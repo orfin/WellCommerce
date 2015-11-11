@@ -25,45 +25,20 @@ use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopInterface;
 class MailerHelper implements MailerHelperInterface
 {
     /**
-     * @var EngineInterface
-     */
-    protected $engine;
-
-    /**
-     * @var \Swift_Mailer
-     */
-    protected $mailer;
-
-    /**
-     * Constructor
-     *
-     * @param EngineInterface $engine
-     * @param \Swift_Mailer   $mailer
-     */
-    public function __construct(EngineInterface $engine, \Swift_Mailer $mailer)
-    {
-        $this->engine = $engine;
-        $this->mailer = $mailer;
-    }
-
-    /**
      * {@inheritdoc}
      */
-    public function sendEmail($recipient, $title, $view, array $parameters = [], ShopInterface $shop = null)
+    public function sendEmail($recipient, $title, $body, ShopInterface $shop)
     {
-        $body = $this->prepareMessage($view, $parameters);
+        $mailerConfiguration = $shop->getMailerConfiguration();
+        $mailer              = $this->createMailer($mailerConfiguration);
 
         $message = Message::newInstance()
             ->setSubject($title)
-            ->setFrom('adam@wellcommerce.org')
+            ->setFrom($mailerConfiguration->getFrom())
             ->setTo($recipient)
             ->setBody($body, 'text/html');
 
-        if (null !== $shop && null !== $shop->getMailerConfiguration()) {
-            $this->mailer = $this->changeConfiguration($shop->getMailerConfiguration());
-        }
-
-        return $this->mailer->send($message);
+        return $mailer->send($message);
     }
 
     /**
@@ -73,7 +48,7 @@ class MailerHelper implements MailerHelperInterface
      *
      * @return \Swift_Mailer
      */
-    protected function changeConfiguration(MailerConfiguration $mailerConfiguration)
+    protected function createMailer(MailerConfiguration $mailerConfiguration)
     {
         $transport = new \Swift_SmtpTransport();
         $transport->setHost($mailerConfiguration->getHost());
@@ -81,19 +56,6 @@ class MailerHelper implements MailerHelperInterface
         $transport->setUsername($mailerConfiguration->getUser());
         $transport->setPassword($mailerConfiguration->getPass());
 
-        return $this->mailer->newInstance($transport);
-    }
-
-    /**
-     * Returns the rendered message
-     *
-     * @param string $view
-     * @param array  $parameters
-     *
-     * @return string
-     */
-    protected function prepareMessage($view, array $parameters = [])
-    {
-        return $this->engine->render($view, $parameters);
+        return \Swift_Mailer::newInstance($transport);
     }
 }

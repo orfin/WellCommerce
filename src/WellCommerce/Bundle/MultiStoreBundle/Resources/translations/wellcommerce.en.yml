@@ -26,6 +26,7 @@ shop:
         default_country: Default country
         default_currency: Default currency
         mailer_configuration:
+            from: Sender (e-mail)
             host: SMTP host
             port: SMTP port
             user: SMTP username

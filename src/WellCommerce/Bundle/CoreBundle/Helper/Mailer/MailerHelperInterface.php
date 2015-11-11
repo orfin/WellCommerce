@@ -24,11 +24,10 @@ interface MailerHelperInterface
     /**
      * Sends an e-mail message
      *
-     * @param string             $recipient
-     * @param string             $title
-     * @param string             $view
-     * @param array              $parameters
-     * @param ShopInterface|null $shop
+     * @param string         $recipient
+     * @param string         $title
+     * @param string         $body
+     * @param ShopInterface| $shop
      */
-    public function sendEmail($recipient, $title, $view, array $parameters = [], ShopInterface $shop = null);
+    public function sendEmail($recipient, $title, $body, ShopInterface $shop);
 }

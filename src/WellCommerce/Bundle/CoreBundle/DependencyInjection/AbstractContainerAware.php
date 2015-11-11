@@ -183,6 +183,22 @@ abstract class AbstractContainerAware extends ContainerAware
     }
 
     /**
+     * @return \WellCommerce\Bundle\CoreBundle\Helper\Mailer\MailerHelperInterface
+     */
+    public function getMailerHelper()
+    {
+        return $this->get('mailer.helper');
+    }
+
+    /**
+     * @return \WellCommerce\Bundle\CoreBundle\Helper\Templating\TemplatingHelperInterface
+     */
+    public function getTemplatingelper()
+    {
+        return $this->get('templating.helper');
+    }
+
+    /**
      * @return \WellCommerce\Bundle\CoreBundle\Helper\Validator\ValidatorHelperInterface
      */
     public function getValidatorHelper()

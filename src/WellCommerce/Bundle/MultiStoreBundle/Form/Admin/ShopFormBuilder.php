@@ -88,6 +88,11 @@ class ShopFormBuilder extends AbstractFormBuilder
         ]));
 
         $mailerConfiguration->addChild($this->getElement('text_field', [
+            'name'  => 'mailerConfiguration.from',
+            'label' => $this->trans('shop.label.mailer_configuration.from'),
+        ]));
+
+        $mailerConfiguration->addChild($this->getElement('text_field', [
             'name'  => 'mailerConfiguration.host',
             'label' => $this->trans('shop.label.mailer_configuration.host'),
         ]));

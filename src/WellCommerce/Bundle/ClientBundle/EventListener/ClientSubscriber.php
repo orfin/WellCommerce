@@ -36,16 +36,12 @@ class ClientSubscriber extends AbstractEventSubscriber
     {
         $client = $event->getResource();
         if ($client instanceof ClientInterface) {
+            $email = $client->getContactDetails()->getEmail();
+            $title = $this->getTranslatorHelper()->trans('client.email.heading.register');
+            $body  = $this->getTemplatingelper()->render('WellCommerceClientBundle:Email:register.html.twig', ['client' => $client]);
+            $shop  = $client->getShop();
 
-            $this->get('mailer.helper')->sendEmail(
-                $client->getContactDetails()->getEmail(),
-                $this->getTranslatorHelper()->trans('client.email.heading.register'),
-                'WellCommerceClientBundle:Email:register.html.twig',
-                [
-                    'client' => $client
-                ],
-                $client->getShop()
-            );
+            $this->getMailerHelper()->sendEmail($email, $title, $body, $shop);
         }
     }
 }

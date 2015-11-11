@@ -19,5 +19,13 @@ namespace WellCommerce\Bundle\CoreBundle\Helper\Templating;
  */
 interface TemplatingHelperInterface
 {
-    
+    /**
+     * Returns the template with given parameters
+     *
+     * @param string $name
+     * @param array  $parameters
+     *
+     * @return string
+     */
+    public function render($name, array $parameters = []);
 }

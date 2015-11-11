@@ -45,9 +45,10 @@
             <argument type="service" id="translator"/>
         </service>
 
-        <service id="mailer.helper" class="WellCommerce\Bundle\CoreBundle\Helper\Mailer\MailerHelper">
+        <service id="templating.helper" class="WellCommerce\Bundle\CoreBundle\Helper\Templating\TemplatingHelper">
             <argument type="service" id="templating"/>
-            <argument type="service" id="mailer"/>
         </service>
+
+        <service id="mailer.helper" class="WellCommerce\Bundle\CoreBundle\Helper\Mailer\MailerHelper" />
     </services>
 </container>

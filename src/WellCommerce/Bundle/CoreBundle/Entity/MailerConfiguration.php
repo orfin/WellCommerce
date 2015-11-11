@@ -19,13 +19,46 @@ namespace WellCommerce\Bundle\CoreBundle\Entity;
  */
 class MailerConfiguration
 {
+    /**
+     * @var string
+     */
+    protected $from;
+
+    /**
+     * @var string
+     */
     protected $host;
 
+    /**
+     * @var int
+     */
     protected $port;
 
+    /**
+     * @var string
+     */
     protected $user;
 
+    /**
+     * @var string
+     */
     protected $pass;
+
+    /**
+     * @return string
+     */
+    public function getFrom()
+    {
+        return $this->from;
+    }
+
+    /**
+     * @param string $from
+     */
+    public function setFrom($from)
+    {
+        $this->from = $from;
+    }
 
     /**
      * @return mixed
