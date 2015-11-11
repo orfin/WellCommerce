@@ -47,6 +47,7 @@ class LoadShopData extends AbstractDataFixture
         $shop->setDefaultCurrency($currency->getCode());
 
         $mailerConfiguration = new MailerConfiguration();
+        $mailerConfiguration->setFrom($this->container->getParameter('mailer_from'));
         $mailerConfiguration->setHost($this->container->getParameter('mailer_host'));
         $mailerConfiguration->setPort($this->container->getParameter('mailer_port'));
         $mailerConfiguration->setUser($this->container->getParameter('mailer_user'));
