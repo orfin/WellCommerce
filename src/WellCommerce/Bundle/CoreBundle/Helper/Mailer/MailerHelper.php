@@ -15,6 +15,7 @@ namespace WellCommerce\Bundle\CoreBundle\Helper\Mailer;
 use Swift_Message as Message;
 use Symfony\Component\Templating\EngineInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\MailerConfiguration;
+use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopInterface;
 
 /**
  * Class MailerHelper
@@ -48,7 +49,7 @@ class MailerHelper implements MailerHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function sendEmail($recipient, $title, $view, array $parameters = [], MailerConfiguration $mailerConfiguration = null)
+    public function sendEmail($recipient, $title, $view, array $parameters = [], ShopInterface $shop = null)
     {
         $body = $this->prepareMessage($view, $parameters);
 
@@ -58,8 +59,8 @@ class MailerHelper implements MailerHelperInterface
             ->setTo($recipient)
             ->setBody($body, 'text/html');
 
-        if (null !== $mailerConfiguration) {
-            $this->mailer = $this->changeConfiguration($mailerConfiguration);
+        if (null !== $shop && null !== $shop->getMailerConfiguration()) {
+            $this->mailer = $this->changeConfiguration($shop->getMailerConfiguration());
         }
 
         return $this->mailer->send($message);
