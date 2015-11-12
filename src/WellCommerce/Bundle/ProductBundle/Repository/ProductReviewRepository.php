@@ -20,5 +20,13 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
  */
 class ProductReviewRepository extends AbstractEntityRepository implements ProductReviewRepositoryInterface
 {
+    public function getDataSetQueryBuilder()
+    {
+        $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder->groupBy('product_review.id');
+        $queryBuilder->leftJoin('product_review.product', 'product_info');
+        $queryBuilder->leftJoin('product_info.translations', 'product_translation');
 
+        return $queryBuilder;
+    }
 }

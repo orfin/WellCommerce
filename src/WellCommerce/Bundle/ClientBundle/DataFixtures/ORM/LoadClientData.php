@@ -55,7 +55,7 @@ class LoadClientData extends AbstractDataFixture
         $billingAddress->setFlatNo($fakerGenerator->buildingNumber);
         $billingAddress->setPostCode($fakerGenerator->postcode);
         $billingAddress->setCity($fakerGenerator->city);
-        $billingAddress->setCountry($fakerGenerator->country);
+        $billingAddress->setCountry($fakerGenerator->countryCode);
         $billingAddress->setVatId(666777888999);
         $billingAddress->setCompanyName($fakerGenerator->company);
 
@@ -67,7 +67,7 @@ class LoadClientData extends AbstractDataFixture
         $shippingAddress->setFlatNo($fakerGenerator->buildingNumber);
         $shippingAddress->setPostCode($fakerGenerator->postcode);
         $shippingAddress->setCity($fakerGenerator->city);
-        $shippingAddress->setCountry($fakerGenerator->country);
+        $shippingAddress->setCountry($fakerGenerator->countryCode);
 
         $client->setBillingAddress($billingAddress);
         $client->setShippingAddress($shippingAddress);

@@ -47,12 +47,13 @@ class ProductReviewExtension extends \Twig_Extension
      */
     public function getProductReviewAverage(Collection $collection)
     {
-        $totalRating = 0;
+        $totalRating  = 0;
+        $reviewsTotal = $collection->count();
 
         $collection->map(function (ProductReviewInterface $review) use (&$totalRating) {
             $totalRating += $review->getRating();
         });
 
-        return round($totalRating / $collection->count(), 2);
+        return ($reviewsTotal > 0) ? round($totalRating / $reviewsTotal, 2) : 0;
     }
 }
