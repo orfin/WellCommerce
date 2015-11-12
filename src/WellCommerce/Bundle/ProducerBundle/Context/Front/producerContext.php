@@ -45,6 +45,18 @@ class ProducerContext implements ProducerContextInterface
     /**
      * {@inheritdoc}
      */
+    public function getCurrentProducerIdentifier()
+    {
+        if ($this->hasCurrentProducer()) {
+            return $this->currentProducer->getId();
+        }
+
+        return null;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function hasCurrentProducer()
     {
         return $this->currentProducer instanceof ProducerInterface;

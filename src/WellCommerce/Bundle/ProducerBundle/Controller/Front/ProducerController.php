@@ -14,6 +14,8 @@ namespace WellCommerce\Bundle\ProducerBundle\Controller\Front;
 
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
+use WellCommerce\Bundle\ProducerBundle\Entity\ProducerInterface;
+use WellCommerce\Bundle\WebBundle\Breadcrumb\BreadcrumbItem;
 
 /**
  * Class ProducerController
@@ -22,8 +24,16 @@ use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
  */
 class ProducerController extends AbstractFrontController implements FrontControllerInterface
 {
-    public function indexAction()
+    public function indexAction(ProducerInterface $producer)
     {
-        return $this->render('WellCommerceProducerBundle:Front/Producer:index.html.twig');
+        $this->addBreadCrumbItem(new BreadcrumbItem([
+            'name' => $producer->translate()->getName(),
+        ]));
+
+        $this->manager->getProducerContext()->setCurrentProducer($producer);
+
+        return $this->displayTemplate('index', [
+            'producer' => $producer,
+        ]);
     }
 }

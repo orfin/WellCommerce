@@ -33,5 +33,9 @@ class ProducerDataSet extends BaseDataSet
             'route'    => 'IDENTITY(producer_translation.route)',
             'products' => 'COUNT(producer_products.id)',
         ]);
+
+        $configurator->setColumnTransformers([
+            'route' => $this->getDataSetTransformer('route')
+        ]);
     }
 }

@@ -28,3 +28,5 @@ web/media/*
 tests/_output/*
 .buildpath
 app/cache/dev/assetic
+
+*.lock

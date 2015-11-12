@@ -46,7 +46,7 @@
 	                        <div class="producer">
 	                            <h5>Producer</h5>
 
-	                            <a href="{{ path('dynamic_' ~ product.getProducer().translate.getRoute().getId()) }}"><img src="{{ asset('themes/wellcommerce/assets/prod/producer.png') }}" /></a>
+	                            <a href="{{ path('dynamic_' ~ product.producer.translate.getRoute().getId()) }}">{{ product.producer.translate.name }}</a>
 	                        </div>
 	                    </div>
 	                </div>

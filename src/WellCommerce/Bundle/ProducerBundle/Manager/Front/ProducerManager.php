@@ -13,6 +13,8 @@
 namespace WellCommerce\Bundle\ProducerBundle\Manager\Front;
 
 use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
+use WellCommerce\Bundle\DataSetBundle\Conditions\Condition\Eq;
+use WellCommerce\Bundle\DataSetBundle\Conditions\ConditionsCollection;
 
 /**
  * Class ProducerManager
@@ -21,4 +23,16 @@ use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
  */
 class ProducerManager extends AbstractFrontManager
 {
+    /**
+     * Returns a collection of dynamic conditions
+     *
+     * @return ConditionsCollection
+     */
+    public function getCurrentProducerConditions()
+    {
+        $conditions = new ConditionsCollection();
+        $conditions->add(new Eq('producerId', $this->getProducerContext()->getCurrentProducerIdentifier()));
+
+        return $conditions;
+    }
 }

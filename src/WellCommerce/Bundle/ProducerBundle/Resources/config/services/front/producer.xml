@@ -33,7 +33,14 @@
 
         <service id="producer.context.front" class="WellCommerce\Bundle\ProducerBundle\Context\Front\ProducerContext"/>
 
-        <service id="producer_menu.layout_box.controller" class="WellCommerce\Bundle\CategoryBundle\Controller\Box\ProducerMenuBoxController">
+        <service id="producer_menu.layout_box.controller" class="WellCommerce\Bundle\ProducerBundle\Controller\Box\ProducerMenuBoxController">
+            <argument type="service" id="producer.manager.front"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="producer_products.layout_box.controller" class="WellCommerce\Bundle\ProducerBundle\Controller\Box\ProducerProductsBoxController">
             <argument type="service" id="producer.manager.front"/>
             <call method="setContainer">
                 <argument type="service" id="service_container" />

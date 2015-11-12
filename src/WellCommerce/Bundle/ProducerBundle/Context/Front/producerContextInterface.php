@@ -32,6 +32,11 @@ interface ProducerContextInterface
     public function getCurrentProducer();
 
     /**
+     * @return int|null
+     */
+    public function getCurrentProducerIdentifier();
+
+    /**
      * @return bool
      */
     public function hasCurrentProducer();

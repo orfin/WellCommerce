@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CategoryBundle\Controller\Box;
+namespace WellCommerce\Bundle\ProducerBundle\Controller\Box;
 
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
@@ -27,8 +27,11 @@ class ProducerMenuBoxController extends AbstractBoxController implements BoxCont
      */
     public function indexAction()
     {
+        $producers = $this->get('producer.dataset.front')->getResult('array');
+
         return $this->displayTemplate('index', [
-            'producers' => $this->get('producer.collection.front')->getSelect()
+            'producers'      => $producers,
+            'activeProducer' => $this->manager->getProducerContext()->getCurrentProducerIdentifier()
         ]);
     }
 }
