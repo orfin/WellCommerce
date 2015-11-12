@@ -27,5 +27,4 @@ app/cache/dev/appDevDebugProjectContainer.xml
 web/media/*
 tests/_output/*
 .buildpath
-
 app/cache/dev/assetic
