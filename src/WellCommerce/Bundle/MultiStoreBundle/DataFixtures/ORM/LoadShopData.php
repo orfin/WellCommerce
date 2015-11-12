@@ -46,6 +46,15 @@ class LoadShopData extends AbstractDataFixture
         $shop->setDefaultCountry('US');
         $shop->setDefaultCurrency($currency->getCode());
 
+        $mailerConfiguration = new MailerConfiguration();
+        $mailerConfiguration->setFrom('');
+        $mailerConfiguration->setHost('');
+        $mailerConfiguration->setPort('');
+        $mailerConfiguration->setUser('');
+        $mailerConfiguration->setPass('');
+
+        $shop->setMailerConfiguration($mailerConfiguration);
+
         $manager->persist($shop);
         $manager->flush();
 
