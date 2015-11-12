@@ -28,6 +28,7 @@
                 <argument key="orderDir">asc</argument>
                 <argument key="priceFrom">0</argument>
                 <argument key="priceTo">9999</argument>
+                <argument key="view">grid</argument>
                 <argument key="producers">null</argument>
                 <argument key="attributes">null</argument>
             </argument>
@@ -38,6 +39,7 @@
                 <argument key="orderDir">asc|desc</argument>
                 <argument key="priceFrom">\d{1,10}</argument>
                 <argument key="priceTo">\d{1,10}</argument>
+                <argument key="view">grid|list</argument>
                 <argument key="producers">[\d+_]+</argument>
                 <argument key="attributes">[\d+_]+</argument>
             </argument>
@@ -48,6 +50,7 @@
                 <argument key="orderDir" />
                 <argument key="priceFrom" />
                 <argument key="priceTo" />
+                <argument key="view" />
                 <argument key="producers" />
                 <argument key="attributes" />
             </argument>

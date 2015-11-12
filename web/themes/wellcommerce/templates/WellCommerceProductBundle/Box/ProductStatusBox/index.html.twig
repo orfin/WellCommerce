@@ -2,7 +2,11 @@
 	{% if app.request.attributes.get('_route') == 'front.home_page.index' %}
 	{% include 'WellCommerceProductBundle:Front/ProductStatus:products.html.twig' %}
 	{% else %}
-	{% include 'WellCommerceProductBundle:Front/Common:products.html.twig' %}
+		{% if app.request.get('view') == 'list' %}
+			{% include 'WellCommerceProductBundle:Front/Common:products_list.html.twig' %}
+		{% else %}
+			{% include 'WellCommerceProductBundle:Front/Common:products.html.twig' %}
+		{% endif %}
 	{% endif %}
 
 {% else %}

@@ -24,6 +24,17 @@
     </div>
 
     <div class="dropdown pull-right">
+        <button class="btn btn-default dropdown-toggle btn-sm" type="button" id="ViewMenu" data-toggle="dropdown" aria-expanded="true">
+            {% trans %}product.options.label.view{% endtrans %}: {{ app.request.get('view') }}
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="ViewMenu">
+            <li><a href="{{ dynamic_path({'view': 'grid'}) }}">{% trans %}product.options.label.grid_view{% endtrans %}</a></li>
+            <li><a href="{{ dynamic_path({'view': 'list'}) }}">{% trans %}product.options.label.list_view{% endtrans %}</a></li>
+        </ul>
+    </div>
+
+    <div class="dropdown pull-right">
         <button class="btn btn-default dropdown-toggle btn-sm" type="button" id="LimitMenu" data-toggle="dropdown" aria-expanded="true">
             {% trans %}product.options.label.limit{% endtrans %}: {{ app.request.get('limit') }}
             <span class="caret"></span>

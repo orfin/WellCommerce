@@ -44,7 +44,6 @@ class TemplatePathsCacheWarmer extends BaseTemplatePathsCacheWarmer
         $templates    = [];
         foreach ($allTemplates as $template) {
             $this->locateTemplate($locator, $template, $templates);
-
         }
 
         $this->writeCacheFile($cacheDir . '/templates.php', sprintf('<?php return %s;', var_export($templates, true)));

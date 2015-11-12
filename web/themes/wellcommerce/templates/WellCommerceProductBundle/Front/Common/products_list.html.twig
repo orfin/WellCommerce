@@ -1,6 +1,5 @@
 {% trans_default_domain "wellcommerce" %}
 
-
 <div class="products-list">
 	{% for item in dataset.rows %}
 	<div class="item">
@@ -21,9 +20,8 @@
 					<div class="row">
 						<div class="col-lg-8 col-md-7 col-xs-12">
 							<h3><a href="{{ item.route }}">{{ item.name }}</a></h3>
-							<p>
-								{{ item.translate().shortDescription|striptags }}
-							</p>
+							{{ item.shortDescription }}
+
 							{% if item.isDiscountValid %}
                             <span class="price promo">
                             	<small>{{ format_price(item.price, item.currency) }}</small>

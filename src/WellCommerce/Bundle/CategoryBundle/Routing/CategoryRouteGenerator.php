@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CategoryBundle\Routing;
 
+use Doctrine\Common\Util\Debug;
 use Symfony\Component\Routing\Route as SymfonyRoute;
 use WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface;
 use WellCommerce\Bundle\RoutingBundle\Generator\AbstractRouteGenerator;
