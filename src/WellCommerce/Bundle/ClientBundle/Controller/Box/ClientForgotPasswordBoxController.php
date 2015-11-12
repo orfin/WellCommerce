@@ -70,8 +70,6 @@ class ClientForgotPasswordBoxController extends AbstractBoxController
                 return $this->getRouterHelper()->redirectTo('front.client.login');
             }
 
-            print_r($this->getValidatorHelper()->validate($client));
-
             $this->manager->getFlashHelper()->addError('client.flash.change_password.error');
         }
 
@@ -94,5 +92,4 @@ class ClientForgotPasswordBoxController extends AbstractBoxController
             'validation_groups' => ['client_password_change']
         ], $client);
     }
-
 }

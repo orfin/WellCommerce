@@ -79,6 +79,11 @@ class Product implements ProductInterface
     protected $attributes;
 
     /**
+     * @var Collection
+     */
+    protected $reviews;
+
+    /**
      * @var float
      */
     protected $stock;
@@ -438,5 +443,13 @@ class Product implements ProductInterface
     public function getShippingCostCurrency()
     {
         return $this->sellPrice->getCurrency();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getReviews()
+    {
+        return $this->reviews;
     }
 }

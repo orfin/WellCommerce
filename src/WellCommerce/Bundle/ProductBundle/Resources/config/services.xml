@@ -8,6 +8,7 @@
         <import resource="services/product_attribute.xml"/>
         <import resource="services/product_status.xml"/>
         <import resource="services/product_search.xml"/>
+        <import resource="services/product_review.xml"/>
     </imports>
     <services>
         <service id="form.product_attribute_collection.data_transformer" class="WellCommerce\Bundle\ProductBundle\Form\Admin\DataTransformer\ProductAttributeCollectionToArrayTransformer" scope="prototype">

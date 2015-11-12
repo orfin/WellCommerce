@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="product_review.manager.front" class="WellCommerce\Bundle\ProductBundle\Manager\Front\ProductReviewManager">
+            <argument type="service" id="product_review.repository"/>
+            <argument type="service" id="product_review.event_dispatcher"/>
+            <argument type="service" id="product_review.factory"/>
+            <argument type="service" id="product_review.form_builder.front"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="product_review.form_builder.front" class="WellCommerce\Bundle\ProductBundle\Form\Front\ProductReviewFormBuilder">
+            <argument type="service" id="form.resolver.factory"/>
+            <argument type="service" id="form.handler"/>
+            <argument type="service" id="product_review.event_dispatcher"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="product_review.layout_box.controller" class="WellCommerce\Bundle\ProductBundle\Controller\Box\ProductReviewBoxController">
+            <argument type="service" id="product_review.manager.front"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+    </services>
+</container>

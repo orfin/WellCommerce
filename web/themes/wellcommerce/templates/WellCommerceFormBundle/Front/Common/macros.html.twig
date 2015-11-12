@@ -21,6 +21,19 @@
     {{ attribute(elements, element.getOption('type'), [element, class]) }}
 {% endmacro %}
 
+{% macro hidden(element) %}
+    {% set options = element.getOptions() %}
+    {% set fieldNameParts = options.name|split('.') %}
+    {% if fieldNameParts|length > 1 %}
+        {% set fieldName = fieldNameParts[0] ~ '['~ options.name ~']' %}
+    {% else %}
+        {% set fieldName = options.name %}
+    {% endif %}
+    {% autoescape true %}
+        <input type="hidden" id="{{ options.name }}" name="{{ fieldName }}" value="{{ element.getValue() }}">
+    {% endautoescape %}
+{% endmacro %}
+
 {% macro text_field(element, class) %}
     {% set options = element.getOptions() %}
     {% set classes = ['form-control', options.class, class] %}

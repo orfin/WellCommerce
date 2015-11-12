@@ -212,4 +212,9 @@ interface ProductInterface extends
      * @param TaxInterface $sellPriceTax
      */
     public function setSellPriceTax(TaxInterface $sellPriceTax);
+
+    /**
+     * @return Collection
+     */
+    public function getReviews();
 }

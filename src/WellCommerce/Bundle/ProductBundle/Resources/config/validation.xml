@@ -75,6 +75,25 @@
         </property>
     </class>
 
+    <class name="WellCommerce\Bundle\ProductBundle\Entity\ProductReview">
+        <property name="nick">
+            <constraint name="NotBlank" />
+            <constraint name="NotNull" />
+        </property>
+        <property name="rating">
+            <constraint name="NotBlank" />
+            <constraint name="NotNull" />
+            <constraint name="Range">
+                <option name="min">0</option>
+                <option name="max">5</option>
+            </constraint>
+        </property>
+        <property name="review">
+            <constraint name="NotBlank" />
+            <constraint name="NotNull" />
+        </property>
+    </class>
+
     <class name="WellCommerce\Bundle\ProductBundle\Entity\ProductStatusTranslation">
         <property name="name">
             <constraint name="NotBlank" />

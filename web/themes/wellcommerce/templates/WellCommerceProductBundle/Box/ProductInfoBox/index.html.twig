@@ -1,4 +1,5 @@
 {% trans_default_domain "wellcommerce" %}
+{% set score = productReviewAverage(product.reviews) %}
 
 <div class="product-details">
     <div class="row">
@@ -26,18 +27,8 @@
 	                <h1>{{ product.translate().name }}</h1>
 
 	                <div class="reviews">
-	                	<!--
-	                		Klasa rat* np. "rat3" to powierzchnia zakolorowanej ostatniej zółtej gwiazdki, np. w tym wypadku zakolorowana będzie 30%
-	                	-->
-	                    <div class="stars rat rat5">
-	                        <span ><img src="{{ asset('themes/wellcommerce/assets/img/star-on.png') }}" /></span>
-	                        <span><img src="{{ asset('themes/wellcommerce/assets/img/star-on.png') }}" /></span>
-	                        <span><img src="{{ asset('themes/wellcommerce/assets/img/star-on.png') }}" /></span>
-	                        <span class="not-quite-full"><img src="{{ asset('themes/wellcommerce/assets/img/star-on.png') }}" /></span>
-	                        <span><img src="{{ asset('themes/wellcommerce/assets/img/star-off.png') }}" /></span>
-	                    </div>
-
-	                    <span>4.3 / see 12 reviews</span>
+	                    <div class="stars rat"></div>
+	                    <span>{{ score }} / <a href="#add-opinion-alert">see {{ product.reviews.count }} reviews</a></span>
 	                </div>
 
 	                <p>{{ product.translate().shortDescription|striptags }}</p>
@@ -105,146 +96,7 @@
                 <p>{{ product.translate().description }}</p>
             </div>
 
-            <div class="description-block">
-                <h2>Opinions</h2>
-
-                <div id="add-opinion-alert" class="alert alert-success">
-                    <button class="btn btn-success btn-lg pull-right">Add opinion</button>
-                    <strong>Help others decide - add rating and review</strong><br />
-                    Your rating will help others decide to choose the right product
-                </div>
-
-                <!-- OPINION ADDED ALERT
-                <div class="alert alert-info">
-					<strong>Your review has been sent and is awaiting moderation.</strong>
-				</div>
-				-->
-
-				<div class="well product-opinions collapse">
-					<form class="form-horizontal">
-						<div class="form-group">
-							<label for="nick" class="col-sm-3 control-label">Your rating</label>
-							<div class="col-md-6 col-sm-10">
-								<div class="stars">
-			                        <img src="{{ asset('themes/wellcommerce/assets/img/star-off.png') }}" />
-			                        <img src="{{ asset('themes/wellcommerce/assets/img/star-off.png') }}" />
-			                        <img src="{{ asset('themes/wellcommerce/assets/img/star-off.png') }}" />
-			                        <img src="{{ asset('themes/wellcommerce/assets/img/star-off.png') }}" />
-			                        <img src="{{ asset('themes/wellcommerce/assets/img/star-off.png') }}" />
-			                    </div>
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="nick" class="col-sm-3 control-label">Your name</label>
-							<div class="col-md-6 col-sm-10">
-								<input type="text" class="form-control" id="nick">
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="opinion" class="col-sm-3 control-label">Your opinion</label>
-							<div class="col-md-6  col-sm-10">
-								<textarea class="form-control" rows="3"></textarea>
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-sm-offset-3 col-md-6 col-sm-10">
-								<button type="submit" class="btn btn-primary">Add opinion</button>
-							</div>
-						</div>
-					</form>
-				</div>
-
-				<div class="media product-opinion">
-					<div class="media-left">
-						<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-					</div>
-					<div class="media-body">
-						<h4 class="media-heading">
-							Adrian
-							<small>11-11-2015</small>
-						</h4>
-
-						<div>
-							<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-							<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-							<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-							<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-							<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-						</div>
-
-						Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo.
-					</div>
-				</div>
-
-
-				<div class="media product-opinion">
-					<div class="media-left">
-						<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-					</div>
-					<div class="media-body">
-						<h4 class="media-heading">
-							Adam
-							<small>17-10-2015</small>
-						</h4>
-
-						<div>
-							<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-							<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-							<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-							<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-							<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-						</div>
-
-						Nulla vel metus scelerisque ante sollicitudin commodo.
-					</div>
-				</div>
-
-				<div class="media product-opinion">
-					<div class="media-left">
-						<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-					</div>
-					<div class="media-body">
-						<h4 class="media-heading">
-							Michał
-							<small>21-05-2015</small>
-						</h4>
-
-						<div>
-							<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-							<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-							<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-							<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-							<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-						</div>
-
-						ras purus odio, vestibulum in vulputate at, tempus viverra turpis.
-					</div>
-				</div>
-
-				<div class="media product-opinion">
-					<div class="media-left">
-						<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-					</div>
-					<div class="media-body">
-						<h4 class="media-heading">
-							Rafał
-							<small>08-01-2015</small>
-						</h4>
-
-						<div>
-							<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-							<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-							<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-							<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-							<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-						</div>
-
-						Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-					</div>
-				</div>
-
-
-            </div>
+			{{ layout_box('product_review') }}
         </div>
         <div class="col-md-3 hidden-sm hidden-xs">
             {% include 'WellCommerceCmsBundle:Front/Common:sidebar_contact.html.twig' %}
@@ -269,6 +121,14 @@
         $('#add-opinion-alert > button').click(function(){
 	    	$('.product-opinions').addClass('in');
 	    	$('#add-opinion-alert').hide();
+        });
+
+        $('.reviews div.stars').raty({
+            readOnly: true,
+            score: {{ score }},
+            halfShow : false,
+            starOff : '{{ asset('themes/wellcommerce/assets/img/star-off.png') }}',
+            starOn  : '{{ asset('themes/wellcommerce/assets/img/star-on.png') }}'
         });
     });
 </script>

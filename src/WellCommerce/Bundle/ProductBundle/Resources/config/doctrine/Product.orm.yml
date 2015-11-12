@@ -172,3 +172,10 @@ WellCommerce\Bundle\ProductBundle\Entity\Product:
             fetch: LAZY
             mappedBy: product
             orphanRemoval: true
+        reviews:
+            targetEntity: WellCommerce\Bundle\ProductBundle\Entity\ProductReview
+            cascade:
+              - all
+            fetch: LAZY
+            mappedBy: product
+            orphanRemoval: true
