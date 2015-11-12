@@ -26,36 +26,32 @@ use WellCommerce\Bundle\SmugglerBundle\Helper\PackageHelperInterface;
 class PackageController extends AbstractAdminController
 {
     /**
+     * @var \WellCommerce\Bundle\SmugglerBundle\Manager\Admin\PackageManager
+     */
+    protected $manager;
+
+    /**
      * Action used to sync packages from remote servers ie. packagist.org
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function syncAction()
     {
-        $manager = $this->getManager();
-        $manager->syncPackages(PackageHelperInterface::DEFAULT_PACKAGE_PLUGIN_TYPE);
-        $manager->syncPackages(PackageHelperInterface::DEFAULT_PACKAGE_THEME_TYPE);
-        $manager->getFlashHelper()->addSuccess('package.flashes.sync_success');
+        $this->manager->syncPackages(PackageHelperInterface::DEFAULT_PACKAGE_PLUGIN_TYPE);
+        $this->manager->syncPackages(PackageHelperInterface::DEFAULT_PACKAGE_THEME_TYPE);
+        $this->manager->getFlashHelper()->addSuccess('package.flashes.sync_success');
 
-        return $manager->getRedirectHelper()->redirectToAction('index');
-    }
-
-    /**
-     * @return \WellCommerce\Bundle\SmugglerBundle\Manager\Admin\PackageManager
-     */
-    protected function getManager()
-    {
-        return parent::getManager();
+        return $this->getRouterHelper()->redirectToAction('index');
     }
 
     public function packageAction(Request $request, $operation)
     {
-        $resource = $this->getManager()->findResource($request);
+        $resource = $this->manager->findResource($request);
         if (null === $resource) {
             return $this->redirectToAction('index');
         }
 
-        $form = $this->getManager()->getForm($resource);
+        $form = $this->manager->getForm($resource);
 
         return [
             'operation'   => $operation,
@@ -66,17 +62,25 @@ class PackageController extends AbstractAdminController
 
     public function consoleAction(Request $request)
     {
-        $helper    = $this->get('environment_helper');
-        $arguments = $this->getManager()->getConsoleCommandArguments($request);
+        $helper    = $this->getHelper();
+        $arguments = $this->manager->getConsoleCommandArguments($request);
         $process   = $helper->getProcess($arguments, 720);
         $process->run();
 
         if ($process->getExitCode() !== null) {
             if (0 === (int)$process->getExitCode()) {
-                $this->getManager()->changePackageStatus($request);
+                $this->manager->changePackageStatus($request);
             }
 
             return $this->jsonResponse(['code' => $process->getExitCode()]);
         }
+    }
+
+    /**
+     * @return \WellCommerce\Bundle\CoreBundle\Helper\Environment\EnvironmentHelperInterface
+     */
+    protected function getHelper()
+    {
+        return $this->get('environment_helper');
     }
 }

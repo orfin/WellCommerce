@@ -33,6 +33,7 @@ security:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/admin$, roles: ROLE_ADMIN }
         - { path: ^/client/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/client/password, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/client, roles: ROLE_CLIENT }
         - { path: ^/client$, roles: ROLE_CLIENT }
 

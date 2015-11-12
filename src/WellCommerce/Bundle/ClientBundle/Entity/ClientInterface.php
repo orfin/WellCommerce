@@ -55,6 +55,8 @@ interface ClientInterface extends
      */
     public function setPassword($password);
 
+    public function resetPassword();
+
     /**
      * @param string $username
      */
@@ -124,4 +126,14 @@ interface ClientInterface extends
      * @param ClientShippingAddressInterface $shippingAddress
      */
     public function setShippingAddress(ClientShippingAddressInterface $shippingAddress);
+
+    /**
+     * @return string
+     */
+    public function getResetPasswordHash();
+
+    /**
+     * @param string $resetPasswordHash
+     */
+    public function setResetPasswordHash($resetPasswordHash);
 }

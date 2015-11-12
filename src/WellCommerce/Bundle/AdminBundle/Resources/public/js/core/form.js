@@ -16062,15 +16062,38 @@ var GFormRichTextEditor = GCore.ExtendClass(GFormTextArea, function() {
 			return;
 		}
 
-//		if(!gThis.m_bShown){
-//			$('#' + gThis.GetId()).redactor({
-//				lang: 'en',
-//				imageUpload: GCore.sAdminUrl + 'redactor/add',
-//				imageGetJson: GCore.sAdminUrl + 'redactor/view/',
-//			});
-//			gThis.m_bShown = true;
-//		}
+		if(!gThis.m_bShown){
+            $('#' + gThis.GetId()).trumbowyg({
+                resetCss: true,
+                removeformatPasted: true,
+                fullscreenable: false,
+                btns: [
+                    'viewHTML',
+                    '|',
+                    'formatting',
+                    '|',
+                    'btnGrp-design',
+                    '|',
+                    'btnGrp-justify',
+                    '|',
+                    'btnGrp-lists',
+                    '|',
+                    'horizontalRule'
+                ]
+            });
+
+			gThis.m_bShown = true;
+		}
 	};
+
+    gThis.SetValue = function(mValue, sRepetition) {
+        if (gThis.m_jField == undefined) {
+            return;
+        }
+
+        $('#' + gThis.GetId()).trumbowyg('html', mValue);
+        gThis._GetField(sRepetition).val(mValue);
+    };
 
 }, oDefaults);
 /*

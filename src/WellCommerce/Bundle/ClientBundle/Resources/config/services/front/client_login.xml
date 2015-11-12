@@ -87,13 +87,6 @@
             </call>
         </service>
 
-        <service id="client_address_book.layout_box.configurator" class="WellCommerce\Bundle\ClientBundle\Layout\ClientAddressBookBoxConfigurator">
-            <argument>ClientAddressBook</argument>
-            <argument>client_address_book.layout_box.controller</argument>
-            <argument type="service" id="translator.helper"/>
-            <tag name="layout_box.configurator" />
-        </service>
-
         <service id="client_menu.layout_box.controller" class="WellCommerce\Bundle\ClientBundle\Controller\Box\ClientMenuBoxController">
             <argument type="service" id="client.manager.front"/>
             <call method="setContainer">
@@ -113,13 +106,6 @@
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
-        </service>
-
-        <service id="client_order.configurator" class="WellCommerce\Bundle\ClientBundle\Layout\ClientOrderBoxConfigurator">
-            <argument>ClientOrder</argument>
-            <argument>client_order.layout_box.controller</argument>
-            <argument type="service" id="translator.helper"/>
-            <tag name="layout_box.configurator" />
         </service>
     </services>
 </container>

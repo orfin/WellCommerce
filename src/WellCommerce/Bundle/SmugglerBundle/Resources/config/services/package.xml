@@ -13,7 +13,6 @@
             <argument type="service" id="package.factory"/>
             <argument type="service" id="package.form_builder"/>
             <argument type="service" id="package.datagrid"/>
-
             <call method="setHelper">
                 <argument type="service" id="package.helper"/>
             </call>
@@ -49,10 +48,8 @@
 
         <service id="package.dataset" class="WellCommerce\Bundle\SmugglerBundle\DataSet\PackageDataSet">
             <argument type="service" id="package.dataset.query_builder"/>
+            <argument type="service" id="dataset.manager"/>
             <argument type="service" id="package.event_dispatcher"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 

@@ -9,6 +9,7 @@
     <import resource="front/client_settings.xml" prefix="client/settings"/>
     <import resource="front/client_wishlist.xml" prefix="client/wishlist"/>
     <import resource="front/client_order.xml" prefix="client/order"/>
+    <import resource="front/client_password.xml" prefix="client/password"/>
     <import resource="front/client_address_book.xml" prefix="client/address"/>
 
 </routes>

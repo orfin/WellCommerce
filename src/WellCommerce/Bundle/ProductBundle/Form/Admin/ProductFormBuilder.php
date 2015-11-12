@@ -66,6 +66,27 @@ class ProductFormBuilder extends AbstractFormBuilder
             'default' => 1
         ]));
 
+        $descriptionData = $form->addChild($this->getElement('nested_fieldset', [
+            'name'  => 'description_data',
+            'label' => $this->trans('fieldset.description')
+        ]));
+
+        $languageData = $descriptionData->addChild($this->getElement('language_fieldset', [
+            'name'        => 'translations',
+            'label'       => $this->trans('fieldset.translations'),
+            'transformer' => $this->getRepositoryTransformer('translation', $this->get('product.repository'))
+        ]));
+
+        $languageData->addChild($this->getElement('rich_text_editor', [
+            'name'  => 'shortDescription',
+            'label' => $this->trans('product.short_description.label')
+        ]));
+
+        $languageData->addChild($this->getElement('rich_text_editor', [
+            'name'  => 'description',
+            'label' => $this->trans('product.description.label'),
+        ]));
+
         $mainData->addChild($this->getElement('text_field', [
             'name'  => 'sku',
             'label' => $this->trans('product.label.sku'),

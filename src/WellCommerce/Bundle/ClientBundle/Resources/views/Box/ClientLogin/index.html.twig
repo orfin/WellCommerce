@@ -16,7 +16,7 @@
         {% endfor %}
 
         <div class="clearfix">
-            <a href="{{ path('front.client.password') }}" class="btn btn-link nopadding notransform coming-soon">{% trans %}client.link.password_forgotten{% endtrans %}</a>
+            <a href="{{ path('front.client_password.reset') }}" class="btn btn-link nopadding notransform coming-soon">{% trans %}client.link.password_forgotten{% endtrans %}</a>
             <button type="submit" class="btn btn-primary pull-right">{% trans %}client.button.login{% endtrans %}</button>
         </div>
     {{ macros.form_end(form) }}

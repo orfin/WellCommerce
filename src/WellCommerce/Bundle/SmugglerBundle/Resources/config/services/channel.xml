@@ -39,10 +39,8 @@
 
         <service id="channel.dataset" class="WellCommerce\Bundle\SmugglerBundle\DataSet\ChannelDataSet">
             <argument type="service" id="channel.dataset.query_builder"/>
+            <argument type="service" id="dataset.manager"/>
             <argument type="service" id="channel.event_dispatcher"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 

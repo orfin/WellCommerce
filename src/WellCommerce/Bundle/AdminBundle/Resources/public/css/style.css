@@ -683,6 +683,11 @@ a.button-green span img,span.button-green span img {
 	margin-right: -20px;
 }
 
+.field-rich-text-editor span.repetition {
+	clear: both;
+    margin-left: 0px!important;
+}
+
 .field-static-image {
 	padding-left: 195px;
 }

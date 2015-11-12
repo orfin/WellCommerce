@@ -96,6 +96,11 @@ class Client implements ClientInterface
     protected $shippingAddress;
 
     /**
+     * @var string
+     */
+    protected $resetPasswordHash;
+
+    /**
      * @inheritDoc
      */
     public function getId()
@@ -151,6 +156,11 @@ class Client implements ClientInterface
         if (strlen($password)) {
             $this->password = password_hash($password, PASSWORD_BCRYPT, ['cost' => 12]);
         }
+    }
+
+    public function resetPassword()
+    {
+        $this->password = null;
     }
 
     /**
@@ -333,5 +343,21 @@ class Client implements ClientInterface
     public function setShippingAddress(ClientShippingAddressInterface $shippingAddress)
     {
         $this->shippingAddress = $shippingAddress;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getResetPasswordHash()
+    {
+        return $this->resetPasswordHash;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setResetPasswordHash($resetPasswordHash)
+    {
+        $this->resetPasswordHash = $resetPasswordHash;
     }
 }

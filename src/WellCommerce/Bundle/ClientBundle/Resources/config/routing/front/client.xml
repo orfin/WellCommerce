@@ -9,16 +9,6 @@
         <option key="allow_page_redirect">true</option>
     </route>
 
-    <route id="front.client.password" path="/password">
-        <default key="_controller">client.controller.front:passwordAction</default>
-        <option key="allow_page_redirect">true</option>
-    </route>
-
-    <route id="front.client.register" path="/register">
-        <default key="_controller">client.controller.front:registerAction</default>
-        <option key="allow_page_redirect">true</option>
-    </route>
-
     <route id="front.client.login_check" path="/login_check" />
 
     <route id="front.client.logout" path="/logout" />

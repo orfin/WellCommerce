@@ -10,6 +10,8 @@ client:
     label:
         username: Login (e-mail)
         password: Password
+        confirm_password: Confirm password
+        new_password: New password
         accept_conditions: Accept store conditions
         accept_newsletter: Sign up for our newsletter
         contact_details:
@@ -40,6 +42,8 @@ client:
         contact_details: Contact details
         billing_address: Billing address
         shipping_address: Shipping address
+        reset_password: Reset password
+        change_password: Change password
     link:
         login: 'Sign in or Sign up'
         register: 'Sign up'
@@ -52,7 +56,8 @@ client:
     button:
         login: 'Sign in'
         register: 'Sign up'
-
+        reset_password: 'Confirm password reset'
+        change_password: 'Change password'
 client_group:
     heading:
         index: Client groups

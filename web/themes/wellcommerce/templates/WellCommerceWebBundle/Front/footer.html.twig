@@ -25,7 +25,7 @@
                                 <li><a href="{{ path('front.client_wishlist.index') }}">{% trans %}client.link.wishlist{% endtrans %}</a></li>
                             {%  else %}
                                 <li><a href="{{ path('front.client.login') }}">{% trans %}client.link.login{% endtrans %}</a></li>
-                                <li><a href="{{ path('front.client.password') }}" class="coming-soon">{% trans %}client.link.password_forgotten{% endtrans %}</a></li>
+                                <li><a href="{{ path('front.client_password.reset') }}">{% trans %}client.link.password_forgotten{% endtrans %}</a></li>
                             {% endif %}
                         </ul>
                     </div>
