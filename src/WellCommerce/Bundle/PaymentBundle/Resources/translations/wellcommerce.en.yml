@@ -6,6 +6,9 @@
 # For the full copyright and license information,
 # please view the LICENSE file that was distributed with this source code.
 
+payment:
+    flash:
+        thank_you: "Thank you for placing an order. Below are the order's details:"
 payment_method:
     heading:
         index: Payment methods

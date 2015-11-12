@@ -6,13 +6,6 @@ parameters:
     database_user:     root
     database_password: ~
 
-    mailer_transport:  smtp
-    mailer_from:       wellcommerce
-    mailer_host:       127.0.0.1
-    mailer_port:       ~
-    mailer_user:       ~
-    mailer_password:   ~
-
     locale:            en
     secret:            ThisTokenIsNotSoSecretChangeIt
 

@@ -6,13 +6,6 @@ parameters:
     database_user:     root
     database_password: ~
 
-    mailer_transport:  smtp
-    mailer_from:       localhost
-    mailer_host:       127.0.0.1
-    mailer_port:       25
-    mailer_user:       user
-    mailer_password:   pass
-
     locale:            en
     secret:            ThisTokenIsNotSoSecretChangeIt
 

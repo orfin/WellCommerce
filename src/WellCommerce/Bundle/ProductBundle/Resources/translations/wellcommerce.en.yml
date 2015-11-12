@@ -11,6 +11,17 @@ product_search:
         index: Search results
     label:
         phrase: Enter search phrase
+product_review:
+    heading:
+        index: Reviews
+    label:
+        rating: Rating
+        nick: Name or nickname
+        review: Review
+    button:
+        add_opinion: Submit review
+    link:
+        first_review: Be first to submit a review
 product:
     form:
         fieldset:
@@ -61,6 +72,8 @@ product:
             order: Sort by
             view: View as
             limit: Show per page
+            grid_view: Grid
+            list_view: List
         order_by:
             name:
                 asc: Name - from A to Z

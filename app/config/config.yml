@@ -79,15 +79,6 @@ doctrine:
                         class:   WellCommerce\Bundle\IntlBundle\ORM\Filter\LocaleFilter
                         enabled: false
 
-
-# Swiftmailer Configuration
-swiftmailer:
-    transport: "%mailer_transport%"
-    host:      "%mailer_host%"
-    username:  "%mailer_user%"
-    password:  "%mailer_password%"
-    spool:     { type: memory }
-
 doctrine_migrations:
     dir_name:   %kernel.root_dir%/sql/migrations
     namespace:  WellCommerce\Migration

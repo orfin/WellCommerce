@@ -81,12 +81,14 @@
                 <option name="groups">
                     <value>client_registration</value>
                     <value>client_settings</value>
+                    <value>order_address</value>
                 </option>
             </constraint>
             <constraint name="NotNull">
                 <option name="groups">
                     <value>client_registration</value>
                     <value>client_settings</value>
+                    <value>order_address</value>
                 </option>
             </constraint>
         </property>
@@ -95,12 +97,14 @@
                 <option name="groups">
                     <value>client_registration</value>
                     <value>client_settings</value>
+                    <value>order_address</value>
                 </option>
             </constraint>
             <constraint name="NotNull">
                 <option name="groups">
                     <value>client_registration</value>
                     <value>client_settings</value>
+                    <value>order_address</value>
                 </option>
             </constraint>
         </property>
@@ -109,12 +113,14 @@
                 <option name="groups">
                     <value>client_registration</value>
                     <value>client_settings</value>
+                    <value>order_address</value>
                 </option>
             </constraint>
             <constraint name="NotBlank">
                 <option name="groups">
                     <value>client_registration</value>
                     <value>client_settings</value>
+                    <value>order_address</value>
                 </option>
             </constraint>
         </property>
@@ -122,27 +128,208 @@
             <constraint name="NotNull">
                 <option name="groups">
                     <value>client_settings</value>
+                    <value>order_address</value>
                 </option>
             </constraint>
-            <constraint name="NotBlank" />
         </property>
         <property name="email">
             <constraint name="NotNull">
                 <option name="groups">
                     <value>client_registration</value>
                     <value>client_settings</value>
+                    <value>order_address</value>
                 </option>
             </constraint>
             <constraint name="NotBlank">
                 <option name="groups">
                     <value>client_registration</value>
                     <value>client_settings</value>
+                    <value>order_address</value>
                 </option>
             </constraint>
             <constraint name="Email">
                 <option name="groups">
                     <value>client_registration</value>
                     <value>client_settings</value>
+                    <value>order_address</value>
+                </option>
+            </constraint>
+        </property>
+    </class>
+
+    <class name="WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddress">
+        <property name="firstName">
+            <constraint name="NotBlank">
+                <option name="groups">
+                    <value>order_address</value>
+                </option>
+            </constraint>
+            <constraint name="NotNull">
+                <option name="groups">
+                    <value>order_address</value>
+                </option>
+            </constraint>
+        </property>
+        <property name="lastName">
+            <constraint name="NotBlank">
+                <option name="groups">
+                    <value>order_address</value>
+                </option>
+            </constraint>
+            <constraint name="NotNull">
+                <option name="groups">
+                    <value>order_address</value>
+                </option>
+            </constraint>
+        </property>
+        <property name="street">
+            <constraint name="NotBlank">
+                <option name="groups">
+                    <value>order_address</value>
+                </option>
+            </constraint>
+            <constraint name="NotNull">
+                <option name="groups">
+                    <value>order_address</value>
+                </option>
+            </constraint>
+        </property>
+        <property name="streetNo">
+            <constraint name="NotBlank">
+                <option name="groups">
+                    <value>order_address</value>
+                </option>
+            </constraint>
+            <constraint name="NotNull">
+                <option name="groups">
+                    <value>order_address</value>
+                </option>
+            </constraint>
+        </property>
+        <property name="flatNo">
+            <constraint name="NotNull">
+                <option name="groups">
+                    <value>order_address</value>
+                </option>
+            </constraint>
+        </property>
+        <property name="postCode">
+            <constraint name="NotBlank">
+                <option name="groups">
+                    <value>order_address</value>
+                </option>
+            </constraint>
+            <constraint name="NotNull">
+                <option name="groups">
+                    <value>order_address</value>
+                </option>
+            </constraint>
+        </property>
+        <property name="city">
+            <constraint name="NotBlank">
+                <option name="groups">
+                    <value>order_address</value>
+                </option>
+            </constraint>
+            <constraint name="NotNull">
+                <option name="groups">
+                    <value>order_address</value>
+                </option>
+            </constraint>
+        </property>
+        <property name="country">
+            <constraint name="Country">
+                <option name="groups">
+                    <value>order_shipping_address</value>
+                </option>
+            </constraint>
+        </property>
+    </class>
+
+    <class name="WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddress">
+        <property name="firstName">
+            <constraint name="NotBlank">
+                <option name="groups">
+                    <value>order_shipping_address</value>
+                </option>
+            </constraint>
+            <constraint name="NotNull">
+                <option name="groups">
+                    <value>order_shipping_address</value>
+                </option>
+            </constraint>
+        </property>
+        <property name="lastName">
+            <constraint name="NotBlank">
+                <option name="groups">
+                    <value>order_shipping_address</value>
+                </option>
+            </constraint>
+            <constraint name="NotNull">
+                <option name="groups">
+                    <value>order_shipping_address</value>
+                </option>
+            </constraint>
+        </property>
+        <property name="street">
+            <constraint name="NotBlank">
+                <option name="groups">
+                    <value>order_shipping_address</value>
+                </option>
+            </constraint>
+            <constraint name="NotNull">
+                <option name="groups">
+                    <value>order_shipping_address</value>
+                </option>
+            </constraint>
+        </property>
+        <property name="streetNo">
+            <constraint name="NotBlank">
+                <option name="groups">
+                    <value>order_shipping_address</value>
+                </option>
+            </constraint>
+            <constraint name="NotNull">
+                <option name="groups">
+                    <value>order_shipping_address</value>
+                </option>
+            </constraint>
+        </property>
+        <property name="flatNo">
+            <constraint name="NotNull">
+                <option name="groups">
+                    <value>order_shipping_address</value>
+                </option>
+            </constraint>
+        </property>
+        <property name="postCode">
+            <constraint name="NotBlank">
+                <option name="groups">
+                    <value>order_shipping_address</value>
+                </option>
+            </constraint>
+            <constraint name="NotNull">
+                <option name="groups">
+                    <value>order_shipping_address</value>
+                </option>
+            </constraint>
+        </property>
+        <property name="city">
+            <constraint name="NotBlank">
+                <option name="groups">
+                    <value>order_shipping_address</value>
+                </option>
+            </constraint>
+            <constraint name="NotNull">
+                <option name="groups">
+                    <value>order_shipping_address</value>
+                </option>
+            </constraint>
+        </property>
+        <property name="country">
+            <constraint name="Country">
+                <option name="groups">
+                    <value>order_shipping_address</value>
                 </option>
             </constraint>
         </property>

@@ -25,7 +25,7 @@
 
     <div class="dropdown pull-right">
         <button class="btn btn-default dropdown-toggle btn-sm" type="button" id="ViewMenu" data-toggle="dropdown" aria-expanded="true">
-            {% trans %}product.options.label.view{% endtrans %}: {{ app.request.get('view') }}
+            {% trans %}product.options.label.view{% endtrans %}: {{ ('product.options.label.' ~ app.request.get('view') ~ '_view')|trans({}, 'wellcommerce') }}
             <span class="caret"></span>
         </button>
         <ul class="dropdown-menu" role="menu" aria-labelledby="ViewMenu">

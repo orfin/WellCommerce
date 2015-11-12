@@ -28,7 +28,11 @@
 
 	                <div class="reviews">
 	                    <div class="stars rat"></div>
-	                    <span>{{ score }} / <a href="#add-opinion-alert">see {{ product.reviews.count }} reviews</a></span>
+                        {% if product.reviews.count > 0 %}
+	                        <span>{{ score }} / <a href="#add-opinion-alert">see {{ product.reviews.count }} reviews</a></span>
+                        {% else %}
+                            <span>{{ score }} / <a href="#add-opinion-alert">{% trans %}product_review.link.first_review{% endtrans %}</a></span>
+                        {% endif %}
 	                </div>
 
 	                <p>{{ product.translate().shortDescription|striptags }}</p>

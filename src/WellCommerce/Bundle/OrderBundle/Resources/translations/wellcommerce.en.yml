@@ -10,12 +10,15 @@ order:
     heading:
         index: Orders
         edit: Edit order
+        address: Address
+        confirmation: Confirmation
     button:
         confirm: Go to confirmation
     heading:
         address: Billing & shipping address
     label:
         id: ID
+        order_no: Order no.
         client: Client
         product_total: Products value
         shipping_total: Shipping cost
@@ -34,6 +37,7 @@ order:
         tax_value: Tax
         gross_amount: Price
         gross_total: Total
+        currency: Currency
     description:
-        cart_total: Total products value
+        product_total: Total products value
         shipping_cost: Shipping costs

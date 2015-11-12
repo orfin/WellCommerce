@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Controller\Front;
 
+use Doctrine\Common\Util\Debug;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
@@ -47,7 +48,7 @@ class OrderAddressController extends AbstractFrontController implements FrontCon
         ]));
 
         $form = $this->manager->getForm($cart, [
-            'validation_groups' => ['address', 'order_contact_details']
+            'validation_groups' => $this->getValidationGroups($request)
         ]);
 
         if ($form->isSubmitted()) {
@@ -70,6 +71,16 @@ class OrderAddressController extends AbstractFrontController implements FrontCon
             'form'     => $form,
             'elements' => $form->getChildren(),
         ]);
+    }
+
+    protected function getValidationGroups(Request $request)
+    {
+        $validationGroups = ['order_address'];
+        if ($request->isMethod('POST') && 0 === (int)$request->request->filter('copyAddress')) {
+            $validationGroups[] = 'order_shipping_address';
+        }
+
+        return $validationGroups;
     }
 
     /**

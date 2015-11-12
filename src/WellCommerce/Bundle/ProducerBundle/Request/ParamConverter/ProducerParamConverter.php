@@ -22,10 +22,5 @@ use WellCommerce\Bundle\CoreBundle\Request\ParamConverter\AbstractEntityParamCon
  */
 class ProducerParamConverter extends AbstractEntityParamConverter
 {
-    protected function findByRequestParameter(Request $request)
-    {
-        return $this->repository->findOneBy([
-            'id' => (int)$request->attributes->filter('id'),
-        ]);
-    }
+
 }

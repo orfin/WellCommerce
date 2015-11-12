@@ -6,14 +6,11 @@
         <div class="col-lg-9">
             <div class="cart">
                 <div class="alert alert-info mtp30">
-                    <p><strong>{% trans %}payment.flash.success{% endtrans %}</strong></p>
-                    <p>{% trans %}order.label.id{% endtrans %}: <strong>{{ order.getId() }}</strong></p>
+                    <p><strong>{% trans %}payment.flash.thank_you{% endtrans %}</strong></p>
+                    <p>{% trans %}order.label.order_no{% endtrans %}: <strong>{{ order.getId() }}</strong></p>
                     <p>{% trans %}order.label.payment_method{% endtrans %}: <strong>{{ order.paymentMethod.translate().name }}</strong></p>
                     <p>{% trans %}order.label.order_total{% endtrans %}: <strong>{{ format_price(order.orderTotal.grossAmount, order.currency) }}</strong></p>
-                    <p>{% trans %}order.label.shipping_details{% endtrans %}: <strong>{{ format_price(order.shippingTotal.grossAmount, order.currency) }}</strong></p>
-                    <p>{% trans %}order.label.currency{% endtrans %}: <strong>{{ order.currency }}</strong></p>
                 </div>
-
                 <div class="clearfix">
                     <a href="{{ path('front.home_page.index') }}" class="btn btn-link light btn-lg notransform nopadding">Back to shopping</a>
                 </div>
