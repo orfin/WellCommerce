@@ -2,20 +2,19 @@ $(document).ready(function () {
 
     var oBasketModal = $('#basket-modal');
     var oCartPreview = $('#topCart');
+    var oAddCartButtonSettings = {
+        oBasketModal: oBasketModal,
+        oCartPreview: oCartPreview,
+        sAddProductFormClass: '.add-to-cart',
+        sProductSelector: '#product',
+        sQuantitySelector: '#quantity',
+        sAttributeSelector: '#attribute',
+        sPriceSelector: '#price',
+        sAddProductRoute: 'front.cart.add',
+        sAttributesSelectClass: '.attribute'
+    };
 
-    $(document).delegate('.add-cart', 'focus', function() {
-        $(this).GProductAddCartButton({
-            oBasketModal: oBasketModal,
-            oCartPreview: oCartPreview,
-            sAddProductFormClass: '.add-to-cart',
-            sProductSelector: '#product',
-            sQuantitySelector: '#quantity',
-            sAttributeSelector: '#attribute',
-            sPriceSelector: '#price',
-            sAddProductRoute: 'front.cart.add',
-            sAttributesSelectClass: '.attribute'
-        });
-    });
+    $('.add-cart').GProductAddCartButton(oAddCartButtonSettings);
 
     $('.coming-soon').click(function(e){
         e.stopImmediatePropagation();
@@ -32,7 +31,8 @@ $(document).ready(function () {
         sProductSearchRoute: 'front.product_search.index',
         sProductLiveSearchRoute: 'front.product_search.view',
         sPhraseInputSelector: '#phrase',
-        sSearchResultsSelector: 'div#search-results'
+        sSearchResultsSelector: 'div#search-results',
+        oAddCartButtonSettings: oAddCartButtonSettings
     });
 
     $('.cart .coupon').GCoupon({

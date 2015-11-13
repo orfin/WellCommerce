@@ -526,7 +526,8 @@ var oSearchDefaultParams = {
     sProductSearchRoute:      'front.product_search.index',
     sProductLiveSearchRoute:  'front.product_search.view',
     sPhraseInputSelector:     'form#search #phrase',
-    sSearchResultsSelector:   'div#search-results'
+    sSearchResultsSelector:   'div#search-results',
+    oAddCartButtonSettings:   {}
 };
 
 var GSearch = function(oOptions) {
@@ -560,6 +561,7 @@ var GSearch = function(oOptions) {
             GAjaxRequest(url, {}, function(oResponse){
                 if(oResponse.liveSearchContent != undefined) {
                     $(gThis.m_oOptions.sSearchResultsSelector).html(oResponse.liveSearchContent);
+                    $(gThis.m_oOptions.sSearchResultsSelector).find('.add-cart').GProductAddCartButton(gThis.m_oOptions.oAddCartButtonSettings);
                 }
             });
         }else{
