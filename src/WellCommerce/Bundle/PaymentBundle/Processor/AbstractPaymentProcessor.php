@@ -12,10 +12,12 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\Processor;
 
+use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
 use WellCommerce\Bundle\FormBundle\Dependencies\DependencyInterface;
 use WellCommerce\Bundle\FormBundle\Elements\ElementInterface;
 use WellCommerce\Bundle\FormBundle\FormBuilderInterface;
+use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodConfigurationInterface;
 
 /**
  * Class AbstractPaymentProcessor
@@ -51,8 +53,19 @@ abstract class AbstractPaymentProcessor extends AbstractContainerAware implement
     /**
      * {@inheritdoc}
      */
-    public function addConfigurationFields(FormBuilderInterface $builder, ElementInterface $fieldset, DependencyInterface $dependency)
-    {
+    abstract function addConfigurationFields(FormBuilderInterface $builder, ElementInterface $fieldset, DependencyInterface $dependency);
 
+    /**
+     * {@inheritdoc}
+     */
+    public function processConfiguration(Collection $collection)
+    {
+        $config = [];
+
+        $collection->map(function (PaymentMethodConfigurationInterface $configuration) use (&$config) {
+            $config[$configuration->getName()] = $configuration->getValue();
+        });
+
+        return $config;
     }
 }

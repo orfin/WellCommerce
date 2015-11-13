@@ -20,6 +20,9 @@
 
         <service id="dictionary.purger" class="WellCommerce\Bundle\IntlBundle\Purger\DictionaryPurger">
             <argument type="service" id="doctrine.helper"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
         </service>
 
         <service id="package.command.purge.translations" class="WellCommerce\Bundle\IntlBundle\Command\PurgeTranslationsCommand">

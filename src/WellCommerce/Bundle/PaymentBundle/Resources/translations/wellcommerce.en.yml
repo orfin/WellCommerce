@@ -19,3 +19,8 @@ payment_method:
     label:
         processor: Payment processor
         shipping_methods: Allowed shipping methods
+    bank_transfer:
+        tip: 'Your order will be processed upon receiving of the payment at the following bank account'
+        account: Account number
+        sort_number: Sort code
+        title: 'Transfer title'

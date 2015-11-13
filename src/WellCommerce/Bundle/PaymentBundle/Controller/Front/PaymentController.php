@@ -12,9 +12,9 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\Controller\Front;
 
-use Doctrine\Common\Util\Debug;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 
 /**
  * Class PaymentController
@@ -37,10 +37,25 @@ class PaymentController extends AbstractFrontController implements FrontControll
             return $this->redirectToRoute('front.home_page.index');
         }
 
-        $processor = $order->getPaymentMethod()->getProcessor();
+        $processor     = $this->getProcessor($order);
+        $configuration = $processor->processConfiguration($order->getPaymentMethod()->getConfiguration());
 
-        return $this->displayTemplate($processor, [
-            'order' => $order
+        return $this->displayTemplate($processor->getAlias(), [
+            'order'         => $order,
+            'configuration' => $configuration
         ]);
+    }
+
+    /**
+     * @param OrderInterface $order
+     *
+     * @return \WellCommerce\Bundle\PaymentBundle\Processor\PaymentMethodProcessorInterface
+     */
+    protected function getProcessor(OrderInterface $order)
+    {
+        $orderProcessor = $order->getPaymentMethod()->getProcessor();
+        $processors     = $this->get('payment_method.processor.collection');
+
+        return $processors->get($orderProcessor);
     }
 }

@@ -72,7 +72,7 @@ class PaymentMethodFormBuilder extends AbstractFormBuilder
         $requiredData->addChild($this->getElement('select', [
             'name'        => 'defaultOrderStatus',
             'label'       => $this->trans('common.label.default_order_status'),
-            'options'     => $this->get('order_status.dataset')->getResult('select'),
+            'options'     => $this->get('order_status.dataset.admin')->getResult('select'),
             'transformer' => $this->getRepositoryTransformer('entity', $this->get('order_status.repository'))
         ]));
 

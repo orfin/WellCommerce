@@ -17,11 +17,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Yaml\Yaml;
-use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
 use WellCommerce\Bundle\CoreBundle\Helper\Helper;
+use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
+use WellCommerce\Bundle\CoreBundle\Purger\PurgerInterface;
 use WellCommerce\Bundle\IntlBundle\Entity\Dictionary;
 use WellCommerce\Bundle\IntlBundle\Entity\Locale;
-use WellCommerce\Bundle\IntlBundle\Repository\LocaleRepositoryInterface;
+use WellCommerce\Bundle\IntlBundle\Entity\LocaleInterface;
 
 /**
  * Class DictionaryManager
@@ -61,30 +62,34 @@ class DictionaryManager extends AbstractAdminManager
     protected $propertyAccessor;
 
     /**
-     * @var LocaleRepositoryInterface
+     * @var PurgerInterface
      */
-    protected $localeRepository;
+    protected $purger;
 
     /**
-     * @param LocaleRepositoryInterface $localeRepository
+     * @param PurgerInterface $purger
      */
-    public function setLocaleRepository(LocaleRepositoryInterface $localeRepository)
+    public function setDictionaryPurger(PurgerInterface $purger)
     {
-        $this->localeRepository = $localeRepository;
+        $this->purger = $purger;
     }
 
     /**
      * Synchronizes database and filesystem translations
      *
-     * @param Request $request
+     * @param Request         $request
+     * @param KernelInterface $kernel
      */
     public function syncDictionary(Request $request, KernelInterface $kernel)
     {
         $this->kernel           = $kernel;
         $this->currentLocale    = $request->getLocale();
-        $this->locales          = $this->localeRepository->findAll();
+        $this->locales          = $this->getLocales();
         $this->propertyAccessor = PropertyAccess::createPropertyAccessor();
+
+        $this->purger->purge();
         $this->loadFilesystemTranslations();
+
         $this->loadDatabaseTranslations();
         $this->mergeAndSaveTranslations();
 
@@ -96,8 +101,35 @@ class DictionaryManager extends AbstractAdminManager
     protected function loadFilesystemTranslations()
     {
         foreach ($this->locales as $locale) {
-            $this->filesystemTranslations[$locale->getCode()] = $this->getFilesystemTranslationsForLocale($locale);;
+            $messages     = $this->get('translator')->getMessages($locale->getCode());
+            $translations = $this->propertyAccessor->getValue($messages, '[wellcommerce]');
+            $this->importMessages($translations, $locale);
         }
+
+        die();
+    }
+
+    /**
+     * Imports the translations
+     *
+     * @param array           $messages
+     * @param LocaleInterface $locale
+     */
+    protected function importMessages(array $messages = [], LocaleInterface $locale)
+    {
+        $em = $this->getDoctrineHelper()->getEntityManager();
+
+        foreach ($messages as $identifier => $translation) {
+            $dictionary = new Dictionary();
+            $dictionary->setIdentifier($identifier);
+            $dictionary->translate($locale->getCode())->setValue($translation);
+            $dictionary->mergeNewTranslations();
+            $em->persist($dictionary);
+        }
+
+        $em->flush();
+
+        die();
     }
 
     /**

@@ -30,7 +30,7 @@ class DictionaryDataSet extends AbstractDataSet
         $configurator->setColumns([
             'id'          => 'dictionary.id',
             'identifier'  => 'dictionary.identifier',
-            'translation' => 'dictionary.identifier',
+            'translation' => 'dictionary_translation.value',
             'locale'      => 'dictionary_translation.locale',
         ]);
     }

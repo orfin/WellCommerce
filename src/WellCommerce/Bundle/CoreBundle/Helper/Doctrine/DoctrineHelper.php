@@ -90,17 +90,18 @@ class DoctrineHelper implements DoctrineHelperInterface
      */
     public function truncateTable($className)
     {
+        $entityManager = $this->getEntityManager();
+
         $metadata = $this->getClassMetadata($className);
         if ($metadata instanceof ClassMetadata) {
-            $connection = $this->registry->getConnection();
+            $connection = $entityManager->getConnection();
+            $platform   = $connection->getDatabasePlatform();
             $connection->beginTransaction();
+            $table = $metadata->getTableName();
 
             try {
-                $sql  = 'DELETE FROM :table';
-                $stmt = $connection->prepare($sql);
-                $stmt->bindValue('table', $metadata->getTableName());
-                $stmt->execute();
-
+                $table = $connection->quoteIdentifier($table);
+                $connection->executeUpdate('DELETE FROM ' . $table);
                 $connection->commit();
 
                 return true;

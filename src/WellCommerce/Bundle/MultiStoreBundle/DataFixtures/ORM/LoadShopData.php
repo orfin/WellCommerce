@@ -18,7 +18,7 @@ use WellCommerce\Bundle\CoreBundle\Entity\MailerConfiguration;
 use WellCommerce\Bundle\IntlBundle\DataFixtures\ORM\LoadCurrencyData;
 
 /**
- * Class LoadThemeData
+ * Class LoadShopData
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */

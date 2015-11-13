@@ -12,9 +12,11 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\Processor;
 
+use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\FormBundle\Dependencies\DependencyInterface;
 use WellCommerce\Bundle\FormBundle\Elements\ElementInterface;
 use WellCommerce\Bundle\FormBundle\FormBuilderInterface;
+use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodConfigurationInterface;
 
 /**
  * Class BankTransfer
