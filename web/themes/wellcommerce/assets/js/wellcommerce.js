@@ -48,6 +48,14 @@ $(document).ready(function () {
         $('form#search #phrase').focus();
 	});
 
+    $(document).keyup(function(e) {
+        if (e.keyCode == 27) {
+            if($('body').has('sliding-search-is-open')){
+                $('body').toggleClass('sliding-search-is-open');
+            }
+        }
+    });
+
 	 $('.sliding-search > div > form').click(function(event){
 	     event.stopPropagation();
 	 });
