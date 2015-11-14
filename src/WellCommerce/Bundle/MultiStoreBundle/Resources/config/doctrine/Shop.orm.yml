@@ -39,7 +39,7 @@ WellCommerce\Bundle\MultiStoreBundle\Entity\Shop:
                     referencedColumnName: id
                     onDelete: 'SET NULL'
         theme:
-            targetEntity: WellCommerce\Bundle\ThemeBundle\Entity\Theme
+            targetEntity: WellCommerce\Bundle\LayoutBundle\Entity\Theme
             fetch: LAZY
             joinColumns:
                 theme_id:

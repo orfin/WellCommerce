@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\ThemeBundle\DataFixtures\ORM;
+namespace WellCommerce\Bundle\MultiStoreBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
@@ -30,7 +30,7 @@ class LoadShopData extends AbstractDataFixture
     public function load(ObjectManager $manager)
     {
         /**
-         * @var $theme       \WellCommerce\Bundle\ThemeBundle\Entity\ThemeInterface
+         * @var $theme       \WellCommerce\Bundle\LayoutBundle\Entity\ThemeInterface
          * @var $company     \WellCommerce\Bundle\MultiStoreBundle\Entity\CompanyInterface
          * @var $orderStatus \WellCommerce\Bundle\OrderBundle\Entity\OrderStatusInterface
          */

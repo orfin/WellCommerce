@@ -55,9 +55,6 @@ wellcommerce_media:
 wellcommerce_layout:
     resource: "@WellCommerceLayoutBundle/Resources/config/routing.xml"
 
-wellcommerce_theme:
-    resource: "@WellCommerceThemeBundle/Resources/config/routing.xml"
-
 wellcommerce_cms:
     resource: "@WellCommerceCmsBundle/Resources/config/routing.xml"
 

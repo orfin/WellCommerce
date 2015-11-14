@@ -62,7 +62,7 @@ interface FrontManagerInterface extends ManagerInterface
     public function getProducerContext();
 
     /**
-     * @return \WellCommerce\Bundle\ThemeBundle\Context\Front\ThemeContextInterface
+     * @return \WellCommerce\Bundle\LayoutBundle\Context\Front\ThemeContextInterface
      */
     public function getThemeContext();
 

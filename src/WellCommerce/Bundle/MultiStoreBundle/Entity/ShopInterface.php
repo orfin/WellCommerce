@@ -16,7 +16,7 @@ use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\MailerConfiguration;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
-use WellCommerce\Bundle\ThemeBundle\Entity\ThemeAwareInterface;
+use WellCommerce\Bundle\LayoutBundle\Entity\ThemeAwareInterface;
 
 /**
  * Interface ShopInterface

@@ -1,13 +1,13 @@
 parameters:
     fixtures_load_order:
         WellCommerce\Bundle\AdminBundle\DataFixtures\ORM\LoadAdminMenuData: 0
-        WellCommerce\Bundle\ThemeBundle\DataFixtures\ORM\LoadThemeData: 10
+        WellCommerce\Bundle\LayoutBundle\DataFixtures\ORM\LoadThemeData: 10
         WellCommerce\Bundle\MultiStoreBundle\DataFixtures\ORM\LoadCompanyData: 20
         WellCommerce\Bundle\IntlBundle\DataFixtures\ORM\LoadCurrencyData: 30
         WellCommerce\Bundle\IntlBundle\DataFixtures\ORM\LoadLocaleData: 40
         WellCommerce\Bundle\OrderBundle\DataFixtures\ORM\LoadOrderStatusGroupData: 41
         WellCommerce\Bundle\OrderBundle\DataFixtures\ORM\LoadOrderStatusData: 42
-        WellCommerce\Bundle\ThemeBundle\DataFixtures\ORM\LoadShopData: 50
+        WellCommerce\Bundle\MultiStoreBundle\DataFixtures\ORM\LoadShopData: 50
         WellCommerce\Bundle\UserBundle\DataFixtures\ORM\LoadUserData: 60
         WellCommerce\Bundle\TaxBundle\DataFixtures\ORM\LoadTaxData: 70
         WellCommerce\Bundle\ClientBundle\DataFixtures\ORM\LoadClientGroupData: 80
