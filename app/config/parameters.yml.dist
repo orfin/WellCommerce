@@ -22,6 +22,8 @@ parameters:
 
     search_engine: lucene
 
+    php_binary_path: ~
+
     pdo.db_options:
       db_table:    session
       db_id_col:   session_id

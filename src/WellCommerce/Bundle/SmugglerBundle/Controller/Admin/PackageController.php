@@ -20,8 +20,6 @@ use WellCommerce\Bundle\SmugglerBundle\Helper\PackageHelperInterface;
  * Class PackageController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class PackageController extends AbstractAdminController
 {
@@ -53,11 +51,11 @@ class PackageController extends AbstractAdminController
 
         $form = $this->manager->getForm($resource);
 
-        return [
+        return $this->displayTemplate('package', [
             'operation'   => $operation,
             'packageName' => $resource->getFullName(),
             'form'        => $form,
-        ];
+        ]);
     }
 
     public function consoleAction(Request $request)
@@ -72,7 +70,7 @@ class PackageController extends AbstractAdminController
                 $this->manager->changePackageStatus($request);
             }
 
-            return $this->jsonResponse(['code' => $process->getExitCode()]);
+            return $this->jsonResponse(['code' => $process->getExitCode(), 'error' => $process->getErrorOutput()]);
         }
     }
 
