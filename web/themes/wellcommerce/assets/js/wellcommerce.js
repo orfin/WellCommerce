@@ -51,7 +51,7 @@ $(document).ready(function () {
     $(document).keyup(function(e) {
         if (e.keyCode == 27) {
             if($('body').has('sliding-search-is-open')){
-                $('body').toggleClass('sliding-search-is-open');
+                $('body').removeClass('sliding-search-is-open');
             }
         }
     });
