@@ -1,0 +1,2 @@
+split:
+    src/WellCommerce/Bundle/*: git@github.com:wellcommerce/$i.git
