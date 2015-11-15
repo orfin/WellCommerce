@@ -13,9 +13,6 @@ wellcommerce_routing:
 wellcommerce_intl:
     resource: "@WellCommerceIntlBundle/Resources/config/routing.xml"
 
-wellcommerce_availability:
-    resource: "@WellCommerceAvailabilityBundle/Resources/config/routing.xml"
-
 wellcommerce_deliverer:
     resource: "@WellCommerceDelivererBundle/Resources/config/routing.xml"
 

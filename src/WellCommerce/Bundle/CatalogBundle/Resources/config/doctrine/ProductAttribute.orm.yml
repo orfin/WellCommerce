@@ -48,7 +48,7 @@ WellCommerce\Bundle\CatalogBundle\Entity\ProductAttribute:
                     referencedColumnName: id
                     onDelete: CASCADE
         availability:
-            targetEntity: WellCommerce\Bundle\AvailabilityBundle\Entity\Availability
+            targetEntity: WellCommerce\Bundle\CatalogBundle\Entity\Availability
             fetch: LAZY
             joinColumns:
                 availability_id:

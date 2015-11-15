@@ -16,7 +16,7 @@ parameters:
         WellCommerce\Bundle\CmsBundle\DataFixtures\ORM\LoadContactData: 130
         WellCommerce\Bundle\MediaBundle\DataFixtures\ORM\LoadMediaData: 135
         WellCommerce\Bundle\DelivererBundle\DataFixtures\ORM\LoadDelivererData: 140
-        WellCommerce\Bundle\AvailabilityBundle\DataFixtures\ORM\LoadAvailabilityData: 150
+        WellCommerce\Bundle\CatalogBundle\DataFixtures\ORM\LoadAvailabilityData: 150
         WellCommerce\Bundle\ProducerBundle\DataFixtures\ORM\LoadProducerData: 160
         WellCommerce\Bundle\AttributeBundle\DataFixtures\ORM\LoadAttributeData: 170
         WellCommerce\Bundle\CatalogBundle\DataFixtures\ORM\LoadCategoryData: 180

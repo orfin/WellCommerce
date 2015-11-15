@@ -67,7 +67,7 @@ WellCommerce\Bundle\CatalogBundle\Entity\Product:
                     referencedColumnName: id
                     onDelete: 'SET NULL'
         availability:
-            targetEntity: WellCommerce\Bundle\AvailabilityBundle\Entity\Availability
+            targetEntity: WellCommerce\Bundle\CatalogBundle\Entity\Availability
             fetch: LAZY
             joinColumns:
                 availability_id:

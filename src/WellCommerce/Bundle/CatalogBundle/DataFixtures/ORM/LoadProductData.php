@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\CatalogBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
-use WellCommerce\Bundle\AvailabilityBundle\DataFixtures\ORM\LoadAvailabilityData;
+use WellCommerce\Bundle\CatalogBundle\DataFixtures\ORM\LoadAvailabilityData;
 use WellCommerce\Bundle\CatalogBundle\DataFixtures\ORM\LoadCategoryData;
 use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
 use WellCommerce\Bundle\CoreBundle\Entity\Dimension;
@@ -84,8 +84,8 @@ class LoadProductData extends AbstractDataFixture
         $sellPrice->setGrossAmount($price = rand(100, 200));
         $sellPrice->setCurrency($currency->getCode());
 
-        foreach($statuses as $status){
-            if($status->translate()->getName() === 'Promotions'){
+        foreach ($statuses as $status) {
+            if ($status->translate()->getName() === 'Promotions') {
                 $sellPrice->setDiscountedGrossAmount($price * (rand(80, 95) / 100));
                 $sellPrice->setValidFrom(new \DateTime());
                 $sellPrice->setValidTo((new \DateTime())->modify('+30 days'));
