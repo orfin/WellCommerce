@@ -6,11 +6,18 @@
 # For the full copyright and license information,
 # please view the LICENSE file that was distributed with this source code.
 
+category:
+    heading:
+        index: Categories
+        add: Create a new category
+        edit: Edit category
+
 product_search:
     heading:
         index: Search results
     label:
         phrase: Enter search phrase
+
 product_review:
     heading:
         index: Reviews
@@ -22,6 +29,7 @@ product_review:
         add_opinion: Submit review
     link:
         first_review: Be first to submit a review
+
 product:
     form:
         fieldset:

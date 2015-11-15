@@ -30,7 +30,7 @@ class EntityTraitGenerator
     {
 
         $generator          = new TraitGenerator('CategoryExtraTrait',
-            'WellCommerce\Bundle\CategoryBundle\Entity\Extra');
+            'WellCommerce\Bundle\CatalogBundle\Entity\Extra');
         $traitDocAnnotation = new BaseTag('baseAnnotation', 'testing');
         $traitDoc           = new DocCommentGenerator('Short trait description.',
             "Long description.\nOn multiple lines.", [$traitDocAnnotation]);

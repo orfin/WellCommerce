@@ -18,7 +18,7 @@ use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroupInterface;
 use WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityAwareTrait;
-use WellCommerce\Bundle\CategoryBundle\Entity\CategoryInterface;
+use WellCommerce\Bundle\CatalogBundle\Entity\CategoryInterface;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\EnableableTrait;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\PhotoTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\Dimension;

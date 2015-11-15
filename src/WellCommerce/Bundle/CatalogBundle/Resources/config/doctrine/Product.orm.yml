@@ -103,7 +103,7 @@ WellCommerce\Bundle\CatalogBundle\Entity\Product:
                     onDelete: 'SET NULL'
     manyToMany:
         categories:
-            targetEntity: WellCommerce\Bundle\CategoryBundle\Entity\Category
+            targetEntity: WellCommerce\Bundle\CatalogBundle\Entity\Category
             fetch: LAZY
             inversedBy: products
             joinTable:

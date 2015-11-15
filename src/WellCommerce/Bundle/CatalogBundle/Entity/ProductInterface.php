@@ -15,7 +15,7 @@ namespace WellCommerce\Bundle\CatalogBundle\Entity;
 use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroupInterface;
 use WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityAwareInterface;
-use WellCommerce\Bundle\CategoryBundle\Entity\CategoryInterface;
+use WellCommerce\Bundle\CatalogBundle\Entity\CategoryInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\Dimension;
 use WellCommerce\Bundle\CoreBundle\Entity\DiscountablePrice;

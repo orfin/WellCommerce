@@ -13,7 +13,7 @@ WellCommerce\Bundle\RoutingBundle\Entity\Route:
         product: WellCommerce\Bundle\CatalogBundle\Entity\ProductRoute
         product_status: WellCommerce\Bundle\CatalogBundle\Entity\ProductStatusRoute
         producer: WellCommerce\Bundle\ProducerBundle\Entity\ProducerRoute
-        category: WellCommerce\Bundle\CategoryBundle\Entity\CategoryRoute
+        category: WellCommerce\Bundle\CatalogBundle\Entity\CategoryRoute
         page: WellCommerce\Bundle\CmsBundle\Entity\PageRoute
     repositoryClass: WellCommerce\Bundle\RoutingBundle\Repository\RouteRepository
     id:

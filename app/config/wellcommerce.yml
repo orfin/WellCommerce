@@ -19,7 +19,7 @@ parameters:
         WellCommerce\Bundle\AvailabilityBundle\DataFixtures\ORM\LoadAvailabilityData: 150
         WellCommerce\Bundle\ProducerBundle\DataFixtures\ORM\LoadProducerData: 160
         WellCommerce\Bundle\AttributeBundle\DataFixtures\ORM\LoadAttributeData: 170
-        WellCommerce\Bundle\CategoryBundle\DataFixtures\ORM\LoadCategoryData: 180
+        WellCommerce\Bundle\CatalogBundle\DataFixtures\ORM\LoadCategoryData: 180
         WellCommerce\Bundle\CatalogBundle\DataFixtures\ORM\LoadProductStatusData: 190
         WellCommerce\Bundle\ProductBundle\DataFixtures\ORM\LoadProductData: 200
         WellCommerce\Bundle\ClientBundle\DataFixtures\ORM\LoadLayoutBoxData: 210

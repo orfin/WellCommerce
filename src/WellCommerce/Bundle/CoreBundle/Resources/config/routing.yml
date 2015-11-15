@@ -26,7 +26,7 @@ wellcommerce_product:
     resource: "@WellCommerceCatalogBundle/Resources/config/routing.xml"
 
 wellcommerce_category:
-    resource: "@WellCommerceCategoryBundle/Resources/config/routing.xml"
+    resource: "@WellCommerceCatalogBundle/Resources/config/routing.xml"
 
 wellcommerce_client:
     resource: "@WellCommerceClientBundle/Resources/config/routing.xml"

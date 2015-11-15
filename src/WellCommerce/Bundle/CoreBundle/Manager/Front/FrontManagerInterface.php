@@ -27,7 +27,7 @@ interface FrontManagerInterface extends ManagerInterface
     public function getCartContext();
 
     /**
-     * @return \WellCommerce\Bundle\CategoryBundle\Context\Front\CategoryContextInterface
+     * @return \WellCommerce\Bundle\CatalogBundle\Context\Front\CategoryContextInterface
      */
     public function getCategoryContext();
 

@@ -15,7 +15,7 @@ namespace WellCommerce\Bundle\CatalogBundle\DataFixtures\ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
 use WellCommerce\Bundle\AvailabilityBundle\DataFixtures\ORM\LoadAvailabilityData;
-use WellCommerce\Bundle\CategoryBundle\DataFixtures\ORM\LoadCategoryData;
+use WellCommerce\Bundle\CatalogBundle\DataFixtures\ORM\LoadCategoryData;
 use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
 use WellCommerce\Bundle\CoreBundle\Entity\Dimension;
 use WellCommerce\Bundle\CoreBundle\Entity\DiscountablePrice;
