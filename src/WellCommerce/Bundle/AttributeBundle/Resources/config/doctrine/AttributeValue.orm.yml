@@ -18,6 +18,6 @@ WellCommerce\Bundle\AttributeBundle\Entity\AttributeValue:
                     onDelete: CASCADE
     manyToMany:
         productAttributeValues:
-            targetEntity: WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute
+            targetEntity: WellCommerce\Bundle\CatalogBundle\Entity\ProductAttribute
             fetch: LAZY
             mappedBy: attributeValues

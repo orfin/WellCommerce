@@ -18,7 +18,7 @@ use WellCommerce\Bundle\CoreBundle\Entity\HierarchyAwareInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
 use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopCollectionAwareInterface;
-use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
+use WellCommerce\Bundle\CatalogBundle\Entity\ProductInterface;
 
 /**
  * Interface CategoryInterface

@@ -9,7 +9,7 @@ WellCommerce\Bundle\ProducerBundle\Entity\Producer:
                 strategy: AUTO
     oneToMany:
         products:
-            targetEntity: WellCommerce\Bundle\ProductBundle\Entity\Product
+            targetEntity: WellCommerce\Bundle\CatalogBundle\Entity\Product
             cascade:
                 - remove
                 - persist

@@ -21,14 +21,14 @@ WellCommerce\Bundle\CartBundle\Entity\CartProduct:
                     referencedColumnName: id
                     onDelete: CASCADE
         product:
-            targetEntity: WellCommerce\Bundle\ProductBundle\Entity\Product
+            targetEntity: WellCommerce\Bundle\CatalogBundle\Entity\Product
             fetch: LAZY
             joinColumns:
                 product_id:
                     referencedColumnName: id
                     onDelete: CASCADE
         attribute:
-            targetEntity: WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute
+            targetEntity: WellCommerce\Bundle\CatalogBundle\Entity\ProductAttribute
             fetch: LAZY
             joinColumns:
                 attribute_id:

@@ -51,7 +51,7 @@ WellCommerce\Bundle\MediaBundle\Entity\Media:
             precision: 0
     oneToMany:
         productPhotos:
-            targetEntity: WellCommerce\Bundle\ProductBundle\Entity\ProductPhoto
+            targetEntity: WellCommerce\Bundle\CatalogBundle\Entity\ProductPhoto
             cascade:
                 - remove
                 - persist

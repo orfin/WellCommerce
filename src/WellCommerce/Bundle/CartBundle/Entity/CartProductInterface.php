@@ -3,8 +3,8 @@
 namespace WellCommerce\Bundle\CartBundle\Entity;
 
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
-use WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeInterface;
-use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareInterface;
+use WellCommerce\Bundle\CatalogBundle\Entity\ProductAttributeInterface;
+use WellCommerce\Bundle\CatalogBundle\Entity\ProductAwareInterface;
 
 /**
  * Interface CartProductInterface

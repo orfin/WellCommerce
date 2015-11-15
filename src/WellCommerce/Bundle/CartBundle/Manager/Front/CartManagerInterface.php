@@ -15,8 +15,8 @@ namespace WellCommerce\Bundle\CartBundle\Manager\Front;
 use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 use WellCommerce\Bundle\CartBundle\Entity\CartProductInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\Front\FrontManagerInterface;
-use WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeInterface;
-use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
+use WellCommerce\Bundle\CatalogBundle\Entity\ProductAttributeInterface;
+use WellCommerce\Bundle\CatalogBundle\Entity\ProductInterface;
 
 /**
  * Interface CartManagerInterface

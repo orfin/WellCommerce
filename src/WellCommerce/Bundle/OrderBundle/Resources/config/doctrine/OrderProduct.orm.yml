@@ -33,14 +33,14 @@ WellCommerce\Bundle\OrderBundle\Entity\OrderProduct:
                     referencedColumnName: id
                     onDelete: CASCADE
         product:
-            targetEntity: WellCommerce\Bundle\ProductBundle\Entity\Product
+            targetEntity: WellCommerce\Bundle\CatalogBundle\Entity\Product
             fetch: LAZY
             joinColumns:
                 product_id:
                     referencedColumnName: id
                     onDelete: RESTRICT
         productAttribute:
-            targetEntity: WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute
+            targetEntity: WellCommerce\Bundle\CatalogBundle\Entity\ProductAttribute
             fetch: LAZY
             joinColumns:
                 product_attribute_id:

@@ -23,7 +23,7 @@ wellcommerce_producer:
     resource: "@WellCommerceProducerBundle/Resources/config/routing.xml"
 
 wellcommerce_product:
-    resource: "@WellCommerceProductBundle/Resources/config/routing.xml"
+    resource: "@WellCommerceCatalogBundle/Resources/config/routing.xml"
 
 wellcommerce_category:
     resource: "@WellCommerceCategoryBundle/Resources/config/routing.xml"

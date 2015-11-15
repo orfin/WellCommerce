@@ -32,7 +32,7 @@ interface ProducerInterface extends TranslatableInterface, TimestampableInterfac
     public function getId();
 
     /**
-     * @return Collection|\WellCommerce\Bundle\ProductBundle\Entity\ProductInterface[]
+     * @return Collection|\WellCommerce\Bundle\CatalogBundle\Entity\ProductInterface[]
      */
     public function getProducts();
 

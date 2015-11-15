@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\ClientBundle\Controller\Front;
 
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
-use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
+use WellCommerce\Bundle\CatalogBundle\Entity\ProductInterface;
 
 /**
  * Class ClientWishlistController

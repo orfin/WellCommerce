@@ -10,8 +10,8 @@ WellCommerce\Bundle\RoutingBundle\Entity\Route:
         fieldName: type
     discriminatorMap:
         route: WellCommerce\Bundle\RoutingBundle\Entity\Route
-        product: WellCommerce\Bundle\ProductBundle\Entity\ProductRoute
-        product_status: WellCommerce\Bundle\ProductBundle\Entity\ProductStatusRoute
+        product: WellCommerce\Bundle\CatalogBundle\Entity\ProductRoute
+        product_status: WellCommerce\Bundle\CatalogBundle\Entity\ProductStatusRoute
         producer: WellCommerce\Bundle\ProducerBundle\Entity\ProducerRoute
         category: WellCommerce\Bundle\CategoryBundle\Entity\CategoryRoute
         page: WellCommerce\Bundle\CmsBundle\Entity\PageRoute

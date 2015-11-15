@@ -15,7 +15,7 @@ namespace WellCommerce\Bundle\ProducerBundle\Controller\Box;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
 use WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxSettingsCollection;
-use WellCommerce\Bundle\ProductBundle\Conditions\ProductLayeredNavigationConditions;
+use WellCommerce\Bundle\CatalogBundle\Conditions\ProductLayeredNavigationConditions;
 
 /**
  * Class ProducerProductsBoxController

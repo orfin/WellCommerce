@@ -19,7 +19,7 @@ use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\EnableableTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\HierarchyAwareTrait;
 use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopCollectionAwareTrait;
-use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
+use WellCommerce\Bundle\CatalogBundle\Entity\ProductInterface;
 
 /**
  * Class Category

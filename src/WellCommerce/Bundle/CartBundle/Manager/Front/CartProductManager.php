@@ -16,8 +16,8 @@ use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 use WellCommerce\Bundle\CartBundle\Entity\CartProductInterface;
 use WellCommerce\Bundle\CartBundle\Exception\DeleteCartItemException;
 use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
-use WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeInterface;
-use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
+use WellCommerce\Bundle\CatalogBundle\Entity\ProductAttributeInterface;
+use WellCommerce\Bundle\CatalogBundle\Entity\ProductInterface;
 
 /**
  * Class CartProductManager

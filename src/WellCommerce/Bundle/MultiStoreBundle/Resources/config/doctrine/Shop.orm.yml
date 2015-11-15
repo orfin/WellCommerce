@@ -47,7 +47,7 @@ WellCommerce\Bundle\MultiStoreBundle\Entity\Shop:
                     onDelete: 'SET NULL'
     manyToMany:
         products:
-            targetEntity: WellCommerce\Bundle\ProductBundle\Entity\Product
+            targetEntity: WellCommerce\Bundle\CatalogBundle\Entity\Product
             fetch: LAZY
             mappedBy: shops
         categories:

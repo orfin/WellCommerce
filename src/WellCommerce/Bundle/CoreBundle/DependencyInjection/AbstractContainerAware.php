@@ -207,7 +207,7 @@ abstract class AbstractContainerAware extends ContainerAware
     }
 
     /**
-     * @return \WellCommerce\Bundle\ProductBundle\Helper\ProductLayeredNavigationHelperInterface
+     * @return \WellCommerce\Bundle\CatalogBundle\Helper\ProductLayeredNavigationHelperInterface
      */
     public function getLayeredNavigationHelper()
     {

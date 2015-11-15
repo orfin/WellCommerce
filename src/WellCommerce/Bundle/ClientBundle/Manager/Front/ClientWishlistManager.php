@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\ClientBundle\Manager\Front;
 
 use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
-use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
+use WellCommerce\Bundle\CatalogBundle\Entity\ProductInterface;
 
 /**
  * Class ClientWishlistManager

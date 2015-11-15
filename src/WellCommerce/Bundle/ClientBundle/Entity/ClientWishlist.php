@@ -12,7 +12,7 @@
 namespace WellCommerce\Bundle\ClientBundle\Entity;
 
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
-use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareTrait;
+use WellCommerce\Bundle\CatalogBundle\Entity\ProductAwareTrait;
 
 /**
  * Class Client

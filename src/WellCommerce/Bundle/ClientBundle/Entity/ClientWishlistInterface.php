@@ -18,7 +18,7 @@ use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
-use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareInterface;
+use WellCommerce\Bundle\CatalogBundle\Entity\ProductAwareInterface;
 
 /**
  * Interface ClientInterface

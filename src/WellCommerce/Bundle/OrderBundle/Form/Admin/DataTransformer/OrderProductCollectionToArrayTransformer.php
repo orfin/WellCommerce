@@ -19,7 +19,7 @@ use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransfo
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderProductInterface;
 use WellCommerce\Bundle\OrderBundle\Manager\Admin\OrderProductManager;
-use WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeInterface;
+use WellCommerce\Bundle\CatalogBundle\Entity\ProductAttributeInterface;
 
 /**
  * Class ProductAttributeCollectionToArrayTransformer

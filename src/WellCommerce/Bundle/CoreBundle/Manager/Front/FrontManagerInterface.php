@@ -47,12 +47,12 @@ interface FrontManagerInterface extends ManagerInterface
     public function getPageContext();
 
     /**
-     * @return \WellCommerce\Bundle\ProductBundle\Context\Front\ProductContextInterface
+     * @return \WellCommerce\Bundle\CatalogBundle\Context\Front\ProductContextInterface
      */
     public function getProductContext();
 
     /**
-     * @return \WellCommerce\Bundle\ProductBundle\Context\Front\ProductStatusContextInterface
+     * @return \WellCommerce\Bundle\CatalogBundle\Context\Front\ProductStatusContextInterface
      */
     public function getProductStatusContext();
 

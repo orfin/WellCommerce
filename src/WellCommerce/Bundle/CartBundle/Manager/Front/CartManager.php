@@ -19,8 +19,8 @@ use WellCommerce\Bundle\CartBundle\Repository\CartRepositoryInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
 use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopInterface;
-use WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeInterface;
-use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
+use WellCommerce\Bundle\CatalogBundle\Entity\ProductAttributeInterface;
+use WellCommerce\Bundle\CatalogBundle\Entity\ProductInterface;
 
 /**
  * Class CartManager
