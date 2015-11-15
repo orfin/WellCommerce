@@ -1,0 +1,23 @@
+WellCommerce\Bundle\CatalogBundle\Entity\AttributeValue:
+    type: entity
+    table: attribute_value
+    repositoryClass: WellCommerce\Bundle\CatalogBundle\Repository\AttributeValueRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    manyToOne:
+        attribute:
+            targetEntity: WellCommerce\Bundle\CatalogBundle\Entity\Attribute
+            fetch: LAZY
+            inversedBy: values
+            joinColumns:
+                attribute_id:
+                    referencedColumnName: id
+                    onDelete: CASCADE
+    manyToMany:
+        productAttributeValues:
+            targetEntity: WellCommerce\Bundle\CatalogBundle\Entity\ProductAttribute
+            fetch: LAZY
+            mappedBy: attributeValues

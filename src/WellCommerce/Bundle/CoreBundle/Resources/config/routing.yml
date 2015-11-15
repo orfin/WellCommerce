@@ -61,9 +61,6 @@ wellcommerce_payment:
 wellcommerce_shipping:
     resource: "@WellCommerceShippingBundle/Resources/config/routing.xml"
 
-wellcommerce_attribute:
-    resource: "@WellCommerceAttributeBundle/Resources/config/routing.xml"
-
 wellcommerce_smuggler:
     resource: "@WellCommerceSmugglerBundle/Resources/config/routing.xml"
 

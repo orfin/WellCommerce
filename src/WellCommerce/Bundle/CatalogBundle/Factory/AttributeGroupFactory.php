@@ -1,0 +1,36 @@
+<?php
+/*
+ * WellCommerce Open-Source E-Commerce Platform
+ * 
+ * This file is part of the WellCommerce package.
+ *
+ * (c) Adam Piotrowski <adam@wellcommerce.org>
+ * 
+ * For the full copyright and license information,
+ * please view the LICENSE file that was distributed with this source code.
+ */
+
+namespace WellCommerce\Bundle\CatalogBundle\Factory;
+
+use Doctrine\Common\Collections\ArrayCollection;
+use WellCommerce\Bundle\CatalogBundle\Entity\AttributeGroup;
+use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
+
+/**
+ * Class AttributeGroupFactory
+ *
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
+ */
+class AttributeGroupFactory extends AbstractFactory
+{
+    /**
+     * @return \WellCommerce\Bundle\CatalogBundle\Entity\AttributeGroupInterface
+     */
+    public function create()
+    {
+        $group = new AttributeGroup();
+        $group->setAttributes(new ArrayCollection());
+
+        return $group;
+    }
+}

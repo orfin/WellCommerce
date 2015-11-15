@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\CatalogBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
-use WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroupInterface;
+use WellCommerce\Bundle\CatalogBundle\Entity\AttributeGroupInterface;
 use WellCommerce\Bundle\CatalogBundle\Entity\AvailabilityAwareInterface;
 use WellCommerce\Bundle\CatalogBundle\Entity\CategoryInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;

@@ -1,0 +1,27 @@
+WellCommerce\Bundle\CatalogBundle\Entity\Attribute:
+    type: entity
+    table: attribute
+    repositoryClass: WellCommerce\Bundle\CatalogBundle\Repository\AttributeRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    manyToOne:
+        attributeGroup:
+            targetEntity: WellCommerce\Bundle\CatalogBundle\Entity\AttributeGroup
+            fetch: LAZY
+            inversedBy: attributes
+            joinColumns:
+                attribute_group_id:
+                    referencedColumnName: id
+                    onDelete: CASCADE
+    oneToMany:
+        values:
+            targetEntity: WellCommerce\Bundle\CatalogBundle\Entity\AttributeValue
+            cascade:
+                - remove
+                - persist
+            fetch: LAZY
+            mappedBy: attribute
+            orphanRemoval: true

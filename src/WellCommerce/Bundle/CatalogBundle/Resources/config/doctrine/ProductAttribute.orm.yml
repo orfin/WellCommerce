@@ -63,7 +63,7 @@ WellCommerce\Bundle\CatalogBundle\Entity\ProductAttribute:
                     onDelete: 'SET NULL'
     manyToMany:
         attributeValues:
-            targetEntity: WellCommerce\Bundle\AttributeBundle\Entity\AttributeValue
+            targetEntity: WellCommerce\Bundle\CatalogBundle\Entity\AttributeValue
             fetch: LAZY
             inversedBy: productAttributeValues
             joinTable:

@@ -1,0 +1,8 @@
+WellCommerce\Bundle\CatalogBundle\Entity\AttributeValueTranslation:
+    type: entity
+    table: attribute_value_translation
+    fields:
+        name:
+            type: string
+            length: 255
+            nullable: false
