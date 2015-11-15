@@ -55,7 +55,6 @@ class AppKernel extends Kernel
             new WellCommerce\Bundle\DelivererBundle\WellCommerceDelivererBundle(),
             new WellCommerce\Bundle\ProducerBundle\WellCommerceProducerBundle(),
             new WellCommerce\Bundle\TaxBundle\WellCommerceTaxBundle(),
-            new WellCommerce\Bundle\UnitBundle\WellCommerceUnitBundle(),
             new WellCommerce\Bundle\MultiStoreBundle\WellCommerceMultiStoreBundle(),
             new WellCommerce\Bundle\ClientBundle\WellCommerceClientBundle(),
             new WellCommerce\Bundle\UserBundle\WellCommerceUserBundle(),

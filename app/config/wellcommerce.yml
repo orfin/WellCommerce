@@ -12,7 +12,7 @@ parameters:
         WellCommerce\Bundle\TaxBundle\DataFixtures\ORM\LoadTaxData: 70
         WellCommerce\Bundle\ClientBundle\DataFixtures\ORM\LoadClientGroupData: 80
         WellCommerce\Bundle\ClientBundle\DataFixtures\ORM\LoadClientData: 90
-        WellCommerce\Bundle\UnitBundle\DataFixtures\ORM\LoadUnitData: 110
+        WellCommerce\Bundle\CatalogBundle\DataFixtures\ORM\LoadUnitData: 110
         WellCommerce\Bundle\CmsBundle\DataFixtures\ORM\LoadContactData: 130
         WellCommerce\Bundle\MediaBundle\DataFixtures\ORM\LoadMediaData: 135
         WellCommerce\Bundle\DelivererBundle\DataFixtures\ORM\LoadDelivererData: 140

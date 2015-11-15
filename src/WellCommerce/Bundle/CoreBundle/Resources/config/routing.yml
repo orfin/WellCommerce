@@ -38,7 +38,7 @@ wellcommerce_company:
     resource: "@WellCommerceMultiStoreBundle/Resources/config/routing.xml"
 
 wellcommerce_unit:
-    resource: "@WellCommerceUnitBundle/Resources/config/routing.xml"
+    resource: "@WellCommerceCatalogBundle/Resources/config/routing.xml"
 
 wellcommerce_report:
     resource: "@WellCommerceReportBundle/Resources/config/routing.xml"

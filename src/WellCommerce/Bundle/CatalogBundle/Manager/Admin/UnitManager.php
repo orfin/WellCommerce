@@ -10,15 +10,15 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CmsBundle;
+namespace WellCommerce\Bundle\CatalogBundle\Manager\Admin;
 
-use Symfony\Component\HttpKernel\Bundle\Bundle;
+use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
 
 /**
- * Class WellCommerceCatalogBundle
+ * Class UnitManager
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class WellCommerceCmsBundle extends Bundle
+class UnitManager extends AbstractAdminManager
 {
 }

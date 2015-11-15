@@ -10,15 +10,15 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CmsBundle;
+namespace WellCommerce\Bundle\CatalogBundle\Repository;
 
-use Symfony\Component\HttpKernel\Bundle\Bundle;
+use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**
- * Class WellCommerceCatalogBundle
+ * Interface UnitRepositoryInterface
  *
- * @author  Adam Piotrowski <adam@wellcommerce.org>
+ * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class WellCommerceCmsBundle extends Bundle
+interface UnitRepositoryInterface extends RepositoryInterface
 {
 }

@@ -27,7 +27,6 @@ use WellCommerce\Bundle\CatalogBundle\Entity\Product;
 use WellCommerce\Bundle\CatalogBundle\Entity\ProductPhoto;
 use WellCommerce\Bundle\RoutingBundle\Helper\Sluggable;
 use WellCommerce\Bundle\TaxBundle\DataFixtures\ORM\LoadTaxData;
-use WellCommerce\Bundle\UnitBundle\DataFixtures\ORM\LoadUnitData;
 
 /**
  * Class LoadProductData

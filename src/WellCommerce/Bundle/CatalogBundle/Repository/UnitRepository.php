@@ -9,16 +9,15 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
+namespace WellCommerce\Bundle\CatalogBundle\Repository;
 
-namespace WellCommerce\Bundle\CmsBundle;
-
-use Symfony\Component\HttpKernel\Bundle\Bundle;
+use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 
 /**
- * Class WellCommerceCatalogBundle
+ * Class UnitRepository
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class WellCommerceCmsBundle extends Bundle
+class UnitRepository extends AbstractEntityRepository implements UnitRepositoryInterface
 {
 }

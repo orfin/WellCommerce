@@ -17,8 +17,6 @@ use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroupInterface;
-use WellCommerce\Bundle\CatalogBundle\Entity\AvailabilityAwareTrait;
-use WellCommerce\Bundle\CatalogBundle\Entity\CategoryInterface;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\EnableableTrait;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\PhotoTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\Dimension;
@@ -28,7 +26,6 @@ use WellCommerce\Bundle\CoreBundle\Entity\Price;
 use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopCollectionAwareTrait;
 use WellCommerce\Bundle\ProducerBundle\Entity\ProducerAwareTrait;
 use WellCommerce\Bundle\TaxBundle\Entity\TaxInterface;
-use WellCommerce\Bundle\UnitBundle\Entity\UnitAwareTrait;
 
 /**
  * Class Product
