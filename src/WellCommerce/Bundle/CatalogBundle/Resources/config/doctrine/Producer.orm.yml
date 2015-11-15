@@ -17,7 +17,7 @@ WellCommerce\Bundle\CatalogBundle\Entity\Producer:
             mappedBy: producer
     manyToMany:
         deliverers:
-            targetEntity: WellCommerce\Bundle\DelivererBundle\Entity\Deliverer
+            targetEntity: WellCommerce\Bundle\CatalogBundle\Entity\Deliverer
             inversedBy: producers
             joinTable:
                 name: producer_deliverer

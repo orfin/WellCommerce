@@ -16,38 +16,33 @@ use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
-use WellCommerce\Bundle\CatalogBundle\Entity\DelivererInterface;
-use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopCollectionAwareInterface;
+use WellCommerce\Bundle\CatalogBundle\Entity\ProducerInterface;
 
 /**
- * Interface ProducerInterface
+ * Interface DelivererInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ProducerInterface extends TranslatableInterface, TimestampableInterface, BlameableInterface, ShopCollectionAwareInterface
+interface DelivererInterface extends TranslatableInterface, TimestampableInterface, BlameableInterface
 {
     /**
-     * @return integer
+     *
+     * @return int
      */
     public function getId();
 
     /**
-     * @return Collection|\WellCommerce\Bundle\CatalogBundle\Entity\ProductInterface[]
+     * @return Collection
      */
-    public function getProducts();
-
-    /**
-     * @return Collection|\WellCommerce\Bundle\CatalogBundle\Entity\DelivererInterface[]
-     */
-    public function getDeliverers();
+    public function getProducers();
 
     /**
      * @param Collection $collection
      */
-    public function setDeliverers(Collection $collection);
+    public function setProducers(Collection $collection);
 
     /**
-     * @param DelivererInterface $deliverer
+     * @param ProducerInterface $producer
      */
-    public function addDeliverer(DelivererInterface $deliverer);
+    public function addProducer(ProducerInterface $producer);
 }

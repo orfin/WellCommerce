@@ -13,16 +13,7 @@ wellcommerce_routing:
 wellcommerce_intl:
     resource: "@WellCommerceIntlBundle/Resources/config/routing.xml"
 
-wellcommerce_deliverer:
-    resource: "@WellCommerceDelivererBundle/Resources/config/routing.xml"
-
-wellcommerce_producer:
-    resource: "@WellCommerceCatalogBundle/Resources/config/routing.xml"
-
-wellcommerce_product:
-    resource: "@WellCommerceCatalogBundle/Resources/config/routing.xml"
-
-wellcommerce_category:
+wellcommerce_catalog:
     resource: "@WellCommerceCatalogBundle/Resources/config/routing.xml"
 
 wellcommerce_client:
