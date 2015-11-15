@@ -55,7 +55,7 @@ WellCommerce\Bundle\MultiStoreBundle\Entity\Shop:
             fetch: LAZY
             mappedBy: shops
         producers:
-            targetEntity: WellCommerce\Bundle\ProducerBundle\Entity\Producer
+            targetEntity: WellCommerce\Bundle\CatalogBundle\Entity\Producer
             fetch: LAZY
             mappedBy: shops
         pages:

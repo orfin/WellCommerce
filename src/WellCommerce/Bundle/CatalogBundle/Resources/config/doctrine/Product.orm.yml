@@ -52,7 +52,7 @@ WellCommerce\Bundle\CatalogBundle\Entity\Product:
                 default: 0
     manyToOne:
         producer:
-            targetEntity: WellCommerce\Bundle\ProducerBundle\Entity\Producer
+            targetEntity: WellCommerce\Bundle\CatalogBundle\Entity\Producer
             fetch: LAZY
             inversedBy: products
             joinColumns:

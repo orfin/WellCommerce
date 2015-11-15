@@ -24,7 +24,6 @@ use WellCommerce\Bundle\CoreBundle\Entity\DiscountablePrice;
 use WellCommerce\Bundle\CoreBundle\Entity\HierarchyAwareTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\Price;
 use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopCollectionAwareTrait;
-use WellCommerce\Bundle\ProducerBundle\Entity\ProducerAwareTrait;
 use WellCommerce\Bundle\TaxBundle\Entity\TaxInterface;
 
 /**

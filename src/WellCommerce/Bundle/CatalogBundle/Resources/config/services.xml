@@ -11,6 +11,7 @@
         <import resource="services/product_status.xml"/>
         <import resource="services/product_search.xml"/>
         <import resource="services/product_review.xml"/>
+        <import resource="services/producer.xml"/>
         <import resource="services/unit.xml"/>
     </imports>
     <services>

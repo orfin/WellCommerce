@@ -1,0 +1,61 @@
+WellCommerce\Bundle\CatalogBundle\Entity\Producer:
+    type: entity
+    table: producer
+    repositoryClass: WellCommerce\Bundle\CatalogBundle\Repository\ProducerRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    oneToMany:
+        products:
+            targetEntity: WellCommerce\Bundle\CatalogBundle\Entity\Product
+            cascade:
+                - remove
+                - persist
+            fetch: LAZY
+            mappedBy: producer
+    manyToMany:
+        deliverers:
+            targetEntity: WellCommerce\Bundle\DelivererBundle\Entity\Deliverer
+            inversedBy: producers
+            joinTable:
+                name: producer_deliverer
+                joinColumns:
+                    -
+                        name: producer_id
+                        nullable: false
+                        onDelete: CASCADE
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    -
+                        name: deliverer_id
+                        nullable: false
+                        onDelete: CASCADE
+                        referencedColumnName: id
+        shops:
+            targetEntity: WellCommerce\Bundle\MultiStoreBundle\Entity\Shop
+            fetch: LAZY
+            inversedBy: producers
+            joinTable:
+                name: shop_producer
+                joinColumns:
+                    -
+                        name: producer_id
+                        nullable: false
+                        onDelete: CASCADE
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    -
+                        name: shop_id
+                        nullable: false
+                        onDelete: CASCADE
+                        referencedColumnName: id
+    manyToOne:
+        photo:
+            targetEntity: WellCommerce\Bundle\MediaBundle\Entity\Media
+            fetch: LAZY
+            joinColumns:
+                photo_id:
+                    referencedColumnName: id
+                    onDelete: 'SET NULL'

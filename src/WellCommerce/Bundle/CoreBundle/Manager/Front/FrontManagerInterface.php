@@ -57,7 +57,7 @@ interface FrontManagerInterface extends ManagerInterface
     public function getProductStatusContext();
 
     /**
-     * @return \WellCommerce\Bundle\ProducerBundle\Context\Front\ProducerContextInterface
+     * @return \WellCommerce\Bundle\CatalogBundle\Context\Front\ProducerContextInterface
      */
     public function getProducerContext();
 
