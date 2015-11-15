@@ -12,10 +12,8 @@
 
 namespace WellCommerce\Bundle\CatalogBundle\Factory;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 use WellCommerce\Bundle\CatalogBundle\Entity\ProductReview;
-use WellCommerce\Bundle\CatalogBundle\Entity\ProductStatus;
+use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 
 /**
  * Class ProductReviewFactory

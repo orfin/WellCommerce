@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\CatalogBundle\Tests\Controller\Admin;
 
-use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
 use WellCommerce\Bundle\CatalogBundle\Entity\AvailabilityInterface;
 use WellCommerce\Bundle\CoreBundle\Test\Controller\Admin\AbstractAdminControllerTestCase;

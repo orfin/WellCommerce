@@ -13,9 +13,6 @@
 namespace WellCommerce\Bundle\CatalogBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
-use WellCommerce\Bundle\CatalogBundle\Entity\AttributeGroupInterface;
-use WellCommerce\Bundle\CatalogBundle\Entity\AvailabilityAwareInterface;
-use WellCommerce\Bundle\CatalogBundle\Entity\CategoryInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\Dimension;
 use WellCommerce\Bundle\CoreBundle\Entity\DiscountablePrice;
@@ -23,10 +20,8 @@ use WellCommerce\Bundle\CoreBundle\Entity\Price;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
 use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopCollectionAwareInterface;
-use WellCommerce\Bundle\CatalogBundle\Entity\ProducerAwareInterface;
 use WellCommerce\Bundle\ShippingBundle\Calculator\ShippingCalculatorSubjectInterface;
 use WellCommerce\Bundle\TaxBundle\Entity\TaxInterface;
-use WellCommerce\Bundle\CatalogBundle\Entity\UnitAwareInterface;
 
 /**
  * Interface ProductInterface

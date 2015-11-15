@@ -15,12 +15,12 @@ namespace WellCommerce\Bundle\CatalogBundle\Form\Admin\DataTransformer;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
-use WellCommerce\Bundle\FormBundle\DataTransformer\DataTransformerInterface;
-use WellCommerce\Bundle\MediaBundle\Entity\MediaInterface;
-use WellCommerce\Bundle\MediaBundle\Form\Admin\DataTransformer\MediaCollectionToArrayTransformer;
 use WellCommerce\Bundle\CatalogBundle\Entity\Product;
 use WellCommerce\Bundle\CatalogBundle\Entity\ProductInterface;
 use WellCommerce\Bundle\CatalogBundle\Entity\ProductPhoto;
+use WellCommerce\Bundle\FormBundle\DataTransformer\DataTransformerInterface;
+use WellCommerce\Bundle\MediaBundle\Entity\MediaInterface;
+use WellCommerce\Bundle\MediaBundle\Form\Admin\DataTransformer\MediaCollectionToArrayTransformer;
 
 /**
  * Class ProductPhotoCollectionToArrayTransformer

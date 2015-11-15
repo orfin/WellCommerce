@@ -16,7 +16,6 @@ use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
-use WellCommerce\Bundle\CatalogBundle\Entity\ProducerInterface;
 
 /**
  * Interface DelivererInterface

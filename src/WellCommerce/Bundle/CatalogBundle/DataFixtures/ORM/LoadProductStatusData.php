@@ -13,8 +13,8 @@
 namespace WellCommerce\Bundle\CatalogBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
 use WellCommerce\Bundle\CatalogBundle\Entity\ProductStatus;
+use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
 use WellCommerce\Bundle\RoutingBundle\Helper\Sluggable;
 
 /**

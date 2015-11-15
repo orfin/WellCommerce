@@ -14,10 +14,10 @@ namespace WellCommerce\Bundle\CatalogBundle\DataSet\Front;
 
 use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\QueryBuilder;
+use WellCommerce\Bundle\CatalogBundle\DataSet\Admin\ProductDataSetQueryBuilder as BaseProductDataSetQueryBuilder;
 use WellCommerce\Bundle\CoreBundle\Helper\Request\RequestHelperInterface;
 use WellCommerce\Bundle\DataSetBundle\Column\ColumnCollection;
 use WellCommerce\Bundle\DataSetBundle\Request\DataSetRequestInterface;
-use WellCommerce\Bundle\CatalogBundle\DataSet\Admin\ProductDataSetQueryBuilder as BaseProductDataSetQueryBuilder;
 
 /**
  * Class ProductDataSetQueryBuilder

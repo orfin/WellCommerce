@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\CatalogBundle\Tests\Form;
 
-use WellCommerce\Bundle\CatalogBundle\Entity\Availability;
 use WellCommerce\Bundle\CoreBundle\Test\Form\AbstractFormBuilderTestCase;
 
 /**

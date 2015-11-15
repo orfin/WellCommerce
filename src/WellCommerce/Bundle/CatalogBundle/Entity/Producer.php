@@ -17,11 +17,7 @@ use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\PhotoTrait;
-use WellCommerce\Bundle\CatalogBundle\Entity\Deliverer;
-use WellCommerce\Bundle\CatalogBundle\Entity\DelivererInterface;
-use WellCommerce\Bundle\MultiStoreBundle\Entity\Shop;
 use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopCollectionAwareTrait;
-use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopInterface;
 
 /**
  * Class Producer

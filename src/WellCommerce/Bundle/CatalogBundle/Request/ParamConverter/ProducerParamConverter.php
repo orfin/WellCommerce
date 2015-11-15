@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\CatalogBundle\Request\ParamConverter;
 
-use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Request\ParamConverter\AbstractEntityParamConverter;
 
 /**

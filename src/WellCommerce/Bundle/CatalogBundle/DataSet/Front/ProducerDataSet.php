@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\CatalogBundle\DataSet\Front;
 
-use WellCommerce\Bundle\DataSetBundle\Configurator\DataSetConfiguratorInterface;
 use WellCommerce\Bundle\CatalogBundle\DataSet\Admin\ProducerDataSet as BaseDataSet;
+use WellCommerce\Bundle\DataSetBundle\Configurator\DataSetConfiguratorInterface;
 
 /**
  * Class ProducerDataSet

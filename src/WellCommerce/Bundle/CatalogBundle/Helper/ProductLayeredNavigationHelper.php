@@ -13,13 +13,13 @@
 namespace WellCommerce\Bundle\CatalogBundle\Helper;
 
 use Doctrine\Common\Collections\Criteria;
+use WellCommerce\Bundle\CatalogBundle\Entity\ProducerInterface;
+use WellCommerce\Bundle\CatalogBundle\Repository\ProducerRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
 use WellCommerce\Bundle\DataSetBundle\Conditions\Condition\Gte;
 use WellCommerce\Bundle\DataSetBundle\Conditions\Condition\In;
 use WellCommerce\Bundle\DataSetBundle\Conditions\Condition\Lte;
 use WellCommerce\Bundle\DataSetBundle\Conditions\ConditionsCollection;
-use WellCommerce\Bundle\CatalogBundle\Entity\ProducerInterface;
-use WellCommerce\Bundle\CatalogBundle\Repository\ProducerRepositoryInterface;
 
 /**
  * Interface ProductLayeredNavigationHelperInterface

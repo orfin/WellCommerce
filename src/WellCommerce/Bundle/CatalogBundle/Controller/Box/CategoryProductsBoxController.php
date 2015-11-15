@@ -12,10 +12,10 @@
 
 namespace WellCommerce\Bundle\CatalogBundle\Controller\Box;
 
+use WellCommerce\Bundle\CatalogBundle\Conditions\ProductLayeredNavigationConditions;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
 use WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxSettingsCollection;
-use WellCommerce\Bundle\CatalogBundle\Conditions\ProductLayeredNavigationConditions;
 
 /**
  * Class CategoryProductsBoxController

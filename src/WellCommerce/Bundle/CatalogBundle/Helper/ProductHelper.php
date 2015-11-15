@@ -13,10 +13,10 @@
 namespace WellCommerce\Bundle\CatalogBundle\Helper;
 
 use WellCommerce\Bundle\CatalogBundle\Entity\CategoryInterface;
+use WellCommerce\Bundle\CatalogBundle\Entity\ProductInterface;
 use WellCommerce\Bundle\DataSetBundle\Conditions\Condition\Eq;
 use WellCommerce\Bundle\DataSetBundle\Conditions\ConditionsCollection;
 use WellCommerce\Bundle\DataSetBundle\DataSetInterface;
-use WellCommerce\Bundle\CatalogBundle\Entity\ProductInterface;
 use WellCommerce\Bundle\ShippingBundle\Provider\ShippingMethodProviderInterface;
 
 /**

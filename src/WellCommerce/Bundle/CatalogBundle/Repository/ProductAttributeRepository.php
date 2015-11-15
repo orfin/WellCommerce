@@ -11,8 +11,8 @@
  */
 namespace WellCommerce\Bundle\CatalogBundle\Repository;
 
-use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 use WellCommerce\Bundle\CatalogBundle\Entity\Product;
+use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 
 /**
  * Class ProductAttributeRepository

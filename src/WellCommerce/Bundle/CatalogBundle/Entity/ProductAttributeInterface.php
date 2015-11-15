@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\CatalogBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
-use WellCommerce\Bundle\CatalogBundle\Entity\AvailabilityAwareInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\DiscountablePrice;
 use WellCommerce\Bundle\CoreBundle\Entity\HierarchyAwareInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;

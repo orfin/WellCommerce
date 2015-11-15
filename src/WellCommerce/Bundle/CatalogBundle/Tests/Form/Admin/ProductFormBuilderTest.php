@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\CatalogBundle\Tests\Form\Admin;
 
-use WellCommerce\Bundle\CatalogBundle\Entity\Product;
 use WellCommerce\Bundle\CoreBundle\Test\Form\AbstractFormBuilderTestCase;
 
 /**

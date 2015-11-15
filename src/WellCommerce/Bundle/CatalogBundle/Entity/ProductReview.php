@@ -12,12 +12,7 @@
 
 namespace WellCommerce\Bundle\CatalogBundle\Entity;
 
-use Doctrine\Common\Collections\Collection;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
-use WellCommerce\Bundle\CatalogBundle\Entity\AvailabilityAwareTrait;
-use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\PhotoTrait;
-use WellCommerce\Bundle\CoreBundle\Entity\DiscountablePrice;
-use WellCommerce\Bundle\CoreBundle\Entity\HierarchyAwareTrait;
 
 /**
  * Class ProductReview

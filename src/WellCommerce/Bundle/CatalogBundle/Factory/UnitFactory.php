@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\CatalogBundle\Factory;
 
-use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 use WellCommerce\Bundle\CatalogBundle\Entity\Unit;
+use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 
 /**
  * Class UnitFactory
