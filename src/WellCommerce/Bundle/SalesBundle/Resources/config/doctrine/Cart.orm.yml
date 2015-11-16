@@ -48,7 +48,7 @@ WellCommerce\Bundle\SalesBundle\Entity\Cart:
             orphanRemoval: true
     manyToOne:
         coupon:
-            targetEntity: WellCommerce\Bundle\CouponBundle\Entity\Coupon
+            targetEntity: WellCommerce\Bundle\PromotionBundle\Entity\Coupon
             fetch: LAZY
             joinColumns:
                 coupon_id:

@@ -58,7 +58,7 @@ WellCommerce\Bundle\SalesBundle\Entity\Order:
             mappedBy: order
     manyToOne:
         coupon:
-            targetEntity: WellCommerce\Bundle\CouponBundle\Entity\Coupon
+            targetEntity: WellCommerce\Bundle\PromotionBundle\Entity\Coupon
             fetch: LAZY
             joinColumns:
                 coupon_id:

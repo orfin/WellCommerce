@@ -19,8 +19,8 @@ wellcommerce_client:
 wellcommerce_sales:
     resource: "@WellCommerceSalesBundle/Resources/config/routing.xml"
 
-wellcommerce_coupon:
-    resource: "@WellCommerceCouponBundle/Resources/config/routing.xml"
+wellcommerce_promotion:
+    resource: "@WellCommercePromotionBundle/Resources/config/routing.xml"
 
 wellcommerce_company:
     resource: "@WellCommerceMultiStoreBundle/Resources/config/routing.xml"

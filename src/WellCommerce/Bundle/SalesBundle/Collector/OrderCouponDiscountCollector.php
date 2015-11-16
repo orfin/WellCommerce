@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\SalesBundle\Collector;
 
-use WellCommerce\Bundle\CouponBundle\Entity\CouponInterface;
+use WellCommerce\Bundle\PromotionBundle\Entity\CouponInterface;
 use WellCommerce\Bundle\SalesBundle\Entity\OrderInterface;
 use WellCommerce\Bundle\SalesBundle\Entity\OrderTotal;
 
