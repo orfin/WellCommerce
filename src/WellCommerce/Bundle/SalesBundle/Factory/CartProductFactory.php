@@ -12,9 +12,9 @@
 
 namespace WellCommerce\Bundle\SalesBundle\Factory;
 
-use WellCommerce\Bundle\SalesBundle\Entity\CartProduct;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 use WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface;
+use WellCommerce\Bundle\SalesBundle\Entity\CartProduct;
 
 /**
  * Class CartProductFactory

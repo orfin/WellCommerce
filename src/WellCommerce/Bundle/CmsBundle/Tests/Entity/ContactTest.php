@@ -12,9 +12,8 @@
 
 namespace WellCommerce\Bundle\CmsBundle\Tests\Entity;
 
-use Doctrine\Common\Util\Debug;
-use WellCommerce\Bundle\CoreBundle\Test\Entity\AbstractEntityTestCase;
 use WellCommerce\Bundle\CmsBundle\Entity\Contact;
+use WellCommerce\Bundle\CoreBundle\Test\Entity\AbstractEntityTestCase;
 
 /**
  * Class ContactTest

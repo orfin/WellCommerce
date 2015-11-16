@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\CoreBundle\Helper\Mailer;
 
 use Swift_Message as Message;
-use Symfony\Component\Templating\EngineInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\MailerConfiguration;
 use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopInterface;
 

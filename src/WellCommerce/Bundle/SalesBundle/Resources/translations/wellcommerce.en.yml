@@ -60,3 +60,33 @@ order:
     description:
         product_total: Total products value
         shipping_cost: Shipping costs
+
+payment:
+    flash:
+        thank_you: "Thank you for placing an order. Below are the order's details:"
+payment_method:
+    heading:
+        index: Payment methods
+        add: Add a payment method
+        edit: Edit a payment method
+    fieldset:
+        shipping_methods: Shipping methods
+    label:
+        processor: Payment processor
+        shipping_methods: Allowed shipping methods
+    bank_transfer:
+        tip: 'Your order will be processed upon receiving of the payment at the following bank account'
+        account: Account number
+        sort_number: Sort code
+        title: 'Transfer title'
+
+shipping_method:
+    heading:
+        index: Shipping methods
+        add: Add a shipping method
+        edit: Edit a shipping method
+    label:
+        calculator: Type of costs calculation
+        costs: Shipping costs
+    fieldset:
+        costs: Shipping costs settings

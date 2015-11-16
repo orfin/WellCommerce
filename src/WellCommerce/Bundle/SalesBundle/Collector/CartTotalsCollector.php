@@ -12,9 +12,9 @@
 
 namespace WellCommerce\Bundle\SalesBundle\Collector;
 
+use WellCommerce\Bundle\IntlBundle\Helper\CurrencyHelperInterface;
 use WellCommerce\Bundle\SalesBundle\Entity\CartInterface;
 use WellCommerce\Bundle\SalesBundle\Entity\CartProductInterface;
-use WellCommerce\Bundle\IntlBundle\Helper\CurrencyHelperInterface;
 
 /**
  * Class CartTotalsCollector

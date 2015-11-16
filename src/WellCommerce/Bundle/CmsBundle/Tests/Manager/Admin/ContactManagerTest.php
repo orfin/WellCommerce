@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\CmsBundle\Tests\Manager\Admin;
 
-use WellCommerce\Bundle\CoreBundle\Test\AbstractTestCase;
 use WellCommerce\Bundle\CoreBundle\Test\Manager\Admin\AbstractAdminManagerTestCase;
 
 /**

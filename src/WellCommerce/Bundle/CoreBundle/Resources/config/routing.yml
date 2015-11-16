@@ -34,20 +34,11 @@ wellcommerce_report:
 wellcommerce_tax:
     resource: "@WellCommerceTaxBundle/Resources/config/routing.xml"
 
-wellcommerce_media:
-    resource: "@WellCommerceMediaBundle/Resources/config/routing.xml"
-
 wellcommerce_layout:
     resource: "@WellCommerceLayoutBundle/Resources/config/routing.xml"
 
 wellcommerce_cms:
     resource: "@WellCommerceCmsBundle/Resources/config/routing.xml"
-
-wellcommerce_payment:
-    resource: "@WellCommercePaymentBundle/Resources/config/routing.xml"
-
-wellcommerce_shipping:
-    resource: "@WellCommerceShippingBundle/Resources/config/routing.xml"
 
 wellcommerce_smuggler:
     resource: "@WellCommerceSmugglerBundle/Resources/config/routing.xml"

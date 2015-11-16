@@ -14,9 +14,9 @@ namespace WellCommerce\Bundle\AdminBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
-use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
 use WellCommerce\Bundle\AdminBundle\Entity\UserGroupInterface;
 use WellCommerce\Bundle\AdminBundle\Entity\UserGroupPermission;
+use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
 
 /**
  * Class LoadUserData

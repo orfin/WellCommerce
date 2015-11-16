@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\TaxBundle\Tests\Form\Admin;
 
-use WellCommerce\Bundle\TaxBundle\Entity\Tax;
 use WellCommerce\Bundle\CoreBundle\Test\Form\AbstractFormBuilderTestCase;
 
 /**

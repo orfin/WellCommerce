@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Helper\Validator;
 
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**

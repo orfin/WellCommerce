@@ -12,10 +12,10 @@
 
 namespace WellCommerce\Bundle\CmsBundle\Entity;
 
+use DateTime;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
-use DateTime;
 
 /**
  * Interface NewsInterface

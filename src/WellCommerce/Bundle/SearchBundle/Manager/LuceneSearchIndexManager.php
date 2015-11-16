@@ -16,7 +16,6 @@ use Ivory\LuceneSearchBundle\Model\LuceneManager;
 use Symfony\Component\HttpKernel\KernelInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 use WellCommerce\Bundle\SearchBundle\Query\Term;
-use ZendSearch\Lucene\Search\Query\Fuzzy;
 
 /**
  * Class LuceneSearchIndexManager

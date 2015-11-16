@@ -12,9 +12,8 @@
 
 namespace WellCommerce\Bundle\SalesBundle\Manager\Front;
 
-use WellCommerce\Bundle\SalesBundle\Entity\CartInterface;
-use WellCommerce\Bundle\SalesBundle\Manager\Front\CartManagerInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
+use WellCommerce\Bundle\SalesBundle\Entity\CartInterface;
 use WellCommerce\Bundle\SalesBundle\Entity\OrderInterface;
 
 /**

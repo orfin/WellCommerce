@@ -16,12 +16,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
 use WellCommerce\Bundle\CatalogBundle\Entity\Product;
 use WellCommerce\Bundle\CatalogBundle\Entity\ProductPhoto;
+use WellCommerce\Bundle\CmsBundle\DataFixtures\ORM\LoadMediaData;
 use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
 use WellCommerce\Bundle\CoreBundle\Entity\Dimension;
 use WellCommerce\Bundle\CoreBundle\Entity\DiscountablePrice;
 use WellCommerce\Bundle\CoreBundle\Entity\Price;
 use WellCommerce\Bundle\IntlBundle\DataFixtures\ORM\LoadCurrencyData;
-use WellCommerce\Bundle\MediaBundle\DataFixtures\ORM\LoadMediaData;
 use WellCommerce\Bundle\RoutingBundle\Helper\Sluggable;
 use WellCommerce\Bundle\TaxBundle\DataFixtures\ORM\LoadTaxData;
 

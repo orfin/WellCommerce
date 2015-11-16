@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\CmsBundle\Layout;
 
-use WellCommerce\Bundle\FormBundle\FormBuilderInterface;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
+use WellCommerce\Bundle\FormBundle\FormBuilderInterface;
 use WellCommerce\Bundle\LayoutBundle\Configurator\AbstractLayoutBoxConfigurator;
 use WellCommerce\Bundle\LayoutBundle\Configurator\LayoutBoxConfiguratorInterface;
 

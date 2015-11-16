@@ -11,9 +11,6 @@
  */
 namespace WellCommerce\Bundle\ClientBundle\EventListener;
 
-use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
-use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
 use WellCommerce\Bundle\CoreBundle\Event\ResourceEvent;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;

@@ -13,10 +13,10 @@
 namespace WellCommerce\Bundle\SalesBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use WellCommerce\Bundle\SalesBundle\Entity\CartInterface;
-use WellCommerce\Bundle\SalesBundle\Entity\CartProductInterface;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 use WellCommerce\Bundle\IntlBundle\Helper\CurrencyHelperInterface;
+use WellCommerce\Bundle\SalesBundle\Entity\CartInterface;
+use WellCommerce\Bundle\SalesBundle\Entity\CartProductInterface;
 use WellCommerce\Bundle\SalesBundle\Entity\Order;
 use WellCommerce\Bundle\SalesBundle\Entity\OrderInterface;
 

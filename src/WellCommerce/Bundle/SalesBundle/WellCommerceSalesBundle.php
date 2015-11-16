@@ -16,6 +16,8 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use WellCommerce\Bundle\SalesBundle\DependencyInjection\Compiler\RegisterCartVisitorPass;
 use WellCommerce\Bundle\SalesBundle\DependencyInjection\Compiler\RegisterOrderVisitorPass;
+use WellCommerce\Bundle\SalesBundle\DependencyInjection\Compiler\RegisterPaymentMethodProcessorPass;
+use WellCommerce\Bundle\SalesBundle\DependencyInjection\Compiler\RegisterShippingMethodCalculatorPass;
 
 /**
  * Class WellCommerceSalesBundle
@@ -34,5 +36,7 @@ class WellCommerceSalesBundle extends Bundle
         parent::build($container);
         $container->addCompilerPass(new RegisterCartVisitorPass());
         $container->addCompilerPass(new RegisterOrderVisitorPass());
+        $container->addCompilerPass(new RegisterShippingMethodCalculatorPass());
+        $container->addCompilerPass(new RegisterPaymentMethodProcessorPass());
     }
 }

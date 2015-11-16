@@ -35,7 +35,7 @@ WellCommerce\Bundle\CatalogBundle\Entity\ProductPhoto:
                 default: 0
     manyToOne:
         photo:
-            targetEntity: WellCommerce\Bundle\MediaBundle\Entity\Media
+            targetEntity: WellCommerce\Bundle\CmsBundle\Entity\Media
             cascade: {  }
             fetch: LAZY
             mappedBy: null

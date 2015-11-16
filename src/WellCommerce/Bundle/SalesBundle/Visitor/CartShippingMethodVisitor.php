@@ -13,8 +13,8 @@
 namespace WellCommerce\Bundle\SalesBundle\Visitor;
 
 use WellCommerce\Bundle\SalesBundle\Entity\CartInterface;
-use WellCommerce\Bundle\ShippingBundle\Provider\CartShippingMethodProviderInterface;
-use WellCommerce\Bundle\ShippingBundle\Provider\ShippingMethodProviderInterface;
+use WellCommerce\Bundle\SalesBundle\Provider\CartShippingMethodProviderInterface;
+use WellCommerce\Bundle\SalesBundle\Provider\ShippingMethodProviderInterface;
 
 /**
  * Class CartShippingMethodVisitor

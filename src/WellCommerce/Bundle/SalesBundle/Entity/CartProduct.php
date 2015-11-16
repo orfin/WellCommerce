@@ -2,9 +2,9 @@
 
 namespace WellCommerce\Bundle\SalesBundle\Entity;
 
-use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\Timestampable\TimestampableTrait;
 use WellCommerce\Bundle\CatalogBundle\Entity\ProductAttributeInterface;
 use WellCommerce\Bundle\CatalogBundle\Entity\ProductAwareTrait;
+use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\Timestampable\TimestampableTrait;
 
 /**
  * Class CartProduct

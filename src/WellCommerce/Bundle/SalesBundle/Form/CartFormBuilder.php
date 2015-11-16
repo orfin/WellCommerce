@@ -11,15 +11,15 @@
  */
 namespace WellCommerce\Bundle\SalesBundle\Form;
 
-use WellCommerce\Bundle\SalesBundle\Context\Front\CartContextInterface;
-use WellCommerce\Bundle\SalesBundle\Entity\CartInterface;
 use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 use WellCommerce\Bundle\FormBundle\Elements\Optioned\RadioGroup;
-use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodInterface;
-use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCostInterface;
-use WellCommerce\Bundle\ShippingBundle\Provider\CartShippingMethodProviderInterface;
-use WellCommerce\Bundle\ShippingBundle\Provider\ShippingMethodProviderInterface;
+use WellCommerce\Bundle\SalesBundle\Context\Front\CartContextInterface;
+use WellCommerce\Bundle\SalesBundle\Entity\CartInterface;
+use WellCommerce\Bundle\SalesBundle\Entity\PaymentMethodInterface;
+use WellCommerce\Bundle\SalesBundle\Entity\ShippingMethodCostInterface;
+use WellCommerce\Bundle\SalesBundle\Provider\CartShippingMethodProviderInterface;
+use WellCommerce\Bundle\SalesBundle\Provider\ShippingMethodProviderInterface;
 
 /**
  * Class CartFormBuilder

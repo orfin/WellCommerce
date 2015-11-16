@@ -17,9 +17,9 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\Filesystem\Exception\FileNotFoundException;
 use Symfony\Component\Finder\Finder;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
-use WellCommerce\Bundle\FormBundle\FormBuilderInterface;
 use WellCommerce\Bundle\FormBundle\Elements\Form;
 use WellCommerce\Bundle\FormBundle\Elements\Input\TextField;
+use WellCommerce\Bundle\FormBundle\FormBuilderInterface;
 use WellCommerce\Bundle\LayoutBundle\Entity\Theme;
 
 /**

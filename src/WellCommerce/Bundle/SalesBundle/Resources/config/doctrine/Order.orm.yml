@@ -54,7 +54,7 @@ WellCommerce\Bundle\SalesBundle\Entity\Order:
             fetch: LAZY
             mappedBy: order
         payments:
-            targetEntity:  WellCommerce\Bundle\PaymentBundle\Entity\Payment
+            targetEntity:  WellCommerce\Bundle\SalesBundle\Entity\Payment
             mappedBy: order
     manyToOne:
         coupon:
@@ -73,7 +73,7 @@ WellCommerce\Bundle\SalesBundle\Entity\Order:
                     referencedColumnName: id
                     onDelete: CASCADE
         paymentMethod:
-            targetEntity: WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod
+            targetEntity: WellCommerce\Bundle\SalesBundle\Entity\PaymentMethod
             fetch: LAZY
             joinColumns:
                 payment_method_id:
@@ -87,7 +87,7 @@ WellCommerce\Bundle\SalesBundle\Entity\Order:
                     referencedColumnName: id
                     onDelete: RESTRICT
         shippingMethod:
-            targetEntity: WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethod
+            targetEntity: WellCommerce\Bundle\SalesBundle\Entity\ShippingMethod
             fetch: LAZY
             joinColumns:
                 shipping_method_id:

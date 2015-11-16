@@ -2,10 +2,10 @@
 
 namespace WellCommerce\Bundle\SalesBundle\Entity;
 
-use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\Timestampable\TimestampableTrait;
-use WellCommerce\Bundle\CoreBundle\Entity\Price;
 use WellCommerce\Bundle\CatalogBundle\Entity\ProductAttributeAwareTrait;
 use WellCommerce\Bundle\CatalogBundle\Entity\ProductAwareTrait;
+use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\Timestampable\TimestampableTrait;
+use WellCommerce\Bundle\CoreBundle\Entity\Price;
 
 /**
  * Class OrderProduct

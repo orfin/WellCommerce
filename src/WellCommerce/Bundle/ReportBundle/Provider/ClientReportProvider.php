@@ -14,10 +14,10 @@ namespace WellCommerce\Bundle\ReportBundle\Provider;
 
 use Doctrine\Common\Collections\Criteria;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
-use WellCommerce\Bundle\SalesBundle\Entity\OrderInterface;
 use WellCommerce\Bundle\ReportBundle\Configuration\ReportConfiguration;
 use WellCommerce\Bundle\ReportBundle\Data\ReportRow;
 use WellCommerce\Bundle\ReportBundle\Data\ReportRowCollection;
+use WellCommerce\Bundle\SalesBundle\Entity\OrderInterface;
 
 /**
  * Class ClientReportProvider

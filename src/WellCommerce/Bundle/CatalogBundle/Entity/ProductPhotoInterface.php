@@ -12,9 +12,9 @@
 
 namespace WellCommerce\Bundle\CatalogBundle\Entity;
 
+use WellCommerce\Bundle\CmsBundle\Entity\MediaInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\HierarchyAwareInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
-use WellCommerce\Bundle\MediaBundle\Entity\MediaInterface;
 
 /**
  * Interface ProductPhotoInterface

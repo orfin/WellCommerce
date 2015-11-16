@@ -14,7 +14,7 @@ parameters:
         WellCommerce\Bundle\ClientBundle\DataFixtures\ORM\LoadClientData: 90
         WellCommerce\Bundle\CatalogBundle\DataFixtures\ORM\LoadUnitData: 110
         WellCommerce\Bundle\CmsBundle\DataFixtures\ORM\LoadContactData: 130
-        WellCommerce\Bundle\MediaBundle\DataFixtures\ORM\LoadMediaData: 135
+        WellCommerce\Bundle\CmsBundle\DataFixtures\ORM\LoadMediaData: 135
         WellCommerce\Bundle\CatalogBundle\DataFixtures\ORM\LoadDelivererData: 140
         WellCommerce\Bundle\CatalogBundle\DataFixtures\ORM\LoadAvailabilityData: 150
         WellCommerce\Bundle\CatalogBundle\DataFixtures\ORM\LoadProducerData: 160
@@ -23,8 +23,8 @@ parameters:
         WellCommerce\Bundle\CatalogBundle\DataFixtures\ORM\LoadProductStatusData: 190
         WellCommerce\Bundle\ProductBundle\DataFixtures\ORM\LoadProductData: 200
         WellCommerce\Bundle\ClientBundle\DataFixtures\ORM\LoadLayoutBoxData: 210
-        WellCommerce\Bundle\ShippingBundle\DataFixtures\ORM\LoadShippingMethodData: 220
-        WellCommerce\Bundle\PaymentBundle\DataFixtures\ORM\LoadPaymentMethodData: 230
+        WellCommerce\Bundle\SalesBundle\DataFixtures\ORM\LoadShippingMethodData: 220
+        WellCommerce\Bundle\SalesBundle\DataFixtures\ORM\LoadPaymentMethodData: 230
     fixtures_product_limit: 100
 
 well_commerce_search:

@@ -16,8 +16,8 @@ use Doctrine\ORM\NoResultException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
-use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 use WellCommerce\Bundle\AdminBundle\Repository\UserRepositoryInterface;
+use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 
 /**
  * Class ClientGroupRepository

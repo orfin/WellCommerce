@@ -17,7 +17,7 @@ use WellCommerce\Bundle\CatalogBundle\Entity\ProductInterface;
 use WellCommerce\Bundle\DataSetBundle\Conditions\Condition\Eq;
 use WellCommerce\Bundle\DataSetBundle\Conditions\ConditionsCollection;
 use WellCommerce\Bundle\DataSetBundle\DataSetInterface;
-use WellCommerce\Bundle\ShippingBundle\Provider\ShippingMethodProviderInterface;
+use WellCommerce\Bundle\SalesBundle\Provider\ShippingMethodProviderInterface;
 
 /**
  * Class ProductHelper

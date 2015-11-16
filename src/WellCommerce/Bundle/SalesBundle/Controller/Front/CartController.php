@@ -12,13 +12,13 @@
 
 namespace WellCommerce\Bundle\SalesBundle\Controller\Front;
 
+use WellCommerce\Bundle\CatalogBundle\Entity\ProductAttributeInterface;
+use WellCommerce\Bundle\CatalogBundle\Entity\ProductInterface;
+use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
+use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
 use WellCommerce\Bundle\SalesBundle\Entity\CartProductInterface;
 use WellCommerce\Bundle\SalesBundle\Exception\AddCartItemException;
 use WellCommerce\Bundle\SalesBundle\Exception\DeleteCartItemException;
-use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
-use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
-use WellCommerce\Bundle\CatalogBundle\Entity\ProductAttributeInterface;
-use WellCommerce\Bundle\CatalogBundle\Entity\ProductInterface;
 use WellCommerce\Bundle\WebBundle\Breadcrumb\BreadcrumbItem;
 
 /**

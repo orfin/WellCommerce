@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\CoreBundle\Helper\Request;
 
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**
  * Class RequestHelper

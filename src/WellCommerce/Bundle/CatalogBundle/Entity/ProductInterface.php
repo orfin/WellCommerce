@@ -20,7 +20,7 @@ use WellCommerce\Bundle\CoreBundle\Entity\Price;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
 use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopCollectionAwareInterface;
-use WellCommerce\Bundle\ShippingBundle\Calculator\ShippingCalculatorSubjectInterface;
+use WellCommerce\Bundle\SalesBundle\Calculator\ShippingCalculatorSubjectInterface;
 use WellCommerce\Bundle\TaxBundle\Entity\TaxInterface;
 
 /**

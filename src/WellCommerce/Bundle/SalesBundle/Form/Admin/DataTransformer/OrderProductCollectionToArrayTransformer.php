@@ -13,13 +13,12 @@
 namespace WellCommerce\Bundle\SalesBundle\Form\Admin\DataTransformer;
 
 use Doctrine\Common\Collections\Collection;
-use Doctrine\Common\Util\Debug;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
+use WellCommerce\Bundle\CatalogBundle\Entity\ProductAttributeInterface;
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
 use WellCommerce\Bundle\SalesBundle\Entity\OrderInterface;
 use WellCommerce\Bundle\SalesBundle\Entity\OrderProductInterface;
 use WellCommerce\Bundle\SalesBundle\Manager\Admin\OrderProductManager;
-use WellCommerce\Bundle\CatalogBundle\Entity\ProductAttributeInterface;
 
 /**
  * Class ProductAttributeCollectionToArrayTransformer

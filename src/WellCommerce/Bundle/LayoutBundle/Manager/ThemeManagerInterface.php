@@ -12,9 +12,6 @@
 
 namespace WellCommerce\Bundle\LayoutBundle\Manager;
 
-use WellCommerce\Bundle\LayoutBundle\Entity\Theme;
-use WellCommerce\Bundle\LayoutBundle\Entity\ThemeInterface;
-
 /**
  * Interface ThemeManagerInterface
  *

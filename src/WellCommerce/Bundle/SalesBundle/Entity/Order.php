@@ -20,10 +20,6 @@ use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\Timestampable\Timesta
 use WellCommerce\Bundle\CoreBundle\Entity\Price;
 use WellCommerce\Bundle\CouponBundle\Entity\CouponAwareTrait;
 use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopAwareTrait;
-use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
-use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodAwareTrait;
-use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodAwareTrait;
-use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCostInterface;
 
 /**
  * Class Order

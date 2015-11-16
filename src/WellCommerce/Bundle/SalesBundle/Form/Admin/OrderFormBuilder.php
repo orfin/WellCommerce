@@ -17,9 +17,9 @@ use WellCommerce\Bundle\FormBundle\Elements\ElementInterface;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 use WellCommerce\Bundle\SalesBundle\Context\Admin\OrderContextInterface;
 use WellCommerce\Bundle\SalesBundle\Entity\OrderInterface;
-use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodInterface;
-use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCostInterface;
-use WellCommerce\Bundle\ShippingBundle\Provider\ShippingMethodProviderInterface;
+use WellCommerce\Bundle\SalesBundle\Entity\PaymentMethodInterface;
+use WellCommerce\Bundle\SalesBundle\Entity\ShippingMethodCostInterface;
+use WellCommerce\Bundle\SalesBundle\Provider\ShippingMethodProviderInterface;
 
 /**
  * Class OrderFormBuilder

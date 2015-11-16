@@ -13,10 +13,10 @@
 namespace WellCommerce\Bundle\SalesBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use WellCommerce\Bundle\SalesBundle\Entity\Cart;
-use WellCommerce\Bundle\SalesBundle\Entity\CartTotals;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 use WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface;
+use WellCommerce\Bundle\SalesBundle\Entity\Cart;
+use WellCommerce\Bundle\SalesBundle\Entity\CartTotals;
 
 /**
  * Class CartFactory

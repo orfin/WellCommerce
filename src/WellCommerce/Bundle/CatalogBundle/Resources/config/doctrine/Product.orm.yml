@@ -95,7 +95,7 @@ WellCommerce\Bundle\CatalogBundle\Entity\Product:
                     referencedColumnName: id
                     onDelete: 'SET NULL'
         photo:
-            targetEntity: WellCommerce\Bundle\MediaBundle\Entity\Media
+            targetEntity: WellCommerce\Bundle\CmsBundle\Entity\Media
             fetch: LAZY
             joinColumns:
                 photo_id:

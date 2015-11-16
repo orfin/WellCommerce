@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\MultiStoreBundle\Resolver\Front;
 
-use Doctrine\Common\Util\Debug;
 use WellCommerce\Bundle\MultiStoreBundle\Resolver\AbstractShopResolver;
 use WellCommerce\Bundle\MultiStoreBundle\Resolver\ShopResolverInterface;
 

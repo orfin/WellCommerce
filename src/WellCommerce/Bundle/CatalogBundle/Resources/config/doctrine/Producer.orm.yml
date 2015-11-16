@@ -53,7 +53,7 @@ WellCommerce\Bundle\CatalogBundle\Entity\Producer:
                         referencedColumnName: id
     manyToOne:
         photo:
-            targetEntity: WellCommerce\Bundle\MediaBundle\Entity\Media
+            targetEntity: WellCommerce\Bundle\CmsBundle\Entity\Media
             fetch: LAZY
             joinColumns:
                 photo_id:

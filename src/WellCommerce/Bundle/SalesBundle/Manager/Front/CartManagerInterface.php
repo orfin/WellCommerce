@@ -12,11 +12,11 @@
 
 namespace WellCommerce\Bundle\SalesBundle\Manager\Front;
 
-use WellCommerce\Bundle\SalesBundle\Entity\CartInterface;
-use WellCommerce\Bundle\SalesBundle\Entity\CartProductInterface;
-use WellCommerce\Bundle\CoreBundle\Manager\Front\FrontManagerInterface;
 use WellCommerce\Bundle\CatalogBundle\Entity\ProductAttributeInterface;
 use WellCommerce\Bundle\CatalogBundle\Entity\ProductInterface;
+use WellCommerce\Bundle\CoreBundle\Manager\Front\FrontManagerInterface;
+use WellCommerce\Bundle\SalesBundle\Entity\CartInterface;
+use WellCommerce\Bundle\SalesBundle\Entity\CartProductInterface;
 
 /**
  * Interface CartManagerInterface

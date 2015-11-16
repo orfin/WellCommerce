@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\SalesBundle\Factory;
 
-use WellCommerce\Bundle\SalesBundle\Entity\CartInterface;
 use WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface;
+use WellCommerce\Bundle\SalesBundle\Entity\CartInterface;
 
 /**
  * Interface OrderFactoryInterface

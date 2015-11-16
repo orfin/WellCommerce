@@ -20,11 +20,7 @@ use WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddressInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CouponBundle\Entity\CouponAwareInterface;
 use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopAwareInterface;
-use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
-use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodAwareInterface;
-use WellCommerce\Bundle\ShippingBundle\Calculator\ShippingCalculatorSubjectInterface;
-use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodAwareInterface;
-use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCostInterface;
+use WellCommerce\Bundle\SalesBundle\Calculator\ShippingCalculatorSubjectInterface;
 
 /**
  * Interface OrderInterface

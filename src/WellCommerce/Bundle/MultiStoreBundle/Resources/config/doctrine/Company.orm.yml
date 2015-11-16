@@ -23,7 +23,7 @@ WellCommerce\Bundle\MultiStoreBundle\Entity\Company:
             column: short_name
     manyToOne:
         photo:
-            targetEntity: WellCommerce\Bundle\MediaBundle\Entity\Media
+            targetEntity: WellCommerce\Bundle\CmsBundle\Entity\Media
             fetch: LAZY
             joinColumns:
                 photo_id:

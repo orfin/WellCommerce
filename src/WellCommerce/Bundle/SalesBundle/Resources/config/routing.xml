@@ -6,7 +6,11 @@
 
     <import resource="routing/admin/order.xml" prefix="admin/order"/>
     <import resource="routing/admin/order_status.xml" prefix="admin/order/status"/>
-    <import resource="routing/admin/order_status_group.xml" prefix="/admin/order/status/group"/>
+    <import resource="routing/admin/order_status_group.xml" prefix="admin/order/status/group"/>
+    <import resource="routing/admin/shipping_method.xml" prefix="admin/order/configuration/shipping"/>
+    <import resource="routing/admin/payment_method.xml" prefix="admin/order/configuration/payment"/>
+    <import resource="routing/front/payment.xml" prefix="payment"/>
     <import resource="routing/front/order.xml" prefix="order"/>
     <import resource="routing/front/cart.xml" prefix="cart"/>
+
 </routes>
