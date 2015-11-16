@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\CatalogBundle\Entity\Attribute;
 
 use Doctrine\Common\Collections\Collection;
+use WellCommerce\Bundle\CatalogBundle\Entity\AttributeInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
