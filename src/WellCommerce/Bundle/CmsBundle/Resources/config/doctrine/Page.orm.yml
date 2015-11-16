@@ -98,7 +98,7 @@ WellCommerce\Bundle\CmsBundle\Entity\Page:
                         referencedColumnName: id
             orderBy: null
         shops:
-            targetEntity: WellCommerce\Bundle\MultiStoreBundle\Entity\Shop
+            targetEntity: WellCommerce\Bundle\CommonBundle\Entity\Shop
             cascade: {  }
             fetch: LAZY
             mappedBy: null

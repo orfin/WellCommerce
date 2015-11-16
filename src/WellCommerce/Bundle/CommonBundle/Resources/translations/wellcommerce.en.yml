@@ -6,6 +6,32 @@
 # For the full copyright and license information,
 # please view the LICENSE file that was distributed with this source code.
 
+company:
+    heading:
+        index: Companies
+        add: Add a company
+        edit: Edit a company
+
+shop:
+    heading:
+        index: Shops
+        add: Add a shop
+        edit: Edit a shop
+    form:
+        fieldset:
+            mailer_configuration: Mailer configuration
+    label:
+        company: Company
+        theme: Default theme
+        default_country: Default country
+        default_currency: Default currency
+        mailer_configuration:
+            from: Sender (e-mail)
+            host: SMTP host
+            port: SMTP port
+            user: SMTP username
+            pass: SMTP password
+
 currency:
     heading:
         index: Currencies
@@ -37,3 +63,11 @@ dictionary:
     button:
         add: Add new translation
         sync: Synchronize translations
+
+tax:
+    heading:
+        index: Tax rates
+        add: Add a tax rate
+        edit: Edit a tax rate
+    label:
+        value: Tax rate

@@ -15,7 +15,7 @@ namespace WellCommerce\Bundle\SalesBundle\EventListener;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 use WellCommerce\Bundle\SalesBundle\Entity\ShippingMethodCostInterface;
-use WellCommerce\Bundle\TaxBundle\Helper\TaxHelper;
+use WellCommerce\Bundle\CommonBundle\Helper\TaxHelper;
 
 /**
  * Class ShippingMethodCostEventSubscriber

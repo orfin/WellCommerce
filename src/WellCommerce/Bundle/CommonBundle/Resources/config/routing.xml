@@ -10,6 +10,9 @@
     <import resource="routing/dictionary.xml"/>
     <import resource="routing/package.xml"/>
     <import resource="routing/routing.xml"/>
+    <import resource="routing/tax.xml"/>
+    <import resource="routing/company.xml" />
+    <import resource="routing/shop.xml" />
 
     <route id="front.home_page.index" path="/">
         <default key="_controller">web.home_page.controller.front:indexAction</default>

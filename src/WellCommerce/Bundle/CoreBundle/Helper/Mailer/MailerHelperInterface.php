@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Helper\Mailer;
 
-use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopInterface;
+use WellCommerce\Bundle\CommonBundle\Entity\ShopInterface;
 
 /**
  * Interface MailerHelperInterface

@@ -19,7 +19,7 @@ use WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddressInterface;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\Timestampable\TimestampableTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\Price;
 use WellCommerce\Bundle\PromotionBundle\Entity\CouponAwareTrait;
-use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopAwareTrait;
+use WellCommerce\Bundle\CommonBundle\Entity\ShopAwareTrait;
 
 /**
  * Class Order

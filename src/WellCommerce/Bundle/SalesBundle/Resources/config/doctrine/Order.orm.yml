@@ -94,7 +94,7 @@ WellCommerce\Bundle\SalesBundle\Entity\Order:
                     referencedColumnName: id
                     onDelete: 'SET NULL'
         shop:
-            targetEntity: WellCommerce\Bundle\MultiStoreBundle\Entity\Shop
+            targetEntity: WellCommerce\Bundle\CommonBundle\Entity\Shop
             fetch: LAZY
             joinColumns:
                 shop_id:

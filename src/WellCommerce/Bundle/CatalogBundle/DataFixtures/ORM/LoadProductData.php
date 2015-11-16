@@ -23,7 +23,7 @@ use WellCommerce\Bundle\CoreBundle\Entity\DiscountablePrice;
 use WellCommerce\Bundle\CoreBundle\Entity\Price;
 use WellCommerce\Bundle\CommonBundle\DataFixtures\ORM\LoadCurrencyData;
 use WellCommerce\Bundle\CommonBundle\Helper\Sluggable;
-use WellCommerce\Bundle\TaxBundle\DataFixtures\ORM\LoadTaxData;
+use WellCommerce\Bundle\CommonBundle\DataFixtures\ORM\LoadTaxData;
 
 /**
  * Class LoadProductData

@@ -19,7 +19,7 @@ use WellCommerce\Bundle\CoreBundle\Entity\Price;
 use WellCommerce\Bundle\CommonBundle\DataFixtures\ORM\LoadCurrencyData;
 use WellCommerce\Bundle\SalesBundle\Entity\ShippingMethodCost;
 use WellCommerce\Bundle\SalesBundle\Entity\ShippingMethodInterface;
-use WellCommerce\Bundle\TaxBundle\DataFixtures\ORM\LoadTaxData;
+use WellCommerce\Bundle\CommonBundle\DataFixtures\ORM\LoadTaxData;
 
 /**
  * Class LoadShippingData

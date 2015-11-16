@@ -19,7 +19,7 @@ use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\EnableableTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\HierarchyAwareTrait;
 use WellCommerce\Bundle\CommonBundle\Entity\CurrencyInterface;
-use WellCommerce\Bundle\TaxBundle\Entity\TaxAwareTrait;
+use WellCommerce\Bundle\CommonBundle\Entity\TaxAwareTrait;
 
 /**
  * Class ShippingMethod

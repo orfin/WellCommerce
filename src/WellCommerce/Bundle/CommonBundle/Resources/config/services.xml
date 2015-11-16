@@ -11,6 +11,9 @@
         <import resource="services/routing.xml"/>
         <import resource="services/channel.xml"/>
         <import resource="services/package.xml"/>
+        <import resource="services/tax.xml"/>
+        <import resource="services/company.xml"/>
+        <import resource="services/shop.xml"/>
     </imports>
 
     <services>

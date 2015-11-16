@@ -40,4 +40,40 @@
             <option name="fields">path</option>
         </constraint>
     </class>
+
+    <class name="WellCommerce\Bundle\CommonBundle\Entity\Tax">
+        <property name="value">
+            <constraint name="NotBlank">
+                <option name="message">validation.tax.not_blank</option>
+            </constraint>
+            <constraint name="Range">
+                <option name="min">0</option>
+                <option name="max">100</option>
+            </constraint>
+        </property>
+        <property name="translations">
+            <constraint name="Valid">
+                <option name="deep">true</option>
+            </constraint>
+        </property>
+    </class>
+
+    <class name="WellCommerce\Bundle\CommonBundle\Entity\TaxTranslation">
+        <property name="name">
+            <constraint name="NotBlank" />
+            <constraint name="NotNull" />
+        </property>
+    </class>
+
+    <class name="WellCommerce\Bundle\CommonBundle\Entity\Company">
+        <property name="name">
+            <constraint name="NotBlank" />
+        </property>
+        <property name="shortName">
+            <constraint name="NotBlank" />
+        </property>
+        <property name="country">
+            <constraint name="Country" />
+        </property>
+    </class>
 </constraint-mapping>

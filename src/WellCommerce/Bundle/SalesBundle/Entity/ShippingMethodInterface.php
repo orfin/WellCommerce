@@ -17,7 +17,7 @@ use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
 use WellCommerce\Bundle\CommonBundle\Entity\CurrencyInterface;
-use WellCommerce\Bundle\TaxBundle\Entity\TaxAwareInterface;
+use WellCommerce\Bundle\CommonBundle\Entity\TaxAwareInterface;
 
 /**
  * Interface ShippingMethodInterface

@@ -19,7 +19,7 @@ use WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetailsInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddressInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\PromotionBundle\Entity\CouponAwareInterface;
-use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopAwareInterface;
+use WellCommerce\Bundle\CommonBundle\Entity\ShopAwareInterface;
 use WellCommerce\Bundle\SalesBundle\Calculator\ShippingCalculatorSubjectInterface;
 
 /**

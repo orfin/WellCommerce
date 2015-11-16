@@ -15,7 +15,7 @@ use Doctrine\Common\Collections\Collection;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Symfony\Component\Security\Core\User\UserInterface;
-use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopAwareTrait;
+use WellCommerce\Bundle\CommonBundle\Entity\ShopAwareTrait;
 
 /**
  * Class Client

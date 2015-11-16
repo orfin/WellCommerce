@@ -120,7 +120,7 @@ interface ManagerInterface
     public function removeResource($resource);
 
     /**
-     * @return \WellCommerce\Bundle\MultiStoreBundle\Context\ShopContextInterface
+     * @return \WellCommerce\Bundle\CommonBundle\Context\ShopContextInterface
      */
     public function getShopContext();
 

@@ -17,7 +17,7 @@ use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\HierarchyAwareInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
-use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopCollectionAwareInterface;
+use WellCommerce\Bundle\CommonBundle\Entity\ShopCollectionAwareInterface;
 
 /**
  * Interface PageInterface

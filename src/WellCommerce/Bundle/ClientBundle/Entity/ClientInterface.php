@@ -19,7 +19,7 @@ use WellCommerce\Bundle\CoreBundle\Entity\AddressInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\ContactDetailsAwareInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
-use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopAwareInterface;
+use WellCommerce\Bundle\CommonBundle\Entity\ShopAwareInterface;
 
 /**
  * Interface ClientInterface

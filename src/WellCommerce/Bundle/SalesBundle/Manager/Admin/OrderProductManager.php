@@ -18,7 +18,7 @@ use WellCommerce\Bundle\CoreBundle\Entity\Price;
 use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
 use WellCommerce\Bundle\SalesBundle\Entity\OrderInterface;
 use WellCommerce\Bundle\SalesBundle\Entity\OrderProductInterface;
-use WellCommerce\Bundle\TaxBundle\Helper\TaxHelper;
+use WellCommerce\Bundle\CommonBundle\Helper\TaxHelper;
 
 /**
  * Class OrderProductManager

@@ -16,7 +16,7 @@ use Doctrine\Common\EventSubscriber;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 use WellCommerce\Bundle\CatalogBundle\Entity\ProductAttributeInterface;
 use WellCommerce\Bundle\CatalogBundle\Entity\ProductInterface;
-use WellCommerce\Bundle\TaxBundle\Helper\TaxHelper;
+use WellCommerce\Bundle\CommonBundle\Helper\TaxHelper;
 
 /**
  * Class ProductDoctrineEventSubscriber

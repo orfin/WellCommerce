@@ -23,8 +23,8 @@ use WellCommerce\Bundle\CoreBundle\Entity\Dimension;
 use WellCommerce\Bundle\CoreBundle\Entity\DiscountablePrice;
 use WellCommerce\Bundle\CoreBundle\Entity\HierarchyAwareTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\Price;
-use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopCollectionAwareTrait;
-use WellCommerce\Bundle\TaxBundle\Entity\TaxInterface;
+use WellCommerce\Bundle\CommonBundle\Entity\ShopCollectionAwareTrait;
+use WellCommerce\Bundle\CommonBundle\Entity\TaxInterface;
 
 /**
  * Class Product

@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\CoreBundle\Helper\Mailer;
 
 use Swift_Message as Message;
 use WellCommerce\Bundle\CoreBundle\Entity\MailerConfiguration;
-use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopInterface;
+use WellCommerce\Bundle\CommonBundle\Entity\ShopInterface;
 
 /**
  * Class MailerHelper
