@@ -28,7 +28,7 @@
 
         <service id="shipping_method.factory" class="WellCommerce\Bundle\SalesBundle\Factory\ShippingMethodFactory" />
 
-        <service id="shipping_method.event_dispatcher" class="WellCommerce\Bundle\SalesBundle\EventDispatcher\ShippingMethodEventDispatcher">
+        <service id="shipping_method.event_dispatcher" parent="core.event_dispatcher" public="false">
             <argument type="service" id="event_dispatcher"/>
         </service>
 

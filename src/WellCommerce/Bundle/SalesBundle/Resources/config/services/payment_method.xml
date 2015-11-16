@@ -59,11 +59,11 @@
 
         <service id="payment.factory" class="WellCommerce\Bundle\SalesBundle\Factory\PaymentFactory" />
 
-        <service id="payment_method.event_dispatcher" class="WellCommerce\Bundle\SalesBundle\EventDispatcher\PaymentMethodEventDispatcher">
+        <service id="payment_method.event_dispatcher" parent="core.event_dispatcher" public="false">
             <argument type="service" id="event_dispatcher"/>
         </service>
 
-        <service id="payment.event_dispatcher" class="WellCommerce\Bundle\SalesBundle\EventDispatcher\PaymentEventDispatcher">
+        <service id="payment.event_dispatcher" parent="core.event_dispatcher" public="false">
             <argument type="service" id="event_dispatcher"/>
         </service>
 

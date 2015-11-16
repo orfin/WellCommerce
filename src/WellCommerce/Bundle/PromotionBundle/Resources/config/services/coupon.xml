@@ -15,7 +15,7 @@
 
         <service id="coupon.factory" class="WellCommerce\Bundle\PromotionBundle\Factory\CouponFactory"/>
 
-        <service id="coupon.event_dispatcher" class="WellCommerce\Bundle\PromotionBundle\EventDispatcher\CouponEventDispatcher">
+        <service id="coupon.event_dispatcher" parent="core.event_dispatcher" public="false">
             <argument type="service" id="event_dispatcher"/>
         </service>
     </services>

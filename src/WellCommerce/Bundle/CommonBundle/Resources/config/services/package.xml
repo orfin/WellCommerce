@@ -23,7 +23,7 @@
 
         <service id="package.factory" class="WellCommerce\Bundle\CommonBundle\Factory\PackageFactory"/>
 
-        <service id="package.event_dispatcher" class="WellCommerce\Bundle\CommonBundle\EventDispatcher\PackageEventDispatcher">
+        <service id="package.event_dispatcher" parent="core.event_dispatcher" public="false">
             <argument type="service" id="event_dispatcher"/>
         </service>
 

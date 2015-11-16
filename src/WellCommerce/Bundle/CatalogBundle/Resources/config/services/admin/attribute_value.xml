@@ -22,7 +22,7 @@
 
         <service id="attribute_value.factory" class="WellCommerce\Bundle\CatalogBundle\Factory\AttributeValueFactory" />
 
-        <service id="attribute_value.event_dispatcher" class="WellCommerce\Bundle\CatalogBundle\EventDispatcher\AttributeValueEventDispatcher">
+        <service id="attribute_value.event_dispatcher" parent="core.event_dispatcher" public="false">
             <argument type="service" id="event_dispatcher"/>
         </service>
 

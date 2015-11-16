@@ -46,7 +46,7 @@
 
         <service id="currency.factory" class="WellCommerce\Bundle\CommonBundle\Factory\CurrencyFactory" />
 
-        <service id="currency.event_dispatcher" class="WellCommerce\Bundle\CommonBundle\EventDispatcher\CurrencyEventDispatcher">
+        <service id="currency.event_dispatcher" parent="core.event_dispatcher" public="false">
             <argument type="service" id="event_dispatcher" />
         </service>
     </services>

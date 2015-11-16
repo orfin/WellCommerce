@@ -10,7 +10,7 @@
 
         <service id="client_wishlist.factory" class="WellCommerce\Bundle\ClientBundle\Factory\ClientWishlistFactory" />
 
-        <service id="client_wishlist.event_dispatcher" class="WellCommerce\Bundle\ClientBundle\EventDispatcher\ClientWishlistEventDispatcher">
+        <service id="client_wishlist.event_dispatcher" parent="core.event_dispatcher" public="false">
             <argument type="service" id="event_dispatcher"/>
         </service>
 

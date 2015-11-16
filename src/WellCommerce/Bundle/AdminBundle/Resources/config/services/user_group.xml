@@ -14,7 +14,7 @@
 
         <service id="user_group.factory" class="WellCommerce\Bundle\AdminBundle\Factory\UserGroupFactory"/>
 
-        <service id="user_group.event_dispatcher" class="WellCommerce\Bundle\AdminBundle\EventDispatcher\UserGroupEventDispatcher">
+        <service id="user_group.event_dispatcher" parent="core.event_dispatcher" public="false">
             <argument type="service" id="event_dispatcher"/>
         </service>
 

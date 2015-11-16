@@ -15,7 +15,7 @@
 
         <service id="contact.factory" class="WellCommerce\Bundle\CmsBundle\Factory\ContactFactory" />
 
-        <service id="contact.event_dispatcher" class="WellCommerce\Bundle\CmsBundle\EventDispatcher\ContactEventDispatcher">
+        <service id="contact.event_dispatcher" parent="core.event_dispatcher" public="false">
             <argument type="service" id="event_dispatcher" />
         </service>
     </services>

@@ -21,25 +21,25 @@ use WellCommerce\Bundle\FormBundle\Event\FormEvent;
 use WellCommerce\Bundle\FormBundle\FormBuilderInterface;
 
 /**
- * Class AbstractEventDispatcher
+ * Class EventDispatcher
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractEventDispatcher implements EventDispatcherInterface
+class EventDispatcher implements EventDispatcherInterface
 {
     /**
      * @var BaseEventDispatcherInterface
      */
-    protected $eventDispatcher;
+    protected $baseEventDispatcher;
     
     /**
      * Constructor
      *
-     * @param BaseEventDispatcherInterface $eventDispatcher
+     * @param BaseEventDispatcherInterface $baseEventDispatcher
      */
-    public function __construct(BaseEventDispatcherInterface $eventDispatcher)
+    public function __construct(BaseEventDispatcherInterface $baseEventDispatcher)
     {
-        $this->eventDispatcher = $eventDispatcher;
+        $this->baseEventDispatcher = $baseEventDispatcher;
     }
 
     /**
@@ -139,7 +139,7 @@ abstract class AbstractEventDispatcher implements EventDispatcherInterface
      */
     protected function dispatch($eventName, Event $event)
     {
-        $this->eventDispatcher->dispatch($eventName, $event);
+        $this->baseEventDispatcher->dispatch($eventName, $event);
     }
     
     /**

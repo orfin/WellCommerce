@@ -43,7 +43,7 @@
 
         <service id="layout_box.factory" class="WellCommerce\Bundle\LayoutBundle\Factory\LayoutBoxFactory"/>
 
-        <service id="layout_box.event_dispatcher" class="WellCommerce\Bundle\LayoutBundle\EventDispatcher\LayoutBoxEventDispatcher">
+        <service id="layout_box.event_dispatcher" parent="core.event_dispatcher" public="false">
             <argument type="service" id="event_dispatcher"/>
         </service>
 

@@ -15,7 +15,7 @@
 
         <service id="routing.factory" class="WellCommerce\Bundle\CommonBundle\Factory\RouteFactory" />
 
-        <service id="routing.event_dispatcher" class="WellCommerce\Bundle\CommonBundle\EventDispatcher\RoutingEventDispatcher">
+        <service id="routing.event_dispatcher" parent="core.event_dispatcher" public="false">
             <argument type="service" id="event_dispatcher"/>
         </service>
 

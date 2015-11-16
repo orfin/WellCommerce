@@ -14,7 +14,7 @@
 
         <service id="dictionary.factory" class="WellCommerce\Bundle\CommonBundle\Factory\DictionaryFactory" />
 
-        <service id="dictionary.event_dispatcher" class="WellCommerce\Bundle\CommonBundle\EventDispatcher\DictionaryEventDispatcher">
+        <service id="dictionary.event_dispatcher" parent="core.event_dispatcher" public="false">
             <argument type="service" id="event_dispatcher" />
         </service>
 

@@ -12,14 +12,14 @@
 
 namespace WellCommerce\Bundle\SalesBundle\EventDispatcher;
 
-use WellCommerce\Bundle\CoreBundle\EventDispatcher\AbstractEventDispatcher;
+use WellCommerce\Bundle\CoreBundle\EventDispatcher\EventDispatcher;
 
 /**
  * Class OrderEventDispatcher
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class OrderEventDispatcher extends AbstractEventDispatcher implements OrderEventDispatcherInterface
+class OrderEventDispatcher extends EventDispatcher implements OrderEventDispatcherInterface
 {
     /**
      * {@inheritdoc}

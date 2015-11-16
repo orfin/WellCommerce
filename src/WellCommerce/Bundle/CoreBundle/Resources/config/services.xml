@@ -17,5 +17,9 @@
         <service id="template_resolver" class="WellCommerce\Bundle\CoreBundle\Templating\TemplateResolver">
              <argument type="service" id="kernel"/>
         </service>
+
+        <service id="core.event_dispatcher" class="WellCommerce\Bundle\CoreBundle\EventDispatcher\EventDispatcher">
+            <argument type="service" id="event_dispatcher"/>
+        </service>
     </services>
 </container>

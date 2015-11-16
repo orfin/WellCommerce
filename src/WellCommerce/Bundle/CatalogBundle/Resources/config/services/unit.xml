@@ -14,7 +14,7 @@
 
         <service id="unit.factory" class="WellCommerce\Bundle\CatalogBundle\Factory\UnitFactory" />
 
-        <service id="unit.event_dispatcher" class="WellCommerce\Bundle\CatalogBundle\EventDispatcher\UnitEventDispatcher">
+        <service id="unit.event_dispatcher" parent="core.event_dispatcher" public="false">
             <argument type="service" id="event_dispatcher" />
         </service>
     </services>

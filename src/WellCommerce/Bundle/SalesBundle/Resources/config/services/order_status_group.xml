@@ -14,7 +14,7 @@
 
         <service id="order_status_group.factory" class="WellCommerce\Bundle\SalesBundle\Factory\OrderStatusGroupFactory"/>
 
-        <service id="order_status_group.event_dispatcher" class="WellCommerce\Bundle\SalesBundle\EventDispatcher\OrderStatusGroupEventDispatcher">
+        <service id="order_status_group.event_dispatcher" parent="core.event_dispatcher" public="false">
             <argument type="service" id="event_dispatcher"/>
         </service>
     </services>

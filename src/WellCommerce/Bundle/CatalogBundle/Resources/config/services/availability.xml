@@ -14,7 +14,7 @@
 
         <service id="availability.factory" class="WellCommerce\Bundle\CatalogBundle\Factory\AvailabilityFactory" />
 
-        <service id="availability.event_dispatcher" class="WellCommerce\Bundle\CatalogBundle\EventDispatcher\AvailabilityEventDispatcher">
+        <service id="availability.event_dispatcher" parent="core.event_dispatcher" public="false">
             <argument type="service" id="event_dispatcher" />
         </service>
     </services>

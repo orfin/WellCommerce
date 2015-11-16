@@ -23,7 +23,7 @@
             </call>
         </service>
 
-        <service id="client_settings.event_dispatcher" class="WellCommerce\Bundle\ClientBundle\EventDispatcher\ClientSettingsEventDispatcher">
+        <service id="client_settings.event_dispatcher" parent="core.event_dispatcher" public="false">
             <argument type="service" id="event_dispatcher"/>
         </service>
 

@@ -15,7 +15,7 @@
 
         <service id="news.factory" class="WellCommerce\Bundle\CmsBundle\Factory\NewsFactory" />
 
-        <service id="news.event_dispatcher" class="WellCommerce\Bundle\CmsBundle\EventDispatcher\NewsEventDispatcher">
+        <service id="news.event_dispatcher" parent="core.event_dispatcher" public="false">
             <argument type="service" id="event_dispatcher" />
         </service>
     </services>

@@ -22,7 +22,7 @@
 
         <service id="locale.factory" class="WellCommerce\Bundle\CommonBundle\Factory\LocaleFactory" />
 
-        <service id="locale.event_dispatcher" class="WellCommerce\Bundle\CommonBundle\EventDispatcher\LocaleEventDispatcher">
+        <service id="locale.event_dispatcher" parent="core.event_dispatcher" public="false">
             <argument type="service" id="event_dispatcher" />
         </service>
     </services>

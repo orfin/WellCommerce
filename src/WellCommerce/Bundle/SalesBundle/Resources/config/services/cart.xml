@@ -84,13 +84,13 @@
 
         <service id="cart.factory" class="WellCommerce\Bundle\SalesBundle\Factory\CartFactory" />
 
-        <service id="cart.event_dispatcher" class="WellCommerce\Bundle\SalesBundle\EventDispatcher\CartEventDispatcher">
+        <service id="cart.event_dispatcher" parent="core.event_dispatcher" public="false">
             <argument type="service" id="event_dispatcher" />
         </service>
 
         <service id="cart_product.factory" class="WellCommerce\Bundle\SalesBundle\Factory\CartProductFactory" />
 
-        <service id="cart_product.event_dispatcher" class="WellCommerce\Bundle\SalesBundle\EventDispatcher\CartProductEventDispatcher">
+        <service id="cart_product.event_dispatcher" parent="core.event_dispatcher" public="false">
             <argument type="service" id="event_dispatcher" />
         </service>
 

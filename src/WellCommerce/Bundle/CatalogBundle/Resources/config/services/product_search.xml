@@ -9,7 +9,7 @@
     </imports>
 
     <services>
-        <service id="product_search.event_dispatcher" class="WellCommerce\Bundle\CatalogBundle\EventDispatcher\ProductSearchEventDispatcher">
+        <service id="product_search.event_dispatcher" parent="core.event_dispatcher" public="false">
             <argument type="service" id="event_dispatcher" />
         </service>
     </services>

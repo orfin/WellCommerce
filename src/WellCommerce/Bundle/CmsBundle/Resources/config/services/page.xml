@@ -23,7 +23,7 @@
 
         <service id="page.factory" class="WellCommerce\Bundle\CmsBundle\Factory\PageFactory" />
 
-        <service id="page.event_dispatcher" class="WellCommerce\Bundle\CmsBundle\EventDispatcher\PageEventDispatcher">
+        <service id="page.event_dispatcher" parent="core.event_dispatcher" public="false">
             <argument type="service" id="event_dispatcher" />
         </service>
     </services>

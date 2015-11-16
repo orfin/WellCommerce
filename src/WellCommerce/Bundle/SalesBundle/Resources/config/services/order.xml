@@ -35,7 +35,7 @@
             <argument type="service" id="event_dispatcher"/>
         </service>
 
-        <service id="order_product.event_dispatcher" class="WellCommerce\Bundle\SalesBundle\EventDispatcher\OrderProductEventDispatcher">
+        <service id="order_product.event_dispatcher" parent="core.event_dispatcher" public="false">
             <argument type="service" id="event_dispatcher"/>
         </service>
 

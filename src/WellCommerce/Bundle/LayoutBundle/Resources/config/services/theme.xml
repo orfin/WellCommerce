@@ -51,7 +51,7 @@
 
         <service id="theme.factory" class="WellCommerce\Bundle\LayoutBundle\Factory\ThemeFactory"/>
 
-        <service id="theme.event_dispatcher" class="WellCommerce\Bundle\LayoutBundle\EventDispatcher\ThemeEventDispatcher">
+        <service id="theme.event_dispatcher" parent="core.event_dispatcher" public="false">
             <argument type="service" id="event_dispatcher"/>
         </service>
 
