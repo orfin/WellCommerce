@@ -32,7 +32,7 @@ class LoadShopData extends AbstractDataFixture
         /**
          * @var $theme       \WellCommerce\Bundle\LayoutBundle\Entity\ThemeInterface
          * @var $company     \WellCommerce\Bundle\MultiStoreBundle\Entity\CompanyInterface
-         * @var $orderStatus \WellCommerce\Bundle\OrderBundle\Entity\OrderStatusInterface
+         * @var $orderStatus \WellCommerce\Bundle\SalesBundle\Entity\OrderStatusInterface
          */
         $theme    = $this->getReference('theme');
         $company  = $this->getReference('company');

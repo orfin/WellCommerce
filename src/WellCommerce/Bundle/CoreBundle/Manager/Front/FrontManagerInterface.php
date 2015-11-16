@@ -22,7 +22,7 @@ use WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface;
 interface FrontManagerInterface extends ManagerInterface
 {
     /**
-     * @return \WellCommerce\Bundle\CartBundle\Context\Front\CartContextInterface
+     * @return \WellCommerce\Bundle\SalesBundle\Context\Front\CartContextInterface
      */
     public function getCartContext();
 

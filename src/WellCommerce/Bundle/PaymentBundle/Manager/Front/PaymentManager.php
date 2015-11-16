@@ -13,9 +13,9 @@
 namespace WellCommerce\Bundle\PaymentBundle\Manager\Front;
 
 use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
-use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
-use WellCommerce\Bundle\OrderBundle\Exception\OrderNotFoundException;
-use WellCommerce\Bundle\OrderBundle\Repository\OrderRepositoryInterface;
+use WellCommerce\Bundle\SalesBundle\Entity\OrderInterface;
+use WellCommerce\Bundle\SalesBundle\Exception\OrderNotFoundException;
+use WellCommerce\Bundle\SalesBundle\Repository\OrderRepositoryInterface;
 
 /**
  * Class PaymentManager

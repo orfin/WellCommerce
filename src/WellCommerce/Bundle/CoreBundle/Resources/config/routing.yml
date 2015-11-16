@@ -16,8 +16,8 @@ wellcommerce_catalog:
 wellcommerce_client:
     resource: "@WellCommerceClientBundle/Resources/config/routing.xml"
 
-wellcommerce_order:
-    resource: "@WellCommerceOrderBundle/Resources/config/routing.xml"
+wellcommerce_sales:
+    resource: "@WellCommerceSalesBundle/Resources/config/routing.xml"
 
 wellcommerce_coupon:
     resource: "@WellCommerceCouponBundle/Resources/config/routing.xml"
@@ -51,6 +51,3 @@ wellcommerce_shipping:
 
 wellcommerce_smuggler:
     resource: "@WellCommerceSmugglerBundle/Resources/config/routing.xml"
-
-wellcommerce_cart:
-    resource: "@WellCommerceCartBundle/Resources/config/routing.xml"

@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\Manager\Front;
 
-use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
+use WellCommerce\Bundle\SalesBundle\Entity\OrderInterface;
 
 /**
  * Interface PaymentManagerInterface
@@ -25,7 +25,7 @@ interface PaymentManagerInterface
      * Finds order by its id or throws an exception
      *
      * @return OrderInterface
-     * @throws \WellCommerce\Bundle\OrderBundle\Exception\OrderNotFoundException
+     * @throws \WellCommerce\Bundle\SalesBundle\Exception\OrderNotFoundException
      */
     public function findOrder();
 

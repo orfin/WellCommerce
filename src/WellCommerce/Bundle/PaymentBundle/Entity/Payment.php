@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\PaymentBundle\Entity;
 
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
-use WellCommerce\Bundle\OrderBundle\Entity\OrderAwareTrait;
+use WellCommerce\Bundle\SalesBundle\Entity\OrderAwareTrait;
 
 /**
  * Class PaymentMethod

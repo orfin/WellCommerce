@@ -33,7 +33,7 @@ WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod:
             orphanRemoval: true
     manyToOne:
         defaultOrderStatus:
-            targetEntity: WellCommerce\Bundle\OrderBundle\Entity\OrderStatus
+            targetEntity: WellCommerce\Bundle\SalesBundle\Entity\OrderStatus
             fetch: LAZY
             joinColumns:
             default_order_status_id:

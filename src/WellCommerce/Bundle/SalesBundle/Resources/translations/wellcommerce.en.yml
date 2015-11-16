@@ -1,0 +1,62 @@
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
+
+cart:
+    flash:
+        added: was added to cart
+    button:
+        add: Add to cart
+    link:
+        checkout: Go to checkout
+    heading:
+        index: Cart
+        recommendations: 'You might also like'
+    table:
+        heading:
+            product: Product
+            price: Price
+            quantity: Quantity
+            total: Total
+    error:
+        no_available_methods: There are no available shipping and/or payment options for this cart
+
+order:
+    heading:
+        index: Orders
+        edit: Edit order
+        address: Address
+        confirmation: Confirmation
+    button:
+        confirm: Go to confirmation
+    heading:
+        address: Billing & shipping address
+    label:
+        id: ID
+        order_no: Order no.
+        client: Client
+        product_total: Products value
+        shipping_total: Shipping cost
+        order_total: Total value
+        variant: Variant
+        weight: Weight
+        quantity: Qty
+        stock: Stock
+        tax_rate: Tax rate
+        current_status: Status
+        created_at: Placed on
+        comment: Additional comments
+        shipping_method: Shipping method
+        payment_method: Payment method
+        product_name: Product
+        tax_value: Tax
+        gross_amount: Price
+        gross_total: Total
+        currency: Currency
+    description:
+        product_total: Total products value
+        shipping_cost: Shipping costs

@@ -1,0 +1,48 @@
+WellCommerce\Bundle\SalesBundle\Entity\OrderProduct:
+    type: entity
+    table: orders_product
+    repositoryClass: WellCommerce\Bundle\SalesBundle\Repository\OrderProductRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    embedded:
+        buyPrice:
+            class: WellCommerce\Bundle\CoreBundle\Entity\Price
+            columnPrefix: buy_price_
+        sellPrice:
+            class: WellCommerce\Bundle\CoreBundle\Entity\Price
+            columnPrefix: sell_price_
+    fields:
+        quantity:
+            type: integer
+            nullable: false
+        weight:
+            type: decimal
+            scale: 4
+            nullable: false
+            precision: 15
+    manyToOne:
+        order:
+            targetEntity: WellCommerce\Bundle\SalesBundle\Entity\Order
+            fetch: LAZY
+            inversedBy: products
+            joinColumns:
+                order_id:
+                    referencedColumnName: id
+                    onDelete: CASCADE
+        product:
+            targetEntity: WellCommerce\Bundle\CatalogBundle\Entity\Product
+            fetch: LAZY
+            joinColumns:
+                product_id:
+                    referencedColumnName: id
+                    onDelete: RESTRICT
+        productAttribute:
+            targetEntity: WellCommerce\Bundle\CatalogBundle\Entity\ProductAttribute
+            fetch: LAZY
+            joinColumns:
+                product_attribute_id:
+                    referencedColumnName: id
+                    onDelete: RESTRICT
