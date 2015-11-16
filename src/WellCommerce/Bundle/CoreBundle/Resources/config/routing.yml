@@ -1,14 +1,8 @@
-wellcommerce_web:
-    resource: "@WellCommerceWebBundle/Resources/config/routing.xml"
-
 wellcommerce_admin:
     resource: "@WellCommerceAdminBundle/Resources/config/routing.xml"
 
-wellcommerce_routing:
-    resource: "@WellCommerceRoutingBundle/Resources/config/routing.xml"
-
-wellcommerce_intl:
-    resource: "@WellCommerceIntlBundle/Resources/config/routing.xml"
+wellcommerce_common:
+    resource: "@WellCommerceCommonBundle/Resources/config/routing.xml"
 
 wellcommerce_catalog:
     resource: "@WellCommerceCatalogBundle/Resources/config/routing.xml"

@@ -16,6 +16,7 @@ use Doctrine\Common\Collections\Collection;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
+use WellCommerce\Bundle\CatalogBundle\Entity\Attribute\GroupInterface;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\EnableableTrait;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\PhotoTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\Dimension;
@@ -104,7 +105,7 @@ class Product implements ProductInterface
     protected $sellPriceTax;
 
     /**
-     * @var AttributeGroupInterface
+     * @var GroupInterface
      */
     protected $attributeGroup;
 
@@ -339,7 +340,7 @@ class Product implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function setAttributeGroup(AttributeGroupInterface $attributeGroup)
+    public function setAttributeGroup(GroupInterface $attributeGroup)
     {
         $this->attributeGroup = $attributeGroup;
     }

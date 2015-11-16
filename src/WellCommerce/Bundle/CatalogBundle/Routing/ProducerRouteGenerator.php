@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\CatalogBundle\Routing;
 
-use WellCommerce\Bundle\RoutingBundle\Generator\AbstractRouteGenerator;
-use WellCommerce\Bundle\RoutingBundle\Generator\RouteGeneratorInterface;
+use WellCommerce\Bundle\CommonBundle\Generator\AbstractRouteGenerator;
+use WellCommerce\Bundle\CommonBundle\Generator\RouteGeneratorInterface;
 
 /**
  * Class ProducerRouteGenerator

@@ -16,7 +16,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
 use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
 use WellCommerce\Bundle\CoreBundle\Entity\Price;
-use WellCommerce\Bundle\IntlBundle\DataFixtures\ORM\LoadCurrencyData;
+use WellCommerce\Bundle\CommonBundle\DataFixtures\ORM\LoadCurrencyData;
 use WellCommerce\Bundle\SalesBundle\Entity\ShippingMethodCost;
 use WellCommerce\Bundle\SalesBundle\Entity\ShippingMethodInterface;
 use WellCommerce\Bundle\TaxBundle\DataFixtures\ORM\LoadTaxData;

@@ -3,8 +3,8 @@ parameters:
         WellCommerce\Bundle\AdminBundle\DataFixtures\ORM\LoadAdminMenuData: 0
         WellCommerce\Bundle\LayoutBundle\DataFixtures\ORM\LoadThemeData: 10
         WellCommerce\Bundle\MultiStoreBundle\DataFixtures\ORM\LoadCompanyData: 20
-        WellCommerce\Bundle\IntlBundle\DataFixtures\ORM\LoadCurrencyData: 30
-        WellCommerce\Bundle\IntlBundle\DataFixtures\ORM\LoadLocaleData: 40
+        WellCommerce\Bundle\CommonBundle\DataFixtures\ORM\LoadCurrencyData: 30
+        WellCommerce\Bundle\CommonBundle\DataFixtures\ORM\LoadLocaleData: 40
         WellCommerce\Bundle\SalesBundle\DataFixtures\ORM\LoadOrderStatusGroupData: 41
         WellCommerce\Bundle\SalesBundle\DataFixtures\ORM\LoadOrderStatusData: 42
         WellCommerce\Bundle\MultiStoreBundle\DataFixtures\ORM\LoadShopData: 50

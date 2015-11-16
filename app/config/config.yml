@@ -76,7 +76,7 @@ doctrine:
                         FIELD: DoctrineExtensions\Query\Mysql\Field
                 filters:
                     locale:
-                        class:   WellCommerce\Bundle\IntlBundle\ORM\Filter\LocaleFilter
+                        class:   WellCommerce\Bundle\CommonBundle\ORM\Filter\LocaleFilter
                         enabled: false
 
 doctrine_migrations:

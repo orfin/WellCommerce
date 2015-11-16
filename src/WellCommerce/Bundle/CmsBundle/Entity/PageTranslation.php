@@ -14,9 +14,9 @@ namespace WellCommerce\Bundle\CmsBundle\Entity;
 
 use Knp\DoctrineBehaviors\Model\Translatable\Translation;
 use WellCommerce\Bundle\CoreBundle\Entity\Meta;
-use WellCommerce\Bundle\IntlBundle\ORM\LocaleAwareInterface;
-use WellCommerce\Bundle\RoutingBundle\Entity\Behaviours\RoutableTrait;
-use WellCommerce\Bundle\RoutingBundle\Entity\RoutableSubjectInterface;
+use WellCommerce\Bundle\CommonBundle\ORM\LocaleAwareInterface;
+use WellCommerce\Bundle\CommonBundle\Entity\Behaviours\RoutableTrait;
+use WellCommerce\Bundle\CommonBundle\Entity\RoutableSubjectInterface;
 
 /**
  * Class PageTranslation
@@ -105,7 +105,7 @@ class PageTranslation implements RoutableSubjectInterface, LocaleAwareInterface
     }
 
     /**
-     * @return PageRoute|\WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface
+     * @return PageRoute|\WellCommerce\Bundle\CommonBundle\Entity\RouteInterface
      */
     public function getRouteEntity()
     {

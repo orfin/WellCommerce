@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\SalesBundle\Controller\Front;
 
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
-use WellCommerce\Bundle\WebBundle\Breadcrumb\BreadcrumbItem;
+use WellCommerce\Bundle\CommonBundle\Breadcrumb\BreadcrumbItem;
 
 /**
  * Class OrderConfirmationController

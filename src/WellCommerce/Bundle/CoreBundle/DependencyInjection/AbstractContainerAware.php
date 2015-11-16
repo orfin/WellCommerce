@@ -159,7 +159,7 @@ abstract class AbstractContainerAware extends ContainerAware
     }
 
     /**
-     * @return \WellCommerce\Bundle\IntlBundle\Entity\Locale[]
+     * @return \WellCommerce\Bundle\CommonBundle\Entity\Locale[]
      */
     public function getLocales()
     {
@@ -167,7 +167,7 @@ abstract class AbstractContainerAware extends ContainerAware
     }
 
     /**
-     * @return \WellCommerce\Bundle\IntlBundle\Helper\CurrencyHelperInterface
+     * @return \WellCommerce\Bundle\CommonBundle\Helper\CurrencyHelperInterface
      */
     public function getCurrencyHelper()
     {

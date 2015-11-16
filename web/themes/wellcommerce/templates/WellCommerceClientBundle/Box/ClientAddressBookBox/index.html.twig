@@ -1,7 +1,7 @@
 {% trans_default_domain "wellcommerce" %}
 {% import "WellCommerceFormBundle:Front/Common:macros.html.twig" as macros %}
 <div class="well-form mbt60">
-    {% include 'WellCommerceWebBundle:Front/Common:flashes.html.twig' %}
+    {% include 'WellCommerceCommonBundle:Front/Common:flashes.html.twig' %}
 
     {{ macros.form_begin(form) }}
     {% set billingAddress = form.getChildren().get('billingAddress').getChildren() %}

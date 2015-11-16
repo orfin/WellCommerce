@@ -21,8 +21,8 @@ use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
 use WellCommerce\Bundle\CoreBundle\Entity\Dimension;
 use WellCommerce\Bundle\CoreBundle\Entity\DiscountablePrice;
 use WellCommerce\Bundle\CoreBundle\Entity\Price;
-use WellCommerce\Bundle\IntlBundle\DataFixtures\ORM\LoadCurrencyData;
-use WellCommerce\Bundle\RoutingBundle\Helper\Sluggable;
+use WellCommerce\Bundle\CommonBundle\DataFixtures\ORM\LoadCurrencyData;
+use WellCommerce\Bundle\CommonBundle\Helper\Sluggable;
 use WellCommerce\Bundle\TaxBundle\DataFixtures\ORM\LoadTaxData;
 
 /**

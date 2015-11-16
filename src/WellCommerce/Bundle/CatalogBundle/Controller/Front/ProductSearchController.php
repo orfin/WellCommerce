@@ -15,7 +15,7 @@ namespace WellCommerce\Bundle\CatalogBundle\Controller\Front;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
 use WellCommerce\Bundle\DataSetBundle\Conditions\ConditionsCollection;
-use WellCommerce\Bundle\WebBundle\Breadcrumb\BreadcrumbItem;
+use WellCommerce\Bundle\CommonBundle\Breadcrumb\BreadcrumbItem;
 
 /**
  * Class ProductSearchController

@@ -13,8 +13,8 @@
 namespace WellCommerce\Bundle\CatalogBundle\Routing;
 
 use Symfony\Component\Routing\Route as SymfonyRoute;
-use WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface;
-use WellCommerce\Bundle\RoutingBundle\Generator\AbstractRouteGenerator;
+use WellCommerce\Bundle\CommonBundle\Entity\RouteInterface;
+use WellCommerce\Bundle\CommonBundle\Generator\AbstractRouteGenerator;
 
 /**
  * Class CategoryRouteGenerator

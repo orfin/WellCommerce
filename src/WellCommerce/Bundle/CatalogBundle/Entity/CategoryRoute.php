@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\CatalogBundle\Entity;
 
-use WellCommerce\Bundle\RoutingBundle\Entity\Route;
-use WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface;
+use WellCommerce\Bundle\CommonBundle\Entity\Route;
+use WellCommerce\Bundle\CommonBundle\Entity\RouteInterface;
 
 /**
  * Class CategoryRoute

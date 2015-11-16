@@ -19,7 +19,7 @@ use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
 use WellCommerce\Bundle\SalesBundle\Entity\CartProductInterface;
 use WellCommerce\Bundle\SalesBundle\Exception\AddCartItemException;
 use WellCommerce\Bundle\SalesBundle\Exception\DeleteCartItemException;
-use WellCommerce\Bundle\WebBundle\Breadcrumb\BreadcrumbItem;
+use WellCommerce\Bundle\CommonBundle\Breadcrumb\BreadcrumbItem;
 
 /**
  * Class CartController

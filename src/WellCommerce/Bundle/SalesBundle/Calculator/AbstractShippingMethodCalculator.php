@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\SalesBundle\Calculator;
 
-use WellCommerce\Bundle\IntlBundle\Helper\CurrencyHelperInterface;
+use WellCommerce\Bundle\CommonBundle\Helper\CurrencyHelperInterface;
 
 /**
  * Class AbstractShippingMethodCalculator

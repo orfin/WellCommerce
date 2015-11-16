@@ -18,7 +18,7 @@ use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\EnableableTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\HierarchyAwareTrait;
-use WellCommerce\Bundle\IntlBundle\Entity\CurrencyInterface;
+use WellCommerce\Bundle\CommonBundle\Entity\CurrencyInterface;
 use WellCommerce\Bundle\TaxBundle\Entity\TaxAwareTrait;
 
 /**

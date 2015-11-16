@@ -14,9 +14,9 @@ namespace WellCommerce\Bundle\CatalogBundle\Entity;
 
 use Knp\DoctrineBehaviors\Model\Translatable\Translation;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\MetaDataTrait;
-use WellCommerce\Bundle\IntlBundle\ORM\LocaleAwareInterface;
-use WellCommerce\Bundle\RoutingBundle\Entity\Behaviours\RoutableTrait;
-use WellCommerce\Bundle\RoutingBundle\Entity\RoutableSubjectInterface;
+use WellCommerce\Bundle\CommonBundle\ORM\LocaleAwareInterface;
+use WellCommerce\Bundle\CommonBundle\Entity\Behaviours\RoutableTrait;
+use WellCommerce\Bundle\CommonBundle\Entity\RoutableSubjectInterface;
 
 /**
  * Class ProductStatusTranslation
@@ -35,7 +35,7 @@ class ProductStatusTranslation implements LocaleAwareInterface, RoutableSubjectI
     protected $name;
 
     /**
-     * @var ProductStatusRoute|\WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface
+     * @var ProductStatusRoute|\WellCommerce\Bundle\CommonBundle\Entity\RouteInterface
      */
     protected $route;
 
@@ -77,7 +77,7 @@ class ProductStatusTranslation implements LocaleAwareInterface, RoutableSubjectI
     }
 
     /**
-     * @return ProductRoute|\WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface
+     * @return ProductRoute|\WellCommerce\Bundle\CommonBundle\Entity\RouteInterface
      */
     public function getRouteEntity()
     {

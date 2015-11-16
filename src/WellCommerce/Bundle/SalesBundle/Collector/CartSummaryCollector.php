@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\SalesBundle\Collector;
 
-use WellCommerce\Bundle\IntlBundle\Helper\CurrencyHelperInterface;
+use WellCommerce\Bundle\CommonBundle\Helper\CurrencyHelperInterface;
 use WellCommerce\Bundle\SalesBundle\Entity\CartInterface;
 use WellCommerce\Bundle\SalesBundle\Entity\ShippingMethodCostInterface;
 

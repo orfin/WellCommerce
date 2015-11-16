@@ -22,7 +22,7 @@ root:
 
 remove_trailing_slash:
     path: /{url}
-    defaults: { _controller: WellCommerceRoutingBundle:Redirecting:removeTrailingSlash }
+    defaults: { _controller: WellCommerceCommonBundle:Redirecting:removeTrailingSlash }
     requirements:
         url: .*/$
     methods: [GET]

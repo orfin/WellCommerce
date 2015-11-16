@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\CatalogBundle\Manager\Admin;
 
 use Doctrine\Common\Collections\Criteria;
-use WellCommerce\Bundle\CatalogBundle\Entity\AttributeGroupInterface;
+use WellCommerce\Bundle\CatalogBundle\Entity\Attribute\GroupInterface;
 use WellCommerce\Bundle\CatalogBundle\Entity\AttributeInterface;
 use WellCommerce\Bundle\CatalogBundle\Entity\AttributeValueInterface;
 use WellCommerce\Bundle\CatalogBundle\Exception\AttributeGroupNotFoundException;
@@ -127,7 +127,7 @@ class AttributeManager extends AbstractAdminManager
      *
      * @param int $id
      *
-     * @return AttributeGroupInterface
+     * @return GroupInterface
      */
     protected function findAttributeGroup($id)
     {
@@ -142,12 +142,12 @@ class AttributeManager extends AbstractAdminManager
     /**
      * Creates an attribute
      *
-     * @param string                  $name
-     * @param AttributeGroupInterface $group
+     * @param string         $name
+     * @param GroupInterface $group
      *
      * @return \WellCommerce\Bundle\CatalogBundle\Entity\AttributeInterface
      */
-    protected function createNewAttribute($name, AttributeGroupInterface $group)
+    protected function createNewAttribute($name, GroupInterface $group)
     {
         $attribute = $this->initResource();
         $attribute->setAttributeGroup($group);

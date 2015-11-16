@@ -15,7 +15,7 @@ namespace WellCommerce\Bundle\CmsBundle\DataFixtures\ORM;
 use Doctrine\Common\Persistence\ObjectManager;
 use WellCommerce\Bundle\CmsBundle\Entity\Page;
 use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
-use WellCommerce\Bundle\RoutingBundle\Helper\Sluggable;
+use WellCommerce\Bundle\CommonBundle\Helper\Sluggable;
 
 /**
  * Class LoadPageData

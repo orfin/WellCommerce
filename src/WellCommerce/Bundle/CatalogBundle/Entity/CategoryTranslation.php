@@ -4,9 +4,9 @@ namespace WellCommerce\Bundle\CatalogBundle\Entity;
 
 use Knp\DoctrineBehaviors\Model\Translatable\Translation;
 use WellCommerce\Bundle\CoreBundle\Entity\Meta;
-use WellCommerce\Bundle\IntlBundle\ORM\LocaleAwareInterface;
-use WellCommerce\Bundle\RoutingBundle\Entity\Behaviours\RoutableTrait;
-use WellCommerce\Bundle\RoutingBundle\Entity\RoutableSubjectInterface;
+use WellCommerce\Bundle\CommonBundle\ORM\LocaleAwareInterface;
+use WellCommerce\Bundle\CommonBundle\Entity\Behaviours\RoutableTrait;
+use WellCommerce\Bundle\CommonBundle\Entity\RoutableSubjectInterface;
 
 /**
  * Class CategoryTranslation
@@ -116,7 +116,7 @@ class CategoryTranslation implements RoutableSubjectInterface, LocaleAwareInterf
     }
 
     /**
-     * @return CategoryRoute|\WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface
+     * @return CategoryRoute|\WellCommerce\Bundle\CommonBundle\Entity\RouteInterface
      */
     public function getRouteEntity()
     {

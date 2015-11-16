@@ -1,9 +1,0 @@
-WellCommerce\Bundle\IntlBundle\Entity\DictionaryTranslation:
-    type: entity
-    table: dictionary_translation
-    fields:
-        value:
-            type: string
-            length: 255
-            nullable: false
-            precision: 0

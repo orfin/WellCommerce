@@ -64,7 +64,7 @@ class ProductDataSetQueryBuilder extends BaseProductDataSetQueryBuilder
     private function addCurrencyRateConditions(QueryBuilder $queryBuilder)
     {
         $queryBuilder->leftJoin(
-            'WellCommerce\Bundle\IntlBundle\Entity\CurrencyRate',
+            'WellCommerce\Bundle\CommonBundle\Entity\CurrencyRate',
             'currency_rate',
             Expr\Join::WITH,
             'currency_rate.currencyFrom = product.sellPrice.currency AND currency_rate.currencyTo = :targetCurrency'
