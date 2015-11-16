@@ -61,7 +61,7 @@
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
-        <service id="cart.form_builder" class="WellCommerce\Bundle\SalesBundle\Form\CartFormBuilder">
+        <service id="cart.form_builder" class="WellCommerce\Bundle\SalesBundle\Form\Front\CartFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
             <argument type="service" id="cart_product.event_dispatcher"/>

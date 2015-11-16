@@ -22,11 +22,11 @@
             </call>
         </service>
 
-        <service id="coupon.dataset.query_builder" class="WellCommerce\Bundle\PromotionBundle\DataSet\CouponDataSetQueryBuilder" public="false">
+        <service id="coupon.dataset.query_builder" class="WellCommerce\Bundle\PromotionBundle\DataSet\Admin\CouponDataSetQueryBuilder" public="false">
             <argument type="service" id="coupon.repository"/>
         </service>
 
-        <service id="coupon.dataset.admin" class="WellCommerce\Bundle\PromotionBundle\DataSet\CouponDataSet">
+        <service id="coupon.dataset.admin" class="WellCommerce\Bundle\PromotionBundle\DataSet\Admin\CouponDataSet">
             <argument type="service" id="coupon.dataset.query_builder"/>
             <argument type="service" id="dataset.manager"/>
             <argument type="service" id="coupon.event_dispatcher"/>

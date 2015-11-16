@@ -36,18 +36,18 @@
             <argument>WellCommerceSalesBundle:ShippingMethodCost</argument>
         </service>
 
-        <service id="shipping_method.dataset.query_builder.admin" class="WellCommerce\Bundle\SalesBundle\DataSet\ShippingMethodDataSetQueryBuilder" public="false">
+        <service id="shipping_method.dataset.query_builder.admin" class="WellCommerce\Bundle\SalesBundle\DataSet\Admin\ShippingMethodDataSetQueryBuilder" public="false">
             <argument type="service" id="shipping_method.repository"/>
         </service>
 
-        <service id="shipping_method.dataset" class="WellCommerce\Bundle\SalesBundle\DataSet\ShippingMethodDataSet">
+        <service id="shipping_method.dataset" class="WellCommerce\Bundle\SalesBundle\DataSet\Admin\ShippingMethodDataSet">
             <argument type="service" id="shipping_method.dataset.query_builder.admin"/>
             <argument type="service" id="dataset.manager"/>
             <argument type="service" id="shipping_method.event_dispatcher"/>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
-        <service id="shipping_method.dataset.query_builder" class="WellCommerce\Bundle\SalesBundle\DataSet\ShippingMethodDataSetQueryBuilder" public="false">
+        <service id="shipping_method.dataset.query_builder" parent="shipping_method.dataset.query_builder.admin" public="false">
             <argument type="service" id="shipping_method.repository"/>
         </service>
 
@@ -60,7 +60,7 @@
             </call>
         </service>
 
-        <service id="shipping_method.form_builder" class="WellCommerce\Bundle\SalesBundle\Form\ShippingMethodFormBuilder">
+        <service id="shipping_method.form_builder" class="WellCommerce\Bundle\SalesBundle\Form\Admin\ShippingMethodFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
             <argument type="service" id="shipping_method.event_dispatcher"/>

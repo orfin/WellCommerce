@@ -73,7 +73,7 @@
             <tag name="dataset.transformer" alias="order_client"/>
         </service>
 
-        <service id="form.order_product_collection.data_transformer" class="WellCommerce\Bundle\SalesBundle\Form\Admin\DataTransformer\OrderProductCollectionToArrayTransformer" scope="prototype">
+        <service id="form.order_product_collection.data_transformer" class="WellCommerce\Bundle\SalesBundle\Form\DataTransformer\OrderProductCollectionToArrayTransformer" scope="prototype">
             <argument type="service" id="doctrine.helper"/>
             <call method="setOrderProductManager">
                 <argument type="service" id="order_product.manager.admin"/>

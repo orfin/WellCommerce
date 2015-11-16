@@ -44,6 +44,10 @@ common:
         valid_from: Valid from
         valid_to: Valid to
         enabled: Enabled
+        preview: Preview
+        extension: Extension
+        mime: MIME
+        size: Size
         publish: Published
         hierarchy: Hierarchy
         password: Password
