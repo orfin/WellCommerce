@@ -13,10 +13,10 @@
 namespace WellCommerce\Bundle\CatalogBundle\Entity;
 
 use Knp\DoctrineBehaviors\Model\Translatable\Translation;
-use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\MetaDataTrait;
-use WellCommerce\Bundle\CommonBundle\ORM\LocaleAwareInterface;
 use WellCommerce\Bundle\CommonBundle\Entity\Behaviours\RoutableTrait;
 use WellCommerce\Bundle\CommonBundle\Entity\RoutableSubjectInterface;
+use WellCommerce\Bundle\CommonBundle\ORM\LocaleAwareInterface;
+use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\MetaDataTrait;
 
 /**
  * Class ProductStatusTranslation

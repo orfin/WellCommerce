@@ -17,14 +17,14 @@ use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 use WellCommerce\Bundle\CatalogBundle\Entity\Attribute\GroupInterface;
+use WellCommerce\Bundle\CommonBundle\Entity\ShopCollectionAwareTrait;
+use WellCommerce\Bundle\CommonBundle\Entity\TaxInterface;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\EnableableTrait;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\PhotoTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\Dimension;
 use WellCommerce\Bundle\CoreBundle\Entity\DiscountablePrice;
 use WellCommerce\Bundle\CoreBundle\Entity\HierarchyAwareTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\Price;
-use WellCommerce\Bundle\CommonBundle\Entity\ShopCollectionAwareTrait;
-use WellCommerce\Bundle\CommonBundle\Entity\TaxInterface;
 
 /**
  * Class Product

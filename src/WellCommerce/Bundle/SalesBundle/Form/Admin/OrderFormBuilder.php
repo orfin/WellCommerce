@@ -89,14 +89,14 @@ class OrderFormBuilder extends AbstractFormBuilder
             'label' => $this->trans('client.heading.billing_address'),
         ]));
 
-        $shippingMethod = $paymentShippingData->addChild($this->getElement('select', [
+        $paymentShippingData->addChild($this->getElement('select', [
             'name'        => 'shippingMethod',
             'label'       => $this->trans('order.label.shipping_method'),
             'options'     => $this->getShippingMethodOptions($shippingMethodsCollection, $currentOrder),
             'transformer' => $this->getRepositoryTransformer('entity', $this->get('shipping_method.repository'))
         ]));
 
-        $paymentMethod = $paymentShippingData->addChild($this->getElement('select', [
+        $paymentShippingData->addChild($this->getElement('select', [
             'name'        => 'paymentMethod',
             'label'       => $this->trans('order.label.payment_method'),
             'options'     => $this->getPaymentMethodOptions($shippingMethodsCollection, $currentOrder),

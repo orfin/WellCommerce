@@ -11,9 +11,9 @@
  */
 namespace WellCommerce\Bundle\CommonBundle\Form\Admin;
 
+use WellCommerce\Bundle\CommonBundle\Repository\CurrencyRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
-use WellCommerce\Bundle\CommonBundle\Repository\CurrencyRepositoryInterface;
 
 /**
  * Class CurrencyFormBuilder

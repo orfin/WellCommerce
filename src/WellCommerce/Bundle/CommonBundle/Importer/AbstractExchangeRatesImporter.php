@@ -12,10 +12,10 @@
 
 namespace WellCommerce\Bundle\CommonBundle\Importer;
 
-use WellCommerce\Bundle\CoreBundle\Helper\Doctrine\DoctrineHelperInterface;
 use WellCommerce\Bundle\CommonBundle\Entity\CurrencyRate;
 use WellCommerce\Bundle\CommonBundle\Repository\CurrencyRateRepositoryInterface;
 use WellCommerce\Bundle\CommonBundle\Repository\CurrencyRepositoryInterface;
+use WellCommerce\Bundle\CoreBundle\Helper\Doctrine\DoctrineHelperInterface;
 
 /**
  * Class AbstractExchangeRatesImporter

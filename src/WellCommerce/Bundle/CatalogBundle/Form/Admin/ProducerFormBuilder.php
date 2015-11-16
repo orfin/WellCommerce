@@ -39,7 +39,7 @@ class ProducerFormBuilder extends AbstractFormBuilder
 
         $name = $languageData->addChild($this->getElement('text_field', [
             'name'  => 'name',
-            'label' => $this->trans('producer.label.name'),
+            'label' => $this->trans('common.label.name'),
         ]));
 
         $languageData->addChild($this->getElement('slug_field', [
@@ -52,7 +52,7 @@ class ProducerFormBuilder extends AbstractFormBuilder
 
         $metaData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'meta_data',
-            'label' => $this->trans('fieldset.meta.label')
+            'label' => $this->trans('common.fieldset.meta')
         ]));
 
         $languageData = $metaData->addChild($this->getElement('language_fieldset', [
@@ -63,22 +63,22 @@ class ProducerFormBuilder extends AbstractFormBuilder
 
         $languageData->addChild($this->getElement('text_field', [
             'name'  => 'meta.title',
-            'label' => $this->trans('meta.title.label')
+            'label' => $this->trans('common.label.meta.title')
         ]));
 
         $languageData->addChild($this->getElement('text_field', [
             'name'  => 'meta.keywords',
-            'label' => $this->trans('meta.keywords.label'),
+            'label' => $this->trans('common.label.meta.keywords'),
         ]));
 
         $languageData->addChild($this->getElement('text_area', [
             'name'  => 'meta.description',
-            'label' => $this->trans('meta.description.label'),
+            'label' => $this->trans('common.label.meta.description'),
         ]));
 
         $mediaData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'media_data',
-            'label' => $this->trans('fieldset.media')
+            'label' => $this->trans('common.fieldset.photos')
         ]));
 
         $mediaData->addChild($this->getElement('image', [
@@ -95,24 +95,24 @@ class ProducerFormBuilder extends AbstractFormBuilder
 
         $delivererData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'deliverers_data',
-            'label' => $this->trans('producer.deliverers.label')
+            'label' => $this->trans('producer.fieldset.deliverers')
         ]));
 
         $delivererData->addChild($this->getElement('multi_select', [
             'name'        => 'deliverers',
-            'label'       => $this->trans('deliverers'),
+            'label'       => $this->trans('producer.label.deliverers'),
             'options'     => $this->get('deliverer.dataset.admin')->getResult('select'),
             'transformer' => $this->getRepositoryTransformer('collection', $this->get('deliverer.repository'))
         ]));
 
         $shopsData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'shops_data',
-            'label' => $this->trans('fieldset.shops.label')
+            'label' => $this->trans('common.fieldset.shops')
         ]));
 
         $shopsData->addChild($this->getElement('multi_select', [
             'name'        => 'shops',
-            'label'       => $this->trans('shops.label'),
+            'label'       => $this->trans('common.label.shops'),
             'options'     => $this->get('shop.dataset.admin')->getResult('select'),
             'transformer' => $this->getRepositoryTransformer('collection', $this->get('shop.repository'))
         ]));

@@ -14,12 +14,12 @@ namespace WellCommerce\Bundle\SalesBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
+use WellCommerce\Bundle\CommonBundle\DataFixtures\ORM\LoadCurrencyData;
+use WellCommerce\Bundle\CommonBundle\DataFixtures\ORM\LoadTaxData;
 use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
 use WellCommerce\Bundle\CoreBundle\Entity\Price;
-use WellCommerce\Bundle\CommonBundle\DataFixtures\ORM\LoadCurrencyData;
 use WellCommerce\Bundle\SalesBundle\Entity\ShippingMethodCost;
 use WellCommerce\Bundle\SalesBundle\Entity\ShippingMethodInterface;
-use WellCommerce\Bundle\CommonBundle\DataFixtures\ORM\LoadTaxData;
 
 /**
  * Class LoadShippingData

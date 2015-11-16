@@ -40,7 +40,7 @@ class AttributeGroupFormBuilder extends AbstractFormBuilder
 
         $languageData->addChild($this->getElement('text_field', [
             'name'  => 'name',
-            'label' => $this->trans('attribute_group.label.name'),
+            'label' => $this->trans('common.label.name'),
         ]));
 
         $attributeData = $form->addChild($this->getElement('nested_fieldset', [

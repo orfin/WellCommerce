@@ -31,6 +31,21 @@ availability:
         edit: Edit a status
 
 category:
+    form:
+        fieldset:
+            general: General
+            meta: Meta
+            shops: Shops
+            description: Description
+    label:
+        shops: Available in shops
+        hierarchy: Hierarchy
+        enabled: Enabled
+        name: Name
+        slug: Slug
+        parent: Parent category
+        short_description: Short description
+        description: Description
     heading:
         index: Categories
         add: Create a new category
@@ -66,6 +81,7 @@ product:
             statuses: Statuses
             attributes: Variants
             shops: Shops
+            description: Description
     comment:
         enabled: Enable product's visibility
     heading:
@@ -78,16 +94,35 @@ product:
         slug: Slug
         enabled: Enabled
         sku: SKU
+        statuses: Product's statuses
+        shops: Available in shops
         categories: Categories
         gross_amount: Gross price
         stock: Stock
         weight: Weight
         producer: Producer
+        currency: Currency
         manufactured_by: by
         shipping_cost: Shipping costs
         availability: Product's availability
         quantity: Quantity
         unit: Unit
+        package_size: Package size
+        track_stock: Track stock
+        buy_price:
+            settings: Buy prices configuration
+            currency: Currency
+            tax: Tax
+            gross_amount: Gross price
+            discounted_gross_amount: Special gross price
+        sell_price:
+            settings: Sell prices configuration
+            currency: Currency
+            tax: Tax
+            gross_amount: Standard price
+            discounted_gross_amount: Discounted price
+            discount_valid_from: Valid from
+            discount_valid_to: Valid to
         dimension:
             width: Width
             height: Height
@@ -95,6 +130,8 @@ product:
         layered_navigation:
             price: Filter by price
             brand: Filter by brand
+        short_description: Short description
+        description: Description
     button:
         filter: Filter results
     heading:

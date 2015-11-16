@@ -12,9 +12,9 @@
 namespace WellCommerce\Bundle\CommonBundle\Form\Admin;
 
 use Packagist\Api\Result\Package\Version;
+use WellCommerce\Bundle\CommonBundle\Helper\PackageHelperInterface;
 use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
-use WellCommerce\Bundle\CommonBundle\Helper\PackageHelperInterface;
 
 /**
  * Class PackageFormBuilder

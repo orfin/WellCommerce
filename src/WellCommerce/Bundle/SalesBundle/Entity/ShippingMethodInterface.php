@@ -13,11 +13,11 @@
 namespace WellCommerce\Bundle\SalesBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
+use WellCommerce\Bundle\CommonBundle\Entity\CurrencyInterface;
+use WellCommerce\Bundle\CommonBundle\Entity\TaxAwareInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
-use WellCommerce\Bundle\CommonBundle\Entity\CurrencyInterface;
-use WellCommerce\Bundle\CommonBundle\Entity\TaxAwareInterface;
 
 /**
  * Interface ShippingMethodInterface

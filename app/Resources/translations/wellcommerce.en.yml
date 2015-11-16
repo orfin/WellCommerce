@@ -6,7 +6,7 @@
 # For the full copyright and license information,
 # please view the LICENSE file that was distributed with this source code.
 
-admin:
+common:
     button:
         add: Add
         save: 'Save changes'
@@ -14,7 +14,6 @@ admin:
         save_and_continue: 'Save and continue'
         save_and_add_another: 'Save and add another'
         back: Return
-form:
     help:
         required_fields: '* required fields'
     fieldset:
@@ -24,11 +23,18 @@ form:
         shops: Shops
         prices: Prices
         discount_settings: Discount settings
-common:
+        general: General
+        photos: Photos
+        meta: Meta
+        shops: Shops
+        categories: Categories
+        description: Description
+        prices: Prices
     label:
         id: ID
         name: Name
         currency: Currency
+        short_description: Short description
         description: Description
         code: Code
         slug: Slug
@@ -41,9 +47,32 @@ common:
         publish: Published
         hierarchy: Hierarchy
         password: Password
+        producer: Producer
         tax: Tax
+        stock: Stock
+        categories: Categories
+        sku: SKU
         default_order_status: Default order status
         url: URL address
+        shops: Available in shops
+        meta:
+            title: Meta title
+            keywords: Meta keywords
+            description: Meta description
+        dimension:
+            width: Width
+            height: Height
+            depth: Depth
+            length: Length
+            weight: Weight
+        phone: Phone
+        secondary_phone: Secondary phone
+        email: E-mail
+        price: Price
+        discounted_price: Discounted price
+        gross_price: Gross price
+        net_price: Net price
+
 address:
     heading:
         billing_address: Billing address
@@ -61,23 +90,7 @@ address:
 contact_details:
     heading:
         details: Contact details
-    label:
-        phone: Phone
-        secondary_phone: Secondary phone
-        email: E-mail
-meta:
-    label:
-        title: Meta title
-        description: Meta description
-        keywords: Meta keywords
 
-dimension:
-    label:
-        width: Width
-        height: Height
-        depth: Depth
-        length: Length
-        weight: Weight
 price:
     sell_price:
         net:    Sell price net

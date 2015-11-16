@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\CmsBundle\Tests\Controller\Admin;
 
 use Doctrine\Common\Collections\Criteria;
-use Proxies\__CG__\WellCommerce\Bundle\CmsBundle\Entity\Page;
 use WellCommerce\Bundle\CmsBundle\Entity\PageInterface;
 use WellCommerce\Bundle\CoreBundle\Test\Controller\Admin\AbstractAdminControllerTestCase;
 

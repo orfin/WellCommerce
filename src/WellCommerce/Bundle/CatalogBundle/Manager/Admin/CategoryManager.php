@@ -13,9 +13,9 @@
 namespace WellCommerce\Bundle\CatalogBundle\Manager\Admin;
 
 use WellCommerce\Bundle\CatalogBundle\Entity\Category;
-use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
 use WellCommerce\Bundle\CommonBundle\Entity\Locale;
 use WellCommerce\Bundle\CommonBundle\Helper\Sluggable;
+use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
 
 /**
  * Class CategoryManager

@@ -14,11 +14,11 @@ namespace WellCommerce\Bundle\SalesBundle\Manager\Admin;
 
 use WellCommerce\Bundle\CatalogBundle\Entity\ProductInterface;
 use WellCommerce\Bundle\CatalogBundle\Repository\ProductRepositoryInterface;
+use WellCommerce\Bundle\CommonBundle\Helper\TaxHelper;
 use WellCommerce\Bundle\CoreBundle\Entity\Price;
 use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
 use WellCommerce\Bundle\SalesBundle\Entity\OrderInterface;
 use WellCommerce\Bundle\SalesBundle\Entity\OrderProductInterface;
-use WellCommerce\Bundle\CommonBundle\Helper\TaxHelper;
 
 /**
  * Class OrderProductManager

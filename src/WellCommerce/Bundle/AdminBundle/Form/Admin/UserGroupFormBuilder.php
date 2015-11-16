@@ -33,7 +33,7 @@ class UserGroupFormBuilder extends AbstractFormBuilder
 
         $requiredData->addChild($this->getElement('text_field', [
             'name'  => 'name',
-            'label' => $this->trans('user_group.label.name'),
+            'label' => $this->trans('common.label.name'),
         ]));
 
 

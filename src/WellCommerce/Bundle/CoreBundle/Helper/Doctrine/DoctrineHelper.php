@@ -95,13 +95,14 @@ class DoctrineHelper implements DoctrineHelperInterface
         $metadata = $this->getClassMetadata($className);
         if ($metadata instanceof ClassMetadata) {
             $connection = $entityManager->getConnection();
-            $platform   = $connection->getDatabasePlatform();
             $connection->beginTransaction();
             $table = $metadata->getTableName();
 
             try {
-                $table = $connection->quoteIdentifier($table);
-                $connection->executeUpdate('DELETE FROM ' . $table);
+                $sql  = 'DELETE FROM :table';
+                $stmt = $connection->prepare($sql);
+                $stmt->bindValue('table', $table);
+                $stmt->execute();
                 $connection->commit();
 
                 return true;

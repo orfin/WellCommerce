@@ -13,9 +13,9 @@
 namespace WellCommerce\Bundle\CatalogBundle\Controller\Front;
 
 use WellCommerce\Bundle\CatalogBundle\Entity\ProducerInterface;
+use WellCommerce\Bundle\CommonBundle\Breadcrumb\BreadcrumbItem;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
-use WellCommerce\Bundle\CommonBundle\Breadcrumb\BreadcrumbItem;
 
 /**
  * Class ProducerController

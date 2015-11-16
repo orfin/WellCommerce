@@ -33,7 +33,7 @@ class UserGroupDataGrid extends AbstractDataGrid
     {
         $collection->add(new Column([
             'id'         => 'id',
-            'caption'    => $this->trans('user_group.label.id'),
+            'caption'    => $this->trans('common.label.id'),
             'sorting'    => new Sorting([
                 'default_order' => ColumnInterface::SORT_DIR_DESC,
             ]),
@@ -48,7 +48,7 @@ class UserGroupDataGrid extends AbstractDataGrid
 
         $collection->add(new Column([
             'id'      => 'name',
-            'caption' => $this->trans('user_group.label.name'),
+            'caption' => $this->trans('common.label.name'),
         ]));
     }
 }

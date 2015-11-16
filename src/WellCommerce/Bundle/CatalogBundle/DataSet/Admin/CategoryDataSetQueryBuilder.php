@@ -12,10 +12,10 @@
 
 namespace WellCommerce\Bundle\CatalogBundle\DataSet\Admin;
 
+use WellCommerce\Bundle\CommonBundle\Context\ShopContextInterface;
 use WellCommerce\Bundle\DataSetBundle\Conditions\Condition\Eq;
 use WellCommerce\Bundle\DataSetBundle\QueryBuilder\AbstractDataSetQueryBuilder;
 use WellCommerce\Bundle\DataSetBundle\QueryBuilder\DataSetQueryBuilderInterface;
-use WellCommerce\Bundle\CommonBundle\Context\ShopContextInterface;
 
 /**
  * Class CategoryDataSetQueryBuilder

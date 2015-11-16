@@ -12,9 +12,9 @@
 
 namespace WellCommerce\Bundle\CommonBundle\Converter;
 
-use WellCommerce\Bundle\CoreBundle\Helper\Request\RequestHelperInterface;
 use WellCommerce\Bundle\CommonBundle\Entity\CurrencyRate;
 use WellCommerce\Bundle\CommonBundle\Repository\CurrencyRateRepositoryInterface;
+use WellCommerce\Bundle\CoreBundle\Helper\Request\RequestHelperInterface;
 
 /**
  * Class CurrencyConverter

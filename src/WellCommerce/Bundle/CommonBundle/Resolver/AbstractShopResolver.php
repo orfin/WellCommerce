@@ -12,9 +12,9 @@
 
 namespace WellCommerce\Bundle\CommonBundle\Resolver;
 
-use WellCommerce\Bundle\CoreBundle\Helper\Request\RequestHelperInterface;
 use WellCommerce\Bundle\CommonBundle\Context\ShopContextInterface;
 use WellCommerce\Bundle\CommonBundle\Repository\ShopRepositoryInterface;
+use WellCommerce\Bundle\CoreBundle\Helper\Request\RequestHelperInterface;
 
 /**
  * Class AbstractShopResolver

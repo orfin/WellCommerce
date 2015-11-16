@@ -206,12 +206,12 @@ class PageFormBuilder extends AbstractFormBuilder
     {
         $shopsData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'shops_data',
-            'label' => $this->trans('fieldset.shops.label')
+            'label' => $this->trans('form.fieldset.shops')
         ]));
 
         $shopsData->addChild($this->getElement('multi_select', [
             'name'        => 'shops',
-            'label'       => $this->trans('shops.label'),
+            'label'       => $this->trans('form.label.shops'),
             'options'     => $this->get('shop.dataset.admin')->getResult('select'),
             'transformer' => $this->getRepositoryTransformer('collection', $this->get('shop.repository'))
         ]));

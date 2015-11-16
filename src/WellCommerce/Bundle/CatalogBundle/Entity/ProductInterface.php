@@ -14,15 +14,15 @@ namespace WellCommerce\Bundle\CatalogBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\CatalogBundle\Entity\Attribute\GroupInterface;
+use WellCommerce\Bundle\CommonBundle\Entity\ShopCollectionAwareInterface;
+use WellCommerce\Bundle\CommonBundle\Entity\TaxInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\Dimension;
 use WellCommerce\Bundle\CoreBundle\Entity\DiscountablePrice;
 use WellCommerce\Bundle\CoreBundle\Entity\Price;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
-use WellCommerce\Bundle\CommonBundle\Entity\ShopCollectionAwareInterface;
 use WellCommerce\Bundle\SalesBundle\Calculator\ShippingCalculatorSubjectInterface;
-use WellCommerce\Bundle\CommonBundle\Entity\TaxInterface;
 
 /**
  * Interface ProductInterface

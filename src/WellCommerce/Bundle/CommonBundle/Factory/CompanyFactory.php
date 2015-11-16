@@ -12,9 +12,9 @@
 
 namespace WellCommerce\Bundle\CommonBundle\Factory;
 
-use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 use WellCommerce\Bundle\CommonBundle\Entity\Company;
 use WellCommerce\Bundle\CommonBundle\Entity\CompanyAddress;
+use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 
 /**
  * Class CompanyFactory

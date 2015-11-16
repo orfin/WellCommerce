@@ -12,11 +12,11 @@
 
 namespace WellCommerce\Bundle\CatalogBundle\DataSet\Admin;
 
+use WellCommerce\Bundle\CommonBundle\Context\ShopContextInterface;
 use WellCommerce\Bundle\DataSetBundle\Column\ColumnCollection;
 use WellCommerce\Bundle\DataSetBundle\QueryBuilder\AbstractDataSetQueryBuilder;
 use WellCommerce\Bundle\DataSetBundle\QueryBuilder\DataSetQueryBuilderInterface;
 use WellCommerce\Bundle\DataSetBundle\Request\DataSetRequestInterface;
-use WellCommerce\Bundle\CommonBundle\Context\ShopContextInterface;
 
 /**
  * Class ProductDataSetQueryBuilder

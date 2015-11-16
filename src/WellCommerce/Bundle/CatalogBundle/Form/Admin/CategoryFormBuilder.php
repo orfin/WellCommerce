@@ -39,7 +39,7 @@ class CategoryFormBuilder extends AbstractFormBuilder
 
         $name = $languageData->addChild($this->getElement('text_field', [
             'name'  => 'name',
-            'label' => $this->trans('category.label.name'),
+            'label' => $this->trans('common.label.name'),
         ]));
 
         $languageData->addChild($this->getElement('slug_field', [
@@ -52,14 +52,14 @@ class CategoryFormBuilder extends AbstractFormBuilder
 
         $requiredData->addChild($this->getElement('checkbox', [
             'name'    => 'enabled',
-            'label'   => $this->trans('category.label.enabled'),
-            'comment' => $this->trans('category.comment.enabled'),
+            'label'   => $this->trans('common.label.enabled'),
+            'comment' => $this->trans('common.comment.enabled'),
             'default' => 1
         ]));
 
         $requiredData->addChild($this->getElement('text_field', [
             'name'  => 'hierarchy',
-            'label' => $this->trans('category.label.hierarchy'),
+            'label' => $this->trans('common.label.hierarchy'),
         ]));
 
         $requiredData->addChild($this->getElement('tree', [
@@ -76,7 +76,7 @@ class CategoryFormBuilder extends AbstractFormBuilder
 
         $descriptionData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'description_data',
-            'label' => $this->trans('fieldset.description')
+            'label' => $this->trans('category.form.fieldset.description')
         ]));
 
         $languageData = $descriptionData->addChild($this->getElement('language_fieldset', [
@@ -87,17 +87,17 @@ class CategoryFormBuilder extends AbstractFormBuilder
 
         $languageData->addChild($this->getElement('rich_text_editor', [
             'name'  => 'shortDescription',
-            'label' => $this->trans('category.short_description.label')
+            'label' => $this->trans('common.label.short_description')
         ]));
 
         $languageData->addChild($this->getElement('rich_text_editor', [
             'name'  => 'description',
-            'label' => $this->trans('category.description.label'),
+            'label' => $this->trans('common.label.description'),
         ]));
 
         $seoData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'seo_data',
-            'label' => $this->trans('fieldset.seo')
+            'label' => $this->trans('common.fieldset.meta')
         ]));
 
         $languageData = $seoData->addChild($this->getElement('language_fieldset', [
@@ -108,27 +108,27 @@ class CategoryFormBuilder extends AbstractFormBuilder
 
         $languageData->addChild($this->getElement('text_field', [
             'name'  => 'meta.title',
-            'label' => $this->trans('meta.label.title')
+            'label' => $this->trans('common.label.meta.title')
         ]));
 
         $languageData->addChild($this->getElement('text_field', [
             'name'  => 'meta.keywords',
-            'label' => $this->trans('meta.label.keywords'),
+            'label' => $this->trans('common.label.meta.keywords'),
         ]));
 
         $languageData->addChild($this->getElement('text_area', [
             'name'  => 'meta.description',
-            'label' => $this->trans('meta.label.description'),
+            'label' => $this->trans('common.label.meta.description'),
         ]));
 
         $shopsData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'shops_data',
-            'label' => $this->trans('fieldset.shops.label')
+            'label' => $this->trans('common.fieldset.shops')
         ]));
 
         $shopsData->addChild($this->getElement('multi_select', [
             'name'        => 'shops',
-            'label'       => $this->trans('shop.label.shops'),
+            'label'       => $this->trans('common.label.shops'),
             'options'     => $this->get('shop.dataset.admin')->getResult('select'),
             'transformer' => $this->getRepositoryTransformer('collection', $this->get('shop.repository'))
         ]));

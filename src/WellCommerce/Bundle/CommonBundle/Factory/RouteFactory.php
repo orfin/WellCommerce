@@ -12,9 +12,9 @@
 
 namespace WellCommerce\Bundle\CommonBundle\Factory;
 
+use WellCommerce\Bundle\CommonBundle\Entity\Route;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 use WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface;
-use WellCommerce\Bundle\CommonBundle\Entity\Route;
 
 /**
  * Class RouteFactory
