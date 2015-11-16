@@ -73,19 +73,11 @@ doctrine:
                         QUARTER: DoctrineExtensions\Query\Mysql\Quarter
                         YEAR: DoctrineExtensions\Query\Mysql\Year
                         DATE_FORMAT: DoctrineExtensions\Query\Mysql\DateFormat
+                        FIELD: DoctrineExtensions\Query\Mysql\Field
                 filters:
                     locale:
-                        class:   WellCommerce\Bundle\IntlBundle\ORM\Filter\LocaleFilter
+                        class:   WellCommerce\Bundle\CommonBundle\ORM\Filter\LocaleFilter
                         enabled: false
-
-
-# Swiftmailer Configuration
-swiftmailer:
-    transport: "%mailer_transport%"
-    host:      "%mailer_host%"
-    username:  "%mailer_user%"
-    password:  "%mailer_password%"
-    spool:     { type: memory }
 
 doctrine_migrations:
     dir_name:   %kernel.root_dir%/sql/migrations
@@ -94,7 +86,7 @@ doctrine_migrations:
     name: WellCommerce Migrations
 
 parameters:
-    knp.doctrine_behaviors.blameable_listener.user_entity: WellCommerce\Bundle\UserBundle\Entity\User
+    knp.doctrine_behaviors.blameable_listener.user_entity: WellCommerce\Bundle\AdminBundle\Entity\User
 
 fos_js_routing:
     router: router.default

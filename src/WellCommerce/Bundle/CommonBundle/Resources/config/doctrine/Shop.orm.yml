@@ -1,0 +1,64 @@
+WellCommerce\Bundle\CommonBundle\Entity\Shop:
+    type: entity
+    table: shop
+    repositoryClass: WellCommerce\Bundle\CommonBundle\Repository\ShopRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: IDENTITY
+    embedded:
+        mailerConfiguration:
+            class: WellCommerce\Bundle\CoreBundle\Entity\MailerConfiguration
+            columnPrefix: mailer_configuration_
+    fields:
+        name:
+            type: string
+            length: 255
+            nullable: false
+        url:
+            type: string
+            length: 255
+            unique: true
+        defaultCountry:
+            type: string
+            length: 3
+            nullable: true
+            column: default_country
+        defaultCurrency:
+            type: string
+            length: 16
+            nullable: false
+            column: default_currency
+    manyToOne:
+        company:
+            targetEntity: WellCommerce\Bundle\CommonBundle\Entity\Company
+            fetch: LAZY
+            joinColumns:
+                company_id:
+                    referencedColumnName: id
+                    onDelete: 'SET NULL'
+        theme:
+            targetEntity: WellCommerce\Bundle\LayoutBundle\Entity\Theme
+            fetch: LAZY
+            joinColumns:
+                theme_id:
+                    referencedColumnName: id
+                    onDelete: 'SET NULL'
+    manyToMany:
+        products:
+            targetEntity: WellCommerce\Bundle\CatalogBundle\Entity\Product
+            fetch: LAZY
+            mappedBy: shops
+        categories:
+            targetEntity: WellCommerce\Bundle\CatalogBundle\Entity\Category
+            fetch: LAZY
+            mappedBy: shops
+        producers:
+            targetEntity: WellCommerce\Bundle\CatalogBundle\Entity\Producer
+            fetch: LAZY
+            mappedBy: shops
+        pages:
+            targetEntity: WellCommerce\Bundle\CmsBundle\Entity\Page
+            fetch: LAZY
+            mappedBy: shops

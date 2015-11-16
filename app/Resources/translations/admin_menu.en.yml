@@ -25,6 +25,7 @@ payment_method: 'Payment methods'
 producer: Producers
 product: Products
 product_status: 'Product statuses'
+product_review: 'Product reviews'
 promotion: Promotions
 promotions: Promotions
 reports: Reports
@@ -46,3 +47,4 @@ sales_report: Sales report
 page: Pages
 user_management: Users management
 user: Users
+user_group: Users groups

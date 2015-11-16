@@ -1,19 +1,16 @@
 {% trans_default_domain "wellcommerce" %}
 {% import "WellCommerceFormBundle:Front/Common:macros.html.twig" as macros %}
-{% include 'WellCommerceWebBundle:Front/Common:flashes.html.twig' %}
 <div class="well-form">
     <h4>{% trans %}client.heading.register{% endtrans %}<small>{% trans %}form.help.required_fields{% endtrans %}</small></h4>
 
+    {% include 'WellCommerceCommonBundle:Front/Common:flashes.html.twig' %}
+
     {{ macros.form_begin(form, 'signup-form') }}
 
-        {{ macros.element(form.getChildren().get('firstName')) }}
-
-        {{ macros.element(form.getChildren().get('lastName')) }}
-
-        {{ macros.element(form.getChildren().get('phone')) }}
-
-        {{ macros.element(form.getChildren().get('email')) }}
-
+        {{ macros.element(form.getChildren().get('contactDetails').getChildren().get('contactDetails.firstName')) }}
+        {{ macros.element(form.getChildren().get('contactDetails').getChildren().get('contactDetails.lastName')) }}
+        {{ macros.element(form.getChildren().get('contactDetails').getChildren().get('contactDetails.phone')) }}
+        {{ macros.element(form.getChildren().get('username')) }}
         {{ macros.element(form.getChildren().get('password')) }}
 
         <div class="alert alert-sm mtp30">

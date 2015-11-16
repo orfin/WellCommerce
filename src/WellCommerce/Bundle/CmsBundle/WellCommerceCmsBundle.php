@@ -15,7 +15,7 @@ namespace WellCommerce\Bundle\CmsBundle;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * Class WellCommerceUnitBundle
+ * Class WellCommerceCatalogBundle
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */

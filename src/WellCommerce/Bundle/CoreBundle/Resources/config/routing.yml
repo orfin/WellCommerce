@@ -1,0 +1,29 @@
+wellcommerce_admin:
+    resource: "@WellCommerceAdminBundle/Resources/config/routing.xml"
+
+wellcommerce_common:
+    resource: "@WellCommerceCommonBundle/Resources/config/routing.xml"
+
+wellcommerce_catalog:
+    resource: "@WellCommerceCatalogBundle/Resources/config/routing.xml"
+
+wellcommerce_client:
+    resource: "@WellCommerceClientBundle/Resources/config/routing.xml"
+
+wellcommerce_sales:
+    resource: "@WellCommerceSalesBundle/Resources/config/routing.xml"
+
+wellcommerce_promotion:
+    resource: "@WellCommercePromotionBundle/Resources/config/routing.xml"
+
+wellcommerce_unit:
+    resource: "@WellCommerceCatalogBundle/Resources/config/routing.xml"
+
+wellcommerce_report:
+    resource: "@WellCommerceReportBundle/Resources/config/routing.xml"
+
+wellcommerce_layout:
+    resource: "@WellCommerceLayoutBundle/Resources/config/routing.xml"
+
+wellcommerce_cms:
+    resource: "@WellCommerceCmsBundle/Resources/config/routing.xml"

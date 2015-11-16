@@ -46,41 +46,48 @@
         <property name="phone">
             <constraint name="NotNull">
                 <option name="groups">
-                    <value>contact_details</value>
+                    <value>registration</value>
+                    <value>client_settings</value>
+                    <value>order_contact_details</value>
                 </option>
             </constraint>
             <constraint name="NotBlank">
                 <option name="groups">
-                    <value>contact_details</value>
+                    <value>registration</value>
+                    <value>client_settings</value>
+                    <value>order_contact_details</value>
                 </option>
             </constraint>
         </property>
         <property name="secondaryPhone">
             <constraint name="NotNull">
                 <option name="groups">
-                    <value>contact_details</value>
+                    <value>client_settings</value>
+                    <value>order_contact_details</value>
                 </option>
             </constraint>
-            <constraint name="NotBlank">
-                <option name="groups">
-                    <value>contact_details</value>
-                </option>
-            </constraint>
+            <constraint name="NotBlank" />
         </property>
         <property name="email">
             <constraint name="NotNull">
                 <option name="groups">
+                    <value>registration</value>
                     <value>contact_details</value>
+                    <value>order_contact_details</value>
                 </option>
             </constraint>
             <constraint name="NotBlank">
                 <option name="groups">
-                    <value>contact_details</value>
+                    <value>registration</value>
+                    <value>client_settings</value>
+                    <value>order_contact_details</value>
                 </option>
             </constraint>
             <constraint name="Email">
                 <option name="groups">
-                    <value>contact_details</value>
+                    <value>registration</value>
+                    <value>client_settings</value>
+                    <value>order_contact_details</value>
                 </option>
             </constraint>
         </property>
@@ -89,27 +96,26 @@
     <class name="WellCommerce\Bundle\CoreBundle\Entity\Address">
         <property name="firstName">
             <constraint name="NotBlank">
-                <option name="message">address.error.first_name.not_blank</option>
                 <option name="groups">
+                    <value>client_registration</value>
                     <value>address</value>
                 </option>
             </constraint>
             <constraint name="NotNull">
-                <option name="message">address.error.first_name.not_null</option>
                 <option name="groups">
+                    <value>client_registration</value>
                     <value>address</value>
                 </option>
             </constraint>
         </property>
         <property name="lastName">
             <constraint name="NotBlank">
-                <option name="message">address.error.last_name.not_blank</option>
                 <option name="groups">
+                    <value>registration</value>
                     <value>address</value>
                 </option>
             </constraint>
             <constraint name="NotNull">
-                <option name="message">address.error.last_name.not_null</option>
                 <option name="groups">
                     <value>address</value>
                 </option>
@@ -117,13 +123,11 @@
         </property>
         <property name="street">
             <constraint name="NotBlank">
-                <option name="message">address.error.street.not_blank</option>
                 <option name="groups">
                     <value>address</value>
                 </option>
             </constraint>
             <constraint name="NotNull">
-                <option name="message">address.error.street.not_null</option>
                 <option name="groups">
                     <value>address</value>
                 </option>
@@ -131,13 +135,11 @@
         </property>
         <property name="streetNo">
             <constraint name="NotBlank">
-                <option name="message">address.error.street_no.not_blank</option>
                 <option name="groups">
                     <value>address</value>
                 </option>
             </constraint>
             <constraint name="NotNull">
-                <option name="message">address.error.street_no.not_null</option>
                 <option name="groups">
                     <value>address</value>
                 </option>
@@ -145,7 +147,6 @@
         </property>
         <property name="flatNo">
             <constraint name="NotNull">
-                <option name="message">address.error.flat_no.not_blank</option>
                 <option name="groups">
                     <value>address</value>
                 </option>
@@ -153,13 +154,11 @@
         </property>
         <property name="postCode">
             <constraint name="NotBlank">
-                <option name="message">address.error.post_code.not_blank</option>
                 <option name="groups">
                     <value>address</value>
                 </option>
             </constraint>
             <constraint name="NotNull">
-                <option name="message">address.error.post_code.not_null</option>
                 <option name="groups">
                     <value>address</value>
                 </option>
@@ -167,13 +166,11 @@
         </property>
         <property name="city">
             <constraint name="NotBlank">
-                <option name="message">address.error.city.not_blank</option>
                 <option name="groups">
                     <value>address</value>
                 </option>
             </constraint>
             <constraint name="NotNull">
-                <option name="message">address.error.city.not_null</option>
                 <option name="groups">
                     <value>address</value>
                 </option>
@@ -181,12 +178,10 @@
         </property>
         <property name="country">
             <constraint name="Country">
-                <option name="message">address.error.country</option>
                 <option name="groups">
                     <value>address</value>
                 </option>
             </constraint>
         </property>
     </class>
-
 </constraint-mapping>

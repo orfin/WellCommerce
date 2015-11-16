@@ -23,16 +23,24 @@ class ClientLoginBoxController extends AbstractBoxController
 {
     public function indexAction()
     {
-        $form = $this->get('client_login.form_builder.front')->createForm([
-            'name'         => 'login',
-            'ajax_enabled' => false,
-            'action'       => $this->getRouterHelper()->generateUrl('front.client.login_check')
-        ], null);
+        $form = $this->createForm();
 
         return $this->displayTemplate('index', [
             'form'     => $form,
             'elements' => $form->getChildren(),
             'error'    => $this->get('security.authentication_utils')->getLastAuthenticationError()
         ]);
+    }
+
+    /**
+     * @return \WellCommerce\Bundle\FormBundle\Elements\FormInterface
+     */
+    protected function createForm()
+    {
+        return $this->get('client_login.form_builder.front')->createForm([
+            'name'         => 'login',
+            'ajax_enabled' => false,
+            'action'       => $this->getRouterHelper()->generateUrl('front.client.login_check')
+        ], null);
     }
 }

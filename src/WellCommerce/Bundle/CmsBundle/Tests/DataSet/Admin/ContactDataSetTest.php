@@ -23,7 +23,7 @@ class ContactDataSetTest extends AbstractDataSetTestCase
 {
     protected function get()
     {
-        return $this->container->get('contact.dataset');
+        return $this->container->get('contact.dataset.admin');
     }
 
     protected function getColumns()

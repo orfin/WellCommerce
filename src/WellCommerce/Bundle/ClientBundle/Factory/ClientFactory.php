@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\ClientBundle\Factory;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\Bundle\ClientBundle\Entity\Client;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetails;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 
 /**
@@ -29,7 +29,7 @@ class ClientFactory extends AbstractFactory
     public function create()
     {
         $client = new Client();
-        $client->setAddresses(new ArrayCollection());
+        $client->setContactDetails(new ClientContactDetails());
         $client->setConditionsAccepted(true);
         $client->setDiscount(0);
         $client->setNewsletterAccepted(true);

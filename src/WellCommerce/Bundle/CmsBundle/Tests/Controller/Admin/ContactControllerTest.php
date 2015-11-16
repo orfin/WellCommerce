@@ -12,6 +12,8 @@
 
 namespace WellCommerce\Bundle\CmsBundle\Tests\Controller\Admin;
 
+use Doctrine\Common\Collections\Criteria;
+use WellCommerce\Bundle\CmsBundle\Entity\ContactInterface;
 use WellCommerce\Bundle\CoreBundle\Test\Controller\Admin\AbstractAdminControllerTestCase;
 
 /**
@@ -27,7 +29,7 @@ class ContactControllerTest extends AbstractAdminControllerTestCase
         $crawler = $this->client->request('GET', $url);
 
         $this->assertTrue($this->client->getResponse()->isSuccessful());
-        $this->assertEquals(1, $crawler->filter('html:contains("' . $this->trans('heading.contact.list') . '")')->count());
+        $this->assertEquals(1, $crawler->filter('html:contains("' . $this->trans('contact.heading.index') . '")')->count());
         $this->assertEquals(1, $crawler->filter('html:contains("' . $this->jsDataGridClass . '")')->count());
         $this->assertEquals(0, $crawler->filter('html:contains("' . $this->jsFormClass . '")')->count());
     }
@@ -38,24 +40,26 @@ class ContactControllerTest extends AbstractAdminControllerTestCase
         $crawler = $this->client->request('GET', $url);
 
         $this->assertTrue($this->client->getResponse()->isSuccessful());
-        $this->assertEquals(1, $crawler->filter('html:contains("' . $this->trans('heading.contact.add') . '")')->count());
+        $this->assertEquals(1, $crawler->filter('html:contains("' . $this->trans('contact.heading.add') . '")')->count());
         $this->assertEquals(0, $crawler->filter('html:contains("' . $this->jsDataGridClass . '")')->count());
         $this->assertEquals(1, $crawler->filter('html:contains("' . $this->jsFormClass . '")')->count());
     }
 
+
     public function testEditAction()
     {
-        $entity = $this->container->get('contact.repository')->findOneBy([]);
-        $name   = $entity->translate()->getName();
-        $url    = $this->generateUrl('admin.contact.edit', ['id' => $entity->getId()]);
+        $collection = $this->container->get('contact.repository')->matching(new Criteria());
 
-        $crawler = $this->client->request('GET', $url);
+        $collection->map(function (ContactInterface $contact) {
+            $url     = $this->generateUrl('admin.contact.edit', ['id' => $contact->getId()]);
+            $crawler = $this->client->request('GET', $url);
 
-        $this->assertTrue($this->client->getResponse()->isSuccessful());
-        $this->assertEquals(1, $crawler->filter('html:contains("' . $this->trans('heading.contact.edit') . '")')->count());
-        $this->assertEquals(0, $crawler->filter('html:contains("' . $this->jsDataGridClass . '")')->count());
-        $this->assertEquals(1, $crawler->filter('html:contains("' . $this->jsFormClass . '")')->count());
-        $this->assertEquals(1, $crawler->filter('html:contains("' . $name . '")')->count());
+            $this->assertTrue($this->client->getResponse()->isSuccessful());
+            $this->assertEquals(1, $crawler->filter('html:contains("' . $this->trans('contact.heading.edit') . '")')->count());
+            $this->assertEquals(0, $crawler->filter('html:contains("' . $this->jsDataGridClass . '")')->count());
+            $this->assertEquals(1, $crawler->filter('html:contains("' . $this->jsFormClass . '")')->count());
+            $this->assertEquals(1, $crawler->filter('html:contains("' . $contact->translate()->getName() . '")')->count());
+        });
     }
 
     public function testGridAction()

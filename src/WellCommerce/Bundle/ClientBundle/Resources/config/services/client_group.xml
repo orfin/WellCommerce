@@ -3,74 +3,19 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
+    <imports>
+        <import resource="admin/client_group.xml"/>
+    </imports>
+
     <services>
-        <service id="client_group.manager.admin" class="WellCommerce\Bundle\ClientBundle\Manager\Admin\ClientGroupManager">
-            <argument type="service" id="client_group.repository"/>
-            <argument type="service" id="client_group.event_dispatcher"/>
-            <argument type="service" id="client_group.factory"/>
-            <argument type="service" id="client_group.form_builder.admin"/>
-            <argument type="service" id="client_group.datagrid"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-        </service>
-
-        <service id="client_group.controller.admin" class="WellCommerce\Bundle\ClientBundle\Controller\Admin\ClientGroupController">
-            <argument type="service" id="client_group.manager.admin"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-        </service>
-
         <service id="client_group.repository" class="WellCommerce\Bundle\ClientBundle\Repository\ClientGroupRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
             <argument>WellCommerceClientBundle:ClientGroup</argument>
         </service>
 
         <service id="client_group.factory" class="WellCommerce\Bundle\ClientBundle\Factory\ClientGroupFactory" />
 
-        <service id="client_group.event_dispatcher" class="WellCommerce\Bundle\ClientBundle\EventDispatcher\ClientGroupEventDispatcher">
+        <service id="client_group.event_dispatcher" parent="core.event_dispatcher" public="false">
             <argument type="service" id="event_dispatcher"/>
-        </service>
-
-        <service id="client_group.dataset.query_builder" class="WellCommerce\Bundle\ClientBundle\DataSet\ClientGroupDataSetQueryBuilder" public="false">
-            <argument type="service" id="client_group.repository"/>
-        </service>
-
-        <service id="client_group.dataset.loader" class="%dataset.loader.class%">
-            <argument type="service" id="client_group.dataset.query_builder"/>
-            <argument type="service" id="dataset.processor"/>
-        </service>
-
-        <service id="client_group.dataset" class="WellCommerce\Bundle\ClientBundle\DataSet\ClientGroupDataSet">
-            <argument key="identifier">client_group</argument>
-            <argument type="service" id="client_group.dataset.loader"/>
-            <argument type="service" id="client_group.event_dispatcher"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-            <configurator service="dataset.configurator" method="configure"/>
-        </service>
-
-        <service id="client_group.collection" parent="dataset.collection_builder.factory">
-            <argument type="service" id="client_group.dataset"/>
-        </service>
-
-        <service id="client_group.datagrid" class="WellCommerce\Bundle\ClientBundle\DataGrid\ClientGroupDataGrid">
-            <argument key="identifier">client_group</argument>
-            <argument type="service" id="client_group.dataset"/>
-            <argument type="service" id="client_group.event_dispatcher"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-        </service>
-
-        <service id="client_group.form_builder.admin" class="WellCommerce\Bundle\ClientBundle\Form\Admin\ClientGroupFormBuilder">
-            <argument type="service" id="form.resolver.factory"/>
-            <argument type="service" id="form.handler"/>
-            <argument type="service" id="client_group.event_dispatcher"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
         </service>
     </services>
 </container>

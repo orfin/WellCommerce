@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\CoreBundle\Test\DataSet;
 
 use WellCommerce\Bundle\CoreBundle\Test\AbstractTestCase;
-use WellCommerce\Bundle\DataSetBundle\Request\DataSetRequest;
 
 /**
  * Class AbstractDataSetTestCase
@@ -68,15 +67,18 @@ abstract class AbstractDataSetTestCase extends AbstractTestCase
         }
     }
 
-    public function testDatasetReturnsResults()
+    /**
+     * @dataProvider getDataSetContexts
+     */
+    public function testDatasetReturnsResults($contexts)
     {
         $dataset = $this->get();
 
         if (null !== $dataset) {
-            $results = $dataset->getResults($this->getDefaultDataSetRequest());
-
-            $this->assertArrayHasKey('rows', $results);
-            $this->assertArrayHasKey('total', $results);
+            foreach ($contexts as $context) {
+                $results = $dataset->getResult($context, ['order_by' => 'id', 'order_dir' => 'asc', 'limit' => 10]);
+                $this->assertNotNull($results);
+            }
         }
     }
 
@@ -88,8 +90,19 @@ abstract class AbstractDataSetTestCase extends AbstractTestCase
         return (bool)(preg_match($regex, $source));
     }
 
-    protected function getDefaultDataSetRequest()
+    /**
+     * @return array
+     */
+    public function getDataSetContexts()
     {
-        return new DataSetRequest(['order_by' => 'id', 'order_dir' => 'asc', 'limit' => 10]);
+        return [
+            'contexts' => [
+                [
+                    'select',
+                    'array',
+                    'datagrid',
+                ]
+            ],
+        ];
     }
 }

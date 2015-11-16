@@ -3,26 +3,22 @@
 <div class="well-form mbt60">
     <h4>{% trans %}client.heading.contact_details{% endtrans %}<small>{% trans %}form.help.required_fields{% endtrans %}</small></h4>
 
-    {% include 'WellCommerceWebBundle:Front/Common:flashes.html.twig' %}
+    {% include 'WellCommerceCommonBundle:Front/Common:flashes.html.twig' %}
 
-    {{ macros.form_begin(form, 'form-horizontal') }}
-
-        {{ macros.element(form.getChildren().get('phone')) }}
-
-        {{ macros.element(form.getChildren().get('secondaryPhone')) }}
-
-        {{ macros.element(form.getChildren().get('email')) }}
-
+    {{ macros.form_begin(contactDetailsForm, 'form-horizontal') }}
+        {% for element in contactDetailsForm.getChildren().get('contactDetails').getChildren() %}
+            {{ macros.element(element) }}
+        {% endfor %}
         <div class="row mtp20">
             <div class="col-sm-5 col-sm-offset-3">
                 <button type="submit" class="btn btn-primary">{% trans %}form.button.save{% endtrans %}</button>
             </div>
         </div>
-    {{ macros.form_end(form) }}
+    {{ macros.form_end(contactDetailsForm) }}
 </div>
 
 <div class="well-form">
-    <h4>Change password<small>*Requested fields</small></h4>
+    <h4>Change password<small>{% trans %}form.help.required_fields{% endtrans %}</small></h4>
 
     <form class="form-horizontal">
         <div class="form-group requested">

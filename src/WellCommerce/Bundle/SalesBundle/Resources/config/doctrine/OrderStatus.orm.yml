@@ -1,0 +1,21 @@
+WellCommerce\Bundle\SalesBundle\Entity\OrderStatus:
+    type: entity
+    table: order_status
+    repositoryClass: WellCommerce\Bundle\SalesBundle\Repository\OrderStatusRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        enabled:
+            type: boolean
+            nullable: false
+    manyToOne:
+        orderStatusGroup:
+            targetEntity: WellCommerce\Bundle\SalesBundle\Entity\OrderStatusGroup
+            fetch: LAZY
+            joinColumns:
+                order_status_group_id:
+                    referencedColumnName: id
+                    onDelete: CASCADE

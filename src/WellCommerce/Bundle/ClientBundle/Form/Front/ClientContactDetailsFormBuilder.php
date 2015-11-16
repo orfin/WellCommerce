@@ -26,19 +26,34 @@ class ClientContactDetailsFormBuilder extends AbstractFormBuilder
      */
     public function buildForm(FormInterface $form)
     {
-        $form->addChild($this->getElement('text_field', [
-            'name'  => 'phone',
-            'label' => $this->trans('client.label.phone'),
+        $contactDetails = $form->addChild($this->getElement('nested_fieldset', [
+            'name'  => 'contactDetails',
+            'label' => $this->trans('client.heading.contact_details'),
         ]));
 
-        $form->addChild($this->getElement('text_field', [
-            'name'  => 'secondaryPhone',
-            'label' => $this->trans('client.label.secondary_phone'),
+        $contactDetails->addChild($this->getElement('text_field', [
+            'name'  => 'contactDetails.firstName',
+            'label' => $this->trans('client.label.contact_details.first_name'),
         ]));
 
-        $form->addChild($this->getElement('text_field', [
-            'name'  => 'email',
-            'label' => $this->trans('client.label.email'),
+        $contactDetails->addChild($this->getElement('text_field', [
+            'name'  => 'contactDetails.lastName',
+            'label' => $this->trans('client.label.contact_details.last_name'),
+        ]));
+
+        $contactDetails->addChild($this->getElement('text_field', [
+            'name'  => 'contactDetails.phone',
+            'label' => $this->trans('client.label.contact_details.phone'),
+        ]));
+
+        $contactDetails->addChild($this->getElement('text_field', [
+            'name'  => 'contactDetails.secondaryPhone',
+            'label' => $this->trans('client.label.contact_details.secondary_phone'),
+        ]));
+
+        $contactDetails->addChild($this->getElement('text_field', [
+            'name'  => 'contactDetails.email',
+            'label' => $this->trans('client.label.contact_details.email'),
         ]));
 
         $form->addFilter($this->getFilter('no_code'));

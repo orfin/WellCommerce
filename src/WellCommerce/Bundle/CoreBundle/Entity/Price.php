@@ -45,6 +45,11 @@ class Price
     protected $currency;
 
     /**
+     * @var float
+     */
+    protected $exchangeRate;
+
+    /**
      * @return float|int
      */
     public function getNetAmount()

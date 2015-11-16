@@ -13,9 +13,9 @@ namespace WellCommerce\Bundle\CoreBundle\Controller\Front;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use WellCommerce\Bundle\CommonBundle\Breadcrumb\BreadcrumbItem;
 use WellCommerce\Bundle\CoreBundle\Controller\AbstractController;
 use WellCommerce\Bundle\CoreBundle\Manager\Front\FrontManagerInterface;
-use WellCommerce\Bundle\WebBundle\Breadcrumb\BreadcrumbItem;
 
 /**
  * Class AbstractFrontController

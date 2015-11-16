@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Manager\Front;
 
+use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\AbstractManager;
-use WellCommerce\Bundle\MultiStoreBundle\Context\ShopContextInterface;
 
 /**
  * Class AbstractFrontManager
@@ -25,72 +25,94 @@ abstract class AbstractFrontManager extends AbstractManager implements FrontMana
     /**
      * {@inheritdoc}
      */
-    public function getProviders()
-    {
-        return $this->get('resource.provider.collection');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getProvider($type)
-    {
-        return $this->getProviders()->get($type);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCategoryProvider()
-    {
-        return $this->getProvider('category');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getProductProvider()
-    {
-        return $this->getProvider('product');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getProductStatusProvider()
-    {
-        return $this->getProvider('product_status');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCartProvider()
-    {
-        return $this->getProvider('cart');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCartProductProvider()
-    {
-        return $this->getProvider('cart_product');
-    }
-
-    /**
-     * @return ShopContextInterface
-     */
     public function getShopContext()
     {
         return $this->get('shop.context.front');
     }
 
     /**
-     * @return \WellCommerce\Bundle\CartBundle\Entity\Cart
+     * {@inheritdoc}
      */
-    public function getCurrentCart()
+    public function getCartContext()
     {
-        return $this->getCartProvider()->getCurrentCart();
+        return $this->get('cart.context.front');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCategoryContext()
+    {
+        return $this->get('category.context.front');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getProductContext()
+    {
+        return $this->get('product.context.front');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getProductStatusContext()
+    {
+        return $this->get('product_status.context.front');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getProducerContext()
+    {
+        return $this->get('producer.context.front');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getContactContext()
+    {
+        return $this->get('contact.context.front');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getNewsContext()
+    {
+        return $this->get('news.context.front');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPageContext()
+    {
+        return $this->get('page.context.front');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getThemeContext()
+    {
+        return $this->get('theme.context.front');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getClient()
+    {
+        $user = $this->getUser();
+
+        if ($user instanceof ClientInterface) {
+            return $user;
+        }
+
+        return null;
     }
 }

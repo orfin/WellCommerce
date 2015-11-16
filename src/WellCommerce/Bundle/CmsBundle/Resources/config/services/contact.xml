@@ -3,78 +3,19 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
+    <imports>
+        <import resource="admin/contact.xml"/>
+        <import resource="front/contact.xml"/>
+    </imports>
+
     <services>
-        <service id="contact.manager.admin" class="WellCommerce\Bundle\CmsBundle\Manager\Admin\ContactManager">
-            <argument type="service" id="contact.repository"/>
-            <argument type="service" id="contact.event_dispatcher"/>
-            <argument type="service" id="contact.factory"/>
-            <argument type="service" id="contact.form_builder"/>
-            <argument type="service" id="contact.datagrid"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-        </service>
-        
-        <service id="contact.controller.admin" class="WellCommerce\Bundle\CmsBundle\Controller\Admin\ContactController">
-            <argument type="service" id="contact.manager.admin"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-        </service>
-
-        <service id="contact.layout_box.controller" class="WellCommerce\Bundle\CmsBundle\Controller\Box\ContactBoxController">
-            <argument type="service" id="service_container"/>
-            <argument type="service" id="contact.repository"/>
-        </service>
-
-        <service id="contact.layout_box.configurator" class="WellCommerce\Bundle\CmsBundle\Layout\ContactBoxConfigurator">
-            <argument>Contact</argument>
-            <argument>contact.layout_box.controller</argument>
-            <argument type="service" id="translator_helper"/>
-            <tag name="layout_box.configurator" />
-        </service>
-
         <service id="contact.repository" class="WellCommerce\Bundle\CmsBundle\Repository\ContactRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
             <argument>WellCommerceCmsBundle:Contact</argument>
         </service>
 
-        <service id="contact.dataset.query_builder" class="WellCommerce\Bundle\CmsBundle\DataSet\Admin\ContactDataSetQueryBuilder" public="false">
-            <argument type="service" id="contact.repository"/>
-        </service>
-
-        <service id="contact.dataset.loader" class="%dataset.loader.class%">
-            <argument type="service" id="contact.dataset.query_builder"/>
-            <argument type="service" id="dataset.processor"/>
-        </service>
-
-        <service id="contact.dataset" class="WellCommerce\Bundle\CmsBundle\DataSet\Admin\ContactDataSet">
-            <argument key="identifier">contact</argument>
-            <argument type="service" id="contact.dataset.loader"/>
-            <argument type="service" id="contact.event_dispatcher"/>
-            <configurator service="dataset.configurator" method="configure"/>
-        </service>
-
-        <service id="contact.datagrid" class="WellCommerce\Bundle\CmsBundle\DataGrid\ContactDataGrid">
-            <argument key="identifier">contact</argument>
-            <argument type="service" id="contact.dataset"/>
-            <argument type="service" id="contact.event_dispatcher"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-        </service>
-
-        <service id="contact.form_builder" class="WellCommerce\Bundle\CmsBundle\Form\Admin\ContactFormBuilder">
-            <argument type="service" id="form.resolver.factory"/>
-            <argument type="service" id="form.handler"/>
-            <argument type="service" id="contact.event_dispatcher"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-        </service>
-
         <service id="contact.factory" class="WellCommerce\Bundle\CmsBundle\Factory\ContactFactory" />
 
-        <service id="contact.event_dispatcher" class="WellCommerce\Bundle\CmsBundle\EventDispatcher\ContactEventDispatcher">
+        <service id="contact.event_dispatcher" parent="core.event_dispatcher" public="false">
             <argument type="service" id="event_dispatcher" />
         </service>
     </services>

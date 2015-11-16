@@ -22,7 +22,7 @@ use WellCommerce\Bundle\CoreBundle\Test\AbstractTestCase;
 abstract class AbstractAdminManagerTestCase extends AbstractTestCase
 {
     /**
-     * @return \WellCommerce\Bundle\AdminBundle\Manager\AdminManagerInterface
+     * @return \WellCommerce\Bundle\CoreBundle\Manager\Admin\AdminManagerInterface
      */
     abstract protected function get();
 

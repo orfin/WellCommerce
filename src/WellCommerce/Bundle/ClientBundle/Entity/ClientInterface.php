@@ -12,11 +12,13 @@
 
 namespace WellCommerce\Bundle\ClientBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use WellCommerce\Bundle\CommonBundle\Entity\ShopAwareInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\AddressInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\ContactDetailsAwareInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 
 /**
@@ -24,9 +26,14 @@ use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ClientInterface
-    extends \Serializable, UserInterface, EquatableInterface, TimestampableInterface, BlameableInterface,
-            ClientGroupAwareInterface
+interface ClientInterface extends
+    \Serializable,
+    UserInterface,
+    EquatableInterface,
+    TimestampableInterface,
+    BlameableInterface,
+    ClientGroupAwareInterface,
+    ShopAwareInterface
 {
     /**
      * @return int
@@ -44,59 +51,11 @@ interface ClientInterface
     public function setDiscount($discount);
 
     /**
-     * @return ArrayCollection
-     */
-    public function getAddresses();
-
-    /**
-     * @param ArrayCollection $addresses
-     */
-    public function setAddresses(Collection $addresses);
-
-    /**
-     * @param ClientAddress $address
-     */
-    public function addAddress(ClientAddressInterface $address);
-
-    /**
-     * @return string
-     */
-    public function getFirstName();
-
-    /**
-     * @param string $firstName
-     */
-    public function setFirstName($firstName);
-
-    /**
-     * @return string
-     */
-    public function getLastName();
-
-    /**
-     * @param string $lastName
-     */
-    public function setLastName($lastName);
-
-    /**
-     * @return string
-     */
-    public function getEmail();
-
-    /**
-     * @param string $email
-     */
-    public function setEmail($email);
-
-    /**
      * @param string $password
      */
     public function setPassword($password);
 
-    /**
-     * @param string $salt
-     */
-    public function setSalt($salt);
+    public function resetPassword();
 
     /**
      * @param string $username
@@ -104,14 +63,9 @@ interface ClientInterface
     public function setUsername($username);
 
     /**
-     * @return string
+     * @param string $salt
      */
-    public function getPhone();
-
-    /**
-     * @param string $phone
-     */
-    public function setPhone($phone);
+    public function setSalt($salt);
 
     /**
      * @return bool
@@ -137,4 +91,49 @@ interface ClientInterface
      * @return Collection
      */
     public function getOrders();
+
+    /**
+     * @return Collection
+     */
+    public function getWishlist();
+
+    /**
+     * @return ClientContactDetailsInterface
+     */
+    public function getContactDetails();
+
+    /**
+     * @param ClientContactDetailsInterface $contactDetails
+     */
+    public function setContactDetails(ClientContactDetailsInterface $contactDetails);
+
+    /**
+     * @return ClientBillingAddressInterface
+     */
+    public function getBillingAddress();
+
+    /**
+     * @param ClientBillingAddressInterface $billingAddress
+     */
+    public function setBillingAddress(ClientBillingAddressInterface $billingAddress);
+
+    /**
+     * @return ClientShippingAddressInterface
+     */
+    public function getShippingAddress();
+
+    /**
+     * @param ClientShippingAddressInterface $shippingAddress
+     */
+    public function setShippingAddress(ClientShippingAddressInterface $shippingAddress);
+
+    /**
+     * @return string
+     */
+    public function getResetPasswordHash();
+
+    /**
+     * @param string $resetPasswordHash
+     */
+    public function setResetPasswordHash($resetPasswordHash);
 }

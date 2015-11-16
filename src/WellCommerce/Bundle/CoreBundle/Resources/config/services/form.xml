@@ -15,17 +15,17 @@
         </service>
 
         <service id="form.collection.data_transformer" class="WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer" scope="prototype">
-            <argument type="service" id="doctrine_helper"/>
+            <argument type="service" id="doctrine.helper"/>
             <tag name="form.data_transformer" alias="collection"/>
         </service>
 
         <service id="form.entity.data_transformer" class="WellCommerce\Bundle\CoreBundle\Form\DataTransformer\EntityToIdentifierTransformer" scope="prototype">
-            <argument type="service" id="doctrine_helper"/>
+            <argument type="service" id="doctrine.helper"/>
             <tag name="form.data_transformer" alias="entity"/>
         </service>
 
         <service id="form.translation.data_transformer" class="WellCommerce\Bundle\CoreBundle\Form\DataTransformer\TranslationTransformer" scope="prototype">
-            <argument type="service" id="doctrine_helper"/>
+            <argument type="service" id="doctrine.helper"/>
             <tag name="form.data_transformer" alias="translation"/>
         </service>
     </services>

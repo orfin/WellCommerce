@@ -12,7 +12,6 @@
 namespace WellCommerce\Bundle\ClientBundle\Form\Admin;
 
 use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
-use WellCommerce\Bundle\DataSetBundle\CollectionBuilder\SelectBuilder;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 
 /**
@@ -27,24 +26,27 @@ class ClientFormBuilder extends AbstractFormBuilder
      */
     public function buildForm(FormInterface $form)
     {
+        $countries      = $this->get('country.repository')->all();
+        $defaultCountry = $this->get('shop.context.admin')->getCurrentShop()->getDefaultCountry();
+
         $requiredData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'required_data',
-            'label' => $this->trans('form.fieldset.required_data')
+            'label' => $this->trans('common.fieldset.general')
         ]));
 
         $requiredData->addChild($this->getElement('text_field', [
             'name'  => 'firstName',
-            'label' => $this->trans('common.label.address.first_name'),
+            'label' => $this->trans('common.label.first_name'),
         ]));
 
         $requiredData->addChild($this->getElement('text_field', [
             'name'  => 'lastName',
-            'label' => $this->trans('common.label.address.last_name'),
+            'label' => $this->trans('common.label.last_name'),
         ]));
 
         $requiredData->addChild($this->getElement('text_field', [
             'name'  => 'email',
-            'label' => $this->trans('common.label.contact_details.email'),
+            'label' => $this->trans('common.label.email'),
         ]));
 
         $requiredData->addChild($this->getElement('password', [
@@ -54,25 +56,127 @@ class ClientFormBuilder extends AbstractFormBuilder
 
         $requiredData->addChild($this->getElement('text_field', [
             'name'  => 'phone',
-            'label' => $this->trans('common.label.contact_details.phone'),
+            'label' => $this->trans('common.label.phone'),
         ]));
-
-        $clientGroupSelectBuilder = new SelectBuilder($this->get('client_group.dataset'));
 
         $requiredData->addChild($this->getElement('select', [
             'name'        => 'group',
-            'label'       => $this->trans('client.label.client_group'),
-            'options'     => $clientGroupSelectBuilder->getItems(),
+            'label'       => $this->trans('common.label.client_group'),
+            'options'     => $this->get('client_group.dataset.admin')->getResult('select'),
             'transformer' => $this->getRepositoryTransformer('entity', $this->get('client_group.repository'))
         ]));
 
         $requiredData->addChild($this->getElement('text_field', [
             'name'    => 'discount',
-            'label'   => $this->trans('client.label.discount'),
+            'label'   => $this->trans('common.label.discount'),
             'suffix'  => '%',
             'filters' => [
                 $this->getFilter('comma_to_dot_changer'),
             ],
+        ]));
+
+        $billingAddress = $form->addChild($this->getElement('nested_fieldset', [
+            'name'  => 'billingAddress',
+            'label' => $this->trans('client.heading.billing_address'),
+        ]));
+
+        $billingAddress->addChild($this->getElement('text_field', [
+            'name'  => 'billingAddress.firstName',
+            'label' => $this->trans('client.label.address.first_name'),
+        ]));
+
+        $billingAddress->addChild($this->getElement('text_field', [
+            'name'  => 'billingAddress.lastName',
+            'label' => $this->trans('client.label.address.last_name'),
+        ]));
+
+        $billingAddress->addChild($this->getElement('text_field', [
+            'name'  => 'billingAddress.street',
+            'label' => $this->trans('client.label.address.street'),
+        ]));
+
+        $billingAddress->addChild($this->getElement('text_field', [
+            'name'  => 'billingAddress.streetNo',
+            'label' => $this->trans('client.label.address.street_no'),
+        ]));
+
+        $billingAddress->addChild($this->getElement('text_field', [
+            'name'  => 'billingAddress.flatNo',
+            'label' => $this->trans('client.label.address.flat_no'),
+        ]));
+
+        $billingAddress->addChild($this->getElement('text_field', [
+            'name'  => 'billingAddress.postCode',
+            'label' => $this->trans('client.label.address.post_code'),
+        ]));
+
+        $billingAddress->addChild($this->getElement('text_field', [
+            'name'  => 'billingAddress.province',
+            'label' => $this->trans('client.label.address.province'),
+        ]));
+
+        $billingAddress->addChild($this->getElement('text_field', [
+            'name'  => 'billingAddress.city',
+            'label' => $this->trans('client.label.address.city'),
+        ]));
+
+        $billingAddress->addChild($this->getElement('select', [
+            'name'    => 'billingAddress.country',
+            'label'   => $this->trans('client.label.address.country'),
+            'options' => $countries,
+            'default' => $defaultCountry
+        ]));
+
+        $shippingAddress = $form->addChild($this->getElement('nested_fieldset', [
+            'name'  => 'shippingAddress',
+            'label' => $this->trans('client.heading.shipping_address'),
+        ]));
+
+        $shippingAddress->addChild($this->getElement('text_field', [
+            'name'  => 'shippingAddress.firstName',
+            'label' => $this->trans('client.label.address.first_name'),
+        ]));
+
+        $shippingAddress->addChild($this->getElement('text_field', [
+            'name'  => 'shippingAddress.lastName',
+            'label' => $this->trans('client.label.address.last_name'),
+        ]));
+
+        $shippingAddress->addChild($this->getElement('text_field', [
+            'name'  => 'shippingAddress.street',
+            'label' => $this->trans('client.label.address.street'),
+        ]));
+
+        $shippingAddress->addChild($this->getElement('text_field', [
+            'name'  => 'shippingAddress.streetNo',
+            'label' => $this->trans('client.label.address.street_no'),
+        ]));
+
+        $shippingAddress->addChild($this->getElement('text_field', [
+            'name'  => 'shippingAddress.flatNo',
+            'label' => $this->trans('client.label.address.flat_no'),
+        ]));
+
+        $shippingAddress->addChild($this->getElement('text_field', [
+            'name'  => 'shippingAddress.postCode',
+            'label' => $this->trans('client.label.address.post_code'),
+        ]));
+
+        $shippingAddress->addChild($this->getElement('text_field', [
+            'name'  => 'shippingAddress.province',
+            'label' => $this->trans('client.label.address.province'),
+        ]));
+
+        $shippingAddress->addChild($this->getElement('text_field', [
+            'name'  => 'shippingAddress.city',
+            'label' => $this->trans('client.label.address.city'),
+        ]));
+
+        $shippingAddress->addChild($this->getElement('select', [
+            'name'    => 'shippingAddress.country',
+            'label'   => $this->trans('client.label.address.country'),
+            'options' => $countries,
+            'default' => $defaultCountry
         ]));
 
         $form->addFilter($this->getFilter('no_code'));

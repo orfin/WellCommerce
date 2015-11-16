@@ -1,0 +1,113 @@
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
+
+cart:
+    flash:
+        added: was added to cart
+    button:
+        add: Add to cart
+    link:
+        checkout: Go to checkout
+    heading:
+        index: Cart
+        recommendations: 'You might also like'
+    table:
+        heading:
+            product: Product
+            price: Price
+            quantity: Quantity
+            total: Total
+    error:
+        no_available_methods: There are no available shipping and/or payment options for this cart
+
+order:
+    form:
+        fieldset:
+            products: Products
+    heading:
+        index: Orders
+        edit: Edit order
+        address: Address
+        confirmation: Confirmation
+        order_total: Summary
+    button:
+        confirm: Go to confirmation
+        add_product: Add product
+    heading:
+        address: Billing & shipping address
+        contact_details: Contact details
+    label:
+        id: ID
+        order_no: Order no.
+        client: Client
+        product_total: Products value
+        shipping_total: Shipping cost
+        order_total: Total value
+        variant: Variant
+        weight: Weight
+        quantity: Qty
+        stock: Stock
+        tax_rate: Tax rate
+        current_status: Status
+        created_at: Placed on
+        comment: Additional comments
+        shipping_method: Shipping method
+        payment_method: Payment method
+        product_name: Product
+        tax_value: Tax
+        gross_amount: Price
+        gross_total: Total
+        currency: Currency
+        order_total:
+            shipping: Shipping total
+    description:
+        product_total: Total products value
+        shipping_cost: Shipping costs
+
+order_status:
+    heading:
+        index: Order statuses
+        add: Add a new order status
+        edit: Edit an order status
+
+order_status_group:
+    heading:
+        index: Order status groups
+        add: Add a new order status group
+        edit: Edit an order status group
+
+payment:
+    flash:
+        thank_you: "Thank you for placing an order. Below are the order's details:"
+
+payment_method:
+    heading:
+        index: Payment methods
+        add: Add a payment method
+        edit: Edit a payment method
+    fieldset:
+        shipping_methods: Shipping methods
+    label:
+        processor: Payment processor
+        shipping_methods: Allowed shipping methods
+    bank_transfer:
+        tip: 'Your order will be processed upon receiving of the payment at the following bank account'
+        account: Account number
+        sort_number: Sort code
+        title: 'Transfer title'
+
+shipping_method:
+    heading:
+        index: Shipping methods
+        add: Add a shipping method
+        edit: Edit a shipping method
+    label:
+        calculator: Type of costs calculation
+        costs: Shipping costs
+    fieldset:
+        costs: Shipping costs settings

@@ -13,6 +13,8 @@
 namespace WellCommerce\Bundle\CmsBundle\DataSet\Front;
 
 use WellCommerce\Bundle\CmsBundle\DataSet\Admin\PageDataSetQueryBuilder as BaseQueryBuilder;
+use WellCommerce\Bundle\DataSetBundle\Column\ColumnCollection;
+use WellCommerce\Bundle\DataSetBundle\Request\DataSetRequestInterface;
 
 /**
  * Class PageDataSetQueryBuilder
@@ -24,9 +26,9 @@ class PageDataSetQueryBuilder extends BaseQueryBuilder
     /**
      * {@inheritdoc}
      */
-    public function getQueryBuilder()
+    public function getQueryBuilder(ColumnCollection $columns, DataSetRequestInterface $request)
     {
-        $qb         = parent::getQueryBuilder();
+        $qb         = parent::getQueryBuilder($columns, $request);
         $expression = $qb->expr()->eq('page.publish', ':publish');
         $qb->andWhere($expression);
         $qb->setParameter('publish', true);

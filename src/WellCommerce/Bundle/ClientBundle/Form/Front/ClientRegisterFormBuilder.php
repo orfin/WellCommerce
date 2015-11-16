@@ -26,29 +26,34 @@ class ClientRegisterFormBuilder extends AbstractFormBuilder
      */
     public function buildForm(FormInterface $form)
     {
-        $form->addChild($this->getElement('text_field', [
-            'name'  => 'firstName',
-            'label' => $this->trans('client.label.first_name'),
+        $contactDetails = $form->addChild($this->getElement('nested_fieldset', [
+            'name'  => 'contactDetails',
+            'label' => $this->trans('client.heading.contact_details'),
+        ]));
+
+        $contactDetails->addChild($this->getElement('text_field', [
+            'name'  => 'contactDetails.firstName',
+            'label' => $this->trans('client.label.contact_details.first_name'),
+        ]));
+
+        $contactDetails->addChild($this->getElement('text_field', [
+            'name'  => 'contactDetails.lastName',
+            'label' => $this->trans('client.label.contact_details.last_name'),
+        ]));
+
+        $contactDetails->addChild($this->getElement('text_field', [
+            'name'  => 'contactDetails.phone',
+            'label' => $this->trans('client.label.contact_details.phone'),
         ]));
 
         $form->addChild($this->getElement('text_field', [
-            'name'  => 'lastName',
-            'label' => $this->trans('client.label.last_name'),
-        ]));
-
-        $form->addChild($this->getElement('text_field', [
-            'name'  => 'phone',
-            'label' => $this->trans('contact_details.label.phone'),
-        ]));
-
-        $form->addChild($this->getElement('text_field', [
-            'name'  => 'email',
-            'label' => $this->trans('contact_details.label.email'),
+            'name'  => 'username',
+            'label' => $this->trans('client.label.username'),
         ]));
 
         $form->addChild($this->getElement('password', [
             'name'  => 'password',
-            'label' => $this->trans('common.label.password'),
+            'label' => $this->trans('client.label.password'),
         ]));
 
         $form->addChild($this->getElement('checkbox', [

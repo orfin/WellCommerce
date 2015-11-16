@@ -22,7 +22,7 @@ security:
             form_login:
                 login_path: front.client.login
                 check_path: front.client.login_check
-                default_target_path: front.client.orders
+                default_target_path: front.client_order.index
                 failure_handler: client.failure.handler
             logout:
                 path:   front.client.logout
@@ -33,17 +33,18 @@ security:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/admin$, roles: ROLE_ADMIN }
         - { path: ^/client/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/client/password, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/client, roles: ROLE_CLIENT }
         - { path: ^/client$, roles: ROLE_CLIENT }
 
     providers:
         administrators:
-            entity: { class: WellCommerceUserBundle:User }
+            entity: { class: WellCommerceAdminBundle:User }
         clients:
             entity: { class: WellCommerceClientBundle:Client }
 
     encoders:
-        WellCommerce\Bundle\UserBundle\Entity\User:
+        WellCommerce\Bundle\AdminBundle\Entity\User:
             algorithm: bcrypt
             cost: 12
         WellCommerce\Bundle\ClientBundle\Entity\Client:

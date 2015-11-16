@@ -1,0 +1,18 @@
+WellCommerce\Bundle\CatalogBundle\Entity\Attribute\Group:
+    type: entity
+    table: attribute_group
+    repositoryClass: WellCommerce\Bundle\CatalogBundle\Repository\AttributeGroupRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    oneToMany:
+        attributes:
+            targetEntity: WellCommerce\Bundle\CatalogBundle\Entity\Attribute
+            cascade:
+                - all
+            fetch: LAZY
+            mappedBy: attributeGroup
+            orphanRemoval: true
+

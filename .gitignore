@@ -4,6 +4,7 @@ web/js/
 web/js/compiled/
 app/bootstrap.php.cache*
 app/cache/*
+app/store/*
 app/cache/dev/*
 app/config/parameters.yml
 app/phpunit.xml
@@ -14,6 +15,7 @@ app/logs/*
 /vendor/
 /bin/
 /composer.phar
+/composer.lock
 /php-cs-fixer.phar
 /application/.idea
 *.idea
@@ -25,5 +27,6 @@ app/cache/dev/appDevDebugProjectContainer.xml
 web/media/*
 tests/_output/*
 .buildpath
-
 app/cache/dev/assetic
+
+*.lock

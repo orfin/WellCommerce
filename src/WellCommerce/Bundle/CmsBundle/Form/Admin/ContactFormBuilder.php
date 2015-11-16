@@ -28,12 +28,12 @@ class ContactFormBuilder extends AbstractFormBuilder
     {
         $requiredData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'requiredData',
-            'label' => $this->trans('admin.form.label.required_data')
+            'label' => $this->trans('common.fieldset.general')
         ]));
 
         $requiredData->addChild($this->getElement('checkbox', [
             'name'  => 'enabled',
-            'label' => $this->trans('admin.form.label.enabled'),
+            'label' => $this->trans('common.label.enabled'),
         ]));
 
         $languageData = $requiredData->addChild($this->getElement('language_fieldset', [
@@ -44,27 +44,27 @@ class ContactFormBuilder extends AbstractFormBuilder
 
         $languageData->addChild($this->getElement('text_field', [
             'name'  => 'name',
-            'label' => $this->trans('contact.label.name'),
+            'label' => $this->trans('common.label.name'),
         ]));
 
         $languageData->addChild($this->getElement('text_field', [
             'name'  => 'email',
-            'label' => $this->trans('contact.label.email'),
+            'label' => $this->trans('common.label.email'),
         ]));
 
         $languageData->addChild($this->getElement('text_field', [
             'name'  => 'phone',
-            'label' => $this->trans('contact.label.phone'),
+            'label' => $this->trans('common.label.phone'),
         ]));
 
         $languageData->addChild($this->getElement('text_area', [
             'name'  => 'businessHours',
-            'label' => $this->trans('contact.label.business_hours'),
+            'label' => $this->trans('common.label.business_hours'),
         ]));
 
         $addressData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'addressData',
-            'label' => $this->trans('contact.label.address')
+            'label' => $this->trans('common.label.address')
         ]));
 
         $languageData = $addressData->addChild($this->getElement('language_fieldset', [

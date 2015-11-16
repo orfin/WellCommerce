@@ -16,8 +16,8 @@ use Doctrine\ORM\NoResultException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
+use WellCommerce\Bundle\AdminBundle\Repository\UserRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
-use WellCommerce\Bundle\UserBundle\Repository\UserRepositoryInterface;
 
 /**
  * Class ClientGroupRepository
@@ -56,12 +56,10 @@ class ClientRepository extends AbstractEntityRepository implements ClientReposit
 
     public function loadUserByUsername($username)
     {
-        $queryBuilder = $this
-            ->createQueryBuilder('c')
+        $queryBuilder = $this->createQueryBuilder('c')
             ->select('c')
-            ->where('c.username = :username OR c.email = :email')
+            ->where('c.username = :username')
             ->setParameter('username', $username)
-            ->setParameter('email', $username)
             ->getQuery();
 
         try {

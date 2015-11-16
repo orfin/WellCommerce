@@ -5,6 +5,9 @@
 
     <imports>
         <import resource="services/dashboard.xml"/>
+        <import resource="services/user.xml"/>
+        <import resource="services/user_group.xml"/>
+        <import resource="services/role.xml"/>
     </imports>
 
     <services>
@@ -15,7 +18,7 @@
         </service>
 
         <service id="admin_menu.importer.xml" class="WellCommerce\Bundle\AdminBundle\Importer\XmlImporter">
-            <argument type="service" id="doctrine_helper"/>
+            <argument type="service" id="doctrine.helper"/>
             <argument type="service" id="admin_menu.factory"/>
             <argument type="service" id="admin_menu.repository"/>
         </service>
@@ -28,6 +31,13 @@
             <argument type="service" id="session"/>
             <argument type="service" id="admin_menu.provider"/>
             <tag name="twig.extension"/>
+        </service>
+
+        <service id="admin.subscriber" class="WellCommerce\Bundle\AdminBundle\EventListener\AdminSubscriber">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <tag name="kernel.event_subscriber"/>
         </service>
     </services>
 </container>

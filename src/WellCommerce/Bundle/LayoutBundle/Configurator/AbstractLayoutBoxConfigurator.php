@@ -12,6 +12,8 @@
 
 namespace WellCommerce\Bundle\LayoutBundle\Configurator;
 
+use Symfony\Component\PropertyAccess\PropertyAccess;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
 use WellCommerce\Bundle\CoreBundle\Helper\Translator\TranslatorHelperInterface;
 use WellCommerce\Bundle\FormBundle\Conditions\Equals;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
@@ -22,7 +24,7 @@ use WellCommerce\Bundle\FormBundle\FormBuilderInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractLayoutBoxConfigurator implements LayoutBoxConfiguratorInterface
+abstract class AbstractLayoutBoxConfigurator extends AbstractContainerAware implements LayoutBoxConfiguratorInterface
 {
     /**
      * @var string
@@ -51,6 +53,14 @@ abstract class AbstractLayoutBoxConfigurator implements LayoutBoxConfiguratorInt
         $this->type              = $type;
         $this->controllerService = $controllerService;
         $this->translatorHelper  = $translatorHelper;
+    }
+
+    /**
+     * @return \Symfony\Component\PropertyAccess\PropertyAccessor
+     */
+    protected function getPropertyAccessor()
+    {
+        return PropertyAccess::createPropertyAccessor();
     }
 
     /**
@@ -114,10 +124,5 @@ abstract class AbstractLayoutBoxConfigurator implements LayoutBoxConfiguratorInt
     protected function getBoxTypeSelect(FormInterface $form)
     {
         return $form->getChildren()->get('required_data')->getChildren()->get('boxType');
-    }
-
-    protected function trans($message)
-    {
-        return $this->translatorHelper->trans($message);
     }
 }

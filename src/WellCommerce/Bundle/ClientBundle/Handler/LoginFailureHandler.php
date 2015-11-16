@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Http\Authentication\AuthenticationFailureHandlerInterface;
 
 /**
@@ -25,7 +26,6 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationFailureHandlerI
  */
 class LoginFailureHandler implements AuthenticationFailureHandlerInterface
 {
-
     /**
      * @var RouterInterface
      */
@@ -50,6 +50,8 @@ class LoginFailureHandler implements AuthenticationFailureHandlerInterface
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
+        $request->getSession()->set(Security::AUTHENTICATION_ERROR, $exception);
+
         return new RedirectResponse($this->router->generate($this->loginRoute));
     }
 }

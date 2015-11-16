@@ -1,0 +1,188 @@
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
+
+attribute:
+    heading:
+        index: Attributes
+        add: Add attribute
+        edit: Edit attribute
+
+attribute_group:
+    heading:
+        index: Attribute groups
+        add: Add group
+        edit: Edit group
+
+attribute_value:
+    heading:
+        index: Attribute values
+        add: Add values
+        edit: Edit values
+
+availability:
+    heading:
+        index: Availability statuses
+        add: Add a status
+        edit: Edit a status
+
+category:
+    form:
+        fieldset:
+            general: General
+            meta: Meta
+            shops: Shops
+            description: Description
+    label:
+        shops: Available in shops
+        hierarchy: Hierarchy
+        enabled: Enabled
+        name: Name
+        slug: Slug
+        parent: Parent category
+        short_description: Short description
+        description: Description
+    heading:
+        index: Categories
+        add: Create a new category
+        edit: Edit category
+
+deliverer:
+    heading:
+        index: Deliverers
+        add: Create a new deliverer
+        edit: Edit deliverer
+
+product_search:
+    heading:
+        index: Search results
+    label:
+        phrase: Enter search phrase
+
+product_status:
+    heading:
+        index: Products statuses
+        add: Add a new products status
+        edit: Edit the products status
+    label:
+        css_class: CSS class
+
+product_review:
+    heading:
+        index: Reviews
+    label:
+        rating: Rating
+        nick: Name or nickname
+        review: Review
+    button:
+        add_opinion: Submit review
+    link:
+        first_review: Be first to submit a review
+
+product:
+    form:
+        fieldset:
+            general: General
+            meta: Meta
+            categories: Categories
+            prices: Prices
+            stock: Stock settings
+            photos: Photos
+            statuses: Statuses
+            attributes: Variants
+            shops: Shops
+            description: Description
+    comment:
+        enabled: Enable product's visibility
+    heading:
+        index: Products
+        add: Add a product
+        edit: Edit a product
+    label:
+        id: ID
+        name: Name
+        slug: Slug
+        enabled: Enabled
+        sku: SKU
+        statuses: Product's statuses
+        shops: Available in shops
+        categories: Categories
+        gross_amount: Gross price
+        stock: Stock
+        weight: Weight
+        producer: Producer
+        currency: Currency
+        manufactured_by: by
+        shipping_cost: Shipping costs
+        availability: Product's availability
+        quantity: Quantity
+        unit: Unit
+        package_size: Package size
+        track_stock: Track stock
+        buy_price:
+            settings: Buy prices configuration
+            currency: Currency
+            tax: Tax
+            gross_amount: Gross price
+            discounted_gross_amount: Special gross price
+        sell_price:
+            settings: Sell prices configuration
+            currency: Currency
+            tax: Tax
+            gross_amount: Standard price
+            discounted_gross_amount: Discounted price
+            discount_valid_from: Valid from
+            discount_valid_to: Valid to
+        dimension:
+            width: Width
+            height: Height
+            depth: Depth
+        layered_navigation:
+            price: Filter by price
+            brand: Filter by brand
+        short_description: Short description
+        description: Description
+    button:
+        filter: Filter results
+    heading:
+        recommendations: 'You might also like'
+    options:
+        label:
+            order: Sort by
+            view: View as
+            limit: Show per page
+            grid_view: Grid
+            list_view: List
+        order_by:
+            name:
+                asc: Name - from A to Z
+                desc: Name - from Z to A
+            final_price:
+                asc: Price - from lowest to highest
+                desc: Price - from highest to lowest
+            score:
+                asc: Best match
+        limit:  Show per page
+        view_type:
+            list: List view
+            grid: Grid view
+
+producer:
+    heading:
+        index: Producers
+        add: Add a producer
+        edit: Edit a producer
+    fieldset:
+        deliverers: Deliverers
+    label:
+        deliverers: Deliverers
+
+unit:
+    heading:
+        index: Units of measure
+        add: Add a unit of measure
+        edit: Edit a unit of measure

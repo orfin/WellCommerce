@@ -29,8 +29,8 @@ class PageDataSet extends BaseDataSet
     {
         parent::configureOptions($configurator);
 
-        $configurator->setTransformers([
-            'route' => $this->container->get('route.transformer')
+        $configurator->setColumnTransformers([
+            'route' => $this->getDataSetTransformer('route')
         ]);
     }
 }

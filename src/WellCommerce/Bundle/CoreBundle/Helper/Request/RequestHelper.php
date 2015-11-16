@@ -13,9 +13,6 @@
 namespace WellCommerce\Bundle\CoreBundle\Helper\Request;
 
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
-use WellCommerce\Bundle\UserBundle\Entity\UserInterface;
 
 /**
  * Class RequestHelper
@@ -35,21 +32,14 @@ class RequestHelper implements RequestHelperInterface
     protected $request;
 
     /**
-     * @var TokenStorageInterface
-     */
-    protected $tokenStorage;
-
-    /**
      * Constructor
      *
-     * @param RequestStack          $requestStack
-     * @param TokenStorageInterface $tokenStorage
+     * @param RequestStack $requestStack
      */
-    public function __construct(RequestStack $requestStack, TokenStorageInterface $tokenStorage)
+    public function __construct(RequestStack $requestStack)
     {
         $this->requestStack = $requestStack;
         $this->request      = $requestStack->getMasterRequest();
-        $this->tokenStorage = $tokenStorage;
     }
 
     /**
@@ -81,7 +71,11 @@ class RequestHelper implements RequestHelperInterface
      */
     public function getSessionAttribute($name, $default = null)
     {
-        return $this->request->getSession()->get($name, $default);
+        if (null !== $this->request && $this->request->hasSession()) {
+            return $this->request->getSession()->get($name, $default);
+        }
+
+        return $default;
     }
 
     /**
@@ -89,6 +83,10 @@ class RequestHelper implements RequestHelperInterface
      */
     public function setSessionAttribute($name, $value)
     {
+        if (null === $this->request || false === $this->request->hasSession()) {
+            throw new \LogicException('Cannot set session attributes without valid session.');
+        }
+
         return $this->request->getSession()->set($name, $value);
     }
 
@@ -97,7 +95,11 @@ class RequestHelper implements RequestHelperInterface
      */
     public function hasSessionAttribute($name)
     {
-        return $this->request->getSession()->has($name);
+        if (null !== $this->request && $this->request->hasSession()) {
+            return $this->request->getSession()->has($name);
+        }
+
+        return false;
     }
 
     /**
@@ -105,21 +107,29 @@ class RequestHelper implements RequestHelperInterface
      */
     public function getSessionId()
     {
-        return $this->request->getSession()->getId();
+        if (null !== $this->request && $this->request->hasSession()) {
+            return $this->request->getSession()->getId();
+        }
+
+        return '';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getRequestAttribute($name, $default = null)
+    public function getSessionName()
     {
-        return $this->request->request->get($name, $default);
+        if (null !== $this->request && $this->request->hasSession()) {
+            return $this->request->getSession()->getName();
+        }
+
+        return '';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function hasRequestAttribute($name)
+    public function hasRequestBagParam($name)
     {
         return $this->request->request->has($name);
     }
@@ -127,31 +137,45 @@ class RequestHelper implements RequestHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function getQueryAttribute($name, $default = null)
+    public function hasRequestBagParams(array $params = [])
     {
-        return $this->request->query->get($name, $default);
+        foreach ($params as $param) {
+            if (!$this->hasRequestBagParam($param)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function hasQueryAttribute($name)
+    public function getRequestBagParam($name, $default = null, $filter = FILTER_SANITIZE_SPECIAL_CHARS)
     {
-        return $this->request->query->has($name);
+        if (false === $this->hasRequestBagParam($name)) {
+            return $default;
+        }
+
+        return $this->request->request->filter($name, $default, false, $filter);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getAttribute($name, $default = null)
+    public function getQueryBagParam($name, $default = null, $filter = FILTER_SANITIZE_SPECIAL_CHARS)
     {
-        return $this->request->attributes->get($name, $default);
+        if (false === $this->request->query->has($name)) {
+            return $default;
+        }
+
+        return $this->request->query->filter($name, $default, false, $filter);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function hasAttribute($name)
+    public function hasAttributesBagParam($name)
     {
         return $this->request->attributes->has($name);
     }
@@ -159,77 +183,27 @@ class RequestHelper implements RequestHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function getAdmin()
+    public function hasAttributesBagParams(array $params = [])
     {
-        $admin = $this->getUser();
-
-        if ($admin instanceof UserInterface) {
-            return $admin;
+        foreach ($params as $param) {
+            if (!$this->hasAttributesBagParam($param)) {
+                return false;
+            }
         }
 
-        return null;
+        return true;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getClient()
+    public function getAttributesBagParam($name, $default = null, $filter = FILTER_SANITIZE_SPECIAL_CHARS)
     {
-        $client = $this->getUser();
-
-        if ($client instanceof ClientInterface) {
-            return $client;
+        if (false === $this->hasAttributesBagParam($name)) {
+            return $default;
         }
 
-        return null;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCurrentOffset($limit)
-    {
-        $page   = $this->getCurrentPage();
-        $offset = ($page * $limit) - $limit;
-
-        return ($offset > 0) ? $offset : 0;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCurrentPage()
-    {
-        $page = (int)$this->getQueryAttribute('page', 1);
-        $page = abs($page);
-
-        return ($page > 0) ? $page : 1;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCurrentLimit($default = 10)
-    {
-        $limit = (int)$this->getQueryAttribute('limit', $default);
-        $limit = abs($limit);
-
-        return ($limit > 0) ? $limit : $default;
-    }
-
-    /**
-     * Returns current user from security context
-     *
-     * @return mixed|null
-     */
-    protected function getUser()
-    {
-        $token = $this->tokenStorage->getToken();
-        if (null !== $token) {
-            return $token->getUser();
-        }
-
-        return null;
+        return $this->request->attributes->filter($name, $default, false, $filter);
     }
 
     /**

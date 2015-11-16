@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Bundle\CmsBundle\Twig\Extension;
 
-use WellCommerce\Bundle\CmsBundle\Provider\PageProviderInterface;
+use WellCommerce\Bundle\DataSetBundle\DataSetInterface;
 
 /**
  * Class PageExtension
@@ -20,20 +20,19 @@ use WellCommerce\Bundle\CmsBundle\Provider\PageProviderInterface;
  */
 class PageExtension extends \Twig_Extension
 {
-
     /**
-     * @var PageProviderInterface
+     * @var DataSetInterface
      */
-    protected $provider;
+    protected $dataset;
 
     /**
      * Constructor
      *
-     * @param PageProviderInterface $provider
+     * @param DataSetInterface $dataset
      */
-    public function __construct(PageProviderInterface $provider)
+    public function __construct(DataSetInterface $dataset)
     {
-        $this->provider = $provider;
+        $this->dataset = $dataset;
     }
 
     public function getGlobals()
@@ -56,9 +55,8 @@ class PageExtension extends \Twig_Extension
      */
     public function getCmsPages()
     {
-        return $this->provider->getCollectionBuilder()->getTree([
-            'cache_enabled' => true,
-            'cache_ttl'     => 3600
+        return $this->dataset->getResult('tree', [
+            'order_by' => 'hierarchy'
         ]);
     }
 }

@@ -16,6 +16,7 @@ use ReflectionClass;
 use ReflectionMethod;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\RouterInterface;
+use WellCommerce\Bundle\CoreBundle\Helper\Request\RequestHelperInterface;
 
 /**
  * Class RouterHelper
@@ -30,13 +31,20 @@ class RouterHelper implements RouterHelperInterface
     protected $router;
 
     /**
+     * @var RequestHelperInterface
+     */
+    protected $requestHelper;
+
+    /**
      * Constructor
      *
-     * @param RouterInterface $router
+     * @param RouterInterface        $router
+     * @param RequestHelperInterface $requestHelper
      */
-    public function __construct(RouterInterface $router)
+    public function __construct(RouterInterface $router, RequestHelperInterface $requestHelper)
     {
-        $this->router = $router;
+        $this->router        = $router;
+        $this->requestHelper = $requestHelper;
     }
 
     /**
@@ -123,5 +131,19 @@ class RouterHelper implements RouterHelperInterface
     public function redirectTo($route, array $routeParams = [])
     {
         return new RedirectResponse($this->router->generate($route, $routeParams, true));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCurrentRoute()
+    {
+        $routeName = $this->requestHelper->getAttributesBagParam('_route');
+        $route     = $this->router->getRouteCollection()->get($routeName);
+        if (null === $route) {
+            throw new \RuntimeException('Cannot determine current route from request');
+        }
+
+        return $this->router->getRouteCollection()->get($routeName);
     }
 }

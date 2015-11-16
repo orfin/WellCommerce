@@ -23,8 +23,8 @@ use WellCommerce\Bundle\DataGridBundle\Configuration\EventHandler\LoadEventHandl
 use WellCommerce\Bundle\DataGridBundle\DataGridInterface;
 use WellCommerce\Bundle\DataGridBundle\Options\Options;
 use WellCommerce\Bundle\DataGridBundle\Options\OptionsInterface;
+use WellCommerce\Bundle\DataSetBundle\Conditions\ConditionsCollection;
 use WellCommerce\Bundle\DataSetBundle\DataSetInterface;
-use WellCommerce\Bundle\DataSetBundle\Request\DataSetRequest;
 
 /**
  * Class AbstractDataGrid
@@ -219,17 +219,19 @@ abstract class AbstractDataGrid extends AbstractContainerAware implements DataGr
      */
     public function loadResults(Request $request)
     {
+        $page               = ($request->request->get('starting_from') / $request->request->get('limit')) + 1;
+        $conditions         = new ConditionsCollection();
         $conditionsResolver = new ConditionsResolver();
+        $conditionsResolver->resolveConditions($request->request->get('where'), $conditions);
 
-        $datasetRequest = new DataSetRequest([
-            'id'         => $request->request->get('id'),
-            'offset'     => $request->request->get('starting_from'),
+        $requestOptions = [
+            'page'       => $page,
             'limit'      => $request->request->get('limit'),
             'order_by'   => $request->request->get('order_by'),
             'order_dir'  => $request->request->get('order_dir'),
-            'conditions' => $conditionsResolver->resolve($request->request->get('where')),
-        ]);
+            'conditions' => $conditions,
+        ];
 
-        return $this->dataset->getResults($datasetRequest);
+        return $this->dataset->getResult('datagrid', $requestOptions);
     }
 }

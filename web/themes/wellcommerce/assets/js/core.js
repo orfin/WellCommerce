@@ -480,3 +480,110 @@ var GCoupon = function(oOptions) {
 };
 
 new GPlugin('GCoupon', oCouponDefaults, GCoupon);
+
+var oLayeredNavigationDefaults = {
+    sFilterRoute:      'front.product_layered.filter',
+    sCurrentRoute:      '',
+    sCurrentRouteParams:      'front.product_layered.filter'
+};
+
+var GLayeredNavigation = function(oOptions) {
+
+    var gThis = this;
+
+    gThis._Constructor = function() {
+        gThis.InitializeEvents();
+    };
+
+    gThis.InitializeEvents = function(){
+        $(gThis).bind('submit', gThis.OnSubmit);
+    };
+
+    gThis.OnSubmit = function(){
+        var oRequest = {
+            form: $(gThis).serialize(),
+            route: gThis.m_oOptions.sCurrentRoute,
+            route_params: gThis.m_oOptions.sCurrentRouteParams
+        };
+
+        GAjaxRequest(Routing.generate(gThis.m_oOptions.sFilterRoute), oRequest, function(oResponse){
+            if(oResponse.success){
+                return window.location.href = oResponse.redirectUrl;
+            }else{
+                alert(oResponse.message);
+            }
+        });
+
+        return false;
+    };
+
+    gThis._Constructor();
+};
+
+new GPlugin('GLayeredNavigation', oLayeredNavigationDefaults, GLayeredNavigation);
+
+var oSearchDefaultParams = {
+    sProductSearchRoute:      'front.product_search.index',
+    sProductLiveSearchRoute:  'front.product_search.view',
+    sPhraseInputSelector:     'form#search #phrase',
+    sSearchResultsSelector:   'div#search-results',
+    oAddCartButtonSettings:   {}
+};
+
+var GSearch = function(oOptions) {
+
+    var gThis = this;
+
+    gThis._Constructor = function() {
+        gThis.InitializeEvents();
+    };
+
+    gThis.InitializeEvents = function(){
+        $(gThis).bind('submit', gThis.OnSubmit);
+
+        var options = {
+            callback: gThis.OnLiveSearch,
+            wait: 250,
+            highlight: false,
+            captureLength: 3
+        };
+
+        $(gThis.m_oOptions.sPhraseInputSelector, gThis).typeWatch(options);
+    };
+
+    gThis.OnLiveSearch = function(sPhrase){
+        if(sPhrase.length > 2){
+            var oRouteParams = {
+                phrase: sPhrase
+            };
+
+            var url = Routing.generate(gThis.m_oOptions.sProductLiveSearchRoute, oRouteParams, true);
+            GAjaxRequest(url, {}, function(oResponse){
+                if(oResponse.liveSearchContent != undefined) {
+                    $(gThis.m_oOptions.sSearchResultsSelector).html(oResponse.liveSearchContent);
+                    $(gThis.m_oOptions.sSearchResultsSelector).find('.add-cart').GProductAddCartButton(gThis.m_oOptions.oAddCartButtonSettings);
+                }
+            });
+        }else{
+            $(gThis.m_oOptions.sSearchResultsSelector).html('');
+        }
+    };
+
+    gThis.OnSubmit = function(eEvent){
+        eEvent.stopImmediatePropagation();
+
+        var oRouteParams = {
+            phrase: $(gThis.m_oOptions.sPhraseInputSelector, gThis).val()
+        };
+
+        var url = Routing.generate(gThis.m_oOptions.sProductSearchRoute, oRouteParams, true);
+
+        window.location.href = Routing.generate(gThis.m_oOptions.sProductSearchRoute, oRouteParams, true);
+
+        return false;
+    };
+
+    gThis._Constructor();
+};
+
+new GPlugin('GSearch', oSearchDefaultParams, GSearch);

@@ -14,10 +14,10 @@ namespace WellCommerce\Bundle\ReportBundle\Provider;
 
 use Doctrine\Common\Collections\Criteria;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
-use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 use WellCommerce\Bundle\ReportBundle\Configuration\ReportConfiguration;
 use WellCommerce\Bundle\ReportBundle\Data\ReportRow;
 use WellCommerce\Bundle\ReportBundle\Data\ReportRowCollection;
+use WellCommerce\Bundle\SalesBundle\Entity\OrderInterface;
 
 /**
  * Class ClientReportProvider
@@ -35,7 +35,7 @@ class ClientReportProvider extends AbstractReportProvider implements ReportProvi
         $collection = $this->repository->matching($criteria);
         $report     = new ReportRowCollection();
 
-        $collection->map(function (ClientInterface $client) use ($configuration, $report) {
+        $collection->map(function (ClientInterface $client) use ($report) {
             $ordersTotal = $this->calculateOrdersAmountForClient($client);
             $identifier  = $client->getFirstName() . ' ' . $client->getLastName();
             $report->add(new ReportRow($identifier, $ordersTotal));

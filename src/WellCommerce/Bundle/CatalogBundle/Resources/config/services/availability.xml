@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <imports>
+        <import resource="admin/availability.xml"/>
+    </imports>
+
+    <services>
+        <service id="availability.repository" class="WellCommerce\Bundle\CatalogBundle\Repository\AvailabilityRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>WellCommerceCatalogBundle:Availability</argument>
+        </service>
+
+        <service id="availability.factory" class="WellCommerce\Bundle\CatalogBundle\Factory\AvailabilityFactory" />
+
+        <service id="availability.event_dispatcher" parent="core.event_dispatcher" public="false">
+            <argument type="service" id="event_dispatcher" />
+        </service>
+    </services>
+</container>

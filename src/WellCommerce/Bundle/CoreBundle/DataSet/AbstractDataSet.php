@@ -12,31 +12,33 @@
 
 namespace WellCommerce\Bundle\CoreBundle\DataSet;
 
-use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
+use Symfony\Component\Asset\Context\ContextInterface;
 use WellCommerce\Bundle\CoreBundle\EventDispatcher\EventDispatcherInterface;
 use WellCommerce\Bundle\DataSetBundle\Column\ColumnCollection;
+use WellCommerce\Bundle\DataSetBundle\Column\ColumnInterface;
 use WellCommerce\Bundle\DataSetBundle\Configurator\DataSetConfiguratorInterface;
 use WellCommerce\Bundle\DataSetBundle\DataSetInterface;
-use WellCommerce\Bundle\DataSetBundle\Loader\DataSetLoaderInterface;
-use WellCommerce\Bundle\DataSetBundle\Request\DataSetRequest;
-use WellCommerce\Bundle\DataSetBundle\Transformer\TransformerCollection;
+use WellCommerce\Bundle\DataSetBundle\Manager\DataSetManagerInterface;
+use WellCommerce\Bundle\DataSetBundle\QueryBuilder\DataSetQueryBuilderInterface;
+use WellCommerce\Bundle\DataSetBundle\Request\DataSetRequestInterface;
+use WellCommerce\Bundle\DataSetBundle\Transformer\ColumnTransformerCollection;
 
 /**
  * Class AbstractDataSet
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractDataSet extends AbstractContainerAware implements DataSetInterface
+abstract class AbstractDataSet implements DataSetInterface
 {
     /**
-     * @var string
+     * @var ColumnCollection
      */
-    protected $identifier;
+    protected $columns;
 
     /**
-     * @var DataSetLoaderInterface
+     * @var DataSetQueryBuilderInterface
      */
-    protected $loader;
+    protected $dataSetQueryBuilder;
 
     /**
      * @var EventDispatcherInterface
@@ -44,35 +46,41 @@ abstract class AbstractDataSet extends AbstractContainerAware implements DataSet
     protected $eventDispatcher;
 
     /**
-     * @var ColumnCollection
+     * @var ColumnTransformerCollection
      */
-    protected $columns;
+    protected $columnTransformers;
 
     /**
-     * @var TransformerCollection
+     * @var DataSetManagerInterface
      */
-    protected $transformers;
+    protected $manager;
 
     /**
-     * @param string                   $identifier
-     * @param DataSetLoaderInterface   $loader
-     * @param EventDispatcherInterface $eventDispatcher
+     * @var array
      */
-    public function __construct($identifier, DataSetLoaderInterface $loader, EventDispatcherInterface $eventDispatcher)
-    {
-        $this->identifier      = $identifier;
-        $this->loader          = $loader;
-        $this->eventDispatcher = $eventDispatcher;
-        $this->columns         = new ColumnCollection();
-        $this->transformers    = new TransformerCollection();
-    }
+    protected $defaultContextOptions = [];
 
     /**
-     * {@inheritdoc}
+     * @var array
      */
-    public function getIdentifier()
-    {
-        return $this->identifier;
+    protected $defaultRequestOptions = [];
+
+    /**
+     * Constructor
+     *
+     * @param DataSetQueryBuilderInterface $dataSetQueryBuilder
+     * @param DataSetManagerInterface      $manager
+     * @param EventDispatcherInterface     $eventDispatcher
+     */
+    public function __construct(
+        DataSetQueryBuilderInterface $dataSetQueryBuilder,
+        DataSetManagerInterface $manager,
+        EventDispatcherInterface $eventDispatcher
+    ) {
+        $this->dataSetQueryBuilder = $dataSetQueryBuilder;
+        $this->manager             = $manager;
+        $this->eventDispatcher     = $eventDispatcher;
+        $this->columns             = new ColumnCollection();
     }
 
     /**
@@ -94,17 +102,9 @@ abstract class AbstractDataSet extends AbstractContainerAware implements DataSet
     /**
      * {@inheritdoc}
      */
-    public function getTransformers()
+    public function addColumn(ColumnInterface $column)
     {
-        return $this->transformers;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setTransformers(TransformerCollection $transformers)
-    {
-        $this->transformers = $transformers;
+        $this->columns->add($column);
     }
 
     /**
@@ -115,8 +115,93 @@ abstract class AbstractDataSet extends AbstractContainerAware implements DataSet
     /**
      * {@inheritdoc}
      */
-    public function getResults(DataSetRequest $request)
+    public function setDefaultRequestOption($name, $value)
     {
-        return $this->loader->getResults($this, $request);
+        $this->defaultRequestOptions[$name] = $value;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setDefaultContextOption($name, $value)
+    {
+        $this->defaultContextOptions[$name] = $value;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getResult($contextType, array $requestOptions = [], array $contextOptions = [])
+    {
+        $contextOptions = $this->getContextOptions($contextOptions);
+        $requestOptions = $this->getRequestOptions($requestOptions);
+        $context        = $this->manager->createContext($contextType, $contextOptions);
+        $request        = $this->manager->createRequest($requestOptions);
+        $queryBuilder   = $this->getQueryBuilder($request);
+
+        return $context->getResult($queryBuilder, $request, $this->columns);
+    }
+
+    public function setContext(ContextInterface $context)
+    {
+        $this->context = $context;
+
+        return $this;
+    }
+
+    /**
+     * Returns the default context's options
+     *
+     * @param array $contextOptions
+     *
+     * @return array
+     */
+    protected function getContextOptions(array $contextOptions = [])
+    {
+        $contextOptions = array_merge($this->defaultContextOptions, $contextOptions);
+
+        return $contextOptions;
+    }
+
+    /**
+     * Returns the default request's options
+     *
+     * @param array $requestOptions
+     *
+     * @return array
+     */
+    protected function getRequestOptions(array $requestOptions = [])
+    {
+        $requestOptions = array_merge($this->defaultRequestOptions, $requestOptions);
+
+        return $requestOptions;
+    }
+
+    /**
+     * Creates a dataset's transformer using factory
+     *
+     * @param       $type
+     * @param array $options
+     *
+     * @return \WellCommerce\Bundle\DataSetBundle\Transformer\DataSetTransformerInterface
+     */
+    protected function getDataSetTransformer($type, array $options = [])
+    {
+        return $this->manager->createTransformer($type, $options);
+    }
+
+    /**
+     * Prepares and returns the Doctrine's QueryBuilder
+     *
+     * @param DataSetRequestInterface $request
+     *
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    protected function getQueryBuilder(DataSetRequestInterface $request)
+    {
+        $columns      = $this->getColumns();
+        $queryBuilder = $this->dataSetQueryBuilder->getQueryBuilder($columns, $request);
+
+        return $queryBuilder;
     }
 }

@@ -1,0 +1,39 @@
+{% trans_default_domain "wellcommerce" %}
+<div class="well-form mbt60">
+    <h4>Orders history</h4>
+
+    {% if orders.count == 0 %}
+        <div class="alert alert-info" role="alert">
+            {% trans %}order.notice.empty_order_list{% endtrans %}
+        </div>
+    {% else %}
+    <div class="table-responsive">
+        <table class="table orders-table">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Date</th>
+                <th>Summary</th>
+                <th>Payment method</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for order in orders %}
+            <tr>
+                <td>{{ order.id }}</td>
+                <td>{{ order.createdAt|date }}</td>
+                <td><strong>{{ format_price(order.orderTotal.grossAmount, order.currency, order.currency) }}</strong></td>
+                <td>{{ order.paymentMethod.translate().name }}</td>
+                <td>{{ order.currentStatus.translate().name }}</td>
+                <td><a href="{{ path('front.client_order.view',{"id": order.id}) }}" class="btn btn-link light">Show details</a></td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+</div>
+

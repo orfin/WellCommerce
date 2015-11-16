@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\CoreBundle\Manager\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
+use WellCommerce\Bundle\AdminBundle\Entity\UserInterface;
 use WellCommerce\Bundle\CoreBundle\EventDispatcher\EventDispatcherInterface;
 use WellCommerce\Bundle\CoreBundle\Exception\MissingDataGridException;
 use WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface;
@@ -88,5 +89,19 @@ abstract class AbstractAdminManager extends AbstractManager implements AdminMana
     public function getShopContext()
     {
         return $this->get('shop.context.admin');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAdmin()
+    {
+        $user = $this->getUser();
+
+        if ($user instanceof UserInterface) {
+            return $user;
+        }
+
+        return null;
     }
 }

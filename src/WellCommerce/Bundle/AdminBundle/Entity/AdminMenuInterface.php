@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\AdminBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
-use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
 
 /**
  * Interface AdminMenuInterface

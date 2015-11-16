@@ -15,6 +15,7 @@ use Doctrine\Common\Collections\Collection;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Symfony\Component\Security\Core\User\UserInterface;
+use WellCommerce\Bundle\CommonBundle\Entity\ShopAwareTrait;
 
 /**
  * Class Client
@@ -23,9 +24,11 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class Client implements ClientInterface
 {
-    use Timestampable, Blameable, ClientAddressAwareTrait;
-
     const ROLE_CLIENT = 'ROLE_CLIENT';
+
+    use Timestampable;
+    use Blameable;
+    use ShopAwareTrait;
 
     /**
      * @var int
@@ -40,32 +43,12 @@ class Client implements ClientInterface
     /**
      * @var string
      */
-    protected $firstName;
-
-    /**
-     * @var string
-     */
-    protected $lastName;
-
-    /**
-     * @var string
-     */
     protected $password;
 
     /**
      * @var string
      */
-    protected $email;
-
-    /**
-     * @var string
-     */
     protected $username;
-
-    /**
-     * @var string
-     */
-    protected $phone;
 
     /**
      * @var string
@@ -83,6 +66,11 @@ class Client implements ClientInterface
     protected $orders;
 
     /**
+     * @var Collection
+     */
+    protected $wishlist;
+
+    /**
      * @var bool
      */
     protected $conditionsAccepted;
@@ -91,6 +79,26 @@ class Client implements ClientInterface
      * @var bool
      */
     protected $newsletterAccepted;
+
+    /**
+     * @var ClientContactDetailsInterface
+     */
+    protected $contactDetails;
+
+    /**
+     * @var ClientBillingAddressInterface
+     */
+    protected $billingAddress;
+
+    /**
+     * @var ClientShippingAddressInterface
+     */
+    protected $shippingAddress;
+
+    /**
+     * @var string
+     */
+    protected $resetPasswordHash;
 
     /**
      * @inheritDoc
@@ -117,30 +125,6 @@ class Client implements ClientInterface
     }
 
     /**
-     * @inheritDoc
-     */
-    public function getAddresses()
-    {
-        return $this->addresses;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function setAddresses(Collection $addresses)
-    {
-        $this->addresses = $addresses;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function addAddress(ClientAddressInterface $address)
-    {
-        $this->addresses[] = $address;
-    }
-
-    /**
      * @return ClientGroupInterface
      */
     public function getClientGroup()
@@ -154,55 +138,6 @@ class Client implements ClientInterface
     public function setClientGroup(ClientGroupInterface $clientGroup)
     {
         $this->clientGroup = $clientGroup;
-    }
-
-    /**
-     * @return string
-     */
-    public function getFirstName()
-    {
-        return $this->firstName;
-    }
-
-    /**
-     * @param string $firstName
-     */
-    public function setFirstName($firstName)
-    {
-        $this->firstName = (string)$firstName;
-    }
-
-    /**
-     * @return string
-     */
-    public function getLastName()
-    {
-        return $this->lastName;
-    }
-
-    /**
-     * @param string $lastName
-     */
-    public function setLastName($lastName)
-    {
-        $this->lastName = (string)$lastName;
-    }
-
-    /**
-     * @return string
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function setEmail($email)
-    {
-        $this->email    = (string)$email;
-        $this->username = (string)$email;
     }
 
     /**
@@ -221,6 +156,11 @@ class Client implements ClientInterface
         if (strlen($password)) {
             $this->password = password_hash($password, PASSWORD_BCRYPT, ['cost' => 12]);
         }
+    }
+
+    public function resetPassword()
+    {
+        $this->password = null;
     }
 
     /**
@@ -260,6 +200,7 @@ class Client implements ClientInterface
     public function setUsername($username)
     {
         $this->username = (string)$username;
+        $this->contactDetails->setEmail((string)$username);
     }
 
     /**
@@ -270,22 +211,6 @@ class Client implements ClientInterface
         return [
             self::ROLE_CLIENT
         ];
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getPhone()
-    {
-        return $this->phone;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function setPhone($phone)
-    {
-        $this->phone = (string)$phone;
     }
 
     /**
@@ -317,7 +242,7 @@ class Client implements ClientInterface
             return false;
         }
 
-        if ($this->email !== $user->getUsername()) {
+        if ($this->username !== $user->getUsername()) {
             return false;
         }
 
@@ -362,5 +287,77 @@ class Client implements ClientInterface
     public function getOrders()
     {
         return $this->orders;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getWishlist()
+    {
+        return $this->wishlist;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getContactDetails()
+    {
+        return $this->contactDetails;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setContactDetails(ClientContactDetailsInterface $contactDetails)
+    {
+        $this->contactDetails = $contactDetails;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBillingAddress()
+    {
+        return $this->billingAddress;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setBillingAddress(ClientBillingAddressInterface $billingAddress)
+    {
+        $this->billingAddress = $billingAddress;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getShippingAddress()
+    {
+        return $this->shippingAddress;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setShippingAddress(ClientShippingAddressInterface $shippingAddress)
+    {
+        $this->shippingAddress = $shippingAddress;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getResetPasswordHash()
+    {
+        return $this->resetPasswordHash;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setResetPasswordHash($resetPasswordHash)
+    {
+        $this->resetPasswordHash = $resetPasswordHash;
     }
 }

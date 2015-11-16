@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <imports>
+        <import resource="admin/product_review.xml"/>
+        <import resource="front/product_review.xml"/>
+    </imports>
+
+    <services>
+        <service id="product_review.repository" class="WellCommerce\Bundle\CatalogBundle\Repository\ProductReviewRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>WellCommerceCatalogBundle:ProductReview</argument>
+        </service>
+
+        <service id="product_review.factory" class="WellCommerce\Bundle\CatalogBundle\Factory\ProductReviewFactory" />
+
+        <service id="product_review.event_dispatcher" parent="core.event_dispatcher" public="false">
+            <argument type="service" id="event_dispatcher" />
+        </service>
+
+        <service id="twig.extension.product_review" class="WellCommerce\Bundle\CatalogBundle\Twig\Extension\ProductReviewExtension">
+            <tag name="twig.extension"/>
+        </service>
+    </services>
+</container>

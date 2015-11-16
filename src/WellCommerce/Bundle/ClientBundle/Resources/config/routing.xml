@@ -4,7 +4,6 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-    <import resource="routing/admin/client.xml" prefix="/admin/crm/client/"/>
-    <import resource="routing/front/client.xml" prefix="/client/"/>
-    <import resource="routing/admin/client_group.xml" prefix="/admin/crm/client/group/"/>
+    <import resource="routing/client.xml"/>
+    <import resource="routing/client_group.xml"/>
 </routes>

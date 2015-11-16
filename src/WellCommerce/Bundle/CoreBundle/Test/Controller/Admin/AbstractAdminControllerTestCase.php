@@ -34,15 +34,19 @@ class AbstractAdminControllerTestCase extends AbstractTestCase
 
     protected function logIn()
     {
+        $user     = $this->container->get('user.repository')->findOneBy([]);
         $session  = $this->client->getContainer()->get('session');
         $firewall = 'admin';
         $token    = new UsernamePasswordToken('admin', 'admin', $firewall, ['ROLE_ADMIN']);
+        $token->setUser($user);
 
         $session->set('_security_' . $firewall, serialize($token));
         $session->save();
 
         $cookie = new Cookie($session->getName(), $session->getId());
         $this->client->getCookieJar()->set($cookie);
+
+        $this->container->get('security.token_storage')->setToken($token);
     }
 
     /**
@@ -66,8 +70,8 @@ class AbstractAdminControllerTestCase extends AbstractTestCase
      *
      * @return string
      */
-    protected function trans($message, $domain = 'admin')
+    protected function trans($message, $domain = 'wellcommerce')
     {
-        return $this->container->get('translator_helper')->trans($message, [], $domain);
+        return $this->container->get('translator.helper')->trans($message, [], $domain);
     }
 }

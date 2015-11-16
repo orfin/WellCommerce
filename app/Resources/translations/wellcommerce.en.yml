@@ -6,7 +6,10 @@
 # For the full copyright and license information,
 # please view the LICENSE file that was distributed with this source code.
 
-admin:
+form:
+    help:
+        required_fields: '* required fields'
+common:
     button:
         add: Add
         save: 'Save changes'
@@ -14,7 +17,6 @@ admin:
         save_and_continue: 'Save and continue'
         save_and_add_another: 'Save and add another'
         back: Return
-form:
     help:
         required_fields: '* required fields'
     fieldset:
@@ -24,26 +26,64 @@ form:
         shops: Shops
         prices: Prices
         discount_settings: Discount settings
-common:
+        general: General
+        photos: Photos
+        meta: Meta
+        shops: Shops
+        categories: Categories
+        description: Description
+        prices: Prices
     label:
         id: ID
         name: Name
         currency: Currency
+        short_description: Short description
         description: Description
         code: Code
         slug: Slug
+        group: Group
         discount: Discount
         created_at: Created at
         updated_at: Updated at
         valid_from: Valid from
         valid_to: Valid to
         enabled: Enabled
+        preview: Preview
+        extension: Extension
+        mime: MIME
+        size: Size
         publish: Published
         hierarchy: Hierarchy
         password: Password
+        producer: Producer
         tax: Tax
+        stock: Stock
+        categories: Categories
+        sku: SKU
         default_order_status: Default order status
         url: URL address
+        shops: Available in shops
+        meta:
+            title: Meta title
+            keywords: Meta keywords
+            description: Meta description
+        dimension:
+            width: Width
+            height: Height
+            depth: Depth
+            length: Length
+            weight: Weight
+        phone: Phone
+        secondary_phone: Secondary phone
+        email: E-mail
+        price: Price
+        discounted_price: Discounted price
+        gross_price: Gross price
+        net_price: Net price
+        first_name: First name
+        last_name: Last name
+        client_group: Client group
+
 address:
     heading:
         billing_address: Billing address
@@ -62,22 +102,10 @@ contact_details:
     heading:
         details: Contact details
     label:
-        phone: Phone
-        secondary_phone: Secondary phone
-        email: E-mail
-meta:
-    label:
-        title: Meta title
-        description: Meta description
-        keywords: Meta keywords
+        first_name: First name
+        last_name: Last name
 
-dimension:
-    label:
-        width: Width
-        height: Height
-        depth: Depth
-        length: Length
-        weight: Weight
+
 price:
     sell_price:
         net:    Sell price net
@@ -89,4 +117,5 @@ price:
         net: Discounted price net
         gross: Discounted price gross
         discount:   Discount
+
 

@@ -7,46 +7,41 @@ WellCommerce\Bundle\ClientBundle\Entity\Client:
             type: integer
             generator:
                 strategy: AUTO
+    embedded:
+        billingAddress:
+            class: WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddress
+            columnPrefix: billing_address_
+        shippingAddress:
+            class: WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddress
+            columnPrefix: shipping_address_
+        contactDetails:
+            class: WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetails
+            columnPrefix: contact_details_
     fields:
         discount:
             type: decimal
-            scale: 4
+            scale: 2
             nullable: false
             precision: 15
-        firstName:
-            type: string
-            length: 255
-            nullable: false
-            column: first_name
-        lastName:
-            type: string
-            length: 255
-            nullable: false
-            column: last_name
         password:
             type: string
             length: 64
-            nullable: false
-        email:
-            type: string
-            length: 60
-            unique: true
             nullable: false
         username:
             type: string
             length: 60
             unique: true
             nullable: false
-        phone:
-            type: string
-            length: 60
-            unique: false
-            nullable: false
         salt:
             type: string
             length: 40
             unique: false
             nullable: false
+        resetPasswordHash:
+            type: string
+            length: 48
+            unique: true
+            nullable: true
         conditionsAccepted:
             type: boolean
             nullable: false
@@ -56,17 +51,16 @@ WellCommerce\Bundle\ClientBundle\Entity\Client:
             nullable: false
             column: newsletter_accepted
     oneToMany:
-        addresses:
-            targetEntity: WellCommerce\Bundle\ClientBundle\Entity\ClientAddress
+        wishlist:
+            targetEntity: WellCommerce\Bundle\ClientBundle\Entity\ClientWishlist
             cascade:
                 - remove
                 - persist
             fetch: LAZY
             mappedBy: client
             orphanRemoval: true
-    oneToMany:
         orders:
-            targetEntity: WellCommerce\Bundle\ClientBundle\Entity\ClientAddress
+            targetEntity: WellCommerce\Bundle\SalesBundle\Entity\Order
             cascade:
                 - remove
                 - persist
@@ -74,6 +68,13 @@ WellCommerce\Bundle\ClientBundle\Entity\Client:
             mappedBy: client
             orphanRemoval: true
     manyToOne:
+        shop:
+            targetEntity: WellCommerce\Bundle\CommonBundle\Entity\Shop
+            fetch: LAZY
+            joinColumns:
+                shop_id:
+                    referencedColumnName: id
+                    onDelete: CASCADE
         clientGroup:
             targetEntity: WellCommerce\Bundle\ClientBundle\Entity\ClientGroup
             fetch: LAZY

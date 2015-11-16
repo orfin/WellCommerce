@@ -57,16 +57,21 @@ class EnvironmentHelper implements EnvironmentHelperInterface
      */
     public function getPhpBinary()
     {
-        $process = new Process('whereis php');
-        $process->run();
-        $output = $process->getOutput();
-        $lines  = explode(PHP_EOL, $output);
-        if (count($lines) > 0) {
-            return current($lines);
+        $binaryPath = $this->kernel->getContainer()->getParameter('php_binary_path');
+
+        if (null === $binaryPath) {
+            $process = new Process('whereis php');
+            $process->run();
+            $output = $process->getOutput();
+            $lines  = explode(PHP_EOL, $output);
+            if (count($lines) > 0) {
+                $binaryPath = current($lines);
+            }
         }
 
-        throw new \RuntimeException('PHP binary was not found');
+        return $binaryPath;
     }
+
 
     /**
      * {@inheritdoc}

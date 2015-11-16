@@ -56,88 +56,19 @@ interface RequestHelperInterface
     public function hasSessionAttribute($name);
 
     /**
-     * Returns the session identifier
+     * Returns the session's identifier
      *
      * @return string
      */
     public function getSessionId();
 
     /**
-     * Returns the request attribute from request
-     *
-     * @param string $name
-     * @param null   $default
-     *
-     * @return mixed
-     */
-    public function getRequestAttribute($name, $default = null);
-
-    /**
-     * Checks whether request contains request attribute
-     *
-     * @param string $name
-     *
-     * @return mixed
-     */
-    public function hasRequestAttribute($name);
-
-    /**
-     * Returns the attribute from query string
-     *
-     * @param string $name
-     * @param null   $default
-     *
-     * @return mixed
-     */
-    public function getQueryAttribute($name, $default = null);
-
-    /**
-     * Checks whether query string contains attribute
-     *
-     * @param string $name
-     *
-     * @return mixed
-     */
-    public function hasQueryAttribute($name);
-
-    /**
-     * Returns the attribute from request
-     *
-     * @param string $name
-     * @param null   $default
-     *
-     * @return mixed
-     */
-    public function getAttribute($name, $default = null);
-
-    /**
-     * Checks whether request contains attribute
-     *
-     * @param string $name
-     *
-     * @return mixed
-     */
-    public function hasAttribute($name);
-
-    /**
-     * Returns the signed-in admin from security context
-     *
-     * @return null|\WellCommerce\Bundle\UserBundle\Entity\User
-     */
-    public function getAdmin();
-
-    /**
-     * Returns the signed-in client from security context
-     *
-     * @return null|\WellCommerce\Bundle\ClientBundle\Entity\Client
-     */
-    public function getClient();
-
-    /**
-     * Returns current host name
+     * Returns the session's name
      *
      * @return string
      */
+    public function getSessionName();
+
     /**
      * Returns current host
      *
@@ -146,31 +77,6 @@ interface RequestHelperInterface
      * @return string|null
      */
     public function getCurrentHost();
-
-    /**
-     * Returns current offset
-     *
-     * @param number $limit
-     *
-     * @return int|number
-     */
-    public function getCurrentOffset($limit);
-
-    /**
-     * Returns current page
-     *
-     * @return number
-     */
-    public function getCurrentPage();
-
-    /**
-     * Returns current limit
-     *
-     * @param mixed $default
-     *
-     * @return number
-     */
-    public function getCurrentLimit($default);
 
     /**
      * Returns current locale
@@ -185,4 +91,73 @@ interface RequestHelperInterface
      * @return string
      */
     public function getCurrentCurrency();
+
+    /**
+     * Returns a param from query bag
+     *
+     * @param string $name
+     * @param null   $default
+     * @param int    $filter
+     *
+     * @return mixed
+     */
+    public function getQueryBagParam($name, $default = null, $filter = FILTER_SANITIZE_SPECIAL_CHARS);
+
+    /**
+     * Checks whether request has given attribute
+     *
+     * @param string $name
+     *
+     * @return bool
+     */
+    public function hasRequestBagParam($name);
+
+    /**
+     * Checks whether request has given attributes
+     *
+     * @param array $params
+     *
+     * @return bool
+     */
+    public function hasRequestBagParams(array $params = []);
+
+    /**
+     * Returns a param from request bag
+     *
+     * @param string $name
+     * @param null   $default
+     * @param int    $filter
+     *
+     * @return mixed
+     */
+    public function getRequestBagParam($name, $default = null, $filter = FILTER_SANITIZE_SPECIAL_CHARS);
+
+    /**
+     * Checks whether request has given attribute
+     *
+     * @param string $name
+     *
+     * @return bool
+     */
+    public function hasAttributesBagParam($name);
+
+    /**
+     * Checks whether request has given attributes
+     *
+     * @param array $params
+     *
+     * @return bool
+     */
+    public function hasAttributesBagParams(array $params = []);
+
+    /**
+     * Returns a param from attributes bag
+     *
+     * @param string $name
+     * @param null   $default
+     * @param int    $filter
+     *
+     * @return mixed
+     */
+    public function getAttributesBagParam($name, $default = null, $filter = FILTER_SANITIZE_SPECIAL_CHARS);
 }

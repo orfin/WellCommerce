@@ -23,33 +23,26 @@ class ClientSettingsBoxController extends AbstractBoxController
 {
     public function indexAction()
     {
-        $request = $this->manager->getRequestHelper()->getCurrentRequest();
-        $client  = $this->manager->getRequestHelper()->getClient();
-        if (null === $client) {
-            return $this->redirectToRoute('front.client.login');
-        }
+        $client             = $this->manager->getClient();
+        $contactDetailsForm = $this->manager->getForm($client, [
+            'name'              => 'contact_details',
+            'validation_groups' => ['client_settings']
+        ]);
 
-        $form = $this->get('client_contact_details.form_builder.front')->createForm([
-            'name' => 'settings'
-        ], $client);
-
-        if ($form->handleRequest()->isSubmitted()) {
-            if ($form->isValid()) {
-                $this->manager->updateResource($client, $request);
+        if ($contactDetailsForm->handleRequest()->isSubmitted()) {
+            if ($contactDetailsForm->isValid()) {
+                $this->manager->updateResource($client);
 
                 $this->manager->getFlashHelper()->addSuccess('client.flash.contact_details.success');
 
-                return $this->redirectToRoute('front.client.settings');
+                return $this->redirectToRoute('front.client_settings.index');
             }
 
-            if (count($form->getError())) {
-                $this->manager->getFlashHelper()->addError('client.flash.contact_details.error');
-            }
+            $this->manager->getFlashHelper()->addError('client.flash.contact_details.error');
         }
 
         return $this->displayTemplate('index', [
-            'form'     => $form,
-            'elements' => $form->getChildren(),
+            'contactDetailsForm' => $contactDetailsForm,
         ]);
     }
 }

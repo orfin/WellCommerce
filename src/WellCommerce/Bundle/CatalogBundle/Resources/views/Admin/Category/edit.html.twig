@@ -1,0 +1,26 @@
+{% extends 'WellCommerceAdminBundle:Admin:layout.html.twig' %}
+{% trans_default_domain "wellcommerce" %}
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts '@WellCommerceCatalogBundle/Resources/public/js/*' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+{% block content %}
+    <h2>{% trans %}category.heading.edit{% endtrans %} &raquo; {{ resource.translate().name }}</h2>
+    <ul class="possibilities">
+        <li><a href="{{ path('admin.category.index') }}" class="button return"><span></span></a></li>
+        <li><a href="#{{ form.getName() }}" rel="submit" class="button"><span>{% trans %}common.button.save_and_finish{% endtrans %}</span></a></li>
+        <li><a href="#{{ form.getName() }}" rel="submit[continue]" class="button"><span>{% trans %}common.button.save_and_continue{% endtrans %}</span></a></li>
+    </ul>
+    <div class="layout-two-columns">
+        <div class="column narrow-collapsed">
+            <div class="block">
+                {{ form_js(tree) }}
+            </div>
+        </div>
+        <div class="column wide-collapsed">
+            {{ form_js(form) }}
+        </div>
+    </div>
+{% endblock %}

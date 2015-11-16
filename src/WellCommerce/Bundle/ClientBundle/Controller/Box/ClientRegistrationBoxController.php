@@ -24,9 +24,12 @@ class ClientRegistrationBoxController extends AbstractBoxController
     public function indexAction()
     {
         $resource = $this->manager->initResource();
-        $form     = $this->get('client_register.form_builder.front')->createForm([
-            'name' => 'register'
-        ], $resource);
+        $resource->setShop($this->manager->getShopContext()->getCurrentShop());
+
+        $form = $this->manager->getForm($resource, [
+            'name'              => 'register',
+            'validation_groups' => ['client_registration']
+        ]);
 
         if ($form->handleRequest()->isSubmitted()) {
             if ($form->isValid()) {
@@ -37,14 +40,11 @@ class ClientRegistrationBoxController extends AbstractBoxController
                 return $this->getRouterHelper()->redirectTo('front.client.login');
             }
 
-            if (count($form->getError())) {
-                $this->manager->getFlashHelper()->addError('client.form.error.registration');
-            }
+            $this->manager->getFlashHelper()->addError('client.flash.registration.error');
         }
 
         return $this->displayTemplate('index', [
-            'form'     => $form,
-            'elements' => $form->getChildren(),
+            'form' => $form,
         ]);
     }
 }

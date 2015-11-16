@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\CoreBundle\Manager\Front;
 
 use WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface;
-use WellCommerce\Bundle\CoreBundle\Provider\ProviderCollection;
 
 /**
  * Interface FrontManagerInterface
@@ -23,58 +22,52 @@ use WellCommerce\Bundle\CoreBundle\Provider\ProviderCollection;
 interface FrontManagerInterface extends ManagerInterface
 {
     /**
-     * Returns providers collection
-     *
-     * @return ProviderCollection
+     * @return \WellCommerce\Bundle\SalesBundle\Context\Front\CartContextInterface
      */
-    public function getProviders();
+    public function getCartContext();
 
     /**
-     * Returns single provider by type
-     *
-     * @param $type
-     *
-     * @return \WellCommerce\Bundle\CoreBundle\Provider\ProviderInterface
+     * @return \WellCommerce\Bundle\CatalogBundle\Context\Front\CategoryContextInterface
      */
-    public function getProvider($type);
+    public function getCategoryContext();
 
     /**
-     * Shorthand to get category provider
-     *
-     * @return \WellCommerce\Bundle\CategoryBundle\Provider\CategoryProviderInterface
+     * @return \WellCommerce\Bundle\CmsBundle\Context\Front\ContactContextInterface
      */
-    public function getCategoryProvider();
+    public function getContactContext();
 
     /**
-     * Shorthand to get product provider
-     *
-     * @return \WellCommerce\Bundle\ProductBundle\Provider\ProductProviderInterface
+     * @return \WellCommerce\Bundle\CmsBundle\Context\Front\NewsContextInterface
      */
-    public function getProductProvider();
+    public function getNewsContext();
 
     /**
-     * Shorthand to get product status provider
-     *
-     * @return \WellCommerce\Bundle\ProductBundle\Provider\ProductStatusProviderInterface
+     * @return \WellCommerce\Bundle\CmsBundle\Context\Front\PageContextInterface
      */
-    public function getProductStatusProvider();
+    public function getPageContext();
 
     /**
-     * Shorthand to get cart provider
-     *
-     * @return \WellCommerce\Bundle\CartBundle\Provider\CartProviderInterface
+     * @return \WellCommerce\Bundle\CatalogBundle\Context\Front\ProductContextInterface
      */
-    public function getCartProvider();
+    public function getProductContext();
 
     /**
-     * Shorthand to get cart products provider
-     *
-     * @return \WellCommerce\Bundle\CartBundle\Provider\CartProductProviderInterface
+     * @return \WellCommerce\Bundle\CatalogBundle\Context\Front\ProductStatusContextInterface
      */
-    public function getCartProductProvider();
+    public function getProductStatusContext();
 
     /**
-     * @return \WellCommerce\Bundle\CartBundle\Entity\Cart
+     * @return \WellCommerce\Bundle\CatalogBundle\Context\Front\ProducerContextInterface
      */
-    public function getCurrentCart();
+    public function getProducerContext();
+
+    /**
+     * @return \WellCommerce\Bundle\LayoutBundle\Context\Front\ThemeContextInterface
+     */
+    public function getThemeContext();
+
+    /**
+     * @return null|\WellCommerce\Bundle\ClientBundle\Entity\ClientInterface
+     */
+    public function getClient();
 }

@@ -6,6 +6,11 @@
     <imports>
         <import resource="admin/client.xml"/>
         <import resource="front/client.xml"/>
+        <import resource="front/client_wishlist.xml"/>
+        <import resource="front/client_settings.xml"/>
+        <import resource="front/client_registration.xml"/>
+        <import resource="front/client_forgot_password.xml"/>
+        <import resource="front/client_address_book.xml"/>
     </imports>
 
     <services>
@@ -13,28 +18,9 @@
             <argument>WellCommerceClientBundle:Client</argument>
         </service>
 
-        <service id="client.dataset.query_builder" class="WellCommerce\Bundle\ClientBundle\DataSet\ClientDataSetQueryBuilder" public="false">
-            <argument type="service" id="client.repository"/>
-        </service>
-
-        <service id="client.dataset.loader" class="%dataset.loader.class%">
-            <argument type="service" id="client.dataset.query_builder"/>
-            <argument type="service" id="dataset.processor"/>
-        </service>
-
-        <service id="client.dataset" class="WellCommerce\Bundle\ClientBundle\DataSet\ClientDataSet">
-            <argument key="identifier">client</argument>
-            <argument type="service" id="client.dataset.loader"/>
-            <argument type="service" id="client.event_dispatcher"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-            <configurator service="dataset.configurator" method="configure"/>
-        </service>
-
         <service id="client.factory" class="WellCommerce\Bundle\ClientBundle\Factory\ClientFactory" />
 
-        <service id="client.event_dispatcher" class="WellCommerce\Bundle\ClientBundle\EventDispatcher\ClientEventDispatcher">
+        <service id="client.event_dispatcher" parent="core.event_dispatcher" public="false">
             <argument type="service" id="event_dispatcher"/>
         </service>
 
@@ -43,6 +29,17 @@
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
+        </service>
+
+        <service id="client.subscriber" class="WellCommerce\Bundle\ClientBundle\EventListener\ClientSubscriber">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="twig.extension.client_address_formatter" class="WellCommerce\Bundle\ClientBundle\Twig\ClientAddressFormatterExtension">
+            <tag name="twig.extension"/>
         </service>
     </services>
 </container>
