@@ -9,6 +9,8 @@
         <import resource="services/locale.xml"/>
         <import resource="services/dictionary.xml"/>
         <import resource="services/routing.xml"/>
+        <import resource="services/channel.xml"/>
+        <import resource="services/package.xml"/>
     </imports>
 
     <services>

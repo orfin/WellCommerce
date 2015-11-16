@@ -33,6 +33,3 @@ wellcommerce_layout:
 
 wellcommerce_cms:
     resource: "@WellCommerceCmsBundle/Resources/config/routing.xml"
-
-wellcommerce_smuggler:
-    resource: "@WellCommerceSmugglerBundle/Resources/config/routing.xml"

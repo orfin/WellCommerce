@@ -4,9 +4,11 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
+    <import resource="routing/channel.xml"/>
     <import resource="routing/currency.xml"/>
     <import resource="routing/locale.xml"/>
     <import resource="routing/dictionary.xml"/>
+    <import resource="routing/package.xml"/>
     <import resource="routing/routing.xml"/>
 
     <route id="front.home_page.index" path="/">
