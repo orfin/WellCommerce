@@ -33,7 +33,7 @@ class ClientGroupDataGrid extends AbstractDataGrid
     {
         $collection->add(new Column([
             'id'         => 'id',
-            'caption'    => $this->trans('client_group.id.label'),
+            'caption'    => $this->trans('common.label.id'),
             'sorting'    => new Sorting([
                 'default_order' => ColumnInterface::SORT_DIR_DESC,
             ]),
@@ -48,7 +48,7 @@ class ClientGroupDataGrid extends AbstractDataGrid
 
         $collection->add(new Column([
             'id'         => 'name',
-            'caption'    => $this->trans('client_group.name.label'),
+            'caption'    => $this->trans('common.label.name'),
             'appearance' => new Appearance([
                 'width' => 290,
             ]),
@@ -56,7 +56,7 @@ class ClientGroupDataGrid extends AbstractDataGrid
 
         $collection->add(new Column([
             'id'         => 'totalClients',
-            'caption'    => $this->trans('client_group.total_clients.label'),
+            'caption'    => $this->trans('client_group.label.total_clients'),
             'filter'     => new Filter([
                 'type' => Filter::FILTER_BETWEEN,
             ]),

@@ -118,15 +118,6 @@
     </item>
 
     <item>
-        <identifier>routing</identifier>
-        <css_class/>
-        <name>routing</name>
-        <route_name>admin.routing.index</route_name>
-        <parent>configuration</parent>
-        <hierarchy>50</hierarchy>
-    </item>
-
-    <item>
         <identifier>tax</identifier>
         <css_class/>
         <name>tax</name>

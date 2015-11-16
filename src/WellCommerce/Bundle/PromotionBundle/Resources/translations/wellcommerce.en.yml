@@ -11,6 +11,8 @@ coupon:
         index: Coupons
         add: Add a coupon
         edit: Edit a coupon
+    fieldset:
+        discount_settings: Discounts configuration
     label:
         client_usage_limit: Usage limit for clients
         global_usage_limit: Global usage limit

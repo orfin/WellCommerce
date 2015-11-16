@@ -45,7 +45,7 @@ class PageFormBuilder extends AbstractFormBuilder
     {
         $mainData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'main_data',
-            'label' => $this->trans('fieldset.main.label')
+            'label' => $this->trans('common.fieldset.general')
         ]));
 
         $languageData = $mainData->addChild($this->getElement('language_fieldset', [
@@ -56,12 +56,12 @@ class PageFormBuilder extends AbstractFormBuilder
 
         $name = $languageData->addChild($this->getElement('text_field', [
             'name'  => 'name',
-            'label' => $this->trans('page.name.label'),
+            'label' => $this->trans('common.label.name'),
         ]));
 
         $languageData->addChild($this->getElement('slug_field', [
             'name'            => 'slug',
-            'label'           => $this->trans('page.slug.label'),
+            'label'           => $this->trans('common.label.slug'),
             'name_field'      => $name,
             'generate_route'  => 'admin.routing.generate',
             'translatable_id' => $this->getParam('id')
@@ -69,20 +69,20 @@ class PageFormBuilder extends AbstractFormBuilder
 
         $mainData->addChild($this->getElement('checkbox', [
             'name'    => 'publish',
-            'label'   => $this->trans('page.publish.label'),
-            'comment' => $this->trans('page.publish.help'),
+            'label'   => $this->trans('common.label.publish'),
+            'comment' => $this->trans('common.comment.publish'),
             'default' => 1
         ]));
 
         $mainData->addChild($this->getElement('text_field', [
             'name'    => 'hierarchy',
-            'label'   => $this->trans('page.hierarchy.label'),
+            'label'   => $this->trans('common.label.hierarchy'),
             'default' => 0
         ]));
 
         $mainData->addChild($this->getElement('tree', [
             'name'        => 'parent',
-            'label'       => $this->trans('page.parent.label'),
+            'label'       => $this->trans('page.label.parent'),
             'choosable'   => true,
             'selectable'  => false,
             'sortable'    => false,
@@ -93,7 +93,7 @@ class PageFormBuilder extends AbstractFormBuilder
         ]));
 
         $mainData->addChild($this->getElement('tip', [
-            'tip' => $this->trans('page.tip.client_groups')
+            'tip' => '<p>' . $this->trans('page.tip.client_groups') . '</p>'
         ]));
 
         $mainData->addChild($this->getElement('multi_select', [
@@ -113,7 +113,7 @@ class PageFormBuilder extends AbstractFormBuilder
     {
         $contentData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'content_data',
-            'label' => $this->trans('fieldset.content.label')
+            'label' => $this->trans('common.fieldset.description')
         ]));
 
         $languageData = $contentData->addChild($this->getElement('language_fieldset', [
@@ -124,12 +124,12 @@ class PageFormBuilder extends AbstractFormBuilder
 
         $languageData->addChild($this->getElement('rich_text_editor', [
             'name'  => 'content',
-            'label' => $this->trans('page.content.label'),
+            'label' => $this->trans('common.label.description'),
         ]));
 
         $metaData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'meta_data',
-            'label' => $this->trans('fieldset.meta.label')
+            'label' => $this->trans('common.fieldset.meta')
         ]));
 
         $languageData = $metaData->addChild($this->getElement('language_fieldset', [
@@ -140,17 +140,17 @@ class PageFormBuilder extends AbstractFormBuilder
 
         $languageData->addChild($this->getElement('text_field', [
             'name'  => 'meta.title',
-            'label' => $this->trans('meta.title.label')
+            'label' => $this->trans('common.label.meta.title')
         ]));
 
         $languageData->addChild($this->getElement('text_field', [
             'name'  => 'meta.keywords',
-            'label' => $this->trans('meta.keywords.label'),
+            'label' => $this->trans('common.label.meta.keywords'),
         ]));
 
         $languageData->addChild($this->getElement('text_area', [
             'name'  => 'meta.description',
-            'label' => $this->trans('meta.description.label'),
+            'label' => $this->trans('common.label.meta.description'),
         ]));
     }
 
@@ -158,16 +158,16 @@ class PageFormBuilder extends AbstractFormBuilder
     {
         $redirectSettings = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'redirect_settings',
-            'label' => $this->trans('label.redirect_settings')
+            'label' => $this->trans('page.fieldset.redirect_settings')
         ]));
 
         $redirectType = $redirectSettings->addChild($this->getElement('select', [
             'name'    => 'redirectType',
-            'label'   => $this->trans('label.redirect_type'),
+            'label'   => $this->trans('page.label.redirect.type'),
             'options' => [
-                0 => $this->trans('label.redirect_type.none'),
-                1 => $this->trans('label.redirect_type.url'),
-                2 => $this->trans('label.redirect_type.route'),
+                0 => $this->trans('page.label.redirect.none'),
+                1 => $this->trans('page.label.redirect.url'),
+                2 => $this->trans('page.label.redirect.route'),
             ]
         ]));
 
@@ -206,12 +206,12 @@ class PageFormBuilder extends AbstractFormBuilder
     {
         $shopsData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'shops_data',
-            'label' => $this->trans('form.fieldset.shops')
+            'label' => $this->trans('common.fieldset.shops')
         ]));
 
         $shopsData->addChild($this->getElement('multi_select', [
             'name'        => 'shops',
-            'label'       => $this->trans('form.label.shops'),
+            'label'       => $this->trans('common.label.shops'),
             'options'     => $this->get('shop.dataset.admin')->getResult('select'),
             'transformer' => $this->getRepositoryTransformer('collection', $this->get('shop.repository'))
         ]));

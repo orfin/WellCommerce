@@ -32,7 +32,7 @@ class ThemeDataGrid extends AbstractDataGrid
     {
         $collection->add(new Column([
             'id'         => 'id',
-            'caption'    => $this->trans('theme.id.label'),
+            'caption'    => $this->trans('common.label.id'),
             'sorting'    => new Sorting([
                 'default_order' => Sorting::SORT_DIR_DESC,
             ]),
@@ -47,12 +47,12 @@ class ThemeDataGrid extends AbstractDataGrid
 
         $collection->add(new Column([
             'id'      => 'name',
-            'caption' => $this->trans('theme.name.label'),
+            'caption' => $this->trans('common.label.name'),
         ]));
 
         $collection->add(new Column([
             'id'      => 'folder',
-            'caption' => $this->trans('theme.folder.label'),
+            'caption' => $this->trans('theme.label.folder'),
         ]));
     }
 }

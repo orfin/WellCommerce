@@ -51,11 +51,25 @@ category:
         add: Create a new category
         edit: Edit category
 
+deliverer:
+    heading:
+        index: Deliverers
+        add: Create a new deliverer
+        edit: Edit deliverer
+
 product_search:
     heading:
         index: Search results
     label:
         phrase: Enter search phrase
+
+product_status:
+    heading:
+        index: Products statuses
+        add: Add a new products status
+        edit: Edit the products status
+    label:
+        css_class: CSS class
 
 product_review:
     heading:
@@ -162,6 +176,10 @@ producer:
         index: Producers
         add: Add a producer
         edit: Edit a producer
+    fieldset:
+        deliverers: Deliverers
+    label:
+        deliverers: Deliverers
 
 unit:
     heading:

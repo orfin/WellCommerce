@@ -28,7 +28,7 @@ class ProductStatusFormBuilder extends AbstractFormBuilder
     {
         $mainData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'required_data',
-            'label' => $this->trans('fieldset.main.label')
+            'label' => $this->trans('common.fieldset.general')
         ]));
 
         $languageData = $mainData->addChild($this->getElement('language_fieldset', [
@@ -39,12 +39,12 @@ class ProductStatusFormBuilder extends AbstractFormBuilder
 
         $name = $languageData->addChild($this->getElement('text_field', [
             'name'  => 'name',
-            'label' => $this->trans('product_status.name.label'),
+            'label' => $this->trans('common.label.name'),
         ]));
 
         $languageData->addChild($this->getElement('slug_field', [
             'name'            => 'slug',
-            'label'           => $this->trans('product_status.slug.label'),
+            'label'           => $this->trans('common.label.slug'),
             'name_field'      => $name,
             'generate_route'  => 'admin.routing.generate',
             'translatable_id' => $this->getParam('id')
@@ -52,13 +52,13 @@ class ProductStatusFormBuilder extends AbstractFormBuilder
 
         $languageData->addChild($this->getElement('text_field', [
             'name'    => 'cssClass',
-            'label'   => $this->trans('product_status.css_class.label'),
-            'comment' => $this->trans('product_status.css_class.comment'),
+            'label'   => $this->trans('product_status.label.css_class'),
+            'comment' => $this->trans('product_status.comment.css_class'),
         ]));
 
         $metaData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'meta_data',
-            'label' => $this->trans('fieldset.meta.label')
+            'label' => $this->trans('common.fieldset.meta')
         ]));
 
         $languageData = $metaData->addChild($this->getElement('language_fieldset', [
@@ -69,17 +69,17 @@ class ProductStatusFormBuilder extends AbstractFormBuilder
 
         $languageData->addChild($this->getElement('text_field', [
             'name'  => 'metaTitle',
-            'label' => $this->trans('meta.label.title')
+            'label' => $this->trans('common.label.meta.title')
         ]));
 
         $languageData->addChild($this->getElement('text_field', [
             'name'  => 'metaKeywords',
-            'label' => $this->trans('meta.label.keywords'),
+            'label' => $this->trans('common.label.meta.keywords'),
         ]));
 
         $languageData->addChild($this->getElement('text_area', [
             'name'  => 'metaDescription',
-            'label' => $this->trans('meta.label.description'),
+            'label' => $this->trans('common.label.meta.description'),
         ]));
 
         $form->addFilter($this->getFilter('no_code'));

@@ -31,7 +31,7 @@ class ThemeFormBuilder extends AbstractFormBuilder
     {
         $requiredData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'required_data',
-            'label' => $this->trans('form.fieldset.required_data')
+            'label' => $this->trans('common.fieldset.general')
         ]));
 
         $requiredData->addChild($this->getElement('text_field', [

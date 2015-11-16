@@ -31,22 +31,22 @@ class ClientFormBuilder extends AbstractFormBuilder
 
         $requiredData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'required_data',
-            'label' => $this->trans('form.fieldset.required_data')
+            'label' => $this->trans('common.fieldset.general')
         ]));
 
         $requiredData->addChild($this->getElement('text_field', [
             'name'  => 'firstName',
-            'label' => $this->trans('common.label.address.first_name'),
+            'label' => $this->trans('common.label.first_name'),
         ]));
 
         $requiredData->addChild($this->getElement('text_field', [
             'name'  => 'lastName',
-            'label' => $this->trans('common.label.address.last_name'),
+            'label' => $this->trans('common.label.last_name'),
         ]));
 
         $requiredData->addChild($this->getElement('text_field', [
             'name'  => 'email',
-            'label' => $this->trans('common.label.contact_details.email'),
+            'label' => $this->trans('common.label.email'),
         ]));
 
         $requiredData->addChild($this->getElement('password', [
@@ -56,19 +56,19 @@ class ClientFormBuilder extends AbstractFormBuilder
 
         $requiredData->addChild($this->getElement('text_field', [
             'name'  => 'phone',
-            'label' => $this->trans('common.label.contact_details.phone'),
+            'label' => $this->trans('common.label.phone'),
         ]));
 
         $requiredData->addChild($this->getElement('select', [
             'name'        => 'group',
-            'label'       => $this->trans('client.label.client_group'),
+            'label'       => $this->trans('common.label.client_group'),
             'options'     => $this->get('client_group.dataset.admin')->getResult('select'),
             'transformer' => $this->getRepositoryTransformer('entity', $this->get('client_group.repository'))
         ]));
 
         $requiredData->addChild($this->getElement('text_field', [
             'name'    => 'discount',
-            'label'   => $this->trans('client.label.discount'),
+            'label'   => $this->trans('common.label.discount'),
             'suffix'  => '%',
             'filters' => [
                 $this->getFilter('comma_to_dot_changer'),

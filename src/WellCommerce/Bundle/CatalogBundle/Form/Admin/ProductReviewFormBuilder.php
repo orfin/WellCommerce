@@ -28,7 +28,7 @@ class ProductReviewFormBuilder extends AbstractFormBuilder
     {
         $mainData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'required_data',
-            'label' => $this->trans('fieldset.main.label')
+            'label' => $this->trans('common.fieldset.general')
         ]));
 
         $mainData->addChild($this->getElement('text_field', [

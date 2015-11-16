@@ -32,7 +32,7 @@ class ChannelDataGrid extends AbstractDataGrid
     {
         $collection->add(new Column([
             'id'         => 'id',
-            'caption'    => $this->trans('channel.id.label'),
+            'caption'    => $this->trans('common.label.id'),
             'sorting'    => new Sorting([
                 'default_order' => Sorting::SORT_DIR_DESC,
             ]),
@@ -47,12 +47,12 @@ class ChannelDataGrid extends AbstractDataGrid
 
         $collection->add(new Column([
             'id'         => 'name',
-            'caption'    => $this->trans('channel.name.label'),
+            'caption'    => $this->trans('common.label.name'),
         ]));
 
         $collection->add(new Column([
             'id'         => 'url',
-            'caption'    => $this->trans('channel.url.label'),
+            'caption'    => $this->trans('common.label.url'),
         ]));
     }
 }

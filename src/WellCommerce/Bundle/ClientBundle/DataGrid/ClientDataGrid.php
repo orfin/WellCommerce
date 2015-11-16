@@ -52,7 +52,7 @@ class ClientDataGrid extends AbstractDataGrid
 
         $collection->add(new Column([
             'id'         => 'lastName',
-            'caption'    => $this->trans('admin.client.label.last_name'),
+            'caption'    => $this->trans('common.label.last_name'),
             'appearance' => new Appearance([
                 'width' => 140,
                 'align' => Appearance::ALIGN_LEFT
@@ -61,7 +61,7 @@ class ClientDataGrid extends AbstractDataGrid
 
         $collection->add(new Column([
             'id'         => 'email',
-            'caption'    => $this->trans('admin.client.label.email'),
+            'caption'    => $this->trans('common.label.email'),
             'appearance' => new Appearance([
                 'width' => 60,
                 'align' => Appearance::ALIGN_CENTER
@@ -70,7 +70,7 @@ class ClientDataGrid extends AbstractDataGrid
 
         $collection->add(new Column([
             'id'         => 'phone',
-            'caption'    => $this->trans('admin.client.label.phone'),
+            'caption'    => $this->trans('common.label.phone'),
             'appearance' => new Appearance([
                 'width' => 80,
                 'align' => Appearance::ALIGN_CENTER
@@ -79,7 +79,7 @@ class ClientDataGrid extends AbstractDataGrid
 
         $collection->add(new Column([
             'id'         => 'groupName',
-            'caption'    => $this->trans('admin.client.label.client_group'),
+            'caption'    => $this->trans('common.label.client_group'),
             'filter'     => new Filter([
                 'type'    => Filter::FILTER_SELECT,
                 'options' => $this->get('client_group.dataset.admin')->getResult('select')
@@ -92,7 +92,7 @@ class ClientDataGrid extends AbstractDataGrid
 
         $collection->add(new Column([
             'id'         => 'createdAt',
-            'caption'    => $this->trans('admin.client.label.created_at'),
+            'caption'    => $this->trans('common.label.created_at'),
             'filter'     => new Filter([
                 'type' => Filter::FILTER_BETWEEN,
             ]),

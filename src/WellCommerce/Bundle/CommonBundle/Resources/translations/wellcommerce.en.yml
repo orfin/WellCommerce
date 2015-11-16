@@ -11,17 +11,22 @@ company:
         index: Companies
         add: Add a company
         edit: Edit a company
+    label:
+        name: Full name
+        short_name: Short name
 
 shop:
     heading:
         index: Shops
         add: Add a shop
         edit: Edit a shop
-    form:
-        fieldset:
-            mailer_configuration: Mailer configuration
+    fieldset:
+        mailer_configuration: Mailer configuration
+        url_configuration: URL configuration
+        cart_configuration: Cart configuration
     label:
         company: Company
+        url: URL
         theme: Default theme
         default_country: Default country
         default_currency: Default currency
@@ -71,3 +76,25 @@ tax:
         edit: Edit a tax rate
     label:
         value: Tax rate
+
+channel:
+    heading:
+        index: Channel
+        add: Add a new channel
+    label:
+        name: Name
+        url: URL
+
+package:
+    heading:
+        index: Packages
+    button:
+        sync: Synchronize packages
+    label:
+        name: Name
+        full_name: Full name
+        vendor: Vendor
+        local_version: Local version
+        remote_version: Remote version
+        created_at: Installed at
+        updated_at: Updated at

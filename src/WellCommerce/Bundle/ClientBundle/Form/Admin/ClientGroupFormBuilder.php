@@ -28,13 +28,13 @@ class ClientGroupFormBuilder extends AbstractFormBuilder
     {
         $requiredData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'required_data',
-            'label' => $this->trans('form.fieldset.required_data')
+            'label' => $this->trans('common.fieldset.general')
         ]));
 
         $requiredData->addChild($this->getElement('text_field', [
             'name'    => 'discount',
-            'label'   => $this->trans('client_group.discount.label'),
-            'comment' => $this->trans('client_group.discount.comment'),
+            'label'   => $this->trans('common.label.discount'),
+            'comment' => $this->trans('common.comment.discount'),
             'suffix'  => '%',
             'filters' => [
                 $this->getFilter('comma_to_dot_changer'),
@@ -49,7 +49,7 @@ class ClientGroupFormBuilder extends AbstractFormBuilder
 
         $languageData->addChild($this->getElement('text_field', [
             'name'  => 'name',
-            'label' => $this->trans('client_group.name.label'),
+            'label' => $this->trans('common.label.name'),
         ]));
 
         $form->addFilter($this->getFilter('no_code'));

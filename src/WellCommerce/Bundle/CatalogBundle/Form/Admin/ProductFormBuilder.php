@@ -353,12 +353,12 @@ class ProductFormBuilder extends AbstractFormBuilder
 
         $shopsData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'shops_data',
-            'label' => $this->trans('product.form.fieldset.shops')
+            'label' => $this->trans('product.common.fieldset.shops')
         ]));
 
         $shopsData->addChild($this->getElement('multi_select', [
             'name'        => 'shops',
-            'label'       => $this->trans('product.form.fieldset.shops'),
+            'label'       => $this->trans('product.common.fieldset.shops'),
             'options'     => $this->get('shop.dataset.admin')->getResult('select'),
             'transformer' => $this->getRepositoryTransformer('collection', $this->get('shop.repository'))
         ]));

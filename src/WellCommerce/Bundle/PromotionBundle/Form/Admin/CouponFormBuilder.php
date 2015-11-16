@@ -30,7 +30,7 @@ class CouponFormBuilder extends AbstractFormBuilder
     {
         $requiredData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'required_data',
-            'label' => $this->trans('form.fieldset.required_data')
+            'label' => $this->trans('common.fieldset.general')
         ]));
 
         $languageData = $requiredData->addChild($this->getElement('language_fieldset', [
@@ -78,7 +78,7 @@ class CouponFormBuilder extends AbstractFormBuilder
 
         $discountPane = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'discount_pane',
-            'label' => $this->trans('form.fieldset.discount_settings')
+            'label' => $this->trans('coupon.fieldset.discount_settings')
         ]));
 
         $modifierType = $discountPane->addChild($this->getElement('select', [

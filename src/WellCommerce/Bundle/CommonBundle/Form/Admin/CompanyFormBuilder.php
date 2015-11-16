@@ -28,7 +28,7 @@ class CompanyFormBuilder extends AbstractFormBuilder
     {
         $requiredData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'required_data',
-            'label' => $this->trans('form.required_data')
+            'label' => $this->trans('common.fieldset.general')
         ]));
 
         $requiredData->addChild($this->getElement('text_field', [
@@ -43,48 +43,48 @@ class CompanyFormBuilder extends AbstractFormBuilder
 
         $addressData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'address_data',
-            'label' => $this->trans('company.label.address')
+            'label' => $this->trans('address.label.addresses')
         ]));
 
         $addressData->addChild($this->getElement('text_field', [
             'name'  => 'street',
-            'label' => $this->trans('company.label.street'),
+            'label' => $this->trans('address.label.street'),
         ]));
 
         $addressData->addChild($this->getElement('text_field', [
             'name'  => 'streetNo',
-            'label' => $this->trans('company.label.street_no'),
+            'label' => $this->trans('address.label.street_no'),
         ]));
 
         $addressData->addChild($this->getElement('text_field', [
             'name'  => 'flatNo',
-            'label' => $this->trans('company.label.flat_no'),
+            'label' => $this->trans('address.label.flat_no'),
         ]));
 
         $addressData->addChild($this->getElement('text_field', [
             'name'  => 'province',
-            'label' => $this->trans('company.label.province'),
+            'label' => $this->trans('address.label.province'),
         ]));
 
         $addressData->addChild($this->getElement('text_field', [
             'name'  => 'postCode',
-            'label' => $this->trans('company.label.post_code'),
+            'label' => $this->trans('address.label.post_code'),
         ]));
 
         $addressData->addChild($this->getElement('text_field', [
             'name'  => 'city',
-            'label' => $this->trans('company.label.city'),
+            'label' => $this->trans('address.label.city'),
         ]));
 
         $addressData->addChild($this->getElement('select', [
             'name'    => 'country',
-            'label'   => $this->trans('company.label.country'),
+            'label'   => $this->trans('address.label.country'),
             'options' => $this->get('country.repository')->all()
         ]));
 
         $mediaData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'media_data',
-            'label' => $this->trans('fieldset.media')
+            'label' => $this->trans('common.fieldset.photos')
         ]));
 
         $mediaData->addChild($this->getElement('image', [

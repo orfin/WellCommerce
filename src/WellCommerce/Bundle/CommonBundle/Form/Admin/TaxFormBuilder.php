@@ -28,7 +28,7 @@ class TaxFormBuilder extends AbstractFormBuilder
     {
         $taxRequiredData = $taxForm->addChild($this->getElement('nested_fieldset', [
             'name'  => 'required_data',
-            'label' => $this->trans('form.fieldset.required_data')
+            'label' => $this->trans('common.fieldset.general')
         ]));
 
         $taxRequiredData->addChild($this->getElement('text_field', [

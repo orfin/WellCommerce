@@ -36,7 +36,7 @@ class PaymentMethodFormBuilder extends AbstractFormBuilder
 
         $requiredData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'required_data',
-            'label' => $this->trans('form.fieldset.required_data')
+            'label' => $this->trans('common.fieldset.general')
         ]));
 
         $languageData = $requiredData->addChild($this->getElement('language_fieldset', [
@@ -93,7 +93,7 @@ class PaymentMethodFormBuilder extends AbstractFormBuilder
         $configurationData = $form->addChild($this->getElement('nested_fieldset', [
             'name'          => 'configuration',
             'property_path' => new PropertyPath('configuration'),
-            'label'         => $this->trans('form.fieldset.required_data'),
+            'label'         => $this->trans('common.fieldset.general'),
             'transformer'   => $this->getRepositoryTransformer('payment_method_configuration', $repository)
         ]));
 

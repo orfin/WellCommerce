@@ -6,6 +6,9 @@
 # For the full copyright and license information,
 # please view the LICENSE file that was distributed with this source code.
 
+form:
+    help:
+        required_fields: '* required fields'
 common:
     button:
         add: Add
@@ -38,6 +41,7 @@ common:
         description: Description
         code: Code
         slug: Slug
+        group: Group
         discount: Discount
         created_at: Created at
         updated_at: Updated at
@@ -76,6 +80,9 @@ common:
         discounted_price: Discounted price
         gross_price: Gross price
         net_price: Net price
+        first_name: First name
+        last_name: Last name
+        client_group: Client group
 
 address:
     heading:
@@ -94,6 +101,10 @@ address:
 contact_details:
     heading:
         details: Contact details
+    label:
+        first_name: First name
+        last_name: Last name
+
 
 price:
     sell_price:

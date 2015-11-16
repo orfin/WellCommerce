@@ -69,9 +69,22 @@ order:
         product_total: Total products value
         shipping_cost: Shipping costs
 
+order_status:
+    heading:
+        index: Order statuses
+        add: Add a new order status
+        edit: Edit an order status
+
+order_status_group:
+    heading:
+        index: Order status groups
+        add: Add a new order status group
+        edit: Edit an order status group
+
 payment:
     flash:
         thank_you: "Thank you for placing an order. Below are the order's details:"
+
 payment_method:
     heading:
         index: Payment methods

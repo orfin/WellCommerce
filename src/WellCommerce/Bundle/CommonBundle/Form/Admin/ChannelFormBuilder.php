@@ -28,17 +28,17 @@ class ChannelFormBuilder extends AbstractFormBuilder
     {
         $channelRequiredData = $unitForm->addChild($this->getElement('nested_fieldset', [
             'name'  => 'required_data',
-            'label' => $this->trans('form.fieldset.required_data')
+            'label' => $this->trans('common.fieldset.general')
         ]));
 
         $channelRequiredData->addChild($this->getElement('text_field', [
             'name'  => 'name',
-            'label' => $this->trans('channel.name.label'),
+            'label' => $this->trans('common.label.name'),
         ]));
 
         $channelRequiredData->addChild($this->getElement('text_field', [
             'name'  => 'url',
-            'label' => $this->trans('channel.url.label'),
+            'label' => $this->trans('common.label.url'),
         ]));
 
         $unitForm->addFilter($this->getFilter('no_code'));

@@ -102,6 +102,18 @@ abstract class AbstractFormBuilder extends AbstractContainerAware implements For
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getRepositoryTransformer($alias, RepositoryInterface $repository)
+    {
+        /** @var $transformer \WellCommerce\Bundle\CoreBundle\Form\DataTransformer\RepositoryAwareDataTransformerInterface */
+        $transformer = $this->get('form.data_transformer.factory')->createRepositoryTransformer($alias);
+        $transformer->setRepository($repository);
+
+        return $transformer;
+    }
+
+    /**
      * Initializes form service
      *
      * @param array $options
@@ -137,22 +149,5 @@ abstract class AbstractFormBuilder extends AbstractContainerAware implements For
         $service->setOptions($options);
 
         return $service;
-    }
-
-    /**
-     * Returns an instance of form data transformer
-     *
-     * @param string                     $alias
-     * @param object|RepositoryInterface $repository
-     *
-     * @return DataTransformer\RepositoryAwareDataTransformerInterface
-     */
-    protected function getRepositoryTransformer($alias, RepositoryInterface $repository)
-    {
-        /** @var $transformer \WellCommerce\Bundle\CoreBundle\Form\DataTransformer\RepositoryAwareDataTransformerInterface */
-        $transformer = $this->get('form.data_transformer.factory')->createRepositoryTransformer($alias);
-        $transformer->setRepository($repository);
-
-        return $transformer;
     }
 }

@@ -28,13 +28,13 @@ class OrderStatusFormBuilder extends AbstractFormBuilder
     {
         $requiredData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'required_data',
-            'label' => $this->trans('form.fieldset.required_data')
+            'label' => $this->trans('common.fieldset.general')
         ]));
 
         $requiredData->addChild($this->getElement('checkbox', [
             'name'    => 'enabled',
-            'label'   => $this->trans('order_status.label.enabled'),
-            'comment' => $this->trans('order_status.comment.enabled'),
+            'label'   => $this->trans('common.label.enabled'),
+            'comment' => $this->trans('common.comment.enabled'),
             'default' => 1
         ]));
 
@@ -56,7 +56,7 @@ class OrderStatusFormBuilder extends AbstractFormBuilder
 
         $languageData->addChild($this->getElement('text_field', [
             'name'  => 'name',
-            'label' => $this->trans('order_status.label.name'),
+            'label' => $this->trans('common.label.name'),
         ]));
 
         $languageData->addChild($this->getElement('rich_text_editor', [

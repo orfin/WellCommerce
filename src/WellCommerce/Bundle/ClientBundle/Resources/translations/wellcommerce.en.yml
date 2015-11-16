@@ -63,3 +63,5 @@ client_group:
         index: Client groups
         add: Create a client group
         edit: Edit group
+    label:
+        total_clients: Total clients

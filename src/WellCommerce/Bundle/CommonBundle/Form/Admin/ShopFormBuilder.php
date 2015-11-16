@@ -33,12 +33,12 @@ class ShopFormBuilder extends AbstractFormBuilder
 
         $requiredData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'required_data',
-            'label' => $this->trans('form.required_data')
+            'label' => $this->trans('common.fieldset.general')
         ]));
 
         $requiredData->addChild($this->getElement('text_field', [
             'name'  => 'name',
-            'label' => $this->trans('shop.label.name'),
+            'label' => $this->trans('common.label.name'),
         ]));
 
         $requiredData->addChild($this->getElement('select', [
@@ -57,7 +57,7 @@ class ShopFormBuilder extends AbstractFormBuilder
 
         $urlData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'url_data',
-            'label' => $this->trans('shop.fieldset.url_data')
+            'label' => $this->trans('shop.fieldset.url_configuration')
         ]));
 
         $urlData->addChild($this->getElement('text_field', [
@@ -67,7 +67,7 @@ class ShopFormBuilder extends AbstractFormBuilder
 
         $cartSettings = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'cart_settings',
-            'label' => $this->trans('shop.cart_settings.label')
+            'label' => $this->trans('shop.fieldset.cart_configuration')
         ]));
 
         $cartSettings->addChild($this->getElement('select', [
@@ -84,7 +84,7 @@ class ShopFormBuilder extends AbstractFormBuilder
 
         $mailerConfiguration = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'mailer_configuration',
-            'label' => $this->trans('shop.form.fieldset.mailer_configuration')
+            'label' => $this->trans('shop.fieldset.mailer_configuration')
         ]));
 
         $mailerConfiguration->addChild($this->getElement('text_field', [

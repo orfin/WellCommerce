@@ -32,7 +32,7 @@ class DelivererDataGrid extends AbstractDataGrid
     {
         $collection->add(new Column([
             'id'         => 'id',
-            'caption'    => $this->trans('deliverer.id'),
+            'caption'    => $this->trans('common.label.id'),
             'sorting'    => new Sorting([
                 'default_order' => Sorting::SORT_DIR_DESC,
             ]),
@@ -47,7 +47,7 @@ class DelivererDataGrid extends AbstractDataGrid
 
         $collection->add(new Column([
             'id'      => 'name',
-            'caption' => $this->trans('deliverer.name'),
+            'caption' => $this->trans('common.label.name'),
         ]));
     }
 }

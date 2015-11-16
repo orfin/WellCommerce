@@ -1,0 +1,39 @@
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
+
+contact:
+    heading:
+        index: Contacts
+        add: Add a new contact
+        edit: Edit contact
+
+news:
+    heading:
+        index: News
+        add: Add a news
+        edit: Edit news
+
+page:
+    tip:
+        client_groups: Select all client groups which can see the page.
+    heading:
+        index: CMS pages
+        add: Add a new page
+        edit: Edit page
+    label:
+        parent: Parent category
+        client_groups: Visible for client groups
+        redirect:
+            type: Type of redirect
+            url: Redirect to URL
+            route: Redirect to route
+            none: No redirect
+    fieldset:
+        redirect_settings: Redirect configuration
+
+

@@ -28,7 +28,7 @@ class ProducerFormBuilder extends AbstractFormBuilder
     {
         $requiredData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'required_data',
-            'label' => $this->trans('form.fieldset.required_data')
+            'label' => $this->trans('common.fieldset.general')
         ]));
 
         $languageData = $requiredData->addChild($this->getElement('language_fieldset', [
@@ -44,7 +44,7 @@ class ProducerFormBuilder extends AbstractFormBuilder
 
         $languageData->addChild($this->getElement('slug_field', [
             'name'            => 'slug',
-            'label'           => $this->trans('producer.label.slug'),
+            'label'           => $this->trans('common.label.slug'),
             'name_field'      => $name,
             'generate_route'  => 'admin.routing.generate',
             'translatable_id' => $this->getParam('id')

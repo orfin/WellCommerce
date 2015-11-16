@@ -28,7 +28,7 @@ class UnitFormBuilder extends AbstractFormBuilder
     {
         $unitRequiredData = $unitForm->addChild($this->getElement('nested_fieldset', [
             'name'  => 'required_data',
-            'label' => $this->trans('form.fieldset.required_data')
+            'label' => $this->trans('common.fieldset.general')
         ]));
 
         $unitTranslationData = $unitRequiredData->addChild($this->getElement('language_fieldset', [

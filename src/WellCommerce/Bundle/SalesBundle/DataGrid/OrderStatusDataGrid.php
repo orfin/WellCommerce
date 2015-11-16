@@ -31,7 +31,7 @@ class OrderStatusDataGrid extends AbstractDataGrid
     {
         $collection->add(new Column([
             'id'         => 'id',
-            'caption'    => $this->trans('order_status.id.label'),
+            'caption'    => $this->trans('common.label.id'),
             'appearance' => new Appearance([
                 'width'   => 90,
                 'visible' => false,
@@ -43,7 +43,7 @@ class OrderStatusDataGrid extends AbstractDataGrid
 
         $collection->add(new Column([
             'id'         => 'name',
-            'caption'    => $this->trans('order_status.name.label'),
+            'caption'    => $this->trans('common.label.name'),
             'appearance' => new Appearance([
                 'width' => 340,
             ]),
@@ -52,7 +52,7 @@ class OrderStatusDataGrid extends AbstractDataGrid
 
         $collection->add(new Column([
             'id'         => 'groupName',
-            'caption'    => $this->trans('order_status.group.label'),
+            'caption'    => $this->trans('common.label.group'),
             'filter'     => new Filter([
                 'type'    => Filter::FILTER_SELECT,
                 'options' => $this->getOrderStatusGroups()
@@ -65,7 +65,7 @@ class OrderStatusDataGrid extends AbstractDataGrid
 
         $collection->add(new Column([
             'id'         => 'createdAt',
-            'caption'    => $this->trans('order_status.created_at.label'),
+            'caption'    => $this->trans('common.label.created_at'),
             'filter'     => new Filter([
                 'type' => Filter::FILTER_BETWEEN,
             ]),
