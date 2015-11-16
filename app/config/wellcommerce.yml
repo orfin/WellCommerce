@@ -8,7 +8,7 @@ parameters:
         WellCommerce\Bundle\OrderBundle\DataFixtures\ORM\LoadOrderStatusGroupData: 41
         WellCommerce\Bundle\OrderBundle\DataFixtures\ORM\LoadOrderStatusData: 42
         WellCommerce\Bundle\MultiStoreBundle\DataFixtures\ORM\LoadShopData: 50
-        WellCommerce\Bundle\UserBundle\DataFixtures\ORM\LoadUserData: 60
+        WellCommerce\Bundle\AdminBundle\DataFixtures\ORM\LoadUserData: 60
         WellCommerce\Bundle\TaxBundle\DataFixtures\ORM\LoadTaxData: 70
         WellCommerce\Bundle\ClientBundle\DataFixtures\ORM\LoadClientGroupData: 80
         WellCommerce\Bundle\ClientBundle\DataFixtures\ORM\LoadClientData: 90

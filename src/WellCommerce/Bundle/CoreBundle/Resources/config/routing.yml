@@ -4,9 +4,6 @@ wellcommerce_web:
 wellcommerce_admin:
     resource: "@WellCommerceAdminBundle/Resources/config/routing.xml"
 
-wellcommerce_user:
-    resource: "@WellCommerceUserBundle/Resources/config/routing.xml"
-
 wellcommerce_routing:
     resource: "@WellCommerceRoutingBundle/Resources/config/routing.xml"
 

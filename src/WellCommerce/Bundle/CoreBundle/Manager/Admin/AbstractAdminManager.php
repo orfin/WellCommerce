@@ -20,7 +20,7 @@ use WellCommerce\Bundle\CoreBundle\Manager\AbstractManager;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 use WellCommerce\Bundle\DataGridBundle\DataGridInterface;
 use WellCommerce\Bundle\FormBundle\FormBuilderInterface;
-use WellCommerce\Bundle\UserBundle\Entity\UserInterface;
+use WellCommerce\Bundle\AdminBundle\Entity\UserInterface;
 
 /**
  * Class AbstractAdminManager

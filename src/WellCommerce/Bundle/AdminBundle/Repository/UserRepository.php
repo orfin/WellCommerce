@@ -9,34 +9,27 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-
-namespace WellCommerce\Bundle\ClientBundle\Repository;
+namespace WellCommerce\Bundle\AdminBundle\Repository;
 
 use Doctrine\ORM\NoResultException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
-use WellCommerce\Bundle\AdminBundle\Repository\UserRepositoryInterface;
 
 /**
- * Class ClientGroupRepository
+ * Class UserRepository
  *
- * @author  Adam Piotrowski <adam@wellcommerce.org>
+ * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientRepository extends AbstractEntityRepository implements ClientRepositoryInterface, UserRepositoryInterface
+class UserRepository extends AbstractEntityRepository implements UserRepositoryInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function getDataSetQueryBuilder()
+    public function getDataGridQueryBuilder()
     {
-        $queryBuilder = $this->getQueryBuilder();
-        $queryBuilder->groupBy('client.id');
-        $queryBuilder->leftJoin('client.clientGroup', 'client_group');
-        $queryBuilder->leftJoin('client_group.translations', 'client_group_translation');
-
-        return $queryBuilder;
+        return parent::getQueryBuilder()->groupBy('user.id');
     }
 
     public function refreshUser(UserInterface $user)
@@ -56,19 +49,18 @@ class ClientRepository extends AbstractEntityRepository implements ClientReposit
 
     public function loadUserByUsername($username)
     {
-        $queryBuilder = $this->createQueryBuilder('c')
-            ->select('c')
-            ->where('c.username = :username')
-            ->setParameter('username', $username)
-            ->getQuery();
+        $queryBuilder = $this->createQueryBuilder('u');
+        $queryBuilder->select('u, r');
+        $queryBuilder->leftJoin('u.roles', 'r');
+        $queryBuilder->where('u.username = :username OR u.email = :email');
+        $queryBuilder->setParameter('username', $username);
+        $queryBuilder->setParameter('email', $username);
 
         try {
-            $user = $queryBuilder->getSingleResult();
+            $user = $queryBuilder->getQuery()->getSingleResult();
         } catch (NoResultException $e) {
-            $msg = sprintf(
-                'Unable to find an active client identified by "%s".',
-                $username
-            );
+            $msg = sprintf('Unable to find an active admin identified by "%s".', $username);
+
             throw new UsernameNotFoundException($msg);
         }
 

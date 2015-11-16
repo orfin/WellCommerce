@@ -5,6 +5,9 @@
 
     <imports>
         <import resource="services/dashboard.xml"/>
+        <import resource="services/user.xml"/>
+        <import resource="services/user_group.xml"/>
+        <import resource="services/role.xml"/>
     </imports>
 
     <services>

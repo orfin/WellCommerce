@@ -14,8 +14,8 @@ namespace WellCommerce\Bundle\CoreBundle\Helper\Security;
 
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use WellCommerce\Bundle\UserBundle\Entity\UserInterface;
-use WellCommerce\Bundle\UserBundle\Repository\UserRepositoryInterface;
+use WellCommerce\Bundle\AdminBundle\Entity\UserInterface;
+use WellCommerce\Bundle\AdminBundle\Repository\UserRepositoryInterface;
 
 /**
  * Class SecurityHelper

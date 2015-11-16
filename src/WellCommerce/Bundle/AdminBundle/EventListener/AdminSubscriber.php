@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\AdminBundle\EventListener;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
-use WellCommerce\Bundle\UserBundle\Entity\UserInterface;
+use WellCommerce\Bundle\AdminBundle\Entity\UserInterface;
 
 /**
  * Class AdminSubscriber
