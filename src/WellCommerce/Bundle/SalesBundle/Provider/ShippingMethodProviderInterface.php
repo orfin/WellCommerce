@@ -29,4 +29,22 @@ interface ShippingMethodProviderInterface
      * @return \Doctrine\Common\Collections\ArrayCollection
      */
     public function getShippingMethodCostsCollection(ShippingCalculatorSubjectInterface $subject);
+
+    /**
+     * Returns all shipping options for given subject
+     *
+     * @param ShippingCalculatorSubjectInterface $subject
+     *
+     * @return array
+     */
+    public function getShippingMethodOptions(ShippingCalculatorSubjectInterface $subject);
+
+    /**
+     * Returns all payment options fetched from collection of available shipping methods for given subject
+     *
+     * @param ShippingCalculatorSubjectInterface $subject
+     *
+     * @return array
+     */
+    public function getShippingMethodsPaymentOptions(ShippingCalculatorSubjectInterface $subject);
 }
