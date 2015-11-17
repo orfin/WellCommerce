@@ -15,34 +15,34 @@ namespace WellCommerce\Bundle\CmsBundle\Tests\Manager\Admin;
 use WellCommerce\Bundle\CoreBundle\Test\Manager\Admin\AbstractAdminManagerTestCase;
 
 /**
- * Class ContactManagerTest
+ * Class PageManagerTest
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ContactManagerTest extends AbstractAdminManagerTestCase
+class PageManagerTest extends AbstractAdminManagerTestCase
 {
     protected function get()
     {
-        return $this->container->get('contact.manager.admin');
+        return $this->container->get('page.manager.admin');
     }
 
     protected function getServiceClassName()
     {
-        return \WellCommerce\Bundle\CmsBundle\Manager\Admin\ContactManager::class;
+        return \WellCommerce\Bundle\CmsBundle\Manager\Admin\PageManager::class;
     }
-
+    
     protected function getFormBuilderClassName()
     {
-        return \WellCommerce\Bundle\CmsBundle\Form\Admin\ContactFormBuilder::class;
+        return \WellCommerce\Bundle\CmsBundle\Form\Admin\PageFormBuilder::class;
     }
 
     protected function getDataGridClassName()
     {
-        return \WellCommerce\Bundle\CmsBundle\DataGrid\ContactDataGrid::class;
+        return \WellCommerce\Bundle\CmsBundle\DataGrid\PageDataGrid::class;
     }
 
     protected function getRepositoryInterfaceName()
     {
-        return \WellCommerce\Bundle\CmsBundle\Repository\ContactRepositoryInterface::class;
+        return \WellCommerce\Bundle\CmsBundle\Repository\PageRepositoryInterface::class;
     }
 }

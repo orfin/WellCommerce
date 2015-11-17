@@ -20,10 +20,10 @@ namespace WellCommerce\Bundle\CoreBundle\Doctrine;
 abstract class AbstractSubscriber
 {
     /**
-     * Checks whether class contains such a method
+     * Checks whether the class contains such a method
      *
      * @param \ReflectionClass $class
-     * @param                  $methodName
+     * @param string           $methodName
      *
      * @return bool
      */
