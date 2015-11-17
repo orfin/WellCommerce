@@ -31,7 +31,7 @@ before_script:
     - php app/console cache:warmup --env=test
 
 script:
-    - bin/phpunit -c app/phpunit.xml.dist --testdox
+    - bin/phpunit -c app/phpunit.xml.dist
 
 notifications:
     email: false
