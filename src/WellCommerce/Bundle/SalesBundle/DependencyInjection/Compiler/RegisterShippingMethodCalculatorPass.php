@@ -12,39 +12,22 @@
 
 namespace WellCommerce\Bundle\SalesBundle\DependencyInjection\Compiler;
 
-use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Reference;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\Compiler\AbstractCollectionPass;
 
 /**
  * Class RegisterShippingMethodCalculatorPass
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class RegisterShippingMethodCalculatorPass implements CompilerPassInterface
+class RegisterShippingMethodCalculatorPass extends AbstractCollectionPass
 {
     /**
-     * @param ContainerBuilder $container
+     * @var string
      */
-    public function process(ContainerBuilder $container)
-    {
-        if (!$container->hasDefinition('shipping_method.calculator.collection')) {
-            return;
-        }
+    protected $collectionServiceId = 'shipping_method.calculator.collection';
 
-        $definition = $container->getDefinition('shipping_method.calculator.collection');
-
-        foreach ($container->findTaggedServiceIds('shipping_method.calculator') as $id => $attributes) {
-            $class     = $container->getDefinition($id)->getClass();
-            $refClass  = new \ReflectionClass($class);
-            $interface = 'WellCommerce\\Bundle\\SalesBundle\\Calculator\\ShippingMethodCalculatorInterface';
-            if (!$refClass->implementsInterface($interface)) {
-                throw new \InvalidArgumentException(sprintf('Service "%s" must implement interface "%s".', $id,
-                    $interface));
-            }
-            $definition->addMethodCall('add', [
-                new Reference($id),
-            ]);
-        }
-    }
+    /**
+     * @var string
+     */
+    protected $serviceTag = 'shipping_method.calculator';
 }

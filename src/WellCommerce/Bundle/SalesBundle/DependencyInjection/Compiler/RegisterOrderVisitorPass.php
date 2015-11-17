@@ -12,39 +12,22 @@
 
 namespace WellCommerce\Bundle\SalesBundle\DependencyInjection\Compiler;
 
-use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Reference;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\Compiler\AbstractCollectionPass;
 
 /**
  * Class RegisterOrderVisitorPass
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class RegisterOrderVisitorPass implements CompilerPassInterface
+class RegisterOrderVisitorPass extends AbstractCollectionPass
 {
     /**
-     * @param ContainerBuilder $container
+     * @var string
      */
-    public function process(ContainerBuilder $container)
-    {
-        if (!$container->hasDefinition('order.visitor.collection')) {
-            return;
-        }
+    protected $collectionServiceId = 'order.visitor.collection';
 
-        $definition = $container->getDefinition('order.visitor.collection');
-
-        foreach ($container->findTaggedServiceIds('order.visitor') as $id => $attributes) {
-            $class     = $container->getDefinition($id)->getClass();
-            $refClass  = new \ReflectionClass($class);
-            $interface = 'WellCommerce\\Bundle\\SalesBundle\\Visitor\\OrderVisitorInterface';
-            if (!$refClass->implementsInterface($interface)) {
-                throw new \InvalidArgumentException(sprintf('Service "%s" must implement interface "%s".', $id,
-                    $interface));
-            }
-            $definition->addMethodCall('add', [
-                new Reference($id),
-            ]);
-        }
-    }
+    /**
+     * @var string
+     */
+    protected $serviceTag = 'order.visitor';
 }

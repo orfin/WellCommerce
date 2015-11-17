@@ -13,6 +13,8 @@
 namespace WellCommerce\Bundle\CommonBundle\Converter;
 
 use WellCommerce\Bundle\CommonBundle\Entity\CurrencyRate;
+use WellCommerce\Bundle\CommonBundle\Exception\MissingCurrencyRateException;
+use WellCommerce\Bundle\CommonBundle\Exception\MissingCurrencyRatesException;
 use WellCommerce\Bundle\CommonBundle\Repository\CurrencyRateRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Request\RequestHelperInterface;
 
@@ -72,8 +74,7 @@ class CurrencyConverter implements CurrencyConverterInterface
         $this->loadExchangeRates($targetCurrency);
 
         if (!isset($this->exchangeRates[$targetCurrency][$baseCurrency])) {
-            throw new \InvalidArgumentException(sprintf('No exchange rate found for base "%s" and target "%s" currency.', $baseCurrency,
-                $targetCurrency));
+            throw new MissingCurrencyRateException($baseCurrency, $targetCurrency);
         }
 
         return $this->exchangeRates[$targetCurrency][$baseCurrency];
@@ -89,7 +90,7 @@ class CurrencyConverter implements CurrencyConverterInterface
         if (!isset($this->exchangeRates[$targetCurrency])) {
             $currencyRates = $this->currencyRateRepository->findBy(['currencyTo' => $targetCurrency]);
             if (count($currencyRates) === 0) {
-                throw new \RuntimeException(sprintf('There are no exchange rates for "%s"', $targetCurrency));
+                throw new MissingCurrencyRatesException($targetCurrency);
             }
             foreach ($currencyRates as $rate) {
                 $this->setExchangeRate($rate, $targetCurrency);
