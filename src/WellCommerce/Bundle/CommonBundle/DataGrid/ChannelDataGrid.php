@@ -46,13 +46,13 @@ class ChannelDataGrid extends AbstractDataGrid
         ]));
 
         $collection->add(new Column([
-            'id'         => 'name',
-            'caption'    => $this->trans('common.label.name'),
+            'id'      => 'name',
+            'caption' => $this->trans('common.label.name'),
         ]));
 
         $collection->add(new Column([
-            'id'         => 'url',
-            'caption'    => $this->trans('common.label.url'),
+            'id'      => 'url',
+            'caption' => $this->trans('common.label.url'),
         ]));
     }
 }

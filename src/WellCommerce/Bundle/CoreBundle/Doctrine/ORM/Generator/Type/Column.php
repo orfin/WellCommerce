@@ -17,6 +17,7 @@ namespace WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Generator\Type;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class Column {
+class Column
+{
 
 }

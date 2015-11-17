@@ -46,10 +46,10 @@ class AttributeCollectionToArrayTransformer extends CollectionToArrayTransformer
      */
     public function findOrCreate($data)
     {
-        $id       = $this->propertyAccessor->getValue($data, '[id]');
-        $name     = $this->propertyAccessor->getValue($data, '[name]');
-        $values   = $this->propertyAccessor->getValue($data, '[values]');
-        $isNew    = substr($id, 0, 3) == 'new';
+        $id     = $this->propertyAccessor->getValue($data, '[id]');
+        $name   = $this->propertyAccessor->getValue($data, '[name]');
+        $values = $this->propertyAccessor->getValue($data, '[values]');
+        $isNew  = substr($id, 0, 3) == 'new';
 
         if ($isNew) {
             $item = $this->addAttribute($name);

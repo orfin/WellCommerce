@@ -33,9 +33,9 @@ class LoadShippingMethodData extends AbstractDataFixture
      */
     public function load(ObjectManager $manager)
     {
-        $tax             = $this->randomizeSamples('tax', LoadTaxData::$samples);
-        $currency        = $this->randomizeSamples('currency', LoadCurrencyData::$samples);
-        $factory         = $this->container->get('shipping_method.factory');
+        $tax      = $this->randomizeSamples('tax', LoadTaxData::$samples);
+        $currency = $this->randomizeSamples('currency', LoadCurrencyData::$samples);
+        $factory  = $this->container->get('shipping_method.factory');
 
         $fedEx = $factory->create();
         $fedEx->setCalculator('price_table');

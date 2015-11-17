@@ -31,7 +31,7 @@ abstract class AbstractExtension extends Extension
     {
         $reflection = new \ReflectionClass($this);
         $directory  = dirname($reflection->getFileName());
-        $loader     = new Loader\XmlFileLoader($container, new FileLocator($directory.'/../Resources/config'));
+        $loader     = new Loader\XmlFileLoader($container, new FileLocator($directory . '/../Resources/config'));
         $loader->load('services.xml');
     }
 }

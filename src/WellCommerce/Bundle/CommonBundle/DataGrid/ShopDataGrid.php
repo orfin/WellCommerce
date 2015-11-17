@@ -46,8 +46,8 @@ class ShopDataGrid extends AbstractDataGrid
         ]));
 
         $collection->add(new Column([
-            'id'      => 'name',
-            'caption' => $this->trans('common.label.name'),
+            'id'         => 'name',
+            'caption'    => $this->trans('common.label.name'),
             'appearance' => new Appearance([
                 'width' => 100,
                 'align' => Appearance::ALIGN_LEFT

@@ -56,10 +56,10 @@ class OrderConfirmationController extends AbstractFrontController implements Fro
         }
 
         return $this->displayTemplate('index', [
-            'form'         => $form,
-            'elements'     => $form->getChildren(),
-            'summary'      => $this->get('cart_summary.collector')->collect($cart),
-            'order'        => $order
+            'form'     => $form,
+            'elements' => $form->getChildren(),
+            'summary'  => $this->get('cart_summary.collector')->collect($cart),
+            'order'    => $order
         ]);
     }
 }

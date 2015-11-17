@@ -40,11 +40,11 @@ class RegisterPaymentMethodProcessorPass implements CompilerPassInterface
             $interface = 'WellCommerce\\Bundle\\SalesBundle\\Processor\\PaymentMethodProcessorInterface';
             if (!$refClass->implementsInterface($interface)) {
                 throw new \InvalidArgumentException(sprintf('Service "%s" must implement interface "%s".', $id,
-                        $interface));
+                    $interface));
             }
-            $definition->addMethodCall('add', array(
+            $definition->addMethodCall('add', [
                 new Reference($id),
-            ));
+            ]);
         }
     }
 }

@@ -38,8 +38,8 @@ class Elt extends FunctionNode
     public function getSql(\Doctrine\ORM\Query\SqlWalker $sqlWalker)
     {
         return 'ELT(' .
-            $this->needle->dispatch($sqlWalker) . ', ' .
-            $this->haystack->dispatch($sqlWalker) .
+        $this->needle->dispatch($sqlWalker) . ', ' .
+        $this->haystack->dispatch($sqlWalker) .
         ')';
     }
 }

@@ -72,7 +72,8 @@ class CurrencyConverter implements CurrencyConverterInterface
         $this->loadExchangeRates($targetCurrency);
 
         if (!isset($this->exchangeRates[$targetCurrency][$baseCurrency])) {
-            throw new \InvalidArgumentException(sprintf('No exchange rate found for base "%s" and target "%s" currency.', $baseCurrency, $targetCurrency));
+            throw new \InvalidArgumentException(sprintf('No exchange rate found for base "%s" and target "%s" currency.', $baseCurrency,
+                $targetCurrency));
         }
 
         return $this->exchangeRates[$targetCurrency][$baseCurrency];

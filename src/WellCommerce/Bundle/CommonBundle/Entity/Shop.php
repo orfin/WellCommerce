@@ -241,7 +241,8 @@ class Shop implements ShopInterface
         $this->mailerConfiguration = $configuration;
     }
 
-    public function getMailerConfiguration(){
+    public function getMailerConfiguration()
+    {
         return $this->mailerConfiguration;
     }
 }
