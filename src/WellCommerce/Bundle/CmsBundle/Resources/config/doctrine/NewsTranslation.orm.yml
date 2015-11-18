@@ -1,6 +1,9 @@
 WellCommerce\Bundle\CmsBundle\Entity\NewsTranslation:
     type: entity
     table: news_translation
+    embedded:
+        meta:
+            class: WellCommerce\Bundle\CoreBundle\Entity\Meta
     fields:
         topic:
             type: string
@@ -12,16 +15,3 @@ WellCommerce\Bundle\CmsBundle\Entity\NewsTranslation:
         content:
             type: text
             nullable: false
-        metaTitle:
-            type: string
-            length: 255
-            nullable: true
-            column: meta_title
-        metaKeywords:
-            type: text
-            nullable: true
-            column: meta_keywords
-        metaDescription:
-            type: text
-            nullable: true
-            column: meta_description

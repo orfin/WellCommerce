@@ -16,7 +16,7 @@ use Knp\DoctrineBehaviors\Model\Translatable\Translation;
 use WellCommerce\Bundle\CommonBundle\Entity\Behaviours\RoutableTrait;
 use WellCommerce\Bundle\CommonBundle\Entity\RoutableSubjectInterface;
 use WellCommerce\Bundle\CommonBundle\ORM\LocaleAwareInterface;
-use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\MetaDataTrait;
+use WellCommerce\Bundle\CoreBundle\Entity\Meta;
 
 /**
  * Class ProductStatusTranslation
@@ -26,7 +26,6 @@ use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\MetaDataTrait;
 class ProductStatusTranslation implements LocaleAwareInterface, RoutableSubjectInterface
 {
     use Translation;
-    use MetaDataTrait;
     use RoutableTrait;
     
     /**
@@ -43,6 +42,19 @@ class ProductStatusTranslation implements LocaleAwareInterface, RoutableSubjectI
      * @var string
      */
     protected $cssClass;
+
+    /**
+     * @var Meta
+     */
+    protected $meta;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->meta = new Meta();
+    }
 
     /**
      * @return string
@@ -74,6 +86,22 @@ class ProductStatusTranslation implements LocaleAwareInterface, RoutableSubjectI
     public function setCssClass($cssClass)
     {
         $this->cssClass = $cssClass;
+    }
+
+    /**
+     * @return Meta
+     */
+    public function getMeta()
+    {
+        return $this->meta;
+    }
+
+    /**
+     * @param Meta $meta
+     */
+    public function setMeta(Meta $meta)
+    {
+        $this->meta = $meta;
     }
 
     /**

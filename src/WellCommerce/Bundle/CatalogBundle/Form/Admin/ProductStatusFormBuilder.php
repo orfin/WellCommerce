@@ -68,17 +68,17 @@ class ProductStatusFormBuilder extends AbstractFormBuilder
         ]));
 
         $languageData->addChild($this->getElement('text_field', [
-            'name'  => 'metaTitle',
+            'name'  => 'meta.title',
             'label' => $this->trans('common.label.meta.title')
         ]));
 
         $languageData->addChild($this->getElement('text_field', [
-            'name'  => 'metaKeywords',
+            'name'  => 'meta.keywords',
             'label' => $this->trans('common.label.meta.keywords'),
         ]));
 
         $languageData->addChild($this->getElement('text_area', [
-            'name'  => 'metaDescription',
+            'name'  => 'meta.description',
             'label' => $this->trans('common.label.meta.description'),
         ]));
 
