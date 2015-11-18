@@ -35,7 +35,12 @@ interface CartProductManagerInterface extends FrontManagerInterface
      *
      * @return \WellCommerce\Bundle\SalesBundle\Entity\CartProductInterface
      */
-    public function initCartProduct(CartInterface $cart, ProductInterface $product, ProductAttributeInterface $attribute = null, $quantity = 1);
+    public function initCartProduct(
+        CartInterface $cart,
+        ProductInterface $product,
+        ProductAttributeInterface $attribute = null,
+        $quantity = 1
+    );
 
 
     /**
@@ -65,7 +70,12 @@ interface CartProductManagerInterface extends FrontManagerInterface
      * @param ProductAttributeInterface|null $attribute
      * @param int                            $quantity
      */
-    public function addProductToCart(CartInterface $cart, ProductInterface $product, ProductAttributeInterface $attribute = null, $quantity = 1);
+    public function addProductToCart(
+        CartInterface $cart,
+        ProductInterface $product,
+        ProductAttributeInterface $attribute = null,
+        $quantity = 1
+    );
 
     /**
      * Changes products quantity or deletes it from cart if 0 quantity was given

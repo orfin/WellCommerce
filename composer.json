@@ -41,9 +41,7 @@
         "ircmaxell/password-compat": "v1.0.4",
         "liip/imagine-bundle": "1.2.1",
         "symfony-cmf/routing-bundle": "1.3.*@dev",
-        "mathiasverraes/money": "1.3.*@dev",
         "beberlei/DoctrineExtensions": "1.0.*@dev",
-        "wingu/code-generator": "1.0.5",
         "wellcommerce/dataset-bundle": "^1.0@dev",
         "wellcommerce/datagrid-bundle": "^1.0@dev",
         "wellcommerce/collections": "^1.0@dev",
@@ -100,7 +98,7 @@
             "file": "app/config/parameters.yml"
         },
         "branch-alias": {
-            "dev-master": "0.1-dev"
+            "dev-master": "0.7.x-dev"
         }
     }
 }

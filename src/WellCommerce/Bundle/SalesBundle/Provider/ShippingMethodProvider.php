@@ -13,6 +13,9 @@
 namespace WellCommerce\Bundle\SalesBundle\Provider;
 
 use WellCommerce\Bundle\SalesBundle\Calculator\ShippingCalculatorSubjectInterface;
+use WellCommerce\Bundle\SalesBundle\Entity\PaymentMethodInterface;
+use WellCommerce\Bundle\SalesBundle\Entity\ShippingMethodCost;
+use WellCommerce\Bundle\SalesBundle\Entity\ShippingMethodCostInterface;
 
 /**
  * Class ShippingMethodProvider
@@ -31,5 +34,43 @@ class ShippingMethodProvider extends AbstractShippingMethodProvider implements S
         }
 
         return $this->sortCollection();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getShippingMethodOptions(ShippingCalculatorSubjectInterface $subject)
+    {
+        $shippingMethodsCollection = $this->getShippingMethodCostsCollection($subject);
+        $targetCurrency            = $subject->getShippingCostCurrency();
+        $options                   = [];
+
+        $shippingMethodsCollection->map(function (ShippingMethodCost $shippingMethodCost) use (&$options, $targetCurrency) {
+            $shippingMethod = $shippingMethodCost->getShippingMethod();
+
+            $options[$shippingMethod->getId()] = $shippingMethod->translate()->getName();
+        });
+
+        return $options;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getShippingMethodsPaymentOptions(ShippingCalculatorSubjectInterface $subject)
+    {
+        $shippingMethodsCollection = $this->getShippingMethodCostsCollection($subject);
+        $options                   = [];
+
+        $shippingMethodsCollection->map(function (ShippingMethodCostInterface $shippingMethodCost) use (&$options) {
+            $shippingMethod = $shippingMethodCost->getShippingMethod();
+            $collection     = $shippingMethod->getPaymentMethods();
+
+            $collection->map(function (PaymentMethodInterface $paymentMethod) use (&$options) {
+                $options[$paymentMethod->getId()] = $paymentMethod->translate()->getName();
+            });
+        });
+
+        return $options;
     }
 }

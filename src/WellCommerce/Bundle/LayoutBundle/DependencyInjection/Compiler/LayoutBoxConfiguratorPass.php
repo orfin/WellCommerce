@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\LayoutBundle\DependencyInjection\Compiler;
 
-use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\Compiler\AbstractCollectionPass;
 
 /**
@@ -20,7 +19,7 @@ use WellCommerce\Bundle\CoreBundle\DependencyInjection\Compiler\AbstractCollecti
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LayoutBoxConfiguratorPass extends AbstractCollectionPass implements CompilerPassInterface
+class LayoutBoxConfiguratorPass extends AbstractCollectionPass
 {
     /**
      * @var string

@@ -38,7 +38,7 @@ class OrderProductFactory extends AbstractFactory implements OrderProductFactory
      */
     public function __construct(CurrencyHelperInterface $currencyHelper)
     {
-        $this->currencyHelper    = $currencyHelper;
+        $this->currencyHelper = $currencyHelper;
     }
 
     /**

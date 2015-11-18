@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\SalesBundle\Controller\Front;
+namespace WellCommerce\Bundle\SalesBundle\Controller\Front\Order;
 
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,11 +19,11 @@ use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
 
 /**
- * Class OrderAddressController
+ * Class AddressController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class OrderAddressController extends AbstractFrontController implements FrontControllerInterface
+class AddressController extends AbstractFrontController implements FrontControllerInterface
 {
     /**
      * @var \WellCommerce\Bundle\SalesBundle\Manager\Front\OrderAddressManager

@@ -28,8 +28,8 @@ class ProductLayeredNavigationBoxController extends AbstractBoxController implem
     public function indexAction()
     {
         $producers = $this->get('producer.dataset.front')->getResult('array', [
-            'order_by'   => 'name',
-            'order_dir'  => 'asc',
+            'order_by'  => 'name',
+            'order_dir' => 'asc',
         ]);
 
         return $this->displayTemplate('index', [

@@ -63,4 +63,17 @@
             </constraint>
         </property>
     </class>
+
+    <class name="WellCommerce\Bundle\CmsBundle\Entity\NewsTranslation">
+        <property name="topic">
+            <constraint name="NotBlank"/>
+            <constraint name="NotNull"/>
+        </property>
+        <property name="summary">
+            <constraint name="NotNull" />
+        </property>
+        <property name="content">
+            <constraint name="NotNull"/>
+        </property>
+    </class>
 </constraint-mapping>

@@ -29,6 +29,11 @@
             <argument type="service" id="breadcrumb.collection"/>
             <tag name="twig.extension"/>
         </service>
-    </services>
 
+        <service id="twig.extension.sorting_helper" class="WellCommerce\Bundle\CommonBundle\Twig\Extension\SortingHelperExtension">
+            <argument type="service" id="request.helper"/>
+            <argument type="service" id="translator.helper"/>
+            <tag name="twig.extension"/>
+        </service>
+    </services>
 </container>

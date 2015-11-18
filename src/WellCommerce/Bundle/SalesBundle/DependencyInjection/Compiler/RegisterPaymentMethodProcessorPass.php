@@ -15,36 +15,22 @@ namespace WellCommerce\Bundle\SalesBundle\DependencyInjection\Compiler;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\Compiler\AbstractCollectionPass;
 
 /**
  * Class RegisterPaymentMethodProcessorPass
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class RegisterPaymentMethodProcessorPass implements CompilerPassInterface
+class RegisterPaymentMethodProcessorPass extends AbstractCollectionPass
 {
     /**
-     * @param ContainerBuilder $container
+     * @var string
      */
-    public function process(ContainerBuilder $container)
-    {
-        if (!$container->hasDefinition('payment_method.processor.collection')) {
-            return;
-        }
+    protected $collectionServiceId = 'payment_method.processor.collection';
 
-        $definition = $container->getDefinition('payment_method.processor.collection');
-
-        foreach ($container->findTaggedServiceIds('payment_method.processor') as $id => $attributes) {
-            $class     = $container->getDefinition($id)->getClass();
-            $refClass  = new \ReflectionClass($class);
-            $interface = 'WellCommerce\\Bundle\\SalesBundle\\Processor\\PaymentMethodProcessorInterface';
-            if (!$refClass->implementsInterface($interface)) {
-                throw new \InvalidArgumentException(sprintf('Service "%s" must implement interface "%s".', $id,
-                        $interface));
-            }
-            $definition->addMethodCall('add', array(
-                new Reference($id),
-            ));
-        }
-    }
+    /**
+     * @var string
+     */
+    protected $serviceTag = 'payment_method.processor';
 }

@@ -36,7 +36,7 @@ class ClientOrderBoxController extends AbstractBoxController
         $client = $this->manager->getClient();
         $order  = $this->get('order.repository')->findOneBy(['id' => $id, 'client' => $client]);
 
-        if(null === $order){
+        if (null === $order) {
             return $this->redirectToAction('index');
         }
 

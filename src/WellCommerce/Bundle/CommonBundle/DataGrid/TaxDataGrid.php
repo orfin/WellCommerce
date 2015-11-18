@@ -60,7 +60,7 @@ class TaxDataGrid extends AbstractDataGrid
             'id'         => 'value',
             'caption'    => $this->trans('tax.label.value'),
             'appearance' => new Appearance([
-                'width'   => 70,
+                'width' => 70,
             ]),
             'filter'     => new Filter([
                 'type' => Filter::FILTER_INPUT,

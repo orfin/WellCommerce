@@ -22,7 +22,8 @@ use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ProductAttributeInterface extends TimestampableInterface, AvailabilityAwareInterface, ProductAwareInterface, HierarchyAwareInterface
+interface ProductAttributeInterface
+    extends TimestampableInterface, AvailabilityAwareInterface, ProductAwareInterface, HierarchyAwareInterface
 {
     /**
      * @return int

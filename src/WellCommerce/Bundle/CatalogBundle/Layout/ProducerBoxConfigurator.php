@@ -32,7 +32,7 @@ class ProducerBoxConfigurator extends AbstractLayoutBoxConfigurator implements L
         $accessor = $this->getPropertyAccessor();
 
         $fieldset->addChild($builder->getElement('tip', [
-            'tip' => '<p>'.$this->trans('Select view type used in template.').'</p>'
+            'tip' => '<p>' . $this->trans('Select view type used in template.') . '</p>'
         ]));
 
         $fieldset->addChild($builder->getElement('select', [

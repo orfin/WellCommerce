@@ -15,11 +15,11 @@ namespace WellCommerce\Bundle\CmsBundle\Tests\DependencyInjection;
 use WellCommerce\Bundle\CoreBundle\Test\DependencyInjection\AbstractExtensionTestCase;
 
 /**
- * Class ContactExtensionTest
+ * Class CmsExtensionTest
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ContactExtensionTest extends AbstractExtensionTestCase
+class CmsExtensionTest extends AbstractExtensionTestCase
 {
     /**
      * @return array
@@ -29,6 +29,7 @@ class ContactExtensionTest extends AbstractExtensionTestCase
         return [
             'services' => [
                 [
+                    // contact services
                     'contact.repository',
                     'contact.factory',
                     'contact.event_dispatcher',
@@ -36,6 +37,7 @@ class ContactExtensionTest extends AbstractExtensionTestCase
                     'contact.dataset.admin',
                     'contact.datagrid',
                     'contact.controller.admin',
+                    // news services
                     'news.repository',
                     'news.factory',
                     'news.event_dispatcher',
@@ -43,6 +45,7 @@ class ContactExtensionTest extends AbstractExtensionTestCase
                     'news.dataset.admin',
                     'news.datagrid',
                     'news.controller.admin',
+                    // page services
                     'page.repository',
                     'page.factory',
                     'page.event_dispatcher',
@@ -51,6 +54,14 @@ class ContactExtensionTest extends AbstractExtensionTestCase
                     'page.datagrid',
                     'page.controller.admin',
                     'page.controller.front',
+                    // media services
+                    'media.repository',
+                    'media.factory',
+                    'media.event_dispatcher',
+                    'media.form_builder.admin',
+                    'media.dataset.admin',
+                    'media.datagrid',
+                    'media.controller.admin'
                 ]
             ],
         ];

@@ -49,8 +49,11 @@ abstract class AbstractFormBuilder extends AbstractContainerAware implements For
      * @param FormHandlerInterface         $formHandler
      * @param EventDispatcherInterface     $eventDispatcher
      */
-    public function __construct(FormResolverFactoryInterface $resolverFactory, FormHandlerInterface $formHandler, EventDispatcherInterface $eventDispatcher)
-    {
+    public function __construct(
+        FormResolverFactoryInterface $resolverFactory,
+        FormHandlerInterface $formHandler,
+        EventDispatcherInterface $eventDispatcher
+    ) {
         $this->resolverFactory = $resolverFactory;
         $this->formHandler     = $formHandler;
         $this->eventDispatcher = $eventDispatcher;
@@ -143,7 +146,7 @@ abstract class AbstractFormBuilder extends AbstractContainerAware implements For
      */
     protected function initService($type, $alias, $options)
     {
-        $id      = $this->resolverFactory->resolve($type, $alias);
+        $id = $this->resolverFactory->resolve($type, $alias);
         $service = $this->get($id);
 
         $service->setOptions($options);

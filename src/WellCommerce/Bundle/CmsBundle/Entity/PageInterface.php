@@ -24,7 +24,8 @@ use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface PageInterface extends TranslatableInterface, TimestampableInterface, BlameableInterface, HierarchyAwareInterface, ShopCollectionAwareInterface
+interface PageInterface
+    extends TranslatableInterface, TimestampableInterface, BlameableInterface, HierarchyAwareInterface, ShopCollectionAwareInterface
 {
     /**
      * @return int

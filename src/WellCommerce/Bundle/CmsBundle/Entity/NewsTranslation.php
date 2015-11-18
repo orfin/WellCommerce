@@ -15,7 +15,7 @@ namespace WellCommerce\Bundle\CmsBundle\Entity;
 use Knp\DoctrineBehaviors\Model\Sluggable\Sluggable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translation;
 use WellCommerce\Bundle\CommonBundle\ORM\LocaleAwareInterface;
-use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\MetaDataTrait;
+use WellCommerce\Bundle\CoreBundle\Entity\Meta;
 
 /**
  * Class NewsTranslation
@@ -25,7 +25,6 @@ use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\MetaDataTrait;
 class NewsTranslation implements LocaleAwareInterface
 {
     use Translation;
-    use MetaDataTrait;
     use Sluggable;
 
     /**
@@ -42,6 +41,19 @@ class NewsTranslation implements LocaleAwareInterface
      * @var string
      */
     protected $content;
+
+    /**
+     * @var Meta
+     */
+    protected $meta;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->meta = new Meta();
+    }
 
     /**
      * @return string
@@ -89,6 +101,22 @@ class NewsTranslation implements LocaleAwareInterface
     public function setTopic($topic)
     {
         $this->topic = $topic;
+    }
+
+    /**
+     * @return Meta
+     */
+    public function getMeta()
+    {
+        return $this->meta;
+    }
+
+    /**
+     * @param Meta $meta
+     */
+    public function setMeta(Meta $meta)
+    {
+        $this->meta = $meta;
     }
 
     /**

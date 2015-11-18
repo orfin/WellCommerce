@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\DependencyInjection\Compiler;
 
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
@@ -21,7 +22,7 @@ use Symfony\Component\DependencyInjection\Reference;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractCollectionPass
+abstract class AbstractCollectionPass implements CompilerPassInterface
 {
     /**
      * @var string

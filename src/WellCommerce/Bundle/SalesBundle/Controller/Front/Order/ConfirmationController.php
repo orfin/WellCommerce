@@ -10,18 +10,18 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\SalesBundle\Controller\Front;
+namespace WellCommerce\Bundle\SalesBundle\Controller\Front\Order;
 
 use WellCommerce\Bundle\CommonBundle\Breadcrumb\BreadcrumbItem;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
 
 /**
- * Class OrderConfirmationController
+ * Class ConfirmationController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class OrderConfirmationController extends AbstractFrontController implements FrontControllerInterface
+class ConfirmationController extends AbstractFrontController implements FrontControllerInterface
 {
     /**
      * @var \WellCommerce\Bundle\SalesBundle\Manager\Front\OrderConfirmationManager
@@ -56,10 +56,10 @@ class OrderConfirmationController extends AbstractFrontController implements Fro
         }
 
         return $this->displayTemplate('index', [
-            'form'         => $form,
-            'elements'     => $form->getChildren(),
-            'summary'      => $this->get('cart_summary.collector')->collect($cart),
-            'order'        => $order
+            'form'     => $form,
+            'elements' => $form->getChildren(),
+            'summary'  => $this->get('cart_summary.collector')->collect($cart),
+            'order'    => $order
         ]);
     }
 }
