@@ -15,21 +15,21 @@ namespace WellCommerce\Bundle\SalesBundle\Tests\Context\Front;
 use WellCommerce\Bundle\CoreBundle\Test\AbstractTestCase;
 
 /**
- * Class CartContextTest
+ * Class OrderContextTest
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CartContextTest extends AbstractTestCase
+class OrderContextTest extends AbstractTestCase
 {
     public function testContextReturnsValidData()
     {
-        $factory = $this->container->get('cart.factory');
-        $context = $this->container->get('cart.context.front');
-        $cart    = $factory->create();
-        $this->assertNull($context->getCurrentCart());
+        $factory = $this->container->get('order.factory');
+        $context = $this->container->get('order.context.front');
+        $order    = $factory->create();
+        $this->assertNull($context->getCurrentOrder());
 
-        $context->setCurrentCart($cart);
-        $this->assertInstanceOf(\WellCommerce\Bundle\SalesBundle\Entity\CartInterface::class, $context->getCurrentCart());
-        $this->assertEquals($cart, $context->getCurrentCart());
+        $context->setCurrentOrder($order);
+        $this->assertInstanceOf(\WellCommerce\Bundle\SalesBundle\Entity\OrderInterface::class, $context->getCurrentOrder());
+        $this->assertEquals($order, $context->getCurrentOrder());
     }
 }

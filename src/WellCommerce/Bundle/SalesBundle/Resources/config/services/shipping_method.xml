@@ -40,7 +40,7 @@
             <argument type="service" id="shipping_method.repository"/>
         </service>
 
-        <service id="shipping_method.dataset" class="WellCommerce\Bundle\SalesBundle\DataSet\Admin\ShippingMethodDataSet">
+        <service id="shipping_method.dataset.admin" class="WellCommerce\Bundle\SalesBundle\DataSet\Admin\ShippingMethodDataSet">
             <argument type="service" id="shipping_method.dataset.query_builder.admin"/>
             <argument type="service" id="dataset.manager"/>
             <argument type="service" id="shipping_method.event_dispatcher"/>
@@ -53,7 +53,7 @@
 
         <service id="shipping_method.datagrid" class="WellCommerce\Bundle\SalesBundle\DataGrid\ShippingMethodDataGrid">
             <argument key="identifier">shipping_method</argument>
-            <argument type="service" id="shipping_method.dataset"/>
+            <argument type="service" id="shipping_method.dataset.admin"/>
             <argument type="service" id="shipping_method.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>

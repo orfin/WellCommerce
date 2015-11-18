@@ -84,7 +84,7 @@ class PaymentMethodFormBuilder extends AbstractFormBuilder
         $shippingMethodsData->addChild($this->getElement('multi_select', [
             'name'        => 'shippingMethods',
             'label'       => $this->trans('payment_method.label.shipping_methods'),
-            'options'     => $this->get('shipping_method.dataset')->getResult('select'),
+            'options'     => $this->get('shipping_method.dataset.admin')->getResult('select'),
             'transformer' => $this->getRepositoryTransformer('collection', $this->get('shipping_method.repository'))
         ]));
 

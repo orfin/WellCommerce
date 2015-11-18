@@ -6,7 +6,6 @@
 
     <imports>
         <import resource="services/helpers.xml"/>
-        <import resource="services/twig.xml"/>
         <import resource="services/form.xml"/>
     </imports>
     <services>

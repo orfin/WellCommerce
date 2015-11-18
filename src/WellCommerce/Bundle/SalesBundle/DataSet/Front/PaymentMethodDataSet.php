@@ -21,5 +21,4 @@ use WellCommerce\Bundle\SalesBundle\DataSet\Admin\PaymentMethodDataSet as BaseDa
  */
 class PaymentMethodDataSet extends BaseDataSet
 {
-
 }
