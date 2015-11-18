@@ -36,14 +36,14 @@
             </call>
         </service>
 
-        <service id="order_address.controller.front" class="WellCommerce\Bundle\SalesBundle\Controller\Front\OrderAddressController">
+        <service id="order_address.controller.front" class="WellCommerce\Bundle\SalesBundle\Controller\Front\Order\AddressController">
             <argument type="service" id="order_address.manager.front"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <service id="order_confirmation.controller.front" class="WellCommerce\Bundle\SalesBundle\Controller\Front\OrderConfirmationController">
+        <service id="order_confirmation.controller.front" class="WellCommerce\Bundle\SalesBundle\Controller\Front\Order\ConfirmationController">
             <argument type="service" id="order_confirmation.manager.front"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
