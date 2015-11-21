@@ -13,8 +13,8 @@
 namespace WellCommerce\SalesBundle\Purger;
 
 
-use WellCommerce\CoreBundle\Purger\AbstractPurger;
-use WellCommerce\CoreBundle\Purger\PurgerInterface;
+use WellCommerce\CoreBundle\Service\Purger\AbstractPurger;
+use WellCommerce\CoreBundle\Service\Purger\PurgerInterface;
 
 class CartPurger extends AbstractPurger implements PurgerInterface
 {

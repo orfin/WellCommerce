@@ -13,14 +13,13 @@
 namespace WellCommerce\CoreBundle\Repository;
 
 use Doctrine\Common\Collections\Criteria;
-use WellCommerce\CoreBundle\Component\DataSet\Repository\DataSetAwareRepositoryInterface;
 
 /**
  * Interface RepositoryInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface RepositoryInterface extends DataSetAwareRepositoryInterface
+interface RepositoryInterface
 {
     /**
      * Creates a new QueryBuilder instance that is prepopulated for this entity name.
@@ -87,4 +86,18 @@ interface RepositoryInterface extends DataSetAwareRepositoryInterface
      * @return \Doctrine\Common\Collections\Collection
      */
     public function matching(Criteria $criteria);
+
+    /**
+     * Returns query builder from related repository
+     *
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function getDataSetQueryBuilder();
+
+    /**
+     * Returns repository alias which is used also as dataset identifier
+     *
+     * @return string
+     */
+    public function getAlias();
 }

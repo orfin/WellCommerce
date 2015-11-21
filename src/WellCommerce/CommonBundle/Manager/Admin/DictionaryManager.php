@@ -22,7 +22,7 @@ use WellCommerce\CommonBundle\Entity\Locale;
 use WellCommerce\CommonBundle\Entity\LocaleInterface;
 use WellCommerce\CoreBundle\Helper\Helper;
 use WellCommerce\CoreBundle\Manager\Admin\AbstractAdminManager;
-use WellCommerce\CoreBundle\Purger\PurgerInterface;
+use WellCommerce\CoreBundle\Service\Purger\PurgerInterface;
 
 /**
  * Class DictionaryManager

@@ -12,8 +12,8 @@
 
 namespace WellCommerce\CommonBundle\Purger;
 
-use WellCommerce\CoreBundle\Purger\AbstractPurger;
-use WellCommerce\CoreBundle\Purger\PurgerInterface;
+use WellCommerce\CoreBundle\Service\Purger\AbstractPurger;
+use WellCommerce\CoreBundle\Service\Purger\PurgerInterface;
 
 class DictionaryPurger extends AbstractPurger implements PurgerInterface
 {

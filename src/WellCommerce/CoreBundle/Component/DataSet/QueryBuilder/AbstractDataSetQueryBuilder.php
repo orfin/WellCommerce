@@ -18,8 +18,8 @@ use WellCommerce\CoreBundle\Component\DataSet\Column\ColumnCollection;
 use WellCommerce\CoreBundle\Component\DataSet\Column\ColumnInterface;
 use WellCommerce\CoreBundle\Component\DataSet\Conditions\ConditionInterface;
 use WellCommerce\CoreBundle\Component\DataSet\Conditions\ConditionsCollection;
-use WellCommerce\CoreBundle\Component\DataSet\Repository\DataSetAwareRepositoryInterface;
 use WellCommerce\CoreBundle\Component\DataSet\Request\DataSetRequestInterface;
+use WellCommerce\CoreBundle\Repository\RepositoryInterface;
 
 /**
  * Class DataSetQueryBuilder
@@ -29,7 +29,7 @@ use WellCommerce\CoreBundle\Component\DataSet\Request\DataSetRequestInterface;
 abstract class AbstractDataSetQueryBuilder implements DataSetQueryBuilderInterface
 {
     /**
-     * @var DataSetAwareRepositoryInterface
+     * @var RepositoryInterface
      */
     protected $repository;
 
@@ -46,9 +46,9 @@ abstract class AbstractDataSetQueryBuilder implements DataSetQueryBuilderInterfa
     /**
      * Constructor
      *
-     * @param DataSetAwareRepositoryInterface $repository
+     * @param RepositoryInterface $repository
      */
-    public function __construct(DataSetAwareRepositoryInterface $repository)
+    public function __construct(RepositoryInterface $repository)
     {
         $this->repository = $repository;
     }
