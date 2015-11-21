@@ -1,0 +1,28 @@
+WellCommerce\CatalogBundle\Entity\ProductReview:
+    type: entity
+    table: product_review
+    repositoryClass: WellCommerce\CatalogBundle\Repository\ProductReviewRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        nick:
+            type: string
+            nullable: false
+        review:
+            type: string
+            nullable: false
+        rating:
+            type: integer
+            nullable: false
+    manyToOne:
+        product:
+            targetEntity: WellCommerce\CatalogBundle\Entity\Product
+            fetch: LAZY
+            inversedBy: attributes
+            joinColumns:
+                product_id:
+                    referencedColumnName: id
+                    onDelete: CASCADE

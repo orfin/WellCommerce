@@ -1,9 +1,0 @@
-WellCommerce\Bundle\CatalogBundle\Entity\Unit:
-    type: entity
-    table: unit
-    repositoryClass: WellCommerce\Bundle\CatalogBundle\Repository\UnitRepository
-    id:
-        id:
-            type: integer
-            generator:
-                strategy: AUTO

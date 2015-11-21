@@ -1,0 +1,45 @@
+WellCommerce\CommonBundle\Entity\Route:
+    type: entity
+    table: route
+    inheritanceType: JOINED
+    discriminatorColumn:
+        name: type
+        type: string
+        length: null
+        columnDefinition: null
+        fieldName: type
+    discriminatorMap:
+        route: WellCommerce\CommonBundle\Entity\Route
+        product: WellCommerce\CatalogBundle\Entity\ProductRoute
+        product_status: WellCommerce\CatalogBundle\Entity\ProductStatusRoute
+        producer: WellCommerce\CatalogBundle\Entity\ProducerRoute
+        category: WellCommerce\CatalogBundle\Entity\CategoryRoute
+        page: WellCommerce\CmsBundle\Entity\PageRoute
+    repositoryClass: WellCommerce\CommonBundle\Repository\RouteRepository
+    id:
+        id:
+            type: integer
+            scale: 0
+            length: null
+            unique: false
+            nullable: false
+            precision: 0
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        path:
+            type: string
+            scale: 0
+            length: null
+            unique: false
+            nullable: false
+            precision: 0
+        locale:
+            type: string
+            scale: 0
+            length: 255
+            unique: false
+            nullable: false
+            precision: 0
+    lifecycleCallbacks: {  }

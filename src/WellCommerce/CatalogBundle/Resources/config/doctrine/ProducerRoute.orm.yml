@@ -1,0 +1,11 @@
+WellCommerce\CatalogBundle\Entity\ProducerRoute:
+    type: entity
+    table: route_producer
+    manyToOne:
+        identifier:
+            targetEntity: WellCommerce\CatalogBundle\Entity\Producer
+            fetch: LAZY
+            joinColumns:
+                foreign_id:
+                    referencedColumnName: id
+                    onDelete: CASCADE

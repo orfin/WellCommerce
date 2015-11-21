@@ -1,0 +1,45 @@
+<?php
+/*
+ * WellCommerce Open-Source E-Commerce Platform
+ *
+ * This file is part of the WellCommerce package.
+ *
+ * (c) Adam Piotrowski <adam@wellcommerce.org>
+ *
+ * For the full copyright and license information,
+ * please view the LICENSE file that was distributed with this source code.
+ */
+
+namespace WellCommerce\CmsBundle\Form\Admin\DataTransformer;
+
+use Doctrine\ORM\PersistentCollection;
+use WellCommerce\CoreBundle\Component\Form\DataTransformer\CollectionToArrayTransformer;
+use WellCommerce\CoreBundle\Component\Form\DataTransformer\DataTransformerInterface;
+
+/**
+ * Class CollectionToArrayTransformer
+ *
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
+ */
+class MediaCollectionToArrayTransformer extends CollectionToArrayTransformer implements DataTransformerInterface
+{
+    /**
+     * {@inheritdoc}
+     */
+    public function transform($modelData)
+    {
+        if (null === $modelData || !$modelData instanceof PersistentCollection) {
+            return [];
+        }
+
+        $items = [];
+        foreach ($modelData as $item) {
+            if ($item->getMainPhoto() == 1) {
+                $items['main_photo'] = $item->getPhoto()->getId();
+            }
+            $items['photos'][] = $item->getPhoto()->getId();
+        }
+
+        return $items;
+    }
+}

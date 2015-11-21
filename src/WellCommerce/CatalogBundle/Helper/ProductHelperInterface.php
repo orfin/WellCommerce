@@ -1,0 +1,42 @@
+<?php
+/*
+ * WellCommerce Open-Source E-Commerce Platform
+ * 
+ * This file is part of the WellCommerce package.
+ *
+ * (c) Adam Piotrowski <adam@wellcommerce.org>
+ * 
+ * For the full copyright and license information,
+ * please view the LICENSE file that was distributed with this source code.
+ */
+
+namespace WellCommerce\CatalogBundle\Helper;
+
+use WellCommerce\CatalogBundle\Entity\CategoryInterface;
+use WellCommerce\CatalogBundle\Entity\ProductInterface;
+
+/**
+ * Interface ProductHelperInterface
+ *
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
+ */
+interface ProductHelperInterface
+{
+    /**
+     * Returns the default product's template variables
+     *
+     * @param ProductInterface $product
+     *
+     * @return array
+     */
+    public function getProductDefaultTemplateData(ProductInterface $product);
+
+    /**
+     * Returns a dataset of products recommended for category
+     *
+     * @param CategoryInterface $category
+     *
+     * @return array
+     */
+    public function getProductRecommendationsForCategory(CategoryInterface $category);
+}

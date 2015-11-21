@@ -1,30 +1,30 @@
 parameters:
     fixtures_load_order:
-        WellCommerce\Bundle\AdminBundle\DataFixtures\ORM\LoadAdminMenuData: 0
-        WellCommerce\Bundle\LayoutBundle\DataFixtures\ORM\LoadThemeData: 10
-        WellCommerce\Bundle\CommonBundle\DataFixtures\ORM\LoadCompanyData: 20
-        WellCommerce\Bundle\CommonBundle\DataFixtures\ORM\LoadCurrencyData: 30
-        WellCommerce\Bundle\CommonBundle\DataFixtures\ORM\LoadLocaleData: 40
-        WellCommerce\Bundle\SalesBundle\DataFixtures\ORM\LoadOrderStatusGroupData: 41
-        WellCommerce\Bundle\SalesBundle\DataFixtures\ORM\LoadOrderStatusData: 42
-        WellCommerce\Bundle\CommonBundle\DataFixtures\ORM\LoadShopData: 50
-        WellCommerce\Bundle\AdminBundle\DataFixtures\ORM\LoadUserData: 60
-        WellCommerce\Bundle\CommonBundle\DataFixtures\ORM\LoadTaxData: 70
-        WellCommerce\Bundle\ClientBundle\DataFixtures\ORM\LoadClientGroupData: 80
-        WellCommerce\Bundle\ClientBundle\DataFixtures\ORM\LoadClientData: 90
-        WellCommerce\Bundle\CatalogBundle\DataFixtures\ORM\LoadUnitData: 110
-        WellCommerce\Bundle\CmsBundle\DataFixtures\ORM\LoadContactData: 130
-        WellCommerce\Bundle\CmsBundle\DataFixtures\ORM\LoadMediaData: 135
-        WellCommerce\Bundle\CatalogBundle\DataFixtures\ORM\LoadDelivererData: 140
-        WellCommerce\Bundle\CatalogBundle\DataFixtures\ORM\LoadAvailabilityData: 150
-        WellCommerce\Bundle\CatalogBundle\DataFixtures\ORM\LoadProducerData: 160
-        WellCommerce\Bundle\CatalogBundle\DataFixtures\ORM\LoadAttributeData: 170
-        WellCommerce\Bundle\CatalogBundle\DataFixtures\ORM\LoadCategoryData: 180
-        WellCommerce\Bundle\CatalogBundle\DataFixtures\ORM\LoadProductStatusData: 190
-        WellCommerce\Bundle\ProductBundle\DataFixtures\ORM\LoadProductData: 200
-        WellCommerce\Bundle\ClientBundle\DataFixtures\ORM\LoadLayoutBoxData: 210
-        WellCommerce\Bundle\SalesBundle\DataFixtures\ORM\LoadShippingMethodData: 220
-        WellCommerce\Bundle\SalesBundle\DataFixtures\ORM\LoadPaymentMethodData: 230
+        WellCommerce\AdminBundle\DataFixtures\ORM\LoadAdminMenuData: 0
+        WellCommerce\LayoutBundle\DataFixtures\ORM\LoadThemeData: 10
+        WellCommerce\CommonBundle\DataFixtures\ORM\LoadCompanyData: 20
+        WellCommerce\CommonBundle\DataFixtures\ORM\LoadCurrencyData: 30
+        WellCommerce\CommonBundle\DataFixtures\ORM\LoadLocaleData: 40
+        WellCommerce\SalesBundle\DataFixtures\ORM\LoadOrderStatusGroupData: 41
+        WellCommerce\SalesBundle\DataFixtures\ORM\LoadOrderStatusData: 42
+        WellCommerce\CommonBundle\DataFixtures\ORM\LoadShopData: 50
+        WellCommerce\AdminBundle\DataFixtures\ORM\LoadUserData: 60
+        WellCommerce\CommonBundle\DataFixtures\ORM\LoadTaxData: 70
+        WellCommerce\ClientBundle\DataFixtures\ORM\LoadClientGroupData: 80
+        WellCommerce\ClientBundle\DataFixtures\ORM\LoadClientData: 90
+        WellCommerce\CatalogBundle\DataFixtures\ORM\LoadUnitData: 110
+        WellCommerce\CmsBundle\DataFixtures\ORM\LoadContactData: 130
+        WellCommerce\CmsBundle\DataFixtures\ORM\LoadMediaData: 135
+        WellCommerce\CatalogBundle\DataFixtures\ORM\LoadDelivererData: 140
+        WellCommerce\CatalogBundle\DataFixtures\ORM\LoadAvailabilityData: 150
+        WellCommerce\CatalogBundle\DataFixtures\ORM\LoadProducerData: 160
+        WellCommerce\CatalogBundle\DataFixtures\ORM\LoadAttributeData: 170
+        WellCommerce\CatalogBundle\DataFixtures\ORM\LoadCategoryData: 180
+        WellCommerce\CatalogBundle\DataFixtures\ORM\LoadProductStatusData: 190
+        WellCommerce\ProductBundle\DataFixtures\ORM\LoadProductData: 200
+        WellCommerce\ClientBundle\DataFixtures\ORM\LoadLayoutBoxData: 210
+        WellCommerce\SalesBundle\DataFixtures\ORM\LoadShippingMethodData: 220
+        WellCommerce\SalesBundle\DataFixtures\ORM\LoadPaymentMethodData: 230
     fixtures_product_limit: 100
 
 well_commerce_search:

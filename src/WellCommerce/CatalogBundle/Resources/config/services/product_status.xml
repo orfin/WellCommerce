@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <imports>
+        <import resource="admin/product_status.xml"/>
+        <import resource="front/product_status.xml"/>
+    </imports>
+
+    <services>
+        <service id="product_status.repository" class="WellCommerce\CatalogBundle\Repository\ProductStatusRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>WellCommerceCatalogBundle:ProductStatus</argument>
+        </service>
+
+        <service id="product_status.factory" class="WellCommerce\CatalogBundle\Factory\ProductStatusFactory" />
+
+        <service id="product_status.event_dispatcher" parent="core.event_dispatcher" public="false">
+            <argument type="service" id="event_dispatcher" />
+        </service>
+
+        <service id="product_status.request_param_converter" class="WellCommerce\CatalogBundle\Request\ParamConverter\ProductStatusParamConverter">
+            <argument type="service" id="product_status.repository" />
+            <argument>id</argument>
+            <argument type="collection">
+                <argument>WellCommerce\CatalogBundle\Entity\ProductStatus</argument>
+                <argument>WellCommerce\CatalogBundle\Entity\ProductStatusInterface</argument>
+            </argument>
+            <tag name="request.param_converter" converter="product" priority="0"/>
+        </service>
+
+        <service id="product_status.transformer" class="WellCommerce\CatalogBundle\DataSet\Transformer\ProductStatusTransformer">
+            <tag name="dataset.transformer" alias="product_status"/>
+        </service>
+
+        <service id="twig.extension.product_status" class="WellCommerce\CatalogBundle\Twig\Extension\ProductStatusExtension">
+            <argument type="service" id="product_status.dataset.front"/>
+            <tag name="twig.extension"/>
+        </service>
+
+        <service id="product_status.route.generator" class="WellCommerce\CatalogBundle\Routing\ProductStatusRouteGenerator">
+            <argument type="collection" key="defaults">
+                <argument key="_controller">product_status.controller.front:indexAction</argument>
+                <argument key="page">1</argument>
+                <argument key="limit">12</argument>
+                <argument key="orderBy">name</argument>
+                <argument key="orderDir">asc</argument>
+                <argument key="priceFrom">0</argument>
+                <argument key="priceTo">9999</argument>
+                <argument key="view">grid</argument>
+                <argument key="producers">null</argument>
+                <argument key="attributes">null</argument>
+            </argument>
+            <argument type="collection" key="requirements">
+                <argument key="limit">\d{1,10}</argument>
+                <argument key="page">\d{1,10}</argument>
+                <argument key="orderBy">name|finalPrice</argument>
+                <argument key="orderDir">asc|desc</argument>
+                <argument key="priceFrom">\d{1,10}</argument>
+                <argument key="priceTo">\d{1,10}</argument>
+                <argument key="view">grid|list</argument>
+                <argument key="producers">[\d+_]+</argument>
+                <argument key="attributes">[\d+_]+</argument>
+            </argument>
+            <argument type="collection" key="pattern">
+                <argument key="page" />
+                <argument key="limit" />
+                <argument key="orderBy" />
+                <argument key="orderDir" />
+                <argument key="priceFrom" />
+                <argument key="priceTo" />
+                <argument key="view" />
+                <argument key="producers" />
+                <argument key="attributes" />
+            </argument>
+            <tag name="route.generator" />
+        </service>
+    </services>
+</container>

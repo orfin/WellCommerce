@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="attribute_value.manager.admin" class="WellCommerce\CatalogBundle\Manager\Admin\AttributeValueManager">
+            <argument type="service" id="attribute_value.repository"/>
+            <argument type="service" id="attribute_value.event_dispatcher"/>
+            <argument type="service" id="attribute_value.factory"/>
+            <call method="setAttributeRepository">
+                <argument type="service" id="attribute.repository"/>
+            </call>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="attribute_value.repository" class="WellCommerce\CatalogBundle\Repository\AttributeValueRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>WellCommerceCatalogBundle:AttributeValue</argument>
+        </service>
+
+        <service id="attribute_value.factory" class="WellCommerce\CatalogBundle\Factory\AttributeValueFactory" />
+
+        <service id="attribute_value.event_dispatcher" parent="core.event_dispatcher" public="false">
+            <argument type="service" id="event_dispatcher"/>
+        </service>
+
+        <service id="attribute_value.controller.admin" class="WellCommerce\CatalogBundle\Controller\Admin\AttributeValueController">
+            <argument type="service" id="attribute_value.manager.admin"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+    </services>
+</container>

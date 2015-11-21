@@ -42,10 +42,6 @@
         "liip/imagine-bundle": "1.2.1",
         "symfony-cmf/routing-bundle": "1.3.*@dev",
         "beberlei/DoctrineExtensions": "1.0.*@dev",
-        "wellcommerce/dataset-bundle": "^1.0@dev",
-        "wellcommerce/datagrid-bundle": "^1.0@dev",
-        "wellcommerce/collections": "^1.0@dev",
-        "wellcommerce/form-bundle": "^1.0@dev",
         "symfony/assetic-bundle": "^2.6@dev",
         "symfony/monolog-bundle": "^2.7@dev",
         "symfony/swiftmailer-bundle": "^2.3@dev",
@@ -58,7 +54,8 @@
         "hoa/websocket": "2.*@dev",
         "devristo/phpws": "dev-master",
         "nesbot/carbon": "dev-master",
-        "egeloen/lucene-search-bundle": "^2.0@dev"
+        "egeloen/lucene-search-bundle": "^2.0@dev",
+        "zendframework/zend-json": "2.3.*@dev"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",

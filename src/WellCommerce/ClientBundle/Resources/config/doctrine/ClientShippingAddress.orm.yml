@@ -1,0 +1,48 @@
+WellCommerce\ClientBundle\Entity\ClientShippingAddress:
+    type: embeddable
+    fields:
+        firstName:
+            type: string
+            length: 255
+            nullable: true
+            column: first_name
+        lastName:
+            type: string
+            length: 255
+            nullable: true
+            column: last_name
+        street:
+            type: string
+            length: 255
+            nullable: true
+            column: street
+        streetNo:
+            type: string
+            length: 255
+            nullable: true
+            column: street_no
+        flatNo:
+            type: string
+            length: 255
+            nullable: true
+            column: flat_no
+        postCode:
+            type: string
+            length: 255
+            nullable: true
+            column: post_code
+        province:
+            type: string
+            length: 255
+            nullable: true
+            column: province
+        city:
+            type: string
+            length: 255
+            nullable: true
+            column: city
+        country:
+            type: string
+            length: 3
+            nullable: true
+            column: country

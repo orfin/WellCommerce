@@ -1,0 +1,13 @@
+WellCommerce\CmsBundle\Entity\Contact:
+    type: entity
+    table: contact
+    repositoryClass: WellCommerce\CmsBundle\Repository\ContactRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        enabled:
+            type: boolean
+            nullable: false

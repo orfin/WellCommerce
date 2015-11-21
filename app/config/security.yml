@@ -44,10 +44,10 @@ security:
             entity: { class: WellCommerceClientBundle:Client }
 
     encoders:
-        WellCommerce\Bundle\AdminBundle\Entity\User:
+        WellCommerce\AdminBundle\Entity\User:
             algorithm: bcrypt
             cost: 12
-        WellCommerce\Bundle\ClientBundle\Entity\Client:
+        WellCommerce\ClientBundle\Entity\Client:
             algorithm: bcrypt
             cost: 12
 
