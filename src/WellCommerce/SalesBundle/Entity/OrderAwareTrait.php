@@ -12,7 +12,11 @@
 
 namespace WellCommerce\SalesBundle\Entity;
 
-
+/**
+ * Class OrderAwareTrait
+ *
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
+ */
 trait OrderAwareTrait
 {
     /**
