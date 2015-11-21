@@ -21,7 +21,7 @@ WellCommerce\CatalogBundle\Entity\ProductReview:
         product:
             targetEntity: WellCommerce\CatalogBundle\Entity\Product
             fetch: LAZY
-            inversedBy: attributes
+            inversedBy: reviews
             joinColumns:
                 product_id:
                     referencedColumnName: id
