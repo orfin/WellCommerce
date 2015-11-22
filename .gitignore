@@ -1,6 +1,5 @@
 .idea
-bin/*
 vendor/
 phpunit.xml
 composer.phar
-*.lock
+composer.lock
