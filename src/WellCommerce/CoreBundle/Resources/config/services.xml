@@ -15,10 +15,6 @@
             <tag name="doctrine.event_subscriber" />
         </service>
 
-        <service id="template_resolver" class="WellCommerce\CoreBundle\Templating\TemplateResolver">
-             <argument type="service" id="kernel"/>
-        </service>
-
         <service id="core.event_dispatcher" class="WellCommerce\CoreBundle\EventDispatcher\EventDispatcher">
             <argument type="service" id="event_dispatcher"/>
         </service>

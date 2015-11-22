@@ -128,9 +128,8 @@ abstract class AbstractController extends AbstractContainerAware implements Cont
      */
     protected function displayTemplate($templateName, array $templateVars = [])
     {
-        $templating       = $this->container->get('templating');
-        $templateResolver = $this->get('template_resolver');
-        $template         = $templateResolver->resolveControllerTemplate($this, $templateName);
+        $templating = $this->container->get('templating');
+        $template   = $this->getTemplatingelper()->resolveControllerTemplate($this, $templateName);
 
         return $templating->renderResponse($template, $templateVars);
     }

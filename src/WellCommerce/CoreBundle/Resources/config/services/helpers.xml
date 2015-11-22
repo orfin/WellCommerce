@@ -47,6 +47,7 @@
 
         <service id="templating.helper" class="WellCommerce\CoreBundle\Helper\Templating\TemplatingHelper">
             <argument type="service" id="templating"/>
+            <argument type="service" id="kernel"/>
         </service>
 
         <service id="mailer.helper" class="WellCommerce\CoreBundle\Helper\Mailer\MailerHelper" />

@@ -12,6 +12,8 @@
 
 namespace WellCommerce\CoreBundle\Helper\Templating;
 
+use WellCommerce\CoreBundle\Controller\ControllerInterface;
+
 /**
  * Interface TemplatingHelperInterface
  *
@@ -28,4 +30,25 @@ interface TemplatingHelperInterface
      * @return string
      */
     public function render($name, array $parameters = []);
+
+    /**
+     * Resolves the controller's template name
+     *
+     * @param ControllerInterface $class
+     * @param string              $templateName
+     *
+     * @return string
+     */
+    public function resolveControllerTemplate(ControllerInterface $class, $templateName);
+
+    /**
+     * Renders the controller's response
+     *
+     * @param ControllerInterface $controller
+     * @param string              $templateName
+     * @param array               $parameters
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function renderControllerResponse(ControllerInterface $controller, $templateName, array $parameters = []);
 }
