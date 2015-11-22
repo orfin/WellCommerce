@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Component\DataGrid\Conditions;
 
-use WellCommerce\CoreBundle\Component\DataSet\Conditions\ConditionsCollection;
+use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
 
 /**
  * Class ConditionsResolver
