@@ -20,7 +20,7 @@
         "source": "https://github.com/WellCommerce/Collections"
     },
     "autoload": {
-        "psr-4": { "WellCommerce\\Common\\Collections\\": "" }
+        "psr-4": { "WellCommerce\\Component\\Collections\\": "" }
     },
     "require": {
         "php": ">=5.6"
