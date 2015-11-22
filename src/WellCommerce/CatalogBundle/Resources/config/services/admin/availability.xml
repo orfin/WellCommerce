@@ -4,7 +4,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="availability.manager.admin" class="WellCommerce\CatalogBundle\Manager\Admin\AvailabilityManager">
+        <service id="availability.manager.admin" class="WellCommerce\AppBundle\Manager\Admin\AvailabilityManager">
             <argument type="service" id="availability.repository"/>
             <argument type="service" id="availability.event_dispatcher"/>
             <argument type="service" id="availability.factory"/>
@@ -15,25 +15,25 @@
             </call>
         </service>
 
-        <service id="availability.controller.admin" class="WellCommerce\CatalogBundle\Controller\Admin\AvailabilityController">
+        <service id="availability.controller.admin" class="WellCommerce\AppBundle\Controller\Admin\AvailabilityController">
             <argument type="service" id="availability.manager.admin"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <service id="availability.dataset.query_builder.admin" class="WellCommerce\CatalogBundle\DataSet\Admin\AvailabilityDataSetQueryBuilder" public="false">
+        <service id="availability.dataset.query_builder.admin" class="WellCommerce\AppBundle\DataSet\Admin\AvailabilityDataSetQueryBuilder" public="false">
             <argument type="service" id="availability.repository"/>
         </service>
 
-        <service id="availability.dataset.admin" class="WellCommerce\CatalogBundle\DataSet\Admin\AvailabilityDataSet">
+        <service id="availability.dataset.admin" class="WellCommerce\AppBundle\DataSet\Admin\AvailabilityDataSet">
             <argument type="service" id="availability.dataset.query_builder.admin"/>
             <argument type="service" id="dataset.manager"/>
             <argument type="service" id="availability.event_dispatcher"/>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
-        <service id="availability.datagrid" class="WellCommerce\CatalogBundle\DataGrid\AvailabilityDataGrid">
+        <service id="availability.datagrid" class="WellCommerce\AppBundle\DataGrid\AvailabilityDataGrid">
             <argument key="identifier">availability</argument>
             <argument type="service" id="availability.dataset.admin"/>
             <argument type="service" id="availability.event_dispatcher"/>
@@ -42,7 +42,7 @@
             </call>
         </service>
 
-        <service id="availability.form_builder.admin" class="WellCommerce\CatalogBundle\Form\Admin\AvailabilityFormBuilder">
+        <service id="availability.form_builder.admin" class="WellCommerce\AppBundle\Form\Admin\AvailabilityFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
             <argument type="service" id="availability.event_dispatcher"/>

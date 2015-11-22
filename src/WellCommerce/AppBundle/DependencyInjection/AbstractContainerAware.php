@@ -159,7 +159,7 @@ abstract class AbstractContainerAware extends ContainerAware
     }
 
     /**
-     * @return \WellCommerce\CommonBundle\Entity\Locale[]
+     * @return \WellCommerce\AppBundle\Entity\Locale[]
      */
     public function getLocales()
     {
@@ -167,7 +167,7 @@ abstract class AbstractContainerAware extends ContainerAware
     }
 
     /**
-     * @return \WellCommerce\CommonBundle\Helper\CurrencyHelperInterface
+     * @return \WellCommerce\AppBundle\Helper\CurrencyHelperInterface
      */
     public function getCurrencyHelper()
     {
@@ -207,7 +207,7 @@ abstract class AbstractContainerAware extends ContainerAware
     }
 
     /**
-     * @return \WellCommerce\CatalogBundle\Helper\ProductLayeredNavigationHelperInterface
+     * @return \WellCommerce\AppBundle\Helper\ProductLayeredNavigationHelperInterface
      */
     public function getLayeredNavigationHelper()
     {

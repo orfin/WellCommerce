@@ -7,7 +7,7 @@
 
         <service id="knp.packagist_api.client" class="Packagist\Api\Client"/>
 
-        <service id="package.manager.admin" class="WellCommerce\CommonBundle\Manager\Admin\PackageManager">
+        <service id="package.manager.admin" class="WellCommerce\AppBundle\Manager\Admin\PackageManager">
             <argument type="service" id="package.repository"/>
             <argument type="service" id="package.event_dispatcher"/>
             <argument type="service" id="package.factory"/>
@@ -21,39 +21,39 @@
             </call>
         </service>
 
-        <service id="package.factory" class="WellCommerce\CommonBundle\Factory\PackageFactory"/>
+        <service id="package.factory" class="WellCommerce\AppBundle\Factory\PackageFactory"/>
 
         <service id="package.event_dispatcher" parent="core.event_dispatcher" public="false">
             <argument type="service" id="event_dispatcher"/>
         </service>
 
-        <service id="package.helper" class="WellCommerce\CommonBundle\Helper\PackageHelper">
+        <service id="package.helper" class="WellCommerce\AppBundle\Helper\PackageHelper">
             <argument type="service" id="knp.packagist_api.client"/>
         </service>
 
-        <service id="package.controller.admin" class="WellCommerce\CommonBundle\Controller\Admin\PackageController">
+        <service id="package.controller.admin" class="WellCommerce\AppBundle\Controller\Admin\PackageController">
             <argument type="service" id="package.manager.admin"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <service id="package.repository" class="WellCommerce\CommonBundle\Repository\PackageRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
-            <argument>WellCommerceCommonBundle:Package</argument>
+        <service id="package.repository" class="WellCommerce\AppBundle\Repository\PackageRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>WellCommerceAppBundle:Package</argument>
         </service>
 
-        <service id="package.dataset.query_builder" class="WellCommerce\CommonBundle\DataSet\Admin\PackageDataSetQueryBuilder" public="false">
+        <service id="package.dataset.query_builder" class="WellCommerce\AppBundle\DataSet\Admin\PackageDataSetQueryBuilder" public="false">
             <argument type="service" id="package.repository"/>
         </service>
 
-        <service id="package.dataset" class="WellCommerce\CommonBundle\DataSet\Admin\PackageDataSet">
+        <service id="package.dataset" class="WellCommerce\AppBundle\DataSet\Admin\PackageDataSet">
             <argument type="service" id="package.dataset.query_builder"/>
             <argument type="service" id="dataset.manager"/>
             <argument type="service" id="package.event_dispatcher"/>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
-        <service id="package.datagrid" class="WellCommerce\CommonBundle\DataGrid\PackageDataGrid">
+        <service id="package.datagrid" class="WellCommerce\AppBundle\DataGrid\PackageDataGrid">
             <argument key="identifier">package</argument>
             <argument type="service" id="package.dataset"/>
             <argument type="service" id="package.event_dispatcher"/>
@@ -62,7 +62,7 @@
             </call>
         </service>
 
-        <service id="package.form_builder" class="WellCommerce\CommonBundle\Form\Admin\PackageFormBuilder">
+        <service id="package.form_builder" class="WellCommerce\AppBundle\Form\Admin\PackageFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
             <argument type="service" id="package.event_dispatcher"/>
@@ -71,19 +71,19 @@
             </call>
         </service>
 
-        <service id="package.command.plugin.require" class="WellCommerce\CommonBundle\Command\Package\RequireCommand">
+        <service id="package.command.plugin.require" class="WellCommerce\AppBundle\Command\Package\RequireCommand">
             <tag name="console.command" />
         </service>
 
-        <service id="package.command.plugin.update" class="WellCommerce\CommonBundle\Command\Package\UpdateCommand">
+        <service id="package.command.plugin.update" class="WellCommerce\AppBundle\Command\Package\UpdateCommand">
             <tag name="console.command" />
         </service>
 
-        <service id="package.command.plugin.remove" class="WellCommerce\CommonBundle\Command\Package\RemoveCommand">
+        <service id="package.command.plugin.remove" class="WellCommerce\AppBundle\Command\Package\RemoveCommand">
             <tag name="console.command" />
         </service>
 
-        <service id="dataset.transformer.package_version_reference" class="WellCommerce\CommonBundle\DataSet\Transformer\VersionReferenceTransformer">
+        <service id="dataset.transformer.package_version_reference" class="WellCommerce\AppBundle\DataSet\Transformer\VersionReferenceTransformer">
             <tag name="dataset.transformer" alias="package_version_reference"/>
         </service>
 

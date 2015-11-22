@@ -3,7 +3,7 @@
                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
 
-    <class name="WellCommerce\SalesBundle\Entity\PaymentMethod">
+    <class name="WellCommerce\AppBundle\Entity\PaymentMethod">
         <property name="translations">
             <constraint name="Valid" />
         </property>
@@ -20,7 +20,7 @@
         </property>
     </class>
 
-    <class name="WellCommerce\SalesBundle\Entity\PaymentMethodTranslation">
+    <class name="WellCommerce\AppBundle\Entity\PaymentMethodTranslation">
         <property name="name">
             <constraint name="NotBlank" />
             <constraint name="NotNull" />

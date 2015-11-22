@@ -17,13 +17,13 @@
     </imports>
 
     <services>
-        <service id="web.home_page.controller.front" class="WellCommerce\CommonBundle\Controller\Front\HomePageController">
+        <service id="web.home_page.controller.front" class="WellCommerce\AppBundle\Controller\Front\HomePageController">
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
         </service>
 
-        <service id="twig.extension.sorting_helper" class="WellCommerce\CommonBundle\Twig\Extension\SortingHelperExtension">
+        <service id="twig.extension.sorting_helper" class="WellCommerce\AppBundle\Twig\Extension\SortingHelperExtension">
             <argument type="service" id="request.helper"/>
             <argument type="service" id="translator.helper"/>
             <tag name="twig.extension"/>

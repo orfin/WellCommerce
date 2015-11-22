@@ -4,7 +4,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="currency.manager.front" class="WellCommerce\CommonBundle\Manager\Front\CurrencyManager">
+        <service id="currency.manager.front" class="WellCommerce\AppBundle\Manager\Front\CurrencyManager">
             <argument type="service" id="currency.repository"/>
             <argument type="service" id="currency.event_dispatcher"/>
             <argument type="service" id="currency.factory"/>
@@ -13,25 +13,25 @@
             </call>
         </service>
 
-        <service id="currency.controller.front" class="WellCommerce\CommonBundle\Controller\Front\CurrencyController">
+        <service id="currency.controller.front" class="WellCommerce\AppBundle\Controller\Front\CurrencyController">
             <argument type="service" id="currency.manager.front"/>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
         </service>
 
-        <service id="currency.dataset.query_builder.front" class="WellCommerce\CommonBundle\DataSet\Front\CurrencyDataSetQueryBuilder" public="false">
+        <service id="currency.dataset.query_builder.front" class="WellCommerce\AppBundle\DataSet\Front\CurrencyDataSetQueryBuilder" public="false">
             <argument type="service" id="currency.repository"/>
         </service>
 
-        <service id="currency.dataset.front" class="WellCommerce\CommonBundle\DataSet\Front\CurrencyDataSet">
+        <service id="currency.dataset.front" class="WellCommerce\AppBundle\DataSet\Front\CurrencyDataSet">
             <argument type="service" id="currency.dataset.query_builder.front"/>
             <argument type="service" id="dataset.manager"/>
             <argument type="service" id="currency.event_dispatcher"/>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
-        <service id="twig.extension.currency" class="WellCommerce\CommonBundle\Twig\Extension\CurrencyExtension">
+        <service id="twig.extension.currency" class="WellCommerce\AppBundle\Twig\Extension\CurrencyExtension">
             <argument type="service" id="currency.helper"/>
             <argument type="service" id="currency.dataset.front"/>
             <tag name="twig.extension"/>

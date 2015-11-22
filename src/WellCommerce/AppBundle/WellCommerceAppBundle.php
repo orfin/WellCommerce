@@ -14,10 +14,7 @@ namespace WellCommerce\AppBundle;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
-use WellCommerce\AppBundle\DependencyInjection\Compiler\DataSetContextPass;
-use WellCommerce\AppBundle\DependencyInjection\Compiler\DataSetTransformerPass;
-use WellCommerce\AppBundle\DependencyInjection\Compiler\FormDataTransformerPass;
-use WellCommerce\AppBundle\DependencyInjection\Compiler\FormResolverPass;
+use WellCommerce\AppBundle\DependencyInjection\Compiler;
 
 /**
  * Class WellCommerceAppBundle
@@ -29,9 +26,17 @@ class WellCommerceAppBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         parent::build($container);
-        $container->addCompilerPass(new FormResolverPass());
-        $container->addCompilerPass(new FormDataTransformerPass());
-        $container->addCompilerPass(new DataSetContextPass());
-        $container->addCompilerPass(new DataSetTransformerPass());
+        $container->addCompilerPass(new Compiler\FormResolverPass());
+        $container->addCompilerPass(new Compiler\FormDataTransformerPass());
+        $container->addCompilerPass(new Compiler\DataSetContextPass());
+        $container->addCompilerPass(new Compiler\DataSetTransformerPass());
+        $container->addCompilerPass(new Compiler\RouteGeneratorPass());
+        $container->addCompilerPass(new Compiler\LayoutBoxConfiguratorPass());
+        $container->addCompilerPass(new Compiler\ThemeCompilerPass());
+        $container->addCompilerPass(new Compiler\TemplateResourcesPass());
+        $container->addCompilerPass(new Compiler\RegisterCartVisitorPass());
+        $container->addCompilerPass(new Compiler\RegisterOrderVisitorPass());
+        $container->addCompilerPass(new Compiler\RegisterShippingMethodCalculatorPass());
+        $container->addCompilerPass(new Compiler\RegisterPaymentMethodProcessorPass());
     }
 }

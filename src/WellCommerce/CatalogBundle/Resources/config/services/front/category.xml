@@ -4,7 +4,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="category.manager.front" class="WellCommerce\CatalogBundle\Manager\Front\CategoryManager">
+        <service id="category.manager.front" class="WellCommerce\AppBundle\Manager\Front\CategoryManager">
             <argument type="service" id="category.repository"/>
             <argument type="service" id="category.event_dispatcher"/>
             <argument type="service" id="category.factory"/>
@@ -13,48 +13,48 @@
             </call>
         </service>
 
-        <service id="category.controller.front" class="WellCommerce\CatalogBundle\Controller\Front\CategoryController">
+        <service id="category.controller.front" class="WellCommerce\AppBundle\Controller\Front\CategoryController">
             <argument type="service" id="category.manager.front"/>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
         </service>
 
-        <service id="category_menu.layout_box.controller" class="WellCommerce\CatalogBundle\Controller\Box\CategoryMenuBoxController">
+        <service id="category_menu.layout_box.controller" class="WellCommerce\AppBundle\Controller\Box\CategoryMenuBoxController">
             <argument type="service" id="category.manager.front"/>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
         </service>
 
-        <service id="category_info.layout_box.controller" class="WellCommerce\CatalogBundle\Controller\Box\CategoryInfoBoxController">
+        <service id="category_info.layout_box.controller" class="WellCommerce\AppBundle\Controller\Box\CategoryInfoBoxController">
             <argument type="service" id="category.manager.front"/>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
         </service>
 
-        <service id="category.dataset.query_builder.front" class="WellCommerce\CatalogBundle\DataSet\Front\CategoryDataSetQueryBuilder" public="false">
+        <service id="category.dataset.query_builder.front" class="WellCommerce\AppBundle\DataSet\Front\CategoryDataSetQueryBuilder" public="false">
             <argument type="service" id="category.repository"/>
             <call method="setShopContext">
                 <argument type="service" id="shop.context.front"/>
             </call>
         </service>
 
-        <service id="category.dataset.front" class="WellCommerce\CatalogBundle\DataSet\Front\CategoryDataSet">
+        <service id="category.dataset.front" class="WellCommerce\AppBundle\DataSet\Front\CategoryDataSet">
             <argument type="service" id="category.dataset.query_builder.front"/>
             <argument type="service" id="dataset.manager"/>
             <argument type="service" id="category.event_dispatcher"/>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
-        <service id="category_products.layout_box.controller" class="WellCommerce\CatalogBundle\Controller\Box\CategoryProductsBoxController">
+        <service id="category_products.layout_box.controller" class="WellCommerce\AppBundle\Controller\Box\CategoryProductsBoxController">
             <argument type="service" id="category.manager.front"/>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
         </service>
 
-        <service id="category.context.front" class="WellCommerce\CatalogBundle\Context\Front\CategoryContext"/>
+        <service id="category.context.front" class="WellCommerce\AppBundle\Context\Front\CategoryContext"/>
     </services>
 </container>

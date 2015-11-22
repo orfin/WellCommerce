@@ -3,7 +3,7 @@
                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
 
-    <class name="WellCommerce\ClientBundle\Entity\Client">
+    <class name="WellCommerce\AppBundle\Entity\Client">
         <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
             <option name="fields">username</option>
             <option name="message">client.error.email.unique</option>
@@ -63,7 +63,7 @@
         </property>
     </class>
 
-    <class name="WellCommerce\ClientBundle\Entity\ClientGroup">
+    <class name="WellCommerce\AppBundle\Entity\ClientGroup">
         <property name="discount">
             <constraint name="NotBlank">
                 <option name="message">client_group.validation.error.not_blank</option>
@@ -75,7 +75,7 @@
         </property>
     </class>
 
-    <class name="WellCommerce\ClientBundle\Entity\ClientContactDetails">
+    <class name="WellCommerce\AppBundle\Entity\ClientContactDetails">
         <property name="firstName">
             <constraint name="NotBlank">
                 <option name="groups">
@@ -157,7 +157,7 @@
         </property>
     </class>
 
-    <class name="WellCommerce\ClientBundle\Entity\ClientBillingAddress">
+    <class name="WellCommerce\AppBundle\Entity\ClientBillingAddress">
         <property name="firstName">
             <constraint name="NotBlank">
                 <option name="groups">
@@ -246,7 +246,7 @@
         </property>
     </class>
 
-    <class name="WellCommerce\ClientBundle\Entity\ClientShippingAddress">
+    <class name="WellCommerce\AppBundle\Entity\ClientShippingAddress">
         <property name="firstName">
             <constraint name="NotBlank">
                 <option name="groups">

@@ -4,7 +4,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="order_status_group.manager.admin" class="WellCommerce\SalesBundle\Manager\Admin\OrderStatusGroupManager">
+        <service id="order_status_group.manager.admin" class="WellCommerce\AppBundle\Manager\Admin\OrderStatusGroupManager">
             <argument type="service" id="order_status_group.repository"/>
             <argument type="service" id="order_status_group.event_dispatcher"/>
             <argument type="service" id="order_status_group.factory"/>
@@ -15,25 +15,25 @@
             </call>
         </service>
 
-        <service id="order_status_group.controller.admin" class="WellCommerce\SalesBundle\Controller\Admin\OrderStatusGroupController">
+        <service id="order_status_group.controller.admin" class="WellCommerce\AppBundle\Controller\Admin\OrderStatusGroupController">
             <argument type="service" id="order_status_group.manager.admin"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <service id="order_status_group.dataset.query_builder.admin" class="WellCommerce\SalesBundle\DataSet\Admin\OrderStatusGroupDataSetQueryBuilder" public="false">
+        <service id="order_status_group.dataset.query_builder.admin" class="WellCommerce\AppBundle\DataSet\Admin\OrderStatusGroupDataSetQueryBuilder" public="false">
             <argument type="service" id="order_status_group.repository"/>
         </service>
 
-        <service id="order_status_group.dataset.admin" class="WellCommerce\SalesBundle\DataSet\Admin\OrderStatusGroupDataSet">
+        <service id="order_status_group.dataset.admin" class="WellCommerce\AppBundle\DataSet\Admin\OrderStatusGroupDataSet">
             <argument type="service" id="order_status_group.dataset.query_builder.admin"/>
             <argument type="service" id="dataset.manager"/>
             <argument type="service" id="order_status_group.event_dispatcher"/>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
-        <service id="order_status_group.datagrid" class="WellCommerce\SalesBundle\DataGrid\OrderStatusGroupDataGrid">
+        <service id="order_status_group.datagrid" class="WellCommerce\AppBundle\DataGrid\OrderStatusGroupDataGrid">
             <argument key="identifier">order_status_group</argument>
             <argument type="service" id="order_status_group.dataset.admin"/>
             <argument type="service" id="order_status_group.event_dispatcher"/>
@@ -42,7 +42,7 @@
             </call>
         </service>
 
-        <service id="order_status_group.form_builder.admin" class="WellCommerce\SalesBundle\Form\Admin\OrderStatusGroupFormBuilder">
+        <service id="order_status_group.form_builder.admin" class="WellCommerce\AppBundle\Form\Admin\OrderStatusGroupFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
             <argument type="service" id="order_status_group.event_dispatcher"/>

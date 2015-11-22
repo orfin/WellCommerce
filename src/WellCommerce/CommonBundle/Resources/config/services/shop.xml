@@ -9,24 +9,24 @@
     </imports>
 
     <services>
-        <service id="shop.repository" class="WellCommerce\CommonBundle\Repository\ShopRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
-            <argument>WellCommerceCommonBundle:Shop</argument>
+        <service id="shop.repository" class="WellCommerce\AppBundle\Repository\ShopRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>WellCommerceAppBundle:Shop</argument>
         </service>
 
-        <service id="shop.factory" class="WellCommerce\CommonBundle\Factory\ShopFactory" />
+        <service id="shop.factory" class="WellCommerce\AppBundle\Factory\ShopFactory" />
 
         <service id="shop.event_dispatcher" parent="core.event_dispatcher" public="false">
             <argument type="service" id="event_dispatcher" />
         </service>
 
-        <service id="shop.subscriber" class="WellCommerce\CommonBundle\EventListener\ShopSubscriber">
+        <service id="shop.subscriber" class="WellCommerce\AppBundle\EventListener\ShopSubscriber">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
             <tag name="kernel.event_subscriber" />
         </service>
 
-        <service id="twig.extension.shop" class="WellCommerce\CommonBundle\Twig\Extension\ShopExtension">
+        <service id="twig.extension.shop" class="WellCommerce\AppBundle\Twig\Extension\ShopExtension">
             <argument type="service" id="shop.context.front"/>
             <tag name="twig.extension"/>
         </service>

@@ -40,7 +40,7 @@ interface AdminManagerInterface extends ManagerInterface
     public function getDataGrid();
 
     /**
-     * @return null|\WellCommerce\AdminBundle\Entity\UserInterface
+     * @return null|\WellCommerce\AppBundle\Entity\UserInterface
      */
     public function getAdmin();
 }

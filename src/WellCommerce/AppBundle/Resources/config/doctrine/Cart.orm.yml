@@ -1,0 +1,86 @@
+WellCommerce\AppBundle\Entity\Cart:
+    type: entity
+    table: cart
+    repositoryClass: WellCommerce\AppBundle\Repository\CartRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: IDENTITY
+    embedded:
+        totals:
+            class: WellCommerce\AppBundle\Entity\CartTotals
+            columnPrefix: total_
+        billingAddress:
+            class: WellCommerce\AppBundle\Entity\ClientBillingAddress
+            columnPrefix: billing_address_
+        shippingAddress:
+            class: WellCommerce\AppBundle\Entity\ClientShippingAddress
+            columnPrefix: shipping_address_
+        contactDetails:
+            class: WellCommerce\AppBundle\Entity\ClientContactDetails
+            columnPrefix: contact_details_
+    fields:
+        sessionId:
+            type: string
+            unique: true
+            nullable: false
+            column: session_id
+        currency:
+            type: string
+            length: 16
+            nullable: false
+            column: currency
+        copyAddress:
+            type: integer
+            nullable: false
+            column: copy_address
+            options:
+                default: 1
+    oneToMany:
+        products:
+            targetEntity: WellCommerce\AppBundle\Entity\CartProduct
+            cascade:
+                - all
+            fetch: LAZY
+            mappedBy: cart
+            orphanRemoval: true
+    manyToOne:
+        coupon:
+            targetEntity: WellCommerce\AppBundle\Entity\Coupon
+            fetch: LAZY
+            joinColumns:
+                coupon_id:
+                    referencedColumnName: id
+                    onDelete: SET NULL
+        shop:
+            targetEntity: WellCommerce\AppBundle\Entity\Shop
+            fetch: LAZY
+            joinColumns:
+                shop_id:
+                    referencedColumnName: id
+                    onDelete: CASCADE
+        shippingMethodCost:
+            targetEntity: WellCommerce\AppBundle\Entity\ShippingMethodCost
+            fetch: LAZY
+            joinColumns:
+                shipping_method_cost_id:
+                    referencedColumnName: id
+                    onDelete: 'SET NULL'
+        paymentMethod:
+            targetEntity: WellCommerce\AppBundle\Entity\PaymentMethod
+            fetch: LAZY
+            joinColumns:
+                payment_method_id:
+                    referencedColumnName: id
+                    onDelete: 'SET NULL'
+    oneToOne:
+        client:
+            targetEntity: WellCommerce\AppBundle\Entity\Client
+            fetch: LAZY
+            nullable: true
+            joinColumns:
+                client_id:
+                    referencedColumnName: id
+                    onDelete: CASCADE

@@ -1,0 +1,9 @@
+{% extends 'WellCommerceAppBundle:Admin:layout.html.twig' %}
+{% trans_default_domain "wellcommerce" %}
+{% block content %}
+    <h2>{% trans %}news.heading.index{% endtrans %}</h2>
+    <ul class="possibilities">
+        <li><a href="{{ path('admin.news.add') }}" class="button"><span>{% trans %}common.button.add{% endtrans %}</span></a></li>
+    </ul>
+    {{ datagrid_renderer(datagrid) }}
+{% endblock %}

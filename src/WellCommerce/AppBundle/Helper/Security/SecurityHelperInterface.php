@@ -12,7 +12,7 @@
 
 namespace WellCommerce\AppBundle\Helper\Security;
 
-use WellCommerce\AdminBundle\Entity\UserInterface;
+use WellCommerce\AppBundle\Entity\UserInterface;
 
 /**
  * Interface TranslatorHelperInterface

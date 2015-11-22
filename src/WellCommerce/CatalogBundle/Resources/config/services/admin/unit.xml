@@ -4,7 +4,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="unit.manager.admin" class="WellCommerce\CatalogBundle\Manager\Admin\UnitManager">
+        <service id="unit.manager.admin" class="WellCommerce\AppBundle\Manager\Admin\UnitManager">
             <argument type="service" id="unit.repository"/>
             <argument type="service" id="unit.event_dispatcher"/>
             <argument type="service" id="unit.factory"/>
@@ -15,25 +15,25 @@
             </call>
         </service>
         
-        <service id="unit.controller.admin" class="WellCommerce\CatalogBundle\Controller\Admin\UnitController">
+        <service id="unit.controller.admin" class="WellCommerce\AppBundle\Controller\Admin\UnitController">
             <argument type="service" id="unit.manager.admin"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <service id="unit.dataset.query_builder.admin" class="WellCommerce\CatalogBundle\DataSet\Admin\UnitDataSetQueryBuilder" public="false">
+        <service id="unit.dataset.query_builder.admin" class="WellCommerce\AppBundle\DataSet\Admin\UnitDataSetQueryBuilder" public="false">
             <argument type="service" id="unit.repository"/>
         </service>
 
-        <service id="unit.dataset.admin" class="WellCommerce\CatalogBundle\DataSet\Admin\UnitDataSet">
+        <service id="unit.dataset.admin" class="WellCommerce\AppBundle\DataSet\Admin\UnitDataSet">
             <argument type="service" id="unit.dataset.query_builder.admin"/>
             <argument type="service" id="dataset.manager"/>
             <argument type="service" id="unit.event_dispatcher"/>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
-        <service id="unit.datagrid" class="WellCommerce\CatalogBundle\DataGrid\UnitDataGrid">
+        <service id="unit.datagrid" class="WellCommerce\AppBundle\DataGrid\UnitDataGrid">
             <argument key="identifier">unit</argument>
             <argument type="service" id="unit.dataset.admin"/>
             <argument type="service" id="unit.event_dispatcher"/>
@@ -42,7 +42,7 @@
             </call>
         </service>
 
-        <service id="unit.form_builder.admin" class="WellCommerce\CatalogBundle\Form\Admin\UnitFormBuilder">
+        <service id="unit.form_builder.admin" class="WellCommerce\AppBundle\Form\Admin\UnitFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
             <argument type="service" id="unit.event_dispatcher"/>

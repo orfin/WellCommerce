@@ -32,7 +32,7 @@ class LocaleFilter extends SQLFilter
      */
     public function addFilterConstraint(ClassMetadata $targetEntity, $targetTableAlias)
     {
-        if (!$targetEntity->reflClass->implementsInterface('WellCommerce\CommonBundle\Entity\LocaleAwareInterface')) {
+        if (!$targetEntity->reflClass->implementsInterface('WellCommerce\AppBundle\Entity\LocaleAwareInterface')) {
             return "";
         }
 

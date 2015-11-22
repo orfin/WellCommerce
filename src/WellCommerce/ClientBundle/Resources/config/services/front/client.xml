@@ -4,7 +4,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="client.manager.front" class="WellCommerce\ClientBundle\Manager\Front\ClientManager">
+        <service id="client.manager.front" class="WellCommerce\AppBundle\Manager\Front\ClientManager">
             <argument type="service" id="client.repository"/>
             <argument type="service" id="client.event_dispatcher"/>
             <argument type="service" id="client.factory"/>
@@ -13,21 +13,21 @@
             </call>
         </service>
 
-        <service id="client.controller.front" class="WellCommerce\ClientBundle\Controller\Front\ClientController">
+        <service id="client.controller.front" class="WellCommerce\AppBundle\Controller\Front\ClientController">
             <argument type="service" id="client.manager.front"/>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
         </service>
 
-        <service id="client_order.controller.front" class="WellCommerce\ClientBundle\Controller\Front\ClientOrderController">
+        <service id="client_order.controller.front" class="WellCommerce\AppBundle\Controller\Front\ClientOrderController">
             <argument type="service" id="client.manager.front"/>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
         </service>
 
-        <service id="client_login.form_builder.front" class="WellCommerce\ClientBundle\Form\Front\ClientLoginFormBuilder">
+        <service id="client_login.form_builder.front" class="WellCommerce\AppBundle\Form\Front\ClientLoginFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
             <argument type="service" id="client.event_dispatcher"/>
@@ -36,42 +36,42 @@
             </call>
         </service>
 
-        <service id="client_login.layout_box.controller" class="WellCommerce\ClientBundle\Controller\Box\ClientLoginBoxController">
+        <service id="client_login.layout_box.controller" class="WellCommerce\AppBundle\Controller\Box\ClientLoginBoxController">
             <argument type="service" id="client.manager.front"/>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
         </service>
 
-        <service id="client_login.layout_box.configurator" class="WellCommerce\ClientBundle\Layout\ClientLoginBoxConfigurator">
+        <service id="client_login.layout_box.configurator" class="WellCommerce\AppBundle\Layout\ClientLoginBoxConfigurator">
             <argument>ClientLogin</argument>
             <argument>client_login.layout_box.controller</argument>
             <argument type="service" id="translator.helper"/>
             <tag name="layout_box.configurator" />
         </service>
 
-        <service id="client_menu.layout_box.controller" class="WellCommerce\ClientBundle\Controller\Box\ClientMenuBoxController">
+        <service id="client_menu.layout_box.controller" class="WellCommerce\AppBundle\Controller\Box\ClientMenuBoxController">
             <argument type="service" id="client.manager.front"/>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
         </service>
 
-        <service id="client_menu.layout_box.configurator" class="WellCommerce\ClientBundle\Layout\ClientMenuBoxConfigurator">
+        <service id="client_menu.layout_box.configurator" class="WellCommerce\AppBundle\Layout\ClientMenuBoxConfigurator">
             <argument>ClientMenu</argument>
             <argument>client_menu.layout_box.controller</argument>
             <argument type="service" id="translator.helper"/>
             <tag name="layout_box.configurator" />
         </service>
 
-        <service id="client_order.layout_box.controller" class="WellCommerce\ClientBundle\Controller\Box\ClientOrderBoxController">
+        <service id="client_order.layout_box.controller" class="WellCommerce\AppBundle\Controller\Box\ClientOrderBoxController">
             <argument type="service" id="client.manager.front"/>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
         </service>
 
-        <service id="client_order.configurator" class="WellCommerce\ClientBundle\Layout\ClientOrderBoxConfigurator">
+        <service id="client_order.configurator" class="WellCommerce\AppBundle\Layout\ClientOrderBoxConfigurator">
             <argument>ClientOrder</argument>
             <argument>client_order.layout_box.controller</argument>
             <argument type="service" id="translator.helper"/>

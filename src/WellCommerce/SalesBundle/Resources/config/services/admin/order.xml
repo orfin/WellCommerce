@@ -4,7 +4,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="order.manager.admin" class="WellCommerce\SalesBundle\Manager\Admin\OrderManager">
+        <service id="order.manager.admin" class="WellCommerce\AppBundle\Manager\Admin\OrderManager">
             <argument type="service" id="order.repository"/>
             <argument type="service" id="order.event_dispatcher"/>
             <argument type="service" id="order.factory"/>
@@ -15,7 +15,7 @@
             </call>
         </service>
 
-        <service id="order_product.manager.admin" class="WellCommerce\SalesBundle\Manager\Admin\OrderProductManager">
+        <service id="order_product.manager.admin" class="WellCommerce\AppBundle\Manager\Admin\OrderProductManager">
             <argument type="service" id="order_product.repository"/>
             <argument type="service" id="order_product.event_dispatcher"/>
             <argument type="service" id="order_product.factory"/>
@@ -27,14 +27,14 @@
             </call>
         </service>
 
-        <service id="order.controller.admin" class="WellCommerce\SalesBundle\Controller\Admin\OrderController">
+        <service id="order.controller.admin" class="WellCommerce\AppBundle\Controller\Admin\OrderController">
             <argument type="service" id="order.manager.admin"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <service id="order.form_builder.admin" class="WellCommerce\SalesBundle\Form\Admin\OrderFormBuilder">
+        <service id="order.form_builder.admin" class="WellCommerce\AppBundle\Form\Admin\OrderFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
             <argument type="service" id="order.event_dispatcher"/>
@@ -49,18 +49,18 @@
             </call>
         </service>
 
-        <service id="order.dataset.query_builder.admin" class="WellCommerce\SalesBundle\DataSet\Admin\OrderDataSetQueryBuilder" public="false">
+        <service id="order.dataset.query_builder.admin" class="WellCommerce\AppBundle\DataSet\Admin\OrderDataSetQueryBuilder" public="false">
             <argument type="service" id="order.repository"/>
         </service>
 
-        <service id="order.dataset.admin" class="WellCommerce\SalesBundle\DataSet\Admin\OrderDataSet">
+        <service id="order.dataset.admin" class="WellCommerce\AppBundle\DataSet\Admin\OrderDataSet">
             <argument type="service" id="order.dataset.query_builder.admin"/>
             <argument type="service" id="dataset.manager"/>
             <argument type="service" id="order.event_dispatcher"/>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
-        <service id="order.datagrid" class="WellCommerce\SalesBundle\DataGrid\OrderDataGrid">
+        <service id="order.datagrid" class="WellCommerce\AppBundle\DataGrid\OrderDataGrid">
             <argument key="identifier">orders</argument>
             <argument type="service" id="order.dataset.admin"/>
             <argument type="service" id="order.event_dispatcher"/>
@@ -69,11 +69,11 @@
             </call>
         </service>
 
-        <service id="order.dataset.transformer.client" class="WellCommerce\SalesBundle\DataSet\Transformer\ClientTransformer">
+        <service id="order.dataset.transformer.client" class="WellCommerce\AppBundle\DataSet\Transformer\ClientTransformer">
             <tag name="dataset.transformer" alias="order_client"/>
         </service>
 
-        <service id="form.order_product_collection.data_transformer" class="WellCommerce\SalesBundle\Form\DataTransformer\OrderProductCollectionToArrayTransformer" scope="prototype">
+        <service id="form.order_product_collection.data_transformer" class="WellCommerce\AppBundle\Form\DataTransformer\OrderProductCollectionToArrayTransformer" scope="prototype">
             <argument type="service" id="doctrine.helper"/>
             <call method="setOrderProductManager">
                 <argument type="service" id="order_product.manager.admin"/>
@@ -81,6 +81,6 @@
             <tag name="form.data_transformer" alias="order_product_collection"/>
         </service>
 
-        <service id="order.context.admin" class="WellCommerce\SalesBundle\Context\Admin\OrderContext"/>
+        <service id="order.context.admin" class="WellCommerce\AppBundle\Context\Admin\OrderContext"/>
     </services>
 </container>

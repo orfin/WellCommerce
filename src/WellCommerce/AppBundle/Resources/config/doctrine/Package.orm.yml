@@ -1,0 +1,55 @@
+WellCommerce\AppBundle\Entity\Package:
+    type: entity
+    table: smuggler_package
+    repositoryClass: WellCommerce\AppBundle\Repository\PackageRepository
+    id:
+        id:
+            type: integer
+            scale: 0
+            length: null
+            unique: false
+            nullable: false
+            precision: 0
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        fullName:
+            type: string
+            scale: 0
+            length: 255
+            unique: true
+            nullable: false
+            precision: 0
+            column: full_name
+        name:
+            type: string
+            scale: 0
+            length: 255
+            unique: false
+            nullable: false
+            precision: 0
+        vendor:
+            type: string
+            scale: 0
+            length: 255
+            unique: false
+            nullable: false
+            precision: 0
+        localVersion:
+            type: string
+            scale: 0
+            length: 255
+            unique: false
+            nullable: true
+            precision: 0
+            column: local_version
+        remoteVersion:
+            type: string
+            scale: 0
+            length: 255
+            unique: false
+            nullable: true
+            precision: 0
+            column: remote_version
+    lifecycleCallbacks: {  }

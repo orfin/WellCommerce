@@ -4,7 +4,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="client.manager.admin" class="WellCommerce\ClientBundle\Manager\Admin\ClientManager">
+        <service id="client.manager.admin" class="WellCommerce\AppBundle\Manager\Admin\ClientManager">
             <argument type="service" id="client.repository"/>
             <argument type="service" id="client.event_dispatcher"/>
             <argument type="service" id="client.factory"/>
@@ -15,14 +15,14 @@
             </call>
         </service>
 
-        <service id="client.controller.admin" class="WellCommerce\ClientBundle\Controller\Admin\ClientController">
+        <service id="client.controller.admin" class="WellCommerce\AppBundle\Controller\Admin\ClientController">
             <argument type="service" id="client.manager.admin"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <service id="client.form_builder.admin" class="WellCommerce\ClientBundle\Form\Admin\ClientFormBuilder">
+        <service id="client.form_builder.admin" class="WellCommerce\AppBundle\Form\Admin\ClientFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
             <argument type="service" id="client.event_dispatcher"/>
@@ -31,18 +31,18 @@
             </call>
         </service>
 
-        <service id="client.dataset.query_builder.admin" class="WellCommerce\ClientBundle\DataSet\Admin\ClientDataSetQueryBuilder" public="false">
+        <service id="client.dataset.query_builder.admin" class="WellCommerce\AppBundle\DataSet\Admin\ClientDataSetQueryBuilder" public="false">
             <argument type="service" id="client.repository"/>
         </service>
 
-        <service id="client.dataset.admin" class="WellCommerce\ClientBundle\DataSet\Admin\ClientDataSet">
+        <service id="client.dataset.admin" class="WellCommerce\AppBundle\DataSet\Admin\ClientDataSet">
             <argument type="service" id="client.dataset.query_builder.admin"/>
             <argument type="service" id="dataset.manager"/>
             <argument type="service" id="client.event_dispatcher"/>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
-        <service id="client.datagrid" class="WellCommerce\ClientBundle\DataGrid\ClientDataGrid">
+        <service id="client.datagrid" class="WellCommerce\AppBundle\DataGrid\ClientDataGrid">
             <argument key="identifier">client</argument>
             <argument type="service" id="client.dataset.admin"/>
             <argument type="service" id="client.event_dispatcher"/>

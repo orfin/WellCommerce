@@ -4,7 +4,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="layout_box.manager.admin" class="WellCommerce\LayoutBundle\Manager\Admin\LayoutBoxManager">
+        <service id="layout_box.manager.admin" class="WellCommerce\AppBundle\Manager\Admin\LayoutBoxManager">
             <argument type="service" id="layout_box.repository"/>
             <argument type="service" id="layout_box.event_dispatcher"/>
             <argument type="service" id="layout_box.factory"/>
@@ -15,7 +15,7 @@
             </call>
         </service>
 
-        <service id="layout_box.manager.front" class="WellCommerce\LayoutBundle\Manager\Front\LayoutBoxManager">
+        <service id="layout_box.manager.front" class="WellCommerce\AppBundle\Manager\Front\LayoutBoxManager">
             <argument type="service" id="layout_box.repository"/>
             <argument type="service" id="layout_box.event_dispatcher"/>
             <argument type="service" id="layout_box.factory"/>
@@ -30,35 +30,35 @@
             </call>
         </service>
 
-        <service id="layout_box.controller.admin" class="WellCommerce\LayoutBundle\Controller\Admin\LayoutBoxController">
+        <service id="layout_box.controller.admin" class="WellCommerce\AppBundle\Controller\Admin\LayoutBoxController">
             <argument type="service" id="layout_box.manager.admin"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <service id="layout_box.repository" class="WellCommerce\LayoutBundle\Repository\LayoutBoxRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
-            <argument>WellCommerceLayoutBundle:LayoutBox</argument>
+        <service id="layout_box.repository" class="WellCommerce\AppBundle\Repository\LayoutBoxRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>WellCommerceAppBundle:LayoutBox</argument>
         </service>
 
-        <service id="layout_box.factory" class="WellCommerce\LayoutBundle\Factory\LayoutBoxFactory"/>
+        <service id="layout_box.factory" class="WellCommerce\AppBundle\Factory\LayoutBoxFactory"/>
 
         <service id="layout_box.event_dispatcher" parent="core.event_dispatcher" public="false">
             <argument type="service" id="event_dispatcher"/>
         </service>
 
-        <service id="layout_box.dataset.query_builder" class="WellCommerce\LayoutBundle\DataSet\LayoutBoxDataSetQueryBuilder" public="false">
+        <service id="layout_box.dataset.query_builder" class="WellCommerce\AppBundle\DataSet\LayoutBoxDataSetQueryBuilder" public="false">
             <argument type="service" id="layout_box.repository"/>
         </service>
 
-        <service id="layout_box.dataset" class="WellCommerce\LayoutBundle\DataSet\LayoutBoxDataSet">
+        <service id="layout_box.dataset" class="WellCommerce\AppBundle\DataSet\LayoutBoxDataSet">
             <argument type="service" id="layout_box.dataset.query_builder"/>
             <argument type="service" id="dataset.manager"/>
             <argument type="service" id="layout_box.event_dispatcher"/>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
-        <service id="layout_box.datagrid" class="WellCommerce\LayoutBundle\DataGrid\LayoutBoxDataGrid">
+        <service id="layout_box.datagrid" class="WellCommerce\AppBundle\DataGrid\LayoutBoxDataGrid">
             <argument key="identifier">layout_box</argument>
             <argument type="service" id="layout_box.dataset"/>
             <argument type="service" id="layout_box.event_dispatcher"/>
@@ -67,7 +67,7 @@
             </call>
         </service>
 
-        <service id="layout_box.form_builder" class="WellCommerce\LayoutBundle\Form\LayoutBoxFormBuilder">
+        <service id="layout_box.form_builder" class="WellCommerce\AppBundle\Form\LayoutBoxFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
             <argument type="service" id="layout_box.event_dispatcher"/>
@@ -76,31 +76,31 @@
             </call>
         </service>
 
-        <service id="layout_box.renderer" class="WellCommerce\LayoutBundle\Renderer\LayoutBoxRenderer">
+        <service id="layout_box.renderer" class="WellCommerce\AppBundle\Renderer\LayoutBoxRenderer">
             <argument type="service" id="layout_box.manager.front" />
         </service>
 
-        <service id="layout_box.collection" class="WellCommerce\LayoutBundle\Collection\LayoutBoxCollection">
+        <service id="layout_box.collection" class="WellCommerce\AppBundle\Collection\LayoutBoxCollection">
             <argument type="service" id="layout_box.repository" />
         </service>
 
-        <service id="layout_box.subscriber" class="WellCommerce\LayoutBundle\EventListener\LayoutBoxSubscriber">
+        <service id="layout_box.subscriber" class="WellCommerce\AppBundle\EventListener\LayoutBoxSubscriber">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
             <tag name="kernel.event_subscriber" />
         </service>
 
-        <service id="layout_box.service_resolver" class="WellCommerce\LayoutBundle\Resolver\ServiceResolver">
+        <service id="layout_box.service_resolver" class="WellCommerce\AppBundle\Resolver\ServiceResolver">
             <argument type="service" id="layout_box.configurator.collection" />
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <service id="layout_box.configurator.collection" class="WellCommerce\LayoutBundle\Configurator\LayoutBoxConfiguratorCollection" />
+        <service id="layout_box.configurator.collection" class="WellCommerce\AppBundle\Configurator\LayoutBoxConfiguratorCollection" />
 
-        <service id="twig.extension.layout_box" class="WellCommerce\LayoutBundle\Twig\Extension\LayoutBoxExtension">
+        <service id="twig.extension.layout_box" class="WellCommerce\AppBundle\Twig\Extension\LayoutBoxExtension">
             <argument type="service" id="layout_box.renderer"/>
             <tag name="twig.extension"/>
         </service>

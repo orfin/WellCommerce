@@ -3,7 +3,7 @@
                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
 
-    <class name="WellCommerce\SalesBundle\Entity\ShippingMethod">
+    <class name="WellCommerce\AppBundle\Entity\ShippingMethod">
         <property name="translations">
             <constraint name="Valid" />
         </property>
@@ -31,14 +31,14 @@
         </property>
     </class>
 
-    <class name="WellCommerce\SalesBundle\Entity\ShippingMethodTranslation">
+    <class name="WellCommerce\AppBundle\Entity\ShippingMethodTranslation">
         <property name="name">
             <constraint name="NotBlank" />
             <constraint name="NotNull" />
         </property>
     </class>
 
-    <class name="WellCommerce\SalesBundle\Entity\ShippingMethodCost">
+    <class name="WellCommerce\AppBundle\Entity\ShippingMethodCost">
         <property name="rangeFrom">
             <constraint name="NotBlank" />
             <constraint name="NotNull" />

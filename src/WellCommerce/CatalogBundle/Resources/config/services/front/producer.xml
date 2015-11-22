@@ -4,7 +4,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="producer.manager.front" class="WellCommerce\CatalogBundle\Manager\Front\ProducerManager">
+        <service id="producer.manager.front" class="WellCommerce\AppBundle\Manager\Front\ProducerManager">
             <argument type="service" id="producer.repository"/>
             <argument type="service" id="producer.event_dispatcher"/>
             <argument type="service" id="producer.factory"/>
@@ -13,34 +13,34 @@
             </call>
         </service>
 
-        <service id="producer.controller.front" class="WellCommerce\CatalogBundle\Controller\Front\ProducerController">
+        <service id="producer.controller.front" class="WellCommerce\AppBundle\Controller\Front\ProducerController">
             <argument type="service" id="producer.manager.front"/>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
         </service>
 
-        <service id="producer.dataset.query_builder.front" class="WellCommerce\CatalogBundle\DataSet\Front\ProducerDataSetQueryBuilder" public="false">
+        <service id="producer.dataset.query_builder.front" class="WellCommerce\AppBundle\DataSet\Front\ProducerDataSetQueryBuilder" public="false">
             <argument type="service" id="producer.repository"/>
         </service>
 
-        <service id="producer.dataset.front" class="WellCommerce\CatalogBundle\DataSet\Front\ProducerDataSet">
+        <service id="producer.dataset.front" class="WellCommerce\AppBundle\DataSet\Front\ProducerDataSet">
             <argument type="service" id="producer.dataset.query_builder.front"/>
             <argument type="service" id="dataset.manager"/>
             <argument type="service" id="producer.event_dispatcher"/>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
-        <service id="producer.context.front" class="WellCommerce\CatalogBundle\Context\Front\ProducerContext"/>
+        <service id="producer.context.front" class="WellCommerce\AppBundle\Context\Front\ProducerContext"/>
 
-        <service id="producer_menu.layout_box.controller" class="WellCommerce\CatalogBundle\Controller\Box\ProducerMenuBoxController">
+        <service id="producer_menu.layout_box.controller" class="WellCommerce\AppBundle\Controller\Box\ProducerMenuBoxController">
             <argument type="service" id="producer.manager.front"/>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
         </service>
 
-        <service id="producer_products.layout_box.controller" class="WellCommerce\CatalogBundle\Controller\Box\ProducerProductsBoxController">
+        <service id="producer_products.layout_box.controller" class="WellCommerce\AppBundle\Controller\Box\ProducerProductsBoxController">
             <argument type="service" id="producer.manager.front"/>
             <call method="setContainer">
                 <argument type="service" id="service_container" />

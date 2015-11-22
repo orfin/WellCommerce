@@ -4,7 +4,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="tax.manager.admin" class="WellCommerce\CommonBundle\Manager\Admin\TaxManager">
+        <service id="tax.manager.admin" class="WellCommerce\AppBundle\Manager\Admin\TaxManager">
             <argument type="service" id="tax.repository"/>
             <argument type="service" id="tax.event_dispatcher"/>
             <argument type="service" id="tax.factory"/>
@@ -15,25 +15,25 @@
             </call>
         </service>
         
-        <service id="tax.controller.admin" class="WellCommerce\CommonBundle\Controller\Admin\TaxController">
+        <service id="tax.controller.admin" class="WellCommerce\AppBundle\Controller\Admin\TaxController">
             <argument type="service" id="tax.manager.admin"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <service id="tax.dataset.query_builder.admin" class="WellCommerce\CommonBundle\DataSet\Admin\TaxDataSetQueryBuilder" public="false">
+        <service id="tax.dataset.query_builder.admin" class="WellCommerce\AppBundle\DataSet\Admin\TaxDataSetQueryBuilder" public="false">
             <argument type="service" id="tax.repository"/>
         </service>
 
-        <service id="tax.dataset.admin" class="WellCommerce\CommonBundle\DataSet\Admin\TaxDataSet">
+        <service id="tax.dataset.admin" class="WellCommerce\AppBundle\DataSet\Admin\TaxDataSet">
             <argument type="service" id="tax.dataset.query_builder.admin"/>
             <argument type="service" id="dataset.manager"/>
             <argument type="service" id="tax.event_dispatcher"/>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
-        <service id="tax.datagrid" class="WellCommerce\CommonBundle\DataGrid\TaxDataGrid">
+        <service id="tax.datagrid" class="WellCommerce\AppBundle\DataGrid\TaxDataGrid">
             <argument key="identifier">tax</argument>
             <argument type="service" id="tax.dataset.admin"/>
             <argument type="service" id="tax.event_dispatcher"/>
@@ -42,7 +42,7 @@
             </call>
         </service>
 
-        <service id="tax.form_builder.admin" class="WellCommerce\CommonBundle\Form\Admin\TaxFormBuilder">
+        <service id="tax.form_builder.admin" class="WellCommerce\AppBundle\Form\Admin\TaxFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
             <argument type="service" id="tax.event_dispatcher"/>
@@ -51,7 +51,7 @@
             </call>
         </service>
 
-        <service id="twig.extension.tax" class="WellCommerce\CommonBundle\Twig\Extension\TaxExtension">
+        <service id="twig.extension.tax" class="WellCommerce\AppBundle\Twig\Extension\TaxExtension">
             <argument type="service" id="tax.dataset.admin"/>
             <tag name="twig.extension"/>
         </service>

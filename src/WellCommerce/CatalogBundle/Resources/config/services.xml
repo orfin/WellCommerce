@@ -17,7 +17,7 @@
         <import resource="services/unit.xml"/>
     </imports>
     <services>
-        <service id="form.product_attribute_collection.data_transformer" class="WellCommerce\CatalogBundle\Form\Admin\DataTransformer\ProductAttributeCollectionToArrayTransformer" scope="prototype">
+        <service id="form.product_attribute_collection.data_transformer" class="WellCommerce\AppBundle\Form\Admin\DataTransformer\ProductAttributeCollectionToArrayTransformer" scope="prototype">
             <argument type="service" id="doctrine.helper"/>
             <call method="setProductAttributeManager">
                 <argument type="service" id="product_attribute.manager.admin"/>
@@ -25,7 +25,7 @@
             <tag name="form.data_transformer" alias="product_attribute_collection"/>
         </service>
 
-        <service id="form.product_photo_collection.data_transformer" class="WellCommerce\CatalogBundle\Form\Admin\DataTransformer\ProductPhotoCollectionToArrayTransformer" scope="prototype">
+        <service id="form.product_photo_collection.data_transformer" class="WellCommerce\AppBundle\Form\Admin\DataTransformer\ProductPhotoCollectionToArrayTransformer" scope="prototype">
             <argument type="service" id="doctrine.helper"/>
             <tag name="form.data_transformer" alias="product_photo_collection"/>
         </service>

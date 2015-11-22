@@ -9,6 +9,11 @@
         <import resource="services/form.xml"/>
         <import resource="services/dataset.xml"/>
         <import resource="services/datagrid.xml"/>
+
+        <import resource="services/dashboard.xml"/>
+        <import resource="services/user.xml"/>
+        <import resource="services/user_group.xml"/>
+        <import resource="services/role.xml"/>
     </imports>
     <services>
         <service id="doctrine.orm.timestampable.subscriber" class="WellCommerce\AppBundle\Doctrine\ORM\Behaviours\Timestampable\TimestampableSubscriber">
@@ -24,6 +29,35 @@
         <service id="twig.extension.breadcrumb" class="WellCommerce\AppBundle\Twig\Extension\BreadcrumbExtension">
             <argument type="service" id="breadcrumb.collection"/>
             <tag name="twig.extension"/>
+        </service>
+
+        <service id="admin_menu.factory" class="WellCommerce\AppBundle\Factory\AdminMenuFactory"/>
+
+        <service id="admin_menu.repository" class="WellCommerce\AppBundle\Repository\AdminMenuRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>WellCommerceAppBundle:AdminMenu</argument>
+        </service>
+
+        <service id="admin_menu.importer.xml" class="WellCommerce\AppBundle\Importer\XmlImporter">
+            <argument type="service" id="doctrine.helper"/>
+            <argument type="service" id="admin_menu.factory"/>
+            <argument type="service" id="admin_menu.repository"/>
+        </service>
+
+        <service id="admin_menu.provider" class="WellCommerce\AppBundle\Provider\AdminMenuProvider">
+            <argument type="service" id="admin_menu.repository"/>
+        </service>
+
+        <service id="twig.extension.admin" class="WellCommerce\AppBundle\Twig\Extension\AdminExtension">
+            <argument type="service" id="session"/>
+            <argument type="service" id="admin_menu.provider"/>
+            <tag name="twig.extension"/>
+        </service>
+
+        <service id="admin.subscriber" class="WellCommerce\AppBundle\EventListener\AdminSubscriber">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <tag name="kernel.event_subscriber"/>
         </service>
     </services>
 </container>

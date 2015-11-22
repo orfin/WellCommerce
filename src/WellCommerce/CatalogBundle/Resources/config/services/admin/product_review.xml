@@ -4,7 +4,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="product_review.manager.admin" class="WellCommerce\CatalogBundle\Manager\Admin\ProductReviewManager">
+        <service id="product_review.manager.admin" class="WellCommerce\AppBundle\Manager\Admin\ProductReviewManager">
             <argument type="service" id="product_review.repository"/>
             <argument type="service" id="product_review.event_dispatcher"/>
             <argument type="service" id="product_review.factory"/>
@@ -15,25 +15,25 @@
             </call>
         </service>
 
-        <service id="product_review.controller.admin" class="WellCommerce\CatalogBundle\Controller\Admin\ProductReviewController">
+        <service id="product_review.controller.admin" class="WellCommerce\AppBundle\Controller\Admin\ProductReviewController">
             <argument type="service" id="product_review.manager.admin"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <service id="product_review.dataset.query_builder.admin" class="WellCommerce\CatalogBundle\DataSet\Admin\ProductReviewDataSetQueryBuilder" public="false">
+        <service id="product_review.dataset.query_builder.admin" class="WellCommerce\AppBundle\DataSet\Admin\ProductReviewDataSetQueryBuilder" public="false">
             <argument type="service" id="product_review.repository"/>
         </service>
 
-        <service id="product_review.dataset.admin" class="WellCommerce\CatalogBundle\DataSet\Admin\ProductReviewDataSet">
+        <service id="product_review.dataset.admin" class="WellCommerce\AppBundle\DataSet\Admin\ProductReviewDataSet">
             <argument type="service" id="product_review.dataset.query_builder.admin"/>
             <argument type="service" id="dataset.manager"/>
             <argument type="service" id="product_review.event_dispatcher"/>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
-        <service id="product_review.datagrid" class="WellCommerce\CatalogBundle\DataGrid\ProductReviewDataGrid">
+        <service id="product_review.datagrid" class="WellCommerce\AppBundle\DataGrid\ProductReviewDataGrid">
             <argument key="identifier">product_review</argument>
             <argument type="service" id="product_review.dataset.admin"/>
             <argument type="service" id="product_review.event_dispatcher"/>
@@ -42,7 +42,7 @@
             </call>
         </service>
 
-        <service id="product_review.form_builder.admin" class="WellCommerce\CatalogBundle\Form\Admin\ProductReviewFormBuilder">
+        <service id="product_review.form_builder.admin" class="WellCommerce\AppBundle\Form\Admin\ProductReviewFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
             <argument type="service" id="product_review.event_dispatcher"/>
@@ -51,7 +51,7 @@
             </call>
         </service>
         
-        <service id="product_review.layout_box.configurator" class="WellCommerce\CatalogBundle\Layout\ProductReviewBoxConfigurator">
+        <service id="product_review.layout_box.configurator" class="WellCommerce\AppBundle\Layout\ProductReviewBoxConfigurator">
             <argument>ProductReview</argument>
             <argument>product_review.layout_box.controller</argument>
             <argument type="service" id="translator.helper"/>

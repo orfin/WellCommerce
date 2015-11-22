@@ -4,7 +4,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="theme.manager.admin" class="WellCommerce\LayoutBundle\Manager\Admin\ThemeManager">
+        <service id="theme.manager.admin" class="WellCommerce\AppBundle\Manager\Admin\ThemeManager">
             <argument type="service" id="theme.repository"/>
             <argument type="service" id="theme.event_dispatcher"/>
             <argument type="service" id="theme.factory"/>
@@ -15,19 +15,19 @@
             </call>
         </service>
 
-        <service id="theme.controller.admin" class="WellCommerce\LayoutBundle\Controller\Admin\ThemeController">
+        <service id="theme.controller.admin" class="WellCommerce\AppBundle\Controller\Admin\ThemeController">
             <argument type="service" id="theme.manager.admin"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <service id="theme.manager" class="WellCommerce\LayoutBundle\Manager\ThemeManager">
+        <service id="theme.manager" class="WellCommerce\AppBundle\Manager\ThemeManager">
             <argument type="service" id="kernel"/>
             <argument type="service" id="theme.context.front"/>
         </service>
 
-        <service id="theme.subscriber" class="WellCommerce\LayoutBundle\EventListener\ThemeSubscriber">
+        <service id="theme.subscriber" class="WellCommerce\AppBundle\EventListener\ThemeSubscriber">
             <argument type="service" id="theme.manager"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
@@ -35,38 +35,38 @@
             <tag name="kernel.event_subscriber" />
         </service>
 
-        <service id="theme.file_locator" class="WellCommerce\LayoutBundle\Locator\FileLocator">
+        <service id="theme.file_locator" class="WellCommerce\AppBundle\Locator\FileLocator">
             <argument type="service" id="theme.manager" />
             <argument>%kernel.root_dir%/Resources</argument>
         </service>
 
-        <service id="theme.templating_locator" class="WellCommerce\LayoutBundle\Locator\TemplateLocator">
+        <service id="theme.templating_locator" class="WellCommerce\AppBundle\Locator\TemplateLocator">
             <argument type="service" id="theme.file_locator" />
             <argument>%kernel.cache_dir%</argument>
         </service>
 
-        <service id="theme.repository" class="WellCommerce\LayoutBundle\Repository\ThemeRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
-            <argument>WellCommerceLayoutBundle:Theme</argument>
+        <service id="theme.repository" class="WellCommerce\AppBundle\Repository\ThemeRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>WellCommerceAppBundle:Theme</argument>
         </service>
 
-        <service id="theme.factory" class="WellCommerce\LayoutBundle\Factory\ThemeFactory"/>
+        <service id="theme.factory" class="WellCommerce\AppBundle\Factory\ThemeFactory"/>
 
         <service id="theme.event_dispatcher" parent="core.event_dispatcher" public="false">
             <argument type="service" id="event_dispatcher"/>
         </service>
 
-        <service id="theme.dataset.query_builder" class="WellCommerce\LayoutBundle\DataSet\ThemeDataSetQueryBuilder" public="false">
+        <service id="theme.dataset.query_builder" class="WellCommerce\AppBundle\DataSet\ThemeDataSetQueryBuilder" public="false">
             <argument type="service" id="theme.repository"/>
         </service>
 
-        <service id="theme.dataset" class="WellCommerce\LayoutBundle\DataSet\ThemeDataSet">
+        <service id="theme.dataset" class="WellCommerce\AppBundle\DataSet\ThemeDataSet">
             <argument type="service" id="theme.dataset.query_builder"/>
             <argument type="service" id="dataset.manager"/>
             <argument type="service" id="theme.event_dispatcher"/>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
-        <service id="theme.datagrid" class="WellCommerce\LayoutBundle\DataGrid\ThemeDataGrid">
+        <service id="theme.datagrid" class="WellCommerce\AppBundle\DataGrid\ThemeDataGrid">
             <argument key="identifier">theme</argument>
             <argument type="service" id="theme.dataset"/>
             <argument type="service" id="theme.event_dispatcher"/>
@@ -75,7 +75,7 @@
             </call>
         </service>
 
-        <service id="theme.form_builder" class="WellCommerce\LayoutBundle\Form\ThemeFormBuilder">
+        <service id="theme.form_builder" class="WellCommerce\AppBundle\Form\ThemeFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
             <argument type="service" id="theme.event_dispatcher"/>
@@ -84,15 +84,15 @@
             </call>
         </service>
 
-        <service id="theme.context.front" class="WellCommerce\LayoutBundle\Context\Front\ThemeContext"/>
+        <service id="theme.context.front" class="WellCommerce\AppBundle\Context\Front\ThemeContext"/>
 
-        <service id="theme.fields_generator" class="WellCommerce\LayoutBundle\Generator\ThemeFieldsGenerator">
+        <service id="theme.fields_generator" class="WellCommerce\AppBundle\Generator\ThemeFieldsGenerator">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <service id="theme.template_paths.cache_warmer" class="WellCommerce\LayoutBundle\CacheWarmer\TemplatePathsCacheWarmer" public="false">
+        <service id="theme.template_paths.cache_warmer" class="WellCommerce\AppBundle\CacheWarmer\TemplatePathsCacheWarmer" public="false">
             <argument type="service" id="templating.finder" />
             <argument type="service" id="theme.templating_locator" />
         </service>

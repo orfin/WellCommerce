@@ -4,7 +4,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="currency.manager.admin" class="WellCommerce\CommonBundle\Manager\Admin\CurrencyManager">
+        <service id="currency.manager.admin" class="WellCommerce\AppBundle\Manager\Admin\CurrencyManager">
             <argument type="service" id="currency.repository"/>
             <argument type="service" id="currency.event_dispatcher"/>
             <argument type="service" id="currency.factory"/>
@@ -15,25 +15,25 @@
             </call>
         </service>
 
-        <service id="currency.controller.admin" class="WellCommerce\CommonBundle\Controller\Admin\CurrencyController">
+        <service id="currency.controller.admin" class="WellCommerce\AppBundle\Controller\Admin\CurrencyController">
             <argument type="service" id="currency.manager.admin"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <service id="currency.dataset.query_builder.admin" class="WellCommerce\CommonBundle\DataSet\Admin\CurrencyDataSetQueryBuilder" public="false">
+        <service id="currency.dataset.query_builder.admin" class="WellCommerce\AppBundle\DataSet\Admin\CurrencyDataSetQueryBuilder" public="false">
             <argument type="service" id="currency.repository"/>
         </service>
 
-        <service id="currency.dataset.admin" class="WellCommerce\CommonBundle\DataSet\Admin\CurrencyDataSet">
+        <service id="currency.dataset.admin" class="WellCommerce\AppBundle\DataSet\Admin\CurrencyDataSet">
             <argument type="service" id="currency.dataset.query_builder.admin"/>
             <argument type="service" id="dataset.manager"/>
             <argument type="service" id="currency.event_dispatcher"/>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
-        <service id="currency.datagrid" class="WellCommerce\CommonBundle\DataGrid\CurrencyDataGrid">
+        <service id="currency.datagrid" class="WellCommerce\AppBundle\DataGrid\CurrencyDataGrid">
             <argument key="identifier">currency</argument>
             <argument type="service" id="currency.dataset.admin"/>
             <argument type="service" id="currency.event_dispatcher"/>
@@ -42,7 +42,7 @@
             </call>
         </service>
 
-        <service id="currency.form_builder.admin" class="WellCommerce\CommonBundle\Form\Admin\CurrencyFormBuilder">
+        <service id="currency.form_builder.admin" class="WellCommerce\AppBundle\Form\Admin\CurrencyFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
             <argument type="service" id="currency.event_dispatcher"/>

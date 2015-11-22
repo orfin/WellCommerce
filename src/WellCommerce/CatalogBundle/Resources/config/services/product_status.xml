@@ -9,36 +9,36 @@
     </imports>
 
     <services>
-        <service id="product_status.repository" class="WellCommerce\CatalogBundle\Repository\ProductStatusRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
-            <argument>WellCommerceCatalogBundle:ProductStatus</argument>
+        <service id="product_status.repository" class="WellCommerce\AppBundle\Repository\ProductStatusRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>WellCommerceAppBundle:ProductStatus</argument>
         </service>
 
-        <service id="product_status.factory" class="WellCommerce\CatalogBundle\Factory\ProductStatusFactory" />
+        <service id="product_status.factory" class="WellCommerce\AppBundle\Factory\ProductStatusFactory" />
 
         <service id="product_status.event_dispatcher" parent="core.event_dispatcher" public="false">
             <argument type="service" id="event_dispatcher" />
         </service>
 
-        <service id="product_status.request_param_converter" class="WellCommerce\CatalogBundle\Request\ParamConverter\ProductStatusParamConverter">
+        <service id="product_status.request_param_converter" class="WellCommerce\AppBundle\Request\ParamConverter\ProductStatusParamConverter">
             <argument type="service" id="product_status.repository" />
             <argument>id</argument>
             <argument type="collection">
-                <argument>WellCommerce\CatalogBundle\Entity\ProductStatus</argument>
-                <argument>WellCommerce\CatalogBundle\Entity\ProductStatusInterface</argument>
+                <argument>WellCommerce\AppBundle\Entity\ProductStatus</argument>
+                <argument>WellCommerce\AppBundle\Entity\ProductStatusInterface</argument>
             </argument>
             <tag name="request.param_converter" converter="product" priority="0"/>
         </service>
 
-        <service id="product_status.transformer" class="WellCommerce\CatalogBundle\DataSet\Transformer\ProductStatusTransformer">
+        <service id="product_status.transformer" class="WellCommerce\AppBundle\DataSet\Transformer\ProductStatusTransformer">
             <tag name="dataset.transformer" alias="product_status"/>
         </service>
 
-        <service id="twig.extension.product_status" class="WellCommerce\CatalogBundle\Twig\Extension\ProductStatusExtension">
+        <service id="twig.extension.product_status" class="WellCommerce\AppBundle\Twig\Extension\ProductStatusExtension">
             <argument type="service" id="product_status.dataset.front"/>
             <tag name="twig.extension"/>
         </service>
 
-        <service id="product_status.route.generator" class="WellCommerce\CatalogBundle\Routing\ProductStatusRouteGenerator">
+        <service id="product_status.route.generator" class="WellCommerce\AppBundle\Routing\ProductStatusRouteGenerator">
             <argument type="collection" key="defaults">
                 <argument key="_controller">product_status.controller.front:indexAction</argument>
                 <argument key="page">1</argument>

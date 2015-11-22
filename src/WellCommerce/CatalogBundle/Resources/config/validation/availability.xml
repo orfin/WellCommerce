@@ -3,7 +3,7 @@
                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
 
-    <class name="WellCommerce\CatalogBundle\Entity\Availability">
+    <class name="WellCommerce\AppBundle\Entity\Availability">
         <property name="translations">
             <constraint name="Valid">
                 <option name="deep">true</option>
@@ -11,7 +11,7 @@
         </property>
     </class>
 
-    <class name="WellCommerce\CatalogBundle\Entity\AvailabilityTranslation">
+    <class name="WellCommerce\AppBundle\Entity\AvailabilityTranslation">
         <property name="name">
             <constraint name="NotBlank" />
             <constraint name="NotNull" />

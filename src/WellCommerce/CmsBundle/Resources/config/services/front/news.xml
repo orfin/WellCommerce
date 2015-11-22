@@ -4,17 +4,17 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="news.dataset.query_builder.front" class="WellCommerce\CmsBundle\DataSet\Front\NewsDataSetQueryBuilder" public="false">
+        <service id="news.dataset.query_builder.front" class="WellCommerce\AppBundle\DataSet\Front\NewsDataSetQueryBuilder" public="false">
             <argument type="service" id="news.repository"/>
         </service>
 
-        <service id="news.dataset.front" class="WellCommerce\CmsBundle\DataSet\Front\NewsDataSet">
+        <service id="news.dataset.front" class="WellCommerce\AppBundle\DataSet\Front\NewsDataSet">
             <argument type="service" id="news.dataset.query_builder.front"/>
             <argument type="service" id="dataset.manager"/>
             <argument type="service" id="news.event_dispatcher"/>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
-        <service id="news.context.front" class="WellCommerce\CmsBundle\Context\Front\NewsContext"/>
+        <service id="news.context.front" class="WellCommerce\AppBundle\Context\Front\NewsContext"/>
     </services>
 </container>

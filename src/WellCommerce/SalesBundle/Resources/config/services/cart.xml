@@ -4,7 +4,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="cart.manager.front" class="WellCommerce\SalesBundle\Manager\Front\CartManager">
+        <service id="cart.manager.front" class="WellCommerce\AppBundle\Manager\Front\CartManager">
             <argument type="service" id="cart.repository"/>
             <argument type="service" id="cart.event_dispatcher"/>
             <argument type="service" id="cart.factory"/>
@@ -17,7 +17,7 @@
             </call>
         </service>
 
-        <service id="cart_product.manager.front" class="WellCommerce\SalesBundle\Manager\Front\CartProductManager">
+        <service id="cart_product.manager.front" class="WellCommerce\AppBundle\Manager\Front\CartProductManager">
             <argument type="service" id="cart_product.repository"/>
             <argument type="service" id="cart_product.event_dispatcher"/>
             <argument type="service" id="cart_product.factory"/>
@@ -26,38 +26,38 @@
             </call>
         </service>
 
-        <service id="package.command.purge.carts" class="WellCommerce\SalesBundle\Command\PurgeCartsCommand">
+        <service id="package.command.purge.carts" class="WellCommerce\AppBundle\Command\PurgeCartsCommand">
             <tag name="console.command"/>
         </service>
 
-        <service id="cart.controller.front" class="WellCommerce\SalesBundle\Controller\Front\CartController">
+        <service id="cart.controller.front" class="WellCommerce\AppBundle\Controller\Front\CartController">
             <argument type="service" id="cart.manager.front"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <service id="cart.repository" class="WellCommerce\SalesBundle\Repository\CartRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
-            <argument>WellCommerceSalesBundle:Cart</argument>
+        <service id="cart.repository" class="WellCommerce\AppBundle\Repository\CartRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>WellCommerceAppBundle:Cart</argument>
         </service>
 
-        <service id="cart_product.repository" class="WellCommerce\SalesBundle\Repository\CartProductRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
-            <argument>WellCommerceSalesBundle:CartProduct</argument>
+        <service id="cart_product.repository" class="WellCommerce\AppBundle\Repository\CartProductRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>WellCommerceAppBundle:CartProduct</argument>
         </service>
 
-        <service id="cart_product.dataset.query_builder" class="WellCommerce\SalesBundle\DataSet\Front\CartProductDataSetQueryBuilder">
+        <service id="cart_product.dataset.query_builder" class="WellCommerce\AppBundle\DataSet\Front\CartProductDataSetQueryBuilder">
             <argument type="service" id="cart_product.repository"/>
             <argument type="service" id="cart.context.front"/>
         </service>
 
-        <service id="cart_product.dataset" class="WellCommerce\SalesBundle\DataSet\Front\CartProductDataSet">
+        <service id="cart_product.dataset" class="WellCommerce\AppBundle\DataSet\Front\CartProductDataSet">
             <argument type="service" id="cart_product.dataset.query_builder"/>
             <argument type="service" id="dataset.manager"/>
             <argument type="service" id="cart_product.event_dispatcher"/>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
-        <service id="cart.form_builder" class="WellCommerce\SalesBundle\Form\Front\CartFormBuilder">
+        <service id="cart.form_builder" class="WellCommerce\AppBundle\Form\Front\CartFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
             <argument type="service" id="cart_product.event_dispatcher"/>
@@ -72,25 +72,25 @@
             </call>
         </service>
 
-        <service id="twig.extension.cart" class="WellCommerce\SalesBundle\Twig\Extension\CartExtension">
+        <service id="twig.extension.cart" class="WellCommerce\AppBundle\Twig\Extension\CartExtension">
             <argument type="service" id="cart.context.front"/>
             <argument type="service" id="cart_product.dataset"/>
             <tag name="twig.extension"/>
         </service>
 
-        <service id="cart.factory" class="WellCommerce\SalesBundle\Factory\CartFactory" />
+        <service id="cart.factory" class="WellCommerce\AppBundle\Factory\CartFactory" />
 
         <service id="cart.event_dispatcher" parent="core.event_dispatcher" public="false">
             <argument type="service" id="event_dispatcher" />
         </service>
 
-        <service id="cart_product.factory" class="WellCommerce\SalesBundle\Factory\CartProductFactory" />
+        <service id="cart_product.factory" class="WellCommerce\AppBundle\Factory\CartProductFactory" />
 
         <service id="cart_product.event_dispatcher" parent="core.event_dispatcher" public="false">
             <argument type="service" id="event_dispatcher" />
         </service>
 
-        <service id="cart.subscriber" class="WellCommerce\SalesBundle\EventListener\CartSubscriber">
+        <service id="cart.subscriber" class="WellCommerce\AppBundle\EventListener\CartSubscriber">
             <argument type="service" id="cart.manager.front"/>
             <argument type="service" id="cart.visitor.traverser"/>
             <call method="setContainer">
@@ -99,44 +99,44 @@
             <tag name="kernel.event_subscriber"/>
         </service>
 
-        <service id="cart.visitor.collection" class="WellCommerce\SalesBundle\Visitor\CartVisitorCollection" />
+        <service id="cart.visitor.collection" class="WellCommerce\AppBundle\Visitor\CartVisitorCollection" />
 
-        <service id="cart.visitor.traverser" class="WellCommerce\SalesBundle\Visitor\CartVisitorTraverser">
+        <service id="cart.visitor.traverser" class="WellCommerce\AppBundle\Visitor\CartVisitorTraverser">
             <argument type="service" id="cart.visitor.collection"/>
         </service>
 
-        <service id="cart_totals.collector" class="WellCommerce\SalesBundle\Collector\CartTotalsCollector">
+        <service id="cart_totals.collector" class="WellCommerce\AppBundle\Collector\CartTotalsCollector">
             <argument type="service" id="currency.helper"/>
         </service>
 
-        <service id="cart_totals.cart.visitor" class="WellCommerce\SalesBundle\Visitor\CartTotalsVisitor">
+        <service id="cart_totals.cart.visitor" class="WellCommerce\AppBundle\Visitor\CartTotalsVisitor">
             <argument type="service" id="cart_totals.collector"/>
             <tag name="cart.visitor"/>
         </service>
 
-        <service id="cart_summary.collector" class="WellCommerce\SalesBundle\Collector\CartSummaryCollector">
+        <service id="cart_summary.collector" class="WellCommerce\AppBundle\Collector\CartSummaryCollector">
             <argument type="service" id="currency.helper"/>
         </service>
 
-        <service id="shipping_method.cart.visitor" class="WellCommerce\SalesBundle\Visitor\CartShippingMethodVisitor">
+        <service id="shipping_method.cart.visitor" class="WellCommerce\AppBundle\Visitor\CartShippingMethodVisitor">
             <argument type="service" id="shipping_method.provider"/>
             <tag name="cart.visitor"/>
         </service>
 
-        <service id="payment_method.cart.visitor" class="WellCommerce\SalesBundle\Visitor\CartPaymentMethodVisitor">
+        <service id="payment_method.cart.visitor" class="WellCommerce\AppBundle\Visitor\CartPaymentMethodVisitor">
             <tag name="cart.visitor"/>
         </service>
 
-        <service id="cart_product.request_param_converter" class="WellCommerce\SalesBundle\Request\ParamConverter\CartProductParamConverter">
+        <service id="cart_product.request_param_converter" class="WellCommerce\AppBundle\Request\ParamConverter\CartProductParamConverter">
             <argument type="service" id="cart_product.repository" />
             <argument>id</argument>
             <argument type="collection">
-                <argument>WellCommerce\SalesBundle\Entity\CartProduct</argument>
-                <argument>WellCommerce\SalesBundle\Entity\CartProductInterface</argument>
+                <argument>WellCommerce\AppBundle\Entity\CartProduct</argument>
+                <argument>WellCommerce\AppBundle\Entity\CartProductInterface</argument>
             </argument>
             <tag name="request.param_converter" converter="cart_product" priority="10"/>
         </service>
 
-        <service id="cart.context.front" class="WellCommerce\SalesBundle\Context\Front\CartContext"/>
+        <service id="cart.context.front" class="WellCommerce\AppBundle\Context\Front\CartContext"/>
     </services>
 </container>

@@ -4,7 +4,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="company.manager.admin" class="WellCommerce\CommonBundle\Manager\Admin\CompanyManager">
+        <service id="company.manager.admin" class="WellCommerce\AppBundle\Manager\Admin\CompanyManager">
             <argument type="service" id="company.repository"/>
             <argument type="service" id="company.event_dispatcher"/>
             <argument type="service" id="company.factory"/>
@@ -15,25 +15,25 @@
             </call>
         </service>
         
-        <service id="company.controller.admin" class="WellCommerce\CommonBundle\Controller\Admin\CompanyController">
+        <service id="company.controller.admin" class="WellCommerce\AppBundle\Controller\Admin\CompanyController">
             <argument type="service" id="company.manager.admin"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <service id="company.dataset.query_builder.admin" class="WellCommerce\CommonBundle\DataSet\Admin\CompanyDataSetQueryBuilder" public="false">
+        <service id="company.dataset.query_builder.admin" class="WellCommerce\AppBundle\DataSet\Admin\CompanyDataSetQueryBuilder" public="false">
             <argument type="service" id="company.repository"/>
         </service>
 
-        <service id="company.dataset.admin" class="WellCommerce\CommonBundle\DataSet\Admin\CompanyDataSet">
+        <service id="company.dataset.admin" class="WellCommerce\AppBundle\DataSet\Admin\CompanyDataSet">
             <argument type="service" id="company.dataset.query_builder.admin"/>
             <argument type="service" id="dataset.manager"/>
             <argument type="service" id="company.event_dispatcher"/>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
-        <service id="company.datagrid" class="WellCommerce\CommonBundle\DataGrid\CompanyDataGrid">
+        <service id="company.datagrid" class="WellCommerce\AppBundle\DataGrid\CompanyDataGrid">
             <argument key="identifier">company</argument>
             <argument type="service" id="company.dataset.admin"/>
             <argument type="service" id="company.event_dispatcher"/>
@@ -42,7 +42,7 @@
             </call>
         </service>
 
-        <service id="company.form_builder.admin" class="WellCommerce\CommonBundle\Form\Admin\CompanyFormBuilder">
+        <service id="company.form_builder.admin" class="WellCommerce\AppBundle\Form\Admin\CompanyFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
             <argument type="service" id="company.event_dispatcher"/>

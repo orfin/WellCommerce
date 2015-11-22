@@ -4,7 +4,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="client_registration.manager.front" class="WellCommerce\ClientBundle\Manager\Front\ClientRegistrationManager">
+        <service id="client_registration.manager.front" class="WellCommerce\AppBundle\Manager\Front\ClientRegistrationManager">
             <argument type="service" id="client.repository"/>
             <argument type="service" id="client.event_dispatcher"/>
             <argument type="service" id="client.factory"/>
@@ -14,7 +14,7 @@
             </call>
         </service>
 
-        <service id="client_register.form_builder.front" class="WellCommerce\ClientBundle\Form\Front\ClientRegisterFormBuilder">
+        <service id="client_register.form_builder.front" class="WellCommerce\AppBundle\Form\Front\ClientRegisterFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
             <argument type="service" id="client.event_dispatcher"/>
@@ -23,14 +23,14 @@
             </call>
         </service>
 
-        <service id="client_registration.layout_box.controller" class="WellCommerce\ClientBundle\Controller\Box\ClientRegistrationBoxController">
+        <service id="client_registration.layout_box.controller" class="WellCommerce\AppBundle\Controller\Box\ClientRegistrationBoxController">
             <argument type="service" id="client_registration.manager.front"/>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
         </service>
 
-        <service id="client_registration.layout_box.configurator" class="WellCommerce\ClientBundle\Layout\ClientRegistrationBoxConfigurator">
+        <service id="client_registration.layout_box.configurator" class="WellCommerce\AppBundle\Layout\ClientRegistrationBoxConfigurator">
             <argument>ClientRegistration</argument>
             <argument>client_registration.layout_box.controller</argument>
             <argument type="service" id="translator.helper"/>

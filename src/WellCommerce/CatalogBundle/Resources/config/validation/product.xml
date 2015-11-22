@@ -3,7 +3,7 @@
                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
 
-    <class name="WellCommerce\CatalogBundle\Entity\Product">
+    <class name="WellCommerce\AppBundle\Entity\Product">
         <property name="translations">
             <constraint name="Valid">
                 <option name="deep">true</option>
@@ -53,7 +53,7 @@
         </property>
     </class>
 
-    <class name="WellCommerce\CatalogBundle\Entity\ProductTranslation">
+    <class name="WellCommerce\AppBundle\Entity\ProductTranslation">
         <property name="name">
             <constraint name="NotBlank" />
             <constraint name="NotNull" />
@@ -67,7 +67,7 @@
         </constraint>
     </class>
 
-    <class name="WellCommerce\CatalogBundle\Entity\ProductStatus">
+    <class name="WellCommerce\AppBundle\Entity\ProductStatus">
         <property name="translations">
             <constraint name="Valid">
                 <option name="deep">true</option>
@@ -75,7 +75,7 @@
         </property>
     </class>
 
-    <class name="WellCommerce\CatalogBundle\Entity\ProductReview">
+    <class name="WellCommerce\AppBundle\Entity\ProductReview">
         <property name="nick">
             <constraint name="NotBlank" />
             <constraint name="NotNull" />
@@ -94,7 +94,7 @@
         </property>
     </class>
 
-    <class name="WellCommerce\CatalogBundle\Entity\ProductStatusTranslation">
+    <class name="WellCommerce\AppBundle\Entity\ProductStatusTranslation">
         <property name="name">
             <constraint name="NotBlank" />
             <constraint name="NotNull" />

@@ -3,7 +3,7 @@
                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
 
-    <class name="WellCommerce\CommonBundle\Entity\Dictionary">
+    <class name="WellCommerce\AppBundle\Entity\Dictionary">
         <property name="translations">
             <constraint name="Valid">
                 <option name="deep">true</option>
@@ -18,14 +18,14 @@
         </constraint>
     </class>
 
-    <class name="WellCommerce\CommonBundle\Entity\DictionaryTranslation">
+    <class name="WellCommerce\AppBundle\Entity\DictionaryTranslation">
         <property name="value">
             <constraint name="NotBlank" />
             <constraint name="NotNull" />
         </property>
     </class>
 
-    <class name="WellCommerce\CommonBundle\Entity\Locale">
+    <class name="WellCommerce\AppBundle\Entity\Locale">
         <property name="code">
             <constraint name="NotBlank" />
             <constraint name="NotNull" />
@@ -35,13 +35,13 @@
         </constraint>
     </class>
 
-    <class name="WellCommerce\CommonBundle\Entity\Route">
+    <class name="WellCommerce\AppBundle\Entity\Route">
         <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
             <option name="fields">path</option>
         </constraint>
     </class>
 
-    <class name="WellCommerce\CommonBundle\Entity\Tax">
+    <class name="WellCommerce\AppBundle\Entity\Tax">
         <property name="value">
             <constraint name="NotBlank">
                 <option name="message">validation.tax.not_blank</option>
@@ -58,14 +58,14 @@
         </property>
     </class>
 
-    <class name="WellCommerce\CommonBundle\Entity\TaxTranslation">
+    <class name="WellCommerce\AppBundle\Entity\TaxTranslation">
         <property name="name">
             <constraint name="NotBlank" />
             <constraint name="NotNull" />
         </property>
     </class>
 
-    <class name="WellCommerce\CommonBundle\Entity\Company">
+    <class name="WellCommerce\AppBundle\Entity\Company">
         <property name="name">
             <constraint name="NotBlank" />
         </property>

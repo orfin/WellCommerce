@@ -4,7 +4,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="order.manager.front" class="WellCommerce\SalesBundle\Manager\Front\OrderManager">
+        <service id="order.manager.front" class="WellCommerce\AppBundle\Manager\Front\OrderManager">
             <argument type="service" id="order.repository"/>
             <argument type="service" id="order.event_dispatcher"/>
             <argument type="service" id="order.factory"/>
@@ -13,7 +13,7 @@
             </call>
         </service>
 
-        <service id="order_address.manager.front" class="WellCommerce\SalesBundle\Manager\Front\OrderAddressManager">
+        <service id="order_address.manager.front" class="WellCommerce\AppBundle\Manager\Front\OrderAddressManager">
             <argument type="service" id="order.repository"/>
             <argument type="service" id="order.event_dispatcher"/>
             <argument type="service" id="order.factory"/>
@@ -23,7 +23,7 @@
             </call>
         </service>
 
-        <service id="order_confirmation.manager.front" class="WellCommerce\SalesBundle\Manager\Front\OrderConfirmationManager">
+        <service id="order_confirmation.manager.front" class="WellCommerce\AppBundle\Manager\Front\OrderConfirmationManager">
             <argument type="service" id="order.repository"/>
             <argument type="service" id="order.event_dispatcher"/>
             <argument type="service" id="order.factory"/>
@@ -36,21 +36,21 @@
             </call>
         </service>
 
-        <service id="order_address.controller.front" class="WellCommerce\SalesBundle\Controller\Front\Order\AddressController">
+        <service id="order_address.controller.front" class="WellCommerce\AppBundle\Controller\Front\Order\AddressController">
             <argument type="service" id="order_address.manager.front"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <service id="order_confirmation.controller.front" class="WellCommerce\SalesBundle\Controller\Front\Order\ConfirmationController">
+        <service id="order_confirmation.controller.front" class="WellCommerce\AppBundle\Controller\Front\Order\ConfirmationController">
             <argument type="service" id="order_confirmation.manager.front"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <service id="order_confirmation.form_builder.front" class="WellCommerce\SalesBundle\Form\Front\OrderConfirmationFormBuilder">
+        <service id="order_confirmation.form_builder.front" class="WellCommerce\AppBundle\Form\Front\OrderConfirmationFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
             <argument type="service" id="order.event_dispatcher"/>
@@ -59,7 +59,7 @@
             </call>
         </service>
 
-        <service id="order_address.form_builder.front" class="WellCommerce\SalesBundle\Form\Front\OrderAddressFormBuilder">
+        <service id="order_address.form_builder.front" class="WellCommerce\AppBundle\Form\Front\OrderAddressFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
             <argument type="service" id="order.event_dispatcher"/>
@@ -68,6 +68,6 @@
             </call>
         </service>
 
-        <service id="order.context.front" class="WellCommerce\SalesBundle\Context\Front\OrderContext"/>
+        <service id="order.context.front" class="WellCommerce\AppBundle\Context\Front\OrderContext"/>
     </services>
 </container>
