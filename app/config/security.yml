@@ -39,15 +39,15 @@ security:
 
     providers:
         administrators:
-            entity: { class: WellCommerceAdminBundle:User }
+            entity: { class: WellCommerceAppBundle:User }
         clients:
-            entity: { class: WellCommerceClientBundle:Client }
+            entity: { class: WellCommerceAppBundle:Client }
 
     encoders:
-        WellCommerce\AdminBundle\Entity\User:
+        WellCommerce\AppBundle\Entity\User:
             algorithm: bcrypt
             cost: 12
-        WellCommerce\ClientBundle\Entity\Client:
+        WellCommerce\AppBundle\Entity\Client:
             algorithm: bcrypt
             cost: 12
 

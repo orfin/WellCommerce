@@ -28,7 +28,7 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder();
         $treeBuilder
-            ->root('well_commerce_search')
+            ->root('well_commerce_app')
             ->useAttributeAsKey('name')
             ->prototype('scalar')->defaultValue('lucene')->isRequired()
             ->end();

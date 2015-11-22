@@ -14,7 +14,7 @@ namespace WellCommerce\AppBundle\Entity;
 use Doctrine\Common\Collections\Collection;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\UserInterface as BaseUserInterface;
 use WellCommerce\AppBundle\Entity\ShopAwareTrait;
 
 /**
@@ -232,7 +232,7 @@ class Client implements ClientInterface
     /**
      * @inheritDoc
      */
-    public function isEqualTo(UserInterface $user)
+    public function isEqualTo(BaseUserInterface $user)
     {
         if ($this->password !== $user->getPassword()) {
             return false;

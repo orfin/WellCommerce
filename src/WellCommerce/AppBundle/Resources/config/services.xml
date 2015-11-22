@@ -14,6 +14,51 @@
         <import resource="services/user.xml"/>
         <import resource="services/user_group.xml"/>
         <import resource="services/role.xml"/>
+
+        <import resource="services/attribute.xml"/>
+        <import resource="services/availability.xml"/>
+        <import resource="services/category.xml"/>
+        <import resource="services/deliverer.xml"/>
+        <import resource="services/product.xml"/>
+        <import resource="services/product_attribute.xml"/>
+        <import resource="services/product_status.xml"/>
+        <import resource="services/product_search.xml"/>
+        <import resource="services/product_review.xml"/>
+        <import resource="services/producer.xml"/>
+        <import resource="services/unit.xml"/>
+
+        <import resource="services/client.xml"/>
+        <import resource="services/client_group.xml"/>
+
+        <import resource="services/media.xml"/>
+        <import resource="services/news.xml"/>
+        <import resource="services/page.xml"/>
+        <import resource="services/contact.xml"/>
+
+        <import resource="services/country.xml"/>
+        <import resource="services/currency.xml"/>
+        <import resource="services/locale.xml"/>
+        <import resource="services/dictionary.xml"/>
+        <import resource="services/routing.xml"/>
+        <import resource="services/channel.xml"/>
+        <import resource="services/package.xml"/>
+        <import resource="services/tax.xml"/>
+        <import resource="services/company.xml"/>
+        <import resource="services/shop.xml"/>
+
+        <import resource="services/layout_box.xml"/>
+        <import resource="services/theme.xml"/>
+
+        <import resource="services/coupon.xml"/>
+
+        <import resource="services/cart.xml"/>
+        <import resource="services/order.xml"/>
+        <import resource="services/order_status.xml"/>
+        <import resource="services/order_status_group.xml"/>
+        <import resource="services/payment_method.xml"/>
+        <import resource="services/shipping_method.xml"/>
+
+        <import resource="services/search.xml"/>
     </imports>
     <services>
         <service id="doctrine.orm.timestampable.subscriber" class="WellCommerce\AppBundle\Doctrine\ORM\Behaviours\Timestampable\TimestampableSubscriber">
@@ -58,6 +103,57 @@
                 <argument type="service" id="service_container"/>
             </call>
             <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="form.product_attribute_collection.data_transformer" class="WellCommerce\AppBundle\Form\Admin\DataTransformer\ProductAttributeCollectionToArrayTransformer" scope="prototype">
+            <argument type="service" id="doctrine.helper"/>
+            <call method="setProductAttributeManager">
+                <argument type="service" id="product_attribute.manager.admin"/>
+            </call>
+            <tag name="form.data_transformer" alias="product_attribute_collection"/>
+        </service>
+
+        <service id="form.product_photo_collection.data_transformer" class="WellCommerce\AppBundle\Form\Admin\DataTransformer\ProductPhotoCollectionToArrayTransformer" scope="prototype">
+            <argument type="service" id="doctrine.helper"/>
+            <tag name="form.data_transformer" alias="product_photo_collection"/>
+        </service>
+
+        <service id="web.home_page.controller.front" class="WellCommerce\AppBundle\Controller\Front\HomePageController">
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="twig.extension.sorting_helper" class="WellCommerce\AppBundle\Twig\Extension\SortingHelperExtension">
+            <argument type="service" id="request.helper"/>
+            <argument type="service" id="translator.helper"/>
+            <tag name="twig.extension"/>
+        </service>
+
+        <service id="sales_report.manager.admin" class="WellCommerce\ReportBundle\Manager\Admin\SalesReportManager">
+            <argument type="service" id="order.repository"/>
+            <argument type="service" id="sales_report.event_dispatcher"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="sales_report.controller.admin" class="WellCommerce\ReportBundle\Controller\Admin\SalesReportController">
+            <argument type="service" id="sales_report.manager.admin"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="sales_report.provider" class="WellCommerce\ReportBundle\Provider\SalesReportProvider">
+            <argument type="service" id="order.repository"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="sales_report.event_dispatcher" parent="core.event_dispatcher" public="false">
+            <argument type="service" id="event_dispatcher"/>
         </service>
     </services>
 </container>

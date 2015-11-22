@@ -14,11 +14,9 @@ namespace WellCommerce\AppBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Security\Core\User\EquatableInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\UserInterface as BaseUserInterface;
 use WellCommerce\AppBundle\Entity\ShopAwareInterface;
-use WellCommerce\AppBundle\Entity\AddressInterface;
 use WellCommerce\AppBundle\Entity\BlameableInterface;
-use WellCommerce\AppBundle\Entity\ContactDetailsAwareInterface;
 use WellCommerce\AppBundle\Entity\TimestampableInterface;
 
 /**
@@ -28,7 +26,7 @@ use WellCommerce\AppBundle\Entity\TimestampableInterface;
  */
 interface ClientInterface extends
     \Serializable,
-    UserInterface,
+    BaseUserInterface,
     EquatableInterface,
     TimestampableInterface,
     BlameableInterface,
