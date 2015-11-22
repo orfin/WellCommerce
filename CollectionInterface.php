@@ -11,7 +11,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Common\Collections;
+namespace WellCommerce\Component\Collections;
 
 /**
  * Interface CollectionInterface

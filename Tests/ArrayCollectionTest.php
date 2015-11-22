@@ -11,9 +11,9 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Common\Collections\Tests;
+namespace WellCommerce\Component\Collections\Tests;
 
-use WellCommerce\Common\Collections\ArrayCollection;
+use WellCommerce\Component\Collections\ArrayCollection;
 
 /**
  * Class ArrayCollectionTest
