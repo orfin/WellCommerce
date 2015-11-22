@@ -9,7 +9,7 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\CoreBundle\Twig;
+namespace WellCommerce\CoreBundle\Twig\Extension;
 
 use WellCommerce\CoreBundle\Component\Form\Elements\FormInterface;
 use WellCommerce\CoreBundle\Component\Form\Renderer\FormRendererInterface;

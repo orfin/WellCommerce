@@ -32,7 +32,7 @@ class PurgeTranslationsCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $output->write('Purging translations. Please wait for process to finish.', true);
-        $result = $this->getContainer()->get('dictionary.purger')->purge();
+        $result = $this->getContainer()->get('doctrine.helper')->truncateTable('WellCommerce\CommonBundle\Entity\Dictionary');
 
         if (true === $result) {
             $output->write('All translations were purged.', true);

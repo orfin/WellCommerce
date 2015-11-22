@@ -22,7 +22,6 @@ use WellCommerce\CommonBundle\Entity\Locale;
 use WellCommerce\CommonBundle\Entity\LocaleInterface;
 use WellCommerce\CoreBundle\Helper\Helper;
 use WellCommerce\CoreBundle\Manager\Admin\AbstractAdminManager;
-use WellCommerce\CoreBundle\Service\Purger\PurgerInterface;
 
 /**
  * Class DictionaryManager
@@ -62,19 +61,6 @@ class DictionaryManager extends AbstractAdminManager
     protected $propertyAccessor;
 
     /**
-     * @var PurgerInterface
-     */
-    protected $purger;
-
-    /**
-     * @param PurgerInterface $purger
-     */
-    public function setDictionaryPurger(PurgerInterface $purger)
-    {
-        $this->purger = $purger;
-    }
-
-    /**
      * Synchronizes database and filesystem translations
      *
      * @param Request         $request
@@ -87,7 +73,7 @@ class DictionaryManager extends AbstractAdminManager
         $this->locales          = $this->getLocales();
         $this->propertyAccessor = PropertyAccess::createPropertyAccessor();
 
-        $this->purger->purge();
+        $this->getDoctrineHelper()->truncateTable('WellCommerce\CommonBundle\Entity\Dictionary');
         $this->loadFilesystemTranslations();
 
         $this->loadDatabaseTranslations();
