@@ -13,15 +13,14 @@
 namespace WellCommerce\CmsBundle\Form\Admin\DataTransformer;
 
 use Doctrine\ORM\PersistentCollection;
-use WellCommerce\CoreBundle\Component\Form\DataTransformer\CollectionToArrayTransformer;
-use WellCommerce\CoreBundle\Component\Form\DataTransformer\DataTransformerInterface;
+use WellCommerce\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
 
 /**
  * Class CollectionToArrayTransformer
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class MediaCollectionToArrayTransformer extends CollectionToArrayTransformer implements DataTransformerInterface
+class MediaCollectionToArrayTransformer extends CollectionToArrayTransformer
 {
     /**
      * {@inheritdoc}

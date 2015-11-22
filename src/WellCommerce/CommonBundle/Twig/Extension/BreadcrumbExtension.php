@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\CommonBundle\Twig\Extension;
 
-use WellCommerce\CommonBundle\Breadcrumb\BreadcrumbItemCollectionInterface;
+use WellCommerce\CoreBundle\Service\Breadcrumb\BreadcrumbItemCollectionInterface;
 
 /**
  * Class BreadcrumbExtension

@@ -33,7 +33,7 @@ class ClientLoginBoxController extends AbstractBoxController
     }
 
     /**
-     * @return \WellCommerce\CoreBundle\Component\Form\Elements\FormInterface
+     * @return \WellCommerce\Component\Form\Elements\FormInterface
      */
     protected function createForm()
     {

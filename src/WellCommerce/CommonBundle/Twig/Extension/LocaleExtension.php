@@ -12,7 +12,7 @@
 namespace WellCommerce\CommonBundle\Twig\Extension;
 
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use WellCommerce\CoreBundle\Component\DataSet\DataSetInterface;
+use WellCommerce\Component\DataSet\DataSetInterface;
 
 /**
  * Class LocaleExtension

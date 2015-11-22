@@ -13,13 +13,14 @@
 namespace WellCommerce\CoreBundle\Repository;
 
 use Doctrine\Common\Collections\Criteria;
+use WellCommerce\Component\DataSet\Repository\DataSetAwareRepositoryInterface;
 
 /**
  * Interface RepositoryInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface RepositoryInterface
+interface RepositoryInterface extends DataSetAwareRepositoryInterface
 {
     /**
      * Creates a new QueryBuilder instance that is prepopulated for this entity name.

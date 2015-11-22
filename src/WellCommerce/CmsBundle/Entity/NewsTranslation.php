@@ -14,7 +14,7 @@ namespace WellCommerce\CmsBundle\Entity;
 
 use Knp\DoctrineBehaviors\Model\Sluggable\Sluggable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translation;
-use WellCommerce\CommonBundle\ORM\LocaleAwareInterface;
+use WellCommerce\CommonBundle\Entity\LocaleAwareInterface;
 use WellCommerce\CoreBundle\Entity\Meta;
 
 /**

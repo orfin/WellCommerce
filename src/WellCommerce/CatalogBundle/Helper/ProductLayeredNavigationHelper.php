@@ -16,10 +16,10 @@ use Doctrine\Common\Collections\Criteria;
 use WellCommerce\CatalogBundle\Entity\ProducerInterface;
 use WellCommerce\CatalogBundle\Repository\ProducerRepositoryInterface;
 use WellCommerce\CoreBundle\DependencyInjection\AbstractContainerAware;
-use WellCommerce\CoreBundle\Component\DataSet\Conditions\Condition\Gte;
-use WellCommerce\CoreBundle\Component\DataSet\Conditions\Condition\In;
-use WellCommerce\CoreBundle\Component\DataSet\Conditions\Condition\Lte;
-use WellCommerce\CoreBundle\Component\DataSet\Conditions\ConditionsCollection;
+use WellCommerce\Component\DataSet\Conditions\Condition\Gte;
+use WellCommerce\Component\DataSet\Conditions\Condition\In;
+use WellCommerce\Component\DataSet\Conditions\Condition\Lte;
+use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
 
 /**
  * Interface ProductLayeredNavigationHelperInterface

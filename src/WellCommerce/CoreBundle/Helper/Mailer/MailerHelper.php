@@ -13,7 +13,6 @@
 namespace WellCommerce\CoreBundle\Helper\Mailer;
 
 use Swift_Message as Message;
-use WellCommerce\CommonBundle\Entity\ShopInterface;
 use WellCommerce\CoreBundle\Entity\MailerConfiguration;
 
 /**
@@ -26,10 +25,9 @@ class MailerHelper implements MailerHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function sendEmail($recipient, $title, $body, ShopInterface $shop)
+    public function sendEmail($recipient, $title, $body, MailerConfiguration $mailerConfiguration)
     {
-        $mailerConfiguration = $shop->getMailerConfiguration();
-        $mailer              = $this->createMailer($mailerConfiguration);
+        $mailer = $this->createMailer($mailerConfiguration);
 
         $message = Message::newInstance()
             ->setSubject($title)

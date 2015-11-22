@@ -13,8 +13,8 @@
 namespace WellCommerce\CatalogBundle\DataSet\Front;
 
 use Doctrine\ORM\Query\Expr;
-use WellCommerce\CoreBundle\Component\DataSet\Column\ColumnCollection;
-use WellCommerce\CoreBundle\Component\DataSet\Request\DataSetRequestInterface;
+use WellCommerce\Component\DataSet\Column\ColumnCollection;
+use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
 use WellCommerce\SearchBundle\Provider\ProductSearchProviderInterface;
 
 /**

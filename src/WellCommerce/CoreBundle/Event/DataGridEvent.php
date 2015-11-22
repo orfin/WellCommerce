@@ -12,7 +12,7 @@
 namespace WellCommerce\CoreBundle\Event;
 
 use Symfony\Component\EventDispatcher\Event;
-use WellCommerce\CoreBundle\Component\DataGrid\DataGridInterface;
+use WellCommerce\Component\DataGrid\DataGridInterface;
 
 /**
  * Class DataGridEvent

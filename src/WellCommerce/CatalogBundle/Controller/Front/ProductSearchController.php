@@ -12,10 +12,10 @@
 
 namespace WellCommerce\CatalogBundle\Controller\Front;
 
-use WellCommerce\CommonBundle\Breadcrumb\BreadcrumbItem;
+use WellCommerce\CoreBundle\Service\Breadcrumb\BreadcrumbItem;
 use WellCommerce\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\CoreBundle\Controller\Front\FrontControllerInterface;
-use WellCommerce\CoreBundle\Component\DataSet\Conditions\ConditionsCollection;
+use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
 
 /**
  * Class ProductSearchController

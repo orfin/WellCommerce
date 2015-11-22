@@ -12,7 +12,7 @@
 
 namespace WellCommerce\SalesBundle\Visitor;
 
-use WellCommerce\CoreBundle\Component\Collection\ArrayCollection;
+use WellCommerce\Component\Collections\ArrayCollection;
 
 /**
  * Class CartVisitorCollection

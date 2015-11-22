@@ -14,7 +14,7 @@ namespace WellCommerce\CatalogBundle\Controller\Box;
 
 use WellCommerce\CoreBundle\Controller\Box\AbstractBoxController;
 use WellCommerce\CoreBundle\Controller\Box\BoxControllerInterface;
-use WellCommerce\CoreBundle\Component\DataSet\Conditions\ConditionsCollection;
+use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
 use WellCommerce\LayoutBundle\Collection\LayoutBoxSettingsCollection;
 
 /**

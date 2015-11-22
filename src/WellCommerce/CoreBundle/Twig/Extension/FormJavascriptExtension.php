@@ -11,8 +11,8 @@
  */
 namespace WellCommerce\CoreBundle\Twig\Extension;
 
-use WellCommerce\CoreBundle\Component\Form\Elements\FormInterface;
-use WellCommerce\CoreBundle\Component\Form\Renderer\FormRendererInterface;
+use WellCommerce\Component\Form\Elements\FormInterface;
+use WellCommerce\Component\Form\Renderer\FormRendererInterface;
 
 /**
  * Class FormJavascriptExtension

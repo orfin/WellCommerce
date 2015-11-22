@@ -14,7 +14,7 @@ namespace WellCommerce\CoreBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use WellCommerce\CoreBundle\Component\Form\DataTransformer\DataTransformerInterface;
+use WellCommerce\Component\Form\DataTransformer\DataTransformerInterface;
 
 /**
  * Class FormDataTransformerPass

@@ -16,7 +16,7 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
-use WellCommerce\CoreBundle\Component\Form\Resolver\ResolverInterface;
+use WellCommerce\Component\Form\Resolver\ResolverInterface;
 
 /**
  * Class FormResolverPass
@@ -40,11 +40,11 @@ class FormResolverPass implements CompilerPassInterface
     private function processResolvers(ContainerBuilder $container)
     {
         $definition = $container->getDefinition('form.resolver.factory');
+        $interface  = ResolverInterface::class;
 
         foreach ($container->findTaggedServiceIds('form.resolver') as $id => $attributes) {
             $resolverDefinition = $container->getDefinition($id);
             $refClass           = new \ReflectionClass($resolverDefinition->getClass());
-            $interface          = ResolverInterface::class;
 
             if (!$refClass->implementsInterface($interface)) {
                 throw new \InvalidArgumentException(

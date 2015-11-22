@@ -15,7 +15,7 @@ namespace WellCommerce\CoreBundle\DependencyInjection\Compiler;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
-use WellCommerce\CoreBundle\Component\DataSet\Transformer\DataSetTransformerInterface;
+use WellCommerce\Component\DataSet\Transformer\DataSetTransformerInterface;
 
 /**
  * Class DataSetTransformerPass

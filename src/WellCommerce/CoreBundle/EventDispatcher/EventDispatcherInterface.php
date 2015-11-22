@@ -12,8 +12,8 @@
 
 namespace WellCommerce\CoreBundle\EventDispatcher;
 
-use WellCommerce\CoreBundle\Component\Form\Elements\FormInterface;
-use WellCommerce\CoreBundle\Component\Form\FormBuilderInterface;
+use WellCommerce\Component\Form\Elements\FormInterface;
+use WellCommerce\Component\Form\FormBuilderInterface;
 
 /**
  * Interface EventDispatcherInterface

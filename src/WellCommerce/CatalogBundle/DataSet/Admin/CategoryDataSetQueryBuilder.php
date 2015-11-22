@@ -13,9 +13,9 @@
 namespace WellCommerce\CatalogBundle\DataSet\Admin;
 
 use WellCommerce\CommonBundle\Context\ShopContextInterface;
-use WellCommerce\CoreBundle\Component\DataSet\Conditions\Condition\Eq;
-use WellCommerce\CoreBundle\Component\DataSet\QueryBuilder\AbstractDataSetQueryBuilder;
-use WellCommerce\CoreBundle\Component\DataSet\QueryBuilder\DataSetQueryBuilderInterface;
+use WellCommerce\Component\DataSet\Conditions\Condition\Eq;
+use WellCommerce\Component\DataSet\QueryBuilder\AbstractDataSetQueryBuilder;
+use WellCommerce\Component\DataSet\QueryBuilder\DataSetQueryBuilderInterface;
 
 /**
  * Class CategoryDataSetQueryBuilder

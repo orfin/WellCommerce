@@ -11,8 +11,8 @@
  */
 namespace WellCommerce\CommonBundle\DataGrid;
 
-use WellCommerce\CoreBundle\Component\DataGrid\AbstractDataGrid;
-use WellCommerce\CoreBundle\Component\DataGrid\Column\ColumnCollection;
+use WellCommerce\CoreBundle\DataGrid\AbstractDataGrid;
+use WellCommerce\Component\DataGrid\Column\ColumnCollection;
 
 /**
  * Class RoutingDataGrid

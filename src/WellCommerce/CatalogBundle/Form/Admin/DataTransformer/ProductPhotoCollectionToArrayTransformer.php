@@ -20,14 +20,13 @@ use WellCommerce\CatalogBundle\Entity\ProductInterface;
 use WellCommerce\CatalogBundle\Entity\ProductPhoto;
 use WellCommerce\CmsBundle\Entity\MediaInterface;
 use WellCommerce\CmsBundle\Form\Admin\DataTransformer\MediaCollectionToArrayTransformer;
-use WellCommerce\CoreBundle\Component\Form\DataTransformer\DataTransformerInterface;
 
 /**
  * Class ProductPhotoCollectionToArrayTransformer
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductPhotoCollectionToArrayTransformer extends MediaCollectionToArrayTransformer implements DataTransformerInterface
+class ProductPhotoCollectionToArrayTransformer extends MediaCollectionToArrayTransformer
 {
     /**
      * {@inheritdoc}

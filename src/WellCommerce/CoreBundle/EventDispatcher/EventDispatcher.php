@@ -16,9 +16,9 @@ use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface as BaseEventDispatcherInterface;
 use WellCommerce\CoreBundle\Event\ResourceEvent;
 use WellCommerce\CoreBundle\Helper\Helper;
-use WellCommerce\CoreBundle\Component\Form\Elements\FormInterface;
+use WellCommerce\Component\Form\Elements\FormInterface;
 use WellCommerce\CoreBundle\Event\FormEvent;
-use WellCommerce\CoreBundle\Component\Form\FormBuilderInterface;
+use WellCommerce\Component\Form\FormBuilderInterface;
 
 /**
  * Class EventDispatcher

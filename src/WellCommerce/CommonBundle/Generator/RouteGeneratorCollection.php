@@ -12,7 +12,7 @@
 
 namespace WellCommerce\CommonBundle\Generator;
 
-use WellCommerce\CoreBundle\Component\Collection\ArrayCollection;
+use WellCommerce\Component\Collections\ArrayCollection;
 
 /**
  * Class RouteGeneratorCollection

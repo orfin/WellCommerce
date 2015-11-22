@@ -16,8 +16,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\PersistentCollection;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 use WellCommerce\CoreBundle\Entity\Price;
-use WellCommerce\CoreBundle\Component\Form\DataTransformer\CollectionToArrayTransformer;
-use WellCommerce\CoreBundle\Component\Form\DataTransformer\DataTransformerInterface;
+use WellCommerce\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
 use WellCommerce\SalesBundle\Entity\ShippingMethod;
 use WellCommerce\SalesBundle\Entity\ShippingMethodCost;
 
@@ -26,7 +25,7 @@ use WellCommerce\SalesBundle\Entity\ShippingMethodCost;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ShippingCostCollectionToArrayTransformer extends CollectionToArrayTransformer implements DataTransformerInterface
+class ShippingCostCollectionToArrayTransformer extends CollectionToArrayTransformer
 {
     /**
      * {@inheritdoc}

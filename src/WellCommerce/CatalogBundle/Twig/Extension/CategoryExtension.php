@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\CatalogBundle\Twig\Extension;
 
-use WellCommerce\CoreBundle\Component\DataSet\DataSetInterface;
+use WellCommerce\Component\DataSet\DataSetInterface;
 
 /**
  * Class CategoryExtension

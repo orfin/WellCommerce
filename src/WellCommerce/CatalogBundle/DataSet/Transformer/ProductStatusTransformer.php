@@ -13,7 +13,7 @@
 namespace WellCommerce\CatalogBundle\DataSet\Transformer;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use WellCommerce\CoreBundle\Component\DataSet\Transformer\AbstractDataSetTransformer;
+use WellCommerce\Component\DataSet\Transformer\AbstractDataSetTransformer;
 
 /**
  * Class ProductStatusTransformer

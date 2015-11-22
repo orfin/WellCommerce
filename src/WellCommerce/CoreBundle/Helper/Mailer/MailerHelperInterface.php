@@ -12,7 +12,7 @@
 
 namespace WellCommerce\CoreBundle\Helper\Mailer;
 
-use WellCommerce\CommonBundle\Entity\ShopInterface;
+use WellCommerce\CoreBundle\Entity\MailerConfiguration;
 
 /**
  * Interface MailerHelperInterface
@@ -24,10 +24,10 @@ interface MailerHelperInterface
     /**
      * Sends an e-mail message
      *
-     * @param string         $recipient
-     * @param string         $title
-     * @param string         $body
-     * @param ShopInterface| $shop
+     * @param string              $recipient
+     * @param string              $title
+     * @param string              $body
+     * @param MailerConfiguration $mailerConfiguration
      */
-    public function sendEmail($recipient, $title, $body, ShopInterface $shop);
+    public function sendEmail($recipient, $title, $body, MailerConfiguration $mailerConfiguration);
 }

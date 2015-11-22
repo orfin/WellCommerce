@@ -11,9 +11,9 @@
  */
 namespace WellCommerce\SalesBundle\Form\Admin;
 
-use WellCommerce\CoreBundle\Component\Form\AbstractFormBuilder;
-use WellCommerce\CoreBundle\Component\Form\Elements\ElementInterface;
-use WellCommerce\CoreBundle\Component\Form\Elements\FormInterface;
+use WellCommerce\CoreBundle\Form\AbstractFormBuilder;
+use WellCommerce\Component\Form\Elements\ElementInterface;
+use WellCommerce\Component\Form\Elements\FormInterface;
 use WellCommerce\SalesBundle\Context\Admin\OrderContextInterface;
 use WellCommerce\SalesBundle\Provider\ShippingMethodProviderInterface;
 

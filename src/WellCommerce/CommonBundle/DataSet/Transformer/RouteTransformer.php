@@ -13,7 +13,7 @@
 namespace WellCommerce\CommonBundle\DataSet\Transformer;
 
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use WellCommerce\CoreBundle\Component\DataSet\Transformer\AbstractDataSetTransformer;
+use WellCommerce\Component\DataSet\Transformer\AbstractDataSetTransformer;
 
 /**
  * Class RouteTransformer

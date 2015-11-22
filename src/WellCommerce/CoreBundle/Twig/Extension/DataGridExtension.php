@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\CoreBundle\Twig\Extension;
 
-use WellCommerce\CoreBundle\Component\DataGrid\DataGridInterface;
+use WellCommerce\Component\DataGrid\DataGridInterface;
 
 
 /**

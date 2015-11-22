@@ -77,7 +77,7 @@ interface ManagerInterface
     /**
      * Returns form object
      *
-     * @return \WellCommerce\CoreBundle\Component\Form\FormBuilderInterface
+     * @return \WellCommerce\Component\Form\FormBuilderInterface
      */
     public function getFormBuilder();
 
@@ -87,7 +87,7 @@ interface ManagerInterface
      * @param null|object $resource
      * @param array       $config
      *
-     * @return \WellCommerce\CoreBundle\Component\Form\Elements\FormInterface
+     * @return \WellCommerce\Component\Form\Elements\FormInterface
      */
     public function getForm($resource, array $config = []);
 

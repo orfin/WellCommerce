@@ -13,8 +13,8 @@
 namespace WellCommerce\CatalogBundle\Manager\Front;
 
 use WellCommerce\CoreBundle\Manager\Front\AbstractFrontManager;
-use WellCommerce\CoreBundle\Component\DataSet\Conditions\Condition\Eq;
-use WellCommerce\CoreBundle\Component\DataSet\Conditions\ConditionsCollection;
+use WellCommerce\Component\DataSet\Conditions\Condition\Eq;
+use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
 
 /**
  * Class CategoryManager

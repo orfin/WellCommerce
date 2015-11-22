@@ -12,7 +12,7 @@
 
 namespace WellCommerce\SalesBundle\DataSet\Transformer;
 
-use WellCommerce\CoreBundle\Component\DataSet\Transformer\AbstractDataSetTransformer;
+use WellCommerce\Component\DataSet\Transformer\AbstractDataSetTransformer;
 
 /**
  * Class DateTransformer

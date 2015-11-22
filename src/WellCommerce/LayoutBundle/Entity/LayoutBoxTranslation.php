@@ -13,7 +13,7 @@
 namespace WellCommerce\LayoutBundle\Entity;
 
 use Knp\DoctrineBehaviors\Model\Translatable\Translation;
-use WellCommerce\CommonBundle\ORM\LocaleAwareInterface;
+use WellCommerce\CommonBundle\Entity\LocaleAwareInterface;
 
 /**
  * Class LayoutBoxTranslation

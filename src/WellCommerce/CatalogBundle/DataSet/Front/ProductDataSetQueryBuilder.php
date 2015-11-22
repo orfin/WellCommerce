@@ -16,8 +16,8 @@ use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\QueryBuilder;
 use WellCommerce\CatalogBundle\DataSet\Admin\ProductDataSetQueryBuilder as BaseProductDataSetQueryBuilder;
 use WellCommerce\CoreBundle\Helper\Request\RequestHelperInterface;
-use WellCommerce\CoreBundle\Component\DataSet\Column\ColumnCollection;
-use WellCommerce\CoreBundle\Component\DataSet\Request\DataSetRequestInterface;
+use WellCommerce\Component\DataSet\Column\ColumnCollection;
+use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
 
 /**
  * Class ProductDataSetQueryBuilder

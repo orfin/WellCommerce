@@ -13,7 +13,7 @@
 namespace WellCommerce\CoreBundle\Event;
 
 use Symfony\Component\EventDispatcher\Event;
-use WellCommerce\CoreBundle\Component\DataSet\DataSetInterface;
+use WellCommerce\Component\DataSet\DataSetInterface;
 
 /**
  * Class DataSetEvent

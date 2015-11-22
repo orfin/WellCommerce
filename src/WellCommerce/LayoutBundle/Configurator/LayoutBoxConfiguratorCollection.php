@@ -12,7 +12,7 @@
 
 namespace WellCommerce\LayoutBundle\Configurator;
 
-use WellCommerce\CoreBundle\Component\Collection\ArrayCollection;
+use WellCommerce\Component\Collections\ArrayCollection;
 
 /**
  * Class LayoutBoxConfiguratorCollection

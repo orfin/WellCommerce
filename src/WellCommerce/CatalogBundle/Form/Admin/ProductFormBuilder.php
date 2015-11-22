@@ -11,10 +11,10 @@
  */
 namespace WellCommerce\CatalogBundle\Form\Admin;
 
-use WellCommerce\CoreBundle\Component\Form\AbstractFormBuilder;
-use WellCommerce\CoreBundle\Component\Form\DataTransformer\DateTransformer;
-use WellCommerce\CoreBundle\Component\Form\Elements\ElementInterface;
-use WellCommerce\CoreBundle\Component\Form\Elements\FormInterface;
+use WellCommerce\CoreBundle\Form\AbstractFormBuilder;
+use WellCommerce\Component\Form\DataTransformer\DateTransformer;
+use WellCommerce\Component\Form\Elements\ElementInterface;
+use WellCommerce\Component\Form\Elements\FormInterface;
 
 /**
  * Class ProductFormBuilder

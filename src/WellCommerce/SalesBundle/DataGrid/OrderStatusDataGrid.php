@@ -11,11 +11,11 @@
  */
 namespace WellCommerce\SalesBundle\DataGrid;
 
-use WellCommerce\CoreBundle\Component\DataGrid\AbstractDataGrid;
-use WellCommerce\CoreBundle\Component\DataGrid\Column\Column;
-use WellCommerce\CoreBundle\Component\DataGrid\Column\ColumnCollection;
-use WellCommerce\CoreBundle\Component\DataGrid\Column\Options\Appearance;
-use WellCommerce\CoreBundle\Component\DataGrid\Column\Options\Filter;
+use WellCommerce\CoreBundle\DataGrid\AbstractDataGrid;
+use WellCommerce\Component\DataGrid\Column\Column;
+use WellCommerce\Component\DataGrid\Column\ColumnCollection;
+use WellCommerce\Component\DataGrid\Column\Options\Appearance;
+use WellCommerce\Component\DataGrid\Column\Options\Filter;
 
 /**
  * Class OrderStatusDataGrid

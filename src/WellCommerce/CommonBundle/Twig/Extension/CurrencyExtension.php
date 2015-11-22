@@ -12,7 +12,7 @@
 namespace WellCommerce\CommonBundle\Twig\Extension;
 
 use WellCommerce\CommonBundle\Helper\CurrencyHelperInterface;
-use WellCommerce\CoreBundle\Component\DataSet\DataSetInterface;
+use WellCommerce\Component\DataSet\DataSetInterface;
 
 /**
  * Class CurrencyExtension

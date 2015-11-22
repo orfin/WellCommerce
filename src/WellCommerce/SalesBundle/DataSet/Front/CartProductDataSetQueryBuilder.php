@@ -12,10 +12,10 @@
 
 namespace WellCommerce\SalesBundle\DataSet\Front;
 
-use WellCommerce\CoreBundle\Component\DataSet\Column\ColumnCollection;
-use WellCommerce\CoreBundle\Component\DataSet\QueryBuilder\AbstractDataSetQueryBuilder;
-use WellCommerce\CoreBundle\Component\DataSet\QueryBuilder\DataSetQueryBuilderInterface;
-use WellCommerce\CoreBundle\Component\DataSet\Request\DataSetRequestInterface;
+use WellCommerce\Component\DataSet\Column\ColumnCollection;
+use WellCommerce\Component\DataSet\QueryBuilder\AbstractDataSetQueryBuilder;
+use WellCommerce\Component\DataSet\QueryBuilder\DataSetQueryBuilderInterface;
+use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
 use WellCommerce\SalesBundle\Context\Front\CartContextInterface;
 use WellCommerce\SalesBundle\Repository\CartProductRepositoryInterface;
 

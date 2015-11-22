@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\CoreBundle\Controller\AbstractController;
 use WellCommerce\CoreBundle\Manager\Admin\AdminManagerInterface;
-use WellCommerce\CoreBundle\Component\Form\Elements\FormInterface;
+use WellCommerce\Component\Form\Elements\FormInterface;
 
 /**
  * Class AbstractAdminController

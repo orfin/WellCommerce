@@ -23,7 +23,7 @@
             </call>
         </service>
 
-        <service id="breadcrumb.collection" class="WellCommerce\CommonBundle\Breadcrumb\BreadcrumbItemCollection" />
+        <service id="breadcrumb.collection" class="WellCommerce\CoreBundle\Service\Breadcrumb\BreadcrumbItemCollection" />
 
         <service id="twig.extension.breadcrumb" class="WellCommerce\CommonBundle\Twig\Extension\BreadcrumbExtension">
             <argument type="service" id="breadcrumb.collection"/>

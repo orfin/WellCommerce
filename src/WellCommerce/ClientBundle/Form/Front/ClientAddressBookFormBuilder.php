@@ -11,8 +11,8 @@
  */
 namespace WellCommerce\ClientBundle\Form\Front;
 
-use WellCommerce\CoreBundle\Component\Form\AbstractFormBuilder;
-use WellCommerce\CoreBundle\Component\Form\Elements\FormInterface;
+use WellCommerce\CoreBundle\Form\AbstractFormBuilder;
+use WellCommerce\Component\Form\Elements\FormInterface;
 
 /**
  * Class ClientAddressBookFormBuilder

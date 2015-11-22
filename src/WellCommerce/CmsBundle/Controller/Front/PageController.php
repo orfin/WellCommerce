@@ -13,7 +13,7 @@
 namespace WellCommerce\CmsBundle\Controller\Front;
 
 use Symfony\Component\HttpFoundation\Request;
-use WellCommerce\CommonBundle\Breadcrumb\BreadcrumbItem;
+use WellCommerce\CoreBundle\Service\Breadcrumb\BreadcrumbItem;
 use WellCommerce\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\CoreBundle\Controller\Front\FrontControllerInterface;
 

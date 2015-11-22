@@ -14,7 +14,7 @@ namespace WellCommerce\CoreBundle\Manager\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\CoreBundle\Manager\ManagerInterface;
-use WellCommerce\CoreBundle\Component\DataGrid\DataGridInterface;
+use WellCommerce\Component\DataGrid\DataGridInterface;
 
 /**
  * Interface AdminManagerInterface

@@ -13,7 +13,7 @@ namespace WellCommerce\CoreBundle\Controller\Front;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use WellCommerce\CommonBundle\Breadcrumb\BreadcrumbItem;
+use WellCommerce\CoreBundle\Service\Breadcrumb\BreadcrumbItem;
 use WellCommerce\CoreBundle\Controller\AbstractController;
 use WellCommerce\CoreBundle\Manager\Front\FrontManagerInterface;
 

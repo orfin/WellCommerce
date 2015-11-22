@@ -18,7 +18,7 @@ use WellCommerce\CoreBundle\Exception\MissingFactoryException;
 use WellCommerce\CoreBundle\Exception\MissingFormBuilderException;
 use WellCommerce\CoreBundle\Factory\FactoryInterface;
 use WellCommerce\CoreBundle\Repository\RepositoryInterface;
-use WellCommerce\CoreBundle\Component\Form\FormBuilderInterface;
+use WellCommerce\Component\Form\FormBuilderInterface;
 
 /**
  * Class AbstractManager

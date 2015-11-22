@@ -12,7 +12,7 @@
 
 namespace WellCommerce\CatalogBundle\Helper;
 
-use WellCommerce\CoreBundle\Component\DataSet\Conditions\ConditionsCollection;
+use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
 
 /**
  * Interface ProductLayeredNavigationHelperInterface

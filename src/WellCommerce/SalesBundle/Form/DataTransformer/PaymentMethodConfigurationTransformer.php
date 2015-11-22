@@ -15,8 +15,7 @@ namespace WellCommerce\SalesBundle\Form\DataTransformer;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
-use WellCommerce\CoreBundle\Component\Form\DataTransformer\CollectionToArrayTransformer;
-use WellCommerce\CoreBundle\Component\Form\DataTransformer\DataTransformerInterface;
+use WellCommerce\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
 use WellCommerce\SalesBundle\Entity\PaymentMethodConfigurationInterface;
 use WellCommerce\SalesBundle\Entity\PaymentMethodInterface;
 use WellCommerce\SalesBundle\Factory\PaymentMethodConfigurationFactory;
@@ -26,7 +25,7 @@ use WellCommerce\SalesBundle\Factory\PaymentMethodConfigurationFactory;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PaymentMethodConfigurationTransformer extends CollectionToArrayTransformer implements DataTransformerInterface
+class PaymentMethodConfigurationTransformer extends CollectionToArrayTransformer
 {
     /**
      * @var PaymentMethodConfigurationFactory

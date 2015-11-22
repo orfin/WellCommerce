@@ -12,7 +12,7 @@
 namespace WellCommerce\SalesBundle\EventListener;
 
 use WellCommerce\CoreBundle\EventListener\AbstractEventSubscriber;
-use WellCommerce\CoreBundle\Component\Form\Elements\FormInterface;
+use WellCommerce\Component\Form\Elements\FormInterface;
 use WellCommerce\CoreBundle\Event\FormEvent;
 
 /**
@@ -60,7 +60,7 @@ class ShippingMethodSubscriber extends AbstractEventSubscriber
      *
      * @param FormInterface $form
      *
-     * @return \WellCommerce\CoreBundle\Component\Form\Elements\Optioned\Select
+     * @return \WellCommerce\Component\Form\Elements\Optioned\Select
      */
     private function getCalculatorTypeElement(FormInterface $form)
     {

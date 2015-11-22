@@ -22,7 +22,7 @@ use WellCommerce\CoreBundle\Test\AbstractTestCase;
 abstract class AbstractDataSetTestCase extends AbstractTestCase
 {
     /**
-     * @return null|\WellCommerce\CoreBundle\Component\DataSet\DataSetInterface
+     * @return null|\WellCommerce\Component\DataSet\DataSetInterface
      */
     protected function get()
     {
@@ -42,7 +42,7 @@ abstract class AbstractDataSetTestCase extends AbstractTestCase
         $dataset = $this->get();
 
         if (null !== $dataset) {
-            $this->assertInstanceOf('WellCommerce\CoreBundle\Component\DataSet\DataSetInterface', $dataset);
+            $this->assertInstanceOf('WellCommerce\Component\DataSet\DataSetInterface', $dataset);
         }
     }
 
@@ -56,10 +56,10 @@ abstract class AbstractDataSetTestCase extends AbstractTestCase
 
             foreach ($requiredColumns as $alias => $source) {
                 /**
-                 * @var $column \WellCommerce\CoreBundle\Component\DataSet\Column\ColumnInterface
+                 * @var $column \WellCommerce\Component\DataSet\Column\ColumnInterface
                  */
                 $column = $columns->get($alias);
-                $this->assertInstanceOf('WellCommerce\CoreBundle\Component\DataSet\Column\ColumnInterface', $column);
+                $this->assertInstanceOf('WellCommerce\Component\DataSet\Column\ColumnInterface', $column);
                 $this->assertEquals($source, $column->getSource());
                 $this->assertEquals($alias, $column->getAlias());
                 $this->assertEquals($this->isAggregateColumn($source), $column->isAggregated());

@@ -38,7 +38,7 @@ class ClientSubscriber extends AbstractEventSubscriber
             $body  = $this->getEmailBody($client);
             $shop  = $client->getShop();
 
-            $this->getMailerHelper()->sendEmail($email, $title, $body, $shop);
+            $this->getMailerHelper()->sendEmail($email, $title, $body, $shop->getMailerConfiguration());
         }
     }
 

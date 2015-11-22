@@ -13,8 +13,8 @@
 namespace WellCommerce\CatalogBundle\Manager\Front;
 
 use WellCommerce\CoreBundle\Manager\Front\AbstractFrontManager;
-use WellCommerce\CoreBundle\Component\DataSet\Conditions\Condition\In;
-use WellCommerce\CoreBundle\Component\DataSet\Conditions\ConditionsCollection;
+use WellCommerce\Component\DataSet\Conditions\Condition\In;
+use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
 use WellCommerce\SearchBundle\Provider\ProductSearchProviderInterface;
 use WellCommerce\SearchBundle\Query\SimpleQuery;
 

@@ -13,9 +13,9 @@
 namespace WellCommerce\SalesBundle\Processor;
 
 use Doctrine\Common\Collections\Collection;
-use WellCommerce\CoreBundle\Component\Form\Dependencies\DependencyInterface;
-use WellCommerce\CoreBundle\Component\Form\Elements\ElementInterface;
-use WellCommerce\CoreBundle\Component\Form\FormBuilderInterface;
+use WellCommerce\Component\Form\Dependencies\DependencyInterface;
+use WellCommerce\Component\Form\Elements\ElementInterface;
+use WellCommerce\Component\Form\FormBuilderInterface;
 
 
 /**

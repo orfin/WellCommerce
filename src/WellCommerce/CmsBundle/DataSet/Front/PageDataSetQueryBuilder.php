@@ -13,8 +13,8 @@
 namespace WellCommerce\CmsBundle\DataSet\Front;
 
 use WellCommerce\CmsBundle\DataSet\Admin\PageDataSetQueryBuilder as BaseQueryBuilder;
-use WellCommerce\CoreBundle\Component\DataSet\Column\ColumnCollection;
-use WellCommerce\CoreBundle\Component\DataSet\Request\DataSetRequestInterface;
+use WellCommerce\Component\DataSet\Column\ColumnCollection;
+use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
 
 /**
  * Class PageDataSetQueryBuilder

@@ -55,7 +55,10 @@
         "devristo/phpws": "dev-master",
         "nesbot/carbon": "dev-master",
         "egeloen/lucene-search-bundle": "^2.0@dev",
-        "zendframework/zend-json": "2.3.*@dev"
+        "wellcommerce/dataset": "^1.0@dev",
+        "wellcommerce/datagrid": "^1.0@dev",
+        "wellcommerce/collections": "^1.0@dev",
+        "wellcommerce/form": "^1.0@dev"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",

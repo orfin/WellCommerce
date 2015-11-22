@@ -22,7 +22,7 @@ use WellCommerce\CoreBundle\Test\AbstractTestCase;
 abstract class AbstractFormBuilderTestCase extends AbstractTestCase
 {
     /**
-     * @return null|\WellCommerce\CoreBundle\Component\Form\FormBuilderInterface
+     * @return null|\WellCommerce\Component\Form\FormBuilderInterface
      */
     protected function getFormBuilderService()
     {
@@ -39,7 +39,7 @@ abstract class AbstractFormBuilderTestCase extends AbstractTestCase
         $formBuilder = $this->getFormBuilderService();
 
         if (null !== $formBuilder) {
-            $this->assertInstanceOf('WellCommerce\CoreBundle\Component\Form\FormBuilderInterface', $formBuilder);
+            $this->assertInstanceOf('WellCommerce\Component\Form\FormBuilderInterface', $formBuilder);
         }
     }
 
@@ -52,7 +52,7 @@ abstract class AbstractFormBuilderTestCase extends AbstractTestCase
                 'name' => 'test'
             ], null);
 
-            $this->assertInstanceOf('WellCommerce\CoreBundle\Component\Form\Elements\FormInterface', $form);
+            $this->assertInstanceOf('WellCommerce\Component\Form\Elements\FormInterface', $form);
         }
     }
 

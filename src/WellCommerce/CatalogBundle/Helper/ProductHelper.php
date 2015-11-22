@@ -14,9 +14,9 @@ namespace WellCommerce\CatalogBundle\Helper;
 
 use WellCommerce\CatalogBundle\Entity\CategoryInterface;
 use WellCommerce\CatalogBundle\Entity\ProductInterface;
-use WellCommerce\CoreBundle\Component\DataSet\Conditions\Condition\Eq;
-use WellCommerce\CoreBundle\Component\DataSet\Conditions\ConditionsCollection;
-use WellCommerce\CoreBundle\Component\DataSet\DataSetInterface;
+use WellCommerce\Component\DataSet\Conditions\Condition\Eq;
+use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
+use WellCommerce\Component\DataSet\DataSetInterface;
 use WellCommerce\SalesBundle\Provider\ShippingMethodProviderInterface;
 
 /**

@@ -20,12 +20,12 @@ namespace WellCommerce\CommonBundle\Entity;
 interface LocaleAwareInterface
 {
     /**
-     * @param LocaleInterface $locale
+     * @param string $locale
      */
-    public function setLocale(LocaleInterface $locale);
+    public function setLocale($locale);
 
     /**
-     * @return LocaleInterface
+     * @return string
      */
     public function getLocale();
 }

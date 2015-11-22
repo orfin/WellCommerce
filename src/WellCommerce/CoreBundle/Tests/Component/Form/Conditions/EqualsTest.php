@@ -12,7 +12,7 @@
 
 namespace WellCommerce\CoreBundle\Tests\Component\Form;
 
-use WellCommerce\CoreBundle\Component\Form\Conditions\Equals;
+use WellCommerce\Component\Form\Conditions\Equals;
 
 /**
  * Class EqualsTest

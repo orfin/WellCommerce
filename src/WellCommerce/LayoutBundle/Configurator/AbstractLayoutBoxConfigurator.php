@@ -15,9 +15,9 @@ namespace WellCommerce\LayoutBundle\Configurator;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use WellCommerce\CoreBundle\DependencyInjection\AbstractContainerAware;
 use WellCommerce\CoreBundle\Helper\Translator\TranslatorHelperInterface;
-use WellCommerce\CoreBundle\Component\Form\Conditions\Equals;
-use WellCommerce\CoreBundle\Component\Form\Elements\FormInterface;
-use WellCommerce\CoreBundle\Component\Form\FormBuilderInterface;
+use WellCommerce\Component\Form\Conditions\Equals;
+use WellCommerce\Component\Form\Elements\FormInterface;
+use WellCommerce\Component\Form\FormBuilderInterface;
 
 /**
  * Class AbstractLayoutBoxConfigurator
@@ -119,7 +119,7 @@ abstract class AbstractLayoutBoxConfigurator extends AbstractContainerAware impl
     /**
      * @param FormInterface $form
      *
-     * @return \WellCommerce\CoreBundle\Component\Form\Elements\Optioned\Select
+     * @return \WellCommerce\Component\Form\Elements\Optioned\Select
      */
     protected function getBoxTypeSelect(FormInterface $form)
     {

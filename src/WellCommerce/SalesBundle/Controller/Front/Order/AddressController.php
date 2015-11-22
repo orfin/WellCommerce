@@ -14,7 +14,7 @@ namespace WellCommerce\SalesBundle\Controller\Front\Order;
 
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
-use WellCommerce\CommonBundle\Breadcrumb\BreadcrumbItem;
+use WellCommerce\CoreBundle\Service\Breadcrumb\BreadcrumbItem;
 use WellCommerce\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\CoreBundle\Controller\Front\FrontControllerInterface;
 

@@ -13,7 +13,7 @@
 namespace WellCommerce\CoreBundle\Test\DataGrid;
 
 use WellCommerce\CoreBundle\Test\AbstractTestCase;
-use WellCommerce\CoreBundle\Component\DataGrid\Column\Column;
+use WellCommerce\Component\DataGrid\Column\Column;
 
 /**
  * Class AbstractDataGridTestCase
@@ -23,7 +23,7 @@ use WellCommerce\CoreBundle\Component\DataGrid\Column\Column;
 abstract class AbstractDataGridTestCase extends AbstractTestCase
 {
     /**
-     * @return null|\WellCommerce\CoreBundle\Component\DataGrid\DataGridInterface
+     * @return null|\WellCommerce\Component\DataGrid\DataGridInterface
      */
     protected function getDataGrid()
     {
@@ -43,7 +43,7 @@ abstract class AbstractDataGridTestCase extends AbstractTestCase
         $datagrid = $this->getDataGrid();
 
         if (null !== $datagrid) {
-            $this->assertInstanceOf('WellCommerce\CoreBundle\Component\DataGrid\DataGridInterface', $datagrid);
+            $this->assertInstanceOf('WellCommerce\Component\DataGrid\DataGridInterface', $datagrid);
         }
     }
 
@@ -63,7 +63,7 @@ abstract class AbstractDataGridTestCase extends AbstractTestCase
                 ]));
             }
 
-            $this->assertInstanceOf('WellCommerce\CoreBundle\Component\DataGrid\Column\ColumnCollection', $columns);
+            $this->assertInstanceOf('WellCommerce\Component\DataGrid\Column\ColumnCollection', $columns);
             $this->assertCount($previousCount + $newCount, $columns);
         }
     }
@@ -78,10 +78,10 @@ abstract class AbstractDataGridTestCase extends AbstractTestCase
 
             foreach ($requiredColumns as $identifier) {
                 /**
-                 * @var $column \WellCommerce\CoreBundle\Component\DataGrid\Column\ColumnInterface
+                 * @var $column \WellCommerce\Component\DataGrid\Column\ColumnInterface
                  */
                 $column = $columns->get($identifier);
-                $this->assertInstanceOf('WellCommerce\CoreBundle\Component\DataGrid\Column\ColumnInterface', $column);
+                $this->assertInstanceOf('WellCommerce\Component\DataGrid\Column\ColumnInterface', $column);
                 $this->assertEquals($identifier, $column->getId());
             }
         }

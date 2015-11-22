@@ -11,16 +11,16 @@
  */
 namespace WellCommerce\CommonBundle\DataGrid;
 
-use WellCommerce\CoreBundle\Component\DataGrid\AbstractDataGrid;
-use WellCommerce\CoreBundle\Component\DataGrid\Column\Column;
-use WellCommerce\CoreBundle\Component\DataGrid\Column\ColumnCollection;
-use WellCommerce\CoreBundle\Component\DataGrid\Column\Options\Appearance;
-use WellCommerce\CoreBundle\Component\DataGrid\Column\Options\Filter;
-use WellCommerce\CoreBundle\Component\DataGrid\Column\Options\Sorting;
-use WellCommerce\CoreBundle\Component\DataGrid\Configuration\EventHandler\ClickRowEventHandler;
-use WellCommerce\CoreBundle\Component\DataGrid\Configuration\EventHandler\CustomRowEventHandler;
-use WellCommerce\CoreBundle\Component\DataGrid\Configuration\EventHandler\LoadEventHandler;
-use WellCommerce\CoreBundle\Component\DataGrid\Options\OptionsInterface;
+use WellCommerce\CoreBundle\DataGrid\AbstractDataGrid;
+use WellCommerce\Component\DataGrid\Column\Column;
+use WellCommerce\Component\DataGrid\Column\ColumnCollection;
+use WellCommerce\Component\DataGrid\Column\Options\Appearance;
+use WellCommerce\Component\DataGrid\Column\Options\Filter;
+use WellCommerce\Component\DataGrid\Column\Options\Sorting;
+use WellCommerce\Component\DataGrid\Configuration\EventHandler\ClickRowEventHandler;
+use WellCommerce\Component\DataGrid\Configuration\EventHandler\CustomRowEventHandler;
+use WellCommerce\Component\DataGrid\Configuration\EventHandler\LoadEventHandler;
+use WellCommerce\Component\DataGrid\Options\OptionsInterface;
 
 /**
  * Class PackageDataGrid

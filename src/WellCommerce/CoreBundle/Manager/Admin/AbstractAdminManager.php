@@ -19,8 +19,8 @@ use WellCommerce\CoreBundle\Exception\MissingDataGridException;
 use WellCommerce\CoreBundle\Factory\FactoryInterface;
 use WellCommerce\CoreBundle\Manager\AbstractManager;
 use WellCommerce\CoreBundle\Repository\RepositoryInterface;
-use WellCommerce\CoreBundle\Component\DataGrid\DataGridInterface;
-use WellCommerce\CoreBundle\Component\Form\FormBuilderInterface;
+use WellCommerce\Component\DataGrid\DataGridInterface;
+use WellCommerce\Component\Form\FormBuilderInterface;
 
 /**
  * Class AbstractAdminManager

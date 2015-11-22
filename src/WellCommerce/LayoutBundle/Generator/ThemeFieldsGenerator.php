@@ -17,9 +17,9 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\Filesystem\Exception\FileNotFoundException;
 use Symfony\Component\Finder\Finder;
 use WellCommerce\CoreBundle\DependencyInjection\AbstractContainer;
-use WellCommerce\CoreBundle\Component\Form\Elements\Form;
-use WellCommerce\CoreBundle\Component\Form\Elements\Input\TextField;
-use WellCommerce\CoreBundle\Component\Form\FormBuilderInterface;
+use WellCommerce\Component\Form\Elements\Form;
+use WellCommerce\Component\Form\Elements\Input\TextField;
+use WellCommerce\Component\Form\FormBuilderInterface;
 use WellCommerce\LayoutBundle\Entity\Theme;
 
 /**
@@ -228,7 +228,7 @@ class ThemeFieldsGenerator extends AbstractContainer implements ContainerAwareIn
      * @param string $type
      * @param array  $attributes
      *
-     * @return \WellCommerce\CoreBundle\Component\Form\Elements\ElementInterface
+     * @return \WellCommerce\Component\Form\Elements\ElementInterface
      */
     protected function addSizeInput($type, $attributes)
     {

@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\SalesBundle\Twig\Extension;
 
-use WellCommerce\CoreBundle\Component\DataSet\DataSetInterface;
+use WellCommerce\Component\DataSet\DataSetInterface;
 use WellCommerce\SalesBundle\Context\Front\CartContextInterface;
 
 /**
