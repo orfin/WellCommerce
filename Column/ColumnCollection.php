@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Component\DataGrid\Column;
 
-use WellCommerce\CoreBundle\Component\Collection\ArrayCollection;
+use WellCommerce\Component\Collections\ArrayCollection;
 use WellCommerce\Component\DataGrid\Exception\ColumnNotFoundException;
 
 /**
