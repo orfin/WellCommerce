@@ -18,5 +18,12 @@
         <service id="core.event_dispatcher" class="WellCommerce\CoreBundle\EventDispatcher\EventDispatcher">
             <argument type="service" id="event_dispatcher"/>
         </service>
+
+        <service id="breadcrumb.collection" class="WellCommerce\CoreBundle\Service\Breadcrumb\BreadcrumbItemCollection" />
+
+        <service id="twig.extension.breadcrumb" class="WellCommerce\CoreBundle\Twig\Extension\BreadcrumbExtension">
+            <argument type="service" id="breadcrumb.collection"/>
+            <tag name="twig.extension"/>
+        </service>
     </services>
 </container>

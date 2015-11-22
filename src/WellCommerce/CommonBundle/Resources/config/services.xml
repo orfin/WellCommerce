@@ -23,13 +23,6 @@
             </call>
         </service>
 
-        <service id="breadcrumb.collection" class="WellCommerce\CoreBundle\Service\Breadcrumb\BreadcrumbItemCollection" />
-
-        <service id="twig.extension.breadcrumb" class="WellCommerce\CommonBundle\Twig\Extension\BreadcrumbExtension">
-            <argument type="service" id="breadcrumb.collection"/>
-            <tag name="twig.extension"/>
-        </service>
-
         <service id="twig.extension.sorting_helper" class="WellCommerce\CommonBundle\Twig\Extension\SortingHelperExtension">
             <argument type="service" id="request.helper"/>
             <argument type="service" id="translator.helper"/>
