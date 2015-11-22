@@ -12,7 +12,7 @@
 
 namespace WellCommerce\ClientBundle\Manager\Front;
 
-use WellCommerce\CoreBundle\Manager\Front\AbstractFrontManager;
+use WellCommerce\AppBundle\Manager\Front\AbstractFrontManager;
 
 /**
  * Class ClientRegistrationManager

@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\AdminBundle\DependencyInjection;
 
-use WellCommerce\CoreBundle\DependencyInjection\AbstractExtension;
+use WellCommerce\AppBundle\DependencyInjection\AbstractExtension;
 
 /**
  * Class WellCommerceAdminExtension

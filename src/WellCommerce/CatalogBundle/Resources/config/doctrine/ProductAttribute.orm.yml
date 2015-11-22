@@ -9,7 +9,7 @@ WellCommerce\CatalogBundle\Entity\ProductAttribute:
                 strategy: AUTO
     embedded:
         sellPrice:
-            class: WellCommerce\CoreBundle\Entity\DiscountablePrice
+            class: WellCommerce\AppBundle\Entity\DiscountablePrice
             columnPrefix: sell_price_
     fields:
         weight:

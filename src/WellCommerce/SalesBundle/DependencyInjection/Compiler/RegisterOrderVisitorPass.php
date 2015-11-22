@@ -12,7 +12,7 @@
 
 namespace WellCommerce\SalesBundle\DependencyInjection\Compiler;
 
-use WellCommerce\CoreBundle\DependencyInjection\Compiler\AbstractCollectionPass;
+use WellCommerce\AppBundle\DependencyInjection\Compiler\AbstractCollectionPass;
 
 /**
  * Class RegisterOrderVisitorPass

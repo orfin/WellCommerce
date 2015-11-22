@@ -12,7 +12,7 @@
 
 namespace WellCommerce\ClientBundle\Tests\DataSet\Admin;
 
-use WellCommerce\CoreBundle\Test\DataSet\AbstractDataSetTestCase;
+use WellCommerce\AppBundle\Test\DataSet\AbstractDataSetTestCase;
 
 /**
  * Class ClientGroupDataSetTest

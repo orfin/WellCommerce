@@ -13,8 +13,8 @@
 namespace WellCommerce\ClientBundle\Controller\Front;
 
 use WellCommerce\CatalogBundle\Entity\ProductInterface;
-use WellCommerce\CoreBundle\Controller\Front\AbstractFrontController;
-use WellCommerce\CoreBundle\Controller\Front\FrontControllerInterface;
+use WellCommerce\AppBundle\Controller\Front\AbstractFrontController;
+use WellCommerce\AppBundle\Controller\Front\FrontControllerInterface;
 
 /**
  * Class ClientWishlistController

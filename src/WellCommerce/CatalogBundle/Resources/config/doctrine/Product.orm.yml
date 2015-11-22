@@ -9,13 +9,13 @@ WellCommerce\CatalogBundle\Entity\Product:
                 strategy: AUTO
     embedded:
         buyPrice:
-            class: WellCommerce\CoreBundle\Entity\Price
+            class: WellCommerce\AppBundle\Entity\Price
             columnPrefix: buy_price_
         sellPrice:
-            class: WellCommerce\CoreBundle\Entity\DiscountablePrice
+            class: WellCommerce\AppBundle\Entity\DiscountablePrice
             columnPrefix: sell_price_
         dimension:
-            class: WellCommerce\CoreBundle\Entity\Dimension
+            class: WellCommerce\AppBundle\Entity\Dimension
             columnPrefix: dimension_
     fields:
         sku:

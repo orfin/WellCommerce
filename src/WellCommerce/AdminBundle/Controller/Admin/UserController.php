@@ -14,7 +14,7 @@ namespace WellCommerce\AdminBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
-use WellCommerce\CoreBundle\Controller\Admin\AbstractAdminController;
+use WellCommerce\AppBundle\Controller\Admin\AbstractAdminController;
 
 /**
  * Class UserController

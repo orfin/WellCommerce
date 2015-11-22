@@ -13,7 +13,7 @@
 namespace WellCommerce\SalesBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use WellCommerce\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\AppBundle\Factory\AbstractFactory;
 use WellCommerce\SalesBundle\Entity\ShippingMethod;
 
 /**

@@ -13,10 +13,10 @@
 namespace WellCommerce\SalesBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
-use WellCommerce\CoreBundle\Entity\BlameableInterface;
-use WellCommerce\CoreBundle\Entity\HierarchyAwareInterface;
-use WellCommerce\CoreBundle\Entity\TimestampableInterface;
-use WellCommerce\CoreBundle\Entity\TranslatableInterface;
+use WellCommerce\AppBundle\Entity\BlameableInterface;
+use WellCommerce\AppBundle\Entity\HierarchyAwareInterface;
+use WellCommerce\AppBundle\Entity\TimestampableInterface;
+use WellCommerce\AppBundle\Entity\TranslatableInterface;
 
 /**
  * Interface PaymentMethodInterface

@@ -13,7 +13,7 @@
 namespace WellCommerce\ClientBundle\Tests\Entity;
 
 use WellCommerce\ClientBundle\Entity\ClientGroup;
-use WellCommerce\CoreBundle\Test\Entity\AbstractEntityTestCase;
+use WellCommerce\AppBundle\Test\Entity\AbstractEntityTestCase;
 
 /**
  * Class ClientGroupTest

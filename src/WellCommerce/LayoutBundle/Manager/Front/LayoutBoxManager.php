@@ -12,8 +12,8 @@
 
 namespace WellCommerce\LayoutBundle\Manager\Front;
 
-use WellCommerce\CoreBundle\Controller\Box\BoxControllerInterface;
-use WellCommerce\CoreBundle\Manager\Front\AbstractFrontManager;
+use WellCommerce\AppBundle\Controller\Box\BoxControllerInterface;
+use WellCommerce\AppBundle\Manager\Front\AbstractFrontManager;
 use WellCommerce\LayoutBundle\Collection\LayoutBoxCollection;
 use WellCommerce\LayoutBundle\Collection\LayoutBoxSettingsCollection;
 use WellCommerce\LayoutBundle\Exception\LayoutBoxNotFoundException;

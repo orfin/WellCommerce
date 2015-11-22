@@ -12,7 +12,7 @@
 
 namespace WellCommerce\CatalogBundle\DataSet\Admin;
 
-use WellCommerce\CoreBundle\DataSet\AbstractDataSet;
+use WellCommerce\AppBundle\DataSet\AbstractDataSet;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
 
 /**

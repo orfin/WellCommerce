@@ -13,7 +13,7 @@
 namespace WellCommerce\AdminBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
-use WellCommerce\CoreBundle\Entity\HierarchyAwareTrait;
+use WellCommerce\AppBundle\Entity\HierarchyAwareTrait;
 
 /**
  * Class Category

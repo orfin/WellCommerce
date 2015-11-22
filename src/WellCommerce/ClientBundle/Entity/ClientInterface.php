@@ -16,10 +16,10 @@ use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use WellCommerce\CommonBundle\Entity\ShopAwareInterface;
-use WellCommerce\CoreBundle\Entity\AddressInterface;
-use WellCommerce\CoreBundle\Entity\BlameableInterface;
-use WellCommerce\CoreBundle\Entity\ContactDetailsAwareInterface;
-use WellCommerce\CoreBundle\Entity\TimestampableInterface;
+use WellCommerce\AppBundle\Entity\AddressInterface;
+use WellCommerce\AppBundle\Entity\BlameableInterface;
+use WellCommerce\AppBundle\Entity\ContactDetailsAwareInterface;
+use WellCommerce\AppBundle\Entity\TimestampableInterface;
 
 /**
  * Interface ClientInterface

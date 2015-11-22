@@ -14,7 +14,7 @@ namespace WellCommerce\CatalogBundle\Form\Admin\DataTransformer;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
-use WellCommerce\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
+use WellCommerce\AppBundle\Form\DataTransformer\CollectionToArrayTransformer;
 
 /**
  * Class AttributeCollectionToArrayTransformer

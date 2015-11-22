@@ -20,7 +20,7 @@ use WellCommerce\CatalogBundle\Entity\AvailabilityInterface;
 use WellCommerce\CatalogBundle\Entity\ProductAttributeInterface;
 use WellCommerce\CatalogBundle\Entity\ProductInterface;
 use WellCommerce\CatalogBundle\Manager\Admin\ProductAttributeManager;
-use WellCommerce\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
+use WellCommerce\AppBundle\Form\DataTransformer\CollectionToArrayTransformer;
 
 /**
  * Class ProductAttributeCollectionToArrayTransformer

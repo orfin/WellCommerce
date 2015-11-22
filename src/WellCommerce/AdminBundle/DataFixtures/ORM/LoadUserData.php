@@ -16,7 +16,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
 use WellCommerce\AdminBundle\Entity\UserGroupInterface;
 use WellCommerce\AdminBundle\Entity\UserGroupPermission;
-use WellCommerce\CoreBundle\DataFixtures\AbstractDataFixture;
+use WellCommerce\AppBundle\DataFixtures\AbstractDataFixture;
 
 /**
  * Class LoadUserData

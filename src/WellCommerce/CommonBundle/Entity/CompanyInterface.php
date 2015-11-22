@@ -12,8 +12,8 @@
 
 namespace WellCommerce\CommonBundle\Entity;
 
-use WellCommerce\CoreBundle\Entity\BlameableInterface;
-use WellCommerce\CoreBundle\Entity\TimestampableInterface;
+use WellCommerce\AppBundle\Entity\BlameableInterface;
+use WellCommerce\AppBundle\Entity\TimestampableInterface;
 
 /**
  * Interface CompanyInterface

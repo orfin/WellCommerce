@@ -12,7 +12,7 @@
 
 namespace WellCommerce\ClientBundle\Repository;
 
-use WellCommerce\CoreBundle\Repository\AbstractEntityRepository;
+use WellCommerce\AppBundle\Repository\AbstractEntityRepository;
 
 /**
  * Class ClientGroupRepository

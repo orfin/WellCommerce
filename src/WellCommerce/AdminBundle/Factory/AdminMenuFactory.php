@@ -14,7 +14,7 @@ namespace WellCommerce\AdminBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\AdminBundle\Entity\AdminMenu;
-use WellCommerce\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\AppBundle\Factory\AbstractFactory;
 
 /**
  * Class AdminMenuFactory

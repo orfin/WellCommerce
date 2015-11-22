@@ -16,8 +16,8 @@ use Doctrine\Common\Collections\Collection;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
-use WellCommerce\CoreBundle\Doctrine\ORM\Behaviours\EnableableTrait;
-use WellCommerce\CoreBundle\Entity\HierarchyAwareTrait;
+use WellCommerce\AppBundle\Doctrine\ORM\Behaviours\EnableableTrait;
+use WellCommerce\AppBundle\Entity\HierarchyAwareTrait;
 
 /**
  * Class PaymentMethod

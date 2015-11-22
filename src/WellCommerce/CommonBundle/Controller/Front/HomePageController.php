@@ -12,8 +12,8 @@
 
 namespace WellCommerce\CommonBundle\Controller\Front;
 
-use WellCommerce\CoreBundle\Controller\AbstractController;
-use WellCommerce\CoreBundle\Controller\Front\FrontControllerInterface;
+use WellCommerce\AppBundle\Controller\AbstractController;
+use WellCommerce\AppBundle\Controller\Front\FrontControllerInterface;
 
 /**
  * Class HomePageController

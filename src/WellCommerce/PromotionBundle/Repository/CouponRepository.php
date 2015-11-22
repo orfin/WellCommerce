@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\PromotionBundle\Repository;
 
-use WellCommerce\CoreBundle\Repository\AbstractEntityRepository;
+use WellCommerce\AppBundle\Repository\AbstractEntityRepository;
 
 /**
  * Class CouponRepository

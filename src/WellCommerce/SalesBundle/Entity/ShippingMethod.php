@@ -18,8 +18,8 @@ use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 use WellCommerce\CommonBundle\Entity\CurrencyInterface;
 use WellCommerce\CommonBundle\Entity\TaxAwareTrait;
-use WellCommerce\CoreBundle\Doctrine\ORM\Behaviours\EnableableTrait;
-use WellCommerce\CoreBundle\Entity\HierarchyAwareTrait;
+use WellCommerce\AppBundle\Doctrine\ORM\Behaviours\EnableableTrait;
+use WellCommerce\AppBundle\Entity\HierarchyAwareTrait;
 
 /**
  * Class ShippingMethod

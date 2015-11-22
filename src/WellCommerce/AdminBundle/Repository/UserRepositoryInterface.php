@@ -13,7 +13,7 @@
 namespace WellCommerce\AdminBundle\Repository;
 
 use Symfony\Component\Security\Core\User\UserProviderInterface;
-use WellCommerce\CoreBundle\Repository\RepositoryInterface;
+use WellCommerce\AppBundle\Repository\RepositoryInterface;
 
 /**
  * Interface UserRepositoryInterface

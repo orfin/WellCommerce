@@ -13,7 +13,7 @@
 namespace WellCommerce\CmsBundle\DataSet\Transformer;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use WellCommerce\CoreBundle\Helper\Image\ImageHelperInterface;
+use WellCommerce\AppBundle\Helper\Image\ImageHelperInterface;
 use WellCommerce\Component\DataSet\Transformer\AbstractDataSetTransformer;
 
 /**

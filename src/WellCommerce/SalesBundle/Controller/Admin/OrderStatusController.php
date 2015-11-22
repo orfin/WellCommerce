@@ -12,7 +12,7 @@
 
 namespace WellCommerce\SalesBundle\Controller\Admin;
 
-use WellCommerce\CoreBundle\Controller\Admin\AbstractAdminController;
+use WellCommerce\AppBundle\Controller\Admin\AbstractAdminController;
 
 /**
  * Class OrderStatusController

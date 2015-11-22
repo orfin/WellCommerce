@@ -14,7 +14,7 @@ namespace WellCommerce\CommonBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use WellCommerce\CoreBundle\Controller\Admin\AbstractAdminController;
+use WellCommerce\AppBundle\Controller\Admin\AbstractAdminController;
 
 /**
  * Class RoutingController

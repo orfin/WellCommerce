@@ -2,7 +2,7 @@
 
 namespace WellCommerce\SalesBundle\Entity;
 
-use WellCommerce\CoreBundle\Doctrine\ORM\Behaviours\Timestampable\TimestampableTrait;
+use WellCommerce\AppBundle\Doctrine\ORM\Behaviours\Timestampable\TimestampableTrait;
 
 /**
  * Class PaymentMethodConfiguration

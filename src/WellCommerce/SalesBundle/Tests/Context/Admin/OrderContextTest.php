@@ -12,7 +12,7 @@
 
 namespace WellCommerce\SalesBundle\Tests\Context\Admin;
 
-use WellCommerce\CoreBundle\Test\AbstractTestCase;
+use WellCommerce\AppBundle\Test\AbstractTestCase;
 
 /**
  * Class OrderContextTest

@@ -13,7 +13,7 @@
 namespace WellCommerce\CmsBundle\Repository;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use WellCommerce\CoreBundle\Repository\RepositoryInterface;
+use WellCommerce\AppBundle\Repository\RepositoryInterface;
 
 /**
  * Interface MediaRepositoryInterface

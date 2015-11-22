@@ -12,7 +12,7 @@
 
 namespace WellCommerce\AdminBundle\Controller\Admin;
 
-use WellCommerce\CoreBundle\Controller\Admin\AbstractAdminController;
+use WellCommerce\AppBundle\Controller\Admin\AbstractAdminController;
 
 /**
  * Class UserGroupController

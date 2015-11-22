@@ -13,7 +13,7 @@
 namespace WellCommerce\CatalogBundle\Repository;
 
 use WellCommerce\CatalogBundle\Entity\Product;
-use WellCommerce\CoreBundle\Repository\RepositoryInterface;
+use WellCommerce\AppBundle\Repository\RepositoryInterface;
 
 /**
  * Interface ProductAttributeRepositoryInterface

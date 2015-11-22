@@ -12,7 +12,7 @@
 
 namespace WellCommerce\ClientBundle\Controller\Box;
 
-use WellCommerce\CoreBundle\Controller\Box\AbstractBoxController;
+use WellCommerce\AppBundle\Controller\Box\AbstractBoxController;
 
 /**
  * Class ClientSettingsBoxController

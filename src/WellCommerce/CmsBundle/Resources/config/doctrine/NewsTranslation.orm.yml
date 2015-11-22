@@ -3,7 +3,7 @@ WellCommerce\CmsBundle\Entity\NewsTranslation:
     table: news_translation
     embedded:
         meta:
-            class: WellCommerce\CoreBundle\Entity\Meta
+            class: WellCommerce\AppBundle\Entity\Meta
     fields:
         topic:
             type: string

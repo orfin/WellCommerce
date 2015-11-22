@@ -13,7 +13,7 @@
 namespace WellCommerce\SalesBundle\Manager\Front;
 
 use WellCommerce\ClientBundle\Entity\ClientInterface;
-use WellCommerce\CoreBundle\Manager\Front\AbstractFrontManager;
+use WellCommerce\AppBundle\Manager\Front\AbstractFrontManager;
 use WellCommerce\SalesBundle\Entity\CartInterface;
 
 /**

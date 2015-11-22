@@ -14,7 +14,7 @@ namespace WellCommerce\CatalogBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use WellCommerce\CatalogBundle\Entity\Unit;
-use WellCommerce\CoreBundle\DataFixtures\AbstractDataFixture;
+use WellCommerce\AppBundle\DataFixtures\AbstractDataFixture;
 
 /**
  * Class LoadUnitData

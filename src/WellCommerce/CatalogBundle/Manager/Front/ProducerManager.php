@@ -12,7 +12,7 @@
 
 namespace WellCommerce\CatalogBundle\Manager\Front;
 
-use WellCommerce\CoreBundle\Manager\Front\AbstractFrontManager;
+use WellCommerce\AppBundle\Manager\Front\AbstractFrontManager;
 use WellCommerce\Component\DataSet\Conditions\Condition\Eq;
 use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
 

@@ -14,7 +14,7 @@ namespace WellCommerce\ClientBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\ClientBundle\Entity\ClientGroup;
-use WellCommerce\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\AppBundle\Factory\AbstractFactory;
 
 /**
  * Class ClientGroupFactory

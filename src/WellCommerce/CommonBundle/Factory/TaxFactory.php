@@ -13,7 +13,7 @@
 namespace WellCommerce\CommonBundle\Factory;
 
 use WellCommerce\CommonBundle\Entity\Tax;
-use WellCommerce\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\AppBundle\Factory\AbstractFactory;
 
 /**
  * Class TaxFactory

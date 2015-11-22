@@ -12,7 +12,7 @@
 namespace WellCommerce\CommonBundle\Form\Admin;
 
 use WellCommerce\CommonBundle\Repository\CurrencyRepositoryInterface;
-use WellCommerce\CoreBundle\Form\AbstractFormBuilder;
+use WellCommerce\AppBundle\Form\AbstractFormBuilder;
 use WellCommerce\Component\Form\Elements\FormInterface;
 
 /**

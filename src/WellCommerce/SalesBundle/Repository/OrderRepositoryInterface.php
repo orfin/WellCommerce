@@ -12,7 +12,7 @@
 
 namespace WellCommerce\SalesBundle\Repository;
 
-use WellCommerce\CoreBundle\Repository\RepositoryInterface;
+use WellCommerce\AppBundle\Repository\RepositoryInterface;
 
 /**
  * Interface OrderRepositoryInterface

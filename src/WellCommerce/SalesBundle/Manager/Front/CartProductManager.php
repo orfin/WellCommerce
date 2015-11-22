@@ -14,7 +14,7 @@ namespace WellCommerce\SalesBundle\Manager\Front;
 
 use WellCommerce\CatalogBundle\Entity\ProductAttributeInterface;
 use WellCommerce\CatalogBundle\Entity\ProductInterface;
-use WellCommerce\CoreBundle\Manager\Front\AbstractFrontManager;
+use WellCommerce\AppBundle\Manager\Front\AbstractFrontManager;
 use WellCommerce\SalesBundle\Entity\CartInterface;
 use WellCommerce\SalesBundle\Entity\CartProductInterface;
 use WellCommerce\SalesBundle\Exception\DeleteCartItemException;

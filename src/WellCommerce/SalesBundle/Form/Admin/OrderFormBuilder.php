@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\SalesBundle\Form\Admin;
 
-use WellCommerce\CoreBundle\Form\AbstractFormBuilder;
+use WellCommerce\AppBundle\Form\AbstractFormBuilder;
 use WellCommerce\Component\Form\Elements\ElementInterface;
 use WellCommerce\Component\Form\Elements\FormInterface;
 use WellCommerce\SalesBundle\Context\Admin\OrderContextInterface;

@@ -12,8 +12,8 @@
 
 namespace WellCommerce\CmsBundle\Controller\Box;
 
-use WellCommerce\CoreBundle\Controller\Box\AbstractBoxController;
-use WellCommerce\CoreBundle\Controller\Box\BoxControllerInterface;
+use WellCommerce\AppBundle\Controller\Box\AbstractBoxController;
+use WellCommerce\AppBundle\Controller\Box\BoxControllerInterface;
 
 /**
  * Class ContactBoxController

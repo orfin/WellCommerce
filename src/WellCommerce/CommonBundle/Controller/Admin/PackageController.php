@@ -14,7 +14,7 @@ namespace WellCommerce\CommonBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\CommonBundle\Helper\PackageHelperInterface;
-use WellCommerce\CoreBundle\Controller\Admin\AbstractAdminController;
+use WellCommerce\AppBundle\Controller\Admin\AbstractAdminController;
 
 /**
  * Class PackageController
@@ -75,7 +75,7 @@ class PackageController extends AbstractAdminController
     }
 
     /**
-     * @return \WellCommerce\CoreBundle\Helper\Environment\EnvironmentHelperInterface
+     * @return \WellCommerce\AppBundle\Helper\Environment\EnvironmentHelperInterface
      */
     protected function getHelper()
     {

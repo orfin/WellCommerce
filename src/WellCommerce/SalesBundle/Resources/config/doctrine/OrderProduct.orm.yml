@@ -9,10 +9,10 @@ WellCommerce\SalesBundle\Entity\OrderProduct:
                 strategy: AUTO
     embedded:
         buyPrice:
-            class: WellCommerce\CoreBundle\Entity\Price
+            class: WellCommerce\AppBundle\Entity\Price
             columnPrefix: buy_price_
         sellPrice:
-            class: WellCommerce\CoreBundle\Entity\Price
+            class: WellCommerce\AppBundle\Entity\Price
             columnPrefix: sell_price_
     fields:
         quantity:

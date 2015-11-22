@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\CmsBundle\Repository;
 
-use WellCommerce\CoreBundle\Repository\AbstractEntityRepository;
+use WellCommerce\AppBundle\Repository\AbstractEntityRepository;
 
 /**
  * Class ContactRepository

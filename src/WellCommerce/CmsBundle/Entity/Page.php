@@ -17,7 +17,7 @@ use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 use WellCommerce\CommonBundle\Entity\ShopCollectionAwareTrait;
-use WellCommerce\CoreBundle\Entity\HierarchyAwareTrait;
+use WellCommerce\AppBundle\Entity\HierarchyAwareTrait;
 
 /**
  * Class Page

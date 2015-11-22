@@ -13,7 +13,7 @@
 namespace WellCommerce\CommonBundle\Formatter;
 
 use WellCommerce\CommonBundle\Exception\CurrencyFormatterException;
-use WellCommerce\CoreBundle\Helper\Request\RequestHelperInterface;
+use WellCommerce\AppBundle\Helper\Request\RequestHelperInterface;
 
 /**
  * Class CurrencyFormatter

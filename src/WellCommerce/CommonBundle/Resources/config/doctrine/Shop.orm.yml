@@ -9,7 +9,7 @@ WellCommerce\CommonBundle\Entity\Shop:
                 strategy: IDENTITY
     embedded:
         mailerConfiguration:
-            class: WellCommerce\CoreBundle\Entity\MailerConfiguration
+            class: WellCommerce\AppBundle\Entity\MailerConfiguration
             columnPrefix: mailer_configuration_
     fields:
         name:

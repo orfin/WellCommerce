@@ -12,7 +12,7 @@
 
 namespace WellCommerce\CatalogBundle\Tests\Manager\Admin;
 
-use WellCommerce\CoreBundle\Test\Manager\Admin\AbstractAdminManagerTestCase;
+use WellCommerce\AppBundle\Test\Manager\Admin\AbstractAdminManagerTestCase;
 
 /**
  * Class CategoryManagerTest
@@ -51,7 +51,7 @@ class CategoryManagerTest extends AbstractAdminManagerTestCase
         try {
             $datagrid = $this->get()->getDataGrid();
         } catch (\Exception $e) {
-            $this->assertInstanceOf('WellCommerce\CoreBundle\Exception\MissingDataGridException', $e);
+            $this->assertInstanceOf('WellCommerce\AppBundle\Exception\MissingDataGridException', $e);
         }
     }
 }

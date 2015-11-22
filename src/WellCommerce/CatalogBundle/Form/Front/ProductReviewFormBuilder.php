@@ -12,7 +12,7 @@
 
 namespace WellCommerce\CatalogBundle\Form\Front;
 
-use WellCommerce\CoreBundle\Form\AbstractFormBuilder;
+use WellCommerce\AppBundle\Form\AbstractFormBuilder;
 use WellCommerce\Component\Form\Elements\FormInterface;
 
 /**

@@ -16,7 +16,7 @@ use Knp\DoctrineBehaviors\Model\Translatable\Translation;
 use WellCommerce\CommonBundle\Entity\Behaviours\RoutableTrait;
 use WellCommerce\CommonBundle\Entity\RoutableSubjectInterface;
 use WellCommerce\CommonBundle\Entity\LocaleAwareInterface;
-use WellCommerce\CoreBundle\Entity\Meta;
+use WellCommerce\AppBundle\Entity\Meta;
 
 /**
  * Class ProductTranslation

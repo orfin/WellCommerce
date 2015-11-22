@@ -14,8 +14,8 @@ namespace WellCommerce\CommonBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\CommonBundle\Entity\Shop;
-use WellCommerce\CoreBundle\Entity\MailerConfiguration;
-use WellCommerce\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\AppBundle\Entity\MailerConfiguration;
+use WellCommerce\AppBundle\Factory\AbstractFactory;
 
 /**
  * Class ShopFactory

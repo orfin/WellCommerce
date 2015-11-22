@@ -20,10 +20,10 @@ use WellCommerce\CmsBundle\DataFixtures\ORM\LoadMediaData;
 use WellCommerce\CommonBundle\DataFixtures\ORM\LoadCurrencyData;
 use WellCommerce\CommonBundle\DataFixtures\ORM\LoadTaxData;
 use WellCommerce\CommonBundle\Helper\Sluggable;
-use WellCommerce\CoreBundle\DataFixtures\AbstractDataFixture;
-use WellCommerce\CoreBundle\Entity\Dimension;
-use WellCommerce\CoreBundle\Entity\DiscountablePrice;
-use WellCommerce\CoreBundle\Entity\Price;
+use WellCommerce\AppBundle\DataFixtures\AbstractDataFixture;
+use WellCommerce\AppBundle\Entity\Dimension;
+use WellCommerce\AppBundle\Entity\DiscountablePrice;
+use WellCommerce\AppBundle\Entity\Price;
 
 /**
  * Class LoadProductData

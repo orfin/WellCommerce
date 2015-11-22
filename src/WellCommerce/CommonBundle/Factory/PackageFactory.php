@@ -13,8 +13,8 @@
 namespace WellCommerce\CommonBundle\Factory;
 
 use WellCommerce\CommonBundle\Entity\Package;
-use WellCommerce\CoreBundle\Factory\AbstractFactory;
-use WellCommerce\CoreBundle\Factory\FactoryInterface;
+use WellCommerce\AppBundle\Factory\AbstractFactory;
+use WellCommerce\AppBundle\Factory\FactoryInterface;
 
 /**
  * Class ChannelFactory

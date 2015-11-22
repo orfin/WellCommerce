@@ -14,9 +14,9 @@ namespace WellCommerce\CatalogBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
-use WellCommerce\CoreBundle\Doctrine\ORM\Behaviours\PhotoTrait;
-use WellCommerce\CoreBundle\Entity\DiscountablePrice;
-use WellCommerce\CoreBundle\Entity\HierarchyAwareTrait;
+use WellCommerce\AppBundle\Doctrine\ORM\Behaviours\PhotoTrait;
+use WellCommerce\AppBundle\Entity\DiscountablePrice;
+use WellCommerce\AppBundle\Entity\HierarchyAwareTrait;
 
 /**
  * Class ProductAttribute

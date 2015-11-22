@@ -9,7 +9,7 @@ WellCommerce\SalesBundle\Entity\ShippingMethodCost:
                 strategy: AUTO
     embedded:
         cost:
-            class: WellCommerce\CoreBundle\Entity\Price
+            class: WellCommerce\AppBundle\Entity\Price
             columnPrefix: cost_
     fields:
         rangeFrom:

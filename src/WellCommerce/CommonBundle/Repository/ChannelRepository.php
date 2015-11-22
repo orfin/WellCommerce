@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\CommonBundle\Repository;
 
-use WellCommerce\CoreBundle\Repository\AbstractEntityRepository;
+use WellCommerce\AppBundle\Repository\AbstractEntityRepository;
 
 /**
  * Class ChannelRepository

@@ -13,7 +13,7 @@
 namespace WellCommerce\CommonBundle\Twig\Extension;
 
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use WellCommerce\CoreBundle\Helper\Request\RequestHelperInterface;
+use WellCommerce\AppBundle\Helper\Request\RequestHelperInterface;
 
 /**
  * Class DynamicRoutingExtension

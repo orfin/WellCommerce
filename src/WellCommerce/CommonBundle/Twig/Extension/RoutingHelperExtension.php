@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\CommonBundle\Twig\Extension;
 
-use WellCommerce\CoreBundle\Helper\Request\RequestHelperInterface;
+use WellCommerce\AppBundle\Helper\Request\RequestHelperInterface;
 
 /**
  * Class RoutingHelperExtension

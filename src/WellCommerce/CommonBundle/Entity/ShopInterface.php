@@ -13,9 +13,9 @@
 namespace WellCommerce\CommonBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
-use WellCommerce\CoreBundle\Entity\BlameableInterface;
-use WellCommerce\CoreBundle\Entity\MailerConfiguration;
-use WellCommerce\CoreBundle\Entity\TimestampableInterface;
+use WellCommerce\AppBundle\Entity\BlameableInterface;
+use WellCommerce\AppBundle\Entity\MailerConfiguration;
+use WellCommerce\AppBundle\Entity\TimestampableInterface;
 use WellCommerce\LayoutBundle\Entity\ThemeAwareInterface;
 
 /**

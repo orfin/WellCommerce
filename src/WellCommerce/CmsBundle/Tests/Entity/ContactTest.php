@@ -13,7 +13,7 @@
 namespace WellCommerce\CmsBundle\Tests\Entity;
 
 use WellCommerce\CmsBundle\Entity\Contact;
-use WellCommerce\CoreBundle\Test\Entity\AbstractEntityTestCase;
+use WellCommerce\AppBundle\Test\Entity\AbstractEntityTestCase;
 
 /**
  * Class ContactTest

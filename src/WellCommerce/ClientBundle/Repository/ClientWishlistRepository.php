@@ -13,7 +13,7 @@
 namespace WellCommerce\ClientBundle\Repository;
 
 use Doctrine\ORM\Query\Expr;
-use WellCommerce\CoreBundle\Repository\AbstractEntityRepository;
+use WellCommerce\AppBundle\Repository\AbstractEntityRepository;
 
 /**
  * Class ClientWishlistRepository

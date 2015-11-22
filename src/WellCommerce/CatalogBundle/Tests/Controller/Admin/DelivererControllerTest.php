@@ -13,7 +13,7 @@
 namespace WellCommerce\CatalogBundle\Tests\Controller\Admin;
 
 use WellCommerce\CatalogBundle\Entity\DelivererInterface;
-use WellCommerce\CoreBundle\Test\Controller\Admin\AbstractAdminControllerTestCase;
+use WellCommerce\AppBundle\Test\Controller\Admin\AbstractAdminControllerTestCase;
 
 /**
  * Class DelivererControllerTest

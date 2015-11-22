@@ -14,7 +14,7 @@ namespace WellCommerce\CmsBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\CmsBundle\Entity\Page;
-use WellCommerce\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\AppBundle\Factory\AbstractFactory;
 
 /**
  * Class PageFactory

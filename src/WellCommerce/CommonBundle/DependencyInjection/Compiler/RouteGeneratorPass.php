@@ -12,7 +12,7 @@
 
 namespace WellCommerce\CommonBundle\DependencyInjection\Compiler;
 
-use WellCommerce\CoreBundle\DependencyInjection\Compiler\AbstractCollectionPass;
+use WellCommerce\AppBundle\DependencyInjection\Compiler\AbstractCollectionPass;
 
 /**
  * Class RouteGeneratorPass

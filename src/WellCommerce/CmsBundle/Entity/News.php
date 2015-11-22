@@ -16,7 +16,7 @@ use DateTime;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
-use WellCommerce\CoreBundle\Doctrine\ORM\Behaviours\PhotoTrait;
+use WellCommerce\AppBundle\Doctrine\ORM\Behaviours\PhotoTrait;
 
 /**
  * Class News

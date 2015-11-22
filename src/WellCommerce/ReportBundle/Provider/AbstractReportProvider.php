@@ -12,8 +12,8 @@
 
 namespace WellCommerce\ReportBundle\Provider;
 
-use WellCommerce\CoreBundle\DependencyInjection\AbstractContainerAware;
-use WellCommerce\CoreBundle\Repository\RepositoryInterface;
+use WellCommerce\AppBundle\DependencyInjection\AbstractContainerAware;
+use WellCommerce\AppBundle\Repository\RepositoryInterface;
 use WellCommerce\SalesBundle\Entity\OrderInterface;
 
 /**

@@ -12,9 +12,9 @@
 
 namespace WellCommerce\CatalogBundle\Entity;
 
-use WellCommerce\CoreBundle\Entity\BlameableInterface;
-use WellCommerce\CoreBundle\Entity\TimestampableInterface;
-use WellCommerce\CoreBundle\Entity\TranslatableInterface;
+use WellCommerce\AppBundle\Entity\BlameableInterface;
+use WellCommerce\AppBundle\Entity\TimestampableInterface;
+use WellCommerce\AppBundle\Entity\TranslatableInterface;
 
 /**
  * Interface AvailabilityInterface

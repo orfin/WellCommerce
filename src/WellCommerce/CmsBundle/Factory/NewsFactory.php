@@ -13,7 +13,7 @@
 namespace WellCommerce\CmsBundle\Factory;
 
 use WellCommerce\CmsBundle\Entity\News;
-use WellCommerce\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\AppBundle\Factory\AbstractFactory;
 
 class NewsFactory extends AbstractFactory
 {

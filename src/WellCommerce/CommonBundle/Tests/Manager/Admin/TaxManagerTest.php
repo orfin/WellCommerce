@@ -12,7 +12,7 @@
 
 namespace WellCommerce\CommonBundle\Tests\Manager\Admin;
 
-use WellCommerce\CoreBundle\Test\Manager\Admin\AbstractAdminManagerTestCase;
+use WellCommerce\AppBundle\Test\Manager\Admin\AbstractAdminManagerTestCase;
 
 /**
  * Class TaxManagerTest

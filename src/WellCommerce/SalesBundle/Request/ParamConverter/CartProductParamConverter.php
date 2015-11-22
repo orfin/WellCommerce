@@ -12,7 +12,7 @@
 
 namespace WellCommerce\SalesBundle\Request\ParamConverter;
 
-use WellCommerce\CoreBundle\Request\ParamConverter\AbstractEntityParamConverter;
+use WellCommerce\AppBundle\Request\ParamConverter\AbstractEntityParamConverter;
 
 /**
  * Class CartProductParamConverter

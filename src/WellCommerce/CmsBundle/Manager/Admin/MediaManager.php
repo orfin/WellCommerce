@@ -12,7 +12,7 @@
 
 namespace WellCommerce\CmsBundle\Manager\Admin;
 
-use WellCommerce\CoreBundle\Manager\Admin\AbstractAdminManager;
+use WellCommerce\AppBundle\Manager\Admin\AbstractAdminManager;
 
 /**
  * Class MediaManager

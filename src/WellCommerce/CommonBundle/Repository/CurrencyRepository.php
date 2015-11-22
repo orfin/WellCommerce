@@ -12,7 +12,7 @@
 namespace WellCommerce\CommonBundle\Repository;
 
 use Symfony\Component\Intl\Intl;
-use WellCommerce\CoreBundle\Repository\AbstractEntityRepository;
+use WellCommerce\AppBundle\Repository\AbstractEntityRepository;
 
 /**
  * Class CurrencyRepository

@@ -12,7 +12,7 @@
 
 namespace WellCommerce\CatalogBundle\Tests\DataGrid;
 
-use WellCommerce\CoreBundle\Test\DataGrid\AbstractDataGridTestCase;
+use WellCommerce\AppBundle\Test\DataGrid\AbstractDataGridTestCase;
 
 /**
  * Class ProducerDataGridTest

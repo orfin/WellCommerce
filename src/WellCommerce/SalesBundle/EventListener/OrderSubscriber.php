@@ -11,8 +11,8 @@
  */
 namespace WellCommerce\SalesBundle\EventListener;
 
-use WellCommerce\CoreBundle\Event\ResourceEvent;
-use WellCommerce\CoreBundle\EventListener\AbstractEventSubscriber;
+use WellCommerce\AppBundle\Event\ResourceEvent;
+use WellCommerce\AppBundle\EventListener\AbstractEventSubscriber;
 use WellCommerce\SalesBundle\Entity\OrderInterface;
 use WellCommerce\SalesBundle\Entity\OrderTotalDetailInterface;
 use WellCommerce\SalesBundle\Factory\OrderTotalFactory;

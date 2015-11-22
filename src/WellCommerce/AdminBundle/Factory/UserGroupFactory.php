@@ -13,7 +13,7 @@
 namespace WellCommerce\AdminBundle\Factory;
 
 use WellCommerce\AdminBundle\Entity\UserGroup;
-use WellCommerce\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\AppBundle\Factory\AbstractFactory;
 
 /**
  * Class UserGroupFactory

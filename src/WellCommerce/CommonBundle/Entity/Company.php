@@ -14,7 +14,7 @@ namespace WellCommerce\CommonBundle\Entity;
 
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
-use WellCommerce\CoreBundle\Doctrine\ORM\Behaviours\PhotoTrait;
+use WellCommerce\AppBundle\Doctrine\ORM\Behaviours\PhotoTrait;
 
 /**
  * Class Company

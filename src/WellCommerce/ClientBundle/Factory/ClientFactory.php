@@ -14,7 +14,7 @@ namespace WellCommerce\ClientBundle\Factory;
 
 use WellCommerce\ClientBundle\Entity\Client;
 use WellCommerce\ClientBundle\Entity\ClientContactDetails;
-use WellCommerce\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\AppBundle\Factory\AbstractFactory;
 
 /**
  * Class ClientFactory

@@ -13,9 +13,9 @@
 namespace WellCommerce\CatalogBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
-use WellCommerce\CoreBundle\Entity\DiscountablePrice;
-use WellCommerce\CoreBundle\Entity\HierarchyAwareInterface;
-use WellCommerce\CoreBundle\Entity\TimestampableInterface;
+use WellCommerce\AppBundle\Entity\DiscountablePrice;
+use WellCommerce\AppBundle\Entity\HierarchyAwareInterface;
+use WellCommerce\AppBundle\Entity\TimestampableInterface;
 
 /**
  * Interface ProductAttributeInterface

@@ -16,7 +16,7 @@ use WellCommerce\CommonBundle\Entity\CurrencyRate;
 use WellCommerce\CommonBundle\Exception\MissingCurrencyRateException;
 use WellCommerce\CommonBundle\Exception\MissingCurrencyRatesException;
 use WellCommerce\CommonBundle\Repository\CurrencyRateRepositoryInterface;
-use WellCommerce\CoreBundle\Helper\Request\RequestHelperInterface;
+use WellCommerce\AppBundle\Helper\Request\RequestHelperInterface;
 
 /**
  * Class CurrencyConverter

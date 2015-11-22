@@ -14,7 +14,7 @@ namespace WellCommerce\CmsBundle\Tests\Controller\Admin;
 
 use Doctrine\Common\Collections\Criteria;
 use WellCommerce\CmsBundle\Entity\PageInterface;
-use WellCommerce\CoreBundle\Test\Controller\Admin\AbstractAdminControllerTestCase;
+use WellCommerce\AppBundle\Test\Controller\Admin\AbstractAdminControllerTestCase;
 
 /**
  * Class PageControllerTest

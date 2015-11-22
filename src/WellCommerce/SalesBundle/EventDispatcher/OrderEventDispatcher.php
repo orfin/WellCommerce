@@ -12,7 +12,7 @@
 
 namespace WellCommerce\SalesBundle\EventDispatcher;
 
-use WellCommerce\CoreBundle\EventDispatcher\EventDispatcher;
+use WellCommerce\AppBundle\EventDispatcher\EventDispatcher;
 
 /**
  * Class OrderEventDispatcher

@@ -14,7 +14,7 @@ namespace WellCommerce\CatalogBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\CatalogBundle\Entity\ProductStatus;
-use WellCommerce\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\AppBundle\Factory\AbstractFactory;
 
 /**
  * Class ProductStatusFactory

@@ -14,7 +14,7 @@ namespace WellCommerce\SearchBundle\Manager;
 
 use Ivory\LuceneSearchBundle\Model\LuceneManager;
 use Symfony\Component\HttpKernel\KernelInterface;
-use WellCommerce\CoreBundle\Helper\Helper;
+use WellCommerce\AppBundle\Helper\Helper;
 use WellCommerce\SearchBundle\Query\Term;
 
 /**

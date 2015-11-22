@@ -14,7 +14,7 @@ namespace WellCommerce\CatalogBundle\Tests\Controller\Admin;
 
 use Doctrine\Common\Collections\Criteria;
 use WellCommerce\CatalogBundle\Entity\CategoryInterface;
-use WellCommerce\CoreBundle\Test\Controller\Admin\AbstractAdminControllerTestCase;
+use WellCommerce\AppBundle\Test\Controller\Admin\AbstractAdminControllerTestCase;
 
 /**
  * Class CategoryControllerTest

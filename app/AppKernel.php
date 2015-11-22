@@ -40,7 +40,7 @@ class AppKernel extends Kernel
             new Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
             new Ivory\LuceneSearchBundle\IvoryLuceneSearchBundle(),
             // WellCommerce bundles
-            new WellCommerce\CoreBundle\WellCommerceCoreBundle(),
+            new WellCommerce\AppBundle\WellCommerceAppBundle(),
             new WellCommerce\AdminBundle\WellCommerceAdminBundle(),
             new WellCommerce\CommonBundle\WellCommerceCommonBundle(),
             new WellCommerce\ReportBundle\WellCommerceReportBundle(),

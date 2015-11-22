@@ -19,12 +19,12 @@ use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 use WellCommerce\CatalogBundle\Entity\Attribute\GroupInterface;
 use WellCommerce\CommonBundle\Entity\ShopCollectionAwareTrait;
 use WellCommerce\CommonBundle\Entity\TaxInterface;
-use WellCommerce\CoreBundle\Doctrine\ORM\Behaviours\EnableableTrait;
-use WellCommerce\CoreBundle\Doctrine\ORM\Behaviours\PhotoTrait;
-use WellCommerce\CoreBundle\Entity\Dimension;
-use WellCommerce\CoreBundle\Entity\DiscountablePrice;
-use WellCommerce\CoreBundle\Entity\HierarchyAwareTrait;
-use WellCommerce\CoreBundle\Entity\Price;
+use WellCommerce\AppBundle\Doctrine\ORM\Behaviours\EnableableTrait;
+use WellCommerce\AppBundle\Doctrine\ORM\Behaviours\PhotoTrait;
+use WellCommerce\AppBundle\Entity\Dimension;
+use WellCommerce\AppBundle\Entity\DiscountablePrice;
+use WellCommerce\AppBundle\Entity\HierarchyAwareTrait;
+use WellCommerce\AppBundle\Entity\Price;
 
 /**
  * Class Product

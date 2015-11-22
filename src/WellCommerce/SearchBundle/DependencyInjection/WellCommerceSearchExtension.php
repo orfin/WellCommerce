@@ -15,7 +15,7 @@ namespace WellCommerce\SearchBundle\DependencyInjection;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader;
-use WellCommerce\CoreBundle\DependencyInjection\AbstractExtension;
+use WellCommerce\AppBundle\DependencyInjection\AbstractExtension;
 
 /**
  * Class WellCommerceSearchExtension

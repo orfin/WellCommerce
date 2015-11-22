@@ -14,9 +14,9 @@ namespace WellCommerce\ClientBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
 use WellCommerce\CmsBundle\Entity\PageInterface;
-use WellCommerce\CoreBundle\Entity\BlameableInterface;
-use WellCommerce\CoreBundle\Entity\TimestampableInterface;
-use WellCommerce\CoreBundle\Entity\TranslatableInterface;
+use WellCommerce\AppBundle\Entity\BlameableInterface;
+use WellCommerce\AppBundle\Entity\TimestampableInterface;
+use WellCommerce\AppBundle\Entity\TranslatableInterface;
 
 /**
  * Interface ClientGroupInterface

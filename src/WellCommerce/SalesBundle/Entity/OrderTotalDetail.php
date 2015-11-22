@@ -2,7 +2,7 @@
 
 namespace WellCommerce\SalesBundle\Entity;
 
-use WellCommerce\CoreBundle\Entity\HierarchyAwareTrait;
+use WellCommerce\AppBundle\Entity\HierarchyAwareTrait;
 
 /**
  * Class OrderTotalDetail

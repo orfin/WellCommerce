@@ -14,7 +14,7 @@ namespace WellCommerce\ClientBundle\Manager\Front;
 
 use WellCommerce\ClientBundle\Entity\ClientInterface;
 use WellCommerce\ClientBundle\Exception\ResetPasswordException;
-use WellCommerce\CoreBundle\Manager\Front\AbstractFrontManager;
+use WellCommerce\AppBundle\Manager\Front\AbstractFrontManager;
 
 /**
  * Class ClientForgotPasswordManager

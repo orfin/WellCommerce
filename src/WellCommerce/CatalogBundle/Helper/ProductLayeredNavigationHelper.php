@@ -15,7 +15,7 @@ namespace WellCommerce\CatalogBundle\Helper;
 use Doctrine\Common\Collections\Criteria;
 use WellCommerce\CatalogBundle\Entity\ProducerInterface;
 use WellCommerce\CatalogBundle\Repository\ProducerRepositoryInterface;
-use WellCommerce\CoreBundle\DependencyInjection\AbstractContainerAware;
+use WellCommerce\AppBundle\DependencyInjection\AbstractContainerAware;
 use WellCommerce\Component\DataSet\Conditions\Condition\Gte;
 use WellCommerce\Component\DataSet\Conditions\Condition\In;
 use WellCommerce\Component\DataSet\Conditions\Condition\Lte;

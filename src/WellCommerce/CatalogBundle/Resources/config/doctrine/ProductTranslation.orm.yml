@@ -3,7 +3,7 @@ WellCommerce\CatalogBundle\Entity\ProductTranslation:
     table: product_translation
     embedded:
         meta:
-            class: WellCommerce\CoreBundle\Entity\Meta
+            class: WellCommerce\AppBundle\Entity\Meta
     fields:
         name:
             type: string

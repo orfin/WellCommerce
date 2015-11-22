@@ -18,7 +18,7 @@ use WellCommerce\ClientBundle\Entity\ClientBillingAddressInterface;
 use WellCommerce\ClientBundle\Entity\ClientContactDetailsInterface;
 use WellCommerce\ClientBundle\Entity\ClientShippingAddressInterface;
 use WellCommerce\CommonBundle\Entity\ShopAwareInterface;
-use WellCommerce\CoreBundle\Entity\TimestampableInterface;
+use WellCommerce\AppBundle\Entity\TimestampableInterface;
 use WellCommerce\PromotionBundle\Entity\CouponAwareInterface;
 use WellCommerce\SalesBundle\Calculator\ShippingCalculatorSubjectInterface;
 

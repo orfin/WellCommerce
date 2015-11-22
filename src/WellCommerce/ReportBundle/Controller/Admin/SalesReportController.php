@@ -14,7 +14,7 @@ namespace WellCommerce\ReportBundle\Controller\Admin;
 
 use Carbon\Carbon;
 use DateInterval;
-use WellCommerce\CoreBundle\Controller\Admin\AbstractAdminController;
+use WellCommerce\AppBundle\Controller\Admin\AbstractAdminController;
 use WellCommerce\ReportBundle\Calculator\SalesSummaryCalculator;
 use WellCommerce\ReportBundle\Configuration\ReportConfiguration;
 use WellCommerce\ReportBundle\Context\LineChartContext;

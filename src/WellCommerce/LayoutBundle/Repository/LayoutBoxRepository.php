@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\LayoutBundle\Repository;
 
-use WellCommerce\CoreBundle\Repository\AbstractEntityRepository;
+use WellCommerce\AppBundle\Repository\AbstractEntityRepository;
 use WellCommerce\LayoutBundle\Collection\LayoutBoxCollection;
 
 /**

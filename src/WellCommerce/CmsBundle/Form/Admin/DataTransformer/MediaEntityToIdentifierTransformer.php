@@ -13,7 +13,7 @@
 namespace WellCommerce\CmsBundle\Form\Admin\DataTransformer;
 
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
-use WellCommerce\CoreBundle\Form\DataTransformer\EntityToIdentifierTransformer;
+use WellCommerce\AppBundle\Form\DataTransformer\EntityToIdentifierTransformer;
 
 /**
  * Class MediaEntityToIdentifierTransformer

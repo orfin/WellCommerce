@@ -12,7 +12,7 @@
 
 namespace WellCommerce\CatalogBundle\Tests\Repository;
 
-use WellCommerce\CoreBundle\Test\Repository\AbstractRepositoryTestCase;
+use WellCommerce\AppBundle\Test\Repository\AbstractRepositoryTestCase;
 
 /**
  * Class UnitRepositoryTest

@@ -20,8 +20,8 @@ use Symfony\Component\Yaml\Yaml;
 use WellCommerce\CommonBundle\Entity\Dictionary;
 use WellCommerce\CommonBundle\Entity\Locale;
 use WellCommerce\CommonBundle\Entity\LocaleInterface;
-use WellCommerce\CoreBundle\Helper\Helper;
-use WellCommerce\CoreBundle\Manager\Admin\AbstractAdminManager;
+use WellCommerce\AppBundle\Helper\Helper;
+use WellCommerce\AppBundle\Manager\Admin\AbstractAdminManager;
 
 /**
  * Class DictionaryManager

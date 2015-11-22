@@ -13,7 +13,7 @@
 namespace WellCommerce\PromotionBundle\Controller\Front;
 
 use Symfony\Component\HttpFoundation\Request;
-use WellCommerce\CoreBundle\Controller\Front\AbstractFrontController;
+use WellCommerce\AppBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\PromotionBundle\Exception\CouponException;
 
 /**

@@ -15,9 +15,9 @@ namespace WellCommerce\SalesBundle\Entity;
 use Doctrine\Common\Collections\Collection;
 use WellCommerce\CommonBundle\Entity\CurrencyInterface;
 use WellCommerce\CommonBundle\Entity\TaxAwareInterface;
-use WellCommerce\CoreBundle\Entity\BlameableInterface;
-use WellCommerce\CoreBundle\Entity\TimestampableInterface;
-use WellCommerce\CoreBundle\Entity\TranslatableInterface;
+use WellCommerce\AppBundle\Entity\BlameableInterface;
+use WellCommerce\AppBundle\Entity\TimestampableInterface;
+use WellCommerce\AppBundle\Entity\TranslatableInterface;
 
 /**
  * Interface ShippingMethodInterface

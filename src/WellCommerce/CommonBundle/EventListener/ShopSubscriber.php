@@ -13,7 +13,7 @@ namespace WellCommerce\CommonBundle\EventListener;
 
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
-use WellCommerce\CoreBundle\EventListener\AbstractEventSubscriber;
+use WellCommerce\AppBundle\EventListener\AbstractEventSubscriber;
 
 /**
  * Class ShopSubscriber

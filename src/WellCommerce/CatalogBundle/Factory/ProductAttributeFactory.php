@@ -13,8 +13,8 @@
 namespace WellCommerce\CatalogBundle\Factory;
 
 use WellCommerce\CatalogBundle\Entity\ProductAttribute;
-use WellCommerce\CoreBundle\Entity\DiscountablePrice;
-use WellCommerce\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\AppBundle\Entity\DiscountablePrice;
+use WellCommerce\AppBundle\Factory\AbstractFactory;
 
 /**
  * Class ProductAttributeFactory

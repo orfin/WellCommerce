@@ -13,7 +13,7 @@
 namespace WellCommerce\AdminBundle\Entity;
 
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
-use WellCommerce\CoreBundle\Doctrine\ORM\Behaviours\EnableableTrait;
+use WellCommerce\AppBundle\Doctrine\ORM\Behaviours\EnableableTrait;
 
 /**
  * Class UserGroupPermission

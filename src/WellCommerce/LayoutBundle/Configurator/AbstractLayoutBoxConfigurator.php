@@ -13,8 +13,8 @@
 namespace WellCommerce\LayoutBundle\Configurator;
 
 use Symfony\Component\PropertyAccess\PropertyAccess;
-use WellCommerce\CoreBundle\DependencyInjection\AbstractContainerAware;
-use WellCommerce\CoreBundle\Helper\Translator\TranslatorHelperInterface;
+use WellCommerce\AppBundle\DependencyInjection\AbstractContainerAware;
+use WellCommerce\AppBundle\Helper\Translator\TranslatorHelperInterface;
 use WellCommerce\Component\Form\Conditions\Equals;
 use WellCommerce\Component\Form\Elements\FormInterface;
 use WellCommerce\Component\Form\FormBuilderInterface;

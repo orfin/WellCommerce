@@ -12,7 +12,7 @@
 
 namespace WellCommerce\SalesBundle\Entity;
 
-use WellCommerce\CoreBundle\Entity\TimestampableInterface;
+use WellCommerce\AppBundle\Entity\TimestampableInterface;
 
 /**
  * Class PaymentInterface

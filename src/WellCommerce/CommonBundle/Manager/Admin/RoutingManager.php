@@ -14,7 +14,7 @@ namespace WellCommerce\CommonBundle\Manager\Admin;
 
 use WellCommerce\CommonBundle\Entity\RouteInterface;
 use WellCommerce\CommonBundle\Helper\Sluggable;
-use WellCommerce\CoreBundle\Manager\Admin\AbstractAdminManager;
+use WellCommerce\AppBundle\Manager\Admin\AbstractAdminManager;
 
 /**
  * Class RoutingManager

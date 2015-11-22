@@ -12,7 +12,7 @@
 
 namespace WellCommerce\CmsBundle\Tests\DependencyInjection;
 
-use WellCommerce\CoreBundle\Test\DependencyInjection\AbstractExtensionTestCase;
+use WellCommerce\AppBundle\Test\DependencyInjection\AbstractExtensionTestCase;
 
 /**
  * Class CmsExtensionTest

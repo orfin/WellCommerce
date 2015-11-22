@@ -12,7 +12,7 @@
 
 namespace WellCommerce\PromotionBundle\Manager\Front;
 
-use WellCommerce\CoreBundle\Manager\Front\AbstractFrontManager;
+use WellCommerce\AppBundle\Manager\Front\AbstractFrontManager;
 use WellCommerce\PromotionBundle\Entity\CouponInterface;
 use WellCommerce\PromotionBundle\Exception\CouponException;
 use WellCommerce\PromotionBundle\Validator\CouponValidator;

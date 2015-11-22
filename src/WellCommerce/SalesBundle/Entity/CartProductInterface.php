@@ -4,7 +4,7 @@ namespace WellCommerce\SalesBundle\Entity;
 
 use WellCommerce\CatalogBundle\Entity\ProductAttributeInterface;
 use WellCommerce\CatalogBundle\Entity\ProductAwareInterface;
-use WellCommerce\CoreBundle\Entity\TimestampableInterface;
+use WellCommerce\AppBundle\Entity\TimestampableInterface;
 
 /**
  * Interface CartProductInterface
@@ -49,7 +49,7 @@ interface CartProductInterface extends TimestampableInterface, ProductAwareInter
     public function decreaseQuantity($decrease);
 
     /**
-     * @return \WellCommerce\CoreBundle\Entity\DiscountablePrice
+     * @return \WellCommerce\AppBundle\Entity\DiscountablePrice
      */
     public function getSellPrice();
 

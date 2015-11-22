@@ -13,7 +13,7 @@
 namespace WellCommerce\ClientBundle\Controller\Box;
 
 use WellCommerce\ClientBundle\Entity\ClientWishlistInterface;
-use WellCommerce\CoreBundle\Controller\Box\AbstractBoxController;
+use WellCommerce\AppBundle\Controller\Box\AbstractBoxController;
 use WellCommerce\Component\DataSet\Conditions\Condition\In;
 use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
 

@@ -12,7 +12,7 @@
 
 namespace WellCommerce\CatalogBundle\Entity;
 
-use WellCommerce\CoreBundle\Entity\DiscountablePrice;
+use WellCommerce\AppBundle\Entity\DiscountablePrice;
 
 /**
  * Class ProductAttributePrice

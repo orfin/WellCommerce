@@ -12,7 +12,7 @@
 
 namespace WellCommerce\SalesBundle\Factory;
 
-use WellCommerce\CoreBundle\Factory\FactoryInterface;
+use WellCommerce\AppBundle\Factory\FactoryInterface;
 use WellCommerce\SalesBundle\Entity\CartInterface;
 
 /**

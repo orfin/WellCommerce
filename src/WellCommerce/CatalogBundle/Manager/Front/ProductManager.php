@@ -12,8 +12,8 @@
 
 namespace WellCommerce\CatalogBundle\Manager\Front;
 
-use WellCommerce\CoreBundle\Manager\Front\AbstractFrontManager;
-use WellCommerce\CoreBundle\Manager\Front\FrontManagerInterface;
+use WellCommerce\AppBundle\Manager\Front\AbstractFrontManager;
+use WellCommerce\AppBundle\Manager\Front\FrontManagerInterface;
 
 /**
  * Class ProductManager

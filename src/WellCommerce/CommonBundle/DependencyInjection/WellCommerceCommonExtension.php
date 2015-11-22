@@ -12,7 +12,7 @@
 
 namespace WellCommerce\CommonBundle\DependencyInjection;
 
-use WellCommerce\CoreBundle\DependencyInjection\AbstractExtension;
+use WellCommerce\AppBundle\DependencyInjection\AbstractExtension;
 
 /**
  * Class WellCommerceCommonExtension

@@ -12,7 +12,7 @@
 
 namespace WellCommerce\PromotionBundle\Factory;
 
-use WellCommerce\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\AppBundle\Factory\AbstractFactory;
 use WellCommerce\PromotionBundle\Entity\Coupon;
 
 /**

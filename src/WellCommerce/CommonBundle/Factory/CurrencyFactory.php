@@ -13,7 +13,7 @@
 namespace WellCommerce\CommonBundle\Factory;
 
 use WellCommerce\CommonBundle\Entity\Currency;
-use WellCommerce\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\AppBundle\Factory\AbstractFactory;
 
 /**
  * Class CurrencyFactory

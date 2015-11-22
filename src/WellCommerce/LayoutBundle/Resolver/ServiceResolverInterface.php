@@ -26,7 +26,7 @@ interface ServiceResolverInterface
      *
      * @param LayoutBox $layoutBox
      *
-     * @return \WellCommerce\CoreBundle\Controller\Box\BoxControllerInterface
+     * @return \WellCommerce\AppBundle\Controller\Box\BoxControllerInterface
      */
     public function resolveControllerService(LayoutBox $layoutBox);
 }

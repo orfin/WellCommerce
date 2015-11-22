@@ -15,7 +15,7 @@ namespace WellCommerce\CmsBundle\Entity;
 use Knp\DoctrineBehaviors\Model\Sluggable\Sluggable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translation;
 use WellCommerce\CommonBundle\Entity\LocaleAwareInterface;
-use WellCommerce\CoreBundle\Entity\Meta;
+use WellCommerce\AppBundle\Entity\Meta;
 
 /**
  * Class NewsTranslation

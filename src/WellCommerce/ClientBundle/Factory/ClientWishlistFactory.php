@@ -13,7 +13,7 @@
 namespace WellCommerce\ClientBundle\Factory;
 
 use WellCommerce\ClientBundle\Entity\ClientWishlist;
-use WellCommerce\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\AppBundle\Factory\AbstractFactory;
 
 /**
  * Class ClientWishlistFactory

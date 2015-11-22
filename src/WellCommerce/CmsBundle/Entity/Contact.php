@@ -15,7 +15,7 @@ namespace WellCommerce\CmsBundle\Entity;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
-use WellCommerce\CoreBundle\Doctrine\ORM\Behaviours\EnableableTrait;
+use WellCommerce\AppBundle\Doctrine\ORM\Behaviours\EnableableTrait;
 
 /**
  * Class Contact

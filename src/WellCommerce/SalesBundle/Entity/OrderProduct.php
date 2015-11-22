@@ -4,8 +4,8 @@ namespace WellCommerce\SalesBundle\Entity;
 
 use WellCommerce\CatalogBundle\Entity\ProductAttributeAwareTrait;
 use WellCommerce\CatalogBundle\Entity\ProductAwareTrait;
-use WellCommerce\CoreBundle\Doctrine\ORM\Behaviours\Timestampable\TimestampableTrait;
-use WellCommerce\CoreBundle\Entity\Price;
+use WellCommerce\AppBundle\Doctrine\ORM\Behaviours\Timestampable\TimestampableTrait;
+use WellCommerce\AppBundle\Entity\Price;
 
 /**
  * Class OrderProduct

@@ -15,8 +15,8 @@ namespace WellCommerce\SalesBundle\Manager\Admin;
 use WellCommerce\CatalogBundle\Entity\ProductInterface;
 use WellCommerce\CatalogBundle\Repository\ProductRepositoryInterface;
 use WellCommerce\CommonBundle\Helper\TaxHelper;
-use WellCommerce\CoreBundle\Entity\Price;
-use WellCommerce\CoreBundle\Manager\Admin\AbstractAdminManager;
+use WellCommerce\AppBundle\Entity\Price;
+use WellCommerce\AppBundle\Manager\Admin\AbstractAdminManager;
 use WellCommerce\SalesBundle\Entity\OrderInterface;
 use WellCommerce\SalesBundle\Entity\OrderProductInterface;
 

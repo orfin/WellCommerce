@@ -12,7 +12,7 @@
 
 namespace WellCommerce\LayoutBundle\Entity;
 
-use WellCommerce\CoreBundle\Entity\TimestampableInterface;
+use WellCommerce\AppBundle\Entity\TimestampableInterface;
 
 /**
  * Interface ThemeCssInterface

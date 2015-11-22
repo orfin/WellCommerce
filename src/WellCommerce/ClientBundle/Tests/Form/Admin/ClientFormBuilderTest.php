@@ -12,7 +12,7 @@
 
 namespace WellCommerce\ClientBundle\Tests\Form\Admin;
 
-use WellCommerce\CoreBundle\Test\Form\AbstractFormBuilderTestCase;
+use WellCommerce\AppBundle\Test\Form\AbstractFormBuilderTestCase;
 
 /**
  * Class ClientFormBuilderTest

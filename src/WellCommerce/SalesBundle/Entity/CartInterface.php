@@ -18,7 +18,7 @@ use WellCommerce\ClientBundle\Entity\ClientBillingAddressInterface;
 use WellCommerce\ClientBundle\Entity\ClientContactDetailsInterface;
 use WellCommerce\ClientBundle\Entity\ClientShippingAddressInterface;
 use WellCommerce\CommonBundle\Entity\ShopAwareInterface;
-use WellCommerce\CoreBundle\Entity\TimestampableInterface;
+use WellCommerce\AppBundle\Entity\TimestampableInterface;
 use WellCommerce\PromotionBundle\Entity\CouponAwareInterface;
 use WellCommerce\SalesBundle\Calculator\ShippingCalculatorSubjectInterface;
 use WellCommerce\SalesBundle\Visitor\CartVisitorInterface;
@@ -154,7 +154,7 @@ interface CartInterface extends
     public function hasMethods();
 
     /**
-     * @return null|\WellCommerce\CoreBundle\Entity\Price
+     * @return null|\WellCommerce\AppBundle\Entity\Price
      */
     public function getShippingCost();
 

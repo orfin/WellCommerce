@@ -14,7 +14,7 @@ namespace WellCommerce\CatalogBundle\Manager\Admin;
 
 use Symfony\Component\Validator\Exception\ValidatorException;
 use WellCommerce\CatalogBundle\Exception\ProductNotFoundException;
-use WellCommerce\CoreBundle\Manager\Admin\AbstractAdminManager;
+use WellCommerce\AppBundle\Manager\Admin\AbstractAdminManager;
 
 /**
  * Class ProductManager

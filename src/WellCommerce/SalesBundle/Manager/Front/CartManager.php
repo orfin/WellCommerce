@@ -16,7 +16,7 @@ use WellCommerce\CatalogBundle\Entity\ProductAttributeInterface;
 use WellCommerce\CatalogBundle\Entity\ProductInterface;
 use WellCommerce\ClientBundle\Entity\ClientInterface;
 use WellCommerce\CommonBundle\Entity\ShopInterface;
-use WellCommerce\CoreBundle\Manager\Front\AbstractFrontManager;
+use WellCommerce\AppBundle\Manager\Front\AbstractFrontManager;
 use WellCommerce\SalesBundle\Entity\CartInterface;
 use WellCommerce\SalesBundle\Entity\CartProductInterface;
 use WellCommerce\SalesBundle\Exception\AddCartItemException;

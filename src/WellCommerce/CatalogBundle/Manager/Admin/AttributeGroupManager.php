@@ -14,7 +14,7 @@ namespace WellCommerce\CatalogBundle\Manager\Admin;
 
 use Doctrine\Common\Collections\Criteria;
 use WellCommerce\CatalogBundle\Entity\Attribute\GroupInterface;
-use WellCommerce\CoreBundle\Manager\Admin\AbstractAdminManager;
+use WellCommerce\AppBundle\Manager\Admin\AbstractAdminManager;
 
 /**
  * Class AttributeGroupManager
