@@ -92,20 +92,6 @@ abstract class AbstractController extends AbstractContainerAware implements Cont
     }
 
     /**
-     * Renders a view.
-     *
-     * @param string   $view       The view name
-     * @param array    $parameters An array of parameters to pass to the view
-     * @param Response $response   A response instance
-     *
-     * @return Response A Response instance
-     */
-    protected function render($view, array $parameters = [], Response $response = null)
-    {
-        return $this->container->get('templating')->renderResponse($view, $parameters, $response);
-    }
-
-    /**
      * Returns a rendered view.
      *
      * @param string $view       The view name
@@ -115,7 +101,7 @@ abstract class AbstractController extends AbstractContainerAware implements Cont
      */
     protected function renderView($view, array $parameters = [])
     {
-        return $this->container->get('templating')->render($view, $parameters);
+        return $this->getTemplatingelper()->render($view, $parameters);
     }
 
     /**
@@ -124,13 +110,10 @@ abstract class AbstractController extends AbstractContainerAware implements Cont
      * @param string $templateName
      * @param array  $templateVars
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     protected function displayTemplate($templateName, array $templateVars = [])
     {
-        $templating = $this->container->get('templating');
-        $template   = $this->getTemplatingelper()->resolveControllerTemplate($this, $templateName);
-
-        return $templating->renderResponse($template, $templateVars);
+        return $this->getTemplatingelper()->renderControllerResponse($this, $templateName, $templateVars);
     }
 }
