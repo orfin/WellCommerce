@@ -1,5 +1,5 @@
 {
-    "name": "wellcommerce/dataset",
+    "name": "wellcommerce/datagrid",
     "license": "MIT",
     "minimum-stability": "dev",
     "description": "WellCommerce DataGrid",
