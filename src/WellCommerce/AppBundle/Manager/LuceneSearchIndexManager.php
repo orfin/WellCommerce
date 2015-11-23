@@ -12,10 +12,9 @@
 
 namespace WellCommerce\AppBundle\Manager;
 
-use Ivory\LuceneAppBundle\Model\LuceneManager;
+use Ivory\LuceneSearchBundle\Model\LuceneManager;
 use Symfony\Component\HttpKernel\KernelInterface;
 use WellCommerce\AppBundle\Helper\Helper;
-use WellCommerce\AppBundle\Query\Term;
 
 /**
  * Class LuceneSearchIndexManager
