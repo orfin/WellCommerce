@@ -19,7 +19,7 @@
             <argument type="service" id="event_dispatcher" />
         </service>
 
-        <service id="product.route.generator" class="WellCommerce\AppBundle\Routing\ProductRouteGenerator">
+        <service id="product.route.generator" class="WellCommerce\AppBundle\Service\Routing\Generator\ProductRouteGenerator">
             <argument type="collection" key="defaults">
                 <argument key="_controller">product.controller.front:indexAction</argument>
             </argument>

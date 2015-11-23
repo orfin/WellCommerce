@@ -76,7 +76,7 @@
             </call>
         </service>
 
-        <service id="layout_box.renderer" class="WellCommerce\AppBundle\Renderer\LayoutBoxRenderer">
+        <service id="layout_box.renderer" class="WellCommerce\AppBundle\Service\Layout\Renderer\LayoutBoxRenderer">
             <argument type="service" id="layout_box.manager.front" />
         </service>
 

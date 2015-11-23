@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\AppBundle\Renderer;
+namespace WellCommerce\AppBundle\Service\Layout\Renderer;
 
 use WellCommerce\AppBundle\Manager\Front\LayoutBoxManager;
 

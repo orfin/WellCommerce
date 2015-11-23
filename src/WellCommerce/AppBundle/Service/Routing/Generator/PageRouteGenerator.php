@@ -10,19 +10,19 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\AppBundle\Routing;
+namespace WellCommerce\AppBundle\Service\Routing\Generator;
 
 use WellCommerce\AppBundle\Generator\AbstractRouteGenerator;
 use WellCommerce\AppBundle\Generator\RouteGeneratorInterface;
 
 /**
- * Class ProductStatusRouteGenerator
+ * Class PageRouteGenerator
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductStatusRouteGenerator extends AbstractRouteGenerator implements RouteGeneratorInterface
+class PageRouteGenerator extends AbstractRouteGenerator implements RouteGeneratorInterface
 {
-    const GENERATOR_STRATEGY = 'product_status';
+    const GENERATOR_STRATEGY = 'page';
 
     public function supports($strategy)
     {

@@ -38,7 +38,7 @@
             <tag name="twig.extension"/>
         </service>
 
-        <service id="product_status.route.generator" class="WellCommerce\AppBundle\Routing\ProductStatusRouteGenerator">
+        <service id="product_status.route.generator" class="WellCommerce\AppBundle\Service\Routing\Generator\ProductStatusRouteGenerator">
             <argument type="collection" key="defaults">
                 <argument key="_controller">product_status.controller.front:indexAction</argument>
                 <argument key="page">1</argument>

@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\AppBundle\Twig\Extension;
 
-use WellCommerce\AppBundle\Renderer\LayoutBoxRendererInterface;
+use WellCommerce\AppBundle\Service\Layout\Renderer\LayoutBoxRendererInterface;
 
 /**
  * Class LayoutBoxExtension
