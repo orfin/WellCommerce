@@ -1,0 +1,28 @@
+WellCommerce\AppBundle\Entity\CurrencyRate:
+    type: entity
+    table: currency_rate
+    repositoryClass: WellCommerce\AppBundle\Repository\CurrencyRateRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        currencyFrom:
+            type: string
+            length: 12
+            unique: false
+            nullable: false
+            column: currency_from
+        currencyTo:
+            type: string
+            length: 12
+            unique: false
+            nullable: false
+            column: currency_to
+        exchangeRate:
+            type: decimal
+            scale: 4
+            nullable: false
+            precision: 15
+            column: exchange_rate

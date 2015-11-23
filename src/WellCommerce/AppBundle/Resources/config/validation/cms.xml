@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
+
+    <class name="WellCommerce\AppBundle\Entity\Contact">
+        <property name="enabled">
+            <constraint name="NotNull">
+                <option name="message">contact.enabled.error.not_null</option>
+            </constraint>
+        </property>
+        <property name="translations">
+            <constraint name="Valid">
+                <option name="deep">true</option>
+            </constraint>
+        </property>
+    </class>
+
+    <class name="WellCommerce\AppBundle\Entity\ContactTranslation">
+        <property name="name">
+            <constraint name="NotBlank">
+                <option name="message">contact.error.name.not_blank</option>
+            </constraint>
+            <constraint name="NotNull">
+                <option name="message">contact.error.name.not_null</option>
+            </constraint>
+        </property>
+        <property name="email">
+            <constraint name="NotBlank">
+                <option name="message">contact.error.name.not_blank</option>
+            </constraint>
+            <constraint name="NotNull">
+                <option name="message">contact.error.name.not_null</option>
+            </constraint>
+        </property>
+    </class>
+
+    <class name="WellCommerce\AppBundle\Entity\Page">
+        <property name="publish">
+            <constraint name="NotNull">
+                <option name="message">page.error.publish.not_null</option>
+            </constraint>
+        </property>
+        <property name="translations">
+            <constraint name="Valid">
+                <option name="deep">true</option>
+            </constraint>
+        </property>
+    </class>
+
+    <class name="WellCommerce\AppBundle\Entity\PageTranslation">
+        <property name="name">
+            <constraint name="NotBlank">
+                <option name="message">page.error.name.not_blank</option>
+            </constraint>
+            <constraint name="NotNull">
+                <option name="message">page.error.name.not_null</option>
+            </constraint>
+        </property>
+        <property name="content">
+            <constraint name="NotNull">
+                <option name="message">page.error.content.not_null</option>
+            </constraint>
+        </property>
+    </class>
+
+    <class name="WellCommerce\AppBundle\Entity\NewsTranslation">
+        <property name="topic">
+            <constraint name="NotBlank"/>
+            <constraint name="NotNull"/>
+        </property>
+        <property name="summary">
+            <constraint name="NotNull" />
+        </property>
+        <property name="content">
+            <constraint name="NotNull"/>
+        </property>
+    </class>
+</constraint-mapping>

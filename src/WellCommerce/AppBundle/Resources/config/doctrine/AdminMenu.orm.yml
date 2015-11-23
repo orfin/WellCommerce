@@ -1,0 +1,47 @@
+WellCommerce\AppBundle\Entity\AdminMenu:
+    type: entity
+    table: admin_menu
+    cache:
+        usage : READ_ONLY
+        region : admin_menu
+    repositoryClass: WellCommerce\AppBundle\Repository\AdminMenuRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        identifier:
+            type: string
+            nullable: false
+        name:
+            type: string
+            nullable: false
+        hierarchy:
+            type: integer
+            nullable: false
+            options:
+                default: 0
+        routeName:
+            type: string
+            nullable: true
+            column: route_name
+        cssClass:
+            type: string
+            nullable: true
+            column: css_class
+    manyToOne:
+        parent:
+            targetEntity: WellCommerce\AppBundle\Entity\AdminMenu
+            fetch: LAZY
+            inversedBy: children
+            joinColumns:
+                parent_id:
+                    referencedColumnName: id
+                    onDelete: CASCADE
+    oneToMany:
+        children:
+            targetEntity: WellCommerce\AppBundle\Entity\AdminMenu
+            fetch: LAZY
+            mappedBy: parent
+            orderBy: {'hierarchy': 'ASC'}

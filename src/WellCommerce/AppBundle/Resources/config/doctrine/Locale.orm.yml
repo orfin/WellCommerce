@@ -1,0 +1,24 @@
+WellCommerce\AppBundle\Entity\Locale:
+    type: entity
+    table: locale
+    repositoryClass: WellCommerce\AppBundle\Repository\LocaleRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        code:
+            type: string
+            length: 12
+            unique: true
+            nullable: false
+    manyToOne:
+        currency:
+            targetEntity: WellCommerce\AppBundle\Entity\Currency
+            fetch: LAZY
+            joinColumns:
+                currency_id:
+                    referencedColumnName: id
+                    onDelete: 'SET NULL'
+            orphanRemoval: false

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <imports>
+        <import resource="admin/client.xml"/>
+        <import resource="front/client.xml"/>
+        <import resource="front/client_wishlist.xml"/>
+        <import resource="front/client_settings.xml"/>
+        <import resource="front/client_registration.xml"/>
+        <import resource="front/client_forgot_password.xml"/>
+        <import resource="front/client_address_book.xml"/>
+    </imports>
+
+    <services>
+        <service id="client.repository" class="WellCommerce\AppBundle\Repository\ClientRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>WellCommerceAppBundle:Client</argument>
+        </service>
+
+        <service id="client.factory" class="WellCommerce\AppBundle\Factory\ClientFactory" />
+
+        <service id="client.event_dispatcher" parent="core.event_dispatcher" public="false">
+            <argument type="service" id="event_dispatcher"/>
+        </service>
+
+        <service id="client_login.layout_box.controller" class="WellCommerce\AppBundle\Controller\Box\ClientLoginBoxController">
+            <argument type="service" id="client.manager.front"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="client.subscriber" class="WellCommerce\AppBundle\EventListener\ClientSubscriber">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="twig.extension.client_address_formatter" class="WellCommerce\AppBundle\Twig\Extension\ClientAddressFormatterExtension">
+            <tag name="twig.extension"/>
+        </service>
+    </services>
+</container>

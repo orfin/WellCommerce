@@ -10,8 +10,8 @@ _bazinga_jstranslation:
 _liip_imagine:
     resource: "@LiipImagineBundle/Resources/config/routing.xml"
 
-wellcommerce_core:
-    resource: "@WellCommerceCoreBundle/Resources/config/routing.yml"
+wellcommerce_app:
+    resource: "@WellCommerceAppBundle/Resources/config/routing.xml"
 
 root:
     path: /admin

@@ -1,0 +1,31 @@
+WellCommerce\AppBundle\Entity\CartTotals:
+    type: embeddable
+    fields:
+        quantity:
+            type: decimal
+            scale: 4
+            nullable: false
+            precision: 15
+        weight:
+            type: decimal
+            scale: 4
+            nullable: false
+            precision: 15
+        netPrice:
+            type: decimal
+            scale: 4
+            nullable: false
+            precision: 15
+            column: net_price
+        grossPrice:
+            type: decimal
+            scale: 4
+            nullable: false
+            precision: 15
+            column: gross_price
+        taxAmount:
+            type: decimal
+            scale: 4
+            nullable: false
+            precision: 15
+            column: tax_amount

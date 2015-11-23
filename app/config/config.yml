@@ -76,7 +76,7 @@ doctrine:
                         FIELD: DoctrineExtensions\Query\Mysql\Field
                 filters:
                     locale:
-                        class:   WellCommerce\Bundle\CommonBundle\ORM\Filter\LocaleFilter
+                        class:   WellCommerce\AppBundle\Doctrine\ORM\Filter\LocaleFilter
                         enabled: false
 
 doctrine_migrations:
@@ -86,7 +86,7 @@ doctrine_migrations:
     name: WellCommerce Migrations
 
 parameters:
-    knp.doctrine_behaviors.blameable_listener.user_entity: WellCommerce\Bundle\AdminBundle\Entity\User
+    knp.doctrine_behaviors.blameable_listener.user_entity: WellCommerce\AdminBundle\Entity\User
 
 fos_js_routing:
     router: router.default
@@ -131,7 +131,7 @@ services:
         arguments: ["%kernel.root_dir%/cache/%kernel.environment%/doctrine"]
 
     client.failure.handler:
-        class: WellCommerce\Bundle\ClientBundle\Handler\LoginFailureHandler
+        class: WellCommerce\AppBundle\Handler\LoginFailureHandler
         arguments:
           - @router
           - front.client.login
