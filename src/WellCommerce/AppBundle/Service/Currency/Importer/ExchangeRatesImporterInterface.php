@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\AppBundle\Importer;
+namespace WellCommerce\AppBundle\Service\Currency\Importer;
 
 /**
  * Interface ExchangeRatesImporterInterface

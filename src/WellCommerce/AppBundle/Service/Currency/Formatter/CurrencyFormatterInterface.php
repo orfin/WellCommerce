@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\AppBundle\Formatter;
+namespace WellCommerce\AppBundle\Service\Currency\Formatter;
 
 /**
  * Interface CurrencyFormatterInterface

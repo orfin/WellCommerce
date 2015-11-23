@@ -24,18 +24,18 @@
             <tag name="kernel.event_subscriber" />
         </service>
 
-        <service id="currency.importer.ecb" class="WellCommerce\AppBundle\Importer\EcbRatesImporter">
+        <service id="currency.importer.ecb" class="WellCommerce\AppBundle\Service\Currency\Importer\EcbRatesImporter">
             <argument type="service" id="currency.repository"/>
             <argument type="service" id="currency_rate.repository"/>
             <argument type="service" id="doctrine.helper"/>
         </service>
 
-        <service id="currency.converter" class="WellCommerce\AppBundle\Converter\CurrencyConverter">
+        <service id="currency.converter" class="WellCommerce\AppBundle\Service\Currency\Converter\CurrencyConverter">
             <argument type="service" id="currency_rate.repository" />
             <argument type="service" id="request.helper"/>
         </service>
 
-        <service id="currency.formatter" class="WellCommerce\AppBundle\Formatter\CurrencyFormatter">
+        <service id="currency.formatter" class="WellCommerce\AppBundle\Service\Currency\Formatter\CurrencyFormatter">
             <argument type="service" id="request.helper"/>
         </service>
 

@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\AppBundle\Converter;
+namespace WellCommerce\AppBundle\Service\Currency\Converter;
 
 use WellCommerce\AppBundle\Entity\CurrencyRate;
 use WellCommerce\AppBundle\Exception\MissingCurrencyRateException;

@@ -12,8 +12,8 @@
 
 namespace WellCommerce\AppBundle\Helper;
 
-use WellCommerce\AppBundle\Converter\CurrencyConverterInterface;
-use WellCommerce\AppBundle\Formatter\CurrencyFormatterInterface;
+use WellCommerce\AppBundle\Service\Currency\Converter\CurrencyConverterInterface;
+use WellCommerce\AppBundle\Service\Currency\Formatter\CurrencyFormatterInterface;
 
 /**
  * Class CurrencyHelper
