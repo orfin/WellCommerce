@@ -12,15 +12,12 @@
 
 namespace WellCommerce\AppBundle\Service\Layout\Configurator;
 
-use WellCommerce\AppBundle\Configurator\AbstractLayoutBoxConfigurator;
-use WellCommerce\AppBundle\Configurator\LayoutBoxConfiguratorInterface;
-
 /**
  * Class ProducerProductsBoxConfigurator
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProducerProductsBoxConfigurator extends AbstractLayoutBoxConfigurator implements LayoutBoxConfiguratorInterface
+class ProducerProductsBoxConfigurator extends AbstractLayoutBoxConfigurator
 {
 
 }

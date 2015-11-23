@@ -14,7 +14,6 @@ namespace WellCommerce\AppBundle\Service\Layout\Configurator;
 
 use WellCommerce\Component\Form\Elements\FormInterface;
 use WellCommerce\Component\Form\FormBuilderInterface;
-use WellCommerce\AppBundle\Configurator\AbstractLayoutBoxConfigurator;
 
 /**
  * Class ProductSearchBoxConfigurator

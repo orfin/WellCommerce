@@ -13,11 +13,10 @@
 namespace WellCommerce\AppBundle\Manager\Front;
 
 use WellCommerce\AppBundle\Controller\Box\BoxControllerInterface;
-use WellCommerce\AppBundle\Manager\Front\AbstractFrontManager;
 use WellCommerce\AppBundle\Collection\LayoutBoxCollection;
 use WellCommerce\AppBundle\Collection\LayoutBoxSettingsCollection;
 use WellCommerce\AppBundle\Exception\LayoutBoxNotFoundException;
-use WellCommerce\AppBundle\Resolver\ServiceResolverInterface;
+use WellCommerce\AppBundle\Service\Layout\Resolver\ServiceResolverInterface;
 
 /**
  * Class LayoutBoxManager

@@ -10,9 +10,9 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\AppBundle\Resolver;
+namespace WellCommerce\AppBundle\Service\Layout\Resolver;
 
-use WellCommerce\AppBundle\Entity\LayoutBox;
+use WellCommerce\AppBundle\Entity\LayoutBoxInterface;
 
 /**
  * Interface ServiceResolverInterface
@@ -24,9 +24,9 @@ interface ServiceResolverInterface
     /**
      * Resolves controller service
      *
-     * @param LayoutBox $layoutBox
+     * @param LayoutBoxInterface $layoutBox
      *
      * @return \WellCommerce\AppBundle\Controller\Box\BoxControllerInterface
      */
-    public function resolveControllerService(LayoutBox $layoutBox);
+    public function resolveControllerService(LayoutBoxInterface $layoutBox);
 }

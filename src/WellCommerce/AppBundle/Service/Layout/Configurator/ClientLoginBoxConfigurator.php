@@ -12,8 +12,6 @@
 
 namespace WellCommerce\AppBundle\Service\Layout\Configurator;
 
-use WellCommerce\AppBundle\Configurator\AbstractLayoutBoxConfigurator;
-
 /**
  * Class ClientLoginBoxConfigurator
  *

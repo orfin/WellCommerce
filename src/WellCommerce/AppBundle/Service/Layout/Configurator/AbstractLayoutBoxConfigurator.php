@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\AppBundle\Configurator;
+namespace WellCommerce\AppBundle\Service\Layout\Configurator;
 
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use WellCommerce\AppBundle\DependencyInjection\AbstractContainerAware;

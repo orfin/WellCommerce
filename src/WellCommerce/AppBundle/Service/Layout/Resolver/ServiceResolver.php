@@ -10,12 +10,12 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\AppBundle\Resolver;
+namespace WellCommerce\AppBundle\Service\Layout\Resolver;
 
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
-use WellCommerce\AppBundle\Configurator\LayoutBoxConfiguratorCollection;
-use WellCommerce\AppBundle\Entity\LayoutBox;
+use WellCommerce\AppBundle\Entity\LayoutBoxInterface;
+use WellCommerce\AppBundle\Service\Layout\Configurator\LayoutBoxConfiguratorCollection;
 
 /**
  * Class ServiceResolver
@@ -42,7 +42,7 @@ class ServiceResolver extends ContainerAware implements ServiceResolverInterface
     /**
      * {@inheritdoc}
      */
-    public function resolveControllerService(LayoutBox $layoutBox)
+    public function resolveControllerService(LayoutBoxInterface $layoutBox)
     {
         $boxType      = $layoutBox->getBoxType();
         $configurator = $this->layoutBoxConfiguratorCollection->get($boxType);

@@ -12,23 +12,22 @@
 
 namespace WellCommerce\AppBundle\Service\Layout\Configurator;
 
+use WellCommerce\Component\Form\Elements\FormInterface;
 use WellCommerce\Component\Form\FormBuilderInterface;
-use WellCommerce\AppBundle\Configurator\AbstractLayoutBoxConfigurator;
-use WellCommerce\AppBundle\Configurator\LayoutBoxConfiguratorInterface;
 
 /**
  * Class ProducerBoxConfigurator
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProducerBoxConfigurator extends AbstractLayoutBoxConfigurator implements LayoutBoxConfiguratorInterface
+class ProducerBoxConfigurator extends AbstractLayoutBoxConfigurator
 {
     /**
      * {@inheritdoc}
      */
-    public function addFormFields(FormBuilderInterface $builder, $defaults)
+    public function addFormFields(FormBuilderInterface $builder, FormInterface $form, $defaults)
     {
-        $fieldset = $this->getFieldset($builder);
+        $fieldset = $this->getFieldset($builder, $form);
         $accessor = $this->getPropertyAccessor();
 
         $fieldset->addChild($builder->getElement('tip', [
