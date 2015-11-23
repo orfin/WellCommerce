@@ -67,7 +67,7 @@
             </call>
         </service>
 
-        <service id="layout_box.form_builder" class="WellCommerce\AppBundle\Form\LayoutBoxFormBuilder">
+        <service id="layout_box.form_builder" class="WellCommerce\AppBundle\Form\Admin\LayoutBoxFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
             <argument type="service" id="layout_box.event_dispatcher"/>

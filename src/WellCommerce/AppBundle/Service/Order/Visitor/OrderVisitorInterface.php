@@ -10,19 +10,29 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\AppBundle\Visitor;
+namespace WellCommerce\AppBundle\Service\Order\Visitor;
 
 use WellCommerce\AppBundle\Entity\OrderInterface;
 
 /**
- * Interface OrderVisitorTraverserInterface
+ * Interface OrderVisitorInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface OrderVisitorTraverserInterface
+interface OrderVisitorInterface
 {
     /**
      * @param OrderInterface $order
      */
-    public function traverse(OrderInterface $order);
+    public function visitOrder(OrderInterface $order);
+
+    /**
+     * @return int
+     */
+    public function getPriority();
+
+    /**
+     * @return string
+     */
+    public function getAlias();
 }

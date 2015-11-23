@@ -12,7 +12,7 @@
 
 namespace WellCommerce\AppBundle\Collector;
 
-use WellCommerce\AppBundle\Visitor\OrderVisitorInterface;
+use WellCommerce\AppBundle\Service\Order\Visitor\OrderVisitorInterface;
 
 /**
  * Interface OrderDataCollectorInterface

@@ -39,9 +39,9 @@
             <argument type="service" id="event_dispatcher"/>
         </service>
 
-        <service id="order.visitor.collection" class="WellCommerce\AppBundle\Visitor\OrderVisitorCollection"/>
+        <service id="order.visitor.collection" class="WellCommerce\AppBundle\Service\Order\Visitor\OrderVisitorCollection"/>
 
-        <service id="order.visitor.traverser" class="WellCommerce\AppBundle\Visitor\OrderVisitorTraverser">
+        <service id="order.visitor.traverser" class="WellCommerce\AppBundle\Service\Order\Visitor\OrderVisitorTraverser">
             <argument type="service" id="order.visitor.collection"/>
         </service>
 

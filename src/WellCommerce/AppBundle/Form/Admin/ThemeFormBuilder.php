@@ -9,18 +9,21 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\AppBundle\Form;
+namespace WellCommerce\AppBundle\Form\Admin;
 
+use Symfony\Component\Finder\Finder;
 use WellCommerce\AppBundle\Form\AbstractFormBuilder;
 use WellCommerce\Component\Form\Elements\FormInterface;
 
 /**
- * Class LayoutBoxFormBuilder
+ * Class ThemeFormBuilder
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class LayoutBoxFormBuilder extends AbstractFormBuilder
+class ThemeFormBuilder extends AbstractFormBuilder
 {
+    const FORM_INIT_EVENT = 'theme.form.init';
+
     /**
      * {@inheritdoc}
      */
@@ -31,30 +34,39 @@ class LayoutBoxFormBuilder extends AbstractFormBuilder
             'label' => $this->trans('common.fieldset.general')
         ]));
 
-        $languageData = $requiredData->addChild($this->getElement('language_fieldset', [
-            'name'        => 'translations',
-            'label'       => $this->trans('form.fieldset.translations'),
-            'transformer' => $this->getRepositoryTransformer('translation', $this->get('layout_box.repository'))
-        ]));
-
-        $languageData->addChild($this->getElement('text_field', [
-            'name'  => 'name',
-            'label' => $this->trans('Name'),
-        ]));
-
         $requiredData->addChild($this->getElement('text_field', [
-            'name'    => 'identifier',
-            'label'   => $this->trans('layout_box.label.identifier'),
-            'comment' => $this->trans('layout_box.comment.identifier'),
+            'name'  => 'name',
+            'label' => $this->trans('common.label.name'),
         ]));
 
         $requiredData->addChild($this->getElement('select', [
-            'name'  => 'boxType',
-            'label' => $this->trans('layout_box.label.box_type'),
+            'name'    => 'folder',
+            'label'   => $this->trans('theme.label.folder'),
+            'comment' => $this->trans('theme.comment.folder'),
+            'options' => $this->getFolderDirectories()
         ]));
 
         $form->addFilter($this->getFilter('no_code'));
         $form->addFilter($this->getFilter('trim'));
         $form->addFilter($this->getFilter('secure'));
+    }
+
+    /**
+     * Lists all themes available in app/Resources/themes directory
+     *
+     * @return array
+     */
+    private function getFolderDirectories()
+    {
+        $finder       = new Finder();
+        $directories  = $finder->directories()->in($this->getThemeDir())->sortByName()->depth('== 1');
+        $themeFolders = [];
+
+        foreach ($directories as $directory) {
+            $name                = $directory->getRelativePath();
+            $themeFolders[$name] = $name;
+        }
+
+        return $themeFolders;
     }
 }

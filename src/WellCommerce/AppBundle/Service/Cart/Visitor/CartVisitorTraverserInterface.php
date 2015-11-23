@@ -10,16 +10,19 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\AppBundle\Data;
+namespace WellCommerce\AppBundle\Service\Cart\Visitor;
 
-use Doctrine\Common\Collections\ArrayCollection;
+use WellCommerce\AppBundle\Entity\CartInterface;
 
 /**
- * Class ReportRowCollection
+ * Interface CartVisitorTraverserInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ReportRowCollection extends ArrayCollection
+interface CartVisitorTraverserInterface
 {
-
+    /**
+     * @param CartInterface $cart
+     */
+    public function traverse(CartInterface $cart);
 }

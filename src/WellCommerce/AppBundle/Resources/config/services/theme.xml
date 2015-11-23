@@ -75,7 +75,7 @@
             </call>
         </service>
 
-        <service id="theme.form_builder" class="WellCommerce\AppBundle\Form\ThemeFormBuilder">
+        <service id="theme.form_builder" class="WellCommerce\AppBundle\Form\Admin\ThemeFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
             <argument type="service" id="theme.event_dispatcher"/>

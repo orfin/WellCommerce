@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\ReportBundle\Generator;
+namespace WellCommerce\AppBundle\Generator;
 
 /**
  * Class ClientReportGenerator

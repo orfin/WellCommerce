@@ -16,7 +16,7 @@ use WellCommerce\AppBundle\EventListener\AbstractEventSubscriber;
 use WellCommerce\AppBundle\Entity\OrderInterface;
 use WellCommerce\AppBundle\Entity\OrderTotalDetailInterface;
 use WellCommerce\AppBundle\Factory\OrderTotalFactory;
-use WellCommerce\AppBundle\Visitor\OrderVisitorTraverserInterface;
+use WellCommerce\AppBundle\Service\Order\Visitor\OrderVisitorTraverserInterface;
 
 /**
  * Class OrderSubscriber

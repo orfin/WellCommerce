@@ -10,28 +10,28 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\AppBundle\Visitor;
+namespace WellCommerce\AppBundle\Service\Order\Visitor;
 
-use WellCommerce\AppBundle\Entity\CartInterface;
+use WellCommerce\AppBundle\Entity\OrderInterface;
 
 /**
- * Class CartVisitorTraverser
+ * Class OrderVisitorTraverser
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CartVisitorTraverser implements CartVisitorTraverserInterface
+class OrderVisitorTraverser implements OrderVisitorTraverserInterface
 {
     /**
-     * @var CartVisitorCollection
+     * @var OrderVisitorCollection
      */
     protected $collection;
 
     /**
      * Constructor
      *
-     * @param CartVisitorCollection $collection
+     * @param OrderVisitorCollection $collection
      */
-    public function __construct(CartVisitorCollection $collection)
+    public function __construct(OrderVisitorCollection $collection)
     {
         $this->collection = $collection;
     }
@@ -39,10 +39,10 @@ class CartVisitorTraverser implements CartVisitorTraverserInterface
     /**
      * {@inheritdoc}
      */
-    public function traverse(CartInterface $cart)
+    public function traverse(OrderInterface $order)
     {
         foreach ($this->collection->all() as $visitor) {
-            $visitor->visitCart($cart);
+            $visitor->visitOrder($order);
         }
     }
 }

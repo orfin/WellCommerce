@@ -10,9 +10,9 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\ReportBundle\Provider;
+namespace WellCommerce\AppBundle\Provider;
 
-use WellCommerce\ReportBundle\Configuration\ReportConfiguration;
+use WellCommerce\AppBundle\Configuration\ReportConfiguration;
 
 /**
  * Interface ReportProviderInterface
@@ -26,7 +26,7 @@ interface ReportProviderInterface
      *
      * @param ReportConfiguration $configuration
      *
-     * @return \WellCommerce\ReportBundle\Data\ReportRowCollection
+     * @return \WellCommerce\AppBundle\Data\ReportRowCollection
      */
     public function getReport(ReportConfiguration $configuration);
 }

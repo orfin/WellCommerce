@@ -16,7 +16,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
 use WellCommerce\AppBundle\Event\ResourceEvent;
 use WellCommerce\AppBundle\EventListener\AbstractEventSubscriber;
 use WellCommerce\AppBundle\Manager\Front\CartManagerInterface;
-use WellCommerce\AppBundle\Visitor\CartVisitorTraverserInterface;
+use WellCommerce\AppBundle\Service\Cart\Visitor\CartVisitorTraverserInterface;
 
 /**
  * Class CartSubscriber

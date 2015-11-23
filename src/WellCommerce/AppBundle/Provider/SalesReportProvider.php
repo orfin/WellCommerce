@@ -10,12 +10,12 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\ReportBundle\Provider;
+namespace WellCommerce\AppBundle\Provider;
 
 use Doctrine\Common\Collections\Criteria;
-use WellCommerce\ReportBundle\Configuration\ReportConfiguration;
-use WellCommerce\ReportBundle\Data\ReportRow;
-use WellCommerce\ReportBundle\Data\ReportRowCollection;
+use WellCommerce\AppBundle\Configuration\ReportConfiguration;
+use WellCommerce\AppBundle\Data\ReportRow;
+use WellCommerce\AppBundle\Data\ReportRowCollection;
 use WellCommerce\AppBundle\Entity\OrderInterface;
 
 /**

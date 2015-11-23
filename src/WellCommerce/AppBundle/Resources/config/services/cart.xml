@@ -99,9 +99,9 @@
             <tag name="kernel.event_subscriber"/>
         </service>
 
-        <service id="cart.visitor.collection" class="WellCommerce\AppBundle\Visitor\CartVisitorCollection" />
+        <service id="cart.visitor.collection" class="WellCommerce\AppBundle\Service\Cart\Visitor\CartVisitorCollection" />
 
-        <service id="cart.visitor.traverser" class="WellCommerce\AppBundle\Visitor\CartVisitorTraverser">
+        <service id="cart.visitor.traverser" class="WellCommerce\AppBundle\Service\Cart\Visitor\CartVisitorTraverser">
             <argument type="service" id="cart.visitor.collection"/>
         </service>
 
@@ -109,7 +109,7 @@
             <argument type="service" id="currency.helper"/>
         </service>
 
-        <service id="cart_totals.cart.visitor" class="WellCommerce\AppBundle\Visitor\CartTotalsVisitor">
+        <service id="cart_totals.cart.visitor" class="WellCommerce\AppBundle\Service\Cart\Visitor\CartTotalsVisitor">
             <argument type="service" id="cart_totals.collector"/>
             <tag name="cart.visitor"/>
         </service>
@@ -118,12 +118,12 @@
             <argument type="service" id="currency.helper"/>
         </service>
 
-        <service id="shipping_method.cart.visitor" class="WellCommerce\AppBundle\Visitor\CartShippingMethodVisitor">
+        <service id="shipping_method.cart.visitor" class="WellCommerce\AppBundle\Service\Cart\Visitor\CartShippingMethodVisitor">
             <argument type="service" id="shipping_method.provider"/>
             <tag name="cart.visitor"/>
         </service>
 
-        <service id="payment_method.cart.visitor" class="WellCommerce\AppBundle\Visitor\CartPaymentMethodVisitor">
+        <service id="payment_method.cart.visitor" class="WellCommerce\AppBundle\Service\Cart\Visitor\CartPaymentMethodVisitor">
             <tag name="cart.visitor"/>
         </service>
 

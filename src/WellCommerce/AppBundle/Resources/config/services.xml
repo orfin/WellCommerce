@@ -105,7 +105,7 @@
             <tag name="kernel.event_subscriber"/>
         </service>
 
-        <service id="form.product_attribute_collection.data_transformer" class="WellCommerce\AppBundle\Form\Admin\DataTransformer\ProductAttributeCollectionToArrayTransformer" scope="prototype">
+        <service id="form.product_attribute_collection.data_transformer" class="WellCommerce\AppBundle\Form\DataTransformer\ProductAttributeCollectionToArrayTransformer" scope="prototype">
             <argument type="service" id="doctrine.helper"/>
             <call method="setProductAttributeManager">
                 <argument type="service" id="product_attribute.manager.admin"/>
@@ -113,7 +113,7 @@
             <tag name="form.data_transformer" alias="product_attribute_collection"/>
         </service>
 
-        <service id="form.product_photo_collection.data_transformer" class="WellCommerce\AppBundle\Form\Admin\DataTransformer\ProductPhotoCollectionToArrayTransformer" scope="prototype">
+        <service id="form.product_photo_collection.data_transformer" class="WellCommerce\AppBundle\Form\DataTransformer\ProductPhotoCollectionToArrayTransformer" scope="prototype">
             <argument type="service" id="doctrine.helper"/>
             <tag name="form.data_transformer" alias="product_photo_collection"/>
         </service>
@@ -130,7 +130,7 @@
             <tag name="twig.extension"/>
         </service>
 
-        <service id="sales_report.manager.admin" class="WellCommerce\ReportBundle\Manager\Admin\SalesReportManager">
+        <service id="sales_report.manager.admin" class="WellCommerce\AppBundle\Manager\Admin\SalesReportManager">
             <argument type="service" id="order.repository"/>
             <argument type="service" id="sales_report.event_dispatcher"/>
             <call method="setContainer">
@@ -138,14 +138,14 @@
             </call>
         </service>
 
-        <service id="sales_report.controller.admin" class="WellCommerce\ReportBundle\Controller\Admin\SalesReportController">
+        <service id="sales_report.controller.admin" class="WellCommerce\AppBundle\Controller\Admin\SalesReportController">
             <argument type="service" id="sales_report.manager.admin"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <service id="sales_report.provider" class="WellCommerce\ReportBundle\Provider\SalesReportProvider">
+        <service id="sales_report.provider" class="WellCommerce\AppBundle\Provider\SalesReportProvider">
             <argument type="service" id="order.repository"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>

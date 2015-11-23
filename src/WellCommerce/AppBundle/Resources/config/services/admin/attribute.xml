@@ -36,7 +36,7 @@
             <argument type="service" id="event_dispatcher"/>
         </service>
 
-        <service id="form.attribute_collection.data_transformer" class="WellCommerce\AppBundle\Form\Admin\DataTransformer\AttributeCollectionToArrayTransformer" scope="prototype">
+        <service id="form.attribute_collection.data_transformer" class="WellCommerce\AppBundle\Form\DataTransformer\AttributeCollectionToArrayTransformer" scope="prototype">
             <argument type="service" id="doctrine.helper"/>
             <tag name="form.data_transformer" alias="attribute_collection"/>
         </service>

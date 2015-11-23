@@ -10,14 +10,14 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\ReportBundle\Controller\Admin;
+namespace WellCommerce\AppBundle\Controller\Admin;
 
 use Carbon\Carbon;
 use DateInterval;
 use WellCommerce\AppBundle\Controller\Admin\AbstractAdminController;
-use WellCommerce\ReportBundle\Calculator\SalesSummaryCalculator;
-use WellCommerce\ReportBundle\Configuration\ReportConfiguration;
-use WellCommerce\ReportBundle\Context\LineChartContext;
+use WellCommerce\AppBundle\Calculator\SalesSummaryCalculator;
+use WellCommerce\AppBundle\Configuration\ReportConfiguration;
+use WellCommerce\AppBundle\Context\LineChartContext;
 
 /**
  * Class SalesReportController

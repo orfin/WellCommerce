@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\ReportBundle\Context;
+namespace WellCommerce\AppBundle\Context;
 
 /**
  * Interface ReportContextInterface
