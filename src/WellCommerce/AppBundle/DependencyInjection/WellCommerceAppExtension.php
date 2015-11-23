@@ -28,10 +28,7 @@ class WellCommerceAppExtension extends AbstractExtension
      */
     public function load(array $configs, ContainerBuilder $container)
     {
-        $reflection = new \ReflectionClass($this);
-        $directory  = dirname($reflection->getFileName());
-        $loader     = new Loader\XmlFileLoader($container, new FileLocator($directory . '/../Resources/config'));
-        $loader->load('services.xml');
+        parent::load($configs, $container);
 
         $configuration = $this->getConfiguration($configs, $container);
         $config        = $this->processConfiguration($configuration, $configs);

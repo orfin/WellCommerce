@@ -47,11 +47,11 @@
             <argument type="service" id="event_dispatcher"/>
         </service>
 
-        <service id="layout_box.dataset.query_builder" class="WellCommerce\AppBundle\DataSet\LayoutBoxDataSetQueryBuilder" public="false">
+        <service id="layout_box.dataset.query_builder" class="WellCommerce\AppBundle\DataSet\Admin\LayoutBoxDataSetQueryBuilder" public="false">
             <argument type="service" id="layout_box.repository"/>
         </service>
 
-        <service id="layout_box.dataset" class="WellCommerce\AppBundle\DataSet\LayoutBoxDataSet">
+        <service id="layout_box.dataset" class="WellCommerce\AppBundle\DataSet\Admin\LayoutBoxDataSet">
             <argument type="service" id="layout_box.dataset.query_builder"/>
             <argument type="service" id="dataset.manager"/>
             <argument type="service" id="layout_box.event_dispatcher"/>
