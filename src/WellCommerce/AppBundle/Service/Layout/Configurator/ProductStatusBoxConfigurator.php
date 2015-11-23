@@ -10,18 +10,18 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\AppBundle\Layout;
+namespace WellCommerce\AppBundle\Service\Layout\Configurator;
 
 use WellCommerce\Component\Form\Elements\FormInterface;
 use WellCommerce\Component\Form\FormBuilderInterface;
 use WellCommerce\AppBundle\Configurator\AbstractLayoutBoxConfigurator;
 
 /**
- * Class ProductShowcaseBoxConfigurator
+ * Class ProductStatusBoxConfigurator
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductLayeredNavigationBoxConfigurator extends AbstractLayoutBoxConfigurator
+class ProductStatusBoxConfigurator extends AbstractLayoutBoxConfigurator
 {
     /**
      * {@inheritdoc}
@@ -31,7 +31,7 @@ class ProductLayeredNavigationBoxConfigurator extends AbstractLayoutBoxConfigura
         $fieldset = $this->getFieldset($builder, $form);
 
         $fieldset->addChild($builder->getElement('tip', [
-            'tip' => '<p>' . $this->trans('product.layered_navigation.tip') . '</p>'
+            'tip' => '<p>' . $this->trans('layout_box.product_status.tip') . '</p>'
         ]));
     }
 }

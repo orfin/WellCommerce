@@ -10,16 +10,17 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\AppBundle\Layout;
+namespace WellCommerce\AppBundle\Service\Layout\Configurator;
 
 use WellCommerce\AppBundle\Configurator\AbstractLayoutBoxConfigurator;
+use WellCommerce\AppBundle\Configurator\LayoutBoxConfiguratorInterface;
 
 /**
- * Class ClientForgotPasswordBoxConfigurator
+ * Class ProducerProductsBoxConfigurator
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientForgotPasswordBoxConfigurator extends AbstractLayoutBoxConfigurator
+class ProducerProductsBoxConfigurator extends AbstractLayoutBoxConfigurator implements LayoutBoxConfiguratorInterface
 {
 
 }

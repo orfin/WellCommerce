@@ -51,14 +51,14 @@
             </call>
         </service>
 
-        <service id="product_showcase.layout_box.configurator" class="WellCommerce\AppBundle\Layout\ProductShowcaseBoxConfigurator">
+        <service id="product_showcase.layout_box.configurator" class="WellCommerce\AppBundle\Service\Layout\Configurator\ProductShowcaseBoxConfigurator">
             <argument>ProductShowcase</argument>
             <argument>product_showcase.layout_box.controller</argument>
             <argument type="service" id="translator.helper"/>
             <tag name="layout_box.configurator" />
         </service>
 
-        <service id="product_status.layout_box.configurator" class="WellCommerce\AppBundle\Layout\ProductStatusBoxConfigurator">
+        <service id="product_status.layout_box.configurator" class="WellCommerce\AppBundle\Service\Layout\Configurator\ProductStatusBoxConfigurator">
             <argument>ProductStatus</argument>
             <argument>product_status.layout_box.controller</argument>
             <argument type="service" id="translator.helper"/>

@@ -22,7 +22,7 @@
             </call>
         </service>
 
-        <service id="page.layout_box.configurator" class="WellCommerce\AppBundle\Layout\PageBoxConfigurator">
+        <service id="page.layout_box.configurator" class="WellCommerce\AppBundle\Service\Layout\Configurator\PageBoxConfigurator">
             <argument>Page</argument>
             <argument>page.layout_box.controller</argument>
             <argument type="service" id="translator.helper"/>

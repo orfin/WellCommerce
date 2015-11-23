@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\AppBundle\Layout;
+namespace WellCommerce\AppBundle\Service\Layout\Configurator;
 
 use WellCommerce\Component\Form\Elements\FormInterface;
 use WellCommerce\Component\Form\FormBuilderInterface;
@@ -18,11 +18,11 @@ use WellCommerce\AppBundle\Configurator\AbstractLayoutBoxConfigurator;
 use WellCommerce\AppBundle\Configurator\LayoutBoxConfiguratorInterface;
 
 /**
- * Class CategoryProductsBoxConfigurator
+ * Class CategoryInfoBoxConfigurator
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CategoryProductsBoxConfigurator extends AbstractLayoutBoxConfigurator implements LayoutBoxConfiguratorInterface
+class CategoryInfoBoxConfigurator extends AbstractLayoutBoxConfigurator implements LayoutBoxConfiguratorInterface
 {
     /**
      * {@inheritdoc}
@@ -31,9 +31,8 @@ class CategoryProductsBoxConfigurator extends AbstractLayoutBoxConfigurator impl
     {
         $fieldset = $this->getFieldset($builder, $form);
 
-        $fieldset->addChild($builder->getElement('text_field', [
-            'name'  => 'per_page',
-            'label' => $this->trans('layout_box.category_products.per_page')
+        $fieldset->addChild($builder->getElement('tip', [
+            'tip' => '<p>' . $this->trans('Choose categories which should be not visible in box.') . '</p>'
         ]));
     }
 }

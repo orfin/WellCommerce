@@ -10,19 +10,18 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\AppBundle\Layout;
+namespace WellCommerce\AppBundle\Service\Layout\Configurator;
 
 use WellCommerce\Component\Form\Elements\FormInterface;
 use WellCommerce\Component\Form\FormBuilderInterface;
 use WellCommerce\AppBundle\Configurator\AbstractLayoutBoxConfigurator;
-use WellCommerce\AppBundle\Configurator\LayoutBoxConfiguratorInterface;
 
 /**
- * Class ProducerMenuBoxConfigurator
+ * Class ProductSearchBoxConfigurator
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProducerMenuBoxConfigurator extends AbstractLayoutBoxConfigurator implements LayoutBoxConfiguratorInterface
+class ProductSearchBoxConfigurator extends AbstractLayoutBoxConfigurator
 {
     /**
      * {@inheritdoc}
@@ -32,7 +31,7 @@ class ProducerMenuBoxConfigurator extends AbstractLayoutBoxConfigurator implemen
         $fieldset = $this->getFieldset($builder, $form);
 
         $fieldset->addChild($builder->getElement('tip', [
-            'tip' => '<p>' . $this->trans('producer.box.info') . '</p>'
+            'tip' => '<p>' . $this->trans('layout_box.product_search.tip') . '</p>'
         ]));
     }
 }

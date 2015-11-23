@@ -10,19 +10,18 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\AppBundle\Layout;
+namespace WellCommerce\AppBundle\Service\Layout\Configurator;
 
 use WellCommerce\Component\Form\Elements\FormInterface;
 use WellCommerce\Component\Form\FormBuilderInterface;
 use WellCommerce\AppBundle\Configurator\AbstractLayoutBoxConfigurator;
-use WellCommerce\AppBundle\Configurator\LayoutBoxConfiguratorInterface;
 
 /**
- * Class PageBoxConfigurator
+ * Class ProductReviewBoxConfigurator
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PageBoxConfigurator extends AbstractLayoutBoxConfigurator implements LayoutBoxConfiguratorInterface
+class ProductReviewBoxConfigurator extends AbstractLayoutBoxConfigurator
 {
     /**
      * {@inheritdoc}
@@ -32,7 +31,7 @@ class PageBoxConfigurator extends AbstractLayoutBoxConfigurator implements Layou
         $fieldset = $this->getFieldset($builder, $form);
 
         $fieldset->addChild($builder->getElement('tip', [
-            'tip' => '<p>' . $this->trans('page.box.help') . '</p>'
+            'tip' => '<p>' . $this->trans('layout_box.product_review.tip') . '</p>'
         ]));
     }
 }

@@ -10,16 +10,16 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\AppBundle\Layout;
+namespace WellCommerce\AppBundle\Service\Layout\Configurator;
 
 use WellCommerce\AppBundle\Configurator\AbstractLayoutBoxConfigurator;
 
 /**
- * Class ClientAddressBookBoxConfigurator
+ * Class ClientMenuBoxConfigurator
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientAddressBookBoxConfigurator extends AbstractLayoutBoxConfigurator
+class ClientMenuBoxConfigurator extends AbstractLayoutBoxConfigurator
 {
 
 }
