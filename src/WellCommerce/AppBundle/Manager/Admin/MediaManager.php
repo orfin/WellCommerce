@@ -38,7 +38,6 @@ class MediaManager extends AbstractAdminManager
             throw new \Exception('Passed file object is not valid');
         }
 
-
         $media = $this->createMediaFromUploadedFile($file);
         $this->saveResource($media);
 
