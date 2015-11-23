@@ -12,9 +12,6 @@
 
 namespace WellCommerce\AppBundle\Repository;
 
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use WellCommerce\AppBundle\Repository\RepositoryInterface;
-
 /**
  * Interface MediaRepositoryInterface
  *
@@ -22,13 +19,5 @@ use WellCommerce\AppBundle\Repository\RepositoryInterface;
  */
 interface MediaRepositoryInterface extends RepositoryInterface
 {
-    /**
-     * Saves uploaded file info
-     *
-     * @param UploadedFile $file
-     * @param              $dir
-     *
-     * @return mixed
-     */
-    public function save(UploadedFile $file, $dir);
+
 }

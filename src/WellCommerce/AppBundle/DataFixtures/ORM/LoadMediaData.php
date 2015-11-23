@@ -51,7 +51,7 @@ class LoadMediaData extends AbstractDataFixture
     public function load(ObjectManager $manager)
     {
         $rootPath   = $this->container->get('kernel')->getRootDir() . '/../web/themes/wellcommerce/assets/prod/';
-        $uploader   = $this->container->get('media.uploader');
+        $uploader   = $this->container->get('media.manager.admin');
         $uploadPath = $uploader->getUploadRootDir('images');
         $filesystem = $this->container->get('filesystem');
 

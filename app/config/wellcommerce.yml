@@ -30,5 +30,6 @@ parameters:
 well_commerce_app:
     type: %search_engine%
     search_term_min_length: 3
+    media_upload_dir: %kernel.root_dir%
 
 

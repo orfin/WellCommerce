@@ -14,7 +14,6 @@ namespace WellCommerce\AppBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\AppBundle\Entity\Media;
-use WellCommerce\AppBundle\Factory\AbstractFactory;
 
 /**
  * Class MediaFactory
@@ -24,7 +23,7 @@ use WellCommerce\AppBundle\Factory\AbstractFactory;
 class MediaFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\AppBundle\Entity\MediaInterface
+     * {@inheritdoc}
      */
     public function create()
     {

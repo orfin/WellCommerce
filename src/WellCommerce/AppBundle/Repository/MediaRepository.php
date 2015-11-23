@@ -11,10 +11,6 @@
  */
 namespace WellCommerce\AppBundle\Repository;
 
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use WellCommerce\AppBundle\Entity\Media;
-use WellCommerce\AppBundle\Repository\AbstractEntityRepository;
-
 /**
  * Class MediaRepository
  *
@@ -22,19 +18,5 @@ use WellCommerce\AppBundle\Repository\AbstractEntityRepository;
  */
 class MediaRepository extends AbstractEntityRepository implements MediaRepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function save(UploadedFile $file, $dir)
-    {
-        $media = new Media();
-        $media->setName($file->getClientOriginalName());
-        $media->setExtension($file->guessClientExtension());
-        $media->setMime($file->getClientMimeType());
-        $media->setSize($file->getClientSize());
-        $this->_em->persist($media);
-        $this->_em->flush();
 
-        return $media;
-    }
 }

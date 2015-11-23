@@ -14,7 +14,6 @@ namespace WellCommerce\AppBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use WellCommerce\AppBundle\Controller\Admin\AbstractAdminController;
 
 /**
  * Class MediaController
@@ -24,6 +23,11 @@ use WellCommerce\AppBundle\Controller\Admin\AbstractAdminController;
 class MediaController extends AbstractAdminController
 {
     /**
+     * @var \WellCommerce\AppBundle\Manager\Admin\MediaManager
+     */
+    protected $manager;
+
+    /**
      * Uploads and saves the file
      *
      * @param Request $request
@@ -32,12 +36,11 @@ class MediaController extends AbstractAdminController
      */
     public function addAction(Request $request)
     {
-        $file     = $request->files->get('file');
-        $uploader = $this->get('media.uploader');
-        $helper   = $this->manager->getImageHelper();
+        $file   = $request->files->get('file');
+        $helper = $this->manager->getImageHelper();
 
         try {
-            $media     = $uploader->upload($file, 'images');
+            $media     = $this->manager->upload($file, 'images');
             $thumbnail = $helper->getImage($media->getPath(), 'medium');
 
             $response = [

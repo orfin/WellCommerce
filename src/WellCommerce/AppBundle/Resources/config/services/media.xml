@@ -18,13 +18,6 @@
             <argument type="service" id="event_dispatcher"/>
         </service>
 
-        <service id="media.uploader" class="WellCommerce\AppBundle\Uploader\MediaUploader">
-            <argument>%kernel.root_dir%</argument>
-            <argument type="service" id="filesystem" />
-            <argument type="service" id="event_dispatcher" />
-            <argument type="service" id="media.repository" />
-        </service>
-
         <service id="twig.extension.image" class="WellCommerce\AppBundle\Twig\Extension\ImageExtension">
             <argument type="service" id="image.helper"/>
             <tag name="twig.extension"/>
