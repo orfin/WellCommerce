@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\AppBundle\Form\Front;
 
-use WellCommerce\AppBundle\Form\AbstractFormBuilder;
+use WellCommerce\CoreBundle\Form\AbstractFormBuilder;
 use WellCommerce\Component\Form\Elements\FormInterface;
 use WellCommerce\Component\Form\Elements\Optioned\RadioGroup;
 use WellCommerce\AppBundle\Context\Front\CartContextInterface;

@@ -7,19 +7,19 @@
     <services>
         <service id="form.data_transformer.collection" class="WellCommerce\Component\Form\DataTransformer\DataTransformerCollection" />
 
-        <service id="form.data_transformer.factory" class="WellCommerce\AppBundle\Form\DataTransformer\DataTransformerFactory">
+        <service id="form.data_transformer.factory" class="WellCommerce\CoreBundle\Form\DataTransformer\DataTransformerFactory">
             <argument type="service" id="form.data_transformer.collection"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <service id="form.collection.data_transformer" class="WellCommerce\AppBundle\Form\DataTransformer\CollectionToArrayTransformer" scope="prototype">
+        <service id="form.collection.data_transformer" class="WellCommerce\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer" scope="prototype">
             <argument type="service" id="doctrine.helper"/>
             <tag name="form.data_transformer" alias="collection"/>
         </service>
 
-        <service id="form.entity.data_transformer" class="WellCommerce\AppBundle\Form\DataTransformer\EntityToIdentifierTransformer" scope="prototype">
+        <service id="form.entity.data_transformer" class="WellCommerce\CoreBundle\Form\DataTransformer\EntityToIdentifierTransformer" scope="prototype">
             <argument type="service" id="doctrine.helper"/>
             <tag name="form.data_transformer" alias="entity"/>
         </service>

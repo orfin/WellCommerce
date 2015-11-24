@@ -15,7 +15,7 @@ namespace WellCommerce\AppBundle\Form\DataTransformer;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
-use WellCommerce\AppBundle\Form\DataTransformer\CollectionToArrayTransformer;
+use WellCommerce\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
 use WellCommerce\AppBundle\Entity\PaymentMethodConfigurationInterface;
 use WellCommerce\AppBundle\Entity\PaymentMethodInterface;
 use WellCommerce\AppBundle\Factory\PaymentMethodConfigurationFactory;

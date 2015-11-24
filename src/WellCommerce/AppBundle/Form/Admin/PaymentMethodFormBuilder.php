@@ -12,7 +12,7 @@
 namespace WellCommerce\AppBundle\Form\Admin;
 
 use Symfony\Component\PropertyAccess\PropertyPath;
-use WellCommerce\AppBundle\Form\AbstractFormBuilder;
+use WellCommerce\CoreBundle\Form\AbstractFormBuilder;
 use WellCommerce\Component\Form\Conditions\Equals;
 use WellCommerce\Component\Form\Elements\FormInterface;
 

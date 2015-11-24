@@ -16,7 +16,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\PersistentCollection;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 use WellCommerce\AppBundle\Entity\Price;
-use WellCommerce\AppBundle\Form\DataTransformer\CollectionToArrayTransformer;
+use WellCommerce\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
 use WellCommerce\AppBundle\Entity\ShippingMethod;
 use WellCommerce\AppBundle\Entity\ShippingMethodCost;
 

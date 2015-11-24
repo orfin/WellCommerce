@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\AppBundle\Form;
+namespace WellCommerce\CoreBundle\Form;
 
 use WellCommerce\CoreBundle\DependencyInjection\AbstractContainerAware;
 use WellCommerce\CoreBundle\EventDispatcher\EventDispatcherInterface;

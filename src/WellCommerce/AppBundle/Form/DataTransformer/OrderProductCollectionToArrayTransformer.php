@@ -15,7 +15,7 @@ namespace WellCommerce\AppBundle\Form\DataTransformer;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 use WellCommerce\AppBundle\Entity\ProductAttributeInterface;
-use WellCommerce\AppBundle\Form\DataTransformer\CollectionToArrayTransformer;
+use WellCommerce\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
 use WellCommerce\AppBundle\Entity\OrderInterface;
 use WellCommerce\AppBundle\Entity\OrderProductInterface;
 use WellCommerce\AppBundle\Manager\Admin\OrderProductManager;
