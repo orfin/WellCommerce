@@ -14,7 +14,7 @@ namespace WellCommerce\AppBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PropertyAccess\PropertyAccess;
-use WellCommerce\AppBundle\Controller\Admin\AbstractAdminController;
+use WellCommerce\CoreBundle\Controller\Admin\AbstractAdminController;
 
 /**
  * Class LayoutBoxController

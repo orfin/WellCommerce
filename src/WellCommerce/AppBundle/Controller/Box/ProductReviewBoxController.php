@@ -12,15 +12,14 @@
 
 namespace WellCommerce\AppBundle\Controller\Box;
 
-use WellCommerce\AppBundle\Controller\Box\AbstractBoxController;
-use WellCommerce\AppBundle\Controller\Box\BoxControllerInterface;
+use WellCommerce\CoreBundle\Controller\Box\AbstractBoxController;
 
 /**
  * Class ProductReviewBoxController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductReviewBoxController extends AbstractBoxController implements BoxControllerInterface
+class ProductReviewBoxController extends AbstractBoxController
 {
     /**
      * @var \WellCommerce\AppBundle\Manager\Front\ProductReviewManager

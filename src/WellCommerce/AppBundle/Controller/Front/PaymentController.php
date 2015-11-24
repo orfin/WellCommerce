@@ -12,16 +12,15 @@
 
 namespace WellCommerce\AppBundle\Controller\Front;
 
-use WellCommerce\AppBundle\Controller\Front\AbstractFrontController;
-use WellCommerce\AppBundle\Controller\Front\FrontControllerInterface;
 use WellCommerce\AppBundle\Entity\OrderInterface;
+use WellCommerce\CoreBundle\Controller\Front\AbstractFrontController;
 
 /**
  * Class PaymentController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PaymentController extends AbstractFrontController implements FrontControllerInterface
+class PaymentController extends AbstractFrontController
 {
     /**
      * @var \WellCommerce\AppBundle\Manager\Front\PaymentManagerInterface

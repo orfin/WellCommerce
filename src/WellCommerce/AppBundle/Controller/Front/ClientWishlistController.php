@@ -13,15 +13,14 @@
 namespace WellCommerce\AppBundle\Controller\Front;
 
 use WellCommerce\AppBundle\Entity\ProductInterface;
-use WellCommerce\AppBundle\Controller\Front\AbstractFrontController;
-use WellCommerce\AppBundle\Controller\Front\FrontControllerInterface;
+use WellCommerce\CoreBundle\Controller\Front\AbstractFrontController;
 
 /**
  * Class ClientWishlistController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientWishlistController extends AbstractFrontController implements FrontControllerInterface
+class ClientWishlistController extends AbstractFrontController
 {
     /**
      * @var \WellCommerce\AppBundle\Manager\Front\ClientWishlistManager

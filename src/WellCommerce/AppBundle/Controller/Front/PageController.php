@@ -14,15 +14,14 @@ namespace WellCommerce\AppBundle\Controller\Front;
 
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\AppBundle\Service\Breadcrumb\BreadcrumbItem;
-use WellCommerce\AppBundle\Controller\Front\AbstractFrontController;
-use WellCommerce\AppBundle\Controller\Front\FrontControllerInterface;
+use WellCommerce\CoreBundle\Controller\Front\AbstractFrontController;
 
 /**
  * Class PageController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PageController extends AbstractFrontController implements FrontControllerInterface
+class PageController extends AbstractFrontController
 {
     /**
      * {@inheritdoc}

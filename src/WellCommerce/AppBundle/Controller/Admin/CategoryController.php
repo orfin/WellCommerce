@@ -14,7 +14,7 @@ namespace WellCommerce\AppBundle\Controller\Admin;
 
 use Doctrine\Common\Collections\Criteria;
 use Symfony\Component\HttpFoundation\Request;
-use WellCommerce\AppBundle\Controller\Admin\AbstractAdminController;
+use WellCommerce\CoreBundle\Controller\Admin\AbstractAdminController;
 
 /**
  * Class CategoryController

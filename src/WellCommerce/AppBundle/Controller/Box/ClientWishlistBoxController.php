@@ -13,9 +13,9 @@
 namespace WellCommerce\AppBundle\Controller\Box;
 
 use WellCommerce\AppBundle\Entity\ClientWishlistInterface;
-use WellCommerce\AppBundle\Controller\Box\AbstractBoxController;
 use WellCommerce\Component\DataSet\Conditions\Condition\In;
 use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
+use WellCommerce\CoreBundle\Controller\Box\AbstractBoxController;
 
 /**
  * Class ClientWishlistBoxController

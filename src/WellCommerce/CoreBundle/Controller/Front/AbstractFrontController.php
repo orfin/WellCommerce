@@ -9,12 +9,12 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\AppBundle\Controller\Front;
+namespace WellCommerce\CoreBundle\Controller\Front;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use WellCommerce\AppBundle\Service\Breadcrumb\BreadcrumbItem;
-use WellCommerce\AppBundle\Controller\AbstractController;
+use WellCommerce\CoreBundle\Controller\AbstractController;
 use WellCommerce\AppBundle\Manager\Front\FrontManagerInterface;
 
 /**

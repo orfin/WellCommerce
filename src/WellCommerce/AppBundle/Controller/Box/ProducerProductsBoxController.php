@@ -12,17 +12,16 @@
 
 namespace WellCommerce\AppBundle\Controller\Box;
 
-use WellCommerce\AppBundle\Conditions\ProductLayeredNavigationConditions;
-use WellCommerce\AppBundle\Controller\Box\AbstractBoxController;
-use WellCommerce\AppBundle\Controller\Box\BoxControllerInterface;
 use WellCommerce\AppBundle\Collection\LayoutBoxSettingsCollection;
+use WellCommerce\AppBundle\Conditions\ProductLayeredNavigationConditions;
+use WellCommerce\CoreBundle\Controller\Box\AbstractBoxController;
 
 /**
  * Class ProducerProductsBoxController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProducerProductsBoxController extends AbstractBoxController implements BoxControllerInterface
+class ProducerProductsBoxController extends AbstractBoxController
 {
     /**
      * @var \WellCommerce\AppBundle\Manager\Front\ProducerManager

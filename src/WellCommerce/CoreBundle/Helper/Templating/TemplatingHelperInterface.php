@@ -12,7 +12,7 @@
 
 namespace WellCommerce\CoreBundle\Helper\Templating;
 
-use WellCommerce\AppBundle\Controller\ControllerInterface;
+use WellCommerce\CoreBundle\Controller\ControllerInterface;
 
 /**
  * Interface TemplatingHelperInterface

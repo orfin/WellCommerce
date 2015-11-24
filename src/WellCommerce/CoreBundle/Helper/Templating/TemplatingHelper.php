@@ -15,7 +15,7 @@ namespace WellCommerce\CoreBundle\Helper\Templating;
 use ReflectionClass;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
-use WellCommerce\AppBundle\Controller\ControllerInterface;
+use WellCommerce\CoreBundle\Controller\ControllerInterface;
 
 /**
  * Class TemplatingHelper

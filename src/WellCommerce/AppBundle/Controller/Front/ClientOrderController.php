@@ -12,15 +12,14 @@
 
 namespace WellCommerce\AppBundle\Controller\Front;
 
-use WellCommerce\AppBundle\Controller\Front\AbstractFrontController;
-use WellCommerce\AppBundle\Controller\Front\FrontControllerInterface;
+use WellCommerce\CoreBundle\Controller\Front\AbstractFrontController;
 
 /**
  * Class ClientOrderController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientOrderController extends AbstractFrontController implements FrontControllerInterface
+class ClientOrderController extends AbstractFrontController
 {
     public function indexAction()
     {

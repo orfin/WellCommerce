@@ -14,15 +14,14 @@ namespace WellCommerce\AppBundle\Controller\Front;
 
 use WellCommerce\AppBundle\Entity\ProducerInterface;
 use WellCommerce\AppBundle\Service\Breadcrumb\BreadcrumbItem;
-use WellCommerce\AppBundle\Controller\Front\AbstractFrontController;
-use WellCommerce\AppBundle\Controller\Front\FrontControllerInterface;
+use WellCommerce\CoreBundle\Controller\Front\AbstractFrontController;
 
 /**
  * Class ProducerController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProducerController extends AbstractFrontController implements FrontControllerInterface
+class ProducerController extends AbstractFrontController
 {
     public function indexAction(ProducerInterface $producer)
     {

@@ -14,15 +14,14 @@ namespace WellCommerce\AppBundle\Controller\Front;
 
 use WellCommerce\AppBundle\Entity\ProductInterface;
 use WellCommerce\AppBundle\Service\Breadcrumb\BreadcrumbItem;
-use WellCommerce\AppBundle\Controller\Front\AbstractFrontController;
-use WellCommerce\AppBundle\Controller\Front\FrontControllerInterface;
+use WellCommerce\CoreBundle\Controller\Front\AbstractFrontController;
 
 /**
  * Class ProductController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductController extends AbstractFrontController implements FrontControllerInterface
+class ProductController extends AbstractFrontController
 {
     public function indexAction(ProductInterface $product)
     {

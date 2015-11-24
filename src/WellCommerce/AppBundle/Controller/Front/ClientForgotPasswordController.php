@@ -12,15 +12,14 @@
 
 namespace WellCommerce\AppBundle\Controller\Front;
 
-use WellCommerce\AppBundle\Controller\Front\AbstractFrontController;
-use WellCommerce\AppBundle\Controller\Front\FrontControllerInterface;
+use WellCommerce\CoreBundle\Controller\Front\AbstractFrontController;
 
 /**
  * Class ClientForgotPasswordController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientForgotPasswordController extends AbstractFrontController implements FrontControllerInterface
+class ClientForgotPasswordController extends AbstractFrontController
 {
     public function resetAction()
     {

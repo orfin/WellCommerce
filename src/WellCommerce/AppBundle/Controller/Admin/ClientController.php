@@ -12,7 +12,7 @@
 
 namespace WellCommerce\AppBundle\Controller\Admin;
 
-use WellCommerce\AppBundle\Controller\Admin\AbstractAdminController;
+use WellCommerce\CoreBundle\Controller\Admin\AbstractAdminController;
 
 /**
  * Class ClientController

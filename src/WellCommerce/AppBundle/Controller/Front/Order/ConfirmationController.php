@@ -13,15 +13,14 @@
 namespace WellCommerce\AppBundle\Controller\Front\Order;
 
 use WellCommerce\AppBundle\Service\Breadcrumb\BreadcrumbItem;
-use WellCommerce\AppBundle\Controller\Front\AbstractFrontController;
-use WellCommerce\AppBundle\Controller\Front\FrontControllerInterface;
+use WellCommerce\CoreBundle\Controller\Front\AbstractFrontController;
 
 /**
  * Class ConfirmationController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ConfirmationController extends AbstractFrontController implements FrontControllerInterface
+class ConfirmationController extends AbstractFrontController
 {
     /**
      * @var \WellCommerce\AppBundle\Manager\Front\OrderConfirmationManager

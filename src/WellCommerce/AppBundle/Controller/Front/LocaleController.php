@@ -14,15 +14,14 @@ namespace WellCommerce\AppBundle\Controller\Front;
 
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use WellCommerce\AppBundle\Controller\Front\AbstractFrontController;
-use WellCommerce\AppBundle\Controller\Front\FrontControllerInterface;
+use WellCommerce\CoreBundle\Controller\Front\AbstractFrontController;
 
 /**
  * Class LocaleController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LocaleController extends AbstractFrontController implements FrontControllerInterface
+class LocaleController extends AbstractFrontController
 {
     /**
      * Redirects to home page

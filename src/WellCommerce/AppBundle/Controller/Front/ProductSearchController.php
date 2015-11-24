@@ -13,16 +13,15 @@
 namespace WellCommerce\AppBundle\Controller\Front;
 
 use WellCommerce\AppBundle\Service\Breadcrumb\BreadcrumbItem;
-use WellCommerce\AppBundle\Controller\Front\AbstractFrontController;
-use WellCommerce\AppBundle\Controller\Front\FrontControllerInterface;
 use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
+use WellCommerce\CoreBundle\Controller\Front\AbstractFrontController;
 
 /**
  * Class ProductSearchController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductSearchController extends AbstractFrontController implements FrontControllerInterface
+class ProductSearchController extends AbstractFrontController
 {
     /**
      * @var \WellCommerce\AppBundle\Manager\Front\ProductSearchManager

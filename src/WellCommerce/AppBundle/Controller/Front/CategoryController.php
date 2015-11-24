@@ -14,15 +14,14 @@ namespace WellCommerce\AppBundle\Controller\Front;
 
 use WellCommerce\AppBundle\Entity\CategoryInterface;
 use WellCommerce\AppBundle\Service\Breadcrumb\BreadcrumbItem;
-use WellCommerce\AppBundle\Controller\Front\AbstractFrontController;
-use WellCommerce\AppBundle\Controller\Front\FrontControllerInterface;
+use WellCommerce\CoreBundle\Controller\Front\AbstractFrontController;
 
 /**
  * Class CategoryController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CategoryController extends AbstractFrontController implements FrontControllerInterface
+class CategoryController extends AbstractFrontController
 {
     /**
      * {@inheritdoc}

@@ -12,15 +12,14 @@
 
 namespace WellCommerce\AppBundle\Controller\Box;
 
-use WellCommerce\AppBundle\Controller\Box\AbstractBoxController;
-use WellCommerce\AppBundle\Controller\Box\BoxControllerInterface;
+use WellCommerce\CoreBundle\Controller\Box\AbstractBoxController;
 
 /**
  * Class ProducerMenuBoxController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProducerMenuBoxController extends AbstractBoxController implements BoxControllerInterface
+class ProducerMenuBoxController extends AbstractBoxController
 {
     /**
      * {@inheritdoc}

@@ -12,21 +12,20 @@
 
 namespace WellCommerce\AppBundle\Controller\Front;
 
+use WellCommerce\AppBundle\Entity\CartProductInterface;
 use WellCommerce\AppBundle\Entity\ProductAttributeInterface;
 use WellCommerce\AppBundle\Entity\ProductInterface;
-use WellCommerce\AppBundle\Service\Breadcrumb\BreadcrumbItem;
-use WellCommerce\AppBundle\Controller\Front\AbstractFrontController;
-use WellCommerce\AppBundle\Controller\Front\FrontControllerInterface;
-use WellCommerce\AppBundle\Entity\CartProductInterface;
 use WellCommerce\AppBundle\Exception\AddCartItemException;
 use WellCommerce\AppBundle\Exception\DeleteCartItemException;
+use WellCommerce\AppBundle\Service\Breadcrumb\BreadcrumbItem;
+use WellCommerce\CoreBundle\Controller\Front\AbstractFrontController;
 
 /**
  * Class CartController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CartController extends AbstractFrontController implements FrontControllerInterface
+class CartController extends AbstractFrontController
 {
     /**
      * @var \WellCommerce\AppBundle\Manager\Front\CartManagerInterface

@@ -12,15 +12,14 @@
 
 namespace WellCommerce\AppBundle\Controller\Front;
 
-use WellCommerce\AppBundle\Controller\Front\AbstractFrontController;
-use WellCommerce\AppBundle\Controller\Front\FrontControllerInterface;
+use WellCommerce\CoreBundle\Controller\Front\AbstractFrontController;
 
 /**
  * Class ProductLayeredNavigationController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductLayeredNavigationController extends AbstractFrontController implements FrontControllerInterface
+class ProductLayeredNavigationController extends AbstractFrontController
 {
     /**
      * @return \Symfony\Component\HttpFoundation\JsonResponse

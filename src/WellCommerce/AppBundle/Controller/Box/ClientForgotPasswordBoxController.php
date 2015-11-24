@@ -14,7 +14,7 @@ namespace WellCommerce\AppBundle\Controller\Box;
 
 use WellCommerce\AppBundle\Entity\ClientInterface;
 use WellCommerce\AppBundle\Exception\ResetPasswordException;
-use WellCommerce\AppBundle\Controller\Box\AbstractBoxController;
+use WellCommerce\CoreBundle\Controller\Box\AbstractBoxController;
 
 /**
  * Class ClientForgotPasswordBoxController

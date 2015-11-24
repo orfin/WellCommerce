@@ -12,7 +12,7 @@
 
 namespace WellCommerce\AppBundle\Manager\Front;
 
-use WellCommerce\AppBundle\Controller\Box\BoxControllerInterface;
+use WellCommerce\CoreBundle\Controller\Box\BoxControllerInterface;
 use WellCommerce\AppBundle\Collection\LayoutBoxCollection;
 use WellCommerce\AppBundle\Collection\LayoutBoxSettingsCollection;
 use WellCommerce\AppBundle\Exception\LayoutBoxNotFoundException;

@@ -12,15 +12,14 @@
 
 namespace WellCommerce\AppBundle\Controller\Box;
 
-use WellCommerce\AppBundle\Controller\Box\AbstractBoxController;
-use WellCommerce\AppBundle\Controller\Box\BoxControllerInterface;
+use WellCommerce\CoreBundle\Controller\Box\AbstractBoxController;
 
 /**
  * Class CategoryInfoBoxController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CategoryInfoBoxController extends AbstractBoxController implements BoxControllerInterface
+class CategoryInfoBoxController extends AbstractBoxController
 {
     public function indexAction()
     {

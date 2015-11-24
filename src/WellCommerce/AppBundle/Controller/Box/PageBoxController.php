@@ -12,15 +12,14 @@
 
 namespace WellCommerce\AppBundle\Controller\Box;
 
-use WellCommerce\AppBundle\Controller\Box\AbstractBoxController;
-use WellCommerce\AppBundle\Controller\Box\BoxControllerInterface;
+use WellCommerce\CoreBundle\Controller\Box\AbstractBoxController;
 
 /**
  * Class PageBoxController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PageBoxController extends AbstractBoxController implements BoxControllerInterface
+class PageBoxController extends AbstractBoxController
 {
     public function indexAction()
     {

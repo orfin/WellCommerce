@@ -14,15 +14,14 @@ namespace WellCommerce\AppBundle\Controller\Front;
 
 use WellCommerce\AppBundle\Entity\ProductStatusInterface;
 use WellCommerce\AppBundle\Service\Breadcrumb\BreadcrumbItem;
-use WellCommerce\AppBundle\Controller\Front\AbstractFrontController;
-use WellCommerce\AppBundle\Controller\Front\FrontControllerInterface;
+use WellCommerce\CoreBundle\Controller\Front\AbstractFrontController;
 
 /**
  * Class ProductStatusController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductStatusController extends AbstractFrontController implements FrontControllerInterface
+class ProductStatusController extends AbstractFrontController
 {
     /**
      * {@inheritdoc}

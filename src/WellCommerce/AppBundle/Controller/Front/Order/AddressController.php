@@ -15,15 +15,14 @@ namespace WellCommerce\AppBundle\Controller\Front\Order;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\AppBundle\Service\Breadcrumb\BreadcrumbItem;
-use WellCommerce\AppBundle\Controller\Front\AbstractFrontController;
-use WellCommerce\AppBundle\Controller\Front\FrontControllerInterface;
+use WellCommerce\CoreBundle\Controller\Front\AbstractFrontController;
 
 /**
  * Class AddressController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AddressController extends AbstractFrontController implements FrontControllerInterface
+class AddressController extends AbstractFrontController
 {
     /**
      * @var \WellCommerce\AppBundle\Manager\Front\OrderAddressManager

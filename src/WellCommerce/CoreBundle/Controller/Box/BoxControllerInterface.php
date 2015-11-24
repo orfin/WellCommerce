@@ -9,16 +9,16 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\AppBundle\Controller\Box;
 
-use WellCommerce\AppBundle\Controller\Front\AbstractFrontController;
+namespace WellCommerce\CoreBundle\Controller\Box;
+
+use WellCommerce\CoreBundle\Controller\ControllerInterface;
 
 /**
- * Class AbstractFrontController
+ * Interface BoxControllerInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractBoxController extends AbstractFrontController implements BoxControllerInterface
+interface BoxControllerInterface extends ControllerInterface
 {
-
 }

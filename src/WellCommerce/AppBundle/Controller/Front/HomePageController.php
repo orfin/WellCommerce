@@ -12,15 +12,14 @@
 
 namespace WellCommerce\AppBundle\Controller\Front;
 
-use WellCommerce\AppBundle\Controller\AbstractController;
-use WellCommerce\AppBundle\Controller\Front\FrontControllerInterface;
+use WellCommerce\CoreBundle\Controller\AbstractController;
 
 /**
  * Class HomePageController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class HomePageController extends AbstractController implements FrontControllerInterface
+class HomePageController extends AbstractController
 {
     public function indexAction()
     {

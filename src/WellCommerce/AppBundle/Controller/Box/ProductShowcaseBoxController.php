@@ -12,16 +12,15 @@
 
 namespace WellCommerce\AppBundle\Controller\Box;
 
-use WellCommerce\AppBundle\Controller\Box\AbstractBoxController;
-use WellCommerce\AppBundle\Controller\Box\BoxControllerInterface;
 use WellCommerce\AppBundle\Collection\LayoutBoxSettingsCollection;
+use WellCommerce\CoreBundle\Controller\Box\AbstractBoxController;
 
 /**
  * Class ProductShowcaseBoxController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductShowcaseBoxController extends AbstractBoxController implements BoxControllerInterface
+class ProductShowcaseBoxController extends AbstractBoxController
 {
     /**
      * @var \WellCommerce\AppBundle\Manager\Front\ProductStatusManager

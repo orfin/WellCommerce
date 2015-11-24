@@ -13,15 +13,14 @@
 namespace WellCommerce\AppBundle\Controller\Front;
 
 use Symfony\Component\HttpFoundation\Request;
-use WellCommerce\AppBundle\Controller\Front\AbstractFrontController;
-use WellCommerce\AppBundle\Controller\Front\FrontControllerInterface;
+use WellCommerce\CoreBundle\Controller\Front\AbstractFrontController;
 
 /**
  * Class ClientController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientController extends AbstractFrontController implements FrontControllerInterface
+class ClientController extends AbstractFrontController
 {
     public function loginAction()
     {

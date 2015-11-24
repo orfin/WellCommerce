@@ -12,17 +12,16 @@
 
 namespace WellCommerce\AppBundle\Controller\Box;
 
-use WellCommerce\AppBundle\Controller\Box\AbstractBoxController;
-use WellCommerce\AppBundle\Controller\Box\BoxControllerInterface;
-use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
 use WellCommerce\AppBundle\Collection\LayoutBoxSettingsCollection;
+use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
+use WellCommerce\CoreBundle\Controller\Box\AbstractBoxController;
 
 /**
  * Class ProductSearchBoxController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductSearchBoxController extends AbstractBoxController implements BoxControllerInterface
+class ProductSearchBoxController extends AbstractBoxController
 {
     /**
      * @var \WellCommerce\AppBundle\Manager\Front\ProductSearchManager
