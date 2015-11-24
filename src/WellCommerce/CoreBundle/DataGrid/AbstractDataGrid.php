@@ -9,7 +9,7 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\AppBundle\DataGrid;
+namespace WellCommerce\CoreBundle\DataGrid;
 
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Component\DataGrid\Column\ColumnCollection;
