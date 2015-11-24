@@ -13,7 +13,7 @@
 namespace WellCommerce\AppBundle\Manager\Admin;
 
 use WellCommerce\AppBundle\Entity\RouteInterface;
-use WellCommerce\AppBundle\Helper\Sluggable;
+use WellCommerce\CoreBundle\Helper\Sluggable;
 use WellCommerce\AppBundle\Manager\Admin\AbstractAdminManager;
 
 /**

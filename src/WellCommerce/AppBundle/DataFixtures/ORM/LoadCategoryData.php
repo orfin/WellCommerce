@@ -16,7 +16,7 @@ use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use WellCommerce\AppBundle\Entity\Category;
-use WellCommerce\AppBundle\Helper\Sluggable;
+use WellCommerce\CoreBundle\Helper\Sluggable;
 use WellCommerce\AppBundle\DataFixtures\AbstractDataFixture;
 
 /**
