@@ -9,6 +9,7 @@
         <import resource="services/form.xml"/>
         <import resource="services/dataset.xml"/>
         <import resource="services/datagrid.xml"/>
+        <import resource="services/twig.xml"/>
     </imports>
 
     <services>

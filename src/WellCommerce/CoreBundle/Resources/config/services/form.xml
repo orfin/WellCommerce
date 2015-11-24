@@ -222,10 +222,5 @@
         <service id="form.dependency.show" class="WellCommerce\Component\Form\Dependencies\Show" scope="prototype">
             <tag name="form.dependency" alias="show"/>
         </service>
-
-        <service id="twig.extension.form" class="WellCommerce\AppBundle\Twig\Extension\FormJavascriptExtension">
-            <argument type="service" id="form.renderer.javascript"/>
-            <tag name="twig.extension"/>
-        </service>
     </services>
 </container>

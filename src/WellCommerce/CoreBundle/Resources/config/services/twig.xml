@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="twig.extension.datagrid" class="WellCommerce\CoreBundle\Twig\Extension\DataGridExtension">
+            <argument>WellCommerceCoreBundle:DataGrid:datagrid.html.twig</argument>
+            <tag name="twig.extension"/>
+        </service>
+
+        <service id="twig.extension.form" class="WellCommerce\CoreBundle\Twig\Extension\FormJavascriptExtension">
+            <argument type="service" id="form.renderer.javascript"/>
+            <tag name="twig.extension"/>
+        </service>
+
+        <service id="twig.extension.image" class="WellCommerce\CoreBundle\Twig\Extension\ImageExtension">
+            <argument type="service" id="image.helper"/>
+            <tag name="twig.extension"/>
+        </service>
+    </services>
+</container>
+
