@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\AppBundle\EventListener;
+namespace WellCommerce\CoreBundle\EventListener;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use WellCommerce\CoreBundle\DependencyInjection\AbstractContainerAware;

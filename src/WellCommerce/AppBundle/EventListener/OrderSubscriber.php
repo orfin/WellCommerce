@@ -12,7 +12,7 @@
 namespace WellCommerce\AppBundle\EventListener;
 
 use WellCommerce\CoreBundle\Event\ResourceEvent;
-use WellCommerce\AppBundle\EventListener\AbstractEventSubscriber;
+use WellCommerce\CoreBundle\EventListener\AbstractEventSubscriber;
 use WellCommerce\AppBundle\Entity\OrderInterface;
 use WellCommerce\AppBundle\Entity\OrderTotalDetailInterface;
 use WellCommerce\AppBundle\Factory\OrderTotalFactory;

@@ -16,7 +16,7 @@ use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 use WellCommerce\AppBundle\Entity\Currency;
-use WellCommerce\AppBundle\EventListener\AbstractEventSubscriber;
+use WellCommerce\CoreBundle\EventListener\AbstractEventSubscriber;
 
 /**
  * Class CurrencySubscriber

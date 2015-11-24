@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\AppBundle\EventListener;
 
-use WellCommerce\AppBundle\EventListener\AbstractEventSubscriber;
+use WellCommerce\CoreBundle\EventListener\AbstractEventSubscriber;
 use WellCommerce\Component\Form\Elements\FormInterface;
 use WellCommerce\CoreBundle\Event\FormEvent;
 

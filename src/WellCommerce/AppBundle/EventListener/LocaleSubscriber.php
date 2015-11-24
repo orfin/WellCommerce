@@ -15,7 +15,7 @@ use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
-use WellCommerce\AppBundle\EventListener\AbstractEventSubscriber;
+use WellCommerce\CoreBundle\EventListener\AbstractEventSubscriber;
 
 /**
  * Class LocaleSubscriber
