@@ -14,8 +14,8 @@ namespace WellCommerce\CoreBundle\Manager;
 
 use WellCommerce\CoreBundle\DependencyInjection\AbstractContainerAware;
 use WellCommerce\CoreBundle\EventDispatcher\EventDispatcherInterface;
-use WellCommerce\AppBundle\Exception\MissingFactoryException;
-use WellCommerce\AppBundle\Exception\MissingFormBuilderException;
+use WellCommerce\CoreBundle\Exception\MissingFactoryException;
+use WellCommerce\CoreBundle\Exception\MissingFormBuilderException;
 use WellCommerce\CoreBundle\Factory\FactoryInterface;
 use WellCommerce\CoreBundle\Repository\RepositoryInterface;
 use WellCommerce\Component\Form\FormBuilderInterface;

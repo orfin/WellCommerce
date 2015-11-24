@@ -10,20 +10,22 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\AppBundle\Exception;
+namespace WellCommerce\CoreBundle\Exception;
 
 /**
- * Class MissingFormBuilderException
+ * Class MissingFactoryException
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class MissingFormBuilderException extends \LogicException
+class MissingFactoryException extends \LogicException
 {
     /**
+     * Constructor
+     *
      * @param string $className
      */
     public function __construct($className)
     {
-        parent::__construct(sprintf('FormBuilder service is missing in "%s"', $className));
+        parent::__construct(sprintf('Factory service is missing in "%s"', $className));
     }
 }
