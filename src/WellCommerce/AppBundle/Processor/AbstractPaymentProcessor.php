@@ -13,7 +13,7 @@
 namespace WellCommerce\AppBundle\Processor;
 
 use Doctrine\Common\Collections\Collection;
-use WellCommerce\AppBundle\DependencyInjection\AbstractContainerAware;
+use WellCommerce\CoreBundle\DependencyInjection\AbstractContainerAware;
 use WellCommerce\Component\Form\Dependencies\DependencyInterface;
 use WellCommerce\Component\Form\Elements\ElementInterface;
 use WellCommerce\Component\Form\FormBuilderInterface;

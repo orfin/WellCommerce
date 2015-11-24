@@ -12,7 +12,7 @@
 
 namespace WellCommerce\AppBundle\DependencyInjection\Compiler;
 
-use WellCommerce\AppBundle\DependencyInjection\Compiler\AbstractCollectionPass;
+use WellCommerce\CoreBundle\DependencyInjection\Compiler\AbstractCollectionPass;
 
 /**
  * Class RegisterShippingMethodCalculatorPass

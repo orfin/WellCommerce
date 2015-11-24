@@ -14,7 +14,7 @@ namespace WellCommerce\CoreBundle;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
-use WellCommerce\AppBundle\DependencyInjection\Compiler;
+use WellCommerce\CoreBundle\DependencyInjection\Compiler;
 
 /**
  * Class WellCommerceCoreBundle
@@ -26,6 +26,10 @@ class WellCommerceCoreBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         parent::build($container);
+        $container->addCompilerPass(new Compiler\FormResolverPass());
+        $container->addCompilerPass(new Compiler\FormDataTransformerPass());
+        $container->addCompilerPass(new Compiler\DataSetContextPass());
+        $container->addCompilerPass(new Compiler\DataSetTransformerPass());
 
     }
 }

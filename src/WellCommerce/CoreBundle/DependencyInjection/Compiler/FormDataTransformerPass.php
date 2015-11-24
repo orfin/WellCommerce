@@ -10,19 +10,18 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\AppBundle\DependencyInjection\Compiler;
+namespace WellCommerce\CoreBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Reference;
-use WellCommerce\Component\DataSet\Context\DataSetContextInterface;
+use WellCommerce\Component\Form\DataTransformer\DataTransformerInterface;
 
 /**
- * Class DataSetContextPass
+ * Class FormDataTransformerPass
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class DataSetContextPass implements CompilerPassInterface
+class FormDataTransformerPass implements CompilerPassInterface
 {
     /**
      * Processes the container
@@ -31,9 +30,9 @@ class DataSetContextPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        $tag        = 'dataset.context';
-        $interface  = DataSetContextInterface::class;
-        $definition = $container->getDefinition('dataset.context.collection');
+        $tag        = 'form.data_transformer';
+        $interface  = DataTransformerInterface::class;
+        $definition = $container->getDefinition('form.data_transformer.collection');
 
         foreach ($container->findTaggedServiceIds($tag) as $id => $attributes) {
             $itemDefinition = $container->getDefinition($id);
@@ -41,13 +40,13 @@ class DataSetContextPass implements CompilerPassInterface
 
             if (!$refClass->implementsInterface($interface)) {
                 throw new \InvalidArgumentException(
-                    sprintf('DataSetContext "%s" tagged with "%s" must implement interface "%s".', $id, $tag, $interface)
+                    sprintf('DataTransformer "%s" tagged with "%s" must implement interface "%s".', $id, $tag, $interface)
                 );
             }
 
             $definition->addMethodCall('add', [
                 $attributes[0]['alias'],
-                new Reference($id)
+                $id
             ]);
         }
     }

@@ -15,7 +15,7 @@ namespace WellCommerce\AppBundle\DependencyInjection\Compiler;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
-use WellCommerce\AppBundle\DependencyInjection\Compiler\AbstractCollectionPass;
+use WellCommerce\CoreBundle\DependencyInjection\Compiler\AbstractCollectionPass;
 
 /**
  * Class RegisterPaymentMethodProcessorPass

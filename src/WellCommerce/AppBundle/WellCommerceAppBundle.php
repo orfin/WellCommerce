@@ -26,10 +26,6 @@ class WellCommerceAppBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         parent::build($container);
-        $container->addCompilerPass(new Compiler\FormResolverPass());
-        $container->addCompilerPass(new Compiler\FormDataTransformerPass());
-        $container->addCompilerPass(new Compiler\DataSetContextPass());
-        $container->addCompilerPass(new Compiler\DataSetTransformerPass());
         $container->addCompilerPass(new Compiler\RouteGeneratorPass());
         $container->addCompilerPass(new Compiler\LayoutBoxConfiguratorPass());
         $container->addCompilerPass(new Compiler\ThemeCompilerPass());

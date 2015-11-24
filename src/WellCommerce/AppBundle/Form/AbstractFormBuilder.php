@@ -12,7 +12,7 @@
 
 namespace WellCommerce\AppBundle\Form;
 
-use WellCommerce\AppBundle\DependencyInjection\AbstractContainerAware;
+use WellCommerce\CoreBundle\DependencyInjection\AbstractContainerAware;
 use WellCommerce\CoreBundle\EventDispatcher\EventDispatcherInterface;
 use WellCommerce\CoreBundle\Repository\RepositoryInterface;
 use WellCommerce\Component\Form\Elements\FormInterface;

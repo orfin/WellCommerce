@@ -12,7 +12,7 @@
 
 namespace WellCommerce\AppBundle\Manager;
 
-use WellCommerce\AppBundle\DependencyInjection\AbstractContainerAware;
+use WellCommerce\CoreBundle\DependencyInjection\AbstractContainerAware;
 use WellCommerce\CoreBundle\EventDispatcher\EventDispatcherInterface;
 use WellCommerce\AppBundle\Exception\MissingFactoryException;
 use WellCommerce\AppBundle\Exception\MissingFormBuilderException;

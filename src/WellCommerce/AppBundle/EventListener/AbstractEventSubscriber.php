@@ -13,7 +13,7 @@
 namespace WellCommerce\AppBundle\EventListener;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use WellCommerce\AppBundle\DependencyInjection\AbstractContainerAware;
+use WellCommerce\CoreBundle\DependencyInjection\AbstractContainerAware;
 
 /**
  * Class AbstractEventSubscriber
