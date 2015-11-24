@@ -12,17 +12,20 @@
     </imports>
 
     <services>
-        <service id="route.transformer" class="WellCommerce\CoreBundle\DataSet\Transformer\RouteTransformer">
-            <argument type="service" id="cmf_routing.generator" />
-            <tag name="dataset.transformer" alias="route"/>
-        </service>
-
-        <service id="dataset.transformer.package_version_reference" class="WellCommerce\CoreBundle\DataSet\Transformer\VersionReferenceTransformer">
-            <tag name="dataset.transformer" alias="package_version_reference"/>
-        </service>
-
         <service id="core.event_dispatcher" class="WellCommerce\CoreBundle\EventDispatcher\EventDispatcher">
             <argument type="service" id="event_dispatcher"/>
+        </service>
+
+        <service id="package.command.plugin.require" class="WellCommerce\AppBundle\Command\Package\RequireCommand">
+            <tag name="console.command" />
+        </service>
+
+        <service id="package.command.plugin.update" class="WellCommerce\AppBundle\Command\Package\UpdateCommand">
+            <tag name="console.command" />
+        </service>
+
+        <service id="package.command.plugin.remove" class="WellCommerce\AppBundle\Command\Package\RemoveCommand">
+            <tag name="console.command" />
         </service>
     </services>
 </container>

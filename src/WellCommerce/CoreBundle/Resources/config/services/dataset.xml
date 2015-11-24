@@ -67,5 +67,14 @@
             <argument type="service" id="image.helper"/>
             <tag name="dataset.transformer" alias="image_path"/>
         </service>
+
+        <service id="dataset.transformer.package_version_reference" class="WellCommerce\CoreBundle\DataSet\Transformer\VersionReferenceTransformer">
+            <tag name="dataset.transformer" alias="package_version_reference"/>
+        </service>
+
+        <service id="dataset.transformer.route" class="WellCommerce\CoreBundle\DataSet\Transformer\RouteTransformer">
+            <argument type="service" id="cmf_routing.generator" />
+            <tag name="dataset.transformer" alias="route"/>
+        </service>
     </services>
 </container>
