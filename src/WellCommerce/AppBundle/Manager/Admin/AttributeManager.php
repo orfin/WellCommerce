@@ -19,7 +19,7 @@ use WellCommerce\AppBundle\Entity\AttributeValueInterface;
 use WellCommerce\AppBundle\Exception\AttributeGroupNotFoundException;
 use WellCommerce\AppBundle\Repository\AttributeGroupRepositoryInterface;
 use WellCommerce\AppBundle\Repository\AttributeValueRepositoryInterface;
-use WellCommerce\AppBundle\Manager\Admin\AbstractAdminManager;
+use WellCommerce\CoreBundle\Manager\Admin\AbstractAdminManager;
 
 /**
  * Class AttributeManager

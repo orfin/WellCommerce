@@ -11,7 +11,7 @@
         <service id="datagrid.column_collection" class="WellCommerce\Component\DataGrid\Column\ColumnCollection" />
 
         <service id="twig.extension.datagrid" class="WellCommerce\AppBundle\Twig\Extension\DataGridExtension">
-            <argument>WellCommerceAppBundle:DataGrid:datagrid.html.twig</argument>
+            <argument>WellCommerceCoreBundle:DataGrid:datagrid.html.twig</argument>
             <tag name="twig.extension"/>
         </service>
     </services>

@@ -14,7 +14,7 @@ namespace WellCommerce\CoreBundle\Controller\Admin;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\CoreBundle\Controller\AbstractController;
-use WellCommerce\AppBundle\Manager\Admin\AdminManagerInterface;
+use WellCommerce\CoreBundle\Manager\Admin\AdminManagerInterface;
 use WellCommerce\Component\Form\Elements\FormInterface;
 
 /**

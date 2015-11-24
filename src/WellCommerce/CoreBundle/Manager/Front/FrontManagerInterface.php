@@ -10,9 +10,9 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\AppBundle\Manager\Front;
+namespace WellCommerce\CoreBundle\Manager\Front;
 
-use WellCommerce\AppBundle\Manager\ManagerInterface;
+use WellCommerce\CoreBundle\Manager\ManagerInterface;
 
 /**
  * Interface FrontManagerInterface

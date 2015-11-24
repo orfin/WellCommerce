@@ -13,7 +13,7 @@
 
 namespace WellCommerce\AppBundle\Manager\Admin;
 
-use WellCommerce\AppBundle\Manager\Admin\AbstractAdminManager;
+use WellCommerce\CoreBundle\Manager\Admin\AbstractAdminManager;
 
 /**
  * Class ChannelManager

@@ -33,7 +33,7 @@
 
         <service id="form.renderer.javascript" class="WellCommerce\Component\Form\Renderer\JavascriptRenderer">
             <argument type="service" id="form.formatter.javascript"/>
-            <argument>WellCommerceAppBundle:Form:form.html.twig</argument>
+            <argument>WellCommerceCoreBundle:Form:form.html.twig</argument>
         </service>
 
         <service id="form.property_accessor" class="Symfony\Component\PropertyAccess\PropertyAccess" factory-class="Symfony\Component\PropertyAccess\PropertyAccess" factory-method="createPropertyAccessor"/>

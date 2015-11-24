@@ -18,7 +18,7 @@ use Packagist\Api\Result\Package as RemotePackage;
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\AppBundle\Entity\Package;
 use WellCommerce\CoreBundle\Helper\Package\PackageHelperInterface;
-use WellCommerce\AppBundle\Manager\Admin\AbstractAdminManager;
+use WellCommerce\CoreBundle\Manager\Admin\AbstractAdminManager;
 
 /**
  * Class PackageManager

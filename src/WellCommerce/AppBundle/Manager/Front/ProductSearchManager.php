@@ -12,7 +12,7 @@
 
 namespace WellCommerce\AppBundle\Manager\Front;
 
-use WellCommerce\AppBundle\Manager\Front\AbstractFrontManager;
+use WellCommerce\CoreBundle\Manager\Front\AbstractFrontManager;
 use WellCommerce\Component\DataSet\Conditions\Condition\In;
 use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
 use WellCommerce\AppBundle\Provider\ProductSearchProviderInterface;

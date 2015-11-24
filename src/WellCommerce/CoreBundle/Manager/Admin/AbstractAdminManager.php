@@ -10,14 +10,14 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\AppBundle\Manager\Admin;
+namespace WellCommerce\CoreBundle\Manager\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\AppBundle\Entity\UserInterface;
 use WellCommerce\CoreBundle\EventDispatcher\EventDispatcherInterface;
 use WellCommerce\AppBundle\Exception\MissingDataGridException;
 use WellCommerce\CoreBundle\Factory\FactoryInterface;
-use WellCommerce\AppBundle\Manager\AbstractManager;
+use WellCommerce\CoreBundle\Manager\AbstractManager;
 use WellCommerce\CoreBundle\Repository\RepositoryInterface;
 use WellCommerce\Component\DataGrid\DataGridInterface;
 use WellCommerce\Component\Form\FormBuilderInterface;

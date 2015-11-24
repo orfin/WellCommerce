@@ -15,7 +15,7 @@ namespace WellCommerce\AppBundle\Manager\Admin;
 use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\AppBundle\Entity\ProductInterface;
 use WellCommerce\AppBundle\Repository\AttributeValueRepositoryInterface;
-use WellCommerce\AppBundle\Manager\Admin\AbstractAdminManager;
+use WellCommerce\CoreBundle\Manager\Admin\AbstractAdminManager;
 
 /**
  * Class ProductAttributeManager

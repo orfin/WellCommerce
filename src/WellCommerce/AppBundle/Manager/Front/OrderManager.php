@@ -12,7 +12,7 @@
 
 namespace WellCommerce\AppBundle\Manager\Front;
 
-use WellCommerce\AppBundle\Manager\Front\AbstractFrontManager;
+use WellCommerce\CoreBundle\Manager\Front\AbstractFrontManager;
 
 /**
  * Class OrderManager

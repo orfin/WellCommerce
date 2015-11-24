@@ -17,6 +17,7 @@ use WellCommerce\AppBundle\Collection\LayoutBoxCollection;
 use WellCommerce\AppBundle\Collection\LayoutBoxSettingsCollection;
 use WellCommerce\AppBundle\Exception\LayoutBoxNotFoundException;
 use WellCommerce\AppBundle\Service\Layout\Resolver\ServiceResolverInterface;
+use WellCommerce\CoreBundle\Manager\Front\AbstractFrontManager;
 
 /**
  * Class LayoutBoxManager

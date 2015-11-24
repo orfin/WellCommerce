@@ -10,10 +10,10 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\AppBundle\Manager\Admin;
+namespace WellCommerce\CoreBundle\Manager\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
-use WellCommerce\AppBundle\Manager\ManagerInterface;
+use WellCommerce\CoreBundle\Manager\ManagerInterface;
 use WellCommerce\Component\DataGrid\DataGridInterface;
 
 /**

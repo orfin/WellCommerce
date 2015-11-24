@@ -15,7 +15,7 @@ namespace WellCommerce\AppBundle\Manager\Admin;
 use WellCommerce\AppBundle\Entity\AttributeInterface;
 use WellCommerce\AppBundle\Exception\AttributeNotFoundException;
 use WellCommerce\AppBundle\Repository\AttributeRepositoryInterface;
-use WellCommerce\AppBundle\Manager\Admin\AbstractAdminManager;
+use WellCommerce\CoreBundle\Manager\Admin\AbstractAdminManager;
 
 /**
  * Class AttributeValueManager

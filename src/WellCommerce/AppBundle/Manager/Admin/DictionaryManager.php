@@ -21,7 +21,7 @@ use WellCommerce\AppBundle\Entity\Dictionary;
 use WellCommerce\AppBundle\Entity\Locale;
 use WellCommerce\AppBundle\Entity\LocaleInterface;
 use WellCommerce\CoreBundle\Helper\Helper;
-use WellCommerce\AppBundle\Manager\Admin\AbstractAdminManager;
+use WellCommerce\CoreBundle\Manager\Admin\AbstractAdminManager;
 
 /**
  * Class DictionaryManager
