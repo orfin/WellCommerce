@@ -82,10 +82,5 @@
         <service id="package.command.plugin.remove" class="WellCommerce\AppBundle\Command\Package\RemoveCommand">
             <tag name="console.command" />
         </service>
-
-        <service id="dataset.transformer.package_version_reference" class="WellCommerce\AppBundle\DataSet\Transformer\VersionReferenceTransformer">
-            <tag name="dataset.transformer" alias="package_version_reference"/>
-        </service>
-
     </services>
 </container>

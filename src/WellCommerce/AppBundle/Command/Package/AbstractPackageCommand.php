@@ -140,7 +140,7 @@ abstract class AbstractPackageCommand extends ContainerAwareCommand
     }
 
     /**
-     * @return \WellCommerce\AppBundle\Helper\Environment\EnvironmentHelper
+     * @return \WellCommerce\CoreBundle\Helper\Environment\EnvironmentHelper
      */
     protected function getEnvironmentHelper()
     {

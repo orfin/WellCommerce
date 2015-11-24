@@ -22,7 +22,7 @@ use WellCommerce\AppBundle\Test\AbstractTestCase;
 abstract class AbstractRepositoryTestCase extends AbstractTestCase
 {
     /**
-     * @return null|\WellCommerce\AppBundle\Repository\RepositoryInterface
+     * @return null|\WellCommerce\CoreBundle\Repository\RepositoryInterface
      */
     protected function get()
     {
@@ -34,7 +34,7 @@ abstract class AbstractRepositoryTestCase extends AbstractTestCase
         $repository = $this->get();
 
         if (null !== $repository) {
-            $this->assertInstanceOf('WellCommerce\AppBundle\Repository\RepositoryInterface', $repository);
+            $this->assertInstanceOf('WellCommerce\CoreBundle\Repository\RepositoryInterface', $repository);
         }
     }
 

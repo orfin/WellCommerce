@@ -24,7 +24,7 @@ use WellCommerce\Component\DataGrid\Options\OptionsInterface;
 use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
 use WellCommerce\Component\DataSet\DataSetInterface;
 use WellCommerce\AppBundle\DependencyInjection\AbstractContainerAware;
-use WellCommerce\AppBundle\EventDispatcher\EventDispatcherInterface;
+use WellCommerce\CoreBundle\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Class AbstractDataGrid

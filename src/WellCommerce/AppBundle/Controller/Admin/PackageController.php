@@ -75,7 +75,7 @@ class PackageController extends AbstractAdminController
     }
 
     /**
-     * @return \WellCommerce\AppBundle\Helper\Environment\EnvironmentHelperInterface
+     * @return \WellCommerce\CoreBundle\Helper\Environment\EnvironmentHelperInterface
      */
     protected function getHelper()
     {

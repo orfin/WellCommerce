@@ -13,7 +13,7 @@ namespace WellCommerce\AppBundle\EventListener;
 
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
-use WellCommerce\AppBundle\Event\ResourceEvent;
+use WellCommerce\CoreBundle\Event\ResourceEvent;
 use WellCommerce\AppBundle\EventListener\AbstractEventSubscriber;
 use WellCommerce\AppBundle\Manager\Front\CartManagerInterface;
 use WellCommerce\AppBundle\Service\Cart\Visitor\CartVisitorTraverserInterface;

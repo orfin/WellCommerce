@@ -13,11 +13,11 @@
 namespace WellCommerce\AppBundle\Manager;
 
 use WellCommerce\AppBundle\DependencyInjection\AbstractContainerAware;
-use WellCommerce\AppBundle\EventDispatcher\EventDispatcherInterface;
+use WellCommerce\CoreBundle\EventDispatcher\EventDispatcherInterface;
 use WellCommerce\AppBundle\Exception\MissingFactoryException;
 use WellCommerce\AppBundle\Exception\MissingFormBuilderException;
 use WellCommerce\AppBundle\Factory\FactoryInterface;
-use WellCommerce\AppBundle\Repository\RepositoryInterface;
+use WellCommerce\CoreBundle\Repository\RepositoryInterface;
 use WellCommerce\Component\Form\FormBuilderInterface;
 
 /**

@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\AppBundle\Twig\Extension;
 
-use WellCommerce\AppBundle\Helper\Image\ImageHelperInterface;
+use WellCommerce\CoreBundle\Helper\Image\ImageHelperInterface;
 
 /**
  * Class ImageExtension

@@ -14,7 +14,7 @@ namespace WellCommerce\AppBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
-use WellCommerce\AppBundle\Helper\Translator\TranslatorHelperInterface;
+use WellCommerce\CoreBundle\Helper\Translator\TranslatorHelperInterface;
 
 /**
  * Class AbstractContainerAware
@@ -111,7 +111,7 @@ abstract class AbstractContainerAware extends ContainerAware
     }
 
     /**
-     * @return \WellCommerce\AppBundle\Helper\Translator\TranslatorHelperInterface
+     * @return \WellCommerce\CoreBundle\Helper\Translator\TranslatorHelperInterface
      */
     public function getTranslatorHelper()
     {
@@ -119,7 +119,7 @@ abstract class AbstractContainerAware extends ContainerAware
     }
 
     /**
-     * @return \WellCommerce\AppBundle\Helper\Flash\FlashHelperInterface
+     * @return \WellCommerce\CoreBundle\Helper\Flash\FlashHelperInterface
      */
     public function getFlashHelper()
     {
@@ -127,7 +127,7 @@ abstract class AbstractContainerAware extends ContainerAware
     }
 
     /**
-     * @return \WellCommerce\AppBundle\Helper\Doctrine\DoctrineHelperInterface
+     * @return \WellCommerce\CoreBundle\Helper\Doctrine\DoctrineHelperInterface
      */
     public function getDoctrineHelper()
     {
@@ -135,7 +135,7 @@ abstract class AbstractContainerAware extends ContainerAware
     }
 
     /**
-     * @return \WellCommerce\AppBundle\Helper\Request\RequestHelperInterface
+     * @return \WellCommerce\CoreBundle\Helper\Request\RequestHelperInterface
      */
     public function getRequestHelper()
     {
@@ -143,7 +143,7 @@ abstract class AbstractContainerAware extends ContainerAware
     }
 
     /**
-     * @return \WellCommerce\AppBundle\Helper\Router\RouterHelperInterface
+     * @return \WellCommerce\CoreBundle\Helper\Router\RouterHelperInterface
      */
     public function getRouterHelper()
     {
@@ -151,7 +151,7 @@ abstract class AbstractContainerAware extends ContainerAware
     }
 
     /**
-     * @return \WellCommerce\AppBundle\Helper\Image\ImageHelperInterface
+     * @return \WellCommerce\CoreBundle\Helper\Image\ImageHelperInterface
      */
     public function getImageHelper()
     {
@@ -175,7 +175,7 @@ abstract class AbstractContainerAware extends ContainerAware
     }
 
     /**
-     * @return \WellCommerce\AppBundle\Helper\Security\SecurityHelperInterface
+     * @return \WellCommerce\CoreBundle\Helper\Security\SecurityHelperInterface
      */
     public function getSecurityHelper()
     {
@@ -183,7 +183,7 @@ abstract class AbstractContainerAware extends ContainerAware
     }
 
     /**
-     * @return \WellCommerce\AppBundle\Helper\Mailer\MailerHelperInterface
+     * @return \WellCommerce\CoreBundle\Helper\Mailer\MailerHelperInterface
      */
     public function getMailerHelper()
     {
@@ -191,7 +191,7 @@ abstract class AbstractContainerAware extends ContainerAware
     }
 
     /**
-     * @return \WellCommerce\AppBundle\Helper\Templating\TemplatingHelperInterface
+     * @return \WellCommerce\CoreBundle\Helper\Templating\TemplatingHelperInterface
      */
     public function getTemplatingelper()
     {
@@ -199,7 +199,7 @@ abstract class AbstractContainerAware extends ContainerAware
     }
 
     /**
-     * @return \WellCommerce\AppBundle\Helper\Validator\ValidatorHelperInterface
+     * @return \WellCommerce\CoreBundle\Helper\Validator\ValidatorHelperInterface
      */
     public function getValidatorHelper()
     {

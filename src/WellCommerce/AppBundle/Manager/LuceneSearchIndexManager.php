@@ -14,7 +14,7 @@ namespace WellCommerce\AppBundle\Manager;
 
 use Ivory\LuceneSearchBundle\Model\LuceneManager;
 use Symfony\Component\HttpKernel\KernelInterface;
-use WellCommerce\AppBundle\Helper\Helper;
+use WellCommerce\CoreBundle\Helper\Helper;
 
 /**
  * Class LuceneSearchIndexManager

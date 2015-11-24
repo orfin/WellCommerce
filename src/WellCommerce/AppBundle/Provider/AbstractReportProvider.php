@@ -13,7 +13,7 @@
 namespace WellCommerce\AppBundle\Provider;
 
 use WellCommerce\AppBundle\DependencyInjection\AbstractContainerAware;
-use WellCommerce\AppBundle\Repository\RepositoryInterface;
+use WellCommerce\CoreBundle\Repository\RepositoryInterface;
 use WellCommerce\AppBundle\Entity\OrderInterface;
 
 /**

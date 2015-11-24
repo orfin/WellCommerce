@@ -20,52 +20,52 @@ namespace WellCommerce\AppBundle\Manager;
 interface ManagerInterface
 {
     /**
-     * @return \WellCommerce\AppBundle\Helper\Flash\FlashHelperInterface
+     * @return \WellCommerce\CoreBundle\Helper\Flash\FlashHelperInterface
      */
     public function getValidatorHelper();
 
     /**
      * Returns the FlashHelper
      *
-     * @return \WellCommerce\AppBundle\Helper\Flash\FlashHelperInterface
+     * @return \WellCommerce\CoreBundle\Helper\Flash\FlashHelperInterface
      */
     public function getFlashHelper();
 
     /**
      * Returns the ImageHelper
      *
-     * @return \WellCommerce\AppBundle\Helper\Image\ImageHelperInterface
+     * @return \WellCommerce\CoreBundle\Helper\Image\ImageHelperInterface
      */
     public function getImageHelper();
 
     /**
      * Returns the DoctrineHelper
      *
-     * @return \WellCommerce\AppBundle\Helper\Doctrine\DoctrineHelperInterface
+     * @return \WellCommerce\CoreBundle\Helper\Doctrine\DoctrineHelperInterface
      */
     public function getDoctrineHelper();
 
     /**
      * Returns the RequestHelper
      *
-     * @return \WellCommerce\AppBundle\Helper\Request\RequestHelperInterface
+     * @return \WellCommerce\CoreBundle\Helper\Request\RequestHelperInterface
      */
     public function getRequestHelper();
 
     /**
      * Returns the Translator
      *
-     * @return \WellCommerce\AppBundle\Helper\Translator\TranslatorHelperInterface
+     * @return \WellCommerce\CoreBundle\Helper\Translator\TranslatorHelperInterface
      */
     public function getTranslatorHelper();
 
     /**
-     * @return \WellCommerce\AppBundle\Repository\RepositoryInterface
+     * @return \WellCommerce\CoreBundle\Repository\RepositoryInterface
      */
     public function getRepository();
 
     /**
-     * @return \WellCommerce\AppBundle\EventDispatcher\EventDispatcherInterface
+     * @return \WellCommerce\CoreBundle\EventDispatcher\EventDispatcherInterface
      */
     public function getEventDispatcher();
 

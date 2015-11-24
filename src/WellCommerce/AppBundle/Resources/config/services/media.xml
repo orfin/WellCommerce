@@ -22,10 +22,5 @@
             <argument type="service" id="image.helper"/>
             <tag name="twig.extension"/>
         </service>
-
-        <service id="dataset.transformer.image_path" class="WellCommerce\AppBundle\DataSet\Transformer\ImagePathTransformer">
-            <argument type="service" id="image.helper"/>
-            <tag name="dataset.transformer" alias="image_path"/>
-        </service>
     </services>
 </container>

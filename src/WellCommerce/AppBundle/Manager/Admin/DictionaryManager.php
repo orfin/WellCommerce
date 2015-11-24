@@ -20,7 +20,7 @@ use Symfony\Component\Yaml\Yaml;
 use WellCommerce\AppBundle\Entity\Dictionary;
 use WellCommerce\AppBundle\Entity\Locale;
 use WellCommerce\AppBundle\Entity\LocaleInterface;
-use WellCommerce\AppBundle\Helper\Helper;
+use WellCommerce\CoreBundle\Helper\Helper;
 use WellCommerce\AppBundle\Manager\Admin\AbstractAdminManager;
 
 /**

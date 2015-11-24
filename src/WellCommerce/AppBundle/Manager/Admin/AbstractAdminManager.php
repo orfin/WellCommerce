@@ -14,11 +14,11 @@ namespace WellCommerce\AppBundle\Manager\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\AppBundle\Entity\UserInterface;
-use WellCommerce\AppBundle\EventDispatcher\EventDispatcherInterface;
+use WellCommerce\CoreBundle\EventDispatcher\EventDispatcherInterface;
 use WellCommerce\AppBundle\Exception\MissingDataGridException;
 use WellCommerce\AppBundle\Factory\FactoryInterface;
 use WellCommerce\AppBundle\Manager\AbstractManager;
-use WellCommerce\AppBundle\Repository\RepositoryInterface;
+use WellCommerce\CoreBundle\Repository\RepositoryInterface;
 use WellCommerce\Component\DataGrid\DataGridInterface;
 use WellCommerce\Component\Form\FormBuilderInterface;
 

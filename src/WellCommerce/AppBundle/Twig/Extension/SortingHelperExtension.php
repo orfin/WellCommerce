@@ -11,9 +11,9 @@
  */
 namespace WellCommerce\AppBundle\Twig\Extension;
 
-use WellCommerce\AppBundle\Helper\Helper;
-use WellCommerce\AppBundle\Helper\Request\RequestHelperInterface;
-use WellCommerce\AppBundle\Helper\Translator\TranslatorHelperInterface;
+use WellCommerce\CoreBundle\Helper\Helper;
+use WellCommerce\CoreBundle\Helper\Request\RequestHelperInterface;
+use WellCommerce\CoreBundle\Helper\Translator\TranslatorHelperInterface;
 
 /**
  * Class SortingHelperExtension

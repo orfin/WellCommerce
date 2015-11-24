@@ -12,7 +12,7 @@
 namespace WellCommerce\AppBundle\Repository;
 
 use WellCommerce\AppBundle\Entity\Product;
-use WellCommerce\AppBundle\Repository\AbstractEntityRepository;
+use WellCommerce\CoreBundle\Repository\AbstractEntityRepository;
 
 /**
  * Class ProductAttributeRepository

@@ -14,8 +14,8 @@ namespace WellCommerce\AppBundle\EventListener;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use WellCommerce\AppBundle\EventListener\AbstractEventSubscriber;
-use WellCommerce\AppBundle\Event\FormEvent;
-use WellCommerce\AppBundle\Form\ThemeFormBuilder;
+use WellCommerce\CoreBundle\Event\FormEvent;
+use WellCommerce\AppBundle\Form\Admin\ThemeFormBuilder;
 use WellCommerce\AppBundle\Manager\ThemeManagerInterface;
 
 /**

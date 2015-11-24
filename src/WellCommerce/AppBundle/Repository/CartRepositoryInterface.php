@@ -14,7 +14,7 @@ namespace WellCommerce\AppBundle\Repository;
 
 use WellCommerce\AppBundle\Entity\ClientInterface;
 use WellCommerce\AppBundle\Entity\ShopInterface;
-use WellCommerce\AppBundle\Repository\RepositoryInterface;
+use WellCommerce\CoreBundle\Repository\RepositoryInterface;
 
 /**
  * Interface CartRepositoryInterface

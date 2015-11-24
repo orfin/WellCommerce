@@ -14,7 +14,7 @@ namespace WellCommerce\AppBundle\Resolver;
 
 use WellCommerce\AppBundle\Context\ShopContextInterface;
 use WellCommerce\AppBundle\Repository\ShopRepositoryInterface;
-use WellCommerce\AppBundle\Helper\Request\RequestHelperInterface;
+use WellCommerce\CoreBundle\Helper\Request\RequestHelperInterface;
 
 /**
  * Class AbstractShopResolver

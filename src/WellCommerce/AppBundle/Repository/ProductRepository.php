@@ -12,7 +12,7 @@
 namespace WellCommerce\AppBundle\Repository;
 
 use Doctrine\ORM\Query\Expr;
-use WellCommerce\AppBundle\Repository\AbstractEntityRepository;
+use WellCommerce\CoreBundle\Repository\AbstractEntityRepository;
 
 /**
  * Class ProductRepository

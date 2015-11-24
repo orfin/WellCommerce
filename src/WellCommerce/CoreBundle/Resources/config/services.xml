@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <imports>
+        <import resource="services/helpers.xml"/>
+        <import resource="services/form.xml"/>
+        <import resource="services/dataset.xml"/>
+        <import resource="services/datagrid.xml"/>
+    </imports>
+
+    <services>
+        <service id="route.transformer" class="WellCommerce\CoreBundle\DataSet\Transformer\RouteTransformer">
+            <argument type="service" id="cmf_routing.generator" />
+            <tag name="dataset.transformer" alias="route"/>
+        </service>
+
+        <service id="dataset.transformer.package_version_reference" class="WellCommerce\CoreBundle\DataSet\Transformer\VersionReferenceTransformer">
+            <tag name="dataset.transformer" alias="package_version_reference"/>
+        </service>
+
+        <service id="core.event_dispatcher" class="WellCommerce\CoreBundle\EventDispatcher\EventDispatcher">
+            <argument type="service" id="event_dispatcher"/>
+        </service>
+    </services>
+</container>

@@ -13,8 +13,8 @@
 namespace WellCommerce\AppBundle\Form;
 
 use WellCommerce\AppBundle\DependencyInjection\AbstractContainerAware;
-use WellCommerce\AppBundle\EventDispatcher\EventDispatcherInterface;
-use WellCommerce\AppBundle\Repository\RepositoryInterface;
+use WellCommerce\CoreBundle\EventDispatcher\EventDispatcherInterface;
+use WellCommerce\CoreBundle\Repository\RepositoryInterface;
 use WellCommerce\Component\Form\Elements\FormInterface;
 use WellCommerce\Component\Form\FormBuilderInterface;
 use WellCommerce\Component\Form\Handler\FormHandlerInterface;

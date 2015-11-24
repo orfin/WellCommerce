@@ -12,7 +12,7 @@
 namespace WellCommerce\AppBundle\EventListener;
 
 use WellCommerce\AppBundle\Entity\ClientInterface;
-use WellCommerce\AppBundle\Event\ResourceEvent;
+use WellCommerce\CoreBundle\Event\ResourceEvent;
 use WellCommerce\AppBundle\EventListener\AbstractEventSubscriber;
 
 /**

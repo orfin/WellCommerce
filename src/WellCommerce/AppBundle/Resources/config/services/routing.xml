@@ -19,11 +19,6 @@
             <argument type="service" id="event_dispatcher"/>
         </service>
 
-        <service id="route.transformer" class="WellCommerce\AppBundle\DataSet\Transformer\RouteTransformer">
-            <argument type="service" id="cmf_routing.generator" />
-            <tag name="dataset.transformer" alias="route"/>
-        </service>
-
         <service id="routable.subscriber" class="WellCommerce\AppBundle\EventListener\RoutableSubscriber">
             <tag name="doctrine.event_subscriber" />
         </service>

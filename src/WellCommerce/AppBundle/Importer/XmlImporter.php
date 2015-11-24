@@ -16,7 +16,7 @@ use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\Config\Util\XmlUtils;
 use WellCommerce\AppBundle\Factory\AdminMenuFactory;
 use WellCommerce\AppBundle\Repository\AdminMenuRepositoryInterface;
-use WellCommerce\AppBundle\Helper\Doctrine\DoctrineHelperInterface;
+use WellCommerce\CoreBundle\Helper\Doctrine\DoctrineHelperInterface;
 
 /**
  * Class XmlImporter
