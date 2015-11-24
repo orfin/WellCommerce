@@ -12,7 +12,7 @@
 
 namespace WellCommerce\AppBundle\Tests\DataSet\Front;
 
-use WellCommerce\AppBundle\Test\DataSet\AbstractDataSetTestCase;
+use WellCommerce\CoreBundle\Test\DataSet\AbstractDataSetTestCase;
 
 /**
  * Class ProducerDataSetTest

@@ -12,7 +12,7 @@
 
 namespace WellCommerce\AppBundle\Tests\Context\Front;
 
-use WellCommerce\AppBundle\Test\AbstractTestCase;
+use WellCommerce\CoreBundle\Test\AbstractTestCase;
 
 /**
  * Class CartContextTest

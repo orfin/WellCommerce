@@ -10,16 +10,16 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\AppBundle\Test\Manager\Front;
+namespace WellCommerce\CoreBundle\Test\Manager\Admin;
 
-use WellCommerce\AppBundle\Test\AbstractTestCase;
+use WellCommerce\CoreBundle\Test\AbstractTestCase;
 
 /**
- * Class AbstractFrontManagerTestCase
+ * Class AbstractAdminManagerTestCase
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractFrontManagerTestCase extends AbstractTestCase
+abstract class AbstractAdminManagerTestCase extends AbstractTestCase
 {
     /**
      * @return \WellCommerce\AppBundle\Manager\Admin\AdminManagerInterface
@@ -34,6 +34,16 @@ abstract class AbstractFrontManagerTestCase extends AbstractTestCase
     /**
      * @return string
      */
+    abstract protected function getFormBuilderClassName();
+
+    /**
+     * @return string
+     */
+    abstract protected function getDataGridClassName();
+
+    /**
+     * @return string
+     */
     abstract protected function getRepositoryInterfaceName();
 
     public function testManagerServiceIsValid()
@@ -42,9 +52,21 @@ abstract class AbstractFrontManagerTestCase extends AbstractTestCase
         $this->assertInstanceOf($this->getServiceClassName(), $manager);
     }
 
+    public function testManagerReturnsValidFormBuilder()
+    {
+        $manager = $this->get();
+        $this->assertInstanceOf($this->getFormBuilderClassName(), $manager->getFormBuilder());
+    }
+
     public function testManagerReturnsValidRepository()
     {
         $manager = $this->get();
         $this->assertInstanceOf($this->getRepositoryInterfaceName(), $manager->getRepository());
+    }
+
+    public function testManagerReturnsValidDataGrid()
+    {
+        $manager = $this->get();
+        $this->assertInstanceOf($this->getDataGridClassName(), $manager->getDataGrid());
     }
 }

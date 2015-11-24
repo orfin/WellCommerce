@@ -12,7 +12,7 @@
 
 namespace WellCommerce\AppBundle\Tests\Manager\Admin;
 
-use WellCommerce\AppBundle\Test\Manager\Admin\AbstractAdminManagerTestCase;
+use WellCommerce\CoreBundle\Test\Manager\Admin\AbstractAdminManagerTestCase;
 
 /**
  * Class ClientGroupManagerTest

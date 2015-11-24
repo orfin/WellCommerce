@@ -14,7 +14,7 @@ namespace WellCommerce\AppBundle\Tests\Controller\Admin;
 
 use Doctrine\Common\Collections\Criteria;
 use WellCommerce\AppBundle\Entity\TaxInterface;
-use WellCommerce\AppBundle\Test\Controller\Admin\AbstractAdminControllerTestCase;
+use WellCommerce\CoreBundle\Test\Controller\Admin\AbstractAdminControllerTestCase;
 
 /**
  * Class TaxControllerTest

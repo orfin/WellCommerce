@@ -10,16 +10,13 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\AppBundle\Test\Entity;
-
-use WellCommerce\AppBundle\Test\AbstractTestCase;
+namespace WellCommerce\CoreBundle\Test\EventDispatcher;
 
 /**
- * Class AbstractEntityTestCase
+ * Class AbstractEventDispatcherTest
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractEntityTestCase extends AbstractTestCase
+abstract class AbstractEventDispatcherTest
 {
-    
 }

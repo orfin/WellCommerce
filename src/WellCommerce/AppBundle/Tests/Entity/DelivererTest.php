@@ -13,7 +13,7 @@
 namespace WellCommerce\AppBundle\Tests\Entity;
 
 use WellCommerce\AppBundle\Entity\Deliverer;
-use WellCommerce\AppBundle\Test\Entity\AbstractEntityTestCase;
+use WellCommerce\CoreBundle\Test\Entity\AbstractEntityTestCase;
 
 /**
  * Class DelivererTest

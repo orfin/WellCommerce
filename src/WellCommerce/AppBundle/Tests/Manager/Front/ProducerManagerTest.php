@@ -12,7 +12,7 @@
 
 namespace WellCommerce\AppBundle\Tests\Manager\Front;
 
-use WellCommerce\AppBundle\Test\Manager\Front\AbstractFrontManagerTestCase;
+use WellCommerce\CoreBundle\Test\Manager\Front\AbstractFrontManagerTestCase;
 
 /**
  * Class ProducerManagerTest

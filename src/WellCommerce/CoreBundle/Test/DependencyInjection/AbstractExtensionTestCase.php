@@ -10,9 +10,9 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\AppBundle\Test\DependencyInjection;
+namespace WellCommerce\CoreBundle\Test\DependencyInjection;
 
-use WellCommerce\AppBundle\Test\AbstractTestCase;
+use WellCommerce\CoreBundle\Test\AbstractTestCase;
 
 /**
  * Class AbstractExtensionTestCase

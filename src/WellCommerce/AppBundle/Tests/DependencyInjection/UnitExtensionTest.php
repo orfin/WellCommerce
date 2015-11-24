@@ -12,7 +12,7 @@
 
 namespace WellCommerce\AppBundle\Tests\DependencyInjection;
 
-use WellCommerce\AppBundle\Test\DependencyInjection\AbstractExtensionTestCase;
+use WellCommerce\CoreBundle\Test\DependencyInjection\AbstractExtensionTestCase;
 
 /**
  * Class UnitExtensionTest

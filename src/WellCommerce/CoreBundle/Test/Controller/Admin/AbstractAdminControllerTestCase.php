@@ -10,11 +10,11 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\AppBundle\Test\Controller\Admin;
+namespace WellCommerce\CoreBundle\Test\Controller\Admin;
 
 use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
-use WellCommerce\AppBundle\Test\AbstractTestCase;
+use WellCommerce\CoreBundle\Test\AbstractTestCase;
 
 /**
  * Class AbstractAdminControllerTestCase
