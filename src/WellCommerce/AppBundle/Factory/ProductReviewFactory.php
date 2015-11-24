@@ -13,7 +13,7 @@
 namespace WellCommerce\AppBundle\Factory;
 
 use WellCommerce\AppBundle\Entity\ProductReview;
-use WellCommerce\AppBundle\Factory\AbstractFactory;
+use WellCommerce\CoreBundle\Factory\AbstractFactory;
 
 /**
  * Class ProductReviewFactory

@@ -12,7 +12,7 @@
 
 namespace WellCommerce\AppBundle\Factory;
 
-use WellCommerce\AppBundle\Factory\AbstractFactory;
+use WellCommerce\CoreBundle\Factory\AbstractFactory;
 use WellCommerce\AppBundle\Entity\OrderStatusGroup;
 
 /**

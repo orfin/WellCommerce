@@ -14,7 +14,7 @@ namespace WellCommerce\AppBundle\Factory;
 
 use WellCommerce\AppBundle\Helper\CurrencyHelperInterface;
 use WellCommerce\AppBundle\Entity\Price;
-use WellCommerce\AppBundle\Factory\AbstractFactory;
+use WellCommerce\CoreBundle\Factory\AbstractFactory;
 use WellCommerce\AppBundle\Entity\CartProductInterface;
 use WellCommerce\AppBundle\Entity\OrderInterface;
 use WellCommerce\AppBundle\Entity\OrderProduct;

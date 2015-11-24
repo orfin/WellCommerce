@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\AppBundle\Entity\UserInterface;
 use WellCommerce\CoreBundle\EventDispatcher\EventDispatcherInterface;
 use WellCommerce\AppBundle\Exception\MissingDataGridException;
-use WellCommerce\AppBundle\Factory\FactoryInterface;
+use WellCommerce\CoreBundle\Factory\FactoryInterface;
 use WellCommerce\AppBundle\Manager\AbstractManager;
 use WellCommerce\CoreBundle\Repository\RepositoryInterface;
 use WellCommerce\Component\DataGrid\DataGridInterface;

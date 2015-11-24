@@ -13,7 +13,7 @@
 namespace WellCommerce\AppBundle\Factory;
 
 use WellCommerce\AppBundle\Entity\Contact;
-use WellCommerce\AppBundle\Factory\AbstractFactory;
+use WellCommerce\CoreBundle\Factory\AbstractFactory;
 
 /**
  * Class ContactFactory

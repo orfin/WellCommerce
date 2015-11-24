@@ -13,8 +13,8 @@
 namespace WellCommerce\AppBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use WellCommerce\AppBundle\Factory\AbstractFactory;
-use WellCommerce\AppBundle\Factory\FactoryInterface;
+use WellCommerce\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\CoreBundle\Factory\FactoryInterface;
 use WellCommerce\AppBundle\Entity\Cart;
 use WellCommerce\AppBundle\Entity\CartTotals;
 

@@ -16,15 +16,15 @@
             <argument type="service" id="event_dispatcher"/>
         </service>
 
-        <service id="package.command.plugin.require" class="WellCommerce\AppBundle\Command\Package\RequireCommand">
+        <service id="package.command.plugin.require" class="WellCommerce\CoreBundle\Command\Package\RequireCommand">
             <tag name="console.command" />
         </service>
 
-        <service id="package.command.plugin.update" class="WellCommerce\AppBundle\Command\Package\UpdateCommand">
+        <service id="package.command.plugin.update" class="WellCommerce\CoreBundle\Command\Package\UpdateCommand">
             <tag name="console.command" />
         </service>
 
-        <service id="package.command.plugin.remove" class="WellCommerce\AppBundle\Command\Package\RemoveCommand">
+        <service id="package.command.plugin.remove" class="WellCommerce\CoreBundle\Command\Package\RemoveCommand">
             <tag name="console.command" />
         </service>
     </services>

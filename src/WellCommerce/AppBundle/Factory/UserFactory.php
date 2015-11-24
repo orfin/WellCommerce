@@ -14,7 +14,7 @@ namespace WellCommerce\AppBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\AppBundle\Entity\User;
-use WellCommerce\AppBundle\Factory\AbstractFactory;
+use WellCommerce\CoreBundle\Factory\AbstractFactory;
 
 /**
  * Class UserFactory

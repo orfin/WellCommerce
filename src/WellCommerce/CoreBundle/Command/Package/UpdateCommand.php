@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\AppBundle\Command\Package;
+namespace WellCommerce\CoreBundle\Command\Package;
 
 use WellCommerce\CoreBundle\Helper\Package\PackageHelperInterface;
 

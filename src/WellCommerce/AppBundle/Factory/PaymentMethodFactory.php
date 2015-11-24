@@ -13,7 +13,7 @@
 namespace WellCommerce\AppBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use WellCommerce\AppBundle\Factory\AbstractFactory;
+use WellCommerce\CoreBundle\Factory\AbstractFactory;
 use WellCommerce\AppBundle\Entity\PaymentMethod;
 
 /**

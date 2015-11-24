@@ -14,7 +14,7 @@ namespace WellCommerce\AppBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\AppBundle\Entity\Product;
-use WellCommerce\AppBundle\Factory\AbstractFactory;
+use WellCommerce\CoreBundle\Factory\AbstractFactory;
 
 /**
  * Class ProductFactory

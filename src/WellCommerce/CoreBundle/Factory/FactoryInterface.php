@@ -10,17 +10,17 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\AppBundle\Factory;
+namespace WellCommerce\CoreBundle\Factory;
 
 /**
- * Class AbstractFactory
+ * Interface FactoryInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractFactory implements FactoryInterface
+interface FactoryInterface
 {
     /**
-     * {@inheritdoc}
+     * @return object
      */
-    abstract public function create();
+    public function create();
 }

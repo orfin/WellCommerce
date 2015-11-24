@@ -14,7 +14,7 @@ namespace WellCommerce\AppBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\AppBundle\Helper\CurrencyHelperInterface;
-use WellCommerce\AppBundle\Factory\AbstractFactory;
+use WellCommerce\CoreBundle\Factory\AbstractFactory;
 use WellCommerce\AppBundle\Entity\CartInterface;
 use WellCommerce\AppBundle\Entity\CartProductInterface;
 use WellCommerce\AppBundle\Entity\Order;

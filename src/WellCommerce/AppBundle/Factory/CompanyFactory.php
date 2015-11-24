@@ -14,7 +14,7 @@ namespace WellCommerce\AppBundle\Factory;
 
 use WellCommerce\AppBundle\Entity\Company;
 use WellCommerce\AppBundle\Entity\CompanyAddress;
-use WellCommerce\AppBundle\Factory\AbstractFactory;
+use WellCommerce\CoreBundle\Factory\AbstractFactory;
 
 /**
  * Class CompanyFactory
