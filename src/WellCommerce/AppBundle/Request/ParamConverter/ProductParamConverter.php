@@ -13,7 +13,7 @@
 namespace WellCommerce\AppBundle\Request\ParamConverter;
 
 use Symfony\Component\HttpFoundation\Request;
-use WellCommerce\AppBundle\Request\ParamConverter\AbstractEntityParamConverter;
+use WellCommerce\CoreBundle\Request\ParamConverter\AbstractEntityParamConverter;
 
 /**
  * Class ProductParamConverter

@@ -1,5 +1,5 @@
 {% extends 'WellCommerceAppBundle:Front:layout.html.twig' %}
-{% import "WellCommerceFormBundle:Front/Common:macros.html.twig" as macros %}
+{% import "WellCommerceAppBundle:Front/Form:macros.html.twig" as macros %}
 {% trans_default_domain "wellcommerce" %}
 {% block content %}
     {% include 'WellCommerceAppBundle:Front:breadcrumbs.html.twig' %}
@@ -46,7 +46,7 @@
         <div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
             {#{{ layout_box('vertical_promotions') }}#}
             <div class="mtp60 mbt60"></div>
-            {% include 'WellCommerceCmsBundle:Front/Common:sidebar_contact.html.twig' %}
+            {% include 'WellCommerceAppBundle:Front/Common:sidebar_contact.html.twig' %}
         </div>
     </div>
 {% endblock %}
