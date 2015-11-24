@@ -17,7 +17,7 @@ use Doctrine\ORM\EntityNotFoundException;
 use Packagist\Api\Result\Package as RemotePackage;
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\AppBundle\Entity\Package;
-use WellCommerce\AppBundle\Helper\PackageHelperInterface;
+use WellCommerce\CoreBundle\Helper\Package\PackageHelperInterface;
 use WellCommerce\AppBundle\Manager\Admin\AbstractAdminManager;
 
 /**

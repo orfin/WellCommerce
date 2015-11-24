@@ -12,7 +12,7 @@
 
 namespace WellCommerce\AppBundle\Command\Package;
 
-use WellCommerce\AppBundle\Helper\PackageHelperInterface;
+use WellCommerce\CoreBundle\Helper\Package\PackageHelperInterface;
 
 /**
  * Class RemoveCommand

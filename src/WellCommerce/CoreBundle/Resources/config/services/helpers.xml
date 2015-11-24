@@ -51,5 +51,9 @@
         </service>
 
         <service id="mailer.helper" class="WellCommerce\CoreBundle\Helper\Mailer\MailerHelper" />
+
+        <service id="package.helper" class="WellCommerce\CoreBundle\Helper\Package\PackageHelper">
+            <argument type="service" id="knp.packagist_api.client"/>
+        </service>
     </services>
 </container>

@@ -12,7 +12,7 @@
 namespace WellCommerce\AppBundle\Form\Admin;
 
 use Packagist\Api\Result\Package\Version;
-use WellCommerce\AppBundle\Helper\PackageHelperInterface;
+use WellCommerce\CoreBundle\Helper\Package\PackageHelperInterface;
 use WellCommerce\AppBundle\Form\AbstractFormBuilder;
 use WellCommerce\Component\Form\Elements\FormInterface;
 

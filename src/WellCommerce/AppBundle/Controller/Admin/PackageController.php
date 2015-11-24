@@ -13,7 +13,7 @@
 namespace WellCommerce\AppBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
-use WellCommerce\AppBundle\Helper\PackageHelperInterface;
+use WellCommerce\CoreBundle\Helper\Package\PackageHelperInterface;
 use WellCommerce\AppBundle\Controller\Admin\AbstractAdminController;
 
 /**

@@ -13,7 +13,7 @@
 namespace WellCommerce\AppBundle\Command\Package;
 
 use Symfony\Component\Console\Input\InputInterface;
-use WellCommerce\AppBundle\Helper\PackageHelperInterface;
+use WellCommerce\CoreBundle\Helper\Package\PackageHelperInterface;
 
 /**
  * Class RequireCommand

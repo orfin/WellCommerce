@@ -27,10 +27,6 @@
             <argument type="service" id="event_dispatcher"/>
         </service>
 
-        <service id="package.helper" class="WellCommerce\AppBundle\Helper\PackageHelper">
-            <argument type="service" id="knp.packagist_api.client"/>
-        </service>
-
         <service id="package.controller.admin" class="WellCommerce\AppBundle\Controller\Admin\PackageController">
             <argument type="service" id="package.manager.admin"/>
             <call method="setContainer">
