@@ -16,7 +16,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use WellCommerce\AppBundle\Entity\Media;
-use WellCommerce\AppBundle\DataFixtures\AbstractDataFixture;
+use WellCommerce\CoreBundle\DataFixtures\AbstractDataFixture;
 
 /**
  * Class LoadMediaData

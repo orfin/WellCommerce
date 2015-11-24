@@ -17,7 +17,7 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use WellCommerce\AppBundle\Entity\Category;
 use WellCommerce\CoreBundle\Helper\Sluggable;
-use WellCommerce\AppBundle\DataFixtures\AbstractDataFixture;
+use WellCommerce\CoreBundle\DataFixtures\AbstractDataFixture;
 
 /**
  * Class LoadCategoryData

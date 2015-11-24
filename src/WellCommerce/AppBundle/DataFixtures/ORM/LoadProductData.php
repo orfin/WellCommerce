@@ -20,7 +20,7 @@ use WellCommerce\AppBundle\DataFixtures\ORM\LoadMediaData;
 use WellCommerce\AppBundle\DataFixtures\ORM\LoadCurrencyData;
 use WellCommerce\AppBundle\DataFixtures\ORM\LoadTaxData;
 use WellCommerce\CoreBundle\Helper\Sluggable;
-use WellCommerce\AppBundle\DataFixtures\AbstractDataFixture;
+use WellCommerce\CoreBundle\DataFixtures\AbstractDataFixture;
 use WellCommerce\AppBundle\Entity\Dimension;
 use WellCommerce\AppBundle\Entity\DiscountablePrice;
 use WellCommerce\AppBundle\Entity\Price;

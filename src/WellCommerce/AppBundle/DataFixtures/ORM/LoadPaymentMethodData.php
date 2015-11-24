@@ -14,7 +14,7 @@ namespace WellCommerce\AppBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
-use WellCommerce\AppBundle\DataFixtures\AbstractDataFixture;
+use WellCommerce\CoreBundle\DataFixtures\AbstractDataFixture;
 use WellCommerce\AppBundle\Entity\PaymentMethod;
 
 /**

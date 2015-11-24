@@ -14,7 +14,7 @@ namespace WellCommerce\AppBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Config\FileLocator;
-use WellCommerce\AppBundle\DataFixtures\AbstractDataFixture;
+use WellCommerce\CoreBundle\DataFixtures\AbstractDataFixture;
 
 /**
  * Class LoadAdminMenuData

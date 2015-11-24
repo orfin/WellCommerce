@@ -15,7 +15,7 @@ namespace WellCommerce\AppBundle\DataFixtures\ORM;
 use Doctrine\Common\Persistence\ObjectManager;
 use WellCommerce\AppBundle\Entity\Producer;
 use WellCommerce\CoreBundle\Helper\Sluggable;
-use WellCommerce\AppBundle\DataFixtures\AbstractDataFixture;
+use WellCommerce\CoreBundle\DataFixtures\AbstractDataFixture;
 
 /**
  * Class LoadProducerData
