@@ -11,6 +11,8 @@
  */
 namespace WellCommerce\AppBundle\Repository;
 
+use WellCommerce\CoreBundle\Repository\AbstractEntityRepository;
+
 /**
  * Class MediaRepository
  *

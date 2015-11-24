@@ -12,6 +12,8 @@
 
 namespace WellCommerce\AppBundle\Repository;
 
+use WellCommerce\CoreBundle\Repository\RepositoryInterface;
+
 /**
  * Interface MediaRepositoryInterface
  *
