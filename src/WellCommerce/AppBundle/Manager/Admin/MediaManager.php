@@ -13,6 +13,7 @@
 namespace WellCommerce\AppBundle\Manager\Admin;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use WellCommerce\CoreBundle\Manager\Admin\AbstractAdminManager;
 
 /**
  * Class MediaManager
