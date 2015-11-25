@@ -12,8 +12,8 @@
 
 namespace WellCommerce\AppBundle\DataSet\Admin;
 
-use WellCommerce\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
+use WellCommerce\CoreBundle\DataSet\AbstractDataSet;
 
 /**
  * Class ClientGroupDataSet

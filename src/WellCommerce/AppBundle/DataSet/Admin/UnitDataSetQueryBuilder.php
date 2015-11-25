@@ -13,13 +13,12 @@
 namespace WellCommerce\AppBundle\DataSet\Admin;
 
 use WellCommerce\Component\DataSet\QueryBuilder\AbstractDataSetQueryBuilder;
-use WellCommerce\Component\DataSet\QueryBuilder\DataSetQueryBuilderInterface;
 
 /**
  * Class UnitDataSetQueryBuilder
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class UnitDataSetQueryBuilder extends AbstractDataSetQueryBuilder implements DataSetQueryBuilderInterface
+class UnitDataSetQueryBuilder extends AbstractDataSetQueryBuilder
 {
 }

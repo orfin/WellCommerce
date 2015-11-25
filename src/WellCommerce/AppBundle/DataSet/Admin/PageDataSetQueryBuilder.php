@@ -15,7 +15,6 @@ namespace WellCommerce\AppBundle\DataSet\Admin;
 use WellCommerce\AppBundle\Context\ShopContextInterface;
 use WellCommerce\Component\DataSet\Column\ColumnCollection;
 use WellCommerce\Component\DataSet\QueryBuilder\AbstractDataSetQueryBuilder;
-use WellCommerce\Component\DataSet\QueryBuilder\DataSetQueryBuilderInterface;
 use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
 
 /**
@@ -23,7 +22,7 @@ use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class PageDataSetQueryBuilder extends AbstractDataSetQueryBuilder implements DataSetQueryBuilderInterface
+class PageDataSetQueryBuilder extends AbstractDataSetQueryBuilder
 {
     /**
      * @var ShopContextInterface

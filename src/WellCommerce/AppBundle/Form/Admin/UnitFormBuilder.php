@@ -34,7 +34,7 @@ class UnitFormBuilder extends AbstractFormBuilder
         $unitTranslationData = $unitRequiredData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
             'label'       => $this->trans('form.fieldset.translations'),
-            'transformer' => $this->getRepositoryTransformer('translation', $this->get('product.repository'))
+            'transformer' => $this->getRepositoryTransformer('translation', $this->get('unit.repository'))
         ]));
 
         $unitTranslationData->addChild($this->getElement('text_field', [

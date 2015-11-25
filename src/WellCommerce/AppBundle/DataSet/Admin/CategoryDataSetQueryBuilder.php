@@ -15,14 +15,13 @@ namespace WellCommerce\AppBundle\DataSet\Admin;
 use WellCommerce\AppBundle\Context\ShopContextInterface;
 use WellCommerce\Component\DataSet\Conditions\Condition\Eq;
 use WellCommerce\Component\DataSet\QueryBuilder\AbstractDataSetQueryBuilder;
-use WellCommerce\Component\DataSet\QueryBuilder\DataSetQueryBuilderInterface;
 
 /**
  * Class CategoryDataSetQueryBuilder
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class CategoryDataSetQueryBuilder extends AbstractDataSetQueryBuilder implements DataSetQueryBuilderInterface
+class CategoryDataSetQueryBuilder extends AbstractDataSetQueryBuilder
 {
     /**
      * @var ShopContextInterface
