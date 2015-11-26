@@ -18,8 +18,8 @@ use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Route as SymfonyRoute;
 use Symfony\Component\Routing\RouteCollection;
 use WellCommerce\AppBundle\Entity\RouteInterface;
-use WellCommerce\AppBundle\Generator\RouteGeneratorCollection;
-use WellCommerce\AppBundle\Generator\RouteGeneratorInterface;
+use WellCommerce\CoreBundle\Service\Routing\Generator\RouteGeneratorCollection;
+use WellCommerce\CoreBundle\Service\Routing\Generator\RouteGeneratorInterface;
 use WellCommerce\AppBundle\Repository\RouteRepositoryInterface;
 
 /**

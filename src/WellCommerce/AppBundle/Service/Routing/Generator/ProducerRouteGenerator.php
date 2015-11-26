@@ -12,15 +12,12 @@
 
 namespace WellCommerce\AppBundle\Service\Routing\Generator;
 
-use WellCommerce\AppBundle\Generator\AbstractRouteGenerator;
-use WellCommerce\AppBundle\Generator\RouteGeneratorInterface;
-
 /**
  * Class ProducerRouteGenerator
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProducerRouteGenerator extends AbstractRouteGenerator implements RouteGeneratorInterface
+class ProducerRouteGenerator extends AbstractRouteGenerator
 {
     const GENERATOR_STRATEGY = 'producer';
 

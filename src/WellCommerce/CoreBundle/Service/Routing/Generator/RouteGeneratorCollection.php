@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\AppBundle\Generator;
+namespace WellCommerce\CoreBundle\Service\Routing\Generator;
 
 use WellCommerce\Component\Collections\ArrayCollection;
 
