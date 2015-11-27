@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\AppBundle\Twig\Extension;
+namespace WellCommerce\CoreBundle\Twig\Extension;
 
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use WellCommerce\CoreBundle\Helper\Request\RequestHelperInterface;

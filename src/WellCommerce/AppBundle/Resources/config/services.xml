@@ -115,12 +115,6 @@
             </call>
         </service>
 
-        <service id="twig.extension.sorting_helper" class="WellCommerce\AppBundle\Twig\Extension\SortingHelperExtension">
-            <argument type="service" id="request.helper"/>
-            <argument type="service" id="translator.helper"/>
-            <tag name="twig.extension"/>
-        </service>
-
         <service id="sales_report.manager.admin" class="WellCommerce\AppBundle\Manager\Admin\SalesReportManager">
             <argument type="service" id="order.repository"/>
             <argument type="service" id="sales_report.event_dispatcher"/>
