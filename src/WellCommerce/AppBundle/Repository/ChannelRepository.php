@@ -18,6 +18,6 @@ use WellCommerce\CoreBundle\Repository\AbstractEntityRepository;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ChannelRepository extends AbstractEntityRepository implements PackageRepositoryInterface
+class ChannelRepository extends AbstractEntityRepository implements ChannelRepositoryInterface
 {
 }
