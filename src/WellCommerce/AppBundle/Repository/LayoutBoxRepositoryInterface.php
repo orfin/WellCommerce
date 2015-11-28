@@ -24,7 +24,7 @@ interface LayoutBoxRepositoryInterface extends RepositoryInterface
     /**
      * Returns boxes collection
      *
-     * @return \WellCommerce\AppBundle\Collection\LayoutBoxCollection
+     * @return \WellCommerce\AppBundle\Service\LayoutBox\Collection\LayoutBoxCollection
      */
     public function getLayoutBoxesCollection();
 }

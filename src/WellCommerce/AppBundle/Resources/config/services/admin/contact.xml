@@ -22,7 +22,7 @@
             </call>
         </service>
 
-        <service id="contact.layout_box.configurator" class="WellCommerce\AppBundle\Service\Layout\Configurator\ContactBoxConfigurator">
+        <service id="contact.layout_box.configurator" class="WellCommerce\AppBundle\Service\LayoutBox\Configurator\ContactBoxConfigurator">
             <argument>Contact</argument>
             <argument>contact.layout_box.controller</argument>
             <argument type="service" id="translator.helper"/>

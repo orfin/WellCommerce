@@ -37,14 +37,14 @@
             </call>
         </service>
 
-        <service id="category_menu.layout_box.configurator" class="WellCommerce\AppBundle\Service\Layout\Configurator\CategoryMenuBoxConfigurator">
+        <service id="category_menu.layout_box.configurator" class="WellCommerce\AppBundle\Service\LayoutBox\Configurator\CategoryMenuBoxConfigurator">
             <argument>CategoryMenu</argument>
             <argument>category_menu.layout_box.controller</argument>
             <argument type="service" id="translator.helper"/>
             <tag name="layout_box.configurator" />
         </service>
 
-        <service id="category_info.layout_box.configurator" class="WellCommerce\AppBundle\Service\Layout\Configurator\CategoryInfoBoxConfigurator">
+        <service id="category_info.layout_box.configurator" class="WellCommerce\AppBundle\Service\LayoutBox\Configurator\CategoryInfoBoxConfigurator">
             <argument>CategoryInfo</argument>
             <argument>category_info.layout_box.controller</argument>
             <argument type="service" id="translator.helper"/>
@@ -90,7 +90,7 @@
             </call>
         </service>
 
-        <service id="category_products.layout_box.configurator" class="WellCommerce\AppBundle\Service\Layout\Configurator\CategoryProductsBoxConfigurator">
+        <service id="category_products.layout_box.configurator" class="WellCommerce\AppBundle\Service\LayoutBox\Configurator\CategoryProductsBoxConfigurator">
             <argument>CategoryProducts</argument>
             <argument>category_products.layout_box.controller</argument>
             <argument type="service" id="translator.helper"/>

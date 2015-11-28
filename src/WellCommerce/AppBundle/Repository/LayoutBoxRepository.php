@@ -12,7 +12,7 @@
 namespace WellCommerce\AppBundle\Repository;
 
 use WellCommerce\CoreBundle\Repository\AbstractEntityRepository;
-use WellCommerce\AppBundle\Collection\LayoutBoxCollection;
+use WellCommerce\AppBundle\Service\LayoutBox\Collection\LayoutBoxCollection;
 
 /**
  * Class LayoutBoxRepository

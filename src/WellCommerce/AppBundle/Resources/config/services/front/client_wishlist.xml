@@ -37,7 +37,7 @@
             </call>
         </service>
 
-        <service id="client_wishlist.configurator" class="WellCommerce\AppBundle\Service\Layout\Configurator\ClientWishlistBoxConfigurator">
+        <service id="client_wishlist.configurator" class="WellCommerce\AppBundle\Service\LayoutBox\Configurator\ClientWishlistBoxConfigurator">
             <argument>ClientWishlist</argument>
             <argument>client_wishlist.layout_box.controller</argument>
             <argument type="service" id="translator.helper"/>

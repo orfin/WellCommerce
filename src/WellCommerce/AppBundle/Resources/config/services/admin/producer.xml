@@ -51,14 +51,14 @@
             </call>
         </service>
 
-        <service id="producer_menu.layout_box.configurator" class="WellCommerce\AppBundle\Service\Layout\Configurator\ProducerMenuBoxConfigurator">
+        <service id="producer_menu.layout_box.configurator" class="WellCommerce\AppBundle\Service\LayoutBox\Configurator\ProducerMenuBoxConfigurator">
             <argument>ProducerMenu</argument>
             <argument>producer_menu.layout_box.controller</argument>
             <argument type="service" id="translator.helper"/>
             <tag name="layout_box.configurator" />
         </service>
 
-        <service id="producer_products.layout_box.configurator" class="WellCommerce\AppBundle\Service\Layout\Configurator\ProducerProductsBoxConfigurator">
+        <service id="producer_products.layout_box.configurator" class="WellCommerce\AppBundle\Service\LayoutBox\Configurator\ProducerProductsBoxConfigurator">
             <argument>ProducerProducts</argument>
             <argument>producer_products.layout_box.controller</argument>
             <argument type="service" id="translator.helper"/>
