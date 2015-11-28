@@ -1,0 +1,11 @@
+WellCommerce\Bundle\AppBundle\Entity\LayoutBoxTranslation:
+    type: entity
+    table: layout_box_translation
+    fields:
+        name:
+            type: string
+            length: 255
+            nullable: false
+        content:
+            type: text
+            nullable: true

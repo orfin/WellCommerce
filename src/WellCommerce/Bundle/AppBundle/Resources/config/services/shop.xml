@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <imports>
+        <import resource="admin/shop.xml"/>
+        <import resource="front/shop.xml"/>
+    </imports>
+
+    <services>
+        <service id="shop.repository" class="WellCommerce\Bundle\AppBundle\Repository\ShopRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>WellCommerceAppBundle:Shop</argument>
+        </service>
+
+        <service id="shop.factory" class="WellCommerce\Bundle\AppBundle\Factory\ShopFactory" />
+
+        <service id="shop.event_dispatcher" parent="core.event_dispatcher" public="false">
+            <argument type="service" id="event_dispatcher" />
+        </service>
+
+        <service id="shop.subscriber" class="WellCommerce\Bundle\AppBundle\EventListener\ShopSubscriber">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <tag name="kernel.event_subscriber" />
+        </service>
+
+        <service id="twig.extension.shop" class="WellCommerce\Bundle\AppBundle\Twig\Extension\ShopExtension">
+            <argument type="service" id="shop.context.front"/>
+            <tag name="twig.extension"/>
+        </service>
+    </services>
+</container>

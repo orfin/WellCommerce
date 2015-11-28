@@ -40,8 +40,8 @@ class AppKernel extends Kernel
             new Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
             new Ivory\LuceneSearchBundle\IvoryLuceneSearchBundle(),
             // WellCommerce bundles
-            new WellCommerce\CoreBundle\WellCommerceCoreBundle(),
-            new WellCommerce\AppBundle\WellCommerceAppBundle()
+            new WellCommerce\Bundle\CoreBundle\WellCommerceCoreBundle(),
+            new WellCommerce\Bundle\AppBundle\WellCommerceAppBundle()
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'])) {

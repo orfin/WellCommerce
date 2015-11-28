@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="client_wishlist.repository" class="WellCommerce\Bundle\AppBundle\Repository\ClientWishlistRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>WellCommerceAppBundle:ClientWishlist</argument>
+        </service>
+
+        <service id="client_wishlist.factory" class="WellCommerce\Bundle\AppBundle\Factory\ClientWishlistFactory" />
+
+        <service id="client_wishlist.event_dispatcher" parent="core.event_dispatcher" public="false">
+            <argument type="service" id="event_dispatcher"/>
+        </service>
+
+        <service id="client_wishlist.manager.front" class="WellCommerce\Bundle\AppBundle\Manager\Front\ClientWishlistManager">
+            <argument type="service" id="client_wishlist.repository"/>
+            <argument type="service" id="client_wishlist.event_dispatcher"/>
+            <argument type="service" id="client_wishlist.factory"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="client_wishlist.controller.front" class="WellCommerce\Bundle\AppBundle\Controller\Front\ClientWishlistController">
+            <argument type="service" id="client_wishlist.manager.front"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="client_wishlist.layout_box.controller" class="WellCommerce\Bundle\AppBundle\Controller\Box\ClientWishlistBoxController">
+            <argument type="service" id="client.manager.front"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="client_wishlist.configurator" class="WellCommerce\Bundle\AppBundle\Service\LayoutBox\Configurator\ClientWishlistBoxConfigurator">
+            <argument>ClientWishlist</argument>
+            <argument>client_wishlist.layout_box.controller</argument>
+            <argument type="service" id="translator.helper"/>
+            <tag name="layout_box.configurator" />
+        </service>
+    </services>
+</container>

@@ -1,0 +1,9 @@
+WellCommerce\Bundle\AppBundle\Entity\OrderStatusGroup:
+    type: entity
+    table: order_status_group
+    repositoryClass: WellCommerce\Bundle\AppBundle\Repository\OrderStatusGroupRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO

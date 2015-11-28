@@ -1,0 +1,25 @@
+WellCommerce\Bundle\AppBundle\Entity\PaymentMethodConfiguration:
+    type: entity
+    table: payment_method_configuration
+    repositoryClass: WellCommerce\Bundle\AppBundle\Repository\PaymentMethodConfigurationRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            nullable: false
+        value:
+            type: string
+            nullable: false
+    manyToOne:
+        paymentMethod:
+            targetEntity: WellCommerce\Bundle\AppBundle\Entity\PaymentMethod
+            fetch: LAZY
+            inversedBy: configuration
+            joinColumns:
+                payment_method_id:
+                    referencedColumnName: id
+                    onDelete: CASCADE

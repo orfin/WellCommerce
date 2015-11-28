@@ -1,0 +1,86 @@
+WellCommerce\Bundle\AppBundle\Entity\Client:
+    type: entity
+    table: client
+    repositoryClass: WellCommerce\Bundle\AppBundle\Repository\ClientRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    embedded:
+        billingAddress:
+            class: WellCommerce\Bundle\AppBundle\Entity\ClientBillingAddress
+            columnPrefix: billing_address_
+        shippingAddress:
+            class: WellCommerce\Bundle\AppBundle\Entity\ClientShippingAddress
+            columnPrefix: shipping_address_
+        contactDetails:
+            class: WellCommerce\Bundle\AppBundle\Entity\ClientContactDetails
+            columnPrefix: contact_details_
+    fields:
+        discount:
+            type: decimal
+            scale: 2
+            nullable: false
+            precision: 15
+        password:
+            type: string
+            length: 64
+            nullable: false
+        username:
+            type: string
+            length: 60
+            unique: true
+            nullable: false
+        salt:
+            type: string
+            length: 40
+            unique: false
+            nullable: false
+        resetPasswordHash:
+            type: string
+            length: 48
+            unique: true
+            nullable: true
+        conditionsAccepted:
+            type: boolean
+            nullable: false
+            column: conditions_accepted
+        newsletterAccepted:
+            type: boolean
+            nullable: false
+            column: newsletter_accepted
+    oneToMany:
+        wishlist:
+            targetEntity: WellCommerce\Bundle\AppBundle\Entity\ClientWishlist
+            cascade:
+                - remove
+                - persist
+            fetch: LAZY
+            mappedBy: client
+            orphanRemoval: true
+        orders:
+            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Order
+            cascade:
+                - remove
+                - persist
+            fetch: LAZY
+            mappedBy: client
+            orphanRemoval: true
+    manyToOne:
+        shop:
+            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Shop
+            fetch: LAZY
+            joinColumns:
+                shop_id:
+                    referencedColumnName: id
+                    onDelete: CASCADE
+        clientGroup:
+            targetEntity: WellCommerce\Bundle\AppBundle\Entity\ClientGroup
+            fetch: LAZY
+            inversedBy: clients
+            joinColumns:
+                client_group_id:
+                    referencedColumnName: id
+                    onDelete: 'SET NULL'
+            orphanRemoval: false

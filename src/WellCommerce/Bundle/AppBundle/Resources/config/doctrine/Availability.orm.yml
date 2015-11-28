@@ -1,0 +1,9 @@
+WellCommerce\Bundle\AppBundle\Entity\Availability:
+    type: entity
+    table: availability
+    repositoryClass: WellCommerce\Bundle\AppBundle\Repository\AvailabilityRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
