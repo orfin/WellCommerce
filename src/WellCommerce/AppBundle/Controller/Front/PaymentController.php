@@ -48,7 +48,7 @@ class PaymentController extends AbstractFrontController
     /**
      * @param OrderInterface $order
      *
-     * @return \WellCommerce\AppBundle\Processor\PaymentMethodProcessorInterface
+     * @return \WellCommerce\AppBundle\Service\PaymentMethod\Processor\PaymentMethodProcessorInterface
      */
     protected function getProcessor(OrderInterface $order)
     {

@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\AppBundle\Processor;
+namespace WellCommerce\AppBundle\Service\PaymentMethod\Processor;
 
 use Doctrine\Common\Collections\Collection;
 use WellCommerce\Component\Form\Dependencies\DependencyInterface;

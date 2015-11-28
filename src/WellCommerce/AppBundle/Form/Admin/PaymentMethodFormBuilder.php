@@ -116,7 +116,7 @@ class PaymentMethodFormBuilder extends AbstractFormBuilder
     /**
      * Returns the collection of payment method processors
      *
-     * @return \WellCommerce\AppBundle\Processor\PaymentMethodProcessorInterface[]
+     * @return \WellCommerce\AppBundle\Service\PaymentMethod\Processor\PaymentMethodProcessorInterface[]
      */
     protected function getProcessors()
     {
