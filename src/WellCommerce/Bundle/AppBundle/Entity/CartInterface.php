@@ -21,7 +21,7 @@ use WellCommerce\Bundle\AppBundle\Entity\ShopAwareInterface;
 use WellCommerce\Bundle\AppBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\AppBundle\Entity\CouponAwareInterface;
 use WellCommerce\Bundle\AppBundle\Calculator\ShippingCalculatorSubjectInterface;
-use WellCommerce\Bundle\AppBundle\Visitor\CartVisitorInterface;
+use WellCommerce\Bundle\AppBundle\Service\Cart\Visitor\CartVisitorInterface;
 
 /**
  * Interface CartInterface
