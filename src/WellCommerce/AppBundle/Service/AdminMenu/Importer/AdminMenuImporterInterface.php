@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\AppBundle\Importer;
+namespace WellCommerce\AppBundle\Service\AdminMenu\Importer;
 
 use Symfony\Component\Config\FileLocatorInterface;
 

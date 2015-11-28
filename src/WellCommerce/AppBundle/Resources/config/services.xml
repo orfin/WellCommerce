@@ -73,7 +73,7 @@
             <argument>WellCommerceAppBundle:AdminMenu</argument>
         </service>
 
-        <service id="admin_menu.importer.xml" class="WellCommerce\AppBundle\Importer\XmlImporter">
+        <service id="admin_menu.importer.xml" class="WellCommerce\AppBundle\Service\AdminMenu\Importer\XmlImporter">
             <argument type="service" id="doctrine.helper"/>
             <argument type="service" id="admin_menu.factory"/>
             <argument type="service" id="admin_menu.repository"/>
