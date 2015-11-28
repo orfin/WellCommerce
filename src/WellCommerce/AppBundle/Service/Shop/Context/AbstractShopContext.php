@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\AppBundle\Context;
+namespace WellCommerce\AppBundle\Service\Shop\Context;
 
 use WellCommerce\AppBundle\Entity\ShopInterface;
 

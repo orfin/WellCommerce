@@ -10,9 +10,9 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\AppBundle\Resolver;
+namespace WellCommerce\AppBundle\Service\Shop\Resolver;
 
-use WellCommerce\AppBundle\Context\ShopContextInterface;
+use WellCommerce\AppBundle\Service\Shop\Context\ShopContextInterface;
 use WellCommerce\AppBundle\Repository\ShopRepositoryInterface;
 use WellCommerce\CoreBundle\Helper\Request\RequestHelperInterface;
 

@@ -12,7 +12,7 @@
 
 namespace WellCommerce\AppBundle\DataSet\Admin;
 
-use WellCommerce\AppBundle\Context\ShopContextInterface;
+use WellCommerce\AppBundle\Service\Shop\Context\ShopContextInterface;
 use WellCommerce\Component\DataSet\Conditions\Condition\Eq;
 use WellCommerce\Component\DataSet\QueryBuilder\AbstractDataSetQueryBuilder;
 

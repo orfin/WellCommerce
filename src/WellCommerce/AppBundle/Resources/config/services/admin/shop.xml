@@ -26,9 +26,9 @@
             <argument type="service" id="shop.repository"/>
         </service>
 
-        <service id="shop.context.admin" class="WellCommerce\AppBundle\Context\Front\ShopContext" />
+        <service id="shop.context.admin" class="WellCommerce\AppBundle\Service\Shop\Context\Front\ShopContext" />
 
-        <service id="shop.resolver.admin" class="WellCommerce\AppBundle\Resolver\Admin\ShopResolver">
+        <service id="shop.resolver.admin" class="WellCommerce\AppBundle\Service\Shop\Resolver\Admin\ShopResolver">
             <argument type="service" id="shop.context.admin" />
             <argument type="service" id="shop.repository" />
             <argument type="service" id="request.helper" />

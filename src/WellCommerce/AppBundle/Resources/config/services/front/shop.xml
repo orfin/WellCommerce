@@ -4,9 +4,9 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="shop.context.front" class="WellCommerce\AppBundle\Context\Front\ShopContext" />
+        <service id="shop.context.front" class="WellCommerce\AppBundle\Service\Shop\Context\Front\ShopContext" />
 
-        <service id="shop.resolver.front" class="WellCommerce\AppBundle\Resolver\Front\ShopResolver">
+        <service id="shop.resolver.front" class="WellCommerce\AppBundle\Service\Shop\Resolver\Front\ShopResolver">
             <argument type="service" id="shop.context.front" />
             <argument type="service" id="shop.repository" />
             <argument type="service" id="request.helper" />

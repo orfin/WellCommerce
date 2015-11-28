@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\AppBundle\Validator;
+namespace WellCommerce\AppBundle\Service\Coupon\Validator;
 
 use WellCommerce\AppBundle\Entity\CouponInterface;
 

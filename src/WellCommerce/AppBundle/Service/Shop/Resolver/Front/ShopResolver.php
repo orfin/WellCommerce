@@ -10,10 +10,10 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\AppBundle\Resolver\Front;
+namespace WellCommerce\AppBundle\Service\Shop\Resolver\Front;
 
-use WellCommerce\AppBundle\Resolver\AbstractShopResolver;
-use WellCommerce\AppBundle\Resolver\ShopResolverInterface;
+use WellCommerce\AppBundle\Service\Shop\Resolver\AbstractShopResolver;
+use WellCommerce\AppBundle\Service\Shop\Resolver\ShopResolverInterface;
 
 /**
  * Class ShopResolver

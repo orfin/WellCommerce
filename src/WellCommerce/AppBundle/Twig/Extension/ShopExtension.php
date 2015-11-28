@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\AppBundle\Twig\Extension;
 
-use WellCommerce\AppBundle\Context\ShopContextInterface;
+use WellCommerce\AppBundle\Service\Shop\Context\ShopContextInterface;
 
 /**
  * Class ShopExtension
