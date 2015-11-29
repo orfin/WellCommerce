@@ -15,7 +15,7 @@ namespace WellCommerce\Bundle\AppBundle\Entity;
 use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\AppBundle\Entity\Attribute\GroupInterface;
 use WellCommerce\Bundle\AppBundle\Entity\ShopCollectionAwareInterface;
-use WellCommerce\Bundle\AppBundle\Entity\TaxInterface;
+use WellCommerce\Bundle\TaxBundle\Entity\TaxInterface;
 use WellCommerce\Bundle\AppBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\AppBundle\Entity\Dimension;
 use WellCommerce\Bundle\AppBundle\Entity\DiscountablePrice;

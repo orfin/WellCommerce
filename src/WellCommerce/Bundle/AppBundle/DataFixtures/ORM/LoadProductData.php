@@ -18,7 +18,7 @@ use WellCommerce\Bundle\AppBundle\Entity\Product;
 use WellCommerce\Bundle\AppBundle\Entity\ProductPhoto;
 use WellCommerce\Bundle\AppBundle\DataFixtures\ORM\LoadMediaData;
 use WellCommerce\Bundle\AppBundle\DataFixtures\ORM\LoadCurrencyData;
-use WellCommerce\Bundle\AppBundle\DataFixtures\ORM\LoadTaxData;
+use WellCommerce\Bundle\TaxBundle\DataFixtures\ORM\LoadTaxData;
 use WellCommerce\Bundle\CoreBundle\Helper\Sluggable;
 use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
 use WellCommerce\Bundle\AppBundle\Entity\Dimension;

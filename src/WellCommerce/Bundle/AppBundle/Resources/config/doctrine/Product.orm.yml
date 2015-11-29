@@ -74,14 +74,14 @@ WellCommerce\Bundle\AppBundle\Entity\Product:
                     referencedColumnName: id
                     onDelete: 'SET NULL'
         buyPriceTax:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Tax
+            targetEntity: WellCommerce\Bundle\TaxBundle\Entity\Tax
             fetch: LAZY
             joinColumns:
                 buy_tax_id:
                     referencedColumnName: id
                     onDelete: 'SET NULL'
         sellPriceTax:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Tax
+            targetEntity: WellCommerce\Bundle\TaxBundle\Entity\Tax
             fetch: LAZY
             joinColumns:
                 sell_tax_id:

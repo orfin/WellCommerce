@@ -41,7 +41,7 @@
         </constraint>
     </class>
 
-    <class name="WellCommerce\Bundle\AppBundle\Entity\Tax">
+    <class name="WellCommerce\Bundle\TaxBundle\Entity\Tax">
         <property name="value">
             <constraint name="NotBlank">
                 <option name="message">validation.tax.not_blank</option>
@@ -58,7 +58,7 @@
         </property>
     </class>
 
-    <class name="WellCommerce\Bundle\AppBundle\Entity\TaxTranslation">
+    <class name="WellCommerce\Bundle\TaxBundle\Entity\TaxTranslation">
         <property name="name">
             <constraint name="NotBlank" />
             <constraint name="NotNull" />

@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Tests\Entity;
+namespace WellCommerce\Bundle\TaxBundle\Tests\Entity;
 
 use WellCommerce\Bundle\AppBundle\Entity\Tax;
 use WellCommerce\Bundle\CoreBundle\Test\Entity\AbstractEntityTestCase;

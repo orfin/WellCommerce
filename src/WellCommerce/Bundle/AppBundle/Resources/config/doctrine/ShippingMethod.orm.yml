@@ -29,7 +29,7 @@ WellCommerce\Bundle\AppBundle\Entity\ShippingMethod:
                     referencedColumnName: id
                     onDelete: 'RESTRICT'
         tax:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Tax
+            targetEntity: WellCommerce\Bundle\TaxBundle\Entity\Tax
             fetch: LAZY
             joinColumns:
                 tax_id:
