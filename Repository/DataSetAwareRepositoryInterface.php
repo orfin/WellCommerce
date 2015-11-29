@@ -12,8 +12,6 @@
 
 namespace WellCommerce\Component\DataSet\Repository;
 
-use Doctrine\Common\Collections\Criteria;
-
 /**
  * Interface DataSetAwareRepositoryInterface
  *
