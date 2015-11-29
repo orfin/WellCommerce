@@ -18,8 +18,8 @@ use WellCommerce\Component\DataSet\Column\ColumnCollection;
 use WellCommerce\Component\DataSet\Column\ColumnInterface;
 use WellCommerce\Component\DataSet\Conditions\ConditionInterface;
 use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
-use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
 use WellCommerce\Component\DataSet\Repository\DataSetAwareRepositoryInterface;
+use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
 
 /**
  * Class DataSetQueryBuilder

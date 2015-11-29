@@ -13,8 +13,8 @@
 namespace WellCommerce\Component\DataSet\Context;
 
 use Doctrine\ORM\Query;
-use WellCommerce\Component\DataSet\Exception\DataSetContextNotFoundException;
 use WellCommerce\Component\Collections\ArrayCollection;
+use WellCommerce\Component\DataSet\Exception\DataSetContextNotFoundException;
 
 /**
  * Class ArrayContext

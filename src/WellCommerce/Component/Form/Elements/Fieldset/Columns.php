@@ -12,8 +12,6 @@
 
 namespace WellCommerce\Component\Form\Elements\Fieldset;
 
-use WellCommerce\Component\Form\Elements\ElementInterface;
-
 /**
  * Class NestedFieldset
  *
