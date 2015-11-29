@@ -10,9 +10,9 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Factory;
+namespace WellCommerce\Bundle\TaxBundle\Factory;
 
-use WellCommerce\Bundle\AppBundle\Entity\Tax;
+use WellCommerce\Bundle\TaxBundle\Entity\Tax;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 
 /**
@@ -23,7 +23,7 @@ use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 class TaxFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\AppBundle\Entity\TaxInterface
+     * @return \WellCommerce\Bundle\TaxBundle\Entity\TaxInterface
      */
     public function create()
     {

@@ -1,7 +1,7 @@
-WellCommerce\Bundle\AppBundle\Entity\Tax:
+WellCommerce\Bundle\TaxBundle\Entity\Tax:
     type: entity
     table: tax
-    repositoryClass: WellCommerce\Bundle\AppBundle\Repository\TaxRepository
+    repositoryClass: WellCommerce\Bundle\TaxBundle\Repository\TaxRepository
     id:
         id:
             type: integer
