@@ -13,9 +13,9 @@
 namespace WellCommerce\Component\Form\Elements\Input;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use WellCommerce\Component\Form\Elements\ElementInterface;
-use WellCommerce\Component\Form\Elements\AttributeCollection;
 use WellCommerce\Component\Form\Elements\Attribute;
+use WellCommerce\Component\Form\Elements\AttributeCollection;
+use WellCommerce\Component\Form\Elements\ElementInterface;
 
 /**
  * Class TextField
