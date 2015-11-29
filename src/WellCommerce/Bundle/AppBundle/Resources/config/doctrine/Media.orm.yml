@@ -30,15 +30,6 @@ WellCommerce\Bundle\AppBundle\Entity\Media:
             type: string
             length: 12
             nullable: true
-    oneToMany:
-        productPhotos:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\ProductPhoto
-            cascade:
-                - remove
-                - persist
-            fetch: LAZY
-            mappedBy: photo
-            orphanRemoval: true
     lifecycleCallbacks:
         prePersist:
             - preUpload

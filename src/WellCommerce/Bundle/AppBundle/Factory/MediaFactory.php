@@ -29,7 +29,6 @@ class MediaFactory extends AbstractFactory
     public function create()
     {
         $media = new Media();
-        $media->setProductPhotos(new ArrayCollection());
 
         return $media;
     }

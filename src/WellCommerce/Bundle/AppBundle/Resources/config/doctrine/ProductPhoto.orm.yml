@@ -36,14 +36,10 @@ WellCommerce\Bundle\AppBundle\Entity\ProductPhoto:
     manyToOne:
         photo:
             targetEntity: WellCommerce\Bundle\AppBundle\Entity\Media
-            cascade: {  }
             fetch: LAZY
-            mappedBy: null
-            inversedBy: productPhotos
             joinColumns:
                 photo_id:
                     referencedColumnName: id
-            orphanRemoval: false
         product:
             targetEntity: WellCommerce\Bundle\AppBundle\Entity\Product
             cascade: {  }

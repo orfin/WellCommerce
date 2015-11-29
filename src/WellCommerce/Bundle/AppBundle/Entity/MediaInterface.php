@@ -82,9 +82,4 @@ interface MediaInterface extends TimestampableInterface, BlameableInterface
      * @param string $extension
      */
     public function setExtension($extension);
-
-    /**
-     * @param Collection $productPhotos
-     */
-    public function setProductPhotos(Collection $productPhotos);
 }

@@ -32,11 +32,6 @@ class Media implements MediaInterface
     protected $id;
 
     /**
-     * @var Collection
-     */
-    protected $productPhotos;
-
-    /**
      * @var string
      */
     protected $name;
@@ -155,14 +150,6 @@ class Media implements MediaInterface
     public function setExtension($extension)
     {
         $this->extension = $extension;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setProductPhotos(Collection $productPhotos)
-    {
-        $this->productPhotos = $productPhotos;
     }
 
     public function preUpload()

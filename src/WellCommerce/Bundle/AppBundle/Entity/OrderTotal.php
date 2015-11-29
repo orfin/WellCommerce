@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\AppBundle\Entity;
 
-use WellCommerce\Bundle\AppBundle\Helper\TaxHelper;
+use WellCommerce\Bundle\TaxBundle\Helper\TaxHelper;
 
 /**
  * Class OrderTotal
