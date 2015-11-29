@@ -1,2 +1,0 @@
-# DataGrid
-WellCommerce DataGrid Component
