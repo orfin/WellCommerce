@@ -28,8 +28,6 @@ class WellCommerceAppBundle extends Bundle
         parent::build($container);
         $container->addCompilerPass(new Compiler\RouteGeneratorPass());
         $container->addCompilerPass(new Compiler\LayoutBoxConfiguratorPass());
-        $container->addCompilerPass(new Compiler\ThemeCompilerPass());
-        $container->addCompilerPass(new Compiler\TemplateResourcesPass());
         $container->addCompilerPass(new Compiler\RegisterCartVisitorPass());
         $container->addCompilerPass(new Compiler\RegisterOrderVisitorPass());
         $container->addCompilerPass(new Compiler\RegisterShippingMethodCalculatorPass());

@@ -38,11 +38,9 @@
     <import resource="routing/shop.xml" />
 
     <import resource="routing/admin/layout_box.xml"/>
-    <import resource="routing/admin/theme.xml"/>
 
     <import resource="routing/admin/coupon.xml" prefix="/admin/promotion/coupon/"/>
     <import resource="routing/front/coupon.xml" prefix="/coupon/"/>
-
 
     <import resource="routing/admin/order.xml" prefix="admin/order"/>
     <import resource="routing/admin/order_status.xml" prefix="admin/order/status"/>

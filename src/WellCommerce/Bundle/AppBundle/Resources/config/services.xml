@@ -42,7 +42,6 @@
         <import resource="services/shop.xml"/>
 
         <import resource="services/layout_box.xml"/>
-        <import resource="services/theme.xml"/>
 
         <import resource="services/coupon.xml"/>
 

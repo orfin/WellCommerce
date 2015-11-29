@@ -29,7 +29,7 @@ class LoadShopData extends AbstractDataFixture
     public function load(ObjectManager $manager)
     {
         /**
-         * @var $theme       \WellCommerce\Bundle\AppBundle\Entity\ThemeInterface
+         * @var $theme       \WellCommerce\Bundle\ThemeBundle\Entity\ThemeInterface
          * @var $company     \WellCommerce\Bundle\AppBundle\Entity\CompanyInterface
          * @var $orderStatus \WellCommerce\Bundle\AppBundle\Entity\OrderStatusInterface
          */

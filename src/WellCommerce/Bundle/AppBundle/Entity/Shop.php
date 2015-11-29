@@ -16,7 +16,7 @@ use Doctrine\Common\Collections\Collection;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use WellCommerce\Bundle\AppBundle\Entity\MailerConfiguration;
-use WellCommerce\Bundle\AppBundle\Entity\ThemeAwareTrait;
+use WellCommerce\Bundle\ThemeBundle\Entity\ThemeAwareTrait;
 
 /**
  * Class Shop

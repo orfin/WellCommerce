@@ -13,6 +13,9 @@ _liip_imagine:
 wellcommerce_app:
     resource: "@WellCommerceAppBundle/Resources/config/routing.xml"
 
+wellcommerce_theme:
+    resource: "@WellCommerceThemeBundle/Resources/config/routing.xml"
+
 root:
     path: /admin
     defaults:
