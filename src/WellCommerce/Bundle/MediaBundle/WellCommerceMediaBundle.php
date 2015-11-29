@@ -15,11 +15,11 @@ namespace WellCommerce\Bundle\TaxBundle;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * Class WellCommerceTaxBundle
+ * Class WellCommerceMediaBundle
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class WellCommerceTaxBundle extends Bundle
+class WellCommerceMediaBundle extends Bundle
 {
 
 }
