@@ -24,6 +24,7 @@ git stree push PageBundle
 git stree push PaymentBundle
 git stree push ProducerBundle
 git stree push ProductBundle
+git stree push ProductStatusBundle
 git stree push ReportBundle
 git stree push ReviewBundle
 git stree push RoutingBundle
@@ -32,6 +33,5 @@ git stree push ShippingBundle
 git stree push ShopBundle
 git stree push SmugglerBundle
 git stree push TaxBundle
-git stree push TaxonomyBundle
 git stree push ThemeBundle
 git stree push UnitBundle
