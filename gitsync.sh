@@ -32,5 +32,6 @@ git stree push ShippingBundle
 git stree push ShopBundle
 git stree push SmugglerBundle
 git stree push TaxBundle
+git stree push TaxonomyBundle
 git stree push ThemeBundle
 git stree push UnitBundle
