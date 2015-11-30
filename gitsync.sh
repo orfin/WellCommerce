@@ -8,6 +8,7 @@ git stree push CategoryBundle
 git stree push Collections
 git stree push CompanyBundle
 git stree push ContactBundle
+git stree push CountryBundle
 git stree push CouponBundle
 git stree push CurrencyBundle
 git stree push DataGrid
