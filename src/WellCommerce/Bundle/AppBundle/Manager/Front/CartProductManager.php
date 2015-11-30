@@ -35,11 +35,13 @@ class CartProductManager extends AbstractFrontManager implements CartProductMana
         ProductAttributeInterface $attribute = null,
         $quantity = 1
     ) {
-        $cartProduct = $this->initResource();
+        $cartProduct = $this->factory->create();
         $cartProduct->setCart($cart);
         $cartProduct->setProduct($product);
         $cartProduct->setAttribute($attribute);
         $cartProduct->setQuantity($quantity);
+
+        $this->eventDispatcher->dispatchOnPostInitResource($cartProduct);
 
         return $cartProduct;
     }
