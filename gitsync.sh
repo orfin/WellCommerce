@@ -15,6 +15,7 @@ git stree push DataSet
 git stree push DelivererBundle
 git stree push DictionaryBundle
 git stree push Form
+git stree push LayeredNavigationBundle
 git stree push LayoutBundle
 git stree push LocaleBundle
 git stree push MediaBundle
