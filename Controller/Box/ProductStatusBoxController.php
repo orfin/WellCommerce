@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\AppBundle\Controller\Box;
 
-use WellCommerce\Bundle\AppBundle\Service\LayoutBox\Collection\LayoutBoxSettingsCollection;
+use WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxSettingsCollection;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 
 /**
