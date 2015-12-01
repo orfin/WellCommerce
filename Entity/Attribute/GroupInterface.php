@@ -14,9 +14,9 @@ namespace WellCommerce\Bundle\AppBundle\Entity\Attribute;
 
 use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\AppBundle\Entity\AttributeInterface;
-use WellCommerce\Bundle\UserBundle\Entity\BlameableInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
-use WellCommerce\Bundle\AppBundle\Entity\TranslatableInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
 
 /**
  * Interface GroupInterface
