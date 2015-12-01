@@ -59,7 +59,7 @@
             </call>
         </service>
 
-        <service id="client_login.layout_box.configurator" class="WellCommerce\Bundle\AppBundle\Service\LayoutBox\Configurator\ClientLoginBoxConfigurator">
+        <service id="client_login.layout_box.configurator" class="WellCommerce\Bundle\LayoutBundle\Configurator\ClientLoginBoxConfigurator">
             <argument>ClientLogin</argument>
             <argument>client_login.layout_box.controller</argument>
             <argument type="service" id="translator.helper"/>
@@ -73,7 +73,7 @@
             </call>
         </service>
 
-        <service id="client_registration.layout_box.configurator" class="WellCommerce\Bundle\AppBundle\Service\LayoutBox\Configurator\ClientRegistrationBoxConfigurator">
+        <service id="client_registration.layout_box.configurator" class="WellCommerce\Bundle\LayoutBundle\Configurator\ClientRegistrationBoxConfigurator">
             <argument>ClientRegistration</argument>
             <argument>client_registration.layout_box.controller</argument>
             <argument type="service" id="translator.helper"/>
@@ -94,7 +94,7 @@
             </call>
         </service>
 
-        <service id="client_menu.layout_box.configurator" class="WellCommerce\Bundle\AppBundle\Service\LayoutBox\Configurator\ClientMenuBoxConfigurator">
+        <service id="client_menu.layout_box.configurator" class="WellCommerce\Bundle\LayoutBundle\Configurator\ClientMenuBoxConfigurator">
             <argument>ClientMenu</argument>
             <argument>client_menu.layout_box.controller</argument>
             <argument type="service" id="translator.helper"/>

@@ -37,7 +37,7 @@
             </call>
         </service>
 
-        <service id="client_address_book.layout_box.configurator" class="WellCommerce\Bundle\AppBundle\Service\LayoutBox\Configurator\ClientAddressBookBoxConfigurator">
+        <service id="client_address_book.layout_box.configurator" class="WellCommerce\Bundle\LayoutBundle\Configurator\ClientAddressBookBoxConfigurator">
             <argument>ClientAddressBook</argument>
             <argument>client_address_book.layout_box.controller</argument>
             <argument type="service" id="translator.helper"/>

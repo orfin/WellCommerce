@@ -41,7 +41,7 @@
             </call>
         </service>
 
-        <service id="client_settings.configurator" class="WellCommerce\Bundle\AppBundle\Service\LayoutBox\Configurator\ClientSettingsBoxConfigurator">
+        <service id="client_settings.configurator" class="WellCommerce\Bundle\LayoutBundle\Configurator\ClientSettingsBoxConfigurator">
             <argument>ClientSettings</argument>
             <argument>client_settings.controller.box</argument>
             <argument type="service" id="translator.helper"/>

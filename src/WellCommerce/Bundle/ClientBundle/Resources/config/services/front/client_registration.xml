@@ -30,7 +30,7 @@
             </call>
         </service>
 
-        <service id="client_registration.layout_box.configurator" class="WellCommerce\Bundle\AppBundle\Service\LayoutBox\Configurator\ClientRegistrationBoxConfigurator">
+        <service id="client_registration.layout_box.configurator" class="WellCommerce\Bundle\LayoutBundle\Configurator\ClientRegistrationBoxConfigurator">
             <argument>ClientRegistration</argument>
             <argument>client_registration.layout_box.controller</argument>
             <argument type="service" id="translator.helper"/>
