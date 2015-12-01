@@ -9,7 +9,7 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Bundle\AppBundle\Form\Admin;
+namespace WellCommerce\Bundle\LocaleBundle\Form\Admin;
 
 use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
 use WellCommerce\Component\Form\Elements\FormInterface;
@@ -35,13 +35,6 @@ class LocaleFormBuilder extends AbstractFormBuilder
             'name'    => 'code',
             'label'   => $this->trans('locale.label.code'),
             'options' => $this->get('locale.repository')->getLocaleNames()
-        ]));
-
-        $requiredData->addChild($this->getElement('select', [
-            'name'        => 'currency',
-            'label'       => $this->trans('locale.label.currency'),
-            'options'     => $this->get('currency.dataset.admin')->getResult('select', [], ['label_column' => 'code']),
-            'transformer' => $this->getRepositoryTransformer('entity', $this->get('currency.repository'))
         ]));
 
         $form->addFilter($this->getFilter('no_code'));

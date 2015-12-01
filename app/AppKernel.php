@@ -41,6 +41,8 @@ class AppKernel extends Kernel
             new Ivory\LuceneSearchBundle\IvoryLuceneSearchBundle(),
             // WellCommerce bundles
             new WellCommerce\Bundle\CoreBundle\WellCommerceCoreBundle(),
+            new WellCommerce\Bundle\AppBundle\WellCommerceAppBundle(),
+            new WellCommerce\Bundle\LocaleBundle\WellCommerceLocaleBundle()
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'])) {

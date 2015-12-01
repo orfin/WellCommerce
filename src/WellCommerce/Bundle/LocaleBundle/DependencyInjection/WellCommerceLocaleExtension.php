@@ -10,18 +10,18 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\WishlistBundle\DependencyInjection;
+namespace WellCommerce\Bundle\LocaleBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Loader;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
 
 /**
- * Class WellCommerceWishlistExtension
+ * Class WellCommerceLocaleExtension
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class WellCommerceWishlistExtension extends AbstractExtension
+class WellCommerceLocaleExtension extends AbstractExtension
 {
 
 }

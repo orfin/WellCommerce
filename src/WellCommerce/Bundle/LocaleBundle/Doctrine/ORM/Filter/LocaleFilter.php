@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Doctrine\ORM\Filter;
+namespace WellCommerce\Bundle\LocaleBundle\Doctrine\ORM\Filter;
 
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Query\Filter\SQLFilter;
@@ -32,7 +32,7 @@ class LocaleFilter extends SQLFilter
      */
     public function addFilterConstraint(ClassMetadata $targetEntity, $targetTableAlias)
     {
-        if (!$targetEntity->reflClass->implementsInterface('WellCommerce\Bundle\AppBundle\Entity\LocaleAwareInterface')) {
+        if (!$targetEntity->reflClass->implementsInterface(\WellCommerce\Bundle\LocaleBundle\Entity\LocaleAwareInterface::class)) {
             return "";
         }
 

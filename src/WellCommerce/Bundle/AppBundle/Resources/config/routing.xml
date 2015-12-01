@@ -4,73 +4,71 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-    <import resource="routing/dashboard.xml"/>
-    <import resource="routing/user.xml"/>
-    <import resource="routing/user_group.xml"/>
+    <import resource="routing/admin/dashboard.xml"/>
+    <!--<import resource="routing/user.xml"/>-->
+    <!--<import resource="routing/user_group.xml"/>-->
 
-    <import resource="routing/client.xml"/>
-    <import resource="routing/client_group.xml"/>
+    <!--<import resource="routing/client.xml"/>-->
+    <!--<import resource="routing/client_group.xml"/>-->
 
-    <import resource="routing/attribute.xml"/>
-    <import resource="routing/availability.xml"/>
-    <import resource="routing/category.xml"/>
-    <import resource="routing/deliverer.xml"/>
-    <import resource="routing/product.xml"/>
-    <import resource="routing/product_status.xml"/>
-    <import resource="routing/product_search.xml"/>
-    <import resource="routing/product_review.xml"/>
-    <import resource="routing/producer.xml"/>
-    <import resource="routing/unit.xml"/>
+    <!--<import resource="routing/attribute.xml"/>-->
+    <!--<import resource="routing/availability.xml"/>-->
+    <!--<import resource="routing/category.xml"/>-->
+    <!--<import resource="routing/deliverer.xml"/>-->
+    <!--<import resource="routing/product.xml"/>-->
+    <!--<import resource="routing/product_status.xml"/>-->
+    <!--<import resource="routing/product_search.xml"/>-->
+    <!--<import resource="routing/product_review.xml"/>-->
+    <!--<import resource="routing/producer.xml"/>-->
+    <!--<import resource="routing/unit.xml"/>-->
 
-    <import resource="routing/media.xml"/>
-    <import resource="routing/news.xml"/>
-    <import resource="routing/page.xml"/>
-    <import resource="routing/contact.xml"/>
+    <!--<import resource="routing/media.xml"/>-->
+    <!--<import resource="routing/news.xml"/>-->
+    <!--<import resource="routing/page.xml"/>-->
+    <!--<import resource="routing/contact.xml"/>-->
 
-    <import resource="routing/channel.xml"/>
-    <import resource="routing/currency.xml"/>
-    <import resource="routing/locale.xml"/>
-    <import resource="routing/dictionary.xml"/>
-    <import resource="routing/package.xml"/>
-    <import resource="routing/routing.xml"/>
-    <import resource="routing/tax.xml"/>
-    <import resource="routing/company.xml" />
-    <import resource="routing/shop.xml" />
+    <!--<import resource="routing/channel.xml"/>-->
+    <!--<import resource="routing/currency.xml"/>-->
+    <!--<import resource="routing/locale.xml"/>-->
+    <!--<import resource="routing/dictionary.xml"/>-->
+    <!--<import resource="routing/package.xml"/>-->
+    <!--<import resource="routing/routing.xml"/>-->
+    <!--<import resource="routing/tax.xml"/>-->
+    <!--<import resource="routing/company.xml" />-->
+    <!--<import resource="routing/shop.xml" />-->
 
-    <import resource="routing/admin/layout_box.xml"/>
+    <!--<import resource="routing/admin/layout_box.xml"/>-->
 
-    <import resource="routing/admin/coupon.xml" prefix="/admin/promotion/coupon/"/>
-    <import resource="routing/front/coupon.xml" prefix="/coupon/"/>
+    <!--<import resource="routing/admin/coupon.xml" prefix="/admin/promotion/coupon/"/>-->
+    <!--<import resource="routing/front/coupon.xml" prefix="/coupon/"/>-->
 
-    <import resource="routing/admin/order.xml" prefix="admin/order"/>
-    <import resource="routing/admin/order_status.xml" prefix="admin/order/status"/>
-    <import resource="routing/admin/order_status_group.xml" prefix="admin/order/status/group"/>
-    <import resource="routing/admin/shipping_method.xml" prefix="admin/order/configuration/shipping"/>
-    <import resource="routing/admin/payment_method.xml" prefix="admin/order/configuration/payment"/>
-    <import resource="routing/front/payment.xml" prefix="payment"/>
-    <import resource="routing/front/order.xml" prefix="order"/>
-    <import resource="routing/front/cart.xml" prefix="cart"/>
+    <!--<import resource="routing/admin/order.xml" prefix="admin/order"/>-->
+    <!--<import resource="routing/admin/order_status.xml" prefix="admin/order/status"/>-->
+    <!--<import resource="routing/admin/order_status_group.xml" prefix="admin/order/status/group"/>-->
+    <!--<import resource="routing/admin/shipping_method.xml" prefix="admin/order/configuration/shipping"/>-->
+    <!--<import resource="routing/admin/payment_method.xml" prefix="admin/order/configuration/payment"/>-->
+    <!--<import resource="routing/front/payment.xml" prefix="payment"/>-->
+    <!--<import resource="routing/front/order.xml" prefix="order"/>-->
+    <!--<import resource="routing/front/cart.xml" prefix="cart"/>-->
 
-    <route id="admin.sales_report.index" path="/sales/index">
-        <default key="_controller">sales_report.controller.admin:indexAction</default>
-        <option key="require_admin_permission">sales_report.index</option>
-    </route>
+    <!--<route id="admin.sales_report.index" path="/sales/index">-->
+        <!--<default key="_controller">sales_report.controller.admin:indexAction</default>-->
+        <!--<option key="require_admin_permission">sales_report.index</option>-->
+    <!--</route>-->
 
-    <route id="admin.sales_report.grid" path="/grid">
-        <default key="_controller">sales_report.controller.admin:gridAction</default>
-        <option key="expose">true</option>
-        <option key="require_admin_permission">sales_report.index</option>
-    </route>
+    <!--<route id="admin.sales_report.grid" path="/grid">-->
+        <!--<default key="_controller">sales_report.controller.admin:gridAction</default>-->
+        <!--<option key="expose">true</option>-->
+        <!--<option key="require_admin_permission">sales_report.index</option>-->
+    <!--</route>-->
 
-    <route id="admin.sales_report.view" path="/view">
-        <default key="_controller">sales_report.controller.admin:viewAction</default>
-        <option key="expose">true</option>
-        <option key="require_admin_permission">sales_report.view</option>
-    </route>
+    <!--<route id="admin.sales_report.view" path="/view">-->
+        <!--<default key="_controller">sales_report.controller.admin:viewAction</default>-->
+        <!--<option key="expose">true</option>-->
+        <!--<option key="require_admin_permission">sales_report.view</option>-->
+    <!--</route>-->
 
     <route id="front.home_page.index" path="/">
         <default key="_controller">web.home_page.controller.front:indexAction</default>
     </route>
-
-
 </routes>

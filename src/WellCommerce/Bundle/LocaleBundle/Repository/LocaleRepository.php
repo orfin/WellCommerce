@@ -9,7 +9,7 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Bundle\AppBundle\Repository;
+namespace WellCommerce\Bundle\LocaleBundle\Repository;
 
 use Symfony\Component\Intl\Intl;
 use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
@@ -30,7 +30,6 @@ class LocaleRepository extends AbstractEntityRepository implements LocaleReposit
     {
         $queryBuilder = $this->getQueryBuilder();
         $queryBuilder->groupBy('locale.id');
-        $queryBuilder->leftJoin('locale.currency', 'default_currency');
 
         return $queryBuilder;
     }

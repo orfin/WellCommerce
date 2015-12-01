@@ -10,17 +10,16 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\WishlistBundle;
+namespace WellCommerce\Bundle\LocaleBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
-use WellCommerce\Bundle\AppBundle\DependencyInjection\Compiler;
 
 /**
- * Class WellCommerceWishlistBundle
+ * Class WellCommerceLocaleBundle
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class WellCommerceWishlistBundle extends Bundle
+class WellCommerceLocaleBundle extends Bundle
 {
 
 }

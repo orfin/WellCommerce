@@ -1,7 +1,7 @@
 imports:
     - { resource: parameters.yml }
     - { resource: wellcommerce.yml }
-    - { resource: security.yml }
+#    - { resource: security.yml }
     - { resource: ../../vendor/knplabs/doctrine-behaviors/config/orm-services.yml }
 
 framework:
@@ -76,7 +76,7 @@ doctrine:
                         FIELD: DoctrineExtensions\Query\Mysql\Field
                 filters:
                     locale:
-                        class:   WellCommerce\Bundle\AppBundle\Doctrine\ORM\Filter\LocaleFilter
+                        class:   WellCommerce\Bundle\LocaleBundle\Doctrine\ORM\Filter\LocaleFilter
                         enabled: false
 
 doctrine_migrations:

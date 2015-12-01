@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Entity;
+namespace WellCommerce\Bundle\LocaleBundle\Entity;
 
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
@@ -24,7 +24,6 @@ class Locale implements LocaleInterface
 {
     use Timestampable;
     use Blameable;
-    use CurrencyAwareTrait;
 
     /**
      * @var integer

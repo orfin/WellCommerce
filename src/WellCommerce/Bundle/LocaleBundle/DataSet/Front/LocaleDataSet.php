@@ -10,9 +10,9 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\DataSet\Front;
+namespace WellCommerce\Bundle\LocaleBundle\DataSet\Front;
 
-use WellCommerce\Bundle\AppBundle\DataSet\Admin\LocaleDataSet as BaseDataSet;
+use WellCommerce\Bundle\LocaleBundle\DataSet\Admin\LocaleDataSet as BaseDataSet;
 
 /**
  * Class LocaleDataSet
@@ -21,5 +21,4 @@ use WellCommerce\Bundle\AppBundle\DataSet\Admin\LocaleDataSet as BaseDataSet;
  */
 class LocaleDataSet extends BaseDataSet
 {
-
 }

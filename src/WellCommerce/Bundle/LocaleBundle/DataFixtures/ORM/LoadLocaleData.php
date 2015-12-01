@@ -10,11 +10,11 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\DataFixtures\ORM;
+namespace WellCommerce\Bundle\LocaleBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use WellCommerce\Bundle\AppBundle\Entity\Locale;
 use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
+use WellCommerce\Bundle\LocaleBundle\Entity\Locale;
 
 /**
  * Class LoadLocaleData
@@ -28,11 +28,8 @@ class LoadLocaleData extends AbstractDataFixture
      */
     public function load(ObjectManager $manager)
     {
-        $currency = $this->getReference('currency_USD');
-
         $en = new Locale();
         $en->setCode('en');
-        $en->setCurrency($currency);
         $manager->persist($en);
         $manager->flush();
 

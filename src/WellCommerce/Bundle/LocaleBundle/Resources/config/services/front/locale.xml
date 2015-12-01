@@ -4,24 +4,24 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="locale.dataset.query_builder.front" class="WellCommerce\Bundle\AppBundle\DataSet\Front\LocaleDataSetQueryBuilder" public="false">
+        <service id="locale.dataset.query_builder.front" class="WellCommerce\Bundle\LocaleBundle\DataSet\Front\LocaleDataSetQueryBuilder" public="false">
             <argument type="service" id="locale.repository"/>
         </service>
 
-        <service id="locale.dataset.front" class="WellCommerce\Bundle\AppBundle\DataSet\Front\LocaleDataSet">
+        <service id="locale.dataset.front" class="WellCommerce\Bundle\LocaleBundle\DataSet\Front\LocaleDataSet">
             <argument type="service" id="locale.dataset.query_builder.front"/>
             <argument type="service" id="dataset.manager"/>
             <argument type="service" id="locale.event_dispatcher"/>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
-        <service id="twig.extension.locale" class="WellCommerce\Bundle\AppBundle\Twig\Extension\LocaleExtension">
+        <service id="twig.extension.locale" class="WellCommerce\Bundle\LocaleBundle\Twig\Extension\LocaleExtension">
             <argument type="service" id="session"/>
             <argument type="service" id="locale.dataset.front"/>
             <tag name="twig.extension"/>
         </service>
 
-        <service id="locale.manager.front" class="WellCommerce\Bundle\AppBundle\Manager\Front\LocaleManager">
+        <service id="locale.manager.front" class="WellCommerce\Bundle\LocaleBundle\Manager\Front\LocaleManager">
             <argument type="service" id="locale.repository"/>
             <argument type="service" id="locale.event_dispatcher"/>
             <argument type="service" id="locale.factory"/>
@@ -30,7 +30,7 @@
             </call>
         </service>
 
-        <service id="locale.controller.front" class="WellCommerce\Bundle\AppBundle\Controller\Front\LocaleController">
+        <service id="locale.controller.front" class="WellCommerce\Bundle\LocaleBundle\Controller\Front\LocaleController">
             <argument type="service" id="locale.manager.front"/>
             <call method="setContainer">
                 <argument type="service" id="service_container" />

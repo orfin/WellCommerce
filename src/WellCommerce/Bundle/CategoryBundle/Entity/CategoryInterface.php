@@ -14,9 +14,9 @@ namespace WellCommerce\Bundle\AppBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\AppBundle\Entity\ShopCollectionAwareInterface;
-use WellCommerce\Bundle\AppBundle\Entity\BlameableInterface;
+use WellCommerce\Bundle\UserBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\AppBundle\Entity\HierarchyAwareInterface;
-use WellCommerce\Bundle\AppBundle\Entity\TimestampableInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\AppBundle\Entity\TranslatableInterface;
 
 /**

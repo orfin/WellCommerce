@@ -15,8 +15,8 @@ namespace WellCommerce\Bundle\AppBundle\Entity;
 use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\AppBundle\Entity\CurrencyInterface;
 use WellCommerce\Bundle\TaxBundle\Entity\TaxAwareInterface;
-use WellCommerce\Bundle\AppBundle\Entity\BlameableInterface;
-use WellCommerce\Bundle\AppBundle\Entity\TimestampableInterface;
+use WellCommerce\Bundle\UserBundle\Entity\BlameableInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\AppBundle\Entity\TranslatableInterface;
 
 /**

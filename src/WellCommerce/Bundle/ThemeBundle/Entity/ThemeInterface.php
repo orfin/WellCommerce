@@ -13,8 +13,8 @@
 namespace WellCommerce\Bundle\ThemeBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
-use WellCommerce\Bundle\AppBundle\Entity\BlameableInterface;
-use WellCommerce\Bundle\AppBundle\Entity\TimestampableInterface;
+use WellCommerce\Bundle\UserBundle\Entity\BlameableInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 
 /**
  * Interface ThemeInterface

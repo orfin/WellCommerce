@@ -9,18 +9,18 @@
     </imports>
 
     <services>
-        <service id="locale.repository" class="WellCommerce\Bundle\AppBundle\Repository\LocaleRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
-            <argument>WellCommerceAppBundle:Locale</argument>
+        <service id="locale.repository" class="WellCommerce\Bundle\LocaleBundle\Repository\LocaleRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>WellCommerceLocaleBundle:Locale</argument>
         </service>
 
-        <service id="locale.subscriber" class="WellCommerce\Bundle\AppBundle\EventListener\LocaleSubscriber">
+        <service id="locale.subscriber" class="WellCommerce\Bundle\LocaleBundle\EventListener\LocaleSubscriber">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
             <tag name="kernel.event_subscriber" />
         </service>
 
-        <service id="locale.factory" class="WellCommerce\Bundle\AppBundle\Factory\LocaleFactory" />
+        <service id="locale.factory" class="WellCommerce\Bundle\LocaleBundle\Factory\LocaleFactory" />
 
         <service id="locale.event_dispatcher" parent="core.event_dispatcher" public="false">
             <argument type="service" id="event_dispatcher" />

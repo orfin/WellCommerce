@@ -10,17 +10,17 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Entity;
+namespace WellCommerce\Bundle\LocaleBundle\Entity;
 
-use WellCommerce\Bundle\AppBundle\Entity\BlameableInterface;
-use WellCommerce\Bundle\AppBundle\Entity\TimestampableInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
+use WellCommerce\Bundle\UserBundle\Entity\BlameableInterface;
 
 /**
  * Interface LocaleInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface LocaleInterface extends TimestampableInterface, BlameableInterface, CurrencyAwareInterface
+interface LocaleInterface extends TimestampableInterface, BlameableInterface
 {
     /**
      * @return integer

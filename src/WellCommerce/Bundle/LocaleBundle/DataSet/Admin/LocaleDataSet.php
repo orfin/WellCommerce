@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\DataSet\Admin;
+namespace WellCommerce\Bundle\LocaleBundle\DataSet\Admin;
 
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
@@ -29,8 +29,7 @@ class LocaleDataSet extends AbstractDataSet
     {
         $configurator->setColumns([
             'id'       => 'locale.id',
-            'code'     => 'locale.code',
-            'currency' => 'default_currency.code',
+            'code'     => 'locale.code'
         ]);
 
         $this->setDefaultRequestOption('order_by', 'code');

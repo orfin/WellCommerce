@@ -16,8 +16,8 @@ use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\UserInterface as BaseUserInterface;
 use WellCommerce\Bundle\AppBundle\Entity\ShopAwareInterface;
-use WellCommerce\Bundle\AppBundle\Entity\BlameableInterface;
-use WellCommerce\Bundle\AppBundle\Entity\TimestampableInterface;
+use WellCommerce\Bundle\UserBundle\Entity\BlameableInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 
 /**
  * Interface ClientInterface
