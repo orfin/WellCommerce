@@ -10,10 +10,10 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Service\Shop\Resolver;
+namespace WellCommerce\Bundle\ShopBundle\Resolver;
 
-use WellCommerce\Bundle\AppBundle\Service\Shop\Context\ShopContextInterface;
-use WellCommerce\Bundle\AppBundle\Repository\ShopRepositoryInterface;
+use WellCommerce\Bundle\ShopBundle\Context\ShopContextInterface;
+use WellCommerce\Bundle\ShopBundle\Repository\ShopRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Request\RequestHelperInterface;
 
 /**
@@ -58,7 +58,7 @@ abstract class AbstractShopResolver
     abstract public function resolve();
 
     /**
-     * @return \WellCommerce\Bundle\AppBundle\Entity\ShopInterface
+     * @return \WellCommerce\Bundle\ShopBundle\Entity\ShopInterface
      */
     protected function getDefaultShop()
     {

@@ -1,31 +1,27 @@
 <?php
 /*
  * WellCommerce Open-Source E-Commerce Platform
- * 
+ *
  * This file is part of the WellCommerce package.
  *
  * (c) Adam Piotrowski <adam@wellcommerce.org>
- * 
+ *
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\ShopBundle\Entity;
+namespace WellCommerce\Bundle\ShopBundle\DependencyInjection;
+
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\Loader;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
 
 /**
- * Interface ShopAwareInterface
+ * Class WellCommerceShopExtension
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ShopAwareInterface
+class WellCommerceShopExtension extends AbstractExtension
 {
-    /**
-     * @param ShopInterface $shop
-     */
-    public function setShop(ShopInterface $shop);
 
-    /**
-     * @return Shop
-     */
-    public function getShop();
 }
