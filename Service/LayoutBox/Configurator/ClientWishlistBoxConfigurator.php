@@ -13,11 +13,11 @@
 namespace WellCommerce\Bundle\AppBundle\Service\LayoutBox\Configurator;
 
 /**
- * Class ClientWishlistBoxConfigurator
+ * Class WishlistBoxConfigurator
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientWishlistBoxConfigurator extends AbstractLayoutBoxConfigurator
+class WishlistBoxConfigurator extends AbstractLayoutBoxConfigurator
 {
 
 }
