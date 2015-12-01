@@ -5,7 +5,7 @@
 
     <services>
 
-        <service id="product_search.layout_box.configurator" class="WellCommerce\Bundle\AppBundle\Service\LayoutBox\Configurator\ProductSearchBoxConfigurator">
+        <service id="product_search.layout_box.configurator" class="WellCommerce\Bundle\LayoutBundle\Configurator\ProductSearchBoxConfigurator">
             <argument>ProductSearch</argument>
             <argument>product_search.layout_box.controller</argument>
             <argument type="service" id="translator.helper"/>
