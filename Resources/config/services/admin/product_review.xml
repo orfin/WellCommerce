@@ -51,7 +51,7 @@
             </call>
         </service>
         
-        <service id="product_review.layout_box.configurator" class="WellCommerce\Bundle\AppBundle\Service\LayoutBox\Configurator\ProductReviewBoxConfigurator">
+        <service id="product_review.layout_box.configurator" class="WellCommerce\Bundle\LayoutBundle\Configurator\ProductReviewBoxConfigurator">
             <argument>ProductReview</argument>
             <argument>product_review.layout_box.controller</argument>
             <argument type="service" id="translator.helper"/>
