@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\LayoutBundle\Renderer;
 
-use WellCommerce\Bundle\AppBundle\Manager\Front\LayoutBoxManager;
+use WellCommerce\Bundle\LayoutBundle\Manager\Front\LayoutBoxManager;
 
 /**
  * Class LayoutBoxRenderer

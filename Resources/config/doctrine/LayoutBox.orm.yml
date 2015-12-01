@@ -1,7 +1,7 @@
-WellCommerce\Bundle\AppBundle\Entity\LayoutBox:
+WellCommerce\Bundle\LayoutBundle\Entity\LayoutBox:
     type: entity
     table: layout_box
-    repositoryClass: WellCommerce\Bundle\AppBundle\Repository\LayoutBoxRepository
+    repositoryClass: WellCommerce\Bundle\LayoutBundle\Repository\LayoutBoxRepository
     id:
         id:
             type: integer
