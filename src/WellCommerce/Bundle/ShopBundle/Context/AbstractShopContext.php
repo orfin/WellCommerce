@@ -10,9 +10,9 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Service\Shop\Context;
+namespace WellCommerce\Bundle\ShopBundle\Context;
 
-use WellCommerce\Bundle\AppBundle\Entity\ShopInterface;
+use WellCommerce\Bundle\ShopBundle\Entity\ShopInterface;
 
 /**
  * Class AbstractShopContext

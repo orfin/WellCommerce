@@ -36,9 +36,8 @@ WellCommerce\Bundle\AppBundle\Entity\Category:
             fetch: LAZY
             mappedBy: categories
         shops:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Shop
+            targetEntity: WellCommerce\Bundle\ShopBundle\Entity\Shop
             fetch: LAZY
-            inversedBy: categories
             joinTable:
                 name: shop_category
                 joinColumns:

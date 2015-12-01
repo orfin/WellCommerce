@@ -10,10 +10,10 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Factory;
+namespace WellCommerce\Bundle\ShopBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use WellCommerce\Bundle\AppBundle\Entity\Shop;
+use WellCommerce\Bundle\ShopBundle\Entity\Shop;
 use WellCommerce\Bundle\AppBundle\Entity\MailerConfiguration;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 
@@ -25,7 +25,7 @@ use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 class ShopFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\AppBundle\Entity\ShopInterface
+     * @return \WellCommerce\Bundle\ShopBundle\Entity\ShopInterface
      */
     public function create()
     {

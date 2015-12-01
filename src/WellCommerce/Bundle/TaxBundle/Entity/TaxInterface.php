@@ -12,9 +12,9 @@
 
 namespace WellCommerce\Bundle\TaxBundle\Entity;
 
-use WellCommerce\Bundle\UserBundle\Entity\BlameableInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
-use WellCommerce\Bundle\AppBundle\Entity\TranslatableInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
 
 /**
  * Interface TaxInterface

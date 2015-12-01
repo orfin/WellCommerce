@@ -9,9 +9,9 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Bundle\AppBundle\Form\Admin;
+namespace WellCommerce\Bundle\CurrencyBundle\Form\Admin;
 
-use WellCommerce\Bundle\AppBundle\Repository\CurrencyRepositoryInterface;
+use WellCommerce\Bundle\CurrencyBundle\Repository\CurrencyRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
 use WellCommerce\Component\Form\Elements\FormInterface;
 

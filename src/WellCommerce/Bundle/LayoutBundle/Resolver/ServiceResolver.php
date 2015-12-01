@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\LayoutBundle\Resolver;
 
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
-use WellCommerce\Bundle\AppBundle\Entity\LayoutBoxInterface;
+use WellCommerce\Bundle\LayoutBundle\Entity\LayoutBoxInterface;
 use WellCommerce\Bundle\LayoutBundle\Configurator\LayoutBoxConfiguratorCollection;
 
 /**

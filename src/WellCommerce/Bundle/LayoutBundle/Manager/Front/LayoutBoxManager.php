@@ -57,7 +57,7 @@ class LayoutBoxManager extends AbstractFrontManager
      *
      * @param string $identifier
      *
-     * @return \WellCommerce\Bundle\AppBundle\Entity\LayoutBox
+     * @return \WellCommerce\Bundle\LayoutBundle\Entity\LayoutBox
      */
     public function findLayoutBox($identifier)
     {

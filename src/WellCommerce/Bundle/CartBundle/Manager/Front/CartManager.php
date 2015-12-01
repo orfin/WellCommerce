@@ -15,7 +15,7 @@ namespace WellCommerce\Bundle\AppBundle\Manager\Front;
 use WellCommerce\Bundle\AppBundle\Entity\ProductAttributeInterface;
 use WellCommerce\Bundle\AppBundle\Entity\ProductInterface;
 use WellCommerce\Bundle\AppBundle\Entity\ClientInterface;
-use WellCommerce\Bundle\AppBundle\Entity\ShopInterface;
+use WellCommerce\Bundle\ShopBundle\Entity\ShopInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
 use WellCommerce\Bundle\AppBundle\Entity\CartInterface;
 use WellCommerce\Bundle\AppBundle\Entity\CartProductInterface;

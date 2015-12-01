@@ -69,7 +69,7 @@ WellCommerce\Bundle\AppBundle\Entity\Client:
             orphanRemoval: true
     manyToOne:
         shop:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Shop
+            targetEntity: WellCommerce\Bundle\ShopBundle\Entity\Shop
             fetch: LAZY
             joinColumns:
                 shop_id:

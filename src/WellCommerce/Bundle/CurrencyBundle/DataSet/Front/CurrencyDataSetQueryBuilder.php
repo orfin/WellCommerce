@@ -10,9 +10,9 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\DataSet\Front;
+namespace WellCommerce\Bundle\CurrencyBundle\DataSet\Front;
 
-use WellCommerce\Bundle\AppBundle\DataSet\Admin\CurrencyDataSetQueryBuilder as BaseDataSetQueryBuilder;
+use WellCommerce\Bundle\CurrencyBundle\DataSet\Admin\CurrencyDataSetQueryBuilder as BaseDataSetQueryBuilder;
 
 /**
  * Class CurrencyDataSetQueryBuilder

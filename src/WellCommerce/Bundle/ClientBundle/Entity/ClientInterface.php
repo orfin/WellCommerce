@@ -15,8 +15,8 @@ namespace WellCommerce\Bundle\AppBundle\Entity;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\UserInterface as BaseUserInterface;
-use WellCommerce\Bundle\AppBundle\Entity\ShopAwareInterface;
-use WellCommerce\Bundle\UserBundle\Entity\BlameableInterface;
+use WellCommerce\Bundle\ShopBundle\Entity\ShopAwareInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 
 /**

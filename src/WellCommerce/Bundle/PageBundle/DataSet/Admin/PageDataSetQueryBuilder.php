@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\AppBundle\DataSet\Admin;
 
-use WellCommerce\Bundle\AppBundle\Service\Shop\Context\ShopContextInterface;
+use WellCommerce\Bundle\ShopBundle\Context\ShopContextInterface;
 use WellCommerce\Component\DataSet\Column\ColumnCollection;
 use WellCommerce\Component\DataSet\QueryBuilder\AbstractDataSetQueryBuilder;
 use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;

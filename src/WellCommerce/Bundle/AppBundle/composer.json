@@ -25,8 +25,12 @@
     },
     "require": {
         "php": ">=5.6",
+        "wellcommerce/company-bundle": "^0.7@dev",
+        "wellcommerce/currency-bundle": "^0.7@dev",
         "wellcommerce/core-bundle": "^0.7@dev",
-        "wellcommerce/user-bundle": "^0.7@dev"
+        "wellcommerce/locale-bundle": "^0.7@dev",
+        "wellcommerce/user-bundle": "^0.7@dev",
+        "wellcommerce/shop-bundle": "^0.7@dev"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",

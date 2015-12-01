@@ -10,9 +10,9 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\DataSet\Front;
+namespace WellCommerce\Bundle\CurrencyBundle\DataSet\Front;
 
-use WellCommerce\Bundle\AppBundle\DataSet\Admin\CurrencyDataSet as BaseDataSet;
+use WellCommerce\Bundle\CurrencyBundle\DataSet\Admin\CurrencyDataSet as BaseDataSet;
 
 /**
  * Class CurrencyDataSet

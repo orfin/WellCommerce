@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\LocaleBundle\DataSet\Admin;
 
-use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
+use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
 
 /**
  * Class LocaleDataSet
@@ -29,7 +29,8 @@ class LocaleDataSet extends AbstractDataSet
     {
         $configurator->setColumns([
             'id'       => 'locale.id',
-            'code'     => 'locale.code'
+            'code'     => 'locale.code',
+            'currency' => 'default_currency.code',
         ]);
 
         $this->setDefaultRequestOption('order_by', 'code');

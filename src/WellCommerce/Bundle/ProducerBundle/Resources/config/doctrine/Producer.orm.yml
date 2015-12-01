@@ -34,9 +34,8 @@ WellCommerce\Bundle\AppBundle\Entity\Producer:
                         onDelete: CASCADE
                         referencedColumnName: id
         shops:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Shop
+            targetEntity: WellCommerce\Bundle\ShopBundle\Entity\Shop
             fetch: LAZY
-            inversedBy: producers
             joinTable:
                 name: shop_producer
                 joinColumns:

@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\LayoutBundle\Resolver;
 
-use WellCommerce\Bundle\AppBundle\Entity\LayoutBoxInterface;
+use WellCommerce\Bundle\LayoutBundle\Entity\LayoutBoxInterface;
 
 /**
  * Interface ServiceResolverInterface

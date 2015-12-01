@@ -1,7 +1,7 @@
-WellCommerce\Bundle\AppBundle\Entity\Shop:
+WellCommerce\Bundle\ShopBundle\Entity\Shop:
     type: entity
     table: shop
-    repositoryClass: WellCommerce\Bundle\AppBundle\Repository\ShopRepository
+    repositoryClass: WellCommerce\Bundle\ShopBundle\Repository\ShopRepository
     id:
         id:
             type: integer
@@ -32,7 +32,7 @@ WellCommerce\Bundle\AppBundle\Entity\Shop:
             column: default_currency
     manyToOne:
         company:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Company
+            targetEntity: WellCommerce\Bundle\CompanyBundle\Entity\Company
             fetch: LAZY
             joinColumns:
                 company_id:
@@ -45,20 +45,3 @@ WellCommerce\Bundle\AppBundle\Entity\Shop:
                 theme_id:
                     referencedColumnName: id
                     onDelete: 'SET NULL'
-    manyToMany:
-        products:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Product
-            fetch: LAZY
-            mappedBy: shops
-        categories:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Category
-            fetch: LAZY
-            mappedBy: shops
-        producers:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Producer
-            fetch: LAZY
-            mappedBy: shops
-        pages:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Page
-            fetch: LAZY
-            mappedBy: shops

@@ -13,9 +13,9 @@
 namespace WellCommerce\Bundle\AppBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
-use WellCommerce\Bundle\UserBundle\Entity\BlameableInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
-use WellCommerce\Bundle\AppBundle\Entity\TranslatableInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
 
 /**
  * Interface ProductStatusInterface

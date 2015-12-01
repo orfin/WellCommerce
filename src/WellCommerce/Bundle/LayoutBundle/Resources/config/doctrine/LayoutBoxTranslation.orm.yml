@@ -1,4 +1,4 @@
-WellCommerce\Bundle\AppBundle\Entity\LayoutBoxTranslation:
+WellCommerce\Bundle\LayoutBundle\Entity\LayoutBoxTranslation:
     type: entity
     table: layout_box_translation
     fields:

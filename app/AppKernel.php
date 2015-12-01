@@ -10,8 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-use Symfony\Component\Config\Loader\LoaderInterface;
-use Symfony\Component\HttpKernel\Kernel;
+use WellCommerce\Bundle\AppBundle\Kernel\Kernel;
 
 /**
  * Class AppKernel
@@ -23,26 +22,7 @@ class AppKernel extends Kernel
     public function registerBundles()
     {
         $bundles = [
-            new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
-            new Symfony\Bundle\SecurityBundle\SecurityBundle(),
-            new Symfony\Bundle\TwigBundle\TwigBundle(),
-            new Symfony\Bundle\MonologBundle\MonologBundle(),
-            new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
-            new Symfony\Bundle\AsseticBundle\AsseticBundle(),
-            new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
-            new Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle(),
-            new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
-            new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
-            new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
-            new Bazinga\Bundle\JsTranslationBundle\BazingaJsTranslationBundle(),
-            new Liip\ImagineBundle\LiipImagineBundle(),
-            new Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
-            new Ivory\LuceneSearchBundle\IvoryLuceneSearchBundle(),
-            // WellCommerce bundles
-            new WellCommerce\Bundle\CoreBundle\WellCommerceCoreBundle(),
-            new WellCommerce\Bundle\AppBundle\WellCommerceAppBundle(),
-            new WellCommerce\Bundle\LocaleBundle\WellCommerceLocaleBundle()
+
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'])) {
@@ -50,11 +30,6 @@ class AppKernel extends Kernel
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
         }
 
-        return $bundles;
-    }
-
-    public function registerContainerConfiguration(LoaderInterface $loader)
-    {
-        $loader->load(__DIR__ . '/config/config_' . $this->getEnvironment() . '.yml');
+        return array_merge(parent::registerBundles(), $bundles);
     }
 }

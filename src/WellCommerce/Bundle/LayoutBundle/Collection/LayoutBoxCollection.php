@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\LayoutBundle\Collection;
 
-use WellCommerce\Bundle\AppBundle\Entity\LayoutBoxInterface;
-use WellCommerce\Bundle\AppBundle\Repository\LayoutBoxRepositoryInterface;
+use WellCommerce\Bundle\LayoutBundle\Entity\LayoutBoxInterface;
+use WellCommerce\Bundle\LayoutBundle\Repository\LayoutBoxRepositoryInterface;
 use WellCommerce\Component\Collections\ArrayCollection;
 
 /**

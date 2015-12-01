@@ -9,7 +9,7 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Bundle\AppBundle\Form\Admin;
+namespace WellCommerce\Bundle\CompanyBundle\Form\Admin;
 
 use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
 use WellCommerce\Component\Form\Elements\FormInterface;
@@ -80,23 +80,6 @@ class CompanyFormBuilder extends AbstractFormBuilder
             'name'    => 'country',
             'label'   => $this->trans('address.label.country'),
             'options' => $this->get('country.repository')->all()
-        ]));
-
-        $mediaData = $form->addChild($this->getElement('nested_fieldset', [
-            'name'  => 'media_data',
-            'label' => $this->trans('common.fieldset.photos')
-        ]));
-
-        $mediaData->addChild($this->getElement('image', [
-            'name'         => 'photo',
-            'label'        => $this->trans('company.label.logo'),
-            'load_route'   => $this->getRouterHelper()->generateUrl('admin.media.grid'),
-            'upload_url'   => $this->getRouterHelper()->generateUrl('admin.media.add'),
-            'repeat_min'   => 0,
-            'repeat_max'   => 1,
-            'transformer'  => $this->getRepositoryTransformer('entity', $this->get('media.repository')),
-            'session_id'   => $this->getRequestHelper()->getSessionId(),
-            'session_name' => $this->getRequestHelper()->getSessionName(),
         ]));
 
         $form->addFilter($this->getFilter('no_code'));

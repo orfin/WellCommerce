@@ -65,7 +65,7 @@
         </property>
     </class>
 
-    <class name="WellCommerce\Bundle\AppBundle\Entity\Company">
+    <class name="WellCommerce\Bundle\CompanyBundle\Entity\Company">
         <property name="name">
             <constraint name="NotBlank" />
         </property>
