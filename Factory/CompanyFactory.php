@@ -10,10 +10,10 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Factory;
+namespace WellCommerce\Bundle\CompanyBundle\Factory;
 
-use WellCommerce\Bundle\AppBundle\Entity\Company;
-use WellCommerce\Bundle\AppBundle\Entity\CompanyAddress;
+use WellCommerce\Bundle\CompanyBundle\Entity\Company;
+use WellCommerce\Bundle\CompanyBundle\Entity\CompanyAddress;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 
 /**
@@ -24,7 +24,7 @@ use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 class CompanyFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\AppBundle\Entity\CompanyInterface
+     * @return \WellCommerce\Bundle\CompanyBundle\Entity\CompanyInterface
      */
     public function create()
     {

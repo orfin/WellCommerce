@@ -1,4 +1,4 @@
-WellCommerce\Bundle\AppBundle\Entity\CompanyAddress:
+WellCommerce\Bundle\CompanyBundle\Entity\CompanyAddress:
     type: embeddable
     fields:
         street:

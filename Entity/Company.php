@@ -10,11 +10,10 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Entity;
+namespace WellCommerce\Bundle\CompanyBundle\Entity;
 
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
-use WellCommerce\Bundle\AppBundle\Doctrine\ORM\Behaviours\PhotoTrait;
 
 /**
  * Class Company
@@ -25,8 +24,7 @@ class Company implements CompanyInterface
 {
     use Timestampable;
     use Blameable;
-    use PhotoTrait;
-    
+
     /**
      * @var integer
      */
