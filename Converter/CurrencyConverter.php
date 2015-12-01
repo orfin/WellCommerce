@@ -10,12 +10,12 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Service\Currency\Converter;
+namespace WellCommerce\Bundle\CurrencyBundle\Converter;
 
-use WellCommerce\Bundle\AppBundle\Entity\CurrencyRate;
-use WellCommerce\Bundle\AppBundle\Exception\MissingCurrencyRateException;
-use WellCommerce\Bundle\AppBundle\Exception\MissingCurrencyRatesException;
-use WellCommerce\Bundle\AppBundle\Repository\CurrencyRateRepositoryInterface;
+use WellCommerce\Bundle\CurrencyBundle\Entity\CurrencyRate;
+use WellCommerce\Bundle\CurrencyBundle\Exception\MissingCurrencyRateException;
+use WellCommerce\Bundle\CurrencyBundle\Exception\MissingCurrencyRatesException;
+use WellCommerce\Bundle\CurrencyBundle\Repository\CurrencyRateRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Request\RequestHelperInterface;
 
 /**

@@ -9,9 +9,9 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Bundle\AppBundle\Twig\Extension;
+namespace WellCommerce\Bundle\CurrencyBundle\Twig\Extension;
 
-use WellCommerce\Bundle\AppBundle\Helper\CurrencyHelperInterface;
+use WellCommerce\Bundle\CurrencyBundle\Helper\CurrencyHelperInterface;
 use WellCommerce\Component\DataSet\DataSetInterface;
 
 /**

@@ -10,9 +10,9 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Factory;
+namespace WellCommerce\Bundle\CurrencyBundle\Factory;
 
-use WellCommerce\Bundle\AppBundle\Entity\CurrencyRate;
+use WellCommerce\Bundle\CurrencyBundle\Entity\CurrencyRate;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 
 /**
@@ -23,7 +23,7 @@ use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 class CurrencyRateFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\AppBundle\Entity\CurrencyRateInterface
+     * @return \WellCommerce\Bundle\CurrencyBundle\Entity\CurrencyRateInterface
      */
     public function create()
     {

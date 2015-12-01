@@ -10,10 +10,10 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Helper;
+namespace WellCommerce\Bundle\CurrencyBundle\Helper;
 
-use WellCommerce\Bundle\AppBundle\Service\Currency\Converter\CurrencyConverterInterface;
-use WellCommerce\Bundle\AppBundle\Service\Currency\Formatter\CurrencyFormatterInterface;
+use WellCommerce\Bundle\CurrencyBundle\Converter\CurrencyConverterInterface;
+use WellCommerce\Bundle\CurrencyBundle\Formatter\CurrencyFormatterInterface;
 
 /**
  * Class CurrencyHelper

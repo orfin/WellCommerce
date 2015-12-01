@@ -1,7 +1,7 @@
-WellCommerce\Bundle\AppBundle\Entity\Currency:
+WellCommerce\Bundle\CurrencyBundle\Entity\Currency:
     type: entity
     table: currency
-    repositoryClass: WellCommerce\Bundle\AppBundle\Repository\CurrencyRepository
+    repositoryClass: WellCommerce\Bundle\CurrencyBundle\Repository\CurrencyRepository
     id:
         id:
             type: integer
