@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Repository;
+namespace WellCommerce\Bundle\LayoutBundle\Repository;
 
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
@@ -24,7 +24,7 @@ interface LayoutBoxRepositoryInterface extends RepositoryInterface
     /**
      * Returns boxes collection
      *
-     * @return \WellCommerce\Bundle\AppBundle\Service\LayoutBox\Collection\LayoutBoxCollection
+     * @return \WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxCollection
      */
     public function getLayoutBoxesCollection();
 }

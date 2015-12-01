@@ -10,13 +10,13 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Manager\Front;
+namespace WellCommerce\Bundle\LayoutBundle\Manager\Front;
 
 use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
-use WellCommerce\Bundle\AppBundle\Service\LayoutBox\Collection\LayoutBoxCollection;
-use WellCommerce\Bundle\AppBundle\Service\LayoutBox\Collection\LayoutBoxSettingsCollection;
+use WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxCollection;
+use WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxSettingsCollection;
 use WellCommerce\Bundle\AppBundle\Exception\LayoutBoxNotFoundException;
-use WellCommerce\Bundle\AppBundle\Service\LayoutBox\Resolver\ServiceResolverInterface;
+use WellCommerce\Bundle\LayoutBundle\Resolver\ServiceResolverInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
 
 /**

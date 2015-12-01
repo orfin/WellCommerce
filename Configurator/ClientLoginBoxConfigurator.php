@@ -10,15 +10,14 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\LayoutBundle\Manager\Admin;
-
-use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
+namespace WellCommerce\Bundle\LayoutBundle\Configurator;
 
 /**
- * Class LayoutBoxManager
+ * Class ClientLoginBoxConfigurator
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LayoutBoxManager extends AbstractAdminManager
+class ClientLoginBoxConfigurator extends AbstractLayoutBoxConfigurator
 {
+
 }
