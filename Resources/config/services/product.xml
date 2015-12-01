@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <imports>
+        <import resource="admin/product.xml"/>
+        <import resource="front/product.xml"/>
+    </imports>
+
+    <services>
+        <service id="product.repository" class="WellCommerce\Bundle\AppBundle\Repository\ProductRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>WellCommerceAppBundle:Product</argument>
+        </service>
+
+        <service id="product.factory" class="WellCommerce\Bundle\AppBundle\Factory\ProductFactory" />
+
+        <service id="product.event_dispatcher" parent="core.event_dispatcher" public="false">
+            <argument type="service" id="event_dispatcher" />
+        </service>
+
+        <service id="product.route.generator" class="WellCommerce\Bundle\AppBundle\Service\Routing\Generator\ProductRouteGenerator">
+            <argument type="collection" key="defaults">
+                <argument key="_controller">product.controller.front:indexAction</argument>
+            </argument>
+            <argument type="collection" key="requirements" />
+            <tag name="route.generator" />
+        </service>
+
+        <service id="product.doctrine.event_subscriber" class="WellCommerce\Bundle\AppBundle\EventListener\ProductDoctrineEventSubscriber">
+            <tag name="doctrine.event_subscriber" connection="default" />
+        </service>
+
+        <service id="product.helper" class="WellCommerce\Bundle\AppBundle\Helper\ProductHelper">
+            <argument type="service" id="product.dataset.front"/>
+            <argument type="service" id="shipping_method.provider"/>
+            <argument type="service" id="product_attribute.helper"/>
+        </service>
+
+        <service id="product.request_param_converter" class="WellCommerce\Bundle\AppBundle\Request\ParamConverter\ProductParamConverter">
+            <argument type="service" id="product.repository" />
+            <argument>id</argument>
+            <argument type="collection">
+                <argument>WellCommerce\Bundle\AppBundle\Entity\Product</argument>
+                <argument>WellCommerce\Bundle\AppBundle\Entity\ProductInterface</argument>
+            </argument>
+            <tag name="request.param_converter" converter="product" priority="0"/>
+        </service>
+    </services>
+</container>
