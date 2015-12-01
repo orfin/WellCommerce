@@ -15,7 +15,7 @@ namespace WellCommerce\Bundle\AppBundle\Entity;
 use WellCommerce\Bundle\AppBundle\Entity\ProductAttributeAwareInterface;
 use WellCommerce\Bundle\AppBundle\Entity\ProductAwareInterface;
 use WellCommerce\Bundle\AppBundle\Entity\Price;
-use WellCommerce\Bundle\AppBundle\Entity\TimestampableInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 
 /**
  * Interface OrderProductInterface
