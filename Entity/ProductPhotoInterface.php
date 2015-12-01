@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\AppBundle\Entity;
 
 use WellCommerce\Bundle\AppBundle\Entity\MediaInterface;
 use WellCommerce\Bundle\AppBundle\Entity\HierarchyAwareInterface;
-use WellCommerce\Bundle\AppBundle\Entity\TimestampableInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 
 /**
  * Interface ProductPhotoInterface

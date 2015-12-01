@@ -16,11 +16,11 @@ use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\AppBundle\Entity\Attribute\GroupInterface;
 use WellCommerce\Bundle\AppBundle\Entity\ShopCollectionAwareInterface;
 use WellCommerce\Bundle\TaxBundle\Entity\TaxInterface;
-use WellCommerce\Bundle\AppBundle\Entity\BlameableInterface;
+use WellCommerce\Bundle\UserBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\AppBundle\Entity\Dimension;
 use WellCommerce\Bundle\AppBundle\Entity\DiscountablePrice;
 use WellCommerce\Bundle\AppBundle\Entity\Price;
-use WellCommerce\Bundle\AppBundle\Entity\TimestampableInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\AppBundle\Entity\TranslatableInterface;
 use WellCommerce\Bundle\AppBundle\Calculator\ShippingCalculatorSubjectInterface;
 
