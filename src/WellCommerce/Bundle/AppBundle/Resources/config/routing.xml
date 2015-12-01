@@ -28,14 +28,14 @@
     <!--<import resource="routing/contact.xml"/>-->
 
     <!--<import resource="routing/channel.xml"/>-->
-    <import resource="routing/currency.xml"/>
-    <import resource="routing/locale.xml"/>
+    <!--<import resource="routing/currency.xml"/>-->
+    <!--<import resource="routing/locale.xml"/>-->
     <!--<import resource="routing/dictionary.xml"/>-->
     <!--<import resource="routing/package.xml"/>-->
     <!--<import resource="routing/routing.xml"/>-->
     <!--<import resource="routing/tax.xml"/>-->
-    <import resource="routing/company.xml" />
-    <import resource="routing/shop.xml" />
+    <!--<import resource="routing/company.xml" />-->
+    <!--<import resource="routing/shop.xml" />-->
 
     <!--<import resource="routing/admin/layout_box.xml"/>-->
 

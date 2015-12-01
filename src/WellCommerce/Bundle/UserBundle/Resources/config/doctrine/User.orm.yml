@@ -1,7 +1,7 @@
-WellCommerce\Bundle\AppBundle\Entity\User:
+WellCommerce\Bundle\UserBundle\Entity\User:
     type: entity
     table: users
-    repositoryClass: WellCommerce\Bundle\AppBundle\Repository\UserRepository
+    repositoryClass: WellCommerce\Bundle\UserBundle\Repository\UserRepository
     id:
         id:
             type: integer
@@ -67,7 +67,7 @@ WellCommerce\Bundle\AppBundle\Entity\User:
             precision: 0
     manyToMany:
         roles:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Role
+            targetEntity: WellCommerce\Bundle\UserBundle\Entity\Role
             fetch: LAZY
             inversedBy: users
             joinTable:
@@ -83,7 +83,7 @@ WellCommerce\Bundle\AppBundle\Entity\User:
                         referencedColumnName: id
                         onDelete: CASCADE
         groups:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\UserGroup
+            targetEntity: WellCommerce\Bundle\UserBundle\Entity\UserGroup
             fetch: LAZY
             inversedBy: users
             joinTable:

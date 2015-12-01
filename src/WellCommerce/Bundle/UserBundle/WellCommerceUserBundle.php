@@ -10,15 +10,15 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\UserBundle\DataSet\Admin;
+namespace WellCommerce\Bundle\UserBundle;
 
-use WellCommerce\Component\DataSet\QueryBuilder\AbstractDataSetQueryBuilder;
+use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * Class UserGroupDataSetQueryBuilder
+ * Class WellCommerceUserBundle
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class UserGroupDataSetQueryBuilder extends AbstractDataSetQueryBuilder
+class WellCommerceUserBundle extends Bundle
 {
 }

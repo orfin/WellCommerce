@@ -1,0 +1,24 @@
+wellcommerce_app:
+    resource: "@WellCommerceAppBundle/Resources/config/routing.xml"
+
+wellcommerce_currency:
+    resource: "@WellCommerceCurrencyBundle/Resources/config/routing.xml"
+
+wellcommerce_locale:
+    resource: "@WellCommerceLocaleBundle/Resources/config/routing.xml"
+
+wellcommerce_shop:
+    resource: "@WellCommerceShopBundle/Resources/config/routing.xml"
+
+wellcommerce_company:
+    resource: "@WellCommerceCompanyBundle/Resources/config/routing.xml"
+
+wellcommerce_user:
+    resource: "@WellCommerceUserBundle/Resources/config/routing.xml"
+
+root:
+    path: /admin
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: admin.user.index
+        permanent: false

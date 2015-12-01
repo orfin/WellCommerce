@@ -1,7 +1,7 @@
-WellCommerce\Bundle\AppBundle\Entity\UserGroupPermission:
+WellCommerce\Bundle\UserBundle\Entity\UserGroupPermission:
     type: entity
     table: user_group_permission
-    repositoryClass: WellCommerce\Bundle\AppBundle\Repository\UserGroupPermissionRepository
+    repositoryClass: WellCommerce\Bundle\UserBundle\Repository\UserGroupPermissionRepository
     id:
         id:
             type: integer
@@ -22,7 +22,7 @@ WellCommerce\Bundle\AppBundle\Entity\UserGroupPermission:
             type: boolean
     manyToOne:
         group:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\UserGroup
+            targetEntity: WellCommerce\Bundle\UserBundle\Entity\UserGroup
             fetch: LAZY
             inversedBy: permissions
             joinColumns:

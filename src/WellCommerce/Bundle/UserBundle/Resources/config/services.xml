@@ -1,9 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" ?>
+
 <container xmlns="http://symfony.com/schema/dic/services"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <services>
-        <service id="role.factory" class="WellCommerce\Bundle\UserBundle\Factory\RoleFactory"/>
-    </services>
+    <imports>
+        <import resource="services/role.xml"/>
+        <import resource="services/user.xml"/>
+        <import resource="services/user_group.xml"/>
+    </imports>
 </container>

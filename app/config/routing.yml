@@ -11,14 +11,7 @@ _liip_imagine:
     resource: "@LiipImagineBundle/Resources/config/routing.xml"
 
 wellcommerce_app:
-    resource: "@WellCommerceAppBundle/Resources/config/routing.xml"
-
-root:
-    path: /admin
-    defaults:
-        _controller: FrameworkBundle:Redirect:redirect
-        route: admin.user.index
-        permanent: false
+    resource: "@WellCommerceAppBundle/Resources/config/routing.yml"
 
 remove_trailing_slash:
     path: /{url}

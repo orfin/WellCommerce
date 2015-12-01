@@ -1,7 +1,7 @@
-WellCommerce\Bundle\AppBundle\Entity\UserGroup:
+WellCommerce\Bundle\UserBundle\Entity\UserGroup:
     type: entity
     table: user_group
-    repositoryClass: WellCommerce\Bundle\AppBundle\Repository\UserGroupRepository
+    repositoryClass: WellCommerce\Bundle\UserBundle\Repository\UserGroupRepository
     id:
         id:
             type: integer
@@ -23,12 +23,12 @@ WellCommerce\Bundle\AppBundle\Entity\UserGroup:
             precision: 0
     manyToMany:
         users:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\User
+            targetEntity: WellCommerce\Bundle\UserBundle\Entity\User
             fetch: LAZY
             mappedBy: groups
     oneToMany:
         permissions:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\UserGroupPermission
+            targetEntity: WellCommerce\Bundle\UserBundle\Entity\UserGroupPermission
             cascade:
                 - all
             fetch: LAZY

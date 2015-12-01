@@ -1,4 +1,4 @@
-WellCommerce\Bundle\AppBundle\Entity\Role:
+WellCommerce\Bundle\UserBundle\Entity\Role:
     type: entity
     table: roles
     id:
@@ -29,7 +29,7 @@ WellCommerce\Bundle\AppBundle\Entity\Role:
             precision: 0
     manyToMany:
         users:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\User
+            targetEntity: WellCommerce\Bundle\UserBundle\Entity\User
             cascade: {  }
             fetch: LAZY
             mappedBy: roles

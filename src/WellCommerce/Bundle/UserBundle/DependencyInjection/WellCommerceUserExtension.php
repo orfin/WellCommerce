@@ -10,15 +10,18 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\UserBundle\DataSet\Admin;
+namespace WellCommerce\Bundle\UserBundle\DependencyInjection;
 
-use WellCommerce\Component\DataSet\QueryBuilder\AbstractDataSetQueryBuilder;
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\Loader;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
 
 /**
- * Class UserGroupDataSetQueryBuilder
+ * Class WellCommerceUserExtension
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class UserGroupDataSetQueryBuilder extends AbstractDataSetQueryBuilder
+class WellCommerceUserExtension extends AbstractExtension
 {
+
 }

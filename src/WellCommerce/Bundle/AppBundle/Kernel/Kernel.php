@@ -43,6 +43,7 @@ class Kernel extends BaseKernel
             new \Ivory\LuceneSearchBundle\IvoryLuceneSearchBundle(),
 
             new \WellCommerce\Bundle\CoreBundle\WellCommerceCoreBundle(),
+            new \WellCommerce\Bundle\UserBundle\WellCommerceUserBundle(),
             new \WellCommerce\Bundle\AppBundle\WellCommerceAppBundle(),
             new \WellCommerce\Bundle\CurrencyBundle\WellCommerceCurrencyBundle(),
             new \WellCommerce\Bundle\LocaleBundle\WellCommerceLocaleBundle(),

@@ -10,9 +10,9 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Factory;
+namespace WellCommerce\Bundle\UserBundle\Factory;
 
-use WellCommerce\Bundle\AppBundle\Entity\UserGroup;
+use WellCommerce\Bundle\UserBundle\Entity\UserGroup;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 
 /**
@@ -23,7 +23,7 @@ use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 class UserGroupFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\AppBundle\Entity\UserGroupInterface
+     * @return \WellCommerce\Bundle\UserBundle\Entity\UserGroupInterface
      */
     public function create()
     {
