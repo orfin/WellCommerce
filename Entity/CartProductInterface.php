@@ -4,7 +4,7 @@ namespace WellCommerce\Bundle\AppBundle\Entity;
 
 use WellCommerce\Bundle\AppBundle\Entity\ProductAttributeInterface;
 use WellCommerce\Bundle\AppBundle\Entity\ProductAwareInterface;
-use WellCommerce\Bundle\AppBundle\Entity\TimestampableInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 
 /**
  * Interface CartProductInterface
