@@ -1,7 +1,7 @@
-WellCommerce\Bundle\AppBundle\Entity\Locale:
+WellCommerce\Bundle\LocaleBundle\Entity\Locale:
     type: entity
     table: locale
-    repositoryClass: WellCommerce\Bundle\AppBundle\Repository\LocaleRepository
+    repositoryClass: WellCommerce\Bundle\LocaleBundle\Repository\LocaleRepository
     id:
         id:
             type: integer
@@ -13,12 +13,3 @@ WellCommerce\Bundle\AppBundle\Entity\Locale:
             length: 12
             unique: true
             nullable: false
-    manyToOne:
-        currency:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Currency
-            fetch: LAZY
-            joinColumns:
-                currency_id:
-                    referencedColumnName: id
-                    onDelete: 'SET NULL'
-            orphanRemoval: false

@@ -10,9 +10,9 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Factory;
+namespace WellCommerce\Bundle\LocaleBundle\Factory;
 
-use WellCommerce\Bundle\AppBundle\Entity\Locale;
+use WellCommerce\Bundle\LocaleBundle\Entity\Locale;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 
 /**
@@ -23,7 +23,7 @@ use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 class LocaleFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\AppBundle\Entity\LocaleInterface
+     * @return \WellCommerce\Bundle\LocaleBundle\Entity\LocaleInterface
      */
     public function create()
     {

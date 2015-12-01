@@ -1,5 +1,5 @@
 {
-    "name": "wellcommerce/wishlist-bundle",
+    "name": "wellcommerce/locale-bundle",
     "license": "MIT",
     "minimum-stability": "dev",
     "description": "WellCommerce Open-Source edition",
@@ -16,15 +16,15 @@
     ],
     "support": {
         "email": "support@wellcommerce.org",
-        "issues": "https://github.com/WellCommerce/WishlistBundle/issues",
-        "source": "https://github.com/WellCommerce/WishlistBundle/"
+        "issues": "https://github.com/WellCommerce/LocaleBundle/issues",
+        "source": "https://github.com/WellCommerce/LocaleBundle/"
     },
     "autoload": {
         "psr-4": { "": "src/" }
     },
     "require": {
         "php": ">=5.6",
-        "wellcommerce/client-bundle": "^0.7@dev"
+        "wellcommerce/app-bundle": "^0.7@dev"
     },
     "extra": {
         "branch-alias": {

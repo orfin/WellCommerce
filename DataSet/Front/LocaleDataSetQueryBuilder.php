@@ -10,9 +10,9 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\DataSet\Front;
+namespace WellCommerce\Bundle\LocaleBundle\DataSet\Front;
 
-use WellCommerce\Bundle\AppBundle\DataSet\Admin\LocaleDataSetQueryBuilder as BaseDataSetQueryBuilder;
+use WellCommerce\Bundle\LocaleBundle\DataSet\Admin\LocaleDataSetQueryBuilder as BaseDataSetQueryBuilder;
 
 /**
  * Class LocaleDataSetQueryBuilder
