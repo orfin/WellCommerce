@@ -91,14 +91,14 @@ parameters:
 fos_js_routing:
     router: router.default
 
-cmf_routing:
-    chain:
-        routers_by_id:
-            router.default:             100
-            cmf_routing.dynamic_router: 50
-    dynamic:
-        enabled: true
-        route_provider_service_id: router.provider.endpoint
+#cmf_routing:
+#    chain:
+#        routers_by_id:
+#            router.default:             100
+#            cmf_routing.dynamic_router: 50
+#    dynamic:
+#        enabled: true
+#        route_provider_service_id: router.provider.endpoint
 
 liip_imagine:
     loaders:

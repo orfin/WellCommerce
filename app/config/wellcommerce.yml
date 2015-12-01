@@ -27,7 +27,7 @@ parameters:
         WellCommerce\Bundle\AppBundle\DataFixtures\ORM\LoadPaymentMethodData: 230
     fixtures_product_limit: 100
 
-well_commerce_app:
+well_commerce_core:
     type: %search_engine%
     search_term_min_length: 3
     media_upload_dir: %kernel.root_dir%

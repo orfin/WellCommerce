@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\TaxBundle\Tests\DependencyInjection;
+namespace WellCommerce\Bundle\AppBundle\Tests\DependencyInjection;
 
 use WellCommerce\Bundle\CoreBundle\Test\DependencyInjection\AbstractExtensionTestCase;
 

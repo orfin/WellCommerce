@@ -25,16 +25,10 @@
 
         <service id="request.helper" class="WellCommerce\Bundle\CoreBundle\Helper\Request\RequestHelper">
             <argument type="service" id="request_stack"/>
-            <argument type="service" id="shop.context.front"/>
         </service>
 
         <service id="environment_helper" class="WellCommerce\Bundle\CoreBundle\Helper\Environment\EnvironmentHelper">
             <argument type="service" id="kernel"/>
-        </service>
-
-        <service id="security.helper" class="WellCommerce\Bundle\CoreBundle\Helper\Security\SecurityHelper">
-            <argument type="service" id="security.token_storage"/>
-            <argument type="service" id="user.repository"/>
         </service>
 
         <service id="validator.helper" class="WellCommerce\Bundle\CoreBundle\Helper\Validator\ValidatorHelper">
@@ -51,9 +45,5 @@
         </service>
 
         <service id="mailer.helper" class="WellCommerce\Bundle\CoreBundle\Helper\Mailer\MailerHelper" />
-
-        <service id="package.helper" class="WellCommerce\Bundle\CoreBundle\Helper\Package\PackageHelper">
-            <argument type="service" id="knp.packagist_api.client"/>
-        </service>
     </services>
 </container>

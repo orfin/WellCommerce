@@ -16,17 +16,5 @@
         <service id="core.event_dispatcher" class="WellCommerce\Bundle\CoreBundle\EventDispatcher\EventDispatcher">
             <argument type="service" id="event_dispatcher"/>
         </service>
-
-        <service id="package.command.plugin.require" class="WellCommerce\Bundle\CoreBundle\Command\Package\RequireCommand">
-            <tag name="console.command" />
-        </service>
-
-        <service id="package.command.plugin.update" class="WellCommerce\Bundle\CoreBundle\Command\Package\UpdateCommand">
-            <tag name="console.command" />
-        </service>
-
-        <service id="package.command.plugin.remove" class="WellCommerce\Bundle\CoreBundle\Command\Package\RemoveCommand">
-            <tag name="console.command" />
-        </service>
     </services>
 </container>
