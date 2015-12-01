@@ -30,6 +30,7 @@ class LocaleRepository extends AbstractEntityRepository implements LocaleReposit
     {
         $queryBuilder = $this->getQueryBuilder();
         $queryBuilder->groupBy('locale.id');
+        $queryBuilder->leftJoin('locale.currency', 'default_currency');
 
         return $queryBuilder;
     }

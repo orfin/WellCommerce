@@ -13,14 +13,15 @@
 namespace WellCommerce\Bundle\LocaleBundle\Entity;
 
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
-use WellCommerce\Bundle\UserBundle\Entity\BlameableInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
+use WellCommerce\Bundle\CurrencyBundle\Entity\CurrencyAwareInterface;
 
 /**
  * Interface LocaleInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface LocaleInterface extends TimestampableInterface, BlameableInterface
+interface LocaleInterface extends TimestampableInterface, BlameableInterface, CurrencyAwareInterface
 {
     /**
      * @return integer

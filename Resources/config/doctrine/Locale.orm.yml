@@ -13,3 +13,12 @@ WellCommerce\Bundle\LocaleBundle\Entity\Locale:
             length: 12
             unique: true
             nullable: false
+    manyToOne:
+        currency:
+            targetEntity: WellCommerce\Bundle\CurrencyBundle\Entity\Currency
+            fetch: LAZY
+            joinColumns:
+                currency_id:
+                    referencedColumnName: id
+                    onDelete: 'SET NULL'
+            orphanRemoval: false
