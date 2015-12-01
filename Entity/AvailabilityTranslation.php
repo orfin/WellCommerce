@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\AppBundle\Entity;
 
 use Knp\DoctrineBehaviors\Model\Translatable\Translation;
-use WellCommerce\Bundle\AppBundle\Entity\LocaleAwareInterface;
+use WellCommerce\Bundle\LocaleBundle\Entity\LocaleAwareInterface;
 
 /**
  * Class AvailabilityTranslation
