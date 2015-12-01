@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\TaxBundle\Entity;
 
-use WellCommerce\Bundle\AppBundle\Entity\BlameableInterface;
-use WellCommerce\Bundle\AppBundle\Entity\TimestampableInterface;
+use WellCommerce\Bundle\UserBundle\Entity\BlameableInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\AppBundle\Entity\TranslatableInterface;
 
 /**
