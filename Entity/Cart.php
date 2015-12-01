@@ -16,7 +16,7 @@ use WellCommerce\Bundle\AppBundle\Entity\ClientAwareTrait;
 use WellCommerce\Bundle\AppBundle\Entity\ClientBillingAddressInterface;
 use WellCommerce\Bundle\AppBundle\Entity\ClientContactDetailsInterface;
 use WellCommerce\Bundle\AppBundle\Entity\ClientShippingAddressInterface;
-use WellCommerce\Bundle\AppBundle\Entity\ShopAwareTrait;
+use WellCommerce\Bundle\ShopBundle\Entity\ShopAwareTrait;
 use WellCommerce\Bundle\AppBundle\Doctrine\ORM\Behaviours\Timestampable\TimestampableTrait;
 use WellCommerce\Bundle\AppBundle\Entity\CouponAwareTrait;
 use WellCommerce\Bundle\AppBundle\Service\Cart\Visitor\CartVisitorInterface;
