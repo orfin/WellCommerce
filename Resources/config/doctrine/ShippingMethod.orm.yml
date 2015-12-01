@@ -22,7 +22,7 @@ WellCommerce\Bundle\AppBundle\Entity\ShippingMethod:
                 default: 0
     manyToOne:
         currency:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Currency
+            targetEntity: WellCommerce\Bundle\CurrencyBundle\Entity\Currency
             fetch: LAZY
             joinColumns:
                 currency_id:
