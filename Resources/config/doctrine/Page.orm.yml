@@ -98,21 +98,16 @@ WellCommerce\Bundle\AppBundle\Entity\Page:
                         referencedColumnName: id
             orderBy: null
         shops:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Shop
-            cascade: {  }
+            targetEntity: WellCommerce\Bundle\ShopBundle\Entity\Shop
             fetch: LAZY
-            mappedBy: null
-            inversedBy: pages
             joinTable:
                 name: shop_page
-                schema: null
                 joinColumns:
                     -
                         name: page_id
                         unique: false
                         nullable: true
                         onDelete: CASCADE
-                        columnDefinition: null
                         referencedColumnName: id
                 inverseJoinColumns:
                     -
@@ -120,9 +115,7 @@ WellCommerce\Bundle\AppBundle\Entity\Page:
                         unique: false
                         nullable: true
                         onDelete: CASCADE
-                        columnDefinition: null
                         referencedColumnName: id
-            orderBy: null
     oneToMany:
         children:
             targetEntity: WellCommerce\Bundle\AppBundle\Entity\Page
