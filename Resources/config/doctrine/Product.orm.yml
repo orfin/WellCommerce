@@ -139,9 +139,8 @@ WellCommerce\Bundle\AppBundle\Entity\Product:
                         onDelete: CASCADE
                         referencedColumnName: id
         shops:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Shop
+            targetEntity: WellCommerce\Bundle\ShopBundle\Entity\Shop
             fetch: LAZY
-            inversedBy: products
             joinTable:
                 name: shop_product
                 joinColumns:

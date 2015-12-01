@@ -17,7 +17,7 @@ use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 use WellCommerce\Bundle\AppBundle\Entity\Attribute\GroupInterface;
-use WellCommerce\Bundle\AppBundle\Entity\ShopCollectionAwareTrait;
+use WellCommerce\Bundle\ShopBundle\Entity\ShopCollectionAwareTrait;
 use WellCommerce\Bundle\TaxBundle\Entity\TaxInterface;
 use WellCommerce\Bundle\AppBundle\Doctrine\ORM\Behaviours\EnableableTrait;
 use WellCommerce\Bundle\AppBundle\Doctrine\ORM\Behaviours\PhotoTrait;
