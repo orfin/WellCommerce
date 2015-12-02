@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\AppBundle\Indexer;
 
-use WellCommerce\Bundle\AppBundle\Entity\ProductInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 use WellCommerce\Bundle\AppBundle\Repository\ProductRepositoryInterface;
 use WellCommerce\Bundle\AppBundle\Manager\SearchIndexManagerInterface;
 use ZendSearch\Lucene\Document;

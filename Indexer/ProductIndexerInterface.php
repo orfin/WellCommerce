@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\AppBundle\Indexer;
 
-use WellCommerce\Bundle\AppBundle\Entity\ProductInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 
 /**
  * Interface ProductIndexerInterface
