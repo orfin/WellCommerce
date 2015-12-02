@@ -40,7 +40,7 @@ WellCommerce\Bundle\AppBundle\Entity\OrderProduct:
                     referencedColumnName: id
                     onDelete: RESTRICT
         productAttribute:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\ProductAttribute
+            targetEntity: WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute
             fetch: LAZY
             joinColumns:
                 product_attribute_id:
