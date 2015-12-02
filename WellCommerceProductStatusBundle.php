@@ -10,15 +10,15 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\ProductStatusBundle\DataSet\Admin;
+namespace WellCommerce\Bundle\ProductStatusBundle;
 
-use WellCommerce\Component\DataSet\QueryBuilder\AbstractDataSetQueryBuilder;
+use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * Class ProductStatusDataSetQueryBuilder
+ * Class WellCommerceProductStatusBundle
  *
- * @author Adam Piotrowski <adam@wellcommerce.org>
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductStatusDataSetQueryBuilder extends AbstractDataSetQueryBuilder
+class WellCommerceProductStatusBundle extends Bundle
 {
 }

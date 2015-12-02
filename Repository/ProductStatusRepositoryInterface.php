@@ -10,15 +10,15 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\ProductStatusBundle\DataSet\Admin;
+namespace WellCommerce\Bundle\ProductStatusBundle\Repository;
 
-use WellCommerce\Component\DataSet\QueryBuilder\AbstractDataSetQueryBuilder;
+use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**
- * Class ProductStatusDataSetQueryBuilder
+ * Interface ProductStatusRepositoryInterface
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductStatusDataSetQueryBuilder extends AbstractDataSetQueryBuilder
+interface ProductStatusRepositoryInterface extends RepositoryInterface
 {
 }

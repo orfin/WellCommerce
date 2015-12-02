@@ -10,15 +10,15 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\ProductStatusBundle\DataSet\Admin;
+namespace WellCommerce\Bundle\ProductStatusBundle\Controller\Admin;
 
-use WellCommerce\Component\DataSet\QueryBuilder\AbstractDataSetQueryBuilder;
+use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 
 /**
- * Class ProductStatusDataSetQueryBuilder
+ * Class ProductStatusController
  *
- * @author Adam Piotrowski <adam@wellcommerce.org>
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductStatusDataSetQueryBuilder extends AbstractDataSetQueryBuilder
+class ProductStatusController extends AbstractAdminController
 {
 }

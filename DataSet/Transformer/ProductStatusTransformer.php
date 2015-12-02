@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\DataSet\Transformer;
+namespace WellCommerce\Bundle\ProductStatusBundle\DataSet\Transformer;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use WellCommerce\Component\DataSet\Transformer\AbstractDataSetTransformer;
