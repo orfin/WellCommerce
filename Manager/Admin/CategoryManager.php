@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Manager\Admin;
+namespace WellCommerce\Bundle\CategoryBundle\Manager\Admin;
 
 use WellCommerce\Bundle\AppBundle\Entity\Category;
 use WellCommerce\Bundle\AppBundle\Entity\Locale;

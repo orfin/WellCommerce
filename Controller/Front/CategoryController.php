@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Controller\Front;
+namespace WellCommerce\Bundle\CategoryBundle\Controller\Front;
 
 use WellCommerce\Bundle\AppBundle\Entity\CategoryInterface;
 use WellCommerce\Bundle\AppBundle\Service\Breadcrumb\BreadcrumbItem;

@@ -1,10 +1,10 @@
 <?php
 
-namespace WellCommerce\Bundle\AppBundle\Entity;
+namespace WellCommerce\Bundle\CategoryBundle\Entity;
 
 use Knp\DoctrineBehaviors\Model\Translatable\Translation;
 use WellCommerce\Bundle\AppBundle\Entity\Behaviours\RoutableTrait;
-use WellCommerce\Bundle\AppBundle\Entity\RoutableSubjectInterface;
+use WellCommerce\Bundle\RoutingBundle\Entity\RoutableSubjectInterface;
 use WellCommerce\Bundle\LocaleBundle\Entity\LocaleAwareInterface;
 use WellCommerce\Bundle\AppBundle\Entity\Meta;
 
@@ -19,7 +19,7 @@ class CategoryTranslation implements RoutableSubjectInterface, LocaleAwareInterf
     use RoutableTrait;
 
     /**
-     * @var \WellCommerce\Bundle\AppBundle\Entity\CategoryRoute
+     * @var \WellCommerce\Bundle\CategoryBundle\Entity\CategoryRoute
      */
     protected $route;
 
@@ -116,7 +116,7 @@ class CategoryTranslation implements RoutableSubjectInterface, LocaleAwareInterf
     }
 
     /**
-     * @return CategoryRoute|\WellCommerce\Bundle\AppBundle\Entity\RouteInterface
+     * @return CategoryRoute|\WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface
      */
     public function getRouteEntity()
     {
