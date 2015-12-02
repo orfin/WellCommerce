@@ -6,7 +6,6 @@
     <imports>
         <import resource="admin/client.xml"/>
         <import resource="front/client.xml"/>
-        <import resource="front/wishlist.xml"/>
         <import resource="front/client_settings.xml"/>
         <import resource="front/client_registration.xml"/>
         <import resource="front/client_forgot_password.xml"/>
@@ -14,31 +13,31 @@
     </imports>
 
     <services>
-        <service id="client.repository" class="WellCommerce\Bundle\AppBundle\Repository\ClientRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
-            <argument>WellCommerceAppBundle:Client</argument>
+        <service id="client.repository" class="WellCommerce\Bundle\ClientBundle\Repository\ClientRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>WellCommerceClientBundle:Client</argument>
         </service>
 
-        <service id="client.factory" class="WellCommerce\Bundle\AppBundle\Factory\ClientFactory" />
+        <service id="client.factory" class="WellCommerce\Bundle\ClientBundle\Factory\ClientFactory" />
 
         <service id="client.event_dispatcher" parent="core.event_dispatcher" public="false">
             <argument type="service" id="event_dispatcher"/>
         </service>
 
-        <service id="client_login.layout_box.controller" class="WellCommerce\Bundle\AppBundle\Controller\Box\ClientLoginBoxController">
+        <service id="client_login.layout_box.controller" class="WellCommerce\Bundle\ClientBundle\Controller\Box\ClientLoginBoxController">
             <argument type="service" id="client.manager.front"/>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
         </service>
 
-        <service id="client.subscriber" class="WellCommerce\Bundle\AppBundle\EventListener\ClientSubscriber">
+        <service id="client.subscriber" class="WellCommerce\Bundle\ClientBundle\EventListener\ClientSubscriber">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
             <tag name="kernel.event_subscriber"/>
         </service>
 
-        <service id="twig.extension.client_address_formatter" class="WellCommerce\Bundle\AppBundle\Twig\Extension\ClientAddressFormatterExtension">
+        <service id="twig.extension.client_address_formatter" class="WellCommerce\Bundle\ClientBundle\Twig\Extension\ClientAddressFormatterExtension">
             <tag name="twig.extension"/>
         </service>
     </services>

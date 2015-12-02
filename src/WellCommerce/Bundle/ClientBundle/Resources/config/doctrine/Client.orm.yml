@@ -1,7 +1,7 @@
-WellCommerce\Bundle\AppBundle\Entity\Client:
+WellCommerce\Bundle\ClientBundle\Entity\Client:
     type: entity
     table: client
-    repositoryClass: WellCommerce\Bundle\AppBundle\Repository\ClientRepository
+    repositoryClass: WellCommerce\Bundle\ClientBundle\Repository\ClientRepository
     id:
         id:
             type: integer
@@ -9,13 +9,13 @@ WellCommerce\Bundle\AppBundle\Entity\Client:
                 strategy: AUTO
     embedded:
         billingAddress:
-            class: WellCommerce\Bundle\AppBundle\Entity\ClientBillingAddress
+            class: WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddress
             columnPrefix: billing_address_
         shippingAddress:
-            class: WellCommerce\Bundle\AppBundle\Entity\ClientShippingAddress
+            class: WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddress
             columnPrefix: shipping_address_
         contactDetails:
-            class: WellCommerce\Bundle\AppBundle\Entity\ClientContactDetails
+            class: WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetails
             columnPrefix: contact_details_
     fields:
         discount:
@@ -51,22 +51,22 @@ WellCommerce\Bundle\AppBundle\Entity\Client:
             nullable: false
             column: newsletter_accepted
     oneToMany:
-        wishlist:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Wishlist
-            cascade:
-                - remove
-                - persist
-            fetch: LAZY
-            mappedBy: client
-            orphanRemoval: true
-        orders:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Order
-            cascade:
-                - remove
-                - persist
-            fetch: LAZY
-            mappedBy: client
-            orphanRemoval: true
+#        wishlist:
+#            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Wishlist
+#            cascade:
+#                - remove
+#                - persist
+#            fetch: LAZY
+#            mappedBy: client
+#            orphanRemoval: true
+#        orders:
+#            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Order
+#            cascade:
+#                - remove
+#                - persist
+#            fetch: LAZY
+#            mappedBy: client
+#            orphanRemoval: true
     manyToOne:
         shop:
             targetEntity: WellCommerce\Bundle\ShopBundle\Entity\Shop
@@ -76,7 +76,7 @@ WellCommerce\Bundle\AppBundle\Entity\Client:
                     referencedColumnName: id
                     onDelete: CASCADE
         clientGroup:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\ClientGroup
+            targetEntity: WellCommerce\Bundle\ClientBundle\Entity\ClientGroup
             fetch: LAZY
             inversedBy: clients
             joinColumns:

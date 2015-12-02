@@ -4,7 +4,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="client_address_book.manager.front" class="WellCommerce\Bundle\AppBundle\Manager\Front\ClientAddressBookManager">
+        <service id="client_address_book.manager.front" class="WellCommerce\Bundle\ClientBundle\Manager\Front\ClientAddressBookManager">
             <argument type="service" id="client.repository"/>
             <argument type="service" id="client.event_dispatcher"/>
             <argument>null</argument>
@@ -14,7 +14,7 @@
             </call>
         </service>
 
-        <service id="client_address_book.form_builder.front" class="WellCommerce\Bundle\AppBundle\Form\Front\ClientAddressBookFormBuilder">
+        <service id="client_address_book.form_builder.front" class="WellCommerce\Bundle\ClientBundle\Form\Front\ClientAddressBookFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
             <argument type="service" id="client.event_dispatcher"/>
@@ -23,14 +23,14 @@
             </call>
         </service>
 
-        <service id="client_address_book.controller.front" class="WellCommerce\Bundle\AppBundle\Controller\Front\ClientAddressBookController">
+        <service id="client_address_book.controller.front" class="WellCommerce\Bundle\ClientBundle\Controller\Front\ClientAddressBookController">
             <argument type="service" id="client_address_book.manager.front"/>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
         </service>
 
-        <service id="client_address_book.layout_box.controller" class="WellCommerce\Bundle\AppBundle\Controller\Box\ClientAddressBookBoxController">
+        <service id="client_address_book.layout_box.controller" class="WellCommerce\Bundle\ClientBundle\Controller\Box\ClientAddressBookBoxController">
             <argument type="service" id="client_address_book.manager.front"/>
             <call method="setContainer">
                 <argument type="service" id="service_container" />

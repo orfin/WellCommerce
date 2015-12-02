@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Repository;
+namespace WellCommerce\Bundle\ProductBundle\Repository;
 
 use WellCommerce\Bundle\AppBundle\Entity\Product;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
@@ -28,7 +28,7 @@ interface ProductAttributeRepositoryInterface extends RepositoryInterface
      * @param string  $id
      * @param Product $product
      *
-     * @return null|\WellCommerce\Bundle\AppBundle\Entity\ProductAttribute
+     * @return null|\WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute
      */
     public function findProductAttribute($id, Product $product);
 }

@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Tests\Context\Front;
+namespace WellCommerce\Bundle\ProductBundle\Tests\Context\Front;
 
 use WellCommerce\Bundle\CoreBundle\Test\AbstractTestCase;
 
@@ -29,7 +29,7 @@ class ProductContextTest extends AbstractTestCase
         $this->assertNull($context->getCurrentProduct());
 
         $context->setCurrentProduct($factory->create());
-        $this->assertInstanceOf('WellCommerce\Bundle\AppBundle\Entity\ProductInterface', $context->getCurrentProduct());
+        $this->assertInstanceOf('WellCommerce\Bundle\ProductBundle\Entity\ProductInterface', $context->getCurrentProduct());
         $this->assertEquals($product, $context->getCurrentProduct());
     }
 }

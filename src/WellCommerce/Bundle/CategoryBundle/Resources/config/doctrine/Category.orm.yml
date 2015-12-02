@@ -32,7 +32,7 @@ WellCommerce\Bundle\AppBundle\Entity\Category:
             mappedBy: parent
     manyToMany:
         products:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Product
+            targetEntity: WellCommerce\Bundle\ProductBundle\Entity\Product
             fetch: LAZY
             mappedBy: categories
         shops:

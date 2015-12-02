@@ -42,7 +42,7 @@
             <argument>id</argument>
             <argument type="collection">
                 <argument>WellCommerce\Bundle\AppBundle\Entity\Product</argument>
-                <argument>WellCommerce\Bundle\AppBundle\Entity\ProductInterface</argument>
+                <argument>WellCommerce\Bundle\ProductBundle\Entity\ProductInterface</argument>
             </argument>
             <tag name="request.param_converter" converter="product" priority="0"/>
         </service>

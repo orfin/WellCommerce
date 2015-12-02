@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\AppBundle\Manager\Admin;
 
-use WellCommerce\Bundle\AppBundle\Entity\ProductInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 use WellCommerce\Bundle\AppBundle\Repository\ProductRepositoryInterface;
 use WellCommerce\Bundle\TaxBundle\Helper\TaxHelper;
 use WellCommerce\Bundle\AppBundle\Entity\Price;

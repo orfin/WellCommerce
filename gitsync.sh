@@ -5,6 +5,7 @@ git stree push AttributeBundle
 git stree push AvailabilityBundle
 git stree push CartBundle
 git stree push CategoryBundle
+git stree push ClientBundle
 git stree push Collections
 git stree push CompanyBundle
 git stree push ContactBundle

@@ -9,7 +9,7 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Bundle\AppBundle\Twig\Extension;
+namespace WellCommerce\Bundle\ClientBundle\Twig\Extension;
 
 use WellCommerce\Bundle\AppBundle\Entity\ClientBillingAddressInterface;
 use WellCommerce\Bundle\AppBundle\Entity\ClientContactDetailsInterface;

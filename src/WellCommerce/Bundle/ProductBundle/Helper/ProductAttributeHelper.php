@@ -10,11 +10,11 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Helper;
+namespace WellCommerce\Bundle\ProductBundle\Helper;
 
 use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\AppBundle\Entity\AttributeValueInterface;
-use WellCommerce\Bundle\AppBundle\Entity\ProductAttributeInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeInterface;
 use WellCommerce\Bundle\AppBundle\Helper\CurrencyHelperInterface;
 
 /**

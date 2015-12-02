@@ -44,6 +44,7 @@ class Kernel extends BaseKernel
 
             new \WellCommerce\Bundle\CoreBundle\WellCommerceCoreBundle(),
             new \WellCommerce\Bundle\UserBundle\WellCommerceUserBundle(),
+            new \WellCommerce\Bundle\ClientBundle\WellCommerceClientBundle(),
             new \WellCommerce\Bundle\AppBundle\WellCommerceAppBundle(),
             new \WellCommerce\Bundle\CurrencyBundle\WellCommerceCurrencyBundle(),
             new \WellCommerce\Bundle\LocaleBundle\WellCommerceLocaleBundle(),
@@ -51,6 +52,7 @@ class Kernel extends BaseKernel
             new \WellCommerce\Bundle\ShopBundle\WellCommerceShopBundle(),
             new \WellCommerce\Bundle\LayoutBundle\WellCommerceLayoutBundle(),
             new \WellCommerce\Bundle\ThemeBundle\WellCommerceThemeBundle(),
+            new \WellCommerce\Bundle\ProductStatusBundle\WellCommerceProductStatusBundle()
 
         ];
 

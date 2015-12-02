@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\AppBundle\Entity;
 
-use WellCommerce\Bundle\AppBundle\Entity\ProductAwareInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 
 /**

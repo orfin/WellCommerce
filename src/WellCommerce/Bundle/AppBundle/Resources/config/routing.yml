@@ -13,6 +13,9 @@ wellcommerce_shop:
 wellcommerce_company:
     resource: "@WellCommerceCompanyBundle/Resources/config/routing.xml"
 
+wellcommerce_client:
+    resource: "@WellCommerceClientBundle/Resources/config/routing.xml"
+
 wellcommerce_user:
     resource: "@WellCommerceUserBundle/Resources/config/routing.xml"
 

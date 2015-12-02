@@ -131,7 +131,7 @@ services:
         arguments: ["%kernel.root_dir%/cache/%kernel.environment%/doctrine"]
 
     client.failure.handler:
-        class: WellCommerce\Bundle\AppBundle\Handler\LoginFailureHandler
+        class: WellCommerce\Bundle\ClientBundle\Handler\LoginFailureHandler
         arguments:
           - @router
           - front.client.login

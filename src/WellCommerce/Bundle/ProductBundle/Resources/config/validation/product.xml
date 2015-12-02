@@ -67,7 +67,7 @@
         </constraint>
     </class>
 
-    <class name="WellCommerce\Bundle\AppBundle\Entity\ProductStatus">
+    <class name="WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatus">
         <property name="translations">
             <constraint name="Valid">
                 <option name="deep">true</option>
@@ -94,7 +94,7 @@
         </property>
     </class>
 
-    <class name="WellCommerce\Bundle\AppBundle\Entity\ProductStatusTranslation">
+    <class name="WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusTranslation">
         <property name="name">
             <constraint name="NotBlank" />
             <constraint name="NotNull" />

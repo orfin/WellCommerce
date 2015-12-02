@@ -1,4 +1,4 @@
-WellCommerce\Bundle\AppBundle\Entity\ClientShippingAddress:
+WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddress:
     type: embeddable
     fields:
         firstName:

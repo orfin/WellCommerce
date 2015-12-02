@@ -10,10 +10,10 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Helper;
+namespace WellCommerce\Bundle\ProductBundle\Helper;
 
 use WellCommerce\Bundle\AppBundle\Entity\CategoryInterface;
-use WellCommerce\Bundle\AppBundle\Entity\ProductInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 
 /**
  * Interface ProductHelperInterface
