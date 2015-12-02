@@ -13,8 +13,8 @@
 namespace WellCommerce\Bundle\AppBundle\Controller\Front;
 
 use WellCommerce\Bundle\AppBundle\Entity\CartProductInterface;
-use WellCommerce\Bundle\AppBundle\Entity\ProductAttributeInterface;
-use WellCommerce\Bundle\AppBundle\Entity\ProductInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 use WellCommerce\Bundle\AppBundle\Exception\AddCartItemException;
 use WellCommerce\Bundle\AppBundle\Exception\DeleteCartItemException;
 use WellCommerce\Bundle\AppBundle\Service\Breadcrumb\BreadcrumbItem;

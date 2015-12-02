@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\AppBundle\Exception;
 
-use WellCommerce\Bundle\AppBundle\Entity\ProductAttributeInterface;
-use WellCommerce\Bundle\AppBundle\Entity\ProductInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 
 /**
  * Class AddCartItemException
