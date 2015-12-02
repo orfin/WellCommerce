@@ -10,9 +10,9 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Factory;
+namespace WellCommerce\Bundle\UnitBundle\Factory;
 
-use WellCommerce\Bundle\AppBundle\Entity\Unit;
+use WellCommerce\Bundle\UnitBundle\Entity\Unit;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 
 /**
@@ -23,7 +23,7 @@ use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 class UnitFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\AppBundle\Entity\UnitInterface
+     * @return \WellCommerce\Bundle\UnitBundle\Entity\UnitInterface
      */
     public function create()
     {
