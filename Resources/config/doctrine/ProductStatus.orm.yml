@@ -15,6 +15,6 @@ WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatus:
                 strategy: IDENTITY
     manyToMany:
         products:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Product
+            targetEntity: WellCommerce\Bundle\ProductBundle\Entity\Product
             fetch: LAZY
             mappedBy: statuses
