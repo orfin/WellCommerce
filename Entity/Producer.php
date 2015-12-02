@@ -34,7 +34,7 @@ class Producer implements ProducerInterface
     protected $id;
 
     /**
-     * @var Collection|\WellCommerce\Bundle\AppBundle\Entity\ProductInterface[]
+     * @var Collection|\WellCommerce\Bundle\ProductBundle\Entity\ProductInterface[]
      */
     protected $products;
 
