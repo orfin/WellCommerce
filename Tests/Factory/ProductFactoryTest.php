@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Tests\Factory;
+namespace WellCommerce\Bundle\ProductBundle\Tests\Factory;
 
 use WellCommerce\Bundle\CoreBundle\Test\Factory\AbstractFactoryTestCase;
 
@@ -28,6 +28,6 @@ class ProductFactoryTest extends AbstractFactoryTestCase
 
     protected function getExpectedInterface()
     {
-        return 'WellCommerce\Bundle\AppBundle\Entity\ProductInterface';
+        return 'WellCommerce\Bundle\ProductBundle\Entity\ProductInterface';
     }
 }

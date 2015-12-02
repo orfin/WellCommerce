@@ -10,12 +10,12 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\EventListener;
+namespace WellCommerce\Bundle\ProductBundle\EventListener;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
-use WellCommerce\Bundle\AppBundle\Entity\ProductAttributeInterface;
-use WellCommerce\Bundle\AppBundle\Entity\ProductInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 use WellCommerce\Bundle\TaxBundle\Helper\TaxHelper;
 
 /**

@@ -10,10 +10,10 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Manager\Admin;
+namespace WellCommerce\Bundle\ProductBundle\Manager\Admin;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use WellCommerce\Bundle\AppBundle\Entity\ProductInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 use WellCommerce\Bundle\AppBundle\Repository\AttributeValueRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
 
@@ -57,11 +57,11 @@ class ProductAttributeManager extends AbstractAdminManager
      * @param int    $id
      * @param string $value
      *
-     * @return \WellCommerce\Bundle\AppBundle\Entity\ProductAttributeInterface
+     * @return \WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeInterface
      */
     protected function getProductAttribute($id, $value)
     {
-        /** @var $productAttribute \WellCommerce\Bundle\AppBundle\Entity\ProductAttributeInterface */
+        /** @var $productAttribute \WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeInterface */
         $productAttribute = $this->repository->find($id);
         if (null === $productAttribute) {
             $productAttribute = $this->initResource();

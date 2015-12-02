@@ -121,7 +121,7 @@ WellCommerce\Bundle\AppBundle\Entity\Product:
                         onDelete: CASCADE
                         referencedColumnName: id
         statuses:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\ProductStatus
+            targetEntity: WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatus
             fetch: LAZY
             inversedBy: products
             joinTable:
@@ -165,7 +165,7 @@ WellCommerce\Bundle\AppBundle\Entity\Product:
             mappedBy: product
             orphanRemoval: true
         attributes:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\ProductAttribute
+            targetEntity: WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute
             cascade:
                 - all
             fetch: LAZY

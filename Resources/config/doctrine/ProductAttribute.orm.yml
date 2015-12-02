@@ -1,4 +1,4 @@
-WellCommerce\Bundle\AppBundle\Entity\ProductAttribute:
+WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute:
     type: entity
     table: product_attribute
     repositoryClass: WellCommerce\Bundle\AppBundle\Repository\ProductAttributeRepository

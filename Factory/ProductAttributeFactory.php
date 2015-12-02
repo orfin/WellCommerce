@@ -10,9 +10,9 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Factory;
+namespace WellCommerce\Bundle\ProductBundle\Factory;
 
-use WellCommerce\Bundle\AppBundle\Entity\ProductAttribute;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute;
 use WellCommerce\Bundle\AppBundle\Entity\DiscountablePrice;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 
@@ -24,7 +24,7 @@ use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 class ProductAttributeFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\AppBundle\Entity\ProductAttributeInterface
+     * @return \WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeInterface
      */
     public function create()
     {
