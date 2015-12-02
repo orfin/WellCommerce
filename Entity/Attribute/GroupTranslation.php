@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Entity\Attribute;
+namespace WellCommerce\Bundle\AttributeBundle\Entity\Attribute;
 
 use Knp\DoctrineBehaviors\Model\Translatable\Translation;
 use WellCommerce\Bundle\LocaleBundle\Entity\LocaleAwareInterface;

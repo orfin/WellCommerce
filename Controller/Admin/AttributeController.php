@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Controller\Admin;
+namespace WellCommerce\Bundle\AttributeBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
@@ -23,7 +23,7 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 class AttributeController extends AbstractAdminController
 {
     /**
-     * @var \WellCommerce\Bundle\AppBundle\Manager\Admin\AttributeManager
+     * @var \WellCommerce\Bundle\AttributeBundle\Manager\Admin\AttributeManager
      */
     protected $manager;
 
