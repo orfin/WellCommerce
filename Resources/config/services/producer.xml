@@ -19,7 +19,7 @@
             <argument type="service" id="event_dispatcher" />
         </service>
 
-        <service id="producer.route.generator" class="WellCommerce\Bundle\AppBundle\Service\Routing\Generator\ProducerRouteGenerator">
+        <service id="producer.route.generator" class="WellCommerce\Bundle\AppBundle\Generator\ProducerRouteGenerator">
             <argument type="collection" key="defaults">
                 <argument key="_controller">producer.controller.front:indexAction</argument>
                 <argument key="limit">12</argument>
@@ -61,8 +61,8 @@
             <argument type="service" id="producer.repository" />
             <argument>id</argument>
             <argument type="collection">
-                <argument>WellCommerce\Bundle\AppBundle\Entity\Producer</argument>
-                <argument>WellCommerce\Bundle\AppBundle\Entity\ProducerInterface</argument>
+                <argument>WellCommerce\Bundle\ProducerBundle\Entity\Producer</argument>
+                <argument>WellCommerce\Bundle\ProducerBundle\Entity\ProducerInterface</argument>
             </argument>
             <tag name="request.param_converter" converter="producer" priority="0"/>
         </service>

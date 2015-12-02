@@ -10,10 +10,10 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Factory;
+namespace WellCommerce\Bundle\ProducerBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use WellCommerce\Bundle\AppBundle\Entity\Producer;
+use WellCommerce\Bundle\ProducerBundle\Entity\Producer;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 
 /**
@@ -24,7 +24,7 @@ use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 class ProducerFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\AppBundle\Entity\ProducerInterface
+     * @return \WellCommerce\Bundle\ProducerBundle\Entity\ProducerInterface
      */
     public function create()
     {

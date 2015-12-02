@@ -1,28 +1,27 @@
 <?php
 /*
  * WellCommerce Open-Source E-Commerce Platform
- * 
+ *
  * This file is part of the WellCommerce package.
  *
  * (c) Adam Piotrowski <adam@wellcommerce.org>
- * 
+ *
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\ProducerBundle\Tests\Repository;
+namespace WellCommerce\Bundle\ProducerBundle\DependencyInjection;
 
-use WellCommerce\Bundle\CoreBundle\Test\Repository\AbstractRepositoryTestCase;
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\Loader;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
 
 /**
- * Class ProducerRepositoryTest
+ * Class WellCommerceProducerExtension
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProducerRepositoryTest extends AbstractRepositoryTestCase
+class WellCommerceProducerExtension extends AbstractExtension
 {
-    protected function get()
-    {
-        return $this->container->get('producer.repository');
-    }
+
 }

@@ -1,4 +1,4 @@
-WellCommerce\Bundle\AppBundle\Entity\ProducerTranslation:
+WellCommerce\Bundle\ProducerBundle\Entity\ProducerTranslation:
     type: entity
     table: producer_translation
     embedded:
@@ -21,7 +21,7 @@ WellCommerce\Bundle\AppBundle\Entity\ProducerTranslation:
             unique: true
     oneToOne:
         route:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\ProducerRoute
+            targetEntity: WellCommerce\Bundle\ProducerBundle\Entity\ProducerRoute
             cascade:
                 - remove
                 - persist
