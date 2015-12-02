@@ -1,4 +1,4 @@
-WellCommerce\Bundle\AppBundle\Entity\ClientContactDetails:
+WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetails:
     type: embeddable
     fields:
         firstName:

@@ -10,18 +10,15 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\UserBundle\DependencyInjection;
+namespace WellCommerce\Bundle\ClientBundle;
 
-use Symfony\Component\Config\FileLocator;
-use Symfony\Component\DependencyInjection\Loader;
-use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
+use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * Class WellCommerceUserExtension
+ * Class WellCommerceClientBundle
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class WellCommerceUserExtension extends AbstractExtension
+class WellCommerceClientBundle extends Bundle
 {
-
 }

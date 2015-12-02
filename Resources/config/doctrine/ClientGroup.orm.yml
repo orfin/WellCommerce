@@ -1,7 +1,7 @@
-WellCommerce\Bundle\AppBundle\Entity\ClientGroup:
+WellCommerce\Bundle\ClientBundle\Entity\ClientGroup:
     type: entity
     table: client_group
-    repositoryClass: WellCommerce\Bundle\AppBundle\Repository\ClientGroupRepository
+    repositoryClass: WellCommerce\Bundle\ClientBundle\Repository\ClientGroupRepository
     id:
         id:
             type: integer
@@ -23,7 +23,7 @@ WellCommerce\Bundle\AppBundle\Entity\ClientGroup:
             precision: 15
     oneToMany:
         clients:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Client
+            targetEntity: WellCommerce\Bundle\ClientBundle\Entity\Client
             cascade: {  }
             fetch: LAZY
             mappedBy: clientGroup
@@ -32,11 +32,6 @@ WellCommerce\Bundle\AppBundle\Entity\ClientGroup:
             orderBy: null
     manyToMany:
         pages:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Page
-            cascade: {  }
+            targetEntity: WellCommerce\Bundle\PageBundle\Entity\Page
             fetch: LAZY
             mappedBy: clientGroups
-            inversedBy: null
-            joinTable: {  }
-            orderBy: null
-    lifecycleCallbacks: {  }
