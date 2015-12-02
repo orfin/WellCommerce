@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\AppBundle\Factory;
 
-use WellCommerce\Bundle\AppBundle\Helper\CurrencyHelperInterface;
+use WellCommerce\Bundle\CurrencyBundle\Helper\CurrencyHelperInterface;
 use WellCommerce\Bundle\AppBundle\Entity\Price;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 use WellCommerce\Bundle\AppBundle\Entity\CartProductInterface;

@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\AppBundle\Collector;
 
-use WellCommerce\Bundle\AppBundle\Helper\CurrencyHelperInterface;
+use WellCommerce\Bundle\CurrencyBundle\Helper\CurrencyHelperInterface;
 use WellCommerce\Bundle\AppBundle\Factory\OrderTotalDetailFactory;
 
 /**
