@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\AppBundle\Entity;
 
-use WellCommerce\Bundle\AppBundle\Entity\Route;
-use WellCommerce\Bundle\AppBundle\Entity\RouteInterface;
+use WellCommerce\Bundle\RoutingBundle\Entity\Route;
+use WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface;
 
 /**
  * Class PageRoute

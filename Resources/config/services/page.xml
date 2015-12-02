@@ -13,7 +13,7 @@
             <argument>WellCommerceAppBundle:Page</argument>
         </service>
 
-        <service id="page.route.generator" class="WellCommerce\Bundle\AppBundle\Service\Routing\Generator\PageRouteGenerator">
+        <service id="page.route.generator" class="WellCommerce\Bundle\AppBundle\Generator\PageRouteGenerator">
             <argument type="collection" key="defaults">
                 <argument key="_controller">page.controller.front:indexAction</argument>
             </argument>
