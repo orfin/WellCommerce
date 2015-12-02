@@ -10,9 +10,9 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Factory;
+namespace WellCommerce\Bundle\RoutingBundle\Factory;
 
-use WellCommerce\Bundle\AppBundle\Entity\Route;
+use WellCommerce\Bundle\RoutingBundle\Entity\Route;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 use WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface;
 
@@ -24,7 +24,7 @@ use WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface;
 class RouteFactory extends AbstractFactory implements FactoryInterface
 {
     /**
-     * @return \WellCommerce\Bundle\AppBundle\Entity\RouteInterface
+     * @return \WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface
      */
     public function create()
     {

@@ -10,19 +10,15 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Service\Routing\Generator;
+namespace WellCommerce\Bundle\RoutingBundle;
+
+use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * Class ProducerRouteGenerator
+ * Class WellCommerceRoutingBundle
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProducerRouteGenerator extends AbstractRouteGenerator
+class WellCommerceRoutingBundle extends Bundle
 {
-    const GENERATOR_STRATEGY = 'producer';
-
-    public function supports($strategy)
-    {
-        return self::GENERATOR_STRATEGY === $strategy;
-    }
 }

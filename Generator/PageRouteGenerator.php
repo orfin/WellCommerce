@@ -9,22 +9,20 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Bundle\RoutingBundle\DataGrid;
 
-use WellCommerce\Bundle\CoreBundle\DataGrid\AbstractDataGrid;
-use WellCommerce\Component\DataGrid\Column\ColumnCollection;
+namespace WellCommerce\Bundle\RoutingBundle\Generator;
 
 /**
- * Class RoutingDataGrid
+ * Class PageRouteGenerator
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class RoutingDataGrid extends AbstractDataGrid
+class PageRouteGenerator extends AbstractRouteGenerator
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function configureColumns(ColumnCollection $collection)
+    const GENERATOR_STRATEGY = 'page';
+
+    public function supports($strategy)
     {
+        return self::GENERATOR_STRATEGY === $strategy;
     }
 }

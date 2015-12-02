@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Service\Routing\Generator;
+namespace WellCommerce\Bundle\RoutingBundle\Generator;
 
 /**
  * Class ProductStatusRouteGenerator

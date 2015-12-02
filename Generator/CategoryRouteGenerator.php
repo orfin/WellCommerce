@@ -10,10 +10,10 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Service\Routing\Generator;
+namespace WellCommerce\Bundle\RoutingBundle\Generator;
 
 use Symfony\Component\Routing\Route as SymfonyRoute;
-use WellCommerce\Bundle\AppBundle\Entity\RouteInterface;
+use WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface;
 
 /**
  * Class CategoryRouteGenerator

@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Command;
+namespace WellCommerce\Bundle\RoutingBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Helper\ProgressBar;
@@ -26,7 +26,7 @@ use Symfony\Component\Yaml\Dumper;
 class DumpDynamicRoutesCommand extends ContainerAwareCommand
 {
     /**
-     * @var \WellCommerce\Bundle\AppBundle\Generator\RouteGeneratorCollection
+     * @var \WellCommerce\Bundle\RoutingBundle\Generator\RouteGeneratorCollection
      */
     protected $generators;
 

@@ -10,16 +10,16 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Provider;
+namespace WellCommerce\Bundle\RoutingBundle\Provider;
 
 use Symfony\Cmf\Component\Routing\RouteProviderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Route as SymfonyRoute;
 use Symfony\Component\Routing\RouteCollection;
-use WellCommerce\Bundle\AppBundle\Entity\RouteInterface;
-use WellCommerce\Bundle\CoreBundle\Service\Routing\Generator\RouteGeneratorCollection;
-use WellCommerce\Bundle\CoreBundle\Service\Routing\Generator\RouteGeneratorInterface;
+use WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface;
+use WellCommerce\Bundle\CoreBundle\Generator\RouteGeneratorCollection;
+use WellCommerce\Bundle\CoreBundle\Generator\RouteGeneratorInterface;
 use WellCommerce\Bundle\AppBundle\Repository\RouteRepositoryInterface;
 
 /**
