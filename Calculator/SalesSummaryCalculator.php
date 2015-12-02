@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Calculator;
+namespace WellCommerce\Bundle\ShippingBundle\Calculator;
 
 use DateTime;
 use Doctrine\Common\Collections\Collection;

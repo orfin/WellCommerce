@@ -1,6 +1,6 @@
 <?php
 
-namespace WellCommerce\Bundle\AppBundle\Entity;
+namespace WellCommerce\Bundle\ShippingBundle\Entity;
 
 use WellCommerce\Bundle\AppBundle\Doctrine\ORM\Behaviours\Timestampable\TimestampableTrait;
 use WellCommerce\Bundle\AppBundle\Entity\Price;

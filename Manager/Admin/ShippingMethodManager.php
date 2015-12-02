@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Manager\Admin;
+namespace WellCommerce\Bundle\ShippingBundle\Manager\Admin;
 
 use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
 

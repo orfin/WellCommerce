@@ -10,15 +10,15 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Form\DataTransformer;
+namespace WellCommerce\Bundle\ShippingBundle\Form\DataTransformer;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\PersistentCollection;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 use WellCommerce\Bundle\AppBundle\Entity\Price;
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
-use WellCommerce\Bundle\AppBundle\Entity\ShippingMethod;
-use WellCommerce\Bundle\AppBundle\Entity\ShippingMethodCost;
+use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethod;
+use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCost;
 
 /**
  * Class ShippingCostCollectionToArrayTransformer

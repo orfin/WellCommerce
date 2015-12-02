@@ -10,12 +10,12 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\EventListener;
+namespace WellCommerce\Bundle\ShippingBundle\EventListener;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 use WellCommerce\Bundle\TaxBundle\Helper\TaxHelper;
-use WellCommerce\Bundle\AppBundle\Entity\ShippingMethodCostInterface;
+use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCostInterface;
 
 /**
  * Class ShippingMethodCostEventSubscriber

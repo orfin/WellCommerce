@@ -10,12 +10,12 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Provider;
+namespace WellCommerce\Bundle\ShippingBundle\Provider;
 
 use WellCommerce\Bundle\AppBundle\Calculator\ShippingCalculatorSubjectInterface;
 use WellCommerce\Bundle\AppBundle\Entity\PaymentMethodInterface;
-use WellCommerce\Bundle\AppBundle\Entity\ShippingMethodCost;
-use WellCommerce\Bundle\AppBundle\Entity\ShippingMethodCostInterface;
+use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCost;
+use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCostInterface;
 
 /**
  * Class ShippingMethodProvider

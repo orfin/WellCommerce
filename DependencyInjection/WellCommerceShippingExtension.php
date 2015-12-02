@@ -10,16 +10,18 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\ShippingBundle\Controller\Admin;
+namespace WellCommerce\Bundle\ShippingBundle\DependencyInjection;
 
-use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\Loader;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
 
 /**
- * Class ShippingMethodController
+ * Class WellCommerceShippingExtension
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ShippingMethodController extends AbstractAdminController
+class WellCommerceShippingExtension extends AbstractExtension
 {
 
 }

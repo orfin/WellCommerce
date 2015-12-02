@@ -10,10 +10,10 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Calculator;
+namespace WellCommerce\Bundle\ShippingBundle\Calculator;
 
-use WellCommerce\Bundle\AppBundle\Entity\ShippingCostSubjectInterface;
-use WellCommerce\Bundle\AppBundle\Entity\ShippingMethodInterface;
+use WellCommerce\Bundle\ShippingBundle\Entity\ShippingCostSubjectInterface;
+use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface;
 
 /**
  * Class WeightTableCalculator
