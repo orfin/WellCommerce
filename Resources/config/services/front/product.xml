@@ -4,7 +4,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="product.manager.front" class="WellCommerce\Bundle\AppBundle\Manager\Front\ProductManager">
+        <service id="product.manager.front" class="WellCommerce\Bundle\ProductBundle\Manager\Front\ProductManager">
             <argument type="service" id="product.repository"/>
             <argument type="service" id="product.event_dispatcher"/>
             <argument type="service" id="product.factory"/>
@@ -13,7 +13,7 @@
             </call>
         </service>
 
-        <service id="product_layered_navigation.manager.front" class="WellCommerce\Bundle\AppBundle\Manager\Front\ProductLayeredNavigationManager">
+        <service id="product_layered_navigation.manager.front" class="WellCommerce\Bundle\ProductBundle\Manager\Front\ProductLayeredNavigationManager">
             <argument type="service" id="product.repository"/>
             <argument type="service" id="product.event_dispatcher"/>
             <argument type="service" id="product.factory"/>
@@ -22,51 +22,51 @@
             </call>
         </service>
 
-        <service id="product_layered_navigation.helper" class="WellCommerce\Bundle\AppBundle\Helper\ProductLayeredNavigationHelper">
+        <service id="product_layered_navigation.helper" class="WellCommerce\Bundle\ProductBundle\Helper\ProductLayeredNavigationHelper">
             <argument type="service" id="producer.repository"/>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
         </service>
         
-        <service id="product.controller.front" class="WellCommerce\Bundle\AppBundle\Controller\Front\ProductController">
+        <service id="product.controller.front" class="WellCommerce\Bundle\ProductBundle\Controller\Front\ProductController">
             <argument type="service" id="product.manager.front"/>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
         </service>
 
-        <service id="product_layered_navigation.controller.front" class="WellCommerce\Bundle\AppBundle\Controller\Front\ProductLayeredNavigationController">
+        <service id="product_layered_navigation.controller.front" class="WellCommerce\Bundle\ProductBundle\Controller\Front\ProductLayeredNavigationController">
             <argument type="service" id="product_layered_navigation.manager.front"/>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
         </service>
 
-        <service id="product.dataset.query_builder.front" class="WellCommerce\Bundle\AppBundle\DataSet\Front\ProductDataSetQueryBuilder" public="false">
+        <service id="product.dataset.query_builder.front" class="WellCommerce\Bundle\ProductBundle\DataSet\Front\ProductDataSetQueryBuilder" public="false">
             <argument type="service" id="product.repository"/>
             <call method="setRequestHelper">
                 <argument type="service" id="request.helper"/>
             </call>
         </service>
 
-        <service id="product.dataset.front" class="WellCommerce\Bundle\AppBundle\DataSet\Front\ProductDataSet">
+        <service id="product.dataset.front" class="WellCommerce\Bundle\ProductBundle\DataSet\Front\ProductDataSet">
             <argument type="service" id="product.dataset.query_builder.front"/>
             <argument type="service" id="dataset.manager"/>
             <argument type="service" id="product.event_dispatcher"/>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
-        <service id="product.context.front" class="WellCommerce\Bundle\AppBundle\Context\Front\ProductContext"/>
+        <service id="product.context.front" class="WellCommerce\Bundle\ProductBundle\Context\Front\ProductContext"/>
 
-        <service id="product_info.layout_box.controller" class="WellCommerce\Bundle\AppBundle\Controller\Box\ProductInfoBoxController">
+        <service id="product_info.layout_box.controller" class="WellCommerce\Bundle\ProductBundle\Controller\Box\ProductInfoBoxController">
             <argument type="service" id="product.manager.front"/>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
         </service>
 
-        <service id="layered_navigation.layout_box.controller" class="WellCommerce\Bundle\AppBundle\Controller\Box\ProductLayeredNavigationBoxController">
+        <service id="layered_navigation.layout_box.controller" class="WellCommerce\Bundle\ProductBundle\Controller\Box\ProductLayeredNavigationBoxController">
             <argument type="service" id="product.manager.front"/>
             <call method="setContainer">
                 <argument type="service" id="service_container" />

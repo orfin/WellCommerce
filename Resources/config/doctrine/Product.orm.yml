@@ -52,7 +52,7 @@ WellCommerce\Bundle\AppBundle\Entity\Product:
                 default: 0
     manyToOne:
         producer:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Producer
+            targetEntity: WellCommerce\Bundle\ProducerBundle\Entity\Producer
             fetch: LAZY
             inversedBy: products
             joinColumns:
@@ -60,7 +60,7 @@ WellCommerce\Bundle\AppBundle\Entity\Product:
                     referencedColumnName: id
                     onDelete: 'SET NULL'
         unit:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Unit
+            targetEntity: WellCommerce\Bundle\UnitBundle\Entity\Unit
             fetch: LAZY
             joinColumns:
                 unit_id:

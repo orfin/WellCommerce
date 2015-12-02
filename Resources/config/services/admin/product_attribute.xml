@@ -4,7 +4,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="product_attribute.manager.admin" class="WellCommerce\Bundle\AppBundle\Manager\Admin\ProductAttributeManager">
+        <service id="product_attribute.manager.admin" class="WellCommerce\Bundle\ProductBundle\Manager\Admin\ProductAttributeManager">
             <argument type="service" id="product_attribute.repository"/>
             <argument type="service" id="product_attribute.event_dispatcher"/>
             <argument type="service" id="product_attribute.factory"/>
