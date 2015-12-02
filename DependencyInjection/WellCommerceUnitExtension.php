@@ -10,15 +10,18 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AvailabilityBundle\Manager\Admin;
+namespace WellCommerce\Bundle\UnitBundle\DependencyInjection;
 
-use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\Loader;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
 
 /**
- * Class AvailabilityManager
+ * Class WellCommerceUnitExtension
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AvailabilityManager extends AbstractAdminManager
+class WellCommerceUnitExtension extends AbstractExtension
 {
+
 }
