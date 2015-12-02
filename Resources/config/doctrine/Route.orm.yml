@@ -11,7 +11,7 @@ WellCommerce\Bundle\AppBundle\Entity\Route:
     discriminatorMap:
         route: WellCommerce\Bundle\AppBundle\Entity\Route
         product: WellCommerce\Bundle\AppBundle\Entity\ProductRoute
-        product_status: WellCommerce\Bundle\AppBundle\Entity\ProductStatusRoute
+        product_status: WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusRoute
         producer: WellCommerce\Bundle\AppBundle\Entity\ProducerRoute
         category: WellCommerce\Bundle\AppBundle\Entity\CategoryRoute
         page: WellCommerce\Bundle\AppBundle\Entity\PageRoute
