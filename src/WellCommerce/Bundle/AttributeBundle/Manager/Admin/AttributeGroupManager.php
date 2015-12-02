@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Manager\Admin;
+namespace WellCommerce\Bundle\AttributeBundle\Manager\Admin;
 
 use Doctrine\Common\Collections\Criteria;
 use WellCommerce\Bundle\AppBundle\Entity\Attribute\GroupInterface;

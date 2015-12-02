@@ -87,7 +87,7 @@ WellCommerce\Bundle\AppBundle\Entity\Order:
                     referencedColumnName: id
                     onDelete: RESTRICT
         shippingMethod:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\ShippingMethod
+            targetEntity: WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethod
             fetch: LAZY
             joinColumns:
                 shipping_method_id:

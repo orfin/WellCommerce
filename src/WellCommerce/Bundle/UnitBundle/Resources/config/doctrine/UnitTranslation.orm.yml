@@ -1,4 +1,4 @@
-WellCommerce\Bundle\AppBundle\Entity\UnitTranslation:
+WellCommerce\Bundle\UnitBundle\Entity\UnitTranslation:
     type: entity
     table: unit_translation
     fields:

@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Controller\Box;
+namespace WellCommerce\Bundle\ProducerBundle\Controller\Box;
 
 use WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxSettingsCollection;
 use WellCommerce\Bundle\AppBundle\Conditions\ProductLayeredNavigationConditions;

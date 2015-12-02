@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Tests\Manager\Admin;
+namespace WellCommerce\Bundle\DelivererBundle\Tests\Manager\Admin;
 
 use WellCommerce\Bundle\CoreBundle\Test\Manager\Admin\AbstractAdminManagerTestCase;
 

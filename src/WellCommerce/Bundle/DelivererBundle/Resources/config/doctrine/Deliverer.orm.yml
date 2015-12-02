@@ -9,6 +9,6 @@ WellCommerce\Bundle\AppBundle\Entity\Deliverer:
                 strategy: AUTO
     manyToMany:
         producers:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Producer
+            targetEntity: WellCommerce\Bundle\ProducerBundle\Entity\Producer
             fetch: LAZY
             mappedBy: deliverers

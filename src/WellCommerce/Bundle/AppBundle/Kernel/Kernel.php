@@ -42,17 +42,22 @@ class Kernel extends BaseKernel
             new \Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
             new \Ivory\LuceneSearchBundle\IvoryLuceneSearchBundle(),
 
+            new \WellCommerce\Bundle\AppBundle\WellCommerceAppBundle(),
+            new \WellCommerce\Bundle\AttributeBundle\WellCommerceAttributeBundle(),
+            new \WellCommerce\Bundle\ClientBundle\WellCommerceClientBundle(),
             new \WellCommerce\Bundle\CoreBundle\WellCommerceCoreBundle(),
             new \WellCommerce\Bundle\UserBundle\WellCommerceUserBundle(),
-            new \WellCommerce\Bundle\ClientBundle\WellCommerceClientBundle(),
-            new \WellCommerce\Bundle\AppBundle\WellCommerceAppBundle(),
             new \WellCommerce\Bundle\CurrencyBundle\WellCommerceCurrencyBundle(),
             new \WellCommerce\Bundle\LocaleBundle\WellCommerceLocaleBundle(),
             new \WellCommerce\Bundle\CompanyBundle\WellCommerceCompanyBundle(),
             new \WellCommerce\Bundle\ShopBundle\WellCommerceShopBundle(),
             new \WellCommerce\Bundle\LayoutBundle\WellCommerceLayoutBundle(),
             new \WellCommerce\Bundle\ThemeBundle\WellCommerceThemeBundle(),
-            new \WellCommerce\Bundle\ProductStatusBundle\WellCommerceProductStatusBundle()
+            new \WellCommerce\Bundle\ProducerBundle\WellCommerceProducerBundle(),
+            new \WellCommerce\Bundle\ProductBundle\WellCommerceProductBundle(),
+            new \WellCommerce\Bundle\ProductStatusBundle\WellCommerceProductStatusBundle(),
+            new \WellCommerce\Bundle\ShippingBundle\WellCommerceShippingBundle(),
+            new \WellCommerce\Bundle\UnitBundle\WellCommerceUnitBundle()
 
         ];
 

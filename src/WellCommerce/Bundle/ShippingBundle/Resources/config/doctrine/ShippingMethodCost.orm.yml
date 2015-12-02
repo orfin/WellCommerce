@@ -1,4 +1,4 @@
-WellCommerce\Bundle\AppBundle\Entity\ShippingMethodCost:
+WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCost:
     type: entity
     table: shipping_method_cost
     repositoryClass: WellCommerce\Bundle\AppBundle\Repository\ShippingMethodCostRepository
@@ -26,7 +26,7 @@ WellCommerce\Bundle\AppBundle\Entity\ShippingMethodCost:
             column: range_to
     manyToOne:
         shippingMethod:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\ShippingMethod
+            targetEntity: WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethod
             fetch: LAZY
             inversedBy: costs
             joinColumns:

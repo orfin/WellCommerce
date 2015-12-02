@@ -16,7 +16,10 @@ use Doctrine\Common\Collections\Collection;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
-use WellCommerce\Bundle\AppBundle\Entity\Attribute\GroupInterface;
+use WellCommerce\Bundle\AttributeBundle\Entity\Attribute\GroupInterface;
+use WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityAwareTrait;
+use WellCommerce\Bundle\CategoryBundle\Entity\CategoryInterface;
+use WellCommerce\Bundle\ProducerBundle\Entity\ProducerAwareTrait;
 use WellCommerce\Bundle\ShopBundle\Entity\ShopCollectionAwareTrait;
 use WellCommerce\Bundle\TaxBundle\Entity\TaxInterface;
 use WellCommerce\Bundle\AppBundle\Doctrine\ORM\Behaviours\EnableableTrait;
@@ -25,6 +28,7 @@ use WellCommerce\Bundle\AppBundle\Entity\Dimension;
 use WellCommerce\Bundle\AppBundle\Entity\DiscountablePrice;
 use WellCommerce\Bundle\AppBundle\Entity\HierarchyAwareTrait;
 use WellCommerce\Bundle\AppBundle\Entity\Price;
+use WellCommerce\Bundle\UnitBundle\Entity\UnitAwareTrait;
 
 /**
  * Class Product

@@ -19,6 +19,21 @@ wellcommerce_client:
 wellcommerce_user:
     resource: "@WellCommerceUserBundle/Resources/config/routing.xml"
 
+wellcommerce_producer:
+    resource: "@WellCommerceProducerBundle/Resources/config/routing.xml"
+
+wellcommerce_product:
+    resource: "@WellCommerceProductBundle/Resources/config/routing.xml"
+
+wellcommerce_product_status:
+    resource: "@WellCommerceProductStatusBundle/Resources/config/routing.xml"
+
+wellcommerce_shipping:
+    resource: "@WellCommerceShippingBundle/Resources/config/routing.xml"
+
+wellcommerce_unit:
+    resource: "@WellCommerceUnitBundle/Resources/config/routing.xml"
+
 root:
     path: /admin
     defaults:

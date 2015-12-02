@@ -10,13 +10,13 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Provider;
+namespace WellCommerce\Bundle\ShippingBundle\Provider;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\Bundle\AppBundle\Calculator\ShippingCalculatorSubjectInterface;
 use WellCommerce\Bundle\AppBundle\Calculator\ShippingMethodCalculatorCollection;
-use WellCommerce\Bundle\AppBundle\Entity\ShippingMethodCostInterface;
-use WellCommerce\Bundle\AppBundle\Entity\ShippingMethodInterface;
+use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCostInterface;
+use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface;
 use WellCommerce\Bundle\AppBundle\Exception\CalculatorNotFoundException;
 use WellCommerce\Bundle\AppBundle\Repository\ShippingMethodRepositoryInterface;
 

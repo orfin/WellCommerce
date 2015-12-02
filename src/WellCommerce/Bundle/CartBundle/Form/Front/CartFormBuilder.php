@@ -9,7 +9,7 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Bundle\AppBundle\Form\Front;
+namespace WellCommerce\Bundle\CartBundle\Form\Front;
 
 use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
 use WellCommerce\Component\Form\Elements\FormInterface;
@@ -17,7 +17,7 @@ use WellCommerce\Component\Form\Elements\Optioned\RadioGroup;
 use WellCommerce\Bundle\AppBundle\Context\Front\CartContextInterface;
 use WellCommerce\Bundle\AppBundle\Entity\CartInterface;
 use WellCommerce\Bundle\AppBundle\Entity\PaymentMethodInterface;
-use WellCommerce\Bundle\AppBundle\Entity\ShippingMethodCostInterface;
+use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCostInterface;
 use WellCommerce\Bundle\AppBundle\Provider\CartShippingMethodProviderInterface;
 use WellCommerce\Bundle\AppBundle\Provider\ShippingMethodProviderInterface;
 

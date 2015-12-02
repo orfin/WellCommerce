@@ -10,12 +10,12 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\EventListener;
+namespace WellCommerce\Bundle\RoutingBundle\EventListener;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Events;
-use WellCommerce\Bundle\AppBundle\Entity\RoutableSubjectInterface;
+use WellCommerce\Bundle\RoutingBundle\Entity\RoutableSubjectInterface;
 
 /**
  * Class RoutableSubscriber
@@ -43,7 +43,7 @@ class RoutableSubscriber implements EventSubscriber
      *
      * @param RoutableSubjectInterface $entity
      *
-     * @return \WellCommerce\Bundle\AppBundle\Entity\RouteInterface
+     * @return \WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface
      */
     protected function addRoute(RoutableSubjectInterface $entity)
     {

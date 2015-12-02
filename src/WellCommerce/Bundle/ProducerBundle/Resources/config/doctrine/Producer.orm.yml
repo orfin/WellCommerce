@@ -1,4 +1,4 @@
-WellCommerce\Bundle\AppBundle\Entity\Producer:
+WellCommerce\Bundle\ProducerBundle\Entity\Producer:
     type: entity
     table: producer
     repositoryClass: WellCommerce\Bundle\AppBundle\Repository\ProducerRepository

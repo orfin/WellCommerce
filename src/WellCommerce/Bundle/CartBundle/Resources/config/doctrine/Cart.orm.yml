@@ -62,7 +62,7 @@ WellCommerce\Bundle\AppBundle\Entity\Cart:
                     referencedColumnName: id
                     onDelete: CASCADE
         shippingMethodCost:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\ShippingMethodCost
+            targetEntity: WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCost
             fetch: LAZY
             joinColumns:
                 shipping_method_cost_id:

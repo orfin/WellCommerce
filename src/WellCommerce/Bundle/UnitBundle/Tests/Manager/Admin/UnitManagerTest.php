@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Tests\Manager\Admin;
+namespace WellCommerce\Bundle\UnitBundle\Tests\Manager\Admin;
 
 use WellCommerce\Bundle\CoreBundle\Test\Manager\Admin\AbstractAdminManagerTestCase;
 
@@ -43,6 +43,6 @@ class UnitManagerTest extends AbstractAdminManagerTestCase
 
     protected function getRepositoryInterfaceName()
     {
-        return 'WellCommerce\Bundle\AppBundle\Repository\UnitRepositoryInterface';
+        return 'WellCommerce\Bundle\UnitBundle\Repository\UnitRepositoryInterface';
     }
 }

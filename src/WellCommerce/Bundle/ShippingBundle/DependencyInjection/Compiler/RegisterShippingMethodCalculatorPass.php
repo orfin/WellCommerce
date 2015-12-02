@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\DependencyInjection\Compiler;
+namespace WellCommerce\Bundle\ShippingBundle\DependencyInjection\Compiler;
 
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\Compiler\AbstractCollectionPass;
 

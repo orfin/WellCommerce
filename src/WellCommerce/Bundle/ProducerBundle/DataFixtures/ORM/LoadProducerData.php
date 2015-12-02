@@ -10,10 +10,10 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\DataFixtures\ORM;
+namespace WellCommerce\Bundle\ProducerBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use WellCommerce\Bundle\AppBundle\Entity\Producer;
+use WellCommerce\Bundle\ProducerBundle\Entity\Producer;
 use WellCommerce\Bundle\CoreBundle\Helper\Sluggable;
 use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
 

@@ -4,7 +4,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="product.manager.admin" class="WellCommerce\Bundle\AppBundle\Manager\Admin\ProductManager">
+        <service id="product.manager.admin" class="WellCommerce\Bundle\ProductBundle\Manager\Admin\ProductManager">
             <argument type="service" id="product.repository"/>
             <argument type="service" id="product.event_dispatcher"/>
             <argument type="service" id="product.factory"/>
@@ -15,28 +15,28 @@
             </call>
         </service>
 
-        <service id="product.controller.admin" class="WellCommerce\Bundle\AppBundle\Controller\Admin\ProductController">
+        <service id="product.controller.admin" class="WellCommerce\Bundle\ProductBundle\Controller\Admin\ProductController">
             <argument type="service" id="product.manager.admin"/>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
         </service>
 
-        <service id="product.dataset.query_builder.admin" class="WellCommerce\Bundle\AppBundle\DataSet\Admin\ProductDataSetQueryBuilder" public="false">
+        <service id="product.dataset.query_builder.admin" class="WellCommerce\Bundle\ProductBundle\DataSet\Admin\ProductDataSetQueryBuilder" public="false">
             <argument type="service" id="product.repository"/>
             <call method="setShopContext">
                 <argument type="service" id="shop.context.admin"/>
             </call>
         </service>
 
-        <service id="product.dataset.admin" class="WellCommerce\Bundle\AppBundle\DataSet\Admin\ProductDataSet">
+        <service id="product.dataset.admin" class="WellCommerce\Bundle\ProductBundle\DataSet\Admin\ProductDataSet">
             <argument type="service" id="product.dataset.query_builder.admin"/>
             <argument type="service" id="dataset.manager"/>
             <argument type="service" id="product.event_dispatcher"/>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
-        <service id="product.datagrid" class="WellCommerce\Bundle\AppBundle\DataGrid\ProductDataGrid">
+        <service id="product.datagrid" class="WellCommerce\Bundle\ProductBundle\DataGrid\ProductDataGrid">
             <argument key="identifier">product</argument>
             <argument type="service" id="product.dataset.admin"/>
             <argument type="service" id="product.event_dispatcher"/>
@@ -45,7 +45,7 @@
             </call>
         </service>
 
-        <service id="product.form_builder.admin" class="WellCommerce\Bundle\AppBundle\Form\Admin\ProductFormBuilder">
+        <service id="product.form_builder.admin" class="WellCommerce\Bundle\ProductBundle\Form\Admin\ProductFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
             <argument type="service" id="product.event_dispatcher"/>

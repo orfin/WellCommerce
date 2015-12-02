@@ -10,19 +10,18 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Service\Routing\Generator;
+namespace WellCommerce\Bundle\ProducerBundle\DependencyInjection;
+
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\Loader;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
 
 /**
- * Class ProductRouteGenerator
+ * Class WellCommerceProducerExtension
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductRouteGenerator extends AbstractRouteGenerator
+class WellCommerceProducerExtension extends AbstractExtension
 {
-    const GENERATOR_STRATEGY = 'product';
 
-    public function supports($strategy)
-    {
-        return self::GENERATOR_STRATEGY === $strategy;
-    }
 }

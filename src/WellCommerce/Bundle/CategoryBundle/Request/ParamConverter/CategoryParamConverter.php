@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Request\ParamConverter;
+namespace WellCommerce\Bundle\CategoryBundle\Request\ParamConverter;
 
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Request\ParamConverter\AbstractEntityParamConverter;

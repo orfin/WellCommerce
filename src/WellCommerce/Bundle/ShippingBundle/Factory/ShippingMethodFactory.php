@@ -10,11 +10,11 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Factory;
+namespace WellCommerce\Bundle\ShippingBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
-use WellCommerce\Bundle\AppBundle\Entity\ShippingMethod;
+use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethod;
 
 /**
  * Class ShippingMethodFactory
@@ -24,7 +24,7 @@ use WellCommerce\Bundle\AppBundle\Entity\ShippingMethod;
 class ShippingMethodFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\AppBundle\Entity\ShippingMethodInterface
+     * @return \WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface
      */
     public function create()
     {

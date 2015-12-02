@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\DataSet\Front;
+namespace WellCommerce\Bundle\CategoryBundle\DataSet\Front;
 
 use WellCommerce\Bundle\AppBundle\DataSet\Admin\CategoryDataSet as BaseDataSet;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;

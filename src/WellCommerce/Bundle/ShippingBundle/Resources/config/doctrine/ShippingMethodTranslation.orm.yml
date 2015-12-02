@@ -1,4 +1,4 @@
-WellCommerce\Bundle\AppBundle\Entity\ShippingMethodTranslation:
+WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodTranslation:
     type: entity
     table: shipping_method_translation
     fields:

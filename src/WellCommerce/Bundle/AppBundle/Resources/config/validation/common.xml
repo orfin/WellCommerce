@@ -35,7 +35,7 @@
         </constraint>
     </class>
 
-    <class name="WellCommerce\Bundle\AppBundle\Entity\Route">
+    <class name="WellCommerce\Bundle\RoutingBundle\Entity\Route">
         <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
             <option name="fields">path</option>
         </constraint>

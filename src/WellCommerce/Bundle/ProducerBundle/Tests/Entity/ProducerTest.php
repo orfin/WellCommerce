@@ -10,9 +10,9 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Tests\Entity;
+namespace WellCommerce\Bundle\ProducerBundle\Tests\Entity;
 
-use WellCommerce\Bundle\AppBundle\Entity\Producer;
+use WellCommerce\Bundle\ProducerBundle\Entity\Producer;
 use WellCommerce\Bundle\CoreBundle\Test\Entity\AbstractEntityTestCase;
 
 /**

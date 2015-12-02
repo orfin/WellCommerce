@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\AppBundle\Entity\Behaviours;
 
-use WellCommerce\Bundle\AppBundle\Entity\RouteInterface;
+use WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface;
 
 /**
  * Class RoutableTrait

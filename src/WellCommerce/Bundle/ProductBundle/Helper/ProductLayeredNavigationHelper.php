@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\ProductBundle\Helper;
 
 use Doctrine\Common\Collections\Criteria;
-use WellCommerce\Bundle\AppBundle\Entity\ProducerInterface;
+use WellCommerce\Bundle\ProducerBundle\Entity\ProducerInterface;
 use WellCommerce\Bundle\AppBundle\Repository\ProducerRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
 use WellCommerce\Component\DataSet\Conditions\Condition\Gte;

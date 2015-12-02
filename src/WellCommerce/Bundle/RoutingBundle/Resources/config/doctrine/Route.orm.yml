@@ -1,4 +1,4 @@
-WellCommerce\Bundle\AppBundle\Entity\Route:
+WellCommerce\Bundle\RoutingBundle\Entity\Route:
     type: entity
     table: route
     inheritanceType: JOINED
@@ -9,10 +9,10 @@ WellCommerce\Bundle\AppBundle\Entity\Route:
         columnDefinition: null
         fieldName: type
     discriminatorMap:
-        route: WellCommerce\Bundle\AppBundle\Entity\Route
+        route: WellCommerce\Bundle\RoutingBundle\Entity\Route
         product: WellCommerce\Bundle\AppBundle\Entity\ProductRoute
         product_status: WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusRoute
-        producer: WellCommerce\Bundle\AppBundle\Entity\ProducerRoute
+        producer: WellCommerce\Bundle\ProducerBundle\Entity\ProducerRoute
         category: WellCommerce\Bundle\AppBundle\Entity\CategoryRoute
         page: WellCommerce\Bundle\AppBundle\Entity\PageRoute
     repositoryClass: WellCommerce\Bundle\AppBundle\Repository\RouteRepository

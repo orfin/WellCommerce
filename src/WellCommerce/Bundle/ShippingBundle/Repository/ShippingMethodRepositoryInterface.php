@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Repository;
+namespace WellCommerce\Bundle\ShippingBundle\Repository;
 
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
@@ -24,12 +24,12 @@ interface ShippingMethodRepositoryInterface extends RepositoryInterface
     /**
      * Returns default shipping method
      *
-     * @return null|\WellCommerce\Bundle\AppBundle\Entity\ShippingMethodInterface
+     * @return null|\WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface
      */
     public function getDefaultShippingMethod();
 
     /**
-     * @return array|\WellCommerce\Bundle\AppBundle\Entity\ShippingMethodInterface[]
+     * @return array|\WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface[]
      */
     public function findAllEnabledShippingMethods();
 }

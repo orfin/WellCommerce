@@ -10,10 +10,10 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CoreBundle\Service\Routing\Generator;
+namespace WellCommerce\Bundle\CoreBundle\Generator;
 
-use WellCommerce\Bundle\AppBundle\Entity\RoutableSubjectInterface;
-use WellCommerce\Bundle\AppBundle\Entity\RouteInterface;
+use WellCommerce\Bundle\RoutingBundle\Entity\RoutableSubjectInterface;
+use WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface;
 
 /**
  * Interface RouteGeneratorInterface

@@ -4,7 +4,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="shipping_method.manager.admin" class="WellCommerce\Bundle\AppBundle\Manager\Admin\ShippingMethodManager">
+        <service id="shipping_method.manager.admin" class="WellCommerce\Bundle\ShippingBundle\Manager\Admin\ShippingMethodManager">
             <argument type="service" id="shipping_method.repository"/>
             <argument type="service" id="shipping_method.event_dispatcher"/>
             <argument type="service" id="shipping_method.factory"/>
@@ -15,32 +15,32 @@
             </call>
         </service>
         
-        <service id="shipping_method.controller.admin" class="WellCommerce\Bundle\AppBundle\Controller\Admin\ShippingMethodController">
+        <service id="shipping_method.controller.admin" class="WellCommerce\Bundle\ShippingBundle\Controller\Admin\ShippingMethodController">
             <argument type="service" id="shipping_method.manager.admin"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <service id="shipping_method.repository" class="WellCommerce\Bundle\AppBundle\Repository\ShippingMethodRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
-            <argument>WellCommerceAppBundle:ShippingMethod</argument>
+        <service id="shipping_method.repository" class="WellCommerce\Bundle\ShippingBundle\Repository\ShippingMethodRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>WellCommerceShippingBundle:ShippingMethod</argument>
         </service>
 
-        <service id="shipping_method.factory" class="WellCommerce\Bundle\AppBundle\Factory\ShippingMethodFactory" />
+        <service id="shipping_method.factory" class="WellCommerce\Bundle\ShippingBundle\Factory\ShippingMethodFactory" />
 
         <service id="shipping_method.event_dispatcher" parent="core.event_dispatcher" public="false">
             <argument type="service" id="event_dispatcher"/>
         </service>
 
-        <service id="shipping_method_cost.repository" class="WellCommerce\Bundle\AppBundle\Repository\ShippingMethodCostRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
-            <argument>WellCommerceAppBundle:ShippingMethodCost</argument>
+        <service id="shipping_method_cost.repository" class="WellCommerce\Bundle\ShippingBundle\Repository\ShippingMethodCostRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>WellCommerceShippingBundle:ShippingMethodCost</argument>
         </service>
 
-        <service id="shipping_method.dataset.query_builder.admin" class="WellCommerce\Bundle\AppBundle\DataSet\Admin\ShippingMethodDataSetQueryBuilder" public="false">
+        <service id="shipping_method.dataset.query_builder.admin" class="WellCommerce\Bundle\ShippingBundle\DataSet\Admin\ShippingMethodDataSetQueryBuilder" public="false">
             <argument type="service" id="shipping_method.repository"/>
         </service>
 
-        <service id="shipping_method.dataset.admin" class="WellCommerce\Bundle\AppBundle\DataSet\Admin\ShippingMethodDataSet">
+        <service id="shipping_method.dataset.admin" class="WellCommerce\Bundle\ShippingBundle\DataSet\Admin\ShippingMethodDataSet">
             <argument type="service" id="shipping_method.dataset.query_builder.admin"/>
             <argument type="service" id="dataset.manager"/>
             <argument type="service" id="shipping_method.event_dispatcher"/>
@@ -51,7 +51,7 @@
             <argument type="service" id="shipping_method.repository"/>
         </service>
 
-        <service id="shipping_method.datagrid" class="WellCommerce\Bundle\AppBundle\DataGrid\ShippingMethodDataGrid">
+        <service id="shipping_method.datagrid" class="WellCommerce\Bundle\ShippingBundle\DataGrid\ShippingMethodDataGrid">
             <argument key="identifier">shipping_method</argument>
             <argument type="service" id="shipping_method.dataset.admin"/>
             <argument type="service" id="shipping_method.event_dispatcher"/>
@@ -60,7 +60,7 @@
             </call>
         </service>
 
-        <service id="shipping_method.form_builder" class="WellCommerce\Bundle\AppBundle\Form\Admin\ShippingMethodFormBuilder">
+        <service id="shipping_method.form_builder" class="WellCommerce\Bundle\ShippingBundle\Form\Admin\ShippingMethodFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
             <argument type="service" id="shipping_method.event_dispatcher"/>
@@ -69,35 +69,35 @@
             </call>
         </service>
 
-        <service id="shipping_method.subscriber" class="WellCommerce\Bundle\AppBundle\EventListener\ShippingMethodSubscriber">
+        <service id="shipping_method.subscriber" class="WellCommerce\Bundle\ShippingBundle\EventListener\ShippingMethodSubscriber">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
             <tag name="kernel.event_subscriber" />
         </service>
 
-        <service id="shipping_method.calculator.collection" class="WellCommerce\Bundle\AppBundle\Calculator\ShippingMethodCalculatorCollection" />
+        <service id="shipping_method.calculator.collection" class="WellCommerce\Bundle\ShippingBundle\Calculator\ShippingMethodCalculatorCollection" />
 
-        <service id="shipping_method.provider" class="WellCommerce\Bundle\AppBundle\Provider\ShippingMethodProvider">
+        <service id="shipping_method.provider" class="WellCommerce\Bundle\ShippingBundle\Provider\ShippingMethodProvider">
             <argument type="service" id="shipping_method.repository"/>
             <argument type="service" id="shipping_method.calculator.collection"/>
         </service>
 
-        <service id="shipping_method_cost.doctrine.event_subscriber" class="WellCommerce\Bundle\AppBundle\EventListener\ShippingMethodCostEventSubscriber">
+        <service id="shipping_method_cost.doctrine.event_subscriber" class="WellCommerce\Bundle\ShippingBundle\EventListener\ShippingMethodCostEventSubscriber">
             <tag name="doctrine.event_subscriber" connection="default" />
         </service>
 
-        <service id="form.shipping_cost_collection.data_transformer" class="WellCommerce\Bundle\AppBundle\Form\DataTransformer\ShippingCostCollectionToArrayTransformer" scope="prototype">
+        <service id="form.shipping_cost_collection.data_transformer" class="WellCommerce\Bundle\ShippingBundle\Form\DataTransformer\ShippingCostCollectionToArrayTransformer" scope="prototype">
             <argument type="service" id="doctrine.helper"/>
             <tag name="form.data_transformer" alias="shipping_cost_collection"/>
         </service>
 
-        <service id="weight_table.calculator" class="WellCommerce\Bundle\AppBundle\Calculator\WeightTableCalculator">
+        <service id="weight_table.calculator" class="WellCommerce\Bundle\ShippingBundle\Calculator\WeightTableCalculator">
             <argument type="service" id="currency.helper"/>
             <tag name="shipping_method.calculator"/>
         </service>
 
-        <service id="price_table.calculator" class="WellCommerce\Bundle\AppBundle\Calculator\PriceTableCalculator">
+        <service id="price_table.calculator" class="WellCommerce\Bundle\ShippingBundle\Calculator\PriceTableCalculator">
             <argument type="service" id="currency.helper"/>
             <tag name="shipping_method.calculator"/>
         </service>

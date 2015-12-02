@@ -10,10 +10,10 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Calculator;
+namespace WellCommerce\Bundle\ShippingBundle\Calculator;
 
-use WellCommerce\Bundle\AppBundle\Entity\ShippingCostSubjectInterface;
-use WellCommerce\Bundle\AppBundle\Entity\ShippingMethodInterface;
+use WellCommerce\Bundle\ShippingBundle\Entity\ShippingCostSubjectInterface;
+use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface;
 
 /**
  * Interface ShippingMethodCalculatorInterface
@@ -42,7 +42,7 @@ interface ShippingMethodCalculatorInterface
      * @param ShippingMethodInterface            $shippingMethod
      * @param ShippingCalculatorSubjectInterface $subject
      *
-     * @return null|\WellCommerce\Bundle\AppBundle\Entity\ShippingMethodCostInterface
+     * @return null|\WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCostInterface
      */
     public function calculate(ShippingMethodInterface $shippingMethod, ShippingCalculatorSubjectInterface $subject);
 }

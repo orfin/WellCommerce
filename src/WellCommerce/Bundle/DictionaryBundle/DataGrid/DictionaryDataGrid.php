@@ -9,7 +9,7 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Bundle\AppBundle\DataGrid;
+namespace WellCommerce\Bundle\DictionaryBundle\DataGrid;
 
 use WellCommerce\Bundle\CoreBundle\DataGrid\AbstractDataGrid;
 use WellCommerce\Component\DataGrid\Column\Column;
