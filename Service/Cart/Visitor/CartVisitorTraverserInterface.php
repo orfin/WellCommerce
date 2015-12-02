@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Service\Cart\Visitor;
+namespace WellCommerce\Bundle\CartBundle\Service\Cart\Visitor;
 
 use WellCommerce\Bundle\AppBundle\Entity\CartInterface;
 
