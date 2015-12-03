@@ -1,45 +1,49 @@
 <?php
 /*
  * WellCommerce Open-Source E-Commerce Platform
- * 
+ *
  * This file is part of the WellCommerce package.
  *
  * (c) Adam Piotrowski <adam@wellcommerce.org>
- * 
+ *
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-
-namespace WellCommerce\Bundle\AppBundle\Form\Front;
+namespace WellCommerce\Bundle\ReviewBundle\Form\Admin;
 
 use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
 use WellCommerce\Component\Form\Elements\FormInterface;
 
 /**
- * Class ProductReviewFormBuilder
+ * Class ReviewFormBuilder
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductReviewFormBuilder extends AbstractFormBuilder
+class ReviewFormBuilder extends AbstractFormBuilder
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormInterface $form)
     {
-        $form->addChild($this->getElement('text_field', [
+        $mainData = $form->addChild($this->getElement('nested_fieldset', [
+            'name'  => 'required_data',
+            'label' => $this->trans('common.fieldset.general')
+        ]));
+
+        $mainData->addChild($this->getElement('text_field', [
             'name'  => 'nick',
-            'label' => $this->trans('product_review.label.nick'),
+            'label' => $this->trans('review.label.nick'),
         ]));
 
-        $form->addChild($this->getElement('hidden', [
+        $mainData->addChild($this->getElement('text_field', [
             'name'  => 'rating',
-            'label' => $this->trans('product_review.label.rating'),
+            'label' => $this->trans('review.label.rating'),
         ]));
 
-        $form->addChild($this->getElement('text_area', [
+        $mainData->addChild($this->getElement('text_area', [
             'name'  => 'review',
-            'label' => $this->trans('product_review.label.review'),
+            'label' => $this->trans('review.label.review'),
             'rows'  => 5,
             'cols'  => 10
         ]));

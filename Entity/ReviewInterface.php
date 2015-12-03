@@ -10,16 +10,17 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Entity;
+namespace WellCommerce\Bundle\ReviewBundle\Entity;
 
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareInterface;
 
 /**
- * Class ProductAttribute
+ * Class ReviewInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ProductReviewInterface extends ProductAwareInterface, TimestampableInterface
+interface ReviewInterface extends ProductAwareInterface, TimestampableInterface
 {
     /**
      * @return int

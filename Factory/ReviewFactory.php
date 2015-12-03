@@ -10,25 +10,25 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Factory;
+namespace WellCommerce\Bundle\ReviewBundle\Factory;
 
-use WellCommerce\Bundle\AppBundle\Entity\ProductReview;
+use WellCommerce\Bundle\ReviewBundle\Entity\Review;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 
 /**
- * Class ProductReviewFactory
+ * Class ReviewFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductReviewFactory extends AbstractFactory
+class ReviewFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\AppBundle\Entity\ProductReviewInterface
+     * @return \WellCommerce\Bundle\ReviewBundle\Entity\ReviewInterface
      */
     public function create()
     {
-        $productReview = new ProductReview();
+        $review = new Review();
 
-        return $productReview;
+        return $review;
     }
 }

@@ -10,15 +10,15 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\DataSet\Admin;
+namespace WellCommerce\Bundle\ReviewBundle\Repository;
 
-use WellCommerce\Component\DataSet\QueryBuilder\AbstractDataSetQueryBuilder;
+use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**
- * Class ProductReviewDataSetQueryBuilder
+ * Interface ReviewRepositoryInterface
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductReviewDataSetQueryBuilder extends AbstractDataSetQueryBuilder
+interface ReviewRepositoryInterface extends RepositoryInterface
 {
 }

@@ -10,16 +10,17 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Entity;
+namespace WellCommerce\Bundle\ReviewBundle\Entity;
 
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareTrait;
 
 /**
- * Class ProductReview
+ * Class Review
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductReview implements ProductReviewInterface
+class Review implements ReviewInterface
 {
     use Timestampable;
     use ProductAwareTrait;

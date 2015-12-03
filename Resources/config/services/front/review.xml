@@ -4,27 +4,27 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="product_review.manager.front" class="WellCommerce\Bundle\AppBundle\Manager\Front\ProductReviewManager">
-            <argument type="service" id="product_review.repository"/>
-            <argument type="service" id="product_review.event_dispatcher"/>
-            <argument type="service" id="product_review.factory"/>
-            <argument type="service" id="product_review.form_builder.front"/>
+        <service id="review.manager.front" class="WellCommerce\Bundle\ReviewBundle\Manager\Front\ReviewManager">
+            <argument type="service" id="review.repository"/>
+            <argument type="service" id="review.event_dispatcher"/>
+            <argument type="service" id="review.factory"/>
+            <argument type="service" id="review.form_builder.front"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <service id="product_review.form_builder.front" class="WellCommerce\Bundle\AppBundle\Form\Front\ProductReviewFormBuilder">
+        <service id="review.form_builder.front" class="WellCommerce\Bundle\ReviewBundle\Form\Front\ReviewFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
-            <argument type="service" id="product_review.event_dispatcher"/>
+            <argument type="service" id="review.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <service id="product_review.layout_box.controller" class="WellCommerce\Bundle\AppBundle\Controller\Box\ProductReviewBoxController">
-            <argument type="service" id="product_review.manager.front"/>
+        <service id="review.layout_box.controller" class="WellCommerce\Bundle\ReviewBundle\Controller\Box\ReviewBoxController">
+            <argument type="service" id="review.manager.front"/>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>

@@ -10,19 +10,19 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Controller\Box;
+namespace WellCommerce\Bundle\ReviewBundle\Controller\Box;
 
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 
 /**
- * Class ProductReviewBoxController
+ * Class ReviewBoxController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductReviewBoxController extends AbstractBoxController
+class ReviewBoxController extends AbstractBoxController
 {
     /**
-     * @var \WellCommerce\Bundle\AppBundle\Manager\Front\ProductReviewManager
+     * @var \WellCommerce\Bundle\ReviewBundle\Manager\Front\ReviewManager
      */
     protected $manager;
     
@@ -42,12 +42,12 @@ class ProductReviewBoxController extends AbstractBoxController
             if ($form->isValid()) {
                 $this->manager->createResource($resource);
 
-                $this->manager->getFlashHelper()->addSuccess('product_review.flash.success');
+                $this->manager->getFlashHelper()->addSuccess('review.flash.success');
 
                 return $this->getRouterHelper()->redirectTo('dynamic_' . $currentRoute);
             }
 
-            $this->manager->getFlashHelper()->addError('product_review.flash.error');
+            $this->manager->getFlashHelper()->addError('review.flash.error');
         }
 
         return $this->displayTemplate('index', [

@@ -1,7 +1,7 @@
-WellCommerce\Bundle\AppBundle\Entity\ProductReview:
+WellCommerce\Bundle\ReviewBundle\Entity\Review:
     type: entity
-    table: product_review
-    repositoryClass: WellCommerce\Bundle\AppBundle\Repository\ProductReviewRepository
+    table: review
+    repositoryClass: WellCommerce\Bundle\ReviewBundle\Repository\ReviewRepository
     id:
         id:
             type: integer
@@ -19,7 +19,7 @@ WellCommerce\Bundle\AppBundle\Entity\ProductReview:
             nullable: false
     manyToOne:
         product:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Product
+            targetEntity: WellCommerce\Bundle\ProductBundle\Entity\Product
             fetch: LAZY
             inversedBy: reviews
             joinColumns:

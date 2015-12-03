@@ -10,15 +10,18 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Manager\Admin;
+namespace WellCommerce\Bundle\ReviewBundle\DependencyInjection;
 
-use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\Loader;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
 
 /**
- * Class ProductReviewManager
+ * Class WellCommerceReviewExtension
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductReviewManager extends AbstractAdminManager
+class WellCommerceReviewExtension extends AbstractExtension
 {
+
 }

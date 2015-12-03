@@ -9,22 +9,22 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Bundle\AppBundle\Twig\Extension;
+namespace WellCommerce\Bundle\ReviewBundle\Twig\Extension;
 
 use Doctrine\Common\Collections\Collection;
-use WellCommerce\Bundle\AppBundle\Entity\ProductReviewInterface;
+use WellCommerce\Bundle\ReviewBundle\Entity\ReviewInterface;
 
 /**
- * Class ProductReviewExtension
+ * Class ReviewExtension
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductReviewExtension extends \Twig_Extension
+class ReviewExtension extends \Twig_Extension
 {
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('productReviewAverage', [$this, 'getProductReviewAverage'], ['is_safe' => ['html']]),
+            new \Twig_SimpleFunction('productReviewAverage', [$this, 'getReviewAverage'], ['is_safe' => ['html']]),
         ];
     }
 
@@ -33,7 +33,7 @@ class ProductReviewExtension extends \Twig_Extension
      */
     public function getName()
     {
-        return 'product_review';
+        return 'review';
     }
 
     /**
@@ -45,12 +45,12 @@ class ProductReviewExtension extends \Twig_Extension
      *
      * @return array
      */
-    public function getProductReviewAverage(Collection $collection)
+    public function getReviewAverage(Collection $collection)
     {
         $totalRating  = 0;
         $reviewsTotal = $collection->count();
 
-        $collection->map(function (ProductReviewInterface $review) use (&$totalRating) {
+        $collection->map(function (ReviewInterface $review) use (&$totalRating) {
             $totalRating += $review->getRating();
         });
 

@@ -10,15 +10,15 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Repository;
+namespace WellCommerce\Bundle\ReviewBundle\Controller\Admin;
 
-use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
+use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 
 /**
- * Interface ProductReviewRepositoryInterface
+ * Class ReviewController
  *
- * @author Adam Piotrowski <adam@wellcommerce.org>
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ProductReviewRepositoryInterface extends RepositoryInterface
+class ReviewController extends AbstractAdminController
 {
 }

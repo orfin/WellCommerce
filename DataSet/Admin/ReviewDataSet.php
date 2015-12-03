@@ -10,17 +10,17 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\DataSet\Admin;
+namespace WellCommerce\Bundle\ReviewBundle\DataSet\Admin;
 
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 
 /**
- * Class ProductReviewDataSet
+ * Class ReviewDataSet
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductReviewDataSet extends AbstractDataSet
+class ReviewDataSet extends AbstractDataSet
 {
     /**
      * {@inheritdoc}
@@ -28,10 +28,10 @@ class ProductReviewDataSet extends AbstractDataSet
     public function configureOptions(DataSetConfiguratorInterface $configurator)
     {
         $configurator->setColumns([
-            'id'        => 'product_review.id',
-            'nick'      => 'product_review.nick',
-            'rating'    => 'product_review.rating',
-            'createdAt' => 'product_review.createdAt',
+            'id'        => 'review.id',
+            'nick'      => 'review.nick',
+            'rating'    => 'review.rating',
+            'createdAt' => 'review.createdAt',
             'product'   => 'product_translation.name',
         ]);
 

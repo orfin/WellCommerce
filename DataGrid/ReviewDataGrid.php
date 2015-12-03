@@ -9,7 +9,7 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Bundle\AppBundle\DataGrid;
+namespace WellCommerce\Bundle\ReviewBundle\DataGrid;
 
 use WellCommerce\Bundle\CoreBundle\DataGrid\AbstractDataGrid;
 use WellCommerce\Component\DataGrid\Column\Column;
@@ -19,11 +19,11 @@ use WellCommerce\Component\DataGrid\Column\Options\Filter;
 use WellCommerce\Component\DataGrid\Column\Options\Sorting;
 
 /**
- * Class ProductReviewDataGrid
+ * Class ReviewDataGrid
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductReviewDataGrid extends AbstractDataGrid
+class ReviewDataGrid extends AbstractDataGrid
 {
     /**
      * {@inheritdoc}
@@ -32,7 +32,7 @@ class ProductReviewDataGrid extends AbstractDataGrid
     {
         $collection->add(new Column([
             'id'         => 'id',
-            'caption'    => $this->trans('product_review.label.id'),
+            'caption'    => $this->trans('review.label.id'),
             'sorting'    => new Sorting([
                 'default_order' => Sorting::SORT_DIR_DESC,
             ]),
@@ -47,7 +47,7 @@ class ProductReviewDataGrid extends AbstractDataGrid
 
         $collection->add(new Column([
             'id'         => 'nick',
-            'caption'    => $this->trans('product_review.label.nick'),
+            'caption'    => $this->trans('review.label.nick'),
             'appearance' => new Appearance([
                 'width' => 70,
             ]),
@@ -58,7 +58,7 @@ class ProductReviewDataGrid extends AbstractDataGrid
 
         $collection->add(new Column([
             'id'         => 'createdAt',
-            'caption'    => $this->trans('product_review.label.created_at'),
+            'caption'    => $this->trans('review.label.created_at'),
             'appearance' => new Appearance([
                 'width' => 70,
             ]),
@@ -69,7 +69,7 @@ class ProductReviewDataGrid extends AbstractDataGrid
 
         $collection->add(new Column([
             'id'         => 'product',
-            'caption'    => $this->trans('product_review.label.product'),
+            'caption'    => $this->trans('review.label.product'),
             'appearance' => new Appearance([
                 'width' => 70,
             ]),
@@ -80,7 +80,7 @@ class ProductReviewDataGrid extends AbstractDataGrid
 
         $collection->add(new Column([
             'id'         => 'rating',
-            'caption'    => $this->trans('product_review.label.rating'),
+            'caption'    => $this->trans('review.label.rating'),
             'appearance' => new Appearance([
                 'width' => 70,
             ]),
