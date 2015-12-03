@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\ProductBundle\Manager\Admin;
 
 use Symfony\Component\Validator\Exception\ValidatorException;
-use WellCommerce\Bundle\AppBundle\Exception\ProductNotFoundException;
+use WellCommerce\Bundle\ProductBundle\Exception\ProductNotFoundException;
 use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
 
 /**
@@ -52,7 +52,7 @@ class ProductManager extends AbstractAdminManager
      *
      * @param int $id
      *
-     * @return \WellCommerce\Bundle\AppBundle\Entity\Product
+     * @return \WellCommerce\Bundle\ProductBundle\Entity\Product
      */
     protected function findProduct($id)
     {

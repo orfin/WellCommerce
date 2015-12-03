@@ -15,10 +15,10 @@ namespace WellCommerce\Bundle\ProductBundle\Form\DataTransformer;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
-use WellCommerce\Bundle\AppBundle\Entity\MediaInterface;
-use WellCommerce\Bundle\AppBundle\Entity\Product;
+use WellCommerce\Bundle\MediaBundle\Entity\MediaInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\Product;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
-use WellCommerce\Bundle\AppBundle\Entity\ProductPhoto;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductPhoto;
 
 /**
  * Class ProductPhotoCollectionToArrayTransformer
@@ -127,7 +127,7 @@ class ProductPhotoCollectionToArrayTransformer extends MediaCollectionToArrayTra
      *
      * @param int $id
      *
-     * @return \WellCommerce\Bundle\AppBundle\Entity\Media
+     * @return \WellCommerce\Bundle\MediaBundle\Entity\Media
      */
     protected function getMediaById($id)
     {

@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\ProductBundle\Helper;
 
-use WellCommerce\Bundle\AppBundle\Entity\CategoryInterface;
+use WellCommerce\Bundle\CategoryBundle\Entity\CategoryInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 
 /**

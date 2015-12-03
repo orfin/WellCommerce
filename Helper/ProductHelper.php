@@ -12,12 +12,12 @@
 
 namespace WellCommerce\Bundle\ProductBundle\Helper;
 
-use WellCommerce\Bundle\AppBundle\Entity\CategoryInterface;
+use WellCommerce\Bundle\CategoryBundle\Entity\CategoryInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 use WellCommerce\Component\DataSet\Conditions\Condition\Eq;
 use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
 use WellCommerce\Component\DataSet\DataSetInterface;
-use WellCommerce\Bundle\AppBundle\Provider\ShippingMethodProviderInterface;
+use WellCommerce\Bundle\ShippingBundle\Provider\ShippingMethodProviderInterface;
 
 /**
  * Class ProductHelper

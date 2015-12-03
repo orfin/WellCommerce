@@ -1,7 +1,7 @@
-WellCommerce\Bundle\AppBundle\Entity\Product:
+WellCommerce\Bundle\ProductBundle\Entity\Product:
     type: entity
     table: product
-    repositoryClass: WellCommerce\Bundle\AppBundle\Repository\ProductRepository
+    repositoryClass: WellCommerce\Bundle\ProductBundle\Repository\ProductRepository
     id:
         id:
             type: integer
@@ -67,7 +67,7 @@ WellCommerce\Bundle\AppBundle\Entity\Product:
                     referencedColumnName: id
                     onDelete: 'SET NULL'
         availability:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Availability
+            targetEntity: WellCommerce\Bundle\AvailabilityBundle\Entity\Availability
             fetch: LAZY
             joinColumns:
                 availability_id:
@@ -88,14 +88,14 @@ WellCommerce\Bundle\AppBundle\Entity\Product:
                     referencedColumnName: id
                     onDelete: 'SET NULL'
         attributeGroup:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Attribute\Group
+            targetEntity: WellCommerce\Bundle\AttributeBundle\Entity\Attribute\Group
             fetch: LAZY
             joinColumns:
                 attribute_group_id:
                     referencedColumnName: id
                     onDelete: 'SET NULL'
         photo:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Media
+            targetEntity: WellCommerce\Bundle\MediaBundle\Entity\Media
             fetch: LAZY
             joinColumns:
                 photo_id:
@@ -103,7 +103,7 @@ WellCommerce\Bundle\AppBundle\Entity\Product:
                     onDelete: 'SET NULL'
     manyToMany:
         categories:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Category
+            targetEntity: WellCommerce\Bundle\CategoryBundle\Entity\Category
             fetch: LAZY
             inversedBy: products
             joinTable:
@@ -157,7 +157,7 @@ WellCommerce\Bundle\AppBundle\Entity\Product:
                         referencedColumnName: id
     oneToMany:
         productPhotos:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\ProductPhoto
+            targetEntity: WellCommerce\Bundle\ProductBundle\Entity\ProductPhoto
             cascade:
                 - remove
                 - persist
@@ -172,7 +172,7 @@ WellCommerce\Bundle\AppBundle\Entity\Product:
             mappedBy: product
             orphanRemoval: true
         reviews:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\ProductReview
+            targetEntity: WellCommerce\Bundle\ReviewBundle\Entity\Review
             cascade:
               - all
             fetch: LAZY

@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\ProductBundle\Controller\Front;
 
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
-use WellCommerce\Bundle\AppBundle\Service\Breadcrumb\BreadcrumbItem;
+use WellCommerce\Bundle\CoreBundle\Service\Breadcrumb\BreadcrumbItem;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 
 /**

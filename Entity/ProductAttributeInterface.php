@@ -15,6 +15,7 @@ namespace WellCommerce\Bundle\ProductBundle\Entity;
 use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\AppBundle\Entity\DiscountablePrice;
 use WellCommerce\Bundle\AppBundle\Entity\HierarchyAwareInterface;
+use WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityAwareInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 
 /**
@@ -22,8 +23,11 @@ use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ProductAttributeInterface
-    extends TimestampableInterface, AvailabilityAwareInterface, ProductAwareInterface, HierarchyAwareInterface
+interface ProductAttributeInterface extends
+    TimestampableInterface,
+    AvailabilityAwareInterface,
+    ProductAwareInterface,
+    HierarchyAwareInterface
 {
     /**
      * @return int

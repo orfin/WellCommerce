@@ -7,9 +7,4 @@
     <route id="front.product.view" path="/view/{id}">
         <default key="_controller">product.controller.front:viewAction</default>
     </route>
-
-    <route id="front.product_layered_navigation.filter" path="/filter">
-        <default key="_controller">product_layered_navigation.controller.front:filterAction</default>
-        <option key="expose">true</option>
-    </route>
 </routes>
