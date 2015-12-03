@@ -43,6 +43,6 @@ class TaxManagerTest extends AbstractAdminManagerTestCase
 
     protected function getRepositoryInterfaceName()
     {
-        return 'WellCommerce\Bundle\AppBundle\Repository\TaxRepositoryInterface';
+        return 'WellCommerce\Bundle\TaxBundle\Repository\TaxRepositoryInterface';
     }
 }
