@@ -1,7 +1,7 @@
-WellCommerce\Bundle\AppBundle\Entity\Page:
+WellCommerce\Bundle\PageBundle\Entity\Page:
     type: entity
     table: page
-    repositoryClass: WellCommerce\Bundle\AppBundle\Repository\PageRepository
+    repositoryClass: WellCommerce\Bundle\PageBundle\Repository\PageRepository
     id:
         id:
             type: integer
@@ -60,7 +60,7 @@ WellCommerce\Bundle\AppBundle\Entity\Page:
                 default: 0
     manyToOne:
         parent:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Page
+            targetEntity: WellCommerce\Bundle\PageBundle\Entity\Page
             cascade: {  }
             fetch: LAZY
             mappedBy: null
@@ -72,10 +72,8 @@ WellCommerce\Bundle\AppBundle\Entity\Page:
             orphanRemoval: false
     manyToMany:
         clientGroups:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\ClientGroup
-            cascade: {  }
+            targetEntity: WellCommerce\Bundle\ClientBundle\Entity\ClientGroup
             fetch: LAZY
-            mappedBy: null
             inversedBy: pages
             joinTable:
                 name: page_client_group
@@ -118,7 +116,7 @@ WellCommerce\Bundle\AppBundle\Entity\Page:
                         referencedColumnName: id
     oneToMany:
         children:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Page
+            targetEntity: WellCommerce\Bundle\PageBundle\Entity\Page
             cascade: {  }
             fetch: LAZY
             mappedBy: parent

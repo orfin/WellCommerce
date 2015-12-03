@@ -10,15 +10,18 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\PageBundle\Controller\Admin;
+namespace WellCommerce\Bundle\PageBundle\DependencyInjection;
 
-use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\Loader;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
 
 /**
- * Class PageController
+ * Class WellCommercePageExtension
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PageController extends AbstractAdminController
+class WellCommercePageExtension extends AbstractExtension
 {
+
 }

@@ -10,9 +10,9 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\DataSet\Front;
+namespace WellCommerce\Bundle\PageBundle\DataSet\Front;
 
-use WellCommerce\Bundle\AppBundle\DataSet\Admin\PageDataSetQueryBuilder as BaseQueryBuilder;
+use WellCommerce\Bundle\PageBundle\DataSet\Admin\PageDataSetQueryBuilder as BaseQueryBuilder;
 use WellCommerce\Component\DataSet\Column\ColumnCollection;
 use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
 

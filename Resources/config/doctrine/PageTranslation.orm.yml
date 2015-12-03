@@ -1,4 +1,4 @@
-WellCommerce\Bundle\AppBundle\Entity\PageTranslation:
+WellCommerce\Bundle\PageBundle\Entity\PageTranslation:
     type: entity
     table: page_translation
     embedded:
@@ -17,7 +17,7 @@ WellCommerce\Bundle\AppBundle\Entity\PageTranslation:
             nullable: false
     oneToOne:
         route:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\PageRoute
+            targetEntity: WellCommerce\Bundle\PageBundle\Entity\PageRoute
             cascade:
                 - remove
                 - persist

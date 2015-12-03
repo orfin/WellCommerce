@@ -1,9 +1,9 @@
-WellCommerce\Bundle\AppBundle\Entity\PageRoute:
+WellCommerce\Bundle\PageBundle\Entity\PageRoute:
     type: entity
     table: route_page
     manyToOne:
         identifier:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Page
+            targetEntity: WellCommerce\Bundle\PageBundle\Entity\Page
             fetch: LAZY
             joinColumns:
                 foreign_id:

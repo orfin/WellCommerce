@@ -4,7 +4,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="page.manager.admin" class="WellCommerce\Bundle\AppBundle\Manager\Admin\PageManager">
+        <service id="page.manager.admin" class="WellCommerce\Bundle\PageBundle\Manager\Admin\PageManager">
             <argument type="service" id="page.repository"/>
             <argument type="service" id="page.event_dispatcher"/>
             <argument type="service" id="page.factory"/>
@@ -15,7 +15,7 @@
             </call>
         </service>
 
-        <service id="page.controller.admin" class="WellCommerce\Bundle\AppBundle\Controller\Admin\PageController">
+        <service id="page.controller.admin" class="WellCommerce\Bundle\PageBundle\Controller\Admin\PageController">
             <argument type="service" id="page.manager.admin"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
@@ -29,21 +29,21 @@
             <tag name="layout_box.configurator" />
         </service>
 
-        <service id="page.dataset.query_builder.admin" class="WellCommerce\Bundle\AppBundle\DataSet\Admin\PageDataSetQueryBuilder" public="false">
+        <service id="page.dataset.query_builder.admin" class="WellCommerce\Bundle\PageBundle\DataSet\Admin\PageDataSetQueryBuilder" public="false">
             <argument type="service" id="page.repository"/>
             <call method="setShopContext">
                 <argument type="service" id="shop.context.admin"/>
             </call>
         </service>
 
-        <service id="page.dataset.admin" class="WellCommerce\Bundle\AppBundle\DataSet\Admin\PageDataSet">
+        <service id="page.dataset.admin" class="WellCommerce\Bundle\PageBundle\DataSet\Admin\PageDataSet">
             <argument type="service" id="page.dataset.query_builder.admin"/>
             <argument type="service" id="dataset.manager"/>
             <argument type="service" id="page.event_dispatcher"/>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
-        <service id="page.datagrid" class="WellCommerce\Bundle\AppBundle\DataGrid\PageDataGrid">
+        <service id="page.datagrid" class="WellCommerce\Bundle\PageBundle\DataGrid\PageDataGrid">
             <argument key="identifier">page</argument>
             <argument type="service" id="page.dataset.admin"/>
             <argument type="service" id="page.event_dispatcher"/>
@@ -52,7 +52,7 @@
             </call>
         </service>
 
-        <service id="page.form_builder.admin" class="WellCommerce\Bundle\AppBundle\Form\Admin\PageFormBuilder">
+        <service id="page.form_builder.admin" class="WellCommerce\Bundle\PageBundle\Form\Admin\PageFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
             <argument type="service" id="page.event_dispatcher"/>

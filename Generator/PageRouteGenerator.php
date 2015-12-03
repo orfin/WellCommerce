@@ -10,15 +10,21 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\PageBundle\Controller\Admin;
+namespace WellCommerce\Bundle\PageBundle\Generator;
 
-use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
+use WellCommerce\Bundle\RoutingBundle\Generator\AbstractRouteGenerator;
 
 /**
- * Class PageController
+ * Class PageRouteGenerator
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PageController extends AbstractAdminController
+class PageRouteGenerator extends AbstractRouteGenerator
 {
+    const GENERATOR_STRATEGY = 'page';
+
+    public function supports($strategy)
+    {
+        return self::GENERATOR_STRATEGY === $strategy;
+    }
 }

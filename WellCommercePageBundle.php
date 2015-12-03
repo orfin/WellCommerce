@@ -10,15 +10,15 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\PageBundle\Controller\Admin;
+namespace WellCommerce\Bundle\PageBundle;
 
-use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
+use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * Class PageController
+ * Class WellCommercePageBundle
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PageController extends AbstractAdminController
+class WellCommercePageBundle extends Bundle
 {
 }
