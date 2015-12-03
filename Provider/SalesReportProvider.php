@@ -16,7 +16,7 @@ use Doctrine\Common\Collections\Criteria;
 use WellCommerce\Bundle\AppBundle\Configuration\ReportConfiguration;
 use WellCommerce\Bundle\AppBundle\Data\ReportRow;
 use WellCommerce\Bundle\AppBundle\Data\ReportRowCollection;
-use WellCommerce\Bundle\AppBundle\Entity\OrderInterface;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 
 /**
  * Class SalesReportDataProvider
