@@ -16,11 +16,11 @@ use WellCommerce\Component\Form\Elements\FormInterface;
 use WellCommerce\Component\Form\FormBuilderInterface;
 
 /**
- * Class ProductShowcaseBoxConfigurator
+ * Class ReviewBoxConfigurator
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductLayeredNavigationBoxConfigurator extends AbstractLayoutBoxConfigurator
+class ReviewBoxConfigurator extends AbstractLayoutBoxConfigurator
 {
     /**
      * {@inheritdoc}
@@ -30,7 +30,7 @@ class ProductLayeredNavigationBoxConfigurator extends AbstractLayoutBoxConfigura
         $fieldset = $this->getFieldset($builder, $form);
 
         $fieldset->addChild($builder->getElement('tip', [
-            'tip' => '<p>' . $this->trans('product.layered_navigation.tip') . '</p>'
+            'tip' => '<p>' . $this->trans('layout_box.review.tip') . '</p>'
         ]));
     }
 }

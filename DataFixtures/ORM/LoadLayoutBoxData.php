@@ -211,11 +211,11 @@ class LoadLayoutBoxData extends AbstractDataFixture
                 'identifier' => 'product_info',
                 'name'       => 'Product'
             ],
-            'ProductReview'            => [
-                'identifier' => 'product_review',
+            'Review'            => [
+                'identifier' => 'review',
                 'name'       => 'Product reviews'
             ],
-            'ProductLayeredNavigation' => [
+            'LayeredNavigation' => [
                 'identifier' => 'layered_navigation',
                 'name'       => 'Layered navigation'
             ],
