@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Repository;
+namespace WellCommerce\Bundle\PaymentBundle\Repository;
 
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
@@ -24,7 +24,7 @@ interface PaymentMethodRepositoryInterface extends RepositoryInterface
     /**
      * Returns default shipping method
      *
-     * @return null|\WellCommerce\Bundle\AppBundle\Entity\PaymentMethodInterface
+     * @return null|\WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodInterface
      */
     public function getDefaultPaymentMethod();
 }

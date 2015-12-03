@@ -10,14 +10,14 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Service\PaymentMethod\Processor;
+namespace WellCommerce\Bundle\PaymentBundle\Processor;
 
 use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
 use WellCommerce\Component\Form\Dependencies\DependencyInterface;
 use WellCommerce\Component\Form\Elements\ElementInterface;
 use WellCommerce\Component\Form\FormBuilderInterface;
-use WellCommerce\Bundle\AppBundle\Entity\PaymentMethodConfigurationInterface;
+use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodConfigurationInterface;
 
 /**
  * Class AbstractPaymentProcessor

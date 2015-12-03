@@ -10,12 +10,12 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Manager\Front;
+namespace WellCommerce\Bundle\PaymentBundle\Manager\Front;
 
 use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
-use WellCommerce\Bundle\AppBundle\Entity\OrderInterface;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 use WellCommerce\Bundle\AppBundle\Exception\OrderNotFoundException;
-use WellCommerce\Bundle\AppBundle\Repository\OrderRepositoryInterface;
+use WellCommerce\Bundle\OrderBundle\Repository\OrderRepositoryInterface;
 
 /**
  * Class PaymentManager

@@ -1,4 +1,4 @@
-WellCommerce\Bundle\AppBundle\Entity\PaymentMethodConfiguration:
+WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodConfiguration:
     type: entity
     table: payment_method_configuration
     repositoryClass: WellCommerce\Bundle\AppBundle\Repository\PaymentMethodConfigurationRepository
@@ -16,7 +16,7 @@ WellCommerce\Bundle\AppBundle\Entity\PaymentMethodConfiguration:
             nullable: false
     manyToOne:
         paymentMethod:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\PaymentMethod
+            targetEntity: WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod
             fetch: LAZY
             inversedBy: configuration
             joinColumns:

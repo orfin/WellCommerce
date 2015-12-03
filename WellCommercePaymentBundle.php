@@ -10,15 +10,15 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\PaymentBundle\Manager\Admin;
+namespace WellCommerce\Bundle\PaymentBundle;
 
-use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
+use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * Class PaymentMethodManager
+ * Class WellCommercePaymentBundle
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PaymentMethodManager extends AbstractAdminManager
+class WellCommercePaymentBundle extends Bundle
 {
 }

@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Tests\DataGrid;
+namespace WellCommerce\Bundle\PaymentBundle\Tests\DataGrid;
 
 use WellCommerce\Bundle\CoreBundle\Test\DataGrid\AbstractDataGridTestCase;
 

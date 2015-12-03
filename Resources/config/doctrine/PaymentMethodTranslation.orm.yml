@@ -1,4 +1,4 @@
-WellCommerce\Bundle\AppBundle\Entity\PaymentMethodTranslation:
+WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodTranslation:
     type: entity
     table: payment_method_translation
     fields:
