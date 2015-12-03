@@ -1,4 +1,4 @@
-WellCommerce\Bundle\AppBundle\Entity\Deliverer:
+WellCommerce\Bundle\DelivererBundle\Entity\Deliverer:
     type: entity
     table: deliverer
     repositoryClass: WellCommerce\Bundle\AppBundle\Repository\DelivererRepository

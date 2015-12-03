@@ -1,4 +1,4 @@
-WellCommerce\Bundle\AppBundle\Entity\DelivererTranslation:
+WellCommerce\Bundle\DelivererBundle\Entity\DelivererTranslation:
     type: entity
     table: deliverer_translation
     fields:

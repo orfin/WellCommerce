@@ -28,6 +28,6 @@ class DelivererFactoryTest extends AbstractFactoryTestCase
 
     protected function getExpectedInterface()
     {
-        return 'WellCommerce\Bundle\AppBundle\Entity\DelivererInterface';
+        return 'WellCommerce\Bundle\DelivererBundle\Entity\DelivererInterface';
     }
 }
