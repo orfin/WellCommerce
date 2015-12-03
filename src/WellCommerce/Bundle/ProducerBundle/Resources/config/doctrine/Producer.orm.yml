@@ -1,7 +1,7 @@
 WellCommerce\Bundle\ProducerBundle\Entity\Producer:
     type: entity
     table: producer
-    repositoryClass: WellCommerce\Bundle\AppBundle\Repository\ProducerRepository
+    repositoryClass: WellCommerce\Bundle\ProducerBundle\Repository\ProducerRepository
     id:
         id:
             type: integer
@@ -9,7 +9,7 @@ WellCommerce\Bundle\ProducerBundle\Entity\Producer:
                 strategy: AUTO
     oneToMany:
         products:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Product
+            targetEntity: WellCommerce\Bundle\ProductBundle\Entity\Product
             cascade:
                 - remove
                 - persist
@@ -17,7 +17,7 @@ WellCommerce\Bundle\ProducerBundle\Entity\Producer:
             mappedBy: producer
     manyToMany:
         deliverers:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Deliverer
+            targetEntity: WellCommerce\Bundle\DelivererBundle\Entity\Deliverer
             inversedBy: producers
             joinTable:
                 name: producer_deliverer
@@ -52,7 +52,7 @@ WellCommerce\Bundle\ProducerBundle\Entity\Producer:
                         referencedColumnName: id
     manyToOne:
         photo:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Media
+            targetEntity: WellCommerce\Bundle\MediaBundle\Entity\Media
             fetch: LAZY
             joinColumns:
                 photo_id:

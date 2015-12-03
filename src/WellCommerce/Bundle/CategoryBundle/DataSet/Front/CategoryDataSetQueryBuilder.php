@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\CategoryBundle\DataSet\Front;
 
-use WellCommerce\Bundle\AppBundle\DataSet\Admin\CategoryDataSetQueryBuilder as BaseQueryBuilder;
+use WellCommerce\Bundle\CategoryBundle\DataSet\Admin\CategoryDataSetQueryBuilder as BaseQueryBuilder;
 use WellCommerce\Component\DataSet\Conditions\Condition\Eq;
 
 /**

@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Collector;
+namespace WellCommerce\Bundle\OrderBundle\Collector;
 
 use WellCommerce\Bundle\CurrencyBundle\Helper\CurrencyHelperInterface;
 use WellCommerce\Bundle\AppBundle\Factory\OrderTotalDetailFactory;
@@ -50,7 +50,7 @@ abstract class AbstractDataCollector implements OrderDataCollectorInterface
     abstract public function getDescription();
 
     /**
-     * @return \WellCommerce\Bundle\AppBundle\Entity\OrderTotalDetailInterface
+     * @return \WellCommerce\Bundle\OrderBundle\Entity\OrderTotalDetailInterface
      */
     protected function initResource()
     {

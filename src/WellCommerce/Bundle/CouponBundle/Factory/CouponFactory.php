@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\CouponBundle\Factory;
 
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
-use WellCommerce\Bundle\AppBundle\Entity\Coupon;
+use WellCommerce\Bundle\CouponBundle\Entity\Coupon;
 
 /**
  * Class CouponFactory
@@ -23,7 +23,7 @@ use WellCommerce\Bundle\AppBundle\Entity\Coupon;
 class CouponFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\AppBundle\Entity\CouponInterface
+     * @return \WellCommerce\Bundle\CouponBundle\Entity\CouponInterface
      */
     public function create()
     {

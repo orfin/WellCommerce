@@ -1,7 +1,7 @@
-WellCommerce\Bundle\AppBundle\Entity\Media:
+WellCommerce\Bundle\MediaBundle\Entity\Media:
     type: entity
     table: media
-    repositoryClass: WellCommerce\Bundle\AppBundle\Repository\MediaRepository
+    repositoryClass: WellCommerce\Bundle\MediaBundle\Repository\MediaRepository
     id:
         id:
             type: integer

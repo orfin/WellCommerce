@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CoreBundle\DataSet\Transformer;
+namespace WellCommerce\Bundle\MediaBundle\DataSet\Transformer;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use WellCommerce\Bundle\CoreBundle\Helper\Image\ImageHelperInterface;

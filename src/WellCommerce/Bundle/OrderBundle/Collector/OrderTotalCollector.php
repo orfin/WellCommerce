@@ -10,11 +10,11 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Collector;
+namespace WellCommerce\Bundle\OrderBundle\Collector;
 
-use WellCommerce\Bundle\AppBundle\Entity\OrderInterface;
-use WellCommerce\Bundle\AppBundle\Entity\OrderTotal;
-use WellCommerce\Bundle\AppBundle\Entity\OrderTotalDetailInterface;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderTotal;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderTotalDetailInterface;
 
 /**
  * Class OrderTotalCollector

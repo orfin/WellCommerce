@@ -18,7 +18,7 @@
         <!--<import resource="services/product_attribute.xml"/>-->
         <!--<import resource="services/product_status.xml"/>-->
         <!--<import resource="services/product_search.xml"/>-->
-        <!--<import resource="services/product_review.xml"/>-->
+        <!--<import resource="services/review.xml"/>-->
         <!--<import resource="services/producer.xml"/>-->
         <!--<import resource="services/unit.xml"/>-->
 
@@ -59,12 +59,12 @@
             <tag name="doctrine.event_subscriber" />
         </service>
 
-        <!--<service id="breadcrumb.collection" class="WellCommerce\Bundle\AppBundle\Service\Breadcrumb\BreadcrumbItemCollection" />-->
+        <service id="breadcrumb.collection" class="WellCommerce\Bundle\CoreBundle\Service\Breadcrumb\BreadcrumbItemCollection" />
 
-        <!--<service id="twig.extension.breadcrumb" class="WellCommerce\Bundle\AppBundle\Twig\Extension\BreadcrumbExtension">-->
-            <!--<argument type="service" id="breadcrumb.collection"/>-->
-            <!--<tag name="twig.extension"/>-->
-        <!--</service>-->
+        <service id="twig.extension.breadcrumb" class="WellCommerce\Bundle\CoreBundle\Twig\Extension\BreadcrumbExtension">
+            <argument type="service" id="breadcrumb.collection"/>
+            <tag name="twig.extension"/>
+        </service>
 
         <!--<service id="admin_menu.factory" class="WellCommerce\Bundle\AppBundle\Factory\AdminMenuFactory"/>-->
 

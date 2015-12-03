@@ -10,10 +10,10 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Factory;
+namespace WellCommerce\Bundle\PaymentBundle\Factory;
 
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
-use WellCommerce\Bundle\AppBundle\Entity\PaymentMethodConfiguration;
+use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodConfiguration;
 
 /**
  * Class PaymentMethodConfigurationFactory
@@ -23,7 +23,7 @@ use WellCommerce\Bundle\AppBundle\Entity\PaymentMethodConfiguration;
 class PaymentMethodConfigurationFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\AppBundle\Entity\PaymentMethodConfigurationInterface
+     * @return \WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodConfigurationInterface
      */
     public function create()
     {

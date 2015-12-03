@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\CouponBundle\Service\Coupon\Validator;
 
-use WellCommerce\Bundle\AppBundle\Entity\CouponInterface;
+use WellCommerce\Bundle\CouponBundle\Entity\CouponInterface;
 
 /**
  * Class CouponValidator

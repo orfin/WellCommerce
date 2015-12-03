@@ -28,6 +28,6 @@ class ClientFactoryTest extends AbstractFactoryTestCase
 
     protected function getExpectedInterface()
     {
-        return 'WellCommerce\Bundle\AppBundle\Entity\ClientInterface';
+        return 'WellCommerce\Bundle\ClientBundle\Entity\ClientInterface';
     }
 }

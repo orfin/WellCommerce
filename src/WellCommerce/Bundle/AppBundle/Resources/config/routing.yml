@@ -1,8 +1,23 @@
 wellcommerce_app:
     resource: "@WellCommerceAppBundle/Resources/config/routing.xml"
 
+wellcommerce_availability:
+    resource: "@WellCommerceAvailabilityBundle/Resources/config/routing.xml"
+
+wellcommerce_cart:
+    resource: "@WellCommerceCartBundle/Resources/config/routing.xml"
+
+wellcommerce_category:
+    resource: "@WellCommerceCategoryBundle/Resources/config/routing.xml"
+
 wellcommerce_currency:
     resource: "@WellCommerceCurrencyBundle/Resources/config/routing.xml"
+
+wellcommerce_layered_navigation:
+    resource: "@WellCommerceLayeredNavigationBundle/Resources/config/routing.xml"
+
+wellcommerce_layout:
+    resource: "@WellCommerceLayoutBundle/Resources/config/routing.xml"
 
 wellcommerce_locale:
     resource: "@WellCommerceLocaleBundle/Resources/config/routing.xml"
@@ -13,11 +28,26 @@ wellcommerce_shop:
 wellcommerce_company:
     resource: "@WellCommerceCompanyBundle/Resources/config/routing.xml"
 
+wellcommerce_coupon:
+    resource: "@WellCommerceCouponBundle/Resources/config/routing.xml"
+
 wellcommerce_client:
     resource: "@WellCommerceClientBundle/Resources/config/routing.xml"
 
+wellcommerce_media:
+    resource: "@WellCommerceMediaBundle/Resources/config/routing.xml"
+
 wellcommerce_user:
     resource: "@WellCommerceUserBundle/Resources/config/routing.xml"
+
+wellcommerce_order:
+    resource: "@WellCommerceOrderBundle/Resources/config/routing.xml"
+
+wellcommerce_page:
+    resource: "@WellCommercePageBundle/Resources/config/routing.xml"
+
+wellcommerce_payment:
+    resource: "@WellCommercePaymentBundle/Resources/config/routing.xml"
 
 wellcommerce_producer:
     resource: "@WellCommerceProducerBundle/Resources/config/routing.xml"
@@ -28,8 +58,17 @@ wellcommerce_product:
 wellcommerce_product_status:
     resource: "@WellCommerceProductStatusBundle/Resources/config/routing.xml"
 
+wellcommerce_review:
+    resource: "@WellCommerceReviewBundle/Resources/config/routing.xml"
+
+wellcommerce_routing:
+    resource: "@WellCommerceRoutingBundle/Resources/config/routing.xml"
+
 wellcommerce_shipping:
     resource: "@WellCommerceShippingBundle/Resources/config/routing.xml"
+
+wellcommerce_tax:
+    resource: "@WellCommerceTaxBundle/Resources/config/routing.xml"
 
 wellcommerce_unit:
     resource: "@WellCommerceUnitBundle/Resources/config/routing.xml"

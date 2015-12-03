@@ -9,7 +9,7 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Bundle\AppBundle\Entity;
+namespace WellCommerce\Bundle\OrderBundle\Entity;
 
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;

@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\AppBundle\Provider;
 
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
-use WellCommerce\Bundle\AppBundle\Entity\OrderInterface;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 
 /**
  * Class AbstractReportProvider

@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\ClientBundle\Tests\Controller\Admin;
 
 use Doctrine\Common\Collections\Criteria;
-use WellCommerce\Bundle\AppBundle\Entity\ClientGroupInterface;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientGroupInterface;
 use WellCommerce\Bundle\CoreBundle\Test\Controller\Admin\AbstractAdminControllerTestCase;
 
 /**

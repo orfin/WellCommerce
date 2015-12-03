@@ -18,7 +18,7 @@
             <argument type="service" id="event_dispatcher"/>
         </service>
 
-        <service id="security.helper" class="WellCommerce\Bundle\CoreBundle\Helper\Security\SecurityHelper">
+        <service id="security.helper" class="WellCommerce\Bundle\UserBundle\Helper\Security\SecurityHelper">
             <argument type="service" id="security.token_storage"/>
             <argument type="service" id="user.repository"/>
         </service>

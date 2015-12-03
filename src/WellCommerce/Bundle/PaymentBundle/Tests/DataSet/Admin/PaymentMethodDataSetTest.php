@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Tests\DataSet\Admin;
+namespace WellCommerce\Bundle\PaymentBundle\Tests\DataSet\Admin;
 
 use WellCommerce\Bundle\CoreBundle\Test\DataSet\AbstractDataSetTestCase;
 

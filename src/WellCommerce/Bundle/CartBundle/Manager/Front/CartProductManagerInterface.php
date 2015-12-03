@@ -15,8 +15,8 @@ namespace WellCommerce\Bundle\CartBundle\Manager\Front;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\Front\FrontManagerInterface;
-use WellCommerce\Bundle\AppBundle\Entity\CartInterface;
-use WellCommerce\Bundle\AppBundle\Entity\CartProductInterface;
+use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
+use WellCommerce\Bundle\CartBundle\Entity\CartProductInterface;
 
 /**
  * Interface CartProductManagerInterface
@@ -33,7 +33,7 @@ interface CartProductManagerInterface extends FrontManagerInterface
      * @param ProductAttributeInterface|null $attribute
      * @param int                            $quantity
      *
-     * @return \WellCommerce\Bundle\AppBundle\Entity\CartProductInterface
+     * @return \WellCommerce\Bundle\CartBundle\Entity\CartProductInterface
      */
     public function initCartProduct(
         CartInterface $cart,
@@ -58,7 +58,7 @@ interface CartProductManagerInterface extends FrontManagerInterface
      * @param ProductInterface               $product
      * @param ProductAttributeInterface|null $attribute
      *
-     * @return null|\WellCommerce\Bundle\AppBundle\Entity\CartProductInterface
+     * @return null|\WellCommerce\Bundle\CartBundle\Entity\CartProductInterface
      */
     public function findProductInCart(CartInterface $cart, ProductInterface $product, ProductAttributeInterface $attribute = null);
 

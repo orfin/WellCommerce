@@ -10,14 +10,14 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Form\DataTransformer;
+namespace WellCommerce\Bundle\PaymentBundle\Form\DataTransformer;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
-use WellCommerce\Bundle\AppBundle\Entity\PaymentMethodConfigurationInterface;
-use WellCommerce\Bundle\AppBundle\Entity\PaymentMethodInterface;
+use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodConfigurationInterface;
+use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodInterface;
 use WellCommerce\Bundle\AppBundle\Factory\PaymentMethodConfigurationFactory;
 
 /**

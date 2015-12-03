@@ -14,7 +14,6 @@ namespace WellCommerce\Bundle\RoutingBundle\Generator;
 
 use Symfony\Component\Routing\Route as SymfonyRoute;
 use WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface;
-use WellCommerce\Bundle\CoreBundle\Generator\RouteGeneratorInterface;
 
 /**
  * Class AbstractRouteGenerator

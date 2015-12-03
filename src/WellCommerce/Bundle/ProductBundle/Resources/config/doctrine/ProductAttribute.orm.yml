@@ -1,7 +1,7 @@
 WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute:
     type: entity
     table: product_attribute
-    repositoryClass: WellCommerce\Bundle\AppBundle\Repository\ProductAttributeRepository
+    repositoryClass: WellCommerce\Bundle\ProductBundle\Repository\ProductAttributeRepository
     id:
         id:
             type: integer
@@ -40,7 +40,7 @@ WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute:
                 default: 0
     manyToOne:
         product:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Product
+            targetEntity: WellCommerce\Bundle\ProductBundle\Entity\Product
             fetch: LAZY
             inversedBy: attributes
             joinColumns:
@@ -48,14 +48,14 @@ WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute:
                     referencedColumnName: id
                     onDelete: CASCADE
         availability:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Availability
+            targetEntity: WellCommerce\Bundle\AvailabilityBundle\Entity\Availability
             fetch: LAZY
             joinColumns:
                 availability_id:
                     referencedColumnName: id
                     onDelete: 'SET NULL'
         photo:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Media
+            targetEntity: WellCommerce\Bundle\MediaBundle\Entity\Media
             fetch: LAZY
             joinColumns:
                 photo_id:
@@ -63,7 +63,7 @@ WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute:
                     onDelete: 'SET NULL'
     manyToMany:
         attributeValues:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\AttributeValue
+            targetEntity: WellCommerce\Bundle\AttributeBundle\Entity\AttributeValue
             fetch: LAZY
             inversedBy: productAttributeValues
             joinTable:

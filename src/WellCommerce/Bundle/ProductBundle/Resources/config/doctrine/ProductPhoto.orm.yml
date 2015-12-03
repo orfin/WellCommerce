@@ -1,4 +1,4 @@
-WellCommerce\Bundle\AppBundle\Entity\ProductPhoto:
+WellCommerce\Bundle\ProductBundle\Entity\ProductPhoto:
     type: entity
     table: product_photo
     repositoryClass: WellCommerce\Bundle\AppBundle\Repository\ProductPhotoRepository
@@ -35,13 +35,13 @@ WellCommerce\Bundle\AppBundle\Entity\ProductPhoto:
                 default: 0
     manyToOne:
         photo:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Media
+            targetEntity: WellCommerce\Bundle\MediaBundle\Entity\Media
             fetch: LAZY
             joinColumns:
                 photo_id:
                     referencedColumnName: id
         product:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Product
+            targetEntity: WellCommerce\Bundle\ProductBundle\Entity\Product
             cascade: {  }
             fetch: LAZY
             mappedBy: null

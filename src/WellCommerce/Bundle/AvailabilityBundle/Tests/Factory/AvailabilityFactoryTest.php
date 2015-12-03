@@ -28,6 +28,6 @@ class AvailabilityFactoryTest extends AbstractFactoryTestCase
 
     protected function getExpectedInterface()
     {
-        return 'WellCommerce\Bundle\AppBundle\Entity\AvailabilityInterface';
+        return 'WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityInterface';
     }
 }

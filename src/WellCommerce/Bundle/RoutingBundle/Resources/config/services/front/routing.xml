@@ -9,6 +9,6 @@
             <argument type="service" id="routing.repository" />
         </service>
 
-        <service id="route.generator.collection" class="WellCommerce\Bundle\CoreBundle\Generator\RouteGeneratorCollection" />
+        <service id="route.generator.collection" class="WellCommerce\Bundle\RoutingBundle\Generator\RouteGeneratorCollection" />
     </services>
 </container>

@@ -1,7 +1,7 @@
-WellCommerce\Bundle\AppBundle\Entity\OrderProduct:
+WellCommerce\Bundle\OrderBundle\Entity\OrderProduct:
     type: entity
     table: orders_product
-    repositoryClass: WellCommerce\Bundle\AppBundle\Repository\OrderProductRepository
+    repositoryClass: WellCommerce\Bundle\OrderBundle\Repository\OrderProductRepository
     id:
         id:
             type: integer
@@ -25,7 +25,7 @@ WellCommerce\Bundle\AppBundle\Entity\OrderProduct:
             precision: 15
     manyToOne:
         order:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Order
+            targetEntity: WellCommerce\Bundle\OrderBundle\Entity\Order
             fetch: LAZY
             inversedBy: products
             joinColumns:
@@ -33,7 +33,7 @@ WellCommerce\Bundle\AppBundle\Entity\OrderProduct:
                     referencedColumnName: id
                     onDelete: CASCADE
         product:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Product
+            targetEntity: WellCommerce\Bundle\ProductBundle\Entity\Product
             fetch: LAZY
             joinColumns:
                 product_id:

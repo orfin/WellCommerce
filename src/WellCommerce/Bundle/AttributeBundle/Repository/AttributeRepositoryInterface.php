@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\AttributeBundle\Repository;
 
-use WellCommerce\Bundle\AppBundle\Entity\Attribute\GroupInterface;
+use WellCommerce\Bundle\AttributeBundle\Entity\Attribute\GroupInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**

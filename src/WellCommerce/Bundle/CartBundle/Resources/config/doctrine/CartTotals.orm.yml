@@ -1,4 +1,4 @@
-WellCommerce\Bundle\AppBundle\Entity\CartTotals:
+WellCommerce\Bundle\CartBundle\Entity\CartTotals:
     type: embeddable
     fields:
         quantity:

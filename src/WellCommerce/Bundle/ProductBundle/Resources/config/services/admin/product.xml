@@ -60,12 +60,5 @@
             <argument type="service" id="translator.helper"/>
             <tag name="layout_box.configurator" />
         </service>
-
-        <service id="layered_navigation.layout_box.configurator" class="WellCommerce\Bundle\LayoutBundle\Configurator\ProductLayeredNavigationBoxConfigurator">
-            <argument>ProductLayeredNavigation</argument>
-            <argument>layered_navigation.layout_box.controller</argument>
-            <argument type="service" id="translator.helper"/>
-            <tag name="layout_box.configurator" />
-        </service>
     </services>
 </container>

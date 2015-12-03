@@ -18,7 +18,7 @@
     <!--<import resource="routing/product.xml"/>-->
     <!--<import resource="routing/product_status.xml"/>-->
     <!--<import resource="routing/product_search.xml"/>-->
-    <!--<import resource="routing/product_review.xml"/>-->
+    <!--<import resource="routing/review.xml"/>-->
     <!--<import resource="routing/producer.xml"/>-->
     <!--<import resource="routing/unit.xml"/>-->
 

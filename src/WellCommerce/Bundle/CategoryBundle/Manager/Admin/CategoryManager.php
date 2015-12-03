@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\CategoryBundle\Manager\Admin;
 
-use WellCommerce\Bundle\AppBundle\Entity\Category;
+use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 use WellCommerce\Bundle\AppBundle\Entity\Locale;
 use WellCommerce\Bundle\CoreBundle\Helper\Sluggable;
 use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
@@ -85,7 +85,7 @@ class CategoryManager extends AbstractAdminManager
     protected function translateCategory(Locale $locale, Category $category, $name)
     {
         /**
-         * @var $translation \WellCommerce\Bundle\AppBundle\Entity\CategoryTranslation
+         * @var $translation \WellCommerce\Bundle\CategoryBundle\Entity\CategoryTranslation
          */
         $translation = $category->translate($locale->getCode());
         $slug        = $this->getLocaleSlug($locale, $name);

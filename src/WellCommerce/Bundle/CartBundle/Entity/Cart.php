@@ -12,14 +12,17 @@
 namespace WellCommerce\Bundle\CartBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
-use WellCommerce\Bundle\AppBundle\Entity\ClientAwareTrait;
-use WellCommerce\Bundle\AppBundle\Entity\ClientBillingAddressInterface;
-use WellCommerce\Bundle\AppBundle\Entity\ClientContactDetailsInterface;
-use WellCommerce\Bundle\AppBundle\Entity\ClientShippingAddressInterface;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientAwareTrait;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddressInterface;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetailsInterface;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddressInterface;
+use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodAwareTrait;
+use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodInterface;
+use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCostInterface;
 use WellCommerce\Bundle\ShopBundle\Entity\ShopAwareTrait;
 use WellCommerce\Bundle\AppBundle\Doctrine\ORM\Behaviours\Timestampable\TimestampableTrait;
-use WellCommerce\Bundle\AppBundle\Entity\CouponAwareTrait;
-use WellCommerce\Bundle\AppBundle\Service\Cart\Visitor\CartVisitorInterface;
+use WellCommerce\Bundle\CouponBundle\Entity\CouponAwareTrait;
+use WellCommerce\Bundle\CartBundle\Visitor\CartVisitorInterface;
 
 /**
  * Class Cart

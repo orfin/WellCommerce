@@ -1,7 +1,7 @@
-WellCommerce\Bundle\AppBundle\Entity\Coupon:
+WellCommerce\Bundle\CouponBundle\Entity\Coupon:
     type: entity
     table: coupon
-    repositoryClass: WellCommerce\Bundle\AppBundle\Repository\CouponRepository
+    repositoryClass: WellCommerce\Bundle\CouponBundle\Repository\CouponRepository
     id:
         id:
             type: integer

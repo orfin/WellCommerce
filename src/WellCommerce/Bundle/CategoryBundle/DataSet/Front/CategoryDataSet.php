@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\CategoryBundle\DataSet\Front;
 
-use WellCommerce\Bundle\AppBundle\DataSet\Admin\CategoryDataSet as BaseDataSet;
+use WellCommerce\Bundle\CategoryBundle\DataSet\Admin\CategoryDataSet as BaseDataSet;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
 
 /**

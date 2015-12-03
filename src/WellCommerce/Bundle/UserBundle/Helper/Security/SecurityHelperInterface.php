@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CoreBundle\Helper\Security;
+namespace WellCommerce\Bundle\UserBundle\Helper\Security;
 
 use WellCommerce\Bundle\UserBundle\Entity\UserInterface;
 

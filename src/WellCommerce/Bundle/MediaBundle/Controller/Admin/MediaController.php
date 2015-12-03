@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Controller\Admin;
+namespace WellCommerce\Bundle\MediaBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,7 +24,7 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 class MediaController extends AbstractAdminController
 {
     /**
-     * @var \WellCommerce\Bundle\AppBundle\Manager\Admin\MediaManager
+     * @var \WellCommerce\Bundle\MediaBundle\Manager\Admin\MediaManager
      */
     protected $manager;
 

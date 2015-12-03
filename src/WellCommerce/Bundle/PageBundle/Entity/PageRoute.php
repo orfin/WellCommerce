@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Entity;
+namespace WellCommerce\Bundle\PageBundle\Entity;
 
 use WellCommerce\Bundle\RoutingBundle\Entity\Route;
 use WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface;

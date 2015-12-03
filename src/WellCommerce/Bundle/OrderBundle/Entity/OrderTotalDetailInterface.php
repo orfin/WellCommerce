@@ -1,6 +1,6 @@
 <?php
 
-namespace WellCommerce\Bundle\AppBundle\Entity;
+namespace WellCommerce\Bundle\OrderBundle\Entity;
 
 /**
  * Class OrderTotalDetailInterface

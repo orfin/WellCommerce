@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\CategoryBundle\Context\Front;
 
-use WellCommerce\Bundle\AppBundle\Entity\CategoryInterface;
+use WellCommerce\Bundle\CategoryBundle\Entity\CategoryInterface;
 
 /**
  * Class CategoryContext

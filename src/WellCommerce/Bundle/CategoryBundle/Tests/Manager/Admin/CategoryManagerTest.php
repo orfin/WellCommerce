@@ -43,7 +43,7 @@ class CategoryManagerTest extends AbstractAdminManagerTestCase
 
     protected function getRepositoryInterfaceName()
     {
-        return 'WellCommerce\Bundle\AppBundle\Repository\CategoryRepositoryInterface';
+        return 'WellCommerce\Bundle\CategoryBundle\Repository\CategoryRepositoryInterface';
     }
 
     public function testManagerReturnsValidDataGrid()

@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\TaxBundle\Tests\Controller\Admin;
 
 use Doctrine\Common\Collections\Criteria;
-use WellCommerce\Bundle\AppBundle\Entity\TaxInterface;
+use WellCommerce\Bundle\TaxBundle\Entity\TaxInterface;
 use WellCommerce\Bundle\CoreBundle\Test\Controller\Admin\AbstractAdminControllerTestCase;
 
 /**

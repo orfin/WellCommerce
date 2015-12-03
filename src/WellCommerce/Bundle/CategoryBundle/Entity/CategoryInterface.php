@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\CategoryBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 use WellCommerce\Bundle\ShopBundle\Entity\ShopCollectionAwareInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\AppBundle\Entity\HierarchyAwareInterface;

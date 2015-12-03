@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Manager\Front;
 
-use WellCommerce\Bundle\AppBundle\Entity\ClientInterface;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\AbstractManager;
 
 /**

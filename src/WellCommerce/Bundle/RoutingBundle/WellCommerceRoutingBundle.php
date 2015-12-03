@@ -12,7 +12,9 @@
 
 namespace WellCommerce\Bundle\RoutingBundle;
 
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
+use WellCommerce\Bundle\RoutingBundle\DependencyInjection\Compiler\RouteGeneratorPass;
 
 /**
  * Class WellCommerceRoutingBundle
@@ -21,4 +23,9 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  */
 class WellCommerceRoutingBundle extends Bundle
 {
+    public function build(ContainerBuilder $container)
+    {
+        parent::build($container);
+        $container->addCompilerPass(new RouteGeneratorPass());
+    }
 }

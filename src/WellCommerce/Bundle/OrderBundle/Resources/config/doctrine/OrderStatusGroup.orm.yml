@@ -1,7 +1,7 @@
-WellCommerce\Bundle\AppBundle\Entity\OrderStatusGroup:
+WellCommerce\Bundle\OrderBundle\Entity\OrderStatusGroup:
     type: entity
     table: order_status_group
-    repositoryClass: WellCommerce\Bundle\AppBundle\Repository\OrderStatusGroupRepository
+    repositoryClass: WellCommerce\Bundle\OrderBundle\Repository\OrderStatusGroupRepository
     id:
         id:
             type: integer

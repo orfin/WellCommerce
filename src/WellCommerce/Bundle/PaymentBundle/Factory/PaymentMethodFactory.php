@@ -10,11 +10,11 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Factory;
+namespace WellCommerce\Bundle\PaymentBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
-use WellCommerce\Bundle\AppBundle\Entity\PaymentMethod;
+use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod;
 
 /**
  * Class PaymentMethodFactory
@@ -24,7 +24,7 @@ use WellCommerce\Bundle\AppBundle\Entity\PaymentMethod;
 class PaymentMethodFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\AppBundle\Entity\PaymentMethodInterface
+     * @return \WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodInterface
      */
     public function create()
     {

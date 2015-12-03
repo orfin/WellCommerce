@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\CartBundle\Repository;
 
-use WellCommerce\Bundle\AppBundle\Entity\ClientInterface;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
 use WellCommerce\Bundle\ShopBundle\Entity\ShopInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
@@ -30,7 +30,7 @@ interface CartRepositoryInterface extends RepositoryInterface
      * @param string               $sessionId
      * @param ShopInterface        $shop
      *
-     * @return null|\WellCommerce\Bundle\AppBundle\Entity\CartInterface
+     * @return null|\WellCommerce\Bundle\CartBundle\Entity\CartInterface
      */
     public function findCart(ClientInterface $client = null, $sessionId, ShopInterface $shop);
 
@@ -40,7 +40,7 @@ interface CartRepositoryInterface extends RepositoryInterface
      * @param ClientInterface $client
      * @param ShopInterface   $shop
      *
-     * @return null|\WellCommerce\Bundle\AppBundle\Entity\CartInterface
+     * @return null|\WellCommerce\Bundle\CartBundle\Entity\CartInterface
      */
     public function getCartForClient(ClientInterface $client, ShopInterface $shop);
 
@@ -50,7 +50,7 @@ interface CartRepositoryInterface extends RepositoryInterface
      * @param string        $sessionId
      * @param ShopInterface $shop
      *
-     * @return null|\WellCommerce\Bundle\AppBundle\Entity\CartInterface
+     * @return null|\WellCommerce\Bundle\CartBundle\Entity\CartInterface
      */
     public function getCartBySessionId($sessionId, ShopInterface $shop);
 }

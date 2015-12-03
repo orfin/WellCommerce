@@ -43,6 +43,6 @@ class ProducerManagerTest extends AbstractAdminManagerTestCase
 
     protected function getRepositoryInterfaceName()
     {
-        return 'WellCommerce\Bundle\AppBundle\Repository\ProducerRepositoryInterface';
+        return 'WellCommerce\Bundle\ProducerBundle\Repository\ProducerRepositoryInterface';
     }
 }

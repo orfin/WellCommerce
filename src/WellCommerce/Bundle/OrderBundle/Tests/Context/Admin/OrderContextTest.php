@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Tests\Context\Admin;
+namespace WellCommerce\Bundle\OrderBundle\Tests\Context\Admin;
 
 use WellCommerce\Bundle\CoreBundle\Test\AbstractTestCase;
 
@@ -29,7 +29,7 @@ class OrderContextTest extends AbstractTestCase
         $this->assertNull($context->getCurrentOrder());
 
         $context->setCurrentOrder($order);
-        $this->assertInstanceOf(\WellCommerce\Bundle\AppBundle\Entity\OrderInterface::class, $context->getCurrentOrder());
+        $this->assertInstanceOf(\WellCommerce\Bundle\OrderBundle\Entity\OrderInterface::class, $context->getCurrentOrder());
         $this->assertEquals($order, $context->getCurrentOrder());
     }
 }

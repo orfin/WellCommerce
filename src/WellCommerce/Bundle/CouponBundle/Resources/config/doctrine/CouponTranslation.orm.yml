@@ -1,4 +1,4 @@
-WellCommerce\Bundle\AppBundle\Entity\CouponTranslation:
+WellCommerce\Bundle\CouponBundle\Entity\CouponTranslation:
     type: entity
     table: coupon_translation
     fields:

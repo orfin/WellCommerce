@@ -10,9 +10,9 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Collector;
+namespace WellCommerce\Bundle\OrderBundle\Collector;
 
-use WellCommerce\Bundle\AppBundle\Service\Order\Visitor\OrderVisitorInterface;
+use WellCommerce\Bundle\OrderBundle\Visitor\OrderVisitorInterface;
 
 /**
  * Interface OrderDataCollectorInterface

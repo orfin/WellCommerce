@@ -15,8 +15,8 @@ namespace WellCommerce\Bundle\CartBundle\Factory;
 use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 use WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface;
-use WellCommerce\Bundle\AppBundle\Entity\Cart;
-use WellCommerce\Bundle\AppBundle\Entity\CartTotals;
+use WellCommerce\Bundle\CartBundle\Entity\Cart;
+use WellCommerce\Bundle\CartBundle\Entity\CartTotals;
 
 /**
  * Class CartFactory
@@ -26,7 +26,7 @@ use WellCommerce\Bundle\AppBundle\Entity\CartTotals;
 class CartFactory extends AbstractFactory implements FactoryInterface
 {
     /**
-     * @return \WellCommerce\Bundle\AppBundle\Entity\CartInterface
+     * @return \WellCommerce\Bundle\CartBundle\Entity\CartInterface
      */
     public function create()
     {

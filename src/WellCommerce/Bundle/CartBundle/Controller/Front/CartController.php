@@ -12,12 +12,12 @@
 
 namespace WellCommerce\Bundle\CartBundle\Controller\Front;
 
-use WellCommerce\Bundle\AppBundle\Entity\CartProductInterface;
+use WellCommerce\Bundle\CartBundle\Entity\CartProductInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
-use WellCommerce\Bundle\AppBundle\Exception\AddCartItemException;
-use WellCommerce\Bundle\AppBundle\Exception\DeleteCartItemException;
-use WellCommerce\Bundle\AppBundle\Service\Breadcrumb\BreadcrumbItem;
+use WellCommerce\Bundle\CartBundle\Exception\AddCartItemException;
+use WellCommerce\Bundle\CartBundle\Exception\DeleteCartItemException;
+use WellCommerce\Bundle\CoreBundle\Service\Breadcrumb\BreadcrumbItem;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 
 /**
@@ -28,7 +28,7 @@ use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 class CartController extends AbstractFrontController
 {
     /**
-     * @var \WellCommerce\Bundle\AppBundle\Manager\Front\CartManagerInterface
+     * @var \WellCommerce\Bundle\CartBundle\Manager\Front\CartManagerInterface
      */
     protected $manager;
 

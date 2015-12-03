@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\CartBundle\Factory;
 
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 use WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface;
-use WellCommerce\Bundle\AppBundle\Entity\CartProduct;
+use WellCommerce\Bundle\CartBundle\Entity\CartProduct;
 
 /**
  * Class CartProductFactory
@@ -24,7 +24,7 @@ use WellCommerce\Bundle\AppBundle\Entity\CartProduct;
 class CartProductFactory extends AbstractFactory implements FactoryInterface
 {
     /**
-     * @return \WellCommerce\Bundle\AppBundle\Entity\CartProductInterface
+     * @return \WellCommerce\Bundle\CartBundle\Entity\CartProductInterface
      */
     public function create()
     {

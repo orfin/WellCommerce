@@ -5,41 +5,28 @@ WellCommerce\Bundle\RoutingBundle\Entity\Route:
     discriminatorColumn:
         name: type
         type: string
-        length: null
-        columnDefinition: null
         fieldName: type
     discriminatorMap:
         route: WellCommerce\Bundle\RoutingBundle\Entity\Route
-        product: WellCommerce\Bundle\AppBundle\Entity\ProductRoute
+        product: WellCommerce\Bundle\ProductBundle\Entity\ProductRoute
         product_status: WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusRoute
         producer: WellCommerce\Bundle\ProducerBundle\Entity\ProducerRoute
-        category: WellCommerce\Bundle\AppBundle\Entity\CategoryRoute
-        page: WellCommerce\Bundle\AppBundle\Entity\PageRoute
-    repositoryClass: WellCommerce\Bundle\AppBundle\Repository\RouteRepository
+        category: WellCommerce\Bundle\CategoryBundle\Entity\CategoryRoute
+        page: WellCommerce\Bundle\PageBundle\Entity\PageRoute
+    repositoryClass: WellCommerce\Bundle\RoutingBundle\Repository\RouteRepository
     id:
         id:
             type: integer
-            scale: 0
-            length: null
-            unique: false
-            nullable: false
-            precision: 0
             id: true
             generator:
                 strategy: IDENTITY
     fields:
         path:
             type: string
-            scale: 0
-            length: null
             unique: false
             nullable: false
-            precision: 0
         locale:
             type: string
-            scale: 0
             length: 255
             unique: false
             nullable: false
-            precision: 0
-    lifecycleCallbacks: {  }

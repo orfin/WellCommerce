@@ -1,6 +1,6 @@
 <?php
 
-namespace WellCommerce\Bundle\AppBundle\Entity;
+namespace WellCommerce\Bundle\OrderBundle\Entity;
 
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeAwareTrait;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareTrait;

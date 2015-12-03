@@ -175,7 +175,7 @@ abstract class AbstractContainerAware extends ContainerAware
     }
 
     /**
-     * @return \WellCommerce\Bundle\CoreBundle\Helper\Security\SecurityHelperInterface
+     * @return \WellCommerce\Bundle\UserBundle\Helper\Security\SecurityHelperInterface
      */
     public function getSecurityHelper()
     {
@@ -207,11 +207,11 @@ abstract class AbstractContainerAware extends ContainerAware
     }
 
     /**
-     * @return \WellCommerce\Bundle\AppBundle\Helper\ProductLayeredNavigationHelperInterface
+     * @return \WellCommerce\Bundle\AppBundle\Helper\LayeredNavigationHelperInterface
      */
     public function getLayeredNavigationHelper()
     {
-        return $this->get('product_layered_navigation.helper');
+        return $this->get('layered_navigation.helper');
     }
 
     /**

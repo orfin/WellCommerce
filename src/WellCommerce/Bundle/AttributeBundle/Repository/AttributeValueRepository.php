@@ -12,7 +12,7 @@
 namespace WellCommerce\Bundle\AttributeBundle\Repository;
 
 use Doctrine\Common\Collections\Criteria;
-use WellCommerce\Bundle\AppBundle\Entity\AttributeInterface;
+use WellCommerce\Bundle\AttributeBundle\Entity\AttributeInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 
 /**

@@ -1,4 +1,4 @@
-WellCommerce\Bundle\AppBundle\Entity\PaymentMethod:
+WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod:
     type: entity
     table: payment_method
     repositoryClass: WellCommerce\Bundle\AppBundle\Repository\PaymentMethodRepository
@@ -24,7 +24,7 @@ WellCommerce\Bundle\AppBundle\Entity\PaymentMethod:
                 default: 0
     oneToMany:
         configuration:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\PaymentMethodConfiguration
+            targetEntity: WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodConfiguration
             cascade:
                 - remove
                 - persist
@@ -33,7 +33,7 @@ WellCommerce\Bundle\AppBundle\Entity\PaymentMethod:
             orphanRemoval: true
     manyToOne:
         defaultOrderStatus:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\OrderStatus
+            targetEntity: WellCommerce\Bundle\OrderBundle\Entity\OrderStatus
             fetch: LAZY
             joinColumns:
             default_order_status_id:

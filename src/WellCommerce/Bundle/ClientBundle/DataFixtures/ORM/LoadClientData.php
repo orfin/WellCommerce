@@ -13,8 +13,8 @@
 namespace WellCommerce\Bundle\ClientBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use WellCommerce\Bundle\AppBundle\Entity\ClientBillingAddress;
-use WellCommerce\Bundle\AppBundle\Entity\ClientShippingAddress;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddress;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddress;
 use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
 
 /**

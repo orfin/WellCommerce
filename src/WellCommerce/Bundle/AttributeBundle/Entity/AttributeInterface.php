@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\AttributeBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
-use WellCommerce\Bundle\AppBundle\Entity\Attribute\GroupInterface;
+use WellCommerce\Bundle\AttributeBundle\Entity\Attribute\GroupInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;

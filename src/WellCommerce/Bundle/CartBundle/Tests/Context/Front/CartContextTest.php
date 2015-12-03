@@ -29,7 +29,7 @@ class CartContextTest extends AbstractTestCase
         $this->assertNull($context->getCurrentCart());
 
         $context->setCurrentCart($cart);
-        $this->assertInstanceOf(\WellCommerce\Bundle\AppBundle\Entity\CartInterface::class, $context->getCurrentCart());
+        $this->assertInstanceOf(\WellCommerce\Bundle\CartBundle\Entity\CartInterface::class, $context->getCurrentCart());
         $this->assertEquals($cart, $context->getCurrentCart());
     }
 }

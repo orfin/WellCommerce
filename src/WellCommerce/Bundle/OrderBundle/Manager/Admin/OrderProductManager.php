@@ -10,15 +10,15 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Manager\Admin;
+namespace WellCommerce\Bundle\OrderBundle\Manager\Admin;
 
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 use WellCommerce\Bundle\AppBundle\Repository\ProductRepositoryInterface;
 use WellCommerce\Bundle\TaxBundle\Helper\TaxHelper;
 use WellCommerce\Bundle\AppBundle\Entity\Price;
 use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
-use WellCommerce\Bundle\AppBundle\Entity\OrderInterface;
-use WellCommerce\Bundle\AppBundle\Entity\OrderProductInterface;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderProductInterface;
 
 /**
  * Class OrderProductManager
@@ -90,7 +90,7 @@ class OrderProductManager extends AbstractAdminManager
      * @param array          $productValues
      * @param OrderInterface $order
      *
-     * @return \WellCommerce\Bundle\AppBundle\Entity\OrderProductInterface
+     * @return \WellCommerce\Bundle\OrderBundle\Entity\OrderProductInterface
      */
     protected function createOrderProduct(array $productValues, OrderInterface $order)
     {

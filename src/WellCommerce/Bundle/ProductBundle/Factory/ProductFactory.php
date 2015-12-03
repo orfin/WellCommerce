@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\ProductBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use WellCommerce\Bundle\AppBundle\Entity\Product;
+use WellCommerce\Bundle\ProductBundle\Entity\Product;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 
 /**

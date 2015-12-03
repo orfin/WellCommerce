@@ -1,4 +1,4 @@
-WellCommerce\Bundle\AppBundle\Entity\AttributeValueTranslation:
+WellCommerce\Bundle\AttributeBundle\Entity\AttributeValueTranslation:
     type: entity
     table: attribute_value_translation
     fields:

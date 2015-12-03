@@ -27,7 +27,7 @@
             <tag name="console.command"/>
         </service>
 
-        <service id="dataset.transformer.route" class="WellCommerce\Bundle\CoreBundle\DataSet\Transformer\RouteTransformer">
+        <service id="dataset.transformer.route" class="WellCommerce\Bundle\RoutingBundle\DataSet\Transformer\RouteTransformer">
             <argument type="service" id="cmf_routing.generator" />
             <tag name="dataset.transformer" alias="route"/>
         </service>

@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\AttributeBundle\Manager\Admin;
 
-use WellCommerce\Bundle\AppBundle\Entity\AttributeInterface;
+use WellCommerce\Bundle\AttributeBundle\Entity\AttributeInterface;
 use WellCommerce\Bundle\AppBundle\Exception\AttributeNotFoundException;
 use WellCommerce\Bundle\AppBundle\Repository\AttributeRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
@@ -43,7 +43,7 @@ class AttributeValueManager extends AbstractAdminManager
      * @param string $attributeValueName
      * @param int    $attributeId
      *
-     * @return \WellCommerce\Bundle\AppBundle\Entity\AttributeValueInterface
+     * @return \WellCommerce\Bundle\AttributeBundle\Entity\AttributeValueInterface
      */
     public function addAttributeValue($attributeValueName, $attributeId)
     {
@@ -58,7 +58,7 @@ class AttributeValueManager extends AbstractAdminManager
      *
      * @param int $attributeId
      *
-     * @return \WellCommerce\Bundle\AppBundle\Entity\AttributeInterface
+     * @return \WellCommerce\Bundle\AttributeBundle\Entity\AttributeInterface
      */
     protected function findAttribute($attributeId)
     {
@@ -79,7 +79,7 @@ class AttributeValueManager extends AbstractAdminManager
      * @param AttributeInterface $attribute
      *
      *
-     * @return \WellCommerce\Bundle\AppBundle\Entity\AttributeValueInterface
+     * @return \WellCommerce\Bundle\AttributeBundle\Entity\AttributeValueInterface
      */
     protected function createAttributeValue($name, AttributeInterface $attribute)
     {

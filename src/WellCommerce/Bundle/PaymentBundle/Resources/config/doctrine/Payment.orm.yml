@@ -9,7 +9,7 @@ WellCommerce\Bundle\AppBundle\Entity\Payment:
                 strategy: AUTO
     manyToOne:
         order:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Order
+            targetEntity: WellCommerce\Bundle\OrderBundle\Entity\Order
             inversedBy: payments
             joinColumn:
                 name: order_id

@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\AttributeBundle\Manager\Admin;
 
 use Doctrine\Common\Collections\Criteria;
-use WellCommerce\Bundle\AppBundle\Entity\Attribute\GroupInterface;
+use WellCommerce\Bundle\AttributeBundle\Entity\Attribute\GroupInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
 
 /**

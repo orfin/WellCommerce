@@ -17,7 +17,7 @@ WellCommerce\Bundle\ClientBundle\Entity\Wishlist:
                     referencedColumnName: id
             orphanRemoval: false
         product:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Product
+            targetEntity: WellCommerce\Bundle\ProductBundle\Entity\Product
             fetch: LAZY
             joinColumns:
                 product_id:

@@ -1,7 +1,7 @@
-WellCommerce\Bundle\AppBundle\Entity\Availability:
+WellCommerce\Bundle\AvailabilityBundle\Entity\Availability:
     type: entity
     table: availability
-    repositoryClass: WellCommerce\Bundle\AppBundle\Repository\AvailabilityRepository
+    repositoryClass: WellCommerce\Bundle\AvailabilityBundle\Repository\AvailabilityRepository
     id:
         id:
             type: integer

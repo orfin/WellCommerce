@@ -43,6 +43,6 @@ class AvailabilityManagerTest extends AbstractAdminManagerTestCase
 
     protected function getRepositoryInterfaceName()
     {
-        return 'WellCommerce\Bundle\AppBundle\Repository\AvailabilityRepositoryInterface';
+        return 'WellCommerce\Bundle\AvailabilityBundle\Repository\AvailabilityRepositoryInterface';
     }
 }

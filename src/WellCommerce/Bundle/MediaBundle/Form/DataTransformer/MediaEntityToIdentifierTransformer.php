@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Form\DataTransformer;
+namespace WellCommerce\Bundle\MediaBundle\Form\DataTransformer;
 
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\EntityToIdentifierTransformer;

@@ -10,10 +10,10 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Factory;
+namespace WellCommerce\Bundle\OrderBundle\Factory;
 
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
-use WellCommerce\Bundle\AppBundle\Entity\OrderStatusGroup;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderStatusGroup;
 
 /**
  * Class OrderStatusGroupFactory
@@ -23,7 +23,7 @@ use WellCommerce\Bundle\AppBundle\Entity\OrderStatusGroup;
 class OrderStatusGroupFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\AppBundle\Entity\OrderStatusGroupInterface
+     * @return \WellCommerce\Bundle\OrderBundle\Entity\OrderStatusGroupInterface
      */
     public function create()
     {

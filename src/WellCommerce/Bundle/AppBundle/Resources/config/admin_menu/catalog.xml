@@ -73,10 +73,10 @@
     </item>
 
     <item>
-        <identifier>product_review</identifier>
+        <identifier>review</identifier>
         <css_class/>
-        <name>product_review</name>
-        <route_name>admin.product_review.index</route_name>
+        <name>review</name>
+        <route_name>admin.review.index</route_name>
         <parent>catalog</parent>
         <hierarchy>80</hierarchy>
     </item>

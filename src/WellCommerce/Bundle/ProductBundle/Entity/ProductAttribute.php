@@ -17,6 +17,7 @@ use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use WellCommerce\Bundle\AppBundle\Doctrine\ORM\Behaviours\PhotoTrait;
 use WellCommerce\Bundle\AppBundle\Entity\DiscountablePrice;
 use WellCommerce\Bundle\AppBundle\Entity\HierarchyAwareTrait;
+use WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityAwareTrait;
 
 /**
  * Class ProductAttribute

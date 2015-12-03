@@ -71,7 +71,7 @@ product_status:
     label:
         css_class: CSS class
 
-product_review:
+review:
     heading:
         index: Reviews
     label:

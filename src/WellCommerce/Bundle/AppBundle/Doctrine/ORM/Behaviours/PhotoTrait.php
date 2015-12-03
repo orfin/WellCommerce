@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\AppBundle\Doctrine\ORM\Behaviours;
 
-use WellCommerce\Bundle\AppBundle\Entity\MediaInterface;
+use WellCommerce\Bundle\MediaBundle\Entity\MediaInterface;
 
 /**
  * Class PhotoTrait
