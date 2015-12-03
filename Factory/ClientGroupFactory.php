@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\ClientBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use WellCommerce\Bundle\AppBundle\Entity\ClientGroup;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientGroup;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 
 /**
@@ -24,7 +24,7 @@ use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 class ClientGroupFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\AppBundle\Entity\ClientGroupInterface
+     * @return \WellCommerce\Bundle\ClientBundle\Entity\ClientGroupInterface
      */
     public function create()
     {

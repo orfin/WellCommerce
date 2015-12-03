@@ -11,9 +11,9 @@
  */
 namespace WellCommerce\Bundle\ClientBundle\Twig\Extension;
 
-use WellCommerce\Bundle\AppBundle\Entity\ClientBillingAddressInterface;
-use WellCommerce\Bundle\AppBundle\Entity\ClientContactDetailsInterface;
-use WellCommerce\Bundle\AppBundle\Entity\ClientShippingAddressInterface;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddressInterface;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetailsInterface;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddressInterface;
 
 /**
  * Class ClientAddressFormatterExtension

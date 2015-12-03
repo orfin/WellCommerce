@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\ClientBundle\Factory;
 
-use WellCommerce\Bundle\AppBundle\Entity\Client;
-use WellCommerce\Bundle\AppBundle\Entity\ClientContactDetails;
+use WellCommerce\Bundle\ClientBundle\Entity\Client;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetails;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 
 /**
@@ -24,7 +24,7 @@ use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 class ClientFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\AppBundle\Entity\ClientInterface
+     * @return \WellCommerce\Bundle\ClientBundle\Entity\ClientInterface
      */
     public function create()
     {

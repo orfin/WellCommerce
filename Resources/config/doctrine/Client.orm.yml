@@ -60,7 +60,7 @@ WellCommerce\Bundle\ClientBundle\Entity\Client:
 #            mappedBy: client
 #            orphanRemoval: true
 #        orders:
-#            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Order
+#            targetEntity: WellCommerce\Bundle\OrderBundle\Entity\Order
 #            cascade:
 #                - remove
 #                - persist
