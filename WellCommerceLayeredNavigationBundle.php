@@ -10,17 +10,15 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Manager\Front;
+namespace WellCommerce\Bundle\LayeredNavigationBundle;
 
-use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
-use WellCommerce\Bundle\CoreBundle\Manager\Front\FrontManagerInterface;
+use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * Class ProductLayeredNavigationManager
+ * Class WellCommerceLayeredNavigationBundleBundle
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductLayeredNavigationManager extends AbstractFrontManager implements FrontManagerInterface
+class WellCommerceLayeredNavigationBundle extends Bundle
 {
-
 }

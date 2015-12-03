@@ -10,23 +10,23 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Controller\Front;
+namespace WellCommerce\Bundle\LayeredNavigationBundle\Controller\Front;
 
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 
 /**
- * Class ProductLayeredNavigationController
+ * Class LayeredNavigationController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductLayeredNavigationController extends AbstractFrontController
+class LayeredNavigationController extends AbstractFrontController
 {
     /**
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
     public function filterAction()
     {
-        $redirectUrl = $this->get('product_layered_navigation.helper')->generateRedirectUrl();
+        $redirectUrl = $this->get('layered_navigation.helper')->generateRedirectUrl();
 
         return $this->jsonResponse([
             'success'     => true,
