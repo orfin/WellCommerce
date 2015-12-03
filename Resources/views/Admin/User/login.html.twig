@@ -1,0 +1,28 @@
+{% extends 'WellCommerceAppBundle:Admin:layout.html.twig' %}
+{% trans_default_domain "wellcommerce" %}
+{% block body %}
+<body class="welcome-screen">
+<div id="header">
+    <div class="layout-container">
+        <h1>
+            <a href="">
+                {% image '@WellCommerceAppBundle/Resources/public/images/logo.png' %}
+                <img src="{{ asset_url }}" />
+                {% endimage %}
+            </a>
+        </h1>
+    </div>
+</div>
+<div id="message-bar"></div>
+<div id="content" class="layout-container">
+    {% if error %}
+        <script>
+            $(document).ready(function(){
+                GError('{{ error.messageKey|trans(error.messageData, 'security') }}');
+            });
+        </script>
+    {% endif %}
+    {{ form_js(form) }}
+</div>
+</body>
+{% endblock %}
