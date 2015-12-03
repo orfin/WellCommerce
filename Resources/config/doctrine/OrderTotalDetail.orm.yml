@@ -1,7 +1,7 @@
-WellCommerce\Bundle\AppBundle\Entity\OrderTotalDetail:
+WellCommerce\Bundle\OrderBundle\Entity\OrderTotalDetail:
     type: entity
     table: orders_total
-    repositoryClass: WellCommerce\Bundle\AppBundle\Repository\OrderTotalDetailRepository
+    repositoryClass: WellCommerce\Bundle\OrderBundle\Repository\OrderTotalDetailRepository
     id:
         id:
             type: integer
@@ -9,7 +9,7 @@ WellCommerce\Bundle\AppBundle\Entity\OrderTotalDetail:
                 strategy: AUTO
     embedded:
         orderTotal:
-            class: WellCommerce\Bundle\AppBundle\Entity\OrderTotal
+            class: WellCommerce\Bundle\OrderBundle\Entity\OrderTotal
             columnPrefix: total_
     fields:
         collector:
@@ -37,7 +37,7 @@ WellCommerce\Bundle\AppBundle\Entity\OrderTotalDetail:
                 default: 0
     manyToOne:
         order:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Order
+            targetEntity: WellCommerce\Bundle\OrderBundle\Entity\Order
             fetch: LAZY
             inversedBy: totals
             joinColumns:

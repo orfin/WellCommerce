@@ -1,4 +1,4 @@
-WellCommerce\Bundle\AppBundle\Entity\OrderTotal:
+WellCommerce\Bundle\OrderBundle\Entity\OrderTotal:
     type: embeddable
     fields:
         netAmount:

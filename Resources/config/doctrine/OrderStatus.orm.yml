@@ -1,7 +1,7 @@
-WellCommerce\Bundle\AppBundle\Entity\OrderStatus:
+WellCommerce\Bundle\OrderBundle\Entity\OrderStatus:
     type: entity
     table: order_status
-    repositoryClass: WellCommerce\Bundle\AppBundle\Repository\OrderStatusRepository
+    repositoryClass: WellCommerce\Bundle\OrderBundle\Repository\OrderStatusRepository
     id:
         id:
             type: integer
@@ -13,7 +13,7 @@ WellCommerce\Bundle\AppBundle\Entity\OrderStatus:
             nullable: false
     manyToOne:
         orderStatusGroup:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\OrderStatusGroup
+            targetEntity: WellCommerce\Bundle\OrderBundle\Entity\OrderStatusGroup
             fetch: LAZY
             joinColumns:
                 order_status_group_id:

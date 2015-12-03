@@ -1,7 +1,7 @@
-WellCommerce\Bundle\AppBundle\Entity\Order:
+WellCommerce\Bundle\OrderBundle\Entity\Order:
     type: entity
     table: orders
-    repositoryClass: WellCommerce\Bundle\AppBundle\Repository\OrderRepository
+    repositoryClass: WellCommerce\Bundle\OrderBundle\Repository\OrderRepository
     id:
         id:
             type: integer
@@ -9,22 +9,22 @@ WellCommerce\Bundle\AppBundle\Entity\Order:
                 strategy: AUTO
     embedded:
         billingAddress:
-            class: WellCommerce\Bundle\AppBundle\Entity\ClientBillingAddress
+            class: WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddress
             columnPrefix: billing_address_
         shippingAddress:
-            class: WellCommerce\Bundle\AppBundle\Entity\ClientShippingAddress
+            class: WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddress
             columnPrefix: shipping_address_
         contactDetails:
-            class: WellCommerce\Bundle\AppBundle\Entity\ClientContactDetails
+            class: WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetails
             columnPrefix: contact_details_
         orderTotal:
-            class: WellCommerce\Bundle\AppBundle\Entity\OrderTotal
+            class: WellCommerce\Bundle\OrderBundle\Entity\OrderTotal
             columnPrefix: order_total_
         productTotal:
-            class: WellCommerce\Bundle\AppBundle\Entity\OrderTotal
+            class: WellCommerce\Bundle\OrderBundle\Entity\OrderTotal
             columnPrefix: product_total_
         shippingTotal:
-            class: WellCommerce\Bundle\AppBundle\Entity\OrderTotal
+            class: WellCommerce\Bundle\OrderBundle\Entity\OrderTotal
             columnPrefix: shipping_total_
     fields:
         sessionId:
@@ -42,13 +42,13 @@ WellCommerce\Bundle\AppBundle\Entity\Order:
             nullable: false
     oneToMany:
         products:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\OrderProduct
+            targetEntity: WellCommerce\Bundle\OrderBundle\Entity\OrderProduct
             cascade:
                 - persist
             fetch: LAZY
             mappedBy: order
         totals:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\OrderTotalDetail
+            targetEntity: WellCommerce\Bundle\OrderBundle\Entity\OrderTotalDetail
             cascade:
                 - persist
             fetch: LAZY
@@ -58,14 +58,14 @@ WellCommerce\Bundle\AppBundle\Entity\Order:
             mappedBy: order
     manyToOne:
         coupon:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Coupon
+            targetEntity: WellCommerce\Bundle\CouponBundle\Entity\Coupon
             fetch: LAZY
             joinColumns:
                 coupon_id:
                     referencedColumnName: id
                     onDelete: SET NULL
         client:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Client
+            targetEntity: WellCommerce\Bundle\ClientBundle\Entity\Client
             fetch: LAZY
             inversedBy: orders
             joinColumns:
@@ -73,14 +73,14 @@ WellCommerce\Bundle\AppBundle\Entity\Order:
                     referencedColumnName: id
                     onDelete: CASCADE
         paymentMethod:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\PaymentMethod
+            targetEntity: WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod
             fetch: LAZY
             joinColumns:
                 payment_method_id:
                     referencedColumnName: id
                     onDelete: RESTRICT
         currentStatus:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\OrderStatus
+            targetEntity: WellCommerce\Bundle\OrderBundle\Entity\OrderStatus
             fetch: LAZY
             joinColumns:
                 order_status_id:

@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Service\Order\Visitor;
+namespace WellCommerce\Bundle\OrderBundle\Visitor;
 
 use WellCommerce\Component\Collections\ArrayCollection;
 

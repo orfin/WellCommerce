@@ -10,14 +10,14 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Factory;
+namespace WellCommerce\Bundle\OrderBundle\Factory;
 
 use WellCommerce\Bundle\CurrencyBundle\Helper\CurrencyHelperInterface;
 use WellCommerce\Bundle\AppBundle\Entity\Price;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
-use WellCommerce\Bundle\AppBundle\Entity\CartProductInterface;
-use WellCommerce\Bundle\AppBundle\Entity\OrderInterface;
-use WellCommerce\Bundle\AppBundle\Entity\OrderProduct;
+use WellCommerce\Bundle\CartBundle\Entity\CartProductInterface;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderProduct;
 
 /**
  * Class OrderProductFactory

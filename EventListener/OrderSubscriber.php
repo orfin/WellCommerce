@@ -9,14 +9,14 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Bundle\AppBundle\EventListener;
+namespace WellCommerce\Bundle\OrderBundle\EventListener;
 
 use WellCommerce\Bundle\CoreBundle\Event\ResourceEvent;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
-use WellCommerce\Bundle\AppBundle\Entity\OrderInterface;
-use WellCommerce\Bundle\AppBundle\Entity\OrderTotalDetailInterface;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderTotalDetailInterface;
 use WellCommerce\Bundle\AppBundle\Factory\OrderTotalFactory;
-use WellCommerce\Bundle\AppBundle\Service\Order\Visitor\OrderVisitorTraverserInterface;
+use WellCommerce\Bundle\OrderBundle\Visitor\OrderVisitorTraverserInterface;
 
 /**
  * Class OrderSubscriber

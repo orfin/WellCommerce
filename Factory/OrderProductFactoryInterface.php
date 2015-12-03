@@ -10,11 +10,11 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Factory;
+namespace WellCommerce\Bundle\OrderBundle\Factory;
 
 use WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface;
-use WellCommerce\Bundle\AppBundle\Entity\CartProductInterface;
-use WellCommerce\Bundle\AppBundle\Entity\OrderInterface;
+use WellCommerce\Bundle\CartBundle\Entity\CartProductInterface;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 
 /**
  * Interface OrderProductFactoryInterface
@@ -24,7 +24,7 @@ use WellCommerce\Bundle\AppBundle\Entity\OrderInterface;
 interface OrderProductFactoryInterface extends FactoryInterface
 {
     /**
-     * @return \WellCommerce\Bundle\AppBundle\Entity\OrderProductInterface
+     * @return \WellCommerce\Bundle\OrderBundle\Entity\OrderProductInterface
      */
     public function create();
 
@@ -34,7 +34,7 @@ interface OrderProductFactoryInterface extends FactoryInterface
      * @param CartProductInterface $cartProduct
      * @param OrderInterface       $order
      *
-     * @return \WellCommerce\Bundle\AppBundle\Entity\OrderProductInterface
+     * @return \WellCommerce\Bundle\OrderBundle\Entity\OrderProductInterface
      */
     public function createFromCartProduct(CartProductInterface $cartProduct, OrderInterface $order);
 }

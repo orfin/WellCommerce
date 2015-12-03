@@ -9,17 +9,17 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Bundle\AppBundle\Entity;
+namespace WellCommerce\Bundle\OrderBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
-use WellCommerce\Bundle\AppBundle\Entity\ClientAwareTrait;
-use WellCommerce\Bundle\AppBundle\Entity\ClientBillingAddressInterface;
-use WellCommerce\Bundle\AppBundle\Entity\ClientContactDetailsInterface;
-use WellCommerce\Bundle\AppBundle\Entity\ClientShippingAddressInterface;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientAwareTrait;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddressInterface;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetailsInterface;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddressInterface;
 use WellCommerce\Bundle\ShopBundle\Entity\ShopAwareTrait;
 use WellCommerce\Bundle\AppBundle\Doctrine\ORM\Behaviours\Timestampable\TimestampableTrait;
 use WellCommerce\Bundle\AppBundle\Entity\Price;
-use WellCommerce\Bundle\AppBundle\Entity\CouponAwareTrait;
+use WellCommerce\Bundle\CouponBundle\Entity\CouponAwareTrait;
 
 /**
  * Class Order

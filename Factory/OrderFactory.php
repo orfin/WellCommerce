@@ -10,15 +10,15 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Factory;
+namespace WellCommerce\Bundle\OrderBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\Bundle\CurrencyBundle\Helper\CurrencyHelperInterface;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
-use WellCommerce\Bundle\AppBundle\Entity\CartInterface;
-use WellCommerce\Bundle\AppBundle\Entity\CartProductInterface;
-use WellCommerce\Bundle\AppBundle\Entity\Order;
-use WellCommerce\Bundle\AppBundle\Entity\OrderInterface;
+use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
+use WellCommerce\Bundle\CartBundle\Entity\CartProductInterface;
+use WellCommerce\Bundle\OrderBundle\Entity\Order;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 
 /**
  * Class OrderFactory
@@ -60,7 +60,7 @@ class OrderFactory extends AbstractFactory implements OrderFactoryInterface
     }
 
     /**
-     * @return \WellCommerce\Bundle\AppBundle\Entity\OrderInterface
+     * @return \WellCommerce\Bundle\OrderBundle\Entity\OrderInterface
      */
     public function create()
     {

@@ -1,4 +1,4 @@
-WellCommerce\Bundle\AppBundle\Entity\OrderStatusTranslation:
+WellCommerce\Bundle\OrderBundle\Entity\OrderStatusTranslation:
     type: entity
     table: order_status_translation
     fields:

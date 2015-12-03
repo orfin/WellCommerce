@@ -10,11 +10,11 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Factory;
+namespace WellCommerce\Bundle\OrderBundle\Factory;
 
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 use WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface;
-use WellCommerce\Bundle\AppBundle\Entity\OrderTotalDetail;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderTotalDetail;
 
 /**
  * Class OrderTotalDetailFactory
@@ -24,7 +24,7 @@ use WellCommerce\Bundle\AppBundle\Entity\OrderTotalDetail;
 class OrderTotalDetailFactory extends AbstractFactory implements FactoryInterface
 {
     /**
-     * @return \WellCommerce\Bundle\AppBundle\Entity\OrderTotalDetailInterface
+     * @return \WellCommerce\Bundle\OrderBundle\Entity\OrderTotalDetailInterface
      */
     public function create()
     {

@@ -10,10 +10,10 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Factory;
+namespace WellCommerce\Bundle\OrderBundle\Factory;
 
 use WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface;
-use WellCommerce\Bundle\AppBundle\Entity\CartInterface;
+use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 
 /**
  * Interface OrderFactoryInterface
@@ -27,7 +27,7 @@ interface OrderFactoryInterface extends FactoryInterface
      *
      * @param CartInterface $cart
      *
-     * @return \WellCommerce\Bundle\AppBundle\Entity\OrderInterface
+     * @return \WellCommerce\Bundle\OrderBundle\Entity\OrderInterface
      */
     public function createOrderFromCart(CartInterface $cart);
 }
