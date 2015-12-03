@@ -1,4 +1,4 @@
-WellCommerce\Bundle\AppBundle\Entity\AvailabilityTranslation:
+WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityTranslation:
     type: entity
     table: availability_translation
     fields:

@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\AvailabilityBundle\Tests\Entity;
 
-use WellCommerce\Bundle\AppBundle\Entity\Availability;
+use WellCommerce\Bundle\AvailabilityBundle\Entity\Availability;
 use WellCommerce\Bundle\CoreBundle\Test\Entity\AbstractEntityTestCase;
 
 /**

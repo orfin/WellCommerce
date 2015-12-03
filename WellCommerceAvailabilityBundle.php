@@ -15,7 +15,7 @@ namespace WellCommerce\Bundle\AvailabilityBundle;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * Class WellCommerceUnitBundle
+ * Class WellCommerceAvailabilityBundle
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */

@@ -10,18 +10,18 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\UnitBundle\DependencyInjection;
+namespace WellCommerce\Bundle\AvailabilityBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Loader;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
 
 /**
- * Class WellCommerceUnitExtension
+ * Class WellCommerceAvailabilityExtension
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class WellCommerceUnitExtension extends AbstractExtension
+class WellCommerceAvailabilityExtension extends AbstractExtension
 {
 
 }

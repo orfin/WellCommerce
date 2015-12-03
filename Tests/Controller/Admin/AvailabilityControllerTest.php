@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\AvailabilityBundle\Tests\Controller\Admin;
 
 use Doctrine\Common\Collections\Criteria;
-use WellCommerce\Bundle\AppBundle\Entity\AvailabilityInterface;
+use WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityInterface;
 use WellCommerce\Bundle\CoreBundle\Test\Controller\Admin\AbstractAdminControllerTestCase;
 
 /**
