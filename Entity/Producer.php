@@ -39,7 +39,7 @@ class Producer implements ProducerInterface
     protected $products;
 
     /**
-     * @var Collection|\WellCommerce\Bundle\AppBundle\Entity\DelivererInterface[]
+     * @var Collection|\WellCommerce\Bundle\DelivererBundle\Entity\DelivererInterface[]
      */
     protected $deliverers;
 

@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\ProducerBundle\Controller\Box;
 
 use WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxSettingsCollection;
-use WellCommerce\Bundle\AppBundle\Conditions\ProductLayeredNavigationConditions;
+use WellCommerce\Bundle\AppBundle\Conditions\LayeredNavigationConditions;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 
 /**
@@ -37,7 +37,7 @@ class ProducerProductsBoxController extends AbstractBoxController
         $requestHelper = $this->manager->getRequestHelper();
         $limit         = $requestHelper->getAttributesBagParam('limit', $boxSettings->getParam('per_page', 12));
         $conditions    = $this->manager->getCurrentProducerConditions();
-        $conditions    = $this->get('product_layered_navigation.helper')->addLayeredNavigationConditions($conditions);
+        $conditions    = $this->get('layered_navigation.helper')->addLayeredNavigationConditions($conditions);
 
         $products = $dataset->getResult('array', [
             'limit'      => $limit,
