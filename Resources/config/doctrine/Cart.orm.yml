@@ -1,7 +1,7 @@
-WellCommerce\Bundle\AppBundle\Entity\Cart:
+WellCommerce\Bundle\CartBundle\Entity\Cart:
     type: entity
     table: cart
-    repositoryClass: WellCommerce\Bundle\AppBundle\Repository\CartRepository
+    repositoryClass: WellCommerce\Bundle\CartBundle\Repository\CartRepository
     id:
         id:
             type: integer
@@ -10,16 +10,16 @@ WellCommerce\Bundle\AppBundle\Entity\Cart:
                 strategy: IDENTITY
     embedded:
         totals:
-            class: WellCommerce\Bundle\AppBundle\Entity\CartTotals
+            class: WellCommerce\Bundle\CartBundle\Entity\CartTotals
             columnPrefix: total_
         billingAddress:
-            class: WellCommerce\Bundle\AppBundle\Entity\ClientBillingAddress
+            class: WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddress
             columnPrefix: billing_address_
         shippingAddress:
-            class: WellCommerce\Bundle\AppBundle\Entity\ClientShippingAddress
+            class: WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddress
             columnPrefix: shipping_address_
         contactDetails:
-            class: WellCommerce\Bundle\AppBundle\Entity\ClientContactDetails
+            class: WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetails
             columnPrefix: contact_details_
     fields:
         sessionId:
@@ -40,7 +40,7 @@ WellCommerce\Bundle\AppBundle\Entity\Cart:
                 default: 1
     oneToMany:
         products:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\CartProduct
+            targetEntity: WellCommerce\Bundle\CartBundle\Entity\CartProduct
             cascade:
                 - all
             fetch: LAZY
@@ -48,7 +48,7 @@ WellCommerce\Bundle\AppBundle\Entity\Cart:
             orphanRemoval: true
     manyToOne:
         coupon:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Coupon
+            targetEntity: WellCommerce\Bundle\CouponBundle\Entity\Coupon
             fetch: LAZY
             joinColumns:
                 coupon_id:
@@ -69,7 +69,7 @@ WellCommerce\Bundle\AppBundle\Entity\Cart:
                     referencedColumnName: id
                     onDelete: 'SET NULL'
         paymentMethod:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\PaymentMethod
+            targetEntity: WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod
             fetch: LAZY
             joinColumns:
                 payment_method_id:
@@ -77,7 +77,7 @@ WellCommerce\Bundle\AppBundle\Entity\Cart:
                     onDelete: 'SET NULL'
     oneToOne:
         client:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Client
+            targetEntity: WellCommerce\Bundle\ClientBundle\Entity\Client
             fetch: LAZY
             nullable: true
             joinColumns:

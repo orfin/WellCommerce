@@ -12,7 +12,7 @@
 namespace WellCommerce\Bundle\CartBundle\Twig\Extension;
 
 use WellCommerce\Component\DataSet\DataSetInterface;
-use WellCommerce\Bundle\AppBundle\Context\Front\CartContextInterface;
+use WellCommerce\Bundle\CartBundle\Context\Front\CartContextInterface;
 
 /**
  * Class CategoryExtension

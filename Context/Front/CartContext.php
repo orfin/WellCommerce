@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\CartBundle\Context\Front;
 
-use WellCommerce\Bundle\AppBundle\Entity\CartInterface;
+use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 
 /**
  * Class CartContext

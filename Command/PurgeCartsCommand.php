@@ -28,7 +28,7 @@ class PurgeCartsCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $output->write('Purging carts. Please wait for process to finish.', true);
-        $result = $this->getContainer()->get('doctrine.helper')->truncateTable('WellCommerce\Bundle\AppBundle\Entity\Cart');
+        $result = $this->getContainer()->get('doctrine.helper')->truncateTable('WellCommerce\Bundle\CartBundle\Entity\Cart');
 
         if (true === $result) {
             $output->write('All carts were purged.', true);

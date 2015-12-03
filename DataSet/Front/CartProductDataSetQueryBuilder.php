@@ -16,8 +16,8 @@ use WellCommerce\Component\DataSet\Column\ColumnCollection;
 use WellCommerce\Component\DataSet\QueryBuilder\AbstractDataSetQueryBuilder;
 use WellCommerce\Component\DataSet\QueryBuilder\DataSetQueryBuilderInterface;
 use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
-use WellCommerce\Bundle\AppBundle\Context\Front\CartContextInterface;
-use WellCommerce\Bundle\AppBundle\Repository\CartProductRepositoryInterface;
+use WellCommerce\Bundle\CartBundle\Context\Front\CartContextInterface;
+use WellCommerce\Bundle\CartBundle\Repository\CartProductRepositoryInterface;
 
 /**
  * Class CartProductDataSetQueryBuilder

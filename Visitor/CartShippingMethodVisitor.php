@@ -10,11 +10,10 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CartBundle\Service\Cart\Visitor;
+namespace WellCommerce\Bundle\CartBundle\Visitor;
 
-use WellCommerce\Bundle\AppBundle\Entity\CartInterface;
-use WellCommerce\Bundle\AppBundle\Provider\CartShippingMethodProviderInterface;
-use WellCommerce\Bundle\AppBundle\Provider\ShippingMethodProviderInterface;
+use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
+use WellCommerce\Bundle\ShippingBundle\Provider\ShippingMethodProviderInterface;
 
 /**
  * Class CartShippingMethodVisitor
