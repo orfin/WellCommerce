@@ -4,7 +4,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="coupon.manager.admin" class="WellCommerce\Bundle\AppBundle\Manager\Admin\CouponManager">
+        <service id="coupon.manager.admin" class="WellCommerce\Bundle\CouponBundle\Manager\Admin\CouponManager">
             <argument type="service" id="coupon.repository"/>
             <argument type="service" id="coupon.event_dispatcher"/>
             <argument type="service" id="coupon.factory"/>
@@ -15,25 +15,25 @@
             </call>
         </service>
 
-        <service id="coupon.controller.admin" class="WellCommerce\Bundle\AppBundle\Controller\Admin\CouponController">
+        <service id="coupon.controller.admin" class="WellCommerce\Bundle\CouponBundle\Controller\Admin\CouponController">
             <argument type="service" id="coupon.manager.admin"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <service id="coupon.dataset.query_builder" class="WellCommerce\Bundle\AppBundle\DataSet\Admin\CouponDataSetQueryBuilder" public="false">
+        <service id="coupon.dataset.query_builder" class="WellCommerce\Bundle\CouponBundle\DataSet\Admin\CouponDataSetQueryBuilder" public="false">
             <argument type="service" id="coupon.repository"/>
         </service>
 
-        <service id="coupon.dataset.admin" class="WellCommerce\Bundle\AppBundle\DataSet\Admin\CouponDataSet">
+        <service id="coupon.dataset.admin" class="WellCommerce\Bundle\CouponBundle\DataSet\Admin\CouponDataSet">
             <argument type="service" id="coupon.dataset.query_builder"/>
             <argument type="service" id="dataset.manager"/>
             <argument type="service" id="coupon.event_dispatcher"/>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
-        <service id="coupon.datagrid" class="WellCommerce\Bundle\AppBundle\DataGrid\CouponDataGrid">
+        <service id="coupon.datagrid" class="WellCommerce\Bundle\CouponBundle\DataGrid\CouponDataGrid">
             <argument key="identifier">coupon</argument>
             <argument type="service" id="coupon.dataset.admin"/>
             <argument type="service" id="coupon.event_dispatcher"/>
@@ -42,7 +42,7 @@
             </call>
         </service>
 
-        <service id="coupon.form_builder.admin" class="WellCommerce\Bundle\AppBundle\Form\Admin\CouponFormBuilder">
+        <service id="coupon.form_builder.admin" class="WellCommerce\Bundle\CouponBundle\Form\Admin\CouponFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
             <argument type="service" id="coupon.event_dispatcher"/>

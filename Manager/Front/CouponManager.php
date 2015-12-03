@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\CouponBundle\Manager\Front;
 
 use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
-use WellCommerce\Bundle\AppBundle\Entity\CouponInterface;
+use WellCommerce\Bundle\CouponBundle\Entity\CouponInterface;
 use WellCommerce\Bundle\AppBundle\Exception\CouponException;
 use WellCommerce\Bundle\AppBundle\Service\Coupon\Validator\CouponValidator;
 
@@ -50,7 +50,7 @@ class CouponManager extends AbstractFrontManager
      *
      * @param string $code
      *
-     * @return null|\WellCommerce\Bundle\AppBundle\Entity\CouponInterface
+     * @return null|\WellCommerce\Bundle\CouponBundle\Entity\CouponInterface
      */
     protected function findCoupon($code)
     {
