@@ -12,15 +12,16 @@
 
 namespace WellCommerce\Bundle\RoutingBundle\Provider;
 
+use Doctrine\Common\Util\Debug;
 use Symfony\Cmf\Component\Routing\RouteProviderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Route as SymfonyRoute;
 use Symfony\Component\Routing\RouteCollection;
 use WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface;
-use WellCommerce\Bundle\CoreBundle\Generator\RouteGeneratorCollection;
-use WellCommerce\Bundle\CoreBundle\Generator\RouteGeneratorInterface;
-use WellCommerce\Bundle\AppBundle\Repository\RouteRepositoryInterface;
+use WellCommerce\Bundle\RoutingBundle\Generator\RouteGeneratorCollection;
+use WellCommerce\Bundle\RoutingBundle\Generator\RouteGeneratorInterface;
+use WellCommerce\Bundle\RoutingBundle\Repository\RouteRepositoryInterface;
 
 /**
  * Class RouteProvider

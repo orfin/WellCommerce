@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CoreBundle\DataSet\Transformer;
+namespace WellCommerce\Bundle\RoutingBundle\DataSet\Transformer;
 
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use WellCommerce\Component\DataSet\Transformer\AbstractDataSetTransformer;
