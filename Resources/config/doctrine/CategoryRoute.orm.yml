@@ -1,9 +1,9 @@
-WellCommerce\Bundle\AppBundle\Entity\CategoryRoute:
+WellCommerce\Bundle\CategoryBundle\Entity\CategoryRoute:
     type: entity
     table: route_category
     manyToOne:
         identifier:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Category
+            targetEntity: WellCommerce\Bundle\CategoryBundle\Entity\Category
             fetch: LAZY
             joinColumns:
                 foreign_id:

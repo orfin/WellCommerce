@@ -3,7 +3,7 @@
                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
 
-    <class name="WellCommerce\Bundle\AppBundle\Entity\Category">
+    <class name="WellCommerce\Bundle\CategoryBundle\Entity\Category">
         <property name="translations">
             <constraint name="Valid">
                 <option name="deep">true</option>
@@ -22,7 +22,7 @@
         </property>
     </class>
 
-    <class name="WellCommerce\Bundle\AppBundle\Entity\CategoryTranslation">
+    <class name="WellCommerce\Bundle\CategoryBundle\Entity\CategoryTranslation">
         <property name="name">
             <constraint name="NotBlank">
                 <option name="message">category_translation.name.not_blank</option>

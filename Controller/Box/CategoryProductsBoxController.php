@@ -23,7 +23,7 @@ use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 class CategoryProductsBoxController extends AbstractBoxController
 {
     /**
-     * @var \WellCommerce\Bundle\AppBundle\Manager\Front\CategoryManager
+     * @var \WellCommerce\Bundle\CategoryBundle\Manager\Front\CategoryManager
      */
     protected $manager;
 
@@ -36,7 +36,7 @@ class CategoryProductsBoxController extends AbstractBoxController
         $requestHelper = $this->manager->getRequestHelper();
         $limit         = $requestHelper->getAttributesBagParam('limit', $boxSettings->getParam('per_page', 12));
         $conditions    = $this->manager->getCurrentCategoryConditions();
-        $conditions    = $this->get('product_layered_navigation.helper')->addLayeredNavigationConditions($conditions);
+        $conditions    = $this->get('layered_navigation.helper')->addLayeredNavigationConditions($conditions);
 
         $products = $dataset->getResult('array', [
             'limit'      => $limit,

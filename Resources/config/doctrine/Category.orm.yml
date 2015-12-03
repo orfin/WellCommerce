@@ -1,7 +1,7 @@
-WellCommerce\Bundle\AppBundle\Entity\Category:
+WellCommerce\Bundle\CategoryBundle\Entity\Category:
     type: entity
     table: category
-    repositoryClass: WellCommerce\Bundle\AppBundle\Repository\CategoryRepository
+    repositoryClass: WellCommerce\Bundle\CategoryBundle\Repository\CategoryRepository
     id:
         id:
             type: integer
@@ -18,7 +18,7 @@ WellCommerce\Bundle\AppBundle\Entity\Category:
             nullable: false
     manyToOne:
         parent:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Category
+            targetEntity: WellCommerce\Bundle\CategoryBundle\Entity\Category
             fetch: LAZY
             inversedBy: children
             joinColumns:
@@ -27,7 +27,7 @@ WellCommerce\Bundle\AppBundle\Entity\Category:
                     onDelete: CASCADE
     oneToMany:
         children:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Category
+            targetEntity: WellCommerce\Bundle\CategoryBundle\Entity\Category
             fetch: LAZY
             mappedBy: parent
     manyToMany:

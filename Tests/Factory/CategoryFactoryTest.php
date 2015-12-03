@@ -28,6 +28,6 @@ class CategoryFactoryTest extends AbstractFactoryTestCase
 
     protected function getExpectedInterface()
     {
-        return 'WellCommerce\Bundle\AppBundle\Entity\CategoryInterface';
+        return 'WellCommerce\Bundle\CategoryBundle\Entity\CategoryInterface';
     }
 }

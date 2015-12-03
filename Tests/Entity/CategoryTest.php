@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\CategoryBundle\Tests\Entity;
 
-use WellCommerce\Bundle\AppBundle\Entity\Category;
+use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 use WellCommerce\Bundle\CoreBundle\Test\Entity\AbstractEntityTestCase;
 
 /**
