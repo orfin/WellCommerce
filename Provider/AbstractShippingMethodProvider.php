@@ -13,12 +13,12 @@
 namespace WellCommerce\Bundle\ShippingBundle\Provider;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use WellCommerce\Bundle\AppBundle\Calculator\ShippingCalculatorSubjectInterface;
-use WellCommerce\Bundle\AppBundle\Calculator\ShippingMethodCalculatorCollection;
+use WellCommerce\Bundle\ShippingBundle\Calculator\ShippingCalculatorSubjectInterface;
+use WellCommerce\Bundle\ShippingBundle\Calculator\ShippingMethodCalculatorCollection;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCostInterface;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface;
 use WellCommerce\Bundle\AppBundle\Exception\CalculatorNotFoundException;
-use WellCommerce\Bundle\AppBundle\Repository\ShippingMethodRepositoryInterface;
+use WellCommerce\Bundle\ShippingBundle\Repository\ShippingMethodRepositoryInterface;
 
 /**
  * Class AbstractShippingMethodProvider
@@ -73,7 +73,7 @@ abstract class AbstractShippingMethodProvider
      *
      * @param ShippingMethodInterface $shippingMethod
      *
-     * @return \WellCommerce\Bundle\AppBundle\Calculator\ShippingMethodCalculatorInterface
+     * @return \WellCommerce\Bundle\ShippingBundle\Calculator\ShippingMethodCalculatorInterface
      */
     protected function getCalculator(ShippingMethodInterface $shippingMethod)
     {

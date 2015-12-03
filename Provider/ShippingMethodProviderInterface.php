@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\ShippingBundle\Provider;
 
-use WellCommerce\Bundle\AppBundle\Calculator\ShippingCalculatorSubjectInterface;
+use WellCommerce\Bundle\ShippingBundle\Calculator\ShippingCalculatorSubjectInterface;
 
 /**
  * Interface ShippingMethodProviderInterface

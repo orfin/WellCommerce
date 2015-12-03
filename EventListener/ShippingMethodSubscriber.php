@@ -48,7 +48,7 @@ class ShippingMethodSubscriber extends AbstractEventSubscriber
     /**
      * Returns shipping method calculators as a select
      *
-     * @return array|\WellCommerce\Bundle\AppBundle\Calculator\ShippingMethodCalculatorInterface[]
+     * @return array|\WellCommerce\Bundle\ShippingBundle\Calculator\ShippingMethodCalculatorInterface[]
      */
     protected function getCalculators()
     {
