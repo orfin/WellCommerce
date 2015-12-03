@@ -35,7 +35,7 @@
         </property>
     </class>
 
-    <class name="WellCommerce\Bundle\AppBundle\Entity\Page">
+    <class name="WellCommerce\Bundle\PageBundle\Entity\Page">
         <property name="publish">
             <constraint name="NotNull">
                 <option name="message">page.error.publish.not_null</option>
@@ -48,7 +48,7 @@
         </property>
     </class>
 
-    <class name="WellCommerce\Bundle\AppBundle\Entity\PageTranslation">
+    <class name="WellCommerce\Bundle\PageBundle\Entity\PageTranslation">
         <property name="name">
             <constraint name="NotBlank">
                 <option name="message">page.error.name.not_blank</option>
