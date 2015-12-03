@@ -8,17 +8,17 @@
     </imports>
 
     <services>
-        <service id="media.repository" class="WellCommerce\Bundle\AppBundle\Repository\MediaRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
-            <argument>WellCommerceAppBundle:Media</argument>
+        <service id="media.repository" class="WellCommerce\Bundle\MediaBundle\Repository\MediaRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>WellCommerceMediaBundle:Media</argument>
         </service>
 
-        <service id="media.factory" class="WellCommerce\Bundle\AppBundle\Factory\MediaFactory" />
+        <service id="media.factory" class="WellCommerce\Bundle\MediaBundle\Factory\MediaFactory" />
 
         <service id="media.event_dispatcher" parent="core.event_dispatcher" public="false">
             <argument type="service" id="event_dispatcher"/>
         </service>
 
-        <service id="dataset.transformer.image_path" class="WellCommerce\Bundle\CoreBundle\DataSet\Transformer\ImagePathTransformer">
+        <service id="dataset.transformer.image_path" class="WellCommerce\Bundle\MediaBundle\DataSet\Transformer\ImagePathTransformer">
             <argument type="service" id="image.helper"/>
             <tag name="dataset.transformer" alias="image_path"/>
         </service>

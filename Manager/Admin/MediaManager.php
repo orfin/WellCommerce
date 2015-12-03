@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Manager\Admin;
+namespace WellCommerce\Bundle\MediaBundle\Manager\Admin;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
@@ -28,7 +28,7 @@ class MediaManager extends AbstractAdminManager
      * @param UploadedFile $file
      * @param              $dir
      *
-     * @return \WellCommerce\Bundle\AppBundle\Entity\MediaInterface
+     * @return \WellCommerce\Bundle\MediaBundle\Entity\MediaInterface
      * @throws \Exception
      */
     public function upload(UploadedFile $file, $dir)
@@ -50,7 +50,7 @@ class MediaManager extends AbstractAdminManager
     /**
      * @param UploadedFile $file
      *
-     * @return \WellCommerce\Bundle\AppBundle\Entity\MediaInterface
+     * @return \WellCommerce\Bundle\MediaBundle\Entity\MediaInterface
      */
     protected function createMediaFromUploadedFile(UploadedFile $file)
     {

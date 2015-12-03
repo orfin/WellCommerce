@@ -10,16 +10,15 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\MediaBundle\Repository;
+namespace WellCommerce\Bundle\MediaBundle;
 
-use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
+use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * Interface MediaRepositoryInterface
+ * Class WellCommerceMediaBundle
  *
- * @author Adam Piotrowski <adam@wellcommerce.org>
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface MediaRepositoryInterface extends RepositoryInterface
+class WellCommerceMediaBundle extends Bundle
 {
-
 }
