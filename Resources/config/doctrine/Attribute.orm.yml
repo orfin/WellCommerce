@@ -1,4 +1,4 @@
-WellCommerce\Bundle\AppBundle\Entity\Attribute:
+WellCommerce\Bundle\AttributeBundle\Entity\Attribute:
     type: entity
     table: attribute
     repositoryClass: WellCommerce\Bundle\AppBundle\Repository\AttributeRepository
@@ -9,7 +9,7 @@ WellCommerce\Bundle\AppBundle\Entity\Attribute:
                 strategy: AUTO
     manyToOne:
         attributeGroup:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Attribute\Group
+            targetEntity: WellCommerce\Bundle\AttributeBundle\Entity\Attribute\Group
             fetch: LAZY
             inversedBy: attributes
             joinColumns:
@@ -18,7 +18,7 @@ WellCommerce\Bundle\AppBundle\Entity\Attribute:
                     onDelete: CASCADE
     oneToMany:
         values:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\AttributeValue
+            targetEntity: WellCommerce\Bundle\AttributeBundle\Entity\AttributeValue
             cascade:
                 - remove
                 - persist

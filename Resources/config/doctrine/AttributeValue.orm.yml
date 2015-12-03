@@ -1,4 +1,4 @@
-WellCommerce\Bundle\AppBundle\Entity\AttributeValue:
+WellCommerce\Bundle\AttributeBundle\Entity\AttributeValue:
     type: entity
     table: attribute_value
     repositoryClass: WellCommerce\Bundle\AppBundle\Repository\AttributeValueRepository
@@ -9,7 +9,7 @@ WellCommerce\Bundle\AppBundle\Entity\AttributeValue:
                 strategy: AUTO
     manyToOne:
         attribute:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Attribute
+            targetEntity: WellCommerce\Bundle\AttributeBundle\Entity\Attribute
             fetch: LAZY
             inversedBy: values
             joinColumns:

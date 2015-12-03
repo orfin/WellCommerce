@@ -1,4 +1,4 @@
-WellCommerce\Bundle\AppBundle\Entity\Attribute\Group:
+WellCommerce\Bundle\AttributeBundle\Entity\Attribute\Group:
     type: entity
     table: attribute_group
     repositoryClass: WellCommerce\Bundle\AppBundle\Repository\AttributeGroupRepository
@@ -9,7 +9,7 @@ WellCommerce\Bundle\AppBundle\Entity\Attribute\Group:
                 strategy: AUTO
     oneToMany:
         attributes:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Attribute
+            targetEntity: WellCommerce\Bundle\AttributeBundle\Entity\Attribute
             cascade:
                 - all
             fetch: LAZY
