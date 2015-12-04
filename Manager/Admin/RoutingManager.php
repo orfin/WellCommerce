@@ -12,9 +12,9 @@
 
 namespace WellCommerce\Bundle\RoutingBundle\Manager\Admin;
 
-use WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Sluggable;
 use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
+use WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface;
 
 /**
  * Class RoutingManager

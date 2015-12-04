@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\RoutingBundle\Provider;
 
-use Doctrine\Common\Util\Debug;
 use Symfony\Cmf\Component\Routing\RouteProviderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
