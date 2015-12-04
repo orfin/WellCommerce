@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\MediaBundle\Entity;
 
-use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 
