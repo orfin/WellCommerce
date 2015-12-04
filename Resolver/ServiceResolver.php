@@ -12,18 +12,20 @@
 
 namespace WellCommerce\Bundle\LayoutBundle\Resolver;
 
-use Symfony\Component\DependencyInjection\ContainerAware;
+use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
-use WellCommerce\Bundle\LayoutBundle\Entity\LayoutBoxInterface;
 use WellCommerce\Bundle\LayoutBundle\Configurator\LayoutBoxConfiguratorCollection;
+use WellCommerce\Bundle\LayoutBundle\Entity\LayoutBoxInterface;
 
 /**
  * Class ServiceResolver
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ServiceResolver extends ContainerAware implements ServiceResolverInterface
+class ServiceResolver implements ServiceResolverInterface
 {
+    use ContainerAwareTrait;
+
     /**
      * @var LayoutBoxConfiguratorCollection
      */
