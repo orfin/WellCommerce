@@ -15,6 +15,7 @@ namespace WellCommerce\Bundle\ShopBundle\DataFixtures\ORM;
 use Doctrine\Common\Persistence\ObjectManager;
 use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
 use WellCommerce\Bundle\AppBundle\Entity\MailerConfiguration;
+use WellCommerce\Bundle\CurrencyBundle\DataFixtures\ORM\LoadCurrencyData;
 
 /**
  * Class LoadShopData
