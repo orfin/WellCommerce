@@ -42,11 +42,9 @@ class UpdateRowEventHandler extends AbstractEventHandler
         ]);
 
         $resolver->setDefaults([
-            'route'    => OptionInterface::GF_NULL,
+            'route' => OptionInterface::GF_NULL,
         ]);
 
-        $resolver->setAllowedTypes([
-            'route'    => ['string'],
-        ]);
+        $resolver->setAllowedTypes('route', 'string');
     }
 }

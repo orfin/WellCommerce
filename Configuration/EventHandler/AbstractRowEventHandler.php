@@ -40,10 +40,8 @@ abstract class AbstractRowEventHandler extends AbstractEventHandler
             'route'          => false,
         ]);
 
-        $resolver->setAllowedTypes([
-            'row_action'     => ['bool', 'string'],
-            'context_action' => ['bool', 'string'],
-            'route'          => ['bool', 'string'],
-        ]);
+        $resolver->setAllowedTypes('row_action', ['bool', 'string']);
+        $resolver->setAllowedTypes('context_action', ['bool', 'string']);
+        $resolver->setAllowedTypes('route', ['bool', 'string']);
     }
 }

@@ -59,11 +59,9 @@ class Column implements ColumnInterface
             'selectable' => false,
         ]);
 
-        $resolver->setAllowedTypes([
-            'appearance' => 'WellCommerce\Component\DataGrid\Column\Options\Appearance',
-            'sorting'    => 'WellCommerce\Component\DataGrid\Column\Options\Sorting',
-            'filter'     => 'WellCommerce\Component\DataGrid\Column\Options\Filter',
-        ]);
+        $resolver->setAllowedTypes('appearance', Appearance::class);
+        $resolver->setAllowedTypes('sorting', Sorting::class);
+        $resolver->setAllowedTypes('filter', Filter::class);
     }
 
     /**

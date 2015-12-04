@@ -40,9 +40,7 @@ class CustomRowEventHandler extends AbstractRowEventHandler
             'function_name',
         ]);
 
-        $resolver->setAllowedTypes([
-            'function_name' => 'string',
-        ]);
+        $resolver->setAllowedTypes('function_name', 'string');
     }
 
     /**

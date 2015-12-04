@@ -40,13 +40,10 @@ class Appearance extends AbstractOption
             'max_height'     => 0,
         ]);
 
-        $resolver->setAllowedTypes([
-            'header'         => 'bool',
-            'filter'         => 'bool',
-            'footer'         => 'bool',
-            'column_select'  => 'bool',
-            'column_options' => 'bool',
-            'max_height'     => 'int',
-        ]);
+        $resolver->setAllowedTypes('header', 'bool');
+        $resolver->setAllowedTypes('footer', 'bool');
+        $resolver->setAllowedTypes('column_select', 'bool');
+        $resolver->setAllowedTypes('column_options', 'bool');
+        $resolver->setAllowedTypes('max_height', 'int');
     }
 }

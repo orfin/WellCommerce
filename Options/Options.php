@@ -58,11 +58,9 @@ class Options implements OptionsInterface
             'event_handlers' => new EventHandlers(),
         ]);
 
-        $resolver->setAllowedTypes([
-            'appearance'     => 'WellCommerce\Component\DataGrid\Configuration\Appearance',
-            'mechanics'      => 'WellCommerce\Component\DataGrid\Configuration\Mechanics',
-            'event_handlers' => 'WellCommerce\Component\DataGrid\Configuration\EventHandlers',
-        ]);
+        $resolver->setAllowedTypes('appearance', Appearance::class);
+        $resolver->setAllowedTypes('mechanics', Mechanics::class);
+        $resolver->setAllowedTypes('event_handlers', EventHandlers::class);
     }
 
     /**

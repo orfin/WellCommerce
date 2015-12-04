@@ -44,9 +44,7 @@ class DeleteGroupEventHandler extends AbstractEventHandler
             'group_action' => false,
         ]);
 
-        $resolver->setAllowedTypes([
-            'route'        => ['bool', 'string'],
-            'group_action' => ['bool', 'string'],
-        ]);
+        $resolver->setAllowedTypes('route', ['bool', 'string']);
+        $resolver->setAllowedTypes('group_action', ['bool', 'string']);
     }
 }

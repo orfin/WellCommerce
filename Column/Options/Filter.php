@@ -46,17 +46,13 @@ class Filter extends AbstractOptions
             'load_children'   => DataGridInterface::GF_NULL,
         ]);
 
-        $optionsNormalizer = function ($options, $values) {
+        $resolver->setNormalizer('options', function ($options, $values) {
             if (self::FILTER_SELECT === $options['type']) {
                 return $this->prepareValues($values);
             }
 
             return [];
-        };
-
-        $resolver->setNormalizers([
-            'options' => $optionsNormalizer,
-        ]);
+        });
 
         $resolver->setAllowedValues([
             'type' => [
