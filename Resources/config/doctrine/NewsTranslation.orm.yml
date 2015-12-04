@@ -1,4 +1,4 @@
-WellCommerce\Bundle\AppBundle\Entity\NewsTranslation:
+WellCommerce\Bundle\NewsBundle\Entity\NewsTranslation:
     type: entity
     table: news_translation
     embedded:

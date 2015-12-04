@@ -10,16 +10,16 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\NewsBundle\DataSet\Front;
+namespace WellCommerce\Bundle\NewsBundle;
 
-use WellCommerce\Bundle\AppBundle\DataSet\Admin\NewsDataSet as BaseDataSet;
+use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * Class NewsDataSet
+ * Class WellCommerceNewsBundle
  *
- * @author Adam Piotrowski <adam@wellcommerce.org>
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class NewsDataSet extends BaseDataSet
+class WellCommerceNewsBundle extends Bundle
 {
 
 }

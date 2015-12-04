@@ -10,9 +10,9 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Context\Front;
+namespace WellCommerce\Bundle\NewsBundle\Context\Front;
 
-use WellCommerce\Bundle\AppBundle\Entity\NewsInterface;
+use WellCommerce\Bundle\NewsBundle\Entity\NewsInterface;
 
 /**
  * Interface NewsContextInterface

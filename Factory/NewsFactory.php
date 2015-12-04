@@ -10,15 +10,15 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Factory;
+namespace WellCommerce\Bundle\NewsBundle\Factory;
 
-use WellCommerce\Bundle\AppBundle\Entity\News;
+use WellCommerce\Bundle\NewsBundle\Entity\News;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 
 class NewsFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\AppBundle\Entity\NewsInterface
+     * @return \WellCommerce\Bundle\NewsBundle\Entity\NewsInterface
      */
     public function create()
     {

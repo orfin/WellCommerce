@@ -1,7 +1,7 @@
-WellCommerce\Bundle\AppBundle\Entity\News:
+WellCommerce\Bundle\NewsBundle\Entity\News:
     type: entity
     table: news
-    repositoryClass: WellCommerce\Bundle\AppBundle\Repository\NewsRepository
+    repositoryClass: WellCommerce\Bundle\NewsBundle\Repository\NewsRepository
     id:
         id:
             type: integer
