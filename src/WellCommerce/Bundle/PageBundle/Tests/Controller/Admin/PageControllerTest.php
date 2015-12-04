@@ -13,8 +13,8 @@
 namespace WellCommerce\Bundle\PageBundle\Tests\Controller\Admin;
 
 use Doctrine\Common\Collections\Criteria;
-use WellCommerce\Bundle\PageBundle\Entity\PageInterface;
 use WellCommerce\Bundle\CoreBundle\Test\Controller\Admin\AbstractAdminControllerTestCase;
+use WellCommerce\Bundle\PageBundle\Entity\PageInterface;
 
 /**
  * Class PageControllerTest

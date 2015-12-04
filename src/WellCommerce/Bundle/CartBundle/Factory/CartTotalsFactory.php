@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\CartBundle\Factory;
 
-use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 use WellCommerce\Bundle\CartBundle\Entity\CartTotals;
+use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 
 /**
  * Class CartTotalsFactory

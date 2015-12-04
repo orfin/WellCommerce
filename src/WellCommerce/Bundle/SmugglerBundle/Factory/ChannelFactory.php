@@ -12,9 +12,9 @@
 
 namespace WellCommerce\Bundle\SmugglerBundle\Factory;
 
-use WellCommerce\Bundle\SmugglerBundle\Entity\Channel;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 use WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface;
+use WellCommerce\Bundle\SmugglerBundle\Entity\Channel;
 
 /**
  * Class ChannelFactory

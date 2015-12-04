@@ -12,9 +12,9 @@
 
 namespace WellCommerce\Bundle\SearchBundle\Controller\Box;
 
+use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 use WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxSettingsCollection;
 use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
-use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 
 /**
  * Class SearchBoxController

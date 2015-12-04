@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\ReviewBundle\Factory;
 
-use WellCommerce\Bundle\ReviewBundle\Entity\Review;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\Bundle\ReviewBundle\Entity\Review;
 
 /**
  * Class ReviewFactory

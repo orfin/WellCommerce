@@ -13,9 +13,9 @@
 namespace WellCommerce\Bundle\LayeredNavigationBundle\Helper;
 
 use Doctrine\Common\Collections\Criteria;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
 use WellCommerce\Bundle\ProducerBundle\Entity\ProducerInterface;
 use WellCommerce\Bundle\ProducerBundle\Repository\ProducerRepositoryInterface;
-use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
 use WellCommerce\Component\DataSet\Conditions\Condition\Gte;
 use WellCommerce\Component\DataSet\Conditions\Condition\In;
 use WellCommerce\Component\DataSet\Conditions\Condition\Lte;

@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\CurrencyBundle\Factory;
 
-use WellCommerce\Bundle\CurrencyBundle\Entity\CurrencyRate;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\Bundle\CurrencyBundle\Entity\CurrencyRate;
 
 /**
  * Class CurrencyRateFactory

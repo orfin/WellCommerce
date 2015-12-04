@@ -13,8 +13,8 @@
 namespace WellCommerce\Bundle\ContactBundle\Entity;
 
 use Knp\DoctrineBehaviors\Model\Translatable\Translation;
-use WellCommerce\Bundle\LocaleBundle\Entity\LocaleAwareInterface;
 use WellCommerce\Bundle\AppBundle\Doctrine\ORM\Behaviours\AddressTrait;
+use WellCommerce\Bundle\LocaleBundle\Entity\LocaleAwareInterface;
 
 /**
  * Class ContactTranslation

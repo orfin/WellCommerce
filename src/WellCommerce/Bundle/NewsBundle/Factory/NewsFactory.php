@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\NewsBundle\Factory;
 
-use WellCommerce\Bundle\NewsBundle\Entity\News;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\Bundle\NewsBundle\Entity\News;
 
 class NewsFactory extends AbstractFactory
 {

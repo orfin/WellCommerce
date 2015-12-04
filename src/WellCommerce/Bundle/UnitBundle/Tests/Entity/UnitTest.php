@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\UnitBundle\Tests\Entity;
 
-use WellCommerce\Bundle\UnitBundle\Entity\Unit;
 use WellCommerce\Bundle\CoreBundle\Test\Entity\AbstractEntityTestCase;
+use WellCommerce\Bundle\UnitBundle\Entity\Unit;
 
 /**
  * Class UnitTest

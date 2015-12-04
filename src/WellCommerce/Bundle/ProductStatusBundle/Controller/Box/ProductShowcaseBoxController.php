@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\ProductStatusBundle\Controller\Box;
 
-use WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxSettingsCollection;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
+use WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxSettingsCollection;
 
 /**
  * Class ProductShowcaseBoxController

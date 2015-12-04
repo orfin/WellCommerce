@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\ShippingBundle\Provider;
 
-use WellCommerce\Bundle\ShippingBundle\Calculator\ShippingCalculatorSubjectInterface;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodInterface;
+use WellCommerce\Bundle\ShippingBundle\Calculator\ShippingCalculatorSubjectInterface;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCost;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCostInterface;
 

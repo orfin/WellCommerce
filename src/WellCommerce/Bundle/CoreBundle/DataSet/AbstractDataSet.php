@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\DataSet;
 
+use WellCommerce\Bundle\CoreBundle\EventDispatcher\EventDispatcherInterface;
 use WellCommerce\Component\DataSet\Column\ColumnCollection;
 use WellCommerce\Component\DataSet\Column\ColumnInterface;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
@@ -21,7 +22,6 @@ use WellCommerce\Component\DataSet\Manager\DataSetManagerInterface;
 use WellCommerce\Component\DataSet\QueryBuilder\DataSetQueryBuilderInterface;
 use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
 use WellCommerce\Component\DataSet\Transformer\ColumnTransformerCollection;
-use WellCommerce\Bundle\CoreBundle\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Class AbstractDataSet

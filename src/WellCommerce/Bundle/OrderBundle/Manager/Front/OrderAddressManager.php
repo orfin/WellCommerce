@@ -12,9 +12,9 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Manager\Front;
 
+use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
-use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 
 /**
  * Class OrderAddressManager

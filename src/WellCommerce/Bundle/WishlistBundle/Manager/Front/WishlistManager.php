@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\AppBundle\Manager\Front;
 
-use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 
 /**
  * Class WishlistManager

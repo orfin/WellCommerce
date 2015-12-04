@@ -14,8 +14,8 @@ namespace WellCommerce\Bundle\ProductBundle\Helper;
 
 use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeValueInterface;
-use WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeInterface;
 use WellCommerce\Bundle\CurrencyBundle\Helper\CurrencyHelperInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeInterface;
 
 /**
  * Class ProductAttributeHelper

@@ -13,8 +13,8 @@
 namespace WellCommerce\Bundle\TaxBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use WellCommerce\Bundle\TaxBundle\Entity\Tax;
 use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
+use WellCommerce\Bundle\TaxBundle\Entity\Tax;
 
 /**
  * Class LoadTaxData

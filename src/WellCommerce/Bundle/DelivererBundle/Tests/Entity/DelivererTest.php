@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\DelivererBundle\Tests\Entity;
 
-use WellCommerce\Bundle\DelivererBundle\Entity\Deliverer;
 use WellCommerce\Bundle\CoreBundle\Test\Entity\AbstractEntityTestCase;
+use WellCommerce\Bundle\DelivererBundle\Entity\Deliverer;
 
 /**
  * Class DelivererTest

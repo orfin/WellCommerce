@@ -12,9 +12,9 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\DataTransformer;
 
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
 use WellCommerce\Component\Form\DataTransformer\DataTransformerCollection;
 use WellCommerce\Component\Form\Exception\MissingFormDataTransformerException;
-use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
 
 /**
  * Class DataTransformerFactory

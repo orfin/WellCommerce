@@ -13,12 +13,12 @@
 namespace WellCommerce\Bundle\AttributeBundle\Manager\Admin;
 
 use Doctrine\Common\Collections\Criteria;
-use WellCommerce\Bundle\AttributeBundle\Entity\Attribute\GroupInterface;
-use WellCommerce\Bundle\AttributeBundle\Entity\AttributeInterface;
-use WellCommerce\Bundle\AttributeBundle\Entity\AttributeValueInterface;
 use WellCommerce\Bundle\AppBundle\Exception\AttributeGroupNotFoundException;
 use WellCommerce\Bundle\AppBundle\Repository\AttributeGroupRepositoryInterface;
 use WellCommerce\Bundle\AppBundle\Repository\AttributeValueRepositoryInterface;
+use WellCommerce\Bundle\AttributeBundle\Entity\Attribute\GroupInterface;
+use WellCommerce\Bundle\AttributeBundle\Entity\AttributeInterface;
+use WellCommerce\Bundle\AttributeBundle\Entity\AttributeValueInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
 
 /**

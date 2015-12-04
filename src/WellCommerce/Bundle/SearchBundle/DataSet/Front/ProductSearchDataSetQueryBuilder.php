@@ -13,9 +13,9 @@
 namespace WellCommerce\Bundle\SearchBundle\DataSet\Front;
 
 use Doctrine\ORM\Query\Expr;
+use WellCommerce\Bundle\AppBundle\Provider\SearchProviderInterface;
 use WellCommerce\Component\DataSet\Column\ColumnCollection;
 use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
-use WellCommerce\Bundle\AppBundle\Provider\SearchProviderInterface;
 
 /**
  * Class ProductDataSetQueryBuilder

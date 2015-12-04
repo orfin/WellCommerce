@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\LocaleBundle\Factory;
 
-use WellCommerce\Bundle\LocaleBundle\Entity\Locale;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\Bundle\LocaleBundle\Entity\Locale;
 
 /**
  * Class LocaleFactory

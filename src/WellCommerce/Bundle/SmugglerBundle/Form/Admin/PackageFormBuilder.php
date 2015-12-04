@@ -12,8 +12,8 @@
 namespace WellCommerce\Bundle\SmugglerBundle\Form\Admin;
 
 use Packagist\Api\Result\Package\Version;
-use WellCommerce\Bundle\SmugglerBundle\Helper\Package\PackageHelperInterface;
 use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
+use WellCommerce\Bundle\SmugglerBundle\Helper\Package\PackageHelperInterface;
 use WellCommerce\Component\Form\Elements\FormInterface;
 
 /**

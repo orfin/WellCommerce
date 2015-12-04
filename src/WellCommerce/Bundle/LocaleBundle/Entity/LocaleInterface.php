@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\LocaleBundle\Entity;
 
-use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CurrencyBundle\Entity\CurrencyAwareInterface;
 
 /**

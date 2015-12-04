@@ -13,12 +13,12 @@
 namespace WellCommerce\Bundle\CategoryBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
-use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
-use WellCommerce\Bundle\ShopBundle\Entity\ShopCollectionAwareInterface;
-use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\AppBundle\Entity\HierarchyAwareInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
+use WellCommerce\Bundle\ShopBundle\Entity\ShopCollectionAwareInterface;
 
 /**
  * Interface CategoryInterface

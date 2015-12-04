@@ -13,8 +13,8 @@
 namespace WellCommerce\Bundle\UnitBundle\Tests\Controller\Admin;
 
 use Doctrine\Common\Collections\Criteria;
-use WellCommerce\Bundle\UnitBundle\Entity\UnitInterface;
 use WellCommerce\Bundle\CoreBundle\Test\Controller\Admin\AbstractAdminControllerTestCase;
+use WellCommerce\Bundle\UnitBundle\Entity\UnitInterface;
 
 /**
  * Class UnitControllerTest

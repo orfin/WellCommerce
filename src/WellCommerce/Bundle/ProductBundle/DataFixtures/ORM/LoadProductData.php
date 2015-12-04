@@ -14,20 +14,20 @@ namespace WellCommerce\Bundle\ProductBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
-use WellCommerce\Bundle\AvailabilityBundle\DataFixtures\ORM\LoadAvailabilityData;
-use WellCommerce\Bundle\CategoryBundle\DataFixtures\ORM\LoadCategoryData;
-use WellCommerce\Bundle\ProducerBundle\DataFixtures\ORM\LoadProducerData;
-use WellCommerce\Bundle\ProductBundle\Entity\Product;
-use WellCommerce\Bundle\ProductBundle\Entity\ProductPhoto;
-use WellCommerce\Bundle\MediaBundle\DataFixtures\ORM\LoadMediaData;
-use WellCommerce\Bundle\CurrencyBundle\DataFixtures\ORM\LoadCurrencyData;
-use WellCommerce\Bundle\ProductStatusBundle\DataFixtures\ORM\LoadProductStatusData;
-use WellCommerce\Bundle\TaxBundle\DataFixtures\ORM\LoadTaxData;
-use WellCommerce\Bundle\CoreBundle\Helper\Sluggable;
-use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
 use WellCommerce\Bundle\AppBundle\Entity\Dimension;
 use WellCommerce\Bundle\AppBundle\Entity\DiscountablePrice;
 use WellCommerce\Bundle\AppBundle\Entity\Price;
+use WellCommerce\Bundle\AvailabilityBundle\DataFixtures\ORM\LoadAvailabilityData;
+use WellCommerce\Bundle\CategoryBundle\DataFixtures\ORM\LoadCategoryData;
+use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
+use WellCommerce\Bundle\CoreBundle\Helper\Sluggable;
+use WellCommerce\Bundle\CurrencyBundle\DataFixtures\ORM\LoadCurrencyData;
+use WellCommerce\Bundle\MediaBundle\DataFixtures\ORM\LoadMediaData;
+use WellCommerce\Bundle\ProducerBundle\DataFixtures\ORM\LoadProducerData;
+use WellCommerce\Bundle\ProductBundle\Entity\Product;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductPhoto;
+use WellCommerce\Bundle\ProductStatusBundle\DataFixtures\ORM\LoadProductStatusData;
+use WellCommerce\Bundle\TaxBundle\DataFixtures\ORM\LoadTaxData;
 use WellCommerce\Bundle\UnitBundle\DataFixtures\ORM\LoadUnitData;
 
 /**

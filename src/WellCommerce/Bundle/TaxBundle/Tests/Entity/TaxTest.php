@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\AppBundle\Tests\Entity;
 
-use WellCommerce\Bundle\TaxBundle\Entity\Tax;
 use WellCommerce\Bundle\CoreBundle\Test\Entity\AbstractEntityTestCase;
+use WellCommerce\Bundle\TaxBundle\Entity\Tax;
 
 /**
  * Class TaxTest

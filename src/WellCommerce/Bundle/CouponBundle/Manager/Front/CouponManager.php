@@ -12,10 +12,10 @@
 
 namespace WellCommerce\Bundle\CouponBundle\Manager\Front;
 
-use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
-use WellCommerce\Bundle\CouponBundle\Entity\CouponInterface;
 use WellCommerce\Bundle\AppBundle\Exception\CouponException;
 use WellCommerce\Bundle\AppBundle\Service\Coupon\Validator\CouponValidator;
+use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
+use WellCommerce\Bundle\CouponBundle\Entity\CouponInterface;
 
 /**
  * Class CouponManager

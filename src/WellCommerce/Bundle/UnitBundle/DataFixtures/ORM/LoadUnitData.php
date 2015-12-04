@@ -13,8 +13,8 @@
 namespace WellCommerce\Bundle\UnitBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use WellCommerce\Bundle\UnitBundle\Entity\Unit;
 use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
+use WellCommerce\Bundle\UnitBundle\Entity\Unit;
 
 /**
  * Class LoadUnitData
