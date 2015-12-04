@@ -12,9 +12,9 @@
 
 namespace WellCommerce\Bundle\SearchBundle\Controller\Front;
 
+use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\CoreBundle\Service\Breadcrumb\BreadcrumbItem;
 use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
-use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 
 /**
  * Class SearchController
