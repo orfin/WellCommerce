@@ -17,12 +17,12 @@ use WellCommerce\Bundle\ClientBundle\Entity\ClientAwareInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddressInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetailsInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddressInterface;
-use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodAwareInterface;
-use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodAwareInterface;
-use WellCommerce\Bundle\ShopBundle\Entity\ShopAwareInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CouponBundle\Entity\CouponAwareInterface;
+use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodAwareInterface;
 use WellCommerce\Bundle\ShippingBundle\Calculator\ShippingCalculatorSubjectInterface;
+use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodAwareInterface;
+use WellCommerce\Bundle\ShopBundle\Entity\ShopAwareInterface;
 
 /**
  * Interface OrderInterface
