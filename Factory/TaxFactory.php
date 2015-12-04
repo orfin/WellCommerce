@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\TaxBundle\Factory;
 
-use WellCommerce\Bundle\TaxBundle\Entity\Tax;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\Bundle\TaxBundle\Entity\Tax;
 
 /**
  * Class TaxFactory
