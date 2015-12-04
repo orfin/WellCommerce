@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\ProducerBundle\DataSet\Front;
 
-use WellCommerce\Bundle\AppBundle\DataSet\Admin\ProducerDataSetQueryBuilder as BaseDataSetQueryBuilder;
+use WellCommerce\Bundle\ProducerBundle\DataSet\Admin\ProducerDataSetQueryBuilder as BaseDataSetQueryBuilder;
 
 /**
  * Class ProducerDataSetQueryBuilder
