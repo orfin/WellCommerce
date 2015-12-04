@@ -19,7 +19,7 @@ use WellCommerce\Bundle\CartBundle\Context\Front\CartContextInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CartExtension extends \Twig_Extension
+class CartExtension extends \Twig_Extension implements \Twig_Extension_GlobalsInterface
 {
     /**
      * @var CartContextInterface
