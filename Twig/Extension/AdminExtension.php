@@ -19,7 +19,7 @@ use WellCommerce\Bundle\AdminBundle\Provider\AdminMenuProvider;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AdminExtension extends \Twig_Extension
+class AdminExtension extends \Twig_Extension implements \Twig_Extension_GlobalsInterface
 {
     /**
      * @var SessionInterface
