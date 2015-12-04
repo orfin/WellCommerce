@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\SmugglerBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
-use WellCommerce\Bundle\CoreBundle\Helper\Package\PackageHelperInterface;
+use WellCommerce\Bundle\SmugglerBundle\Helper\Package\PackageHelperInterface;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 
 /**
@@ -24,7 +24,7 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 class PackageController extends AbstractAdminController
 {
     /**
-     * @var \WellCommerce\Bundle\AppBundle\Manager\Admin\PackageManager
+     * @var \WellCommerce\Bundle\SmugglerBundle\Manager\Admin\PackageManager
      */
     protected $manager;
 

@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\SmugglerBundle\Command\Package;
 
-use WellCommerce\Bundle\CoreBundle\Helper\Package\PackageHelperInterface;
+use WellCommerce\Bundle\SmugglerBundle\Helper\Package\PackageHelperInterface;
 
 /**
  * Class RemoveCommand
