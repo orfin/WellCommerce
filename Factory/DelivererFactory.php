@@ -13,8 +13,8 @@
 namespace WellCommerce\Bundle\DelivererBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use WellCommerce\Bundle\DelivererBundle\Entity\Deliverer;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\Bundle\DelivererBundle\Entity\Deliverer;
 
 /**
  * Class DelivererFactory
