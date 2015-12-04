@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\CurrencyBundle\Formatter;
 
-use WellCommerce\Bundle\CurrencyBundle\Exception\CurrencyFormatterException;
 use WellCommerce\Bundle\CoreBundle\Helper\Request\RequestHelperInterface;
+use WellCommerce\Bundle\CurrencyBundle\Exception\CurrencyFormatterException;
 
 /**
  * Class CurrencyFormatter

@@ -13,8 +13,8 @@
 namespace WellCommerce\Bundle\CurrencyBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use WellCommerce\Bundle\CurrencyBundle\Entity\Currency;
 use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
+use WellCommerce\Bundle\CurrencyBundle\Entity\Currency;
 
 /**
  * Class LoadCurrencyData
