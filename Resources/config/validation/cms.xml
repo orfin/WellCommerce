@@ -64,7 +64,7 @@
         </property>
     </class>
 
-    <class name="WellCommerce\Bundle\AppBundle\Entity\NewsTranslation">
+    <class name="WellCommerce\Bundle\NewsBundle\Entity\NewsTranslation">
         <property name="topic">
             <constraint name="NotBlank"/>
             <constraint name="NotNull"/>
