@@ -1,5 +1,5 @@
 {
-    "name": "wellcommerce/unit-bundle",
+    "name": "wellcommerce/category-bundle",
     "license": "MIT",
     "minimum-stability": "dev",
     "description": "WellCommerce Open-Source edition",
@@ -16,8 +16,8 @@
     ],
     "support": {
         "email": "support@wellcommerce.org",
-        "issues": "https://github.com/WellCommerce/UnitBundle/issues",
-        "source": "https://github.com/WellCommerce/UnitBundle/"
+        "issues": "https://github.com/WellCommerce/CategoryBundle/issues",
+        "source": "https://github.com/WellCommerce/CategoryBundle/"
     },
     "autoload": {
         "psr-4": { "": "src/" }

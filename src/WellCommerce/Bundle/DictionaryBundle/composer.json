@@ -16,8 +16,8 @@
     ],
     "support": {
         "email": "support@wellcommerce.org",
-        "issues": "https://github.com/WellCommerce/NewsBundle/issues",
-        "source": "https://github.com/WellCommerce/NewsBundle/"
+        "issues": "https://github.com/WellCommerce/DictionaryBundle/issues",
+        "source": "https://github.com/WellCommerce/DictionaryBundle/"
     },
     "autoload": {
         "psr-4": { "": "src/" }
