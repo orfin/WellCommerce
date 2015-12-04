@@ -62,22 +62,6 @@ abstract class AbstractContainerAware
     }
 
     /**
-     * Shortcut to get param from current route
-     *
-     * @param string $index
-     *
-     * @return int|string|null
-     */
-    public function getParam($index)
-    {
-        if ($this->container->isScopeActive('request')) {
-            return $this->container->get('request')->attributes->get($index);
-        }
-
-        return null;
-    }
-
-    /**
      * Returns themes directory path
      * If theme folder name is passed, full directory path pointing to it will be returned
      *
