@@ -13,17 +13,17 @@
 namespace WellCommerce\Bundle\CartBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
+use WellCommerce\Bundle\CartBundle\Visitor\CartVisitorInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientAwareInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddressInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetailsInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddressInterface;
-use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodAwareInterface;
-use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCostInterface;
-use WellCommerce\Bundle\ShopBundle\Entity\ShopAwareInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CouponBundle\Entity\CouponAwareInterface;
+use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodAwareInterface;
 use WellCommerce\Bundle\ShippingBundle\Calculator\ShippingCalculatorSubjectInterface;
-use WellCommerce\Bundle\CartBundle\Visitor\CartVisitorInterface;
+use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCostInterface;
+use WellCommerce\Bundle\ShopBundle\Entity\ShopAwareInterface;
 
 /**
  * Interface CartInterface

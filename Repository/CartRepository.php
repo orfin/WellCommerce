@@ -13,8 +13,8 @@
 namespace WellCommerce\Bundle\CartBundle\Repository;
 
 use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
-use WellCommerce\Bundle\ShopBundle\Entity\ShopInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\ShopBundle\Entity\ShopInterface;
 
 /**
  * Class CartRepository
