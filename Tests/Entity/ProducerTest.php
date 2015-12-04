@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\ProducerBundle\Tests\Entity;
 
-use WellCommerce\Bundle\ProducerBundle\Entity\Producer;
 use WellCommerce\Bundle\CoreBundle\Test\Entity\AbstractEntityTestCase;
+use WellCommerce\Bundle\ProducerBundle\Entity\Producer;
 
 /**
  * Class ProducerTest

@@ -13,8 +13,8 @@
 namespace WellCommerce\Bundle\ProducerBundle\Tests\Controller\Admin;
 
 use Doctrine\Common\Collections\Criteria;
-use WellCommerce\Bundle\ProducerBundle\Entity\ProducerInterface;
 use WellCommerce\Bundle\CoreBundle\Test\Controller\Admin\AbstractAdminControllerTestCase;
+use WellCommerce\Bundle\ProducerBundle\Entity\ProducerInterface;
 
 /**
  * Class ProducerControllerTest
