@@ -17,10 +17,10 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\Filesystem\Exception\FileNotFoundException;
 use Symfony\Component\Finder\Finder;
 use WellCommerce\Bundle\AppBundle\DependencyInjection\AbstractContainer;
+use WellCommerce\Bundle\ThemeBundle\Entity\Theme;
 use WellCommerce\Component\Form\Elements\Form;
 use WellCommerce\Component\Form\Elements\Input\TextField;
 use WellCommerce\Component\Form\FormBuilderInterface;
-use WellCommerce\Bundle\ThemeBundle\Entity\Theme;
 
 /**
  * Class ThemeFieldsGenerator
