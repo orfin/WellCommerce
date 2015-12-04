@@ -76,7 +76,8 @@ class Kernel extends BaseKernel
             new Bundle\ShippingBundle\WellCommerceShippingBundle(),
             new Bundle\SmugglerBundle\WellCommerceSmugglerBundle(),
             new Bundle\TaxBundle\WellCommerceTaxBundle(),
-            new Bundle\UnitBundle\WellCommerceUnitBundle()
+            new Bundle\UnitBundle\WellCommerceUnitBundle(),
+            new Bundle\WishlistBundle\WellCommerceWishlistBundle()
 
         ];
 

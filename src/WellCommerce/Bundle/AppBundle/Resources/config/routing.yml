@@ -97,6 +97,9 @@ wellcommerce_theme:
 wellcommerce_unit:
     resource: "@WellCommerceUnitBundle/Resources/config/routing.xml"
 
+wellcommerce_wishlist:
+    resource: "@WellCommerceWishlistBundle/Resources/config/routing.xml"
+
 root:
     path: /admin
     defaults:
