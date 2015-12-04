@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\ContactBundle\Factory;
 
-use WellCommerce\Bundle\AppBundle\Entity\Contact;
+use WellCommerce\Bundle\ContactBundle\Entity\Contact;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 
 /**
@@ -23,7 +23,7 @@ use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 class ContactFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\AppBundle\Entity\ContactInterface
+     * @return \WellCommerce\Bundle\ContactBundle\Entity\ContactInterface
      */
     public function create()
     {

@@ -3,7 +3,7 @@
                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
 
-    <class name="WellCommerce\Bundle\AppBundle\Entity\Contact">
+    <class name="WellCommerce\Bundle\ContactBundle\Entity\Contact">
         <property name="enabled">
             <constraint name="NotNull">
                 <option name="message">contact.enabled.error.not_null</option>
@@ -16,7 +16,7 @@
         </property>
     </class>
 
-    <class name="WellCommerce\Bundle\AppBundle\Entity\ContactTranslation">
+    <class name="WellCommerce\Bundle\ContactBundle\Entity\ContactTranslation">
         <property name="name">
             <constraint name="NotBlank">
                 <option name="message">contact.error.name.not_blank</option>

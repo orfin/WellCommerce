@@ -42,7 +42,7 @@
         </property>
     </class>
 
-    <class name="WellCommerce\Bundle\AppBundle\Entity\ContactDetails">
+    <class name="WellCommerce\Bundle\ClientBundle\Entity\ContactDetails">
         <property name="phone">
             <constraint name="NotNull">
                 <option name="groups">
