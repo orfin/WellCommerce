@@ -30,6 +30,7 @@ class LoadLocaleData extends AbstractDataFixture
     {
         $en = new Locale();
         $en->setCode('en');
+        $en->setCurrency($this->getReference('currency_USD'));
         $manager->persist($en);
         $manager->flush();
 
