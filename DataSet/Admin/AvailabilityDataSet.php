@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\AvailabilityBundle\DataSet\Admin;
 
-use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
+use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
 
 /**
  * Class AvailabilityDataSet
