@@ -13,11 +13,11 @@
 namespace WellCommerce\Bundle\ShippingBundle\Provider;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use WellCommerce\Bundle\AppBundle\Exception\CalculatorNotFoundException;
 use WellCommerce\Bundle\ShippingBundle\Calculator\ShippingCalculatorSubjectInterface;
 use WellCommerce\Bundle\ShippingBundle\Calculator\ShippingMethodCalculatorCollection;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCostInterface;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface;
-use WellCommerce\Bundle\AppBundle\Exception\CalculatorNotFoundException;
 use WellCommerce\Bundle\ShippingBundle\Repository\ShippingMethodRepositoryInterface;
 
 /**
