@@ -2,6 +2,7 @@
 
 git stree push AdminBundle
 git stree push AttributeBundle
+git stree push AppBundle
 git stree push AvailabilityBundle
 git stree push CartBundle
 git stree push CategoryBundle
