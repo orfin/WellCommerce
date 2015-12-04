@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\DictionaryBundle\Factory;
 
-use WellCommerce\Bundle\AppBundle\Entity\Dictionary;
+use WellCommerce\Bundle\DictionaryBundle\Entity\Dictionary;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 
 /**
@@ -23,7 +23,7 @@ use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 class DictionaryFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\AppBundle\Entity\DictionaryInterface
+     * @return \WellCommerce\Bundle\DictionaryBundle\Entity\DictionaryInterface
      */
     public function create()
     {

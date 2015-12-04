@@ -1,4 +1,4 @@
-WellCommerce\Bundle\AppBundle\Entity\DictionaryTranslation:
+WellCommerce\Bundle\DictionaryBundle\Entity\DictionaryTranslation:
     type: entity
     table: dictionary_translation
     fields:
