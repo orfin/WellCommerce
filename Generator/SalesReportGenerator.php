@@ -10,10 +10,10 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Generator;
+namespace WellCommerce\Bundle\ReportBundle\Generator;
 
 use Doctrine\Common\Collections\Collection;
-use WellCommerce\Bundle\AppBundle\Configuration\ReportConfiguration;
+use WellCommerce\Bundle\ReportBundle\Configuration\ReportConfiguration;
 
 /**
  * Class SalesReportGenerator

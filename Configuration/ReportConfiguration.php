@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Configuration;
+namespace WellCommerce\Bundle\ReportBundle\Configuration;
 
 use DateInterval;
 use DatePeriod;
