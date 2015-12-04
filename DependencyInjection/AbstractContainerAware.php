@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\DependencyInjection;
 
-use Symfony\Component\DependencyInjection\ContainerAware;
+use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use WellCommerce\Bundle\CoreBundle\Helper\Translator\TranslatorHelperInterface;
 
@@ -21,8 +21,10 @@ use WellCommerce\Bundle\CoreBundle\Helper\Translator\TranslatorHelperInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractContainerAware extends ContainerAware
+abstract class AbstractContainerAware
 {
+    use ContainerAwareTrait;
+
     /**
      * Returns true if the service id is defined.
      *
