@@ -16,8 +16,8 @@
     ],
     "support": {
         "email": "support@wellcommerce.org",
-        "issues": "https://github.com/WellCommerce/UserBundle/issues",
-        "source": "https://github.com/WellCommerce/UserBundle/"
+        "issues": "https://github.com/WellCommerce/ClientBundle/issues",
+        "source": "https://github.com/WellCommerce/ClientBundle/"
     },
     "autoload": {
         "psr-4": { "": "src/" }
