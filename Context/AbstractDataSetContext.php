@@ -73,9 +73,7 @@ abstract class AbstractDataSetContext
             'column_transformers' => new ColumnTransformerCollection(),
         ]);
 
-        $resolver->setAllowedTypes([
-            'column_transformers' => ['WellCommerce\Component\DataSet\Transformer\ColumnTransformerCollection'],
-        ]);
+        $resolver->setAllowedTypes('column_transformers', ColumnTransformerCollection::class);
     }
 
     /**

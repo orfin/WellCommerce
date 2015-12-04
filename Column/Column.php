@@ -53,11 +53,9 @@ class Column implements ColumnInterface
             'aggregated' => false
         ]);
 
-        $resolver->setNormalizers([
-            'aggregated' => function ($options) {
-                return $this->isAggregateColumn($options['source']);
-            },
-        ]);
+        $resolver->setNormalizer('aggregated', function ($options) {
+            return $this->isAggregateColumn($options['source']);
+        });
     }
 
     /**

@@ -75,8 +75,6 @@ class DataGridContext extends AbstractDataSetContext implements DataSetContextIn
             'data_id' => 0,
         ]);
 
-        $resolver->setAllowedTypes([
-            'data_id' => ['numeric'],
-        ]);
+        $resolver->setAllowedTypes('data_id', 'numeric');
     }
 }

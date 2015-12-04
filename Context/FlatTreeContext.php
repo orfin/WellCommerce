@@ -86,9 +86,7 @@ class FlatTreeContext extends AbstractDataSetContext implements DataSetContextIn
             'hierarchy_column' => 'hierarchy',
         ]);
 
-        $resolver->setAllowedTypes([
-            'children_column'  => ['string'],
-            'hierarchy_column' => ['string'],
-        ]);
+        $resolver->setAllowedTypes('children_column', 'string');
+        $resolver->setAllowedTypes('hierarchy_column', 'string');
     }
 }

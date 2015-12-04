@@ -34,9 +34,7 @@ class DateTransformer extends AbstractDataSetTransformer
             'format' => 'Y-m-d'
         ]);
 
-        $resolver->setAllowedTypes([
-            'format' => ['string']
-        ]);
+        $resolver->setAllowedTypes('format', 'string');
     }
 
     /**

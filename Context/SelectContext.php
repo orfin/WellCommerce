@@ -83,9 +83,7 @@ class SelectContext extends AbstractDataSetContext implements DataSetContextInte
             'label_column' => 'name',
         ]);
 
-        $resolver->setAllowedTypes([
-            'value_column' => ['string'],
-            'label_column' => ['string'],
-        ]);
+        $resolver->setAllowedTypes('value_column', 'string');
+        $resolver->setAllowedTypes('label_column', 'string');
     }
 }

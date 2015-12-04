@@ -70,14 +70,12 @@ class DataSetRequest implements DataSetRequestInterface
             return ($page * $limit) - $limit;
         });
 
-        $resolver->setAllowedTypes([
-            'offset'     => ['numeric'],
-            'page'       => ['numeric'],
-            'limit'      => ['numeric'],
-            'order_by'   => ['string'],
-            'order_dir'  => ['string'],
-            'conditions' => ['WellCommerce\Component\DataSet\Conditions\ConditionsCollection'],
-        ]);
+        $resolver->setAllowedTypes('offset', 'numeric');
+        $resolver->setAllowedTypes('page', 'numeric');
+        $resolver->setAllowedTypes('limit', 'numeric');
+        $resolver->setAllowedTypes('order_by', 'string');
+        $resolver->setAllowedTypes('order_dir', 'string');
+        $resolver->setAllowedTypes('conditions', ConditionsCollection::class);
     }
 
     /**
