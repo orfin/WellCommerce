@@ -51,22 +51,22 @@ WellCommerce\Bundle\ClientBundle\Entity\Client:
             nullable: false
             column: newsletter_accepted
     oneToMany:
-#        wishlist:
-#            targetEntity: WellCommerce\Bundle\AppBundle\Entity\Wishlist
-#            cascade:
-#                - remove
-#                - persist
-#            fetch: LAZY
-#            mappedBy: client
-#            orphanRemoval: true
-#        orders:
-#            targetEntity: WellCommerce\Bundle\OrderBundle\Entity\Order
-#            cascade:
-#                - remove
-#                - persist
-#            fetch: LAZY
-#            mappedBy: client
-#            orphanRemoval: true
+        wishlist:
+            targetEntity: WellCommerce\Bundle\WishlistBundle\Entity\Wishlist
+            cascade:
+                - remove
+                - persist
+            fetch: LAZY
+            mappedBy: client
+            orphanRemoval: true
+        orders:
+            targetEntity: WellCommerce\Bundle\OrderBundle\Entity\Order
+            cascade:
+                - remove
+                - persist
+            fetch: LAZY
+            mappedBy: client
+            orphanRemoval: true
     manyToOne:
         shop:
             targetEntity: WellCommerce\Bundle\ShopBundle\Entity\Shop
