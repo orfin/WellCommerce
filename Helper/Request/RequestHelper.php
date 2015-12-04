@@ -157,7 +157,7 @@ class RequestHelper implements RequestHelperInterface
             return $default;
         }
 
-        return $this->request->request->filter($name, $default, false, $filter);
+        return $this->request->request->filter($name, $default, $filter);
     }
 
     /**
@@ -169,7 +169,7 @@ class RequestHelper implements RequestHelperInterface
             return $default;
         }
 
-        return $this->request->query->filter($name, $default, false, $filter);
+        return $this->request->query->filter($name, $default, $filter);
     }
 
     /**
@@ -203,7 +203,7 @@ class RequestHelper implements RequestHelperInterface
             return $default;
         }
 
-        return $this->request->attributes->filter($name, $default, false, $filter);
+        return $this->request->attributes->filter($name, $default, $filter);
     }
 
     /**
