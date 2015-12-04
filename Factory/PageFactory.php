@@ -13,8 +13,8 @@
 namespace WellCommerce\Bundle\PageBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use WellCommerce\Bundle\PageBundle\Entity\Page;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\Bundle\PageBundle\Entity\Page;
 
 /**
  * Class PageFactory
