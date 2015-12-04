@@ -54,7 +54,7 @@ WellCommerce\Bundle\OrderBundle\Entity\Order:
             fetch: LAZY
             mappedBy: order
         payments:
-            targetEntity:  WellCommerce\Bundle\AppBundle\Entity\Payment
+            targetEntity:  WellCommerce\Bundle\PaymentBundle\Entity\Payment
             mappedBy: order
     manyToOne:
         coupon:
