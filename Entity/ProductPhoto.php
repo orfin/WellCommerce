@@ -13,8 +13,8 @@
 namespace WellCommerce\Bundle\ProductBundle\Entity;
 
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
-use WellCommerce\Bundle\MediaBundle\Entity\MediaInterface;
 use WellCommerce\Bundle\AppBundle\Entity\HierarchyAwareTrait;
+use WellCommerce\Bundle\MediaBundle\Entity\MediaInterface;
 
 /**
  * Class ProductPhoto
