@@ -43,13 +43,11 @@ class AttributeEditor extends AbstractField implements ElementInterface
             'attributes' => [],
         ]);
 
-        $resolver->setAllowedTypes([
-            'set'                          => ['int', 'string', 'null'],
-            'attributes'                   => 'array',
-            'delete_attribute_route'       => 'string',
-            'rename_attribute_route'       => 'string',
-            'rename_attribute_value_route' => 'string',
-        ]);
+        $resolver->setAllowedTypes('set', ['int', 'string', 'null']);
+        $resolver->setAllowedTypes('attributes', 'array');
+        $resolver->setAllowedTypes('delete_attribute_route', 'string');
+        $resolver->setAllowedTypes('rename_attribute_route', 'string');
+        $resolver->setAllowedTypes('rename_attribute_value_route', 'string');
     }
 
     /**

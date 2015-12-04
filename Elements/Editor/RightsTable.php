@@ -42,10 +42,8 @@ class RightsTable extends AbstractField implements ElementInterface
             'controllers' => []
         ]);
 
-        $resolver->setAllowedTypes([
-            'actions'     => 'array',
-            'controllers' => 'array',
-        ]);
+        $resolver->setAllowedTypes('actions', 'array');
+        $resolver->setAllowedTypes('controllers', 'array');
     }
 
     /**

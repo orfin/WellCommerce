@@ -40,9 +40,7 @@ class LayoutBoxesList extends AbstractField implements ElementInterface
             'boxes' => [],
         ]);
 
-        $resolver->setAllowedTypes([
-            'boxes' => 'array',
-        ]);
+        $resolver->setAllowedTypes('boxes', 'array');
     }
 
     /**

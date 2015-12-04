@@ -12,6 +12,9 @@
 namespace WellCommerce\Component\Form\Dependencies;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use WellCommerce\Component\Form\Conditions\ConditionInterface;
+use WellCommerce\Component\Form\Elements\ElementInterface;
+use WellCommerce\Component\Form\Elements\Form;
 
 /**
  * Class AbstractDependency
@@ -47,11 +50,9 @@ abstract class AbstractDependency implements DependencyInterface
             'condition',
         ]);
 
-        $resolver->setAllowedTypes([
-            'field'     => 'WellCommerce\Component\Form\Elements\ElementInterface',
-            'form'      => 'WellCommerce\Component\Form\Elements\Form',
-            'condition' => 'WellCommerce\Component\Form\Conditions\ConditionInterface',
-        ]);
+        $resolver->setAllowedTypes('field', ElementInterface::class);
+        $resolver->setAllowedTypes('form', Form::class);
+        $resolver->setAllowedTypes('condition', ConditionInterface::class);
     }
 
     /**

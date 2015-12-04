@@ -35,10 +35,8 @@ class RepeatableFieldset extends AbstractFieldset implements FieldsetInterface
             'repeat_max',
         ]);
 
-        $resolver->setAllowedTypes([
-            'repeat_min' => ['numeric'],
-            'repeat_max' => ['numeric'],
-        ]);
+        $resolver->setAllowedTypes('repeat_min', 'numeric');
+        $resolver->setAllowedTypes('repeat_max', 'numeric');
     }
 
     /**

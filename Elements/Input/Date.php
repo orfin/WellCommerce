@@ -36,17 +36,12 @@ class Date extends TextField implements ElementInterface
         ]);
 
         $resolver->setDefaults([
-            'minDate' => '',
-            'maxDate' => ''
-        ]);
-
-        $resolver->setAllowedTypes([
-            'minDate' => 'string',
-            'maxDate' => 'string',
-        ]);
-
-        $resolver->setDefaults([
+            'minDate'     => '',
+            'maxDate'     => '',
             'transformer' => new DateTransformer('Y-m-d'),
         ]);
+
+        $resolver->setAllowedTypes('minDate', 'string');
+        $resolver->setAllowedTypes('maxDate', 'string');
     }
 }

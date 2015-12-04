@@ -45,15 +45,13 @@ class TextField extends AbstractInputField implements ElementInterface
             'max_length'    => 255,
         ]);
 
-        $resolver->setAllowedTypes([
-            'size'          => 'string',
-            'suffix'        => 'string',
-            'prefix'        => 'string',
-            'selector'      => 'string',
-            'wrap'          => 'string',
-            'css_attribute' => 'string',
-            'max_length'    => 'integer',
-        ]);
+        $resolver->setAllowedTypes('size', 'string');
+        $resolver->setAllowedTypes('suffix', 'string');
+        $resolver->setAllowedTypes('prefix', 'string');
+        $resolver->setAllowedTypes('selector', 'string');
+        $resolver->setAllowedTypes('wrap', 'string');
+        $resolver->setAllowedTypes('css_attribute', 'string');
+        $resolver->setAllowedTypes('max_length', 'integer');
     }
 
     /**

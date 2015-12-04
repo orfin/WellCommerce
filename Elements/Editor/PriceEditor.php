@@ -55,12 +55,10 @@ class PriceEditor extends AbstractField implements ElementInterface
             'vat_field_name' => $vatFieldName,
         ]);
 
-        $resolver->setAllowedTypes([
-            'suffix'         => 'string',
-            'prefixes'       => 'array',
-            'vat_field'      => ['null', 'WellCommerce\Component\Form\Elements\ElementInterface'],
-            'vat_field_name' => 'string',
-        ]);
+        $resolver->setAllowedTypes('suffix', 'string');
+        $resolver->setAllowedTypes('prefixes', 'array');
+        $resolver->setAllowedTypes('vat_field', ['null', ElementInterface::class]);
+        $resolver->setAllowedTypes('vat_field_name', 'string');
     }
 
     /**

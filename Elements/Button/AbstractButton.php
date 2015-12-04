@@ -33,9 +33,7 @@ abstract class AbstractButton extends AbstractFixedField
             'icon' => '',
         ]);
 
-        $resolver->setAllowedTypes([
-            'icon' => 'string',
-        ]);
+        $resolver->setAllowedTypes('icon', 'string');
     }
 
     public function getValue()

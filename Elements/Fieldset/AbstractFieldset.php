@@ -13,6 +13,7 @@
 namespace WellCommerce\Component\Form\Elements\Fieldset;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use WellCommerce\Component\Form\DataTransformer\DataTransformerInterface;
 use WellCommerce\Component\Form\Elements\AbstractContainer;
 
 /**
@@ -36,11 +37,9 @@ abstract class AbstractFieldset extends AbstractContainer
             'transformer'  => null,
         ]);
 
-        $resolver->setAllowedTypes([
-            'dependencies' => 'array',
-            'filters'      => 'array',
-            'rules'        => 'array',
-            'transformer'  => ['null', 'WellCommerce\Component\Form\DataTransformer\DataTransformerInterface'],
-        ]);
+        $resolver->setAllowedTypes('dependencies', 'array');
+        $resolver->setAllowedTypes('filters', 'array');
+        $resolver->setAllowedTypes('rules', 'array');
+        $resolver->setAllowedTypes('transformer', ['null', DataTransformerInterface::class]);
     }
 }

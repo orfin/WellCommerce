@@ -39,21 +39,15 @@ class SlugField extends TextField implements ElementInterface
         ]);
 
         $resolver->setDefaults([
-            'class' => 'sluggable',
+            'class' => 'sluggable'
         ]);
 
-        $resolver->setAllowedTypes([
-            'name_field'     => 'WellCommerce\Component\Form\Elements\ElementInterface',
-            'generate_route' => 'string',
-        ]);
+        $resolver->setAllowedTypes('name_field', ElementInterface::class);
+        $resolver->setAllowedTypes('generate_route', 'string');
 
-        $fieldNormalizer = function (Options $options, ElementInterface $value) {
+        $resolver->setNormalizer('name_field', function (Options $options, ElementInterface $value) {
             return $value->getName();
-        };
-
-        $resolver->setNormalizers([
-            'name_field' => $fieldNormalizer,
-        ]);
+        });
     }
 
     /**

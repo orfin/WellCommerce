@@ -59,16 +59,14 @@ class ProductVariantsEditor extends AbstractField implements ElementInterface
             'add_attribute_value_route'   => 'admin.attribute_value.ajax.add',
         ]);
 
-        $resolver->setAllowedTypes([
-            'allow_generate'     => 'bool',
-            'availability_field' => 'WellCommerce\Component\Form\Elements\ElementInterface',
-            'vat_field'          => 'WellCommerce\Component\Form\Elements\ElementInterface',
-            'vat_values'         => 'array',
-            'photos'             => 'array',
-            'availability'       => 'array',
-            'price_field'        => 'WellCommerce\Component\Form\Elements\ElementInterface',
-            'category_field'     => 'WellCommerce\Component\Form\Elements\ElementInterface',
-        ]);
+        $resolver->setAllowedTypes('allow_generate', 'bool');
+        $resolver->setAllowedTypes('availability_field', ElementInterface::class);
+        $resolver->setAllowedTypes('vat_field', ElementInterface::class);
+        $resolver->setAllowedTypes('vat_values', 'array');
+        $resolver->setAllowedTypes('photos', 'array');
+        $resolver->setAllowedTypes('availability', 'array');
+        $resolver->setAllowedTypes('price_field', ElementInterface::class);
+        $resolver->setAllowedTypes('category_field', ElementInterface::class);
 
         $fieldNormalizer = function (Options $options, $value) {
             if (!$value instanceof ElementInterface) {
@@ -78,12 +76,10 @@ class ProductVariantsEditor extends AbstractField implements ElementInterface
             return $value->getName();
         };
 
-        $resolver->setNormalizers([
-            'vat_field'          => $fieldNormalizer,
-            'price_field'        => $fieldNormalizer,
-            'category_field'     => $fieldNormalizer,
-            'availability_field' => $fieldNormalizer,
-        ]);
+        $resolver->setNormalizer('vat_field', $fieldNormalizer);
+        $resolver->setNormalizer('price_field', $fieldNormalizer);
+        $resolver->setNormalizer('category_field', $fieldNormalizer);
+        $resolver->setNormalizer('availability_field', $fieldNormalizer);
     }
 
     /**

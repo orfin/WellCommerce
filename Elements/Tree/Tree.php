@@ -62,30 +62,28 @@ class Tree extends AbstractTree implements ElementInterface
             'active'                           => 0,
         ]);
 
-        $resolver->setAllowedTypes([
-            'addLabel'                         => 'string',
-            'selectable'                       => 'bool',
-            'choosable'                        => 'bool',
-            'clickable'                        => 'bool',
-            'deletable'                        => 'bool',
-            'sortable'                         => 'bool',
-            'retractable'                      => 'bool',
-            'addable'                          => 'bool',
-            'total'                            => 'int',
-            'items'                            => 'array',
-            'onClick'                          => ['string', 'bool'],
-            'onDuplicate'                      => ['string', 'bool'],
-            'onAdd'                            => ['string', 'bool'],
-            'onAfterAdd'                       => ['string', 'bool'],
-            'onDelete'                         => ['string', 'bool'],
-            'onAfterDelete'                    => ['string', 'bool'],
-            'onSaveOrder'                      => ['string', 'bool'],
-            'active'                           => ['string', 'array', 'int'],
-            'onAfterDeleteId'                  => 'int',
-            'add_item_prompt'                  => 'string',
-            'prevent_duplicates'               => 'bool',
-            'prevent_duplicates_on_all_levels' => 'bool',
-        ]);
+        $resolver->setAllowedTypes('addLabel', 'string');
+        $resolver->setAllowedTypes('selectable', 'bool');
+        $resolver->setAllowedTypes('choosable', 'bool');
+        $resolver->setAllowedTypes('clickable', 'bool');
+        $resolver->setAllowedTypes('deletable', 'bool');
+        $resolver->setAllowedTypes('sortable', 'bool');
+        $resolver->setAllowedTypes('retractable', 'bool');
+        $resolver->setAllowedTypes('addable', 'bool');
+        $resolver->setAllowedTypes('total', 'int');
+        $resolver->setAllowedTypes('items', 'array');
+        $resolver->setAllowedTypes('onClick', ['string', 'bool']);
+        $resolver->setAllowedTypes('onDuplicate', ['string', 'bool']);
+        $resolver->setAllowedTypes('onAdd', ['string', 'bool']);
+        $resolver->setAllowedTypes('onAfterAdd', ['string', 'bool']);
+        $resolver->setAllowedTypes('onDelete', ['string', 'bool']);
+        $resolver->setAllowedTypes('onAfterDelete', ['string', 'bool']);
+        $resolver->setAllowedTypes('onSaveOrder', ['string', 'bool']);
+        $resolver->setAllowedTypes('active', ['string', 'array', 'int']);
+        $resolver->setAllowedTypes('onAfterDeleteId', 'int');
+        $resolver->setAllowedTypes('add_item_prompt', 'string');
+        $resolver->setAllowedTypes('prevent_duplicates', 'bool');
+        $resolver->setAllowedTypes('prevent_duplicates_on_all_levels', 'bool');
     }
 
     /**
@@ -115,6 +113,6 @@ class Tree extends AbstractTree implements ElementInterface
         $collection->add(new Attribute('sAddItemPrompt', $this->getOption('add_item_prompt')));
         $collection->add(new Attribute('bPreventDuplicates', $this->getOption('prevent_duplicates'), Attribute::TYPE_BOOLEAN));
         $collection->add(new Attribute('bPreventDuplicatesOnAllLevels',
-                $this->getOption('prevent_duplicates_on_all_levels')));
+            $this->getOption('prevent_duplicates_on_all_levels')));
     }
 }

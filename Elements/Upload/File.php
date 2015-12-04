@@ -47,12 +47,10 @@ class File extends AbstractField implements ElementInterface
             'file_types'             => ['jpg', 'jpeg', 'png', 'gif'],
         ]);
 
-        $resolver->setAllowedTypes([
-            'session_id'             => 'string',
-            'session_name'           => 'string',
-            'file_types_description' => 'string',
-            'file_types'             => 'array',
-        ]);
+        $resolver->setAllowedTypes('session_id', 'string');
+        $resolver->setAllowedTypes('session_name', 'string');
+        $resolver->setAllowedTypes('file_types_description', 'string');
+        $resolver->setAllowedTypes('file_types', 'array');
     }
 
     /**

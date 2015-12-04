@@ -36,10 +36,8 @@ class ClientSelect extends AbstractField implements ElementInterface
             'get_client_details_route'
         ]);
 
-        $resolver->setAllowedTypes([
-            'load_clients_route'       => 'string',
-            'get_client_details_route' => 'string',
-        ]);
+        $resolver->setAllowedTypes('load_clients_route', 'string');
+        $resolver->setAllowedTypes('get_client_details_route', 'string');
     }
 
     /**

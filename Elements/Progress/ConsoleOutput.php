@@ -36,10 +36,8 @@ class ConsoleOutput extends AbstractProgressField implements ElementInterface
             'port',
         ]);
 
-        $resolver->setAllowedTypes([
-            'console_url' => 'string',
-            'port'        => 'int',
-        ]);
+        $resolver->setAllowedTypes('console_url', 'string');
+        $resolver->setAllowedTypes('port', 'int');
     }
 
     /**

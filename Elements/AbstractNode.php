@@ -16,6 +16,7 @@ use Doctrine\Common\Util\ClassUtils;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\PropertyAccess\PropertyAccess;
+use Symfony\Component\PropertyAccess\PropertyPath;
 use WellCommerce\Component\Form\Exception\TransformerNotFoundException;
 
 /**
@@ -171,12 +172,10 @@ abstract class AbstractNode implements ElementInterface
             }
         ]);
 
-        $resolver->setAllowedTypes([
-            'name'          => 'string',
-            'label'         => 'string',
-            'property_path' => ['null', 'Symfony\Component\PropertyAccess\PropertyPath'],
-            'type'          => 'string'
-        ]);
+        $resolver->setAllowedTypes('name', 'string');
+        $resolver->setAllowedTypes('label', 'string');
+        $resolver->setAllowedTypes('property_path', ['null', PropertyPath::class]);
+        $resolver->setAllowedTypes('type', 'string');
     }
 
     /**
