@@ -16,11 +16,11 @@ use WellCommerce\Component\Form\Elements\FormInterface;
 use WellCommerce\Component\Form\FormBuilderInterface;
 
 /**
- * Class ProductSearchBoxConfigurator
+ * Class SearchBoxConfigurator
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductSearchBoxConfigurator extends AbstractLayoutBoxConfigurator
+class SearchBoxConfigurator extends AbstractLayoutBoxConfigurator
 {
     /**
      * {@inheritdoc}

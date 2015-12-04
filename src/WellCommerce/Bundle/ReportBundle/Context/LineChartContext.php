@@ -10,9 +10,9 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Context;
+namespace WellCommerce\Bundle\ReportBundle\Context;
 
-use WellCommerce\Bundle\AppBundle\Configuration\ReportConfiguration;
+use WellCommerce\Bundle\ReportBundle\Configuration\ReportConfiguration;
 use WellCommerce\Bundle\AppBundle\Data\ReportRow;
 use WellCommerce\Bundle\AppBundle\Data\ReportRowCollection;
 

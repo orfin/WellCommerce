@@ -10,29 +10,29 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\DataSet\Front;
+namespace WellCommerce\Bundle\SearchBundle\DataSet\Front;
 
 use Doctrine\ORM\Query\Expr;
 use WellCommerce\Component\DataSet\Column\ColumnCollection;
 use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
-use WellCommerce\Bundle\AppBundle\Provider\ProductSearchProviderInterface;
+use WellCommerce\Bundle\AppBundle\Provider\SearchProviderInterface;
 
 /**
  * Class ProductDataSetQueryBuilder
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductSearchDataSetQueryBuilder extends ProductDataSetQueryBuilder
+class SearchDataSetQueryBuilder extends ProductDataSetQueryBuilder
 {
     /**
-     * @var ProductSearchProviderInterface
+     * @var SearchProviderInterface
      */
     protected $provider;
 
     /**
-     * @param ProductSearchProviderInterface $provider
+     * @param SearchProviderInterface $provider
      */
-    public function setProductSearchProvider(ProductSearchProviderInterface $provider)
+    public function setSearchProvider(SearchProviderInterface $provider)
     {
         $this->provider = $provider;
     }

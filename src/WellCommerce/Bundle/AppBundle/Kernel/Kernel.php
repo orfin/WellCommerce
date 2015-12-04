@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\AppBundle\Kernel;
 
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
+use WellCommerce\Bundle as Bundle;
 
 /**
  * Class Kernel
@@ -42,34 +43,40 @@ class Kernel extends BaseKernel
             new \Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
             new \Ivory\LuceneSearchBundle\IvoryLuceneSearchBundle(),
 
-            new \WellCommerce\Bundle\AppBundle\WellCommerceAppBundle(),
-            new \WellCommerce\Bundle\AttributeBundle\WellCommerceAttributeBundle(),
-            new \WellCommerce\Bundle\AvailabilityBundle\WellCommerceAvailabilityBundle(),
-            new \WellCommerce\Bundle\CartBundle\WellCommerceCartBundle(),
-            new \WellCommerce\Bundle\CategoryBundle\WellCommerceCategoryBundle(),
-            new \WellCommerce\Bundle\ClientBundle\WellCommerceClientBundle(),
-            new \WellCommerce\Bundle\CoreBundle\WellCommerceCoreBundle(),
-            new \WellCommerce\Bundle\CouponBundle\WellCommerceCouponBundle(),
-            new \WellCommerce\Bundle\UserBundle\WellCommerceUserBundle(),
-            new \WellCommerce\Bundle\CurrencyBundle\WellCommerceCurrencyBundle(),
-            new \WellCommerce\Bundle\LocaleBundle\WellCommerceLocaleBundle(),
-            new \WellCommerce\Bundle\CompanyBundle\WellCommerceCompanyBundle(),
-            new \WellCommerce\Bundle\ShopBundle\WellCommerceShopBundle(),
-            new \WellCommerce\Bundle\LayeredNavigationBundle\WellCommerceLayeredNavigationBundle(),
-            new \WellCommerce\Bundle\LayoutBundle\WellCommerceLayoutBundle(),
-            new \WellCommerce\Bundle\MediaBundle\WellCommerceMediaBundle(),
-            new \WellCommerce\Bundle\ThemeBundle\WellCommerceThemeBundle(),
-            new \WellCommerce\Bundle\OrderBundle\WellCommerceOrderBundle(),
-            new \WellCommerce\Bundle\PageBundle\WellCommercePageBundle(),
-            new \WellCommerce\Bundle\PaymentBundle\WellCommercePaymentBundle(),
-            new \WellCommerce\Bundle\ProducerBundle\WellCommerceProducerBundle(),
-            new \WellCommerce\Bundle\ProductBundle\WellCommerceProductBundle(),
-            new \WellCommerce\Bundle\ProductStatusBundle\WellCommerceProductStatusBundle(),
-            new \WellCommerce\Bundle\ReviewBundle\WellCommerceReviewBundle(),
-            new \WellCommerce\Bundle\RoutingBundle\WellCommerceRoutingBundle(),
-            new \WellCommerce\Bundle\ShippingBundle\WellCommerceShippingBundle(),
-            new \WellCommerce\Bundle\TaxBundle\WellCommerceTaxBundle(),
-            new \WellCommerce\Bundle\UnitBundle\WellCommerceUnitBundle()
+            new Bundle\AdminBundle\WellCommerceAdminBundle(),
+            new Bundle\AppBundle\WellCommerceAppBundle(),
+            new Bundle\AttributeBundle\WellCommerceAttributeBundle(),
+            new Bundle\AvailabilityBundle\WellCommerceAvailabilityBundle(),
+            new Bundle\CartBundle\WellCommerceCartBundle(),
+            new Bundle\CategoryBundle\WellCommerceCategoryBundle(),
+            new Bundle\ContactBundle\WellCommerceContactBundle(),
+            new Bundle\ClientBundle\WellCommerceClientBundle(),
+            new Bundle\CoreBundle\WellCommerceCoreBundle(),
+            new Bundle\CouponBundle\WellCommerceCouponBundle(),
+            new Bundle\CurrencyBundle\WellCommerceCurrencyBundle(),
+            new Bundle\DelivererBundle\WellCommerceDelivererBundle(),
+            new Bundle\DictionaryBundle\WellCommerceDictionaryBundle(),
+            new Bundle\LocaleBundle\WellCommerceLocaleBundle(),
+            new Bundle\CompanyBundle\WellCommerceCompanyBundle(),
+            new Bundle\ShopBundle\WellCommerceShopBundle(),
+            new Bundle\LayeredNavigationBundle\WellCommerceLayeredNavigationBundle(),
+            new Bundle\LayoutBundle\WellCommerceLayoutBundle(),
+            new Bundle\MediaBundle\WellCommerceMediaBundle(),
+            new Bundle\NewsBundle\WellCommerceNewsBundle(),
+            new Bundle\ThemeBundle\WellCommerceThemeBundle(),
+            new Bundle\OrderBundle\WellCommerceOrderBundle(),
+            new Bundle\PageBundle\WellCommercePageBundle(),
+            new Bundle\PaymentBundle\WellCommercePaymentBundle(),
+            new Bundle\ProducerBundle\WellCommerceProducerBundle(),
+            new Bundle\ProductBundle\WellCommerceProductBundle(),
+            new Bundle\ProductStatusBundle\WellCommerceProductStatusBundle(),
+            new Bundle\ReportBundle\WellCommerceReportBundle(),
+            new Bundle\ReviewBundle\WellCommerceReviewBundle(),
+            new Bundle\RoutingBundle\WellCommerceRoutingBundle(),
+            new Bundle\ShippingBundle\WellCommerceShippingBundle(),
+            new Bundle\SmugglerBundle\WellCommerceSmugglerBundle(),
+            new Bundle\TaxBundle\WellCommerceTaxBundle(),
+            new Bundle\UnitBundle\WellCommerceUnitBundle()
 
         ];
 

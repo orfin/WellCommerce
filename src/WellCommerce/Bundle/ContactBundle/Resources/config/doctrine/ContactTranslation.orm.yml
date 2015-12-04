@@ -1,4 +1,4 @@
-WellCommerce\Bundle\AppBundle\Entity\ContactTranslation:
+WellCommerce\Bundle\ContactBundle\Entity\ContactTranslation:
     type: entity
     table: contact_translation
     id: {  }

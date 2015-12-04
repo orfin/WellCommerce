@@ -1,5 +1,5 @@
 {
-    "name": "wellcommerce/user-bundle",
+    "name": "wellcommerce/coupon-bundle",
     "license": "MIT",
     "minimum-stability": "dev",
     "description": "WellCommerce Open-Source edition",
@@ -16,8 +16,8 @@
     ],
     "support": {
         "email": "support@wellcommerce.org",
-        "issues": "https://github.com/WellCommerce/UserBundle/issues",
-        "source": "https://github.com/WellCommerce/UserBundle/"
+        "issues": "https://github.com/WellCommerce/CouponBundle/issues",
+        "source": "https://github.com/WellCommerce/CouponBundle/"
     },
     "autoload": {
         "psr-4": { "": "src/" }

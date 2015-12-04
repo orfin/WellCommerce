@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\DependencyInjection;
+namespace WellCommerce\Bundle\SearchBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;

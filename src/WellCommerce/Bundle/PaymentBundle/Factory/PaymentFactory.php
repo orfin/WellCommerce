@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\PaymentBundle\Factory;
 
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 use WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface;
-use WellCommerce\Bundle\AppBundle\Entity\Payment;
+use WellCommerce\Bundle\PaymentBundle\Entity\Payment;
 
 /**
  * Class PaymentFactory
@@ -24,7 +24,7 @@ use WellCommerce\Bundle\AppBundle\Entity\Payment;
 class PaymentFactory extends AbstractFactory implements FactoryInterface
 {
     /**
-     * @return \WellCommerce\Bundle\AppBundle\Entity\PaymentInterface
+     * @return \WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface
      */
     public function create()
     {

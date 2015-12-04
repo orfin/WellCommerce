@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\DataSet\Front;
+namespace WellCommerce\Bundle\NewsBundle\DataSet\Front;
 
 use WellCommerce\Bundle\AppBundle\DataSet\Admin\NewsDataSet as BaseDataSet;
 

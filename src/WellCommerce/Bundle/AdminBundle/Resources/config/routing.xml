@@ -5,5 +5,6 @@
         xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
     <import resource="routing/admin/dashboard.xml"/>
-
+    <import resource="routing/user.xml"/>
+    <import resource="routing/user_group.xml"/>
 </routes>

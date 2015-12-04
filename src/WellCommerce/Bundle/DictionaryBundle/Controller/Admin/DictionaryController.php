@@ -23,7 +23,7 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 class DictionaryController extends AbstractAdminController
 {
     /**
-     * @var \WellCommerce\Bundle\AppBundle\Manager\Admin\DictionaryManager
+     * @var \WellCommerce\Bundle\DictionaryBundle\Manager\Admin\DictionaryManager
      */
     protected $manager;
 

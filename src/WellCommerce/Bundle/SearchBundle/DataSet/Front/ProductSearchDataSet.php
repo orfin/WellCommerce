@@ -10,17 +10,17 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\DataSet\Front;
+namespace WellCommerce\Bundle\SearchBundle\DataSet\Front;
 
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
 
 /**
- * Class ProductSearchDataSet
+ * Class SearchDataSet
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductSearchDataSet extends AbstractDataSet
+class SearchDataSet extends AbstractDataSet
 {
     /**
      * {@inheritdoc}

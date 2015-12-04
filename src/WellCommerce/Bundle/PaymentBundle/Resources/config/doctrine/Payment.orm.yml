@@ -1,4 +1,4 @@
-WellCommerce\Bundle\AppBundle\Entity\Payment:
+WellCommerce\Bundle\PaymentBundle\Entity\Payment:
     type: entity
     table: payment
     repositoryClass: WellCommerce\Bundle\AppBundle\Repository\PaymentRepository

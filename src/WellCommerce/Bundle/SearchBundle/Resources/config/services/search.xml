@@ -14,7 +14,7 @@
             <argument type="service" id="product.repository"/>
         </service>
 
-        <service id="product_search.provider.lucene" class="WellCommerce\Bundle\AppBundle\Provider\LuceneProductSearchProvider">
+        <service id="product_search.provider.lucene" class="WellCommerce\Bundle\AppBundle\Provider\LuceneSearchProvider">
             <argument type="service" id="search_index.manager.lucene"/>
         </service>
 

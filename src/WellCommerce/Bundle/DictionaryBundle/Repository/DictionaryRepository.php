@@ -46,7 +46,7 @@ class DictionaryRepository extends AbstractEntityRepository implements Dictionar
     public function getDictionaryTranslations()
     {
         $qb = parent::getQueryBuilder()
-            ->leftJoin('WellCommerce\Bundle\AppBundle\Entity\DictionaryTranslation',
+            ->leftJoin('WellCommerce\Bundle\DictionaryBundle\Entity\DictionaryTranslation',
                 'dictionary_translation',
                 'WITH',
                 'dictionary.id = dictionary_translation.translatable')

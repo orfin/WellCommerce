@@ -10,13 +10,13 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Manager\Admin;
+namespace WellCommerce\Bundle\SmugglerBundle\Manager\Admin;
 
 use ComposerRevisions\Revisions;
 use Doctrine\ORM\EntityNotFoundException;
 use Packagist\Api\Result\Package as RemotePackage;
 use Symfony\Component\HttpFoundation\Request;
-use WellCommerce\Bundle\AppBundle\Entity\Package;
+use WellCommerce\Bundle\SmugglerBundle\Entity\Package;
 use WellCommerce\Bundle\CoreBundle\Helper\Package\PackageHelperInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
 
@@ -117,7 +117,7 @@ class PackageManager extends AbstractAdminManager
     public function changePackageStatus(Request $request)
     {
         /**
-         * @var $package \WellCommerce\Bundle\AppBundle\Entity\Package
+         * @var $package \WellCommerce\Bundle\SmugglerBundle\Entity\Package
          */
         $id         = $request->attributes->get('id');
         $em         = $this->getDoctrineHelper()->getEntityManager();

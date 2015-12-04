@@ -1,7 +1,7 @@
-WellCommerce\Bundle\AppBundle\Entity\Channel:
+WellCommerce\Bundle\SmugglerBundle\Entity\Channel:
     type: entity
     table: smuggler_channel
-    repositoryClass: WellCommerce\Bundle\AppBundle\Repository\ChannelRepository
+    repositoryClass: WellCommerce\Bundle\SmugglerBundle\Repository\ChannelRepository
     id:
         id:
             type: integer

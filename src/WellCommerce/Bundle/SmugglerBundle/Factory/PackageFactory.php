@@ -10,9 +10,9 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Factory;
+namespace WellCommerce\Bundle\SmugglerBundle\Factory;
 
-use WellCommerce\Bundle\AppBundle\Entity\Package;
+use WellCommerce\Bundle\SmugglerBundle\Entity\Package;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 use WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface;
 
@@ -24,7 +24,7 @@ use WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface;
 class PackageFactory extends AbstractFactory implements FactoryInterface
 {
     /**
-     * @return \WellCommerce\Bundle\AppBundle\Entity\PackageInterface
+     * @return \WellCommerce\Bundle\SmugglerBundle\Entity\PackageInterface
      */
     public function create()
     {

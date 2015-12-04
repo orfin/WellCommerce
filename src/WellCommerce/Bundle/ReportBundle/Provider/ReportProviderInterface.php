@@ -10,9 +10,9 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Provider;
+namespace WellCommerce\Bundle\ReportBundle\Provider;
 
-use WellCommerce\Bundle\AppBundle\Configuration\ReportConfiguration;
+use WellCommerce\Bundle\ReportBundle\Configuration\ReportConfiguration;
 
 /**
  * Interface ReportProviderInterface

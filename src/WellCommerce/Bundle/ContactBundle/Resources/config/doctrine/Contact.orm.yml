@@ -1,7 +1,7 @@
-WellCommerce\Bundle\AppBundle\Entity\Contact:
+WellCommerce\Bundle\ContactBundle\Entity\Contact:
     type: entity
     table: contact
-    repositoryClass: WellCommerce\Bundle\AppBundle\Repository\ContactRepository
+    repositoryClass: WellCommerce\Bundle\ContactBundle\Repository\ContactRepository
     id:
         id:
             type: integer

@@ -159,7 +159,7 @@ abstract class AbstractContainerAware extends ContainerAware
     }
 
     /**
-     * @return \WellCommerce\Bundle\AppBundle\Entity\Locale[]
+     * @return \WellCommerce\Bundle\LocaleBundle\Entity\LocaleInterface[]
      */
     public function getLocales()
     {
@@ -167,7 +167,7 @@ abstract class AbstractContainerAware extends ContainerAware
     }
 
     /**
-     * @return \WellCommerce\Bundle\AppBundle\Helper\CurrencyHelperInterface
+     * @return \WellCommerce\Bundle\CurrencyBundle\Helper\CurrencyHelperInterface
      */
     public function getCurrencyHelper()
     {
@@ -175,11 +175,11 @@ abstract class AbstractContainerAware extends ContainerAware
     }
 
     /**
-     * @return \WellCommerce\Bundle\UserBundle\Helper\Security\SecurityHelperInterface
+     * @return \WellCommerce\Bundle\AdminBundle\Helper\Admin\AdminHelperInterface
      */
     public function getSecurityHelper()
     {
-        return $this->get('security.helper');
+        return $this->get('admin.helper');
     }
 
     /**
@@ -199,19 +199,11 @@ abstract class AbstractContainerAware extends ContainerAware
     }
 
     /**
-     * @return \WellCommerce\Bundle\AppBundle\Helper\Validator\ValidatorHelperInterface
+     * @return \WellCommerce\Bundle\CoreBundle\Helper\Validator\ValidatorHelperInterface
      */
     public function getValidatorHelper()
     {
         return $this->get('validator.helper');
-    }
-
-    /**
-     * @return \WellCommerce\Bundle\AppBundle\Helper\LayeredNavigationHelperInterface
-     */
-    public function getLayeredNavigationHelper()
-    {
-        return $this->get('layered_navigation.helper');
     }
 
     /**

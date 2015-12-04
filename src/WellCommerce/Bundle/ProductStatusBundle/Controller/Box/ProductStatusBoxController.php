@@ -23,7 +23,7 @@ use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 class ProductStatusBoxController extends AbstractBoxController
 {
     /**
-     * @var \WellCommerce\Bundle\AppBundle\Manager\Front\ProductStatusManager
+     * @var \WellCommerce\Bundle\ProductStatusBundle\Manager\Front\ProductStatusManager
      */
     protected $manager;
     
@@ -36,7 +36,7 @@ class ProductStatusBoxController extends AbstractBoxController
         $requestHelper = $this->manager->getRequestHelper();
         $limit         = $requestHelper->getQueryBagParam('limit', $boxSettings->getParam('per_page', 12));
         $conditions    = $this->manager->getStatusConditions($boxSettings->getParam('status'));
-        $conditions    = $this->getLayeredNavigationHelper()->addLayeredNavigationConditions($conditions);
+        $conditions    = $this->get('layered_navigation.helper')->addLayeredNavigationConditions($conditions);
 
         $products = $dataset->getResult('array', [
             'limit'      => $limit,

@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\CoreBundle\Manager\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
-use WellCommerce\Bundle\UserBundle\Entity\UserInterface;
+use WellCommerce\Bundle\AdminBundle\Entity\UserInterface;
 use WellCommerce\Bundle\CoreBundle\EventDispatcher\EventDispatcherInterface;
 use WellCommerce\Bundle\CoreBundle\Exception\MissingDataGridException;
 use WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface;

@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CoreBundle\Command\Package;
+namespace WellCommerce\Bundle\SmugglerBundle\Command\Package;
 
 use Devristo\Phpws\Server\WebSocketServer;
 use React\ChildProcess\Process;

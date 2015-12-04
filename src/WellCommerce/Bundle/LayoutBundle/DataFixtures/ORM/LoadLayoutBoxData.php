@@ -166,7 +166,7 @@ class LoadLayoutBoxData extends AbstractDataFixture
                 'settings'   => []
             ],
             4 => [
-                'type'       => 'ProductSearch',
+                'type'       => 'Search',
                 'identifier' => 'product_search',
                 'name'       => 'Product search box',
                 'settings'   => []
