@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\ContactBundle\Context\Front;
 
-use WellCommerce\Bundle\AppBundle\Entity\ContactInterface;
+use WellCommerce\Bundle\ContactBundle\Entity\ContactInterface;
 
 /**
  * Interface ContactContextInterface
