@@ -1,7 +1,7 @@
-WellCommerce\Bundle\ClientBundle\Entity\Wishlist:
+WellCommerce\Bundle\WishlistBundle\Entity\Wishlist:
     type: entity
     table: wishlist
-    repositoryClass: WellCommerce\Bundle\ClientBundle\Repository\WishlistRepository
+    repositoryClass: WellCommerce\Bundle\WishlistBundle\Repository\WishlistRepository
     id:
         id:
             type: integer
