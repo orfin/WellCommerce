@@ -28,6 +28,10 @@ before_script:
 
     - php app/console doctrine:schema:create --env=test
     - php app/console doctrine:fixtures:load --env=test --no-interaction
+    - php app/console assets:install --env=test
+    - php app/console bazinga:js-translation:dump --env=test
+    - php app/console fos:js-routing:dump --env=test
+    - php app/console assetic:dump --env=test
     - php app/console cache:warmup --env=test
 
 script:
