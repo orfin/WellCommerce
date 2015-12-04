@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 git stree push AdminBundle
-git stree push AttributeBundle
 git stree push AppBundle
+git stree push AttributeBundle
 git stree push AvailabilityBundle
 git stree push CartBundle
 git stree push CategoryBundle
@@ -10,6 +10,7 @@ git stree push ClientBundle
 git stree push Collections
 git stree push CompanyBundle
 git stree push ContactBundle
+git stree push CoreBundle
 git stree push CountryBundle
 git stree push CouponBundle
 git stree push CurrencyBundle
@@ -39,3 +40,4 @@ git stree push SmugglerBundle
 git stree push TaxBundle
 git stree push ThemeBundle
 git stree push UnitBundle
+git stree push WishlistBundle
