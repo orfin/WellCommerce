@@ -12,9 +12,9 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\Manager\Front;
 
+use WellCommerce\Bundle\AppBundle\Exception\OrderNotFoundException;
 use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
-use WellCommerce\Bundle\AppBundle\Exception\OrderNotFoundException;
 use WellCommerce\Bundle\OrderBundle\Repository\OrderRepositoryInterface;
 
 /**

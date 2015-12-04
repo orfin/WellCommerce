@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\Controller\Front;
 
-use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 
 /**
  * Class PaymentController
