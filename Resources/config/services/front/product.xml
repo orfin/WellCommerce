@@ -13,13 +13,6 @@
             </call>
         </service>
 
-        <service id="layered_navigation.helper" class="WellCommerce\Bundle\ProductBundle\Helper\LayeredNavigationHelper">
-            <argument type="service" id="producer.repository"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-        </service>
-        
         <service id="product.controller.front" class="WellCommerce\Bundle\ProductBundle\Controller\Front\ProductController">
             <argument type="service" id="product.manager.front"/>
             <call method="setContainer">
