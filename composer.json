@@ -33,7 +33,6 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "knplabs/doctrine-behaviors": "1.1.*@dev",
         "fzaninotto/faker": "1.5.0",
-        "white-october/pagerfanta-bundle": "2.1.x-dev",
         "friendsofsymfony/jsrouting-bundle": "2.0.*@dev",
         "willdurand/js-translation-bundle": "2.1.*@dev",
         "jms/serializer-bundle": "0.13.0",
