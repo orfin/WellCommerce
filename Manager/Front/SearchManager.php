@@ -10,30 +10,30 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Manager\Front;
+namespace WellCommerce\Bundle\SearchBundle\Manager\Front;
 
 use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
 use WellCommerce\Component\DataSet\Conditions\Condition\In;
 use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
-use WellCommerce\Bundle\AppBundle\Provider\ProductSearchProviderInterface;
+use WellCommerce\Bundle\AppBundle\Provider\SearchProviderInterface;
 use WellCommerce\Bundle\AppBundle\Query\SimpleQuery;
 
 /**
- * Class ProductSearchManager
+ * Class SearchManager
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductSearchManager extends AbstractFrontManager
+class SearchManager extends AbstractFrontManager
 {
     /**
-     * @var ProductSearchProviderInterface
+     * @var SearchProviderInterface
      */
     protected $provider;
 
     /**
-     * @param ProductSearchProviderInterface $provider
+     * @param SearchProviderInterface $provider
      */
-    public function setProductSearchProvider(ProductSearchProviderInterface $provider)
+    public function setSearchProvider(SearchProviderInterface $provider)
     {
         $this->provider = $provider;
     }

@@ -10,21 +10,21 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Controller\Box;
+namespace WellCommerce\Bundle\SearchBundle\Controller\Box;
 
 use WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxSettingsCollection;
 use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 
 /**
- * Class ProductSearchBoxController
+ * Class SearchBoxController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductSearchBoxController extends AbstractBoxController
+class SearchBoxController extends AbstractBoxController
 {
     /**
-     * @var \WellCommerce\Bundle\AppBundle\Manager\Front\ProductSearchManager
+     * @var \WellCommerce\Bundle\SearchBundle\Manager\Front\SearchManager
      */
     protected $manager;
 
@@ -38,7 +38,7 @@ class ProductSearchBoxController extends AbstractBoxController
         $requestHelper = $this->getRequestHelper();
         $limit         = $this->manager->getRequestHelper()->getAttributesBagParam('limit', $boxSettings->getParam('per_page', 12));
         $conditions    = $this->manager->addSearchConditions($conditions);
-        $conditions    = $this->getLayeredNavigationHelper()->addLayeredNavigationConditions($conditions);
+        $conditions    = $this->get('layered_navigation.helper')->addLayeredNavigationConditions($conditions);
 
         $products = $dataset->getResult('array', [
             'limit'      => $limit,

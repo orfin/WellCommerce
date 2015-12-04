@@ -10,21 +10,21 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Controller\Front;
+namespace WellCommerce\Bundle\SearchBundle\Controller\Front;
 
 use WellCommerce\Bundle\CoreBundle\Service\Breadcrumb\BreadcrumbItem;
 use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 
 /**
- * Class ProductSearchController
+ * Class SearchController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductSearchController extends AbstractFrontController
+class SearchController extends AbstractFrontController
 {
     /**
-     * @var \WellCommerce\Bundle\AppBundle\Manager\Front\ProductSearchManager
+     * @var \WellCommerce\Bundle\SearchBundle\Manager\Front\SearchManager
      */
     protected $manager;
 
@@ -59,7 +59,7 @@ class ProductSearchController extends AbstractFrontController
             $dataset    = $this->get('product_search.dataset.front');
             $conditions = new ConditionsCollection();
             $conditions = $this->manager->addSearchConditions($conditions);
-            $conditions = $this->getLayeredNavigationHelper()->addLayeredNavigationConditions($conditions);
+            $conditions = $this->get('layered_navigation.helper')->addLayeredNavigationConditions($conditions);
 
             $products = $dataset->getResult('array', [
                 'limit'      => 20,
@@ -69,7 +69,7 @@ class ProductSearchController extends AbstractFrontController
                 'conditions' => $conditions,
             ]);
 
-            $liveSearchContent = $this->renderView('WellCommerceAppBundle:Front/ProductSearch:view.html.twig', [
+            $liveSearchContent = $this->renderView('WellCommerceAppBundle:Front/Search:view.html.twig', [
                 'dataset' => $products,
             ]);
         }
@@ -77,36 +77,5 @@ class ProductSearchController extends AbstractFrontController
         return $this->jsonResponse([
             'liveSearchContent' => $liveSearchContent
         ]);
-    }
-
-    protected function getSortOptions()
-    {
-        $sorting = [
-            'name'       => [
-                'asc'  => [
-                    'label' => $this->trans('product.options.order_by.name.asc'),
-                ],
-                'desc' => [
-                    'label' => $this->trans('product.options.order_by.name.desc')
-                ],
-            ],
-            'finalPrice' => [
-                'asc'  => [
-                    'label' => $this->trans('product.options.order_by.final_price.asc')
-                ],
-                'desc' => [
-                    'label' => $this->trans('product.options.order_by.final_price.desc')
-                ],
-            ],
-            'score'      => [
-                'asc' => [
-                    'label' => $this->trans('product.options.order_by.score.asc')
-                ],
-            ],
-        ];
-
-        foreach ($sorting as $column => $directions) {
-
-        }
     }
 }

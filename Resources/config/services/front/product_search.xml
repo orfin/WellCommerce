@@ -4,10 +4,10 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="product_search.manager.front" class="WellCommerce\Bundle\AppBundle\Manager\Front\ProductSearchManager">
+        <service id="product_search.manager.front" class="WellCommerce\Bundle\AppBundle\Manager\Front\SearchManager">
             <argument type="service" id="product.repository"/>
             <argument type="service" id="product_search.event_dispatcher"/>
-            <call method="setProductSearchProvider">
+            <call method="setSearchProvider">
                 <argument type="service" id="product_search.provider"/>
             </call>
             <call method="setContainer">
@@ -15,9 +15,9 @@
             </call>
         </service>
 
-        <service id="product_search.dataset.query_builder.front" class="WellCommerce\Bundle\AppBundle\DataSet\Front\ProductSearchDataSetQueryBuilder">
+        <service id="product_search.dataset.query_builder.front" class="WellCommerce\Bundle\AppBundle\DataSet\Front\SearchDataSetQueryBuilder">
             <argument type="service" id="product.repository"/>
-            <call method="setProductSearchProvider">
+            <call method="setSearchProvider">
                 <argument type="service" id="product_search.provider"/>
             </call>
             <call method="setRequestHelper">
@@ -25,21 +25,21 @@
             </call>
         </service>
 
-        <service id="product_search.dataset.front" class="WellCommerce\Bundle\AppBundle\DataSet\Front\ProductSearchDataSet">
+        <service id="product_search.dataset.front" class="WellCommerce\Bundle\AppBundle\DataSet\Front\SearchDataSet">
             <argument type="service" id="product_search.dataset.query_builder.front"/>
             <argument type="service" id="dataset.manager"/>
             <argument type="service" id="product.event_dispatcher"/>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
-        <service id="product_search.controller.front" class="WellCommerce\Bundle\AppBundle\Controller\Front\ProductSearchController">
+        <service id="product_search.controller.front" class="WellCommerce\Bundle\AppBundle\Controller\Front\SearchController">
             <argument type="service" id="product_search.manager.front"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <service id="product_search.layout_box.controller" class="WellCommerce\Bundle\AppBundle\Controller\Box\ProductSearchBoxController">
+        <service id="product_search.layout_box.controller" class="WellCommerce\Bundle\AppBundle\Controller\Box\SearchBoxController">
             <argument type="service" id="product_search.manager.front"/>
             <call method="setContainer">
                 <argument type="service" id="service_container" />

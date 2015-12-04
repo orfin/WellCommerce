@@ -10,21 +10,21 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Provider;
+namespace WellCommerce\Bundle\SearchBundle\Provider;
 
 use WellCommerce\Bundle\AppBundle\Query\SimpleQuery;
 
 /**
- * Interface ProductSearchProviderInterface
+ * Interface SearchProviderInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ProductSearchProviderInterface
+interface SearchProviderInterface
 {
     /**
      * @param SimpleQuery $query
      *
-     * @return ProductSearchProviderInterface
+     * @return SearchProviderInterface
      */
     public function searchProducts(SimpleQuery $query);
 
