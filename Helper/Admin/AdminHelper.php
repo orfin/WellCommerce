@@ -10,18 +10,18 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\UserBundle\Helper\Security;
+namespace WellCommerce\Bundle\AdminBundle\Helper\Admin;
 
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use WellCommerce\Bundle\UserBundle\Entity\UserInterface;
-use WellCommerce\Bundle\UserBundle\Repository\UserRepositoryInterface;
+use WellCommerce\Bundle\AdminBundle\Entity\UserInterface;
+use WellCommerce\Bundle\AdminBundle\Repository\UserRepositoryInterface;
 
 /**
- * Class SecurityHelper
+ * Class AdminHelper
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class SecurityHelper implements SecurityHelperInterface
+class AdminHelper implements AdminHelperInterface
 {
     /**
      * @var TokenStorageInterface

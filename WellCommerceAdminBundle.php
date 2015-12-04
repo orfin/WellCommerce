@@ -10,19 +10,15 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Controller\Front;
+namespace WellCommerce\Bundle\AdminBundle;
 
-use WellCommerce\Bundle\CoreBundle\Controller\AbstractController;
+use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * Class HomePageController
+ * Class WellCommerceAdminBundle
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class HomePageController extends AbstractController
+class WellCommerceAdminBundle extends Bundle
 {
-    public function indexAction()
-    {
-        return $this->displayTemplate('index');
-    }
 }

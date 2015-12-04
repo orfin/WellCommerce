@@ -10,16 +10,18 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AdminBundle\Repository;
+namespace WellCommerce\Bundle\AdminBundle\DependencyInjection;
 
-use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\Loader;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
 
 /**
- * Class AdminMenuRepository
+ * Class WellCommerceAdminExtension
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AdminMenuRepository extends AbstractEntityRepository implements AdminMenuRepositoryInterface
+class WellCommerceAdminExtension extends AbstractExtension
 {
 
 }

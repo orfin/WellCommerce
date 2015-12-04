@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\UserBundle\Repository;
+namespace WellCommerce\Bundle\AdminBundle\Repository;
 
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;

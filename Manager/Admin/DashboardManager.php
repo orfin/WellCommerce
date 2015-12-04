@@ -10,16 +10,24 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AdminBundle\Repository;
+namespace WellCommerce\Bundle\AdminBundle\Manager\Admin;
 
-use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
 
 /**
- * Class AdminMenuRepository
+ * Class DashboardManager
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AdminMenuRepository extends AbstractEntityRepository implements AdminMenuRepositoryInterface
+class DashboardManager extends AbstractAdminManager
 {
+    public function getSummarySales()
+    {
 
+    }
+
+    public function getSalesReport()
+    {
+
+    }
 }

@@ -9,10 +9,10 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Bundle\AppBundle\Twig\Extension;
+namespace WellCommerce\Bundle\AdminBundle\Twig\Extension;
 
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use WellCommerce\Bundle\AppBundle\Provider\AdminMenuProvider;
+use WellCommerce\Bundle\AdminBundle\Provider\AdminMenuProvider;
 
 /**
  * Class AdminExtension

@@ -10,16 +10,16 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\UserBundle\Helper\Security;
+namespace WellCommerce\Bundle\AdminBundle\Helper\Admin;
 
-use WellCommerce\Bundle\UserBundle\Entity\UserInterface;
+use WellCommerce\Bundle\AdminBundle\Entity\UserInterface;
 
 /**
  * Interface TranslatorHelperInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface SecurityHelperInterface
+interface AdminHelperInterface
 {
     /**
      * @return object|null

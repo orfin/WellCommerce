@@ -10,12 +10,12 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\UserBundle\DataFixtures\ORM;
+namespace WellCommerce\Bundle\AdminBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
-use WellCommerce\Bundle\UserBundle\Entity\UserGroupInterface;
-use WellCommerce\Bundle\UserBundle\Entity\UserGroupPermission;
+use WellCommerce\Bundle\AdminBundle\Entity\UserGroupInterface;
+use WellCommerce\Bundle\AdminBundle\Entity\UserGroupPermission;
 use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
 
 /**

@@ -14,10 +14,10 @@ namespace WellCommerce\Bundle\AdminBundle\Controller\Admin;
 
 use Carbon\Carbon;
 use DateInterval;
-use WellCommerce\Bundle\AppBundle\Configuration\ReportConfiguration;
-use WellCommerce\Bundle\AppBundle\Context\LineChartContext;
+use WellCommerce\Bundle\ReportBundle\Calculator\SalesSummaryCalculator;
+use WellCommerce\Bundle\ReportBundle\Configuration\ReportConfiguration;
+use WellCommerce\Bundle\ReportBundle\Context\LineChartContext;
 use WellCommerce\Bundle\CoreBundle\Controller\AbstractController;
-use WellCommerce\Bundle\ShippingBundle\Calculator\SalesSummaryCalculator;
 
 /**
  * Class DashboardController

@@ -12,23 +12,27 @@
 
 namespace WellCommerce\Bundle\AdminBundle\Factory;
 
-use WellCommerce\Bundle\AdminBundle\Entity\UserGroup;
+use Doctrine\Common\Collections\ArrayCollection;
+use WellCommerce\Bundle\AdminBundle\Entity\AdminMenu;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 
 /**
- * Class UserGroupFactory
+ * Class AdminMenuFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class UserGroupFactory extends AbstractFactory
+class AdminMenuFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\AdminBundle\Entity\UserGroupInterface
+     * @return \WellCommerce\Bundle\AdminBundle\Entity\AdminMenuInterface
      */
     public function create()
     {
-        $group = new UserGroup();
+        $adminMenu = new AdminMenu();
+        $adminMenu->setParent(null);
+        $adminMenu->setCssClass('');
+        $adminMenu->setChildren(new ArrayCollection());
 
-        return $group;
+        return $adminMenu;
     }
 }

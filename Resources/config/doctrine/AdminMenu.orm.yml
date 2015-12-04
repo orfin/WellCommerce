@@ -1,10 +1,10 @@
-WellCommerce\Bundle\AppBundle\Entity\AdminMenu:
+WellCommerce\Bundle\AdminBundle\Entity\AdminMenu:
     type: entity
     table: admin_menu
     cache:
         usage : READ_ONLY
         region : admin_menu
-    repositoryClass: WellCommerce\Bundle\AppBundle\Repository\AdminMenuRepository
+    repositoryClass: WellCommerce\Bundle\AdminBundle\Repository\AdminMenuRepository
     id:
         id:
             type: integer
@@ -32,7 +32,7 @@ WellCommerce\Bundle\AppBundle\Entity\AdminMenu:
             column: css_class
     manyToOne:
         parent:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\AdminMenu
+            targetEntity: WellCommerce\Bundle\AdminBundle\Entity\AdminMenu
             fetch: LAZY
             inversedBy: children
             joinColumns:
@@ -41,7 +41,7 @@ WellCommerce\Bundle\AppBundle\Entity\AdminMenu:
                     onDelete: CASCADE
     oneToMany:
         children:
-            targetEntity: WellCommerce\Bundle\AppBundle\Entity\AdminMenu
+            targetEntity: WellCommerce\Bundle\AdminBundle\Entity\AdminMenu
             fetch: LAZY
             mappedBy: parent
             orderBy: {'hierarchy': 'ASC'}

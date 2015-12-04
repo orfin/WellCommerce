@@ -10,12 +10,12 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Service\AdminMenu\Importer;
+namespace WellCommerce\Bundle\AdminBundle\Importer;
 
 use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\Config\Util\XmlUtils;
-use WellCommerce\Bundle\AppBundle\Factory\AdminMenuFactory;
-use WellCommerce\Bundle\AppBundle\Repository\AdminMenuRepositoryInterface;
+use WellCommerce\Bundle\AdminBundle\Factory\AdminMenuFactory;
+use WellCommerce\Bundle\AdminBundle\Repository\AdminMenuRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Doctrine\DoctrineHelperInterface;
 
 /**
