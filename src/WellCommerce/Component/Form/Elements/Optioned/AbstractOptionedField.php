@@ -41,11 +41,9 @@ abstract class AbstractOptionedField extends AbstractField
             'prefix'  => ''
         ]);
 
-        $resolver->setAllowedTypes([
-            'options' => 'array',
-            'suffix'  => 'string',
-            'prefix'  => 'string',
-        ]);
+        $resolver->setAllowedTypes('options', 'array');
+        $resolver->setAllowedTypes('suffix', 'string');
+        $resolver->setAllowedTypes('prefix', 'string');
     }
 
     /**

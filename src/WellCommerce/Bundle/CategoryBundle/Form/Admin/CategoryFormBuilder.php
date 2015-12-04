@@ -47,7 +47,7 @@ class CategoryFormBuilder extends AbstractFormBuilder
             'label'           => $this->trans('category.label.slug'),
             'name_field'      => $name,
             'generate_route'  => 'admin.routing.generate',
-            'translatable_id' => $this->getParam('id')
+            'translatable_id' => $this->getRequestHelper()->getAttributesBagParam('id')
         ]));
 
         $requiredData->addChild($this->getElement('checkbox', [
@@ -70,7 +70,7 @@ class CategoryFormBuilder extends AbstractFormBuilder
             'sortable'    => false,
             'clickable'   => false,
             'items'       => $this->get('category.dataset.admin')->getResult('flat_tree'),
-            'restrict'    => $this->getParam('id'),
+            'restrict'    => $this->getRequestHelper()->getAttributesBagParam('id'),
             'transformer' => $this->getRepositoryTransformer('entity', $this->get('category.repository'))
         ]));
 

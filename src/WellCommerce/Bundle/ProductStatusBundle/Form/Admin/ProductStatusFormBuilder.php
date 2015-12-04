@@ -47,7 +47,7 @@ class ProductStatusFormBuilder extends AbstractFormBuilder
             'label'           => $this->trans('common.label.slug'),
             'name_field'      => $name,
             'generate_route'  => 'admin.routing.generate',
-            'translatable_id' => $this->getParam('id')
+            'translatable_id' => $this->getRequestHelper()->getAttributesBagParam('id')
         ]));
 
         $languageData->addChild($this->getElement('text_field', [

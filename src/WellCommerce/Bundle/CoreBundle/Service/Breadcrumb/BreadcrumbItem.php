@@ -56,11 +56,9 @@ class BreadcrumbItem implements BreadcrumbItemInterface
             'link'  => ''
         ]);
 
-        $resolver->setAllowedTypes([
-            'name'  => 'string',
-            'link'  => 'string',
-            'class' => 'string',
-        ]);
+        $resolver->setAllowedTypes('name', 'string');
+        $resolver->setAllowedTypes('link', 'string');
+        $resolver->setAllowedTypes('class', 'string');
     }
 
     /**

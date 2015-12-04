@@ -51,11 +51,9 @@ class Appearance extends AbstractOptions
             'no_title' => [true, false],
         ]);
 
-        $resolver->setAllowedTypes([
-            'visible'  => 'bool',
-            'width'    => ['int', 'string'],
-            'align'    => 'string',
-            'no_title' => 'bool',
-        ]);
+        $resolver->setAllowedTypes('visible', 'bool');
+        $resolver->setAllowedTypes('width', ['int', 'string']);
+        $resolver->setAllowedTypes('align', 'string');
+        $resolver->setAllowedTypes('no_title', 'bool');
     }
 }

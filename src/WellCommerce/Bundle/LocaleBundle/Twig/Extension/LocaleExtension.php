@@ -19,7 +19,7 @@ use WellCommerce\Component\DataSet\DataSetInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LocaleExtension extends \Twig_Extension
+class LocaleExtension extends \Twig_Extension implements \Twig_Extension_GlobalsInterface
 {
     /**
      * @var SessionInterface

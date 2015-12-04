@@ -54,9 +54,7 @@ class ProductStatusTransformer extends AbstractDataSetTransformer
             'statuses' => []
         ]);
 
-        $resolver->setAllowedTypes([
-            'statuses' => ['array']
-        ]);
+        $resolver->setAllowedTypes('statuses', 'array');
     }
 
     /**

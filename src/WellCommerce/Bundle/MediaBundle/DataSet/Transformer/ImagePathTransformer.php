@@ -51,9 +51,7 @@ class ImagePathTransformer extends AbstractDataSetTransformer
             'filter' => 'medium'
         ]);
 
-        $resolver->setAllowedTypes([
-            'filter' => ['string']
-        ]);
+        $resolver->setAllowedTypes('filter', 'string');
     }
 
     /**

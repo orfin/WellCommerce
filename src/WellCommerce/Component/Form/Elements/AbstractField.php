@@ -14,6 +14,7 @@ namespace WellCommerce\Component\Form\Elements;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\PropertyAccess\PropertyPath;
+use WellCommerce\Component\Form\DataTransformer\DataTransformerInterface;
 use WellCommerce\Component\Form\Filters\FilterInterface;
 
 /**
@@ -45,20 +46,16 @@ abstract class AbstractField extends AbstractContainer
             'transformer'  => null,
         ]);
 
-        $resolver->setNormalizers([
-            'property_path' => function ($options) {
-                return new PropertyPath($options['name']);
-            }
-        ]);
+        $resolver->setNormalizer('property_path', function ($options) {
+            return new PropertyPath($options['name']);
+        });
 
-        $resolver->setAllowedTypes([
-            'comment'      => 'string',
-            'error'        => 'array',
-            'dependencies' => 'array',
-            'rules'        => 'array',
-            'filters'      => 'array',
-            'transformer'  => ['null', 'WellCommerce\Component\Form\DataTransformer\DataTransformerInterface'],
-        ]);
+        $resolver->setAllowedTypes('comment', 'string');
+        $resolver->setAllowedTypes('error', 'array');
+        $resolver->setAllowedTypes('dependencies', 'array');
+        $resolver->setAllowedTypes('rules', 'array');
+        $resolver->setAllowedTypes('filters', 'array');
+        $resolver->setAllowedTypes('transformer', ['null', DataTransformerInterface::class]);
     }
 
     protected function getFilters()

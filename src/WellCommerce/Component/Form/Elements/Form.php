@@ -48,13 +48,11 @@ class Form extends AbstractContainer implements FormInterface
             'validation_groups' => null
         ]);
 
-        $resolver->setAllowedTypes([
-            'action'            => 'string',
-            'method'            => 'string',
-            'ajax_enabled'      => 'bool',
-            'tabs'              => 'integer',
-            'validation_groups' => ['null', 'array'],
-        ]);
+        $resolver->setAllowedTypes('action', 'string');
+        $resolver->setAllowedTypes('method', 'string');
+        $resolver->setAllowedTypes('ajax_enabled', 'bool');
+        $resolver->setAllowedTypes('tabs', 'integer');
+        $resolver->setAllowedTypes('validation_groups', ['null', 'array']);
     }
 
     /**

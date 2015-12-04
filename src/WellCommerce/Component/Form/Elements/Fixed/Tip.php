@@ -61,13 +61,11 @@ class Tip extends AbstractFixedField implements ElementInterface
             'default_state' => [self::EXPANDED, self::RETRACTED],
         ]);
 
-        $resolver->setAllowedTypes([
-            'tip'           => 'string',
-            'direction'     => 'string',
-            'short_tip'     => 'string',
-            'retractable'   => 'bool',
-            'default_state' => 'string',
-        ]);
+        $resolver->setAllowedTypes('tip', 'string');
+        $resolver->setAllowedTypes('direction', 'string');
+        $resolver->setAllowedTypes('short_tip', 'string');
+        $resolver->setAllowedTypes('retractable', 'bool');
+        $resolver->setAllowedTypes('default_state', 'string');
     }
 
     /**

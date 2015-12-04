@@ -38,13 +38,11 @@ class Select extends AbstractOptionedField implements OptionedFieldInterface
             'css_attribute'   => '',
         ]);
 
-        $resolver->setAllowedTypes([
-            'selector'        => 'string',
-            'css_attribute'   => 'string',
-            'addable'         => 'bool',
-            'onAdd'           => 'string',
-            'add_item_prompt' => 'string',
-        ]);
+        $resolver->setAllowedTypes('selector', 'string');
+        $resolver->setAllowedTypes('css_attribute', 'string');
+        $resolver->setAllowedTypes('addable', 'bool');
+        $resolver->setAllowedTypes('onAdd', 'string');
+        $resolver->setAllowedTypes('add_item_prompt', 'string');
     }
 
     /**

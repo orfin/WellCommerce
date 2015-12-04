@@ -39,13 +39,11 @@ class OrderEditor extends AbstractField implements ElementInterface
             'repeat_max',
         ]);
 
-        $resolver->setAllowedTypes([
-            'on_change'           => 'string',
-            'on_before_change'    => 'string',
-            'load_products_route' => 'string',
-            'repeat_min'          => ['numeric'],
-            'repeat_max'          => ['numeric'],
-        ]);
+        $resolver->setAllowedTypes('on_change', 'string');
+        $resolver->setAllowedTypes('on_before_change', 'string');
+        $resolver->setAllowedTypes('load_products_route', 'string');
+        $resolver->setAllowedTypes('repeat_min', 'numeric');
+        $resolver->setAllowedTypes('repeat_max', 'numeric');
     }
 
     /**

@@ -37,8 +37,6 @@ class RichTextEditor extends TextArea implements ElementInterface
             'advanced' => true,
         ]);
 
-        $resolver->setAllowedTypes([
-            'advanced' => 'bool',
-        ]);
+        $resolver->setAllowedTypes('advanced', 'bool');
     }
 }

@@ -52,9 +52,7 @@ abstract class AbstractEventHandler implements EventHandlerInterface
             'function' => OptionInterface::GF_NULL,
         ]);
 
-        $resolver->setAllowedTypes([
-            'function' => ['string', 'int'],
-        ]);
+        $resolver->setAllowedTypes('function', ['string', 'int']);
     }
 
     /**

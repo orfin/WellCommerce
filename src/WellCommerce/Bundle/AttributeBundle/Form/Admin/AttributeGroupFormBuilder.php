@@ -52,7 +52,7 @@ class AttributeGroupFormBuilder extends AbstractFormBuilder
         $attributeData->addChild($this->getElement('attribute_editor', [
             'name'                         => 'attributes',
             'label'                        => $this->trans('attribute_group.label.attributes'),
-            'set'                          => $this->getParam('id'),
+            'set'                          => $this->getRequestHelper()->getAttributesBagParam('id'),
             'delete_attribute_route'       => 'admin.attribute.delete',
             'rename_attribute_route'       => 'admin.attribute.edit',
             'rename_attribute_value_route' => 'admin.attribute_value.edit',

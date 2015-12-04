@@ -14,6 +14,7 @@ namespace WellCommerce\Component\Form\Elements\Fieldset;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\PropertyAccess\PropertyPath;
+use WellCommerce\Component\Form\DataTransformer\DataTransformerInterface;
 use WellCommerce\Component\Form\Elements\Attribute;
 use WellCommerce\Component\Form\Elements\AttributeCollection;
 use WellCommerce\Component\Form\Elements\ElementInterface;
@@ -48,16 +49,12 @@ class LanguageFieldset extends NestedFieldset implements FieldsetInterface
             'languages' => $this->locales,
         ]);
 
-        $resolver->setNormalizers([
-            'property_path' => function ($options) {
-                return new PropertyPath($options['name']);
-            },
-        ]);
+        $resolver->setNormalizer('property_path', function ($options) {
+            return new PropertyPath($options['name']);
+        });
 
-        $resolver->setAllowedTypes([
-            'languages'   => 'array',
-            'transformer' => ['WellCommerce\Component\Form\DataTransformer\DataTransformerInterface'],
-        ]);
+        $resolver->setAllowedTypes('languages', 'array');
+        $resolver->setAllowedTypes('transformer', DataTransformerInterface::class);
     }
 
     /**

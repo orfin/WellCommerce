@@ -62,15 +62,13 @@ class RangeEditor extends AbstractField implements ElementInterface
             'prefixes'        => ['net', 'gross'],
         ]);
 
-        $resolver->setAllowedTypes([
-            'suffix'          => 'string',
-            'price_precision' => 'int',
-            'range_precision' => 'int',
-            'range_suffix'    => 'string',
-            'vat_field'       => ['null', 'WellCommerce\Component\Form\Elements\ElementInterface'],
-            'vat_field_name'  => 'string',
-            'prefixes'        => 'array',
-        ]);
+        $resolver->setAllowedTypes('suffix', 'string');
+        $resolver->setAllowedTypes('price_precision', 'int');
+        $resolver->setAllowedTypes('range_precision', 'int');
+        $resolver->setAllowedTypes('range_suffix', 'string');
+        $resolver->setAllowedTypes('vat_field', ['null', ElementInterface::class]);
+        $resolver->setAllowedTypes('vat_field_name', 'string');
+        $resolver->setAllowedTypes('prefixes', 'array');
     }
 
     /**

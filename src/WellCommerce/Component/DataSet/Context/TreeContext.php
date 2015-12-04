@@ -74,8 +74,6 @@ class TreeContext extends FlatTreeContext
             'parent_column' => 'parent',
         ]);
 
-        $resolver->setAllowedTypes([
-            'parent_column' => 'string',
-        ]);
+        $resolver->setAllowedTypes('parent_column', 'string');
     }
 }

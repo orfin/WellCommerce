@@ -47,20 +47,18 @@ class Mechanics extends AbstractOption
             'persistent'               => true,
         ]);
 
-        $resolver->setAllowedTypes([
-            'rows_per_page'            => 'int',
-            'key'                      => ['int', 'string'],
-            'default_sorting'          => ['int', 'string'],
-            'right_click_menu'         => 'bool',
-            'auto_suggest_delay'       => 'int',
-            'auto_suggest_min_length'  => 'int',
-            'auto_suggest_suggestions' => 'int',
-            'only_one_selected'        => 'bool',
-            'no_column_modification'   => 'bool',
-            'no_column_resizing'       => 'bool',
-            'create_input'             => 'bool',
-            'save_column_modification' => 'bool',
-            'persistent'               => 'bool',
-        ]);
+        $resolver->setAllowedTypes('rows_per_page', 'int');
+        $resolver->setAllowedTypes('key', ['int', 'string']);
+        $resolver->setAllowedTypes('default_sorting', ['int', 'string']);
+        $resolver->setAllowedTypes('right_click_menu', 'bool');
+        $resolver->setAllowedTypes('auto_suggest_delay', 'int');
+        $resolver->setAllowedTypes('auto_suggest_min_length', 'int');
+        $resolver->setAllowedTypes('auto_suggest_suggestions', 'int');
+        $resolver->setAllowedTypes('only_one_selected', 'bool');
+        $resolver->setAllowedTypes('no_column_modification', 'bool');
+        $resolver->setAllowedTypes('no_column_resizing', 'bool');
+        $resolver->setAllowedTypes('create_input', 'bool');
+        $resolver->setAllowedTypes('save_column_modification', 'bool');
+        $resolver->setAllowedTypes('persistent', 'bool');
     }
 }

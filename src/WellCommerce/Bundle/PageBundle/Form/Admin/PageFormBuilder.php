@@ -64,7 +64,7 @@ class PageFormBuilder extends AbstractFormBuilder
             'label'           => $this->trans('common.label.slug'),
             'name_field'      => $name,
             'generate_route'  => 'admin.routing.generate',
-            'translatable_id' => $this->getParam('id')
+            'translatable_id' => $this->getRequestHelper()->getAttributesBagParam('id')
         ]));
 
         $mainData->addChild($this->getElement('checkbox', [
@@ -88,7 +88,7 @@ class PageFormBuilder extends AbstractFormBuilder
             'sortable'    => false,
             'clickable'   => false,
             'items'       => $this->get('page.dataset.admin')->getResult('flat_tree'),
-            'restrict'    => $this->getParam('id'),
+            'restrict'    => $this->getRequestHelper()->getAttributesBagParam('id'),
             'transformer' => $this->getRepositoryTransformer('entity', $this->get('page.repository'))
         ]));
 
