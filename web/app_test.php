@@ -26,8 +26,6 @@ if (!in_array(@$_SERVER['REMOTE_ADDR'], array(
 $loader = require __DIR__ . '/../app/autoload.php';
 \Symfony\Component\Debug\Debug::enable();
 
-require_once __DIR__.'/../app/AppKernel.php';
-
 $kernel  = new AppKernel('test', true);
 $request = Request::createFromGlobals();
 Request::enableHttpMethodParameterOverride();
