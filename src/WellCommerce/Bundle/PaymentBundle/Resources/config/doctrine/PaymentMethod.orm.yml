@@ -1,7 +1,7 @@
 WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod:
     type: entity
     table: payment_method
-    repositoryClass: WellCommerce\Bundle\AppBundle\Repository\PaymentMethodRepository
+    repositoryClass: WellCommerce\Bundle\PaymentBundle\Repository\PaymentMethodRepository
     id:
         id:
             type: integer
