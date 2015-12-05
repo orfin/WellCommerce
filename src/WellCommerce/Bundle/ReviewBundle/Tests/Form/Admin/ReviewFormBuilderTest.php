@@ -10,24 +10,24 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\TaxBundle\Tests\Form\Admin;
+namespace WellCommerce\Bundle\ReviewBundle\Tests\Form\Admin;
 
 use WellCommerce\Bundle\CoreBundle\Test\Form\AbstractFormBuilderTestCase;
 
 /**
- * Class TaxFormBuilderTest
+ * Class ReviewFormBuilderTest
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class TaxFormBuilderTest extends AbstractFormBuilderTestCase
+class ReviewFormBuilderTest extends AbstractFormBuilderTestCase
 {
     protected function getFormBuilderService()
     {
-        return $this->container->get('tax.form_builder.admin');
+        return $this->container->get('review.form_builder.admin');
     }
 
     protected function getFactoryService()
     {
-        return $this->container->get('tax.factory');
+        return $this->container->get('review.factory');
     }
 }

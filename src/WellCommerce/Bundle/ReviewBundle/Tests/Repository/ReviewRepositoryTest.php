@@ -10,19 +10,19 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\TaxBundle\Tests\Repository;
+namespace WellCommerce\Bundle\ReviewBundle\Tests\Repository;
 
 use WellCommerce\Bundle\CoreBundle\Test\Repository\AbstractRepositoryTestCase;
 
 /**
- * Class TaxRepositoryTest
+ * Class ReviewRepositoryTest
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class TaxRepositoryTest extends AbstractRepositoryTestCase
+class ReviewRepositoryTest extends AbstractRepositoryTestCase
 {
     protected function get()
     {
-        return $this->container->get('tax.repository');
+        return $this->container->get('review.repository');
     }
 }

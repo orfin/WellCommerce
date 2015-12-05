@@ -10,19 +10,24 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\TaxBundle\Tests\Repository;
+namespace WellCommerce\Bundle\ReviewBundle\Tests\DataGrid;
 
-use WellCommerce\Bundle\CoreBundle\Test\Repository\AbstractRepositoryTestCase;
+use WellCommerce\Bundle\CoreBundle\Test\DataGrid\AbstractDataGridTestCase;
 
 /**
- * Class TaxRepositoryTest
+ * Class ReviewDataGridTest
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class TaxRepositoryTest extends AbstractRepositoryTestCase
+class ReviewDataGridTest extends AbstractDataGridTestCase
 {
     protected function get()
     {
-        return $this->container->get('tax.repository');
+        return $this->container->get('tax.datagrid')->getInstance();
+    }
+
+    protected function getColumns()
+    {
+        return ['id', 'nick', 'createdAt', 'product', 'rating'];
     }
 }
