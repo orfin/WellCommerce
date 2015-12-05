@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\DataSet\Front;
 
-use WellCommerce\Bundle\AppBundle\DataSet\Admin\PaymentMethodDataSetQueryBuilder as BaseDataSetQueryBuilder;
+use WellCommerce\Bundle\PaymentBundle\DataSet\Admin\PaymentMethodDataSetQueryBuilder as BaseDataSetQueryBuilder;
 
 /**
  * Class PaymentMethodDataSetQueryBuilder
