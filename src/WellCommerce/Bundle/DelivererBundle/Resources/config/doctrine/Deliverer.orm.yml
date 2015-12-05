@@ -1,7 +1,7 @@
 WellCommerce\Bundle\DelivererBundle\Entity\Deliverer:
     type: entity
     table: deliverer
-    repositoryClass: WellCommerce\Bundle\AppBundle\Repository\DelivererRepository
+    repositoryClass: WellCommerce\Bundle\DelivererBundle\Repository\DelivererRepository
     id:
         id:
             type: integer

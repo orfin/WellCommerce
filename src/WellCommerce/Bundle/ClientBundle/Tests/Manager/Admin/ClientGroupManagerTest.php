@@ -28,21 +28,21 @@ class ClientGroupManagerTest extends AbstractAdminManagerTestCase
 
     protected function getServiceClassName()
     {
-        return 'WellCommerce\Bundle\AppBundle\Manager\Admin\ClientGroupManager';
+        return \WellCommerce\Bundle\ClientBundle\Manager\Admin\ClientGroupManager::class;
     }
 
     protected function getFormBuilderClassName()
     {
-        return 'WellCommerce\Bundle\AppBundle\Form\Admin\ClientGroupFormBuilder';
+        return \WellCommerce\Bundle\ClientBundle\Form\Admin\ClientGroupFormBuilder::class;
     }
 
     protected function getDataGridClassName()
     {
-        return 'WellCommerce\Bundle\AppBundle\DataGrid\ClientGroupDataGrid';
+        return \WellCommerce\Bundle\ClientBundle\DataGrid\ClientGroupDataGrid::class;
     }
 
     protected function getRepositoryInterfaceName()
     {
-        return 'WellCommerce\Bundle\AppBundle\Repository\ClientGroupRepositoryInterface';
+        return \WellCommerce\Bundle\ClientBundle\Repository\ClientGroupRepositoryInterface::class;
     }
 }

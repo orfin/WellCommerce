@@ -28,11 +28,11 @@ class ProductManagerTest extends AbstractFrontManagerTestCase
 
     protected function getServiceClassName()
     {
-        return 'WellCommerce\Bundle\AppBundle\Manager\Front\ProductManager';
+        return \WellCommerce\Bundle\ProductBundle\Manager\Front\ProductManager::class;
     }
 
     protected function getRepositoryInterfaceName()
     {
-        return 'WellCommerce\Bundle\AppBundle\Repository\ProductRepositoryInterface';
+        return \WellCommerce\Bundle\ProductBundle\Repository\ProductRepositoryInterface::class;
     }
 }

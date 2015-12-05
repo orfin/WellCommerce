@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\DataSet\Front;
 
-use WellCommerce\Bundle\AppBundle\DataSet\Admin\PaymentMethodDataSet as BaseDataSet;
+use WellCommerce\Bundle\PaymentBundle\DataSet\Admin\PaymentMethodDataSet as BaseDataSet;
 
 /**
  * Class PaymentMethodDataSet

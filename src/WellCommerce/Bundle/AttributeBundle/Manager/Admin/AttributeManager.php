@@ -13,9 +13,9 @@
 namespace WellCommerce\Bundle\AttributeBundle\Manager\Admin;
 
 use Doctrine\Common\Collections\Criteria;
-use WellCommerce\Bundle\AppBundle\Exception\AttributeGroupNotFoundException;
-use WellCommerce\Bundle\AppBundle\Repository\AttributeGroupRepositoryInterface;
-use WellCommerce\Bundle\AppBundle\Repository\AttributeValueRepositoryInterface;
+use WellCommerce\Bundle\AttributeBundle\Exception\AttributeGroupNotFoundException;
+use WellCommerce\Bundle\AttributeBundle\Repository\AttributeGroupRepositoryInterface;
+use WellCommerce\Bundle\AttributeBundle\Repository\AttributeValueRepositoryInterface;
 use WellCommerce\Bundle\AttributeBundle\Entity\Attribute\GroupInterface;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeInterface;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeValueInterface;
@@ -29,7 +29,7 @@ use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
 class AttributeManager extends AbstractAdminManager
 {
     /**
-     * @var \WellCommerce\Bundle\AppBundle\Repository\AttributeRepositoryInterface
+     * @var \WellCommerce\Bundle\AttributeBundle\Repository\AttributeRepositoryInterface
      */
     protected $repository;
 

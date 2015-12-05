@@ -28,21 +28,21 @@ class UnitManagerTest extends AbstractAdminManagerTestCase
 
     protected function getServiceClassName()
     {
-        return 'WellCommerce\Bundle\AppBundle\Manager\Admin\UnitManager';
+        return \WellCommerce\Bundle\UnitBundle\Manager\Admin\UnitManager::class;
     }
 
     protected function getFormBuilderClassName()
     {
-        return 'WellCommerce\Bundle\AppBundle\Form\Admin\UnitFormBuilder';
+        return \WellCommerce\Bundle\UnitBundle\Form\Admin\UnitFormBuilder::class;
     }
 
     protected function getDataGridClassName()
     {
-        return 'WellCommerce\Bundle\AppBundle\DataGrid\UnitDataGrid';
+        return \WellCommerce\Bundle\UnitBundle\DataGrid\UnitDataGrid::class;
     }
 
     protected function getRepositoryInterfaceName()
     {
-        return 'WellCommerce\Bundle\UnitBundle\Repository\UnitRepositoryInterface';
+        return \WellCommerce\Bundle\UnitBundle\Repository\UnitRepositoryInterface::class;
     }
 }

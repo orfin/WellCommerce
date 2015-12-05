@@ -4,23 +4,23 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="contact.layout_box.controller" class="WellCommerce\Bundle\AppBundle\Controller\Box\ContactBoxController">
+        <service id="contact.layout_box.controller" class="WellCommerce\Bundle\ContactBundle\Controller\Box\ContactBoxController">
             <argument type="service" id="service_container"/>
             <argument type="service" id="contact.repository"/>
         </service>
 
-        <service id="contact.dataset.query_builder.front" class="WellCommerce\Bundle\AppBundle\DataSet\Front\ContactDataSetQueryBuilder" public="false">
+        <service id="contact.dataset.query_builder.front" class="WellCommerce\Bundle\ContactBundle\DataSet\Front\ContactDataSetQueryBuilder" public="false">
             <argument type="service" id="contact.repository"/>
         </service>
 
-        <service id="contact.dataset.front" class="WellCommerce\Bundle\AppBundle\DataSet\Front\ContactDataSet">
+        <service id="contact.dataset.front" class="WellCommerce\Bundle\ContactBundle\DataSet\Front\ContactDataSet">
             <argument type="service" id="contact.dataset.query_builder.front"/>
             <argument type="service" id="dataset.manager"/>
             <argument type="service" id="contact.event_dispatcher"/>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
-        <service id="contact.form_builder.front" class="WellCommerce\Bundle\AppBundle\Form\Front\ContactFormBuilder">
+        <service id="contact.form_builder.front" class="WellCommerce\Bundle\ContactBundle\Form\Front\ContactFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
             <argument type="service" id="contact.event_dispatcher"/>
@@ -29,6 +29,6 @@
             </call>
         </service>
 
-        <service id="contact.context.front" class="WellCommerce\Bundle\AppBundle\Context\Front\ContactContext"/>
+        <service id="contact.context.front" class="WellCommerce\Bundle\ContactBundle\Context\Front\ContactContext"/>
     </services>
 </container>

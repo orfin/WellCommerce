@@ -9,11 +9,11 @@
     </imports>
 
     <services>
-        <service id="contact.repository" class="WellCommerce\Bundle\AppBundle\Repository\ContactRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
-            <argument>WellCommerceAppBundle:Contact</argument>
+        <service id="contact.repository" class="WellCommerce\Bundle\ContactBundle\Repository\ContactRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>WellCommerceContactBundle:Contact</argument>
         </service>
 
-        <service id="contact.factory" class="WellCommerce\Bundle\AppBundle\Factory\ContactFactory" />
+        <service id="contact.factory" class="WellCommerce\Bundle\ContactBundle\Factory\ContactFactory" />
 
         <service id="contact.event_dispatcher" parent="core.event_dispatcher" public="false">
             <argument type="service" id="event_dispatcher" />

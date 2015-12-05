@@ -34,46 +34,4 @@
             </constraint>
         </property>
     </class>
-
-    <class name="WellCommerce\Bundle\PageBundle\Entity\Page">
-        <property name="publish">
-            <constraint name="NotNull">
-                <option name="message">page.error.publish.not_null</option>
-            </constraint>
-        </property>
-        <property name="translations">
-            <constraint name="Valid">
-                <option name="deep">true</option>
-            </constraint>
-        </property>
-    </class>
-
-    <class name="WellCommerce\Bundle\PageBundle\Entity\PageTranslation">
-        <property name="name">
-            <constraint name="NotBlank">
-                <option name="message">page.error.name.not_blank</option>
-            </constraint>
-            <constraint name="NotNull">
-                <option name="message">page.error.name.not_null</option>
-            </constraint>
-        </property>
-        <property name="content">
-            <constraint name="NotNull">
-                <option name="message">page.error.content.not_null</option>
-            </constraint>
-        </property>
-    </class>
-
-    <class name="WellCommerce\Bundle\NewsBundle\Entity\NewsTranslation">
-        <property name="topic">
-            <constraint name="NotBlank"/>
-            <constraint name="NotNull"/>
-        </property>
-        <property name="summary">
-            <constraint name="NotNull" />
-        </property>
-        <property name="content">
-            <constraint name="NotNull"/>
-        </property>
-    </class>
 </constraint-mapping>

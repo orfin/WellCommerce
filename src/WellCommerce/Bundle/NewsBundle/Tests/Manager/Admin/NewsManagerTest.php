@@ -28,17 +28,17 @@ class NewsManagerTest extends AbstractAdminManagerTestCase
 
     protected function getServiceClassName()
     {
-        return \WellCommerce\Bundle\AppBundle\Manager\Admin\NewsManager::class;
+        return \WellCommerce\Bundle\NewsBundle\Manager\Admin\NewsManager::class;
     }
     
     protected function getFormBuilderClassName()
     {
-        return \WellCommerce\Bundle\AppBundle\Form\Admin\NewsFormBuilder::class;
+        return \WellCommerce\Bundle\NewsBundle\Form\Admin\NewsFormBuilder::class;
     }
 
     protected function getDataGridClassName()
     {
-        return \WellCommerce\Bundle\AppBundle\DataGrid\NewsDataGrid::class;
+        return \WellCommerce\Bundle\NewsBundle\DataGrid\NewsDataGrid::class;
     }
 
     protected function getRepositoryInterfaceName()

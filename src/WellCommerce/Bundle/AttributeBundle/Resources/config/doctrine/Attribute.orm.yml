@@ -1,7 +1,7 @@
 WellCommerce\Bundle\AttributeBundle\Entity\Attribute:
     type: entity
     table: attribute
-    repositoryClass: WellCommerce\Bundle\AppBundle\Repository\AttributeRepository
+    repositoryClass: WellCommerce\Bundle\AttributeBundle\Repository\AttributeRepository
     id:
         id:
             type: integer

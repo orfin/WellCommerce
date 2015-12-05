@@ -4,7 +4,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="deliverer.manager.admin" class="WellCommerce\Bundle\AppBundle\Manager\Admin\DelivererManager">
+        <service id="deliverer.manager.admin" class="WellCommerce\Bundle\DelivererBundle\Manager\Admin\DelivererManager">
             <argument type="service" id="deliverer.repository"/>
             <argument type="service" id="deliverer.event_dispatcher"/>
             <argument type="service" id="deliverer.factory"/>
@@ -15,25 +15,25 @@
             </call>
         </service>
         
-        <service id="deliverer.controller.admin" class="WellCommerce\Bundle\AppBundle\Controller\Admin\DelivererController">
+        <service id="deliverer.controller.admin" class="WellCommerce\Bundle\DelivererBundle\Controller\Admin\DelivererController">
             <argument type="service" id="deliverer.manager.admin"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <service id="deliverer.dataset.query_builder.admin" class="WellCommerce\Bundle\AppBundle\DataSet\Admin\DelivererDataSetQueryBuilder" public="false">
+        <service id="deliverer.dataset.query_builder.admin" class="WellCommerce\Bundle\DelivererBundle\DataSet\Admin\DelivererDataSetQueryBuilder" public="false">
             <argument type="service" id="deliverer.repository"/>
         </service>
 
-        <service id="deliverer.dataset.admin" class="WellCommerce\Bundle\AppBundle\DataSet\Admin\DelivererDataSet">
+        <service id="deliverer.dataset.admin" class="WellCommerce\Bundle\DelivererBundle\DataSet\Admin\DelivererDataSet">
             <argument type="service" id="deliverer.dataset.query_builder.admin"/>
             <argument type="service" id="dataset.manager"/>
             <argument type="service" id="deliverer.event_dispatcher"/>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
-        <service id="deliverer.datagrid" class="WellCommerce\Bundle\AppBundle\DataGrid\DelivererDataGrid">
+        <service id="deliverer.datagrid" class="WellCommerce\Bundle\DelivererBundle\DataGrid\DelivererDataGrid">
             <argument key="identifier">deliverer</argument>
             <argument type="service" id="deliverer.dataset.admin"/>
             <argument type="service" id="deliverer.event_dispatcher"/>
@@ -42,7 +42,7 @@
             </call>
         </service>
 
-        <service id="deliverer.form_builder.admin" class="WellCommerce\Bundle\AppBundle\Form\Admin\DelivererFormBuilder">
+        <service id="deliverer.form_builder.admin" class="WellCommerce\Bundle\DelivererBundle\Form\Admin\DelivererFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
             <argument type="service" id="deliverer.event_dispatcher"/>

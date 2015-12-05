@@ -28,21 +28,21 @@ class DelivererManagerTest extends AbstractAdminManagerTestCase
 
     protected function getServiceClassName()
     {
-        return 'WellCommerce\Bundle\AppBundle\Manager\Admin\DelivererManager';
+        return \WellCommerce\Bundle\DelivererBundle\Manager\Admin\DelivererManager::class;
     }
 
     protected function getFormBuilderClassName()
     {
-        return 'WellCommerce\Bundle\AppBundle\Form\Admin\DelivererFormBuilder';
+        return \WellCommerce\Bundle\DelivererBundle\Form\Admin\DelivererFormBuilder::class;
     }
 
     protected function getDataGridClassName()
     {
-        return 'WellCommerce\Bundle\AppBundle\DataGrid\DelivererDataGrid';
+        return \WellCommerce\Bundle\DelivererBundle\DataGrid\DelivererDataGrid::class;
     }
 
     protected function getRepositoryInterfaceName()
     {
-        return 'WellCommerce\Bundle\AppBundle\Repository\DelivererRepositoryInterface';
+        return \WellCommerce\Bundle\DelivererBundle\Repository\DelivererRepositoryInterface::class;
     }
 }

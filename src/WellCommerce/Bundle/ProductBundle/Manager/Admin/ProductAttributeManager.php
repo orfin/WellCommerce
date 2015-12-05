@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\ProductBundle\Manager\Admin;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use WellCommerce\Bundle\AppBundle\Repository\AttributeValueRepositoryInterface;
+use WellCommerce\Bundle\AttributeBundle\Repository\AttributeValueRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 

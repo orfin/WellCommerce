@@ -10,15 +10,18 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\PaymentBundle\DataSet\Front;
+namespace WellCommerce\Bundle\CountryBundle\DependencyInjection;
 
-use WellCommerce\Bundle\PaymentBundle\DataSet\Admin\PaymentMethodDataSetQueryBuilder as BaseDataSetQueryBuilder;
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\Loader;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
 
 /**
- * Class PaymentMethodDataSetQueryBuilder
+ * Class WellCommerceCountryExtension
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PaymentMethodDataSetQueryBuilder extends BaseDataSetQueryBuilder
+class WellCommerceCountryExtension extends AbstractExtension
 {
+
 }
