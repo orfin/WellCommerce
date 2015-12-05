@@ -52,6 +52,7 @@ class Kernel extends BaseKernel
             new Bundle\ContactBundle\WellCommerceContactBundle(),
             new Bundle\ClientBundle\WellCommerceClientBundle(),
             new Bundle\CoreBundle\WellCommerceCoreBundle(),
+            new Bundle\CountryBundle\WellCommerceCountryBundle(),
             new Bundle\CouponBundle\WellCommerceCouponBundle(),
             new Bundle\CurrencyBundle\WellCommerceCurrencyBundle(),
             new Bundle\DelivererBundle\WellCommerceDelivererBundle(),
