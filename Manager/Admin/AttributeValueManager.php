@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\AttributeBundle\Manager\Admin;
 
 use WellCommerce\Bundle\AppBundle\Exception\AttributeNotFoundException;
-use WellCommerce\Bundle\AppBundle\Repository\AttributeRepositoryInterface;
+use WellCommerce\Bundle\AttributeBundle\Repository\AttributeRepositoryInterface;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
 
