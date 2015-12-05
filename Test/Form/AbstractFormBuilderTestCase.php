@@ -30,7 +30,7 @@ abstract class AbstractFormBuilderTestCase extends AbstractTestCase
     }
 
     /**
-     * @return \WellCommerce\Bundle\AppBundle\Factory\FactoryInterface
+     * @return \WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface
      */
     abstract protected function getFactoryService();
 

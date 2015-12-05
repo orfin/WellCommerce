@@ -22,7 +22,7 @@ use WellCommerce\Bundle\CoreBundle\Test\AbstractTestCase;
 abstract class AbstractFactoryTestCase extends AbstractTestCase
 {
     /**
-     * @return \WellCommerce\Bundle\AppBundle\Factory\FactoryInterface
+     * @return \WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface
      */
     abstract protected function getFactoryService();
 
@@ -32,7 +32,7 @@ abstract class AbstractFactoryTestCase extends AbstractTestCase
     {
         $factory = $this->getFactoryService();
         if (null !== $factory) {
-            $this->assertInstanceOf('WellCommerce\Bundle\AppBundle\Factory\FactoryInterface', $factory);
+            $this->assertInstanceOf('WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface', $factory);
         }
     }
 

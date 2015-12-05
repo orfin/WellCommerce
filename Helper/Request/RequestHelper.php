@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Helper\Request;
 
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
@@ -131,7 +132,11 @@ class RequestHelper implements RequestHelperInterface
      */
     public function hasRequestBagParam($name)
     {
-        return $this->request->request->has($name);
+        if ($this->request instanceof Request) {
+            return $this->request->request->has($name);
+        }
+
+        return false;
     }
 
     /**
@@ -177,7 +182,11 @@ class RequestHelper implements RequestHelperInterface
      */
     public function hasAttributesBagParam($name)
     {
-        return $this->request->attributes->has($name);
+        if ($this->request instanceof Request) {
+            return $this->request->attributes->has($name);
+        }
+
+        return false;
     }
 
     /**
