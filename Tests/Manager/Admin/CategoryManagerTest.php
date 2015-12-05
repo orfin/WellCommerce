@@ -28,30 +28,30 @@ class CategoryManagerTest extends AbstractAdminManagerTestCase
 
     protected function getServiceClassName()
     {
-        return 'WellCommerce\Bundle\AppBundle\Manager\Admin\CategoryManager';
+        return \WellCommerce\Bundle\CategoryBundle\Manager\Admin\CategoryManager::class;
     }
 
     protected function getFormBuilderClassName()
     {
-        return 'WellCommerce\Bundle\AppBundle\Form\Admin\CategoryFormBuilder';
+        return \WellCommerce\Bundle\CategoryBundle\Form\Admin\CategoryFormBuilder::class;
     }
 
     protected function getDataGridClassName()
     {
-        return 'WellCommerce\Bundle\AppBundle\DataGrid\CategoryDataGrid';
+        return \WellCommerce\Component\DataGrid\DataGridInterface::class;
     }
 
     protected function getRepositoryInterfaceName()
     {
-        return 'WellCommerce\Bundle\CategoryBundle\Repository\CategoryRepositoryInterface';
+        return \WellCommerce\Bundle\CategoryBundle\Repository\CategoryRepositoryInterface::class;
     }
 
     public function testManagerReturnsValidDataGrid()
     {
         try {
-            $datagrid = $this->get()->getDataGrid();
+            $this->get()->getDataGrid();
         } catch (\Exception $e) {
-            $this->assertInstanceOf('WellCommerce\Bundle\AppBundle\Exception\MissingDataGridException', $e);
+            $this->assertInstanceOf(\WellCommerce\Bundle\CoreBundle\Exception\MissingDataGridException::class, $e);
         }
     }
 }
