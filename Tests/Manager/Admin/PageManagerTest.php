@@ -28,17 +28,17 @@ class PageManagerTest extends AbstractAdminManagerTestCase
 
     protected function getServiceClassName()
     {
-        return \WellCommerce\Bundle\AppBundle\Manager\Admin\PageManager::class;
+        return \WellCommerce\Bundle\PageBundle\Manager\Admin\PageManager::class;
     }
     
     protected function getFormBuilderClassName()
     {
-        return \WellCommerce\Bundle\AppBundle\Form\Admin\PageFormBuilder::class;
+        return \WellCommerce\Bundle\PageBundle\Form\Admin\PageFormBuilder::class;
     }
 
     protected function getDataGridClassName()
     {
-        return \WellCommerce\Bundle\AppBundle\DataGrid\PageDataGrid::class;
+        return \WellCommerce\Bundle\PageBundle\DataGrid\PageDataGrid::class;
     }
 
     protected function getRepositoryInterfaceName()
