@@ -28,21 +28,21 @@ class AvailabilityManagerTest extends AbstractAdminManagerTestCase
 
     protected function getServiceClassName()
     {
-        return 'WellCommerce\Bundle\AppBundle\Manager\Admin\AvailabilityManager';
+        return \WellCommerce\Bundle\AvailabilityBundle\Manager\Admin\AvailabilityManager::class;
     }
 
     protected function getFormBuilderClassName()
     {
-        return 'WellCommerce\Bundle\AppBundle\Form\Admin\AvailabilityFormBuilder';
+        return \WellCommerce\Bundle\AvailabilityBundle\Form\Admin\AvailabilityFormBuilder::class;
     }
 
     protected function getDataGridClassName()
     {
-        return 'WellCommerce\Bundle\AppBundle\DataGrid\AvailabilityDataGrid';
+        return \WellCommerce\Bundle\AvailabilityBundle\DataGrid\AvailabilityDataGrid::class;
     }
 
     protected function getRepositoryInterfaceName()
     {
-        return 'WellCommerce\Bundle\AvailabilityBundle\Repository\AvailabilityRepositoryInterface';
+        return \WellCommerce\Bundle\AvailabilityBundle\Repository\AvailabilityRepositoryInterface::class;
     }
 }
