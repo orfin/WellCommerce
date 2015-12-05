@@ -28,21 +28,21 @@ class ProducerManagerTest extends AbstractAdminManagerTestCase
 
     protected function getServiceClassName()
     {
-        return 'WellCommerce\Bundle\AppBundle\Manager\Admin\ProducerManager';
+        return \WellCommerce\Bundle\ProducerBundle\Manager\Admin\ProducerManager::class;
     }
 
     protected function getFormBuilderClassName()
     {
-        return 'WellCommerce\Bundle\AppBundle\Form\Admin\ProducerFormBuilder';
+        return \WellCommerce\Bundle\ProducerBundle\Form\Admin\ProducerFormBuilder::class;
     }
 
     protected function getDataGridClassName()
     {
-        return 'WellCommerce\Bundle\AppBundle\DataGrid\ProducerDataGrid';
+        return \WellCommerce\Bundle\ProducerBundle\DataGrid\ProducerDataGrid::class;
     }
 
     protected function getRepositoryInterfaceName()
     {
-        return 'WellCommerce\Bundle\ProducerBundle\Repository\ProducerRepositoryInterface';
+        return \WellCommerce\Bundle\ProducerBundle\Repository\ProducerRepositoryInterface::class;
     }
 }
