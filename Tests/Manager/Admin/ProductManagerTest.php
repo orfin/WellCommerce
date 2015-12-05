@@ -28,21 +28,21 @@ class ProductManagerTest extends AbstractAdminManagerTestCase
 
     protected function getServiceClassName()
     {
-        return 'WellCommerce\Bundle\AppBundle\Manager\Admin\ProductManager';
+        return \WellCommerce\Bundle\ProductBundle\Manager\Admin\ProductManager::class;
     }
 
     protected function getFormBuilderClassName()
     {
-        return 'WellCommerce\Bundle\AppBundle\Form\Admin\ProductFormBuilder';
+        return \WellCommerce\Bundle\ProductBundle\Form\Admin\ProductFormBuilder::class;
     }
 
     protected function getDataGridClassName()
     {
-        return 'WellCommerce\Bundle\AppBundle\DataGrid\ProductDataGrid';
+        return \WellCommerce\Bundle\ProductBundle\DataGrid\ProductDataGrid::class;
     }
 
     protected function getRepositoryInterfaceName()
     {
-        return 'WellCommerce\Bundle\AppBundle\Repository\ProductRepositoryInterface';
+        return \WellCommerce\Bundle\ProductBundle\Repository\ProductRepositoryInterface::class;
     }
 }
