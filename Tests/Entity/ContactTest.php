@@ -43,7 +43,7 @@ class ContactTest extends AbstractEntityTestCase
         $entity->mergeNewTranslations();
 
         $errors = $this->validator->validate($entity);
-        $this->assertEquals(2, count($errors));
+        $this->assertEquals(2, count($errors), $errors);
     }
 
     public function testValidationPassesIfEnabledIsNull()

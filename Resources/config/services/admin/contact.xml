@@ -4,7 +4,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="contact.manager.admin" class="WellCommerce\Bundle\AppBundle\Manager\Admin\ContactManager">
+        <service id="contact.manager.admin" class="WellCommerce\Bundle\ContactBundle\Manager\Admin\ContactManager">
             <argument type="service" id="contact.repository"/>
             <argument type="service" id="contact.event_dispatcher"/>
             <argument type="service" id="contact.factory"/>
@@ -15,7 +15,7 @@
             </call>
         </service>
         
-        <service id="contact.controller.admin" class="WellCommerce\Bundle\AppBundle\Controller\Admin\ContactController">
+        <service id="contact.controller.admin" class="WellCommerce\Bundle\ContactBundle\Controller\Admin\ContactController">
             <argument type="service" id="contact.manager.admin"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
@@ -29,18 +29,18 @@
             <tag name="layout_box.configurator" />
         </service>
 
-        <service id="contact.dataset.query_builder.admin" class="WellCommerce\Bundle\AppBundle\DataSet\Admin\ContactDataSetQueryBuilder" public="false">
+        <service id="contact.dataset.query_builder.admin" class="WellCommerce\Bundle\ContactBundle\DataSet\Admin\ContactDataSetQueryBuilder" public="false">
             <argument type="service" id="contact.repository"/>
         </service>
 
-        <service id="contact.dataset.admin" class="WellCommerce\Bundle\AppBundle\DataSet\Admin\ContactDataSet">
+        <service id="contact.dataset.admin" class="WellCommerce\Bundle\ContactBundle\DataSet\Admin\ContactDataSet">
             <argument type="service" id="contact.dataset.query_builder.admin"/>
             <argument type="service" id="dataset.manager"/>
             <argument type="service" id="contact.event_dispatcher"/>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
-        <service id="contact.datagrid" class="WellCommerce\Bundle\AppBundle\DataGrid\ContactDataGrid">
+        <service id="contact.datagrid" class="WellCommerce\Bundle\ContactBundle\DataGrid\ContactDataGrid">
             <argument key="identifier">contact</argument>
             <argument type="service" id="contact.dataset.admin"/>
             <argument type="service" id="contact.event_dispatcher"/>
@@ -49,7 +49,7 @@
             </call>
         </service>
 
-        <service id="contact.form_builder.admin" class="WellCommerce\Bundle\AppBundle\Form\Admin\ContactFormBuilder">
+        <service id="contact.form_builder.admin" class="WellCommerce\Bundle\ContactBundle\Form\Admin\ContactFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
             <argument type="service" id="contact.event_dispatcher"/>

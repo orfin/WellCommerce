@@ -28,21 +28,21 @@ class ContactManagerTest extends AbstractAdminManagerTestCase
 
     protected function getServiceClassName()
     {
-        return \WellCommerce\Bundle\AppBundle\Manager\Admin\ContactManager::class;
+        return \WellCommerce\Bundle\ContactBundle\Manager\Admin\ContactManager::class;
     }
 
     protected function getFormBuilderClassName()
     {
-        return \WellCommerce\Bundle\AppBundle\Form\Admin\ContactFormBuilder::class;
+        return \WellCommerce\Bundle\ContactBundle\Form\Admin\ContactFormBuilder::class;
     }
 
     protected function getDataGridClassName()
     {
-        return \WellCommerce\Bundle\AppBundle\DataGrid\ContactDataGrid::class;
+        return \WellCommerce\Bundle\ContactBundle\DataGrid\ContactDataGrid::class;
     }
 
     protected function getRepositoryInterfaceName()
     {
-        return \WellCommerce\Bundle\AppBundle\Repository\ContactRepositoryInterface::class;
+        return \WellCommerce\Bundle\ContactBundle\Repository\ContactRepositoryInterface::class;
     }
 }
