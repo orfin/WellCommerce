@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\OrderBundle\Manager\Front;
 
 use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
+use WellCommerce\Bundle\CartBundle\Manager\Front\CartManagerInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 
@@ -24,12 +25,12 @@ use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 class OrderConfirmationManager extends AbstractFrontManager
 {
     /**
-     * @var \WellCommerce\Bundle\AppBundle\Factory\OrderFactoryInterface
+     * @var \WellCommerce\Bundle\OrderBundle\Factory\OrderFactoryInterface
      */
     protected $factory;
 
     /**
-     * @var \WellCommerce\Bundle\AppBundle\EventDispatcher\OrderEventDispatcherInterface
+     * @var \WellCommerce\Bundle\OrderBundle\EventDispatcher\OrderEventDispatcherInterface
      */
     protected $eventDispatcher;
 

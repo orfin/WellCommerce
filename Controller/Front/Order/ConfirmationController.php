@@ -23,7 +23,7 @@ use WellCommerce\Bundle\CoreBundle\Service\Breadcrumb\BreadcrumbItem;
 class ConfirmationController extends AbstractFrontController
 {
     /**
-     * @var \WellCommerce\Bundle\AppBundle\Manager\Front\OrderConfirmationManager
+     * @var \WellCommerce\Bundle\OrderBundle\Manager\Front\OrderConfirmationManager
      */
     protected $manager;
 
