@@ -10,24 +10,19 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\ReviewBundle\Tests\DataGrid;
+namespace WellCommerce\Bundle\ProductStatusBundle\Tests\Repository;
 
-use WellCommerce\Bundle\CoreBundle\Test\DataGrid\AbstractDataGridTestCase;
+use WellCommerce\Bundle\CoreBundle\Test\Repository\AbstractRepositoryTestCase;
 
 /**
- * Class ReviewDataGridTest
+ * Class ProductStatusRepositoryTest
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ReviewDataGridTest extends AbstractDataGridTestCase
+class ProductStatusRepositoryTest extends AbstractRepositoryTestCase
 {
     protected function get()
     {
-        return $this->container->get('review.datagrid')->getInstance();
-    }
-
-    protected function getColumns()
-    {
-        return ['id', 'nick', 'createdAt', 'product', 'rating'];
+        return $this->container->get('product_status.repository');
     }
 }
