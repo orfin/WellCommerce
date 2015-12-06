@@ -1,7 +1,7 @@
 WellCommerce\Bundle\CompanyBundle\Entity\Company:
     type: entity
     table: company
-    repositoryClass: WellCommerce\Bundle\AppBundle\Repository\CompanyRepository
+    repositoryClass: WellCommerce\Bundle\CompanyBundle\Repository\CompanyRepository
     id:
         id:
             type: integer
