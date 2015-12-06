@@ -33,7 +33,7 @@ class CollectionToArrayTransformer extends AbstractDataTransformer
         $meta       = $this->getRepository()->getMetadata();
         $identifier = $meta->getSingleIdentifierFieldName();
 
-        if ($modelData instanceof PersistentCollection) {
+        if ($modelData instanceof Collection) {
             foreach ($modelData as $item) {
                 $items[] = $this->propertyAccessor->getValue($item, $identifier);
             }
