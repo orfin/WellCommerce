@@ -69,7 +69,7 @@ class SearchController extends AbstractFrontController
                 'conditions' => $conditions,
             ]);
 
-            $liveSearchContent = $this->renderView('WellCommerceAppBundle:Front/Search:view.html.twig', [
+            $liveSearchContent = $this->renderView('WellCommerceSearchBundle:Front/Search:view.html.twig', [
                 'dataset' => $products,
             ]);
         }

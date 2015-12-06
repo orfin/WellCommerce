@@ -12,9 +12,9 @@
 
 namespace WellCommerce\Bundle\SearchBundle\Provider;
 
-use WellCommerce\Bundle\AppBundle\Indexer\ProductIndexerInterface;
-use WellCommerce\Bundle\AppBundle\Manager\SearchIndexManagerInterface;
-use WellCommerce\Bundle\AppBundle\Query\SimpleQuery;
+use WellCommerce\Bundle\SearchBundle\Indexer\ProductIndexerInterface;
+use WellCommerce\Bundle\SearchBundle\Manager\SearchIndexManagerInterface;
+use WellCommerce\Bundle\SearchBundle\Query\SimpleQuery;
 
 /**
  * Class LuceneSearchProvider

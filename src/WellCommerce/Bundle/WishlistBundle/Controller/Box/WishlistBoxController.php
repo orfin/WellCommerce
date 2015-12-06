@@ -10,9 +10,9 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Controller\Box;
+namespace WellCommerce\Bundle\WishlistBundle\Controller\Box;
 
-use WellCommerce\Bundle\AppBundle\Entity\WishlistInterface;
+use WellCommerce\Bundle\WishlistBundle\Entity\WishlistInterface;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 use WellCommerce\Component\DataSet\Conditions\Condition\In;
 use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;

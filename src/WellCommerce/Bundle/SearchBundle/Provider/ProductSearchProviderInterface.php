@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\SearchBundle\Provider;
 
-use WellCommerce\Bundle\AppBundle\Query\SimpleQuery;
+use WellCommerce\Bundle\SearchBundle\Query\SimpleQuery;
 
 /**
  * Interface SearchProviderInterface

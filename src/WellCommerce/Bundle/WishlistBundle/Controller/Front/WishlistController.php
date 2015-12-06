@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Controller\Front;
+namespace WellCommerce\Bundle\WishlistBundle\Controller\Front;
 
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;

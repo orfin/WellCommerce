@@ -10,9 +10,9 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Factory;
+namespace WellCommerce\Bundle\WishlistBundle\Factory;
 
-use WellCommerce\Bundle\AppBundle\Entity\Wishlist;
+use WellCommerce\Bundle\WishlistBundle\Entity\Wishlist;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 
 /**
@@ -23,7 +23,7 @@ use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 class WishlistFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\AppBundle\Entity\WishlistInterface
+     * @return \WellCommerce\Bundle\WishlistBundle\Entity\WishlistInterface
      */
     public function create()
     {

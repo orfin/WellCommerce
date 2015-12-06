@@ -10,15 +10,15 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\WishlistBundle\Repository;
+namespace WellCommerce\Bundle\SearchBundle;
 
-use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
+use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * Interface WishlistRepositoryInterface
+ * Class WellCommerceSearchBundle
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface WishlistRepositoryInterface extends RepositoryInterface
+class WellCommerceSearchBundle extends Bundle
 {
 }

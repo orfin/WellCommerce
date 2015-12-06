@@ -93,12 +93,12 @@ class CartController extends AbstractFrontController
         $category        = $product->getCategories()->first();
         $recommendations = $this->get('product.helper')->getProductRecommendationsForCategory($category);
 
-        $basketModalContent = $this->renderView('WellCommerceAppBundle:Front/Cart:add.html.twig', [
+        $basketModalContent = $this->renderView('WellCommerceCartBundle:Front/Cart:add.html.twig', [
             'product'         => $product,
             'recommendations' => $recommendations
         ]);
 
-        $cartPreviewContent = $this->renderView('WellCommerceAppBundle:Front/Common:preview.html.twig');
+        $cartPreviewContent = $this->renderView('WellCommerceCartBundle:Front/Common:preview.html.twig');
 
         return $this->jsonResponse([
             'basketModalContent' => $basketModalContent,

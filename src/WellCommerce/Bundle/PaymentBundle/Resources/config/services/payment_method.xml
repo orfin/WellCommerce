@@ -115,16 +115,16 @@
             <tag name="form.data_transformer" alias="payment_method_configuration"/>
         </service>
 
-        <service id="payment_method.processor.collection" class="WellCommerce\Bundle\PaymentBundle\Service\PaymentMethod\Processor\PaymentMethodProcessorCollection" />
+        <service id="payment_method.processor.collection" class="WellCommerce\Bundle\PaymentBundle\Processor\PaymentMethodProcessorCollection" />
 
-        <service id="bank_transfer.processor" class="WellCommerce\Bundle\PaymentBundle\Service\PaymentMethod\Processor\BankTransfer">
+        <service id="bank_transfer.processor" class="WellCommerce\Bundle\PaymentBundle\Processor\BankTransfer">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
             <tag name="payment_method.processor"/>
         </service>
 
-        <service id="cod.processor" class="WellCommerce\Bundle\PaymentBundle\Service\PaymentMethod\Processor\CashOnDelivery">
+        <service id="cod.processor" class="WellCommerce\Bundle\PaymentBundle\Processor\CashOnDelivery">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
