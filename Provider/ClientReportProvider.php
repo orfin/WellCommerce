@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\ReportBundle\Provider;
 
 use Doctrine\Common\Collections\Criteria;
-use WellCommerce\Bundle\AppBundle\Data\ReportRow;
+use WellCommerce\Bundle\ReportBundle\Data\ReportRow;
 use WellCommerce\Bundle\AppBundle\Data\ReportRowCollection;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
