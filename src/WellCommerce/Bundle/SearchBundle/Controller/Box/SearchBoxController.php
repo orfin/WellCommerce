@@ -33,7 +33,7 @@ class SearchBoxController extends AbstractBoxController
      */
     public function indexAction(LayoutBoxSettingsCollection $boxSettings)
     {
-        $dataset       = $this->get('product_search.dataset.front');
+        $dataset       = $this->get('search.dataset.front');
         $conditions    = new ConditionsCollection();
         $requestHelper = $this->getRequestHelper();
         $limit         = $this->manager->getRequestHelper()->getAttributesBagParam('limit', $boxSettings->getParam('per_page', 12));

@@ -57,7 +57,7 @@ deliverer:
         add: Create a new deliverer
         edit: Edit deliverer
 
-product_search:
+search:
     heading:
         index: Search results
     label:

@@ -28,8 +28,8 @@ $(document).ready(function () {
     });
 
     $('form#search').GSearch({
-        sProductSearchRoute: 'front.product_search.index',
-        sProductLiveSearchRoute: 'front.product_search.view',
+        sProductSearchRoute: 'front.search.index',
+        sProductLiveSearchRoute: 'front.search.view',
         sPhraseInputSelector: '#phrase',
         sSearchResultsSelector: 'div#search-results',
         oAddCartButtonSettings: oAddCartButtonSettings
