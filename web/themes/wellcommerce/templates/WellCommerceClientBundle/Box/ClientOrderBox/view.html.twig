@@ -61,7 +61,7 @@
             <tbody>
             {% for product in order.products %}
             <tr>
-                <td><a href="product.php"><strong>GoPro Hero 4 Black Edition (CHDHX-401)</strong></a></td>
+                <td><a href="{{ path('dynamic_' ~ product.getProduct().translate().getRoute().getId()) }}"><strong>{{ product.getProduct().translate().getName() }}</strong></a></td>
                 <td>{{ format_price(product.sellPrice.grossAmount, order.currency, order.currency) }}</td>
                 <td>{{ product.quantity }}</td>
                 <td><strong>{{ format_price(product.sellPrice.grossAmount, order.currency, order.currency, null, product.quantity) }}</strong></td>
