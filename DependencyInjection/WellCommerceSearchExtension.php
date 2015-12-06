@@ -18,11 +18,11 @@ use Symfony\Component\DependencyInjection\Loader;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
 
 /**
- * Class WellCommerceAppExtension
+ * Class WellCommerceSearchExtension
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class WellCommerceAppExtension extends AbstractExtension
+class WellCommerceSearchExtension extends AbstractExtension
 {
     /**
      * {@inheritdoc}
