@@ -11,6 +11,9 @@
  */
 namespace WellCommerce\Bundle\AttributeBundle\Form\Admin;
 
+use Doctrine\Common\Collections\Criteria;
+use Doctrine\Common\Util\Debug;
+use WellCommerce\Bundle\AttributeBundle\Entity\AttributeInterface;
 use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
 use WellCommerce\Component\Form\Elements\FormInterface;
 
@@ -56,7 +59,7 @@ class AttributeGroupFormBuilder extends AbstractFormBuilder
             'delete_attribute_route'       => 'admin.attribute.delete',
             'rename_attribute_route'       => 'admin.attribute.edit',
             'rename_attribute_value_route' => 'admin.attribute_value.edit',
-            'attributes'                   => $this->get('attribute.repository')->findAll(),
+            'attributes'                   => $this->get('attribute.repository')->getAttributesWithValues(),
             'transformer'                  => $this->getRepositoryTransformer('attribute_collection', $this->get('attribute.repository'))
         ]));
 

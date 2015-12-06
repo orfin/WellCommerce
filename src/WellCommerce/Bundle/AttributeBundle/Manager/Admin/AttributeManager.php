@@ -13,12 +13,12 @@
 namespace WellCommerce\Bundle\AttributeBundle\Manager\Admin;
 
 use Doctrine\Common\Collections\Criteria;
-use WellCommerce\Bundle\AttributeBundle\Exception\AttributeGroupNotFoundException;
-use WellCommerce\Bundle\AttributeBundle\Repository\AttributeGroupRepositoryInterface;
-use WellCommerce\Bundle\AttributeBundle\Repository\AttributeValueRepositoryInterface;
 use WellCommerce\Bundle\AttributeBundle\Entity\Attribute\GroupInterface;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeInterface;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeValueInterface;
+use WellCommerce\Bundle\AttributeBundle\Exception\AttributeGroupNotFoundException;
+use WellCommerce\Bundle\AttributeBundle\Repository\AttributeGroupRepositoryInterface;
+use WellCommerce\Bundle\AttributeBundle\Repository\AttributeValueRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
 
 /**
@@ -137,6 +137,25 @@ class AttributeManager extends AbstractAdminManager
         }
 
         return $attributeGroup;
+    }
+
+    /**
+     * Creates an attribute or returns the existing one
+     *
+     * @param int            $id
+     * @param string         $name
+     * @param GroupInterface $group
+     *
+     * @return AttributeInterface
+     */
+    public function getAttribute($id, $name, GroupInterface $group)
+    {
+        $attribute = $this->repository->find($id);
+        if (null === $attribute) {
+            $attribute = $this->createNewAttribute($name, $group);
+        }
+
+        return $attribute;
     }
 
     /**

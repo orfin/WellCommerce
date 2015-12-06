@@ -27,7 +27,7 @@
         </service>
 
         <service id="attribute.repository" class="WellCommerce\Bundle\AttributeBundle\Repository\AttributeRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
-            <argument>WellCommerceAppBundle:Attribute</argument>
+            <argument>WellCommerceAttributeBundle:Attribute</argument>
         </service>
 
         <service id="attribute.factory" class="WellCommerce\Bundle\AttributeBundle\Factory\AttributeFactory" />
@@ -38,6 +38,12 @@
 
         <service id="form.attribute_collection.data_transformer" class="WellCommerce\Bundle\AttributeBundle\Form\DataTransformer\AttributeCollectionToArrayTransformer" scope="prototype">
             <argument type="service" id="doctrine.helper"/>
+            <call method="setAttributeManager">
+                <argument type="service" id="attribute.manager.admin"/>
+            </call>
+            <call method="setAttributeValueManager">
+                <argument type="service" id="attribute_value.manager.admin"/>
+            </call>
             <tag name="form.data_transformer" alias="attribute_collection"/>
         </service>
     </services>

@@ -42,7 +42,6 @@ class ColumnCollection extends ArrayCollection
     public function get($id)
     {
         if (!isset($this->items[$id])) {
-            print_r($this->items);
             throw new DataSetColumnNotFoundException($id);
         }
 

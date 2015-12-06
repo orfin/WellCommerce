@@ -13,7 +13,12 @@
 namespace WellCommerce\Bundle\AttributeBundle\Form\DataTransformer;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\PersistentCollection;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
+use WellCommerce\Bundle\AttributeBundle\Entity\Attribute\GroupInterface;
+use WellCommerce\Bundle\AttributeBundle\Manager\Admin\AttributeManager;
+use WellCommerce\Bundle\AttributeBundle\Manager\Admin\AttributeValueManager;
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
 
 /**
@@ -24,6 +29,32 @@ use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransfo
 class AttributeCollectionToArrayTransformer extends CollectionToArrayTransformer
 {
     /**
+     * @var AttributeManager
+     */
+    protected $attributeManager;
+
+    /**
+     * @var AttributeValueManager
+     */
+    protected $attributeValueManager;
+
+    /**
+     * @param AttributeManager $attributeManager
+     */
+    public function setAttributeManager(AttributeManager $attributeManager)
+    {
+        $this->attributeManager = $attributeManager;
+    }
+
+    /**
+     * @param AttributeValueManager $attributeValueManager
+     */
+    public function setAttributeValueManager(AttributeValueManager $attributeValueManager)
+    {
+        $this->attributeValueManager = $attributeValueManager;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function reverseTransform($modelData, PropertyPathInterface $propertyPath, $value)
@@ -33,9 +64,12 @@ class AttributeCollectionToArrayTransformer extends CollectionToArrayTransformer
         if (null === $value || empty($value)) {
             return $collection;
         }
-        foreach ($value['editor'] as $attribute) {
-            $item = $this->findOrCreate($attribute);
-            $collection->add($item);
+
+        if ($modelData instanceof GroupInterface) {
+            foreach ($value['editor'] as $attribute) {
+                $item = $this->findOrCreate($attribute, $modelData);
+                $collection->add($item);
+            }
         }
 
         $this->propertyAccessor->setValue($modelData, $propertyPath, $collection);
@@ -44,24 +78,23 @@ class AttributeCollectionToArrayTransformer extends CollectionToArrayTransformer
     /**
      * {@inheritdoc}
      */
-    public function findOrCreate($data)
+    public function findOrCreate($data, GroupInterface $group)
     {
-        $id     = $this->propertyAccessor->getValue($data, '[id]');
-        $name   = $this->propertyAccessor->getValue($data, '[name]');
-        $values = $this->propertyAccessor->getValue($data, '[values]');
-        $isNew  = substr($id, 0, 3) == 'new';
-
-        if ($isNew) {
-            $item = $this->addAttribute($name);
-        } else {
-            $item = $this->find($id);
-        }
+        $id        = $this->propertyAccessor->getValue($data, '[id]');
+        $name      = $this->propertyAccessor->getValue($data, '[name]');
+        $values    = $this->propertyAccessor->getValue($data, '[values]');
+        $attribute = $this->attributeManager->getAttribute($id, $name, $group);
 
         if (!empty($values)) {
-            $collection = $this->getAttributeValueRepository()->makeCollection($item, $values);
-            $item->setValues($collection);
+            $valuesCollection = new ArrayCollection();
+            foreach($values as $value){
+                $attributeValue = $this->attributeValueManager->getAttributeValue($value['id'], $value['name'], $attribute);
+                $valuesCollection->add($attributeValue);
+            }
+
+            $attribute->setValues($valuesCollection);
         }
 
-        return $item;
+        return $attribute;
     }
 }
