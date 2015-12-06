@@ -37,7 +37,7 @@ class SearchController extends AbstractFrontController
         $phrase        = $requestHelper->getAttributesBagParam('phrase');
 
         $this->addBreadCrumbItem(new BreadcrumbItem([
-            'name' => $this->trans('product_search.heading.index')
+            'name' => $this->trans('search.heading.index')
         ]));
 
         $this->addBreadCrumbItem(new BreadcrumbItem([
@@ -56,7 +56,7 @@ class SearchController extends AbstractFrontController
         if (strlen($phrase) < $this->container->getParameter('search_term_min_length')) {
             $liveSearchContent = '';
         } else {
-            $dataset    = $this->get('product_search.dataset.front');
+            $dataset    = $this->get('search.dataset.front');
             $conditions = new ConditionsCollection();
             $conditions = $this->manager->addSearchConditions($conditions);
             $conditions = $this->get('layered_navigation.helper')->addLayeredNavigationConditions($conditions);

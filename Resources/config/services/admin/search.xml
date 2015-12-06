@@ -3,14 +3,12 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <imports>
-        <import resource="admin/product_search.xml"/>
-        <import resource="front/product_search.xml"/>
-    </imports>
-
     <services>
-        <service id="product_search.event_dispatcher" parent="core.event_dispatcher" public="false">
-            <argument type="service" id="event_dispatcher" />
+        <service id="search.layout_box.configurator" class="WellCommerce\Bundle\LayoutBundle\Configurator\SearchBoxConfigurator">
+            <argument>Search</argument>
+            <argument>search.layout_box.controller</argument>
+            <argument type="service" id="translator.helper"/>
+            <tag name="layout_box.configurator" />
         </service>
     </services>
 </container>

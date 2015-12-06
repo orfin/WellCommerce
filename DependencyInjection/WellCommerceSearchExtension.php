@@ -36,8 +36,8 @@ class WellCommerceSearchExtension extends AbstractExtension
         $type          = $config['type'];
 
         $container->setParameter('search_term_min_length', $config['search_term_min_length']);
-        $container->setAlias('product_search.indexer', sprintf('product_search.indexer.%s', $type));
+        $container->setAlias('search.indexer', sprintf('search.indexer.%s', $type));
         $container->setAlias('search_index.manager', sprintf('search_index.manager.lucene', $type));
-        $container->setAlias('product_search.provider', sprintf('product_search.provider.lucene', $type));
+        $container->setAlias('search.provider', sprintf('search.provider.lucene', $type));
     }
 }
