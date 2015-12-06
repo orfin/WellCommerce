@@ -19,6 +19,9 @@ wellcommerce_contact:
 wellcommerce_currency:
     resource: "@WellCommerceCurrencyBundle/Resources/config/routing.xml"
 
+wellcommerce_deliverer:
+    resource: "@WellCommerceDelivererBundle/Resources/config/routing.xml"
+
 wellcommerce_dictionary:
     resource: "@WellCommerceDictionaryBundle/Resources/config/routing.xml"
 
@@ -42,9 +45,6 @@ wellcommerce_coupon:
 
 wellcommerce_client:
     resource: "@WellCommerceClientBundle/Resources/config/routing.xml"
-
-wellcommerce_deliverer:
-    resource: "@WellCommerceDelivererBundle/Resources/config/routing.xml"
 
 wellcommerce_media:
     resource: "@WellCommerceMediaBundle/Resources/config/routing.xml"
