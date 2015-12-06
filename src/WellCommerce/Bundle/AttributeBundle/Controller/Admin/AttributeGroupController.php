@@ -78,16 +78,15 @@ class AttributeGroupController extends AbstractAdminController
         $form   = $this->manager->getForm($resource, [
             'class' => 'attributeGroupEditor'
         ]);
-        
-        if ($form->handleRequest()->isValid()) {
-            $this->manager->updateResource($resource);
-            if ($form->isAction('continue')) {
-                return $this->getRouterHelper()->redirectToAction('edit', ['id' => $resource->getId()]);
+
+        if ($form->handleRequest()->isSubmitted()) {
+            if ($form->isValid()) {
+                $this->manager->updateResource($resource);
             }
-            
-            return $this->redirectToAction('index');
+
+            return $this->createFormDefaultJsonResponse($form);
         }
-        
+
         return $this->displayTemplate('edit', [
             'resource' => $resource,
             'groups'   => $groups,

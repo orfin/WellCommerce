@@ -81,6 +81,22 @@ class Attribute implements AttributeInterface
      */
     public function setValues(Collection $collection)
     {
+        if (null !== $this->values) {
+            $this->values->map(function (AttributeValueInterface $value) use ($collection) {
+                if (false === $collection->contains($value)) {
+                    $this->removeValue($value);
+                }
+            });
+        }
+
         $this->values = $collection;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeValue(AttributeValueInterface $value)
+    {
+        $this->values->removeElement($value);
     }
 }

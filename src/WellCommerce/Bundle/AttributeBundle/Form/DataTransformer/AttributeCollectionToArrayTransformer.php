@@ -13,8 +13,7 @@
 namespace WellCommerce\Bundle\AttributeBundle\Form\DataTransformer;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\PersistentCollection;
+use Doctrine\Common\Util\Debug;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 use WellCommerce\Bundle\AttributeBundle\Entity\Attribute\GroupInterface;
 use WellCommerce\Bundle\AttributeBundle\Manager\Admin\AttributeManager;
@@ -72,6 +71,8 @@ class AttributeCollectionToArrayTransformer extends CollectionToArrayTransformer
             }
         }
 
+        $previousCollection = $this->propertyAccessor->getValue($modelData, $propertyPath);
+        $this->synchronizeCollection($previousCollection, $collection);
         $this->propertyAccessor->setValue($modelData, $propertyPath, $collection);
     }
 
@@ -87,11 +88,12 @@ class AttributeCollectionToArrayTransformer extends CollectionToArrayTransformer
 
         if (!empty($values)) {
             $valuesCollection = new ArrayCollection();
-            foreach($values as $value){
+            foreach ($values as $value) {
                 $attributeValue = $this->attributeValueManager->getAttributeValue($value['id'], $value['name'], $attribute);
                 $valuesCollection->add($attributeValue);
             }
 
+            $this->synchronizeCollection($attribute->getValues(), $valuesCollection);
             $attribute->setValues($valuesCollection);
         }
 

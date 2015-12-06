@@ -20,8 +20,7 @@ WellCommerce\Bundle\AttributeBundle\Entity\Attribute:
         values:
             targetEntity: WellCommerce\Bundle\AttributeBundle\Entity\AttributeValue
             cascade:
-                - remove
-                - persist
+                - all
             fetch: LAZY
             mappedBy: attribute
             orphanRemoval: true
