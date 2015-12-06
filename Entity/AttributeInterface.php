@@ -49,4 +49,9 @@ interface AttributeInterface extends TimestampableInterface, TranslatableInterfa
      * @param Collection $collection
      */
     public function setValues(Collection $collection);
+
+    /**
+     * @param AttributeValueInterface $value
+     */
+    public function removeValue(AttributeValueInterface $value);
 }
