@@ -51,7 +51,7 @@ class OrderController extends AbstractAdminController
     }
 
     /**
-     * @return \WellCommerce\Bundle\AppBundle\Context\Admin\OrderContextInterface
+     * @return \WellCommerce\Bundle\OrderBundle\Context\Admin\OrderContextInterface
      */
     protected function getOrderContext()
     {
