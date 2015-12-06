@@ -11,8 +11,11 @@
  */
 namespace WellCommerce\Bundle\AttributeBundle\Repository;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
 use WellCommerce\Bundle\AttributeBundle\Entity\Attribute\GroupInterface;
+use WellCommerce\Bundle\AttributeBundle\Entity\AttributeInterface;
+use WellCommerce\Bundle\AttributeBundle\Entity\AttributeValueInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 
 /**
@@ -31,5 +34,33 @@ class AttributeRepository extends AbstractEntityRepository implements AttributeR
         $criteria->where($criteria->expr()->eq('attributeGroup', $attributeGroup));
 
         return $this->matching($criteria);
+    }
+
+    public function getAttributesWithValues()
+    {
+        $attributes = [];
+        $collection = $this->matching(new Criteria());
+        $collection->map(function (AttributeInterface $attribute) use (&$attributes) {
+            $attributes[] = [
+                'id'     => $attribute->getId(),
+                'name'   => $attribute->translate()->getName(),
+                'values' => $this->getAttributeValues($attribute->getValues())
+            ];
+        });
+
+        return $attributes;
+    }
+
+    protected function getAttributeValues(Collection $collection)
+    {
+        $values = [];
+        $collection->map(function (AttributeValueInterface $value) use (&$values) {
+            $values[] = [
+                'id'   => $value->getId(),
+                'name' => $value->translate()->getName()
+            ];
+        });
+
+        return $values;
     }
 }

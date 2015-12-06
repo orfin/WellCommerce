@@ -12,9 +12,9 @@
 
 namespace WellCommerce\Bundle\AttributeBundle\Manager\Admin;
 
-use WellCommerce\Bundle\AppBundle\Exception\AttributeNotFoundException;
-use WellCommerce\Bundle\AttributeBundle\Repository\AttributeRepositoryInterface;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeInterface;
+use WellCommerce\Bundle\AttributeBundle\Exception\AttributeNotFoundException;
+use WellCommerce\Bundle\AttributeBundle\Repository\AttributeRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
 
 /**
@@ -70,6 +70,25 @@ class AttributeValueManager extends AbstractAdminManager
         }
 
         return $attribute;
+    }
+
+    /**
+     * Creates a new attribute's value or returns the existing one
+     *
+     * @param int                $id
+     * @param string             $name
+     * @param AttributeInterface $attribute
+     *
+     * @return \WellCommerce\Bundle\AttributeBundle\Entity\AttributeValueInterface
+     */
+    public function getAttributeValue($id, $name, AttributeInterface $attribute)
+    {
+        $attributeValue = $this->repository->findOneBy(['id' => $id, 'attribute' => $attribute]);
+        if (null === $attributeValue) {
+            $attributeValue = $this->createAttributeValue($name, $attribute);
+        }
+
+        return $attributeValue;
     }
 
     /**

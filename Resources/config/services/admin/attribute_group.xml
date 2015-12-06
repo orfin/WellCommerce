@@ -22,7 +22,7 @@
         </service>
 
         <service id="attribute_group.repository" class="WellCommerce\Bundle\AttributeBundle\Repository\AttributeGroupRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
-            <argument>WellCommerceAppBundle:Attribute\Group</argument>
+            <argument>WellCommerceAttributeBundle:Attribute\Group</argument>
         </service>
 
         <service id="attribute_group.factory" class="WellCommerce\Bundle\AttributeBundle\Factory\AttributeGroupFactory" />
