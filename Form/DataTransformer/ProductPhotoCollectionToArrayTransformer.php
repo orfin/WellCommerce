@@ -33,7 +33,7 @@ class ProductPhotoCollectionToArrayTransformer extends MediaCollectionToArrayTra
      */
     public function reverseTransform($modelData, PropertyPathInterface $propertyPath, $values)
     {
-        if (!$modelData instanceof Product) {
+        if (!$modelData instanceof ProductInterface) {
             throw new \InvalidArgumentException(sprintf('Wrong entity passed "%s"', get_class($modelData)));
         }
 
