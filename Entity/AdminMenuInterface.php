@@ -87,7 +87,7 @@ interface AdminMenuInterface
     public function getRouteName();
 
     /**
-     * @param string $link
+     * @param string $routeName
      */
     public function setRouteName($routeName);
 
