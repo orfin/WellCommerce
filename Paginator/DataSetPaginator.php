@@ -79,22 +79,16 @@ class DataSetPaginator implements DataSetPaginatorInterface
         switch ($operator) {
             case Query\Expr\Comparison::EQ:
                 return 'eq';
-                break;
             case Query\Expr\Comparison::NEQ:
                 return 'neq';
-                break;
             case Query\Expr\Comparison::LT:
                 return 'lt';
-                break;
             case Query\Expr\Comparison::LTE:
                 return 'lte';
-                break;
             case Query\Expr\Comparison::GT:
                 return 'gt';
-                break;
             case Query\Expr\Comparison::GTE:
                 return 'gte';
-                break;
             default:
                 return 'eq';
         }
