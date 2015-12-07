@@ -4,5 +4,5 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-    <import resource="routing/admin/shipping_method.xml"/>
+    <import resource="routing/admin/shipping_method.xml" prefix="admin/configuration/shipping"/>
 </routes>

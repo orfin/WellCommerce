@@ -5,5 +5,5 @@
         xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
     <import resource="front/payment.xml" prefix="payment"/>
-    <import resource="admin/payment_method.xml" prefix="admin/configuration/payment/method"/>
+    <import resource="admin/payment_method.xml" prefix="admin/configuration/payment"/>
 </routes>

@@ -10,18 +10,18 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\ShopBundle\DependencyInjection;
+namespace WellCommerce\Bundle\SmugglerBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Loader;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
 
 /**
- * Class WellCommerceShopExtension
+ * Class WellCommerceSmugglerExtension
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class WellCommerceShopExtension extends AbstractExtension
+class WellCommerceSmugglerExtension extends AbstractExtension
 {
 
 }
