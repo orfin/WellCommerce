@@ -23,7 +23,7 @@ use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 class PaymentController extends AbstractFrontController
 {
     /**
-     * @var \WellCommerce\Bundle\AppBundle\Manager\Front\PaymentManagerInterface
+     * @var \WellCommerce\Bundle\PaymentBundle\Manager\Front\PaymentManagerInterface
      */
     protected $manager;
 
@@ -48,7 +48,7 @@ class PaymentController extends AbstractFrontController
     /**
      * @param OrderInterface $order
      *
-     * @return \WellCommerce\Bundle\AppBundle\Service\PaymentMethod\Processor\PaymentMethodProcessorInterface
+     * @return \WellCommerce\Bundle\PaymentBundle\Processor\PaymentMethodProcessorInterface
      */
     protected function getProcessor(OrderInterface $order)
     {
