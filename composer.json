@@ -1,8 +1,8 @@
 {
-    "name": "wellcommerce/category-bundle",
+    "name": "wellcommerce/country-bundle",
     "license": "MIT",
     "minimum-stability": "dev",
-    "description": "WellCommerce Open-Source edition",
+    "description": "WellCommerce CountryBundle",
     "keywords": ["wellcommerce","e-commerce","open-source"],
     "authors": [
         {
@@ -16,8 +16,8 @@
     ],
     "support": {
         "email": "support@wellcommerce.org",
-        "issues": "https://github.com/WellCommerce/CategoryBundle/issues",
-        "source": "https://github.com/WellCommerce/CategoryBundle/"
+        "issues": "https://github.com/WellCommerce/CountryBundle/issues",
+        "source": "https://github.com/WellCommerce/CountryBundle/"
     },
     "autoload": {
         "psr-4": { "": "src/" }
