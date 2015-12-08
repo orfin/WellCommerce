@@ -2,7 +2,7 @@
     "name": "wellcommerce/company-bundle",
     "license": "MIT",
     "minimum-stability": "dev",
-    "description": "WellCommerce Open-Source edition",
+    "description": "WellCommerce CompanyBundle",
     "keywords": ["wellcommerce","e-commerce","open-source"],
     "authors": [
         {
