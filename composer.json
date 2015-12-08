@@ -2,7 +2,7 @@
     "name": "wellcommerce/dictionary-bundle",
     "license": "MIT",
     "minimum-stability": "dev",
-    "description": "WellCommerce Open-Source edition",
+    "description": "WellCommerce DictionaryBundle",
     "keywords": ["wellcommerce","e-commerce","open-source"],
     "authors": [
         {
