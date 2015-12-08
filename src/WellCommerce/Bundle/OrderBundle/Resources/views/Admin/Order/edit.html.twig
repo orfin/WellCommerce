@@ -1,0 +1,40 @@
+{% extends 'WellCommerceAdminBundle:Admin:layout.html.twig' %}
+{% trans_default_domain "wellcommerce" %}
+{% block content %}
+    <h2>{% trans %}order.heading.edit{% endtrans %}</h2>
+    <ul class="possibilities">
+        <li><a href="{{ path('admin.order.index') }}" class="button return"><span></span></a></li>
+        <li><a href="#{{ form.getName() }}" rel="submit" class="button"><span>{% trans %}common.button.save_and_finish{% endtrans %}</span></a></li>
+    </ul>
+
+    <div class="view-order GForm">
+
+        <fieldset class="no-margin">
+            <legend><span>{% trans %}common.fieldset.general{% endtrans %}</span></legend>
+            {{ form_js(form) }}
+        </fieldset>
+    </div>
+
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+            $('.view-order').GTabs();
+        });
+
+        var RecalculateOrder = function(eEvent){
+
+        };
+
+        var OnProductListChange = GEventHandler(function(eEvent) {
+            var gSelectedDatagrid = $('.field-order-editor').get(0).gNode.m_gSelectedDatagrid;
+            if(gSelectedDatagrid.m_aoRows.length){
+                RecalculateOrder(eEvent, true);
+            }
+            gSelectedDatagrid.m_jBody.find('.show-thumb').mouseenter(GTooltip.ShowThumbForThis).mouseleave(GTooltip.HideThumbForThis);
+        });
+
+        var OnProductListBeforeChange = GEventHandler(function(eEvent) {
+
+        });
+    </script>
+{% endblock %}
