@@ -1,8 +1,8 @@
-{% extends 'WellCommerceAppBundle:Admin:layout.html.twig' %}
+{% extends 'WellCommerceAdminBundle:Admin:layout.html.twig' %}
 {% trans_default_domain "wellcommerce" %}
 {% block javascripts %}
     {{ parent() }}
-    {% javascripts '@WellCommerceAppBundle/Resources/public/js/*' %}
+    {% javascripts '@WellCommerceAdminBundle/Resources/public/js/*' %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
 {% endblock %}
