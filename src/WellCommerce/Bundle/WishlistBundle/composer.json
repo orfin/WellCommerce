@@ -1,5 +1,6 @@
 {
     "name": "wellcommerce/wishlist-bundle",
+    "type": "wellcommerce-bundle",
     "license": "MIT",
     "minimum-stability": "dev",
     "description": "WellCommerce WishlistBundle",
@@ -24,6 +25,7 @@
     },
     "require": {
         "php": ">=5.6",
+        "wellcommerce/composer-plugin": "^1.0@dev",
         "wellcommerce/core-bundle":     "^0.7@dev",
         "wellcommerce/client-bundle":   "^0.7@dev",
         "wellcommerce/product-bundle":  "^0.7@dev"
