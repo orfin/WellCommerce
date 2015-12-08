@@ -23,7 +23,7 @@ use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 class WishlistController extends AbstractFrontController
 {
     /**
-     * @var \WellCommerce\Bundle\AppBundle\Manager\Front\WishlistManager
+     * @var \WellCommerce\Bundle\WishlistBundle\Manager\Front\WishlistManager
      */
     protected $manager;
 
