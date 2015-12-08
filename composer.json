@@ -2,8 +2,8 @@
     "name": "wellcommerce/order-bundle",
     "license": "MIT",
     "minimum-stability": "dev",
-    "description": "WellCommerce Open-Source edition",
-    "keywords": ["symfony","e-commerce","open-source"],
+    "description": "WellCommerce OrderBundle",
+    "keywords": ["wellcommerce","e-commerce","open-source"],
     "authors": [
         {
             "name": "Adam Piotrowski",
