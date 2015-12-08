@@ -46,6 +46,49 @@ if [ "$action" == 'clear' ]
         git remote rm stree-themebundle
         git remote rm stree-unitbundle
         git remote rm stree-wishlistbundle
+
+        git branch -d stree-backports-adminbundle
+        git branch -d stree-backports-appbundle
+        git branch -d stree-backports-attributebundle
+        git branch -d stree-backports-availabilitybundle
+        git branch -d stree-backports-cartbundle
+        git branch -d stree-backports-categorybundle
+        git branch -d stree-backports-clientbundle
+        git branch -d stree-backports-collections
+        git branch -d stree-backports-companybundle
+        git branch -d stree-backports-contactbundle
+        git branch -d stree-backports-corebundle
+        git branch -d stree-backports-countrybundle
+        git branch -d stree-backports-couponbundle
+        git branch -d stree-backports-currencybundle
+        git branch -d stree-backports-datagrid
+        git branch -d stree-backports-dataset
+        git branch -d stree-backports-delivererbundle
+        git branch -d stree-backports-dictionarybundle
+        git branch -d stree-backports-form
+        git branch -d stree-backports-layerednavigationbundle
+        git branch -d stree-backports-layoutbundle
+        git branch -d stree-backports-localebundle
+        git branch -d stree-backports-mediabundle
+        git branch -d stree-backports-newsbundle
+        git branch -d stree-backports-orderbundle
+        git branch -d stree-backports-pagebundle
+        git branch -d stree-backports-paymentbundle
+        git branch -d stree-backports-producerbundle
+        git branch -d stree-backports-productbundle
+        git branch -d stree-backports-productstatusbundle
+        git branch -d stree-backports-reportbundle
+        git branch -d stree-backports-reviewbundle
+        git branch -d stree-backports-routingbundle
+        git branch -d stree-backports-searchbundle
+        git branch -d stree-backports-shippingbundle
+        git branch -d stree-backports-shopbundle
+        git branch -d stree-backports-smugglerbundle
+        git branch -d stree-backports-taxbundle
+        git branch -d stree-backports-themebundle
+        git branch -d stree-backports-unitbundle
+        git branch -d stree-backports-wishlistbundle
+
         rm -rf src/WellCommerce/Bundle/*
         rm -rf src/WellCommerce/Component/*
 fi
