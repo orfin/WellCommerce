@@ -6,12 +6,12 @@
     <meta http-equiv="Author" content="WellCommerce sp. z o.o."/>
     <meta name="robots" content="noindex, nofollow"/>
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}"/>
-    {% stylesheets 'bundles/wellcommerceapp/css/*' filter='cssrewrite' %}
+    {% stylesheets 'bundles/wellcommerceadmin/css/*' filter='cssrewrite' %}
     <link rel="stylesheet" href="{{ asset_url }}" />
     {% endstylesheets %}
     {% javascripts
         'bundles/fosjsrouting/js/router.js'
-        '@WellCommerceAppBundle/Resources/public/js/libs/*'
+        '@WellCommerceAdminBundle/Resources/public/js/libs/*'
         output='js/libs/all.js'
     %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
@@ -21,10 +21,10 @@
         'bundles/bazingajstranslation/js/translator.min.js'
         'js/translations/config.js'
         'js/translations/*/*.js'
-        '@WellCommerceAppBundle/Resources/public/js/core/core.js'
-        '@WellCommerceAppBundle/Resources/public/js/core/plugin/*.js'
-        '@WellCommerceAppBundle/Resources/public/js/core/form.js'
-        '@WellCommerceAppBundle/Resources/public/js/core/language/*.js'
+        '@WellCommerceAdminBundle/Resources/public/js/core/core.js'
+        '@WellCommerceAdminBundle/Resources/public/js/core/plugin/*.js'
+        '@WellCommerceAdminBundle/Resources/public/js/core/form.js'
+        '@WellCommerceAdminBundle/Resources/public/js/core/language/*.js'
     %}
     <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
@@ -44,8 +44,8 @@
         var DataGrid;
     </script>
     {% javascripts
-        '@WellCommerceAppBundle/Resources/public/js/core/gf.js'
-        '@WellCommerceAppBundle/Resources/public/js/core/init.js'
+        '@WellCommerceAdminBundle/Resources/public/js/core/gf.js'
+        '@WellCommerceAdminBundle/Resources/public/js/core/init.js'
     %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
@@ -53,7 +53,7 @@
         GF_Debug.s_iLevel = GF_Debug.LEVEL_ALL;
     </script>
     {% block javascripts %}{% endblock %}
-    {% include 'WellCommerceAppBundle:Admin:flashes.html.twig' %}
+    {% include 'WellCommerceAdminBundle:Admin:flashes.html.twig' %}
 </head>
 {% block body %}
 <body>
@@ -61,7 +61,7 @@
     <div class="layout-container">
         <h1>
             <a href="">
-                {% image '@WellCommerceAppBundle/Resources/public/images/logo.png' %}
+                {% image '@WellCommerceAdminBundle/Resources/public/images/logo.png' %}
                 <img src="{{ asset_url }}" alt="Example" />
                 {% endimage %}
             </a>
@@ -87,7 +87,7 @@
 </div>
 <div id="navigation-bar">
     <div class="layout-container">
-        {% include 'WellCommerceAppBundle:Admin:navigation.html.twig' %}
+        {% include 'WellCommerceAdminBundle:Admin:navigation.html.twig' %}
         <div id="boxShop">
             <span class="icon"></span>
             <div class="field-select">

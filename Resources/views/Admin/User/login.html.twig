@@ -1,4 +1,4 @@
-{% extends 'WellCommerceAppBundle:Admin:layout.html.twig' %}
+{% extends 'WellCommerceAdminBundle:Admin:layout.html.twig' %}
 {% trans_default_domain "wellcommerce" %}
 {% block body %}
 <body class="welcome-screen">
@@ -6,7 +6,7 @@
     <div class="layout-container">
         <h1>
             <a href="">
-                {% image '@WellCommerceAppBundle/Resources/public/images/logo.png' %}
+                {% image '@WellCommerceAdminBundle/Resources/public/images/logo.png' %}
                 <img src="{{ asset_url }}" />
                 {% endimage %}
             </a>
