@@ -1,5 +1,6 @@
 {
     "name": "wellcommerce/locale-bundle",
+    "type": "wellcommerce-bundle",
     "license": "MIT",
     "minimum-stability": "dev",
     "description": "WellCommerce LocaleBundle",
@@ -30,6 +31,9 @@
     "extra": {
         "branch-alias": {
             "dev-master": "0.7.x-dev"
+        },
+        "wellcommerce-bundle": {
+            "install-dir": "src/WellCommerce/Bundle/LocaleBundle"
         }
     }
 }
