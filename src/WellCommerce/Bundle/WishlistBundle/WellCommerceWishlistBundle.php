@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\WishlistBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
-use WellCommerce\Bundle\AppBundle\DependencyInjection\Compiler;
 
 /**
  * Class WellCommerceWishlistBundle
