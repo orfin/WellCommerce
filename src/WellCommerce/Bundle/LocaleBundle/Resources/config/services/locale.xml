@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <imports>
+        <import resource="admin/locale.xml"/>
+        <import resource="front/locale.xml"/>
+    </imports>
+
+    <services>
+        <service id="locale.repository" class="WellCommerce\Bundle\LocaleBundle\Repository\LocaleRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>WellCommerceLocaleBundle:Locale</argument>
+        </service>
+
+        <service id="locale.subscriber" class="WellCommerce\Bundle\LocaleBundle\EventListener\LocaleSubscriber">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <tag name="kernel.event_subscriber" />
+        </service>
+
+        <service id="locale.factory" class="WellCommerce\Bundle\LocaleBundle\Factory\LocaleFactory" />
+
+        <service id="locale.event_dispatcher" parent="core.event_dispatcher" public="false">
+            <argument type="service" id="event_dispatcher" />
+        </service>
+
+        <service id="form.translation.data_transformer" class="WellCommerce\Bundle\LocaleBundle\Form\DataTransformer\TranslationTransformer" scope="prototype">
+            <argument type="service" id="doctrine.helper"/>
+            <tag name="form.data_transformer" alias="translation"/>
+        </service>
+    </services>
+</container>
