@@ -62,18 +62,6 @@ class ArrayCollection implements CollectionInterface
     }
 
     /**
-     * Checks whether such key exists in collection
-     *
-     * @param $key
-     *
-     * @return bool
-     */
-    public function has($key)
-    {
-        return array_key_exists($key, $this->items);
-    }
-
-    /**
      * Returns a collection element by its key
      *
      * @param $key
@@ -95,6 +83,18 @@ class ArrayCollection implements CollectionInterface
         if ($this->has($key)) {
             unset($this->items[$key]);
         }
+    }
+
+    /**
+     * Checks whether such key exists in collection
+     *
+     * @param $key
+     *
+     * @return bool
+     */
+    public function has($key)
+    {
+        return array_key_exists($key, $this->items);
     }
 
     /**
