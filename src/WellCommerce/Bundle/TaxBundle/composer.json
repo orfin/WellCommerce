@@ -2,7 +2,7 @@
     "name": "wellcommerce/tax-bundle",
     "license": "MIT",
     "minimum-stability": "dev",
-    "description": "WellCommerce Open-Source edition",
+    "description": "WellCommerce TaxBundle",
     "keywords": ["symfony","e-commerce","open-source"],
     "authors": [
         {
