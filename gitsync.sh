@@ -159,7 +159,6 @@ if [ "$action" == 'init' ]
         git stree add CurrencyBundle -P src/WellCommerce/Bundle/CurrencyBundle git@github.com:WellCommerce/CurrencyBundle.git
         git stree add DelivererBundle -P src/WellCommerce/Bundle/DelivererBundle git@github.com:WellCommerce/DelivererBundle.git
         git stree add DictionaryBundle -P src/WellCommerce/Bundle/DictionaryBundle git@github.com:WellCommerce/DictionaryBundle.git
-        git stree add FrontBundle -P src/WellCommerce/Bundle/FrontBundle git@github.com:WellCommerce/FrontBundle.git
         git stree add LayeredNavigationBundle -P src/WellCommerce/Bundle/LayeredNavigationBundle git@github.com:WellCommerce/LayeredNavigationBundle.git
         git stree add LayoutBundle -P src/WellCommerce/Bundle/LayoutBundle git@github.com:WellCommerce/LayoutBundle.git
         git stree add LocaleBundle -P src/WellCommerce/Bundle/LocaleBundle git@github.com:WellCommerce/LocaleBundle.git
@@ -179,9 +178,7 @@ if [ "$action" == 'init' ]
         git stree add ShopBundle -P src/WellCommerce/Bundle/ShopBundle git@github.com:WellCommerce/ShopBundle.git
         git stree add SmugglerBundle -P src/WellCommerce/Bundle/SmugglerBundle git@github.com:WellCommerce/SmugglerBundle.git
         git stree add TaxBundle -P src/WellCommerce/Bundle/TaxBundle git@github.com:WellCommerce/TaxBundle.git
-        git stree add TaxonomyBundle -P src/WellCommerce/Bundle/TaxonomyBundle git@github.com:WellCommerce/TaxonomyBundle.git
         git stree add ThemeBundle -P src/WellCommerce/Bundle/ThemeBundle git@github.com:WellCommerce/ThemeBundle.git
         git stree add UnitBundle -P src/WellCommerce/Bundle/UnitBundle git@github.com:WellCommerce/UnitBundle.git
-        git stree add UserBundle -P src/WellCommerce/Bundle/UserBundle git@github.com:WellCommerce/UserBundle.git
         git stree add WishlistBundle -P src/WellCommerce/Bundle/WishlistBundle git@github.com:WellCommerce/WishlistBundle.git
 fi
