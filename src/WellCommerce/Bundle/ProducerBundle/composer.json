@@ -2,7 +2,7 @@
     "name": "wellcommerce/producer-bundle",
     "license": "MIT",
     "minimum-stability": "dev",
-    "description": "WellCommerce Open-Source edition",
+    "description": "WellCommerce ProducerBundle",
     "keywords": ["wellcommerce","e-commerce","open-source"],
     "authors": [
         {
