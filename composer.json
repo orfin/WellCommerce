@@ -2,7 +2,7 @@
     "name": "wellcommerce/locale-bundle",
     "license": "MIT",
     "minimum-stability": "dev",
-    "description": "WellCommerce Open-Source edition",
+    "description": "WellCommerce LocaleBundle",
     "keywords": ["wellcommerce","e-commerce","open-source"],
     "authors": [
         {
