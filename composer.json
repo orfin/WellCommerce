@@ -2,8 +2,8 @@
     "name": "wellcommerce/app-bundle",
     "license": "MIT",
     "minimum-stability": "dev",
-    "description": "WellCommerce Open-Source edition",
-    "keywords": ["symfony","e-commerce","open-source"],
+    "description": "WellCommerce AppBundle",
+    "keywords": ["wellcommerce","e-commerce","open-source"],
     "authors": [
         {
             "name": "Adam Piotrowski",
@@ -20,58 +20,13 @@
         "source": "https://github.com/WellCommerce/AppBundle/"
     },
     "autoload": {
-        "psr-4": { "": "src/" },
-        "files": [ "app/AppKernel.php" ]
+        "psr-4": { "": "src/" }
     },
     "require": {
         "php": ">=5.6",
-        "wellcommerce/company-bundle": "^0.7@dev",
-        "wellcommerce/currency-bundle": "^0.7@dev",
-        "wellcommerce/core-bundle": "^0.7@dev",
-        "wellcommerce/locale-bundle": "^0.7@dev",
-        "wellcommerce/user-bundle": "^0.7@dev",
-        "wellcommerce/shop-bundle": "^0.7@dev"
-    },
-    "require-dev": {
-        "sensio/generator-bundle": "~2.3",
-        "doctrine/doctrine-fixtures-bundle": "2.2.x-dev",
-        "phpunit/phpunit":  "5.0.*@dev"
-    },
-    "scripts": {
-        "post-root-package-install": [
-            "SymfonyStandard\\Composer::hookRootPackageInstall"
-        ],
-        "post-install-cmd": [
-            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles"
-        ],
-        "post-update-cmd": [
-            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles"
-        ],
-        "build-bootstrap": [
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap"
-        ]
-    },
-    "config": {
-        "bin-dir": "bin"
+        "wellcommerce/core-bundle": "^0.7@dev"
     },
     "extra": {
-        "symfony-app-dir": "app",
-        "symfony-web-dir": "web",
-        "incenteev-parameters": {
-            "symfony-app-dir": "app",
-            "symfony-web-dir": "web",
-            "file": "app/config/parameters.yml"
-        },
         "branch-alias": {
             "dev-master": "0.7.x-dev"
         }
