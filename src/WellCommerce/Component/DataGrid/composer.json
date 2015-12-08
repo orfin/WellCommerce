@@ -28,7 +28,7 @@
         "symfony/options-resolver": "2.7.x-dev",
         "wellcommerce/collections": "1.0.x-dev",
         "wellcommerce/dataset": "1.0.x-dev",
-        "zendframework/zend-json": "2.3.*@dev"
+        "zendframework/zend-json": "2.6.*@dev"
     },
     "require-dev": {
         "phpunit/phpunit":  "5.0.*@dev"
