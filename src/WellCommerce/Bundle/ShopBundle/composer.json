@@ -2,7 +2,7 @@
     "name": "wellcommerce/shop-bundle",
     "license": "MIT",
     "minimum-stability": "dev",
-    "description": "WellCommerce Open-Source edition",
+    "description": "WellCommerce ShopBundle",
     "keywords": ["symfony","e-commerce","open-source"],
     "authors": [
         {
