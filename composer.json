@@ -1,5 +1,6 @@
 {
     "name": "wellcommerce/review-bundle",
+    "type": "wellcommerce-bundle",
     "license": "MIT",
     "minimum-stability": "dev",
     "description": "WellCommerce ReviewBundle",
@@ -30,6 +31,9 @@
     "extra": {
         "branch-alias": {
             "dev-master": "0.7.x-dev"
+        },
+        "wellcommerce-bundle": {
+            "install-dir": "src/WellCommerce/Bundle/ReviewBundle"
         }
     }
 }
