@@ -2,7 +2,7 @@
     "name": "wellcommerce/layered-navigation-bundle",
     "license": "MIT",
     "minimum-stability": "dev",
-    "description": "WellCommerce Open-Source edition",
+    "description": "WellCommerce LayeredNavigationBundle",
     "keywords": ["wellcommerce","e-commerce","open-source"],
     "authors": [
         {
