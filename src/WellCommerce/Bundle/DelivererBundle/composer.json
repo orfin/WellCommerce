@@ -2,7 +2,7 @@
     "name": "wellcommerce/deliverer-bundle",
     "license": "MIT",
     "minimum-stability": "dev",
-    "description": "WellCommerce Open-Source edition",
+    "description": "WellCommerce DelivererBundle",
     "keywords": ["wellcommerce","e-commerce","open-source"],
     "authors": [
         {
