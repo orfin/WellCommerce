@@ -30,6 +30,5 @@ class WellCommerceCoreBundle extends Bundle
         $container->addCompilerPass(new Compiler\FormDataTransformerPass());
         $container->addCompilerPass(new Compiler\DataSetContextPass());
         $container->addCompilerPass(new Compiler\DataSetTransformerPass());
-
     }
 }
