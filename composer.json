@@ -1,5 +1,6 @@
 {
     "name": "wellcommerce/contact-bundle",
+    "type": "wellcommerce-bundle",
     "license": "MIT",
     "minimum-stability": "dev",
     "description": "WellCommerce ContactBundle",
@@ -29,6 +30,9 @@
     "extra": {
         "branch-alias": {
             "dev-master": "0.7.x-dev"
+        },
+        "wellcommerce-bundle": {
+            "install-dir": "src/WellCommerce/Bundle/ContactBundle"
         }
     }
 }
