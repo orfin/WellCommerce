@@ -1,8 +1,0 @@
-WellCommerce\Bundle\TaxBundle\Entity\TaxTranslation:
-    type: entity
-    table: tax_translation
-    fields:
-        name:
-            type: string
-            length: 255
-            nullable: false
