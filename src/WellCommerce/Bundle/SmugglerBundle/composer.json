@@ -25,7 +25,12 @@
     },
     "require": {
         "php": ">=5.6",
-        "wellcommerce/core-bundle": "^0.7@dev"
+        "wellcommerce/core-bundle": "^0.7@dev",
+        "react/child-process": "0.5.*@dev",
+        "knplabs/packagist-api": "1.*@dev",
+        "mcuelenaere/composer-revision-plugin": "0.1.*",
+        "hoa/websocket": "2.*@dev",
+        "devristo/phpws": "dev-master"
     },
     "extra": {
         "branch-alias": {
