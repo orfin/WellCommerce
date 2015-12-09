@@ -136,6 +136,7 @@ if [ "$action" == 'push' ]
         git stree push ThemeBundle
         git stree push UnitBundle
         git stree push WishlistBundle
+        git stree push wellcommerce-default-theme
 fi
 
 if [ "$action" == 'init' ]
