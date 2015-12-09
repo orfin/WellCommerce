@@ -182,5 +182,5 @@ if [ "$action" == 'init' ]
         git stree add ThemeBundle -P src/WellCommerce/Bundle/ThemeBundle git@github.com:WellCommerce/ThemeBundle.git
         git stree add UnitBundle -P src/WellCommerce/Bundle/UnitBundle git@github.com:WellCommerce/UnitBundle.git
         git stree add WishlistBundle -P src/WellCommerce/Bundle/WishlistBundle git@github.com:WellCommerce/WishlistBundle.git
-        git stree add wellcommerce-default-theme -P web/themes/wellcommerce git@github.com:WellCommerce/wellcommerce-default-theme.git
+        git stree add wellcommerce-default-theme -P web/themes/wellcommerce-default-theme git@github.com:WellCommerce/wellcommerce-default-theme.git
 fi
