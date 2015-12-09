@@ -60,7 +60,8 @@
         "wellcommerce/tax-bundle": "^0.7@dev",
         "wellcommerce/theme-bundle": "^0.7@dev",
         "wellcommerce/unit-bundle": "^0.7@dev",
-        "wellcommerce/wishlist-bundle": "^0.7@dev"
+        "wellcommerce/wishlist-bundle": "^0.7@dev",
+        "wellcommerce/wellcommerce-default-theme": "^0.7@dev"
     },
     "extra": {
         "branch-alias": {
