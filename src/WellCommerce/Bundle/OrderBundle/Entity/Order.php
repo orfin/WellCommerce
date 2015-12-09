@@ -19,6 +19,7 @@ use WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddressInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetailsInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddressInterface;
 use WellCommerce\Bundle\CouponBundle\Entity\CouponAwareTrait;
+use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodAwareTrait;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodAwareTrait;
 use WellCommerce\Bundle\ShopBundle\Entity\ShopAwareTrait;
