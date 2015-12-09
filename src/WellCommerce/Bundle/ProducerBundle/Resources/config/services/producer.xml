@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <imports>
+        <import resource="admin/producer.xml"/>
+        <import resource="front/producer.xml"/>
+    </imports>
+
+    <services>
+        <service id="producer.repository" class="WellCommerce\Bundle\ProducerBundle\Repository\ProducerRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>WellCommerceProducerBundle:Producer</argument>
+        </service>
+
+        <service id="producer.factory" class="WellCommerce\Bundle\ProducerBundle\Factory\ProducerFactory"/>
+
+        <service id="producer.event_dispatcher" parent="core.event_dispatcher" public="false">
+            <argument type="service" id="event_dispatcher" />
+        </service>
+
+        <service id="producer.route.generator" class="WellCommerce\Bundle\ProducerBundle\Generator\ProducerRouteGenerator">
+            <argument type="collection" key="defaults">
+                <argument key="_controller">producer.controller.front:indexAction</argument>
+                <argument key="limit">12</argument>
+                <argument key="page">1</argument>
+                <argument key="orderBy">name</argument>
+                <argument key="orderDir">asc</argument>
+                <argument key="priceFrom">0</argument>
+                <argument key="priceTo">9999</argument>
+                <argument key="view">grid</argument>
+                <argument key="producers">null</argument>
+                <argument key="attributes">null</argument>
+            </argument>
+            <argument type="collection" key="requirements">
+                <argument key="limit">\d{1,10}</argument>
+                <argument key="page">\d{1,10}</argument>
+                <argument key="orderBy">name|finalPrice</argument>
+                <argument key="orderDir">asc|desc</argument>
+                <argument key="priceFrom">\d{1,10}</argument>
+                <argument key="priceTo">\d{1,10}</argument>
+                <argument key="view">grid|list</argument>
+                <argument key="producers">[\d+_]+</argument>
+                <argument key="attributes">[\d+_]+</argument>
+            </argument>
+            <argument type="collection" key="pattern">
+                <argument key="page" />
+                <argument key="limit" />
+                <argument key="orderBy" />
+                <argument key="orderDir" />
+                <argument key="priceFrom" />
+                <argument key="priceTo" />
+                <argument key="view" />
+                <argument key="producers" />
+                <argument key="attributes" />
+            </argument>
+            <tag name="route.generator" />
+        </service>
+
+        <service id="producer.request_param_converter" class="WellCommerce\Bundle\ProducerBundle\Request\ParamConverter\ProducerParamConverter">
+            <argument type="service" id="producer.repository" />
+            <argument>id</argument>
+            <argument type="collection">
+                <argument>WellCommerce\Bundle\ProducerBundle\Entity\Producer</argument>
+                <argument>WellCommerce\Bundle\ProducerBundle\Entity\ProducerInterface</argument>
+            </argument>
+            <tag name="request.param_converter" converter="producer" priority="0"/>
+        </service>
+    </services>
+</container>
