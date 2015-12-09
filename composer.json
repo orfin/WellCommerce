@@ -51,7 +51,8 @@
         "hoa/websocket": "2.*@dev",
         "devristo/phpws": "dev-master",
         "nesbot/carbon": "dev-master",
-        "egeloen/lucene-search-bundle": "^2.0@dev"
+        "egeloen/lucene-search-bundle": "^2.0@dev",
+        "zendframework/zend-json": "2.6.*@dev"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0@dev",
