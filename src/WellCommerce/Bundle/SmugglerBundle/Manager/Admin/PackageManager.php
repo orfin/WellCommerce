@@ -18,6 +18,7 @@ use Packagist\Api\Result\Package as RemotePackage;
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
 use WellCommerce\Bundle\SmugglerBundle\Entity\Package;
+use WellCommerce\Bundle\SmugglerBundle\Entity\PackageInterface;
 use WellCommerce\Bundle\SmugglerBundle\Helper\Package\PackageHelperInterface;
 
 /**
@@ -63,10 +64,13 @@ class PackageManager extends AbstractAdminManager
      */
     protected function syncPackage(RemotePackage $remotePackage)
     {
-        $repository = $this->getRepository();
-        $result     = $repository->findOneBy(['fullName' => $remotePackage->getName()]);
-        if (null === $result) {
+        $repository   = $this->getRepository();
+        $localPackage = $repository->findOneBy(['fullName' => $remotePackage->getName()]);
+        if (!$localPackage instanceof PackageInterface) {
             $this->addPackage($remotePackage);
+        } else {
+            $this->setPackageVersions($localPackage);
+            $this->getDoctrineHelper()->getEntityManager()->flush();
         }
     }
 
@@ -82,6 +86,7 @@ class PackageManager extends AbstractAdminManager
         $package->setFullName($remotePackage->getName());
         $package->setName($name);
         $package->setVendor($vendor);
+        $this->setPackageVersions($package);
         $this->getDoctrineHelper()->getEntityManager()->persist($package);
     }
 
@@ -128,6 +133,16 @@ class PackageManager extends AbstractAdminManager
             throw new EntityNotFoundException($repository->getMetaData()->getName(), $id);
         }
 
+        $this->setPackageVersions($package);
+
+        $em->flush();
+    }
+
+    /**
+     * @param PackageInterface $package
+     */
+    protected function setPackageVersions(PackageInterface $package)
+    {
         $branch        = PackageHelperInterface::DEFAULT_BRANCH_VERSION;
         $remotePackage = $this->helper->getPackage($package->getFullName());
         $remoteVersion = $this->getPackageVersionReference($remotePackage->getVersions()[$branch]);
@@ -140,8 +155,6 @@ class PackageManager extends AbstractAdminManager
 
         $package->setLocalVersion($localVersion);
         $package->setRemoteVersion($remoteVersion);
-
-        $em->flush();
     }
 
     /**

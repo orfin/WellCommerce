@@ -21,7 +21,7 @@ interface PackageHelperInterface
 {
 
     const DEFAULT_BRANCH_VERSION      = 'dev-master';
-    const DEFAULT_PACKAGE_PLUGIN_TYPE = 'wellcommerce-plugin';
+    const DEFAULT_PACKAGE_BUNDLE_TYPE = 'wellcommerce-bundle';
     const DEFAULT_PACKAGE_THEME_TYPE  = 'wellcommerce-theme';
     const ACTION_REQUIRE              = 'require';
     const ACTION_UPDATE               = 'update';
