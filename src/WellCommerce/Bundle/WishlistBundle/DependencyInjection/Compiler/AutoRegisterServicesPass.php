@@ -15,6 +15,7 @@ namespace WellCommerce\Bundle\WishlistBundle\DependencyInjection\Compiler;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use WellCommerce\Bundle\AttributeBundle\DependencyInjection\WellCommerceAttributeExtension;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\Compiler\AbstractAutoRegisterServicesPass;
+use WellCommerce\Bundle\WishlistBundle\DependencyInjection\WellCommerceWishlistExtension;
 
 /**
  * Class MappingCompilerPass
@@ -25,6 +26,6 @@ class AutoRegisterServicesPass extends AbstractAutoRegisterServicesPass
 {
     protected function getExtensionConfiguration(ContainerBuilder $container)
     {
-        return $container->getParameter(WellCommerceAttributeExtension::EXTENSION_NAME);
+        return $container->getParameter(WellCommerceWishlistExtension::EXTENSION_NAME);
     }
 }

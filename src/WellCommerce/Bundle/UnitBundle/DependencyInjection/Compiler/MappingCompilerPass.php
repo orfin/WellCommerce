@@ -16,6 +16,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use WellCommerce\Bundle\AppBundle\DependencyInjection\WellCommerceAppExtension;
 use WellCommerce\Bundle\AttributeBundle\DependencyInjection\WellCommerceAttributeExtension;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\Compiler\AbstractMappingCompilerPass;
+use WellCommerce\Bundle\UnitBundle\DependencyInjection\WellCommerceUnitExtension;
 
 /**
  * Class MappingCompilerPass
@@ -26,6 +27,6 @@ class MappingCompilerPass extends AbstractMappingCompilerPass
 {
     protected function getExtensionConfiguration(ContainerBuilder $container)
     {
-        return $container->getParameter(WellCommerceAttributeExtension::EXTENSION_NAME);
+        return $container->getParameter(WellCommerceUnitExtension::EXTENSION_NAME);
     }
 }
