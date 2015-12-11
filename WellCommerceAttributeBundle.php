@@ -12,7 +12,9 @@
 
 namespace WellCommerce\Bundle\AttributeBundle;
 
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
+use WellCommerce\Bundle\AttributeBundle\DependencyInjection\Compiler;
 
 /**
  * Class WellCommerceAttributeBundle
@@ -21,4 +23,10 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  */
 class WellCommerceAttributeBundle extends Bundle
 {
+    public function build(ContainerBuilder $container)
+    {
+        parent::build($container);
+//        $container->addCompilerPass(new Compiler\AutoRegisterServicesPass());
+//        $container->addCompilerPass(new Compiler\MappingCompilerPass());
+    }
 }

@@ -1,0 +1,9 @@
+well_commerce_app:
+    services:
+        attribute:
+            auto_services:
+                factory: WellCommerce\Bundle\AttributeBundle\Factory\AttributeFactory
+                repository: WellCommerce\Bundle\AttributeBundle\Repository\AttributeRepository
+            orm_configuration:
+                mapping: "@WellCommerceAttributeBundle/Resources/config/doctrine/Attribute.orm.yml"
+                entity: WellCommerce\Bundle\AttributeBundle\Entity\Attribute
