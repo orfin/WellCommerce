@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\RoutingBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
 
@@ -23,5 +24,13 @@ use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
  */
 class WellCommerceRoutingExtension extends AbstractExtension
 {
+    CONST EXTENSION_NAME = 'well_commerce_routing';
 
+    /**
+     * {@inheritdoc}
+     */
+    protected function setExtensionConfiguration(ContainerBuilder $container, array $parameters = [])
+    {
+        $container->setParameter(self::EXTENSION_NAME, $parameters);
+    }
 }
