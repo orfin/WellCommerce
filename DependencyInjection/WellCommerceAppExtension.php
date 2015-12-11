@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\AppBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
 
@@ -23,4 +24,13 @@ use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
  */
 class WellCommerceAppExtension extends AbstractExtension
 {
+    CONST EXTENSION_NAME = 'well_commerce_app';
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function setExtensionConfiguration(ContainerBuilder $container, array $parameters = [])
+    {
+        $container->setParameter(self::EXTENSION_NAME, $parameters);
+    }
 }

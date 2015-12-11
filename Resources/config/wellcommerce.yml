@@ -1,0 +1,71 @@
+imports:
+    - { resource: "@WellCommerceAdminBundle/Resources/config/wellcommerce.yml" }
+    - { resource: "@WellCommerceAttributeBundle/Resources/config/wellcommerce.yml" }
+    - { resource: "@WellCommerceAvailabilityBundle/Resources/config/wellcommerce.yml" }
+    - { resource: "@WellCommerceCartBundle/Resources/config/wellcommerce.yml" }
+    - { resource: "@WellCommerceCategoryBundle/Resources/config/wellcommerce.yml" }
+    - { resource: "@WellCommerceClientBundle/Resources/config/wellcommerce.yml" }
+    - { resource: "@WellCommerceCompanyBundle/Resources/config/wellcommerce.yml" }
+    - { resource: "@WellCommerceCountryBundle/Resources/config/wellcommerce.yml" }
+    - { resource: "@WellCommerceCouponBundle/Resources/config/wellcommerce.yml" }
+    - { resource: "@WellCommerceCurrencyBundle/Resources/config/wellcommerce.yml" }
+    - { resource: "@WellCommerceDelivererBundle/Resources/config/wellcommerce.yml" }
+    - { resource: "@WellCommerceDictionaryBundle/Resources/config/wellcommerce.yml" }
+    - { resource: "@WellCommerceLayeredNavigationBundle/Resources/config/wellcommerce.yml" }
+    - { resource: "@WellCommerceLayoutBundle/Resources/config/wellcommerce.yml" }
+    - { resource: "@WellCommerceLocaleBundle/Resources/config/wellcommerce.yml" }
+    - { resource: "@WellCommerceMediaBundle/Resources/config/wellcommerce.yml" }
+    - { resource: "@WellCommerceNewsBundle/Resources/config/wellcommerce.yml" }
+    - { resource: "@WellCommerceOrderBundle/Resources/config/wellcommerce.yml" }
+    - { resource: "@WellCommercePageBundle/Resources/config/wellcommerce.yml" }
+    - { resource: "@WellCommercePaymentBundle/Resources/config/wellcommerce.yml" }
+    - { resource: "@WellCommerceProducerBundle/Resources/config/wellcommerce.yml" }
+    - { resource: "@WellCommerceProductBundle/Resources/config/wellcommerce.yml" }
+    - { resource: "@WellCommerceProductStatusBundle/Resources/config/wellcommerce.yml" }
+    - { resource: "@WellCommerceReportBundle/Resources/config/wellcommerce.yml" }
+    - { resource: "@WellCommerceReviewBundle/Resources/config/wellcommerce.yml" }
+    - { resource: "@WellCommerceRoutingBundle/Resources/config/wellcommerce.yml" }
+    - { resource: "@WellCommerceSearchBundle/Resources/config/wellcommerce.yml" }
+    - { resource: "@WellCommerceShippingBundle/Resources/config/wellcommerce.yml" }
+    - { resource: "@WellCommerceShopBundle/Resources/config/wellcommerce.yml" }
+    - { resource: "@WellCommerceSmugglerBundle/Resources/config/wellcommerce.yml" }
+    - { resource: "@WellCommerceTaxBundle/Resources/config/wellcommerce.yml" }
+    - { resource: "@WellCommerceThemeBundle/Resources/config/wellcommerce.yml" }
+    - { resource: "@WellCommerceUnitBundle/Resources/config/wellcommerce.yml" }
+    - { resource: "@WellCommerceWishlistBundle/Resources/config/wellcommerce.yml" }
+
+parameters:
+    fixtures_load_order:
+        WellCommerce\Bundle\AdminBundle\DataFixtures\ORM\LoadAdminMenuData: 0
+        WellCommerce\Bundle\ThemeBundle\DataFixtures\ORM\LoadThemeData: 10
+        WellCommerce\Bundle\CompanyBundle\DataFixtures\ORM\LoadCompanyData: 20
+        WellCommerce\Bundle\CurrencyBundle\DataFixtures\ORM\LoadCurrencyData: 30
+        WellCommerce\Bundle\LocaleBundle\DataFixtures\ORM\LoadLocaleData: 40
+        WellCommerce\Bundle\OrderBundle\DataFixtures\ORM\LoadOrderStatusGroupData: 41
+        WellCommerce\Bundle\OrderBundle\DataFixtures\ORM\LoadOrderStatusData: 42
+        WellCommerce\Bundle\ShopBundle\DataFixtures\ORM\LoadShopData: 50
+        WellCommerce\Bundle\AdminBundle\DataFixtures\ORM\LoadUserData: 60
+        WellCommerce\Bundle\TaxBundle\DataFixtures\ORM\LoadTaxData: 70
+        WellCommerce\Bundle\ClientBundle\DataFixtures\ORM\LoadClientGroupData: 80
+        WellCommerce\Bundle\ClientBundle\DataFixtures\ORM\LoadClientData: 90
+        WellCommerce\Bundle\UnitBundle\DataFixtures\ORM\LoadUnitData: 110
+        WellCommerce\Bundle\ContactBundle\DataFixtures\ORM\LoadContactData: 130
+        WellCommerce\Bundle\MediaBundle\DataFixtures\ORM\LoadMediaData: 135
+        WellCommerce\Bundle\DelivererBundle\DataFixtures\ORM\LoadDelivererData: 140
+        WellCommerce\Bundle\AvailabilityBundle\DataFixtures\ORM\LoadAvailabilityData: 150
+        WellCommerce\Bundle\ProducerBundle\DataFixtures\ORM\LoadProducerData: 160
+        WellCommerce\Bundle\AttributeBundle\DataFixtures\ORM\LoadAttributeData: 170
+        WellCommerce\Bundle\CategoryBundle\DataFixtures\ORM\LoadCategoryData: 180
+        WellCommerce\Bundle\ProductStatusBundle\DataFixtures\ORM\LoadProductStatusData: 190
+        WellCommerce\Bundle\ProductBundle\DataFixtures\ORM\LoadProductData: 200
+        WellCommerce\Bundle\LayoutBundle\DataFixtures\ORM\LoadLayoutBoxData: 210
+        WellCommerce\Bundle\ShippingBundle\DataFixtures\ORM\LoadShippingMethodData: 220
+        WellCommerce\Bundle\PaymentBundle\DataFixtures\ORM\LoadPaymentMethodData: 230
+    fixtures_product_limit: 100
+
+well_commerce_search:
+    type: %search_engine%
+    search_term_min_length: 3
+#
+#well_commerce_media:
+#    media_upload_dir: %kernel.root_dir%
