@@ -4,6 +4,22 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
+        <service id="contact.manager.front" class="WellCommerce\Bundle\ContactBundle\Manager\Front\ContactManager">
+            <argument type="service" id="contact.repository"/>
+            <argument type="service" id="contact.event_dispatcher"/>
+            <argument type="service" id="contact.factory"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="contact.controller.front" class="WellCommerce\Bundle\ContactBundle\Controller\Front\ContactController">
+            <argument type="service" id="contact.manager.front"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
         <service id="contact.layout_box.controller" class="WellCommerce\Bundle\ContactBundle\Controller\Box\ContactBoxController">
             <argument type="service" id="service_container"/>
             <argument type="service" id="contact.repository"/>
