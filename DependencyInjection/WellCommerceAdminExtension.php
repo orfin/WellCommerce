@@ -13,8 +13,9 @@
 namespace WellCommerce\Bundle\AdminBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
-use Symfony\Component\DependencyInjection\Loader;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
+use Symfony\Component\DependencyInjection\Loader;
 
 /**
  * Class WellCommerceAdminExtension
@@ -23,5 +24,13 @@ use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
  */
 class WellCommerceAdminExtension extends AbstractExtension
 {
+    CONST EXTENSION_NAME = 'well_commerce_admin';
 
+    /**
+     * {@inheritdoc}
+     */
+    protected function setExtensionConfiguration(ContainerBuilder $container, array $parameters = [])
+    {
+        $container->setParameter(self::EXTENSION_NAME, $parameters);
+    }
 }
