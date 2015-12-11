@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\DependencyInjection;
 
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -22,11 +23,48 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  */
 abstract class AbstractConfiguration implements ConfigurationInterface
 {
+    protected $treeRoot;
+
     /**
      * {@inheritdoc}
      */
     public function getConfigTreeBuilder()
     {
-        return new TreeBuilder();
+        $treeBuilder = new TreeBuilder();
+        if (null !== $this->treeRoot) {
+            $rootNode = $treeBuilder->root($this->treeRoot);
+            $this->addServicesConfiguration($rootNode);
+        }
+
+        return $treeBuilder;
+    }
+
+    /**
+     * @param ArrayNodeDefinition $node
+     */
+    protected function addServicesConfiguration(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+            ->arrayNode('services')
+            ->useAttributeAsKey('name')
+            ->prototype('array')
+            ->children()
+            ->arrayNode('auto_services')->addDefaultsIfNotSet()
+            ->children()
+            ->scalarNode('repository')->defaultNull()->end()
+            ->scalarNode('factory')->defaultNull()->end()
+            ->end()
+            ->end()
+            ->arrayNode('orm_configuration')->addDefaultsIfNotSet()
+            ->children()
+            ->scalarNode('entity')->end()
+            ->scalarNode('mapping')->end()
+            ->end()
+            ->end()
+            ->end()
+            ->end()
+            ->end()
+            ->end();
     }
 }

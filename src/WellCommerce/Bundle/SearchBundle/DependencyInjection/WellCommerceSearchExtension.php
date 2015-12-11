@@ -24,6 +24,16 @@ use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
  */
 class WellCommerceSearchExtension extends AbstractExtension
 {
+    CONST EXTENSION_NAME = 'well_commerce_search';
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function setExtensionConfiguration(ContainerBuilder $container, array $parameters = [])
+    {
+        $container->setParameter(self::EXTENSION_NAME, $parameters);
+    }
+
     /**
      * {@inheritdoc}
      */

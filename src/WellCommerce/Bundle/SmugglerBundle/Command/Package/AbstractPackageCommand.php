@@ -22,6 +22,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\HttpKernel\Kernel;
+use WellCommerce\Bundle\SmugglerBundle\Entity\PackageInterface;
 use Zend\Log\Logger;
 use Zend\Log\Writer\Stream;
 
@@ -121,12 +122,12 @@ abstract class AbstractPackageCommand extends ContainerAwareCommand
      */
     protected function getPackageInformation($id)
     {
-        $entity = $this->getContainer()->get('package.repository')->find($id);
-        if (null === $entity) {
+        $package = $this->getContainer()->get('package.repository')->find($id);
+        if (!$package instanceof PackageInterface) {
             throw new \InvalidArgumentException(sprintf('Package "%s" not found', $id));
         }
 
-        return $entity->getFullName();
+        return $package->getFullName();
     }
 
     /**

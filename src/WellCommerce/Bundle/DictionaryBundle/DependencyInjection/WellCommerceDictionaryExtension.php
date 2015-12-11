@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\DictionaryBundle\DependencyInjection;
 
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
 
 /**
@@ -21,5 +22,13 @@ use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
  */
 class WellCommerceDictionaryExtension extends AbstractExtension
 {
+    CONST EXTENSION_NAME = 'well_commerce_dictionary';
 
+    /**
+     * {@inheritdoc}
+     */
+    protected function setExtensionConfiguration(ContainerBuilder $container, array $parameters = [])
+    {
+        $container->setParameter(self::EXTENSION_NAME, $parameters);
+    }
 }

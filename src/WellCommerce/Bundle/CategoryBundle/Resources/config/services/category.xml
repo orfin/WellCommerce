@@ -9,12 +9,6 @@
     </imports>
 
     <services>
-        <service id="category.repository" class="WellCommerce\Bundle\CategoryBundle\Repository\CategoryRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
-            <argument>WellCommerceCategoryBundle:Category</argument>
-        </service>
-
-        <service id="category.factory" class="WellCommerce\Bundle\CategoryBundle\Factory\CategoryFactory" />
-
         <service id="category.event_dispatcher" parent="core.event_dispatcher" public="false">
             <argument type="service" id="event_dispatcher" />
         </service>
