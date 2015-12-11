@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\ShippingBundle;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
-use WellCommerce\Bundle\ShippingBundle\DependencyInjection\Compiler\RegisterShippingMethodCalculatorPass;
+use WellCommerce\Bundle\ShippingBundle\DependencyInjection\Compiler;
 
 /**
  * Class WellCommerceShippingBundle
@@ -26,6 +26,8 @@ class WellCommerceShippingBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         parent::build($container);
-        $container->addCompilerPass(new RegisterShippingMethodCalculatorPass());
+        $container->addCompilerPass(new Compiler\AutoRegisterServicesPass());
+        $container->addCompilerPass(new Compiler\MappingCompilerPass());
+        $container->addCompilerPass(new Compiler\RegisterShippingMethodCalculatorPass());
     }
 }
