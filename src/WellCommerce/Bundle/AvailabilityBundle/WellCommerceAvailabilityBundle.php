@@ -12,7 +12,9 @@
 
 namespace WellCommerce\Bundle\AvailabilityBundle;
 
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
+use WellCommerce\Bundle\AvailabilityBundle\DependencyInjection\Compiler;
 
 /**
  * Class WellCommerceAvailabilityBundle
@@ -21,4 +23,10 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  */
 class WellCommerceAvailabilityBundle extends Bundle
 {
+    public function build(ContainerBuilder $container)
+    {
+        parent::build($container);
+        $container->addCompilerPass(new Compiler\AutoRegisterServicesPass());
+        $container->addCompilerPass(new Compiler\MappingCompilerPass());
+    }
 }

@@ -14,8 +14,7 @@ namespace WellCommerce\Bundle\AdminBundle;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
-use WellCommerce\Bundle\AdminBundle\DependencyInjection\Compiler\AutoRegisterServicesPass;
-use WellCommerce\Bundle\AdminBundle\DependencyInjection\Compiler\MappingCompilerPass;
+use WellCommerce\Bundle\AdminBundle\DependencyInjection\Compiler;
 
 /**
  * Class WellCommerceAdminBundle
@@ -27,7 +26,7 @@ class WellCommerceAdminBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         parent::build($container);
-        $container->addCompilerPass(new AutoRegisterServicesPass());
-        $container->addCompilerPass(new MappingCompilerPass());
+        $container->addCompilerPass(new Compiler\AutoRegisterServicesPass());
+        $container->addCompilerPass(new Compiler\MappingCompilerPass());
     }
 }
