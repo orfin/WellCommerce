@@ -12,9 +12,9 @@
 
 namespace WellCommerce\Bundle\ReportBundle\Context;
 
+use WellCommerce\Bundle\ReportBundle\Configuration\ReportConfiguration;
 use WellCommerce\Bundle\ReportBundle\Data\ReportRow;
 use WellCommerce\Bundle\ReportBundle\Data\ReportRowCollection;
-use WellCommerce\Bundle\ReportBundle\Configuration\ReportConfiguration;
 
 /**
  * Class LineChartContext
