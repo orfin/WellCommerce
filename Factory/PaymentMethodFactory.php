@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\PaymentBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
-use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod;
+use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodInterface;
 
 /**
  * Class PaymentMethodFactory
@@ -24,11 +24,17 @@ use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod;
 class PaymentMethodFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodInterface
+     * @var string
+     */
+    protected $supportsInterface = PaymentMethodInterface::class;
+
+    /**
+     * @return PaymentMethodInterface
      */
     public function create()
     {
-        $paymentMethod = new PaymentMethod();
+        /** @var  $paymentMethod PaymentMethodInterface */
+        $paymentMethod = $this->init();
         $paymentMethod->setHierarchy(0);
         $paymentMethod->setEnabled(true);
         $paymentMethod->setConfiguration(new ArrayCollection());

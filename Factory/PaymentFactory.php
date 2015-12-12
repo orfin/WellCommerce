@@ -13,22 +13,27 @@
 namespace WellCommerce\Bundle\PaymentBundle\Factory;
 
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
-use WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface;
-use WellCommerce\Bundle\PaymentBundle\Entity\Payment;
+use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
 
 /**
  * Class PaymentFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PaymentFactory extends AbstractFactory implements FactoryInterface
+class PaymentFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface
+     * @var string
+     */
+    protected $supportsInterface = PaymentInterface::class;
+
+    /**
+     * @return PaymentInterface
      */
     public function create()
     {
-        $payment = new Payment();
+        /** @var  $payment PaymentInterface */
+        $payment = $this->init();
 
         return $payment;
     }

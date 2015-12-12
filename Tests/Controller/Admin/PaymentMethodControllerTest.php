@@ -14,7 +14,6 @@ namespace WellCommerce\Bundle\PaymentBundle\Tests\Controller\Admin;
 
 use Doctrine\Common\Collections\Criteria;
 use WellCommerce\Bundle\CoreBundle\Test\Controller\Admin\AbstractAdminControllerTestCase;
-use WellCommerce\Bundle\PageBundle\Entity\PageInterface;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodInterface;
 
 /**
