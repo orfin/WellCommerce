@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\ContactBundle\Factory;
 
-use WellCommerce\Bundle\ContactBundle\Entity\Contact;
+use WellCommerce\Bundle\ContactBundle\Entity\ContactInterface;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 
 /**
@@ -23,11 +23,17 @@ use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 class ContactFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\ContactBundle\Entity\ContactInterface
+     * @var string
+     */
+    protected $supportsInterface = ContactInterface::class;
+
+    /**
+     * @return ContactInterface
      */
     public function create()
     {
-        $contact = new Contact();
+        /** @var $contact ContactInterface */
+        $contact = $this->init();
         $contact->setCreatedAt(new \DateTime());
 
         return $contact;
