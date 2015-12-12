@@ -1,9 +1,9 @@
-well_commerce_app:
+well_commerce_shop:
     services:
-        admin_menu:
+        shop:
             auto_services:
-                factory: WellCommerce\Bundle\AdminBundle\Factory\AdminMenuFactory
-                repository: WellCommerce\Bundle\AdminBundle\Repository\AdminMenuRepository
+                factory: WellCommerce\Bundle\ShopBundle\Factory\ShopFactory
+                repository: WellCommerce\Bundle\ShopBundle\Repository\ShopRepository
             orm_configuration:
-                mapping: "@WellCommerceAdminBundle/Resources/config/doctrine/AdminMenu.orm.yml"
-                entity: WellCommerce\Bundle\AdminBundle\Entity\AdminMenu
+                mapping: "@WellCommerceShopBundle/Resources/config/doctrine/Shop.orm.yml"
+                entity: WellCommerce\Bundle\ShopBundle\Entity\Shop
