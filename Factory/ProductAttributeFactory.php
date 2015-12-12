@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\ProductBundle\Factory;
 
 use WellCommerce\Bundle\AppBundle\Entity\DiscountablePrice;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
-use WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeInterface;
 
 /**
  * Class ProductAttributeFactory
@@ -24,11 +24,17 @@ use WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute;
 class ProductAttributeFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeInterface
+     * @var string
+     */
+    protected $supportsInterface = ProductAttributeInterface::class;
+
+    /**
+     * @return ProductAttributeInterface
      */
     public function create()
     {
-        $productAttribute = new ProductAttribute();
+        /** @var  $productAttribute ProductAttributeInterface */
+        $productAttribute = $this->init();
         $productAttribute->setHierarchy(0);
         $productAttribute->setModifierType('%');
         $productAttribute->setModifierValue(100);
