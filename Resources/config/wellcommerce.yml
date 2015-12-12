@@ -1,9 +1,13 @@
-well_commerce_app:
+well_commerce_coupon:
     services:
-        admin_menu:
+        coupon:
             auto_services:
-                factory: WellCommerce\Bundle\AdminBundle\Factory\AdminMenuFactory
-                repository: WellCommerce\Bundle\AdminBundle\Repository\AdminMenuRepository
+                factory: WellCommerce\Bundle\CouponBundle\Factory\CouponFactory
+                repository: WellCommerce\Bundle\CouponBundle\Repository\CouponRepository
             orm_configuration:
-                mapping: "@WellCommerceAdminBundle/Resources/config/doctrine/AdminMenu.orm.yml"
-                entity: WellCommerce\Bundle\AdminBundle\Entity\AdminMenu
+                mapping: "@WellCommerceCouponBundle/Resources/config/doctrine/Coupon.orm.yml"
+                entity: WellCommerce\Bundle\CouponBundle\Entity\Coupon
+        coupon_translation:
+            orm_configuration:
+                mapping: "@WellCommerceCouponBundle/Resources/config/doctrine/CouponTranslation.orm.yml"
+                entity: WellCommerce\Bundle\CouponBundle\Entity\CouponTranslation
