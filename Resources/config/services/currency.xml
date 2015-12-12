@@ -9,14 +9,6 @@
     </imports>
 
     <services>
-        <service id="currency.repository" class="WellCommerce\Bundle\CurrencyBundle\Repository\CurrencyRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
-            <argument>WellCommerceCurrencyBundle:Currency</argument>
-        </service>
-
-        <service id="currency_rate.repository" class="WellCommerce\Bundle\CurrencyBundle\Repository\CurrencyRateRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
-            <argument>WellCommerceCurrencyBundle:CurrencyRate</argument>
-        </service>
-
         <service id="currency.subscriber" class="WellCommerce\Bundle\CurrencyBundle\EventListener\CurrencySubscriber">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
@@ -43,8 +35,6 @@
             <argument type="service" id="currency.converter" />
             <argument type="service" id="currency.formatter"/>
         </service>
-
-        <service id="currency.factory" class="WellCommerce\Bundle\CurrencyBundle\Factory\CurrencyFactory" />
 
         <service id="currency.event_dispatcher" parent="core.event_dispatcher" public="false">
             <argument type="service" id="event_dispatcher" />
