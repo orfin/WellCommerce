@@ -9,7 +9,7 @@ WellCommerce\Bundle\AttributeBundle\Entity\Attribute:
                 strategy: AUTO
     manyToOne:
         attributeGroup:
-            targetEntity: WellCommerce\Bundle\AttributeBundle\Entity\Attribute\Group
+            targetEntity: WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroup
             fetch: LAZY
             inversedBy: attributes
             joinColumns:

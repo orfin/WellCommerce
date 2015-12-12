@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\AttributeBundle\Repository;
 
-use WellCommerce\Bundle\AttributeBundle\Entity\Attribute\GroupInterface;
+use WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroupInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**
@@ -25,9 +25,9 @@ interface AttributeRepositoryInterface extends RepositoryInterface
     /**
      * Returns all attributes for group
      *
-     * @param GroupInterface $attributeGroup
+     * @param AttributeGroupInterface $attributeGroup
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getCollectionByAttributeGroup(GroupInterface $attributeGroup);
+    public function getCollectionByAttributeGroup(AttributeGroupInterface $attributeGroup);
 }

@@ -1,4 +1,4 @@
-WellCommerce\Bundle\AttributeBundle\Entity\Attribute\GroupTranslation:
+WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroupTranslation:
     type: entity
     table: attribute_group_translation
     fields:

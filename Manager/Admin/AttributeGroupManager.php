@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\AttributeBundle\Manager\Admin;
 
 use Doctrine\Common\Collections\Criteria;
-use WellCommerce\Bundle\AttributeBundle\Entity\Attribute\GroupInterface;
+use WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroupInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
 
 /**
@@ -28,7 +28,7 @@ class AttributeGroupManager extends AbstractAdminManager
      *
      * @param $name
      *
-     * @return GroupInterface
+     * @return AttributeGroupInterface
      */
     public function createGroup($name)
     {
@@ -64,7 +64,7 @@ class AttributeGroupManager extends AbstractAdminManager
         $groups = $this->getGroupsCollection();
         $sets   = [];
 
-        $groups->map(function (GroupInterface $attributeGroup) use (&$sets) {
+        $groups->map(function (AttributeGroupInterface $attributeGroup) use (&$sets) {
             $sets[] = [
                 'id'               => $attributeGroup->getId(),
                 'name'             => $attributeGroup->translate()->getName(),

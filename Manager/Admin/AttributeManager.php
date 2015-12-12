@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\AttributeBundle\Manager\Admin;
 
 use Doctrine\Common\Collections\Criteria;
-use WellCommerce\Bundle\AttributeBundle\Entity\Attribute\GroupInterface;
+use WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroupInterface;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeInterface;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeValueInterface;
 use WellCommerce\Bundle\AttributeBundle\Exception\AttributeGroupNotFoundException;
@@ -127,7 +127,7 @@ class AttributeManager extends AbstractAdminManager
      *
      * @param int $id
      *
-     * @return GroupInterface
+     * @return AttributeGroupInterface
      */
     protected function findAttributeGroup($id)
     {
@@ -142,13 +142,13 @@ class AttributeManager extends AbstractAdminManager
     /**
      * Creates an attribute or returns the existing one
      *
-     * @param int            $id
-     * @param string         $name
-     * @param GroupInterface $group
+     * @param int                     $id
+     * @param string                  $name
+     * @param AttributeGroupInterface $group
      *
      * @return AttributeInterface
      */
-    public function getAttribute($id, $name, GroupInterface $group)
+    public function getAttribute($id, $name, AttributeGroupInterface $group)
     {
         $attribute = $this->repository->find($id);
         if (null === $attribute) {
@@ -161,12 +161,12 @@ class AttributeManager extends AbstractAdminManager
     /**
      * Creates an attribute
      *
-     * @param string         $name
-     * @param GroupInterface $group
+     * @param string                  $name
+     * @param AttributeGroupInterface $group
      *
      * @return \WellCommerce\Bundle\AttributeBundle\Entity\AttributeInterface
      */
-    protected function createNewAttribute($name, GroupInterface $group)
+    protected function createNewAttribute($name, AttributeGroupInterface $group)
     {
         $attribute = $this->initResource();
         $attribute->setAttributeGroup($group);

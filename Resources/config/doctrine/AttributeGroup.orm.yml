@@ -1,4 +1,4 @@
-WellCommerce\Bundle\AttributeBundle\Entity\Attribute\Group:
+WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroup:
     type: entity
     table: attribute_group
     repositoryClass: WellCommerce\Bundle\AttributeBundle\Repository\AttributeGroupRepository
