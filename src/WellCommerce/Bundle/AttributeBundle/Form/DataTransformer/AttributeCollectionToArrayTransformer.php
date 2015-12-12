@@ -13,9 +13,8 @@
 namespace WellCommerce\Bundle\AttributeBundle\Form\DataTransformer;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Util\Debug;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
-use WellCommerce\Bundle\AttributeBundle\Entity\Attribute\GroupInterface;
+use WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroupInterface;
 use WellCommerce\Bundle\AttributeBundle\Manager\Admin\AttributeManager;
 use WellCommerce\Bundle\AttributeBundle\Manager\Admin\AttributeValueManager;
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
@@ -64,7 +63,7 @@ class AttributeCollectionToArrayTransformer extends CollectionToArrayTransformer
             return $collection;
         }
 
-        if ($modelData instanceof GroupInterface) {
+        if ($modelData instanceof AttributeGroupInterface) {
             foreach ($value['editor'] as $attribute) {
                 $item = $this->findOrCreate($attribute, $modelData);
                 $collection->add($item);
@@ -79,7 +78,7 @@ class AttributeCollectionToArrayTransformer extends CollectionToArrayTransformer
     /**
      * {@inheritdoc}
      */
-    public function findOrCreate($data, GroupInterface $group)
+    public function findOrCreate($data, AttributeGroupInterface $group)
     {
         $id        = $this->propertyAccessor->getValue($data, '[id]');
         $name      = $this->propertyAccessor->getValue($data, '[name]');

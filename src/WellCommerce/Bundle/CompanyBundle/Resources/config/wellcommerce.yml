@@ -1,9 +1,13 @@
-well_commerce_app:
+well_commerce_company:
     services:
-        admin_menu:
+        company:
             auto_services:
-                factory: WellCommerce\Bundle\AdminBundle\Factory\AdminMenuFactory
-                repository: WellCommerce\Bundle\AdminBundle\Repository\AdminMenuRepository
+                factory: WellCommerce\Bundle\CompanyBundle\Factory\CompanyFactory
+                repository: WellCommerce\Bundle\CompanyBundle\Repository\CompanyRepository
             orm_configuration:
-                mapping: "@WellCommerceAdminBundle/Resources/config/doctrine/AdminMenu.orm.yml"
-                entity: WellCommerce\Bundle\AdminBundle\Entity\AdminMenu
+                mapping: "@WellCommerceCompanyBundle/Resources/config/doctrine/Company.orm.yml"
+                entity: WellCommerce\Bundle\CompanyBundle\Entity\Company
+        company_address:
+            orm_configuration:
+                mapping: "@WellCommerceCompanyBundle/Resources/config/doctrine/CompanyAddress.orm.yml"
+                entity: WellCommerce\Bundle\CompanyBundle\Entity\CompanyAddress

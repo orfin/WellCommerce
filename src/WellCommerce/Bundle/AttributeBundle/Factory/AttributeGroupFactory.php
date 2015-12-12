@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\AttributeBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use WellCommerce\Bundle\AttributeBundle\Entity\Attribute\Group;
+use WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroup;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 
 /**
@@ -24,11 +24,11 @@ use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 class AttributeGroupFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\AttributeBundle\Entity\Attribute\GroupInterface
+     * @return \WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroupInterface
      */
     public function create()
     {
-        $group = new Group();
+        $group = new AttributeGroup();
         $group->setAttributes(new ArrayCollection());
 
         return $group;

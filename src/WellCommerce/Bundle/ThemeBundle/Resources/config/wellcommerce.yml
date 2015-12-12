@@ -1,9 +1,16 @@
-well_commerce_app:
+well_commerce_theme:
     services:
-        admin_menu:
+        theme:
             auto_services:
-                factory: WellCommerce\Bundle\AdminBundle\Factory\AdminMenuFactory
-                repository: WellCommerce\Bundle\AdminBundle\Repository\AdminMenuRepository
+                factory: WellCommerce\Bundle\ThemeBundle\Factory\ThemeFactory
+                repository: WellCommerce\Bundle\ThemeBundle\Repository\ThemeRepository
             orm_configuration:
-                mapping: "@WellCommerceAdminBundle/Resources/config/doctrine/AdminMenu.orm.yml"
-                entity: WellCommerce\Bundle\AdminBundle\Entity\AdminMenu
+                mapping: "@WellCommerceThemeBundle/Resources/config/doctrine/Theme.orm.yml"
+                entity: WellCommerce\Bundle\ThemeBundle\Entity\Theme
+        theme_css:
+            auto_services:
+                factory: ~
+                repository: ~
+            orm_configuration:
+                mapping: "@WellCommerceThemeBundle/Resources/config/doctrine/ThemeCss.orm.yml"
+                entity: WellCommerce\Bundle\ThemeBundle\Entity\ThemeCss

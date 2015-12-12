@@ -9,12 +9,6 @@
    </imports>
 
     <services>
-        <service id="coupon.repository" class="WellCommerce\Bundle\CouponBundle\Repository\CouponRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
-            <argument>WellCommerceCouponBundle:Coupon</argument>
-        </service>
-
-        <service id="coupon.factory" class="WellCommerce\Bundle\CouponBundle\Factory\CouponFactory"/>
-
         <service id="coupon.event_dispatcher" parent="core.event_dispatcher" public="false">
             <argument type="service" id="event_dispatcher"/>
         </service>

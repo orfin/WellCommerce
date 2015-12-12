@@ -1,9 +1,9 @@
-well_commerce_app:
+well_commerce_wishlist:
     services:
-        admin_menu:
+        wishlist:
             auto_services:
-                factory: WellCommerce\Bundle\AdminBundle\Factory\AdminMenuFactory
-                repository: WellCommerce\Bundle\AdminBundle\Repository\AdminMenuRepository
+                factory: WellCommerce\Bundle\WishlistBundle\Factory\WishlistFactory
+                repository: WellCommerce\Bundle\WishlistBundle\Repository\WishlistRepository
             orm_configuration:
-                mapping: "@WellCommerceAdminBundle/Resources/config/doctrine/AdminMenu.orm.yml"
-                entity: WellCommerce\Bundle\AdminBundle\Entity\AdminMenu
+                mapping: "@WellCommerceWishlistBundle/Resources/config/doctrine/Wishlist.orm.yml"
+                entity: WellCommerce\Bundle\WishlistBundle\Entity\Wishlist

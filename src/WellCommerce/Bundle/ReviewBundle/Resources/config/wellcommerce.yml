@@ -1,9 +1,9 @@
-well_commerce_app:
+well_commerce_review:
     services:
-        admin_menu:
+        review:
             auto_services:
-                factory: WellCommerce\Bundle\AdminBundle\Factory\AdminMenuFactory
-                repository: WellCommerce\Bundle\AdminBundle\Repository\AdminMenuRepository
+                factory: WellCommerce\Bundle\ReviewBundle\Factory\ReviewFactory
+                repository: WellCommerce\Bundle\ReviewBundle\Repository\ReviewRepository
             orm_configuration:
-                mapping: "@WellCommerceAdminBundle/Resources/config/doctrine/AdminMenu.orm.yml"
-                entity: WellCommerce\Bundle\AdminBundle\Entity\AdminMenu
+                mapping: "@WellCommerceReviewBundle/Resources/config/doctrine/Review.orm.yml"
+                entity: WellCommerce\Bundle\ReviewBundle\Entity\Review

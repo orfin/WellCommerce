@@ -10,7 +10,6 @@ well_commerce_admin:
         role:
             auto_services:
                 factory: WellCommerce\Bundle\AdminBundle\Factory\RoleFactory
-                repository: ~
             orm_configuration:
                 mapping: "@WellCommerceAdminBundle/Resources/config/doctrine/Role.orm.yml"
                 entity: WellCommerce\Bundle\AdminBundle\Entity\Role
@@ -29,9 +28,6 @@ well_commerce_admin:
                 mapping: "@WellCommerceAdminBundle/Resources/config/doctrine/UserGroup.orm.yml"
                 entity: WellCommerce\Bundle\AdminBundle\Entity\UserGroup
         user_group_permission:
-            auto_services:
-                factory: ~
-                repository: ~
             orm_configuration:
                 mapping: "@WellCommerceAdminBundle/Resources/config/doctrine/UserGroupPermission.orm.yml"
                 entity: WellCommerce\Bundle\AdminBundle\Entity\UserGroupPermission

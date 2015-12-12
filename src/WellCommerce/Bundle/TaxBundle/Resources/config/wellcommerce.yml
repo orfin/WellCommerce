@@ -1,9 +1,16 @@
-well_commerce_app:
+well_commerce_tax:
     services:
-        admin_menu:
+        tax:
             auto_services:
-                factory: WellCommerce\Bundle\AdminBundle\Factory\AdminMenuFactory
-                repository: WellCommerce\Bundle\AdminBundle\Repository\AdminMenuRepository
+                factory: WellCommerce\Bundle\TaxBundle\Factory\TaxFactory
+                repository: WellCommerce\Bundle\TaxBundle\Repository\TaxRepository
             orm_configuration:
-                mapping: "@WellCommerceAdminBundle/Resources/config/doctrine/AdminMenu.orm.yml"
-                entity: WellCommerce\Bundle\AdminBundle\Entity\AdminMenu
+                mapping: "@WellCommerceTaxBundle/Resources/config/doctrine/Tax.orm.yml"
+                entity: WellCommerce\Bundle\TaxBundle\Entity\Tax
+        tax_translation:
+            auto_services:
+                factory: ~
+                repository: ~
+            orm_configuration:
+                mapping: "@WellCommerceTaxBundle/Resources/config/doctrine/TaxTranslation.orm.yml"
+                entity: WellCommerce\Bundle\TaxBundle\Entity\TaxTranslation

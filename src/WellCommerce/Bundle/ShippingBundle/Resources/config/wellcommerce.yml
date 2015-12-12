@@ -1,9 +1,23 @@
-well_commerce_app:
+well_commerce_shipping:
     services:
-        admin_menu:
+        shipping_method:
             auto_services:
-                factory: WellCommerce\Bundle\AdminBundle\Factory\AdminMenuFactory
-                repository: WellCommerce\Bundle\AdminBundle\Repository\AdminMenuRepository
+                factory: WellCommerce\Bundle\ShippingBundle\Factory\ShippingMethodFactory
+                repository: WellCommerce\Bundle\ShippingBundle\Repository\ShippingMethodRepository
             orm_configuration:
-                mapping: "@WellCommerceAdminBundle/Resources/config/doctrine/AdminMenu.orm.yml"
-                entity: WellCommerce\Bundle\AdminBundle\Entity\AdminMenu
+                mapping: "@WellCommerceShippingBundle/Resources/config/doctrine/ShippingMethod.orm.yml"
+                entity: WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethod
+        shipping_method_cost:
+            auto_services:
+                factory: ~
+                repository: WellCommerce\Bundle\ShippingBundle\Repository\ShippingMethodCostRepository
+            orm_configuration:
+                mapping: "@WellCommerceShippingBundle/Resources/config/doctrine/ShippingMethodCost.orm.yml"
+                entity: WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCost
+        shipping_method_translation:
+            auto_services:
+                factory: ~
+                repository: ~
+            orm_configuration:
+                mapping: "@WellCommerceShippingBundle/Resources/config/doctrine/ShippingMethodTranslation.orm.yml"
+                entity: WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodTranslation

@@ -1,9 +1,13 @@
-well_commerce_app:
+well_commerce_contact:
     services:
-        admin_menu:
+        contact:
             auto_services:
-                factory: WellCommerce\Bundle\AdminBundle\Factory\AdminMenuFactory
-                repository: WellCommerce\Bundle\AdminBundle\Repository\AdminMenuRepository
+                factory: WellCommerce\Bundle\ContactBundle\Factory\ContactFactory
+                repository: WellCommerce\Bundle\ContactBundle\Repository\ContactRepository
             orm_configuration:
-                mapping: "@WellCommerceAdminBundle/Resources/config/doctrine/AdminMenu.orm.yml"
-                entity: WellCommerce\Bundle\AdminBundle\Entity\AdminMenu
+                mapping: "@WellCommerceContactBundle/Resources/config/doctrine/Contact.orm.yml"
+                entity: WellCommerce\Bundle\ContactBundle\Entity\Contact
+        contact_translation:
+            orm_configuration:
+                mapping: "@WellCommerceContactBundle/Resources/config/doctrine/ContactTranslation.orm.yml"
+                entity: WellCommerce\Bundle\ContactBundle\Entity\ContactTranslation

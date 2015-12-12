@@ -37,12 +37,6 @@
             </call>
         </service>
 
-        <service id="layout_box.repository" class="WellCommerce\Bundle\LayoutBundle\Repository\LayoutBoxRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
-            <argument>WellCommerceLayoutBundle:LayoutBox</argument>
-        </service>
-
-        <service id="layout_box.factory" class="WellCommerce\Bundle\LayoutBundle\Factory\LayoutBoxFactory"/>
-
         <service id="layout_box.event_dispatcher" parent="core.event_dispatcher" public="false">
             <argument type="service" id="event_dispatcher"/>
         </service>

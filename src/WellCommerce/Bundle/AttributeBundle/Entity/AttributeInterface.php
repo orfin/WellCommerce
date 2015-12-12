@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\AttributeBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
-use WellCommerce\Bundle\AttributeBundle\Entity\Attribute\GroupInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
@@ -31,14 +30,14 @@ interface AttributeInterface extends TimestampableInterface, TranslatableInterfa
     public function getId();
 
     /**
-     * @return GroupInterface
+     * @return AttributeGroupInterface
      */
     public function getAttributeGroup();
 
     /**
-     * @param GroupInterface $attributeGroup
+     * @param AttributeGroupInterface $attributeGroup
      */
-    public function setAttributeGroup(GroupInterface $attributeGroup);
+    public function setAttributeGroup(AttributeGroupInterface $attributeGroup);
 
     /**
      * @return Collection

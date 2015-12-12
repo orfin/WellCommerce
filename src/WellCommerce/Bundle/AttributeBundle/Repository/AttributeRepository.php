@@ -13,7 +13,7 @@ namespace WellCommerce\Bundle\AttributeBundle\Repository;
 
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
-use WellCommerce\Bundle\AttributeBundle\Entity\Attribute\GroupInterface;
+use WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroupInterface;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeInterface;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeValueInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
@@ -28,7 +28,7 @@ class AttributeRepository extends AbstractEntityRepository implements AttributeR
     /**
      * {@inheritdoc}
      */
-    public function getCollectionByAttributeGroup(GroupInterface $attributeGroup)
+    public function getCollectionByAttributeGroup(AttributeGroupInterface $attributeGroup)
     {
         $criteria = new Criteria();
         $criteria->where($criteria->expr()->eq('attributeGroup', $attributeGroup));

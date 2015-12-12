@@ -1,9 +1,16 @@
-well_commerce_app:
+well_commerce_layout:
     services:
-        admin_menu:
+        layout_box:
             auto_services:
-                factory: WellCommerce\Bundle\AdminBundle\Factory\AdminMenuFactory
-                repository: WellCommerce\Bundle\AdminBundle\Repository\AdminMenuRepository
+                factory: WellCommerce\Bundle\LayoutBundle\Factory\LayoutBoxFactory
+                repository: WellCommerce\Bundle\LayoutBundle\Repository\LayoutBoxRepository
             orm_configuration:
-                mapping: "@WellCommerceAdminBundle/Resources/config/doctrine/AdminMenu.orm.yml"
-                entity: WellCommerce\Bundle\AdminBundle\Entity\AdminMenu
+                mapping: "@WellCommerceLayoutBundle/Resources/config/doctrine/LayoutBox.orm.yml"
+                entity: WellCommerce\Bundle\LayoutBundle\Entity\LayoutBox
+        layout_box_translation:
+            auto_services:
+                factory: ~
+                repository: ~
+            orm_configuration:
+                mapping: "@WellCommerceLayoutBundle/Resources/config/doctrine/LayoutBoxTranslation.orm.yml"
+                entity: WellCommerce\Bundle\LayoutBundle\Entity\LayoutBoxTranslation

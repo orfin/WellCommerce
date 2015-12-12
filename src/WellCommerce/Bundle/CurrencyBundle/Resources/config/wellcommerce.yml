@@ -1,9 +1,16 @@
-well_commerce_app:
+well_commerce_currency:
     services:
-        admin_menu:
+        currency:
             auto_services:
-                factory: WellCommerce\Bundle\AdminBundle\Factory\AdminMenuFactory
-                repository: WellCommerce\Bundle\AdminBundle\Repository\AdminMenuRepository
+                factory: WellCommerce\Bundle\CurrencyBundle\Factory\CurrencyFactory
+                repository: WellCommerce\Bundle\CurrencyBundle\Repository\CurrencyRepository
             orm_configuration:
-                mapping: "@WellCommerceAdminBundle/Resources/config/doctrine/AdminMenu.orm.yml"
-                entity: WellCommerce\Bundle\AdminBundle\Entity\AdminMenu
+                mapping: "@WellCommerceCurrencyBundle/Resources/config/doctrine/Currency.orm.yml"
+                entity: WellCommerce\Bundle\CurrencyBundle\Entity\Currency
+        currency_rate:
+            auto_services:
+                factory: WellCommerce\Bundle\CurrencyBundle\Factory\CurrencyRateFactory
+                repository: WellCommerce\Bundle\CurrencyBundle\Repository\CurrencyRateRepository
+            orm_configuration:
+                mapping: "@WellCommerceCurrencyBundle/Resources/config/doctrine/CurrencyRate.orm.yml"
+                entity: WellCommerce\Bundle\CurrencyBundle\Entity\CurrencyRate

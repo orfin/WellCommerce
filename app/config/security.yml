@@ -39,9 +39,9 @@ security:
 
     providers:
         administrators:
-            entity: { class: WellCommerceAdminBundle:User }
+            entity: { class: WellCommerce\Bundle\AdminBundle\Entity\User }
         clients:
-            entity: { class: WellCommerceClientBundle:Client }
+            entity: { class: WellCommerce\Bundle\ClientBundle\Entity\Client }
 
     encoders:
         WellCommerce\Bundle\AdminBundle\Entity\User:

@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AttributeBundle\Entity\Attribute;
+namespace WellCommerce\Bundle\AttributeBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeInterface;
@@ -23,7 +23,7 @@ use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface GroupInterface extends TimestampableInterface, TranslatableInterface, BlameableInterface
+interface AttributeGroupInterface extends TimestampableInterface, TranslatableInterface, BlameableInterface
 {
     /**
      * @return int

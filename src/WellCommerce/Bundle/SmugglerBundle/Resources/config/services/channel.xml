@@ -22,12 +22,6 @@
             </call>
         </service>
 
-        <service id="channel.repository" class="WellCommerce\Bundle\SmugglerBundle\Repository\ChannelRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
-            <argument>WellCommerceSmugglerBundle:Channel</argument>
-        </service>
-
-        <service id="channel.factory" class="WellCommerce\Bundle\SmugglerBundle\Factory\ChannelFactory"/>
-
         <service id="channel.event_dispatcher" parent="core.event_dispatcher" public="false">
             <argument type="service" id="event_dispatcher"/>
         </service>

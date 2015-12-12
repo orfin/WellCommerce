@@ -20,8 +20,6 @@
             </call>
         </service>
 
-        <service id="package.factory" class="WellCommerce\Bundle\SmugglerBundle\Factory\PackageFactory"/>
-
         <service id="package.event_dispatcher" parent="core.event_dispatcher" public="false">
             <argument type="service" id="event_dispatcher"/>
         </service>
@@ -31,10 +29,6 @@
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
-        </service>
-
-        <service id="package.repository" class="WellCommerce\Bundle\SmugglerBundle\Repository\PackageRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
-            <argument>WellCommerceSmugglerBundle:Package</argument>
         </service>
 
         <service id="package.dataset.query_builder" class="WellCommerce\Bundle\SmugglerBundle\DataSet\Admin\PackageDataSetQueryBuilder" public="false">

@@ -16,7 +16,6 @@ use Doctrine\Common\Collections\Collection;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
-use WellCommerce\Bundle\AttributeBundle\Entity\Attribute\GroupInterface;
 
 /**
  * Class Attribute
@@ -35,7 +34,7 @@ class Attribute implements AttributeInterface
     protected $id;
 
     /**
-     * @var GroupInterface
+     * @var AttributeGroupInterface
      */
     protected $attributeGroup;
 
@@ -63,7 +62,7 @@ class Attribute implements AttributeInterface
     /**
      * {@inheritdoc}
      */
-    public function setAttributeGroup(GroupInterface $attributeGroup)
+    public function setAttributeGroup(AttributeGroupInterface $attributeGroup)
     {
         $this->attributeGroup = $attributeGroup;
     }

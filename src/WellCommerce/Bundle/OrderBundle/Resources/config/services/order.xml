@@ -9,27 +9,15 @@
     </imports>
 
     <services>
-        <service id="order.repository" class="WellCommerce\Bundle\OrderBundle\Repository\OrderRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
-            <argument>WellCommerceOrderBundle:Order</argument>
-        </service>
+        <!--<service id="order.factory" class="WellCommerce\Bundle\OrderBundle\Factory\OrderFactory">-->
+            <!--<argument type="service" id="order_product.factory"/>-->
+            <!--<argument type="service" id="order_total.factory"/>-->
+            <!--<argument type="service" id="currency.helper"/>-->
+        <!--</service>-->
 
-        <service id="order_product.repository" class="WellCommerce\Bundle\OrderBundle\Repository\OrderProductRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
-            <argument>WellCommerceOrderBundle:OrderProduct</argument>
-        </service>
-
-        <service id="order.factory" class="WellCommerce\Bundle\OrderBundle\Factory\OrderFactory">
-            <argument type="service" id="order_product.factory"/>
-            <argument type="service" id="order_total.factory"/>
-            <argument type="service" id="currency.helper"/>
-        </service>
-
-        <service id="order_product.factory" class="WellCommerce\Bundle\OrderBundle\Factory\OrderProductFactory">
-            <argument type="service" id="currency.helper"/>
-        </service>
-
-        <service id="order_total.factory" class="WellCommerce\Bundle\OrderBundle\Factory\OrderTotalFactory" />
-
-        <service id="order_total_detail.factory" class="WellCommerce\Bundle\OrderBundle\Factory\OrderTotalDetailFactory"/>
+        <!--<service id="order_product.factory" class="WellCommerce\Bundle\OrderBundle\Factory\OrderProductFactory">-->
+            <!--<argument type="service" id="currency.helper"/>-->
+        <!--</service>-->
 
         <service id="order.event_dispatcher" class="WellCommerce\Bundle\OrderBundle\EventDispatcher\OrderEventDispatcher">
             <argument type="service" id="event_dispatcher"/>
