@@ -1,3 +1,8 @@
+doctrine:
+    orm:
+        resolve_target_entities:
+            WellCommerce\Bundle\CartBundle\Entity\CartProductInterface: WellCommerce\Bundle\CartBundle\Entity\CartProduct
+
 well_commerce_cart:
     services:
         cart:
