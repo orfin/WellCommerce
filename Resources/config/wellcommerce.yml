@@ -1,9 +1,9 @@
-well_commerce_app:
+well_commerce_locale:
     services:
-        admin_menu:
+        locale:
             auto_services:
-                factory: WellCommerce\Bundle\AdminBundle\Factory\AdminMenuFactory
-                repository: WellCommerce\Bundle\AdminBundle\Repository\AdminMenuRepository
+                factory: WellCommerce\Bundle\LocaleBundle\Factory\LocaleFactory
+                repository: WellCommerce\Bundle\LocaleBundle\Repository\LocaleRepository
             orm_configuration:
-                mapping: "@WellCommerceAdminBundle/Resources/config/doctrine/AdminMenu.orm.yml"
-                entity: WellCommerce\Bundle\AdminBundle\Entity\AdminMenu
+                mapping: "@WellCommerceLocaleBundle/Resources/config/doctrine/Locale.orm.yml"
+                entity: WellCommerce\Bundle\LocaleBundle\Entity\Locale
