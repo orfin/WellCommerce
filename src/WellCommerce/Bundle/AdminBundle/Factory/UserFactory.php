@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\AdminBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use WellCommerce\Bundle\AdminBundle\Entity\User;
+use WellCommerce\Bundle\AdminBundle\Entity\UserInterface;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 
 /**
@@ -24,11 +24,16 @@ use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 class UserFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\AdminBundle\Entity\UserInterface
+     * @var string
+     */
+    protected $supportsInterface = UserInterface::class;
+
+    /**
+     * @return UserInterface
      */
     public function create()
     {
-        $user = new User();
+        $user = $this->init();
         $user->setEnabled(true);
         $user->setRoles(new ArrayCollection());
         $user->setGroups(new ArrayCollection());

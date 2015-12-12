@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\AdminBundle\Factory;
 
 use WellCommerce\Bundle\AdminBundle\Entity\UserGroup;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\Bundle\AdminBundle\Entity\UserGroupInterface;
 
 /**
  * Class UserGroupFactory
@@ -23,11 +24,16 @@ use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 class UserGroupFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\AdminBundle\Entity\UserGroupInterface
+     * @var string
+     */
+    protected $supportsInterface = UserGroupInterface::class;
+
+    /**
+     * @return UserGroupInterface
      */
     public function create()
     {
-        $group = new UserGroup();
+        $group = $this->init();
 
         return $group;
     }

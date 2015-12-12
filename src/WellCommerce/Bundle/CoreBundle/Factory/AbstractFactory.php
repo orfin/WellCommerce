@@ -20,7 +20,56 @@ namespace WellCommerce\Bundle\CoreBundle\Factory;
 abstract class AbstractFactory implements FactoryInterface
 {
     /**
+     * @var string
+     */
+    protected $supportsInterface;
+
+    /**
+     * @var string
+     */
+    protected $className;
+
+    /**
+     * AbstractFactory constructor.
+     *
+     * @param string $className
+     */
+    public function __construct($className)
+    {
+        $this->className = $className;
+    }
+
+    /**
+     * @return object
+     */
+    protected function init()
+    {
+        if (!$this->isSupported()) {
+            throw new \LogicException(sprintf(
+                'Factory "%s" supports only instances of "%s". "%s" given',
+                get_class($this),
+                $this->supportsInterface,
+                $this->className
+            ));
+        }
+
+        return new $this->className;
+    }
+
+    /**
      * {@inheritdoc}
      */
     abstract public function create();
+
+    /**
+     * Checks whether the factory supports given entity class
+     *
+     * @return bool
+     */
+    protected function isSupported()
+    {
+        $rc = new \ReflectionClass($this->className);
+
+        return $rc->implementsInterface($this->supportsInterface);
+    }
 }

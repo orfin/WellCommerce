@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\CartBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use WellCommerce\Bundle\CartBundle\Entity\Cart;
+use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 use WellCommerce\Bundle\CartBundle\Entity\CartTotals;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 use WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface;
@@ -25,12 +25,14 @@ use WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface;
  */
 class CartFactory extends AbstractFactory implements FactoryInterface
 {
+    protected $supportsInterface = CartInterface::class;
+
     /**
-     * @return \WellCommerce\Bundle\CartBundle\Entity\CartInterface
+     * @return CartInterface
      */
     public function create()
     {
-        $cart = new Cart();
+        $cart = $this->init();
         $cart->setProducts(new ArrayCollection());
         $cart->setTotals(new CartTotals());
         $cart->setShippingMethodCost(null);
