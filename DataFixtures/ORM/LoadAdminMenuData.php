@@ -28,21 +28,15 @@ class LoadAdminMenuData extends AbstractDataFixture
      */
     public function load(ObjectManager $manager)
     {
-        $reflection = new \ReflectionClass($this);
-        $directory  = dirname($reflection->getFileName());
-        $locator    = new FileLocator($directory . '/../../Resources/config/admin_menu');
-
-        $importer = $this->container->get('admin_menu.importer.xml');
-
-        $importer->import('catalog.xml', $locator);
-        $importer->import('cms.xml', $locator);
-        $importer->import('configuration.xml', $locator);
-        $importer->import('crm.xml', $locator);
-        $importer->import('dashboard.xml', $locator);
-        $importer->import('integration.xml', $locator);
-        $importer->import('layout.xml', $locator);
-        $importer->import('promotions.xml', $locator);
-        $importer->import('reports.xml', $locator);
-        $importer->import('sales.xml', $locator);
+        $this->importAdminMenuConfiguration('catalog.xml');
+        $this->importAdminMenuConfiguration('cms.xml');
+        $this->importAdminMenuConfiguration('configuration.xml');
+        $this->importAdminMenuConfiguration('crm.xml');
+        $this->importAdminMenuConfiguration('dashboard.xml');
+        $this->importAdminMenuConfiguration('integration.xml');
+        $this->importAdminMenuConfiguration('layout.xml');
+        $this->importAdminMenuConfiguration('promotions.xml');
+        $this->importAdminMenuConfiguration('reports.xml');
+        $this->importAdminMenuConfiguration('sales.xml');
     }
 }
