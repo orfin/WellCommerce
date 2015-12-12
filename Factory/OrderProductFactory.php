@@ -24,23 +24,8 @@ use WellCommerce\Bundle\OrderBundle\Entity\OrderProduct;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class OrderProductFactory extends AbstractFactory implements OrderProductFactoryInterface
+class OrderProductFactory extends AbstractFactory
 {
-    /**
-     * @var CurrencyHelperInterface
-     */
-    protected $currencyHelper;
-
-    /**
-     * OrderProductFactory constructor.
-     *
-     * @param CurrencyHelperInterface $currencyHelper
-     */
-    public function __construct(CurrencyHelperInterface $currencyHelper)
-    {
-        $this->currencyHelper = $currencyHelper;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -49,39 +34,6 @@ class OrderProductFactory extends AbstractFactory implements OrderProductFactory
         $orderProduct = new OrderProduct();
         $orderProduct->setQuantity(0);
         $orderProduct->setWeight(0);
-
-        return $orderProduct;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function createFromCartProduct(CartProductInterface $cartProduct, OrderInterface $order)
-    {
-        $orderProduct   = new OrderProduct();
-        $product        = $cartProduct->getProduct();
-        $attribute      = $cartProduct->getAttribute();
-        $sellPrice      = $cartProduct->getSellPrice();
-        $baseCurrency   = $sellPrice->getCurrency();
-        $targetCurrency = $order->getCurrency();
-
-        $grossAmount = $this->currencyHelper->convert($sellPrice->getFinalGrossAmount(), $baseCurrency, $targetCurrency);
-        $netAmount   = $this->currencyHelper->convert($sellPrice->getFinalNetAmount(), $baseCurrency, $targetCurrency);
-        $taxAmount   = $this->currencyHelper->convert($sellPrice->getFinalTaxAmount(), $baseCurrency, $targetCurrency);
-
-        $sellPrice = new Price();
-        $sellPrice->setGrossAmount($grossAmount);
-        $sellPrice->setNetAmount($netAmount);
-        $sellPrice->setTaxAmount($taxAmount);
-        $sellPrice->setTaxRate($sellPrice->getTaxRate());
-        $sellPrice->setCurrency($targetCurrency);
-
-        $orderProduct->setSellPrice($sellPrice);
-        $orderProduct->setBuyPrice($product->getBuyPrice());
-        $orderProduct->setQuantity($cartProduct->getQuantity());
-        $orderProduct->setWeight($cartProduct->getWeight());
-        $orderProduct->setProductAttribute($attribute);
-        $orderProduct->setProduct($product);
 
         return $orderProduct;
     }

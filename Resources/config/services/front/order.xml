@@ -11,6 +11,15 @@
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
+            <call method="setCartManager">
+                <argument type="service" id="cart.manager.front"/>
+            </call>
+            <call method="setOrderProductFactory">
+                <argument type="service" id="order_product.factory"/>
+            </call>
+            <call method="setOrderTotalFactory">
+                <argument type="service" id="order_total.factory"/>
+            </call>
         </service>
 
         <service id="order_address.manager.front" class="WellCommerce\Bundle\OrderBundle\Manager\Front\OrderAddressManager">
@@ -28,9 +37,6 @@
             <argument type="service" id="order.event_dispatcher"/>
             <argument type="service" id="order.factory"/>
             <argument type="service" id="order_confirmation.form_builder.front"/>
-            <call method="setCartManager">
-                <argument type="service" id="cart.manager.front"/>
-            </call>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
