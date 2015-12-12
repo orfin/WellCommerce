@@ -12,10 +12,7 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Manager\Front;
 
-use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
-use WellCommerce\Bundle\CartBundle\Manager\Front\CartManagerInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
-use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 
 /**
  * Class OrderConfirmationManager
@@ -24,54 +21,5 @@ use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
  */
 class OrderConfirmationManager extends AbstractFrontManager
 {
-    /**
-     * @var \WellCommerce\Bundle\OrderBundle\Factory\OrderFactoryInterface
-     */
-    protected $factory;
 
-    /**
-     * @var \WellCommerce\Bundle\OrderBundle\EventDispatcher\OrderEventDispatcherInterface
-     */
-    protected $eventDispatcher;
-
-    /**
-     * @var CartManagerInterface
-     */
-    protected $cartManager;
-
-    /**
-     * @param CartManagerInterface $cartManager
-     */
-    public function setCartManager(CartManagerInterface $cartManager)
-    {
-        $this->cartManager = $cartManager;
-    }
-
-    /**
-     * Prepares the order
-     *
-     * @param CartInterface $cart
-     *
-     * @return OrderInterface
-     */
-    public function prepareOrder(CartInterface $cart)
-    {
-        $order = $this->factory->createOrderFromCart($cart);
-
-        $this->eventDispatcher->dispatchOnPostOrderPrepared($order);
-
-        return $order;
-    }
-
-    /**
-     * @param OrderInterface $order
-     */
-    public function saveOrder(OrderInterface $order)
-    {
-        $this->createResource($order);
-        $cart = $this->getCartContext()->getCurrentCart();
-        $this->cartManager->abandonCart($cart);
-
-        $this->getRequestHelper()->setSessionAttribute('orderId', $order->getId());
-    }
 }

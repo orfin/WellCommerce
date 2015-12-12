@@ -22,11 +22,6 @@ use WellCommerce\Bundle\CoreBundle\Service\Breadcrumb\BreadcrumbItem;
  */
 class ConfirmationController extends AbstractFrontController
 {
-    /**
-     * @var \WellCommerce\Bundle\OrderBundle\Manager\Front\OrderConfirmationManager
-     */
-    protected $manager;
-
     public function indexAction()
     {
         $cart = $this->manager->getCartContext()->getCurrentCart();
@@ -39,12 +34,13 @@ class ConfirmationController extends AbstractFrontController
             'name' => $this->trans('order.heading.confirmation'),
         ]));
 
-        $order = $this->manager->prepareOrder($cart);
-        $form  = $this->manager->getForm($order);
+        $orderManager = $this->getOrderManager();
+        $order        = $orderManager->prepareOrderFromCart($cart);
+        $form         = $this->manager->getForm($order);
 
         if ($form->handleRequest()->isSubmitted()) {
             if ($form->isValid()) {
-                $this->manager->saveOrder($order);
+                $orderManager->saveOrder($order);
 
                 return $this->redirectToRoute('front.payment.index');
             }
@@ -60,5 +56,13 @@ class ConfirmationController extends AbstractFrontController
             'summary'  => $this->get('cart_summary.collector')->collect($cart),
             'order'    => $order
         ]);
+    }
+
+    /**
+     * @return \WellCommerce\Bundle\OrderBundle\Manager\Front\OrderManager
+     */
+    protected function getOrderManager()
+    {
+        return $this->get('order.manager.front');
     }
 }
