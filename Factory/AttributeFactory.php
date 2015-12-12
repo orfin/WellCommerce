@@ -15,6 +15,7 @@ namespace WellCommerce\Bundle\AttributeBundle\Factory;
 use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\Bundle\AttributeBundle\Entity\Attribute;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\Bundle\AttributeBundle\Entity\AttributeInterface;
 
 /**
  * Class AttributeFactory
@@ -24,11 +25,17 @@ use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 class AttributeFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\AttributeBundle\Entity\AttributeInterface
+     * @var string
+     */
+    protected $supportsInterface = AttributeInterface::class;
+
+    /**
+     * @return AttributeInterface
      */
     public function create()
     {
-        $attribute = new Attribute();
+        /** @var $attribute AttributeInterface */
+        $attribute = $this->init();
         $attribute->setValues(new ArrayCollection());
 
         return $attribute;

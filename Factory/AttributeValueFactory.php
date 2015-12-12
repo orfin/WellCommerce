@@ -15,6 +15,7 @@ namespace WellCommerce\Bundle\AttributeBundle\Factory;
 use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeValue;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\Bundle\AttributeBundle\Entity\AttributeValueInterface;
 
 /**
  * Class AttributeValueFactory
@@ -24,11 +25,17 @@ use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 class AttributeValueFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\AttributeBundle\Entity\AttributeValueInterface
+     * @var string
+     */
+    protected $supportsInterface = AttributeValueInterface::class;
+
+    /**
+     * @return AttributeValueInterface
      */
     public function create()
     {
-        $value = new AttributeValue();
+        /** @var $value AttributeValueInterface */
+        $value = $this->init();
         $value->setProductAttributeValues(new ArrayCollection());
 
         return $value;
