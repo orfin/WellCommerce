@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\CartBundle\Factory;
 
-use WellCommerce\Bundle\CartBundle\Entity\CartTotals;
+use WellCommerce\Bundle\CartBundle\Entity\CartTotalsInterface;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 
 /**
@@ -23,11 +23,17 @@ use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 class CartTotalsFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\CartBundle\Entity\CartTotalsInterface
+     * @var string
+     */
+    protected $supportsInterface = CartTotalsInterface::class;
+
+    /**
+     * @return CartTotalsInterface
      */
     public function create()
     {
-        $totals = new CartTotals();
+        /** @var $totals CartTotalsInterface */
+        $totals = $this->init();
         $totals->setQuantity(0);
         $totals->setGrossPrice(0);
         $totals->setNetPrice(0);
