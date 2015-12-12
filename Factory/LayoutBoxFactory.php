@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\LayoutBundle\Factory;
 
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
-use WellCommerce\Bundle\LayoutBundle\Entity\LayoutBox;
+use WellCommerce\Bundle\LayoutBundle\Entity\LayoutBoxInterface;
 
 /**
  * Class LayoutBoxFactory
@@ -23,11 +23,17 @@ use WellCommerce\Bundle\LayoutBundle\Entity\LayoutBox;
 class LayoutBoxFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\LayoutBundle\Entity\LayoutBoxInterface
+     * @var string
+     */
+    protected $supportsInterface = LayoutBoxInterface::class;
+
+    /**
+     * @return LayoutBoxInterface
      */
     public function create()
     {
-        $box = new LayoutBox();
+        /** @var $box LayoutBoxInterface */
+        $box = $this->init();
         $box->setIdentifier('');
 
         return $box;
