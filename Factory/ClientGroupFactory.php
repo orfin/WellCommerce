@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\ClientBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use WellCommerce\Bundle\ClientBundle\Entity\ClientGroup;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientGroupInterface;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 
 /**
@@ -24,11 +24,17 @@ use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 class ClientGroupFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\ClientBundle\Entity\ClientGroupInterface
+     * @var string
+     */
+    protected $supportsInterface = ClientGroupInterface::class;
+
+    /**
+     * @return ClientGroupInterface
      */
     public function create()
     {
-        $clientGroup = new ClientGroup();
+        /** @var $clientGroup ClientGroupInterface */
+        $clientGroup = $this->init();
         $clientGroup->setDiscount(0);
         $clientGroup->setClients(new ArrayCollection());
         $clientGroup->setPages(new ArrayCollection());

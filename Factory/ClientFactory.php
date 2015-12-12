@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\ClientBundle\Factory;
 
-use WellCommerce\Bundle\ClientBundle\Entity\Client;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetails;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 
 /**
@@ -24,11 +24,17 @@ use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 class ClientFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\ClientBundle\Entity\ClientInterface
+     * @var string
+     */
+    protected $supportsInterface = ClientInterface::class;
+
+    /**
+     * @return ClientInterface
      */
     public function create()
     {
-        $client = new Client();
+        /** @var $client ClientInterface */
+        $client = $this->init();
         $client->setContactDetails(new ClientContactDetails());
         $client->setConditionsAccepted(true);
         $client->setDiscount(0);
