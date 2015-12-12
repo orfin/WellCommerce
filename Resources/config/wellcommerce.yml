@@ -1,9 +1,23 @@
-well_commerce_app:
+well_commerce_product_status:
     services:
-        admin_menu:
+        product_status:
             auto_services:
-                factory: WellCommerce\Bundle\AdminBundle\Factory\AdminMenuFactory
-                repository: WellCommerce\Bundle\AdminBundle\Repository\AdminMenuRepository
+                factory: WellCommerce\Bundle\ProductStatusBundle\Factory\ProductStatusFactory
+                repository: WellCommerce\Bundle\ProductStatusBundle\Repository\ProductStatusRepository
             orm_configuration:
-                mapping: "@WellCommerceAdminBundle/Resources/config/doctrine/AdminMenu.orm.yml"
-                entity: WellCommerce\Bundle\AdminBundle\Entity\AdminMenu
+                mapping: "@WellCommerceProductStatusBundle/Resources/config/doctrine/ProductStatus.orm.yml"
+                entity: WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatus
+        product_status_route:
+            auto_services:
+                factory: ~
+                repository: ~
+            orm_configuration:
+                mapping: "@WellCommerceProductStatusBundle/Resources/config/doctrine/ProductStatusRoute.orm.yml"
+                entity: WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusRoute
+        product_status_translation:
+            auto_services:
+                factory: ~
+                repository: ~
+            orm_configuration:
+                mapping: "@WellCommerceProductStatusBundle/Resources/config/doctrine/ProductStatusTranslation.orm.yml"
+                entity: WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusTranslation
