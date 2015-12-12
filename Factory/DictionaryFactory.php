@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\DictionaryBundle\Factory;
 
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
-use WellCommerce\Bundle\DictionaryBundle\Entity\Dictionary;
+use WellCommerce\Bundle\DictionaryBundle\Entity\DictionaryInterface;
 
 /**
  * Class DictionaryFactory
@@ -23,11 +23,18 @@ use WellCommerce\Bundle\DictionaryBundle\Entity\Dictionary;
 class DictionaryFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\DictionaryBundle\Entity\DictionaryInterface
+     * @var string
+     */
+    protected $supportsInterface = DictionaryInterface::class;
+
+    /**
+     * @return DictionaryInterface
      */
     public function create()
     {
-        $dictionary = new Dictionary();
+        /** @var $dictionary DictionaryInterface */
+        $dictionary = $this->init();
+        $dictionary->setIdentifier('');
 
         return $dictionary;
     }

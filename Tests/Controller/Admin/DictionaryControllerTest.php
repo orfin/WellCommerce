@@ -13,8 +13,8 @@
 namespace WellCommerce\Bundle\DictionaryBundle\Tests\Controller\Admin;
 
 use Doctrine\Common\Collections\Criteria;
-use WellCommerce\Bundle\DictionaryBundle\Entity\DictionaryInterface;
 use WellCommerce\Bundle\CoreBundle\Test\Controller\Admin\AbstractAdminControllerTestCase;
+use WellCommerce\Bundle\DictionaryBundle\Entity\DictionaryInterface;
 
 /**
  * Class DictionaryControllerTest

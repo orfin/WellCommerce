@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\DictionaryBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use WellCommerce\Bundle\AttributeBundle\DependencyInjection\WellCommerceAttributeExtension;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\Compiler\AbstractAutoRegisterServicesPass;
 use WellCommerce\Bundle\DictionaryBundle\DependencyInjection\WellCommerceDictionaryExtension;
 
