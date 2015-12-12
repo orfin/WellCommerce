@@ -15,7 +15,7 @@ namespace WellCommerce\Bundle\ShopBundle\Factory;
 use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\Bundle\AppBundle\Entity\MailerConfiguration;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
-use WellCommerce\Bundle\ShopBundle\Entity\Shop;
+use WellCommerce\Bundle\ShopBundle\Entity\ShopInterface;
 
 /**
  * Class ShopFactory
@@ -25,11 +25,17 @@ use WellCommerce\Bundle\ShopBundle\Entity\Shop;
 class ShopFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\ShopBundle\Entity\ShopInterface
+     * @var string
+     */
+    protected $supportsInterface = ShopInterface::class;
+
+    /**
+     * @return ShopInterface
      */
     public function create()
     {
-        $shop = new Shop();
+        /** @var  $shop ShopInterface */
+        $shop = $this->init();
         $shop->setProducts(new ArrayCollection());
         $shop->setCategories(new ArrayCollection());
         $shop->setPages(new ArrayCollection());
