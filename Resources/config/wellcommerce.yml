@@ -1,9 +1,37 @@
-well_commerce_app:
+well_commerce_product:
     services:
-        admin_menu:
+        product:
             auto_services:
-                factory: WellCommerce\Bundle\AdminBundle\Factory\AdminMenuFactory
-                repository: WellCommerce\Bundle\AdminBundle\Repository\AdminMenuRepository
+                factory: WellCommerce\Bundle\ProductBundle\Factory\ProductFactory
+                repository: WellCommerce\Bundle\ProductBundle\Repository\ProductRepository
             orm_configuration:
-                mapping: "@WellCommerceAdminBundle/Resources/config/doctrine/AdminMenu.orm.yml"
-                entity: WellCommerce\Bundle\AdminBundle\Entity\AdminMenu
+                mapping: "@WellCommerceProductBundle/Resources/config/doctrine/Product.orm.yml"
+                entity: WellCommerce\Bundle\ProductBundle\Entity\Product
+        product_attribute:
+            auto_services:
+                factory: WellCommerce\Bundle\ProductBundle\Factory\ProductAttributeFactory
+                repository: WellCommerce\Bundle\ProductBundle\Repository\ProductAttributeRepository
+            orm_configuration:
+                mapping: "@WellCommerceProductBundle/Resources/config/doctrine/ProductAttribute.orm.yml"
+                entity: WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute
+        product_photo:
+            auto_services:
+                factory: ~
+                repository: WellCommerce\Bundle\ProductBundle\Repository\ProductPhotoRepository
+            orm_configuration:
+                mapping: "@WellCommerceProductBundle/Resources/config/doctrine/ProductPhoto.orm.yml"
+                entity: WellCommerce\Bundle\ProductBundle\Entity\ProductPhoto
+        product_route:
+            auto_services:
+                factory: ~
+                repository: ~
+            orm_configuration:
+                mapping: "@WellCommerceProductBundle/Resources/config/doctrine/ProductRoute.orm.yml"
+                entity: WellCommerce\Bundle\ProductBundle\Entity\ProductRoute
+        product_translation:
+            auto_services:
+                factory: ~
+                repository: ~
+            orm_configuration:
+                mapping: "@WellCommerceProductBundle/Resources/config/doctrine/ProductTranslation.orm.yml"
+                entity: WellCommerce\Bundle\ProductBundle\Entity\ProductTranslation

@@ -16,7 +16,7 @@ use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\AppBundle\Entity\Dimension;
 use WellCommerce\Bundle\AppBundle\Entity\DiscountablePrice;
 use WellCommerce\Bundle\AppBundle\Entity\Price;
-use WellCommerce\Bundle\AttributeBundle\Entity\Attribute\GroupInterface;
+use WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroupInterface;
 use WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityAwareInterface;
 use WellCommerce\Bundle\CategoryBundle\Entity\CategoryInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
@@ -169,14 +169,14 @@ interface ProductInterface extends
     public function setPackageSize($packageSize);
 
     /**
-     * @return GroupInterface
+     * @return AttributeGroupInterface
      */
     public function getAttributeGroup();
 
     /**
-     * @param GroupInterface $attributeGroup
+     * @param AttributeGroupInterface $attributeGroup
      */
-    public function setAttributeGroup(GroupInterface $attributeGroup);
+    public function setAttributeGroup(AttributeGroupInterface $attributeGroup);
 
     /**
      * @return Collection

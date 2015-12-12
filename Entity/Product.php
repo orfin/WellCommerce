@@ -22,7 +22,7 @@ use WellCommerce\Bundle\AppBundle\Entity\Dimension;
 use WellCommerce\Bundle\AppBundle\Entity\DiscountablePrice;
 use WellCommerce\Bundle\AppBundle\Entity\HierarchyAwareTrait;
 use WellCommerce\Bundle\AppBundle\Entity\Price;
-use WellCommerce\Bundle\AttributeBundle\Entity\Attribute\GroupInterface;
+use WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroupInterface;
 use WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityAwareTrait;
 use WellCommerce\Bundle\CategoryBundle\Entity\CategoryInterface;
 use WellCommerce\Bundle\ProducerBundle\Entity\ProducerAwareTrait;
@@ -109,7 +109,7 @@ class Product implements ProductInterface
     protected $sellPriceTax;
 
     /**
-     * @var GroupInterface
+     * @var AttributeGroupInterface
      */
     protected $attributeGroup;
 
@@ -344,7 +344,7 @@ class Product implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function setAttributeGroup(GroupInterface $attributeGroup)
+    public function setAttributeGroup(AttributeGroupInterface $attributeGroup)
     {
         $this->attributeGroup = $attributeGroup;
     }

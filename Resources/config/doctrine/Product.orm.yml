@@ -88,7 +88,7 @@ WellCommerce\Bundle\ProductBundle\Entity\Product:
                     referencedColumnName: id
                     onDelete: 'SET NULL'
         attributeGroup:
-            targetEntity: WellCommerce\Bundle\AttributeBundle\Entity\Attribute\Group
+            targetEntity: WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroup
             fetch: LAZY
             joinColumns:
                 attribute_group_id:
