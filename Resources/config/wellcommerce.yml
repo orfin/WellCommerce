@@ -1,9 +1,32 @@
-well_commerce_app:
+well_commerce_client:
     services:
-        admin_menu:
+        client:
             auto_services:
-                factory: WellCommerce\Bundle\AdminBundle\Factory\AdminMenuFactory
-                repository: WellCommerce\Bundle\AdminBundle\Repository\AdminMenuRepository
+                factory: WellCommerce\Bundle\ClientBundle\Factory\ClientFactory
+                repository: WellCommerce\Bundle\ClientBundle\Repository\ClientRepository
             orm_configuration:
-                mapping: "@WellCommerceAdminBundle/Resources/config/doctrine/AdminMenu.orm.yml"
-                entity: WellCommerce\Bundle\AdminBundle\Entity\AdminMenu
+                mapping: "@WellCommerceClientBundle/Resources/config/doctrine/Client.orm.yml"
+                entity: WellCommerce\Bundle\ClientBundle\Entity\Client
+        client_billing_address:
+            orm_configuration:
+                mapping: "@WellCommerceClientBundle/Resources/config/doctrine/ClientBillingAddress.orm.yml"
+                entity: WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddress
+        client_contact_details:
+            orm_configuration:
+                mapping: "@WellCommerceClientBundle/Resources/config/doctrine/ClientContactDetails.orm.yml"
+                entity: WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetails
+        client_group:
+            auto_services:
+                factory: WellCommerce\Bundle\ClientBundle\Factory\ClientGroupFactory
+                repository: WellCommerce\Bundle\ClientBundle\Repository\ClientGroupRepository
+            orm_configuration:
+                mapping: "@WellCommerceClientBundle/Resources/config/doctrine/ClientGroup.orm.yml"
+                entity: WellCommerce\Bundle\ClientBundle\Entity\ClientGroup
+        client_group_translation:
+            orm_configuration:
+                mapping: "@WellCommerceClientBundle/Resources/config/doctrine/ClientGroupTranslation.orm.yml"
+                entity: WellCommerce\Bundle\ClientBundle\Entity\ClientGroupTranslation
+        client_shipping_address:
+            orm_configuration:
+                mapping: "@WellCommerceClientBundle/Resources/config/doctrine/ClientShippingAddress.orm.yml"
+                entity: WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddress

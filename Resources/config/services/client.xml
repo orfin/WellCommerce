@@ -13,12 +13,6 @@
     </imports>
 
     <services>
-        <service id="client.repository" class="WellCommerce\Bundle\ClientBundle\Repository\ClientRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
-            <argument>WellCommerceClientBundle:Client</argument>
-        </service>
-
-        <service id="client.factory" class="WellCommerce\Bundle\ClientBundle\Factory\ClientFactory" />
-
         <service id="client.event_dispatcher" parent="core.event_dispatcher" public="false">
             <argument type="service" id="event_dispatcher"/>
         </service>
