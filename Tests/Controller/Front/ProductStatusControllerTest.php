@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\ProductStatusBundle\Tests\Controller\Front;
 
 use Doctrine\Common\Collections\Criteria;
-use WellCommerce\Bundle\CategoryBundle\Entity\CategoryInterface;
 use WellCommerce\Bundle\CoreBundle\Test\Controller\Admin\AbstractAdminControllerTestCase;
 use WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusInterface;
 
