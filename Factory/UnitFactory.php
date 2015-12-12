@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\UnitBundle\Factory;
 
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
-use WellCommerce\Bundle\UnitBundle\Entity\Unit;
+use WellCommerce\Bundle\UnitBundle\Entity\UnitInterface;
 
 /**
  * Class UnitFactory
@@ -23,11 +23,17 @@ use WellCommerce\Bundle\UnitBundle\Entity\Unit;
 class UnitFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\UnitBundle\Entity\UnitInterface
+     * @var string
+     */
+    protected $supportsInterface = UnitInterface::class;
+
+    /**
+     * @return UnitInterface
      */
     public function create()
     {
-        $unit = new Unit();
+        /** @var  $unit UnitInterface */
+        $unit = $this->init();
         $unit->setCreatedAt(new \DateTime());
 
         return $unit;
