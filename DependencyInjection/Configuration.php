@@ -11,7 +11,6 @@
 
 namespace WellCommerce\Bundle\AdminBundle\DependencyInjection;
 
-use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractConfiguration;
 
 /**

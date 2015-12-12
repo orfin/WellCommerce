@@ -14,8 +14,8 @@ namespace WellCommerce\Bundle\AdminBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
 use Symfony\Component\DependencyInjection\Loader;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
 
 /**
  * Class WellCommerceAdminExtension
