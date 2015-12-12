@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\MediaBundle\Factory;
 
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
-use WellCommerce\Bundle\MediaBundle\Entity\Media;
+use WellCommerce\Bundle\MediaBundle\Entity\MediaInterface;
 
 /**
  * Class MediaFactory
@@ -23,11 +23,18 @@ use WellCommerce\Bundle\MediaBundle\Entity\Media;
 class MediaFactory extends AbstractFactory
 {
     /**
-     * {@inheritdoc}
+     * @var string
+     */
+    protected $supportsInterface = MediaInterface::class;
+
+    /**
+     * @return MediaInterface
      */
     public function create()
     {
-        $media = new Media();
+        /** @var $media MediaInterface */
+        $media = $this->init();
+        $media->setSize(0);
 
         return $media;
     }
