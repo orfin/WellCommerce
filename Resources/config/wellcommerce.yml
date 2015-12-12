@@ -1,9 +1,16 @@
-well_commerce_app:
+well_commerce_unit:
     services:
-        admin_menu:
+        unit:
             auto_services:
-                factory: WellCommerce\Bundle\AdminBundle\Factory\AdminMenuFactory
-                repository: WellCommerce\Bundle\AdminBundle\Repository\AdminMenuRepository
+                factory: WellCommerce\Bundle\UnitBundle\Factory\UnitFactory
+                repository: WellCommerce\Bundle\UnitBundle\Repository\UnitRepository
             orm_configuration:
-                mapping: "@WellCommerceAdminBundle/Resources/config/doctrine/AdminMenu.orm.yml"
-                entity: WellCommerce\Bundle\AdminBundle\Entity\AdminMenu
+                mapping: "@WellCommerceUnitBundle/Resources/config/doctrine/Unit.orm.yml"
+                entity: WellCommerce\Bundle\UnitBundle\Entity\Unit
+        unit_translation:
+            auto_services:
+                factory: ~
+                repository: ~
+            orm_configuration:
+                mapping: "@WellCommerceUnitBundle/Resources/config/doctrine/UnitTranslation.orm.yml"
+                entity: WellCommerce\Bundle\UnitBundle\Entity\UnitTranslation
