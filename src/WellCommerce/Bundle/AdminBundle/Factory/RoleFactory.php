@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\AdminBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use WellCommerce\Bundle\AdminBundle\Entity\Role;
 use WellCommerce\Bundle\AdminBundle\Entity\RoleInterface;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 

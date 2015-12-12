@@ -16,15 +16,17 @@ use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 use WellCommerce\Bundle\CartBundle\Entity\CartTotals;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
-use WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface;
 
 /**
  * Class CartFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CartFactory extends AbstractFactory implements FactoryInterface
+class CartFactory extends AbstractFactory
 {
+    /**
+     * @var string
+     */
     protected $supportsInterface = CartInterface::class;
 
     /**
@@ -32,6 +34,7 @@ class CartFactory extends AbstractFactory implements FactoryInterface
      */
     public function create()
     {
+        /** @var $cart CartInterface */
         $cart = $this->init();
         $cart->setProducts(new ArrayCollection());
         $cart->setTotals(new CartTotals());

@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\AvailabilityBundle\Factory;
 
-use WellCommerce\Bundle\AvailabilityBundle\Entity\Availability;
+use WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityInterface;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 
 /**
@@ -23,11 +23,17 @@ use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 class AvailabilityFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityInterface
+     * @var string
+     */
+    protected $supportsInterface = AvailabilityInterface::class;
+
+    /**
+     * @return AvailabilityInterface
      */
     public function create()
     {
-        $availability = new Availability();
+        /** @var $availability AvailabilityInterface */
+        $availability = $this->init();
 
         return $availability;
     }

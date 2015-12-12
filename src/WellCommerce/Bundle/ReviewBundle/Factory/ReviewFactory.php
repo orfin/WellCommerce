@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\ReviewBundle\Factory;
 
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
-use WellCommerce\Bundle\ReviewBundle\Entity\Review;
+use WellCommerce\Bundle\ReviewBundle\Entity\ReviewInterface;
 
 /**
  * Class ReviewFactory
@@ -23,11 +23,17 @@ use WellCommerce\Bundle\ReviewBundle\Entity\Review;
 class ReviewFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\ReviewBundle\Entity\ReviewInterface
+     * @var string
+     */
+    protected $supportsInterface = ReviewInterface::class;
+
+    /**
+     * @return ReviewInterface
      */
     public function create()
     {
-        $review = new Review();
+        /** @var  $review ReviewInterface */
+        $review = $this->init();
 
         return $review;
     }

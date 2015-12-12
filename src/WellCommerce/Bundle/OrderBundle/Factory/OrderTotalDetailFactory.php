@@ -13,22 +13,27 @@
 namespace WellCommerce\Bundle\OrderBundle\Factory;
 
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
-use WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface;
-use WellCommerce\Bundle\OrderBundle\Entity\OrderTotalDetail;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderTotalDetailInterface;
 
 /**
  * Class OrderTotalDetailFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class OrderTotalDetailFactory extends AbstractFactory implements FactoryInterface
+class OrderTotalDetailFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\OrderBundle\Entity\OrderTotalDetailInterface
+     * @var string
+     */
+    protected $supportsInterface = OrderTotalDetailInterface::class;
+
+    /**
+     * @return OrderTotalDetailInterface
      */
     public function create()
     {
-        $detail = new OrderTotalDetail();
+        /** @var  $detail OrderTotalDetailInterface */
+        $detail = $this->init();
         $detail->setSubtraction(false);
 
         return $detail;

@@ -14,9 +14,9 @@ namespace WellCommerce\Bundle\ReportBundle\Calculator;
 
 use DateTime;
 use Doctrine\Common\Collections\Collection;
+use WellCommerce\Bundle\ReportBundle\Configuration\ReportConfiguration;
 use WellCommerce\Bundle\ReportBundle\Data\ReportRow;
 use WellCommerce\Bundle\ReportBundle\Data\ReportRowCollection;
-use WellCommerce\Bundle\ReportBundle\Configuration\ReportConfiguration;
 
 /**
  * Class SalesSummaryCalculator

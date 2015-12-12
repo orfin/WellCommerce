@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\LocaleBundle\Factory;
 
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
-use WellCommerce\Bundle\LocaleBundle\Entity\Locale;
+use WellCommerce\Bundle\LocaleBundle\Entity\LocaleInterface;
 
 /**
  * Class LocaleFactory
@@ -23,11 +23,18 @@ use WellCommerce\Bundle\LocaleBundle\Entity\Locale;
 class LocaleFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\LocaleBundle\Entity\LocaleInterface
+     * @var string
+     */
+    protected $supportsInterface = LocaleInterface::class;
+
+    /**
+     * @return LocaleInterface
      */
     public function create()
     {
-        $locale = new Locale();
+        /** @var $locale LocaleInterface */
+        $locale = $this->init();
+        $locale->setCode('');
 
         return $locale;
     }

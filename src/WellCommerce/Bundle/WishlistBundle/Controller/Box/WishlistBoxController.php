@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\WishlistBundle\Controller\Box;
 
-use WellCommerce\Bundle\WishlistBundle\Entity\WishlistInterface;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
+use WellCommerce\Bundle\WishlistBundle\Entity\WishlistInterface;
 use WellCommerce\Component\DataSet\Conditions\Condition\In;
 use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
 

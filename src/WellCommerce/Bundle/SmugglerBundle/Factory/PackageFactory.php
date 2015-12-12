@@ -13,22 +13,27 @@
 namespace WellCommerce\Bundle\SmugglerBundle\Factory;
 
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
-use WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface;
-use WellCommerce\Bundle\SmugglerBundle\Entity\Package;
+use WellCommerce\Bundle\SmugglerBundle\Entity\PackageInterface;
 
 /**
  * Class ChannelFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PackageFactory extends AbstractFactory implements FactoryInterface
+class PackageFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\SmugglerBundle\Entity\PackageInterface
+     * @var string
+     */
+    protected $supportsInterface = PackageInterface::class;
+
+    /**
+     * @return PackageInterface
      */
     public function create()
     {
-        $package = new Package();
+        /** @var  $package PackageInterface */
+        $package = $this->init();
 
         return $package;
     }

@@ -12,9 +12,9 @@
 
 namespace WellCommerce\Bundle\SearchBundle\Indexer;
 
-use WellCommerce\Bundle\SearchBundle\Manager\SearchIndexManagerInterface;
-use WellCommerce\Bundle\ProductBundle\Repository\ProductRepositoryInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
+use WellCommerce\Bundle\ProductBundle\Repository\ProductRepositoryInterface;
+use WellCommerce\Bundle\SearchBundle\Manager\SearchIndexManagerInterface;
 use ZendSearch\Lucene\Document;
 use ZendSearch\Lucene\Document\Field;
 

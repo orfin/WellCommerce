@@ -13,8 +13,6 @@
 namespace WellCommerce\Bundle\TaxBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use WellCommerce\Bundle\AppBundle\DependencyInjection\WellCommerceAppExtension;
-use WellCommerce\Bundle\AttributeBundle\DependencyInjection\WellCommerceAttributeExtension;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\Compiler\AbstractMappingCompilerPass;
 use WellCommerce\Bundle\TaxBundle\DependencyInjection\WellCommerceTaxExtension;
 

@@ -13,16 +13,27 @@
 namespace WellCommerce\Bundle\NewsBundle\Factory;
 
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
-use WellCommerce\Bundle\NewsBundle\Entity\News;
+use WellCommerce\Bundle\NewsBundle\Entity\NewsInterface;
 
+/**
+ * Class NewsFactory
+ *
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
+ */
 class NewsFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\NewsBundle\Entity\NewsInterface
+     * @var string
+     */
+    protected $supportsInterface = NewsInterface::class;
+
+    /**
+     * @return NewsInterface
      */
     public function create()
     {
-        $news = new News();
+        /** @var $news NewsInterface */
+        $news = $this->init();
         $news->setFeatured(false);
         $news->setPublish(true);
         $news->setStartDate(new \DateTime());

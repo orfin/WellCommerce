@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\ShippingBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
-use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethod;
+use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface;
 
 /**
  * Class ShippingMethodFactory
@@ -24,11 +24,17 @@ use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethod;
 class ShippingMethodFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface
+     * @var string
+     */
+    protected $supportsInterface = ShippingMethodInterface::class;
+
+    /**
+     * @return ShippingMethodInterface
      */
     public function create()
     {
-        $shippingMethod = new ShippingMethod();
+        /** @var  $shippingMethod ShippingMethodInterface */
+        $shippingMethod = $this->init();
         $shippingMethod->setCosts(new ArrayCollection());
         $shippingMethod->setEnabled(true);
         $shippingMethod->setHierarchy(0);

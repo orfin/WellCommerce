@@ -12,23 +12,32 @@
 
 namespace WellCommerce\Bundle\ThemeBundle\Factory;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
-use WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface;
-use WellCommerce\Bundle\ThemeBundle\Entity\Theme;
+use WellCommerce\Bundle\ThemeBundle\Entity\ThemeInterface;
 
 /**
  * Class ThemeFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ThemeFactory extends AbstractFactory implements FactoryInterface
+class ThemeFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\ThemeBundle\Entity\ThemeInterface
+     * @var string
+     */
+    protected $supportsInterface = ThemeInterface::class;
+
+    /**
+     * @return ThemeInterface
      */
     public function create()
     {
-        $theme = new Theme();
+        /** @var  $theme ThemeInterface */
+        $theme = $this->init();
+        $theme->setCss(new ArrayCollection());
+        $theme->setFolder('');
+        $theme->setName('');
 
         return $theme;
     }

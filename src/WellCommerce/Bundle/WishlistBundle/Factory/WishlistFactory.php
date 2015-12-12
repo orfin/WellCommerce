@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\WishlistBundle\Factory;
 
-use WellCommerce\Bundle\WishlistBundle\Entity\Wishlist;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\Bundle\WishlistBundle\Entity\WishlistInterface;
 
 /**
  * Class WishlistFactory
@@ -23,12 +23,18 @@ use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 class WishlistFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\WishlistBundle\Entity\WishlistInterface
+     * @var string
+     */
+    protected $supportsInterface = WishlistInterface::class;
+
+    /**
+     * @return WishlistInterface
      */
     public function create()
     {
-        $Wishlist = new Wishlist();
+        /** @var  $wishlist WishlistInterface */
+        $wishlist = $this->init();
 
-        return $Wishlist;
+        return $wishlist;
     }
 }

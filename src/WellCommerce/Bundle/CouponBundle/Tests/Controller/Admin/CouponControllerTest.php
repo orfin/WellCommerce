@@ -13,8 +13,8 @@
 namespace WellCommerce\Bundle\CouponBundle\Tests\Controller\Admin;
 
 use Doctrine\Common\Collections\Criteria;
-use WellCommerce\Bundle\CouponBundle\Entity\CouponInterface;
 use WellCommerce\Bundle\CoreBundle\Test\Controller\Admin\AbstractAdminControllerTestCase;
+use WellCommerce\Bundle\CouponBundle\Entity\CouponInterface;
 
 /**
  * Class CouponControllerTest

@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\CategoryBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use WellCommerce\Bundle\CategoryBundle\Entity\Category;
+use WellCommerce\Bundle\CategoryBundle\Entity\CategoryInterface;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 
 /**
@@ -24,11 +24,17 @@ use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 class CategoryFactory extends AbstractFactory
 {
     /**
-     * @return Category
+     * @var string
+     */
+    protected $supportsInterface = CategoryInterface::class;
+
+    /**
+     * @return CategoryInterface
      */
     public function create()
     {
-        $category = new Category();
+        /** @var $category CategoryInterface */
+        $category = $this->init();
         $category->setChildren(new ArrayCollection());
         $category->setProducts(new ArrayCollection());
         $category->setEnabled(true);

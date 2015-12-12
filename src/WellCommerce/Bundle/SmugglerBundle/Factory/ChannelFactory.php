@@ -13,22 +13,27 @@
 namespace WellCommerce\Bundle\SmugglerBundle\Factory;
 
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
-use WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface;
-use WellCommerce\Bundle\SmugglerBundle\Entity\Channel;
+use WellCommerce\Bundle\SmugglerBundle\Entity\ChannelInterface;
 
 /**
  * Class ChannelFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ChannelFactory extends AbstractFactory implements FactoryInterface
+class ChannelFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\SmugglerBundle\Entity\ChannelInterface
+     * @var string
+     */
+    protected $supportsInterface = ChannelInterface::class;
+
+    /**
+     * @return ChannelInterface
      */
     public function create()
     {
-        $channel = new Channel();
+        /** @var  $channel ChannelInterface */
+        $channel = $this->init();
 
         return $channel;
     }

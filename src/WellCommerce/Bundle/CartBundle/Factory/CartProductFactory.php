@@ -12,23 +12,28 @@
 
 namespace WellCommerce\Bundle\CartBundle\Factory;
 
-use WellCommerce\Bundle\CartBundle\Entity\CartProduct;
+use WellCommerce\Bundle\CartBundle\Entity\CartProductInterface;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
-use WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface;
 
 /**
  * Class CartProductFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CartProductFactory extends AbstractFactory implements FactoryInterface
+class CartProductFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\CartBundle\Entity\CartProductInterface
+     * @var string
+     */
+    protected $supportsInterface = CartProductInterface::class;
+
+    /**
+     * @return CartProductInterface
      */
     public function create()
     {
-        $cartProduct = new CartProduct();
+        /** @var $cartProduct CartProductInterface */
+        $cartProduct = $this->init();
         $cartProduct->setCreatedAt(new \DateTime());
         $cartProduct->setUpdatedAt(new \DateTime());
 

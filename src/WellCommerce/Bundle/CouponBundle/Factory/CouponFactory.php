@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\CouponBundle\Factory;
 
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
-use WellCommerce\Bundle\CouponBundle\Entity\Coupon;
+use WellCommerce\Bundle\CouponBundle\Entity\CouponInterface;
 
 /**
  * Class CouponFactory
@@ -23,11 +23,22 @@ use WellCommerce\Bundle\CouponBundle\Entity\Coupon;
 class CouponFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\CouponBundle\Entity\CouponInterface
+     * @var string
+     */
+    protected $supportsInterface = CouponInterface::class;
+
+    /**
+     * @return CouponInterface
      */
     public function create()
     {
-        $coupon = new Coupon();
+        /** @var $coupon CouponInterface */
+        $coupon = $this->init();
+        $coupon->setCode('');
+        $coupon->setClientUsageLimit(1);
+        $coupon->setGlobalUsageLimit(1);
+        $coupon->setModifierType('%');
+        $coupon->setModifierValue(100);
 
         return $coupon;
     }

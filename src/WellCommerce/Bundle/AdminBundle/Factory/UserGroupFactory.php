@@ -12,9 +12,8 @@
 
 namespace WellCommerce\Bundle\AdminBundle\Factory;
 
-use WellCommerce\Bundle\AdminBundle\Entity\UserGroup;
-use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 use WellCommerce\Bundle\AdminBundle\Entity\UserGroupInterface;
+use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 
 /**
  * Class UserGroupFactory

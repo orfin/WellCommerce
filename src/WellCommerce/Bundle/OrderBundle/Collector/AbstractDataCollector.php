@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Collector;
 
-use WellCommerce\Bundle\OrderBundle\Factory\OrderTotalDetailFactory;
 use WellCommerce\Bundle\CurrencyBundle\Helper\CurrencyHelperInterface;
+use WellCommerce\Bundle\OrderBundle\Factory\OrderTotalDetailFactory;
 
 /**
  * Class AbstractDataCollector

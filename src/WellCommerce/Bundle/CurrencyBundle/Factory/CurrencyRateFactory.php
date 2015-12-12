@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\CurrencyBundle\Factory;
 
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
-use WellCommerce\Bundle\CurrencyBundle\Entity\CurrencyRate;
+use WellCommerce\Bundle\CurrencyBundle\Entity\CurrencyRateInterface;
 
 /**
  * Class CurrencyRateFactory
@@ -23,11 +23,17 @@ use WellCommerce\Bundle\CurrencyBundle\Entity\CurrencyRate;
 class CurrencyRateFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\CurrencyBundle\Entity\CurrencyRateInterface
+     * @var string
+     */
+    protected $supportsInterface = CurrencyRateInterface::class;
+
+    /**
+     * @return CurrencyRateInterface
      */
     public function create()
     {
-        $currencyRate = new CurrencyRate();
+        /** @var $currencyRate CurrencyRateInterface */
+        $currencyRate = $this->init();
         $currencyRate->setExchangeRate(1);
 
         return $currencyRate;
