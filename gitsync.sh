@@ -45,6 +45,7 @@ if [ "$action" == 'clear' ]
         git remote rm stree-taxbundle
         git remote rm stree-themebundle
         git remote rm stree-unitbundle
+        git remote rm stree-wellcommerce-default-theme
         git remote rm stree-wishlistbundle
 
         git branch -D stree-backports-adminbundle
@@ -87,10 +88,12 @@ if [ "$action" == 'clear' ]
         git branch -D stree-backports-taxbundle
         git branch -D stree-backports-themebundle
         git branch -D stree-backports-unitbundle
+        git branch -D stree-backports-wellcommerce-default-theme
         git branch -D stree-backports-wishlistbundle
 
         rm -rf src/WellCommerce/Bundle/*
         rm -rf src/WellCommerce/Component/*
+        rm -rf web/themes/wellcommerce-default-theme
 fi
 
 if [ "$action" == 'push' ]

@@ -19,6 +19,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Factory as FakerFactory;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Config\FileLocator;
 
 /**
  * Class AbstractDataFixture
@@ -104,5 +105,15 @@ abstract class AbstractDataFixture extends AbstractFixture implements OrderedFix
     protected function get($name)
     {
         return $this->container->get($name);
+    }
+
+    protected function importAdminMenuConfiguration($file)
+    {
+        $reflection = new \ReflectionClass($this);
+        $directory  = dirname($reflection->getFileName());
+        $locator    = new FileLocator($directory . '/../../Resources/config/admin_menu');
+        $importer   = $this->container->get('admin_menu.importer.xml');
+
+        $importer->import($file, $locator);
     }
 }
