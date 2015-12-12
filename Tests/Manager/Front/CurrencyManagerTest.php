@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\CurrencyBundle\Front\Manager\Admin;
 
-use WellCommerce\Bundle\CoreBundle\Test\Manager\Admin\AbstractAdminManagerTestCase;
 use WellCommerce\Bundle\CoreBundle\Test\Manager\Front\AbstractFrontManagerTestCase;
 
 /**

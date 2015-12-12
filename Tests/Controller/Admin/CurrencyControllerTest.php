@@ -13,8 +13,8 @@
 namespace WellCommerce\Bundle\CurrencyBundle\Tests\Controller\Admin;
 
 use Doctrine\Common\Collections\Criteria;
-use WellCommerce\Bundle\CurrencyBundle\Entity\CurrencyInterface;
 use WellCommerce\Bundle\CoreBundle\Test\Controller\Admin\AbstractAdminControllerTestCase;
+use WellCommerce\Bundle\CurrencyBundle\Entity\CurrencyInterface;
 
 /**
  * Class CurrencyControllerTest
