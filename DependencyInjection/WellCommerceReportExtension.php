@@ -29,6 +29,6 @@ class WellCommerceReportExtension extends AbstractExtension
      */
     protected function setExtensionConfiguration(ContainerBuilder $container, array $parameters = [])
     {
-        $container->setParameter(self::EXTENSION_NAME, $parameters);
+        return false;
     }
 }
