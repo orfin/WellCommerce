@@ -12,12 +12,8 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Factory;
 
-use WellCommerce\Bundle\AppBundle\Entity\Price;
-use WellCommerce\Bundle\CartBundle\Entity\CartProductInterface;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
-use WellCommerce\Bundle\CurrencyBundle\Helper\CurrencyHelperInterface;
-use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
-use WellCommerce\Bundle\OrderBundle\Entity\OrderProduct;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderProductInterface;
 
 /**
  * Class OrderProductFactory
@@ -27,11 +23,17 @@ use WellCommerce\Bundle\OrderBundle\Entity\OrderProduct;
 class OrderProductFactory extends AbstractFactory
 {
     /**
-     * {@inheritdoc}
+     * @var string
+     */
+    protected $supportsInterface = OrderProductInterface::class;
+
+    /**
+     * @return OrderProductInterface
      */
     public function create()
     {
-        $orderProduct = new OrderProduct();
+        /** @var  $orderProduct OrderProductInterface */
+        $orderProduct = $this->init();
         $orderProduct->setQuantity(0);
         $orderProduct->setWeight(0);
 

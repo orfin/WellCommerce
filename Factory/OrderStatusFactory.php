@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\OrderBundle\Factory;
 
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
-use WellCommerce\Bundle\OrderBundle\Entity\OrderStatus;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderStatusInterface;
 
 /**
  * Class OrderStatusFactory
@@ -23,11 +23,17 @@ use WellCommerce\Bundle\OrderBundle\Entity\OrderStatus;
 class OrderStatusFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\OrderBundle\Entity\OrderStatusInterface
+     * @var string
+     */
+    protected $supportsInterface = OrderStatusInterface::class;
+
+    /**
+     * @return OrderStatusInterface
      */
     public function create()
     {
-        $status = new OrderStatus();
+        /** @var  $status OrderStatusInterface */
+        $status = $this->init();
         $status->setEnabled(true);
 
         return $status;

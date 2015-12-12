@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\OrderBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
-use WellCommerce\Bundle\OrderBundle\Entity\Order;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 
 /**
  * Class OrderFactory
@@ -24,11 +24,17 @@ use WellCommerce\Bundle\OrderBundle\Entity\Order;
 class OrderFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\OrderBundle\Entity\OrderInterface
+     * @var string
+     */
+    protected $supportsInterface = OrderInterface::class;
+
+    /**
+     * @return OrderInterface
      */
     public function create()
     {
-        $order = new Order();
+        /** @var  $order OrderInterface */
+        $order = $this->init();
         $order->setProducts(new ArrayCollection());
         $order->setPayments(new ArrayCollection());
         $order->setTotals(new ArrayCollection());
