@@ -40,7 +40,7 @@ WellCommerce\Bundle\CartBundle\Entity\Cart:
                 default: 1
     oneToMany:
         products:
-            targetEntity: WellCommerce\Bundle\CartBundle\Entity\CartProduct
+            targetEntity: WellCommerce\Bundle\CartBundle\Entity\CartProductInterface
             cascade:
                 - all
             fetch: LAZY
