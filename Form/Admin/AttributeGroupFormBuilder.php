@@ -11,9 +11,6 @@
  */
 namespace WellCommerce\Bundle\AttributeBundle\Form\Admin;
 
-use Doctrine\Common\Collections\Criteria;
-use Doctrine\Common\Util\Debug;
-use WellCommerce\Bundle\AttributeBundle\Entity\AttributeInterface;
 use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
 use WellCommerce\Component\Form\Elements\FormInterface;
 
