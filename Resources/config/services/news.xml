@@ -9,12 +9,6 @@
     </imports>
 
     <services>
-        <service id="news.repository" class="WellCommerce\Bundle\NewsBundle\Repository\NewsRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
-            <argument>WellCommerceNewsBundle:News</argument>
-        </service>
-
-        <service id="news.factory" class="WellCommerce\Bundle\NewsBundle\Factory\NewsFactory" />
-
         <service id="news.event_dispatcher" parent="core.event_dispatcher" public="false">
             <argument type="service" id="event_dispatcher" />
         </service>

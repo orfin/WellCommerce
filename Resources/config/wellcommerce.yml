@@ -1,9 +1,13 @@
-well_commerce_app:
+well_commerce_news:
     services:
-        admin_menu:
+        news:
             auto_services:
-                factory: WellCommerce\Bundle\AdminBundle\Factory\AdminMenuFactory
-                repository: WellCommerce\Bundle\AdminBundle\Repository\AdminMenuRepository
+                factory: WellCommerce\Bundle\NewsBundle\Factory\NewsFactory
+                repository: WellCommerce\Bundle\NewsBundle\Repository\NewsRepository
             orm_configuration:
-                mapping: "@WellCommerceAdminBundle/Resources/config/doctrine/AdminMenu.orm.yml"
-                entity: WellCommerce\Bundle\AdminBundle\Entity\AdminMenu
+                mapping: "@WellCommerceNewsBundle/Resources/config/doctrine/News.orm.yml"
+                entity: WellCommerce\Bundle\NewsBundle\Entity\News
+        news_translation:
+            orm_configuration:
+                mapping: "@WellCommerceNewsBundle/Resources/config/doctrine/NewsTranslation.orm.yml"
+                entity: WellCommerce\Bundle\NewsBundle\Entity\NewsTranslation
