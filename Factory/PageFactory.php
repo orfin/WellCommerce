@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\PageBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
-use WellCommerce\Bundle\PageBundle\Entity\Page;
+use WellCommerce\Bundle\PageBundle\Entity\PageInterface;
 
 /**
  * Class PageFactory
@@ -24,11 +24,17 @@ use WellCommerce\Bundle\PageBundle\Entity\Page;
 class PageFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\PageBundle\Entity\PageInterface
+     * @var string
+     */
+    protected $supportsInterface = PageInterface::class;
+
+    /**
+     * @return PageInterface
      */
     public function create()
     {
-        $page = new Page();
+        /** @var  $page PageInterface */
+        $page = $this->init();
         $page->setHierarchy(0);
         $page->setCreatedAt(new \DateTime());
         $page->setClientGroups(new ArrayCollection());
