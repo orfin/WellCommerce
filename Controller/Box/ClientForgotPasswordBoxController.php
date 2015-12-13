@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\ClientBundle\Controller\Box;
 
-use WellCommerce\Bundle\AppBundle\Exception\ResetPasswordException;
+use WellCommerce\Bundle\ClientBundle\Exception\ResetPasswordException;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 
@@ -24,7 +24,7 @@ use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 class ClientForgotPasswordBoxController extends AbstractBoxController
 {
     /**
-     * @var \WellCommerce\Bundle\AppBundle\Manager\Front\ClientForgotPasswordManager
+     * @var \WellCommerce\Bundle\ClientBundle\Manager\Front\ClientForgotPasswordManager
      */
     protected $manager;
 
