@@ -31,6 +31,10 @@ class LoadProductStatusData extends AbstractDataFixture
      */
     public function load(ObjectManager $manager)
     {
+        if (!$this->isEnabled()) {
+            return;
+        }
+
         foreach (self::$samples as $name) {
             $status = new ProductStatus();
             $status->translate('en')->setName($name);
