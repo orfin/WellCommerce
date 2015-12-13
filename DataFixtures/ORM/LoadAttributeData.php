@@ -14,18 +14,22 @@ namespace WellCommerce\Bundle\AttributeBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
 
 /**
  * Class LoadAttributeData
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LoadAttributeData implements FixtureInterface
+class LoadAttributeData extends AbstractDataFixture
 {
     /**
      * {@inheritDoc}
      */
     public function load(ObjectManager $manager)
     {
+        if (!$this->isEnabled()) {
+            return;
+        }
     }
 }
