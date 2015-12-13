@@ -17,9 +17,9 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Factory as FakerFactory;
+use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\Config\FileLocator;
 
 /**
  * Class AbstractDataFixture
@@ -64,6 +64,21 @@ abstract class AbstractDataFixture extends AbstractFixture implements OrderedFix
         }
 
         return self::FALLBACK_HIERARCHY;
+    }
+
+    /**
+     * @return bool
+     */
+    protected function isEnabled()
+    {
+        $enabledFixtures = $this->container->getParameter('enabled_fixtures');
+        $className       = get_class($this);
+
+        if (isset($enabledFixtures[$className])) {
+            return (bool)$enabledFixtures[$className];
+        }
+
+        return false;
     }
 
     /**
