@@ -58,5 +58,8 @@ class LoadPaymentMethodData extends AbstractDataFixture
         $manager->persist($bankTransfer);
 
         $manager->flush();
+
+        $this->setReference('payment_method_cod', $cod);
+        $this->setReference('payment_method_bank_transfer', $bankTransfer);
     }
 }
