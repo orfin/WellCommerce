@@ -28,6 +28,10 @@ class LoadClientGroupData extends AbstractDataFixture
      */
     public function load(ObjectManager $manager)
     {
+        if (!$this->isEnabled()) {
+            return;
+        }
+
         $clientGroup = new ClientGroup();
         $clientGroup->setDiscount(10);
         $clientGroup->translate('en')->setName('Default client group');
