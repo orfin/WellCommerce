@@ -31,6 +31,10 @@ class LoadProducerData extends AbstractDataFixture
      */
     public function load(ObjectManager $manager)
     {
+        if (!$this->isEnabled()) {
+            return;
+        }
+
         $shop = $this->getReference('shop');
 
         foreach (self::$samples as $name) {
