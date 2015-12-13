@@ -29,6 +29,10 @@ class LoadAvailabilityData extends AbstractDataFixture
      */
     public function load(ObjectManager $manager)
     {
+        if (!$this->isEnabled()) {
+            return;
+        }
+
         foreach (self::$samples as $name) {
             $availability = $this->get('availability.factory')->create();
             $availability->translate('en')->setName($name);
