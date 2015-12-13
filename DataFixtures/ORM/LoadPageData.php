@@ -38,6 +38,10 @@ class LoadPageData extends AbstractDataFixture
      */
     public function load(ObjectManager $manager)
     {
+        if (!$this->isEnabled()) {
+            return;
+        }
+
         $this->manager     = $manager;
         $this->shop        = $this->getReference('shop');
         $this->defaultText = $this->getFakerGenerator()->text(600);
