@@ -33,6 +33,10 @@ class LoadShippingMethodData extends AbstractDataFixture
      */
     public function load(ObjectManager $manager)
     {
+        if (!$this->isEnabled()) {
+            return;
+        }
+
         $tax      = $this->randomizeSamples('tax', LoadTaxData::$samples);
         $currency = $this->randomizeSamples('currency', LoadCurrencyData::$samples);
         $factory  = $this->container->get('shipping_method.factory');
