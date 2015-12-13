@@ -28,6 +28,10 @@ class LoadLocaleData extends AbstractDataFixture
      */
     public function load(ObjectManager $manager)
     {
+        if (!$this->isEnabled()) {
+            return;
+        }
+
         $en = new Locale();
         $en->setCode('en');
         $en->setCurrency($this->getReference('currency_USD'));
