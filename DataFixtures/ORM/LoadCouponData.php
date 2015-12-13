@@ -27,6 +27,8 @@ class LoadCouponData extends AbstractDataFixture
      */
     public function load(ObjectManager $manager)
     {
-
+        if (!$this->isEnabled()) {
+            return;
+        }
     }
 }
