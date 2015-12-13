@@ -31,6 +31,10 @@ class LoadOrderStatusGroupData extends AbstractDataFixture
      */
     public function load(ObjectManager $manager)
     {
+        if (!$this->isEnabled()) {
+            return;
+        }
+
         foreach (self::$samples as $name) {
             $orderStatusGroup = new OrderStatusGroup();
             $orderStatusGroup->translate('en')->setName($name);

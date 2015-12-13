@@ -29,6 +29,9 @@ class LoadOrderStatusData extends AbstractDataFixture
      */
     public function load(ObjectManager $manager)
     {
+        if (!$this->isEnabled()) {
+            return;
+        }
 
         foreach ($this->getStatuses() as $sample) {
             $status = new OrderStatus();
