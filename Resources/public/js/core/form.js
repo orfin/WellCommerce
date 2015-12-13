@@ -10503,7 +10503,7 @@ var GFormPriceEditor = GCore.ExtendClass(GFormTextField, function() {
 	};
 
 	gThis.OnShow = function() {
-		gThis._CalculateGrossPrice(gThis.m_jField.eq(0).val());
+		gThis._CalculateNetPrice(gThis.m_jField.eq(1).val());
 		gThis.m_bShown = true;
 		if (!gThis.m_bResized) {
 			gThis.m_bResized = true;
