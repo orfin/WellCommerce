@@ -28,10 +28,13 @@ class LoadDelivererData extends AbstractDataFixture
      */
     public function load(ObjectManager $manager)
     {
-        $fakerGenerator = $this->getFakerGenerator();
+        if (!$this->isEnabled()) {
+            return;
+        }
 
-        $deliverer = new Deliverer();
-        $name      = $fakerGenerator->company;
+        $fakerGenerator = $this->getFakerGenerator();
+        $deliverer      = new Deliverer();
+        $name           = $fakerGenerator->company;
         $deliverer->translate('en')->setName($name);
         $deliverer->mergeNewTranslations();
         $manager->persist($deliverer);
