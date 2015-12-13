@@ -42,6 +42,10 @@ class LoadCategoryData extends AbstractDataFixture implements FixtureInterface, 
      */
     public function load(ObjectManager $manager)
     {
+        if (!$this->isEnabled()) {
+            return;
+        }
+
         $shop = $this->getReference('shop');
 
         foreach (self::$samples as $hierarchy => $name) {
