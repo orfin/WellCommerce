@@ -27,6 +27,10 @@ class LoadCompanyData extends AbstractDataFixture
      */
     public function load(ObjectManager $manager)
     {
+        if (!$this->isEnabled()) {
+            return;
+        }
+
         $fakerGenerator = $this->getFakerGenerator();
         $company        = $this->container->get('company.factory')->create();
         $company->setName($fakerGenerator->company . ' ' . $fakerGenerator->companySuffix);
