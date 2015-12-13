@@ -29,6 +29,10 @@ class LoadPaymentMethodData extends AbstractDataFixture
      */
     public function load(ObjectManager $manager)
     {
+        if (!$this->isEnabled()) {
+            return;
+        }
+
         $shippingMethods = new ArrayCollection();
         $shippingMethods->add($this->getReference('shipping_method_fedex'));
         $shippingMethods->add($this->getReference('shipping_method_ups'));
