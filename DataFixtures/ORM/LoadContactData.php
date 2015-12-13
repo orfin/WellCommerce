@@ -28,6 +28,10 @@ class LoadContactData extends AbstractDataFixture
      */
     public function load(ObjectManager $manager)
     {
+        if (!$this->isEnabled()) {
+            return;
+        }
+
         $contact = new Contact();
         $contact->setEnabled(1);
         $contact->translate('en')->setName('Sales department');
