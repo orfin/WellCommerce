@@ -61,6 +61,32 @@ parameters:
         WellCommerce\Bundle\ShippingBundle\DataFixtures\ORM\LoadShippingMethodData: 220
         WellCommerce\Bundle\PaymentBundle\DataFixtures\ORM\LoadPaymentMethodData: 230
     fixtures_product_limit: 100
+    enabled_fixtures:
+        WellCommerce\Bundle\AdminBundle\DataFixtures\ORM\LoadAdminMenuData: true
+        WellCommerce\Bundle\ThemeBundle\DataFixtures\ORM\LoadThemeData: true
+        WellCommerce\Bundle\CompanyBundle\DataFixtures\ORM\LoadCompanyData: true
+        WellCommerce\Bundle\CurrencyBundle\DataFixtures\ORM\LoadCurrencyData: true
+        WellCommerce\Bundle\LocaleBundle\DataFixtures\ORM\LoadLocaleData: true
+        WellCommerce\Bundle\OrderBundle\DataFixtures\ORM\LoadOrderStatusGroupData: true
+        WellCommerce\Bundle\OrderBundle\DataFixtures\ORM\LoadOrderStatusData: true
+        WellCommerce\Bundle\ShopBundle\DataFixtures\ORM\LoadShopData: true
+        WellCommerce\Bundle\AdminBundle\DataFixtures\ORM\LoadUserData: true
+        WellCommerce\Bundle\TaxBundle\DataFixtures\ORM\LoadTaxData: true
+        WellCommerce\Bundle\ClientBundle\DataFixtures\ORM\LoadClientGroupData: true
+        WellCommerce\Bundle\ClientBundle\DataFixtures\ORM\LoadClientData: true
+        WellCommerce\Bundle\UnitBundle\DataFixtures\ORM\LoadUnitData: true
+        WellCommerce\Bundle\ContactBundle\DataFixtures\ORM\LoadContactData: true
+        WellCommerce\Bundle\MediaBundle\DataFixtures\ORM\LoadMediaData: true
+        WellCommerce\Bundle\DelivererBundle\DataFixtures\ORM\LoadDelivererData: true
+        WellCommerce\Bundle\AvailabilityBundle\DataFixtures\ORM\LoadAvailabilityData: true
+        WellCommerce\Bundle\ProducerBundle\DataFixtures\ORM\LoadProducerData: true
+        WellCommerce\Bundle\AttributeBundle\DataFixtures\ORM\LoadAttributeData: true
+        WellCommerce\Bundle\CategoryBundle\DataFixtures\ORM\LoadCategoryData: true
+        WellCommerce\Bundle\ProductStatusBundle\DataFixtures\ORM\LoadProductStatusData: true
+        WellCommerce\Bundle\ProductBundle\DataFixtures\ORM\LoadProductData: true
+        WellCommerce\Bundle\LayoutBundle\DataFixtures\ORM\LoadLayoutBoxData: true
+        WellCommerce\Bundle\ShippingBundle\DataFixtures\ORM\LoadShippingMethodData: true
+        WellCommerce\Bundle\PaymentBundle\DataFixtures\ORM\LoadPaymentMethodData: true
 
 #
 #well_commerce_media:
