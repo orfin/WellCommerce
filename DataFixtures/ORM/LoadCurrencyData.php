@@ -30,6 +30,10 @@ class LoadCurrencyData extends AbstractDataFixture
      */
     public function load(ObjectManager $manager)
     {
+        if (!$this->isEnabled()) {
+            return;
+        }
+
         foreach (self::$samples as $name) {
             $currency = new Currency();
             $currency->setCode($name);
