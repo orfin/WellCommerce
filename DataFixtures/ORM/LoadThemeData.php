@@ -28,6 +28,10 @@ class LoadThemeData extends AbstractDataFixture
      */
     public function load(ObjectManager $manager)
     {
+        if (!$this->isEnabled()) {
+            return;
+        }
+
         $theme = new Theme();
         $theme->setName('WellCommerce Default Theme');
         $theme->setFolder('wellcommerce-default-theme');
