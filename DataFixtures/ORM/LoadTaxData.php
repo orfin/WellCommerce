@@ -30,6 +30,10 @@ class LoadTaxData extends AbstractDataFixture
      */
     public function load(ObjectManager $manager)
     {
+        if (!$this->isEnabled()) {
+            return;
+        }
+
         foreach (self::$samples as $val) {
             $name = sprintf('%s%s', $val, '%');
             $tax  = new Tax();
