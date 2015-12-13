@@ -33,6 +33,10 @@ class LoadLayoutBoxData extends AbstractDataFixture
      */
     public function load(ObjectManager $manager)
     {
+        if (!$this->isEnabled()) {
+            return;
+        }
+
         $this->manager = $manager;
 
         $this->createCategoryBoxes();
