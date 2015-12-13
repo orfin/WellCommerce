@@ -30,6 +30,10 @@ class LoadUserData extends AbstractDataFixture
      */
     public function load(ObjectManager $manager)
     {
+        if (!$this->isEnabled()) {
+            return;
+        }
+
         $role = $this->container->get('role.factory')->create();
         $role->setName('admin');
         $role->setRole('ROLE_ADMIN');

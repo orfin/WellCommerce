@@ -28,6 +28,10 @@ class LoadAdminMenuData extends AbstractDataFixture
      */
     public function load(ObjectManager $manager)
     {
+        if (!$this->isEnabled()) {
+            return;
+        }
+
         $this->importAdminMenuConfiguration('catalog.xml');
         $this->importAdminMenuConfiguration('cms.xml');
         $this->importAdminMenuConfiguration('configuration.xml');
