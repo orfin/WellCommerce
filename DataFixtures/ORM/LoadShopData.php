@@ -29,6 +29,10 @@ class LoadShopData extends AbstractDataFixture
      */
     public function load(ObjectManager $manager)
     {
+        if (!$this->isEnabled()) {
+            return;
+        }
+
         /**
          * @var $theme       \WellCommerce\Bundle\ThemeBundle\Entity\ThemeInterface
          * @var $company     \WellCommerce\Bundle\CompanyBundle\Entity\CompanyInterface
