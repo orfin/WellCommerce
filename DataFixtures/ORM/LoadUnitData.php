@@ -30,6 +30,10 @@ class LoadUnitData extends AbstractDataFixture
      */
     public function load(ObjectManager $manager)
     {
+        if (!$this->isEnabled()) {
+            return;
+        }
+
         foreach (self::$samples as $name) {
             $unit = new Unit();
             $unit->translate('en')->setName($name);
