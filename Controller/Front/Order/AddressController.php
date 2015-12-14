@@ -25,7 +25,7 @@ use WellCommerce\Bundle\CoreBundle\Service\Breadcrumb\BreadcrumbItem;
 class AddressController extends AbstractFrontController
 {
     /**
-     * @var \WellCommerce\Bundle\AppBundle\Manager\Front\OrderAddressManager
+     * @var \WellCommerce\Bundle\OrderBundle\Manager\Front\OrderAddressManager
      */
     protected $manager;
 
