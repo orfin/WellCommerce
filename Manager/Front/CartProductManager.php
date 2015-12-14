@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\CartBundle\Manager\Front;
 
-use WellCommerce\Bundle\AppBundle\Exception\DeleteCartItemException;
+use WellCommerce\Bundle\CartBundle\Exception\DeleteCartItemException;
 use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 use WellCommerce\Bundle\CartBundle\Entity\CartProductInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
