@@ -37,6 +37,13 @@ class LocaleFormBuilder extends AbstractFormBuilder
             'options' => $this->get('locale.repository')->getLocaleNames()
         ]));
 
+        $requiredData->addChild($this->getElement('select', [
+            'name'        => 'currency',
+            'label'       => $this->trans('locale.label.currency'),
+            'options'     => $this->get('currency.dataset.admin')->getResult('select', [], ['label_column' => 'code']),
+            'transformer' => $this->getRepositoryTransformer('entity', $this->get('currency.repository'))
+        ]));
+
         $form->addFilter($this->getFilter('no_code'));
         $form->addFilter($this->getFilter('trim'));
         $form->addFilter($this->getFilter('secure'));
