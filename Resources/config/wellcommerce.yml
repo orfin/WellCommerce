@@ -60,6 +60,7 @@ parameters:
         WellCommerce\Bundle\LayoutBundle\DataFixtures\ORM\LoadLayoutBoxData: 210
         WellCommerce\Bundle\ShippingBundle\DataFixtures\ORM\LoadShippingMethodData: 220
         WellCommerce\Bundle\PaymentBundle\DataFixtures\ORM\LoadPaymentMethodData: 230
+        WellCommerce\Bundle\PageBundle\DataFixtures\ORM\LoadPageData: 240
     fixtures_product_limit: 100
     enabled_fixtures:
         WellCommerce\Bundle\AdminBundle\DataFixtures\ORM\LoadAdminMenuData: true
@@ -87,6 +88,7 @@ parameters:
         WellCommerce\Bundle\LayoutBundle\DataFixtures\ORM\LoadLayoutBoxData: true
         WellCommerce\Bundle\ShippingBundle\DataFixtures\ORM\LoadShippingMethodData: true
         WellCommerce\Bundle\PaymentBundle\DataFixtures\ORM\LoadPaymentMethodData: true
+        WellCommerce\Bundle\PageBundle\DataFixtures\ORM\LoadPageData: true
 
 #
 #well_commerce_media:
