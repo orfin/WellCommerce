@@ -76,6 +76,8 @@ class LoadClientData extends AbstractDataFixture
         $client->setBillingAddress($billingAddress);
         $client->setShippingAddress($shippingAddress);
 
+        $client->setShop($this->getReference('shop'));
+
         $manager->persist($client);
 
         $manager->flush();
