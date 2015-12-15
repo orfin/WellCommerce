@@ -25,8 +25,18 @@ class ClientSubscriber extends AbstractEventSubscriber
     public static function getSubscribedEvents()
     {
         return [
-            'client.post_create' => ['onClientPostCreate']
+            'client.post_create' => ['onClientPostCreate'],
+            'client.pre_create'  => ['onClientPreCreate']
         ];
+    }
+
+    public function onClientPreCreate(ResourceEvent $event)
+    {
+        $client = $event->getResource();
+        if ($client instanceof ClientInterface) {
+            $userName = $client->getUsername();
+            $client->getContactDetails()->setEmail($userName);
+        }
     }
 
     public function onClientPostCreate(ResourceEvent $event)
