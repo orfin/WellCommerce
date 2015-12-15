@@ -11,6 +11,10 @@ well_commerce_client:
             orm_configuration:
                 mapping: "@WellCommerceClientBundle/Resources/config/doctrine/ClientBillingAddress.orm.yml"
                 entity: WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddress
+        client_details:
+            orm_configuration:
+                mapping: "@WellCommerceClientBundle/Resources/config/doctrine/ClientDetails.orm.yml"
+                entity: WellCommerce\Bundle\ClientBundle\Entity\ClientDetails
         client_contact_details:
             orm_configuration:
                 mapping: "@WellCommerceClientBundle/Resources/config/doctrine/ClientContactDetails.orm.yml"

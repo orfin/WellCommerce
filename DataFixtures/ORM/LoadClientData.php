@@ -44,11 +44,13 @@ class LoadClientData extends AbstractDataFixture
         $client->getContactDetails()->setLastName($lastName);
         $client->getContactDetails()->setEmail($email);
         $client->getContactDetails()->setPhone($fakerGenerator->phoneNumber);
-        $client->setDiscount(25);
-        $client->setUsername($email);
-        $client->setPassword('demo');
-        $client->setConditionsAccepted(true);
-        $client->setNewsletterAccepted(true);
+
+        $client->getClientDetails()->setDiscount(25);
+        $client->getClientDetails()->setUsername($email);
+        $client->getClientDetails()->setPassword('demo');
+        $client->getClientDetails()->setConditionsAccepted(true);
+        $client->getClientDetails()->setNewsletterAccepted(true);
+
         $client->setClientGroup($clientGroup);
 
         $billingAddress = new ClientBillingAddress();

@@ -36,26 +36,6 @@ class Client implements ClientInterface
     protected $id;
 
     /**
-     * @var float
-     */
-    protected $discount;
-
-    /**
-     * @var string
-     */
-    protected $password;
-
-    /**
-     * @var string
-     */
-    protected $username;
-
-    /**
-     * @var string
-     */
-    protected $salt;
-
-    /**
      * @var ClientGroupInterface
      */
     protected $clientGroup;
@@ -71,14 +51,9 @@ class Client implements ClientInterface
     protected $wishlist;
 
     /**
-     * @var bool
+     * @var ClientDetails
      */
-    protected $conditionsAccepted;
-
-    /**
-     * @var bool
-     */
-    protected $newsletterAccepted;
+    protected $clientDetails;
 
     /**
      * @var ClientContactDetailsInterface
@@ -96,32 +71,11 @@ class Client implements ClientInterface
     protected $shippingAddress;
 
     /**
-     * @var string
-     */
-    protected $resetPasswordHash;
-
-    /**
      * @inheritDoc
      */
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getDiscount()
-    {
-        return $this->discount;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function setDiscount($discount)
-    {
-        $this->discount = (float)$discount;
     }
 
     /**
@@ -145,22 +99,7 @@ class Client implements ClientInterface
      */
     public function getPassword()
     {
-        return $this->password;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function setPassword($password)
-    {
-        if (strlen($password)) {
-            $this->password = password_hash($password, PASSWORD_BCRYPT, ['cost' => 12]);
-        }
-    }
-
-    public function resetPassword()
-    {
-        $this->password = null;
+        return $this->clientDetails->getPassword();
     }
 
     /**
@@ -168,22 +107,7 @@ class Client implements ClientInterface
      */
     public function getSalt()
     {
-        return null;
-    }
-
-    /**
-     * @param string $salt
-     */
-    public function setSalt($salt)
-    {
-        $this->salt = (string)$salt;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function eraseCredentials()
-    {
+        return $this->clientDetails->getSalt();
     }
 
     /**
@@ -191,16 +115,14 @@ class Client implements ClientInterface
      */
     public function getUsername()
     {
-        return $this->username;
+        return $this->clientDetails->getUsername();
     }
 
     /**
      * @inheritDoc
      */
-    public function setUsername($username)
+    public function eraseCredentials()
     {
-        $this->username = (string)$username;
-        $this->contactDetails->setEmail((string)$username);
     }
 
     /**
@@ -218,7 +140,7 @@ class Client implements ClientInterface
      */
     public function serialize()
     {
-        return serialize([$this->id, $this->username, $this->password]);
+        return serialize([$this->id, $this->getUsername(), $this->getPassword()]);
     }
 
     /**
@@ -226,7 +148,12 @@ class Client implements ClientInterface
      */
     public function unserialize($serialized)
     {
-        list($this->id, $this->username, $this->password) = unserialize($serialized);
+        list($this->id, $username, $password) = unserialize($serialized);
+        if (!$this->clientDetails instanceof ClientDetailsInterface) {
+            $this->clientDetails = new ClientDetails();
+        }
+        $this->clientDetails->setUsername($username);
+        $this->clientDetails->setPassword($password);
     }
 
     /**
@@ -234,51 +161,19 @@ class Client implements ClientInterface
      */
     public function isEqualTo(BaseUserInterface $user)
     {
-        if ($this->password !== $user->getPassword()) {
+        if ($this->getPassword() !== $user->getPassword()) {
             return false;
         }
 
-        if ($this->salt !== $user->getSalt()) {
+        if ($this->getSalt() !== $user->getSalt()) {
             return false;
         }
 
-        if ($this->username !== $user->getUsername()) {
+        if ($this->getUsername() !== $user->getUsername()) {
             return false;
         }
 
         return true;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function isConditionsAccepted()
-    {
-        return $this->conditionsAccepted;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function setConditionsAccepted($conditionsAccepted)
-    {
-        $this->conditionsAccepted = (bool)$conditionsAccepted;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function isNewsletterAccepted()
-    {
-        return $this->newsletterAccepted;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function setNewsletterAccepted($newsletterAccepted)
-    {
-        $this->newsletterAccepted = (bool)$newsletterAccepted;
     }
 
     /**
@@ -295,6 +190,22 @@ class Client implements ClientInterface
     public function getWishlist()
     {
         return $this->wishlist;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getClientDetails()
+    {
+        return $this->clientDetails;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setClientDetails(ClientDetailsInterface $clientDetails)
+    {
+        $this->clientDetails = $clientDetails;
     }
 
     /**
@@ -343,21 +254,5 @@ class Client implements ClientInterface
     public function setShippingAddress(ClientShippingAddressInterface $shippingAddress)
     {
         $this->shippingAddress = $shippingAddress;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getResetPasswordHash()
-    {
-        return $this->resetPasswordHash;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setResetPasswordHash($resetPasswordHash)
-    {
-        $this->resetPasswordHash = $resetPasswordHash;
     }
 }

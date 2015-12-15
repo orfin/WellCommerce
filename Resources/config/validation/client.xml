@@ -4,13 +4,11 @@
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
 
     <class name="WellCommerce\Bundle\ClientBundle\Entity\Client">
-        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
-            <option name="fields">username</option>
-            <option name="message">client.error.email.unique</option>
-            <option name="groups">
-                <value>client_registration</value>
-            </option>
-        </constraint>
+        <property name="clientDetails">
+            <constraint name="Valid">
+                <option name="deep">true</option>
+            </constraint>
+        </property>
         <property name="billingAddress">
             <constraint name="Valid">
                 <option name="deep">true</option>
@@ -26,6 +24,17 @@
                 <option name="deep">true</option>
             </constraint>
         </property>
+    </class>
+
+    <class name="WellCommerce\Bundle\ClientBundle\Entity\ClientDetails">
+        <!--<constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">-->
+            <!--<option name="fields">username</option>-->
+            <!--<option name="message">client.error.email.unique</option>-->
+            <!--<option name="repositoryMethod">findClientByUsername</option>-->
+            <!--<option name="groups">-->
+                <!--<value>client_registration</value>-->
+            <!--</option>-->
+        <!--</constraint>-->
         <property name="conditionsAccepted">
             <constraint name="EqualTo">
                 <option name="value">1</option>
@@ -132,29 +141,29 @@
                 </option>
             </constraint>
         </property>
-        <property name="email">
-            <constraint name="NotNull">
-                <option name="groups">
-                    <value>client_registration</value>
-                    <value>client_settings</value>
-                    <value>order_address</value>
-                </option>
-            </constraint>
-            <constraint name="NotBlank">
-                <option name="groups">
-                    <value>client_registration</value>
-                    <value>client_settings</value>
-                    <value>order_address</value>
-                </option>
-            </constraint>
-            <constraint name="Email">
-                <option name="groups">
-                    <value>client_registration</value>
-                    <value>client_settings</value>
-                    <value>order_address</value>
-                </option>
-            </constraint>
-        </property>
+        <!--<property name="email">-->
+            <!--<constraint name="NotNull">-->
+                <!--<option name="groups">-->
+                    <!--<value>client_registration</value>-->
+                    <!--<value>client_settings</value>-->
+                    <!--<value>order_address</value>-->
+                <!--</option>-->
+            <!--</constraint>-->
+            <!--<constraint name="NotBlank">-->
+                <!--<option name="groups">-->
+                    <!--<value>client_registration</value>-->
+                    <!--<value>client_settings</value>-->
+                    <!--<value>order_address</value>-->
+                <!--</option>-->
+            <!--</constraint>-->
+            <!--<constraint name="Email">-->
+                <!--<option name="groups">-->
+                    <!--<value>client_registration</value>-->
+                    <!--<value>client_settings</value>-->
+                    <!--<value>order_address</value>-->
+                <!--</option>-->
+            <!--</constraint>-->
+        <!--</property>-->
     </class>
 
     <class name="WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddress">

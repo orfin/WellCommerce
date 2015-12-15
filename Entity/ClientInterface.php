@@ -39,53 +39,6 @@ interface ClientInterface extends
     public function getId();
 
     /**
-     * @return float
-     */
-    public function getDiscount();
-
-    /**
-     * @param float $discount
-     */
-    public function setDiscount($discount);
-
-    /**
-     * @param string $password
-     */
-    public function setPassword($password);
-
-    public function resetPassword();
-
-    /**
-     * @param string $username
-     */
-    public function setUsername($username);
-
-    /**
-     * @param string $salt
-     */
-    public function setSalt($salt);
-
-    /**
-     * @return bool
-     */
-    public function isConditionsAccepted();
-
-    /**
-     * @param bool $conditionsAccepted
-     */
-    public function setConditionsAccepted($conditionsAccepted);
-
-    /**
-     * @return bool
-     */
-    public function isNewsletterAccepted();
-
-    /**
-     * @param bool $newsletterAccepted
-     */
-    public function setNewsletterAccepted($newsletterAccepted);
-
-    /**
      * @return Collection
      */
     public function getOrders();
@@ -94,6 +47,16 @@ interface ClientInterface extends
      * @return Collection
      */
     public function getWishlist();
+
+    /**
+     * @return ClientDetailsInterface
+     */
+    public function getClientDetails();
+
+    /**
+     * @param ClientDetailsInterface $clientDetails
+     */
+    public function setClientDetails(ClientDetailsInterface $clientDetails);
 
     /**
      * @return ClientContactDetailsInterface
@@ -124,14 +87,4 @@ interface ClientInterface extends
      * @param ClientShippingAddressInterface $shippingAddress
      */
     public function setShippingAddress(ClientShippingAddressInterface $shippingAddress);
-
-    /**
-     * @return string
-     */
-    public function getResetPasswordHash();
-
-    /**
-     * @param string $resetPasswordHash
-     */
-    public function setResetPasswordHash($resetPasswordHash);
 }

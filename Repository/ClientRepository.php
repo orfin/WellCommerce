@@ -58,7 +58,7 @@ class ClientRepository extends AbstractEntityRepository implements ClientReposit
     {
         $queryBuilder = $this->createQueryBuilder('c')
             ->select('c')
-            ->where('c.username = :username')
+            ->where('c.clientDetails.username = :username')
             ->setParameter('username', $username)
             ->getQuery();
 

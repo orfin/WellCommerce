@@ -8,6 +8,9 @@ WellCommerce\Bundle\ClientBundle\Entity\Client:
             generator:
                 strategy: AUTO
     embedded:
+        clientDetails:
+            class: WellCommerce\Bundle\ClientBundle\Entity\ClientDetails
+            columnPrefix: client_details_
         billingAddress:
             class: WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddress
             columnPrefix: billing_address_
@@ -17,39 +20,6 @@ WellCommerce\Bundle\ClientBundle\Entity\Client:
         contactDetails:
             class: WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetails
             columnPrefix: contact_details_
-    fields:
-        discount:
-            type: decimal
-            scale: 2
-            nullable: false
-            precision: 15
-        password:
-            type: string
-            length: 64
-            nullable: false
-        username:
-            type: string
-            length: 60
-            unique: true
-            nullable: false
-        salt:
-            type: string
-            length: 40
-            unique: false
-            nullable: false
-        resetPasswordHash:
-            type: string
-            length: 48
-            unique: true
-            nullable: true
-        conditionsAccepted:
-            type: boolean
-            nullable: false
-            column: conditions_accepted
-        newsletterAccepted:
-            type: boolean
-            nullable: false
-            column: newsletter_accepted
     oneToMany:
         wishlist:
             targetEntity: WellCommerce\Bundle\WishlistBundle\Entity\Wishlist
