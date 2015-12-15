@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\ClientBundle\Manager\Front;
 
-use WellCommerce\Bundle\AppBundle\Exception\ResetPasswordException;
+use WellCommerce\Bundle\ClientBundle\Exception\ResetPasswordException;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
 
@@ -45,7 +45,7 @@ class ClientForgotPasswordManager extends AbstractFrontManager
     protected function setClientResetPasswordHash(ClientInterface $client)
     {
         $hash = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36) . $client->getId();
-        $client->setResetPasswordHash($hash);
+        $client->getClientDetails()->setResetPasswordHash($hash);
         $this->updateResource($client);
     }
 
@@ -75,7 +75,7 @@ class ClientForgotPasswordManager extends AbstractFrontManager
      */
     protected function findClient($username)
     {
-        $resource = $this->getRepository()->findOneBy(['username' => $username]);
+        $resource = $this->getRepository()->findOneBy(['clientDetails.username' => $username]);
 
         return $resource;
     }

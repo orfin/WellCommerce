@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\ClientBundle\Controller\Box;
 
-use WellCommerce\Bundle\ClientBundle\Exception\ResetPasswordException;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
+use WellCommerce\Bundle\ClientBundle\Exception\ResetPasswordException;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 
 /**
@@ -53,13 +53,13 @@ class ClientForgotPasswordBoxController extends AbstractBoxController
     public function changeAction()
     {
         $hash   = $this->getRequestHelper()->getAttributesBagParam('hash');
-        $client = $this->manager->getRepository()->findOneBy(['resetPasswordHash' => $hash]);
+        $client = $this->manager->getRepository()->findOneBy(['clientDetails.resetPasswordHash' => $hash]);
 
         if (!$client instanceof ClientInterface) {
             return $this->getRouterHelper()->redirectToAction('reset');
         }
 
-        $client->resetPassword();
+        $client->getClientDetails()->resetPassword();
         $form = $this->createChangePasswordForm($client);
 
         if ($form->handleRequest()->isSubmitted()) {
