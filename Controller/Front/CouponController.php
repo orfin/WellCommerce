@@ -24,7 +24,7 @@ use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 class CouponController extends AbstractFrontController
 {
     /**
-     * @var \WellCommerce\Bundle\AppBundle\Manager\Front\CouponManager
+     * @var \WellCommerce\Bundle\CouponBundle\Manager\Front\CouponManager
      */
     protected $manager;
 
