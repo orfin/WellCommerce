@@ -20,7 +20,10 @@ namespace WellCommerce\Bundle\CoreBundle\Helper\Validator;
 interface ValidatorHelperInterface
 {
     /**
-     * @param object $entity
+     * @param object $value
+     * @param array  $groups
+     *
+     * @return mixed
      */
-    public function validate($entity);
+    public function validate($value, array $groups = []);
 }
