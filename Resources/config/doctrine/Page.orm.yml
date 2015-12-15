@@ -14,6 +14,11 @@ WellCommerce\Bundle\PageBundle\Entity\Page:
             generator:
                 strategy: IDENTITY
     fields:
+        section:
+            type: string
+            length: 255
+            unique: false
+            nullable: true
         publish:
             type: boolean
             scale: 0

@@ -48,6 +48,7 @@ class LoadPageData extends AbstractDataFixture
         $this->defaultText = $this->getFakerGenerator()->text(600);
 
         $aboutUs = $this->createPage('About us', 0, null);
+        $this->setReference('page_about_us', $aboutUs);
         $this->createPage('News feed', 10, $aboutUs);
         $this->createPage('Stores', 20, $aboutUs);
         $this->createPage('Brands', 30, $aboutUs);
@@ -56,6 +57,7 @@ class LoadPageData extends AbstractDataFixture
         $this->createPage('Wholesale', 60, $aboutUs);
 
         $help = $this->createPage('Help', 10, null);
+        $this->setReference('page_help', $aboutUs);
         $this->createPage('Conditions', 10, $help);
         $this->createPage('Returns, warranty', 20, $help);
         $this->createPage('Shipping', 30, $help);
@@ -82,6 +84,7 @@ class LoadPageData extends AbstractDataFixture
         $page->setHierarchy($hierarchy);
         $page->setPublish(1);
         $page->setRedirectType(0);
+        $page->setSection('');
         $page->addShop($this->shop);
         $page->translate('en')->setName($name);
         $page->translate('en')->setSlug(Sluggable::makeSlug($name));

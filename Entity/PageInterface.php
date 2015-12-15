@@ -101,4 +101,14 @@ interface PageInterface
      * @param int $redirectType
      */
     public function setRedirectType($redirectType);
+
+    /**
+     * @return string
+     */
+    public function getSection();
+
+    /**
+     * @param string $section
+     */
+    public function setSection($section);
 }

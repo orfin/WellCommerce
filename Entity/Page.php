@@ -50,6 +50,11 @@ class Page implements PageInterface
     /**
      * @var string
      */
+    protected $section;
+
+    /**
+     * @var string
+     */
     protected $redirectUrl;
 
     /**
@@ -211,5 +216,21 @@ class Page implements PageInterface
     public function setRedirectType($redirectType)
     {
         $this->redirectType = $redirectType;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSection()
+    {
+        return $this->section;
+    }
+
+    /**
+     * @param string $section
+     */
+    public function setSection($section)
+    {
+        $this->section = $section;
     }
 }

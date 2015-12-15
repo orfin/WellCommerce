@@ -80,6 +80,11 @@ class PageFormBuilder extends AbstractFormBuilder
             'default' => 0
         ]));
 
+        $mainData->addChild($this->getElement('text_field', [
+            'name'    => 'section',
+            'label'   => $this->trans('page.label.section'),
+        ]));
+
         $mainData->addChild($this->getElement('tree', [
             'name'        => 'parent',
             'label'       => $this->trans('page.label.parent'),

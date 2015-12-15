@@ -51,6 +51,11 @@ class PageDataGrid extends AbstractDataGrid
         ]));
 
         $collection->add(new Column([
+            'id'      => 'section',
+            'caption' => $this->trans('page.label.section'),
+        ]));
+
+        $collection->add(new Column([
             'id'         => 'hierarchy',
             'caption'    => $this->trans('common.label.hierarchy'),
             'appearance' => new Appearance([

@@ -36,6 +36,7 @@ class PageDataSet extends AbstractDataSet
             'locale'    => 'page_translation.locale',
             'route'     => 'IDENTITY(page_translation.route)',
             'publish'   => 'page.publish',
+            'section'   => 'page.section',
             'shop'      => 'page_shops.id',
             'hierarchy' => 'page.hierarchy',
         ]);
