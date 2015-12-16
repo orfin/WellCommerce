@@ -54,8 +54,8 @@ class LoadCategoryData extends AbstractDataFixture implements FixtureInterface, 
             $category->setHierarchy($hierarchy);
             $category->setParent(null);
             $category->addShop($shop);
-            $category->translate('en')->setName($name);
-            $category->translate('en')->setSlug(Sluggable::makeSlug($name));
+            $category->translate($this->container->getParameter('locale'))->setName($name);
+            $category->translate($this->container->getParameter('locale'))->setSlug(Sluggable::makeSlug($name));
             $category->mergeNewTranslations();
             $manager->persist($category);
             $this->setReference('category_' . $name, $category);

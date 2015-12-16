@@ -236,7 +236,7 @@ class LoadLayoutBoxData extends AbstractDataFixture
         $layoutBox->setBoxType($type);
         $layoutBox->setIdentifier($identifier);
         $layoutBox->setSettings($settings);
-        $layoutBox->translate('en')->setName($name);
+        $layoutBox->translate($this->container->getParameter('locale'))->setName($name);
         $layoutBox->mergeNewTranslations();
 
         $this->manager->persist($layoutBox);

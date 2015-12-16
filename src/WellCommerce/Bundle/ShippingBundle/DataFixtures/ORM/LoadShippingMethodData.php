@@ -45,7 +45,7 @@ class LoadShippingMethodData extends AbstractDataFixture
         $fedEx->setCalculator('price_table');
         $fedEx->setTax($tax);
         $fedEx->setCurrency($currency);
-        $fedEx->translate('en')->setName('FedEx');
+        $fedEx->translate($this->container->getParameter('locale'))->setName('FedEx');
         $fedEx->mergeNewTranslations();
         $fedEx->setCosts($this->getShippingCostsCollection($fedEx));
         $manager->persist($fedEx);
@@ -54,7 +54,7 @@ class LoadShippingMethodData extends AbstractDataFixture
         $ups->setCalculator('price_table');
         $ups->setTax($tax);
         $ups->setCurrency($currency);
-        $ups->translate('en')->setName('UPS');
+        $ups->translate($this->container->getParameter('locale'))->setName('UPS');
         $ups->mergeNewTranslations();
         $ups->setCosts($this->getShippingCostsCollection($ups));
         $manager->persist($ups);

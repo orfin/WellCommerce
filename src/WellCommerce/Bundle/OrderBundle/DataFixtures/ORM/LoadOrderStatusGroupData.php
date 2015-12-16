@@ -37,7 +37,7 @@ class LoadOrderStatusGroupData extends AbstractDataFixture
 
         foreach (self::$samples as $name) {
             $orderStatusGroup = new OrderStatusGroup();
-            $orderStatusGroup->translate('en')->setName($name);
+            $orderStatusGroup->translate($this->container->getParameter('locale'))->setName($name);
             $orderStatusGroup->mergeNewTranslations();
             $manager->persist($orderStatusGroup);
             $this->setReference('order_status_group_' . $name, $orderStatusGroup);

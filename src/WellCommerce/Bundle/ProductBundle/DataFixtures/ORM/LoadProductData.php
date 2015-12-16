@@ -90,7 +90,7 @@ class LoadProductData extends AbstractDataFixture
         $sellPrice->setCurrency($currency->getCode());
 
         foreach ($statuses as $status) {
-            if ($status->translate()->getName() === 'Promotions') {
+            if ($status->translate($this->container->getParameter('locale'))->getName() === 'Promotions') {
                 $sellPrice->setDiscountedGrossAmount($price * (rand(80, 95) / 100));
                 $sellPrice->setValidFrom(new \DateTime());
                 $sellPrice->setValidTo((new \DateTime())->modify('+30 days'));
@@ -110,10 +110,10 @@ class LoadProductData extends AbstractDataFixture
         $product->addShop($shop);
         $product->setStatuses($statuses);
 
-        $product->translate('en')->setName($name);
-        $product->translate('en')->setSlug(Sluggable::makeSlug($name));
-        $product->translate('en')->setShortDescription($shortDescription);
-        $product->translate('en')->setDescription($description);
+        $product->translate($this->container->getParameter('locale'))->setName($name);
+        $product->translate($this->container->getParameter('locale'))->setSlug(Sluggable::makeSlug($name));
+        $product->translate($this->container->getParameter('locale'))->setShortDescription($shortDescription);
+        $product->translate($this->container->getParameter('locale'))->setDescription($description);
         $product->mergeNewTranslations();
 
         $product->setProductPhotos($this->getPhotos($product, $manager));

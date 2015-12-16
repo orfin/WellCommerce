@@ -41,7 +41,7 @@ class LoadPaymentMethodData extends AbstractDataFixture
         $cod->setEnabled(1);
         $cod->setHierarchy(0);
         $cod->setProcessor('cod');
-        $cod->translate('en')->setName('Cash on delivery');
+        $cod->translate($this->container->getParameter('locale'))->setName('Cash on delivery');
         $cod->setShippingMethods($shippingMethods);
         $cod->setDefaultOrderStatus($this->getReference('default_order_status'));
         $cod->mergeNewTranslations();
@@ -51,7 +51,7 @@ class LoadPaymentMethodData extends AbstractDataFixture
         $bankTransfer->setEnabled(1);
         $bankTransfer->setHierarchy(0);
         $bankTransfer->setProcessor('bank_transfer');
-        $bankTransfer->translate('en')->setName('Bank transfer');
+        $bankTransfer->translate($this->container->getParameter('locale'))->setName('Bank transfer');
         $bankTransfer->setShippingMethods($shippingMethods);
         $bankTransfer->setDefaultOrderStatus($this->getReference('default_order_status'));
         $bankTransfer->mergeNewTranslations();
