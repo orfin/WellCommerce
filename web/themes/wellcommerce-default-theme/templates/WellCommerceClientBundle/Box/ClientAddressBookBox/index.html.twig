@@ -1,0 +1,106 @@
+{% trans_default_domain "wellcommerce" %}
+{% import "WellCommerceAppBundle:Front/Form:macros.html.twig" as macros %}
+<div class="well-form mbt60">
+    {% include 'WellCommerceAppBundle:Front/Common:flashes.html.twig' %}
+
+    {{ macros.form_begin(form) }}
+    {% set billingAddress = form.getChildren().get('billingAddress').getChildren() %}
+    {% set shippingAddress = form.getChildren().get('shippingAddress').getChildren() %}
+
+    <div class="well-form mbt60">
+        <h4>{% trans %}client.heading.billing_address{% endtrans %}<small>{% trans %}form.help.required_fields{% endtrans %}</small></h4>
+
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="row">
+                    <div class="col-sm-6 col-xs-12">
+                        {{ macros.element(billingAddress.get('billingAddress.firstName')) }}
+                    </div>
+                    <div class="col-sm-6 col-xs-12">
+                        {{ macros.element(billingAddress.get('billingAddress.lastName')) }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6 col-xs-12">
+                        {{ macros.element(billingAddress.get('billingAddress.street')) }}
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-6">
+                        {{ macros.element(billingAddress.get('billingAddress.streetNo')) }}
+                    </div>
+
+                    <div class="col-md-3 col-sm-3 col-xs-6">
+                        {{ macros.element(billingAddress.get('billingAddress.flatNo')) }}
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-sm-6 col-xs-12">
+                        {{ macros.element(billingAddress.get('billingAddress.city')) }}
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-6">
+                        {{ macros.element(billingAddress.get('billingAddress.postCode')) }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6 col-xs-12">
+                        {{ macros.element(billingAddress.get('billingAddress.country')) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="well-form">
+        <h4>{% trans %}client.heading.shipping_address{% endtrans %}</h4>
+
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="row">
+                    <div class="col-sm-6 col-xs-12">
+                        {{ macros.element(shippingAddress.get('shippingAddress.firstName')) }}
+                    </div>
+                    <div class="col-sm-6 col-xs-12">
+                        {{ macros.element(shippingAddress.get('shippingAddress.lastName')) }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6 col-xs-12">
+                        {{ macros.element(shippingAddress.get('shippingAddress.street')) }}
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-6">
+                        {{ macros.element(shippingAddress.get('shippingAddress.streetNo')) }}
+                    </div>
+
+                    <div class="col-md-3 col-sm-3 col-xs-6">
+                        {{ macros.element(shippingAddress.get('shippingAddress.flatNo')) }}
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-sm-6 col-xs-12">
+                        {{ macros.element(shippingAddress.get('shippingAddress.city')) }}
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-6">
+                        {{ macros.element(shippingAddress.get('shippingAddress.postCode')) }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6 col-xs-12">
+                        {{ macros.element(shippingAddress.get('shippingAddress.country')) }}
+                    </div>
+                </div>
+
+                <div class="clearfix mtp20">
+                    <button type="submit" class="btn btn-primary pull-right">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ macros.form_end(form) }}
+</div>
