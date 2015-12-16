@@ -35,7 +35,7 @@ class LoadAvailabilityData extends AbstractDataFixture
 
         foreach (self::$samples as $name) {
             $availability = $this->get('availability.factory')->create();
-            $availability->translate('en')->setName($name);
+            $availability->translate($this->container->getParameter('locale'))->setName($name);
             $availability->mergeNewTranslations();
             $manager->persist($availability);
             $this->setReference('availability_' . $name, $availability);
