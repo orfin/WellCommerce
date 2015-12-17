@@ -286,6 +286,7 @@ client:
         register: 'Sign up'
         reset_password: 'Confirm password reset'
         change_password: 'Change password'
+
 client_group:
     heading:
         index: Client groups

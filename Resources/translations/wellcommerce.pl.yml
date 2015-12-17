@@ -285,6 +285,7 @@ client:
         register: Zarejestruj się
         reset_password: Potwierdź zresetowanie hasła
         change_password: Potwierdź zmianę hasła
+
 client_group:
     heading:
         index: Grupy klientów
