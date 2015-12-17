@@ -22,10 +22,4 @@ use WellCommerce\Bundle\CoreBundle\Test\Entity\AbstractEntityTestCase;
  */
 class ClientTest extends AbstractEntityTestCase
 {
-    public function testNewEntityFailsValidation()
-    {
-        $entity = new Client();
-        $errors = $this->validator->validate($entity, null, ['client_registration']);
-        $this->assertFalse(0 === count($errors));
-    }
 }
