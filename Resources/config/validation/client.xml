@@ -38,7 +38,7 @@
         <property name="conditionsAccepted">
             <constraint name="EqualTo">
                 <option name="value">1</option>
-                <option name="message">client.validation.error.conditions_not_accepted</option>
+                <option name="message">client.conditions_not_accepted</option>
                 <option name="groups">
                     <value>client_registration</value>
                 </option>
