@@ -61,5 +61,6 @@ class TextField extends AbstractInputField implements ElementInterface
     {
         parent::prepareAttributesCollection($collection);
         $collection->add(new Attribute('size', $this->getOption('size')));
+        $collection->add(new Attribute('sSuffix', $this->getOption('suffix')));
     }
 }
