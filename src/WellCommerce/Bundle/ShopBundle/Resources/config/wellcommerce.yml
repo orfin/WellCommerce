@@ -1,0 +1,9 @@
+well_commerce_shop:
+    services:
+        shop:
+            auto_services:
+                factory: WellCommerce\Bundle\ShopBundle\Factory\ShopFactory
+                repository: WellCommerce\Bundle\ShopBundle\Repository\ShopRepository
+            orm_configuration:
+                mapping: "@WellCommerceShopBundle/Resources/config/doctrine/Shop.orm.yml"
+                entity: WellCommerce\Bundle\ShopBundle\Entity\Shop
