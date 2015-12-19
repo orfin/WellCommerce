@@ -50,8 +50,7 @@ class LoadUserData extends AbstractDataFixture
         $user->setUsername('admin');
         $user->setEmail('admin@domain.org');
         $user->setEnabled(1);
-        $password = password_hash('admin', PASSWORD_BCRYPT, ['cost' => 12]);
-        $user->setPassword($password);
+        $user->setPassword('admin');
         $user->addRole($role);
         $user->getGroups()->add($group);
         $manager->persist($user);
