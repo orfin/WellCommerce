@@ -1,8 +1,0 @@
-WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodTranslation:
-    type: entity
-    table: payment_method_translation
-    fields:
-        name:
-            type: string
-            length: 255
-            nullable: false
