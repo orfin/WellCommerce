@@ -5,8 +5,8 @@
     Translator.add("This value should be of type {{ type }}.", "D\u00ebse W\u00e4ert sollt vum Typ {{ type }} sinn.", "validators", "lb");
     Translator.add("This value should be blank.", "D\u00ebse W\u00e4ert sollt eidel sinn.", "validators", "lb");
     Translator.add("The value you selected is not a valid choice.", "D\u00ebse W\u00e4ert sollt enger vun de Wielm\u00e9iglechkeeten entspriechen.", "validators", "lb");
-    Translator.add("You must select at least {{ limit }} choice.|You must select at least {{ limit }} choices.", "Dir sollt mindestens {{ limit }} M\u00e9iglechkeete wielen.", "validators", "lb");
-    Translator.add("You must select at most {{ limit }} choice.|You must select at most {{ limit }} choices.", "Dir sollt h\u00e9chstens {{ limit }} M\u00e9iglechkeete wielen.", "validators", "lb");
+    Translator.add("You must select at least {{ limit }} choice.|You must select at least {{ limit }} choices.", "Et muss mindestens {{ limit }} M\u00e9iglechkeet ausgewielt ginn.|Et musse mindestens {{ limit }} M\u00e9iglechkeeten ausgewielt ginn.", "validators", "lb");
+    Translator.add("You must select at most {{ limit }} choice.|You must select at most {{ limit }} choices.", "Et dierf h\u00e9chstens {{ limit }} M\u00e9iglechkeet ausgewielt ginn.|Et dierfen h\u00e9chstens {{ limit }} M\u00e9iglechkeeten ausgewielt ginn.", "validators", "lb");
     Translator.add("One or more of the given values is invalid.", "Een oder m\u00e9i vun de W\u00e4erter ass ong\u00eblteg.", "validators", "lb");
     Translator.add("The fields {{ fields }} were not expected.", "D'Felder {{ fields }} goufen net erwaart.", "validators", "lb");
     Translator.add("The fields {{ fields }} are missing.", "D'Felder {{ fields }} feelen.", "validators", "lb");
@@ -74,6 +74,10 @@
     Translator.add("The image is square ({{ width }}x{{ height }}px). Square images are not allowed.", "D'Bild ass quadratesch ({{ width }}x{{ height }}px). Quadratesch Biller sinn net erlaabt.", "validators", "lb");
     Translator.add("The image is landscape oriented ({{ width }}x{{ height }}px). Landscape oriented images are not allowed.", "D'Bild ass am Queeschformat ({{ width }}x{{ height }}px). Biller am Queeschformat sinn net erlaabt.", "validators", "lb");
     Translator.add("The image is portrait oriented ({{ width }}x{{ height }}px). Portrait oriented images are not allowed.", "D'Bild ass am H\u00e9ichformat ({{ width }}x{{ height }}px). Biller am H\u00e9ichformat sinn net erlaabt.", "validators", "lb");
+    Translator.add("An empty file is not allowed.", "En eidele Fichier ass net erlaabt.", "validators", "lb");
+    Translator.add("The host could not be resolved.", "Den Domain-Numm konnt net opgel\u00e9ist ginn.", "validators", "lb");
+    Translator.add("This value does not match the expected {{ charset }} charset.", "D\u00ebse W\u00e4ert entspr\u00e9cht net dem erwaarten Zeechesaz {{ charset }}.", "validators", "lb");
+    Translator.add("This is not a valid Business Identifier Code (BIC).", "D\u00ebst ass kee g\u00ebltege \"Business Identifier Code\" (BIC).", "validators", "lb");
     Translator.add("This form should not contain extra fields.", "D\u00ebs Feldergrupp sollt keng zous\u00e4tzlech Felder enthalen.", "validators", "lb");
     Translator.add("The uploaded file was too large. Please try to upload a smaller file.", "De gesch\u00e9cktene Fichier ass ze grouss. Versicht wann ech gelift ee m\u00e9i klenge Fichier eropzelueden.", "validators", "lb");
     Translator.add("The CSRF token is invalid. Please try to resubmit the form.", "Den CSRF-Token ass ong\u00eblteg. Versicht wann ech gelift de Formulaire nach eng K\u00e9ier ze sch\u00e9cken.", "validators", "lb");

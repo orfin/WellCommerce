@@ -80,4 +80,5 @@
     Translator.add("This form should not contain extra fields.", "Ten formularz nie powinien zawiera\u0107 dodatkowych p\u00f3l.", "validators", "pl");
     Translator.add("The uploaded file was too large. Please try to upload a smaller file.", "Wgrany plik by\u0142 za du\u017cy. Prosz\u0119 spr\u00f3bowa\u0107 wgra\u0107 mniejszy plik.", "validators", "pl");
     Translator.add("The CSRF token is invalid. Please try to resubmit the form.", "Token CSRF jest nieprawid\u0142owy. Prosz\u0119 spr\u00f3bowa\u0107 wys\u0142a\u0107 formularz ponownie.", "validators", "pl");
+    Translator.add("client.conditions_not_accepted", "Musisz zaakceptowa\u0107 regulamin sklepu", "validators", "pl");
 })(Translator);

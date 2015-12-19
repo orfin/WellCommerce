@@ -1364,6 +1364,15 @@
     Translator.add("This value should be less than or equal to {{ compared_value }}.", "\u0421\u0442\u043e\u0439\u043d\u043e\u0441\u0442\u0442\u0430 \u0442\u0440\u044f\u0431\u0432\u0430 \u0434\u0430 \u0431\u044a\u0434\u0435 \u043f\u043e-\u043c\u0430\u043b\u043a\u0430 \u0438\u043b\u0438 \u0440\u0430\u0432\u043d\u0430 \u043d\u0430 {{ compared_value }}.", "validators", "bg");
     Translator.add("This value should not be equal to {{ compared_value }}.", "\u0421\u0442\u043e\u0439\u043d\u043e\u0441\u0442\u0442\u0430 \u043d\u0435 \u0442\u0440\u044f\u0431\u0432\u0430 \u0434\u0430 \u0431\u044a\u0434\u0435 \u0440\u0430\u0432\u043d\u0430 \u043d\u0430 {{ compared_value }}.", "validators", "bg");
     Translator.add("This value should not be identical to {{ compared_value_type }} {{ compared_value }}.", "\u0421\u0442\u043e\u0439\u043d\u043e\u0441\u0442\u0442\u0430 \u043d\u0435 \u0442\u0440\u044f\u0431\u0432\u0430 \u0434\u0430 \u0431\u044a\u0434\u0435 \u0438\u0434\u0435\u043d\u0442\u0438\u0447\u043d\u0430 \u0441 {{ compared_value_type }} {{ compared_value }}.", "validators", "bg");
+    Translator.add("The image ratio is too big ({{ ratio }}). Allowed maximum ratio is {{ max_ratio }}.", "\u0418\u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u0438\u0435\u0442\u043e \u0435 \u0441 \u0442\u0432\u044a\u0440\u0434\u0435 \u0433\u043e\u043b\u044f\u043c\u0430 \u043f\u0440\u043e\u043f\u043e\u0440\u0446\u0438\u044f ({{ ratio }}). \u041c\u0430\u043a\u0441\u0438\u043c\u0430\u043b\u043d\u0430\u0442\u0430 \u043f\u0440\u043e\u043f\u043e\u0440\u0446\u0438\u044f \u0442\u0440\u044f\u0431\u0432\u0430 \u0434\u0430 \u0435 {{ max_ratio }}.", "validators", "bg");
+    Translator.add("The image ratio is too small ({{ ratio }}). Minimum ratio expected is {{ min_ratio }}.", "\u0418\u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u0438\u0435\u0442\u043e \u0435 \u0441 \u0442\u0432\u044a\u0440\u0434\u0435 \u043c\u0430\u043b\u043a\u0430 \u043f\u0440\u043e\u043f\u043e\u0440\u0446\u0438\u044f ({{ ratio }}). \u041c\u0438\u043d\u0438\u043c\u0430\u043b\u043d\u0430\u0442\u0430 \u043f\u0440\u043e\u043f\u043e\u0440\u0446\u0438\u044f \u0442\u0440\u044f\u0431\u0432\u0430 \u0434\u0430 \u0435 {{ min_ratio }}.", "validators", "bg");
+    Translator.add("The image is square ({{ width }}x{{ height }}px). Square images are not allowed.", "\u0418\u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u0438\u0435\u0442\u043e \u0435 \u043a\u0432\u0430\u0434\u0440\u0430\u0442 ({{ width }}x{{ height }}px). \u0422\u0430\u043a\u0438\u0432\u0430 \u0438\u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u0438\u044f \u043d\u0435 \u0441\u0430 \u0440\u0430\u0437\u0440\u0435\u0448\u0435\u043d\u0438.", "validators", "bg");
+    Translator.add("The image is landscape oriented ({{ width }}x{{ height }}px). Landscape oriented images are not allowed.", "\u0418\u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u0438\u0435\u0442\u043e \u0435 \u0441 \u043f\u0435\u0439\u0437\u0430\u0436\u043d\u0430 \u043e\u0440\u0438\u0435\u043d\u0442\u0430\u0446\u0438\u044f ({{ width }}x{{ height }}px). \u0418\u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u0438\u044f \u0441 \u0442\u0430\u043a\u0430\u0432\u0430 \u043e\u0440\u0438\u0435\u043d\u0442\u0430\u0446\u0438\u044f \u043d\u0435 \u0441\u0430 \u0440\u0430\u0437\u0440\u0435\u0448\u0435\u043d\u0438.", "validators", "bg");
+    Translator.add("The image is portrait oriented ({{ width }}x{{ height }}px). Portrait oriented images are not allowed.", "\u0418\u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u0438\u0435\u0442\u043e \u0435 \u0441 \u043f\u043e\u0440\u0442\u0440\u0435\u0442\u043d\u0430 \u043e\u0440\u0438\u0435\u043d\u0442\u0430\u0446\u0438\u044f ({{ width }}x{{ height }}px). \u0418\u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u0438\u044f \u0441 \u0442\u0430\u043a\u0430\u0432\u0430 \u043e\u0440\u0438\u0435\u043d\u0442\u0430\u0446\u0438\u044f \u043d\u0435 \u0441\u0430 \u0440\u0430\u0437\u0440\u0435\u0448\u0435\u043d\u0438.", "validators", "bg");
+    Translator.add("An empty file is not allowed.", "\u041f\u0440\u0430\u0437\u043d\u0438 \u0444\u0430\u0439\u043b\u043e\u0432\u0435 \u043d\u0435 \u0441\u0430 \u0440\u0430\u0437\u0440\u0435\u0448\u0435\u043d\u0438.", "validators", "bg");
+    Translator.add("The host could not be resolved.", "\u0425\u043e\u0441\u0442\u044a\u0442 \u0435 \u043d\u0435\u0434\u043e\u0441\u0442\u044a\u043f\u0435\u043d.", "validators", "bg");
+    Translator.add("This value does not match the expected {{ charset }} charset.", "\u0421\u0442\u043e\u0439\u043d\u043e\u0441\u0442\u0442\u0430 \u043d\u0435 \u0441\u044a\u0432\u043f\u0430\u0434\u0430 \u0441 {{ charset }}.", "validators", "bg");
+    Translator.add("This is not a valid Business Identifier Code (BIC).", "\u041d\u0435\u0432\u0430\u043b\u0438\u0434\u0435\u043d \u0431\u0438\u0437\u043d\u0435\u0441 \u0438\u0434\u0435\u043d\u0442\u0438\u0444\u0438\u043a\u0430\u0446\u0438\u043e\u043d\u0435\u043d \u043a\u043e\u0434 (BIC).", "validators", "bg");
     Translator.add("This form should not contain extra fields.", "\u0422\u0430\u0437\u0438 \u0444\u043e\u0440\u043c\u0430 \u043d\u0435 \u0442\u0440\u044f\u0431\u0432\u0430 \u0434\u0430 \u0441\u044a\u0434\u044a\u0440\u0436\u0430 \u0434\u043e\u043f\u044a\u043b\u043d\u0438\u0442\u0435\u043b\u043d\u0438 \u043f\u043e\u043b\u0435\u0442\u0430.", "validators", "bg");
     Translator.add("The uploaded file was too large. Please try to upload a smaller file.", "\u041a\u0430\u0447\u0435\u043d\u0438\u044f\u0442 \u0444\u0430\u0439\u043b \u0435 \u0442\u0432\u044a\u0440\u0434\u0435 \u0433\u043e\u043b\u044f\u043c. \u041c\u043e\u043b\u044f, \u043e\u043f\u0438\u0442\u0430\u0439\u0442\u0435 \u0434\u0430 \u043a\u0430\u0447\u0438\u0442\u0435 \u043f\u043e-\u043c\u0430\u043b\u044a\u043a \u0444\u0430\u0439\u043b.", "validators", "bg");
     Translator.add("The CSRF token is invalid. Please try to resubmit the form.", "\u041d\u0435\u0432\u0430\u043b\u0438\u0434\u0435\u043d CSRF \u0442\u043e\u043a\u0435\u043d. \u041c\u043e\u043b\u044f, \u043e\u043f\u0438\u0442\u0430\u0439\u0442\u0435 \u0434\u0430 \u0438\u0437\u043f\u0440\u0430\u0442\u0438\u0442\u0435 \u0444\u043e\u0440\u043c\u0430\u0442\u0430 \u043e\u0442\u043d\u043e\u0432\u043e.", "validators", "bg");
@@ -1901,6 +1910,7 @@
     Translator.add("This form should not contain extra fields.", "This form should not contain extra fields.", "validators", "en");
     Translator.add("The uploaded file was too large. Please try to upload a smaller file.", "The uploaded file was too large. Please try to upload a smaller file.", "validators", "en");
     Translator.add("The CSRF token is invalid. Please try to resubmit the form.", "The CSRF token is invalid. Please try to resubmit the form.", "validators", "en");
+    Translator.add("client.conditions_not_accepted", "You must accept store conditions", "validators", "en");
 })(Translator);
 
 (function (Translator) {
@@ -2991,8 +3001,8 @@
     Translator.add("This value should be of type {{ type }}.", "D\u00ebse W\u00e4ert sollt vum Typ {{ type }} sinn.", "validators", "lb");
     Translator.add("This value should be blank.", "D\u00ebse W\u00e4ert sollt eidel sinn.", "validators", "lb");
     Translator.add("The value you selected is not a valid choice.", "D\u00ebse W\u00e4ert sollt enger vun de Wielm\u00e9iglechkeeten entspriechen.", "validators", "lb");
-    Translator.add("You must select at least {{ limit }} choice.|You must select at least {{ limit }} choices.", "Dir sollt mindestens {{ limit }} M\u00e9iglechkeete wielen.", "validators", "lb");
-    Translator.add("You must select at most {{ limit }} choice.|You must select at most {{ limit }} choices.", "Dir sollt h\u00e9chstens {{ limit }} M\u00e9iglechkeete wielen.", "validators", "lb");
+    Translator.add("You must select at least {{ limit }} choice.|You must select at least {{ limit }} choices.", "Et muss mindestens {{ limit }} M\u00e9iglechkeet ausgewielt ginn.|Et musse mindestens {{ limit }} M\u00e9iglechkeeten ausgewielt ginn.", "validators", "lb");
+    Translator.add("You must select at most {{ limit }} choice.|You must select at most {{ limit }} choices.", "Et dierf h\u00e9chstens {{ limit }} M\u00e9iglechkeet ausgewielt ginn.|Et dierfen h\u00e9chstens {{ limit }} M\u00e9iglechkeeten ausgewielt ginn.", "validators", "lb");
     Translator.add("One or more of the given values is invalid.", "Een oder m\u00e9i vun de W\u00e4erter ass ong\u00eblteg.", "validators", "lb");
     Translator.add("The fields {{ fields }} were not expected.", "D'Felder {{ fields }} goufen net erwaart.", "validators", "lb");
     Translator.add("The fields {{ fields }} are missing.", "D'Felder {{ fields }} feelen.", "validators", "lb");
@@ -3060,6 +3070,10 @@
     Translator.add("The image is square ({{ width }}x{{ height }}px). Square images are not allowed.", "D'Bild ass quadratesch ({{ width }}x{{ height }}px). Quadratesch Biller sinn net erlaabt.", "validators", "lb");
     Translator.add("The image is landscape oriented ({{ width }}x{{ height }}px). Landscape oriented images are not allowed.", "D'Bild ass am Queeschformat ({{ width }}x{{ height }}px). Biller am Queeschformat sinn net erlaabt.", "validators", "lb");
     Translator.add("The image is portrait oriented ({{ width }}x{{ height }}px). Portrait oriented images are not allowed.", "D'Bild ass am H\u00e9ichformat ({{ width }}x{{ height }}px). Biller am H\u00e9ichformat sinn net erlaabt.", "validators", "lb");
+    Translator.add("An empty file is not allowed.", "En eidele Fichier ass net erlaabt.", "validators", "lb");
+    Translator.add("The host could not be resolved.", "Den Domain-Numm konnt net opgel\u00e9ist ginn.", "validators", "lb");
+    Translator.add("This value does not match the expected {{ charset }} charset.", "D\u00ebse W\u00e4ert entspr\u00e9cht net dem erwaarten Zeechesaz {{ charset }}.", "validators", "lb");
+    Translator.add("This is not a valid Business Identifier Code (BIC).", "D\u00ebst ass kee g\u00ebltege \"Business Identifier Code\" (BIC).", "validators", "lb");
     Translator.add("This form should not contain extra fields.", "D\u00ebs Feldergrupp sollt keng zous\u00e4tzlech Felder enthalen.", "validators", "lb");
     Translator.add("The uploaded file was too large. Please try to upload a smaller file.", "De gesch\u00e9cktene Fichier ass ze grouss. Versicht wann ech gelift ee m\u00e9i klenge Fichier eropzelueden.", "validators", "lb");
     Translator.add("The CSRF token is invalid. Please try to resubmit the form.", "Den CSRF-Token ass ong\u00eblteg. Versicht wann ech gelift de Formulaire nach eng K\u00e9ier ze sch\u00e9cken.", "validators", "lb");
@@ -3465,6 +3479,7 @@
     Translator.add("This form should not contain extra fields.", "Ten formularz nie powinien zawiera\u0107 dodatkowych p\u00f3l.", "validators", "pl");
     Translator.add("The uploaded file was too large. Please try to upload a smaller file.", "Wgrany plik by\u0142 za du\u017cy. Prosz\u0119 spr\u00f3bowa\u0107 wgra\u0107 mniejszy plik.", "validators", "pl");
     Translator.add("The CSRF token is invalid. Please try to resubmit the form.", "Token CSRF jest nieprawid\u0142owy. Prosz\u0119 spr\u00f3bowa\u0107 wys\u0142a\u0107 formularz ponownie.", "validators", "pl");
+    Translator.add("client.conditions_not_accepted", "Musisz zaakceptowa\u0107 regulamin sklepu", "validators", "pl");
 })(Translator);
 
 (function (Translator) {
@@ -4709,6 +4724,28 @@
 
 (function (Translator) {
     // en
+    Translator.add("user.heading.index", "Users", "wellcommerce", "en");
+    Translator.add("user.heading.add", "Add user", "wellcommerce", "en");
+    Translator.add("user.heading.edit", "Edit user", "wellcommerce", "en");
+    Translator.add("user.button.log_in", "Log in", "wellcommerce", "en");
+    Translator.add("user.button.reset_password", "Reset password", "wellcommerce", "en");
+    Translator.add("user.label.id", "ID", "wellcommerce", "en");
+    Translator.add("user.label.username", "Username", "wellcommerce", "en");
+    Translator.add("user.label.password", "Password", "wellcommerce", "en");
+    Translator.add("user.label.email", "E-mail", "wellcommerce", "en");
+    Translator.add("user.label.first_name", "First name", "wellcommerce", "en");
+    Translator.add("user.label.last_name", "Last name", "wellcommerce", "en");
+    Translator.add("user.label.enabled", "Enabled", "wellcommerce", "en");
+    Translator.add("user.label.user_group", "Group", "wellcommerce", "en");
+    Translator.add("user.flash.success.reset_password", "Your new password has been sent by e-mail", "wellcommerce", "en");
+    Translator.add("user.flash.error.wrong_username", "Wrong username given", "wellcommerce", "en");
+    Translator.add("user.flash.error.blocked_account", "Account is blocked", "wellcommerce", "en");
+    Translator.add("user.email.title.register", "User credentials", "wellcommerce", "en");
+    Translator.add("user.email.title.reset_password", "New login credentials", "wellcommerce", "en");
+    Translator.add("user_group.heading.index", "Users groups", "wellcommerce", "en");
+    Translator.add("user_group.heading.add", "Add an user group", "wellcommerce", "en");
+    Translator.add("user_group.heading.edit", "Edit users group", "wellcommerce", "en");
+    Translator.add("user_group.label.permissions", "Permissions", "wellcommerce", "en");
     Translator.add("attribute.heading.index", "Attributes", "wellcommerce", "en");
     Translator.add("attribute.heading.add", "Add attribute", "wellcommerce", "en");
     Translator.add("attribute.heading.edit", "Edit attribute", "wellcommerce", "en");
@@ -4826,21 +4863,6 @@
     Translator.add("unit.heading.index", "Units of measure", "wellcommerce", "en");
     Translator.add("unit.heading.add", "Add a unit of measure", "wellcommerce", "en");
     Translator.add("unit.heading.edit", "Edit a unit of measure", "wellcommerce", "en");
-    Translator.add("user.heading.index", "Users", "wellcommerce", "en");
-    Translator.add("user.heading.add", "Add user", "wellcommerce", "en");
-    Translator.add("user.heading.edit", "Edit user", "wellcommerce", "en");
-    Translator.add("user.button.log_in", "Log in", "wellcommerce", "en");
-    Translator.add("user.label.id", "ID", "wellcommerce", "en");
-    Translator.add("user.label.username", "Username", "wellcommerce", "en");
-    Translator.add("user.label.password", "Password", "wellcommerce", "en");
-    Translator.add("user.label.email", "E-mail", "wellcommerce", "en");
-    Translator.add("user.label.first_name", "First name", "wellcommerce", "en");
-    Translator.add("user.label.last_name", "Last name", "wellcommerce", "en");
-    Translator.add("user.label.enabled", "Enabled", "wellcommerce", "en");
-    Translator.add("user_group.heading.index", "Users groups", "wellcommerce", "en");
-    Translator.add("user_group.heading.add", "Add an user group", "wellcommerce", "en");
-    Translator.add("user_group.heading.edit", "Edit users group", "wellcommerce", "en");
-    Translator.add("user_group.label.permissions", "Permissions", "wellcommerce", "en");
     Translator.add("common.label.id", "ID", "wellcommerce", "en");
     Translator.add("common.label.name", "Name", "wellcommerce", "en");
     Translator.add("common.label.slug", "Slug", "wellcommerce", "en");
@@ -5152,6 +5174,28 @@
 
 (function (Translator) {
     // pl
+    Translator.add("user.heading.index", "Administratorzy", "wellcommerce", "pl");
+    Translator.add("user.heading.add", "Dodaj admnistratora", "wellcommerce", "pl");
+    Translator.add("user.heading.edit", "Edytuj admnistratora", "wellcommerce", "pl");
+    Translator.add("user.button.log_in", "Zaloguj si\u0119", "wellcommerce", "pl");
+    Translator.add("user.button.reset_password", "Zresetuj has\u0142o", "wellcommerce", "pl");
+    Translator.add("user.label.id", "ID", "wellcommerce", "pl");
+    Translator.add("user.label.username", "Login", "wellcommerce", "pl");
+    Translator.add("user.label.password", "Has\u0142o", "wellcommerce", "pl");
+    Translator.add("user.label.email", "E-mail", "wellcommerce", "pl");
+    Translator.add("user.label.first_name", "Imi\u0119", "wellcommerce", "pl");
+    Translator.add("user.label.last_name", "Nazwisko", "wellcommerce", "pl");
+    Translator.add("user.label.enabled", "Aktywny", "wellcommerce", "pl");
+    Translator.add("user.label.user_group", "Grupa administrator\u00f3w", "wellcommerce", "pl");
+    Translator.add("user.flash.success.reset_password", "Twoje nowe has\u0142o zosta\u0142o wys\u0142ane na e-mail", "wellcommerce", "pl");
+    Translator.add("user.flash.error.wrong_username", "Podano niepoprawny login", "wellcommerce", "pl");
+    Translator.add("user.flash.error.blocked_account", "Konto jest zablokowane", "wellcommerce", "pl");
+    Translator.add("user.email.title.register", "Dane logowania administratora", "wellcommerce", "pl");
+    Translator.add("user.email.title.reset_password", "Nowe dane do logowania", "wellcommerce", "pl");
+    Translator.add("user_group.heading.index", "Grupy administrator\u00f3w", "wellcommerce", "pl");
+    Translator.add("user_group.heading.add", "Dodaj grup\u0119 administrator\u00f3w", "wellcommerce", "pl");
+    Translator.add("user_group.heading.edit", "Edytuj grup\u0119 administrator\u00f3w", "wellcommerce", "pl");
+    Translator.add("user_group.label.permissions", "Uprawnienia", "wellcommerce", "pl");
     Translator.add("attribute.heading.index", "Atrybuty", "wellcommerce", "pl");
     Translator.add("attribute.heading.add", "Dodawanie nowego atrubutu", "wellcommerce", "pl");
     Translator.add("attribute.heading.edit", "Edycja atrybutu", "wellcommerce", "pl");
@@ -5268,21 +5312,6 @@
     Translator.add("unit.heading.index", "Jednostki miary", "wellcommerce", "pl");
     Translator.add("unit.heading.add", "Dodaj jednostk\u0119 miary", "wellcommerce", "pl");
     Translator.add("unit.heading.edit", "Edytuj jednostk\u0119 miary", "wellcommerce", "pl");
-    Translator.add("user.heading.index", "Administratorzy", "wellcommerce", "pl");
-    Translator.add("user.heading.add", "Dodaj admnistratora", "wellcommerce", "pl");
-    Translator.add("user.heading.edit", "Edytuj admnistratora", "wellcommerce", "pl");
-    Translator.add("user.button.log_in", "Zaloguj si\u0119", "wellcommerce", "pl");
-    Translator.add("user.label.id", "ID", "wellcommerce", "pl");
-    Translator.add("user.label.username", "Login", "wellcommerce", "pl");
-    Translator.add("user.label.password", "Has\u0142o", "wellcommerce", "pl");
-    Translator.add("user.label.email", "E-mail", "wellcommerce", "pl");
-    Translator.add("user.label.first_name", "Imi\u0119", "wellcommerce", "pl");
-    Translator.add("user.label.last_name", "Nazwisko", "wellcommerce", "pl");
-    Translator.add("user.label.enabled", "Aktywny", "wellcommerce", "pl");
-    Translator.add("user_group.heading.index", "Grupy administrator\u00f3w", "wellcommerce", "pl");
-    Translator.add("user_group.heading.add", "Dodaj grup\u0119 administrator\u00f3w", "wellcommerce", "pl");
-    Translator.add("user_group.heading.edit", "Edytuj grup\u0119 administrator\u00f3w", "wellcommerce", "pl");
-    Translator.add("user_group.label.permissions", "Uprawnienia", "wellcommerce", "pl");
     Translator.add("common.label.id", "ID", "wellcommerce", "pl");
     Translator.add("common.label.name", "Nazwa", "wellcommerce", "pl");
     Translator.add("common.label.slug", "\u015acie\u017cka SEO", "wellcommerce", "pl");

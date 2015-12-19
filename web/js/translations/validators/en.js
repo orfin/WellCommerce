@@ -80,4 +80,5 @@
     Translator.add("This form should not contain extra fields.", "This form should not contain extra fields.", "validators", "en");
     Translator.add("The uploaded file was too large. Please try to upload a smaller file.", "The uploaded file was too large. Please try to upload a smaller file.", "validators", "en");
     Translator.add("The CSRF token is invalid. Please try to resubmit the form.", "The CSRF token is invalid. Please try to resubmit the form.", "validators", "en");
+    Translator.add("client.conditions_not_accepted", "You must accept store conditions", "validators", "en");
 })(Translator);
