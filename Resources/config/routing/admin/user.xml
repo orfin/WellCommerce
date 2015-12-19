@@ -36,6 +36,10 @@
         <default key="_controller">user.controller.admin:loginAction</default>
     </route>
 
+    <route id="admin.user.reset_password" path="/reset">
+        <default key="_controller">user.controller.admin:resetPasswordAction</default>
+    </route>
+
     <route id="admin.user.login_check" path="/login_check"/>
 
     <route id="admin.user.logout" path="/logout" />

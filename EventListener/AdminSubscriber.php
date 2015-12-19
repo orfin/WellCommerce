@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\AdminBundle\EventListener;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use WellCommerce\Bundle\AdminBundle\Entity\UserInterface;
+use WellCommerce\Bundle\CoreBundle\Event\ResourceEvent;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
 
 /**
@@ -27,6 +28,7 @@ class AdminSubscriber extends AbstractEventSubscriber
     {
         return [
             KernelEvents::CONTROLLER => ['onKernelController', 0],
+            'user.pre_create'        => ['onUserPreCreate', 0],
         ];
     }
 
@@ -43,5 +45,32 @@ class AdminSubscriber extends AbstractEventSubscriber
                 }
             }
         }
+    }
+
+    public function onUserPreCreate(ResourceEvent $resourceEvent)
+    {
+        $password = $this->getSecurityHelper()->generateRandomPassword();
+        $role     = $this->get('role.repository')->findOneByName('admin');
+        $user     = $resourceEvent->getResource();
+        if ($user instanceof UserInterface) {
+            $user->addRole($role);
+            $user->setPassword($password);
+
+            $email = $user->getEmail();
+            $title = $this->getTranslatorHelper()->trans('user.email.title.register');
+            $body  = $this->getEmailBody($user, $password);
+            $shop  = $this->get('shop.context.admin')->getCurrentShop();
+
+            $this->getMailerHelper()->sendEmail($email, $title, $body, $shop->getMailerConfiguration());
+        }
+    }
+
+    protected function getEmailBody(UserInterface $user, $password)
+    {
+        return $this->getTemplatingelper()->render(
+            'WellCommerceAdminBundle:Admin/Email:register.html.twig', [
+            'user'     => $user,
+            'password' => $password
+        ]);
     }
 }

@@ -175,7 +175,9 @@ class User implements UserInterface
      */
     public function setPassword($password)
     {
-        $this->password = $password;
+        if (strlen($password)) {
+            $this->password = password_hash($password, PASSWORD_BCRYPT, ['cost' => 12]);
+        }
     }
 
     /**

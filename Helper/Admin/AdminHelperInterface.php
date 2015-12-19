@@ -35,4 +35,13 @@ interface AdminHelperInterface
      * @return array
      */
     public function getPermission($name, UserInterface $user);
+
+    /**
+     * Generates a random password
+     *
+     * @param int $length
+     *
+     * @return string
+     */
+    public function generateRandomPassword($length = 8);
 }

@@ -59,5 +59,14 @@
                 <argument type="service" id="service_container"/>
             </call>
         </service>
+
+        <service id="user_reset_password.form_builder" class="WellCommerce\Bundle\AdminBundle\Form\Admin\UserResetPasswordFormBuilder">
+            <argument type="service" id="form.resolver.factory"/>
+            <argument type="service" id="form.handler"/>
+            <argument type="service" id="user.event_dispatcher"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
     </services>
 </container>

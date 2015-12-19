@@ -33,22 +33,22 @@ class UserFormBuilder extends AbstractFormBuilder
 
         $requiredData->addChild($this->getElement('text_field', [
             'name'  => 'firstName',
-            'label' => $this->trans('common.label.first_name'),
+            'label' => $this->trans('user.label.first_name'),
         ]));
 
         $requiredData->addChild($this->getElement('text_field', [
             'name'  => 'lastName',
-            'label' => $this->trans('common.label.last_name'),
+            'label' => $this->trans('user.label.last_name'),
         ]));
 
         $requiredData->addChild($this->getElement('text_field', [
             'name'  => 'username',
-            'label' => $this->trans('common.label.username'),
+            'label' => $this->trans('user.label.username'),
         ]));
 
         $requiredData->addChild($this->getElement('text_field', [
             'name'  => 'email',
-            'label' => $this->trans('common.label.email'),
+            'label' => $this->trans('user.label.email'),
         ]));
 
         $requiredData->addChild($this->getElement('multi_select', [
