@@ -33,6 +33,7 @@ class UserFactory extends AbstractFactory
      */
     public function create()
     {
+        /** @var $user UserInterface */
         $user = $this->init();
         $user->setEnabled(true);
         $user->setRoles(new ArrayCollection());

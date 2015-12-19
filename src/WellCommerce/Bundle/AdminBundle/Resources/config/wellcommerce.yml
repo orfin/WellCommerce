@@ -10,6 +10,7 @@ well_commerce_admin:
         role:
             auto_services:
                 factory: WellCommerce\Bundle\AdminBundle\Factory\RoleFactory
+                repository: WellCommerce\Bundle\AdminBundle\Repository\RoleRepository
             orm_configuration:
                 mapping: "@WellCommerceAdminBundle/Resources/config/doctrine/Role.orm.yml"
                 entity: WellCommerce\Bundle\AdminBundle\Entity\Role

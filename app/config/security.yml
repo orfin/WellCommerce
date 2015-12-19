@@ -30,6 +30,7 @@ security:
 
     access_control:
         - { path: ^/admin/user/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/user/reset, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/admin$, roles: ROLE_ADMIN }
         - { path: ^/client/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }

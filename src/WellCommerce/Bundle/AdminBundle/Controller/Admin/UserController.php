@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\AdminBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
+use WellCommerce\Bundle\AdminBundle\Exception\ResetPasswordException;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 
 /**
@@ -23,6 +24,16 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
  */
 class UserController extends AbstractAdminController
 {
+    /**
+     * @var \WellCommerce\Bundle\AdminBundle\Manager\Admin\UserManager
+     */
+    protected $manager;
+
+    /**
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function loginAction(Request $request)
     {
         $form = $this->get('user_login.form_builder')->createForm([
@@ -35,6 +46,43 @@ class UserController extends AbstractAdminController
         return $this->displayTemplate('login', [
             'error' => $this->getSecurityErrors($request),
             'form'  => $form
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function resetPasswordAction()
+    {
+        /** @var $form \WellCommerce\Component\Form\Elements\FormInterface */
+        $form = $this->get('user_reset_password.form_builder')->createForm([
+            'name'         => 'reset_password',
+            'ajax_enabled' => false,
+            'class'        => 'login-form',
+        ], null);
+
+        if ($form->handleRequest()->isSubmitted()) {
+            $formValues = $form->getValue();
+            $username   = $formValues['username'];
+
+            try {
+                $this->manager->resetPassword($username);
+
+            } catch (ResetPasswordException $e) {
+                $this->getFlashHelper()->addError($e->getMessage());
+
+                return $this->redirectToAction('reset_password');
+            }
+
+            $this->getFlashHelper()->addSuccess('user.flash.success.reset_password');
+
+            return $this->redirectToAction('login');
+        }
+
+        return $this->displayTemplate('reset_password', [
+            'form' => $form
         ]);
     }
 
@@ -64,6 +112,11 @@ class UserController extends AbstractAdminController
     {
     }
 
+    /**
+     * @param int $id
+     *
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     */
     public function deleteAction($id)
     {
         $user = $this->getUser();

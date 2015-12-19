@@ -15,13 +15,14 @@ namespace WellCommerce\Bundle\AdminBundle\Entity;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\UserInterface as BaseUserInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 
 /**
  * Interface UserInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface UserInterface extends \Serializable, EquatableInterface, BaseUserInterface
+interface UserInterface extends \Serializable, EquatableInterface, BaseUserInterface, TimestampableInterface
 {
     /**
      * @return int

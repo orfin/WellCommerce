@@ -15,11 +15,11 @@ use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
 use WellCommerce\Component\Form\Elements\FormInterface;
 
 /**
- * Class UserLoginFormBuilder
+ * Class UserResetPasswordFormBuilder
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class UserLoginFormBuilder extends AbstractFormBuilder
+class UserResetPasswordFormBuilder extends AbstractFormBuilder
 {
     /**
      * {@inheritdoc}
@@ -27,24 +27,13 @@ class UserLoginFormBuilder extends AbstractFormBuilder
     public function buildForm(FormInterface $form)
     {
         $form->addChild($this->getElement('text_field', [
-            'name'  => '_username',
+            'name'  => 'username',
             'label' => $this->trans('user.label.username'),
         ]));
 
-        $form->addChild($this->getElement('password', [
-            'name'  => '_password',
-            'label' => $this->trans('user.label.password'),
-        ]));
-
         $form->addChild($this->getElement('submit', [
-            'name'  => 'log_in',
-            'label' => $this->trans('user.button.log_in'),
-        ]));
-
-        $resetUrl = $this->getRouterHelper()->generateUrl('admin.user.reset_password');
-
-        $form->addChild($this->getElement('static_text', [
-            'text' => '<a href="' . $resetUrl . '">' . $this->trans('user.button.reset_password') . '</a>',
+            'name'  => 'reset_password',
+            'label' => $this->trans('user.button.reset_password'),
         ]));
 
         $form->addFilter($this->getFilter('no_code'));
