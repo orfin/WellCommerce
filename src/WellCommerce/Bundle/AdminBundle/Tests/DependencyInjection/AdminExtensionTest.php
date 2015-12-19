@@ -15,11 +15,11 @@ namespace WellCommerce\Bundle\AdminBundle\Tests\DependencyInjection;
 use WellCommerce\Bundle\CoreBundle\Test\DependencyInjection\AbstractExtensionTestCase;
 
 /**
- * Class UserExtensionTest
+ * Class AdminExtensionTest
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class UserExtensionTest extends AbstractExtensionTestCase
+class AdminExtensionTest extends AbstractExtensionTestCase
 {
     /**
      * @return array
@@ -29,6 +29,7 @@ class UserExtensionTest extends AbstractExtensionTestCase
         return [
             'services' => [
                 [
+                    // user
                     'user.repository',
                     'user.factory',
                     'user.event_dispatcher',
@@ -36,6 +37,14 @@ class UserExtensionTest extends AbstractExtensionTestCase
                     'user.dataset.admin',
                     'user.datagrid',
                     'user.controller.admin',
+                    // user group
+                    'user_group.repository',
+                    'user_group.factory',
+                    'user_group.event_dispatcher',
+                    'user_group.form_builder.admin',
+                    'user_group.dataset.admin',
+                    'user_group.datagrid',
+                    'user_group.controller.admin',
                 ]
             ],
         ];
