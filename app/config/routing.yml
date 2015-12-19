@@ -1,21 +1,2 @@
-_dynamic_routing:
-    resource: dynamic_routing.yml
-
-fos_js_routing:
-    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
-
-_bazinga_jstranslation:
-    resource: "@BazingaJsTranslationBundle/Resources/config/routing/routing.yml"
-
-_liip_imagine:
-    resource: "@LiipImagineBundle/Resources/config/routing.xml"
-
 wellcommerce_app:
     resource: "@WellCommerceAppBundle/Resources/config/routing.yml"
-
-remove_trailing_slash:
-    path: /{url}
-    defaults: { _controller: WellCommerceCommonBundle:Redirecting:removeTrailingSlash }
-    requirements:
-        url: .*/$
-    methods: [GET]
