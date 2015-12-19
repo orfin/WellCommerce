@@ -3,45 +3,32 @@
                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
 
-    <class name="WellCommerce\Bundle\PageBundle\Entity\Page">
-        <property name="publish">
-            <constraint name="NotNull">
-                <option name="message">page.error.publish.not_null</option>
-            </constraint>
-        </property>
-        <property name="translations">
-            <constraint name="Valid">
-                <option name="deep">true</option>
-            </constraint>
-        </property>
-    </class>
-
-    <class name="WellCommerce\Bundle\PageBundle\Entity\PageTranslation">
+    <class name="WellCommerce\Bundle\MediaBundle\Entity\Media">
         <property name="name">
-            <constraint name="NotBlank">
-                <option name="message">page.error.name.not_blank</option>
-            </constraint>
-            <constraint name="NotNull">
-                <option name="message">page.error.name.not_null</option>
-            </constraint>
-        </property>
-        <property name="content">
-            <constraint name="NotNull">
-                <option name="message">page.error.content.not_null</option>
-            </constraint>
-        </property>
-    </class>
-
-    <class name="WellCommerce\Bundle\NewsBundle\Entity\NewsTranslation">
-        <property name="topic">
-            <constraint name="NotBlank"/>
-            <constraint name="NotNull"/>
-        </property>
-        <property name="summary">
             <constraint name="NotNull" />
+            <constraint name="NotBlank" />
         </property>
-        <property name="content">
-            <constraint name="NotNull"/>
+        <property name="extension">
+            <constraint name="NotNull" />
+            <constraint name="NotBlank" />
+            <constraint name="Choice">
+                <option name="choices">
+                    <value>jpg</value>
+                    <value>jpeg</value>
+                    <value>png</value>
+                </option>
+            </constraint>
+        </property>
+        <property name="mime">
+            <constraint name="NotNull" />
+            <constraint name="NotBlank" />
+        </property>
+        <property name="size">
+            <constraint name="NotNull" />
+            <constraint name="NotBlank" />
+            <constraint name="GreaterThan">
+                <option name="value">0</option>
+            </constraint>
         </property>
     </class>
 </constraint-mapping>
