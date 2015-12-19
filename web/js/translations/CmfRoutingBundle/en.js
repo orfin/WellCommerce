@@ -1,0 +1,36 @@
+(function (Translator) {
+    // en
+    Translator.add("dashboard.cmf", "Symfony CMF", "CmfRoutingBundle", "en");
+    Translator.add("dashboard.label_routing", "Route", "CmfRoutingBundle", "en");
+    Translator.add("dashboard.label_redirect_routing", "Redirect Route", "CmfRoutingBundle", "en");
+    Translator.add("breadcrumb.link_route_list", "Routes", "CmfRoutingBundle", "en");
+    Translator.add("breadcrumb.link_route_create", "Create", "CmfRoutingBundle", "en");
+    Translator.add("breadcrumb.link_route_edit", "Edit", "CmfRoutingBundle", "en");
+    Translator.add("breadcrumb.link_route_delete", "Delete", "CmfRoutingBundle", "en");
+    Translator.add("breadcrumb.link_redirect_route_list", "Redirect Routes", "CmfRoutingBundle", "en");
+    Translator.add("breadcrumb.link_redirect_route_create", "Create", "CmfRoutingBundle", "en");
+    Translator.add("breadcrumb.link_redirect_route_edit", "Edit", "CmfRoutingBundle", "en");
+    Translator.add("breadcrumb.link_redirect_route_delete", "Delete", "CmfRoutingBundle", "en");
+    Translator.add("filter.label_name", "Name", "CmfRoutingBundle", "en");
+    Translator.add("list.label_path", "URL", "CmfRoutingBundle", "en");
+    Translator.add("form.group_general", "General", "CmfRoutingBundle", "en");
+    Translator.add("form.group_advanced", "Advanced", "CmfRoutingBundle", "en");
+    Translator.add("form.label_parent", "Parent", "CmfRoutingBundle", "en");
+    Translator.add("form.label_name", "Last URL part", "CmfRoutingBundle", "en");
+    Translator.add("form.label_variable_pattern", "Variable pattern", "CmfRoutingBundle", "en");
+    Translator.add("form.help_variable_pattern", "A pattern in the format {variable}\/{more}... The fields are passed to the controller if it declares them as arguments.", "CmfRoutingBundle", "en");
+    Translator.add("form.label_content", "Content", "CmfRoutingBundle", "en");
+    Translator.add("form.label_defaults", "Defaults", "CmfRoutingBundle", "en");
+    Translator.add("form.label_options", "Options", "CmfRoutingBundle", "en");
+    Translator.add("form.label_route_name", "Name", "CmfRoutingBundle", "en");
+    Translator.add("form.label_uri", "URI", "CmfRoutingBundle", "en");
+    Translator.add("form.label_route_target", "Route target", "CmfRoutingBundle", "en");
+    Translator.add("form.group_routes", "Routes", "CmfRoutingBundle", "en");
+    Translator.add("form.label_routes", "Routes", "CmfRoutingBundle", "en");
+    Translator.add("form.label_add_locale_pattern", "Add locale pattern", "CmfRoutingBundle", "en");
+    Translator.add("form.label_add_format_pattern", "Add format pattern", "CmfRoutingBundle", "en");
+    Translator.add("form.label_add_trailing_slash", "Add trailing slash", "CmfRoutingBundle", "en");
+    Translator.add("form.help_options", "\n            \n            Locale: Prepend locale to route like \/{locale}\/your\/route<br\/>\n            Format: Append format to route like \/your\/route.{format}. Default format is 'html'<br\/>\n            Slash: Append a trailing slash to route like \/your\/route\/\n            \n        ", "CmfRoutingBundle", "en");
+    Translator.add("admin.menu_frontend_link_caption", "Frontend", "CmfRoutingBundle", "en");
+    Translator.add("admin.menu_frontend_link_title", "Open frontend view in new tab", "CmfRoutingBundle", "en");
+})(Translator);

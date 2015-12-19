@@ -31,3 +31,5 @@ tests/_output/*
 app/cache/dev/assetic
 
 *.lock
+
+.idea/workspace.xml

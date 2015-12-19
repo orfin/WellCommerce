@@ -1,0 +1,36 @@
+(function (Translator) {
+    // fr
+    Translator.add("dashboard.cmf", "Symfony CMF", "CmfRoutingBundle", "fr");
+    Translator.add("dashboard.label_routing", "Route", "CmfRoutingBundle", "fr");
+    Translator.add("dashboard.label_redirect_routing", "Redirection", "CmfRoutingBundle", "fr");
+    Translator.add("breadcrumb.link_route_list", "Routes", "CmfRoutingBundle", "fr");
+    Translator.add("breadcrumb.link_route_create", "Cr\u00e9er", "CmfRoutingBundle", "fr");
+    Translator.add("breadcrumb.link_route_edit", "\u00c9diter", "CmfRoutingBundle", "fr");
+    Translator.add("breadcrumb.link_route_delete", "Supprimer", "CmfRoutingBundle", "fr");
+    Translator.add("breadcrumb.link_redirect_route_list", "Redirection", "CmfRoutingBundle", "fr");
+    Translator.add("breadcrumb.link_redirect_route_create", "Cr\u00e9er", "CmfRoutingBundle", "fr");
+    Translator.add("breadcrumb.link_redirect_route_edit", "\u00c9diter", "CmfRoutingBundle", "fr");
+    Translator.add("breadcrumb.link_redirect_route_delete", "Supprimer", "CmfRoutingBundle", "fr");
+    Translator.add("filter.label_name", "Nom", "CmfRoutingBundle", "fr");
+    Translator.add("list.label_path", "URL", "CmfRoutingBundle", "fr");
+    Translator.add("form.group_general", "G\u00e9n\u00e9ral", "CmfRoutingBundle", "fr");
+    Translator.add("form.group_advanced", "Avanc\u00e9", "CmfRoutingBundle", "fr");
+    Translator.add("form.label_parent", "Parent", "CmfRoutingBundle", "fr");
+    Translator.add("form.label_name", "Derni\u00e8re partie de l'URL", "CmfRoutingBundle", "fr");
+    Translator.add("form.label_variable_pattern", "Motif variable", "CmfRoutingBundle", "fr");
+    Translator.add("form.help_variable_pattern", "Un motif en format {variable}\/{plus}... Les variables sont pass\u00e9 au controlleur s'il les d\u00e9clare comme arguments.", "CmfRoutingBundle", "fr");
+    Translator.add("form.label_content", "Contenu", "CmfRoutingBundle", "fr");
+    Translator.add("form.label_defaults", "Defauts", "CmfRoutingBundle", "fr");
+    Translator.add("form.label_options", "Options", "CmfRoutingBundle", "fr");
+    Translator.add("form.label_route_name", "Nom", "CmfRoutingBundle", "fr");
+    Translator.add("form.label_uri", "URI", "CmfRoutingBundle", "fr");
+    Translator.add("form.label_route_target", "Route objectif", "CmfRoutingBundle", "fr");
+    Translator.add("form.group_routes", "Routes", "CmfRoutingBundle", "fr");
+    Translator.add("form.label_routes", "Routes", "CmfRoutingBundle", "fr");
+    Translator.add("form.label_add_locale_pattern", "Ajouter le langage", "CmfRoutingBundle", "fr");
+    Translator.add("form.label_add_format_pattern", "Ajouter le motif du format", "CmfRoutingBundle", "fr");
+    Translator.add("form.label_add_trailing_slash", "Ajouter une barre oblique en fin", "CmfRoutingBundle", "fr");
+    Translator.add("form.help_options", "\n            Langage: Prefix la route avec le langage tel que \/{locale}\/your\/route<br\/>\n            Format: Ajoute le format \u00e0 la route tel que \/your\/route.{format}. Le format par d\u00e9faut est 'html'<br\/>\n            Barre Oblique: Ajoute un slash \u00e0 la fin de la route tel que \/your\/route\/\n            \n        ", "CmfRoutingBundle", "fr");
+    Translator.add("admin.menu_frontend_link_caption", "Frontend", "CmfRoutingBundle", "fr");
+    Translator.add("admin.menu_frontend_link_title", "Ouvrir ce front-end lien dans un nouvel onglet", "CmfRoutingBundle", "fr");
+})(Translator);

@@ -1,0 +1,35 @@
+{
+	"name": "mcuelenaere/composer-revision-plugin",
+	"type": "composer-plugin",
+
+	"description": "Simple composer plugin which generates a class containing the VCS references of all packages",
+	"homepage": "https://github.com/mcuelenaere/composer-revision-plugin",
+	"authors": [
+		{
+			"name": "Maurus Cuelenaere",
+			"email": "mcuelenaere@gmail.com"
+		}
+	],
+	"license": "MIT",
+
+	"autoload": {
+		"psr-4": {
+			"ComposerRevisionPlugin\\": "src/"
+		},
+		"classmap": [
+			"gen/"
+		]
+	},
+	"minimum-stability": "alpha",
+	"require": {
+		"composer-plugin-api": "~1.0",
+		"php": ">=5.3"
+	},
+	"require-dev": {
+		"composer/composer": "1.*"
+	},
+
+	"extra": {
+		"class": "ComposerRevisionPlugin\\Plugin"
+	}
+}
