@@ -15,6 +15,7 @@ namespace WellCommerce\Bundle\MediaBundle\Controller\Admin;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
+use WellCommerce\Bundle\MediaBundle\Exception\InvalidMediaException;
 
 /**
  * Class MediaController
@@ -51,7 +52,7 @@ class MediaController extends AbstractAdminController
                 'sExtension' => $media->getExtension(),
                 'sFileType'  => $media->getMime(),
             ];
-        } catch (\Exception $e) {
+        } catch (InvalidMediaException $e) {
             $response = [
                 'sError'   => $this->trans('uploader.error'),
                 'sMessage' => $this->trans($e->getMessage()),

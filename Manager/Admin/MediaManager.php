@@ -12,8 +12,10 @@
 
 namespace WellCommerce\Bundle\MediaBundle\Manager\Admin;
 
+use Doctrine\Common\Util\Debug;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
+use WellCommerce\Bundle\MediaBundle\Exception\InvalidMediaException;
 
 /**
  * Class MediaManager
@@ -36,12 +38,16 @@ class MediaManager extends AbstractAdminManager
         $uploadPath = $this->getUploadRootDir($dir);
 
         if (!$file->isValid()) {
-            throw new \Exception('Passed file object is not valid');
+            throw new InvalidMediaException('Passed file object is not valid');
         }
 
-        $media = $this->createMediaFromUploadedFile($file);
-        $this->saveResource($media);
+        $media  = $this->createMediaFromUploadedFile($file);
+        $errors = $this->getValidatorHelper()->validate($media);
+        if (0 !== count($errors)) {
+            throw new InvalidMediaException($errors);
+        }
 
+        $this->saveResource($media);
         $file->move($uploadPath, $media->getPath());
 
         return $media;
