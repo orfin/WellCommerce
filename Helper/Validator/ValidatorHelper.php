@@ -45,6 +45,6 @@ class ValidatorHelper implements ValidatorHelperInterface
     {
         $groups = array_merge(self::DEFAULT_VALIDATOR_GROUPS, $groups);
 
-        return $this->validator->validate($value, [], $groups);
+        return $this->validator->validate($value, null, $groups);
     }
 }
