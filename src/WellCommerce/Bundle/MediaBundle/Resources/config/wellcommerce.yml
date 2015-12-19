@@ -1,0 +1,9 @@
+well_commerce_media:
+    services:
+        media:
+            auto_services:
+                factory: WellCommerce\Bundle\MediaBundle\Factory\MediaFactory
+                repository: WellCommerce\Bundle\MediaBundle\Repository\MediaRepository
+            orm_configuration:
+                mapping: "@WellCommerceMediaBundle/Resources/config/doctrine/Media.orm.yml"
+                entity: WellCommerce\Bundle\MediaBundle\Entity\Media
