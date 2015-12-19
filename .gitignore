@@ -33,3 +33,5 @@ app/cache/dev/assetic
 *.lock
 
 .idea/workspace.xml
+
+.idea/workspace.xml
