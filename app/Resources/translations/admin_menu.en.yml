@@ -29,6 +29,7 @@ product_review: 'Product reviews'
 promotion: Promotions
 promotions: Promotions
 reports: Reports
+review: Reviews
 routing: Routing configuration
 sales: Sales
 shipping_method: 'Shipping methods'
