@@ -397,6 +397,9 @@ GException.Handle = function(xException) {
     throw xException; // for debugging
 };
 
+var GTranslation = function(sMessage) {
+    return Translator.trans(sMessage, {}, 'wellcommerce');
+};
 
 /*
  * PLUGIN
@@ -13333,9 +13336,9 @@ var GFormImage = GCore.ExtendClass(GFormFile, function() {
 		if ((gThis.m_oOptions.sComment != undefined) && (gThis.m_oOptions.sComment.length)) {
 			jLabel.append(' <small>' + gThis.m_oOptions.sComment + '</small>');
 		}
-		gThis.m_jSwfUpload = $('<div class="' + gThis._GetClass('AddFiles') + '"><a href="#" class="button expand"><span id="' + gThis.GetId() + '__upload"><img src="' + gThis._GetImage('ChooseIcon') + '" alt=""/>' + GForm.Language.localfiles_upload + '</span></a></div>');
+		gThis.m_jSwfUpload = $('<div class="' + gThis._GetClass('AddFiles') + '"><a href="#" class="button expand"><span id="' + gThis.GetId() + '__upload"><img src="' + gThis._GetImage('ChooseIcon') + '" alt=""/>' + GTranslation('media.button.add_from_disk') + '</span></a></div>');
 		gThis.m_jNode.append(gThis.m_jSwfUpload);
-		gThis.m_jChooseButton = $('<a href="#" class="button expand"><span><img src="' + gThis._GetImage('ChooseIcon') + '" alt=""/>' + GForm.Language.localfiles_select + '</span></a>');
+		gThis.m_jChooseButton = $('<a href="#" class="button expand"><span><img src="' + gThis._GetImage('ChooseIcon') + '" alt=""/>' + GTranslation('media.button.select_from_library') + '</span></a>');
 		gThis.m_jNode.append($('<span class="browse-pictures" style="float: right;margin-right: 5px;"/>').append(gThis.m_jChooseButton));
 		gThis.m_jQueue = $('<ul class="' + gThis._GetClass('Queue') + '" id="' + gThis.GetId() + '__queue"/>');
 		gThis.m_jNode.append(gThis.m_jQueue);
@@ -13582,7 +13585,6 @@ var GFormImage = GCore.ExtendClass(GFormFile, function() {
 		        UploadProgress: function(up, file) {
 		        	gThis.OnUploadProgress(file);
 		        },
-
 		        Error: function(up, err) {
 		        	gThis.OnUploadProgress(err);
 		        },
@@ -13622,6 +13624,9 @@ var GFormImage = GCore.ExtendClass(GFormFile, function() {
 
 	gThis.OnUploadSuccess = function(oFile, oResponse) {
 		var oServerResponse = $.parseJSON(oResponse.response);
+        if(oServerResponse.sError != undefined){
+            return GAlert(oServerResponse.sError, oServerResponse.sMessage);
+        }
 		var jLi = gThis.m_jQueue.find('.upload__' + oFile.id);
 		jLi.addClass(gThis._GetClass('UploadSuccess'));
 		jLi.find('.' + gThis._GetClass('Progress')).text(GForm.Language.file_selector_upload_success);
