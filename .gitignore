@@ -5,6 +5,7 @@
 web/bundles/*
 web/css/*
 web/js/*
+web/images/*
 web/media/*
 
 app/bootstrap.*
