@@ -18,8 +18,6 @@
             <constraint name="NotBlank" />
             <constraint name="NotNull" />
         </property>
-        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
-            <option name="fields">slug</option>
-        </constraint>
+        <constraint name="WellCommerce\Bundle\RoutingBundle\Doctrine\Validator\Constraints\UniqueEntity" />
     </class>
 </constraint-mapping>
