@@ -25,19 +25,6 @@ class CategoryRouteGenerator extends AbstractRouteGenerator
 {
     const GENERATOR_STRATEGY = 'category';
 
-    public function generate(RouteInterface $resource)
-    {
-        $this->defaults['id']      = $resource->getIdentifier()->getId();
-        $this->defaults['_locale'] = $resource->getLocale();
-
-        return new SymfonyRoute(
-            $this->getPath($resource),
-            $this->defaults,
-            $this->requirements,
-            $this->options
-        );
-    }
-
     /**
      * {@inheritdoc}
      */

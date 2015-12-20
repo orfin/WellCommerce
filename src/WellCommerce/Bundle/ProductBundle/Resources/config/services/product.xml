@@ -13,14 +13,6 @@
             <argument type="service" id="event_dispatcher" />
         </service>
 
-        <service id="product.route.generator" class="WellCommerce\Bundle\ProductBundle\Generator\ProductRouteGenerator">
-            <argument type="collection" key="defaults">
-                <argument key="_controller">product.controller.front:indexAction</argument>
-            </argument>
-            <argument type="collection" key="requirements" />
-            <tag name="route.generator" />
-        </service>
-
         <service id="product.doctrine.event_subscriber" class="WellCommerce\Bundle\ProductBundle\EventListener\ProductDoctrineEventSubscriber">
             <tag name="doctrine.event_subscriber" connection="default" />
         </service>

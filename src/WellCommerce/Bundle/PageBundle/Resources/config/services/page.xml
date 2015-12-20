@@ -9,14 +9,6 @@
     </imports>
 
     <services>
-        <service id="page.route.generator" class="WellCommerce\Bundle\PageBundle\Generator\PageRouteGenerator">
-            <argument type="collection" key="defaults">
-                <argument key="_controller">page.controller.front:indexAction</argument>
-            </argument>
-            <argument type="collection" key="requirements" />
-            <tag name="route.generator" />
-        </service>
-
         <service id="page.event_dispatcher" parent="core.event_dispatcher" public="false">
             <argument type="service" id="event_dispatcher" />
         </service>

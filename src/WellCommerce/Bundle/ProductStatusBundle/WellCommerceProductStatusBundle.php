@@ -28,5 +28,6 @@ class WellCommerceProductStatusBundle extends Bundle
         parent::build($container);
         $container->addCompilerPass(new Compiler\AutoRegisterServicesPass());
         $container->addCompilerPass(new Compiler\MappingCompilerPass());
+        $container->addCompilerPass(new Compiler\ConfigureDynamicRoutingPass());
     }
 }

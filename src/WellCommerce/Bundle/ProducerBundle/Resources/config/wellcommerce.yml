@@ -21,3 +21,28 @@ well_commerce_producer:
             orm_configuration:
                 mapping: "@WellCommerceProducerBundle/Resources/config/doctrine/ProducerTranslation.orm.yml"
                 entity: WellCommerce\Bundle\ProducerBundle\Entity\ProducerTranslation
+    dynamic_routing:
+        name: producer
+        class: WellCommerce\Bundle\ProducerBundle\Generator\ProducerRouteGenerator
+        defaults:
+            _controller: producer.controller.front:indexAction
+            limit: 12
+            page: 1
+            orderBy: name
+            orderDir: asc
+            priceFrom: 0
+            priceTo: 9999
+            view: grid
+            producers: ~
+            attributes: ~
+        requirements:
+            limit: "\d{1,10}"
+            page: "\d{1,10}"
+            orderBy: "name|finalPrice"
+            orderDir: "asc|desc"
+            priceFrom: "\d{1,10}"
+            priceTo: "\d{1,10}"
+            view: "grid|list"
+            producers: "[\d+_]+"
+            attributes: "[\d+_]+"
+        pattern: "{page},{limit},{orderBy},{orderDir},{priceFrom},{priceTo},{view},{producers},{attributes}"
