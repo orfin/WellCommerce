@@ -8,11 +8,6 @@ WellCommerce\Bundle\RoutingBundle\Entity\Route:
         fieldName: type
     discriminatorMap:
         route: WellCommerce\Bundle\RoutingBundle\Entity\Route
-        product: WellCommerce\Bundle\ProductBundle\Entity\ProductRoute
-        product_status: WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusRoute
-        producer: WellCommerce\Bundle\ProducerBundle\Entity\ProducerRoute
-        category: WellCommerce\Bundle\CategoryBundle\Entity\CategoryRoute
-        page: WellCommerce\Bundle\PageBundle\Entity\PageRoute
     repositoryClass: WellCommerce\Bundle\RoutingBundle\Repository\RouteRepository
     id:
         id:

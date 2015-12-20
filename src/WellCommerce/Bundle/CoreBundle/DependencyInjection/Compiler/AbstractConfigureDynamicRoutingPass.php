@@ -30,9 +30,10 @@ abstract class AbstractConfigureDynamicRoutingPass implements CompilerPassInterf
 
     public function process(ContainerBuilder $container)
     {
-        $parameters            = $this->getExtensionConfiguration($container);
+        $routingDiscriminators = $container->getParameter('routing_discriminator_map');
 
-        $definition = new Definition($parameters['dynamic_routing']['class'], [
+        $parameters = $this->getExtensionConfiguration($container);
+        $definition = new Definition($parameters['dynamic_routing']['generator'], [
             'defaults'     => $parameters['dynamic_routing']['defaults'],
             'requirements' => $parameters['dynamic_routing']['requirements'],
             'pattern'      => $parameters['dynamic_routing']['pattern'],
@@ -40,5 +41,10 @@ abstract class AbstractConfigureDynamicRoutingPass implements CompilerPassInterf
 
         $definition->addTag('route.generator');
         $container->setDefinition($parameters['dynamic_routing']['name'] . '.route.generator', $definition);
+
+        if (null !== $parameters['dynamic_routing']['entity']) {
+            $routingDiscriminators[$parameters['dynamic_routing']['name']] = $parameters['dynamic_routing']['entity'];
+            $container->setParameter('routing_discriminator_map', $routingDiscriminators);
+        }
     }
 }
