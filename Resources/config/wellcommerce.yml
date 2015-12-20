@@ -23,7 +23,8 @@ well_commerce_product_status:
                 entity: WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusTranslation
     dynamic_routing:
         name: product_status
-        class: WellCommerce\Bundle\ProductStatusBundle\Generator\ProductStatusRouteGenerator
+        entity: WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusRoute
+        generator: WellCommerce\Bundle\ProductStatusBundle\Generator\ProductStatusRouteGenerator
         defaults:
             _controller: product_status.controller.front:indexAction
             limit: 12
