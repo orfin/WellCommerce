@@ -50,12 +50,12 @@ abstract class AbstractRouteGenerator implements RouteGeneratorInterface
      * @param string $pattern
      * @param array  $options
      */
-    public function __construct(array $defaults = [], array $requirements = [], array $pattern = [], array $options = [])
+    public function __construct(array $defaults = [], array $requirements = [], $pattern, array $options = [])
     {
         $this->defaults     = $defaults;
         $this->options      = $options;
         $this->requirements = $requirements;
-        $this->pattern      = $this->generateStaticPattern($pattern);
+        $this->pattern      = $pattern;
     }
 
     /**
@@ -88,19 +88,6 @@ abstract class AbstractRouteGenerator implements RouteGeneratorInterface
         }
 
         return $resource->getPath();
-    }
-
-    /**
-     * @return string
-     */
-    protected function generateStaticPattern(array $pattern = [])
-    {
-        $parts = [];
-        foreach ($pattern as $key => $val) {
-            $parts[] = '{' . $key . '}';
-        }
-
-        return implode(RouteGeneratorInterface::PATH_PARAMS_SEPARATOR, $parts);
     }
 
     /**
