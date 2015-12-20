@@ -35,3 +35,9 @@ well_commerce_product:
             orm_configuration:
                 mapping: "@WellCommerceProductBundle/Resources/config/doctrine/ProductTranslation.orm.yml"
                 entity: WellCommerce\Bundle\ProductBundle\Entity\ProductTranslation
+
+    dynamic_routing:
+        name: product
+        class: WellCommerce\Bundle\ProductBundle\Generator\ProductRouteGenerator
+        defaults:
+            _controller: product.controller.front:indexAction
