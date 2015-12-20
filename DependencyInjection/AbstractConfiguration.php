@@ -34,9 +34,31 @@ abstract class AbstractConfiguration implements ConfigurationInterface
         if (null !== $this->treeRoot) {
             $rootNode = $treeBuilder->root($this->treeRoot);
             $this->addServicesConfiguration($rootNode);
+            $this->addDynamicRoutingConfiguration($rootNode);
         }
 
         return $treeBuilder;
+    }
+
+    protected function addDynamicRoutingConfiguration(ArrayNodeDefinition $node){
+        $node
+            ->children()
+                ->arrayNode('dynamic_routing')
+                    ->children()
+                        ->scalarNode('name')->defaultNull()->end()
+                        ->scalarNode('class')->defaultNull()->end()
+                        ->arrayNode('defaults')
+                            ->useAttributeAsKey('name')
+                            ->prototype('scalar')->end()
+                        ->end()
+                        ->arrayNode('requirements')
+                            ->useAttributeAsKey('name')
+                            ->prototype('scalar')->end()
+                        ->end()
+                        ->scalarNode('pattern')->defaultNull()->end()
+                    ->end()
+                ->end()
+            ->end();
     }
 
     /**
@@ -46,25 +68,25 @@ abstract class AbstractConfiguration implements ConfigurationInterface
     {
         $node
             ->children()
-            ->arrayNode('services')
-            ->useAttributeAsKey('name')
-            ->prototype('array')
-            ->children()
-            ->arrayNode('auto_services')->addDefaultsIfNotSet()
-            ->children()
-            ->scalarNode('repository')->defaultNull()->end()
-            ->scalarNode('factory')->defaultNull()->end()
-            ->end()
-            ->end()
-            ->arrayNode('orm_configuration')->addDefaultsIfNotSet()
-            ->children()
-            ->scalarNode('entity')->end()
-            ->scalarNode('mapping')->end()
-            ->end()
-            ->end()
-            ->end()
-            ->end()
-            ->end()
+                ->arrayNode('services')
+                    ->useAttributeAsKey('name')
+                    ->prototype('array')
+                        ->children()
+                            ->arrayNode('auto_services')->addDefaultsIfNotSet()
+                                ->children()
+                                    ->scalarNode('repository')->defaultNull()->end()
+                                    ->scalarNode('factory')->defaultNull()->end()
+                                ->end()
+                            ->end()
+                            ->arrayNode('orm_configuration')->addDefaultsIfNotSet()
+                                ->children()
+                                    ->scalarNode('entity')->end()
+                                    ->scalarNode('mapping')->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
             ->end();
     }
 }
