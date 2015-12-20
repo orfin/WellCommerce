@@ -23,7 +23,8 @@ well_commerce_producer:
                 entity: WellCommerce\Bundle\ProducerBundle\Entity\ProducerTranslation
     dynamic_routing:
         name: producer
-        class: WellCommerce\Bundle\ProducerBundle\Generator\ProducerRouteGenerator
+        entity: WellCommerce\Bundle\ProducerBundle\Entity\ProducerRoute
+        generator: WellCommerce\Bundle\ProducerBundle\Generator\ProducerRouteGenerator
         defaults:
             _controller: producer.controller.front:indexAction
             limit: 12
