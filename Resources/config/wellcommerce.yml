@@ -21,3 +21,28 @@ well_commerce_product_status:
             orm_configuration:
                 mapping: "@WellCommerceProductStatusBundle/Resources/config/doctrine/ProductStatusTranslation.orm.yml"
                 entity: WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusTranslation
+    dynamic_routing:
+        name: product_status
+        class: WellCommerce\Bundle\ProductStatusBundle\Generator\ProductStatusRouteGenerator
+        defaults:
+            _controller: product_status.controller.front:indexAction
+            limit: 12
+            page: 1
+            orderBy: name
+            orderDir: asc
+            priceFrom: 0
+            priceTo: 9999
+            view: grid
+            producers: ~
+            attributes: ~
+        requirements:
+            limit: "\d{1,10}"
+            page: "\d{1,10}"
+            orderBy: "name|finalPrice"
+            orderDir: "asc|desc"
+            priceFrom: "\d{1,10}"
+            priceTo: "\d{1,10}"
+            view: "grid|list"
+            producers: "[\d+_]+"
+            attributes: "[\d+_]+"
+        pattern: "{page},{limit},{orderBy},{orderDir},{priceFrom},{priceTo},{view},{producers},{attributes}"
