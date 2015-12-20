@@ -80,6 +80,11 @@ class JavascriptRenderer implements FormRendererInterface
             $collection->add(new Attribute('agDependencies', $dependencies, Attribute::TYPE_ARRAY));
         }
 
+        if ($element->hasOption('rules') && count($element->getOption('rules'))) {
+            $rules = $this->formatter->formatRules($element->getOption('rules'));
+            $collection->add(new Attribute('aoRules', $rules, Attribute::TYPE_ARRAY));
+        }
+
         return $this->formatter->formatAttributesCollection($collection);
     }
 

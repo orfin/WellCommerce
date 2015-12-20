@@ -69,6 +69,10 @@
             <tag name="form.resolver" type="dependency"/>
         </service>
 
+        <service id="form.resolver.rule" class="WellCommerce\Component\Form\Resolver\RuleResolver">
+            <tag name="form.resolver" type="rule"/>
+        </service>
+
         <service id="form.element.form" class="WellCommerce\Component\Form\Elements\Form" scope="prototype">
             <tag name="form.element" alias="form"/>
         </service>
@@ -216,6 +220,10 @@
 
         <service id="form.dependency.show" class="WellCommerce\Component\Form\Dependencies\Show" scope="prototype">
             <tag name="form.dependency" alias="show"/>
+        </service>
+
+        <service id="form.rule.required" class="WellCommerce\Component\Form\Rules\Required" scope="prototype">
+            <tag name="form.rule" alias="required"/>
         </service>
     </services>
 </container>

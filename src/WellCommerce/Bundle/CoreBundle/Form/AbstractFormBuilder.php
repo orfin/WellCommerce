@@ -109,7 +109,7 @@ abstract class AbstractFormBuilder extends AbstractContainerAware implements For
      */
     public function getRepositoryTransformer($alias, RepositoryInterface $repository)
     {
-        /** @var $transformer \WellCommerce\Bundle\AppBundle\Form\DataTransformer\RepositoryAwareDataTransformerInterface */
+        /** @var $transformer \WellCommerce\Component\Form\DataTransformer\DataTransformerInterface */
         $transformer = $this->get('form.data_transformer.factory')->createRepositoryTransformer($alias);
         $transformer->setRepository($repository);
 
