@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\RoutingBundle\EventListener;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;
+use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Events;
 use WellCommerce\Bundle\RoutingBundle\Entity\RoutableSubjectInterface;
 
@@ -24,6 +25,31 @@ use WellCommerce\Bundle\RoutingBundle\Entity\RoutableSubjectInterface;
  */
 class RoutableSubscriber implements EventSubscriber
 {
+    /**
+     * @var array
+     */
+    protected $routingDiscriminatorsMap;
+
+    /**
+     * RoutableSubscriber constructor.
+     *
+     * @param array $routingDiscriminatorsMap
+     */
+    public function __construct(array $routingDiscriminatorsMap = [])
+    {
+        $this->routingDiscriminatorsMap = $routingDiscriminatorsMap;
+    }
+
+    public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
+    {
+        $metadata = $eventArgs->getClassMetaData();
+        /** @var $reflectionClass \ReflectionClass */
+        $reflectionClass = $metadata->getReflectionClass();
+        if ($reflectionClass->implementsInterface(\WellCommerce\Bundle\RoutingBundle\Entity\RoutingDiscriminatorsAwareInterface::class)) {
+            $metadata->setDiscriminatorMap($this->routingDiscriminatorsMap);
+        }
+    }
+
     /**
      * Add Route for new entity
      *
@@ -62,6 +88,7 @@ class RoutableSubscriber implements EventSubscriber
     {
         return [
             Events::prePersist,
+            Events::loadClassMetadata
         ];
     }
 }

@@ -14,6 +14,7 @@
         </service>
 
         <service id="routable.subscriber" class="WellCommerce\Bundle\RoutingBundle\EventListener\RoutableSubscriber">
+            <argument>%routing_discriminator_map%</argument>
             <tag name="doctrine.event_subscriber" />
         </service>
 

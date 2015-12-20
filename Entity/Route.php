@@ -17,7 +17,7 @@ namespace WellCommerce\Bundle\RoutingBundle\Entity;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Route implements RouteInterface
+class Route implements RouteInterface, RoutingDiscriminatorsAwareInterface
 {
     /**
      * @var int
