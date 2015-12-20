@@ -21,3 +21,29 @@ well_commerce_category:
             orm_configuration:
                 mapping: "@WellCommerceCategoryBundle/Resources/config/doctrine/CategoryTranslation.orm.yml"
                 entity: WellCommerce\Bundle\CategoryBundle\Entity\CategoryTranslation
+    dynamic_routing:
+        name: category
+        class: WellCommerce\Bundle\CategoryBundle\Generator\CategoryRouteGenerator
+        defaults:
+            _controller: category.controller.front:indexAction
+            limit: 12
+            page: 1
+            orderBy: name
+            orderDir: asc
+            priceFrom: 0
+            priceTo: 9999
+            view: grid
+            producers: ~
+            attributes: ~
+        requirements:
+            limit: "\d{1,10}"
+            page: "\d{1,10}"
+            orderBy: "name|finalPrice"
+            orderDir: "asc|desc"
+            priceFrom: "\d{1,10}"
+            priceTo: "\d{1,10}"
+            view: "grid|list"
+            producers: "[\d+_]+"
+            attributes: "[\d+_]+"
+        pattern: "{page},{limit},{orderBy},{orderDir},{priceFrom},{priceTo},{view},{producers},{attributes}"
+
