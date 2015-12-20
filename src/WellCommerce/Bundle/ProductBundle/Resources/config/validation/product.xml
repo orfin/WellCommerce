@@ -62,17 +62,7 @@
             <constraint name="NotBlank" />
             <constraint name="NotNull" />
         </property>
-        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
-            <option name="fields">slug</option>
-        </constraint>
-    </class>
-
-    <class name="WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatus">
-        <property name="translations">
-            <constraint name="Valid">
-                <option name="deep">true</option>
-            </constraint>
-        </property>
+        <constraint name="WellCommerce\Bundle\RoutingBundle\Doctrine\Validator\Constraints\UniqueEntity" />
     </class>
 
     <class name="WellCommerce\Bundle\ReviewBundle\Entity\Review">
@@ -92,19 +82,5 @@
             <constraint name="NotBlank" />
             <constraint name="NotNull" />
         </property>
-    </class>
-
-    <class name="WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusTranslation">
-        <property name="name">
-            <constraint name="NotBlank" />
-            <constraint name="NotNull" />
-        </property>
-        <property name="slug">
-            <constraint name="NotBlank" />
-            <constraint name="NotNull" />
-        </property>
-        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
-            <option name="fields">slug</option>
-        </constraint>
     </class>
 </constraint-mapping>
