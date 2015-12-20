@@ -43,6 +43,7 @@ imports:
     - { resource: "@WellCommerceWishlistBundle/Resources/config/wellcommerce.yml" }
 
 parameters:
+    routing_discriminator_map: ~
     fixtures_load_order:
         WellCommerce\Bundle\AdminBundle\DataFixtures\ORM\LoadAdminMenuData: 0
         WellCommerce\Bundle\ThemeBundle\DataFixtures\ORM\LoadThemeData: 10
