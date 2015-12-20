@@ -18,17 +18,12 @@
 
     <class name="WellCommerce\Bundle\PageBundle\Entity\PageTranslation">
         <property name="name">
-            <constraint name="NotBlank">
-                <option name="message">page.error.name.not_blank</option>
-            </constraint>
-            <constraint name="NotNull">
-                <option name="message">page.error.name.not_null</option>
-            </constraint>
+            <constraint name="NotBlank" />
+            <constraint name="NotNull" />
         </property>
         <property name="content">
-            <constraint name="NotNull">
-                <option name="message">page.error.content.not_null</option>
-            </constraint>
+            <constraint name="NotNull" />
         </property>
+        <constraint name="WellCommerce\Bundle\RoutingBundle\Doctrine\Validator\Constraints\UniqueEntity" />
     </class>
 </constraint-mapping>
