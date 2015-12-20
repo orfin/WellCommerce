@@ -28,6 +28,7 @@
 
         <service id="routing.orm.validator.unique" class="WellCommerce\Bundle\RoutingBundle\Doctrine\Validator\Constraints\UniqueEntityValidator">
             <argument type="service" id="routing.repository"/>
+            <argument type="service" id="router.helper"/>
             <tag name="validator.constraint_validator" alias="routing.orm.validator.unique" />
         </service>
     </services>

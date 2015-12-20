@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\RoutingBundle\Doctrine\Validator\Constraints;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use WellCommerce\Bundle\CoreBundle\Helper\Router\RouterHelperInterface;
 use WellCommerce\Bundle\RoutingBundle\Entity\RoutableSubjectInterface;
 use WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface;
 use WellCommerce\Bundle\RoutingBundle\Repository\RouteRepositoryInterface;
@@ -31,13 +32,20 @@ class UniqueEntityValidator extends ConstraintValidator
     protected $routeRepository;
 
     /**
+     * @var RouterHelperInterface
+     */
+    protected $routerHelper;
+
+    /**
      * UniqueEntityValidator constructor.
      *
      * @param RouteRepositoryInterface $routeRepository
+     * @param RouterHelperInterface    $routerHelper
      */
-    public function __construct(RouteRepositoryInterface $routeRepository)
+    public function __construct(RouteRepositoryInterface $routeRepository, RouterHelperInterface $routerHelper)
     {
         $this->routeRepository = $routeRepository;
+        $this->routerHelper    = $routerHelper;
     }
 
     /**
@@ -71,9 +79,20 @@ class UniqueEntityValidator extends ConstraintValidator
             $this->context
                 ->buildViolation($constraint->message)
                 ->setParameter('{{ type }}', $this->formatValue($result->getType()))
+                ->setParameter('{{ url }}', $this->generatePath($result))
                 ->atPath('slug')
                 ->setInvalidValue($slug)
                 ->addViolation();
         }
+    }
+
+    /**
+     * @param RouteInterface $route
+     *
+     * @return string
+     */
+    protected function generatePath(RouteInterface $route)
+    {
+        return $this->routerHelper->generateUrl('dynamic_' . $route->getId());
     }
 }
