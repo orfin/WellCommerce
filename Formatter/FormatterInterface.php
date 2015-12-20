@@ -57,4 +57,13 @@ interface FormatterInterface
      * @return array
      */
     public function formatDependencies(array $dependencies);
+
+    /**
+     * Formats elements rules
+     *
+     * @param array $rules
+     *
+     * @return array
+     */
+    public function formatRules(array $rules);
 }

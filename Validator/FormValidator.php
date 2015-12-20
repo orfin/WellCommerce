@@ -38,13 +38,15 @@ class FormValidator implements FormValidatorInterface
     protected $constraintViolationMapper;
 
     /**
-     * Constructor
+     * FormValidator constructor.
      *
      * @param ValidatorInterface        $validator
      * @param ConstraintViolationMapper $constraintViolationMapper
      */
-    public function __construct(ValidatorInterface $validator, ConstraintViolationMapper $constraintViolationMapper)
-    {
+    public function __construct(
+        ValidatorInterface $validator,
+        ConstraintViolationMapper $constraintViolationMapper
+    ) {
         $this->validator                 = $validator;
         $this->constraintViolationMapper = $constraintViolationMapper;
     }

@@ -108,7 +108,7 @@ class ConstraintViolationMapper
      * Sets errors on element
      *
      * @param array            $messages
-     * @param ElementInterface $child
+     * @param ElementInterface $element
      */
     protected function mapMessagesToElement(array $messages, ElementInterface $element)
     {

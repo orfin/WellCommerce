@@ -16,6 +16,7 @@ use WellCommerce\Component\Form\Dependencies\DependencyInterface;
 use WellCommerce\Component\Form\Elements\Attribute;
 use WellCommerce\Component\Form\Elements\AttributeCollection;
 use WellCommerce\Component\Form\Elements\ElementInterface;
+use WellCommerce\Component\Form\Rules\RuleInterface;
 use Zend\Json\Expr;
 use Zend\Json\Json;
 
@@ -75,6 +76,19 @@ class JavascriptFormatter implements FormatterInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function formatRules(array $rules)
+    {
+        $formattedRules = [];
+        foreach ($rules as $rule) {
+            $formattedRules[] = $this->formatRule($rule);
+        }
+
+        return $formattedRules;
+    }
+
+    /**
      * Formats single dependency
      *
      * @param DependencyInterface $dependency
@@ -84,6 +98,18 @@ class JavascriptFormatter implements FormatterInterface
     protected function formatDependency(DependencyInterface $dependency)
     {
         return new Expr($dependency->renderJs());
+    }
+
+    /**
+     * Formats single rule
+     *
+     * @param RuleInterface $rule
+     *
+     * @return Expr
+     */
+    protected function formatRule(RuleInterface $rule)
+    {
+        return new Expr($rule->renderJs());
     }
 
     /**
