@@ -31,13 +31,6 @@
                 <option name="message">category_translation.name.not_null</option>
             </constraint>
         </property>
-        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
-            <option name="fields">slug</option>
-        </constraint>
-        <property name="route">
-            <constraint name="Valid">
-                <option name="deep">true</option>
-            </constraint>
-        </property>
+        <constraint name="WellCommerce\Bundle\RoutingBundle\Doctrine\Validator\Constraints\UniqueEntity" />
     </class>
 </constraint-mapping>
