@@ -21,3 +21,9 @@ well_commerce_page:
             orm_configuration:
                 mapping: "@WellCommercePageBundle/Resources/config/doctrine/PageTranslation.orm.yml"
                 entity: WellCommerce\Bundle\PageBundle\Entity\PageTranslation
+
+    dynamic_routing:
+        name: page
+        class: WellCommerce\Bundle\PageBundle\Generator\PageRouteGenerator
+        defaults:
+            _controller: page.controller.front:indexAction
