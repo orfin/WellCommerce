@@ -7062,6 +7062,9 @@ var GFormSlugField = GCore.ExtendClass(GFormTextField, function () {
             jRepetitionNode.append(jSuffix);
         }
 
+        var jError = $('<span class="' + gThis._GetClass('Required') + '"/>');
+        jRepetitionNode.append(jError);
+
         if(gThis.m_oOptions.sTranslatableId > 0){
             sRefreshLink = $('<img src="' + gThis._GetImage('RefreshButton') + '" />').css({
                 'cursor': 'pointer',
@@ -7075,8 +7078,6 @@ var GFormSlugField = GCore.ExtendClass(GFormTextField, function () {
             jRepetitionNode.append(sRefreshLink);
         }
 
-        var jError = $('<span class="' + gThis._GetClass('Required') + '"/>');
-        jRepetitionNode.append(jError);
         gThis.jRepetitionNode = jRepetitionNode;
         return gThis.jRepetitionNode;
     };
