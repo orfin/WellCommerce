@@ -29,6 +29,9 @@ class UserResetPasswordFormBuilder extends AbstractFormBuilder
         $form->addChild($this->getElement('text_field', [
             'name'  => 'username',
             'label' => $this->trans('user.label.username'),
+            'rules' => [
+                $this->getRule('required')
+            ],
         ]));
 
         $form->addChild($this->getElement('submit', [
