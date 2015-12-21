@@ -42,18 +42,22 @@ class ShippingMethodFormBuilder extends AbstractFormBuilder
         $languageData->addChild($this->getElement('text_field', [
             'name'  => 'name',
             'label' => $this->trans('common.label.name'),
+            'rules' => [
+                $this->getRule('required')
+            ],
         ]));
 
         $requiredData->addChild($this->getElement('checkbox', [
             'name'    => 'enabled',
             'label'   => $this->trans('common.label.enabled'),
-            'default' => 1
         ]));
 
         $requiredData->addChild($this->getElement('text_field', [
             'name'    => 'hierarchy',
             'label'   => $this->trans('common.label.hierarchy'),
-            'default' => 0
+            'rules' => [
+                $this->getRule('required')
+            ],
         ]));
 
         $costsData = $form->addChild($this->getElement('nested_fieldset', [
