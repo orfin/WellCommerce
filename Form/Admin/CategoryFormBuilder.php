@@ -40,6 +40,9 @@ class CategoryFormBuilder extends AbstractFormBuilder
         $name = $languageData->addChild($this->getElement('text_field', [
             'name'  => 'name',
             'label' => $this->trans('common.label.name'),
+            'rules' => [
+                $this->getRule('required')
+            ]
         ]));
 
         $languageData->addChild($this->getElement('slug_field', [
@@ -47,7 +50,10 @@ class CategoryFormBuilder extends AbstractFormBuilder
             'label'           => $this->trans('category.label.slug'),
             'name_field'      => $name,
             'generate_route'  => 'admin.routing.generate',
-            'translatable_id' => $this->getRequestHelper()->getAttributesBagParam('id')
+            'translatable_id' => $this->getRequestHelper()->getAttributesBagParam('id'),
+            'rules'           => [
+                $this->getRule('required')
+            ]
         ]));
 
         $requiredData->addChild($this->getElement('checkbox', [
@@ -60,6 +66,9 @@ class CategoryFormBuilder extends AbstractFormBuilder
         $requiredData->addChild($this->getElement('text_field', [
             'name'  => 'hierarchy',
             'label' => $this->trans('common.label.hierarchy'),
+            'rules' => [
+                $this->getRule('required')
+            ],
         ]));
 
         $requiredData->addChild($this->getElement('tree', [
