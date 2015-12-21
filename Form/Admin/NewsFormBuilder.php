@@ -40,6 +40,9 @@ class NewsFormBuilder extends AbstractFormBuilder
         $languageData->addChild($this->getElement('text_field', [
             'name'  => 'topic',
             'label' => $this->trans('news.label.topic'),
+            'rules' => [
+                $this->getRule('required')
+            ],
         ]));
 
         $languageData->addChild($this->getElement('text_area', [
