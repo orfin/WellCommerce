@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Component\Form\Elements\Optioned;
 
+use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use WellCommerce\Component\Form\Elements\Attribute;
 use WellCommerce\Component\Form\Elements\AttributeCollection;
@@ -37,6 +38,14 @@ class Select extends AbstractOptionedField implements OptionedFieldInterface
             'selector'        => '',
             'css_attribute'   => '',
         ]);
+
+        $resolver->setDefault('default', function (Options $options) {
+            if (count($options['options'])) {
+                return current(array_keys($options['options']));
+            }
+
+            return null;
+        });
 
         $resolver->setAllowedTypes('selector', 'string');
         $resolver->setAllowedTypes('css_attribute', 'string');
