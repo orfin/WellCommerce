@@ -34,11 +34,17 @@ class CompanyFormBuilder extends AbstractFormBuilder
         $requiredData->addChild($this->getElement('text_field', [
             'name'  => 'name',
             'label' => $this->trans('company.label.name'),
+            'rules' => [
+                $this->getRule('required')
+            ],
         ]));
 
         $requiredData->addChild($this->getElement('text_field', [
             'name'  => 'shortName',
             'label' => $this->trans('company.label.short_name'),
+            'rules' => [
+                $this->getRule('required')
+            ],
         ]));
 
         $addressData = $form->addChild($this->getElement('nested_fieldset', [
