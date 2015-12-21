@@ -10,9 +10,6 @@ WellCommerce\Bundle\ProducerBundle\Entity\Producer:
     oneToMany:
         products:
             targetEntity: WellCommerce\Bundle\ProductBundle\Entity\Product
-            cascade:
-                - remove
-                - persist
             fetch: LAZY
             mappedBy: producer
     manyToMany:
