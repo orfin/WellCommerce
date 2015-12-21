@@ -34,7 +34,6 @@ class CouponFactory extends AbstractFactory
     {
         /** @var $coupon CouponInterface */
         $coupon = $this->init();
-        $coupon->setCode('');
         $coupon->setClientUsageLimit(1);
         $coupon->setGlobalUsageLimit(1);
         $coupon->setModifierType('%');
