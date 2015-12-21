@@ -27,14 +27,11 @@
     </class>
 
     <class name="WellCommerce\Bundle\ClientBundle\Entity\ClientDetails">
-        <!--<constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">-->
-            <!--<option name="fields">username</option>-->
-            <!--<option name="message">client.error.email.unique</option>-->
-            <!--<option name="repositoryMethod">findClientByUsername</option>-->
-            <!--<option name="groups">-->
-                <!--<value>client_registration</value>-->
-            <!--</option>-->
-        <!--</constraint>-->
+        <constraint name="WellCommerce\Bundle\ClientBundle\Doctrine\Validator\Constraints\UniqueUsername">
+            <option name="groups">
+                <value>client_registration</value>
+            </option>
+        </constraint>
         <property name="conditionsAccepted">
             <constraint name="EqualTo">
                 <option name="value">1</option>

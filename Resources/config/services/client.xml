@@ -34,5 +34,11 @@
         <service id="twig.extension.client_address_formatter" class="WellCommerce\Bundle\ClientBundle\Twig\Extension\ClientAddressFormatterExtension">
             <tag name="twig.extension"/>
         </service>
+
+        <service id="client.orm.validator.unique" class="WellCommerce\Bundle\ClientBundle\Doctrine\Validator\Constraints\UniqueUsernameValidator">
+            <argument type="service" id="client.repository"/>
+            <argument type="service" id="router.helper"/>
+            <tag name="validator.constraint_validator" alias="client.orm.validator.unique" />
+        </service>
     </services>
 </container>

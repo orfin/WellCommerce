@@ -40,6 +40,11 @@ interface ClientDetailsInterface
     public function resetPassword();
 
     /**
+     * @return string
+     */
+    public function getUsername();
+
+    /**
      * @param string $username
      */
     public function setUsername($username);
