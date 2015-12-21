@@ -39,6 +39,9 @@ class ClientGroupFormBuilder extends AbstractFormBuilder
             'filters' => [
                 $this->getFilter('comma_to_dot_changer'),
             ],
+            'rules' => [
+                $this->getRule('required')
+            ],
         ]));
 
         $languageData = $requiredData->addChild($this->getElement('language_fieldset', [
@@ -50,6 +53,9 @@ class ClientGroupFormBuilder extends AbstractFormBuilder
         $languageData->addChild($this->getElement('text_field', [
             'name'  => 'name',
             'label' => $this->trans('common.label.name'),
+            'rules' => [
+                $this->getRule('required')
+            ],
         ]));
 
         $form->addFilter($this->getFilter('no_code'));
