@@ -41,6 +41,9 @@ class AttributeGroupFormBuilder extends AbstractFormBuilder
         $languageData->addChild($this->getElement('text_field', [
             'name'  => 'name',
             'label' => $this->trans('common.label.name'),
+            'rules' => [
+                $this->getRule('required')
+            ],
         ]));
 
         $attributeData = $form->addChild($this->getElement('nested_fieldset', [

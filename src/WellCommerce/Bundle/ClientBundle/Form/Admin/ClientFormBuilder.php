@@ -37,26 +37,41 @@ class ClientFormBuilder extends AbstractFormBuilder
         $requiredData->addChild($this->getElement('text_field', [
             'name'  => 'firstName',
             'label' => $this->trans('common.label.first_name'),
+            'rules' => [
+                $this->getRule('required')
+            ],
         ]));
 
         $requiredData->addChild($this->getElement('text_field', [
             'name'  => 'lastName',
             'label' => $this->trans('common.label.last_name'),
+            'rules' => [
+                $this->getRule('required')
+            ],
         ]));
 
         $requiredData->addChild($this->getElement('text_field', [
             'name'  => 'email',
             'label' => $this->trans('common.label.email'),
+            'rules' => [
+                $this->getRule('required')
+            ],
         ]));
 
         $requiredData->addChild($this->getElement('password', [
             'name'  => 'password',
             'label' => $this->trans('common.label.password'),
+            'rules' => [
+                $this->getRule('required')
+            ],
         ]));
 
         $requiredData->addChild($this->getElement('text_field', [
             'name'  => 'phone',
             'label' => $this->trans('common.label.phone'),
+            'rules' => [
+                $this->getRule('required')
+            ],
         ]));
 
         $requiredData->addChild($this->getElement('select', [
@@ -72,6 +87,9 @@ class ClientFormBuilder extends AbstractFormBuilder
             'suffix'  => '%',
             'filters' => [
                 $this->getFilter('comma_to_dot_changer'),
+            ],
+            'rules' => [
+                $this->getRule('required')
             ],
         ]));
 

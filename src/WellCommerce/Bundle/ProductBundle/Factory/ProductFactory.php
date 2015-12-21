@@ -41,6 +41,9 @@ class ProductFactory extends AbstractFactory
         $product->setAttributes(new ArrayCollection());
         $product->setShops(new ArrayCollection());
         $product->setEnabled(true);
+        $product->setStock(0);
+        $product->setWeight(0);
+        $product->setPackageSize(1);
 
         return $product;
     }

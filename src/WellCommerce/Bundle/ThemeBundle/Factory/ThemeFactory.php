@@ -36,7 +36,6 @@ class ThemeFactory extends AbstractFactory
         /** @var  $theme ThemeInterface */
         $theme = $this->init();
         $theme->setCss(new ArrayCollection());
-        $theme->setFolder('');
         $theme->setName('');
 
         return $theme;

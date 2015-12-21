@@ -48,25 +48,28 @@ class PaymentMethodFormBuilder extends AbstractFormBuilder
         $languageData->addChild($this->getElement('text_field', [
             'name'  => 'name',
             'label' => $this->trans('common.label.name'),
+            'rules' => [
+                $this->getRule('required')
+            ],
         ]));
 
         $processorType = $requiredData->addChild($this->getElement('select', [
             'name'    => 'processor',
             'label'   => $this->trans('payment_method.label.processor'),
-            'options' => $options,
-            'default' => current(array_keys($options)),
+            'options' => $options
         ]));
 
         $requiredData->addChild($this->getElement('checkbox', [
             'name'    => 'enabled',
             'label'   => $this->trans('common.label.enabled'),
-            'default' => 1
         ]));
 
         $requiredData->addChild($this->getElement('text_field', [
             'name'    => 'hierarchy',
             'label'   => $this->trans('common.label.hierarchy'),
-            'default' => 0
+            'rules' => [
+                $this->getRule('required')
+            ],
         ]));
 
         $requiredData->addChild($this->getElement('select', [

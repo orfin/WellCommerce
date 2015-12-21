@@ -34,11 +34,17 @@ class ChannelFormBuilder extends AbstractFormBuilder
         $channelRequiredData->addChild($this->getElement('text_field', [
             'name'  => 'name',
             'label' => $this->trans('common.label.name'),
+            'rules' => [
+                $this->getRule('required')
+            ],
         ]));
 
         $channelRequiredData->addChild($this->getElement('text_field', [
             'name'  => 'url',
             'label' => $this->trans('common.label.url'),
+            'rules' => [
+                $this->getRule('required')
+            ],
         ]));
 
         $unitForm->addFilter($this->getFilter('no_code'));

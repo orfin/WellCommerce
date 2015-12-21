@@ -37,6 +37,9 @@ class ThemeFormBuilder extends AbstractFormBuilder
         $requiredData->addChild($this->getElement('text_field', [
             'name'  => 'name',
             'label' => $this->trans('common.label.name'),
+            'rules' => [
+                $this->getRule('required')
+            ],
         ]));
 
         $requiredData->addChild($this->getElement('select', [

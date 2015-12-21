@@ -39,6 +39,9 @@ class ShopFormBuilder extends AbstractFormBuilder
         $requiredData->addChild($this->getElement('text_field', [
             'name'  => 'name',
             'label' => $this->trans('common.label.name'),
+            'rules' => [
+                $this->getRule('required')
+            ],
         ]));
 
         $requiredData->addChild($this->getElement('select', [
@@ -63,6 +66,9 @@ class ShopFormBuilder extends AbstractFormBuilder
         $urlData->addChild($this->getElement('text_field', [
             'name'  => 'url',
             'label' => $this->trans('shop.label.url'),
+            'rules' => [
+                $this->getRule('required')
+            ],
         ]));
 
         $cartSettings = $form->addChild($this->getElement('nested_fieldset', [
@@ -90,26 +96,41 @@ class ShopFormBuilder extends AbstractFormBuilder
         $mailerConfiguration->addChild($this->getElement('text_field', [
             'name'  => 'mailerConfiguration.from',
             'label' => $this->trans('shop.label.mailer_configuration.from'),
+            'rules' => [
+                $this->getRule('required')
+            ],
         ]));
 
         $mailerConfiguration->addChild($this->getElement('text_field', [
             'name'  => 'mailerConfiguration.host',
             'label' => $this->trans('shop.label.mailer_configuration.host'),
+            'rules' => [
+                $this->getRule('required')
+            ],
         ]));
 
         $mailerConfiguration->addChild($this->getElement('text_field', [
             'name'  => 'mailerConfiguration.port',
             'label' => $this->trans('shop.label.mailer_configuration.port'),
+            'rules' => [
+                $this->getRule('required')
+            ],
         ]));
 
         $mailerConfiguration->addChild($this->getElement('text_field', [
             'name'  => 'mailerConfiguration.user',
             'label' => $this->trans('shop.label.mailer_configuration.user'),
+            'rules' => [
+                $this->getRule('required')
+            ],
         ]));
 
         $mailerConfiguration->addChild($this->getElement('password', [
             'name'  => 'mailerConfiguration.pass',
             'label' => $this->trans('shop.label.mailer_configuration.pass'),
+            'rules' => [
+                $this->getRule('required')
+            ],
         ]));
 
         $form->addFilter($this->getFilter('no_code'));

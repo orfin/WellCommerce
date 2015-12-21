@@ -4091,16 +4091,27 @@ var GForm = GCore.ExtendClass(GFormContainer, function() {
 		if(gThis.m_bLocked == true){
 			return false;
 		}
-		gThis.m_bLocked = true;
-		GCore.StartWaiting();
-		var values = {};
-		$.each($(gThis).serializeArray(), function(i, field) {
-			values[field.name] = field.value;
-		});
+		
+        var bResult = gThis.Validate(true);
+		if (bResult) {
+            gThis.m_bLocked = true;
+    		GCore.StartWaiting();
+    		var values = {};
+    		$.each($(gThis).serializeArray(), function(i, field) {
+    			values[field.name] = field.value;
+    		});
 
-		GF_Ajax_Request($(gThis).attr('action'), values, gThis.OnAjaxSubmitResponse);
+    		GF_Ajax_Request($(gThis).attr('action'), values, gThis.OnAjaxSubmitResponse);
+        }else{
+            $(gThis).find('.invalid').first().find('input, select').focus();
+			GAlert.DestroyAll();
+			GAlert(GForm.Language.form_data_invalid,'', {
+				bAutoFocus: false
+			});
+			window.setTimeout(GAlert.DestroyAll, 15000);
+        }
 
-		return false;
+		return bResult;
 	};
 
 	gThis._InitButtons = function() {

@@ -34,7 +34,6 @@ class LayoutBoxFactory extends AbstractFactory
     {
         /** @var $box LayoutBoxInterface */
         $box = $this->init();
-        $box->setIdentifier('');
 
         return $box;
     }
