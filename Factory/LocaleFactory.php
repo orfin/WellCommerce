@@ -34,7 +34,6 @@ class LocaleFactory extends AbstractFactory
     {
         /** @var $locale LocaleInterface */
         $locale = $this->init();
-        $locale->setCode('');
 
         return $locale;
     }
