@@ -49,6 +49,9 @@ class ProductFormBuilder extends AbstractFormBuilder
         $name = $languageData->addChild($this->getElement('text_field', [
             'name'  => 'name',
             'label' => $this->trans('common.label.name'),
+            'rules' => [
+                $this->getRule('required')
+            ],
         ]));
 
         $languageData->addChild($this->getElement('slug_field', [
@@ -56,14 +59,16 @@ class ProductFormBuilder extends AbstractFormBuilder
             'label'           => $this->trans('product.label.slug'),
             'name_field'      => $name,
             'generate_route'  => 'admin.routing.generate',
-            'translatable_id' => $this->getRequestHelper()->getAttributesBagParam('id')
+            'translatable_id' => $this->getRequestHelper()->getAttributesBagParam('id'),
+            'rules' => [
+                $this->getRule('required')
+            ],
         ]));
 
         $mainData->addChild($this->getElement('checkbox', [
             'name'    => 'enabled',
             'label'   => $this->trans('common.label.enabled'),
             'comment' => $this->trans('common.comment.enabled'),
-            'default' => 1
         ]));
 
         $descriptionData = $form->addChild($this->getElement('nested_fieldset', [
@@ -90,6 +95,9 @@ class ProductFormBuilder extends AbstractFormBuilder
         $mainData->addChild($this->getElement('text_field', [
             'name'  => 'sku',
             'label' => $this->trans('common.label.sku'),
+            'rules' => [
+                $this->getRule('required')
+            ],
         ]));
 
         $mainData->addChild($this->getElement('select', [
@@ -238,7 +246,9 @@ class ProductFormBuilder extends AbstractFormBuilder
             'name'    => 'stock',
             'label'   => $this->trans('common.label.stock'),
             'suffix'  => $this->trans('pcs'),
-            'default' => 0
+            'rules' => [
+                $this->getRule('required')
+            ],
         ]));
 
         $stockData->addChild($this->getElement('checkbox', [
@@ -260,7 +270,9 @@ class ProductFormBuilder extends AbstractFormBuilder
             'filters' => [
                 $this->getFilter('comma_to_dot_changer'),
             ],
-            'default' => 0
+            'rules' => [
+                $this->getRule('required')
+            ],
         ]));
 
         $stockData->addChild($this->getElement('text_field', [
@@ -293,7 +305,9 @@ class ProductFormBuilder extends AbstractFormBuilder
             'filters' => [
                 $this->getFilter('comma_to_dot_changer'),
             ],
-            'default' => 1
+            'rules' => [
+                $this->getRule('required')
+            ],
         ]));
 
         $availabilityField = $stockData->addChild($this->getElement('select', [
