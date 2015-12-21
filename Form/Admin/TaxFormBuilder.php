@@ -40,12 +40,18 @@ class TaxFormBuilder extends AbstractFormBuilder
         $taxTranslationData->addChild($this->getElement('text_field', [
             'name'  => 'name',
             'label' => $this->trans('common.label.name'),
+            'rules' => [
+                $this->getRule('required')
+            ],
         ]));
 
         $taxRequiredData->addChild($this->getElement('text_field', [
             'name'   => 'value',
             'label'  => $this->trans('tax.label.value'),
-            'suffix' => '%'
+            'suffix' => '%',
+            'rules' => [
+                $this->getRule('required')
+            ],
         ]));
 
         $taxForm->addFilter($this->getFilter('no_code'));
