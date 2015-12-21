@@ -45,16 +45,25 @@ class ContactFormBuilder extends AbstractFormBuilder
         $languageData->addChild($this->getElement('text_field', [
             'name'  => 'name',
             'label' => $this->trans('common.label.name'),
+            'rules' => [
+                $this->getRule('required')
+            ],
         ]));
 
         $languageData->addChild($this->getElement('text_field', [
             'name'  => 'email',
             'label' => $this->trans('common.label.email'),
+            'rules' => [
+                $this->getRule('required')
+            ],
         ]));
 
         $languageData->addChild($this->getElement('text_field', [
             'name'  => 'phone',
             'label' => $this->trans('common.label.phone'),
+            'rules' => [
+                $this->getRule('required')
+            ],
         ]));
 
         $languageData->addChild($this->getElement('text_area', [
