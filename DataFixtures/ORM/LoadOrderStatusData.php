@@ -37,8 +37,8 @@ class LoadOrderStatusData extends AbstractDataFixture
             $status = new OrderStatus();
             $status->setEnabled(1);
             $status->setOrderStatusGroup($this->getReference($sample['order_status_group_reference']));
-            $status->translate('en')->setName($sample['name']);
-            $status->translate('en')->setDefaultComment($sample['default_comment']);
+            $status->translate($this->container->getParameter('locale'))->setName($sample['name']);
+            $status->translate($this->container->getParameter('locale'))->setDefaultComment($sample['default_comment']);
             $status->mergeNewTranslations();
             $manager->persist($status);
             if (true === $sample['default']) {
