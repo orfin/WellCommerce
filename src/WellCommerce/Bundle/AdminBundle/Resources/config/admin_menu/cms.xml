@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<items>
+    <item>
+        <identifier>cms</identifier>
+        <route_name>admin.page.index</route_name>
+        <css_class>cms</css_class>
+        <name>cms</name>
+        <parent/>
+        <hierarchy>70</hierarchy>
+    </item>
+
+    <item>
+        <identifier>page</identifier>
+        <css_class/>
+        <name>page</name>
+        <route_name>admin.page.index</route_name>
+        <parent>cms</parent>
+        <hierarchy>10</hierarchy>
+    </item>
+
+    <item>
+        <identifier>news</identifier>
+        <css_class/>
+        <name>news</name>
+        <route_name>admin.news.index</route_name>
+        <parent>cms</parent>
+        <hierarchy>20</hierarchy>
+    </item>
+
+    <item>
+        <identifier>contact</identifier>
+        <css_class/>
+        <name>contact</name>
+        <route_name>admin.contact.index</route_name>
+        <parent>cms</parent>
+        <hierarchy>30</hierarchy>
+    </item>
+
+    <item>
+        <identifier>media</identifier>
+        <css_class/>
+        <name>media</name>
+        <route_name>admin.media.index</route_name>
+        <parent>cms</parent>
+        <hierarchy>40</hierarchy>
+    </item>
+</items>
