@@ -1,0 +1,9 @@
+well_commerce_routing:
+    services:
+        routing:
+            auto_services:
+                factory: WellCommerce\Bundle\RoutingBundle\Factory\RouteFactory
+                repository: WellCommerce\Bundle\RoutingBundle\Repository\RouteRepository
+            orm_configuration:
+                mapping: "@WellCommerceRoutingBundle/Resources/config/doctrine/Route.orm.yml"
+                entity: WellCommerce\Bundle\RoutingBundle\Entity\Route
