@@ -13,7 +13,7 @@ WellCommerce\Bundle\ClientBundle\Entity\ClientDetails:
         username:
             type: string
             length: 60
-            unique: true
+            unique: false
             nullable: false
         salt:
             type: string
