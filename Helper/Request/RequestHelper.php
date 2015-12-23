@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Helper\Request;
 
+use Doctrine\Common\Util\Debug;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
