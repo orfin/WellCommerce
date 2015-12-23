@@ -20,7 +20,7 @@
             <argument type="service" id="event_dispatcher" />
         </service>
 
-        <service id="form.translation.data_transformer" class="WellCommerce\Bundle\LocaleBundle\Form\DataTransformer\TranslationTransformer" scope="prototype">
+        <service id="form.translation.data_transformer" class="WellCommerce\Bundle\LocaleBundle\Form\DataTransformer\TranslationTransformer" shared="false">
             <argument type="service" id="doctrine.helper"/>
             <tag name="form.data_transformer" alias="translation"/>
         </service>

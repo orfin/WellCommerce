@@ -45,11 +45,9 @@ class Appearance extends AbstractOptions
             'no_title' => false,
         ]);
 
-        $resolver->setAllowedValues([
-            'visible'  => [true, false],
-            'align'    => [self::ALIGN_LEFT, self::ALIGN_CENTER, self::ALIGN_RIGHT],
-            'no_title' => [true, false],
-        ]);
+        $resolver->setAllowedValues('visible', [true, false]);
+        $resolver->setAllowedValues('align', [self::ALIGN_LEFT, self::ALIGN_CENTER, self::ALIGN_RIGHT]);
+        $resolver->setAllowedValues('no_title', [true, false]);
 
         $resolver->setAllowedTypes('visible', 'bool');
         $resolver->setAllowedTypes('width', ['int', 'string']);

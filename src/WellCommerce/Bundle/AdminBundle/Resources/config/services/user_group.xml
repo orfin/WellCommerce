@@ -12,7 +12,7 @@
             <argument type="service" id="event_dispatcher"/>
         </service>
 
-        <service id="form.user_group_permission.data_transformer" class="WellCommerce\Bundle\AdminBundle\Form\DataTransformer\UserGroupPermissionToArrayTransformer" scope="prototype">
+        <service id="form.user_group_permission.data_transformer" class="WellCommerce\Bundle\AdminBundle\Form\DataTransformer\UserGroupPermissionToArrayTransformer" shared="false">
             <argument type="service" id="doctrine.helper"/>
             <tag name="form.data_transformer" alias="user_group_permission"/>
         </service>

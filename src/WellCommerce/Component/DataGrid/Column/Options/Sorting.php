@@ -39,9 +39,7 @@ class Sorting extends AbstractOptions
             'default_order' => self::SORT_DIR_DESC,
         ]);
 
-        $resolver->setAllowedValues([
-            'allowed'       => [true, false],
-            'default_order' => [self::SORT_DIR_DESC, self::SORT_DIR_ASC],
-        ]);
+        $resolver->setAllowedValues('allowed', [true, false]);
+        $resolver->setAllowedValues('default_order', [self::SORT_DIR_DESC, self::SORT_DIR_ASC]);
     }
 }

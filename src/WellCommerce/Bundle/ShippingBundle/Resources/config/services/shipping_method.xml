@@ -77,7 +77,7 @@
             <tag name="doctrine.event_subscriber" connection="default" />
         </service>
 
-        <service id="form.shipping_cost_collection.data_transformer" class="WellCommerce\Bundle\ShippingBundle\Form\DataTransformer\ShippingCostCollectionToArrayTransformer" scope="prototype">
+        <service id="form.shipping_cost_collection.data_transformer" class="WellCommerce\Bundle\ShippingBundle\Form\DataTransformer\ShippingCostCollectionToArrayTransformer" shared="false">
             <argument type="service" id="doctrine.helper"/>
             <tag name="form.data_transformer" alias="shipping_cost_collection"/>
         </service>

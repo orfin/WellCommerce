@@ -45,12 +45,6 @@
             <argument>%kernel.cache_dir%</argument>
         </service>
 
-        <service id="theme.repository" class="WellCommerce\Bundle\ThemeBundle\Repository\ThemeRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
-            <argument>WellCommerceThemeBundle:Theme</argument>
-        </service>
-
-        <service id="theme.factory" class="WellCommerce\Bundle\ThemeBundle\Factory\ThemeFactory"/>
-
         <service id="theme.event_dispatcher" parent="core.event_dispatcher" public="false">
             <argument type="service" id="event_dispatcher"/>
         </service>

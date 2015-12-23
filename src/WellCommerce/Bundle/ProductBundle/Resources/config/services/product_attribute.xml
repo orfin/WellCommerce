@@ -26,7 +26,7 @@
             <tag name="request.param_converter" converter="product_attribute" priority="10"/>
         </service>
 
-        <service id="form.product_attribute_collection.data_transformer" class="WellCommerce\Bundle\ProductBundle\Form\DataTransformer\ProductAttributeCollectionToArrayTransformer" scope="prototype">
+        <service id="form.product_attribute_collection.data_transformer" class="WellCommerce\Bundle\ProductBundle\Form\DataTransformer\ProductAttributeCollectionToArrayTransformer" shared="false">
             <argument type="service" id="doctrine.helper"/>
             <call method="setProductAttributeManager">
                 <argument type="service" id="product_attribute.manager.admin"/>

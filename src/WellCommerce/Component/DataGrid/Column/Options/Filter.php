@@ -54,14 +54,12 @@ class Filter extends AbstractOptions
             return [];
         });
 
-        $resolver->setAllowedValues([
-            'type' => [
-                self::FILTER_SELECT,
-                self::FILTER_BETWEEN,
-                self::FILTER_INPUT,
-                self::FILTER_NONE,
-                self::FILTER_TREE,
-            ],
+        $resolver->setAllowedValues('type', [
+            self::FILTER_SELECT,
+            self::FILTER_BETWEEN,
+            self::FILTER_INPUT,
+            self::FILTER_NONE,
+            self::FILTER_TREE,
         ]);
     }
 

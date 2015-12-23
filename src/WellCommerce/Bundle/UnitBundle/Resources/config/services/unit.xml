@@ -8,12 +8,6 @@
     </imports>
 
     <services>
-        <service id="unit.repository" class="WellCommerce\Bundle\UnitBundle\Repository\UnitRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
-            <argument>WellCommerceUnitBundle:Unit</argument>
-        </service>
-
-        <service id="unit.factory" class="WellCommerce\Bundle\UnitBundle\Factory\UnitFactory" />
-
         <service id="unit.event_dispatcher" parent="core.event_dispatcher" public="false">
             <argument type="service" id="event_dispatcher" />
         </service>

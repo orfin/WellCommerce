@@ -33,7 +33,7 @@
             <tag name="request.param_converter" converter="product" priority="0"/>
         </service>
 
-        <service id="form.product_photo_collection.data_transformer" class="WellCommerce\Bundle\ProductBundle\Form\DataTransformer\ProductPhotoCollectionToArrayTransformer" scope="prototype">
+        <service id="form.product_photo_collection.data_transformer" class="WellCommerce\Bundle\ProductBundle\Form\DataTransformer\ProductPhotoCollectionToArrayTransformer" shared="false">
             <argument type="service" id="doctrine.helper"/>
             <tag name="form.data_transformer" alias="product_photo_collection"/>
         </service>

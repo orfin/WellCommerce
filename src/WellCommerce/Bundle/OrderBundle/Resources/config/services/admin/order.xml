@@ -69,7 +69,7 @@
             </call>
         </service>
 
-        <service id="form.order_product_collection.data_transformer" class="WellCommerce\Bundle\OrderBundle\Form\DataTransformer\OrderProductCollectionToArrayTransformer" scope="prototype">
+        <service id="form.order_product_collection.data_transformer" class="WellCommerce\Bundle\OrderBundle\Form\DataTransformer\OrderProductCollectionToArrayTransformer" shared="false">
             <argument type="service" id="doctrine.helper"/>
             <call method="setOrderProductManager">
                 <argument type="service" id="order_product.manager.admin"/>

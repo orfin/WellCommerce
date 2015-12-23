@@ -22,6 +22,7 @@ framework:
         save_path: "%kernel.root_dir%/sessions"
     fragments:       ~
     http_method_override: true
+    assets: ~
     profiler:
         matcher: { ip: "%developer_mode.ip%" }
 
@@ -77,5 +78,5 @@ services:
     client.failure.handler:
         class: WellCommerce\Bundle\ClientBundle\Handler\LoginFailureHandler
         arguments:
-          - @router
+          - "@router"
           - front.client.login

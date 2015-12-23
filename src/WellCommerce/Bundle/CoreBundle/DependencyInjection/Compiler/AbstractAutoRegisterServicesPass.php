@@ -15,6 +15,7 @@ namespace WellCommerce\Bundle\CoreBundle\DependencyInjection\Compiler;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * Class AbstractAutoRegisterServicesPass
@@ -58,8 +59,7 @@ abstract class AbstractAutoRegisterServicesPass implements CompilerPassInterface
     protected function registerRepository($name, $repositoryClass, $entityClass, ContainerBuilder $container)
     {
         $definition = new Definition($repositoryClass);
-        $definition->setFactoryService('doctrine.orm.entity_manager');
-        $definition->setFactoryMethod('getRepository');
+        $definition->setFactory([new Reference('doctrine.orm.entity_manager'), 'getRepository']);
         $definition->addArgument($entityClass);
 
         $container->setDefinition($name . '.repository', $definition);
