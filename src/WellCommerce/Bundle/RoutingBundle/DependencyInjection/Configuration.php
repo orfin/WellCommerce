@@ -11,6 +11,7 @@
 
 namespace WellCommerce\Bundle\RoutingBundle\DependencyInjection;
 
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractConfiguration;
 
 /**
@@ -21,4 +22,15 @@ use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractConfiguration;
 class Configuration extends AbstractConfiguration
 {
     protected $treeRoot = WellCommerceRoutingExtension::EXTENSION_NAME;
+
+    protected function addCustomExtensionConfiguration(ArrayNodeDefinition $node)
+    {
+        $node->children()
+            ->arrayNode('routers')
+                ->defaultValue(array('router.default' => 100))
+                ->useAttributeAsKey('id')
+                ->prototype('scalar')->end()
+            ->end()
+        ->end();
+    }
 }

@@ -35,12 +35,19 @@ abstract class AbstractConfiguration implements ConfigurationInterface
             $rootNode = $treeBuilder->root($this->treeRoot);
             $this->addServicesConfiguration($rootNode);
             $this->addDynamicRoutingConfiguration($rootNode);
+            $this->addCustomExtensionConfiguration($rootNode);
         }
 
         return $treeBuilder;
     }
 
-    protected function addDynamicRoutingConfiguration(ArrayNodeDefinition $node){
+    protected function addCustomExtensionConfiguration(ArrayNodeDefinition $node)
+    {
+
+    }
+
+    protected function addDynamicRoutingConfiguration(ArrayNodeDefinition $node)
+    {
         $node
             ->children()
                 ->arrayNode('dynamic_routing')
