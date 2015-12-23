@@ -37,14 +37,14 @@ well_commerce_category:
             producers: ~
             attributes: ~
         requirements:
-            limit: "\d{1,10}"
-            page: "\d{1,10}"
+            limit: "\\d{1,10}"
+            page: "\\d{1,10}"
             orderBy: "name|finalPrice"
             orderDir: "asc|desc"
-            priceFrom: "\d{1,10}"
-            priceTo: "\d{1,10}"
+            priceFrom: "\\d{1,10}"
+            priceTo: "\\d{1,10}"
             view: "grid|list"
-            producers: "[\d+_]+"
-            attributes: "[\d+_]+"
+            producers: "[\\d+_]+"
+            attributes: "[\\d+_]+"
         pattern: "{page},{limit},{orderBy},{orderDir},{priceFrom},{priceTo},{view},{producers},{attributes}"
 
