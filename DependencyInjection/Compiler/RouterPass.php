@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\RoutingBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use WellCommerce\Bundle\CoreBundle\DependencyInjection\Compiler\AbstractCollectionPass;
+use Symfony\Component\DependencyInjection\Reference;
 use WellCommerce\Bundle\RoutingBundle\DependencyInjection\WellCommerceRoutingExtension;
 
 /**
@@ -31,9 +31,12 @@ class RouterPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        $container->setAlias('router', 'routing.router');
+        $config = $container->getParameter(WellCommerceRoutingExtension::EXTENSION_NAME);
+        $router = $container->getDefinition('routing.chain_router');
+        foreach ($config['routers'] as $id => $priority) {
+            $router->addMethodCall('add', [new Reference($id), (int)$priority]);
+        }
 
-        print_r($container->getParameter(WellCommerceRoutingExtension::EXTENSION_NAME));
-        die();
+        $container->setAlias('router', 'routing.chain_router');
     }
 }
