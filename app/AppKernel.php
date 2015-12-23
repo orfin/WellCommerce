@@ -37,7 +37,6 @@ class AppKernel extends Kernel
             new \FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new \Bazinga\Bundle\JsTranslationBundle\BazingaJsTranslationBundle(),
             new \Liip\ImagineBundle\LiipImagineBundle(),
-            new \Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
             new \Ivory\LuceneSearchBundle\IvoryLuceneSearchBundle(),
 
             new \WellCommerce\Bundle\AdminBundle\WellCommerceAdminBundle(),
