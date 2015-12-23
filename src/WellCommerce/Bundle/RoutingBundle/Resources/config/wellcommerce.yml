@@ -1,7 +1,7 @@
 well_commerce_routing:
     routers:
         router.default:             100
-        cmf_routing.dynamic_router: 50
+        routing.dynamic_router:     50
     services:
         routing:
             auto_services:
