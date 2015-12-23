@@ -30,7 +30,7 @@
             <argument type="service" id="event_dispatcher"/>
         </service>
 
-        <service id="form.attribute_collection.data_transformer" class="WellCommerce\Bundle\AttributeBundle\Form\DataTransformer\AttributeCollectionToArrayTransformer" scope="prototype">
+        <service id="form.attribute_collection.data_transformer" class="WellCommerce\Bundle\AttributeBundle\Form\DataTransformer\AttributeCollectionToArrayTransformer" shared="false">
             <argument type="service" id="doctrine.helper"/>
             <call method="setAttributeManager">
                 <argument type="service" id="attribute.manager.admin"/>
