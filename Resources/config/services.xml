@@ -11,16 +11,10 @@
     </imports>
 
     <services>
-        <service id="admin_menu.factory" class="WellCommerce\Bundle\AdminBundle\Factory\AdminMenuFactory"/>
-
-        <service id="admin_menu.repository" class="WellCommerce\Bundle\AdminBundle\Repository\AdminMenuRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
-            <argument>WellCommerceAdminBundle:AdminMenu</argument>
-        </service>
-
         <service id="admin_menu.importer.xml" class="WellCommerce\Bundle\AdminBundle\Importer\XmlImporter">
-        <argument type="service" id="doctrine.helper"/>
-        <argument type="service" id="admin_menu.factory"/>
-        <argument type="service" id="admin_menu.repository"/>
+            <argument type="service" id="doctrine.helper"/>
+            <argument type="service" id="admin_menu.factory"/>
+            <argument type="service" id="admin_menu.repository"/>
         </service>
 
         <service id="admin_menu.provider" class="WellCommerce\Bundle\AdminBundle\Provider\AdminMenuProvider">
