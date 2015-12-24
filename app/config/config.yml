@@ -41,6 +41,7 @@ assetic:
 
 parameters:
     knp.doctrine_behaviors.blameable_listener.user_entity: WellCommerce\AdminBundle\Entity\User
+    knp.doctrine_behaviors.blameable_subscriber.user_callable.class: WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Blameable\UserCallable
 
 fos_js_routing:
     router: router.default
