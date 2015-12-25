@@ -22,9 +22,6 @@
             <call method="setServiceResolver">
                 <argument type="service" id="layout_box.service_resolver"/>
             </call>
-            <call method="setLayoutBoxesCollection">
-                <argument type="service" id="layout_box.collection"/>
-            </call>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -72,12 +69,6 @@
 
         <service id="layout_box.renderer" class="WellCommerce\Bundle\LayoutBundle\Renderer\LayoutBoxRenderer">
             <argument type="service" id="layout_box.manager.front" />
-        </service>
-
-        <service id="layout_box.collection" class="WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxCollection">
-            <call method="init">
-                <argument type="service" id="layout_box.repository"/>
-            </call>
         </service>
 
         <service id="layout_box.subscriber" class="WellCommerce\Bundle\LayoutBundle\EventListener\LayoutBoxSubscriber">
