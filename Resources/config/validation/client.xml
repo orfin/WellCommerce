@@ -6,22 +6,22 @@
     <class name="WellCommerce\Bundle\ClientBundle\Entity\Client">
         <property name="clientDetails">
             <constraint name="Valid">
-                <option name="deep">true</option>
+                <option name="traverse">true</option>
             </constraint>
         </property>
         <property name="billingAddress">
             <constraint name="Valid">
-                <option name="deep">true</option>
+                <option name="traverse">true</option>
             </constraint>
         </property>
         <property name="shippingAddress">
             <constraint name="Valid">
-                <option name="deep">true</option>
+                <option name="traverse">true</option>
             </constraint>
         </property>
         <property name="contactDetails">
             <constraint name="Valid">
-                <option name="deep">true</option>
+                <option name="traverse">true</option>
             </constraint>
         </property>
     </class>
