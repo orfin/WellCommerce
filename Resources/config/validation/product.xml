@@ -6,17 +6,17 @@
     <class name="WellCommerce\Bundle\ProductBundle\Entity\Product">
         <property name="translations">
             <constraint name="Valid">
-                <option name="deep">true</option>
+                <option name="traverse">true</option>
             </constraint>
         </property>
         <property name="sellPrice">
             <constraint name="Valid">
-                <option name="deep">true</option>
+                <option name="traverse">true</option>
             </constraint>
         </property>
         <property name="dimension">
             <constraint name="Valid">
-                <option name="deep">true</option>
+                <option name="traverse">true</option>
             </constraint>
         </property>
         <property name="sku">
@@ -25,12 +25,12 @@
         </property>
         <property name="buyPrice">
             <constraint name="Valid">
-                <option name="deep">true</option>
+                <option name="traverse">true</option>
             </constraint>
         </property>
         <property name="sellPrice">
             <constraint name="Valid">
-                <option name="deep">true</option>
+                <option name="traverse">true</option>
             </constraint>
         </property>
         <property name="stock">
