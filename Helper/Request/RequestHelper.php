@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Helper\Request;
 
-use Doctrine\Common\Util\Debug;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -57,6 +56,10 @@ class RequestHelper implements RequestHelperInterface
      */
     public function getCurrentHost()
     {
+        if (!is_object($this->request->server)) {
+            return null;
+        }
+
         if (null !== $url = $this->request->server->get('SERVER_NAME')) {
             return $url;
         }
@@ -64,7 +67,7 @@ class RequestHelper implements RequestHelperInterface
         if (null !== $url = $this->request->server->get('HTTP_HOST')) {
             return parse_url($url, PHP_URL_HOST);
         }
-
+        
         return null;
     }
 
