@@ -51,11 +51,11 @@ class LoadShopData extends AbstractDataFixture
         $shop->setDefaultCurrency($currency->getCode());
 
         $mailerConfiguration = new MailerConfiguration();
-        $mailerConfiguration->setFrom('');
-        $mailerConfiguration->setHost('');
-        $mailerConfiguration->setPort('');
-        $mailerConfiguration->setUser('');
-        $mailerConfiguration->setPass('');
+        $mailerConfiguration->setFrom($this->container->getParameter('mailer_from'));
+        $mailerConfiguration->setHost($this->container->getParameter('mailer_host'));
+        $mailerConfiguration->setPort($this->container->getParameter('mailer_port'));
+        $mailerConfiguration->setUser($this->container->getParameter('mailer_user'));
+        $mailerConfiguration->setPass($this->container->getParameter('mailer_password'));
 
         $shop->setMailerConfiguration($mailerConfiguration);
 
