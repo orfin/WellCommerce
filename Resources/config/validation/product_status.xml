@@ -6,7 +6,7 @@
     <class name="WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatus">
         <property name="translations">
             <constraint name="Valid">
-                <option name="deep">true</option>
+                <option name="traverse">true</option>
             </constraint>
         </property>
     </class>
@@ -25,7 +25,7 @@
         </property>
         <property name="meta">
             <constraint name="Valid">
-                <option name="deep">true</option>
+                <option name="traverse">true</option>
             </constraint>
         </property>
         <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
