@@ -34,8 +34,9 @@ class AdminSubscriber extends AbstractEventSubscriber
 
     public function onKernelController(FilterControllerEvent $event)
     {
-        $user = $this->getUser();
-        if ($user instanceof UserInterface) {
+        $user     = $this->getUser();
+        $hasRoute = $this->getRequestHelper()->getAttributesBagParam('_route');
+        if ($user instanceof UserInterface && $hasRoute) {
             $route = $this->getRouterHelper()->getCurrentRoute();
             if ($route->hasOption('require_admin_permission')) {
                 $name       = $route->getOption('require_admin_permission');
