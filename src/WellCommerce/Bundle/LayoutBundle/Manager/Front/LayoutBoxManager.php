@@ -14,8 +14,8 @@ namespace WellCommerce\Bundle\LayoutBundle\Manager\Front;
 
 use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
-use WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxCollection;
 use WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxSettingsCollection;
+use WellCommerce\Bundle\LayoutBundle\Entity\LayoutBoxInterface;
 use WellCommerce\Bundle\LayoutBundle\Exception\LayoutBoxNotFoundException;
 use WellCommerce\Bundle\LayoutBundle\Resolver\ServiceResolverInterface;
 
@@ -32,11 +32,6 @@ class LayoutBoxManager extends AbstractFrontManager
     protected $serviceResolver;
 
     /**
-     * @var LayoutBoxCollection
-     */
-    protected $layoutBoxCollection;
-
-    /**
      * @param ServiceResolverInterface $serviceResolver
      */
     public function setServiceResolver(ServiceResolverInterface $serviceResolver)
@@ -45,27 +40,20 @@ class LayoutBoxManager extends AbstractFrontManager
     }
 
     /**
-     * @param LayoutBoxCollection $layoutBoxCollection
-     */
-    public function setLayoutBoxesCollection(LayoutBoxCollection $layoutBoxCollection)
-    {
-        $this->layoutBoxCollection = $layoutBoxCollection;
-    }
-
-    /**
      * Returns a layout box by its identifier
      *
      * @param string $identifier
      *
-     * @return \WellCommerce\Bundle\LayoutBundle\Entity\LayoutBox
+     * @return \WellCommerce\Bundle\LayoutBundle\Entity\LayoutBoxInterface
      */
     public function findLayoutBox($identifier)
     {
-        if (!$this->layoutBoxCollection->has($identifier)) {
+        $layoutBox = $this->repository->findOneBy(['identifier' => $identifier]);
+        if (!$layoutBox instanceof LayoutBoxInterface) {
             throw new LayoutBoxNotFoundException($identifier);
         }
 
-        return $this->layoutBoxCollection->get($identifier);
+        return $layoutBox;
     }
 
     /**
