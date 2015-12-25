@@ -23,12 +23,7 @@ use WellCommerce\Component\Collections\ArrayCollection;
  */
 class LayoutBoxCollection extends ArrayCollection
 {
-    /**
-     * Constructor
-     *
-     * @param LayoutBoxRepositoryInterface $layoutBoxRepository
-     */
-    public function __construct(LayoutBoxRepositoryInterface $layoutBoxRepository)
+    public function init(LayoutBoxRepositoryInterface $layoutBoxRepository)
     {
         $layoutBoxes = $layoutBoxRepository->findAll();
         foreach ($layoutBoxes as $layoutBox) {

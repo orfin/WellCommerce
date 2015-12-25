@@ -75,7 +75,9 @@
         </service>
 
         <service id="layout_box.collection" class="WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxCollection">
-            <argument type="service" id="layout_box.repository" />
+            <call method="init">
+                <argument type="service" id="layout_box.repository"/>
+            </call>
         </service>
 
         <service id="layout_box.subscriber" class="WellCommerce\Bundle\LayoutBundle\EventListener\LayoutBoxSubscriber">
