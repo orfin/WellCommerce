@@ -51,6 +51,13 @@ abstract class AbstractTestCase extends KernelTestCase
         $this->container = $this->client->getContainer();
         $this->em        = $this->container->get('doctrine')->getManager();
         $this->validator = $this->container->get('validator');
+        $this->setCurrentShop();
+    }
+
+    private function setCurrentShop()
+    {
+        $shop = $this->container->get('shop.repository')->findOneBy([]);
+        $this->container->get('shop.context.admin')->setCurrentShop($shop);
     }
 
     /**
