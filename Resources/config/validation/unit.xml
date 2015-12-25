@@ -6,7 +6,7 @@
     <class name="WellCommerce\Bundle\UnitBundle\Entity\Unit">
         <property name="translations">
             <constraint name="Valid">
-                <option name="deep">true</option>
+                <option name="traverse">true</option>
             </constraint>
         </property>
     </class>
