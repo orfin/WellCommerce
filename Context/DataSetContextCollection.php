@@ -12,12 +12,11 @@
 
 namespace WellCommerce\Component\DataSet\Context;
 
-use Doctrine\ORM\Query;
 use WellCommerce\Component\Collections\ArrayCollection;
 use WellCommerce\Component\DataSet\Exception\DataSetContextNotFoundException;
 
 /**
- * Class ArrayContext
+ * Class DataSetContextCollection
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */

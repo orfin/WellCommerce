@@ -12,10 +12,8 @@
 
 namespace WellCommerce\Component\DataSet\Context;
 
-use Doctrine\ORM\Query;
-
 /**
- * Class ArrayContext
+ * Class DataSetContextFactory
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
