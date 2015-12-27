@@ -58,9 +58,9 @@ class ThemeSubscriber extends AbstractEventSubscriber
      */
     public function onKernelController(FilterControllerEvent $event)
     {
-//        $frontContext = $this->container->get('shop.context.front');
-//        $themeContext = $this->container->get('theme.context.front');
-//        $themeContext->setCurrentTheme($frontContext->getCurrentShop()->getTheme());
+        $frontContext = $this->container->get('shop.context.front');
+        $themeContext = $this->container->get('theme.context.front');
+        $themeContext->setCurrentTheme($frontContext->getCurrentShop()->getTheme());
     }
 
     /**
