@@ -72,6 +72,11 @@ liip_imagine:
                 thumbnail: { size: [1200, 1200], mode: outbound }
 
 services:
+    knp.doctrine_behaviors.blameable_subscriber.user_callable:
+        class:           "%knp.doctrine_behaviors.blameable_subscriber.user_callable.class%"
+        arguments:
+            - "@security.token_storage"
+        public:  false
     doctrine.cache:
         class: %doctrine_cache.file_system.class%
         arguments: ["%kernel.root_dir%/cache/%kernel.environment%/doctrine"]

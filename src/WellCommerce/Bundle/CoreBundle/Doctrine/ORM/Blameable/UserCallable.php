@@ -13,7 +13,8 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Blameable;
 
-use Symfony\Component\DependencyInjection\Container;
+use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**
  * Class UserCallable
@@ -23,25 +24,27 @@ use Symfony\Component\DependencyInjection\Container;
 class UserCallable
 {
     /**
-     * @var Container
+     * @var TokenStorageInterface
      */
-    private $container;
+    protected $tokenStorage;
 
     /**
      * UserCallable constructor.
      *
-     * @param Container $container
+     * @param TokenStorageInterface $tokenStorage
      */
-    public function __construct(Container $container)
+    public function __construct(TokenStorageInterface $tokenStorage)
     {
-        $this->container = $container;
+        $this->tokenStorage = $tokenStorage;
     }
 
     public function __invoke()
     {
-        $token = $this->container->get('security.token_storage')->getToken();
+        $token = $this->tokenStorage->getToken();
         if (null !== $token) {
             return $token->getUser();
         }
+
+        return null;
     }
 }
