@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\ProducerBundle\Controller\Box;
 
-use WellCommerce\Bundle\AppBundle\Conditions\LayeredNavigationConditions;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 use WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxSettingsCollection;
 
@@ -24,7 +23,7 @@ use WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxSettingsCollection;
 class ProducerProductsBoxController extends AbstractBoxController
 {
     /**
-     * @var \WellCommerce\Bundle\AppBundle\Manager\Front\ProducerManager
+     * @var \WellCommerce\Bundle\ProducerBundle\Manager\Front\ProducerManager
      */
     protected $manager;
 
