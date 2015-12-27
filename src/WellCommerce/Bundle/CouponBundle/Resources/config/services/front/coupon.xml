@@ -11,6 +11,9 @@
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
+            <call method="setCouponChecker">
+                <argument type="service" id="coupon.checker"/>
+            </call>
         </service>
         
         <service id="coupon.controller.front" class="WellCommerce\Bundle\CouponBundle\Controller\Front\CouponController">

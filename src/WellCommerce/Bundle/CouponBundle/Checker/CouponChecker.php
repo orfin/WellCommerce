@@ -10,21 +10,22 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CouponBundle\Service\Coupon\Validator;
+namespace WellCommerce\Bundle\CouponBundle\Checker;
 
 use WellCommerce\Bundle\CouponBundle\Entity\CouponInterface;
+use WellCommerce\Bundle\OrderBundle\Repository\OrderRepositoryInterface;
 
 /**
- * Class CouponValidator
+ * Class CouponChecker
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CouponValidator
+class CouponChecker implements CouponCheckerInterface
 {
     /**
-     * @var CouponInterface
+     * @var OrderRepositoryInterface
      */
-    protected $coupon;
+    protected $orderRepository;
 
     /**
      * @var string
@@ -32,33 +33,33 @@ class CouponValidator
     protected $error = '';
 
     /**
-     * @param CouponInterface $coupon
+     * CouponChecker constructor.
+     *
+     * @param OrderRepositoryInterface $orderRepository
      */
-    public function __construct(CouponInterface $coupon = null)
+    public function __construct(OrderRepositoryInterface $orderRepository)
     {
-        $this->coupon = $coupon;
+        $this->orderRepository = $orderRepository;
     }
 
     /**
-     * Checks whether the coupon is valid for use
-     *
-     * @return bool
+     * {@inheritdoc}
      */
-    public function isValid()
+    public function isValid(CouponInterface $coupon = null)
     {
-        if (null === $this->coupon) {
+        if (null === $coupon) {
             $this->error = 'coupon.error.not_found';
 
             return false;
         }
 
-        if (false === $this->isStartDateValid()) {
+        if (false === $this->isStartDateValid($coupon)) {
             $this->error = 'coupon.error.future_coupon';
 
             return false;
         }
 
-        if (false === $this->isNotExpired()) {
+        if (false === $this->isNotExpired($coupon)) {
             $this->error = 'coupon.error.coupon_expired';
 
             return false;
@@ -68,7 +69,7 @@ class CouponValidator
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getError()
     {
@@ -80,10 +81,10 @@ class CouponValidator
      *
      * @return bool
      */
-    protected function isStartDateValid()
+    protected function isStartDateValid(CouponInterface $coupon)
     {
         $now             = new \DateTime();
-        $couponStartDate = $this->coupon->getValidFrom();
+        $couponStartDate = $coupon->getValidFrom();
 
         if ($couponStartDate instanceof \DateTime) {
             return $now >= $couponStartDate;
@@ -97,10 +98,10 @@ class CouponValidator
      *
      * @return bool
      */
-    protected function isNotExpired()
+    protected function isNotExpired(CouponInterface $coupon)
     {
         $now           = new \DateTime();
-        $couponEndDate = $this->coupon->getValidTo();
+        $couponEndDate = $coupon->getValidTo();
 
         if ($couponEndDate instanceof \DateTime) {
             return $now <= $couponEndDate;
