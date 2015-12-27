@@ -25,7 +25,7 @@ use WellCommerce\Component\DataSet\Transformer\ColumnTransformerCollection;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractDataSetContext
+abstract class AbstractDataSetContext implements DataSetContextInterface
 {
     /**
      * @var array

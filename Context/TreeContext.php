@@ -23,7 +23,7 @@ use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class TreeContext extends FlatTreeContext
+class TreeContext extends ArrayContext
 {
     /**
      * {@inheritdoc}
@@ -32,7 +32,7 @@ class TreeContext extends FlatTreeContext
     {
         $result = parent::getResult($queryBuilder, $request, $columns);
 
-        return $this->buildTree($result, null);
+        return $this->buildTree($result['rows'], null);
     }
 
     /**
@@ -65,15 +65,18 @@ class TreeContext extends FlatTreeContext
     public function configureOptions(OptionsResolver $resolver)
     {
         parent::configureOptions($resolver);
-        
+
         $resolver->setRequired([
-            'parent_column',
+            'children_column',
+            'hierarchy_column',
         ]);
 
         $resolver->setDefaults([
-            'parent_column' => 'parent',
+            'children_column'  => 'children',
+            'hierarchy_column' => 'hierarchy',
         ]);
 
-        $resolver->setAllowedTypes('parent_column', 'string');
+        $resolver->setAllowedTypes('children_column', 'string');
+        $resolver->setAllowedTypes('hierarchy_column', 'string');
     }
 }
