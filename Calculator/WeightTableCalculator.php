@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\ShippingBundle\Calculator;
 
-use WellCommerce\Bundle\ShippingBundle\Entity\ShippingCostSubjectInterface;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface;
 
 /**
@@ -20,7 +19,7 @@ use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class WeightTableCalculator extends AbstractShippingMethodCalculator implements ShippingMethodCalculatorInterface
+class WeightTableCalculator extends AbstractShippingMethodCalculator
 {
     /**
      * {@inheritdoc}

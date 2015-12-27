@@ -19,7 +19,7 @@ use WellCommerce\Bundle\CurrencyBundle\Helper\CurrencyHelperInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractShippingMethodCalculator
+abstract class AbstractShippingMethodCalculator implements ShippingMethodCalculatorInterface
 {
     /**
      * @var null
