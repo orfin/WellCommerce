@@ -12,10 +12,10 @@
 
 namespace WellCommerce\Bundle\CouponBundle\Manager\Front;
 
-use WellCommerce\Bundle\AppBundle\Exception\CouponException;
-use WellCommerce\Bundle\AppBundle\Service\Coupon\Validator\CouponValidator;
 use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
+use WellCommerce\Bundle\CouponBundle\Checker\CouponCheckerInterface;
 use WellCommerce\Bundle\CouponBundle\Entity\CouponInterface;
+use WellCommerce\Bundle\CouponBundle\Exception\CouponException;
 
 /**
  * Class CouponManager
@@ -25,38 +25,33 @@ use WellCommerce\Bundle\CouponBundle\Entity\CouponInterface;
 class CouponManager extends AbstractFrontManager
 {
     /**
-     * Use coupon on cart
-     *
-     * @param string $code
+     * @var CouponCheckerInterface
+     */
+    protected $couponChecker;
+
+    /**
+     * @param CouponCheckerInterface $couponChecker
+     */
+    public function setCouponChecker(CouponCheckerInterface $couponChecker)
+    {
+        $this->couponChecker = $couponChecker;
+    }
+
+    /**
+     * @param CouponInterface|null $coupon
      *
      * @return bool
+     * @throws CouponException
      */
-    public function useCoupon($code)
+    public function useCoupon(CouponInterface $coupon = null)
     {
-        $coupon    = $this->findCoupon($code);
-        $validator = new CouponValidator($coupon);
-
-        if (!$validator->isValid()) {
-            throw new CouponException($validator->getError());
+        if (!$this->couponChecker->isValid($coupon)) {
+            throw new CouponException($this->couponChecker->getError());
         }
 
         $this->applyCartCoupon($coupon);
 
         return true;
-    }
-
-    /**
-     * Returns coupon object or null if not found
-     *
-     * @param string $code
-     *
-     * @return null|\WellCommerce\Bundle\CouponBundle\Entity\CouponInterface
-     */
-    protected function findCoupon($code)
-    {
-        return $this->repository->findOneBy([
-            'code' => $code
-        ]);
     }
 
     /**

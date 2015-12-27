@@ -13,8 +13,9 @@
 namespace WellCommerce\Bundle\CouponBundle\Controller\Front;
 
 use Symfony\Component\HttpFoundation\Request;
-use WellCommerce\Bundle\AppBundle\Exception\CouponException;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
+use WellCommerce\Bundle\CouponBundle\Entity\CouponInterface;
+use WellCommerce\Bundle\CouponBundle\Exception\CouponException;
 
 /**
  * Class CouponController
@@ -29,20 +30,16 @@ class CouponController extends AbstractFrontController
     protected $manager;
 
     /**
-     * @param Request $request
+     * Adds a coupon to cart
      *
-     * @return \Symfony\Component\HttpFoundation\JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse
+     * @param CouponInterface|null $coupon
+     *
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
-    public function addAction(Request $request)
+    public function addAction(CouponInterface $coupon = null)
     {
-        if (!$request->isXmlHttpRequest()) {
-            return $this->redirectToRoute('cart.front.index');
-        }
-
-        $code = $this->getRequestHelper()->getRequestBagParam('code');
-
         try {
-            $this->manager->useCoupon($code);
+            $this->manager->useCoupon($coupon);
 
             $result = [
                 'success' => true
