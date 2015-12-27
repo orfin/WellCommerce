@@ -38,6 +38,7 @@ class AppKernel extends Kernel
             new \Bazinga\Bundle\JsTranslationBundle\BazingaJsTranslationBundle(),
             new \Liip\ImagineBundle\LiipImagineBundle(),
             new \Ivory\LuceneSearchBundle\IvoryLuceneSearchBundle(),
+            new \Knp\DoctrineBehaviors\Bundle\DoctrineBehaviorsBundle(),
 
             new \WellCommerce\Bundle\AdminBundle\WellCommerceAdminBundle(),
             new \WellCommerce\Bundle\AppBundle\WellCommerceAppBundle(),

@@ -12,6 +12,15 @@ doctrine_migrations:
     table_name: migration
     name: WellCommerce Migrations
 
+knp_doctrine_behaviors:
+    blameable:      true
+    geocodable:     false
+    loggable:       false
+    sluggable:      false
+    soft_deletable: false
+    timestampable:  true
+    translatable:   true
+
 doctrine:
     dbal:
         driver:   "%database_driver%"
@@ -51,5 +60,3 @@ doctrine:
                     locale:
                         class:   WellCommerce\Bundle\LocaleBundle\Doctrine\ORM\Filter\LocaleFilter
                         enabled: false
-        resolve_target_entities:
-            Acme\InvoiceBundle\Model\InvoiceSubjectInterface: Acme\AppBundle\Entity\Customer

@@ -7,7 +7,7 @@
 # please view the LICENSE file that was distributed with this source code.
 
 imports:
-    - { resource: "doctrine.yml" }
+    - { resource: "app/" }
     - { resource: "@WellCommerceAdminBundle/Resources/config/wellcommerce.yml" }
     - { resource: "@WellCommerceAttributeBundle/Resources/config/wellcommerce.yml" }
     - { resource: "@WellCommerceAvailabilityBundle/Resources/config/wellcommerce.yml" }
@@ -99,10 +99,8 @@ parameters:
         WellCommerce\Bundle\ShippingBundle\DataFixtures\ORM\LoadShippingMethodData: true
         WellCommerce\Bundle\PaymentBundle\DataFixtures\ORM\LoadPaymentMethodData: true
         WellCommerce\Bundle\PageBundle\DataFixtures\ORM\LoadPageData: true
-
-#
-#well_commerce_media:
-#    media_upload_dir: %kernel.root_dir%
+    knp.doctrine_behaviors.blameable_listener.user_entity: WellCommerce\AdminBundle\Entity\User
+    knp.doctrine_behaviors.blameable_subscriber.user_callable.class: WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Blameable\UserCallable
 
 well_commerce_app:
     services:
@@ -126,3 +124,47 @@ well_commerce_app:
             orm_configuration:
                 mapping: "@WellCommerceAppBundle/Resources/config/doctrine/Price.orm.yml"
                 entity: WellCommerce\Bundle\AppBundle\Entity\Price
+
+fos_js_routing:
+    router: router.default
+
+liip_imagine:
+    loaders:
+        default:
+            filesystem:
+                data_root: %kernel.root_dir%/../web/media/images
+    filter_sets:
+        smallest:
+            filters:
+                thumbnail: { size: [60, 60], mode: outbound }
+        small:
+            filters:
+                thumbnail: { size: [120, 120], mode: outbound }
+        normal:
+            filters:
+                thumbnail: { size: [175, 175], mode: outbound }
+        medium:
+            filters:
+                thumbnail: { size: [240, 240], mode: outbound }
+        large:
+            filters:
+                thumbnail: { size: [600, 600], mode: outbound }
+        largest:
+            filters:
+                thumbnail: { size: [1200, 1200], mode: outbound }
+
+services:
+    knp.doctrine_behaviors.blameable_subscriber.user_callable:
+        class:           "%knp.doctrine_behaviors.blameable_subscriber.user_callable.class%"
+        arguments:
+            - "@security.token_storage"
+        public:  false
+    doctrine.cache:
+        class: %doctrine_cache.file_system.class%
+        arguments: ["%kernel.root_dir%/cache/%kernel.environment%/doctrine"]
+
+    client.failure.handler:
+        class: WellCommerce\Bundle\ClientBundle\Handler\LoginFailureHandler
+        arguments:
+          - "@router"
+          - front.client.login
