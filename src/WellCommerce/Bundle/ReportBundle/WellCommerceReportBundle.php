@@ -12,9 +12,7 @@
 
 namespace WellCommerce\Bundle\ReportBundle;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
-use WellCommerce\Bundle\ReportBundle\DependencyInjection\Compiler;
 
 /**
  * Class WellCommerceReportBundle
@@ -23,8 +21,5 @@ use WellCommerce\Bundle\ReportBundle\DependencyInjection\Compiler;
  */
 class WellCommerceReportBundle extends Bundle
 {
-    public function build(ContainerBuilder $container)
-    {
-        parent::build($container);
-    }
+
 }

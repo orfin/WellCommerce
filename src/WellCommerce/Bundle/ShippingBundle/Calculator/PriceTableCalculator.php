@@ -20,7 +20,7 @@ use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PriceTableCalculator extends AbstractShippingMethodCalculator implements ShippingMethodCalculatorInterface
+class PriceTableCalculator extends AbstractShippingMethodCalculator
 {
     /**
      * {@inheritdoc}

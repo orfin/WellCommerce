@@ -19,7 +19,6 @@ use WellCommerce\Bundle\CartBundle\Manager\Front\CartManagerInterface;
 use WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
-use WellCommerce\Bundle\OrderBundle\Factory\OrderProductFactoryInterface;
 use WellCommerce\Bundle\OrderBundle\Factory\OrderTotalFactory;
 
 /**

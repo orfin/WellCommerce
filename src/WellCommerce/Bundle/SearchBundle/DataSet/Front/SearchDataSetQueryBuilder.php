@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\SearchBundle\DataSet\Front;
 
-use Doctrine\ORM\Query\Expr;
 use WellCommerce\Bundle\ProductBundle\DataSet\Front\ProductDataSetQueryBuilder;
 use WellCommerce\Bundle\SearchBundle\Provider\SearchProviderInterface;
 use WellCommerce\Component\DataSet\Column\ColumnCollection;

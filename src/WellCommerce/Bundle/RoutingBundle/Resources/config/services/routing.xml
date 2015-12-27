@@ -18,10 +18,6 @@
             <tag name="doctrine.event_subscriber" />
         </service>
 
-        <service id="routing.command.dump" class="WellCommerce\Bundle\RoutingBundle\Command\DumpDynamicRoutesCommand">
-            <tag name="console.command"/>
-        </service>
-
         <service id="dataset.transformer.route" class="WellCommerce\Bundle\RoutingBundle\DataSet\Transformer\RouteTransformer">
             <argument type="service" id="routing.generator" />
             <tag name="dataset.transformer" alias="route"/>

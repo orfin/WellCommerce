@@ -13,7 +13,6 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Blameable;
 
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**

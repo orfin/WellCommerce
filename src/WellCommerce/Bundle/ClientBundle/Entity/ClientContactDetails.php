@@ -12,8 +12,6 @@
 
 namespace WellCommerce\Bundle\ClientBundle\Entity;
 
-use WellCommerce\Bundle\ClientBundle\Entity\ContactDetails;
-
 /**
  * Class ClientContactDetails
  *
