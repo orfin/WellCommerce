@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\MediaBundle\Manager\Admin;
 
-use Doctrine\Common\Util\Debug;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
 use WellCommerce\Bundle\MediaBundle\Exception\InvalidMediaException;
