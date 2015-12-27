@@ -28,7 +28,7 @@
         "symfony/validator": "^3.0",
         "symfony/property-access": "^3.0",
         "symfony/options-resolver": "^3.0",
-        "wellcommerce/collections": "^0.7.*@dev",
+        "wellcommerce/collections": "^0.7@dev",
         "zendframework/zend-json": "^2.6@dev"
     },
     "require-dev": {
