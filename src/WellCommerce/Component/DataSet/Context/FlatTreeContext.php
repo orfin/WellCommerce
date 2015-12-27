@@ -23,7 +23,7 @@ use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class FlatTreeContext extends AbstractDataSetContext implements DataSetContextInterface
+class FlatTreeContext extends ArrayContext
 {
     /**
      * {@inheritdoc}
@@ -32,7 +32,7 @@ class FlatTreeContext extends AbstractDataSetContext implements DataSetContextIn
     {
         $result = parent::getResult($queryBuilder, $request, $columns);
 
-        return $this->makeTree($result);
+        return $this->makeTree($result['rows']);
     }
 
     /**

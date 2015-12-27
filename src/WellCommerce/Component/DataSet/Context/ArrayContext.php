@@ -24,7 +24,7 @@ use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class ArrayContext extends AbstractDataSetContext implements DataSetContextInterface
+class ArrayContext extends AbstractDataSetContext
 {
     /**
      * @var DataSetPaginationInterface

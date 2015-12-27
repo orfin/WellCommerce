@@ -23,7 +23,7 @@ use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class SelectContext extends AbstractDataSetContext implements DataSetContextInterface
+class SelectContext extends ArrayContext
 {
     /**
      * {@inheritdoc}
@@ -32,7 +32,7 @@ class SelectContext extends AbstractDataSetContext implements DataSetContextInte
     {
         $result = parent::getResult($queryBuilder, $request, $columns);
 
-        return $this->makeOptions($result);
+        return $this->makeOptions($result['rows']);
     }
 
     /**
