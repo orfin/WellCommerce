@@ -42,10 +42,9 @@ class ShippingMethodProvider extends AbstractShippingMethodProvider implements S
     public function getShippingMethodOptions(ShippingCalculatorSubjectInterface $subject)
     {
         $shippingMethodsCollection = $this->getShippingMethodCostsCollection($subject);
-        $targetCurrency            = $subject->getShippingCostCurrency();
         $options                   = [];
 
-        $shippingMethodsCollection->map(function (ShippingMethodCost $shippingMethodCost) use (&$options, $targetCurrency) {
+        $shippingMethodsCollection->map(function (ShippingMethodCost $shippingMethodCost) use (&$options) {
             $shippingMethod = $shippingMethodCost->getShippingMethod();
 
             $options[$shippingMethod->getId()] = $shippingMethod->translate()->getName();
