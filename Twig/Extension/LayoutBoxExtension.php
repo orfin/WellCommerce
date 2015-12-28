@@ -43,6 +43,14 @@ class LayoutBoxExtension extends \Twig_Extension
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'layout_box';
+    }
+
+    /**
      * Returns layout box content
      *
      * @param string $identifier
@@ -53,13 +61,5 @@ class LayoutBoxExtension extends \Twig_Extension
     public function getLayoutBoxContent($identifier, $params = [])
     {
         return $this->renderer->render($identifier, $params);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'layout_box';
     }
 }
