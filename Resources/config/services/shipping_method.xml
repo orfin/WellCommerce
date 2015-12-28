@@ -8,7 +8,7 @@
             <argument type="service" id="shipping_method.repository"/>
             <argument type="service" id="shipping_method.event_dispatcher"/>
             <argument type="service" id="shipping_method.factory"/>
-            <argument type="service" id="shipping_method.form_builder"/>
+            <argument type="service" id="shipping_method.form_builder.admin"/>
             <argument type="service" id="shipping_method.datagrid"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
@@ -50,7 +50,7 @@
             </call>
         </service>
 
-        <service id="shipping_method.form_builder" class="WellCommerce\Bundle\ShippingBundle\Form\Admin\ShippingMethodFormBuilder">
+        <service id="shipping_method.form_builder.admin" class="WellCommerce\Bundle\ShippingBundle\Form\Admin\ShippingMethodFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
             <argument type="service" id="shipping_method.event_dispatcher"/>
