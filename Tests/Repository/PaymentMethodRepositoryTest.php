@@ -15,14 +15,19 @@ namespace WellCommerce\Bundle\PaymentBundle\Tests\Repository;
 use WellCommerce\Bundle\CoreBundle\Test\Repository\AbstractRepositoryTestCase;
 
 /**
- * Class PageRepositoryTest
+ * Class PaymentMethodRepositoryTest
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PageRepositoryTest extends AbstractRepositoryTestCase
+class PaymentMethodRepositoryTest extends AbstractRepositoryTestCase
 {
+    protected function getAlias()
+    {
+        return 'payment_method';
+    }
+
     protected function get()
     {
-        return $this->container->get('page.repository');
+        return $this->container->get('payment_method.repository');
     }
 }
