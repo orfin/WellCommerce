@@ -60,7 +60,7 @@ class ProductFormBuilder extends AbstractFormBuilder
             'name_field'      => $name,
             'generate_route'  => 'admin.routing.generate',
             'translatable_id' => $this->getRequestHelper()->getAttributesBagParam('id'),
-            'rules' => [
+            'rules'           => [
                 $this->getRule('required')
             ],
         ]));
@@ -243,10 +243,10 @@ class ProductFormBuilder extends AbstractFormBuilder
         ]));
 
         $stockData->addChild($this->getElement('text_field', [
-            'name'    => 'stock',
-            'label'   => $this->trans('common.label.stock'),
-            'suffix'  => $this->trans('pcs'),
-            'rules' => [
+            'name'   => 'stock',
+            'label'  => $this->trans('common.label.stock'),
+            'suffix' => $this->trans('pcs'),
+            'rules'  => [
                 $this->getRule('required')
             ],
         ]));
@@ -270,7 +270,7 @@ class ProductFormBuilder extends AbstractFormBuilder
             'filters' => [
                 $this->getFilter('comma_to_dot_changer'),
             ],
-            'rules' => [
+            'rules'   => [
                 $this->getRule('required')
             ],
         ]));
@@ -305,7 +305,7 @@ class ProductFormBuilder extends AbstractFormBuilder
             'filters' => [
                 $this->getFilter('comma_to_dot_changer'),
             ],
-            'rules' => [
+            'rules'   => [
                 $this->getRule('required')
             ],
         ]));
