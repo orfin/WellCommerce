@@ -13,11 +13,11 @@
 namespace WellCommerce\Bundle\OrderBundle\Manager\Admin;
 
 use WellCommerce\Bundle\AppBundle\Entity\Price;
-use WellCommerce\Bundle\ProductBundle\Repository\ProductRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderProductInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
+use WellCommerce\Bundle\ProductBundle\Repository\ProductRepositoryInterface;
 use WellCommerce\Bundle\TaxBundle\Helper\TaxHelper;
 
 /**
