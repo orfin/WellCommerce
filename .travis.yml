@@ -5,9 +5,7 @@ sudo: false
 matrix:
     include:
         - php: 5.6
-          services: [apc, memcached]
         - php: 7.0
-          services: [apc, memcached]
 
 addons:
     apt:
