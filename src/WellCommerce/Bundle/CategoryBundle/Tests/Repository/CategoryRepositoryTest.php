@@ -21,6 +21,11 @@ use WellCommerce\Bundle\CoreBundle\Test\Repository\AbstractRepositoryTestCase;
  */
 class CategoryRepositoryTest extends AbstractRepositoryTestCase
 {
+    protected function getAlias()
+    {
+        return 'category';
+    }
+
     protected function get()
     {
         return $this->container->get('category.repository');

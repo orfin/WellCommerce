@@ -21,6 +21,11 @@ use WellCommerce\Bundle\CoreBundle\Test\Repository\AbstractRepositoryTestCase;
  */
 class ClientRepositoryTest extends AbstractRepositoryTestCase
 {
+    protected function getAlias()
+    {
+        return 'client';
+    }
+
     protected function get()
     {
         return $this->container->get('client.repository');

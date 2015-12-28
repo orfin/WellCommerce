@@ -21,6 +21,11 @@ use WellCommerce\Bundle\CoreBundle\Test\Repository\AbstractRepositoryTestCase;
  */
 class UserGroupRepositoryTest extends AbstractRepositoryTestCase
 {
+    protected function getAlias()
+    {
+        return 'user_group';
+    }
+
     protected function get()
     {
         return $this->container->get('user_group.repository');

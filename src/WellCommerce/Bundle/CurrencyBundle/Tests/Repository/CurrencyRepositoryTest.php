@@ -21,6 +21,11 @@ use WellCommerce\Bundle\CoreBundle\Test\Repository\AbstractRepositoryTestCase;
  */
 class CurrencyRepositoryTest extends AbstractRepositoryTestCase
 {
+    protected function getAlias()
+    {
+        return 'currency';
+    }
+
     protected function get()
     {
         return $this->container->get('currency.repository');

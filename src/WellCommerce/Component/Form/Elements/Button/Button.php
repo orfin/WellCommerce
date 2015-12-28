@@ -19,4 +19,5 @@ namespace WellCommerce\Component\Form\Elements\Button;
  */
 class Button extends AbstractButton implements ButtonInterface
 {
+
 }

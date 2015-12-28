@@ -9,6 +9,7 @@
         <testsuite name="WellCommerce">
             <directory>../src/*/*Bundle/Tests</directory>
             <directory>../src/*/Bundle/*Bundle/Tests</directory>
+            <directory>../src/*/Component/*/Tests</directory>
         </testsuite>
     </testsuites>
 
