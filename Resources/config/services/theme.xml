@@ -8,7 +8,7 @@
             <argument type="service" id="theme.repository"/>
             <argument type="service" id="theme.event_dispatcher"/>
             <argument type="service" id="theme.factory"/>
-            <argument type="service" id="theme.form_builder"/>
+            <argument type="service" id="theme.form_builder.admin"/>
             <argument type="service" id="theme.datagrid"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
@@ -53,7 +53,7 @@
             <argument type="service" id="theme.repository"/>
         </service>
 
-        <service id="theme.dataset" class="WellCommerce\Bundle\ThemeBundle\DataSet\Admin\ThemeDataSet">
+        <service id="theme.dataset.admin" class="WellCommerce\Bundle\ThemeBundle\DataSet\Admin\ThemeDataSet">
             <argument type="service" id="theme.dataset.query_builder"/>
             <argument type="service" id="dataset.manager"/>
             <argument type="service" id="theme.event_dispatcher"/>
@@ -62,14 +62,14 @@
 
         <service id="theme.datagrid" class="WellCommerce\Bundle\ThemeBundle\DataGrid\ThemeDataGrid">
             <argument key="identifier">theme</argument>
-            <argument type="service" id="theme.dataset"/>
+            <argument type="service" id="theme.dataset.admin"/>
             <argument type="service" id="theme.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <service id="theme.form_builder" class="WellCommerce\Bundle\ThemeBundle\Form\Admin\ThemeFormBuilder">
+        <service id="theme.form_builder.admin" class="WellCommerce\Bundle\ThemeBundle\Form\Admin\ThemeFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
             <argument type="service" id="theme.event_dispatcher"/>
