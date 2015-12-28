@@ -35,9 +35,9 @@ doctrine:
         auto_generate_proxy_classes: "%kernel.debug%"
         entity_managers:
             default:
-                query_cache_driver: apc
-                metadata_cache_driver: apc
-                result_cache_driver: apc
+                query_cache_driver: ~
+                metadata_cache_driver: ~
+                result_cache_driver: ~
                 auto_mapping: false
                 dql:
                     string_functions:
