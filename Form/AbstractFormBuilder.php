@@ -146,7 +146,7 @@ abstract class AbstractFormBuilder extends AbstractContainerAware implements For
      */
     protected function initService($type, $alias, $options)
     {
-        $id = $this->resolverFactory->resolve($type, $alias);
+        $id      = $this->resolverFactory->resolve($type, $alias);
         $service = $this->get($id);
 
         $service->setOptions($options);

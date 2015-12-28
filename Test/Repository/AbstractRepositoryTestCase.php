@@ -21,14 +21,6 @@ use WellCommerce\Bundle\CoreBundle\Test\AbstractTestCase;
  */
 abstract class AbstractRepositoryTestCase extends AbstractTestCase
 {
-    /**
-     * @return null|\WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface
-     */
-    protected function get()
-    {
-        return null;
-    }
-
     public function testRepositoryServiceIsCreated()
     {
         $repository = $this->get();
@@ -36,6 +28,14 @@ abstract class AbstractRepositoryTestCase extends AbstractTestCase
         if (null !== $repository) {
             $this->assertInstanceOf('WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface', $repository);
         }
+    }
+
+    /**
+     * @return null|\WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface
+     */
+    protected function get()
+    {
+        return null;
     }
 
     public function testRepositoryHasDatasetQueryBuilder()

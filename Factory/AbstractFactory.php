@@ -40,6 +40,11 @@ abstract class AbstractFactory implements FactoryInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    abstract public function create();
+
+    /**
      * @return object
      */
     protected function init()
@@ -55,11 +60,6 @@ abstract class AbstractFactory implements FactoryInterface
 
         return new $this->className;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    abstract public function create();
 
     /**
      * Checks whether the factory supports given entity class

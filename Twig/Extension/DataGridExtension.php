@@ -58,6 +58,11 @@ class DataGridExtension extends \Twig_Extension
         ];
     }
 
+    public function getName()
+    {
+        return 'datagrid_renderer';
+    }
+
     /**
      * Renders the datagrid
      *
@@ -70,10 +75,5 @@ class DataGridExtension extends \Twig_Extension
         return $this->environment->render($this->templateName, [
             'datagrid' => $datagrid
         ]);
-    }
-
-    public function getName()
-    {
-        return 'datagrid_renderer';
     }
 }

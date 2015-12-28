@@ -64,6 +64,16 @@ class FormJavascriptExtension extends \Twig_Extension
     }
 
     /**
+     * Returns extension alias
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return 'form_js';
+    }
+
+    /**
      * Renders the javascript part
      *
      * @param FormInterface $form
@@ -78,15 +88,5 @@ class FormJavascriptExtension extends \Twig_Extension
         ];
 
         return $this->environment->render($this->renderer->getTemplateName(), $templateVars);
-    }
-
-    /**
-     * Returns extension alias
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return 'form_js';
     }
 }

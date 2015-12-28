@@ -43,6 +43,14 @@ class ImageExtension extends \Twig_Extension
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'image';
+    }
+
+    /**
      * @param $path
      * @param $filter
      *
@@ -51,13 +59,5 @@ class ImageExtension extends \Twig_Extension
     public function getImage($path, $filter)
     {
         return $this->helper->getImage($path, $filter);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'image';
     }
 }

@@ -21,6 +21,12 @@ use WellCommerce\Bundle\CoreBundle\Test\AbstractTestCase;
  */
 abstract class AbstractAdminManagerTestCase extends AbstractTestCase
 {
+    public function testManagerServiceIsValid()
+    {
+        $manager = $this->get();
+        $this->assertInstanceOf($this->getServiceClassName(), $manager);
+    }
+
     /**
      * @return \WellCommerce\Bundle\CoreBundle\Manager\Admin\AdminManagerInterface
      */
@@ -31,32 +37,16 @@ abstract class AbstractAdminManagerTestCase extends AbstractTestCase
      */
     abstract protected function getServiceClassName();
 
-    /**
-     * @return string
-     */
-    abstract protected function getFormBuilderClassName();
-
-    /**
-     * @return string
-     */
-    abstract protected function getDataGridClassName();
-
-    /**
-     * @return string
-     */
-    abstract protected function getRepositoryInterfaceName();
-
-    public function testManagerServiceIsValid()
-    {
-        $manager = $this->get();
-        $this->assertInstanceOf($this->getServiceClassName(), $manager);
-    }
-
     public function testManagerReturnsValidFormBuilder()
     {
         $manager = $this->get();
         $this->assertInstanceOf($this->getFormBuilderClassName(), $manager->getFormBuilder());
     }
+
+    /**
+     * @return string
+     */
+    abstract protected function getFormBuilderClassName();
 
     public function testManagerReturnsValidRepository()
     {
@@ -64,9 +54,19 @@ abstract class AbstractAdminManagerTestCase extends AbstractTestCase
         $this->assertInstanceOf($this->getRepositoryInterfaceName(), $manager->getRepository());
     }
 
+    /**
+     * @return string
+     */
+    abstract protected function getRepositoryInterfaceName();
+
     public function testManagerReturnsValidDataGrid()
     {
         $manager = $this->get();
         $this->assertInstanceOf($this->getDataGridClassName(), $manager->getDataGrid());
     }
+
+    /**
+     * @return string
+     */
+    abstract protected function getDataGridClassName();
 }

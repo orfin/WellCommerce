@@ -22,22 +22,6 @@ use WellCommerce\Component\DataGrid\Column\Column;
  */
 abstract class AbstractDataGridTestCase extends AbstractTestCase
 {
-    /**
-     * @return null|\WellCommerce\Component\DataGrid\DataGridInterface
-     */
-    protected function getDataGrid()
-    {
-        return null;
-    }
-
-    /**
-     * @return array
-     */
-    protected function getColumns()
-    {
-        return [];
-    }
-
     public function testDatagridServiceIsCreated()
     {
         $datagrid = $this->getDataGrid();
@@ -45,6 +29,14 @@ abstract class AbstractDataGridTestCase extends AbstractTestCase
         if (null !== $datagrid) {
             $this->assertInstanceOf('WellCommerce\Component\DataGrid\DataGridInterface', $datagrid);
         }
+    }
+
+    /**
+     * @return null|\WellCommerce\Component\DataGrid\DataGridInterface
+     */
+    protected function getDataGrid()
+    {
+        return null;
     }
 
     public function testDatagridColumnsCollectionIsConfigurable()
@@ -85,5 +77,13 @@ abstract class AbstractDataGridTestCase extends AbstractTestCase
                 $this->assertEquals($identifier, $column->getId());
             }
         }
+    }
+
+    /**
+     * @return array
+     */
+    protected function getColumns()
+    {
+        return [];
     }
 }
