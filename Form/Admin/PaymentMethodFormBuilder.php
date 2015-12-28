@@ -60,13 +60,13 @@ class PaymentMethodFormBuilder extends AbstractFormBuilder
         ]));
 
         $requiredData->addChild($this->getElement('checkbox', [
-            'name'    => 'enabled',
-            'label'   => $this->trans('common.label.enabled'),
+            'name'  => 'enabled',
+            'label' => $this->trans('common.label.enabled'),
         ]));
 
         $requiredData->addChild($this->getElement('text_field', [
-            'name'    => 'hierarchy',
-            'label'   => $this->trans('common.label.hierarchy'),
+            'name'  => 'hierarchy',
+            'label' => $this->trans('common.label.hierarchy'),
             'rules' => [
                 $this->getRule('required')
             ],
