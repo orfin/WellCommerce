@@ -29,14 +29,6 @@ abstract class AbstractShopContext
     /**
      * {@inheritdoc}
      */
-    public function setCurrentShop(ShopInterface $shop)
-    {
-        $this->currentShop = $shop;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getCurrentShop()
     {
         return $this->currentShop;
@@ -45,9 +37,9 @@ abstract class AbstractShopContext
     /**
      * {@inheritdoc}
      */
-    public function hasCurrentShop()
+    public function setCurrentShop(ShopInterface $shop)
     {
-        return $this->currentShop instanceof ShopInterface;
+        $this->currentShop = $shop;
     }
 
     /**
@@ -60,5 +52,13 @@ abstract class AbstractShopContext
         }
 
         return null;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasCurrentShop()
+    {
+        return $this->currentShop instanceof ShopInterface;
     }
 }
