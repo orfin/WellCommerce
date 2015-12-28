@@ -49,7 +49,7 @@ class TaxFormBuilder extends AbstractFormBuilder
             'name'   => 'value',
             'label'  => $this->trans('tax.label.value'),
             'suffix' => '%',
-            'rules' => [
+            'rules'  => [
                 $this->getRule('required')
             ],
         ]));
