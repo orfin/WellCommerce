@@ -54,7 +54,7 @@ class ShopFormBuilder extends AbstractFormBuilder
         $requiredData->addChild($this->getElement('select', [
             'name'        => 'theme',
             'label'       => $this->trans('shop.label.theme'),
-            'options'     => $this->get('theme.dataset')->getResult('select'),
+            'options'     => $this->get('theme.dataset.admin')->getResult('select'),
             'transformer' => $this->getRepositoryTransformer('entity', $this->get('theme.repository'))
         ]));
 
