@@ -23,18 +23,6 @@ use WellCommerce\Bundle\OrderBundle\Entity\OrderTotal;
 class OrderTotalFactory extends AbstractFactory
 {
     /**
-     * @return OrderTotal
-     */
-    public function create()
-    {
-        $orderTotal = new OrderTotal();
-        $orderTotal->setGrossAmount(0);
-        $orderTotal->setTaxRate(0);
-
-        return $orderTotal;
-    }
-
-    /**
      * Creates an order total from given values
      *
      * @param int|float $grossAmount
@@ -51,6 +39,18 @@ class OrderTotalFactory extends AbstractFactory
         $orderTotal->setCurrency($currency);
 
         $orderTotal->recalculate();
+
+        return $orderTotal;
+    }
+
+    /**
+     * @return OrderTotal
+     */
+    public function create()
+    {
+        $orderTotal = new OrderTotal();
+        $orderTotal->setGrossAmount(0);
+        $orderTotal->setTaxRate(0);
 
         return $orderTotal;
     }

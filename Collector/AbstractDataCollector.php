@@ -43,12 +43,6 @@ abstract class AbstractDataCollector implements OrderDataCollectorInterface
         $this->currencyHelper = $currencyHelper;
     }
 
-    abstract public function getAlias();
-
-    abstract public function getPriority();
-
-    abstract public function getDescription();
-
     /**
      * @return \WellCommerce\Bundle\OrderBundle\Entity\OrderTotalDetailInterface
      */
@@ -60,6 +54,12 @@ abstract class AbstractDataCollector implements OrderDataCollectorInterface
 
         return $resource;
     }
+
+    abstract public function getAlias();
+
+    abstract public function getPriority();
+
+    abstract public function getDescription();
 
 
 }

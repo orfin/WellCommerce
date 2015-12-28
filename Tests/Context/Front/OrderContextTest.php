@@ -25,7 +25,7 @@ class OrderContextTest extends AbstractTestCase
     {
         $factory = $this->container->get('order.factory');
         $context = $this->container->get('order.context.front');
-        $order    = $factory->create();
+        $order   = $factory->create();
         $this->assertNull($context->getCurrentOrder());
 
         $context->setCurrentOrder($order);
