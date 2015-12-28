@@ -21,11 +21,11 @@ use Symfony\Component\Validator\Constraint;
  */
 class UniqueUsername extends Constraint
 {
-    public $message          = 'You have an account already. Please login first.';
-    public $service          = 'client.orm.validator.unique';
-    public $fields           = [];
-    public $errorPath        = null;
-    public $ignoreNull       = true;
+    public $message    = 'You have an account already. Please login first.';
+    public $service    = 'client.orm.validator.unique';
+    public $fields     = [];
+    public $errorPath  = null;
+    public $ignoreNull = true;
 
     /**
      * {@inheritdoc}

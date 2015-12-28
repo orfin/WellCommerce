@@ -88,7 +88,7 @@ class ClientFormBuilder extends AbstractFormBuilder
             'filters' => [
                 $this->getFilter('comma_to_dot_changer'),
             ],
-            'rules' => [
+            'rules'   => [
                 $this->getRule('required')
             ],
         ]));
