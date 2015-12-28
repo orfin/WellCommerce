@@ -6,11 +6,32 @@ parameters:
     database_user:     root
     database_password: ~
 
+    mailer_host:               127.0.0.1
+    mailer_from:               ~
+    mailer_port:               25
+    mailer_user:               ~
+    mailer_password:           ~
+
     locale:            en
     secret:            ThisTokenIsNotSoSecretChangeIt
-
-    php_binary_path: ~
 
     debug_toolbar:          true
     debug_redirects:        false
     use_assetic_controller: true
+
+    doctrine.server_version: 5.6
+
+    fallback_theme: wellcommerce-default-theme
+    fallback_hostname: localhost
+
+    developer_mode.ip: 127.0.0.1
+
+    search_engine: lucene
+
+    php_binary_path: ~
+
+    pdo.db_options:
+      db_table:    session
+      db_id_col:   session_id
+      db_data_col: session_value
+      db_time_col: session_time

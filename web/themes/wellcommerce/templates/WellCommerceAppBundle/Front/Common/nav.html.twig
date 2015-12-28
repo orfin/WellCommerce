@@ -1,9 +1,0 @@
-{% trans_default_domain "wellcommerce" %}
-{% if app.user and is_granted('ROLE_CLIENT') %}
-    <a href="{{ path('front.client_settings.index') }}" class="btn btn-default btn-sm">{% trans %}client.link.settings{% endtrans %}</a>
-    <a href="{{ path('front.client_order.index') }}" class="btn btn-default btn-sm">{% trans %}client.link.orders{% endtrans %}</a>
-    <a href="{{ path('front.client_wishlist.index') }}" class="btn btn-default btn-sm">{% trans %}client.link.wishlist{% endtrans %} ({{ app.user.wishlist.count() }})</a>
-    <a href="{{ path('front.client.logout') }}" class="btn btn-default btn-sm">{% trans %}client.link.logout{% endtrans %}</a>
-{%  else %}
-    <a href="{{ path('front.client.login') }}" class="btn btn-default btn-sm">{% trans %}client.link.login{% endtrans %}</a>
-{% endif %}

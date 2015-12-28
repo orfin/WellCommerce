@@ -1,0 +1,13 @@
+{% extends 'WellCommerceAppBundle:Front:layout.html.twig' %}
+{% block content %}
+    {% include 'WellCommerceAppBundle:Front:breadcrumbs.html.twig' %}
+    <div class="row">
+        <div class="col-sm-3">
+            {{ layout_box('client_menu') }}
+        </div>
+
+        <div class="col-sm-9">
+			{{ layout_box('wishlist') }}
+        </div>
+    </div>
+{% endblock %}

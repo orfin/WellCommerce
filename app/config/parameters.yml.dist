@@ -1,10 +1,16 @@
 parameters:
     database_driver:   pdo_mysql
     database_host:     127.0.0.1
-    database_port:     ~
+    database_port:     3306
     database_name:     wellcommerce
     database_user:     root
     database_password: ~
+
+    mailer_host:               127.0.0.1
+    mailer_from:               ~
+    mailer_port:               25
+    mailer_user:               ~
+    mailer_password:           ~
 
     locale:            en
     secret:            ThisTokenIsNotSoSecretChangeIt
@@ -15,7 +21,7 @@ parameters:
 
     doctrine.server_version: 5.6
 
-    fallback_theme: wellcommerce
+    fallback_theme: wellcommerce-default-theme
     fallback_hostname: localhost
 
     developer_mode.ip: 127.0.0.1
