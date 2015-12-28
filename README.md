@@ -38,13 +38,20 @@ http://getcomposer.org/ or just run the following command:
 
 Then, use the `create-project` command to generate a new WellCommerce application:
 
-    1) php composer.phar create-project wellcommerce/wellcommerce -s dev path/to/wellcommerce
-    
-    or
-    
-    2) composer create-project wellcommerce/wellcommerce -s dev path/to/wellcommerce 
+For developer/contributor edition use following command:
 
-Composer will install WellCommerce and all its dependencies under the `path/to/wellcommerce` directory.
+    php composer.phar create-project wellcommerce/wellcommerce -s dev path/to/wellcommerce
+    
+For community edition use following command:
+    
+    php composer.phar create-project wellcommerce/community-edition -s dev path/to/wellcommerce
+
+Composer will install WellCommerce and all its dependencies under the `path/to/wellcommerce` directory. You will be asked to enter configuration parameters during the install process.
+
+After the download is complete, run following command to create a database, install assets and import sample data:
+
+    cd path/to/wellcommerce
+    php app/console wellcommerce:install
 
 Contributors
 ------------
