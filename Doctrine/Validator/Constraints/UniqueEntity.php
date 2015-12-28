@@ -21,11 +21,11 @@ use Symfony\Component\Validator\Constraint;
  */
 class UniqueEntity extends Constraint
 {
-    public $message          = 'This value is already used in {{ type }}. Follow <a target="_blank" href="{{ url }}">this link</a>';
-    public $service          = 'routing.orm.validator.unique';
-    public $fields           = [];
-    public $errorPath        = null;
-    public $ignoreNull       = true;
+    public $message    = 'This value is already used in {{ type }}. Follow <a target="_blank" href="{{ url }}">this link</a>';
+    public $service    = 'routing.orm.validator.unique';
+    public $fields     = [];
+    public $errorPath  = null;
+    public $ignoreNull = true;
 
     /**
      * {@inheritdoc}

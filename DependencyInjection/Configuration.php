@@ -27,10 +27,10 @@ class Configuration extends AbstractConfiguration
     {
         $node->children()
             ->arrayNode('routers')
-                ->defaultValue(array('router.default' => 100))
-                ->useAttributeAsKey('id')
-                ->prototype('scalar')->end()
+            ->defaultValue(['router.default' => 100])
+            ->useAttributeAsKey('id')
+            ->prototype('scalar')->end()
             ->end()
-        ->end();
+            ->end();
     }
 }
