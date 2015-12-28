@@ -75,6 +75,11 @@ abstract class AbstractRouteGenerator implements RouteGeneratorInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    abstract public function supports($strategy);
+
+    /**
      * Returns a concatenated path
      *
      * @param RouteInterface $resource
@@ -89,9 +94,4 @@ abstract class AbstractRouteGenerator implements RouteGeneratorInterface
 
         return $resource->getPath();
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    abstract public function supports($strategy);
 }

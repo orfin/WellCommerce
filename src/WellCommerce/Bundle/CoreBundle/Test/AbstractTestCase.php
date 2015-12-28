@@ -54,10 +54,10 @@ abstract class AbstractTestCase extends KernelTestCase
         $this->setCurrentShop();
     }
 
-    private function setCurrentShop()
+    protected function tearDown()
     {
-        $shop = $this->container->get('shop.repository')->findOneBy([]);
-        $this->container->get('shop.context.admin')->setCurrentShop($shop);
+        parent::tearDown();
+        $this->em->getConnection()->close();
     }
 
     /**
@@ -78,9 +78,9 @@ abstract class AbstractTestCase extends KernelTestCase
         return $client;
     }
 
-    protected function tearDown()
+    private function setCurrentShop()
     {
-        parent::tearDown();
-        $this->em->getConnection()->close();
+        $shop = $this->container->get('shop.repository')->findOneBy([]);
+        $this->container->get('shop.context.admin')->setCurrentShop($shop);
     }
 }

@@ -45,54 +45,6 @@ class DiscountablePrice extends Price
     protected $validTo;
 
     /**
-     * @return float|int
-     */
-    public function getDiscountedNetAmount()
-    {
-        return (float)$this->discountedNetAmount;
-    }
-
-    /**
-     * @param float|int $discountedNetAmount
-     */
-    public function setDiscountedNetAmount($discountedNetAmount)
-    {
-        $this->discountedNetAmount = (float)$discountedNetAmount;
-    }
-
-    /**
-     * @return float|int
-     */
-    public function getDiscountedGrossAmount()
-    {
-        return (float)$this->discountedGrossAmount;
-    }
-
-    /**
-     * @param float|int $discountedGrossAmount
-     */
-    public function setDiscountedGrossAmount($discountedGrossAmount)
-    {
-        $this->discountedGrossAmount = (float)$discountedGrossAmount;
-    }
-
-    /**
-     * @return float|int
-     */
-    public function getDiscountedTaxAmount()
-    {
-        return (float)$this->discountedTaxAmount;
-    }
-
-    /**
-     * @param float|int $discountedTaxAmount
-     */
-    public function setDiscountedTaxAmount($discountedTaxAmount)
-    {
-        $this->discountedTaxAmount = (float)$discountedTaxAmount;
-    }
-
-    /**
      * @return \DateTime|null
      */
     public function getValidFrom()
@@ -137,6 +89,36 @@ class DiscountablePrice extends Price
     }
 
     /**
+     * @return bool
+     */
+    public function isDiscountValid()
+    {
+        $now = new \DateTime();
+
+        if ($this->validFrom instanceof \DateTime && $this->validTo instanceof \DateTime) {
+            return ($this->validFrom <= $now) && ($this->validTo >= $now);
+        }
+
+        return false;
+    }
+
+    /**
+     * @return float|int
+     */
+    public function getDiscountedGrossAmount()
+    {
+        return (float)$this->discountedGrossAmount;
+    }
+
+    /**
+     * @param float|int $discountedGrossAmount
+     */
+    public function setDiscountedGrossAmount($discountedGrossAmount)
+    {
+        $this->discountedGrossAmount = (float)$discountedGrossAmount;
+    }
+
+    /**
      * @return float|int
      */
     public function getFinalNetAmount()
@@ -146,6 +128,22 @@ class DiscountablePrice extends Price
         }
 
         return $this->getNetAmount();
+    }
+
+    /**
+     * @return float|int
+     */
+    public function getDiscountedNetAmount()
+    {
+        return (float)$this->discountedNetAmount;
+    }
+
+    /**
+     * @param float|int $discountedNetAmount
+     */
+    public function setDiscountedNetAmount($discountedNetAmount)
+    {
+        $this->discountedNetAmount = (float)$discountedNetAmount;
     }
 
     /**
@@ -161,16 +159,18 @@ class DiscountablePrice extends Price
     }
 
     /**
-     * @return bool
+     * @return float|int
      */
-    public function isDiscountValid()
+    public function getDiscountedTaxAmount()
     {
-        $now = new \DateTime();
+        return (float)$this->discountedTaxAmount;
+    }
 
-        if ($this->validFrom instanceof \DateTime && $this->validTo instanceof \DateTime) {
-            return ($this->validFrom <= $now) && ($this->validTo >= $now);
-        }
-
-        return false;
+    /**
+     * @param float|int $discountedTaxAmount
+     */
+    public function setDiscountedTaxAmount($discountedTaxAmount)
+    {
+        $this->discountedTaxAmount = (float)$discountedTaxAmount;
     }
 }

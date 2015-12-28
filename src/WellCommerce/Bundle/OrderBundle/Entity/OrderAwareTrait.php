@@ -25,18 +25,18 @@ trait OrderAwareTrait
     protected $order;
 
     /**
-     * @param OrderInterface $order
-     */
-    public function setOrder(OrderInterface $order)
-    {
-        $this->order = $order;
-    }
-
-    /**
      * @return OrderInterface
      */
     public function getOrder()
     {
         return $this->order;
+    }
+
+    /**
+     * @param OrderInterface $order
+     */
+    public function setOrder(OrderInterface $order)
+    {
+        $this->order = $order;
     }
 }

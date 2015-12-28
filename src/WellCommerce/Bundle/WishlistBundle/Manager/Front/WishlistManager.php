@@ -35,15 +35,6 @@ class WishlistManager extends AbstractFrontManager
         }
     }
 
-    public function deleteProductFromWishlist(ProductInterface $product)
-    {
-        $wishlist = $this->findWishlist($product);
-
-        if (null !== $wishlist) {
-            $this->removeResource($wishlist);
-        }
-    }
-
     public function findWishlist(ProductInterface $product)
     {
         $client = $this->getClient();
@@ -52,5 +43,14 @@ class WishlistManager extends AbstractFrontManager
             'client'  => $client,
             'product' => $product
         ]);
+    }
+
+    public function deleteProductFromWishlist(ProductInterface $product)
+    {
+        $wishlist = $this->findWishlist($product);
+
+        if (null !== $wishlist) {
+            $this->removeResource($wishlist);
+        }
     }
 }

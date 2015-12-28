@@ -21,22 +21,6 @@ use WellCommerce\Bundle\CoreBundle\Test\AbstractTestCase;
  */
 abstract class AbstractDataSetTestCase extends AbstractTestCase
 {
-    /**
-     * @return null|\WellCommerce\Component\DataSet\DataSetInterface
-     */
-    protected function get()
-    {
-        return null;
-    }
-
-    /**
-     * @return array
-     */
-    protected function getColumns()
-    {
-        return [];
-    }
-
     public function testDatasetServiceIsCreated()
     {
         $dataset = $this->get();
@@ -44,6 +28,14 @@ abstract class AbstractDataSetTestCase extends AbstractTestCase
         if (null !== $dataset) {
             $this->assertInstanceOf('WellCommerce\Component\DataSet\DataSetInterface', $dataset);
         }
+    }
+
+    /**
+     * @return null|\WellCommerce\Component\DataSet\DataSetInterface
+     */
+    protected function get()
+    {
+        return null;
     }
 
     public function testDatasetHasRequiredColumns()
@@ -68,6 +60,22 @@ abstract class AbstractDataSetTestCase extends AbstractTestCase
     }
 
     /**
+     * @return array
+     */
+    protected function getColumns()
+    {
+        return [];
+    }
+
+    protected function isAggregateColumn($source)
+    {
+        $aggregates = ['SUM', 'GROUP_CONCAT', 'MIN', 'MAX', 'AVG', 'COUNT'];
+        $regex      = '/(' . implode('|', $aggregates) . ')/i';
+
+        return (bool)(preg_match($regex, $source));
+    }
+
+    /**
      * @dataProvider getDataSetContexts
      */
     public function testDatasetReturnsResults($contexts)
@@ -80,14 +88,6 @@ abstract class AbstractDataSetTestCase extends AbstractTestCase
                 $this->assertNotNull($results);
             }
         }
-    }
-
-    protected function isAggregateColumn($source)
-    {
-        $aggregates = ['SUM', 'GROUP_CONCAT', 'MIN', 'MAX', 'AVG', 'COUNT'];
-        $regex      = '/(' . implode('|', $aggregates) . ')/i';
-
-        return (bool)(preg_match($regex, $source));
     }
 
     /**

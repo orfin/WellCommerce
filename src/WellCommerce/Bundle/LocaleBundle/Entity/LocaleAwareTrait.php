@@ -25,18 +25,18 @@ trait LocaleAwareTrait
     protected $locale;
 
     /**
-     * @param LocaleInterface $locale
-     */
-    public function setLocale(LocaleInterface $locale)
-    {
-        $this->locale = $locale;
-    }
-
-    /**
      * @return LocaleInterface
      */
     public function getLocale()
     {
         return $this->locale;
+    }
+
+    /**
+     * @param LocaleInterface $locale
+     */
+    public function setLocale(LocaleInterface $locale)
+    {
+        $this->locale = $locale;
     }
 }

@@ -21,19 +21,19 @@ trait ProductAttributeAwareTrait
     protected $productAttribute;
 
     /**
-     * @param null|ProductAttributeInterface $productAttribute
-     */
-    public function setProductAttribute(ProductAttributeInterface $productAttribute = null)
-    {
-        $this->productAttribute = $productAttribute;
-    }
-
-    /**
      * @return null|ProductAttributeInterface
      */
     public function getProductAttribute()
     {
         return $this->productAttribute;
+    }
+
+    /**
+     * @param null|ProductAttributeInterface $productAttribute
+     */
+    public function setProductAttribute(ProductAttributeInterface $productAttribute = null)
+    {
+        $this->productAttribute = $productAttribute;
     }
 }
 

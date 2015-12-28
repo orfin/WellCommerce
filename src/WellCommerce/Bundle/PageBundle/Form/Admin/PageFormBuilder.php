@@ -68,7 +68,7 @@ class PageFormBuilder extends AbstractFormBuilder
             'name_field'      => $name,
             'generate_route'  => 'admin.routing.generate',
             'translatable_id' => $this->getRequestHelper()->getAttributesBagParam('id'),
-            'rules' => [
+            'rules'           => [
                 $this->getRule('required')
             ],
         ]));
@@ -81,16 +81,16 @@ class PageFormBuilder extends AbstractFormBuilder
         ]));
 
         $mainData->addChild($this->getElement('text_field', [
-            'name'    => 'hierarchy',
-            'label'   => $this->trans('common.label.hierarchy'),
+            'name'  => 'hierarchy',
+            'label' => $this->trans('common.label.hierarchy'),
             'rules' => [
                 $this->getRule('required')
             ],
         ]));
 
         $mainData->addChild($this->getElement('text_field', [
-            'name'    => 'section',
-            'label'   => $this->trans('page.label.section'),
+            'name'  => 'section',
+            'label' => $this->trans('page.label.section'),
         ]));
 
         $mainData->addChild($this->getElement('tree', [

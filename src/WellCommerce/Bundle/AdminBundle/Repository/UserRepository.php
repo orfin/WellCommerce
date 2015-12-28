@@ -24,14 +24,6 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
  */
 class UserRepository extends AbstractEntityRepository implements UserRepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getDataGridQueryBuilder()
-    {
-        return parent::getQueryBuilder()->groupBy('user.id');
-    }
-
     public function refreshUser(UserInterface $user)
     {
         $class = get_class($user);

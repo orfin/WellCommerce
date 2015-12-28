@@ -50,8 +50,6 @@ class UserController extends AbstractAdminController
     }
 
     /**
-     * @param Request $request
-     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function resetPasswordAction()
@@ -113,6 +111,8 @@ class UserController extends AbstractAdminController
     }
 
     /**
+     * Deletes the user
+     *
      * @param int $id
      *
      * @return \Symfony\Component\HttpFoundation\JsonResponse

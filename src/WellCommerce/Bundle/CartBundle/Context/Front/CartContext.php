@@ -61,5 +61,4 @@ class CartContext implements CartContextInterface
     {
         return $this->currentCart instanceof CartInterface;
     }
-
 }

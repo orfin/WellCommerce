@@ -21,13 +21,6 @@ use WellCommerce\Bundle\CoreBundle\Test\AbstractTestCase;
  */
 abstract class AbstractFactoryTestCase extends AbstractTestCase
 {
-    /**
-     * @return \WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface
-     */
-    abstract protected function getFactoryService();
-
-    abstract protected function getExpectedInterface();
-
     public function testImplementsProperInterface()
     {
         $factory = $this->getFactoryService();
@@ -36,6 +29,11 @@ abstract class AbstractFactoryTestCase extends AbstractTestCase
         }
     }
 
+    /**
+     * @return \WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface
+     */
+    abstract protected function getFactoryService();
+
     public function testExpectedObjectIsReturned()
     {
         $factory = $this->getFactoryService();
@@ -43,4 +41,6 @@ abstract class AbstractFactoryTestCase extends AbstractTestCase
             $this->assertInstanceOf($this->getExpectedInterface(), $factory->create());
         }
     }
+
+    abstract protected function getExpectedInterface();
 }

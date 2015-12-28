@@ -33,6 +33,12 @@ class InstallCommand extends Command
         $this->setName('wellcommerce:install');
     }
 
+    /**
+     * Executes the command
+     *
+     * @param InputInterface  $input
+     * @param OutputInterface $output
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         foreach ($this->getCommandsToExecute() as $command) {

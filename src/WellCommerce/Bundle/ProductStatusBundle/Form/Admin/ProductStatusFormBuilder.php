@@ -51,7 +51,7 @@ class ProductStatusFormBuilder extends AbstractFormBuilder
             'name_field'      => $name,
             'generate_route'  => 'admin.routing.generate',
             'translatable_id' => $this->getRequestHelper()->getAttributesBagParam('id'),
-            'rules' => [
+            'rules'           => [
                 $this->getRule('required')
             ]
         ]));

@@ -31,6 +31,14 @@ trait RoutableTrait
     /**
      * {@inheritdoc}
      */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function setSlug($slug)
     {
         $this->slug = $slug;
@@ -43,9 +51,9 @@ trait RoutableTrait
     /**
      * {@inheritdoc}
      */
-    public function getSlug()
+    public function getRoute()
     {
-        return $this->slug;
+        return $this->route;
     }
 
     /**
@@ -54,13 +62,5 @@ trait RoutableTrait
     public function setRoute(RouteInterface $route)
     {
         $this->route = $route;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getRoute()
-    {
-        return $this->route;
     }
 }

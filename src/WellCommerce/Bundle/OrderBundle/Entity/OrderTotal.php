@@ -55,6 +55,14 @@ class OrderTotal
     }
 
     /**
+     * @param float|int $netAmount
+     */
+    public function setNetAmount($netAmount)
+    {
+        $this->netAmount = $netAmount;
+    }
+
+    /**
      * @return float|int
      */
     public function getGrossAmount()
@@ -76,6 +84,14 @@ class OrderTotal
     public function getTaxAmount()
     {
         return (float)$this->taxAmount;
+    }
+
+    /**
+     * @param float|int $taxAmount
+     */
+    public function setTaxAmount($taxAmount)
+    {
+        $this->taxAmount = $taxAmount;
     }
 
     /**
@@ -108,22 +124,6 @@ class OrderTotal
     public function setCurrency($currency)
     {
         $this->currency = $currency;
-    }
-
-    /**
-     * @param float|int $netAmount
-     */
-    public function setNetAmount($netAmount)
-    {
-        $this->netAmount = $netAmount;
-    }
-
-    /**
-     * @param float|int $taxAmount
-     */
-    public function setTaxAmount($taxAmount)
-    {
-        $this->taxAmount = $taxAmount;
     }
 
     /**

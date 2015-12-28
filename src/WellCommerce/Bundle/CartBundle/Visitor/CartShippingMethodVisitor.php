@@ -52,11 +52,6 @@ class CartShippingMethodVisitor implements CartVisitorInterface
         }
     }
 
-    protected function getShippingMethodCostCollection(CartInterface $cart)
-    {
-        return $this->shippingMethodProvider->getShippingMethodCostsCollection($cart);
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -71,5 +66,10 @@ class CartShippingMethodVisitor implements CartVisitorInterface
     public function getPriority()
     {
         return 10;
+    }
+
+    protected function getShippingMethodCostCollection(CartInterface $cart)
+    {
+        return $this->shippingMethodProvider->getShippingMethodCostsCollection($cart);
     }
 }

@@ -25,18 +25,18 @@ trait CouponAwareTrait
     protected $coupon;
 
     /**
-     * @param CouponInterface|null $coupon
-     */
-    public function setCoupon(CouponInterface $coupon = null)
-    {
-        $this->coupon = $coupon;
-    }
-
-    /**
      * @return CouponInterface|null
      */
     public function getCoupon()
     {
         return $this->coupon;
+    }
+
+    /**
+     * @param CouponInterface|null $coupon
+     */
+    public function setCoupon(CouponInterface $coupon = null)
+    {
+        $this->coupon = $coupon;
     }
 }

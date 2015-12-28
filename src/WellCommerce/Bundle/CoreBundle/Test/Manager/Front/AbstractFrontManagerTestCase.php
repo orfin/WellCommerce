@@ -21,6 +21,12 @@ use WellCommerce\Bundle\CoreBundle\Test\AbstractTestCase;
  */
 abstract class AbstractFrontManagerTestCase extends AbstractTestCase
 {
+    public function testManagerServiceIsValid()
+    {
+        $manager = $this->get();
+        $this->assertInstanceOf($this->getServiceClassName(), $manager);
+    }
+
     /**
      * @return \WellCommerce\Bundle\CoreBundle\Manager\Admin\AdminManagerInterface
      */
@@ -31,20 +37,14 @@ abstract class AbstractFrontManagerTestCase extends AbstractTestCase
      */
     abstract protected function getServiceClassName();
 
-    /**
-     * @return string
-     */
-    abstract protected function getRepositoryInterfaceName();
-
-    public function testManagerServiceIsValid()
-    {
-        $manager = $this->get();
-        $this->assertInstanceOf($this->getServiceClassName(), $manager);
-    }
-
     public function testManagerReturnsValidRepository()
     {
         $manager = $this->get();
         $this->assertInstanceOf($this->getRepositoryInterfaceName(), $manager->getRepository());
     }
+
+    /**
+     * @return string
+     */
+    abstract protected function getRepositoryInterfaceName();
 }

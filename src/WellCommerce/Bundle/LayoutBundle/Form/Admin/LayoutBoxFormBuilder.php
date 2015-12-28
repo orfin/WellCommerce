@@ -49,7 +49,7 @@ class LayoutBoxFormBuilder extends AbstractFormBuilder
             'name'    => 'identifier',
             'label'   => $this->trans('layout_box.label.identifier'),
             'comment' => $this->trans('layout_box.comment.identifier'),
-            'rules' => [
+            'rules'   => [
                 $this->getRule('required')
             ],
         ]));

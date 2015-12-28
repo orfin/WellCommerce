@@ -22,11 +22,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  */
 abstract class AbstractMappingCompilerPass extends BaseAbstractMappingCompilerPass
 {
-    /**
-     * @return array
-     */
-    abstract protected function getExtensionConfiguration(ContainerBuilder $container);
-
     public function process(ContainerBuilder $container)
     {
         $parameters = $this->getExtensionConfiguration($container);
@@ -37,4 +32,9 @@ abstract class AbstractMappingCompilerPass extends BaseAbstractMappingCompilerPa
             $this->addEntityMapping($container, 'default', $entity, $mapping);
         }
     }
+
+    /**
+     * @return array
+     */
+    abstract protected function getExtensionConfiguration(ContainerBuilder $container);
 }

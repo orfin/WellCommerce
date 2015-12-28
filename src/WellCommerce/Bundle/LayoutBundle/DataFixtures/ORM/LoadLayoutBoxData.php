@@ -99,7 +99,7 @@ class LoadLayoutBoxData extends AbstractDataFixture
                 'identifier' => 'client_menu',
                 'name'       => 'Client menu'
             ],
-            'Wishlist'       => [
+            'Wishlist'             => [
                 'identifier' => 'wishlist',
                 'name'       => 'Wishlist'
             ],
@@ -211,7 +211,7 @@ class LoadLayoutBoxData extends AbstractDataFixture
     protected function createProductBoxes()
     {
         $boxes = [
-            'ProductInfo'              => [
+            'ProductInfo'       => [
                 'identifier' => 'product_info',
                 'name'       => 'Product'
             ],

@@ -46,6 +46,7 @@ abstract class AbstractConfiguration implements ConfigurationInterface
 
     }
 
+    //@formatter:off
     protected function addDynamicRoutingConfiguration(ArrayNodeDefinition $node)
     {
         $node
@@ -97,4 +98,5 @@ abstract class AbstractConfiguration implements ConfigurationInterface
                 ->end()
             ->end();
     }
+    //@formatter:on
 }

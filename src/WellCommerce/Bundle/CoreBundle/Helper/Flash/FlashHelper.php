@@ -53,6 +53,22 @@ class FlashHelper implements FlashHelperInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function addNotice($message, array $params = [])
+    {
+        return $this->addMessage(FlashHelperInterface::FLASH_TYPE_NOTICE, $message, $params);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addError($message, array $params = [])
+    {
+        return $this->addMessage(FlashHelperInterface::FLASH_TYPE_ERROR, $message, $params);
+    }
+
+    /**
      * Shortcut to add new flash message to bag
      *
      * @param $type
@@ -89,21 +105,5 @@ class FlashHelper implements FlashHelperInterface
     private function getFlashBag()
     {
         return $this->session->getBag(FlashHelperInterface::FLASHES_NAME);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addNotice($message, array $params = [])
-    {
-        return $this->addMessage(FlashHelperInterface::FLASH_TYPE_NOTICE, $message, $params);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addError($message, array $params = [])
-    {
-        return $this->addMessage(FlashHelperInterface::FLASH_TYPE_ERROR, $message, $params);
     }
 }
