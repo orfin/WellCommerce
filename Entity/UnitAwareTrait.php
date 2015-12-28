@@ -25,18 +25,18 @@ trait UnitAwareTrait
     protected $unit;
 
     /**
-     * @param UnitInterface $unit
-     */
-    public function setUnit(UnitInterface $unit)
-    {
-        $this->unit = $unit;
-    }
-
-    /**
      * @return UnitInterface
      */
     public function getUnit()
     {
         return $this->unit;
+    }
+
+    /**
+     * @param UnitInterface $unit
+     */
+    public function setUnit(UnitInterface $unit)
+    {
+        $this->unit = $unit;
     }
 }
