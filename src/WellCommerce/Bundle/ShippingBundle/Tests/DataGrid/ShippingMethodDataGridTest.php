@@ -21,17 +21,13 @@ use WellCommerce\Bundle\CoreBundle\Test\DataGrid\AbstractDataGridTestCase;
  */
 class ShippingMethodDataGridTest extends AbstractDataGridTestCase
 {
-    protected function getDataGrid()
+    protected function get()
     {
         return $this->container->get('shipping_method.datagrid')->getInstance();
     }
 
     protected function getColumns()
     {
-        return [
-            'id',
-            'name',
-            'calculator',
-        ];
+        return ['id', 'name', 'calculator'];
     }
 }
