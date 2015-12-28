@@ -14,7 +14,6 @@ namespace WellCommerce\Bundle\AdminBundle\Tests\Controller\Admin;
 
 use Doctrine\Common\Collections\Criteria;
 use WellCommerce\Bundle\AdminBundle\Entity\UserGroupInterface;
-use WellCommerce\Bundle\AdminBundle\Entity\UserInterface;
 use WellCommerce\Bundle\CoreBundle\Test\Controller\Admin\AbstractAdminControllerTestCase;
 
 /**
