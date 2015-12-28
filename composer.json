@@ -47,6 +47,7 @@
         "symfony/monolog-bundle": "^2.7@dev",
         "symfony/swiftmailer-bundle": "^2.3@dev",
         "doctrine/doctrine-migrations-bundle": "^1.0@dev",
+        "doctrine/doctrine-fixtures-bundle": "^2.2",
         "twig/twig": "^1.2@dev",
         "react/child-process": "0.5.*@dev",
         "knplabs/packagist-api": "1.*@dev",
@@ -60,7 +61,6 @@
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0@dev",
-        "doctrine/doctrine-fixtures-bundle": "^2.2",
         "phpunit/phpunit":  "^5.0@dev"
     },
     "extra": {
