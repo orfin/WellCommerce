@@ -26,6 +26,11 @@ interface ElementInterface
     const INFINITE = 99999;
 
     /**
+     * @param array $options
+     */
+    public function setOptions(array $options = []);
+
+    /**
      * Configures element attributes
      *
      * @param OptionsResolver $resolver
