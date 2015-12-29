@@ -24,7 +24,7 @@ well_commerce_category:
     dynamic_routing:
         name: category
         entity: WellCommerce\Bundle\CategoryBundle\Entity\CategoryRoute
-        generator: WellCommerce\Bundle\CategoryBundle\Generator\CategoryRouteGenerator
+        generator: WellCommerce\Bundle\CategoryBundle\Routing\CategoryRouteGenerator
         defaults:
             _controller: category.controller.front:indexAction
             limit: 12

@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CategoryBundle\Generator;
+namespace WellCommerce\Bundle\CategoryBundle\Routing;
 
 use WellCommerce\Bundle\RoutingBundle\Generator\AbstractRouteGenerator;
 
