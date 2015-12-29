@@ -39,6 +39,6 @@ well_commerce_product:
     dynamic_routing:
         name: product
         entity: WellCommerce\Bundle\ProductBundle\Entity\ProductRoute
-        generator: WellCommerce\Bundle\ProductBundle\Generator\ProductRouteGenerator
+        generator: WellCommerce\Bundle\ProductBundle\Routing\ProductRouteGenerator
         defaults:
             _controller: product.controller.front:indexAction

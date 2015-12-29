@@ -10,22 +10,19 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CategoryBundle\Generator;
+namespace WellCommerce\Bundle\ProductBundle\Routing;
 
 use WellCommerce\Bundle\RoutingBundle\Generator\AbstractRouteGenerator;
 
 /**
- * Class CategoryRouteGenerator
+ * Class ProductRouteGenerator
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CategoryRouteGenerator extends AbstractRouteGenerator
+class ProductRouteGenerator extends AbstractRouteGenerator
 {
-    const GENERATOR_STRATEGY = 'category';
+    const GENERATOR_STRATEGY = 'product';
 
-    /**
-     * {@inheritdoc}
-     */
     public function supports($strategy)
     {
         return self::GENERATOR_STRATEGY === $strategy;

@@ -13,7 +13,7 @@
             <argument type="service" id="event_dispatcher" />
         </service>
 
-        <service id="category.request_param_converter" class="WellCommerce\Bundle\CategoryBundle\Request\ParamConverter\CategoryParamConverter">
+        <service id="category.request_param_converter" class="WellCommerce\Bundle\CategoryBundle\Request\ParamConverter\CategoryParamConverter" public="false">
             <argument type="service" id="category.repository" />
             <argument>id</argument>
             <argument type="collection">
