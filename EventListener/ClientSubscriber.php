@@ -11,6 +11,7 @@
  */
 namespace WellCommerce\Bundle\ClientBundle\EventListener;
 
+use Doctrine\Common\Util\Debug;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
 use WellCommerce\Bundle\CoreBundle\Event\ResourceEvent;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
@@ -32,10 +33,12 @@ class ClientSubscriber extends AbstractEventSubscriber
 
     public function onClientPreCreate(ResourceEvent $event)
     {
-        $client = $event->getResource();
+        $client      = $event->getResource();
+        $shopContext = $this->get('shop.context.front');
         if ($client instanceof ClientInterface) {
             $userName = $client->getUsername();
             $client->getContactDetails()->setEmail($userName);
+            $client->setShop($shopContext->getCurrentShop());
         }
     }
 
