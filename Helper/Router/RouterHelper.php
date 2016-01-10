@@ -15,6 +15,7 @@ namespace WellCommerce\Bundle\CoreBundle\Helper\Router;
 use ReflectionClass;
 use ReflectionMethod;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Request\RequestHelperInterface;
 
@@ -120,9 +121,9 @@ class RouterHelper implements RouterHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function generateUrl($routeName, array $routeParams = [])
+    public function generateUrl($routeName, array $routeParams = [], $referenceType = UrlGeneratorInterface::ABSOLUTE_URL)
     {
-        return $this->router->generate($routeName, $routeParams, true);
+        return $this->router->generate($routeName, $routeParams, $referenceType);
     }
 
     /**

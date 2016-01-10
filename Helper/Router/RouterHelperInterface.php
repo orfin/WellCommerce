@@ -12,6 +12,8 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Helper\Router;
 
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+
 /**
  * Interface RouterHelperInterface
  *
@@ -81,14 +83,15 @@ interface RouterHelperInterface
     public function getRedirectToActionUrl($action, array $params = []);
 
     /**
-     * Generates an absolute url
+     * Generates an url
      *
-     * @param string $routeName
-     * @param array  $routeParams
+     * @param       $routeName
+     * @param array $routeParams
+     * @param int   $referenceType
      *
-     * @return string
+     * @return mixed
      */
-    public function generateUrl($routeName, array $routeParams = []);
+    public function generateUrl($routeName, array $routeParams = [], $referenceType = UrlGeneratorInterface::ABSOLUTE_URL);
 
     /**
      * @return \Symfony\Component\Routing\Route
