@@ -35,6 +35,9 @@ security:
             logout:
                 path:   front.client.logout
                 target: front.client.login
+            guard:
+                authenticators:
+                    - oauth.authentificator.facebook
 
     access_control:
         - { path: ^/admin/user/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
