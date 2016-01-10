@@ -152,6 +152,9 @@ liip_imagine:
         largest:
             filters:
                 thumbnail: { size: [1200, 1200], mode: outbound }
+        original:
+            filters:
+              strip: ~
 
 services:
     knp.doctrine_behaviors.blameable_subscriber.user_callable:
