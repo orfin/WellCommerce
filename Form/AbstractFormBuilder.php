@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form;
 
+use Doctrine\Common\Util\Debug;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
 use WellCommerce\Bundle\CoreBundle\EventDispatcher\EventDispatcherInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
@@ -66,8 +67,8 @@ abstract class AbstractFormBuilder extends AbstractContainerAware implements For
     {
         $form = $this->getFormService($options);
         $this->buildForm($form);
-        $this->formHandler->initForm($form, $defaultData);
         $this->eventDispatcher->dispatchOnFormInitEvent($this, $form);
+        $this->formHandler->initForm($form, $defaultData);
 
         return $form;
     }
