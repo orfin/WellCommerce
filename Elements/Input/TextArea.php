@@ -13,6 +13,8 @@
 namespace WellCommerce\Component\Form\Elements\Input;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use WellCommerce\Component\Form\Elements\Attribute;
+use WellCommerce\Component\Form\Elements\AttributeCollection;
 use WellCommerce\Component\Form\Elements\ElementInterface;
 
 /**
@@ -41,5 +43,15 @@ class TextArea extends TextField implements ElementInterface
 
         $resolver->setAllowedTypes('rows', 'int');
         $resolver->setAllowedTypes('cols', 'int');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function prepareAttributesCollection(AttributeCollection $collection)
+    {
+        parent::prepareAttributesCollection($collection);
+        $collection->add(new Attribute('iCols', $this->getOption('cols')));
+        $collection->add(new Attribute('iRows', $this->getOption('rows')));
     }
 }

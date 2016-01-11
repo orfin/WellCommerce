@@ -107,5 +107,6 @@ abstract class AbstractField extends AbstractContainer
     {
         parent::prepareAttributesCollection($collection);
         $collection->add(new Attribute('sValue', $this->value));
+        $collection->add(new Attribute('sComment', $this->getOption('comment')));
     }
 }
