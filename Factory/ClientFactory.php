@@ -35,9 +35,9 @@ class ClientFactory extends AbstractFactory
     public function create()
     {
         $clientDetails = new ClientDetails();
-        $clientDetails->setConditionsAccepted(true);
+        $clientDetails->setConditionsAccepted(false);
         $clientDetails->setDiscount(0);
-        $clientDetails->setNewsletterAccepted(true);
+        $clientDetails->setNewsletterAccepted(false);
         $clientDetails->setSalt(base_convert(sha1(uniqid(mt_rand(), true)), 16, 36));
 
         /** @var $client ClientInterface */
