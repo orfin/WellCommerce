@@ -22,7 +22,7 @@ WellCommerce\Bundle\ThemeBundle\Entity\ThemeCss:
             nullable: false
     manyToOne:
         theme:
-            targetEntity: WellCommerce\Bundle\ThemeBundle\Entity\Theme
+            targetEntity: WellCommerce\Bundle\ThemeBundle\Entity\ThemeInterface
             fetch: LAZY
             inversedBy: css
             joinColumns:
