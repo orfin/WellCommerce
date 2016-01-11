@@ -363,8 +363,8 @@ client:
             first_name: Imię
             last_name: Nazwisko
             street: Ulica
-            street_no: Numer ulicy
-            flat_no: Numer domu/lokalu
+            street_no: Numer budynku
+            flat_no: Numer lokalu
             province: Prowincja
             post_code: Kod pocztowy
             country: Państwo
