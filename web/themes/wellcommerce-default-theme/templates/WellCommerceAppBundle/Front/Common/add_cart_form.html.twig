@@ -1,0 +1,24 @@
+{% trans_default_domain "wellcommerce" %}
+<form class="form-horizontal">
+    <input type="hidden" id="product" value="{{ product.id }}"/>
+    <input type="hidden" id="attribute" value="0"/>
+    {% for group in attributeGroups %}
+        <div class="form-group">
+            <label class="col-md-4 col-sm-3 control-label">{{ group.name }}</label>
+            <div class="col-md-8 col-sm-9">
+                <select class="form-control attribute">
+                    {% for valueId, valueName in group.values %}
+                        <option value="{{ valueId }}">{{ valueName }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    {% endfor %}
+    <div class="form-group">
+        <label for="quantity" class="col-md-4 col-sm-3 control-label">{% trans %}product.label.quantity{% endtrans %}</label>
+        <div class="col-md-8 col-sm-9">
+            <input type="number" id="quantity" class="form-control" value="1" />
+        </div>
+    </div>
+    <button class="btn btn-primary btn-block text-left" id="add-cart">{% trans %}cart.button.add{% endtrans %}<img src="{{ asset('themes/wellcommerce-default-theme/assets/img/add-to-cart.png') }}" class="pull-right" /></button>
+</form>
