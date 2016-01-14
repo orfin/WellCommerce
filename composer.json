@@ -47,7 +47,6 @@
         "react/child-process": "0.5.*@dev",
         "knplabs/packagist-api": "1.*@dev",
         "mcuelenaere/composer-revision-plugin": "0.1.*",
-        "hoa/websocket": "2.*@dev",
         "devristo/phpws": "dev-master",
         "nesbot/carbon": "dev-master",
         "egeloen/lucene-search-bundle": "^2.0@dev",
