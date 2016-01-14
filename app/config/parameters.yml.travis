@@ -30,6 +30,9 @@ parameters:
 
     php_binary_path: ~
 
+    facebook_app_id: ~
+    facebook_app_secret: ~
+
     pdo.db_options:
       db_table:    session
       db_id_col:   session_id
