@@ -16,9 +16,20 @@
             {{ macros.element(element) }}
         {% endfor %}
 
-        <div class="clearfix">
-            <a href="{{ path('front.client_password.reset') }}" class="btn btn-link nopadding notransform">{% trans %}client.link.password_forgotten{% endtrans %}</a>
-            <button type="submit" class="btn btn-primary pull-right">{% trans %}client.button.login{% endtrans %}</button>
+        <div class="row">
+        	<div class="col-sm-6">
+            	<a href="{{ path('front.client_password.reset') }}" class="btn btn-link nopadding notransform">{% trans %}client.link.password_forgotten{% endtrans %}</a>
+            </div>
+			<div class="col-sm-6">
+	            <div class="btn-group btn-group-justified" role="group">
+					<div class="btn-group" role="group">
+	                    <button type="submit" class="btn btn-primary pull-right">{% trans %}client.button.login{% endtrans %}</button>
+					</div>
+					<div class="btn-group btn-group-fb" role="group">
+	                    <a href="#" class="btn btn-fb"><i class="fa fa-facebook"></i></a>
+					</div>
+				</div>
+			</div>
         </div>
     {{ macros.form_end(form) }}
 
