@@ -26,6 +26,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
+use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 use WellCommerce\Bundle\CoreBundle\Helper\Router\RouterHelperInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface;
 
@@ -130,7 +131,7 @@ class FacebookAuthenticator extends AbstractGuardAuthenticator
         /** @var $client ClientInterface */
         $client = $this->clientManager->initResource();
         $client->getClientDetails()->setUsername($email);
-        $client->getClientDetails()->setPassword($this->generateRandomPassword());
+        $client->getClientDetails()->setPassword(Helper::generateRandomPassword());
 
         $client->getContactDetails()->setEmail($email);
         $client->getContactDetails()->setFirstName($firstName);
@@ -141,17 +142,6 @@ class FacebookAuthenticator extends AbstractGuardAuthenticator
         $this->clientManager->createResource($client);
 
         return $client;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function generateRandomPassword($length = 8)
-    {
-        $chars    = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-=+;:,.?";
-        $password = substr(str_shuffle($chars), 0, $length);
-
-        return $password;
     }
 
     public function checkCredentials($credentials, UserInterface $user)
