@@ -100,7 +100,6 @@ parameters:
         WellCommerce\Bundle\PaymentBundle\DataFixtures\ORM\LoadPaymentMethodData: true
         WellCommerce\Bundle\PageBundle\DataFixtures\ORM\LoadPageData: true
     knp.doctrine_behaviors.blameable_listener.user_entity: WellCommerce\AdminBundle\Entity\User
-    knp.doctrine_behaviors.blameable_subscriber.user_callable.class: WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Blameable\UserCallable
 
 well_commerce_app:
     services:
@@ -157,11 +156,6 @@ liip_imagine:
               strip: ~
 
 services:
-    knp.doctrine_behaviors.blameable_subscriber.user_callable:
-        class:           "%knp.doctrine_behaviors.blameable_subscriber.user_callable.class%"
-        arguments:
-            - "@security.token_storage"
-        public:  false
     doctrine.cache:
         class: %doctrine_cache.file_system.class%
         arguments: ["%kernel.root_dir%/cache/%kernel.environment%/doctrine"]
