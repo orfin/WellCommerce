@@ -27,11 +27,11 @@ parameters:
     developer_mode.ip: 127.0.0.1
 
     search_engine: lucene
-
-    php_binary_path: ~
-
     facebook_app_id: ~
     facebook_app_secret: ~
+    php_binary_path: ~
+
+
 
     pdo.db_options:
       db_table:    session

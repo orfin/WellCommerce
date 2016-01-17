@@ -81,6 +81,21 @@ class Helper
     }
 
     /**
+     * Generates a random password for given length
+     *
+     * @param int $length
+     *
+     * @return string
+     */
+    public static function generateRandomPassword($length = 8)
+    {
+        $chars    = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-=+;:,.?";
+        $password = substr(str_shuffle($chars), 0, $length);
+
+        return $password;
+    }
+
+    /**
      * Returns an array of values flattened to dot notation
      *
      * @param array $data
