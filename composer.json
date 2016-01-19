@@ -52,7 +52,8 @@
         "egeloen/lucene-search-bundle": "^2.0@dev",
         "zendframework/zend-json": "^2.6@dev",
         "mmoreram/simple-doctrine-mapping": "^1.1",
-        "league/oauth2-facebook": "~1.0"
+        "league/oauth2-facebook": "~1.0",
+        "memio/memio": "^1.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0@dev",

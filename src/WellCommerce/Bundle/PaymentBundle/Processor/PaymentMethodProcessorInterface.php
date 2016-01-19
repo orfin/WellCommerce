@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\PaymentBundle\Processor;
 
 use Doctrine\Common\Collections\Collection;
+use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
 use WellCommerce\Component\Form\Dependencies\DependencyInterface;
 use WellCommerce\Component\Form\Elements\ElementInterface;
 use WellCommerce\Component\Form\FormBuilderInterface;
@@ -54,4 +55,19 @@ interface PaymentMethodProcessorInterface
      * @return array
      */
     public function processConfiguration(Collection $collection);
+
+    /**
+     * @param PaymentInterface $payment
+     */
+    public function executePayment(PaymentInterface $payment);
+
+    /**
+     * @param PaymentInterface $payment
+     */
+    public function confirmPayment(PaymentInterface $payment);
+
+    /**
+     * @param PaymentInterface $payment
+     */
+    public function cancelPayment(PaymentInterface $payment);
 }

@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\PaymentBundle\Processor;
 
 use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
+use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodConfigurationInterface;
 use WellCommerce\Component\Form\Dependencies\DependencyInterface;
 use WellCommerce\Component\Form\Elements\ElementInterface;
@@ -67,5 +68,29 @@ abstract class AbstractPaymentProcessor extends AbstractContainerAware implement
         });
 
         return $config;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function executePayment(PaymentInterface $payment)
+    {
+        return false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function confirmPayment(PaymentInterface $payment)
+    {
+        return false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function cancelPayment(PaymentInterface $payment)
+    {
+        return false;
     }
 }

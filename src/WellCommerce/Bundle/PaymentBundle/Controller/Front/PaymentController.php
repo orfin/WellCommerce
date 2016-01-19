@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\PaymentBundle\Controller\Front;
 
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
+use WellCommerce\Bundle\OrderBundle\Exception\OrderNotFoundException;
 
 /**
  * Class PaymentController
@@ -30,14 +31,16 @@ class PaymentController extends AbstractFrontController
     public function indexAction()
     {
         try {
-            $order = $this->manager->findOrder();
-            $this->manager->registerPayment($order);
-        } catch (\Exception $e) {
+            $order   = $this->manager->findOrder();
+            $payment = $this->manager->createPayment($order);
+        } catch (OrderNotFoundException $e) {
             return $this->redirectToRoute('front.home_page.index');
         }
 
         $processor     = $this->getProcessor($order);
         $configuration = $processor->processConfiguration($order->getPaymentMethod()->getConfiguration());
+
+        $processor->executePayment($payment);
 
         return $this->displayTemplate($processor->getAlias(), [
             'order'         => $order,

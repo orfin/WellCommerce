@@ -38,30 +38,44 @@ abstract class AbstractAutoRegisterServicesPass implements CompilerPassInterface
             $factoryClass    = $config['auto_services']['factory'];
             $entityClass     = $config['orm_configuration']['entity'];
 
-            if (null !== $repositoryClass) {
-                $this->registerRepository($moduleName, $repositoryClass, $entityClass, $container);
-            }
-
-            if (null !== $factoryClass) {
-                $this->registerFactory($moduleName, $factoryClass, $entityClass, $container);
-            }
-
+            $this->registerRepository($moduleName, $repositoryClass, $entityClass, $container);
+            $this->registerFactory($moduleName, $factoryClass, $entityClass, $container);
         }
     }
 
-    protected function registerFactory($name, $factoryClass, $entityClass, ContainerBuilder $container)
+    /**
+     * Automatic registration of factory service
+     *
+     * @param string           $name
+     * @param string|null      $factoryClass
+     * @param string           $entityClass
+     * @param ContainerBuilder $container
+     */
+    protected function registerFactory($name, $factoryClass = null, $entityClass, ContainerBuilder $container)
     {
-        $definition = new Definition($factoryClass);
-        $definition->addArgument($entityClass);
-        $container->setDefinition($name . '.factory', $definition);
+        if (null !== $factoryClass) {
+            $definition = new Definition($factoryClass);
+            $definition->addArgument($entityClass);
+            $container->setDefinition($name . '.factory', $definition);
+        }
     }
 
-    protected function registerRepository($name, $repositoryClass, $entityClass, ContainerBuilder $container)
+    /**
+     * Automatic registration of factory service
+     *
+     * @param string           $name
+     * @param string|null      $repositoryClass
+     * @param string           $entityClass
+     * @param ContainerBuilder $container
+     */
+    protected function registerRepository($name, $repositoryClass = null, $entityClass, ContainerBuilder $container)
     {
-        $definition = new Definition($repositoryClass);
-        $definition->setFactory([new Reference('doctrine.orm.entity_manager'), 'getRepository']);
-        $definition->addArgument($entityClass);
+        if (null !== $repositoryClass) {
+            $definition = new Definition($repositoryClass);
+            $definition->setFactory([new Reference('doctrine.orm.entity_manager'), 'getRepository']);
+            $definition->addArgument($entityClass);
 
-        $container->setDefinition($name . '.repository', $definition);
+            $container->setDefinition($name . '.repository', $definition);
+        }
     }
 }

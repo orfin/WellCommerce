@@ -25,5 +25,9 @@
         <service id="app.command.install" class="WellCommerce\Bundle\AppBundle\Command\InstallCommand">
             <tag name="console.command" />
         </service>
+
+        <service id="app.command.generate_entities_extra" class="WellCommerce\Bundle\AppBundle\Command\GenerateEntitiesExtraCommand">
+            <tag name="console.command" />
+        </service>
     </services>
 </container>

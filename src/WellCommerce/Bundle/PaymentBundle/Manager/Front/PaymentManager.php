@@ -12,10 +12,11 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\Manager\Front;
 
-use WellCommerce\Bundle\AppBundle\Exception\OrderNotFoundException;
 use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
+use WellCommerce\Bundle\OrderBundle\Exception\OrderNotFoundException;
 use WellCommerce\Bundle\OrderBundle\Repository\OrderRepositoryInterface;
+use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
 
 /**
  * Class PaymentManager
@@ -45,7 +46,7 @@ class PaymentManager extends AbstractFrontManager implements PaymentManagerInter
         $id    = $this->getRequestHelper()->getSessionAttribute('orderId');
         $order = $this->orderRepository->find($id);
 
-        if (null === $order) {
+        if (!$order instanceof OrderInterface) {
             throw new OrderNotFoundException($id);
         }
 
@@ -55,23 +56,15 @@ class PaymentManager extends AbstractFrontManager implements PaymentManagerInter
     /**
      * {@inheritdoc}
      */
-    public function registerPayment(OrderInterface $order)
+    public function createPayment(OrderInterface $order)
     {
         $payment = $this->repository->findOneBy(['order' => $order]);
-        if (null === $payment) {
-            $this->createPayment($order);
+        if (!$payment instanceof PaymentInterface) {
+            $payment = $this->getFactory()->create();
+            $payment->setOrder($order);
+            $this->createResource($payment);
         }
-    }
 
-    /**
-     * Creates a payment for order
-     *
-     * @param OrderInterface $order
-     */
-    protected function createPayment(OrderInterface $order)
-    {
-        $payment = $this->getFactory()->create();
-        $payment->setOrder($order);
-        $this->createResource($payment);
+        return $payment;
     }
 }

@@ -25,12 +25,14 @@ interface PaymentManagerInterface
      * Finds order by its id or throws an exception
      *
      * @return OrderInterface
-     * @throws \WellCommerce\Bundle\AppBundle\Exception\OrderNotFoundException
+     * @throws \WellCommerce\Bundle\OrderBundle\Exception\OrderNotFoundException
      */
     public function findOrder();
 
     /**
      * @param OrderInterface $order
+     *
+     * @return \WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface
      */
-    public function registerPayment(OrderInterface $order);
+    public function createPayment(OrderInterface $order);
 }
