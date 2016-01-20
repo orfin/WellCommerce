@@ -55,6 +55,9 @@ wellcommerce_news:
 wellcommerce_admin:
     resource: "@WellCommerceAdminBundle/Resources/config/routing.xml"
 
+wellcommerce_oauth:
+    resource: "@WellCommerceOAuthBundle/Resources/config/routing.xml"
+
 wellcommerce_order:
     resource: "@WellCommerceOrderBundle/Resources/config/routing.xml"
 
