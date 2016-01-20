@@ -101,7 +101,7 @@ WellCommerce\Bundle\PageBundle\Entity\Page:
                         referencedColumnName: id
             orderBy: null
         shops:
-            targetEntity: WellCommerce\Bundle\ShopBundle\Entity\Shop
+            targetEntity: WellCommerce\Bundle\ShopBundle\Entity\ShopInterface
             fetch: LAZY
             joinTable:
                 name: shop_page
