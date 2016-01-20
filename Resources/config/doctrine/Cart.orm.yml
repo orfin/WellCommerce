@@ -55,7 +55,7 @@ WellCommerce\Bundle\CartBundle\Entity\Cart:
                     referencedColumnName: id
                     onDelete: SET NULL
         shop:
-            targetEntity: WellCommerce\Bundle\ShopBundle\Entity\Shop
+            targetEntity: WellCommerce\Bundle\ShopBundle\Entity\ShopInterface
             fetch: LAZY
             joinColumns:
                 shop_id:
