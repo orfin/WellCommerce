@@ -1,0 +1,687 @@
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
+
+form:
+    help:
+        required_fields: '* required fields'
+
+common:
+    button:
+        add: Add
+        save: 'Save changes'
+        save_and_finish: 'Save and finish'
+        save_and_continue: 'Save and continue'
+        save_and_add_another: 'Save and add another'
+        back: Return
+    help:
+        required_fields: '* required fields'
+    fieldset:
+        required_data: General settings
+        general_settings: General settings
+        translations: Translations
+        shops: Shops
+        prices: Prices
+        discount_settings: Discount settings
+        general: General
+        photos: Photos
+        meta: Meta
+        shops: Shops
+        categories: Categories
+        description: Description
+        prices: Prices
+    label:
+        id: ID
+        name: Name
+        currency: Currency
+        short_description: Short description
+        description: Description
+        code: Code
+        slug: Slug
+        group: Group
+        discount: Discount
+        created_at: Created at
+        updated_at: Updated at
+        valid_from: Valid from
+        valid_to: Valid to
+        enabled: Enabled
+        preview: Preview
+        extension: Extension
+        mime: MIME
+        size: Size
+        publish: Published
+        hierarchy: Hierarchy
+        password: Password
+        producer: Producer
+        tax: Tax
+        stock: Stock
+        categories: Categories
+        sku: SKU
+        default_order_status: Default order status
+        url: URL address
+        shops: Available in shops
+        meta:
+            title: Meta title
+            keywords: Meta keywords
+            description: Meta description
+        dimension:
+            width: Width
+            height: Height
+            depth: Depth
+            length: Length
+            weight: Weight
+        phone: Phone
+        secondary_phone: Secondary phone
+        email: E-mail
+        price: Price
+        discounted_price: Discounted price
+        gross_price: Gross price
+        net_price: Net price
+        first_name: First name
+        last_name: Last name
+        client_group: Client group
+
+address:
+    heading:
+        billing_address: Billing address
+        shipping_address: Shipping address
+    label:
+        copy_address: Shipping address same as billing address
+        addresses: Addresses
+        street: Street
+        street_no: Street no.
+        flat_no: Flat no.
+        province: Province
+        post_code: Post code
+        country: Country
+        city: City
+
+contact_details:
+    heading:
+        details: Contact details
+    label:
+        first_name: First name
+        last_name: Last name
+
+
+price:
+    sell_price:
+        net:    Sell price net
+        gross:  Sell price gross
+    buy_price:
+        net: Buy price net
+        gross: Buy price gross
+    discounted_price:
+        net: Discounted price net
+        gross: Discounted price gross
+        discount:   Discount
+
+attribute:
+    heading:
+        index: Attributes
+        add: Add attribute
+        edit: Edit attribute
+
+attribute_group:
+    heading:
+        index: Attribute groups
+        add: Add group
+        edit: Edit group
+
+attribute_value:
+    heading:
+        index: Attribute values
+        add: Add values
+        edit: Edit values
+
+availability:
+    heading:
+        index: Availability statuses
+        add: Add a status
+        edit: Edit a status
+
+category:
+    form:
+        fieldset:
+            general: General
+            meta: Meta
+            shops: Shops
+            description: Description
+    label:
+        shops: Available in shops
+        hierarchy: Hierarchy
+        enabled: Enabled
+        name: Name
+        slug: Slug
+        parent: Parent category
+        short_description: Short description
+        description: Description
+    heading:
+        index: Categories
+        add: Create a new category
+        edit: Edit category
+
+deliverer:
+    heading:
+        index: Deliverers
+        add: Create a new deliverer
+        edit: Edit deliverer
+
+product_search:
+    heading:
+        index: Search results
+    label:
+        phrase: Enter search phrase
+
+product_status:
+    heading:
+        index: Products statuses
+        add: Add a new products status
+        edit: Edit the products status
+    label:
+        css_class: CSS class
+
+review:
+    heading:
+        index: Reviews
+    label:
+        rating: Rating
+        nick: Name or nickname
+        review: Review
+    button:
+        add_opinion: Submit review
+    link:
+        first_review: Be first to submit a review
+
+product:
+    form:
+        fieldset:
+            general: General
+            meta: Meta
+            categories: Categories
+            prices: Prices
+            stock: Stock settings
+            photos: Photos
+            statuses: Statuses
+            attributes: Variants
+            shops: Shops
+            description: Description
+    comment:
+        enabled: Enable product's visibility
+    heading:
+        index: Products
+        add: Add a product
+        edit: Edit a product
+    label:
+        id: ID
+        name: Name
+        slug: Slug
+        enabled: Enabled
+        sku: SKU
+        statuses: Product's statuses
+        shops: Available in shops
+        categories: Categories
+        gross_amount: Gross price
+        stock: Stock
+        weight: Weight
+        producer: Producer
+        currency: Currency
+        manufactured_by: by
+        shipping_cost: Shipping costs
+        availability: Product's availability
+        quantity: Quantity
+        unit: Unit
+        package_size: Package size
+        track_stock: Track stock
+        buy_price:
+            settings: Buy prices configuration
+            currency: Currency
+            tax: Tax
+            gross_amount: Gross price
+            discounted_gross_amount: Special gross price
+        sell_price:
+            settings: Sell prices configuration
+            currency: Currency
+            tax: Tax
+            gross_amount: Standard price
+            discounted_gross_amount: Discounted price
+            discount_valid_from: Valid from
+            discount_valid_to: Valid to
+        dimension:
+            width: Width
+            height: Height
+            depth: Depth
+        layered_navigation:
+            price: Filter by price
+            brand: Filter by brand
+        short_description: Short description
+        description: Description
+    button:
+        filter: Filter results
+    heading:
+        recommendations: 'You might also like'
+    options:
+        label:
+            order: Sort by
+            view: View as
+            limit: Show per page
+            grid_view: Grid
+            list_view: List
+        order_by:
+            name:
+                asc: Name - from A to Z
+                desc: Name - from Z to A
+            final_price:
+                asc: Price - from lowest to highest
+                desc: Price - from highest to lowest
+            score:
+                asc: Best match
+        limit:  Show per page
+        view_type:
+            list: List view
+            grid: Grid view
+
+producer:
+    heading:
+        index: Producers
+        add: Add a producer
+        edit: Edit a producer
+    fieldset:
+        deliverers: Deliverers
+    label:
+        deliverers: Deliverers
+
+unit:
+    heading:
+        index: Units of measure
+        add: Add a unit of measure
+        edit: Edit a unit of measure
+
+user:
+    heading:
+        index: Users
+        add: Add user
+        edit: Edit user
+    button:
+        log_in: Log in
+    label:
+        id: ID
+        username: Username
+        password: Password
+        email: E-mail
+        first_name: First name
+        last_name: Last name
+        enabled: Enabled
+
+user_group:
+    heading:
+        index: Users groups
+        add: Add an user group
+        edit: Edit users group
+    label:
+        permissions: Permissions
+
+common:
+    label:
+        id: ID
+        name: Name
+        slug: Slug
+        created_at: Created at
+        updated_at: Updated at
+        enabled: Enabled
+        hierarchy: Hierarchy
+        address: Address
+        street: Street
+        street_no: Street no.
+        flat_no: Flat no.
+        province: Province
+        post_code: Post code
+        country: Country
+        phone: Phone
+        secondary_phone: Secondary phone
+        email: E-mail
+        meta_title: Meta title
+        meta_description: Meta description
+        meta_keywords: Meta keywords
+
+client:
+    label:
+        username: Login (e-mail)
+        password: Password
+        confirm_password: Confirm password
+        new_password: New password
+        accept_conditions: Accept store conditions
+        accept_newsletter: Sign up for our newsletter
+        contact_details:
+            first_name: First name
+            last_name: Last name
+            phone: Phone
+            secondary_phone: Secondary phone
+            email: E-mail
+        address:
+            first_name: First name
+            last_name: Last name
+            street: Street
+            street_no: Street no.
+            flat_no: Flat no.
+            province: Province
+            post_code: Post code
+            country: Country
+            city: City
+            copy_address: Shipping address same as billing address
+    heading:
+        index: Clients
+        add: Create a client
+        edit: Edit client
+        login: 'Sign in'
+        register: 'Sign up'
+        contact_details: 'Contact details'
+        footer_links: 'Your account'
+        contact_details: Contact details
+        billing_address: Billing address
+        shipping_address: Shipping address
+        reset_password: Reset password
+        change_password: Change password
+    link:
+        login: 'Sign in or Sign up'
+        register: 'Sign up'
+        logout: Logout
+        orders: Orders
+        address_book: Addressess
+        settings: Settings
+        wishlist: Wishlist
+        password_forgotten: 'Reset password'
+    button:
+        login: 'Sign in'
+        register: 'Sign up'
+        reset_password: 'Confirm password reset'
+        change_password: 'Change password'
+    flash:
+        reset_password:
+            wrong_email: Wrong e-mail adress was given.
+            email_not_found: Such e-mail does not exists.
+            success: E-mail with reset instructions was sent.
+
+client_group:
+    heading:
+        index: Client groups
+        add: Create a client group
+        edit: Edit group
+    label:
+        total_clients: Total clients
+
+contact:
+    heading:
+        index: Contacts
+        add: Add a new contact
+        edit: Edit contact
+
+news:
+    heading:
+        index: News
+        add: Add a news
+        edit: Edit news
+
+page:
+    tip:
+        client_groups: Select all client groups which can see the page.
+    heading:
+        index: CMS pages
+        add: Add a new page
+        edit: Edit page
+    label:
+        parent: Parent category
+        client_groups: Visible for client groups
+        redirect:
+            type: Type of redirect
+            url: Redirect to URL
+            route: Redirect to route
+            none: No redirect
+    fieldset:
+        redirect_settings: Redirect configuration
+
+company:
+    heading:
+        index: Companies
+        add: Add a company
+        edit: Edit a company
+    label:
+        name: Full name
+        short_name: Short name
+
+shop:
+    heading:
+        index: Shops
+        add: Add a shop
+        edit: Edit a shop
+    fieldset:
+        mailer_configuration: Mailer configuration
+        url_configuration: URL configuration
+        cart_configuration: Cart configuration
+    label:
+        company: Company
+        url: URL
+        theme: Default theme
+        default_country: Default country
+        default_currency: Default currency
+        mailer_configuration:
+            from: Sender (e-mail)
+            host: SMTP host
+            port: SMTP port
+            user: SMTP username
+            pass: SMTP password
+
+currency:
+    heading:
+        index: Currencies
+        add: Add a currency
+        edit: Edit a currency
+    button:
+        sync: Synchronize exchange rates
+    label:
+        code: Code
+
+locale:
+    heading:
+        index: Locales
+        add: Add a locale
+        edit: Edit a locale
+    label:
+        code: Code
+        currency: Default currency
+
+dictionary:
+    heading:
+        index: Translations
+        add: Add a translation
+        edit: Edit a translation
+    label:
+        identifier: Identifier
+        translation: Translation
+        locale: Locale
+    button:
+        add: Add new translation
+        sync: Synchronize translations
+
+tax:
+    heading:
+        index: Tax rates
+        add: Add a tax rate
+        edit: Edit a tax rate
+    label:
+        value: Tax rate
+
+channel:
+    heading:
+        index: Channel
+        add: Add a new channel
+    label:
+        name: Name
+        url: URL
+
+package:
+    heading:
+        index: Packages
+    button:
+        sync: Synchronize packages
+    label:
+        name: Name
+        full_name: Full name
+        vendor: Vendor
+        local_version: Local version
+        remote_version: Remote version
+        created_at: Installed at
+        updated_at: Updated at
+
+theme:
+    heading:
+        index: Themes
+        add: Add a theme
+        edit: Edit theme
+    label:
+        folder: Folder
+
+layout_box:
+    heading:
+        index: Layout boxes
+        add: Add a layout box
+        edit: Edit layout box
+    label:
+        type: Type
+        identifier: Identifier
+
+
+coupon:
+    heading:
+        index: Coupons
+        add: Add a coupon
+        edit: Edit a coupon
+    fieldset:
+        discount_settings: Discounts configuration
+    label:
+        client_usage_limit: Usage limit for clients
+        global_usage_limit: Global usage limit
+        modifier_type: Type of modifier
+        modifier_value: Value of modifier
+        modifier_type_percent: '%'
+        modifier_type_subtract: '-'
+
+sales_report:
+    heading:
+        sales: Sales summary
+    label:
+        sales: Sales
+        clients: Clients
+        orders: Orders
+        today: today
+        current_month: current month
+
+cart:
+    flash:
+        added: was added to cart
+    button:
+        add: Add to cart
+    link:
+        checkout: Go to checkout
+    heading:
+        index: Cart
+        recommendations: 'You might also like'
+    table:
+        heading:
+            product: Product
+            price: Price
+            quantity: Quantity
+            total: Total
+    error:
+        no_available_methods: There are no available shipping and/or payment options for this cart
+
+order:
+    form:
+        fieldset:
+            products: Products
+    heading:
+        index: Orders
+        edit: Edit order
+        address: Address
+        confirmation: Confirmation
+        order_total: Summary
+    button:
+        confirm: Go to confirmation
+        add_product: Add product
+    heading:
+        address: Billing & shipping address
+        contact_details: Contact details
+    label:
+        id: ID
+        order_no: Order no.
+        client: Client
+        product_total: Products value
+        shipping_total: Shipping cost
+        order_total: Total value
+        variant: Variant
+        weight: Weight
+        quantity: Qty
+        stock: Stock
+        tax_rate: Tax rate
+        current_status: Status
+        created_at: Placed on
+        comment: Additional comments
+        shipping_method: Shipping method
+        payment_method: Payment method
+        product_name: Product
+        tax_value: Tax
+        gross_amount: Price
+        gross_total: Total
+        currency: Currency
+        order_total:
+            shipping: Shipping total
+    description:
+        product_total: Total products value
+        shipping_cost: Shipping costs
+
+order_status:
+    heading:
+        index: Order statuses
+        add: Add a new order status
+        edit: Edit an order status
+
+order_status_group:
+    heading:
+        index: Order status groups
+        add: Add a new order status group
+        edit: Edit an order status group
+
+payment:
+    flash:
+        thank_you: "Thank you for placing an order. Below are the order's details:"
+
+payment_method:
+    heading:
+        index: Payment methods
+        add: Add a payment method
+        edit: Edit a payment method
+    fieldset:
+        shipping_methods: Shipping methods
+    label:
+        processor: Payment processor
+        shipping_methods: Allowed shipping methods
+    bank_transfer:
+        tip: 'Your order will be processed upon receiving of the payment at the following bank account'
+        account: Account number
+        sort_number: Sort code
+        title: 'Transfer title'
+
+shipping_method:
+    heading:
+        index: Shipping methods
+        add: Add a shipping method
+        edit: Edit a shipping method
+    label:
+        calculator: Type of costs calculation
+        costs: Shipping costs
+    fieldset:
+        costs: Shipping costs settings
