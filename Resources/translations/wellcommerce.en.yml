@@ -402,9 +402,9 @@ client:
         change_password: 'Change password'
     flash:
         reset_password:
-            wrong_email: Podano niepoprawny adres e-mail.
-            email_not_found: Podany adres e-mail nie występuje w naszej bazie.
-            success: Wysłano e-mail z linkiem do zresetowania hasła.
+            wrong_email: Wrong e-mail adress was given.
+            email_not_found: Such e-mail does not exists.
+            success: E-mail with reset instructions was sent.
 
 client_group:
     heading:
