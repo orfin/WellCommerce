@@ -400,6 +400,11 @@ client:
         register: 'Sign up'
         reset_password: 'Confirm password reset'
         change_password: 'Change password'
+    flash:
+        reset_password:
+            wrong_email: Podano niepoprawny adres e-mail.
+            email_not_found: Podany adres e-mail nie występuje w naszej bazie.
+            success: Wysłano e-mail z linkiem do zresetowania hasła.
 
 client_group:
     heading:
