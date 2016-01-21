@@ -26,11 +26,11 @@ class ClientForgotPasswordManager extends AbstractFrontManager
     public function resetPassword($username)
     {
         if (false === filter_var($username, FILTER_VALIDATE_EMAIL)) {
-            throw new ResetPasswordException('Given e-mail address is not valid');
+            throw new ResetPasswordException('client.flash.reset_password.wrong_email');
         }
 
         if (null === $client = $this->findClient($username)) {
-            throw new ResetPasswordException(sprintf('Account for email %s was not found', $username));
+            throw new ResetPasswordException(sprintf('client.flash.reset_password.email_not_found', $username));
         }
 
         $this->setClientResetPasswordHash($client);

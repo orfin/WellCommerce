@@ -39,7 +39,7 @@ class ClientForgotPasswordBoxController extends AbstractBoxController
                 $this->manager->resetPassword($data['_username']);
                 $this->manager->getFlashHelper()->addSuccess('client.flash.reset_password.success');
             } catch (ResetPasswordException $e) {
-                $this->manager->getFlashHelper()->addError('client.flash.reset_password.error');
+                $this->manager->getFlashHelper()->addError($e->getMessage());
             }
 
             return $this->getRouterHelper()->redirectTo('front.client_password.reset');
