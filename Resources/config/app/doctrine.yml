@@ -32,8 +32,6 @@ doctrine:
         charset:  UTF8
         server_version: %doctrine.server_version%
     orm:
-        resolve_target_entities:
-            WellCommerce\Bundle\ThemeBundle\Entity\ThemeInterface: WellCommerce\Bundle\ThemeBundle\Entity\Theme
         auto_generate_proxy_classes: false
         entity_managers:
             default:
