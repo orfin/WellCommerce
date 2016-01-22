@@ -1,0 +1,6 @@
+WellCommerce\Bundle\AvailabilityBundle\Entity\Availability:
+    fields:
+        name:
+            type: string
+            length: 255
+            nullable: false

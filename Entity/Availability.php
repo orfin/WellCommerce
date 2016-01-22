@@ -23,7 +23,9 @@ use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
  */
 class Availability implements AvailabilityInterface
 {
-    use Translatable, Timestampable, Blameable;
+    use Translatable;
+    use Timestampable;
+    use Blameable;
 
     /**
      * @var int
