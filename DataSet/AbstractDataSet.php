@@ -123,6 +123,14 @@ abstract class AbstractDataSet implements DataSetInterface
     /**
      * {@inheritdoc}
      */
+    public function dispatchOnDataSetInitEvent()
+    {
+        $this->eventDispatcher->dispatchOnDataSetInitEvent($this);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function setDefaultContextOption($name, $value)
     {
         $this->defaultContextOptions[$name] = $value;
