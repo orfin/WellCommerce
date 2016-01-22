@@ -11,3 +11,5 @@ well_commerce_availability:
             orm_configuration:
                 mapping: "@WellCommerceAvailabilityBundle/Resources/config/doctrine/AvailabilityTranslation.orm.yml"
                 entity: WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityTranslation
+
+

@@ -69,4 +69,11 @@ interface DataSetInterface
      * @param DataSetConfiguratorInterface $resolver
      */
     public function configureOptions(DataSetConfiguratorInterface $configurator);
+
+    /**
+     * Dispatches the init event using event-dispatcher service
+     *
+     * @return void
+     */
+    public function dispatchOnDataSetInitEvent();
 }

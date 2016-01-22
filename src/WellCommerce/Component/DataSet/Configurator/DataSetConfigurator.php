@@ -36,6 +36,7 @@ class DataSetConfigurator implements DataSetConfiguratorInterface
     {
         $this->dataset = $dataset;
         $dataset->configureOptions($this);
+        $dataset->dispatchOnDataSetInitEvent();
     }
 
     /**

@@ -14,3 +14,8 @@ well_commerce_theme:
             orm_configuration:
                 mapping: "@WellCommerceThemeBundle/Resources/config/doctrine/ThemeCss.orm.yml"
                 entity: WellCommerce\Bundle\ThemeBundle\Entity\ThemeCss
+
+doctrine:
+    orm:
+        resolve_target_entities:
+            WellCommerce\Bundle\ThemeBundle\Entity\ThemeInterface: WellCommerce\Bundle\ThemeBundle\Entity\Theme

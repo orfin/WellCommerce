@@ -31,6 +31,14 @@ class AvailabilityFormBuilder extends AbstractFormBuilder
             'label' => $this->trans('common.fieldset.general')
         ]));
 
+        $requiredData->addChild($this->getElement('text_field', [
+            'name'  => 'name',
+            'label' => $this->trans('common.label.name'),
+            'rules' => [
+                $this->getRule('required')
+            ],
+        ]));
+
         $languageData = $requiredData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
             'label'       => $this->trans('form.fieldset.translations'),
