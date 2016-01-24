@@ -1,33 +1,29 @@
 <?php
+
 /*
  * WellCommerce Open-Source E-Commerce Platform
- * 
+ *
  * This file is part of the WellCommerce package.
  *
  * (c) Adam Piotrowski <adam@wellcommerce.org>
- * 
+ *
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\GeneratorBundle\Reflection;
+namespace WellCommerce\Bundle\CoreBundle\Helper\Reflection;
 
 use ReflectionClass;
 
 /**
- * Class ClassAnalyzer
+ * Class ReflectionHelper
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClassAnalyzer
+class ReflectionHelper implements ReflectionHelperInterface
 {
     /**
-     * Checks whether the class has trait
-     *
-     * @param ReflectionClass $class
-     * @param string          $traitName
-     *
-     * @return bool
+     * {@inheritdoc}
      */
     public function hasTrait(ReflectionClass $class, $traitName)
     {
@@ -35,12 +31,7 @@ class ClassAnalyzer
     }
 
     /**
-     * Checks whether the class has method
-     *
-     * @param ReflectionClass $class
-     * @param string          $methodName
-     *
-     * @return bool
+     * {@inheritdoc}
      */
     public function hasMethod(ReflectionClass $class, $methodName)
     {
@@ -48,12 +39,7 @@ class ClassAnalyzer
     }
 
     /**
-     * Checks whether the class has constant
-     *
-     * @param ReflectionClass $class
-     * @param string          $constantName
-     *
-     * @return bool
+     * {@inheritdoc}
      */
     public function hasConstant(ReflectionClass $class, $constantName)
     {
@@ -61,12 +47,7 @@ class ClassAnalyzer
     }
 
     /**
-     * Chacks whether the class has property
-     *
-     * @param ReflectionClass $class
-     * @param string          $propertyName
-     *
-     * @return bool
+     * {@inheritdoc}
      */
     public function hasProperty(ReflectionClass $class, $propertyName)
     {

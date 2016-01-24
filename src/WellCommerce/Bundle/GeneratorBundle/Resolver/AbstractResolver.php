@@ -48,16 +48,4 @@ abstract class AbstractResolver extends AbstractContainerAware
 
         return $configuration;
     }
-
-    /**
-     * Parses the config file
-     *
-     * @param \SplFileInfo $file
-     *
-     * @return array
-     */
-    protected function parseFile(\SplFileInfo $file)
-    {
-        return Yaml::parse($file->getContents());
-    }
 }

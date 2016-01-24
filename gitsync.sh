@@ -23,6 +23,7 @@ if [ "$action" == 'clear' ]
         git remote rm stree-dataset
         git remote rm stree-delivererbundle
         git remote rm stree-dictionarybundle
+        git remote rm stree-distributionbundle
         git remote rm stree-form
         git remote rm stree-generatorbundle
         git remote rm stree-layerednavigationbundle
@@ -69,6 +70,7 @@ if [ "$action" == 'clear' ]
         git branch -D stree-backports-dataset
         git branch -D stree-backports-delivererbundle
         git branch -D stree-backports-dictionarybundle
+        git branch -D stree-backports-distributionbundle
         git branch -D stree-backports-form
         git branch -D stree-backports-generatorbundle
         git branch -D stree-backports-layerednavigationbundle
@@ -80,7 +82,6 @@ if [ "$action" == 'clear' ]
         git branch -D stree-backports-oauthbundle
         git branch -D stree-backports-pagebundle
         git branch -D stree-backports-paymentbundle
-        git branch -D stree-backports-pluginbundle
         git branch -D stree-backports-producerbundle
         git branch -D stree-backports-productbundle
         git branch -D stree-backports-productstatusbundle
@@ -123,6 +124,7 @@ if [ "$action" == 'init' ]
         git stree add CurrencyBundle -P src/WellCommerce/Bundle/CurrencyBundle git@github.com:WellCommerce/CurrencyBundle.git
         git stree add DelivererBundle -P src/WellCommerce/Bundle/DelivererBundle git@github.com:WellCommerce/DelivererBundle.git
         git stree add DictionaryBundle -P src/WellCommerce/Bundle/DictionaryBundle git@github.com:WellCommerce/DictionaryBundle.git
+        git stree add DistributionBundle -P src/WellCommerce/Bundle/DistributionBundle git@github.com:WellCommerce/DistributionBundle.git
         git stree add GeneratorBundle -P src/WellCommerce/Bundle/GeneratorBundle git@github.com:WellCommerce/GeneratorBundle.git
         git stree add LayeredNavigationBundle -P src/WellCommerce/Bundle/LayeredNavigationBundle git@github.com:WellCommerce/LayeredNavigationBundle.git
         git stree add LayoutBundle -P src/WellCommerce/Bundle/LayoutBundle git@github.com:WellCommerce/LayoutBundle.git
@@ -133,7 +135,6 @@ if [ "$action" == 'init' ]
         git stree add OAuthBundle -P src/WellCommerce/Bundle/OAuthBundle git@github.com:WellCommerce/OAuthBundle.git
         git stree add OrderBundle -P src/WellCommerce/Bundle/OrderBundle git@github.com:WellCommerce/OrderBundle.git
         git stree add PaymentBundle -P src/WellCommerce/Bundle/PaymentBundle git@github.com:WellCommerce/PaymentBundle.git
-        git stree add PluginBundle -P src/WellCommerce/Bundle/PluginBundle git@github.com:WellCommerce/PluginBundle.git
         git stree add ProductBundle -P src/WellCommerce/Bundle/ProductBundle git@github.com:WellCommerce/ProductBundle.git
         git stree add ProductStatusBundle -P src/WellCommerce/Bundle/ProductStatusBundle git@github.com:WellCommerce/ProductStatusBundle.git
         git stree add ProducerBundle -P src/WellCommerce/Bundle/ProducerBundle git@github.com:WellCommerce/ProducerBundle.git
@@ -171,6 +172,7 @@ if [ "$action" == 'push' ]
         git stree push DataSet
         git stree push DelivererBundle
         git stree push DictionaryBundle
+        git stree push DistributionBundle
         git stree push Form
         git stree push GeneratorBundle
         git stree push LayeredNavigationBundle
@@ -182,7 +184,6 @@ if [ "$action" == 'push' ]
         git stree push OAuthBundle
         git stree push PageBundle
         git stree push PaymentBundle
-        git stree push PluginBundle
         git stree push ProducerBundle
         git stree push ProductBundle
         git stree push ProductStatusBundle

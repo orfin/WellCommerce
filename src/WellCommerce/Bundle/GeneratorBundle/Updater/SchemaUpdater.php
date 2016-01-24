@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\GeneratorBundle\Updater;
 
+use Symfony\Component\HttpKernel\KernelInterface;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
 
 /**
@@ -19,12 +20,18 @@ use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class SchemaUpdater extends AbstractContainerAware
+class SchemaUpdater
 {
+    protected $kernel;
+
+    public function __construct(KernelInterface $kernel)
+    {
+        $this->kernel = $kernel;
+    }
+
     public function execute()
     {
-        $kernel      = $this->container->get('kernel');
-        $application = new \Symfony\Bundle\FrameworkBundle\Console\Application($kernel);
+        $application = new \Symfony\Bundle\FrameworkBundle\Console\Application($this->kernel);
         $application->setAutoExit(false);
         $options = ['command' => 'doctrine:schema:update', '--force' => true];
         $application->run(new \Symfony\Component\Console\Input\ArrayInput($options));

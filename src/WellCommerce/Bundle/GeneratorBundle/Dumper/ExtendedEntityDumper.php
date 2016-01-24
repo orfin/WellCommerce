@@ -22,7 +22,7 @@ use Wingu\OctopusCore\CodeGenerator\PHP\OOP\ClassGenerator;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ExtendedEntityDumper implements EntityDumperInterface
+class ExtendedEntityDumper implements ExtendedEntityDumperInterface
 {
     /**
      * {@inheritdoc}

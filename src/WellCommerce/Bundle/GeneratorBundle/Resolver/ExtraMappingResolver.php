@@ -13,13 +13,14 @@
 namespace WellCommerce\Bundle\GeneratorBundle\Resolver;
 
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\Yaml\Yaml;
 
 /**
  * Class ExtraMappingResolver
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ExtraMappingResolver extends AbstractResolver
+class ExtraMappingResolver implements ExtraMappingResolverInterface
 {
     /**
      * @var string
@@ -82,10 +83,7 @@ class ExtraMappingResolver extends AbstractResolver
      */
     protected function getExtraMapping()
     {
-        $fileNamePattern   = 'extra.orm.yml';
-        $searchPathPattern = 'src/*/*/*/Resources/config';
-
-        return $this->parseFiles($fileNamePattern, $searchPathPattern);
+        return $this->parseFiles($this->extendedFileNamePattern, $this->extendedSearchPattern);
     }
 
     /**
@@ -95,10 +93,7 @@ class ExtraMappingResolver extends AbstractResolver
      */
     protected function getBaseMapping()
     {
-        $fileNamePattern   = '*.orm.yml';
-        $searchPathPattern = 'src/*/*/*/Resources/config/doctrine';
-
-        return $this->parseFiles($fileNamePattern, $searchPathPattern);
+        return $this->parseFiles($this->baseFileNamePattern, $this->baseSearchPattern);
     }
 
     /**
@@ -123,5 +118,17 @@ class ExtraMappingResolver extends AbstractResolver
         }
 
         return $mapping;
+    }
+
+    /**
+     * Parses the config file
+     *
+     * @param \SplFileInfo $file
+     *
+     * @return array
+     */
+    protected function parseFile(\SplFileInfo $file)
+    {
+        return Yaml::parse($file->getContents());
     }
 }

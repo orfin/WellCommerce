@@ -45,5 +45,7 @@
         </service>
 
         <service id="mailer.helper" class="WellCommerce\Bundle\CoreBundle\Helper\Mailer\MailerHelper" />
+
+        <service id="reflection.helper" class="WellCommerce\Bundle\CoreBundle\Helper\Reflection\ReflectionHelper" />
     </services>
 </container>

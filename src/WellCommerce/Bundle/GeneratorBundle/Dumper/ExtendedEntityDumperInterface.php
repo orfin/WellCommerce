@@ -15,11 +15,11 @@ namespace WellCommerce\Bundle\GeneratorBundle\Dumper;
 use Wingu\OctopusCore\CodeGenerator\PHP\OOP\ClassGenerator;
 
 /**
- * Interface EntityDumperInterface
+ * Interface ExtendedEntityDumperInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface EntityDumperInterface
+interface ExtendedEntityDumperInterface
 {
     /**
      * Dumps extended entity to file

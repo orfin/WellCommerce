@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\GeneratorBundle\Generator;
 
-use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
 use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 use WellCommerce\Bundle\GeneratorBundle\Dumper\EntityDumperInterface;
 use WellCommerce\Bundle\GeneratorBundle\Reflection\ClassAnalyzer;
@@ -24,13 +23,13 @@ use Wingu\OctopusCore\CodeGenerator\PHP\OOP\PropertyGenerator;
 use Wingu\OctopusCore\CodeGenerator\PHP\ParameterGenerator;
 
 /**
- * Class EntitiesExtraGenerator
+ * Class ExtendedEntityClassGenerator
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ExtendedEntityGenerator extends AbstractContainerAware
+class ExtendedEntityClassGenerator
 {
-    const EXTENDED_CLASS_SUFFIX = 'Extended';
+    const EXTENDED_ENTITY_CLASS_SUFFIX = 'Extended';
 
     /**
      * @var ClassAnalyzer
@@ -85,7 +84,7 @@ class ExtendedEntityGenerator extends AbstractContainerAware
      */
     protected function getExtendedEntityName(\ReflectionClass $baseEntity)
     {
-        return sprintf('%s%s', $baseEntity->getShortName(), self::EXTENDED_CLASS_SUFFIX);
+        return sprintf('%s%s', $baseEntity->getShortName(), self::EXTENDED_ENTITY_CLASS_SUFFIX);
     }
 
     /**

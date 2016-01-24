@@ -13,15 +13,15 @@
 namespace WellCommerce\Bundle\PaymentBundle;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\HttpKernel\Bundle\Bundle;
 use WellCommerce\Bundle\PaymentBundle\DependencyInjection\Compiler;
+use WellCommerce\Bundle\PluginBundle\Bundle\AbstractPluginAwareBundle;
 
 /**
  * Class WellCommercePaymentBundle
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class WellCommercePaymentBundle extends Bundle
+class WellCommercePaymentBundle extends AbstractPluginAwareBundle
 {
     public function build(ContainerBuilder $container)
     {
