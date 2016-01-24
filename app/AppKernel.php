@@ -10,8 +10,8 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
+use Symfony\Component\HttpKernel\Kernel;
 
 /**
  * Class AppKernel
@@ -57,6 +57,7 @@ class AppKernel extends Kernel
             new \WellCommerce\Bundle\LocaleBundle\WellCommerceLocaleBundle(),
             new \WellCommerce\Bundle\CompanyBundle\WellCommerceCompanyBundle(),
             new \WellCommerce\Bundle\ShopBundle\WellCommerceShopBundle(),
+            new \WellCommerce\Bundle\GeneratorBundle\WellCommerceGeneratorBundle(),
             new \WellCommerce\Bundle\LayeredNavigationBundle\WellCommerceLayeredNavigationBundle(),
             new \WellCommerce\Bundle\LayoutBundle\WellCommerceLayoutBundle(),
             new \WellCommerce\Bundle\MediaBundle\WellCommerceMediaBundle(),

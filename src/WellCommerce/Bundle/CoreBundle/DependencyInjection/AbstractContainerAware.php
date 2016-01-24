@@ -97,6 +97,22 @@ abstract class AbstractContainerAware
     }
 
     /**
+     * @return \Symfony\Component\HttpKernel\Bundle\BundleInterface[]
+     */
+    public function getBundles()
+    {
+        return $this->getKernel()->getBundles();
+    }
+
+    /**
+     * @return string
+     */
+    public function getConfigDir()
+    {
+        return $this->getKernel()->getRootDir() . '/config';
+    }
+
+    /**
      * @return \WellCommerce\Bundle\CoreBundle\Helper\Translator\TranslatorHelperInterface
      */
     public function getTranslatorHelper()
