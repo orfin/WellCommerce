@@ -8,3 +8,4 @@
 
 client:
     conditions_not_accepted: You must accept store conditions
+    email_not_unique: 'You have an account already. Please login first.'
