@@ -21,13 +21,15 @@ use WellCommerce\Bundle\AppBundle\Entity\MailerConfiguration;
  */
 interface MailerHelperInterface
 {
+
     /**
-     * Sends an e-mail message
+     * Sends an email
      *
      * @param string              $recipient
      * @param string              $title
-     * @param string              $body
+     * @param string              $template
+     * @param array               $parameters
      * @param MailerConfiguration $mailerConfiguration
      */
-    public function sendEmail($recipient, $title, $body, MailerConfiguration $mailerConfiguration);
+    public function sendEmail($recipient, $title, $template, array $parameters = [], MailerConfiguration $mailerConfiguration);
 }

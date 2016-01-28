@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\CoreBundle\Helper\Mailer;
 
 use Swift_Message as Message;
 use WellCommerce\Bundle\AppBundle\Entity\MailerConfiguration;
+use WellCommerce\Bundle\CoreBundle\Helper\Templating\TemplatingHelperInterface;
 
 /**
  * Class MailerHelper
@@ -23,19 +24,43 @@ use WellCommerce\Bundle\AppBundle\Entity\MailerConfiguration;
 class MailerHelper implements MailerHelperInterface
 {
     /**
+     * @var TemplatingHelperInterface
+     */
+    protected $templatingHelper;
+
+    /**
+     * MailerHelper constructor.
+     *
+     * @param TemplatingHelperInterface $templatingHelper
+     */
+    public function __construct(TemplatingHelperInterface $templatingHelper)
+    {
+        $this->templatingHelper = $templatingHelper;
+    }
+
+    /**
      * {@inheritdoc}
      */
-    public function sendEmail($recipient, $title, $body, MailerConfiguration $mailerConfiguration)
+    public function sendEmail($recipient, $title, $template, array $parameters = [], MailerConfiguration $mailerConfiguration)
     {
-        $mailer = $this->createMailer($mailerConfiguration);
+        $mailer  = $this->createMailer($mailerConfiguration);
+        $message = Message::newInstance();
 
-        $message = Message::newInstance()
-            ->setSubject($title)
-            ->setFrom($mailerConfiguration->getFrom())
-            ->setTo($recipient)
-            ->setBody($body, 'text/html');
+        $message->setSubject($title);
+        $message->setFrom($mailerConfiguration->getFrom());
+        $message->setTo($recipient);
+
+        $this->setBody($message, $template, $parameters);
 
         return $mailer->send($message);
+    }
+
+    protected function setBody(Message $message, $template, array $parameters = [])
+    {
+        $parameters['message'] = $message;
+        $body                  = $this->templatingHelper->render($template, $parameters);
+
+        $message->setBody($body, 'text/html');
     }
 
     /**

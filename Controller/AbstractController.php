@@ -101,7 +101,7 @@ abstract class AbstractController extends AbstractContainerAware implements Cont
      */
     protected function renderView($view, array $parameters = [])
     {
-        return $this->getTemplatingelper()->render($view, $parameters);
+        return $this->getTemplatingHelper()->render($view, $parameters);
     }
 
     /**
@@ -114,6 +114,6 @@ abstract class AbstractController extends AbstractContainerAware implements Cont
      */
     protected function displayTemplate($templateName, array $templateVars = [])
     {
-        return $this->getTemplatingelper()->renderControllerResponse($this, $templateName, $templateVars);
+        return $this->getTemplatingHelper()->renderControllerResponse($this, $templateName, $templateVars);
     }
 }

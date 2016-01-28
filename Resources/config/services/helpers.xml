@@ -44,6 +44,8 @@
             <argument type="service" id="kernel"/>
         </service>
 
-        <service id="mailer.helper" class="WellCommerce\Bundle\CoreBundle\Helper\Mailer\MailerHelper" />
+        <service id="mailer.helper" class="WellCommerce\Bundle\CoreBundle\Helper\Mailer\MailerHelper">
+            <argument type="service" id="templating.helper"/>
+        </service>
     </services>
 </container>

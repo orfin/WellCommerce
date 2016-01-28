@@ -179,7 +179,7 @@ abstract class AbstractContainerAware
     /**
      * @return \WellCommerce\Bundle\CoreBundle\Helper\Templating\TemplatingHelperInterface
      */
-    public function getTemplatingelper()
+    public function getTemplatingHelper()
     {
         return $this->get('templating.helper');
     }
