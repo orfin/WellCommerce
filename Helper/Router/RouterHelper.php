@@ -131,7 +131,16 @@ class RouterHelper implements RouterHelperInterface
      */
     public function redirectTo($route, array $routeParams = [])
     {
-        return new RedirectResponse($this->router->generate($route, $routeParams, true));
+        $url      = $this->router->generate($route, $routeParams, true);
+        $response = new RedirectResponse($url);
+        $response->setContent(
+            sprintf(
+                '<!DOCTYPE html><html><head></head><script>window.location.href = "%s";</script></html>',
+                htmlspecialchars($url, ENT_QUOTES, 'UTF-8')
+            )
+        );
+
+        return $response;
     }
 
     /**
