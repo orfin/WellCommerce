@@ -41,19 +41,12 @@ class UserManager extends AbstractAdminManager
         $user->setPassword($password);
         $this->updateResource($user);
 
-        $email = $user->getEmail();
-        $title = $this->getTranslatorHelper()->trans('user.email.title.reset_password');
-        $body  = $this->getEmailBody($password);
-        $shop  = $this->get('shop.context.admin')->getCurrentShop();
+        $email      = $user->getEmail();
+        $title      = $this->getTranslatorHelper()->trans('user.email.title.reset_password');
+        $template   = 'WellCommerceAdminBundle:Admin/Email:reset_password.html.twig';
+        $parameters = ['password' => $password];
+        $shop       = $this->get('shop.context.admin')->getCurrentShop();
 
-        $this->getMailerHelper()->sendEmail($email, $title, $body, $shop->getMailerConfiguration());
-    }
-
-    protected function getEmailBody($password)
-    {
-        return $this->getTemplatingelper()->render(
-            'WellCommerceAdminBundle:Admin/Email:reset_password.html.twig', [
-            'password' => $password
-        ]);
+        $this->getMailerHelper()->sendEmail($email, $title, $template, $parameters, $shop->getMailerConfiguration());
     }
 }
