@@ -133,6 +133,14 @@ class ShopFormBuilder extends AbstractFormBuilder
             ],
         ]));
 
+        $mailerConfiguration->addChild($this->getElement('password', [
+            'name'  => 'mailerConfiguration.pass',
+            'label' => $this->trans('shop.label.mailer_configuration.pass'),
+            'rules' => [
+                $this->getRule('required')
+            ],
+        ]));
+
         $form->addFilter($this->getFilter('no_code'));
         $form->addFilter($this->getFilter('trim'));
         $form->addFilter($this->getFilter('secure'));
