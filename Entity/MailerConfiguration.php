@@ -123,6 +123,4 @@ class MailerConfiguration
     {
         $this->pass = $pass;
     }
-
-
 }
