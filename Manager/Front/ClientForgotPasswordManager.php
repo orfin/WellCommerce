@@ -58,12 +58,13 @@ class ClientForgotPasswordManager extends AbstractFrontManager
      */
     protected function sendResetInstructions(ClientInterface $client)
     {
-        $email = $client->getContactDetails()->getEmail();
-        $title = $this->getTranslatorHelper()->trans('client.email.title.reset_password');
-        $body  = $this->getTemplatingelper()->render('WellCommerceClientBundle:Email:reset_password.html.twig', ['client' => $client]);
-        $shop  = $client->getShop();
+        $email      = $client->getContactDetails()->getEmail();
+        $title      = $this->getTranslatorHelper()->trans('client.email.title.reset_password');
+        $template   = 'WellCommerceClientBundle:Email:reset_password.html.twig';
+        $parameters = ['client' => $client];
+        $shop       = $client->getShop();
 
-        return $this->getMailerHelper()->sendEmail($email, $title, $body, $shop->getMailerConfiguration());
+        return $this->getMailerHelper()->sendEmail($email, $title, $template, $parameters, $shop->getMailerConfiguration());
     }
 
     /**

@@ -11,7 +11,6 @@
  */
 namespace WellCommerce\Bundle\ClientBundle\EventListener;
 
-use Doctrine\Common\Util\Debug;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
 use WellCommerce\Bundle\CoreBundle\Event\ResourceEvent;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
@@ -46,20 +45,13 @@ class ClientSubscriber extends AbstractEventSubscriber
     {
         $client = $event->getResource();
         if ($client instanceof ClientInterface) {
-            $email = $client->getContactDetails()->getEmail();
-            $title = $this->getTranslatorHelper()->trans('client.email.heading.register');
-            $body  = $this->getEmailBody($client);
-            $shop  = $client->getShop();
+            $email      = $client->getContactDetails()->getEmail();
+            $title      = $this->getTranslatorHelper()->trans('client.email.heading.register');
+            $template   = 'WellCommerceAppBundle:Email:register.html.twig';
+            $parameters = ['client' => $client];
+            $shop       = $client->getShop();
 
-            $this->getMailerHelper()->sendEmail($email, $title, $body, $shop->getMailerConfiguration());
+            $this->getMailerHelper()->sendEmail($email, $title, $template, $parameters, $shop->getMailerConfiguration());
         }
-    }
-
-    protected function getEmailBody(ClientInterface $client)
-    {
-        return $this->getTemplatingelper()->render(
-            'WellCommerceAppBundle:Email:register.html.twig', [
-            'client' => $client
-        ]);
     }
 }
