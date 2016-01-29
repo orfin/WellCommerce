@@ -405,6 +405,14 @@ client:
             wrong_email: Wrong e-mail adress was given.
             email_not_found: Such e-mail does not exists.
             success: E-mail with reset instructions was sent.
+        change_password:
+            success: New password was set.
+    email:
+        heading:
+            reset_password: Informacje dotyczące zresetowania hasła
+        body:
+            reset_password_instructions: Rozpoczęto procedurę odzyskiwania hasła.
+            confirm_password_reset: Przejdź na stronę celem ustalenia nowego hasła w sklepie.
 
 client_group:
     heading:
@@ -419,6 +427,9 @@ contact:
         index: Contacts
         add: Add a new contact
         edit: Edit contact
+    email:
+        heading:
+            contact: We have received your inquiry
 
 news:
     heading:
