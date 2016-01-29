@@ -26,12 +26,12 @@ class ClientChangePasswordFormBuilder extends AbstractFormBuilder
      */
     public function buildForm(FormInterface $form)
     {
-        $contactDetails = $form->addChild($this->getElement('nested_fieldset', [
+        $clientDetails = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'clientDetails',
             'label' => $this->trans('client.heading.client_details'),
         ]));
 
-        $contactDetails->addChild($this->getElement('text_field', [
+        $clientDetails->addChild($this->getElement('text_field', [
             'name'  => 'clientDetails.password',
             'label' => $this->trans('client.label.new_password'),
         ]));
