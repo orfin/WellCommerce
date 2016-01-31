@@ -35,6 +35,7 @@ if [ "$action" == 'clear' ]
         git remote rm stree-oauthbundle
         git remote rm stree-pagebundle
         git remote rm stree-paymentbundle
+        git remote rm stree-pluginbundle
         git remote rm stree-producerbundle
         git remote rm stree-productbundle
         git remote rm stree-productstatusbundle
@@ -80,6 +81,7 @@ if [ "$action" == 'clear' ]
         git branch -D stree-backports-oauthbundle
         git branch -D stree-backports-pagebundle
         git branch -D stree-backports-paymentbundle
+        git branch -D stree-backports-pluginbundle
         git branch -D stree-backports-producerbundle
         git branch -D stree-backports-productbundle
         git branch -D stree-backports-productstatusbundle
@@ -132,6 +134,7 @@ if [ "$action" == 'init' ]
         git stree add OAuthBundle -P src/WellCommerce/Bundle/OAuthBundle git@github.com:WellCommerce/OAuthBundle.git
         git stree add OrderBundle -P src/WellCommerce/Bundle/OrderBundle git@github.com:WellCommerce/OrderBundle.git
         git stree add PaymentBundle -P src/WellCommerce/Bundle/PaymentBundle git@github.com:WellCommerce/PaymentBundle.git
+        git stree add PluginBundle -P src/WellCommerce/Bundle/PluginBundle git@github.com:WellCommerce/PluginBundle.git
         git stree add ProductBundle -P src/WellCommerce/Bundle/ProductBundle git@github.com:WellCommerce/ProductBundle.git
         git stree add ProductStatusBundle -P src/WellCommerce/Bundle/ProductStatusBundle git@github.com:WellCommerce/ProductStatusBundle.git
         git stree add ProducerBundle -P src/WellCommerce/Bundle/ProducerBundle git@github.com:WellCommerce/ProducerBundle.git
@@ -180,6 +183,7 @@ if [ "$action" == 'push' ]
         git stree push OAuthBundle
         git stree push PageBundle
         git stree push PaymentBundle
+        git stree push PluginBundle
         git stree push ProducerBundle
         git stree push ProductBundle
         git stree push ProductStatusBundle

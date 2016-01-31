@@ -11,5 +11,9 @@
         <service id="availability.event_dispatcher" parent="core.event_dispatcher" public="false">
             <argument type="service" id="event_dispatcher" />
         </service>
+
+        <service id="availability.plugin.class_metadata.visitor" class="WellCommerce\Bundle\AvailabilityBundle\Plugin\AvailabilityClassMetadataVisitor">
+            <tag name="plugin.class_metadata.visitor"/>
+        </service>
     </services>
 </container>
