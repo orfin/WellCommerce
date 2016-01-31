@@ -1,8 +1,0 @@
-<form id="{{ form.getName() }}" method="{{ form.getOption('method') }}" action="{{ form.getOption('action') }}">
-    <input type="hidden" name="{{ form.getName() }}_submitted" value="1"/>
-</form>
-<script type="text/javascript">
-GCore.OnLoad(function () {
-    $('#{{ form.getName() }}').GForm({{ form_javascript|raw }});
-});
-</script>
