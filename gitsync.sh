@@ -35,7 +35,6 @@ if [ "$action" == 'clear' ]
         git remote rm stree-oauthbundle
         git remote rm stree-pagebundle
         git remote rm stree-paymentbundle
-        git remote rm stree-pluginbundle
         git remote rm stree-producerbundle
         git remote rm stree-productbundle
         git remote rm stree-productstatusbundle
@@ -72,7 +71,6 @@ if [ "$action" == 'clear' ]
         git branch -D stree-backports-dictionarybundle
         git branch -D stree-backports-distributionbundle
         git branch -D stree-backports-form
-        git branch -D stree-backports-generatorbundle
         git branch -D stree-backports-layerednavigationbundle
         git branch -D stree-backports-layoutbundle
         git branch -D stree-backports-localebundle
@@ -125,7 +123,6 @@ if [ "$action" == 'init' ]
         git stree add DelivererBundle -P src/WellCommerce/Bundle/DelivererBundle git@github.com:WellCommerce/DelivererBundle.git
         git stree add DictionaryBundle -P src/WellCommerce/Bundle/DictionaryBundle git@github.com:WellCommerce/DictionaryBundle.git
         git stree add DistributionBundle -P src/WellCommerce/Bundle/DistributionBundle git@github.com:WellCommerce/DistributionBundle.git
-        git stree add GeneratorBundle -P src/WellCommerce/Bundle/GeneratorBundle git@github.com:WellCommerce/GeneratorBundle.git
         git stree add LayeredNavigationBundle -P src/WellCommerce/Bundle/LayeredNavigationBundle git@github.com:WellCommerce/LayeredNavigationBundle.git
         git stree add LayoutBundle -P src/WellCommerce/Bundle/LayoutBundle git@github.com:WellCommerce/LayoutBundle.git
         git stree add LocaleBundle -P src/WellCommerce/Bundle/LocaleBundle git@github.com:WellCommerce/LocaleBundle.git
@@ -174,7 +171,6 @@ if [ "$action" == 'push' ]
         git stree push DictionaryBundle
         git stree push DistributionBundle
         git stree push Form
-        git stree push GeneratorBundle
         git stree push LayeredNavigationBundle
         git stree push LayoutBundle
         git stree push LocaleBundle

@@ -32,6 +32,15 @@ interface ReflectionHelperInterface
     public function hasTrait(ReflectionClass $class, $traitName);
 
     /**
+     * Checks whether the entity has extra trait in sub-namespace
+     *
+     * @param ReflectionClass $class
+     *
+     * @return bool
+     */
+    public function hasEntityExtraTrait(ReflectionClass $class);
+
+    /**
      * Checks whether the class has method
      *
      * @param ReflectionClass $class
@@ -60,4 +69,22 @@ interface ReflectionHelperInterface
      * @return bool
      */
     public function hasProperty(ReflectionClass $class, $propertyName);
+
+    /**
+     * Returns the entity extra trait from reflection
+     *
+     * @param ReflectionClass $class
+     *
+     * @return bool|ReflectionClass
+     */
+    public function getEntityExtraTrait(ReflectionClass $class);
+
+    /**
+     * Returns the extra enity trait name
+     *
+     * @param ReflectionClass $class
+     *
+     * @return string
+     */
+    public function getEntityExtraTraitName(ReflectionClass $class);
 }

@@ -22,7 +22,7 @@ use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
  */
 class WellCommerceAvailabilityExtension extends AbstractExtension
 {
-    CONST EXTENSION_NAME = 'well_commerce_availablity';
+    CONST EXTENSION_NAME = 'well_commerce_availability';
 
     /**
      * {@inheritdoc}

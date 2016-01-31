@@ -11,5 +11,14 @@
         <service id="availability.event_dispatcher" parent="core.event_dispatcher" public="false">
             <argument type="service" id="event_dispatcher" />
         </service>
+
+        <service id="availability.bundle_plugin" class="WellCommerce\Bundle\AvailabilityBundle\Plugin\AvailabilityBundlePlugin">
+            <tag name="bundle_plugin" />
+        </service>
+
+        <service id="availability.metadata_loaded_subscriber" class="WellCommerce\Bundle\AvailabilityBundle\EventListener\MetadataLoadedSubscriber">
+            <argument type="service" id="distribution.distribution.bundle_plugin.collection"/>
+            <tag name="doctrine.event_subscriber" connection="default" />
+        </service>
     </services>
 </container>

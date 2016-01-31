@@ -209,6 +209,14 @@ abstract class AbstractContainerAware
     }
 
     /**
+     * @return \WellCommerce\Bundle\CoreBundle\Helper\Reflection\ReflectionHelperInterface
+     */
+    public function getReflectionHelper()
+    {
+        return $this->get('reflection.helper');
+    }
+
+    /**
      * @return \Doctrine\Common\Persistence\ObjectManager|object
      */
     public function getEntityManager()

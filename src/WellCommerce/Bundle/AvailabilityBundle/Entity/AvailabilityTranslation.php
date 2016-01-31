@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\AvailabilityBundle\Entity;
 
 use Knp\DoctrineBehaviors\Model\Translatable\Translation;
+use WellCommerce\Bundle\AvailabilityBundle\Entity\Extra\AvailabilityTranslationExtraTrait;
 use WellCommerce\Bundle\LocaleBundle\Entity\LocaleAwareInterface;
 
 /**
@@ -23,6 +24,7 @@ use WellCommerce\Bundle\LocaleBundle\Entity\LocaleAwareInterface;
 class AvailabilityTranslation implements LocaleAwareInterface
 {
     use Translation;
+    use AvailabilityTranslationExtraTrait;
 
     /**
      * @var string

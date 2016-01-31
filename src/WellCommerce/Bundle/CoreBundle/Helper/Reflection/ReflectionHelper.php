@@ -55,6 +55,13 @@ class ReflectionHelper implements ReflectionHelperInterface
             return true;
         }
 
+        $traits = $class->getTraits();
+        foreach ($traits as $trait) {
+            if ($trait->hasProperty($propertyName)) {
+                return true;
+            }
+        }
+
         $parentClass = $class->getParentClass();
 
         if (false === $parentClass) {
@@ -62,5 +69,38 @@ class ReflectionHelper implements ReflectionHelperInterface
         }
 
         return $this->hasProperty($parentClass, $propertyName);
+    }
+
+    /**
+     * @param ReflectionClass $class
+     *
+     * @return bool
+     */
+    public function hasEntityExtraTrait(ReflectionClass $class)
+    {
+        return $this->hasTrait($class, $this->getEntityExtraTraitName($class));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getEntityExtraTrait(ReflectionClass $class)
+    {
+        $traits = $class->getTraits();
+        foreach ($traits as $trait) {
+            if ($trait->getName() == $this->getEntityExtraTraitName($class)) {
+                return $trait;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getEntityExtraTraitName(ReflectionClass $class)
+    {
+        return sprintf('%s\\Extra\\%sExtraTrait', $class->getNamespaceName(), $class->getShortName());
     }
 }

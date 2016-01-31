@@ -1,17 +1,3 @@
 imports:
     - { resource: "@WellCommerceAppBundle/Resources/config/wellcommerce.yml" }
-    - { resource: "generated/extensions.yml" }
 
-#well_commerce_availability:
-#    services:
-#        availability:
-#            auto_services:
-#                factory: WellCommerce\Bundle\AvailabilityBundle\Factory\AvailabilityFactory
-#                repository: WellCommerce\Bundle\AvailabilityBundle\Repository\AvailabilityRepository
-#            orm_configuration:
-#                mapping: "%kernel.root_dir%/config/generated/doctrine/Availability.orm.yml"
-#                entity: WellCommerce\Bundle\AvailabilityBundle\Entity\Availability
-#        availability_translation:
-#            orm_configuration:
-#                mapping: "%kernel.root_dir%/config/generated/doctrine/AvailabilityTranslation.orm.yml"
-#                entity: WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityTranslation

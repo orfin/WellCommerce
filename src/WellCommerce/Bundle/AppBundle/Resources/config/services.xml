@@ -21,9 +21,5 @@
                 <argument type="service" id="service_container" />
             </call>
         </service>
-
-        <service id="app.command.install" class="WellCommerce\Bundle\AppBundle\Command\InstallCommand">
-            <tag name="console.command" />
-        </service>
     </services>
 </container>
