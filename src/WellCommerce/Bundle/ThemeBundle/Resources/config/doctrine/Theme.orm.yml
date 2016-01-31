@@ -1,0 +1,26 @@
+WellCommerce\Bundle\ThemeBundle\Entity\Theme:
+    type: entity
+    table: theme
+    repositoryClass: WellCommerce\Bundle\ThemeBundle\Repository\ThemeRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+            unique: false
+            nullable: false
+        folder:
+            type: string
+            length: 255
+            unique: true
+            nullable: false
+    oneToMany:
+        css:
+            targetEntity: WellCommerce\Bundle\ThemeBundle\Entity\ThemeCss
+            fetch: LAZY
+            mappedBy: theme
+            orphanRemoval: false
