@@ -1,0 +1,13 @@
+WellCommerce\Bundle\AvailabilityBundle\Entity\Availability:
+    fields:
+        type:
+            type: string
+            length: 255
+            nullable: false
+
+WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityTranslation:
+    fields:
+        type:
+            type: string
+            length: 255
+            nullable: false
