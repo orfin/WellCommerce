@@ -29,6 +29,7 @@ _main:
     - WellCommerce\Bundle\CurrencyBundle\WellCommerceCurrencyBundle
     - WellCommerce\Bundle\DelivererBundle\WellCommerceDelivererBundle
     - WellCommerce\Bundle\DictionaryBundle\WellCommerceDictionaryBundle
+    - WellCommerce\Bundle\DoctrineBundle\WellCommerceDoctrineBundle
     - WellCommerce\Bundle\LocaleBundle\WellCommerceLocaleBundle
     - WellCommerce\Bundle\CompanyBundle\WellCommerceCompanyBundle
     - WellCommerce\Bundle\ShopBundle\WellCommerceShopBundle
@@ -41,7 +42,6 @@ _main:
     - WellCommerce\Bundle\OAuthBundle\WellCommerceOAuthBundle
     - WellCommerce\Bundle\PageBundle\WellCommercePageBundle
     - WellCommerce\Bundle\PaymentBundle\WellCommercePaymentBundle
-    - WellCommerce\Bundle\PluginBundle\WellCommercePluginBundle
     - WellCommerce\Bundle\ProducerBundle\WellCommerceProducerBundle
     - WellCommerce\Bundle\ProductBundle\WellCommerceProductBundle
     - WellCommerce\Bundle\ProductStatusBundle\WellCommerceProductStatusBundle

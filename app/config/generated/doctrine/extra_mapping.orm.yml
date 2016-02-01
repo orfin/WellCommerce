@@ -1,6 +1,0 @@
-well_commerce_availability:
-    services:
-        availability:
-            orm_configuration:
-                entity: WellCommerce\Bundle\AvailabilityBundle\Entity\Availability
-                mapping: '%kernel.root_dir%/config/generated/doctrine/Availability.orm.yml'

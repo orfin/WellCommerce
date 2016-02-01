@@ -12,8 +12,8 @@
             <argument type="service" id="event_dispatcher" />
         </service>
 
-        <service id="availability.plugin.class_metadata.visitor" class="WellCommerce\Bundle\AvailabilityBundle\Plugin\AvailabilityClassMetadataVisitor">
-            <tag name="plugin.class_metadata.visitor"/>
+        <service id="availability.mapping.enhancer" class="WellCommerce\Bundle\AvailabilityBundle\Enhancer\AvailabilityMappingEnhancer">
+            <tag name="doctrine.mapping.enhancer"/>
         </service>
     </services>
 </container>
