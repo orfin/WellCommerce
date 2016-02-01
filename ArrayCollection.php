@@ -98,6 +98,14 @@ class ArrayCollection implements CollectionInterface
     }
 
     /**
+     * @return array
+     */
+    public function keys()
+    {
+        return array_keys($this->items);
+    }
+
+    /**
      * @param Closure $callable
      */
     public function forAll(Closure $callable)
