@@ -10,19 +10,18 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AvailabilityBundle\Plugin;
+namespace WellCommerce\Bundle\AvailabilityBundle\Enhancer;
 
-use WellCommerce\Bundle\PluginBundle\Definition\FieldDefinition;
-use WellCommerce\Bundle\PluginBundle\Definition\ManyToManyDefinition;
-use WellCommerce\Bundle\PluginBundle\Definition\MappingDefinitionCollection;
-use WellCommerce\Bundle\PluginBundle\Visitor\ClassMetadata\AbstractClassMetadataVisitor;
+use WellCommerce\Bundle\DoctrineBundle\Definition\FieldDefinition;
+use WellCommerce\Bundle\DoctrineBundle\Definition\MappingDefinitionCollection;
+use WellCommerce\Bundle\DoctrineBundle\Enhancer\AbstractMappingEnhancer;
 
 /**
- * Class AvailabilityClassMetadataVisitor
+ * Class AvailabilityMappingEnhancer
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AvailabilityClassMetadataVisitor extends AbstractClassMetadataVisitor
+class AvailabilityMappingEnhancer extends AbstractMappingEnhancer
 {
     /**
      * @param MappingDefinitionCollection $collection
@@ -44,13 +43,19 @@ class AvailabilityClassMetadataVisitor extends AbstractClassMetadataVisitor
             'length'     => 255,
             'unique'     => true,
             'nullable'   => true,
-            'columnName' => 'name',
+            'columnName' => 'type',
         ]));
 
-        $collection->add(new ManyToManyDefinition([
-            'fieldName'    => 'groups',
-            'targetEntity' => 'WellCommerce\Bundle\Availability',
-        ]));
+        for ($i = 0; $i < 20; $i++) {
+            $collection->add(new FieldDefinition([
+                'fieldName'  => 'type' . $i,
+                'type'       => 'string',
+                'length'     => 255,
+                'unique'     => true,
+                'nullable'   => true,
+                'columnName' => 'type' . $i,
+            ]));
+        }
     }
 
     public function getSupportedEntityClass()

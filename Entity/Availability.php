@@ -15,6 +15,7 @@ namespace WellCommerce\Bundle\AvailabilityBundle\Entity;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
+use WellCommerce\Bundle\AvailabilityBundle\Entity\Extra\AvailabilityExtraTrait;
 
 /**
  * Class Availability
@@ -26,6 +27,7 @@ class Availability implements AvailabilityInterface
     use Translatable;
     use Timestampable;
     use Blameable;
+    use AvailabilityExtraTrait;
 
     /**
      * @var int
