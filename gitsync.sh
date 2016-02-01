@@ -169,7 +169,7 @@ if [ "$action" == 'push' ]
         git stree push DataSet
         git stree push DelivererBundle
         git stree push DictionaryBundle
-        git stree push DistributionBundle
+        git stree push DoctrineBundle
         git stree push Form
         git stree push LayeredNavigationBundle
         git stree push LayoutBundle
@@ -180,7 +180,6 @@ if [ "$action" == 'push' ]
         git stree push OAuthBundle
         git stree push PageBundle
         git stree push PaymentBundle
-        git stree push PluginBundle
         git stree push ProducerBundle
         git stree push ProductBundle
         git stree push ProductStatusBundle
