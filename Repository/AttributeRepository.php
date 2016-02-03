@@ -16,7 +16,7 @@ use Doctrine\Common\Collections\Criteria;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroupInterface;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeInterface;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeValueInterface;
-use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
 
 /**
  * Class AttributeRepository
