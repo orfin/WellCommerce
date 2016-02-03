@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\LocaleBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
+use WellCommerce\Bundle\DoctrineBundle\DataFixtures\AbstractDataFixture;
 use WellCommerce\Bundle\LocaleBundle\Entity\Locale;
 
 /**
