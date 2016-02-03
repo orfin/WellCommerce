@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Bundle\ReviewBundle\Repository;
 
-use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
 
 /**
  * Class ReviewRepository
