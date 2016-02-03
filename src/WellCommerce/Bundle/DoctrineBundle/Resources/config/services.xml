@@ -28,5 +28,9 @@
             <argument type="service" id="environment_helper"/>
             <tag name="console.command" />
         </service>
+
+        <service id="doctrine.helper" class="WellCommerce\Bundle\DoctrineBundle\Helper\Doctrine\DoctrineHelper">
+            <argument type="service" id="doctrine"/>
+        </service>
     </services>
 </container>

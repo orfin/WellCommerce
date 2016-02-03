@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\CoreBundle\Form\DataTransformer;
 
 use Symfony\Component\PropertyAccess\PropertyAccess;
-use WellCommerce\Bundle\CoreBundle\Helper\Doctrine\DoctrineHelperInterface;
+use WellCommerce\Bundle\DoctrineBundle\Helper\Doctrine\DoctrineHelperInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**
