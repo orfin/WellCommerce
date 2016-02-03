@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\CouponBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
+use WellCommerce\Bundle\DoctrineBundle\DataFixtures\AbstractDataFixture;
 
 /**
  * Class LoadCouponData
