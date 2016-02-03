@@ -19,7 +19,7 @@ use WellCommerce\Bundle\AppBundle\Entity\DiscountablePrice;
 use WellCommerce\Bundle\AppBundle\Entity\Price;
 use WellCommerce\Bundle\AvailabilityBundle\DataFixtures\ORM\LoadAvailabilityData;
 use WellCommerce\Bundle\CategoryBundle\DataFixtures\ORM\LoadCategoryData;
-use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
+use WellCommerce\Bundle\DoctrineBundle\DataFixtures\AbstractDataFixture;
 use WellCommerce\Bundle\CoreBundle\Helper\Sluggable;
 use WellCommerce\Bundle\CurrencyBundle\DataFixtures\ORM\LoadCurrencyData;
 use WellCommerce\Bundle\MediaBundle\DataFixtures\ORM\LoadMediaData;
