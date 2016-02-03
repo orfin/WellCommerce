@@ -113,7 +113,7 @@ abstract class AbstractContainerAware
     }
 
     /**
-     * @return \WellCommerce\Bundle\CoreBundle\Helper\Doctrine\DoctrineHelperInterface
+     * @return \WellCommerce\Bundle\DoctrineBundle\Helper\Doctrine\DoctrineHelperInterface
      */
     public function getDoctrineHelper()
     {
