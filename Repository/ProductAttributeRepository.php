@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Bundle\ProductBundle\Repository;
 
-use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
 use WellCommerce\Bundle\ProductBundle\Entity\Product;
 
 /**
