@@ -17,7 +17,7 @@ use WellCommerce\Bundle\CoreBundle\EventDispatcher\EventDispatcherInterface;
 use WellCommerce\Bundle\CoreBundle\Exception\MissingFactoryException;
 use WellCommerce\Bundle\CoreBundle\Exception\MissingFormBuilderException;
 use WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface;
-use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
+use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
 use WellCommerce\Component\Form\FormBuilderInterface;
 
 /**
