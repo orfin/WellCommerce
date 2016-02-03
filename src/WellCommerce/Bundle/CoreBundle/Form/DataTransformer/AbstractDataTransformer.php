@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\CoreBundle\Form\DataTransformer;
 
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use WellCommerce\Bundle\DoctrineBundle\Helper\Doctrine\DoctrineHelperInterface;
-use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
+use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
 
 /**
  * Class AbstractDataTransformer

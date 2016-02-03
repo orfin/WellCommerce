@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Bundle\ContactBundle\Repository;
 
-use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
 
 /**
  * Class ContactRepository

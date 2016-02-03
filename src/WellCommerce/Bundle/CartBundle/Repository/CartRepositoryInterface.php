@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\CartBundle\Repository;
 
 use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
-use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
+use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
 use WellCommerce\Bundle\ShopBundle\Entity\ShopInterface;
 
 /**

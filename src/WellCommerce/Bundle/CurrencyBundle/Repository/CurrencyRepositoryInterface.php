@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\CurrencyBundle\Repository;
 
-use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
+use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
 
 /**
  * Interface CurrencyRepositoryInterface
