@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\CompanyBundle\Repository;
 
-use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
 
 /**
  * Class CompanyRepository
