@@ -12,7 +12,6 @@
 
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\Kernel;
-use Symfony\Component\Yaml\Yaml;
 
 /**
  * Class AppKernel
@@ -23,11 +22,34 @@ class AppKernel extends Kernel
 {
     public function registerBundles()
     {
-        $bundles           = [];
-        $bundlesToRegister = $this->parseBundleConfig();
+        $applicationBundles = $this->getApplicationBundles();
 
-        foreach ($bundlesToRegister as $bundle) {
-            $bundles[] = new $bundle;
+        $bundles = [
+            new \Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
+            new \Symfony\Bundle\SecurityBundle\SecurityBundle(),
+            new \Symfony\Bundle\TwigBundle\TwigBundle(),
+            new \Symfony\Bundle\MonologBundle\MonologBundle(),
+            new \Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
+            new \Symfony\Bundle\AsseticBundle\AsseticBundle(),
+            new \Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
+            new \Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle(),
+            new \Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
+            new \Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+            new \Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
+            new \FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+            new \Bazinga\Bundle\JsTranslationBundle\BazingaJsTranslationBundle(),
+            new \Liip\ImagineBundle\LiipImagineBundle(),
+            new \Ivory\LuceneSearchBundle\IvoryLuceneSearchBundle(),
+            new \Knp\DoctrineBehaviors\Bundle\DoctrineBehaviorsBundle(),
+        ];
+
+        foreach ($applicationBundles as $appBundle) {
+            $bundles[] = new $appBundle;
+        }
+
+        if (in_array($this->getEnvironment(), ['dev', 'test'])) {
+            $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
+            $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
         }
 
         return $bundles;
@@ -41,17 +63,15 @@ class AppKernel extends Kernel
     /**
      * @return array
      */
-    protected function parseBundleConfig()
+    private function getApplicationBundles()
     {
-        $configurationFile = $this->getRootDir() . '/config/bundles.yml';
-        $configuration     = Yaml::parse(file_get_contents($configurationFile));
-        $environment       = $this->getEnvironment();
-        $bundlesToRegister = $configuration['_main'];
+        $cacheDir = $this->getCacheDir();
+        $bundles  = [];
 
-        if (in_array($environment, ['dev', 'test']) && isset($configuration[$environment])) {
-            $bundlesToRegister = array_merge($bundlesToRegister, $configuration[$environment]);
+        if (null !== $cacheDir && is_file($cache = $cacheDir . '/bundles.php')) {
+            $bundles = require $cache;
         }
 
-        return $bundlesToRegister;
+        return $bundles;
     }
 }
