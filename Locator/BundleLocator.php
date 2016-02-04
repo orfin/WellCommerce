@@ -41,7 +41,7 @@ class BundleLocator implements BundleLocatorInterface
     {
         $bundles = [];
         $finder  = new Finder();
-        $finder->files()->in($this->searchPath)->name('*Bundle.php')->depth(2);
+        $finder->files()->in($this->searchPath)->name('*Bundle.php')->notName('WellCommerceAppBundle*')->depth(2);
 
         /** @var $file \SplFileInfo */
         foreach ($finder as $file) {
