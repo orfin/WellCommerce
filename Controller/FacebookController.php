@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use WellCommerce\Bundle\CoreBundle\Controller\AbstractController;
 
 /**
- * Class OAuthController
+ * Class FacebookController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
