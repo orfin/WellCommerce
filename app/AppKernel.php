@@ -41,6 +41,7 @@ class AppKernel extends Kernel
             new \Liip\ImagineBundle\LiipImagineBundle(),
             new \Ivory\LuceneSearchBundle\IvoryLuceneSearchBundle(),
             new \Knp\DoctrineBehaviors\Bundle\DoctrineBehaviorsBundle(),
+            new \WellCommerce\Bundle\AppBundle\WellCommerceAppBundle()
         ];
 
         foreach ($applicationBundles as $appBundle) {
@@ -68,8 +69,26 @@ class AppKernel extends Kernel
         $cacheDir = $this->getCacheDir();
         $bundles  = [];
 
-        if (null !== $cacheDir && is_file($cache = $cacheDir . '/bundles.php')) {
+        if (is_file($cache = $cacheDir . '/bundles.php')) {
             $bundles = require $cache;
+        } else {
+            $bundles = $this->locateBundles();
+        }
+
+        return $bundles;
+    }
+
+    public function locateBundles()
+    {
+        $bundles = [];
+        $finder  = new \Symfony\Component\Finder\Finder();
+        $finder->files()->in($this->getRootDir() . '/../src/*')->name('*Bundle.php')->notName('WellCommerceAppBundle*')->depth(2);
+
+        /** @var $file \SplFileInfo */
+        foreach ($finder as $file) {
+            $reflectionFile = new \Wingu\OctopusCore\Reflection\ReflectionFile($file->getRealpath());
+            $bundleClass    = sprintf('%s\%s', current($reflectionFile->getNamespaces()), $file->getBasename('.php'));
+            $bundles[]      = $bundleClass;
         }
 
         return $bundles;
