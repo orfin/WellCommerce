@@ -28,6 +28,8 @@ class BundleLocator implements BundleLocatorInterface
      */
     protected $searchPath;
 
+    protected $bundles = [];
+
     /**
      * BundleLocator constructor.
      *
@@ -38,21 +40,34 @@ class BundleLocator implements BundleLocatorInterface
         $this->searchPath = $searchPath;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getBundles()
     {
-        $bundles = [];
-        $finder  = new Finder();
-        $finder->files()->in($this->searchPath)->name('*Bundle.php')->notName('WellCommerceAppBundle*')->depth(2);
+        $files = $this->locateBundleFiles();
 
-        /** @var $file \SplFileInfo */
-        foreach ($finder as $file) {
-            $bundles[] = $this->getBundleClass($file);
+        foreach ($files as $file) {
+            $this->bundles[] = $this->getBundleClass($file);
         }
 
-        return $bundles;
+        return $this->bundles;
     }
 
     /**
+     * @return SplFileInfo[]
+     */
+    private function locateBundleFiles()
+    {
+        $finder = new Finder();
+        $finder->files()->in($this->searchPath)->name('*Bundle.php')->notName('WellCommerceAppBundle*')->depth(2);
+
+        return $finder;
+    }
+
+    /**
+     * Returns FQCN for bundle
+     *
      * @param SplFileInfo $fileInfo
      *
      * @return string

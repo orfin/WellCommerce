@@ -25,8 +25,6 @@ class WellCommerceAppKernel extends Kernel
 {
     public function registerBundles()
     {
-        $applicationBundles = $this->getApplicationBundles();
-
         $bundles = [
             new \Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new \Symfony\Bundle\SecurityBundle\SecurityBundle(),
@@ -47,8 +45,8 @@ class WellCommerceAppKernel extends Kernel
             new WellCommerceAppBundle()
         ];
 
-        foreach ($applicationBundles as $appBundle) {
-            $bundles[] = new $appBundle;
+        foreach ($this->getApplicationBundles() as $bundle) {
+            $bundles[] = new $bundle;
         }
 
         if (in_array($this->getEnvironment(), ['dev', 'test'])) {

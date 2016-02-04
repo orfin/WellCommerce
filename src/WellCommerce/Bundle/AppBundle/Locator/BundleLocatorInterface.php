@@ -20,6 +20,8 @@ namespace WellCommerce\Bundle\AppBundle\Locator;
 interface BundleLocatorInterface
 {
     /**
+     * Returns an array containing resolved bundle classes
+     *
      * @return array
      */
     public function getBundles();
