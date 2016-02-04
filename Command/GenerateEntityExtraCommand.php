@@ -103,6 +103,11 @@ class GenerateEntityExtraCommand extends Command
         $this->executeSchemaUpdate($output);
     }
 
+    /**
+     * Executes the schema update through separate process
+     *
+     * @param OutputInterface $output
+     */
     protected function executeSchemaUpdate(OutputInterface $output)
     {
         $arguments = [
