@@ -27,7 +27,7 @@
         </service>
 
         <service id="app.bundle.locator" class="WellCommerce\Bundle\AppBundle\Locator\BundleLocator" public="false">
-            <argument>%kernel.root_dir%/../src/*</argument>
+            <argument>%kernel.root_dir%/../src</argument>
         </service>
 
         <service id="app.bundle.cache_warmer" class="WellCommerce\Bundle\AppBundle\CacheWarmer\BundleCacheWarmer" public="false">

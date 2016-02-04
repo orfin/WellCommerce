@@ -27,21 +27,16 @@ class BundleLocator implements BundleLocatorInterface
     /**
      * @var string
      */
-    protected $searchPath;
-
-    /**
-     * @var array
-     */
-    protected $bundles = [];
+    protected $rootDir;
 
     /**
      * BundleLocator constructor.
      *
-     * @param string $searchPath
+     * @param string $rootDir
      */
-    public function __construct($searchPath)
+    public function __construct($rootDir)
     {
-        $this->searchPath = $searchPath;
+        $this->rootDir = $rootDir;
     }
 
     /**
@@ -50,26 +45,17 @@ class BundleLocator implements BundleLocatorInterface
     public function getBundles()
     {
         $bundles = [];
-        $finder  = $this->getFinder();
+        $finder  = new Finder();
+        $finder->in($this->rootDir)->name('*Bundle.php')->notName('WellCommerceAppBundle*')->depth(3);
 
-        foreach ($finder as $file) {
-            if (null !== $bundle = $this->getBundleClass($file)) {
+        foreach ($finder->files() as $file) {
+            $bundle = $this->getBundleClass($file);
+            if (null !== $bundle) {
                 $bundles[] = $bundle;
             }
         }
 
         return $bundles;
-    }
-
-    /**
-     * @return Finder
-     */
-    private function getFinder()
-    {
-        $finder = new Finder();
-        $finder->files()->in($this->searchPath)->name('*Bundle.php')->notName('WellCommerceAppBundle*')->depth(3);
-
-        return $finder;
     }
 
     /**
@@ -83,7 +69,7 @@ class BundleLocator implements BundleLocatorInterface
     {
         $reflector         = new ClassReflector(new SingleFileSourceLocator($fileInfo->getRealpath()));
         $reflectionClasses = $reflector->getAllClasses();
-        
+
         foreach ($reflectionClasses as $reflectionClass) {
             return $reflectionClass->getName();
         }
