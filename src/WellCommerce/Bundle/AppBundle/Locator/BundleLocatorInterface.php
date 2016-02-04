@@ -22,5 +22,5 @@ interface BundleLocatorInterface
     /**
      * @return array
      */
-    public function locateBundles();
+    public function getBundles();
 }

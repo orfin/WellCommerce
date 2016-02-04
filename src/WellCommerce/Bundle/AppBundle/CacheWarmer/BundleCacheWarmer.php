@@ -46,7 +46,7 @@ class BundleCacheWarmer extends CacheWarmer
      */
     public function warmUp($cacheDir)
     {
-        $bundles = $this->locator->locateBundles();
+        $bundles = $this->locator->getBundles();
 
         $this->writeCacheFile($cacheDir . '/bundles.php', sprintf('<?php return %s;', var_export($bundles, true)));
     }
