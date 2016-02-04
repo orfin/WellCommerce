@@ -46,6 +46,7 @@
         "wellcommerce/media-bundle": "^0.7@dev",
         "wellcommerce/news-bundle": "^0.7@dev",
         "wellcommerce/order-bundle": "^0.7@dev",
+        "wellcommerce/oauth-bundle": "^0.7@dev",
         "wellcommerce/page-bundle": "^0.7@dev",
         "wellcommerce/payment-bundle": "^0.7@dev",
         "wellcommerce/producer-bundle": "^0.7@dev",
