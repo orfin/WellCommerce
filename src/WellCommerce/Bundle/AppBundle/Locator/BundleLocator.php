@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\AppBundle\Locator;
 
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\Finder\SplFileInfo;
 use Wingu\OctopusCore\Reflection\ReflectionFile;
 
 /**
@@ -45,11 +46,23 @@ class BundleLocator implements BundleLocatorInterface
 
         /** @var $file \SplFileInfo */
         foreach ($finder as $file) {
-            $reflectionFile = new ReflectionFile($file->getRealpath());
-            $bundleClass    = sprintf('%s\%s', current($reflectionFile->getNamespaces()), $file->getBasename('.php'));
-            $bundles[]      = $bundleClass;
+            $bundles[] = $this->getBundleClass($file);
         }
 
         return $bundles;
+    }
+
+    /**
+     * @param SplFileInfo $fileInfo
+     *
+     * @return string
+     */
+    private function getBundleClass(SplFileInfo $fileInfo)
+    {
+        $reflectionFile = new ReflectionFile($fileInfo->getRealpath());
+        $namespace      = current($reflectionFile->getNamespaces());
+        $shortName      = $fileInfo->getBasename('.php');
+
+        return sprintf('%s\%s', $namespace, $shortName);
     }
 }
