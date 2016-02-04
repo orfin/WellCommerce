@@ -37,7 +37,7 @@ class BundleLocator implements BundleLocatorInterface
         $this->searchPath = $searchPath;
     }
 
-    public function locateBundles()
+    public function getBundles()
     {
         $bundles = [];
         $finder  = new Finder();
