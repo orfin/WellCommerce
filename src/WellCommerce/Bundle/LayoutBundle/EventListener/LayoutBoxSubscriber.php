@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\LayoutBundle\EventListener;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use WellCommerce\Bundle\AppBundle\Configurator\LayoutBoxConfiguratorInterface;
-use WellCommerce\Bundle\CoreBundle\Event\FormEvent;
+use WellCommerce\Component\Form\Event\FormEvent;
 use WellCommerce\Bundle\CoreBundle\Event\ResourceEvent;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
 
