@@ -28,6 +28,9 @@ class BundleLocator implements BundleLocatorInterface
      */
     protected $searchPath;
 
+    /**
+     * @var array
+     */
     protected $bundles = [];
 
     /**
@@ -45,22 +48,23 @@ class BundleLocator implements BundleLocatorInterface
      */
     public function getBundles()
     {
-        $files = $this->locateBundleFiles();
+        $bundles = [];
+        $finder  = $this->getFinder();
 
-        foreach ($files as $file) {
-            $this->bundles[] = $this->getBundleClass($file);
+        foreach ($finder as $file) {
+            $bundles[] = $this->getBundleClass($file);
         }
 
-        return $this->bundles;
+        return $bundles;
     }
 
     /**
-     * @return SplFileInfo[]
+     * @return Finder
      */
-    private function locateBundleFiles()
+    private function getFinder()
     {
         $finder = new Finder();
-        $finder->files()->in($this->searchPath)->name('*Bundle.php')->notName('WellCommerceAppBundle*')->depth(2);
+        $finder->files()->in($this->searchPath)->name('*Bundle.php')->notName('WellCommerceAppBundle*')->depth(3);
 
         return $finder;
     }
