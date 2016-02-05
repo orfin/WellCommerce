@@ -23,6 +23,7 @@ if [ "$action" == 'clear' ]
         git remote rm stree-dataset
         git remote rm stree-delivererbundle
         git remote rm stree-dictionarybundle
+        git remote rm stree-distributionbundle
         git remote rm stree-doctrinebundle
         git remote rm stree-form
         git remote rm stree-generatorbundle
@@ -69,6 +70,7 @@ if [ "$action" == 'clear' ]
         git branch -D stree-backports-dataset
         git branch -D stree-backports-delivererbundle
         git branch -D stree-backports-dictionarybundle
+        git branch -D stree-backports-distributionbundle
         git branch -D stree-backports-doctrinebundle
         git branch -D stree-backports-form
         git branch -D stree-backports-layerednavigationbundle
@@ -122,6 +124,7 @@ if [ "$action" == 'init' ]
         git stree add CurrencyBundle -P src/WellCommerce/Bundle/CurrencyBundle git@github.com:WellCommerce/CurrencyBundle.git
         git stree add DelivererBundle -P src/WellCommerce/Bundle/DelivererBundle git@github.com:WellCommerce/DelivererBundle.git
         git stree add DictionaryBundle -P src/WellCommerce/Bundle/DictionaryBundle git@github.com:WellCommerce/DictionaryBundle.git
+        git stree add DistributionBundle -P src/WellCommerce/Bundle/DistributionBundle git@github.com:WellCommerce/DistributionBundle.git
         git stree add DoctrineBundle -P src/WellCommerce/Bundle/DoctrineBundle git@github.com:WellCommerce/DoctrineBundle.git
         git stree add LayeredNavigationBundle -P src/WellCommerce/Bundle/LayeredNavigationBundle git@github.com:WellCommerce/LayeredNavigationBundle.git
         git stree add LayoutBundle -P src/WellCommerce/Bundle/LayoutBundle git@github.com:WellCommerce/LayoutBundle.git
@@ -169,6 +172,7 @@ if [ "$action" == 'push' ]
         git stree push DataSet
         git stree push DelivererBundle
         git stree push DictionaryBundle
+        git stree push DistributionBundle
         git stree push DoctrineBundle
         git stree push Form
         git stree push LayeredNavigationBundle
