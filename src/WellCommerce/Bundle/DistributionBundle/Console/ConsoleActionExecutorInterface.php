@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\DistributionBundle\Console;
 
+use Symfony\Component\Console\Output\ConsoleOutputInterface;
 use WellCommerce\Bundle\DistributionBundle\Console\Action\ConsoleActionInterface;
 
 /**
@@ -22,7 +23,12 @@ use WellCommerce\Bundle\DistributionBundle\Console\Action\ConsoleActionInterface
 interface ConsoleActionExecutorInterface
 {
     /**
-     * @var array|ConsoleActionInterface[]
+     * Executes the console commands
+     *
+     * @param array|ConsoleActionInterface[] $actions
+     * @param ConsoleOutputInterface|null    $output
+     *
+     * @return mixed
      */
-    public function execute(array $actions = []);
+    public function execute(array $actions = [], ConsoleOutputInterface $output = null);
 }

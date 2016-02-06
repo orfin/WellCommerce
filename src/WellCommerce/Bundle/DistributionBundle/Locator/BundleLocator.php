@@ -10,12 +10,13 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Locator;
+namespace WellCommerce\Bundle\DistributionBundle\Locator;
 
 use BetterReflection\Reflector\ClassReflector;
 use BetterReflection\SourceLocator\Type\SingleFileSourceLocator;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
+use WellCommerce\Bundle\AppBundle\Kernel\WellCommerceKernelInterface;
 
 /**
  * Class BundleLocator
@@ -32,11 +33,11 @@ class BundleLocator implements BundleLocatorInterface
     /**
      * BundleLocator constructor.
      *
-     * @param string $rootDir
+     * @param WellCommerceKernelInterface $kernel
      */
-    public function __construct($rootDir)
+    public function __construct(WellCommerceKernelInterface $kernel)
     {
-        $this->rootDir = $rootDir;
+        $this->rootDir = $kernel->getSourceDirectory();
     }
 
     /**

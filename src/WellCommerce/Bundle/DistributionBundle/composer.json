@@ -1,9 +1,9 @@
 {
-    "name": "wellcommerce/generator-bundle",
+    "name": "wellcommerce/distribution-bundle",
     "type": "wellcommerce-bundle",
     "license": "MIT",
     "minimum-stability": "dev",
-    "description": "WellCommerce GeneratorBundle",
+    "description": "WellCommerce DistributionBundle",
     "keywords": ["wellcommerce","e-commerce","open-source"],
     "authors": [
         {
@@ -17,8 +17,8 @@
     ],
     "support": {
         "email": "support@wellcommerce.org",
-        "issues": "https://github.com/WellCommerce/GeneratorBundle/issues",
-        "source": "https://github.com/WellCommerce/GeneratorBundle/"
+        "issues": "https://github.com/WellCommerce/DistributionBundle/issues",
+        "source": "https://github.com/WellCommerce/DistributionBundle/"
     },
     "autoload": {
         "psr-4": { "": "src/" }
@@ -32,7 +32,7 @@
             "dev-master": "0.7.x-dev"
         },
         "wellcommerce-bundle": {
-            "install-dir": "src/WellCommerce/Bundle/GeneratorBundle"
+            "install-dir": "src/WellCommerce/Bundle/DistributionBundle"
         }
     }
 }

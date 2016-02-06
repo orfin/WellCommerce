@@ -98,8 +98,6 @@ class GenerateEntityExtraCommand extends Command
             $this->filesystem->dumpFile($reflectionClass->getFileName(), $code);
         }
 
-        echo PHP_BINARY;
-
         $this->executeSchemaUpdate($output);
     }
 

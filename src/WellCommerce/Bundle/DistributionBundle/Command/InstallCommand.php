@@ -16,8 +16,10 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use WellCommerce\Bundle\DistributionBundle\Console\Action\InstallAction;
-use WellCommerce\Bundle\DistributionBundle\Console\ConsoleActionExecutor;
+use WellCommerce\Bundle\DistributionBundle\Console\Action\InstallAssetsAction;
+use WellCommerce\Bundle\DistributionBundle\Console\Action\InstallDatabaseAction;
+use WellCommerce\Bundle\DistributionBundle\Console\Action\InstallFixturesAction;
+use WellCommerce\Bundle\DistributionBundle\Console\ConsoleActionExecutorInterface;
 
 /**
  * Class InstallCommand
@@ -26,6 +28,22 @@ use WellCommerce\Bundle\DistributionBundle\Console\ConsoleActionExecutor;
  */
 class InstallCommand extends Command
 {
+    /**
+     * @var ConsoleActionExecutorInterface
+     */
+    protected $executor;
+
+    /**
+     * InstallCommand constructor.
+     *
+     * @param ConsoleActionExecutorInterface $executor
+     */
+    public function __construct(ConsoleActionExecutorInterface $executor)
+    {
+        parent::__construct();
+        $this->executor = $executor;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -43,7 +61,10 @@ class InstallCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $executor = new ConsoleActionExecutor($this->getApplication(), $output);
-        $executor->execute(new InstallAction());
+        $this->executor->execute([
+            new InstallDatabaseAction(),
+            new InstallFixturesAction(),
+            new InstallAssetsAction()
+        ], $output);
     }
 }

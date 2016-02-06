@@ -10,20 +10,19 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\DistributionBundle\Collection;
-
-use Symfony\Component\Finder\SplFileInfo;
-use WellCommerce\Component\Collections\ArrayCollection;
+namespace WellCommerce\Bundle\DistributionBundle\Console\Action;
 
 /**
- * Class ConfigurationFilesCollection
+ * Class InstallFixturesAction
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ConfigurationFilesCollection extends ArrayCollection
+class InstallFixturesAction implements ConsoleActionInterface
 {
-    public function add(SplFileInfo $fileInfo)
+    public function getCommandsToExecute()
     {
-        $this->items[] = $fileInfo;
+        return [
+            'doctrine:fixtures:load'      => [],
+        ];
     }
 }

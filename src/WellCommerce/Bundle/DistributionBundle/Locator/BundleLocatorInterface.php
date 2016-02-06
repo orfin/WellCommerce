@@ -10,24 +10,19 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\DistributionBundle\Parser;
-
-use Symfony\Component\Finder\SplFileInfo;
-use WellCommerce\Bundle\DistributionBundle\Collection\MappingFilesCollection;
+namespace WellCommerce\Bundle\DistributionBundle\Locator;
 
 /**
- * Interface MappingParserInterface
+ * Interface BundleLocatorInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface MappingParserInterface
+interface BundleLocatorInterface
 {
     /**
-     * Parses the file's YAML content and returns it as an array
-     *
-     * @param SplFileInfo $file
+     * Returns an array containing resolved bundle classes
      *
      * @return array
      */
-    public function parseFile(SplFileInfo $file);
+    public function getBundles();
 }

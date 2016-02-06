@@ -10,13 +10,21 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-use WellCommerce\Bundle\AppBundle\WellCommerceAppKernel;
+use WellCommerce\Bundle\AppBundle\Kernel\WellCommerceAppKernel;
+use WellCommerce\Bundle\AppBundle\Kernel\WellCommerceKernelInterface;
 
 /**
  * Class AppKernel
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AppKernel extends WellCommerceAppKernel
+class AppKernel extends WellCommerceAppKernel implements WellCommerceKernelInterface
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function getSourceDirectory()
+    {
+        return $this->rootDir . '/../src';
+    }
 }

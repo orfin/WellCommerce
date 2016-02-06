@@ -13,18 +13,18 @@
 namespace WellCommerce\Bundle\DistributionBundle\Console\Action;
 
 /**
- * Class ExtendDoctrineAction
+ * Class InstallDatabaseAction
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ExtendDoctrineAction implements ConsoleActionInterface
+class InstallDatabaseAction implements ConsoleActionInterface
 {
     public function getCommandsToExecute()
     {
         return [
-            'wellcommerce:doctrine:extend-entities' => [],
-            'wellcommerce:doctrine:extend-mapping'  => [],
-            'doctrine:schema:update'                => ['--force' => true],
+            'doctrine:database:create' => ['--if-not-exists' => true],
+            'doctrine:schema:drop'     => ['--force' => true],
+            'doctrine:schema:create'   => [],
         ];
     }
 }

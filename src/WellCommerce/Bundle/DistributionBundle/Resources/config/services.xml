@@ -9,51 +9,18 @@
             <argument type="service" id="kernel"/>
         </service>
 
-        <service id="distribution.distribution.bundle_plugin.collection" class="WellCommerce\Bundle\DistributionBundle\Collection\BundlePluginCollection" />
-
         <service id="distribution.install.command" class="WellCommerce\Bundle\DistributionBundle\Command\InstallCommand">
-            <tag name="console.command" />
-        </service>
-
-        <service id="distribution.doctrine_extend.command" class="WellCommerce\Bundle\DistributionBundle\Command\DoctrineExtendCommand">
-            <argument type="service" id="distribution.doctrine.executor"/>
             <argument type="service" id="distribution.console.action_executor"/>
             <tag name="console.command" />
         </service>
 
-        <service id="distribution.doctrine.mapping.finder" class="WellCommerce\Bundle\DistributionBundle\Finder\MappingFinder" />
-
-        <service id="distribution.doctrine.mapping.merger" class="WellCommerce\Bundle\DistributionBundle\Merger\MappingMerger" />
-
-        <service id="distribution.doctrine.mapping.dumper" class="WellCommerce\Bundle\DistributionBundle\Dumper\MappingDumper">
-            <argument>%kernel.root_dir%/config/generated/doctrine</argument>
+        <service id="distribution.bundle.locator" class="WellCommerce\Bundle\DistributionBundle\Locator\BundleLocator" public="false">
+            <argument type="service" id="kernel"/>
         </service>
 
-        <service id="distribution.doctrine.trait.generator" class="WellCommerce\Bundle\DistributionBundle\Generator\EntityExtraTraitGenerator">
-            <argument type="service" id="reflection.helper"/>
-        </service>
-
-        <service id="distribution.doctrine.mapping.configuration_manipulator" class="WellCommerce\Bundle\DistributionBundle\Manipulator\MappingConfigurationManipulator">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-        </service>
-
-        <service id="distribution.doctrine.trait.dumper" class="WellCommerce\Bundle\DistributionBundle\Dumper\EntityExtraTraitDumper">
-            <argument type="service" id="distribution.doctrine.trait.generator"/>
-        </service>
-
-        <service id="distribution.doctrine.executor" class="WellCommerce\Bundle\DistributionBundle\Executor\DoctrineExtendExecutor">
-            <argument type="service" id="distribution.doctrine.mapping.finder"/>
-            <argument type="service" id="distribution.doctrine.mapping.merger"/>
-            <argument type="service" id="distribution.doctrine.mapping.dumper"/>
-            <argument type="service" id="distribution.doctrine.trait.dumper"/>
-            <argument type="service" id="distribution.doctrine.mapping.configuration_manipulator"/>
-        </service>
-
-        <service id="distribution.doctrine.cache_warmer" class="WellCommerce\Bundle\DistributionBundle\CacheWarmer\DoctrineCacheWarmer">
-            <argument type="service" id="distribution.console.action_executor"/>
-            <tag name="kernel.cache_warmer" />
+        <service id="distribution.bundle.cache_warmer" class="WellCommerce\Bundle\DistributionBundle\CacheWarmer\BundleCacheWarmer" public="false">
+            <argument type="service" id="distribution.bundle.locator" />
+            <tag name="kernel.cache_warmer"/>
         </service>
     </services>
 </container>
