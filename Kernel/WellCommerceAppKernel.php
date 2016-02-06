@@ -21,37 +21,14 @@ use WellCommerce\Bundle\DistributionBundle\Locator\BundleLocator;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class WellCommerceAppKernel extends Kernel
+class WellCommerceAppKernel extends Kernel implements WellCommerceKernelInterface
 {
     public function registerBundles()
     {
-        $bundles = [
-            new \Symfony\Bundle\FrameworkBundle\FrameworkBundle,
-            new \Symfony\Bundle\SecurityBundle\SecurityBundle,
-            new \Symfony\Bundle\TwigBundle\TwigBundle,
-            new \Symfony\Bundle\MonologBundle\MonologBundle,
-            new \Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle,
-            new \Symfony\Bundle\AsseticBundle\AsseticBundle,
-            new \Doctrine\Bundle\DoctrineBundle\DoctrineBundle,
-            new \Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle,
-            new \Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle,
-            new \Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle,
-            new \Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle,
-            new \FOS\JsRoutingBundle\FOSJsRoutingBundle,
-            new \Bazinga\Bundle\JsTranslationBundle\BazingaJsTranslationBundle,
-            new \Liip\ImagineBundle\LiipImagineBundle,
-            new \Ivory\LuceneSearchBundle\IvoryLuceneSearchBundle,
-            new \Knp\DoctrineBehaviors\Bundle\DoctrineBehaviorsBundle,
-            new \WellCommerce\Bundle\AppBundle\WellCommerceAppBundle
-        ];
+        $bundles = [];
 
         foreach ($this->getApplicationBundles() as $bundle) {
             $bundles[] = new $bundle;
-        }
-
-        if (in_array($this->getEnvironment(), ['dev', 'test'])) {
-            $bundles[] = new \Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
-            $bundles[] = new \Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
         }
 
         return $bundles;
@@ -60,6 +37,14 @@ class WellCommerceAppKernel extends Kernel
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
         $loader->load($this->getRootDir() . '/config/config_' . $this->getEnvironment() . '.yml');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSourceDirectory()
+    {
+        return $this->rootDir . '/../src';
     }
 
     /**
@@ -72,6 +57,39 @@ class WellCommerceAppKernel extends Kernel
         } else {
             $locator = new BundleLocator($this);
             $bundles = $locator->getBundles();
+        }
+
+        return $bundles;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCoreBundles()
+    {
+        $bundles = [
+            \Symfony\Bundle\FrameworkBundle\FrameworkBundle::class,
+            \Symfony\Bundle\SecurityBundle\SecurityBundle::class,
+            \Symfony\Bundle\TwigBundle\TwigBundle::class,
+            \Symfony\Bundle\MonologBundle\MonologBundle::class,
+            \Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle::class,
+            \Symfony\Bundle\AsseticBundle\AsseticBundle::class,
+            \Doctrine\Bundle\DoctrineBundle\DoctrineBundle::class,
+            \Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle::class,
+            \Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle::class,
+            \Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle::class,
+            \Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle::class,
+            \FOS\JsRoutingBundle\FOSJsRoutingBundle::class,
+            \Bazinga\Bundle\JsTranslationBundle\BazingaJsTranslationBundle::class,
+            \Liip\ImagineBundle\LiipImagineBundle::class,
+            \Ivory\LuceneSearchBundle\IvoryLuceneSearchBundle::class,
+            \Knp\DoctrineBehaviors\Bundle\DoctrineBehaviorsBundle::class,
+            \WellCommerce\Bundle\AppBundle\WellCommerceAppBundle::class,
+        ];
+
+        if (in_array($this->getEnvironment(), ['dev', 'test'])) {
+            $bundles[] = \Symfony\Bundle\WebProfilerBundle\WebProfilerBundle::class;
+            $bundles[] = \Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle::class;
         }
 
         return $bundles;
