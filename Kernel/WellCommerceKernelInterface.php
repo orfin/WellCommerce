@@ -10,19 +10,19 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Locator;
+namespace WellCommerce\Bundle\AppBundle\Kernel;
+
+use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
- * Interface BundleLocatorInterface
+ * Interface WellCommerceKernelInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface BundleLocatorInterface
+interface WellCommerceKernelInterface extends KernelInterface
 {
     /**
-     * Returns an array containing resolved bundle classes
-     *
-     * @return array
+     * @return string
      */
-    public function getBundles();
+    public function getSourceDirectory();
 }

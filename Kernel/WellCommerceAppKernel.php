@@ -10,11 +10,11 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle;
+namespace WellCommerce\Bundle\AppBundle\Kernel;
 
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\Kernel;
-use WellCommerce\Bundle\AppBundle\Locator\BundleLocator;
+use WellCommerce\Bundle\DistributionBundle\Locator\BundleLocator;
 
 /**
  * Class WellCommerceAppKernel
@@ -26,23 +26,23 @@ class WellCommerceAppKernel extends Kernel
     public function registerBundles()
     {
         $bundles = [
-            new \Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
-            new \Symfony\Bundle\SecurityBundle\SecurityBundle(),
-            new \Symfony\Bundle\TwigBundle\TwigBundle(),
-            new \Symfony\Bundle\MonologBundle\MonologBundle(),
-            new \Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
-            new \Symfony\Bundle\AsseticBundle\AsseticBundle(),
-            new \Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
-            new \Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle(),
-            new \Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
-            new \Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
-            new \Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            new \FOS\JsRoutingBundle\FOSJsRoutingBundle(),
-            new \Bazinga\Bundle\JsTranslationBundle\BazingaJsTranslationBundle(),
-            new \Liip\ImagineBundle\LiipImagineBundle(),
-            new \Ivory\LuceneSearchBundle\IvoryLuceneSearchBundle(),
-            new \Knp\DoctrineBehaviors\Bundle\DoctrineBehaviorsBundle(),
-            new WellCommerceAppBundle()
+            new \Symfony\Bundle\FrameworkBundle\FrameworkBundle,
+            new \Symfony\Bundle\SecurityBundle\SecurityBundle,
+            new \Symfony\Bundle\TwigBundle\TwigBundle,
+            new \Symfony\Bundle\MonologBundle\MonologBundle,
+            new \Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle,
+            new \Symfony\Bundle\AsseticBundle\AsseticBundle,
+            new \Doctrine\Bundle\DoctrineBundle\DoctrineBundle,
+            new \Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle,
+            new \Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle,
+            new \Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle,
+            new \Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle,
+            new \FOS\JsRoutingBundle\FOSJsRoutingBundle,
+            new \Bazinga\Bundle\JsTranslationBundle\BazingaJsTranslationBundle,
+            new \Liip\ImagineBundle\LiipImagineBundle,
+            new \Ivory\LuceneSearchBundle\IvoryLuceneSearchBundle,
+            new \Knp\DoctrineBehaviors\Bundle\DoctrineBehaviorsBundle,
+            new \WellCommerce\Bundle\AppBundle\WellCommerceAppBundle
         ];
 
         foreach ($this->getApplicationBundles() as $bundle) {
@@ -70,7 +70,7 @@ class WellCommerceAppKernel extends Kernel
         if (is_file($cache = $this->getCacheDir() . '/bundles.php')) {
             $bundles = require $cache;
         } else {
-            $locator = new BundleLocator($this->rootDir . '/../src');
+            $locator = new BundleLocator($this);
             $bundles = $locator->getBundles();
         }
 

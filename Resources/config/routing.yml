@@ -124,7 +124,7 @@ root:
 
 remove_trailing_slash:
     path: /{url}
-    defaults: { _controller: WellCommerceCoreBundle:Redirecting:removeTrailingSlash }
+    defaults: { _controller: WellCommerceAppBundle:Redirecting:removeTrailingSlash }
     requirements:
         url: .*/$
     methods: [GET]

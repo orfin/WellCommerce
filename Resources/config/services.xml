@@ -21,18 +21,5 @@
                 <argument type="service" id="service_container" />
             </call>
         </service>
-
-        <service id="app.command.install" class="WellCommerce\Bundle\AppBundle\Command\InstallCommand">
-            <tag name="console.command" />
-        </service>
-
-        <service id="app.bundle.locator" class="WellCommerce\Bundle\AppBundle\Locator\BundleLocator" public="false">
-            <argument>%kernel.root_dir%/../src</argument>
-        </service>
-
-        <service id="app.bundle.cache_warmer" class="WellCommerce\Bundle\AppBundle\CacheWarmer\BundleCacheWarmer" public="false">
-            <argument type="service" id="app.bundle.locator" />
-            <tag name="kernel.cache_warmer"/>
-        </service>
     </services>
 </container>
