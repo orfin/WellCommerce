@@ -16,6 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Output\ConsoleOutput;
+use Symfony\Component\Console\Output\ConsoleOutputInterface;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -56,13 +57,25 @@ class ConsoleActionExecutor implements ConsoleActionExecutorInterface
     /**
      * {@inheritdoc}
      */
-    public function execute(array $actions = [])
+    public function execute(array $actions = [], ConsoleOutputInterface $output = null)
     {
         $this->application = new Application($this->kernel);
-        $this->output      = ('cli' === PHP_SAPI) ? new ConsoleOutput() : new NullOutput();
+        $this->initOutput($output);
 
         foreach ($actions as $action) {
             $this->runAction($action);
+        }
+    }
+
+    /**
+     * @param ConsoleOutputInterface|null $output
+     */
+    protected function initOutput(ConsoleOutputInterface $output = null)
+    {
+        if (null === $output) {
+            $this->output = ('cli' === PHP_SAPI) ? new ConsoleOutput() : new NullOutput();
+        } else {
+            $this->output = $output;
         }
     }
 

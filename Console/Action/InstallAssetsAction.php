@@ -13,23 +13,19 @@
 namespace WellCommerce\Bundle\DistributionBundle\Console\Action;
 
 /**
- * Class InstallAction
+ * Class InstallAssetsAction
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class InstallAction implements ConsoleActionInterface
+class InstallAssetsAction implements ConsoleActionInterface
 {
     public function getCommandsToExecute()
     {
         return [
-            'doctrine:database:create'    => ['--if-not-exists' => true],
-            'doctrine:schema:drop'        => ['--force' => true],
-            'doctrine:schema:create'      => [],
-            'doctrine:fixtures:load'      => [],
             'assets:install'              => [],
             'bazinga:js-translation:dump' => [],
             'fos:js-routing:dump'         => [],
-            'assetic:dump'                => [],
+            'assetic:dump'                => []
         ];
     }
 }
