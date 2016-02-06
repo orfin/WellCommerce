@@ -54,17 +54,19 @@ class InstallCommand extends Command
     }
 
     /**
-     * Executes the command
+     * Executes the actions
      *
      * @param InputInterface  $input
      * @param OutputInterface $output
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->executor->execute([
+        $actions = [
             new InstallDatabaseAction(),
             new InstallFixturesAction(),
             new InstallAssetsAction()
-        ], $output);
+        ];
+
+        $this->executor->execute($actions, $output);
     }
 }
