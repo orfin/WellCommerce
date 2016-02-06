@@ -28,34 +28,7 @@ class AvailabilityMappingEnhancer extends AbstractMappingEnhancer
      */
     protected function configureMappingDefinition(MappingDefinitionCollection $collection)
     {
-        $collection->add(new FieldDefinition([
-            'fieldName'  => 'name',
-            'type'       => 'string',
-            'length'     => 50,
-            'unique'     => true,
-            'nullable'   => true,
-            'columnName' => 'name',
-        ]));
 
-        $collection->add(new FieldDefinition([
-            'fieldName'  => 'type',
-            'type'       => 'string',
-            'length'     => 255,
-            'unique'     => true,
-            'nullable'   => true,
-            'columnName' => 'type',
-        ]));
-
-        for ($i = 0; $i < 20; $i++) {
-            $collection->add(new FieldDefinition([
-                'fieldName'  => 'type' . $i,
-                'type'       => 'string',
-                'length'     => 255,
-                'unique'     => true,
-                'nullable'   => true,
-                'columnName' => 'type' . $i,
-            ]));
-        }
     }
 
     public function getSupportedEntityClass()
