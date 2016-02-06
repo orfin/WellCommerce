@@ -39,6 +39,7 @@
         "wellcommerce/currency-bundle": "^0.7@dev",
         "wellcommerce/deliverer-bundle": "^0.7@dev",
         "wellcommerce/dictionary-bundle": "^0.7@dev",
+        "wellcommerce/distribution-bundle": "^0.7@dev",
         "wellcommerce/doctrine-bundle": "^0.7@dev",
         "wellcommerce/layered-navigation-bundle": "^0.7@dev",
         "wellcommerce/layout-bundle": "^0.7@dev",
