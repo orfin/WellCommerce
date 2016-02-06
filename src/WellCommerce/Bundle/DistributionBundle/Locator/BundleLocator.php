@@ -31,6 +31,11 @@ class BundleLocator implements BundleLocatorInterface
     protected $rootDir;
 
     /**
+     * @var array
+     */
+    protected $bundles;
+
+    /**
      * BundleLocator constructor.
      *
      * @param WellCommerceKernelInterface $kernel
@@ -38,6 +43,7 @@ class BundleLocator implements BundleLocatorInterface
     public function __construct(WellCommerceKernelInterface $kernel)
     {
         $this->rootDir = $kernel->getSourceDirectory();
+        $this->bundles = $kernel->getCoreBundles();
     }
 
     /**
@@ -45,9 +51,9 @@ class BundleLocator implements BundleLocatorInterface
      */
     public function getBundles()
     {
-        $bundles = [];
-        $finder  = new Finder();
+        $finder = new Finder();
         $finder->in($this->rootDir)->name('*Bundle.php')->notName('WellCommerceAppBundle*')->depth(3);
+        $bundles = [];
 
         foreach ($finder->files() as $file) {
             $bundle = $this->getBundleClass($file);
@@ -57,7 +63,9 @@ class BundleLocator implements BundleLocatorInterface
         }
 
         natsort($bundles);
-        
+
+        $bundles = array_merge($this->bundles, $bundles);
+
         return $bundles;
     }
 

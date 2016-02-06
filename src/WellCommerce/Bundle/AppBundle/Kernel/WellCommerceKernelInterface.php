@@ -22,6 +22,11 @@ use Symfony\Component\HttpKernel\KernelInterface;
 interface WellCommerceKernelInterface extends KernelInterface
 {
     /**
+     * @return array
+     */
+    public function getCoreBundles();
+
+    /**
      * @return string
      */
     public function getSourceDirectory();

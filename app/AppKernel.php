@@ -18,13 +18,6 @@ use WellCommerce\Bundle\AppBundle\Kernel\WellCommerceKernelInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AppKernel extends WellCommerceAppKernel implements WellCommerceKernelInterface
+class AppKernel extends WellCommerceAppKernel
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getSourceDirectory()
-    {
-        return $this->rootDir . '/../src';
-    }
 }
