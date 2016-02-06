@@ -11,9 +11,5 @@
         <service id="availability.event_dispatcher" parent="core.event_dispatcher" public="false">
             <argument type="service" id="event_dispatcher" />
         </service>
-
-        <service id="availability.mapping.enhancer" class="WellCommerce\Bundle\AvailabilityBundle\Enhancer\AvailabilityMappingEnhancer">
-            <tag name="doctrine.mapping.enhancer"/>
-        </service>
     </services>
 </container>
