@@ -16,14 +16,14 @@ use BetterReflection\Reflector\ClassReflector;
 use BetterReflection\SourceLocator\Type\SingleFileSourceLocator;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
-use WellCommerce\Bundle\AppBundle\Kernel\WellCommerceKernelInterface;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
  * Class BundleLocator
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class BundleLocator implements BundleLocatorInterface
+class BundleLocator
 {
     /**
      * @var string
@@ -31,25 +31,19 @@ class BundleLocator implements BundleLocatorInterface
     protected $rootDir;
 
     /**
-     * @var array
-     */
-    protected $bundles;
-
-    /**
      * BundleLocator constructor.
      *
-     * @param WellCommerceKernelInterface $kernel
+     * @param KernelInterface $kernel
      */
-    public function __construct(WellCommerceKernelInterface $kernel)
+    public function __construct(KernelInterface $kernel)
     {
-        $this->rootDir = $kernel->getSourceDirectory();
-        $this->bundles = $kernel->getCoreBundles();
+        $this->rootDir = $kernel->getRootDir() . '/../src';
     }
 
     /**
-     * {@inheritdoc}
+     * @return array
      */
-    public function getBundles()
+    public function locateBundleClasses()
     {
         $finder = new Finder();
         $finder->in($this->rootDir)->name('*Bundle.php')->notName('WellCommerceAppBundle*')->depth(3);
@@ -63,8 +57,6 @@ class BundleLocator implements BundleLocatorInterface
         }
 
         natsort($bundles);
-
-        $bundles = array_merge($this->bundles, $bundles);
 
         return $bundles;
     }

@@ -10,62 +10,77 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Kernel;
+namespace WellCommerce\Bundle\DistributionBundle\Loader;
 
-use Symfony\Component\Config\Loader\LoaderInterface;
-use Symfony\Component\HttpKernel\Kernel;
+use Symfony\Component\HttpKernel\KernelInterface;
 use WellCommerce\Bundle\DistributionBundle\Locator\BundleLocator;
 
 /**
- * Class WellCommerceAppKernel
+ * Class BundleLoader
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class WellCommerceAppKernel extends Kernel implements WellCommerceKernelInterface
+class BundleLoader
 {
-    public function registerBundles()
+    const CACHE_FILENAME = 'bundles.php';
+
+    /**
+     * @var KernelInterface
+     */
+    protected $kernel;
+
+    /**
+     * BundleLoader constructor.
+     *
+     * @param KernelInterface $kernel
+     */
+    public function __construct(KernelInterface $kernel)
     {
-        $bundles = [];
-
-        foreach ($this->getApplicationBundles() as $bundle) {
-            $bundles[] = new $bundle;
-        }
-
-        return $bundles;
-    }
-
-    public function registerContainerConfiguration(LoaderInterface $loader)
-    {
-        $loader->load($this->getRootDir() . '/config/config_' . $this->getEnvironment() . '.yml');
+        $this->kernel = $kernel;
     }
 
     /**
-     * {@inheritdoc}
+     * @return \Symfony\Component\HttpKernel\Bundle\BundleInterface
      */
-    public function getSourceDirectory()
+    public function loadBundles()
     {
-        return $this->rootDir . '/../src';
+        $bundles = [];
+
+        if (is_file($cache = $this->kernel->getCacheDir() . '/' . self::CACHE_FILENAME)) {
+            $bundleClasses = require $cache;
+        } else {
+            $bundleClasses = $this->getManagedBundleClasses();
+        }
+
+        foreach ($bundleClasses as $bundleClass) {
+            $bundles[] = new $bundleClass;
+        }
+
+        return $bundles;
     }
 
     /**
      * @return array
      */
-    private function getApplicationBundles()
+    protected function getManagedBundleClasses()
     {
-        if (is_file($cache = $this->getCacheDir() . '/bundles.php')) {
-            $bundles = require $cache;
-        } else {
-            $locator = new BundleLocator($this);
-            $bundles = $locator->getBundles();
-        }
+        $locator = $this->getLocator();
 
-        return $bundles;
+        return array_merge($this->getCoreBundlesClasses(), $locator->locateBundleClasses());
     }
 
     /**
-     * {@inheritdoc}
+     * @return BundleLocator
      */
-    public function getCoreBundles()
+    protected function getLocator()
+    {
+        return new BundleLocator($this->kernel);
+    }
+
+    /**
+     * @return array
+     */
+    public function getCoreBundlesClasses()
     {
         $bundles = [
             \Symfony\Bundle\FrameworkBundle\FrameworkBundle::class,
@@ -87,7 +102,7 @@ class WellCommerceAppKernel extends Kernel implements WellCommerceKernelInterfac
             \WellCommerce\Bundle\AppBundle\WellCommerceAppBundle::class,
         ];
 
-        if (in_array($this->getEnvironment(), ['dev', 'test'])) {
+        if (in_array($this->kernel->getEnvironment(), ['dev', 'test'])) {
             $bundles[] = \Symfony\Bundle\WebProfilerBundle\WebProfilerBundle::class;
             $bundles[] = \Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle::class;
         }
