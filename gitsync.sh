@@ -6,6 +6,7 @@ if [ "$action" == 'clear' ]
     then
         git stree clear
         git remote rm stree-adminbundle
+        git remote rm stree-apibundle
         git remote rm stree-appbundle
         git remote rm stree-attributebundle
         git remote rm stree-availabilitybundle
@@ -52,6 +53,7 @@ if [ "$action" == 'clear' ]
         git remote rm stree-wishlistbundle
 
         git branch -D stree-backports-adminbundle
+        git branch -D stree-backports-apibundle
         git branch -D stree-backports-appbundle
         git branch -D stree-backports-attributebundle
         git branch -D stree-backports-availabilitybundle
@@ -108,6 +110,7 @@ if [ "$action" == 'init' ]
         git stree add DataGrid -P src/WellCommerce/Component/DataGrid git@github.com:WellCommerce/DataGrid.git
         git stree add Form -P src/WellCommerce/Component/Form git@github.com:WellCommerce/Form.git
         git stree add AdminBundle -P src/WellCommerce/Bundle/AdminBundle git@github.com:WellCommerce/AdminBundle.git
+        git stree add ApiBundle -P src/WellCommerce/Bundle/ApiBundle git@github.com:WellCommerce/ApiBundle.git
         git stree add AppBundle -P src/WellCommerce/Bundle/AppBundle git@github.com:WellCommerce/AppBundle.git
         git stree add AttributeBundle -P src/WellCommerce/Bundle/AttributeBundle git@github.com:WellCommerce/AttributeBundle.git
         git stree add AvailabilityBundle -P src/WellCommerce/Bundle/AvailabilityBundle git@github.com:WellCommerce/AvailabilityBundle.git
@@ -152,6 +155,7 @@ fi
 if [ "$action" == 'push' ]
     then
         git stree push AdminBundle
+        git stree push ApiBundle
         git stree push AppBundle
         git stree push AttributeBundle
         git stree push AvailabilityBundle
