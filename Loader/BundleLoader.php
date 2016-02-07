@@ -62,25 +62,19 @@ class BundleLoader
     /**
      * @return array
      */
-    protected function getManagedBundleClasses()
+    public function getManagedBundleClasses()
     {
+        $bundles = $this->getCoreBundlesClasses();
         $locator = $this->getLocator();
+        $bundles = array_merge($bundles, $locator->locateBundleClasses());
 
-        return array_merge($this->getCoreBundlesClasses(), $locator->locateBundleClasses());
-    }
-
-    /**
-     * @return BundleLocator
-     */
-    protected function getLocator()
-    {
-        return new BundleLocator($this->kernel);
+        return $bundles;
     }
 
     /**
      * @return array
      */
-    public function getCoreBundlesClasses()
+    protected function getCoreBundlesClasses()
     {
         $bundles = [
             \Symfony\Bundle\FrameworkBundle\FrameworkBundle::class,
@@ -108,5 +102,13 @@ class BundleLoader
         }
 
         return $bundles;
+    }
+
+    /**
+     * @return BundleLocator
+     */
+    protected function getLocator()
+    {
+        return new BundleLocator($this->kernel);
     }
 }
