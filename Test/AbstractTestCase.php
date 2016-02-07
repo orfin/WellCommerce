@@ -54,12 +54,6 @@ abstract class AbstractTestCase extends KernelTestCase
         $this->setCurrentShop();
     }
 
-    protected function tearDown()
-    {
-        parent::tearDown();
-        $this->em->getConnection()->close();
-    }
-
     /**
      * Creates a Client.
      *
