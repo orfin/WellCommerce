@@ -56,7 +56,7 @@ class RequestHelper implements RequestHelperInterface
      */
     public function getCurrentHost()
     {
-        if (!is_object($this->request->server)) {
+        if (!is_object($this->request) || !is_object($this->request->server)) {
             return null;
         }
 
