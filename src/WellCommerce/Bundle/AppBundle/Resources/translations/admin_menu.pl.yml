@@ -37,7 +37,7 @@ tax: Stawki podatku
 theme: Szablony strony
 package: Moduły
 channel: Kanały aktualizacji
-smuggler: Zarządzanie modułami
+distribution: Zarządzanie aplikacją
 multi_store: Zarządzanie multi-store
 company: Firmy
 shop: Sklepy

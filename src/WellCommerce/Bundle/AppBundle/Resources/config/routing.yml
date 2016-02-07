@@ -25,6 +25,9 @@ wellcommerce_deliverer:
 wellcommerce_dictionary:
     resource: "@WellCommerceDictionaryBundle/Resources/config/routing.xml"
 
+wellcommerce_distribution:
+    resource: "@WellCommerceDistributionBundle/Resources/config/routing.xml"
+
 wellcommerce_layered_navigation:
     resource: "@WellCommerceLayeredNavigationBundle/Resources/config/routing.xml"
 
@@ -90,9 +93,6 @@ wellcommerce_search:
 
 wellcommerce_shipping:
     resource: "@WellCommerceShippingBundle/Resources/config/routing.xml"
-
-wellcommerce_smuggler:
-    resource: "@WellCommerceSmugglerBundle/Resources/config/routing.xml"
 
 wellcommerce_tax:
     resource: "@WellCommerceTaxBundle/Resources/config/routing.xml"

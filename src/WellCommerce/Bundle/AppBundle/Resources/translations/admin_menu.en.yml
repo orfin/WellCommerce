@@ -37,7 +37,7 @@ tax: Taxes
 theme: Themes
 package: Packages
 channel: Channels
-smuggler: 'Package management'
+distribution: 'Application management'
 multi_store: 'Multistore management'
 company: Companies
 shop: Shops

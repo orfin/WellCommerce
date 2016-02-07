@@ -45,7 +45,6 @@ if [ "$action" == 'clear' ]
         git remote rm stree-searchbundle
         git remote rm stree-shippingbundle
         git remote rm stree-shopbundle
-        git remote rm stree-smugglerbundle
         git remote rm stree-taxbundle
         git remote rm stree-themebundle
         git remote rm stree-unitbundle
@@ -91,7 +90,6 @@ if [ "$action" == 'clear' ]
         git branch -D stree-backports-searchbundle
         git branch -D stree-backports-shippingbundle
         git branch -D stree-backports-shopbundle
-        git branch -D stree-backports-smugglerbundle
         git branch -D stree-backports-taxbundle
         git branch -D stree-backports-themebundle
         git branch -D stree-backports-unitbundle
@@ -144,7 +142,6 @@ if [ "$action" == 'init' ]
         git stree add SearchBundle -P src/WellCommerce/Bundle/SearchBundle git@github.com:WellCommerce/SearchBundle.git
         git stree add ShippingBundle -P src/WellCommerce/Bundle/ShippingBundle git@github.com:WellCommerce/ShippingBundle.git
         git stree add ShopBundle -P src/WellCommerce/Bundle/ShopBundle git@github.com:WellCommerce/ShopBundle.git
-        git stree add SmugglerBundle -P src/WellCommerce/Bundle/SmugglerBundle git@github.com:WellCommerce/SmugglerBundle.git
         git stree add TaxBundle -P src/WellCommerce/Bundle/TaxBundle git@github.com:WellCommerce/TaxBundle.git
         git stree add ThemeBundle -P src/WellCommerce/Bundle/ThemeBundle git@github.com:WellCommerce/ThemeBundle.git
         git stree add UnitBundle -P src/WellCommerce/Bundle/UnitBundle git@github.com:WellCommerce/UnitBundle.git
@@ -193,7 +190,6 @@ if [ "$action" == 'push' ]
         git stree push SearchBundle
         git stree push ShippingBundle
         git stree push ShopBundle
-        git stree push SmugglerBundle
         git stree push TaxBundle
         git stree push ThemeBundle
         git stree push UnitBundle
