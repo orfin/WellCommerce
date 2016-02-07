@@ -20,6 +20,7 @@ imports:
     - { resource: "@WellCommerceCurrencyBundle/Resources/config/wellcommerce.yml" }
     - { resource: "@WellCommerceDelivererBundle/Resources/config/wellcommerce.yml" }
     - { resource: "@WellCommerceDictionaryBundle/Resources/config/wellcommerce.yml" }
+    - { resource: "@WellCommerceDistributionBundle/Resources/config/wellcommerce.yml" }
     - { resource: "@WellCommerceLayoutBundle/Resources/config/wellcommerce.yml" }
     - { resource: "@WellCommerceLocaleBundle/Resources/config/wellcommerce.yml" }
     - { resource: "@WellCommerceMediaBundle/Resources/config/wellcommerce.yml" }
@@ -36,7 +37,6 @@ imports:
     - { resource: "@WellCommerceSearchBundle/Resources/config/wellcommerce.yml" }
     - { resource: "@WellCommerceShippingBundle/Resources/config/wellcommerce.yml" }
     - { resource: "@WellCommerceShopBundle/Resources/config/wellcommerce.yml" }
-    - { resource: "@WellCommerceSmugglerBundle/Resources/config/wellcommerce.yml" }
     - { resource: "@WellCommerceTaxBundle/Resources/config/wellcommerce.yml" }
     - { resource: "@WellCommerceThemeBundle/Resources/config/wellcommerce.yml" }
     - { resource: "@WellCommerceUnitBundle/Resources/config/wellcommerce.yml" }

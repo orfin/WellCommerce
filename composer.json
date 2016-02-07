@@ -59,7 +59,6 @@
         "wellcommerce/search-bundle": "^0.7@dev",
         "wellcommerce/shipping-bundle": "^0.7@dev",
         "wellcommerce/shop-bundle": "^0.7@dev",
-        "wellcommerce/smuggler-bundle": "^0.7@dev",
         "wellcommerce/tax-bundle": "^0.7@dev",
         "wellcommerce/theme-bundle": "^0.7@dev",
         "wellcommerce/unit-bundle": "^0.7@dev",
