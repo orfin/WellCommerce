@@ -12,7 +12,9 @@
 
 namespace WellCommerce\Bundle\DistributionBundle;
 
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
+use WellCommerce\Bundle\DistributionBundle\DependencyInjection\Compiler;
 
 /**
  * Class WellCommerceDistributionBundle
@@ -21,4 +23,10 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  */
 class WellCommerceDistributionBundle extends Bundle
 {
+    public function build(ContainerBuilder $container)
+    {
+        parent::build($container);
+        $container->addCompilerPass(new Compiler\AutoRegisterServicesPass());
+        $container->addCompilerPass(new Compiler\MappingCompilerPass());
+    }
 }
