@@ -25,7 +25,7 @@ class TimestampableSubscriber extends AbstractSubscriber implements EventSubscri
     protected $fields = ['createdAt', 'updatedAt'];
 
     /**
-     * @var \Doctrine\Common\Persistence\Mapping\ClassMetadata
+     * @var \Doctrine\ORM\Mapping\ClassMetadataInfo
      */
     protected $classMetadata;
 

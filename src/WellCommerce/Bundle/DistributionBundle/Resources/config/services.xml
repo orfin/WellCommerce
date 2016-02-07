@@ -18,8 +18,12 @@
             <argument type="service" id="kernel"/>
         </service>
 
+        <service id="distribution.bundle.loader" class="WellCommerce\Bundle\DistributionBundle\Loader\BundleLoader" public="false">
+            <argument type="service" id="kernel"/>
+        </service>
+
         <service id="distribution.bundle.cache_warmer" class="WellCommerce\Bundle\DistributionBundle\CacheWarmer\BundleCacheWarmer" public="false">
-            <argument type="service" id="distribution.bundle.locator" />
+            <argument type="service" id="distribution.bundle.loader" />
             <tag name="kernel.cache_warmer"/>
         </service>
     </services>

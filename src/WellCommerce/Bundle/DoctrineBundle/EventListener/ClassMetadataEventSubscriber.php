@@ -42,8 +42,13 @@ class ClassMetadataEventSubscriber implements EventSubscriber
     public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
     {
         /** @var $metadata \Doctrine\Common\Persistence\Mapping\ClassMetadata */
-        $metadata = $eventArgs->getClassMetadata();
+        $metadata        = $eventArgs->getClassMetadata();
+        $reflectionClass = $metadata->getReflectionClass();
         $this->traverser->traverse($metadata);
+    }
+
+    protected function registerTimestampable(){
+
     }
 
     public function getSubscribedEvents()

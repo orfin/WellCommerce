@@ -12,9 +12,8 @@
 
 namespace WellCommerce\Bundle\DistributionBundle\CacheWarmer;
 
-use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\HttpKernel\CacheWarmer\CacheWarmer;
-use WellCommerce\Bundle\DistributionBundle\Locator\BundleLocator;
+use WellCommerce\Bundle\DistributionBundle\Loader\BundleLoader;
 
 /**
  * Class BundleCacheWarmer
@@ -24,18 +23,18 @@ use WellCommerce\Bundle\DistributionBundle\Locator\BundleLocator;
 class BundleCacheWarmer extends CacheWarmer
 {
     /**
-     * @var BundleLocator
+     * @var BundleLoader
      */
-    protected $locator;
+    protected $loader;
 
     /**
      * BundleCacheWarmer constructor.
      *
-     * @param BundleLocator $locator
+     * @param BundleLoader $loader
      */
-    public function __construct(BundleLocator $locator)
+    public function __construct(BundleLoader $loader)
     {
-        $this->locator = $locator;
+        $this->loader = $loader;
     }
 
     /**
@@ -45,7 +44,7 @@ class BundleCacheWarmer extends CacheWarmer
      */
     public function warmUp($cacheDir)
     {
-        $bundlesClasses = $this->locator->locateBundleClasses();
+        $bundlesClasses = $this->loader->getManagedBundleClasses();
         if (count($bundlesClasses)) {
             $this->writeCacheFile($cacheDir . '/bundles.php', sprintf('<?php return %s;', var_export($bundlesClasses, true)));
         }
