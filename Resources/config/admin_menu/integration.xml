@@ -10,9 +10,9 @@
     </item>
 
     <item>
-        <identifier>smuggler</identifier>
+        <identifier>distribution</identifier>
         <css_class/>
-        <name>smuggler</name>
+        <name>distribution</name>
         <route_name>admin.package.index</route_name>
         <parent>integration</parent>
         <hierarchy>10</hierarchy>
@@ -23,16 +23,7 @@
         <css_class/>
         <name>package</name>
         <route_name>admin.package.index</route_name>
-        <parent>smuggler</parent>
+        <parent>distribution</parent>
         <hierarchy>10</hierarchy>
-    </item>
-
-    <item>
-        <identifier>channel</identifier>
-        <css_class/>
-        <name>channel</name>
-        <route_name>admin.channel.index</route_name>
-        <parent>smuggler</parent>
-        <hierarchy>20</hierarchy>
     </item>
 </items>
