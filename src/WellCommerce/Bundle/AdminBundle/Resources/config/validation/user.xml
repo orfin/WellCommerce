@@ -10,6 +10,9 @@
         <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
             <option name="fields">email</option>
         </constraint>
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+            <option name="fields">apiKey</option>
+        </constraint>
         <property name="firstName">
             <constraint name="NotBlank" />
             <constraint name="NotNull" />
