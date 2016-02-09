@@ -12,6 +12,11 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        api:
+            pattern:   ^/api
+            guard:
+                authenticators:
+                    - api.security.token_authenticator
         admin:
             pattern:   ^/admin
             anonymous: ~

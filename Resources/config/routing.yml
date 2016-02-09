@@ -1,3 +1,6 @@
+wellcommerce_api:
+    resource: "@WellCommerceApiBundle/Resources/config/routing.xml"
+
 wellcommerce_app:
     resource: "@WellCommerceAppBundle/Resources/config/routing.xml"
 
