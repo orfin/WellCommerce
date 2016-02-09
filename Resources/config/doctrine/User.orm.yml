@@ -5,66 +5,52 @@ WellCommerce\Bundle\AdminBundle\Entity\User:
     id:
         id:
             type: integer
-            scale: 0
-            length: null
-            unique: false
-            nullable: false
-            precision: 0
             id: true
             generator:
                 strategy: IDENTITY
     fields:
         firstName:
             type: string
-            scale: 0
             length: 64
             unique: false
             nullable: false
-            precision: 0
             column: first_name
         lastName:
             type: string
-            scale: 0
             length: 64
             unique: false
             nullable: false
-            precision: 0
             column: last_name
         username:
             type: string
-            scale: 0
             length: 25
             unique: true
             nullable: false
-            precision: 0
         password:
             type: string
-            scale: 0
             length: 64
             unique: false
             nullable: false
-            precision: 0
         email:
             type: string
-            scale: 0
             length: 60
             unique: true
             nullable: false
-            precision: 0
         salt:
             type: string
-            scale: 0
             length: 40
             unique: false
             nullable: false
-            precision: 0
         enabled:
             type: boolean
-            scale: 0
             length: null
             unique: false
             nullable: false
-            precision: 0
+        apiKey:
+            type: string
+            length: 40
+            unique: true
+            nullable: true
     manyToMany:
         roles:
             targetEntity: WellCommerce\Bundle\AdminBundle\Entity\Role

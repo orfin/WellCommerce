@@ -70,6 +70,16 @@ class UserFormBuilder extends AbstractFormBuilder
             'transformer' => $this->getRepositoryTransformer('collection', $this->get('user_group.repository')),
         ]));
 
+        $apiData = $form->addChild($this->getElement('nested_fieldset', [
+            'name'  => 'api_data',
+            'label' => $this->trans('user.fieldset.api_access')
+        ]));
+
+        $apiData->addChild($this->getElement('text_field', [
+            'name'  => 'apiKey',
+            'label' => $this->trans('user.label.api_key'),
+        ]));
+
         $form->addFilter($this->getFilter('no_code'));
         $form->addFilter($this->getFilter('trim'));
         $form->addFilter($this->getFilter('secure'));

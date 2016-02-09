@@ -52,6 +52,11 @@ class User implements UserInterface
     /**
      * @var string
      */
+    protected $apiKey;
+
+    /**
+     * @var string
+     */
     protected $password;
 
     /**
@@ -261,5 +266,21 @@ class User implements UserInterface
     public function setGroups(Collection $groups)
     {
         $this->groups = $groups;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getApiKey()
+    {
+        return $this->apiKey;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setApiKey($apiKey)
+    {
+        $this->apiKey = $apiKey;
     }
 }

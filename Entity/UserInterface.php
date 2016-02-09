@@ -124,4 +124,14 @@ interface UserInterface extends \Serializable, EquatableInterface, BaseUserInter
      * @param bool $enabled
      */
     public function setEnabled($enabled);
+
+    /**
+     * @return string
+     */
+    public function getApiKey();
+
+    /**
+     * @param string $apiKey
+     */
+    public function setApiKey($apiKey);
 }
