@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
 use WellCommerce\Bundle\CoreBundle\EventDispatcher\EventDispatcherInterface;
 use WellCommerce\Component\DataGrid\Column\ColumnCollection;
-use WellCommerce\Component\DataGrid\Conditions\ConditionsResolver;
+use WellCommerce\Component\DataSet\Conditions\ConditionsResolver;
 use WellCommerce\Component\DataGrid\Configuration\EventHandler\ClickRowEventHandler;
 use WellCommerce\Component\DataGrid\Configuration\EventHandler\DeleteRowEventHandler;
 use WellCommerce\Component\DataGrid\Configuration\EventHandler\EditRowEventHandler;
