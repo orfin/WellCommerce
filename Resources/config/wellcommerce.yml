@@ -7,17 +7,14 @@ well_commerce_product_status:
             orm_configuration:
                 mapping: "@WellCommerceProductStatusBundle/Resources/config/doctrine/ProductStatus.orm.yml"
                 entity: WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatus
+            api_configuration:
+                exposed: true
+                dataset: product_status.dataset.admin
         product_status_route:
-            auto_services:
-                factory: ~
-                repository: ~
             orm_configuration:
                 mapping: "@WellCommerceProductStatusBundle/Resources/config/doctrine/ProductStatusRoute.orm.yml"
                 entity: WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusRoute
         product_status_translation:
-            auto_services:
-                factory: ~
-                repository: ~
             orm_configuration:
                 mapping: "@WellCommerceProductStatusBundle/Resources/config/doctrine/ProductStatusTranslation.orm.yml"
                 entity: WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusTranslation
