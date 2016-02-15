@@ -12,11 +12,10 @@
 
 namespace WellCommerce\Bundle\DistributionBundle\Locator;
 
-use BetterReflection\Reflector\ClassReflector;
-use BetterReflection\SourceLocator\Type\SingleFileSourceLocator;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 use Symfony\Component\HttpKernel\KernelInterface;
+use Wingu\OctopusCore\Reflection\ReflectionFile;
 
 /**
  * Class BundleLocator
@@ -70,11 +69,11 @@ class BundleLocator
      */
     private function getBundleClass(SplFileInfo $fileInfo)
     {
-        $reflector         = new ClassReflector(new SingleFileSourceLocator($fileInfo->getRealpath()));
-        $reflectionClasses = $reflector->getAllClasses();
+        $reflection = new ReflectionFile($fileInfo->getRealPath());
+        $baseName   = $fileInfo->getBasename('.php');
 
-        foreach ($reflectionClasses as $reflectionClass) {
-            return $reflectionClass->getName();
+        foreach ($reflection->getNamespaces() as $namespace) {
+            return $namespace . '\\' . $baseName;
         }
 
         return null;
