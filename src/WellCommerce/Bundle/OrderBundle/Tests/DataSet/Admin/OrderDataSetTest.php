@@ -29,14 +29,15 @@ class OrderDataSetTest extends AbstractDataSetTestCase
     protected function getColumns()
     {
         return [
-            'id'            => 'orders.id',
-            'client'        => 'CONCAT_WS(\':\', orders.billingAddress.firstName, orders.billingAddress.lastName, orders.contactDetails.phone)',
-            'productTotal'  => 'orders.productTotal.grossAmount',
-            'shippingTotal' => 'orders.shippingTotal.grossAmount',
-            'orderTotal'    => 'orders.orderTotal.grossAmount',
-            'currentStatus' => 'status_translation.name',
-            'currency'      => 'orders.currency',
-            'createdAt'     => 'orders.createdAt',
+            'id'                => 'orders.id',
+            'client'            => 'CONCAT_WS(\':\', orders.billingAddress.firstName, orders.billingAddress.lastName, orders.contactDetails.phone)',
+            'productTotal'      => 'orders.productTotal.grossAmount',
+            'shippingTotal'     => 'orders.shippingTotal.grossAmount',
+            'orderTotal'        => 'orders.orderTotal.grossAmount',
+            'currentStatusId'   => 'IDENTITY(orders.currentStatus)',
+            'currentStatusName' => 'status_translation.name',
+            'currency'          => 'orders.currency',
+            'createdAt'         => 'orders.createdAt',
         ];
     }
 }
