@@ -84,11 +84,6 @@ class Order implements OrderInterface
     protected $sessionId;
 
     /**
-     * @var ShippingMethodCostInterface
-     */
-    protected $shippingMethodCost;
-
-    /**
      * @var OrderStatusInterface
      */
     protected $currentStatus;

@@ -9,16 +9,6 @@
     </imports>
 
     <services>
-        <!--<service id="order.factory" class="WellCommerce\Bundle\OrderBundle\Factory\OrderFactory">-->
-            <!--<argument type="service" id="order_product.factory"/>-->
-            <!--<argument type="service" id="order_total.factory"/>-->
-            <!--<argument type="service" id="currency.helper"/>-->
-        <!--</service>-->
-
-        <!--<service id="order_product.factory" class="WellCommerce\Bundle\OrderBundle\Factory\OrderProductFactory">-->
-            <!--<argument type="service" id="currency.helper"/>-->
-        <!--</service>-->
-
         <service id="order.event_dispatcher" class="WellCommerce\Bundle\OrderBundle\EventDispatcher\OrderEventDispatcher">
             <argument type="service" id="event_dispatcher"/>
         </service>

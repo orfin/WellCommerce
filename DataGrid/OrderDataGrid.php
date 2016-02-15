@@ -105,7 +105,7 @@ class OrderDataGrid extends AbstractDataGrid
         ]));
 
         $collection->add(new Column([
-            'id'         => 'currentStatus',
+            'id'         => 'currentStatusName',
             'caption'    => $this->trans('order.label.current_status'),
             'filter'     => new Filter([
                 'type' => Filter::FILTER_INPUT,
