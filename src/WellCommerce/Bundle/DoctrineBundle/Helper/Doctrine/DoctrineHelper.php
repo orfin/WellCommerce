@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\DoctrineBundle\Helper\Doctrine;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Common\Util\ClassUtils;
 use Doctrine\ORM\Mapping\ClassMetadata;
 
 /**
@@ -75,6 +76,26 @@ class DoctrineHelper implements DoctrineHelperInterface
     public function getClassMetadata($className)
     {
         return $this->getEntityManager()->getClassMetadata($className);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getClassMetadataForEntity($object)
+    {
+        $className = ClassUtils::getRealClass(get_class($object));
+
+        return $this->getClassMetadata($className);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasClassMetadataForEntity($object)
+    {
+        $className = ClassUtils::getRealClass(get_class($object));
+
+        return $this->getMetadataFactory()->hasMetadataFor($className);
     }
 
     /**

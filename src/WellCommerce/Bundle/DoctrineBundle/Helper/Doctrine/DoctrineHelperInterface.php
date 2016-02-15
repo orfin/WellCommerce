@@ -50,13 +50,31 @@ interface DoctrineHelperInterface
     public function enableFilter($filter);
 
     /**
-     * Returns class metadata if exists
+     * Returns class metadata for given class name
      *
-     * @param $className
+     * @param string $className
      *
      * @return \Doctrine\Common\Persistence\Mapping\ClassMetadata
      */
     public function getClassMetadata($className);
+
+    /**
+     * Returns class metadata for given object
+     *
+     * @param object $entity
+     *
+     * @return \Doctrine\Common\Persistence\Mapping\ClassMetadata
+     */
+    public function getClassMetadataForEntity($entity);
+
+    /**
+     * Returns true if entity is managed through Doctrine, false otherwise
+     *
+     * @param object $object
+     *
+     * @return bool
+     */
+    public function hasClassMetadataForEntity($object);
 
     /**
      * Truncates table

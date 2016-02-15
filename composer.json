@@ -53,10 +53,8 @@
         "zendframework/zend-json": "^2.6@dev",
         "mmoreram/simple-doctrine-mapping": "^1.1",
         "league/oauth2-facebook": "~1.0",
-        "zendframework/zend-code": "^2.6|^3.0",
         "wingu/code-generator": "^1.0",
-        "roave/better-reflection": "^1.0",
-        "jms/serializer-bundle": "^1.1"
+        "roave/better-reflection": "^1.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0@dev",

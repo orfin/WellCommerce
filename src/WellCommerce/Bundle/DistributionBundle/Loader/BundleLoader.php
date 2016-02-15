@@ -93,7 +93,6 @@ class BundleLoader
             \Liip\ImagineBundle\LiipImagineBundle::class,
             \Ivory\LuceneSearchBundle\IvoryLuceneSearchBundle::class,
             \Knp\DoctrineBehaviors\Bundle\DoctrineBehaviorsBundle::class,
-            \JMS\SerializerBundle\JMSSerializerBundle::class,
             \WellCommerce\Bundle\AppBundle\WellCommerceAppBundle::class,
         ];
 

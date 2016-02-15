@@ -25,5 +25,7 @@ framework:
     fragments:       ~
     http_method_override: true
     assets: ~
+    serializer:
+        enabled: true
     profiler:
         matcher: { ip: "%developer_mode.ip%" }

@@ -16,6 +16,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
 use WellCommerce\Bundle\AdminBundle\Entity\UserGroupInterface;
 use WellCommerce\Bundle\AdminBundle\Entity\UserGroupPermission;
+use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 use WellCommerce\Bundle\DoctrineBundle\DataFixtures\AbstractDataFixture;
 
 /**
@@ -39,10 +40,14 @@ class LoadUserData extends AbstractDataFixture
         $role->setRole('ROLE_ADMIN');
         $manager->persist($role);
 
+        $this->setReference('default_role', $role);
+
         $group = $this->container->get('user_group.factory')->create();
         $group->setName('Administration');
         $group->setPermissions($this->getPermissions($group));
         $manager->persist($group);
+
+        $this->setReference('default_group', $group);
 
         $user = $this->container->get('user.factory')->create();
         $user->setFirstName('John');
@@ -53,6 +58,7 @@ class LoadUserData extends AbstractDataFixture
         $user->setPassword('admin');
         $user->addRole($role);
         $user->getGroups()->add($group);
+        $user->setApiKey(Helper::generateRandomPassword(8));
         $manager->persist($user);
 
         $manager->flush();

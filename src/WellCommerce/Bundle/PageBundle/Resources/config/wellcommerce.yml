@@ -7,6 +7,9 @@ well_commerce_page:
             orm_configuration:
                 mapping: "@WellCommercePageBundle/Resources/config/doctrine/Page.orm.yml"
                 entity: WellCommerce\Bundle\PageBundle\Entity\Page
+            api_configuration:
+                exposed: true
+                dataset: page.dataset.admin
         page_route:
             auto_services:
                 factory: ~
