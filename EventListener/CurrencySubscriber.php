@@ -34,10 +34,6 @@ class CurrencySubscriber extends AbstractEventSubscriber
 
     public function onKernelController(FilterControllerEvent $event)
     {
-        if ($event->getRequestType() == HttpKernelInterface::SUB_REQUEST) {
-            return;
-        }
-
         $request = $event->getRequest();
         $session = $request->getSession();
 
