@@ -1,0 +1,12 @@
+dictionary:
+    heading:
+        index: Translations
+        add: Add a translation
+        edit: Edit a translation
+    label:
+        identifier: Identifier
+        translation: Translation
+        locale: Locale
+    button:
+        add: Add new translation
+        sync: Synchronize translations

@@ -1,0 +1,21 @@
+channel:
+    heading:
+        index: Channel
+        add: Add a new channel
+    label:
+        name: Name
+        url: URL
+
+package:
+    heading:
+        index: Packages
+    button:
+        sync: Synchronize packages
+    label:
+        name: Name
+        full_name: Full name
+        vendor: Vendor
+        local_version: Local version
+        remote_version: Remote version
+        created_at: Installed at
+        updated_at: Updated at

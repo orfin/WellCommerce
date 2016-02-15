@@ -41,7 +41,7 @@ class DictionaryFormBuilder extends AbstractFormBuilder
 
         $languageData = $requiredData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
-            'label'       => $this->trans('form.fieldset.translations'),
+            'label'       => $this->trans('common.fieldset.translations'),
             'transformer' => $this->getRepositoryTransformer('translation', $this->get('dictionary.repository'))
         ]));
 

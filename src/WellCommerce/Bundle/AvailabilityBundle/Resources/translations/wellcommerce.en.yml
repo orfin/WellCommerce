@@ -1,0 +1,5 @@
+availability:
+    heading:
+        index: Availability statuses
+        add: Add a status
+        edit: Edit a status

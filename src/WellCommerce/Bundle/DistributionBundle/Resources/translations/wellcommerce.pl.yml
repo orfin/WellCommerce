@@ -1,0 +1,21 @@
+channel:
+    heading:
+        index: Kanały aktualizacji
+        add: Dodaj nowy kanał
+    label:
+        name: Nazwa
+        url: Adres URL
+
+package:
+    heading:
+        index: Moduły
+    button:
+        sync: Synchronizuj moduły
+    label:
+        name: Nazwa
+        full_name: Pełna nazwa
+        vendor: Dostawca
+        local_version: Wersja lokalna
+        remote_version: Wersja zdalna
+        created_at: Zainstalowany
+        updated_at: Zaktualizowany

@@ -1,0 +1,7 @@
+theme:
+    heading:
+        index: Szablony
+        add: Dodaj szablon
+        edit: Edytuj szablon
+    label:
+        folder: Folder

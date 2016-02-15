@@ -1,0 +1,9 @@
+product_status:
+    heading:
+        index: Statusy produktów
+        add: Dodaj status produktu
+        edit: Edytuj status produktu
+    label:
+        css_class: Nazwa klasy CSS
+    comment:
+        css_class: Symbol wykorzystywany np. w szablonach CSS. Dozwolone znaki alfanumeryczne.

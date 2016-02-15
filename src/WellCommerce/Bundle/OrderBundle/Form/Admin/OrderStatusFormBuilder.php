@@ -50,7 +50,7 @@ class OrderStatusFormBuilder extends AbstractFormBuilder
 
         $languageData = $requiredData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
-            'label'       => $this->trans('fieldset.translations.label'),
+            'label'       => $this->trans('common.fieldset.translations'),
             'transformer' => $this->getRepositoryTransformer('translation', $this->get('order_status.repository'))
         ]));
 

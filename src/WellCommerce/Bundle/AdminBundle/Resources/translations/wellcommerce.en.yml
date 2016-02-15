@@ -12,6 +12,7 @@ user:
         add: Add user
         edit: Edit user
     button:
+        add: Add
         log_in: Log in
         reset_password: Reset password
     label:
@@ -42,3 +43,28 @@ user_group:
         edit: Edit users group
     label:
         permissions: Permissions
+
+admin:
+    heading:
+        last_opinions: Last opinions
+        last_orders: Last orders
+        new_customers: New customers
+        bestsellers: Bestsellers
+        customers_online: Customers online
+    label:
+        content: Content
+        customer: Customer
+        sum: Sum
+        firstname: First Name
+        lastname: Last Name
+        product: Product
+        quantity: Sold amount
+        client: Client
+        cart: Cart
+        global_context: Global
+    user:
+        logout: Logout
+        help: Help
+    button:
+        show_all: Show all
+        show_raports: Show raports

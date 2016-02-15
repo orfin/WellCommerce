@@ -54,7 +54,7 @@ class CartController extends AbstractFrontController
             }
 
             if (count($form->getError())) {
-                $this->getFlashHelper()->addError('client.form.error.registration');
+                $this->getFlashHelper()->addError('client.flash.registration.error');
             }
         }
 

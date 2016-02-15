@@ -1,0 +1,5 @@
+news:
+    heading:
+        index: News
+        add: Add a news
+        edit: Edit news

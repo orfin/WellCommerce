@@ -50,7 +50,7 @@ class PageFormBuilder extends AbstractFormBuilder
 
         $languageData = $mainData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
-            'label'       => $this->trans('fieldset.translations.label'),
+            'label'       => $this->trans('common.fieldset.translations'),
             'transformer' => $this->getRepositoryTransformer('translation', $this->get('page.repository'))
         ]));
 
@@ -131,7 +131,7 @@ class PageFormBuilder extends AbstractFormBuilder
 
         $languageData = $contentData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
-            'label'       => $this->trans('fieldset.translations.label'),
+            'label'       => $this->trans('common.fieldset.translations'),
             'transformer' => $this->getRepositoryTransformer('translation', $this->get('page.repository'))
         ]));
 
@@ -147,7 +147,7 @@ class PageFormBuilder extends AbstractFormBuilder
 
         $languageData = $metaData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
-            'label'       => $this->trans('fieldset.translations.label'),
+            'label'       => $this->trans('common.fieldset.translations'),
             'transformer' => $this->getRepositoryTransformer('translation', $this->get('page.repository'))
         ]));
 

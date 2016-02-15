@@ -1,0 +1,15 @@
+contact:
+    heading:
+        index: Contacts
+        add: Add a new contact
+        edit: Edit contact
+    email:
+        heading:
+            contact: We have received your inquiry
+
+contact_details:
+    heading:
+        details: Contact details
+    label:
+        first_name: First name
+        last_name: Last name
