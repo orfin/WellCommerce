@@ -1,0 +1,17 @@
+WellCommerce\Bundle\ProductBundle\Entity\ProductPhoto:
+    properties:
+        id:
+            groups: ['product', 'product_photo']
+            type: integer
+        mainPhoto:
+            groups: ['product', 'product_photo']
+            type: boolean
+        hierarchy:
+            groups: ['product', 'product_photo']
+            type: boolean
+        createdAt:
+            groups: ['product_photo']
+            type: DateTime
+        updatedAt:
+            groups: ['product_photo']
+            type: DateTime
