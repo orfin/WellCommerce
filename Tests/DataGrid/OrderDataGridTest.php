@@ -35,7 +35,7 @@ class OrderDataGridTest extends AbstractDataGridTestCase
             'shippingTotal',
             'orderTotal',
             'currency',
-            'currentStatus',
+            'currentStatusName',
             'createdAt',
         ];
     }
