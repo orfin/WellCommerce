@@ -28,7 +28,7 @@ class OrderStatusGroupFormBuilder extends AbstractFormBuilder
     {
         $requiredData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'required_data',
-            'label' => $this->trans('fieldset.required_data.label')
+            'label' => $this->trans('common.fieldset.required_data')
         ]));
 
         $languageData = $requiredData->addChild($this->getElement('language_fieldset', [

@@ -6,6 +6,8 @@ contact:
     email:
         heading:
             contact: Otrzymaliśmy Twoje zapytanie
+    label:
+        business_hours: Godziny otwarcia
 
 contact_details:
     heading:

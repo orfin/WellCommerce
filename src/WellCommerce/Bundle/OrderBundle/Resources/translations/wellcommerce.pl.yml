@@ -49,9 +49,14 @@ order_status:
         index: Statusy zamówienia
         add: Dodaj status
         edit: Edytuj status
+        label:
+            order_status_group: Grupa statusu zamówienia
+            default_comment: Domyślny komentarz dla zamówienia
 
 order_status_group:
     heading:
         index: Grupy statusów zamówienia
         add: Dodaj grupę
         edit: Edytuj grupę
+    label:
+        name: Nazwa grupy statusów zamówień

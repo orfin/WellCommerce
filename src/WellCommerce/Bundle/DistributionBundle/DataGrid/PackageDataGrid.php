@@ -36,7 +36,7 @@ class PackageDataGrid extends AbstractDataGrid
     {
         $collection->add(new Column([
             'id'         => 'id',
-            'caption'    => $this->trans('package.id.label'),
+            'caption'    => $this->trans('package.label.id'),
             'sorting'    => new Sorting([
                 'default_order' => Sorting::SORT_DIR_DESC,
             ]),

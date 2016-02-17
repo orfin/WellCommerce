@@ -6,6 +6,8 @@ contact:
     email:
         heading:
             contact: We have received your inquiry
+    label:
+        business_hours: Business hours
 
 contact_details:
     heading:

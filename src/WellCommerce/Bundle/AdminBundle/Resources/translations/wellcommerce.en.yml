@@ -51,6 +51,7 @@ admin:
         new_customers: New customers
         bestsellers: Bestsellers
         customers_online: Customers online
+        dashboard: Dashboard
     label:
         content: Content
         customer: Customer

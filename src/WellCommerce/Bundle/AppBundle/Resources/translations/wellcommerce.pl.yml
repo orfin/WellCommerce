@@ -117,10 +117,6 @@ dataset:
         delete: Usuń
         confirm_delete: Czy na pewno chcesz usunąć
 
-media:
-    button:
-        select_from_library: Wybierz z biblioteki
-        add_from_disk: Dodaj z dysku
 
 
 

@@ -186,7 +186,7 @@ class PageFormBuilder extends AbstractFormBuilder
 
         $redirectSettings->addChild($this->getElement('text_field', [
             'name'         => 'redirectUrl',
-            'label'        => $this->trans('label.redirect_url'),
+            'label'        => $this->trans('page.label.redirect.url'),
             'dependencies' => [
                 $this->getDependency('show', [
                     'form'      => $form,
@@ -198,7 +198,7 @@ class PageFormBuilder extends AbstractFormBuilder
 
         $redirectSettings->addChild($this->getElement('select', [
             'name'         => 'redirectRoute',
-            'label'        => $this->trans('label.redirect_route'),
+            'label'        => $this->trans('page.label.redirect.route'),
             'options'      => $this->getRedirectRoutes(),
             'dependencies' => [
                 $this->getDependency('show', [

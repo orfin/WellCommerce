@@ -48,9 +48,14 @@ order_status:
         index: Order statuses
         add: Add a new order status
         edit: Edit an order status
+    label:
+        order_status_group: Order status group
+        default_comment: Default comment for order
 
 order_status_group:
     heading:
         index: Order status groups
         add: Add a new order status group
         edit: Edit an order status group
+    label:
+        name: Order status group name

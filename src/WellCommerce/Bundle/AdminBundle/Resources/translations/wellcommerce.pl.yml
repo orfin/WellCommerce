@@ -51,6 +51,7 @@ admin:
         new_customers: Nowi klienci
         bestsellers: Bestsellery
         customers_online: Klienci online
+        dashboard: Dashboard
     label:
         content: Treść
         customer: Zamawiający

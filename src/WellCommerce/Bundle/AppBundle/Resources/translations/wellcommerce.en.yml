@@ -117,11 +117,6 @@ dataset:
         delete: Delete
         confirm_delete: Are you sure to delete
 
-media:
-    button:
-        select_from_library: Select from library
-        add_from_disk: Add from disk
-
 
 
 

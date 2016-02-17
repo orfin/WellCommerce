@@ -3,3 +3,7 @@ news:
         index: Newsy
         add: Dodaj news
         edit: Edytuj news
+    label:
+        topic: Temat
+        summary: Skrócona treść
+        content: Treść

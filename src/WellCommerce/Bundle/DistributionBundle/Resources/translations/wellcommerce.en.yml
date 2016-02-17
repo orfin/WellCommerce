@@ -12,6 +12,7 @@ package:
     button:
         sync: Synchronize packages
     label:
+        id: ID
         name: Name
         full_name: Full name
         vendor: Vendor

@@ -12,6 +12,7 @@ package:
     button:
         sync: Synchronizuj moduły
     label:
+        id: ID
         name: Nazwa
         full_name: Pełna nazwa
         vendor: Dostawca
