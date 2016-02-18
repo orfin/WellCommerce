@@ -21,7 +21,7 @@ before_script:
     - cp app/config/parameters.yml.travis app/config/parameters.yml
 
     - composer self-update
-    - composer install --prefer-source --no-interaction
+    - composer update --no-interaction
 
     - php app/console wellcommerce:install
     - php app/console cache:warmup --env=test
