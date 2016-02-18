@@ -5,7 +5,7 @@
         {% endfor %}
 
         {% for flashMessage in app.session.getFlashBag().get('success') %}
-        GMessage('{% trans %}Success!{% endtrans %}', '{{ flashMessage }}');
+        GMessage('{% trans %}common.flashes.success{% endtrans %}', '{{ flashMessage }}');
         {% endfor %}
     });
 </script>

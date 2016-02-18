@@ -99,6 +99,8 @@ common:
         meta_title: Tytuł meta
         meta_description: Opis meta
         meta_keywords: Słowa kluczowe meta
+    flashes:
+        success: Sukces!
 
 price:
     sell_price:

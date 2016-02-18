@@ -9,8 +9,10 @@ channel:
 package:
     heading:
         index: Moduły
+        require: Pobierz moduł
     button:
         sync: Synchronizuj moduły
+        run: Rozpocznij pobieranie
     label:
         id: ID
         name: Nazwa
@@ -20,3 +22,10 @@ package:
         remote_version: Wersja zdalna
         created_at: Zainstalowany
         updated_at: Zaktualizowany
+        output: Status instalacji
+    fieldset:
+        information: Informacje
+        progress: Postęp pobierania
+    flash:
+        sync:
+            success: Synchronizacja zakończona sukcesem.

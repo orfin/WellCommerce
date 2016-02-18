@@ -9,8 +9,10 @@ channel:
 package:
     heading:
         index: Packages
+        require: Require package
     button:
         sync: Synchronize packages
+        run: Install package
     label:
         id: ID
         name: Name
@@ -20,3 +22,10 @@ package:
         remote_version: Remote version
         created_at: Installed at
         updated_at: Updated at
+        output: Install status
+    fieldset:
+        information: Informations
+        progress: Download progress
+    flash:
+        sync:
+            success: Synchronization completed successfully.

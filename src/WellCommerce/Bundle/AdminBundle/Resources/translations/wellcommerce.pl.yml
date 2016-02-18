@@ -25,6 +25,9 @@ user:
         enabled: Aktywny
         user_group: Grupa administratorów
         username: Login
+        api_key: Klucz API
+    fieldset:
+        api_access: Dostęp API
     flash:
         success:
             reset_password: Twoje nowe hasło zostało wysłane na e-mail

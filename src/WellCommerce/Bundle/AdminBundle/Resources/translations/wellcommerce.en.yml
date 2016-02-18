@@ -25,6 +25,9 @@ user:
         enabled: Enabled
         user_group: Group
         username: Username
+        api_key: API key
+    fieldset:
+        api_access: API access
     flash:
         success:
             reset_password: Your new password has been sent by e-mail
