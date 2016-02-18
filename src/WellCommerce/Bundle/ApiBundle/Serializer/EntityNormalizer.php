@@ -27,6 +27,9 @@ class EntityNormalizer extends AbstractSerializer implements NormalizerInterface
      */
     public function normalize($object, $format = null, array $context = [])
     {
+        print_r($this->getMetadata());
+        die();
+
         $currentLevel = isset($context['level']) ? $context['level'] : 0;
         $data         = [];
         $metadata     = $this->getEntityMetadata($object);
