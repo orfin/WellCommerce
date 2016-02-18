@@ -36,6 +36,15 @@ interface SearchIndexManagerInterface
     public function getIndex($name);
 
     /**
+     * Checks whether the index exists
+     *
+     * @param string $name
+     *
+     * @return bool
+     */
+    public function hasIndex($name);
+
+    /**
      * Removes the given index
      *
      * @param string $name
