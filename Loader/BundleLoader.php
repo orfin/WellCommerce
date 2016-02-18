@@ -91,7 +91,6 @@ class BundleLoader
             \FOS\JsRoutingBundle\FOSJsRoutingBundle::class,
             \Bazinga\Bundle\JsTranslationBundle\BazingaJsTranslationBundle::class,
             \Liip\ImagineBundle\LiipImagineBundle::class,
-            \Ivory\LuceneSearchBundle\IvoryLuceneSearchBundle::class,
             \Knp\DoctrineBehaviors\Bundle\DoctrineBehaviorsBundle::class,
             \WellCommerce\Bundle\AppBundle\WellCommerceAppBundle::class,
         ];
