@@ -1,5 +1,5 @@
 WellCommerce\Bundle\ProductBundle\Entity\ProductPhoto:
-    properties:
+    fields:
         id:
             groups: ['product', 'product_photo']
             type: integer
