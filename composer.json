@@ -49,7 +49,7 @@
         "mcuelenaere/composer-revision-plugin": "0.1.*",
         "devristo/phpws": "dev-master",
         "nesbot/carbon": "dev-master",
-        "egeloen/lucene-search-bundle": "^2.0@dev",
+        "zendframework/zendsearch": "dev-master",
         "zendframework/zend-json": "^2.6@dev",
         "mmoreram/simple-doctrine-mapping": "^1.1",
         "league/oauth2-facebook": "~1.0",
