@@ -24,12 +24,23 @@
 
         <service id="api.serializer.normalizer" class="WellCommerce\Bundle\ApiBundle\Serializer\EntityNormalizer">
             <argument type="service" id="doctrine.helper"/>
+            <argument type="service" id="api.serialization.metadata_loader"/>
             <tag name="serializer.normalizer" />
         </service>
 
         <service id="api.serializer.denormalizer" class="WellCommerce\Bundle\ApiBundle\Serializer\EntityDenormalizer">
             <argument type="service" id="doctrine.helper"/>
+            <argument type="service" id="api.serialization.metadata_loader"/>
             <tag name="serializer.normalizer" />
+        </service>
+
+        <service id="api.serialization.cache_warmer" class="WellCommerce\Bundle\ApiBundle\CacheWarmer\SerializationCacheWarmer" public="false">
+            <argument>%kernel.root_dir%/../src/*/Bundle/*/Resources</argument>
+            <tag name="kernel.cache_warmer"/>
+        </service>
+
+        <service id="api.serialization.metadata_loader" class="WellCommerce\Bundle\ApiBundle\Metadata\Loader\SerializationMetadataLoader">
+            <argument type="service" id="kernel" />
         </service>
     </services>
 </container>

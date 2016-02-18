@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Serializer\SerializerInterface;
+use WellCommerce\Bundle\ApiBundle\Configuration\ConfigurationLoaderInterface;
 use WellCommerce\Bundle\ApiBundle\Exception\ResourceNotFoundException;
 use WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface;
 use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
@@ -63,12 +64,12 @@ class RequestHandler implements RequestHandlerInterface
     /**
      * RequestHandler constructor.
      *
-     * @param                     $resourceType
-     * @param RepositoryInterface $repository
-     * @param DataSetInterface    $dataset
-     * @param FactoryInterface    $factory
-     * @param SerializerInterface $serializer
-     * @param array               $options
+     * @param                              $resourceType
+     * @param RepositoryInterface          $repository
+     * @param DataSetInterface             $dataset
+     * @param FactoryInterface             $factory
+     * @param SerializerInterface          $serializer
+     * @param array                        $options
      */
     public function __construct(
         $resourceType,
@@ -78,12 +79,12 @@ class RequestHandler implements RequestHandlerInterface
         SerializerInterface $serializer,
         array $options = []
     ) {
-        $this->resourceType = $resourceType;
-        $this->repository   = $repository;
-        $this->dataset      = $dataset;
-        $this->factory      = $factory;
-        $this->serializer   = $serializer;
-        $resolver           = new OptionsResolver();
+        $this->resourceType        = $resourceType;
+        $this->repository          = $repository;
+        $this->dataset             = $dataset;
+        $this->factory             = $factory;
+        $this->serializer          = $serializer;
+        $resolver                  = new OptionsResolver();
         $this->configureOptions($resolver);
         $this->options = $resolver->resolve($options);
     }
@@ -177,7 +178,7 @@ class RequestHandler implements RequestHandlerInterface
             throw new ResourceNotFoundException($this->getResourceType(), $identifier);
         }
 
-        $data = $this->serializer->serialize($result, self::RESPONSE_FORMAT, ['level' => 0]);
+        $data          = $this->serializer->serialize($result, self::RESPONSE_FORMAT, ['level' => 0]);
 
         return new Response($data);
     }

@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\ApiBundle\Serializer;
 
-use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Doctrine\Common\Util\Inflector;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\PropertyAccess\PropertyAccess;
@@ -21,6 +20,7 @@ use Symfony\Component\Serializer\Exception\LogicException;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\SerializerAwareInterface;
 use Symfony\Component\Serializer\SerializerInterface;
+use WellCommerce\Bundle\ApiBundle\Metadata\Loader\SerializationMetadataLoaderInterface;
 use WellCommerce\Bundle\DoctrineBundle\Helper\Doctrine\DoctrineHelperInterface;
 
 /**
@@ -51,14 +51,21 @@ abstract class AbstractSerializer implements SerializerAwareInterface
     protected $serializer;
 
     /**
-     * EntityNormalizer constructor.
-     *
-     * @param DoctrineHelperInterface $doctrineHelper
+     * @var SerializationMetadataLoaderInterface
      */
-    public function __construct(DoctrineHelperInterface $doctrineHelper)
+    protected $serializationMetadataLoader;
+
+    /**
+     * AbstractSerializer constructor.
+     *
+     * @param DoctrineHelperInterface              $doctrineHelper
+     * @param SerializationMetadataLoaderInterface $serializationMetadataLoader
+     */
+    public function __construct(DoctrineHelperInterface $doctrineHelper, SerializationMetadataLoaderInterface $serializationMetadataLoader)
     {
-        $this->doctrineHelper   = $doctrineHelper;
-        $this->propertyAccessor = PropertyAccess::createPropertyAccessor();
+        $this->doctrineHelper              = $doctrineHelper;
+        $this->serializationMetadataLoader = $serializationMetadataLoader;
+        $this->propertyAccessor            = PropertyAccess::createPropertyAccessor();
     }
 
     /**
@@ -71,6 +78,14 @@ abstract class AbstractSerializer implements SerializerAwareInterface
         }
 
         $this->serializer = $serializer;
+    }
+
+    /**
+     * @return \WellCommerce\Bundle\ApiBundle\Metadata\Collection\SerializationMetadataCollection
+     */
+    protected function getMetadata()
+    {
+        return $this->serializationMetadataLoader->loadMetadata();
     }
 
     /**
@@ -103,10 +118,5 @@ abstract class AbstractSerializer implements SerializerAwareInterface
         }, $elements);
 
         return new PropertyPath(implode('', $wrapped));
-    }
-
-    protected function getExposedAssociations(ClassMetadata $metadata)
-    {
-
     }
 }
