@@ -48,16 +48,13 @@ class FieldMetadata implements FieldMetadataInterface
     {
         $resolver->setRequired([
             'groups',
-            'type',
         ]);
 
         $resolver->setDefaults([
             'groups' => [],
-            'type'   => 'string',
         ]);
 
         $resolver->setAllowedTypes('groups', 'array');
-        $resolver->setAllowedTypes('type', 'string');
     }
 
     /**
@@ -79,16 +76,16 @@ class FieldMetadata implements FieldMetadataInterface
     /**
      * {@inheritdoc}
      */
-    public function getType()
-    {
-        return $this->options['type'];
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
     public function hasGroup($group)
     {
         return in_array($group, $this->getGroups());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasDefaultGroup()
+    {
+        return $this->hasGroup('default');
     }
 }

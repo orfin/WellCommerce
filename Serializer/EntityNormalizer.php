@@ -14,6 +14,8 @@ namespace WellCommerce\Bundle\ApiBundle\Serializer;
 
 use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use WellCommerce\Bundle\ApiBundle\Metadata\Collection\AssociationMetadataCollection;
+use WellCommerce\Bundle\ApiBundle\Metadata\Collection\FieldMetadataCollection;
 
 /**
  * Class EntityNormalizer
@@ -27,18 +29,11 @@ class EntityNormalizer extends AbstractSerializer implements NormalizerInterface
      */
     public function normalize($object, $format = null, array $context = [])
     {
-        print_r($this->getMetadata());
-        die();
+        $data           = [];
+        $entityMetadata = $this->getEntityMetadata($object);
 
-        $currentLevel = isset($context['level']) ? $context['level'] : 0;
-        $data         = [];
-        $metadata     = $this->getEntityMetadata($object);
-
-        $this->updateDataFromFields($data, $metadata, $object);
-
-        if (0 === $currentLevel) {
-            $this->updateDataFromAssociations($data, $metadata, $object, $format, ['level' => 1]);
-        }
+        $this->updateDataFromFields($data, $entityMetadata, $object, $context);
+        $this->updateDataFromAssociations($data, $entityMetadata, $object, $context, $format);
 
         return $data;
     }
@@ -49,14 +44,61 @@ class EntityNormalizer extends AbstractSerializer implements NormalizerInterface
      * @param array         $data
      * @param ClassMetadata $metadata
      * @param object        $object
+     * @param array         $context
      */
-    protected function updateDataFromFields(array &$data = [], ClassMetadata $metadata, $object)
+    protected function updateDataFromFields(array &$data = [], ClassMetadata $metadata, $object, array $context = [])
     {
+        $serializationMetadata = $this->getSerializationMetadata($object);
+        $serializedFields      = $serializationMetadata->getFields();
+
         foreach ($metadata->getFieldNames() as $fieldName) {
-            $propertyPath = $this->getPropertyPath($fieldName);
-            $value        = $this->propertyAccessor->getValue($object, $fieldName);
-            $this->propertyAccessor->setValue($data, $propertyPath, $value);
+            $propertyName = $this->getPropertyNameForField($fieldName);
+            if ($this->isFieldSerializable($propertyName, $serializedFields, $context['group'])) {
+                $value = $this->propertyAccessor->getValue($object, $fieldName);
+                $this->propertyAccessor->setValue($data, $this->getPropertyPath($fieldName), $value);
+            }
         }
+    }
+
+    /**
+     * Checks whether the field is serializable
+     *
+     * @param string                  $fieldName
+     * @param FieldMetadataCollection $collection
+     * @param string                  $currentGroup
+     *
+     * @return bool
+     */
+    protected function isFieldSerializable($fieldName, FieldMetadataCollection $collection, $currentGroup)
+    {
+        $propertyName = $this->getPropertyNameForField($fieldName);
+
+        if ($collection->has($propertyName)) {
+            $field = $collection->get($propertyName);
+            return ($field->hasGroup($currentGroup) || $field->hasDefaultGroup());
+        }
+
+        return false;
+    }
+
+    /**
+     * Checks whether the association is serializable
+     *
+     * @param string                        $associationName
+     * @param AssociationMetadataCollection $collection
+     * @param string                        $currentGroup
+     *
+     * @return bool
+     */
+    protected function isAssociationSerializable($associationName, AssociationMetadataCollection $collection, $currentGroup)
+    {
+        if ($collection->has($associationName)) {
+            $association = $collection->get($associationName);
+
+            return ($association->hasGroup($currentGroup) || $association->hasDefaultGroup());
+        }
+
+        return false;
     }
 
     /**
@@ -65,15 +107,20 @@ class EntityNormalizer extends AbstractSerializer implements NormalizerInterface
      * @param array         $data
      * @param ClassMetadata $metadata
      * @param object        $object
-     * @param string|null   $format
      * @param array         $context
+     * @param string|null   $format
      */
-    protected function updateDataFromAssociations(array &$data = [], ClassMetadata $metadata, $object, $format = null, array $context = [])
+    protected function updateDataFromAssociations(array &$data = [], ClassMetadata $metadata, $object, array $context = [], $format = null)
     {
+        $serializationMetadata  = $this->getSerializationMetadata($object);
+        $serializedAssociations = $serializationMetadata->getAssociations();
+
         foreach ($metadata->getAssociationNames() as $associationName) {
-            $propertyPath = $this->getPropertyPath($associationName);
-            $value        = $this->getAssociationValue($object, $associationName, $format, $context);
-            $this->propertyAccessor->setValue($data, $propertyPath, $value);
+            if ($this->isAssociationSerializable($associationName, $serializedAssociations, $context['group'])) {
+                $propertyPath = $this->getPropertyPath($associationName);
+                $value        = $this->getAssociationValue($object, $associationName, $format, $context);
+                $this->propertyAccessor->setValue($data, $propertyPath, $value);
+            }
         }
     }
 

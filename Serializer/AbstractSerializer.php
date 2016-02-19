@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\ApiBundle\Serializer;
 
+use Doctrine\Common\Util\ClassUtils;
 use Doctrine\Common\Util\Inflector;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\PropertyAccess\PropertyAccess;
@@ -56,6 +57,11 @@ abstract class AbstractSerializer implements SerializerAwareInterface
     protected $serializationMetadataLoader;
 
     /**
+     * @var \WellCommerce\Bundle\ApiBundle\Metadata\Collection\SerializationMetadataCollection
+     */
+    protected $serializationMetadataCollection;
+
+    /**
      * AbstractSerializer constructor.
      *
      * @param DoctrineHelperInterface              $doctrineHelper
@@ -63,9 +69,10 @@ abstract class AbstractSerializer implements SerializerAwareInterface
      */
     public function __construct(DoctrineHelperInterface $doctrineHelper, SerializationMetadataLoaderInterface $serializationMetadataLoader)
     {
-        $this->doctrineHelper              = $doctrineHelper;
-        $this->serializationMetadataLoader = $serializationMetadataLoader;
-        $this->propertyAccessor            = PropertyAccess::createPropertyAccessor();
+        $this->doctrineHelper                  = $doctrineHelper;
+        $this->serializationMetadataLoader     = $serializationMetadataLoader;
+        $this->propertyAccessor                = PropertyAccess::createPropertyAccessor();
+        $this->serializationMetadataCollection = $this->getSerializationMetadataCollection();
     }
 
     /**
@@ -83,9 +90,23 @@ abstract class AbstractSerializer implements SerializerAwareInterface
     /**
      * @return \WellCommerce\Bundle\ApiBundle\Metadata\Collection\SerializationMetadataCollection
      */
-    protected function getMetadata()
+    protected function getSerializationMetadataCollection()
     {
         return $this->serializationMetadataLoader->loadMetadata();
+    }
+
+    /**
+     * Returns the serialization metadata for given entity
+     *
+     * @param object $entity
+     *
+     * @return \WellCommerce\Bundle\ApiBundle\Metadata\SerializationClassMetadataInterface
+     */
+    protected function getSerializationMetadata($entity)
+    {
+        $className = $this->getRealClass($entity);
+
+        return $this->serializationMetadataCollection->get($className);
     }
 
     /**
@@ -101,11 +122,11 @@ abstract class AbstractSerializer implements SerializerAwareInterface
     }
 
     /**
-     * Builds property path in array-notation style from passed attribute's name
+     * Builds property path in array-notation style from given attribute's name
      *
-     * @param string $attributeName
+     * @param $attributeName
      *
-     * @return string
+     * @return PropertyPath
      */
     protected function getPropertyPath($attributeName)
     {
@@ -118,5 +139,31 @@ abstract class AbstractSerializer implements SerializerAwareInterface
         }, $elements);
 
         return new PropertyPath(implode('', $wrapped));
+    }
+
+    /**
+     * @param $fieldName
+     *
+     * @return mixed
+     */
+    protected function getPropertyNameForField($fieldName)
+    {
+        list($rootName,) = explode('.', $fieldName);
+
+        return $rootName;
+    }
+
+    /**
+     * Returns the real class name
+     *
+     * @param object $object
+     *
+     * @return string
+     */
+    private function getRealClass($object)
+    {
+        $className = get_class($object);
+
+        return ClassUtils::getRealClass($className);
     }
 }
