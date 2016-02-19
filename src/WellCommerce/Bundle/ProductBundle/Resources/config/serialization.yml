@@ -1,17 +1,65 @@
+WellCommerce\Bundle\ProductBundle\Entity\Product:
+    fields:
+        id:
+            groups: ['default']
+        buyPrice:
+            groups: ['default']
+        sellPrice:
+            groups: ['default']
+        dimension:
+            groups: ['default']
+        sku:
+            groups: ['default']
+        stock:
+            groups: ['default']
+        trackStock:
+            groups: ['default']
+        weight:
+            groups: ['default']
+        packageSize:
+            groups: ['product']
+        enabled:
+            groups: ['default']
+        hierarchy:
+            groups: ['default']
+    associations:
+        producer:
+            groups: []
+        unit:
+            groups: []
+        availability:
+            groups: []
+        buyPriceTax:
+            groups: []
+        sellPriceTax:
+            groups: []
+        attributeGroup:
+            groups: []
+        photo:
+            groups: []
+        categories:
+            groups: []
+        statuses:
+            groups: []
+        shops:
+            groups: []
+        productPhotos:
+            groups: ['product']
+        attributes:
+            groups: []
+        reviews:
+            groups: []
+
+
 WellCommerce\Bundle\ProductBundle\Entity\ProductPhoto:
     fields:
         id:
             groups: ['product', 'product_photo']
-            type: integer
         mainPhoto:
             groups: ['product', 'product_photo']
-            type: boolean
         hierarchy:
             groups: ['product', 'product_photo']
-            type: boolean
         createdAt:
             groups: ['product_photo']
-            type: DateTime
         updatedAt:
             groups: ['product_photo']
-            type: DateTime

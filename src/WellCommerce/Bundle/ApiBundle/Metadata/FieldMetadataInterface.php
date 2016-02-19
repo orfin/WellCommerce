@@ -30,11 +30,6 @@ interface FieldMetadataInterface
     public function getGroups();
 
     /**
-     * @return string
-     */
-    public function getType();
-
-    /**
      * Checks whether field is exposed for given serialization group
      *
      * @param string $group
@@ -42,4 +37,13 @@ interface FieldMetadataInterface
      * @return bool
      */
     public function hasGroup($group);
+
+    /**
+     * Checks whether field is exposed for default serialization group
+     *
+     * @param string $group
+     *
+     * @return bool
+     */
+    public function hasDefaultGroup();
 }

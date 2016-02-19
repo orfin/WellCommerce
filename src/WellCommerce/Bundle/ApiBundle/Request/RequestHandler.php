@@ -79,12 +79,12 @@ class RequestHandler implements RequestHandlerInterface
         SerializerInterface $serializer,
         array $options = []
     ) {
-        $this->resourceType        = $resourceType;
-        $this->repository          = $repository;
-        $this->dataset             = $dataset;
-        $this->factory             = $factory;
-        $this->serializer          = $serializer;
-        $resolver                  = new OptionsResolver();
+        $this->resourceType = $resourceType;
+        $this->repository   = $repository;
+        $this->dataset      = $dataset;
+        $this->factory      = $factory;
+        $this->serializer   = $serializer;
+        $resolver           = new OptionsResolver();
         $this->configureOptions($resolver);
         $this->options = $resolver->resolve($options);
     }
@@ -178,7 +178,7 @@ class RequestHandler implements RequestHandlerInterface
             throw new ResourceNotFoundException($this->getResourceType(), $identifier);
         }
 
-        $data          = $this->serializer->serialize($result, self::RESPONSE_FORMAT, ['level' => 0]);
+        $data = $this->serializer->serialize($result, self::RESPONSE_FORMAT, ['group' => $this->getResourceType()]);
 
         return new Response($data);
     }
