@@ -10,6 +10,7 @@ well_commerce_product:
             api_configuration:
                 exposed: true
                 dataset: product.dataset.admin
+                manager: product.manager.admin
         product_attribute:
             auto_services:
                 factory: WellCommerce\Bundle\ProductBundle\Factory\ProductAttributeFactory
