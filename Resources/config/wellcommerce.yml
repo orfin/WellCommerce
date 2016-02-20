@@ -10,6 +10,7 @@ well_commerce_currency:
             api_configuration:
                 exposed: true
                 dataset: currency.dataset.admin
+                manager: currency.manager.admin
         currency_rate:
             auto_services:
                 factory: WellCommerce\Bundle\CurrencyBundle\Factory\CurrencyRateFactory
