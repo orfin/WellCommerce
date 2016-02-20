@@ -1,0 +1,19 @@
+WellCommerce\Bundle\DictionaryBundle\Entity\DictionaryTranslation:
+    fields:
+        value:
+            groups:
+                - default
+                - dictionary_translation
+        locale:
+            groups:
+                - default
+                - dictionary_translation
+        id:
+            groups:
+                - default
+                - dictionary_translation
+    associations:
+        translatable:
+            groups:
+                - dictionary_translation
+    callbacks: {  }

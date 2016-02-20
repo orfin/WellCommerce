@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\ApiBundle\Serializer;
 
+use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Doctrine\Common\Util\ClassUtils;
 use Doctrine\Common\Util\Inflector;
 use Symfony\Component\Config\FileLocator;
@@ -42,11 +43,6 @@ abstract class AbstractSerializer implements SerializerAwareInterface
     protected $propertyAccessor;
 
     /**
-     * @var array
-     */
-    protected $cache;
-
-    /**
      * @var SerializerInterface|NormalizerInterface
      */
     protected $serializer;
@@ -60,6 +56,16 @@ abstract class AbstractSerializer implements SerializerAwareInterface
      * @var \WellCommerce\Bundle\ApiBundle\Metadata\Collection\SerializationMetadataCollection
      */
     protected $serializationMetadataCollection;
+
+    /**
+     * @var array
+     */
+    protected $context = [];
+
+    /**
+     * @var string
+     */
+    protected $format;
 
     /**
      * AbstractSerializer constructor.
@@ -142,15 +148,62 @@ abstract class AbstractSerializer implements SerializerAwareInterface
     }
 
     /**
-     * @param $fieldName
+     * Returns the entity fields
      *
-     * @return mixed
+     * @param ClassMetadata $metadata
+     *
+     * @return array
      */
-    protected function getPropertyNameForField($fieldName)
+    protected function getEntityFields(ClassMetadata $metadata)
     {
-        list($rootName,) = explode('.', $fieldName);
+        $entityFields = $metadata->getFieldNames();
+        $fields       = [];
+        foreach ($entityFields as $field) {
+            if (false === strpos($field, '.')) {
+                $fields[$field] = $field;
+            }
+        }
 
-        return $rootName;
+        return $fields;
+    }
+
+    /**
+     * Returns the entity embeddable fields
+     *
+     * @param ClassMetadata $metadata
+     *
+     * @return array
+     */
+    protected function getEntityEmbeddables(ClassMetadata $metadata)
+    {
+        $entityFields = $metadata->getFieldNames();
+        $embeddables  = [];
+        foreach ($entityFields as $embeddableField) {
+            if (false !== strpos($embeddableField, '.')) {
+                list($embeddablePropertyName,) = explode('.', $embeddableField);
+                $embeddables[$embeddablePropertyName] = $embeddablePropertyName;
+            }
+        }
+
+        return $embeddables;
+    }
+
+    /**
+     * Returns the entity fields
+     *
+     * @param ClassMetadata $metadata
+     *
+     * @return array
+     */
+    protected function getEntityAssociations(ClassMetadata $metadata)
+    {
+        $entityAssociations = $metadata->getAssociationNames();
+        $associations       = [];
+        foreach ($entityAssociations as $association) {
+            $associations[$association] = $association;
+        }
+
+        return $associations;
     }
 
     /**

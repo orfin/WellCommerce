@@ -17,6 +17,7 @@ well_commerce_payment:
             api_configuration:
                 exposed: true
                 dataset: payment_method.dataset.admin
+                manager: payment_method.manager.admin
         payment_method_configuration:
             auto_services:
                 factory: WellCommerce\Bundle\PaymentBundle\Factory\PaymentMethodConfigurationFactory

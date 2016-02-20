@@ -10,6 +10,7 @@ well_commerce_page:
             api_configuration:
                 exposed: true
                 dataset: page.dataset.admin
+                manager: page.manager.admin
         page_route:
             auto_services:
                 factory: ~

@@ -29,33 +29,94 @@ class EntityNormalizer extends AbstractSerializer implements NormalizerInterface
      */
     public function normalize($object, $format = null, array $context = [])
     {
-        $data           = [];
-        $entityMetadata = $this->getEntityMetadata($object);
+        $this->format                     = $format;
+        $this->context                    = $context;
+        $data                             = [];
+        $entityMetadata                   = $this->getEntityMetadata($object);
+        $serializationMetadata            = $this->getSerializationMetadata($object);
+        $serializedFieldsCollection       = $serializationMetadata->getFields();
+        $serializedAssociationsCollection = $serializationMetadata->getAssociations();
 
-        $this->updateDataFromFields($data, $entityMetadata, $object, $context);
-        $this->updateDataFromAssociations($data, $entityMetadata, $object, $context, $format);
+        $this->normalizeFields(
+            $this->getEntityFields($entityMetadata),
+            $serializedFieldsCollection,
+            $object,
+            $data
+        );
+
+        $this->normalizeEmbeddables(
+            $this->getEntityEmbeddables($entityMetadata),
+            $serializedFieldsCollection,
+            $object,
+            $data
+        );
+
+        $this->normalizeAssociations(
+            $this->getEntityAssociations($entityMetadata),
+            $serializedAssociationsCollection,
+            $object,
+            $data
+        );
 
         return $data;
     }
 
     /**
-     * Updates normalized data with entity fields values
+     * Normalizes the entity's fields
      *
-     * @param array         $data
-     * @param ClassMetadata $metadata
-     * @param object        $object
-     * @param array         $context
+     * @param array                   $fields
+     * @param FieldMetadataCollection $collection
+     * @param object                  $object
+     * @param array                   $data
      */
-    protected function updateDataFromFields(array &$data = [], ClassMetadata $metadata, $object, array $context = [])
+    protected function normalizeFields(array $fields, FieldMetadataCollection $collection, $object, array &$data)
     {
-        $serializationMetadata = $this->getSerializationMetadata($object);
-        $serializedFields      = $serializationMetadata->getFields();
+        foreach ($fields as $field) {
+            if ($this->isFieldSerializable($field, $collection)) {
+                $value = $this->propertyAccessor->getValue($object, $field);
+                $this->propertyAccessor->setValue($data, $this->getPropertyPath($field), $value);
+            }
+        }
+    }
 
-        foreach ($metadata->getFieldNames() as $fieldName) {
-            $propertyName = $this->getPropertyNameForField($fieldName);
-            if ($this->isFieldSerializable($propertyName, $serializedFields, $context['group'])) {
-                $value = $this->propertyAccessor->getValue($object, $fieldName);
-                $this->propertyAccessor->setValue($data, $this->getPropertyPath($fieldName), $value);
+    /**
+     * Normalizes the entity's embeddables
+     *
+     * @param array                   $embeddables
+     * @param FieldMetadataCollection $collection
+     * @param object                  $object
+     * @param array                   $data
+     */
+    protected function normalizeEmbeddables(array $embeddables, FieldMetadataCollection $collection, $object, array &$data)
+    {
+        foreach ($embeddables as $embedabbleName) {
+            if ($this->isEmbeddableSerializable($embedabbleName, $collection)) {
+                $value = $this->propertyAccessor->getValue($object, $embedabbleName);
+                if (null !== $value && !is_scalar($value)) {
+                    $value = $this->serializer->normalize($value, $this->format, $this->context);
+                }
+                $this->propertyAccessor->setValue($data, $this->getPropertyPath($embedabbleName), $value);
+            }
+        }
+    }
+
+    /**
+     * Normalizes the entity's associations
+     *
+     * @param array                         $associations
+     * @param AssociationMetadataCollection $collection
+     * @param object                        $object
+     * @param array                         $data
+     */
+    protected function normalizeAssociations(array $associations, AssociationMetadataCollection $collection, $object, array &$data)
+    {
+        foreach ($associations as $association) {
+            if ($this->isAssociationSerializable($association, $collection)) {
+                $value = $this->propertyAccessor->getValue($object, $association);
+                if (null !== $value && !is_scalar($value)) {
+                    $value = $this->serializer->normalize($value, $this->format, $this->context);
+                }
+                $this->propertyAccessor->setValue($data, $this->getPropertyPath($association), $value);
             }
         }
     }
@@ -65,17 +126,34 @@ class EntityNormalizer extends AbstractSerializer implements NormalizerInterface
      *
      * @param string                  $fieldName
      * @param FieldMetadataCollection $collection
-     * @param string                  $currentGroup
      *
      * @return bool
      */
-    protected function isFieldSerializable($fieldName, FieldMetadataCollection $collection, $currentGroup)
+    protected function isFieldSerializable($fieldName, FieldMetadataCollection $collection)
     {
-        $propertyName = $this->getPropertyNameForField($fieldName);
+        if ($collection->has($fieldName)) {
+            $field = $collection->get($fieldName);
 
-        if ($collection->has($propertyName)) {
-            $field = $collection->get($propertyName);
-            return ($field->hasGroup($currentGroup) || $field->hasDefaultGroup());
+            return ($field->hasGroup($this->context['group']) || $field->hasDefaultGroup());
+        }
+
+        return false;
+    }
+
+    /**
+     * Checks whether the embeddable field is serializable
+     *
+     * @param string                  $embeddableName
+     * @param FieldMetadataCollection $collection
+     *
+     * @return bool
+     */
+    protected function isEmbeddableSerializable($embeddableName, FieldMetadataCollection $collection)
+    {
+        if ($collection->has($embeddableName)) {
+            $embeddable = $collection->get($embeddableName);
+
+            return ($embeddable->hasGroup($this->context['group']) || $embeddable->hasDefaultGroup());
         }
 
         return false;
@@ -86,62 +164,18 @@ class EntityNormalizer extends AbstractSerializer implements NormalizerInterface
      *
      * @param string                        $associationName
      * @param AssociationMetadataCollection $collection
-     * @param string                        $currentGroup
      *
      * @return bool
      */
-    protected function isAssociationSerializable($associationName, AssociationMetadataCollection $collection, $currentGroup)
+    protected function isAssociationSerializable($associationName, AssociationMetadataCollection $collection)
     {
         if ($collection->has($associationName)) {
             $association = $collection->get($associationName);
 
-            return ($association->hasGroup($currentGroup) || $association->hasDefaultGroup());
+            return ($association->hasGroup($this->context['group']) || $association->hasDefaultGroup());
         }
 
         return false;
-    }
-
-    /**
-     * Updates normalized data with entity associations values
-     *
-     * @param array         $data
-     * @param ClassMetadata $metadata
-     * @param object        $object
-     * @param array         $context
-     * @param string|null   $format
-     */
-    protected function updateDataFromAssociations(array &$data = [], ClassMetadata $metadata, $object, array $context = [], $format = null)
-    {
-        $serializationMetadata  = $this->getSerializationMetadata($object);
-        $serializedAssociations = $serializationMetadata->getAssociations();
-
-        foreach ($metadata->getAssociationNames() as $associationName) {
-            if ($this->isAssociationSerializable($associationName, $serializedAssociations, $context['group'])) {
-                $propertyPath = $this->getPropertyPath($associationName);
-                $value        = $this->getAssociationValue($object, $associationName, $format, $context);
-                $this->propertyAccessor->setValue($data, $propertyPath, $value);
-            }
-        }
-    }
-
-    /**
-     * Returns the value for association
-     *
-     * @param object $object
-     * @param string $associationName
-     * @param string $format
-     * @param array  $context
-     *
-     * @return array|bool|float|int|mixed|null|string
-     */
-    protected function getAssociationValue($object, $associationName, $format, array $context = [])
-    {
-        $value = $this->propertyAccessor->getValue($object, $associationName);
-        if (null !== $value && !is_scalar($value)) {
-            $value = $this->serializer->normalize($value, $format, $context);
-        }
-
-        return $value;
     }
 
     /**

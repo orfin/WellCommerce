@@ -35,8 +35,13 @@
         </service>
 
         <service id="api.serialization.cache_warmer" class="WellCommerce\Bundle\ApiBundle\CacheWarmer\SerializationCacheWarmer" public="false">
-            <argument>%kernel.root_dir%/../src/*/Bundle/*/Resources</argument>
+            <argument type="service" id="doctrine.helper"/>
             <tag name="kernel.cache_warmer"/>
+        </service>
+
+        <service id="api.generate_serialization_metadata.command" class="WellCommerce\Bundle\ApiBundle\Command\GenerateSerializationMetadataCommand">
+            <argument type="service" id="doctrine.helper"/>
+            <tag name="console.command" />
         </service>
 
         <service id="api.serialization.metadata_loader" class="WellCommerce\Bundle\ApiBundle\Metadata\Loader\SerializationMetadataLoader">

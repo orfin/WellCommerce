@@ -1,2 +1,0 @@
-parameters:
-    serialization_mapping_file: %kernel.root_dir%/../src/WellCommerce/Bundle/ApiBundle/Resources/config/serializer/mapping.yml

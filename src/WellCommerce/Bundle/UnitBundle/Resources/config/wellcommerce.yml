@@ -10,6 +10,7 @@ well_commerce_unit:
             api_configuration:
                 exposed: true
                 dataset: unit.dataset.admin
+                manager: unit.manager.admin
         unit_translation:
             auto_services:
                 factory: ~

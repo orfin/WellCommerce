@@ -18,8 +18,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Serializer\SerializerInterface;
 use WellCommerce\Bundle\ApiBundle\Configuration\ConfigurationLoaderInterface;
 use WellCommerce\Bundle\ApiBundle\Exception\ResourceNotFoundException;
-use WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface;
-use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
+use WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface;
 use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
 use WellCommerce\Component\DataSet\Conditions\ConditionsResolver;
 use WellCommerce\Component\DataSet\DataSetInterface;
@@ -32,9 +31,9 @@ use WellCommerce\Component\DataSet\DataSetInterface;
 class RequestHandler implements RequestHandlerInterface
 {
     /**
-     * @var RepositoryInterface
+     * @var ManagerInterface
      */
-    protected $repository;
+    protected $manager;
 
     /**
      * @var DataSetInterface
@@ -57,32 +56,24 @@ class RequestHandler implements RequestHandlerInterface
     protected $resourceType;
 
     /**
-     * @var FactoryInterface
-     */
-    protected $factory;
-
-    /**
      * RequestHandler constructor.
      *
-     * @param                              $resourceType
-     * @param RepositoryInterface          $repository
-     * @param DataSetInterface             $dataset
-     * @param FactoryInterface             $factory
-     * @param SerializerInterface          $serializer
-     * @param array                        $options
+     * @param                     $resourceType
+     * @param DataSetInterface    $dataset
+     * @param ManagerInterface    $manager
+     * @param SerializerInterface $serializer
+     * @param array               $options
      */
     public function __construct(
         $resourceType,
-        RepositoryInterface $repository,
         DataSetInterface $dataset,
-        FactoryInterface $factory,
+        ManagerInterface $manager,
         SerializerInterface $serializer,
         array $options = []
     ) {
         $this->resourceType = $resourceType;
-        $this->repository   = $repository;
         $this->dataset      = $dataset;
-        $this->factory      = $factory;
+        $this->manager      = $manager;
         $this->serializer   = $serializer;
         $resolver           = new OptionsResolver();
         $this->configureOptions($resolver);
@@ -173,7 +164,7 @@ class RequestHandler implements RequestHandlerInterface
      */
     public function handleGetRequest(Request $request, $identifier)
     {
-        $result = $this->repository->find($identifier);
+        $result = $this->manager->getRepository()->find($identifier);
         if (null === $result) {
             throw new ResourceNotFoundException($this->getResourceType(), $identifier);
         }

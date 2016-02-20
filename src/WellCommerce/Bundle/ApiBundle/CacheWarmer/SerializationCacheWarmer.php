@@ -12,11 +12,14 @@
 
 namespace WellCommerce\Bundle\ApiBundle\CacheWarmer;
 
+use Doctrine\Common\Persistence\Mapping\ClassMetadata;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 use Symfony\Component\HttpKernel\CacheWarmer\CacheWarmer;
 use Symfony\Component\Yaml\Yaml;
 use WellCommerce\Bundle\ApiBundle\Metadata\Loader\SerializationMetadataLoaderInterface;
+use WellCommerce\Bundle\DoctrineBundle\Helper\Doctrine\DoctrineHelperInterface;
 
 /**
  * Class SerializationCacheWarmer
@@ -26,18 +29,24 @@ use WellCommerce\Bundle\ApiBundle\Metadata\Loader\SerializationMetadataLoaderInt
 class SerializationCacheWarmer extends CacheWarmer
 {
     /**
-     * @var string
+     * @var DoctrineHelperInterface
      */
-    protected $searchDirectoryPattern;
+    protected $doctrineHelper;
+
+    /**
+     * @var Filesystem
+     */
+    protected $filesystem;
 
     /**
      * SerializationCacheWarmer constructor.
      *
-     * @param $searchDirectoryPattern
+     * @param DoctrineHelperInterface $doctrineHelper
      */
-    public function __construct($searchDirectoryPattern)
+    public function __construct(DoctrineHelperInterface $doctrineHelper)
     {
-        $this->searchDirectoryPattern = $searchDirectoryPattern;
+        $this->doctrineHelper = $doctrineHelper;
+        $this->filesystem     = new Filesystem();
     }
 
     /**
@@ -60,27 +69,28 @@ class SerializationCacheWarmer extends CacheWarmer
      */
     protected function getConfiguration()
     {
-        $configuration = [];
-        $finder        = new Finder();
-        $finder->in($this->searchDirectoryPattern);
-        $finder->name(SerializationMetadataLoaderInterface::MAPPING_FILENAME);
+        $configuration      = [];
+        $metadataCollection = $this->doctrineHelper->getMetadataFactory()->getAllMetadata();
 
-        foreach ($finder->files() as $file) {
-            $this->appendConfigurationFromFile($file, $configuration);
+        foreach ($metadataCollection as $entityMetadata) {
+            $this->appendConfigurationFromMetadata($entityMetadata, $configuration);
         }
 
         return $configuration;
     }
 
-    /**
-     * Appends configuration from file to an array
-     *
-     * @param SplFileInfo $fileInfo
-     * @param array       $configuration
-     */
-    private function appendConfigurationFromFile(SplFileInfo $fileInfo, array &$configuration = [])
+    protected function appendConfigurationFromMetadata(ClassMetadata $metadata, &$configuration)
     {
-        $configuration = array_replace_recursive($configuration, $this->parseContent($fileInfo->getContents()));
+        $serializationFilePath = $this->resolvePath($metadata->getReflectionClass());
+        if ($this->filesystem->exists($serializationFilePath)) {
+            $content       = file_get_contents($serializationFilePath);
+            $configuration = array_replace_recursive($configuration, $this->parseContent($content));
+        }
+    }
+
+    protected function resolvePath(\ReflectionClass $reflectionClass)
+    {
+        return dirname($reflectionClass->getFileName()) . '/../Resources/config/serialization/' . $reflectionClass->getShortName() . '.yml';
     }
 
     /**

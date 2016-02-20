@@ -97,6 +97,7 @@ abstract class AbstractConfiguration implements ConfigurationInterface
                                 ->children()
                                     ->booleanNode('exposed')->defaultFalse()->end()
                                     ->scalarNode('dataset')->defaultNull()->end()
+                                    ->scalarNode('manager')->defaultNull()->end()
                                 ->end()
                             ->end()
                         ->end()

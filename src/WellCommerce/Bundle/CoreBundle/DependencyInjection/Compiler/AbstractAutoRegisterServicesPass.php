@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\CoreBundle\DependencyInjection\Compiler;
 
-use Doctrine\Common\Util\Debug;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -35,53 +34,44 @@ abstract class AbstractAutoRegisterServicesPass implements CompilerPassInterface
         $parameters = $this->getExtensionConfiguration($container);
 
         foreach ($parameters['services'] as $moduleName => $config) {
-            $repositoryClass   = $config['auto_services']['repository'];
-            $factoryClass      = $config['auto_services']['factory'];
-            $entityClass       = $config['orm_configuration']['entity'];
-            $apiExposed        = $config['api_configuration']['exposed'];
-            $apiDatasetService = $config['api_configuration']['dataset'];
-            $repositoryService = null;
-            $factoryService    = null;
+            $repositoryClass = $config['auto_services']['repository'];
+            $factoryClass    = $config['auto_services']['factory'];
+            $entityClass     = $config['orm_configuration']['entity'];
+            $apiExposed      = $config['api_configuration']['exposed'];
 
             if (null !== $repositoryClass) {
-                $repositoryService = $this->registerRepository($moduleName, $repositoryClass, $entityClass, $container);
+                $this->registerRepository($moduleName, $repositoryClass, $entityClass, $container);
             }
 
             if (null !== $factoryClass) {
-                $factoryService = $this->registerFactory($moduleName, $factoryClass, $entityClass, $container);
+                $this->registerFactory($moduleName, $factoryClass, $entityClass, $container);
             }
 
             if (true === $apiExposed) {
-                $this->registerApiRequestHandler($moduleName, $factoryService, $repositoryService, $apiDatasetService, $container);
+                $this->registerApiRequestHandler($moduleName, $config['api_configuration'], $container);
             }
         }
     }
 
     /**
-     * Registers the API request handler for resource type
+     * Registers the API request handler for given resource type
      *
      * @param string           $resourceType
-     * @param string|null      $factoryService
-     * @param string|null      $repositoryService
-     * @param string|null      $apiDatasetService
+     * @param array            $configuration
      * @param ContainerBuilder $container
      */
-    protected function registerApiRequestHandler(
-        $resourceType,
-        $factoryService,
-        $repositoryService,
-        $apiDatasetService,
-        ContainerBuilder $container
-    ) {
-        if (null === $factoryService || null === $repositoryService || false === $container->hasDefinition($apiDatasetService)) {
+    protected function registerApiRequestHandler($resourceType, array $configuration, ContainerBuilder $container)
+    {
+        $datasetService = $configuration['dataset'];
+        $managerService = $configuration['manager'];
+        if (false === $container->hasDefinition($datasetService) || false === $container->hasDefinition($managerService)) {
             return;
         }
 
         $definition = new Definition($container->getParameter('api.request_handler.class'));
         $definition->addArgument($resourceType);
-        $definition->addArgument(new Reference($repositoryService));
-        $definition->addArgument(new Reference($apiDatasetService));
-        $definition->addArgument(new Reference($factoryService));
+        $definition->addArgument(new Reference($datasetService));
+        $definition->addArgument(new Reference($managerService));
         $definition->addArgument(new Reference('serializer'));
         $definition->addTag('api.request_handler');
 
@@ -95,8 +85,6 @@ abstract class AbstractAutoRegisterServicesPass implements CompilerPassInterface
      * @param string           $factoryClass
      * @param string           $entityClass
      * @param ContainerBuilder $container
-     *
-     * @return string
      */
     protected function registerFactory($name, $factoryClass, $entityClass, ContainerBuilder $container)
     {
@@ -104,8 +92,6 @@ abstract class AbstractAutoRegisterServicesPass implements CompilerPassInterface
         $definition  = new Definition($factoryClass);
         $definition->addArgument($entityClass);
         $container->setDefinition($serviceName, $definition);
-
-        return $serviceName;
     }
 
     /**
@@ -115,8 +101,6 @@ abstract class AbstractAutoRegisterServicesPass implements CompilerPassInterface
      * @param string           $repositoryClass
      * @param string           $entityClass
      * @param ContainerBuilder $container
-     *
-     * @return string
      */
     protected function registerRepository($name, $repositoryClass, $entityClass, ContainerBuilder $container)
     {
@@ -126,7 +110,5 @@ abstract class AbstractAutoRegisterServicesPass implements CompilerPassInterface
         $definition->addArgument($entityClass);
 
         $container->setDefinition($serviceName, $definition);
-
-        return $serviceName;
     }
 }
