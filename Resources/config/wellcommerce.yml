@@ -10,6 +10,7 @@ well_commerce_tax:
             api_configuration:
                 exposed: true
                 dataset: tax.dataset.admin
+                manager: tax.manager.admin
         tax_translation:
             auto_services:
                 factory: ~
