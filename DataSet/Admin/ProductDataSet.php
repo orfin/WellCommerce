@@ -36,7 +36,7 @@ class ProductDataSet extends AbstractDataSet
             'stock'       => 'product.stock',
             'shop'        => 'product_shops.id',
             'tax'         => 'sell_tax.value',
-            'category'    => 'GROUP_CONCAT(DISTINCT categories_translation.name SEPARATOR \', \')',
+            'category'    => 'GROUP_CONCAT(DISTINCT categories_translation.name ORDER BY categories_translation.name ASC SEPARATOR \', \')',
         ]);
     }
 }
