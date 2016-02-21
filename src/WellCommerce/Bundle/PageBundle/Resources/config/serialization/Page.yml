@@ -46,9 +46,6 @@ WellCommerce\Bundle\PageBundle\Entity\Page:
         children:
             groups:
                 - page
-        parent:
-            groups:
-                - page
         clientGroups:
             groups:
                 - page
