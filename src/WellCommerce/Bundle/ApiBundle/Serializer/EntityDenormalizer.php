@@ -12,19 +12,53 @@
 
 namespace WellCommerce\Bundle\ApiBundle\Serializer;
 
-
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
-use Symfony\Component\Serializer\Normalizer\SerializerAwareNormalizer;
+use WellCommerce\Bundle\ApiBundle\Metadata\Collection\FieldMetadataCollection;
 
-class EntityDenormalizer extends SerializerAwareNormalizer implements DenormalizerInterface
+/**
+ * Class EntityDenormalizer
+ *
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
+ */
+class EntityDenormalizer extends AbstractSerializer implements DenormalizerInterface
 {
+    /**
+     * {@inheritdoc}
+     */
     public function denormalize($data, $class, $format = null, array $context = [])
     {
-        // TODO: Implement denormalize() method.
+        $resource              = $context['resource'];
+        $serializationMetadata = $this->getSerializationMetadata($resource);
+        $serializedFields      = $serializationMetadata->getFields();
+
+        $this->updateEntityFields($data, $serializedFields, $resource);
+
+        return $resource;
     }
 
+    /**
+     * Updates the resource fields with given data
+     *
+     * @param array                   $properties
+     * @param FieldMetadataCollection $collection
+     * @param object                  $resource
+     */
+    protected function updateEntityFields(array $properties, FieldMetadataCollection $collection, $resource)
+    {
+        foreach ($properties as $propertyName => $propertyValue) {
+            if ($collection->has($propertyName) && is_scalar($propertyValue)) {
+                if ($this->propertyAccessor->isWritable($resource, $propertyName)) {
+                    $this->propertyAccessor->setValue($resource, $propertyName, $propertyValue);
+                }
+            }
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function supportsDenormalization($data, $type, $format = null)
     {
-        // TODO: Implement supportsDenormalization() method.
+        return is_array($data) && $this->doctrineHelper->getMetadataFactory()->hasMetadataFor($type);
     }
 }

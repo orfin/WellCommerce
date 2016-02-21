@@ -19,6 +19,7 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyPath;
 use Symfony\Component\Serializer\Exception\LogicException;
+use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\SerializerAwareInterface;
 use Symfony\Component\Serializer\SerializerInterface;
@@ -43,7 +44,7 @@ abstract class AbstractSerializer implements SerializerAwareInterface
     protected $propertyAccessor;
 
     /**
-     * @var SerializerInterface|NormalizerInterface
+     * @var SerializerInterface|NormalizerInterface|DenormalizerInterface
      */
     protected $serializer;
 
@@ -86,8 +87,8 @@ abstract class AbstractSerializer implements SerializerAwareInterface
      */
     public function setSerializer(SerializerInterface $serializer)
     {
-        if (!$serializer instanceof NormalizerInterface) {
-            throw new LogicException('Injected serializer must be a normalizer');
+        if (!$serializer instanceof NormalizerInterface || !$serializer instanceof DenormalizerInterface) {
+            throw new LogicException('Injected serializer must implement both NormalizerInterface and DenormalizerInterface');
         }
 
         $this->serializer = $serializer;
@@ -139,12 +140,28 @@ abstract class AbstractSerializer implements SerializerAwareInterface
         $elements = explode('.', $attributeName);
 
         $wrapped = array_map(function ($element) {
-            $name = Inflector::tableize($element);
 
-            return "[{$name}]";
+            return "[{$element}]";
         }, $elements);
 
         return new PropertyPath(implode('', $wrapped));
+    }
+
+    /**
+     * @param $propertyName
+     *
+     * @return PropertyPath
+     */
+    protected function buildPath($propertyName)
+    {
+        $elements = explode('.', $propertyName);
+        $wrapped  = array_map(function ($element) {
+            $name = Inflector::classify($element);
+
+            return Inflector::camelize($name);
+        }, $elements);
+
+        return new PropertyPath(implode('.', $wrapped));
     }
 
     /**
