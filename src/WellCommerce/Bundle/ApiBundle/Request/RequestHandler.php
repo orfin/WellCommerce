@@ -12,11 +12,11 @@
 
 namespace WellCommerce\Bundle\ApiBundle\Request;
 
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Serializer\SerializerInterface;
-use WellCommerce\Bundle\ApiBundle\Configuration\ConfigurationLoaderInterface;
 use WellCommerce\Bundle\ApiBundle\Exception\ResourceNotFoundException;
 use WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface;
 use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
@@ -140,7 +140,10 @@ class RequestHandler implements RequestHandlerInterface
      */
     public function handleCreateRequest(Request $request)
     {
-        // TODO: Implement handleCreateRequest() method.
+        $result = $this->manager->initResource();
+        $data   = $this->serializer->serialize($result, self::RESPONSE_FORMAT, ['group' => $this->getResourceType()]);
+
+        return new Response($data);
     }
 
     /**
@@ -148,7 +151,18 @@ class RequestHandler implements RequestHandlerInterface
      */
     public function handleDeleteRequest(Request $request, $identifier)
     {
-        // TODO: Implement handleDeleteRequest() method.
+        $resource = $this->manager->getRepository()->find($identifier);
+        if (null === $resource) {
+            throw new ResourceNotFoundException($this->getResourceType(), $identifier);
+        }
+
+        $this->manager->removeResource($resource);
+
+        return new JsonResponse([
+            'success'       => true,
+            'identifier'    => $identifier,
+            'resource_type' => $this->getResourceType()
+        ]);
     }
 
     /**
