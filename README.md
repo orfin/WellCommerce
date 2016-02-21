@@ -39,7 +39,7 @@ Default credentials for administration area:
 Requirements
 ------------
 
-WellCommerce is only supported on PHP 5.6.x. Every next major release will require [actively supported PHP version][7]
+WellCommerce is only supported on PHP 5.6.x and 7.x. Every next major release will require [actively supported PHP version][7]
 
 Installation
 ------------
