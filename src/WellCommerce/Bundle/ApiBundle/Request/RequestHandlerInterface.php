@@ -29,6 +29,21 @@ interface RequestHandlerInterface
     public function getResourceType();
 
     /**
+     * @return \WellCommerce\Component\DataSet\DataSetInterface
+     */
+    public function getDataset();
+
+    /**
+     * @return \WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface
+     */
+    public function getManager();
+
+    /**
+     * @return \Symfony\Component\Serializer\SerializerInterface
+     */
+    public function getSerializer();
+
+    /**
      * Handles the "list" request for given resource
      *
      * @return array

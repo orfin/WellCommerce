@@ -9,7 +9,7 @@ well_commerce_shipping:
                 entity: WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethod
             api_configuration:
                 exposed: true
-                manager: shipping_method.manager.admin
+                dataset: shipping_method.dataset.admin
                 manager: shipping_method.manager.admin
         shipping_method_cost:
             auto_services:

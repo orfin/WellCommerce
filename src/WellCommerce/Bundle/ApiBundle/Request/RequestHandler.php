@@ -89,6 +89,30 @@ class RequestHandler implements RequestHandlerInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getDataset()
+    {
+        return $this->dataset;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getManager()
+    {
+        return $this->manager;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSerializer()
+    {
+        return $this->serializer;
+    }
+
+    /**
      * @param OptionsResolver $resolver
      */
     protected function configureOptions(OptionsResolver $resolver)
@@ -102,7 +126,7 @@ class RequestHandler implements RequestHandlerInterface
 
         $resolver->setDefaults([
             'page'      => 1,
-            'limit'     => 100,
+            'limit'     => 10,
             'order_by'  => 'id',
             'order_dir' => 'asc',
         ]);

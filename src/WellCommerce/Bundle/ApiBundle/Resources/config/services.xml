@@ -22,13 +22,13 @@
             </call>
         </service>
 
-        <service id="api.serializer.normalizer" class="WellCommerce\Bundle\ApiBundle\Serializer\EntityNormalizer">
+        <service id="api.serializer.normalizer" class="WellCommerce\Bundle\ApiBundle\Serializer\EntityNormalizer" public="false">
             <argument type="service" id="doctrine.helper"/>
             <argument type="service" id="api.serialization.metadata_loader"/>
             <tag name="serializer.normalizer" />
         </service>
 
-        <service id="api.serializer.denormalizer" class="WellCommerce\Bundle\ApiBundle\Serializer\EntityDenormalizer">
+        <service id="api.serializer.denormalizer" class="WellCommerce\Bundle\ApiBundle\Serializer\EntityDenormalizer" public="false">
             <argument type="service" id="doctrine.helper"/>
             <argument type="service" id="api.serialization.metadata_loader"/>
             <tag name="serializer.normalizer" />
