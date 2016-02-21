@@ -75,7 +75,6 @@ class ApiControllerTest extends AbstractTestCase
     protected function runRequestHandlerGetTest(RequestHandlerInterface $requestHandler)
     {
         $result = $requestHandler->getManager()->getRepository()->findOneBy([]);
-
         if (null !== $result) {
             $data = $requestHandler->getSerializer()->serialize($result, 'json', ['group' => $requestHandler->getResourceType()]);
 
@@ -86,7 +85,6 @@ class ApiControllerTest extends AbstractTestCase
             ]);
 
             $this->client->request('GET', $url);
-
             $this->assertTrue($this->client->getResponse()->isSuccessful());
             $this->assertEquals($data, $this->client->getResponse()->getContent(), sprintf(
                 'Wrong "get" response received for %s',
