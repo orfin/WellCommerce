@@ -20,6 +20,18 @@ The code is still hot but it only gets cooler :). Here are most important things
 - [Twig template engine][4]
 - [Twitter Bootstrap 3 as a base HTML framework][5]
 
+Demo
+------------
+
+[![Home](http://wellcommerce.org/web/assets/screens/mainside.png)](http://wellcommerce.org/web/assets/screens/mainside-m.png)
+
+[Front-end][8]
+[Administration][9]
+
+Default credentials for administration area:
+Login: admin
+Password: admin
+
 Requirements
 ------------
 
@@ -69,3 +81,5 @@ You can also discuss and share your opinions on WellCommerce in our gitter chat:
 [5]:  http://getbootstrap.com
 [6]:  http://getcomposer.org/
 [7]:  http://php.net/supported-versions.php
+[8]:  http://demo.wellcommerce.org
+[9]:  http://demo.wellcommerce.org/admin
