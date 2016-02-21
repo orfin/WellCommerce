@@ -23,14 +23,19 @@ The code is still hot but it only gets cooler :). Here are most important things
 Demo
 ------------
 
-[![Home](http://wellcommerce.org/web/assets/screens/mainside-m.png)](http://wellcommerce.org/web/assets/screens/mainside.png)
+[![Home page](http://wellcommerce.org/web/assets/screens/mainside-m.png)](http://wellcommerce.org/web/assets/screens/mainside.png)
+[![Product card](http://wellcommerce.org/web/assets/screens/product-m.png)](http://wellcommerce.org/web/assets/screens/product.png)
+[![Products list](http://wellcommerce.org/web/assets/screens/list-m.png)](http://wellcommerce.org/web/assets/screens/list.png)
+[![Products grid](http://wellcommerce.org/web/assets/screens/category-m.png)](http://wellcommerce.org/web/assets/screens/category.png)
+[![CMS](http://wellcommerce.org/web/assets/screens/cms-m.png)](http://wellcommerce.org/web/assets/screens/cms.png)
+[![Cart](http://wellcommerce.org/web/assets/screens/cart-m.png)](http://wellcommerce.org/web/assets/screens/cart.png)
 
-[Front-end][8]
-[Administration][9]
+- [Front-end][8]
+- [Administration][9]
 
 Default credentials for administration area:
-Login: admin
-Password: admin
+    Login: admin
+    Password: admin
 
 Requirements
 ------------
