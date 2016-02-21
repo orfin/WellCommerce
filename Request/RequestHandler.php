@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\ApiBundle\Request;
 
+use Doctrine\Common\Util\ClassUtils;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -46,7 +47,7 @@ class RequestHandler implements RequestHandlerInterface
     protected $options;
 
     /**
-     * @var SerializerInterface
+     * @var SerializerInterface|\Symfony\Component\Serializer\Normalizer\DenormalizerInterface|\Symfony\Component\Serializer\Normalizer\NormalizerInterface
      */
     protected $serializer;
 
@@ -175,10 +176,7 @@ class RequestHandler implements RequestHandlerInterface
      */
     public function handleDeleteRequest(Request $request, $identifier)
     {
-        $resource = $this->manager->getRepository()->find($identifier);
-        if (null === $resource) {
-            throw new ResourceNotFoundException($this->getResourceType(), $identifier);
-        }
+        $resource = $this->getResourceById($identifier);
 
         $this->manager->removeResource($resource);
 
@@ -194,7 +192,18 @@ class RequestHandler implements RequestHandlerInterface
      */
     public function handleUpdateRequest(Request $request, $identifier)
     {
-        // TODO: Implement handleUpdateRequest() method.
+        $parameters = $request->request->all();
+        $resource   = $this->getResourceById($identifier);
+        $className  = ClassUtils::getRealClass(get_class($resource));
+        $resource   = $this->serializer->denormalize($parameters, $className, self::RESPONSE_FORMAT, [
+            'resource' => $resource
+        ]);
+
+        $data = $this->serializer->serialize($resource, self::RESPONSE_FORMAT, ['group' => $this->getResourceType()]);
+
+        $this->manager->updateResource($resource);
+
+        return new Response($data);
     }
 
     /**
@@ -202,13 +211,27 @@ class RequestHandler implements RequestHandlerInterface
      */
     public function handleGetRequest(Request $request, $identifier)
     {
-        $result = $this->manager->getRepository()->find($identifier);
-        if (null === $result) {
+        $resource = $this->getResourceById($identifier);
+        $data     = $this->serializer->serialize($resource, self::RESPONSE_FORMAT, ['group' => $this->getResourceType()]);
+
+        return new Response($data);
+    }
+
+    /**
+     * Returns the resource by its identifier or throws an exception if it was not found
+     *
+     * @param integer $identifier
+     *
+     * @return object
+     * @throws ResourceNotFoundException
+     */
+    protected function getResourceById($identifier)
+    {
+        $resource = $this->manager->getRepository()->find($identifier);
+        if (null === $resource) {
             throw new ResourceNotFoundException($this->getResourceType(), $identifier);
         }
 
-        $data = $this->serializer->serialize($result, self::RESPONSE_FORMAT, ['group' => $this->getResourceType()]);
-
-        return new Response($data);
+        return $resource;
     }
 }
