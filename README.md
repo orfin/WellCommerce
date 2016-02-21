@@ -31,7 +31,9 @@ Demo
 - [Administration][9]
 
 Default credentials for administration area:
+
     Login: admin
+    
     Password: admin
 
 Requirements
