@@ -15,7 +15,6 @@ namespace WellCommerce\Bundle\ApiBundle\Serializer;
 use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Doctrine\Common\Util\ClassUtils;
 use Doctrine\Common\Util\Inflector;
-use Symfony\Component\Config\FileLocator;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyPath;
 use Symfony\Component\Serializer\Exception\LogicException;

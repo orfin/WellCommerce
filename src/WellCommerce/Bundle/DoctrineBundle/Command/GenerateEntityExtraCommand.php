@@ -12,14 +12,10 @@
 
 namespace WellCommerce\Bundle\DoctrineBundle\Command;
 
-use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Finder\Finder;
-use Symfony\Component\Process\Process;
 use WellCommerce\Bundle\CoreBundle\Helper\Environment\EnvironmentHelperInterface;
 use WellCommerce\Bundle\DoctrineBundle\Enhancer\TraitGenerator\TraitGeneratorEnhancerCollection;
 use WellCommerce\Bundle\DoctrineBundle\Enhancer\TraitGenerator\TraitGeneratorEnhancerTraverserInterface;

@@ -14,8 +14,6 @@ namespace WellCommerce\Bundle\ApiBundle\CacheWarmer;
 
 use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Finder\Finder;
-use Symfony\Component\Finder\SplFileInfo;
 use Symfony\Component\HttpKernel\CacheWarmer\CacheWarmer;
 use Symfony\Component\Yaml\Yaml;
 use WellCommerce\Bundle\ApiBundle\Metadata\Loader\SerializationMetadataLoaderInterface;
