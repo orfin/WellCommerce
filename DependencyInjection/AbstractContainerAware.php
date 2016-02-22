@@ -25,18 +25,7 @@ use WellCommerce\Bundle\CoreBundle\Helper\Translator\TranslatorHelperInterface;
  */
 abstract class AbstractContainerAware
 {
-    /**
-     * @var ContainerInterface
-     */
-    protected $container;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setContainer(ContainerInterface $container)
-    {
-        $this->container = $container;
-    }
+    use ContainerAwareTrait;
 
     /**
      * Returns true if the service id is defined.
