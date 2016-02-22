@@ -84,7 +84,7 @@ class Product implements ProductInterface
     protected $reviews;
 
     /**
-     * @var float
+     * @var int
      */
     protected $stock;
 
