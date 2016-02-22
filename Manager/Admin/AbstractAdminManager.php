@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Manager\Admin;
 
-use Doctrine\Common\Util\Debug;
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\AdminBundle\Entity\UserInterface;
 use WellCommerce\Bundle\CoreBundle\EventDispatcher\EventDispatcherInterface;
