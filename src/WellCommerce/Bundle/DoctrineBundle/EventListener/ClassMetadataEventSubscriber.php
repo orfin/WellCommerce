@@ -43,7 +43,6 @@ class ClassMetadataEventSubscriber implements EventSubscriber
     {
         /** @var $metadata \Doctrine\Common\Persistence\Mapping\ClassMetadata */
         $metadata        = $eventArgs->getClassMetadata();
-        $reflectionClass = $metadata->getReflectionClass();
         $this->traverser->traverse($metadata);
     }
 
