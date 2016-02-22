@@ -12,8 +12,6 @@
 
 namespace WellCommerce\Component\DataSet\Conditions;
 
-use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
-
 /**
  * Class ConditionsResolver
  *
