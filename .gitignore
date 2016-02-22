@@ -1,6 +1,5 @@
-*.idea
-*.project
 *.lock
+*.phar
 
 web/bundles/*
 web/css/*
@@ -20,5 +19,3 @@ app/phpunit.xml
 /bin/
 /vendor/
 
-composer.phar
-composer.lock
