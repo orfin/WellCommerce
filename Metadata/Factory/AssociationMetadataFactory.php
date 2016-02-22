@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\ApiBundle\Metadata\Factory;
 
 use WellCommerce\Bundle\ApiBundle\Metadata\AssociationMetadata;
-use WellCommerce\Bundle\ApiBundle\Metadata\FieldMetadata;
 
 /**
  * Class AssociationMetadataFactory

@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\ApiBundle\Metadata\Factory;
 
 use WellCommerce\Bundle\ApiBundle\Metadata\FieldMetadata;
-use WellCommerce\Bundle\ApiBundle\Metadata\SerializationClassMetadata;
 
 /**
  * Class FieldMetadataFactory
