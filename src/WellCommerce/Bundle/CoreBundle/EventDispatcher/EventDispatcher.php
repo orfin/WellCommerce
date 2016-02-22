@@ -14,12 +14,12 @@ namespace WellCommerce\Bundle\CoreBundle\EventDispatcher;
 
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface as BaseEventDispatcherInterface;
-use WellCommerce\Component\DataSet\Event\DataSetEvent;
-use WellCommerce\Component\Form\Event\FormEvent;
-use WellCommerce\Bundle\DoctrineBundle\Event\ResourceEvent;
 use WellCommerce\Bundle\CoreBundle\Helper\Helper;
+use WellCommerce\Bundle\DoctrineBundle\Event\ResourceEvent;
 use WellCommerce\Component\DataSet\DataSetInterface;
+use WellCommerce\Component\DataSet\Event\DataSetEvent;
 use WellCommerce\Component\Form\Elements\FormInterface;
+use WellCommerce\Component\Form\Event\FormEvent;
 use WellCommerce\Component\Form\FormBuilderInterface;
 
 /**

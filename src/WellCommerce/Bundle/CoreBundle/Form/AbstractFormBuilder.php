@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form;
 
-use Doctrine\Common\Util\Debug;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
 use WellCommerce\Bundle\CoreBundle\EventDispatcher\EventDispatcherInterface;
 use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;

@@ -11,9 +11,9 @@
  */
 namespace WellCommerce\Bundle\ShippingBundle\EventListener;
 
-use WellCommerce\Component\Form\Event\FormEvent;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
 use WellCommerce\Component\Form\Elements\FormInterface;
+use WellCommerce\Component\Form\Event\FormEvent;
 
 /**
  * Class ShippingMethodSubscriber
