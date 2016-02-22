@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\ClientBundle\Manager\Front;
 
-use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
 
 /**
