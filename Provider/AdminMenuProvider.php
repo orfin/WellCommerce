@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\AdminBundle\Provider;
 
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\KernelInterface;
 use WellCommerce\Bundle\AdminBundle\Entity\AdminMenuInterface;
 use WellCommerce\Bundle\AdminBundle\Repository\AdminMenuRepositoryInterface;
@@ -55,6 +56,7 @@ class AdminMenuProvider
             $menu = require $cache;
         } else {
             $menu = $this->generateMenu();
+            $this->writeCache($menu);
         }
 
         return $menu;
@@ -92,6 +94,18 @@ class AdminMenuProvider
         });
 
         return $tree;
+    }
+
+    protected function writeCache(array $menu)
+    {
+        $file    = $this->kernel->getCacheDir() . '/' . self::CACHE_FILENAME;
+        $content = sprintf('<?php return %s;', var_export($menu, true));
+        $tmpFile = tempnam(dirname($file), basename($file));
+        if (false !== @file_put_contents($tmpFile, $content) && @rename($tmpFile, $file)) {
+            @chmod($file, 0666 & ~umask());
+
+            return;
+        }
     }
 
     /**
