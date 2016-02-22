@@ -17,11 +17,6 @@
             <argument type="service" id="admin_menu.repository"/>
         </service>
 
-        <service id="admin_menu.cache_warmer" class="WellCommerce\Bundle\AdminBundle\CacheWarmer\AdminMenuCacheWarmer" public="false">
-            <argument type="service" id="admin_menu.provider" />
-            <tag name="kernel.cache_warmer"/>
-        </service>
-
         <service id="admin_menu.provider" class="WellCommerce\Bundle\AdminBundle\Provider\AdminMenuProvider" public="false">
             <argument type="service" id="kernel"/>
             <argument type="service" id="admin_menu.repository"/>
