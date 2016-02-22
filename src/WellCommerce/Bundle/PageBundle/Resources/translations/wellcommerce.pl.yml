@@ -16,3 +16,5 @@ page:
             none: Brak przekierowania
     fieldset:
         redirect_settings: Ustawienia przekierowań
+    comment:
+        publish: Informacja będzie widoczna w sklepie

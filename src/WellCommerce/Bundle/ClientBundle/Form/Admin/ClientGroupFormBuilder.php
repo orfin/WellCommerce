@@ -34,7 +34,7 @@ class ClientGroupFormBuilder extends AbstractFormBuilder
         $requiredData->addChild($this->getElement('text_field', [
             'name'    => 'discount',
             'label'   => $this->trans('common.label.discount'),
-            'comment' => $this->trans('common.comment.discount'),
+            'comment' => $this->trans('client.comment.discount'),
             'suffix'  => '%',
             'filters' => [
                 $this->getFilter('comma_to_dot_changer'),

@@ -5,3 +5,5 @@ theme:
         edit: Edytuj szablon
     label:
         folder: Folder
+    comment:
+        folder: Wybierz folder zawierający szablon

@@ -59,6 +59,8 @@ client:
             success: Wysłano e-mail z linkiem do zresetowania hasła.
         change_password:
             success: Nowe hasło zostało ustawione
+    comment:
+        discount: Wprowadź procentową wartość zniżki (np. 10 dla 10% zniżki)
     email:
         heading:
             reset_password: Informacje dotyczące zresetowania hasła

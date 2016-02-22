@@ -13,4 +13,6 @@ theme:
         edit: Edit theme
     label:
         folder: Folder
+    comment:
+        folder: Choose a folder which contains your theme
 

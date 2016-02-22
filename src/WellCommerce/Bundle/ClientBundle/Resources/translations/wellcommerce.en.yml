@@ -59,6 +59,8 @@ client:
             success: E-mail with reset instructions was sent.
         change_password:
             success: New password was set.
+    comment:
+        discount: Enter percentage-based discount ie. 10 for 10%
     email:
         heading:
             reset_password: Reset password instructions

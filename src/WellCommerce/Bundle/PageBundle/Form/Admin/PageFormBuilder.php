@@ -76,7 +76,7 @@ class PageFormBuilder extends AbstractFormBuilder
         $mainData->addChild($this->getElement('checkbox', [
             'name'    => 'publish',
             'label'   => $this->trans('common.label.publish'),
-            'comment' => $this->trans('common.comment.publish'),
+            'comment' => $this->trans('page.comment.publish'),
             'default' => 1
         ]));
 

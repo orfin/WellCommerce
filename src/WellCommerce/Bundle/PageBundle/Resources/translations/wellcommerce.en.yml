@@ -15,3 +15,5 @@ page:
             none: No redirect
     fieldset:
         redirect_settings: Redirect configuration
+    comment:
+        publish: Check if information should be visible for clients

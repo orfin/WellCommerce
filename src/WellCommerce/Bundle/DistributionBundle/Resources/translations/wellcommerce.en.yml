@@ -28,4 +28,4 @@ package:
         progress: Download progress
     flash:
         sync:
-            success: Synchronization completed successfully.
+            success: Package synchronization succeeded.
