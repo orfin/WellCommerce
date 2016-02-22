@@ -100,12 +100,8 @@ class AdminMenuProvider
     {
         $file    = $this->kernel->getCacheDir() . '/' . self::CACHE_FILENAME;
         $content = sprintf('<?php return %s;', var_export($menu, true));
-        $tmpFile = tempnam(dirname($file), basename($file));
-        if (false !== @file_put_contents($tmpFile, $content) && @rename($tmpFile, $file)) {
-            @chmod($file, 0666 & ~umask());
-
-            return;
-        }
+        $fs      = new Filesystem();
+        $fs->dumpFile($file, $content);
     }
 
     /**
@@ -124,5 +120,4 @@ class AdminMenuProvider
 
         return $children;
     }
-
 }
