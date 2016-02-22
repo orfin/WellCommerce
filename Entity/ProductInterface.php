@@ -59,12 +59,12 @@ interface ProductInterface extends
     public function setSku($sku);
 
     /**
-     * @return float
+     * @return int
      */
     public function getStock();
 
     /**
-     * @param float $stock
+     * @param int $stock
      */
     public function setStock($stock);
 
