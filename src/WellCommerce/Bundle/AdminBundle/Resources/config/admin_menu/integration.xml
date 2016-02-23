@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<items>
+    <item>
+        <identifier>integration</identifier>
+        <css_class>integration</css_class>
+        <name>integration</name>
+        <route_name/>
+        <parent/>
+        <hierarchy>90</hierarchy>
+    </item>
+
+    <item>
+        <identifier>distribution</identifier>
+        <css_class/>
+        <name>distribution</name>
+        <route_name>admin.package.index</route_name>
+        <parent>integration</parent>
+        <hierarchy>10</hierarchy>
+    </item>
+
+    <item>
+        <identifier>package</identifier>
+        <css_class/>
+        <name>package</name>
+        <route_name>admin.package.index</route_name>
+        <parent>distribution</parent>
+        <hierarchy>10</hierarchy>
+    </item>
+</items>
