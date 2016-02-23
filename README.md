@@ -57,10 +57,6 @@ Then, use the `create-project` command to generate a new WellCommerce applicatio
 For developer/contributor edition use following command:
 
     php composer.phar create-project wellcommerce/wellcommerce -s dev path/to/wellcommerce
-    
-For community edition use following command:
-    
-    php composer.phar create-project wellcommerce/community-edition -s dev path/to/wellcommerce
 
 Composer will install WellCommerce and all its dependencies under the `path/to/wellcommerce` directory. You will be asked to enter configuration parameters during the install process.
 
