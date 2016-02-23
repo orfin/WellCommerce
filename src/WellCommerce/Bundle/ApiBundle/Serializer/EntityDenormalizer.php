@@ -12,7 +12,9 @@
 
 namespace WellCommerce\Bundle\ApiBundle\Serializer;
 
+use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
+use WellCommerce\Bundle\ApiBundle\Metadata\Collection\AssociationMetadataCollection;
 use WellCommerce\Bundle\ApiBundle\Metadata\Collection\FieldMetadataCollection;
 
 /**
@@ -27,11 +29,13 @@ class EntityDenormalizer extends AbstractSerializer implements DenormalizerInter
      */
     public function denormalize($data, $class, $format = null, array $context = [])
     {
-        $resource              = $context['resource'];
-        $serializationMetadata = $this->getSerializationMetadata($resource);
-        $serializedFields      = $serializationMetadata->getFields();
+        $resource               = $context['resource'];
+        $serializationMetadata  = $this->getSerializationMetadata($resource);
+        $serializedFields       = $serializationMetadata->getFields();
+        $serializedAssociations = $serializationMetadata->getAssociations();
 
         $this->updateEntityFields($data, $serializedFields, $resource);
+        $this->updateEntityAssociations($data, $serializedAssociations, $resource);
 
         return $resource;
     }
@@ -52,6 +56,55 @@ class EntityDenormalizer extends AbstractSerializer implements DenormalizerInter
                 }
             }
         }
+    }
+
+    /**
+     * Loop through all passed properties and update the associations
+     *
+     * @param array                         $properties
+     * @param AssociationMetadataCollection $collection
+     * @param object                        $resource
+     */
+    protected function updateEntityAssociations(array $properties, AssociationMetadataCollection $collection, $resource)
+    {
+        $entityMetadata = $this->getEntityMetadata($resource);
+
+        foreach ($properties as $propertyName => $propertyValue) {
+            if ($collection->has($propertyName)) {
+                $this->updateEntityAssociation($propertyName, $propertyValue, $resource, $entityMetadata);
+            }
+        }
+    }
+
+    /**
+     * Updates a single entity association
+     *
+     * @param string $propertyName
+     * @param array  $propertyValue
+     * @param object $resource
+     */
+    protected function updateEntityAssociation($propertyName, array $propertyValue, $resource, ClassMetadata $entityMetadata)
+    {
+        if ($entityMetadata->isSingleValuedAssociation($propertyName)) {
+            $associationTargetClass = $entityMetadata->getAssociationTargetClass($propertyName);
+            $repository             = $this->getRepositoryByTargetClass($associationTargetClass);
+            $associationResource    = $repository->findOneBy($propertyValue);
+            if (null !== $associationResource && $this->propertyAccessor->isWritable($resource, $propertyName)) {
+                $this->propertyAccessor->setValue($resource, $propertyName, $associationResource);
+            }
+        }
+    }
+
+    /**
+     * Returns the repository object for given class
+     *
+     * @param string $targetClass
+     *
+     * @return \WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface
+     */
+    protected function getRepositoryByTargetClass($targetClass)
+    {
+        return $this->doctrineHelper->getEntityManager()->getRepository($targetClass);
     }
 
     /**
