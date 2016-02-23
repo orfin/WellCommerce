@@ -45,7 +45,11 @@ class ApiTokenAuthenticator extends AbstractGuardAuthenticator
             return $request->query->get('apiKey');
         }
 
-        return $request->headers->get('X-Api-Key');
+        if ($request->headers->has('X-Api-Key')) {
+            return $request->headers->get('X-Api-Key');
+        }
+
+        return false;
     }
 
     public function getUser($credentials, UserProviderInterface $userProvider)
