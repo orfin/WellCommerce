@@ -1,0 +1,40 @@
+WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddress:
+    fields:
+        firstName:
+            groups:
+                - default
+                - client_shipping_address
+        lastName:
+            groups:
+                - default
+                - client_shipping_address
+        street:
+            groups:
+                - default
+                - client_shipping_address
+        streetNo:
+            groups:
+                - default
+                - client_shipping_address
+        flatNo:
+            groups:
+                - default
+                - client_shipping_address
+        postCode:
+            groups:
+                - default
+                - client_shipping_address
+        province:
+            groups:
+                - default
+                - client_shipping_address
+        city:
+            groups:
+                - default
+                - client_shipping_address
+        country:
+            groups:
+                - default
+                - client_shipping_address
+    associations: {  }
+    callbacks: {  }
