@@ -143,6 +143,13 @@ class RequestHandler implements RequestHandlerInterface
      */
     public function handleListRequest(Request $request)
     {
+        if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
+            $data = json_decode($request->getContent(), true);
+            if (is_array($data)) {
+                $request->request->replace($data);
+            }
+        }
+
         $conditions         = new ConditionsCollection();
         $conditionsResolver = new ConditionsResolver();
         $conditionsResolver->resolveConditions($request->request->get('where'), $conditions);
