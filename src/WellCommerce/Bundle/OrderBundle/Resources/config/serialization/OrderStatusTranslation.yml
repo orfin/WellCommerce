@@ -1,0 +1,23 @@
+WellCommerce\Bundle\OrderBundle\Entity\OrderStatusTranslation:
+    fields:
+        name:
+            groups:
+                - default
+                - order_status_translation
+        defaultComment:
+            groups:
+                - default
+                - order_status_translation
+        locale:
+            groups:
+                - default
+                - order_status_translation
+        id:
+            groups:
+                - default
+                - order_status_translation
+    associations:
+        translatable:
+            groups:
+                - order_status_translation
+    callbacks: {  }
