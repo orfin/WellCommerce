@@ -10,7 +10,6 @@
 
     <services>
         <service id="search_index.manager.lucene" class="WellCommerce\Bundle\SearchBundle\Manager\LuceneSearchIndexManager">
-            <argument type="service" id="ivory_lucene_search"/>
             <argument type="service" id="kernel"/>
         </service>
 

@@ -1,11 +1,11 @@
 <?php
 /*
  * WellCommerce Open-Source E-Commerce Platform
- * 
+ *
  * This file is part of the WellCommerce package.
  *
  * (c) Adam Piotrowski <adam@wellcommerce.org>
- * 
+ *
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
@@ -28,7 +28,7 @@ class RequestHelper implements RequestHelperInterface
     protected $requestStack;
 
     /**
-     * @var null|\Symfony\Component\HttpFoundation\Request
+     * @var null|Request
      */
     protected $request;
 
@@ -40,7 +40,6 @@ class RequestHelper implements RequestHelperInterface
     public function __construct(RequestStack $requestStack)
     {
         $this->requestStack = $requestStack;
-        $this->request      = $requestStack->getMasterRequest();
     }
 
     /**
@@ -48,6 +47,10 @@ class RequestHelper implements RequestHelperInterface
      */
     public function getCurrentRequest()
     {
+        if (null === $this->request) {
+            $this->request = $this->requestStack->getMasterRequest();
+        }
+
         return $this->request;
     }
 
@@ -56,7 +59,7 @@ class RequestHelper implements RequestHelperInterface
      */
     public function getCurrentHost()
     {
-        if (!is_object($this->request) || !is_object($this->request->server)) {
+        if (!is_object($this->getCurrentRequest()) || !is_object($this->request->server)) {
             return null;
         }
 
@@ -76,7 +79,7 @@ class RequestHelper implements RequestHelperInterface
      */
     public function getSessionAttribute($name, $default = null)
     {
-        if (null !== $this->request && $this->request->hasSession()) {
+        if (null !== $this->getCurrentRequest() && $this->request->hasSession()) {
             return $this->request->getSession()->get($name, $default);
         }
 
@@ -88,7 +91,7 @@ class RequestHelper implements RequestHelperInterface
      */
     public function setSessionAttribute($name, $value)
     {
-        if (null === $this->request || false === $this->request->hasSession()) {
+        if (null === $this->getCurrentRequest() || false === $this->request->hasSession()) {
             throw new \LogicException('Cannot set session attributes without valid session.');
         }
 
@@ -100,7 +103,7 @@ class RequestHelper implements RequestHelperInterface
      */
     public function hasSessionAttribute($name)
     {
-        if (null !== $this->request && $this->request->hasSession()) {
+        if (null !== $this->getCurrentRequest() && $this->request->hasSession()) {
             return $this->request->getSession()->has($name);
         }
 
@@ -112,7 +115,7 @@ class RequestHelper implements RequestHelperInterface
      */
     public function getSessionId()
     {
-        if (null !== $this->request && $this->request->hasSession()) {
+        if (null !== $this->getCurrentRequest() && $this->request->hasSession()) {
             return $this->request->getSession()->getId();
         }
 
@@ -124,7 +127,7 @@ class RequestHelper implements RequestHelperInterface
      */
     public function getSessionName()
     {
-        if (null !== $this->request && $this->request->hasSession()) {
+        if (null !== $this->getCurrentRequest() && $this->request->hasSession()) {
             return $this->request->getSession()->getName();
         }
 
@@ -136,7 +139,7 @@ class RequestHelper implements RequestHelperInterface
      */
     public function hasRequestBagParam($name)
     {
-        if ($this->request instanceof Request) {
+        if ($this->getCurrentRequest() instanceof Request) {
             return $this->request->request->has($name);
         }
 
@@ -174,7 +177,7 @@ class RequestHelper implements RequestHelperInterface
      */
     public function getQueryBagParam($name, $default = null, $filter = FILTER_SANITIZE_SPECIAL_CHARS)
     {
-        if (false === $this->request->query->has($name)) {
+        if (null === $this->getCurrentRequest() || false === $this->request->query->has($name)) {
             return $default;
         }
 
@@ -186,7 +189,7 @@ class RequestHelper implements RequestHelperInterface
      */
     public function hasAttributesBagParam($name)
     {
-        if ($this->request instanceof Request) {
+        if ($this->getCurrentRequest() instanceof Request) {
             return $this->request->attributes->has($name);
         }
 
@@ -224,7 +227,7 @@ class RequestHelper implements RequestHelperInterface
      */
     public function getCurrentLocale()
     {
-        return $this->request->getLocale();
+        return $this->getCurrentRequest()->getLocale();
     }
 
     /**

@@ -14,8 +14,6 @@ namespace WellCommerce\Bundle\ApiBundle\Security;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundException;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
@@ -43,7 +41,15 @@ class ApiTokenAuthenticator extends AbstractGuardAuthenticator
 
     public function getCredentials(Request $request)
     {
-        return $request->query->get('apiKey');
+        if ($request->query->has('apiKey')) {
+            return $request->query->get('apiKey');
+        }
+
+        if ($request->headers->has('X-Api-Key')) {
+            return $request->headers->get('X-Api-Key');
+        }
+
+        return false;
     }
 
     public function getUser($credentials, UserProviderInterface $userProvider)

@@ -7,6 +7,10 @@ well_commerce_company:
             orm_configuration:
                 mapping: "@WellCommerceCompanyBundle/Resources/config/doctrine/Company.orm.yml"
                 entity: WellCommerce\Bundle\CompanyBundle\Entity\Company
+            api_configuration:
+                exposed: true
+                dataset: company.dataset.admin
+                manager: company.manager.admin
         company_address:
             orm_configuration:
                 mapping: "@WellCommerceCompanyBundle/Resources/config/doctrine/CompanyAddress.orm.yml"

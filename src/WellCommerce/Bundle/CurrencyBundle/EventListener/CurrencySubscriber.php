@@ -13,7 +13,6 @@ namespace WellCommerce\Bundle\CurrencyBundle\EventListener;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
-use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
 use WellCommerce\Bundle\CurrencyBundle\Entity\Currency;
@@ -34,10 +33,6 @@ class CurrencySubscriber extends AbstractEventSubscriber
 
     public function onKernelController(FilterControllerEvent $event)
     {
-        if ($event->getRequestType() == HttpKernelInterface::SUB_REQUEST) {
-            return;
-        }
-
         $request = $event->getRequest();
         $session = $request->getSession();
 

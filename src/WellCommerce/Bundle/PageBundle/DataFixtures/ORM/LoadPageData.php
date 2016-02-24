@@ -13,8 +13,8 @@
 namespace WellCommerce\Bundle\PageBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use WellCommerce\Bundle\DoctrineBundle\DataFixtures\AbstractDataFixture;
 use WellCommerce\Bundle\CoreBundle\Helper\Sluggable;
+use WellCommerce\Bundle\DoctrineBundle\DataFixtures\AbstractDataFixture;
 use WellCommerce\Bundle\PageBundle\Entity\Page;
 use WellCommerce\Bundle\PageBundle\Entity\PageInterface;
 

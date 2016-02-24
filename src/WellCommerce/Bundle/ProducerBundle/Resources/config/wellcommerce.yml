@@ -7,6 +7,10 @@ well_commerce_producer:
             orm_configuration:
                 mapping: "@WellCommerceProducerBundle/Resources/config/doctrine/Producer.orm.yml"
                 entity: WellCommerce\Bundle\ProducerBundle\Entity\Producer
+            api_configuration:
+                exposed: true
+                dataset: producer.dataset.admin
+                manager: producer.manager.admin
         producer_route:
             auto_services:
                 factory: ~

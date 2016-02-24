@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\RoutingBundle\Provider;
 
+use Doctrine\Common\Collections\Criteria;
 use Symfony\Cmf\Component\Routing\RouteProviderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
@@ -101,11 +102,12 @@ class RouteProvider implements RouteProviderInterface
 
     public function getRoutesByNames($names, $parameters = [])
     {
-        $collection = $this->repository->findAll();
+        $collection = $this->repository->matching(new Criteria());
         $routes     = [];
-        foreach ($collection as $item) {
-            $routes[] = $this->getRouteByName($item->getId());
-        }
+
+        $collection->map(function (RouteInterface $route) use (&$routes) {
+            $routes[] = $this->getRouteByName($route->getId());
+        });
 
         return $routes;
     }

@@ -11,7 +11,6 @@
  */
 namespace WellCommerce\Bundle\ShopBundle\EventListener;
 
-use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
@@ -23,9 +22,6 @@ use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
  */
 class ShopSubscriber extends AbstractEventSubscriber
 {
-    /**
-     * {@inheritdoc}
-     */
     public static function getSubscribedEvents()
     {
         return [

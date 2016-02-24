@@ -14,6 +14,10 @@ well_commerce_payment:
             orm_configuration:
                 mapping: "@WellCommercePaymentBundle/Resources/config/doctrine/PaymentMethod.orm.yml"
                 entity: WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod
+            api_configuration:
+                exposed: true
+                dataset: payment_method.dataset.admin
+                manager: payment_method.manager.admin
         payment_method_configuration:
             auto_services:
                 factory: WellCommerce\Bundle\PaymentBundle\Factory\PaymentMethodConfigurationFactory

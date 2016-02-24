@@ -7,3 +7,7 @@ well_commerce_locale:
             orm_configuration:
                 mapping: "@WellCommerceLocaleBundle/Resources/config/doctrine/Locale.orm.yml"
                 entity: WellCommerce\Bundle\LocaleBundle\Entity\Locale
+            api_configuration:
+                exposed: true
+                dataset: locale.dataset.admin
+                manager: locale.manager.admin

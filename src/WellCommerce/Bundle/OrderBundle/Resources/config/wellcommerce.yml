@@ -7,6 +7,10 @@ well_commerce_order:
             orm_configuration:
                 mapping: "@WellCommerceOrderBundle/Resources/config/doctrine/Order.orm.yml"
                 entity: WellCommerce\Bundle\OrderBundle\Entity\Order
+            api_configuration:
+                exposed: true
+                dataset: order.dataset.admin
+                manager: order.manager.admin
         order_product:
             auto_services:
                 factory: WellCommerce\Bundle\OrderBundle\Factory\OrderProductFactory
@@ -21,6 +25,10 @@ well_commerce_order:
             orm_configuration:
                 mapping: "@WellCommerceOrderBundle/Resources/config/doctrine/OrderStatus.orm.yml"
                 entity: WellCommerce\Bundle\OrderBundle\Entity\OrderStatus
+            api_configuration:
+                exposed: true
+                dataset: order_status.dataset.admin
+                manager: order_status.manager.admin
         order_status_translation:
             orm_configuration:
                 mapping: "@WellCommerceOrderBundle/Resources/config/doctrine/OrderStatusTranslation.orm.yml"
@@ -32,6 +40,10 @@ well_commerce_order:
             orm_configuration:
                 mapping: "@WellCommerceOrderBundle/Resources/config/doctrine/OrderStatusGroup.orm.yml"
                 entity: WellCommerce\Bundle\OrderBundle\Entity\OrderStatusGroup
+            api_configuration:
+                exposed: true
+                dataset: order_status_group.dataset.admin
+                manager: order_status_group.manager.admin
         order_status_group_translation:
             orm_configuration:
                 mapping: "@WellCommerceOrderBundle/Resources/config/doctrine/OrderStatusGroupTranslation.orm.yml"

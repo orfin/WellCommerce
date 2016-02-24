@@ -10,7 +10,7 @@ README
 What is WellCommerce?
 ---------------------
 
-WellCommerce is an e-commerce platform for PHP 5.6+. It can be used to develop all kind of shops and extend them in the way you like.
+WellCommerce is an e-commerce platform for PHP 5.6.x and 7.x. It can be used to develop all kind of shops and extend them in the way you like.
 
 The code is still hot but it only gets cooler :). Here are most important things which we have used to create this solution:
 
@@ -20,10 +20,26 @@ The code is still hot but it only gets cooler :). Here are most important things
 - [Twig template engine][4]
 - [Twitter Bootstrap 3 as a base HTML framework][5]
 
+Demo
+------------
+
+[![Home page](http://wellcommerce.org/web/assets/screens/mainside-m.png)](http://wellcommerce.org/web/assets/screens/mainside.png)
+[![Product card](http://wellcommerce.org/web/assets/screens/product-m.png)](http://wellcommerce.org/web/assets/screens/product.png)
+[![Products grid](http://wellcommerce.org/web/assets/screens/category-m.png)](http://wellcommerce.org/web/assets/screens/category.png)
+
+- [Front-end][8]
+- [Administration][9]
+
+Default credentials for administration area:
+
+    Login: admin
+    
+    Password: admin
+
 Requirements
 ------------
 
-WellCommerce is only supported on PHP 5.6.x. Every next major release will require [actively supported PHP version][7]
+WellCommerce is only supported on PHP 5.6.x and 7.x. Every next major release will require [actively supported PHP version][7]
 
 Installation
 ------------
@@ -41,10 +57,6 @@ Then, use the `create-project` command to generate a new WellCommerce applicatio
 For developer/contributor edition use following command:
 
     php composer.phar create-project wellcommerce/wellcommerce -s dev path/to/wellcommerce
-    
-For community edition use following command:
-    
-    php composer.phar create-project wellcommerce/community-edition -s dev path/to/wellcommerce
 
 Composer will install WellCommerce and all its dependencies under the `path/to/wellcommerce` directory. You will be asked to enter configuration parameters during the install process.
 
@@ -69,3 +81,5 @@ You can also discuss and share your opinions on WellCommerce in our gitter chat:
 [5]:  http://getbootstrap.com
 [6]:  http://getcomposer.org/
 [7]:  http://php.net/supported-versions.php
+[8]:  http://demo.wellcommerce.org
+[9]:  http://demo.wellcommerce.org/admin

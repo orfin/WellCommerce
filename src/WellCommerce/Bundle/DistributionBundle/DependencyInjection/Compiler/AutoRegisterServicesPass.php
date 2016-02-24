@@ -14,7 +14,6 @@ namespace WellCommerce\Bundle\DistributionBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\Compiler\AbstractAutoRegisterServicesPass;
-use WellCommerce\Bundle\DictionaryBundle\DependencyInjection\WellCommerceDictionaryExtension;
 use WellCommerce\Bundle\DistributionBundle\DependencyInjection\WellCommerceDistributionExtension;
 
 /**

@@ -7,6 +7,10 @@ well_commerce_news:
             orm_configuration:
                 mapping: "@WellCommerceNewsBundle/Resources/config/doctrine/News.orm.yml"
                 entity: WellCommerce\Bundle\NewsBundle\Entity\News
+            api_configuration:
+                exposed: true
+                dataset: news.dataset.admin
+                manager: news.manager.admin
         news_translation:
             orm_configuration:
                 mapping: "@WellCommerceNewsBundle/Resources/config/doctrine/NewsTranslation.orm.yml"

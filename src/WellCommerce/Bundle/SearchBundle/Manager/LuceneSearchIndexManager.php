@@ -13,8 +13,15 @@
 namespace WellCommerce\Bundle\SearchBundle\Manager;
 
 use Ivory\LuceneSearchBundle\Model\LuceneManager;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\KernelInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use WellCommerce\Bundle\CoreBundle\Helper\Helper;
+use ZendSearch\Lucene\Analysis\Analyzer\Analyzer;
+use ZendSearch\Lucene\Analysis\Analyzer\Common\Utf8\CaseInsensitive;
+use ZendSearch\Lucene\Lucene;
+use ZendSearch\Lucene\Search\QueryParser;
+use ZendSearch\Lucene\Storage\Directory\Filesystem as LuceneFilesystem;
 
 /**
  * Class LuceneSearchIndexManager
@@ -24,9 +31,9 @@ use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 class LuceneSearchIndexManager implements SearchIndexManagerInterface
 {
     /**
-     * @var LuceneManager
+     * @var array
      */
-    protected $luceneManager;
+    protected $options = [];
 
     /**
      * @var KernelInterface
@@ -39,10 +46,34 @@ class LuceneSearchIndexManager implements SearchIndexManagerInterface
      * @param LuceneManager   $luceneManager
      * @param KernelInterface $kernel
      */
-    public function __construct(LuceneManager $luceneManager, KernelInterface $kernel)
+    public function __construct(KernelInterface $kernel, array $options = [])
     {
-        $this->luceneManager = $luceneManager;
-        $this->kernel        = $kernel;
+        $this->kernel = $kernel;
+        $resolver     = new OptionsResolver();
+        $this->configureOptions($resolver);
+        $this->options = $resolver->resolve($options);
+    }
+
+    /**
+     * @param OptionsResolver $resolver
+     */
+    protected function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setRequired([
+            'max_buffered_docs',
+            'max_merge_docs',
+            'merge_factor',
+        ]);
+
+        $resolver->setDefaults([
+            'max_buffered_docs' => 10,
+            'max_merge_docs'    => 100000,
+            'merge_factor'      => 10,
+        ]);
+
+        $resolver->setAllowedTypes('max_buffered_docs', 'int');
+        $resolver->setAllowedTypes('max_merge_docs', 'int');
+        $resolver->setAllowedTypes('merge_factor', 'int');
     }
 
     /**
@@ -50,14 +81,10 @@ class LuceneSearchIndexManager implements SearchIndexManagerInterface
      */
     public function createIndex($name)
     {
-        $kernelDir = $this->kernel->getRootDir();
-        $indexDir  = $kernelDir . '/store/lucene/' . Helper::snake($name);
+        $path  = $this->getIndexPath($name);
+        $index = Lucene::create($path);
 
-        $this->luceneManager->setIndex(
-            $name,
-            $indexDir,
-            'ZendSearch\Lucene\Analysis\Analyzer\Common\Utf8\CaseInsensitive'
-        );
+        return $index;
     }
 
     /**
@@ -65,11 +92,35 @@ class LuceneSearchIndexManager implements SearchIndexManagerInterface
      */
     public function getIndex($name)
     {
-        if (!$this->luceneManager->hasIndex($name)) {
-            $this->createIndex($name);
+        $path = $this->getIndexPath($name);
+
+        if (!$this->checkPath($path)) {
+            $index = Lucene::create($path);
+        } else {
+            $index = Lucene::open($path);
         }
 
-        return $this->luceneManager->getIndex($name);
+        Analyzer::setDefault(new CaseInsensitive);
+        LuceneFilesystem::setDefaultFilePermissions(0775);
+        QueryParser::setDefaultEncoding('UTF-8');
+
+        $index->setMaxBufferedDocs($this->options['max_buffered_docs']);
+        $index->setMaxMergeDocs($this->options['max_merge_docs']);
+        $index->setMergeFactor($this->options['merge_factor']);
+
+        $index->optimize();
+
+        return $index;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasIndex($name)
+    {
+        $path = $this->getIndexPath($name);
+
+        return $this->checkPath($path);
     }
 
     /**
@@ -77,9 +128,10 @@ class LuceneSearchIndexManager implements SearchIndexManagerInterface
      */
     public function removeIndex($name)
     {
-        $index = $this->getIndex($name);
-        if ($index->count()) {
-            $this->luceneManager->removeIndex($name, false);
+        $path       = $this->getIndexPath($name);
+        $filesystem = new Filesystem();
+        if ($filesystem->exists($path)) {
+            $filesystem->remove($path);
         }
     }
 
@@ -88,9 +140,31 @@ class LuceneSearchIndexManager implements SearchIndexManagerInterface
      */
     public function eraseIndex($name)
     {
-        $index = $this->getIndex($name);
-        if ($index->count()) {
-            $this->luceneManager->eraseIndex($name);
+        $path       = $this->getIndexPath($name);
+        $filesystem = new Filesystem();
+        if ($filesystem->exists($path)) {
+            $filesystem->remove($path);
         }
+
+        $this->createIndex($name);
+    }
+
+    /**
+     * Returns the path for given index
+     *
+     * @param string $name
+     *
+     * @return string
+     */
+    private function getIndexPath($name)
+    {
+        $kernelDir = $this->kernel->getRootDir();
+
+        return $kernelDir . '/store/lucene/' . Helper::snake($name);
+    }
+
+    private function checkPath($path)
+    {
+        return file_exists($path) && is_readable($path) && ($resources = scandir($path)) && (count($resources) > 2);
     }
 }

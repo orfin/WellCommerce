@@ -7,6 +7,10 @@ well_commerce_availability:
             orm_configuration:
                 mapping: "@WellCommerceAvailabilityBundle/Resources/config/doctrine/Availability.orm.yml"
                 entity: WellCommerce\Bundle\AvailabilityBundle\Entity\Availability
+            api_configuration:
+                exposed: true
+                dataset: availability.dataset.admin
+                manager: availability.manager.admin
         availability_translation:
             orm_configuration:
                 mapping: "@WellCommerceAvailabilityBundle/Resources/config/doctrine/AvailabilityTranslation.orm.yml"

@@ -4,6 +4,10 @@ well_commerce_media:
             auto_services:
                 factory: WellCommerce\Bundle\MediaBundle\Factory\MediaFactory
                 repository: WellCommerce\Bundle\MediaBundle\Repository\MediaRepository
+            api_configuration:
+                exposed: true
+                dataset: media.dataset.admin
+                manager: media.manager.admin
             orm_configuration:
                 mapping: "@WellCommerceMediaBundle/Resources/config/doctrine/Media.orm.yml"
                 entity: WellCommerce\Bundle\MediaBundle\Entity\Media

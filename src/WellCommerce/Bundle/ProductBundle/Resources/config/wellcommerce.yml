@@ -7,6 +7,10 @@ well_commerce_product:
             orm_configuration:
                 mapping: "@WellCommerceProductBundle/Resources/config/doctrine/Product.orm.yml"
                 entity: WellCommerce\Bundle\ProductBundle\Entity\Product
+            api_configuration:
+                exposed: true
+                dataset: product.dataset.admin
+                manager: product.manager.admin
         product_attribute:
             auto_services:
                 factory: WellCommerce\Bundle\ProductBundle\Factory\ProductAttributeFactory

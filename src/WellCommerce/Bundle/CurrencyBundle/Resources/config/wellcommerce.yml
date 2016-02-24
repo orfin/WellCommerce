@@ -7,6 +7,10 @@ well_commerce_currency:
             orm_configuration:
                 mapping: "@WellCommerceCurrencyBundle/Resources/config/doctrine/Currency.orm.yml"
                 entity: WellCommerce\Bundle\CurrencyBundle\Entity\Currency
+            api_configuration:
+                exposed: true
+                dataset: currency.dataset.admin
+                manager: currency.manager.admin
         currency_rate:
             auto_services:
                 factory: WellCommerce\Bundle\CurrencyBundle\Factory\CurrencyRateFactory

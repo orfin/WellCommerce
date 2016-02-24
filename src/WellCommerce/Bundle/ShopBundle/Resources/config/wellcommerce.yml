@@ -7,6 +7,10 @@ well_commerce_shop:
             orm_configuration:
                 mapping: "@WellCommerceShopBundle/Resources/config/doctrine/Shop.orm.yml"
                 entity: WellCommerce\Bundle\ShopBundle\Entity\Shop
+            api_configuration:
+                exposed: true
+                dataset: shop.dataset.admin
+                manager: shop.manager.admin
 
 doctrine:
     orm:

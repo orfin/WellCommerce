@@ -23,10 +23,7 @@ class AppKernel extends Kernel
 {
     public function registerBundles()
     {
-        $loader  = new BundleLoader($this);
-        $bundles = $loader->loadBundles();
-
-        return $bundles;
+        return (new BundleLoader($this))->loadBundles();
     }
 
     public function registerContainerConfiguration(LoaderInterface $loader)

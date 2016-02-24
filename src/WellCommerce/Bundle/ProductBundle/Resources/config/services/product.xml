@@ -37,6 +37,5 @@
             <argument type="service" id="doctrine.helper"/>
             <tag name="form.data_transformer" alias="product_photo_collection"/>
         </service>
-
     </services>
 </container>

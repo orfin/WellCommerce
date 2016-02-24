@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\OAuthBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use WellCommerce\Bundle\CoreBundle\Controller\AbstractController;
 
 /**

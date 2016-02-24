@@ -7,6 +7,10 @@ well_commerce_client:
             orm_configuration:
                 mapping: "@WellCommerceClientBundle/Resources/config/doctrine/Client.orm.yml"
                 entity: WellCommerce\Bundle\ClientBundle\Entity\Client
+            api_configuration:
+                exposed: true
+                dataset: client.dataset.admin
+                manager: client.manager.admin
         client_billing_address:
             orm_configuration:
                 mapping: "@WellCommerceClientBundle/Resources/config/doctrine/ClientBillingAddress.orm.yml"
@@ -26,6 +30,10 @@ well_commerce_client:
             orm_configuration:
                 mapping: "@WellCommerceClientBundle/Resources/config/doctrine/ClientGroup.orm.yml"
                 entity: WellCommerce\Bundle\ClientBundle\Entity\ClientGroup
+            api_configuration:
+                exposed: true
+                dataset: client_group.dataset.admin
+                manager: client_group.manager.admin
         client_group_translation:
             orm_configuration:
                 mapping: "@WellCommerceClientBundle/Resources/config/doctrine/ClientGroupTranslation.orm.yml"

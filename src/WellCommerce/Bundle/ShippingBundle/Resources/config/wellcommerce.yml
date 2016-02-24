@@ -7,6 +7,10 @@ well_commerce_shipping:
             orm_configuration:
                 mapping: "@WellCommerceShippingBundle/Resources/config/doctrine/ShippingMethod.orm.yml"
                 entity: WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethod
+            api_configuration:
+                exposed: true
+                dataset: shipping_method.dataset.admin
+                manager: shipping_method.manager.admin
         shipping_method_cost:
             auto_services:
                 factory: ~
