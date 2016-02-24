@@ -9,6 +9,7 @@ page:
         section: Sekcja
         parent: Strona nadrzędna
         client_groups: Widoczność dla grup klientów
+        section: Sekcja
         redirect:
             type: Rodzaj przekierowania
             url: Na adres URL

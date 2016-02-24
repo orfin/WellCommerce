@@ -13,7 +13,7 @@ product:
             description: Description
     comment:
         enabled: Enable product's visibility
-        track_stock: Śledzenie stanu magazynowego spowoduje, że stan magazynowy będzie się zmieniał automatycznie w przypadku zamówień. Produkty z włączonym śledzeniem i ilością 0 nie będą mogły być zamówione przez klientów.
+        track_stock: Enabling inventory tracking, the quantity of items will be updated automatically. A products with tracking switched on, which quantity equals 0, would not be able to order by clients.
     heading:
         index: Products
         add: Add a product
@@ -42,6 +42,7 @@ product:
         unit: Unit
         package_size: Package size
         track_stock: Track stock
+        pcs: pcs
         buy_price:
             settings: Buy prices configuration
             currency: Currency

@@ -8,6 +8,7 @@ page:
     label:
         parent: Parent category
         client_groups: Visible for client groups
+        section: Section
         redirect:
             type: Type of redirect
             url: Redirect to URL

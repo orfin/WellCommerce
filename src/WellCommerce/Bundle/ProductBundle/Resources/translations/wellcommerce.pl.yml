@@ -41,6 +41,7 @@ product:
         unit: Jednostka miary
         package_size: Ilość w opakowaniu
         track_stock: Śledzenie magazynu
+        pcs: szt.
         buy_price:
             settings: Konfiguracja cen zakupu
             currency: Waluta

@@ -34,7 +34,7 @@ class OrderStatusFormBuilder extends AbstractFormBuilder
         $requiredData->addChild($this->getElement('checkbox', [
             'name'    => 'enabled',
             'label'   => $this->trans('common.label.enabled'),
-            'comment' => $this->trans('common.comment.enabled'),
+            'comment' => $this->trans('order_status.comment.enabled'),
             'default' => 1
         ]));
 
