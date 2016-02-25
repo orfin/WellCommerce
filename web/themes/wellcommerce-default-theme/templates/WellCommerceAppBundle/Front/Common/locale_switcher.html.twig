@@ -7,7 +7,7 @@
         </button>
         <ul class="dropdown-menu" role="menu" aria-labelledby="CurrencyMenu">
             {% for locale in locales %}
-                <li><a href="{{ path('front.locale.switch',{"_locale": locale.code}) }}">{{ locale.code }}</a></li>
+                <li><a href="{{ path('front.locale.switch',{"_locale": locale}) }}">{{ locale }}</a></li>
             {% endfor %}
         </ul>
     </div>
