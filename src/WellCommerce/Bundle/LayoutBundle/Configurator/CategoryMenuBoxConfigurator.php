@@ -31,7 +31,7 @@ class CategoryMenuBoxConfigurator extends AbstractLayoutBoxConfigurator
         $accessor = $this->getPropertyAccessor();
 
         $fieldset->addChild($builder->getElement('tip', [
-            'tip' => '<p>' . $this->trans('Choose categories which should be not visible in box.') . '</p>'
+            'tip' => $this->trans('Choose categories which should be not visible in box.')
         ]));
 
         $fieldset->addChild($builder->getElement('tree', [

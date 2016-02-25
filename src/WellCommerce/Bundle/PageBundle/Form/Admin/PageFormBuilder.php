@@ -106,7 +106,7 @@ class PageFormBuilder extends AbstractFormBuilder
         ]));
 
         $mainData->addChild($this->getElement('tip', [
-            'tip' => '<p>' . $this->trans('page.tip.client_groups') . '</p>'
+            'tip' => $this->trans('page.tip.client_groups')
         ]));
 
         $mainData->addChild($this->getElement('multi_select', [

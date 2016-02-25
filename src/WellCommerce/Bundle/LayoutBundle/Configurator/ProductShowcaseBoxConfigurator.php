@@ -30,7 +30,7 @@ class ProductShowcaseBoxConfigurator extends AbstractLayoutBoxConfigurator
         $fieldset = $this->getFieldset($builder, $form);
 
         $fieldset->addChild($builder->getElement('tip', [
-            'tip' => '<p>' . $this->trans('product_showcase.tip') . '</p>'
+            'tip' => $this->trans('product_showcase.tip')
         ]));
 
         $fieldset->addChild($builder->getElement('select', [

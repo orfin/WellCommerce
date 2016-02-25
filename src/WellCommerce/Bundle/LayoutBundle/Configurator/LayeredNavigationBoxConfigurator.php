@@ -30,7 +30,7 @@ class LayeredNavigationBoxConfigurator extends AbstractLayoutBoxConfigurator
         $fieldset = $this->getFieldset($builder, $form);
 
         $fieldset->addChild($builder->getElement('tip', [
-            'tip' => '<p>' . $this->trans('product.layered_navigation.tip') . '</p>'
+            'tip' => $this->trans('product.layered_navigation.tip')
         ]));
     }
 }
