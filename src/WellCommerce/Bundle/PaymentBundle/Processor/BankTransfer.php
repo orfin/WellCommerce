@@ -23,7 +23,14 @@ use WellCommerce\Component\Form\FormBuilderInterface;
  */
 class BankTransfer extends AbstractPaymentProcessor
 {
+    /**
+     * @var string
+     */
     protected $name  = 'Bank transfer';
+
+    /**
+     * @var string
+     */
     protected $alias = 'bank_transfer';
 
     /**
