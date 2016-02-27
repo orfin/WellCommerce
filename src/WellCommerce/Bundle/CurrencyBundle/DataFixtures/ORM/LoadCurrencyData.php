@@ -37,6 +37,7 @@ class LoadCurrencyData extends AbstractDataFixture
         foreach (self::$samples as $name) {
             $currency = new Currency();
             $currency->setCode($name);
+            $currency->setEnabled(true);
             $manager->persist($currency);
 
             $this->setReference('currency_' . $name, $currency);
