@@ -11,7 +11,6 @@
  */
 namespace WellCommerce\Bundle\LocaleBundle\Form\Admin;
 
-use Doctrine\Common\Util\Debug;
 use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
 use WellCommerce\Component\Form\Elements\FormInterface;
 
