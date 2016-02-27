@@ -12,6 +12,9 @@ attribute_group:
     flash:
         empty_group: Pusta grupa
         new_group: Nowa grupa
+    label:
+        attributes: Atrybuty
+        group: Grupa
 
 attribute_value:
     heading:

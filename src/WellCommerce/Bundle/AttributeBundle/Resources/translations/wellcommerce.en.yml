@@ -12,7 +12,9 @@ attribute_group:
     flash:
         empty_group: Empty group
         new_group: New group
-
+    label:
+        attributes: Attributes
+        group: Group
 attribute_value:
     heading:
         index: Attribute values
