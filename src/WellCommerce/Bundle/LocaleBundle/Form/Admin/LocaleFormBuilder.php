@@ -11,6 +11,7 @@
  */
 namespace WellCommerce\Bundle\LocaleBundle\Form\Admin;
 
+use Doctrine\Common\Util\Debug;
 use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
 use WellCommerce\Component\Form\Elements\FormInterface;
 
@@ -42,6 +43,12 @@ class LocaleFormBuilder extends AbstractFormBuilder
             'label'       => $this->trans('locale.label.currency'),
             'options'     => $this->get('currency.dataset.admin')->getResult('select', [], ['label_column' => 'code']),
             'transformer' => $this->getRepositoryTransformer('entity', $this->get('currency.repository'))
+        ]));
+
+        $requiredData->addChild($this->getElement('checkbox', [
+            'name'    => 'enabled',
+            'label'   => $this->trans('common.label.enabled'),
+            'comment' => $this->trans('common.comment.enabled'),
         ]));
 
         $form->addFilter($this->getFilter('no_code'));

@@ -13,6 +13,11 @@ WellCommerce\Bundle\LocaleBundle\Entity\Locale:
             length: 12
             unique: true
             nullable: false
+        enabled:
+            type: boolean
+            nullable: false
+            options:
+                default: true
     manyToOne:
         currency:
             targetEntity: WellCommerce\Bundle\CurrencyBundle\Entity\Currency

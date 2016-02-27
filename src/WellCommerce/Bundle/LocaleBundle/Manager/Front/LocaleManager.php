@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\LocaleBundle\Manager\Front;
 
+use Doctrine\Common\Collections\Criteria;
 use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
 
 /**
