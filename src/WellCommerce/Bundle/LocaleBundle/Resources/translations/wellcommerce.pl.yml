@@ -8,3 +8,6 @@ locale:
         currency: Domyślna waluta
         language: Język
         translations: Tłumaczenia
+    comment:
+        enabled: Tłumaczenie będzie widoczne w sklepie
+

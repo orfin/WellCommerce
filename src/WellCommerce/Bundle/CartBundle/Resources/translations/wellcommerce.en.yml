@@ -4,6 +4,8 @@ cart:
         empty: Cart is empty.
     button:
         add: Add to cart
+        go_to_cart: Go to cart
+        back_to_shopping: Back to shopping
     link:
         checkout: Go to checkout
     heading:

@@ -8,3 +8,6 @@ currency:
     label:
         code: Code
         name: Currency
+    comment:
+        enabled: Currency will be visible in shop
+

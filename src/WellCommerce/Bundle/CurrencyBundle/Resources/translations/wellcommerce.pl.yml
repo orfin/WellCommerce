@@ -7,6 +7,8 @@ currency:
         sync: Synchronizuj kursy walutowe
     label:
         code: Kod
+    comment:
+        enabled: Waluta będzie widoczna w sklepie
 
 locale:
     heading:

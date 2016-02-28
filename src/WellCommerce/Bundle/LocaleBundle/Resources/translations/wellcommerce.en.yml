@@ -8,3 +8,5 @@ locale:
         currency: Default currency
         language: Language
         translations: Translations
+    comment:
+        enabled: Locale will be visible in shop

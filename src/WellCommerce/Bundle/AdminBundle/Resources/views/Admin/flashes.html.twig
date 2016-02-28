@@ -1,3 +1,4 @@
+{% trans_default_domain "wellcommerce" %}
 <script type="text/javascript">
     $(document).ready(function(){
         {% for flashMessage in app.session.getFlashBag().get('error') %}
