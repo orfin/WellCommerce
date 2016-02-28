@@ -47,7 +47,7 @@ class LocaleFormBuilder extends AbstractFormBuilder
         $requiredData->addChild($this->getElement('checkbox', [
             'name'    => 'enabled',
             'label'   => $this->trans('common.label.enabled'),
-            'comment' => $this->trans('common.comment.enabled'),
+            'comment' => $this->trans('locale.comment.enabled'),
         ]));
 
         $form->addFilter($this->getFilter('no_code'));
