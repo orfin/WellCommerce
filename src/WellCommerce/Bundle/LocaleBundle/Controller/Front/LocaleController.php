@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\LocaleBundle\Controller\Front;
 
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 
 /**
