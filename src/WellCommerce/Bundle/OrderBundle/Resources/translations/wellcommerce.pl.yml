@@ -1,0 +1,64 @@
+order:
+    form:
+        fieldset:
+            products: Produkty
+    heading:
+        index: Zamówienia
+        edit: Edytuj zamówienie
+        address: Adresy
+        confirmation: Potwierdzenie
+        order_total: Suma
+        products: Produkty
+        order_method_details:
+    button:
+        confirm: Przejdź do potwierdzenia
+        add_product: Dodaj produkt
+    heading:
+        address: Adres dostawy i płatnika
+        contact_details: Dane kontaktowe
+    label:
+        id: ID
+        order_no: Numer zamówienia
+        client: Klient
+        product_total: Wartość produktów
+        shipping_total: Koszty wysyłki
+        order_total: Wartość zamówienia
+        variant: Wariant
+        weight: Waga
+        quantity: Ilość
+        stock: Stan magazynowy
+        tax_rate: Stawka VAT
+        current_status: Status
+        created_at: Złożone
+        comment: Komentarz klienta
+        shipping_method: Forma wysyłki
+        payment_method: Forma płatności
+        product_name: Produkt
+        tax_value: Podatek
+        gross_amount: Cena
+        gross_total: Suma
+        currency: Waluta
+        order_total:
+            shipping: Koszty wysyłki
+    description:
+        product_total: Wartość produktów
+        shipping_cost: Koszty wysyłki
+
+order_status:
+    heading:
+        index: Statusy zamówienia
+        add: Dodaj status
+        edit: Edytuj status
+        label:
+            order_status_group: Grupa statusu zamówienia
+            default_comment: Domyślny komentarz dla zamówienia
+        comment:
+            enabled: Status zamówienia będzie widoczny.
+
+order_status_group:
+    heading:
+        index: Grupy statusów zamówienia
+        add: Dodaj grupę
+        edit: Edytuj grupę
+    label:
+        name: Nazwa grupy statusów zamówień

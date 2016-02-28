@@ -50,7 +50,7 @@ class PageFormBuilder extends AbstractFormBuilder
 
         $languageData = $mainData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
-            'label'       => $this->trans('fieldset.translations.label'),
+            'label'       => $this->trans('common.fieldset.translations'),
             'transformer' => $this->getRepositoryTransformer('translation', $this->get('page.repository'))
         ]));
 
@@ -76,7 +76,7 @@ class PageFormBuilder extends AbstractFormBuilder
         $mainData->addChild($this->getElement('checkbox', [
             'name'    => 'publish',
             'label'   => $this->trans('common.label.publish'),
-            'comment' => $this->trans('common.comment.publish'),
+            'comment' => $this->trans('page.comment.publish'),
             'default' => 1
         ]));
 
@@ -131,7 +131,7 @@ class PageFormBuilder extends AbstractFormBuilder
 
         $languageData = $contentData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
-            'label'       => $this->trans('fieldset.translations.label'),
+            'label'       => $this->trans('common.fieldset.translations'),
             'transformer' => $this->getRepositoryTransformer('translation', $this->get('page.repository'))
         ]));
 
@@ -147,7 +147,7 @@ class PageFormBuilder extends AbstractFormBuilder
 
         $languageData = $metaData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
-            'label'       => $this->trans('fieldset.translations.label'),
+            'label'       => $this->trans('common.fieldset.translations'),
             'transformer' => $this->getRepositoryTransformer('translation', $this->get('page.repository'))
         ]));
 
@@ -186,7 +186,7 @@ class PageFormBuilder extends AbstractFormBuilder
 
         $redirectSettings->addChild($this->getElement('text_field', [
             'name'         => 'redirectUrl',
-            'label'        => $this->trans('label.redirect_url'),
+            'label'        => $this->trans('page.label.redirect.url'),
             'dependencies' => [
                 $this->getDependency('show', [
                     'form'      => $form,
@@ -198,7 +198,7 @@ class PageFormBuilder extends AbstractFormBuilder
 
         $redirectSettings->addChild($this->getElement('select', [
             'name'         => 'redirectRoute',
-            'label'        => $this->trans('label.redirect_route'),
+            'label'        => $this->trans('page.label.redirect.route'),
             'options'      => $this->getRedirectRoutes(),
             'dependencies' => [
                 $this->getDependency('show', [

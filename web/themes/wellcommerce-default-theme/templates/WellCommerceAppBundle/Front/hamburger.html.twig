@@ -45,7 +45,7 @@
 
 			{% if currencies|length > 1 %}
 			<li>
-				<a class="collapsed coll" data-toggle="collapse" href="#currency" aria-expanded="false" aria-controls="#currency">{% trans %}currency.label{% endtrans %}: {{ app.request.session.get('_currency')|upper }} <span class="caret"></span></a>
+				<a class="collapsed coll" data-toggle="collapse" href="#currency" aria-expanded="false" aria-controls="#currency">{% trans %}currency.label.name{% endtrans %}: {{ app.request.session.get('_currency')|upper }} <span class="caret"></span></a>
 				<ul id="currency" class="subcategories collapse">
 					{% for currency in currencies %}
 					<li><a href="{{ path('front.currency.switch',{"currency": currency }) }}">{{ currency }}</a></li>

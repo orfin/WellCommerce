@@ -4,8 +4,8 @@
     <h2>{% trans %}dictionary.heading.add{% endtrans %}</h2>
     <ul class="possibilities">
         <li><a href="{{ path('admin.dictionary.index') }}" class="button return"><span></span></a></li>
-        <li><a href="#{{ form.getName() }}" rel="submit[next]" class="button"><span>{% trans %}admin.form.save_and_add_another{% endtrans %}</span></a></li>
-        <li><a href="#{{ form.getName() }}" rel="submit" class="button"><span>{% trans %}admin.form.save_and_finish{% endtrans %}</span></a></li>
+        <li><a href="#{{ form.getName() }}" rel="submit[next]" class="button"><span>{% trans %}common.button.save_and_add_another{% endtrans %}</span></a></li>
+        <li><a href="#{{ form.getName() }}" rel="submit" class="button"><span>{% trans %}common.button.save_and_finish{% endtrans %}</span></a></li>
     </ul>
     {{ form_js(form) }}
 {% endblock %}

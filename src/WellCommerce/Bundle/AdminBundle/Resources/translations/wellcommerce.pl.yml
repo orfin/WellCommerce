@@ -12,6 +12,7 @@ user:
         add: Dodaj admnistratora
         edit: Edytuj admnistratora
     button:
+        add: Dodaj
         log_in: Zaloguj się
         reset_password: Zresetuj hasło
     label:
@@ -24,6 +25,9 @@ user:
         enabled: Aktywny
         user_group: Grupa administratorów
         username: Login
+        api_key: Klucz API
+    fieldset:
+        api_access: Dostęp API
     flash:
         success:
             reset_password: Twoje nowe hasło zostało wysłane na e-mail
@@ -42,3 +46,29 @@ user_group:
         edit: Edytuj grupę administratorów
     label:
         permissions: Uprawnienia
+
+admin:
+    heading:
+        last_opinions: Ostatnie opinie
+        last_orders: Ostatnie zamówienia
+        new_customers: Nowi klienci
+        bestsellers: Bestsellery
+        customers_online: Klienci online
+        dashboard: Dashboard
+    label:
+        content: Treść
+        customer: Zamawiający
+        sum: Suma
+        firstname: Imię
+        lastname: Nazwisko
+        product: Produkt
+        quantity: Ilość sprzedanych
+        show_raports: Pokaż raporty
+        client: Klient
+        cart: Koszyk
+        global_context: Globalny
+    user:
+        logout: Wyloguj
+        help: Pomoc
+    button:
+        show_all: Pokaż wszystkie

@@ -1,0 +1,18 @@
+currency:
+    heading:
+        index: Waluty
+        add: Dodaj walutę
+        edit: Edytuj walutę
+    button:
+        sync: Synchronizuj kursy walutowe
+    label:
+        code: Kod
+
+locale:
+    heading:
+        index: Języki
+        add: Dodaj język
+        edit: Edytuj język
+    label:
+        code: Kod
+        currency: Domyślna waluta

@@ -1,0 +1,10 @@
+currency:
+    heading:
+        index: Currencies
+        add: Add a currency
+        edit: Edit a currency
+    button:
+        sync: Synchronize exchange rates
+    label:
+        code: Code
+        name: Currency
