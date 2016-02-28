@@ -65,4 +65,14 @@ class LayoutBoxTranslation implements LocaleAwareInterface
     {
         $this->content = $content;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCopyingSensitiveProperties()
+    {
+        return [
+            'name',
+        ];
+    }
 }

@@ -4091,7 +4091,7 @@ var GForm = GCore.ExtendClass(GFormContainer, function() {
 		if(gThis.m_bLocked == true){
 			return false;
 		}
-		
+
         var bResult = gThis.Validate(true);
 		if (bResult) {
             gThis.m_bLocked = true;
@@ -7362,7 +7362,7 @@ var GFormTip = GCore.ExtendClass(GFormField, function() {
 	gThis._PrepareNode = function() {
 		gThis.m_jNode = $('<div/>').addClass(gThis._GetClass('Field')).addClass(gThis.m_oOptions.sDirection);
 		gThis.m_jNode.append('<div class="' + gThis._GetClass('Arrow') + '"/>');
-		gThis.m_jNode.append($('<div class="long"/>').append(gThis.m_oOptions.sTip));
+		gThis.m_jNode.append($('<div class="long"/>').append('<p>' + gThis.m_oOptions.sTip + '</p>'));
 		if (gThis.m_oOptions.bRetractable) {
 			gThis.m_jNode.addClass(gThis._GetClass('Retractable'));
 			if (gThis.m_oOptions.sDefaultState == 'retracted') {

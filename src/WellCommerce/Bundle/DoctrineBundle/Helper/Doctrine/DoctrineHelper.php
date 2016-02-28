@@ -91,6 +91,14 @@ class DoctrineHelper implements DoctrineHelperInterface
     /**
      * {@inheritdoc}
      */
+    public function getAllMetadata()
+    {
+        return $this->getMetadataFactory()->getAllMetadata();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function hasClassMetadataForEntity($object)
     {
         $className = ClassUtils::getRealClass(get_class($object));

@@ -23,7 +23,14 @@ use WellCommerce\Component\Form\FormBuilderInterface;
  */
 class CashOnDelivery extends AbstractPaymentProcessor
 {
-    protected $name  = 'Cash on delivery';
+    /**
+     * @var string
+     */
+    protected $name = 'Cash on delivery';
+
+    /**
+     * @var string
+     */
     protected $alias = 'cod';
 
     /**
@@ -31,6 +38,9 @@ class CashOnDelivery extends AbstractPaymentProcessor
      */
     public function addConfigurationFields(FormBuilderInterface $builder, ElementInterface $fieldset, DependencyInterface $dependency)
     {
-
+        $fieldset->addChild($builder->getElement('tip', [
+            'tip'          => $this->trans('payment_method.cod.configuration'),
+            'dependencies' => [$dependency]
+        ]));
     }
 }

@@ -28,8 +28,8 @@ class LocaleController extends AbstractFrontController
      *
      * @return RedirectResponse
      */
-    public function switchAction(Request $request)
+    public function switchAction()
     {
-        return new RedirectResponse($request->headers->get('referer'));
+        return $this->redirectToRoute('front.home_page.index');
     }
 }

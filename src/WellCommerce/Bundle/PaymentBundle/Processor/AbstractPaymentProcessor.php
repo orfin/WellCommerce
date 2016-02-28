@@ -26,7 +26,14 @@ use WellCommerce\Component\Form\FormBuilderInterface;
  */
 abstract class AbstractPaymentProcessor extends AbstractContainerAware implements PaymentMethodProcessorInterface
 {
+    /**
+     * @var string
+     */
     protected $name;
+
+    /**
+     * @var string
+     */
     protected $alias;
 
     /**
@@ -45,6 +52,13 @@ abstract class AbstractPaymentProcessor extends AbstractContainerAware implement
         return $this->name;
     }
 
+    /**
+     * Returns the field name used in forms
+     *
+     * @param string $name
+     *
+     * @return string
+     */
     protected function getFieldName($name)
     {
         return sprintf('%s_%s', $this->alias, $name);
@@ -53,7 +67,11 @@ abstract class AbstractPaymentProcessor extends AbstractContainerAware implement
     /**
      * {@inheritdoc}
      */
-    abstract function addConfigurationFields(FormBuilderInterface $builder, ElementInterface $fieldset, DependencyInterface $dependency);
+    abstract public function addConfigurationFields(
+        FormBuilderInterface $builder,
+        ElementInterface $fieldset,
+        DependencyInterface $dependency
+    );
 
     /**
      * {@inheritdoc}

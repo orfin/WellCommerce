@@ -111,4 +111,15 @@ class PageTranslation implements RoutableSubjectInterface, LocaleAwareInterface
     {
         return new PageRoute();
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCopyingSensitiveProperties()
+    {
+        return [
+            'name',
+            'slug',
+        ];
+    }
 }
