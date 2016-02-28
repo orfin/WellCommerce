@@ -47,6 +47,9 @@
             <argument>ClientLogin</argument>
             <argument>client_login.layout_box.controller</argument>
             <argument type="service" id="translator.helper"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
             <tag name="layout_box.configurator" />
         </service>
 
@@ -61,6 +64,9 @@
             <argument>ClientMenu</argument>
             <argument>client_menu.layout_box.controller</argument>
             <argument type="service" id="translator.helper"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
             <tag name="layout_box.configurator" />
         </service>
 
@@ -75,6 +81,9 @@
             <argument>ClientOrder</argument>
             <argument>client_order.layout_box.controller</argument>
             <argument type="service" id="translator.helper"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
             <tag name="layout_box.configurator" />
         </service>
     </services>

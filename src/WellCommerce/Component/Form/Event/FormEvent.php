@@ -37,15 +37,22 @@ class FormEvent extends Event
     protected $form;
 
     /**
-     * Constructor
+     * @var null|object
+     */
+    protected $defaultData;
+
+    /**
+     * FormEvent constructor.
      *
      * @param FormBuilderInterface $formBuilder
      * @param FormInterface        $form
+     * @param null|object          $defaultData
      */
-    public function __construct(FormBuilderInterface $formBuilder, FormInterface $form)
+    public function __construct(FormBuilderInterface $formBuilder, FormInterface $form, $defaultData = null)
     {
         $this->formBuilder = $formBuilder;
         $this->form        = $form;
+        $this->defaultData = $defaultData;
     }
 
     /**
@@ -66,5 +73,13 @@ class FormEvent extends Event
     public function getForm()
     {
         return $this->form;
+    }
+
+    /**
+     * @return null|object
+     */
+    public function getDefaultData()
+    {
+        return $this->defaultData;
     }
 }

@@ -8,6 +8,9 @@
             <argument>Search</argument>
             <argument>search.layout_box.controller</argument>
             <argument type="service" id="translator.helper"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
             <tag name="layout_box.configurator" />
         </service>
     </services>

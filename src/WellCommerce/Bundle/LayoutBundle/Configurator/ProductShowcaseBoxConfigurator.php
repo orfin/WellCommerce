@@ -34,9 +34,9 @@ class ProductShowcaseBoxConfigurator extends AbstractLayoutBoxConfigurator
         ]));
 
         $fieldset->addChild($builder->getElement('select', [
-            'name'    => 'status',
-            'label'   => $this->trans('product_showcase.status.label'),
-            'options' => $this->get('product_status.collection.admin')->getSelect(),
+            'name'        => 'status',
+            'label'       => $this->trans('product_showcase.label.status'),
+            'options'     => $this->get('product_status.dataset.admin')->getResult('select'),
         ]));
     }
 }

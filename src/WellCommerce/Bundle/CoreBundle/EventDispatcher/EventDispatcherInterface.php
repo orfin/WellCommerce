@@ -88,8 +88,9 @@ interface EventDispatcherInterface
      *
      * @param FormBuilderInterface $builder
      * @param FormInterface        $form
+     * @param object               $defaultData
      */
-    public function dispatchOnFormInitEvent(FormBuilderInterface $builder, FormInterface $form);
+    public function dispatchOnFormInitEvent(FormBuilderInterface $builder, FormInterface $form, $defaultData);
 
     /**
      * Dispatches the events after dataset initialization

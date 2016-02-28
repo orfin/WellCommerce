@@ -103,9 +103,9 @@ class EventDispatcher implements EventDispatcherInterface
     /**
      * {@inheritdoc}
      */
-    public function dispatchOnFormInitEvent(FormBuilderInterface $builder, FormInterface $form)
+    public function dispatchOnFormInitEvent(FormBuilderInterface $builder, FormInterface $form, $defaultData)
     {
-        $this->dispatchFormEvent($builder, $form, EventDispatcherInterface::FORM_INIT_EVENT);
+        $this->dispatchFormEvent($builder, $form, $defaultData, EventDispatcherInterface::FORM_INIT_EVENT);
     }
 
     /**
@@ -153,15 +153,17 @@ class EventDispatcher implements EventDispatcherInterface
     }
     
     /**
-     * Dispatches resource event
+     * Dispatches form init event
      *
-     * @param object $resource
-     * @param string $name
+     * @param FormBuilderInterface $builder
+     * @param FormInterface        $form
+     * @param object               $defaultData
+     * @param string               $name
      */
-    protected function dispatchFormEvent(FormBuilderInterface $builder, FormInterface $form, $name)
+    protected function dispatchFormEvent(FormBuilderInterface $builder, FormInterface $form, $defaultData, $name)
     {
         $eventName = sprintf('%s.%s', $form->getName(), $name);
-        $event     = new FormEvent($builder, $form);
+        $event     = new FormEvent($builder, $form, $defaultData);
         $this->dispatch($eventName, $event);
     }
 

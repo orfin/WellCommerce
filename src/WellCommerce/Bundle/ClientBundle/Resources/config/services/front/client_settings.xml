@@ -45,6 +45,9 @@
             <argument>ClientSettings</argument>
             <argument>client_settings.controller.box</argument>
             <argument type="service" id="translator.helper"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
             <tag name="layout_box.configurator" />
         </service>
     </services>

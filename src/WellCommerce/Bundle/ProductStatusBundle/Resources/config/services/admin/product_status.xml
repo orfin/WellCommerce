@@ -55,6 +55,9 @@
             <argument>ProductShowcase</argument>
             <argument>product_showcase.layout_box.controller</argument>
             <argument type="service" id="translator.helper"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
             <tag name="layout_box.configurator" />
         </service>
 
@@ -62,6 +65,9 @@
             <argument>ProductStatus</argument>
             <argument>product_status.layout_box.controller</argument>
             <argument type="service" id="translator.helper"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
             <tag name="layout_box.configurator" />
         </service>
     </services>
