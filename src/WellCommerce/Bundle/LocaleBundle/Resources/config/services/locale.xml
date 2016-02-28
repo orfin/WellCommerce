@@ -20,11 +20,17 @@
             <argument type="service" id="event_dispatcher" />
         </service>
 
-        <service id="locale.install.command" class="WellCommerce\Bundle\LocaleBundle\Command\AddLocaleCommand">
+        <service id="locale.add.command" class="WellCommerce\Bundle\LocaleBundle\Command\AddLocaleCommand">
             <argument type="service" id="doctrine.helper"/>
             <argument type="service" id="locale.repository"/>
             <argument type="service" id="locale.factory"/>
             <argument type="service" id="currency.repository"/>
+            <tag name="console.command" />
+        </service>
+
+        <service id="locale.delete.command" class="WellCommerce\Bundle\LocaleBundle\Command\DeleteLocaleCommand">
+            <argument type="service" id="doctrine.helper"/>
+            <argument type="service" id="locale.repository"/>
             <tag name="console.command" />
         </service>
 
