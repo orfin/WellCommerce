@@ -53,10 +53,6 @@
             <constraint name="NotBlank" />
             <constraint name="NotNull" />
         </property>
-        <property name="slug">
-            <constraint name="NotBlank" />
-            <constraint name="NotNull" />
-        </property>
         <constraint name="WellCommerce\Bundle\RoutingBundle\Doctrine\Validator\Constraints\UniqueEntity" />
     </class>
 

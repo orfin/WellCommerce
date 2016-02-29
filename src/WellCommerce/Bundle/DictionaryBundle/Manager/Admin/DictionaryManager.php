@@ -12,16 +12,18 @@
 
 namespace WellCommerce\Bundle\DictionaryBundle\Manager\Admin;
 
+use Doctrine\Common\Collections\Criteria;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Yaml\Yaml;
-use WellCommerce\Bundle\LocaleBundle\Entity\Locale;
-use WellCommerce\Bundle\LocaleBundle\Entity\LocaleInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
 use WellCommerce\Bundle\DictionaryBundle\Entity\Dictionary;
+use WellCommerce\Bundle\DictionaryBundle\Entity\DictionaryInterface;
+use WellCommerce\Bundle\LocaleBundle\Entity\Locale;
+use WellCommerce\Bundle\LocaleBundle\Entity\LocaleInterface;
 
 /**
  * Class DictionaryManager
@@ -73,12 +75,42 @@ class DictionaryManager extends AbstractAdminManager
         $this->locales          = $this->getLocales();
         $this->propertyAccessor = PropertyAccess::createPropertyAccessor();
 
+        foreach ($this->locales as $locale) {
+            $this->updateTranslationsForLocale($locale);
+        }
+
         $this->getDoctrineHelper()->truncateTable('WellCommerce\Bundle\DictionaryBundle\Entity\Dictionary');
         $this->loadFilesystemTranslations();
 
         $this->loadDatabaseTranslations();
         $this->mergeAndSaveTranslations();
+    }
 
+    protected function updateTranslationsForLocale(LocaleInterface $locale)
+    {
+        $fsTranslations = $this->getTranslatorHelper()->getMessages($locale->getCode());
+        $dbTranslations = $this->getDatabaseTranslations($locale);
+        print_r($dbTranslations);
+        die();
+    }
+
+    /**
+     * Returns an array containing all previously imported translations
+     *
+     * @param LocaleInterface $locale
+     *
+     * @return array
+     */
+    protected function getDatabaseTranslations(LocaleInterface $locale)
+    {
+        $messages   = [];
+        $collection = $this->repository->matching(new Criteria());
+
+        $collection->map(function (DictionaryInterface $dictionary) use ($locale, &$messages) {
+            $messages[$dictionary->getIdentifier()] = $dictionary->translate($locale->getCode())->getValue();
+        });
+
+        return $messages;
     }
 
     /**
@@ -87,9 +119,8 @@ class DictionaryManager extends AbstractAdminManager
     protected function loadFilesystemTranslations()
     {
         foreach ($this->locales as $locale) {
-            $messages     = $this->get('translator')->getMessages($locale->getCode());
-            $translations = $this->propertyAccessor->getValue($messages, '[wellcommerce]');
-            $this->importMessages($translations, $locale);
+            $messages = $this->getTranslatorHelper()->getMessages($locale->getCode());
+            $this->importMessages($messages, $locale);
         }
     }
 
@@ -166,7 +197,7 @@ class DictionaryManager extends AbstractAdminManager
     protected function loadDatabaseTranslations()
     {
         $em           = $this->getDoctrineHelper()->getEntityManager();
-        $repository   = $em->getRepository('WellCommerceAppBundle:Dictionary');
+        $repository   = $em->getRepository('WellCommerceDictrionaryBundle:Dictionary');
         $translations = $repository->findAll();
         foreach ($translations as $translation) {
             $this->addDatabaseTranslation($translation);
