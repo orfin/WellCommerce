@@ -4,12 +4,6 @@
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
 
     <class name="WellCommerce\Bundle\AppBundle\Entity\Price">
-        <property name="netAmount">
-            <constraint name="GreaterThanOrEqual">
-                <option name="value">0</option>
-            </constraint>
-            <constraint name="NotBlank" />
-        </property>
         <property name="grossAmount">
             <constraint name="GreaterThanOrEqual">
                 <option name="value">0</option>

@@ -13,6 +13,9 @@
 namespace WellCommerce\Bundle\ProductBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use WellCommerce\Bundle\AppBundle\Entity\Dimension;
+use WellCommerce\Bundle\AppBundle\Entity\DiscountablePrice;
+use WellCommerce\Bundle\AppBundle\Entity\Price;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 
@@ -44,6 +47,9 @@ class ProductFactory extends AbstractFactory
         $product->setStock(0);
         $product->setWeight(0);
         $product->setPackageSize(1);
+        $product->setSellPrice(new DiscountablePrice());
+        $product->setDimension(new Dimension());
+        $product->setBuyPrice(new Price());
 
         return $product;
     }
