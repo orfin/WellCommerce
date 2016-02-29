@@ -1,0 +1,541 @@
+form.help.required_fields: '* required fields'
+form.media_data.image_id: 'Image ID'
+common.button.add: Add
+common.button.save: 'Save changes'
+common.button.save_and_finish: 'Save and finish'
+common.button.save_and_continue: 'Save and continue'
+common.button.save_and_add_another: 'Save and add another'
+common.button.back: Return
+common.help.required_fields: '* required fields'
+common.fieldset.required_data: 'General settings'
+common.fieldset.general_settings: 'General settings'
+common.fieldset.translations: Translations
+common.fieldset.shops: Shops
+common.fieldset.prices: Prices
+common.fieldset.discount_settings: 'Discount settings'
+common.fieldset.general: General
+common.fieldset.photos: Photos
+common.fieldset.meta: Meta
+common.fieldset.categories: Categories
+common.fieldset.description: Description
+common.label.id: ID
+common.label.name: Name
+common.label.currency: Currency
+common.label.short_description: 'Short description'
+common.label.description: Description
+common.label.code: Code
+common.label.slug: Slug
+common.label.group: Group
+common.label.discount: Discount
+common.label.created_at: 'Created at'
+common.label.updated_at: 'Updated at'
+common.label.valid_from: 'Valid from'
+common.label.valid_to: 'Valid to'
+common.label.enabled: Enabled
+common.label.preview: Preview
+common.label.extension: Extension
+common.label.mime: MIME
+common.label.size: Size
+common.label.publish: Published
+common.label.hierarchy: Hierarchy
+common.label.password: Password
+common.label.producer: Producer
+common.label.tax: Tax
+common.label.stock: Stock
+common.label.categories: Categories
+common.label.sku: SKU
+common.label.default_order_status: 'Default order status'
+common.label.url: 'URL address'
+common.label.shops: 'Available in shops'
+common.label.meta.title: 'Meta title'
+common.label.meta.keywords: 'Meta keywords'
+common.label.meta.description: 'Meta description'
+common.label.dimension.width: Width
+common.label.dimension.height: Height
+common.label.dimension.depth: Depth
+common.label.dimension.length: Length
+common.label.dimension.weight: Weight
+common.label.phone: Phone
+common.label.secondary_phone: 'Secondary phone'
+common.label.email: E-mail
+common.label.price: Price
+common.label.discounted_price: 'Discounted price'
+common.label.gross_price: 'Gross price'
+common.label.net_price: 'Net price'
+common.label.first_name: 'First name'
+common.label.last_name: 'Last name'
+common.label.client_group: 'Client group'
+common.label.address: Address
+common.label.street: Street
+common.label.street_no: 'Street no.'
+common.label.flat_no: 'Flat no.'
+common.label.province: Province
+common.label.post_code: 'Post code'
+common.label.country: Country
+common.label.meta_title: 'Meta title'
+common.label.meta_description: 'Meta description'
+common.label.meta_keywords: 'Meta keywords'
+common.flashes.success: Success!
+price.sell_price.net: 'Sell price net'
+price.sell_price.gross: 'Sell price gross'
+price.buy_price.net: 'Buy price net'
+price.buy_price.gross: 'Buy price gross'
+price.discounted_price.net: 'Discounted price net'
+price.discounted_price.gross: 'Discounted price gross'
+price.discounted_price.discount: Discount
+dataset.label.delete: Delete
+dataset.label.confirm_delete: 'Are you sure to delete'
+user.heading.index: Users
+user.heading.add: 'Add user'
+user.heading.edit: 'Edit user'
+user.button.add: Add
+user.button.log_in: 'Log in'
+user.button.reset_password: 'Reset password'
+user.label.id: ID
+user.label.username: Username
+user.label.password: Password
+user.label.email: E-mail
+user.label.first_name: 'First name'
+user.label.last_name: 'Last name'
+user.label.enabled: Enabled
+user.label.user_group: Group
+user.label.api_key: 'API key'
+user.fieldset.api_access: 'API access'
+user.flash.success.reset_password: 'Your new password has been sent by e-mail'
+user.flash.error.wrong_username: 'Wrong username given'
+user.flash.error.blocked_account: 'Account is blocked'
+user.email.title.register: 'User credentials'
+user.email.title.reset_password: 'New login credentials'
+user_group.heading.index: 'Users groups'
+user_group.heading.add: 'Add an user group'
+user_group.heading.edit: 'Edit users group'
+user_group.label.permissions: Permissions
+admin.heading.last_opinions: 'Last opinions'
+admin.heading.last_orders: 'Last orders'
+admin.heading.new_customers: 'New customers'
+admin.heading.bestsellers: Bestsellers
+admin.heading.customers_online: 'Customers online'
+admin.heading.dashboard: Dashboard
+admin.label.content: Content
+admin.label.customer: Customer
+admin.label.sum: Sum
+admin.label.firstname: 'First Name'
+admin.label.lastname: 'Last Name'
+admin.label.product: Product
+admin.label.quantity: 'Sold amount'
+admin.label.client: Client
+admin.label.cart: Cart
+admin.label.global_context: Global
+admin.user.logout: Logout
+admin.user.help: Help
+admin.button.show_all: 'Show all'
+admin.button.show_raports: 'Show raports'
+attribute.heading.index: Attributes
+attribute.heading.add: 'Add attribute'
+attribute.heading.edit: 'Edit attribute'
+attribute_group.heading.index: 'Attribute groups'
+attribute_group.heading.add: 'Add group'
+attribute_group.heading.edit: 'Edit group'
+attribute_group.flash.empty_group: 'Empty group'
+attribute_group.flash.new_group: 'New group'
+attribute_group.label.attributes: Attributes
+attribute_group.label.group: Group
+attribute_value.heading.index: 'Attribute values'
+attribute_value.heading.add: 'Add values'
+attribute_value.heading.edit: 'Edit values'
+availability.heading.index: 'Availability statuses'
+availability.heading.add: 'Add a status'
+availability.heading.edit: 'Edit a status'
+cart.flash.added: 'was added to cart'
+cart.flash.empty: 'Cart is empty.'
+cart.button.add: 'Add to cart'
+cart.button.go_to_cart: 'Go to cart'
+cart.button.back_to_shopping: 'Back to shopping'
+cart.link.checkout: 'Go to checkout'
+cart.heading.index: Cart
+cart.heading.recommendations: 'You might also like'
+cart.table.heading.product: Product
+cart.table.heading.price: Price
+cart.table.heading.quantity: Quantity
+cart.table.heading.total: Total
+cart.error.no_available_methods: 'There are no available shipping and/or payment options for this cart'
+cart.shipping_method.label: 'Shipping method'
+cart.payment_method.label: 'Payment method'
+address.heading.billing_address: 'Billing address'
+address.heading.shipping_address: 'Shipping address'
+address.label.copy_address: 'Shipping address same as billing address'
+address.label.addresses: Addresses
+address.label.street: Street
+address.label.street_no: 'Street no.'
+address.label.flat_no: 'Flat no.'
+address.label.province: Province
+address.label.post_code: 'Post code'
+address.label.country: Country
+address.label.city: City
+category.form.fieldset.general: General
+category.form.fieldset.meta: Meta
+category.form.fieldset.shops: Shops
+category.form.fieldset.description: Description
+category.label.shops: 'Available in shops'
+category.label.hierarchy: Hierarchy
+category.label.enabled: Enabled
+category.label.name: Name
+category.label.slug: Slug
+category.label.parent: 'Parent category'
+category.label.short_description: 'Short description'
+category.label.description: Description
+category.label.category_add: 'Add category'
+category.label.category_name: 'Category name'
+category.label.tree: 'Categories tree'
+category.heading.index: Categories
+category.heading.add: 'Create a new category'
+category.heading.edit: 'Edit category'
+category.comment.enabled: 'Enable category visibility'
+client.label.username: 'Login (e-mail)'
+client.label.password: Password
+client.label.confirm_password: 'Confirm password'
+client.label.new_password: 'New password'
+client.label.accept_conditions: 'Accept store conditions'
+client.label.accept_newsletter: 'Sign up for our newsletter'
+client.label.contact_details.first_name: 'First name'
+client.label.contact_details.last_name: 'Last name'
+client.label.contact_details.phone: Phone
+client.label.contact_details.secondary_phone: 'Secondary phone'
+client.label.contact_details.email: E-mail
+client.label.address.first_name: 'First name'
+client.label.address.last_name: 'Last name'
+client.label.address.street: Street
+client.label.address.street_no: 'Street no.'
+client.label.address.flat_no: 'Flat no.'
+client.label.address.province: Province
+client.label.address.post_code: 'Post code'
+client.label.address.country: Country
+client.label.address.city: City
+client.label.address.copy_address: 'Shipping address same as billing address'
+client.heading.index: Clients
+client.heading.add: 'Create a client'
+client.heading.edit: 'Edit client'
+client.heading.login: 'Sign in'
+client.heading.register: 'Sign up'
+client.heading.contact_details: 'Contact details'
+client.heading.footer_links: 'Your account'
+client.heading.billing_address: 'Billing address'
+client.heading.shipping_address: 'Shipping address'
+client.heading.reset_password: 'Reset password'
+client.heading.change_password: 'Change password'
+client.link.login: 'Sign in or Sign up'
+client.link.register: 'Sign up'
+client.link.logout: Logout
+client.link.orders: Orders
+client.link.address_book: Addressess
+client.link.settings: Settings
+client.link.wishlist: Wishlist
+client.link.password_forgotten: 'Reset password'
+client.button.login: 'Sign in'
+client.button.register: 'Sign up'
+client.button.reset_password: 'Confirm password reset'
+client.button.change_password: 'Change password'
+client.flash.registration.error: 'Form contains invalid data.'
+client.flash.reset_password.wrong_email: 'Wrong e-mail adress was given.'
+client.flash.reset_password.email_not_found: 'Such e-mail does not exists.'
+client.flash.reset_password.success: 'E-mail with reset instructions was sent.'
+client.flash.change_password.success: 'New password was set.'
+client.comment.discount: 'Enter percentage-based discount ie. 10 for 10%'
+client.email.heading.reset_password: 'Reset password instructions'
+client.email.body.reset_password_instructions: 'Password recovery procedure is in progress.'
+client.email.body.confirm_password_reset: 'Head to the site to establish a new password.'
+client_group.heading.index: 'Client groups'
+client_group.heading.add: 'Create a client group'
+client_group.heading.edit: 'Edit group'
+client_group.label.total_clients: 'Total clients'
+company.heading.index: Companies
+company.heading.add: 'Add a company'
+company.heading.edit: 'Edit a company'
+company.label.name: 'Full name'
+company.label.short_name: 'Short name'
+contact.heading.index: Contacts
+contact.heading.add: 'Add a new contact'
+contact.heading.edit: 'Edit contact'
+contact.email.heading.contact: 'We have received your inquiry'
+contact.label.business_hours: 'Business hours'
+contact_details.heading.details: 'Contact details'
+contact_details.label.first_name: 'First name'
+contact_details.label.last_name: 'Last name'
+coupon.heading.index: Coupons
+coupon.heading.add: 'Add a coupon'
+coupon.heading.edit: 'Edit a coupon'
+coupon.fieldset.discount_settings: 'Discounts configuration'
+coupon.label.client_usage_limit: 'Usage limit for clients'
+coupon.label.global_usage_limit: 'Global usage limit'
+coupon.label.modifier_type: 'Type of modifier'
+coupon.label.modifier_value: 'Value of modifier'
+coupon.label.modifier_type_percent: '%'
+coupon.label.modifier_type_subtract: '-'
+coupon.error.not_found: 'Coupon code is invalid'
+currency.heading.index: Currencies
+currency.heading.add: 'Add a currency'
+currency.heading.edit: 'Edit a currency'
+currency.button.sync: 'Synchronize exchange rates'
+currency.label.code: Code
+currency.label.name: Currency
+currency.comment.enabled: 'Currency will be visible in shop'
+deliverer.heading.index: Deliverers
+deliverer.heading.add: 'Create a new deliverer'
+deliverer.heading.edit: 'Edit deliverer'
+dictionary.heading.index: Translations
+dictionary.heading.add: 'Add a translation'
+dictionary.heading.edit: 'Edit a translation'
+dictionary.label.id: ID
+dictionary.label.identifier: Identifier
+dictionary.label.translation: Translation
+dictionary.label.locale: Locale
+dictionary.label.value: Value
+dictionary.button.add: 'Add new translation'
+dictionary.button.sync: 'Synchronize translations'
+channel.heading.index: Channel
+channel.heading.add: 'Add a new channel'
+channel.label.name: Name
+channel.label.url: URL
+package.heading.index: Packages
+package.heading.require: 'Require package'
+package.button.sync: 'Synchronize packages'
+package.button.run: 'Install package'
+package.label.id: ID
+package.label.name: Name
+package.label.full_name: 'Full name'
+package.label.vendor: Vendor
+package.label.local_version: 'Local version'
+package.label.remote_version: 'Remote version'
+package.label.created_at: 'Installed at'
+package.label.updated_at: 'Updated at'
+package.label.output: 'Install status'
+package.fieldset.information: Informations
+package.fieldset.progress: 'Download progress'
+package.flash.sync.success: 'Package synchronization succeeded.'
+layout_box.heading.index: 'Layout boxes'
+layout_box.heading.add: 'Add a layout box'
+layout_box.heading.edit: 'Edit layout box'
+layout_box.label.type: Type
+layout_box.label.identifier: Identifier
+locale.heading.index: Locales
+locale.heading.add: 'Add a locale'
+locale.heading.edit: 'Edit a locale'
+locale.label.code: Code
+locale.label.currency: 'Default currency'
+locale.label.language: Language
+locale.label.translations: Translations
+locale.comment.enabled: 'Locale will be visible in shop'
+media.heading.index: Media
+media.button.select_from_library: 'Select from library'
+media.button.add_from_disk: 'Add from disk'
+news.heading.index: News
+news.heading.add: 'Add a news'
+news.heading.edit: 'Edit news'
+news.label.topic: Topic
+news.label.summary: Summary
+news.label.content: Content
+order.form.fieldset.products: Products
+order.heading.index: Orders
+order.heading.edit: 'Edit order'
+order.heading.address: Address
+order.heading.confirmation: Confirmation
+order.heading.order_total: Summary
+order.heading.products: Products
+order.button.confirm: 'Go to confirmation'
+order.button.add_product: 'Add product'
+order.label.id: ID
+order.label.order_no: 'Order no.'
+order.label.client: Client
+order.label.product_total: 'Products value'
+order.label.shipping_total: 'Shipping cost'
+order.label.order_total: 'Total value'
+order.label.variant: Variant
+order.label.weight: Weight
+order.label.quantity: Qty
+order.label.stock: Stock
+order.label.tax_rate: 'Tax rate'
+order.label.current_status: Status
+order.label.created_at: 'Placed on'
+order.label.comment: 'Additional comments'
+order.label.shipping_method: 'Shipping method'
+order.label.payment_method: 'Payment method'
+order.label.product_name: Product
+order.label.tax_value: Tax
+order.label.gross_amount: Price
+order.label.gross_total: Total
+order.label.currency: Currency
+order.description.product_total: 'Total products value'
+order.description.shipping_cost: 'Shipping costs'
+order_status.heading.index: 'Order statuses'
+order_status.heading.add: 'Add a new order status'
+order_status.heading.edit: 'Edit an order status'
+order_status.label.order_status_group: 'Order status group'
+order_status.label.default_comment: 'Default comment for order'
+order_status.comment.enabled: 'Order status will be visible.'
+order_status_group.heading.index: 'Order status groups'
+order_status_group.heading.add: 'Add a new order status group'
+order_status_group.heading.edit: 'Edit an order status group'
+order_status_group.label.name: 'Order status group name'
+page.tip.client_groups: 'Select all client groups which can see the page.'
+page.heading.index: 'CMS pages'
+page.heading.add: 'Add a new page'
+page.heading.edit: 'Edit page'
+page.label.parent: 'Parent category'
+page.label.client_groups: 'Visible for client groups'
+page.label.section: Section
+page.label.redirect.type: 'Type of redirect'
+page.label.redirect.url: 'Redirect to URL'
+page.label.redirect.route: 'Redirect to route'
+page.label.redirect.none: 'No redirect'
+page.fieldset.redirect_settings: 'Redirect configuration'
+page.comment.publish: 'Check if information should be visible for clients'
+payment.flash.thank_you: 'Thank you for placing an order. Below are the order''s details:'
+payment_method.heading.index: 'Payment methods'
+payment_method.heading.add: 'Add a payment method'
+payment_method.heading.edit: 'Edit a payment method'
+payment_method.fieldset.shipping_methods: 'Shipping methods'
+payment_method.label.processor: 'Payment processor'
+payment_method.label.shipping_methods: 'Allowed shipping methods'
+payment_method.bank_transfer.tip: 'Your order will be processed upon receiving of the payment at the following bank account'
+payment_method.bank_transfer.account: 'Account number'
+payment_method.bank_transfer.sort_number: 'Sort code'
+payment_method.bank_transfer.title: 'Transfer title'
+producer.heading.index: Producers
+producer.heading.add: 'Add a producer'
+producer.heading.edit: 'Edit a producer'
+producer.fieldset.deliverers: Deliverers
+producer.label.deliverers: Deliverers
+product.form.fieldset.general: General
+product.form.fieldset.meta: Meta
+product.form.fieldset.categories: Categories
+product.form.fieldset.prices: Prices
+product.form.fieldset.stock: 'Stock settings'
+product.form.fieldset.photos: Photos
+product.form.fieldset.statuses: Statuses
+product.form.fieldset.attributes: Variants
+product.form.fieldset.shops: Shops
+product.form.fieldset.description: Description
+product.comment.enabled: 'Enable product''s visibility'
+product.comment.track_stock: 'Enabling inventory tracking, the quantity of items will be updated automatically. A products with tracking switched on, which quantity equals 0, would not be able to order by clients.'
+product.heading.index: Products
+product.heading.add: 'Add a product'
+product.heading.edit: 'Edit a product'
+product.label.id: ID
+product.label.name: Name
+product.label.slug: Slug
+product.label.enabled: Enabled
+product.label.sku: SKU
+product.label.statuses: 'Product''s statuses'
+product.label.shops: 'Available in shops'
+product.label.categories: Categories
+product.label.gross_amount: 'Gross price'
+product.label.stock: Stock
+product.label.weight: Weight
+product.label.producer: Producer
+product.label.currency: Currency
+product.label.manufactured_by: by
+product.label.shipping_cost: 'Shipping costs'
+product.label.availability: 'Product''s availability'
+product.label.attributes: Attributes
+product.label.add_tax_prompt: 'Add tax'
+product.label.photos: Zdjęcia
+product.label.quantity: Quantity
+product.label.unit: Unit
+product.label.package_size: 'Package size'
+product.label.track_stock: 'Track stock'
+product.label.pcs: pcs
+product.label.buy_price.settings: 'Buy prices configuration'
+product.label.buy_price.currency: Currency
+product.label.buy_price.tax: Tax
+product.label.buy_price.gross_amount: 'Gross price'
+product.label.buy_price.discounted_gross_amount: 'Special gross price'
+product.label.sell_price.settings: 'Sell prices configuration'
+product.label.sell_price.currency: Currency
+product.label.sell_price.tax: Tax
+product.label.sell_price.gross_amount: 'Standard price'
+product.label.sell_price.discounted_gross_amount: 'Discounted price'
+product.label.sell_price.discount_valid_from: 'Valid from'
+product.label.sell_price.discount_valid_to: 'Valid to'
+product.label.dimension.width: Width
+product.label.dimension.height: Height
+product.label.dimension.depth: Depth
+product.label.layered_navigation.price: 'Filter by price'
+product.label.layered_navigation.brand: 'Filter by brand'
+product.label.short_description: 'Short description'
+product.label.description: Description
+product.button.filter: 'Filter results'
+product.options.label.order: 'Sort by'
+product.options.label.view: 'View as'
+product.options.label.limit: 'Show per page'
+product.options.label.grid_view: Grid
+product.options.label.list_view: List
+product.options.order_by.name.asc: 'Name - from A to Z'
+product.options.order_by.name.desc: 'Name - from Z to A'
+product.options.order_by.final_price.asc: 'Price - from lowest to highest'
+product.options.order_by.final_price.desc: 'Price - from highest to lowest'
+product.options.order_by.score.asc: 'Best match'
+product.options.limit: 'Show per page'
+product.options.view_type.list: 'List view'
+product.options.view_type.grid: 'Grid view'
+product_status.heading.index: 'Products statuses'
+product_status.heading.add: 'Add a new products status'
+product_status.heading.edit: 'Edit the products status'
+product_status.label.css_class: 'CSS class'
+product_status.label.id: Id
+product_status.label.name: Name
+product_status.comment.css_class: 'A symbol used for example in CSS templates. Alphanumeric characters permitted.'
+sales_report.heading.sales: 'Sales summary'
+sales_report.label.sales: Sales
+sales_report.label.clients: Clients
+sales_report.label.orders: Orders
+sales_report.label.today: today
+sales_report.label.current_month: 'current month'
+review.heading.index: Reviews
+review.heading.edit: Edit
+review.label.rating: Rating
+review.label.nick: 'Name or nickname'
+review.label.review: Review
+review.label.created_at: 'Created at'
+review.label.product: Product
+review.label.id: ID
+review.button.add_opinion: 'Submit review'
+review.link.first_review: 'Be first to submit a review'
+review.flash.success: 'Opinion added succesfull.'
+search.heading.index: 'Search results'
+search.label.phrase: 'Enter search phrase'
+search.flash.no_results: 'No search results'
+shipping_method.heading.index: 'Shipping methods'
+shipping_method.heading.add: 'Add a shipping method'
+shipping_method.heading.edit: 'Edit a shipping method'
+shipping_method.label.calculator: 'Type of costs calculation'
+shipping_method.label.costs: 'Shipping costs'
+shipping_method.fieldset.costs: 'Shipping costs settings'
+shop.heading.index: Shops
+shop.heading.add: 'Add a shop'
+shop.heading.edit: 'Edit a shop'
+shop.fieldset.mailer_configuration: 'Mailer configuration'
+shop.fieldset.url_configuration: 'URL configuration'
+shop.fieldset.cart_configuration: 'Cart configuration'
+shop.label.company: Company
+shop.label.url: URL
+shop.label.theme: 'Default theme'
+shop.label.default_country: 'Default country'
+shop.label.default_currency: 'Default currency'
+shop.label.mailer_configuration.from: 'Sender (e-mail)'
+shop.label.mailer_configuration.host: 'SMTP host'
+shop.label.mailer_configuration.port: 'SMTP port'
+shop.label.mailer_configuration.user: 'SMTP username'
+shop.label.mailer_configuration.pass: 'SMTP password'
+tax.heading.index: 'Tax rates'
+tax.heading.add: 'Add a tax rate'
+tax.heading.edit: 'Edit a tax rate'
+tax.label.value: 'Tax rate'
+theme.heading.index: Themes
+theme.heading.add: 'Add a theme'
+theme.heading.edit: 'Edit theme'
+theme.label.folder: Folder
+theme.comment.folder: 'Choose a folder which contains your theme'
+unit.heading.index: 'Units of measure'
+unit.heading.add: 'Add a unit of measure'
+unit.heading.edit: 'Edit a unit of measure'
+test: test

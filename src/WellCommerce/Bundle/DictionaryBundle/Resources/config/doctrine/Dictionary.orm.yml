@@ -15,8 +15,5 @@ WellCommerce\Bundle\DictionaryBundle\Entity\Dictionary:
     fields:
         identifier:
             type: string
-            scale: 0
             length: 255
-            unique: false
             nullable: false
-            precision: 0

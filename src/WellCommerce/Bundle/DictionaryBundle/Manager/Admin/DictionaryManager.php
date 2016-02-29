@@ -22,7 +22,6 @@ use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
 use WellCommerce\Bundle\DictionaryBundle\Entity\Dictionary;
 use WellCommerce\Bundle\DictionaryBundle\Entity\DictionaryInterface;
-use WellCommerce\Bundle\LocaleBundle\Entity\Locale;
 use WellCommerce\Bundle\LocaleBundle\Entity\LocaleInterface;
 
 /**
@@ -63,6 +62,11 @@ class DictionaryManager extends AbstractAdminManager
     protected $propertyAccessor;
 
     /**
+     * @var Filesystem
+     */
+    protected $filesystem;
+
+    /**
      * Synchronizes database and filesystem translations
      *
      * @param Request         $request
@@ -74,24 +78,41 @@ class DictionaryManager extends AbstractAdminManager
         $this->currentLocale    = $request->getLocale();
         $this->locales          = $this->getLocales();
         $this->propertyAccessor = PropertyAccess::createPropertyAccessor();
+        $this->filesystem       = new Filesystem();
 
         foreach ($this->locales as $locale) {
             $this->updateTranslationsForLocale($locale);
         }
 
-        $this->getDoctrineHelper()->truncateTable('WellCommerce\Bundle\DictionaryBundle\Entity\Dictionary');
-        $this->loadFilesystemTranslations();
-
-        $this->loadDatabaseTranslations();
-        $this->mergeAndSaveTranslations();
+        $this->getDoctrineHelper()->getEntityManager()->flush();
     }
 
     protected function updateTranslationsForLocale(LocaleInterface $locale)
     {
-        $fsTranslations = $this->getTranslatorHelper()->getMessages($locale->getCode());
-        $dbTranslations = $this->getDatabaseTranslations($locale);
-        print_r($dbTranslations);
-        die();
+        $fsTranslations     = $this->getTranslatorHelper()->getMessages($locale->getCode());
+        $dbTranslations     = $this->getDatabaseTranslations($locale);
+        $mergedTranslations = array_replace_recursive($fsTranslations, $dbTranslations);
+        $filename           = sprintf('wellcommerce.%s.yml', $locale->getCode());
+        $path               = $this->getFilesystemTranslationsPath() . DIRECTORY_SEPARATOR . $filename;
+        $content            = Yaml::dump($mergedTranslations, 6);
+        $this->filesystem->dumpFile($path, $content);
+
+        $this->synchronizeDatabaseTranslations($mergedTranslations, $locale);
+    }
+
+    protected function synchronizeDatabaseTranslations(array $messages, LocaleInterface $locale)
+    {
+        $this->getDoctrineHelper()->truncateTable('WellCommerce\Bundle\DictionaryBundle\Entity\Dictionary');
+
+        $em = $this->getDoctrineHelper()->getEntityManager();
+
+        foreach ($messages as $identifier => $translation) {
+            $dictionary = $this->factory->create();
+            $dictionary->setIdentifier($identifier);
+            $dictionary->translate($locale->getCode())->setValue($translation);
+            $dictionary->mergeNewTranslations();
+            $em->persist($dictionary);
+        }
     }
 
     /**
@@ -113,62 +134,6 @@ class DictionaryManager extends AbstractAdminManager
         return $messages;
     }
 
-    /**
-     * Loads filesystem translations found in Resource folder
-     */
-    protected function loadFilesystemTranslations()
-    {
-        foreach ($this->locales as $locale) {
-            $messages = $this->getTranslatorHelper()->getMessages($locale->getCode());
-            $this->importMessages($messages, $locale);
-        }
-    }
-
-    /**
-     * Imports the translations
-     *
-     * @param array           $messages
-     * @param LocaleInterface $locale
-     */
-    protected function importMessages(array $messages = [], LocaleInterface $locale)
-    {
-        $em = $this->getDoctrineHelper()->getEntityManager();
-
-        foreach ($messages as $identifier => $translation) {
-            $dictionary = new Dictionary();
-            $dictionary->setIdentifier($identifier);
-            $dictionary->translate($locale->getCode())->setValue($translation);
-            $dictionary->mergeNewTranslations();
-            $em->persist($dictionary);
-        }
-
-        $em->flush();
-    }
-
-    /**
-     * Returns parsed translations from filesystem
-     *
-     * @param Locale $locale
-     */
-    protected function getFilesystemTranslationsForLocale(Locale $locale)
-    {
-        $filename   = sprintf('wellcommerce.%s.yml', $locale->getCode());
-        $filesystem = $this->getFilesystem();
-        $path       = $this->getFilesystemTranslationsPath() . DIRECTORY_SEPARATOR . $filename;
-        if ($filesystem->exists($path)) {
-            return $this->parseYaml($path);
-        }
-
-        return [];
-    }
-
-    /**
-     * @return Filesystem
-     */
-    protected function getFilesystem()
-    {
-        return new Filesystem();
-    }
 
     protected function getFilesystemTranslationsPath()
     {
@@ -176,100 +141,6 @@ class DictionaryManager extends AbstractAdminManager
 
         return $kernelDir . DIRECTORY_SEPARATOR . 'Resources' . DIRECTORY_SEPARATOR . 'translations';
     }
-
-    /**
-     * Parses yaml file containing translations
-     *
-     * @param string $content
-     *
-     * @return array
-     */
-    protected function parseYaml($content)
-    {
-        $yaml = new Yaml();
-
-        return $yaml->parse($content);
-    }
-
-    /**
-     * Load translations from database
-     */
-    protected function loadDatabaseTranslations()
-    {
-        $em           = $this->getDoctrineHelper()->getEntityManager();
-        $repository   = $em->getRepository('WellCommerceDictrionaryBundle:Dictionary');
-        $translations = $repository->findAll();
-        foreach ($translations as $translation) {
-            $this->addDatabaseTranslation($translation);
-        }
-    }
-
-    /**
-     *
-     * @param Dictionary $dictionary
-     */
-    protected function addDatabaseTranslation(Dictionary $dictionary)
-    {
-        foreach ($this->locales as $locale) {
-            $translation  = $dictionary->translate($locale->getCode())->getValue();
-            $propertyPath = '[' . $locale->getCode() . ']' . Helper::convertDotNotation($dictionary->getIdentifier());
-            $this->propertyAccessor->setValue($this->databaseTranslations, $propertyPath, $translation);
-        }
-    }
-
-    /**
-     * Merges and saves translations to filesystem and database
-     */
-    protected function mergeAndSaveTranslations()
-    {
-        $filesystem         = $this->getFilesystem();
-        $mergedTranslations = array_replace_recursive($this->filesystemTranslations, $this->databaseTranslations);
-        $this->getDoctrineHelper()->truncateTable('WellCommerceAppBundle:Dictionary');
-
-        foreach ($mergedTranslations as $locale => $data) {
-            $filename = sprintf('wellcommerce.%s.yml', $locale);
-            $path     = $this->getFilesystemTranslationsPath() . DIRECTORY_SEPARATOR . $filename;
-            $content  = Yaml::dump($data, 6);
-            $filesystem->dumpFile($path, $content);
-        }
-
-        $this->syncDatabaseTranslations($mergedTranslations);
-    }
-
-    /**
-     * Synchronizes translations to database
-     *
-     * @param array $mergedTranslations
-     */
-    protected function syncDatabaseTranslations(array $mergedTranslations)
-    {
-        foreach ($mergedTranslations as $locale => $data) {
-            $flattened = Helper::flattenArrayToDotNotation($data);
-            $this->saveDatabaseTranslations($locale, $flattened);
-        }
-    }
-
-    /**
-     * Saves translations for particular locale
-     *
-     * @param string $locale
-     * @param array  $data
-     */
-    protected function saveDatabaseTranslations($locale, array $data)
-    {
-        $em = $this->getDoctrineHelper()->getEntityManager();
-
-        foreach ($data as $identifier => $value) {
-            $dictionary = new Dictionary();
-            $dictionary->setIdentifier($identifier);
-            $dictionary->translate($locale)->setValue($value);
-            $dictionary->mergeNewTranslations();
-            $em->persist($dictionary);
-        }
-
-        $em->flush();
-    }
-
 }
 
 
