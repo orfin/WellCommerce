@@ -46,24 +46,32 @@ class ClientRegisterFormBuilder extends AbstractFormBuilder
             'label' => $this->trans('client.label.contact_details.phone'),
         ]));
 
-        $form->addChild($this->getElement('text_field', [
-            'name'  => 'username',
+        $clientDetails = $form->addChild($this->getElement('nested_fieldset', [
+            'name'  => 'clientDetails',
+            'label' => $this->trans('client.heading.client'),
+        ]));
+
+        $clientDetails->addChild($this->getElement('text_field', [
+            'name'  => 'clientDetails.username',
             'label' => $this->trans('client.label.username'),
         ]));
 
-        $form->addChild($this->getElement('password', [
-            'name'  => 'password',
+        $clientDetails->addChild($this->getElement('password', [
+            'name'  => 'clientDetails.password',
             'label' => $this->trans('client.label.password'),
         ]));
 
-        $form->addChild($this->getElement('checkbox', [
-            'name'  => 'conditionsAccepted',
-            'label' => $this->trans('client.label.accept_conditions'),
+        $clientDetails->addChild($this->getElement('checkbox', [
+            'name'    => 'clientDetails.conditionsAccepted',
+            'label'   => $this->trans('client.label.accept_conditions'),
+            'default' => false,
+            'comment' => $this->trans('client.comment.accept_conditions')
         ]));
 
-        $form->addChild($this->getElement('checkbox', [
-            'name'  => 'newsletterAccepted',
-            'label' => $this->trans('client.label.accept_newsletter'),
+        $clientDetails->addChild($this->getElement('checkbox', [
+            'name'    => 'clientDetails.newsletterAccepted',
+            'label'   => $this->trans('client.label.accept_newsletter'),
+            'comment' => $this->trans('client.comment.accept_newsletter'),
         ]));
 
         $form->addFilter($this->getFilter('no_code'));

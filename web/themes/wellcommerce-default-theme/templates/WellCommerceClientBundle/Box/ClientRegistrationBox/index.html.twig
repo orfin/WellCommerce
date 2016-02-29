@@ -10,8 +10,8 @@
         {{ macros.element(form.getChildren().get('contactDetails').getChildren().get('contactDetails.firstName')) }}
         {{ macros.element(form.getChildren().get('contactDetails').getChildren().get('contactDetails.lastName')) }}
         {{ macros.element(form.getChildren().get('contactDetails').getChildren().get('contactDetails.phone')) }}
-        {{ macros.element(form.getChildren().get('username')) }}
-        {{ macros.element(form.getChildren().get('password')) }}
+        {{ macros.element(form.getChildren().get('clientDetails').getChildren().get('clientDetails.username')) }}
+        {{ macros.element(form.getChildren().get('clientDetails').getChildren().get('clientDetails.password')) }}
 
         <div class="alert alert-sm mtp30">
             <strong>Benefits from registration</strong>
@@ -23,10 +23,8 @@
 
 
         <h4 class="mtp30">Terms and conditions</h4>
-
-        {{ macros.element(form.getChildren().get('conditionsAccepted')) }}
-
-        {{ macros.element(form.getChildren().get('newsletterAccepted')) }}
+        {{ macros.element(form.getChildren().get('clientDetails').getChildren().get('clientDetails.conditionsAccepted')) }}
+        {{ macros.element(form.getChildren().get('clientDetails').getChildren().get('clientDetails.newsletterAccepted')) }}
 
         <div class="clearfix">
             <button type="submit" class="btn btn-primary pull-right">{% trans %}client.button.register{% endtrans %}</button>
