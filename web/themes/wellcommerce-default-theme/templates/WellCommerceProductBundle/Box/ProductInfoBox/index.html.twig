@@ -77,7 +77,9 @@
                 {% endif %}
 
                 <div class="available text-center">
+                    {% if product.availability is not null %}
                     {% trans %}product.label.availability{% endtrans %}: <span class="grn">{{ product.availability.translate().name }}</span><br />
+                    {% endif %}
                     {% if shippingCosts.count > 0 %}
                         {% trans %}product.label.shipping_cost{% endtrans %}: {{ format_price(shippingCosts.first.cost.grossAmount, shippingCosts.first.cost.currency) }}
                     {% endif %}
