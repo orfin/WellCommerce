@@ -14,13 +14,10 @@ namespace WellCommerce\Bundle\DictionaryBundle\Manager\Admin;
 
 use Doctrine\Common\Collections\Criteria;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Yaml\Yaml;
-use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
-use WellCommerce\Bundle\DictionaryBundle\Entity\Dictionary;
 use WellCommerce\Bundle\DictionaryBundle\Entity\DictionaryInterface;
 use WellCommerce\Bundle\LocaleBundle\Entity\LocaleInterface;
 
@@ -37,24 +34,9 @@ class DictionaryManager extends AbstractAdminManager
     protected $kernel;
 
     /**
-     * @var string
-     */
-    protected $currentLocale;
-
-    /**
      * @var array|\WellCommerce\Bundle\LocaleBundle\Entity\Locale[]
      */
     protected $locales;
-
-    /**
-     * @var array
-     */
-    protected $filesystemTranslations = [];
-
-    /**
-     * @var array
-     */
-    protected $databaseTranslations = [];
 
     /**
      * @var \Symfony\Component\PropertyAccess\PropertyAccessorInterface
@@ -68,14 +50,10 @@ class DictionaryManager extends AbstractAdminManager
 
     /**
      * Synchronizes database and filesystem translations
-     *
-     * @param Request         $request
-     * @param KernelInterface $kernel
      */
-    public function syncDictionary(Request $request, KernelInterface $kernel)
+    public function syncDictionary()
     {
-        $this->kernel           = $kernel;
-        $this->currentLocale    = $request->getLocale();
+        $this->kernel           = $this->get('kernel');
         $this->locales          = $this->getLocales();
         $this->propertyAccessor = PropertyAccess::createPropertyAccessor();
         $this->filesystem       = new Filesystem();
