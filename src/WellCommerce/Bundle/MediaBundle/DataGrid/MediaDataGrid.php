@@ -17,8 +17,11 @@ use WellCommerce\Component\DataGrid\Column\ColumnCollection;
 use WellCommerce\Component\DataGrid\Column\Options\Appearance;
 use WellCommerce\Component\DataGrid\Column\Options\Filter;
 use WellCommerce\Component\DataGrid\Column\Options\Sorting;
+use WellCommerce\Component\DataGrid\Configuration\EventHandler\DeleteRowEventHandler;
 use WellCommerce\Component\DataGrid\Configuration\EventHandler\LoadedEventHandler;
+use WellCommerce\Component\DataGrid\Configuration\EventHandler\LoadEventHandler;
 use WellCommerce\Component\DataGrid\Configuration\EventHandler\ProcessEventHandler;
+use WellCommerce\Component\DataGrid\DataGridInterface;
 use WellCommerce\Component\DataGrid\Options\OptionsInterface;
 
 /**
@@ -82,7 +85,18 @@ class MediaDataGrid extends AbstractDataGrid
      */
     protected function configureOptions(OptionsInterface $options)
     {
-        parent::configureOptions($options);
+        $eventHandlers = $options->getEventHandlers();
+
+        $eventHandlers->add(new LoadEventHandler([
+            'function' => $this->getJavascriptFunctionName('load'),
+            'route'    => $this->getActionUrl('grid'),
+        ]));
+
+        $eventHandlers->add(new DeleteRowEventHandler([
+            'function'   => $this->getJavascriptFunctionName('delete'),
+            'row_action' => DataGridInterface::ACTION_DELETE,
+            'route'      => $this->getActionUrl('delete'),
+        ]));
 
         $eventHandlers = $options->getEventHandlers();
 
