@@ -14,7 +14,6 @@ namespace WellCommerce\Bundle\ProductBundle\EventListener;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
-use Doctrine\Common\Util\Debug;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 use WellCommerce\Bundle\TaxBundle\Helper\TaxHelper;
