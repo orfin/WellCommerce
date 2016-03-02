@@ -6900,7 +6900,7 @@ var GFormTextField = GCore.ExtendClass(GFormField, function() {
 			jRepetitionNode.append(jPrefix);
 		}
 		jRepetitionNode.append($('<span class="' + gThis._GetClass('FieldSpan') + '"/>').append(jField));
-		if (gThis.m_oOptions.sSuffix != undefined) {
+		if (gThis.m_oOptions.sSuffix != undefined && gThis.m_oOptions.sSuffix != '') {
 			var jSuffix = $('<span class="' + gThis._GetClass('Suffix') + '"/>');
 			jSuffix.html(gThis.m_oOptions.sSuffix);
 			jRepetitionNode.append(jSuffix);
