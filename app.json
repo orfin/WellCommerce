@@ -11,7 +11,7 @@
     "cleardb:ignite"
   ],
   "website": "https://wellcommerce.org",
-  "repository": "https://github.com/WellCommerce/WellCommerce",
+  "repository": "https://github.com/WellCommerce/WellCommerce/tree/development",
   "logo": "https://pbs.twimg.com/profile_images/575626542585245698/r_DCmVWu_400x400.png",
   "success_url": "/",
   "scripts": {
