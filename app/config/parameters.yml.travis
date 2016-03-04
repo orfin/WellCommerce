@@ -12,6 +12,8 @@ parameters:
     mailer_user:               ~
     mailer_password:           ~
 
+    prod_log_path:     "%kernel.logs_dir%/%kernel.environment%.log"
+
     locale:            en
     secret:            ThisTokenIsNotSoSecretChangeIt
 

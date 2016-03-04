@@ -1,0 +1,28 @@
+{
+  "name": "WellCommerce Demo Application",
+  "description": "The official demo application for the WellCommerce e-commerce platform.",
+  "keywords": [
+    "php",
+    "symfony",
+    "wellcommerce",
+    "e-commerce"
+  ],
+  "addons": [
+    "cleardb:ignite"
+  ],
+  "website": "https://wellcommerce.org",
+  "repository": "https://github.com/WellCommerce/WellCommerce/tree/development",
+  "logo": "https://pbs.twimg.com/profile_images/575626542585245698/r_DCmVWu_400x400.png",
+  "success_url": "/",
+  "scripts": {
+    "postdeploy": "php app/console wellcommerce:install"
+  },
+  "env": {
+    "SYMFONY_ENV": "prod",
+    "SYMFONY_SECRET": {
+      "description": "Extra entropy for %kernel.secret%; used for CSRF tokens, cookies and signed URLs.",
+      "generator": "secret"
+    }
+  },
+  "image": "heroku/php"
+}
