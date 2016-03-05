@@ -21,6 +21,9 @@ use Symfony\Component\Translation\TranslatorInterface;
  */
 class TranslatorHelper implements TranslatorHelperInterface
 {
+    /**
+     * @var TranslatorInterface|\Symfony\Component\Translation\TranslatorBagInterface
+     */
     protected $translator;
 
     /**
@@ -39,5 +42,27 @@ class TranslatorHelper implements TranslatorHelperInterface
     public function trans($message, array $parameters = [], $domain = TranslatorHelperInterface::DEFAULT_TRANSLATION_DOMAIN)
     {
         return $this->translator->trans($message, $parameters, $domain);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getMessages($locale, $domain = TranslatorHelperInterface::DEFAULT_TRANSLATION_DOMAIN)
+    {
+        $catalogue = $this->getCatalogue($locale);
+
+        return $catalogue->all($domain);
+    }
+
+    /**
+     * Returns the message catalogue
+     *
+     * @param string $domain
+     *
+     * @return \Symfony\Component\Translation\MessageCatalogueInterface
+     */
+    protected function getCatalogue($locale)
+    {
+        return $this->translator->getCatalogue($locale);
     }
 }

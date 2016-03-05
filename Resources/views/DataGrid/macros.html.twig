@@ -1,3 +1,4 @@
+{% trans_default_domain "wellcommerce" %}
 {% macro datagrid_header(id) %}
     {% autoescape true %}
     <div class="block">
@@ -92,8 +93,8 @@
     {% autoescape true %}
     function {{ options.function }}(dg, id) {
         var oRow = DataGrid.GetRow(id);
-        var title = '{% trans %}Delete{% endtrans %}';
-        var msg = '{% trans %}Are you sure to delete {% endtrans %} ' + oRow.name + '?';
+        var title = '{% trans %}dataset.label.delete{% endtrans %}';
+        var msg = '{% trans %}dataset.label.confirm_delete{% endtrans %} ' + oRow.name + '?';
         var params = {
             id: id
         };
@@ -124,8 +125,8 @@
 {% macro delete_group(options) %}
     {% autoescape true %}
     function {{ options.function }}(dg, ids) {
-        var title = '{% trans %}Delete{% endtrans %}';
-        var msg = '{% trans %}Are you sure to delete {% endtrans %} ' + ids.join(', ') + '?';
+        var title = '{% trans %}dataset.label.delete{% endtrans %}';
+        var msg = '{% trans %}dataset.label.confirm_delete{% endtrans %} ' + ids.join(', ') + '?';
         var params = {
             dg: dg,
             ids: ids

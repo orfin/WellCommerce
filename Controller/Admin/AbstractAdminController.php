@@ -165,7 +165,7 @@ abstract class AbstractAdminController extends AbstractController implements Adm
             'continue'   => $form->isAction('continue'),
             'next'       => $form->isAction('next'),
             'redirectTo' => $this->getRedirectToActionUrl('index'),
-            'error'      => $form->getError()
+            'error'      => $form->getError(),
         ]);
     }
 }

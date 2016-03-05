@@ -66,7 +66,7 @@ abstract class AbstractFormBuilder extends AbstractContainerAware implements For
     {
         $form = $this->getFormService($options);
         $this->buildForm($form);
-        $this->eventDispatcher->dispatchOnFormInitEvent($this, $form);
+        $this->eventDispatcher->dispatchOnFormInitEvent($this, $form, $defaultData);
         $this->formHandler->initForm($form, $defaultData);
 
         return $form;
