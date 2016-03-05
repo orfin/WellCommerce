@@ -91,6 +91,14 @@ class DoctrineHelper implements DoctrineHelperInterface
     /**
      * {@inheritdoc}
      */
+    public function getAllMetadata()
+    {
+        return $this->getMetadataFactory()->getAllMetadata();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function hasClassMetadataForEntity($object)
     {
         $className = ClassUtils::getRealClass(get_class($object));
@@ -112,24 +120,18 @@ class DoctrineHelper implements DoctrineHelperInterface
     public function truncateTable($className)
     {
         $entityManager = $this->getEntityManager();
-
-        $metadata = $this->getClassMetadata($className);
+        $metadata      = $this->getClassMetadata($className);
         if ($metadata instanceof ClassMetadata) {
-            $connection = $entityManager->getConnection();
-            $connection->beginTransaction();
-            $table = $metadata->getTableName();
+            $repository = $entityManager->getRepository($className);
+            $collection = $repository->findAll();
 
-            try {
-                $sql  = 'DELETE FROM :table';
-                $stmt = $connection->prepare($sql);
-                $stmt->bindValue('table', $table);
-                $stmt->execute();
-                $connection->commit();
-
-                return true;
-            } catch (\Exception $e) {
-                $connection->rollback();
+            foreach ($collection as $entity) {
+                $entityManager->remove($entity);
             }
+
+            $entityManager->flush();
+
+            return true;
         }
 
         return false;

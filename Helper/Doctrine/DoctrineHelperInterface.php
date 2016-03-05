@@ -77,6 +77,11 @@ interface DoctrineHelperInterface
     public function hasClassMetadataForEntity($object);
 
     /**
+     * @return \Doctrine\Common\Persistence\Mapping\ClassMetadata[]
+     */
+    public function getAllMetadata();
+
+    /**
      * Truncates table
      *
      * @param string $className
