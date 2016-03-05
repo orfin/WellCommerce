@@ -41,6 +41,9 @@
             <argument>CategoryMenu</argument>
             <argument>category_menu.layout_box.controller</argument>
             <argument type="service" id="translator.helper"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
             <tag name="layout_box.configurator" />
         </service>
 
@@ -48,6 +51,9 @@
             <argument>CategoryInfo</argument>
             <argument>category_info.layout_box.controller</argument>
             <argument type="service" id="translator.helper"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
             <tag name="layout_box.configurator" />
         </service>
 
@@ -94,6 +100,9 @@
             <argument>CategoryProducts</argument>
             <argument>category_products.layout_box.controller</argument>
             <argument type="service" id="translator.helper"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
             <tag name="layout_box.configurator" />
         </service>
     </services>

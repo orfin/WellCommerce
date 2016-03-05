@@ -12,10 +12,10 @@
 
 namespace WellCommerce\Bundle\CategoryBundle\Manager\Admin;
 
-use WellCommerce\Bundle\AppBundle\Entity\Locale;
 use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 use WellCommerce\Bundle\CoreBundle\Helper\Sluggable;
 use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
+use WellCommerce\Bundle\LocaleBundle\Entity\Locale;
 
 /**
  * Class CategoryManager
