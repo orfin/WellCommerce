@@ -1,0 +1,102 @@
+WellCommerce\Bundle\OrderBundle\Entity\Order:
+    type: entity
+    table: orders
+    repositoryClass: WellCommerce\Bundle\OrderBundle\Repository\OrderRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    embedded:
+        billingAddress:
+            class: WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddress
+            columnPrefix: billing_address_
+        shippingAddress:
+            class: WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddress
+            columnPrefix: shipping_address_
+        contactDetails:
+            class: WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetails
+            columnPrefix: contact_details_
+        orderTotal:
+            class: WellCommerce\Bundle\OrderBundle\Entity\OrderTotal
+            columnPrefix: order_total_
+        productTotal:
+            class: WellCommerce\Bundle\OrderBundle\Entity\OrderTotal
+            columnPrefix: product_total_
+        shippingTotal:
+            class: WellCommerce\Bundle\OrderBundle\Entity\OrderTotal
+            columnPrefix: shipping_total_
+    fields:
+        sessionId:
+            type: string
+            nullable: false
+            column: session_id
+        currency:
+            type: string
+            length: 16
+            nullable: false
+            column: currency
+        comment:
+            type: string
+            length: 1000
+            nullable: false
+    oneToMany:
+        products:
+            targetEntity: WellCommerce\Bundle\OrderBundle\Entity\OrderProduct
+            cascade:
+                - persist
+            fetch: LAZY
+            mappedBy: order
+        totals:
+            targetEntity: WellCommerce\Bundle\OrderBundle\Entity\OrderTotalDetail
+            cascade:
+                - persist
+            fetch: LAZY
+            mappedBy: order
+        payments:
+            targetEntity:  WellCommerce\Bundle\PaymentBundle\Entity\Payment
+            mappedBy: order
+    manyToOne:
+        coupon:
+            targetEntity: WellCommerce\Bundle\CouponBundle\Entity\Coupon
+            fetch: LAZY
+            joinColumns:
+                coupon_id:
+                    referencedColumnName: id
+                    onDelete: SET NULL
+        client:
+            targetEntity: WellCommerce\Bundle\ClientBundle\Entity\Client
+            fetch: LAZY
+            inversedBy: orders
+            joinColumns:
+                client_id:
+                    referencedColumnName: id
+                    onDelete: CASCADE
+        paymentMethod:
+            targetEntity: WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod
+            fetch: LAZY
+            joinColumns:
+                payment_method_id:
+                    referencedColumnName: id
+                    onDelete: RESTRICT
+        currentStatus:
+            targetEntity: WellCommerce\Bundle\OrderBundle\Entity\OrderStatus
+            fetch: LAZY
+            joinColumns:
+                order_status_id:
+                    referencedColumnName: id
+                    onDelete: RESTRICT
+        shippingMethod:
+            targetEntity: WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethod
+            fetch: LAZY
+            joinColumns:
+                shipping_method_id:
+                    referencedColumnName: id
+                    onDelete: 'SET NULL'
+        shop:
+            targetEntity: WellCommerce\Bundle\ShopBundle\Entity\ShopInterface
+            fetch: LAZY
+            joinColumns:
+                shop_id:
+                    referencedColumnName: id
+                    onDelete: RESTRICT
