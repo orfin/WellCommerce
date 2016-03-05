@@ -1,7 +1,7 @@
 {% extends 'WellCommerceAdminBundle:Admin:layout.html.twig' %}
 {% trans_default_domain "wellcommerce" %}
 {% block content %}
-    <h2>{% trans %}sales_report.heading.index{% endtrans %}</h2>
+    <h2>{% trans %}sales_report.heading.sales{% endtrans %}</h2>
 
     <div class="block" id="desktop">
         <div class="simple-stats layout-two-columns">
@@ -24,56 +24,56 @@
         <div class="layout-four-columns" style="display: none;">
             <div class="column">
                 <div class="box simple">
-                    <h3>{% trans %}TXT_LAST_OPINIONS{% endtrans %}</h3>
+                    <h3>{% trans %}admin.heading.last_opinions{% endtrans %}</h3>
                     <table cellspacing="0" class="full-size">
                         <thead>
                         <tr>
-                            <th>{% trans %}TXT_NICK{% endtrans %}</th>
-                            <th>{% trans %}TXT_CONTENT{% endtrans %}</th>
+                            <th>{% trans %}user.label.username{% endtrans %}</th>
+                            <th>{% trans %}admin.label.content{% endtrans %}</th>
                         </tr>
                         </thead>
                         <tbody>
 
                         </tbody>
                     </table>
-                    <p class="more"><a class="btnMore" href="productrange"><span>{% trans %}TXT_SHOW_ALL{% endtrans %}</span></a></p>
+                    <p class="more"><a class="btnMore" href="productrange"><span>{% trans %}admin.button.show_all{% endtrans %}</span></a></p>
                 </div>
             </div>
 
             <div class="column">
                 <div class="box simple">
-                    <h3>{% trans %}TXT_LAST_ORDERS{% endtrans %}</h3>
+                    <h3>{% trans %}admin.heading.last_orders{% endtrans %}</h3>
                     <table cellspacing="0" class="full-size">
                         <thead>
                         <tr>
-                            <th>Zamawiający</th>
-                            <th>{% trans %}TXT_SUM{% endtrans %}</th>
+                            <th>{% trans %}admin.label.customer{% endtrans %}</th>
+                            <th>{% trans %}admin.label.sum{% endtrans %}</th>
                         </tr>
                         </thead>
                         <tbody>
 
                         </tbody>
                     </table>
-                    <p class="more"><a class="btnMore" href="order"><span>{% trans %}TXT_SHOW_ALL{% endtrans %}</span></a></p>
+                    <p class="more"><a class="btnMore" href="order"><span>{% trans %}admin.button.show_all{% endtrans %}</span></a></p>
                 </div>
             </div>
 
             <!-- begin: New customers -->
             <div class="column">
                 <div class="box simple">
-                    <h3>{% trans %}TXT_NEW_CUSTOMERS{% endtrans %}</h3>
+                    <h3>{% trans %}admin.heading.new_customers{% endtrans %}</h3>
                     <table cellspacing="0" class="full-size">
                         <thead>
                         <tr>
-                            <th>{% trans %}TXT_FIRSTNAME{% endtrans %}</th>
-                            <th abbr="Sztuk">{% trans %}TXT_SURNAME{% endtrans %}</th>
+                            <th>{% trans %}admin.label.firstname{% endtrans %}</th>
+                            <th abbr="Sztuk">{% trans %}admin.label.lastname{% endtrans %}</th>
                         </tr>
                         </thead>
                         <tbody>
 
                         </tbody>
                     </table>
-                    <p class="more"><a class="btnMore" href="client"><span>{% trans %}TXT_SHOW_ALL{% endtrans %}</span></a></p>
+                    <p class="more"><a class="btnMore" href="client"><span>{% trans %}admin.button.show_all{% endtrans %}</span></a></p>
                 </div>
             </div>
             <!-- end: New customers -->
@@ -81,19 +81,19 @@
             <!-- begin: Bestsellers -->
             <div class="column">
                 <div class="box simple">
-                    <h3>{% trans %}TXT_BESTSELLERS{% endtrans %}</h3>
+                    <h3>{% trans %}admin.heading.bestsellers{% endtrans %}</h3>
                     <table cellspacing="0" class="full-size">
                         <thead>
                         <tr>
-                            <th>{% trans %}TXT_PRODUCT{% endtrans %}</th>
-                            <th abbr="Sztuk">{% trans %}TXT_QTY{% endtrans %}</th>
+                            <th>{% trans %}admin.label.product{% endtrans %}</th>
+                            <th abbr="Sztuk">{% trans %}admin.label.quantity{% endtrans %}</th>
                         </tr>
                         </thead>
                         <tbody>
 
                         </tbody>
                     </table>
-                    <p class="more"><a class="btnMore" href="statsproducts"><span>{% trans %}TXT_SHOW_RAPORTS{% endtrans %}</span></a></p>
+                    <p class="more"><a class="btnMore" href="statsproducts"><span>{% trans %}admin.button.show_raports{% endtrans %}</span></a></p>
                 </div>
             </div>
             <!-- end: Bestsellers -->
@@ -101,19 +101,19 @@
             <!-- begin: Most popular -->
             <div class="column">
                 <div class="box simple">
-                    <h3>{% trans %}TXT_CLIENT_ONLINE{% endtrans %}</h3>
+                    <h3>{% trans %}admin.heading.customers_online{% endtrans %}</h3>
                     <table cellspacing="0" class="full-size">
                         <thead>
                         <tr>
-                            <th>{% trans %}TXT_CLIENT{% endtrans %}</th>
-                            <th>{% trans %}TXT_CART{% endtrans %}</th>
+                            <th>{% trans %}admin.label.client{% endtrans %}</th>
+                            <th>{% trans %}admin.label.cart{% endtrans %}</th>
                         </tr>
                         </thead>
                         <tbody>
 
                         </tbody>
                     </table>
-                    <p class="more"><a class="btnMore" href="spy"><span>{% trans %}TXT_SHOW_RAPORTS{% endtrans %}</span></a></p>
+                    <p class="more"><a class="btnMore" href="spy"><span>{% trans %}admin.button.show_raports{% endtrans %}</span></a></p>
                 </div>
             </div>
             <!-- end: Most popular -->
