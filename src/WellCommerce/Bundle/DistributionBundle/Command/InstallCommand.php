@@ -62,8 +62,7 @@ class InstallCommand extends Command
     {
         $actions = [
             new InstallDatabaseAction(),
-            new InstallFixturesAction(),
-            new InstallAssetsAction()
+            new InstallFixturesAction()
         ];
 
         $this->executor->execute($actions, $output);
