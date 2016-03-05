@@ -35,9 +35,15 @@ doctrine:
         auto_generate_proxy_classes: false
         entity_managers:
             default:
-                query_cache_driver: ~
-                metadata_cache_driver: ~
-                result_cache_driver: ~
+                query_cache_driver:
+                    type: service
+                    id: doctrine.cache
+                metadata_cache_driver:
+                    type: service
+                    id: doctrine.cache
+                result_cache_driver:
+                    type: service
+                    id: doctrine.cache
                 auto_mapping: false
                 dql:
                     string_functions:
