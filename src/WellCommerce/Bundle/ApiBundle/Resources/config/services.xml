@@ -38,7 +38,7 @@
         <service id="api.serializer.denormalizer" class="WellCommerce\Bundle\ApiBundle\Serializer\EntityDenormalizer" public="false">
             <argument type="service" id="doctrine.helper"/>
             <argument type="service" id="api.serialization.metadata_loader"/>
-            <tag name="serializer.denormalizer" />
+            <tag name="serializer.normalizer" />
         </service>
 
         <service id="api.serialization.cache_warmer" class="WellCommerce\Bundle\ApiBundle\CacheWarmer\SerializationCacheWarmer" public="false">
