@@ -25,4 +25,14 @@ class LocaleController extends AbstractAdminController
     public function switchAction(Request $request)
     {
     }
+
+    /**
+     * @param int $id
+     *
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     */
+    public function deleteAction($id)
+    {
+        return $this->jsonResponse(['error' => 'You can delete a locale only by using "wellcommerce:locale:delete" console command.']);
+    }
 }

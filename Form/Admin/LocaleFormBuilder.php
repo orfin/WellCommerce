@@ -44,6 +44,12 @@ class LocaleFormBuilder extends AbstractFormBuilder
             'transformer' => $this->getRepositoryTransformer('entity', $this->get('currency.repository'))
         ]));
 
+        $requiredData->addChild($this->getElement('checkbox', [
+            'name'    => 'enabled',
+            'label'   => $this->trans('common.label.enabled'),
+            'comment' => $this->trans('locale.comment.enabled'),
+        ]));
+
         $form->addFilter($this->getFilter('no_code'));
         $form->addFilter($this->getFilter('trim'));
         $form->addFilter($this->getFilter('secure'));

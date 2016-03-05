@@ -20,6 +20,20 @@
             <argument type="service" id="event_dispatcher" />
         </service>
 
+        <service id="locale.add.command" class="WellCommerce\Bundle\LocaleBundle\Command\AddLocaleCommand">
+            <argument type="service" id="doctrine.helper"/>
+            <argument type="service" id="locale.repository"/>
+            <argument type="service" id="locale.factory"/>
+            <argument type="service" id="currency.repository"/>
+            <tag name="console.command" />
+        </service>
+
+        <service id="locale.delete.command" class="WellCommerce\Bundle\LocaleBundle\Command\DeleteLocaleCommand">
+            <argument type="service" id="doctrine.helper"/>
+            <argument type="service" id="locale.repository"/>
+            <tag name="console.command" />
+        </service>
+
         <service id="form.translation.data_transformer" class="WellCommerce\Bundle\LocaleBundle\Form\DataTransformer\TranslationTransformer" shared="false">
             <argument type="service" id="doctrine.helper"/>
             <tag name="form.data_transformer" alias="translation"/>

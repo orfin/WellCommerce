@@ -18,6 +18,7 @@
         <service id="twig.extension.locale" class="WellCommerce\Bundle\LocaleBundle\Twig\Extension\LocaleExtension">
             <argument type="service" id="session"/>
             <argument type="service" id="locale.dataset.front"/>
+            <argument type="service" id="locale.manager.front"/>
             <tag name="twig.extension"/>
         </service>
 
