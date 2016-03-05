@@ -61,7 +61,7 @@ class AddressController extends AbstractFrontController
             }
 
             if (count($form->getError())) {
-                $this->manager->getFlashHelper()->addError('client.form.error.registration');
+                $this->manager->getFlashHelper()->addError('client.flash.registration.error');
             }
         }
 

@@ -34,7 +34,7 @@ class OrderStatusFormBuilder extends AbstractFormBuilder
         $requiredData->addChild($this->getElement('checkbox', [
             'name'    => 'enabled',
             'label'   => $this->trans('common.label.enabled'),
-            'comment' => $this->trans('common.comment.enabled'),
+            'comment' => $this->trans('order_status.comment.enabled'),
             'default' => 1
         ]));
 
@@ -50,7 +50,7 @@ class OrderStatusFormBuilder extends AbstractFormBuilder
 
         $languageData = $requiredData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
-            'label'       => $this->trans('fieldset.translations.label'),
+            'label'       => $this->trans('common.fieldset.translations'),
             'transformer' => $this->getRepositoryTransformer('translation', $this->get('order_status.repository'))
         ]));
 
