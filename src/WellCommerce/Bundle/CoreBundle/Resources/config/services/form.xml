@@ -43,11 +43,11 @@
             <argument type="service" id="request_stack"/>
         </service>
 
-        <service id="form.contstraints_mapper" class="WellCommerce\Component\Form\Validator\ConstraintViolationMapper" />
+        <service id="form.constraints_mapper" class="WellCommerce\Component\Form\Validator\ConstraintViolationMapper" />
 
         <service id="form.validator" class="WellCommerce\Component\Form\Validator\FormValidator">
             <argument type="service" id="validator"/>
-            <argument type="service" id="form.contstraints_mapper"/>
+            <argument type="service" id="form.constraints_mapper"/>
         </service>
 
         <service id="form.handler" class="WellCommerce\Component\Form\Handler\FormHandler">

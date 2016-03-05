@@ -71,11 +71,10 @@ class ThemeSubscriber extends AbstractEventSubscriber
     public function onThemeFormInit(FormEvent $event)
     {
         $builder        = $event->getFormBuilder();
-        $form           = $builder->getForm();
         $resource       = $builder->getData();
         $fieldGenerator = $this->container->get('theme.fields_generator');
 
         $fieldGenerator->loadThemeFieldsConfiguration($resource);
-        $fieldGenerator->addFormFields($builder, $form);
+        $fieldGenerator->addFormFields($builder);
     }
 }
