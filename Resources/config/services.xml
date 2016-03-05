@@ -13,6 +13,13 @@
             <argument type="service" id="user.repository"/>
         </service>
 
+        <service id="api.subscriber" class="WellCommerce\Bundle\ApiBundle\EventListener\ApiSubscriber">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
         <service id="api.request_handler.collection" class="WellCommerce\Bundle\ApiBundle\Request\RequestHandlerCollection" />
 
         <service id="api.controller.front" class="WellCommerce\Bundle\ApiBundle\Controller\ApiController">
