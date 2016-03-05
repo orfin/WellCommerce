@@ -154,7 +154,7 @@ class Media implements MediaInterface
     public function preUpload()
     {
         if (null !== $this->getExtension()) {
-            $filename   = sha1(uniqid(mt_rand(), true));
+            $filename   = sha1($this->name);
             $this->path = sprintf('%s.%s', $filename, $this->getExtension());
         }
     }
