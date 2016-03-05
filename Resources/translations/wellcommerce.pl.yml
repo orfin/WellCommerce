@@ -1,0 +1,9 @@
+producer:
+    heading:
+        index: Producenci
+        add: Dodaj producenta
+        edit: Edytuj producenta
+    fieldset:
+        deliverers: Dostawcy
+    label:
+        deliverers: Dostawcy
