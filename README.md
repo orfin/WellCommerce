@@ -23,7 +23,7 @@ The code is still hot but it only gets cooler :). Here are most important things
 Demo
 ------------
 
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/WellCommerce/WellCommerce/tree/development)
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/WellCommerce/WellCommerce/tree/heroku-demo)
 
 [![Home page](http://wellcommerce.org/web/assets/screens/mainside-m.png)](http://wellcommerce.org/web/assets/screens/mainside.png)
 [![Product card](http://wellcommerce.org/web/assets/screens/product-m.png)](http://wellcommerce.org/web/assets/screens/product.png)
