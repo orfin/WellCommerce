@@ -12,11 +12,11 @@
 
 namespace WellCommerce\Bundle\AttributeBundle\Manager\Admin;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroupInterface;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeInterface;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeValueInterface;
-use WellCommerce\Bundle\AttributeBundle\Exception\AttributeGroupNotFoundException;
 use WellCommerce\Bundle\AttributeBundle\Repository\AttributeGroupRepositoryInterface;
 use WellCommerce\Bundle\AttributeBundle\Repository\AttributeValueRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
@@ -111,32 +111,19 @@ class AttributeManager extends AbstractAdminManager
      *
      * @param int $id
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return ArrayCollection|\Doctrine\Common\Collections\Collection
      */
     public function findAttributesByAttributeGroupId($id)
     {
-        $attributeGroup = $this->findAttributeGroup($id);
-        $criteria       = new Criteria();
-        $criteria->where($criteria->expr()->eq('attributeGroup', $attributeGroup));
-
-        return $this->repository->matching($criteria);
-    }
-
-    /**
-     * Returns an attribute's group or throws an exception
-     *
-     * @param int $id
-     *
-     * @return AttributeGroupInterface
-     */
-    protected function findAttributeGroup($id)
-    {
         $attributeGroup = $this->attributeGroupRepository->find($id);
-        if (null === $attributeGroup) {
-            throw new AttributeGroupNotFoundException($id);
+        if ($attributeGroup instanceof AttributeGroupInterface) {
+            $criteria = new Criteria();
+            $criteria->where($criteria->expr()->eq('attributeGroup', $attributeGroup));
+
+            return $this->repository->matching($criteria);
         }
 
-        return $attributeGroup;
+        return new ArrayCollection();
     }
 
     /**
