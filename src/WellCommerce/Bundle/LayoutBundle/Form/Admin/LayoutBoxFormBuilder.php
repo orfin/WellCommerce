@@ -39,7 +39,7 @@ class LayoutBoxFormBuilder extends AbstractFormBuilder
 
         $languageData->addChild($this->getElement('text_field', [
             'name'  => 'name',
-            'label' => $this->trans('layput_box.label.name'),
+            'label' => $this->trans('layout_box.label.name'),
             'rules' => [
                 $this->getRule('required')
             ],

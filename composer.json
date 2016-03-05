@@ -95,9 +95,8 @@
     "extra": {
         "symfony-app-dir": "app",
         "symfony-web-dir": "web",
+        "symfony-assets-install": "relative",
         "incenteev-parameters": {
-            "symfony-app-dir": "app",
-            "symfony-web-dir": "web",
             "file": "app/config/parameters.yml",
             "env-map": {
                 "database_name":        "SYMFONY_DATABASE_NAME",
