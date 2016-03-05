@@ -1,6 +1,9 @@
 imports:
     - { resource: config.yml }
 
+framework:
+    profiler: false
+
 monolog:
     handlers:
         main:

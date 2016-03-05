@@ -87,6 +87,10 @@
         ],
         "build-bootstrap": [
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap"
+        ],
+        "compile": [
+            "app/console assets:install",
+            "app/console assetic:dump"
         ]
     },
     "config": {
