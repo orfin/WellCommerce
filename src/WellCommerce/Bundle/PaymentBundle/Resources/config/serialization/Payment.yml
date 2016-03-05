@@ -1,0 +1,19 @@
+WellCommerce\Bundle\PaymentBundle\Entity\Payment:
+    fields:
+        id:
+            groups:
+                - default
+                - payment
+        createdAt:
+            groups:
+                - default
+                - payment
+        updatedAt:
+            groups:
+                - default
+                - payment
+    associations:
+        order:
+            groups:
+                - payment
+    callbacks: {  }
