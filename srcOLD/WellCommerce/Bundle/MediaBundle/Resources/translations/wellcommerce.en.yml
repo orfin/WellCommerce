@@ -1,6 +1,0 @@
-media:
-    heading:
-        index: Media
-    button:
-        select_from_library: Select from library
-        add_from_disk: Add from disk

@@ -1,3 +1,0 @@
-well_commerce_search:
-    type: %search_engine%
-    search_term_min_length: 3

@@ -1,9 +1,0 @@
-sales_report:
-    heading:
-        sales: Podsumowanie sprzedaży
-    label:
-        sales: Sprzedaż
-        clients: Klienci
-        orders: Zamówienia
-        today: dzisiaj
-        current_month: w tym miesiącu

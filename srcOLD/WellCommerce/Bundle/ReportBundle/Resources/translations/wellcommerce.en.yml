@@ -1,9 +1,0 @@
-sales_report:
-    heading:
-        sales: Sales summary
-    label:
-        sales: Sales
-        clients: Clients
-        orders: Orders
-        today: today
-        current_month: current month

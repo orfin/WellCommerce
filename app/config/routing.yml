@@ -1,2 +1,0 @@
-wellcommerce_app:
-    resource: "@WellCommerceAppBundle/Resources/config/routing.yml"
