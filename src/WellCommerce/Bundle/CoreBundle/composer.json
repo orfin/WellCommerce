@@ -24,7 +24,7 @@
         "psr-4": { "": "src/" }
     },
     "require": {
-        "php": "^5.6|^7.0",
+        "php": "^7.0",
         "wellcommerce/composer-plugin": "^1.0@dev",
         "wellcommerce/collections": "^0.7@dev",
         "wellcommerce/datagrid": "^0.7@dev",
