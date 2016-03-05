@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\CurrencyBundle\Entity;
 
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
+use WellCommerce\Bundle\AppBundle\Doctrine\ORM\Behaviours\EnableableTrait;
 
 /**
  * Class Currency
@@ -22,7 +23,9 @@ use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
  */
 class Currency implements CurrencyInterface
 {
-    use Timestampable, Blameable;
+    use Timestampable;
+    use Blameable;
+    use EnableableTrait;
 
     /**
      * @var integer
