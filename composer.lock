@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d5458e2be029b561e25bf1feba6d3c6b",
+    "hash": "a4a5f2a3d374ff072f4b15728780f0d0",
     "content-hash": "eb009f268f5f986ecec2ef677e8831e2",
     "packages": [
         {
@@ -4420,12 +4420,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-escaper.git",
-                "reference": "2c4c3198449c187140b40a8f06f47cb96ab97eac"
+                "reference": "a9ca209587b7492aae0d2399675a2b0b0dbd0992"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-escaper/zipball/2c4c3198449c187140b40a8f06f47cb96ab97eac",
-                "reference": "2c4c3198449c187140b40a8f06f47cb96ab97eac",
+                "url": "https://api.github.com/repos/zendframework/zend-escaper/zipball/a9ca209587b7492aae0d2399675a2b0b0dbd0992",
+                "reference": "a9ca209587b7492aae0d2399675a2b0b0dbd0992",
                 "shasum": ""
             },
             "require": {
@@ -4456,7 +4456,7 @@
                 "escaper",
                 "zf2"
             ],
-            "time": "2016-01-19 21:34:52"
+            "time": "2016-03-05 20:47:03"
         },
         {
             "name": "zendframework/zend-eventmanager",
@@ -4464,12 +4464,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-eventmanager.git",
-                "reference": "608f3c453c2ef25006631f46ff0a342ecf9ad3af"
+                "reference": "0f2c0c5d3ab1b12ab01174d54d7da1ebbf22783c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-eventmanager/zipball/608f3c453c2ef25006631f46ff0a342ecf9ad3af",
-                "reference": "608f3c453c2ef25006631f46ff0a342ecf9ad3af",
+                "url": "https://api.github.com/repos/zendframework/zend-eventmanager/zipball/0f2c0c5d3ab1b12ab01174d54d7da1ebbf22783c",
+                "reference": "0f2c0c5d3ab1b12ab01174d54d7da1ebbf22783c",
                 "shasum": ""
             },
             "require": {
@@ -4510,7 +4510,7 @@
                 "events",
                 "zf2"
             ],
-            "time": "2016-02-18 20:55:14"
+            "time": "2016-03-05 20:47:05"
         },
         {
             "name": "zendframework/zend-http",
@@ -4518,12 +4518,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-http.git",
-                "reference": "e0a1ce2dd815f4b09c54ff939d2896dc8371780d"
+                "reference": "be6f15934a73d0fb00fea3c1f28e505b819dfc47"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-http/zipball/e0a1ce2dd815f4b09c54ff939d2896dc8371780d",
-                "reference": "e0a1ce2dd815f4b09c54ff939d2896dc8371780d",
+                "url": "https://api.github.com/repos/zendframework/zend-http/zipball/be6f15934a73d0fb00fea3c1f28e505b819dfc47",
+                "reference": "be6f15934a73d0fb00fea3c1f28e505b819dfc47",
                 "shasum": ""
             },
             "require": {
@@ -4560,7 +4560,7 @@
                 "http",
                 "zf2"
             ],
-            "time": "2016-02-04 20:38:18"
+            "time": "2016-03-05 20:47:39"
         },
         {
             "name": "zendframework/zend-hydrator",
@@ -4626,12 +4626,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-json.git",
-                "reference": "4a8695d62d4567d20ce50f93c7dad0cece1c58b3"
+                "reference": "166dfbc8790cfc4e9afa192e0999aeeb903deb04"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-json/zipball/4a8695d62d4567d20ce50f93c7dad0cece1c58b3",
-                "reference": "4a8695d62d4567d20ce50f93c7dad0cece1c58b3",
+                "url": "https://api.github.com/repos/zendframework/zend-json/zipball/166dfbc8790cfc4e9afa192e0999aeeb903deb04",
+                "reference": "166dfbc8790cfc4e9afa192e0999aeeb903deb04",
                 "shasum": ""
             },
             "require": {
@@ -4673,7 +4673,7 @@
                 "json",
                 "zf2"
             ],
-            "time": "2016-02-04 21:21:47"
+            "time": "2016-03-05 20:47:49"
         },
         {
             "name": "zendframework/zend-loader",
@@ -4681,12 +4681,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-loader.git",
-                "reference": "5b29591076d7b6a38945859a6858efcfaa913e39"
+                "reference": "ffcebe2c132b2de8a656d403fca2bce4626b04f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-loader/zipball/5b29591076d7b6a38945859a6858efcfaa913e39",
-                "reference": "5b29591076d7b6a38945859a6858efcfaa913e39",
+                "url": "https://api.github.com/repos/zendframework/zend-loader/zipball/ffcebe2c132b2de8a656d403fca2bce4626b04f6",
+                "reference": "ffcebe2c132b2de8a656d403fca2bce4626b04f6",
                 "shasum": ""
             },
             "require": {
@@ -4717,7 +4717,7 @@
                 "loader",
                 "zf2"
             ],
-            "time": "2016-01-19 22:11:44"
+            "time": "2016-03-05 20:47:52"
         },
         {
             "name": "zendframework/zend-log",
@@ -4725,12 +4725,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-log.git",
-                "reference": "f01607ffbd5d8db58cd302fe9efaa4011a45f832"
+                "reference": "3dcbb97301032af6e897f7ef9ebb9e8fbacc1a74"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-log/zipball/f01607ffbd5d8db58cd302fe9efaa4011a45f832",
-                "reference": "f01607ffbd5d8db58cd302fe9efaa4011a45f832",
+                "url": "https://api.github.com/repos/zendframework/zend-log/zipball/3dcbb97301032af6e897f7ef9ebb9e8fbacc1a74",
+                "reference": "3dcbb97301032af6e897f7ef9ebb9e8fbacc1a74",
                 "shasum": ""
             },
             "require": {
@@ -4781,7 +4781,7 @@
                 "logging",
                 "zf2"
             ],
-            "time": "2016-03-02 18:37:50"
+            "time": "2016-03-05 20:47:54"
         },
         {
             "name": "zendframework/zend-servicemanager",
@@ -4789,12 +4789,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-servicemanager.git",
-                "reference": "b931ddf4054c2c42622bee1705aa320d4844a89d"
+                "reference": "2aad0c8aaef187ea9fbf3d3d65f1dab57bfc53e8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-servicemanager/zipball/b931ddf4054c2c42622bee1705aa320d4844a89d",
-                "reference": "b931ddf4054c2c42622bee1705aa320d4844a89d",
+                "url": "https://api.github.com/repos/zendframework/zend-servicemanager/zipball/2aad0c8aaef187ea9fbf3d3d65f1dab57bfc53e8",
+                "reference": "2aad0c8aaef187ea9fbf3d3d65f1dab57bfc53e8",
                 "shasum": ""
             },
             "require": {
@@ -4833,7 +4833,7 @@
                 "servicemanager",
                 "zf"
             ],
-            "time": "2016-02-02 14:15:24"
+            "time": "2016-03-05 20:48:23"
         },
         {
             "name": "zendframework/zend-stdlib",
@@ -4900,12 +4900,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-uri.git",
-                "reference": "75bcb74138af4211c5f3c9976d04731b50a5823c"
+                "reference": "5bdfa2aa01edfc4c47a89a4b83f8754e93b1236a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-uri/zipball/75bcb74138af4211c5f3c9976d04731b50a5823c",
-                "reference": "75bcb74138af4211c5f3c9976d04731b50a5823c",
+                "url": "https://api.github.com/repos/zendframework/zend-uri/zipball/5bdfa2aa01edfc4c47a89a4b83f8754e93b1236a",
+                "reference": "5bdfa2aa01edfc4c47a89a4b83f8754e93b1236a",
                 "shasum": ""
             },
             "require": {
@@ -4939,7 +4939,7 @@
                 "uri",
                 "zf2"
             ],
-            "time": "2016-02-17 22:40:02"
+            "time": "2016-03-05 20:48:40"
         },
         {
             "name": "zendframework/zend-validator",
@@ -4947,12 +4947,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-validator.git",
-                "reference": "1cc9eaa6a14980e6b36facd6fd0cb9457f1edd3d"
+                "reference": "37a335f02154c3c5a02c884599762783cf6b95b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-validator/zipball/1cc9eaa6a14980e6b36facd6fd0cb9457f1edd3d",
-                "reference": "1cc9eaa6a14980e6b36facd6fd0cb9457f1edd3d",
+                "url": "https://api.github.com/repos/zendframework/zend-validator/zipball/37a335f02154c3c5a02c884599762783cf6b95b5",
+                "reference": "37a335f02154c3c5a02c884599762783cf6b95b5",
                 "shasum": ""
             },
             "require": {
@@ -5006,7 +5006,7 @@
                 "validator",
                 "zf2"
             ],
-            "time": "2016-03-02 19:48:14"
+            "time": "2016-03-05 20:48:42"
         },
         {
             "name": "zendframework/zendsearch",
