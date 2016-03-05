@@ -35,33 +35,33 @@ class LoadUserData extends AbstractDataFixture
             return;
         }
 
-//        $role = $this->container->get('role.factory')->create();
-//        $role->setName('admin');
-//        $role->setRole('ROLE_ADMIN');
-//        $manager->persist($role);
-//
-//        $this->setReference('default_role', $role);
-//
-//        $group = $this->container->get('user_group.factory')->create();
-//        $group->setName('Administration');
-//        $group->setPermissions($this->getPermissions($group));
-//        $manager->persist($group);
-//
-//        $this->setReference('default_group', $group);
-//
-//        $user = $this->container->get('user.factory')->create();
-//        $user->setFirstName('John');
-//        $user->setLastName('Doe');
-//        $user->setUsername('admin');
-//        $user->setEmail('admin@domain.org');
-//        $user->setEnabled(1);
-//        $user->setPassword('admin');
-//        $user->addRole($role);
-//        $user->getGroups()->add($group);
-//        $user->setApiKey(Helper::generateRandomPassword(8));
-//        $manager->persist($user);
-//
-//        $manager->flush();
+        $role = $this->container->get('role.factory')->create();
+        $role->setName('admin');
+        $role->setRole('ROLE_ADMIN');
+        $manager->persist($role);
+
+        $this->setReference('default_role', $role);
+
+        $group = $this->container->get('user_group.factory')->create();
+        $group->setName('Administration');
+        $group->setPermissions($this->getPermissions($group));
+        $manager->persist($group);
+
+        $this->setReference('default_group', $group);
+
+        $user = $this->container->get('user.factory')->create();
+        $user->setFirstName('John');
+        $user->setLastName('Doe');
+        $user->setUsername('admin');
+        $user->setEmail('admin@domain.org');
+        $user->setEnabled(1);
+        $user->setPassword('admin');
+        $user->addRole($role);
+        $user->getGroups()->add($group);
+        $user->setApiKey(Helper::generateRandomPassword(8));
+        $manager->persist($user);
+
+        $manager->flush();
     }
 
     protected function getPermissions(UserGroupInterface $group)
