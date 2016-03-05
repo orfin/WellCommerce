@@ -37,7 +37,7 @@ class PackageController extends AbstractAdminController
     {
         $this->manager->syncPackages(PackageHelperInterface::DEFAULT_PACKAGE_BUNDLE_TYPE);
         $this->manager->syncPackages(PackageHelperInterface::DEFAULT_PACKAGE_THEME_TYPE);
-        $this->manager->getFlashHelper()->addSuccess('package.flashes.sync_success');
+        $this->manager->getFlashHelper()->addSuccess('package.flash.sync.success');
 
         return $this->getRouterHelper()->redirectToAction('index');
     }
