@@ -1,0 +1,24 @@
+WellCommerce\Bundle\AppBundle\Entity\Price:
+    fields:
+        netAmount:
+            groups:
+                - default
+                - price
+        grossAmount:
+            groups:
+                - default
+                - price
+        taxAmount:
+            groups:
+                - default
+                - price
+        taxRate:
+            groups:
+                - default
+                - price
+        currency:
+            groups:
+                - default
+                - price
+    associations: {  }
+    callbacks: {  }

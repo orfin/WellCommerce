@@ -1,0 +1,695 @@
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
+
+form:
+    help:
+        required_fields: '* pola wymagane'
+common:
+    button:
+        add: Dodaj
+        save: Zapisz zmiany
+        save_and_finish: Zapisz i zakończ
+        save_and_continue: Zapisz i kontynuuj
+        save_and_add_another: Zapisz i dodaj kolejny
+        back: Return
+    help:
+        required_fields: '* pola wymagane'
+    fieldset:
+        required_data: Ustawienia ogólne
+        general_settings: Ustawienia ogólne
+        translations: Tłumaczenia
+        shops: Sklepy
+        prices: Ceny
+        discount_settings: Rabaty
+        general: Ogólne
+        photos: Zdjęcia
+        meta: Ustawienia znaczników meta
+        shops: Sklepy
+        categories: Kategorie
+        description: Opis
+        prices: Ceny
+    label:
+        id: ID
+        name: Nazwa
+        currency: Waluta
+        short_description: Krótki opis
+        description: Opis
+        code: Kod
+        slug: Ścieżka SEO
+        group: Grupa
+        discount: Rabat
+        created_at: Utworzenie
+        updated_at: Ostatnia aktualizacja
+        valid_from: Ważny od
+        valid_to: Ważny do
+        enabled: Włączony
+        preview: Podgląd
+        extension: Rozszerzenie
+        mime: MIME
+        size: Rozmiar
+        publish: Opublikowany
+        hierarchy: Kolejność
+        password: Hasło
+        producer: Producent
+        tax: Podatek
+        stock: Stan magazynowy
+        categories: Kategorie
+        sku: SKU
+        default_order_status: Domyślny status
+        url: Adres URL
+        shops: Dostępny w sklepach
+        meta:
+            title: Tytuł
+            keywords: Słowa kluczowe
+            description: Opis
+        dimension:
+            width: Szerokość
+            height: Wysokość
+            depth: Głębokość
+            length: Długość
+            weight: Waga
+        phone: Telefon
+        secondary_phone: Drugi telefon
+        email: E-mail
+        price: Cena
+        discounted_price: Cena promocyjna
+        gross_price: Cena brutto
+        net_price: Cena netto
+        first_name: Imię
+        last_name: Nazwisko
+        client_group: Grupa klientów
+
+address:
+    heading:
+        billing_address: Adres płatnika
+        shipping_address: Adres dostawy
+    label:
+        copy_address: Adres dostawy jest taki sam jak adres płatnika
+        addresses: Adresy
+        street: Ulica
+        street_no: Numer ulicy
+        flat_no: Numer domu/lokalu
+        province: Prowincja
+        post_code: Kod pocztowy
+        country: Państwo
+        city: Miejscowość
+contact_details:
+    heading:
+        details: Dane kontaktowe
+    label:
+        first_name: Imię
+        last_name: Nazwisko
+
+
+price:
+    sell_price:
+        net:    Cena sprzedaży netto
+        gross:  Cena sprzedaży brutto
+    buy_price:
+        net: Cena zakupu netto
+        gross: Cena zakupu brutto
+    discounted_price:
+        net: Cena promocyjna netto
+        gross: Cena promocyjna brutto
+        discount: Rabat
+
+attribute:
+    heading:
+        index: Atrybuty
+        add: Dodawanie nowego atrubutu
+        edit: Edycja atrybutu
+
+attribute_group:
+    heading:
+        index: Grupy atrybutów
+        add: Dodaj grupę
+        edit: Edycja grupy
+
+attribute_value:
+    heading:
+        index: Wartości atrybutów
+        add: Dodaj wartości
+        edit: Edytuj wartości
+
+availability:
+    heading:
+        index: Statusy dostępności
+        add: Dodaj status
+        edit: Edytuj status
+
+category:
+    form:
+        fieldset:
+            general: Ogólne
+            meta: Ustawienia znaczników meta
+            shops: Sklepy
+            description: Opis
+    label:
+        shops: Dostępna w sklepach
+        hierarchy: Kolejność
+        enabled: Włączona
+        name: Nazwa
+        slug: Ścieżka SEO
+        parent: Kategoria nadrzędna
+        short_description: Krótki opis
+        description: Opis
+    heading:
+        index: Kategorie
+        add: Dodaj kategorię
+        edit: Edytuj kategorię
+
+deliverer:
+    heading:
+        index: Dostawcy
+        add: Dodaj dostawcę
+        edit: Edytuj dostawcę
+
+search:
+    heading:
+        index: Wyniki wyszukiwania
+    label:
+        phrase: Wpisz czego szukasz
+
+product_status:
+    heading:
+        index: Statusy produktów
+        add: Dodaj status produktu
+        edit: Edytuj status produktu
+    label:
+        css_class: Nazwa klasy CSS
+
+review:
+    heading:
+        index: Opinie
+    label:
+        rating: Ocena
+        nick: Imię lub pseudonim
+        review: Recenzja
+    button:
+        add_opinion: Wyślij opinię
+    link:
+        first_review: Bądź pierwszą osobą która doda opinię
+
+product:
+    form:
+        fieldset:
+            general: Ogólne
+            meta: Ustawienia znaczników meta
+            categories: Kategorie
+            prices: Ceny
+            stock: Ustawienia magazynu
+            photos: Zdjęcia
+            statuses: Statusy
+            attributes: Warianty
+            shops: Sklepy
+            description: Opis
+    comment:
+        enabled: Włącz widoczność produktu w sklepie
+    heading:
+        index: Produkty
+        add: Dodaj produkt
+        edit: Edytuj produkt
+    label:
+        id: ID
+        name: Nazwa
+        slug: Ścieżka SEO
+        enabled: Włączony
+        sku: SKU
+        statuses: Statusy produktu
+        shops: Dostępny w sklepach
+        categories: Kategorie
+        gross_amount: Cena brutto
+        stock: Stan magazynowy
+        weight: Waga
+        producer: Producent
+        currency: Waluta
+        manufactured_by: od
+        shipping_cost: Koszty wysyłki
+        availability: Dostępność
+        quantity: Ilość
+        unit: Jednostka miary
+        package_size: Ilość w opakowaniu
+        track_stock: Śledzenie magazynu
+        buy_price:
+            settings: Konfiguracja cen zakupu
+            currency: Waluta
+            tax: Podatek
+            gross_amount: Cena brutto
+        sell_price:
+            settings: Konfiguracja cen sprzedaży
+            currency: Waluta
+            tax: Podatek
+            gross_amount: Cena standardowa
+            discounted_gross_amount: Cena promocyjna
+            discount_valid_from: Ważna od
+            discount_valid_to: Ważna do
+        dimension:
+            width: Szerokość
+            height: Wysokość
+            depth: Głębokość
+        layered_navigation:
+            price: Filtruj po cenie
+            brand: Filtruj po marce
+        short_description: Krótki opis
+        description: Opis
+    button:
+        filter: Filtrowanie wyników
+    heading:
+        recommendations: 'Polecamy Ci również'
+    options:
+        label:
+            order: Sortuj
+            view: Widok
+            limit: Wyników na stronę
+            grid_view: Siatka
+            list_view: Lista
+        order_by:
+            name:
+                asc: Nazwa - od A d Z
+                desc: Nazwa - od Z a A
+            final_price:
+                asc: Cena - od najniższej
+                desc: Cena - od najwyższej
+            score:
+                asc: Najlepsze trafienie
+        limit:  Wyników na stronę
+        view_type:
+            list: Lista
+            grid: Siatka
+
+producer:
+    heading:
+        index: Producenci
+        add: Dodaj producenta
+        edit: Edytuj producenta
+    fieldset:
+        deliverers: Dostawcy
+    label:
+        deliverers: Dostawcy
+
+unit:
+    heading:
+        index: Jednostki miary
+        add: Dodaj jednostkę miary
+        edit: Edytuj jednostkę miary
+
+user:
+    heading:
+        index: Administratorzy
+        add: Dodaj admnistratora
+        edit: Edytuj admnistratora
+    button:
+        log_in: Zaloguj się
+    label:
+        id: ID
+        username: Login
+        password: Hasło
+        email: E-mail
+        first_name: Imię
+        last_name: Nazwisko
+        enabled: Aktywny
+
+user_group:
+    heading:
+        index: Grupy administratorów
+        add: Dodaj grupę administratorów
+        edit: Edytuj grupę administratorów
+    label:
+        permissions: Uprawnienia
+
+common:
+    label:
+        id: ID
+        name: Nazwa
+        slug: Ścieżka SEO
+        created_at: Utworzony
+        updated_at: Zaktualizowany
+        enabled: Aktywny
+        hierarchy: Kolejność
+        address: Adresy
+        street: Ulica
+        street_no: Numer ulicy
+        flat_no: Numer domu/lokalu
+        province: Prowincja
+        post_code: Kod pocztowy
+        country: Państwo
+        phone: Telefon
+        secondary_phone: Telefon dodatkowy
+        email: E-mail
+        meta_title: Tytuł meta
+        meta_description: Opis meta
+        meta_keywords: Słowa kluczowe meta
+
+client:
+    label:
+        username: Login (e-mail)
+        password: Hasło
+        confirm_password: Potwierdź hasło
+        new_password: Nowe hasło
+        accept_conditions: Akceptuję regulamin sklepu
+        accept_newsletter: Zapisz się na nasz newsleter
+        contact_details:
+            first_name: Imię
+            last_name: Nazwisko
+            phone: Telefon
+            secondary_phone: Telefon dodatkowy
+            email: E-mail
+        address:
+            first_name: Imię
+            last_name: Nazwisko
+            street: Ulica
+            street_no: Numer budynku
+            flat_no: Numer lokalu
+            province: Prowincja
+            post_code: Kod pocztowy
+            country: Państwo
+            city: Miejscowość
+            copy_address: Adres dostawy jest taki sam jak adres płatnika
+    heading:
+        index: Klienci
+        add: Dodaj klienta
+        edit: Edytuj klienta
+        login: Logowanie
+        register: Rejestracja
+        contact_details: Dane kontaktowe
+        footer_links: Twoje konto
+        contact_details: Dane kontaktowe
+        billing_address: Adres płatnika
+        shipping_address: Adres dostawy
+        reset_password: Zresetuj hasło
+        change_password: Zmień hasło
+    link:
+        login: 'Zaloguj lub zarejestruj się'
+        register: Rejestracja
+        logout: Wyloguj
+        orders: Zamówienia
+        address_book: Adresy
+        settings: Ustawienia
+        wishlist: Lista życzeń
+        password_forgotten: Zresetuj hasło
+    button:
+        login: Zaloguj się
+        register: Zarejestruj się
+        reset_password: Potwierdź zresetowanie hasła
+        change_password: Potwierdź zmianę hasła
+    flash:
+        reset_password:
+            wrong_email: Podano niepoprawny adres e-mail.
+            email_not_found: Podany adres e-mail nie występuje w naszej bazie.
+            success: Wysłano e-mail z linkiem do zresetowania hasła.
+        change_password:
+            success: Nowe hasło zostało ustawione
+    email:
+        heading:
+            reset_password: Informacje dotyczące zresetowania hasła
+        body:
+            reset_password_instructions: Rozpoczęto procedurę odzyskiwania hasła.
+            confirm_password_reset: Przejdź na stronę celem ustalenia nowego hasła w sklepie.
+
+client_group:
+    heading:
+        index: Grupy klientów
+        add: Dodaj grupę klientów
+        edit: Edytuj grupę
+    label:
+        total_clients: Klientów w tej grupie
+
+contact:
+    heading:
+        index: Kontakty
+        add: Dodaj kontakt
+        edit: Edytuj kontakt
+    email:
+        heading:
+            contact: Otrzymaliśmy Twoje zapytanie
+
+news:
+    heading:
+        index: Newsy
+        add: Dodaj news
+        edit: Edytuj news
+
+page:
+    tip:
+        client_groups: Zaznacz grupy klientów które mogą widzieć stronę
+    heading:
+        index: Strony CMS
+        add: Dodaj stronę
+        edit: Edytuj stronę
+    label:
+        section: Sekcja
+        parent: Strona nadrzędna
+        client_groups: Widoczność dla grup klientów
+        redirect:
+            type: Rodzaj przekierowania
+            url: Na adres URL
+            route: Na adres wewnętrzny
+            none: Brak przekierowania
+    fieldset:
+        redirect_settings: Ustawienia przekierowań
+
+company:
+    heading:
+        index: Firmy
+        add: Dodaj firmę
+        edit: Edytuj firmę
+    label:
+        name: Pełna nazwa
+        short_name: Skrócona nazwa
+
+shop:
+    heading:
+        index: Sklepy
+        add: Dodaj sklep
+        edit: Edytuj sklep
+    fieldset:
+        mailer_configuration: Ustawienia mailera
+        url_configuration: Ustawienia adresów
+        cart_configuration: Ustawienia koszyka
+    label:
+        company: Firma
+        url: Adres URL
+        theme: Domyślny szablon sklepu
+        default_country: Domyślne państwo
+        default_currency: Domyślna waluta
+        mailer_configuration:
+            from: Nadawca (e-mail)
+            host: Host SMTP
+            port: Port SMTP
+            user: Login SMTP
+            pass: Hasło SMTP
+
+currency:
+    heading:
+        index: Waluty
+        add: Dodaj walutę
+        edit: Edytuj walutę
+    button:
+        sync: Synchronizuj kursy walutowe
+    label:
+        code: Kod
+
+locale:
+    heading:
+        index: Języki
+        add: Dodaj język
+        edit: Edytuj język
+    label:
+        code: Kod
+        currency: Domyślna waluta
+
+dictionary:
+    heading:
+        index: Tłumaczenia
+        add: Dodaj tłumaczenie
+        edit: Edytuj tłumaczenie
+    label:
+        identifier: Identyfikator
+        translation: Tłumaczenie
+        locale: Język
+    button:
+        add: Dodaj tłumaczenie
+        sync: Synchronizuj tłumaczenia
+
+tax:
+    heading:
+        index: Stawki VAT
+        add: Dodaj stawkę VAT
+        edit: Edytuj stawkę VAT
+    label:
+        value: Wysokość stawki
+
+channel:
+    heading:
+        index: Kanały aktualizacji
+        add: Dodaj nowy kanał
+    label:
+        name: Nazwa
+        url: Adres URL
+
+package:
+    heading:
+        index: Moduły
+    button:
+        sync: Synchronizuj moduły
+    label:
+        name: Nazwa
+        full_name: Pełna nazwa
+        vendor: Dostawca
+        local_version: Wersja lokalna
+        remote_version: Wersja zdalna
+        created_at: Zainstalowany
+        updated_at: Zaktualizowany
+
+theme:
+    heading:
+        index: Szablony
+        add: Dodaj szablon
+        edit: Edytuj szablon
+    label:
+        folder: Folder
+
+layout_box:
+    heading:
+        index: Boksy
+        add: Dodaj boks
+        edit: Edytuj boks
+    label:
+        type: Typ
+        identifier: Identyfikator
+
+coupon:
+    heading:
+        index: Kupony
+        add: Dodaj kupon
+        edit: Edytuj kupon
+    fieldset:
+        discount_settings: Konfiguracja rabatów
+    label:
+        client_usage_limit: Limit dla klientów
+        global_usage_limit: Limit globalny
+        modifier_type: Rodzaj modyfikatora
+        modifier_value: Wartość modyfikatora
+        modifier_type_percent: '%'
+        modifier_type_subtract: '-'
+
+sales_report:
+    heading:
+        sales: Podsumowanie sprzedaży
+    label:
+        sales: Sprzedaż
+        clients: Klienci
+        orders: Zamówienia
+        today: dzisiaj
+        current_month: w tym miesiącu
+
+cart:
+    flash:
+        added: został dodany do koszyka
+    button:
+        add: Dodaj do koszyka
+    link:
+        checkout: Przejdź do zamówienia
+    heading:
+        index: Koszyk
+        recommendations: Polecamy Ci również
+    table:
+        heading:
+            product: Produkt
+            price: Cena
+            quantity: Ilość
+            total: Wartość
+    error:
+        no_available_methods: Nie ma dostępnych form wysyłki i/lub płatności dla produktów w koszyku
+
+order:
+    form:
+        fieldset:
+            products: Produkty
+    heading:
+        index: Zamówienia
+        edit: Edytuj zamówienie
+        address: Adresy
+        confirmation: Potwierdzenie
+        order_total: Suma
+    button:
+        confirm: Przejdź do potwierdzenia
+        add_product: Dodaj produkt
+    heading:
+        address: Adres dostawy i płatnika
+        contact_details: Dane kontaktowe
+    label:
+        id: ID
+        order_no: Numer zamówienia
+        client: Klient
+        product_total: Wartość produktów
+        shipping_total: Koszty wysyłki
+        order_total: Wartość zamówienia
+        variant: Wariant
+        weight: Waga
+        quantity: Ilość
+        stock: Stan magazynowy
+        tax_rate: Stawka VAT
+        current_status: Status
+        created_at: Złożone
+        comment: Komentarz klienta
+        shipping_method: Forma wysyłki
+        payment_method: Forma płatności
+        product_name: Produkt
+        tax_value: Podatek
+        gross_amount: Cena
+        gross_total: Suma
+        currency: Waluta
+        order_total:
+            shipping: Koszty wysyłki
+    description:
+        product_total: Wartość produktów
+        shipping_cost: Koszty wysyłki
+
+order_status:
+    heading:
+        index: Statusy zamówienia
+        add: Dodaj status
+        edit: Edytuj status
+
+order_status_group:
+    heading:
+        index: Grupy statusów zamówienia
+        add: Dodaj grupę
+        edit: Edytuj grupę
+
+payment:
+    flash:
+        thank_you: "Dziękujemy za złożenie zamówienia. Poniżej prezentujemy jego szczegóły:"
+
+payment_method:
+    heading:
+        index: Formy płatności
+        add: Dodaj formę płatności
+        edit: Edytuj formę płatności
+    fieldset:
+        shipping_methods: Formy wysyłki
+    label:
+        processor: Typ procesora płatności
+        shipping_methods: Dozwolone formy wysyłki
+    bank_transfer:
+        tip: Twoje zamówienie będzie realizowane po otrzymaniu przelewu na poniższe dane rachunku.
+        account: Numer rachunku
+        sort_number: Sort code banku
+        title: Tytuł przelewu
+
+shipping_method:
+    heading:
+        index: Formy wysyłki
+        add: Dodaj formę wysyłki
+        edit: Edytuj formę wysyłki
+    label:
+        calculator: Rodzaj kalkulacji kosztów
+        costs: Koszty wysyłki
+    fieldset:
+        costs: Ustawienia kosztów wysyłki
