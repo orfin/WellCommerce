@@ -31,7 +31,7 @@ class ProductControllerTest extends AbstractAdminControllerTestCase
             $url     = $this->generateUrl('dynamic_' . $product->translate()->getRoute()->getId());
             $crawler = $this->client->request('GET', $url);
 
-            $this->assertTrue($this->client->getResponse()->isSuccessful());
+            $this->assertTrue($this->client->getResponse()->isSuccessful(), 'Code: ' . $this->client->getResponse()->getStatusCode());
             $this->assertGreaterThan(0, $crawler->filter('html:contains("' . $product->translate()->getName() . '")')->count());
         });
     }

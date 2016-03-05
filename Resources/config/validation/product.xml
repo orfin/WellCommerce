@@ -28,11 +28,6 @@
                 <option name="traverse">true</option>
             </constraint>
         </property>
-        <property name="sellPrice">
-            <constraint name="Valid">
-                <option name="traverse">true</option>
-            </constraint>
-        </property>
         <property name="stock">
             <constraint name="GreaterThanOrEqual">
                 <option name="value">0</option>
@@ -55,10 +50,6 @@
 
     <class name="WellCommerce\Bundle\ProductBundle\Entity\ProductTranslation">
         <property name="name">
-            <constraint name="NotBlank" />
-            <constraint name="NotNull" />
-        </property>
-        <property name="slug">
             <constraint name="NotBlank" />
             <constraint name="NotNull" />
         </property>
