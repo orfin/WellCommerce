@@ -109,4 +109,14 @@ class ContactTranslation implements LocaleAwareInterface
     {
         $this->businessHours = $businessHours;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCopyingSensitiveProperties()
+    {
+        return [
+            'name',
+        ];
+    }
 }

@@ -31,4 +31,14 @@ interface TranslatorHelperInterface
      * @return string
      */
     public function trans($message, array $parameters = [], $domain = self::DEFAULT_TRANSLATION_DOMAIN);
+
+    /**
+     * Returns all messages for given locale and domain
+     *
+     * @param string $locale
+     * @param string $domain
+     *
+     * @return array
+     */
+    public function getMessages($locale, $domain = self::DEFAULT_TRANSLATION_DOMAIN);
 }

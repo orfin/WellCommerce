@@ -13,9 +13,9 @@ namespace WellCommerce\Bundle\LayoutBundle\EventListener;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PropertyAccess\PropertyAccess;
-use WellCommerce\Bundle\AppBundle\Configurator\LayoutBoxConfiguratorInterface;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
 use WellCommerce\Bundle\DoctrineBundle\Event\ResourceEvent;
+use WellCommerce\Bundle\LayoutBundle\Configurator\LayoutBoxConfiguratorInterface;
 use WellCommerce\Component\Form\Event\FormEvent;
 
 /**
@@ -29,7 +29,7 @@ class LayoutBoxSubscriber extends AbstractEventSubscriber
     {
         return [
             'layout_box.form_init'  => 'onLayoutBoxFormInit',
-            'layout_box.pre_update' => 'onLayoutBoxResourceSave'
+            'layout_box.pre_update' => 'onLayoutBoxPreResourceUpdate'
         ];
     }
 
@@ -43,7 +43,7 @@ class LayoutBoxSubscriber extends AbstractEventSubscriber
     {
         $builder       = $event->getFormBuilder();
         $form          = $event->getForm();
-        $resource      = $form->getModelData();
+        $resource      = $event->getDefaultData();
         $configurators = $this->container->get('layout_box.configurator.collection')->all();
         $boxSettings   = $resource->getSettings();
 
@@ -64,9 +64,10 @@ class LayoutBoxSubscriber extends AbstractEventSubscriber
      *
      * @param ResourceEvent $event
      */
-    public function onLayoutBoxResourceSave(ResourceEvent $event)
+    public function onLayoutBoxPreResourceUpdate(ResourceEvent $event)
     {
-        $settings = $this->getBoxSettingsFromRequest($event->getRequest());
+        $request  = $this->getRequestHelper()->getCurrentRequest();
+        $settings = $this->getBoxSettingsFromRequest($request);
         $resource = $event->getResource();
         $resource->setSettings($settings);
     }

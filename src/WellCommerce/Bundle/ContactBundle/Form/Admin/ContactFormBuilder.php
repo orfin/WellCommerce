@@ -38,7 +38,7 @@ class ContactFormBuilder extends AbstractFormBuilder
 
         $languageData = $requiredData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
-            'label'       => $this->trans('admin.form.translations'),
+            'label'       => $this->trans('common.fieldset.translations'),
             'transformer' => $this->getRepositoryTransformer('translation', $this->get('contact.repository'))
         ]));
 
@@ -68,7 +68,7 @@ class ContactFormBuilder extends AbstractFormBuilder
 
         $languageData->addChild($this->getElement('text_area', [
             'name'  => 'businessHours',
-            'label' => $this->trans('common.label.business_hours'),
+            'label' => $this->trans('contact.label.business_hours'),
         ]));
 
         $addressData = $form->addChild($this->getElement('nested_fieldset', [
@@ -78,7 +78,7 @@ class ContactFormBuilder extends AbstractFormBuilder
 
         $languageData = $addressData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
-            'label'       => $this->trans('admin.form.label.translations'),
+            'label'       => $this->trans('common.fieldset.translations'),
             'transformer' => $this->getRepositoryTransformer('translation', $this->get('contact.repository'))
         ]));
 

@@ -70,9 +70,8 @@ class AttributeCollectionToArrayTransformer extends CollectionToArrayTransformer
             }
         }
 
-        $previousCollection = $this->propertyAccessor->getValue($modelData, $propertyPath);
-        $this->synchronizeCollection($previousCollection, $collection);
-        $this->propertyAccessor->setValue($modelData, $propertyPath, $collection);
+        $this->synchronizeCollection($modelData->getAttributes(), $collection);
+        $modelData->setAttributes($collection);
     }
 
     /**

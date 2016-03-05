@@ -8,7 +8,7 @@
             <argument type="service" id="layout_box.repository"/>
             <argument type="service" id="layout_box.event_dispatcher"/>
             <argument type="service" id="layout_box.factory"/>
-            <argument type="service" id="layout_box.form_builder"/>
+            <argument type="service" id="layout_box.form_builder.admin"/>
             <argument type="service" id="layout_box.datagrid"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
@@ -42,7 +42,7 @@
             <argument type="service" id="layout_box.repository"/>
         </service>
 
-        <service id="layout_box.dataset" class="WellCommerce\Bundle\LayoutBundle\DataSet\Admin\LayoutBoxDataSet">
+        <service id="layout_box.dataset.admin" class="WellCommerce\Bundle\LayoutBundle\DataSet\Admin\LayoutBoxDataSet">
             <argument type="service" id="layout_box.dataset.query_builder"/>
             <argument type="service" id="dataset.manager"/>
             <argument type="service" id="layout_box.event_dispatcher"/>
@@ -51,14 +51,14 @@
 
         <service id="layout_box.datagrid" class="WellCommerce\Bundle\LayoutBundle\DataGrid\LayoutBoxDataGrid">
             <argument key="identifier">layout_box</argument>
-            <argument type="service" id="layout_box.dataset"/>
+            <argument type="service" id="layout_box.dataset.admin"/>
             <argument type="service" id="layout_box.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <service id="layout_box.form_builder" class="WellCommerce\Bundle\LayoutBundle\Form\Admin\LayoutBoxFormBuilder">
+        <service id="layout_box.form_builder.admin" class="WellCommerce\Bundle\LayoutBundle\Form\Admin\LayoutBoxFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
             <argument type="service" id="layout_box.event_dispatcher"/>

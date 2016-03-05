@@ -54,7 +54,10 @@ class LocaleExtension extends \Twig_Extension implements \Twig_Extension_Globals
     public function getGlobals()
     {
         return [
-            'locales' => $this->dataset->getResult('select')
+            'locales' => $this->dataset->getResult('select', ['order_by' => 'code'], [
+                'label_column' => 'code',
+                'value_column' => 'code'
+            ])
         ];
     }
 

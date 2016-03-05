@@ -55,6 +55,9 @@
             <argument>ProducerMenu</argument>
             <argument>producer_menu.layout_box.controller</argument>
             <argument type="service" id="translator.helper"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
             <tag name="layout_box.configurator" />
         </service>
 
@@ -62,6 +65,9 @@
             <argument>ProducerProducts</argument>
             <argument>producer_products.layout_box.controller</argument>
             <argument type="service" id="translator.helper"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
             <tag name="layout_box.configurator" />
         </service>
     </services>

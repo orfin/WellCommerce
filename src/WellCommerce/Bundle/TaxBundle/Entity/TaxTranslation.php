@@ -44,4 +44,14 @@ class TaxTranslation implements LocaleAwareInterface
     {
         $this->name = $name;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCopyingSensitiveProperties()
+    {
+        return [
+            'name',
+        ];
+    }
 }

@@ -12,16 +12,14 @@
 
 namespace WellCommerce\Bundle\DictionaryBundle\Manager\Admin;
 
+use Doctrine\Common\Collections\Criteria;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Yaml\Yaml;
-use WellCommerce\Bundle\AppBundle\Entity\Locale;
-use WellCommerce\Bundle\AppBundle\Entity\LocaleInterface;
-use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
-use WellCommerce\Bundle\DictionaryBundle\Entity\Dictionary;
+use WellCommerce\Bundle\DictionaryBundle\Entity\DictionaryInterface;
+use WellCommerce\Bundle\LocaleBundle\Entity\LocaleInterface;
 
 /**
  * Class DictionaryManager
@@ -36,24 +34,9 @@ class DictionaryManager extends AbstractAdminManager
     protected $kernel;
 
     /**
-     * @var string
-     */
-    protected $currentLocale;
-
-    /**
-     * @var array|\WellCommerce\Bundle\AppBundle\Entity\Locale[]
+     * @var array|\WellCommerce\Bundle\LocaleBundle\Entity\Locale[]
      */
     protected $locales;
-
-    /**
-     * @var array
-     */
-    protected $filesystemTranslations = [];
-
-    /**
-     * @var array
-     */
-    protected $databaseTranslations = [];
 
     /**
      * @var \Symfony\Component\PropertyAccess\PropertyAccessorInterface
@@ -61,83 +44,74 @@ class DictionaryManager extends AbstractAdminManager
     protected $propertyAccessor;
 
     /**
-     * Synchronizes database and filesystem translations
-     *
-     * @param Request         $request
-     * @param KernelInterface $kernel
+     * @var Filesystem
      */
-    public function syncDictionary(Request $request, KernelInterface $kernel)
+    protected $filesystem;
+
+    /**
+     * Synchronizes database and filesystem translations
+     */
+    public function syncDictionary()
     {
-        $this->kernel           = $kernel;
-        $this->currentLocale    = $request->getLocale();
+        $this->kernel           = $this->get('kernel');
         $this->locales          = $this->getLocales();
         $this->propertyAccessor = PropertyAccess::createPropertyAccessor();
+        $this->filesystem       = new Filesystem();
 
-        $this->getDoctrineHelper()->truncateTable('WellCommerce\Bundle\DictionaryBundle\Entity\Dictionary');
-        $this->loadFilesystemTranslations();
-
-        $this->loadDatabaseTranslations();
-        $this->mergeAndSaveTranslations();
-
-    }
-
-    /**
-     * Loads filesystem translations found in Resource folder
-     */
-    protected function loadFilesystemTranslations()
-    {
         foreach ($this->locales as $locale) {
-            $messages     = $this->get('translator')->getMessages($locale->getCode());
-            $translations = $this->propertyAccessor->getValue($messages, '[wellcommerce]');
-            $this->importMessages($translations, $locale);
+            $this->updateTranslationsForLocale($locale);
         }
+
+        $this->getDoctrineHelper()->getEntityManager()->flush();
     }
 
-    /**
-     * Imports the translations
-     *
-     * @param array           $messages
-     * @param LocaleInterface $locale
-     */
-    protected function importMessages(array $messages = [], LocaleInterface $locale)
+    protected function updateTranslationsForLocale(LocaleInterface $locale)
     {
+        $fsTranslations     = $this->getTranslatorHelper()->getMessages($locale->getCode());
+        $dbTranslations     = $this->getDatabaseTranslations($locale);
+        $mergedTranslations = array_replace_recursive($fsTranslations, $dbTranslations);
+        $filename           = sprintf('wellcommerce.%s.yml', $locale->getCode());
+        $path               = $this->getFilesystemTranslationsPath() . DIRECTORY_SEPARATOR . $filename;
+        $content            = Yaml::dump($mergedTranslations, 6);
+        $this->filesystem->dumpFile($path, $content);
+
+        $this->synchronizeDatabaseTranslations($mergedTranslations, $locale);
+    }
+
+    protected function synchronizeDatabaseTranslations(array $messages, LocaleInterface $locale)
+    {
+        $this->getDoctrineHelper()->truncateTable('WellCommerce\Bundle\DictionaryBundle\Entity\Dictionary');
+
         $em = $this->getDoctrineHelper()->getEntityManager();
 
         foreach ($messages as $identifier => $translation) {
-            $dictionary = new Dictionary();
+            $dictionary = $this->factory->create();
             $dictionary->setIdentifier($identifier);
             $dictionary->translate($locale->getCode())->setValue($translation);
             $dictionary->mergeNewTranslations();
             $em->persist($dictionary);
         }
-
-        $em->flush();
     }
 
     /**
-     * Returns parsed translations from filesystem
+     * Returns an array containing all previously imported translations
      *
-     * @param Locale $locale
+     * @param LocaleInterface $locale
+     *
+     * @return array
      */
-    protected function getFilesystemTranslationsForLocale(Locale $locale)
+    protected function getDatabaseTranslations(LocaleInterface $locale)
     {
-        $filename   = sprintf('wellcommerce.%s.yml', $locale->getCode());
-        $filesystem = $this->getFilesystem();
-        $path       = $this->getFilesystemTranslationsPath() . DIRECTORY_SEPARATOR . $filename;
-        if ($filesystem->exists($path)) {
-            return $this->parseYaml($path);
-        }
+        $messages   = [];
+        $collection = $this->repository->matching(new Criteria());
 
-        return [];
+        $collection->map(function (DictionaryInterface $dictionary) use ($locale, &$messages) {
+            $messages[$dictionary->getIdentifier()] = $dictionary->translate($locale->getCode())->getValue();
+        });
+
+        return $messages;
     }
 
-    /**
-     * @return Filesystem
-     */
-    protected function getFilesystem()
-    {
-        return new Filesystem();
-    }
 
     protected function getFilesystemTranslationsPath()
     {
@@ -145,100 +119,6 @@ class DictionaryManager extends AbstractAdminManager
 
         return $kernelDir . DIRECTORY_SEPARATOR . 'Resources' . DIRECTORY_SEPARATOR . 'translations';
     }
-
-    /**
-     * Parses yaml file containing translations
-     *
-     * @param string $content
-     *
-     * @return array
-     */
-    protected function parseYaml($content)
-    {
-        $yaml = new Yaml();
-
-        return $yaml->parse($content);
-    }
-
-    /**
-     * Load translations from database
-     */
-    protected function loadDatabaseTranslations()
-    {
-        $em           = $this->getDoctrineHelper()->getEntityManager();
-        $repository   = $em->getRepository('WellCommerceAppBundle:Dictionary');
-        $translations = $repository->findAll();
-        foreach ($translations as $translation) {
-            $this->addDatabaseTranslation($translation);
-        }
-    }
-
-    /**
-     *
-     * @param Dictionary $dictionary
-     */
-    protected function addDatabaseTranslation(Dictionary $dictionary)
-    {
-        foreach ($this->locales as $locale) {
-            $translation  = $dictionary->translate($locale->getCode())->getValue();
-            $propertyPath = '[' . $locale->getCode() . ']' . Helper::convertDotNotation($dictionary->getIdentifier());
-            $this->propertyAccessor->setValue($this->databaseTranslations, $propertyPath, $translation);
-        }
-    }
-
-    /**
-     * Merges and saves translations to filesystem and database
-     */
-    protected function mergeAndSaveTranslations()
-    {
-        $filesystem         = $this->getFilesystem();
-        $mergedTranslations = array_replace_recursive($this->filesystemTranslations, $this->databaseTranslations);
-        $this->getDoctrineHelper()->truncateTable('WellCommerceAppBundle:Dictionary');
-
-        foreach ($mergedTranslations as $locale => $data) {
-            $filename = sprintf('wellcommerce.%s.yml', $locale);
-            $path     = $this->getFilesystemTranslationsPath() . DIRECTORY_SEPARATOR . $filename;
-            $content  = Yaml::dump($data, 6);
-            $filesystem->dumpFile($path, $content);
-        }
-
-        $this->syncDatabaseTranslations($mergedTranslations);
-    }
-
-    /**
-     * Synchronizes translations to database
-     *
-     * @param array $mergedTranslations
-     */
-    protected function syncDatabaseTranslations(array $mergedTranslations)
-    {
-        foreach ($mergedTranslations as $locale => $data) {
-            $flattened = Helper::flattenArrayToDotNotation($data);
-            $this->saveDatabaseTranslations($locale, $flattened);
-        }
-    }
-
-    /**
-     * Saves translations for particular locale
-     *
-     * @param string $locale
-     * @param array  $data
-     */
-    protected function saveDatabaseTranslations($locale, array $data)
-    {
-        $em = $this->getDoctrineHelper()->getEntityManager();
-
-        foreach ($data as $identifier => $value) {
-            $dictionary = new Dictionary();
-            $dictionary->setIdentifier($identifier);
-            $dictionary->translate($locale)->setValue($value);
-            $dictionary->mergeNewTranslations();
-            $em->persist($dictionary);
-        }
-
-        $em->flush();
-    }
-
 }
 
 

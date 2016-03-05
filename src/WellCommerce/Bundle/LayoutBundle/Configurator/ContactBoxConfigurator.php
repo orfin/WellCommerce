@@ -30,7 +30,7 @@ class ContactBoxConfigurator extends AbstractLayoutBoxConfigurator
         $fieldset = $this->getFieldset($builder, $form);
 
         $fieldset->addChild($builder->getElement('tip', [
-            'tip' => '<p>' . $this->trans('contact.box.help') . '</p>'
+            'tip' => $this->trans('contact.box.help')
         ]));
     }
 }

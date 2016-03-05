@@ -28,6 +28,11 @@ class CouponFormBuilder extends AbstractFormBuilder
      */
     public function buildForm(FormInterface $form)
     {
+        $currencies = $this->get('currency.dataset.admin')->getResult('select', ['order_by' => 'code'], [
+            'label_column' => 'code',
+            'value_column' => 'code'
+        ]);
+
         $requiredData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'required_data',
             'label' => $this->trans('common.fieldset.general')
@@ -35,7 +40,7 @@ class CouponFormBuilder extends AbstractFormBuilder
 
         $languageData = $requiredData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
-            'label'       => $this->trans('form.fieldset.translations'),
+            'label'       => $this->trans('common.fieldset.translations'),
             'transformer' => $this->getRepositoryTransformer('translation', $this->get('coupon.repository'))
         ]));
 
@@ -102,7 +107,7 @@ class CouponFormBuilder extends AbstractFormBuilder
         $discountPane->addChild($this->getElement('select', [
             'name'         => 'currency',
             'label'        => $this->trans('common.label.currency'),
-            'options'      => $this->get('currency.dataset.admin')->getResult('select'),
+            'options'      => $currencies,
             'dependencies' => [
                 $this->getDependency('show', [
                     'form'      => $form,

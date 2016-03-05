@@ -132,4 +132,15 @@ class ProducerTranslation implements RoutableSubjectInterface, LocaleAwareInterf
     {
         return new ProducerRoute();
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCopyingSensitiveProperties()
+    {
+        return [
+            'name',
+            'slug',
+        ];
+    }
 }

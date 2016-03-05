@@ -30,7 +30,7 @@ class ProducerMenuBoxConfigurator extends AbstractLayoutBoxConfigurator
         $fieldset = $this->getFieldset($builder, $form);
 
         $fieldset->addChild($builder->getElement('tip', [
-            'tip' => '<p>' . $this->trans('producer.box.info') . '</p>'
+            'tip' => $this->trans('producer.box.info')
         ]));
     }
 }

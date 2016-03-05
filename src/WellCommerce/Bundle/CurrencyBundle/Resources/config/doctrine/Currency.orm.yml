@@ -13,3 +13,8 @@ WellCommerce\Bundle\CurrencyBundle\Entity\Currency:
             length: 12
             unique: true
             nullable: false
+        enabled:
+            type: boolean
+            nullable: false
+            options:
+                default: true

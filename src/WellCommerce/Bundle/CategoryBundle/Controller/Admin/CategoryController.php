@@ -24,7 +24,7 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 class CategoryController extends AbstractAdminController
 {
     /**
-     * @var \WellCommerce\Bundle\AppBundle\Manager\Admin\CategoryManager
+     * @var \WellCommerce\Bundle\CategoryBundle\Manager\Admin\CategoryManager
      */
     protected $manager;
 

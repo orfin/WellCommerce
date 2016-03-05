@@ -33,7 +33,7 @@ class CategoryFormBuilder extends AbstractFormBuilder
 
         $languageData = $requiredData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
-            'label'       => $this->trans('form.fieldset.translations'),
+            'label'       => $this->trans('common.fieldset.translations'),
             'transformer' => $this->getRepositoryTransformer('translation', $this->get('category.repository'))
         ]));
 
@@ -58,8 +58,8 @@ class CategoryFormBuilder extends AbstractFormBuilder
 
         $requiredData->addChild($this->getElement('checkbox', [
             'name'    => 'enabled',
-            'label'   => $this->trans('common.label.enabled'),
-            'comment' => $this->trans('common.comment.enabled'),
+            'label'   => $this->trans('category.label.enabled'),
+            'comment' => $this->trans('category.comment.enabled'),
             'default' => 1
         ]));
 
@@ -90,7 +90,7 @@ class CategoryFormBuilder extends AbstractFormBuilder
 
         $languageData = $descriptionData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
-            'label'       => $this->trans('fieldset.translations'),
+            'label'       => $this->trans('common.fieldset.translations'),
             'transformer' => $this->getRepositoryTransformer('translation', $this->get('category.repository'))
         ]));
 
@@ -111,7 +111,7 @@ class CategoryFormBuilder extends AbstractFormBuilder
 
         $languageData = $seoData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
-            'label'       => $this->trans('fieldset.translations'),
+            'label'       => $this->trans('common.fieldset.translations'),
             'transformer' => $this->getRepositoryTransformer('translation', $this->get('category.repository'))
         ]));
 

@@ -122,4 +122,15 @@ class CategoryTranslation implements RoutableSubjectInterface, LocaleAwareInterf
     {
         return new CategoryRoute();
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCopyingSensitiveProperties()
+    {
+        return [
+            'name',
+            'slug'
+        ];
+    }
 }

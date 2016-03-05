@@ -31,10 +31,10 @@ class CategoryMenuBoxConfigurator extends AbstractLayoutBoxConfigurator
         $accessor = $this->getPropertyAccessor();
 
         $fieldset->addChild($builder->getElement('tip', [
-            'tip' => '<p>' . $this->trans('Choose categories which should be not visible in box.') . '</p>'
+            'tip' => $this->trans('Choose categories which should be not visible in box.')
         ]));
 
-        $fieldset->addChild($builder->getElement('tree', [
+        $exclude = $fieldset->addChild($builder->getElement('tree', [
             'name'        => 'exclude',
             'label'       => $this->trans('category.label.exclude'),
             'choosable'   => false,
@@ -43,7 +43,8 @@ class CategoryMenuBoxConfigurator extends AbstractLayoutBoxConfigurator
             'clickable'   => false,
             'items'       => $this->get('category.dataset.admin')->getResult('flat_tree'),
             'transformer' => $builder->getRepositoryTransformer('entity', $this->get('category.repository')),
-            'default'     => $accessor->getValue($defaults, '[exclude]')
         ]));
+
+        $exclude->setValue($accessor->getValue($defaults, '[exclude]'));
     }
 }

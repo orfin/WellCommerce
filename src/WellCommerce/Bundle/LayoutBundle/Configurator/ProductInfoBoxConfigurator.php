@@ -30,7 +30,7 @@ class ProductInfoBoxConfigurator extends AbstractLayoutBoxConfigurator
         $fieldset = $this->getFieldset($builder, $form);
 
         $fieldset->addChild($builder->getElement('tip', [
-            'tip' => '<p>' . $this->trans('layout_box.product.info.tip') . '</p>'
+            'tip' => $this->trans('layout_box.product.info.tip')
         ]));
     }
 }

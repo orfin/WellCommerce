@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\DictionaryBundle\Controller\Admin;
 
-use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 
 /**
@@ -30,13 +29,11 @@ class DictionaryController extends AbstractAdminController
     /**
      * Synchronizes translations to filesystem and database
      *
-     * @param Request $request
-     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function syncAction(Request $request)
+    public function syncAction()
     {
-        $this->manager->syncDictionary($request, $this->get('kernel'));
+        $this->manager->syncDictionary();
         $this->manager->getFlashHelper()->addSuccess('translation.flashes.success.synchronization');
 
         return $this->redirectToAction('index');

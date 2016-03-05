@@ -30,7 +30,7 @@ class CategoryInfoBoxConfigurator extends AbstractLayoutBoxConfigurator
         $fieldset = $this->getFieldset($builder, $form);
 
         $fieldset->addChild($builder->getElement('tip', [
-            'tip' => '<p>' . $this->trans('Choose categories which should be not visible in box.') . '</p>'
+            'tip' => $this->trans('Choose categories which should be not visible in box.')
         ]));
     }
 }
