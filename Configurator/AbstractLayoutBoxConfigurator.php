@@ -87,7 +87,7 @@ abstract class AbstractLayoutBoxConfigurator extends AbstractContainerAware impl
         $fieldset = $this->getFieldset($builder, $form);
 
         $fieldset->addChild($builder->getElement('tip', [
-            'tip' => '<p>' . $this->trans('layout_box.configuration') . '</p>'
+            'tip' => $this->trans('layout_box.configuration')
         ]));
 
         return $fieldset;
