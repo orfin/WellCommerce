@@ -1,3 +1,4 @@
+{% trans_default_domain "wellcommerce" %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{{ app.request.locale }}">
 <head>
@@ -68,18 +69,18 @@
         </h1>
 
         <div id="livesearch">
-            <input type="text" name="search" id="search" placeholder="{% trans %}Search{% endtrans %}"/>
+            <input type="text" name="search" id="search" placeholder="{% trans %}admin.label.global_context{% endtrans %}"/>
         </div>
         <div id="top-menu">
             <ul>
                 <li>
                     {% if app.user %}
                     <a href="{{ path('admin.user.edit', {"id": app.user.id}) }}">{{ app.user.firstName }} {{ app.user.lastName }}</a>
-                    (<a href="{{ path('admin.user.logout') }}">{% trans %}Logout{% endtrans %}</a>)
+                    (<a href="{{ path('admin.user.logout') }}">{% trans %}admin.user.logout{% endtrans %}</a>)
                     {% endif %}
                 </li>
                 <li>
-                    <a target="_blank" href="http://wellcommerce.org/professional-services">{% trans %}Help{% endtrans %}</a>
+                    <a target="_blank" href="http://wellcommerce.org/professional-services">{% trans %}admin.user.help{% endtrans %}</a>
                 </li>
             </ul>
         </div>
@@ -92,7 +93,7 @@
             <span class="icon"></span>
             <div class="field-select">
                 <select id="change-context">
-                    <option value="0" {% if activeContextId == 0 %}selected{% endif %}>{% trans %}label.global_context{% endtrans %}</option>
+                    <option value="0" {% if activeContextId == 0 %}selected{% endif %}>{% trans %}admin.label.global_context{% endtrans %}</option>
                     {% for id, name in shops %}
                         <option value="{{ id }}" {% if activeContextId == id %}selected{% endif %}>{{ name }}</option>
                     {% endfor %}
