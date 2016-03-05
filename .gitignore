@@ -1,10 +1,5 @@
 *.phar
 
-web/bundles/*
-web/css/*
-web/js/*
-web/images/*
-
 app/bootstrap.*
 app/cache/*
 app/config/parameters.yml
