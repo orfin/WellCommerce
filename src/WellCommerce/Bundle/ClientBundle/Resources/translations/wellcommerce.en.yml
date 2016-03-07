@@ -64,6 +64,8 @@ client:
     email:
         heading:
             reset_password: Reset password instructions
+            registration_ok: User registration
+            register: User registration
         body:
             reset_password_instructions: Password recovery procedure is in progress.
             confirm_password_reset: Head to the site to establish a new password.

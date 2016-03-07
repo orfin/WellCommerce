@@ -64,6 +64,8 @@ client:
     email:
         heading:
             reset_password: Informacje dotyczące zresetowania hasła
+            registration_ok: Rejestracja użytkownika
+            register: Rejestracja użytkownika
         body:
             reset_password_instructions: Rozpoczęto procedurę odzyskiwania hasła.
             confirm_password_reset: Przejdź na stronę celem ustalenia nowego hasła w sklepie.
