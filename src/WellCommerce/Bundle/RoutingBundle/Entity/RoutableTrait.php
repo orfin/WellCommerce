@@ -10,9 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Entity\Behaviours;
-
-use WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface;
+namespace WellCommerce\Bundle\RoutingBundle\Entity;
 
 /**
  * Class RoutableTrait
