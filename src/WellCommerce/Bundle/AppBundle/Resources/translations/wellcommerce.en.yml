@@ -1,0 +1,127 @@
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
+
+form:
+    help:
+        required_fields: '* required fields'
+    media_data:
+        image_id: Image ID
+
+common:
+    button:
+        add: Add
+        save: 'Save changes'
+        save_and_finish: 'Save and finish'
+        save_and_continue: 'Save and continue'
+        save_and_add_another: 'Save and add another'
+        back: Return
+    help:
+        required_fields: '* required fields'
+    fieldset:
+        required_data: General settings
+        general_settings: General settings
+        translations: Translations
+        shops: Shops
+        prices: Prices
+        discount_settings: Discount settings
+        general: General
+        photos: Photos
+        meta: Meta
+        shops: Shops
+        categories: Categories
+        description: Description
+        prices: Prices
+    label:
+        id: ID
+        name: Name
+        currency: Currency
+        short_description: Short description
+        description: Description
+        code: Code
+        slug: Slug
+        group: Group
+        discount: Discount
+        created_at: Created at
+        updated_at: Updated at
+        valid_from: Valid from
+        valid_to: Valid to
+        enabled: Enabled
+        preview: Preview
+        extension: Extension
+        mime: MIME
+        size: Size
+        publish: Published
+        hierarchy: Hierarchy
+        password: Password
+        producer: Producer
+        tax: Tax
+        stock: Stock
+        categories: Categories
+        sku: SKU
+        default_order_status: Default order status
+        url: URL address
+        shops: Available in shops
+        meta:
+            title: Meta title
+            keywords: Meta keywords
+            description: Meta description
+        dimension:
+            width: Width
+            height: Height
+            depth: Depth
+            length: Length
+            weight: Weight
+        phone: Phone
+        secondary_phone: Secondary phone
+        email: E-mail
+        price: Price
+        discounted_price: Discounted price
+        gross_price: Gross price
+        net_price: Net price
+        first_name: First name
+        last_name: Last name
+        client_group: Client group
+        address: Address
+        street: Street
+        street_no: Street no.
+        flat_no: Flat no.
+        province: Province
+        post_code: Post code
+        country: Country
+        phone: Phone
+        secondary_phone: Secondary phone
+        email: E-mail
+        meta_title: Meta title
+        meta_description: Meta description
+        meta_keywords: Meta keywords
+    flashes:
+        success: Success!
+
+price:
+    sell_price:
+        net:    Sell price net
+        gross:  Sell price gross
+    buy_price:
+        net: Buy price net
+        gross: Buy price gross
+    discounted_price:
+        net: Discounted price net
+        gross: Discounted price gross
+        discount:   Discount
+
+dataset:
+    label:
+        delete: Delete
+        confirm_delete: Are you sure to delete
+
+
+
+
+
+
+
