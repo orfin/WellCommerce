@@ -61,3 +61,4 @@ doctrine:
                         class:   WellCommerce\Bundle\LocaleBundle\Doctrine\ORM\Filter\LocaleFilter
                         enabled: false
 
+
