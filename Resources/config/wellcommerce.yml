@@ -22,6 +22,7 @@ imports:
     - { resource: "@WellCommerceDelivererBundle/Resources/config/wellcommerce.yml" }
     - { resource: "@WellCommerceDictionaryBundle/Resources/config/wellcommerce.yml" }
     - { resource: "@WellCommerceDistributionBundle/Resources/config/wellcommerce.yml" }
+    - { resource: "@WellCommerceDoctrineBundle/Resources/config/wellcommerce.yml" }
     - { resource: "@WellCommerceLayoutBundle/Resources/config/wellcommerce.yml" }
     - { resource: "@WellCommerceLocaleBundle/Resources/config/wellcommerce.yml" }
     - { resource: "@WellCommerceMediaBundle/Resources/config/wellcommerce.yml" }
