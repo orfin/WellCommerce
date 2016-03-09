@@ -31,7 +31,7 @@ class ClientChangePasswordFormBuilder extends AbstractFormBuilder
             'label' => $this->trans('client.heading.client_details'),
         ]));
 
-        $clientDetails->addChild($this->getElement('text_field', [
+        $clientDetails->addChild($this->getElement('password', [
             'name'  => 'clientDetails.password',
             'label' => $this->trans('client.label.new_password'),
         ]));
