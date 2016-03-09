@@ -51,8 +51,6 @@ interface RoutableSubjectInterface
      * Sets route
      *
      * @param RouteInterface $route
-     *
-     * @return mixed
      */
     public function setRoute(RouteInterface $route);
 
