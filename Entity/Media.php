@@ -158,5 +158,4 @@ class Media implements MediaInterface
             $this->path = sprintf('%s.%s', $filename, $this->getExtension());
         }
     }
-
 }
