@@ -17,6 +17,7 @@ use WellCommerce\Bundle\AppBundle\Entity\DiscountablePrice;
 use WellCommerce\Bundle\AppBundle\Entity\HierarchyAwareInterface;
 use WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityAwareInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
+use WellCommerce\Bundle\MediaBundle\Entity\MediaAwareInterface;
 
 /**
  * Interface ProductAttributeInterface
@@ -27,7 +28,8 @@ interface ProductAttributeInterface extends
     TimestampableInterface,
     AvailabilityAwareInterface,
     ProductAwareInterface,
-    HierarchyAwareInterface
+    HierarchyAwareInterface,
+    MediaAwareInterface
 {
     /**
      * @return int
