@@ -1,5 +1,6 @@
 *.phar
-
+.idea
+.DS_Store
 app/bootstrap.*
 app/cache/*
 app/config/parameters.yml
