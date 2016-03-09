@@ -3,7 +3,7 @@
 namespace WellCommerce\Bundle\CategoryBundle\Entity;
 
 use Knp\DoctrineBehaviors\Model\Translatable\Translation;
-use WellCommerce\Bundle\AppBundle\Entity\Behaviours\RoutableTrait;
+use WellCommerce\Bundle\RoutingBundle\Entity\RoutableTrait;
 use WellCommerce\Bundle\AppBundle\Entity\Meta;
 use WellCommerce\Bundle\LocaleBundle\Entity\LocaleAwareInterface;
 use WellCommerce\Bundle\RoutingBundle\Entity\RoutableSubjectInterface;
