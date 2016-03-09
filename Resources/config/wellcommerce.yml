@@ -10,3 +10,7 @@ well_commerce_routing:
             orm_configuration:
                 mapping: "@WellCommerceRoutingBundle/Resources/config/doctrine/Route.orm.yml"
                 entity: WellCommerce\Bundle\RoutingBundle\Entity\Route
+
+
+fos_js_routing:
+    router: router.default
