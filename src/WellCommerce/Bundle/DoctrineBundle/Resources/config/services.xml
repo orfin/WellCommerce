@@ -22,6 +22,10 @@
             <tag name="doctrine.event_subscriber" connection="default" />
         </service>
 
+        <service id="doctrine.timestampable.event_subscriber" class="WellCommerce\Bundle\DoctrineBundle\EventListener\TimestampableSubscriber">
+            <tag name="doctrine.event_subscriber" />
+        </service>
+
         <service id="doctrine.command.generate_entity_extra" class="WellCommerce\Bundle\DoctrineBundle\Command\GenerateEntityExtraCommand">
             <argument type="service" id="doctrine.trait_generator.enhancer_collection"/>
             <argument type="service" id="doctrine.trait_generator.enhancer_traverser"/>

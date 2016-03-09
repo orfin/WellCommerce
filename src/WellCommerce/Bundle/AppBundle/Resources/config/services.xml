@@ -5,10 +5,6 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="doctrine.orm.timestampable.subscriber" class="WellCommerce\Bundle\AppBundle\Doctrine\ORM\Behaviours\Timestampable\TimestampableSubscriber">
-            <tag name="doctrine.event_subscriber" />
-        </service>
-
         <service id="breadcrumb.collection" class="WellCommerce\Bundle\CoreBundle\Service\Breadcrumb\BreadcrumbItemCollection" />
 
         <service id="twig.extension.breadcrumb" class="WellCommerce\Bundle\CoreBundle\Twig\Extension\BreadcrumbExtension">

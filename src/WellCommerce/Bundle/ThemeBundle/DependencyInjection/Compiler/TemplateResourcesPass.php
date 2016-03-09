@@ -22,7 +22,7 @@ use Symfony\Component\DependencyInjection\Exception\LogicException;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
- * Created on base of the LiipAppBundle <https://github.com/liip/LiipAppBundle>
+ * Created on base of the LiipThemeBundle <https://github.com/liip/LiipThemeBundle>
  *
  * Special thanks goes to its authors and contributors
  */
