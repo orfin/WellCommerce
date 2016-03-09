@@ -22,10 +22,10 @@ interface MediaAwareInterface
     /**
      * @return MediaInterface
      */
-    public function getMedia();
+    public function getPhoto();
 
     /**
      * @param null|MediaInterface $media
      */
-    public function setMedia(MediaInterface $media = null);
+    public function setPhoto(MediaInterface $media = null);
 }
