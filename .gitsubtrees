@@ -1,0 +1,4 @@
+[subtree "UnitBundle"]
+    url = git@github.com:WellCommerce/UnitBundle.git
+    path = src/WellCommerce/Bundle/UnitBundle
+    branch = master

@@ -97,10 +97,6 @@ if [ "$action" == 'clear' ]
         git branch -D stree-backports-unitbundle
         git branch -D stree-backports-wellcommerce-default-theme
         git branch -D stree-backports-wishlistbundle
-
-        rm -rf src/WellCommerce/Bundle/*
-        rm -rf src/WellCommerce/Component/*
-        rm -rf web/themes/wellcommerce-default-theme
 fi
 
 if [ "$action" == 'init' ]
