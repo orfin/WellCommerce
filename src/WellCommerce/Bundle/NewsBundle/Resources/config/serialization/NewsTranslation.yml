@@ -1,0 +1,31 @@
+WellCommerce\Bundle\NewsBundle\Entity\NewsTranslation:
+    fields:
+        topic:
+            groups:
+                - default
+                - news_translation
+        summary:
+            groups:
+                - default
+                - news_translation
+        content:
+            groups:
+                - default
+                - news_translation
+        meta:
+            groups:
+                - default
+                - news_translation
+        locale:
+            groups:
+                - default
+                - news_translation
+        id:
+            groups:
+                - default
+                - news_translation
+    associations:
+        translatable:
+            groups:
+                - news_translation
+    callbacks: {  }
