@@ -16,7 +16,7 @@ use DateTime;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
-use WellCommerce\Bundle\AppBundle\Doctrine\ORM\Behaviours\PhotoTrait;
+use WellCommerce\Bundle\MediaBundle\Entity\MediaAwareTrait;
 
 /**
  * Class News
@@ -28,7 +28,7 @@ class News implements NewsInterface
     use Translatable;
     use Timestampable;
     use Blameable;
-    use PhotoTrait;
+    use MediaAwareTrait;
 
     /**
      * @var int
