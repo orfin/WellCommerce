@@ -15,9 +15,13 @@ namespace WellCommerce\Bundle\DoctrineBundle\Behaviours\Timestampable;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Events;
-use WellCommerce\Bundle\AppBundle\Doctrine\AbstractSubscriber;
 
-class TimestampableSubscriber extends AbstractSubscriber implements EventSubscriber
+/**
+ * Class TimestampableSubscriber
+ *
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
+ */
+class TimestampableSubscriber implements EventSubscriber
 {
     /**
      * @var array Timestampable fields
@@ -101,5 +105,18 @@ class TimestampableSubscriber extends AbstractSubscriber implements EventSubscri
                 'nullable'  => true,
             ]);
         }
+    }
+
+    /**
+     * Checks whether the class contains such a method
+     *
+     * @param \ReflectionClass $class
+     * @param string           $methodName
+     *
+     * @return bool
+     */
+    protected function hasMethod(\ReflectionClass $class, $methodName)
+    {
+        return $class->hasMethod($methodName);
     }
 }
