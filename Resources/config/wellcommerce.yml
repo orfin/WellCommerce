@@ -124,17 +124,3 @@ well_commerce_app:
             orm_configuration:
                 mapping: "@WellCommerceAppBundle/Resources/config/doctrine/Price.orm.yml"
                 entity: WellCommerce\Bundle\AppBundle\Entity\Price
-
-fos_js_routing:
-    router: router.default
-
-services:
-    doctrine.cache:
-        class: %doctrine_cache.file_system.class%
-        arguments: ["%kernel.root_dir%/cache/%kernel.environment%/doctrine"]
-
-    client.failure.handler:
-        class: WellCommerce\Bundle\ClientBundle\Handler\LoginFailureHandler
-        arguments:
-          - "@router"
-          - front.client.login
