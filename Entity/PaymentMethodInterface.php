@@ -17,6 +17,7 @@ use WellCommerce\Bundle\AppBundle\Entity\HierarchyAwareInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderStatusInterface;
 
 /**
@@ -24,13 +25,8 @@ use WellCommerce\Bundle\OrderBundle\Entity\OrderStatusInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface PaymentMethodInterface extends TimestampableInterface, TranslatableInterface, BlameableInterface, HierarchyAwareInterface
+interface PaymentMethodInterface extends EntityInterface, TimestampableInterface, TranslatableInterface, BlameableInterface, HierarchyAwareInterface
 {
-    /**
-     * @return integer
-     */
-    public function getId();
-
     /**
      * Returns payment method processor
      *
