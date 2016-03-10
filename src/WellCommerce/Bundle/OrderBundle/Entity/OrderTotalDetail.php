@@ -3,21 +3,17 @@
 namespace WellCommerce\Bundle\OrderBundle\Entity;
 
 use WellCommerce\Bundle\AppBundle\Entity\HierarchyAwareTrait;
+use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
 
 /**
  * Class OrderTotalDetail
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class OrderTotalDetail implements OrderTotalDetailInterface
+class OrderTotalDetail extends AbstractEntity implements OrderTotalDetailInterface
 {
     use HierarchyAwareTrait;
     use OrderAwareTrait;
-
-    /**
-     * @var int
-     */
-    protected $id;
 
     /**
      * @var string
@@ -43,14 +39,6 @@ class OrderTotalDetail implements OrderTotalDetailInterface
      * @var int|float
      */
     protected $modifierValue;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 
     /**
      * {@inheritdoc}

@@ -14,33 +14,29 @@ namespace WellCommerce\Bundle\AdminBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Security\Core\Role\RoleInterface as BaseRoleInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 
 /**
  * Interface RoleInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface RoleInterface extends BaseRoleInterface
+interface RoleInterface extends BaseRoleInterface, EntityInterface
 {
     /**
-     * @return int
+     * @param string $role
      */
-    public function getId();
-
-    /**
-     * @param string|null $role
-     */
-    public function setRole($role);
+    public function setRole(string $role);
 
     /**
      * @return string
      */
-    public function getName();
+    public function getName() : string;
 
     /**
      * @param string $name
      */
-    public function setName($name);
+    public function setName(string $name);
 
     /**
      * @param Collection $users
@@ -50,5 +46,5 @@ interface RoleInterface extends BaseRoleInterface
     /**
      * @return Collection
      */
-    public function getUsers();
+    public function getUsers() : Collection;
 }

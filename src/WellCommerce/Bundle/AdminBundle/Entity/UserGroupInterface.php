@@ -14,38 +14,34 @@ namespace WellCommerce\Bundle\AdminBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 
 /**
  * Interface UserGroupInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface UserGroupInterface extends BlameableInterface
+interface UserGroupInterface extends EntityInterface, BlameableInterface
 {
-    /**
-     * @return int
-     */
-    public function getId();
-
     /**
      * @return string
      */
-    public function getName();
+    public function getName() : string;
 
     /**
      * @param string $name
      */
-    public function setName($name);
+    public function setName(string $name);
 
     /**
      * @return Collection
      */
-    public function getUsers();
+    public function getUsers() : Collection;
 
     /**
      * @return Collection
      */
-    public function getPermissions();
+    public function getPermissions() : Collection;
 
     /**
      * @param Collection $permissions

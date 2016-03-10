@@ -14,21 +14,17 @@ namespace WellCommerce\Bundle\AdminBundle\Entity;
 
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use WellCommerce\Bundle\DoctrineBundle\Behaviours\Enableable\EnableableTrait;
+use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
 
 /**
  * Class UserGroupPermission
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class UserGroupPermission
+class UserGroupPermission extends AbstractEntity implements UserGroupPermissionInterface
 {
     use Timestampable;
     use EnableableTrait;
-
-    /**
-     * @var int
-     */
-    protected $id;
 
     /**
      * @var UserGroupInterface
@@ -43,21 +39,13 @@ class UserGroupPermission
     /**
      * {@inheritdoc}
      */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @return UserGroupInterface
-     */
-    public function getGroup()
+    public function getGroup() : UserGroupInterface
     {
         return $this->group;
     }
 
     /**
-     * @param UserGroupInterface $group
+     * {@inheritdoc}
      */
     public function setGroup(UserGroupInterface $group)
     {
@@ -65,17 +53,17 @@ class UserGroupPermission
     }
 
     /**
-     * @return int
+     * {@inheritdoc}
      */
-    public function getName()
+    public function getName() : string
     {
         return $this->name;
     }
 
     /**
-     * @param string $name
+     * {@inheritdoc}
      */
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = $name;
     }

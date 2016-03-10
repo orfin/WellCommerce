@@ -27,7 +27,7 @@ trait EnableableTrait
     /**
      * @return bool
      */
-    public function getEnabled()
+    public function getEnabled() : bool
     {
         return $this->enabled;
     }
@@ -35,8 +35,8 @@ trait EnableableTrait
     /**
      * @param bool $enabled
      */
-    public function setEnabled($enabled)
+    public function setEnabled(bool $enabled)
     {
-        $this->enabled = (bool)$enabled;
+        $this->enabled = $enabled;
     }
 }

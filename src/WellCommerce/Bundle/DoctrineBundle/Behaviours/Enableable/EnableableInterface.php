@@ -10,33 +10,22 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Entity;
+namespace WellCommerce\Bundle\DoctrineBundle\Behaviours\Enableable;
 
 /**
- * Class HierarchyAwareTrait
+ * Interface EnableableInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-trait HierarchyAwareTrait
+interface EnableableInterface
 {
     /**
-     * @var int
+     * @return bool
      */
-    protected $hierarchy;
+    public function getEnabled() : bool;
 
     /**
-     * @return int
+     * @param bool $enabled
      */
-    public function getHierarchy() : int
-    {
-        return $this->hierarchy;
-    }
-
-    /**
-     * @param int $hierarchy
-     */
-    public function setHierarchy(int $hierarchy)
-    {
-        $this->hierarchy = $hierarchy;
-    }
+    public function setEnabled(bool $enabled);
 }

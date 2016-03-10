@@ -10,33 +10,25 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AppBundle\Entity;
+namespace WellCommerce\Bundle\DoctrineBundle\Entity;
 
 /**
- * Class HierarchyAwareTrait
+ * Class AbstractEntity
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-trait HierarchyAwareTrait
+abstract class AbstractEntity
 {
     /**
      * @var int
      */
-    protected $hierarchy;
+    protected $id;
 
     /**
      * @return int
      */
-    public function getHierarchy() : int
+    public function getId() : int
     {
-        return $this->hierarchy;
-    }
-
-    /**
-     * @param int $hierarchy
-     */
-    public function setHierarchy(int $hierarchy)
-    {
-        $this->hierarchy = $hierarchy;
+        return $this->id;
     }
 }
