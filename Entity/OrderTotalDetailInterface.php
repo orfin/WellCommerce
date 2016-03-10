@@ -2,28 +2,16 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Entity;
 
+use WellCommerce\Bundle\AppBundle\Entity\HierarchyAwareInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
+
 /**
  * Class OrderTotalDetailInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface OrderTotalDetailInterface extends OrderAwareInterface
+interface OrderTotalDetailInterface extends OrderAwareInterface, HierarchyAwareInterface, EntityInterface
 {
-    /**
-     * @return int
-     */
-    public function getId();
-
-    /**
-     * @return int
-     */
-    public function getHierarchy();
-
-    /**
-     * @param int $hierarchy
-     */
-    public function setHierarchy($hierarchy);
-
     /**
      * @return string
      */
