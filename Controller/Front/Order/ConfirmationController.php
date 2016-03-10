@@ -12,8 +12,10 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Controller\Front\Order;
 
+use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\CoreBundle\Service\Breadcrumb\BreadcrumbItem;
+use WellCommerce\Bundle\OrderBundle\Manager\Front\OrderManager;
 
 /**
  * Class ConfirmationController
@@ -22,7 +24,7 @@ use WellCommerce\Bundle\CoreBundle\Service\Breadcrumb\BreadcrumbItem;
  */
 class ConfirmationController extends AbstractFrontController
 {
-    public function indexAction()
+    public function indexAction() : Response
     {
         $cart = $this->manager->getCartContext()->getCurrentCart();
 
@@ -58,10 +60,7 @@ class ConfirmationController extends AbstractFrontController
         ]);
     }
 
-    /**
-     * @return \WellCommerce\Bundle\OrderBundle\Manager\Front\OrderManager
-     */
-    protected function getOrderManager()
+    protected function getOrderManager() : OrderManager
     {
         return $this->get('order.manager.front');
     }
