@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\ProducerBundle\Controller\Box;
 
+use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 
 /**
@@ -24,7 +25,7 @@ class ProducerMenuBoxController extends AbstractBoxController
     /**
      * {@inheritdoc}
      */
-    public function indexAction()
+    public function indexAction() : Response
     {
         $producers = $this->get('producer.dataset.front')->getResult('array');
 
