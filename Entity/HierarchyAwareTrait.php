@@ -27,7 +27,7 @@ trait HierarchyAwareTrait
     /**
      * @return int
      */
-    public function getHierarchy()
+    public function getHierarchy() : int
     {
         return $this->hierarchy;
     }
@@ -35,8 +35,8 @@ trait HierarchyAwareTrait
     /**
      * @param int $hierarchy
      */
-    public function setHierarchy($hierarchy)
+    public function setHierarchy(int $hierarchy)
     {
-        $this->hierarchy = (int)$hierarchy;
+        $this->hierarchy = $hierarchy;
     }
 }

@@ -22,10 +22,10 @@ interface HierarchyAwareInterface
     /**
      * @param int $hierarchy
      */
-    public function setHierarchy($hierarchy);
+    public function setHierarchy(int $hierarchy);
 
     /**
      * @return int
      */
-    public function getHierarchy();
+    public function getHierarchy() : int;
 }
