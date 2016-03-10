@@ -14,7 +14,9 @@ namespace WellCommerce\Bundle\CategoryBundle\Controller\Admin;
 
 use Doctrine\Common\Collections\Criteria;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
+use WellCommerce\Component\Form\Elements\FormInterface;
 
 /**
  * Class CategoryController
@@ -28,12 +30,7 @@ class CategoryController extends AbstractAdminController
      */
     protected $manager;
 
-    /**
-     * List categories action
-     *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     */
-    public function indexAction()
+    public function indexAction() : Response
     {
         $categories = $this->manager->getRepository()->matching(new Criteria());
         $tree       = $this->buildTreeForm();
@@ -51,14 +48,7 @@ class CategoryController extends AbstractAdminController
         ]);
     }
 
-    /**
-     * Add category action
-     *
-     * @param Request $request
-     *
-     * @return \Symfony\Component\HttpFoundation\JsonResponse
-     */
-    public function addAction(Request $request)
+    public function addAction(Request $request) : Response
     {
         if (!$request->isXmlHttpRequest()) {
             return $this->redirectToAction('index');
@@ -73,14 +63,7 @@ class CategoryController extends AbstractAdminController
         ]);
     }
 
-    /**
-     * Edit category action
-     *
-     * @param Request $request
-     *
-     * @return \Symfony\Component\HttpFoundation\JsonResponse|\Symfony\Component\HttpFoundation\Response
-     */
-    public function editAction(Request $request)
+    public function editAction(Request $request) : Response
     {
         $resource = $this->manager->findResource($request);
         $form     = $this->manager->getForm($resource);
@@ -100,12 +83,7 @@ class CategoryController extends AbstractAdminController
         ]);
     }
 
-    /**
-     * Builds nested tree form
-     *
-     * @return \WellCommerce\Component\Form\Elements\FormInterface
-     */
-    protected function buildTreeForm()
+    protected function buildTreeForm() : FormInterface
     {
         return $this->get('category_tree.form_builder.admin')->createForm([
             'name'  => 'category_tree',

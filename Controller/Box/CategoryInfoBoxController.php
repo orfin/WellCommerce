@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CategoryBundle\Controller\Box;
 
+use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 
 /**
@@ -21,7 +22,7 @@ use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
  */
 class CategoryInfoBoxController extends AbstractBoxController
 {
-    public function indexAction()
+    public function indexAction() : Response
     {
         return $this->displayTemplate('index', [
             'category' => $this->manager->getCategoryContext()->getCurrentCategory()
