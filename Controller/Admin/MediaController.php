@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\MediaBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 use WellCommerce\Bundle\MediaBundle\Exception\InvalidMediaException;
 
@@ -29,14 +30,7 @@ class MediaController extends AbstractAdminController
      */
     protected $manager;
 
-    /**
-     * Uploads and saves the file
-     *
-     * @param Request $request
-     *
-     * @return array|JsonResponse
-     */
-    public function addAction(Request $request)
+    public function addAction(Request $request) : Response
     {
         $file   = $request->files->get('file');
         $helper = $this->manager->getImageHelper();
