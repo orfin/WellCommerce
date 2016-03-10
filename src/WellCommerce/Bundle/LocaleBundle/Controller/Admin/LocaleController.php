@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\LocaleBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 
 /**
@@ -26,13 +27,10 @@ class LocaleController extends AbstractAdminController
     {
     }
 
-    /**
-     * @param int $id
-     *
-     * @return \Symfony\Component\HttpFoundation\JsonResponse
-     */
-    public function deleteAction($id)
+    public function deleteAction(int $id) : Response
     {
-        return $this->jsonResponse(['error' => 'You can delete a locale only by using "wellcommerce:locale:delete" console command.']);
+        return $this->jsonResponse([
+            'error' => 'You can delete a locale only by using "wellcommerce:locale:delete" console command.'
+        ]);
     }
 }

@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\OrderBundle\Controller\Front\Order;
 
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\CoreBundle\Service\Breadcrumb\BreadcrumbItem;
 
@@ -29,10 +30,7 @@ class AddressController extends AbstractFrontController
      */
     protected $manager;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function indexAction(Request $request)
+    public function indexAction(Request $request) : Response
     {
         $cart = $this->manager->getCartContext()->getCurrentCart();
         $this->manager->setAddresses();
@@ -71,7 +69,7 @@ class AddressController extends AbstractFrontController
         ]);
     }
 
-    protected function getValidationGroups(Request $request)
+    protected function getValidationGroups(Request $request) : array
     {
         $validationGroups = ['order_address'];
         if ($request->isMethod('POST') && 0 === (int)$request->request->filter('copyAddress')) {

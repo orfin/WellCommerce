@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CouponBundle\Controller\Front;
 
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\CouponBundle\Entity\CouponInterface;
@@ -29,14 +30,7 @@ class CouponController extends AbstractFrontController
      */
     protected $manager;
 
-    /**
-     * Adds a coupon to cart
-     *
-     * @param CouponInterface|null $coupon
-     *
-     * @return \Symfony\Component\HttpFoundation\JsonResponse
-     */
-    public function addAction(CouponInterface $coupon = null)
+    public function addAction(CouponInterface $coupon = null) : JsonResponse
     {
         try {
             $this->manager->useCoupon($coupon);
@@ -54,10 +48,7 @@ class CouponController extends AbstractFrontController
         return $this->jsonResponse($result);
     }
 
-    /**
-     * @return \Symfony\Component\HttpFoundation\JsonResponse
-     */
-    public function deleteAction(Request $request)
+    public function deleteAction(Request $request) : JsonResponse
     {
         if (!$request->isXmlHttpRequest()) {
             return $this->redirectToRoute('cart.front.index');

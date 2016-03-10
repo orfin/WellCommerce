@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\ReportBundle\Controller\Admin;
 
 use Carbon\Carbon;
 use DateInterval;
+use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 use WellCommerce\Bundle\ReportBundle\Calculator\SalesSummaryCalculator;
 use WellCommerce\Bundle\ReportBundle\Configuration\ReportConfiguration;
@@ -26,22 +27,18 @@ use WellCommerce\Bundle\ReportBundle\Context\LineChartContext;
  */
 class SalesReportController extends AbstractAdminController
 {
-    public function indexAction()
+    public function indexAction() : Response
     {
         $salesSummary = $this->getSalesSummary();
 
         return $this->displayTemplate('index', [
-                'salesChart'   => $this->getSalesChart(),
-                'salesSummary' => $salesSummary->getSummary(),
-                'currency'     => $this->getRequestHelper()->getCurrentCurrency()
-            ]
-        );
+            'salesChart'   => $this->getSalesChart(),
+            'salesSummary' => $salesSummary->getSummary(),
+            'currency'     => $this->getRequestHelper()->getCurrentCurrency()
+        ]);
     }
 
-    /**
-     * @return LineChartContext
-     */
-    protected function getSalesChart()
+    protected function getSalesChart() : LineChartContext
     {
         $startDate     = Carbon::now()->startOfMonth();
         $endDate       = Carbon::now()->endOfMonth();
@@ -52,7 +49,7 @@ class SalesReportController extends AbstractAdminController
         return new LineChartContext($report, $configuration);
     }
 
-    protected function getSalesSummary()
+    protected function getSalesSummary() : SalesSummaryCalculator
     {
         $startDate     = Carbon::now()->startOfMonth();
         $endDate       = Carbon::now()->endOfMonth();

@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\SearchBundle\Controller\Box;
 
+use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 use WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxSettingsCollection;
 use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
@@ -31,14 +32,12 @@ class SearchBoxController extends AbstractBoxController
     /**
      * {@inheritdoc}
      */
-    public function indexAction(LayoutBoxSettingsCollection $boxSettings)
+    public function indexAction(LayoutBoxSettingsCollection $boxSettings) : Response
     {
         $dataset       = $this->get('search.dataset.front');
-        $conditions    = new ConditionsCollection();
+        $conditions    = $this->getConditions();
         $requestHelper = $this->getRequestHelper();
         $limit         = $this->manager->getRequestHelper()->getAttributesBagParam('limit', $boxSettings->getParam('per_page', 12));
-        $conditions    = $this->manager->addSearchConditions($conditions);
-        $conditions    = $this->get('layered_navigation.helper')->addLayeredNavigationConditions($conditions);
 
         $products = $dataset->getResult('array', [
             'limit'      => $limit,
@@ -51,5 +50,14 @@ class SearchBoxController extends AbstractBoxController
         return $this->displayTemplate('index', [
             'dataset' => $products,
         ]);
+    }
+
+    protected function getConditions() : ConditionsCollection
+    {
+        $conditions = new ConditionsCollection();
+        $conditions = $this->manager->addSearchConditions($conditions);
+        $conditions = $this->get('layered_navigation.helper')->addLayeredNavigationConditions($conditions);
+
+        return $conditions;
     }
 }

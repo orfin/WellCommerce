@@ -12,8 +12,10 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\Controller\Front;
 
+use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
+use WellCommerce\Bundle\PaymentBundle\Processor\PaymentMethodProcessorInterface;
 
 /**
  * Class PaymentController
@@ -27,7 +29,7 @@ class PaymentController extends AbstractFrontController
      */
     protected $manager;
 
-    public function indexAction()
+    public function indexAction() : Response
     {
         try {
             $order = $this->manager->findOrder();
@@ -45,12 +47,7 @@ class PaymentController extends AbstractFrontController
         ]);
     }
 
-    /**
-     * @param OrderInterface $order
-     *
-     * @return \WellCommerce\Bundle\PaymentBundle\Processor\PaymentMethodProcessorInterface
-     */
-    protected function getProcessor(OrderInterface $order)
+    protected function getProcessor(OrderInterface $order) : PaymentMethodProcessorInterface
     {
         $orderProcessor = $order->getPaymentMethod()->getProcessor();
         $processors     = $this->get('payment_method.processor.collection');

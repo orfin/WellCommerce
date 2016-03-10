@@ -30,7 +30,7 @@ abstract class AbstractController extends AbstractContainerAware implements Cont
      *
      * @return JsonResponse
      */
-    protected function jsonResponse(array $content)
+    protected function jsonResponse(array $content) : JsonResponse
     {
         return new JsonResponse($content);
     }
@@ -43,7 +43,7 @@ abstract class AbstractController extends AbstractContainerAware implements Cont
      *
      * @return RedirectResponse
      */
-    protected function redirectResponse($url, $status = RedirectResponse::HTTP_FOUND)
+    protected function redirectResponse(string $url, int $status = RedirectResponse::HTTP_FOUND) : RedirectResponse
     {
         return new RedirectResponse($url, $status);
     }
@@ -56,7 +56,7 @@ abstract class AbstractController extends AbstractContainerAware implements Cont
      *
      * @return RedirectResponse
      */
-    protected function redirectToAction($actionName = 'index', array $params = [])
+    protected function redirectToAction(string $actionName = 'index', array $params = []) : RedirectResponse
     {
         $url = $this->getRedirectToActionUrl($actionName, $params);
 
@@ -71,7 +71,7 @@ abstract class AbstractController extends AbstractContainerAware implements Cont
      *
      * @return RedirectResponse
      */
-    protected function redirectToRoute($routeName, array $routeParams = [])
+    protected function redirectToRoute(string $routeName, array $routeParams = []) : RedirectResponse
     {
         $url = $this->getRouterHelper()->generateUrl($routeName, $routeParams);
 
@@ -86,7 +86,7 @@ abstract class AbstractController extends AbstractContainerAware implements Cont
      *
      * @return string
      */
-    protected function getRedirectToActionUrl($actionName = 'index', array $params = [])
+    protected function getRedirectToActionUrl(string $actionName = 'index', array $params = []) : string
     {
         return $this->getRouterHelper()->getRedirectToActionUrl($actionName, $params);
     }
@@ -99,7 +99,7 @@ abstract class AbstractController extends AbstractContainerAware implements Cont
      *
      * @return string The rendered view
      */
-    protected function renderView($view, array $parameters = [])
+    protected function renderView(string $view, array $parameters = []) : string
     {
         return $this->getTemplatingHelper()->render($view, $parameters);
     }
@@ -112,7 +112,7 @@ abstract class AbstractController extends AbstractContainerAware implements Cont
      *
      * @return Response
      */
-    protected function displayTemplate($templateName, array $templateVars = [])
+    protected function displayTemplate(string $templateName, array $templateVars = []) : Response
     {
         return $this->getTemplatingHelper()->renderControllerResponse($this, $templateName, $templateVars);
     }

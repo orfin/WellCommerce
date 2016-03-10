@@ -12,6 +12,8 @@
 
 namespace WellCommerce\Bundle\ProductBundle\Controller\Front;
 
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\CoreBundle\Service\Breadcrumb\BreadcrumbItem;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
@@ -23,7 +25,7 @@ use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
  */
 class ProductController extends AbstractFrontController
 {
-    public function indexAction(ProductInterface $product)
+    public function indexAction(ProductInterface $product) : Response
     {
         $this->addBreadCrumbItem(new BreadcrumbItem([
             'name' => $product->translate()->getName(),
@@ -36,7 +38,7 @@ class ProductController extends AbstractFrontController
         ]);
     }
 
-    public function viewAction(ProductInterface $product)
+    public function viewAction(ProductInterface $product) : JsonResponse
     {
         $this->manager->getProductContext()->setCurrentProduct($product);
 

@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\ProductStatusBundle\Controller\Box;
 
+use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 use WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxSettingsCollection;
 
@@ -23,14 +24,11 @@ use WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxSettingsCollection;
 class ProductShowcaseBoxController extends AbstractBoxController
 {
     /**
-     * @var \WellCommerce\Bundle\AppBundle\Manager\Front\ProductStatusManager
+     * @var \WellCommerce\Bundle\ProductStatusBundle\Manager\Front\ProductStatusManager
      */
     protected $manager;
     
-    /**
-     * {@inheritdoc}
-     */
-    public function indexAction(LayoutBoxSettingsCollection $boxSettings)
+    public function indexAction(LayoutBoxSettingsCollection $boxSettings) : Response
     {
         $categories = $this->get('category.dataset.front')->getResult('array', [
             'limit'     => 5,

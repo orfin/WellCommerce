@@ -19,5 +19,4 @@ namespace WellCommerce\Bundle\CoreBundle\Controller;
  */
 interface ControllerInterface
 {
-
 }

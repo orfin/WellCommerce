@@ -12,6 +12,7 @@
 namespace WellCommerce\Bundle\CoreBundle\Controller\Front;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use WellCommerce\Bundle\CoreBundle\Controller\AbstractController;
 use WellCommerce\Bundle\CoreBundle\Manager\Front\FrontManagerInterface;
@@ -37,6 +38,11 @@ abstract class AbstractFrontController extends AbstractController implements Fro
     public function __construct(FrontManagerInterface $manager)
     {
         $this->manager = $manager;
+    }
+
+    public function indexAction() : Response
+    {
+        return $this->displayTemplate('index');
     }
 
     /**

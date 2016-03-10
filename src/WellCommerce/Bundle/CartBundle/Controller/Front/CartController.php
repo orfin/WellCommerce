@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CartBundle\Controller\Front;
 
+use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CartBundle\Entity\CartProductInterface;
 use WellCommerce\Bundle\CartBundle\Exception\AddCartItemException;
 use WellCommerce\Bundle\CartBundle\Exception\DeleteCartItemException;
@@ -32,10 +33,7 @@ class CartController extends AbstractFrontController
      */
     protected $manager;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function indexAction()
+    public function indexAction() : Response
     {
         $this->addBreadCrumbItem(new BreadcrumbItem([
             'name' => $this->trans('cart.heading.index')
@@ -66,16 +64,7 @@ class CartController extends AbstractFrontController
         ]);
     }
 
-    /**
-     * Adds item to cart or redirects to quick-view
-     *
-     * @param ProductInterface               $product
-     * @param ProductAttributeInterface|null $attribute
-     * @param int                            $quantity
-     *
-     * @return \Symfony\Component\HttpFoundation\JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function addAction(ProductInterface $product, ProductAttributeInterface $attribute = null, $quantity = 1)
+    public function addAction(ProductInterface $product, ProductAttributeInterface $attribute = null, int $quantity = 1) : Response
     {
         if ($product->getAttributes()->count() && !$product->getAttributes()->contains($attribute)) {
             return $this->redirectToRoute('front.product.view', ['id' => $product->getId()]);
@@ -106,7 +95,7 @@ class CartController extends AbstractFrontController
         ]);
     }
 
-    public function editAction(CartProductInterface $cartProduct, $quantity)
+    public function editAction(CartProductInterface $cartProduct, int $quantity) : Response
     {
         $message = null;
 
@@ -124,7 +113,7 @@ class CartController extends AbstractFrontController
         ]);
     }
 
-    public function deleteAction(CartProductInterface $cartProduct)
+    public function deleteAction(CartProductInterface $cartProduct) : Response
     {
         try {
             $this->manager->deleteCartProduct($cartProduct);

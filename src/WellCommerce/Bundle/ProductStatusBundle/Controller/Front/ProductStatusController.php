@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\ProductStatusBundle\Controller\Front;
 
+use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\CoreBundle\Service\Breadcrumb\BreadcrumbItem;
 use WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusInterface;
@@ -23,10 +24,7 @@ use WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusInterface;
  */
 class ProductStatusController extends AbstractFrontController
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function indexAction(ProductStatusInterface $productStatus)
+    public function indexAction(ProductStatusInterface $productStatus) : Response
     {
         $this->addBreadCrumbItem(new BreadcrumbItem([
             'name' => $productStatus->translate()->getName(),

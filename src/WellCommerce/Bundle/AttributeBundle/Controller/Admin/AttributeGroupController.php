@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\AttributeBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 
 /**
@@ -27,10 +28,7 @@ class AttributeGroupController extends AbstractAdminController
      */
     protected $manager;
     
-    /**
-     * {@inheritdoc}
-     */
-    public function indexAction()
+    public function indexAction() : Response
     {
         $groups = $this->manager->getGroupsCollection();
 
@@ -47,10 +45,7 @@ class AttributeGroupController extends AbstractAdminController
         ]);
     }
     
-    /**
-     * {@inheritdoc}
-     */
-    public function addAction(Request $request)
+    public function addAction(Request $request) : Response
     {
         if (!$request->isXmlHttpRequest()) {
             return $this->redirectToAction('index');
@@ -64,10 +59,7 @@ class AttributeGroupController extends AbstractAdminController
         ]);
     }
     
-    /**
-     * {@inheritdoc}
-     */
-    public function editAction(Request $request)
+    public function editAction(Request $request) : Response
     {
         $resource = $this->manager->findResource($request);
         if (null === $resource) {
@@ -94,14 +86,7 @@ class AttributeGroupController extends AbstractAdminController
         ]);
     }
     
-    /**
-     * Returns all attribute groups as json
-     *
-     * @param Request $request
-     *
-     * @return \Symfony\Component\HttpFoundation\JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function ajaxIndexAction(Request $request)
+    public function ajaxIndexAction(Request $request) : Response
     {
         if (!$request->isXmlHttpRequest()) {
             return $this->redirectToAction('index');

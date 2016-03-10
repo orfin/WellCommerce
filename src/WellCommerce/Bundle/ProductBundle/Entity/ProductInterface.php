@@ -216,5 +216,5 @@ interface ProductInterface extends
     /**
      * @return Collection
      */
-    public function getReviews();
+    public function getReviews() : Collection;
 }

@@ -12,7 +12,17 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Manager\Front;
 
+use WellCommerce\Bundle\CartBundle\Context\Front\CartContextInterface;
+use WellCommerce\Bundle\CategoryBundle\Context\Front\CategoryContextInterface;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
+use WellCommerce\Bundle\ContactBundle\Context\Front\ContactContextInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface;
+use WellCommerce\Bundle\NewsBundle\Context\Front\NewsContextInterface;
+use WellCommerce\Bundle\PageBundle\Context\Front\PageContextInterface;
+use WellCommerce\Bundle\ProducerBundle\Context\Front\ProducerContextInterface;
+use WellCommerce\Bundle\ProductBundle\Context\Front\ProductContextInterface;
+use WellCommerce\Bundle\ProductStatusBundle\Context\Front\ProductStatusContextInterface;
+use WellCommerce\Bundle\ThemeBundle\Context\Front\ThemeContextInterface;
 
 /**
  * Interface FrontManagerInterface
@@ -22,52 +32,52 @@ use WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface;
 interface FrontManagerInterface extends ManagerInterface
 {
     /**
-     * @return \WellCommerce\Bundle\CartBundle\Context\Front\CartContextInterface
+     * @return CartContextInterface
      */
-    public function getCartContext();
+    public function getCartContext() : CartContextInterface;
 
     /**
-     * @return \WellCommerce\Bundle\AppBundle\Context\Front\CategoryContextInterface
+     * @return CategoryContextInterface
      */
-    public function getCategoryContext();
+    public function getCategoryContext() : CategoryContextInterface;
 
     /**
-     * @return \WellCommerce\Bundle\AppBundle\Context\Front\ContactContextInterface
+     * @return ContactContextInterface
      */
-    public function getContactContext();
+    public function getContactContext() : ContactContextInterface;
 
     /**
-     * @return \WellCommerce\Bundle\AppBundle\Context\Front\NewsContextInterface
+     * @return NewsContextInterface
      */
-    public function getNewsContext();
+    public function getNewsContext() : NewsContextInterface;
 
     /**
-     * @return \WellCommerce\Bundle\AppBundle\Context\Front\PageContextInterface
+     * @return PageContextInterface
      */
-    public function getPageContext();
+    public function getPageContext() : PageContextInterface;
 
     /**
-     * @return \WellCommerce\Bundle\AppBundle\Context\Front\ProductContextInterface
+     * @return ProductContextInterface
      */
-    public function getProductContext();
+    public function getProductContext() : ProductContextInterface;
 
     /**
-     * @return \WellCommerce\Bundle\AppBundle\Context\Front\ProductStatusContextInterface
+     * @return ProductStatusContextInterface
      */
-    public function getProductStatusContext();
+    public function getProductStatusContext() : ProductStatusContextInterface;
 
     /**
-     * @return \WellCommerce\Bundle\AppBundle\Context\Front\ProducerContextInterface
+     * @return ProducerContextInterface
      */
-    public function getProducerContext();
+    public function getProducerContext() : ProducerContextInterface;
 
     /**
-     * @return \WellCommerce\Bundle\AppBundle\Context\Front\ThemeContextInterface
+     * @return ThemeContextInterface
      */
-    public function getThemeContext();
+    public function getThemeContext() : ThemeContextInterface;
 
     /**
-     * @return null|\WellCommerce\Bundle\ClientBundle\Entity\ClientInterface
+     * @return ClientInterface
      */
-    public function getClient();
+    public function getClient() : ClientInterface;
 }

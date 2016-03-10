@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\PageBundle\Controller\Front;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\CoreBundle\Service\Breadcrumb\BreadcrumbItem;
 
@@ -26,7 +27,7 @@ class PageController extends AbstractFrontController
     /**
      * {@inheritdoc}
      */
-    public function indexAction(Request $request)
+    public function indexAction(Request $request) : Response
     {
         $page = $this->findOr404($request);
 
