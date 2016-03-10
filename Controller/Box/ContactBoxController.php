@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\ContactBundle\Controller\Box;
 
+use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 
 /**
@@ -21,8 +22,4 @@ use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
  */
 class ContactBoxController extends AbstractBoxController
 {
-    public function indexAction()
-    {
-        return $this->displayTemplate('index');
-    }
 }
