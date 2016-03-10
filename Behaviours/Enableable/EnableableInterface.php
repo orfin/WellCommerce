@@ -1,11 +1,11 @@
 <?php
 /*
  * WellCommerce Open-Source E-Commerce Platform
- *
+ * 
  * This file is part of the WellCommerce package.
  *
  * (c) Adam Piotrowski <adam@wellcommerce.org>
- *
+ * 
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
@@ -13,30 +13,19 @@
 namespace WellCommerce\Bundle\DoctrineBundle\Behaviours\Enableable;
 
 /**
- * Class EnableableTrait
+ * Interface EnableableInterface
  *
- * @author Adam Piotrowski <adam@wellcommerce.org>
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-trait EnableableTrait
+interface EnableableInterface
 {
-    /**
-     * @var bool
-     */
-    protected $enabled;
-
     /**
      * @return bool
      */
-    public function getEnabled() : bool
-    {
-        return $this->enabled;
-    }
+    public function getEnabled() : bool;
 
     /**
      * @param bool $enabled
      */
-    public function setEnabled(bool $enabled)
-    {
-        $this->enabled = $enabled;
-    }
+    public function setEnabled(bool $enabled);
 }
