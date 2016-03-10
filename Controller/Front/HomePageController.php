@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\AppBundle\Controller\Front;
 
+use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\AbstractController;
 
 /**
@@ -21,7 +22,7 @@ use WellCommerce\Bundle\CoreBundle\Controller\AbstractController;
  */
 class HomePageController extends AbstractController
 {
-    public function indexAction()
+    public function indexAction() : Response
     {
         return $this->displayTemplate('index');
     }
