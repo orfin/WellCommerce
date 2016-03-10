@@ -27,11 +27,6 @@ class WishlistController extends AbstractFrontController
      */
     protected $manager;
 
-    public function indexAction()
-    {
-        return $this->displayTemplate('index');
-    }
-
     public function addAction(ProductInterface $product)
     {
         $this->manager->addProductToWishlist($product);

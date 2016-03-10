@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\WishlistBundle\Controller\Box;
 
+use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 use WellCommerce\Bundle\WishlistBundle\Entity\WishlistInterface;
 use WellCommerce\Component\DataSet\Conditions\Condition\In;
@@ -24,7 +25,7 @@ use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
  */
 class WishlistBoxController extends AbstractBoxController
 {
-    public function indexAction()
+    public function indexAction() : Response
     {
         $dataset = $this->get('product.dataset.front')->getResult('array', [
             'order_by'   => 'name',
@@ -37,16 +38,13 @@ class WishlistBoxController extends AbstractBoxController
         ]);
     }
 
-    /**
-     * @return ConditionsCollection
-     */
-    protected function getConditions()
+    protected function getConditions() : ConditionsCollection
     {
         $wishlist   = $this->manager->getClient()->getWishlist();
         $productIds = [];
 
-        $wishlist->map(function (WishlistInterface $Wishlist) use (&$productIds) {
-            $productIds[] = $Wishlist->getProduct()->getId();
+        $wishlist->map(function (WishlistInterface $wishlist) use (&$productIds) {
+            $productIds[] = $wishlist->getProduct()->getId();
         });
 
         $conditions = new ConditionsCollection();
