@@ -13,6 +13,7 @@ namespace WellCommerce\Bundle\CoreBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\AbstractController;
 use WellCommerce\Bundle\CoreBundle\Manager\Admin\AdminManagerInterface;
 use WellCommerce\Component\Form\Elements\FormInterface;
@@ -39,26 +40,14 @@ abstract class AbstractAdminController extends AbstractController implements Adm
         $this->manager = $manager;
     }
 
-    /**
-     * Controller index action
-     *
-     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function indexAction()
+    public function indexAction() : Response
     {
         return $this->displayTemplate('index', [
             'datagrid' => $this->manager->getDataGrid()->getInstance()
         ]);
     }
 
-    /**
-     * Default DataGrid view action
-     *
-     * @param Request $request
-     *
-     * @return JsonResponse
-     */
-    public function gridAction(Request $request)
+    public function gridAction(Request $request) : JsonResponse
     {
         if (!$request->isXmlHttpRequest()) {
             return $this->getRouterHelper()->redirectToAction('index');
@@ -75,14 +64,7 @@ abstract class AbstractAdminController extends AbstractController implements Adm
         return $this->jsonResponse($results);
     }
 
-    /**
-     * Default add action
-     *
-     * @param Request $request
-     *
-     * @return JsonResponse|\Symfony\Component\HttpFoundation\Response
-     */
-    public function addAction(Request $request)
+    public function addAction(Request $request) : Response
     {
         $resource = $this->manager->initResource();
         $form     = $this->manager->getForm($resource);
@@ -100,14 +82,7 @@ abstract class AbstractAdminController extends AbstractController implements Adm
         ]);
     }
 
-    /**
-     * Default edit action
-     *
-     * @param Request $request
-     *
-     * @return array|JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     */
-    public function editAction(Request $request)
+    public function editAction(Request $request) : Response
     {
         $resource = $this->manager->findResource($request);
         if (null === $resource) {
@@ -130,14 +105,7 @@ abstract class AbstractAdminController extends AbstractController implements Adm
         ]);
     }
 
-    /**
-     * Default delete action
-     *
-     * @param int $id
-     *
-     * @return JsonResponse
-     */
-    public function deleteAction($id)
+    public function deleteAction(int $id) : Response
     {
         $this->getDoctrineHelper()->disableFilter('locale');
 
@@ -151,14 +119,7 @@ abstract class AbstractAdminController extends AbstractController implements Adm
         return $this->jsonResponse(['success' => true]);
     }
 
-    /**
-     * Creates default response for form instance
-     *
-     * @param FormInterface $form
-     *
-     * @return JsonResponse
-     */
-    protected function createFormDefaultJsonResponse(FormInterface $form)
+    protected function createFormDefaultJsonResponse(FormInterface $form) : JsonResponse
     {
         return $this->jsonResponse([
             'valid'      => $form->isValid(),
