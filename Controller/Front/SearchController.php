@@ -12,6 +12,8 @@
 
 namespace WellCommerce\Bundle\SearchBundle\Controller\Front;
 
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\CoreBundle\Service\Breadcrumb\BreadcrumbItem;
 use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
@@ -28,10 +30,7 @@ class SearchController extends AbstractFrontController
      */
     protected $manager;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function indexAction()
+    public function indexAction() : Response
     {
         $requestHelper = $this->manager->getRequestHelper();
         $phrase        = $requestHelper->getAttributesBagParam('phrase');
@@ -49,7 +48,7 @@ class SearchController extends AbstractFrontController
         ]);
     }
 
-    public function viewAction()
+    public function viewAction() : JsonResponse
     {
         $requestHelper = $this->getRequestHelper();
         $phrase        = $requestHelper->getAttributesBagParam('phrase');
