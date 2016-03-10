@@ -12,20 +12,33 @@
 
 namespace WellCommerce\Bundle\AdminBundle\Entity;
 
+use WellCommerce\Bundle\DoctrineBundle\Behaviours\Enableable\EnableableInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
+
 /**
  * Class UserGroupPermission
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface UserGroupPermissionInterface
+interface UserGroupPermissionInterface extends EntityInterface, EnableableInterface
 {
     /**
-     * @return bool
+     * @return UserGroupInterface
      */
-    public function getEnabled();
+    public function getGroup() : UserGroupInterface;
 
     /**
-     * @param bool $enabled
+     * @param UserGroupInterface $group
      */
-    public function setEnabled($enabled);
+    public function setGroup(UserGroupInterface $group);
+
+    /**
+     * @return int
+     */
+    public function getName() : string;
+
+    /**
+     * @param string $name
+     */
+    public function setName(string $name);
 }

@@ -17,22 +17,18 @@ use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Symfony\Component\Security\Core\User\UserInterface as BaseUserInterface;
 use WellCommerce\Bundle\DoctrineBundle\Behaviours\Enableable\EnableableTrait;
+use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
 
 /**
  * Class User
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class User implements UserInterface
+class User extends AbstractEntity implements UserInterface
 {
     use Timestampable;
     use Blameable;
     use EnableableTrait;
-
-    /**
-     * @var int
-     */
-    protected $id;
 
     /**
      * @var string
@@ -82,15 +78,7 @@ class User implements UserInterface
     /**
      * {@inheritdoc}
      */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getFirstName()
+    public function getFirstName() : string
     {
         return $this->firstName;
     }
@@ -98,7 +86,7 @@ class User implements UserInterface
     /**
      * {@inheritdoc}
      */
-    public function setFirstName($firstName)
+    public function setFirstName(string $firstName)
     {
         $this->firstName = $firstName;
     }
@@ -106,7 +94,7 @@ class User implements UserInterface
     /**
      * {@inheritdoc}
      */
-    public function getLastName()
+    public function getLastName() : string
     {
         return $this->lastName;
     }
@@ -114,7 +102,7 @@ class User implements UserInterface
     /**
      * {@inheritdoc}
      */
-    public function setLastName($lastName)
+    public function setLastName(string $lastName)
     {
         $this->lastName = $lastName;
     }
@@ -138,7 +126,7 @@ class User implements UserInterface
     /**
      * {@inheritdoc}
      */
-    public function getEmail()
+    public function getEmail() : string
     {
         return $this->email;
     }
@@ -146,7 +134,7 @@ class User implements UserInterface
     /**
      * {@inheritdoc}
      */
-    public function setEmail($email)
+    public function setEmail(string $email)
     {
         $this->email = $email;
     }
@@ -255,7 +243,7 @@ class User implements UserInterface
     /**
      * {@inheritdoc}
      */
-    public function getGroups()
+    public function getGroups() : Collection
     {
         return $this->groups;
     }
@@ -271,7 +259,7 @@ class User implements UserInterface
     /**
      * {@inheritdoc}
      */
-    public function getApiKey()
+    public function getApiKey() : string
     {
         return $this->apiKey;
     }
@@ -279,7 +267,7 @@ class User implements UserInterface
     /**
      * {@inheritdoc}
      */
-    public function setApiKey($apiKey)
+    public function setApiKey(string $apiKey)
     {
         $this->apiKey = $apiKey;
     }
