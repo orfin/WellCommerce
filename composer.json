@@ -70,7 +70,7 @@
     },
     "scripts": {
         "pre-install-cmd": [
-            "WellCommerce\\Bundle\\AppBundle\\Composer\\HerokuEnvironment::populateEnvironment"
+            "WellCommerce\\Bundle\\DistributionBundle\\Composer\\HerokuEnvironment::populateEnvironment"
         ],
         "post-install-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
