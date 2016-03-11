@@ -41,14 +41,14 @@ interface DataGridInterface
      *
      * @return string
      */
-    public function getIdentifier();
+    public function getIdentifier() : string;
 
     /**
      * Returns current DataGrid instance
      *
      * @return DataGridInterface
      */
-    public function getInstance();
+    public function getInstance() : DataGridInterface;
 
     /**
      * Sets DataGrid columns
@@ -64,7 +64,7 @@ interface DataGridInterface
      *
      * @return ColumnCollection
      */
-    public function getColumns();
+    public function getColumns() : ColumnCollection;
 
     /**
      * Sets DataGrid options
@@ -80,7 +80,7 @@ interface DataGridInterface
      *
      * @return OptionsInterface
      */
-    public function getOptions();
+    public function getOptions() : OptionsInterface;
 
     /**
      * Forwards request to dataset and returns results
@@ -89,5 +89,5 @@ interface DataGridInterface
      *
      * @return array
      */
-    public function loadResults(Request $request);
+    public function loadResults(Request $request) : array;
 }
