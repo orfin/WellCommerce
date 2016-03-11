@@ -15,11 +15,11 @@ namespace WellCommerce\Bundle\CoreBundle\Test\Factory;
 use WellCommerce\Bundle\CoreBundle\Test\AbstractTestCase;
 
 /**
- * Class AbstractFactoryTestCase
+ * Class AbstractEntityFactoryTestCase
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractFactoryTestCase extends AbstractTestCase
+abstract class AbstractEntityFactoryTestCase extends AbstractTestCase
 {
     public function testImplementsProperInterface()
     {

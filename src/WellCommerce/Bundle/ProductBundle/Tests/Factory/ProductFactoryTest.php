@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\ProductBundle\Tests\Factory;
 
-use WellCommerce\Bundle\CoreBundle\Test\Factory\AbstractFactoryTestCase;
+use WellCommerce\Bundle\CoreBundle\Test\Factory\AbstractEntityFactoryTestCase;
 
 /**
  * Class ProductFactoryTest
