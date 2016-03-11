@@ -12,9 +12,11 @@
 
 namespace WellCommerce\Bundle\ClientBundle\Factory;
 
+use WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddress;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetails;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientDetails;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddress;
 use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 
 /**
@@ -44,6 +46,8 @@ class ClientFactory extends AbstractEntityFactory
         $client = $this->init();
         $client->setContactDetails(new ClientContactDetails());
         $client->setClientDetails($clientDetails);
+        $client->setBillingAddress(new ClientBillingAddress());
+        $client->setShippingAddress(new ClientShippingAddress());
 
         return $client;
     }
