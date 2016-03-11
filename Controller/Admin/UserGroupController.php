@@ -21,5 +21,4 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
  */
 class UserGroupController extends AbstractAdminController
 {
-
 }
