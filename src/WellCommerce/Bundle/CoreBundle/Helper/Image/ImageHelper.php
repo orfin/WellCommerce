@@ -39,7 +39,7 @@ class ImageHelper implements ImageHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function getImage($path, $filter, array $config = [])
+    public function getImage(string $path, string $filter, array $config = []) : string
     {
         return $this->manager->getBrowserPath($path, $filter, $config);
     }

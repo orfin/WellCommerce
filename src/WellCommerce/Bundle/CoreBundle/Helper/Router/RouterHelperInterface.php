@@ -12,7 +12,10 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Helper\Router;
 
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Routing\RequestContext;
+use WellCommerce\Bundle\CoreBundle\Controller\ControllerInterface;
 
 /**
  * Interface RouterHelperInterface
@@ -24,53 +27,53 @@ interface RouterHelperInterface
     /**
      * Checks whether controller action is callable
      *
-     * @param object $controller
-     * @param string $action
+     * @param ControllerInterface $controller
+     * @param string              $action
      *
      * @return bool
      */
-    public function hasControllerAction($controller, $action);
+    public function hasControllerAction(ControllerInterface $controller, string $action) : bool;
 
     /**
      * @return string
      */
-    public function getCurrentAction();
+    public function getCurrentAction() : string;
 
     /**
      * Returns the current request context
      *
-     * @return \Symfony\Component\Routing\RequestContext
+     * @return RequestContext
      */
-    public function getRouterRequestContext();
+    public function getRouterRequestContext() : RequestContext;
 
     /**
      * Redirects user to another resource
      *
-     * @param       $route
-     * @param array $routeParams
+     * @param string $route
+     * @param array  $routeParams
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
-    public function redirectTo($route, array $routeParams = []);
+    public function redirectTo(string $route, array $routeParams = []) : RedirectResponse;
 
     /**
      * Resolves current route and redirects user to given controller action
      *
-     * @param       $action
-     * @param array $params
+     * @param string $action
+     * @param array  $params
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
-    public function redirectToAction($action, array $params = []);
+    public function redirectToAction(string $action, array $params = []) : RedirectResponse;
 
     /**
      * Resolves route for given action
      *
-     * @param $action
+     * @param string $action
      *
-     * @return mixed
+     * @return string
      */
-    public function getActionForCurrentController($action);
+    public function getActionForCurrentController(string $action) : string;
 
     /**
      * Creates absolute url pointing to particular controller action
@@ -80,18 +83,18 @@ interface RouterHelperInterface
      *
      * @return string
      */
-    public function getRedirectToActionUrl($action, array $params = []);
+    public function getRedirectToActionUrl(string $action, array $params = []) : string;
 
     /**
      * Generates an url
      *
      * @param       $routeName
-     * @param array $routeParams
+     * @param array $params
      * @param int   $referenceType
      *
      * @return mixed
      */
-    public function generateUrl($routeName, array $routeParams = [], $referenceType = UrlGeneratorInterface::ABSOLUTE_URL);
+    public function generateUrl(string $routeName, array $params = [], int $referenceType = UrlGeneratorInterface::ABSOLUTE_URL) : string;
 
     /**
      * @return \Symfony\Component\Routing\Route

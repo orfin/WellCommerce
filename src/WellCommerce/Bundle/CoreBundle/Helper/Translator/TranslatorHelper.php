@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Helper\Translator;
 
+use Symfony\Component\Translation\MessageCatalogueInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
@@ -39,15 +40,15 @@ class TranslatorHelper implements TranslatorHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function trans($message, array $parameters = [], $domain = TranslatorHelperInterface::DEFAULT_TRANSLATION_DOMAIN)
+    public function trans(string $message, array $params = [], string $domain = self::DEFAULT_TRANSLATION_DOMAIN) : string
     {
-        return $this->translator->trans($message, $parameters, $domain);
+        return $this->translator->trans($message, $params, $domain);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getMessages($locale, $domain = TranslatorHelperInterface::DEFAULT_TRANSLATION_DOMAIN)
+    public function getMessages(string $locale, string $domain = self::DEFAULT_TRANSLATION_DOMAIN) : array
     {
         $catalogue = $this->getCatalogue($locale);
 
@@ -57,11 +58,11 @@ class TranslatorHelper implements TranslatorHelperInterface
     /**
      * Returns the message catalogue
      *
-     * @param string $domain
+     * @param string $locale
      *
-     * @return \Symfony\Component\Translation\MessageCatalogueInterface
+     * @return MessageCatalogueInterface
      */
-    protected function getCatalogue($locale)
+    protected function getCatalogue(string $locale) : MessageCatalogueInterface
     {
         return $this->translator->getCatalogue($locale);
     }

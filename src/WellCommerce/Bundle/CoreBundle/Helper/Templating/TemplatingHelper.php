@@ -14,6 +14,8 @@ namespace WellCommerce\Bundle\CoreBundle\Helper\Templating;
 
 use ReflectionClass;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 use WellCommerce\Bundle\CoreBundle\Controller\ControllerInterface;
 
@@ -49,15 +51,15 @@ class TemplatingHelper implements TemplatingHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function render($view, array $parameters = [])
+    public function render(string $name, array $parameters = []) : string
     {
-        return $this->engine->render($view, $parameters);
+        return $this->engine->render($name, $parameters);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function renderControllerResponse(ControllerInterface $controller, $templateName, array $parameters = [])
+    public function renderControllerResponse(ControllerInterface $controller, string $templateName, array $parameters = []) : Response
     {
         $template = $this->resolveControllerTemplate($controller, $templateName);
 
@@ -67,7 +69,7 @@ class TemplatingHelper implements TemplatingHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function resolveControllerTemplate(ControllerInterface $controller, $templateName)
+    public function resolveControllerTemplate(ControllerInterface $controller, string $templateName) : string
     {
         $reflectionClass = new ReflectionClass($controller);
         $controllerName  = $this->getControllerLogicalName($reflectionClass);
@@ -83,7 +85,7 @@ class TemplatingHelper implements TemplatingHelperInterface
      *
      * @return string
      */
-    protected function getControllerLogicalName(ReflectionClass $reflectionClass)
+    protected function getControllerLogicalName(ReflectionClass $reflectionClass) : string
     {
         $className = $reflectionClass->getName();
         preg_match('/Controller\\\(.+)Controller$/', $className, $matchController);
@@ -98,7 +100,7 @@ class TemplatingHelper implements TemplatingHelperInterface
      *
      * @return string
      */
-    protected function getBundleName(ReflectionClass $reflectionClass)
+    protected function getBundleName(ReflectionClass $reflectionClass) : string
     {
         $currentBundle = $this->getBundleForClass($reflectionClass);
 
@@ -110,9 +112,9 @@ class TemplatingHelper implements TemplatingHelperInterface
      *
      * @param ReflectionClass $class
      *
-     * @return \Symfony\Component\HttpKernel\Bundle\BundleInterface
+     * @return BundleInterface
      */
-    protected function getBundleForClass(ReflectionClass $reflectionClass)
+    protected function getBundleForClass(ReflectionClass $reflectionClass) : BundleInterface
     {
         $bundles = $this->kernel->getBundles();
 

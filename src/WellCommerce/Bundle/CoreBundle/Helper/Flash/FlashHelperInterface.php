@@ -29,28 +29,22 @@ interface FlashHelperInterface
      *
      * @param string $message
      * @param array  $params
-     *
-     * @return mixed
      */
-    public function addSuccess($message, array $params = []);
+    public function addSuccess(string $message, array $params = []);
 
     /**
      * Adds notice message
      *
      * @param string $message
      * @param array  $params
-     *
-     * @return mixed
      */
-    public function addNotice($message, array $params = []);
+    public function addNotice(string $message, array $params = []);
 
     /**
      * Adds error message
      *
      * @param string $message
      * @param array  $params
-     *
-     * @return mixed
      */
-    public function addError($message, array $params = []);
+    public function addError(string $message, array $params = []);
 }
