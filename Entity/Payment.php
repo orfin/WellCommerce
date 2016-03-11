@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\PaymentBundle\Entity;
 
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
+use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderAwareTrait;
 
 /**
@@ -20,21 +21,8 @@ use WellCommerce\Bundle\OrderBundle\Entity\OrderAwareTrait;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Payment implements PaymentInterface
+class Payment extends AbstractEntity implements PaymentInterface
 {
     use Timestampable;
     use OrderAwareTrait;
-
-    /**
-     * @var int
-     */
-    protected $id;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 }

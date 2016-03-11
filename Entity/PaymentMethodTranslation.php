@@ -32,7 +32,7 @@ class PaymentMethodTranslation implements LocaleAwareInterface
     /**
      * @return string
      */
-    public function getName()
+    public function getName() : string
     {
         return $this->name;
     }
@@ -40,7 +40,7 @@ class PaymentMethodTranslation implements LocaleAwareInterface
     /**
      * @param string $name
      */
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = $name;
     }
@@ -48,7 +48,7 @@ class PaymentMethodTranslation implements LocaleAwareInterface
     /**
      * {@inheritdoc}
      */
-    public function getCopyingSensitiveProperties()
+    public function getCopyingSensitiveProperties() : array
     {
         return [
             'name',

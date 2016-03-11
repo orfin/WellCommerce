@@ -18,6 +18,7 @@ use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 use WellCommerce\Bundle\DoctrineBundle\Behaviours\Enableable\EnableableTrait;
 use WellCommerce\Bundle\AppBundle\Entity\HierarchyAwareTrait;
+use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderStatusInterface;
 
 /**
@@ -25,18 +26,13 @@ use WellCommerce\Bundle\OrderBundle\Entity\OrderStatusInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PaymentMethod implements PaymentMethodInterface
+class PaymentMethod extends AbstractEntity implements PaymentMethodInterface
 {
     use Translatable;
     use Timestampable;
     use Blameable;
     use HierarchyAwareTrait;
     use EnableableTrait;
-
-    /**
-     * @var int
-     */
-    protected $id;
 
     /**
      * @var string
@@ -61,15 +57,7 @@ class PaymentMethod implements PaymentMethodInterface
     /**
      * {@inheritdoc}
      */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getProcessor()
+    public function getProcessor() : string
     {
         return $this->processor;
     }
@@ -77,7 +65,7 @@ class PaymentMethod implements PaymentMethodInterface
     /**
      * {@inheritdoc}
      */
-    public function setProcessor($processor)
+    public function setProcessor(string $processor)
     {
         $this->processor = $processor;
     }
@@ -85,7 +73,7 @@ class PaymentMethod implements PaymentMethodInterface
     /**
      * {@inheritdoc}
      */
-    public function getShippingMethods()
+    public function getShippingMethods() : Collection
     {
         return $this->shippingMethods;
     }
@@ -101,7 +89,7 @@ class PaymentMethod implements PaymentMethodInterface
     /**
      * {@inheritdoc}
      */
-    public function getDefaultOrderStatus()
+    public function getDefaultOrderStatus() : OrderStatusInterface
     {
         return $this->defaultOrderStatus;
     }
@@ -117,7 +105,7 @@ class PaymentMethod implements PaymentMethodInterface
     /**
      * {@inheritdoc}
      */
-    public function getConfiguration()
+    public function getConfiguration() : Collection
     {
         return $this->configuration;
     }

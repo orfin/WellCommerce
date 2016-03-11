@@ -13,28 +13,24 @@
 namespace WellCommerce\Bundle\PaymentBundle\Entity;
 
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 
 /**
  * Interface ShippingMethodCostInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface PaymentMethodConfigurationInterface extends TimestampableInterface, PaymentMethodAwareInterface
+interface PaymentMethodConfigurationInterface extends EntityInterface, TimestampableInterface, PaymentMethodAwareInterface
 {
-    /**
-     * @return int
-     */
-    public function getId();
-
     /**
      * @return string
      */
-    public function getName();
+    public function getName() : string;
 
     /**
      * @param string $name
      */
-    public function setName($name);
+    public function setName(string $name);
 
     /**
      * @return bool|int|string
