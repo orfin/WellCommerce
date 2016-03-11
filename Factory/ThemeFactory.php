@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\ThemeBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 use WellCommerce\Bundle\ThemeBundle\Entity\ThemeInterface;
 
 /**
@@ -21,7 +21,7 @@ use WellCommerce\Bundle\ThemeBundle\Entity\ThemeInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ThemeFactory extends AbstractFactory
+class ThemeFactory extends AbstractEntityFactory
 {
     /**
      * @var string
