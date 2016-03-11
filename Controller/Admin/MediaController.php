@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\MediaBundle\Controller\Admin;
 
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
