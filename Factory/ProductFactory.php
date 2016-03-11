@@ -16,7 +16,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\Bundle\AppBundle\Entity\Dimension;
 use WellCommerce\Bundle\AppBundle\Entity\DiscountablePrice;
 use WellCommerce\Bundle\AppBundle\Entity\Price;
-use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 
 /**
@@ -24,7 +24,7 @@ use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductFactory extends AbstractFactory
+class ProductFactory extends AbstractEntityFactory
 {
     /**
      * @var string
