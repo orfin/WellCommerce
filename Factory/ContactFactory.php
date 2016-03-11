@@ -34,6 +34,7 @@ class ContactFactory extends AbstractFactory
     {
         /** @var $contact ContactInterface */
         $contact = $this->init();
+        $contact->setEnabled(true);
         $contact->setCreatedAt(new \DateTime());
 
         return $contact;

@@ -16,29 +16,17 @@ use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 use WellCommerce\Bundle\DoctrineBundle\Behaviours\Enableable\EnableableTrait;
+use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
 
 /**
  * Class Contact
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Contact implements ContactInterface
+class Contact extends AbstractEntity implements ContactInterface
 {
     use Translatable;
     use Timestampable;
     use Blameable;
     use EnableableTrait;
-
-    /**
-     * @var int
-     */
-    protected $id;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 }
