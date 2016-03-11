@@ -16,8 +16,8 @@ use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\AdminBundle\Entity\UserInterface;
 use WellCommerce\Bundle\CoreBundle\EventDispatcher\EventDispatcherInterface;
 use WellCommerce\Bundle\CoreBundle\Exception\MissingDataGridException;
-use WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\AbstractManager;
+use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactoryInterface;
 use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
 use WellCommerce\Component\DataGrid\DataGridInterface;
 use WellCommerce\Component\Form\FormBuilderInterface;
@@ -37,16 +37,16 @@ abstract class AbstractAdminManager extends AbstractManager implements AdminMana
     /**
      * Constructor
      *
-     * @param RepositoryInterface       $repository
-     * @param EventDispatcherInterface  $eventDispatcher
-     * @param FactoryInterface|null     $factory
-     * @param FormBuilderInterface|null $formBuilder
-     * @param DataGridInterface|null    $dataGrid
+     * @param RepositoryInterface         $repository
+     * @param EventDispatcherInterface    $eventDispatcher
+     * @param EntityFactoryInterface|null $factory
+     * @param FormBuilderInterface|null   $formBuilder
+     * @param DataGridInterface|null      $dataGrid
      */
     public function __construct(
         RepositoryInterface $repository,
         EventDispatcherInterface $eventDispatcher,
-        FactoryInterface $factory = null,
+        EntityFactoryInterface $factory = null,
         FormBuilderInterface $formBuilder = null,
         DataGridInterface $dataGrid = null
     ) {

@@ -16,7 +16,7 @@ use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
 use WellCommerce\Bundle\CoreBundle\EventDispatcher\EventDispatcherInterface;
 use WellCommerce\Bundle\CoreBundle\Exception\MissingFactoryException;
 use WellCommerce\Bundle\CoreBundle\Exception\MissingFormBuilderException;
-use WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface;
+use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactoryInterface;
 use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
 use WellCommerce\Component\Form\FormBuilderInterface;
 
@@ -38,7 +38,7 @@ abstract class AbstractManager extends AbstractContainerAware implements Manager
     protected $eventDispatcher;
 
     /**
-     * @var FactoryInterface
+     * @var EntityFactoryInterface
      */
     protected $factory;
 
@@ -50,15 +50,15 @@ abstract class AbstractManager extends AbstractContainerAware implements Manager
     /**
      * Constructor
      *
-     * @param RepositoryInterface       $repository
-     * @param EventDispatcherInterface  $eventDispatcher
-     * @param FactoryInterface|null     $factory
-     * @param FormBuilderInterface|null $formBuilder
+     * @param RepositoryInterface         $repository
+     * @param EventDispatcherInterface    $eventDispatcher
+     * @param EntityFactoryInterface|null $factory
+     * @param FormBuilderInterface|null   $formBuilder
      */
     public function __construct(
         RepositoryInterface $repository,
         EventDispatcherInterface $eventDispatcher,
-        FactoryInterface $factory = null,
+        EntityFactoryInterface $factory = null,
         FormBuilderInterface $formBuilder = null
     ) {
         $this->repository      = $repository;
