@@ -45,7 +45,7 @@ class RequestHelper implements RequestHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function getCurrentRequest() : Request
+    public function getCurrentRequest()
     {
         if (null === $this->request) {
             $this->request = $this->requestStack->getMasterRequest();
