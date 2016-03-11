@@ -84,7 +84,7 @@ abstract class AbstractDataGrid extends AbstractContainerAware implements DataGr
      *
      * @return DataGridInterface
      */
-    public function getInstance()
+    public function getInstance() : DataGridInterface
     {
         if (!$this->booted) {
             $this->configure();
@@ -107,8 +107,6 @@ abstract class AbstractDataGrid extends AbstractContainerAware implements DataGr
      * Configures DataGrid columns
      *
      * @param ColumnCollection $columns
-     *
-     * @return void
      */
     abstract protected function configureColumns(ColumnCollection $columns);
 
@@ -116,8 +114,6 @@ abstract class AbstractDataGrid extends AbstractContainerAware implements DataGr
      * Configures DataGrid options
      *
      * @param OptionsInterface $options
-     *
-     * @return void
      */
     protected function configureOptions(OptionsInterface $options)
     {
@@ -147,13 +143,13 @@ abstract class AbstractDataGrid extends AbstractContainerAware implements DataGr
     }
 
     /**
-     * Returns an absolute URL pointing to controller action
+     * Returns the absolute URL pointing to the controller action
      *
-     * @param $actionName
+     * @param string $actionName
      *
      * @return string
      */
-    protected function getActionUrl($actionName)
+    protected function getActionUrl(string $actionName) : string
     {
         return $this->getRouterHelper()->getActionForCurrentController($actionName);
     }
@@ -161,11 +157,11 @@ abstract class AbstractDataGrid extends AbstractContainerAware implements DataGr
     /**
      * Returns javascript function name
      *
-     * @param $name
+     * @param string $name
      *
      * @return string
      */
-    protected function getJavascriptFunctionName($name)
+    protected function getJavascriptFunctionName(string $name) : string
     {
         $functionName = sprintf('%s%s', $name, ucfirst($this->identifier));
         $functionName = ucwords(str_replace(['-', '_'], ' ', $functionName));
@@ -177,7 +173,7 @@ abstract class AbstractDataGrid extends AbstractContainerAware implements DataGr
     /**
      * {@inheritdoc}
      */
-    public function getIdentifier()
+    public function getIdentifier() : string
     {
         return $this->identifier;
     }
@@ -193,7 +189,7 @@ abstract class AbstractDataGrid extends AbstractContainerAware implements DataGr
     /**
      * {@inheritdoc}
      */
-    public function getColumns()
+    public function getColumns() : ColumnCollection
     {
         return $this->columns;
     }
@@ -209,7 +205,7 @@ abstract class AbstractDataGrid extends AbstractContainerAware implements DataGr
     /**
      * {@inheritdoc}
      */
-    public function getOptions()
+    public function getOptions() : OptionsInterface
     {
         return $this->options;
     }
@@ -217,7 +213,7 @@ abstract class AbstractDataGrid extends AbstractContainerAware implements DataGr
     /**
      * {@inheritdoc}
      */
-    public function loadResults(Request $request)
+    public function loadResults(Request $request) : array
     {
         $page               = ($request->request->get('starting_from') / $request->request->get('limit')) + 1;
         $conditions         = new ConditionsCollection();
