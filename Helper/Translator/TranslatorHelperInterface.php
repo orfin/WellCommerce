@@ -30,7 +30,7 @@ interface TranslatorHelperInterface
      *
      * @return string
      */
-    public function trans($message, array $parameters = [], $domain = self::DEFAULT_TRANSLATION_DOMAIN);
+    public function trans(string $message, array $parameters = [], string $domain = self::DEFAULT_TRANSLATION_DOMAIN) : string;
 
     /**
      * Returns all messages for given locale and domain
@@ -40,5 +40,5 @@ interface TranslatorHelperInterface
      *
      * @return array
      */
-    public function getMessages($locale, $domain = self::DEFAULT_TRANSLATION_DOMAIN);
+    public function getMessages(string $locale, string $domain = self::DEFAULT_TRANSLATION_DOMAIN) : array;
 }

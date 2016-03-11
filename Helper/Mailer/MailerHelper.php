@@ -41,9 +41,15 @@ class MailerHelper implements MailerHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function sendEmail($recipient, $title, $template, array $parameters = [], MailerConfiguration $mailerConfiguration)
+    public function sendEmail(
+        string $recipient,
+        string $title,
+        string $template,
+        array $parameters = [],
+        MailerConfiguration $mailerConfiguration
+    ) : int
     {
-        $mailer  = $this->createMailer($mailerConfiguration);
+        $mailer = $this->createMailer($mailerConfiguration);
         $message = Message::newInstance();
 
         $message->setSubject($title);
@@ -55,7 +61,7 @@ class MailerHelper implements MailerHelperInterface
         return $mailer->send($message);
     }
 
-    protected function setBody(Message $message, $template, array $parameters = [])
+    protected function setBody(Message $message, string $template, array $parameters = [])
     {
         $parameters['message'] = $message;
         $body                  = $this->templatingHelper->render($template, $parameters);

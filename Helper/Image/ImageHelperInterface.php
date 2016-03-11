@@ -20,12 +20,13 @@ namespace WellCommerce\Bundle\CoreBundle\Helper\Image;
 interface ImageHelperInterface
 {
     /**
-     * Returns image path
+     * Returns the image path
      *
-     * @param $path
-     * @param $filter
+     * @param string $path
+     * @param string $filter
+     * @param array  $config
      *
-     * @return mixed
+     * @return string
      */
-    public function getImage($path, $filter);
+    public function getImage(string $path, string $filter, array $config = []) : string;
 }

@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Helper\Templating;
 
+use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\ControllerInterface;
 
 /**
@@ -29,7 +30,7 @@ interface TemplatingHelperInterface
      *
      * @return string
      */
-    public function render($name, array $parameters = []);
+    public function render(string $name, array $parameters = []) : string;
 
     /**
      * Resolves the controller's template name
@@ -39,7 +40,7 @@ interface TemplatingHelperInterface
      *
      * @return string
      */
-    public function resolveControllerTemplate(ControllerInterface $class, $templateName);
+    public function resolveControllerTemplate(ControllerInterface $class, string $templateName) : string;
 
     /**
      * Renders the controller's response
@@ -48,7 +49,7 @@ interface TemplatingHelperInterface
      * @param string              $templateName
      * @param array               $parameters
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
-    public function renderControllerResponse(ControllerInterface $controller, $templateName, array $parameters = []);
+    public function renderControllerResponse(ControllerInterface $controller, string $templateName, array $parameters = []) : Response;
 }

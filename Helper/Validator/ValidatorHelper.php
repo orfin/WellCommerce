@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Helper\Validator;
 
+use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
@@ -21,8 +22,6 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 class ValidatorHelper implements ValidatorHelperInterface
 {
-    const DEFAULT_VALIDATOR_GROUPS = ['Default'];
-
     /**
      * @var ValidatorInterface
      */
@@ -41,7 +40,7 @@ class ValidatorHelper implements ValidatorHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function validate($value, array $groups = [])
+    public function validate($value, array $groups = []) : ConstraintViolationListInterface
     {
         $groups = array_merge(self::DEFAULT_VALIDATOR_GROUPS, $groups);
 

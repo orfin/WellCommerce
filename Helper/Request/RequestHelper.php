@@ -45,7 +45,7 @@ class RequestHelper implements RequestHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function getCurrentRequest()
+    public function getCurrentRequest() : Request
     {
         if (null === $this->request) {
             $this->request = $this->requestStack->getMasterRequest();
@@ -77,7 +77,7 @@ class RequestHelper implements RequestHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function getSessionAttribute($name, $default = null)
+    public function getSessionAttribute(string $name, $default = null)
     {
         if (null !== $this->getCurrentRequest() && $this->request->hasSession()) {
             return $this->request->getSession()->get($name, $default);
@@ -89,7 +89,7 @@ class RequestHelper implements RequestHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function setSessionAttribute($name, $value)
+    public function setSessionAttribute(string $name, $value)
     {
         if (null === $this->getCurrentRequest() || false === $this->request->hasSession()) {
             throw new \LogicException('Cannot set session attributes without valid session.');
@@ -101,7 +101,7 @@ class RequestHelper implements RequestHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function hasSessionAttribute($name)
+    public function hasSessionAttribute(string $name) : bool
     {
         if (null !== $this->getCurrentRequest() && $this->request->hasSession()) {
             return $this->request->getSession()->has($name);
@@ -113,7 +113,7 @@ class RequestHelper implements RequestHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function getSessionId()
+    public function getSessionId() : string
     {
         if (null !== $this->getCurrentRequest() && $this->request->hasSession()) {
             return $this->request->getSession()->getId();
@@ -125,7 +125,7 @@ class RequestHelper implements RequestHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function getSessionName()
+    public function getSessionName() : string
     {
         if (null !== $this->getCurrentRequest() && $this->request->hasSession()) {
             return $this->request->getSession()->getName();
@@ -137,7 +137,7 @@ class RequestHelper implements RequestHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function hasRequestBagParam($name)
+    public function hasRequestBagParam(string $name) : bool
     {
         if ($this->getCurrentRequest() instanceof Request) {
             return $this->request->request->has($name);
@@ -149,7 +149,7 @@ class RequestHelper implements RequestHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function hasRequestBagParams(array $params = [])
+    public function hasRequestBagParams(array $params = []) : bool
     {
         foreach ($params as $param) {
             if (!$this->hasRequestBagParam($param)) {
@@ -163,7 +163,7 @@ class RequestHelper implements RequestHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function getRequestBagParam($name, $default = null, $filter = FILTER_SANITIZE_SPECIAL_CHARS)
+    public function getRequestBagParam(string $name, $default = null, int $filter = FILTER_SANITIZE_SPECIAL_CHARS)
     {
         if (false === $this->hasRequestBagParam($name)) {
             return $default;
@@ -175,7 +175,7 @@ class RequestHelper implements RequestHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function getQueryBagParam($name, $default = null, $filter = FILTER_SANITIZE_SPECIAL_CHARS)
+    public function getQueryBagParam(string $name, $default = null, int $filter = FILTER_SANITIZE_SPECIAL_CHARS)
     {
         if (null === $this->getCurrentRequest() || false === $this->request->query->has($name)) {
             return $default;
@@ -187,7 +187,7 @@ class RequestHelper implements RequestHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function hasAttributesBagParam($name)
+    public function hasAttributesBagParam(string $name) : bool
     {
         if ($this->getCurrentRequest() instanceof Request) {
             return $this->request->attributes->has($name);
@@ -199,7 +199,7 @@ class RequestHelper implements RequestHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function hasAttributesBagParams(array $params = [])
+    public function hasAttributesBagParams(array $params = []) : bool
     {
         foreach ($params as $param) {
             if (!$this->hasAttributesBagParam($param)) {
@@ -213,7 +213,7 @@ class RequestHelper implements RequestHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function getAttributesBagParam($name, $default = null, $filter = FILTER_SANITIZE_SPECIAL_CHARS)
+    public function getAttributesBagParam(string $name, $default = null, int $filter = FILTER_SANITIZE_SPECIAL_CHARS)
     {
         if (false === $this->hasAttributesBagParam($name)) {
             return $default;
@@ -225,7 +225,7 @@ class RequestHelper implements RequestHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function getCurrentLocale()
+    public function getCurrentLocale() : string
     {
         return $this->getCurrentRequest()->getLocale();
     }
@@ -233,7 +233,7 @@ class RequestHelper implements RequestHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function getCurrentCurrency()
+    public function getCurrentCurrency() : string
     {
         return $this->getSessionAttribute('_currency');
     }

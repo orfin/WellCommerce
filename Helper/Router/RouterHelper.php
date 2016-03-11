@@ -16,7 +16,10 @@ use ReflectionClass;
 use ReflectionMethod;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Routing\RequestContext;
+use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouterInterface;
+use WellCommerce\Bundle\CoreBundle\Controller\ControllerInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Request\RequestHelperInterface;
 
 /**
@@ -51,7 +54,7 @@ class RouterHelper implements RouterHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function hasControllerAction($controller, $action)
+    public function hasControllerAction(ControllerInterface $controller, string $action) : bool
     {
         $reflectionClass = new ReflectionClass($controller);
         if ($reflectionClass->hasMethod($action)) {
@@ -67,7 +70,7 @@ class RouterHelper implements RouterHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function getCurrentAction()
+    public function getCurrentAction() : string
     {
         $currentPath  = $this->getRouterRequestContext()->getPathInfo();
         $currentRoute = $this->router->match($currentPath);
@@ -79,7 +82,7 @@ class RouterHelper implements RouterHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function getRouterRequestContext()
+    public function getRouterRequestContext() : RequestContext
     {
         return $this->router->getContext();
     }
@@ -87,7 +90,7 @@ class RouterHelper implements RouterHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function redirectToAction($action, array $params = [])
+    public function redirectToAction(string $action, array $params = []) : RedirectResponse
     {
         $route = $this->getActionForCurrentController($action);
 
@@ -97,7 +100,7 @@ class RouterHelper implements RouterHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function getRedirectToActionUrl($action, array $params = [])
+    public function getRedirectToActionUrl(string $action, array $params = []) : string
     {
         $route = $this->getActionForCurrentController($action);
 
@@ -107,7 +110,7 @@ class RouterHelper implements RouterHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function getActionForCurrentController($action)
+    public function getActionForCurrentController(string $action) : string
     {
         $currentPath  = $this->getRouterRequestContext()->getPathInfo();
         $currentRoute = $this->router->match($currentPath);
@@ -121,15 +124,15 @@ class RouterHelper implements RouterHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function generateUrl($routeName, array $routeParams = [], $referenceType = UrlGeneratorInterface::ABSOLUTE_URL)
+    public function generateUrl(string $routeName, array $params = [], int $referenceType = UrlGeneratorInterface::ABSOLUTE_URL) : string
     {
-        return $this->router->generate($routeName, $routeParams, $referenceType);
+        return $this->router->generate($routeName, $params, $referenceType);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function redirectTo($route, array $routeParams = [])
+    public function redirectTo(string $route, array $routeParams = []) : RedirectResponse
     {
         $url      = $this->router->generate($route, $routeParams, true);
         $response = new RedirectResponse($url);
@@ -146,7 +149,7 @@ class RouterHelper implements RouterHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function getCurrentRoute()
+    public function getCurrentRoute() : Route
     {
         $routeName = $this->requestHelper->getAttributesBagParam('_route');
         $route     = $this->router->getRouteCollection()->get($routeName);

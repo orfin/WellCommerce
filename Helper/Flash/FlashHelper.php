@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Helper\Flash;
 
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Translator\TranslatorHelperInterface;
 
@@ -47,62 +48,60 @@ class FlashHelper implements FlashHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function addSuccess($message, array $params = [])
+    public function addSuccess(string $message, array $params = [])
     {
-        return $this->addMessage(FlashHelperInterface::FLASH_TYPE_SUCCESS, $message, $params);
+        $this->addMessage(FlashHelperInterface::FLASH_TYPE_SUCCESS, $message, $params);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function addNotice($message, array $params = [])
+    public function addNotice(string $message, array $params = [])
     {
-        return $this->addMessage(FlashHelperInterface::FLASH_TYPE_NOTICE, $message, $params);
+        $this->addMessage(FlashHelperInterface::FLASH_TYPE_NOTICE, $message, $params);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function addError($message, array $params = [])
+    public function addError(string $message, array $params = [])
     {
-        return $this->addMessage(FlashHelperInterface::FLASH_TYPE_ERROR, $message, $params);
+        $this->addMessage(FlashHelperInterface::FLASH_TYPE_ERROR, $message, $params);
     }
 
     /**
      * Shortcut to add new flash message to bag
      *
-     * @param $type
-     * @param $message
-     * @param $params
-     *
-     * @return mixed
+     * @param string $type
+     * @param string $message
+     * @param array  $params
      */
-    private function addMessage($type, $message, $params)
+    private function addMessage(string $type, string $message, array $params)
     {
         $message = $this->translate($message, $params);
 
-        return $this->getFlashBag()->add($type, $message);
+        $this->getFlashBag()->add($type, $message);
     }
 
     /**
-     * Translates given message using translator service
+     * Returns the translated message
      *
-     * @param $message
-     * @param $params
+     * @param string $message
+     * @param array  $params
      *
      * @return string
      */
-    private function translate($message, $params)
+    private function translate(string $message, array $params) : string
     {
         return $this->translatorHelper->trans($message, $params, 'wellcommerce');
     }
 
     /**
-     * Returns flash bag
+     * Returns the flash bag
      *
-     * @return \Symfony\Component\HttpFoundation\Session\Flash\FlashBag
+     * @return FlashBag
      */
-    private function getFlashBag()
+    private function getFlashBag() : FlashBag
     {
         return $this->session->getBag(FlashHelperInterface::FLASHES_NAME);
     }

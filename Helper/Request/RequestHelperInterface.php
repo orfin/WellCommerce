@@ -34,40 +34,40 @@ interface RequestHelperInterface
      *
      * @return mixed
      */
-    public function getSessionAttribute($name, $default = null);
+    public function getSessionAttribute(string $name, $default = null);
 
     /**
      * Sets session attribute
      *
-     * @param $name
-     * @param $value
+     * @param string $name
+     * @param mixed  $value
      *
      * @return mixed
      */
-    public function setSessionAttribute($name, $value);
+    public function setSessionAttribute(string $name, $value);
 
     /**
      * Returns true if session has attribute, else otherwise
      *
      * @param string $name
      *
-     * @return mixed
+     * @return bool
      */
-    public function hasSessionAttribute($name);
+    public function hasSessionAttribute(string $name) : bool;
 
     /**
      * Returns the session's identifier
      *
      * @return string
      */
-    public function getSessionId();
+    public function getSessionId() : string;
 
     /**
      * Returns the session's name
      *
      * @return string
      */
-    public function getSessionName();
+    public function getSessionName() : string;
 
     /**
      * Returns current host
@@ -83,14 +83,14 @@ interface RequestHelperInterface
      *
      * @return string
      */
-    public function getCurrentLocale();
+    public function getCurrentLocale() : string;
 
     /**
      * Returns current currency
      *
      * @return string
      */
-    public function getCurrentCurrency();
+    public function getCurrentCurrency() : string;
 
     /**
      * Returns a param from query bag
@@ -101,7 +101,7 @@ interface RequestHelperInterface
      *
      * @return mixed
      */
-    public function getQueryBagParam($name, $default = null, $filter = FILTER_SANITIZE_SPECIAL_CHARS);
+    public function getQueryBagParam(string $name, $default = null, int $filter = FILTER_SANITIZE_SPECIAL_CHARS);
 
     /**
      * Checks whether request has given attribute
@@ -110,7 +110,7 @@ interface RequestHelperInterface
      *
      * @return bool
      */
-    public function hasRequestBagParam($name);
+    public function hasRequestBagParam(string $name) : bool;
 
     /**
      * Checks whether request has given attributes
@@ -119,7 +119,7 @@ interface RequestHelperInterface
      *
      * @return bool
      */
-    public function hasRequestBagParams(array $params = []);
+    public function hasRequestBagParams(array $params = []) : bool;
 
     /**
      * Returns a param from request bag
@@ -130,7 +130,7 @@ interface RequestHelperInterface
      *
      * @return mixed
      */
-    public function getRequestBagParam($name, $default = null, $filter = FILTER_SANITIZE_SPECIAL_CHARS);
+    public function getRequestBagParam(string $name, $default = null, int $filter = FILTER_SANITIZE_SPECIAL_CHARS);
 
     /**
      * Checks whether request has given attribute
@@ -139,7 +139,7 @@ interface RequestHelperInterface
      *
      * @return bool
      */
-    public function hasAttributesBagParam($name);
+    public function hasAttributesBagParam(string $name) : bool;
 
     /**
      * Checks whether request has given attributes
@@ -148,7 +148,7 @@ interface RequestHelperInterface
      *
      * @return bool
      */
-    public function hasAttributesBagParams(array $params = []);
+    public function hasAttributesBagParams(array $params = []) : bool;
 
     /**
      * Returns a param from attributes bag
@@ -159,5 +159,5 @@ interface RequestHelperInterface
      *
      * @return mixed
      */
-    public function getAttributesBagParam($name, $default = null, $filter = FILTER_SANITIZE_SPECIAL_CHARS);
+    public function getAttributesBagParam(string $name, $default = null, int $filter = FILTER_SANITIZE_SPECIAL_CHARS);
 }

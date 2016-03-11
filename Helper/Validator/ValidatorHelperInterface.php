@@ -12,6 +12,8 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Helper\Validator;
 
+use Symfony\Component\Validator\ConstraintViolationListInterface;
+
 /**
  * Interface ValidatorHelperInterface
  *
@@ -19,11 +21,15 @@ namespace WellCommerce\Bundle\CoreBundle\Helper\Validator;
  */
 interface ValidatorHelperInterface
 {
+    const DEFAULT_VALIDATOR_GROUPS = ['Default'];
+
     /**
+     * Validates the object
+     *
      * @param object $value
      * @param array  $groups
      *
-     * @return mixed
+     * @return ConstraintViolationListInterface
      */
-    public function validate($value, array $groups = []);
+    public function validate($value, array $groups = []) : ConstraintViolationListInterface;
 }
