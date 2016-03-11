@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\PaymentBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderStatusInterface;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodInterface;
 
@@ -22,7 +22,7 @@ use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PaymentMethodFactory extends AbstractFactory
+class PaymentMethodFactory extends AbstractEntityFactory
 {
     /**
      * @var string

@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\Factory;
 
-use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodConfigurationInterface;
 
 /**
@@ -20,7 +20,7 @@ use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodConfigurationInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PaymentMethodConfigurationFactory extends AbstractFactory
+class PaymentMethodConfigurationFactory extends AbstractEntityFactory
 {
     /**
      * @var string
