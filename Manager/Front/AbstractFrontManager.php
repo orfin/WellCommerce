@@ -12,8 +12,18 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Manager\Front;
 
+use WellCommerce\Bundle\CartBundle\Context\Front\CartContextInterface;
+use WellCommerce\Bundle\CategoryBundle\Context\Front\CategoryContextInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
+use WellCommerce\Bundle\ContactBundle\Context\Front\ContactContextInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\AbstractManager;
+use WellCommerce\Bundle\NewsBundle\Context\Front\NewsContextInterface;
+use WellCommerce\Bundle\PageBundle\Context\Front\PageContextInterface;
+use WellCommerce\Bundle\ProducerBundle\Context\Front\ProducerContextInterface;
+use WellCommerce\Bundle\ProductBundle\Context\Front\ProductContextInterface;
+use WellCommerce\Bundle\ProductStatusBundle\Context\Front\ProductStatusContextInterface;
+use WellCommerce\Bundle\ShopBundle\Context\ShopContextInterface;
+use WellCommerce\Bundle\ThemeBundle\Context\Front\ThemeContextInterface;
 
 /**
  * Class AbstractFrontManager
@@ -25,7 +35,7 @@ abstract class AbstractFrontManager extends AbstractManager implements FrontMana
     /**
      * {@inheritdoc}
      */
-    public function getShopContext()
+    public function getShopContext() : ShopContextInterface
     {
         return $this->get('shop.context.front');
     }
@@ -33,7 +43,7 @@ abstract class AbstractFrontManager extends AbstractManager implements FrontMana
     /**
      * {@inheritdoc}
      */
-    public function getCartContext()
+    public function getCartContext() : CartContextInterface
     {
         return $this->get('cart.context.front');
     }
@@ -41,7 +51,7 @@ abstract class AbstractFrontManager extends AbstractManager implements FrontMana
     /**
      * {@inheritdoc}
      */
-    public function getCategoryContext()
+    public function getCategoryContext() : CategoryContextInterface
     {
         return $this->get('category.context.front');
     }
@@ -49,7 +59,7 @@ abstract class AbstractFrontManager extends AbstractManager implements FrontMana
     /**
      * {@inheritdoc}
      */
-    public function getProductContext()
+    public function getProductContext() : ProductContextInterface
     {
         return $this->get('product.context.front');
     }
@@ -57,7 +67,7 @@ abstract class AbstractFrontManager extends AbstractManager implements FrontMana
     /**
      * {@inheritdoc}
      */
-    public function getProductStatusContext()
+    public function getProductStatusContext() : ProductStatusContextInterface
     {
         return $this->get('product_status.context.front');
     }
@@ -65,7 +75,7 @@ abstract class AbstractFrontManager extends AbstractManager implements FrontMana
     /**
      * {@inheritdoc}
      */
-    public function getProducerContext()
+    public function getProducerContext() : ProducerContextInterface
     {
         return $this->get('producer.context.front');
     }
@@ -73,7 +83,7 @@ abstract class AbstractFrontManager extends AbstractManager implements FrontMana
     /**
      * {@inheritdoc}
      */
-    public function getContactContext()
+    public function getContactContext() : ContactContextInterface
     {
         return $this->get('contact.context.front');
     }
@@ -81,7 +91,7 @@ abstract class AbstractFrontManager extends AbstractManager implements FrontMana
     /**
      * {@inheritdoc}
      */
-    public function getNewsContext()
+    public function getNewsContext() : NewsContextInterface
     {
         return $this->get('news.context.front');
     }
@@ -89,7 +99,7 @@ abstract class AbstractFrontManager extends AbstractManager implements FrontMana
     /**
      * {@inheritdoc}
      */
-    public function getPageContext()
+    public function getPageContext() : PageContextInterface
     {
         return $this->get('page.context.front');
     }
@@ -97,7 +107,7 @@ abstract class AbstractFrontManager extends AbstractManager implements FrontMana
     /**
      * {@inheritdoc}
      */
-    public function getThemeContext()
+    public function getThemeContext() : ThemeContextInterface
     {
         return $this->get('theme.context.front');
     }

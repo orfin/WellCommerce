@@ -77,7 +77,7 @@ interface FrontManagerInterface extends ManagerInterface
     public function getThemeContext() : ThemeContextInterface;
 
     /**
-     * @return ClientInterface
+     * @return null|ClientInterface
      */
-    public function getClient() : ClientInterface;
+    public function getClient();
 }
