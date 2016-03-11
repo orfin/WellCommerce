@@ -34,6 +34,8 @@ class CurrencyFactory extends AbstractFactory
     {
         /** @var $currency CurrencyInterface */
         $currency = $this->init();
+        $currency->setEnabled(true);
+        $currency->setCode('');
 
         return $currency;
     }

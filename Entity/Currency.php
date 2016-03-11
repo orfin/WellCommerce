@@ -15,22 +15,18 @@ namespace WellCommerce\Bundle\CurrencyBundle\Entity;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use WellCommerce\Bundle\DoctrineBundle\Behaviours\Enableable\EnableableTrait;
+use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
 
 /**
  * Class Currency
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Currency implements CurrencyInterface
+class Currency extends AbstractEntity implements CurrencyInterface
 {
     use Timestampable;
     use Blameable;
     use EnableableTrait;
-
-    /**
-     * @var integer
-     */
-    protected $id;
 
     /**
      * @var string
@@ -40,15 +36,7 @@ class Currency implements CurrencyInterface
     /**
      * {@inheritdoc}
      */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCode($code)
+    public function setCode(string $code)
     {
         $this->code = $code;
     }
@@ -56,7 +44,7 @@ class Currency implements CurrencyInterface
     /**
      * {@inheritdoc}
      */
-    public function getCode()
+    public function getCode() : string
     {
         return $this->code;
     }

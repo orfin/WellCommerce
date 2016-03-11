@@ -14,26 +14,23 @@ namespace WellCommerce\Bundle\CurrencyBundle\Entity;
 
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
+use WellCommerce\Bundle\DoctrineBundle\Behaviours\Enableable\EnableableInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 
 /**
  * Interface CurrencyInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface CurrencyInterface extends TimestampableInterface, BlameableInterface
+interface CurrencyInterface extends EntityInterface, EnableableInterface, TimestampableInterface, BlameableInterface
 {
-    /**
-     * @return integer
-     */
-    public function getId();
-
     /**
      * @param string $code
      */
-    public function setCode($code);
+    public function setCode(string $code);
 
     /**
      * @return string
      */
-    public function getCode();
+    public function getCode() : string;
 }
