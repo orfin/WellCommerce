@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\OrderBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 
 /**
@@ -21,7 +21,7 @@ use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class OrderFactory extends AbstractFactory
+class OrderFactory extends AbstractEntityFactory
 {
     /**
      * @var string

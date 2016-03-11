@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Factory;
 
-use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderTotal;
 
 /**
@@ -20,7 +20,7 @@ use WellCommerce\Bundle\OrderBundle\Entity\OrderTotal;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class OrderTotalFactory extends AbstractFactory
+class OrderTotalFactory extends AbstractEntityFactory
 {
     /**
      * Creates an order total from given values
