@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\UnitBundle\Factory;
 
-use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 use WellCommerce\Bundle\UnitBundle\Entity\UnitInterface;
 
 /**
@@ -20,7 +20,7 @@ use WellCommerce\Bundle\UnitBundle\Entity\UnitInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class UnitFactory extends AbstractFactory
+class UnitFactory extends AbstractEntityFactory
 {
     /**
      * @var string
