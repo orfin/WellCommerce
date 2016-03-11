@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\WishlistBundle\Controller\Box;
 
 use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
+use WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxSettingsCollection;
 use WellCommerce\Bundle\WishlistBundle\Entity\WishlistInterface;
 use WellCommerce\Component\DataSet\Conditions\Condition\In;
 use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
@@ -25,7 +26,7 @@ use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
  */
 class WishlistBoxController extends AbstractBoxController
 {
-    public function indexAction() : Response
+    public function indexAction(LayoutBoxSettingsCollection $boxSettings) : Response
     {
         $dataset = $this->get('product.dataset.front')->getResult('array', [
             'order_by'   => 'name',
