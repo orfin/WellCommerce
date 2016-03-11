@@ -14,21 +14,17 @@ namespace WellCommerce\Bundle\CurrencyBundle\Entity;
 
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
+use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
 
 /**
  * Class CurrencyRate
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CurrencyRate implements CurrencyRateInterface
+class CurrencyRate extends AbstractEntity implements CurrencyRateInterface
 {
     use Timestampable;
     use Blameable;
-    
-    /**
-     * @var integer
-     */
-    protected $id;
     
     /**
      * @var CurrencyInterface
@@ -48,15 +44,7 @@ class CurrencyRate implements CurrencyRateInterface
     /**
      * {@inheritdoc}
      */
-    public function getId()
-    {
-        return $this->id;
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function getCurrencyFrom()
+    public function getCurrencyFrom() : string
     {
         return $this->currencyFrom;
     }
@@ -64,7 +52,7 @@ class CurrencyRate implements CurrencyRateInterface
     /**
      * {@inheritdoc}
      */
-    public function setCurrencyFrom($currencyFrom)
+    public function setCurrencyFrom(string $currencyFrom)
     {
         $this->currencyFrom = $currencyFrom;
     }
@@ -72,7 +60,7 @@ class CurrencyRate implements CurrencyRateInterface
     /**
      * {@inheritdoc}
      */
-    public function getCurrencyTo()
+    public function getCurrencyTo() : string
     {
         return $this->currencyTo;
     }
@@ -80,7 +68,7 @@ class CurrencyRate implements CurrencyRateInterface
     /**
      * {@inheritdoc}
      */
-    public function setCurrencyTo($currencyTo)
+    public function setCurrencyTo(string $currencyTo)
     {
         $this->currencyTo = $currencyTo;
     }
@@ -88,7 +76,7 @@ class CurrencyRate implements CurrencyRateInterface
     /**
      * {@inheritdoc}
      */
-    public function getExchangeRate()
+    public function getExchangeRate() : float
     {
         return $this->exchangeRate;
     }
@@ -96,8 +84,8 @@ class CurrencyRate implements CurrencyRateInterface
     /**
      * {@inheritdoc}
      */
-    public function setExchangeRate($exchangeRate)
+    public function setExchangeRate(float $exchangeRate)
     {
-        $this->exchangeRate = (float)$exchangeRate;
+        $this->exchangeRate = $exchangeRate;
     }
 }

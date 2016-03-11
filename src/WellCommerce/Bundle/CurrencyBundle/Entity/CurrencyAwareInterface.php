@@ -27,5 +27,5 @@ interface CurrencyAwareInterface
     /**
      * @return CurrencyInterface
      */
-    public function getCurrency();
+    public function getCurrency() : CurrencyInterface;
 }

@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\ClientBundle\Controller\Box;
 
 use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
+use WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxSettingsCollection;
 
 /**
  * Class ClientOrderBoxController
@@ -22,7 +23,7 @@ use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
  */
 class ClientOrderBoxController extends AbstractBoxController
 {
-    public function indexAction() : Response
+    public function indexAction(LayoutBoxSettingsCollection $boxSettings) : Response
     {
         $orders = $this->manager->getClient()->getOrders();
 

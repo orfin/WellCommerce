@@ -17,6 +17,7 @@ use WellCommerce\Bundle\AppBundle\Entity\HierarchyAwareInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
+use WellCommerce\Bundle\DoctrineBundle\Behaviours\Enableable\EnableableInterface;
 use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderStatusInterface;
 
@@ -25,26 +26,32 @@ use WellCommerce\Bundle\OrderBundle\Entity\OrderStatusInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface PaymentMethodInterface extends EntityInterface, TimestampableInterface, TranslatableInterface, BlameableInterface, HierarchyAwareInterface
+interface PaymentMethodInterface extends
+    EntityInterface,
+    EnableableInterface,
+    TimestampableInterface,
+    TranslatableInterface,
+    BlameableInterface,
+    HierarchyAwareInterface
 {
     /**
      * Returns payment method processor
      *
      * @return string
      */
-    public function getProcessor();
+    public function getProcessor() : string;
 
     /**
      * Sets payment method processor
      *
      * @param string $processor
      */
-    public function setProcessor($processor);
+    public function setProcessor(string $processor);
 
     /**
      * @return Collection
      */
-    public function getShippingMethods();
+    public function getShippingMethods() : Collection;
 
     /**
      * @param Collection $shippingMethods
@@ -54,7 +61,7 @@ interface PaymentMethodInterface extends EntityInterface, TimestampableInterface
     /**
      * @return OrderStatusInterface
      */
-    public function getDefaultOrderStatus();
+    public function getDefaultOrderStatus() : OrderStatusInterface;
 
     /**
      * @param OrderStatusInterface $defaultOrderStatus
@@ -64,7 +71,7 @@ interface PaymentMethodInterface extends EntityInterface, TimestampableInterface
     /**
      * @return Collection
      */
-    public function getConfiguration();
+    public function getConfiguration() : Collection;
 
     /**
      * @param Collection $configuration

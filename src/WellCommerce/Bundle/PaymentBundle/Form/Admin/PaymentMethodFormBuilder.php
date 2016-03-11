@@ -56,7 +56,7 @@ class PaymentMethodFormBuilder extends AbstractFormBuilder
         $processorType = $requiredData->addChild($this->getElement('select', [
             'name'    => 'processor',
             'label'   => $this->trans('payment_method.label.processor'),
-            'options' => $options
+            'options' => $options,
         ]));
 
         $requiredData->addChild($this->getElement('checkbox', [
@@ -119,9 +119,9 @@ class PaymentMethodFormBuilder extends AbstractFormBuilder
     /**
      * Returns the collection of payment method processors
      *
-     * @return \WellCommerce\Bundle\AppBundle\Service\PaymentMethod\Processor\PaymentMethodProcessorInterface[]
+     * @return \WellCommerce\Bundle\PaymentBundle\Processor\PaymentMethodProcessorInterface[]
      */
-    protected function getProcessors()
+    protected function getProcessors() : array
     {
         return $this->get('payment_method.processor.collection')->all();
     }

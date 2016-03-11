@@ -46,7 +46,7 @@ class ApiController extends AbstractController
         return new Response('documentation');
     }
 
-    public function createResourceAction(Request $request, string $resourceType) : JsonResponse
+    public function createResourceAction(Request $request, string $resourceType) : Response
     {
         try {
             $response = $this->getRequestHandler($resourceType)->handleCreateRequest($request);
@@ -57,7 +57,7 @@ class ApiController extends AbstractController
         return $response;
     }
 
-    public function updateResourceAction(Request $request, string $resourceType, int $identifier) : JsonResponse
+    public function updateResourceAction(Request $request, string $resourceType, int $identifier) : Response
     {
         try {
             $response = $this->getRequestHandler($resourceType)->handleUpdateRequest($request, $identifier);
@@ -68,7 +68,7 @@ class ApiController extends AbstractController
         return $response;
     }
 
-    public function deleteResourceAction(Request $request, string $resourceType, int $identifier) : JsonResponse
+    public function deleteResourceAction(Request $request, string $resourceType, int $identifier) : Response
     {
         try {
             $response = $this->getRequestHandler($resourceType)->handleDeleteRequest($request, $identifier);
@@ -79,7 +79,7 @@ class ApiController extends AbstractController
         return $response;
     }
 
-    public function getResourceAction(Request $request, string $resourceType, int $identifier) : JsonResponse
+    public function getResourceAction(Request $request, string $resourceType, int $identifier) : Response
     {
         try {
             $response = $this->getRequestHandler($resourceType)->handleGetRequest($request, $identifier);
@@ -90,7 +90,7 @@ class ApiController extends AbstractController
         return $response;
     }
 
-    public function listResourceAction(Request $request, string $resourceType) : JsonResponse
+    public function listResourceAction(Request $request, string $resourceType) : Response
     {
         try {
             $response = $this->getRequestHandler($resourceType)->handleListRequest($request);

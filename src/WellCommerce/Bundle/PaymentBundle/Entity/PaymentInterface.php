@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\PaymentBundle\Entity;
 
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderAwareInterface;
 
 /**
@@ -20,10 +21,6 @@ use WellCommerce\Bundle\OrderBundle\Entity\OrderAwareInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface PaymentInterface extends TimestampableInterface, OrderAwareInterface
+interface PaymentInterface extends EntityInterface, TimestampableInterface, OrderAwareInterface
 {
-    /**
-     * @return int
-     */
-    public function getId();
 }

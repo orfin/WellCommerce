@@ -91,6 +91,7 @@ abstract class AbstractAutoRegisterServicesPass implements CompilerPassInterface
         $serviceName = $name . '.factory';
         $definition  = new Definition($factoryClass);
         $definition->addArgument($entityClass);
+        $definition->addMethodCall('setContainer', [new Reference('service_container')]);
         $container->setDefinition($serviceName, $definition);
     }
 

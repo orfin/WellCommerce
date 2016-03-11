@@ -40,11 +40,6 @@ abstract class AbstractFrontController extends AbstractController implements Fro
         $this->manager = $manager;
     }
 
-    public function indexAction() : Response
-    {
-        return $this->displayTemplate('index');
-    }
-
     /**
      * Returns resource by ID parameter
      *

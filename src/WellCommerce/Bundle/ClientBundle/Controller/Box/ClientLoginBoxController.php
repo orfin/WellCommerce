@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\ClientBundle\Controller\Box;
 
 use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
+use WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxSettingsCollection;
 use WellCommerce\Component\Form\Elements\FormInterface;
 
 /**
@@ -23,7 +24,7 @@ use WellCommerce\Component\Form\Elements\FormInterface;
  */
 class ClientLoginBoxController extends AbstractBoxController
 {
-    public function indexAction() : Response
+    public function indexAction(LayoutBoxSettingsCollection $boxSettings) : Response
     {
         $form = $this->createForm();
 

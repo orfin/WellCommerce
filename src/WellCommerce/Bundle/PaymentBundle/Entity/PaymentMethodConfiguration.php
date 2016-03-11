@@ -3,21 +3,17 @@
 namespace WellCommerce\Bundle\PaymentBundle\Entity;
 
 use WellCommerce\Bundle\DoctrineBundle\Behaviours\Timestampable\TimestampableTrait;
+use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
 
 /**
  * Class PaymentMethodConfiguration
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PaymentMethodConfiguration implements PaymentMethodConfigurationInterface
+class PaymentMethodConfiguration extends AbstractEntity implements PaymentMethodConfigurationInterface
 {
     use TimestampableTrait;
     use PaymentMethodAwareTrait;
-
-    /**
-     * @var int
-     */
-    protected $id;
 
     /**
      * @var string
@@ -32,15 +28,7 @@ class PaymentMethodConfiguration implements PaymentMethodConfigurationInterface
     /**
      * {@inheritdoc}
      */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
+    public function getName() : string
     {
         return $this->name;
     }
@@ -48,7 +36,7 @@ class PaymentMethodConfiguration implements PaymentMethodConfigurationInterface
     /**
      * {@inheritdoc}
      */
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = $name;
     }

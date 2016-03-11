@@ -12,12 +12,15 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Factory;
 
+use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
+
 /**
  * Class AbstractFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractFactory implements FactoryInterface
+abstract class AbstractFactory extends AbstractContainerAware implements FactoryInterface
 {
     /**
      * @var string

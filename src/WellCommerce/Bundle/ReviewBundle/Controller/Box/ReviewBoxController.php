@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\ReviewBundle\Controller\Box;
 
 use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
+use WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxSettingsCollection;
 
 /**
  * Class ReviewBoxController
@@ -30,7 +31,7 @@ class ReviewBoxController extends AbstractBoxController
     /**
      * {@inheritdoc}
      */
-    public function indexAction() : Response
+    public function indexAction(LayoutBoxSettingsCollection $boxSettings) : Response
     {
         $product  = $this->manager->getProductContext()->getCurrentProduct();
         $resource = $this->manager->initResource();

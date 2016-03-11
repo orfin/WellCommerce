@@ -47,7 +47,7 @@ abstract class AbstractAdminController extends AbstractController implements Adm
         ]);
     }
 
-    public function gridAction(Request $request) : JsonResponse
+    public function gridAction(Request $request) : Response
     {
         if (!$request->isXmlHttpRequest()) {
             return $this->getRouterHelper()->redirectToAction('index');

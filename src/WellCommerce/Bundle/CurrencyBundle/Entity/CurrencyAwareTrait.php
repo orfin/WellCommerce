@@ -27,7 +27,7 @@ trait CurrencyAwareTrait
     /**
      * @return CurrencyInterface
      */
-    public function getCurrency()
+    public function getCurrency() : CurrencyInterface
     {
         return $this->currency;
     }

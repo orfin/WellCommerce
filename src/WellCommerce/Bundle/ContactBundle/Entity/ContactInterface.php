@@ -15,16 +15,14 @@ namespace WellCommerce\Bundle\ContactBundle\Entity;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
+use WellCommerce\Bundle\DoctrineBundle\Behaviours\Enableable\EnableableInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 
 /**
  * Interface ContactInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ContactInterface extends TimestampableInterface, TranslatableInterface, BlameableInterface
+interface ContactInterface extends EntityInterface, EnableableInterface, TimestampableInterface, TranslatableInterface, BlameableInterface
 {
-    /**
-     * @return integer
-     */
-    public function getId();
 }

@@ -22,8 +22,4 @@ use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
  */
 class ClientMenuBoxController extends AbstractBoxController
 {
-    public function indexAction() : Response
-    {
-        return $this->displayTemplate('index');
-    }
 }

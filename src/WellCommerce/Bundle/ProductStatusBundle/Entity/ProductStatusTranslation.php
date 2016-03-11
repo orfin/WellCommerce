@@ -115,7 +115,7 @@ class ProductStatusTranslation implements LocaleAwareInterface, RoutableSubjectI
     /**
      * {@inheritdoc}
      */
-    public function getCopyingSensitiveProperties()
+    public function getCopyingSensitiveProperties() : array
     {
         return [
             'slug',

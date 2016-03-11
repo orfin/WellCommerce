@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\PaymentBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderStatusInterface;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodInterface;
 
 /**
@@ -39,7 +40,21 @@ class PaymentMethodFactory extends AbstractFactory
         $paymentMethod->setEnabled(true);
         $paymentMethod->setConfiguration(new ArrayCollection());
         $paymentMethod->setShippingMethods(new ArrayCollection());
+        $paymentMethod->setProcessor($this->getDefaultProcessor());
+        $paymentMethod->setDefaultOrderStatus($this->getDefaultOrderStatus());
 
         return $paymentMethod;
+    }
+
+    protected function getDefaultOrderStatus() : OrderStatusInterface
+    {
+        return $this->get('order_status.repository')->findOneBy([]);
+    }
+
+    protected function getDefaultProcessor() : string
+    {
+        $processors = $this->get('payment_method.processor.collection')->keys();
+
+        return current($processors);
     }
 }

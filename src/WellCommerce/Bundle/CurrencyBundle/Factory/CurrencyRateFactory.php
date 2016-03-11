@@ -35,6 +35,8 @@ class CurrencyRateFactory extends AbstractFactory
         /** @var $currencyRate CurrencyRateInterface */
         $currencyRate = $this->init();
         $currencyRate->setExchangeRate(1);
+        $currencyRate->setCurrencyFrom('');
+        $currencyRate->setCurrencyTo('');
 
         return $currencyRate;
     }
