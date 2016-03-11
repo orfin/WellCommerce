@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\ProducerBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 use WellCommerce\Bundle\ProducerBundle\Entity\ProducerInterface;
 
 /**
@@ -21,7 +21,7 @@ use WellCommerce\Bundle\ProducerBundle\Entity\ProducerInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProducerFactory extends AbstractFactory
+class ProducerFactory extends AbstractEntityFactory
 {
     /**
      * @var string

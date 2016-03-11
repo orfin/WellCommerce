@@ -13,14 +13,14 @@
 namespace WellCommerce\Bundle\AvailabilityBundle\Factory;
 
 use WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityInterface;
-use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 
 /**
  * Class AvailabilityFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AvailabilityFactory extends AbstractFactory
+class AvailabilityFactory extends AbstractEntityFactory
 {
     /**
      * @var string

@@ -14,14 +14,14 @@ namespace WellCommerce\Bundle\CompanyBundle\Factory;
 
 use WellCommerce\Bundle\CompanyBundle\Entity\CompanyAddress;
 use WellCommerce\Bundle\CompanyBundle\Entity\CompanyInterface;
-use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 
 /**
  * Class CompanyFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CompanyFactory extends AbstractFactory
+class CompanyFactory extends AbstractEntityFactory
 {
     /**
      * @var string

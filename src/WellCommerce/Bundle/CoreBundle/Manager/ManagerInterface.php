@@ -70,7 +70,7 @@ interface ManagerInterface
     public function getEventDispatcher();
 
     /**
-     * @return \WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface
+     * @return \WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactoryInterface
      */
     public function getFactory();
 

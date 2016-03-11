@@ -12,6 +12,11 @@
 
 namespace WellCommerce\Component\Form;
 
+use WellCommerce\Component\Form\Dependencies\DependencyInterface;
+use WellCommerce\Component\Form\Elements\ElementInterface;
+use WellCommerce\Component\Form\Elements\FormInterface;
+use WellCommerce\Component\Form\Filters\FilterInterface;
+
 /**
  * Interface FormBuilderInterface
  *
@@ -25,9 +30,9 @@ interface FormBuilderInterface
      * @param array $options
      * @param null  $formData
      *
-     * @return \WellCommerce\Component\Form\Elements\FormInterface
+     * @return FormInterface
      */
-    public function createForm($options, $formData = null);
+    public function createForm(array $options, $formData = null) : FormInterface;
 
     /**
      * Returns an element object by its type
@@ -35,9 +40,9 @@ interface FormBuilderInterface
      * @param string $type
      * @param array  $options
      *
-     * @return \WellCommerce\Component\Form\Elements\ElementInterface
+     * @return ElementInterface
      */
-    public function getElement($type, array $options = []);
+    public function getElement(string $type, array $options = []) : ElementInterface;
 
     /**
      * Returns a filter object by its type
@@ -45,9 +50,9 @@ interface FormBuilderInterface
      * @param string $type
      * @param array  $options
      *
-     * @return \WellCommerce\Component\Form\Filters\FilterInterface
+     * @return FilterInterface
      */
-    public function getFilter($type, array $options = []);
+    public function getFilter(string $type, array $options = []) : FilterInterface;
 
     /**
      * Returns a dependency object by its type
@@ -55,7 +60,7 @@ interface FormBuilderInterface
      * @param string $type
      * @param array  $options
      *
-     * @return \WellCommerce\Component\Form\Dependencies\DependencyInterface
+     * @return DependencyInterface
      */
-    public function getDependency($type, array $options = []);
+    public function getDependency(string $type, array $options = []) : DependencyInterface;
 }

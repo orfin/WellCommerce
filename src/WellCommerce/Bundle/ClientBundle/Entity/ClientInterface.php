@@ -17,6 +17,7 @@ use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\UserInterface as BaseUserInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 use WellCommerce\Bundle\ShopBundle\Entity\ShopAwareInterface;
 
 /**
@@ -25,6 +26,7 @@ use WellCommerce\Bundle\ShopBundle\Entity\ShopAwareInterface;
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface ClientInterface extends
+    EntityInterface,
     \Serializable,
     BaseUserInterface,
     EquatableInterface,
@@ -34,24 +36,19 @@ interface ClientInterface extends
     ShopAwareInterface
 {
     /**
-     * @return int
+     * @return Collection
      */
-    public function getId();
+    public function getOrders() : Collection;
 
     /**
      * @return Collection
      */
-    public function getOrders();
-
-    /**
-     * @return Collection
-     */
-    public function getWishlist();
+    public function getWishlist() : Collection;
 
     /**
      * @return ClientDetailsInterface
      */
-    public function getClientDetails();
+    public function getClientDetails() : ClientDetailsInterface;
 
     /**
      * @param ClientDetailsInterface $clientDetails
@@ -61,7 +58,7 @@ interface ClientInterface extends
     /**
      * @return ClientContactDetailsInterface
      */
-    public function getContactDetails();
+    public function getContactDetails() : ClientContactDetailsInterface;
 
     /**
      * @param ClientContactDetailsInterface $contactDetails
@@ -71,7 +68,7 @@ interface ClientInterface extends
     /**
      * @return ClientBillingAddressInterface
      */
-    public function getBillingAddress();
+    public function getBillingAddress() : ClientBillingAddressInterface;
 
     /**
      * @param ClientBillingAddressInterface $billingAddress
@@ -81,7 +78,7 @@ interface ClientInterface extends
     /**
      * @return ClientShippingAddressInterface
      */
-    public function getShippingAddress();
+    public function getShippingAddress() : ClientShippingAddressInterface;
 
     /**
      * @param ClientShippingAddressInterface $shippingAddress

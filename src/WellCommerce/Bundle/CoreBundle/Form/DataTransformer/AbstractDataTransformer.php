@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\DataTransformer;
 
+use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use WellCommerce\Bundle\DoctrineBundle\Helper\Doctrine\DoctrineHelperInterface;
 use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
@@ -62,7 +63,7 @@ abstract class AbstractDataTransformer implements RepositoryAwareDataTransformer
      *
      * @return RepositoryInterface
      */
-    protected function getRepository()
+    protected function getRepository() : RepositoryInterface
     {
         if (null === $this->repository) {
             throw new \LogicException('Repository was not set during class initialization.');
@@ -76,7 +77,7 @@ abstract class AbstractDataTransformer implements RepositoryAwareDataTransformer
      *
      * @return DoctrineHelperInterface
      */
-    protected function getDoctrineHelper()
+    protected function getDoctrineHelper() : DoctrineHelperInterface
     {
         if (null === $this->doctrineHelper) {
             throw new \LogicException('Doctrine helper was not set during class initialization.');
@@ -90,9 +91,9 @@ abstract class AbstractDataTransformer implements RepositoryAwareDataTransformer
      *
      * @param string $class
      *
-     * @return \Doctrine\Common\Persistence\Mapping\ClassMetadata
+     * @return ClassMetadata
      */
-    protected function getClassMetadata($class)
+    protected function getClassMetadata(string $class) : ClassMetadata
     {
         $factory = $this->getDoctrineHelper()->getMetadataFactory();
         if (!$factory->hasMetadataFor($class)) {

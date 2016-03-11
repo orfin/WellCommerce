@@ -13,14 +13,14 @@
 namespace WellCommerce\Bundle\CartBundle\Factory;
 
 use WellCommerce\Bundle\CartBundle\Entity\CartProductInterface;
-use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 
 /**
  * Class CartProductFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CartProductFactory extends AbstractFactory
+class CartProductFactory extends AbstractEntityFactory
 {
     /**
      * @var string

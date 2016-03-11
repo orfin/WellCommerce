@@ -15,10 +15,15 @@ namespace WellCommerce\Bundle\CoreBundle\Form;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
 use WellCommerce\Bundle\CoreBundle\EventDispatcher\EventDispatcherInterface;
 use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
+use WellCommerce\Component\Form\DataTransformer\DataTransformerInterface;
+use WellCommerce\Component\Form\Dependencies\DependencyInterface;
+use WellCommerce\Component\Form\Elements\ElementInterface;
 use WellCommerce\Component\Form\Elements\FormInterface;
+use WellCommerce\Component\Form\Filters\FilterInterface;
 use WellCommerce\Component\Form\FormBuilderInterface;
 use WellCommerce\Component\Form\Handler\FormHandlerInterface;
 use WellCommerce\Component\Form\Resolver\FormResolverFactoryInterface;
+use WellCommerce\Component\Form\Rules\RuleInterface;
 
 /**
  * Class AbstractFormBuilder
@@ -62,7 +67,7 @@ abstract class AbstractFormBuilder extends AbstractContainerAware implements For
     /**
      * {@inheritdoc}
      */
-    public function createForm($options, $defaultData = null)
+    public function createForm(array $options, $defaultData = null) : FormInterface
     {
         $form = $this->getFormService($options);
         $this->buildForm($form);
@@ -75,7 +80,7 @@ abstract class AbstractFormBuilder extends AbstractContainerAware implements For
     /**
      * {@inheritdoc}
      */
-    public function getElement($alias, array $options = [])
+    public function getElement(string $alias, array $options = []) : ElementInterface
     {
         return $this->initService('element', $alias, $options);
     }
@@ -83,7 +88,7 @@ abstract class AbstractFormBuilder extends AbstractContainerAware implements For
     /**
      * {@inheritdoc}
      */
-    public function getRule($alias, array $options = [])
+    public function getRule(string $alias, array $options = []) : RuleInterface
     {
         return $this->initService('rule', $alias, $options);
     }
@@ -91,7 +96,7 @@ abstract class AbstractFormBuilder extends AbstractContainerAware implements For
     /**
      * {@inheritdoc}
      */
-    public function getFilter($alias, array $options = [])
+    public function getFilter(string $alias, array $options = []) : FilterInterface
     {
         return $this->initService('filter', $alias, $options);
     }
@@ -99,7 +104,7 @@ abstract class AbstractFormBuilder extends AbstractContainerAware implements For
     /**
      * {@inheritdoc}
      */
-    public function getDependency($alias, array $options = [])
+    public function getDependency(string $alias, array $options = []) : DependencyInterface
     {
         return $this->initService('dependency', $alias, $options);
     }
@@ -107,7 +112,7 @@ abstract class AbstractFormBuilder extends AbstractContainerAware implements For
     /**
      * {@inheritdoc}
      */
-    public function getRepositoryTransformer($alias, RepositoryInterface $repository)
+    public function getRepositoryTransformer(string $alias, RepositoryInterface $repository) : DataTransformerInterface
     {
         /** @var $transformer \WellCommerce\Component\Form\DataTransformer\DataTransformerInterface */
         $transformer = $this->get('form.data_transformer.factory')->createRepositoryTransformer($alias);
@@ -123,7 +128,7 @@ abstract class AbstractFormBuilder extends AbstractContainerAware implements For
      *
      * @return FormInterface
      */
-    protected function getFormService($options)
+    protected function getFormService(array $options) : FormInterface
     {
         return $this->getElement('form', $options);
     }
@@ -144,7 +149,7 @@ abstract class AbstractFormBuilder extends AbstractContainerAware implements For
      *
      * @return object
      */
-    protected function initService($type, $alias, $options)
+    protected function initService(string $type, string $alias, array $options)
     {
         $id      = $this->resolverFactory->resolve($type, $alias);
         $service = $this->get($id);

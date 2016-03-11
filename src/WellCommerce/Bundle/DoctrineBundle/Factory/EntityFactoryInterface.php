@@ -10,17 +10,19 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CoreBundle\Factory;
+namespace WellCommerce\Bundle\DoctrineBundle\Factory;
+
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 
 /**
- * Interface FactoryInterface
+ * Interface EntityFactoryInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface FactoryInterface
+interface EntityFactoryInterface
 {
     /**
-     * @return object
+     * @return EntityInterface
      */
     public function create();
 }

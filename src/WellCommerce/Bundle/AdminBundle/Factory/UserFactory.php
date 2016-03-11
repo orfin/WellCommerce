@@ -14,14 +14,14 @@ namespace WellCommerce\Bundle\AdminBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\Bundle\AdminBundle\Entity\UserInterface;
-use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 
 /**
  * Class UserFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class UserFactory extends AbstractFactory
+class UserFactory extends AbstractEntityFactory
 {
     /**
      * @var string

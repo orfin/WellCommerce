@@ -15,14 +15,14 @@ namespace WellCommerce\Bundle\ClientBundle\Factory;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetails;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientDetails;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
-use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 
 /**
  * Class ClientFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientFactory extends AbstractFactory
+class ClientFactory extends AbstractEntityFactory
 {
     /**
      * @var string

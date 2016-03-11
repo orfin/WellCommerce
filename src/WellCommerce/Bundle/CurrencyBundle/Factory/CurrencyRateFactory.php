@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\CurrencyBundle\Factory;
 
-use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 use WellCommerce\Bundle\CurrencyBundle\Entity\CurrencyRateInterface;
 
 /**
@@ -20,7 +20,7 @@ use WellCommerce\Bundle\CurrencyBundle\Entity\CurrencyRateInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CurrencyRateFactory extends AbstractFactory
+class CurrencyRateFactory extends AbstractEntityFactory
 {
     /**
      * @var string

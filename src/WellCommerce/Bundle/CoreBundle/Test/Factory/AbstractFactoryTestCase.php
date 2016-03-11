@@ -25,12 +25,12 @@ abstract class AbstractFactoryTestCase extends AbstractTestCase
     {
         $factory = $this->getFactoryService();
         if (null !== $factory) {
-            $this->assertInstanceOf('WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface', $factory);
+            $this->assertInstanceOf('WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactoryInterface', $factory);
         }
     }
 
     /**
-     * @return \WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface
+     * @return \WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactoryInterface
      */
     abstract protected function getFactoryService();
 

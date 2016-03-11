@@ -19,7 +19,7 @@ use WellCommerce\Bundle\CoreBundle\Test\Factory\AbstractFactoryTestCase;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CategoryFactoryTest extends AbstractFactoryTestCase
+class CategoryFactoryTest extends AbstractEntityFactoryTestCase
 {
     protected function getFactoryService()
     {

@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\CoreBundle\Form\DataTransformer;
 
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
 use WellCommerce\Component\Form\DataTransformer\DataTransformerCollection;
+use WellCommerce\Component\Form\DataTransformer\DataTransformerInterface;
 use WellCommerce\Component\Form\Exception\MissingFormDataTransformerException;
 
 /**
@@ -41,9 +42,9 @@ class DataTransformerFactory extends AbstractContainerAware
      *
      * @param string $alias
      *
-     * @return \WellCommerce\Component\Form\DataTransformer\DataTransformerInterface
+     * @return DataTransformerInterface
      */
-    public function createRepositoryTransformer($alias)
+    public function createRepositoryTransformer(string $alias) : DataTransformerInterface
     {
         if (!$this->collection->has($alias)) {
             throw new MissingFormDataTransformerException($alias);
@@ -51,6 +52,6 @@ class DataTransformerFactory extends AbstractContainerAware
 
         $serviceId = $this->collection->get($alias);
 
-        return $this->container->get($serviceId);
+        return $this->get($serviceId);
     }
 }

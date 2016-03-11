@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\ShopBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\Bundle\AppBundle\Entity\MailerConfiguration;
-use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 use WellCommerce\Bundle\ShopBundle\Entity\ShopInterface;
 
 /**
@@ -22,7 +22,7 @@ use WellCommerce\Bundle\ShopBundle\Entity\ShopInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ShopFactory extends AbstractFactory
+class ShopFactory extends AbstractEntityFactory
 {
     /**
      * @var string

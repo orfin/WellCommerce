@@ -13,14 +13,14 @@
 namespace WellCommerce\Bundle\ContactBundle\Factory;
 
 use WellCommerce\Bundle\ContactBundle\Entity\ContactInterface;
-use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 
 /**
  * Class ContactFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ContactFactory extends AbstractFactory
+class ContactFactory extends AbstractEntityFactory
 {
     /**
      * @var string

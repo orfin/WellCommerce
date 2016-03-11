@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\ProductBundle\Factory;
 
 use WellCommerce\Bundle\AppBundle\Entity\DiscountablePrice;
-use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeInterface;
 
 /**
@@ -21,7 +21,7 @@ use WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductAttributeFactory extends AbstractFactory
+class ProductAttributeFactory extends AbstractEntityFactory
 {
     /**
      * @var string

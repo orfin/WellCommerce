@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\DictionaryBundle\Factory;
 
-use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 use WellCommerce\Bundle\DictionaryBundle\Entity\DictionaryInterface;
 
 /**
@@ -20,7 +20,7 @@ use WellCommerce\Bundle\DictionaryBundle\Entity\DictionaryInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class DictionaryFactory extends AbstractFactory
+class DictionaryFactory extends AbstractEntityFactory
 {
     /**
      * @var string

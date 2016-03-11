@@ -10,17 +10,18 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CoreBundle\Factory;
+namespace WellCommerce\Bundle\DoctrineBundle\Factory;
 
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 
 /**
  * Class AbstractFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractFactory extends AbstractContainerAware implements FactoryInterface
+abstract class AbstractEntityFactory extends AbstractContainerAware implements EntityFactoryInterface
 {
     /**
      * @var string
@@ -33,19 +34,14 @@ abstract class AbstractFactory extends AbstractContainerAware implements Factory
     protected $className;
 
     /**
-     * AbstractFactory constructor.
+     * AbstractEntityFactory constructor.
      *
      * @param string $className
      */
-    public function __construct($className)
+    public function __construct(string $className)
     {
         $this->className = $className;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    abstract public function create();
 
     /**
      * @return object

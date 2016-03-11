@@ -14,14 +14,14 @@ namespace WellCommerce\Bundle\AdminBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\Bundle\AdminBundle\Entity\RoleInterface;
-use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 
 /**
  * Class RoleFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class RoleFactory extends AbstractFactory
+class RoleFactory extends AbstractEntityFactory
 {
     /**
      * @var string

@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\DelivererBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 use WellCommerce\Bundle\DelivererBundle\Entity\DelivererInterface;
 
 /**
@@ -21,7 +21,7 @@ use WellCommerce\Bundle\DelivererBundle\Entity\DelivererInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class DelivererFactory extends AbstractFactory
+class DelivererFactory extends AbstractEntityFactory
 {
     /**
      * @var string

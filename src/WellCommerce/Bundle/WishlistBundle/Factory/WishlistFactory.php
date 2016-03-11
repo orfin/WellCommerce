@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\WishlistBundle\Factory;
 
-use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 use WellCommerce\Bundle\WishlistBundle\Entity\WishlistInterface;
 
 /**
@@ -20,7 +20,7 @@ use WellCommerce\Bundle\WishlistBundle\Entity\WishlistInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class WishlistFactory extends AbstractFactory
+class WishlistFactory extends AbstractEntityFactory
 {
     /**
      * @var string
