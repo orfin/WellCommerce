@@ -35,5 +35,5 @@ interface LocaleAwareInterface
      *
      * @return array
      */
-    public function getCopyingSensitiveProperties();
+    public function getCopyingSensitiveProperties() : array;
 }
