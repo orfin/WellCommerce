@@ -136,7 +136,7 @@ class ProductTranslation implements LocaleAwareInterface, RoutableSubjectInterfa
     /**
      * {@inheritdoc}
      */
-    public function getCopyingSensitiveProperties()
+    public function getCopyingSensitiveProperties() : array
     {
         return [
             'name',
