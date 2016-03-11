@@ -40,6 +40,7 @@ class AbstractAdminControllerTestCase extends AbstractTestCase
         $token    = new UsernamePasswordToken('admin', 'admin', $firewall, ['ROLE_ADMIN']);
         $token->setUser($user);
 
+        $session->set('_currency', 'USD');
         $session->set('_security_' . $firewall, serialize($token));
         $session->save();
 
