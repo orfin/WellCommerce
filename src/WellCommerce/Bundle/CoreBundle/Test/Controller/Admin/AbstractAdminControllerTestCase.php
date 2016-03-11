@@ -35,12 +35,13 @@ class AbstractAdminControllerTestCase extends AbstractTestCase
     protected function logIn()
     {
         $user     = $this->container->get('user.repository')->findOneBy([]);
+        $currency = $this->container->get('currency.repository')->findOneBy([]);
         $session  = $this->client->getContainer()->get('session');
         $firewall = 'admin';
         $token    = new UsernamePasswordToken('admin', 'admin', $firewall, ['ROLE_ADMIN']);
         $token->setUser($user);
 
-        $session->set('_currency', 'USD');
+        $session->set('_currency', $currency->getCode());
         $session->set('_security_' . $firewall, serialize($token));
         $session->save();
 
