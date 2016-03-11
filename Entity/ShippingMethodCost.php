@@ -2,8 +2,8 @@
 
 namespace WellCommerce\Bundle\ShippingBundle\Entity;
 
-use WellCommerce\Bundle\DoctrineBundle\Behaviours\Timestampable\TimestampableTrait;
 use WellCommerce\Bundle\AppBundle\Entity\Price;
+use WellCommerce\Bundle\DoctrineBundle\Behaviours\Timestampable\TimestampableTrait;
 
 /**
  * Class ShippingMethodCost
