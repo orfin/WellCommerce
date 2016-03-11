@@ -35,10 +35,14 @@ class UserFactory extends AbstractFactory
     {
         /** @var $user UserInterface */
         $user = $this->init();
+        $user->setFirstName('');
+        $user->setLastName('');
+        $user->setEmail('');
         $user->setEnabled(true);
         $user->setRoles(new ArrayCollection());
         $user->setGroups(new ArrayCollection());
         $user->setSalt(base_convert(sha1(uniqid(mt_rand(), true)), 16, 36));
+        $user->setApiKey('');
         $user->setCreatedAt(new \DateTime());
 
         return $user;

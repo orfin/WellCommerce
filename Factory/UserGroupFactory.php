@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\AdminBundle\Factory;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\Bundle\AdminBundle\Entity\UserGroupInterface;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 
@@ -32,7 +33,10 @@ class UserGroupFactory extends AbstractFactory
      */
     public function create()
     {
+        /** @var $group UserGroupInterface */
         $group = $this->init();
+        $group->setName('');
+        $group->setPermissions(new ArrayCollection());
 
         return $group;
     }
