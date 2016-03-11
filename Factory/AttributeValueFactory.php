@@ -14,14 +14,14 @@ namespace WellCommerce\Bundle\AttributeBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeValueInterface;
-use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 
 /**
  * Class AttributeValueFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AttributeValueFactory extends AbstractFactory
+class AttributeValueFactory extends AbstractEntityFactory
 {
     /**
      * @var string
