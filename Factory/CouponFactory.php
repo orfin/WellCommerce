@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\CouponBundle\Factory;
 
-use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 use WellCommerce\Bundle\CouponBundle\Entity\CouponInterface;
 
 /**
@@ -20,7 +20,7 @@ use WellCommerce\Bundle\CouponBundle\Entity\CouponInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CouponFactory extends AbstractFactory
+class CouponFactory extends AbstractEntityFactory
 {
     /**
      * @var string
