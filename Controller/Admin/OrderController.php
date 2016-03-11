@@ -13,7 +13,9 @@
 namespace WellCommerce\Bundle\OrderBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
+use WellCommerce\Bundle\OrderBundle\Context\Front\OrderContextInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 
 /**
@@ -23,7 +25,7 @@ use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
  */
 class OrderController extends AbstractAdminController
 {
-    public function editAction(Request $request)
+    public function editAction(Request $request) : Response
     {
         $resource = $this->manager->findResource($request);
         if (!$resource instanceof OrderInterface) {
@@ -50,10 +52,7 @@ class OrderController extends AbstractAdminController
         ]);
     }
 
-    /**
-     * @return \WellCommerce\Bundle\OrderBundle\Context\Admin\OrderContextInterface
-     */
-    protected function getOrderContext()
+    protected function getOrderContext() : OrderContextInterface
     {
         return $this->get('order.context.admin');
     }
