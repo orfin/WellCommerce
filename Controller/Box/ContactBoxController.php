@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\ContactBundle\Controller\Box;
 
-use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 
 /**
