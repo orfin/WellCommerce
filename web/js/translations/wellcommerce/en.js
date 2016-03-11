@@ -244,6 +244,8 @@
     Translator.add("client.flash.change_password.success", "New password was set.", "wellcommerce", "en");
     Translator.add("client.comment.discount", "Enter percentage-based discount ie. 10 for 10%", "wellcommerce", "en");
     Translator.add("client.email.heading.reset_password", "Reset password instructions", "wellcommerce", "en");
+    Translator.add("client.email.heading.registration_ok", "User registration", "wellcommerce", "en");
+    Translator.add("client.email.heading.register", "User registration", "wellcommerce", "en");
     Translator.add("client.email.body.reset_password_instructions", "Password recovery procedure is in progress.", "wellcommerce", "en");
     Translator.add("client.email.body.confirm_password_reset", "Head to the site to establish a new password.", "wellcommerce", "en");
     Translator.add("client_group.heading.index", "Client groups", "wellcommerce", "en");

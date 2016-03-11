@@ -4844,6 +4844,8 @@
     Translator.add("client.flash.change_password.success", "New password was set.", "wellcommerce", "en");
     Translator.add("client.comment.discount", "Enter percentage-based discount ie. 10 for 10%", "wellcommerce", "en");
     Translator.add("client.email.heading.reset_password", "Reset password instructions", "wellcommerce", "en");
+    Translator.add("client.email.heading.registration_ok", "User registration", "wellcommerce", "en");
+    Translator.add("client.email.heading.register", "User registration", "wellcommerce", "en");
     Translator.add("client.email.body.reset_password_instructions", "Password recovery procedure is in progress.", "wellcommerce", "en");
     Translator.add("client.email.body.confirm_password_reset", "Head to the site to establish a new password.", "wellcommerce", "en");
     Translator.add("client_group.heading.index", "Client groups", "wellcommerce", "en");
@@ -5389,6 +5391,8 @@
     Translator.add("client.flash.change_password.success", "Nowe has\u0142o zosta\u0142o ustawione", "wellcommerce", "pl");
     Translator.add("client.comment.discount", "Wprowad\u017a procentow\u0105 warto\u015b\u0107 zni\u017cki (np. 10 dla 10% zni\u017cki)", "wellcommerce", "pl");
     Translator.add("client.email.heading.reset_password", "Informacje dotycz\u0105ce zresetowania has\u0142a", "wellcommerce", "pl");
+    Translator.add("client.email.heading.registration_ok", "Rejestracja u\u017cytkownika", "wellcommerce", "pl");
+    Translator.add("client.email.heading.register", "Rejestracja u\u017cytkownika", "wellcommerce", "pl");
     Translator.add("client.email.body.reset_password_instructions", "Rozpocz\u0119to procedur\u0119 odzyskiwania has\u0142a.", "wellcommerce", "pl");
     Translator.add("client.email.body.confirm_password_reset", "Przejd\u017a na stron\u0119 celem ustalenia nowego has\u0142a w sklepie.", "wellcommerce", "pl");
     Translator.add("client_group.heading.index", "Grupy klient\u00f3w", "wellcommerce", "pl");
