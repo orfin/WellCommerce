@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\PageBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 use WellCommerce\Bundle\PageBundle\Entity\PageInterface;
 
 /**
@@ -21,7 +21,7 @@ use WellCommerce\Bundle\PageBundle\Entity\PageInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PageFactory extends AbstractFactory
+class PageFactory extends AbstractEntityFactory
 {
     /**
      * @var string
