@@ -95,11 +95,11 @@ class XmlImporter implements AdminMenuImporterInterface
 
         if (null === $adminMenuItem) {
             $adminMenuItem = $this->adminMenuFactory->create();
-            $adminMenuItem->setCssClass($item->css_class);
-            $adminMenuItem->setIdentifier($item->identifier);
-            $adminMenuItem->setName($item->name);
-            $adminMenuItem->setRouteName($item->route_name);
-            $adminMenuItem->setHierarchy($item->hierarchy);
+            $adminMenuItem->setCssClass((string)$item->css_class);
+            $adminMenuItem->setIdentifier((string)$item->identifier);
+            $adminMenuItem->setName((string)$item->name);
+            $adminMenuItem->setRouteName((string)$item->route_name);
+            $adminMenuItem->setHierarchy((int)$item->hierarchy);
             $adminMenuItem->setParent($parent);
 
             $em->persist($adminMenuItem);
