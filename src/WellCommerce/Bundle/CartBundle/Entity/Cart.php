@@ -12,13 +12,13 @@
 namespace WellCommerce\Bundle\CartBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
-use WellCommerce\Bundle\DoctrineBundle\Behaviours\Timestampable\TimestampableTrait;
 use WellCommerce\Bundle\CartBundle\Visitor\CartVisitorInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientAwareTrait;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddressInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetailsInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddressInterface;
 use WellCommerce\Bundle\CouponBundle\Entity\CouponAwareTrait;
+use WellCommerce\Bundle\DoctrineBundle\Behaviours\Timestampable\TimestampableTrait;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodAwareTrait;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodInterface;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCostInterface;
