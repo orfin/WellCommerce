@@ -17,6 +17,7 @@ use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use WellCommerce\Bundle\AppBundle\Entity\MailerConfiguration;
 use WellCommerce\Bundle\CompanyBundle\Entity\CompanyInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
 use WellCommerce\Bundle\ThemeBundle\Entity\ThemeAwareTrait;
 
 /**
@@ -24,16 +25,11 @@ use WellCommerce\Bundle\ThemeBundle\Entity\ThemeAwareTrait;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Shop implements ShopInterface
+class Shop extends AbstractEntity implements ShopInterface
 {
     use Timestampable;
     use Blameable;
     use ThemeAwareTrait;
-
-    /**
-     * @var integer
-     */
-    protected $id;
 
     /**
      * @var string
@@ -88,15 +84,7 @@ class Shop implements ShopInterface
     /**
      * {@inheritdoc}
      */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
+    public function getName() : string
     {
         return $this->name;
     }
@@ -104,7 +92,7 @@ class Shop implements ShopInterface
     /**
      * {@inheritdoc}
      */
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = $name;
     }
@@ -112,7 +100,7 @@ class Shop implements ShopInterface
     /**
      * {@inheritdoc}
      */
-    public function getProducts()
+    public function getProducts() : Collection
     {
         return $this->products;
     }
@@ -128,7 +116,7 @@ class Shop implements ShopInterface
     /**
      * {@inheritdoc}
      */
-    public function getCompany()
+    public function getCompany() : CompanyInterface
     {
         return $this->company;
     }
@@ -144,7 +132,7 @@ class Shop implements ShopInterface
     /**
      * {@inheritdoc}
      */
-    public function getCategories()
+    public function getCategories() : Collection
     {
         return $this->categories;
     }
@@ -160,7 +148,7 @@ class Shop implements ShopInterface
     /**
      * {@inheritdoc}
      */
-    public function getProducers()
+    public function getProducers() : Collection
     {
         return $this->producers;
     }
@@ -176,7 +164,7 @@ class Shop implements ShopInterface
     /**
      * {@inheritdoc}
      */
-    public function getUrl()
+    public function getUrl() : string
     {
         return $this->url;
     }
@@ -184,7 +172,7 @@ class Shop implements ShopInterface
     /**
      * {@inheritdoc}
      */
-    public function setUrl($url)
+    public function setUrl(string $url)
     {
         $this->url = $url;
     }
@@ -192,7 +180,7 @@ class Shop implements ShopInterface
     /**
      * {@inheritdoc}
      */
-    public function getPages()
+    public function getPages() : Collection
     {
         return $this->pages;
     }
@@ -208,7 +196,7 @@ class Shop implements ShopInterface
     /**
      * {@inheritdoc}
      */
-    public function getDefaultCountry()
+    public function getDefaultCountry() : string
     {
         return $this->defaultCountry;
     }
@@ -216,7 +204,7 @@ class Shop implements ShopInterface
     /**
      * {@inheritdoc}
      */
-    public function setDefaultCountry($defaultCountry)
+    public function setDefaultCountry(string $defaultCountry)
     {
         $this->defaultCountry = $defaultCountry;
     }
@@ -224,7 +212,7 @@ class Shop implements ShopInterface
     /**
      * {@inheritdoc}
      */
-    public function getDefaultCurrency()
+    public function getDefaultCurrency() : string
     {
         return $this->defaultCurrency;
     }
@@ -232,17 +220,23 @@ class Shop implements ShopInterface
     /**
      * {@inheritdoc}
      */
-    public function setDefaultCurrency($defaultCurrency)
+    public function setDefaultCurrency(string $defaultCurrency)
     {
         $this->defaultCurrency = $defaultCurrency;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setMailerConfiguration(MailerConfiguration $configuration)
     {
         $this->mailerConfiguration = $configuration;
     }
 
-    public function getMailerConfiguration()
+    /**
+     * {@inheritdoc}
+     */
+    public function getMailerConfiguration() : MailerConfiguration
     {
         return $this->mailerConfiguration;
     }

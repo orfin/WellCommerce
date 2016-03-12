@@ -27,7 +27,7 @@ trait ShopAwareTrait
     /**
      * @return ShopInterface
      */
-    public function getShop()
+    public function getShop() : ShopInterface
     {
         return $this->shop;
     }
