@@ -13,46 +13,42 @@
 namespace WellCommerce\Bundle\ThemeBundle\Entity;
 
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 
 /**
  * Interface ThemeCssInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ThemeCssInterface extends TimestampableInterface, ThemeAwareInterface
+interface ThemeCssInterface extends EntityInterface, TimestampableInterface, ThemeAwareInterface
 {
-    /**
-     * @return int
-     */
-    public function getId();
-
     /**
      * @return string
      */
-    public function getAttribute();
+    public function getAttribute() : string;
 
     /**
      * @param string $attribute
      */
-    public function setAttribute($attribute);
+    public function setAttribute(string $attribute);
 
     /**
      * @return string
      */
-    public function getClass();
+    public function getClass() : string;
 
     /**
      * @param string $class
      */
-    public function setClass($class);
+    public function setClass(string $class);
 
     /**
      * @return string
      */
-    public function getSelector();
+    public function getSelector() : string;
 
     /**
      * @param string $selector
      */
-    public function setSelector($selector);
+    public function setSelector(string $selector);
 }

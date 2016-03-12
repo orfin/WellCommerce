@@ -15,20 +15,17 @@ namespace WellCommerce\Bundle\ThemeBundle\Entity;
 use Doctrine\Common\Collections\Collection;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
+use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
 
 /**
  * Class Theme
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Theme implements ThemeInterface
+class Theme extends AbstractEntity implements ThemeInterface
 {
-    use Timestampable, Blameable;
-
-    /**
-     * @var int
-     */
-    protected $id;
+    use Timestampable;
+    use Blameable;
 
     /**
      * @var string
@@ -48,15 +45,7 @@ class Theme implements ThemeInterface
     /**
      * {@inheritdoc}
      */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
+    public function getName() : string
     {
         return $this->name;
     }
@@ -64,7 +53,7 @@ class Theme implements ThemeInterface
     /**
      * {@inheritdoc}
      */
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = $name;
     }
@@ -72,7 +61,7 @@ class Theme implements ThemeInterface
     /**
      * @return string
      */
-    public function getFolder()
+    public function getFolder() : string
     {
         return $this->folder;
     }
@@ -80,7 +69,7 @@ class Theme implements ThemeInterface
     /**
      * {@inheritdoc}
      */
-    public function setFolder($folder)
+    public function setFolder(string $folder)
     {
         $this->folder = $folder;
     }
@@ -88,7 +77,7 @@ class Theme implements ThemeInterface
     /**
      * {@inheritdoc}
      */
-    public function getCss()
+    public function getCss() : Collection
     {
         return $this->css;
     }

@@ -13,20 +13,17 @@
 namespace WellCommerce\Bundle\ThemeBundle\Entity;
 
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
+use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
 
 /**
  * Class ThemeCss
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ThemeCss implements ThemeCssInterface
+class ThemeCss extends AbstractEntity implements ThemeCssInterface
 {
-    use Timestampable, ThemeAwareTrait;
-
-    /**
-     * @var int
-     */
-    protected $id;
+    use Timestampable;
+    use ThemeAwareTrait;
 
     /**
      * @var string
@@ -44,17 +41,9 @@ class ThemeCss implements ThemeCssInterface
     protected $attribute;
 
     /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
      * @return string
      */
-    public function getAttribute()
+    public function getAttribute() : string
     {
         return $this->attribute;
     }
@@ -62,7 +51,7 @@ class ThemeCss implements ThemeCssInterface
     /**
      * @param string $attribute
      */
-    public function setAttribute($attribute)
+    public function setAttribute(string $attribute)
     {
         $this->attribute = $attribute;
     }
@@ -70,7 +59,7 @@ class ThemeCss implements ThemeCssInterface
     /**
      * @return string
      */
-    public function getClass()
+    public function getClass() : string
     {
         return $this->class;
     }
@@ -78,7 +67,7 @@ class ThemeCss implements ThemeCssInterface
     /**
      * @param string $class
      */
-    public function setClass($class)
+    public function setClass(string $class)
     {
         $this->class = $class;
     }
@@ -86,7 +75,7 @@ class ThemeCss implements ThemeCssInterface
     /**
      * @return string
      */
-    public function getSelector()
+    public function getSelector() : string
     {
         return $this->selector;
     }
@@ -94,7 +83,7 @@ class ThemeCss implements ThemeCssInterface
     /**
      * @param string $selector
      */
-    public function setSelector($selector)
+    public function setSelector(string $selector)
     {
         $this->selector = $selector;
     }
