@@ -20,22 +20,22 @@ namespace WellCommerce\Bundle\ShippingBundle\Calculator;
 interface ShippingCalculatorSubjectInterface
 {
     /**
-     * @return float
+     * @return int
      */
-    public function getShippingCostQuantity();
+    public function getShippingCostQuantity() : int;
 
     /**
      * @return float
      */
-    public function getShippingCostWeight();
+    public function getShippingCostWeight() : float;
 
     /**
      * @return float
      */
-    public function getShippingCostGrossPrice();
+    public function getShippingCostGrossPrice() : float;
 
     /**
      * @return string
      */
-    public function getShippingCostCurrency();
+    public function getShippingCostCurrency() : string;
 }
