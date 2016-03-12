@@ -29,7 +29,7 @@ trait ShopCollectionAwareTrait
     /**
      * @return Collection
      */
-    public function getShops()
+    public function getShops() : Collection
     {
         return $this->shops;
     }

@@ -27,5 +27,5 @@ interface ShopAwareInterface
     /**
      * @return Shop
      */
-    public function getShop();
+    public function getShop() : ShopInterface;
 }

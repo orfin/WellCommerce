@@ -24,7 +24,7 @@ interface ShopCollectionAwareInterface
     /**
      * @return Collection
      */
-    public function getShops();
+    public function getShops() : Collection;
 
     /**
      * @param Collection $shops
