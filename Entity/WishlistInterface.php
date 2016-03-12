@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\WishlistBundle\Entity;
 
 use WellCommerce\Bundle\ClientBundle\Entity\ClientAwareInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareInterface;
 
 /**
@@ -21,10 +22,6 @@ use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface WishlistInterface extends ClientAwareInterface, TimestampableInterface, ProductAwareInterface
+interface WishlistInterface extends EntityInterface, ClientAwareInterface, TimestampableInterface, ProductAwareInterface
 {
-    /**
-     * @return int
-     */
-    public function getId();
 }
