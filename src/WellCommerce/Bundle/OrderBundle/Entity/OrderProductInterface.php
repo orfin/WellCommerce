@@ -30,16 +30,15 @@ interface OrderProductInterface extends
     TimestampableInterface,
     OrderAwareInterface
 {
-
     /**
      * @return int
      */
-    public function getQuantity() : float;
+    public function getQuantity() : int;
 
     /**
      * @param float $quantity
      */
-    public function setQuantity(float $quantity);
+    public function setQuantity(int $quantity);
 
     /**
      * @return Price
@@ -65,7 +64,7 @@ interface OrderProductInterface extends
      * @return float
      */
     public function getWeight() : float;
-    
+
     /**
      * @param float $weight
      */
