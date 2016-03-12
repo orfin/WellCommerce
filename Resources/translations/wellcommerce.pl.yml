@@ -43,6 +43,8 @@ order:
     description:
         product_total: Wartość produktów
         shipping_cost: Koszty wysyłki
+    notice:
+        empty_order_list: Nie złożyłeś jeszcze żadnych zamówień
 
 order_status:
     heading:
