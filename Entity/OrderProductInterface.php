@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\OrderBundle\Entity;
 
 use WellCommerce\Bundle\AppBundle\Entity\Price;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeAwareInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareInterface;
 
@@ -22,27 +23,28 @@ use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface OrderProductInterface extends ProductAwareInterface, ProductAttributeAwareInterface, TimestampableInterface, OrderAwareInterface
+interface OrderProductInterface extends
+    EntityInterface,
+    ProductAwareInterface,
+    ProductAttributeAwareInterface,
+    TimestampableInterface,
+    OrderAwareInterface
 {
-    /**
-     * @return int
-     */
-    public function getId();
 
     /**
      * @return int
      */
-    public function getQuantity();
+    public function getQuantity() : float;
 
     /**
      * @param float $quantity
      */
-    public function setQuantity($quantity);
+    public function setQuantity(float $quantity);
 
     /**
      * @return Price
      */
-    public function getSellPrice();
+    public function getSellPrice() : Price;
 
     /**
      * @param Price $sellPrice
@@ -52,7 +54,7 @@ interface OrderProductInterface extends ProductAwareInterface, ProductAttributeA
     /**
      * @return Price
      */
-    public function getBuyPrice();
+    public function getBuyPrice() : Price;
 
     /**
      * @param Price $buyPrice
@@ -62,10 +64,10 @@ interface OrderProductInterface extends ProductAwareInterface, ProductAttributeA
     /**
      * @return float
      */
-    public function getWeight();
-
+    public function getWeight() : float;
+    
     /**
      * @param float $weight
      */
-    public function setWeight($weight);
+    public function setWeight(float $weight);
 }

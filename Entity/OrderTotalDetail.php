@@ -36,14 +36,14 @@ class OrderTotalDetail extends AbstractEntity implements OrderTotalDetailInterfa
     protected $modifierType;
 
     /**
-     * @var int|float
+     * @var float
      */
     protected $modifierValue;
 
     /**
      * {@inheritdoc}
      */
-    public function getCollector()
+    public function getCollector() : string
     {
         return $this->collector;
     }
@@ -51,7 +51,7 @@ class OrderTotalDetail extends AbstractEntity implements OrderTotalDetailInterfa
     /**
      * {@inheritdoc}
      */
-    public function setCollector($collector)
+    public function setCollector(string $collector)
     {
         $this->collector = $collector;
     }
@@ -59,7 +59,7 @@ class OrderTotalDetail extends AbstractEntity implements OrderTotalDetailInterfa
     /**
      * {@inheritdoc}
      */
-    public function getOrderTotal()
+    public function getOrderTotal() : OrderTotal
     {
         return $this->orderTotal;
     }
@@ -75,7 +75,7 @@ class OrderTotalDetail extends AbstractEntity implements OrderTotalDetailInterfa
     /**
      * {@inheritdoc}
      */
-    public function getModifierType()
+    public function getModifierType() : string
     {
         return $this->modifierType;
     }
@@ -83,7 +83,7 @@ class OrderTotalDetail extends AbstractEntity implements OrderTotalDetailInterfa
     /**
      * {@inheritdoc}
      */
-    public function setModifierType($modifierType)
+    public function setModifierType(string $modifierType)
     {
         $this->modifierType = $modifierType;
     }
@@ -91,7 +91,7 @@ class OrderTotalDetail extends AbstractEntity implements OrderTotalDetailInterfa
     /**
      * {@inheritdoc}
      */
-    public function getModifierValue()
+    public function getModifierValue() : float
     {
         return $this->modifierValue;
     }
@@ -99,7 +99,7 @@ class OrderTotalDetail extends AbstractEntity implements OrderTotalDetailInterfa
     /**
      * {@inheritdoc}
      */
-    public function setModifierValue($modifierValue)
+    public function setModifierValue(float $modifierValue)
     {
         $this->modifierValue = $modifierValue;
     }
@@ -107,7 +107,7 @@ class OrderTotalDetail extends AbstractEntity implements OrderTotalDetailInterfa
     /**
      * {@inheritdoc}
      */
-    public function isSubtraction()
+    public function isSubtraction() : bool
     {
         return $this->subtraction;
     }
@@ -115,7 +115,7 @@ class OrderTotalDetail extends AbstractEntity implements OrderTotalDetailInterfa
     /**
      * {@inheritdoc}
      */
-    public function setSubtraction($subtraction)
+    public function setSubtraction(bool $subtraction)
     {
         $this->subtraction = $subtraction;
     }

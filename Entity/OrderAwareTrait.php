@@ -27,7 +27,7 @@ trait OrderAwareTrait
     /**
      * @return OrderInterface
      */
-    public function getOrder()
+    public function getOrder() : OrderInterface
     {
         return $this->order;
     }

@@ -19,6 +19,7 @@ use WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetailsInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddressInterface;
 use WellCommerce\Bundle\CouponBundle\Entity\CouponAwareTrait;
 use WellCommerce\Bundle\DoctrineBundle\Behaviours\Timestampable\TimestampableTrait;
+use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodAwareTrait;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodAwareTrait;
@@ -29,7 +30,7 @@ use WellCommerce\Bundle\ShopBundle\Entity\ShopAwareTrait;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Order implements OrderInterface
+class Order extends AbstractEntity implements OrderInterface
 {
     use TimestampableTrait;
     use ShopAwareTrait;
@@ -37,11 +38,6 @@ class Order implements OrderInterface
     use PaymentMethodAwareTrait;
     use ClientAwareTrait;
     use CouponAwareTrait;
-
-    /**
-     * @var int
-     */
-    protected $id;
 
     /**
      * @var string
@@ -111,15 +107,7 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCurrency()
+    public function getCurrency() : string
     {
         return $this->currency;
     }
@@ -127,7 +115,7 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setCurrency($currency)
+    public function setCurrency(string $currency)
     {
         $this->currency = $currency;
     }
@@ -135,7 +123,7 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getSessionId()
+    public function getSessionId() : string
     {
         return $this->sessionId;
     }
@@ -143,7 +131,7 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setSessionId($sessionId)
+    public function setSessionId(string $sessionId)
     {
         $this->sessionId = $sessionId;
     }
@@ -167,7 +155,7 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getProducts()
+    public function getProducts() : Collection
     {
         return $this->products;
     }
@@ -183,7 +171,7 @@ class Order implements OrderInterface
     /**
      * @return OrderTotal
      */
-    public function getOrderTotal()
+    public function getOrderTotal() : OrderTotal
     {
         return $this->orderTotal;
     }
@@ -199,7 +187,7 @@ class Order implements OrderInterface
     /**
      * @return OrderTotal
      */
-    public function getProductTotal()
+    public function getProductTotal() : OrderTotal
     {
         return $this->productTotal;
     }
@@ -215,7 +203,7 @@ class Order implements OrderInterface
     /**
      * @return OrderTotal
      */
-    public function getShippingTotal()
+    public function getShippingTotal() : OrderTotal
     {
         return $this->shippingTotal;
     }
@@ -231,7 +219,7 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getContactDetails()
+    public function getContactDetails() : ClientContactDetailsInterface
     {
         return $this->contactDetails;
     }
@@ -247,7 +235,7 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getBillingAddress()
+    public function getBillingAddress() : ClientBillingAddressInterface
     {
         return $this->billingAddress;
     }
@@ -263,7 +251,7 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getShippingAddress()
+    public function getShippingAddress() : ClientShippingAddressInterface
     {
         return $this->shippingAddress;
     }
@@ -279,7 +267,7 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getTotals()
+    public function getTotals() : Collection
     {
         return $this->totals;
     }
@@ -303,7 +291,7 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getCurrentStatus()
+    public function getCurrentStatus() : OrderStatusInterface
     {
         return $this->currentStatus;
     }
@@ -319,7 +307,7 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getComment()
+    public function getComment() : string
     {
         return $this->comment;
     }
@@ -327,7 +315,7 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setComment($comment)
+    public function setComment(string $comment)
     {
         $this->comment = $comment;
     }
@@ -335,7 +323,7 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getPayments()
+    public function getPayments() : Collection
     {
         return $this->payments;
     }
@@ -359,7 +347,7 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getShippingCostQuantity()
+    public function getShippingCostQuantity() : int
     {
         $quantity = 0;
         $this->products->map(function (OrderProduct $orderProduct) use (&$quantity) {
@@ -372,7 +360,7 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getShippingCostWeight()
+    public function getShippingCostWeight() : float
     {
         $weight = 0;
         $this->products->map(function (OrderProduct $orderProduct) use (&$weight) {
@@ -385,7 +373,7 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getShippingCostGrossPrice()
+    public function getShippingCostGrossPrice() : float
     {
         return $this->productTotal->getGrossAmount();
     }
@@ -393,7 +381,7 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getShippingCostCurrency()
+    public function getShippingCostCurrency() : string
     {
         return $this->productTotal->getCurrency();
     }

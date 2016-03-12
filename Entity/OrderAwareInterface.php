@@ -27,5 +27,5 @@ interface OrderAwareInterface
     /**
      * @return OrderInterface
      */
-    public function getOrder();
+    public function getOrder() : OrderInterface;
 }
