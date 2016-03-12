@@ -27,5 +27,5 @@ interface ThemeAwareInterface
     /**
      * @return ThemeInterface
      */
-    public function getTheme();
+    public function getTheme() : ThemeInterface;
 }

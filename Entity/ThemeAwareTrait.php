@@ -27,7 +27,7 @@ trait ThemeAwareTrait
     /**
      * @return ThemeInterface
      */
-    public function getTheme()
+    public function getTheme() : ThemeInterface
     {
         return $this->theme;
     }
