@@ -27,7 +27,7 @@ class LocaleController extends AbstractFrontController
      *
      * @return RedirectResponse
      */
-    public function switchAction()
+    public function switchAction() : RedirectResponse
     {
         return $this->redirectToRoute('front.home_page.index');
     }
