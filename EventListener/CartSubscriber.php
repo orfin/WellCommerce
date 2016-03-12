@@ -57,7 +57,7 @@ class CartSubscriber extends AbstractEventSubscriber
         ];
     }
 
-    public function onKernelController(FilterControllerEvent $event)
+    public function onKernelController()
     {
         $this->cartManager->initializeCart();
     }
