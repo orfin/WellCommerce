@@ -22,22 +22,22 @@ use WellCommerce\Bundle\TaxBundle\Helper\TaxHelper;
 class OrderTotal
 {
     /**
-     * @var int|float
+     * @var float
      */
-    protected $netAmount;
+    protected $netAmount = 0;
 
     /**
-     * @var int|float
+     * @var float
      */
-    protected $grossAmount;
+    protected $grossAmount = 0;
 
     /**
-     * @var int|float
+     * @var float
      */
-    protected $taxAmount;
+    protected $taxAmount = 0;
 
     /**
-     * @var int|float
+     * @var float
      */
     protected $taxRate;
 
