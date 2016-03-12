@@ -41,7 +41,7 @@ class ApiController extends AbstractController
         $this->requestHandlerCollection = $requestHandlerCollection;
     }
 
-    public function indexAction(Request $request) : Response
+    public function indexAction() : Response
     {
         return new Response('documentation');
     }
