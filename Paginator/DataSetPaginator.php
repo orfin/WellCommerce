@@ -27,7 +27,7 @@ class DataSetPaginator implements DataSetPaginatorInterface
     /**
      * {@inheritdoc}
      */
-    public function getTotalRows(QueryBuilder $queryBuilder, ColumnCollection $columns)
+    public function getTotalRows(QueryBuilder $queryBuilder, ColumnCollection $columns) : int
     {
         $builder = clone $queryBuilder;
         $having  = $builder->getDQLPart('having');
@@ -73,7 +73,7 @@ class DataSetPaginator implements DataSetPaginatorInterface
         $expression = $queryBuilder->expr()->{$operator}($source, $param);
         $queryBuilder->andWhere($expression);
     }
-    
+
     protected function getOperator(string $operator) : string
     {
         $operators = [
@@ -85,6 +85,6 @@ class DataSetPaginator implements DataSetPaginatorInterface
             Query\Expr\Comparison::GTE => 'gte',
         ];
 
-        return $operators[$operator];
+        return $operators[$operator] ?? 'eq';
     }
 }
