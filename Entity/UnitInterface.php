@@ -15,16 +15,13 @@ namespace WellCommerce\Bundle\UnitBundle\Entity;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 
 /**
  * Interface UnitInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface UnitInterface extends TimestampableInterface, TranslatableInterface, BlameableInterface
+interface UnitInterface extends EntityInterface, TimestampableInterface, TranslatableInterface, BlameableInterface
 {
-    /**
-     * @return integer
-     */
-    public function getId();
 }

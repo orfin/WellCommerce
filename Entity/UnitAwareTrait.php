@@ -27,7 +27,7 @@ trait UnitAwareTrait
     /**
      * @return UnitInterface
      */
-    public function getUnit()
+    public function getUnit() : UnitInterface
     {
         return $this->unit;
     }

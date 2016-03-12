@@ -27,5 +27,5 @@ interface UnitAwareInterface
     /**
      * @return UnitInterface
      */
-    public function getUnit();
+    public function getUnit() : UnitInterface;
 }
