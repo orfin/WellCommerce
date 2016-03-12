@@ -67,25 +67,56 @@ class JavascriptRenderer implements FormRendererInterface
      */
     protected function renderElement(ElementInterface $element)
     {
-        $children   = $element->getChildren();
         $collection = $this->getAttributesCollection($element);
 
+        $this->addElementChildren($element, $collection);
+        $this->addElementDependencies($element, $collection);
+        $this->addElementRules($element, $collection);
+
+        return $this->formatter->formatAttributesCollection($collection);
+    }
+
+    /**
+     * Adds javascript children to element
+     *
+     * @param ElementInterface    $element
+     * @param AttributeCollection $collection
+     */
+    protected function addElementChildren(ElementInterface $element, AttributeCollection $collection)
+    {
+        $children = $element->getChildren();
         if ($children->count()) {
             $attribute = new Attribute('aoFields', $this->renderChildren($children), Attribute::TYPE_ARRAY);
             $collection->add($attribute);
         }
+    }
 
+    /**
+     * Adds javascript dependencies to element
+     *
+     * @param ElementInterface    $element
+     * @param AttributeCollection $collection
+     */
+    protected function addElementDependencies(ElementInterface $element, AttributeCollection $collection)
+    {
         if ($element->hasOption('dependencies') && count($element->getOption('dependencies'))) {
             $dependencies = $this->formatter->formatDependencies($element->getOption('dependencies'));
             $collection->add(new Attribute('agDependencies', $dependencies, Attribute::TYPE_ARRAY));
         }
+    }
 
+    /**
+     * Adds javascript rules to element
+     *
+     * @param ElementInterface    $element
+     * @param AttributeCollection $collection
+     */
+    protected function addElementRules(ElementInterface $element, AttributeCollection $collection)
+    {
         if ($element->hasOption('rules') && count($element->getOption('rules'))) {
             $rules = $this->formatter->formatRules($element->getOption('rules'));
             $collection->add(new Attribute('aoRules', $rules, Attribute::TYPE_ARRAY));
         }
-
-        return $this->formatter->formatAttributesCollection($collection);
     }
 
     /**
@@ -95,7 +126,7 @@ class JavascriptRenderer implements FormRendererInterface
      *
      * @return AttributeCollection
      */
-    protected function getAttributesCollection(ElementInterface $element)
+    protected function getAttributesCollection(ElementInterface $element) : AttributeCollection
     {
         $collection = new AttributeCollection();
         $element->prepareAttributesCollection($collection);
