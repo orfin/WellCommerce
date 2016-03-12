@@ -138,7 +138,7 @@ class CartManager extends AbstractFrontManager implements CartManagerInterface
         $cart = $this->repository->findCart($client, $sessionId, $shop);
 
         if (null === $cart) {
-            $cart = $this->createCart($shop, $client, $sessionId, $currency);
+            $cart = $this->createCart($shop, $client);
         } else {
             $this->updateCart($cart, $client, $currency);
         }
@@ -177,17 +177,13 @@ class CartManager extends AbstractFrontManager implements CartManagerInterface
      *
      * @param ShopInterface        $shop
      * @param ClientInterface|null $client
-     * @param string               $sessionId
-     * @param string               $currency
      *
      * @return CartInterface
      */
-    protected function createCart(ShopInterface $shop, ClientInterface $client = null, $sessionId, $currency)
+    protected function createCart(ShopInterface $shop, ClientInterface $client = null)
     {
         $cart = $this->initResource();
         $cart->setShop($shop);
-        $cart->setSessionId($sessionId);
-        $cart->setCurrency($currency);
         $cart->setClient($client);
 
         $this->createResource($cart);

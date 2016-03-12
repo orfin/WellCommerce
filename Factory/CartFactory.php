@@ -42,6 +42,8 @@ class CartFactory extends AbstractEntityFactory
         $cart->setPaymentMethod(null);
         $cart->setCopyAddress(true);
         $cart->setCoupon(null);
+        $cart->setCurrency($this->getRequestHelper()->getCurrentCurrency());
+        $cart->setSessionId($this->getRequestHelper()->getSessionId());
 
         return $cart;
     }
