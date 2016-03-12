@@ -33,7 +33,7 @@ class ClientController extends AbstractFrontController
         return $this->displayTemplate('login');
     }
 
-    public function loginCheckAction(Request $request)
+    public function loginCheckAction()
     {
     }
 }
