@@ -21,9 +21,6 @@ use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
  */
 class ContactController extends AbstractFrontController
 {
-    /**
-     * {@inheritdoc}
-     */
     public function indexAction()
     {
         return $this->displayTemplate('index');

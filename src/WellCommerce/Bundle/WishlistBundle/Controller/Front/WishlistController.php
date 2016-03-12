@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\WishlistBundle\Controller\Front;
 
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 
@@ -27,14 +28,14 @@ class WishlistController extends AbstractFrontController
      */
     protected $manager;
 
-    public function addAction(ProductInterface $product)
+    public function addAction(ProductInterface $product) : RedirectResponse
     {
         $this->manager->addProductToWishlist($product);
 
         return $this->redirectToAction('index');
     }
 
-    public function deleteAction(ProductInterface $product)
+    public function deleteAction(ProductInterface $product) : RedirectResponse
     {
         $this->manager->deleteProductFromWishlist($product);
 

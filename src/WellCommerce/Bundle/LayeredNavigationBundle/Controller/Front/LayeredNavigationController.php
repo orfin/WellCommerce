@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\LayeredNavigationBundle\Controller\Front;
 
+use Symfony\Component\HttpFoundation\JsonResponse;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 
 /**
@@ -21,10 +22,7 @@ use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
  */
 class LayeredNavigationController extends AbstractFrontController
 {
-    /**
-     * @return \Symfony\Component\HttpFoundation\JsonResponse
-     */
-    public function filterAction()
+    public function filterAction() : JsonResponse
     {
         $redirectUrl = $this->get('layered_navigation.helper')->generateRedirectUrl();
 

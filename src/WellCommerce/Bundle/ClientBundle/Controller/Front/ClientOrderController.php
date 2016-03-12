@@ -22,6 +22,11 @@ use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
  */
 class ClientOrderController extends AbstractFrontController
 {
+    public function indexAction() : Response
+    {
+        return $this->displayTemplate('index');
+    }
+
     public function viewAction() : Response
     {
         return $this->displayTemplate('view');
