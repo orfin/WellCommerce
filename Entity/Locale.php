@@ -16,23 +16,19 @@ use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use WellCommerce\Bundle\CurrencyBundle\Entity\CurrencyAwareTrait;
 use WellCommerce\Bundle\DoctrineBundle\Behaviours\Enableable\EnableableTrait;
+use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
 
 /**
  * Class Locale
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Locale implements LocaleInterface
+class Locale extends AbstractEntity implements LocaleInterface
 {
     use Timestampable;
     use Blameable;
     use CurrencyAwareTrait;
     use EnableableTrait;
-
-    /**
-     * @var integer
-     */
-    protected $id;
 
     /**
      * @var string
@@ -42,15 +38,7 @@ class Locale implements LocaleInterface
     /**
      * {@inheritdoc}
      */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCode()
+    public function getCode() : string
     {
         return $this->code;
     }
@@ -58,7 +46,7 @@ class Locale implements LocaleInterface
     /**
      * {@inheritdoc}
      */
-    public function setCode($code)
+    public function setCode(string $code)
     {
         $this->code = $code;
     }

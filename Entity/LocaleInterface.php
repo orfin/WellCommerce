@@ -15,26 +15,23 @@ namespace WellCommerce\Bundle\LocaleBundle\Entity;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CurrencyBundle\Entity\CurrencyAwareInterface;
+use WellCommerce\Bundle\DoctrineBundle\Behaviours\Enableable\EnableableInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 
 /**
  * Interface LocaleInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface LocaleInterface extends TimestampableInterface, BlameableInterface, CurrencyAwareInterface
+interface LocaleInterface extends EntityInterface, EnableableInterface, TimestampableInterface, BlameableInterface, CurrencyAwareInterface
 {
-    /**
-     * @return integer
-     */
-    public function getId();
-
     /**
      * @return string
      */
-    public function getCode();
+    public function getCode() : string;
 
     /**
      * @param string $code
      */
-    public function setCode($code);
+    public function setCode(string $code);
 }

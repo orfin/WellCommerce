@@ -21,11 +21,14 @@
         </service>
 
         <service id="locale.add.command" class="WellCommerce\Bundle\LocaleBundle\Command\AddLocaleCommand">
-            <argument type="service" id="doctrine.helper"/>
-            <argument type="service" id="locale.repository"/>
-            <argument type="service" id="locale.factory"/>
-            <argument type="service" id="currency.repository"/>
+            <argument type="service" id="locale.manager.admin"/>
+            <argument type="service" id="locale.dataset.admin"/>
+            <argument type="service" id="currency.dataset.admin"/>
             <tag name="console.command" />
+        </service>
+
+        <service id="locale.copier" class="WellCommerce\Bundle\LocaleBundle\Copier\LocaleCopier">
+            <argument type="service" id="doctrine.helper"/>
         </service>
 
         <service id="locale.delete.command" class="WellCommerce\Bundle\LocaleBundle\Command\DeleteLocaleCommand">
