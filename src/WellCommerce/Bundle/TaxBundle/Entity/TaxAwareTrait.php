@@ -27,7 +27,7 @@ trait TaxAwareTrait
     /**
      * @return TaxInterface
      */
-    public function getTax()
+    public function getTax() : TaxInterface
     {
         return $this->tax;
     }
