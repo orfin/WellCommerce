@@ -27,6 +27,10 @@
             <argument type="service" id="theme.context.front"/>
         </service>
 
+        <service id="theme.locator" class="WellCommerce\Bundle\ThemeBundle\Locator\ThemeLocator">
+            <argument>%kernel.root_dir%/../web/themes</argument>
+        </service>
+
         <service id="theme.subscriber" class="WellCommerce\Bundle\ThemeBundle\EventListener\ThemeSubscriber">
             <argument type="service" id="theme.manager"/>
             <call method="setContainer">

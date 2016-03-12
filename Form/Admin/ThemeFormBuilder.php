@@ -46,30 +46,11 @@ class ThemeFormBuilder extends AbstractFormBuilder
             'name'    => 'folder',
             'label'   => $this->trans('theme.label.folder'),
             'comment' => $this->trans('theme.comment.folder'),
-            'options' => $this->getFolderDirectories()
+            'options' => $this->get('theme.locator')->getThemeFolders()
         ]));
 
         $form->addFilter($this->getFilter('no_code'));
         $form->addFilter($this->getFilter('trim'));
         $form->addFilter($this->getFilter('secure'));
-    }
-
-    /**
-     * Lists all themes available in app/Resources/themes directory
-     *
-     * @return array
-     */
-    private function getFolderDirectories()
-    {
-        $finder       = new Finder();
-        $directories  = $finder->directories()->in($this->getThemeDir())->sortByName()->depth('== 1');
-        $themeFolders = [];
-
-        foreach ($directories as $directory) {
-            $name                = $directory->getRelativePath();
-            $themeFolders[$name] = $name;
-        }
-
-        return $themeFolders;
     }
 }
