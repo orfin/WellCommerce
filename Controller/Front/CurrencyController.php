@@ -31,7 +31,7 @@ class CurrencyController extends AbstractFrontController
      *
      * @return RedirectResponse
      */
-    public function switchAction(Request $request, $currency)
+    public function switchAction(Request $request, string $currency) : RedirectResponse
     {
         $result = $this->get('currency.repository')->findOneBy(['code' => $currency]);
         if (null !== $result) {
