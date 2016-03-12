@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\OrderBundle\Factory;
 
 use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderStatusGroupInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderStatusInterface;
 
 /**
@@ -35,7 +36,13 @@ class OrderStatusFactory extends AbstractEntityFactory
         /** @var  $status OrderStatusInterface */
         $status = $this->init();
         $status->setEnabled(true);
+        $status->setOrderStatusGroup($this->getDefaultOrderStatusGroup());
 
         return $status;
+    }
+
+    private function getDefaultOrderStatusGroup() : OrderStatusGroupInterface
+    {
+        return $this->get('order_status_group.repository')->findOneBy([]);
     }
 }
