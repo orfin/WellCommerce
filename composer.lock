@@ -13,12 +13,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/beberlei/DoctrineExtensions.git",
-                "reference": "c913c8eea2715df164b9f34ebaaa5205ad230675"
+                "reference": "5e4eeb632b18da7a848b9b470ff1e688200c0d4e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/beberlei/DoctrineExtensions/zipball/c913c8eea2715df164b9f34ebaaa5205ad230675",
-                "reference": "c913c8eea2715df164b9f34ebaaa5205ad230675",
+                "url": "https://api.github.com/repos/beberlei/DoctrineExtensions/zipball/5e4eeb632b18da7a848b9b470ff1e688200c0d4e",
+                "reference": "5e4eeb632b18da7a848b9b470ff1e688200c0d4e",
                 "shasum": ""
             },
             "require": {
@@ -67,7 +67,7 @@
                 "doctrine",
                 "orm"
             ],
-            "time": "2016-03-10 12:22:03"
+            "time": "2016-03-12 14:13:55"
         },
         {
             "name": "behat/transliterator",
@@ -3409,7 +3409,7 @@
         },
         {
             "name": "symfony/assetic-bundle",
-            "version": "dev-master",
+            "version": "v2.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/assetic-bundle.git",
