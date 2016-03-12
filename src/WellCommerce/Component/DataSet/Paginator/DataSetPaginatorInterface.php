@@ -29,7 +29,7 @@ interface DataSetPaginatorInterface
      * @param QueryBuilder     $queryBuilder
      * @param ColumnCollection $columns
      *
-     * @return mixed
+     * @return int
      */
-    public function getTotalRows(QueryBuilder $queryBuilder, ColumnCollection $columns);
+    public function getTotalRows(QueryBuilder $queryBuilder, ColumnCollection $columns) : int;
 }
