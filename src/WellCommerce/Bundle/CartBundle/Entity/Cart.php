@@ -19,6 +19,7 @@ use WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetailsInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddressInterface;
 use WellCommerce\Bundle\CouponBundle\Entity\CouponAwareTrait;
 use WellCommerce\Bundle\DoctrineBundle\Behaviours\Timestampable\TimestampableTrait;
+use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodAwareTrait;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodInterface;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCostInterface;
@@ -29,18 +30,13 @@ use WellCommerce\Bundle\ShopBundle\Entity\ShopAwareTrait;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Cart implements CartInterface
+class Cart extends AbstractEntity implements CartInterface
 {
     use TimestampableTrait;
     use ShopAwareTrait;
     use PaymentMethodAwareTrait;
     use ClientAwareTrait;
     use CouponAwareTrait;
-
-    /**
-     * @var integer
-     */
-    protected $id;
 
     /**
      * @var Collection
@@ -90,15 +86,7 @@ class Cart implements CartInterface
     /**
      * {@inheritdoc}
      */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getSessionId()
+    public function getSessionId() : string
     {
         return $this->sessionId;
     }
@@ -106,7 +94,7 @@ class Cart implements CartInterface
     /**
      * {@inheritdoc}
      */
-    public function setSessionId($sessionId)
+    public function setSessionId(string $sessionId)
     {
         $this->sessionId = $sessionId;
     }
@@ -114,7 +102,7 @@ class Cart implements CartInterface
     /**
      * {@inheritdoc}
      */
-    public function getCopyAddress()
+    public function getCopyAddress() : bool
     {
         return $this->copyAddress;
     }
@@ -122,7 +110,7 @@ class Cart implements CartInterface
     /**
      * {@inheritdoc}
      */
-    public function setCopyAddress($copyAddress)
+    public function setCopyAddress(bool $copyAddress)
     {
         $this->copyAddress = $copyAddress;
     }
@@ -146,7 +134,7 @@ class Cart implements CartInterface
     /**
      * {@inheritdoc}
      */
-    public function getTotals()
+    public function getTotals() : CartTotalsInterface
     {
         return $this->totals;
     }
@@ -162,7 +150,7 @@ class Cart implements CartInterface
     /**
      * {@inheritdoc}
      */
-    public function getProducts()
+    public function getProducts() : Collection
     {
         return $this->products;
     }
@@ -178,7 +166,7 @@ class Cart implements CartInterface
     /**
      * {@inheritdoc}
      */
-    public function getContactDetails()
+    public function getContactDetails() : ClientContactDetailsInterface
     {
         return $this->contactDetails;
     }
@@ -194,7 +182,7 @@ class Cart implements CartInterface
     /**
      * {@inheritdoc}
      */
-    public function getBillingAddress()
+    public function getBillingAddress() : ClientBillingAddressInterface
     {
         return $this->billingAddress;
     }
@@ -210,7 +198,7 @@ class Cart implements CartInterface
     /**
      * {@inheritdoc}
      */
-    public function getShippingAddress()
+    public function getShippingAddress() : ClientShippingAddressInterface
     {
         return $this->shippingAddress;
     }
@@ -250,7 +238,7 @@ class Cart implements CartInterface
     /**
      * {@inheritdoc}
      */
-    public function getCurrency()
+    public function getCurrency() : string
     {
         return $this->currency;
     }
@@ -258,7 +246,7 @@ class Cart implements CartInterface
     /**
      * {@inheritdoc}
      */
-    public function setCurrency($currency)
+    public function setCurrency(string $currency)
     {
         $this->currency = $currency;
     }
@@ -266,7 +254,7 @@ class Cart implements CartInterface
     /**
      * {@inheritdoc}
      */
-    public function getShippingCostQuantity()
+    public function getShippingCostQuantity() : int
     {
         return $this->totals->getQuantity();
     }
@@ -274,7 +262,7 @@ class Cart implements CartInterface
     /**
      * {@inheritdoc}
      */
-    public function getShippingCostWeight()
+    public function getShippingCostWeight() : float
     {
         return $this->totals->getWeight();
     }
@@ -282,7 +270,7 @@ class Cart implements CartInterface
     /**
      * {@inheritdoc}
      */
-    public function getShippingCostGrossPrice()
+    public function getShippingCostGrossPrice() : float
     {
         return $this->totals->getGrossPrice();
     }
@@ -290,7 +278,7 @@ class Cart implements CartInterface
     /**
      * {@inheritdoc}
      */
-    public function getShippingCostCurrency()
+    public function getShippingCostCurrency() : string
     {
         return $this->getCurrency();
     }
@@ -298,10 +286,12 @@ class Cart implements CartInterface
     /**
      * {@inheritdoc}
      */
-    public function hasMethods()
+    public function hasMethods() : bool
     {
-        return (bool)($this->getShippingMethodCost() instanceof ShippingMethodCostInterface
-            && $this->getPaymentMethod() instanceof PaymentMethodInterface);
+        return (
+            $this->getShippingMethodCost() instanceof ShippingMethodCostInterface
+            && $this->getPaymentMethod() instanceof PaymentMethodInterface
+        );
     }
 
     /**
@@ -309,7 +299,7 @@ class Cart implements CartInterface
      */
     public function getShippingCost()
     {
-        if (null !== $this->getShippingMethodCost()) {
+        if ($this->getShippingMethodCost() instanceof ShippingMethodCostInterface) {
             return $this->getShippingMethodCost()->getCost();
         }
 
@@ -319,7 +309,7 @@ class Cart implements CartInterface
     /**
      * {@inheritdoc}
      */
-    public function isEmpty()
+    public function isEmpty() : bool
     {
         return 0 === $this->products->count();
     }

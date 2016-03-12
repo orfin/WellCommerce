@@ -15,23 +15,19 @@ use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 use WellCommerce\Bundle\DoctrineBundle\Behaviours\Enableable\EnableableTrait;
+use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
 
 /**
  * Class OrderStatus
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class OrderStatus implements OrderStatusInterface
+class OrderStatus extends AbstractEntity implements OrderStatusInterface
 {
     use Timestampable;
     use Blameable;
     use Translatable;
     use EnableableTrait;
-
-    /**
-     * @var int
-     */
-    protected $id;
 
     /**
      * @var OrderStatusGroupInterface
@@ -41,15 +37,7 @@ class OrderStatus implements OrderStatusInterface
     /**
      * {@inheritdoc}
      */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getOrderStatusGroup()
+    public function getOrderStatusGroup() : OrderStatusGroupInterface
     {
         return $this->orderStatusGroup;
     }

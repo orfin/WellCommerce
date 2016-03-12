@@ -15,17 +15,17 @@ interface OrderTotalDetailInterface extends OrderAwareInterface, HierarchyAwareI
     /**
      * @return string
      */
-    public function getCollector();
+    public function getCollector() : string;
 
     /**
      * @param string $collector
      */
-    public function setCollector($collector);
+    public function setCollector(string $collector);
 
     /**
      * @return OrderTotal
      */
-    public function getOrderTotal();
+    public function getOrderTotal() : OrderTotal;
 
     /**
      * @param OrderTotal $orderTotal
@@ -35,30 +35,30 @@ interface OrderTotalDetailInterface extends OrderAwareInterface, HierarchyAwareI
     /**
      * @return string
      */
-    public function getModifierType();
+    public function getModifierType() : string;
 
     /**
      * @param string $modifierType
      */
-    public function setModifierType($modifierType);
+    public function setModifierType(string $modifierType);
 
     /**
-     * @return float|int
+     * @return float
      */
-    public function getModifierValue();
+    public function getModifierValue() : float;
 
     /**
-     * @param float|int $modifierValue
+     * @param float $modifierValue
      */
-    public function setModifierValue($modifierValue);
+    public function setModifierValue(float $modifierValue);
 
     /**
-     * @return boolean
+     * @return bool
      */
-    public function isSubtraction();
+    public function isSubtraction() : bool;
 
     /**
      * @param boolean $subtraction
      */
-    public function setSubtraction($subtraction);
+    public function setSubtraction(bool $subtraction);
 }

@@ -18,6 +18,7 @@ use WellCommerce\Bundle\AppBundle\Entity\DiscountablePrice;
 use WellCommerce\Bundle\AppBundle\Entity\Price;
 use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
+use WellCommerce\Bundle\UnitBundle\Entity\UnitInterface;
 
 /**
  * Class ProductFactory
@@ -36,6 +37,9 @@ class ProductFactory extends AbstractEntityFactory
      */
     public function create()
     {
+        $unit = $this->getDefaultUnit();
+        $tax = $this->getDefaultTax();
+
         /** @var  $product ProductInterface */
         $product = $this->init();
         $product->setCategories(new ArrayCollection());
@@ -50,7 +54,15 @@ class ProductFactory extends AbstractEntityFactory
         $product->setSellPrice(new DiscountablePrice());
         $product->setDimension(new Dimension());
         $product->setBuyPrice(new Price());
+        $product->setBuyPriceTax($tax);
+        $product->setSellPriceTax($tax);
+        $product->setUnit($unit);
 
         return $product;
+    }
+
+    private function getDefaultUnit() : UnitInterface
+    {
+        return $this->get('unit.repository')->findOneBy([]);
     }
 }

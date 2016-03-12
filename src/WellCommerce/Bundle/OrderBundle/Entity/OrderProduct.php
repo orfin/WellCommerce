@@ -4,6 +4,7 @@ namespace WellCommerce\Bundle\OrderBundle\Entity;
 
 use WellCommerce\Bundle\AppBundle\Entity\Price;
 use WellCommerce\Bundle\DoctrineBundle\Behaviours\Timestampable\TimestampableTrait;
+use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeAwareTrait;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareTrait;
 
@@ -12,17 +13,12 @@ use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareTrait;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class OrderProduct implements OrderProductInterface
+class OrderProduct extends AbstractEntity implements OrderProductInterface
 {
     use TimestampableTrait;
     use ProductAwareTrait;
     use ProductAttributeAwareTrait;
     use OrderAwareTrait;
-
-    /**
-     * @var int
-     */
-    protected $id;
 
     /**
      * @var int
@@ -47,15 +43,7 @@ class OrderProduct implements OrderProductInterface
     /**
      * {@inheritdoc}
      */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getQuantity()
+    public function getQuantity() : int
     {
         return $this->quantity;
     }
@@ -63,15 +51,15 @@ class OrderProduct implements OrderProductInterface
     /**
      * {@inheritdoc}
      */
-    public function setQuantity($quantity)
+    public function setQuantity(int $quantity)
     {
-        $this->quantity = (int)$quantity;
+        $this->quantity = $quantity;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getSellPrice()
+    public function getSellPrice() : Price
     {
         return $this->sellPrice;
     }
@@ -87,7 +75,7 @@ class OrderProduct implements OrderProductInterface
     /**
      * {@inheritdoc}
      */
-    public function getBuyPrice()
+    public function getBuyPrice() : Price
     {
         return $this->buyPrice;
     }
@@ -103,7 +91,7 @@ class OrderProduct implements OrderProductInterface
     /**
      * {@inheritdoc}
      */
-    public function getWeight()
+    public function getWeight() : float
     {
         return $this->weight;
     }
@@ -111,7 +99,7 @@ class OrderProduct implements OrderProductInterface
     /**
      * {@inheritdoc}
      */
-    public function setWeight($weight)
+    public function setWeight(float $weight)
     {
         $this->weight = $weight;
     }

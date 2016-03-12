@@ -19,6 +19,7 @@ use WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetailsInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddressInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CouponBundle\Entity\CouponAwareInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodAwareInterface;
 use WellCommerce\Bundle\ShippingBundle\Calculator\ShippingCalculatorSubjectInterface;
@@ -31,6 +32,7 @@ use WellCommerce\Bundle\ShopBundle\Entity\ShopAwareInterface;
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface OrderInterface extends
+    EntityInterface,
     TimestampableInterface,
     ShopAwareInterface,
     PaymentMethodAwareInterface,
@@ -40,29 +42,24 @@ interface OrderInterface extends
     ShippingCalculatorSubjectInterface
 {
     /**
-     * @return int
-     */
-    public function getId();
-
-    /**
      * @return string
      */
-    public function getCurrency();
+    public function getCurrency() : string;
 
     /**
      * @param string $currency
      */
-    public function setCurrency($currency);
+    public function setCurrency(string $currency);
 
     /**
-     * @return float
+     * @return string
      */
-    public function getSessionId();
+    public function getSessionId() : string;
 
     /**
-     * @param float $sessionId
+     * @param string $sessionId
      */
-    public function setSessionId($sessionId);
+    public function setSessionId(string $sessionId);
 
     /**
      * @param OrderProductInterface $orderProduct
@@ -70,14 +67,14 @@ interface OrderInterface extends
     public function addProduct(OrderProductInterface $orderProduct);
 
     /**
-     * @param OrderProduct $orderProduct
+     * @param OrderProductInterface $orderProduct
      */
     public function removeProduct(OrderProductInterface $orderProduct);
 
     /**
      * @return Collection
      */
-    public function getProducts();
+    public function getProducts() : Collection;
 
     /**
      * @param Collection $products
@@ -87,7 +84,7 @@ interface OrderInterface extends
     /**
      * @return OrderTotal
      */
-    public function getOrderTotal();
+    public function getOrderTotal() : OrderTotal;
 
     /**
      * @param OrderTotal $orderTotal
@@ -97,7 +94,7 @@ interface OrderInterface extends
     /**
      * @return OrderTotal
      */
-    public function getProductTotal();
+    public function getProductTotal() : OrderTotal;
 
     /**
      * @param OrderTotal $productTotal
@@ -107,7 +104,7 @@ interface OrderInterface extends
     /**
      * @return OrderTotal
      */
-    public function getShippingTotal();
+    public function getShippingTotal() : OrderTotal;
 
     /**
      * @param OrderTotal $shippingTotal
@@ -117,7 +114,7 @@ interface OrderInterface extends
     /**
      * @return ClientContactDetailsInterface
      */
-    public function getContactDetails();
+    public function getContactDetails() : ClientContactDetailsInterface;
 
     /**
      * @param ClientContactDetailsInterface $contactDetails
@@ -127,7 +124,7 @@ interface OrderInterface extends
     /**
      * @return ClientBillingAddressInterface
      */
-    public function getBillingAddress();
+    public function getBillingAddress() : ClientBillingAddressInterface;
 
     /**
      * @param ClientBillingAddressInterface $billingAddress
@@ -137,7 +134,7 @@ interface OrderInterface extends
     /**
      * @return ClientShippingAddressInterface
      */
-    public function getShippingAddress();
+    public function getShippingAddress() : ClientShippingAddressInterface;
 
     /**
      * @param ClientShippingAddressInterface $shippingAddress
@@ -147,7 +144,7 @@ interface OrderInterface extends
     /**
      * @return Collection
      */
-    public function getTotals();
+    public function getTotals() : Collection;
 
     /**
      * @param Collection $totals
@@ -162,7 +159,7 @@ interface OrderInterface extends
     /**
      * @return OrderStatusInterface
      */
-    public function getCurrentStatus();
+    public function getCurrentStatus() : OrderStatusInterface;
 
     /**
      * @param OrderStatus $currentStatus
@@ -172,17 +169,17 @@ interface OrderInterface extends
     /**
      * @return string
      */
-    public function getComment();
+    public function getComment() : string;
 
     /**
      * @param string $comment
      */
-    public function setComment($comment);
+    public function setComment(string $comment);
 
     /**
      * @return Collection
      */
-    public function getPayments();
+    public function getPayments() : Collection;
 
     /**
      * @param Collection $payments

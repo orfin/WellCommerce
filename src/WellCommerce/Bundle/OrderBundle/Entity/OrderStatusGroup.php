@@ -14,28 +14,16 @@ namespace WellCommerce\Bundle\OrderBundle\Entity;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
+use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
 
 /**
  * Class OrderStatusGroup
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class OrderStatusGroup implements OrderStatusGroupInterface
+class OrderStatusGroup extends AbstractEntity implements OrderStatusGroupInterface
 {
     use Timestampable;
     use Blameable;
     use Translatable;
-
-    /**
-     * @var int
-     */
-    protected $id;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 }

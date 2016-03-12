@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\CartBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
+use WellCommerce\Bundle\AppBundle\Entity\Price;
 use WellCommerce\Bundle\CartBundle\Visitor\CartVisitorInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientAwareInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddressInterface;
@@ -20,6 +21,7 @@ use WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetailsInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddressInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CouponBundle\Entity\CouponAwareInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodAwareInterface;
 use WellCommerce\Bundle\ShippingBundle\Calculator\ShippingCalculatorSubjectInterface;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCostInterface;
@@ -31,6 +33,7 @@ use WellCommerce\Bundle\ShopBundle\Entity\ShopAwareInterface;
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface CartInterface extends
+    EntityInterface,
     ShopAwareInterface,
     PaymentMethodAwareInterface,
     ClientAwareInterface,
@@ -39,29 +42,24 @@ interface CartInterface extends
     ShippingCalculatorSubjectInterface
 {
     /**
-     * @return int
+     * @return string
      */
-    public function getId();
+    public function getSessionId() : string;
 
     /**
-     * @return float
+     * @param string $sessionId
      */
-    public function getSessionId();
-
-    /**
-     * @param float $sessionId
-     */
-    public function setSessionId($sessionId);
+    public function setSessionId(string $sessionId);
 
     /**
      * @return boolean
      */
-    public function getCopyAddress();
+    public function getCopyAddress() : bool;
 
     /**
      * @param boolean $copyAddress
      */
-    public function setCopyAddress($copyAddress);
+    public function setCopyAddress(bool $copyAddress);
 
     /**
      * @param CartProductInterface $cartProduct
@@ -74,9 +72,9 @@ interface CartInterface extends
     public function removeProduct(CartProductInterface $cartProduct);
 
     /**
-     * @return CartTotals
+     * @return CartTotalsInterface
      */
-    public function getTotals();
+    public function getTotals() : CartTotalsInterface;
 
     /**
      * @param CartTotals $cartTotals
@@ -86,7 +84,7 @@ interface CartInterface extends
     /**
      * @return Collection
      */
-    public function getProducts();
+    public function getProducts() : Collection;
 
     /**
      * @param Collection $products
@@ -96,7 +94,7 @@ interface CartInterface extends
     /**
      * @return ClientContactDetailsInterface
      */
-    public function getContactDetails();
+    public function getContactDetails() : ClientContactDetailsInterface;
 
     /**
      * @param ClientContactDetailsInterface $contactDetails
@@ -106,7 +104,7 @@ interface CartInterface extends
     /**
      * @return ClientBillingAddressInterface
      */
-    public function getBillingAddress();
+    public function getBillingAddress() : ClientBillingAddressInterface;
 
     /**
      * @param ClientBillingAddressInterface $billingAddress
@@ -116,7 +114,7 @@ interface CartInterface extends
     /**
      * @return ClientShippingAddressInterface
      */
-    public function getShippingAddress();
+    public function getShippingAddress() : ClientShippingAddressInterface;
 
     /**
      * @param ClientShippingAddressInterface $shippingAddress
@@ -141,27 +139,27 @@ interface CartInterface extends
     /**
      * @return string
      */
-    public function getCurrency();
+    public function getCurrency() : string;
 
     /**
      * @param string $currency
      */
-    public function setCurrency($currency);
+    public function setCurrency(string $currency);
 
     /**
      * Checks whether cart has shipping and payment method
      *
      * @return bool
      */
-    public function hasMethods();
+    public function hasMethods() : bool;
 
     /**
-     * @return null|\WellCommerce\Bundle\AppBundle\Entity\Price
+     * @return Price
      */
     public function getShippingCost();
 
     /**
      * @return bool
      */
-    public function isEmpty();
+    public function isEmpty() : bool;
 }
