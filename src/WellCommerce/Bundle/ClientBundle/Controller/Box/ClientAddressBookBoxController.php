@@ -27,8 +27,8 @@ class ClientAddressBookBoxController extends AbstractBoxController
     {
         $client          = $this->manager->getClient();
         $addressBookForm = $this->manager->getForm($client, [
-            'name'              => 'address_book',
-            'validation_groups' => ['address']
+            'name'              => 'client_address_book',
+            'validation_groups' => ['client_address_book']
         ]);
 
         if ($addressBookForm->handleRequest()->isSubmitted()) {

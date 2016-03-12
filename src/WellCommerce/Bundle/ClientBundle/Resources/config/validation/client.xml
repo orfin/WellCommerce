@@ -145,11 +145,13 @@
             <constraint name="NotBlank">
                 <option name="groups">
                     <value>order_address</value>
+                    <value>client_address_book</value>
                 </option>
             </constraint>
             <constraint name="NotNull">
                 <option name="groups">
                     <value>order_address</value>
+                    <value>client_address_book</value>
                 </option>
             </constraint>
         </property>
@@ -157,11 +159,13 @@
             <constraint name="NotBlank">
                 <option name="groups">
                     <value>order_address</value>
+                    <value>client_address_book</value>
                 </option>
             </constraint>
             <constraint name="NotNull">
                 <option name="groups">
                     <value>order_address</value>
+                    <value>client_address_book</value>
                 </option>
             </constraint>
         </property>
@@ -169,11 +173,13 @@
             <constraint name="NotBlank">
                 <option name="groups">
                     <value>order_address</value>
+                    <value>client_address_book</value>
                 </option>
             </constraint>
             <constraint name="NotNull">
                 <option name="groups">
                     <value>order_address</value>
+                    <value>client_address_book</value>
                 </option>
             </constraint>
         </property>
@@ -181,11 +187,13 @@
             <constraint name="NotBlank">
                 <option name="groups">
                     <value>order_address</value>
+                    <value>client_address_book</value>
                 </option>
             </constraint>
             <constraint name="NotNull">
                 <option name="groups">
                     <value>order_address</value>
+                    <value>client_address_book</value>
                 </option>
             </constraint>
         </property>
@@ -193,6 +201,7 @@
             <constraint name="NotNull">
                 <option name="groups">
                     <value>order_address</value>
+                    <value>client_address_book</value>
                 </option>
             </constraint>
         </property>
@@ -200,11 +209,13 @@
             <constraint name="NotBlank">
                 <option name="groups">
                     <value>order_address</value>
+                    <value>client_address_book</value>
                 </option>
             </constraint>
             <constraint name="NotNull">
                 <option name="groups">
                     <value>order_address</value>
+                    <value>client_address_book</value>
                 </option>
             </constraint>
         </property>
@@ -212,11 +223,13 @@
             <constraint name="NotBlank">
                 <option name="groups">
                     <value>order_address</value>
+                    <value>client_address_book</value>
                 </option>
             </constraint>
             <constraint name="NotNull">
                 <option name="groups">
                     <value>order_address</value>
+                    <value>client_address_book</value>
                 </option>
             </constraint>
         </property>
@@ -224,6 +237,7 @@
             <constraint name="Country">
                 <option name="groups">
                     <value>order_shipping_address</value>
+                    <value>client_address_book</value>
                 </option>
             </constraint>
         </property>
@@ -234,11 +248,13 @@
             <constraint name="NotBlank">
                 <option name="groups">
                     <value>order_shipping_address</value>
+                    <value>client_address_book</value>
                 </option>
             </constraint>
             <constraint name="NotNull">
                 <option name="groups">
                     <value>order_shipping_address</value>
+                    <value>client_address_book</value>
                 </option>
             </constraint>
         </property>
@@ -246,11 +262,13 @@
             <constraint name="NotBlank">
                 <option name="groups">
                     <value>order_shipping_address</value>
+                    <value>client_address_book</value>
                 </option>
             </constraint>
             <constraint name="NotNull">
                 <option name="groups">
                     <value>order_shipping_address</value>
+                    <value>client_address_book</value>
                 </option>
             </constraint>
         </property>
@@ -258,11 +276,13 @@
             <constraint name="NotBlank">
                 <option name="groups">
                     <value>order_shipping_address</value>
+                    <value>client_address_book</value>
                 </option>
             </constraint>
             <constraint name="NotNull">
                 <option name="groups">
                     <value>order_shipping_address</value>
+                    <value>client_address_book</value>
                 </option>
             </constraint>
         </property>
@@ -270,11 +290,13 @@
             <constraint name="NotBlank">
                 <option name="groups">
                     <value>order_shipping_address</value>
+                    <value>client_address_book</value>
                 </option>
             </constraint>
             <constraint name="NotNull">
                 <option name="groups">
                     <value>order_shipping_address</value>
+                    <value>client_address_book</value>
                 </option>
             </constraint>
         </property>
@@ -282,6 +304,7 @@
             <constraint name="NotNull">
                 <option name="groups">
                     <value>order_shipping_address</value>
+                    <value>client_address_book</value>
                 </option>
             </constraint>
         </property>
@@ -289,11 +312,13 @@
             <constraint name="NotBlank">
                 <option name="groups">
                     <value>order_shipping_address</value>
+                    <value>client_address_book</value>
                 </option>
             </constraint>
             <constraint name="NotNull">
                 <option name="groups">
                     <value>order_shipping_address</value>
+                    <value>client_address_book</value>
                 </option>
             </constraint>
         </property>
@@ -301,11 +326,13 @@
             <constraint name="NotBlank">
                 <option name="groups">
                     <value>order_shipping_address</value>
+                    <value>client_address_book</value>
                 </option>
             </constraint>
             <constraint name="NotNull">
                 <option name="groups">
                     <value>order_shipping_address</value>
+                    <value>client_address_book</value>
                 </option>
             </constraint>
         </property>
@@ -313,6 +340,7 @@
             <constraint name="Country">
                 <option name="groups">
                     <value>order_shipping_address</value>
+                    <value>client_address_book</value>
                 </option>
             </constraint>
         </property>

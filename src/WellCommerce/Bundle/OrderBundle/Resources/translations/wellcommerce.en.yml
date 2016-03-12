@@ -42,6 +42,8 @@ order:
     description:
         product_total: Total products value
         shipping_cost: Shipping costs
+    notice:
+        empty_order_list: You have not placed any orders
 
 order_status:
     heading:
