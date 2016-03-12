@@ -13,6 +13,7 @@ namespace WellCommerce\Bundle\ShippingBundle\EventListener;
 
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
 use WellCommerce\Component\Form\Elements\FormInterface;
+use WellCommerce\Component\Form\Elements\Optioned\Select;
 use WellCommerce\Component\Form\Event\FormEvent;
 
 /**
@@ -50,9 +51,9 @@ class ShippingMethodSubscriber extends AbstractEventSubscriber
      *
      * @return array|\WellCommerce\Bundle\ShippingBundle\Calculator\ShippingMethodCalculatorInterface[]
      */
-    protected function getCalculators()
+    protected function getCalculators() : array
     {
-        return $this->container->get('shipping_method.calculator.collection')->all();
+        return $this->get('shipping_method.calculator.collection')->all();
     }
 
     /**
@@ -62,7 +63,7 @@ class ShippingMethodSubscriber extends AbstractEventSubscriber
      *
      * @return \WellCommerce\Component\Form\Elements\Optioned\Select
      */
-    private function getCalculatorTypeElement(FormInterface $form)
+    private function getCalculatorTypeElement(FormInterface $form) : Select
     {
         return $form->getChildren()->get('costs_data')->getChildren()->get('calculator');
     }

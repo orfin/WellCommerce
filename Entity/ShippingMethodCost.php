@@ -4,21 +4,17 @@ namespace WellCommerce\Bundle\ShippingBundle\Entity;
 
 use WellCommerce\Bundle\AppBundle\Entity\Price;
 use WellCommerce\Bundle\DoctrineBundle\Behaviours\Timestampable\TimestampableTrait;
+use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
 
 /**
  * Class ShippingMethodCost
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ShippingMethodCost implements ShippingMethodCostInterface
+class ShippingMethodCost extends AbstractEntity implements ShippingMethodCostInterface
 {
     use TimestampableTrait;
     use ShippingMethodAwareTrait;
-
-    /**
-     * @var int
-     */
-    protected $id;
 
     /**
      * @var float
@@ -38,15 +34,7 @@ class ShippingMethodCost implements ShippingMethodCostInterface
     /**
      * {@inheritdoc}
      */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getRangeFrom()
+    public function getRangeFrom() : float
     {
         return $this->rangeFrom;
     }
@@ -54,7 +42,7 @@ class ShippingMethodCost implements ShippingMethodCostInterface
     /**
      * {@inheritdoc}
      */
-    public function setRangeFrom($rangeFrom)
+    public function setRangeFrom(float $rangeFrom)
     {
         $this->rangeFrom = (float)$rangeFrom;
     }
@@ -62,7 +50,7 @@ class ShippingMethodCost implements ShippingMethodCostInterface
     /**
      * {@inheritdoc}
      */
-    public function getRangeTo()
+    public function getRangeTo() : float
     {
         return $this->rangeTo;
     }
@@ -70,7 +58,7 @@ class ShippingMethodCost implements ShippingMethodCostInterface
     /**
      * {@inheritdoc}
      */
-    public function setRangeTo($rangeTo)
+    public function setRangeTo(float $rangeTo)
     {
         $this->rangeTo = (float)$rangeTo;
     }
@@ -78,7 +66,7 @@ class ShippingMethodCost implements ShippingMethodCostInterface
     /**
      * @return Price
      */
-    public function getCost()
+    public function getCost() : Price
     {
         return $this->cost;
     }
