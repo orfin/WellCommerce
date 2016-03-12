@@ -97,7 +97,7 @@ class UserController extends AbstractAdminController
         return $error;
     }
 
-    public function loginCheckAction(Request $request)
+    public function loginCheckAction()
     {
     }
 
