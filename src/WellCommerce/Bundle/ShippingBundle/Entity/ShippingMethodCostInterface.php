@@ -14,43 +14,39 @@ namespace WellCommerce\Bundle\ShippingBundle\Entity;
 
 use WellCommerce\Bundle\AppBundle\Entity\Price;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 
 /**
  * Interface ShippingMethodCostInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ShippingMethodCostInterface extends TimestampableInterface, ShippingMethodAwareInterface
+interface ShippingMethodCostInterface extends EntityInterface, TimestampableInterface, ShippingMethodAwareInterface
 {
-    /**
-     * @return int
-     */
-    public function getId();
-
     /**
      * @return float
      */
-    public function getRangeFrom();
+    public function getRangeFrom() : float;
 
     /**
      * @param float $rangeFrom
      */
-    public function setRangeFrom($rangeFrom);
+    public function setRangeFrom(float $rangeFrom);
 
     /**
      * @return float
      */
-    public function getRangeTo();
+    public function getRangeTo() : float;
 
     /**
      * @param float $rangeTo
      */
-    public function setRangeTo($rangeTo);
+    public function setRangeTo(float $rangeTo);
 
     /**
      * @return Price
      */
-    public function getCost();
+    public function getCost() : Price;
 
     /**
      * @param Price $cost

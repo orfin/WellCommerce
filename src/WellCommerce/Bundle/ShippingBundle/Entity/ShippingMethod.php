@@ -19,6 +19,7 @@ use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 use WellCommerce\Bundle\AppBundle\Entity\HierarchyAwareTrait;
 use WellCommerce\Bundle\CurrencyBundle\Entity\CurrencyInterface;
 use WellCommerce\Bundle\DoctrineBundle\Behaviours\Enableable\EnableableTrait;
+use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
 use WellCommerce\Bundle\TaxBundle\Entity\TaxAwareTrait;
 
 /**
@@ -26,7 +27,7 @@ use WellCommerce\Bundle\TaxBundle\Entity\TaxAwareTrait;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ShippingMethod implements ShippingMethodInterface
+class ShippingMethod extends AbstractEntity implements ShippingMethodInterface
 {
     use Translatable;
     use Timestampable;
@@ -34,11 +35,6 @@ class ShippingMethod implements ShippingMethodInterface
     use EnableableTrait;
     use HierarchyAwareTrait;
     use TaxAwareTrait;
-
-    /**
-     * @var integer
-     */
-    protected $id;
 
     /**
      * @var string
@@ -63,15 +59,7 @@ class ShippingMethod implements ShippingMethodInterface
     /**
      * {@inheritdoc}
      */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCalculator()
+    public function getCalculator() : string
     {
         return $this->calculator;
     }
@@ -79,7 +67,7 @@ class ShippingMethod implements ShippingMethodInterface
     /**
      * {@inheritdoc}
      */
-    public function setCalculator($calculator)
+    public function setCalculator(string $calculator)
     {
         $this->calculator = $calculator;
     }
@@ -87,7 +75,7 @@ class ShippingMethod implements ShippingMethodInterface
     /**
      * {@inheritdoc}
      */
-    public function getCosts()
+    public function getCosts() : Collection
     {
         return $this->costs;
     }
@@ -103,7 +91,7 @@ class ShippingMethod implements ShippingMethodInterface
     /**
      * {@inheritdoc}
      */
-    public function getCurrency()
+    public function getCurrency() : CurrencyInterface
     {
         return $this->currency;
     }
@@ -119,7 +107,7 @@ class ShippingMethod implements ShippingMethodInterface
     /**
      * {@inheritdoc}
      */
-    public function getPaymentMethods()
+    public function getPaymentMethods() : Collection
     {
         return $this->paymentMethods;
     }

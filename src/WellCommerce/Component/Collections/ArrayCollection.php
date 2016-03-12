@@ -74,6 +74,14 @@ class ArrayCollection implements CollectionInterface
     }
 
     /**
+     * @return mixed
+     */
+    public function first()
+    {
+        return reset($this->items);
+    }
+
+    /**
      * Removes an item from collection
      *
      * @param string $key

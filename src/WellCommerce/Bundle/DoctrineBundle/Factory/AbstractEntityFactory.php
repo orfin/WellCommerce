@@ -14,7 +14,8 @@ namespace WellCommerce\Bundle\DoctrineBundle\Factory;
 
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
-use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
+use WellCommerce\Bundle\CurrencyBundle\Entity\CurrencyInterface;
+use WellCommerce\Bundle\TaxBundle\Entity\TaxInterface;
 
 /**
  * Class AbstractFactory
@@ -58,6 +59,16 @@ abstract class AbstractEntityFactory extends AbstractContainerAware implements E
         }
 
         return new $this->className;
+    }
+
+    protected function getDefaultCurrency() : CurrencyInterface
+    {
+        return $this->get('currency.repository')->findOneBy([]);
+    }
+
+    protected function getDefaultTax() : TaxInterface
+    {
+        return $this->get('tax.repository')->findOneBy([]);
     }
 
     /**
