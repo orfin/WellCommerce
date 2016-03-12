@@ -15,6 +15,7 @@ namespace WellCommerce\Bundle\ProductBundle\Entity;
 use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\AppBundle\Entity\Dimension;
 use WellCommerce\Bundle\AppBundle\Entity\DiscountablePrice;
+use WellCommerce\Bundle\AppBundle\Entity\HierarchyAwareInterface;
 use WellCommerce\Bundle\AppBundle\Entity\Price;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroupInterface;
 use WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityAwareInterface;
@@ -22,6 +23,8 @@ use WellCommerce\Bundle\CategoryBundle\Entity\CategoryInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
+use WellCommerce\Bundle\DoctrineBundle\Behaviours\Enableable\EnableableInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 use WellCommerce\Bundle\ProducerBundle\Entity\ProducerAwareInterface;
 use WellCommerce\Bundle\ShippingBundle\Calculator\ShippingCalculatorSubjectInterface;
 use WellCommerce\Bundle\ShopBundle\Entity\ShopCollectionAwareInterface;
@@ -34,6 +37,9 @@ use WellCommerce\Bundle\UnitBundle\Entity\UnitAwareInterface;
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface ProductInterface extends
+    EntityInterface,
+    HierarchyAwareInterface,
+    EnableableInterface,
     TranslatableInterface,
     TimestampableInterface,
     BlameableInterface,
@@ -44,44 +50,39 @@ interface ProductInterface extends
     ShippingCalculatorSubjectInterface
 {
     /**
-     * @return int
-     */
-    public function getId();
-
-    /**
      * @return string
      */
-    public function getSku();
+    public function getSku() : string;
 
     /**
      * @param string $sku
      */
-    public function setSku($sku);
+    public function setSku(string $sku);
 
     /**
      * @return int
      */
-    public function getStock();
+    public function getStock() : int;
 
     /**
      * @param int $stock
      */
-    public function setStock($stock);
+    public function setStock(int $stock);
 
     /**
      * @return boolean
      */
-    public function getTrackStock();
+    public function getTrackStock() : bool;
 
     /**
      * @param boolean $trackStock
      */
-    public function setTrackStock($trackStock);
+    public function setTrackStock(bool $trackStock);
 
     /**
      * @return Collection
      */
-    public function getStatuses();
+    public function getStatuses() : Collection;
 
     /**
      * @return Collection
@@ -91,7 +92,7 @@ interface ProductInterface extends
     /**
      * @return Collection
      */
-    public function getProductPhotos();
+    public function getProductPhotos() : Collection;
 
     /**
      * @param Collection $photos
@@ -106,7 +107,7 @@ interface ProductInterface extends
     /**
      * @return Collection
      */
-    public function getCategories();
+    public function getCategories() : Collection;
 
     /**
      * @param Collection $collection
@@ -121,7 +122,7 @@ interface ProductInterface extends
     /**
      * @return DiscountablePrice
      */
-    public function getSellPrice();
+    public function getSellPrice() : DiscountablePrice;
 
     /**
      * @param DiscountablePrice $sellPrice
@@ -131,7 +132,7 @@ interface ProductInterface extends
     /**
      * @return Price
      */
-    public function getBuyPrice();
+    public function getBuyPrice() : Price;
 
     /**
      * @param Price $buyPrice
@@ -141,17 +142,17 @@ interface ProductInterface extends
     /**
      * @return float
      */
-    public function getWeight();
+    public function getWeight() : float;
 
     /**
      * @param float $weight
      */
-    public function setWeight($weight);
+    public function setWeight(float $weight);
 
     /**
      * @return Dimension
      */
-    public function getDimension();
+    public function getDimension() : Dimension;
 
     /**
      * @param Dimension $dimension
@@ -161,12 +162,12 @@ interface ProductInterface extends
     /**
      * @return float
      */
-    public function getPackageSize();
+    public function getPackageSize() : float;
 
     /**
      * @param float $packageSize
      */
-    public function setPackageSize($packageSize);
+    public function setPackageSize(float $packageSize);
 
     /**
      * @return AttributeGroupInterface
@@ -181,7 +182,7 @@ interface ProductInterface extends
     /**
      * @return Collection
      */
-    public function getAttributes();
+    public function getAttributes() : Collection;
 
     /**
      * @param Collection $attributes
@@ -196,7 +197,7 @@ interface ProductInterface extends
     /**
      * @return TaxInterface
      */
-    public function getBuyPriceTax();
+    public function getBuyPriceTax() : TaxInterface;
 
     /**
      * @param TaxInterface $buyPriceTax
@@ -206,7 +207,7 @@ interface ProductInterface extends
     /**
      * @return TaxInterface
      */
-    public function getSellPriceTax();
+    public function getSellPriceTax() : TaxInterface;
 
     /**
      * @param TaxInterface $sellPriceTax
