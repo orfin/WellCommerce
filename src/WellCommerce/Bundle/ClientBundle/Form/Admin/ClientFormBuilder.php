@@ -30,12 +30,12 @@ class ClientFormBuilder extends AbstractFormBuilder
         $defaultCountry = $this->get('shop.context.admin')->getCurrentShop()->getDefaultCountry();
 
         $requiredData = $form->addChild($this->getElement('nested_fieldset', [
-            'name'  => 'required_data',
+            'name'  => 'contactDetails',
             'label' => $this->trans('common.fieldset.general')
         ]));
 
         $requiredData->addChild($this->getElement('text_field', [
-            'name'  => 'firstName',
+            'name'  => 'contactDetails.firstName',
             'label' => $this->trans('common.label.first_name'),
             'rules' => [
                 $this->getRule('required')
@@ -43,7 +43,7 @@ class ClientFormBuilder extends AbstractFormBuilder
         ]));
 
         $requiredData->addChild($this->getElement('text_field', [
-            'name'  => 'lastName',
+            'name'  => 'contactDetails.lastName',
             'label' => $this->trans('common.label.last_name'),
             'rules' => [
                 $this->getRule('required')
@@ -51,23 +51,15 @@ class ClientFormBuilder extends AbstractFormBuilder
         ]));
 
         $requiredData->addChild($this->getElement('text_field', [
-            'name'  => 'email',
+            'name'  => 'contactDetails.email',
             'label' => $this->trans('common.label.email'),
             'rules' => [
                 $this->getRule('required')
             ],
         ]));
 
-        $requiredData->addChild($this->getElement('password', [
-            'name'  => 'password',
-            'label' => $this->trans('common.label.password'),
-            'rules' => [
-                $this->getRule('required')
-            ],
-        ]));
-
         $requiredData->addChild($this->getElement('text_field', [
-            'name'  => 'phone',
+            'name'  => 'contactDetails.phone',
             'label' => $this->trans('common.label.phone'),
             'rules' => [
                 $this->getRule('required')
@@ -82,7 +74,7 @@ class ClientFormBuilder extends AbstractFormBuilder
         ]));
 
         $requiredData->addChild($this->getElement('text_field', [
-            'name'    => 'discount',
+            'name'    => 'clientDetails.discount',
             'label'   => $this->trans('common.label.discount'),
             'suffix'  => '%',
             'filters' => [
