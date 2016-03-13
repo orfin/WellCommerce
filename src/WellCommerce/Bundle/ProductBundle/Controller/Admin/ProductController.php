@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\ProductBundle\Controller\Admin;
 
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 
@@ -32,12 +33,12 @@ class ProductController extends AbstractAdminController
      *
      * @param Request $request
      *
-     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     * @return JsonResponse
      */
-    public function updateAction(Request $request)
+    public function updateAction(Request $request) : JsonResponse
     {
         $id   = $request->request->get('id');
-        $data = $request->request->get('row');
+        $data = $request->request->get('product');
 
         try {
             $this->manager->quickUpdateProduct($id, $data);
