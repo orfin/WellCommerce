@@ -107,7 +107,7 @@ class DiscountablePrice extends Price
      */
     public function getDiscountedGrossAmount() : float
     {
-        return $this->discountedGrossAmount;
+        return (float)$this->discountedGrossAmount;
     }
 
     /**
@@ -133,7 +133,7 @@ class DiscountablePrice extends Price
     /**
      * @return float
      */
-    public function getDiscountedNetAmount() : float
+    public function getDiscountedNetAmount()
     {
         return (float)$this->discountedNetAmount;
     }
@@ -161,7 +161,7 @@ class DiscountablePrice extends Price
     /**
      * @return float|int
      */
-    public function getDiscountedTaxAmount() : float
+    public function getDiscountedTaxAmount()
     {
         return $this->discountedTaxAmount;
     }
