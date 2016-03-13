@@ -37,7 +37,7 @@ class ProductManager extends AbstractAdminManager
         $product->setSku($data['sku']);
         $product->setWeight($data['weight']);
         $product->setStock($data['stock']);
-        $product->getSellPrice()->setAmount($data['sellPrice']);
+        $product->getSellPrice()->setGrossAmount($data['grossAmount']);
 
         $errors = $this->getValidatorHelper()->validate($product);
         if ($errors->count()) {
