@@ -17,6 +17,7 @@ use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use WellCommerce\Bundle\AppBundle\Entity\DiscountablePrice;
 use WellCommerce\Bundle\AppBundle\Entity\HierarchyAwareTrait;
 use WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityAwareTrait;
+use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
 use WellCommerce\Bundle\MediaBundle\Entity\MediaAwareTrait;
 
 /**
@@ -24,18 +25,13 @@ use WellCommerce\Bundle\MediaBundle\Entity\MediaAwareTrait;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductAttribute implements ProductAttributeInterface
+class ProductAttribute extends AbstractEntity implements ProductAttributeInterface
 {
     use Timestampable;
     use HierarchyAwareTrait;
     use MediaAwareTrait;
     use AvailabilityAwareTrait;
     use ProductAwareTrait;
-
-    /**
-     * @var int
-     */
-    protected $id;
 
     /**
      * @var Collection
@@ -58,7 +54,7 @@ class ProductAttribute implements ProductAttributeInterface
     protected $symbol;
 
     /**
-     * @var float
+     * @var int
      */
     protected $stock;
 
@@ -73,23 +69,15 @@ class ProductAttribute implements ProductAttributeInterface
     protected $modifierValue;
 
     /**
-     * @return int
+     * {@inheritdoc}
      */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @return Collection
-     */
-    public function getAttributeValues()
+    public function getAttributeValues() : Collection
     {
         return $this->attributeValues;
     }
 
     /**
-     * @param Collection $attributeValues
+     * {@inheritdoc}
      */
     public function setAttributeValues(Collection $attributeValues)
     {
@@ -97,63 +85,63 @@ class ProductAttribute implements ProductAttributeInterface
     }
 
     /**
-     * @return float
+     * {@inheritdoc}
      */
-    public function getWeight()
+    public function getWeight() : float
     {
         return $this->weight;
     }
 
     /**
-     * @param float $weight
+     * {@inheritdoc}
      */
-    public function setWeight($weight)
+    public function setWeight(float $weight)
     {
         $this->weight = $weight;
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
-    public function getSymbol()
+    public function getSymbol() : string
     {
         return $this->symbol;
     }
 
     /**
-     * @param string $symbol
+     * {@inheritdoc}
      */
-    public function setSymbol($symbol)
+    public function setSymbol(string $symbol)
     {
         $this->symbol = $symbol;
     }
 
     /**
-     * @return float
+     * {@inheritdoc}
      */
-    public function getStock()
+    public function getStock() : int
     {
         return $this->stock;
     }
 
     /**
-     * @param float $stock
+     * {@inheritdoc}
      */
-    public function setStock($stock)
+    public function setStock(int $stock)
     {
         $this->stock = $stock;
     }
 
     /**
-     * @return DiscountablePrice
+     * {@inheritdoc}
      */
-    public function getSellPrice()
+    public function getSellPrice() : DiscountablePrice
     {
         return $this->sellPrice;
     }
 
     /**
-     * @param DiscountablePrice $sellPrice
+     * {@inheritdoc}
      */
     public function setSellPrice(DiscountablePrice $sellPrice)
     {
@@ -161,33 +149,33 @@ class ProductAttribute implements ProductAttributeInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
-    public function getModifierValue()
+    public function getModifierValue() : float
     {
         return $this->modifierValue;
     }
 
     /**
-     * @param string $modifierValue
+     * {@inheritdoc}
      */
-    public function setModifierValue($modifierValue)
+    public function setModifierValue(float $modifierValue)
     {
         $this->modifierValue = $modifierValue;
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
-    public function getModifierType()
+    public function getModifierType() : string
     {
         return $this->modifierType;
     }
 
     /**
-     * @param string $modifierType
+     * {@inheritdoc}
      */
-    public function setModifierType($modifierType)
+    public function setModifierType(string $modifierType)
     {
         $this->modifierType = $modifierType;
     }

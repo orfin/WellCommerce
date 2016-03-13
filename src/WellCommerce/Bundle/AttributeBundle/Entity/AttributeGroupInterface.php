@@ -16,23 +16,19 @@ use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 
 /**
  * Interface GroupInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface AttributeGroupInterface extends TimestampableInterface, TranslatableInterface, BlameableInterface
+interface AttributeGroupInterface extends EntityInterface, TimestampableInterface, TranslatableInterface, BlameableInterface
 {
-    /**
-     * @return int
-     */
-    public function getId();
-
     /**
      * @return Collection
      */
-    public function getAttributes();
+    public function getAttributes() : Collection;
 
     /**
      * @param Collection $collection
@@ -43,4 +39,9 @@ interface AttributeGroupInterface extends TimestampableInterface, TranslatableIn
      * @param AttributeInterface $attribute
      */
     public function addAttribute(AttributeInterface $attribute);
+
+    /**
+     * @param AttributeInterface $attribute
+     */
+    public function removeAttribute(AttributeInterface $attribute);
 }

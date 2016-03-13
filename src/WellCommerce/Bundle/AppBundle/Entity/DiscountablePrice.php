@@ -20,17 +20,17 @@ namespace WellCommerce\Bundle\AppBundle\Entity;
 class DiscountablePrice extends Price
 {
     /**
-     * @var int|float
+     * @var float
      */
     protected $discountedNetAmount;
 
     /**
-     * @var int|float
+     * @var float
      */
     protected $discountedGrossAmount;
 
     /**
-     * @var int|float
+     * @var float
      */
     protected $discountedTaxAmount;
 
@@ -77,9 +77,9 @@ class DiscountablePrice extends Price
     }
 
     /**
-     * @return float|int
+     * @return float
      */
-    public function getFinalGrossAmount()
+    public function getFinalGrossAmount() : float
     {
         if ($this->isDiscountValid()) {
             return $this->getDiscountedGrossAmount();
@@ -91,7 +91,7 @@ class DiscountablePrice extends Price
     /**
      * @return bool
      */
-    public function isDiscountValid()
+    public function isDiscountValid() : bool
     {
         $now = new \DateTime();
 
@@ -103,25 +103,25 @@ class DiscountablePrice extends Price
     }
 
     /**
-     * @return float|int
+     * @return float
      */
-    public function getDiscountedGrossAmount()
+    public function getDiscountedGrossAmount() : float
     {
-        return (float)$this->discountedGrossAmount;
+        return $this->discountedGrossAmount;
     }
 
     /**
-     * @param float|int $discountedGrossAmount
+     * @param float $discountedGrossAmount
      */
-    public function setDiscountedGrossAmount($discountedGrossAmount)
+    public function setDiscountedGrossAmount(float $discountedGrossAmount)
     {
-        $this->discountedGrossAmount = (float)$discountedGrossAmount;
+        $this->discountedGrossAmount = $discountedGrossAmount;
     }
 
     /**
-     * @return float|int
+     * @return float
      */
-    public function getFinalNetAmount()
+    public function getFinalNetAmount() : float
     {
         if ($this->isDiscountValid()) {
             return $this->getDiscountedNetAmount();
@@ -131,25 +131,25 @@ class DiscountablePrice extends Price
     }
 
     /**
-     * @return float|int
+     * @return float
      */
-    public function getDiscountedNetAmount()
+    public function getDiscountedNetAmount() : float
     {
         return (float)$this->discountedNetAmount;
     }
 
     /**
-     * @param float|int $discountedNetAmount
+     * @param float $discountedNetAmount
      */
-    public function setDiscountedNetAmount($discountedNetAmount)
+    public function setDiscountedNetAmount(float $discountedNetAmount)
     {
-        $this->discountedNetAmount = (float)$discountedNetAmount;
+        $this->discountedNetAmount = $discountedNetAmount;
     }
 
     /**
-     * @return float|int
+     * @return float
      */
-    public function getFinalTaxAmount()
+    public function getFinalTaxAmount() : float
     {
         if ($this->isDiscountValid()) {
             return $this->getDiscountedTaxAmount();
@@ -161,16 +161,16 @@ class DiscountablePrice extends Price
     /**
      * @return float|int
      */
-    public function getDiscountedTaxAmount()
+    public function getDiscountedTaxAmount() : float
     {
-        return (float)$this->discountedTaxAmount;
+        return $this->discountedTaxAmount;
     }
 
     /**
-     * @param float|int $discountedTaxAmount
+     * @param float $discountedTaxAmount
      */
-    public function setDiscountedTaxAmount($discountedTaxAmount)
+    public function setDiscountedTaxAmount(float $discountedTaxAmount)
     {
-        $this->discountedTaxAmount = (float)$discountedTaxAmount;
+        $this->discountedTaxAmount = $discountedTaxAmount;
     }
 }

@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\AttributeBundle\Manager\Admin;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroupInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
@@ -23,45 +24,28 @@ use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
  */
 class AttributeGroupManager extends AbstractAdminManager
 {
-    /**
-     * Creates a new attributes group
-     *
-     * @param $name
-     *
-     * @return AttributeGroupInterface
-     */
-    public function createGroup($name)
+    public function createAttributeGroup(string $name) : AttributeGroupInterface
     {
-        $resource = $this->initResource();
+        $group = $this->initResource();
 
         foreach ($this->getLocales() as $locale) {
-            $resource->translate($locale->getCode())->setName($name);
+            $group->translate($locale->getCode())->setName($name);
         }
 
-        $resource->mergeNewTranslations();
-        $this->createResource($resource);
+        $group->mergeNewTranslations();
+        $this->createResource($group);
 
-        return $resource;
+        return $group;
     }
 
-    /**
-     * Returns all attribute groups as a collection
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getGroupsCollection()
+    public function getAttributeGroupsCollection() : Collection
     {
         return $this->getRepository()->matching(new Criteria());
     }
 
-    /**
-     * Returns an array of all attribute groups
-     *
-     * @return array
-     */
-    public function getAttributeGroupSet()
+    public function getAttributeGroupSet() : array
     {
-        $groups = $this->getGroupsCollection();
+        $groups = $this->getAttributeGroupsCollection();
         $sets   = [];
 
         $groups->map(function (AttributeGroupInterface $attributeGroup) use (&$sets) {
