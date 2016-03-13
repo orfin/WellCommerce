@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\DictionaryBundle\Factory;
 
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 use WellCommerce\Bundle\DictionaryBundle\Entity\DictionaryInterface;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 
 /**
  * Class DictionaryFactory
