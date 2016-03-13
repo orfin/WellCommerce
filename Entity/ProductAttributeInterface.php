@@ -17,6 +17,7 @@ use WellCommerce\Bundle\AppBundle\Entity\DiscountablePrice;
 use WellCommerce\Bundle\AppBundle\Entity\HierarchyAwareInterface;
 use WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityAwareInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 use WellCommerce\Bundle\MediaBundle\Entity\MediaAwareInterface;
 
 /**
@@ -25,6 +26,7 @@ use WellCommerce\Bundle\MediaBundle\Entity\MediaAwareInterface;
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface ProductAttributeInterface extends
+    EntityInterface,
     TimestampableInterface,
     AvailabilityAwareInterface,
     ProductAwareInterface,
@@ -32,14 +34,9 @@ interface ProductAttributeInterface extends
     MediaAwareInterface
 {
     /**
-     * @return int
-     */
-    public function getId();
-
-    /**
      * @return Collection
      */
-    public function getAttributeValues();
+    public function getAttributeValues() : Collection;
 
     /**
      * @param Collection $attributeValues
@@ -49,37 +46,37 @@ interface ProductAttributeInterface extends
     /**
      * @return float
      */
-    public function getWeight();
+    public function getWeight() : float;
 
     /**
      * @param float $weight
      */
-    public function setWeight($weight);
+    public function setWeight(float $weight);
 
     /**
      * @return string
      */
-    public function getSymbol();
+    public function getSymbol() : string;
 
     /**
      * @param string $symbol
      */
-    public function setSymbol($symbol);
+    public function setSymbol(string $symbol);
 
     /**
-     * @return float
+     * @return int
      */
-    public function getStock();
+    public function getStock() : int;
 
     /**
-     * @param float $stock
+     * @param int $stock
      */
-    public function setStock($stock);
+    public function setStock(int $stock);
 
     /**
      * @return DiscountablePrice
      */
-    public function getSellPrice();
+    public function getSellPrice() : DiscountablePrice;
 
     /**
      * @param DiscountablePrice $sellPrice
@@ -89,20 +86,20 @@ interface ProductAttributeInterface extends
     /**
      * @return float
      */
-    public function getModifierValue();
+    public function getModifierValue() : float;
 
     /**
      * @param float $modifierValue
      */
-    public function setModifierValue($modifierValue);
+    public function setModifierValue(float $modifierValue);
 
     /**
      * @return string
      */
-    public function getModifierType();
+    public function getModifierType() : string;
 
     /**
      * @param string $modifierType
      */
-    public function setModifierType($modifierType);
+    public function setModifierType(string $modifierType);
 }

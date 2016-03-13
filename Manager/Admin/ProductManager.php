@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\ProductBundle\Manager\Admin;
 
 use Symfony\Component\Validator\Exception\ValidatorException;
 use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 use WellCommerce\Bundle\ProductBundle\Exception\ProductNotFoundException;
 
 /**
@@ -29,7 +30,7 @@ class ProductManager extends AbstractAdminManager
      * @param int   $id
      * @param array $data
      */
-    public function quickUpdateProduct($id, array $data)
+    public function quickUpdateProduct(int $id, array $data)
     {
         $product       = $this->findProduct($id);
         $entityManager = $this->getDoctrineHelper()->getEntityManager();
@@ -52,12 +53,12 @@ class ProductManager extends AbstractAdminManager
      *
      * @param int $id
      *
-     * @return \WellCommerce\Bundle\ProductBundle\Entity\Product
+     * @return ProductInterface
      */
-    protected function findProduct($id)
+    protected function findProduct(int $id) : ProductInterface
     {
-        $product = $this->getRepository()->find($id);
-        if (null === $product) {
+        $product = $this->repository->find($id);
+        if (!$product instanceof ProductInterface) {
             throw new ProductNotFoundException($id);
         }
 
