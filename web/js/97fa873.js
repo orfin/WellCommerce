@@ -4970,6 +4970,7 @@
     Translator.add("order.label.currency", "Currency", "wellcommerce", "en");
     Translator.add("order.description.product_total", "Total products value", "wellcommerce", "en");
     Translator.add("order.description.shipping_cost", "Shipping costs", "wellcommerce", "en");
+    Translator.add("order.notice.empty_order_list", "You have not placed any orders", "wellcommerce", "en");
     Translator.add("order_status.heading.index", "Order statuses", "wellcommerce", "en");
     Translator.add("order_status.heading.add", "Add a new order status", "wellcommerce", "en");
     Translator.add("order_status.heading.edit", "Edit an order status", "wellcommerce", "en");
@@ -5517,6 +5518,7 @@
     Translator.add("order.label.currency", "Waluta", "wellcommerce", "pl");
     Translator.add("order.description.product_total", "Warto\u015b\u0107 produkt\u00f3w", "wellcommerce", "pl");
     Translator.add("order.description.shipping_cost", "Koszty wysy\u0142ki", "wellcommerce", "pl");
+    Translator.add("order.notice.empty_order_list", "Nie z\u0142o\u017cy\u0142e\u015b jeszcze \u017cadnych zam\u00f3wie\u0144", "wellcommerce", "pl");
     Translator.add("order_status.heading.index", "Statusy zam\u00f3wienia", "wellcommerce", "pl");
     Translator.add("order_status.heading.add", "Dodaj status", "wellcommerce", "pl");
     Translator.add("order_status.heading.edit", "Edytuj status", "wellcommerce", "pl");
