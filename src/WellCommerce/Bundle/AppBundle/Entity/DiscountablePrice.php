@@ -22,17 +22,17 @@ class DiscountablePrice extends Price
     /**
      * @var float
      */
-    protected $discountedNetAmount;
+    protected $discountedNetAmount = 0;
 
     /**
      * @var float
      */
-    protected $discountedGrossAmount;
+    protected $discountedGrossAmount = 0;
 
     /**
      * @var float
      */
-    protected $discountedTaxAmount;
+    protected $discountedTaxAmount = 0;
 
     /**
      * @var \DateTime|null
@@ -107,7 +107,7 @@ class DiscountablePrice extends Price
      */
     public function getDiscountedGrossAmount() : float
     {
-        return (float)$this->discountedGrossAmount;
+        return $this->discountedGrossAmount;
     }
 
     /**
@@ -133,9 +133,9 @@ class DiscountablePrice extends Price
     /**
      * @return float
      */
-    public function getDiscountedNetAmount()
+    public function getDiscountedNetAmount() : float
     {
-        return (float)$this->discountedNetAmount;
+        return $this->discountedNetAmount;
     }
 
     /**
@@ -159,9 +159,9 @@ class DiscountablePrice extends Price
     }
 
     /**
-     * @return float|int
+     * @return float
      */
-    public function getDiscountedTaxAmount()
+    public function getDiscountedTaxAmount() : float
     {
         return $this->discountedTaxAmount;
     }

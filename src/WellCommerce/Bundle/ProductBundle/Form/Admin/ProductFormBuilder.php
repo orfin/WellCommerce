@@ -11,6 +11,8 @@
  */
 namespace WellCommerce\Bundle\ProductBundle\Form\Admin;
 
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\Criteria;
 use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
 use WellCommerce\Component\Form\DataTransformer\DateTransformer;
 use WellCommerce\Component\Form\Elements\ElementInterface;
@@ -346,24 +348,26 @@ class ProductFormBuilder extends AbstractFormBuilder
             'transformer' => $this->getRepositoryTransformer('collection', $this->get('product_status.repository'))
         ]));
 
-        $attributesData = $form->addChild($this->getElement('nested_fieldset', [
-            'name'  => 'attributes_data',
-            'label' => $this->trans('product.form.fieldset.attributes')
-        ]));
+        if ($this->getAttributeGroups()->count()) {
+            $attributesData = $form->addChild($this->getElement('nested_fieldset', [
+                'name'  => 'attributes_data',
+                'label' => $this->trans('product.form.fieldset.attributes')
+            ]));
 
-        $attributesData->addChild($this->getElement('product_variants_editor', [
-            'name'               => 'attributes',
-            'label'              => $this->trans('product.label.attributes'),
-            'suffixes'           => ['+', '-', '%'],
-            'price_field'        => $sellPriceAmount,
-            'vat_field'          => $sellPriceTax,
-            'vat_values'         => $vatValues,
-            'category_field'     => $categoriesField,
-            'availability_field' => $availabilityField,
-            'availability'       => $availabilityField->getOption('options'),
-            'transformer'        => $this->getRepositoryTransformer('product_attribute_collection',
-                $this->get('product_attribute.repository'))
-        ]));
+            $attributesData->addChild($this->getElement('product_variants_editor', [
+                'name'               => 'attributes',
+                'label'              => $this->trans('product.label.attributes'),
+                'suffixes'           => ['+', '-', '%'],
+                'price_field'        => $sellPriceAmount,
+                'vat_field'          => $sellPriceTax,
+                'vat_values'         => $vatValues,
+                'category_field'     => $categoriesField,
+                'availability_field' => $availabilityField,
+                'availability'       => $availabilityField->getOption('options'),
+                'transformer'        => $this->getRepositoryTransformer('product_attribute_collection',
+                    $this->get('product_attribute.repository'))
+            ]));
+        }
 
         $shopsData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'shops_data',
@@ -379,5 +383,10 @@ class ProductFormBuilder extends AbstractFormBuilder
 
         $form->addFilter($this->getFilter('trim'));
         $form->addFilter($this->getFilter('secure'));
+    }
+
+    protected function getAttributeGroups() : Collection
+    {
+        return $this->get('product_attribute.repository')->matching(new Criteria());
     }
 }

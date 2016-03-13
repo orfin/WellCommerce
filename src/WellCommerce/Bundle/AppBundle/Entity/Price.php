@@ -22,32 +22,32 @@ class Price
     /**
      * @var float
      */
-    protected $netAmount;
+    protected $netAmount = 0;
 
     /**
      * @var float
      */
-    protected $grossAmount;
+    protected $grossAmount = 0;
 
     /**
      * @var float
      */
-    protected $taxAmount;
+    protected $taxAmount = 0;
 
     /**
      * @var float
      */
-    protected $taxRate;
+    protected $taxRate = 0;
 
     /**
      * @var string
      */
-    protected $currency;
+    protected $currency = '';
 
     /**
      * @var float
      */
-    protected $exchangeRate;
+    protected $exchangeRate = 0;
 
     /**
      * @return float
