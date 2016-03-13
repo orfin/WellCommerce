@@ -5,6 +5,7 @@
     <ul class="possibilities">
         <li><a href="{{ path('admin.attribute_group.index') }}" class="button return"><span></span></a></li>
         <li><a href="{{ path('admin.attribute_group.add') }}" id="add_group" class="button" title="{% trans %}common.button.add{% endtrans %}"><span>{% trans %}common.button.add{% endtrans %}</span></a></li>
+        <li><a href="#" id="delete_group" class="button delete" title="{% trans %}common.button.delete{% endtrans %}"><span>{% trans %}common.button.delete{% endtrans %}</span></a></li>
         <li><a href="#{{ form.getName() }}" rel="submit" class="button"><span>{% trans %}common.button.save_and_finish{% endtrans %}</span></a></li>
     </ul>
     <div class="block">
@@ -19,5 +20,33 @@
     </div>
 
     {% include 'WellCommerceAttributeBundle:Admin:AttributeGroup/javascript.html.twig' %}
+    <script type="text/javascript">
+        GCore.OnLoad(function() {
+            $('#delete_group').click(function() {
 
+                var title = '{% trans %}attribute_group.flash.delete_group{% endtrans %}';
+                var msg = '';
+                var params = {
+                    id: {{ resource.id }}
+                };
+
+                var func = function(p) {
+                    oRequest = {
+                        id: p.id
+                    }
+
+                    GF_Ajax_Request(Routing.generate('admin.attribute_group.delete', {id: p.id}), {}, function(oData){
+                        if(oData.success){
+                            window.location = Routing.generate('admin.attribute_group.edit',{id: p.id});
+                        }
+                        if(oData.error){
+                            GError(oData.error);
+                        }
+                    });
+                };
+
+                new GF_Alert(title, msg, func, true, params);
+            });
+        });
+    </script>
 {% endblock %}

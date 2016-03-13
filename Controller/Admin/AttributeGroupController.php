@@ -30,7 +30,7 @@ class AttributeGroupController extends AbstractAdminController
     
     public function indexAction() : Response
     {
-        $groups = $this->manager->getGroupsCollection();
+        $groups = $this->manager->getAttributeGroupsCollection();
 
         if ($groups->count()) {
             $defaultGroup = $groups->first();
@@ -52,7 +52,7 @@ class AttributeGroupController extends AbstractAdminController
         }
 
         $name     = $request->request->get('name');
-        $resource = $this->manager->createGroup($name);
+        $resource = $this->manager->createAttributeGroup($name);
         
         return $this->jsonResponse([
             'id' => $resource->getId(),
@@ -66,7 +66,7 @@ class AttributeGroupController extends AbstractAdminController
             return $this->redirectToAction('index');
         }
 
-        $groups = $this->manager->getGroupsCollection();
+        $groups = $this->manager->getAttributeGroupsCollection();
         $form   = $this->manager->getForm($resource, [
             'class' => 'attributeGroupEditor'
         ]);

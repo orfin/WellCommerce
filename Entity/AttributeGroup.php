@@ -13,23 +13,22 @@
 namespace WellCommerce\Bundle\AttributeBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Util\Debug;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
+use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
 
 /**
  * Class AttributeGroup
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AttributeGroup implements AttributeGroupInterface
+class AttributeGroup extends AbstractEntity implements AttributeGroupInterface
 {
-    use Translatable, Timestampable, Blameable;
-
-    /**
-     * @var int
-     */
-    protected $id;
+    use Translatable;
+    use Timestampable;
+    use Blameable;
 
     /**
      * @var Collection
@@ -39,15 +38,7 @@ class AttributeGroup implements AttributeGroupInterface
     /**
      * {@inheritdoc}
      */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAttributes()
+    public function getAttributes() : Collection
     {
         return $this->attributes;
     }
@@ -55,9 +46,25 @@ class AttributeGroup implements AttributeGroupInterface
     /**
      * {@inheritdoc}
      */
-    public function setAttributes(Collection $collection)
+    public function setAttributes(Collection $attributes)
     {
-        $this->attributes = $collection;
+        if ($this->attributes instanceof Collection) {
+            $this->attributes->map(function (AttributeInterface $attribute) use ($attributes) {
+                if (false === $attributes->contains($attribute)) {
+                    $this->removeAttribute($attribute);
+                }
+            });
+        }
+
+        $this->attributes = $attributes;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeAttribute(AttributeInterface $attribute)
+    {
+        $this->attributes->removeElement($attribute);
     }
 
     /**
