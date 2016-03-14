@@ -20,11 +20,11 @@ use WellCommerce\Component\Form\Elements\AttributeCollection;
 use WellCommerce\Component\Form\Elements\ElementInterface;
 
 /**
- * Class ProductVariantsEditor
+ * Class VariantEditor
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductVariantsEditor extends AbstractField implements ElementInterface
+class VariantEditor extends AbstractField implements ElementInterface
 {
     /**
      * {@inheritdoc}
