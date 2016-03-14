@@ -1,4 +1,6 @@
-attribute_group: Grupy wariantów
+attribute_group: Grupy cech
+attribute: Cechy produktów
+attribute_value: Wartości cech
 availability: Dostępność
 catalog: Katalog
 category: Kategorie

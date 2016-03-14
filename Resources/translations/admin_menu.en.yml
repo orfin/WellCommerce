@@ -1,4 +1,6 @@
-attribute_group: 'Variant groups'
+attribute_group: 'Attribute groups'
+attribute: 'Attributes'
+attribute_value: 'Attribute values'
 availability: Availability
 catalog: Catalog
 category: Categories
@@ -49,3 +51,4 @@ page: Pages
 user_management: Users management
 user: Users
 user_group: Users groups
+variants: Variants
