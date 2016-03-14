@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\AttributeBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 
 /**
@@ -32,16 +33,16 @@ class AttributeValueController extends AbstractAdminController
      *
      * @param Request $request
      *
-     * @return \Symfony\Component\HttpFoundation\JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse
+     * @return Response
      */
-    public function ajaxAddAction(Request $request)
+    public function ajaxAddAction(Request $request) : Response
     {
         if (!$request->isXmlHttpRequest()) {
             return $this->redirectToAction('index');
         }
 
         $attributeValueName = $request->request->get('name');
-        $attributeId        = (int)$request->request->get('attribute');
+        $attributeId        = $request->request->get('attribute');
         $value              = $this->manager->addAttributeValue($attributeValueName, $attributeId);
 
         return $this->jsonResponse([

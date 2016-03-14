@@ -44,6 +44,11 @@ interface AttributeInterface extends
     public function setGroups(Collection $groups);
 
     /**
+     * @param AttributeGroupInterface $group
+     */
+    public function addGroup(AttributeGroupInterface $group);
+
+    /**
      * @return Collection
      */
     public function getValues() : Collection;

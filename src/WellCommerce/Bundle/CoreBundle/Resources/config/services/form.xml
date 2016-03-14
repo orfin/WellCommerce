@@ -111,8 +111,8 @@
             <tag name="form.element" alias="price_editor"/>
         </service>
 
-        <service id="form.element.product_variants_editor" class="WellCommerce\Component\Form\Elements\Editor\ProductVariantsEditor" shared="false">
-            <tag name="form.element" alias="product_variants_editor"/>
+        <service id="form.element.variant_editor" class="WellCommerce\Component\Form\Elements\Editor\VariantEditor" shared="false">
+            <tag name="form.element" alias="variant_editor"/>
         </service>
 
         <service id="form.element.password" class="WellCommerce\Component\Form\Elements\Input\Password" shared="false">

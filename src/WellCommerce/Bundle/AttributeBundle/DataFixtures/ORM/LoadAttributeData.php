@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\AttributeBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use WellCommerce\Bundle\AttributeBundle\Factory\AttributeGroupFactory;
 use WellCommerce\Bundle\DoctrineBundle\DataFixtures\AbstractDataFixture;
 
 /**
@@ -30,5 +31,12 @@ class LoadAttributeData extends AbstractDataFixture
         if (!$this->isEnabled()) {
             return;
         }
+
+        $group = $this->getAttributeGroupFactory()->create();
+    }
+
+    protected function getAttributeGroupFactory() : AttributeGroupFactory
+    {
+        return $this->container->get('attribute_group.factory');
     }
 }

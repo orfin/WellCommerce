@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <imports>
+        <import resource="admin/variant.xml"/>
+    </imports>
+
+    <services>
+        <service id="variant.event_dispatcher" parent="core.event_dispatcher" public="false">
+            <argument type="service" id="event_dispatcher"/>
+        </service>
+
+        <service id="variant.helper" class="WellCommerce\Bundle\ProductBundle\Helper\VariantHelper">
+            <argument type="service" id="currency.helper"/>
+        </service>
+
+        <service id="variant.request_param_converter" class="WellCommerce\Bundle\ProductBundle\Request\ParamConverter\VariantParamConverter">
+            <argument type="service" id="variant.repository" />
+            <argument>attribute</argument>
+            <argument type="collection">
+                <argument>WellCommerce\Bundle\ProductBundle\Entity\Variant</argument>
+                <argument>WellCommerce\Bundle\ProductBundle\Entity\VariantInterface</argument>
+            </argument>
+            <tag name="request.param_converter" converter="variant" priority="10"/>
+        </service>
+
+        <service id="form.variant_collection.data_transformer" class="WellCommerce\Bundle\ProductBundle\Form\DataTransformer\VariantCollectionToArrayTransformer" shared="false">
+            <argument type="service" id="doctrine.helper"/>
+            <call method="setVariantManager">
+                <argument type="service" id="variant.manager.admin"/>
+            </call>
+            <tag name="form.data_transformer" alias="variant_collection"/>
+        </service>
+    </services>
+</container>

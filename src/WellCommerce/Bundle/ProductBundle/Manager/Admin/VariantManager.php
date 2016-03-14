@@ -18,25 +18,12 @@ use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 
 /**
- * Class ProductAttributeManager
+ * Class VariantManager
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductAttributeManager extends AbstractAdminManager
+class VariantManager extends AbstractAdminManager
 {
-    /**
-     * @var AttributeValueRepositoryInterface
-     */
-    protected $attributeValueRepository;
-
-    /**
-     * @param AttributeValueRepositoryInterface $attributeValueRepository
-     */
-    public function setAttributeValueRepository(AttributeValueRepositoryInterface $attributeValueRepository)
-    {
-        $this->attributeValueRepository = $attributeValueRepository;
-    }
-
     public function getAttributesCollectionForProduct(ProductInterface $product, array $values)
     {
         $values     = $this->filterValues($values);

@@ -24,6 +24,21 @@ use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
  */
 class AttributeManager extends AbstractAdminManager
 {
+    public function createAttribute(string $attributeName, int $attributeGroupId) : AttributeInterface
+    {
+        /** @var $attribute AttributeInterface */
+        $attribute = $this->initResource();
+        $group     = $this->findAttributeGroup($attributeGroupId);
+        foreach ($this->getLocales() as $locale) {
+            $attribute->translate($locale->getCode())->setName($attributeName);
+        }
+        $attribute->addGroup($group);
+        $attribute->mergeNewTranslations();
+        $this->saveResource($attribute);
+
+        return $attribute;
+    }
+
     public function getAttributeSet(int $attributeGroupId) : array
     {
         $sets                 = [];

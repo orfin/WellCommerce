@@ -15,26 +15,26 @@ namespace WellCommerce\Bundle\ProductBundle\Entity;
 use WellCommerce\Bundle\AppBundle\Entity\DiscountablePrice;
 
 /**
- * Class ProductAttributePrice
+ * Class VariantPrice
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductAttributePrice extends DiscountablePrice
+class VariantPrice extends DiscountablePrice
 {
     /**
      * @var string
      */
-    protected $modifierType;
+    protected $modifierType = '';
 
     /**
-     * @var int|float
+     * @var float
      */
-    protected $modifierValue;
+    protected $modifierValue = 0;
 
     /**
      * @return string
      */
-    public function getModifierType()
+    public function getModifierType() : string
     {
         return $this->modifierType;
     }
@@ -42,23 +42,23 @@ class ProductAttributePrice extends DiscountablePrice
     /**
      * @param string $modifierType
      */
-    public function setModifierType($modifierType)
+    public function setModifierType(string $modifierType)
     {
         $this->modifierType = $modifierType;
     }
 
     /**
-     * @return float|int
+     * @return float
      */
-    public function getModifierValue()
+    public function getModifierValue() : float
     {
         return $this->modifierValue;
     }
 
     /**
-     * @param float|int $modifierValue
+     * @param float $modifierValue
      */
-    public function setModifierValue($modifierValue)
+    public function setModifierValue(float $modifierValue)
     {
         $this->modifierValue = $modifierValue;
     }

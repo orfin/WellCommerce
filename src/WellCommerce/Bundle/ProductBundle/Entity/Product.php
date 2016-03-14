@@ -72,11 +72,6 @@ class Product extends AbstractEntity implements ProductInterface
     /**
      * @var Collection
      */
-    protected $attributes;
-
-    /**
-     * @var Collection
-     */
     protected $reviews;
 
     /**
@@ -103,6 +98,11 @@ class Product extends AbstractEntity implements ProductInterface
      * @var TaxInterface
      */
     protected $sellPriceTax;
+
+    /**
+     * @var Collection
+     */
+    protected $variants;
 
     /**
      * @var AttributeGroupInterface
@@ -340,33 +340,33 @@ class Product extends AbstractEntity implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function getAttributes() : Collection
+    public function getVariants() : Collection
     {
-        return $this->attributes;
+        return $this->variants;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setAttributes(Collection $attributes)
+    public function setVariants(Collection $variants)
     {
-        if (null !== $this->attributes) {
-            $this->attributes->map(function (ProductAttributeInterface $productAttribute) use ($attributes) {
-                if (false === $attributes->contains($productAttribute)) {
-                    $this->removeAttribute($productAttribute);
+        if ($this->variants instanceof Collection) {
+            $this->variants->map(function (VariantInterface $variant) use ($variants) {
+                if (false === $variants->contains($variant)) {
+                    $this->removeVariant($variant);
                 }
             });
         }
 
-        $this->attributes = $attributes;
+        $this->variants = $variants;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function removeAttribute(ProductAttributeInterface $productAttribute)
+    public function removeVariant(VariantInterface $variant)
     {
-        $this->attributes->removeElement($productAttribute);
+        $this->variants->removeElement($variant);
     }
 
     /**

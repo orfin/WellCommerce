@@ -19,12 +19,48 @@
     </item>
 
     <item>
+        <identifier>variant</identifier>
+        <css_class/>
+        <name>variant</name>
+        <route_name>admin.variant.index</route_name>
+        <parent>catalog</parent>
+        <hierarchy>20</hierarchy>
+    </item>
+
+    <item>
+        <identifier>attribute_group</identifier>
+        <css_class/>
+        <name>attribute_group</name>
+        <route_name>admin.attribute_group.index</route_name>
+        <parent>variant</parent>
+        <hierarchy>10</hierarchy>
+    </item>
+
+    <item>
+        <identifier>attribute</identifier>
+        <css_class/>
+        <name>attribute</name>
+        <route_name>admin.attribute.index</route_name>
+        <parent>variant</parent>
+        <hierarchy>20</hierarchy>
+    </item>
+
+    <item>
+        <identifier>attribute_value</identifier>
+        <css_class/>
+        <name>attribute_value</name>
+        <route_name>admin.attribute_value.index</route_name>
+        <parent>variant</parent>
+        <hierarchy>30</hierarchy>
+    </item>
+
+    <item>
         <identifier>category</identifier>
         <css_class/>
         <name>category</name>
         <route_name>admin.category.index</route_name>
         <parent>catalog</parent>
-        <hierarchy>20</hierarchy>
+        <hierarchy>30</hierarchy>
     </item>
 
     <item>
@@ -33,7 +69,7 @@
         <name>producer</name>
         <route_name>admin.producer.index</route_name>
         <parent>catalog</parent>
-        <hierarchy>30</hierarchy>
+        <hierarchy>40</hierarchy>
     </item>
 
     <item>
@@ -42,7 +78,7 @@
         <name>deliverer</name>
         <route_name>admin.deliverer.index</route_name>
         <parent>catalog</parent>
-        <hierarchy>40</hierarchy>
+        <hierarchy>50</hierarchy>
     </item>
 
     <item>
@@ -50,15 +86,6 @@
         <css_class/>
         <name>availability</name>
         <route_name>admin.availability.index</route_name>
-        <parent>catalog</parent>
-        <hierarchy>50</hierarchy>
-    </item>
-
-    <item>
-        <identifier>attribute_group</identifier>
-        <css_class/>
-        <name>attribute_group</name>
-        <route_name>admin.attribute_group.index</route_name>
         <parent>catalog</parent>
         <hierarchy>60</hierarchy>
     </item>

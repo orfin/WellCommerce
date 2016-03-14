@@ -15,11 +15,11 @@ namespace WellCommerce\Bundle\ProductBundle\Request\ParamConverter;
 use WellCommerce\Bundle\CoreBundle\Request\ParamConverter\AbstractEntityParamConverter;
 
 /**
- * Class ProductAttributeParamConverter
+ * Class VariantParamConverter
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductAttributeParamConverter extends AbstractEntityParamConverter
+class VariantParamConverter extends AbstractEntityParamConverter
 {
 
 }

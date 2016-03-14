@@ -11,13 +11,13 @@ well_commerce_product:
                 exposed: true
                 dataset: product.dataset.admin
                 manager: product.manager.admin
-        product_attribute:
+        variant:
             auto_services:
-                factory: WellCommerce\Bundle\ProductBundle\Factory\ProductAttributeFactory
-                repository: WellCommerce\Bundle\ProductBundle\Repository\ProductAttributeRepository
+                factory: WellCommerce\Bundle\ProductBundle\Factory\VariantFactory
+                repository: WellCommerce\Bundle\ProductBundle\Repository\VariantRepository
             orm_configuration:
-                mapping: "@WellCommerceProductBundle/Resources/config/doctrine/ProductAttribute.orm.yml"
-                entity: WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute
+                mapping: "@WellCommerceProductBundle/Resources/config/doctrine/Variant.orm.yml"
+                entity: WellCommerce\Bundle\ProductBundle\Entity\Variant
         product_photo:
             auto_services:
                 factory: ~

@@ -2,34 +2,28 @@
 
 namespace WellCommerce\Bundle\CartBundle\Entity;
 
+use WellCommerce\Bundle\AppBundle\Entity\DiscountablePrice;
 use WellCommerce\Bundle\DoctrineBundle\Behaviours\Timestampable\TimestampableTrait;
-use WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareTrait;
+use WellCommerce\Bundle\ProductBundle\Entity\VariantAwareTrait;
+use WellCommerce\Bundle\ProductBundle\Entity\VariantInterface;
 
 /**
  * Class CartProduct
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CartProduct implements CartProductInterface
+class CartProduct extends AbstractEntity implements CartProductInterface
 {
     use TimestampableTrait;
     use ProductAwareTrait;
-
-    /**
-     * @var integer
-     */
-    protected $id;
+    use VariantAwareTrait;
 
     /**
      * @var CartInterface
      */
     protected $cart;
-
-    /**
-     * @var ProductAttributeInterface
-     */
-    protected $attribute;
 
     /**
      * @var float
@@ -39,31 +33,7 @@ class CartProduct implements CartProductInterface
     /**
      * {@inheritdoc}
      */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAttribute()
-    {
-        return $this->attribute;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setAttribute(ProductAttributeInterface $attribute = null)
-    {
-        $this->attribute = $attribute;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getQuantity()
+    public function getQuantity() : int
     {
         return $this->quantity;
     }
@@ -71,25 +41,25 @@ class CartProduct implements CartProductInterface
     /**
      * {@inheritdoc}
      */
-    public function setQuantity($quantity)
+    public function setQuantity(int $quantity)
     {
-        $this->quantity = abs((int)$quantity);
+        $this->quantity = $quantity;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function increaseQuantity($increase)
+    public function increaseQuantity(int $increase)
     {
-        $this->quantity += abs((int)$increase);
+        $this->quantity += $increase;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function decreaseQuantity($decrease)
+    public function decreaseQuantity(int $decrease)
     {
-        $this->quantity -= abs((int)$decrease);
+        $this->quantity -= $decrease;
     }
 
     /**
@@ -111,24 +81,24 @@ class CartProduct implements CartProductInterface
     /**
      * {@inheritdoc}
      */
-    public function getSellPrice()
+    public function getSellPrice() : DiscountablePrice
     {
-        if (null === $this->attribute) {
-            return $this->product->getSellPrice();
+        if ($this->variant instanceof VariantInterface) {
+            return $this->variant->getSellPrice();
         }
 
-        return $this->attribute->getSellPrice();
+        return $this->product->getSellPrice();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getWeight()
+    public function getWeight() : float
     {
-        if (null === $this->attribute) {
-            return $this->product->getWeight();
+        if ($this->variant instanceof VariantInterface) {
+            return $this->variant->getWeight();
         }
 
-        return $this->attribute->getWeight();
+        return $this->product->getWeight();
     }
 }

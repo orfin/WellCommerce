@@ -15,14 +15,14 @@ namespace WellCommerce\Bundle\ProductBundle\Helper;
 use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeValueInterface;
 use WellCommerce\Bundle\CurrencyBundle\Helper\CurrencyHelperInterface;
-use WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\VariantInterface;
 
 /**
- * Class ProductAttributeHelper
+ * Class VariantHelper
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductAttributeHelper implements ProductAttributeHelperInterface
+class VariantHelper implements VariantHelperInterface
 {
     /**
      * @var CurrencyHelperInterface
@@ -46,8 +46,8 @@ class ProductAttributeHelper implements ProductAttributeHelperInterface
     {
         $groups = [];
 
-        $productAttributeCollection->map(function (ProductAttributeInterface $productAttribute) use (&$groups) {
-            $values = $productAttribute->getAttributeValues();
+        $productAttributeCollection->map(function (VariantInterface $variant) use (&$groups) {
+            $values = $variant->getAttributeValues();
             $this->extractValues($values, $groups);
         });
 
@@ -61,9 +61,9 @@ class ProductAttributeHelper implements ProductAttributeHelperInterface
     {
         $attributes = [];
 
-        $productAttributeCollection->map(function (ProductAttributeInterface $productAttribute) use (&$attributes) {
-            $key              = $this->generateProductAttributeKey($productAttribute);
-            $attributes[$key] = $this->getAttributeData($productAttribute);
+        $productAttributeCollection->map(function (VariantInterface $variant) use (&$attributes) {
+            $key              = $this->generateVariantKey($variant);
+            $attributes[$key] = $this->getAttributeData($variant);
         });
 
         return $attributes;
@@ -88,14 +88,14 @@ class ProductAttributeHelper implements ProductAttributeHelperInterface
     /**
      * Generates an attribute's key on base of its values
      *
-     * @param ProductAttributeInterface $productAttribute
+     * @param VariantInterface $variant
      *
      * @return string
      */
-    protected function generateProductAttributeKey(ProductAttributeInterface $productAttribute)
+    protected function generateVariantKey(VariantInterface $variant)
     {
         $values = [];
-        $productAttribute->getAttributeValues()->map(function (AttributeValueInterface $attributeValue) use (&$values) {
+        $variant->getAttributeValues()->map(function (AttributeValueInterface $attributeValue) use (&$values) {
             $values[$attributeValue->getId()] = $attributeValue->getId();
         });
 
@@ -107,22 +107,22 @@ class ProductAttributeHelper implements ProductAttributeHelperInterface
     /**
      * Returns the attribute's data
      *
-     * @param ProductAttributeInterface $productAttribute
+     * @param VariantInterface $variant
      *
      * @return array
      */
-    protected function getAttributeData(ProductAttributeInterface $productAttribute)
+    protected function getAttributeData(VariantInterface $variant)
     {
-        $sellPrice    = $productAttribute->getSellPrice();
+        $sellPrice    = $variant->getSellPrice();
         $baseCurrency = $sellPrice->getCurrency();
 
         return [
-            'id'                 => $productAttribute->getId(),
+            'id'                 => $variant->getId(),
             'finalPriceGross'    => $this->currencyHelper->convertAndFormat($sellPrice->getFinalGrossAmount(), $baseCurrency),
             'sellPriceGross'     => $this->currencyHelper->convertAndFormat($sellPrice->getGrossAmount(), $baseCurrency),
             'discountPriceGross' => $this->currencyHelper->convertAndFormat($sellPrice->getDiscountedGrossAmount(), $baseCurrency),
-            'stock'              => $productAttribute->getStock(),
-            'symbol'             => $productAttribute->getSymbol()
+            'stock'              => $variant->getStock(),
+            'symbol'             => $variant->getSymbol()
         ];
     }
 }

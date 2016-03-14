@@ -28,7 +28,7 @@ use WellCommerce\Bundle\TaxBundle\Helper\TaxHelper;
 class OrderProductManager extends AbstractAdminManager
 {
     /**
-     * @var \WellCommerce\Bundle\OrderBundle\Factory\OrderProductFactoryInterface
+     * @var \WellCommerce\Bundle\OrderBundle\Factory\OrderProductFactory
      */
     protected $factory;
 
@@ -100,11 +100,11 @@ class OrderProductManager extends AbstractAdminManager
             throw new \InvalidArgumentException(sprintf('Cannot add product to order. ID "%s" does not exists.', $productId));
         }
 
-        $orderProduct = $this->factory->create();
+        $orderProduct = $this->initResource();
         $orderProduct->setBuyPrice($product->getBuyPrice());
         $orderProduct->setOrder($order);
         $orderProduct->setProduct($product);
-        $orderProduct->setProductAttribute(null);
+        $orderProduct->setVariant(null);
         $orderProduct->setQuantity($productValues['quantity']);
         $orderProduct->setWeight($productValues['weight']);
 

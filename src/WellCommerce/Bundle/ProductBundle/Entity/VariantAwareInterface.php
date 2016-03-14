@@ -13,19 +13,19 @@
 namespace WellCommerce\Bundle\ProductBundle\Entity;
 
 /**
- * Interface ProductAttributeAwareInterface
+ * Interface VariantAwareInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ProductAttributeAwareInterface
+interface VariantAwareInterface
 {
     /**
-     * @param null|ProductAttributeInterface $productAttribute
+     * @param null|VariantInterface $variant
      */
-    public function setProductAttribute(ProductAttributeInterface $productAttribute = null);
+    public function setVariant(VariantInterface $variant = null);
 
     /**
-     * @return null|ProductAttributeInterface
+     * @return null|VariantInterface
      */
-    public function getProductAttribute();
+    public function getVariant();
 }

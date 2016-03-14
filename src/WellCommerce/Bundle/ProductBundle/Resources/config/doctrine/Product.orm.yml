@@ -164,8 +164,8 @@ WellCommerce\Bundle\ProductBundle\Entity\Product:
             fetch: LAZY
             mappedBy: product
             orphanRemoval: true
-        attributes:
-            targetEntity: WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute
+        variants:
+            targetEntity: WellCommerce\Bundle\ProductBundle\Entity\Variant
             cascade:
                 - all
             fetch: LAZY

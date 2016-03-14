@@ -1,6 +1,8 @@
 (function (Translator) {
     // pl
-    Translator.add("attribute_group", "Grupy wariant\u00f3w", "admin_menu", "pl");
+    Translator.add("attribute_group", "Grupy cech", "admin_menu", "pl");
+    Translator.add("attribute", "Cechy produkt\u00f3w", "admin_menu", "pl");
+    Translator.add("attribute_value", "Warto\u015bci cech", "admin_menu", "pl");
     Translator.add("availability", "Dost\u0119pno\u015b\u0107", "admin_menu", "pl");
     Translator.add("catalog", "Katalog", "admin_menu", "pl");
     Translator.add("category", "Kategorie", "admin_menu", "pl");

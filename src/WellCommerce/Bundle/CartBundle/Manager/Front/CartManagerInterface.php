@@ -15,8 +15,8 @@ namespace WellCommerce\Bundle\CartBundle\Manager\Front;
 use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 use WellCommerce\Bundle\CartBundle\Entity\CartProductInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\Front\FrontManagerInterface;
-use WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\VariantInterface;
 
 /**
  * Interface CartManagerInterface
@@ -28,13 +28,13 @@ interface CartManagerInterface extends FrontManagerInterface
     /**
      * Adds new product to cart
      *
-     * @param ProductInterface          $product
-     * @param ProductAttributeInterface $attribute
-     * @param int                       $quantity
+     * @param ProductInterface $product
+     * @param VariantInterface $variant
+     * @param int              $quantity
      *
      * @return bool
      */
-    public function addProductToCart(ProductInterface $product, ProductAttributeInterface $attribute = null, $quantity = 1);
+    public function addProductToCart(ProductInterface $product, VariantInterface $variant = null, $quantity = 1);
 
     /**
      * Deletes the item from cart

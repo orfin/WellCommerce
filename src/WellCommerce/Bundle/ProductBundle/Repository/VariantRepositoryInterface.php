@@ -13,22 +13,15 @@
 namespace WellCommerce\Bundle\ProductBundle\Repository;
 
 use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
-use WellCommerce\Bundle\ProductBundle\Entity\Product;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\VariantInterface;
 
 /**
- * Interface ProductAttributeRepositoryInterface
+ * Interface VariantRepositoryInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ProductAttributeRepositoryInterface extends RepositoryInterface
+interface VariantRepositoryInterface extends RepositoryInterface
 {
-    /**
-     * Returns attribute by id
-     *
-     * @param string  $id
-     * @param Product $product
-     *
-     * @return null|\WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute
-     */
-    public function findProductAttribute($id, Product $product);
+    public function findVariant(int $id, ProductInterface $product) : VariantInterface;
 }

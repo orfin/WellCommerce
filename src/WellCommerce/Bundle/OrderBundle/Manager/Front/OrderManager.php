@@ -18,6 +18,7 @@ use WellCommerce\Bundle\CartBundle\Entity\CartProductInterface;
 use WellCommerce\Bundle\CartBundle\Manager\Front\CartManagerInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
+use WellCommerce\Bundle\OrderBundle\Factory\OrderProductFactory;
 use WellCommerce\Bundle\OrderBundle\Factory\OrderTotalFactory;
 
 /**
@@ -28,7 +29,7 @@ use WellCommerce\Bundle\OrderBundle\Factory\OrderTotalFactory;
 class OrderManager extends AbstractFrontManager
 {
     /**
-     * @var FactoryInterface
+     * @var OrderProductFactory
      */
     protected $orderProductFactory;
 
@@ -48,17 +49,17 @@ class OrderManager extends AbstractFrontManager
     protected $eventDispatcher;
 
     /**
-     * @param FactoryInterface $orderProductFactory
+     * @param OrderProductFactory $orderProductFactory
      */
-    public function setOrderProductFactory(FactoryInterface $orderProductFactory)
+    public function setOrderProductFactory(OrderProductFactory $orderProductFactory)
     {
         $this->orderProductFactory = $orderProductFactory;
     }
 
     /**
-     * @param FactoryInterface $orderTotalFactory
+     * @param OrderTotalFactory $orderTotalFactory
      */
-    public function setOrderTotalFactory(FactoryInterface $orderTotalFactory)
+    public function setOrderTotalFactory(OrderTotalFactory $orderTotalFactory)
     {
         $this->orderTotalFactory = $orderTotalFactory;
     }
@@ -146,7 +147,7 @@ class OrderManager extends AbstractFrontManager
     {
         $orderProduct   = $this->orderProductFactory->create();
         $product        = $cartProduct->getProduct();
-        $attribute      = $cartProduct->getAttribute();
+        $variant        = $cartProduct->getVariant();
         $sellPrice      = $cartProduct->getSellPrice();
         $baseCurrency   = $sellPrice->getCurrency();
         $targetCurrency = $order->getCurrency();
@@ -166,7 +167,7 @@ class OrderManager extends AbstractFrontManager
         $orderProduct->setBuyPrice($product->getBuyPrice());
         $orderProduct->setQuantity($cartProduct->getQuantity());
         $orderProduct->setWeight($cartProduct->getWeight());
-        $orderProduct->setProductAttribute($attribute);
+        $orderProduct->setVariant($variant);
         $orderProduct->setProduct($product);
 
         return $orderProduct;

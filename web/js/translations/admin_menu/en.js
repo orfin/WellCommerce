@@ -1,6 +1,8 @@
 (function (Translator) {
     // en
-    Translator.add("attribute_group", "Variant groups", "admin_menu", "en");
+    Translator.add("attribute_group", "Attribute groups", "admin_menu", "en");
+    Translator.add("attribute", "Attributes", "admin_menu", "en");
+    Translator.add("attribute_value", "Attribute values", "admin_menu", "en");
     Translator.add("availability", "Availability", "admin_menu", "en");
     Translator.add("catalog", "Catalog", "admin_menu", "en");
     Translator.add("category", "Categories", "admin_menu", "en");
@@ -51,4 +53,5 @@
     Translator.add("user_management", "Users management", "admin_menu", "en");
     Translator.add("user", "Users", "admin_menu", "en");
     Translator.add("user_group", "Users groups", "admin_menu", "en");
+    Translator.add("variants", "Variants", "admin_menu", "en");
 })(Translator);
