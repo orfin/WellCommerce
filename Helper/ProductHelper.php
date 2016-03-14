@@ -32,9 +32,9 @@ class ProductHelper implements ProductHelperInterface
     protected $shippingMethodProvider;
 
     /**
-     * @var ProductAttributeHelperInterface
+     * @var VariantHelperInterface
      */
-    protected $productAttributeHelper;
+    protected $variantHelper;
 
     /**
      * @var DataSetInterface
@@ -42,19 +42,19 @@ class ProductHelper implements ProductHelperInterface
     protected $dataset;
 
     /**
-     * Constructor
+     * ProductHelper constructor.
      *
      * @param DataSetInterface                $dataset
-     * @param ShippingMethodProviderInterface $shippingMethodProviderInterface
-     * @param ProductAttributeHelperInterface $productAttributeHelper
+     * @param ShippingMethodProviderInterface $shippingMethodProvider
+     * @param VariantHelperInterface          $variantHelper
      */
     public function __construct(
         DataSetInterface $dataset,
         ShippingMethodProviderInterface $shippingMethodProvider,
-        ProductAttributeHelperInterface $productAttributeHelper
+        VariantHelperInterface $variantHelper
     ) {
         $this->shippingMethodProvider = $shippingMethodProvider;
-        $this->productAttributeHelper = $productAttributeHelper;
+        $this->variantHelper          = $variantHelper;
         $this->dataset                = $dataset;
     }
 
@@ -64,9 +64,9 @@ class ProductHelper implements ProductHelperInterface
     public function getProductDefaultTemplateData(ProductInterface $product)
     {
         $shippingMethodCosts = $this->shippingMethodProvider->getShippingMethodCostsCollection($product);
-        $productAttributes   = $product->getAttributes();
-        $groups              = $this->productAttributeHelper->getAttributeGroups($productAttributes);
-        $attributes          = $this->productAttributeHelper->getAttributes($productAttributes);
+        $variants            = $product->getVariants();
+        $groups              = $this->variantHelper->getAttributeGroups($variants);
+        $attributes          = $this->variantHelper->getAttributes($variants);
 
         return [
             'product'         => $product,

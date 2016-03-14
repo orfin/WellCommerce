@@ -21,11 +21,11 @@ use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
 use WellCommerce\Bundle\MediaBundle\Entity\MediaAwareTrait;
 
 /**
- * Class ProductAttribute
+ * Class Variant
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductAttribute extends AbstractEntity implements ProductAttributeInterface
+class Variant extends AbstractEntity implements VariantInterface
 {
     use Timestampable;
     use HierarchyAwareTrait;
@@ -36,7 +36,7 @@ class ProductAttribute extends AbstractEntity implements ProductAttributeInterfa
     /**
      * @var Collection
      */
-    protected $attributeValues;
+    protected $attributeSets;
 
     /**
      * @var DiscountablePrice
@@ -71,17 +71,17 @@ class ProductAttribute extends AbstractEntity implements ProductAttributeInterfa
     /**
      * {@inheritdoc}
      */
-    public function getAttributeValues() : Collection
+    public function getAttributeSets() : Collection
     {
-        return $this->attributeValues;
+        return $this->attributeSets;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setAttributeValues(Collection $attributeValues)
+    public function setAttributeSets(Collection $attributeSets)
     {
-        $this->attributeValues = $attributeValues;
+        $this->attributeSets = $attributeSets;
     }
 
     /**

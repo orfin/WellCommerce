@@ -12,19 +12,17 @@
 namespace WellCommerce\Bundle\ProductBundle\Repository;
 
 use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
-use WellCommerce\Bundle\ProductBundle\Entity\Product;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\VariantInterface;
 
 /**
- * Class ProductAttributeRepository
+ * Class VariantRepository
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductAttributeRepository extends AbstractEntityRepository implements ProductAttributeRepositoryInterface
+class VariantRepository extends AbstractEntityRepository implements VariantRepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function findProductAttribute($id, Product $product)
+    public function findVariant(int $id, ProductInterface $product) : VariantInterface
     {
         return $this->findOneBy([
             'product' => $product,

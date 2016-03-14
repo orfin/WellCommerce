@@ -354,7 +354,7 @@ class ProductFormBuilder extends AbstractFormBuilder
                 'label' => $this->trans('product.form.fieldset.attributes')
             ]));
 
-            $attributesData->addChild($this->getElement('product_variants_editor', [
+            $attributesData->addChild($this->getElement('variant_editor', [
                 'name'               => 'attributes',
                 'label'              => $this->trans('product.label.attributes'),
                 'suffixes'           => ['+', '-', '%'],
@@ -364,8 +364,7 @@ class ProductFormBuilder extends AbstractFormBuilder
                 'category_field'     => $categoriesField,
                 'availability_field' => $availabilityField,
                 'availability'       => $availabilityField->getOption('options'),
-                'transformer'        => $this->getRepositoryTransformer('product_attribute_collection',
-                    $this->get('product_attribute.repository'))
+                'transformer'        => $this->getRepositoryTransformer('variant_collection', $this->get('variant.repository'))
             ]));
         }
 
@@ -387,6 +386,6 @@ class ProductFormBuilder extends AbstractFormBuilder
 
     protected function getAttributeGroups() : Collection
     {
-        return $this->get('product_attribute.repository')->matching(new Criteria());
+        return $this->get('attribute_group.repository')->matching(new Criteria());
     }
 }

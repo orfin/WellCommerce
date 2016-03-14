@@ -182,17 +182,17 @@ interface ProductInterface extends
     /**
      * @return Collection
      */
-    public function getAttributes() : Collection;
+    public function getVariants() : Collection;
 
     /**
      * @param Collection $attributes
      */
-    public function setAttributes(Collection $attributes);
+    public function setVariants(Collection $attributes);
 
     /**
-     * @param ProductAttributeInterface $productAttribute
+     * @param VariantInterface $variant
      */
-    public function removeAttribute(ProductAttributeInterface $productAttribute);
+    public function removeVariant(VariantInterface $variant);
 
     /**
      * @return TaxInterface

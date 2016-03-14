@@ -18,28 +18,28 @@ use Symfony\Component\PropertyAccess\PropertyPathInterface;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeValueInterface;
 use WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityInterface;
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
-use WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
-use WellCommerce\Bundle\ProductBundle\Manager\Admin\ProductAttributeManager;
+use WellCommerce\Bundle\ProductBundle\Entity\VariantInterface;
+use WellCommerce\Bundle\ProductBundle\Manager\Admin\VariantManager;
 
 /**
- * Class ProductAttributeCollectionToArrayTransformer
+ * Class VariantCollectionToArrayTransformer
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductAttributeCollectionToArrayTransformer extends CollectionToArrayTransformer
+class VariantCollectionToArrayTransformer extends CollectionToArrayTransformer
 {
     /**
-     * @var ProductAttributeManager
+     * @var VariantManager
      */
-    protected $productAttributeManager;
+    protected $variantManager;
 
     /**
-     * @param ProductAttributeManager $productAttributeManager
+     * @param VariantManager $variantManager
      */
-    public function setProductAttributeManager(ProductAttributeManager $productAttributeManager)
+    public function setVariantManager(VariantManager $variantManager)
     {
-        $this->productAttributeManager = $productAttributeManager;
+        $this->variantManager = $variantManager;
     }
 
     /**
@@ -50,16 +50,16 @@ class ProductAttributeCollectionToArrayTransformer extends CollectionToArrayTran
         $values = [];
 
         if ($modelData instanceof Collection) {
-            $modelData->map(function (ProductAttributeInterface $productAttribute) use (&$values) {
+            $modelData->map(function (VariantInterface $variant) use (&$values) {
                 $values[] = [
-                    'id'           => $productAttribute->getId(),
-                    'suffix'       => $productAttribute->getModifierType(),
-                    'modifier'     => $productAttribute->getModifierValue(),
-                    'stock'        => $productAttribute->getStock(),
-                    'symbol'       => $productAttribute->getSymbol(),
-                    'weight'       => $productAttribute->getWeight(),
-                    'availability' => $this->transformAvailability($productAttribute->getAvailability()),
-                    'attributes'   => $this->transformValues($productAttribute->getAttributeValues()),
+                    'id'           => $variant->getId(),
+                    'suffix'       => $variant->getModifierType(),
+                    'modifier'     => $variant->getModifierValue(),
+                    'stock'        => $variant->getStock(),
+                    'symbol'       => $variant->getSymbol(),
+                    'weight'       => $variant->getWeight(),
+                    'availability' => $this->transformAvailability($variant->getAvailability()),
+                    'attributes'   => $this->transformValues($variant->getAttributeValues()),
                 ];
             });
         }
@@ -103,7 +103,7 @@ class ProductAttributeCollectionToArrayTransformer extends CollectionToArrayTran
     public function reverseTransform($modelData, PropertyPathInterface $propertyPath, $values)
     {
         if ($modelData instanceof ProductInterface) {
-            $collection = $this->productAttributeManager->getAttributesCollectionForProduct($modelData, $values);
+            $collection = $this->variantManager->getAttributesCollectionForProduct($modelData, $values);
             $modelData->setAttributes($collection);
         }
     }

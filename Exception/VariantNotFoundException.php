@@ -13,19 +13,19 @@
 namespace WellCommerce\Bundle\ProductBundle\Exception;
 
 /**
- * Class ProductAttributeNotFoundException
+ * Class VariantNotFoundException
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductAttributeNotFoundException extends \RuntimeException
+class VariantNotFoundException extends \RuntimeException
 {
     /**
-     * Constructor
+     * VariantNotFoundException constructor.
      *
      * @param int $id
      */
     public function __construct($id)
     {
-        parent::__construct(sprintf('Product attribute with ID "%s" was not found.', $id));
+        parent::__construct(sprintf('Variant with ID "%s" was not found.', $id));
     }
 }

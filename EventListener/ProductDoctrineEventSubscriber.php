@@ -14,8 +14,8 @@ namespace WellCommerce\Bundle\ProductBundle\EventListener;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
-use WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\VariantInterface;
 use WellCommerce\Bundle\TaxBundle\Helper\TaxHelper;
 
 /**
@@ -52,8 +52,8 @@ class ProductDoctrineEventSubscriber implements EventSubscriber
             $this->syncProductStock($entity);
         }
 
-        if ($entity instanceof ProductAttributeInterface) {
-            $this->refreshProductAttributeSellPrice($entity);
+        if ($entity instanceof VariantInterface) {
+            $this->refreshProductVariantSellPrice($entity);
         }
     }
 
@@ -81,19 +81,19 @@ class ProductDoctrineEventSubscriber implements EventSubscriber
     /**
      * Recalculates sell prices for single product attribute
      *
-     * @param ProductAttributeInterface $productAttribute
+     * @param VariantInterface $variant
      */
-    protected function refreshProductAttributeSellPrice(ProductAttributeInterface $productAttribute)
+    protected function refreshProductVariantSellPrice(VariantInterface $variant)
     {
-        $product               = $productAttribute->getProduct();
+        $product               = $variant->getProduct();
         $sellPrice             = $product->getSellPrice();
-        $grossAmount           = $this->calculateAttributePrice($productAttribute, $sellPrice->getGrossAmount());
-        $discountedGrossAmount = $this->calculateAttributePrice($productAttribute, $sellPrice->getDiscountedGrossAmount());
+        $grossAmount           = $this->calculateAttributePrice($variant, $sellPrice->getGrossAmount());
+        $discountedGrossAmount = $this->calculateAttributePrice($variant, $sellPrice->getDiscountedGrossAmount());
         $taxRate               = $product->getSellPriceTax()->getValue();
         $netAmount             = TaxHelper::calculateNetPrice($grossAmount, $taxRate);
         $discountedNetAmount   = TaxHelper::calculateNetPrice($discountedGrossAmount, $taxRate);
 
-        $productAttributeSellPrice = $productAttribute->getSellPrice();
+        $productAttributeSellPrice = $variant->getSellPrice();
         $productAttributeSellPrice->setTaxRate($taxRate);
         $productAttributeSellPrice->setTaxAmount($grossAmount - $netAmount);
         $productAttributeSellPrice->setGrossAmount($grossAmount);
@@ -109,15 +109,15 @@ class ProductDoctrineEventSubscriber implements EventSubscriber
     /**
      * Calculates new amount for attribute
      *
-     * @param ProductAttributeInterface $productAttribute
+     * @param VariantInterface $variant
      * @param                           $amount
      *
      * @return float
      */
-    protected function calculateAttributePrice(ProductAttributeInterface $productAttribute, $amount)
+    protected function calculateAttributePrice(VariantInterface $variant, $amount)
     {
-        $modifierType  = $productAttribute->getModifierType();
-        $modifierValue = $productAttribute->getModifierValue();
+        $modifierType  = $variant->getModifierType();
+        $modifierValue = $variant->getModifierValue();
 
         switch ($modifierType) {
             case '+':

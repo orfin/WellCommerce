@@ -6,6 +6,6 @@
 
     <imports>
         <import resource="services/product.xml"/>
-        <import resource="services/product_attribute.xml"/>
+        <import resource="services/variant.xml"/>
     </imports>
 </container>

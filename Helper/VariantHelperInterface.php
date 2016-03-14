@@ -15,20 +15,20 @@ namespace WellCommerce\Bundle\ProductBundle\Helper;
 use Doctrine\Common\Collections\Collection;
 
 /**
- * Interface ProductAttributeHelper
+ * Interface VariantHelperInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ProductAttributeHelperInterface
+interface VariantHelperInterface
 {
     /**
      * Returns an array containing all attributes and its values
      *
-     * @param Collection $productAttributeCollection
+     * @param Collection $collection
      *
      * @return array
      */
-    public function getAttributeGroups(Collection $productAttributeCollection);
+    public function getAttributeGroups(Collection $collection) : array;
 
     /**
      * Returns an array of all product attributes
@@ -37,5 +37,5 @@ interface ProductAttributeHelperInterface
      *
      * @return array
      */
-    public function getAttributes(Collection $productAttributeCollection);
+    public function getAttributes(Collection $collection) : array;
 }

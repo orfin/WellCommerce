@@ -21,11 +21,11 @@ use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 use WellCommerce\Bundle\MediaBundle\Entity\MediaAwareInterface;
 
 /**
- * Interface ProductAttributeInterface
+ * Interface VariantInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ProductAttributeInterface extends
+interface VariantInterface extends
     EntityInterface,
     TimestampableInterface,
     AvailabilityAwareInterface,
@@ -33,16 +33,6 @@ interface ProductAttributeInterface extends
     HierarchyAwareInterface,
     MediaAwareInterface
 {
-    /**
-     * @return Collection
-     */
-    public function getAttributeValues() : Collection;
-
-    /**
-     * @param Collection $attributeValues
-     */
-    public function setAttributeValues(Collection $attributeValues);
-
     /**
      * @return float
      */
@@ -102,4 +92,14 @@ interface ProductAttributeInterface extends
      * @param string $modifierType
      */
     public function setModifierType(string $modifierType);
+
+    /**
+     * @return Collection
+     */
+    public function getAttributeSets() : Collection;
+
+    /**
+     * @param Collection $sets
+     */
+    public function setAttributeSets(Collection $sets);
 }

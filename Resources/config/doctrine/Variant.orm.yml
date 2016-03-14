@@ -1,7 +1,7 @@
-WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute:
+WellCommerce\Bundle\ProductBundle\Entity\Variant:
     type: entity
-    table: product_attribute
-    repositoryClass: WellCommerce\Bundle\ProductBundle\Repository\ProductAttributeRepository
+    table: variant
+    repositoryClass: WellCommerce\Bundle\ProductBundle\Repository\VariantRepository
     id:
         id:
             type: integer
@@ -42,7 +42,7 @@ WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute:
         product:
             targetEntity: WellCommerce\Bundle\ProductBundle\Entity\Product
             fetch: LAZY
-            inversedBy: attributes
+            inversedBy: variants
             joinColumns:
                 product_id:
                     referencedColumnName: id
@@ -61,22 +61,3 @@ WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute:
                 photo_id:
                     referencedColumnName: id
                     onDelete: 'SET NULL'
-    manyToMany:
-        attributeValues:
-            targetEntity: WellCommerce\Bundle\AttributeBundle\Entity\AttributeValue
-            fetch: LAZY
-            inversedBy: productAttributeValues
-            joinTable:
-                name: product_attribute_value
-                joinColumns:
-                    -
-                        name: product_attribute_id
-                        nullable: false
-                        onDelete: CASCADE
-                        referencedColumnName: id
-                inverseJoinColumns:
-                    -
-                        name: attribute_value_id
-                        nullable: false
-                        onDelete: CASCADE
-                        referencedColumnName: id
