@@ -16947,11 +16947,11 @@ var oDefaults = {
 };
 
 /**
- * GFormProductVariantsEditor
+ * GFormVariantEditor
  *
  * @type {*}
  */
-var GFormProductVariantsEditor = GCore.ExtendClass(GFormField, function () {
+var GFormVariantEditor = GCore.ExtendClass(GFormField, function () {
 
     var gThis = this;
 

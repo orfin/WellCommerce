@@ -82,7 +82,7 @@ class UserController extends AbstractAdminController
         ], null);
     }
 
-    private function getSecurityErrors(Request $request) : string
+    private function getSecurityErrors(Request $request)
     {
         $session = $request->getSession();
         $error   = '';
