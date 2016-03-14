@@ -34,4 +34,9 @@ interface AttributeValueInterface extends EntityInterface, TranslatableInterface
      * @param Collection $attributes
      */
     public function setAttributes(Collection $attributes);
+
+    /**
+     * @param AttributeInterface $attribute
+     */
+    public function addAttribute(AttributeInterface $attribute);
 }

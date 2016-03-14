@@ -82,6 +82,15 @@ class Attribute extends AbstractEntity implements AttributeInterface
     /**
      * {@inheritdoc}
      */
+    public function addGroup(AttributeGroupInterface $group)
+    {
+        $this->groups->add($group);
+        $group->addAttribute($this);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getValues() : Collection
     {
         return $this->values;

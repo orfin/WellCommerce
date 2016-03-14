@@ -60,6 +60,12 @@ class AttributeValue extends AbstractEntity implements AttributeValueInterface
         $this->syncNewAttributes($attributes);
     }
 
+    public function addAttribute(AttributeInterface $attribute)
+    {
+        $this->attributes->add($attribute);
+        $attribute->addValue($this);
+    }
+
     protected function syncOldAttributes(Collection $attributes)
     {
         $this->attributes->map(function (AttributeInterface $attribute) use ($attributes) {
