@@ -18,7 +18,7 @@ use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransfo
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderProductInterface;
 use WellCommerce\Bundle\OrderBundle\Manager\Admin\OrderProductManager;
-use WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\VariantInterface;
 
 /**
  * Class OrderProductCollectionToArrayTransformer
@@ -50,7 +50,7 @@ class OrderProductCollectionToArrayTransformer extends CollectionToArrayTransfor
         if ($modelData instanceof Collection) {
             $modelData->map(function (OrderProductInterface $orderProduct) use (&$values) {
 
-                $variantId = $this->getVariantId($orderProduct->getProductAttribute());
+                $variantId = $this->getVariantId($orderProduct->getVariant());
 
                 $values[] = [
                     'id'               => $orderProduct->getId(),
@@ -74,13 +74,9 @@ class OrderProductCollectionToArrayTransformer extends CollectionToArrayTransfor
         return $values;
     }
 
-    protected function getVariantId(ProductAttributeInterface $attribute = null)
+    protected function getVariantId(VariantInterface $variant = null)
     {
-        if (null === $attribute) {
-            return 0;
-        }
-
-        return $attribute->getId();
+        return (!$variant instanceof VariantInterface) ? 0 : $variant->getId();
     }
 
     /**

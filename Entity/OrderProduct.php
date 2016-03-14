@@ -5,8 +5,8 @@ namespace WellCommerce\Bundle\OrderBundle\Entity;
 use WellCommerce\Bundle\AppBundle\Entity\Price;
 use WellCommerce\Bundle\DoctrineBundle\Behaviours\Timestampable\TimestampableTrait;
 use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
-use WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeAwareTrait;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareTrait;
+use WellCommerce\Bundle\ProductBundle\Entity\VariantAwareTrait;
 
 /**
  * Class OrderProduct
@@ -17,7 +17,7 @@ class OrderProduct extends AbstractEntity implements OrderProductInterface
 {
     use TimestampableTrait;
     use ProductAwareTrait;
-    use ProductAttributeAwareTrait;
+    use VariantAwareTrait;
     use OrderAwareTrait;
 
     /**
