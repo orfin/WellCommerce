@@ -15,11 +15,11 @@ use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
 use WellCommerce\Component\Form\Elements\FormInterface;
 
 /**
- * Class AttributeGroupForm
+ * Class AttributeValueFormBuilder
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class AttributeGroupFormBuilder extends AbstractFormBuilder
+class AttributeValueFormBuilder extends AbstractFormBuilder
 {
     /**
      * {@inheritdoc}
@@ -28,13 +28,13 @@ class AttributeGroupFormBuilder extends AbstractFormBuilder
     {
         $groupData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'main_data',
-            'label' => $this->trans('attribute_group.label.group')
+            'label' => $this->trans('attribute_value.label.group')
         ]));
 
         $languageData = $groupData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
             'label'       => $this->trans('common.fieldset.translations'),
-            'transformer' => $this->getRepositoryTransformer('translation', $this->get('attribute_group.repository'))
+            'transformer' => $this->getRepositoryTransformer('translation', $this->get('attribute_value.repository'))
         ]));
 
         $languageData->addChild($this->getElement('text_field', [

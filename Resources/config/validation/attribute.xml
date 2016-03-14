@@ -13,12 +13,8 @@
 
     <class name="WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroupTranslation">
         <property name="name">
-            <constraint name="NotBlank">
-                <option name="message">attribute_group.error.name.not_blank</option>
-            </constraint>
-            <constraint name="NotNull">
-                <option name="message">attribute_group.error.name.not_null</option>
-            </constraint>
+            <constraint name="NotBlank" />
+            <constraint name="NotNull" />
         </property>
     </class>
 </constraint-mapping>

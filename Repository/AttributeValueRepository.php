@@ -22,14 +22,4 @@ use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
  */
 class AttributeValueRepository extends AbstractEntityRepository implements AttributeValueRepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getCollectionByAttribute(AttributeInterface $attribute)
-    {
-        $criteria = new Criteria();
-        $criteria->where($criteria->expr()->eq('attribute', $attribute));
-
-        return $this->matching($criteria);
-    }
 }

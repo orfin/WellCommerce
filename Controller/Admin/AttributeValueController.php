@@ -23,7 +23,7 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 class AttributeValueController extends AbstractAdminController
 {
     /**
-     * @var \WellCommerce\Bundle\AppBundle\Manager\Admin\AttributeValueManager
+     * @var \WellCommerce\Bundle\AttributeBundle\Manager\Admin\AttributeValueManager
      */
     protected $manager;
 

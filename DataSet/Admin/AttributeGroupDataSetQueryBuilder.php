@@ -10,16 +10,15 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AttributeBundle\Repository;
+namespace WellCommerce\Bundle\AttributeBundle\DataSet\Admin;
 
-use WellCommerce\Bundle\AttributeBundle\Entity\AttributeInterface;
-use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
+use WellCommerce\Component\DataSet\QueryBuilder\AbstractDataSetQueryBuilder;
 
 /**
- * Interface AttributeValueRepositoryInterface
+ * Class AttributeGroupDataSetQueryBuilder
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface AttributeValueRepositoryInterface extends RepositoryInterface
+class AttributeGroupDataSetQueryBuilder extends AbstractDataSetQueryBuilder
 {
 }

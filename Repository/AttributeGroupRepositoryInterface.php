@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\AttributeBundle\Repository;
 
+use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
 
 /**
@@ -21,4 +22,5 @@ use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
  */
 interface AttributeGroupRepositoryInterface extends RepositoryInterface
 {
+    public function getAttributeGroupSet() : array;
 }

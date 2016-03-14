@@ -72,6 +72,6 @@ class AttributeGroup extends AbstractEntity implements AttributeGroupInterface
      */
     public function addAttribute(AttributeInterface $attribute)
     {
-        $this->attributes[] = $attribute;
+        $this->attributes->add($attribute);
     }
 }

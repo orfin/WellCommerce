@@ -12,31 +12,32 @@
 
 namespace WellCommerce\Bundle\AttributeBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
+use WellCommerce\Bundle\AppBundle\Entity\HierarchyAwareTrait;
+use WellCommerce\Bundle\DoctrineBundle\Behaviours\Enableable\EnableableTrait;
+use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
 
 /**
  * Class Attribute
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Attribute implements AttributeInterface
+class Attribute extends AbstractEntity implements AttributeInterface
 {
     use Translatable;
     use Timestampable;
     use Blameable;
+    use EnableableTrait;
+    use HierarchyAwareTrait;
 
     /**
-     * @var int
+     * @var Collection
      */
-    protected $id;
-
-    /**
-     * @var AttributeGroupInterface
-     */
-    protected $attributeGroup;
+    protected $groups;
 
     /**
      * @var Collection
@@ -44,33 +45,44 @@ class Attribute implements AttributeInterface
     protected $values;
 
     /**
-     * {@inheritdoc}
+     * Attribute constructor.
      */
-    public function getId()
+    public function __construct()
     {
-        return $this->id;
+        $this->groups = new ArrayCollection();
+        $this->values = new ArrayCollection();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getAttributeGroup()
+    public function getGroups() : Collection
     {
-        return $this->attributeGroup;
+        return $this->groups;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setAttributeGroup(AttributeGroupInterface $attributeGroup)
+    public function setGroups(Collection $groups)
     {
-        $this->attributeGroup = $attributeGroup;
+        $this->groups->map(function (AttributeGroupInterface $group) use ($groups) {
+            if (false === $groups->contains($group)) {
+                $group->removeAttribute($this);
+            }
+        });
+
+        $groups->map(function (AttributeGroupInterface $group) {
+            if (false === $this->groups->contains($group)) {
+                $group->addAttribute($this);
+            }
+        });
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getValues()
+    public function getValues() : Collection
     {
         return $this->values;
     }
@@ -80,14 +92,6 @@ class Attribute implements AttributeInterface
      */
     public function setValues(Collection $collection)
     {
-        if (null !== $this->values) {
-            $this->values->map(function (AttributeValueInterface $value) use ($collection) {
-                if (false === $collection->contains($value)) {
-                    $this->removeValue($value);
-                }
-            });
-        }
-
         $this->values = $collection;
     }
 
@@ -97,5 +101,13 @@ class Attribute implements AttributeInterface
     public function removeValue(AttributeValueInterface $value)
     {
         $this->values->removeElement($value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addValue(AttributeValueInterface $value)
+    {
+        $this->values->add($value);
     }
 }

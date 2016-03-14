@@ -35,7 +35,7 @@ class AttributeValueFactory extends AbstractEntityFactory
     {
         /** @var $value AttributeValueInterface */
         $value = $this->init();
-        $value->setProductAttributeValues(new ArrayCollection());
+        $value->setAttributes(new ArrayCollection());
 
         return $value;
     }

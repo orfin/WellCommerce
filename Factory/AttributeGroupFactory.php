@@ -35,7 +35,6 @@ class AttributeGroupFactory extends AbstractEntityFactory
     {
         /** @var $group AttributeGroupInterface */
         $group = $this->init();
-        $group->setAttributes(new ArrayCollection());
 
         return $group;
     }

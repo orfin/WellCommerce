@@ -28,6 +28,20 @@ class AttributeRepository extends AbstractEntityRepository implements AttributeR
     /**
      * {@inheritdoc}
      */
+    public function getDataSetQueryBuilder()
+    {
+        $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder->groupBy('attribute.id');
+        $queryBuilder->leftJoin('attribute.translations', 'attribute_translation');
+        $queryBuilder->leftJoin('attribute.groups', 'attribute_groups');
+        $queryBuilder->leftJoin('attribute_groups.translations', 'attribute_groups_translation');
+
+        return $queryBuilder;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getCollectionByAttributeGroup(AttributeGroupInterface $attributeGroup)
     {
         $criteria = new Criteria();
