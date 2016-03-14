@@ -16,8 +16,8 @@ use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 use WellCommerce\Bundle\CartBundle\Entity\CartProductInterface;
 use WellCommerce\Bundle\CartBundle\Exception\DeleteCartItemException;
 use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
-use WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\VariantInterface;
 
 /**
  * Class CartProductManager
@@ -29,16 +29,12 @@ class CartProductManager extends AbstractFrontManager implements CartProductMana
     /**
      * {@inheritdoc}
      */
-    public function initCartProduct(
-        CartInterface $cart,
-        ProductInterface $product,
-        ProductAttributeInterface $attribute = null,
-        $quantity = 1
-    ) {
-        $cartProduct = $this->factory->create();
+    public function initCartProduct(CartInterface $cart, ProductInterface $product, VariantInterface $variant = null, $quantity = 1)
+    {
+        $cartProduct = $this->initResource();
         $cartProduct->setCart($cart);
         $cartProduct->setProduct($product);
-        $cartProduct->setAttribute($attribute);
+        $cartProduct->setVariant($variant);
         $cartProduct->setQuantity($quantity);
 
         $this->eventDispatcher->dispatchOnPostInitResource($cartProduct);
@@ -49,28 +45,24 @@ class CartProductManager extends AbstractFrontManager implements CartProductMana
     /**
      * {@inheritdoc}
      */
-    public function findProductInCart(CartInterface $cart, ProductInterface $product, ProductAttributeInterface $attribute = null)
+    public function findProductInCart(CartInterface $cart, ProductInterface $product, VariantInterface $variant = null)
     {
         return $this->getRepository()->findOneBy([
-            'cart'      => $cart,
-            'product'   => $product,
-            'attribute' => $attribute
+            'cart'    => $cart,
+            'product' => $product,
+            'variant' => $variant
         ]);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function addProductToCart(
-        CartInterface $cart,
-        ProductInterface $product,
-        ProductAttributeInterface $attribute = null,
-        $quantity = 1
-    ) {
-        $cartProduct = $this->findProductInCart($cart, $product, $attribute);
+    public function addProductToCart(CartInterface $cart, ProductInterface $product, VariantInterface $variant = null, $quantity = 1)
+    {
+        $cartProduct = $this->findProductInCart($cart, $product, $variant);
 
         if (null === $cartProduct) {
-            $cartProduct = $this->initCartProduct($cart, $product, $attribute, $quantity);
+            $cartProduct = $this->initCartProduct($cart, $product, $variant, $quantity);
             $cart->addProduct($cartProduct);
         } else {
             $cartProduct->increaseQuantity($quantity);

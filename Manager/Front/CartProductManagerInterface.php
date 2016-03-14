@@ -15,8 +15,8 @@ namespace WellCommerce\Bundle\CartBundle\Manager\Front;
 use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 use WellCommerce\Bundle\CartBundle\Entity\CartProductInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\Front\FrontManagerInterface;
-use WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\VariantInterface;
 
 /**
  * Interface CartProductManagerInterface
@@ -28,19 +28,14 @@ interface CartProductManagerInterface extends FrontManagerInterface
     /**
      * Initializes product object
      *
-     * @param CartInterface                  $cart
-     * @param ProductInterface               $product
-     * @param ProductAttributeInterface|null $attribute
-     * @param int                            $quantity
+     * @param CartInterface         $cart
+     * @param ProductInterface      $product
+     * @param VariantInterface|null $variant
+     * @param int                   $quantity
      *
      * @return \WellCommerce\Bundle\CartBundle\Entity\CartProductInterface
      */
-    public function initCartProduct(
-        CartInterface $cart,
-        ProductInterface $product,
-        ProductAttributeInterface $attribute = null,
-        $quantity = 1
-    );
+    public function initCartProduct(CartInterface $cart, ProductInterface $product, VariantInterface $variant = null, $quantity = 1);
 
 
     /**
@@ -54,28 +49,23 @@ interface CartProductManagerInterface extends FrontManagerInterface
     /**
      * Returns the CartProduct object from cart or null if it was not found
      *
-     * @param CartInterface                  $cart
-     * @param ProductInterface               $product
-     * @param ProductAttributeInterface|null $attribute
+     * @param CartInterface         $cart
+     * @param ProductInterface      $product
+     * @param VariantInterface|null $variant
      *
      * @return null|\WellCommerce\Bundle\CartBundle\Entity\CartProductInterface
      */
-    public function findProductInCart(CartInterface $cart, ProductInterface $product, ProductAttributeInterface $attribute = null);
+    public function findProductInCart(CartInterface $cart, ProductInterface $product, VariantInterface $variant = null);
 
     /**
      * Adds a new product to cart or increments its quantity
      *
-     * @param CartInterface                  $cart
-     * @param ProductInterface               $product
-     * @param ProductAttributeInterface|null $attribute
-     * @param int                            $quantity
+     * @param CartInterface         $cart
+     * @param ProductInterface      $product
+     * @param VariantInterface|null $variant
+     * @param int                   $quantity
      */
-    public function addProductToCart(
-        CartInterface $cart,
-        ProductInterface $product,
-        ProductAttributeInterface $attribute = null,
-        $quantity = 1
-    );
+    public function addProductToCart(CartInterface $cart, ProductInterface $product, VariantInterface $variant = null, $quantity = 1);
 
     /**
      * Changes products quantity or deletes it from cart if 0 quantity was given

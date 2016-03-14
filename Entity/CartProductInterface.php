@@ -2,59 +2,51 @@
 
 namespace WellCommerce\Bundle\CartBundle\Entity;
 
+use WellCommerce\Bundle\AppBundle\Entity\DiscountablePrice;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
-use WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\VariantAwareInterface;
 
 /**
  * Interface CartProductInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface CartProductInterface extends TimestampableInterface, ProductAwareInterface, CartAwareInterface
+interface CartProductInterface extends
+    EntityInterface,
+    VariantAwareInterface,
+    TimestampableInterface,
+    ProductAwareInterface,
+    CartAwareInterface
 {
     /**
      * @return int
      */
-    public function getId();
+    public function getQuantity() : int;
 
     /**
-     * @return null|ProductAttributeInterface
+     * @param int $quantity
      */
-    public function getAttribute();
+    public function setQuantity(int $quantity);
 
     /**
-     * @param null|ProductAttributeInterface $attribute
+     * @param int $increase
      */
-    public function setAttribute(ProductAttributeInterface $attribute = null);
+    public function increaseQuantity(int $increase);
 
     /**
-     * @return float
+     * @param int $decrease
      */
-    public function getQuantity();
+    public function decreaseQuantity(int $decrease);
 
     /**
-     * @param float $quantity
+     * @return DiscountablePrice
      */
-    public function setQuantity($quantity);
-
-    /**
-     * @param $increase
-     */
-    public function increaseQuantity($increase);
-
-    /**
-     * @param $decrease
-     */
-    public function decreaseQuantity($decrease);
-
-    /**
-     * @return \WellCommerce\Bundle\AppBundle\Entity\DiscountablePrice
-     */
-    public function getSellPrice();
+    public function getSellPrice() : DiscountablePrice;
 
     /**
      * @return float
      */
-    public function getWeight();
+    public function getWeight() : float;
 }

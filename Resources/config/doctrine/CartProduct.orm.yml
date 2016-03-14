@@ -27,10 +27,10 @@ WellCommerce\Bundle\CartBundle\Entity\CartProduct:
                 product_id:
                     referencedColumnName: id
                     onDelete: CASCADE
-        attribute:
-            targetEntity: WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute
+        variant:
+            targetEntity: WellCommerce\Bundle\ProductBundle\Entity\Variant
             fetch: LAZY
             joinColumns:
-                attribute_id:
+                variant_id:
                     referencedColumnName: id
                     onDelete: CASCADE

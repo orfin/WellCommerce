@@ -18,8 +18,8 @@ use WellCommerce\Bundle\CartBundle\Exception\AddCartItemException;
 use WellCommerce\Bundle\CartBundle\Repository\CartRepositoryInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
-use WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\VariantInterface;
 use WellCommerce\Bundle\ShopBundle\Entity\ShopInterface;
 
 /**
@@ -50,18 +50,18 @@ class CartManager extends AbstractFrontManager implements CartManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function addProductToCart(ProductInterface $product, ProductAttributeInterface $attribute = null, $quantity = 1)
+    public function addProductToCart(ProductInterface $product, VariantInterface $variant = null, $quantity = 1)
     {
         $cart = $this->getCartContext()->getCurrentCart();
 
         try {
-            $this->cartProductManager->addProductToCart($cart, $product, $attribute, $quantity);
+            $this->cartProductManager->addProductToCart($cart, $product, $variant, $quantity);
             $cart->setShippingMethodCost(null);
             $cart->setPaymentMethod(null);
             $this->updateResource($cart);
 
         } catch (\Exception $e) {
-            throw new AddCartItemException($product, $attribute, $quantity, $e);
+            throw new AddCartItemException($product, $variant, $quantity, $e);
         }
 
         return true;

@@ -18,8 +18,8 @@ use WellCommerce\Bundle\CartBundle\Exception\AddCartItemException;
 use WellCommerce\Bundle\CartBundle\Exception\DeleteCartItemException;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\CoreBundle\Service\Breadcrumb\BreadcrumbItem;
-use WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\VariantInterface;
 
 /**
  * Class CartController
@@ -64,14 +64,16 @@ class CartController extends AbstractFrontController
         ]);
     }
 
-    public function addAction(ProductInterface $product, ProductAttributeInterface $attribute = null, int $quantity = 1) : Response
+    public function addAction(ProductInterface $product, VariantInterface $variant = null, int $quantity = 1) : Response
     {
-        if ($product->getAttributes()->count() && !$product->getAttributes()->contains($attribute)) {
+        $variants = $product->getVariants();
+
+        if ($variants->count() && false === $variants->contains($variant)) {
             return $this->redirectToRoute('front.product.view', ['id' => $product->getId()]);
         }
 
         try {
-            $this->manager->addProductToCart($product, $attribute, $quantity);
+            $this->manager->addProductToCart($product, $variant, $quantity);
         } catch (AddCartItemException $exception) {
             return $this->jsonResponse([
                 'error'         => $exception->getMessage(),

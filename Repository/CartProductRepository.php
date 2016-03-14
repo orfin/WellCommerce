@@ -27,7 +27,7 @@ class CartProductRepository extends AbstractEntityRepository implements CartProd
         $queryBuilder = $this->getQueryBuilder();
         $queryBuilder->groupBy('cart_product.id');
         $queryBuilder->leftJoin('cart_product.product', 'product');
-        $queryBuilder->leftJoin('cart_product.attribute', 'product_attribute');
+        $queryBuilder->leftJoin('cart_product.variant', 'product_variant');
         $queryBuilder->leftJoin('product.translations', 'product_translation');
         $queryBuilder->leftJoin('product.sellPriceTax', 'sell_tax');
         $queryBuilder->leftJoin('product.productPhotos', 'gallery', Expr\Join::WITH, 'gallery.mainPhoto = :mainPhoto');
