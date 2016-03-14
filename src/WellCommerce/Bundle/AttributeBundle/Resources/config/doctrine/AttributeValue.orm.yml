@@ -7,17 +7,8 @@ WellCommerce\Bundle\AttributeBundle\Entity\AttributeValue:
             type: integer
             generator:
                 strategy: AUTO
-    manyToOne:
-        attribute:
+    manyToMany:
+        attributes:
             targetEntity: WellCommerce\Bundle\AttributeBundle\Entity\Attribute
             fetch: LAZY
-            inversedBy: values
-            joinColumns:
-                attribute_id:
-                    referencedColumnName: id
-                    onDelete: CASCADE
-    manyToMany:
-        productAttributeValues:
-            targetEntity: WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute
-            fetch: LAZY
-            mappedBy: attributeValues
+            mappedBy: values

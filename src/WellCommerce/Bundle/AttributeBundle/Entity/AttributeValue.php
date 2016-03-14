@@ -12,72 +12,69 @@
 
 namespace WellCommerce\Bundle\AttributeBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
+use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
 
 /**
  * Class AttributeValue
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AttributeValue implements AttributeValueInterface
+class AttributeValue extends AbstractEntity implements AttributeValueInterface
 {
-    use Translatable, Timestampable, Blameable;
-
-    /**
-     * @var integer
-     */
-    protected $id;
-
-    /**
-     * @var AttributeInterface
-     */
-    protected $attribute;
+    use Translatable;
+    use Timestampable;
+    use Blameable;
 
     /**
      * @var Collection
      */
-    protected $productAttributeValues;
+    protected $attributes;
 
     /**
-     * {@inheritdoc}
+     * AttributeValue constructor.
      */
-    public function getId()
+    public function __construct()
     {
-        return $this->id;
+        $this->attributes = new ArrayCollection();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getAttribute()
+    public function getAttributes() : Collection
     {
-        return $this->attribute;
+        return $this->attributes;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setAttribute(AttributeInterface $attribute)
+    public function setAttributes(Collection $attributes)
     {
-        $this->attribute = $attribute;
+        $this->syncOldAttributes($attributes);
+        $this->syncNewAttributes($attributes);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getProductAttributeValues()
+    protected function syncOldAttributes(Collection $attributes)
     {
-        return $this->productAttributeValues;
+        $this->attributes->map(function (AttributeInterface $attribute) use ($attributes) {
+            if (false === $attributes->contains($attribute)) {
+                $attribute->removeValue($this);
+            }
+        });
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setProductAttributeValues(Collection $productAttributeValues)
+    protected function syncNewAttributes(Collection $attributes)
     {
-        $this->productAttributeValues = $productAttributeValues;
+        $attributes->map(function (AttributeInterface $attribute) {
+            if (false === $this->attributes->contains($attribute)) {
+                $attribute->addValue($this);
+            }
+        });
     }
 }

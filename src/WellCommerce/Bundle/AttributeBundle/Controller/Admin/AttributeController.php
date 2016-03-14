@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\AttributeBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 
 /**
@@ -28,13 +29,13 @@ class AttributeController extends AbstractAdminController
     protected $manager;
 
     /**
-     * Ajax action for listing attributes
+     * Ajax action for listing attributes in variants editor
      *
      * @param Request $request
      *
-     * @return \Symfony\Component\HttpFoundation\JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse
+     * @return Response
      */
-    public function ajaxIndexAction(Request $request)
+    public function ajaxIndexAction(Request $request) : Response
     {
         if (!$request->isXmlHttpRequest()) {
             return $this->redirectToAction('index');
@@ -52,9 +53,9 @@ class AttributeController extends AbstractAdminController
      *
      * @param Request $request
      *
-     * @return \Symfony\Component\HttpFoundation\JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse
+     * @return Response
      */
-    public function ajaxAddAction(Request $request)
+    public function ajaxAddAction(Request $request) : Response
     {
         if (!$request->isXmlHttpRequest()) {
             return $this->redirectToAction('index');

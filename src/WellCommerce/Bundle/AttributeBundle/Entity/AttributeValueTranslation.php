@@ -13,13 +13,14 @@
 namespace WellCommerce\Bundle\AttributeBundle\Entity;
 
 use Knp\DoctrineBehaviors\Model\Translatable\Translation;
+use WellCommerce\Bundle\LocaleBundle\Entity\LocaleAwareInterface;
 
 /**
  * Class AttributeValueTranslation
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AttributeValueTranslation
+class AttributeValueTranslation implements LocaleAwareInterface
 {
     use Translation;
 
@@ -42,5 +43,15 @@ class AttributeValueTranslation
     public function setName($name)
     {
         $this->name = $name;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCopyingSensitiveProperties() : array
+    {
+        return [
+            'name'
+        ];
     }
 }

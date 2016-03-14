@@ -15,6 +15,7 @@ attribute_group:
     label:
         attributes: Attributes
         group: Group
+
 attribute_value:
     heading:
         index: Attribute values

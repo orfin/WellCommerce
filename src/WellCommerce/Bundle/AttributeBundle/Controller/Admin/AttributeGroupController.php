@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\AttributeBundle\Controller\Admin;
 
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 
 /**
@@ -27,73 +27,15 @@ class AttributeGroupController extends AbstractAdminController
      * @var \WellCommerce\Bundle\AttributeBundle\Manager\Admin\AttributeGroupManager
      */
     protected $manager;
-    
-    public function indexAction() : Response
-    {
-        $groups = $this->manager->getAttributeGroupsCollection();
 
-        if ($groups->count()) {
-            $defaultGroup = $groups->first();
-
-            return $this->redirectToAction('edit', [
-                'id' => $defaultGroup->getId()
-            ]);
-        }
-
-        return $this->displayTemplate('index', [
-            'groups' => $groups
-        ]);
-    }
-    
-    public function addAction(Request $request) : Response
+    public function ajaxIndexAction(Request $request) : JsonResponse
     {
         if (!$request->isXmlHttpRequest()) {
             return $this->redirectToAction('index');
         }
 
-        $name     = $request->request->get('name');
-        $resource = $this->manager->createAttributeGroup($name);
-        
         return $this->jsonResponse([
-            'id' => $resource->getId(),
-        ]);
-    }
-    
-    public function editAction(Request $request) : Response
-    {
-        $resource = $this->manager->findResource($request);
-        if (null === $resource) {
-            return $this->redirectToAction('index');
-        }
-
-        $groups = $this->manager->getAttributeGroupsCollection();
-        $form   = $this->manager->getForm($resource, [
-            'class' => 'attributeGroupEditor'
-        ]);
-
-        if ($form->handleRequest()->isSubmitted()) {
-            if ($form->isValid()) {
-                $this->manager->updateResource($resource);
-            }
-
-            return $this->createFormDefaultJsonResponse($form);
-        }
-
-        return $this->displayTemplate('edit', [
-            'resource' => $resource,
-            'groups'   => $groups,
-            'form'     => $form
-        ]);
-    }
-    
-    public function ajaxIndexAction(Request $request) : Response
-    {
-        if (!$request->isXmlHttpRequest()) {
-            return $this->redirectToAction('index');
-        }
-        
-        return $this->jsonResponse([
-            'sets' => $this->manager->getAttributeGroupSet()
+            'sets' => $this->manager->getAttributeGroupSets()
         ]);
     }
 }

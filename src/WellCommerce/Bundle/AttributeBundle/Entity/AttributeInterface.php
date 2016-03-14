@@ -13,36 +13,40 @@
 namespace WellCommerce\Bundle\AttributeBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
+use WellCommerce\Bundle\AppBundle\Entity\HierarchyAwareInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
+use WellCommerce\Bundle\DoctrineBundle\Behaviours\Enableable\EnableableInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 
 /**
  * Interface AttributeInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface AttributeInterface extends TimestampableInterface, TranslatableInterface, BlameableInterface
+interface AttributeInterface extends
+    EntityInterface,
+    EnableableInterface,
+    HierarchyAwareInterface,
+    TimestampableInterface,
+    TranslatableInterface,
+    BlameableInterface
 {
     /**
-     * @return int
+     * @return Collection
      */
-    public function getId();
+    public function getGroups() : Collection;
 
     /**
-     * @return AttributeGroupInterface
+     * @param Collection $groups
      */
-    public function getAttributeGroup();
-
-    /**
-     * @param AttributeGroupInterface $attributeGroup
-     */
-    public function setAttributeGroup(AttributeGroupInterface $attributeGroup);
+    public function setGroups(Collection $groups);
 
     /**
      * @return Collection
      */
-    public function getValues();
+    public function getValues() : Collection;
 
     /**
      * @param Collection $collection
@@ -53,4 +57,9 @@ interface AttributeInterface extends TimestampableInterface, TranslatableInterfa
      * @param AttributeValueInterface $value
      */
     public function removeValue(AttributeValueInterface $value);
+
+    /**
+     * @param AttributeValueInterface $value
+     */
+    public function addValue(AttributeValueInterface $value);
 }
