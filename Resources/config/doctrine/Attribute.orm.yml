@@ -13,7 +13,7 @@ WellCommerce\Bundle\AttributeBundle\Entity\Attribute:
             fetch: LAZY
             mappedBy: attributes
             cascade:
-                - all
+                - persist
         values:
             targetEntity: WellCommerce\Bundle\AttributeBundle\Entity\AttributeValue
             fetch: LAZY
@@ -31,4 +31,4 @@ WellCommerce\Bundle\AttributeBundle\Entity\Attribute:
                         referencedColumnName: id
                         onDelete: CASCADE
             cascade:
-                - all
+                - persist

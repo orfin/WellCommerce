@@ -47,12 +47,12 @@ class AttributeGroupFormBuilder extends AbstractFormBuilder
 
         $attributesData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'attributes_data',
-            'label' => $this->trans('attribute_group.fieldset.attribute')
+            'label' => $this->trans('attribute_group.fieldset.attributes')
         ]));
 
         $attributesData->addChild($this->getElement('multi_select', [
             'name'        => 'attributes',
-            'label'       => $this->trans('attribute_group.label.attribute'),
+            'label'       => $this->trans('attribute_group.label.attributes'),
             'options'     => $this->get('attribute.dataset.admin')->getResult('select'),
             'transformer' => $this->getRepositoryTransformer('collection', $this->get('attribute.repository'))
         ]));

@@ -52,7 +52,7 @@ class AttributeDataGrid extends AbstractDataGrid
 
         $collection->add(new Column([
             'id'         => 'groups',
-            'caption'    => $this->trans('common.label.groups'),
+            'caption'    => $this->trans('attribute.label.groups'),
             'filter'     => new Filter([
                 'type'    => Filter::FILTER_NONE,
             ]),
