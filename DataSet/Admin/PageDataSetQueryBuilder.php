@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\PageBundle\DataSet\Admin;
 
+use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\ShopBundle\Context\ShopContextInterface;
 use WellCommerce\Component\DataSet\Column\ColumnCollection;
 use WellCommerce\Component\DataSet\QueryBuilder\AbstractDataSetQueryBuilder;
@@ -43,9 +44,9 @@ class PageDataSetQueryBuilder extends AbstractDataSetQueryBuilder
      * @param ColumnCollection        $columns
      * @param DataSetRequestInterface $request
      *
-     * @return \Doctrine\ORM\QueryBuilder
+     * @return QueryBuilder
      */
-    public function getQueryBuilder(ColumnCollection $columns, DataSetRequestInterface $request)
+    public function getQueryBuilder(ColumnCollection $columns, DataSetRequestInterface $request) : QueryBuilder
     {
         $queryBuilder = parent::getQueryBuilder($columns, $request);
 
