@@ -43,4 +43,10 @@
         <option key="expose">true</option>
         <option key="require_admin_permission">attribute.add</option>
     </route>
+
+    <route id="admin.attribute.ajax.generate" path="/ajax/generate" methods="POST">
+        <default key="_controller">attribute.controller.admin:ajaxGenerateCartesianAction</default>
+        <option key="expose">true</option>
+        <option key="require_admin_permission">attribute.add</option>
+    </route>
 </routes>

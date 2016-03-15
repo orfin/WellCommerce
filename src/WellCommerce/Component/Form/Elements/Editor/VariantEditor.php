@@ -57,6 +57,7 @@ class VariantEditor extends AbstractField implements ElementInterface
             'get_attributes_values_route' => 'admin.attribute_value.ajax.index',
             'add_attribute_route'         => 'admin.attribute.ajax.add',
             'add_attribute_value_route'   => 'admin.attribute_value.ajax.add',
+            'generate_cartesian_route'    => 'admin.attribute.ajax.generate',
         ]);
 
         $resolver->setAllowedTypes('allow_generate', 'bool');
@@ -93,6 +94,7 @@ class VariantEditor extends AbstractField implements ElementInterface
         $collection->add(new Attribute('sGetAttributesValuesRoute', $this->getOption('get_attributes_values_route')));
         $collection->add(new Attribute('sAddAttributeRoute', $this->getOption('add_attribute_route')));
         $collection->add(new Attribute('sAddAttributeValueRoute', $this->getOption('add_attribute_value_route')));
+        $collection->add(new Attribute('sGenerateCartesianRoute', $this->getOption('generate_cartesian_route')));
         $collection->add(new Attribute('sCategoryField', $this->getOption('category_field')));
         $collection->add(new Attribute('sPriceField', $this->getOption('price_field')));
         $collection->add(new Attribute('bAllowGenerate', $this->getOption('allow_generate'), Attribute::TYPE_BOOLEAN));

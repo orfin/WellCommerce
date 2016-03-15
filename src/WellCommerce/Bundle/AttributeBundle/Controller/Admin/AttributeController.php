@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\AttributeBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use WellCommerce\Bundle\AttributeBundle\Generator\CartesianProductGenerator;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 
 /**
@@ -77,5 +78,21 @@ class AttributeController extends AbstractAdminController
                 'error' => $e->getMessage(),
             ]);
         }
+    }
+
+    public function ajaxGenerateCartesianAction(Request $request) : Response
+    {
+        $attributes    = $request->request->get('attributes');
+        $attributesMap = [];
+
+        foreach ($attributes as $attribute) {
+            $attributesMap[$attribute['attribute']][] = $attribute['value'];
+        }
+
+        $variantsCombinations = CartesianProductGenerator::generateCartesianProduct($attributesMap);
+
+        return $this->jsonResponse([
+            'variants' => $variantsCombinations
+        ]);
     }
 }
