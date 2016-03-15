@@ -17333,8 +17333,12 @@ var GFormVariantEditor = GCore.ExtendClass(GFormField, function () {
         jGenerate.click(GEventHandler(function () {
             var aoAttributes = [];
             $(".generate:checked").each(function () {
-                aoAttributes.push(this.value);
+                aoAttributes.push({
+                    attribute: $(this).data('attribute'),
+                    value: this.value
+                });
             });
+
             if (aoAttributes.length) {
                 if (gThis.m_aoVariants.length > 0) {
                     var title = 'Autogeneration of new variants';
@@ -17358,15 +17362,15 @@ var GFormVariantEditor = GCore.ExtendClass(GFormField, function () {
 
     gThis._GenerateCartesian = function (aoAttributes) {
         var sSetId = gThis.m_jSetSelect.find('option:selected').val();
-        alert(sSetId);
-        gThis.m_oOptions.fGetCartesian({
+        GF_Ajax_Request(Routing.generate(gThis.m_oOptions.sGenerateCartesianRoute), {
             setid: sSetId,
-            ids: aoAttributes
-        }, GCallback(gThis._OnVariantsGenerated));
+            attributes: aoAttributes
+        }, gThis._OnVariantsGenerated);
+
     };
 
     gThis._OnVariantsGenerated = GEventHandler(function (eEvent) {
-
+        console.log(gThis.m_aoAttributes);
         $.each(eEvent.variants, function (k, key) {
             var sId = 'new-' + gThis.m_sRepetitionCounter++;
             var oRow = {
@@ -17380,9 +17384,17 @@ var GFormVariantEditor = GCore.ExtendClass(GFormField, function () {
                 status: 1,
                 weight: 0
             };
-            $.each(key, function (a, attribute) {
-                oRow['attribute_' + attribute.sAttributeId] = attribute.sValueName;
-                oRow['attributeid_' + attribute.sAttributeId] = attribute.sValueId;
+            $.each(key, function (attributeId, attributeValue) {
+                for (var k in gThis.m_aoAttributes) {
+                    if (gThis.m_aoAttributes[k].id == attributeId) {
+                        for (var l in gThis.m_aoAttributes[k]['values']) {
+                            if (gThis.m_aoAttributes[k]['values'][l].id == attributeValue) {
+                                oRow['attribute_' + attributeId] = gThis.m_aoAttributes[k]['values'][l].name;
+                            }
+                        }
+                    }
+                }
+                oRow['attributeid_' + attributeId] = attributeValue;
             });
             gThis.m_gDataProvider.AddRow(oRow);
             gThis.m_gDatagrid.m_asSelected = [sId];
