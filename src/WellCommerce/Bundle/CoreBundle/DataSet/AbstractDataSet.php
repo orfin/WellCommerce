@@ -12,16 +12,17 @@
 
 namespace WellCommerce\Bundle\CoreBundle\DataSet;
 
+use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\CoreBundle\EventDispatcher\EventDispatcherInterface;
 use WellCommerce\Component\DataSet\Column\ColumnCollection;
 use WellCommerce\Component\DataSet\Column\ColumnInterface;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
-use WellCommerce\Component\DataSet\Context\DataSetContextInterface;
 use WellCommerce\Component\DataSet\DataSetInterface;
 use WellCommerce\Component\DataSet\Manager\DataSetManagerInterface;
 use WellCommerce\Component\DataSet\QueryBuilder\DataSetQueryBuilderInterface;
 use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
 use WellCommerce\Component\DataSet\Transformer\ColumnTransformerCollection;
+use WellCommerce\Component\DataSet\Transformer\DataSetTransformerInterface;
 
 /**
  * Class AbstractDataSet
@@ -86,7 +87,7 @@ abstract class AbstractDataSet implements DataSetInterface
     /**
      * {@inheritdoc}
      */
-    public function getColumns()
+    public function getColumns() : ColumnCollection
     {
         return $this->columns;
     }
@@ -115,7 +116,7 @@ abstract class AbstractDataSet implements DataSetInterface
     /**
      * {@inheritdoc}
      */
-    public function setDefaultRequestOption($name, $value)
+    public function setDefaultRequestOption(string $name, $value)
     {
         $this->defaultRequestOptions[$name] = $value;
     }
@@ -131,7 +132,7 @@ abstract class AbstractDataSet implements DataSetInterface
     /**
      * {@inheritdoc}
      */
-    public function setDefaultContextOption($name, $value)
+    public function setDefaultContextOption(string $name, $value)
     {
         $this->defaultContextOptions[$name] = $value;
     }
@@ -139,7 +140,7 @@ abstract class AbstractDataSet implements DataSetInterface
     /**
      * {@inheritdoc}
      */
-    public function getResult($contextType, array $requestOptions = [], array $contextOptions = [])
+    public function getResult(string $contextType, array $requestOptions = [], array $contextOptions = []) : array
     {
         $contextOptions = $this->getContextOptions($contextOptions);
         $requestOptions = $this->getRequestOptions($requestOptions);
@@ -156,13 +157,6 @@ abstract class AbstractDataSet implements DataSetInterface
         }
     }
 
-    public function setContext(DataSetContextInterface $context)
-    {
-        $this->context = $context;
-
-        return $this;
-    }
-
     /**
      * Returns the default context's options
      *
@@ -170,7 +164,7 @@ abstract class AbstractDataSet implements DataSetInterface
      *
      * @return array
      */
-    protected function getContextOptions(array $contextOptions = [])
+    protected function getContextOptions(array $contextOptions = []) : array
     {
         $contextOptions = array_merge($this->defaultContextOptions, $contextOptions);
 
@@ -184,7 +178,7 @@ abstract class AbstractDataSet implements DataSetInterface
      *
      * @return array
      */
-    protected function getRequestOptions(array $requestOptions = [])
+    protected function getRequestOptions(array $requestOptions = []) : array
     {
         $requestOptions = array_merge($this->defaultRequestOptions, $requestOptions);
 
@@ -194,12 +188,12 @@ abstract class AbstractDataSet implements DataSetInterface
     /**
      * Creates a dataset's transformer using factory
      *
-     * @param       $type
-     * @param array $options
+     * @param string $type
+     * @param array  $options
      *
-     * @return \WellCommerce\Component\DataSet\Transformer\DataSetTransformerInterface
+     * @return DataSetTransformerInterface
      */
-    protected function getDataSetTransformer($type, array $options = [])
+    protected function getDataSetTransformer(string $type, array $options = []) : DataSetTransformerInterface
     {
         return $this->manager->createTransformer($type, $options);
     }
@@ -209,9 +203,9 @@ abstract class AbstractDataSet implements DataSetInterface
      *
      * @param DataSetRequestInterface $request
      *
-     * @return \Doctrine\ORM\QueryBuilder
+     * @return QueryBuilder
      */
-    protected function getQueryBuilder(DataSetRequestInterface $request)
+    protected function getQueryBuilder(DataSetRequestInterface $request) : QueryBuilder
     {
         $columns      = $this->getColumns();
         $queryBuilder = $this->dataSetQueryBuilder->getQueryBuilder($columns, $request);

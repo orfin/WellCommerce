@@ -8,6 +8,8 @@ WellCommerce\Bundle\ProductBundle\Entity\Product:
             groups:
                 - default
                 - product
+                - order
+                - order_product
         stock:
             groups:
                 - default

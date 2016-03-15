@@ -17309,7 +17309,7 @@ var GFormVariantEditor = GCore.ExtendClass(GFormField, function () {
         var jSave = $('<a class="save button" href="#"/>');
         jSave.append('<span><img src="' + gThis._GetImage('SaveIcon') + '" alt=""/>' + GForm.Language.product_variants_editor_save_variant + '</span>');
         var jGenerate = $('<a class="add button" href="#"/>');
-        jGenerate.append('<span><img src="' + gThis._GetImage('AddIcon') + '" alt=""/>Generuj automatycznie</span>');
+        jGenerate.append('<span><img src="' + gThis._GetImage('AddIcon') + '" alt=""/>Autogenerate variants</span>');
         if (gThis.m_oOptions.bAllowGenerate == 1) {
             gThis.m_jVariantEditorOptions.append($('<li/>').append(jGenerate));
         }
@@ -17337,8 +17337,8 @@ var GFormVariantEditor = GCore.ExtendClass(GFormField, function () {
             });
             if (aoAttributes.length) {
                 if (gThis.m_aoVariants.length > 0) {
-                    var title = 'Automatyczne wygenerowanie wariantów';
-                    var msg = 'Wybranie tej opcji usunie wszystkie dotychczasowe dotychczasowe warianty i wygeneruje kombinacje na nowo. Czy jesteś pewien ?';
+                    var title = 'Autogeneration of new variants';
+                    var msg = 'Using this option removes all variants and generates new ones. Are you sure?';
                     var params = {};
                     var func = function (p) {
                         gThis.m_gDataProvider.ChangeData();
@@ -17350,14 +17350,15 @@ var GFormVariantEditor = GCore.ExtendClass(GFormField, function () {
                     gThis._GenerateCartesian(aoAttributes);
                 }
             } else {
-                GError('Nie wybrano cech', 'Aby wygenerować automatycznie warianty musisz wybrać cechy zaznaczając checkbox obok ich nazwy.');
+                GError('Please select attributes', 'Prior to autogeneration of variants you must choose attributes.');
             }
             return false;
         }));
     };
 
     gThis._GenerateCartesian = function (aoAttributes) {
-        var sSetId = $('#variants_pane__variants__set').find('option:selected').val();
+        var sSetId = gThis.m_jSetSelect.find('option:selected').val();
+        alert(sSetId);
         gThis.m_oOptions.fGetCartesian({
             setid: sSetId,
             ids: aoAttributes
@@ -17462,7 +17463,7 @@ var GFormVariantEditor = GCore.ExtendClass(GFormField, function () {
             var jUl = $('<ul/>');
             for (var j = 0; j < gThis.m_aoAttributes[i].values.length; j++) {
                 var oValue = gThis.m_aoAttributes[i].values[j];
-                var jValue = $('<li><input type="checkbox" class="generate" value="' + oValue.id + '" /> ' + oValue.name + '</li>');
+                var jValue = $('<li><input type="checkbox" data-attribute="' + gThis.m_aoAttributes[i].id + '" class="generate" value="' + oValue.id + '" /> ' + oValue.name + '</li>');
                 jUl.append(jValue);
             }
             var jSaveValue = $('<a class="save" href="#"/>').append('<img src="' + gThis._GetImage('SaveIcon') + '" alt="' + GForm.Language.product_variants_editor_save_value + '" title="' + GForm.Language.product_variants_editor_save_value + '"/>');
