@@ -30,7 +30,7 @@ class VariantHelper implements VariantHelperInterface
     protected $currencyHelper;
 
     /**
-     * Constructor
+     * VariantHelper constructor.
      *
      * @param CurrencyHelperInterface $currencyHelper
      */
@@ -107,5 +107,18 @@ class VariantHelper implements VariantHelperInterface
         ksort($options);
 
         return implode(',', $options);
+    }
+
+    public function getVariantOptions(VariantInterface $variant) : array
+    {
+        $options = [];
+
+        $variant->getOptions()->map(function (VariantOptionInterface $variantOption) use (&$options) {
+            $attribute                                   = $variantOption->getAttribute();
+            $attributeValue                              = $variantOption->getAttributeValue();
+            $options[$attribute->translate()->getName()] = $attributeValue->translate()->getName();
+        });
+
+        return $options;
     }
 }

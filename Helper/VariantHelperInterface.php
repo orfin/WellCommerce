@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\ProductBundle\Helper;
 
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\VariantInterface;
 
 /**
  * Interface VariantHelperInterface
@@ -24,4 +25,6 @@ interface VariantHelperInterface
     public function getVariants(ProductInterface $product) : array;
 
     public function getAttributes(ProductInterface $product) : array;
+
+    public function getVariantOptions(VariantInterface $variant) : array;
 }
