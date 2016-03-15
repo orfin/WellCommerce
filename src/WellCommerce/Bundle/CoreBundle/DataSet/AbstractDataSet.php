@@ -147,7 +147,13 @@ abstract class AbstractDataSet implements DataSetInterface
         $request        = $this->manager->createRequest($requestOptions);
         $queryBuilder   = $this->getQueryBuilder($request);
 
-        return $context->getResult($queryBuilder, $request, $this->columns);
+        try {
+            return $context->getResult($queryBuilder, $request, $this->columns);
+        } catch (\Exception $e) {
+            return [
+                'error' => $e->getMessage()
+            ];
+        }
     }
 
     public function setContext(DataSetContextInterface $context)
