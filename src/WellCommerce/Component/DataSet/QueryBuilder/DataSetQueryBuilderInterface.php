@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Component\DataSet\QueryBuilder;
 
+use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Component\DataSet\Column\ColumnCollection;
 use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
 
@@ -31,7 +32,7 @@ interface DataSetQueryBuilderInterface
      * @param ColumnCollection        $columns
      * @param DataSetRequestInterface $request
      *
-     * @return \Doctrine\ORM\QueryBuilder
+     * @return QueryBuilder
      */
-    public function getQueryBuilder(ColumnCollection $columns, DataSetRequestInterface $request);
+    public function getQueryBuilder(ColumnCollection $columns, DataSetRequestInterface $request) : QueryBuilder;
 }

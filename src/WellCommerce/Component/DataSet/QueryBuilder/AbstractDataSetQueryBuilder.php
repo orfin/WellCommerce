@@ -59,9 +59,9 @@ abstract class AbstractDataSetQueryBuilder implements DataSetQueryBuilderInterfa
      * @param ColumnCollection        $columns
      * @param DataSetRequestInterface $request
      *
-     * @return \Doctrine\ORM\QueryBuilder
+     * @return QueryBuilder
      */
-    public function getQueryBuilder(ColumnCollection $columns, DataSetRequestInterface $request)
+    public function getQueryBuilder(ColumnCollection $columns, DataSetRequestInterface $request) : QueryBuilder
     {
         $this->conditions = $request->getConditions();
         $queryBuilder     = $this->repository->getDataSetQueryBuilder();

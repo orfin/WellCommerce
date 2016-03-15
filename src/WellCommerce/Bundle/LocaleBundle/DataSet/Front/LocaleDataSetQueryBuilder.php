@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\LocaleBundle\DataSet\Front;
 
+use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\LocaleBundle\DataSet\Admin\LocaleDataSetQueryBuilder as BaseDataSetQueryBuilder;
 use WellCommerce\Component\DataSet\Column\ColumnCollection;
 use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
@@ -26,7 +27,7 @@ class LocaleDataSetQueryBuilder extends BaseDataSetQueryBuilder
     /**
      * {@inheritdoc}
      */
-    public function getQueryBuilder(ColumnCollection $columns, DataSetRequestInterface $request)
+    public function getQueryBuilder(ColumnCollection $columns, DataSetRequestInterface $request) : QueryBuilder
     {
         $queryBuilder = parent::getQueryBuilder($columns, $request);
         $expression   = $queryBuilder->expr()->eq('locale.enabled', ':enabled');

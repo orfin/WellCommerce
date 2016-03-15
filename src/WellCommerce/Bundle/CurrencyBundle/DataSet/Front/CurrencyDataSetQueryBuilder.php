@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CurrencyBundle\DataSet\Front;
 
+use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\CurrencyBundle\DataSet\Admin\CurrencyDataSetQueryBuilder as BaseDataSetQueryBuilder;
 use WellCommerce\Component\DataSet\Column\ColumnCollection;
 use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
@@ -26,7 +27,7 @@ class CurrencyDataSetQueryBuilder extends BaseDataSetQueryBuilder
     /**
      * {@inheritdoc}
      */
-    public function getQueryBuilder(ColumnCollection $columns, DataSetRequestInterface $request)
+    public function getQueryBuilder(ColumnCollection $columns, DataSetRequestInterface $request) : QueryBuilder
     {
         $queryBuilder = parent::getQueryBuilder($columns, $request);
         $expression   = $queryBuilder->expr()->eq('currency.enabled', ':enabled');
