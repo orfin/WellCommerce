@@ -19,6 +19,9 @@
                     </td>
                     <td>
                         <a href="{{ item.route }}">{{ item.name }}</a>
+                        {% for attribute, value in item.options %}
+                            <br /><small><strong>{{ attribute }}:</strong> {{ value }}</small>
+                        {% endfor %}
                     </td>
                     <td>
 						{{ item.quantity|number_format(0) }}
