@@ -15,7 +15,12 @@
         {% for item in cartProducts.rows %}
             <tr>
                 <td><img src="{{ image(item.photo, 'small') }}" alt="{{ item.name }}"/></td>
-                <td><a href="{{ item.route }}">{{ item.name }}</a></td>
+                <td>
+                    <a href="{{ item.route }}">{{ item.name }}</a>
+                    {% for attribute, value in item.options %}
+                    <br /><small><strong>{{ attribute }}:</strong> {{ value }}</small>
+                    {% endfor %}
+                </td>
                 <td class="text-center">
                     {% if item.isDiscountValid == 1 %}
                         <span class="price promo">
