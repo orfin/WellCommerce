@@ -54,7 +54,7 @@ class AttributeDataGrid extends AbstractDataGrid
             'id'         => 'groups',
             'caption'    => $this->trans('attribute.label.groups'),
             'filter'     => new Filter([
-                'type'    => Filter::FILTER_NONE,
+                'type'    => Filter::FILTER_INPUT,
             ]),
             'appearance' => new Appearance([
                 'width' => 140,
