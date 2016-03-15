@@ -49,4 +49,14 @@ interface CartProductInterface extends
      * @return float
      */
     public function getWeight() : float;
+
+    /**
+     * @return array
+     */
+    public function getOptions();
+
+    /**
+     * @param $options
+     */
+    public function setOptions($options);
 }

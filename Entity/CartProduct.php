@@ -26,9 +26,14 @@ class CartProduct extends AbstractEntity implements CartProductInterface
     protected $cart;
 
     /**
-     * @var float
+     * @var int
      */
     protected $quantity;
+
+    /**
+     * @var string
+     */
+    protected $options;
 
     /**
      * {@inheritdoc}
@@ -100,5 +105,21 @@ class CartProduct extends AbstractEntity implements CartProductInterface
         }
 
         return $this->product->getWeight();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOptions()
+    {
+        return $this->options;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setOptions($options)
+    {
+        $this->options = $options;
     }
 }

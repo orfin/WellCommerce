@@ -35,11 +35,21 @@ class CartProductManager extends AbstractFrontManager implements CartProductMana
         $cartProduct->setCart($cart);
         $cartProduct->setProduct($product);
         $cartProduct->setVariant($variant);
+        $cartProduct->setOptions($this->prepareVariantOptions($variant));
         $cartProduct->setQuantity($quantity);
 
         $this->eventDispatcher->dispatchOnPostInitResource($cartProduct);
 
         return $cartProduct;
+    }
+
+    protected function prepareVariantOptions(VariantInterface $variant = null) : array
+    {
+        if (null === $variant) {
+            return [];
+        }
+
+        return $this->get('variant.helper')->getVariantOptions($variant);
     }
 
     /**

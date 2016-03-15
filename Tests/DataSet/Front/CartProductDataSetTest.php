@@ -37,6 +37,7 @@ class CartProductDataSetTest extends AbstractDataSetTestCase
             'weight'          => 'IF_ELSE(cart_product.variant IS NOT NULL, product_variant.weight, product.weight)',
             'quantity'        => 'cart_product.quantity',
             'variant'         => 'IDENTITY(cart_product.variant)',
+            'options'         => 'cart_product.options',
             'name'            => 'product_translation.name',
             'route'           => 'IDENTITY(product_translation.route)',
             'isDiscountValid' => 'IF_ELSE(:date BETWEEN product.sellPrice.validFrom AND product.sellPrice.validTo, 1, 0)',
