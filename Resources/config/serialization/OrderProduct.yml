@@ -34,6 +34,7 @@ WellCommerce\Bundle\OrderBundle\Entity\OrderProduct:
                 - order_product
         product:
             groups:
+                - order
                 - order_product
         productAttribute:
             groups:
