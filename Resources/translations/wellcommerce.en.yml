@@ -8,7 +8,7 @@ product:
             stock: Stock settings
             photos: Photos
             statuses: Statuses
-            attributes: Variants
+            variants: Variants
             shops: Shops
             description: Description
     comment:
@@ -37,7 +37,7 @@ product:
         availability: Product's availability
         attributes: Attributes
         add_tax_prompt: Add tax
-        photos: Zdjęcia
+        photos: Photos
         quantity: Quantity
         unit: Unit
         package_size: Package size
