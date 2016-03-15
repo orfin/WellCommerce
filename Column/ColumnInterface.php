@@ -24,26 +24,33 @@ interface ColumnInterface
      *
      * @return string
      */
-    public function getAlias();
+    public function getAlias() : string;
+
+    /**
+     * Returns column paginator source
+     *
+     * @return string
+     */
+    public function getPaginatorSource() : string;
 
     /**
      * Returns column source option
      *
      * @return string
      */
-    public function getSource();
+    public function getSource() : string;
 
     /**
      * Returns true if column uses MySQL aggregate function. False otherwise.
      *
      * @return bool
      */
-    public function isAggregated();
+    public function isAggregated() : bool;
 
     /**
      * Returns a raw SQL select clause
      *
      * @return string
      */
-    public function getRawSelect();
+    public function getRawSelect() : string;
 }

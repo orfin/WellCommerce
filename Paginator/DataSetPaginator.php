@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Component\DataSet\Paginator;
 
+use Doctrine\Common\Util\Debug;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -56,6 +57,7 @@ class DataSetPaginator implements DataSetPaginatorInterface
         }
 
         $queryBuilder->resetDQLPart('having');
+        $queryBuilder->resetDQLPart('groupBy');
     }
 
     /**
@@ -67,7 +69,7 @@ class DataSetPaginator implements DataSetPaginatorInterface
      */
     protected function replaceSingleHavingClause(Query\Expr\Comparison $comparison, ColumnCollection $columns, QueryBuilder $queryBuilder)
     {
-        $source     = $columns->get($comparison->getLeftExpr())->getSource();
+        $source     = $columns->get($comparison->getLeftExpr())->getPaginatorSource();
         $param      = $comparison->getRightExpr();
         $operator   = $this->getOperator($comparison->getOperator());
         $expression = $queryBuilder->expr()->{$operator}($source, $param);
@@ -83,6 +85,7 @@ class DataSetPaginator implements DataSetPaginatorInterface
             Query\Expr\Comparison::LTE => 'lte',
             Query\Expr\Comparison::GT  => 'gt',
             Query\Expr\Comparison::GTE => 'gte',
+            'LIKE'                     => 'like',
         ];
 
         return $operators[$operator] ?? 'eq';

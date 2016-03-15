@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Component\DataSet\Column;
 
+use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -46,29 +47,46 @@ class Column implements ColumnInterface
         $resolver->setRequired([
             'alias',
             'source',
-            'aggregated'
+            'aggregated',
+            'paginator_source'
         ]);
 
         $resolver->setDefaults([
-            'aggregated' => false
+            'aggregated'       => false,
+            'paginator_source' => '',
         ]);
 
-        $resolver->setNormalizer('aggregated', function ($options) {
-            return $this->isAggregateColumn($options['source']);
+        $resolver->setNormalizer('aggregated', function (Options $options) {
+            return $this->isAggregateColumn($options['source'], ['SUM', 'GROUP_CONCAT', 'MIN', 'MAX', 'AVG', 'COUNT']);
         });
+
+        $resolver->setNormalizer('paginator_source', function (Options $options) {
+            return $this->normalizePaginatorSource($options);
+        });
+    }
+
+    protected function normalizePaginatorSource(Options $options) : string
+    {
+        if (true === $this->isAggregateColumn($options['source'], ['GROUP_CONCAT'])) {
+            $parts = explode(' ', $options['source']);
+
+            return $parts[1];
+        }
+
+        return $options['source'];
     }
 
     /**
      * Checks whether column source uses MySQL aggregate function
      *
      * @param string $source
+     * @param array  $aggregates
      *
      * @return bool
      */
-    protected function isAggregateColumn($source)
+    protected function isAggregateColumn(string $source, array $aggregates) : bool
     {
-        $aggregates = ['SUM', 'GROUP_CONCAT', 'MIN', 'MAX', 'AVG', 'COUNT'];
-        $regex      = '/(' . implode('|', $aggregates) . ')/i';
+        $regex = '/(' . implode('|', $aggregates) . ')/i';
 
         return (bool)(preg_match($regex, $source));
     }
@@ -76,7 +94,7 @@ class Column implements ColumnInterface
     /**
      * {@inheritdoc}
      */
-    public function getAlias()
+    public function getAlias() : string
     {
         return $this->options['alias'];
     }
@@ -84,7 +102,15 @@ class Column implements ColumnInterface
     /**
      * {@inheritdoc}
      */
-    public function getSource()
+    public function getPaginatorSource() : string
+    {
+        return $this->options['paginator_source'];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSource() : string
     {
         return $this->options['source'];
     }
@@ -92,7 +118,7 @@ class Column implements ColumnInterface
     /**
      * {@inheritdoc}
      */
-    public function getRawSelect()
+    public function getRawSelect() : string
     {
         return sprintf('%s AS %s', $this->options['source'], $this->options['alias']);
     }
@@ -100,7 +126,7 @@ class Column implements ColumnInterface
     /**
      * {@inheritdoc}
      */
-    public function isAggregated()
+    public function isAggregated() : bool
     {
         return $this->options['aggregated'];
     }
