@@ -20,6 +20,7 @@ use WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityInterface;
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\VariantInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\VariantOptionInterface;
 use WellCommerce\Bundle\ProductBundle\Manager\Admin\VariantManager;
 
 /**
@@ -59,7 +60,7 @@ class VariantCollectionToArrayTransformer extends CollectionToArrayTransformer
                     'symbol'       => $variant->getSymbol(),
                     'weight'       => $variant->getWeight(),
                     'availability' => $this->transformAvailability($variant->getAvailability()),
-                    'attributes'   => $this->transformValues($variant->getAttributeValues()),
+                    'attributes'   => $this->transformOptions($variant->getOptions()),
                 ];
             });
         }
@@ -76,22 +77,15 @@ class VariantCollectionToArrayTransformer extends CollectionToArrayTransformer
         return null;
     }
 
-    /**
-     * Transforms values collection to identifiers
-     *
-     * @param PersistentCollection $collection
-     *
-     * @return array
-     */
-    public function transformValues(Collection $collection = null)
+    public function transformOptions(Collection $collection = null) : array
     {
         if (null === $collection) {
             return [];
         }
 
         $values = [];
-        $collection->map(function (AttributeValueInterface $attributeValue) use (&$values) {
-            $values[$attributeValue->getAttribute()->getId()] = $attributeValue->getId();
+        $collection->map(function (VariantOptionInterface $variantOption) use (&$values) {
+            $values[$variantOption->getAttribute()->getId()] = $variantOption->getAttributeValue()->getId();
         });
 
         return $values;
@@ -104,7 +98,7 @@ class VariantCollectionToArrayTransformer extends CollectionToArrayTransformer
     {
         if ($modelData instanceof ProductInterface) {
             $collection = $this->variantManager->getAttributesCollectionForProduct($modelData, $values);
-            $modelData->setAttributes($collection);
+            $modelData->setVariants($collection);
         }
     }
 }

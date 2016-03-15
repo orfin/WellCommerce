@@ -29,7 +29,7 @@ interface ProductHelperInterface
      *
      * @return array
      */
-    public function getProductDefaultTemplateData(ProductInterface $product);
+    public function getProductDefaultTemplateData(ProductInterface $product) : array;
 
     /**
      * Returns a dataset of products recommended for category
@@ -38,5 +38,5 @@ interface ProductHelperInterface
      *
      * @return array
      */
-    public function getProductRecommendationsForCategory(CategoryInterface $category);
+    public function getProductRecommendationsForCategory(CategoryInterface $category) : array;
 }

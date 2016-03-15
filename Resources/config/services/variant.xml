@@ -18,7 +18,7 @@
 
         <service id="variant.request_param_converter" class="WellCommerce\Bundle\ProductBundle\Request\ParamConverter\VariantParamConverter">
             <argument type="service" id="variant.repository" />
-            <argument>attribute</argument>
+            <argument>variant</argument>
             <argument type="collection">
                 <argument>WellCommerce\Bundle\ProductBundle\Entity\Variant</argument>
                 <argument>WellCommerce\Bundle\ProductBundle\Entity\VariantInterface</argument>

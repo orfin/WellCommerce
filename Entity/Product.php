@@ -351,14 +351,19 @@ class Product extends AbstractEntity implements ProductInterface
     public function setVariants(Collection $variants)
     {
         if ($this->variants instanceof Collection) {
-            $this->variants->map(function (VariantInterface $variant) use ($variants) {
-                if (false === $variants->contains($variant)) {
-                    $this->removeVariant($variant);
-                }
-            });
+            $this->synchronizeVariants($variants);
         }
 
         $this->variants = $variants;
+    }
+
+    protected function synchronizeVariants(Collection $variants)
+    {
+        $this->variants->map(function (VariantInterface $variant) use ($variants) {
+            if (false === $variants->contains($variant)) {
+                $this->removeVariant($variant);
+            }
+        });
     }
 
     /**

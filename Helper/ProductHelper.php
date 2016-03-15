@@ -61,18 +61,18 @@ class ProductHelper implements ProductHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function getProductDefaultTemplateData(ProductInterface $product)
+    public function getProductDefaultTemplateData(ProductInterface $product) : array
     {
         $shippingMethodCosts = $this->shippingMethodProvider->getShippingMethodCostsCollection($product);
-        $variants            = $product->getVariants();
-        $groups              = $this->variantHelper->getAttributeGroups($variants);
-        $attributes          = $this->variantHelper->getAttributes($variants);
+        $variants            = $this->variantHelper->getVariants($product);
+        $attributes          = $this->variantHelper->getAttributes($product);
+
 
         return [
-            'product'         => $product,
-            'shippingCosts'   => $shippingMethodCosts,
-            'attributeGroups' => $groups,
-            'attributes'      => json_encode($attributes)
+            'product'       => $product,
+            'shippingCosts' => $shippingMethodCosts,
+            'variants'      => json_encode($variants),
+            'attributes'    => $attributes
         ];
     }
 
@@ -83,7 +83,7 @@ class ProductHelper implements ProductHelperInterface
      *
      * @return array
      */
-    public function getProductRecommendationsForCategory(CategoryInterface $category)
+    public function getProductRecommendationsForCategory(CategoryInterface $category) : array
     {
         $conditions = new ConditionsCollection();
         $conditions->add(new Eq('category', $category->getId()));
