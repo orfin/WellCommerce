@@ -7,8 +7,8 @@ $(document).ready(function () {
         oCartPreview: oCartPreview,
         sAddProductFormClass: '.add-to-cart',
         sProductSelector: '#product',
+        sVariantSelector: '#variant',
         sQuantitySelector: '#quantity',
-        sAttributeSelector: '#attribute',
         sPriceSelector: '#price',
         sAddProductRoute: 'front.cart.add',
         sAttributesSelectClass: '.attribute'
@@ -28,19 +28,19 @@ $(document).ready(function () {
     });
 
     $('form#search').GSearch({
-        sProductSearchRoute: 'front.search.index',
-        sProductLiveSearchRoute: 'front.search.view',
-        sPhraseInputSelector: '#phrase',
-        sSearchResultsSelector: 'div#search-results',
-        oAddCartButtonSettings: oAddCartButtonSettings
+        sProductSearchRoute:        'front.search.index',
+        sProductLiveSearchRoute:    'front.search.view',
+        sPhraseInputSelector:       '#phrase',
+        sSearchResultsSelector:     'div#search-results',
+        oAddCartButtonSettings:     oAddCartButtonSettings
     });
 
     $('.cart .coupon').GCoupon({
-        sAddCouponRoute:      'front.coupon.add',
-        sRemoveCouponRoute:      'front.coupon.delete',
-        sCodeInputIdentifier: 'coupon_code',
-        sAddButtonIdentifier: 'use_coupon',
-        sRemoveButtonIdentifier: 'remove_coupon'
+        sAddCouponRoute:            'front.coupon.add',
+        sRemoveCouponRoute:         'front.coupon.delete',
+        sCodeInputIdentifier:       'coupon_code',
+        sAddButtonIdentifier:       'use_coupon',
+        sRemoveButtonIdentifier:    'remove_coupon'
     });
 
 	$('.push-search, .sliding-search > div').click(function() {
