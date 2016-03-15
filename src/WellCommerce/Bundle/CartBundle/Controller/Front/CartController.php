@@ -93,7 +93,8 @@ class CartController extends AbstractFrontController
 
         return $this->jsonResponse([
             'basketModalContent' => $basketModalContent,
-            'cartPreviewContent' => $cartPreviewContent
+            'cartPreviewContent' => $cartPreviewContent,
+            'templateData'       => [],
         ]);
     }
 

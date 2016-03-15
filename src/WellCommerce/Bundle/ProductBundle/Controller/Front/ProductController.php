@@ -43,11 +43,11 @@ class ProductController extends AbstractFrontController
         $this->manager->getProductContext()->setCurrentProduct($product);
 
         $templateData       = $this->get('product.helper')->getProductDefaultTemplateData($product);
-        $basketModalContent = $this->renderView('WellCommerceAppBundle:Front/Product:view.html.twig', $templateData);
+        $basketModalContent = $this->renderView('WellCommerceProductBundle:Front/Product:view.html.twig', $templateData);
 
         return $this->jsonResponse([
             'basketModalContent' => $basketModalContent,
-            'attributes'         => $templateData['attributes']
+            'templateData'       => $templateData
         ]);
     }
 }

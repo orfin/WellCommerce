@@ -167,7 +167,7 @@ WellCommerce\Bundle\ProductBundle\Entity\Product:
         variants:
             targetEntity: WellCommerce\Bundle\ProductBundle\Entity\Variant
             cascade:
-                - all
+                - persist
             fetch: LAZY
             mappedBy: product
             orphanRemoval: true

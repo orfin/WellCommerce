@@ -351,12 +351,12 @@ class ProductFormBuilder extends AbstractFormBuilder
         if ($this->getAttributeGroups()->count()) {
             $attributesData = $form->addChild($this->getElement('nested_fieldset', [
                 'name'  => 'attributes_data',
-                'label' => $this->trans('product.form.fieldset.attributes')
+                'label' => $this->trans('product.form.fieldset.variants')
             ]));
 
             $attributesData->addChild($this->getElement('variant_editor', [
-                'name'               => 'attributes',
-                'label'              => $this->trans('product.label.attributes'),
+                'name'               => 'variants',
+                'label'              => $this->trans('product.label.variants'),
                 'suffixes'           => ['+', '-', '%'],
                 'price_field'        => $sellPriceAmount,
                 'vat_field'          => $sellPriceTax,

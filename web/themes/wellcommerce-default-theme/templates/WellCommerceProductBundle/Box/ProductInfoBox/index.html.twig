@@ -116,13 +116,13 @@
         $('.product-details .add-to-cart').GProductAddCartForm({
             sAddProductRoute: 'front.cart.add',
             oProduct: $('#product', $(this)),
+            oVariant: $('#variant', $(this)),
             oQuantity: $('#quantity', $(this)),
-            oAttribute: $('#attribute', $(this)),
             oPrice: $('#price', $(this)),
             oBasketModal: $('#basket-modal'),
             oCartPreview: $('#topCart'),
             sAttributesSelectClass: '.attribute',
-            aoAttributes: {{ attributes|raw }}
+            aoVariants: {{ variants|raw }}
         });
 
 		$('.product-details .thumbnails > a').click(function() {

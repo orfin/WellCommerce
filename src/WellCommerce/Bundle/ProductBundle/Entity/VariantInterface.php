@@ -96,10 +96,10 @@ interface VariantInterface extends
     /**
      * @return Collection
      */
-    public function getAttributeSets() : Collection;
+    public function getOptions() : Collection;
 
     /**
      * @param Collection $sets
      */
-    public function setAttributeSets(Collection $sets);
+    public function setOptions(Collection $options);
 }

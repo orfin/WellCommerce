@@ -61,3 +61,11 @@ WellCommerce\Bundle\ProductBundle\Entity\Variant:
                 photo_id:
                     referencedColumnName: id
                     onDelete: 'SET NULL'
+    oneToMany:
+        options:
+            targetEntity: WellCommerce\Bundle\ProductBundle\Entity\VariantOption
+            cascade:
+                - persist
+            fetch: LAZY
+            mappedBy: variant
+            orphanRemoval: true

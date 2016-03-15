@@ -18,6 +18,13 @@ well_commerce_product:
             orm_configuration:
                 mapping: "@WellCommerceProductBundle/Resources/config/doctrine/Variant.orm.yml"
                 entity: WellCommerce\Bundle\ProductBundle\Entity\Variant
+        variant_option:
+            auto_services:
+                factory: WellCommerce\Bundle\ProductBundle\Factory\VariantOptionFactory
+                repository: WellCommerce\Bundle\ProductBundle\Repository\VariantOptionRepository
+            orm_configuration:
+                mapping: "@WellCommerceProductBundle/Resources/config/doctrine/VariantOption.orm.yml"
+                entity: WellCommerce\Bundle\ProductBundle\Entity\VariantOption
         product_photo:
             auto_services:
                 factory: ~

@@ -13,9 +13,13 @@
 namespace WellCommerce\Bundle\ProductBundle\Manager\Admin;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use WellCommerce\Bundle\AttributeBundle\Repository\AttributeValueRepositoryInterface;
+use Doctrine\Common\Collections\Collection;
+use WellCommerce\Bundle\AttributeBundle\Entity\AttributeInterface;
+use WellCommerce\Bundle\AttributeBundle\Entity\AttributeValueInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\VariantInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\VariantOptionInterface;
 
 /**
  * Class VariantManager
@@ -24,74 +28,91 @@ use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
  */
 class VariantManager extends AbstractAdminManager
 {
-    public function getAttributesCollectionForProduct(ProductInterface $product, array $values)
+    public function getAttributesCollectionForProduct(ProductInterface $product, array $values) : Collection
     {
         $values     = $this->filterValues($values);
         $collection = new ArrayCollection();
 
         foreach ($values as $id => $value) {
-            $productAttribute = $this->getProductAttribute($id, $value);
-            $productAttribute->setProduct($product);
-            $collection->add($productAttribute);
+            $variant = $this->getVariant($id, $value);
+            $variant->setProduct($product);
+            $collection->add($variant);
         }
 
         return $collection;
     }
 
-    /**
-     * Creates an attribute
-     *
-     * @param int    $id
-     * @param string $value
-     *
-     * @return \WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeInterface
-     */
-    protected function getProductAttribute($id, $value)
+    protected function getVariant($id, $value) : VariantInterface
     {
-        /** @var $productAttribute \WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeInterface */
-        $productAttribute = $this->repository->find($id);
-        if (null === $productAttribute) {
-            $productAttribute = $this->initResource();
+        /** @var $variant \WellCommerce\Bundle\ProductBundle\Entity\VariantInterface */
+        $variant = $this->repository->find($id);
+        if (null === $variant) {
+            $variant = $this->initResource();
         }
 
-        $productAttribute->setModifierType($value['suffix']);
-        $productAttribute->setModifierValue($value['modifier']);
-        $productAttribute->setStock($value['stock']);
-        $productAttribute->setSymbol($value['symbol']);
-        $productAttribute->setWeight($value['weight']);
-        $productAttribute->setAttributeValues($this->makeAttributeValuesCollection($value['attributes']));
+        $variantOptions = $this->makeVariantOptionCollection($variant, $value['attributes']);
 
-        return $productAttribute;
+        $variant->setModifierType($value['suffix']);
+        $variant->setModifierValue($value['modifier']);
+        $variant->setStock($value['stock']);
+        $variant->setSymbol($value['symbol']);
+        $variant->setWeight($value['weight']);
+        $variant->setOptions($variantOptions);
+
+        return $variant;
     }
 
-    /**
-     * Prepares collection from passed attribute values
-     *
-     * @param array $values
-     *
-     * @return ArrayCollection
-     */
-    protected function makeAttributeValuesCollection($values)
+    protected function makeVariantOptionCollection(VariantInterface $variant, $values) : Collection
     {
         $collection = new ArrayCollection();
-        foreach ($values as $id) {
-            $item = $this->attributeValueRepository->find($id);
-            if (null !== $item) {
-                $collection->add($item);
-            }
+        foreach ($values as $attributeId => $attributeValueId) {
+            $attribute      = $this->getAttribute($attributeId);
+            $attributeValue = $this->getAttributeValue($attributeValueId);
+            $variantOption  = $this->getVariantOption($variant, $attribute, $attributeValue);
+            $collection->add($variantOption);
         }
 
         return $collection;
     }
 
-    /**
-     * Filters passed data and strips non-array values
-     *
-     * @param array $values
-     *
-     * @return array
-     */
-    private function filterValues($values)
+    protected function getVariantOption(
+        VariantInterface $variant,
+        AttributeInterface $attribute,
+        AttributeValueInterface $attributeValue
+    ) : VariantOptionInterface
+    {
+        $variantOption = $this->findVariantOption($variant, $attribute, $attributeValue);
+
+        if (!$variantOption instanceof VariantOptionInterface) {
+            $variantOption = $this->get('variant_option.factory')->create();
+            $variantOption->setVariant($variant);
+            $variantOption->setAttribute($attribute);
+            $variantOption->setAttributeValue($attributeValue);
+        }
+
+        return $variantOption;
+    }
+
+    protected function findVariantOption(VariantInterface $variant, AttributeInterface $attribute, AttributeValueInterface $attributeValue)
+    {
+        return $this->get('variant_option.repository')->findOneBy([
+            'variant'        => $variant,
+            'attribute'      => $attribute,
+            'attributeValue' => $attributeValue,
+        ]);
+    }
+
+    protected function getAttribute(int $id) : AttributeInterface
+    {
+        return $this->get('attribute.repository')->find($id);
+    }
+
+    protected function getAttributeValue(int $id) : AttributeValueInterface
+    {
+        return $this->get('attribute_value.repository')->find($id);
+    }
+
+    private function filterValues(array $values) : array
     {
         return array_filter($values, function ($value) {
             return is_array($value);

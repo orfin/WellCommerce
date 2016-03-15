@@ -12,10 +12,10 @@
 
 namespace WellCommerce\Bundle\ProductBundle\Helper;
 
-use Doctrine\Common\Collections\Collection;
-use WellCommerce\Bundle\AttributeBundle\Entity\AttributeValueInterface;
 use WellCommerce\Bundle\CurrencyBundle\Helper\CurrencyHelperInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\VariantInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\VariantOptionInterface;
 
 /**
  * Class VariantHelper
@@ -42,87 +42,70 @@ class VariantHelper implements VariantHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function getAttributeGroups(Collection $productAttributeCollection)
+    public function getVariants(ProductInterface $product) : array
     {
-        $groups = [];
+        $variants = [];
 
-        $productAttributeCollection->map(function (VariantInterface $variant) use (&$groups) {
-            $values = $variant->getAttributeValues();
-            $this->extractValues($values, $groups);
+        $product->getVariants()->map(function (VariantInterface $variant) use (&$variants) {
+            $this->extractVariantData($variant, $variants);
         });
 
-        return $groups;
+        return $variants;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getAttributes(Collection $productAttributeCollection)
+    public function getAttributes(ProductInterface $product) : array
     {
         $attributes = [];
 
-        $productAttributeCollection->map(function (VariantInterface $variant) use (&$attributes) {
-            $key              = $this->generateVariantKey($variant);
-            $attributes[$key] = $this->getAttributeData($variant);
+        $product->getVariants()->map(function (VariantInterface $variant) use (&$attributes) {
+            $this->extractAttributesData($variant, $attributes);
         });
 
         return $attributes;
     }
 
-    /**
-     * Extracts information from collection and appends it to an array of attributes
-     *
-     * @param Collection $collection
-     * @param array      $attributes
-     */
-    protected function extractValues(Collection $collection, &$attributes)
+    protected function extractAttributesData(VariantInterface $variant, &$attributes)
     {
-        $collection->map(function (AttributeValueInterface $attributeValue) use (&$attributes) {
-            $attribute = $attributeValue->getAttribute();
-
+        $variant->getOptions()->map(function (VariantOptionInterface $variantOption) use (&$attributes) {
+            $attribute                                                           = $variantOption->getAttribute();
+            $attributeValue                                                      = $variantOption->getAttributeValue();
             $attributes[$attribute->getId()]['name']                             = $attribute->translate()->getName();
             $attributes[$attribute->getId()]['values'][$attributeValue->getId()] = $attributeValue->translate()->getName();
         });
     }
 
-    /**
-     * Generates an attribute's key on base of its values
-     *
-     * @param VariantInterface $variant
-     *
-     * @return string
-     */
-    protected function generateVariantKey(VariantInterface $variant)
-    {
-        $values = [];
-        $variant->getAttributeValues()->map(function (AttributeValueInterface $attributeValue) use (&$values) {
-            $values[$attributeValue->getId()] = $attributeValue->getId();
-        });
-
-        ksort($values);
-
-        return implode(',', $values);
-    }
-
-    /**
-     * Returns the attribute's data
-     *
-     * @param VariantInterface $variant
-     *
-     * @return array
-     */
-    protected function getAttributeData(VariantInterface $variant)
+    protected function extractVariantData(VariantInterface $variant, array &$variants)
     {
         $sellPrice    = $variant->getSellPrice();
         $baseCurrency = $sellPrice->getCurrency();
+        $key          = $this->getVariantOptionsKey($variant);
 
-        return [
+        $variants[$key] = [
             'id'                 => $variant->getId(),
             'finalPriceGross'    => $this->currencyHelper->convertAndFormat($sellPrice->getFinalGrossAmount(), $baseCurrency),
             'sellPriceGross'     => $this->currencyHelper->convertAndFormat($sellPrice->getGrossAmount(), $baseCurrency),
             'discountPriceGross' => $this->currencyHelper->convertAndFormat($sellPrice->getDiscountedGrossAmount(), $baseCurrency),
             'stock'              => $variant->getStock(),
-            'symbol'             => $variant->getSymbol()
+            'symbol'             => $variant->getSymbol(),
         ];
+    }
+
+    protected function getVariantOptionsKey(VariantInterface $variant) : string
+    {
+        $options = [];
+
+        $variant->getOptions()->map(function (VariantOptionInterface $variantOption) use (&$options) {
+            $attribute      = $variantOption->getAttribute();
+            $attributeValue = $variantOption->getAttributeValue();
+            $key            = sprintf('%s:%s', $attribute->getId(), $attributeValue->getId());
+            $options[$key]  = $key;
+        });
+
+        ksort($options);
+
+        return implode(',', $options);
     }
 }

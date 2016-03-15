@@ -10,9 +10,9 @@
         <option key="allow_page_redirect">true</option>
     </route>
 
-    <route id="front.cart.add" path="add/{id},{attribute},{quantity}">
+    <route id="front.cart.add" path="add/{id},{variant},{quantity}">
         <default key="_controller">cart.controller.front:addAction</default>
-        <default key="attribute">null</default>
+        <default key="variant">null</default>
         <default key="quantity">1</default>
         <option key="expose">true</option>
     </route>

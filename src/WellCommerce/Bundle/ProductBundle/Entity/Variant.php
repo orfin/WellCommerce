@@ -36,7 +36,7 @@ class Variant extends AbstractEntity implements VariantInterface
     /**
      * @var Collection
      */
-    protected $attributeSets;
+    protected $options;
 
     /**
      * @var DiscountablePrice
@@ -71,17 +71,30 @@ class Variant extends AbstractEntity implements VariantInterface
     /**
      * {@inheritdoc}
      */
-    public function getAttributeSets() : Collection
+    public function getOptions() : Collection
     {
-        return $this->attributeSets;
+        return $this->options;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setAttributeSets(Collection $attributeSets)
+    public function setOptions(Collection $options)
     {
-        $this->attributeSets = $attributeSets;
+        if ($this->options instanceof Collection) {
+            $this->synchronizeOptions($options);
+        }
+
+        $this->options = $options;
+    }
+
+    protected function synchronizeOptions(Collection $options)
+    {
+        $this->options->map(function (VariantOptionInterface $option) use ($options) {
+            if (false === $options->contains($option)) {
+                $this->options->removeElement($option);
+            }
+        });
     }
 
     /**

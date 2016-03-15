@@ -35,7 +35,7 @@ class CartProductDataSet extends AbstractDataSet
             'stock'           => 'IF_ELSE(cart_product.variant IS NOT NULL, product_variant.stock, product.stock)',
             'weight'          => 'IF_ELSE(cart_product.variant IS NOT NULL, product_variant.weight, product.weight)',
             'quantity'        => 'cart_product.quantity',
-            'attribute'       => 'IDENTITY(cart_product.variant)',
+            'variant'         => 'IDENTITY(cart_product.variant)',
             'name'            => 'product_translation.name',
             'route'           => 'IDENTITY(product_translation.route)',
             'isDiscountValid' => 'IF_ELSE(:date BETWEEN product.sellPrice.validFrom AND product.sellPrice.validTo, 1, 0)',
