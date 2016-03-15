@@ -3,6 +3,12 @@ attribute:
         index: Atrybuty
         add: Dodawanie nowego atrubutu
         edit: Edycja atrybutu
+    label:
+        groups: Grupy
+        values: Wartości
+    fieldset:
+        groups: Grupy
+        values: Wartości
 
 attribute_group:
     heading:
@@ -15,6 +21,8 @@ attribute_group:
     label:
         attributes: Atrybuty
         group: Grupa
+    fieldset:
+        attributes: Atrybuty
 
 attribute_value:
     heading:

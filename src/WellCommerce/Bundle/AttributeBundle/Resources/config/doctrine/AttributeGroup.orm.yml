@@ -25,4 +25,4 @@ WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroup:
                         referencedColumnName: id
                         onDelete: CASCADE
             cascade:
-                - all
+                - persist

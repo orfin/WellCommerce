@@ -3,6 +3,12 @@ attribute:
         index: Attributes
         add: Add attribute
         edit: Edit attribute
+    label:
+        groups: Groups
+        values: Values
+    fieldset:
+        groups: Groups
+        values: Values
 
 attribute_group:
     heading:
@@ -12,6 +18,8 @@ attribute_group:
     flash:
         empty_group: Empty group
         new_group: New group
+    fieldset:
+        attributes: Attributes
     label:
         attributes: Attributes
         group: Group

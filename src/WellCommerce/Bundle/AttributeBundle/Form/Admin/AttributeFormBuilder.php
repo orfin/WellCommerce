@@ -52,7 +52,7 @@ class AttributeFormBuilder extends AbstractFormBuilder
 
         $groupsData->addChild($this->getElement('multi_select', [
             'name'        => 'groups',
-            'label'       => $this->trans('attribute.label.attribute_group'),
+            'label'       => $this->trans('attribute.label.groups'),
             'options'     => $this->get('attribute_group.dataset.admin')->getResult('select'),
             'transformer' => $this->getRepositoryTransformer('collection', $this->get('attribute_group.repository'))
         ]));
@@ -64,7 +64,7 @@ class AttributeFormBuilder extends AbstractFormBuilder
 
         $valuesData->addChild($this->getElement('multi_select', [
             'name'        => 'values',
-            'label'       => $this->trans('attribute.label.attribute_value'),
+            'label'       => $this->trans('attribute.label.values'),
             'options'     => $this->get('attribute_value.dataset.admin')->getResult('select'),
             'transformer' => $this->getRepositoryTransformer('collection', $this->get('attribute_value.repository'))
         ]));

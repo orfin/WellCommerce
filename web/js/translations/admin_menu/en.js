@@ -53,5 +53,5 @@
     Translator.add("user_management", "Users management", "admin_menu", "en");
     Translator.add("user", "Users", "admin_menu", "en");
     Translator.add("user_group", "Users groups", "admin_menu", "en");
-    Translator.add("variants", "Variants", "admin_menu", "en");
+    Translator.add("variant", "Variants", "admin_menu", "en");
 })(Translator);
