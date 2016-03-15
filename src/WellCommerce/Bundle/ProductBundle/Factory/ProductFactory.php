@@ -45,7 +45,7 @@ class ProductFactory extends AbstractEntityFactory
         $product->setCategories(new ArrayCollection());
         $product->setProductPhotos(new ArrayCollection());
         $product->setStatuses(new ArrayCollection());
-        $product->setAttributes(new ArrayCollection());
+        $product->setVariants(new ArrayCollection());
         $product->setShops(new ArrayCollection());
         $product->setEnabled(true);
         $product->setSellPrice(new DiscountablePrice());
