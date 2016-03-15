@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CartBundle\DataSet\Front;
 
+use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\CartBundle\Context\Front\CartContextInterface;
 use WellCommerce\Bundle\CartBundle\Repository\CartProductRepositoryInterface;
 use WellCommerce\Component\DataSet\Column\ColumnCollection;
@@ -46,7 +47,7 @@ class CartProductDataSetQueryBuilder extends AbstractDataSetQueryBuilder impleme
     /**
      * {@inheritdoc}
      */
-    public function getQueryBuilder(ColumnCollection $columns, DataSetRequestInterface $request)
+    public function getQueryBuilder(ColumnCollection $columns, DataSetRequestInterface $request) : QueryBuilder
     {
         $queryBuilder = parent::getQueryBuilder($columns, $request);
         $expression   = $queryBuilder->expr()->eq('cart_product.cart', ':cart');
