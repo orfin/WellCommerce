@@ -22,7 +22,7 @@
         <identifier>variant</identifier>
         <css_class/>
         <name>variant</name>
-        <route_name>admin.variant.index</route_name>
+        <route_name/>
         <parent>catalog</parent>
         <hierarchy>20</hierarchy>
     </item>
