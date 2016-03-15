@@ -42,7 +42,7 @@ class ProductDataSetQueryBuilder extends BaseProductDataSetQueryBuilder
     /**
      * {@inheritdoc}
      */
-    public function getQueryBuilder(ColumnCollection $columns, DataSetRequestInterface $request)
+    public function getQueryBuilder(ColumnCollection $columns, DataSetRequestInterface $request) : QueryBuilder
     {
         $qb = parent::getQueryBuilder($columns, $request);
 
