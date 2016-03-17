@@ -15,7 +15,7 @@ namespace WellCommerce\Bundle\OrderBundle\Controller\Admin;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
-use WellCommerce\Bundle\OrderBundle\Context\Front\OrderContextInterface;
+use WellCommerce\Bundle\OrderBundle\Context\Admin\OrderContextInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 
 /**

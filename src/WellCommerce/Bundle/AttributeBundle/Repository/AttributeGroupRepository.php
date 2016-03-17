@@ -38,22 +38,4 @@ class AttributeGroupRepository extends AbstractEntityRepository implements Attri
 
         return $sets;
     }
-
-    public function getAttributeSet($attributeGroupId) : array
-    {
-        /** @var $attributeGroup \WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroupInterface */
-        $attributeGroup = $this->find($attributeGroupId);
-        $sets           = [];
-
-        $attributeGroup->getAttributes()->map(function (AttributeInterface $attribute) use (&$sets) {
-            $sets[] = [
-                'id'     => $attribute->getId(),
-                'name'   => $attribute->translate()->getName(),
-                'values' => $this->getAttributeValuesSet($attribute)
-            ];
-        });
-
-        return $sets;
-    }
-
 }

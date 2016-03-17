@@ -56,23 +56,8 @@ class AttributeManager extends AbstractAdminManager
         return $sets;
     }
 
-    protected function findAttributeGroup(int $id) : AttributeGroupInterface
+    public function findAttributeGroup(int $id) : AttributeGroupInterface
     {
         return $this->get('attribute_group.repository')->find($id);
-    }
-
-    protected function getAttributeValuesSet(AttributeInterface $attribute) : array
-    {
-        $values                    = [];
-        $attributeValuesCollection = $attribute->getValues();
-
-        $attributeValuesCollection->map(function (AttributeValueInterface $attributeValue) use (&$values) {
-            $values[] = [
-                'id'   => $attributeValue->getId(),
-                'name' => $attributeValue->translate()->getName()
-            ];
-        });
-
-        return $values;
     }
 }

@@ -5757,6 +5757,7 @@ var GFormStaticText = GCore.ExtendClass(GFormField, function() {
 	gThis.Focus = function() { return false; };
 
 }, oDefaults);
+
 /*
 * SUBMIT
 */
@@ -5782,6 +5783,7 @@ var GFormSubmit = GCore.ExtendClass(GFormField, function() {
 	};
 
 }, oDefaults);
+
 /*
 * TECHNICAL DATA EDITOR
 */
