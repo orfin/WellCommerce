@@ -12,9 +12,11 @@
 
 namespace WellCommerce\Bundle\AttributeBundle\Controller\Admin;
 
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\AttributeBundle\Generator\CartesianProductGenerator;
+use WellCommerce\Bundle\AttributeBundle\Repository\AttributeRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 
 /**
@@ -28,7 +30,7 @@ class AttributeController extends AbstractAdminController
      * @var \WellCommerce\Bundle\AttributeBundle\Manager\Admin\AttributeManager
      */
     protected $manager;
-
+    
     /**
      * Ajax action for listing attributes in variants editor
      *
@@ -41,14 +43,15 @@ class AttributeController extends AbstractAdminController
         if (!$request->isXmlHttpRequest()) {
             return $this->redirectToAction('index');
         }
-
+        
         $attributeGroupId = (int)$request->request->get('id');
+        $attributeGroup   = $this->manager->findAttributeGroup($attributeGroupId);
 
         return $this->jsonResponse([
-            'attributes' => $this->manager->getAttributeSet($attributeGroupId),
+            'attributes' => $this->getRepository()->getAttributeSet($attributeGroup),
         ]);
     }
-
+    
     /**
      * Adds new attribute value using ajax request
      *
@@ -61,38 +64,43 @@ class AttributeController extends AbstractAdminController
         if (!$request->isXmlHttpRequest()) {
             return $this->redirectToAction('index');
         }
-
+        
         $attributeName    = $request->request->get('name');
         $attributeGroupId = (int)$request->request->get('set');
-
+        
         try {
             $attribute = $this->manager->createAttribute($attributeName, $attributeGroupId);
-
+            
             return $this->jsonResponse([
                 'id' => $attribute->getId()
             ]);
-
+            
         } catch (\Exception $e) {
-
+            
             return $this->jsonResponse([
                 'error' => $e->getMessage(),
             ]);
         }
     }
-
-    public function ajaxGenerateCartesianAction(Request $request) : Response
+    
+    public function ajaxGenerateCartesianAction(Request $request) : JsonResponse
     {
         $attributes    = $request->request->get('attributes');
         $attributesMap = [];
-
+        
         foreach ($attributes as $attribute) {
             $attributesMap[$attribute['attribute']][] = $attribute['value'];
         }
-
+        
         $variantsCombinations = CartesianProductGenerator::generateCartesianProduct($attributesMap);
-
+        
         return $this->jsonResponse([
             'variants' => $variantsCombinations
         ]);
+    }
+    
+    private function getRepository() : AttributeRepositoryInterface
+    {
+        return $this->manager->getRepository();
     }
 }

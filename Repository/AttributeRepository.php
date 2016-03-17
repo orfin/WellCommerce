@@ -11,8 +11,6 @@
  */
 namespace WellCommerce\Bundle\AttributeBundle\Repository;
 
-use Doctrine\Common\Collections\Collection;
-use Doctrine\Common\Collections\Criteria;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroupInterface;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeInterface;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeValueInterface;
@@ -42,36 +40,34 @@ class AttributeRepository extends AbstractEntityRepository implements AttributeR
     /**
      * {@inheritdoc}
      */
-    public function getCollectionByAttributeGroup(AttributeGroupInterface $attributeGroup)
+    public function getAttributeSet(AttributeGroupInterface $attributeGroup) : array
     {
-        $criteria = new Criteria();
-        $criteria->where($criteria->expr()->eq('attributeGroup', $attributeGroup));
-
-        return $this->matching($criteria);
-    }
-
-    public function getAttributesWithValues()
-    {
-        $attributes = [];
-        $collection = $this->matching(new Criteria());
-        $collection->map(function (AttributeInterface $attribute) use (&$attributes) {
-            $attributes[] = [
+        $sets                 = [];
+        $attributesCollection = $attributeGroup->getAttributes();
+        
+        $attributesCollection->map(function (AttributeInterface $attribute) use (&$sets) {
+            $sets[] = [
                 'id'     => $attribute->getId(),
                 'name'   => $attribute->translate()->getName(),
-                'values' => $this->getAttributeValues($attribute->getValues())
+                'values' => $this->getAttributeValuesSet($attribute)
             ];
         });
-
-        return $attributes;
+        
+        return $sets;
     }
 
-    protected function getAttributeValues(Collection $collection)
+    /**
+     * {@inheritdoc}
+     */
+    public function getAttributeValuesSet(AttributeInterface $attribute) : array
     {
-        $values = [];
-        $collection->map(function (AttributeValueInterface $value) use (&$values) {
+        $values                    = [];
+        $attributeValuesCollection = $attribute->getValues();
+
+        $attributeValuesCollection->map(function (AttributeValueInterface $attributeValue) use (&$values) {
             $values[] = [
-                'id'   => $value->getId(),
-                'name' => $value->translate()->getName()
+                'id'   => $attributeValue->getId(),
+                'name' => $attributeValue->translate()->getName()
             ];
         });
 
