@@ -37,7 +37,7 @@ class CartContext implements CartContextInterface
     /**
      * {@inheritdoc}
      */
-    public function getCurrentCart()
+    public function getCurrentCart() : CartInterface
     {
         return $this->currentCart;
     }
@@ -45,19 +45,15 @@ class CartContext implements CartContextInterface
     /**
      * {@inheritdoc}
      */
-    public function getCurrentCartIdentifier()
+    public function getCurrentCartIdentifier() : int
     {
-        if ($this->hasCurrentCart()) {
-            return $this->currentCart->getId();
-        }
-
-        return null;
+        return $this->getCurrentCart()->getId();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function hasCurrentCart()
+    public function hasCurrentCart() : bool
     {
         return $this->currentCart instanceof CartInterface;
     }
