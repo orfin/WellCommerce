@@ -30,7 +30,7 @@ class CouponFactory extends AbstractEntityFactory
     /**
      * @return CouponInterface
      */
-    public function create() : ContactInterface
+    public function create() : CouponInterface
     {
         /** @var $coupon CouponInterface */
         $coupon = $this->init();
