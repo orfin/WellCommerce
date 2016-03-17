@@ -37,7 +37,7 @@ class ContactContext implements ContactContextInterface
     /**
      * {@inheritdoc}
      */
-    public function getCurrentContact()
+    public function getCurrentContact() : ContactInterface
     {
         return $this->currentContact;
     }
@@ -45,7 +45,7 @@ class ContactContext implements ContactContextInterface
     /**
      * {@inheritdoc}
      */
-    public function hasCurrentContact()
+    public function hasCurrentContact() : bool
     {
         return $this->currentContact instanceof ContactInterface;
     }
