@@ -30,7 +30,7 @@ class LayoutBoxFactory extends AbstractEntityFactory
     /**
      * @return LayoutBoxInterface
      */
-    public function create()
+    public function create() : LayoutBoxInterface
     {
         /** @var $box LayoutBoxInterface */
         $box = $this->init();
