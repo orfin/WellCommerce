@@ -31,7 +31,7 @@ class UserFactory extends AbstractEntityFactory
     /**
      * @return UserInterface
      */
-    public function create()
+    public function create() : UserInterface
     {
         /** @var $user UserInterface */
         $user = $this->init();

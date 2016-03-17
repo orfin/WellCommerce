@@ -31,7 +31,7 @@ class UserGroupFactory extends AbstractEntityFactory
     /**
      * @return UserGroupInterface
      */
-    public function create()
+    public function create() : UserGroupInterface
     {
         /** @var $group UserGroupInterface */
         $group = $this->init();

@@ -31,7 +31,7 @@ class RoleFactory extends AbstractEntityFactory
     /**
      * @return RoleInterface
      */
-    public function create()
+    public function create() : RoleInterface
     {
         $role = $this->init();
         $role->setName('');
