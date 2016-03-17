@@ -76,7 +76,7 @@ abstract class AbstractEntityFactory extends AbstractContainerAware implements E
      *
      * @return bool
      */
-    protected function isSupported()
+    protected function isSupported() : bool
     {
         $rc = new \ReflectionClass($this->className);
 
