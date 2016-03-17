@@ -13,23 +13,23 @@
 namespace WellCommerce\Bundle\ProductStatusBundle\Tests\Context\Front;
 
 use WellCommerce\Bundle\CoreBundle\Test\AbstractTestCase;
+use WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusInterface;
 
 /**
- * Class CartContextTest
+ * Class ProductStatusContextTest
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CartContextTest extends AbstractTestCase
+class ProductStatusContextTest extends AbstractTestCase
 {
     public function testContextReturnsValidData()
     {
-        $factory = $this->container->get('cart.factory');
-        $context = $this->container->get('cart.context.front');
-        $cart    = $factory->create();
-        $this->assertNull($context->getCurrentCart());
+        $factory = $this->container->get('product_status.factory');
+        $context = $this->container->get('product_status.context.front');
+        $status  = $factory->create();
 
-        $context->setCurrentCart($cart);
-        $this->assertInstanceOf(\WellCommerce\Bundle\CartBundle\Entity\CartInterface::class, $context->getCurrentCart());
-        $this->assertEquals($cart, $context->getCurrentCart());
+        $context->setCurrentProductStatus($status);
+        $this->assertInstanceOf(ProductStatusInterface::class, $context->getCurrentProductStatus());
+        $this->assertEquals($status, $context->getCurrentProductStatus());
     }
 }
