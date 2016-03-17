@@ -30,7 +30,7 @@ class MediaFactory extends AbstractEntityFactory
     /**
      * @return MediaInterface
      */
-    public function create()
+    public function create() : MediaInterface
     {
         /** @var $media MediaInterface */
         $media = $this->init();
