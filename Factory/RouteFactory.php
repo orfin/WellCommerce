@@ -30,7 +30,7 @@ class RouteFactory extends AbstractEntityFactory
     /**
      * @return RouteInterface
      */
-    public function create()
+    public function create() : RouteInterface
     {
         /** @var  $route RouteInterface */
         $route = $this->init();
