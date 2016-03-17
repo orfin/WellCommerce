@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CartBundle\Tests\Context\Front;
 
+use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 use WellCommerce\Bundle\CoreBundle\Test\AbstractTestCase;
 
 /**
@@ -26,10 +27,9 @@ class CartContextTest extends AbstractTestCase
         $factory = $this->container->get('cart.factory');
         $context = $this->container->get('cart.context.front');
         $cart    = $factory->create();
-        $this->assertNull($context->getCurrentCart());
 
         $context->setCurrentCart($cart);
-        $this->assertInstanceOf(\WellCommerce\Bundle\CartBundle\Entity\CartInterface::class, $context->getCurrentCart());
+        $this->assertInstanceOf(CartInterface::class, $context->getCurrentCart());
         $this->assertEquals($cart, $context->getCurrentCart());
     }
 }

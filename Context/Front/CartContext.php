@@ -47,7 +47,11 @@ class CartContext implements CartContextInterface
      */
     public function getCurrentCartIdentifier() : int
     {
-        return $this->getCurrentCart()->getId();
+        if ($this->hasCurrentCart()) {
+            return $this->getCurrentCart()->getId();
+        }
+
+        return 0;
     }
 
     /**
