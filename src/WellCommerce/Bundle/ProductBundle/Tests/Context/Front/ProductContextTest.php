@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\ProductBundle\Tests\Context\Front;
 
 use WellCommerce\Bundle\CoreBundle\Test\AbstractTestCase;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 
 /**
  * Class ProductContextTest
@@ -26,10 +27,9 @@ class ProductContextTest extends AbstractTestCase
         $factory = $this->container->get('product.factory');
         $context = $this->container->get('product.context.front');
         $product = $factory->create();
-        $this->assertNull($context->getCurrentProduct());
 
         $context->setCurrentProduct($factory->create());
-        $this->assertInstanceOf('WellCommerce\Bundle\ProductBundle\Entity\ProductInterface', $context->getCurrentProduct());
+        $this->assertInstanceOf(ProductInterface::class, $context->getCurrentProduct());
         $this->assertEquals($product, $context->getCurrentProduct());
     }
 }

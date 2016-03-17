@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\OrderBundle\Tests\Context\Admin;
 
 use WellCommerce\Bundle\CoreBundle\Test\AbstractTestCase;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 
 /**
  * Class OrderContextTest
@@ -26,10 +27,9 @@ class OrderContextTest extends AbstractTestCase
         $factory = $this->container->get('order.factory');
         $context = $this->container->get('order.context.admin');
         $order   = $factory->create();
-        $this->assertNull($context->getCurrentOrder());
 
         $context->setCurrentOrder($order);
-        $this->assertInstanceOf(\WellCommerce\Bundle\OrderBundle\Entity\OrderInterface::class, $context->getCurrentOrder());
+        $this->assertInstanceOf(OrderInterface::class, $context->getCurrentOrder());
         $this->assertEquals($order, $context->getCurrentOrder());
     }
 }

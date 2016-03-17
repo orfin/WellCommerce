@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\PageBundle\Tests\Context\Front;
 
 use WellCommerce\Bundle\CoreBundle\Test\AbstractTestCase;
+use WellCommerce\Bundle\PageBundle\Entity\PageInterface;
 
 /**
  * Class PageContextTest
@@ -26,10 +27,9 @@ class PageContextTest extends AbstractTestCase
         $factory = $this->container->get('page.factory');
         $context = $this->container->get('page.context.front');
         $page    = $factory->create();
-        $this->assertNull($context->getCurrentPage());
 
         $context->setCurrentPage($factory->create());
-        $this->assertInstanceOf(\WellCommerce\Bundle\PageBundle\Entity\PageInterface::class, $context->getCurrentPage());
+        $this->assertInstanceOf(PageInterface::class, $context->getCurrentPage());
         $this->assertEquals($page, $context->getCurrentPage());
     }
 }
