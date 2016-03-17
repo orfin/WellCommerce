@@ -37,7 +37,7 @@ class ProducerContext implements ProducerContextInterface
     /**
      * {@inheritdoc}
      */
-    public function getCurrentProducer()
+    public function getCurrentProducer() : ProducerInterface
     {
         return $this->currentProducer;
     }
@@ -45,19 +45,15 @@ class ProducerContext implements ProducerContextInterface
     /**
      * {@inheritdoc}
      */
-    public function getCurrentProducerIdentifier()
+    public function getCurrentProducerIdentifier() : int
     {
-        if ($this->hasCurrentProducer()) {
-            return $this->currentProducer->getId();
-        }
-
-        return null;
+        return $this->getCurrentProducer()->getId();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function hasCurrentProducer()
+    public function hasCurrentProducer() : bool
     {
         return $this->currentProducer instanceof ProducerInterface;
     }
