@@ -27,17 +27,17 @@ interface ProducerContextInterface
     public function setCurrentProducer(ProducerInterface $producer);
 
     /**
-     * @return null|ProducerInterface
+     * @return ProducerInterface
      */
-    public function getCurrentProducer();
+    public function getCurrentProducer() : ProducerInterface;
 
     /**
-     * @return int|null
+     * @return int
      */
-    public function getCurrentProducerIdentifier();
+    public function getCurrentProducerIdentifier() : int;
 
     /**
      * @return bool
      */
-    public function hasCurrentProducer();
+    public function hasCurrentProducer() : bool;
 }

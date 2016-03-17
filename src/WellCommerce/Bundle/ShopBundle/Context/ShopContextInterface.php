@@ -22,14 +22,14 @@ use WellCommerce\Bundle\ShopBundle\Entity\ShopInterface;
 interface ShopContextInterface
 {
     /**
-     * @return \WellCommerce\Bundle\ShopBundle\Entity\ShopInterface
+     * @return ShopInterface
      */
-    public function getCurrentShop();
+    public function getCurrentShop() : ShopInterface;
 
     /**
-     * @return null|int
+     * @return int
      */
-    public function getCurrentShopIdentifier();
+    public function getCurrentShopIdentifier() : int;
 
     /**
      * @param ShopInterface $shop
@@ -39,10 +39,10 @@ interface ShopContextInterface
     /**
      * @return bool
      */
-    public function hasCurrentShop();
+    public function hasCurrentShop() : bool;
 
     /**
      * @return string
      */
-    public function getSessionAttributeName();
+    public function getSessionAttributeName() : string;
 }

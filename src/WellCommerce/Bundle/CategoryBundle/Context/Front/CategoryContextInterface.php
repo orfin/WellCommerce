@@ -29,15 +29,15 @@ interface CategoryContextInterface
     /**
      * @return CategoryInterface
      */
-    public function getCurrentCategory();
+    public function getCurrentCategory() : CategoryInterface;
 
     /**
-     * @return int|null
+     * @return int
      */
-    public function getCurrentCategoryIdentifier();
+    public function getCurrentCategoryIdentifier() : int;
 
     /**
      * @return bool
      */
-    public function hasCurrentCategory();
+    public function hasCurrentCategory() : bool;
 }

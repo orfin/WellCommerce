@@ -37,7 +37,7 @@ class ThemeContext implements ThemeContextInterface
     /**
      * {@inheritdoc}
      */
-    public function getCurrentTheme()
+    public function getCurrentTheme() : ThemeInterface
     {
         return $this->currentTheme;
     }
@@ -45,19 +45,15 @@ class ThemeContext implements ThemeContextInterface
     /**
      * {@inheritdoc}
      */
-    public function getCurrentThemeFolder()
+    public function getCurrentThemeFolder() : string
     {
-        if ($this->hasCurrentTheme()) {
-            return $this->currentTheme->getFolder();
-        }
-
-        return null;
+        return $this->currentTheme->getFolder();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function hasCurrentTheme()
+    public function hasCurrentTheme() : bool
     {
         return $this->currentTheme instanceof ThemeInterface;
     }

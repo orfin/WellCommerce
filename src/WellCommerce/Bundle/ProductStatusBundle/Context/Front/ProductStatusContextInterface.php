@@ -27,17 +27,17 @@ interface ProductStatusContextInterface
     public function setCurrentProductStatus(ProductStatusInterface $productStatus);
 
     /**
-     * @return null|ProductStatusInterface
+     * @return ProductStatusInterface
      */
-    public function getCurrentProductStatus();
+    public function getCurrentProductStatus() : ProductStatusInterface;
 
     /**
-     * @return int|null
+     * @return int
      */
-    public function getCurrentProductStatusIdentifier();
+    public function getCurrentProductStatusIdentifier() : int;
 
     /**
      * @return bool
      */
-    public function hasCurrentProductStatus();
+    public function hasCurrentProductStatus() : bool;
 }

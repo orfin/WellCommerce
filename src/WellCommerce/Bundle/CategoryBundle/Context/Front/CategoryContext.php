@@ -37,7 +37,7 @@ class CategoryContext implements CategoryContextInterface
     /**
      * {@inheritdoc}
      */
-    public function getCurrentCategory()
+    public function getCurrentCategory() : CategoryInterface
     {
         return $this->currentCategory;
     }
@@ -45,19 +45,15 @@ class CategoryContext implements CategoryContextInterface
     /**
      * {@inheritdoc}
      */
-    public function getCurrentCategoryIdentifier()
+    public function getCurrentCategoryIdentifier() : int
     {
-        if ($this->hasCurrentCategory()) {
-            return $this->currentCategory->getId();
-        }
-
-        return null;
+        return $this->getCurrentCategory()->getId();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function hasCurrentCategory()
+    public function hasCurrentCategory() : bool
     {
         return $this->currentCategory instanceof CategoryInterface;
     }

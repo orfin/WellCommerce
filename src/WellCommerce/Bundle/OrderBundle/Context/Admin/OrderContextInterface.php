@@ -27,12 +27,12 @@ interface OrderContextInterface
     public function setCurrentOrder(OrderInterface $order);
 
     /**
-     * @return null|OrderInterface
+     * @return OrderInterface
      */
-    public function getCurrentOrder();
+    public function getCurrentOrder() : OrderInterface;
 
     /**
      * @return bool
      */
-    public function hasCurrentOrder();
+    public function hasCurrentOrder() : bool;
 }

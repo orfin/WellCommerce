@@ -29,7 +29,7 @@ abstract class AbstractShopContext
     /**
      * {@inheritdoc}
      */
-    public function getCurrentShop()
+    public function getCurrentShop() : ShopInterface
     {
         return $this->currentShop;
     }
@@ -45,19 +45,15 @@ abstract class AbstractShopContext
     /**
      * {@inheritdoc}
      */
-    public function getCurrentShopIdentifier()
+    public function getCurrentShopIdentifier() : int
     {
-        if ($this->hasCurrentShop()) {
-            return $this->currentShop->getId();
-        }
-
-        return null;
+        return $this->currentShop->getId();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function hasCurrentShop()
+    public function hasCurrentShop() : bool
     {
         return $this->currentShop instanceof ShopInterface;
     }

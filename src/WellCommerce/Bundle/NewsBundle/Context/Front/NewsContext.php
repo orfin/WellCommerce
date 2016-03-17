@@ -37,7 +37,7 @@ class NewsContext implements NewsContextInterface
     /**
      * {@inheritdoc}
      */
-    public function getCurrentNews()
+    public function getCurrentNews() : NewsInterface
     {
         return $this->currentNews;
     }
@@ -45,7 +45,7 @@ class NewsContext implements NewsContextInterface
     /**
      * {@inheritdoc}
      */
-    public function hasCurrentNews()
+    public function hasCurrentNews() : bool
     {
         return $this->currentNews instanceof NewsInterface;
     }

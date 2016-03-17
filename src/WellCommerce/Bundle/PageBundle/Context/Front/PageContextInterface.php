@@ -27,12 +27,12 @@ interface PageContextInterface
     public function setCurrentPage(PageInterface $page);
 
     /**
-     * @return null|PageInterface
+     * @return PageInterface
      */
-    public function getCurrentPage();
+    public function getCurrentPage() : PageInterface;
 
     /**
      * @return bool
      */
-    public function hasCurrentPage();
+    public function hasCurrentPage() : bool;
 }

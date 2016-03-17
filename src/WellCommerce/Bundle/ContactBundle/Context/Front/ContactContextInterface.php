@@ -27,12 +27,12 @@ interface ContactContextInterface
     public function setCurrentContact(ContactInterface $contact);
 
     /**
-     * @return null|ContactInterface
+     * @return ContactInterface
      */
-    public function getCurrentContact();
+    public function getCurrentContact() : ContactInterface;
 
     /**
      * @return bool
      */
-    public function hasCurrentContact();
+    public function hasCurrentContact() : bool;
 }

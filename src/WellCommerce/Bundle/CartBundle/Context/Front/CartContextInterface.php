@@ -27,17 +27,17 @@ interface CartContextInterface
     public function setCurrentCart(CartInterface $cart);
 
     /**
-     * @return null|CartInterface
+     * @return CartInterface
      */
-    public function getCurrentCart();
+    public function getCurrentCart() : CartInterface;
 
     /**
-     * @return int|null
+     * @return int
      */
-    public function getCurrentCartIdentifier();
+    public function getCurrentCartIdentifier() : int;
 
     /**
      * @return bool
      */
-    public function hasCurrentCart();
+    public function hasCurrentCart() : bool;
 }

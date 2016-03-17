@@ -37,7 +37,7 @@ class ProductContext implements ProductContextInterface
     /**
      * {@inheritdoc}
      */
-    public function getCurrentProduct()
+    public function getCurrentProduct() : ProductInterface
     {
         return $this->currentProduct;
     }
@@ -45,9 +45,8 @@ class ProductContext implements ProductContextInterface
     /**
      * {@inheritdoc}
      */
-    public function hasCurrentProduct()
+    public function hasCurrentProduct() : bool
     {
         return $this->currentProduct instanceof ProductInterface;
     }
-
 }

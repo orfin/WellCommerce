@@ -37,27 +37,23 @@ class ProductStatusContext implements ProductStatusContextInterface
     /**
      * {@inheritdoc}
      */
-    public function getCurrentProductStatus()
+    public function getCurrentProductStatus() : ProductStatusInterface
     {
         return $this->currentProductStatus;
     }
-
+    
     /**
      * {@inheritdoc}
      */
-    public function getCurrentProductStatusIdentifier()
+    public function getCurrentProductStatusIdentifier() : int
     {
-        if ($this->hasCurrentProductStatus()) {
-            return $this->currentProductStatus->getId();
-        }
-
-        return null;
+        return $this->getCurrentProductStatus()->getId();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function hasCurrentProductStatus()
+    public function hasCurrentProductStatus() : bool
     {
         return $this->currentProductStatus instanceof ProductStatusInterface;
     }
