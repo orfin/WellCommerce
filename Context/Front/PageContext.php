@@ -37,7 +37,7 @@ class PageContext implements PageContextInterface
     /**
      * {@inheritdoc}
      */
-    public function getCurrentPage()
+    public function getCurrentPage() : PageInterface
     {
         return $this->currentPage;
     }
@@ -45,7 +45,7 @@ class PageContext implements PageContextInterface
     /**
      * {@inheritdoc}
      */
-    public function hasCurrentPage()
+    public function hasCurrentPage() : bool
     {
         return $this->currentPage instanceof PageInterface;
     }
