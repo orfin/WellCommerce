@@ -47,7 +47,11 @@ class CategoryContext implements CategoryContextInterface
      */
     public function getCurrentCategoryIdentifier() : int
     {
-        return $this->getCurrentCategory()->getId();
+        if ($this->hasCurrentCategory()) {
+            return $this->getCurrentCategory()->getId();
+        }
+
+        return 0;
     }
 
     /**
