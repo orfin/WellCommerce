@@ -16,29 +16,17 @@ use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 use WellCommerce\Bundle\AvailabilityBundle\Entity\Extra\AvailabilityExtraTrait;
+use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
 
 /**
  * Class Availability
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Availability implements AvailabilityInterface
+class Availability extends AbstractEntity implements AvailabilityInterface
 {
     use Translatable;
     use Timestampable;
     use Blameable;
     use AvailabilityExtraTrait;
-
-    /**
-     * @var int
-     */
-    protected $id;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 }

@@ -30,7 +30,7 @@ class AvailabilityFactory extends AbstractEntityFactory
     /**
      * @return AvailabilityInterface
      */
-    public function create()
+    public function create() : AvailabilityInterface
     {
         /** @var $availability AvailabilityInterface */
         $availability = $this->init();
