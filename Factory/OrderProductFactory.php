@@ -30,7 +30,7 @@ class OrderProductFactory extends AbstractEntityFactory
     /**
      * @return OrderProductInterface
      */
-    public function create()
+    public function create() : OrderProductInterface
     {
         /** @var  $orderProduct OrderProductInterface */
         $orderProduct = $this->init();

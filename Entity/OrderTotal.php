@@ -19,7 +19,7 @@ use WellCommerce\Bundle\TaxBundle\Helper\TaxHelper;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class OrderTotal
+class OrderTotal implements OrderTotalInterface
 {
     /**
      * @var float
