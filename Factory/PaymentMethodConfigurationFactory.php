@@ -30,7 +30,7 @@ class PaymentMethodConfigurationFactory extends AbstractEntityFactory
     /**
      * @return PaymentMethodConfigurationInterface
      */
-    public function create()
+    public function create() : PaymentMethodConfigurationInterface
     {
         /** @var  $paymentMethodConfiguration PaymentMethodConfigurationInterface */
         $paymentMethodConfiguration = $this->init();

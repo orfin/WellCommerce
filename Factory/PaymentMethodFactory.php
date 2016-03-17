@@ -32,7 +32,7 @@ class PaymentMethodFactory extends AbstractEntityFactory
     /**
      * @return PaymentMethodInterface
      */
-    public function create()
+    public function create() : PaymentMethodInterface
     {
         /** @var  $paymentMethod PaymentMethodInterface */
         $paymentMethod = $this->init();
