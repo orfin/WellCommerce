@@ -37,7 +37,7 @@ class OrderContext implements OrderContextInterface
     /**
      * {@inheritdoc}
      */
-    public function getCurrentOrder()
+    public function getCurrentOrder() : OrderInterface
     {
         return $this->currentOrder;
     }
@@ -45,7 +45,7 @@ class OrderContext implements OrderContextInterface
     /**
      * {@inheritdoc}
      */
-    public function hasCurrentOrder()
+    public function hasCurrentOrder() : bool
     {
         return $this->currentOrder instanceof OrderInterface;
     }
