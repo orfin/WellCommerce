@@ -31,7 +31,7 @@ class DelivererFactory extends AbstractEntityFactory
     /**
      * @return DelivererInterface
      */
-    public function create()
+    public function create() : DelivererInterface
     {
         /** @var $deliverer DelivererInterface */
         $deliverer = $this->init();
