@@ -32,7 +32,7 @@ class AttributeFactory extends AbstractEntityFactory
     /**
      * @return AttributeInterface
      */
-    public function create()
+    public function create() : AttributeInterface
     {
         /** @var $attribute AttributeInterface */
         $attribute = $this->init();
