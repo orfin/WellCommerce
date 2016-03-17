@@ -34,7 +34,7 @@ class ShopFactory extends AbstractEntityFactory
     /**
      * @return ShopInterface
      */
-    public function create()
+    public function create() : ShopInterface
     {
         /** @var  $shop ShopInterface */
         $shop = $this->init();
