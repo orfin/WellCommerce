@@ -27,7 +27,7 @@ class ShopContext extends AbstractShopContext implements ShopContextInterface
     /**
      * {@inheritdoc}
      */
-    public function getSessionAttributeName()
+    public function getSessionAttributeName() : string
     {
         return self::SHOP_CONTEXT_SESSION_ATTRIBUTE;
     }
