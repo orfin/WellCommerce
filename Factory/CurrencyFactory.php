@@ -30,7 +30,7 @@ class CurrencyFactory extends AbstractEntityFactory
     /**
      * @return CurrencyInterface
      */
-    public function create()
+    public function create() : CurrencyInterface
     {
         /** @var $currency CurrencyInterface */
         $currency = $this->init();
