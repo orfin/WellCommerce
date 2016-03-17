@@ -13,6 +13,8 @@
 namespace WellCommerce\Bundle\ReviewBundle\Entity;
 
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
+use WellCommerce\Bundle\DoctrineBundle\Behaviours\Enableable\EnableableInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareInterface;
 
 /**
@@ -20,40 +22,35 @@ use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ReviewInterface extends ProductAwareInterface, TimestampableInterface
+interface ReviewInterface extends EntityInterface, EnableableInterface, ProductAwareInterface, TimestampableInterface
 {
-    /**
-     * @return int
-     */
-    public function getId();
-
     /**
      * @return string
      */
-    public function getNick();
+    public function getNick() : string;
 
     /**
      * @param string $nick
      */
-    public function setNick($nick);
+    public function setNick(string $nick);
 
     /**
      * @return string
      */
-    public function getReview();
+    public function getReview() : string;
 
     /**
      * @param string $review
      */
-    public function setReview($review);
+    public function setReview(string $review);
 
     /**
      * @return int
      */
-    public function getRating();
+    public function getRating() : int;
 
     /**
      * @param int $rating
      */
-    public function setRating($rating);
+    public function setRating(int $rating);
 }

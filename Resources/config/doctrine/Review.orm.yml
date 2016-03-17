@@ -17,6 +17,9 @@ WellCommerce\Bundle\ReviewBundle\Entity\Review:
         rating:
             type: integer
             nullable: false
+        enabled:
+            type: boolean
+            nullable: false
     manyToOne:
         product:
             targetEntity: WellCommerce\Bundle\ProductBundle\Entity\Product
