@@ -30,7 +30,7 @@ class PackageFactory extends AbstractEntityFactory
     /**
      * @return PackageInterface
      */
-    public function create()
+    public function create() : DictionaryInterface
     {
         /** @var  $package PackageInterface */
         $package = $this->init();
