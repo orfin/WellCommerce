@@ -31,7 +31,7 @@ class ThemeFactory extends AbstractEntityFactory
     /**
      * @return ThemeInterface
      */
-    public function create()
+    public function create() : ThemeInterface
     {
         /** @var  $theme ThemeInterface */
         $theme = $this->init();
