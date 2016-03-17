@@ -30,7 +30,7 @@ class CartTotalsFactory extends AbstractEntityFactory
     /**
      * @return CartTotalsInterface
      */
-    public function create()
+    public function create() : CartTotalsInterface
     {
         /** @var $totals CartTotalsInterface */
         $totals = $this->init();

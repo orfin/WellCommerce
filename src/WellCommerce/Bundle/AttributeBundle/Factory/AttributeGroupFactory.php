@@ -31,7 +31,7 @@ class AttributeGroupFactory extends AbstractEntityFactory
     /**
      * @return AttributeGroupInterface
      */
-    public function create()
+    public function create() : AttributeGroupInterface
     {
         /** @var $group AttributeGroupInterface */
         $group = $this->init();

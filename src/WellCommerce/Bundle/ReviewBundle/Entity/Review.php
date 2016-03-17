@@ -13,6 +13,8 @@
 namespace WellCommerce\Bundle\ReviewBundle\Entity;
 
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
+use WellCommerce\Bundle\DoctrineBundle\Behaviours\Enableable\EnableableTrait;
+use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareTrait;
 
 /**
@@ -20,15 +22,11 @@ use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareTrait;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Review implements ReviewInterface
+class Review extends AbstractEntity implements ReviewInterface
 {
     use Timestampable;
     use ProductAwareTrait;
-
-    /**
-     * @var int
-     */
-    protected $id;
+    use EnableableTrait;
 
     /**
      * @var string
@@ -48,15 +46,7 @@ class Review implements ReviewInterface
     /**
      * {@inheritdoc}
      */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getNick()
+    public function getNick() : string
     {
         return $this->nick;
     }
@@ -64,7 +54,7 @@ class Review implements ReviewInterface
     /**
      * {@inheritdoc}
      */
-    public function setNick($nick)
+    public function setNick(string $nick)
     {
         $this->nick = $nick;
     }
@@ -72,7 +62,7 @@ class Review implements ReviewInterface
     /**
      * {@inheritdoc}
      */
-    public function getReview()
+    public function getReview() : string
     {
         return $this->review;
     }
@@ -80,7 +70,7 @@ class Review implements ReviewInterface
     /**
      * {@inheritdoc}
      */
-    public function setReview($review)
+    public function setReview(string $review)
     {
         $this->review = $review;
     }
@@ -88,7 +78,7 @@ class Review implements ReviewInterface
     /**
      * {@inheritdoc}
      */
-    public function getRating()
+    public function getRating() : int
     {
         return $this->rating;
     }
@@ -96,7 +86,7 @@ class Review implements ReviewInterface
     /**
      * {@inheritdoc}
      */
-    public function setRating($rating)
+    public function setRating(int $rating)
     {
         $this->rating = $rating;
     }

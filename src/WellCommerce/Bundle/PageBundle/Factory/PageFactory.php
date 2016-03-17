@@ -31,7 +31,7 @@ class PageFactory extends AbstractEntityFactory
     /**
      * @return PageInterface
      */
-    public function create()
+    public function create() : PageInterface
     {
         /** @var  $page PageInterface */
         $page = $this->init();

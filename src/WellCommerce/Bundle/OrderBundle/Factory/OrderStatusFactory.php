@@ -31,7 +31,7 @@ class OrderStatusFactory extends AbstractEntityFactory
     /**
      * @return OrderStatusInterface
      */
-    public function create()
+    public function create() : OrderStatusInterface
     {
         /** @var  $status OrderStatusInterface */
         $status = $this->init();

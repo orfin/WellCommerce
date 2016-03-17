@@ -31,14 +31,14 @@ class ClientGroupFactory extends AbstractEntityFactory
     /**
      * @return ClientGroupInterface
      */
-    public function create()
+    public function create() : ClientGroupInterface
     {
-        /** @var $clientGroup ClientGroupInterface */
-        $clientGroup = $this->init();
-        $clientGroup->setDiscount(0);
-        $clientGroup->setClients(new ArrayCollection());
-        $clientGroup->setPages(new ArrayCollection());
+        /** @var $group ClientGroupInterface */
+        $group = $this->init();
+        $group->setDiscount(0);
+        $group->setClients(new ArrayCollection());
+        $group->setPages(new ArrayCollection());
 
-        return $clientGroup;
+        return $group;
     }
 }

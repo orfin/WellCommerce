@@ -30,7 +30,7 @@ class NewsFactory extends AbstractEntityFactory
     /**
      * @return NewsInterface
      */
-    public function create()
+    public function create() : NewsInterface
     {
         /** @var $news NewsInterface */
         $news = $this->init();

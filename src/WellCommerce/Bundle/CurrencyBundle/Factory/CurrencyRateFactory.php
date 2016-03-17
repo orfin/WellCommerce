@@ -30,7 +30,7 @@ class CurrencyRateFactory extends AbstractEntityFactory
     /**
      * @return CurrencyRateInterface
      */
-    public function create()
+    public function create() : CurrencyRateInterface
     {
         /** @var $currencyRate CurrencyRateInterface */
         $currencyRate = $this->init();

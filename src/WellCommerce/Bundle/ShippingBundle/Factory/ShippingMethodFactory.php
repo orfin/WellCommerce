@@ -32,7 +32,7 @@ class ShippingMethodFactory extends AbstractEntityFactory
     /**
      * @return ShippingMethodInterface
      */
-    public function create()
+    public function create() : ShippingMethodInterface
     {
         /** @var  $shippingMethod ShippingMethodInterface */
         $shippingMethod = $this->init();

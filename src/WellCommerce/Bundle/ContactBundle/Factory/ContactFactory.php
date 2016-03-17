@@ -30,7 +30,7 @@ class ContactFactory extends AbstractEntityFactory
     /**
      * @return ContactInterface
      */
-    public function create()
+    public function create() : ContactInterface
     {
         /** @var $contact ContactInterface */
         $contact = $this->init();

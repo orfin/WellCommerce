@@ -30,7 +30,7 @@ class OrderTotalDetailFactory extends AbstractEntityFactory
     /**
      * @return OrderTotalDetailInterface
      */
-    public function create()
+    public function create() : OrderTotalDetailInterface
     {
         /** @var  $detail OrderTotalDetailInterface */
         $detail = $this->init();

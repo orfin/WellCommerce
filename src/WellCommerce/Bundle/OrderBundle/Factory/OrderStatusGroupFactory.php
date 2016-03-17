@@ -30,7 +30,7 @@ class OrderStatusGroupFactory extends AbstractEntityFactory
     /**
      * @return OrderStatusGroupInterface
      */
-    public function create()
+    public function create() : OrderStatusGroupInterface
     {
         /** @var  $group OrderStatusGroupInterface */
         $group = $this->init();

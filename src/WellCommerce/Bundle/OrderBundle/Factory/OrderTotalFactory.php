@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\OrderBundle\Factory;
 
 use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderTotal;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderTotalInterface;
 
 /**
  * Class OrderTotalFactory
@@ -25,28 +26,28 @@ class OrderTotalFactory extends AbstractEntityFactory
     /**
      * Creates an order total from given values
      *
-     * @param int|float $grossAmount
-     * @param int|float $taxRate
-     * @param string    $currency
+     * @param float  $grossAmount
+     * @param float  $taxRate
+     * @param string $currency
      *
-     * @return OrderTotal
+     * @return OrderTotalInterface
      */
-    public function createFromSpecifiedValues($grossAmount, $taxRate, $currency)
+    public function createFromSpecifiedValues(float $grossAmount, float $taxRate, string $currency) : OrderTotalInterface
     {
         $orderTotal = $this->create();
         $orderTotal->setGrossAmount($grossAmount);
         $orderTotal->setTaxRate($taxRate);
         $orderTotal->setCurrency($currency);
-
+        
         $orderTotal->recalculate();
 
         return $orderTotal;
     }
 
     /**
-     * @return OrderTotal
+     * @return OrderTotalInterface
      */
-    public function create()
+    public function create() : OrderTotalInterface
     {
         $orderTotal = new OrderTotal();
         $orderTotal->setGrossAmount(0);

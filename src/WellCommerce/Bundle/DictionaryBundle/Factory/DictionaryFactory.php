@@ -30,7 +30,7 @@ class DictionaryFactory extends AbstractEntityFactory
     /**
      * @return DictionaryInterface
      */
-    public function create()
+    public function create() : DictionaryInterface
     {
         /** @var $dictionary DictionaryInterface */
         $dictionary = $this->init();

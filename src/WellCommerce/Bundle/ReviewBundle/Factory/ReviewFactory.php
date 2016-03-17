@@ -30,10 +30,14 @@ class ReviewFactory extends AbstractEntityFactory
     /**
      * @return ReviewInterface
      */
-    public function create()
+    public function create() : ReviewInterface
     {
         /** @var  $review ReviewInterface */
         $review = $this->init();
+        $review->setNick('');
+        $review->setRating(0);
+        $review->setReview('');
+        $review->setEnabled(false);
 
         return $review;
     }

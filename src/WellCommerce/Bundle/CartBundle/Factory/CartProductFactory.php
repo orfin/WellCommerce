@@ -30,7 +30,7 @@ class CartProductFactory extends AbstractEntityFactory
     /**
      * @return CartProductInterface
      */
-    public function create()
+    public function create() : CartProductInterface
     {
         /** @var $cartProduct CartProductInterface */
         $cartProduct = $this->init();

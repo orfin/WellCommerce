@@ -30,7 +30,7 @@ class LocaleFactory extends AbstractEntityFactory
     /**
      * @return LocaleInterface
      */
-    public function create()
+    public function create() : LocaleInterface
     {
         /** @var $locale LocaleInterface */
         $locale = $this->init();

@@ -18,6 +18,7 @@ use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 use WellCommerce\Bundle\AppBundle\Entity\HierarchyAwareTrait;
 use WellCommerce\Bundle\DoctrineBundle\Behaviours\Enableable\EnableableTrait;
+use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 use WellCommerce\Bundle\ShopBundle\Entity\ShopCollectionAwareTrait;
 
@@ -26,7 +27,7 @@ use WellCommerce\Bundle\ShopBundle\Entity\ShopCollectionAwareTrait;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Category implements CategoryInterface
+class Category extends AbstractEntity implements CategoryInterface
 {
     use Translatable;
     use Timestampable;
@@ -34,11 +35,6 @@ class Category implements CategoryInterface
     use EnableableTrait;
     use ShopCollectionAwareTrait;
     use HierarchyAwareTrait;
-
-    /**
-     * @var integer
-     */
-    protected $id;
 
     /**
      * @var null|CategoryInterface
@@ -54,14 +50,6 @@ class Category implements CategoryInterface
      * @var Collection
      */
     protected $products;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 
     /**
      * {@inheritdoc}

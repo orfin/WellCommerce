@@ -31,7 +31,7 @@ class CompanyFactory extends AbstractEntityFactory
     /**
      * @return CompanyInterface
      */
-    public function create()
+    public function create() : CompanyInterface
     {
         /** @var $company CompanyInterface */
         $company = $this->init();
