@@ -30,7 +30,7 @@ class UnitFactory extends AbstractEntityFactory
     /**
      * @return UnitInterface
      */
-    public function create()
+    public function create() : UnitInterface
     {
         /** @var  $unit UnitInterface */
         $unit = $this->init();
