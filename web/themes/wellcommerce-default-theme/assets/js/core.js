@@ -316,10 +316,13 @@ var GProductAddCartForm = function(oOptions) {
     gThis._Constructor = function() {
         gThis.m_gForm = $("form", gThis);
         gThis.m_gForm.submit(gThis.OnFormSubmit);
-        $(gThis).find(gThis.m_oOptions.sAttributesSelectClass).change(function(){
+        var variantsTotal = Object.keys(gThis.m_oOptions.aoVariants).length;
+        if(variantsTotal > 0){
+            $(gThis).find(gThis.m_oOptions.sAttributesSelectClass).change(function(){
+                gThis.UpdateAttributes();
+            });
             gThis.UpdateAttributes();
-        });
-        gThis.UpdateAttributes();
+        }
     };
 
     gThis.UpdateAttributes = function(){
@@ -329,8 +332,6 @@ var GProductAddCartForm = function(oOptions) {
         });
         attributes.sort(function(a,b){return a - b});
         var checkedVariant = attributes.join(',');
-
-        console.log(checkedVariant);
 
         if(gThis.m_oOptions.aoVariants[checkedVariant] != undefined){
             var variant = gThis.m_oOptions.aoVariants[checkedVariant];
