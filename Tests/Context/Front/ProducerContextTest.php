@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\ProducerBundle\Tests\Context\Front;
 
 use WellCommerce\Bundle\CoreBundle\Test\AbstractTestCase;
+use WellCommerce\Bundle\ProducerBundle\Entity\ProducerInterface;
 
 /**
  * Class ProducerContextTest
@@ -26,10 +27,9 @@ class ProducerContextTest extends AbstractTestCase
         $factory  = $this->container->get('producer.factory');
         $context  = $this->container->get('producer.context.front');
         $producer = $factory->create();
-        $this->assertNull($context->getCurrentProducer());
 
         $context->setCurrentProducer($factory->create());
-        $this->assertInstanceOf(\WellCommerce\Bundle\ProducerBundle\Entity\ProducerInterface::class, $context->getCurrentProducer());
+        $this->assertInstanceOf(ProducerInterface::class, $context->getCurrentProducer());
         $this->assertEquals($producer, $context->getCurrentProducer());
     }
 }
