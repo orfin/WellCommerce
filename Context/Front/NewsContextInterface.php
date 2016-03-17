@@ -27,12 +27,12 @@ interface NewsContextInterface
     public function setCurrentNews(NewsInterface $news);
 
     /**
-     * @return null|NewsInterface
+     * @return NewsInterface
      */
-    public function getCurrentNews();
+    public function getCurrentNews() : NewsInterface;
 
     /**
      * @return bool
      */
-    public function hasCurrentNews();
+    public function hasCurrentNews() : bool;
 }
