@@ -31,16 +31,16 @@ class CategoryFactory extends AbstractEntityFactory
     /**
      * @return CategoryInterface
      */
-    public function create()
+    public function create() : CategoryInterface
     {
         /** @var $category CategoryInterface */
         $category = $this->init();
-        $category->setChildren(new ArrayCollection());
-        $category->setProducts(new ArrayCollection());
         $category->setEnabled(true);
         $category->setHierarchy(0);
         $category->setParent(null);
         $category->setShops(new ArrayCollection());
+        $category->setChildren(new ArrayCollection());
+        $category->setProducts(new ArrayCollection());
 
         return $category;
     }
