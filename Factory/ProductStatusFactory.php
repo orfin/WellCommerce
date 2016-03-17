@@ -29,9 +29,9 @@ class ProductStatusFactory extends AbstractEntityFactory
     protected $supportsInterface = ProductStatusInterface::class;
 
     /**
-     * @return \WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusInterface
+     * @return ProductStatusInterface
      */
-    public function create()
+    public function create() : ProductStatusInterface
     {
         /** @var  $productStatus ProductStatusInterface */
         $productStatus = $this->init();
