@@ -27,17 +27,17 @@ interface ThemeContextInterface
     public function setCurrentTheme(ThemeInterface $theme);
 
     /**
-     * @return null|ThemeInterface
+     * @return ThemeInterface
      */
-    public function getCurrentTheme();
+    public function getCurrentTheme() : ThemeInterface;
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getCurrentThemeFolder();
+    public function getCurrentThemeFolder() : string;
 
     /**
      * @return bool
      */
-    public function hasCurrentTheme();
+    public function hasCurrentTheme() : bool;
 }
