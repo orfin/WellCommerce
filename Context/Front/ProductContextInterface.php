@@ -27,12 +27,12 @@ interface ProductContextInterface
     public function setCurrentProduct(ProductInterface $product);
 
     /**
-     * @return null|ProductInterface
+     * @return ProductInterface
      */
-    public function getCurrentProduct();
+    public function getCurrentProduct() : ProductInterface;
 
     /**
      * @return bool
      */
-    public function hasCurrentProduct();
+    public function hasCurrentProduct() : bool;
 }
