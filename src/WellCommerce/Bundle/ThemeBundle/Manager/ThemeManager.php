@@ -69,9 +69,11 @@ class ThemeManager implements ThemeManagerInterface
      */
     public function getCurrentThemeFolder()
     {
-        $folder = $this->themeContext->getCurrentThemeFolder();
+        if (false === $this->themeContext->hasCurrentTheme()) {
+            return $this->fallBackTheme;
+        }
 
-        return (null === $folder) ? $this->fallBackTheme : $folder;
+        return $this->themeContext->getCurrentThemeFolder();
     }
 
     /**

@@ -31,7 +31,7 @@ class TemplatePathsCacheWarmer extends BaseTemplatePathsCacheWarmer
      * @var \WellCommerce\Bundle\ThemeBundle\Locator\TemplateLocator
      */
     protected $locator;
-
+    
     /**
      * Warms up the cache.
      *
@@ -45,10 +45,10 @@ class TemplatePathsCacheWarmer extends BaseTemplatePathsCacheWarmer
         foreach ($allTemplates as $template) {
             $this->locateTemplate($locator, $template, $templates);
         }
-
+        
         $this->writeCacheFile($cacheDir . '/templates.php', sprintf('<?php return %s;', var_export($templates, true)));
     }
-
+    
     /**
      * Checks whether this warmer is optional or not.
      *
@@ -58,7 +58,7 @@ class TemplatePathsCacheWarmer extends BaseTemplatePathsCacheWarmer
     {
         return false;
     }
-
+    
     /**
      * Locates and appends template to an array
      *

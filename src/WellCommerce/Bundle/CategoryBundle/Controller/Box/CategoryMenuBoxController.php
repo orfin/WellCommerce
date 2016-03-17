@@ -25,8 +25,13 @@ class CategoryMenuBoxController extends AbstractBoxController
 {
     public function indexAction(LayoutBoxSettingsCollection $boxSettings) : Response
     {
+        $activeCategory = 0;
+        if ($this->manager->getCategoryContext()->hasCurrentCategory()) {
+            $activeCategory = $this->manager->getCategoryContext()->getCurrentCategoryIdentifier();
+        }
+
         return $this->displayTemplate('index', [
-            'active' => $this->manager->getCategoryContext()->getCurrentCategoryIdentifier()
+            'active' => $activeCategory
         ]);
     }
 }
