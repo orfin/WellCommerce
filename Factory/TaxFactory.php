@@ -30,7 +30,7 @@ class TaxFactory extends AbstractEntityFactory
     /**
      * @return TaxInterface
      */
-    public function create()
+    public function create() : TaxInterface
     {
         /** @var  $tax TaxInterface */
         $tax = $this->init();
