@@ -30,7 +30,7 @@ class WishlistFactory extends AbstractEntityFactory
     /**
      * @return WishlistInterface
      */
-    public function create()
+    public function create() : WishlistInterface
     {
         /** @var  $wishlist WishlistInterface */
         $wishlist = $this->init();
