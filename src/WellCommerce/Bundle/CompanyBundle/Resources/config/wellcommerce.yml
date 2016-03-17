@@ -12,6 +12,8 @@ well_commerce_company:
                 dataset: company.dataset.admin
                 manager: company.manager.admin
         company_address:
+            auto_services:
+                factory: WellCommerce\Bundle\CompanyBundle\Factory\CompanyAddressFactory
             orm_configuration:
                 mapping: "@WellCommerceCompanyBundle/Resources/config/doctrine/CompanyAddress.orm.yml"
                 entity: WellCommerce\Bundle\CompanyBundle\Entity\CompanyAddress
