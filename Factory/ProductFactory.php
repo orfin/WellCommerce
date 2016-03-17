@@ -33,9 +33,9 @@ class ProductFactory extends AbstractEntityFactory
     protected $supportsInterface = ProductInterface::class;
 
     /**
-     * @return \WellCommerce\Bundle\ProductBundle\Entity\ProductInterface
+     * @return ProductInterface
      */
-    public function create()
+    public function create() : ProductInterface
     {
         $unit = $this->getDefaultUnit();
         $tax = $this->getDefaultTax();

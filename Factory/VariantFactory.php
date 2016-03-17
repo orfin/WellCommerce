@@ -31,7 +31,7 @@ class VariantFactory extends AbstractEntityFactory
     /**
      * @return VariantInterface
      */
-    public function create()
+    public function create() : VariantInterface
     {
         /** @var  $variant VariantInterface */
         $variant = $this->init();
