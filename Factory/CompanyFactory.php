@@ -37,7 +37,7 @@ class CompanyFactory extends AbstractEntityFactory
         $company = $this->init();
         $company->setName('');
         $company->setShortName('');
-        $company->setAddress(new CompanyAddress());
+        $company->setAddress($this->get('company_address.factory')->create());
 
         return $company;
     }
