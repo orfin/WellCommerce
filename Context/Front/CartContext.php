@@ -50,7 +50,7 @@ class CartContext implements CartContextInterface
         if ($this->hasCurrentCart()) {
             return $this->getCurrentCart()->getId();
         }
-
+        
         return 0;
     }
 
