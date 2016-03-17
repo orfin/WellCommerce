@@ -31,12 +31,11 @@ class ProducerFactory extends AbstractEntityFactory
     /**
      * @return ProducerInterface
      */
-    public function create()
+    public function create() : ProducerInterface
     {
         /** @var  $producer ProducerInterface */
         $producer = $this->init();
         $producer->setDeliverers(new ArrayCollection());
-        $producer->setPhoto(null);
         $producer->setShops(new ArrayCollection());
 
         return $producer;
