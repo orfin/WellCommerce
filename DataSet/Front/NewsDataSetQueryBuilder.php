@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\NewsBundle\DataSet\Front;
 
-use WellCommerce\Bundle\AppBundle\DataSet\Admin\NewsDataSetQueryBuilder as BaseQueryBuilder;
+use WellCommerce\Bundle\NewsBundle\DataSet\Admin\NewsDataSetQueryBuilder as BaseQueryBuilder;
 
 /**
  * Class NewsDataSetQueryBuilder
