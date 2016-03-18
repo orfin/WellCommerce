@@ -12,6 +12,8 @@
 namespace WellCommerce\Bundle\DoctrineBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Mapping\ClassMetadata;
+use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 
 /**
@@ -25,11 +27,9 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
     const TRANSLATIONS_ASSOCIATION_FIELD = 'translatable';
 
     /**
-     * Returns class metadata
-     *
-     * @return \Doctrine\ORM\Mapping\ClassMetadata
+     * {@inheritdoc}
      */
-    public function getMetadata()
+    public function getMetadata() : ClassMetadata
     {
         return $this->_class;
     }
@@ -37,7 +37,7 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
     /**
      * {@inheritdoc}
      */
-    public function getAlias()
+    public function getAlias() : string
     {
         $parts      = explode('\\', $this->getEntityName());
         $entityName = end($parts);
@@ -48,7 +48,7 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
     /**
      * {@inheritdoc}
      */
-    public function getDataSetQueryBuilder()
+    public function getDataSetQueryBuilder() : QueryBuilder
     {
         $queryBuilder    = $this->getQueryBuilder();
         $metadata        = $this->getMetadata();
@@ -72,11 +72,9 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
     }
 
     /**
-     * Creates QueryBuilder instance
-     *
-     * @return \Doctrine\ORM\QueryBuilder
+     * {@inheritdoc}
      */
-    public function getQueryBuilder()
+    public function getQueryBuilder() : QueryBuilder
     {
         return $this->createQueryBuilder($this->getAlias());
     }
