@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Component\DataSet\Paginator;
 
-use Doctrine\Common\Util\Debug;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
