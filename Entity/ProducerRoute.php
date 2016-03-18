@@ -27,7 +27,7 @@ class ProducerRoute extends Route implements RouteInterface
      */
     protected $identifier;
 
-    public function getType()
+    public function getType() : string
     {
         return 'producer';
     }
