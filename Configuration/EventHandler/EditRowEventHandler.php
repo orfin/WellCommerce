@@ -22,7 +22,7 @@ class EditRowEventHandler extends ClickRowEventHandler
     /**
      * {@inheritdoc}
      */
-    public function getFunctionName()
+    public function getFunctionName() : string
     {
         return 'edit_row';
     }

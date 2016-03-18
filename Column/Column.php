@@ -67,7 +67,7 @@ class Column implements ColumnInterface
     /**
      * {@inheritdoc}
      */
-    public function getId()
+    public function getId() : string
     {
         return $this->options['id'];
     }
@@ -75,7 +75,7 @@ class Column implements ColumnInterface
     /**
      * {@inheritdoc}
      */
-    public function getEditable()
+    public function getEditable() : bool
     {
         return $this->options['editable'];
     }
@@ -83,7 +83,7 @@ class Column implements ColumnInterface
     /**
      * {@inheritdoc}
      */
-    public function getSelectable()
+    public function getSelectable() : bool
     {
         return $this->options['selectable'];
     }
@@ -91,7 +91,7 @@ class Column implements ColumnInterface
     /**
      * {@inheritdoc}
      */
-    public function getCaption()
+    public function getCaption() : string
     {
         return $this->options['caption'];
     }
@@ -99,7 +99,7 @@ class Column implements ColumnInterface
     /**
      * {@inheritdoc}
      */
-    public function getSorting()
+    public function getSorting() : Sorting
     {
         return $this->options['sorting'];
     }
@@ -107,7 +107,7 @@ class Column implements ColumnInterface
     /**
      * {@inheritdoc}
      */
-    public function getAppearance()
+    public function getAppearance() : Appearance
     {
         return $this->options['appearance'];
     }
@@ -115,7 +115,7 @@ class Column implements ColumnInterface
     /**
      * {@inheritdoc}
      */
-    public function getFilter()
+    public function getFilter() : Filter
     {
         return $this->options['filter'];
     }

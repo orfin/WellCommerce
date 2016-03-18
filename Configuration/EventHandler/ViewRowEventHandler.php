@@ -22,7 +22,7 @@ class ViewRowEventHandler extends AbstractRowEventHandler
     /**
      * {@inheritdoc}
      */
-    public function getFunctionName()
+    public function getFunctionName() : string
     {
         return 'view_row';
     }

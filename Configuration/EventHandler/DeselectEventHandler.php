@@ -22,7 +22,7 @@ class DeselectEventHandler extends AbstractEventHandler
     /**
      * {@inheritdoc}
      */
-    public function getFunctionName()
+    public function getFunctionName() : string
     {
         return 'deselect';
     }

@@ -12,6 +12,10 @@
 
 namespace WellCommerce\Component\DataGrid\Column;
 
+use WellCommerce\Component\DataGrid\Column\Options\Appearance;
+use WellCommerce\Component\DataGrid\Column\Options\Filter;
+use WellCommerce\Component\DataGrid\Column\Options\Sorting;
+
 /**
  * Interface ColumnInterface
  *
@@ -37,47 +41,47 @@ interface ColumnInterface
      *
      * @return string
      */
-    public function getId();
+    public function getId() : string;
 
     /**
      * Returns column editable status
      *
-     * @return boolean
+     * @return bool
      */
-    public function getEditable();
+    public function getEditable() : bool;
 
     /**
      * Returns column selectable status
      *
-     * @return boolean
+     * @return bool
      */
-    public function getSelectable();
+    public function getSelectable() : bool;
 
     /**
      * Returns column caption
      *
      * @return string
      */
-    public function getCaption();
+    public function getCaption() : string;
 
     /**
      * Returns column sorting options
      *
-     * @return string
+     * @return Sorting
      */
-    public function getSorting();
+    public function getSorting() : Sorting;
 
     /**
      * Returns column appearance options
      *
-     * @return string
+     * @return Appearance
      */
-    public function getAppearance();
+    public function getAppearance() : Appearance;
 
     /**
      * Returns column filtering options
      *
-     * @return string
+     * @return Filter
      */
-    public function getFilter();
+    public function getFilter() : Filter;
 }

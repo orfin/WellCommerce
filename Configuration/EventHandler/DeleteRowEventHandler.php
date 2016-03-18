@@ -22,7 +22,7 @@ class DeleteRowEventHandler extends AbstractRowEventHandler
     /**
      * {@inheritdoc}
      */
-    public function getFunctionName()
+    public function getFunctionName() : string
     {
         return 'delete_row';
     }

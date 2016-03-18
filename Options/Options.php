@@ -66,7 +66,7 @@ class Options implements OptionsInterface
     /**
      * {@inheritdoc}
      */
-    public function setIdentifier($identifier)
+    public function setIdentifier(string $identifier)
     {
         $this->options['identifier'] = $identifier;
     }
@@ -74,7 +74,7 @@ class Options implements OptionsInterface
     /**
      * {@inheritdoc}
      */
-    public function getIdentifier()
+    public function getIdentifier() : string
     {
         return $this->options['identifier'];
     }
@@ -90,7 +90,7 @@ class Options implements OptionsInterface
     /**
      * {@inheritdoc}
      */
-    public function getAppearance()
+    public function getAppearance() : Appearance
     {
         return $this->options['appearance'];
     }
@@ -106,7 +106,7 @@ class Options implements OptionsInterface
     /**
      * {@inheritdoc}
      */
-    public function getMechanics()
+    public function getMechanics() : Mechanics
     {
         return $this->options['mechanics'];
     }
@@ -122,7 +122,7 @@ class Options implements OptionsInterface
     /**
      * {@inheritdoc}
      */
-    public function getEventHandlers()
+    public function getEventHandlers() : EventHandlers
     {
         return $this->options['event_handlers'];
     }

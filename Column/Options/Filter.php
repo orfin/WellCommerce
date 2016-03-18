@@ -70,7 +70,7 @@ class Filter extends AbstractOptions
      *
      * @return array
      */
-    protected function prepareValues($values)
+    private function prepareValues(array $values) : array
     {
         $filterOptions = [];
         foreach ($values as $key => $value) {

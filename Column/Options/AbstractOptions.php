@@ -50,7 +50,7 @@ abstract class AbstractOptions
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString() : string
     {
         $data = [];
         foreach ($this->options as $key => $value) {

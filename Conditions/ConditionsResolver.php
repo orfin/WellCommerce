@@ -29,7 +29,7 @@ class ConditionsResolver
      *
      * @return ConditionsCollection
      */
-    public function resolveConditions($params, ConditionsCollection $conditions)
+    public function resolveConditions(array $params, ConditionsCollection $conditions) : ConditionsCollection
     {
         if (is_array($params)) {
             foreach ($params as $where) {
@@ -49,11 +49,11 @@ class ConditionsResolver
      *
      * @return array
      */
-    private function parseParam(array $param)
+    private function parseParam(array $param) : array
     {
         $column   = $param['column'];
         $operator = $param['operator'];
-        $value    = isset($param['value']) ? $param['value'] : null;
+        $value    = $param['value'] ?? null;
 
         return [
             $column,

@@ -63,7 +63,7 @@ abstract class AbstractEventHandler implements EventHandlerInterface
      * @return mixed
      * @throws \InvalidArgumentException
      */
-    public function get($option)
+    public function get(string $option)
     {
         if (!isset($this->options[$option])) {
             throw new \InvalidArgumentException(sprintf('Option "%s" does not exists.', $option));
@@ -79,7 +79,7 @@ abstract class AbstractEventHandler implements EventHandlerInterface
      *
      * @return bool
      */
-    public function has($option)
+    public function has(string $option) : bool
     {
         return isset($this->options[$option]);
     }
@@ -87,7 +87,7 @@ abstract class AbstractEventHandler implements EventHandlerInterface
     /**
      * {@inheritdoc}
      */
-    public function getOptions()
+    public function getOptions() : array
     {
         return $this->options;
     }
@@ -95,7 +95,7 @@ abstract class AbstractEventHandler implements EventHandlerInterface
     /**
      * {@inheritdoc}
      */
-    public function isCustomEvent()
+    public function isCustomEvent() : bool
     {
         return false;
     }

@@ -41,7 +41,7 @@ class EventHandlers implements \IteratorAggregate, \Countable
      *
      * @return int
      */
-    public function count()
+    public function count() : int
     {
         return count($this->eventHandlers);
     }
@@ -49,9 +49,9 @@ class EventHandlers implements \IteratorAggregate, \Countable
     /**
      * Returns all event handlers
      *
-     * @return mixed
+     * @return array
      */
-    public function all()
+    public function all() : array
     {
         return $this->eventHandlers;
     }
@@ -71,10 +71,10 @@ class EventHandlers implements \IteratorAggregate, \Countable
      *
      * @param $name
      *
-     * @return mixed
+     * @return EventHandlerInterface
      * @throws \InvalidArgumentException
      */
-    public function get($name)
+    public function get(string $name) : EventHandlerInterface
     {
         if (!isset($this->eventHandlers[$name])) {
             throw new \InvalidArgumentException(sprintf('DataGrid event handler %s not found', $name));
@@ -88,7 +88,7 @@ class EventHandlers implements \IteratorAggregate, \Countable
      *
      * @return string
      */
-    public function __toString()
+    public function __toString() : string
     {
         $attributes = [];
         foreach ($this->all() as $eventHandlerName => $options) {

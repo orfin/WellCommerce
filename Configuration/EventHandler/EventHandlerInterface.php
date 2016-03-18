@@ -24,19 +24,19 @@ interface EventHandlerInterface
      *
      * @return string
      */
-    public function getFunctionName();
+    public function getFunctionName() : string;
 
     /**
      * Returns event options
      *
      * @return array
      */
-    public function getOptions();
+    public function getOptions() : array;
 
     /**
      * Returns boolean indicating if event is custom
      *
      * @return bool
      */
-    public function isCustomEvent();
+    public function isCustomEvent() : bool;
 }

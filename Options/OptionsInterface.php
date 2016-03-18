@@ -37,17 +37,15 @@ interface OptionsInterface
      * Sets DataGrid identifier
      *
      * @param string $identifier
-     *
-     * @return void
      */
-    public function setIdentifier($identifier);
+    public function setIdentifier(string $identifier);
 
     /**
      * Returns current DataGrid identifier
      *
      * @return string
      */
-    public function getIdentifier();
+    public function getIdentifier() : string;
 
     /**
      * Sets appearance options for DataGrid
@@ -63,7 +61,7 @@ interface OptionsInterface
      *
      * @return Appearance
      */
-    public function getAppearance();
+    public function getAppearance() : Appearance;
 
     /**
      * Sets mechanics options for DataGrid
@@ -79,7 +77,7 @@ interface OptionsInterface
      *
      * @return Mechanics
      */
-    public function getMechanics();
+    public function getMechanics() : Mechanics;
 
     /**
      * Sets event handlers for DataGrid
@@ -95,5 +93,5 @@ interface OptionsInterface
      *
      * @return EventHandlers
      */
-    public function getEventHandlers();
+    public function getEventHandlers() : EventHandlers;
 }
