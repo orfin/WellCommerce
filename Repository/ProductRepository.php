@@ -12,6 +12,7 @@
 namespace WellCommerce\Bundle\ProductBundle\Repository;
 
 use Doctrine\ORM\Query\Expr;
+use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
 
 /**
@@ -21,7 +22,10 @@ use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
  */
 class ProductRepository extends AbstractEntityRepository implements ProductRepositoryInterface
 {
-    public function getDataSetQueryBuilder()
+    /**
+     * {@inheritdoc}
+     */
+    public function getDataSetQueryBuilder() : QueryBuilder
     {
         $queryBuilder = $this->getQueryBuilder();
         $queryBuilder->groupBy('product.id');
