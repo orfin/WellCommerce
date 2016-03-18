@@ -12,37 +12,34 @@
 
 namespace WellCommerce\Bundle\RoutingBundle\Entity;
 
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
+
 /**
  * Interface RouteInterface
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-interface RouteInterface
+interface RouteInterface extends EntityInterface
 {
     /**
-     * @return mixed
+     * @return string
      */
-    public function getId();
+    public function getPath() : string;
 
     /**
-     * @return mixed
+     * @param string $path
      */
-    public function getPath();
+    public function setPath(string $path);
 
     /**
-     * @param mixed $path
+     * @return string
      */
-    public function setPath($path);
-
-    /**
-     * @return mixed
-     */
-    public function getLocale();
+    public function getLocale() : string;
 
     /**
      * @param string $locale
      */
-    public function setLocale($locale);
+    public function setLocale(string $locale);
 
     /**
      * @param object $identifier
@@ -57,5 +54,5 @@ interface RouteInterface
     /**
      * @return string
      */
-    public function getType();
+    public function getType() : string;
 }
