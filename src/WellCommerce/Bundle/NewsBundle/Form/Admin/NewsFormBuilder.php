@@ -58,31 +58,7 @@ class NewsFormBuilder extends AbstractFormBuilder
             'label' => $this->trans('news.label.content'),
         ]));
 
-        $metaData = $form->addChild($this->getElement('nested_fieldset', [
-            'name'  => 'meta_data',
-            'label' => $this->trans('common.fieldset.meta')
-        ]));
-
-        $languageData = $metaData->addChild($this->getElement('language_fieldset', [
-            'name'        => 'translations',
-            'label'       => $this->trans('common.fieldset.translations'),
-            'transformer' => $this->getRepositoryTransformer('translation', $repository)
-        ]));
-
-        $languageData->addChild($this->getElement('text_field', [
-            'name'  => 'meta.title',
-            'label' => $this->trans('common.label.meta.title')
-        ]));
-
-        $languageData->addChild($this->getElement('text_field', [
-            'name'  => 'meta.keywords',
-            'label' => $this->trans('common.label.meta.keywords'),
-        ]));
-
-        $languageData->addChild($this->getElement('text_area', [
-            'name'  => 'meta.description',
-            'label' => $this->trans('common.label.meta.description'),
-        ]));
+        $this->addMetadataFieldset($form, $repository);
 
         $form->addFilter($this->getFilter('trim'));
         $form->addFilter($this->getFilter('secure'));

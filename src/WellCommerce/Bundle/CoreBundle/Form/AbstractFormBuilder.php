@@ -36,17 +36,17 @@ abstract class AbstractFormBuilder extends AbstractContainerAware implements For
      * @var FormResolverFactoryInterface
      */
     protected $resolverFactory;
-
+    
     /**
      * @var FormHandlerInterface
      */
     protected $formHandler;
-
+    
     /**
      * @var EventDispatcherInterface
      */
     protected $eventDispatcher;
-
+    
     /**
      * Constructor
      *
@@ -63,7 +63,7 @@ abstract class AbstractFormBuilder extends AbstractContainerAware implements For
         $this->formHandler     = $formHandler;
         $this->eventDispatcher = $eventDispatcher;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -73,10 +73,10 @@ abstract class AbstractFormBuilder extends AbstractContainerAware implements For
         $this->buildForm($form);
         $this->eventDispatcher->dispatchOnFormInitEvent($this, $form, $defaultData);
         $this->formHandler->initForm($form, $defaultData);
-
+        
         return $form;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -84,7 +84,7 @@ abstract class AbstractFormBuilder extends AbstractContainerAware implements For
     {
         return $this->initService('element', $alias, $options);
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -92,7 +92,7 @@ abstract class AbstractFormBuilder extends AbstractContainerAware implements For
     {
         return $this->initService('rule', $alias, $options);
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -100,7 +100,7 @@ abstract class AbstractFormBuilder extends AbstractContainerAware implements For
     {
         return $this->initService('filter', $alias, $options);
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -108,7 +108,7 @@ abstract class AbstractFormBuilder extends AbstractContainerAware implements For
     {
         return $this->initService('dependency', $alias, $options);
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -117,10 +117,10 @@ abstract class AbstractFormBuilder extends AbstractContainerAware implements For
         /** @var $transformer \WellCommerce\Component\Form\DataTransformer\DataTransformerInterface */
         $transformer = $this->get('form.data_transformer.factory')->createRepositoryTransformer($alias);
         $transformer->setRepository($repository);
-
+        
         return $transformer;
     }
-
+    
     /**
      * Initializes form service
      *
@@ -132,14 +132,14 @@ abstract class AbstractFormBuilder extends AbstractContainerAware implements For
     {
         return $this->getElement('form', $options);
     }
-
+    
     /**
      * Builds the form
      *
      * @param FormInterface $form
      */
     abstract protected function buildForm(FormInterface $form);
-
+    
     /**
      * Initializes a service by its type
      *
@@ -153,9 +153,53 @@ abstract class AbstractFormBuilder extends AbstractContainerAware implements For
     {
         $id      = $this->resolverFactory->resolve($type, $alias);
         $service = $this->get($id);
-
+        
         $service->setOptions($options);
-
+        
         return $service;
+    }
+    
+    protected function addMetadataFieldset(FormInterface $form, RepositoryInterface $repository)
+    {
+        $metadata = $form->addChild($this->getElement('nested_fieldset', [
+            'name'  => 'metadata',
+            'label' => $this->trans('common.fieldset.meta')
+        ]));
+        
+        $languageData = $metadata->addChild($this->getElement('language_fieldset', [
+            'name'        => 'translations',
+            'label'       => $this->trans('common.fieldset.translations'),
+            'transformer' => $this->getRepositoryTransformer('translation', $repository)
+        ]));
+        
+        $languageData->addChild($this->getElement('text_field', [
+            'name'  => 'meta.title',
+            'label' => $this->trans('common.label.meta.title')
+        ]));
+        
+        $languageData->addChild($this->getElement('text_field', [
+            'name'  => 'meta.keywords',
+            'label' => $this->trans('common.label.meta.keywords'),
+        ]));
+        
+        $languageData->addChild($this->getElement('text_area', [
+            'name'  => 'meta.description',
+            'label' => $this->trans('common.label.meta.description'),
+        ]));
+    }
+    
+    protected function addShopsFieldset(FormInterface $form)
+    {
+        $shopsData = $form->addChild($this->getElement('nested_fieldset', [
+            'name'  => 'shops_data',
+            'label' => $this->trans('common.fieldset.shops')
+        ]));
+
+        $shopsData->addChild($this->getElement('multi_select', [
+            'name'        => 'shops',
+            'label'       => $this->trans('common.label.shops'),
+            'options'     => $this->get('shop.dataset.admin')->getResult('select'),
+            'transformer' => $this->getRepositoryTransformer('collection', $this->get('shop.repository'))
+        ]));
     }
 }

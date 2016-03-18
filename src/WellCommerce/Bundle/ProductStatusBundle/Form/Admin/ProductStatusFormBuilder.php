@@ -62,31 +62,7 @@ class ProductStatusFormBuilder extends AbstractFormBuilder
             'comment' => $this->trans('product_status.comment.css_class'),
         ]));
 
-        $metaData = $form->addChild($this->getElement('nested_fieldset', [
-            'name'  => 'meta_data',
-            'label' => $this->trans('common.fieldset.meta')
-        ]));
-
-        $languageData = $metaData->addChild($this->getElement('language_fieldset', [
-            'name'        => 'translations',
-            'label'       => $this->trans('common.fieldset.translations'),
-            'transformer' => $this->getRepositoryTransformer('translation', $this->get('product_status.repository'))
-        ]));
-
-        $languageData->addChild($this->getElement('text_field', [
-            'name'  => 'meta.title',
-            'label' => $this->trans('common.label.meta.title')
-        ]));
-
-        $languageData->addChild($this->getElement('text_field', [
-            'name'  => 'meta.keywords',
-            'label' => $this->trans('common.label.meta.keywords'),
-        ]));
-
-        $languageData->addChild($this->getElement('text_area', [
-            'name'  => 'meta.description',
-            'label' => $this->trans('common.label.meta.description'),
-        ]));
+        $this->addMetadataFieldset($form, $this->get('product_status.repository'));
 
         $form->addFilter($this->getFilter('no_code'));
         $form->addFilter($this->getFilter('trim'));

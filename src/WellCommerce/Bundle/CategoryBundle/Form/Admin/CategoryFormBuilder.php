@@ -98,49 +98,15 @@ class CategoryFormBuilder extends AbstractFormBuilder
             'name'  => 'shortDescription',
             'label' => $this->trans('common.label.short_description')
         ]));
-
+        
         $languageData->addChild($this->getElement('rich_text_editor', [
             'name'  => 'description',
             'label' => $this->trans('common.label.description'),
         ]));
 
-        $seoData = $form->addChild($this->getElement('nested_fieldset', [
-            'name'  => 'seo_data',
-            'label' => $this->trans('common.fieldset.meta')
-        ]));
+        $this->addMetadataFieldset($form, $this->get('category.repository'));
 
-        $languageData = $seoData->addChild($this->getElement('language_fieldset', [
-            'name'        => 'translations',
-            'label'       => $this->trans('common.fieldset.translations'),
-            'transformer' => $this->getRepositoryTransformer('translation', $this->get('category.repository'))
-        ]));
-
-        $languageData->addChild($this->getElement('text_field', [
-            'name'  => 'meta.title',
-            'label' => $this->trans('common.label.meta.title')
-        ]));
-
-        $languageData->addChild($this->getElement('text_field', [
-            'name'  => 'meta.keywords',
-            'label' => $this->trans('common.label.meta.keywords'),
-        ]));
-
-        $languageData->addChild($this->getElement('text_area', [
-            'name'  => 'meta.description',
-            'label' => $this->trans('common.label.meta.description'),
-        ]));
-
-        $shopsData = $form->addChild($this->getElement('nested_fieldset', [
-            'name'  => 'shops_data',
-            'label' => $this->trans('common.fieldset.shops')
-        ]));
-
-        $shopsData->addChild($this->getElement('multi_select', [
-            'name'        => 'shops',
-            'label'       => $this->trans('common.label.shops'),
-            'options'     => $this->get('shop.dataset.admin')->getResult('select'),
-            'transformer' => $this->getRepositoryTransformer('collection', $this->get('shop.repository'))
-        ]));
+        $this->addShopsFieldset($form);
 
         $form->addFilter($this->getFilter('trim'));
         $form->addFilter($this->getFilter('secure'));
