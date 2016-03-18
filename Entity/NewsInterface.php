@@ -63,5 +63,5 @@ interface NewsInterface extends EntityInterface, TimestampableInterface, Transla
     /**
      * @param bool $featured
      */
-    public function setFeatured($featured) : bool;
+    public function setFeatured($featured);
 }
