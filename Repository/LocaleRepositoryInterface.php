@@ -26,12 +26,12 @@ interface LocaleRepositoryInterface extends RepositoryInterface
      *
      * @return array
      */
-    public function getLocaleNames();
+    public function getLocaleNames() : array;
 
     /**
      * Returns defined locales as an array
      *
      * @return array
      */
-    public function getAvailableLocales();
+    public function getAvailableLocales() : array;
 }
