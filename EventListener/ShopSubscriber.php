@@ -40,10 +40,7 @@ class ShopSubscriber extends AbstractEventSubscriber
         $this->container->get('session')->remove('admin/shops');
     }
 
-    /**
-     * @param GetResponseEvent $event
-     */
-    public function onKernelRequest(GetResponseEvent $event)
+    public function onKernelRequest()
     {
         if (!$this->container->get('session')->has('admin/shops')) {
             $shops = $this->container->get('shop.dataset.admin')->getResult('select');
