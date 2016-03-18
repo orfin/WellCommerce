@@ -30,7 +30,7 @@ class ProductStatusRoute extends Route implements RouteInterface
     /**
      * @return string
      */
-    public function getType()
+    public function getType() : string
     {
         return 'product_status';
     }

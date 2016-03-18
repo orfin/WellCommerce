@@ -12,18 +12,15 @@
 
 namespace WellCommerce\Bundle\RoutingBundle\Entity;
 
+use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
+
 /**
  * Class Route
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Route implements RouteInterface, RoutingDiscriminatorsAwareInterface
+class Route extends AbstractEntity implements RouteInterface, RoutingDiscriminatorsAwareInterface
 {
-    /**
-     * @var int
-     */
-    protected $id;
-
     /**
      * @var string
      */
@@ -40,17 +37,9 @@ class Route implements RouteInterface, RoutingDiscriminatorsAwareInterface
     protected $identifier;
 
     /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
      * @return string
      */
-    public function getPath()
+    public function getPath() : string
     {
         return $this->path;
     }
@@ -58,7 +47,7 @@ class Route implements RouteInterface, RoutingDiscriminatorsAwareInterface
     /**
      * @param string $path
      */
-    public function setPath($path)
+    public function setPath(string $path)
     {
         $this->path = $path;
     }
@@ -66,7 +55,7 @@ class Route implements RouteInterface, RoutingDiscriminatorsAwareInterface
     /**
      * @return string
      */
-    public function getLocale()
+    public function getLocale() : string
     {
         return $this->locale;
     }
@@ -74,7 +63,7 @@ class Route implements RouteInterface, RoutingDiscriminatorsAwareInterface
     /**
      * @param string $locale
      */
-    public function setLocale($locale)
+    public function setLocale(string $locale)
     {
         $this->locale = $locale;
     }
@@ -95,7 +84,7 @@ class Route implements RouteInterface, RoutingDiscriminatorsAwareInterface
         $this->identifier = $identifier;
     }
 
-    public function getType()
+    public function getType() : string
     {
         return 'route';
     }

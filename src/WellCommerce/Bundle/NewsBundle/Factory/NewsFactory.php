@@ -37,6 +37,7 @@ class NewsFactory extends AbstractEntityFactory
         $news->setFeatured(false);
         $news->setPublish(true);
         $news->setStartDate(new \DateTime());
+        $news->setEndDate(new \DateTime());
 
         return $news;
     }

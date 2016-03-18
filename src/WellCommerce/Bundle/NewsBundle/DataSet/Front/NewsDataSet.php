@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\NewsBundle\DataSet\Front;
 
-use WellCommerce\Bundle\AppBundle\DataSet\Admin\NewsDataSet as BaseDataSet;
+use WellCommerce\Bundle\NewsBundle\DataSet\Admin\NewsDataSet as BaseDataSet;
 
 /**
  * Class NewsDataSet
@@ -21,5 +21,4 @@ use WellCommerce\Bundle\AppBundle\DataSet\Admin\NewsDataSet as BaseDataSet;
  */
 class NewsDataSet extends BaseDataSet
 {
-
 }
