@@ -17,6 +17,7 @@ use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
 use WellCommerce\Bundle\DelivererBundle\Entity\DelivererInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 use WellCommerce\Bundle\ShopBundle\Entity\ShopCollectionAwareInterface;
 
 /**
@@ -24,22 +25,22 @@ use WellCommerce\Bundle\ShopBundle\Entity\ShopCollectionAwareInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ProducerInterface extends TranslatableInterface, TimestampableInterface, BlameableInterface, ShopCollectionAwareInterface
+interface ProducerInterface extends
+    EntityInterface,
+    TranslatableInterface,
+    TimestampableInterface,
+    BlameableInterface,
+    ShopCollectionAwareInterface
 {
     /**
-     * @return integer
+     * @return Collection
      */
-    public function getId();
+    public function getProducts() : Collection;
 
     /**
-     * @return Collection|\WellCommerce\Bundle\ProductBundle\Entity\ProductInterface[]
+     * @return Collection
      */
-    public function getProducts();
-
-    /**
-     * @return Collection|\WellCommerce\Bundle\DelivererBundle\Entity\DelivererInterface[]
-     */
-    public function getDeliverers();
+    public function getDeliverers() : Collection;
 
     /**
      * @param Collection $collection

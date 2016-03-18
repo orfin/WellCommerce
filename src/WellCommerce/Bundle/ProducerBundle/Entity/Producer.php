@@ -17,6 +17,7 @@ use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 use WellCommerce\Bundle\DelivererBundle\Entity\DelivererInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
 use WellCommerce\Bundle\MediaBundle\Entity\MediaAwareTrait;
 use WellCommerce\Bundle\ShopBundle\Entity\ShopCollectionAwareTrait;
 
@@ -25,7 +26,7 @@ use WellCommerce\Bundle\ShopBundle\Entity\ShopCollectionAwareTrait;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Producer implements ProducerInterface
+class Producer extends AbstractEntity implements ProducerInterface
 {
     use Translatable;
     use Timestampable;
@@ -34,32 +35,19 @@ class Producer implements ProducerInterface
     use ShopCollectionAwareTrait;
 
     /**
-     * @var integer
-     */
-    protected $id;
-
-    /**
-     * @var Collection|\WellCommerce\Bundle\ProductBundle\Entity\ProductInterface[]
+     * @var Collection
      */
     protected $products;
 
     /**
-     * @var Collection|\WellCommerce\Bundle\DelivererBundle\Entity\DelivererInterface[]
+     * @var Collection
      */
     protected $deliverers;
 
     /**
      * {@inheritdoc}
      */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getProducts()
+    public function getProducts() : Collection
     {
         return $this->products;
     }
@@ -67,7 +55,7 @@ class Producer implements ProducerInterface
     /**
      * {@inheritdoc}
      */
-    public function getDeliverers()
+    public function getDeliverers() : Collection
     {
         return $this->deliverers;
     }
