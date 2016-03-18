@@ -12,6 +12,8 @@
 
 namespace WellCommerce\Bundle\DoctrineBundle\Factory;
 
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\Criteria;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
 use WellCommerce\Bundle\CurrencyBundle\Entity\CurrencyInterface;
@@ -69,6 +71,11 @@ abstract class AbstractEntityFactory extends AbstractContainerAware implements E
     protected function getDefaultTax() : TaxInterface
     {
         return $this->get('tax.repository')->findOneBy([]);
+    }
+
+    protected function getDefaultShops() : Collection
+    {
+        return $this->get('shop.repository')->matching(new Criteria());
     }
 
     /**

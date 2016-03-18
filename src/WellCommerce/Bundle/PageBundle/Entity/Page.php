@@ -17,6 +17,7 @@ use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 use WellCommerce\Bundle\AppBundle\Entity\HierarchyAwareTrait;
+use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
 use WellCommerce\Bundle\ShopBundle\Entity\ShopCollectionAwareTrait;
 
 /**
@@ -24,18 +25,13 @@ use WellCommerce\Bundle\ShopBundle\Entity\ShopCollectionAwareTrait;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Page implements PageInterface
+class Page extends AbstractEntity implements PageInterface
 {
     use Translatable;
     use Timestampable;
     use Blameable;
     use HierarchyAwareTrait;
     use ShopCollectionAwareTrait;
-
-    /**
-     * @var int
-     */
-    protected $id;
 
     /**
      * @var bool
@@ -80,15 +76,7 @@ class Page implements PageInterface
     /**
      * {@inheritdoc}
      */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPublish()
+    public function getPublish() : bool
     {
         return $this->publish;
     }
@@ -96,7 +84,7 @@ class Page implements PageInterface
     /**
      * {@inheritdoc}
      */
-    public function setPublish($publish)
+    public function setPublish(bool $publish)
     {
         $this->publish = $publish;
     }
@@ -120,7 +108,7 @@ class Page implements PageInterface
     /**
      * {@inheritdoc}
      */
-    public function getChildren()
+    public function getChildren() : Collection
     {
         return $this->children;
     }
@@ -169,7 +157,7 @@ class Page implements PageInterface
     /**
      * {@inheritdoc}
      */
-    public function getClientGroups()
+    public function getClientGroups() : Collection
     {
         return $this->clientGroups;
     }
@@ -221,7 +209,7 @@ class Page implements PageInterface
     /**
      * @return string
      */
-    public function getSection()
+    public function getSection() : string
     {
         return $this->section;
     }
@@ -229,7 +217,7 @@ class Page implements PageInterface
     /**
      * @param string $section
      */
-    public function setSection($section)
+    public function setSection(string $section)
     {
         $this->section = $section;
     }

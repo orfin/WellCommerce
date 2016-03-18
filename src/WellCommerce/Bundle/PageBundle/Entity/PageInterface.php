@@ -17,6 +17,7 @@ use WellCommerce\Bundle\AppBundle\Entity\HierarchyAwareInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 use WellCommerce\Bundle\ShopBundle\Entity\ShopCollectionAwareInterface;
 
 /**
@@ -24,23 +25,23 @@ use WellCommerce\Bundle\ShopBundle\Entity\ShopCollectionAwareInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface PageInterface
-    extends TranslatableInterface, TimestampableInterface, BlameableInterface, HierarchyAwareInterface, ShopCollectionAwareInterface
+interface PageInterface extends
+    EntityInterface,
+    TranslatableInterface,
+    TimestampableInterface,
+    BlameableInterface,
+    HierarchyAwareInterface,
+    ShopCollectionAwareInterface
 {
-    /**
-     * @return int
-     */
-    public function getId();
-
     /**
      * @return bool
      */
-    public function getPublish();
+    public function getPublish() : bool;
 
     /**
      * @param bool $publish
      */
-    public function setPublish($publish);
+    public function setPublish(bool $publish);
 
     /**
      * @return null|PageInterface
@@ -55,7 +56,7 @@ interface PageInterface
     /**
      * @return Collection
      */
-    public function getChildren();
+    public function getChildren() : Collection;
 
     /**
      * @param PageInterface $child
@@ -85,7 +86,7 @@ interface PageInterface
     /**
      * @return Collection
      */
-    public function getClientGroups();
+    public function getClientGroups() : Collection;
 
     /**
      * @param Collection $clientGroups
@@ -105,10 +106,10 @@ interface PageInterface
     /**
      * @return string
      */
-    public function getSection();
+    public function getSection() : string;
 
     /**
      * @param string $section
      */
-    public function setSection($section);
+    public function setSection(string $section);
 }
