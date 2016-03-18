@@ -4,11 +4,11 @@ sudo: false
 
 php:
   - 7.0
-  - hhvm
+  - hhvm-nightly
 
 matrix:
     allow_failures:
-        - php: hhvm
+        - php: hhvm-nightly
 
 addons:
     apt:
@@ -19,10 +19,10 @@ before_install:
     - if [[ $TRAVIS_PHP_VERSION = 7.* ]] ; then pecl config-set preferred_state beta; echo yes | pecl install apcu; fi;
 
 before_script:
-    - echo '' > ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
-    - echo "zend.enable_gc = 0" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
-    - echo "apc.enabled = 1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
-    - echo "memory_limit=4096M" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
+    - if [[ $TRAVIS_PHP_VERSION = 7.* ]] ; then echo '' > ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini; fi;
+    - if [[ $TRAVIS_PHP_VERSION = 7.* ]] ; then echo "zend.enable_gc = 0" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini; fi;
+    - if [[ $TRAVIS_PHP_VERSION = 7.* ]] ; then echo "apc.enabled = 1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini; fi;
+    - if [[ $TRAVIS_PHP_VERSION = 7.* ]] ; then echo "memory_limit=4096M" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini; fi;
 
     - mysql -e 'CREATE DATABASE travis;'
     - cp app/config/parameters.yml.travis app/config/parameters.yml
