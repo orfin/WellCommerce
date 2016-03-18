@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\CategoryBundle\DataSet\Admin;
 
 use WellCommerce\Bundle\ShopBundle\Context\ShopContextInterface;
 use WellCommerce\Component\DataSet\Conditions\Condition\Eq;
+use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
 use WellCommerce\Component\DataSet\QueryBuilder\AbstractDataSetQueryBuilder;
 
 /**
@@ -36,7 +37,7 @@ class CategoryDataSetQueryBuilder extends AbstractDataSetQueryBuilder
         $this->context = $context;
     }
 
-    protected function getConditions()
+    protected function getConditions() : ConditionsCollection
     {
         $conditions = parent::getConditions();
 
