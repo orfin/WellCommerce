@@ -84,13 +84,10 @@ abstract class AbstractOption implements OptionInterface
         switch (gettype($value)) {
             case OptionInterface::TYPE_BOOLEAN:
                 return ($value) ? 'true' : 'false';
-                break;
             case OptionInterface::TYPE_NUMBER:
                 return $value;
-                break;
             case OptionInterface::TYPE_STRING:
-                return "'".$value."'";
-                break;
+                return "'" . $value . "'";
         }
     }
 
