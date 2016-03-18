@@ -31,7 +31,6 @@ use WellCommerce\Bundle\RoutingBundle\Repository\RouteRepositoryInterface;
 class RouteProvider implements RouteProviderInterface
 {
     const DYNAMIC_PREFIX   = 'dynamic_';
-    const CANDIDATES_LIMIT = 1000;
 
     /**
      * Collection of route generators available in collection
