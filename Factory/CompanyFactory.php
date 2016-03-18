@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\CompanyBundle\Factory;
 
-use WellCommerce\Bundle\CompanyBundle\Entity\CompanyAddress;
 use WellCommerce\Bundle\CompanyBundle\Entity\CompanyInterface;
 use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 
