@@ -41,7 +41,7 @@ class DataGridEvent extends Event
      *
      * @return DataGridInterface
      */
-    public function getDataGrid()
+    public function getDataGrid() : DataGridInterface
     {
         return $this->datagrid;
     }

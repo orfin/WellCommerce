@@ -37,9 +37,9 @@ class ColumnCollection extends ArrayCollection
      *
      * @param string $identifier Column identifier
      *
-     * @return array
+     * @return ColumnInterface
      */
-    public function get($identifier)
+    public function get($identifier) : ColumnInterface
     {
         if (false === $this->has($identifier)) {
             throw new ColumnNotFoundException($identifier);

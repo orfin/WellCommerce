@@ -1047,12 +1047,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/migrations.git",
-                "reference": "20e25bd5037512a270bc8dee36e02fbd17a5e222"
+                "reference": "0d0ff5da10c5d30846da32060bd9e357abf70a05"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/migrations/zipball/20e25bd5037512a270bc8dee36e02fbd17a5e222",
-                "reference": "20e25bd5037512a270bc8dee36e02fbd17a5e222",
+                "url": "https://api.github.com/repos/doctrine/migrations/zipball/0d0ff5da10c5d30846da32060bd9e357abf70a05",
+                "reference": "0d0ff5da10c5d30846da32060bd9e357abf70a05",
                 "shasum": ""
             },
             "require": {
@@ -1112,7 +1112,7 @@
                 "database",
                 "migrations"
             ],
-            "time": "2016-02-23 16:21:27"
+            "time": "2016-03-14 12:29:11"
         },
         {
             "name": "doctrine/orm",
@@ -1877,12 +1877,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/DoctrineBehaviors.git",
-                "reference": "58ccf4a1dcc88b98e72d3f3ff5b51f09bc377034"
+                "reference": "9314801e018d0363a36565b49cc1f1faf5f399b1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/DoctrineBehaviors/zipball/58ccf4a1dcc88b98e72d3f3ff5b51f09bc377034",
-                "reference": "58ccf4a1dcc88b98e72d3f3ff5b51f09bc377034",
+                "url": "https://api.github.com/repos/KnpLabs/DoctrineBehaviors/zipball/9314801e018d0363a36565b49cc1f1faf5f399b1",
+                "reference": "9314801e018d0363a36565b49cc1f1faf5f399b1",
                 "shasum": ""
             },
             "require": {
@@ -1935,7 +1935,7 @@
                 "translatable",
                 "tree"
             ],
-            "time": "2016-03-10 07:58:27"
+            "time": "2016-03-18 08:01:33"
         },
         {
             "name": "knplabs/packagist-api",
@@ -2131,16 +2131,16 @@
         },
         {
             "name": "league/oauth2-facebook",
-            "version": "1.2.0",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/oauth2-facebook.git",
-                "reference": "2ff73dbe8267ca7cd678089014fdcd9a99b11f4b"
+                "reference": "19a000ec7ce514f57983588cca4479f00edfa31f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/oauth2-facebook/zipball/2ff73dbe8267ca7cd678089014fdcd9a99b11f4b",
-                "reference": "2ff73dbe8267ca7cd678089014fdcd9a99b11f4b",
+                "url": "https://api.github.com/repos/thephpleague/oauth2-facebook/zipball/19a000ec7ce514f57983588cca4479f00edfa31f",
+                "reference": "19a000ec7ce514f57983588cca4479f00edfa31f",
                 "shasum": ""
             },
             "require": {
@@ -2178,7 +2178,7 @@
                 "oauth",
                 "oauth2"
             ],
-            "time": "2016-02-26 01:56:08"
+            "time": "2016-03-17 22:26:08"
         },
         {
             "name": "liip/imagine-bundle",
@@ -2369,12 +2369,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "81045d59740a686121d85281e7de245d49b1236a"
+                "reference": "a9ccae25cbb5c0af6f2a549e4cc3ee6628c253ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/81045d59740a686121d85281e7de245d49b1236a",
-                "reference": "81045d59740a686121d85281e7de245d49b1236a",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/a9ccae25cbb5c0af6f2a549e4cc3ee6628c253ab",
+                "reference": "a9ccae25cbb5c0af6f2a549e4cc3ee6628c253ab",
                 "shasum": ""
             },
             "require": {
@@ -2439,7 +2439,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2016-03-09 11:43:02"
+            "time": "2016-03-13 16:20:24"
         },
         {
             "name": "nesbot/carbon",
@@ -2601,7 +2601,7 @@
         },
         {
             "name": "paragonie/random_compat",
-            "version": "v1.2.2",
+            "version": "v1.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/random_compat.git",
@@ -2998,12 +2998,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/reactphp/socket-client.git",
-                "reference": "f905ec2a576b1242b10d5c1dbd2f0eb4fcea7f0c"
+                "reference": "7c79c33c385030dd9952d5dce991c018b71e46e0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/reactphp/socket-client/zipball/f905ec2a576b1242b10d5c1dbd2f0eb4fcea7f0c",
-                "reference": "f905ec2a576b1242b10d5c1dbd2f0eb4fcea7f0c",
+                "url": "https://api.github.com/repos/reactphp/socket-client/zipball/7c79c33c385030dd9952d5dce991c018b71e46e0",
+                "reference": "7c79c33c385030dd9952d5dce991c018b71e46e0",
                 "shasum": ""
             },
             "require": {
@@ -3035,7 +3035,7 @@
             "keywords": [
                 "Socket"
             ],
-            "time": "2016-03-08 13:22:16"
+            "time": "2016-03-14 03:35:31"
         },
         {
             "name": "react/stream",
@@ -3091,12 +3091,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioDistributionBundle.git",
-                "reference": "c4c5caff48a2f3b17e3cc988e2b9d7a785779f39"
+                "reference": "3a160355bb1364da55ed9e415c1aa1fa8d457b6f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/c4c5caff48a2f3b17e3cc988e2b9d7a785779f39",
-                "reference": "c4c5caff48a2f3b17e3cc988e2b9d7a785779f39",
+                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/3a160355bb1364da55ed9e415c1aa1fa8d457b6f",
+                "reference": "3a160355bb1364da55ed9e415c1aa1fa8d457b6f",
                 "shasum": ""
             },
             "require": {
@@ -3135,7 +3135,7 @@
                 "configuration",
                 "distribution"
             ],
-            "time": "2016-02-16 07:20:15"
+            "time": "2016-03-15 16:21:41"
         },
         {
             "name": "sensio/framework-extra-bundle",
@@ -3479,16 +3479,16 @@
         },
         {
             "name": "symfony/monolog-bundle",
-            "version": "dev-master",
+            "version": "v2.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/monolog-bundle.git",
-                "reference": "d4d933a76b7bcceb806cfe80aeaf73438744807e"
+                "reference": "82fd8f36e2cccbe94faf237403c48052d4d4b77e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/monolog-bundle/zipball/d4d933a76b7bcceb806cfe80aeaf73438744807e",
-                "reference": "d4d933a76b7bcceb806cfe80aeaf73438744807e",
+                "url": "https://api.github.com/repos/symfony/monolog-bundle/zipball/82fd8f36e2cccbe94faf237403c48052d4d4b77e",
+                "reference": "82fd8f36e2cccbe94faf237403c48052d4d4b77e",
                 "shasum": ""
             },
             "require": {
@@ -3500,6 +3500,7 @@
                 "symfony/monolog-bridge": "~2.3|~3.0"
             },
             "require-dev": {
+                "phpunit/phpunit": "^4.8",
                 "symfony/console": "~2.3|~3.0",
                 "symfony/yaml": "~2.3|~3.0"
             },
@@ -3534,7 +3535,7 @@
                 "log",
                 "logging"
             ],
-            "time": "2016-03-02 14:24:51"
+            "time": "2016-03-13 15:55:56"
         },
         {
             "name": "symfony/polyfill-intl-icu",
@@ -3883,12 +3884,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "28500db9300678278d0e3e02049355f11e56b6ac"
+                "reference": "4af15567e0c92a8c93771643629cdf7effcdbfa6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/28500db9300678278d0e3e02049355f11e56b6ac",
-                "reference": "28500db9300678278d0e3e02049355f11e56b6ac",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/4af15567e0c92a8c93771643629cdf7effcdbfa6",
+                "reference": "4af15567e0c92a8c93771643629cdf7effcdbfa6",
                 "shasum": ""
             },
             "require": {
@@ -4004,7 +4005,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2016-03-10 19:36:40"
+            "time": "2016-03-16 17:51:43"
         },
         {
             "name": "twig/extensions",
@@ -5452,12 +5453,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "fd46062cdb2f8706509fe5fcfac8e23adbe3f9ad"
+                "reference": "6572c14ed74aa0eb2879fea073b62dd17a7b62d0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/fd46062cdb2f8706509fe5fcfac8e23adbe3f9ad",
-                "reference": "fd46062cdb2f8706509fe5fcfac8e23adbe3f9ad",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/6572c14ed74aa0eb2879fea073b62dd17a7b62d0",
+                "reference": "6572c14ed74aa0eb2879fea073b62dd17a7b62d0",
                 "shasum": ""
             },
             "require": {
@@ -5519,7 +5520,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2016-03-10 08:31:58"
+            "time": "2016-03-15 06:01:32"
         },
         {
             "name": "phpunit/phpunit-mock-objects",

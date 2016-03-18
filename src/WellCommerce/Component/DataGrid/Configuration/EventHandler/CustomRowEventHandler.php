@@ -24,7 +24,7 @@ class CustomRowEventHandler extends AbstractRowEventHandler
     /**
      * {@inheritdoc}
      */
-    public function getFunctionName()
+    public function getFunctionName() : string
     {
         return $this->get('function_name');
     }
@@ -46,7 +46,7 @@ class CustomRowEventHandler extends AbstractRowEventHandler
     /**
      * {@inheritdoc}
      */
-    public function isCustomEvent()
+    public function isCustomEvent() : bool
     {
         return true;
     }

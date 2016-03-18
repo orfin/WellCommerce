@@ -18,6 +18,7 @@ use WellCommerce\Component\DataSet\Conditions\Condition\In;
 use WellCommerce\Component\DataSet\Conditions\Condition\Like;
 use WellCommerce\Component\DataSet\Conditions\Condition\Lte;
 use WellCommerce\Component\DataSet\Conditions\Condition\Neq;
+use WellCommerce\Component\DataSet\Conditions\ConditionInterface;
 
 /**
  * Class ConditionFactory
@@ -42,20 +43,13 @@ class ConditionFactory
      * @param string $column
      * @param mixed  $value
      */
-    public function __construct($column, $value)
+    public function __construct(string $column, $value)
     {
         $this->column = $column;
         $this->value  = $value;
     }
 
-    /**
-     * Creates the condition for given operator
-     *
-     * @param string $operator
-     *
-     * @return \WellCommerce\Component\DataSet\Conditions\ConditionInterface
-     */
-    public function createCondition($operator)
+    public function createCondition(string $operator) : ConditionInterface
     {
         switch ($operator) {
             case 'IN':

@@ -22,7 +22,7 @@ class ClickRowEventHandler extends AbstractRowEventHandler
     /**
      * {@inheritdoc}
      */
-    public function getFunctionName()
+    public function getFunctionName() : string
     {
         return 'click_row';
     }

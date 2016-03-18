@@ -25,7 +25,7 @@ class UpdateRowEventHandler extends AbstractEventHandler
     /**
      * {@inheritdoc}
      */
-    public function getFunctionName()
+    public function getFunctionName() : string
     {
         return 'update_row';
     }
