@@ -110,7 +110,7 @@ class News extends AbstractEntity implements NewsInterface
     /**
      * {@inheritdoc}
      */
-    public function setFeatured($featured) : bool
+    public function setFeatured($featured)
     {
         $this->featured = $featured;
     }
