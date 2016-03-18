@@ -11,6 +11,7 @@
  */
 namespace WellCommerce\Bundle\PageBundle\Repository;
 
+use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
 
 /**
@@ -23,7 +24,7 @@ class PageRepository extends AbstractEntityRepository implements PageRepositoryI
     /**
      * {@inheritdoc}
      */
-    public function getDataSetQueryBuilder()
+    public function getDataSetQueryBuilder() : QueryBuilder
     {
         $queryBuilder = $this->getQueryBuilder();
         $queryBuilder->leftJoin('page.translations', 'page_translation');
