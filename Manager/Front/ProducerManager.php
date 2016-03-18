@@ -28,7 +28,7 @@ class ProducerManager extends AbstractFrontManager
      *
      * @return ConditionsCollection
      */
-    public function getCurrentProducerConditions()
+    public function getCurrentProducerConditions() : ConditionsCollection
     {
         $conditions = new ConditionsCollection();
         $conditions->add(new Eq('producerId', $this->getProducerContext()->getCurrentProducerIdentifier()));
