@@ -2,9 +2,13 @@ language: php
 
 sudo: false
 
+php:
+  - 7.0
+  - hhvm
+
 matrix:
-    include:
-        - php: 7.0
+    allow_failures:
+        - php: hhvm
 
 addons:
     apt:
