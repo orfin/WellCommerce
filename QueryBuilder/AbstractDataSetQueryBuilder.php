@@ -83,7 +83,7 @@ abstract class AbstractDataSetQueryBuilder implements DataSetQueryBuilderInterfa
      *
      * @return ConditionsCollection
      */
-    protected function getConditions()
+    protected function getConditions() : ConditionsCollection
     {
         return $this->conditions;
     }
@@ -96,7 +96,7 @@ abstract class AbstractDataSetQueryBuilder implements DataSetQueryBuilderInterfa
      *
      * @return Expr\OrderBy
      */
-    protected function getOrderByExpression(DataSetRequestInterface $request, ColumnCollection $columns)
+    protected function getOrderByExpression(DataSetRequestInterface $request, ColumnCollection $columns) : Expr\OrderBy
     {
         $column   = $columns->get($request->getOrderBy());
         $orderBy  = ($column->isAggregated()) ? $column->getAlias() : $column->getSource();

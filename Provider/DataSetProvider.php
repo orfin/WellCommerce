@@ -41,10 +41,8 @@ class DataSetProvider implements DataSetProviderInterface
      * Constructor
      *
      * @param DataSetInterface|null $dataset
-     * @param array                 $defaultContextOptions
-     * @param array                 $defaultRequestOptions
      */
-    public function __construct(DataSetInterface $dataset = null, array $defaultContextOptions = [], array $defaultRequestOptions = [])
+    public function __construct(DataSetInterface $dataset = null)
     {
         $this->dataset = $dataset;
     }

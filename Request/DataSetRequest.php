@@ -63,7 +63,7 @@ class DataSetRequest implements DataSetRequestInterface
             'conditions' => new ConditionsCollection(),
         ]);
 
-        $resolver->setNormalizer('offset', function (Options $options, $value) {
+        $resolver->setNormalizer('offset', function (Options $options) {
             $page  = $options['page'];
             $limit = $options['limit'];
 
@@ -81,7 +81,7 @@ class DataSetRequest implements DataSetRequestInterface
     /**
      * {@inheritdoc}
      */
-    public function getOffset()
+    public function getOffset() : int
     {
         return $this->options['offset'];
     }
@@ -89,7 +89,7 @@ class DataSetRequest implements DataSetRequestInterface
     /**
      * {@inheritdoc}
      */
-    public function getLimit()
+    public function getLimit() : int
     {
         return $this->options['limit'];
     }
@@ -97,7 +97,7 @@ class DataSetRequest implements DataSetRequestInterface
     /**
      * {@inheritdoc}
      */
-    public function getOrderBy()
+    public function getOrderBy() : string
     {
         return $this->options['order_by'];
     }
@@ -105,7 +105,7 @@ class DataSetRequest implements DataSetRequestInterface
     /**
      * {@inheritdoc}
      */
-    public function getOrderDir()
+    public function getOrderDir() : string
     {
         $order = strtolower($this->options['order_dir']);
 
@@ -115,7 +115,7 @@ class DataSetRequest implements DataSetRequestInterface
     /**
      * {@inheritdoc}
      */
-    public function getConditions()
+    public function getConditions() : ConditionsCollection
     {
         return $this->options['conditions'];
     }
