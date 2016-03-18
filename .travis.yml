@@ -4,11 +4,11 @@ sudo: false
 
 php:
   - 7.0
-  - hhvm-nightly
+  - hhvm
 
 matrix:
     allow_failures:
-        - php: hhvm-nightly
+        - php: hhvm
 
 addons:
     apt:
