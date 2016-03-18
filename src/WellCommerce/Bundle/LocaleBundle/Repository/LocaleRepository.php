@@ -11,6 +11,7 @@
  */
 namespace WellCommerce\Bundle\LocaleBundle\Repository;
 
+use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\Intl\Intl;
 use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
 
@@ -26,7 +27,7 @@ class LocaleRepository extends AbstractEntityRepository implements LocaleReposit
     /**
      * {@inheritdoc}
      */
-    public function getDataSetQueryBuilder()
+    public function getDataSetQueryBuilder() : QueryBuilder
     {
         $queryBuilder = $this->getQueryBuilder();
         $queryBuilder->groupBy('locale.id');
@@ -38,7 +39,7 @@ class LocaleRepository extends AbstractEntityRepository implements LocaleReposit
     /**
      * {@inheritdoc}
      */
-    public function getAvailableLocaleCodes()
+    public function getAvailableLocaleCodes() : array
     {
         if (empty($this->currentLocales)) {
             $this->currentLocales = $this->getAvailableLocales();
@@ -56,7 +57,7 @@ class LocaleRepository extends AbstractEntityRepository implements LocaleReposit
     /**
      * {@inheritdoc}
      */
-    public function getAvailableLocales()
+    public function getAvailableLocales() : array
     {
         $qb    = $this->createQueryBuilder('locale');
         $query = $qb->getQuery();
@@ -67,7 +68,7 @@ class LocaleRepository extends AbstractEntityRepository implements LocaleReposit
     /**
      * {@inheritdoc}
      */
-    public function getLocaleNames()
+    public function getLocaleNames() : array
     {
         $locales = Intl::getLocaleBundle()->getLocaleNames();
 

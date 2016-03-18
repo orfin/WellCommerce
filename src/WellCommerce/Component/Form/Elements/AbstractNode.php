@@ -13,7 +13,6 @@
 namespace WellCommerce\Component\Form\Elements;
 
 use Doctrine\Common\Util\ClassUtils;
-use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyPath;
@@ -167,9 +166,7 @@ abstract class AbstractNode implements ElementInterface
         $resolver->setDefaults([
             'class'         => '',
             'property_path' => null,
-            'type'          => function (Options $options) {
-                return $this->getElementType();
-            }
+            'type'          => $this->getElementType()
         ]);
 
         $resolver->setAllowedTypes('name', 'string');

@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\ShopBundle\Repository;
 
+use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
 
 /**
@@ -24,7 +25,7 @@ class ShopRepository extends AbstractEntityRepository implements ShopRepositoryI
     /**
      * {@inheritdoc}
      */
-    public function getDataSetQueryBuilder()
+    public function getDataSetQueryBuilder() : QueryBuilder
     {
         $queryBuilder = $this->getQueryBuilder();
         $queryBuilder->groupBy('shop.id');

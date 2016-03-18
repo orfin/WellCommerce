@@ -25,6 +25,6 @@ class ProductPhotoRepository extends AbstractEntityRepository implements Product
      */
     public function getDataGridQueryBuilder()
     {
-        return parent::getQueryBuilder()->groupBy('product.id');
+        return $this->getQueryBuilder()->groupBy('product.id');
     }
 }

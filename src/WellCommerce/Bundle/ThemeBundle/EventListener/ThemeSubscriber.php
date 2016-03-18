@@ -53,10 +53,8 @@ class ThemeSubscriber extends AbstractEventSubscriber
 
     /**
      * Sets shop context related session variables
-     *
-     * @param FilterControllerEvent $event
      */
-    public function onKernelController(FilterControllerEvent $event)
+    public function onKernelController()
     {
         $frontContext = $this->container->get('shop.context.front');
         $themeContext = $this->container->get('theme.context.front');

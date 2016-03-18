@@ -12,6 +12,8 @@
 
 namespace WellCommerce\Component\DataSet\Repository;
 
+use Doctrine\ORM\QueryBuilder;
+
 /**
  * Interface DataSetAwareRepositoryInterface
  *
@@ -22,14 +24,14 @@ interface DataSetAwareRepositoryInterface
     /**
      * Returns query builder from related repository
      *
-     * @return \Doctrine\ORM\QueryBuilder
+     * @return QueryBuilder
      */
-    public function getDataSetQueryBuilder();
+    public function getDataSetQueryBuilder() : QueryBuilder;
 
     /**
      * Returns repository alias which is used also as dataset identifier
      *
      * @return string
      */
-    public function getAlias();
+    public function getAlias() : string;
 }

@@ -27,8 +27,7 @@ class FacebookController extends AbstractController
         return $this->get('oauth.authentificator.facebook')->start($request);
     }
 
-    public function checkAction(Request $request)
+    public function checkAction()
     {
-
     }
 }

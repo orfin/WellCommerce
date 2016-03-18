@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\WishlistBundle\Repository;
 
 use Doctrine\ORM\Query\Expr;
+use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
 
 /**
@@ -22,7 +23,10 @@ use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
  */
 class WishlistRepository extends AbstractEntityRepository implements WishlistRepositoryInterface
 {
-    public function getDataSetQueryBuilder()
+    /**
+     * {@inheritdoc}
+     */
+    public function getDataSetQueryBuilder() : QueryBuilder
     {
         $queryBuilder = $this->getQueryBuilder();
         $queryBuilder->groupBy('product.id');

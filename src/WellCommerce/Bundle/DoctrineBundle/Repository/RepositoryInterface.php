@@ -12,7 +12,10 @@
 
 namespace WellCommerce\Bundle\DoctrineBundle\Repository;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
+use Doctrine\ORM\Mapping\ClassMetadata;
+use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Component\DataSet\Repository\DataSetAwareRepositoryInterface;
 
 /**
@@ -27,7 +30,7 @@ interface RepositoryInterface extends DataSetAwareRepositoryInterface
      *
      * @param string $alias
      *
-     * @return \Doctrine\ORM\QueryBuilder
+     * @return QueryBuilder
      */
     public function createQueryBuilder($alias);
 
@@ -69,36 +72,22 @@ interface RepositoryInterface extends DataSetAwareRepositoryInterface
     /**
      * Creates QueryBuilder instance
      *
-     * @return \Doctrine\ORM\QueryBuilder
+     * @return QueryBuilder
      */
-    public function getQueryBuilder();
+    public function getQueryBuilder() : QueryBuilder;
 
     /**
-     * @return \Doctrine\ORM\Mapping\ClassMetadata
+     * @return ClassMetadata
      */
-    public function getMetaData();
+    public function getMetaData() : ClassMetadata;
 
     /**
      * Select all elements from a selectable that match the expression and
      * return a new collection containing these elements.
      *
-     * @param \Doctrine\Common\Collections\Criteria $criteria
+     * @param Criteria $criteria
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection
      */
     public function matching(Criteria $criteria);
-
-    /**
-     * Returns query builder from related repository
-     *
-     * @return \Doctrine\ORM\QueryBuilder
-     */
-    public function getDataSetQueryBuilder();
-
-    /**
-     * Returns repository alias which is used also as dataset identifier
-     *
-     * @return string
-     */
-    public function getAlias();
 }
