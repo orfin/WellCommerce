@@ -1,5 +1,7 @@
 WellCommerce\Bundle\ShopBundle\Entity\Shop:
     type: entity
+    cache:
+        usage: NONSTRICT_READ_WRITE
     table: shop
     repositoryClass: WellCommerce\Bundle\ShopBundle\Repository\ShopRepository
     id:
