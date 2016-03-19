@@ -22,43 +22,32 @@ use WellCommerce\Bundle\AdminBundle\Provider\AdminMenuProvider;
 class AdminExtension extends \Twig_Extension implements \Twig_Extension_GlobalsInterface
 {
     /**
-     * @var SessionInterface
-     */
-    protected $session;
-
-    /**
      * @var AdminMenuProvider
      */
     protected $adminMenuProvider;
-
+    
     /**
      * Constructor
      *
-     * @param SessionInterface  $session
      * @param AdminMenuProvider $adminMenuProvider
      */
-    public function __construct(SessionInterface $session, AdminMenuProvider $adminMenuProvider)
+    public function __construct(AdminMenuProvider $adminMenuProvider)
     {
-        $this->session           = $session;
         $this->adminMenuProvider = $adminMenuProvider;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getGlobals()
+    
+    public function getFunctions()
     {
-        $scope = $this->session->get('admin/shop');
-
         return [
-            'user'            => $this->session->get('admin/user'),
-            'menu'            => $this->adminMenuProvider->getMenu(),
-            'shops'           => $this->session->get('admin/shops'),
-            'activeContextId' => $scope['id'],
-            'flashbag'        => $this->session->getFlashBag(),
+            new \Twig_SimpleFunction('adminMenu', [$this, 'getAdminMenu'], ['is_safe' => ['html']]),
         ];
     }
-
+    
+    public function getAdminMenu()
+    {
+        return $this->adminMenuProvider->getMenu();
+    }
+    
     /**
      * {@inheritdoc}
      */

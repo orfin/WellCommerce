@@ -23,7 +23,6 @@
         </service>
 
         <service id="twig.extension.admin" class="WellCommerce\Bundle\AdminBundle\Twig\Extension\AdminExtension">
-            <argument type="service" id="session"/>
             <argument type="service" id="admin_menu.provider"/>
             <tag name="twig.extension"/>
         </service>

@@ -1,6 +1,6 @@
 {% trans_default_domain "admin_menu" %}
 <ul id="navigation">
-    {% for firstLevel in menu %}
+    {% for firstLevel in adminMenu() %}
         {% if firstLevel.children is empty %}
             <li>
                 <a {% if firstLevel.routeName != '' %}href="{{ path(firstLevel.routeName) }}"{% endif %} id="menu-{{ firstLevel.cssClass }}"><span class="icon {{ firstLevel.cssClass }}"></span>{{ firstLevel.name|trans }}</a>
