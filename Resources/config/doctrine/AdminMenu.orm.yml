@@ -2,8 +2,7 @@ WellCommerce\Bundle\AdminBundle\Entity\AdminMenu:
     type: entity
     table: admin_menu
     cache:
-        usage : READ_ONLY
-        region : admin_menu
+        usage : NONSTRICT_READ_WRITE
     repositoryClass: WellCommerce\Bundle\AdminBundle\Repository\AdminMenuRepository
     id:
         id:
