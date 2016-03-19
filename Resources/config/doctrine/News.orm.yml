@@ -1,5 +1,7 @@
 WellCommerce\Bundle\NewsBundle\Entity\News:
     type: entity
+    cache:
+        usage: NONSTRICT_READ_WRITE
     table: news
     repositoryClass: WellCommerce\Bundle\NewsBundle\Repository\NewsRepository
     id:
