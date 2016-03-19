@@ -1,5 +1,7 @@
 WellCommerce\Bundle\ThemeBundle\Entity\Theme:
     type: entity
+    cache:
+        usage: NONSTRICT_READ_WRITE
     table: theme
     repositoryClass: WellCommerce\Bundle\ThemeBundle\Repository\ThemeRepository
     id:
