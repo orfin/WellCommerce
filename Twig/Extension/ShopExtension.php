@@ -12,6 +12,8 @@
 namespace WellCommerce\Bundle\ShopBundle\Twig\Extension;
 
 use WellCommerce\Bundle\ShopBundle\Context\ShopContextInterface;
+use WellCommerce\Bundle\ShopBundle\Entity\ShopInterface;
+use WellCommerce\Component\DataSet\DataSetInterface;
 
 /**
  * Class ShopExtension
@@ -26,32 +28,45 @@ class ShopExtension extends \Twig_Extension
     protected $shopContext;
 
     /**
-     * Constructor
+     * @var DataSetInterface
+     */
+    protected $shopDataset;
+
+    /**
+     * ShopExtension constructor.
      *
      * @param ShopContextInterface $shopContext
+     * @param DataSetInterface     $shopDataset
      */
-    public function __construct(ShopContextInterface $shopContext)
+    public function __construct(ShopContextInterface $shopContext, DataSetInterface $shopDataset)
     {
         $this->shopContext = $shopContext;
+        $this->shopDataset = $shopDataset;
     }
 
     public function getFunctions()
     {
         return [
             new \Twig_SimpleFunction('currentShop', [$this, 'getCurrentShop'], ['is_safe' => ['html']]),
+            new \Twig_SimpleFunction('shops', [$this, 'getShops'], ['is_safe' => ['html']]),
         ];
     }
-
+    
+    public function getCurrentShop() : ShopInterface
+    {
+        return $this->shopContext->getCurrentShop();
+    }
+    
+    public function getShops() : array
+    {
+        return $this->shopDataset->getResult('select');
+    }
+    
     /**
      * {@inheritdoc}
      */
     public function getName()
     {
         return 'shop';
-    }
-
-    public function getCurrentShop()
-    {
-        return $this->shopContext->getCurrentShop();
     }
 }
