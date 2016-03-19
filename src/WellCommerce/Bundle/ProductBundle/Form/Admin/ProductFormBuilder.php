@@ -35,7 +35,7 @@ class ProductFormBuilder extends AbstractFormBuilder
             'value_column' => 'code'
         ]);
 
-        $vatValues = $this->get('tax.dataset.admin')->getResult('select');
+        $vatValues = $this->get('tax.dataset.admin')->getResult('select', ['order_by' => 'value']);
 
         $mainData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'main_data',
@@ -191,7 +191,7 @@ class ProductFormBuilder extends AbstractFormBuilder
             'filters'   => [
                 $this->getFilter('comma_to_dot_changer'),
             ],
-            'vat_field' => $sellPriceTax,
+            'vat_field' => $sellPriceTax
         ]));
 
         $sellPriceSettings->addChild($this->getElement('price_editor', [
@@ -200,7 +200,7 @@ class ProductFormBuilder extends AbstractFormBuilder
             'filters'   => [
                 $this->getFilter('comma_to_dot_changer'),
             ],
-            'vat_field' => $sellPriceTax,
+            'vat_field' => $sellPriceTax
         ]));
 
         $sellPriceSettings->addChild($this->getElement('date', [

@@ -24,7 +24,7 @@ class PageExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
      * @var DataSetInterface
      */
     protected $dataset;
-
+    
     /**
      * Constructor
      *
@@ -34,29 +34,30 @@ class PageExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
     {
         $this->dataset = $dataset;
     }
-
-    public function getGlobals()
+    
+    public function getFunctions()
     {
         return [
-            'cmsPages' => $this->getCmsPages()
+            new \Twig_SimpleFunction('cmsPages', [$this, 'getCmsPages'], ['is_safe' => ['html']]),
+            new \Twig_SimpleFunction('convert_price', [$this, 'convertPrice'], ['is_safe' => ['html']]),
         ];
     }
-
+    
+    /**
+     * @return array
+     */
+    public function getCmsPages() : array
+    {
+        return $this->dataset->getResult('tree', [
+            'order_by' => 'hierarchy'
+        ]);
+    }
+    
     /**
      * {@inheritdoc}
      */
     public function getName()
     {
         return 'cms_page';
-    }
-
-    /**
-     * @return array
-     */
-    public function getCmsPages()
-    {
-        return $this->dataset->getResult('tree', [
-            'order_by' => 'hierarchy'
-        ]);
     }
 }

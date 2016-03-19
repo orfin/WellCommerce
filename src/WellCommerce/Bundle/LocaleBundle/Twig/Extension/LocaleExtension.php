@@ -22,36 +22,31 @@ use WellCommerce\Component\DataSet\DataSetInterface;
 class LocaleExtension extends \Twig_Extension implements \Twig_Extension_GlobalsInterface
 {
     /**
-     * @var SessionInterface
-     */
-    protected $session;
-
-    /**
      * @var DataSetInterface
      */
     protected $dataset;
-
+    
     /**
-     * Constructor
+     * LocaleExtension constructor.
      *
-     * @param SessionInterface $session
-     */
-    /**
-     * Constructor
-     *
-     * @param SessionInterface $session
      * @param DataSetInterface $dataset
      */
-    public function __construct(SessionInterface $session, DataSetInterface $dataset)
+    public function __construct(DataSetInterface $dataset)
     {
-        $this->session = $session;
         $this->dataset = $dataset;
+    }
+
+    public function getFunctions()
+    {
+        return [
+            new \Twig_SimpleFunction('locales', [$this, 'getLocales'], ['is_safe' => ['html']]),
+        ];
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getGlobals()
+    public function getLocales() : array
     {
         return [
             'locales' => $this->dataset->getResult('select', ['order_by' => 'code'], [

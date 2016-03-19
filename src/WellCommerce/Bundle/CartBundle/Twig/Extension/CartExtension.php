@@ -43,21 +43,26 @@ class CartExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
         $this->cartProductDataSet = $dataset;
     }
 
-    public function getGlobals()
+    public function getFunctions()
     {
         return [
-            'cart'         => $this->getCurrentCart(),
-            'cartProducts' => $this->cartProductDataSet->getResult('array', [], ['pagination' => false])
+            new \Twig_SimpleFunction('currentCart', [$this, 'getCurrentCart'], ['is_safe' => ['html']]),
+            new \Twig_SimpleFunction('cartProducts', [$this, 'getCurrentCartProducts'], ['is_safe' => ['html']]),
         ];
     }
 
-    private function getCurrentCart()
+    public function getCurrentCart()
     {
         if ($this->cartContext->hasCurrentCart()) {
             return $this->cartContext->getCurrentCart();
         }
 
         return null;
+    }
+
+    public function getCurrentCartProducts()
+    {
+        return $this->cartProductDataSet->getResult('array', [], ['pagination' => false]);
     }
 
     /**

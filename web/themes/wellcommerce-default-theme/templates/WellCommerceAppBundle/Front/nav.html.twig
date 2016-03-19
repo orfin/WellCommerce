@@ -35,7 +35,7 @@
             {% for status in productStatuses().rows %}
                 <li><a href="{{ status.route }}">{{ status.name }}</a></li>
             {% endfor %}
-            {% for page in cmsPages %}
+            {% for page in cmsPages() %}
                 {% if page.children|length %}
                     <li class="dropdown">
                         <a href="{{ page.route }}" class="dropdown-toggle" data-toggle="dropdown"

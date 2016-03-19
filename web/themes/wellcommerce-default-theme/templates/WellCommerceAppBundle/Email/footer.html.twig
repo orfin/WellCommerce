@@ -10,7 +10,7 @@
     <tr>
         <td align="left">
             <p style="margin:11px 0;">
-                {% for page in cmsPages if page.children|length %}
+                {% for page in cmsPages() if page.children|length %}
                     {% for childPage in page.children %}
                         <a style="color:#484848; text-decoration:none;" href="{{ childPage.route }}">{{ childPage.name }}</a> &nbsp; | &nbsp;
                     {% endfor %}

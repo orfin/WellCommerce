@@ -25,28 +25,12 @@ class ShopSubscriber extends AbstractEventSubscriber
     public static function getSubscribedEvents()
     {
         return [
-            KernelEvents::REQUEST => ['onKernelRequest', 100],
-            'shop.post_update'    => 'onShopListModified',
-            'shop.post_create'    => 'onShopListModified',
-            'shop.post_remove'    => 'onShopListModified',
+            KernelEvents::REQUEST => ['onKernelRequest', 100]
         ];
     }
 
-    /**
-     * Clears session data after shop list was changed
-     */
-    public function onShopListModified()
+    public function onKernelRequest(GetResponseEvent $event)
     {
-        $this->container->get('session')->remove('admin/shops');
-    }
-
-    public function onKernelRequest()
-    {
-        if (!$this->container->get('session')->has('admin/shops')) {
-            $shops = $this->container->get('shop.dataset.admin')->getResult('select');
-            $this->container->get('session')->set('admin/shops', $shops);
-        }
-
         $this->get('shop.resolver.front')->resolve();
         $this->get('shop.resolver.admin')->resolve();
     }

@@ -37,6 +37,7 @@ class PriceEditor extends AbstractField implements ElementInterface
             'prefixes',
             'vat_field',
             'vat_field_name',
+            'vat_values',
             'suffix',
         ]);
 
@@ -45,7 +46,15 @@ class PriceEditor extends AbstractField implements ElementInterface
                 return $options['vat_field']->getName();
             }
 
-            return;
+            return null;
+        };
+
+        $vatValues = function (Options $options) {
+            if (isset($options['vat_field']) && $options['vat_field'] instanceof ElementInterface) {
+                return $options['vat_field']->getOption('options');
+            }
+
+            return [];
         };
 
         $resolver->setDefaults([
@@ -53,10 +62,12 @@ class PriceEditor extends AbstractField implements ElementInterface
             'vat_field'      => null,
             'suffix'         => '',
             'vat_field_name' => $vatFieldName,
+            'vat_values'     => $vatValues,
         ]);
 
         $resolver->setAllowedTypes('suffix', 'string');
         $resolver->setAllowedTypes('prefixes', 'array');
+        $resolver->setAllowedTypes('vat_values', 'array');
         $resolver->setAllowedTypes('vat_field', ['null', ElementInterface::class]);
         $resolver->setAllowedTypes('vat_field_name', 'string');
     }
@@ -69,6 +80,7 @@ class PriceEditor extends AbstractField implements ElementInterface
         parent::prepareAttributesCollection($collection);
         $collection->add(new Attribute('sSuffix', $this->getOption('suffix')));
         $collection->add(new Attribute('asPrefixes', $this->getOption('prefixes'), Attribute::TYPE_ARRAY));
+        $collection->add(new Attribute('aoVatValues', $this->getOption('vat_values'), Attribute::TYPE_ARRAY));
         $collection->add(new Attribute('sVatField', $this->getOption('vat_field_name')));
     }
 }

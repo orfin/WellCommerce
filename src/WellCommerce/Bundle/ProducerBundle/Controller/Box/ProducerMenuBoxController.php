@@ -28,7 +28,7 @@ class ProducerMenuBoxController extends AbstractBoxController
      */
     public function indexAction(LayoutBoxSettingsCollection $boxSettings) : Response
     {
-        $producers = $this->get('producer.dataset.front')->getResult('array');
+        $producers = $this->get('producer.dataset.front')->getResult('array', [], ['pagination' => false]);
 
         return $this->displayTemplate('index', [
             'producers'      => $producers,

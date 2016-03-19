@@ -25,7 +25,7 @@
             <li><a href="{{ status.route }}">{{ status.name }}</a></li>
             {% endfor %}
 
-			{% for page in cmsPages %}
+			{% for page in cmsPages() %}
 			{% if page.children|length %}
 			<li>
 				<a class="collapsed coll" data-toggle="collapse" href="#cms{{ page.id }}" aria-expanded="false" aria-controls="#cms{{ page.id }}">{{ page.name }} <span class="caret bordered"></span></a>
@@ -42,7 +42,7 @@
 		</ul>
 
 		<ul class="hamburger-tools">
-
+			{% set currencies = currencies() %}
 			{% if currencies|length > 1 %}
 			<li>
 				<a class="collapsed coll" data-toggle="collapse" href="#currency" aria-expanded="false" aria-controls="#currency">{% trans %}currency.label{% endtrans %}: {{ app.request.session.get('_currency')|upper }} <span class="caret"></span></a>

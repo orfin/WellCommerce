@@ -2,15 +2,15 @@
 
 <li class="dropdown" id="cart-preview">
 	<span class="push-search btn btn-link hidden-md hidden-lg"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
-    <a href="{{ path('front.cart.index') }}" class="dropdown-toggle cartQty" data-target="#" {% if false == cart.isEmpty %}data-toggle="dropdown"{% endif %} role="button" aria-expanded="true">
-        Cart<span class="cart-qty">{{ cart.getTotals().getQuantity()|number_format }}</span>
+    <a href="{{ path('front.cart.index') }}" class="dropdown-toggle cartQty" data-target="#" {% if false == currentCart().isEmpty %}data-toggle="dropdown"{% endif %} role="button" aria-expanded="true">
+        Cart<span class="cart-qty">{{ currentCart().getTotals().getQuantity()|number_format }}</span>
     </a>
-    {% if false == cart.isEmpty %}
+    {% if false == currentCart().isEmpty %}
     <ul class="dropdown-menu" role="menu">
         <li>
             <table>
                 <tbody>
-                {% for item in cartProducts.rows %}
+                {% for item in cartProducts().rows %}
                 <tr>
                 	<td>
                         <a href="{{ path('front.cart.delete',{"id": item.id }) }}" class="delete" title="Remove item">
@@ -43,7 +43,7 @@
                         </a>
                     </td>
                     <td>
-                        <span>{{ format_price(cart.getTotals().getGrossPrice()) }}</span>
+                        <span>{{ format_price(currentCart().getTotals().getGrossPrice()) }}</span>
                     </td>
                 </tr>
                 </tbody>
