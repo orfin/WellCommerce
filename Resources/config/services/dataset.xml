@@ -39,26 +39,31 @@
 
         <service id="dataset.context.array" class="WellCommerce\Component\DataSet\Context\ArrayContext">
             <argument type="service" id="dataset.pagination"/>
+            <argument type="service" id="doctrine.cache"/>
             <tag name="dataset.context" alias="array"/>
         </service>
 
         <service id="dataset.context.datagrid" class="WellCommerce\Component\DataSet\Context\DataGridContext">
             <argument type="service" id="dataset.paginator"/>
+            <argument type="service" id="doctrine.cache"/>
             <tag name="dataset.context" alias="datagrid"/>
         </service>
 
         <service id="dataset.context.select" class="WellCommerce\Component\DataSet\Context\SelectContext">
             <argument type="service" id="dataset.pagination"/>
+            <argument type="service" id="doctrine.cache"/>
             <tag name="dataset.context" alias="select"/>
         </service>
 
         <service id="dataset.context.tree" class="WellCommerce\Component\DataSet\Context\TreeContext">
             <argument type="service" id="dataset.pagination"/>
+            <argument type="service" id="doctrine.cache"/>
             <tag name="dataset.context" alias="tree"/>
         </service>
 
         <service id="dataset.context.flat_tree" class="WellCommerce\Component\DataSet\Context\FlatTreeContext">
             <argument type="service" id="dataset.pagination"/>
+            <argument type="service" id="doctrine.cache"/>
             <tag name="dataset.context" alias="flat_tree"/>
         </service>
 
