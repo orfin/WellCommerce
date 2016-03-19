@@ -73,6 +73,7 @@ class DataGridContext extends AbstractDataSetContext
 
         $resolver->setDefaults([
             'data_id' => 0,
+            'cache'   => false
         ]);
 
         $resolver->setAllowedTypes('data_id', 'numeric');

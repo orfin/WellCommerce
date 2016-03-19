@@ -46,6 +46,19 @@ class ArrayContext extends AbstractDataSetContext
      */
     public function getResult(QueryBuilder $queryBuilder, DataSetRequestInterface $request, ColumnCollection $columns)
     {
+        if ($this->options['pagination']) {
+            return $this->getPaginatedResult($queryBuilder, $request, $columns);
+        }
+
+        $result = parent::getResult($queryBuilder, $request, $columns);
+
+        return [
+            'rows' => $result,
+        ];
+    }
+
+    protected function getPaginatedResult(QueryBuilder $queryBuilder, DataSetRequestInterface $request, ColumnCollection $columns)
+    {
         $pagination = $this->pagination->getPagination($queryBuilder, $request, $columns);
         $result     = parent::getResult($queryBuilder, $request, $columns);
         $limit      = $request->getLimit();
@@ -65,5 +78,15 @@ class ArrayContext extends AbstractDataSetContext
     public function configureOptions(OptionsResolver $resolver)
     {
         parent::configureOptions($resolver);
+
+        $resolver->setRequired([
+            'pagination',
+        ]);
+
+        $resolver->setDefaults([
+            'pagination' => true,
+        ]);
+
+        $resolver->setAllowedTypes('pagination', 'bool');
     }
 }

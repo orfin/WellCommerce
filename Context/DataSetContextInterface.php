@@ -31,7 +31,7 @@ interface DataSetContextInterface
      * @param DataSetRequestInterface $request
      * @param ColumnCollection        $columns
      *
-     * @return mixed
+     * @return array
      */
     public function getResult(QueryBuilder $queryBuilder, DataSetRequestInterface $request, ColumnCollection $columns);
 
