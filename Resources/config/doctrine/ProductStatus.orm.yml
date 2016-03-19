@@ -1,5 +1,7 @@
 WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatus:
     type: entity
+    cache:
+        usage: NONSTRICT_READ_WRITE
     table: product_status
     repositoryClass: WellCommerce\Bundle\ProductStatusBundle\Repository\ProductStatusRepository
     id:

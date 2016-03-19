@@ -65,6 +65,8 @@ class ProductStatusExtension extends \Twig_Extension
             'limit'     => $limit,
             'order_by'  => $orderBy,
             'order_dir' => $orderDir,
+        ], [
+            'pagination' => false
         ]);
     }
 }
