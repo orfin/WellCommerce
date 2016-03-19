@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-sm-9 col-xs-12">
                 <div class="row">
-                    {% for page in cmsPages if page.children|length %}
+                    {% for page in cmsPages() if page.children|length %}
                         <div class="col-sm-4 menu">
                             <h3>{{ page.name }}</h3>
                             <ul>

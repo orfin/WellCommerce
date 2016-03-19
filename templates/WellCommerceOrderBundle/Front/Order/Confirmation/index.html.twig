@@ -50,21 +50,21 @@
                                         <h4>Delivery address <a href="{{ path('front.order.address') }}">Change</a></h4>
 
                                         <p>
-                                            {{ format_billing_address(cart.billingAddress) }}
+                                            {{ format_billing_address(currentCart().billingAddress) }}
                                         </p>
                                     </div>
                                     <div class="col-sm-4">
                                         <h4>Contact info <a href="{{ path('front.order.address') }}">Change</a></h4>
 
                                         <p>
-                                            {{ format_contact_details(cart.contactDetails) }}
+                                            {{ format_contact_details(currentCart().contactDetails) }}
                                         </p>
                                     </div>
                                     <div class="col-sm-4">
                                         <h4>Billing data <a href="{{ path('front.order.address') }}">Change</a></h4>
 
                                         <p>
-                                            {{ format_shipping_address(cart.shippingAddress) }}
+                                            {{ format_shipping_address(currentCart().shippingAddress) }}
                                         </p>
                                     </div>
                                 </div>
