@@ -47,7 +47,11 @@ abstract class AbstractShopContext
      */
     public function getCurrentShopIdentifier() : int
     {
-        return $this->currentShop->getId();
+        if ($this->hasCurrentShop()) {
+            return $this->getCurrentShop()->getId();
+        }
+
+        return 0;
     }
 
     /**

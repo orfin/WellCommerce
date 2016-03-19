@@ -135,6 +135,10 @@
     Translator.add("attribute.heading.index", "Atrybuty", "wellcommerce", "pl");
     Translator.add("attribute.heading.add", "Dodawanie nowego atrubutu", "wellcommerce", "pl");
     Translator.add("attribute.heading.edit", "Edycja atrybutu", "wellcommerce", "pl");
+    Translator.add("attribute.label.groups", "Grupy", "wellcommerce", "pl");
+    Translator.add("attribute.label.values", "Warto\u015bci", "wellcommerce", "pl");
+    Translator.add("attribute.fieldset.groups", "Grupy", "wellcommerce", "pl");
+    Translator.add("attribute.fieldset.values", "Warto\u015bci", "wellcommerce", "pl");
     Translator.add("attribute_group.heading.index", "Grupy atrybut\u00f3w", "wellcommerce", "pl");
     Translator.add("attribute_group.heading.add", "Dodaj grup\u0119", "wellcommerce", "pl");
     Translator.add("attribute_group.heading.edit", "Edycja grupy", "wellcommerce", "pl");
@@ -142,6 +146,7 @@
     Translator.add("attribute_group.flash.new_group", "Nowa grupa", "wellcommerce", "pl");
     Translator.add("attribute_group.label.attributes", "Atrybuty", "wellcommerce", "pl");
     Translator.add("attribute_group.label.group", "Grupa", "wellcommerce", "pl");
+    Translator.add("attribute_group.fieldset.attributes", "Atrybuty", "wellcommerce", "pl");
     Translator.add("attribute_value.heading.index", "Warto\u015bci atrybut\u00f3w", "wellcommerce", "pl");
     Translator.add("attribute_value.heading.add", "Dodaj warto\u015bci", "wellcommerce", "pl");
     Translator.add("attribute_value.heading.edit", "Edytuj warto\u015bci", "wellcommerce", "pl");

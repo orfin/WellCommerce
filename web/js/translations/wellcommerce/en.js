@@ -135,11 +135,16 @@
     Translator.add("attribute.heading.index", "Attributes", "wellcommerce", "en");
     Translator.add("attribute.heading.add", "Add attribute", "wellcommerce", "en");
     Translator.add("attribute.heading.edit", "Edit attribute", "wellcommerce", "en");
+    Translator.add("attribute.label.groups", "Groups", "wellcommerce", "en");
+    Translator.add("attribute.label.values", "Values", "wellcommerce", "en");
+    Translator.add("attribute.fieldset.groups", "Groups", "wellcommerce", "en");
+    Translator.add("attribute.fieldset.values", "Values", "wellcommerce", "en");
     Translator.add("attribute_group.heading.index", "Attribute groups", "wellcommerce", "en");
     Translator.add("attribute_group.heading.add", "Add group", "wellcommerce", "en");
     Translator.add("attribute_group.heading.edit", "Edit group", "wellcommerce", "en");
     Translator.add("attribute_group.flash.empty_group", "Empty group", "wellcommerce", "en");
     Translator.add("attribute_group.flash.new_group", "New group", "wellcommerce", "en");
+    Translator.add("attribute_group.fieldset.attributes", "Attributes", "wellcommerce", "en");
     Translator.add("attribute_group.label.attributes", "Attributes", "wellcommerce", "en");
     Translator.add("attribute_group.label.group", "Group", "wellcommerce", "en");
     Translator.add("attribute_value.heading.index", "Attribute values", "wellcommerce", "en");
@@ -417,7 +422,7 @@
     Translator.add("product.form.fieldset.stock", "Stock settings", "wellcommerce", "en");
     Translator.add("product.form.fieldset.photos", "Photos", "wellcommerce", "en");
     Translator.add("product.form.fieldset.statuses", "Statuses", "wellcommerce", "en");
-    Translator.add("product.form.fieldset.attributes", "Variants", "wellcommerce", "en");
+    Translator.add("product.form.fieldset.variants", "Variants", "wellcommerce", "en");
     Translator.add("product.form.fieldset.shops", "Shops", "wellcommerce", "en");
     Translator.add("product.form.fieldset.description", "Description", "wellcommerce", "en");
     Translator.add("product.comment.enabled", "Enable product's visibility", "wellcommerce", "en");
@@ -543,5 +548,6 @@
     Translator.add("unit.heading.index", "Units of measure", "wellcommerce", "en");
     Translator.add("unit.heading.add", "Add a unit of measure", "wellcommerce", "en");
     Translator.add("unit.heading.edit", "Edit a unit of measure", "wellcommerce", "en");
+    Translator.add("product.form.fieldset.attributes", "Variants", "wellcommerce", "en");
     Translator.add("test", "test", "wellcommerce", "en");
 })(Translator);
