@@ -31,6 +31,8 @@ class LayeredNavigationBoxController extends AbstractBoxController
         $producers = $this->get('producer.dataset.front')->getResult('array', [
             'order_by'  => 'name',
             'order_dir' => 'asc',
+        ],[
+            'pagination' => false
         ]);
 
         return $this->displayTemplate('index', [
