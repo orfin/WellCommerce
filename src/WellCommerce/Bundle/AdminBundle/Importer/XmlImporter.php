@@ -90,8 +90,8 @@ class XmlImporter implements AdminMenuImporterInterface
     protected function addMenuItem(\SimpleXMLElement $item)
     {
         $em            = $this->doctrineHelper->getEntityManager();
-        $adminMenuItem = $this->adminMenuRepository->findOneBy(['identifier' => $item->identifier]);
-        $parent        = $this->adminMenuRepository->findOneBy(['identifier' => $item->parent]);
+        $adminMenuItem = $this->adminMenuRepository->findOneBy(['identifier' => (string)$item->identifier]);
+        $parent        = $this->adminMenuRepository->findOneBy(['identifier' => (string)$item->parent]);
 
         if (null === $adminMenuItem) {
             $adminMenuItem = $this->adminMenuFactory->create();
