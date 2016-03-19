@@ -1,5 +1,7 @@
 WellCommerce\Bundle\LocaleBundle\Entity\Locale:
     type: entity
+    cache:
+        usage: NONSTRICT_READ_WRITE
     table: locale
     repositoryClass: WellCommerce\Bundle\LocaleBundle\Repository\LocaleRepository
     id:

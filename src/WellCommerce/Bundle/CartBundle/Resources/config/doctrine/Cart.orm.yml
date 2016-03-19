@@ -1,5 +1,7 @@
 WellCommerce\Bundle\CartBundle\Entity\Cart:
     type: entity
+    cache:
+        usage: NONSTRICT_READ_WRITE
     table: cart
     repositoryClass: WellCommerce\Bundle\CartBundle\Repository\CartRepository
     id:
@@ -46,6 +48,8 @@ WellCommerce\Bundle\CartBundle\Entity\Cart:
             fetch: LAZY
             mappedBy: cart
             orphanRemoval: true
+            cache:
+                usage : NONSTRICT_READ_WRITE
     manyToOne:
         coupon:
             targetEntity: WellCommerce\Bundle\CouponBundle\Entity\Coupon

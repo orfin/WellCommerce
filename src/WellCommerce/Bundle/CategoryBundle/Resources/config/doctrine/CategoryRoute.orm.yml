@@ -1,5 +1,7 @@
 WellCommerce\Bundle\CategoryBundle\Entity\CategoryRoute:
     type: entity
+    cache:
+        usage: NONSTRICT_READ_WRITE
     table: route_category
     manyToOne:
         identifier:

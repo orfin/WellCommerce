@@ -47,7 +47,7 @@ class CartExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
     {
         return [
             'cart'         => $this->cartContext->getCurrentCart(),
-            'cartProducts' => $this->cartProductDataSet->getResult('array')
+            'cartProducts' => $this->cartProductDataSet->getResult('array', [], ['pagination' => false])
         ];
     }
 

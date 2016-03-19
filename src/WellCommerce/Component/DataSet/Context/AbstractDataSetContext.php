@@ -53,7 +53,9 @@ abstract class AbstractDataSetContext implements DataSetContextInterface
      */
     public function getResult(QueryBuilder $queryBuilder, DataSetRequestInterface $request, ColumnCollection $columns)
     {
-        $query  = $queryBuilder->getQuery();
+        $query = $queryBuilder->getQuery();
+        $query->useQueryCache($this->options['cache']);
+        $query->useResultCache($this->options['cache']);
         $result = $query->getArrayResult();
         $result = $this->transformResult($result);
 
@@ -67,13 +69,16 @@ abstract class AbstractDataSetContext implements DataSetContextInterface
     {
         $resolver->setRequired([
             'column_transformers',
+            'cache'
         ]);
 
         $resolver->setDefaults([
             'column_transformers' => new ColumnTransformerCollection(),
+            'cache'               => true
         ]);
 
         $resolver->setAllowedTypes('column_transformers', ColumnTransformerCollection::class);
+        $resolver->setAllowedTypes('cache', 'bool');
     }
 
     /**

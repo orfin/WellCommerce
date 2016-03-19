@@ -34,6 +34,8 @@ class ProductShowcaseBoxController extends AbstractBoxController
             'limit'     => 5,
             'order_by'  => 'name',
             'order_dir' => 'asc'
+        ], [
+            'pagination' => false
         ]);
 
         foreach ($categories['rows'] as &$category) {

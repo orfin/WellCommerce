@@ -1,5 +1,7 @@
 WellCommerce\Bundle\RoutingBundle\Entity\Route:
     type: entity
+    cache:
+        usage: NONSTRICT_READ_WRITE
     table: route
     inheritanceType: JOINED
     discriminatorColumn:

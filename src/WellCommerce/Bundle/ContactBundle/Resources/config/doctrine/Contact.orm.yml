@@ -1,5 +1,7 @@
 WellCommerce\Bundle\ContactBundle\Entity\Contact:
     type: entity
+    cache:
+        usage: NONSTRICT_READ_WRITE
     table: contact
     repositoryClass: WellCommerce\Bundle\ContactBundle\Repository\ContactRepository
     id:

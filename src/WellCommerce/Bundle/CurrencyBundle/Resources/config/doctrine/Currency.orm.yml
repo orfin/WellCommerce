@@ -1,5 +1,7 @@
 WellCommerce\Bundle\CurrencyBundle\Entity\Currency:
     type: entity
+    cache:
+        usage: NONSTRICT_READ_WRITE
     table: currency
     repositoryClass: WellCommerce\Bundle\CurrencyBundle\Repository\CurrencyRepository
     id:

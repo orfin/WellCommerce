@@ -81,6 +81,7 @@ class SelectContext extends ArrayContext
         $resolver->setDefaults([
             'value_column' => 'id',
             'label_column' => 'name',
+            'pagination'   => false
         ]);
 
         $resolver->setAllowedTypes('value_column', 'string');

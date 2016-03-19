@@ -1,5 +1,7 @@
 WellCommerce\Bundle\CategoryBundle\Entity\CategoryTranslation:
     type: entity
+    cache:
+        usage: NONSTRICT_READ_WRITE
     table: category_translation
     embedded:
         meta:

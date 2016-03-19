@@ -1,5 +1,7 @@
 WellCommerce\Bundle\ProducerBundle\Entity\Producer:
     type: entity
+    cache:
+        usage: NONSTRICT_READ_WRITE
     table: producer
     repositoryClass: WellCommerce\Bundle\ProducerBundle\Repository\ProducerRepository
     id:

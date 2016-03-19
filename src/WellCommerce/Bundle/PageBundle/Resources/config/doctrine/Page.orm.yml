@@ -1,5 +1,7 @@
 WellCommerce\Bundle\PageBundle\Entity\Page:
     type: entity
+    cache:
+        usage: NONSTRICT_READ_WRITE
     table: page
     repositoryClass: WellCommerce\Bundle\PageBundle\Repository\PageRepository
     id:

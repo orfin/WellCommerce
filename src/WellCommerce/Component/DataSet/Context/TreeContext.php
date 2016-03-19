@@ -74,6 +74,7 @@ class TreeContext extends ArrayContext
         $resolver->setDefaults([
             'children_column'  => 'children',
             'hierarchy_column' => 'hierarchy',
+            'pagination'       => false
         ]);
 
         $resolver->setAllowedTypes('children_column', 'string');
