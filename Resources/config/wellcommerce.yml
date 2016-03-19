@@ -60,5 +60,11 @@ doctrine:
                     locale:
                         class:   WellCommerce\Bundle\LocaleBundle\Doctrine\ORM\Filter\LocaleFilter
                         enabled: false
-
-
+                second_level_cache:
+                    region_cache_driver:
+                        type:                 service
+                        id:                   doctrine.cache
+                    region_lock_lifetime: 60
+                    log_enabled:          true
+                    region_lifetime:      3600
+                    enabled:              true
