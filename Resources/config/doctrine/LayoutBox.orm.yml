@@ -1,5 +1,7 @@
 WellCommerce\Bundle\LayoutBundle\Entity\LayoutBox:
     type: entity
+    cache:
+        usage: NONSTRICT_READ_WRITE
     table: layout_box
     repositoryClass: WellCommerce\Bundle\LayoutBundle\Repository\LayoutBoxRepository
     id:
