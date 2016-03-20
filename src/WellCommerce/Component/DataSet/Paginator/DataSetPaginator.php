@@ -35,7 +35,9 @@ class DataSetPaginator implements DataSetPaginatorInterface
             $this->replaceHaving($having, $columns, $builder);
         }
 
-        $query     = $builder->getQuery();
+        $query = $builder->getQuery();
+        $query->useQueryCache(true);
+        $query->useResultCache(true);
         $paginator = new Paginator($query, true);
         $paginator->setUseOutputWalkers(false);
 

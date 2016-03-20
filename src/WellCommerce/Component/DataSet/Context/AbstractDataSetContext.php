@@ -16,6 +16,8 @@ use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\PropertyAccess\PropertyAccess;
+use WellCommerce\Component\DataSet\Cache\CacheOptions;
+use WellCommerce\Component\DataSet\Cache\DataSetCacheManagerInterface;
 use WellCommerce\Component\DataSet\Column\ColumnCollection;
 use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
 use WellCommerce\Component\DataSet\Transformer\ColumnTransformerCollection;
@@ -33,9 +35,24 @@ abstract class AbstractDataSetContext implements DataSetContextInterface
     protected $options;
 
     /**
+     * @var DataSetCacheManagerInterface
+     */
+    protected $cacheManager;
+
+    /**
      * @var \Symfony\Component\PropertyAccess\PropertyAccessor
      */
     protected $propertyAccessor;
+
+    /**
+     * AbstractDataSetContext constructor.
+     *
+     * @param DataSetCacheManagerInterface $cacheManager
+     */
+    public function __construct(DataSetCacheManagerInterface $cacheManager)
+    {
+        $this->cacheManager = $cacheManager;
+    }
 
     /**
      * {@inheritdoc}
@@ -47,19 +64,23 @@ abstract class AbstractDataSetContext implements DataSetContextInterface
         $this->options          = $optionsResolver->resolve($options);
         $this->propertyAccessor = $this->getPropertyAccessor();
     }
-
+    
     /**
      * {@inheritdoc}
      */
-    public function getResult(QueryBuilder $queryBuilder, DataSetRequestInterface $request, ColumnCollection $columns)
+    public function getResult(QueryBuilder $builder, DataSetRequestInterface $request, ColumnCollection $columns, CacheOptions $cache)
     {
-        $query = $queryBuilder->getQuery();
+        $query = $builder->getQuery();
         $query->useQueryCache($this->options['cache']);
-        $query->useResultCache($this->options['cache']);
-        $result = $query->getArrayResult();
-        $result = $this->transformResult($result);
+        $query->useResultCache(false);
+        
+        if ($cache->isEnabled()) {
+            $result = $this->cacheManager->getCachedDataSetResult($query, $cache);
+        } else {
+            $result = $query->getArrayResult();
+        }
 
-        return $result;
+        return $this->transformResult($result);
     }
 
     /**
@@ -71,16 +92,16 @@ abstract class AbstractDataSetContext implements DataSetContextInterface
             'column_transformers',
             'cache'
         ]);
-
+        
         $resolver->setDefaults([
             'column_transformers' => new ColumnTransformerCollection(),
             'cache'               => true
         ]);
-
+        
         $resolver->setAllowedTypes('column_transformers', ColumnTransformerCollection::class);
         $resolver->setAllowedTypes('cache', 'bool');
     }
-
+    
     /**
      * @return \Symfony\Component\PropertyAccess\PropertyAccessor
      */
@@ -88,7 +109,7 @@ abstract class AbstractDataSetContext implements DataSetContextInterface
     {
         return PropertyAccess::createPropertyAccessor();
     }
-
+    
     /**
      * @return ColumnTransformerCollection
      */
@@ -96,7 +117,7 @@ abstract class AbstractDataSetContext implements DataSetContextInterface
     {
         return $this->options['column_transformers'];
     }
-
+    
     /**
      * Transforms the results using additional data transformers
      *
@@ -107,16 +128,16 @@ abstract class AbstractDataSetContext implements DataSetContextInterface
     protected function transformResult(array $result)
     {
         $transformers = $this->getTransformers();
-
+        
         if ($transformers->count()) {
             foreach ($result as $index => $row) {
                 $result[$index] = $this->transformRow($row, $transformers);
             }
         }
-
+        
         return $result;
     }
-
+    
     /**
      * Processes the row data
      *
@@ -131,7 +152,7 @@ abstract class AbstractDataSetContext implements DataSetContextInterface
                 $row[$field] = $transformers->get($field)->transformValue($value);
             }
         }
-
+        
         return $row;
     }
 }

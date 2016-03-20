@@ -311,6 +311,6 @@ class Cart extends AbstractEntity implements CartInterface
      */
     public function isEmpty() : bool
     {
-        return 0 === $this->products->count();
+        return 0 === $this->getTotals()->getQuantity();
     }
 }

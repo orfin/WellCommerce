@@ -15,6 +15,8 @@ namespace WellCommerce\Component\DataSet\Context;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use WellCommerce\Component\DataSet\Cache\CacheOptions;
+use WellCommerce\Component\DataSet\Cache\DataSetCacheManagerInterface;
 use WellCommerce\Component\DataSet\Column\ColumnCollection;
 use WellCommerce\Component\DataSet\Pagination\DataSetPaginationInterface;
 use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
@@ -32,37 +34,26 @@ class ArrayContext extends AbstractDataSetContext
     protected $pagination;
 
     /**
-     * Constructor
+     * ArrayContext constructor.
      *
-     * @param DataSetPaginationInterface $pagination
+     * @param DataSetPaginationInterface   $pagination
+     * @param DataSetCacheManagerInterface $cacheManager
      */
-    public function __construct(DataSetPaginationInterface $pagination)
+    public function __construct(DataSetPaginationInterface $pagination, DataSetCacheManagerInterface $cacheManager)
     {
-        $this->pagination = $pagination;
+        parent::__construct($cacheManager);
+        $this->pagination   = $pagination;
     }
-
+    
     /**
      * {@inheritdoc}
      */
-    public function getResult(QueryBuilder $queryBuilder, DataSetRequestInterface $request, ColumnCollection $columns)
+    public function getResult(QueryBuilder $builder, DataSetRequestInterface $request, ColumnCollection $columns, CacheOptions $cache)
     {
-        if ($this->options['pagination']) {
-            return $this->getPaginatedResult($queryBuilder, $request, $columns);
-        }
-
-        $result = parent::getResult($queryBuilder, $request, $columns);
-
-        return [
-            'rows' => $result,
-        ];
-    }
-
-    protected function getPaginatedResult(QueryBuilder $queryBuilder, DataSetRequestInterface $request, ColumnCollection $columns)
-    {
-        $pagination = $this->pagination->getPagination($queryBuilder, $request, $columns);
-        $result     = parent::getResult($queryBuilder, $request, $columns);
+        $pagination = ($this->options['pagination']) ? $this->pagination->getPagination($builder, $request, $columns) : null;
         $limit      = $request->getLimit();
         $offset     = $request->getOffset();
+        $result     = parent::getResult($builder, $request, $columns, $cache);
 
         return [
             'offset'     => $offset,
@@ -71,22 +62,22 @@ class ArrayContext extends AbstractDataSetContext
             'rows'       => $result,
         ];
     }
-
+    
     /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         parent::configureOptions($resolver);
-
+        
         $resolver->setRequired([
             'pagination',
         ]);
-
+        
         $resolver->setDefaults([
             'pagination' => true,
         ]);
-
+        
         $resolver->setAllowedTypes('pagination', 'bool');
     }
 }

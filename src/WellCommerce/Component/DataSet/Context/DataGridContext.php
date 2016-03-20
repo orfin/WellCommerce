@@ -15,6 +15,8 @@ namespace WellCommerce\Component\DataSet\Context;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use WellCommerce\Component\DataSet\Cache\CacheOptions;
+use WellCommerce\Component\DataSet\Cache\DataSetCacheManagerInterface;
 use WellCommerce\Component\DataSet\Column\ColumnCollection;
 use WellCommerce\Component\DataSet\Paginator\DataSetPaginatorInterface;
 use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
@@ -32,22 +34,24 @@ class DataGridContext extends AbstractDataSetContext
     protected $paginator;
 
     /**
-     * Constructor
+     * DataGridContext constructor.
      *
-     * @param DataSetPaginatorInterface $paginator
+     * @param DataSetPaginatorInterface    $paginator
+     * @param DataSetCacheManagerInterface $cacheManager
      */
-    public function __construct(DataSetPaginatorInterface $paginator)
+    public function __construct(DataSetPaginatorInterface $paginator, DataSetCacheManagerInterface $cacheManager)
     {
+        parent::__construct($cacheManager);
         $this->paginator = $paginator;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getResult(QueryBuilder $queryBuilder, DataSetRequestInterface $request, ColumnCollection $columns)
+    public function getResult(QueryBuilder $builder, DataSetRequestInterface $request, ColumnCollection $columns, CacheOptions $cache)
     {
-        $total    = $this->paginator->getTotalRows($queryBuilder, $columns);
-        $result   = parent::getResult($queryBuilder, $request, $columns);
+        $total    = $this->paginator->getTotalRows($builder, $columns);
+        $result   = parent::getResult($builder, $request, $columns, $cache);
         $filtered = ($request->getConditions()->count() !== 0) ? count($result) : $total;
 
         return [

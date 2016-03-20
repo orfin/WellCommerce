@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CartBundle\Manager\Front;
 
+use Symfony\Component\Debug\Debug;
 use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 use WellCommerce\Bundle\CartBundle\Entity\CartProductInterface;
 use WellCommerce\Bundle\CartBundle\Exception\AddCartItemException;

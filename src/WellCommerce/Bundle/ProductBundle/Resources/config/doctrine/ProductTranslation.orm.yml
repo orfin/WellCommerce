@@ -1,5 +1,7 @@
 WellCommerce\Bundle\ProductBundle\Entity\ProductTranslation:
     type: entity
+    cache:
+        usage: NONSTRICT_READ_WRITE
     table: product_translation
     embedded:
         meta:

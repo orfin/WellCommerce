@@ -4,6 +4,9 @@ WellCommerce\Bundle\ProductBundle\Entity\Product:
         usage: NONSTRICT_READ_WRITE
     table: product
     repositoryClass: WellCommerce\Bundle\ProductBundle\Repository\ProductRepository
+    indexes:
+        IDX_product_enabled:
+            columns: [enabled]
     id:
         id:
             type: integer

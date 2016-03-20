@@ -39,7 +39,6 @@ class ProductRepository extends AbstractEntityRepository implements ProductRepos
         $queryBuilder->leftJoin('gallery.photo', 'photos');
         $queryBuilder->leftJoin('product.statuses', 'statuses');
         $queryBuilder->leftJoin('product.shops', 'product_shops');
-        $queryBuilder->leftJoin('statuses.translations', 'statuses_translation');
         $queryBuilder->setParameter('mainPhoto', 1);
 
         return $queryBuilder;

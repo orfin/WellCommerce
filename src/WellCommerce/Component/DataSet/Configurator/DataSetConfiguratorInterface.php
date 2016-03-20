@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Component\DataSet\Configurator;
 
+use WellCommerce\Component\DataSet\Cache\CacheOptions;
 use WellCommerce\Component\DataSet\DataSetInterface;
 
 /**
@@ -41,4 +42,13 @@ interface DataSetConfiguratorInterface
      * @param array $transformers
      */
     public function setColumnTransformers(array $transformers = []);
+
+    /**
+     * Sets the dataset's cache configuration
+     *
+     * @param CacheOptions $options
+     *
+     * @return mixed
+     */
+    public function setCacheOptions(CacheOptions $options);
 }

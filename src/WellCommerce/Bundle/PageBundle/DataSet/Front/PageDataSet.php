@@ -13,6 +13,9 @@
 namespace WellCommerce\Bundle\PageBundle\DataSet\Front;
 
 use WellCommerce\Bundle\PageBundle\DataSet\Admin\PageDataSet as BaseDataSet;
+use WellCommerce\Bundle\PageBundle\Entity\Page;
+use WellCommerce\Bundle\PageBundle\Entity\PageTranslation;
+use WellCommerce\Component\DataSet\Cache\CacheOptions;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
 
 /**
@@ -28,9 +31,14 @@ class PageDataSet extends BaseDataSet
     public function configureOptions(DataSetConfiguratorInterface $configurator)
     {
         parent::configureOptions($configurator);
-
+        
         $configurator->setColumnTransformers([
             'route' => $this->getDataSetTransformer('route')
         ]);
+
+        $configurator->setCacheOptions(new CacheOptions(true, 3600, [
+            Page::class,
+            PageTranslation::class
+        ]));
     }
 }

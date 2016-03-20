@@ -50,7 +50,7 @@ class ProductStatusManager extends AbstractFrontManager
         $conditions = $this->getStatusConditions($status);
         $conditions->add(new Eq('category', $id));
 
-        return $this->get('product.dataset.front')->getResult('datagrid', [
+        return $this->get('product.dataset.front')->getResult('array', [
             'limit'      => 10,
             'order_by'   => 'name',
             'order_dir'  => 'asc',

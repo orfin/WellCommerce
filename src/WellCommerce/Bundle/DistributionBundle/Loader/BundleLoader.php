@@ -92,6 +92,7 @@ class BundleLoader
             \Bazinga\Bundle\JsTranslationBundle\BazingaJsTranslationBundle::class,
             \Liip\ImagineBundle\LiipImagineBundle::class,
             \Knp\DoctrineBehaviors\Bundle\DoctrineBehaviorsBundle::class,
+            \Cache\AdapterBundle\CacheAdapterBundle::class,
             \WellCommerce\Bundle\AppBundle\WellCommerceAppBundle::class,
         ];
 

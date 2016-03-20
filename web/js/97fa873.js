@@ -4740,11 +4740,16 @@
     Translator.add("attribute.heading.index", "Attributes", "wellcommerce", "en");
     Translator.add("attribute.heading.add", "Add attribute", "wellcommerce", "en");
     Translator.add("attribute.heading.edit", "Edit attribute", "wellcommerce", "en");
+    Translator.add("attribute.label.groups", "Groups", "wellcommerce", "en");
+    Translator.add("attribute.label.values", "Values", "wellcommerce", "en");
+    Translator.add("attribute.fieldset.groups", "Groups", "wellcommerce", "en");
+    Translator.add("attribute.fieldset.values", "Values", "wellcommerce", "en");
     Translator.add("attribute_group.heading.index", "Attribute groups", "wellcommerce", "en");
     Translator.add("attribute_group.heading.add", "Add group", "wellcommerce", "en");
     Translator.add("attribute_group.heading.edit", "Edit group", "wellcommerce", "en");
     Translator.add("attribute_group.flash.empty_group", "Empty group", "wellcommerce", "en");
     Translator.add("attribute_group.flash.new_group", "New group", "wellcommerce", "en");
+    Translator.add("attribute_group.fieldset.attributes", "Attributes", "wellcommerce", "en");
     Translator.add("attribute_group.label.attributes", "Attributes", "wellcommerce", "en");
     Translator.add("attribute_group.label.group", "Group", "wellcommerce", "en");
     Translator.add("attribute_value.heading.index", "Attribute values", "wellcommerce", "en");
@@ -5022,7 +5027,7 @@
     Translator.add("product.form.fieldset.stock", "Stock settings", "wellcommerce", "en");
     Translator.add("product.form.fieldset.photos", "Photos", "wellcommerce", "en");
     Translator.add("product.form.fieldset.statuses", "Statuses", "wellcommerce", "en");
-    Translator.add("product.form.fieldset.attributes", "Variants", "wellcommerce", "en");
+    Translator.add("product.form.fieldset.variants", "Variants", "wellcommerce", "en");
     Translator.add("product.form.fieldset.shops", "Shops", "wellcommerce", "en");
     Translator.add("product.form.fieldset.description", "Description", "wellcommerce", "en");
     Translator.add("product.comment.enabled", "Enable product's visibility", "wellcommerce", "en");
@@ -5148,6 +5153,7 @@
     Translator.add("unit.heading.index", "Units of measure", "wellcommerce", "en");
     Translator.add("unit.heading.add", "Add a unit of measure", "wellcommerce", "en");
     Translator.add("unit.heading.edit", "Edit a unit of measure", "wellcommerce", "en");
+    Translator.add("product.form.fieldset.attributes", "Variants", "wellcommerce", "en");
     Translator.add("test", "test", "wellcommerce", "en");
 })(Translator);
 
@@ -5288,6 +5294,10 @@
     Translator.add("attribute.heading.index", "Atrybuty", "wellcommerce", "pl");
     Translator.add("attribute.heading.add", "Dodawanie nowego atrubutu", "wellcommerce", "pl");
     Translator.add("attribute.heading.edit", "Edycja atrybutu", "wellcommerce", "pl");
+    Translator.add("attribute.label.groups", "Grupy", "wellcommerce", "pl");
+    Translator.add("attribute.label.values", "Warto\u015bci", "wellcommerce", "pl");
+    Translator.add("attribute.fieldset.groups", "Grupy", "wellcommerce", "pl");
+    Translator.add("attribute.fieldset.values", "Warto\u015bci", "wellcommerce", "pl");
     Translator.add("attribute_group.heading.index", "Grupy atrybut\u00f3w", "wellcommerce", "pl");
     Translator.add("attribute_group.heading.add", "Dodaj grup\u0119", "wellcommerce", "pl");
     Translator.add("attribute_group.heading.edit", "Edycja grupy", "wellcommerce", "pl");
@@ -5295,6 +5305,7 @@
     Translator.add("attribute_group.flash.new_group", "Nowa grupa", "wellcommerce", "pl");
     Translator.add("attribute_group.label.attributes", "Atrybuty", "wellcommerce", "pl");
     Translator.add("attribute_group.label.group", "Grupa", "wellcommerce", "pl");
+    Translator.add("attribute_group.fieldset.attributes", "Atrybuty", "wellcommerce", "pl");
     Translator.add("attribute_value.heading.index", "Warto\u015bci atrybut\u00f3w", "wellcommerce", "pl");
     Translator.add("attribute_value.heading.add", "Dodaj warto\u015bci", "wellcommerce", "pl");
     Translator.add("attribute_value.heading.edit", "Edytuj warto\u015bci", "wellcommerce", "pl");
@@ -8224,7 +8235,6 @@ var oDefaults = {
 	aoViews:'',
 	iActiveLanguage:1,
 	aoLanguages:'',
-	aoVatValues:'',
 	sCurrentController: '',
 	sCurrentAction: ''
 };
@@ -8236,7 +8246,6 @@ GCore = function(oParams) {
 	GCore.aoViews = GCore.p_oParams.aoViews;
 	GCore.iActiveLanguage = GCore.p_oParams.iActiveLanguage;
 	GCore.aoLanguages = GCore.p_oParams.aoLanguages;
-	GCore.aoVatValues = GCore.p_oParams.aoVatValues;
 	GCore.sCurrentController = GCore.p_oParams.sCurrentController;
 	GCore.sAdminUrl = GCore.p_oParams.sUrl;
 	GCore.sCurrentAction = GCore.p_oParams.sCurrentAction;
@@ -13352,10 +13361,6 @@ var GFormSelect = GCore.ExtendClass(GFormField, function() {
 							gThis.ExchangeOptions(eEvent.options);
 							gThis.SetValue(eEvent.id);
 							gThis.m_jField.triggerHandler('change');
-							if(eEvent.vat){
-								GCore.aoVatValues = eEvent.vat;
-								$(window).trigger('OnVatChange');
-							}
 						}else{
 							GError(eEvent.error);
 						}
@@ -13863,6 +13868,7 @@ var GFormStaticText = GCore.ExtendClass(GFormField, function() {
 	gThis.Focus = function() { return false; };
 
 }, oDefaults);
+
 /*
 * SUBMIT
 */
@@ -13888,6 +13894,7 @@ var GFormSubmit = GCore.ExtendClass(GFormField, function() {
 	};
 
 }, oDefaults);
+
 /*
 * TECHNICAL DATA EDITOR
 */
@@ -18642,8 +18649,8 @@ var GFormPriceEditor = GCore.ExtendClass(GFormTextField, function() {
 		var gVat = gThis.m_gForm.GetField(gThis.m_oOptions.sVatField);
 		var iVatId = parseInt(gVat.GetValue());
 		var fVat = 0;
-		if (GCore.aoVatValues[iVatId] != undefined) {
-			fVat = parseFloat(GCore.aoVatValues[iVatId]);
+		if (gThis.m_oOptions.aoVatValues[iVatId] != undefined) {
+			fVat = parseFloat(gThis.m_oOptions.aoVatValues[iVatId]);
 		}
 		if (sPrice == undefined) {
 			var sPrice = gThis.m_jField.eq(0).val();
@@ -18657,8 +18664,8 @@ var GFormPriceEditor = GCore.ExtendClass(GFormTextField, function() {
 		var gVat = gThis.m_gForm.GetField(gThis.m_oOptions.sVatField);
 		var iVatId = gVat.GetValue();
 		var fVat = 0;
-		if (GCore.aoVatValues[iVatId] != undefined) {
-			fVat = parseFloat(GCore.aoVatValues[iVatId]);
+		if (gThis.m_oOptions.aoVatValues[iVatId] != undefined) {
+			fVat = parseFloat(gThis.m_oOptions.aoVatValues[iVatId]);
 		}
 		if (sPrice == undefined) {
 			var sPrice = gThis.m_jField.eq(1).val();
@@ -18908,41 +18915,11 @@ var GFormProductAggregator = GCore.ExtendClass(GFormField, function() {
 	};
 
 	gThis._CalculateGrossPrice = function(sPrice) {
-		/*var gVat = gThis.m_gForm.GetField(gThis.m_oOptions.sVatField);
-		var iVatId = gVat.GetValue();
-		var fVat = 0;
-		for (var i in gThis.m_oOptions.aoVatValues) {
-			if (gThis.m_oOptions.aoVatValues[i].id == iVatId) {
-				fVat = gThis.m_oOptions.aoVatValues[i].value;
-				break;
-			}
-		}
-		if (sPrice == undefined) {
-			var sPrice = gThis.m_jField.eq(0).val();
-		}
-		var fPrice = parseFloat(sPrice.replace(/,/, '.'));
-		fPrice = isNaN(fPrice) ? 0 : fPrice;
-		//gThis.m_jField.eq(0).val(fPrice.toFixed(2));
-		gThis.m_jField.eq(1).val((fPrice * (1 + fVat / 100)).toFixed(2));*/
+
 	};
 
 	gThis._CalculateNetPrice = function(sPrice) {
-		/*var gVat = gThis.m_gForm.GetField(gThis.m_oOptions.sVatField);
-		var iVatId = gVat.GetValue();
-		var fVat = 0;
-		for (var i in gThis.m_oOptions.aoVatValues) {
-			if (gThis.m_oOptions.aoVatValues[i].id == iVatId) {
-				fVat = gThis.m_oOptions.aoVatValues[i].value;
-				break;
-			}
-		}
-		if (sPrice == undefined) {
-			var sPrice = gThis.m_jField.eq(0).val();
-		}
-		var fPrice = parseFloat(sPrice.replace(/,/, '.'));
-		fPrice = isNaN(fPrice) ? 0 : fPrice;
-		//gThis.m_jField.eq(1).val(fPrice.toFixed(2));
-		gThis.m_jField.eq(0).val((fPrice / (1 + fVat / 100)).toFixed(2));*/
+
 	};
 
 	gThis.StartWaiting = function() {
@@ -25415,7 +25392,7 @@ var GFormVariantEditor = GCore.ExtendClass(GFormField, function () {
         var jSave = $('<a class="save button" href="#"/>');
         jSave.append('<span><img src="' + gThis._GetImage('SaveIcon') + '" alt=""/>' + GForm.Language.product_variants_editor_save_variant + '</span>');
         var jGenerate = $('<a class="add button" href="#"/>');
-        jGenerate.append('<span><img src="' + gThis._GetImage('AddIcon') + '" alt=""/>Generuj automatycznie</span>');
+        jGenerate.append('<span><img src="' + gThis._GetImage('AddIcon') + '" alt=""/>Autogenerate variants</span>');
         if (gThis.m_oOptions.bAllowGenerate == 1) {
             gThis.m_jVariantEditorOptions.append($('<li/>').append(jGenerate));
         }
@@ -25439,12 +25416,16 @@ var GFormVariantEditor = GCore.ExtendClass(GFormField, function () {
         jGenerate.click(GEventHandler(function () {
             var aoAttributes = [];
             $(".generate:checked").each(function () {
-                aoAttributes.push(this.value);
+                aoAttributes.push({
+                    attribute: $(this).data('attribute'),
+                    value: this.value
+                });
             });
+
             if (aoAttributes.length) {
                 if (gThis.m_aoVariants.length > 0) {
-                    var title = 'Automatyczne wygenerowanie wariantów';
-                    var msg = 'Wybranie tej opcji usunie wszystkie dotychczasowe dotychczasowe warianty i wygeneruje kombinacje na nowo. Czy jesteś pewien ?';
+                    var title = 'Autogeneration of new variants';
+                    var msg = 'Using this option removes all variants and generates new ones. Are you sure?';
                     var params = {};
                     var func = function (p) {
                         gThis.m_gDataProvider.ChangeData();
@@ -25456,22 +25437,23 @@ var GFormVariantEditor = GCore.ExtendClass(GFormField, function () {
                     gThis._GenerateCartesian(aoAttributes);
                 }
             } else {
-                GError('Nie wybrano cech', 'Aby wygenerować automatycznie warianty musisz wybrać cechy zaznaczając checkbox obok ich nazwy.');
+                GError('Please select attributes', 'Prior to autogeneration of variants you must choose attributes.');
             }
             return false;
         }));
     };
 
     gThis._GenerateCartesian = function (aoAttributes) {
-        var sSetId = $('#variants_pane__variants__set').find('option:selected').val();
-        gThis.m_oOptions.fGetCartesian({
+        var sSetId = gThis.m_jSetSelect.find('option:selected').val();
+        GF_Ajax_Request(Routing.generate(gThis.m_oOptions.sGenerateCartesianRoute), {
             setid: sSetId,
-            ids: aoAttributes
-        }, GCallback(gThis._OnVariantsGenerated));
+            attributes: aoAttributes
+        }, gThis._OnVariantsGenerated);
+
     };
 
     gThis._OnVariantsGenerated = GEventHandler(function (eEvent) {
-
+        console.log(gThis.m_aoAttributes);
         $.each(eEvent.variants, function (k, key) {
             var sId = 'new-' + gThis.m_sRepetitionCounter++;
             var oRow = {
@@ -25485,9 +25467,17 @@ var GFormVariantEditor = GCore.ExtendClass(GFormField, function () {
                 status: 1,
                 weight: 0
             };
-            $.each(key, function (a, attribute) {
-                oRow['attribute_' + attribute.sAttributeId] = attribute.sValueName;
-                oRow['attributeid_' + attribute.sAttributeId] = attribute.sValueId;
+            $.each(key, function (attributeId, attributeValue) {
+                for (var k in gThis.m_aoAttributes) {
+                    if (gThis.m_aoAttributes[k].id == attributeId) {
+                        for (var l in gThis.m_aoAttributes[k]['values']) {
+                            if (gThis.m_aoAttributes[k]['values'][l].id == attributeValue) {
+                                oRow['attribute_' + attributeId] = gThis.m_aoAttributes[k]['values'][l].name;
+                            }
+                        }
+                    }
+                }
+                oRow['attributeid_' + attributeId] = attributeValue;
             });
             gThis.m_gDataProvider.AddRow(oRow);
             gThis.m_gDatagrid.m_asSelected = [sId];
@@ -25568,7 +25558,7 @@ var GFormVariantEditor = GCore.ExtendClass(GFormField, function () {
             var jUl = $('<ul/>');
             for (var j = 0; j < gThis.m_aoAttributes[i].values.length; j++) {
                 var oValue = gThis.m_aoAttributes[i].values[j];
-                var jValue = $('<li><input type="checkbox" class="generate" value="' + oValue.id + '" /> ' + oValue.name + '</li>');
+                var jValue = $('<li><input type="checkbox" data-attribute="' + gThis.m_aoAttributes[i].id + '" class="generate" value="' + oValue.id + '" /> ' + oValue.name + '</li>');
                 jUl.append(jValue);
             }
             var jSaveValue = $('<a class="save" href="#"/>').append('<img src="' + gThis._GetImage('SaveIcon') + '" alt="' + GForm.Language.product_variants_editor_save_value + '" title="' + GForm.Language.product_variants_editor_save_value + '"/>');

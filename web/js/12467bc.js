@@ -4419,7 +4419,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 
 	ProcessIncomingData: GF.NewEventHandler(function(oData) {
 		if ((oData.data_id == undefined) || !(GF_Instance.s_aoInstances[oData.data_id] instanceof GF_Datagrid)) {
-			GF_Debug.Error('The server has responded with an invalid data.<br />' + oData);
+			GF_Debug.Error('The server has responded with an invalid data.<br />' + oData.error);
 		}
 		var dDg = GF_Instance.ReturnInstance(oData.data_id);
 		dDg._ProcessData(oData);

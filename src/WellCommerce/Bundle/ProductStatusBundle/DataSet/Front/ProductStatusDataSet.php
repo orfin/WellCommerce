@@ -13,6 +13,9 @@
 namespace WellCommerce\Bundle\ProductStatusBundle\DataSet\Front;
 
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
+use WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatus;
+use WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusTranslation;
+use WellCommerce\Component\DataSet\Cache\CacheOptions;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
 
 /**
@@ -37,5 +40,10 @@ class ProductStatusDataSet extends AbstractDataSet
         $configurator->setColumnTransformers([
             'route' => $this->getDataSetTransformer('route')
         ]);
+
+        $configurator->setCacheOptions(new CacheOptions(true, 3600, [
+            ProductStatus::class,
+            ProductStatusTranslation::class
+        ]));
     }
 }

@@ -118,7 +118,6 @@ var oDefaults = {
 	aoViews:'',
 	iActiveLanguage:1,
 	aoLanguages:'',
-	aoVatValues:'',
 	sCurrentController: '',
 	sCurrentAction: ''
 };
@@ -130,7 +129,6 @@ GCore = function(oParams) {
 	GCore.aoViews = GCore.p_oParams.aoViews;
 	GCore.iActiveLanguage = GCore.p_oParams.iActiveLanguage;
 	GCore.aoLanguages = GCore.p_oParams.aoLanguages;
-	GCore.aoVatValues = GCore.p_oParams.aoVatValues;
 	GCore.sCurrentController = GCore.p_oParams.sCurrentController;
 	GCore.sAdminUrl = GCore.p_oParams.sUrl;
 	GCore.sCurrentAction = GCore.p_oParams.sCurrentAction;
@@ -5246,10 +5244,6 @@ var GFormSelect = GCore.ExtendClass(GFormField, function() {
 							gThis.ExchangeOptions(eEvent.options);
 							gThis.SetValue(eEvent.id);
 							gThis.m_jField.triggerHandler('change');
-							if(eEvent.vat){
-								GCore.aoVatValues = eEvent.vat;
-								$(window).trigger('OnVatChange');
-							}
 						}else{
 							GError(eEvent.error);
 						}
@@ -10538,8 +10532,8 @@ var GFormPriceEditor = GCore.ExtendClass(GFormTextField, function() {
 		var gVat = gThis.m_gForm.GetField(gThis.m_oOptions.sVatField);
 		var iVatId = parseInt(gVat.GetValue());
 		var fVat = 0;
-		if (GCore.aoVatValues[iVatId] != undefined) {
-			fVat = parseFloat(GCore.aoVatValues[iVatId]);
+		if (gThis.m_oOptions.aoVatValues[iVatId] != undefined) {
+			fVat = parseFloat(gThis.m_oOptions.aoVatValues[iVatId]);
 		}
 		if (sPrice == undefined) {
 			var sPrice = gThis.m_jField.eq(0).val();
@@ -10553,8 +10547,8 @@ var GFormPriceEditor = GCore.ExtendClass(GFormTextField, function() {
 		var gVat = gThis.m_gForm.GetField(gThis.m_oOptions.sVatField);
 		var iVatId = gVat.GetValue();
 		var fVat = 0;
-		if (GCore.aoVatValues[iVatId] != undefined) {
-			fVat = parseFloat(GCore.aoVatValues[iVatId]);
+		if (gThis.m_oOptions.aoVatValues[iVatId] != undefined) {
+			fVat = parseFloat(gThis.m_oOptions.aoVatValues[iVatId]);
 		}
 		if (sPrice == undefined) {
 			var sPrice = gThis.m_jField.eq(1).val();
@@ -10804,41 +10798,11 @@ var GFormProductAggregator = GCore.ExtendClass(GFormField, function() {
 	};
 
 	gThis._CalculateGrossPrice = function(sPrice) {
-		/*var gVat = gThis.m_gForm.GetField(gThis.m_oOptions.sVatField);
-		var iVatId = gVat.GetValue();
-		var fVat = 0;
-		for (var i in gThis.m_oOptions.aoVatValues) {
-			if (gThis.m_oOptions.aoVatValues[i].id == iVatId) {
-				fVat = gThis.m_oOptions.aoVatValues[i].value;
-				break;
-			}
-		}
-		if (sPrice == undefined) {
-			var sPrice = gThis.m_jField.eq(0).val();
-		}
-		var fPrice = parseFloat(sPrice.replace(/,/, '.'));
-		fPrice = isNaN(fPrice) ? 0 : fPrice;
-		//gThis.m_jField.eq(0).val(fPrice.toFixed(2));
-		gThis.m_jField.eq(1).val((fPrice * (1 + fVat / 100)).toFixed(2));*/
+
 	};
 
 	gThis._CalculateNetPrice = function(sPrice) {
-		/*var gVat = gThis.m_gForm.GetField(gThis.m_oOptions.sVatField);
-		var iVatId = gVat.GetValue();
-		var fVat = 0;
-		for (var i in gThis.m_oOptions.aoVatValues) {
-			if (gThis.m_oOptions.aoVatValues[i].id == iVatId) {
-				fVat = gThis.m_oOptions.aoVatValues[i].value;
-				break;
-			}
-		}
-		if (sPrice == undefined) {
-			var sPrice = gThis.m_jField.eq(0).val();
-		}
-		var fPrice = parseFloat(sPrice.replace(/,/, '.'));
-		fPrice = isNaN(fPrice) ? 0 : fPrice;
-		//gThis.m_jField.eq(1).val(fPrice.toFixed(2));
-		gThis.m_jField.eq(0).val((fPrice / (1 + fVat / 100)).toFixed(2));*/
+
 	};
 
 	gThis.StartWaiting = function() {

@@ -5,10 +5,6 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="doctrine.cache" class="%doctrine_cache.file_system.class%">
-            <argument>%kernel.root_dir%/cache/%kernel.environment%/doctrine</argument>
-        </service>
-
         <service id="doctrine.class_metadata.enhancer_collection" class="WellCommerce\Bundle\DoctrineBundle\Enhancer\ClassMetadata\ClassMetadataEnhancerCollection" />
 
         <service id="doctrine.class_metadata.enhancer_traverser" class="WellCommerce\Bundle\DoctrineBundle\Enhancer\ClassMetadata\ClassMetadataEnhancerTraverser">
@@ -28,6 +24,11 @@
 
         <service id="doctrine.timestampable.event_subscriber" class="WellCommerce\Bundle\DoctrineBundle\EventListener\TimestampableSubscriber">
             <tag name="doctrine.event_subscriber" />
+        </service>
+
+        <service id="doctrine.cache_invalidator.event_subscriber" class="WellCommerce\Bundle\DoctrineBundle\EventListener\CacheInvalidatorSubscriber">
+            <argument type="service" id="cache"/>
+            <tag name="doctrine.event_subscriber" connection="default" />
         </service>
 
         <service id="doctrine.command.generate_entity_extra" class="WellCommerce\Bundle\DoctrineBundle\Command\GenerateEntityExtraCommand">
