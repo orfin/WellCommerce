@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Component\DataSet\Configurator;
 
+use WellCommerce\Component\DataSet\Cache\CacheOptions;
 use WellCommerce\Component\DataSet\Column\Column;
 use WellCommerce\Component\DataSet\Column\ColumnCollection;
 use WellCommerce\Component\DataSet\DataSetInterface;
@@ -67,5 +68,13 @@ class DataSetConfigurator implements DataSetConfiguratorInterface
         }
 
         $this->dataset->setDefaultContextOption('column_transformers', $collection);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCacheOptions(CacheOptions $options)
+    {
+        $this->dataset->setCacheOptions($options);
     }
 }

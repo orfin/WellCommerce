@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Component\DataSet;
 
+use WellCommerce\Component\DataSet\Cache\CacheOptions;
 use WellCommerce\Component\DataSet\Column\ColumnCollection;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
 
@@ -76,4 +77,9 @@ interface DataSetInterface
      * @return void
      */
     public function dispatchOnDataSetInitEvent();
+
+    /**
+     * @param CacheOptions $options
+     */
+    public function setCacheOptions(CacheOptions $options);
 }
