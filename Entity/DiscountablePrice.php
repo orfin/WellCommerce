@@ -57,6 +57,10 @@ class DiscountablePrice extends Price
      */
     public function setValidFrom(\DateTime $validFrom = null)
     {
+        if (null !== $validFrom) {
+            $validFrom = $validFrom->setTime(0, 0, 0);
+        }
+
         $this->validFrom = $validFrom;
     }
 
@@ -73,6 +77,10 @@ class DiscountablePrice extends Price
      */
     public function setValidTo(\DateTime $validTo = null)
     {
+        if (null !== $validTo) {
+            $validTo = $validTo->setTime(23, 59, 59);
+        }
+
         $this->validTo = $validTo;
     }
 
