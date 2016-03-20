@@ -21,6 +21,12 @@ knp_doctrine_behaviors:
     timestampable:  true
     translatable:   true
 
+doctrine_cache:
+    providers:
+        file_system:
+            type: file_system
+        apcu:
+            type: apcu
 doctrine:
     dbal:
         driver:   "%database_driver%"
@@ -37,13 +43,13 @@ doctrine:
             default:
                 query_cache_driver:
                     type: service
-                    id: doctrine.cache
+                    id: doctrine_cache.providers.file_system
                 metadata_cache_driver:
                     type: service
-                    id: doctrine.cache
+                    id: doctrine_cache.providers.file_system
                 result_cache_driver:
                     type: service
-                    id: doctrine.cache
+                    id: doctrine_cache.providers.file_system
                 auto_mapping: false
                 dql:
                     string_functions:
@@ -62,8 +68,8 @@ doctrine:
                         enabled: false
                 second_level_cache:
                     region_cache_driver:
-                        type:                 service
-                        id:                   doctrine.cache
+                        type: service
+                        id: doctrine_cache.providers.file_system
                     region_lock_lifetime: 60
                     log_enabled:          true
                     region_lifetime:      3600

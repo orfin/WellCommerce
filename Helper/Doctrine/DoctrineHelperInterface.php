@@ -12,6 +12,8 @@
 
 namespace WellCommerce\Bundle\DoctrineBundle\Helper\Doctrine;
 
+use Doctrine\ORM\QueryBuilder;
+
 /**
  * Interface DoctrineHelperInterface
  *
@@ -92,4 +94,13 @@ interface DoctrineHelperInterface
      * @return \Doctrine\Common\Persistence\Mapping\ClassMetadataFactory
      */
     public function getMetadataFactory();
+
+    /**
+     * Returns the root and association classes used in given QueryBuilder
+     *
+     * @param QueryBuilder $queryBuilder
+     *
+     * @return array
+     */
+    public function getAllClassesForQueryBuilder(QueryBuilder $queryBuilder) : array;
 }
