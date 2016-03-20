@@ -13,6 +13,9 @@
 namespace WellCommerce\Bundle\CategoryBundle\DataSet\Front;
 
 use WellCommerce\Bundle\CategoryBundle\DataSet\Admin\CategoryDataSet as BaseDataSet;
+use WellCommerce\Bundle\CategoryBundle\Entity\CategoryInterface;
+use WellCommerce\Bundle\CategoryBundle\Entity\CategoryTranslation;
+use WellCommerce\Component\DataSet\Cache\CacheOptions;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
 
 /**
@@ -29,5 +32,10 @@ class CategoryDataSet extends BaseDataSet
         $configurator->setColumnTransformers([
             'route' => $this->getDataSetTransformer('route')
         ]);
+
+        $configurator->setCacheOptions(new CacheOptions(true, 3600, [
+            CategoryInterface::class,
+            CategoryTranslation::class
+        ]));
     }
 }
