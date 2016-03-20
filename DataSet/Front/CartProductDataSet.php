@@ -12,7 +12,13 @@
 
 namespace WellCommerce\Bundle\CartBundle\DataSet\Front;
 
+use WellCommerce\Bundle\CartBundle\Entity\Cart;
+use WellCommerce\Bundle\CartBundle\Entity\CartProduct;
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
+use WellCommerce\Bundle\ProductBundle\Entity\Product;
+use WellCommerce\Bundle\ProductBundle\Entity\Variant;
+use WellCommerce\Bundle\TaxBundle\Entity\Tax;
+use WellCommerce\Component\DataSet\Cache\CacheOptions;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
 
 /**
@@ -45,7 +51,15 @@ class CartProductDataSet extends AbstractDataSet
         ]);
 
         $configurator->setColumnTransformers([
-            'route'   => $this->getDataSetTransformer('route'),
+            'route' => $this->getDataSetTransformer('route'),
         ]);
+
+        $configurator->setCacheOptions(new CacheOptions(true, 3600, [
+            Cart::class,
+            CartProduct::class,
+            Product::class,
+            Variant::class,
+            Tax::class
+        ]));
     }
 }
