@@ -49,24 +49,28 @@ class LoadProductData extends AbstractDataFixture
         }
 
         $limit = $this->container->getParameter('fixtures_product_limit');
+        $faker = $this->getFakerGenerator();
+        $names = [];
 
         for ($i = 0; $i < $limit; $i++) {
-            $this->createRandomProduct($manager);
+            $sentence     = $faker->unique()->sentence(3);
+            $name         = substr($sentence, 0, strlen($sentence) - 1);
+            $names[$name] = $name;
+        }
+
+        foreach ($names as $name) {
+            $this->createRandomProduct($name, $manager);
         }
 
         $manager->flush();
-
-        $this->container->get('search.indexer')->reindexProducts();
     }
 
-    protected function createRandomProduct(ObjectManager $manager)
+    protected function createRandomProduct(string $name, ObjectManager $manager)
     {
         $faker            = $this->getFakerGenerator();
-        $sentence         = $faker->unique()->sentence(3);
-        $name             = substr($sentence, 0, strlen($sentence) - 1);
         $shortDescription = $faker->text(100);
         $description      = $faker->text(1000);
-        $sku              = $this->getFakerGenerator()->creditCardNumber();
+        $sku              = $faker->creditCardNumber();
         $shop             = $this->getReference('shop');
         $currency         = $this->randomizeSamples('currency', LoadCurrencyData::$samples);
         $producer         = $this->randomizeSamples('producer', LoadProducerData::$samples);

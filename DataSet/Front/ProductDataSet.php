@@ -12,7 +12,13 @@
 
 namespace WellCommerce\Bundle\ProductBundle\DataSet\Front;
 
+use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
+use WellCommerce\Bundle\ProducerBundle\Entity\Producer;
+use WellCommerce\Bundle\ProducerBundle\Entity\ProducerTranslation;
+use WellCommerce\Bundle\ProductBundle\Entity\Product;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductTranslation;
+use WellCommerce\Component\DataSet\Cache\CacheOptions;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
 
 /**
@@ -52,5 +58,13 @@ class ProductDataSet extends AbstractDataSet
         $configurator->setColumnTransformers([
             'route' => $this->getDataSetTransformer('route')
         ]);
+
+        $configurator->setCacheOptions(new CacheOptions(true, 3600, [
+            Product::class,
+            ProductTranslation::class,
+            Producer::class,
+            ProducerTranslation::class,
+            Category::class
+        ]));
     }
 }

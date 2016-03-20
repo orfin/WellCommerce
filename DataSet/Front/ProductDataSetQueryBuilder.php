@@ -50,8 +50,7 @@ class ProductDataSetQueryBuilder extends BaseProductDataSetQueryBuilder
         $this->addCategoryConditions($qb);
         $this->addCurrencyRateConditions($qb);
 
-        $qb->setParameter('date', new \DateTime());
-
+        $qb->setParameter('date', (new \DateTime())->setTime(0, 0, 1));
 
         return $qb;
     }
