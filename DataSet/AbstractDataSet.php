@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\CoreBundle\DataSet;
 
 use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\CoreBundle\EventDispatcher\EventDispatcherInterface;
+use WellCommerce\Component\DataSet\Cache\CacheOptions;
 use WellCommerce\Component\DataSet\Column\ColumnCollection;
 use WellCommerce\Component\DataSet\Column\ColumnInterface;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
@@ -35,39 +36,44 @@ abstract class AbstractDataSet implements DataSetInterface
      * @var ColumnCollection
      */
     protected $columns;
-
+    
     /**
      * @var DataSetQueryBuilderInterface
      */
     protected $dataSetQueryBuilder;
-
+    
     /**
      * @var EventDispatcherInterface
      */
     protected $eventDispatcher;
-
+    
     /**
      * @var ColumnTransformerCollection
      */
     protected $columnTransformers;
-
+    
     /**
      * @var DataSetManagerInterface
      */
     protected $manager;
-
+    
     /**
      * @var array
      */
     protected $defaultContextOptions = [];
-
+    
     /**
      * @var array
      */
     protected $defaultRequestOptions = [];
-
+    
     /**
-     * Constructor
+     * @var CacheOptions
+     */
+    protected $cacheOptions;
+    
+    /**
+     * AbstractDataSet constructor.
      *
      * @param DataSetQueryBuilderInterface $dataSetQueryBuilder
      * @param DataSetManagerInterface      $manager
@@ -82,8 +88,17 @@ abstract class AbstractDataSet implements DataSetInterface
         $this->manager             = $manager;
         $this->eventDispatcher     = $eventDispatcher;
         $this->columns             = new ColumnCollection();
+        $this->cacheOptions        = new CacheOptions();
     }
-
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function setCacheOptions(CacheOptions $options)
+    {
+        $this->cacheOptions = $options;
+    }
+    
     /**
      * {@inheritdoc}
      */
@@ -91,7 +106,7 @@ abstract class AbstractDataSet implements DataSetInterface
     {
         return $this->columns;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -99,7 +114,7 @@ abstract class AbstractDataSet implements DataSetInterface
     {
         $this->columns = $columns;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -107,12 +122,12 @@ abstract class AbstractDataSet implements DataSetInterface
     {
         $this->columns->add($column);
     }
-
+    
     /**
      * {@inheritdoc}
      */
     abstract public function configureOptions(DataSetConfiguratorInterface $configurator);
-
+    
     /**
      * {@inheritdoc}
      */
@@ -120,7 +135,7 @@ abstract class AbstractDataSet implements DataSetInterface
     {
         $this->defaultRequestOptions[$name] = $value;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -128,7 +143,7 @@ abstract class AbstractDataSet implements DataSetInterface
     {
         $this->eventDispatcher->dispatchOnDataSetInitEvent($this);
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -136,7 +151,7 @@ abstract class AbstractDataSet implements DataSetInterface
     {
         $this->defaultContextOptions[$name] = $value;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -147,16 +162,16 @@ abstract class AbstractDataSet implements DataSetInterface
         $context        = $this->manager->createContext($contextType, $contextOptions);
         $request        = $this->manager->createRequest($requestOptions);
         $queryBuilder   = $this->getQueryBuilder($request);
-
+        
         try {
-            return $context->getResult($queryBuilder, $request, $this->columns);
+            return $context->getResult($queryBuilder, $request, $this->columns, $this->cacheOptions);
         } catch (\Exception $e) {
             return [
                 'error' => $e->getMessage()
             ];
         }
     }
-
+    
     /**
      * Returns the default context's options
      *
@@ -167,10 +182,10 @@ abstract class AbstractDataSet implements DataSetInterface
     protected function getContextOptions(array $contextOptions = []) : array
     {
         $contextOptions = array_merge($this->defaultContextOptions, $contextOptions);
-
+        
         return $contextOptions;
     }
-
+    
     /**
      * Returns the default request's options
      *
@@ -181,10 +196,10 @@ abstract class AbstractDataSet implements DataSetInterface
     protected function getRequestOptions(array $requestOptions = []) : array
     {
         $requestOptions = array_merge($this->defaultRequestOptions, $requestOptions);
-
+        
         return $requestOptions;
     }
-
+    
     /**
      * Creates a dataset's transformer using factory
      *
@@ -197,7 +212,7 @@ abstract class AbstractDataSet implements DataSetInterface
     {
         return $this->manager->createTransformer($type, $options);
     }
-
+    
     /**
      * Prepares and returns the Doctrine's QueryBuilder
      *
@@ -209,7 +224,7 @@ abstract class AbstractDataSet implements DataSetInterface
     {
         $columns      = $this->getColumns();
         $queryBuilder = $this->dataSetQueryBuilder->getQueryBuilder($columns, $request);
-
+        
         return $queryBuilder;
     }
 }
