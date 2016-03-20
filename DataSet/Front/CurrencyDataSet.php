@@ -21,5 +21,4 @@ use WellCommerce\Bundle\CurrencyBundle\DataSet\Admin\CurrencyDataSet as BaseData
  */
 class CurrencyDataSet extends BaseDataSet
 {
-
 }
