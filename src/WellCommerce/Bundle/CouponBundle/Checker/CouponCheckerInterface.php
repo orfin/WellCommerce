@@ -26,10 +26,10 @@ interface CouponCheckerInterface
      *
      * @return bool
      */
-    public function isValid(CouponInterface $coupon);
+    public function isValid(CouponInterface $coupon) : bool;
 
     /**
      * @return string
      */
-    public function getError();
+    public function getError() : string;
 }
