@@ -14,71 +14,67 @@ namespace WellCommerce\Bundle\MediaBundle\Entity;
 
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 
 /**
  * Interface MediaInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface MediaInterface extends TimestampableInterface, BlameableInterface
+interface MediaInterface extends EntityInterface, TimestampableInterface, BlameableInterface
 {
-    /**
-     * @return int
-     */
-    public function getId();
-
     /**
      * @return string
      */
-    public function getName();
+    public function getName() : string;
 
     /**
      * @param string $name
      */
-    public function setName($name);
+    public function setName(string $name);
 
     /**
      * @return string
      */
-    public function getPath();
+    public function getPath() : string;
 
     /**
      * @param string $path
      */
-    public function setPath($path);
+    public function setPath(string $path);
 
     /**
      * @return string
      */
-    public function getMime();
+    public function getMime() : string;
 
     /**
      * @param string $mime
      */
-    public function setMime($mime);
+    public function setMime(string $mime);
 
     /**
      * @return int
      */
-    public function getSize();
+    public function getSize() : int;
 
     /**
      * @param int $size
      */
-    public function setSize($size);
+    public function setSize(int $size);
 
     /**
      * @return string
      */
-    public function getFullName();
+    public function getFullName() : string;
 
     /**
      * @return string
      */
-    public function getExtension();
+    public function getExtension() : string;
 
     /**
      * @param string $extension
      */
-    public function setExtension($extension);
+    public function setExtension(string $extension);
 }
