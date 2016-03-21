@@ -26,7 +26,7 @@ class LayoutBoxFactory extends AbstractEntityFactory
      * @var string
      */
     protected $supportsInterface = LayoutBoxInterface::class;
-
+    
     /**
      * @return LayoutBoxInterface
      */
@@ -34,7 +34,17 @@ class LayoutBoxFactory extends AbstractEntityFactory
     {
         /** @var $box LayoutBoxInterface */
         $box = $this->init();
-
+        $box->setBoxType($this->getDefaultLayoutBoxType());
+        $box->setIdentifier('');
+        $box->setSettings([]);
+        
         return $box;
+    }
+    
+    private function getDefaultLayoutBoxType() : string
+    {
+        $type = $this->container->get('layout_box.configurator.collection')->first();
+
+        return $type->getType();
     }
 }
