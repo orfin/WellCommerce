@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "fa52df8a3f6a392a3993342ffa2e03f8",
+    "hash": "27b27d36baf784bfcc807ae81b199362",
     "content-hash": "8ddd228fc8e43536a07eb92d5c7a4f42",
     "packages": [
         {
@@ -1410,12 +1410,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/migrations.git",
-                "reference": "a726ac05f83687123bc0817dafe394620ba1ca62"
+                "reference": "bb30f9e8058866c6336a03561b4bc0544d37357c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/migrations/zipball/a726ac05f83687123bc0817dafe394620ba1ca62",
-                "reference": "a726ac05f83687123bc0817dafe394620ba1ca62",
+                "url": "https://api.github.com/repos/doctrine/migrations/zipball/bb30f9e8058866c6336a03561b4bc0544d37357c",
+                "reference": "bb30f9e8058866c6336a03561b4bc0544d37357c",
                 "shasum": ""
             },
             "require": {
@@ -1475,7 +1475,7 @@
                 "database",
                 "migrations"
             ],
-            "time": "2016-03-18 14:12:43"
+            "time": "2016-03-21 12:22:21"
         },
         {
             "name": "doctrine/orm",
@@ -2435,12 +2435,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "5ab81c6e5d14b5922f9650edb136e679a9932d45"
+                "reference": "208a18e1c73531be36ca11f2ac3c1b2bc1257201"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/5ab81c6e5d14b5922f9650edb136e679a9932d45",
-                "reference": "5ab81c6e5d14b5922f9650edb136e679a9932d45",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/208a18e1c73531be36ca11f2ac3c1b2bc1257201",
+                "reference": "208a18e1c73531be36ca11f2ac3c1b2bc1257201",
                 "shasum": ""
             },
             "require": {
@@ -2510,7 +2510,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2016-03-18 11:48:58"
+            "time": "2016-03-21 11:29:06"
         },
         {
             "name": "league/oauth2-client",
