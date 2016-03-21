@@ -35,7 +35,11 @@ class MediaFactory extends AbstractEntityFactory
         /** @var $media MediaInterface */
         $media = $this->init();
         $media->setSize(0);
-
+        $media->setName('');
+        $media->setMime('');
+        $media->setExtension('');
+        $media->setPath('');
+        
         return $media;
     }
 }
