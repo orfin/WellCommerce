@@ -16,6 +16,7 @@ use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 use WellCommerce\Bundle\ProducerBundle\Entity\ProducerInterface;
 
 /**
@@ -23,18 +24,12 @@ use WellCommerce\Bundle\ProducerBundle\Entity\ProducerInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface DelivererInterface extends TranslatableInterface, TimestampableInterface, BlameableInterface
+interface DelivererInterface extends EntityInterface, TranslatableInterface, TimestampableInterface, BlameableInterface
 {
-    /**
-     *
-     * @return int
-     */
-    public function getId();
-
     /**
      * @return Collection
      */
-    public function getProducers();
+    public function getProducers() : Collection;
 
     /**
      * @param Collection $collection

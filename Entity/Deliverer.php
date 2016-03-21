@@ -16,6 +16,7 @@ use Doctrine\Common\Collections\Collection;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
+use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
 use WellCommerce\Bundle\ProducerBundle\Entity\ProducerInterface;
 
 /**
@@ -23,7 +24,7 @@ use WellCommerce\Bundle\ProducerBundle\Entity\ProducerInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Deliverer implements DelivererInterface
+class Deliverer extends AbstractEntity implements DelivererInterface
 {
     use Translatable;
     use Timestampable;
@@ -42,15 +43,7 @@ class Deliverer implements DelivererInterface
     /**
      * {@inheritdoc}
      */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getProducers()
+    public function getProducers() : Collection
     {
         return $this->producers;
     }
