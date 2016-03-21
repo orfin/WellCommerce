@@ -15,20 +15,16 @@ namespace WellCommerce\Bundle\DictionaryBundle\Entity;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
+use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
 
 /**
  * Dictionary
  */
-class Dictionary implements DictionaryInterface
+class Dictionary extends AbstractEntity implements DictionaryInterface
 {
     use Timestampable;
     use Translatable;
     use Blameable;
-
-    /**
-     * @var integer
-     */
-    protected $id;
 
     /**
      * @var string
@@ -38,15 +34,7 @@ class Dictionary implements DictionaryInterface
     /**
      * {@inheritdoc}
      */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getIdentifier()
+    public function getIdentifier() : string
     {
         return $this->identifier;
     }
@@ -54,7 +42,7 @@ class Dictionary implements DictionaryInterface
     /**
      * {@inheritdoc}
      */
-    public function setIdentifier($identifier)
+    public function setIdentifier(string $identifier)
     {
         $this->identifier = $identifier;
     }
