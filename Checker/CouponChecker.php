@@ -45,7 +45,7 @@ class CouponChecker implements CouponCheckerInterface
     /**
      * {@inheritdoc}
      */
-    public function isValid(CouponInterface $coupon = null)
+    public function isValid(CouponInterface $coupon = null) : bool
     {
         if (null === $coupon) {
             $this->error = 'coupon.error.not_found';
@@ -71,7 +71,7 @@ class CouponChecker implements CouponCheckerInterface
     /**
      * {@inheritdoc}
      */
-    public function getError()
+    public function getError() : string
     {
         return $this->error;
     }
@@ -81,7 +81,7 @@ class CouponChecker implements CouponCheckerInterface
      *
      * @return bool
      */
-    protected function isStartDateValid(CouponInterface $coupon)
+    protected function isStartDateValid(CouponInterface $coupon) : bool
     {
         $now             = new \DateTime();
         $couponStartDate = $coupon->getValidFrom();
@@ -98,7 +98,7 @@ class CouponChecker implements CouponCheckerInterface
      *
      * @return bool
      */
-    protected function isNotExpired(CouponInterface $coupon)
+    protected function isNotExpired(CouponInterface $coupon) : bool
     {
         $now           = new \DateTime();
         $couponEndDate = $coupon->getValidTo();
