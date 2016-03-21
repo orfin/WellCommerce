@@ -15,46 +15,42 @@ namespace WellCommerce\Bundle\LayoutBundle\Entity;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 
 /**
  * Interface LayoutBoxInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface LayoutBoxInterface extends TimestampableInterface, TranslatableInterface, BlameableInterface
+interface LayoutBoxInterface extends EntityInterface, TimestampableInterface, TranslatableInterface, BlameableInterface
 {
-    /**
-     * @return int
-     */
-    public function getId();
-
     /**
      * @return string
      */
-    public function getBoxType();
+    public function getBoxType() : string;
 
     /**
      * @param string $boxType
      */
-    public function setBoxType($boxType);
+    public function setBoxType(string $boxType);
 
     /**
      * @return array
      */
-    public function getSettings();
+    public function getSettings() : array;
 
     /**
      * @param array $settings
      */
-    public function setSettings($settings);
+    public function setSettings(array $settings);
 
     /**
      * @return string
      */
-    public function getIdentifier();
+    public function getIdentifier() : string;
 
     /**
      * @param string $identifier
      */
-    public function setIdentifier($identifier);
+    public function setIdentifier(string $identifier);
 }

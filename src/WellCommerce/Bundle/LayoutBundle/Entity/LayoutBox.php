@@ -15,22 +15,18 @@ namespace WellCommerce\Bundle\LayoutBundle\Entity;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
+use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
 
 /**
  * Class LayoutBox
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LayoutBox implements LayoutBoxInterface
+class LayoutBox extends AbstractEntity implements LayoutBoxInterface
 {
     use Timestampable;
     use Translatable;
     use Blameable;
-
-    /**
-     * @var int
-     */
-    protected $id;
 
     /**
      * @var string
@@ -50,15 +46,7 @@ class LayoutBox implements LayoutBoxInterface
     /**
      * {@inheritdoc}
      */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getBoxType()
+    public function getBoxType() : string
     {
         return $this->boxType;
     }
@@ -66,7 +54,7 @@ class LayoutBox implements LayoutBoxInterface
     /**
      * {@inheritdoc}
      */
-    public function setBoxType($boxType)
+    public function setBoxType(string $boxType)
     {
         $this->boxType = $boxType;
     }
@@ -74,7 +62,7 @@ class LayoutBox implements LayoutBoxInterface
     /**
      * {@inheritdoc}
      */
-    public function getSettings()
+    public function getSettings() : array
     {
         return $this->settings;
     }
@@ -82,7 +70,7 @@ class LayoutBox implements LayoutBoxInterface
     /**
      * {@inheritdoc}
      */
-    public function setSettings($settings)
+    public function setSettings(array $settings)
     {
         $this->settings = $settings;
     }
@@ -90,7 +78,7 @@ class LayoutBox implements LayoutBoxInterface
     /**
      * {@inheritdoc}
      */
-    public function getIdentifier()
+    public function getIdentifier() : string
     {
         return $this->identifier;
     }
@@ -98,7 +86,7 @@ class LayoutBox implements LayoutBoxInterface
     /**
      * {@inheritdoc}
      */
-    public function setIdentifier($identifier)
+    public function setIdentifier(string $identifier)
     {
         $this->identifier = $identifier;
     }
