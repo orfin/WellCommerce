@@ -15,60 +15,54 @@ namespace WellCommerce\Bundle\CouponBundle\Entity;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 
 /**
  * Interface CouponInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface CouponInterface extends TranslatableInterface, TimestampableInterface, BlameableInterface
+interface CouponInterface extends EntityInterface, TranslatableInterface, TimestampableInterface, BlameableInterface
 {
     /**
-     *
-     * @return int
-     */
-    public function getId();
-
-    /**
-     *
      * @return string
      */
-    public function getCode();
+    public function getCode() : string;
 
     /**
      * @param string $code
      */
-    public function setCode($code);
+    public function setCode(string $code);
 
     /**
      * @return string
      */
-    public function getCurrency();
+    public function getCurrency() : string;
 
     /**
      * @param string $currency
      */
-    public function setCurrency($currency);
+    public function setCurrency(string $currency);
 
     /**
      * @return string
      */
-    public function getModifierType();
+    public function getModifierType() : string;
 
     /**
      * @param string $modifierType
      */
-    public function setModifierType($modifierType);
+    public function setModifierType(string $modifierType);
 
     /**
-     * @return float|int
+     * @return float
      */
-    public function getModifierValue();
+    public function getModifierValue() : float;
 
     /**
-     * @param float|int $modifierValue
+     * @param float $modifierValue
      */
-    public function setModifierValue($modifierValue);
+    public function setModifierValue(float $modifierValue);
 
     /**
      * @return \DateTime|null
@@ -93,20 +87,20 @@ interface CouponInterface extends TranslatableInterface, TimestampableInterface,
     /**
      * @return int
      */
-    public function getClientUsageLimit();
+    public function getClientUsageLimit() : int;
 
     /**
      * @param int $clientUsageLimit
      */
-    public function setClientUsageLimit($clientUsageLimit);
+    public function setClientUsageLimit(int $clientUsageLimit);
 
     /**
      * @return int
      */
-    public function getGlobalUsageLimit();
+    public function getGlobalUsageLimit() : int;
 
     /**
      * @param int $globalUsageLimit
      */
-    public function setGlobalUsageLimit($globalUsageLimit);
+    public function setGlobalUsageLimit(int $globalUsageLimit);
 }
