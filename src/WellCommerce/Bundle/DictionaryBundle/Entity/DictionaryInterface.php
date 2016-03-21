@@ -15,26 +15,22 @@ namespace WellCommerce\Bundle\DictionaryBundle\Entity;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 
 /**
  * Interface DictionaryInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface DictionaryInterface extends TranslatableInterface, TimestampableInterface, BlameableInterface
+interface DictionaryInterface extends EntityInterface, TranslatableInterface, TimestampableInterface, BlameableInterface
 {
-    /**
-     * @return int
-     */
-    public function getId();
-
     /**
      * @return string
      */
-    public function getIdentifier();
+    public function getIdentifier() : string;
 
     /**
      * @param string $identifier
      */
-    public function setIdentifier($identifier);
+    public function setIdentifier(string $identifier);
 }

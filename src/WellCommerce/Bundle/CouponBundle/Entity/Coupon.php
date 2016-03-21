@@ -15,22 +15,18 @@ namespace WellCommerce\Bundle\CouponBundle\Entity;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
+use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
 
 /**
  * Class Coupon
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Coupon implements CouponInterface
+class Coupon extends AbstractEntity implements CouponInterface
 {
     use Translatable;
     use Timestampable;
     use Blameable;
-
-    /**
-     * @var integer
-     */
-    protected $id;
 
     /**
      * @var string
@@ -75,15 +71,7 @@ class Coupon implements CouponInterface
     /**
      * {@inheritdoc}
      */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCode()
+    public function getCode() : string
     {
         return $this->code;
     }
@@ -91,7 +79,7 @@ class Coupon implements CouponInterface
     /**
      * {@inheritdoc}
      */
-    public function setCode($code)
+    public function setCode(string $code)
     {
         $this->code = $code;
     }
@@ -99,7 +87,7 @@ class Coupon implements CouponInterface
     /**
      * {@inheritdoc}
      */
-    public function getCurrency()
+    public function getCurrency() : string
     {
         return $this->currency;
     }
@@ -107,7 +95,7 @@ class Coupon implements CouponInterface
     /**
      * {@inheritdoc}
      */
-    public function setCurrency($currency)
+    public function setCurrency(string $currency)
     {
         $this->currency = $currency;
     }
@@ -115,7 +103,7 @@ class Coupon implements CouponInterface
     /**
      * {@inheritdoc}
      */
-    public function getModifierType()
+    public function getModifierType() : string
     {
         return $this->modifierType;
     }
@@ -123,7 +111,7 @@ class Coupon implements CouponInterface
     /**
      * {@inheritdoc}
      */
-    public function setModifierType($modifierType)
+    public function setModifierType(string $modifierType)
     {
         $this->modifierType = $modifierType;
     }
@@ -131,7 +119,7 @@ class Coupon implements CouponInterface
     /**
      * {@inheritdoc}
      */
-    public function getModifierValue()
+    public function getModifierValue() : float
     {
         return $this->modifierValue;
     }
@@ -139,7 +127,7 @@ class Coupon implements CouponInterface
     /**
      * {@inheritdoc}
      */
-    public function setModifierValue($modifierValue)
+    public function setModifierValue(float $modifierValue)
     {
         $this->modifierValue = $modifierValue;
     }
@@ -179,7 +167,7 @@ class Coupon implements CouponInterface
     /**
      * {@inheritdoc}
      */
-    public function getClientUsageLimit()
+    public function getClientUsageLimit() : int
     {
         return $this->clientUsageLimit;
     }
@@ -187,7 +175,7 @@ class Coupon implements CouponInterface
     /**
      * {@inheritdoc}
      */
-    public function setClientUsageLimit($clientUsageLimit)
+    public function setClientUsageLimit(int $clientUsageLimit)
     {
         $this->clientUsageLimit = $clientUsageLimit;
     }
@@ -195,7 +183,7 @@ class Coupon implements CouponInterface
     /**
      * {@inheritdoc}
      */
-    public function getGlobalUsageLimit()
+    public function getGlobalUsageLimit() : int
     {
         return $this->globalUsageLimit;
     }
@@ -203,7 +191,7 @@ class Coupon implements CouponInterface
     /**
      * {@inheritdoc}
      */
-    public function setGlobalUsageLimit($globalUsageLimit)
+    public function setGlobalUsageLimit(int $globalUsageLimit)
     {
         $this->globalUsageLimit = $globalUsageLimit;
     }
