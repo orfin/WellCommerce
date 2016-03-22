@@ -15,6 +15,7 @@ use Doctrine\Common\Collections\Collection;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Symfony\Component\Security\Core\User\UserInterface as BaseUserInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
 use WellCommerce\Bundle\ShopBundle\Entity\ShopAwareTrait;
 
 /**
@@ -22,18 +23,13 @@ use WellCommerce\Bundle\ShopBundle\Entity\ShopAwareTrait;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Client implements ClientInterface
+class Client extends AbstractEntity implements ClientInterface
 {
     const ROLE_CLIENT = 'ROLE_CLIENT';
 
     use Timestampable;
     use Blameable;
     use ShopAwareTrait;
-
-    /**
-     * @var int
-     */
-    protected $id;
 
     /**
      * @var ClientGroupInterface
@@ -71,17 +67,9 @@ class Client implements ClientInterface
     protected $shippingAddress;
 
     /**
-     * @inheritDoc
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
      * @return ClientGroupInterface
      */
-    public function getClientGroup()
+    public function getClientGroup() : ClientGroupInterface
     {
         return $this->clientGroup;
     }
@@ -179,7 +167,7 @@ class Client implements ClientInterface
     /**
      * @inheritDoc
      */
-    public function getOrders()
+    public function getOrders() : Collection
     {
         return $this->orders;
     }
@@ -187,7 +175,7 @@ class Client implements ClientInterface
     /**
      * @inheritDoc
      */
-    public function getWishlist()
+    public function getWishlist() : Collection
     {
         return $this->wishlist;
     }
@@ -195,7 +183,7 @@ class Client implements ClientInterface
     /**
      * {@inheritdoc}
      */
-    public function getClientDetails()
+    public function getClientDetails() : ClientDetailsInterface
     {
         return $this->clientDetails;
     }
@@ -211,7 +199,7 @@ class Client implements ClientInterface
     /**
      * {@inheritdoc}
      */
-    public function getContactDetails()
+    public function getContactDetails() : ClientContactDetailsInterface
     {
         return $this->contactDetails;
     }
@@ -227,7 +215,7 @@ class Client implements ClientInterface
     /**
      * {@inheritdoc}
      */
-    public function getBillingAddress()
+    public function getBillingAddress() : ClientBillingAddressInterface
     {
         return $this->billingAddress;
     }
@@ -243,7 +231,7 @@ class Client implements ClientInterface
     /**
      * {@inheritdoc}
      */
-    public function getShippingAddress()
+    public function getShippingAddress() : ClientShippingAddressInterface
     {
         return $this->shippingAddress;
     }
