@@ -14,22 +14,18 @@ namespace WellCommerce\Bundle\CompanyBundle\Entity;
 
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
+use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
 
 /**
  * Class Company
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Company implements CompanyInterface
+class Company extends AbstractEntity implements CompanyInterface
 {
     use Timestampable;
     use Blameable;
 
-    /**
-     * @var integer
-     */
-    protected $id;
-    
     /**
      * @var string
      */
@@ -48,15 +44,7 @@ class Company implements CompanyInterface
     /**
      * {@inheritdoc}
      */
-    public function getId()
-    {
-        return $this->id;
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
+    public function getName() : string
     {
         return $this->name;
     }
@@ -64,7 +52,7 @@ class Company implements CompanyInterface
     /**
      * {@inheritdoc}
      */
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = $name;
     }
@@ -72,7 +60,7 @@ class Company implements CompanyInterface
     /**
      * {@inheritdoc}
      */
-    public function getShortName()
+    public function getShortName() : string
     {
         return $this->shortName;
     }
@@ -80,7 +68,7 @@ class Company implements CompanyInterface
     /**
      * {@inheritdoc}
      */
-    public function setShortName($shortName)
+    public function setShortName(string $shortName)
     {
         $this->shortName = $shortName;
     }
@@ -88,7 +76,7 @@ class Company implements CompanyInterface
     /**
      * {@inheritdoc}
      */
-    public function getAddress()
+    public function getAddress() : CompanyAddressInterface
     {
         return $this->address;
     }

@@ -57,7 +57,7 @@ class CompanyAddress implements CompanyAddressInterface
     /**
      * {@inheritdoc}
      */
-    public function getStreet()
+    public function getStreet() : string
     {
         return $this->street;
     }
@@ -65,7 +65,7 @@ class CompanyAddress implements CompanyAddressInterface
     /**
      * {@inheritdoc}
      */
-    public function setStreet($street)
+    public function setStreet(string $street)
     {
         $this->street = $street;
     }
@@ -73,7 +73,7 @@ class CompanyAddress implements CompanyAddressInterface
     /**
      * {@inheritdoc}
      */
-    public function getStreetNo()
+    public function getStreetNo() : string
     {
         return $this->streetNo;
     }
@@ -81,7 +81,7 @@ class CompanyAddress implements CompanyAddressInterface
     /**
      * {@inheritdoc}
      */
-    public function setStreetNo($streetNo)
+    public function setStreetNo(string $streetNo)
     {
         $this->streetNo = $streetNo;
     }
@@ -89,7 +89,7 @@ class CompanyAddress implements CompanyAddressInterface
     /**
      * {@inheritdoc}
      */
-    public function getFlatNo()
+    public function getFlatNo() : string
     {
         return $this->flatNo;
     }
@@ -97,7 +97,7 @@ class CompanyAddress implements CompanyAddressInterface
     /**
      * {@inheritdoc}
      */
-    public function setFlatNo($flatNo)
+    public function setFlatNo(string $flatNo)
     {
         $this->flatNo = $flatNo;
     }
@@ -105,7 +105,7 @@ class CompanyAddress implements CompanyAddressInterface
     /**
      * {@inheritdoc}
      */
-    public function getPostCode()
+    public function getPostCode() : string
     {
         return $this->postCode;
     }
@@ -113,7 +113,7 @@ class CompanyAddress implements CompanyAddressInterface
     /**
      * {@inheritdoc}
      */
-    public function setPostCode($postCode)
+    public function setPostCode(string $postCode)
     {
         $this->postCode = $postCode;
     }
@@ -121,7 +121,7 @@ class CompanyAddress implements CompanyAddressInterface
     /**
      * {@inheritdoc}
      */
-    public function getProvince()
+    public function getProvince() : string
     {
         return $this->province;
     }
@@ -129,7 +129,7 @@ class CompanyAddress implements CompanyAddressInterface
     /**
      * {@inheritdoc}
      */
-    public function setProvince($province)
+    public function setProvince(string $province)
     {
         $this->province = $province;
     }
@@ -137,7 +137,7 @@ class CompanyAddress implements CompanyAddressInterface
     /**
      * {@inheritdoc}
      */
-    public function getCity()
+    public function getCity() : string
     {
         return $this->city;
     }
@@ -145,7 +145,7 @@ class CompanyAddress implements CompanyAddressInterface
     /**
      * {@inheritdoc}
      */
-    public function setCity($city)
+    public function setCity(string $city)
     {
         $this->city = $city;
     }
@@ -153,7 +153,7 @@ class CompanyAddress implements CompanyAddressInterface
     /**
      * {@inheritdoc}
      */
-    public function getCountry()
+    public function getCountry() : string
     {
         return $this->country;
     }
@@ -161,7 +161,7 @@ class CompanyAddress implements CompanyAddressInterface
     /**
      * {@inheritdoc}
      */
-    public function setCountry($country)
+    public function setCountry(string $country)
     {
         $this->country = $country;
     }
