@@ -12,14 +12,20 @@ well_commerce_client:
                 dataset: client.dataset.admin
                 manager: client.manager.admin
         client_billing_address:
+            auto_services:
+                factory: WellCommerce\Bundle\ClientBundle\Factory\ClientBillingAddressFactory
             orm_configuration:
                 mapping: "@WellCommerceClientBundle/Resources/config/doctrine/ClientBillingAddress.orm.yml"
                 entity: WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddress
         client_details:
+            auto_services:
+                factory: WellCommerce\Bundle\ClientBundle\Factory\ClientDetailsFactory
             orm_configuration:
                 mapping: "@WellCommerceClientBundle/Resources/config/doctrine/ClientDetails.orm.yml"
                 entity: WellCommerce\Bundle\ClientBundle\Entity\ClientDetails
         client_contact_details:
+            auto_services:
+                factory: WellCommerce\Bundle\ClientBundle\Factory\ClientContactDetailsFactory
             orm_configuration:
                 mapping: "@WellCommerceClientBundle/Resources/config/doctrine/ClientContactDetails.orm.yml"
                 entity: WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetails
@@ -39,6 +45,8 @@ well_commerce_client:
                 mapping: "@WellCommerceClientBundle/Resources/config/doctrine/ClientGroupTranslation.orm.yml"
                 entity: WellCommerce\Bundle\ClientBundle\Entity\ClientGroupTranslation
         client_shipping_address:
+            auto_services:
+                factory: WellCommerce\Bundle\ClientBundle\Factory\ClientShippingAddressFactory
             orm_configuration:
                 mapping: "@WellCommerceClientBundle/Resources/config/doctrine/ClientShippingAddress.orm.yml"
                 entity: WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddress

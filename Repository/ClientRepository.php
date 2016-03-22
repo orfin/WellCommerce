@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\ClientBundle\Repository;
 
 use Doctrine\ORM\NoResultException;
+use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -29,7 +30,7 @@ class ClientRepository extends AbstractEntityRepository implements ClientReposit
     /**
      * {@inheritdoc}
      */
-    public function getDataSetQueryBuilder()
+    public function getDataSetQueryBuilder() : QueryBuilder
     {
         $queryBuilder = $this->getQueryBuilder();
         $queryBuilder->groupBy('client.id');

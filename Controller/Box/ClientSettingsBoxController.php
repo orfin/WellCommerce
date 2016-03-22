@@ -12,7 +12,9 @@
 
 namespace WellCommerce\Bundle\ClientBundle\Controller\Box;
 
+use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
+use WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxSettingsCollection;
 
 /**
  * Class ClientSettingsBoxController
@@ -21,7 +23,7 @@ use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
  */
 class ClientSettingsBoxController extends AbstractBoxController
 {
-    public function indexAction()
+    public function indexAction(LayoutBoxSettingsCollection $boxSettings) : Response
     {
         $client             = $this->manager->getClient();
         $contactDetailsForm = $this->manager->getForm($client, [

@@ -14,14 +14,14 @@ namespace WellCommerce\Bundle\ClientBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientGroupInterface;
-use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 
 /**
  * Class ClientGroupFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientGroupFactory extends AbstractFactory
+class ClientGroupFactory extends AbstractEntityFactory
 {
     /**
      * @var string
@@ -31,14 +31,14 @@ class ClientGroupFactory extends AbstractFactory
     /**
      * @return ClientGroupInterface
      */
-    public function create()
+    public function create() : ClientGroupInterface
     {
-        /** @var $clientGroup ClientGroupInterface */
-        $clientGroup = $this->init();
-        $clientGroup->setDiscount(0);
-        $clientGroup->setClients(new ArrayCollection());
-        $clientGroup->setPages(new ArrayCollection());
+        /** @var $group ClientGroupInterface */
+        $group = $this->init();
+        $group->setDiscount(0);
+        $group->setClients(new ArrayCollection());
+        $group->setPages(new ArrayCollection());
 
-        return $clientGroup;
+        return $group;
     }
 }

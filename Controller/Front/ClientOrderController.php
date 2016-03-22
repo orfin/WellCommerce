@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\ClientBundle\Controller\Front;
 
+use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 
 /**
@@ -21,12 +22,12 @@ use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
  */
 class ClientOrderController extends AbstractFrontController
 {
-    public function indexAction()
+    public function indexAction() : Response
     {
         return $this->displayTemplate('index');
     }
 
-    public function viewAction()
+    public function viewAction() : Response
     {
         return $this->displayTemplate('view');
     }

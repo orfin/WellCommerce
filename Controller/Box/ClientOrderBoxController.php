@@ -12,7 +12,9 @@
 
 namespace WellCommerce\Bundle\ClientBundle\Controller\Box;
 
+use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
+use WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxSettingsCollection;
 
 /**
  * Class ClientOrderBoxController
@@ -21,16 +23,16 @@ use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
  */
 class ClientOrderBoxController extends AbstractBoxController
 {
-    public function indexAction()
+    public function indexAction(LayoutBoxSettingsCollection $boxSettings) : Response
     {
-        $client = $this->manager->getClient();
+        $orders = $this->manager->getClient()->getOrders();
 
         return $this->displayTemplate('index', [
-            'orders' => $client->getOrders()
+            'orders' => $orders
         ]);
     }
 
-    public function viewAction()
+    public function viewAction() : Response
     {
         $id     = (int)$this->getRequestHelper()->getAttributesBagParam('id');
         $client = $this->manager->getClient();
