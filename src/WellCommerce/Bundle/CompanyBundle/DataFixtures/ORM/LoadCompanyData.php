@@ -35,7 +35,6 @@ class LoadCompanyData extends AbstractDataFixture
         $company        = $this->container->get('company.factory')->create();
         $company->setName($fakerGenerator->company . ' ' . $fakerGenerator->companySuffix);
         $company->setShortName($fakerGenerator->company);
-        $c
         $company->getAddress()->setCountry($fakerGenerator->countryCode);
         $company->getAddress()->setStreet($fakerGenerator->streetName);
         $company->getAddress()->setStreetNo($fakerGenerator->streetSuffix);
