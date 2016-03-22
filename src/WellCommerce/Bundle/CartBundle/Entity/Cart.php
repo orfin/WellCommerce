@@ -288,10 +288,23 @@ class Cart extends AbstractEntity implements CartInterface
      */
     public function hasMethods() : bool
     {
-        return (
-            $this->getShippingMethodCost() instanceof ShippingMethodCostInterface
-            && $this->getPaymentMethod() instanceof PaymentMethodInterface
-        );
+        return ($this->hasShippingMethod() && $this->hasPaymentMethod());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasShippingMethod() : bool
+    {
+        return $this->getShippingMethodCost() instanceof ShippingMethodCostInterface;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasPaymentMethod() : bool
+    {
+        return $this->getPaymentMethod() instanceof PaymentMethodInterface;
     }
 
     /**
