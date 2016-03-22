@@ -13,10 +13,13 @@
 namespace WellCommerce\Bundle\LayoutBundle\Configurator;
 
 use Symfony\Component\PropertyAccess\PropertyAccess;
+use Symfony\Component\PropertyAccess\PropertyAccessor;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
 use WellCommerce\Bundle\CoreBundle\Helper\Translator\TranslatorHelperInterface;
 use WellCommerce\Component\Form\Conditions\Equals;
+use WellCommerce\Component\Form\Elements\Fieldset\FieldsetInterface;
 use WellCommerce\Component\Form\Elements\FormInterface;
+use WellCommerce\Component\Form\Elements\Optioned\Select;
 use WellCommerce\Component\Form\FormBuilderInterface;
 
 /**
@@ -48,7 +51,7 @@ abstract class AbstractLayoutBoxConfigurator extends AbstractContainerAware impl
      * @param string                    $controllerService
      * @param TranslatorHelperInterface $translatorHelper
      */
-    public function __construct($type, $controllerService, TranslatorHelperInterface $translatorHelper)
+    public function __construct(string $type, string $controllerService, TranslatorHelperInterface $translatorHelper)
     {
         $this->type              = $type;
         $this->controllerService = $controllerService;
@@ -56,9 +59,9 @@ abstract class AbstractLayoutBoxConfigurator extends AbstractContainerAware impl
     }
 
     /**
-     * @return \Symfony\Component\PropertyAccess\PropertyAccessor
+     * @return PropertyAccessor
      */
-    protected function getPropertyAccessor()
+    protected function getPropertyAccessor() : PropertyAccessor
     {
         return PropertyAccess::createPropertyAccessor();
     }
@@ -66,7 +69,7 @@ abstract class AbstractLayoutBoxConfigurator extends AbstractContainerAware impl
     /**
      * {@inheritdoc}
      */
-    public function getControllerService()
+    public function getControllerService() : string
     {
         return $this->controllerService;
     }
@@ -74,7 +77,7 @@ abstract class AbstractLayoutBoxConfigurator extends AbstractContainerAware impl
     /**
      * {@inheritdoc}
      */
-    public function getType()
+    public function getType() : string
     {
         return $this->type;
     }
@@ -96,7 +99,7 @@ abstract class AbstractLayoutBoxConfigurator extends AbstractContainerAware impl
     /**
      * {@inheritdoc}
      */
-    protected function getFieldset(FormBuilderInterface $builder, FormInterface $form)
+    protected function getFieldset(FormBuilderInterface $builder, FormInterface $form) : FieldsetInterface
     {
         $boxTypeSelect = $this->getBoxTypeSelect($form);
         $boxTypeSelect->addOptionToSelect($this->type, $this->type);
@@ -119,9 +122,9 @@ abstract class AbstractLayoutBoxConfigurator extends AbstractContainerAware impl
     /**
      * @param FormInterface $form
      *
-     * @return \WellCommerce\Component\Form\Elements\Optioned\Select
+     * @return Select
      */
-    protected function getBoxTypeSelect(FormInterface $form)
+    protected function getBoxTypeSelect(FormInterface $form) : Select
     {
         return $form->getChildren()->get('required_data')->getChildren()->get('boxType');
     }

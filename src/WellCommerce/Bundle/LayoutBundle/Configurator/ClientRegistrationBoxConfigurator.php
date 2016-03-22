@@ -19,5 +19,4 @@ namespace WellCommerce\Bundle\LayoutBundle\Configurator;
  */
 class ClientRegistrationBoxConfigurator extends AbstractLayoutBoxConfigurator
 {
-
 }

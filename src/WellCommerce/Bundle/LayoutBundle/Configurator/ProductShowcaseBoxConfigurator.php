@@ -28,15 +28,17 @@ class ProductShowcaseBoxConfigurator extends AbstractLayoutBoxConfigurator
     public function addFormFields(FormBuilderInterface $builder, FormInterface $form, $defaults)
     {
         $fieldset = $this->getFieldset($builder, $form);
-
+        
         $fieldset->addChild($builder->getElement('tip', [
             'tip' => $this->trans('product_showcase.tip')
         ]));
-
-        $fieldset->addChild($builder->getElement('select', [
-            'name'        => 'status',
-            'label'       => $this->trans('product_showcase.label.status'),
-            'options'     => $this->get('product_status.dataset.admin')->getResult('select'),
+        
+        $status = $fieldset->addChild($builder->getElement('select', [
+            'name'    => 'status',
+            'label'   => $this->trans('product_showcase.label.status'),
+            'options' => $this->get('product_status.dataset.admin')->getResult('select'),
         ]));
+    
+        $status->setValue($this->getPropertyAccessor()->getValue($defaults, '[status]'));
     }
 }

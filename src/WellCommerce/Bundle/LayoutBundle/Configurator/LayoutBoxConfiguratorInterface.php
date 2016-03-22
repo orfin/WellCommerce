@@ -25,9 +25,9 @@ interface LayoutBoxConfiguratorInterface
     /**
      * Returns configurator type
      *
-     * @return mixed
+     * @return string
      */
-    public function getType();
+    public function getType() : string;
 
     /**
      * Adds form fields required to configure the layout box
@@ -45,5 +45,5 @@ interface LayoutBoxConfiguratorInterface
      *
      * @return string
      */
-    public function getControllerService();
+    public function getControllerService() : string;
 }

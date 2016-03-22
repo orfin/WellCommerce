@@ -28,20 +28,20 @@ class ProducerBoxConfigurator extends AbstractLayoutBoxConfigurator
     public function addFormFields(FormBuilderInterface $builder, FormInterface $form, $defaults)
     {
         $fieldset = $this->getFieldset($builder, $form);
-        $accessor = $this->getPropertyAccessor();
 
         $fieldset->addChild($builder->getElement('tip', [
             'tip' => $this->trans('Select view type used in template.')
         ]));
 
-        $fieldset->addChild($builder->getElement('select', [
+        $viewType = $fieldset->addChild($builder->getElement('select', [
             'name'    => 'view_type',
             'label'   => $this->trans('View type'),
             'options' => [
                 0 => $this->trans('List'),
                 1 => $this->trans('Select'),
-            ],
-            'default' => $accessor->getValue($defaults, '[view_type]')
+            ]
         ]));
+
+        $viewType->setValue($this->getPropertyAccessor()->getValue($defaults, '[view_type]'));
     }
 }
