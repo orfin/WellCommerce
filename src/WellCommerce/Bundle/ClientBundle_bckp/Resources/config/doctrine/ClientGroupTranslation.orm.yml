@@ -1,9 +1,0 @@
-WellCommerce\Bundle\ClientBundle\Entity\ClientGroupTranslation:
-    type: entity
-    table: client_group_translation
-    fields:
-        name:
-            type: string
-            length: 255
-            unique: false
-            nullable: false
