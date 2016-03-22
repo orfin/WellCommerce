@@ -154,6 +154,20 @@ interface CartInterface extends
     public function hasMethods() : bool;
 
     /**
+     * Checks whether cart has shipping method
+     *
+     * @return bool
+     */
+    public function hasShippingMethod() : bool;
+
+    /**
+     * Checks whether cart has payment method
+     *
+     * @return bool
+     */
+    public function hasPaymentMethod() : bool;
+
+    /**
      * @return Price
      */
     public function getShippingCost();
