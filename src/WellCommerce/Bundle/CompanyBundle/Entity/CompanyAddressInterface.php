@@ -22,70 +22,70 @@ interface CompanyAddressInterface
     /**
      * @return string
      */
-    public function getStreet();
+    public function getStreet() : string;
 
     /**
      * @param string $street
      */
-    public function setStreet($street);
+    public function setStreet(string $street);
 
     /**
      * @return string
      */
-    public function getStreetNo();
+    public function getStreetNo() : string;
 
     /**
      * @param string $streetNo
      */
-    public function setStreetNo($streetNo);
+    public function setStreetNo(string $streetNo);
 
     /**
      * @return string
      */
-    public function getFlatNo();
+    public function getFlatNo() : string;
 
     /**
      * @param string $flatNo
      */
-    public function setFlatNo($flatNo);
+    public function setFlatNo(string $flatNo);
 
     /**
      * @return string
      */
-    public function getPostCode();
+    public function getPostCode() : string;
 
     /**
      * @param string $postCode
      */
-    public function setPostCode($postCode);
+    public function setPostCode(string $postCode);
 
     /**
      * @return string
      */
-    public function getProvince();
+    public function getProvince() : string;
 
     /**
      * @param string $province
      */
-    public function setProvince($province);
+    public function setProvince(string $province);
 
     /**
      * @return string
      */
-    public function getCity();
+    public function getCity() : string;
 
     /**
      * @param string $city
      */
-    public function setCity($city);
+    public function setCity(string $city);
 
     /**
      * @return string
      */
-    public function getCountry();
+    public function getCountry() : string;
 
     /**
      * @param string $country
      */
-    public function setCountry($country);
+    public function setCountry(string $country);
 }

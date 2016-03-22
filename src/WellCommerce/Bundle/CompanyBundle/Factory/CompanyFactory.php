@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CompanyBundle\Factory;
 
+use WellCommerce\Bundle\CompanyBundle\Entity\CompanyAddressInterface;
 use WellCommerce\Bundle\CompanyBundle\Entity\CompanyInterface;
 use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 
@@ -36,8 +37,13 @@ class CompanyFactory extends AbstractEntityFactory
         $company = $this->init();
         $company->setName('');
         $company->setShortName('');
-        $company->setAddress($this->get('company_address.factory')->create());
+        $company->setAddress($this->createDefaultCompanyAddress());
 
         return $company;
+    }
+
+    private function createDefaultCompanyAddress() : CompanyAddressInterface
+    {
+        return $this->get('company_address.factory')->create();
     }
 }

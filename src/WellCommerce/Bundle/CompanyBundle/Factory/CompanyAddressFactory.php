@@ -34,6 +34,12 @@ class CompanyAddressFactory extends AbstractEntityFactory
     {
         /** @var $address CompanyAddressInterface */
         $address = $this->init();
+        $address->setStreet('');
+        $address->setStreetNo('');
+        $address->setFlatNo('');
+        $address->setPostCode('');
+        $address->setCity('');
+        $address->setCountry('');
 
         return $address;
     }
