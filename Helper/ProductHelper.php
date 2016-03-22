@@ -67,7 +67,6 @@ class ProductHelper implements ProductHelperInterface
         $variants            = $this->variantHelper->getVariants($product);
         $attributes          = $this->variantHelper->getAttributes($product);
 
-
         return [
             'product'       => $product,
             'shippingCosts' => $shippingMethodCosts,
