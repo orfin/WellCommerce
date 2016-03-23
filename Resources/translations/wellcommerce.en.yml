@@ -23,6 +23,8 @@ client:
             country: Country
             city: City
             copy_address: Shipping address same as billing address
+            vat_id: VAT ID
+            company_name: Company
     heading:
         index: Clients
         add: Create a client

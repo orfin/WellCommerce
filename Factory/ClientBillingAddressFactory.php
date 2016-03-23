@@ -34,6 +34,7 @@ class ClientBillingAddressFactory extends AbstractEntityFactory
     public function create() : ClientBillingAddressInterface
     {
         $address = new ClientBillingAddress();
+        $address->setCompanyAddress(false);
 
         return $address;
     }

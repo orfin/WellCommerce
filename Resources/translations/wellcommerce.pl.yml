@@ -23,6 +23,8 @@ client:
             country: Państwo
             city: Miejscowość
             copy_address: Adres dostawy jest taki sam jak adres płatnika
+            vat_id: NIP
+            company_name: Nazwa firmy
     heading:
         index: Klienci
         add: Dodaj klienta

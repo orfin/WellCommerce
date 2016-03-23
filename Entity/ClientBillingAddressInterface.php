@@ -38,4 +38,14 @@ interface ClientBillingAddressInterface extends ClientAddressInterface
      * @return string
      */
     public function getCompanyName();
+
+    /**
+     * @return boolean
+     */
+    public function isCompanyAddress();
+
+    /**
+     * @param boolean $companyAddress
+     */
+    public function setCompanyAddress($companyAddress);
 }

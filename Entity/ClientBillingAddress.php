@@ -75,6 +75,11 @@ class ClientBillingAddress implements ClientBillingAddressInterface
     protected $companyName;
 
     /**
+     * @var bool
+     */
+    protected $companyAddress;
+
+    /**
      * {@inheritdoc}
      */
     public function getFirstName()
@@ -248,5 +253,21 @@ class ClientBillingAddress implements ClientBillingAddressInterface
     public function setCompanyName($companyName)
     {
         $this->companyName = $companyName;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isCompanyAddress()
+    {
+        return $this->companyAddress;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCompanyAddress($companyAddress)
+    {
+        $this->companyAddress = $companyAddress;
     }
 }
