@@ -119,6 +119,14 @@
             <tag name="form.element" alias="password"/>
         </service>
 
+        <service id="form.element.button" class="WellCommerce\Component\Form\Elements\Button\Button" shared="false">
+            <tag name="form.element" alias="button"/>
+        </service>
+
+        <service id="form.element.constant" class="WellCommerce\Component\Form\Elements\Input\Constant" shared="false">
+            <tag name="form.element" alias="constant"/>
+        </service>
+
         <service id="form.element.hidden" class="WellCommerce\Component\Form\Elements\Input\Hidden" shared="false">
             <tag name="form.element" alias="hidden"/>
         </service>
