@@ -39,7 +39,6 @@ class PageExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
     {
         return [
             new \Twig_SimpleFunction('cmsPages', [$this, 'getCmsPages'], ['is_safe' => ['html']]),
-            new \Twig_SimpleFunction('convert_price', [$this, 'convertPrice'], ['is_safe' => ['html']]),
         ];
     }
     
