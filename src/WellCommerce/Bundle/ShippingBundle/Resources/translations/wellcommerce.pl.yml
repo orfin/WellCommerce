@@ -1,0 +1,10 @@
+shipping_method:
+    heading:
+        index: Formy wysyłki
+        add: Dodaj formę wysyłki
+        edit: Edytuj formę wysyłki
+    label:
+        calculator: Rodzaj kalkulacji kosztów
+        costs: Koszty wysyłki
+    fieldset:
+        costs: Ustawienia kosztów wysyłki
