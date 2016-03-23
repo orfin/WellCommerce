@@ -58,5 +58,5 @@ WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddress:
             column: company_name
         companyAddress:
             type: boolean
-            nullable: false
+            nullable: true
             column: company_address
