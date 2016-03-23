@@ -1,0 +1,9 @@
+producer:
+    heading:
+        index: Producers
+        add: Add a producer
+        edit: Edit a producer
+    fieldset:
+        deliverers: Deliverers
+    label:
+        deliverers: Deliverers
