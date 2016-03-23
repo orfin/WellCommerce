@@ -1,0 +1,40 @@
+WellCommerce\Bundle\CartBundle\Entity\CartProduct:
+    type: entity
+    cache:
+        usage: NONSTRICT_READ_WRITE
+    table: cart_product
+    repositoryClass: WellCommerce\Bundle\CartBundle\Repository\CartProductRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        quantity:
+            type: integer
+            nullable: false
+        options:
+            type: json_array
+    manyToOne:
+        cart:
+            targetEntity: WellCommerce\Bundle\CartBundle\Entity\Cart
+            fetch: LAZY
+            inversedBy: products
+            joinColumns:
+                cart_id:
+                    referencedColumnName: id
+                    onDelete: CASCADE
+        product:
+            targetEntity: WellCommerce\Bundle\ProductBundle\Entity\Product
+            fetch: LAZY
+            joinColumns:
+                product_id:
+                    referencedColumnName: id
+                    onDelete: CASCADE
+        variant:
+            targetEntity: WellCommerce\Bundle\ProductBundle\Entity\Variant
+            fetch: LAZY
+            joinColumns:
+                variant_id:
+                    referencedColumnName: id
+                    onDelete: CASCADE
