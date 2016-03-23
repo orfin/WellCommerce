@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<items>
+    <item>
+        <identifier>reports</identifier>
+        <css_class>reports</css_class>
+        <name>reports</name>
+        <route_name/>
+        <parent/>
+        <hierarchy>50</hierarchy>
+    </item>
+
+    <item>
+        <identifier>sales_report</identifier>
+        <css_class/>
+        <name>sales_report</name>
+        <route_name>admin.sales_report.index</route_name>
+        <parent>reports</parent>
+        <hierarchy>10</hierarchy>
+    </item>
+</items>
