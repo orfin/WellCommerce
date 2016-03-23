@@ -1,0 +1,19 @@
+payment:
+    flash:
+        thank_you: "Dziękujemy za złożenie zamówienia. Poniżej prezentujemy jego szczegóły:"
+
+payment_method:
+    heading:
+        index: Formy płatności
+        add: Dodaj formę płatności
+        edit: Edytuj formę płatności
+    fieldset:
+        shipping_methods: Formy wysyłki
+    label:
+        processor: Typ procesora płatności
+        shipping_methods: Dozwolone formy wysyłki
+    bank_transfer:
+        tip: Twoje zamówienie będzie realizowane po otrzymaniu przelewu na poniższe dane rachunku.
+        account: Numer rachunku
+        sort_number: Sort code banku
+        title: Tytuł przelewu
