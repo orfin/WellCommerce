@@ -17,6 +17,7 @@ use Doctrine\Common\Collections\Criteria;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
 use WellCommerce\Bundle\CurrencyBundle\Entity\CurrencyInterface;
+use WellCommerce\Bundle\ShopBundle\Entity\ShopInterface;
 use WellCommerce\Bundle\TaxBundle\Entity\TaxInterface;
 
 /**
@@ -76,6 +77,11 @@ abstract class AbstractEntityFactory extends AbstractContainerAware implements E
     protected function getDefaultShops() : Collection
     {
         return $this->get('shop.repository')->matching(new Criteria());
+    }
+    
+    protected function getDefaultShop() : ShopInterface
+    {
+        return $this->get('shop.context.admin')->getCurrentShop();
     }
 
     /**

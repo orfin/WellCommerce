@@ -17,7 +17,7 @@ namespace WellCommerce\Bundle\AppBundle\Entity;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class DiscountablePrice extends Price
+class DiscountablePrice extends Price implements DiscountablePriceInterface
 {
     /**
      * @var float
