@@ -137,6 +137,16 @@ class ClientFormBuilder extends AbstractFormBuilder
             'default' => $defaultCountry
         ]));
 
+        $billingAddress->addChild($this->getElement('text_field', [
+            'name'  => 'billingAddress.vatId',
+            'label' => $this->trans('client.label.address.vat_id'),
+        ]));
+
+        $billingAddress->addChild($this->getElement('text_field', [
+            'name'  => 'billingAddress.companyName',
+            'label' => $this->trans('client.label.address.company_name'),
+        ]));
+
         $shippingAddress = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'shippingAddress',
             'label' => $this->trans('client.heading.shipping_address'),
