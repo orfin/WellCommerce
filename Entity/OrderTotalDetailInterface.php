@@ -35,7 +35,7 @@ interface OrderTotalDetailInterface extends OrderAwareInterface, HierarchyAwareI
     /**
      * @return string
      */
-    public function getModifierType() : string;
+    public function getModifierType();
 
     /**
      * @param string $modifierType
@@ -45,7 +45,7 @@ interface OrderTotalDetailInterface extends OrderAwareInterface, HierarchyAwareI
     /**
      * @return float
      */
-    public function getModifierValue() : float;
+    public function getModifierValue();
 
     /**
      * @param float $modifierValue

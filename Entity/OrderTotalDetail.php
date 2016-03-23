@@ -75,7 +75,7 @@ class OrderTotalDetail extends AbstractEntity implements OrderTotalDetailInterfa
     /**
      * {@inheritdoc}
      */
-    public function getModifierType() : string
+    public function getModifierType()
     {
         return $this->modifierType;
     }
@@ -91,7 +91,7 @@ class OrderTotalDetail extends AbstractEntity implements OrderTotalDetailInterfa
     /**
      * {@inheritdoc}
      */
-    public function getModifierValue() : float
+    public function getModifierValue()
     {
         return $this->modifierValue;
     }
