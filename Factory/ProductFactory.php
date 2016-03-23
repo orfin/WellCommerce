@@ -54,6 +54,7 @@ class ProductFactory extends AbstractEntityFactory
         $product->setBuyPriceTax($tax);
         $product->setSellPriceTax($tax);
         $product->setUnit($unit);
+        $product->setHierarchy(0);
 
         return $product;
     }

@@ -73,6 +73,14 @@ class ProductFormBuilder extends AbstractFormBuilder
             'comment' => $this->trans('product.comment.enabled'),
         ]));
 
+        $mainData->addChild($this->getElement('text_field', [
+            'name'  => 'hierarchy',
+            'label' => $this->trans('common.label.hierarchy'),
+            'rules' => [
+                $this->getRule('required')
+            ],
+        ]));
+
         $descriptionData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'description_data',
             'label' => $this->trans('common.fieldset.description')
