@@ -1,0 +1,34 @@
+WellCommerce\Bundle\CompanyBundle\Entity\Company:
+    fields:
+        id:
+            groups:
+                - default
+                - company
+        name:
+            groups:
+                - default
+                - company
+        shortName:
+            groups:
+                - default
+                - company
+        address:
+            groups:
+                - default
+                - company
+        createdAt:
+            groups:
+                - default
+                - company
+        updatedAt:
+            groups:
+                - default
+                - company
+        createdBy:
+            groups: {  }
+        updatedBy:
+            groups: {  }
+        deletedBy:
+            groups: {  }
+    associations: {  }
+    callbacks: {  }
