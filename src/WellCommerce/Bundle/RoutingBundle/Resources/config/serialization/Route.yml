@@ -1,0 +1,16 @@
+WellCommerce\Bundle\RoutingBundle\Entity\Route:
+    fields:
+        id:
+            groups:
+                - default
+                - route
+        path:
+            groups:
+                - default
+                - route
+        locale:
+            groups:
+                - default
+                - route
+    associations: {  }
+    callbacks: {  }
