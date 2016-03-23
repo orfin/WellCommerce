@@ -1,0 +1,48 @@
+WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddress:
+    fields:
+        firstName:
+            groups:
+                - default
+                - client_billing_address
+        lastName:
+            groups:
+                - default
+                - client_billing_address
+        street:
+            groups:
+                - default
+                - client_billing_address
+        streetNo:
+            groups:
+                - default
+                - client_billing_address
+        flatNo:
+            groups:
+                - default
+                - client_billing_address
+        postCode:
+            groups:
+                - default
+                - client_billing_address
+        province:
+            groups:
+                - default
+                - client_billing_address
+        city:
+            groups:
+                - default
+                - client_billing_address
+        country:
+            groups:
+                - default
+                - client_billing_address
+        vatId:
+            groups:
+                - default
+                - client_billing_address
+        companyName:
+            groups:
+                - default
+                - client_billing_address
+    associations: {  }
+    callbacks: {  }
