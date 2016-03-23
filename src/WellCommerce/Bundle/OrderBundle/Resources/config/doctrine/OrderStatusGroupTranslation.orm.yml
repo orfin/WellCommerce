@@ -1,8 +1,0 @@
-WellCommerce\Bundle\OrderBundle\Entity\OrderStatusGroupTranslation:
-    type: entity
-    table: order_status_group_translation
-    fields:
-        name:
-            type: string
-            length: 255
-            nullable: false

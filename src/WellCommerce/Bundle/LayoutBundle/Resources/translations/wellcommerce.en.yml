@@ -1,8 +1,0 @@
-layout_box:
-    heading:
-        index: Layout boxes
-        add: Add a layout box
-        edit: Edit layout box
-    label:
-        type: Type
-        identifier: Identifier

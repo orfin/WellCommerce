@@ -1,8 +1,0 @@
-search:
-    heading:
-        index: Wyniki wyszukiwania
-    label:
-        phrase: Wpisz czego szukasz
-    flash:
-        no_results: Brak wyników wyszukiwania
-
