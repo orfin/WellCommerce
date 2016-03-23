@@ -15,4 +15,13 @@
             </constraint>
         </property>
     </class>
+
+    <class name="WellCommerce\Bundle\OrderBundle\Entity\OrderStatusHistory">
+        <property name="comment">
+            <constraint name="NotNull" />
+        </property>
+        <property name="orderStatus">
+            <constraint name="NotNull" />
+        </property>
+    </class>
 </constraint-mapping>

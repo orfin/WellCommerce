@@ -19,6 +19,7 @@ use WellCommerce\Bundle\CoreBundle\Exception\MissingDataGridException;
 use WellCommerce\Bundle\CoreBundle\Manager\AbstractManager;
 use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactoryInterface;
 use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
+use WellCommerce\Bundle\OrderBundle\Context\Admin\OrderContextInterface;
 use WellCommerce\Component\DataGrid\DataGridInterface;
 use WellCommerce\Component\Form\FormBuilderInterface;
 
@@ -89,6 +90,14 @@ abstract class AbstractAdminManager extends AbstractManager implements AdminMana
     public function getShopContext()
     {
         return $this->get('shop.context.admin');
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function getOrderContext() : OrderContextInterface
+    {
+        return $this->get('order.context.admin');
     }
 
     /**

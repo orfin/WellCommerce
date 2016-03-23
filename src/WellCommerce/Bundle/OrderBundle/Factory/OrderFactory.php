@@ -38,6 +38,7 @@ class OrderFactory extends AbstractEntityFactory
         $order->setProducts(new ArrayCollection());
         $order->setPayments(new ArrayCollection());
         $order->setTotals(new ArrayCollection());
+        $order->setOrderStatusHistory(new ArrayCollection());
         $order->setComment('');
 
         return $order;

@@ -162,9 +162,24 @@ interface OrderInterface extends
     public function getCurrentStatus() : OrderStatusInterface;
 
     /**
-     * @param OrderStatus $currentStatus
+     * @param OrderStatusInterface $currentStatus
      */
     public function setCurrentStatus(OrderStatusInterface $currentStatus);
+
+    /**
+     * @return Collection
+     */
+    public function getOrderStatusHistory() : Collection;
+
+    /**
+     * @param Collection $orderStatusHistory
+     */
+    public function setOrderStatusHistory(Collection $orderStatusHistory);
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addOrderStatusHistory(OrderStatusHistoryInterface $orderStatusHistory);
 
     /**
      * @return string

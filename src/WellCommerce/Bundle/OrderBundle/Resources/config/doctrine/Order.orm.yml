@@ -47,6 +47,12 @@ WellCommerce\Bundle\OrderBundle\Entity\Order:
                 - persist
             fetch: LAZY
             mappedBy: order
+        orderStatusHistory:
+            targetEntity: WellCommerce\Bundle\OrderBundle\Entity\OrderStatusHistory
+            cascade:
+                - persist
+            fetch: LAZY
+            mappedBy: order
         totals:
             targetEntity: WellCommerce\Bundle\OrderBundle\Entity\OrderTotalDetail
             cascade:

@@ -33,7 +33,7 @@ class CategoryController extends AbstractAdminController
     public function indexAction() : Response
     {
         $categories = $this->manager->getRepository()->matching(new Criteria());
-        $tree       = $this->buildTreeForm();
+        $tree       = $this->createCategoryTreeForm();
 
         if ($categories->count()) {
             $category = $categories->first();
@@ -77,13 +77,13 @@ class CategoryController extends AbstractAdminController
         }
 
         return $this->displayTemplate('edit', [
-            'tree'     => $this->buildTreeForm(),
+            'tree'     => $this->createCategoryTreeForm(),
             'form'     => $form,
             'resource' => $resource
         ]);
     }
 
-    protected function buildTreeForm() : FormInterface
+    protected function createCategoryTreeForm() : FormInterface
     {
         return $this->get('category_tree.form_builder.admin')->createForm([
             'name'  => 'category_tree',
