@@ -1,0 +1,29 @@
+WellCommerce\Bundle\TaxBundle\Entity\Tax:
+    fields:
+        id:
+            groups:
+                - default
+                - tax
+        value:
+            groups:
+                - default
+                - tax
+        createdAt:
+            groups:
+                - default
+                - tax
+        updatedAt:
+            groups:
+                - default
+                - tax
+        createdBy:
+            groups: {  }
+        updatedBy:
+            groups: {  }
+        deletedBy:
+            groups: {  }
+    associations:
+        translations:
+            groups:
+                - tax
+    callbacks: {  }
