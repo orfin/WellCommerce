@@ -1,0 +1,13 @@
+{% extends 'WellCommerceAdminBundle:Admin:layout.html.twig' %}
+{% trans_default_domain "wellcommerce" %}
+{% block content %}
+    <h2>{% trans %}locale.heading.add{% endtrans %}</h2>
+    <ul class="possibilities">
+        <li><a href="{{ path('admin.locale.index') }}" class="button return"><span></span></a></li>
+    </ul>
+    <div class="block">
+        <p>Adding a new locale requires that all translatable records will be copied to ensure database consistency. Please use following console command:</p>
+        <p><strong>php app/console wellcommerce:locale:add</strong></p>
+        <p>You will be asked to choose source and target locale. Soon after the new locale is created, all related records will be copied automatically.</p>
+    </div>
+{% endblock %}
