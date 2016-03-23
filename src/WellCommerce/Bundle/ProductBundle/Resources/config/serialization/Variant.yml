@@ -1,0 +1,53 @@
+WellCommerce\Bundle\ProductBundle\Entity\Variant:
+    fields:
+        id:
+            groups:
+                - default
+                - variant
+        weight:
+            groups:
+                - default
+                - variant
+        symbol:
+            groups:
+                - default
+                - variant
+        stock:
+            groups:
+                - default
+                - variant
+        modifierType:
+            groups:
+                - default
+                - variant
+        modifierValue:
+            groups:
+                - default
+                - variant
+        hierarchy:
+            groups:
+                - default
+                - variant
+        sellPrice:
+            groups:
+                - default
+                - variant
+        createdAt:
+            groups:
+                - default
+                - variant
+        updatedAt:
+            groups:
+                - default
+                - variant
+    associations:
+        product:
+            groups:
+                - variant
+        availability:
+            groups:
+                - variant
+        photo:
+            groups:
+                - variant
+    callbacks: {  }
