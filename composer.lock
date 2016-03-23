@@ -1808,12 +1808,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "6a173ddae1a8e58be871f6d010e88c029eaf5cae"
+                "reference": "d094e337976dff9d8e2424e8485872194e768662"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/6a173ddae1a8e58be871f6d010e88c029eaf5cae",
-                "reference": "6a173ddae1a8e58be871f6d010e88c029eaf5cae",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/d094e337976dff9d8e2424e8485872194e768662",
+                "reference": "d094e337976dff9d8e2424e8485872194e768662",
                 "shasum": ""
             },
             "require": {
@@ -1862,7 +1862,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2016-03-11 16:36:56"
+            "time": "2016-03-21 20:02:09"
         },
         {
             "name": "guzzlehttp/promises",
@@ -3486,27 +3486,24 @@
         },
         {
             "name": "react/socket-client",
-            "version": "dev-master",
+            "version": "0.4.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/reactphp/socket-client.git",
-                "reference": "7c79c33c385030dd9952d5dce991c018b71e46e0"
+                "reference": "5e3c4c60b14204660ffedc5e1d6813c708b2ce2c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/reactphp/socket-client/zipball/7c79c33c385030dd9952d5dce991c018b71e46e0",
-                "reference": "7c79c33c385030dd9952d5dce991c018b71e46e0",
+                "url": "https://api.github.com/repos/reactphp/socket-client/zipball/5e3c4c60b14204660ffedc5e1d6813c708b2ce2c",
+                "reference": "5e3c4c60b14204660ffedc5e1d6813c708b2ce2c",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.0",
-                "react/dns": "0.4.*|0.3.*",
-                "react/event-loop": "0.4.*|0.3.*",
-                "react/promise": "~2.0|~1.1",
-                "react/stream": "0.4.*|0.3.*"
-            },
-            "require-dev": {
-                "clue/block-react": "~1.0"
+                "php": ">=5.4.0",
+                "react/dns": "0.4.*",
+                "react/event-loop": "0.4.*",
+                "react/promise": "~2.0",
+                "react/stream": "0.4.*"
             },
             "type": "library",
             "extra": {
@@ -3527,7 +3524,7 @@
             "keywords": [
                 "Socket"
             ],
-            "time": "2016-03-14 03:35:31"
+            "time": "2015-09-24 13:51:48"
         },
         {
             "name": "react/stream",
@@ -3635,12 +3632,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioFrameworkExtraBundle.git",
-                "reference": "a75f351c8e7cc99f1931796c0a78d551178c3bdf"
+                "reference": "40431d338da7ab4ef5f9edc1ba4551ea1d4d0782"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/a75f351c8e7cc99f1931796c0a78d551178c3bdf",
-                "reference": "a75f351c8e7cc99f1931796c0a78d551178c3bdf",
+                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/40431d338da7ab4ef5f9edc1ba4551ea1d4d0782",
+                "reference": "40431d338da7ab4ef5f9edc1ba4551ea1d4d0782",
                 "shasum": ""
             },
             "require": {
@@ -3689,7 +3686,7 @@
                 "annotations",
                 "controllers"
             ],
-            "time": "2016-03-09 13:09:37"
+            "time": "2016-03-22 12:39:08"
         },
         {
             "name": "sensio/generator-bundle",
