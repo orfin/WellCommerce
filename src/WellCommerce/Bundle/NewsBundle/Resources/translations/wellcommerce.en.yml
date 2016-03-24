@@ -1,9 +1,0 @@
-news:
-    heading:
-        index: News
-        add: Add a news
-        edit: Edit news
-    label:
-        topic: Topic
-        summary: Summary
-        content: Content

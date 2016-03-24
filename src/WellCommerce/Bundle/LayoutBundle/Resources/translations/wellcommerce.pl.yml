@@ -1,8 +1,0 @@
-layout_box:
-    heading:
-        index: Boksy
-        add: Dodaj boks
-        edit: Edytuj boks
-    label:
-        type: Typ
-        identifier: Identyfikator

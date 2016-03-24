@@ -1,7 +1,0 @@
-search:
-    heading:
-        index: Search results
-    label:
-        phrase: Enter search phrase
-    flash:
-        no_results: No search results

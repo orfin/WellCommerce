@@ -1,8 +1,0 @@
-company:
-    heading:
-        index: Firmy
-        add: Dodaj firmę
-        edit: Edytuj firmę
-    label:
-        name: Pełna nazwa
-        short_name: Skrócona nazwa

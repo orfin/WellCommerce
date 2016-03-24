@@ -1,7 +1,0 @@
-tax:
-    heading:
-        index: Stawki VAT
-        add: Dodaj stawkę VAT
-        edit: Edytuj stawkę VAT
-    label:
-        value: Wysokość stawki

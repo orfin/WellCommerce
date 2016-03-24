@@ -1,9 +1,0 @@
-well_commerce_distribution:
-    services:
-        package:
-            auto_services:
-                factory: WellCommerce\Bundle\DistributionBundle\Factory\PackageFactory
-                repository: WellCommerce\Bundle\DistributionBundle\Repository\PackageRepository
-            orm_configuration:
-                mapping: "@WellCommerceDistributionBundle/Resources/config/doctrine/Package.orm.yml"
-                entity: WellCommerce\Bundle\DistributionBundle\Entity\Package
