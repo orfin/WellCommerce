@@ -71,5 +71,6 @@ order_status_history:
         client_notified: Client notified
         client_not_notified: Client not notified
         created_by: Created by
+        no_history: Order status history is empty
     button:
         change: Save

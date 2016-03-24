@@ -71,5 +71,6 @@ order_status_history:
         client_notified: Klient został poinformowany
         client_not_notified: Klient nie został poinformowany
         created_by: Utworzone przez
+        no_history: Brak informacji o zmianach statusów zamówienia
     button:
         change: Zapisz

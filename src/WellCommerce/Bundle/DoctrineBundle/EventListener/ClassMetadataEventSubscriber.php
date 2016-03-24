@@ -46,10 +46,6 @@ class ClassMetadataEventSubscriber implements EventSubscriber
         $this->traverser->traverse($metadata);
     }
 
-    protected function registerTimestampable(){
-
-    }
-
     public function getSubscribedEvents()
     {
         return [
