@@ -1,0 +1,6 @@
+cache_adapter:
+    providers:
+        filesystem:
+            factory: 'cache.factory.doctrine_filesystem'
+            options:
+                directory: %kernel.root_dir%/cache/%kernel.environment%/filesystem

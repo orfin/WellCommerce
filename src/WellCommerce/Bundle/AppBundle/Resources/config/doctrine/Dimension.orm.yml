@@ -1,0 +1,18 @@
+WellCommerce\Bundle\AppBundle\Entity\Dimension:
+    type: embeddable
+    fields:
+        depth:
+            type: decimal
+            scale: 4
+            nullable: false
+            precision: 15
+        width:
+            type: decimal
+            scale: 4
+            nullable: false
+            precision: 15
+        height:
+            type: decimal
+            scale: 4
+            nullable: false
+            precision: 15
