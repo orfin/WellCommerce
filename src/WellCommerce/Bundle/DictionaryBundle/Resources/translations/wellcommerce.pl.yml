@@ -1,0 +1,14 @@
+dictionary:
+    heading:
+        index: Tłumaczenia
+        add: Dodaj tłumaczenie
+        edit: Edytuj tłumaczenie
+    label:
+        id: ID
+        identifier: Identyfikator
+        translation: Tłumaczenie
+        locale: Język
+        value: Wartość
+    button:
+        add: Dodaj tłumaczenie
+        sync: Synchronizuj tłumaczenia

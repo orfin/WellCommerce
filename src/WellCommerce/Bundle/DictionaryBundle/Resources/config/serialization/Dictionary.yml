@@ -1,0 +1,29 @@
+WellCommerce\Bundle\DictionaryBundle\Entity\Dictionary:
+    fields:
+        id:
+            groups:
+                - default
+                - dictionary
+        identifier:
+            groups:
+                - default
+                - dictionary
+        createdAt:
+            groups:
+                - default
+                - dictionary
+        updatedAt:
+            groups:
+                - default
+                - dictionary
+        createdBy:
+            groups: {  }
+        updatedBy:
+            groups: {  }
+        deletedBy:
+            groups: {  }
+    associations:
+        translations:
+            groups:
+                - dictionary
+    callbacks: {  }
