@@ -1,0 +1,47 @@
+{% trans_default_domain "wellcommerce" %}
+{% if dataset.pagination.totalRows > 0 %}
+	{% for item in dataset.rows %}
+	<div class="item">
+	    <div class="row">
+	        <div class="col-md-3 col-sm-5 col-xs-12 text-center">
+	            <a href="{{ item.route }}" class="photo">
+	                <img src="{{ image(item.photo, 'normal') }}">
+	            </a>
+	        </div>
+	        <div class="col-md-9 col-sm-7 col-xs-12">
+	            <div class="description">
+	                <div class="row">
+	                    <div class="col-lg-8 col-md-7 col-xs-12">
+	                        <h3><a href="{{ item.route }}">{{ item.name }}</a></h3>
+	                        <p>{{ item.shortDescription }}</p>
+	                        {% if item.isDiscountValid %}
+							<span class="price promo"><small>{{ format_price(item.price, item.currency) }}</small>{{ format_price(item.discountedPrice, item.currency) }}</span>
+	                        {% else %}
+	                        <span class="price">{{ format_price(item.price, item.currency) }}</span>
+	                        {% endif %}
+	                    </div>
+
+	                    <div class="col-lg-4 col-md-5 col-xs-12 buttons text-right">
+	                        <a href="{{ path('front.cart.add',{"id": item.id}) }}" class="btn btn-primary text-left add-cart">{% trans %}cart.button.add{% endtrans %}
+	                            <i class="pull-right">
+	                                <img src="{{ asset('themes/wellcommerce-default-theme/assets/img/add-to-cart.png') }}">
+	                            </i>
+	                        </a>
+	                        <a href="{{ item.route }}" class="btn btn-link">See details</a>
+                        </div>
+	                </div>
+	            </div>
+	        </div>
+		</div>
+	</div>
+    {% endfor %}
+
+    <div class="btns text-center">
+        <button class="btn btn-default" onclick="$('#search').submit();return false;">See all results</button>
+    </div>
+{% else %}
+    <div class="btns text-center">
+        <div class="alert alert-warning nomargin">{% trans %}search.flash.no_results{% endtrans %}</div>
+    </div>
+{% endif %}
+
