@@ -1,0 +1,71 @@
+WellCommerce\Bundle\ProductBundle\Entity\Variant:
+    type: entity
+    table: variant
+    repositoryClass: WellCommerce\Bundle\ProductBundle\Repository\VariantRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    embedded:
+        sellPrice:
+            class: WellCommerce\Bundle\AppBundle\Entity\DiscountablePrice
+            columnPrefix: sell_price_
+    fields:
+        weight:
+            type: decimal
+            scale: 4
+            nullable: false
+            precision: 15
+        symbol:
+            type: string
+            nullable: false
+        stock:
+            type: integer
+            nullable: false
+        modifierType:
+            type: string
+            nullable: false
+            column: modifier_type
+        modifierValue:
+            type: decimal
+            scale: 4
+            nullable: false
+            precision: 15
+            column: modifier_value
+        hierarchy:
+            type: integer
+            nullable: false
+            options:
+                default: 0
+    manyToOne:
+        product:
+            targetEntity: WellCommerce\Bundle\ProductBundle\Entity\Product
+            fetch: LAZY
+            inversedBy: variants
+            joinColumns:
+                product_id:
+                    referencedColumnName: id
+                    onDelete: CASCADE
+        availability:
+            targetEntity: WellCommerce\Bundle\AvailabilityBundle\Entity\Availability
+            fetch: LAZY
+            joinColumns:
+                availability_id:
+                    referencedColumnName: id
+                    onDelete: 'SET NULL'
+        photo:
+            targetEntity: WellCommerce\Bundle\MediaBundle\Entity\Media
+            fetch: LAZY
+            joinColumns:
+                photo_id:
+                    referencedColumnName: id
+                    onDelete: 'SET NULL'
+    oneToMany:
+        options:
+            targetEntity: WellCommerce\Bundle\ProductBundle\Entity\VariantOption
+            cascade:
+                - persist
+            fetch: LAZY
+            mappedBy: variant
+            orphanRemoval: true
