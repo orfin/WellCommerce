@@ -63,6 +63,7 @@ class LoadShopData extends AbstractDataFixture
         $manager->persist($shop);
         $manager->flush();
 
+        $this->get('shop.context.admin')->setCurrentShop($shop);
         $this->setReference('shop', $shop);
     }
 }
