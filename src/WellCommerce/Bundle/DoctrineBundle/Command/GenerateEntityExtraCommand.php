@@ -118,11 +118,11 @@ class GenerateEntityExtraCommand extends Command
     /**
      * Generates a trait class
      *
-     * @param string $entityName
+     * @param ReflectionClass $reflectionClass
      *
      * @return string
      */
-    protected function generateTrait(ReflectionClass $reflectionClass)
+    protected function generateTrait(ReflectionClass $reflectionClass) : string
     {
         $generator = new TraitGenerator($reflectionClass->getShortName(), $reflectionClass->getNamespaceName());
         $this->traverser->traverse($generator);

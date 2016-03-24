@@ -265,10 +265,15 @@ class User extends AbstractEntity implements UserInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritdoc}122
      */
     public function setApiKey(string $apiKey)
     {
         $this->apiKey = $apiKey;
+    }
+
+    public function __toString() : string
+    {
+        return sprintf('%s %s', $this->getFirstName(), $this->getLastName());
     }
 }

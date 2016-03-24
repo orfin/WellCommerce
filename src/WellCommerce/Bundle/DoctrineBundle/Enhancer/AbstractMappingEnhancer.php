@@ -43,12 +43,18 @@ abstract class AbstractMappingEnhancer implements MappingEnhancerInterface
         return $collection;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function visitClassMetadata(ClassMetadataInfo $metadata)
     {
         $collection = $this->getMappingDefinitionCollection();
         $this->extendClassMetadata($metadata, $collection);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function visitTraitGenerator(TraitGenerator $generator)
     {
         $collection = $this->getMappingDefinitionCollection();
@@ -56,25 +62,17 @@ abstract class AbstractMappingEnhancer implements MappingEnhancerInterface
     }
 
     /**
-     * Checks whether the enhances supports entity
-     *
-     * @param $className
-     *
-     * @return bool
+     * {@inheritdoc}
      */
-    public function supportsEntity($className)
+    public function supportsEntity(string $className) : bool
     {
         return $className === $this->getSupportedEntityClass();
     }
 
     /**
-     * Checks whether the enhancer supports entity extra trait
-     *
-     * @param $className
-     *
-     * @return bool
+     * {@inheritdoc}
      */
-    public function supportsEntityExtraTrait($className)
+    public function supportsEntityExtraTrait(string $className) : bool
     {
         return $className === $this->getSupportedEntityExtraTraitClass();
     }
@@ -95,6 +93,12 @@ abstract class AbstractMappingEnhancer implements MappingEnhancerInterface
         });
     }
 
+    /**
+     * Extend the trait
+     *
+     * @param TraitGenerator              $generator
+     * @param MappingDefinitionCollection $collection
+     */
     private function extendTrait(TraitGenerator $generator, MappingDefinitionCollection $collection)
     {
         $collection->forAll(function (MappingDefinitionInterface $definition) use ($generator) {
@@ -110,7 +114,7 @@ abstract class AbstractMappingEnhancer implements MappingEnhancerInterface
      * @param TraitGenerator $generator
      * @param string         $property
      */
-    protected function addProperty(TraitGenerator $generator, $property)
+    protected function addProperty(TraitGenerator $generator, string $property)
     {
         $generator->addProperty(new PropertyGenerator($property, null, Modifiers::MODIFIER_PROTECTED));
     }
@@ -121,7 +125,7 @@ abstract class AbstractMappingEnhancer implements MappingEnhancerInterface
      * @param TraitGenerator $generator
      * @param string         $property
      */
-    protected function addGetterMethod(TraitGenerator $generator, $property)
+    protected function addGetterMethod(TraitGenerator $generator, string $property)
     {
         $getterMethodName = 'get' . Helper::studly($property);
         $variableName     = strval($property);
@@ -137,7 +141,7 @@ abstract class AbstractMappingEnhancer implements MappingEnhancerInterface
      * @param TraitGenerator $generator
      * @param string         $property
      */
-    protected function addSetterMethod(TraitGenerator $generator, $property)
+    protected function addSetterMethod(TraitGenerator $generator, string $property)
     {
         $setterMethodName = 'set' . Helper::studly($property);
         $variableName     = strval($property);

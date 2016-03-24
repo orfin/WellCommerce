@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\CoreBundle\Manager\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface;
+use WellCommerce\Bundle\OrderBundle\Context\Admin\OrderContextInterface;
 use WellCommerce\Component\DataGrid\DataGridInterface;
 
 /**
@@ -43,4 +44,9 @@ interface AdminManagerInterface extends ManagerInterface
      * @return null|\WellCommerce\Bundle\AdminBundle\Entity\UserInterface
      */
     public function getAdmin();
+
+    /**
+     * @return OrderContextInterface
+     */
+    public function getOrderContext() : OrderContextInterface;
 }

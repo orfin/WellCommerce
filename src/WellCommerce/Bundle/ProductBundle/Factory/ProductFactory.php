@@ -14,8 +14,8 @@ namespace WellCommerce\Bundle\ProductBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\Bundle\AppBundle\Entity\Dimension;
-use WellCommerce\Bundle\AppBundle\Entity\DiscountablePrice;
-use WellCommerce\Bundle\AppBundle\Entity\Price;
+use WellCommerce\Bundle\AppBundle\Entity\DiscountablePriceInterface;
+use WellCommerce\Bundle\AppBundle\Entity\PriceInterface;
 use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 use WellCommerce\Bundle\UnitBundle\Entity\UnitInterface;
@@ -38,7 +38,7 @@ class ProductFactory extends AbstractEntityFactory
     public function create() : ProductInterface
     {
         $unit = $this->getDefaultUnit();
-        $tax = $this->getDefaultTax();
+        $tax  = $this->getDefaultTax();
 
         /** @var  $product ProductInterface */
         $product = $this->init();
@@ -48,9 +48,9 @@ class ProductFactory extends AbstractEntityFactory
         $product->setVariants(new ArrayCollection());
         $product->setShops(new ArrayCollection());
         $product->setEnabled(true);
-        $product->setSellPrice(new DiscountablePrice());
+        $product->setSellPrice($this->createDefaultDiscountablePrice());
         $product->setDimension(new Dimension());
-        $product->setBuyPrice(new Price());
+        $product->setBuyPrice($this->createDefaultPrice());
         $product->setBuyPriceTax($tax);
         $product->setSellPriceTax($tax);
         $product->setUnit($unit);
@@ -58,9 +58,19 @@ class ProductFactory extends AbstractEntityFactory
 
         return $product;
     }
-
+    
     private function getDefaultUnit() : UnitInterface
     {
         return $this->get('unit.repository')->findOneBy([]);
+    }
+
+    private function createDefaultDiscountablePrice() : DiscountablePriceInterface
+    {
+        return $this->get('discountable_price.factory')->create();
+    }
+
+    private function createDefaultPrice() : PriceInterface
+    {
+        return $this->get('price.factory')->create();
     }
 }

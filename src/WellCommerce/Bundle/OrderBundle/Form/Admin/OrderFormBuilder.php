@@ -107,7 +107,7 @@ class OrderFormBuilder extends AbstractFormBuilder
 
         $orderTotalData->addChild($this->getElement('text_field', [
             'name'  => 'shippingTotal.grossAmount',
-            'label' => $this->trans('order.label.order_total.shipping'),
+            'label' => $this->trans('order.label.shipping_total'),
         ]));
 
         $contactDetails = $form->addChild($this->getElement('nested_fieldset', [
@@ -142,7 +142,7 @@ class OrderFormBuilder extends AbstractFormBuilder
 
         $addresses = $form->addChild($this->getElement('columns', [
             'name'  => 'addresses',
-            'label' => $this->trans('order.heading.addresses'),
+            'label' => $this->trans('order.heading.address'),
         ]));
 
         $billingAddress = $addresses->addChild($this->getElement('nested_fieldset', [

@@ -37,30 +37,30 @@ interface MappingEnhancerInterface
      *
      * @return string
      */
-    public function getSupportedEntityClass();
+    public function getSupportedEntityClass() : string;
 
     /**
      * Returns the class name supported by enhancer
      *
      * @return string
      */
-    public function getSupportedEntityExtraTraitClass();
+    public function getSupportedEntityExtraTraitClass() : string;
 
     /**
      * Checks whether the enhances supports entity
      *
-     * @param $className
+     * @param string $className
      *
      * @return bool
      */
-    public function supportsEntity($className);
+    public function supportsEntity(string $className) : bool;
 
     /**
      * Checks whether the enhancer supports entity extra trait
      *
-     * @param $className
+     * @param string $className
      *
      * @return bool
      */
-    public function supportsEntityExtraTrait($className);
+    public function supportsEntityExtraTrait(string $className) : bool;
 }

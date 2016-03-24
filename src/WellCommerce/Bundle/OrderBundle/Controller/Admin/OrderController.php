@@ -15,8 +15,9 @@ namespace WellCommerce\Bundle\OrderBundle\Controller\Admin;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
-use WellCommerce\Bundle\OrderBundle\Context\Admin\OrderContextInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderStatusHistoryInterface;
+use WellCommerce\Component\Form\Elements\FormInterface;
 
 /**
  * Class OrderController
@@ -31,29 +32,62 @@ class OrderController extends AbstractAdminController
         if (!$resource instanceof OrderInterface) {
             return $this->redirectToAction('index');
         }
-
-        $this->getOrderContext()->setCurrentOrder($resource);
-
+        
+        $this->manager->getOrderContext()->setCurrentOrder($resource);
+        
         $form = $this->manager->getForm($resource, [
             'class' => 'editOrder'
         ]);
-
+        
         if ($form->handleRequest()->isSubmitted()) {
             if ($form->isValid()) {
                 $this->manager->updateResource($resource);
             }
-
+            
             return $this->createFormDefaultJsonResponse($form);
         }
 
+        $orderStatusHistory     = $this->createOrderStatusHistoryResource($resource);
+        $orderStatusHistoryForm = $this->createOrderStatusHistoryForm($orderStatusHistory);
+
+        if ($orderStatusHistoryForm->handleRequest()->isSubmitted()) {
+            if ($orderStatusHistoryForm->isValid()) {
+                $this->get('order_status_history.manager.admin')->createResource($orderStatusHistory);
+            }
+
+            return $this->jsonResponse([
+                'valid'      => $orderStatusHistoryForm->isValid(),
+                'next'       => false,
+                'continue'   => false,
+                'redirectTo' => $this->getRedirectToActionUrl('edit', ['id' => $resource->getId()]),
+                'error'      => $orderStatusHistoryForm->getError(),
+            ]);
+        }
+
         return $this->displayTemplate('edit', [
-            'form'     => $form,
-            'resource' => $resource
+            'form'                   => $form,
+            'orderStatusHistoryForm' => $orderStatusHistoryForm,
+            'resource'               => $resource
         ]);
     }
-
-    protected function getOrderContext() : OrderContextInterface
+    
+    protected function createOrderStatusHistoryForm(OrderStatusHistoryInterface $orderStatusHistory) : FormInterface
     {
-        return $this->get('order.context.admin');
+        return $this->get('order_status_history.form_builder.admin')->createForm([
+            'name'  => 'orderStatusHistory',
+            'class' => 'statusChange'
+        ], $orderStatusHistory);
+    }
+
+    protected function createOrderStatusHistoryResource(OrderInterface $order) : OrderStatusHistoryInterface
+    {
+        /** @var $orderStatusHistory OrderStatusHistoryInterface */
+        $orderStatusHistory = $this->get('order_status_history.factory')->create();
+        $orderStatusHistory->setNotify(false);
+        $orderStatusHistory->setComment('');
+        $orderStatusHistory->setOrder($order);
+        $orderStatusHistory->setOrderStatus($order->getCurrentStatus());
+
+        return $orderStatusHistory;
     }
 }

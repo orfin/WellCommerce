@@ -29,6 +29,13 @@ well_commerce_order:
                 exposed: true
                 dataset: order_status.dataset.admin
                 manager: order_status.manager.admin
+        order_status_history:
+            auto_services:
+                factory: WellCommerce\Bundle\OrderBundle\Factory\OrderStatusHistoryFactory
+                repository: WellCommerce\Bundle\OrderBundle\Repository\OrderStatusHistoryRepository
+            orm_configuration:
+                mapping: "@WellCommerceOrderBundle/Resources/config/doctrine/OrderStatusHistory.orm.yml"
+                entity: WellCommerce\Bundle\OrderBundle\Entity\OrderStatusHistory
         order_status_translation:
             orm_configuration:
                 mapping: "@WellCommerceOrderBundle/Resources/config/doctrine/OrderStatusTranslation.orm.yml"

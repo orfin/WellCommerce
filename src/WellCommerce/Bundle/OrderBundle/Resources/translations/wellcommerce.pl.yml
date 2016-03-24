@@ -9,13 +9,10 @@ order:
         confirmation: Potwierdzenie
         order_total: Suma
         products: Produkty
-        order_method_details:
+        contact_details: Dane kontaktowe
     button:
         confirm: Przejdź do potwierdzenia
         add_product: Dodaj produkt
-    heading:
-        address: Adres dostawy i płatnika
-        contact_details: Dane kontaktowe
     label:
         id: ID
         order_no: Numer zamówienia
@@ -38,8 +35,6 @@ order:
         gross_amount: Cena
         gross_total: Suma
         currency: Waluta
-        order_total:
-            shipping: Koszty wysyłki
     description:
         product_total: Wartość produktów
         shipping_cost: Koszty wysyłki
@@ -64,3 +59,18 @@ order_status_group:
         edit: Edytuj grupę
     label:
         name: Nazwa grupy statusów zamówień
+
+order_status_history:
+    heading:
+        add: Zmiana statusu zamówienia
+        view: Historia zmiany statusów
+    label:
+        order_status: Status zamówienia
+        comment: Komentarz
+        nofity: Wyślij powiadomienie
+        client_notified: Klient został poinformowany
+        client_not_notified: Klient nie został poinformowany
+        created_by: Utworzone przez
+        no_history: Brak informacji o zmianach statusów zamówienia
+    button:
+        change: Zapisz

@@ -85,6 +85,11 @@ class Order extends AbstractEntity implements OrderInterface
     protected $currentStatus;
 
     /**
+     * @var Collection
+     */
+    protected $orderStatusHistory;
+    
+    /**
      * @var ClientContactDetailsInterface
      */
     protected $contactDetails;
@@ -302,6 +307,30 @@ class Order extends AbstractEntity implements OrderInterface
     public function setCurrentStatus(OrderStatusInterface $currentStatus)
     {
         $this->currentStatus = $currentStatus;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setOrderStatusHistory(Collection $orderStatusHistory)
+    {
+        $this->orderStatusHistory = $orderStatusHistory;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOrderStatusHistory() : Collection
+    {
+        return $this->orderStatusHistory;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addOrderStatusHistory(OrderStatusHistoryInterface $orderStatusHistory)
+    {
+        $this->orderStatusHistory->add($orderStatusHistory);
     }
 
     /**

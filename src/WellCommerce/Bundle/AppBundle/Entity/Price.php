@@ -17,7 +17,7 @@ namespace WellCommerce\Bundle\AppBundle\Entity;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Price
+class Price implements PriceInterface
 {
     /**
      * @var float

@@ -110,6 +110,8 @@ well_commerce_app:
                 mapping: "@WellCommerceAppBundle/Resources/config/doctrine/Dimension.orm.yml"
                 entity: WellCommerce\Bundle\AppBundle\Entity\Dimension
         discountable_price:
+            auto_services:
+                factory: WellCommerce\Bundle\AppBundle\Factory\DiscountablePriceFactory
             orm_configuration:
                 mapping: "@WellCommerceAppBundle/Resources/config/doctrine/DiscountablePrice.orm.yml"
                 entity: WellCommerce\Bundle\AppBundle\Entity\DiscountablePrice
@@ -122,6 +124,8 @@ well_commerce_app:
                 mapping: "@WellCommerceAppBundle/Resources/config/doctrine/Meta.orm.yml"
                 entity: WellCommerce\Bundle\AppBundle\Entity\Meta
         price:
+            auto_services:
+                factory: WellCommerce\Bundle\AppBundle\Factory\PriceFactory
             orm_configuration:
                 mapping: "@WellCommerceAppBundle/Resources/config/doctrine/Price.orm.yml"
                 entity: WellCommerce\Bundle\AppBundle\Entity\Price

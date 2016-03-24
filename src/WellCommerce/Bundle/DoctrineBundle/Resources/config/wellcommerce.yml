@@ -21,6 +21,9 @@ knp_doctrine_behaviors:
     timestampable:  true
     translatable:   true
 
+parameters:
+    knp.doctrine_behaviors.blameable_subscriber.user_entity: WellCommerce\Bundle\AdminBundle\Entity\User
+
 doctrine_cache:
     providers:
         file_system:

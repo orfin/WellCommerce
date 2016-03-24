@@ -12,6 +12,31 @@
         <fieldset class="no-margin">
             <legend><span>{% trans %}common.fieldset.general{% endtrans %}</span></legend>
             {{ form_js(form) }}
+            <div class="layout-two-columns">
+                <div class="column">
+                    <h3><span><strong>{% trans %}order_status_history.heading.add{% endtrans %}</strong></span></h3>
+                    {{ form_js(orderStatusHistoryForm) }}
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset class="no-margin">
+            <legend><span>{% trans %}order_status_history.heading.view{% endtrans %} ({{ resource.orderStatusHistory.count() }})</span></legend>
+
+            {% if resource.orderStatusHistory.count() > 0 %}
+                <ul class="changes-detailed">
+                    {% for entry in resource.orderStatusHistory %}
+                        <li>
+                            <h4><span>{{ entry.createdAt|date }} - <em>{% if entry.notify == true %}{% trans %}order_status_history.label.client_notified{% endtrans %}{% else %}{% trans %}order_status_history.label.client_not_notified{% endtrans %}{% endif %}</em></span></h4>
+                            <p>{% trans %}order_status_history.label.order_status{% endtrans %}: <strong>{{ entry.orderStatus.translate.name }}</strong></p>
+                            {% if entry.comment != '' %}<p>{% trans %}order_status_history.label.comment{% endtrans %}: <strong>{{ entry.comment }}</strong></p>{% endif %}
+                            {% if entry.createdBy is not null %}<p class="author">{% trans %}order_status_history.label.created_by{% endtrans %}: <strong>{{ entry.createdBy }}</strong></p>{% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="information">{% trans %}order_status_history.label.no_history{% endtrans %}</p>
+            {% endif %}
         </fieldset>
     </div>
 

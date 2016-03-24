@@ -13,6 +13,10 @@
 namespace WellCommerce\Bundle\PaymentBundle\DataSet\Front;
 
 use WellCommerce\Bundle\PaymentBundle\DataSet\Admin\PaymentMethodDataSet as BaseDataSet;
+use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod;
+use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethod;
+use WellCommerce\Component\DataSet\Cache\CacheOptions;
+use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
 
 /**
  * Class PaymentMethodDataSet
@@ -21,4 +25,16 @@ use WellCommerce\Bundle\PaymentBundle\DataSet\Admin\PaymentMethodDataSet as Base
  */
 class PaymentMethodDataSet extends BaseDataSet
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(DataSetConfiguratorInterface $configurator)
+    {
+        parent::configureOptions($configurator);
+
+        $configurator->setCacheOptions(new CacheOptions(true, 3600, [
+            PaymentMethod::class,
+            ShippingMethod::class
+        ]));
+    }
 }

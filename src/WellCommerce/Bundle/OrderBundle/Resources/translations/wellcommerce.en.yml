@@ -5,16 +5,14 @@ order:
     heading:
         index: Orders
         edit: Edit order
-        address: Address
+        address: Billing & shipping address
         confirmation: Confirmation
         order_total: Summary
         products: Products
+        contact_details: Contact details
     button:
         confirm: Go to confirmation
         add_product: Add product
-    heading:
-        address: Billing & shipping address
-        contact_details: Contact details
     label:
         id: ID
         order_no: Order no.
@@ -37,8 +35,6 @@ order:
         gross_amount: Price
         gross_total: Total
         currency: Currency
-        order_total:
-            shipping: Shipping total
     description:
         product_total: Total products value
         shipping_cost: Shipping costs
@@ -63,3 +59,18 @@ order_status_group:
         edit: Edit an order status group
     label:
         name: Order status group name
+
+order_status_history:
+    heading:
+        add: Change order status
+        view: Order status history
+    label:
+        order_status: Order status
+        comment: Comment
+        nofity: Send notification
+        client_notified: Client notified
+        client_not_notified: Client not notified
+        created_by: Created by
+        no_history: Order status history is empty
+    button:
+        change: Save
