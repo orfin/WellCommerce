@@ -54,10 +54,10 @@ parameters:
         WellCommerce\Bundle\LocaleBundle\DataFixtures\ORM\LoadLocaleData: 40
         WellCommerce\Bundle\OrderBundle\DataFixtures\ORM\LoadOrderStatusGroupData: 41
         WellCommerce\Bundle\OrderBundle\DataFixtures\ORM\LoadOrderStatusData: 42
+        WellCommerce\Bundle\ClientBundle\DataFixtures\ORM\LoadClientGroupData: 43
         WellCommerce\Bundle\ShopBundle\DataFixtures\ORM\LoadShopData: 50
         WellCommerce\Bundle\AdminBundle\DataFixtures\ORM\LoadUserData: 60
         WellCommerce\Bundle\TaxBundle\DataFixtures\ORM\LoadTaxData: 70
-        WellCommerce\Bundle\ClientBundle\DataFixtures\ORM\LoadClientGroupData: 80
         WellCommerce\Bundle\ClientBundle\DataFixtures\ORM\LoadClientData: 90
         WellCommerce\Bundle\UnitBundle\DataFixtures\ORM\LoadUnitData: 110
         WellCommerce\Bundle\ContactBundle\DataFixtures\ORM\LoadContactData: 130
