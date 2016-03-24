@@ -5,6 +5,7 @@
     <ul class="possibilities">
         <li><a href="{{ path('admin.client.index') }}" class="button return"><span></span></a></li>
         <li><a href="#{{ form.getName() }}" rel="submit" class="button"><span>{% trans %}common.button.save_and_finish{% endtrans %}</span></a></li>
+        <li><a href="#{{ form.getName() }}" rel="submit[continue]" class="button"><span>{% trans %}common.button.save_and_continue{% endtrans %}</span></a></li>
     </ul>
     {{ form_js(form) }}
 {% endblock %}
