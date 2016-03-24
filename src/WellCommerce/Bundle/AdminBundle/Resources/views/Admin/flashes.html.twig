@@ -1,0 +1,12 @@
+{% trans_default_domain "wellcommerce" %}
+<script type="text/javascript">
+    $(document).ready(function(){
+        {% for flashMessage in app.session.getFlashBag().get('error') %}
+        GError('{% trans %}An error has occured!{% endtrans %}', '{{ flashMessage }}');
+        {% endfor %}
+
+        {% for flashMessage in app.session.getFlashBag().get('success') %}
+        GMessage('{% trans %}common.flashes.success{% endtrans %}', '{{ flashMessage }}');
+        {% endfor %}
+    });
+</script>
