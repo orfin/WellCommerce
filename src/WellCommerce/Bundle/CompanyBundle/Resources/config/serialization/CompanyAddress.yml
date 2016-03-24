@@ -1,0 +1,32 @@
+WellCommerce\Bundle\CompanyBundle\Entity\CompanyAddress:
+    fields:
+        street:
+            groups:
+                - default
+                - company_address
+        streetNo:
+            groups:
+                - default
+                - company_address
+        flatNo:
+            groups:
+                - default
+                - company_address
+        postCode:
+            groups:
+                - default
+                - company_address
+        province:
+            groups:
+                - default
+                - company_address
+        city:
+            groups:
+                - default
+                - company_address
+        country:
+            groups:
+                - default
+                - company_address
+    associations: {  }
+    callbacks: {  }
