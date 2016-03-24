@@ -1,0 +1,2 @@
+# Collections
+WellCommerce Collections Component
