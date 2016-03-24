@@ -65,6 +65,7 @@ common:
         sku: SKU
         default_order_status: Default order status
         url: URL address
+        shop: Shop
         shops: Available in shops
         meta:
             title: Meta title

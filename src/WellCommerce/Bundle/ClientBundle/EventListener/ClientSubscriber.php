@@ -32,12 +32,10 @@ class ClientSubscriber extends AbstractEventSubscriber
 
     public function onClientPreCreate(ResourceEvent $event)
     {
-        $client      = $event->getResource();
-        $shopContext = $this->get('shop.context.front');
+        $client = $event->getResource();
         if ($client instanceof ClientInterface) {
             $userName = $client->getUsername();
             $client->getContactDetails()->setEmail($userName);
-            $client->setShop($shopContext->getCurrentShop());
         }
     }
 

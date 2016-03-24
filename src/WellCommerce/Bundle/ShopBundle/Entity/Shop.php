@@ -16,6 +16,7 @@ use Doctrine\Common\Collections\Collection;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use WellCommerce\Bundle\AppBundle\Entity\MailerConfiguration;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientGroupAwareTrait;
 use WellCommerce\Bundle\CompanyBundle\Entity\CompanyInterface;
 use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
 use WellCommerce\Bundle\ThemeBundle\Entity\ThemeAwareTrait;
@@ -30,7 +31,8 @@ class Shop extends AbstractEntity implements ShopInterface
     use Timestampable;
     use Blameable;
     use ThemeAwareTrait;
-
+    use ClientGroupAwareTrait;
+    
     /**
      * @var string
      */

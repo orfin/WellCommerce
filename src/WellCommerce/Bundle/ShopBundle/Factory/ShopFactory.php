@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\ShopBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\Bundle\AppBundle\Entity\MailerConfiguration;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientGroupInterface;
 use WellCommerce\Bundle\CompanyBundle\Entity\CompanyInterface;
 use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 use WellCommerce\Bundle\ShopBundle\Entity\ShopInterface;
@@ -48,9 +49,22 @@ class ShopFactory extends AbstractEntityFactory
         $shop->setCompany($this->getDefaultCompany());
         $shop->setTheme($this->getDefaultTheme());
         $shop->setDefaultCurrency($this->getDefaultCurrency()->getCode());
-        $shop->setDefaultCountry('');
+        $shop->setDefaultCountry($this->getDefaultCountry());
+        $shop->setClientGroup($this->getDefaultClientGroup());
 
         return $shop;
+    }
+
+    private function getDefaultCountry() : string
+    {
+        $countries = array_keys($this->get('country.repository')->all());
+
+        return reset($countries);
+    }
+
+    private function getDefaultClientGroup() : ClientGroupInterface
+    {
+        return $this->get('client_group.repository')->findOneBy([]);
     }
 
     private function getDefaultCompany() : CompanyInterface

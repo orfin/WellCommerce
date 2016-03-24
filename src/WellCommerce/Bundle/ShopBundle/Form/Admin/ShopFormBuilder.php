@@ -88,6 +88,13 @@ class ShopFormBuilder extends AbstractFormBuilder
             'options' => $currencies,
         ]));
 
+        $cartSettings->addChild($this->getElement('select', [
+            'name'        => 'clientGroup',
+            'label'       => $this->trans('shop.label.default_client_group'),
+            'options'     => $this->get('client_group.dataset.admin')->getResult('select'),
+            'transformer' => $this->getRepositoryTransformer('entity', $this->get('client_group.repository'))
+        ]));
+
         $mailerConfiguration = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'mailer_configuration',
             'label' => $this->trans('shop.fieldset.mailer_configuration')

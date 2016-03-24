@@ -30,11 +30,7 @@ class Client extends AbstractEntity implements ClientInterface
     use Timestampable;
     use Blameable;
     use ShopAwareTrait;
-
-    /**
-     * @var ClientGroupInterface
-     */
-    protected $clientGroup;
+    use ClientGroupAwareTrait;
 
     /**
      * @var Collection
@@ -65,22 +61,6 @@ class Client extends AbstractEntity implements ClientInterface
      * @var ClientShippingAddressInterface
      */
     protected $shippingAddress;
-
-    /**
-     * @return ClientGroupInterface
-     */
-    public function getClientGroup() : ClientGroupInterface
-    {
-        return $this->clientGroup;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function setClientGroup(ClientGroupInterface $clientGroup)
-    {
-        $this->clientGroup = $clientGroup;
-    }
 
     /**
      * @inheritDoc

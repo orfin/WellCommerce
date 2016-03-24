@@ -47,3 +47,10 @@ WellCommerce\Bundle\ShopBundle\Entity\Shop:
                 theme_id:
                     referencedColumnName: id
                     onDelete: 'SET NULL'
+        clientGroup:
+            targetEntity: WellCommerce\Bundle\ClientBundle\Entity\ClientGroup
+            fetch: LAZY
+            joinColumns:
+                client_group_id:
+                    referencedColumnName: id
+                    onDelete: 'SET NULL'

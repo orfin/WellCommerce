@@ -58,6 +58,18 @@
                 </option>
             </constraint>
         </property>
+        <property name="password">
+            <constraint name="NotNull">
+                <option name="groups">
+                    <value>client_registration</value>
+                </option>
+            </constraint>
+            <constraint name="NotBlank">
+                <option name="groups">
+                    <value>client_registration</value>
+                </option>
+            </constraint>
+        </property>
         <property name="discount">
             <constraint name="Range">
                 <option name="min">0</option>

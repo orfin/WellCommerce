@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\ShopBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\AppBundle\Entity\MailerConfiguration;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientGroupAwareInterface;
 use WellCommerce\Bundle\CompanyBundle\Entity\CompanyAwareInterface;
 use WellCommerce\Bundle\CompanyBundle\Entity\CompanyInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
@@ -26,7 +27,13 @@ use WellCommerce\Bundle\ThemeBundle\Entity\ThemeAwareInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ShopInterface extends EntityInterface, TimestampableInterface, BlameableInterface, ThemeAwareInterface, CompanyAwareInterface
+interface ShopInterface extends
+    EntityInterface,
+    ClientGroupAwareInterface,
+    TimestampableInterface,
+    BlameableInterface,
+    ThemeAwareInterface,
+    CompanyAwareInterface
 {
     /**
      * @return string
