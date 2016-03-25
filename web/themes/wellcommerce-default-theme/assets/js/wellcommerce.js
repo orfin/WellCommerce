@@ -1,5 +1,4 @@
 $(document).ready(function () {
-
     var oBasketModal = $('#basket-modal');
     var oCartPreview = $('#topCart');
     var oAddCartButtonSettings = {

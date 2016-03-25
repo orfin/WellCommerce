@@ -6,6 +6,7 @@ var less = require('gulp-less');
 var sourcemaps = require('gulp-sourcemaps');
 var order = require('gulp-order');
 var merge = require('merge-stream');
+var livereload = require('gulp-livereload');
 
 var paths = {
     theme: {
@@ -33,7 +34,8 @@ gulp.task('theme-js', function () {
         .pipe(concat('theme.js'))
         .pipe(uglify())
         .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest('assets/js/'));
+        .pipe(gulp.dest('assets/js/'))
+        .pipe(livereload());
 });
 
 gulp.task('theme-css', function () {
@@ -46,7 +48,14 @@ gulp.task('theme-css', function () {
         .pipe(uglifycss())
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest('assets/css/'))
+        .pipe(livereload())
         ;
+});
+
+gulp.task('watch', function() {
+    livereload.listen();
+    gulp.watch(paths.theme.css, ['theme-css']);
+    gulp.watch(paths.theme.js, ['theme-js']);
 });
 
 gulp.task('default', ['theme-js', 'theme-css']);
