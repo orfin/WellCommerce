@@ -9233,6 +9233,13 @@ span.field+span.required,span.field+*+span.required {
     stroke: #00A0AB;
 }
 
+.form-button {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	margin-left: 10px;
+	float: left;
+}
+
 /**
  * Trumbowyg v2.0.0-beta.5 - A lightweight WYSIWYG editor
  * Default stylesheet for Trumbowyg editor

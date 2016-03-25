@@ -13896,6 +13896,37 @@ var GFormSubmit = GCore.ExtendClass(GFormField, function() {
 }, oDefaults);
 
 /*
+* SUBMIT
+*/
+
+var oDefaults = {
+	sName: '',
+	sLabel: '',
+	oClasses: {
+		sFieldClass: 'field-submit',
+		sButtonClass: 'button'
+	},
+	sIcon: ''
+};
+
+var GFormButton = GCore.ExtendClass(GFormField, function() {
+
+	var gThis = this;
+
+	gThis._PrepareNode = function() {
+		gThis.m_jNode = $('<div/>').addClass(gThis._GetClass('Field'));
+        gThis.m_jNode.addClass(gThis.m_oOptions.sCssClass);
+        gThis.m_jButton = $('<button class="' + gThis._GetClass('Button') + '" type="button" name="' + gThis.GetName() + '"><span>' + gThis.m_oOptions.sLabel + '</span></button>');
+		gThis.m_jNode.append(gThis.m_jButton);
+
+        gThis.m_jButton.click(function(){
+            window.open(gThis.m_oOptions.sUrl);
+        });
+	};
+
+}, oDefaults);
+
+/*
 * TECHNICAL DATA EDITOR
 */
 
