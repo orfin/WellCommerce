@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\CartBundle\Controller\Front;
 
 use Symfony\Component\HttpFoundation\Response;
+use WellCommerce\Bundle\AdminBundle\Entity\UserInterface;
 use WellCommerce\Bundle\CartBundle\Entity\CartProductInterface;
 use WellCommerce\Bundle\CartBundle\Exception\AddCartItemException;
 use WellCommerce\Bundle\CartBundle\Exception\DeleteCartItemException;

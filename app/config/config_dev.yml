@@ -20,3 +20,7 @@ monolog:
         console:
             type:   console
             bubble: false
+        sentry:
+            type:  raven
+            dsn:   'https://aee308387ae54cca928ce30fa320b0e2:343f9af62d9d4686bc6ca4b25ff5ec09@app.getsentry.com/71753'
+            level: error
