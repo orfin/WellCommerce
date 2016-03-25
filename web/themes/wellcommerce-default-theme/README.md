@@ -1,7 +1,7 @@
 # wellcommerce-default-theme
 WellCommerce Default Theme
 
-1) change working directory to web/themes/wellcommerce-default-theme
+1) chdir to web/themes/wellcommerce-default-theme
 
 2) Install npm
 
@@ -13,6 +13,12 @@ brew install npm
 
 ```
 npm install
+```
+
+4) run gulp
+
+```
+gulp watch
 ```
 
 
