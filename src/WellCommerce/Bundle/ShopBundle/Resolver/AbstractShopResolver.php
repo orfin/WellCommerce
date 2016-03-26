@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\ShopBundle\Resolver;
 
 use WellCommerce\Bundle\CoreBundle\Helper\Request\RequestHelperInterface;
 use WellCommerce\Bundle\ShopBundle\Context\ShopContextInterface;
+use WellCommerce\Bundle\ShopBundle\Entity\ShopInterface;
 use WellCommerce\Bundle\ShopBundle\Repository\ShopRepositoryInterface;
 
 /**
@@ -57,13 +58,10 @@ abstract class AbstractShopResolver
      */
     abstract public function resolve();
 
-    /**
-     * @return \WellCommerce\Bundle\ShopBundle\Entity\ShopInterface
-     */
-    protected function getDefaultShop()
+    protected function getDefaultShop() : ShopInterface
     {
         $shop = $this->repository->findOneBy([]);
-        if (null === $shop) {
+        if (!$shop instanceof ShopInterface) {
             throw new \RuntimeException('Cannot load multistore data. Check stores configuration.');
         }
 

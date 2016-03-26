@@ -15,6 +15,7 @@ namespace WellCommerce\Bundle\CategoryBundle\DataSet\Front;
 use WellCommerce\Bundle\CategoryBundle\DataSet\Admin\CategoryDataSetQueryBuilder as BaseQueryBuilder;
 use WellCommerce\Component\DataSet\Conditions\Condition\Eq;
 use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
+use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
 
 /**
  * Class CategoryDataSetQueryBuilder
@@ -23,9 +24,9 @@ use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
  */
 class CategoryDataSetQueryBuilder extends BaseQueryBuilder
 {
-    protected function getConditions() : ConditionsCollection
+    protected function getConditions(DataSetRequestInterface $request) : ConditionsCollection
     {
-        $conditions = parent::getConditions();
+        $conditions = parent::getConditions($request);
         $conditions->add(new Eq('enabled', true));
 
         return $conditions;

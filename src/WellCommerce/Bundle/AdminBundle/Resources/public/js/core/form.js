@@ -10352,7 +10352,11 @@ var GFormMultiSelect = GCore.ExtendClass(GFormField, function() {
 		}
 		var jRepetitionNode = $('<span class="' + gThis._GetClass('FieldRepetition') + '"/>');
 		jRepetitionNode.append($('<span class="' + gThis._GetClass('FieldSpan') + '"/>').append(jField));
-		return jRepetitionNode;
+
+        var jError = $('<span class="' + gThis._GetClass('Required') + '"/>');
+        jRepetitionNode.append(jError);
+
+        return jRepetitionNode;
 	};
 
 	gThis.OnReset = function() {

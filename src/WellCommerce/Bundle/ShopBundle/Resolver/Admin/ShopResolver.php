@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\ShopBundle\Resolver\Admin;
 
+use Doctrine\Common\Util\Debug;
 use WellCommerce\Bundle\ShopBundle\Resolver\AbstractShopResolver;
 use WellCommerce\Bundle\ShopBundle\Resolver\ShopResolverInterface;
 

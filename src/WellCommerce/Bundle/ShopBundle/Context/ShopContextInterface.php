@@ -36,6 +36,8 @@ interface ShopContextInterface
      */
     public function setCurrentShop(ShopInterface $shop);
 
+    public function resetCurrentShop();
+
     /**
      * @return bool
      */

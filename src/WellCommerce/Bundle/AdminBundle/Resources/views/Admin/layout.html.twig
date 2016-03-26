@@ -66,9 +66,8 @@
             <span class="icon"></span>
             <div class="field-select">
                 <select id="change-context">
-                    <option value="0" {% if currentShop().id == 0 %}selected{% endif %}>{% trans %}admin.label.global_context{% endtrans %}</option>
                     {% for id, name in shops() %}
-                        <option value="{{ id }}" {% if currentShop().id == id %}selected{% endif %}>{{ name }}</option>
+                        <option value="{{ id }}" {% if currentAdminShop().id == id %}selected{% endif %}>{{ name }}</option>
                     {% endfor %}
                 </select>
             </div>

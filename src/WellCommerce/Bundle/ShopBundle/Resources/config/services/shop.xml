@@ -22,6 +22,7 @@
 
         <service id="twig.extension.shop" class="WellCommerce\Bundle\ShopBundle\Twig\Extension\ShopExtension">
             <argument type="service" id="shop.context.front"/>
+            <argument type="service" id="shop.context.admin"/>
             <argument type="service" id="shop.dataset.admin"/>
             <tag name="twig.extension"/>
         </service>

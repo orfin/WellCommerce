@@ -24,8 +24,8 @@ class ShopController extends AbstractAdminController
 {
     public function changeContextAction(int $id) : JsonResponse
     {
-        $shop = $this->manager->getRepository()->find($id);
-        $this->manager->getShopContext()->setCurrentShop($shop);
+        $sessionAttributeName = $this->manager->getShopContext()->getSessionAttributeName();
+        $this->getRequestHelper()->setSessionAttribute($sessionAttributeName, $id);
 
         return $this->jsonResponse([
             'success' => true

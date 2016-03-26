@@ -63,7 +63,7 @@ abstract class AbstractDataSetQueryBuilder implements DataSetQueryBuilderInterfa
      */
     public function getQueryBuilder(ColumnCollection $columns, DataSetRequestInterface $request) : QueryBuilder
     {
-        $this->conditions = $request->getConditions();
+        $this->conditions = $this->getConditions($request);
         $queryBuilder     = $this->repository->getDataSetQueryBuilder();
 
         $queryBuilder->select($columns->getSelectClause());
@@ -80,12 +80,13 @@ abstract class AbstractDataSetQueryBuilder implements DataSetQueryBuilderInterfa
 
     /**
      * Returns the query conditions
+     *Ž
      *
      * @return ConditionsCollection
      */
-    protected function getConditions() : ConditionsCollection
+    protected function getConditions(DataSetRequestInterface $request) : ConditionsCollection
     {
-        return $this->conditions;
+        return $request->getConditions();
     }
 
     /**
@@ -108,8 +109,8 @@ abstract class AbstractDataSetQueryBuilder implements DataSetQueryBuilderInterfa
     /**
      * Adds additional conditions to query
      *
-     * @param QueryBuilder         $queryBuilder
-     * @param ColumnCollection     $columns
+     * @param QueryBuilder     $queryBuilder
+     * @param ColumnCollection $columns
      */
     protected function setColumnConditions(QueryBuilder $queryBuilder, ColumnCollection $columns)
     {

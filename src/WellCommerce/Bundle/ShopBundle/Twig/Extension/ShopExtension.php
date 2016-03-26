@@ -25,7 +25,12 @@ class ShopExtension extends \Twig_Extension
     /**
      * @var ShopContextInterface
      */
-    protected $shopContext;
+    protected $frontContext;
+
+    /**
+     * @var ShopContextInterface
+     */
+    protected $adminContext;
 
     /**
      * @var DataSetInterface
@@ -35,26 +40,34 @@ class ShopExtension extends \Twig_Extension
     /**
      * ShopExtension constructor.
      *
-     * @param ShopContextInterface $shopContext
+     * @param ShopContextInterface $frontContext
+     * @param ShopContextInterface $adminContext
      * @param DataSetInterface     $shopDataset
      */
-    public function __construct(ShopContextInterface $shopContext, DataSetInterface $shopDataset)
+    public function __construct(ShopContextInterface $frontContext, ShopContextInterface $adminContext, DataSetInterface $shopDataset)
     {
-        $this->shopContext = $shopContext;
-        $this->shopDataset = $shopDataset;
+        $this->frontContext = $frontContext;
+        $this->adminContext = $adminContext;
+        $this->shopDataset  = $shopDataset;
     }
 
     public function getFunctions()
     {
         return [
             new \Twig_SimpleFunction('currentShop', [$this, 'getCurrentShop'], ['is_safe' => ['html']]),
+            new \Twig_SimpleFunction('currentAdminShop', [$this, 'getCurrentAdminShop'], ['is_safe' => ['html']]),
             new \Twig_SimpleFunction('shops', [$this, 'getShops'], ['is_safe' => ['html']]),
         ];
     }
     
     public function getCurrentShop() : ShopInterface
     {
-        return $this->shopContext->getCurrentShop();
+        return $this->frontContext->getCurrentShop();
+    }
+
+    public function getCurrentAdminShop() : ShopInterface
+    {
+        return $this->adminContext->getCurrentShop();
     }
     
     public function getShops() : array

@@ -39,7 +39,7 @@ class ProductDataSetQueryBuilder extends AbstractDataSetQueryBuilder
     }
 
     /**
-     * Adds additional criteria to query builder. Filters dataset by current shop scope
+     * Adds additional criteria to query builder. Filters dataset by current shop context
      *
      * @param ColumnCollection        $columns
      * @param DataSetRequestInterface $request
@@ -48,13 +48,10 @@ class ProductDataSetQueryBuilder extends AbstractDataSetQueryBuilder
      */
     public function getQueryBuilder(ColumnCollection $columns, DataSetRequestInterface $request) : QueryBuilder
     {
-        $qb = parent::getQueryBuilder($columns, $request);
-
-        if (null !== $this->context) {
-            $expression = $qb->expr()->eq('product_shops.id', ':shop');
-            $qb->andWhere($expression);
-            $qb->setParameter('shop', $this->context->getCurrentShopIdentifier());
-        }
+        $qb         = parent::getQueryBuilder($columns, $request);
+        $expression = $qb->expr()->eq('product_shops.id', ':shop');
+        $qb->andWhere($expression);
+        $qb->setParameter('shop', $this->context->getCurrentShopIdentifier());
 
         return $qb;
     }

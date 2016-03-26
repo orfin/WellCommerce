@@ -8,6 +8,13 @@
             <constraint name="NotBlank" />
             <constraint name="NotNull" />
         </property>
+        <property name="url">
+            <constraint name="NotBlank" />
+            <constraint name="NotNull" />
+        </property>
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+            <option name="fields">url</option>
+        </constraint>
     </class>
     
 </constraint-mapping>

@@ -12,10 +12,12 @@
 
 namespace WellCommerce\Bundle\CategoryBundle\DataSet\Admin;
 
+use Doctrine\Common\Util\Debug;
 use WellCommerce\Bundle\ShopBundle\Context\ShopContextInterface;
 use WellCommerce\Component\DataSet\Conditions\Condition\Eq;
 use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
 use WellCommerce\Component\DataSet\QueryBuilder\AbstractDataSetQueryBuilder;
+use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
 
 /**
  * Class CategoryDataSetQueryBuilder
@@ -37,13 +39,10 @@ class CategoryDataSetQueryBuilder extends AbstractDataSetQueryBuilder
         $this->context = $context;
     }
 
-    protected function getConditions() : ConditionsCollection
+    protected function getConditions(DataSetRequestInterface $request) : ConditionsCollection
     {
-        $conditions = parent::getConditions();
-
-        if (null !== $this->context) {
-            $conditions->add(new Eq('shop', $this->context->getCurrentShopIdentifier()));
-        }
+        $conditions = parent::getConditions($request);
+        $conditions->add(new Eq('shop', $this->context->getCurrentShopIdentifier()));
 
         return $conditions;
     }
