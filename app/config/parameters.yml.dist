@@ -19,7 +19,6 @@ parameters:
 
     debug_toolbar:          true
     debug_redirects:        false
-    use_assetic_controller: true
 
     doctrine.server_version: 5.6
 

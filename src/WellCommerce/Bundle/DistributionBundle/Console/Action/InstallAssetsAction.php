@@ -24,8 +24,7 @@ class InstallAssetsAction implements ConsoleActionInterface
         return [
             'assets:install'              => [],
             'bazinga:js-translation:dump' => [],
-            'fos:js-routing:dump'         => [],
-            'assetic:dump'                => []
+            'fos:js-routing:dump'         => []
         ];
     }
 }

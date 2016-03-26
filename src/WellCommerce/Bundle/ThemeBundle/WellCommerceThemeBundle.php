@@ -29,6 +29,5 @@ class WellCommerceThemeBundle extends Bundle
         $container->addCompilerPass(new Compiler\AutoRegisterServicesPass());
         $container->addCompilerPass(new Compiler\MappingCompilerPass());
         $container->addCompilerPass(new Compiler\ThemeCompilerPass());
-        $container->addCompilerPass(new Compiler\TemplateResourcesPass());
     }
 }
