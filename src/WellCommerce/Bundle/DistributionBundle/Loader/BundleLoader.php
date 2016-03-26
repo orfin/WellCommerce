@@ -82,7 +82,6 @@ class BundleLoader
             \Symfony\Bundle\TwigBundle\TwigBundle::class,
             \Symfony\Bundle\MonologBundle\MonologBundle::class,
             \Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle::class,
-            \Symfony\Bundle\AsseticBundle\AsseticBundle::class,
             \Doctrine\Bundle\DoctrineBundle\DoctrineBundle::class,
             \Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle::class,
             \Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle::class,

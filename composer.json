@@ -44,7 +44,6 @@
         "liip/imagine-bundle": "^1.3",
         "symfony-cmf/routing": "^1.3",
         "beberlei/DoctrineExtensions": "1.0.*@dev",
-        "symfony/assetic-bundle": "^2.7@dev",
         "symfony/monolog-bundle": "^2.7@dev",
         "symfony/swiftmailer-bundle": "^2.3@dev",
         "doctrine/doctrine-migrations-bundle": "^1.0@dev",

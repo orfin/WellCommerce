@@ -7,32 +7,13 @@
     <meta http-equiv="Author" content="WellCommerce sp. z o.o."/>
     <meta name="robots" content="noindex, nofollow"/>
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}"/>
-    {% stylesheets 'bundles/wellcommerceadmin/css/*' filter='cssrewrite' %}
-    <link rel="stylesheet" href="{{ asset_url }}" />
-    {% endstylesheets %}
-    {% javascripts
-        'bundles/fosjsrouting/js/router.js'
-        '@WellCommerceAdminBundle/Resources/public/js/libs/*'
-        output='js/libs/all.js'
-    %}
-    <script type="text/javascript" src="{{ asset_url }}"></script>
-    {% endjavascripts %}
-    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
-    {% javascripts
-        'bundles/bazingajstranslation/js/translator.min.js'
-        'js/translations/config.js'
-        'js/translations/*/*.js'
-        '@WellCommerceAdminBundle/Resources/public/js/core/core.js'
-        '@WellCommerceAdminBundle/Resources/public/js/core/plugin/*.js'
-        '@WellCommerceAdminBundle/Resources/public/js/core/form.js'
-        '@WellCommerceAdminBundle/Resources/public/js/core/language/*.js'
-    %}
-    <script src="{{ asset_url }}"></script>
-    {% endjavascripts %}
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}" />
+    <script type="text/javascript" src="{{ asset('js/admin/libs.js') }}"></script>
+    <script type="text/javascript" src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
     <script type="text/javascript">
         new GCore({
             iCookieLifetime: 30,
-            sDesignPath: '{{ asset('bundles/wellcommerceadmin/') }}',
+            sDesignPath: '/',
             iActiveView: '',
             iActiveLanguage: '',
             aoLanguages: '',
@@ -43,12 +24,7 @@
 
         var DataGrid;
     </script>
-    {% javascripts
-        '@WellCommerceAdminBundle/Resources/public/js/core/gf.js'
-        '@WellCommerceAdminBundle/Resources/public/js/core/init.js'
-    %}
-    <script type="text/javascript" src="{{ asset_url }}"></script>
-    {% endjavascripts %}
+    <script type="text/javascript" src="{{ asset('js/admin/core.js') }}"></script>
     <script type="text/javascript">
         GF_Debug.s_iLevel = GF_Debug.LEVEL_ALL;
     </script>
@@ -61,9 +37,7 @@
     <div class="layout-container">
         <h1>
             <a href="{{ path('admin.dashboard.index') }}">
-                {% image '@WellCommerceAdminBundle/Resources/public/images/logo.png' %}
-                <img src="{{ asset_url }}" alt="WellCommerce" />
-                {% endimage %}
+                <img src="{{ asset('images/logo.png') }}" alt="WellCommerce" />
             </a>
         </h1>
 

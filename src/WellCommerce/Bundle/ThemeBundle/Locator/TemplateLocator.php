@@ -35,18 +35,9 @@ class TemplateLocator extends BaseTemplateLocator
         return $this->locator;
     }
 
-    /**
-     * Returns cache key for a given template
-     *
-     * @param TemplateReferenceInterface $template
-     *
-     * @return string
-     */
     protected function getCacheKey($template)
     {
-        $name = $template->getLogicalName();
-
-        return $name;
+        return $template->getLogicalName();
     }
 
     /**

@@ -1,0 +1,30 @@
+{
+    "name": "wellcommerce-admin-theme",
+    "title": "WellCommerce Admin Theme",
+    "license": "MIT",
+    "homepage": "http://wellcommerce.org",
+    "description": "Default theme for WellCommerce",
+    "author": "adrian@wellcommerce.org",
+    "bugs": "https://github.com/WellCommerce/WellCommerce/issues",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/WellCommerce/WellCommerce.git"
+    },
+    "keywords": [
+        "gulp",
+        "admin",
+        "template",
+        "wellcommerce"
+    ],
+    "devDependencies": {
+        "gulp": "^3.9.0",
+        "gulp-concat": "^2.6.0",
+        "gulp-order": "^1.1.1",
+        "gulp-less": "^3.0.5",
+        "gulp-sourcemaps": "^1.6.0",
+        "gulp-uglify": "^1.5.1",
+        "gulp-uglifycss": "^1.0.5",
+        "merge-stream": "^1.0.0",
+        "gulp-livereload": "^3.8.1"
+    }
+}
