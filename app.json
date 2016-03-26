@@ -17,6 +17,11 @@
   "scripts": {
     "postdeploy": "php app/console wellcommerce:install"
   },
+  "buildpacks": [
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-php"
+    }
+  ],
   "env": {
     "SYMFONY_ENV": "prod",
     "SYMFONY_SECRET": {
