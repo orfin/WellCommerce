@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\ShopBundle\Controller\Admin;
 
+use Symfony\Component\HttpFoundation\JsonResponse;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 
 /**
@@ -21,17 +22,10 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
  */
 class ShopController extends AbstractAdminController
 {
-    /**
-     * Action used to switch admin shop context
-     *
-     * @param int $id
-     *
-     * @return \Symfony\Component\HttpFoundation\JsonResponse
-     */
-    public function changeContextAction($id)
+    public function changeContextAction(int $id) : JsonResponse
     {
         $shop = $this->manager->getRepository()->find($id);
-        $this->get('shop.context.admin')->setCurrentScope($shop);
+        $this->manager->getShopContext()->setCurrentShop($shop);
 
         return $this->jsonResponse([
             'success' => true
