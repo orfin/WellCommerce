@@ -57,14 +57,6 @@ abstract class AbstractShopContext
     /**
      * {@inheritdoc}
      */
-    public function resetCurrentShop()
-    {
-        $this->currentShop = null;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function hasCurrentShop() : bool
     {
         return $this->currentShop instanceof ShopInterface;

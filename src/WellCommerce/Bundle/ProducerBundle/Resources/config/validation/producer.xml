@@ -7,6 +7,12 @@
         <property name="translations">
             <constraint name="Valid" />
         </property>
+        <property name="shops">
+            <constraint name="Count">
+                <option name="min">1</option>
+                <option name="minMessage">You must specify at least one shop</option>
+            </constraint>
+        </property>
     </class>
 
     <class name="WellCommerce\Bundle\ProducerBundle\Entity\ProducerTranslation">

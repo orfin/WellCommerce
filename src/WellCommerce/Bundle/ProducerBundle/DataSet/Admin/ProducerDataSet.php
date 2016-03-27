@@ -30,6 +30,7 @@ class ProducerDataSet extends AbstractDataSet
         $configurator->setColumns([
             'id'    => 'producer.id',
             'name'  => 'producer_translation.name',
+            'shop'  => 'producer_shops.id',
             'route' => 'IDENTITY(producer_translation.route)',
         ]);
     }

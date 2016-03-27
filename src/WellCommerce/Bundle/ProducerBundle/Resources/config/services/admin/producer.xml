@@ -24,6 +24,9 @@
 
         <service id="producer.dataset.query_builder.admin" class="WellCommerce\Bundle\ProducerBundle\DataSet\Admin\ProducerDataSetQueryBuilder" public="false">
             <argument type="service" id="producer.repository"/>
+            <call method="setShopContext">
+                <argument type="service" id="shop.context.admin"/>
+            </call>
         </service>
 
         <service id="producer.dataset.admin" class="WellCommerce\Bundle\ProducerBundle\DataSet\Admin\ProducerDataSet">

@@ -35,6 +35,7 @@ class ProducerDataSet extends BaseDataSet
             'id'       => 'producer.id',
             'name'     => 'producer_translation.name',
             'route'    => 'IDENTITY(producer_translation.route)',
+            'shop'     => 'producer_shops.id',
             'products' => 'COUNT(producer_products.id)',
         ]);
 
