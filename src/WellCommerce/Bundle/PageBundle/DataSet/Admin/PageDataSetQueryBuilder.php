@@ -15,6 +15,8 @@ namespace WellCommerce\Bundle\PageBundle\DataSet\Admin;
 use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\ShopBundle\Context\ShopContextInterface;
 use WellCommerce\Component\DataSet\Column\ColumnCollection;
+use WellCommerce\Component\DataSet\Conditions\Condition\Eq;
+use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
 use WellCommerce\Component\DataSet\QueryBuilder\AbstractDataSetQueryBuilder;
 use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
 
@@ -38,25 +40,11 @@ class PageDataSetQueryBuilder extends AbstractDataSetQueryBuilder
         $this->context = $context;
     }
 
-    /**
-     * Adds additional criteria to query builder. Filters dataset by current shop scope
-     *
-     * @param ColumnCollection        $columns
-     * @param DataSetRequestInterface $request
-     *
-     * @return QueryBuilder
-     */
-    public function getQueryBuilder(ColumnCollection $columns, DataSetRequestInterface $request) : QueryBuilder
+    protected function getConditions(DataSetRequestInterface $request) : ConditionsCollection
     {
-        $queryBuilder = parent::getQueryBuilder($columns, $request);
+        $conditions = parent::getConditions($request);
+        $conditions->add(new Eq('shop', $this->context->getCurrentShopIdentifier()));
 
-        if (null !== $this->context) {
-            $expression = $queryBuilder->expr()->eq('page_shops.id', ':shop');
-            $queryBuilder->andWhere($expression);
-            $queryBuilder->setParameter('shop', $this->context->getCurrentShopIdentifier());
-        }
-
-        return $queryBuilder;
+        return $conditions;
     }
-
 }

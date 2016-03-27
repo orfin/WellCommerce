@@ -28,7 +28,6 @@ class LocaleSubscriber extends AbstractEventSubscriber
     {
         return [
             KernelEvents::REQUEST    => ['onKernelRequest', 15],
-            KernelEvents::CONTROLLER => ['onKernelController', -256],
         ];
     }
 
@@ -50,19 +49,6 @@ class LocaleSubscriber extends AbstractEventSubscriber
                 $request->setLocale($currentLocale);
                 $filter->setParameter('locale', $currentLocale);
             }
-        }
-    }
-
-    public function onKernelController(FilterControllerEvent $event)
-    {
-        // skip fetching locales when handling sub-request
-        if ($event->getRequestType() == HttpKernelInterface::SUB_REQUEST) {
-            return;
-        }
-
-        if (!$this->container->get('session')->has('admin/locales')) {
-            $locales = $this->container->get('locale.repository')->getAvailableLocales();
-            $this->container->get('session')->set('admin/locales', $locales);
         }
     }
 }
