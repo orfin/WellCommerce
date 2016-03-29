@@ -34,6 +34,10 @@ class PaymentFactory extends AbstractEntityFactory
     {
         /** @var  $payment PaymentInterface */
         $payment = $this->init();
+        $payment->setState(PaymentInterface::PAYMENT_STATE_CREATED);
+        $payment->setConfiguration([]);
+        $payment->setApprovalUrl('');
+        $payment->setToken('');
 
         return $payment;
     }

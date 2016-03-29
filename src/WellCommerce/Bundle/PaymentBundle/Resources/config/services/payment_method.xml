@@ -100,6 +100,11 @@
         <service id="payment_method.processor.collection" class="WellCommerce\Bundle\PaymentBundle\Processor\PaymentMethodProcessorCollection" />
 
         <service id="bank_transfer.processor" class="WellCommerce\Bundle\PaymentBundle\Processor\BankTransfer">
+            <argument type="service" id="payment.manager.front"/>
+            <argument type="collection">
+                <argument key="name">Bank transfer</argument>
+                <argument key="alias">bank_transfer</argument>
+            </argument>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -107,6 +112,23 @@
         </service>
 
         <service id="cod.processor" class="WellCommerce\Bundle\PaymentBundle\Processor\CashOnDelivery">
+            <argument type="service" id="payment.manager.front"/>
+            <argument type="collection">
+                <argument key="name">Cash on delivery</argument>
+                <argument key="alias">cod</argument>
+            </argument>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <tag name="payment_method.processor"/>
+        </service>
+
+        <service id="paypal.processor" class="WellCommerce\Bundle\PaymentBundle\Processor\PayPal">
+            <argument type="service" id="payment.manager.front"/>
+            <argument type="collection">
+                <argument key="name">PayPal</argument>
+                <argument key="alias">paypal</argument>
+            </argument>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>

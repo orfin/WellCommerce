@@ -17,6 +17,8 @@ use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 use WellCommerce\Bundle\OrderBundle\Exception\OrderNotFoundException;
 use WellCommerce\Bundle\OrderBundle\Repository\OrderRepositoryInterface;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
+use WellCommerce\Bundle\PaymentBundle\Exception\InvalidPaymentTokenException;
+use WellCommerce\Bundle\PaymentBundle\Processor\PaymentMethodProcessorInterface;
 
 /**
  * Class PaymentManager
@@ -29,7 +31,7 @@ class PaymentManager extends AbstractFrontManager implements PaymentManagerInter
      * @var OrderRepositoryInterface
      */
     protected $orderRepository;
-
+    
     /**
      * @param OrderRepositoryInterface $orderRepository
      */
@@ -37,42 +39,50 @@ class PaymentManager extends AbstractFrontManager implements PaymentManagerInter
     {
         $this->orderRepository = $orderRepository;
     }
-
+    
     /**
      * {@inheritdoc}
      */
-    public function findOrder()
+    public function findOrder() : OrderInterface
     {
         $id    = $this->getRequestHelper()->getSessionAttribute('orderId');
         $order = $this->orderRepository->find($id);
-
+        
         if (!$order instanceof OrderInterface) {
             throw new OrderNotFoundException($id);
         }
-
+        
         return $order;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function createPayment(OrderInterface $order, PaymentMethodProcessorInterface $processor) : PaymentInterface
+    {
+        $configuration = $processor->processConfiguration($order->getPaymentMethod()->getConfiguration());
+        $payment       = $this->repository->findOneBy(['order' => $order]);
+        if (!$payment instanceof PaymentInterface) {
+            $payment = $this->initResource();
+            $payment->setOrder($order);
+            $payment->setProcessor($processor->getAlias());
+            $payment->setConfiguration($configuration);
+            $this->createResource($payment);
+        }
+        
+        return $payment;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function registerPayment(OrderInterface $order)
+    public function findProcessorPaymentByToken(string $processor, string $token) : PaymentInterface
     {
-        $payment = $this->repository->findOneBy(['order' => $order]);
+        $payment = $this->repository->findOneBy(['processor' => $processor, 'token' => $token]);
         if (!$payment instanceof PaymentInterface) {
-            $this->createPayment($order);
+            throw new InvalidPaymentTokenException($token);
         }
-    }
 
-    /**
-     * Creates a payment for order
-     *
-     * @param OrderInterface $order
-     */
-    protected function createPayment(OrderInterface $order)
-    {
-        $payment = $this->getFactory()->create();
-        $payment->setOrder($order);
-        $this->createResource($payment);
+        return $payment;
     }
 }

@@ -7,14 +7,16 @@
             <div class="cart">
                 <div class="alert alert-info mtp30">
                     <p><strong>{% trans %}payment.flash.thank_you{% endtrans %}</strong></p>
-                    <p>{% trans %}order.label.order_no{% endtrans %}: <strong>{{ order.getId() }}</strong></p>
-                    <p>{% trans %}order.label.payment_method{% endtrans %}: <strong>{{ order.paymentMethod.translate().name }}</strong></p>
-                    <p>{% trans %}order.label.order_total{% endtrans %}: <strong>{{ format_price(order.orderTotal.grossAmount, order.currency) }}</strong></p>
+                    <p>{% trans %}order.label.order_no{% endtrans %}: <strong>{{ payment.order.id }}</strong></p>
+                    <p>{% trans %}order.label.payment_method{% endtrans %}: <strong>{{ payment.order.paymentMethod.translate.name }}</strong></p>
+                    <p>{% trans %}order.label.order_total{% endtrans %}: <strong>{{ format_price(payment.order.orderTotal.grossAmount, payment.order.currency) }}</strong></p>
                     <br />
                     <p><strong>{% trans %}payment_method.bank_transfer.tip{% endtrans %}:</strong></p>
-                    <p>{% trans %}payment_method.bank_transfer.account{% endtrans %}: {{ configuration.bank_transfer_account }}</p>
-                    <p>{% trans %}payment_method.bank_transfer.sort_number{% endtrans %}: {{ configuration.bank_transfer_sort_number }}</p>
-                    <p>{% trans %}payment_method.bank_transfer.title{% endtrans %}: #{{ order.getId() }}</p>
+                    {% if payment.configuration is not empty %}
+                    <p>{% trans %}payment_method.bank_transfer.account{% endtrans %}: {{ payment.configuration.bank_transfer_account }}</p>
+                    <p>{% trans %}payment_method.bank_transfer.sort_number{% endtrans %}: {{ payment.configuration.bank_transfer_sort_number }}</p>
+                    {% endif %}
+                    <p>{% trans %}payment_method.bank_transfer.title{% endtrans %}: #{{ payment.order.getId }}</p>
                 </div>
                 <div class="clearfix">
                     <a href="{{ path('front.home_page.index') }}" class="btn btn-link light btn-lg notransform nopadding">Back to shopping</a>

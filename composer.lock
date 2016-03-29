@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "92a964c63318089490529290eb1e845f",
-    "content-hash": "ca39db7df6fe9c24cd713526ed1512d3",
+    "hash": "615ec02ee3f6e31379a19c45c962179d",
+    "content-hash": "595dd28d8947d43f901230f224ebb734",
     "packages": [
         {
             "name": "beberlei/DoctrineExtensions",
@@ -683,12 +683,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/collections.git",
-                "reference": "382cc2c8e1bae7453e8598b5c52c951a9c97d53d"
+                "reference": "392b8dd9e04c073e832fcda99270ec5a8f5e30cd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/collections/zipball/382cc2c8e1bae7453e8598b5c52c951a9c97d53d",
-                "reference": "382cc2c8e1bae7453e8598b5c52c951a9c97d53d",
+                "url": "https://api.github.com/repos/doctrine/collections/zipball/392b8dd9e04c073e832fcda99270ec5a8f5e30cd",
+                "reference": "392b8dd9e04c073e832fcda99270ec5a8f5e30cd",
                 "shasum": ""
             },
             "require": {
@@ -741,7 +741,7 @@
                 "collections",
                 "iterator"
             ],
-            "time": "2016-03-25 08:33:42"
+            "time": "2016-03-27 19:22:52"
         },
         {
             "name": "doctrine/common",
@@ -1410,12 +1410,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/migrations.git",
-                "reference": "0bf83caad40db57c958389f0f5967eab250a30cc"
+                "reference": "5f9429e5e6dd31d0f36c8951daa184112a39e195"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/migrations/zipball/0bf83caad40db57c958389f0f5967eab250a30cc",
-                "reference": "0bf83caad40db57c958389f0f5967eab250a30cc",
+                "url": "https://api.github.com/repos/doctrine/migrations/zipball/5f9429e5e6dd31d0f36c8951daa184112a39e195",
+                "reference": "5f9429e5e6dd31d0f36c8951daa184112a39e195",
                 "shasum": ""
             },
             "require": {
@@ -1475,7 +1475,7 @@
                 "database",
                 "migrations"
             ],
-            "time": "2016-03-25 21:47:14"
+            "time": "2016-03-26 12:55:42"
         },
         {
             "name": "doctrine/orm",
@@ -2500,16 +2500,16 @@
         },
         {
             "name": "league/oauth2-facebook",
-            "version": "1.3.0",
+            "version": "1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/oauth2-facebook.git",
-                "reference": "19a000ec7ce514f57983588cca4479f00edfa31f"
+                "reference": "c7ea7041b597a4d215abe49cf82dbede6eaed1c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/oauth2-facebook/zipball/19a000ec7ce514f57983588cca4479f00edfa31f",
-                "reference": "19a000ec7ce514f57983588cca4479f00edfa31f",
+                "url": "https://api.github.com/repos/thephpleague/oauth2-facebook/zipball/c7ea7041b597a4d215abe49cf82dbede6eaed1c1",
+                "reference": "c7ea7041b597a4d215abe49cf82dbede6eaed1c1",
                 "shasum": ""
             },
             "require": {
@@ -2547,7 +2547,7 @@
                 "oauth",
                 "oauth2"
             ],
-            "time": "2016-03-17 22:26:08"
+            "time": "2016-03-28 17:44:07"
         },
         {
             "name": "liip/imagine-bundle",
@@ -2738,12 +2738,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "96034ac8afc647cef61a24e0c9f39452f2165496"
+                "reference": "dec4e574c2efcbbd4b6441ef64334daa79edf8f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/96034ac8afc647cef61a24e0c9f39452f2165496",
-                "reference": "96034ac8afc647cef61a24e0c9f39452f2165496",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/dec4e574c2efcbbd4b6441ef64334daa79edf8f2",
+                "reference": "dec4e574c2efcbbd4b6441ef64334daa79edf8f2",
                 "shasum": ""
             },
             "require": {
@@ -2808,7 +2808,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2016-03-25 20:51:34"
+            "time": "2016-03-26 08:27:31"
         },
         {
             "name": "nesbot/carbon",
@@ -3015,6 +3015,54 @@
                 "random"
             ],
             "time": "2016-03-18 20:34:03"
+        },
+        {
+            "name": "paypal/rest-api-sdk-php",
+            "version": "v1.6.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/paypal/PayPal-PHP-SDK.git",
+                "reference": "06837d290c4906578cfd92786412dff330a1429c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/paypal/PayPal-PHP-SDK/zipball/06837d290c4906578cfd92786412dff330a1429c",
+                "reference": "06837d290c4906578cfd92786412dff330a1429c",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "PayPal": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache2"
+            ],
+            "authors": [
+                {
+                    "name": "PayPal",
+                    "homepage": "https://github.com/paypal/rest-api-sdk-php/contributors"
+                }
+            ],
+            "description": "PayPal's PHP SDK for REST APIs",
+            "homepage": "http://paypal.github.io/PayPal-PHP-SDK/",
+            "keywords": [
+                "payments",
+                "paypal",
+                "rest",
+                "sdk"
+            ],
+            "time": "2016-01-20 17:45:52"
         },
         {
             "name": "psr/cache",
@@ -4283,12 +4331,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "8529f190fbb8cdedd047141dcda5e5b305a39c34"
+                "reference": "27dc53edd6f86338e79b98d135799fd9bf089e2f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/8529f190fbb8cdedd047141dcda5e5b305a39c34",
-                "reference": "8529f190fbb8cdedd047141dcda5e5b305a39c34",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/27dc53edd6f86338e79b98d135799fd9bf089e2f",
+                "reference": "27dc53edd6f86338e79b98d135799fd9bf089e2f",
                 "shasum": ""
             },
             "require": {
@@ -4401,7 +4449,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2016-03-25 01:50:54"
+            "time": "2016-03-28 07:01:03"
         },
         {
             "name": "twig/extensions",

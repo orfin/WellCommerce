@@ -7,6 +7,25 @@ WellCommerce\Bundle\PaymentBundle\Entity\Payment:
             type: integer
             generator:
                 strategy: AUTO
+    fields:
+        processor:
+            type: string
+            nullable: false
+            length: 64
+        token:
+            type: string
+            nullable: true
+            length: 255
+        configuration:
+            type: json_array
+        state:
+            type: string
+            nullable: true
+            length: 64
+        approvalUrl:
+            type: string
+            nullable: true
+            length: 255
     manyToOne:
         order:
             targetEntity: WellCommerce\Bundle\OrderBundle\Entity\Order

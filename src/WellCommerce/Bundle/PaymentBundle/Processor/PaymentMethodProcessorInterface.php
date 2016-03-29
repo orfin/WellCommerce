@@ -13,6 +13,9 @@
 namespace WellCommerce\Bundle\PaymentBundle\Processor;
 
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\HttpFoundation\Request;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
+use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
 use WellCommerce\Component\Form\Dependencies\DependencyInterface;
 use WellCommerce\Component\Form\Elements\ElementInterface;
 use WellCommerce\Component\Form\FormBuilderInterface;
@@ -30,14 +33,14 @@ interface PaymentMethodProcessorInterface
      *
      * @return string
      */
-    public function getAlias();
+    public function getAlias() : string;
 
     /**
      * Returns processor name
      *
      * @return string
      */
-    public function getName();
+    public function getName() : string;
 
     /**
      * Adds configuration fields to form fieldset
@@ -53,5 +56,42 @@ interface PaymentMethodProcessorInterface
      *
      * @return array
      */
-    public function processConfiguration(Collection $collection);
+    public function processConfiguration(Collection $collection) : array;
+
+    /**
+     * Processes a payment for order
+     *
+     * @param PaymentInterface $payment
+     *
+     * @return PaymentInterface
+     */
+    public function processPayment(PaymentInterface $payment) : PaymentInterface;
+
+    /**
+     * Confirms a payment for order
+     *
+     * @param Request $request
+     *
+     * @return PaymentInterface
+     */
+    public function confirmPayment(Request $request) : PaymentInterface;
+
+    /**
+     * Cancels a payment for order
+     *
+     * @param OrderInterface $order
+     * @param Request        $request
+     *
+     * @return PaymentInterface
+     */
+    public function cancelPayment(OrderInterface $order, Request $request) : PaymentInterface;
+
+    /**
+     * Notifies about payment state change
+     *
+     * @param Request $request
+     *
+     * @return PaymentInterface
+     */
+    public function notifyPayment(Request $request) : PaymentInterface;
 }

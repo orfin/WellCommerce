@@ -13,8 +13,13 @@
 namespace WellCommerce\Bundle\PaymentBundle\Processor;
 
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
+use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodConfigurationInterface;
+use WellCommerce\Bundle\PaymentBundle\Manager\Front\PaymentManagerInterface;
 use WellCommerce\Component\Form\Dependencies\DependencyInterface;
 use WellCommerce\Component\Form\Elements\ElementInterface;
 use WellCommerce\Component\Form\FormBuilderInterface;
@@ -27,29 +32,57 @@ use WellCommerce\Component\Form\FormBuilderInterface;
 abstract class AbstractPaymentProcessor extends AbstractContainerAware implements PaymentMethodProcessorInterface
 {
     /**
-     * @var string
+     * @var array
      */
-    protected $name;
+    protected $options;
 
     /**
-     * @var string
+     * @var PaymentManagerInterface
      */
-    protected $alias;
+    protected $paymentManager;
 
     /**
-     * {@inheritdoc}
+     * AbstractPaymentProcessor constructor.
+     *
+     * @param PaymentManagerInterface $paymentManager
+     * @param array                   $options
      */
-    public function getAlias()
+    public function __construct(PaymentManagerInterface $paymentManager, array $options)
     {
-        return $this->alias;
+        $this->paymentManager = $paymentManager;
+        $resolver             = new OptionsResolver();
+        $this->configureOptions($resolver);
+        $this->options = $resolver->resolve($options);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function configureOptions(OptionsResolver $resolver)
     {
-        return $this->name;
+        $resolver->setRequired([
+            'name',
+            'alias',
+        ]);
+
+        $resolver->setAllowedTypes('name', 'string');
+        $resolver->setAllowedTypes('alias', 'string');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAlias() : string
+    {
+        return $this->options['alias'];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName() : string
+    {
+        return $this->options['name'];
     }
 
     /**
@@ -61,7 +94,7 @@ abstract class AbstractPaymentProcessor extends AbstractContainerAware implement
      */
     protected function getFieldName($name)
     {
-        return sprintf('%s_%s', $this->alias, $name);
+        return sprintf('%s_%s', $this->getAlias(), $name);
     }
 
     /**
@@ -76,7 +109,7 @@ abstract class AbstractPaymentProcessor extends AbstractContainerAware implement
     /**
      * {@inheritdoc}
      */
-    public function processConfiguration(Collection $collection)
+    public function processConfiguration(Collection $collection) : array
     {
         $config = [];
 
@@ -85,5 +118,52 @@ abstract class AbstractPaymentProcessor extends AbstractContainerAware implement
         });
 
         return $config;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function processPayment(PaymentInterface $payment) : PaymentInterface
+    {
+        return $payment;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function confirmPayment(Request $request) : PaymentInterface
+    {
+        throw new \LogicException(sprintf('Payment processor "%s" does not allow payment confirmation', $this->getAlias()));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function cancelPayment(OrderInterface $order, Request $request) : PaymentInterface
+    {
+        throw new \LogicException(sprintf('Payment processor "%s" does not allow payment cancellation', $this->getAlias()));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function notifyPayment(Request $request) : PaymentInterface
+    {
+        throw new \LogicException(sprintf('Payment processor "%s" does not allow payment notification', $this->getAlias()));
+    }
+
+    protected function getConfirmUrl() : string
+    {
+        return $this->getRouterHelper()->generateUrl('front.payment.confirm', ['processor' => $this->getAlias()]);
+    }
+
+    protected function getCancelUrl() : string
+    {
+        return $this->getRouterHelper()->generateUrl('front.payment.cancel', ['processor' => $this->getAlias()]);
+    }
+
+    protected function getNotifyUrl() : string
+    {
+        return $this->getRouterHelper()->generateUrl('front.payment.notify', ['processor' => $this->getAlias()]);
     }
 }

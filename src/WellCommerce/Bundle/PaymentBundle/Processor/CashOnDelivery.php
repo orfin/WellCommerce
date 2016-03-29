@@ -12,6 +12,8 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\Processor;
 
+use Symfony\Component\HttpFoundation\Request;
+use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
 use WellCommerce\Component\Form\Dependencies\DependencyInterface;
 use WellCommerce\Component\Form\Elements\ElementInterface;
 use WellCommerce\Component\Form\FormBuilderInterface;
@@ -23,16 +25,6 @@ use WellCommerce\Component\Form\FormBuilderInterface;
  */
 class CashOnDelivery extends AbstractPaymentProcessor
 {
-    /**
-     * @var string
-     */
-    protected $name = 'Cash on delivery';
-
-    /**
-     * @var string
-     */
-    protected $alias = 'cod';
-
     /**
      * {@inheritdoc}
      */

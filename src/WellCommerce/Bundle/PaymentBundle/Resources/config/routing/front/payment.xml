@@ -8,4 +8,16 @@
         <default key="_controller">payment.controller.front:indexAction</default>
         <option key="expose">true</option>
     </route>
+
+    <route id="front.payment.confirm" path="/confirm/{processor}">
+        <default key="_controller">payment.controller.front:confirmAction</default>
+    </route>
+
+    <route id="front.payment.cancel" path="/cancel/{processor}">
+        <default key="_controller">payment.controller.front:cancelAction</default>
+    </route>
+
+    <route id="front.payment.notify" path="/notify/{processor}">
+        <default key="_controller">payment.controller.front:notifyAction</default>
+    </route>
 </routes>
