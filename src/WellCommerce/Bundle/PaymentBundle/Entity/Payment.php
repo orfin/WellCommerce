@@ -42,7 +42,7 @@ class Payment extends AbstractEntity implements PaymentInterface
     protected $configuration;
 
     /**
-     * @var array
+     * @var string
      */
     protected $approvalUrl;
 
