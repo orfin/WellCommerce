@@ -55,6 +55,7 @@ gulp.task('theme-css', function () {
 gulp.task('watch', function() {
     livereload.listen();
     gulp.watch(paths.theme.css, ['theme-css']);
+    gulp.watch(paths.theme.less, ['theme-css']);
     gulp.watch(paths.theme.js, ['theme-js']);
 });
 

@@ -26,7 +26,7 @@ var paths = {
             'web/bundles/wellcommerceadmin/js/core/init.js'
         ],
         css:  [
-            'web/js/wellcommerceadmin/css/**'
+            'web/bundles/wellcommerceadmin/css/**'
         ],
         images: [
             'web/bundles/wellcommerceadmin/images/**'
@@ -64,8 +64,7 @@ gulp.task('admin-css', function () {
 gulp.task('admin-images', function() {
     return gulp.src(paths.admin.images)
         .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest('web/images/'))
-        ;
+        .pipe(gulp.dest('web/images/'));
 });
 
 gulp.task('watch', function() {
