@@ -9,16 +9,16 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
+
 namespace WellCommerce\Bundle\PaymentBundle\Repository;
 
-use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
 
 /**
- * Class PaymentMethodConfigurationRepository
+ * Interface PaymentStateHistoryRepositoryInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PaymentMethodConfigurationRepository extends AbstractEntityRepository implements PaymentMethodConfigurationRepositoryInterface
+interface PaymentStateHistoryRepositoryInterface extends RepositoryInterface
 {
-
 }

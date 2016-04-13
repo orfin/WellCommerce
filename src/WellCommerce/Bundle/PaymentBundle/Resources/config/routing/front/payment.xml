@@ -4,20 +4,23 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-    <route id="front.payment.index" path="/index">
-        <default key="_controller">payment.controller.front:indexAction</default>
+    <route id="front.payment.initialize" path="/initialize">
+        <default key="_controller">payment.controller.front:initializeAction</default>
         <option key="expose">true</option>
     </route>
 
-    <route id="front.payment.confirm" path="/confirm/{processor}">
+    <route id="front.payment.confirm" path="/confirm/{token}">
         <default key="_controller">payment.controller.front:confirmAction</default>
+        <option key="expose">true</option>
     </route>
 
-    <route id="front.payment.cancel" path="/cancel/{processor}">
+    <route id="front.payment.cancel" path="/cancel/{token}">
         <default key="_controller">payment.controller.front:cancelAction</default>
+        <option key="expose">true</option>
     </route>
 
-    <route id="front.payment.notify" path="/notify/{processor}">
+    <route id="front.payment.notify" path="/notify/{token}">
         <default key="_controller">payment.controller.front:notifyAction</default>
+        <option key="expose">true</option>
     </route>
 </routes>

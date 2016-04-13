@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderAwareInterface;
@@ -44,12 +45,12 @@ interface PaymentInterface extends EntityInterface, TimestampableInterface, Orde
     /**
      * @return string
      */
-    public function getToken() : string;
+    public function getState() : string;
 
     /**
-     * @param string $token
+     * @param string $state
      */
-    public function setToken(string $token);
+    public function setState(string $state);
 
     /**
      * @return array
@@ -62,24 +63,44 @@ interface PaymentInterface extends EntityInterface, TimestampableInterface, Orde
     public function setConfiguration(array $configuration);
 
     /**
-     * @return array
-     */
-    public function getApprovalUrl() : string;
-
-    /**
-     * @param array $approvalUrl
-     */
-    public function setApprovalUrl(string $approvalUrl);
-
-    /**
      * @return string
      */
-    public function getState() : string;
+    public function getToken() : string;
 
     /**
-     * @param string $state
+     * @param string $token
      */
-    public function setState(string $state);
+    public function setToken(string $token);
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getExternalToken();
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function setExternalToken($externalToken);
+
+    /**
+     * @return string|null
+     */
+    public function getExternalIdentifier();
+
+    /**
+     * @param string|null $identifier
+     */
+    public function setExternalIdentifier($identifier);
+
+    /**
+     * @return string|null
+     */
+    public function getRedirectUrl();
+
+    /**
+     * @param string|null $redirectUrl
+     */
+    public function setRedirectUrl($redirectUrl);
 
     /**
      * @return bool
@@ -115,4 +136,24 @@ interface PaymentInterface extends EntityInterface, TimestampableInterface, Orde
      * @return bool
      */
     public function isInProgress() : bool;
+
+    /**
+     * @return Collection
+     */
+    public function getPaymentStateHistory() : Collection;
+
+    /**
+     * @param PaymentStateHistoryInterface $paymentStateHistory
+     */
+    public function addPaymentStateHistory(PaymentStateHistoryInterface $paymentStateHistory);
+
+    /**
+     * @return string
+     */
+    public function getComment() : string;
+
+    /**
+     * @param string $comment
+     */
+    public function setComment(string $comment);
 }

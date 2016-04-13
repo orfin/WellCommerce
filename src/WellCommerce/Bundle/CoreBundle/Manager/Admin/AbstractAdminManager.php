@@ -15,11 +15,11 @@ namespace WellCommerce\Bundle\CoreBundle\Manager\Admin;
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\AdminBundle\Entity\UserInterface;
 use WellCommerce\Bundle\CoreBundle\EventDispatcher\EventDispatcherInterface;
-use WellCommerce\Bundle\CoreBundle\Exception\MissingDataGridException;
 use WellCommerce\Bundle\CoreBundle\Manager\AbstractManager;
 use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactoryInterface;
 use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
 use WellCommerce\Bundle\OrderBundle\Context\Admin\OrderContextInterface;
+use WellCommerce\Bundle\ShopBundle\Context\ShopContextInterface;
 use WellCommerce\Component\DataGrid\DataGridInterface;
 use WellCommerce\Component\Form\FormBuilderInterface;
 
@@ -58,12 +58,8 @@ abstract class AbstractAdminManager extends AbstractManager implements AdminMana
     /**
      * {@inheritdoc}
      */
-    public function getDataGrid()
+    public function getDataGrid() : DataGridInterface
     {
-        if (null === $this->dataGrid) {
-            throw new MissingDataGridException(get_class($this));
-        }
-
         return $this->dataGrid;
     }
 
@@ -87,7 +83,7 @@ abstract class AbstractAdminManager extends AbstractManager implements AdminMana
     /**
      * {@inheritdoc}
      */
-    public function getShopContext()
+    public function getShopContext() : ShopContextInterface
     {
         return $this->get('shop.context.admin');
     }

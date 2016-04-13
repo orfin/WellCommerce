@@ -12,20 +12,39 @@ WellCommerce\Bundle\PaymentBundle\Entity\Payment:
             type: string
             nullable: false
             length: 64
-        token:
-            type: string
-            nullable: true
-            length: 255
         configuration:
             type: json_array
+        comment:
+            type: string
+            length: 1000
+            nullable: true
         state:
             type: string
-            nullable: true
+            nullable: false
             length: 64
-        approvalUrl:
+        token:
+            type: string
+            nullable: false
+            length: 255
+        externalIdentifier:
             type: string
             nullable: true
             length: 255
+        externalToken:
+            type: string
+            nullable: true
+            length: 255
+        redirectUrl:
+            type: string
+            nullable: true
+            length: 255
+    oneToMany:
+        paymentStateHistory:
+            targetEntity: WellCommerce\Bundle\PaymentBundle\Entity\PaymentStateHistory
+            cascade:
+                - persist
+            fetch: LAZY
+            mappedBy: payment
     manyToOne:
         order:
             targetEntity: WellCommerce\Bundle\OrderBundle\Entity\Order

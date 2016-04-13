@@ -12,6 +12,20 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Manager;
 
+use WellCommerce\Bundle\CoreBundle\EventDispatcher\EventDispatcherInterface;
+use WellCommerce\Bundle\CoreBundle\Helper\Flash\FlashHelperInterface;
+use WellCommerce\Bundle\CoreBundle\Helper\Image\ImageHelperInterface;
+use WellCommerce\Bundle\CoreBundle\Helper\Request\RequestHelperInterface;
+use WellCommerce\Bundle\CoreBundle\Helper\Translator\TranslatorHelperInterface;
+use WellCommerce\Bundle\CoreBundle\Helper\Validator\ValidatorHelperInterface;
+use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactoryInterface;
+use WellCommerce\Bundle\DoctrineBundle\Helper\Doctrine\DoctrineHelperInterface;
+use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
+use WellCommerce\Bundle\OrderBundle\Context\Admin\OrderContextInterface;
+use WellCommerce\Bundle\ShopBundle\Context\ShopContextInterface;
+use WellCommerce\Component\Form\Elements\FormInterface;
+use WellCommerce\Component\Form\FormBuilderInterface;
+
 /**
  * Interface ManagerInterface
  *
@@ -20,76 +34,84 @@ namespace WellCommerce\Bundle\CoreBundle\Manager;
 interface ManagerInterface
 {
     /**
-     * @return \WellCommerce\Bundle\CoreBundle\Helper\Flash\FlashHelperInterface
-     */
-    public function getValidatorHelper();
-
-    /**
-     * Returns the FlashHelper
+     * Returns the helper for validation
      *
-     * @return \WellCommerce\Bundle\CoreBundle\Helper\Flash\FlashHelperInterface
+     * @return ValidatorHelperInterface
      */
-    public function getFlashHelper();
+    public function getValidatorHelper() : ValidatorHelperInterface;
 
     /**
-     * Returns the ImageHelper
+     * Returns the helper for management of flash session messages
      *
-     * @return \WellCommerce\Bundle\CoreBundle\Helper\Image\ImageHelperInterface
+     * @return FlashHelperInterface
      */
-    public function getImageHelper();
+    public function getFlashHelper() : FlashHelperInterface;
 
     /**
-     * Returns the DoctrineHelper
+     * Returns the helper for management of images
      *
-     * @return \WellCommerce\Bundle\DoctrineBundle\Helper\Doctrine\DoctrineHelperInterface
+     * @return ImageHelperInterface
      */
-    public function getDoctrineHelper();
+    public function getImageHelper() : ImageHelperInterface;
 
     /**
-     * Returns the RequestHelper
+     * Returns the helper for Doctrine calls
      *
-     * @return \WellCommerce\Bundle\CoreBundle\Helper\Request\RequestHelperInterface
+     * @return DoctrineHelperInterface
      */
-    public function getRequestHelper();
+    public function getDoctrineHelper() : DoctrineHelperInterface;
 
     /**
-     * Returns the Translator
+     * Returns the helper for Request management
      *
-     * @return \WellCommerce\Bundle\CoreBundle\Helper\Translator\TranslatorHelperInterface
+     * @return RequestHelperInterface
      */
-    public function getTranslatorHelper();
+    public function getRequestHelper() : RequestHelperInterface;
 
     /**
-     * @return \WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface
-     */
-    public function getRepository();
-
-    /**
-     * @return \WellCommerce\Bundle\CoreBundle\EventDispatcher\EventDispatcherInterface
-     */
-    public function getEventDispatcher();
-
-    /**
-     * @return \WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactoryInterface
-     */
-    public function getFactory();
-
-    /**
-     * Returns form object
+     * Returns the helper for translations management
      *
-     * @return \WellCommerce\Component\Form\FormBuilderInterface
+     * @return TranslatorHelperInterface
      */
-    public function getFormBuilder();
+    public function getTranslatorHelper() : TranslatorHelperInterface;
 
     /**
-     * Returns form instance from builder
+     * Returns the repository
      *
-     * @param null|object $resource
-     * @param array       $config
-     *
-     * @return \WellCommerce\Component\Form\Elements\FormInterface
+     * @return RepositoryInterface
      */
-    public function getForm($resource, array $config = []);
+    public function getRepository() : RepositoryInterface;
+
+    /**
+     * Returns the event-dispatcher helper
+     *
+     * @return EventDispatcherInterface
+     */
+    public function getEventDispatcher() : EventDispatcherInterface;
+
+    /**
+     * Returns the factory
+     *
+     * @return EntityFactoryInterface
+     */
+    public function getFactory() : EntityFactoryInterface;
+
+    /**
+     * Returns the form builder
+     *
+     * @return FormBuilderInterface
+     */
+    public function getFormBuilder() : FormBuilderInterface;
+
+    /**
+     * Initializes the form
+     *
+     * @param object $resource
+     * @param array  $config
+     *
+     * @return FormInterface
+     */
+    public function getForm($resource, array $config = []) : FormInterface;
 
     /**
      * Initializes new resource object
@@ -120,9 +142,9 @@ interface ManagerInterface
     public function removeResource($resource);
 
     /**
-     * @return \WellCommerce\Bundle\ShopBundle\Context\ShopContextInterface
+     * @return ShopContextInterface
      */
-    public function getShopContext();
+    public function getShopContext() : ShopContextInterface;
 
     /**
      * @return null|object

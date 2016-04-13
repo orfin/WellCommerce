@@ -15,19 +15,19 @@ namespace WellCommerce\Bundle\PaymentBundle\DependencyInjection\Compiler;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\Compiler\AbstractCollectionPass;
 
 /**
- * Class RegisterPaymentMethodProcessorPass
+ * Class RegisterPaymentProcessorPass
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class RegisterPaymentMethodProcessorPass extends AbstractCollectionPass
+class RegisterPaymentProcessorPass extends AbstractCollectionPass
 {
     /**
      * @var string
      */
-    protected $collectionServiceId = 'payment_method.processor.collection';
+    protected $collectionServiceId = 'payment.processor.collection';
 
     /**
      * @var string
      */
-    protected $serviceTag = 'payment_method.processor';
+    protected $serviceTag = 'payment.processor';
 }

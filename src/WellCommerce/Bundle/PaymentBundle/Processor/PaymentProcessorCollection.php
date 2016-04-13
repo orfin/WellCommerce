@@ -15,22 +15,19 @@ namespace WellCommerce\Bundle\PaymentBundle\Processor;
 use WellCommerce\Component\Collections\ArrayCollection;
 
 /**
- * Class PaymentMethodProcessorCollection
+ * Class PaymentProcessorCollection
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PaymentMethodProcessorCollection extends ArrayCollection
+class PaymentProcessorCollection extends ArrayCollection
 {
-    /**
-     * @param PaymentMethodProcessorInterface $processor
-     */
-    public function add(PaymentMethodProcessorInterface $processor)
+    public function add(PaymentProcessorInterface $processor)
     {
-        $this->items[$processor->getAlias()] = $processor;
+        $this->items[$processor->getConfigurator()->getName()] = $processor;
     }
 
     /**
-     * @return PaymentMethodProcessorInterface[]
+     * @return PaymentProcessorInterface[]
      */
     public function all()
     {

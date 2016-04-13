@@ -10,21 +10,28 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\PaymentBundle\Processor;
+namespace WellCommerce\Bundle\PaymentBundle\Configurator;
 
-use Symfony\Component\HttpFoundation\Request;
-use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use WellCommerce\Component\Form\Dependencies\DependencyInterface;
 use WellCommerce\Component\Form\Elements\ElementInterface;
 use WellCommerce\Component\Form\FormBuilderInterface;
 
 /**
- * Class CashOnDelivery
+ * Class CashOnDeliveryConfigurator
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CashOnDelivery extends AbstractPaymentProcessor
+class CashOnDeliveryConfigurator extends AbstractPaymentMethodConfigurator
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function getName() : string
+    {
+        return 'cash_on_delivery';
+    }
+
     /**
      * {@inheritdoc}
      */

@@ -35,11 +35,6 @@ class PaymentMethod extends AbstractEntity implements PaymentMethodInterface
     use EnableableTrait;
 
     /**
-     * @var string
-     */
-    protected $processor;
-
-    /**
      * @var Collection
      */
     protected $shippingMethods;
@@ -47,10 +42,25 @@ class PaymentMethod extends AbstractEntity implements PaymentMethodInterface
     /**
      * @var OrderStatusInterface
      */
-    protected $defaultOrderStatus;
+    protected $paymentPendingOrderStatus;
 
     /**
-     * @var Collection
+     * @var OrderStatusInterface
+     */
+    protected $paymentSuccessOrderStatus;
+
+    /**
+     * @var OrderStatusInterface
+     */
+    protected $paymentFailureOrderStatus;
+
+    /**
+     * @var string
+     */
+    protected $processor;
+    
+    /**
+     * @var array
      */
     protected $configuration;
 
@@ -89,23 +99,7 @@ class PaymentMethod extends AbstractEntity implements PaymentMethodInterface
     /**
      * {@inheritdoc}
      */
-    public function getDefaultOrderStatus() : OrderStatusInterface
-    {
-        return $this->defaultOrderStatus;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setDefaultOrderStatus(OrderStatusInterface $defaultOrderStatus)
-    {
-        $this->defaultOrderStatus = $defaultOrderStatus;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getConfiguration() : Collection
+    public function getConfiguration() : array
     {
         return $this->configuration;
     }
@@ -113,8 +107,56 @@ class PaymentMethod extends AbstractEntity implements PaymentMethodInterface
     /**
      * {@inheritdoc}
      */
-    public function setConfiguration(Collection $configuration)
+    public function setConfiguration(array $configuration)
     {
         $this->configuration = $configuration;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPaymentPendingOrderStatus() : OrderStatusInterface
+    {
+        return $this->paymentPendingOrderStatus;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPaymentPendingOrderStatus(OrderStatusInterface $paymentPendingOrderStatus)
+    {
+        $this->paymentPendingOrderStatus = $paymentPendingOrderStatus;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPaymentSuccessOrderStatus() : OrderStatusInterface
+    {
+        return $this->paymentSuccessOrderStatus;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPaymentSuccessOrderStatus(OrderStatusInterface $paymentSuccessOrderStatus)
+    {
+        $this->paymentSuccessOrderStatus = $paymentSuccessOrderStatus;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPaymentFailureOrderStatus() : OrderStatusInterface
+    {
+        return $this->paymentFailureOrderStatus;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPaymentFailureOrderStatus(OrderStatusInterface $paymentFailureOrderStatus)
+    {
+        $this->paymentFailureOrderStatus = $paymentFailureOrderStatus;
     }
 }

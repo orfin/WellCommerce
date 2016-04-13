@@ -57,13 +57,16 @@ class AdminSubscriber extends AbstractEventSubscriber
             $user->addRole($role);
             $user->setPassword($password);
 
-            $email      = $user->getEmail();
-            $title      = $this->getTranslatorHelper()->trans('user.email.title.register');
-            $template   = 'WellCommerceAdminBundle:Admin/Email:register.html.twig';
-            $parameters = ['user' => $user, 'password' => $password];
-            $shop       = $this->get('shop.context.admin')->getCurrentShop();
-
-            $this->getMailerHelper()->sendEmail($email, $title, $template, $parameters, $shop->getMailerConfiguration());
+            $this->getMailerHelper()->sendEmail([
+                'recipient'     => $user->getEmail(),
+                'subject'       => $this->getTranslatorHelper()->trans('user.email.title.register'),
+                'template'      => 'WellCommerceAdminBundle:Admin/Email:register.html.twig',
+                'parameters'    => [
+                    'user'     => $user,
+                    'password' => $password
+                ],
+                'configuration' => $this->get('shop.context.admin')->getCurrentShop()->getMailerConfiguration(),
+            ]);
         }
     }
 }

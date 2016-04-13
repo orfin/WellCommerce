@@ -42,6 +42,7 @@
 
         <service id="mailer.helper" class="WellCommerce\Bundle\CoreBundle\Helper\Mailer\MailerHelper">
             <argument type="service" id="templating.helper"/>
+            <argument>%kernel.debug%</argument>
         </service>
     </services>
 </container>

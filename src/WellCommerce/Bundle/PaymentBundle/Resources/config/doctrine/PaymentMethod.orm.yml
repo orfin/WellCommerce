@@ -8,10 +8,6 @@ WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod:
             generator:
                 strategy: AUTO
     fields:
-        processor:
-            type: string
-            length: 64
-            nullable: false
         enabled:
             type: boolean
             nullable: false
@@ -22,23 +18,34 @@ WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod:
             nullable: false
             options:
                 default: 0
-    oneToMany:
+        processor:
+            type: string
+            length: 64
+            nullable: false
         configuration:
-            targetEntity: WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodConfiguration
-            cascade:
-                - remove
-                - persist
-            fetch: LAZY
-            mappedBy: paymentMethod
-            orphanRemoval: true
+            type: json_array
     manyToOne:
-        defaultOrderStatus:
+        paymentPendingOrderStatus:
             targetEntity: WellCommerce\Bundle\OrderBundle\Entity\OrderStatus
             fetch: LAZY
             joinColumns:
-            default_order_status_id:
-                referencedColumnName: id
-                onDelete: 'SET NULL'
+                payment_pending_order_status_id:
+                    referencedColumnName: id
+                    onDelete: 'SET NULL'
+        paymentSuccessOrderStatus:
+            targetEntity: WellCommerce\Bundle\OrderBundle\Entity\OrderStatus
+            fetch: LAZY
+            joinColumns:
+                payment_success_order_status_id:
+                    referencedColumnName: id
+                    onDelete: 'SET NULL'
+        paymentFailureOrderStatus:
+            targetEntity: WellCommerce\Bundle\OrderBundle\Entity\OrderStatus
+            fetch: LAZY
+            joinColumns:
+                payment_failure_order_status_id:
+                    referencedColumnName: id
+                    onDelete: 'SET NULL'
     manyToMany:
         shippingMethods:
             targetEntity: WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethod

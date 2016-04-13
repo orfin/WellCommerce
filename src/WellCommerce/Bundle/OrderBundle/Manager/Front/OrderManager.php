@@ -81,7 +81,8 @@ class OrderManager extends AbstractFrontManager
      */
     public function prepareOrderFromCart(CartInterface $cart) : OrderInterface
     {
-        $order = $this->initResource();
+        $orderStatus = $cart->getPaymentMethod()->getPaymentPendingOrderStatus();
+        $order       = $this->initResource();
         $order->setCurrency($cart->getCurrency());
         $order->setPaymentMethod($cart->getPaymentMethod());
         $order->setShippingMethod($cart->getShippingMethodCost()->getShippingMethod());
@@ -91,10 +92,10 @@ class OrderManager extends AbstractFrontManager
         $order->setShop($cart->getShop());
         $order->setSessionId($cart->getSessionId());
         $order->setClient($cart->getClient());
-        $order->setCurrentStatus($cart->getPaymentMethod()->getDefaultOrderStatus());
+        $order->setCurrentStatus($orderStatus);
         $order->setCoupon($cart->getCoupon());
         
-        $this->prepareOrderStatusHistory($order, $cart->getPaymentMethod()->getDefaultOrderStatus());
+        $this->prepareOrderStatusHistory($order, $orderStatus);
         $this->prepareOrderProducts($cart, $order);
         $this->prepareOrderShippingDetails($cart, $order);
         

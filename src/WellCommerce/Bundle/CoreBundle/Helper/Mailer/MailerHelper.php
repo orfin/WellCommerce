@@ -12,7 +12,12 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Helper\Mailer;
 
+use Swift_Mailer as Mailer;
 use Swift_Message as Message;
+use Swift_Plugins_LoggerPlugin;
+use Swift_Plugins_Loggers_EchoLogger;
+use Symfony\Component\OptionsResolver\Options;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use WellCommerce\Bundle\AppBundle\Entity\MailerConfiguration;
 use WellCommerce\Bundle\CoreBundle\Helper\Templating\TemplatingHelperInterface;
 
@@ -27,40 +32,55 @@ class MailerHelper implements MailerHelperInterface
      * @var TemplatingHelperInterface
      */
     protected $templatingHelper;
+    
+    /**
+     * @var array
+     */
+    protected $options = [];
+
+    /**
+     * @var bool
+     */
+    protected $debug;
 
     /**
      * MailerHelper constructor.
      *
      * @param TemplatingHelperInterface $templatingHelper
+     * @param bool                      $debug
      */
-    public function __construct(TemplatingHelperInterface $templatingHelper)
+    public function __construct(TemplatingHelperInterface $templatingHelper, bool $debug = false)
     {
         $this->templatingHelper = $templatingHelper;
+        $this->debug            = $debug;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function sendEmail(
-        string $recipient,
-        string $title,
-        string $template,
-        array $parameters = [],
-        MailerConfiguration $mailerConfiguration
-    ) : int
+    
+    public function sendEmail(array $options) : int
     {
-        $mailer = $this->createMailer($mailerConfiguration);
-        $message = Message::newInstance();
-
-        $message->setSubject($title);
-        $message->setFrom($mailerConfiguration->getFrom());
-        $message->setTo($recipient);
-
-        $this->setBody($message, $template, $parameters);
+        $resolver = new OptionsResolver();
+        $this->configureOptions($resolver);
+        $this->options = $resolver->resolve($options);
+        
+        $mailer  = $this->createMailer();
+        $message = $this->createMessage();
 
         return $mailer->send($message);
     }
+    
+    protected function createMessage() : Message
+    {
+        $message = Message::newInstance();
+        $message->setSubject($this->options['subject']);
+        $message->setFrom($this->options['configuration']->getFrom());
+        $message->setTo($this->options['recipient']);
+        $message->setReplyTo($this->options['reply_to']);
+        $message->setBcc($this->options['bcc']);
 
+        $this->setBody($message, $this->options['template'], $this->options['parameters']);
+
+        return $message;
+    }
+    
     protected function setBody(Message $message, string $template, array $parameters = [])
     {
         $parameters['message'] = $message;
@@ -68,22 +88,55 @@ class MailerHelper implements MailerHelperInterface
 
         $message->setBody($body, 'text/html');
     }
-
-    /**
-     * Changes mailer configuration on runtime
-     *
-     * @param MailerConfiguration $mailerConfiguration
-     *
-     * @return \Swift_Mailer
-     */
-    protected function createMailer(MailerConfiguration $mailerConfiguration)
+    
+    protected function configureOptions(OptionsResolver $resolver)
     {
-        $transport = new \Swift_SmtpTransport();
-        $transport->setHost($mailerConfiguration->getHost());
-        $transport->setPort($mailerConfiguration->getPort());
-        $transport->setUsername($mailerConfiguration->getUser());
-        $transport->setPassword($mailerConfiguration->getPass());
+        $resolver->setRequired([
+            'recipient',
+            'bcc',
+            'reply_to',
+            'subject',
+            'template',
+            'parameters',
+            'configuration',
+        ]);
 
-        return \Swift_Mailer::newInstance($transport);
+        $resolver->setDefault('bcc', function (Options $options) {
+            return $options['configuration']->getFrom();
+        });
+
+        $resolver->setDefault('reply_to', function (Options $options) {
+            return $options['configuration']->getFrom();
+        });
+
+        $resolver->setAllowedTypes('recipient', ['string', 'array']);
+        $resolver->setAllowedTypes('bcc', ['string', 'array']);
+        $resolver->setAllowedTypes('reply_to', ['string', 'array']);
+        $resolver->setAllowedTypes('subject', ['string']);
+        $resolver->setAllowedTypes('template', ['string']);
+        $resolver->setAllowedTypes('parameters', ['array']);
+        $resolver->setAllowedTypes('configuration', MailerConfiguration::class);
+    }
+    
+    protected function createMailer() : Mailer
+    {
+        $configuration = $this->options['configuration'];
+        $transport     = new \Swift_SmtpTransport($configuration->getHost(), $configuration->getPort(), 'tls');
+        $transport->setUsername($configuration->getUser());
+        $transport->setPassword($configuration->getPass());
+        $transport->setStreamOptions([
+            'ssl' => [
+                'verify_peer' => false
+            ]
+        ]);
+
+        $mailer = Mailer::newInstance($transport);
+
+        if ($this->debug) {
+            $logger = new Swift_Plugins_Loggers_EchoLogger();
+            $mailer->registerPlugin(new Swift_Plugins_LoggerPlugin($logger));
+        }
+        
+        return $mailer;
     }
 }

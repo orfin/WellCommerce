@@ -48,6 +48,7 @@
     Translator.add("common.label.sku", "SKU", "wellcommerce", "pl");
     Translator.add("common.label.default_order_status", "Domy\u015blny status", "wellcommerce", "pl");
     Translator.add("common.label.url", "Adres URL", "wellcommerce", "pl");
+    Translator.add("common.label.shop", "Sklep", "wellcommerce", "pl");
     Translator.add("common.label.shops", "Dost\u0119pny w sklepach", "wellcommerce", "pl");
     Translator.add("common.label.meta.title", "Tytu\u0142", "wellcommerce", "pl");
     Translator.add("common.label.meta.keywords", "S\u0142owa kluczowe", "wellcommerce", "pl");
@@ -219,6 +220,8 @@
     Translator.add("client.label.address.country", "Pa\u0144stwo", "wellcommerce", "pl");
     Translator.add("client.label.address.city", "Miejscowo\u015b\u0107", "wellcommerce", "pl");
     Translator.add("client.label.address.copy_address", "Adres dostawy jest taki sam jak adres p\u0142atnika", "wellcommerce", "pl");
+    Translator.add("client.label.address.vat_id", "NIP", "wellcommerce", "pl");
+    Translator.add("client.label.address.company_name", "Nazwa firmy", "wellcommerce", "pl");
     Translator.add("client.heading.index", "Klienci", "wellcommerce", "pl");
     Translator.add("client.heading.add", "Dodaj klienta", "wellcommerce", "pl");
     Translator.add("client.heading.edit", "Edytuj klienta", "wellcommerce", "pl");
@@ -349,7 +352,7 @@
     Translator.add("order.heading.confirmation", "Potwierdzenie", "wellcommerce", "pl");
     Translator.add("order.heading.order_total", "Suma", "wellcommerce", "pl");
     Translator.add("order.heading.products", "Produkty", "wellcommerce", "pl");
-    Translator.add("order.heading.order_method_details", null, "wellcommerce", "pl");
+    Translator.add("order.heading.contact_details", "Dane kontaktowe", "wellcommerce", "pl");
     Translator.add("order.button.confirm", "Przejd\u017a do potwierdzenia", "wellcommerce", "pl");
     Translator.add("order.button.add_product", "Dodaj produkt", "wellcommerce", "pl");
     Translator.add("order.label.id", "ID", "wellcommerce", "pl");
@@ -386,6 +389,16 @@
     Translator.add("order_status_group.heading.add", "Dodaj grup\u0119", "wellcommerce", "pl");
     Translator.add("order_status_group.heading.edit", "Edytuj grup\u0119", "wellcommerce", "pl");
     Translator.add("order_status_group.label.name", "Nazwa grupy status\u00f3w zam\u00f3wie\u0144", "wellcommerce", "pl");
+    Translator.add("order_status_history.heading.add", "Zmiana statusu zam\u00f3wienia", "wellcommerce", "pl");
+    Translator.add("order_status_history.heading.view", "Historia zmiany status\u00f3w", "wellcommerce", "pl");
+    Translator.add("order_status_history.label.order_status", "Status zam\u00f3wienia", "wellcommerce", "pl");
+    Translator.add("order_status_history.label.comment", "Komentarz", "wellcommerce", "pl");
+    Translator.add("order_status_history.label.nofity", "Wy\u015blij powiadomienie", "wellcommerce", "pl");
+    Translator.add("order_status_history.label.client_notified", "Klient zosta\u0142 poinformowany", "wellcommerce", "pl");
+    Translator.add("order_status_history.label.client_not_notified", "Klient nie zosta\u0142 poinformowany", "wellcommerce", "pl");
+    Translator.add("order_status_history.label.created_by", "Utworzone przez", "wellcommerce", "pl");
+    Translator.add("order_status_history.label.no_history", "Brak informacji o zmianach status\u00f3w zam\u00f3wienia", "wellcommerce", "pl");
+    Translator.add("order_status_history.button.change", "Zapisz", "wellcommerce", "pl");
     Translator.add("page.tip.client_groups", "Zaznacz grupy klient\u00f3w kt\u00f3re mog\u0105 widzie\u0107 stron\u0119", "wellcommerce", "pl");
     Translator.add("page.heading.index", "Strony CMS", "wellcommerce", "pl");
     Translator.add("page.heading.add", "Dodaj stron\u0119", "wellcommerce", "pl");
@@ -404,8 +417,13 @@
     Translator.add("payment_method.heading.add", "Dodaj form\u0119 p\u0142atno\u015bci", "wellcommerce", "pl");
     Translator.add("payment_method.heading.edit", "Edytuj form\u0119 p\u0142atno\u015bci", "wellcommerce", "pl");
     Translator.add("payment_method.fieldset.shipping_methods", "Formy wysy\u0142ki", "wellcommerce", "pl");
+    Translator.add("payment_method.fieldset.processor_configuration", "Konfiguracja procesora", "wellcommerce", "pl");
+    Translator.add("payment_method.fieldset.order_statuses", "Statusy zam\u00f3wienia", "wellcommerce", "pl");
     Translator.add("payment_method.label.processor", "Typ procesora p\u0142atno\u015bci", "wellcommerce", "pl");
     Translator.add("payment_method.label.shipping_methods", "Dozwolone formy wysy\u0142ki", "wellcommerce", "pl");
+    Translator.add("payment_method.label.payment_pending_order_status", "Oczekuje na p\u0142atno\u015b\u0107", "wellcommerce", "pl");
+    Translator.add("payment_method.label.payment_success_order_status", "P\u0142atno\u015b\u0107 zako\u0144czona", "wellcommerce", "pl");
+    Translator.add("payment_method.label.payment_failure_order_status", "P\u0142atno\u015b\u0107 anulowana", "wellcommerce", "pl");
     Translator.add("payment_method.bank_transfer.tip", "Twoje zam\u00f3wienie b\u0119dzie realizowane po otrzymaniu przelewu na poni\u017csze dane rachunku.", "wellcommerce", "pl");
     Translator.add("payment_method.bank_transfer.account", "Numer rachunku", "wellcommerce", "pl");
     Translator.add("payment_method.bank_transfer.sort_number", "Sort code banku", "wellcommerce", "pl");

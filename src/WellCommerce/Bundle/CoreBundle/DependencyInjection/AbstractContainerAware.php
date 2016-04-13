@@ -12,10 +12,22 @@
 
 namespace WellCommerce\Bundle\CoreBundle\DependencyInjection;
 
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpKernel\KernelInterface;
+use WellCommerce\Bundle\AdminBundle\Helper\Admin\AdminHelperInterface;
+use WellCommerce\Bundle\CoreBundle\Helper\Flash\FlashHelperInterface;
+use WellCommerce\Bundle\CoreBundle\Helper\Image\ImageHelperInterface;
+use WellCommerce\Bundle\CoreBundle\Helper\Mailer\MailerHelperInterface;
+use WellCommerce\Bundle\CoreBundle\Helper\Request\RequestHelperInterface;
+use WellCommerce\Bundle\CoreBundle\Helper\Router\RouterHelperInterface;
+use WellCommerce\Bundle\CoreBundle\Helper\Templating\TemplatingHelperInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Translator\TranslatorHelperInterface;
+use WellCommerce\Bundle\CoreBundle\Helper\Validator\ValidatorHelperInterface;
+use WellCommerce\Bundle\CurrencyBundle\Helper\CurrencyHelperInterface;
+use WellCommerce\Bundle\DoctrineBundle\Helper\Doctrine\DoctrineHelperInterface;
+use WellCommerce\Bundle\PaymentBundle\Helper\PaymentMethodHelperInterface;
 
 /**
  * Class AbstractContainerAware
@@ -26,61 +38,26 @@ abstract class AbstractContainerAware
 {
     use ContainerAwareTrait;
 
-    /**
-     * Returns true if the service id is defined.
-     *
-     * @param string $id The service id
-     *
-     * @return bool true if the service id is defined, false otherwise
-     */
-    public function has($id)
+    public function has(string $id) : bool
     {
         return $this->container->has($id);
     }
 
-    /**
-     * Gets a service by id.
-     *
-     * @param string $id The service id
-     *
-     * @return object Service
-     */
-    public function get($id)
+    public function get(string $id)
     {
         return $this->container->get($id);
     }
 
-    /**
-     * Translates a string using the translation service
-     *
-     * @param string $id Message to translate
-     *
-     * @return string The message
-     */
-    public function trans($id, $params = [], $domain = TranslatorHelperInterface::DEFAULT_TRANSLATION_DOMAIN)
+    public function trans(string $id, array $params = [], string $domain = TranslatorHelperInterface::DEFAULT_TRANSLATION_DOMAIN) : string
     {
         return $this->getTranslatorHelper()->trans($id, $params, $domain);
     }
 
-    /**
-     * Returns themes directory path
-     * If theme folder name is passed, full directory path pointing to it will be returned
-     *
-     * @param string $themeFolder
-     *
-     * @return string
-     * @throws \Symfony\Component\HttpFoundation\File\Exception\FileException
-     */
-    public function getThemeDir($themeFolder = '')
+    public function getThemeDir(string $themeFolder = '') : string
     {
         $kernelDir = $this->getKernel()->getRootDir();
         $webDir    = $kernelDir . '/../web';
-
-        if (strlen($themeFolder)) {
-            $dir = $webDir . DIRECTORY_SEPARATOR . 'themes' . DIRECTORY_SEPARATOR . $themeFolder;
-        } else {
-            $dir = $webDir . DIRECTORY_SEPARATOR . 'themes';
-        }
+        $dir       = $webDir . DIRECTORY_SEPARATOR . 'themes' . (strlen($themeFolder) ? DIRECTORY_SEPARATOR . $themeFolder : '');
 
         if (!is_dir($dir)) {
             throw new FileException(sprintf('Directory "%s" not found.', $dir));
@@ -89,114 +66,72 @@ abstract class AbstractContainerAware
         return $dir;
     }
 
-    /**
-     * @return \Symfony\Component\HttpKernel\KernelInterface
-     */
-    public function getKernel()
+    public function getKernel() : KernelInterface
     {
         return $this->get('kernel');
     }
 
-    /**
-     * @return \WellCommerce\Bundle\CoreBundle\Helper\Translator\TranslatorHelperInterface
-     */
-    public function getTranslatorHelper()
+    public function getTranslatorHelper() : TranslatorHelperInterface
     {
         return $this->get('translator.helper');
     }
 
-    /**
-     * @return \WellCommerce\Bundle\CoreBundle\Helper\Flash\FlashHelperInterface
-     */
-    public function getFlashHelper()
+    public function getFlashHelper() : FlashHelperInterface
     {
         return $this->get('flash.helper');
     }
 
-    /**
-     * @return \WellCommerce\Bundle\DoctrineBundle\Helper\Doctrine\DoctrineHelperInterface
-     */
-    public function getDoctrineHelper()
+    public function getDoctrineHelper() : DoctrineHelperInterface
     {
         return $this->get('doctrine.helper');
     }
 
-    /**
-     * @return \WellCommerce\Bundle\CoreBundle\Helper\Request\RequestHelperInterface
-     */
-    public function getRequestHelper()
+    public function getRequestHelper() : RequestHelperInterface
     {
         return $this->get('request.helper');
     }
 
-    /**
-     * @return \WellCommerce\Bundle\CoreBundle\Helper\Router\RouterHelperInterface
-     */
-    public function getRouterHelper()
+    public function getRouterHelper() : RouterHelperInterface
     {
         return $this->get('router.helper');
     }
 
-    /**
-     * @return \WellCommerce\Bundle\CoreBundle\Helper\Image\ImageHelperInterface
-     */
-    public function getImageHelper()
+    public function getImageHelper() : ImageHelperInterface
     {
         return $this->get('image.helper');
     }
 
-    /**
-     * @return \WellCommerce\Bundle\LocaleBundle\Entity\LocaleInterface[]
-     */
-    public function getLocales()
+    public function getLocales() : array
     {
         return $this->get('locale.repository')->findAll();
     }
 
-    /**
-     * @return \WellCommerce\Bundle\CurrencyBundle\Helper\CurrencyHelperInterface
-     */
-    public function getCurrencyHelper()
+    public function getCurrencyHelper() : CurrencyHelperInterface
     {
         return $this->get('currency.helper');
     }
 
-    /**
-     * @return \WellCommerce\Bundle\AdminBundle\Helper\Admin\AdminHelperInterface
-     */
-    public function getSecurityHelper()
+    public function getSecurityHelper() : AdminHelperInterface
     {
         return $this->get('admin.helper');
     }
 
-    /**
-     * @return \WellCommerce\Bundle\CoreBundle\Helper\Mailer\MailerHelperInterface
-     */
-    public function getMailerHelper()
+    public function getMailerHelper() : MailerHelperInterface
     {
         return $this->get('mailer.helper');
     }
 
-    /**
-     * @return \WellCommerce\Bundle\CoreBundle\Helper\Templating\TemplatingHelperInterface
-     */
-    public function getTemplatingHelper()
+    public function getTemplatingHelper() : TemplatingHelperInterface
     {
         return $this->get('templating.helper');
     }
 
-    /**
-     * @return \WellCommerce\Bundle\CoreBundle\Helper\Validator\ValidatorHelperInterface
-     */
-    public function getValidatorHelper()
+    public function getValidatorHelper() : ValidatorHelperInterface
     {
         return $this->get('validator.helper');
     }
 
-    /**
-     * @return \Doctrine\Common\Persistence\ObjectManager|object
-     */
-    public function getEntityManager()
+    public function getEntityManager() : ObjectManager
     {
         return $this->getDoctrineHelper()->getEntityManager();
     }

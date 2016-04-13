@@ -8,12 +8,18 @@ payment_method:
         add: Add a payment method
         edit: Edit a payment method
     fieldset:
-        shipping_methods: Shipping methods
+        shipping_methods: Allowed shipping methods
+        processor_configuration: Processor configuration
+        order_statuses: Order statuses
     label:
         processor: Payment processor
         shipping_methods: Allowed shipping methods
-    bank_transfer:
-        tip: 'Your order will be processed upon receiving of the payment at the following bank account'
-        account: Account number
-        sort_number: Sort code
-        title: 'Transfer title'
+        payment_pending_order_status: Waiting for payment
+        payment_success_order_status: Paid
+        payment_failure_order_status: Payment failed
+        bank_transfer:
+            tip: 'Your order will be processed upon receiving of the payment at the following bank account'
+            account_number: Account number
+            account_owner: Account owner
+            sort_number: Sort code
+            title: 'Transfer title'

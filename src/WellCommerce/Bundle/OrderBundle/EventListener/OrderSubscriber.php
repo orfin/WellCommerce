@@ -11,6 +11,8 @@
  */
 namespace WellCommerce\Bundle\OrderBundle\EventListener;
 
+use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\KernelEvents;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
 use WellCommerce\Bundle\DoctrineBundle\Event\ResourceEvent;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
@@ -29,12 +31,12 @@ class OrderSubscriber extends AbstractEventSubscriber
      * @var OrderVisitorTraverserInterface
      */
     protected $orderVisitorTraverser;
-
+    
     /**
      * @var OrderTotalFactory
      */
     protected $orderTotalFactory;
-
+    
     /**
      * OrderSubscriber constructor.
      *
@@ -46,15 +48,16 @@ class OrderSubscriber extends AbstractEventSubscriber
         $this->orderVisitorTraverser = $orderVisitorTraverser;
         $this->orderTotalFactory     = $orderTotalFactory;
     }
-
+    
     public static function getSubscribedEvents()
     {
         return [
             'order.post_prepared' => ['onOrderPostPreparedEvent', 0],
             'order.pre_update'    => ['onOrderPreUpdateEvent', 0],
+            KernelEvents::REQUEST => ['onKernelRequest', 0],
         ];
     }
-
+    
     public function onOrderPostPreparedEvent(ResourceEvent $event)
     {
         $order = $event->getResource();
@@ -62,7 +65,7 @@ class OrderSubscriber extends AbstractEventSubscriber
             $this->traverseOrder($order);
         }
     }
-
+    
     public function onOrderPreUpdateEvent(ResourceEvent $event)
     {
         $order = $event->getResource();
@@ -73,16 +76,30 @@ class OrderSubscriber extends AbstractEventSubscriber
         }
     }
 
+    public function onKernelRequest(GetResponseEvent $event)
+    {
+        $session    = $event->getRequest()->getSession();
+        $repository = $this->container->get('order.repository');
+        $context    = $this->container->get('order.context.front');
+
+        if ($session->has('orderId')) {
+            $order = $repository->find($session->get('orderId'));
+            if ($order instanceof OrderInterface) {
+                $context->setCurrentOrder($order);
+            }
+        }
+    }
+    
     protected function recalculateShippingTotal(OrderInterface $order)
     {
         $grossAmount = $order->getShippingTotal()->getGrossAmount();
         $taxRate     = $order->getShippingMethod()->getTax()->getValue();
         $currency    = $order->getCurrency();
         $orderTotal  = $this->orderTotalFactory->createFromSpecifiedValues($grossAmount, $taxRate, $currency);
-
+        
         $order->setShippingTotal($orderTotal);
     }
-
+    
     protected function removeTotals(OrderInterface $order)
     {
         $em     = $this->getDoctrineHelper()->getEntityManager();
@@ -90,10 +107,10 @@ class OrderSubscriber extends AbstractEventSubscriber
         $totals->map(function (OrderTotalDetailInterface $total) use ($em) {
             $em->remove($total);
         });
-
+        
         $em->flush();
     }
-
+    
     protected function traverseOrder(OrderInterface $order)
     {
         $this->orderVisitorTraverser->traverse($order);

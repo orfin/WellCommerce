@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderAwareTrait;
@@ -32,11 +33,6 @@ class Payment extends AbstractEntity implements PaymentInterface
     protected $processor;
 
     /**
-     * @var string
-     */
-    protected $token;
-
-    /**
      * @var array
      */
     protected $configuration;
@@ -44,12 +40,37 @@ class Payment extends AbstractEntity implements PaymentInterface
     /**
      * @var string
      */
-    protected $approvalUrl;
+    protected $state;
 
     /**
      * @var string
      */
-    protected $state;
+    protected $token;
+
+    /**
+     * @var string
+     */
+    protected $externalToken;
+    
+    /**
+     * @var string|null
+     */
+    protected $externalIdentifier;
+
+    /**
+     * @var string
+     */
+    protected $redirectUrl;
+
+    /**
+     * @var string
+     */
+    protected $comment;
+
+    /**
+     * @var Collection
+     */
+    protected $paymentStateHistory;
 
     /**
      * {@inheritdoc}
@@ -70,17 +91,17 @@ class Payment extends AbstractEntity implements PaymentInterface
     /**
      * {@inheritdoc}
      */
-    public function getToken() : string
+    public function getState() : string
     {
-        return $this->token;
+        return $this->state;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setToken(string $token)
+    public function setState(string $state)
     {
-        $this->token = $token;
+        $this->state = $state;
     }
 
     /**
@@ -102,33 +123,66 @@ class Payment extends AbstractEntity implements PaymentInterface
     /**
      * {@inheritdoc}
      */
-    public function getApprovalUrl() : string
+    public function getToken() : string
     {
-        return $this->approvalUrl;
+        return $this->token;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setApprovalUrl(string $approvalUrl)
+    public function setToken(string $token)
     {
-        $this->approvalUrl = $approvalUrl;
+        $this->token = $token;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getState() : string
+    public function getExternalIdentifier()
     {
-        return $this->state;
+        return $this->externalIdentifier;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setState(string $state)
+    public function setExternalIdentifier($identifier)
     {
-        $this->state = $state;
+        $this->externalIdentifier = $identifier;
+    }
+
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getExternalToken()
+    {
+        return $this->externalToken;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setExternalToken($externalToken)
+    {
+        $this->externalToken = $externalToken;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRedirectUrl()
+    {
+        return $this->redirectUrl;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setRedirectUrl($redirectUrl)
+    {
+        $this->redirectUrl = $redirectUrl;
     }
 
     /**
@@ -185,5 +239,37 @@ class Payment extends AbstractEntity implements PaymentInterface
     public function isInProgress() : bool
     {
         return $this->getState() === PaymentInterface::PAYMENT_STATE_IN_PROGRESS;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function getPaymentStateHistory() : Collection
+    {
+        return $this->paymentStateHistory;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function addPaymentStateHistory(PaymentStateHistoryInterface $paymentStateHistory)
+    {
+        $this->getPaymentStateHistory()->add($paymentStateHistory);
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function getComment() : string
+    {
+        return $this->comment;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setComment(string $comment)
+    {
+        $this->comment = $comment;
     }
 }

@@ -49,5 +49,4 @@ class OrderContext implements OrderContextInterface
     {
         return $this->currentOrder instanceof OrderInterface;
     }
-
 }

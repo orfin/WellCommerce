@@ -22,5 +22,4 @@ use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
  */
 abstract class AbstractEventSubscriber extends AbstractContainerAware implements EventSubscriberInterface
 {
-
 }

@@ -24,7 +24,7 @@ use WellCommerce\Bundle\OrderBundle\Entity\OrderStatusGroup;
 class LoadOrderStatusGroupData extends AbstractDataFixture
 {
 
-    public static $samples = ['Processing', 'Prepared', 'Completed'];
+    public static $samples = ['Processing', 'Prepared', 'Completed', 'Cancelled'];
 
     /**
      * {@inheritDoc}

@@ -61,20 +61,40 @@ interface PaymentMethodInterface extends
     /**
      * @return OrderStatusInterface
      */
-    public function getDefaultOrderStatus() : OrderStatusInterface;
+    public function getPaymentPendingOrderStatus() : OrderStatusInterface;
 
     /**
-     * @param OrderStatusInterface $defaultOrderStatus
+     * @param OrderStatusInterface $paymentPendingOrderStatus
      */
-    public function setDefaultOrderStatus(OrderStatusInterface $defaultOrderStatus);
+    public function setPaymentPendingOrderStatus(OrderStatusInterface $paymentPendingOrderStatus);
 
     /**
-     * @return Collection
+     * @return OrderStatusInterface
      */
-    public function getConfiguration() : Collection;
+    public function getPaymentSuccessOrderStatus() : OrderStatusInterface;
 
     /**
-     * @param Collection $configuration
+     * @param OrderStatusInterface $paymentSuccessOrderStatus
      */
-    public function setConfiguration(Collection $configuration);
+    public function setPaymentSuccessOrderStatus(OrderStatusInterface $paymentSuccessOrderStatus);
+
+    /**
+     * @return OrderStatusInterface
+     */
+    public function getPaymentFailureOrderStatus() : OrderStatusInterface;
+
+    /**
+     * @param OrderStatusInterface $paymentFailureOrderStatus
+     */
+    public function setPaymentFailureOrderStatus(OrderStatusInterface $paymentFailureOrderStatus);
+
+    /**
+     * @return array
+     */
+    public function getConfiguration() : array;
+
+    /**
+     * @param array $configuration
+     */
+    public function setConfiguration(array $configuration);
 }

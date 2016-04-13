@@ -24,19 +24,9 @@ interface MailerHelperInterface
     /**
      * Sends an email
      *
-     * @param string $recipient
-     * @param string $title
-     * @param string $template
-     * @param array $parameters
-     * @param MailerConfiguration $mailerConfiguration
+     * @param array $options
      *
      * @return int
      */
-    public function sendEmail(
-        string $recipient,
-        string $title,
-        string $template,
-        array $parameters = [],
-        MailerConfiguration $mailerConfiguration
-    ) : int;
+    public function sendEmail(array $options) : int;
 }

@@ -18,6 +18,7 @@ use WellCommerce\Bundle\CoreBundle\Exception\MissingFactoryException;
 use WellCommerce\Bundle\CoreBundle\Exception\MissingFormBuilderException;
 use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactoryInterface;
 use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
+use WellCommerce\Component\Form\Elements\FormInterface;
 use WellCommerce\Component\Form\FormBuilderInterface;
 
 /**
@@ -70,7 +71,7 @@ abstract class AbstractManager extends AbstractContainerAware implements Manager
     /**
      * {@inheritdoc}
      */
-    public function getRepository()
+    public function getRepository() : RepositoryInterface
     {
         return $this->repository;
     }
@@ -78,7 +79,7 @@ abstract class AbstractManager extends AbstractContainerAware implements Manager
     /**
      * {@inheritdoc}
      */
-    public function getEventDispatcher()
+    public function getEventDispatcher() : EventDispatcherInterface
     {
         return $this->eventDispatcher;
     }
@@ -86,7 +87,7 @@ abstract class AbstractManager extends AbstractContainerAware implements Manager
     /**
      * {@inheritdoc}
      */
-    public function getFactory()
+    public function getFactory() : EntityFactoryInterface
     {
         if (null === $this->factory) {
             throw new MissingFactoryException(get_class($this));
@@ -98,7 +99,7 @@ abstract class AbstractManager extends AbstractContainerAware implements Manager
     /**
      * {@inheritdoc}
      */
-    public function getFormBuilder()
+    public function getFormBuilder() : FormBuilderInterface
     {
         if (null === $this->formBuilder) {
             throw new MissingFormBuilderException(get_class($this));
@@ -110,7 +111,7 @@ abstract class AbstractManager extends AbstractContainerAware implements Manager
     /**
      * {@inheritdoc}
      */
-    public function getForm($resource, array $config = [])
+    public function getForm($resource, array $config = []) : FormInterface
     {
         $builder       = $this->getFormBuilder();
         $defaultConfig = [

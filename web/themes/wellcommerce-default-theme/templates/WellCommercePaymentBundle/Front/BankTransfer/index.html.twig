@@ -13,10 +13,11 @@
                     <br />
                     <p><strong>{% trans %}payment_method.bank_transfer.tip{% endtrans %}:</strong></p>
                     {% if payment.configuration is not empty %}
-                    <p>{% trans %}payment_method.bank_transfer.account{% endtrans %}: {{ payment.configuration.bank_transfer_account }}</p>
-                    <p>{% trans %}payment_method.bank_transfer.sort_number{% endtrans %}: {{ payment.configuration.bank_transfer_sort_number }}</p>
+                    <p>{% trans %}payment_method.label.bank_transfer.account_number{% endtrans %}: {{ payment.configuration.bank_transfer_account_number }}</p>
+                    <p>{% trans %}payment_method.label.bank_transfer.account_owner{% endtrans %}: {{ payment.configuration.bank_transfer_account_owner }}</p>
+                    <p>{% trans %}payment_method.label.bank_transfer.sort_number{% endtrans %}: {{ payment.configuration.bank_transfer_sort_number }}</p>
                     {% endif %}
-                    <p>{% trans %}payment_method.bank_transfer.title{% endtrans %}: #{{ payment.order.getId }}</p>
+                    <p>{% trans %}payment_method.label.bank_transfer.title{% endtrans %}: #{{ payment.order.getId }}</p>
                 </div>
                 <div class="clearfix">
                     <a href="{{ path('front.home_page.index') }}" class="btn btn-link light btn-lg notransform nopadding">Back to shopping</a>

@@ -18,6 +18,7 @@ use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
 use WellCommerce\Bundle\ContactBundle\Context\Front\ContactContextInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface;
 use WellCommerce\Bundle\NewsBundle\Context\Front\NewsContextInterface;
+use WellCommerce\Bundle\OrderBundle\Context\Front\OrderContextInterface;
 use WellCommerce\Bundle\PageBundle\Context\Front\PageContextInterface;
 use WellCommerce\Bundle\ProducerBundle\Context\Front\ProducerContextInterface;
 use WellCommerce\Bundle\ProductBundle\Context\Front\ProductContextInterface;
@@ -45,6 +46,11 @@ interface FrontManagerInterface extends ManagerInterface
      * @return ContactContextInterface
      */
     public function getContactContext() : ContactContextInterface;
+
+    /**
+     * @return OrderContextInterface
+     */
+    public function getOrderContext() : OrderContextInterface;
 
     /**
      * @return NewsContextInterface

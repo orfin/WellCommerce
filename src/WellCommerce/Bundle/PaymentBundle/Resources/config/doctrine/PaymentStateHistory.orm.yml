@@ -1,0 +1,27 @@
+WellCommerce\Bundle\PaymentBundle\Entity\PaymentStateHistory:
+    type: entity
+    table: payment_state_history
+    repositoryClass: WellCommerce\Bundle\PaymentBundle\Repository\PaymentStateHistoryRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        state:
+            type: string
+            length: 64
+            nullable: false
+        comment:
+            type: string
+            length: 1000
+            nullable: true
+    manyToOne:
+        payment:
+            targetEntity: WellCommerce\Bundle\PaymentBundle\Entity\Payment
+            fetch: LAZY
+            inversedBy: paymentStateHistory
+            joinColumns:
+                payment_id:
+                    referencedColumnName: id
+                    onDelete: CASCADE

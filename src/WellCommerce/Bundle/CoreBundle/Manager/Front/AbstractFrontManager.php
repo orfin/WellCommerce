@@ -18,6 +18,7 @@ use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
 use WellCommerce\Bundle\ContactBundle\Context\Front\ContactContextInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\AbstractManager;
 use WellCommerce\Bundle\NewsBundle\Context\Front\NewsContextInterface;
+use WellCommerce\Bundle\OrderBundle\Context\Front\OrderContextInterface;
 use WellCommerce\Bundle\PageBundle\Context\Front\PageContextInterface;
 use WellCommerce\Bundle\ProducerBundle\Context\Front\ProducerContextInterface;
 use WellCommerce\Bundle\ProductBundle\Context\Front\ProductContextInterface;
@@ -110,6 +111,14 @@ abstract class AbstractFrontManager extends AbstractManager implements FrontMana
     public function getThemeContext() : ThemeContextInterface
     {
         return $this->get('theme.context.front');
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function getOrderContext() : OrderContextInterface
+    {
+        return $this->get('order.context.front');
     }
 
     /**

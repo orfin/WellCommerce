@@ -14,11 +14,8 @@ namespace WellCommerce\Bundle\PaymentBundle\Manager\Front;
 
 use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
-use WellCommerce\Bundle\OrderBundle\Exception\OrderNotFoundException;
-use WellCommerce\Bundle\OrderBundle\Repository\OrderRepositoryInterface;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
-use WellCommerce\Bundle\PaymentBundle\Exception\InvalidPaymentTokenException;
-use WellCommerce\Bundle\PaymentBundle\Processor\PaymentMethodProcessorInterface;
+use WellCommerce\Bundle\PaymentBundle\Processor\PaymentProcessorInterface;
 
 /**
  * Class PaymentManager
@@ -28,47 +25,46 @@ use WellCommerce\Bundle\PaymentBundle\Processor\PaymentMethodProcessorInterface;
 class PaymentManager extends AbstractFrontManager implements PaymentManagerInterface
 {
     /**
-     * @var OrderRepositoryInterface
+     * {@inheritdoc}
      */
-    protected $orderRepository;
-    
-    /**
-     * @param OrderRepositoryInterface $orderRepository
-     */
-    public function setOrderRepository(OrderRepositoryInterface $orderRepository)
+    public function getFirstPaymentForOrder(OrderInterface $order) : PaymentInterface
     {
-        $this->orderRepository = $orderRepository;
+        $payments = $order->getPayments();
+        if (0 === $payments->count()) {
+            return $this->createPayment($order);
+        }
+        
+        return $payments->first();
     }
     
     /**
      * {@inheritdoc}
      */
-    public function findOrder() : OrderInterface
+    public function getPaymentProcessor(string $alias) : PaymentProcessorInterface
     {
-        $id    = $this->getRequestHelper()->getSessionAttribute('orderId');
-        $order = $this->orderRepository->find($id);
+        $processors = $this->get('payment.processor.collection');
         
-        if (!$order instanceof OrderInterface) {
-            throw new OrderNotFoundException($id);
-        }
-        
-        return $order;
+        return $processors->get($alias);
     }
     
     /**
      * {@inheritdoc}
      */
-    public function createPayment(OrderInterface $order, PaymentMethodProcessorInterface $processor) : PaymentInterface
+    protected function createPayment(OrderInterface $order) : PaymentInterface
     {
-        $configuration = $processor->processConfiguration($order->getPaymentMethod()->getConfiguration());
-        $payment       = $this->repository->findOneBy(['order' => $order]);
-        if (!$payment instanceof PaymentInterface) {
-            $payment = $this->initResource();
-            $payment->setOrder($order);
-            $payment->setProcessor($processor->getAlias());
-            $payment->setConfiguration($configuration);
-            $this->createResource($payment);
-        }
+        /** @var $payment PaymentInterface */
+        $payment       = $this->initResource();
+        $paymentMethod = $order->getPaymentMethod();
+        $processor     = $this->getPaymentProcessor($order->getPaymentMethod()->getProcessor());
+
+        $payment->setState(PaymentInterface::PAYMENT_STATE_CREATED);
+        $payment->setOrder($order);
+        $payment->setConfiguration($processor->getConfiguration($paymentMethod));
+        $payment->setProcessor($processor->getConfigurator()->getName());
+
+        $processor->preparePayment($payment);
+
+        $this->createResource($payment);
         
         return $payment;
     }
@@ -76,13 +72,8 @@ class PaymentManager extends AbstractFrontManager implements PaymentManagerInter
     /**
      * {@inheritdoc}
      */
-    public function findProcessorPaymentByToken(string $processor, string $token) : PaymentInterface
+    public function findPaymentByToken(string $token) : PaymentInterface
     {
-        $payment = $this->repository->findOneBy(['processor' => $processor, 'token' => $token]);
-        if (!$payment instanceof PaymentInterface) {
-            throw new InvalidPaymentTokenException($token);
-        }
-
-        return $payment;
+        return $this->repository->findOneBy(['token' => $token]);
     }
 }

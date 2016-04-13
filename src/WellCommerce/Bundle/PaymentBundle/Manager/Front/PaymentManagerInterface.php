@@ -15,7 +15,7 @@ namespace WellCommerce\Bundle\PaymentBundle\Manager\Front;
 use WellCommerce\Bundle\CoreBundle\Manager\Front\FrontManagerInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
-use WellCommerce\Bundle\PaymentBundle\Processor\PaymentMethodProcessorInterface;
+use WellCommerce\Bundle\PaymentBundle\Processor\PaymentProcessorInterface;
 
 /**
  * Interface PaymentManagerInterface
@@ -25,29 +25,29 @@ use WellCommerce\Bundle\PaymentBundle\Processor\PaymentMethodProcessorInterface;
 interface PaymentManagerInterface extends FrontManagerInterface
 {
     /**
-     * Finds order by its id or throws an exception
-     *
-     * @return OrderInterface
-     * @throws \WellCommerce\Bundle\OrderBundle\Exception\OrderNotFoundException
-     */
-    public function findOrder() : OrderInterface;
-
-    /**
-     * Creates a payment object if none was found
+     * Returns the first payment for order or creates a new one
      *
      * @param OrderInterface $order
      *
      * @return PaymentInterface
      */
-    public function createPayment(OrderInterface $order, PaymentMethodProcessorInterface $processor) : PaymentInterface;
-    
+    public function getFirstPaymentForOrder(OrderInterface $order) : PaymentInterface;
+
     /**
-     * Returns a payment object for given processor and token
+     * Returns the processor object for given name
      *
-     * @param string $processor
+     * @param string $name
+     *
+     * @return PaymentProcessorInterface
+     */
+    public function getPaymentProcessor(string $name) : PaymentProcessorInterface;
+
+    /**
+     * Returns the payment for given token
+     *
      * @param string $token
      *
      * @return PaymentInterface
      */
-    public function findProcessorPaymentByToken(string $processor, string $token) : PaymentInterface;
+    public function findPaymentByToken(string $token) : PaymentInterface;
 }

@@ -21,5 +21,4 @@ use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
  */
 class OrderConfirmationManager extends AbstractFrontManager
 {
-
 }

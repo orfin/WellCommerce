@@ -26,7 +26,7 @@ class PaymentFactory extends AbstractEntityFactory
      * @var string
      */
     protected $supportsInterface = PaymentInterface::class;
-
+    
     /**
      * @return PaymentInterface
      */
@@ -36,9 +36,18 @@ class PaymentFactory extends AbstractEntityFactory
         $payment = $this->init();
         $payment->setState(PaymentInterface::PAYMENT_STATE_CREATED);
         $payment->setConfiguration([]);
-        $payment->setApprovalUrl('');
-        $payment->setToken('');
-
+        $payment->setToken($this->generateToken());
+        $payment->setComment('');
+        
         return $payment;
+    }
+    
+    private function generateToken() : string
+    {
+        mt_srand((double)microtime() * 10000);
+        $charid = strtoupper(md5(uniqid(rand(), true)));
+        $retval = substr($charid, 0, 32);
+
+        return $retval;
     }
 }

@@ -34,14 +34,18 @@ class PaymentMethodFactory extends AbstractEntityFactory
      */
     public function create() : PaymentMethodInterface
     {
+        $defaultOrderStatus = $this->getDefaultOrderStatus();
+
         /** @var  $paymentMethod PaymentMethodInterface */
         $paymentMethod = $this->init();
         $paymentMethod->setHierarchy(0);
         $paymentMethod->setEnabled(true);
-        $paymentMethod->setConfiguration(new ArrayCollection());
+        $paymentMethod->setConfiguration([]);
         $paymentMethod->setShippingMethods(new ArrayCollection());
         $paymentMethod->setProcessor($this->getDefaultProcessor());
-        $paymentMethod->setDefaultOrderStatus($this->getDefaultOrderStatus());
+        $paymentMethod->setPaymentPendingOrderStatus($defaultOrderStatus);
+        $paymentMethod->setPaymentFailureOrderStatus($defaultOrderStatus);
+        $paymentMethod->setPaymentSuccessOrderStatus($defaultOrderStatus);
 
         return $paymentMethod;
     }
@@ -53,7 +57,7 @@ class PaymentMethodFactory extends AbstractEntityFactory
 
     protected function getDefaultProcessor() : string
     {
-        $processors = $this->get('payment_method.processor.collection')->keys();
+        $processors = $this->get('payment.processor.collection')->keys();
 
         return current($processors);
     }
