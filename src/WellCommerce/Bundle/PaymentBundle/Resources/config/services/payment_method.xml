@@ -40,13 +40,6 @@
             </call>
         </service>
 
-        <service id="payment.controller.front" class="WellCommerce\Bundle\PaymentBundle\Controller\Front\PaymentController">
-            <argument type="service" id="payment.manager.front"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-        </service>
-
         <service id="payment_method.doctrine.event_subscriber" class="WellCommerce\Bundle\PaymentBundle\EventListener\PaymentMethodDoctrineEventSubscriber">
             <tag name="doctrine.event_subscriber" connection="default" />
             <call method="setContainer">
@@ -114,50 +107,5 @@
         </service>
 
         <service id="payment.processor.collection" class="WellCommerce\Bundle\PaymentBundle\Processor\PaymentProcessorCollection" />
-
-        <service id="bank_transfer.configurator" class="WellCommerce\Bundle\PaymentBundle\Configurator\BankTransferConfigurator" shared="false">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-        </service>
-
-        <service id="bank_transfer.processor" class="WellCommerce\Bundle\PaymentBundle\Processor\BankTransferProcessor">
-            <argument type="service" id="bank_transfer.configurator"/>
-            <argument type="service" id="payment.manager.front"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-            <tag name="payment.processor"/>
-        </service>
-
-        <service id="cash_on_delivery.configurator" class="WellCommerce\Bundle\PaymentBundle\Configurator\CashOnDeliveryConfigurator" shared="false">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-        </service>
-
-        <service id="cash_on_delivery.processor" class="WellCommerce\Bundle\PaymentBundle\Processor\CashOnDeliveryProcessor">
-            <argument type="service" id="cash_on_delivery.configurator"/>
-            <argument type="service" id="payment.manager.front"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-            <tag name="payment.processor"/>
-        </service>
-
-        <service id="paypal.configurator" class="WellCommerce\Bundle\PaymentBundle\Configurator\PayPalConfigurator" shared="false">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-        </service>
-
-        <service id="paypal.processor" class="WellCommerce\Bundle\PaymentBundle\Processor\PayPalProcessor">
-            <argument type="service" id="paypal.configurator"/>
-            <argument type="service" id="payment.manager.front"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-            <tag name="payment.processor"/>
-        </service>
     </services>
 </container>

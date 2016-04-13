@@ -6,5 +6,8 @@
 
     <imports>
         <import resource="services/payment_method.xml"/>
+        <import resource="services/bank_transfer.xml"/>
+        <import resource="services/cash_on_delivery.xml"/>
+        <import resource="services/paypal.xml"/>
     </imports>
 </container>

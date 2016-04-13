@@ -15,36 +15,17 @@ namespace WellCommerce\Bundle\PaymentBundle\Controller\Front;
 use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\PaymentBundle\Manager\Front\PaymentManagerInterface;
+use WellCommerce\Bundle\PaymentBundle\Processor\PaymentProcessorInterface;
 
 /**
  * Class CashOnDeliveryController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CashOnDeliveryController extends AbstractFrontController
+class CashOnDeliveryController extends AbstractPaymentController
 {
-    /**
-     * @var PaymentManagerInterface
-     */
-    protected $manager;
-
-    public function initializeAction() : Response
+    protected function getCurrentPaymentProcessor() : PaymentProcessorInterface
     {
-        if ($this->manager->getOrderContext()->hasCurrentOrder()) {
-            $order     = $this->manager->getOrderContext()->getCurrentOrder();
-            $processor = $this->manager->getPaymentProcessor($order->getPaymentMethod()->getProcessor());
-
-            if ('cash_on_delivery' !== $processor->getConfigurator()->getName()) {
-                return $this->redirectResponse($processor->getInitializeUrl());
-            }
-
-            $payment = $this->manager->getFirstPaymentForOrder($order);
-
-            return $this->displayTemplate('index', [
-                'payment' => $payment
-            ]);
-        }
-
-        return $this->redirectToRoute('front.home_page.index');
+        return $this->manager->getPaymentProcessor('cash_on_delivery');
     }
 }

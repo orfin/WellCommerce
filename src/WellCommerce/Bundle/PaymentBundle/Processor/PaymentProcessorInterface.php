@@ -12,7 +12,9 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\Processor;
 
+use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 use WellCommerce\Bundle\PaymentBundle\Configurator\PaymentMethodConfiguratorInterface;
+use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodInterface;
 
 /**
@@ -44,4 +46,12 @@ interface PaymentProcessorInterface
      * @return string
      */
     public function getInitializeUrl() : string;
+
+    /**
+     * Prepares the payment for order
+     *
+     * @param PaymentInterface $payment
+     * @param OrderInterface   $order
+     */
+    public function preparePaymentForOrder(PaymentInterface $payment, OrderInterface $order);
 }

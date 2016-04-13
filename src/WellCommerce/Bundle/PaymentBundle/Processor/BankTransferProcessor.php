@@ -12,9 +12,6 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\Processor;
 
-use Symfony\Component\HttpFoundation\Response;
-use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
-
 /**
  * Class BankTransferProcessor
  *
@@ -27,6 +24,6 @@ class BankTransferProcessor extends AbstractPaymentProcessor
      */
     public function getInitializeUrl() : string
     {
-        return $this->getRouterHelper()->redirectTo('front.payment.bank_transfer.initialize');
+        return $this->getRouterHelper()->generateUrl('front.bank_transfer.initialize');
     }
 }

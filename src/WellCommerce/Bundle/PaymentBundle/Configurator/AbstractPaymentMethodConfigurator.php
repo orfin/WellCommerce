@@ -42,7 +42,7 @@ abstract class AbstractPaymentMethodConfigurator extends AbstractContainerAware 
     /**
      * {@inheritdoc}
      */
-    public function getConfiguration() : array
+    public function getConfiguration(PaymentMethodInterface $paymentMethod) : array
     {
         if (null === $this->configuration) {
             throw new \LogicException('Processor was not configured prior to accessing configuration. Please use configure() method');
@@ -52,25 +52,17 @@ abstract class AbstractPaymentMethodConfigurator extends AbstractContainerAware 
     }
     
     /**
-     * Returns the concatenated key name
-     *
-     * @param string $name
-     *
-     * @return string
+     * {@inheritdoc}
      */
-    protected function getConfigurationKey(string $name) : string
+    public function getConfigurationKey(string $name) : string
     {
         return sprintf('%s_%s', $this->getName(), $name);
     }
     
     /**
-     * Returns the value for given configuration key
-     *
-     * @param string $name
-     *
-     * @return mixed
+     * {@inheritdoc}
      */
-    protected function getConfigurationValue(string $name)
+    public function getConfigurationValue(string $name)
     {
         $key = $this->getConfigurationKey($name);
         

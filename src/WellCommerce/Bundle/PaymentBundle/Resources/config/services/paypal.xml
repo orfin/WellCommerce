@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="paypal.controller.front" class="WellCommerce\Bundle\PaymentBundle\Controller\Front\PayPalController">
+            <argument type="service" id="payment.manager.front"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="paypal.configurator" class="WellCommerce\Bundle\PaymentBundle\Configurator\PayPalConfigurator" shared="false">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="paypal.gateway" class="WellCommerce\Bundle\PaymentBundle\Gateway\PayPalGateway" shared="false">
+            <argument type="collection">
+                <argument key="log.FileName">%kernel.logs_dir%/PayPal.log</argument>
+            </argument>
+        </service>
+
+        <service id="paypal.processor" class="WellCommerce\Bundle\PaymentBundle\Processor\PayPalProcessor">
+            <argument type="service" id="paypal.configurator"/>
+            <argument type="service" id="paypal.gateway"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <tag name="payment.processor"/>
+        </service>
+    </services>
+</container>

@@ -12,11 +12,6 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\Processor;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
-use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
-
 /**
  * Class CashOnDeliveryProcessor
  *
@@ -24,13 +19,11 @@ use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
  */
 class CashOnDeliveryProcessor extends AbstractPaymentProcessor
 {
-    const PROCESSOR_NAME = 'cash_on_delivery';
-
     /**
      * {@inheritdoc}
      */
     public function getInitializeUrl() : string
     {
-        return $this->getRouterHelper()->redirectTo('front.payment.cash_on_delivery.initialize');
+        return $this->getRouterHelper()->generateUrl('front.cash_on_delivery.initialize');
     }
 }

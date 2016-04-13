@@ -13,7 +13,9 @@
 namespace WellCommerce\Bundle\PaymentBundle\Processor;
 
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 use WellCommerce\Bundle\PaymentBundle\Configurator\PaymentMethodConfiguratorInterface;
+use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodInterface;
 use WellCommerce\Bundle\PaymentBundle\Manager\Front\PaymentManagerInterface;
 
@@ -30,20 +32,13 @@ abstract class AbstractPaymentProcessor extends AbstractContainerAware implement
     protected $configurator;
     
     /**
-     * @var PaymentManagerInterface
-     */
-    protected $paymentManager;
-    
-    /**
      * AbstractPaymentProcessor constructor.
      *
      * @param PaymentMethodConfiguratorInterface $configurator
-     * @param PaymentManagerInterface            $paymentManager
      */
-    public function __construct(PaymentMethodConfiguratorInterface $configurator, PaymentManagerInterface $paymentManager)
+    public function __construct(PaymentMethodConfiguratorInterface $configurator)
     {
-        $this->paymentManager = $paymentManager;
-        $this->configurator   = $configurator;
+        $this->configurator = $configurator;
     }
     
     /**
@@ -62,5 +57,16 @@ abstract class AbstractPaymentProcessor extends AbstractContainerAware implement
         $this->configurator->configure($paymentMethod);
         
         return $this->configurator->getConfiguration();
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function preparePaymentForOrder(PaymentInterface $payment, OrderInterface $order)
+    {
+        $payment->setOrder($order);
+        $payment->setState(PaymentInterface::PAYMENT_STATE_CREATED);
+        $payment->setProcessor($this->getConfigurator()->getName());
+        $payment->setConfiguration($this->getConfiguration($order->getPaymentMethod()));
     }
 }

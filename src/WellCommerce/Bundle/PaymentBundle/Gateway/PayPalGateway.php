@@ -20,20 +20,19 @@ use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Core\PayPalHttpConfig;
 use PayPal\Rest\ApiContext;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
 
 /**
  * Class PayPalGateway
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PayPalGateway extends AbstractContainerAware implements PayPalGatewayInterface
+class PayPalGateway implements PayPalGatewayInterface
 {
     /**
      * @var array
      */
     protected $options;
-    
+
     /**
      * PayPalGateway constructor.
      *
@@ -84,39 +83,41 @@ class PayPalGateway extends AbstractContainerAware implements PayPalGatewayInter
         
         $resolver->setDefaults([
             'log.LogEnabled'  => true,
-            'log.FileName'    => $this->getKernel()->getLogDir() . '/PayPal.log',
             'log.LogLevel'    => 'DEBUG',
             'cache.enabled'   => true,
             'http.VerifyPeer' => 0,
             'http.VerifyHost' => 2,
         ]);
-    }
-    
-    protected function getPayment(string $identifier, ApiContext $apiContext) : Payment
-    {
-        return Payment::get($identifier, $apiContext);
+
+        $resolver->setAllowedTypes('log.LogEnabled', 'bool');
+        $resolver->setAllowedTypes('log.LogLevel', 'string');
+        $resolver->setAllowedTypes('cache.enabled', 'bool');
+        $resolver->setAllowedTypes('http.VerifyPeer', 'int');
+        $resolver->setAllowedTypes('http.VerifyHost', 'int');
     }
     
     /**
      * Configures the PayPal API context
      *
-     * @param array $configuration
+     * @param string $clientId
+     * @param string $clientSecret
+     * @param string $mode
      *
      * @return ApiContext
      */
-    protected function getApiContext(array $configuration) : ApiContext
+    protected function getApiContext(string $clientId, string $clientSecret, string $mode) : ApiContext
     {
         PayPalHttpConfig::$defaultCurlOptions[CURLOPT_SSLVERSION] = 6;
         
         $apiContext = new ApiContext(
             new OAuthTokenCredential(
-                $configuration['paypal_client_id'],
-                $configuration['paypal_client_secret']
+                $clientId,
+                $clientSecret
             )
         );
         
         $apiContext->setConfig([
-            'mode'            => $configuration['paypal_mode'],
+            'mode'            => $mode,
             'log.LogEnabled'  => $this->options['log.LogEnabled'],
             'log.FileName'    => $this->options['log.FileName'],
             'log.LogLevel'    => $this->options['log.LogLevel'],

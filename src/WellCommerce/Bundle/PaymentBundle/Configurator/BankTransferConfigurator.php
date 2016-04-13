@@ -29,7 +29,7 @@ class BankTransferConfigurator extends AbstractPaymentMethodConfigurator
      */
     public function getName() : string
     {
-        return self::PROCESSOR_NAME;
+        return 'bank_transfer';
     }
 
     /**

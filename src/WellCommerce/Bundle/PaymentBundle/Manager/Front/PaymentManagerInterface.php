@@ -27,11 +27,12 @@ interface PaymentManagerInterface extends FrontManagerInterface
     /**
      * Returns the first payment for order or creates a new one
      *
-     * @param OrderInterface $order
+     * @param OrderInterface            $order
+     * @param PaymentProcessorInterface $processor
      *
      * @return PaymentInterface
      */
-    public function getFirstPaymentForOrder(OrderInterface $order) : PaymentInterface;
+    public function getFirstPaymentForOrder(OrderInterface $order, PaymentProcessorInterface $processor) : PaymentInterface;
 
     /**
      * Returns the processor object for given name
@@ -41,13 +42,4 @@ interface PaymentManagerInterface extends FrontManagerInterface
      * @return PaymentProcessorInterface
      */
     public function getPaymentProcessor(string $name) : PaymentProcessorInterface;
-
-    /**
-     * Returns the payment for given token
-     *
-     * @param string $token
-     *
-     * @return PaymentInterface
-     */
-    public function findPaymentByToken(string $token) : PaymentInterface;
 }

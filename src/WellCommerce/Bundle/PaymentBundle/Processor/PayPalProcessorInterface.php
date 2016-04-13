@@ -23,13 +23,6 @@ use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
 interface PayPalProcessorInterface extends PaymentProcessorInterface
 {
     /**
-     * Creates a payment for order
-     *
-     * @param PaymentInterface $payment
-     */
-    public function preparePayment(PaymentInterface $payment);
-
-    /**
      * Confirms a payment for order
      *
      * @param PaymentInterface $payment
@@ -46,4 +39,22 @@ interface PayPalProcessorInterface extends PaymentProcessorInterface
      * @return Response
      */
     public function cancelPayment(PaymentInterface $payment) : Response;
+
+    /**
+     * Returns the URL to confirm action
+     *
+     * @param PaymentInterface $payment
+     *
+     * @return string
+     */
+    public function getConfirmUrl(PaymentInterface $payment) : string;
+
+    /**
+     * Returns the URL to cancel action
+     *
+     * @param PaymentInterface $payment
+     *
+     * @return string
+     */
+    public function getCancelUrl(PaymentInterface $payment) : string;
 }

@@ -10,30 +10,78 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\PaymentBundle\Gateway\PayPal;
+namespace WellCommerce\Bundle\PaymentBundle\Processor;
 
+use PayPal\Api\Address;
 use PayPal\Api\Amount;
 use PayPal\Api\Details;
+use PayPal\Api\FundingInstrument;
 use PayPal\Api\Item;
 use PayPal\Api\ItemList;
+use PayPal\Api\Payer;
 use PayPal\Api\Transaction;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderProductInterface;
+use WellCommerce\Bundle\PaymentBundle\Configurator\PaymentMethodConfiguratorInterface;
+use WellCommerce\Bundle\PaymentBundle\Gateway\PayPalGatewayInterface;
 
 /**
- * Class TransactionFactory
+ * Class AbstractPayPalProcessor
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class TransactionFactory
+abstract class AbstractPayPalProcessor extends AbstractPaymentProcessor implements PayPalProcessorInterface
 {
-    public function createOrderTransaction(OrderInterface $order) : Transaction
+    /**
+     * @var PayPalGatewayInterface
+     */
+    protected $gateway;
+    
+    /**
+     * PayPalProcessor constructor.
+     *
+     * @param PaymentMethodConfiguratorInterface $configurator
+     * @param PayPalGatewayInterface             $gateway
+     */
+    public function __construct(PaymentMethodConfiguratorInterface $configurator, PayPalGatewayInterface $gateway)
+    {
+        parent::__construct($configurator);
+        $this->gateway = $gateway;
+    }
+    
+    /**
+     * Creates a Payer object for given payment method and funding instrument
+     *
+     * @param string                 $paymentMethod
+     * @param FundingInstrument|null $fundingInstrument
+     *
+     * @return Payer
+     */
+    protected function createPayer(string $paymentMethod, FundingInstrument $fundingInstrument = null) : Payer
+    {
+        $payer = new Payer();
+        $payer->setPaymentMethod($paymentMethod);
+        if (null !== $fundingInstrument) {
+            $payer->setFundingInstruments([$fundingInstrument]);
+        }
+        
+        return $payer;
+    }
+    
+    /**
+     * Creates a PayPal transaction object for given order
+     *
+     * @param OrderInterface $order
+     *
+     * @return Transaction
+     */
+    protected function createTransaction(OrderInterface $order) : Transaction
     {
         $transaction = new Transaction();
         $transaction->setAmount($this->createAmount($order));
         $transaction->setItemList($this->createItemList($order));
         $transaction->setDescription($order->getId());
-
+        
         return $transaction;
     }
     
@@ -71,7 +119,7 @@ class TransactionFactory
         
         return $details;
     }
-
+    
     /**
      * Creates a collection of PayPal items for given order
      *
@@ -82,14 +130,14 @@ class TransactionFactory
     protected function createItemList(OrderInterface $order) : ItemList
     {
         $itemList = new ItemList();
-
+        
         $order->getProducts()->map(function (OrderProductInterface $orderProduct) use ($itemList) {
             $itemList->addItem($this->createItem($orderProduct));
         });
-
+        
         return $itemList;
     }
-
+    
     /**
      * Creates a single PayPal item from given order product
      *
@@ -106,7 +154,25 @@ class TransactionFactory
         $item->setSku($orderProduct->getProduct()->getSku());
         $item->setPrice($orderProduct->getSellPrice()->getNetAmount());
         $item->setTax($orderProduct->getSellPrice()->getTaxAmount());
-
+        
         return $item;
+    }
+
+    /**
+     * Creates an address object
+     *
+     * @param OrderInterface $order
+     *
+     * @return Address
+     */
+    protected function createAddress(OrderInterface $order) : Address
+    {
+        $address = new Address();
+        $address->setLine1($order->getBillingAddress()->getStreet() . ' ' . $order->getBillingAddress()->getStreetNo());
+        $address->setCity($order->getBillingAddress()->getCity());
+        $address->setPostalCode($order->getBillingAddress()->getPostCode());
+        $address->setCountryCode($order->getBillingAddress()->getCountry());
+
+        return $address;
     }
 }

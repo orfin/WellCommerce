@@ -16,8 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\CoreBundle\Service\Breadcrumb\BreadcrumbItem;
 use WellCommerce\Bundle\OrderBundle\Manager\Front\OrderManager;
-use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodInterface;
-use WellCommerce\Bundle\PaymentBundle\Processor\PaymentProcessorInterface;
+use WellCommerce\Bundle\PaymentBundle\Manager\Front\PaymentManagerInterface;
 
 /**
  * Class ConfirmationController
@@ -40,14 +39,14 @@ class ConfirmationController extends AbstractFrontController
         
         $orderManager = $this->getOrderManager();
         $order        = $orderManager->prepareOrderFromCart($cart);
-        $processor    = $this->getPaymentProcessor($order->getPaymentMethod());
+        $processor    = $this->getPaymentManager()->getPaymentProcessor($order->getPaymentMethod()->getProcessor());
         $form         = $this->manager->getForm($order);
 
         if ($form->handleRequest()->isSubmitted()) {
             if ($form->isValid()) {
                 $orderManager->saveOrder($order);
                 
-                return $this->redirectToRoute('front.payment.initialize');
+                return $this->redirectResponse($processor->getInitializeUrl());
             }
             
             if (count($form->getError())) {
@@ -68,8 +67,8 @@ class ConfirmationController extends AbstractFrontController
         return $this->get('order.manager.front');
     }
 
-    protected function getPaymentProcessor(PaymentMethodInterface $paymentMethod) : PaymentProcessorInterface
+    protected function getPaymentManager() : PaymentManagerInterface
     {
-        return $this->get('payment.processor.collection')->get($paymentMethod->getProcessor());
+        return $this->get('payment.manager.front');
     }
 }

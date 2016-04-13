@@ -27,11 +27,16 @@ class PaymentManager extends AbstractFrontManager implements PaymentManagerInter
     /**
      * {@inheritdoc}
      */
-    public function getFirstPaymentForOrder(OrderInterface $order) : PaymentInterface
+    public function getFirstPaymentForOrder(OrderInterface $order, PaymentProcessorInterface $processor) : PaymentInterface
     {
         $payments = $order->getPayments();
         if (0 === $payments->count()) {
-            return $this->createPayment($order);
+            /** @var $payment PaymentInterface */
+            $payment = $this->initResource();
+            $processor->preparePaymentForOrder($payment, $order);
+            $this->createResource($payment);
+
+            return $payment;
         }
         
         return $payments->first();
@@ -45,35 +50,5 @@ class PaymentManager extends AbstractFrontManager implements PaymentManagerInter
         $processors = $this->get('payment.processor.collection');
         
         return $processors->get($alias);
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
-    protected function createPayment(OrderInterface $order) : PaymentInterface
-    {
-        /** @var $payment PaymentInterface */
-        $payment       = $this->initResource();
-        $paymentMethod = $order->getPaymentMethod();
-        $processor     = $this->getPaymentProcessor($order->getPaymentMethod()->getProcessor());
-
-        $payment->setState(PaymentInterface::PAYMENT_STATE_CREATED);
-        $payment->setOrder($order);
-        $payment->setConfiguration($processor->getConfiguration($paymentMethod));
-        $payment->setProcessor($processor->getConfigurator()->getName());
-
-        $processor->preparePayment($payment);
-
-        $this->createResource($payment);
-        
-        return $payment;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function findPaymentByToken(string $token) : PaymentInterface
-    {
-        return $this->repository->findOneBy(['token' => $token]);
     }
 }

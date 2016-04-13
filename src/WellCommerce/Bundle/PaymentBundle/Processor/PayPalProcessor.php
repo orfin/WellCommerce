@@ -12,43 +12,25 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\Processor;
 
-use PayPal\Api\Payer;
 use PayPal\Api\Payment;
 use PayPal\Api\RedirectUrls;
-use PayPal\Api\Transaction;
 use PayPal\Rest\ApiContext;
 use Symfony\Component\HttpFoundation\Response;
-use WellCommerce\Bundle\PaymentBundle\Configurator\PaymentMethodConfiguratorInterface;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
-use WellCommerce\Bundle\PaymentBundle\Gateway\PayPalGatewayInterface;
-use WellCommerce\Bundle\PaymentBundle\Manager\Front\PaymentManagerInterface;
 
 /**
  * Class PayPal
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PayPalProcessor extends AbstractPaymentProcessor implements PayPalProcessorInterface
+class PayPalProcessor extends AbstractPayPalProcessor
 {
     /**
-     * @var PayPalGatewayInterface
+     * {@inheritdoc}
      */
-    protected $gateway;
-    
-    /**
-     * PayPalProcessor constructor.
-     *
-     * @param PaymentMethodConfiguratorInterface $configurator
-     * @param PaymentManagerInterface            $paymentManager
-     * @param PayPalGatewayInterface             $gateway
-     */
-    public function __construct(
-        PaymentMethodConfiguratorInterface $configurator,
-        PaymentManagerInterface $paymentManager,
-        PayPalGatewayInterface $gateway
-    ) {
-        parent::__construct($configurator, $paymentManager);
-        $this->gateway = $gateway;
+    public function preparePayment(PaymentInterface $payment)
+    {
+        $order = $payment->getOrder();
     }
     
     /**
@@ -57,17 +39,10 @@ class PayPalProcessor extends AbstractPaymentProcessor implements PayPalProcesso
     public function processPayment(PaymentInterface $payment) : PaymentInterface
     {
         $order = $payment->getOrder();
-        $payer = new Payer();
-        $payer->setPaymentMethod("paypal");
         
-        $itemList     = $this->createItemList($order);
-        $amount       = $this->createAmount($order);
-        $redirectUrls = $this->createRedirectUrls();
-        
-        $transaction = new Transaction();
-        $transaction->setAmount($amount);
-        $transaction->setItemList($itemList);
-        $transaction->setDescription($order->getId());
+        $payer        = $this->createPayer('paypal');
+        $redirectUrls = $this->createRedirectUrls($payment);
+        $transaction  = $this->createTransaction($order);
         
         $payPalPayment = new Payment();
         $payPalPayment->setIntent("sale");
@@ -124,11 +99,11 @@ class PayPalProcessor extends AbstractPaymentProcessor implements PayPalProcesso
      *
      * @return RedirectUrls
      */
-    protected function createRedirectUrls() : RedirectUrls
+    protected function createRedirectUrls(PaymentInterface $payment) : RedirectUrls
     {
         $redirectUrls = new RedirectUrls();
-        $redirectUrls->setReturnUrl($this->getConfirmUrl());
-        $redirectUrls->setCancelUrl($this->getCancelUrl());
+        $redirectUrls->setReturnUrl($this->getConfirmUrl($payment));
+        $redirectUrls->setCancelUrl($this->getCancelUrl($payment));
         
         return $redirectUrls;
     }
@@ -152,32 +127,24 @@ class PayPalProcessor extends AbstractPaymentProcessor implements PayPalProcesso
     /**
      * {@inheritdoc}
      */
-    public function notifyPayment(PaymentInterface $payment) : Response
+    public function getInitializeUrl() : string
     {
-        return $this->getRouterHelper()->redirectTo('front.home_page.index');
+        return $this->getRouterHelper()->generateUrl('front.paypal.initialize');
     }
-
+    
     /**
      * {@inheritdoc}
      */
-    public function getConfirmUrl(string $token) : string
+    public function getConfirmUrl(PaymentInterface $payment) : string
     {
-        return $this->getRouterHelper()->generateUrl('front.payment.confirm', ['token' => $token]);
+        return $this->getRouterHelper()->generateUrl('front.paypal.confirm', ['token' => $payment->getToken()]);
     }
-
+    
     /**
      * {@inheritdoc}
      */
-    public function getCancelUrl(string $token) : string
+    public function getCancelUrl(PaymentInterface $payment) : string
     {
-        return $this->getRouterHelper()->generateUrl('front.payment.cancel', ['token' => $token]);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getNotifyUrl(string $token) : string
-    {
-        return $this->getRouterHelper()->generateUrl('front.payment.notify', ['token' => $token]);
+        return $this->getRouterHelper()->generateUrl('front.paypal.cancel', ['token' => $payment->getToken()]);
     }
 }
