@@ -12,7 +12,7 @@
 namespace WellCommerce\Bundle\OrderBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
-use WellCommerce\Bundle\AppBundle\Entity\Price;
+use WellCommerce\Bundle\CartBundle\Entity\CartAwareTrait;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientAwareTrait;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddressInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetailsInterface;
@@ -38,52 +38,58 @@ class Order extends AbstractEntity implements OrderInterface
     use PaymentMethodAwareTrait;
     use ClientAwareTrait;
     use CouponAwareTrait;
-
-    /**
-     * @var string
-     */
-    protected $currency;
-
+    use CartAwareTrait;
+    
     /**
      * @var Collection
      */
     protected $products;
-
+    
     /**
-     * @var Price
+     * @var float
      */
-    protected $orderTotal;
-
+    protected $netAmount = 0;
+    
     /**
-     * @var Price
+     * @var float
      */
-    protected $productTotal;
-
+    protected $grossAmount = 0;
+    
     /**
-     * @var Price
+     * @var float
      */
-    protected $shippingTotal;
-
+    protected $taxAmount = 0;
+    
+    /**
+     * @var string
+     */
+    protected $currency;
+    
+    /**
+     * @var float
+     */
+    protected $currencyRate;
+    
     /**
      * @var Collection
      */
     protected $totals;
-
+    
     /**
      * @var Collection
      */
     protected $payments;
-
+    
     /**
      * @var string
      */
     protected $sessionId;
-
+    
     /**
      * @var OrderStatusInterface
      */
     protected $currentStatus;
-
+    
     /**
      * @var Collection
      */
@@ -93,12 +99,12 @@ class Order extends AbstractEntity implements OrderInterface
      * @var ClientContactDetailsInterface
      */
     protected $contactDetails;
-
+    
     /**
      * @var ClientBillingAddressInterface
      */
     protected $billingAddress;
-
+    
     /**
      * @var ClientShippingAddressInterface
      */
@@ -116,7 +122,7 @@ class Order extends AbstractEntity implements OrderInterface
     {
         return $this->currency;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -124,7 +130,7 @@ class Order extends AbstractEntity implements OrderInterface
     {
         $this->currency = $currency;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -132,7 +138,7 @@ class Order extends AbstractEntity implements OrderInterface
     {
         return $this->sessionId;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -140,7 +146,7 @@ class Order extends AbstractEntity implements OrderInterface
     {
         $this->sessionId = $sessionId;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -148,7 +154,7 @@ class Order extends AbstractEntity implements OrderInterface
     {
         $this->products->add($orderProduct);
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -156,7 +162,7 @@ class Order extends AbstractEntity implements OrderInterface
     {
         $this->products->removeElement($orderProduct);
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -164,7 +170,7 @@ class Order extends AbstractEntity implements OrderInterface
     {
         return $this->products;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -172,55 +178,8 @@ class Order extends AbstractEntity implements OrderInterface
     {
         $this->products = $products;
     }
-
-    /**
-     * @return OrderTotal
-     */
-    public function getOrderTotal() : OrderTotal
-    {
-        return $this->orderTotal;
-    }
-
-    /**
-     * @param OrderTotal $orderTotal
-     */
-    public function setOrderTotal(OrderTotal $orderTotal)
-    {
-        $this->orderTotal = $orderTotal;
-    }
-
-    /**
-     * @return OrderTotal
-     */
-    public function getProductTotal() : OrderTotal
-    {
-        return $this->productTotal;
-    }
-
-    /**
-     * @param OrderTotal $productTotal
-     */
-    public function setProductTotal(OrderTotal $productTotal)
-    {
-        $this->productTotal = $productTotal;
-    }
-
-    /**
-     * @return OrderTotal
-     */
-    public function getShippingTotal() : OrderTotal
-    {
-        return $this->shippingTotal;
-    }
-
-    /**
-     * @param OrderTotal $shippingTotal
-     */
-    public function setShippingTotal(OrderTotal $shippingTotal)
-    {
-        $this->shippingTotal = $shippingTotal;
-    }
-
+    
+    
     /**
      * {@inheritdoc}
      */
@@ -228,7 +187,7 @@ class Order extends AbstractEntity implements OrderInterface
     {
         return $this->contactDetails;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -236,7 +195,7 @@ class Order extends AbstractEntity implements OrderInterface
     {
         $this->contactDetails = $contactDetails;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -244,7 +203,7 @@ class Order extends AbstractEntity implements OrderInterface
     {
         return $this->billingAddress;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -252,7 +211,7 @@ class Order extends AbstractEntity implements OrderInterface
     {
         $this->billingAddress = $billingAddress;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -260,7 +219,7 @@ class Order extends AbstractEntity implements OrderInterface
     {
         return $this->shippingAddress;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -268,7 +227,7 @@ class Order extends AbstractEntity implements OrderInterface
     {
         $this->shippingAddress = $shippingAddress;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -276,7 +235,7 @@ class Order extends AbstractEntity implements OrderInterface
     {
         return $this->totals;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -284,7 +243,7 @@ class Order extends AbstractEntity implements OrderInterface
     {
         $this->totals = $totals;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -292,7 +251,7 @@ class Order extends AbstractEntity implements OrderInterface
     {
         $this->totals->add($orderTotal);
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -300,7 +259,7 @@ class Order extends AbstractEntity implements OrderInterface
     {
         return $this->currentStatus;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -308,7 +267,7 @@ class Order extends AbstractEntity implements OrderInterface
     {
         $this->currentStatus = $currentStatus;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -316,7 +275,7 @@ class Order extends AbstractEntity implements OrderInterface
     {
         $this->orderStatusHistory = $orderStatusHistory;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -324,7 +283,7 @@ class Order extends AbstractEntity implements OrderInterface
     {
         return $this->orderStatusHistory;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -332,7 +291,7 @@ class Order extends AbstractEntity implements OrderInterface
     {
         $this->orderStatusHistory->add($orderStatusHistory);
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -340,7 +299,7 @@ class Order extends AbstractEntity implements OrderInterface
     {
         return $this->comment;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -348,7 +307,7 @@ class Order extends AbstractEntity implements OrderInterface
     {
         $this->comment = $comment;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -356,7 +315,7 @@ class Order extends AbstractEntity implements OrderInterface
     {
         return $this->payments;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -364,7 +323,7 @@ class Order extends AbstractEntity implements OrderInterface
     {
         $this->payments = $payments;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -372,46 +331,51 @@ class Order extends AbstractEntity implements OrderInterface
     {
         $this->payments[] = $payment;
     }
-
+    
     /**
      * {@inheritdoc}
      */
     public function getShippingCostQuantity() : int
     {
         $quantity = 0;
-        $this->products->map(function (OrderProduct $orderProduct) use (&$quantity) {
+        $this->products->map(function (OrderProductInterface $orderProduct) use (&$quantity) {
             $quantity += $orderProduct->getQuantity();
         });
-
+        
         return $quantity;
     }
-
+    
     /**
      * {@inheritdoc}
      */
     public function getShippingCostWeight() : float
     {
         $weight = 0;
-        $this->products->map(function (OrderProduct $orderProduct) use (&$weight) {
+        $this->products->map(function (OrderProductInterface $orderProduct) use (&$weight) {
             $weight += $orderProduct->getQuantity() * $orderProduct->getWeight();
         });
-
+        
         return $weight;
     }
-
+    
     /**
      * {@inheritdoc}
      */
     public function getShippingCostGrossPrice() : float
     {
-        return $this->productTotal->getGrossAmount();
+        $totalGrossPrice = 0;
+        $this->products->map(function (OrderProductInterface $orderProduct) use (&$totalGrossPrice) {
+            $totalGrossPrice += $orderProduct->getSellPrice()->getGrossAmount();
+        });
+        
+        return $totalGrossPrice;
     }
-
+    
     /**
      * {@inheritdoc}
      */
     public function getShippingCostCurrency() : string
     {
-        return $this->productTotal->getCurrency();
+        return $this->currency;
     }
 }

@@ -104,18 +104,6 @@ class OrderManager extends AbstractFrontManager
         return $order;
     }
     
-    /**
-     * @param OrderInterface $order
-     */
-    public function saveOrder(OrderInterface $order)
-    {
-        $this->createResource($order);
-        $cart = $this->getCartContext()->getCurrentCart();
-        $this->cartManager->abandonCart($cart);
-        
-        $this->getRequestHelper()->setSessionAttribute('orderId', $order->getId());
-    }
-    
     protected function prepareOrderStatusHistory(OrderInterface $order, OrderStatusInterface $orderStatus)
     {
         /** @var $orderStatusHistory OrderStatusHistoryInterface */

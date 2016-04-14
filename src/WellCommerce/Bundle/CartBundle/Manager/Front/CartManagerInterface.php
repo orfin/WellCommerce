@@ -64,8 +64,6 @@ interface CartManagerInterface extends FrontManagerInterface
 
     /**
      * Clears and reinitializes the cart
-     *
-     * @param CartInterface $cart
      */
-    public function abandonCart(CartInterface $cart);
+    public function abandonCurrentCart();
 }

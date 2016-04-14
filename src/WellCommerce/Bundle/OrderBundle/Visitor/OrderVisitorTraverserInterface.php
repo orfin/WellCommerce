@@ -21,8 +21,5 @@ use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
  */
 interface OrderVisitorTraverserInterface
 {
-    /**
-     * @param OrderInterface $order
-     */
     public function traverse(OrderInterface $order);
 }

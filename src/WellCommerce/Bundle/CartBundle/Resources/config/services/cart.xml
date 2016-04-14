@@ -79,8 +79,6 @@
         </service>
 
         <service id="cart.subscriber" class="WellCommerce\Bundle\CartBundle\EventListener\CartSubscriber">
-            <argument type="service" id="cart.manager.front"/>
-            <argument type="service" id="cart.visitor.traverser"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>

@@ -20,9 +20,7 @@
         "source": "https://github.com/WellCommerce/WellCommerce/"
     },
     "autoload": {
-        "classmap": [
-            "src/"
-        ],
+        "psr-4": { "": "src/" },
         "files": [ "app/AppKernel.php" ]
     },
     "require": {

@@ -40,6 +40,14 @@ WellCommerce\Bundle\OrderBundle\Entity\Order:
             type: string
             length: 1000
             nullable: false
+    oneToOne:
+        cart:
+            targetEntity: WellCommerce\Bundle\CartBundle\Entity\Cart
+            fetch: LAZY
+            joinColumns:
+                cart_id:
+                    referencedColumnName: id
+                    onDelete: SET NULL
     oneToMany:
         products:
             targetEntity: WellCommerce\Bundle\OrderBundle\Entity\OrderProduct

@@ -106,6 +106,18 @@ class ArrayCollection implements CollectionInterface
     }
 
     /**
+     * Checks whether such item exists in collection
+     *
+     * @param $item
+     *
+     * @return bool
+     */
+    public function contains($item)
+    {
+        return in_array($item, $this->items);
+    }
+
+    /**
      * @return array
      */
     public function keys()

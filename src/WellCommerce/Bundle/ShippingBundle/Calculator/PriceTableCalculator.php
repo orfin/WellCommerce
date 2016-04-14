@@ -25,22 +25,6 @@ class PriceTableCalculator extends AbstractShippingMethodCalculator
     /**
      * {@inheritdoc}
      */
-    public function getName()
-    {
-        return 'Price table';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAlias()
-    {
-        return 'price_table';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function calculate(ShippingMethodInterface $shippingMethod, ShippingCalculatorSubjectInterface $subject)
     {
         $ranges          = $shippingMethod->getCosts();

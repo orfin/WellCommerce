@@ -28,7 +28,7 @@ class ConfirmationController extends AbstractFrontController
     public function indexAction() : Response
     {
         $cart = $this->manager->getCartContext()->getCurrentCart();
-        
+
         if ($cart->isEmpty()) {
             return $this->redirectToRoute('front.cart.index');
         }
@@ -36,17 +36,16 @@ class ConfirmationController extends AbstractFrontController
         $this->addBreadCrumbItem(new BreadcrumbItem([
             'name' => $this->trans('order.heading.confirmation'),
         ]));
-        
-        $orderManager = $this->getOrderManager();
-        $order        = $orderManager->prepareOrderFromCart($cart);
-        $processor    = $this->getPaymentManager()->getPaymentProcessor($order->getPaymentMethod()->getProcessor());
-        $form         = $this->manager->getForm($order);
 
+        $order = $this->manager->initResource();
+        $form  = $this->manager->getForm($order);
+        
         if ($form->handleRequest()->isSubmitted()) {
             if ($form->isValid()) {
-                $orderManager->saveOrder($order);
-                
-                return $this->redirectResponse($processor->getInitializeUrl());
+                $this->getOrderManager()->createResource($order);
+                $payment = $this->getPaymentManager()->createFirstPaymentForOrder($order);
+
+                return $this->redirectToRoute('front.payment.initialize', ['token' => $payment->getToken()]);
             }
             
             if (count($form->getError())) {

@@ -19,12 +19,8 @@ class CartProduct extends AbstractEntity implements CartProductInterface
     use TimestampableTrait;
     use ProductAwareTrait;
     use VariantAwareTrait;
-
-    /**
-     * @var CartInterface
-     */
-    protected $cart;
-
+    use CartAwareTrait;
+    
     /**
      * @var int
      */
@@ -65,22 +61,6 @@ class CartProduct extends AbstractEntity implements CartProductInterface
     public function decreaseQuantity(int $decrease)
     {
         $this->quantity -= $decrease;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCart()
-    {
-        return $this->cart;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCart(CartInterface $cart)
-    {
-        $this->cart = $cart;
     }
 
     /**

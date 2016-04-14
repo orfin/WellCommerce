@@ -13,15 +13,29 @@
 namespace WellCommerce\Bundle\CartBundle\Entity;
 
 /**
- * Interface CartAwareInterface
+ * Class CartAwareTrait
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface CartAwareInterface
+trait CartAwareTrait
 {
-    public function setCart(CartInterface $cart);
+    /**
+     * @var CartInterface
+     */
+    protected $cart;
 
-    public function getCart() : CartInterface;
+    public function setCart(CartInterface $cart)
+    {
+        $this->cart = $cart;
+    }
 
-    public function hasCart() : bool;
+    public function getCart() : CartInterface
+    {
+        return $this->cart;
+    }
+
+    public function hasCart() : bool
+    {
+        return $this->cart instanceof CartInterface;
+    }
 }

@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\CartBundle\Manager\Front;
 
-use Symfony\Component\Debug\Debug;
 use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 use WellCommerce\Bundle\CartBundle\Entity\CartProductInterface;
 use WellCommerce\Bundle\CartBundle\Exception\AddCartItemException;
@@ -118,10 +117,12 @@ class CartManager extends AbstractFrontManager implements CartManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function abandonCart(CartInterface $cart)
+    public function abandonCurrentCart()
     {
-        $this->removeResource($cart);
-        $this->initializeCart();
+        if ($this->getCartContext()->hasCurrentCart()) {
+            $this->removeResource($this->getCartContext()->getCurrentCart());
+            $this->initializeCart();
+        }
     }
 
     /**

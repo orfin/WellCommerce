@@ -4,28 +4,28 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-    <route id="front.bank_transfer.initialize" path="bank_transfer">
-        <default key="_controller">bank_transfer.controller.front:initializeAction</default>
+    <route id="front.payment.initialize" path="initialize/{token}">
+        <default key="_controller">payment.controller.front:initializeAction</default>
         <option key="expose">true</option>
     </route>
 
-    <route id="front.cash_on_delivery.initialize" path="cash_on_delivery">
-        <default key="_controller">cash_on_delivery.controller.front:initializeAction</default>
+    <route id="front.payment.confirm" path="confirm/{token}">
+        <default key="_controller">payment.controller.front:confirmAction</default>
         <option key="expose">true</option>
     </route>
 
-    <route id="front.paypal.initialize" path="paypal">
-        <default key="_controller">paypal.controller.front:initializeAction</default>
+    <route id="front.payment.cancel" path="cancel/{token}">
+        <default key="_controller">payment.controller.front:cancelAction</default>
         <option key="expose">true</option>
     </route>
 
-    <route id="front.paypal.confirm" path="paypal/confirm">
-        <default key="_controller">paypal.controller.front:confirmAction</default>
+    <route id="front.payment.execute" path="execute/{token}">
+        <default key="_controller">payment.controller.front:executeAction</default>
         <option key="expose">true</option>
     </route>
 
-    <route id="front.paypal.cancel" path="paypal/cancel">
-        <default key="_controller">paypal.controller.front:cancelAction</default>
+    <route id="front.payment.notify" path="notify/{token}">
+        <default key="_controller">payment.controller.front:notifyAction</default>
         <option key="expose">true</option>
     </route>
 </routes>

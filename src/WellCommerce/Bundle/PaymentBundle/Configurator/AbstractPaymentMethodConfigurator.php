@@ -42,7 +42,7 @@ abstract class AbstractPaymentMethodConfigurator extends AbstractContainerAware 
     /**
      * {@inheritdoc}
      */
-    public function getConfiguration(PaymentMethodInterface $paymentMethod) : array
+    public function getConfiguration() : array
     {
         if (null === $this->configuration) {
             throw new \LogicException('Processor was not configured prior to accessing configuration. Please use configure() method');

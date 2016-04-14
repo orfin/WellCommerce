@@ -11,8 +11,9 @@
  */
 namespace WellCommerce\Bundle\OrderBundle\EventListener;
 
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
-use Symfony\Component\HttpKernel\KernelEvents;
+use Doctrine\Common\Util\Debug;
+use WellCommerce\Bundle\CartBundle\Context\Front\CartContextInterface;
+use WellCommerce\Bundle\CartBundle\Manager\Front\CartManagerInterface;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
 use WellCommerce\Bundle\DoctrineBundle\Event\ResourceEvent;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
@@ -27,35 +28,29 @@ use WellCommerce\Bundle\OrderBundle\Visitor\OrderVisitorTraverserInterface;
  */
 class OrderSubscriber extends AbstractEventSubscriber
 {
-    /**
-     * @var OrderVisitorTraverserInterface
-     */
-    protected $orderVisitorTraverser;
-    
-    /**
-     * @var OrderTotalFactory
-     */
-    protected $orderTotalFactory;
-    
-    /**
-     * OrderSubscriber constructor.
-     *
-     * @param OrderVisitorTraverserInterface $orderVisitorTraverser
-     * @param OrderTotalFactory              $orderTotalFactory
-     */
-    public function __construct(OrderVisitorTraverserInterface $orderVisitorTraverser, OrderTotalFactory $orderTotalFactory)
-    {
-        $this->orderVisitorTraverser = $orderVisitorTraverser;
-        $this->orderTotalFactory     = $orderTotalFactory;
-    }
-    
     public static function getSubscribedEvents()
     {
         return [
-            'order.post_prepared' => ['onOrderPostPreparedEvent', 0],
-            'order.pre_update'    => ['onOrderPreUpdateEvent', 0],
-            KernelEvents::REQUEST => ['onKernelRequest', 0],
+            'order.post_init'   => ['onOrderPostInitEvent', 0],
+            'order.post_create' => ['onOrderPostCreateEvent', 0],
+            'order.pre_update'  => ['onOrderPreUpdateEvent', 0],
         ];
+    }
+    
+    public function onOrderPostInitEvent(ResourceEvent $event)
+    {
+        $order   = $event->getResource();
+        $context = $this->getCartContext();
+        if ($order instanceof OrderInterface && $context->hasCurrentCart()) {
+            $order->setCart($context->getCurrentCart());
+        }
+
+        Debug::dump($order);die();
+    }
+
+    public function onOrderPostCreateEvent(ResourceEvent $event)
+    {
+        
     }
     
     public function onOrderPostPreparedEvent(ResourceEvent $event)
@@ -75,27 +70,13 @@ class OrderSubscriber extends AbstractEventSubscriber
             $this->traverseOrder($order);
         }
     }
-
-    public function onKernelRequest(GetResponseEvent $event)
-    {
-        $session    = $event->getRequest()->getSession();
-        $repository = $this->container->get('order.repository');
-        $context    = $this->container->get('order.context.front');
-
-        if ($session->has('orderId')) {
-            $order = $repository->find($session->get('orderId'));
-            if ($order instanceof OrderInterface) {
-                $context->setCurrentOrder($order);
-            }
-        }
-    }
     
     protected function recalculateShippingTotal(OrderInterface $order)
     {
         $grossAmount = $order->getShippingTotal()->getGrossAmount();
         $taxRate     = $order->getShippingMethod()->getTax()->getValue();
         $currency    = $order->getCurrency();
-        $orderTotal  = $this->orderTotalFactory->createFromSpecifiedValues($grossAmount, $taxRate, $currency);
+        $orderTotal  = $this->getOrderTotalFactory()->createFromSpecifiedValues($grossAmount, $taxRate, $currency);
         
         $order->setShippingTotal($orderTotal);
     }
@@ -113,6 +94,26 @@ class OrderSubscriber extends AbstractEventSubscriber
     
     protected function traverseOrder(OrderInterface $order)
     {
-        $this->orderVisitorTraverser->traverse($order);
+        $this->getOrderVisitorTraverser()->traverse($order);
+    }
+
+    protected function getOrderVisitorTraverser() : OrderVisitorTraverserInterface
+    {
+        return $this->container->get('order.visitor.traverser');
+    }
+
+    protected function getCartManager() : CartManagerInterface
+    {
+        return $this->container->get('cart.manager.front');
+    }
+
+    protected function getCartContext() : CartContextInterface
+    {
+        return $this->container->get('cart.context.front');
+    }
+
+    protected function getOrderTotalFactory() : OrderTotalFactory
+    {
+        return $this->container->get('order_total.factory');
     }
 }

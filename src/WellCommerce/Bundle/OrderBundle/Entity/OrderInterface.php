@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\OrderBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
+use WellCommerce\Bundle\CartBundle\Entity\CartAwareInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientAwareInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddressInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetailsInterface;
@@ -39,7 +40,8 @@ interface OrderInterface extends
     ClientAwareInterface,
     CouponAwareInterface,
     ShippingMethodAwareInterface,
-    ShippingCalculatorSubjectInterface
+    ShippingCalculatorSubjectInterface,
+    CartAwareInterface
 {
     /**
      * @return string

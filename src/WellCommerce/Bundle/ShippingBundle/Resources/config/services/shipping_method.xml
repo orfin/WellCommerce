@@ -66,7 +66,9 @@
             <tag name="kernel.event_subscriber" />
         </service>
 
-        <service id="shipping_method.calculator.collection" class="WellCommerce\Bundle\ShippingBundle\Calculator\ShippingMethodCalculatorCollection" />
+        <service id="shipping_method.calculator.collection" class="Doctrine\Common\Collections\ArrayCollection" />
+
+        <service id="shipping_method.adapter.collection" class="Doctrine\Common\Collections\ArrayCollection" />
 
         <service id="shipping_method.provider" class="WellCommerce\Bundle\ShippingBundle\Provider\ShippingMethodProvider">
             <argument type="service" id="shipping_method.repository"/>
@@ -83,13 +85,21 @@
         </service>
 
         <service id="weight_table.calculator" class="WellCommerce\Bundle\ShippingBundle\Calculator\WeightTableCalculator">
-            <argument type="service" id="currency.helper"/>
-            <tag name="shipping_method.calculator"/>
+            <argument>weight_table</argument>
+            <argument type="service" id="shipping_method.adapter.collection"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <tag name="shipping_method.calculator" alias="weight_table"/>
         </service>
 
         <service id="price_table.calculator" class="WellCommerce\Bundle\ShippingBundle\Calculator\PriceTableCalculator">
-            <argument type="service" id="currency.helper"/>
-            <tag name="shipping_method.calculator"/>
+            <argument>price_table</argument>
+            <argument type="service" id="shipping_method.adapter.collection"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <tag name="shipping_method.calculator" alias="price_table"/>
         </service>
     </services>
 </container>

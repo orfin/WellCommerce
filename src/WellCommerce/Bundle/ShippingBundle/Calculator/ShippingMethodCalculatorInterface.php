@@ -21,19 +21,7 @@ use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface;
  */
 interface ShippingMethodCalculatorInterface
 {
-    /**
-     * Returns alias
-     *
-     * @return string
-     */
-    public function getAlias();
-
-    /**
-     * Returns name
-     *
-     * @return string
-     */
-    public function getName();
+    public function getAlias() : string;
 
     /**
      * Returns shipping costs for given amount

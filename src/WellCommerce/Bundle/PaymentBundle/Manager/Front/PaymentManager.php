@@ -27,19 +27,16 @@ class PaymentManager extends AbstractFrontManager implements PaymentManagerInter
     /**
      * {@inheritdoc}
      */
-    public function getFirstPaymentForOrder(OrderInterface $order, PaymentProcessorInterface $processor) : PaymentInterface
+    public function createFirstPaymentForOrder(OrderInterface $order) : PaymentInterface
     {
-        $payments = $order->getPayments();
-        if (0 === $payments->count()) {
-            /** @var $payment PaymentInterface */
-            $payment = $this->initResource();
-            $processor->preparePaymentForOrder($payment, $order);
-            $this->createResource($payment);
-
-            return $payment;
-        }
+        $processor = $order->getPaymentMethod()->getProcessor();
+        $payment   = $this->initResource();
+        $payment->setOrder($order);
+        $payment->setState(PaymentInterface::PAYMENT_STATE_CREATED);
+        $payment->setProcessor($processor);
+        $this->createResource($payment);
         
-        return $payments->first();
+        return $payment;
     }
     
     /**

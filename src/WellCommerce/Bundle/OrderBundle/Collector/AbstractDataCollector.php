@@ -54,12 +54,4 @@ abstract class AbstractDataCollector implements OrderDataCollectorInterface
 
         return $resource;
     }
-
-    abstract public function getAlias();
-
-    abstract public function getPriority();
-
-    abstract public function getDescription();
-
-
 }

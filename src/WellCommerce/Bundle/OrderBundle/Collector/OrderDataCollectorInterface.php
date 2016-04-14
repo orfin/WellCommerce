@@ -21,8 +21,9 @@ use WellCommerce\Bundle\OrderBundle\Visitor\OrderVisitorInterface;
  */
 interface OrderDataCollectorInterface extends OrderVisitorInterface
 {
-    /**
-     * @return string
-     */
-    public function getDescription();
+    public function getAlias() : string;
+
+    public function getPriority() : int;
+
+    public function getDescription() : string;
 }

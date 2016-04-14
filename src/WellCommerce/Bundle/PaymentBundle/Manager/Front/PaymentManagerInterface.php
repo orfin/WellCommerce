@@ -28,11 +28,10 @@ interface PaymentManagerInterface extends FrontManagerInterface
      * Returns the first payment for order or creates a new one
      *
      * @param OrderInterface            $order
-     * @param PaymentProcessorInterface $processor
      *
      * @return PaymentInterface
      */
-    public function getFirstPaymentForOrder(OrderInterface $order, PaymentProcessorInterface $processor) : PaymentInterface;
+    public function createFirstPaymentForOrder(OrderInterface $order) : PaymentInterface;
 
     /**
      * Returns the processor object for given name

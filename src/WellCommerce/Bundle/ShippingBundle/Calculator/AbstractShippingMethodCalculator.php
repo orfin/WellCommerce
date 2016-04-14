@@ -12,19 +12,27 @@
 
 namespace WellCommerce\Bundle\ShippingBundle\Calculator;
 
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
 use WellCommerce\Bundle\CurrencyBundle\Helper\CurrencyHelperInterface;
+use WellCommerce\Bundle\ShippingBundle\Adapter\ShippingCalculatorAdapterCollection;
+use WellCommerce\Bundle\ShippingBundle\Adapter\ShippingCalculatorAdapterInterface;
 
 /**
  * Class AbstractShippingMethodCalculator
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractShippingMethodCalculator implements ShippingMethodCalculatorInterface
+abstract class AbstractShippingMethodCalculator extends AbstractContainerAware implements ShippingMethodCalculatorInterface
 {
     /**
-     * @var null
+     * @var string
      */
-    protected $alias = null;
+    protected $alias;
+
+    /**
+     * @var ShippingCalculatorAdapterCollection
+     */
+    protected $adapters;
 
     /**
      * @var CurrencyHelperInterface
@@ -32,22 +40,23 @@ abstract class AbstractShippingMethodCalculator implements ShippingMethodCalcula
     protected $currencyHelper;
 
     /**
-     * Constructor
+     * AbstractShippingMethodCalculator constructor.
      *
-     * @param CurrencyHelperInterface $currencyHelper
+     * @param string                              $alias
+     * @param ShippingCalculatorAdapterCollection $adapters
      */
-    public function __construct(CurrencyHelperInterface $currencyHelper)
+    public function __construct(string $alias, ShippingCalculatorAdapterCollection $adapters)
     {
-        $this->currencyHelper = $currencyHelper;
+        $this->alias    = $alias;
+        $this->adapters = $adapters;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    abstract public function getName();
+    public function getAlias() : string
+    {
+        return $this->alias;
+    }
 
-    /**
-     * {@inheritdoc}
-     */
-    abstract public function getAlias();
+    protected function getAdapter($resource) : ShippingCalculatorAdapterInterface
+    {
+    }
 }

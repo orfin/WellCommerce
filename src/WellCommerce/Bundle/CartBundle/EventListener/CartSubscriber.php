@@ -11,8 +11,8 @@
  */
 namespace WellCommerce\Bundle\CartBundle\EventListener;
 
-use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
+use WellCommerce\Bundle\CartBundle\Context\Front\CartContextInterface;
 use WellCommerce\Bundle\CartBundle\Manager\Front\CartManagerInterface;
 use WellCommerce\Bundle\CartBundle\Visitor\CartVisitorTraverserInterface;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
@@ -25,28 +25,6 @@ use WellCommerce\Bundle\DoctrineBundle\Event\ResourceEvent;
  */
 class CartSubscriber extends AbstractEventSubscriber
 {
-    /**
-     * @var CartManagerInterface
-     */
-    protected $cartManager;
-
-    /**
-     * @var CartVisitorTraverserInterface
-     */
-    protected $cartVisitorTraverser;
-
-    /**
-     * Constructor
-     *
-     * @param CartManagerInterface          $cartManager
-     * @param CartVisitorTraverserInterface $cartVisitorTraverser
-     */
-    public function __construct(CartManagerInterface $cartManager, CartVisitorTraverserInterface $cartVisitorTraverser)
-    {
-        $this->cartManager          = $cartManager;
-        $this->cartVisitorTraverser = $cartVisitorTraverser;
-    }
-
     public static function getSubscribedEvents()
     {
         return [
@@ -54,21 +32,42 @@ class CartSubscriber extends AbstractEventSubscriber
             'cart.pre_create'        => ['onCartChangedEvent', 0],
             'cart.pre_update'        => ['onCartChangedEvent', 0],
             'cart.post_init'         => ['onCartInitEvent', 0],
+            'order.post_create'      => ['onOrderPostCreateEvent', 0],
         ];
     }
-
+    
     public function onKernelController()
     {
-        $this->cartManager->initializeCart();
+        $this->getCartManager()->initializeCart();
+    }
+
+    public function onOrderPostCreateEvent()
+    {
+        $this->getCartManager()->abandonCurrentCart();
     }
 
     public function onCartInitEvent(ResourceEvent $event)
     {
-        $this->cartVisitorTraverser->traverse($event->getResource());
+        $this->getCartVisitorTraverser()->traverse($event->getResource());
     }
-
+    
     public function onCartChangedEvent(ResourceEvent $event)
     {
-        $this->cartVisitorTraverser->traverse($event->getResource());
+        $this->getCartVisitorTraverser()->traverse($event->getResource());
+    }
+
+    protected function getCartContext() : CartContextInterface
+    {
+        return $this->container->get('cart.context.front');
+    }
+    
+    protected function getCartManager() : CartManagerInterface
+    {
+        return $this->container->get('cart.manager.front');
+    }
+    
+    protected function getCartVisitorTraverser() : CartVisitorTraverserInterface
+    {
+        return $this->container->get('cart.visitor.traverser');
     }
 }

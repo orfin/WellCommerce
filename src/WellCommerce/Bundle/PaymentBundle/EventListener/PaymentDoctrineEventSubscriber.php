@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\PaymentBundle\EventListener;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
+use Doctrine\ORM\Id\UuidGenerator;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
 use WellCommerce\Bundle\PaymentBundle\Manager\Front\PaymentStateHistoryManager;
@@ -30,11 +31,22 @@ class PaymentDoctrineEventSubscriber implements EventSubscriber
     public function getSubscribedEvents()
     {
         return [
+            'prePersist',
             'postPersist',
             'postUpdate',
         ];
     }
-    
+
+    public function prePersist(LifecycleEventArgs $args)
+    {
+        $entity = $args->getObject();
+        if ($entity instanceof PaymentInterface) {
+            $generator = new UuidGenerator();
+            $token     = $generator->generate($args->getObjectManager(), null);
+            $entity->setToken($token);
+        }
+    }
+
     public function postUpdate(LifecycleEventArgs $args)
     {
         $this->onPaymentBeforeSave($args);
@@ -44,7 +56,7 @@ class PaymentDoctrineEventSubscriber implements EventSubscriber
     {
         $this->onPaymentBeforeSave($args);
     }
-    
+
     public function onPaymentBeforeSave(LifecycleEventArgs $args)
     {
         $entity = $args->getObject();
@@ -52,7 +64,7 @@ class PaymentDoctrineEventSubscriber implements EventSubscriber
             $this->getPaymentStateHistoryManager()->createPaymentStateHistory($entity);
         }
     }
-    
+
     protected function getPaymentStateHistoryManager() : PaymentStateHistoryManager
     {
         return $this->container->get('payment_state_history.manager.front');

@@ -28,19 +28,6 @@ class OrderTotalCollector extends AbstractDataCollector
      */
     public function visitOrder(OrderInterface $order)
     {
-        $total = $this->calculateOrderTotal($order);
-        $order->setOrderTotal($total);
-    }
-
-    /**
-     * Calculates order's total values
-     *
-     * @param OrderInterface $order
-     *
-     * @return OrderTotal
-     */
-    protected function calculateOrderTotal(OrderInterface $order)
-    {
         $totals         = $order->getTotals();
         $targetCurrency = $order->getCurrency();
         $orderTotal     = new OrderTotal();
@@ -72,7 +59,7 @@ class OrderTotalCollector extends AbstractDataCollector
         $orderTotal->setNetAmount($netTotal);
         $orderTotal->setTaxAmount($taxTotal);
 
-        return $orderTotal;
+        $order->setOrderTotal($orderTotal);
     }
 
     /**

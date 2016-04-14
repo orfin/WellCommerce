@@ -13,11 +13,8 @@
 namespace WellCommerce\Bundle\PaymentBundle\Processor;
 
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
-use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 use WellCommerce\Bundle\PaymentBundle\Configurator\PaymentMethodConfiguratorInterface;
-use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
-use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodInterface;
-use WellCommerce\Bundle\PaymentBundle\Manager\Front\PaymentManagerInterface;
+use WellCommerce\Bundle\PaymentBundle\Gateway\PaymentGatewayInterface;
 
 /**
  * Class AbstractPaymentProcessor
@@ -27,18 +24,33 @@ use WellCommerce\Bundle\PaymentBundle\Manager\Front\PaymentManagerInterface;
 abstract class AbstractPaymentProcessor extends AbstractContainerAware implements PaymentProcessorInterface
 {
     /**
-     * @var PaymentManagerInterface
+     * @var PaymentGatewayInterface
+     */
+    protected $gateway;
+    
+    /**
+     * @var PaymentMethodConfiguratorInterface
      */
     protected $configurator;
     
     /**
      * AbstractPaymentProcessor constructor.
      *
+     * @param PaymentGatewayInterface            $gateway
      * @param PaymentMethodConfiguratorInterface $configurator
      */
-    public function __construct(PaymentMethodConfiguratorInterface $configurator)
+    public function __construct(PaymentGatewayInterface $gateway, PaymentMethodConfiguratorInterface $configurator)
     {
+        $this->gateway      = $gateway;
         $this->configurator = $configurator;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function getGateway() : PaymentGatewayInterface
+    {
+        return $this->gateway;
     }
     
     /**
@@ -47,26 +59,5 @@ abstract class AbstractPaymentProcessor extends AbstractContainerAware implement
     public function getConfigurator() : PaymentMethodConfiguratorInterface
     {
         return $this->configurator;
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function getConfiguration(PaymentMethodInterface $paymentMethod) : array
-    {
-        $this->configurator->configure($paymentMethod);
-        
-        return $this->configurator->getConfiguration();
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function preparePaymentForOrder(PaymentInterface $payment, OrderInterface $order)
-    {
-        $payment->setOrder($order);
-        $payment->setState(PaymentInterface::PAYMENT_STATE_CREATED);
-        $payment->setProcessor($this->getConfigurator()->getName());
-        $payment->setConfiguration($this->getConfiguration($order->getPaymentMethod()));
     }
 }
