@@ -1,3 +1,10 @@
+doctrine:
+    orm:
+        resolve_target_entities:
+            WellCommerce\Bundle\OrderBundle\Entity\OrderInterface: WellCommerce\Bundle\OrderBundle\Entity\Order
+            WellCommerce\Bundle\OrderBundle\Entity\OrderSummaryInterface: WellCommerce\Bundle\OrderBundle\Entity\OrderSummary
+            WellCommerce\Bundle\OrderBundle\Entity\OrderProductTotalInterface: WellCommerce\Bundle\OrderBundle\Entity\OrderProductTotal
+
 well_commerce_order:
     services:
         order:
@@ -11,6 +18,18 @@ well_commerce_order:
                 exposed: true
                 dataset: order.dataset.admin
                 manager: order.manager.admin
+        order_modifier:
+            auto_services:
+                factory: WellCommerce\Bundle\CartBundle\Factory\OrderModifierFactory
+            orm_configuration:
+                mapping: "@WellCommerceOrderBundle/Resources/config/doctrine/OrderModifier.orm.yml"
+                entity: WellCommerce\Bundle\OrderBundle\Entity\OrderModifier
+        order_summary:
+            auto_services:
+                factory: WellCommerce\Bundle\OrderBundle\Factory\OrderSummaryFactory
+            orm_configuration:
+                mapping: "@WellCommerceOrderBundle/Resources/config/doctrine/OrderSummary.orm.yml"
+                entity: WellCommerce\Bundle\OrderBundle\Entity\OrderSummary
         order_product:
             auto_services:
                 factory: WellCommerce\Bundle\OrderBundle\Factory\OrderProductFactory
@@ -18,6 +37,12 @@ well_commerce_order:
             orm_configuration:
                 mapping: "@WellCommerceOrderBundle/Resources/config/doctrine/OrderProduct.orm.yml"
                 entity: WellCommerce\Bundle\OrderBundle\Entity\OrderProduct
+        order_product_total:
+            auto_services:
+                factory: WellCommerce\Bundle\OrderBundle\Factory\OrderProductTotalFactory
+            orm_configuration:
+                mapping: "@WellCommerceOrderBundle/Resources/config/doctrine/OrderProductTotal.orm.yml"
+                entity: WellCommerce\Bundle\OrderBundle\Entity\OrderProductTotal
         order_status:
             auto_services:
                 factory: WellCommerce\Bundle\OrderBundle\Factory\OrderStatusFactory
@@ -55,21 +80,10 @@ well_commerce_order:
             orm_configuration:
                 mapping: "@WellCommerceOrderBundle/Resources/config/doctrine/OrderStatusGroupTranslation.orm.yml"
                 entity: WellCommerce\Bundle\OrderBundle\Entity\OrderStatusGroupTranslation
-        order_total:
-            auto_services:
-                factory: WellCommerce\Bundle\OrderBundle\Factory\OrderTotalFactory
-            orm_configuration:
-                mapping: "@WellCommerceOrderBundle/Resources/config/doctrine/OrderTotal.orm.yml"
-                entity: WellCommerce\Bundle\OrderBundle\Entity\OrderTotal
-        order_total_detail:
-            auto_services:
-                factory: WellCommerce\Bundle\OrderBundle\Factory\OrderTotalDetailFactory
-            orm_configuration:
-                mapping: "@WellCommerceOrderBundle/Resources/config/doctrine/OrderTotalDetail.orm.yml"
-                entity: WellCommerce\Bundle\OrderBundle\Entity\OrderTotalDetail
-        order_summary:
-            auto_services:
-                factory: WellCommerce\Bundle\OrderBundle\Factory\OrderSummaryFactory
-            orm_configuration:
-                mapping: "@WellCommerceOrderBundle/Resources/config/doctrine/OrderSummary.orm.yml"
-                entity: WellCommerce\Bundle\OrderBundle\Entity\OrderSummary
+
+parameters:
+    order_visitor_hierarchy:
+        product_total: 0
+        shipping_method: 10
+        payment_method: 20
+        summary: 900

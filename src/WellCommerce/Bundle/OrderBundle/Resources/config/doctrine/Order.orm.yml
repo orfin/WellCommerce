@@ -1,5 +1,7 @@
 WellCommerce\Bundle\OrderBundle\Entity\Order:
     type: entity
+    cache:
+        usage: NONSTRICT_READ_WRITE
     table: orders
     repositoryClass: WellCommerce\Bundle\OrderBundle\Repository\OrderRepository
     id:
@@ -24,6 +26,13 @@ WellCommerce\Bundle\OrderBundle\Entity\Order:
             class: WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetails
             columnPrefix: contact_details_
     fields:
+        confirmed:
+            type: boolean
+            nullable: false
+        number:
+            type: string
+            length: 32
+            nullable: true
         sessionId:
             type: string
             nullable: false

@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\OrderBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
-use WellCommerce\Bundle\CartBundle\Entity\CartAwareInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientAwareInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddressAwareInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetailsAwareInterface;
@@ -21,6 +20,7 @@ use WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddressAwareInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CouponBundle\Entity\CouponAwareInterface;
 use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
+use WellCommerce\Bundle\OrderBundle\Visitor\OrderVisitorInterface;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodAwareInterface;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodAwareInterface;
@@ -44,52 +44,64 @@ interface OrderInterface extends
     ShippingMethodAwareInterface
 {
     public function getCurrency() : string;
-    
+
     public function setCurrency(string $currency);
 
     public function getCurrencyRate() : float;
 
     public function setCurrencyRate(float $currencyRate);
-    
-    public function getSummary() : OrderSummaryInterface;
-    
-    public function setSummary(OrderSummaryInterface $summary);
-    
+
     public function getSessionId() : string;
-    
+
     public function setSessionId(string $sessionId);
-    
+
     public function addProduct(OrderProductInterface $orderProduct);
-    
+
     public function removeProduct(OrderProductInterface $orderProduct);
-    
+
     public function getProducts() : Collection;
-    
+
     public function setProducts(Collection $products);
-    
-    public function getTotals() : Collection;
-    
-    public function setTotals(Collection $totals);
-    
-    public function addTotal(OrderTotalDetailInterface $total);
-    
+
+    public function getProductTotal() : OrderProductTotalInterface;
+
+    public function setProductTotal(OrderProductTotalInterface $productTotal);
+
+    public function addModifier(OrderModifierInterface $modifier);
+
+    public function hasModifier(string $name) : bool;
+
+    public function removeModifier(string $name);
+
+    public function getModifier(string $name) : OrderModifierInterface;
+
+    public function getModifiers() : Collection;
+
+    public function setModifiers(Collection $modifiers);
+
+    public function getSummary() : OrderSummaryInterface;
+
+    public function setSummary(OrderSummaryInterface $summary);
+
     public function getCurrentStatus() : OrderStatusInterface;
-    
+
     public function setCurrentStatus(OrderStatusInterface $currentStatus);
-    
-    public function getOrderStatusHistory() : Collection;
-    
+
     public function setOrderStatusHistory(Collection $orderStatusHistory);
-    
+
+    public function getOrderStatusHistory() : Collection;
+
     public function addOrderStatusHistory(OrderStatusHistoryInterface $orderStatusHistory);
-    
+
     public function getComment() : string;
-    
+
     public function setComment(string $comment);
-    
+
     public function getPayments() : Collection;
-    
+
     public function setPayments(Collection $payments);
-    
+
     public function addPayment(PaymentInterface $payment);
+
+    public function acceptVisitor(OrderVisitorInterface $visitor);
 }

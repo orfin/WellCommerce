@@ -29,5 +29,6 @@ class WellCommerceOrderBundle extends Bundle
         $container->addCompilerPass(new Compiler\AutoRegisterServicesPass());
         $container->addCompilerPass(new Compiler\MappingCompilerPass());
         $container->addCompilerPass(new Compiler\RegisterOrderVisitorPass());
+        $container->addCompilerPass(new Compiler\RegisterOrderModifierPass());
     }
 }

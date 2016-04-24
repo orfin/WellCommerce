@@ -17,11 +17,7 @@ use WellCommerce\Bundle\CartBundle\Manager\Front\CartManagerInterface;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
 use WellCommerce\Bundle\DoctrineBundle\Event\ResourceEvent;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
-use WellCommerce\Bundle\OrderBundle\Entity\OrderTotalDetailInterface;
-use WellCommerce\Bundle\OrderBundle\Factory\OrderTotalFactory;
-use WellCommerce\Bundle\OrderBundle\Manager\Front\OrderConfirmationManager;
-use WellCommerce\Bundle\OrderBundle\Manager\Front\OrderManager;
-use WellCommerce\Bundle\OrderBundle\Visitor\OrderVisitorTraverserInterface;
+use WellCommerce\Bundle\OrderBundle\Visitor\OrderVisitorTraverser;
 
 /**
  * Class OrderSubscriber
@@ -68,31 +64,8 @@ final class OrderSubscriber extends AbstractEventSubscriber
     {
         $order = $event->getResource();
         if ($order instanceof OrderInterface) {
-            $this->removeTotals($order);
-            $this->recalculateShippingTotal($order);
             $this->traverseOrder($order);
         }
-    }
-    
-    protected function recalculateShippingTotal(OrderInterface $order)
-    {
-        $grossAmount = $order->getShippingTotal()->getGrossAmount();
-        $taxRate     = $order->getShippingMethod()->getTax()->getValue();
-        $currency    = $order->getCurrency();
-        $orderTotal  = $this->getOrderTotalFactory()->createFromSpecifiedValues($grossAmount, $taxRate, $currency);
-        
-        $order->setShippingTotal($orderTotal);
-    }
-    
-    protected function removeTotals(OrderInterface $order)
-    {
-        $em     = $this->getDoctrineHelper()->getEntityManager();
-        $totals = $order->getTotals();
-        $totals->map(function (OrderTotalDetailInterface $total) use ($em) {
-            $em->remove($total);
-        });
-        
-        $em->flush();
     }
     
     private function traverseOrder(OrderInterface $order)
@@ -100,7 +73,7 @@ final class OrderSubscriber extends AbstractEventSubscriber
         $this->getOrderVisitorTraverser()->traverse($order);
     }
 
-    private function getOrderVisitorTraverser() : OrderVisitorTraverserInterface
+    private function getOrderVisitorTraverser() : OrderVisitorTraverser
     {
         return $this->container->get('order.visitor.traverser');
     }
@@ -113,15 +86,5 @@ final class OrderSubscriber extends AbstractEventSubscriber
     private function getCartContext() : CartContextInterface
     {
         return $this->container->get('cart.context.front');
-    }
-
-    private function getOrderTotalFactory() : OrderTotalFactory
-    {
-        return $this->container->get('order_total.factory');
-    }
-
-    private function getOrderConfirmationManager() : OrderConfirmationManager
-    {
-        return $this->container->get('order_confirmation.manager.front');
     }
 }

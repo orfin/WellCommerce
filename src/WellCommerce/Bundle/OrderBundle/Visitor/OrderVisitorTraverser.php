@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Visitor;
 
+use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 
 /**
@@ -19,30 +20,27 @@ use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class OrderVisitorTraverser implements OrderVisitorTraverserInterface
+final class OrderVisitorTraverser
 {
     /**
-     * @var OrderVisitorCollection
+     * @var Collection
      */
-    protected $collection;
+    private $visitors;
 
     /**
-     * Constructor
+     * OrderVisitorTraverser constructor.
      *
-     * @param OrderVisitorCollection $collection
+     * @param Collection $visitors
      */
-    public function __construct(OrderVisitorCollection $collection)
+    public function __construct(Collection $visitors)
     {
-        $this->collection = $collection;
+        $this->visitors = $visitors;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function traverse(OrderInterface $order)
     {
-        foreach ($this->collection->all() as $visitor) {
+        $this->visitors->map(function (OrderVisitorInterface $visitor) use ($order) {
             $visitor->visitOrder($order);
-        }
+        });
     }
 }

@@ -19,13 +19,9 @@ namespace WellCommerce\Bundle\OrderBundle\Entity;
  */
 interface OrderAwareInterface
 {
-    /**
-     * @param OrderInterface $order
-     */
     public function setOrder(OrderInterface $order);
 
-    /**
-     * @return OrderInterface
-     */
     public function getOrder() : OrderInterface;
+    
+    public function hasOrder() : bool;
 }

@@ -108,22 +108,22 @@
 
         <service id="payment.processor.collection" class="WellCommerce\Bundle\PaymentBundle\Processor\PaymentProcessorCollection" />
 
-        <service id="payment_method.cart.visitor" class="WellCommerce\Bundle\PaymentBundle\Visitor\PaymentMethodCartVisitor">
-            <argument type="service" id="cart_modifier.manager.front"/>
-            <tag name="cart.visitor" alias="payment_method"/>
+        <service id="payment_method.order.visitor" class="WellCommerce\Bundle\PaymentBundle\Visitor\PaymentMethodOrderVisitor">
+            <argument type="service" id="order.modifier.provider"/>
+            <tag name="order.visitor" alias="payment_method"/>
         </service>
 
-        <service id="payment_surcharge.cart.modifier.configurator" class="WellCommerce\Bundle\CartBundle\Configurator\CartModifierConfigurator">
+        <service id="payment_surcharge.order.modifier.configurator" class="WellCommerce\Bundle\OrderBundle\Configurator\OrderModifierConfigurator">
             <argument key="name">payment_surcharge</argument>
-            <argument key="description">cart.label.payment_surcharge</argument>
+            <argument key="description">order.label.payment_surcharge</argument>
             <argument key="subtraction">false</argument>
             <argument key="hierarchy">900</argument>
         </service>
 
-        <service id="payment_surcharge.cart.modifier" class="WellCommerce\Bundle\CartBundle\Entity\CartModifier">
-            <factory service="cart_modifier.factory" method="create" />
-            <configurator service="payment_surcharge.cart.modifier.configurator" method="configure" />
-            <tag name="cart.modifier" alias="payment_surcharge"/>
+        <service id="payment_surcharge.order.modifier" class="WellCommerce\Bundle\OrderBundle\Entity\OrderModifier">
+            <factory service="order_modifier.factory" method="create" />
+            <configurator service="payment_surcharge.order.modifier.configurator" method="configure" />
+            <tag name="order.modifier" alias="payment_surcharge"/>
         </service>
     </services>
 </container>

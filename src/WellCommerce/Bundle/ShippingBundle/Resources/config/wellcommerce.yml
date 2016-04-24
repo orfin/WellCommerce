@@ -1,3 +1,8 @@
+doctrine:
+    orm:
+        resolve_target_entities:
+            WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface: WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethod
+
 well_commerce_shipping:
     services:
         shipping_method:

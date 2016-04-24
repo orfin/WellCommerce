@@ -12,17 +12,14 @@
 namespace WellCommerce\Bundle\OrderBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
-use WellCommerce\Bundle\CartBundle\Entity\CartAwareTrait;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientAwareTrait;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddressAwareTrait;
-use WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddressInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetailsAwareTrait;
-use WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetailsInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddressAwareTrait;
-use WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddressInterface;
 use WellCommerce\Bundle\CouponBundle\Entity\CouponAwareTrait;
 use WellCommerce\Bundle\DoctrineBundle\Behaviours\Timestampable\TimestampableTrait;
 use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
+use WellCommerce\Bundle\OrderBundle\Visitor\OrderVisitorInterface;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodAwareTrait;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodAwareTrait;
@@ -59,9 +56,9 @@ class Order extends AbstractEntity implements OrderInterface
      * @var float
      */
     protected $currencyRate;
-
+    
     /**
-     * @var Collection
+     * @var Collection|PaymentInterface[]
      */
     protected $payments;
     
@@ -76,19 +73,24 @@ class Order extends AbstractEntity implements OrderInterface
     protected $currentStatus;
     
     /**
-     * @var Collection
+     * @var Collection|OrderStatusHistoryInterface[]
      */
     protected $orderStatusHistory;
     
     /**
-     * @var Collection
+     * @var OrderProductTotalInterface
      */
-    private $modifiers;
+    protected $productTotal;
+    
+    /**
+     * @var Collection|OrderModifierInterface[]
+     */
+    protected $modifiers;
     
     /**
      * @var OrderSummaryInterface
      */
-    private $summary;
+    protected $summary;
     
     /**
      * @var string
@@ -142,32 +144,61 @@ class Order extends AbstractEntity implements OrderInterface
     
     public function setProducts(Collection $products)
     {
-        $this->products = $products;
+        $products->map(function (OrderProductInterface $orderProduct) {
+            $this->addProduct($orderProduct);
+        });
     }
 
+    public function getProductTotal() : OrderProductTotalInterface
+    {
+        return $this->productTotal;
+    }
+
+    public function setProductTotal(OrderProductTotalInterface $productTotal)
+    {
+        $this->productTotal = $productTotal;
+    }
+
+    public function addModifier(OrderModifierInterface $modifier)
+    {
+        $this->modifiers->set($modifier->getName(), $modifier);
+    }
+    
+    public function hasModifier(string $name) : bool
+    {
+        return $this->modifiers->containsKey($name);
+    }
+    
+    public function removeModifier(string $name)
+    {
+        $this->modifiers->remove($name);
+    }
+    
+    public function getModifier(string $name) : OrderModifierInterface
+    {
+        return $this->modifiers->get($name);
+    }
+    
+    public function getModifiers() : Collection
+    {
+        return $this->modifiers;
+    }
+    
+    public function setModifiers(Collection $modifiers)
+    {
+        $modifiers->map(function (OrderModifierInterface $modifier) {
+            $this->addModifier($modifier);
+        });
+    }
+    
     public function getSummary() : OrderSummaryInterface
     {
         return $this->summary;
     }
-
+    
     public function setSummary(OrderSummaryInterface $summary)
     {
         $this->summary = $summary;
-    }
-
-    public function getTotals() : Collection
-    {
-        return $this->totals;
-    }
-    
-    public function setTotals(Collection $totals)
-    {
-        $this->totals = $totals;
-    }
-    
-    public function addTotal(OrderTotalDetailInterface $orderTotal)
-    {
-        $this->totals->add($orderTotal);
     }
     
     public function getCurrentStatus() : OrderStatusInterface
@@ -190,98 +221,38 @@ class Order extends AbstractEntity implements OrderInterface
         return $this->orderStatusHistory;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function addOrderStatusHistory(OrderStatusHistoryInterface $orderStatusHistory)
     {
         $this->orderStatusHistory->add($orderStatusHistory);
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function getComment() : string
     {
         return $this->comment;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function setComment(string $comment)
     {
         $this->comment = $comment;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function getPayments() : Collection
     {
         return $this->payments;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function setPayments(Collection $payments)
     {
         $this->payments = $payments;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function addPayment(PaymentInterface $payment)
     {
         $this->payments[] = $payment;
     }
     
-    /**
-     * {@inheritdoc}
-     */
-    public function getShippingCostQuantity() : int
+    public function acceptVisitor(OrderVisitorInterface $visitor)
     {
-        $quantity = 0;
-        $this->products->map(function (OrderProductInterface $orderProduct) use (&$quantity) {
-            $quantity += $orderProduct->getQuantity();
-        });
-        
-        return $quantity;
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function getShippingCostWeight() : float
-    {
-        $weight = 0;
-        $this->products->map(function (OrderProductInterface $orderProduct) use (&$weight) {
-            $weight += $orderProduct->getQuantity() * $orderProduct->getWeight();
-        });
-        
-        return $weight;
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function getShippingCostGrossPrice() : float
-    {
-        $totalGrossPrice = 0;
-        $this->products->map(function (OrderProductInterface $orderProduct) use (&$totalGrossPrice) {
-            $totalGrossPrice += $orderProduct->getSellPrice()->getGrossAmount();
-        });
-        
-        return $totalGrossPrice;
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function getShippingCostCurrency() : string
-    {
-        return $this->currency;
+        $visitor->visitOrder($this);
     }
 }

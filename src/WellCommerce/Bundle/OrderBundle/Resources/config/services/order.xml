@@ -17,51 +17,30 @@
             <argument type="service" id="event_dispatcher"/>
         </service>
 
-        <service id="order.visitor.collection" class="WellCommerce\Bundle\OrderBundle\Visitor\OrderVisitorCollection"/>
+        <service id="order.modifier.collection" class="Doctrine\Common\Collections\ArrayCollection" shared="false" />
+
+        <service id="order.modifier.provider" class="WellCommerce\Bundle\OrderBundle\Provider\OrderModifierProvider">
+            <argument type="service" id="order.modifier.collection"/>
+        </service>
+
+        <service id="order.visitor.collection" class="Doctrine\Common\Collections\ArrayCollection" shared="false" />
 
         <service id="order.visitor.traverser" class="WellCommerce\Bundle\OrderBundle\Visitor\OrderVisitorTraverser">
             <argument type="service" id="order.visitor.collection"/>
         </service>
 
-        <service id="order_cart_total.visitor" class="WellCommerce\Bundle\OrderBundle\Collector\OrderProductTotalCollector">
-            <argument type="service" id="order_total_detail.factory"/>
+        <service id="product_total.order.visitor" class="WellCommerce\Bundle\OrderBundle\Visitor\OrderProductTotalVisitor">
             <argument type="service" id="currency.helper"/>
-            <tag name="order.visitor"/>
+            <tag name="order.visitor" alias="product_total"/>
         </service>
 
-        <service id="order_shipping_cost.visitor" class="WellCommerce\Bundle\OrderBundle\Collector\OrderShippingCostCollector">
-            <argument type="service" id="order_total_detail.factory"/>
+        <service id="summary.order.visitor" class="WellCommerce\Bundle\OrderBundle\Visitor\OrderSummaryVisitor">
             <argument type="service" id="currency.helper"/>
-            <tag name="order.visitor"/>
-        </service>
-
-        <service id="order_payment_surcharge.visitor" class="WellCommerce\Bundle\OrderBundle\Collector\OrderPaymentSurchargeCollector">
-            <argument type="service" id="order_total_detail.factory"/>
-            <argument type="service" id="currency.helper"/>
-            <tag name="order.visitor"/>
-        </service>
-
-        <service id="order_client_discount.visitor" class="WellCommerce\Bundle\OrderBundle\Collector\OrderClientDiscountCollector">
-            <argument type="service" id="order_total_detail.factory"/>
-            <argument type="service" id="currency.helper"/>
-            <tag name="order.visitor"/>
-        </service>
-
-        <service id="order_coupon_discount.visitor" class="WellCommerce\Bundle\OrderBundle\Collector\OrderCouponDiscountCollector">
-            <argument type="service" id="order_total_detail.factory"/>
-            <argument type="service" id="currency.helper"/>
-            <tag name="order.visitor"/>
-        </service>
-
-        <service id="order_total.visitor" class="WellCommerce\Bundle\OrderBundle\Collector\OrderTotalCollector">
-            <argument type="service" id="order_total_detail.factory"/>
-            <argument type="service" id="currency.helper"/>
-            <tag name="order.visitor"/>
+            <argument type="service" id="order_summary.factory"/>
+            <tag name="order.visitor" alias="summary"/>
         </service>
 
         <service id="order.subscriber" class="WellCommerce\Bundle\OrderBundle\EventListener\OrderSubscriber">
-            <argument type="service" id="order.visitor.traverser"/>
-            <argument type="service" id="order_total.factory"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>

@@ -1,3 +1,8 @@
+doctrine:
+    orm:
+        resolve_target_entities:
+            WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodInterface: WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod
+
 well_commerce_payment:
     services:
         payment:

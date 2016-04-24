@@ -22,14 +22,4 @@ use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 interface OrderVisitorInterface
 {
     public function visitOrder(OrderInterface $order);
-
-    /**
-     * @return int
-     */
-    public function getPriority() : int;
-
-    /**
-     * @return string
-     */
-    public function getAlias() : int;
 }

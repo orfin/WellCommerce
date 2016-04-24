@@ -34,6 +34,10 @@ interface OrderProductInterface extends
 
     public function setQuantity(int $quantity);
 
+    public function increaseQuantity(int $increase);
+
+    public function decreaseQuantity(int $decrease);
+
     public function getSellPrice() : PriceInterface;
 
     public function setSellPrice(PriceInterface $sellPrice);
@@ -45,4 +49,8 @@ interface OrderProductInterface extends
     public function getWeight() : float;
 
     public function setWeight(float $weight);
+
+    public function getOptions() : array;
+
+    public function setOptions(array $options);
 }

@@ -26,5 +26,24 @@
         <service id="coupon.checker" class="WellCommerce\Bundle\CouponBundle\Checker\CouponChecker">
             <argument type="service" id="order.repository"/>
         </service>
+
+        <service id="coupon.order.visitor" class="WellCommerce\Bundle\CouponBundle\Visitor\CouponOrderVisitor">
+            <argument type="service" id="order.modifier.provider"/>
+            <argument type="service" id="currency.helper"/>
+            <tag name="order.visitor" alias="coupon"/>
+        </service>
+
+        <service id="coupon_discount.order.modifier.configurator" class="WellCommerce\Bundle\OrderBundle\Configurator\OrderModifierConfigurator">
+            <argument key="name">coupon_discount</argument>
+            <argument key="description">order.label.coupon_discount</argument>
+            <argument key="subtraction">true</argument>
+            <argument key="hierarchy">100</argument>
+        </service>
+
+        <service id="coupon_discount.order.modifier" class="WellCommerce\Bundle\OrderBundle\Entity\OrderModifier">
+            <factory service="order_modifier.factory" method="create" />
+            <configurator service="coupon_discount.order.modifier.configurator" method="configure" />
+            <tag name="order.modifier" alias="coupon_discount"/>
+        </service>
     </services>
 </container>

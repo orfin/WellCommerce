@@ -1,6 +1,6 @@
-WellCommerce\Bundle\CartBundle\Entity\CartModifier:
+WellCommerce\Bundle\OrderBundle\Entity\OrderModifier:
     type: entity
-    table: cart_modifier
+    table: order_modifier
     id:
         id:
             type: integer
@@ -48,10 +48,10 @@ WellCommerce\Bundle\CartBundle\Entity\CartModifier:
             column: currency
     manyToOne:
         order:
-            targetEntity: WellCommerce\Bundle\CartBundle\Entity\CartInterface
+            targetEntity: WellCommerce\Bundle\OrderBundle\Entity\OrderInterface
             fetch: LAZY
             inversedBy: totals
             joinColumns:
-                cart_id:
+                order_id:
                     referencedColumnName: id
                     onDelete: CASCADE

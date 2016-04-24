@@ -1,3 +1,8 @@
+doctrine:
+    orm:
+        resolve_target_entities:
+            WellCommerce\Bundle\ClientBundle\Entity\ClientInterface: WellCommerce\Bundle\ClientBundle\Entity\Client
+
 well_commerce_client:
     services:
         client:

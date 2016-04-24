@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\OrderBundle\Factory;
 
 use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderModifierInterface;
 
 /**
  * Class OrderModifierFactory
@@ -21,11 +22,11 @@ use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
  */
 final class OrderModifierFactory extends AbstractEntityFactory
 {
-    protected $supportsInterface = CartModifierInterface::class;
+    protected $supportsInterface = OrderModifierInterface::class;
 
-    public function create() : CartModifierInterface
+    public function create() : OrderModifierInterface
     {
-        /** @var $modifier CartModifierInterface */
+        /** @var $modifier OrderModifierInterface */
         $modifier = $this->init();
         $modifier->setGrossAmount(0);
         $modifier->setNetAmount(0);

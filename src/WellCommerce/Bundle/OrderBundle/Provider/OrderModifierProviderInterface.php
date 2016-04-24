@@ -10,15 +10,17 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CartBundle\Entity;
+namespace WellCommerce\Bundle\OrderBundle\Provider;
 
-use WellCommerce\Bundle\OrderBundle\Entity\OrderProductTotal;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderModifierInterface;
 
 /**
- * Class CartProductTotal
+ * Interface OrderModifierProviderInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CartProductTotal extends OrderProductTotal implements CartProductTotalInterface
+interface OrderModifierProviderInterface
 {
+    public function getOrderModifier(OrderInterface $order, string $name) : OrderModifierInterface;
 }

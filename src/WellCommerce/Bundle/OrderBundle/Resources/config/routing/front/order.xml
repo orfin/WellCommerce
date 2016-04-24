@@ -4,7 +4,32 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-    <route id="front.order.confirm" path="/confirm">
+    <route id="front.order.cart" path="cart">
+        <default key="_controller">order.controller.front:cartAction</default>
+    </route>
+
+    <route id="front.order.address" path="address">
+        <default key="_controller">order.controller.front:addressAction</default>
+    </route>
+
+    <route id="front.order.confirm" path="confirm">
         <default key="_controller">order.controller.front:confirmAction</default>
+    </route>
+
+    <route id="front.order_product.add" path="product/add/{id},{variant},{quantity}">
+        <default key="_controller">order.controller.front:addProductAction</default>
+        <default key="variant">null</default>
+        <default key="quantity">1</default>
+        <option key="expose">true</option>
+    </route>
+
+    <route id="front.order_product.edit" path="product/edit/{id},{quantity}">
+        <default key="_controller">order.controller.front:editProductAction</default>
+        <option key="expose">true</option>
+    </route>
+
+    <route id="front.order_product.delete" path="product/delete/{id}">
+        <default key="_controller">order.controller.front:deleteProductAction</default>
+        <option key="expose">true</option>
     </route>
 </routes>

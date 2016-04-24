@@ -22,14 +22,8 @@ use WellCommerce\Bundle\OrderBundle\Entity\OrderProductInterface;
  */
 class OrderProductFactory extends AbstractEntityFactory
 {
-    /**
-     * @var string
-     */
     protected $supportsInterface = OrderProductInterface::class;
 
-    /**
-     * @return OrderProductInterface
-     */
     public function create() : OrderProductInterface
     {
         /** @var  $orderProduct OrderProductInterface */

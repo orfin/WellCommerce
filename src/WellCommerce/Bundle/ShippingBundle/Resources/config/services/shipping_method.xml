@@ -84,22 +84,23 @@
             <tag name="shipping_method.calculator" alias="price_table"/>
         </service>
 
-        <service id="shipping_method.cart.visitor" class="WellCommerce\Bundle\ShippingBundle\Visitor\ShippingMethodCartVisitor">
-            <argument type="service" id="cart_modifier.manager.front"/>
-            <tag name="cart.visitor" alias="shipping_method"/>
+        <service id="shipping_method.order.visitor" class="WellCommerce\Bundle\ShippingBundle\Visitor\ShippingMethodOrderVisitor">
+            <argument type="service" id="order.modifier.provider"/>
+            <argument type="service" id="shipping_method.provider"/>
+            <tag name="order.visitor" alias="shipping_method"/>
         </service>
 
-        <service id="shipping_cost.cart.modifier.configurator" class="WellCommerce\Bundle\CartBundle\Configurator\CartModifierConfigurator">
+        <service id="shipping_cost.order.modifier.configurator" class="WellCommerce\Bundle\OrderBundle\Configurator\OrderModifierConfigurator">
             <argument key="name">shipping_cost</argument>
-            <argument key="description">cart.label.shipping_cost</argument>
+            <argument key="description">order.label.shipping_cost</argument>
             <argument key="subtraction">false</argument>
             <argument key="hierarchy">0</argument>
         </service>
 
-        <service id="shipping_cost.cart.modifier" class="WellCommerce\Bundle\CartBundle\Entity\CartModifier">
-            <factory service="cart_modifier.factory" method="create" />
-            <configurator service="shipping_cost.cart.modifier.configurator" method="configure" />
-            <tag name="cart.modifier" alias="shipping_cost"/>
+        <service id="shipping_cost.order.modifier" class="WellCommerce\Bundle\OrderBundle\Entity\OrderModifier">
+            <factory service="order_modifier.factory" method="create" />
+            <configurator service="shipping_cost.order.modifier.configurator" method="configure" />
+            <tag name="order.modifier" alias="shipping_cost"/>
         </service>
     </services>
 </container>

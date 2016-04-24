@@ -24,6 +24,7 @@ class OrderProduct extends AbstractEntity implements OrderProductInterface
     protected $buyPrice;
     protected $sellPrice;
     protected $weight;
+    protected $options;
 
     public function getQuantity() : int
     {
@@ -33,6 +34,16 @@ class OrderProduct extends AbstractEntity implements OrderProductInterface
     public function setQuantity(int $quantity)
     {
         $this->quantity = $quantity;
+    }
+
+    public function increaseQuantity(int $increase)
+    {
+        $this->quantity += $increase;
+    }
+
+    public function decreaseQuantity(int $decrease)
+    {
+        $this->quantity -= $decrease;
     }
 
     public function getSellPrice() : PriceInterface
@@ -63,5 +74,15 @@ class OrderProduct extends AbstractEntity implements OrderProductInterface
     public function setWeight(float $weight)
     {
         $this->weight = $weight;
+    }
+    
+    public function getOptions() : array
+    {
+        return $this->options;
+    }
+    
+    public function setOptions(array $options)
+    {
+        $this->options = $options;
     }
 }

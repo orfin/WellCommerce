@@ -1,7 +1,9 @@
 doctrine:
     orm:
         resolve_target_entities:
+            WellCommerce\Bundle\CartBundle\Entity\CartInterface: WellCommerce\Bundle\CartBundle\Entity\Cart
             WellCommerce\Bundle\CartBundle\Entity\CartProductInterface: WellCommerce\Bundle\CartBundle\Entity\CartProduct
+            WellCommerce\Bundle\CartBundle\Entity\CartModifierInterface: WellCommerce\Bundle\CartBundle\Entity\CartModifierInterface
 
 well_commerce_cart:
     services:
@@ -19,28 +21,9 @@ well_commerce_cart:
             orm_configuration:
                 mapping: "@WellCommerceCartBundle/Resources/config/doctrine/CartProduct.orm.yml"
                 entity: WellCommerce\Bundle\CartBundle\Entity\CartProduct
-        cart_product_total:
-            auto_services:
-                factory: WellCommerce\Bundle\CartBundle\Factory\CartProductTotalFactory
-            orm_configuration:
-                mapping: "@WellCommerceCartBundle/Resources/config/doctrine/CartProductTotal.orm.yml"
-                entity: WellCommerce\Bundle\CartBundle\Entity\CartProductTotal
-        cart_summary:
-            auto_services:
-                factory: WellCommerce\Bundle\CartBundle\Factory\CartSummaryFactory
-            orm_configuration:
-                mapping: "@WellCommerceCartBundle/Resources/config/doctrine/CartSummary.orm.yml"
-                entity: WellCommerce\Bundle\CartBundle\Entity\CartSummary
         cart_modifier:
             auto_services:
                 factory: WellCommerce\Bundle\CartBundle\Factory\CartModifierFactory
-                repository: WellCommerce\Bundle\CartBundle\Repository\CartModifierRepository
             orm_configuration:
                 mapping: "@WellCommerceCartBundle/Resources/config/doctrine/CartModifier.orm.yml"
                 entity: WellCommerce\Bundle\CartBundle\Entity\CartModifier
-parameters:
-    cart_visitor_hierarchy:
-        product_total: 0
-        shipping_method: 10
-        payment_method: 20
-        summary: 900

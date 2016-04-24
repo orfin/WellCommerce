@@ -19,6 +19,8 @@ use WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddressInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetailsInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddressInterface;
 use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderProductTotalInterface;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderSummaryInterface;
 
 /**
  * Class CartFactory
@@ -34,12 +36,12 @@ final class CartFactory extends AbstractEntityFactory
         /** @var $cart CartInterface */
         $cart = $this->init();
         $cart->setProducts($this->createEmptyCollection());
-        $cart->setProductTotal($this->createCartProductTotal());
+        $cart->setProductTotal($this->createOrderProductTotal());
         $cart->setModifiers($this->createEmptyCollection());
         $cart->setCopyAddress(true);
         $cart->setCurrency($this->getRequestHelper()->getCurrentCurrency());
         $cart->setSessionId($this->getRequestHelper()->getSessionId());
-        $cart->setSummary($this->createCartSummary());
+        $cart->setSummary($this->createOrderSummary());
         $cart->setContactDetails($this->createContactDetails());
         $cart->setBillingAddress($this->createBillingAddress());
         $cart->setShippingAddress($this->createShippingAddress());
@@ -62,13 +64,13 @@ final class CartFactory extends AbstractEntityFactory
         return $this->get('client_shipping_address.factory')->create();
     }
 
-    private function createCartProductTotal() : CartProductTotalInterface
+    private function createOrderProductTotal() : OrderProductTotalInterface
     {
-        return $this->get('cart_product_total.factory')->create();
+        return $this->get('order_product_total.factory')->create();
     }
 
-    private function createCartSummary() : CartSummaryInterface
+    private function createOrderSummary() : OrderSummaryInterface
     {
-        return $this->get('cart_summary.factory')->create();
+        return $this->get('order_summary.factory')->create();
     }
 }

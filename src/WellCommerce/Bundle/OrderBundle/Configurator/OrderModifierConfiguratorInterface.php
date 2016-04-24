@@ -10,21 +10,23 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CartBundle\Configurator;
+namespace WellCommerce\Bundle\OrderBundle\Configurator;
 
-use WellCommerce\Bundle\CartBundle\Entity\CartModifierInterface;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderModifierInterface;
 
 /**
- * Class CartModifierConfigurator
+ * Class OrderModifierConfiguratorInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface CartModifierConfiguratorInterface
+interface OrderModifierConfiguratorInterface
 {
     /**
-     * Configures given cart modifier
+     * Configures the order modifier
      *
-     * @param CartModifierInterface $cartModifier
+     * @param OrderModifierInterface $modifier
+     *
+     * @return mixed
      */
-    public function configure(CartModifierInterface $cartModifier);
+    public function configure(OrderModifierInterface $modifier);
 }

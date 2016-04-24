@@ -18,6 +18,7 @@ use WellCommerce\Bundle\CartBundle\Visitor\CartVisitorTraverser;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
 use WellCommerce\Bundle\DoctrineBundle\Event\ResourceEvent;
+use WellCommerce\Bundle\OrderBundle\Visitor\OrderVisitorTraverser;
 use WellCommerce\Component\Form\Event\FormEvent;
 
 /**
@@ -47,7 +48,7 @@ final class CartSubscriber extends AbstractEventSubscriber
     {
         $cart = $event->getResource();
         if ($cart instanceof CartInterface) {
-            $this->getCartVisitorTraverser()->traverse($event->getResource());
+            $this->getOrderVisitorTraverser()->traverse($event->getResource());
         }
     }
     
@@ -67,8 +68,8 @@ final class CartSubscriber extends AbstractEventSubscriber
         return $this->container->get('cart.manager.front');
     }
     
-    private function getCartVisitorTraverser() : CartVisitorTraverser
+    private function getOrderVisitorTraverser() : OrderVisitorTraverser
     {
-        return $this->container->get('cart.visitor.traverser');
+        return $this->container->get('order.visitor.traverser');
     }
 }

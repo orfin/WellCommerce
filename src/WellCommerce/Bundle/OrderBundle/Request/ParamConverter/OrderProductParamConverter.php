@@ -10,15 +10,15 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CartBundle\Entity;
+namespace WellCommerce\Bundle\CartBundle\Request\ParamConverter;
 
-use WellCommerce\Bundle\OrderBundle\Entity\OrderSummary;
+use WellCommerce\Bundle\CoreBundle\Request\ParamConverter\AbstractEntityParamConverter;
 
 /**
- * Class CartSummary
+ * Class CartProductParamConverter
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CartSummary extends OrderSummary implements CartSummaryInterface
+final class OrderProductParamConverter extends AbstractEntityParamConverter
 {
 }

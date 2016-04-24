@@ -10,16 +10,16 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CartBundle\Configurator;
+namespace WellCommerce\Bundle\OrderBundle\Configurator;
 
-use WellCommerce\Bundle\CartBundle\Entity\CartModifierInterface;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderModifierInterface;
 
 /**
- * Class CartModifierConfigurator
+ * Class OrderModifierConfigurator
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-final class CartModifierConfigurator implements CartModifierConfiguratorInterface
+final class OrderModifierConfigurator implements OrderModifierConfiguratorInterface
 {
     private $name;
     private $description;
@@ -27,7 +27,7 @@ final class CartModifierConfigurator implements CartModifierConfiguratorInterfac
     private $hierarchy;
 
     /**
-     * CartModifierConfigurator constructor.
+     * OrderModifierConfigurator constructor.
      *
      * @param string $name
      * @param string $description
@@ -45,11 +45,11 @@ final class CartModifierConfigurator implements CartModifierConfiguratorInterfac
     /**
      * {@inheritdoc}
      */
-    public function configure(CartModifierInterface $cartModifier)
+    public function configure(OrderModifierInterface $modifier)
     {
-        $cartModifier->setName($this->name);
-        $cartModifier->setDescription($this->description);
-        $cartModifier->setSubtraction($this->isSubtraction);
-        $cartModifier->setHierarchy($this->hierarchy);
+        $modifier->setName($this->name);
+        $modifier->setDescription($this->description);
+        $modifier->setSubtraction($this->isSubtraction);
+        $modifier->setHierarchy($this->hierarchy);
     }
 }

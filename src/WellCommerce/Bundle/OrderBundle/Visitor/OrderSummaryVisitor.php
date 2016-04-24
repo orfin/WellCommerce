@@ -10,20 +10,23 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CartBundle\Visitor;
+namespace WellCommerce\Bundle\OrderBundle\Visitor;
 
-use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
-use WellCommerce\Bundle\CartBundle\Entity\CartModifierInterface;
-use WellCommerce\Bundle\CartBundle\Entity\CartSummaryInterface;
 use WellCommerce\Bundle\CurrencyBundle\Helper\CurrencyHelperInterface;
 use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactoryInterface;
+use WellCommerce\Bundle\OrderBundle\Entity\CartInterface;
+use WellCommerce\Bundle\OrderBundle\Entity\CartModifierInterface;
+use WellCommerce\Bundle\OrderBundle\Entity\CartSummaryInterface;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderModifierInterface;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderSummaryInterface;
 
 /**
- * Class CartSummaryVisitor
+ * Class OrderSummaryVisitor
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-final class CartSummaryVisitor implements CartVisitorInterface
+final class OrderSummaryVisitor implements OrderVisitorInterface
 {
     /**
      * @var CurrencyHelperInterface
@@ -47,19 +50,19 @@ final class CartSummaryVisitor implements CartVisitorInterface
         $this->factory = $factory;
     }
     
-    public function visitCart(CartInterface $cart)
+    public function visitOrder(OrderInterface $order)
     {
-        $productTotal   = $cart->getProductTotal();
-        $modifiers      = $cart->getModifiers();
-        $targetCurrency = $cart->getCurrency();
+        $productTotal   = $order->getProductTotal();
+        $modifiers      = $order->getModifiers();
+        $targetCurrency = $order->getCurrency();
 
-        /** @var CartSummaryInterface $summary */
+        /** @var OrderSummaryInterface $summary */
         $summary = $this->factory->create();
         $summary->setGrossAmount($productTotal->getGrossPrice());
         $summary->setNetAmount($productTotal->getNetPrice());
         $summary->setTaxAmount($productTotal->getTaxAmount());
         
-        $modifiers->map(function (CartModifierInterface $modifier) use ($summary, $targetCurrency) {
+        $modifiers->map(function (OrderModifierInterface $modifier) use ($summary, $targetCurrency) {
             $baseCurrency = $modifier->getCurrency();
             $grossAmount  = $this->helper->convert($modifier->getGrossAmount(), $baseCurrency, $targetCurrency);
             $netAmount    = $this->helper->convert($modifier->getNetAmount(), $baseCurrency, $targetCurrency);
@@ -76,6 +79,6 @@ final class CartSummaryVisitor implements CartVisitorInterface
             }
         });
 
-        $cart->setSummary($summary);
+        $order->setSummary($summary);
     }
 }

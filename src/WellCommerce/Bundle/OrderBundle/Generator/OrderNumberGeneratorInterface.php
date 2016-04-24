@@ -10,18 +10,16 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CartBundle\Entity;
+namespace WellCommerce\Bundle\OrderBundle\Generator;
+
+use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 
 /**
- * Interface CartAwareInterface
+ * Interface OrderNumberGeneratorInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface CartAwareInterface
+interface OrderNumberGeneratorInterface
 {
-    public function setCart(CartInterface $cart);
-
-    public function getCart() : CartInterface;
-
-    public function hasCart() : bool;
+    public function generateOrderNumber(OrderInterface $order) : string;
 }
