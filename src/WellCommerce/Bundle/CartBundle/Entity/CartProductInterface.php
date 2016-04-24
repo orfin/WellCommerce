@@ -20,43 +20,19 @@ interface CartProductInterface extends
     ProductAwareInterface,
     CartAwareInterface
 {
-    /**
-     * @return int
-     */
     public function getQuantity() : int;
 
-    /**
-     * @param int $quantity
-     */
     public function setQuantity(int $quantity);
 
-    /**
-     * @param int $increase
-     */
     public function increaseQuantity(int $increase);
 
-    /**
-     * @param int $decrease
-     */
     public function decreaseQuantity(int $decrease);
 
-    /**
-     * @return DiscountablePrice
-     */
     public function getSellPrice() : DiscountablePrice;
 
-    /**
-     * @return float
-     */
     public function getWeight() : float;
 
-    /**
-     * @return array
-     */
-    public function getOptions();
+    public function getOptions() : array;
 
-    /**
-     * @param $options
-     */
-    public function setOptions($options);
+    public function setOptions(array $options);
 }

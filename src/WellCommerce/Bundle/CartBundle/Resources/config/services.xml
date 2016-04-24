@@ -6,5 +6,6 @@
 
     <imports>
         <import resource="services/cart.xml"/>
+        <import resource="services/cart_address.xml"/>
     </imports>
 </container>

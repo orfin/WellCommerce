@@ -1,22 +1,18 @@
 WellCommerce\Bundle\CompanyBundle\Entity\CompanyAddress:
     fields:
-        street:
+        line1:
             groups:
                 - default
                 - company_address
-        streetNo:
+        line2:
             groups:
                 - default
                 - company_address
-        flatNo:
+        postalCode:
             groups:
                 - default
                 - company_address
-        postCode:
-            groups:
-                - default
-                - company_address
-        province:
+        state:
             groups:
                 - default
                 - company_address

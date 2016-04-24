@@ -20,16 +20,10 @@ use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class DiscountablePriceFactory extends AbstractEntityFactory
+final class DiscountablePriceFactory extends AbstractEntityFactory
 {
-    /**
-     * @var string
-     */
     protected $supportsInterface = DiscountablePriceInterface::class;
 
-    /**
-     * @return DiscountablePriceInterface
-     */
     public function create() : DiscountablePriceInterface
     {
         /** @var $price DiscountablePriceInterface */

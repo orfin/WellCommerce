@@ -13,18 +13,17 @@
 namespace WellCommerce\Bundle\CartBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
-use WellCommerce\Bundle\AppBundle\Entity\Price;
 use WellCommerce\Bundle\CartBundle\Visitor\CartVisitorInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientAwareInterface;
-use WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddressInterface;
-use WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetailsInterface;
-use WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddressInterface;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddressAwareInterface;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetailsAwareInterface;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddressAwareInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CouponBundle\Entity\CouponAwareInterface;
 use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodAwareInterface;
-use WellCommerce\Bundle\ShippingBundle\Calculator\ShippingCalculatorSubjectInterface;
-use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCostInterface;
+use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodAwareInterface;
 use WellCommerce\Bundle\ShopBundle\Entity\ShopAwareInterface;
 
 /**
@@ -32,148 +31,49 @@ use WellCommerce\Bundle\ShopBundle\Entity\ShopAwareInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface CartInterface extends
-    EntityInterface,
-    ShopAwareInterface,
-    PaymentMethodAwareInterface,
-    ClientAwareInterface,
-    TimestampableInterface,
-    CouponAwareInterface,
-    ShippingCalculatorSubjectInterface
+interface CartInterface extends OrderInterface
 {
-    /**
-     * @return string
-     */
     public function getSessionId() : string;
 
-    /**
-     * @param string $sessionId
-     */
     public function setSessionId(string $sessionId);
 
-    /**
-     * @return boolean
-     */
     public function getCopyAddress() : bool;
 
-    /**
-     * @param boolean $copyAddress
-     */
     public function setCopyAddress(bool $copyAddress);
 
-    /**
-     * @param CartProductInterface $cartProduct
-     */
     public function addProduct(CartProductInterface $cartProduct);
 
-    /**
-     * @param CartProduct $cartProduct
-     */
     public function removeProduct(CartProductInterface $cartProduct);
 
-    /**
-     * @return CartTotalsInterface
-     */
-    public function getTotals() : CartTotalsInterface;
+    public function getProductTotal() : CartProductTotalInterface;
 
-    /**
-     * @param CartTotals $cartTotals
-     */
-    public function setTotals(CartTotalsInterface $cartTotals);
+    public function setProductTotal(CartProductTotalInterface $productTotal);
 
-    /**
-     * @return Collection
-     */
+    public function addModifier(CartModifierInterface $modifier);
+
+    public function getModifier(string $name) : CartModifierInterface;
+
+    public function hasModifier(string $name) : bool;
+
+    public function removeModifier(string $name);
+
+    public function getModifiers() : Collection;
+
+    public function setModifiers(Collection $modifiers);
+    
     public function getProducts() : Collection;
 
-    /**
-     * @param Collection $products
-     */
     public function setProducts(Collection $products);
 
-    /**
-     * @return ClientContactDetailsInterface
-     */
-    public function getContactDetails() : ClientContactDetailsInterface;
-
-    /**
-     * @param ClientContactDetailsInterface $contactDetails
-     */
-    public function setContactDetails(ClientContactDetailsInterface $contactDetails);
-
-    /**
-     * @return ClientBillingAddressInterface
-     */
-    public function getBillingAddress() : ClientBillingAddressInterface;
-
-    /**
-     * @param ClientBillingAddressInterface $billingAddress
-     */
-    public function setBillingAddress(ClientBillingAddressInterface $billingAddress);
-
-    /**
-     * @return ClientShippingAddressInterface
-     */
-    public function getShippingAddress() : ClientShippingAddressInterface;
-
-    /**
-     * @param ClientShippingAddressInterface $shippingAddress
-     */
-    public function setShippingAddress(ClientShippingAddressInterface $shippingAddress);
-
-    /**
-     * @param CartVisitorInterface $visitor
-     */
     public function acceptVisitor(CartVisitorInterface $visitor);
 
-    /**
-     * @return null|ShippingMethodCostInterface
-     */
-    public function getShippingMethodCost();
-
-    /**
-     * @param null|ShippingMethodCostInterface $shippingMethodCost
-     */
-    public function setShippingMethodCost(ShippingMethodCostInterface $shippingMethodCost = null);
-
-    /**
-     * @return string
-     */
     public function getCurrency() : string;
 
-    /**
-     * @param string $currency
-     */
     public function setCurrency(string $currency);
 
-    /**
-     * Checks whether cart has shipping and payment method
-     *
-     * @return bool
-     */
-    public function hasMethods() : bool;
+    public function getSummary() : CartSummaryInterface;
 
-    /**
-     * Checks whether cart has shipping method
-     *
-     * @return bool
-     */
-    public function hasShippingMethod() : bool;
+    public function setSummary(CartSummaryInterface $summary);
 
-    /**
-     * Checks whether cart has payment method
-     *
-     * @return bool
-     */
-    public function hasPaymentMethod() : bool;
-
-    /**
-     * @return Price
-     */
-    public function getShippingCost();
-
-    /**
-     * @return bool
-     */
     public function isEmpty() : bool;
 }

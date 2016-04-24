@@ -20,6 +20,7 @@ use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Core\PayPalHttpConfig;
 use PayPal\Rest\ApiContext;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
 
 /**
  * Class PayPalGateway
@@ -44,7 +45,27 @@ class PayPalGateway implements PayPalGatewayInterface
         $this->configureOptions($resolver);
         $this->options = $resolver->resolve($options);
     }
-    
+
+    public function executePayment(PaymentInterface $payment)
+    {
+        // TODO: Implement executePayment() method.
+    }
+
+    public function confirmPayment(PaymentInterface $payment)
+    {
+        // TODO: Implement confirmPayment() method.
+    }
+
+    public function cancelPayment(PaymentInterface $payment)
+    {
+        // TODO: Implement cancelPayment() method.
+    }
+
+    public function notifyPayment(PaymentInterface $payment)
+    {
+        // TODO: Implement notifyPayment() method.
+    }
+
     /**
      * Creates a PayPal payment
      *

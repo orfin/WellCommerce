@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
+
+    <class name="WellCommerce\Bundle\ClientBundle\Entity\ClientDetails">
+        <constraint name="WellCommerce\Bundle\ClientBundle\Doctrine\Validator\Constraints\UniqueUsername">
+            <option name="groups">
+                <value>client_registration</value>
+            </option>
+        </constraint>
+        <property name="conditionsAccepted">
+            <constraint name="EqualTo">
+                <option name="value">1</option>
+                <option name="message">client.conditions_not_accepted</option>
+                <option name="groups">
+                    <value>client_registration</value>
+                </option>
+            </constraint>
+        </property>
+        <property name="username">
+            <constraint name="NotNull">
+                <option name="groups">
+                    <value>client_registration</value>
+                </option>
+            </constraint>
+            <constraint name="NotBlank">
+                <option name="groups">
+                    <value>client_registration</value>
+                </option>
+            </constraint>
+            <constraint name="Email">
+                <option name="groups">
+                    <value>client_registration</value>
+                </option>
+            </constraint>
+        </property>
+        <property name="password">
+            <constraint name="NotNull">
+                <option name="groups">
+                    <value>client_registration</value>
+                </option>
+            </constraint>
+            <constraint name="NotBlank">
+                <option name="groups">
+                    <value>client_registration</value>
+                </option>
+            </constraint>
+        </property>
+        <property name="discount">
+            <constraint name="Range">
+                <option name="min">0</option>
+                <option name="max">100</option>
+                <option name="groups">
+                    <value>Default</value>
+                    <value>client_registration</value>
+                </option>
+            </constraint>
+        </property>
+    </class>
+</constraint-mapping>

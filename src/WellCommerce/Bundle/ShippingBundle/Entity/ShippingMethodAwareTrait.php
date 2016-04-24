@@ -19,24 +19,20 @@ namespace WellCommerce\Bundle\ShippingBundle\Entity;
  */
 trait ShippingMethodAwareTrait
 {
-    /**
-     * @var ShippingMethodInterface
-     */
     protected $shippingMethod;
 
-    /**
-     * @return null|ShippingMethodInterface
-     */
-    public function getShippingMethod()
+    public function getShippingMethod() : ShippingMethodInterface
     {
         return $this->shippingMethod;
     }
 
-    /**
-     * @param null|ShippingMethodInterface
-     */
-    public function setShippingMethod(ShippingMethodInterface $shippingMethod = null)
+    public function setShippingMethod(ShippingMethodInterface $shippingMethod)
     {
         $this->shippingMethod = $shippingMethod;
+    }
+    
+    public function hasShippingMethod() : bool
+    {
+        return $this->shippingMethod instanceof ShippingMethodInterface;
     }
 }

@@ -53,12 +53,9 @@ class ClientAddressFormatterExtension extends \Twig_Extension
     {
         $lines   = [];
         $lines[] = sprintf('%s %s', $address->getFirstName(), $address->getLastName());
-        if (strlen($address->getFlatNo())) {
-            $lines[] = sprintf('%s %s/%s', $address->getStreet(), $address->getStreetNo(), $address->getFlatNo());
-        } else {
-            $lines[] = sprintf('%s %s', $address->getStreet(), $address->getStreetNo(), '/' . $address->getFlatNo());
-        }
-        $lines[] = sprintf('%s, %s %s', $address->getCountry(), $address->getPostCode(), $address->getCity());
+        $lines[] = $address->getLine1();
+        $lines[] = $address->getLine2();
+        $lines[] = sprintf('%s, %s %s', $address->getCountry(), $address->getPostalCode(), $address->getCity());
 
         return implode($lineSeparator, $lines);
     }
@@ -75,12 +72,9 @@ class ClientAddressFormatterExtension extends \Twig_Extension
     {
         $lines   = [];
         $lines[] = sprintf('%s %s', $address->getFirstName(), $address->getLastName());
-        if (strlen($address->getFlatNo())) {
-            $lines[] = sprintf('%s %s/%s', $address->getStreet(), $address->getStreetNo(), $address->getFlatNo());
-        } else {
-            $lines[] = sprintf('%s %s', $address->getStreet(), $address->getStreetNo(), '/' . $address->getFlatNo());
-        }
-        $lines[] = sprintf('%s, %s %s', $address->getCountry(), $address->getPostCode(), $address->getCity());
+        $lines[] = $address->getLine1();
+        $lines[] = $address->getLine2();
+        $lines[] = sprintf('%s, %s %s', $address->getCountry(), $address->getPostalCode(), $address->getCity());
 
         return implode($lineSeparator, $lines);
     }

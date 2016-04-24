@@ -6,6 +6,7 @@
 
     <imports>
         <import resource="services/order.xml"/>
+        <import resource="services/order_product.xml"/>
         <import resource="services/order_status.xml"/>
         <import resource="services/order_status_history.xml"/>
         <import resource="services/order_status_group.xml"/>

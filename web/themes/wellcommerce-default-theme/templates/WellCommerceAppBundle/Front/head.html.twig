@@ -12,5 +12,5 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link href='http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700,300italic,400italic,500italic,700italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
     <script src="{{ asset( 'bundles/fosjsrouting/js/router.js' ) }}"></script>
-    <script src="{{ asset( 'js/fos_js_routes.js' ) }}"></script>
+    <script type="text/javascript" src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
 </head>

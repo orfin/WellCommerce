@@ -4,11 +4,7 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-    <route id="front.order.address" path="/address">
-        <default key="_controller">order_address.controller.front:indexAction</default>
-    </route>
-
     <route id="front.order.confirm" path="/confirm">
-        <default key="_controller">order_confirmation.controller.front:indexAction</default>
+        <default key="_controller">order.controller.front:confirmAction</default>
     </route>
 </routes>

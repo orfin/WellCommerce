@@ -8,23 +8,19 @@ WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddress:
             groups:
                 - default
                 - client_billing_address
-        street:
+        line1:
             groups:
                 - default
                 - client_billing_address
-        streetNo:
+        line2:
             groups:
                 - default
                 - client_billing_address
-        flatNo:
+        postalCode:
             groups:
                 - default
                 - client_billing_address
-        postCode:
-            groups:
-                - default
-                - client_billing_address
-        province:
+        state:
             groups:
                 - default
                 - client_billing_address

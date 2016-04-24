@@ -3,7 +3,7 @@
 <li class="dropdown" id="cart-preview">
 	<span class="push-search btn btn-link hidden-md hidden-lg"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
     <a href="{{ path('front.cart.index') }}" class="dropdown-toggle cartQty" data-target="#" {% if false == currentCart().isEmpty %}data-toggle="dropdown"{% endif %} role="button" aria-expanded="true">
-        Cart<span class="cart-qty">{{ currentCart().getTotals().getQuantity()|number_format }}</span>
+        Cart<span class="cart-qty">{{ currentCart().productTotal.quantity }}</span>
     </a>
     {% if false == currentCart().isEmpty %}
     <ul class="dropdown-menu" role="menu">
@@ -43,7 +43,7 @@
                         </a>
                     </td>
                     <td>
-                        <span>{{ format_price(currentCart().getTotals().getGrossPrice()) }}</span>
+                        <span>{{ format_price(currentCart().productTotal.grossPrice) }}</span>
                     </td>
                 </tr>
                 </tbody>

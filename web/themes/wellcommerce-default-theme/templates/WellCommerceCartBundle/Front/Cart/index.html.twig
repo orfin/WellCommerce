@@ -15,30 +15,17 @@
             <div class="cart">
                 <div class="clearfix">
                     <a href="{{ path('front.home_page.index') }}" class="btn btn-link light btn-lg notransform nopadding">Back to shopping</a>
-                    {% if currentCart().hasMethods %}
                     <a href="{{ path('front.order.address') }}" class="btn btn-primary btn-lg pull-right">Place an order</a>
-                    {% endif %}
                 </div>
-                {% if currentCart().hasMethods %}
-                    {% include 'WellCommerceAppBundle:Front/Common:discounts.html.twig' %}
-                {% endif %}
-
+                {% include 'WellCommerceAppBundle:Front/Common:discounts.html.twig' %}
                 {% include 'WellCommerceAppBundle:Front/Common:products_table.html.twig' with {'confirmation': false} %}
+                {% include 'WellCommerceAppBundle:Front/Common:methods.html.twig' %}
+                {% include 'WellCommerceAppBundle:Front/Common:summary.html.twig' %}
 
-                {% if currentCart().hasMethods %}
-                    {% include 'WellCommerceAppBundle:Front/Common:methods.html.twig' %}
-
-                    {% include 'WellCommerceAppBundle:Front/Common:summary.html.twig' %}
-
-                    <div class="clearfix">
-                        <a href="{{ path('front.home_page.index') }}" class="btn btn-link light btn-lg notransform nopadding">Back to shopping</a>
-                        <a href="{{ path('front.order.address') }}" class="btn btn-primary btn-lg pull-right">Place an order</a>
-                    </div>
-                {% else %}
-                    <div class="alert alert-error mtp30">
-                        <strong>{% trans %}cart.error.no_available_methods{% endtrans %}</strong>
-                    </div>
-                {% endif %}
+                <div class="clearfix">
+                    <a href="{{ path('front.home_page.index') }}" class="btn btn-link light btn-lg notransform nopadding">Back to shopping</a>
+                    <a href="{{ path('front.cart_address.index') }}" class="btn btn-primary btn-lg pull-right">Place an order</a>
+                </div>
             </div>
             {% endif %}
         </div>

@@ -21,7 +21,7 @@ use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class CartProductRepository extends AbstractEntityRepository implements CartProductRepositoryInterface
+final class CartProductRepository extends AbstractEntityRepository implements CartProductRepositoryInterface
 {
     /**
      * {@inheritdoc}

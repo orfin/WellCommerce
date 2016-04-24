@@ -14,15 +14,15 @@ namespace WellCommerce\Bundle\CartBundle\Entity;
 use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\CartBundle\Visitor\CartVisitorInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientAwareTrait;
-use WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddressInterface;
-use WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetailsInterface;
-use WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddressInterface;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddressAwareTrait;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetailsAwareTrait;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddressAwareTrait;
 use WellCommerce\Bundle\CouponBundle\Entity\CouponAwareTrait;
 use WellCommerce\Bundle\DoctrineBundle\Behaviours\Timestampable\TimestampableTrait;
 use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
+use WellCommerce\Bundle\OrderBundle\Entity\Order;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodAwareTrait;
-use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodInterface;
-use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCostInterface;
+use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodAwareTrait;
 use WellCommerce\Bundle\ShopBundle\Entity\ShopAwareTrait;
 
 /**
@@ -30,300 +30,160 @@ use WellCommerce\Bundle\ShopBundle\Entity\ShopAwareTrait;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Cart extends AbstractEntity implements CartInterface
+class Cart extends Order implements CartInterface
 {
     use TimestampableTrait;
     use ShopAwareTrait;
     use PaymentMethodAwareTrait;
+    use ShippingMethodAwareTrait;
     use ClientAwareTrait;
     use CouponAwareTrait;
+    use ClientContactDetailsAwareTrait;
+    use ClientBillingAddressAwareTrait;
+    use ClientShippingAddressAwareTrait;
 
     /**
      * @var Collection
      */
-    protected $products;
+    private $products;
 
     /**
      * @var string
      */
-    protected $sessionId;
+    private $sessionId;
 
     /**
      * @var bool
      */
-    protected $copyAddress;
+    private $copyAddress;
 
     /**
      * @var string
      */
-    protected $currency;
+    private $currency;
 
     /**
-     * @var CartTotals
+     * @var CartProductTotalInterface
      */
-    protected $totals;
+    private $productTotal;
 
     /**
-     * @var ClientContactDetailsInterface
+     * @var Collection
      */
-    protected $contactDetails;
+    private $modifiers;
 
     /**
-     * @var ClientBillingAddressInterface
+     * @var CartSummaryInterface
      */
-    protected $billingAddress;
+    private $summary;
 
-    /**
-     * @var ClientShippingAddressInterface
-     */
-    protected $shippingAddress;
-
-    /**
-     * @var ShippingMethodCostInterface
-     */
-    protected $shippingMethodCost;
-
-    /**
-     * {@inheritdoc}
-     */
     public function getSessionId() : string
     {
         return $this->sessionId;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setSessionId(string $sessionId)
     {
         $this->sessionId = $sessionId;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCopyAddress() : bool
     {
         return $this->copyAddress;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setCopyAddress(bool $copyAddress)
     {
         $this->copyAddress = $copyAddress;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addProduct(CartProductInterface $cartProduct)
     {
         $this->products->add($cartProduct);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function removeProduct(CartProductInterface $cartProduct)
     {
         $this->products->removeElement($cartProduct);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getTotals() : CartTotalsInterface
+    public function getProductTotal() : CartProductTotalInterface
     {
-        return $this->totals;
+        return $this->productTotal;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setTotals(CartTotalsInterface $cartTotals)
+    public function setProductTotal(CartProductTotalInterface $productTotal)
     {
-        $this->totals = $cartTotals;
+        $this->productTotal = $productTotal;
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    public function addModifier(CartModifierInterface $modifier)
+    {
+        $this->modifiers->set($modifier->getName(), $modifier);
+    }
+
+    public function hasModifier(string $name) : bool
+    {
+        return $this->modifiers->containsKey($name);
+    }
+
+    public function removeModifier(string $name)
+    {
+        $this->modifiers->remove($name);
+    }
+
+    public function getModifier(string $name) : CartModifierInterface
+    {
+        return $this->modifiers->get($name);
+    }
+
+    public function getModifiers() : Collection
+    {
+        return $this->modifiers;
+    }
+
+    public function setModifiers(Collection $modifiers)
+    {
+        $this->modifiers = $modifiers;
+    }
+
     public function getProducts() : Collection
     {
         return $this->products;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setProducts(Collection $products)
     {
         $this->products = $products;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getContactDetails() : ClientContactDetailsInterface
-    {
-        return $this->contactDetails;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setContactDetails(ClientContactDetailsInterface $contactDetails)
-    {
-        $this->contactDetails = $contactDetails;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getBillingAddress() : ClientBillingAddressInterface
-    {
-        return $this->billingAddress;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setBillingAddress(ClientBillingAddressInterface $billingAddress)
-    {
-        $this->billingAddress = $billingAddress;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getShippingAddress() : ClientShippingAddressInterface
-    {
-        return $this->shippingAddress;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setShippingAddress(ClientShippingAddressInterface $shippingAddress)
-    {
-        $this->shippingAddress = $shippingAddress;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function acceptVisitor(CartVisitorInterface $visitor)
     {
         $visitor->visitCart($this);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getShippingMethodCost()
-    {
-        return $this->shippingMethodCost;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setShippingMethodCost(ShippingMethodCostInterface $shippingMethodCost = null)
-    {
-        $this->shippingMethodCost = $shippingMethodCost;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getCurrency() : string
     {
         return $this->currency;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setCurrency(string $currency)
     {
         $this->currency = $currency;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getShippingCostQuantity() : int
+    public function getSummary() : CartSummaryInterface
     {
-        return $this->totals->getQuantity();
+        return $this->summary;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getShippingCostWeight() : float
+    public function setSummary(CartSummaryInterface $summary)
     {
-        return $this->totals->getWeight();
+        $this->summary = $summary;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getShippingCostGrossPrice() : float
-    {
-        return $this->totals->getGrossPrice();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getShippingCostCurrency() : string
-    {
-        return $this->getCurrency();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasMethods() : bool
-    {
-        return ($this->hasShippingMethod() && $this->hasPaymentMethod());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasShippingMethod() : bool
-    {
-        return $this->getShippingMethodCost() instanceof ShippingMethodCostInterface;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasPaymentMethod() : bool
-    {
-        return $this->getPaymentMethod() instanceof PaymentMethodInterface;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getShippingCost()
-    {
-        if ($this->getShippingMethodCost() instanceof ShippingMethodCostInterface) {
-            return $this->getShippingMethodCost()->getCost();
-        }
-
-        return null;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function isEmpty() : bool
     {
-        return 0 === $this->getTotals()->getQuantity();
+        return 0 === $this->productTotal->getQuantity();
     }
 }

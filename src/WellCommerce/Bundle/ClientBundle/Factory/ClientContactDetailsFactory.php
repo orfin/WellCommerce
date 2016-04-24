@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\ClientBundle\Factory;
 
-use WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetails;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetailsInterface;
 use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 
@@ -21,19 +20,19 @@ use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientContactDetailsFactory extends AbstractEntityFactory
+final class ClientContactDetailsFactory extends AbstractEntityFactory
 {
-    /**
-     * @var string
-     */
     protected $supportsInterface = ClientContactDetailsInterface::class;
 
-    /**
-     * @return ClientContactDetailsInterface
-     */
     public function create() : ClientContactDetailsInterface
     {
-        $details = new ClientContactDetails();
+        /** @var ClientContactDetailsInterface $details */
+        $details = $this->init();
+        $details->setFirstName('');
+        $details->setLastName('');
+        $details->setEmail('');
+        $details->setPhone('');
+        $details->setSecondaryPhone('');
 
         return $details;
     }

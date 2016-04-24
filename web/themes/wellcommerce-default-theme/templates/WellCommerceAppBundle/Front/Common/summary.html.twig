@@ -1,11 +1,39 @@
+{% set cart = currentCart() %}
 <div class="summary mbt60">
     <div class="row">
-        <div class="col-lg-10 col-lg-offset-2 col-xs-12">
+        <div class="col-sm-10 col-sm-offset-2">
             <div class="col-sm-9 col-xs-6 text-right">
-                <span class="text">Summary<small>Payment method: {{ currentCart().getPaymentMethod().translate().getName() }}</small></span>
+                <span class="text-sm">{% trans %}cart.label.product_total{% endtrans %}</span>
             </div>
             <div class="col-sm-3 col-xs-6">
-                <span class="value">{{ format_price(summary) }}</span>
+                <span class="text-sm addition">{{ format_price(cart.productTotal.grossPrice, cart.currency) }}</span>
+            </div>
+        </div>
+    </div>
+    {% for modifier in cart.modifiers %}
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-2">
+            <div class="col-sm-9 col-xs-6 text-right">
+                <span class="text-sm">{{ (modifier.description)|trans({}, 'wellcommerce') }}</span>
+            </div>
+            <div class="col-sm-3 col-xs-6">
+                {% if modifier.isSubtraction() %}
+                    <span class="text-sm subtraction">-{{ format_price(modifier.grossAmount, modifier.currency, cart.currency) }}</span>
+                {% else %}
+                    <span class="text-sm addition">{{ format_price(modifier.grossAmount, modifier.currency, cart.currency) }}</span>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-2">
+            <div class="col-sm-9 col-xs-6 text-right">
+                <span class="text">Summary</span>
+            </div>
+            <div class="col-sm-3 col-xs-6">
+                <span class="value">{{ format_price(cart.summary.grossAmount) }}</span>
             </div>
         </div>
     </div>

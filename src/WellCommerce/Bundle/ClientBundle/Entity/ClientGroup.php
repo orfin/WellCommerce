@@ -15,6 +15,7 @@ use Doctrine\Common\Collections\Collection;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
+use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
 use WellCommerce\Bundle\PageBundle\Entity\PageInterface;
 
 /**
@@ -22,16 +23,11 @@ use WellCommerce\Bundle\PageBundle\Entity\PageInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientGroup implements ClientGroupInterface
+class ClientGroup extends AbstractEntity implements ClientGroupInterface
 {
     use Translatable;
     use Timestampable;
     use Blameable;
-
-    /**
-     * @var int
-     */
-    protected $id;
 
     /**
      * @var float
@@ -48,76 +44,44 @@ class ClientGroup implements ClientGroupInterface
      */
     protected $pages;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getDiscount()
+    public function getDiscount() : float
     {
         return $this->discount;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setDiscount($discount)
+    public function setDiscount(float $discount)
     {
-        $this->discount = (float)$discount;
+        $this->discount = $discount;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setClients(Collection $clients)
     {
         $this->clients = $clients;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getClients()
+    public function getClients() : Collection
     {
         return $this->clients;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addClient(ClientInterface $client)
     {
-        $this->clients[] = $client;
+        $this->clients->add($client);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getPages()
+    public function getPages() : Collection
     {
         return $this->pages;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setPages(Collection $pages)
     {
         $this->pages = $pages;
     }
-
-    /**
-     * {@inheritdoc}
-     */
+    
     public function addPage(PageInterface $page)
     {
-        $this->pages[] = $page;
+        $this->pages->add($page);
     }
 }
 

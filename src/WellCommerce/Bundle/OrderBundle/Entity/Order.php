@@ -14,8 +14,11 @@ namespace WellCommerce\Bundle\OrderBundle\Entity;
 use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\CartBundle\Entity\CartAwareTrait;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientAwareTrait;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddressAwareTrait;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddressInterface;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetailsAwareTrait;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetailsInterface;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddressAwareTrait;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddressInterface;
 use WellCommerce\Bundle\CouponBundle\Entity\CouponAwareTrait;
 use WellCommerce\Bundle\DoctrineBundle\Behaviours\Timestampable\TimestampableTrait;
@@ -37,28 +40,15 @@ class Order extends AbstractEntity implements OrderInterface
     use ShippingMethodAwareTrait;
     use PaymentMethodAwareTrait;
     use ClientAwareTrait;
+    use ClientContactDetailsAwareTrait;
+    use ClientBillingAddressAwareTrait;
+    use ClientShippingAddressAwareTrait;
     use CouponAwareTrait;
-    use CartAwareTrait;
     
     /**
      * @var Collection
      */
     protected $products;
-    
-    /**
-     * @var float
-     */
-    protected $netAmount = 0;
-    
-    /**
-     * @var float
-     */
-    protected $grossAmount = 0;
-    
-    /**
-     * @var float
-     */
-    protected $taxAmount = 0;
     
     /**
      * @var string
@@ -69,12 +59,7 @@ class Order extends AbstractEntity implements OrderInterface
      * @var float
      */
     protected $currencyRate;
-    
-    /**
-     * @var Collection
-     */
-    protected $totals;
-    
+
     /**
      * @var Collection
      */
@@ -96,189 +81,110 @@ class Order extends AbstractEntity implements OrderInterface
     protected $orderStatusHistory;
     
     /**
-     * @var ClientContactDetailsInterface
+     * @var Collection
      */
-    protected $contactDetails;
+    private $modifiers;
     
     /**
-     * @var ClientBillingAddressInterface
+     * @var OrderSummaryInterface
      */
-    protected $billingAddress;
-    
-    /**
-     * @var ClientShippingAddressInterface
-     */
-    protected $shippingAddress;
+    private $summary;
     
     /**
      * @var string
      */
     protected $comment;
     
-    /**
-     * {@inheritdoc}
-     */
     public function getCurrency() : string
     {
         return $this->currency;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function setCurrency(string $currency)
     {
         $this->currency = $currency;
     }
     
-    /**
-     * {@inheritdoc}
-     */
+    public function getCurrencyRate() : float
+    {
+        return $this->currencyRate;
+    }
+    
+    public function setCurrencyRate(float $currencyRate)
+    {
+        $this->currencyRate = $currencyRate;
+    }
+    
     public function getSessionId() : string
     {
         return $this->sessionId;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function setSessionId(string $sessionId)
     {
         $this->sessionId = $sessionId;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function addProduct(OrderProductInterface $orderProduct)
     {
         $this->products->add($orderProduct);
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function removeProduct(OrderProductInterface $orderProduct)
     {
         $this->products->removeElement($orderProduct);
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function getProducts() : Collection
     {
         return $this->products;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function setProducts(Collection $products)
     {
         $this->products = $products;
     }
-    
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function getContactDetails() : ClientContactDetailsInterface
+
+    public function getSummary() : OrderSummaryInterface
     {
-        return $this->contactDetails;
+        return $this->summary;
     }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function setContactDetails(ClientContactDetailsInterface $contactDetails)
+
+    public function setSummary(OrderSummaryInterface $summary)
     {
-        $this->contactDetails = $contactDetails;
+        $this->summary = $summary;
     }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function getBillingAddress() : ClientBillingAddressInterface
-    {
-        return $this->billingAddress;
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function setBillingAddress(ClientBillingAddressInterface $billingAddress)
-    {
-        $this->billingAddress = $billingAddress;
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function getShippingAddress() : ClientShippingAddressInterface
-    {
-        return $this->shippingAddress;
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function setShippingAddress(ClientShippingAddressInterface $shippingAddress)
-    {
-        $this->shippingAddress = $shippingAddress;
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
+
     public function getTotals() : Collection
     {
         return $this->totals;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function setTotals(Collection $totals)
     {
         $this->totals = $totals;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function addTotal(OrderTotalDetailInterface $orderTotal)
     {
         $this->totals->add($orderTotal);
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function getCurrentStatus() : OrderStatusInterface
     {
         return $this->currentStatus;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function setCurrentStatus(OrderStatusInterface $currentStatus)
     {
         $this->currentStatus = $currentStatus;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function setOrderStatusHistory(Collection $orderStatusHistory)
     {
         $this->orderStatusHistory = $orderStatusHistory;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function getOrderStatusHistory() : Collection
     {
         return $this->orderStatusHistory;

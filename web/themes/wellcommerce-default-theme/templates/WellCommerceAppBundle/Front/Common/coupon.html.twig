@@ -1,18 +1,8 @@
-{% set coupon = currentCart().coupon %}
-<div class="col-lg-7 col-xs-6">
-    <div class="coupon">
-        <h4>Coupon code</h4>
-        {% if coupon is null %}
-        <div class="form-group">
-            <div class="input-group">
-                <input type="text" value="" class="form-control" id="coupon_code">
-
-                <div class="input-group-addon">
-                    <button type="submit" class="btn btn-primary btn-sm" id="use_coupon">Accept</button>
-                </div>
-            </div>
-        </div>
-        {% else %}
+{% if currentCart().hasCoupon() %}
+    {% set coupon = currentCart().getCoupon() %}
+    <div class="col-lg-7 col-xs-6">
+        <div class="coupon">
+            <h4>Coupon code</h4>
             <div class="form-group">
                 <div class="input-group">
                     <input type="text" value="{{ coupon.code }}" class="form-control" disabled>
@@ -22,23 +12,35 @@
                     </div>
                 </div>
             </div>
-        {% endif %}
+        </div>
     </div>
-</div>
+    <div class="col-lg-5 col-xs-6">
+        <div class="row">
+            <div class="col-xs-6 text-right">
+                <h4><br/><br/>Discount</h4>
+            </div>
+            <div class="col-xs-6">
+                {% if coupon.modifierType == '-' %}
+                    <h4><strong><br/><br/>-{{ format_price(coupon.modifierValue, coupon.currency) }}</strong></h4>
+                {% else %}
+                    <h4><strong><br/><br/>-{{ coupon.modifierValue }}{{ coupon.modifierType }}</strong></h4>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% else %}
+    <div class="col-lg-7 col-xs-6">
+        <div class="coupon">
+            <h4>Coupon code</h4>
+            <div class="form-group">
+                <div class="input-group">
+                    <input type="text" value="" class="form-control" id="coupon_code">
 
-{% if coupon is not null %}
-<div class="col-lg-5 col-xs-6">
-    <div class="row">
-        <div class="col-xs-6 text-right">
-            <h4><br/><br/>Discount</h4>
-        </div>
-        <div class="col-xs-6">
-            {% if coupon.modifierType == '-' %}
-                <h4><strong><br/><br/>-{{ format_price(coupon.modifierValue, coupon.currency) }}</strong></h4>
-            {% else %}
-                <h4><strong><br/><br/>-{{ coupon.modifierValue }}{{ coupon.modifierType }}</strong></h4>
-            {% endif %}
+                    <div class="input-group-addon">
+                        <button type="submit" class="btn btn-primary btn-sm" id="use_coupon">Accept</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
 {% endif %}

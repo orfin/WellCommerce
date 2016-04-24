@@ -21,19 +21,14 @@ use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientDetailsFactory extends AbstractEntityFactory
+final class ClientDetailsFactory extends AbstractEntityFactory
 {
-    /**
-     * @var string
-     */
     protected $supportsInterface = ClientDetailsInterface::class;
 
-    /**
-     * @return ClientDetailsInterface
-     */
     public function create() : ClientDetailsInterface
     {
-        $details = new ClientDetails();
+        /** @var ClientDetailsInterface $details */
+        $details = $this->init();
         $details->setConditionsAccepted(false);
         $details->setDiscount(0);
         $details->setNewsletterAccepted(false);

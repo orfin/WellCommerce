@@ -12,9 +12,12 @@
 
 namespace WellCommerce\Bundle\CartBundle\Factory;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
-use WellCommerce\Bundle\CartBundle\Entity\CartTotals;
+use WellCommerce\Bundle\CartBundle\Entity\CartProductTotalInterface;
+use WellCommerce\Bundle\CartBundle\Entity\CartSummaryInterface;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddressInterface;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetailsInterface;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddressInterface;
 use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 
 /**
@@ -22,29 +25,50 @@ use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CartFactory extends AbstractEntityFactory
+final class CartFactory extends AbstractEntityFactory
 {
-    /**
-     * @var string
-     */
     protected $supportsInterface = CartInterface::class;
 
-    /**
-     * @return CartInterface
-     */
     public function create() : CartInterface
     {
         /** @var $cart CartInterface */
         $cart = $this->init();
-        $cart->setProducts(new ArrayCollection());
-        $cart->setTotals(new CartTotals());
-        $cart->setShippingMethodCost(null);
-        $cart->setPaymentMethod(null);
+        $cart->setProducts($this->createEmptyCollection());
+        $cart->setProductTotal($this->createCartProductTotal());
+        $cart->setModifiers($this->createEmptyCollection());
         $cart->setCopyAddress(true);
-        $cart->setCoupon(null);
         $cart->setCurrency($this->getRequestHelper()->getCurrentCurrency());
         $cart->setSessionId($this->getRequestHelper()->getSessionId());
+        $cart->setSummary($this->createCartSummary());
+        $cart->setContactDetails($this->createContactDetails());
+        $cart->setBillingAddress($this->createBillingAddress());
+        $cart->setShippingAddress($this->createShippingAddress());
 
         return $cart;
+    }
+
+    private function createContactDetails() : ClientContactDetailsInterface
+    {
+        return $this->get('client_contact_details.factory')->create();
+    }
+
+    private function createBillingAddress() : ClientBillingAddressInterface
+    {
+        return $this->get('client_billing_address.factory')->create();
+    }
+
+    private function createShippingAddress() : ClientShippingAddressInterface
+    {
+        return $this->get('client_shipping_address.factory')->create();
+    }
+
+    private function createCartProductTotal() : CartProductTotalInterface
+    {
+        return $this->get('cart_product_total.factory')->create();
+    }
+
+    private function createCartSummary() : CartSummaryInterface
+    {
+        return $this->get('cart_summary.factory')->create();
     }
 }

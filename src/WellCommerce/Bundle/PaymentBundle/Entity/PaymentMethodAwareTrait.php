@@ -19,24 +19,20 @@ namespace WellCommerce\Bundle\PaymentBundle\Entity;
  */
 trait PaymentMethodAwareTrait
 {
-    /**
-     * @var PaymentMethodInterface
-     */
     protected $paymentMethod;
 
-    /**
-     * @return null|PaymentMethodInterface
-     */
-    public function getPaymentMethod()
+    public function getPaymentMethod() : PaymentMethodInterface
     {
         return $this->paymentMethod;
     }
 
-    /**
-     * @param null|PaymentMethodInterface $paymentMethod
-     */
-    public function setPaymentMethod(PaymentMethodInterface $paymentMethod = null)
+    public function setPaymentMethod(PaymentMethodInterface $paymentMethod)
     {
         $this->paymentMethod = $paymentMethod;
+    }
+
+    public function hasPaymentMethod() : bool
+    {
+        return $this->paymentMethod instanceof PaymentMethodInterface;
     }
 }

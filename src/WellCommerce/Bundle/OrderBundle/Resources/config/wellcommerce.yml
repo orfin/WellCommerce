@@ -67,3 +67,9 @@ well_commerce_order:
             orm_configuration:
                 mapping: "@WellCommerceOrderBundle/Resources/config/doctrine/OrderTotalDetail.orm.yml"
                 entity: WellCommerce\Bundle\OrderBundle\Entity\OrderTotalDetail
+        order_summary:
+            auto_services:
+                factory: WellCommerce\Bundle\OrderBundle\Factory\OrderSummaryFactory
+            orm_configuration:
+                mapping: "@WellCommerceOrderBundle/Resources/config/doctrine/OrderSummary.orm.yml"
+                entity: WellCommerce\Bundle\OrderBundle\Entity\OrderSummary

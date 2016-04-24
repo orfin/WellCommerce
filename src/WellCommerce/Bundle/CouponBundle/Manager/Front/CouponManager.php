@@ -72,7 +72,7 @@ class CouponManager extends AbstractFrontManager
     public function removeCartCoupon()
     {
         $cart = $this->getCartContext()->getCurrentCart();
-        $cart->setCoupon(null);
+        $cart->removeCoupon();
         $this->updateResource($cart);
     }
 }

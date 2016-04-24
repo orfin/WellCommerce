@@ -26,7 +26,6 @@ use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
 use WellCommerce\Bundle\DoctrineBundle\Behaviours\Enableable\EnableableInterface;
 use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 use WellCommerce\Bundle\ProducerBundle\Entity\ProducerAwareInterface;
-use WellCommerce\Bundle\ShippingBundle\Calculator\ShippingCalculatorSubjectInterface;
 use WellCommerce\Bundle\ShopBundle\Entity\ShopCollectionAwareInterface;
 use WellCommerce\Bundle\TaxBundle\Entity\TaxInterface;
 use WellCommerce\Bundle\UnitBundle\Entity\UnitAwareInterface;
@@ -46,8 +45,7 @@ interface ProductInterface extends
     ShopCollectionAwareInterface,
     ProducerAwareInterface,
     UnitAwareInterface,
-    AvailabilityAwareInterface,
-    ShippingCalculatorSubjectInterface
+    AvailabilityAwareInterface
 {
     /**
      * @return string

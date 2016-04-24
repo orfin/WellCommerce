@@ -26,6 +26,15 @@
             </call>
         </service>
 
+        <service id="cart_modifier.manager.front" class="WellCommerce\Bundle\CartBundle\Manager\Front\CartModifierManager">
+            <argument type="service" id="cart_modifier.repository"/>
+            <argument type="service" id="cart_modifier.event_dispatcher"/>
+            <argument type="service" id="cart_modifier.factory"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
         <service id="package.command.purge.carts" class="WellCommerce\Bundle\CartBundle\Command\PurgeCartsCommand">
             <tag name="console.command"/>
         </service>
@@ -53,12 +62,6 @@
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
             <argument type="service" id="cart_product.event_dispatcher"/>
-            <call method="setShippingMethodProvider">
-                <argument type="service" id="shipping_method.provider"/>
-            </call>
-            <call method="setCartContext">
-                <argument type="service" id="cart.context.front"/>
-            </call>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -78,6 +81,10 @@
             <argument type="service" id="event_dispatcher" />
         </service>
 
+        <service id="cart_modifier.event_dispatcher" parent="core.event_dispatcher" public="false">
+            <argument type="service" id="event_dispatcher" />
+        </service>
+
         <service id="cart.subscriber" class="WellCommerce\Bundle\CartBundle\EventListener\CartSubscriber">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
@@ -85,32 +92,23 @@
             <tag name="kernel.event_subscriber"/>
         </service>
 
-        <service id="cart.visitor.collection" class="WellCommerce\Bundle\CartBundle\Visitor\CartVisitorCollection" />
+        <service id="cart.visitor.collection" class="Doctrine\Common\Collections\ArrayCollection" shared="false" />
+
+        <service id="cart.modifier.collection" class="Doctrine\Common\Collections\ArrayCollection" shared="false" />
 
         <service id="cart.visitor.traverser" class="WellCommerce\Bundle\CartBundle\Visitor\CartVisitorTraverser">
             <argument type="service" id="cart.visitor.collection"/>
         </service>
 
-        <service id="cart_totals.collector" class="WellCommerce\Bundle\CartBundle\Collector\CartTotalsCollector">
+        <service id="product_total.cart.visitor" class="WellCommerce\Bundle\CartBundle\Visitor\CartProductTotalVisitor">
             <argument type="service" id="currency.helper"/>
+            <tag name="cart.visitor" alias="product_total"/>
         </service>
 
-        <service id="cart_totals.cart.visitor" class="WellCommerce\Bundle\CartBundle\Visitor\CartTotalsVisitor">
-            <argument type="service" id="cart_totals.collector"/>
-            <tag name="cart.visitor"/>
-        </service>
-
-        <service id="cart_summary.collector" class="WellCommerce\Bundle\CartBundle\Collector\CartSummaryCollector">
+        <service id="summary.cart.visitor" class="WellCommerce\Bundle\CartBundle\Visitor\CartSummaryVisitor">
             <argument type="service" id="currency.helper"/>
-        </service>
-
-        <service id="shipping_method.cart.visitor" class="WellCommerce\Bundle\CartBundle\Visitor\CartShippingMethodVisitor">
-            <argument type="service" id="shipping_method.provider"/>
-            <tag name="cart.visitor"/>
-        </service>
-
-        <service id="payment_method.cart.visitor" class="WellCommerce\Bundle\CartBundle\Visitor\CartPaymentMethodVisitor">
-            <tag name="cart.visitor"/>
+            <argument type="service" id="cart_summary.factory"/>
+            <tag name="cart.visitor" alias="summary"/>
         </service>
 
         <service id="cart_product.request_param_converter" class="WellCommerce\Bundle\CartBundle\Request\ParamConverter\CartProductParamConverter">

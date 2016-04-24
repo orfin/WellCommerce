@@ -47,7 +47,7 @@ abstract class AbstractEntityParamConverter implements ParamConverterInterface
      * @param string              $requestAttributeName
      * @param array               $supportedTypes
      */
-    public function __construct(RepositoryInterface $repository, $requestAttributeName = 'id', $supportedTypes = [])
+    public function __construct(RepositoryInterface $repository, string $requestAttributeName = 'id', array $supportedTypes = [])
     {
         $this->repository           = $repository;
         $this->requestAttributeName = $requestAttributeName;

@@ -19,73 +19,27 @@ namespace WellCommerce\Bundle\CompanyBundle\Entity;
  */
 interface CompanyAddressInterface
 {
-    /**
-     * @return string
-     */
-    public function getStreet() : string;
+    public function getLine1() : string;
 
-    /**
-     * @param string $street
-     */
-    public function setStreet(string $street);
+    public function setLine1(string $street);
 
-    /**
-     * @return string
-     */
-    public function getStreetNo() : string;
+    public function getLine2() : string;
 
-    /**
-     * @param string $streetNo
-     */
-    public function setStreetNo(string $streetNo);
+    public function setLine2(string $streetNo);
 
-    /**
-     * @return string
-     */
-    public function getFlatNo() : string;
+    public function getPostalCode() : string;
 
-    /**
-     * @param string $flatNo
-     */
-    public function setFlatNo(string $flatNo);
+    public function setPostalCode(string $postalCode);
 
-    /**
-     * @return string
-     */
-    public function getPostCode() : string;
+    public function getState() : string;
 
-    /**
-     * @param string $postCode
-     */
-    public function setPostCode(string $postCode);
+    public function setState(string $state);
 
-    /**
-     * @return string
-     */
-    public function getProvince() : string;
-
-    /**
-     * @param string $province
-     */
-    public function setProvince(string $province);
-
-    /**
-     * @return string
-     */
     public function getCity() : string;
 
-    /**
-     * @param string $city
-     */
     public function setCity(string $city);
 
-    /**
-     * @return string
-     */
     public function getCountry() : string;
 
-    /**
-     * @param string $country
-     */
     public function setCountry(string $country);
 }

@@ -12,6 +12,8 @@
 
 namespace WellCommerce\Bundle\ShippingBundle\Calculator;
 
+use Doctrine\Common\Collections\Collection;
+use WellCommerce\Bundle\CurrencyBundle\Converter\CurrencyConverterInterface;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCostInterface;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface;
 
@@ -20,25 +22,42 @@ use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PriceTableCalculator extends AbstractShippingMethodCalculator
+final class PriceTableCalculator implements ShippingCalculatorInterface
 {
     /**
-     * {@inheritdoc}
+     * @var CurrencyConverterInterface
      */
-    public function calculate(ShippingMethodInterface $shippingMethod, ShippingCalculatorSubjectInterface $subject)
+    private $currencyConverter;
+
+    /**
+     * PriceTableCalculator constructor.
+     *
+     * @param CurrencyConverterInterface $currencyConverter
+     */
+    public function __construct(CurrencyConverterInterface $currencyConverter)
     {
-        $ranges          = $shippingMethod->getCosts();
-        $baseCurrency    = $subject->getShippingCostCurrency();
-        $targetCurrency  = $shippingMethod->getCurrency()->getCode();
-        $grossAmount     = $this->currencyHelper->convert($subject->getShippingCostGrossPrice(), $baseCurrency, $targetCurrency);
-        $supportedRanges = $ranges->filter(function (ShippingMethodCostInterface $cost) use ($grossAmount) {
+        $this->currencyConverter = $currencyConverter;
+    }
+
+    public function calculate(ShippingMethodInterface $shippingMethod, ShippingSubjectInterface $subject) : Collection
+    {
+        $ranges         = $shippingMethod->getCosts();
+        $baseCurrency   = $subject->getCurrency();
+        $targetCurrency = $shippingMethod->getCurrency()->getCode();
+        $grossAmount    = $this->currencyConverter->convert($subject->getGrossPrice(), $baseCurrency, $targetCurrency);
+
+        return $this->filterRanges($ranges, $grossAmount);
+    }
+
+    public function getAlias() : string
+    {
+        return 'price_table';
+    }
+
+    private function filterRanges(Collection $ranges, float $grossAmount) : Collection
+    {
+        return $ranges->filter(function (ShippingMethodCostInterface $cost) use ($grossAmount) {
             return ($cost->getRangeFrom() <= $grossAmount && $cost->getRangeTo() >= $grossAmount);
         });
-
-        if ($supportedRanges->count()) {
-            return $supportedRanges->first();
-        }
-
-        return null;
     }
 }

@@ -12,9 +12,11 @@
 
 namespace WellCommerce\Bundle\DoctrineBundle\Factory;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use WellCommerce\Bundle\AppBundle\Entity\DiscountablePriceInterface;
+use WellCommerce\Bundle\AppBundle\Entity\PriceInterface;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
 use WellCommerce\Bundle\CurrencyBundle\Entity\CurrencyInterface;
 use WellCommerce\Bundle\ShopBundle\Entity\ShopInterface;
@@ -27,14 +29,7 @@ use WellCommerce\Bundle\TaxBundle\Entity\TaxInterface;
  */
 abstract class AbstractEntityFactory extends AbstractContainerAware implements EntityFactoryInterface
 {
-    /**
-     * @var string
-     */
     protected $supportsInterface;
-
-    /**
-     * @var string
-     */
     protected $className;
 
     /**
@@ -47,9 +42,6 @@ abstract class AbstractEntityFactory extends AbstractContainerAware implements E
         $this->className = $className;
     }
 
-    /**
-     * @return object
-     */
     protected function init()
     {
         if (!$this->isSupported()) {
@@ -62,6 +54,16 @@ abstract class AbstractEntityFactory extends AbstractContainerAware implements E
         }
 
         return new $this->className;
+    }
+
+    protected function createDiscountablePrice() : DiscountablePriceInterface
+    {
+        return $this->get('discountable_price.factory')->create();
+    }
+
+    protected function createPrice() : PriceInterface
+    {
+        return $this->get('price.factory')->create();
     }
 
     protected function getDefaultCurrency() : CurrencyInterface
@@ -84,11 +86,11 @@ abstract class AbstractEntityFactory extends AbstractContainerAware implements E
         return $this->get('shop.context.admin')->getCurrentShop();
     }
 
-    /**
-     * Checks whether the factory supports given entity class
-     *
-     * @return bool
-     */
+    protected function createEmptyCollection() : Collection
+    {
+        return new ArrayCollection();
+    }
+
     protected function isSupported() : bool
     {
         $rc = new \ReflectionClass($this->className);

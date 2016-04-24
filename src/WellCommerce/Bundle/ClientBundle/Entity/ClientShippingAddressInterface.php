@@ -19,5 +19,4 @@ namespace WellCommerce\Bundle\ClientBundle\Entity;
  */
 interface ClientShippingAddressInterface extends ClientAddressInterface
 {
-
 }

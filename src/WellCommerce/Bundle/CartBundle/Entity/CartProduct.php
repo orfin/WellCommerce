@@ -21,51 +21,29 @@ class CartProduct extends AbstractEntity implements CartProductInterface
     use VariantAwareTrait;
     use CartAwareTrait;
     
-    /**
-     * @var int
-     */
     protected $quantity;
-
-    /**
-     * @var string
-     */
     protected $options;
 
-    /**
-     * {@inheritdoc}
-     */
     public function getQuantity() : int
     {
         return $this->quantity;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setQuantity(int $quantity)
     {
         $this->quantity = $quantity;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function increaseQuantity(int $increase)
     {
         $this->quantity += $increase;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function decreaseQuantity(int $decrease)
     {
         $this->quantity -= $decrease;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSellPrice() : DiscountablePrice
     {
         if ($this->variant instanceof VariantInterface) {
@@ -75,9 +53,6 @@ class CartProduct extends AbstractEntity implements CartProductInterface
         return $this->product->getSellPrice();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getWeight() : float
     {
         if ($this->variant instanceof VariantInterface) {
@@ -87,18 +62,12 @@ class CartProduct extends AbstractEntity implements CartProductInterface
         return $this->product->getWeight();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getOptions()
+    public function getOptions() : array
     {
         return $this->options;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setOptions($options)
+    public function setOptions(array $options)
     {
         $this->options = $options;
     }

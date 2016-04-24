@@ -24,16 +24,10 @@ use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientFactory extends AbstractEntityFactory
+final class ClientFactory extends AbstractEntityFactory
 {
-    /**
-     * @var string
-     */
     protected $supportsInterface = ClientInterface::class;
 
-    /**
-     * @return ClientInterface
-     */
     public function create() : ClientInterface
     {
         /** @var $client ClientInterface */

@@ -19,10 +19,7 @@ namespace WellCommerce\Bundle\CartBundle\Entity;
  */
 trait CartAwareTrait
 {
-    /**
-     * @var CartInterface
-     */
-    protected $cart;
+    private $cart;
 
     public function setCart(CartInterface $cart)
     {

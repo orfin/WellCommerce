@@ -27,6 +27,7 @@ class WellCommerceCartBundle extends Bundle
     {
         parent::build($container);
         $container->addCompilerPass(new Compiler\RegisterCartVisitorPass());
+        $container->addCompilerPass(new Compiler\RegisterCartModifierPass());
         $container->addCompilerPass(new Compiler\AutoRegisterServicesPass());
         $container->addCompilerPass(new Compiler\MappingCompilerPass());
     }

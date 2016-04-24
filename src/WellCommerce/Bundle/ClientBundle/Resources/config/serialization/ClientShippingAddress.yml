@@ -8,23 +8,19 @@ WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddress:
             groups:
                 - default
                 - client_shipping_address
-        street:
+        line1:
             groups:
                 - default
                 - client_shipping_address
-        streetNo:
+        line2:
             groups:
                 - default
                 - client_shipping_address
-        flatNo:
+        postalCode:
             groups:
                 - default
                 - client_shipping_address
-        postCode:
-            groups:
-                - default
-                - client_shipping_address
-        province:
+        state:
             groups:
                 - default
                 - client_shipping_address

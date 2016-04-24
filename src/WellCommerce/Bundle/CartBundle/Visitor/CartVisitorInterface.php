@@ -21,18 +21,5 @@ use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
  */
 interface CartVisitorInterface
 {
-    /**
-     * @param CartInterface $cart
-     */
     public function visitCart(CartInterface $cart);
-
-    /**
-     * @return int
-     */
-    public function getPriority();
-
-    /**
-     * @return string
-     */
-    public function getAlias();
 }

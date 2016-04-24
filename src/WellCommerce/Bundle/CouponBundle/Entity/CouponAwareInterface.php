@@ -15,13 +15,11 @@ namespace WellCommerce\Bundle\CouponBundle\Entity;
 
 interface CouponAwareInterface
 {
-    /**
-     * @param CouponInterface|null $coupon
-     */
-    public function setCoupon(CouponInterface $coupon = null);
+    public function setCoupon(CouponInterface $coupon);
 
-    /**
-     * @return CouponInterface|null
-     */
-    public function getCoupon();
+    public function getCoupon() : CouponInterface;
+
+    public function hasCoupon() : bool;
+
+    public function removeCoupon();
 }

@@ -36,12 +36,10 @@ class LoadCompanyData extends AbstractDataFixture
         $company->setName($fakerGenerator->company . ' ' . $fakerGenerator->companySuffix);
         $company->setShortName($fakerGenerator->company);
         $company->getAddress()->setCountry($fakerGenerator->countryCode);
-        $company->getAddress()->setStreet($fakerGenerator->streetName);
-        $company->getAddress()->setStreetNo($fakerGenerator->streetSuffix);
-        $company->getAddress()->setFlatNo($fakerGenerator->randomNumber());
-        $company->getAddress()->setPostCode($fakerGenerator->postcode);
-        $company->getAddress()->setPostCode($fakerGenerator->postcode);
-        $company->getAddress()->setProvince('');
+        $company->getAddress()->setLine1($fakerGenerator->streetName . ' ' . $fakerGenerator->streetSuffix);
+        $company->getAddress()->setLine2($fakerGenerator->buildingNumber);
+        $company->getAddress()->setPostalCode($fakerGenerator->postcode);
+        $company->getAddress()->setState('');
         $company->getAddress()->setCity($fakerGenerator->city);
         $manager->persist($company);
         $manager->flush();

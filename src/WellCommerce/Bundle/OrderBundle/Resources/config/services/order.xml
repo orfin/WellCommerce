@@ -9,7 +9,7 @@
     </imports>
 
     <services>
-        <service id="order.event_dispatcher" class="WellCommerce\Bundle\OrderBundle\EventDispatcher\OrderEventDispatcher">
+        <service id="order.event_dispatcher" parent="core.event_dispatcher" public="false">
             <argument type="service" id="event_dispatcher"/>
         </service>
 

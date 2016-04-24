@@ -17,6 +17,6 @@ namespace WellCommerce\Bundle\PaymentBundle\Gateway;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface PayPalGatewayInterface
+interface PayPalGatewayInterface extends PaymentGatewayInterface
 {
 }

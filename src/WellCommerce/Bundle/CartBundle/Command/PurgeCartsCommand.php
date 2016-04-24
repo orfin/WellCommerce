@@ -12,12 +12,16 @@
 
 namespace WellCommerce\Bundle\CartBundle\Command;
 
-
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class PurgeCartsCommand extends ContainerAwareCommand
+/**
+ * Class PurgeCartsCommand
+ *
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
+ */
+final class PurgeCartsCommand extends ContainerAwareCommand
 {
     protected function configure()
     {

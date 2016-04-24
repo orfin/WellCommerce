@@ -11,6 +11,8 @@
             </call>
         </service>
 
+        <service id="bank_transfer.gateway" class="WellCommerce\Bundle\PaymentBundle\Gateway\OfflinePaymentGateway" shared="false" />
+
         <service id="bank_transfer.configurator" class="WellCommerce\Bundle\PaymentBundle\Configurator\BankTransferConfigurator" shared="false">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
@@ -18,6 +20,7 @@
         </service>
 
         <service id="bank_transfer.processor" class="WellCommerce\Bundle\PaymentBundle\Processor\BankTransferProcessor">
+            <argument type="service" id="bank_transfer.gateway"/>
             <argument type="service" id="bank_transfer.configurator"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>

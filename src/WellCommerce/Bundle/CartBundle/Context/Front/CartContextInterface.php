@@ -21,23 +21,11 @@ use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
  */
 interface CartContextInterface
 {
-    /**
-     * @param CartInterface $cart
-     */
     public function setCurrentCart(CartInterface $cart);
 
-    /**
-     * @return CartInterface
-     */
     public function getCurrentCart() : CartInterface;
 
-    /**
-     * @return int
-     */
     public function getCurrentCartIdentifier() : int;
 
-    /**
-     * @return bool
-     */
     public function hasCurrentCart() : bool;
 }

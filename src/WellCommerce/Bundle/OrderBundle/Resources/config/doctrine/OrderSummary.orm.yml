@@ -1,0 +1,18 @@
+WellCommerce\Bundle\OrderBundle\Entity\OrderSummary:
+    type: embeddable
+    fields:
+        netAmount:
+            type: decimal
+            scale: 2
+            nullable: false
+            column: net_amount
+        grossAmount:
+            type: decimal
+            scale: 2
+            nullable: false
+            column: gross_amount
+        taxAmount:
+            type: decimal
+            scale: 2
+            nullable: false
+            column: tax_amount

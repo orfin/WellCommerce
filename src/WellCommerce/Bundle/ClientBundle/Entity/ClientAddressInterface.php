@@ -19,93 +19,35 @@ namespace WellCommerce\Bundle\ClientBundle\Entity;
  */
 interface ClientAddressInterface
 {
-    /**
-     * @return string
-     */
-    public function getFirstName();
+    public function getFirstName() : string;
 
-    /**
-     * @param string $firstName
-     */
-    public function setFirstName($firstName);
+    public function setFirstName(string $firstName);
 
-    /**
-     * @return string
-     */
-    public function getLastName();
+    public function getLastName() : string;
 
-    /**
-     * @param string $lastName
-     */
-    public function setLastName($lastName);
+    public function setLastName(string $lastName);
 
-    /**
-     * @return string
-     */
-    public function getStreet();
+    public function getLine1() : string;
 
-    /**
-     * @param string $street
-     */
-    public function setStreet($street);
+    public function setLine1(string $line1);
+    
+    public function getLine2() : string;
 
-    /**
-     * @return string
-     */
-    public function getStreetNo();
+    public function setLine2(string $line2);
 
-    /**
-     * @param string $streetNo
-     */
-    public function setStreetNo($streetNo);
+    public function getPostalCode() : string;
 
-    /**
-     * @return string
-     */
-    public function getFlatNo();
+    public function setPostalCode(string $postalCode);
 
-    /**
-     * @param string $flatNo
-     */
-    public function setFlatNo($flatNo);
+    public function getState() : string;
+    
+    public function setState(string $state);
 
-    /**
-     * @return string
-     */
-    public function getPostCode();
+    public function getCity() : string;
 
-    /**
-     * @param string $postCode
-     */
-    public function setPostCode($postCode);
+    public function setCity(string $city);
 
-    /**
-     * @return string
-     */
-    public function getProvince();
+    public function getCountry() : string;
 
-    /**
-     * @param string $province
-     */
-    public function setProvince($province);
-
-    /**
-     * @return string
-     */
-    public function getCity();
-
-    /**
-     * @param string $city
-     */
-    public function setCity($city);
-
-    /**
-     * @return string
-     */
-    public function getCountry();
-
-    /**
-     * @param string $country
-     */
-    public function setCountry($country);
+    public function setCountry(string $country);
 }

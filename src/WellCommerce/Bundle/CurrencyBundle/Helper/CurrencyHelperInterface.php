@@ -20,38 +20,54 @@ namespace WellCommerce\Bundle\CurrencyBundle\Helper;
 interface CurrencyHelperInterface
 {
     /**
-     * Formats given amount
+     * Formats the given amount
      *
      * @param float       $amount
-     * @param null|string $currency
-     * @param null|string $locale
+     * @param string|null $currency
+     * @param string|null $locale
      *
      * @return string
      */
-    public function format($amount, $currency = null, $locale = null);
+    public function format(float $amount, string $currency = null, string $locale = null) : string;
 
     /**
-     * Converts amount from base currency to target currency
+     * Converts the amount between currencies
      *
      * @param float       $amount
-     * @param null|string $baseCurrency
-     * @param null|string $targetCurrency
+     * @param string|null $baseCurrency
+     * @param string|null $targetCurrency
      * @param int         $quantity
      *
      * @return float
      */
-    public function convert($amount, $baseCurrency = null, $targetCurrency = null, $quantity = 1);
+    public function convert(float $amount, string $baseCurrency = null, string $targetCurrency = null, int $quantity = 1) : float;
 
     /**
-     * Converts and formats the given amount
+     * Firts converts and then formats the amount
      *
-     * @param int|float   $amount
-     * @param null|string $baseCurrency
-     * @param null|string $targetCurrency
+     * @param float       $amount
+     * @param string|null $baseCurrency
+     * @param string|null $targetCurrency
      * @param int         $quantity
-     * @param null|string $locale
+     * @param string|null $locale
      *
      * @return string
      */
-    public function convertAndFormat($amount, $baseCurrency = null, $targetCurrency = null, $quantity = 1, $locale = null);
+    public function convertAndFormat(
+        float $amount,
+        string $baseCurrency = null,
+        string $targetCurrency = null,
+        int $quantity = 1,
+        string $locale = null
+    ) : string;
+
+    /**
+     * Returns the exchange rate
+     *
+     * @param string|null $baseCurrency
+     * @param string|null $targetCurrency
+     *
+     * @return float
+     */
+    public function getCurrencyRate(string $baseCurrency = null, string $targetCurrency = null) : float;
 }

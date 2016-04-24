@@ -11,6 +11,8 @@
             </call>
         </service>
 
+        <service id="cash_on_delivery.gateway" class="WellCommerce\Bundle\PaymentBundle\Gateway\OfflinePaymentGateway" shared="false" />
+
         <service id="cash_on_delivery.configurator" class="WellCommerce\Bundle\PaymentBundle\Configurator\CashOnDeliveryConfigurator" shared="false">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
@@ -18,6 +20,7 @@
         </service>
 
         <service id="cash_on_delivery.processor" class="WellCommerce\Bundle\PaymentBundle\Processor\CashOnDeliveryProcessor">
+            <argument type="service" id="cash_on_delivery.gateway"/>
             <argument type="service" id="cash_on_delivery.configurator"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>

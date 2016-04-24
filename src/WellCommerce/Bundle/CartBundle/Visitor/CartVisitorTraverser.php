@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CartBundle\Visitor;
 
+use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 
 /**
@@ -19,30 +20,27 @@ use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CartVisitorTraverser implements CartVisitorTraverserInterface
+final class CartVisitorTraverser
 {
     /**
-     * @var CartVisitorCollection
+     * @var Collection
      */
-    protected $collection;
+    private $visitors;
 
     /**
-     * Constructor
+     * CartVisitorTraverser constructor.
      *
-     * @param CartVisitorCollection $collection
+     * @param Collection $visitors
      */
-    public function __construct(CartVisitorCollection $collection)
+    public function __construct(Collection $visitors)
     {
-        $this->collection = $collection;
+        $this->visitors = $visitors;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function traverse(CartInterface $cart)
     {
-        foreach ($this->collection->all() as $visitor) {
+        $this->visitors->map(function (CartVisitorInterface $visitor) use ($cart) {
             $visitor->visitCart($cart);
-        }
+        });
     }
 }

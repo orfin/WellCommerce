@@ -19,7 +19,6 @@ use WellCommerce\Bundle\CoreBundle\Request\ParamConverter\AbstractEntityParamCon
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CartProductParamConverter extends AbstractEntityParamConverter
+final class CartProductParamConverter extends AbstractEntityParamConverter
 {
-
 }

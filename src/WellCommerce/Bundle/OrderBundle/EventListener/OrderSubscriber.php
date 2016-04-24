@@ -19,6 +19,8 @@ use WellCommerce\Bundle\DoctrineBundle\Event\ResourceEvent;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderTotalDetailInterface;
 use WellCommerce\Bundle\OrderBundle\Factory\OrderTotalFactory;
+use WellCommerce\Bundle\OrderBundle\Manager\Front\OrderConfirmationManager;
+use WellCommerce\Bundle\OrderBundle\Manager\Front\OrderManager;
 use WellCommerce\Bundle\OrderBundle\Visitor\OrderVisitorTraverserInterface;
 
 /**
@@ -26,7 +28,7 @@ use WellCommerce\Bundle\OrderBundle\Visitor\OrderVisitorTraverserInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class OrderSubscriber extends AbstractEventSubscriber
+final class OrderSubscriber extends AbstractEventSubscriber
 {
     public static function getSubscribedEvents()
     {
@@ -42,15 +44,16 @@ class OrderSubscriber extends AbstractEventSubscriber
         $order   = $event->getResource();
         $context = $this->getCartContext();
         if ($order instanceof OrderInterface && $context->hasCurrentCart()) {
-            $order->setCart($context->getCurrentCart());
+            $this->getOrderConfirmationManager()->prepareOrderFromCart($order, $context->getCurrentCart());
         }
 
-        Debug::dump($order);die();
+        Debug::dump($order);
+        die();
     }
 
-    public function onOrderPostCreateEvent(ResourceEvent $event)
+    public function onOrderPostCreateEvent()
     {
-        
+        $this->getCartManager()->abandonCurrentCart();
     }
     
     public function onOrderPostPreparedEvent(ResourceEvent $event)
@@ -92,28 +95,33 @@ class OrderSubscriber extends AbstractEventSubscriber
         $em->flush();
     }
     
-    protected function traverseOrder(OrderInterface $order)
+    private function traverseOrder(OrderInterface $order)
     {
         $this->getOrderVisitorTraverser()->traverse($order);
     }
 
-    protected function getOrderVisitorTraverser() : OrderVisitorTraverserInterface
+    private function getOrderVisitorTraverser() : OrderVisitorTraverserInterface
     {
         return $this->container->get('order.visitor.traverser');
     }
 
-    protected function getCartManager() : CartManagerInterface
+    private function getCartManager() : CartManagerInterface
     {
         return $this->container->get('cart.manager.front');
     }
 
-    protected function getCartContext() : CartContextInterface
+    private function getCartContext() : CartContextInterface
     {
         return $this->container->get('cart.context.front');
     }
 
-    protected function getOrderTotalFactory() : OrderTotalFactory
+    private function getOrderTotalFactory() : OrderTotalFactory
     {
         return $this->container->get('order_total.factory');
+    }
+
+    private function getOrderConfirmationManager() : OrderConfirmationManager
+    {
+        return $this->container->get('order_confirmation.manager.front');
     }
 }

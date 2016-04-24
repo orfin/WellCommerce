@@ -22,8 +22,6 @@ use PayPal\Api\Payer;
 use PayPal\Api\Transaction;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderProductInterface;
-use WellCommerce\Bundle\PaymentBundle\Configurator\PaymentMethodConfiguratorInterface;
-use WellCommerce\Bundle\PaymentBundle\Gateway\PayPalGatewayInterface;
 
 /**
  * Class AbstractPayPalProcessor
@@ -32,23 +30,6 @@ use WellCommerce\Bundle\PaymentBundle\Gateway\PayPalGatewayInterface;
  */
 abstract class AbstractPayPalProcessor extends AbstractPaymentProcessor implements PayPalProcessorInterface
 {
-    /**
-     * @var PayPalGatewayInterface
-     */
-    protected $gateway;
-    
-    /**
-     * PayPalProcessor constructor.
-     *
-     * @param PaymentMethodConfiguratorInterface $configurator
-     * @param PayPalGatewayInterface             $gateway
-     */
-    public function __construct(PaymentMethodConfiguratorInterface $configurator, PayPalGatewayInterface $gateway)
-    {
-        parent::__construct($configurator);
-        $this->gateway = $gateway;
-    }
-    
     /**
      * Creates a Payer object for given payment method and funding instrument
      *
@@ -168,9 +149,10 @@ abstract class AbstractPayPalProcessor extends AbstractPaymentProcessor implemen
     protected function createAddress(OrderInterface $order) : Address
     {
         $address = new Address();
-        $address->setLine1($order->getBillingAddress()->getStreet() . ' ' . $order->getBillingAddress()->getStreetNo());
+        $address->setLine1($order->getBillingAddress()->getLine1());
+        $address->setLine2($order->getBillingAddress()->getLine2());
         $address->setCity($order->getBillingAddress()->getCity());
-        $address->setPostalCode($order->getBillingAddress()->getPostCode());
+        $address->setPostalCode($order->getBillingAddress()->getPostalCode());
         $address->setCountryCode($order->getBillingAddress()->getCountry());
 
         return $address;

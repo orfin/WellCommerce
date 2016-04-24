@@ -16,6 +16,7 @@ use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 use WellCommerce\Bundle\PageBundle\Entity\PageInterface;
 
 /**
@@ -23,50 +24,21 @@ use WellCommerce\Bundle\PageBundle\Entity\PageInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ClientGroupInterface extends TranslatableInterface, TimestampableInterface, BlameableInterface
+interface ClientGroupInterface extends EntityInterface, TranslatableInterface, TimestampableInterface, BlameableInterface
 {
-    /**
-     * @return int
-     */
-    public function getId();
+    public function getDiscount() : float;
 
-    /**
-     * @return float
-     */
-    public function getDiscount();
+    public function setDiscount(float $discount);
 
-    /**
-     * @param float $discount
-     */
-    public function setDiscount($discount);
-
-    /**
-     * @param Collection $clients
-     */
     public function setClients(Collection $clients);
 
-    /**
-     * @return Collection
-     */
-    public function getClients();
+    public function getClients() : Collection;
 
-    /**
-     * @param ClientInterface $client
-     */
     public function addClient(ClientInterface $client);
 
-    /**
-     * @return Collection
-     */
-    public function getPages();
+    public function getPages() : Collection;
 
-    /**
-     * @param Collection $pages
-     */
     public function setPages(Collection $pages);
 
-    /**
-     * @param PageInterface $page
-     */
     public function addPage(PageInterface $page);
 }

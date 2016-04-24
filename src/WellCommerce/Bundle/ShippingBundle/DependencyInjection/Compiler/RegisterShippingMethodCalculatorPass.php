@@ -15,7 +15,7 @@ namespace WellCommerce\Bundle\ShippingBundle\DependencyInjection\Compiler;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
-use WellCommerce\Bundle\ShippingBundle\Calculator\ShippingMethodCalculatorInterface;
+use WellCommerce\Bundle\ShippingBundle\Calculator\ShippingCalculatorInterface;
 
 /**
  * Class RegisterShippingMethodCalculatorPass
@@ -32,7 +32,7 @@ class RegisterShippingMethodCalculatorPass implements CompilerPassInterface
     public function process(ContainerBuilder $container)
     {
         $tag        = 'shipping_method.calculator';
-        $interface  = ShippingMethodCalculatorInterface::class;
+        $interface  = ShippingCalculatorInterface::class;
         $definition = $container->getDefinition('shipping_method.calculator.collection');
         
         foreach ($container->findTaggedServiceIds($tag) as $id => $attributes) {

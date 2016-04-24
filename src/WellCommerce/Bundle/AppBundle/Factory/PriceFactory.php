@@ -15,16 +15,10 @@ namespace WellCommerce\Bundle\AppBundle\Factory;
 use WellCommerce\Bundle\AppBundle\Entity\PriceInterface;
 use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 
-class PriceFactory extends AbstractEntityFactory
+final class PriceFactory extends AbstractEntityFactory
 {
-    /**
-     * @var string
-     */
     protected $supportsInterface = PriceInterface::class;
     
-    /**
-     * @return PriceInterface
-     */
     public function create() : PriceInterface
     {
         /** @var $price PriceInterface */

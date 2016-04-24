@@ -56,8 +56,6 @@ class CartManager extends AbstractFrontManager implements CartManagerInterface
 
         try {
             $this->cartProductManager->addProductToCart($cart, $product, $variant, $quantity);
-            $cart->setShippingMethodCost(null);
-            $cart->setPaymentMethod(null);
             $this->updateResource($cart);
 
         } catch (\Exception $e) {
@@ -74,9 +72,6 @@ class CartManager extends AbstractFrontManager implements CartManagerInterface
     {
         $cart = $this->getCartContext()->getCurrentCart();
         $this->cartProductManager->deleteCartProductFromCart($cartProduct, $cart);
-
-        $cart->setShippingMethodCost(null);
-        $cart->setPaymentMethod(null);
         $this->updateResource($cart);
 
         return true;
@@ -89,9 +84,6 @@ class CartManager extends AbstractFrontManager implements CartManagerInterface
     {
         $cart = $this->getCartContext()->getCurrentCart();
         $this->cartProductManager->changeCartProductQuantity($cart, $cartProduct, $qty);
-
-        $cart->setShippingMethodCost(null);
-        $cart->setPaymentMethod(null);
         $this->updateResource($cart);
 
         return true;
@@ -182,12 +174,11 @@ class CartManager extends AbstractFrontManager implements CartManagerInterface
      *
      * @return CartInterface
      */
-    protected function createCart(ShopInterface $shop, ClientInterface $client = null)
+    private function createCart(ShopInterface $shop, ClientInterface $client = null) : CartInterface
     {
         $cart = $this->initResource();
         $cart->setShop($shop);
         $cart->setClient($client);
-
         $this->createResource($cart);
 
         return $cart;

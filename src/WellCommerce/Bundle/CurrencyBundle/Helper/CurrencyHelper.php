@@ -20,17 +20,17 @@ use WellCommerce\Bundle\CurrencyBundle\Formatter\CurrencyFormatterInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CurrencyHelper implements CurrencyHelperInterface
+final class CurrencyHelper implements CurrencyHelperInterface
 {
     /**
      * @var CurrencyConverterInterface
      */
-    protected $converter;
+    private $converter;
 
     /**
      * @var CurrencyFormatterInterface
      */
-    protected $formatter;
+    private $formatter;
 
     /**
      * Constructor
@@ -44,29 +44,31 @@ class CurrencyHelper implements CurrencyHelperInterface
         $this->formatter = $formatter;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function format($amount, $currency = null, $locale = null)
+    public function format(float $amount, string $currency = null, string $locale = null) : string
     {
         return $this->formatter->format($amount, $currency, $locale);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function convert($amount, $baseCurrency = null, $targetCurrency = null, $quantity = 1)
+    public function convert(float $amount, string $baseCurrency = null, string $targetCurrency = null, int $quantity = 1) : float
     {
         return $this->converter->convert($amount, $baseCurrency, $targetCurrency, $quantity);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function convertAndFormat($amount, $baseCurrency = null, $targetCurrency = null, $quantity = 1, $locale = null)
+    public function convertAndFormat(
+        float $amount,
+        string $baseCurrency = null,
+        string $targetCurrency = null,
+        int $quantity = 1,
+        string $locale = null
+    ) : string
     {
         $converted = $this->convert($amount, $baseCurrency, $targetCurrency, $quantity);
 
         return $this->format($converted, $targetCurrency, $locale);
+    }
+
+    public function getCurrencyRate(string $baseCurrency = null, string $targetCurrency = null) : float
+    {
+        return $this->converter->getExchangeRate($baseCurrency, $targetCurrency);
     }
 }

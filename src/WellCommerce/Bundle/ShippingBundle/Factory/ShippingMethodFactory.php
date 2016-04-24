@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\ShippingBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
-use WellCommerce\Bundle\ShippingBundle\Calculator\ShippingMethodCalculatorInterface;
+use WellCommerce\Bundle\ShippingBundle\Calculator\ShippingCalculatorInterface;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface;
 
 /**
@@ -46,7 +46,7 @@ class ShippingMethodFactory extends AbstractEntityFactory
         return $shippingMethod;
     }
 
-    private function getDefaultCalculator() : ShippingMethodCalculatorInterface
+    private function getDefaultCalculator() : ShippingCalculatorInterface
     {
         return $this->get('shipping_method.calculator.collection')->first();
     }

@@ -21,19 +21,22 @@ use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientBillingAddressFactory extends AbstractEntityFactory
+final class ClientBillingAddressFactory extends AbstractEntityFactory
 {
-    /**
-     * @var string
-     */
     protected $supportsInterface = ClientBillingAddressInterface::class;
 
-    /**
-     * @return ClientBillingAddressInterface
-     */
     public function create() : ClientBillingAddressInterface
     {
-        $address = new ClientBillingAddress();
+        /** @var ClientBillingAddressInterface $address */
+        $address = $this->init();
+        $address->setFirstName('');
+        $address->setLastName('');
+        $address->setLine1('');
+        $address->setLine2('');
+        $address->setPostalCode('');
+        $address->setState('');
+        $address->setCity('');
+        $address->setCountry($this->getDefaultShop()->getDefaultCountry());
         $address->setCompanyAddress(false);
 
         return $address;

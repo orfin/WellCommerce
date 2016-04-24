@@ -11,8 +11,10 @@
  */
 namespace WellCommerce\Bundle\OrderBundle\Form\Admin;
 
+use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
 use WellCommerce\Bundle\OrderBundle\Context\Admin\OrderContextInterface;
+use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface;
 use WellCommerce\Bundle\ShippingBundle\Provider\ShippingMethodProviderInterface;
 use WellCommerce\Component\Form\Elements\ElementInterface;
 use WellCommerce\Component\Form\Elements\FormInterface;
@@ -161,28 +163,23 @@ class OrderFormBuilder extends AbstractFormBuilder
         ]));
 
         $billingAddress->addChild($this->getElement('text_field', [
-            'name'  => 'billingAddress.street',
-            'label' => $this->trans('client.label.address.street'),
+            'name'  => 'billingAddress.line1',
+            'label' => $this->trans('client.label.address.line1'),
         ]));
 
         $billingAddress->addChild($this->getElement('text_field', [
-            'name'  => 'billingAddress.streetNo',
-            'label' => $this->trans('client.label.address.street_no'),
+            'name'  => 'billingAddress.line2',
+            'label' => $this->trans('client.label.address.line2'),
         ]));
 
         $billingAddress->addChild($this->getElement('text_field', [
-            'name'  => 'billingAddress.flatNo',
-            'label' => $this->trans('client.label.address.flat_no'),
+            'name'  => 'billingAddress.postalCode',
+            'label' => $this->trans('client.label.address.postal_code'),
         ]));
 
         $billingAddress->addChild($this->getElement('text_field', [
-            'name'  => 'billingAddress.postCode',
-            'label' => $this->trans('client.label.address.post_code'),
-        ]));
-
-        $billingAddress->addChild($this->getElement('text_field', [
-            'name'  => 'billingAddress.province',
-            'label' => $this->trans('client.label.address.province'),
+            'name'  => 'billingAddress.state',
+            'label' => $this->trans('client.label.address.state'),
         ]));
 
         $billingAddress->addChild($this->getElement('text_field', [
@@ -222,28 +219,23 @@ class OrderFormBuilder extends AbstractFormBuilder
         ]));
 
         $shippingAddress->addChild($this->getElement('text_field', [
-            'name'  => 'shippingAddress.street',
-            'label' => $this->trans('client.label.address.street'),
+            'name'  => 'shippingAddress.line1',
+            'label' => $this->trans('client.label.address.line1'),
         ]));
 
         $shippingAddress->addChild($this->getElement('text_field', [
-            'name'  => 'shippingAddress.streetNo',
-            'label' => $this->trans('client.label.address.street_no'),
+            'name'  => 'shippingAddress.line2',
+            'label' => $this->trans('client.label.address.line2'),
         ]));
 
         $shippingAddress->addChild($this->getElement('text_field', [
-            'name'  => 'shippingAddress.flatNo',
-            'label' => $this->trans('client.label.address.flat_no'),
+            'name'  => 'shippingAddress.postalCode',
+            'label' => $this->trans('client.label.address.postal_code'),
         ]));
 
         $shippingAddress->addChild($this->getElement('text_field', [
-            'name'  => 'shippingAddress.postCode',
-            'label' => $this->trans('client.label.address.post_code'),
-        ]));
-
-        $shippingAddress->addChild($this->getElement('text_field', [
-            'name'  => 'shippingAddress.province',
-            'label' => $this->trans('client.label.address.province'),
+            'name'  => 'shippingAddress.state',
+            'label' => $this->trans('client.label.address.state'),
         ]));
 
         $shippingAddress->addChild($this->getElement('text_field', [
@@ -260,5 +252,27 @@ class OrderFormBuilder extends AbstractFormBuilder
         $form->addFilter($this->getFilter('no_code'));
         $form->addFilter($this->getFilter('trim'));
         $form->addFilter($this->getFilter('secure'));
+    }
+    
+    private function getShippingMethodOptions(Collection $collection) : array
+    {
+        $options = [];
+
+        $collection->map(function (ShippingMethodInterface $shippingMethod) use (&$options) {
+            $options[$shippingMethod->getId()] = $shippingMethod->translate()->getName();
+        });
+
+        return $options;
+    }
+    
+    private function getPaymentMethodOptions(Collection $collection) : array
+    {
+        $options = [];
+        
+        $collection->map(function (ShippingMethodInterface $shippingMethod) use (&$options) {
+            $options[$shippingMethod->getId()] = $shippingMethod->translate()->getName();
+        });
+        
+        return $options;
     }
 }

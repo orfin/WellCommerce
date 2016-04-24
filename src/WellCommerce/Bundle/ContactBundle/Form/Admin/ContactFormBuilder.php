@@ -83,27 +83,22 @@ class ContactFormBuilder extends AbstractFormBuilder
         ]));
 
         $languageData->addChild($this->getElement('text_field', [
-            'name'  => 'street',
-            'label' => $this->trans('address.label.street'),
+            'name'  => 'line1',
+            'label' => $this->trans('address.label.line1'),
         ]));
 
         $languageData->addChild($this->getElement('text_field', [
-            'name'  => 'streetNo',
-            'label' => $this->trans('address.label.street_no'),
+            'name'  => 'line2',
+            'label' => $this->trans('address.label.line2'),
         ]));
 
         $languageData->addChild($this->getElement('text_field', [
-            'name'  => 'flatNo',
-            'label' => $this->trans('address.label.flat_no'),
+            'name'  => 'state',
+            'label' => $this->trans('address.label.state'),
         ]));
 
         $languageData->addChild($this->getElement('text_field', [
-            'name'  => 'province',
-            'label' => $this->trans('address.label.province'),
-        ]));
-
-        $languageData->addChild($this->getElement('text_field', [
-            'name'  => 'postCode',
+            'name'  => 'postalCode',
             'label' => $this->trans('address.label.post_code'),
         ]));
 

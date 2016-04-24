@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\ClientBundle\Factory;
 
-use WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddress;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddressInterface;
 use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 
@@ -21,20 +20,23 @@ use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientShippingAddressFactory extends AbstractEntityFactory
+final class ClientShippingAddressFactory extends AbstractEntityFactory
 {
-    /**
-     * @var string
-     */
-    protected $supportsInterface = ClientShippingAddressFactory::class;
+    protected $supportsInterface = ClientShippingAddressInterface::class;
 
-    /**
-     * @return ClientShippingAddressInterface
-     */
     public function create() : ClientShippingAddressInterface
     {
-        $address = new ClientShippingAddress();
-        
+        /** @var ClientShippingAddressInterface $address */
+        $address = $this->init();
+        $address->setFirstName('');
+        $address->setLastName('');
+        $address->setLine1('');
+        $address->setLine2('');
+        $address->setPostalCode('');
+        $address->setState('');
+        $address->setCity('');
+        $address->setCountry($this->getDefaultShop()->getDefaultCountry());
+
         return $address;
     }
 }

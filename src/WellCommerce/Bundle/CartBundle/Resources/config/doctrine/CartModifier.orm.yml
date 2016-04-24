@@ -1,0 +1,58 @@
+WellCommerce\Bundle\CartBundle\Entity\CartModifier:
+    type: entity
+    table: cart_modifier
+    repositoryClass: WellCommerce\Bundle\CartBundle\Repository\CartModifierRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            nullable: false
+        description:
+            type: string
+            nullable: false
+        subtraction:
+            type: boolean
+            nullable: false
+            options:
+                default: false
+        hierarchy:
+            type: integer
+            nullable: false
+            options:
+                default: 0
+        netAmount:
+            type: decimal
+            scale: 2
+            nullable: false
+            precision: 15
+            column: net_amount
+        grossAmount:
+            type: decimal
+            scale: 2
+            nullable: false
+            precision: 15
+            column: gross_amount
+        taxAmount:
+            type: decimal
+            scale: 2
+            nullable: false
+            precision: 15
+            column: tax_amount
+        currency:
+            type: string
+            length: 16
+            nullable: false
+            column: currency
+    manyToOne:
+        cart:
+            targetEntity: WellCommerce\Bundle\CartBundle\Entity\Cart
+            fetch: LAZY
+            inversedBy: totals
+            joinColumns:
+                cart_id:
+                    referencedColumnName: id
+                    onDelete: CASCADE

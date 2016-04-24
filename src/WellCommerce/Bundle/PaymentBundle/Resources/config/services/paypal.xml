@@ -24,8 +24,8 @@
         </service>
 
         <service id="paypal.processor" class="WellCommerce\Bundle\PaymentBundle\Processor\PayPalProcessor">
-            <argument type="service" id="paypal.configurator"/>
             <argument type="service" id="paypal.gateway"/>
+            <argument type="service" id="paypal.configurator"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>

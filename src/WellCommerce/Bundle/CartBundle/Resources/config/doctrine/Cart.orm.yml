@@ -11,9 +11,12 @@ WellCommerce\Bundle\CartBundle\Entity\Cart:
             generator:
                 strategy: IDENTITY
     embedded:
-        totals:
-            class: WellCommerce\Bundle\CartBundle\Entity\CartTotals
-            columnPrefix: total_
+        productTotal:
+            class: WellCommerce\Bundle\CartBundle\Entity\CartProductTotal
+            columnPrefix: product_total_
+        summary:
+            class: WellCommerce\Bundle\CartBundle\Entity\CartSummary
+            columnPrefix: summary_
         billingAddress:
             class: WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddress
             columnPrefix: billing_address_
@@ -48,6 +51,15 @@ WellCommerce\Bundle\CartBundle\Entity\Cart:
             fetch: LAZY
             mappedBy: cart
             orphanRemoval: true
+        modifiers:
+            indexBy: name
+            orderBy: { 'hierarchy': 'ASC' }
+            targetEntity: WellCommerce\Bundle\CartBundle\Entity\CartModifier
+            cascade:
+                - persist
+            fetch: LAZY
+            mappedBy: cart
+            orphanRemoval: true
     manyToOne:
         coupon:
             targetEntity: WellCommerce\Bundle\CouponBundle\Entity\Coupon
@@ -55,7 +67,7 @@ WellCommerce\Bundle\CartBundle\Entity\Cart:
             joinColumns:
                 coupon_id:
                     referencedColumnName: id
-                    onDelete: SET NULL
+                    onDelete: 'SET NULL'
         shop:
             targetEntity: WellCommerce\Bundle\ShopBundle\Entity\ShopInterface
             fetch: LAZY
@@ -63,11 +75,11 @@ WellCommerce\Bundle\CartBundle\Entity\Cart:
                 shop_id:
                     referencedColumnName: id
                     onDelete: CASCADE
-        shippingMethodCost:
-            targetEntity: WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCost
+        shippingMethod:
+            targetEntity: WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethod
             fetch: LAZY
             joinColumns:
-                shipping_method_cost_id:
+                shipping_method_id:
                     referencedColumnName: id
                     onDelete: 'SET NULL'
         paymentMethod:

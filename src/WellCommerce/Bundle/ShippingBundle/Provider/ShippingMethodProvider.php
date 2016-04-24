@@ -12,64 +12,75 @@
 
 namespace WellCommerce\Bundle\ShippingBundle\Provider;
 
-use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodInterface;
-use WellCommerce\Bundle\ShippingBundle\Calculator\ShippingCalculatorSubjectInterface;
-use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCost;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use WellCommerce\Bundle\ShippingBundle\Calculator\ShippingCalculatorInterface;
+use WellCommerce\Bundle\ShippingBundle\Calculator\ShippingSubjectInterface;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCostInterface;
+use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface;
+use WellCommerce\Bundle\ShippingBundle\Exception\CalculatorNotFoundException;
+use WellCommerce\Bundle\ShippingBundle\Repository\ShippingMethodRepositoryInterface;
 
 /**
  * Class ShippingMethodProvider
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ShippingMethodProvider extends AbstractShippingMethodProvider implements ShippingMethodProviderInterface
+final class ShippingMethodProvider implements ShippingMethodProviderInterface
 {
     /**
-     * {@inheritdoc}
+     * @var ShippingMethodRepositoryInterface
      */
-    public function getShippingMethodCostsCollection(ShippingCalculatorSubjectInterface $subject)
-    {
-        if (null === $this->collection) {
-            $this->collection = $this->getCollection($subject);
-        }
-
-        return $this->sortCollection();
-    }
-
+    private $repository;
+    
     /**
-     * {@inheritdoc}
+     * @var Collection
      */
-    public function getShippingMethodOptions(ShippingCalculatorSubjectInterface $subject)
-    {
-        $shippingMethodsCollection = $this->getShippingMethodCostsCollection($subject);
-        $options                   = [];
-
-        $shippingMethodsCollection->map(function (ShippingMethodCost $shippingMethodCost) use (&$options) {
-            $shippingMethod = $shippingMethodCost->getShippingMethod();
-
-            $options[$shippingMethod->getId()] = $shippingMethod->translate()->getName();
-        });
-
-        return $options;
-    }
-
+    private $calculators;
+    
     /**
-     * {@inheritdoc}
+     * AbstractShippingMethodProvider constructor.
+     *
+     * @param ShippingMethodRepositoryInterface $repository
+     * @param Collection                        $calculators
      */
-    public function getShippingMethodsPaymentOptions(ShippingCalculatorSubjectInterface $subject)
+    public function __construct(ShippingMethodRepositoryInterface $repository, Collection $calculators)
     {
-        $shippingMethodsCollection = $this->getShippingMethodCostsCollection($subject);
-        $options                   = [];
+        $this->repository  = $repository;
+        $this->calculators = $calculators;
+    }
+    
+    public function getCosts(ShippingSubjectInterface $subject) : Collection
+    {
+        $methods    = $this->repository->getShippingMethods();
+        $collection = new ArrayCollection();
+        
+        $methods->map(function (ShippingMethodInterface $shippingMethod) use ($subject, $collection) {
+            $costs = $this->getShippingMethodCosts($shippingMethod, $subject);
 
-        $shippingMethodsCollection->map(function (ShippingMethodCostInterface $shippingMethodCost) use (&$options) {
-            $shippingMethod = $shippingMethodCost->getShippingMethod();
-            $collection     = $shippingMethod->getPaymentMethods();
-
-            $collection->map(function (PaymentMethodInterface $paymentMethod) use (&$options) {
-                $options[$paymentMethod->getId()] = $paymentMethod->translate()->getName();
+            $costs->map(function (ShippingMethodCostInterface $cost) use ($collection) {
+                $collection->add($cost);
             });
         });
+        
+        return $collection;
+    }
 
-        return $options;
+    public function getShippingMethodCosts(ShippingMethodInterface $method, ShippingSubjectInterface $subject) : Collection
+    {
+        $calculator = $this->getCalculator($method);
+
+        return $calculator->calculate($method, $subject);
+    }
+    
+    private function getCalculator(ShippingMethodInterface $shippingMethod) : ShippingCalculatorInterface
+    {
+        $calculator = $shippingMethod->getCalculator();
+        
+        if (false === $this->calculators->containsKey($calculator)) {
+            throw new CalculatorNotFoundException($calculator);
+        }
+        
+        return $this->calculators->get($calculator);
     }
 }

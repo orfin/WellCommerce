@@ -19,24 +19,25 @@ namespace WellCommerce\Bundle\CouponBundle\Entity;
  */
 trait CouponAwareTrait
 {
-    /**
-     * @var CouponInterface|null $coupon
-     */
     protected $coupon;
 
-    /**
-     * @return CouponInterface|null
-     */
-    public function getCoupon()
+    public function getCoupon() : CouponInterface
     {
         return $this->coupon;
     }
 
-    /**
-     * @param CouponInterface|null $coupon
-     */
-    public function setCoupon(CouponInterface $coupon = null)
+    public function setCoupon(CouponInterface $coupon)
     {
         $this->coupon = $coupon;
+    }
+
+    public function hasCoupon() : bool
+    {
+        return $this->coupon instanceof CouponInterface;
+    }
+
+    public function removeCoupon()
+    {
+        $this->coupon = null;
     }
 }

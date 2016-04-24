@@ -21,50 +21,17 @@ use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class OrderAddressManager extends AbstractFrontManager
+final class OrderAddressManager extends AbstractOrderManager
 {
     public function setAddresses()
     {
         $client = $this->getClient();
-        $cart   = $this->getCartContext()->getCurrentCart();;
+        $cart   = $this->getCartContext()->getCurrentCart();
 
-        if (null !== $client) {
-            $this->copyBillingAddress($client, $cart);
-            $this->copyShippingAddress($client, $cart);
-            $this->copyContactDetails($client, $cart);
+        if ($client instanceof ClientInterface) {
+            $cart->setBillingAddress($client->getBillingAddress());
+            $cart->setShippingAddress($client->getShippingAddress());
+            $cart->setContactDetails($client->getContactDetails());
         }
-    }
-
-    /**
-     * Copies the client's billing address to cart
-     *
-     * @param ClientInterface $client
-     * @param CartInterface   $cart
-     */
-    protected function copyBillingAddress(ClientInterface $client, CartInterface $cart)
-    {
-        $cart->setBillingAddress($client->getBillingAddress());
-    }
-
-    /**
-     * Copies the client's shipping address to cart
-     *
-     * @param ClientInterface $client
-     * @param CartInterface   $cart
-     */
-    protected function copyShippingAddress(ClientInterface $client, CartInterface $cart)
-    {
-        $cart->setShippingAddress($client->getShippingAddress());
-    }
-
-    /**
-     * Copies the client's contact details to cart
-     *
-     * @param ClientInterface $client
-     * @param CartInterface   $cart
-     */
-    protected function copyContactDetails(ClientInterface $client, CartInterface $cart)
-    {
-        $cart->setContactDetails($client->getContactDetails());
     }
 }

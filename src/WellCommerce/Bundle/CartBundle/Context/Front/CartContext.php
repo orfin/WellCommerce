@@ -19,32 +19,23 @@ use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CartContext implements CartContextInterface
+final class CartContext implements CartContextInterface
 {
     /**
      * @var CartInterface
      */
-    protected $currentCart;
+    private $currentCart;
 
-    /**
-     * {@inheritdoc}
-     */
     public function setCurrentCart(CartInterface $cart)
     {
         $this->currentCart = $cart;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCurrentCart() : CartInterface
     {
         return $this->currentCart;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCurrentCartIdentifier() : int
     {
         if ($this->hasCurrentCart()) {
@@ -54,9 +45,6 @@ class CartContext implements CartContextInterface
         return 0;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasCurrentCart() : bool
     {
         return $this->currentCart instanceof CartInterface;

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
+
+    <class name="WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddress">
+        <property name="firstName">
+            <constraint name="NotBlank">
+                <option name="groups">
+                    <value>cart_client_billing_address</value>
+                    <value>client_address_book</value>
+                </option>
+            </constraint>
+            <constraint name="NotNull">
+                <option name="groups">
+                    <value>cart_client_billing_address</value>
+                    <value>client_address_book</value>
+                </option>
+            </constraint>
+        </property>
+        <property name="lastName">
+            <constraint name="NotBlank">
+                <option name="groups">
+                    <value>cart_client_billing_address</value>
+                    <value>client_address_book</value>
+                </option>
+            </constraint>
+            <constraint name="NotNull">
+                <option name="groups">
+                    <value>cart_client_billing_address</value>
+                    <value>client_address_book</value>
+                </option>
+            </constraint>
+        </property>
+        <property name="line1">
+            <constraint name="NotBlank">
+                <option name="groups">
+                    <value>cart_client_billing_address</value>
+                    <value>client_address_book</value>
+                </option>
+            </constraint>
+            <constraint name="NotNull">
+                <option name="groups">
+                    <value>cart_client_billing_address</value>
+                    <value>client_address_book</value>
+                </option>
+            </constraint>
+        </property>
+        <property name="line2">
+            <constraint name="NotBlank">
+                <option name="groups">
+                    <value>cart_client_billing_address</value>
+                    <value>client_address_book</value>
+                </option>
+            </constraint>
+            <constraint name="NotNull">
+                <option name="groups">
+                    <value>cart_client_billing_address</value>
+                    <value>client_address_book</value>
+                </option>
+            </constraint>
+        </property>
+        <property name="postalCode">
+            <constraint name="NotBlank">
+                <option name="groups">
+                    <value>cart_client_billing_address</value>
+                    <value>client_address_book</value>
+                </option>
+            </constraint>
+            <constraint name="NotNull">
+                <option name="groups">
+                    <value>cart_client_billing_address</value>
+                    <value>client_address_book</value>
+                </option>
+            </constraint>
+        </property>
+        <property name="city">
+            <constraint name="NotBlank">
+                <option name="groups">
+                    <value>cart_client_billing_address</value>
+                    <value>client_address_book</value>
+                </option>
+            </constraint>
+            <constraint name="NotNull">
+                <option name="groups">
+                    <value>cart_client_billing_address</value>
+                    <value>client_address_book</value>
+                </option>
+            </constraint>
+        </property>
+        <property name="country">
+            <constraint name="Country">
+                <option name="groups">
+                    <value>order_shipping_address</value>
+                    <value>client_address_book</value>
+                </option>
+            </constraint>
+        </property>
+    </class>
+</constraint-mapping>

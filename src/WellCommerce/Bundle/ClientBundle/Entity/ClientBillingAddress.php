@@ -12,6 +12,8 @@
 
 namespace WellCommerce\Bundle\ClientBundle\Entity;
 
+use WellCommerce\Bundle\CoreBundle\Entity\AddressTrait;
+
 /**
  * Class ClientBillingAddress
  *
@@ -19,254 +21,60 @@ namespace WellCommerce\Bundle\ClientBundle\Entity;
  */
 class ClientBillingAddress implements ClientBillingAddressInterface
 {
-    /**
-     * @var string
-     */
-    protected $firstName;
+    use AddressTrait;
 
-    /**
-     * @var string
-     */
-    protected $lastName;
+    private $firstName;
+    private $lastName;
+    private $vatId;
+    private $companyName;
+    private $companyAddress;
 
-    /**
-     * @var string
-     */
-    protected $street;
-
-    /**
-     * @var string
-     */
-    protected $streetNo;
-
-    /**
-     * @var string
-     */
-    protected $flatNo;
-
-    /**
-     * @var string
-     */
-    protected $postCode;
-
-    /**
-     * @var string
-     */
-    protected $province;
-
-    /**
-     * @var string
-     */
-    protected $city;
-
-    /**
-     * @var string
-     */
-    protected $country;
-
-    /**
-     * @var string
-     */
-    protected $vatId;
-    
-    /**
-     * @var string
-     */
-    protected $companyName;
-
-    /**
-     * @var bool
-     */
-    protected $companyAddress;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getFirstName()
+    public function getFirstName() : string
     {
         return $this->firstName;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setFirstName($firstName)
+    public function setFirstName(string $firstName)
     {
         $this->firstName = $firstName;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getLastName()
+    public function getLastName() : string
     {
         return $this->lastName;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setLastName($lastName)
+    public function setLastName(string $lastName)
     {
         $this->lastName = $lastName;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getStreet()
-    {
-        return $this->street;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setStreet($street)
-    {
-        $this->street = $street;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getStreetNo()
-    {
-        return $this->streetNo;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setStreetNo($streetNo)
-    {
-        $this->streetNo = $streetNo;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getFlatNo()
-    {
-        return $this->flatNo;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setFlatNo($flatNo)
-    {
-        $this->flatNo = $flatNo;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPostCode()
-    {
-        return $this->postCode;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setPostCode($postCode)
-    {
-        $this->postCode = $postCode;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getProvince()
-    {
-        return $this->province;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setProvince($province)
-    {
-        $this->province = $province;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCity()
-    {
-        return $this->city;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCity($city)
-    {
-        $this->city = $city;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCountry()
-    {
-        return $this->country;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCountry($country)
-    {
-        $this->country = $country;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getVatId()
+    public function getVatId() : string
     {
         return $this->vatId;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setVatId($vatId)
+    public function setVatId(string $vatId)
     {
         $this->vatId = $vatId;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getCompanyName()
+    public function getCompanyName() : string
     {
         return $this->companyName;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setCompanyName($companyName)
+    public function setCompanyName(string $companyName)
     {
         $this->companyName = $companyName;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function isCompanyAddress()
+    public function isCompanyAddress() : bool
     {
         return $this->companyAddress;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setCompanyAddress($companyAddress)
+    public function setCompanyAddress(bool $companyAddress)
     {
         $this->companyAddress = $companyAddress;
     }

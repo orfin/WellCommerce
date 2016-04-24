@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Entity;
 
-use WellCommerce\Bundle\AppBundle\Entity\Price;
+use WellCommerce\Bundle\AppBundle\Entity\PriceInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareInterface;
@@ -30,43 +30,19 @@ interface OrderProductInterface extends
     TimestampableInterface,
     OrderAwareInterface
 {
-    /**
-     * @return int
-     */
     public function getQuantity() : int;
 
-    /**
-     * @param float $quantity
-     */
     public function setQuantity(int $quantity);
 
-    /**
-     * @return Price
-     */
-    public function getSellPrice() : Price;
+    public function getSellPrice() : PriceInterface;
 
-    /**
-     * @param Price $sellPrice
-     */
-    public function setSellPrice(Price $sellPrice);
+    public function setSellPrice(PriceInterface $sellPrice);
 
-    /**
-     * @return Price
-     */
-    public function getBuyPrice() : Price;
+    public function getBuyPrice() : PriceInterface;
 
-    /**
-     * @param Price $buyPrice
-     */
-    public function setBuyPrice(Price $buyPrice);
+    public function setBuyPrice(PriceInterface $buyPrice);
 
-    /**
-     * @return float
-     */
     public function getWeight() : float;
 
-    /**
-     * @param float $weight
-     */
     public function setWeight(float $weight);
 }

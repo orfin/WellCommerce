@@ -20,16 +20,10 @@ use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CartProductFactory extends AbstractEntityFactory
+final class CartProductFactory extends AbstractEntityFactory
 {
-    /**
-     * @var string
-     */
     protected $supportsInterface = CartProductInterface::class;
 
-    /**
-     * @return CartProductInterface
-     */
     public function create() : CartProductInterface
     {
         /** @var $cartProduct CartProductInterface */

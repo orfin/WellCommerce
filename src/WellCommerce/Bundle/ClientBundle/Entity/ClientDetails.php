@@ -54,38 +54,29 @@ class ClientDetails implements ClientDetailsInterface
      */
     protected $resetPasswordHash;
 
-    /**
-     * @inheritDoc
-     */
-    public function getDiscount()
+    public function getDiscount() : float
     {
         return $this->discount;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function setDiscount($discount)
+    public function setDiscount(float $discount)
     {
-        $this->discount = (float)$discount;
+        $this->discount = $discount;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function getPassword()
+    public function getPassword() : string
     {
         return $this->password;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function setPassword($password)
+    public function setPassword(string $password)
     {
-        if (strlen($password)) {
-            $this->password = password_hash($password, PASSWORD_BCRYPT, ['cost' => 12]);
-        }
+        $this->password = $password;
+    }
+
+    public function setHashedPassword(string $password)
+    {
+        $this->password = password_hash($password, PASSWORD_BCRYPT, ['cost' => 12]);
     }
 
     public function resetPassword()
@@ -93,82 +84,52 @@ class ClientDetails implements ClientDetailsInterface
         $this->password = null;
     }
 
-    /**
-     * @return null
-     */
     public function getSalt()
     {
         return null;
     }
 
-    /**
-     * @param string $salt
-     */
-    public function setSalt($salt)
+    public function setSalt(string $salt)
     {
-        $this->salt = (string)$salt;
+        $this->salt = $salt;
     }
 
-    /**
-     * @return string
-     */
-    public function getUsername()
+    public function getUsername() : string
     {
         return $this->username;
     }
 
-    /**
-     * @param string $username
-     */
-    public function setUsername($username)
+    public function setUsername(string $username)
     {
         $this->username = $username;
     }
 
-    /**
-     * @return boolean
-     */
-    public function isConditionsAccepted()
+    public function isConditionsAccepted() : bool
     {
         return $this->conditionsAccepted;
     }
 
-    /**
-     * @param boolean $conditionsAccepted
-     */
-    public function setConditionsAccepted($conditionsAccepted)
+    public function setConditionsAccepted(bool $conditionsAccepted)
     {
         $this->conditionsAccepted = $conditionsAccepted;
     }
 
-    /**
-     * @return boolean
-     */
-    public function isNewsletterAccepted()
+    public function isNewsletterAccepted() : bool
     {
         return $this->newsletterAccepted;
     }
 
-    /**
-     * @param boolean $newsletterAccepted
-     */
-    public function setNewsletterAccepted($newsletterAccepted)
+    public function setNewsletterAccepted(bool $newsletterAccepted)
     {
         $this->newsletterAccepted = $newsletterAccepted;
     }
 
-    /**
-     * @return string
-     */
-    public function getResetPasswordHash()
+    public function getResetPasswordHash() : string
     {
         return $this->resetPasswordHash;
     }
 
-    /**
-     * @param string $resetPasswordHash
-     */
-    public function setResetPasswordHash($resetPasswordHash)
+    public function setResetPasswordHash(string $resetPasswordHash)
     {
         $this->resetPasswordHash = $resetPasswordHash;
     }

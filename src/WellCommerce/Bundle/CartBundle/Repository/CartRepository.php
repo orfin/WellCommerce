@@ -21,11 +21,8 @@ use WellCommerce\Bundle\ShopBundle\Entity\ShopInterface;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class CartRepository extends AbstractEntityRepository implements CartRepositoryInterface
+final class CartRepository extends AbstractEntityRepository implements CartRepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function findCart(ClientInterface $client = null, $sessionId, ShopInterface $shop)
     {
         if (null !== $client) {

@@ -19,5 +19,23 @@
                 <option name="traverse">true</option>
             </constraint>
         </property>
+        <property name="shippingMethod">
+            <constraint name="Type">
+                <option name="type">WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface</option>
+                <option name="message">cart.shipping_method_not_valid</option>
+            </constraint>
+        </property>
+        <property name="paymentMethod">
+            <constraint name="Type">
+                <option name="type">WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodInterface</option>
+                <option name="message">cart.payment_method_not_valid</option>
+            </constraint>
+        </property>
+        <property name="products">
+            <constraint name="Count">
+                <option name="min">1</option>
+                <option name="minMessage">cart.empty_product_collection</option>
+            </constraint>
+        </property>
     </class>
 </constraint-mapping>

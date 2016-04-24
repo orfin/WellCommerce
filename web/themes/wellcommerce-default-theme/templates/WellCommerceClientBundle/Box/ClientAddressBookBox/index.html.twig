@@ -21,26 +21,25 @@
                     </div>
                 </div>
 
+
                 <div class="row">
                     <div class="col-sm-6 col-xs-12">
-                        {{ macros.element(billingAddress.get('billingAddress.street')) }}
-                    </div>
-                    <div class="col-md-3 col-sm-3 col-xs-6">
-                        {{ macros.element(billingAddress.get('billingAddress.streetNo')) }}
-                    </div>
-
-                    <div class="col-md-3 col-sm-3 col-xs-6">
-                        {{ macros.element(billingAddress.get('billingAddress.flatNo')) }}
+                        {{ macros.element(billingAddress.get('billingAddress.line1')) }}
                     </div>
                 </div>
 
+                <div class="row">
+                    <div class="col-sm-6 col-xs-12">
+                        {{ macros.element(billingAddress.get('billingAddress.line2')) }}
+                    </div>
+                </div>
 
                 <div class="row">
                     <div class="col-sm-6 col-xs-12">
                         {{ macros.element(billingAddress.get('billingAddress.city')) }}
                     </div>
                     <div class="col-md-3 col-sm-3 col-xs-6">
-                        {{ macros.element(billingAddress.get('billingAddress.postCode')) }}
+                        {{ macros.element(billingAddress.get('billingAddress.postalCode')) }}
                     </div>
                 </div>
 
@@ -69,24 +68,22 @@
 
                 <div class="row">
                     <div class="col-sm-6 col-xs-12">
-                        {{ macros.element(shippingAddress.get('shippingAddress.street')) }}
-                    </div>
-                    <div class="col-md-3 col-sm-3 col-xs-6">
-                        {{ macros.element(shippingAddress.get('shippingAddress.streetNo')) }}
-                    </div>
-
-                    <div class="col-md-3 col-sm-3 col-xs-6">
-                        {{ macros.element(shippingAddress.get('shippingAddress.flatNo')) }}
+                        {{ macros.element(shippingAddress.get('shippingAddress.line1')) }}
                     </div>
                 </div>
 
+                <div class="row">
+                    <div class="col-sm-6 col-xs-12">
+                        {{ macros.element(shippingAddress.get('shippingAddress.line2')) }}
+                    </div>
+                </div>
 
                 <div class="row">
                     <div class="col-sm-6 col-xs-12">
                         {{ macros.element(shippingAddress.get('shippingAddress.city')) }}
                     </div>
                     <div class="col-md-3 col-sm-3 col-xs-6">
-                        {{ macros.element(shippingAddress.get('shippingAddress.postCode')) }}
+                        {{ macros.element(shippingAddress.get('shippingAddress.postalCode')) }}
                     </div>
                 </div>
 

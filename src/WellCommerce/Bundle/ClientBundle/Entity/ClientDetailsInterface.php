@@ -19,68 +19,29 @@ namespace WellCommerce\Bundle\ClientBundle\Entity;
  */
 interface ClientDetailsInterface
 {
-    /**
-     * @return float
-     */
-    public function getDiscount();
+    public function getDiscount() : float;
 
-    /**
-     * @param float $discount
-     */
-    public function setDiscount($discount);
+    public function setDiscount(float $discount);
 
-    /**
-     * @param string $password
-     */
-    public function setPassword($password);
+    public function setPassword(string $password);
 
-    /**
-     * @return void
-     */
     public function resetPassword();
 
-    /**
-     * @return string
-     */
-    public function getUsername();
+    public function getUsername() : string;
 
-    /**
-     * @param string $username
-     */
-    public function setUsername($username);
+    public function setUsername(string $username);
 
-    /**
-     * @param string $salt
-     */
-    public function setSalt($salt);
+    public function setSalt(string $salt);
 
-    /**
-     * @return bool
-     */
-    public function isConditionsAccepted();
+    public function isConditionsAccepted() : bool;
 
-    /**
-     * @param bool $conditionsAccepted
-     */
-    public function setConditionsAccepted($conditionsAccepted);
+    public function setConditionsAccepted(bool $conditionsAccepted);
 
-    /**
-     * @return bool
-     */
-    public function isNewsletterAccepted();
+    public function isNewsletterAccepted() : bool;
 
-    /**
-     * @param bool $newsletterAccepted
-     */
-    public function setNewsletterAccepted($newsletterAccepted);
+    public function setNewsletterAccepted(bool $newsletterAccepted);
 
-    /**
-     * @return string
-     */
-    public function getResetPasswordHash();
+    public function getResetPasswordHash() : string;
 
-    /**
-     * @param string $resetPasswordHash
-     */
-    public function setResetPasswordHash($resetPasswordHash);
+    public function setResetPasswordHash(string $resetPasswordHash);
 }

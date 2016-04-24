@@ -34,8 +34,10 @@ class OrderProductFactory extends AbstractEntityFactory
     {
         /** @var  $orderProduct OrderProductInterface */
         $orderProduct = $this->init();
-        $orderProduct->setQuantity(0);
+        $orderProduct->setQuantity(1);
         $orderProduct->setWeight(0);
+        $orderProduct->setBuyPrice($this->createPrice());
+        $orderProduct->setSellPrice($this->createPrice());
 
         return $orderProduct;
     }

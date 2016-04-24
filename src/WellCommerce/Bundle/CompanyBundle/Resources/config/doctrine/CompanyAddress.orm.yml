@@ -1,38 +1,28 @@
 WellCommerce\Bundle\CompanyBundle\Entity\CompanyAddress:
     type: embeddable
     fields:
-        street:
+        line1:
             type: string
             length: 255
             nullable: true
-            column: street
-        streetNo:
+        line2:
             type: string
             length: 255
             nullable: true
-            column: street_no
-        flatNo:
+        postalCode:
             type: string
             length: 255
             nullable: true
-            column: flat_no
-        postCode:
+            column: postal_code
+        state:
             type: string
             length: 255
             nullable: true
-            column: post_code
-        province:
-            type: string
-            length: 255
-            nullable: true
-            column: province
         city:
             type: string
             length: 255
             nullable: true
-            column: city
         country:
             type: string
             length: 3
             nullable: true
-            column: country

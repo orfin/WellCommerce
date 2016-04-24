@@ -1,0 +1,27 @@
+WellCommerce\Bundle\OrderBundle\Entity\OrderProductTotal:
+    type: embeddable
+    fields:
+        quantity:
+            type: integer
+            nullable: false
+            column: quantity
+        weight:
+            type: decimal
+            scale: 4
+            nullable: false
+            column: weight
+        netPrice:
+            type: decimal
+            scale: 2
+            nullable: false
+            column: net_price
+        grossPrice:
+            type: decimal
+            scale: 2
+            nullable: false
+            column: gross_price
+        taxAmount:
+            type: decimal
+            scale: 2
+            nullable: false
+            column: tax_amount

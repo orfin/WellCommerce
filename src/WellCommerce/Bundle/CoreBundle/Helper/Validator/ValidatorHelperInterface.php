@@ -32,4 +32,14 @@ interface ValidatorHelperInterface
      * @return ConstraintViolationListInterface
      */
     public function validate($value, array $groups = []) : ConstraintViolationListInterface;
+
+    /**
+     * Checks whether the given value is valid
+     *
+     * @param object $value
+     * @param array  $groups
+     *
+     * @return bool
+     */
+    public function isValid($value, array $groups = []) : bool;
 }

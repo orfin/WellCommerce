@@ -19,13 +19,9 @@ namespace WellCommerce\Bundle\PaymentBundle\Entity;
  */
 interface PaymentMethodAwareInterface
 {
-    /**
-     * @return null|PaymentMethodInterface
-     */
-    public function getPaymentMethod();
+    public function getPaymentMethod() : PaymentMethodInterface;
 
-    /**
-     * @param null|PaymentMethodInterface $paymentMethod
-     */
-    public function setPaymentMethod(PaymentMethodInterface $paymentMethod = null);
+    public function setPaymentMethod(PaymentMethodInterface $paymentMethod);
+
+    public function hasPaymentMethod() : bool;
 }

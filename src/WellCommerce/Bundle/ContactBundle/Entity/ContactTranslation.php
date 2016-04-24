@@ -24,240 +24,117 @@ class ContactTranslation implements LocaleAwareInterface
 {
     use Translation;
 
-    /**
-     * @var string
-     */
-    protected $name;
+    private $name;
+    private $email;
+    private $phone;
+    private $businessHours;
+    private $line1;
+    private $line2;
+    private $postalCode;
+    private $state;
+    private $city;
+    private $country;
 
-    /**
-     * @var string
-     */
-    protected $email;
-
-    /**
-     * @var string
-     */
-    protected $phone;
-
-    /**
-     * @var string
-     */
-    protected $businessHours;
-
-    /**
-     * @var string
-     */
-    protected $street;
-
-    /**
-     * @var string
-     */
-    protected $streetNo;
-
-    /**
-     * @var string
-     */
-    protected $flatNo;
-
-    /**
-     * @var string
-     */
-    protected $postCode;
-
-    /**
-     * @var string
-     */
-    protected $province;
-
-    /**
-     * @var string
-     */
-    protected $city;
-
-    /**
-     * @var string
-     */
-    protected $country;
-
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName() : string
     {
         return $this->name;
     }
 
-    /**
-     * @param string $name
-     */
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = $name;
     }
 
-    /**
-     * @return string
-     */
-    public function getEmail()
+    public function getEmail() : string
     {
         return $this->email;
     }
 
-    /**
-     * @param string $email
-     */
-    public function setEmail($email)
+    public function setEmail(string $email)
     {
         $this->email = $email;
     }
 
-    /**
-     * @return string
-     */
-    public function getPhone()
+    public function getPhone() : string
     {
         return $this->phone;
     }
 
-    /**
-     * @param string $phone
-     */
-    public function setPhone($phone)
+    public function setPhone(string $phone)
     {
         $this->phone = $phone;
     }
 
-    /**
-     * @return string
-     */
-    public function getBusinessHours()
+    public function getBusinessHours() : string
     {
         return $this->businessHours;
     }
 
-    /**
-     * @param string $businessHours
-     */
-    public function setBusinessHours($businessHours)
+    public function setBusinessHours(string $businessHours)
     {
         $this->businessHours = $businessHours;
     }
 
-    /**
-     * @return string
-     */
-    public function getStreet()
+    public function getLine1() : string
     {
-        return $this->street;
+        return $this->line1;
     }
 
-    /**
-     * @param string $street
-     */
-    public function setStreet($street)
+    public function setLine1(string $line1)
     {
-        $this->street = $street;
+        $this->line1 = $line1;
     }
 
-    /**
-     * @return string
-     */
-    public function getStreetNo()
+    public function getLine2() : string
     {
-        return $this->streetNo;
+        return $this->line2;
     }
 
-    /**
-     * @param string $streetNo
-     */
-    public function setStreetNo($streetNo)
+    public function setLine2(string $line2)
     {
-        $this->streetNo = $streetNo;
+        $this->line2 = $line2;
     }
 
-    /**
-     * @return string
-     */
-    public function getFlatNo()
+    public function getPostalCode() : string
     {
-        return $this->flatNo;
+        return $this->postalCode;
     }
 
-    /**
-     * @param string $flatNo
-     */
-    public function setFlatNo($flatNo)
+    public function setPostalCode(string $postalCode)
     {
-        $this->flatNo = $flatNo;
+        $this->postalCode = $postalCode;
     }
 
-    /**
-     * @return string
-     */
-    public function getPostCode()
+    public function getState() : string
     {
-        return $this->postCode;
+        return $this->state;
     }
 
-    /**
-     * @param string $postCode
-     */
-    public function setPostCode($postCode)
+    public function setState(string $state)
     {
-        $this->postCode = $postCode;
+        $this->state = $state;
     }
 
-    /**
-     * @return string
-     */
-    public function getCity()
+    public function getCity() : string
     {
         return $this->city;
     }
 
-    /**
-     * @param string $city
-     */
-    public function setCity($city)
+    public function setCity(string $city)
     {
         $this->city = $city;
     }
 
-    /**
-     * @return string
-     */
-    public function getProvince()
-    {
-        return $this->province;
-    }
-
-    /**
-     * @param string $province
-     */
-    public function setProvince($province)
-    {
-        $this->province = $province;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCountry()
+    public function getCountry() : string
     {
         return $this->country;
     }
 
-    /**
-     * @param string $country
-     */
-    public function setCountry($country)
+    public function setCountry(string $country)
     {
         $this->country = $country;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCopyingSensitiveProperties() : array
     {
         return [

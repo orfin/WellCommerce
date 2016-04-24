@@ -12,7 +12,9 @@
 
 namespace WellCommerce\Bundle\ShippingBundle\Repository;
 
+use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
+use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface;
 
 /**
  * Interface ShippingMethodRepositoryInterface
@@ -22,14 +24,9 @@ use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
 interface ShippingMethodRepositoryInterface extends RepositoryInterface
 {
     /**
-     * Returns default shipping method
+     * Returns all valid shipping methods
      *
-     * @return null|\WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface
+     * @return Collection
      */
-    public function getDefaultShippingMethod();
-
-    /**
-     * @return array|\WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface[]
-     */
-    public function findAllEnabledShippingMethods();
+    public function getShippingMethods() : Collection;
 }

@@ -56,10 +56,9 @@ class LoadClientData extends AbstractDataFixture
         $billingAddress = new ClientBillingAddress();
         $billingAddress->setFirstName($firstName);
         $billingAddress->setLastName($lastName);
-        $billingAddress->setStreet($fakerGenerator->streetName);
-        $billingAddress->setStreetNo($fakerGenerator->streetSuffix);
-        $billingAddress->setFlatNo($fakerGenerator->buildingNumber);
-        $billingAddress->setPostCode($fakerGenerator->postcode);
+        $billingAddress->setLine1($fakerGenerator->streetName . ' ' . $fakerGenerator->streetSuffix);
+        $billingAddress->setLine2($fakerGenerator->buildingNumber);
+        $billingAddress->setPostalCode($fakerGenerator->postcode);
         $billingAddress->setCity($fakerGenerator->city);
         $billingAddress->setCountry($fakerGenerator->countryCode);
         $billingAddress->setVatId(666777888999);
@@ -68,10 +67,9 @@ class LoadClientData extends AbstractDataFixture
         $shippingAddress = new ClientShippingAddress();
         $shippingAddress->setFirstName($firstName);
         $shippingAddress->setLastName($lastName);
-        $shippingAddress->setStreet($fakerGenerator->streetName);
-        $shippingAddress->setStreetNo($fakerGenerator->streetSuffix);
-        $shippingAddress->setFlatNo($fakerGenerator->buildingNumber);
-        $shippingAddress->setPostCode($fakerGenerator->postcode);
+        $shippingAddress->setLine1($fakerGenerator->streetName . ' ' . $fakerGenerator->streetSuffix);
+        $shippingAddress->setLine2($fakerGenerator->buildingNumber);
+        $shippingAddress->setPostalCode($fakerGenerator->postcode);
         $shippingAddress->setCity($fakerGenerator->city);
         $shippingAddress->setCountry($fakerGenerator->countryCode);
 

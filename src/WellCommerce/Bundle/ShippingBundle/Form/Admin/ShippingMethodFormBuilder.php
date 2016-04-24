@@ -11,8 +11,12 @@
  */
 namespace WellCommerce\Bundle\ShippingBundle\Form\Admin;
 
+use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
+use WellCommerce\Bundle\ShippingBundle\Calculator\ShippingCalculatorInterface;
+use WellCommerce\Component\Form\Elements\ElementInterface;
 use WellCommerce\Component\Form\Elements\FormInterface;
+use WellCommerce\Component\Form\Elements\Optioned\Select;
 
 /**
  * Class ShippingMethodFormBuilder
@@ -65,12 +69,14 @@ class ShippingMethodFormBuilder extends AbstractFormBuilder
             'label' => $this->trans('shipping_method.fieldset.costs')
         ]));
 
-        $costsData->addChild($this->getElement('select', [
+        $calculator = $costsData->addChild($this->getElement('select', [
             'name'    => 'calculator',
             'label'   => $this->trans('shipping_method.label.calculator'),
             'options' => [],
         ]));
 
+        $this->addCalculatorOptions($calculator);
+        
         $costsData->addChild($this->getElement('select', [
             'name'        => 'currency',
             'label'       => $this->trans('common.label.currency'),
@@ -96,5 +102,24 @@ class ShippingMethodFormBuilder extends AbstractFormBuilder
         $form->addFilter($this->getFilter('no_code'));
         $form->addFilter($this->getFilter('trim'));
         $form->addFilter($this->getFilter('secure'));
+    }
+
+    /**
+     * Adds calculator options to select
+     *
+     * @param ElementInterface|Select $select
+     */
+    private function addCalculatorOptions(ElementInterface $select)
+    {
+        $collection = $this->getCalculators();
+
+        $collection->map(function (ShippingCalculatorInterface $calculator) use ($select) {
+            $select->addOptionToSelect($calculator->getAlias(), $calculator->getAlias());
+        });
+    }
+
+    private function getCalculators() : Collection
+    {
+        return $this->get('shipping_method.calculator.collection');
     }
 }

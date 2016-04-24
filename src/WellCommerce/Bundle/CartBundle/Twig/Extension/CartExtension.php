@@ -19,7 +19,7 @@ use WellCommerce\Component\DataSet\DataSetInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CartExtension extends \Twig_Extension implements \Twig_Extension_GlobalsInterface
+class CartExtension extends \Twig_Extension
 {
     /**
      * @var CartContextInterface

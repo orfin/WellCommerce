@@ -16,23 +16,19 @@ WellCommerce\Bundle\ContactBundle\Entity\ContactTranslation:
             groups:
                 - default
                 - contact_translation
-        street:
+        line1:
             groups:
                 - default
                 - contact_translation
-        streetNo:
+        line2:
             groups:
                 - default
                 - contact_translation
-        flatNo:
+        postalCode:
             groups:
                 - default
                 - contact_translation
-        postCode:
-            groups:
-                - default
-                - contact_translation
-        province:
+        state:
             groups:
                 - default
                 - contact_translation

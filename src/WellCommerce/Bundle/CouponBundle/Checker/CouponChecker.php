@@ -20,17 +20,17 @@ use WellCommerce\Bundle\OrderBundle\Repository\OrderRepositoryInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CouponChecker implements CouponCheckerInterface
+final class CouponChecker implements CouponCheckerInterface
 {
     /**
      * @var OrderRepositoryInterface
      */
-    protected $orderRepository;
+    private $orderRepository;
 
     /**
      * @var string
      */
-    protected $error = '';
+    private $error = '';
 
     /**
      * CouponChecker constructor.
@@ -79,9 +79,11 @@ class CouponChecker implements CouponCheckerInterface
     /**
      * Checks whether the coupon's start date is valid
      *
+     * @param CouponInterface $coupon
+     *
      * @return bool
      */
-    protected function isStartDateValid(CouponInterface $coupon) : bool
+    private function isStartDateValid(CouponInterface $coupon) : bool
     {
         $now             = new \DateTime();
         $couponStartDate = $coupon->getValidFrom();
@@ -96,9 +98,11 @@ class CouponChecker implements CouponCheckerInterface
     /**
      * Checks whether the coupon is not expired
      *
+     * @param CouponInterface $coupon
+     *
      * @return bool
      */
-    protected function isNotExpired(CouponInterface $coupon) : bool
+    private function isNotExpired(CouponInterface $coupon) : bool
     {
         $now           = new \DateTime();
         $couponEndDate = $coupon->getValidTo();

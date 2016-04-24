@@ -14,7 +14,7 @@
                 <argument type="service" id="service_container"/>
             </call>
         </service>
-        
+
         <service id="shipping_method.controller.admin" class="WellCommerce\Bundle\ShippingBundle\Controller\Admin\ShippingMethodController">
             <argument type="service" id="shipping_method.manager.admin"/>
             <call method="setContainer">
@@ -59,16 +59,7 @@
             </call>
         </service>
 
-        <service id="shipping_method.subscriber" class="WellCommerce\Bundle\ShippingBundle\EventListener\ShippingMethodSubscriber">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-            <tag name="kernel.event_subscriber" />
-        </service>
-
         <service id="shipping_method.calculator.collection" class="Doctrine\Common\Collections\ArrayCollection" />
-
-        <service id="shipping_method.adapter.collection" class="Doctrine\Common\Collections\ArrayCollection" />
 
         <service id="shipping_method.provider" class="WellCommerce\Bundle\ShippingBundle\Provider\ShippingMethodProvider">
             <argument type="service" id="shipping_method.repository"/>
@@ -85,21 +76,30 @@
         </service>
 
         <service id="weight_table.calculator" class="WellCommerce\Bundle\ShippingBundle\Calculator\WeightTableCalculator">
-            <argument>weight_table</argument>
-            <argument type="service" id="shipping_method.adapter.collection"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
             <tag name="shipping_method.calculator" alias="weight_table"/>
         </service>
 
         <service id="price_table.calculator" class="WellCommerce\Bundle\ShippingBundle\Calculator\PriceTableCalculator">
-            <argument>price_table</argument>
-            <argument type="service" id="shipping_method.adapter.collection"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
+            <argument type="service" id="currency.converter"/>
             <tag name="shipping_method.calculator" alias="price_table"/>
+        </service>
+
+        <service id="shipping_method.cart.visitor" class="WellCommerce\Bundle\ShippingBundle\Visitor\ShippingMethodCartVisitor">
+            <argument type="service" id="cart_modifier.manager.front"/>
+            <tag name="cart.visitor" alias="shipping_method"/>
+        </service>
+
+        <service id="shipping_cost.cart.modifier.configurator" class="WellCommerce\Bundle\CartBundle\Configurator\CartModifierConfigurator">
+            <argument key="name">shipping_cost</argument>
+            <argument key="description">cart.label.shipping_cost</argument>
+            <argument key="subtraction">false</argument>
+            <argument key="hierarchy">0</argument>
+        </service>
+
+        <service id="shipping_cost.cart.modifier" class="WellCommerce\Bundle\CartBundle\Entity\CartModifier">
+            <factory service="cart_modifier.factory" method="create" />
+            <configurator service="shipping_cost.cart.modifier.configurator" method="configure" />
+            <tag name="cart.modifier" alias="shipping_cost"/>
         </service>
     </services>
 </container>

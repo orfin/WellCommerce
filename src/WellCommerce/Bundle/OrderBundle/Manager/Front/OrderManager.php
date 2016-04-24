@@ -15,93 +15,44 @@ namespace WellCommerce\Bundle\OrderBundle\Manager\Front;
 use WellCommerce\Bundle\AppBundle\Entity\Price;
 use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 use WellCommerce\Bundle\CartBundle\Entity\CartProductInterface;
-use WellCommerce\Bundle\CartBundle\Manager\Front\CartManagerInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderStatusHistoryInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderStatusInterface;
-use WellCommerce\Bundle\OrderBundle\Factory\OrderProductFactory;
-use WellCommerce\Bundle\OrderBundle\Factory\OrderTotalFactory;
 
 /**
  * Class OrderManager
  *
- * @author Adam Piotrowski <adam@wellcommerce.org>
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class OrderManager extends AbstractFrontManager
+class OrderManager extends AbstractFrontManager implements OrderManagerInterface
 {
-    /**
-     * @var OrderProductFactory
-     */
-    protected $orderProductFactory;
-    
-    /**
-     * @var OrderTotalFactory
-     */
-    protected $orderTotalFactory;
-    
-    /**
-     * @var CartManagerInterface
-     */
-    protected $cartManager;
-    
-    /**
-     * @var \WellCommerce\Bundle\OrderBundle\EventDispatcher\OrderEventDispatcherInterface
-     */
-    protected $eventDispatcher;
-    
-    /**
-     * @param OrderProductFactory $orderProductFactory
-     */
-    public function setOrderProductFactory(OrderProductFactory $orderProductFactory)
+    public function initializeOrderFromCart(CartInterface $cart) : OrderInterface
     {
-        $this->orderProductFactory = $orderProductFactory;
-    }
-    
-    /**
-     * @param OrderTotalFactory $orderTotalFactory
-     */
-    public function setOrderTotalFactory(OrderTotalFactory $orderTotalFactory)
-    {
-        $this->orderTotalFactory = $orderTotalFactory;
-    }
-    
-    /**
-     * @param CartManagerInterface $cartManager
-     */
-    public function setCartManager(CartManagerInterface $cartManager)
-    {
-        $this->cartManager = $cartManager;
-    }
-    
-    /**
-     * @param CartInterface $cart
-     *
-     * @return OrderInterface
-     */
-    public function prepareOrderFromCart(CartInterface $cart) : OrderInterface
-    {
-        $orderStatus = $cart->getPaymentMethod()->getPaymentPendingOrderStatus();
-        $order       = $this->initResource();
+        /** @var OrderInterface $order */
+        $order = $this->initResource();
         $order->setCurrency($cart->getCurrency());
         $order->setPaymentMethod($cart->getPaymentMethod());
-        $order->setShippingMethod($cart->getShippingMethodCost()->getShippingMethod());
+        $order->setShippingMethod($cart->getShippingMethod());
         $order->setBillingAddress($cart->getBillingAddress());
         $order->setShippingAddress($cart->getShippingAddress());
         $order->setContactDetails($cart->getContactDetails());
         $order->setShop($cart->getShop());
         $order->setSessionId($cart->getSessionId());
         $order->setClient($cart->getClient());
-        $order->setCurrentStatus($orderStatus);
+        $order->setCurrentStatus($this->getDefaultOrderStatus($cart));
         $order->setCoupon($cart->getCoupon());
         
-        $this->prepareOrderStatusHistory($order, $orderStatus);
+        $this->prepareOrderStatusHistory($order, $cart);
         $this->prepareOrderProducts($cart, $order);
         $this->prepareOrderShippingDetails($cart, $order);
         
-        $this->eventDispatcher->dispatchOnPostOrderPrepared($order);
-        
         return $order;
+    }
+    
+    private function getDefaultOrderStatus(CartInterface $cart) : OrderStatusInterface
+    {
+        return $cart->getPaymentMethod()->getPaymentPendingOrderStatus();
     }
     
     protected function prepareOrderStatusHistory(OrderInterface $order, OrderStatusInterface $orderStatus)
@@ -112,7 +63,7 @@ class OrderManager extends AbstractFrontManager
         $orderStatusHistory->setComment('');
         $orderStatusHistory->setOrder($order);
         $orderStatusHistory->setOrderStatus($orderStatus);
-
+        
         $order->addOrderStatusHistory($orderStatusHistory);
     }
     
@@ -175,5 +126,10 @@ class OrderManager extends AbstractFrontManager
         $orderProduct->setProduct($product);
         
         return $orderProduct;
+    }
+
+    private function getOrderProductManager() : OrderProductManager
+    {
+        return $this->get('order_product.manager.front');
     }
 }

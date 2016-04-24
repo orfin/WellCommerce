@@ -19,42 +19,17 @@ namespace WellCommerce\Bundle\AppBundle\Entity;
  */
 class DiscountablePrice extends Price implements DiscountablePriceInterface
 {
-    /**
-     * @var float
-     */
-    protected $discountedNetAmount = 0;
-
-    /**
-     * @var float
-     */
+    protected $discountedNetAmount   = 0;
     protected $discountedGrossAmount = 0;
+    protected $discountedTaxAmount   = 0;
+    protected $validFrom             = null;
+    protected $validTo               = null;
 
-    /**
-     * @var float
-     */
-    protected $discountedTaxAmount = 0;
-
-    /**
-     * @var \DateTime|null
-     */
-    protected $validFrom;
-
-    /**
-     * @var \DateTime|null
-     */
-    protected $validTo;
-
-    /**
-     * @return \DateTime|null
-     */
     public function getValidFrom()
     {
         return $this->validFrom;
     }
 
-    /**
-     * @param \DateTime|null $validFrom
-     */
     public function setValidFrom(\DateTime $validFrom = null)
     {
         if (null !== $validFrom) {
@@ -64,17 +39,11 @@ class DiscountablePrice extends Price implements DiscountablePriceInterface
         $this->validFrom = $validFrom;
     }
 
-    /**
-     * @return \DateTime|null
-     */
     public function getValidTo()
     {
         return $this->validTo;
     }
 
-    /**
-     * @param \DateTime|null $validTo
-     */
     public function setValidTo(\DateTime $validTo = null)
     {
         if (null !== $validTo) {
@@ -84,9 +53,6 @@ class DiscountablePrice extends Price implements DiscountablePriceInterface
         $this->validTo = $validTo;
     }
 
-    /**
-     * @return float
-     */
     public function getFinalGrossAmount() : float
     {
         if ($this->isDiscountValid()) {
@@ -96,9 +62,6 @@ class DiscountablePrice extends Price implements DiscountablePriceInterface
         return $this->getGrossAmount();
     }
 
-    /**
-     * @return bool
-     */
     public function isDiscountValid() : bool
     {
         $now = new \DateTime();
@@ -110,25 +73,16 @@ class DiscountablePrice extends Price implements DiscountablePriceInterface
         return false;
     }
 
-    /**
-     * @return float
-     */
     public function getDiscountedGrossAmount() : float
     {
         return $this->discountedGrossAmount;
     }
 
-    /**
-     * @param float $discountedGrossAmount
-     */
     public function setDiscountedGrossAmount(float $discountedGrossAmount)
     {
         $this->discountedGrossAmount = $discountedGrossAmount;
     }
 
-    /**
-     * @return float
-     */
     public function getFinalNetAmount() : float
     {
         if ($this->isDiscountValid()) {
@@ -138,25 +92,16 @@ class DiscountablePrice extends Price implements DiscountablePriceInterface
         return $this->getNetAmount();
     }
 
-    /**
-     * @return float
-     */
     public function getDiscountedNetAmount() : float
     {
         return $this->discountedNetAmount;
     }
 
-    /**
-     * @param float $discountedNetAmount
-     */
     public function setDiscountedNetAmount(float $discountedNetAmount)
     {
         $this->discountedNetAmount = $discountedNetAmount;
     }
 
-    /**
-     * @return float
-     */
     public function getFinalTaxAmount() : float
     {
         if ($this->isDiscountValid()) {
@@ -166,17 +111,11 @@ class DiscountablePrice extends Price implements DiscountablePriceInterface
         return $this->getTaxAmount();
     }
 
-    /**
-     * @return float
-     */
     public function getDiscountedTaxAmount() : float
     {
         return $this->discountedTaxAmount;
     }
 
-    /**
-     * @param float $discountedTaxAmount
-     */
     public function setDiscountedTaxAmount(float $discountedTaxAmount)
     {
         $this->discountedTaxAmount = $discountedTaxAmount;
