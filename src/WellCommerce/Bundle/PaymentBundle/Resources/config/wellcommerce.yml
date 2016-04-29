@@ -4,33 +4,30 @@ doctrine:
             WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodInterface: WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod
 
 well_commerce_payment:
-    services:
+    configuration:
         payment:
-            auto_services:
+            orm:
                 factory: WellCommerce\Bundle\PaymentBundle\Factory\PaymentFactory
                 repository: WellCommerce\Bundle\PaymentBundle\Repository\PaymentRepository
-            orm_configuration:
                 mapping: "@WellCommercePaymentBundle/Resources/config/doctrine/Payment.orm.yml"
                 entity: WellCommerce\Bundle\PaymentBundle\Entity\Payment
         payment_state_history:
-            auto_services:
+            orm:
                 factory: WellCommerce\Bundle\PaymentBundle\Factory\PaymentStateHistoryFactory
                 repository: WellCommerce\Bundle\PaymentBundle\Repository\PaymentStateHistoryRepository
-            orm_configuration:
                 mapping: "@WellCommercePaymentBundle/Resources/config/doctrine/PaymentStateHistory.orm.yml"
                 entity: WellCommerce\Bundle\PaymentBundle\Entity\PaymentStateHistory
         payment_method:
-            auto_services:
+            orm:
                 factory: WellCommerce\Bundle\PaymentBundle\Factory\PaymentMethodFactory
                 repository: WellCommerce\Bundle\PaymentBundle\Repository\PaymentMethodRepository
-            orm_configuration:
                 mapping: "@WellCommercePaymentBundle/Resources/config/doctrine/PaymentMethod.orm.yml"
                 entity: WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod
-            api_configuration:
+            api:
                 exposed: true
                 dataset: payment_method.dataset.admin
                 manager: payment_method.manager.admin
         payment_method_translation:
-            orm_configuration:
+            orm:
                 mapping: "@WellCommercePaymentBundle/Resources/config/doctrine/PaymentMethodTranslation.orm.yml"
                 entity: WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodTranslation

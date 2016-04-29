@@ -22,13 +22,4 @@ use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
  */
 class WellCommerceReviewExtension extends AbstractExtension
 {
-    CONST EXTENSION_NAME = 'well_commerce_review';
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function setExtensionConfiguration(ContainerBuilder $container, array $parameters = [])
-    {
-        $container->setParameter(self::EXTENSION_NAME, $parameters);
-    }
 }

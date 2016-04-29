@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\CoreBundle\DependencyInjection;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpKernel\KernelInterface;
 use WellCommerce\Bundle\AdminBundle\Helper\Admin\AdminHelperInterface;
@@ -134,6 +135,11 @@ abstract class AbstractContainerAware
     public function getEntityManager() : ObjectManager
     {
         return $this->getDoctrineHelper()->getEntityManager();
+    }
+
+    public function getEventDispatcher() : EventDispatcherInterface
+    {
+        return $this->get('event_dispatcher');
     }
 
     /**

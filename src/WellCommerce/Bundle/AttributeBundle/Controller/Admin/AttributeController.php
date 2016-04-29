@@ -27,7 +27,7 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 class AttributeController extends AbstractAdminController
 {
     /**
-     * @var \WellCommerce\Bundle\AttributeBundle\Manager\Admin\AttributeManager
+     * @var \WellCommerce\Bundle\AttributeBundle\Manager\AttributeManager
      */
     protected $manager;
     

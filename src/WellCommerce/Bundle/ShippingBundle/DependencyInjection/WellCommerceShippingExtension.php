@@ -22,13 +22,4 @@ use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
  */
 class WellCommerceShippingExtension extends AbstractExtension
 {
-    CONST EXTENSION_NAME = 'well_commerce_shipping';
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function setExtensionConfiguration(ContainerBuilder $container, array $parameters = [])
-    {
-        $container->setParameter(self::EXTENSION_NAME, $parameters);
-    }
 }

@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\CoreBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
@@ -25,11 +26,22 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 abstract class AbstractExtension extends Extension
 {
     /**
-     * @param ContainerBuilder $container
-     * @param array            $parameters
+     * {@inheritdoc}
      */
-    abstract protected function setExtensionConfiguration(ContainerBuilder $container, array $parameters = []);
-
+    public function getConfiguration(array $config, ContainerBuilder $container)
+    {
+        $reflected = new \ReflectionClass($this);
+        $namespace = $reflected->getNamespaceName();
+        
+        $class = $namespace . '\\Configuration';
+        if (class_exists($class)) {
+            $r = new \ReflectionClass($class);
+            $container->addResource(new FileResource($r->getFileName()));
+            
+            return new $class($this->getAlias());
+        }
+    }
+    
     /**
      * {@inheritdoc}
      */
@@ -37,15 +49,14 @@ abstract class AbstractExtension extends Extension
     {
         $reflection = new \ReflectionClass($this);
         $directory  = dirname($reflection->getFileName());
-
+        
         $locator = new FileLocator($directory . '/../Resources/config');
-
+        
         $xmlLoader = new Loader\XmlFileLoader($container, $locator);
         $xmlLoader->load('services.xml');
-
+        
         $configuration = $this->getConfiguration($configs, $container);
-        $config        = $this->processConfiguration($configuration, $configs);
-
-        $this->setExtensionConfiguration($container, $config);
+        
+        $this->processConfiguration($configuration, $configs);
     }
 }

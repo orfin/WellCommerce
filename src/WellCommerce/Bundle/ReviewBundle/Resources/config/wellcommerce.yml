@@ -1,13 +1,12 @@
 well_commerce_review:
-    services:
+    configuration:
         review:
-            auto_services:
+            orm:
                 factory: WellCommerce\Bundle\ReviewBundle\Factory\ReviewFactory
                 repository: WellCommerce\Bundle\ReviewBundle\Repository\ReviewRepository
-            orm_configuration:
                 mapping: "@WellCommerceReviewBundle/Resources/config/doctrine/Review.orm.yml"
                 entity: WellCommerce\Bundle\ReviewBundle\Entity\Review
-            api_configuration:
+            api:
                 exposed: true
                 dataset: review.dataset.admin
                 manager: review.manager.admin

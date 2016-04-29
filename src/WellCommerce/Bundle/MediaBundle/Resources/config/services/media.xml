@@ -8,8 +8,9 @@
     </imports>
 
     <services>
-        <service id="media.event_dispatcher" parent="core.event_dispatcher" public="false">
-            <argument type="service" id="event_dispatcher"/>
+        <service id="media.manager" class="WellCommerce\Bundle\MediaBundle\Manager\MediaManager" parent="core.manager">
+            <argument type="service" id="media.repository"/>
+            <argument type="service" id="media.factory"/>
         </service>
 
         <service id="dataset.transformer.image_path" class="WellCommerce\Bundle\MediaBundle\DataSet\Transformer\ImagePathTransformer">

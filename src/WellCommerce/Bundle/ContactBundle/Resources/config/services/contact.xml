@@ -9,8 +9,9 @@
     </imports>
 
     <services>
-        <service id="contact.event_dispatcher" parent="core.event_dispatcher" public="false">
-            <argument type="service" id="event_dispatcher" />
+        <service id="contact.manager" class="WellCommerce\Bundle\ContactBundle\Manager\ContactManager" parent="core.manager">
+            <argument type="service" id="contact.repository"/>
+            <argument type="service" id="contact.factory"/>
         </service>
     </services>
 </container>

@@ -39,8 +39,8 @@ class UserFactory extends AbstractEntityFactory
         $user->setLastName('');
         $user->setEmail('');
         $user->setEnabled(true);
-        $user->setRoles(new ArrayCollection());
-        $user->setGroups(new ArrayCollection());
+        $user->setRoles($this->createEmptyCollection());
+        $user->setGroups($this->createEmptyCollection());
         $user->setSalt(base_convert(sha1(uniqid(mt_rand(), true)), 16, 36));
         $user->setApiKey('');
         $user->setCreatedAt(new \DateTime());

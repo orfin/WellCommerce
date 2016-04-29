@@ -33,11 +33,6 @@ use WellCommerce\Bundle\ThemeBundle\Context\Front\ThemeContextInterface;
 interface FrontManagerInterface extends ManagerInterface
 {
     /**
-     * @return CartContextInterface
-     */
-    public function getCartContext() : CartContextInterface;
-
-    /**
      * @return CategoryContextInterface
      */
     public function getCategoryContext() : CategoryContextInterface;

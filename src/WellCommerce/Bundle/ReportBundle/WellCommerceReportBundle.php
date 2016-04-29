@@ -21,5 +21,4 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  */
 class WellCommerceReportBundle extends Bundle
 {
-
 }

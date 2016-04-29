@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\OAuthBundle\DependencyInjection;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
 
 /**
@@ -22,13 +21,4 @@ use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
  */
 class WellCommerceOAuthExtension extends AbstractExtension
 {
-    CONST EXTENSION_NAME = 'well_commerce_oauth';
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function setExtensionConfiguration(ContainerBuilder $container, array $parameters = [])
-    {
-        $container->setParameter(self::EXTENSION_NAME, $parameters);
-    }
 }

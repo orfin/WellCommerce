@@ -12,9 +12,7 @@
 
 namespace WellCommerce\Bundle\LocaleBundle;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
-use WellCommerce\Bundle\LocaleBundle\DependencyInjection\Compiler;
 
 /**
  * Class WellCommerceLocaleBundle
@@ -23,10 +21,4 @@ use WellCommerce\Bundle\LocaleBundle\DependencyInjection\Compiler;
  */
 class WellCommerceLocaleBundle extends Bundle
 {
-    public function build(ContainerBuilder $container)
-    {
-        parent::build($container);
-        $container->addCompilerPass(new Compiler\AutoRegisterServicesPass());
-        $container->addCompilerPass(new Compiler\MappingCompilerPass());
-    }
 }

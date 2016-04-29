@@ -4,19 +4,18 @@ doctrine:
             WellCommerce\Bundle\CouponBundle\Entity\CouponInterface: WellCommerce\Bundle\CouponBundle\Entity\Coupon
 
 well_commerce_coupon:
-    services:
+    configuration:
         coupon:
-            auto_services:
+            orm:
                 factory: WellCommerce\Bundle\CouponBundle\Factory\CouponFactory
                 repository: WellCommerce\Bundle\CouponBundle\Repository\CouponRepository
-            orm_configuration:
                 mapping: "@WellCommerceCouponBundle/Resources/config/doctrine/Coupon.orm.yml"
                 entity: WellCommerce\Bundle\CouponBundle\Entity\Coupon
-            api_configuration:
+            api:
                 exposed: true
                 dataset: coupon.dataset.admin
                 manager: coupon.manager.admin
         coupon_translation:
-            orm_configuration:
+            orm:
                 mapping: "@WellCommerceCouponBundle/Resources/config/doctrine/CouponTranslation.orm.yml"
                 entity: WellCommerce\Bundle\CouponBundle\Entity\CouponTranslation

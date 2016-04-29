@@ -14,14 +14,7 @@
             </call>
         </service>
 
-        <service id="client_register.form_builder.front" class="WellCommerce\Bundle\ClientBundle\Form\Front\ClientRegisterFormBuilder">
-            <argument type="service" id="form.resolver.factory"/>
-            <argument type="service" id="form.handler"/>
-            <argument type="service" id="client.event_dispatcher"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-        </service>
+        <service id="client_register.form_builder.front" class="WellCommerce\Bundle\ClientBundle\Form\Front\ClientRegisterFormBuilder" parent="core.form_builder" />
 
         <service id="client_registration.layout_box.controller" class="WellCommerce\Bundle\ClientBundle\Controller\Box\ClientRegistrationBoxController">
             <argument type="service" id="client_registration.manager.front"/>

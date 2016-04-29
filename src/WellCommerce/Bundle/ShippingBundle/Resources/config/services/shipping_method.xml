@@ -4,10 +4,13 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="shipping_method.manager.admin" class="WellCommerce\Bundle\ShippingBundle\Manager\Admin\ShippingMethodManager">
+        <service id="shipping_method.manager" class="WellCommerce\Bundle\ShippingBundle\Manager\ShippingMethodManager" parent="core.manager">
             <argument type="service" id="shipping_method.repository"/>
-            <argument type="service" id="shipping_method.event_dispatcher"/>
             <argument type="service" id="shipping_method.factory"/>
+        </service>
+
+        <service id="shipping_method.controller.admin" class="WellCommerce\Bundle\ShippingBundle\Controller\Admin\ShippingMethodController">
+            <argument type="service" id="shipping_method.manager"/>
             <argument type="service" id="shipping_method.form_builder.admin"/>
             <argument type="service" id="shipping_method.datagrid"/>
             <call method="setContainer">
@@ -15,49 +18,24 @@
             </call>
         </service>
 
-        <service id="shipping_method.controller.admin" class="WellCommerce\Bundle\ShippingBundle\Controller\Admin\ShippingMethodController">
-            <argument type="service" id="shipping_method.manager.admin"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-        </service>
-
-        <service id="shipping_method.event_dispatcher" parent="core.event_dispatcher" public="false">
-            <argument type="service" id="event_dispatcher"/>
-        </service>
-
         <service id="shipping_method.dataset.query_builder.admin" class="WellCommerce\Bundle\ShippingBundle\DataSet\Admin\ShippingMethodDataSetQueryBuilder" public="false">
             <argument type="service" id="shipping_method.repository"/>
         </service>
 
-        <service id="shipping_method.dataset.admin" class="WellCommerce\Bundle\ShippingBundle\DataSet\Admin\ShippingMethodDataSet">
+        <service id="shipping_method.dataset.admin" class="WellCommerce\Bundle\ShippingBundle\DataSet\Admin\ShippingMethodDataSet" parent="core.dataset">
             <argument type="service" id="shipping_method.dataset.query_builder.admin"/>
-            <argument type="service" id="dataset.manager"/>
-            <argument type="service" id="shipping_method.event_dispatcher"/>
-            <configurator service="dataset.configurator" method="configure"/>
         </service>
 
         <service id="shipping_method.dataset.query_builder" parent="shipping_method.dataset.query_builder.admin" public="false">
             <argument type="service" id="shipping_method.repository"/>
         </service>
 
-        <service id="shipping_method.datagrid" class="WellCommerce\Bundle\ShippingBundle\DataGrid\ShippingMethodDataGrid">
+        <service id="shipping_method.datagrid" class="WellCommerce\Bundle\ShippingBundle\DataGrid\ShippingMethodDataGrid" parent="core.datagrid">
             <argument key="identifier">shipping_method</argument>
             <argument type="service" id="shipping_method.dataset.admin"/>
-            <argument type="service" id="shipping_method.event_dispatcher"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
         </service>
 
-        <service id="shipping_method.form_builder.admin" class="WellCommerce\Bundle\ShippingBundle\Form\Admin\ShippingMethodFormBuilder">
-            <argument type="service" id="form.resolver.factory"/>
-            <argument type="service" id="form.handler"/>
-            <argument type="service" id="shipping_method.event_dispatcher"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-        </service>
+        <service id="shipping_method.form_builder.admin" class="WellCommerce\Bundle\ShippingBundle\Form\Admin\ShippingMethodFormBuilder" parent="core.form_builder" />
 
         <service id="shipping_method.calculator.collection" class="Doctrine\Common\Collections\ArrayCollection" />
 

@@ -1,17 +1,13 @@
 well_commerce_theme:
-    services:
+    configuration:
         theme:
-            auto_services:
+            orm:
                 factory: WellCommerce\Bundle\ThemeBundle\Factory\ThemeFactory
                 repository: WellCommerce\Bundle\ThemeBundle\Repository\ThemeRepository
-            orm_configuration:
                 mapping: "@WellCommerceThemeBundle/Resources/config/doctrine/Theme.orm.yml"
                 entity: WellCommerce\Bundle\ThemeBundle\Entity\Theme
         theme_css:
-            auto_services:
-                factory: ~
-                repository: ~
-            orm_configuration:
+            orm:
                 mapping: "@WellCommerceThemeBundle/Resources/config/doctrine/ThemeCss.orm.yml"
                 entity: WellCommerce\Bundle\ThemeBundle\Entity\ThemeCss
 

@@ -10,9 +10,6 @@ wellcommerce_attribute:
 wellcommerce_availability:
     resource: "@WellCommerceAvailabilityBundle/Resources/config/routing.xml"
 
-wellcommerce_cart:
-    resource: "@WellCommerceCartBundle/Resources/config/routing.xml"
-
 wellcommerce_category:
     resource: "@WellCommerceCategoryBundle/Resources/config/routing.xml"
 

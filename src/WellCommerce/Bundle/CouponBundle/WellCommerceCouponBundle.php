@@ -12,9 +12,7 @@
 
 namespace WellCommerce\Bundle\CouponBundle;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
-use WellCommerce\Bundle\CouponBundle\DependencyInjection\Compiler;
 
 /**
  * Class WellCommerceCouponBundle
@@ -23,10 +21,4 @@ use WellCommerce\Bundle\CouponBundle\DependencyInjection\Compiler;
  */
 class WellCommerceCouponBundle extends Bundle
 {
-    public function build(ContainerBuilder $container)
-    {
-        parent::build($container);
-        $container->addCompilerPass(new Compiler\AutoRegisterServicesPass());
-        $container->addCompilerPass(new Compiler\MappingCompilerPass());
-    }
 }

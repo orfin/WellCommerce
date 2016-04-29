@@ -6,78 +6,70 @@ doctrine:
             WellCommerce\Bundle\OrderBundle\Entity\OrderProductTotalInterface: WellCommerce\Bundle\OrderBundle\Entity\OrderProductTotal
 
 well_commerce_order:
-    services:
+    configuration:
         order:
-            auto_services:
+            orm:
                 factory: WellCommerce\Bundle\OrderBundle\Factory\OrderFactory
                 repository: WellCommerce\Bundle\OrderBundle\Repository\OrderRepository
-            orm_configuration:
                 mapping: "@WellCommerceOrderBundle/Resources/config/doctrine/Order.orm.yml"
                 entity: WellCommerce\Bundle\OrderBundle\Entity\Order
-            api_configuration:
+            api:
                 exposed: true
                 dataset: order.dataset.admin
                 manager: order.manager.admin
         order_modifier:
-            auto_services:
-                factory: WellCommerce\Bundle\CartBundle\Factory\OrderModifierFactory
-            orm_configuration:
+            orm:
+                factory: WellCommerce\Bundle\OrderBundle\Factory\OrderModifierFactory
                 mapping: "@WellCommerceOrderBundle/Resources/config/doctrine/OrderModifier.orm.yml"
                 entity: WellCommerce\Bundle\OrderBundle\Entity\OrderModifier
         order_summary:
-            auto_services:
+            orm:
                 factory: WellCommerce\Bundle\OrderBundle\Factory\OrderSummaryFactory
-            orm_configuration:
                 mapping: "@WellCommerceOrderBundle/Resources/config/doctrine/OrderSummary.orm.yml"
                 entity: WellCommerce\Bundle\OrderBundle\Entity\OrderSummary
         order_product:
-            auto_services:
+            orm:
                 factory: WellCommerce\Bundle\OrderBundle\Factory\OrderProductFactory
                 repository: WellCommerce\Bundle\OrderBundle\Repository\OrderProductRepository
-            orm_configuration:
                 mapping: "@WellCommerceOrderBundle/Resources/config/doctrine/OrderProduct.orm.yml"
                 entity: WellCommerce\Bundle\OrderBundle\Entity\OrderProduct
         order_product_total:
-            auto_services:
+            orm:
                 factory: WellCommerce\Bundle\OrderBundle\Factory\OrderProductTotalFactory
-            orm_configuration:
                 mapping: "@WellCommerceOrderBundle/Resources/config/doctrine/OrderProductTotal.orm.yml"
                 entity: WellCommerce\Bundle\OrderBundle\Entity\OrderProductTotal
         order_status:
-            auto_services:
+            orm:
                 factory: WellCommerce\Bundle\OrderBundle\Factory\OrderStatusFactory
                 repository: WellCommerce\Bundle\OrderBundle\Repository\OrderStatusRepository
-            orm_configuration:
                 mapping: "@WellCommerceOrderBundle/Resources/config/doctrine/OrderStatus.orm.yml"
                 entity: WellCommerce\Bundle\OrderBundle\Entity\OrderStatus
-            api_configuration:
+            api:
                 exposed: true
                 dataset: order_status.dataset.admin
                 manager: order_status.manager.admin
         order_status_history:
-            auto_services:
+            orm:
                 factory: WellCommerce\Bundle\OrderBundle\Factory\OrderStatusHistoryFactory
                 repository: WellCommerce\Bundle\OrderBundle\Repository\OrderStatusHistoryRepository
-            orm_configuration:
                 mapping: "@WellCommerceOrderBundle/Resources/config/doctrine/OrderStatusHistory.orm.yml"
                 entity: WellCommerce\Bundle\OrderBundle\Entity\OrderStatusHistory
         order_status_translation:
-            orm_configuration:
+            orm:
                 mapping: "@WellCommerceOrderBundle/Resources/config/doctrine/OrderStatusTranslation.orm.yml"
                 entity: WellCommerce\Bundle\OrderBundle\Entity\OrderStatusTranslation
         order_status_group:
-            auto_services:
+            orm:
                 factory: WellCommerce\Bundle\OrderBundle\Factory\OrderStatusGroupFactory
                 repository: WellCommerce\Bundle\OrderBundle\Repository\OrderStatusGroupRepository
-            orm_configuration:
                 mapping: "@WellCommerceOrderBundle/Resources/config/doctrine/OrderStatusGroup.orm.yml"
                 entity: WellCommerce\Bundle\OrderBundle\Entity\OrderStatusGroup
-            api_configuration:
+            api:
                 exposed: true
                 dataset: order_status_group.dataset.admin
                 manager: order_status_group.manager.admin
         order_status_group_translation:
-            orm_configuration:
+            orm:
                 mapping: "@WellCommerceOrderBundle/Resources/config/doctrine/OrderStatusGroupTranslation.orm.yml"
                 entity: WellCommerce\Bundle\OrderBundle\Entity\OrderStatusGroupTranslation
 

@@ -8,4 +8,11 @@
         <import resource="admin/layered_navigation.xml"/>
         <import resource="front/layered_navigation.xml"/>
     </imports>
+
+    <services>
+        <service id="layered_navigation.manager" class="WellCommerce\Bundle\LayeredNavigationBundle\Manager\LayeredNavigationManager" parent="core.manager">
+            <argument type="service" id="product.repository"/>
+            <argument type="service" id="product.factory"/>
+        </service>
+    </services>
 </container>

@@ -4,7 +4,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="user_group.manager.admin" class="WellCommerce\Bundle\AdminBundle\Manager\Admin\UserGroupManager">
+        <service id="user_group.manager.admin" class="WellCommerce\Bundle\AdminBundle\Manager\UserGroupManager">
             <argument type="service" id="user_group.repository"/>
             <argument type="service" id="user_group.event_dispatcher"/>
             <argument type="service" id="user_group.factory"/>
@@ -26,29 +26,15 @@
             <argument type="service" id="user_group.repository"/>
         </service>
 
-        <service id="user_group.dataset.admin" class="WellCommerce\Bundle\AdminBundle\DataSet\Admin\UserGroupDataSet">
+        <service id="user_group.dataset.admin" class="WellCommerce\Bundle\AdminBundle\DataSet\Admin\UserGroupDataSet" parent="core.dataset">
             <argument type="service" id="user_group.dataset.query_builder.admin"/>
-            <argument type="service" id="dataset.manager"/>
-            <argument type="service" id="user_group.event_dispatcher"/>
-            <configurator service="dataset.configurator" method="configure"/>
         </service>
 
-        <service id="user_group.datagrid" class="WellCommerce\Bundle\AdminBundle\DataGrid\UserGroupDataGrid">
+        <service id="user_group.datagrid" class="WellCommerce\Bundle\AdminBundle\DataGrid\UserGroupDataGrid" parent="core.datagrid">
             <argument key="identifier">user_group</argument>
             <argument type="service" id="user_group.dataset.admin"/>
-            <argument type="service" id="user_group.event_dispatcher"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
         </service>
 
-        <service id="user_group.form_builder.admin" class="WellCommerce\Bundle\AdminBundle\Form\Admin\UserGroupFormBuilder">
-            <argument type="service" id="form.resolver.factory"/>
-            <argument type="service" id="form.handler"/>
-            <argument type="service" id="user_group.event_dispatcher"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-        </service>
+        <service id="user_group.form_builder.admin" class="WellCommerce\Bundle\AdminBundle\Form\Admin\UserGroupFormBuilder" parent="core.form_builder" />
     </services>
 </container>

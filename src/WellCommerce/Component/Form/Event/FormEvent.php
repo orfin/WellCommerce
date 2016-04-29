@@ -12,6 +12,7 @@
 namespace WellCommerce\Component\Form\Event;
 
 use Symfony\Component\EventDispatcher\Event;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 use WellCommerce\Component\Form\Elements\FormInterface;
 use WellCommerce\Component\Form\FormBuilderInterface;
 
@@ -20,57 +21,34 @@ use WellCommerce\Component\Form\FormBuilderInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class FormEvent extends Event
+final class FormEvent extends Event
 {
     const FORM_INIT_EVENT = 'form_init';
 
-    /**
-     * Form builder instance
-     *
-     * @var FormBuilderInterface
-     */
-    protected $formBuilder;
-
-    /**
-     * @var FormInterface
-     */
-    protected $form;
-
-    /**
-     * @var null|object
-     */
-    protected $defaultData;
+    private $formBuilder;
+    private $form;
+    private $entity;
 
     /**
      * FormEvent constructor.
      *
      * @param FormBuilderInterface $formBuilder
      * @param FormInterface        $form
-     * @param null|object          $defaultData
+     * @param EntityInterface|null $entity
      */
-    public function __construct(FormBuilderInterface $formBuilder, FormInterface $form, $defaultData = null)
+    public function __construct(FormBuilderInterface $formBuilder, FormInterface $form, EntityInterface $entity = null)
     {
         $this->formBuilder = $formBuilder;
         $this->form        = $form;
-        $this->defaultData = $defaultData;
+        $this->entity      = $entity;
     }
 
-    /**
-     * Returns form builder instance
-     *
-     * @return FormBuilderInterface
-     */
-    public function getFormBuilder()
+    public function getFormBuilder() : FormBuilderInterface
     {
         return $this->formBuilder;
     }
 
-    /**
-     * Returns a form instance
-     *
-     * @return FormInterface
-     */
-    public function getForm()
+    public function getForm() : FormInterface
     {
         return $this->form;
     }
@@ -78,8 +56,8 @@ class FormEvent extends Event
     /**
      * @return null|object
      */
-    public function getDefaultData()
+    public function getEntity()
     {
-        return $this->defaultData;
+        return $this->entity;
     }
 }

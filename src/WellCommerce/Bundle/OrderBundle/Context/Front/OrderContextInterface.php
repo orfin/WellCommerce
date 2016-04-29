@@ -21,18 +21,11 @@ use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
  */
 interface OrderContextInterface
 {
-    /**
-     * @param OrderInterface $order
-     */
     public function setCurrentOrder(OrderInterface $order);
 
-    /**
-     * @return OrderInterface
-     */
     public function getCurrentOrder() : OrderInterface;
 
-    /**
-     * @return bool
-     */
+    public function getCurrentOrderIdentifier() : int;
+
     public function hasCurrentOrder() : bool;
 }

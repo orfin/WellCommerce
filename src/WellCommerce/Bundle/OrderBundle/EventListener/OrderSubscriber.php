@@ -12,11 +12,13 @@
 namespace WellCommerce\Bundle\OrderBundle\EventListener;
 
 use Doctrine\Common\Util\Debug;
-use WellCommerce\Bundle\CartBundle\Context\Front\CartContextInterface;
-use WellCommerce\Bundle\CartBundle\Manager\Front\CartManagerInterface;
+use Symfony\Component\HttpKernel\KernelEvents;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
 use WellCommerce\Bundle\DoctrineBundle\Event\ResourceEvent;
+use WellCommerce\Bundle\OrderBundle\Context\Front\CartContextInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
+use WellCommerce\Bundle\OrderBundle\Manager\Front\CartManagerInterface;
+use WellCommerce\Bundle\OrderBundle\Manager\Front\OrderManagerInterface;
 use WellCommerce\Bundle\OrderBundle\Visitor\OrderVisitorTraverser;
 
 /**
@@ -29,12 +31,18 @@ final class OrderSubscriber extends AbstractEventSubscriber
     public static function getSubscribedEvents()
     {
         return [
-            'order.post_init'   => ['onOrderPostInitEvent', 0],
-            'order.post_create' => ['onOrderPostCreateEvent', 0],
-            'order.pre_update'  => ['onOrderPreUpdateEvent', 0],
+            KernelEvents::CONTROLLER => ['onKernelController', -150],
+            'order.post_init'        => ['onOrderPostInitEvent', 0],
+            'order.post_create'      => ['onOrderPostCreateEvent', 0],
+            'order.pre_update'       => ['onOrderPreUpdateEvent', 0],
         ];
     }
-    
+
+    public function onKernelController()
+    {
+        $this->getOrderManager()->initializeOrder();
+    }
+
     public function onOrderPostInitEvent(ResourceEvent $event)
     {
         $order   = $event->getResource();
@@ -42,11 +50,11 @@ final class OrderSubscriber extends AbstractEventSubscriber
         if ($order instanceof OrderInterface && $context->hasCurrentCart()) {
             $this->getOrderConfirmationManager()->prepareOrderFromCart($order, $context->getCurrentCart());
         }
-
+        
         Debug::dump($order);
         die();
     }
-
+    
     public function onOrderPostCreateEvent()
     {
         $this->getCartManager()->abandonCurrentCart();
@@ -72,19 +80,14 @@ final class OrderSubscriber extends AbstractEventSubscriber
     {
         $this->getOrderVisitorTraverser()->traverse($order);
     }
-
+    
     private function getOrderVisitorTraverser() : OrderVisitorTraverser
     {
         return $this->container->get('order.visitor.traverser');
     }
-
-    private function getCartManager() : CartManagerInterface
+    
+    private function getOrderManager() : OrderManagerInterface
     {
-        return $this->container->get('cart.manager.front');
-    }
-
-    private function getCartContext() : CartContextInterface
-    {
-        return $this->container->get('cart.context.front');
+        return $this->container->get('order.manager.front');
     }
 }

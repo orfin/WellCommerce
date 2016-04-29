@@ -20,5 +20,4 @@ use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractConfiguration;
  */
 class Configuration extends AbstractConfiguration
 {
-    protected $treeRoot = WellCommerceTaxExtension::EXTENSION_NAME;
 }

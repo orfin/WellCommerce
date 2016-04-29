@@ -5,6 +5,14 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
+        <service id="core.form_builder" abstract="true">
+            <argument type="service" id="form.resolver.factory"/>
+            <argument type="service" id="form.handler"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
         <service id="form.data_transformer.collection" class="WellCommerce\Component\Form\DataTransformer\DataTransformerCollection" />
 
         <service id="form.data_transformer.factory" class="WellCommerce\Bundle\CoreBundle\Form\DataTransformer\DataTransformerFactory">

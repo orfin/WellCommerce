@@ -9,8 +9,9 @@
     </imports>
 
     <services>
-        <service id="page.event_dispatcher" parent="core.event_dispatcher" public="false">
-            <argument type="service" id="event_dispatcher" />
+        <service id="page.manager" class="WellCommerce\Bundle\PageBundle\Manager\PageManager" parent="core.manager">
+            <argument type="service" id="page.repository"/>
+            <argument type="service" id="page.factory"/>
         </service>
     </services>
 </container>

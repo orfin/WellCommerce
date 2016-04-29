@@ -12,9 +12,7 @@
 
 namespace WellCommerce\Bundle\ShopBundle;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
-use WellCommerce\Bundle\ShopBundle\DependencyInjection\Compiler;
 
 /**
  * Class WellCommerceShopBundle
@@ -23,10 +21,4 @@ use WellCommerce\Bundle\ShopBundle\DependencyInjection\Compiler;
  */
 class WellCommerceShopBundle extends Bundle
 {
-    public function build(ContainerBuilder $container)
-    {
-        parent::build($container);
-        $container->addCompilerPass(new Compiler\AutoRegisterServicesPass());
-        $container->addCompilerPass(new Compiler\MappingCompilerPass());
-    }
 }

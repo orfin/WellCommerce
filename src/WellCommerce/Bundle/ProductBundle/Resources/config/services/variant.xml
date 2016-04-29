@@ -8,8 +8,9 @@
     </imports>
 
     <services>
-        <service id="variant.event_dispatcher" parent="core.event_dispatcher" public="false">
-            <argument type="service" id="event_dispatcher"/>
+        <service id="variant.manager" class="WellCommerce\Bundle\ProductBundle\Manager\VariantManager" parent="core.manager">
+            <argument type="service" id="variant.repository"/>
+            <argument type="service" id="variant.factory"/>
         </service>
 
         <service id="variant.helper" class="WellCommerce\Bundle\ProductBundle\Helper\VariantHelper">
@@ -29,7 +30,7 @@
         <service id="form.variant_collection.data_transformer" class="WellCommerce\Bundle\ProductBundle\Form\DataTransformer\VariantCollectionToArrayTransformer" shared="false">
             <argument type="service" id="doctrine.helper"/>
             <call method="setVariantManager">
-                <argument type="service" id="variant.manager.admin"/>
+                <argument type="service" id="variant.manager"/>
             </call>
             <tag name="form.data_transformer" alias="variant_collection"/>
         </service>

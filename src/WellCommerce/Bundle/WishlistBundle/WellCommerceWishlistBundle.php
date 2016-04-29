@@ -12,9 +12,7 @@
 
 namespace WellCommerce\Bundle\WishlistBundle;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
-use WellCommerce\Bundle\WishlistBundle\DependencyInjection\Compiler;
 
 /**
  * Class WellCommerceWishlistBundle
@@ -23,10 +21,4 @@ use WellCommerce\Bundle\WishlistBundle\DependencyInjection\Compiler;
  */
 class WellCommerceWishlistBundle extends Bundle
 {
-    public function build(ContainerBuilder $container)
-    {
-        parent::build($container);
-        $container->addCompilerPass(new Compiler\AutoRegisterServicesPass());
-        $container->addCompilerPass(new Compiler\MappingCompilerPass());
-    }
 }

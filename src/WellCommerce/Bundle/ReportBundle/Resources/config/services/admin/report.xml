@@ -4,16 +4,12 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="sales_report.manager.admin" class="WellCommerce\Bundle\ReportBundle\Manager\Admin\SalesReportManager">
+        <service id="sales_report.manager" class="WellCommerce\Bundle\ReportBundle\Manager\SalesReportManager" parent="core.manager">
             <argument type="service" id="order.repository"/>
-            <argument type="service" id="sales_report.event_dispatcher"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
         </service>
 
         <service id="sales_report.controller.admin" class="WellCommerce\Bundle\ReportBundle\Controller\Admin\SalesReportController">
-            <argument type="service" id="sales_report.manager.admin"/>
+            <argument type="service" id="sales_report.manager"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -24,10 +20,6 @@
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
-        </service>
-
-        <service id="sales_report.event_dispatcher" parent="core.event_dispatcher" public="false">
-            <argument type="service" id="event_dispatcher"/>
         </service>
     </services>
 </container>

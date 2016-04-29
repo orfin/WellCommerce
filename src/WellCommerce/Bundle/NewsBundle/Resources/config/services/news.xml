@@ -9,8 +9,9 @@
     </imports>
 
     <services>
-        <service id="news.event_dispatcher" parent="core.event_dispatcher" public="false">
-            <argument type="service" id="event_dispatcher" />
+        <service id="news.manager" class="WellCommerce\Bundle\NewsBundle\Manager\NewsManager" parent="core.manager">
+            <argument type="service" id="news.repository"/>
+            <argument type="service" id="news.factory"/>
         </service>
     </services>
 </container>

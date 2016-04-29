@@ -4,23 +4,6 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="order_status_history.manager.admin" class="WellCommerce\Bundle\OrderBundle\Manager\Admin\OrderStatusHistoryManager">
-            <argument type="service" id="order_status_history.repository"/>
-            <argument type="service" id="order_status_history.event_dispatcher"/>
-            <argument type="service" id="order_status_history.factory"/>
-            <argument type="service" id="order_status_history.form_builder.admin"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-        </service>
-
-        <service id="order_status_history.form_builder.admin" class="WellCommerce\Bundle\OrderBundle\Form\Admin\OrderStatusHistoryFormBuilder">
-            <argument type="service" id="form.resolver.factory"/>
-            <argument type="service" id="form.handler"/>
-            <argument type="service" id="order_status_history.event_dispatcher"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-        </service>
+        <service id="order_status_history.form_builder.admin" class="WellCommerce\Bundle\OrderBundle\Form\Admin\OrderStatusHistoryFormBuilder" parent="core.form_builder" />
     </services>
 </container>

@@ -13,7 +13,6 @@ namespace WellCommerce\Bundle\CoreBundle\DataGrid;
 
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
-use WellCommerce\Bundle\CoreBundle\EventDispatcher\EventDispatcherInterface;
 use WellCommerce\Component\DataGrid\Column\ColumnCollection;
 use WellCommerce\Component\DataGrid\Configuration\EventHandler\ClickRowEventHandler;
 use WellCommerce\Component\DataGrid\Configuration\EventHandler\DeleteRowEventHandler;
@@ -44,11 +43,6 @@ abstract class AbstractDataGrid extends AbstractContainerAware implements DataGr
     protected $columns;
 
     /**
-     * @var EventDispatcherInterface
-     */
-    protected $eventDispatcher;
-
-    /**
      * @var OptionsInterface
      */
     protected $options;
@@ -66,17 +60,15 @@ abstract class AbstractDataGrid extends AbstractContainerAware implements DataGr
     /**
      * Constructor
      *
-     * @param string                   $identifier
-     * @param DataSetInterface         $dataset
-     * @param EventDispatcherInterface $eventDispatcher
+     * @param string           $identifier
+     * @param DataSetInterface $dataset
      */
-    public function __construct($identifier, DataSetInterface $dataset, EventDispatcherInterface $eventDispatcher)
+    public function __construct($identifier, DataSetInterface $dataset)
     {
-        $this->identifier      = $identifier;
-        $this->dataset         = $dataset;
-        $this->eventDispatcher = $eventDispatcher;
-        $this->columns         = new ColumnCollection();
-        $this->options         = new Options();
+        $this->identifier = $identifier;
+        $this->dataset    = $dataset;
+        $this->columns    = new ColumnCollection();
+        $this->options    = new Options();
     }
 
     /**

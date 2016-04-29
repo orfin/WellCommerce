@@ -21,5 +21,4 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  */
 class WellCommerceLayeredNavigationBundle extends Bundle
 {
-
 }

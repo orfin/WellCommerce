@@ -20,5 +20,4 @@ use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
  */
 class UserGroupRepository extends AbstractEntityRepository implements UserGroupRepositoryInterface
 {
-
 }

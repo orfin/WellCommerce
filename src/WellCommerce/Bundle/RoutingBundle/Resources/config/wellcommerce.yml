@@ -2,12 +2,11 @@ well_commerce_routing:
     routers:
         router.default:             100
         routing.dynamic_router:     50
-    services:
+    configuration:
         routing:
-            auto_services:
+            orm:
                 factory: WellCommerce\Bundle\RoutingBundle\Factory\RouteFactory
                 repository: WellCommerce\Bundle\RoutingBundle\Repository\RouteRepository
-            orm_configuration:
                 mapping: "@WellCommerceRoutingBundle/Resources/config/doctrine/Route.orm.yml"
                 entity: WellCommerce\Bundle\RoutingBundle\Entity\Route
 

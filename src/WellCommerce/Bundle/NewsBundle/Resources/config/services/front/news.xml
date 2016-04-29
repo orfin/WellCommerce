@@ -8,11 +8,8 @@
             <argument type="service" id="news.repository"/>
         </service>
 
-        <service id="news.dataset.front" class="WellCommerce\Bundle\NewsBundle\DataSet\Front\NewsDataSet">
+        <service id="news.dataset.front" class="WellCommerce\Bundle\NewsBundle\DataSet\Front\NewsDataSet" parent="core.dataset">
             <argument type="service" id="news.dataset.query_builder.front"/>
-            <argument type="service" id="dataset.manager"/>
-            <argument type="service" id="news.event_dispatcher"/>
-            <configurator service="dataset.configurator" method="configure"/>
         </service>
 
         <service id="news.context.front" class="WellCommerce\Bundle\NewsBundle\Context\Front\NewsContext"/>

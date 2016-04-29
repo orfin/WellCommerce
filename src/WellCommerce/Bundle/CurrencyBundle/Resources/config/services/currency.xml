@@ -9,6 +9,11 @@
     </imports>
 
     <services>
+        <service id="currency.manager" class="WellCommerce\Bundle\CurrencyBundle\Manager\CurrencyManager" parent="core.manager">
+            <argument type="service" id="currency.repository"/>
+            <argument type="service" id="currency.factory"/>
+        </service>
+
         <service id="currency.subscriber" class="WellCommerce\Bundle\CurrencyBundle\EventListener\CurrencySubscriber">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
@@ -34,10 +39,6 @@
         <service id="currency.helper" class="WellCommerce\Bundle\CurrencyBundle\Helper\CurrencyHelper">
             <argument type="service" id="currency.converter" />
             <argument type="service" id="currency.formatter"/>
-        </service>
-
-        <service id="currency.event_dispatcher" parent="core.event_dispatcher" public="false">
-            <argument type="service" id="event_dispatcher" />
         </service>
     </services>
 </container>

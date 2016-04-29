@@ -9,8 +9,9 @@
     </imports>
 
     <services>
-        <service id="review.event_dispatcher" parent="core.event_dispatcher" public="false">
-            <argument type="service" id="event_dispatcher" />
+        <service id="review.manager" class="WellCommerce\Bundle\ReviewBundle\Manager\ReviewManager" parent="core.manager">
+            <argument type="service" id="review.repository"/>
+            <argument type="service" id="review.factory"/>
         </service>
 
         <service id="twig.extension.review" class="WellCommerce\Bundle\ReviewBundle\Twig\Extension\ReviewExtension">

@@ -8,10 +8,6 @@
     </imports>
 
     <services>
-        <service id="user.event_dispatcher" parent="core.event_dispatcher" public="false">
-            <argument type="service" id="event_dispatcher"/>
-        </service>
-
         <service id="admin.helper" class="WellCommerce\Bundle\AdminBundle\Helper\Admin\AdminHelper">
             <argument type="service" id="security.token_storage"/>
             <argument type="service" id="user.repository"/>

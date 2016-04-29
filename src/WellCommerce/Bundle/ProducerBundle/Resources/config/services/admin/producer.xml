@@ -4,19 +4,10 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="producer.manager.admin" class="WellCommerce\Bundle\ProducerBundle\Manager\Admin\ProducerManager">
-            <argument type="service" id="producer.repository"/>
-            <argument type="service" id="producer.event_dispatcher"/>
-            <argument type="service" id="producer.factory"/>
+        <service id="producer.controller.admin" class="WellCommerce\Bundle\ProducerBundle\Controller\Admin\ProducerController">
+            <argument type="service" id="producer.manager"/>
             <argument type="service" id="producer.form_builder.admin"/>
             <argument type="service" id="producer.datagrid"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-        </service>
-
-        <service id="producer.controller.admin" class="WellCommerce\Bundle\ProducerBundle\Controller\Admin\ProducerController">
-            <argument type="service" id="producer.manager.admin"/>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
@@ -29,30 +20,16 @@
             </call>
         </service>
 
-        <service id="producer.dataset.admin" class="WellCommerce\Bundle\ProducerBundle\DataSet\Admin\ProducerDataSet">
+        <service id="producer.dataset.admin" class="WellCommerce\Bundle\ProducerBundle\DataSet\Admin\ProducerDataSet" parent="core.dataset">
             <argument type="service" id="producer.dataset.query_builder.admin"/>
-            <argument type="service" id="dataset.manager"/>
-            <argument type="service" id="producer.event_dispatcher"/>
-            <configurator service="dataset.configurator" method="configure"/>
         </service>
 
-        <service id="producer.datagrid" class="WellCommerce\Bundle\ProducerBundle\DataGrid\ProducerDataGrid">
+        <service id="producer.datagrid" class="WellCommerce\Bundle\ProducerBundle\DataGrid\ProducerDataGrid" parent="core.datagrid">
             <argument key="identifier">producer</argument>
             <argument type="service" id="producer.dataset.admin"/>
-            <argument type="service" id="producer.event_dispatcher"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
         </service>
 
-        <service id="producer.form_builder.admin" class="WellCommerce\Bundle\ProducerBundle\Form\Admin\ProducerFormBuilder">
-            <argument type="service" id="form.resolver.factory"/>
-            <argument type="service" id="form.handler"/>
-            <argument type="service" id="producer.event_dispatcher"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-        </service>
+        <service id="producer.form_builder.admin" class="WellCommerce\Bundle\ProducerBundle\Form\Admin\ProducerFormBuilder" parent="core.form_builder" />
 
         <service id="producer_menu.layout_box.configurator" class="WellCommerce\Bundle\LayoutBundle\Configurator\ProducerMenuBoxConfigurator">
             <argument>ProducerMenu</argument>

@@ -41,9 +41,19 @@ class Order extends AbstractEntity implements OrderInterface
     use ClientBillingAddressAwareTrait;
     use ClientShippingAddressAwareTrait;
     use CouponAwareTrait;
-    
+
     /**
-     * @var Collection
+     * @var bool
+     */
+    protected $confirmed;
+
+    /**
+     * @var string
+     */
+    protected $number;
+
+    /**
+     * @var Collection|OrderProductInterface[]
      */
     protected $products;
     
@@ -96,7 +106,27 @@ class Order extends AbstractEntity implements OrderInterface
      * @var string
      */
     protected $comment;
-    
+
+    public function isConfirmed() : bool
+    {
+        return $this->confirmed;
+    }
+
+    public function setConfirmed(bool $confirmed)
+    {
+        $this->confirmed = $confirmed;
+    }
+
+    public function getNumber() : string
+    {
+        return $this->number;
+    }
+
+    public function setNumber(string $number)
+    {
+        $this->number = $number;
+    }
+
     public function getCurrency() : string
     {
         return $this->currency;
@@ -254,5 +284,10 @@ class Order extends AbstractEntity implements OrderInterface
     public function acceptVisitor(OrderVisitorInterface $visitor)
     {
         $visitor->visitOrder($this);
+    }
+
+    public function isEmpty() : bool
+    {
+        return 0 === $this->productTotal->getQuantity();
     }
 }

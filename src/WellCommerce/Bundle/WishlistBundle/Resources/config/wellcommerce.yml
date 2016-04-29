@@ -1,9 +1,8 @@
 well_commerce_wishlist:
-    services:
+    configuration:
         wishlist:
-            auto_services:
+            orm:
                 factory: WellCommerce\Bundle\WishlistBundle\Factory\WishlistFactory
                 repository: WellCommerce\Bundle\WishlistBundle\Repository\WishlistRepository
-            orm_configuration:
                 mapping: "@WellCommerceWishlistBundle/Resources/config/doctrine/Wishlist.orm.yml"
                 entity: WellCommerce\Bundle\WishlistBundle\Entity\Wishlist

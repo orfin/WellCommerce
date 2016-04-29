@@ -8,8 +8,9 @@
     </imports>
 
     <services>
-        <service id="deliverer.event_dispatcher" parent="core.event_dispatcher" public="false">
-            <argument type="service" id="event_dispatcher"/>
+        <service id="deliverer.manager" class="WellCommerce\Bundle\DelivererBundle\Manager\DelivererManager" parent="core.manager">
+            <argument type="service" id="deliverer.repository"/>
+            <argument type="service" id="deliverer.factory"/>
         </service>
     </services>
 </container>

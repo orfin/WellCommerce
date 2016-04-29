@@ -12,7 +12,6 @@ imports:
     - { resource: "@WellCommerceApiBundle/Resources/config/wellcommerce.yml" }
     - { resource: "@WellCommerceAttributeBundle/Resources/config/wellcommerce.yml" }
     - { resource: "@WellCommerceAvailabilityBundle/Resources/config/wellcommerce.yml" }
-    - { resource: "@WellCommerceCartBundle/Resources/config/wellcommerce.yml" }
     - { resource: "@WellCommerceCategoryBundle/Resources/config/wellcommerce.yml" }
     - { resource: "@WellCommerceClientBundle/Resources/config/wellcommerce.yml" }
     - { resource: "@WellCommerceCompanyBundle/Resources/config/wellcommerce.yml" }
@@ -104,28 +103,26 @@ parameters:
     knp.doctrine_behaviors.blameable_listener.user_entity: WellCommerce\AdminBundle\Entity\User
 
 well_commerce_app:
-    services:
+    configuration:
         dimension:
-            orm_configuration:
+            orm:
                 mapping: "@WellCommerceAppBundle/Resources/config/doctrine/Dimension.orm.yml"
                 entity: WellCommerce\Bundle\AppBundle\Entity\Dimension
         discountable_price:
-            auto_services:
+            orm:
                 factory: WellCommerce\Bundle\AppBundle\Factory\DiscountablePriceFactory
-            orm_configuration:
                 mapping: "@WellCommerceAppBundle/Resources/config/doctrine/DiscountablePrice.orm.yml"
                 entity: WellCommerce\Bundle\AppBundle\Entity\DiscountablePrice
         mailer_configuration:
-            orm_configuration:
+            orm:
                 mapping: "@WellCommerceAppBundle/Resources/config/doctrine/MailerConfiguration.orm.yml"
                 entity: WellCommerce\Bundle\AppBundle\Entity\MailerConfiguration
         meta:
-            orm_configuration:
+            orm:
                 mapping: "@WellCommerceAppBundle/Resources/config/doctrine/Meta.orm.yml"
                 entity: WellCommerce\Bundle\AppBundle\Entity\Meta
         price:
-            auto_services:
+            orm:
                 factory: WellCommerce\Bundle\AppBundle\Factory\PriceFactory
-            orm_configuration:
                 mapping: "@WellCommerceAppBundle/Resources/config/doctrine/Price.orm.yml"
                 entity: WellCommerce\Bundle\AppBundle\Entity\Price

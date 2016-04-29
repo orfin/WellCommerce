@@ -12,9 +12,7 @@
 
 namespace WellCommerce\Bundle\ReviewBundle;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
-use WellCommerce\Bundle\ReviewBundle\DependencyInjection\Compiler;
 
 /**
  * Class WellCommerceReviewBundle
@@ -23,10 +21,4 @@ use WellCommerce\Bundle\ReviewBundle\DependencyInjection\Compiler;
  */
 class WellCommerceReviewBundle extends Bundle
 {
-    public function build(ContainerBuilder $container)
-    {
-        parent::build($container);
-        $container->addCompilerPass(new Compiler\AutoRegisterServicesPass());
-        $container->addCompilerPass(new Compiler\MappingCompilerPass());
-    }
 }

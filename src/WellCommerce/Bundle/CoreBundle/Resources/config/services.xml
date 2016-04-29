@@ -13,8 +13,10 @@
     </imports>
 
     <services>
-        <service id="core.event_dispatcher" class="WellCommerce\Bundle\CoreBundle\EventDispatcher\EventDispatcher">
-            <argument type="service" id="event_dispatcher"/>
+        <service id="core.manager" abstract="true" public="false">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
         </service>
     </services>
 </container>

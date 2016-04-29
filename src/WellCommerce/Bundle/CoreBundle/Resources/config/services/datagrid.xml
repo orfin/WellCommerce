@@ -4,6 +4,12 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
+        <service id="core.datagrid" abstract="true" public="false">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
         <service id="datagrid_options" class="WellCommerce\Component\DataGrid\Options\Options" />
 
         <service id="datagrid_columns" class="WellCommerce\Component\DataGrid\Column\ColumnCollection" />

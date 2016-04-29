@@ -1,9 +1,8 @@
 well_commerce_report:
-    services:
+    configuration:
         report:
-            auto_services:
+            orm:
                 factory: ~
                 repository: ~
-            orm_configuration:
                 mapping: ~
                 entity: ~

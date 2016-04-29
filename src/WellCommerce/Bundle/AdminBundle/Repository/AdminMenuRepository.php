@@ -21,5 +21,4 @@ use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
  */
 class AdminMenuRepository extends AbstractEntityRepository implements AdminMenuRepositoryInterface
 {
-
 }

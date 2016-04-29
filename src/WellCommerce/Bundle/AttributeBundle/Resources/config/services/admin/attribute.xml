@@ -4,55 +4,28 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="attribute.manager.admin" class="WellCommerce\Bundle\AttributeBundle\Manager\Admin\AttributeManager">
-            <argument type="service" id="attribute.repository"/>
-            <argument type="service" id="attribute.event_dispatcher"/>
-            <argument type="service" id="attribute.factory"/>
-            <argument type="service" id="attribute.form_builder"/>
+        <service id="attribute.controller.admin" class="WellCommerce\Bundle\AttributeBundle\Controller\Admin\AttributeController">
+            <argument type="service" id="attribute.manager"/>
+            <argument type="service" id="attribute.form_builder.admin"/>
             <argument type="service" id="attribute.datagrid"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <service id="attribute.controller.admin" class="WellCommerce\Bundle\AttributeBundle\Controller\Admin\AttributeController">
-            <argument type="service" id="attribute.manager.admin"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-        </service>
-
-        <service id="attribute.form_builder" class="WellCommerce\Bundle\AttributeBundle\Form\Admin\AttributeFormBuilder">
-            <argument type="service" id="form.resolver.factory"/>
-            <argument type="service" id="form.handler"/>
-            <argument type="service" id="attribute.event_dispatcher"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-        </service>
-
-        <service id="attribute.event_dispatcher" parent="core.event_dispatcher" public="false">
-            <argument type="service" id="event_dispatcher"/>
-        </service>
+        <service id="attribute.form_builder.admin" class="WellCommerce\Bundle\AttributeBundle\Form\Admin\AttributeFormBuilder" parent="core.form_builder" />
 
         <service id="attribute.dataset.query_builder.admin" class="WellCommerce\Bundle\AttributeBundle\DataSet\Admin\AttributeDataSetQueryBuilder" public="false">
             <argument type="service" id="attribute.repository"/>
         </service>
 
-        <service id="attribute.dataset.admin" class="WellCommerce\Bundle\AttributeBundle\DataSet\Admin\AttributeDataSet">
+        <service id="attribute.dataset.admin" class="WellCommerce\Bundle\AttributeBundle\DataSet\Admin\AttributeDataSet" parent="core.dataset">
             <argument type="service" id="attribute.dataset.query_builder.admin"/>
-            <argument type="service" id="dataset.manager"/>
-            <argument type="service" id="attribute.event_dispatcher"/>
-            <configurator service="dataset.configurator" method="configure"/>
         </service>
 
-        <service id="attribute.datagrid" class="WellCommerce\Bundle\AttributeBundle\DataGrid\AttributeDataGrid">
+        <service id="attribute.datagrid" class="WellCommerce\Bundle\AttributeBundle\DataGrid\AttributeDataGrid" parent="core.datagrid">
             <argument key="identifier">availability</argument>
             <argument type="service" id="attribute.dataset.admin"/>
-            <argument type="service" id="attribute.event_dispatcher"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
         </service>
     </services>
 </container>

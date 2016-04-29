@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\AdminBundle\Factory;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\Bundle\AdminBundle\Entity\RoleInterface;
 use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 
@@ -23,19 +22,13 @@ use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
  */
 class RoleFactory extends AbstractEntityFactory
 {
-    /**
-     * @var string
-     */
     protected $supportsInterface = RoleInterface::class;
 
-    /**
-     * @return RoleInterface
-     */
     public function create() : RoleInterface
     {
         $role = $this->init();
         $role->setName('');
-        $role->setUsers(new ArrayCollection());
+        $role->setUsers($this->createEmptyCollection());
 
         return $role;
     }

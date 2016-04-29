@@ -29,21 +29,11 @@
             <argument type="service" id="contact.repository"/>
         </service>
 
-        <service id="contact.dataset.front" class="WellCommerce\Bundle\ContactBundle\DataSet\Front\ContactDataSet">
+        <service id="contact.dataset.front" class="WellCommerce\Bundle\ContactBundle\DataSet\Front\ContactDataSet" parent="core.dataset">
             <argument type="service" id="contact.dataset.query_builder.front"/>
-            <argument type="service" id="dataset.manager"/>
-            <argument type="service" id="contact.event_dispatcher"/>
-            <configurator service="dataset.configurator" method="configure"/>
         </service>
 
-        <service id="contact.form_builder.front" class="WellCommerce\Bundle\ContactBundle\Form\Front\ContactFormBuilder">
-            <argument type="service" id="form.resolver.factory"/>
-            <argument type="service" id="form.handler"/>
-            <argument type="service" id="contact.event_dispatcher"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-        </service>
+        <service id="contact.form_builder.front" class="WellCommerce\Bundle\ContactBundle\Form\Front\ContactFormBuilder" parent="core.form_builder" />
 
         <service id="contact.context.front" class="WellCommerce\Bundle\ContactBundle\Context\Front\ContactContext"/>
     </services>

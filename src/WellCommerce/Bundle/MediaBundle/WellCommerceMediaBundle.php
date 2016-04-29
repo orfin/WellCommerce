@@ -12,9 +12,7 @@
 
 namespace WellCommerce\Bundle\MediaBundle;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
-use WellCommerce\Bundle\MediaBundle\DependencyInjection\Compiler;
 
 /**
  * Class WellCommerceMediaBundle
@@ -23,10 +21,4 @@ use WellCommerce\Bundle\MediaBundle\DependencyInjection\Compiler;
  */
 class WellCommerceMediaBundle extends Bundle
 {
-    public function build(ContainerBuilder $container)
-    {
-        parent::build($container);
-        $container->addCompilerPass(new Compiler\AutoRegisterServicesPass());
-        $container->addCompilerPass(new Compiler\MappingCompilerPass());
-    }
 }

@@ -19,32 +19,29 @@ use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class OrderContext implements OrderContextInterface
+final class OrderContext implements OrderContextInterface
 {
-    /**
-     * @var OrderInterface
-     */
-    protected $currentOrder;
+    private $currentOrder;
 
-    /**
-     * {@inheritdoc}
-     */
     public function setCurrentOrder(OrderInterface $order)
     {
         $this->currentOrder = $order;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCurrentOrder() : OrderInterface
     {
         return $this->currentOrder;
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    public function getCurrentOrderIdentifier() : int
+    {
+        if ($this->hasCurrentOrder()) {
+            return $this->getCurrentOrder()->getId();
+        }
+
+        return 0;
+    }
+
     public function hasCurrentOrder() : bool
     {
         return $this->currentOrder instanceof OrderInterface;

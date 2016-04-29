@@ -4,15 +4,6 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="layered_navigation.manager.front" class="WellCommerce\Bundle\LayeredNavigationBundle\Manager\Front\LayeredNavigationManager">
-            <argument type="service" id="product.repository"/>
-            <argument type="service" id="product.event_dispatcher"/>
-            <argument type="service" id="product.factory"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-        </service>
-
         <service id="layered_navigation.helper" class="WellCommerce\Bundle\LayeredNavigationBundle\Helper\LayeredNavigationHelper">
             <argument type="service" id="producer.repository"/>
             <call method="setContainer">
@@ -21,14 +12,14 @@
         </service>
 
         <service id="layered_navigation.controller.front" class="WellCommerce\Bundle\LayeredNavigationBundle\Controller\Front\LayeredNavigationController">
-            <argument type="service" id="layered_navigation.manager.front"/>
+            <argument type="service" id="layered_navigation.manager"/>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
         </service>
 
         <service id="layered_navigation.layout_box.controller" class="WellCommerce\Bundle\LayeredNavigationBundle\Controller\Box\LayeredNavigationBoxController">
-            <argument type="service" id="product.manager.front"/>
+            <argument type="service" id="product.manager"/>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>

@@ -1,17 +1,16 @@
 well_commerce_deliverer:
-    services:
+    configuration:
         deliverer:
-            auto_services:
+            orm:
                 factory: WellCommerce\Bundle\DelivererBundle\Factory\DelivererFactory
                 repository: WellCommerce\Bundle\DelivererBundle\Repository\DelivererRepository
-            orm_configuration:
                 mapping: "@WellCommerceDelivererBundle/Resources/config/doctrine/Deliverer.orm.yml"
                 entity: WellCommerce\Bundle\DelivererBundle\Entity\Deliverer
-            api_configuration:
+            api:
                 exposed: true
                 dataset: deliverer.dataset.admin
                 manager: deliverer.manager.admin
         deliverer_translation:
-            orm_configuration:
+            orm:
                 mapping: "@WellCommerceDelivererBundle/Resources/config/doctrine/DelivererTranslation.orm.yml"
                 entity: WellCommerce\Bundle\DelivererBundle\Entity\DelivererTranslation

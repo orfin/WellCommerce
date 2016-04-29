@@ -1,16 +1,15 @@
 well_commerce_media:
-    services:
+    configuration:
         media:
-            auto_services:
+            orm:
                 factory: WellCommerce\Bundle\MediaBundle\Factory\MediaFactory
                 repository: WellCommerce\Bundle\MediaBundle\Repository\MediaRepository
-            api_configuration:
+                mapping: "@WellCommerceMediaBundle/Resources/config/doctrine/Media.orm.yml"
+                entity: WellCommerce\Bundle\MediaBundle\Entity\Media
+            api:
                 exposed: true
                 dataset: media.dataset.admin
                 manager: media.manager.admin
-            orm_configuration:
-                mapping: "@WellCommerceMediaBundle/Resources/config/doctrine/Media.orm.yml"
-                entity: WellCommerce\Bundle\MediaBundle\Entity\Media
 
 liip_imagine:
     loaders:

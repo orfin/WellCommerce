@@ -8,8 +8,9 @@
     </imports>
 
     <services>
-        <service id="dictionary.event_dispatcher" parent="core.event_dispatcher" public="false">
-            <argument type="service" id="event_dispatcher" />
+        <service id="dictionary.manager" class="WellCommerce\Bundle\DictionaryBundle\Manager\DictionaryManager" parent="core.manager">
+            <argument type="service" id="dictionary.repository"/>
+            <argument type="service" id="dictionary.factory"/>
         </service>
 
         <service id="package.command.purge.translations" class="WellCommerce\Bundle\DictionaryBundle\Command\PurgeTranslationsCommand">

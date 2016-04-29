@@ -4,10 +4,8 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="dashboard.manager.admin" class="WellCommerce\Bundle\AdminBundle\Manager\Admin\DashboardManager" />
-
         <service id="dashboard.controller.admin" class="WellCommerce\Bundle\AdminBundle\Controller\Admin\DashboardController">
-            <argument type="service" id="dashboard.manager.admin"/>
+            <argument type="service" id="dashboard.manager"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>

@@ -9,8 +9,9 @@
     </imports>
 
     <services>
-        <service id="product.event_dispatcher" parent="core.event_dispatcher" public="false">
-            <argument type="service" id="event_dispatcher" />
+        <service id="product.manager" class="WellCommerce\Bundle\ProductBundle\Manager\ProductManager" parent="core.manager">
+            <argument type="service" id="product.repository"/>
+            <argument type="service" id="product.factory"/>
         </service>
 
         <service id="product.doctrine.event_subscriber" class="WellCommerce\Bundle\ProductBundle\EventListener\ProductDoctrineEventSubscriber">

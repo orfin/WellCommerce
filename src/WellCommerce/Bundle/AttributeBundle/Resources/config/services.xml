@@ -6,5 +6,7 @@
 
     <imports>
         <import resource="services/attribute.xml"/>
+        <import resource="services/attribute_group.xml"/>
+        <import resource="services/attribute_value.xml"/>
     </imports>
 </container>

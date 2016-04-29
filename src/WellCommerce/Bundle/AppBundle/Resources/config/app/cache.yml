@@ -3,4 +3,4 @@ cache_adapter:
         filesystem:
             factory: 'cache.factory.doctrine_filesystem'
             options:
-                directory: %kernel.root_dir%/cache/%kernel.environment%/filesystem
+                directory: "%kernel.root_dir%/cache/%kernel.environment%/filesystem"

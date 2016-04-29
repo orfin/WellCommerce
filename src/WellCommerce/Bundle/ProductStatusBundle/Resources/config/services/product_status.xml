@@ -9,8 +9,9 @@
     </imports>
 
     <services>
-        <service id="product_status.event_dispatcher" parent="core.event_dispatcher" public="false">
-            <argument type="service" id="event_dispatcher" />
+        <service id="product_status.manager" class="WellCommerce\Bundle\ProductStatusBundle\Manager\ProductStatusManager" parent="core.manager">
+            <argument type="service" id="product_status.repository"/>
+            <argument type="service" id="product_status.factory"/>
         </service>
 
         <service id="product_status.request_param_converter" class="WellCommerce\Bundle\ProductStatusBundle\Request\ParamConverter\ProductStatusParamConverter">

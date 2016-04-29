@@ -4,19 +4,10 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="contact.manager.admin" class="WellCommerce\Bundle\ContactBundle\Manager\Admin\ContactManager">
-            <argument type="service" id="contact.repository"/>
-            <argument type="service" id="contact.event_dispatcher"/>
-            <argument type="service" id="contact.factory"/>
+        <service id="contact.controller.admin" class="WellCommerce\Bundle\ContactBundle\Controller\Admin\ContactController">
+            <argument type="service" id="contact.manager"/>
             <argument type="service" id="contact.form_builder.admin"/>
             <argument type="service" id="contact.datagrid"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-        </service>
-        
-        <service id="contact.controller.admin" class="WellCommerce\Bundle\ContactBundle\Controller\Admin\ContactController">
-            <argument type="service" id="contact.manager.admin"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -36,29 +27,15 @@
             <argument type="service" id="contact.repository"/>
         </service>
 
-        <service id="contact.dataset.admin" class="WellCommerce\Bundle\ContactBundle\DataSet\Admin\ContactDataSet">
+        <service id="contact.dataset.admin" class="WellCommerce\Bundle\ContactBundle\DataSet\Admin\ContactDataSet" parent="core.dataset">
             <argument type="service" id="contact.dataset.query_builder.admin"/>
-            <argument type="service" id="dataset.manager"/>
-            <argument type="service" id="contact.event_dispatcher"/>
-            <configurator service="dataset.configurator" method="configure"/>
         </service>
 
-        <service id="contact.datagrid" class="WellCommerce\Bundle\ContactBundle\DataGrid\ContactDataGrid">
+        <service id="contact.datagrid" class="WellCommerce\Bundle\ContactBundle\DataGrid\ContactDataGrid" parent="core.datagrid">
             <argument key="identifier">contact</argument>
             <argument type="service" id="contact.dataset.admin"/>
-            <argument type="service" id="contact.event_dispatcher"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
         </service>
 
-        <service id="contact.form_builder.admin" class="WellCommerce\Bundle\ContactBundle\Form\Admin\ContactFormBuilder">
-            <argument type="service" id="form.resolver.factory"/>
-            <argument type="service" id="form.handler"/>
-            <argument type="service" id="contact.event_dispatcher"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-        </service>
+        <service id="contact.form_builder.admin" class="WellCommerce\Bundle\ContactBundle\Form\Admin\ContactFormBuilder" parent="core.form_builder" />
     </services>
 </container>

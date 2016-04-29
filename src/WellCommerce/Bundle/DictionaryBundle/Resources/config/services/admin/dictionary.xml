@@ -4,19 +4,10 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="dictionary.manager.admin" class="WellCommerce\Bundle\DictionaryBundle\Manager\Admin\DictionaryManager">
-            <argument type="service" id="dictionary.repository"/>
-            <argument type="service" id="dictionary.event_dispatcher"/>
-            <argument type="service" id="dictionary.factory"/>
+        <service id="dictionary.controller.admin" class="WellCommerce\Bundle\DictionaryBundle\Controller\Admin\DictionaryController">
+            <argument type="service" id="dictionary.manager"/>
             <argument type="service" id="dictionary.form_builder.admin"/>
             <argument type="service" id="dictionary.datagrid"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-        </service>
-
-        <service id="dictionary.controller.admin" class="WellCommerce\Bundle\DictionaryBundle\Controller\Admin\DictionaryController">
-            <argument type="service" id="dictionary.manager.admin"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -26,29 +17,15 @@
             <argument type="service" id="dictionary.repository"/>
         </service>
 
-        <service id="dictionary.dataset.admin" class="WellCommerce\Bundle\DictionaryBundle\DataSet\Admin\DictionaryDataSet">
+        <service id="dictionary.dataset.admin" class="WellCommerce\Bundle\DictionaryBundle\DataSet\Admin\DictionaryDataSet" parent="core.dataset">
             <argument type="service" id="dictionary.dataset.query_builder.admin"/>
-            <argument type="service" id="dataset.manager"/>
-            <argument type="service" id="dictionary.event_dispatcher"/>
-            <configurator service="dataset.configurator" method="configure"/>
         </service>
 
-        <service id="dictionary.datagrid" class="WellCommerce\Bundle\DictionaryBundle\DataGrid\DictionaryDataGrid">
+        <service id="dictionary.datagrid" class="WellCommerce\Bundle\DictionaryBundle\DataGrid\DictionaryDataGrid" parent="core.datagrid">
             <argument key="identifier">dictionary</argument>
             <argument type="service" id="dictionary.dataset.admin"/>
-            <argument type="service" id="dictionary.event_dispatcher"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
         </service>
 
-        <service id="dictionary.form_builder.admin" class="WellCommerce\Bundle\DictionaryBundle\Form\Admin\DictionaryFormBuilder">
-            <argument type="service" id="form.resolver.factory"/>
-            <argument type="service" id="form.handler"/>
-            <argument type="service" id="dictionary.event_dispatcher"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-        </service>
+        <service id="dictionary.form_builder.admin" class="WellCommerce\Bundle\DictionaryBundle\Form\Admin\DictionaryFormBuilder" parent="core.form_builder" />
     </services>
 </container>

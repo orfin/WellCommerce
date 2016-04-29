@@ -43,6 +43,14 @@ interface OrderInterface extends
     CouponAwareInterface,
     ShippingMethodAwareInterface
 {
+    public function isConfirmed() : bool;
+
+    public function setConfirmed(bool $confirmed);
+
+    public function getNumber() : string;
+
+    public function setNumber(string $number);
+
     public function getCurrency() : string;
 
     public function setCurrency(string $currency);
@@ -104,4 +112,6 @@ interface OrderInterface extends
     public function addPayment(PaymentInterface $payment);
 
     public function acceptVisitor(OrderVisitorInterface $visitor);
+
+    public function isEmpty() : bool;
 }

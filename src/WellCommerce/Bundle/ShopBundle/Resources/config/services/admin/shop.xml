@@ -4,19 +4,15 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="shop.manager.admin" class="WellCommerce\Bundle\ShopBundle\Manager\Admin\ShopManager">
+        <service id="shop.manager" class="WellCommerce\Bundle\ShopBundle\Manager\ShopManager" parent="core.manager">
             <argument type="service" id="shop.repository"/>
-            <argument type="service" id="shop.event_dispatcher"/>
             <argument type="service" id="shop.factory"/>
-            <argument type="service" id="shop.form_builder.admin"/>
-            <argument type="service" id="shop.datagrid"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
         </service>
         
         <service id="shop.controller.admin" class="WellCommerce\Bundle\ShopBundle\Controller\Admin\ShopController">
-            <argument type="service" id="shop.manager.admin"/>
+            <argument type="service" id="shop.manager"/>
+            <argument type="service" id="shop.form_builder.admin"/>
+            <argument type="service" id="shop.datagrid"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -34,29 +30,15 @@
             <argument type="service" id="request.helper" />
         </service>
 
-        <service id="shop.dataset.admin" class="WellCommerce\Bundle\ShopBundle\DataSet\Admin\ShopDataSet">
+        <service id="shop.dataset.admin" class="WellCommerce\Bundle\ShopBundle\DataSet\Admin\ShopDataSet" parent="core.dataset">
             <argument type="service" id="shop.dataset.query_builder.admin"/>
-            <argument type="service" id="dataset.manager"/>
-            <argument type="service" id="shop.event_dispatcher"/>
-            <configurator service="dataset.configurator" method="configure"/>
         </service>
 
-        <service id="shop.datagrid" class="WellCommerce\Bundle\ShopBundle\DataGrid\ShopDataGrid">
+        <service id="shop.datagrid" class="WellCommerce\Bundle\ShopBundle\DataGrid\ShopDataGrid" parent="core.datagrid">
             <argument key="identifier">shop</argument>
             <argument type="service" id="shop.dataset.admin"/>
-            <argument type="service" id="shop.event_dispatcher"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
         </service>
 
-        <service id="shop.form_builder.admin" class="WellCommerce\Bundle\ShopBundle\Form\Admin\ShopFormBuilder">
-            <argument type="service" id="form.resolver.factory"/>
-            <argument type="service" id="form.handler"/>
-            <argument type="service" id="shop.event_dispatcher"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-        </service>
+        <service id="shop.form_builder.admin" class="WellCommerce\Bundle\ShopBundle\Form\Admin\ShopFormBuilder" parent="core.form_builder" />
     </services>
 </container>

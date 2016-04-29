@@ -21,7 +21,6 @@ use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractConfiguration;
  */
 class Configuration extends AbstractConfiguration
 {
-    protected $treeRoot = WellCommerceRoutingExtension::EXTENSION_NAME;
 
     protected function addCustomExtensionConfiguration(ArrayNodeDefinition $node)
     {
