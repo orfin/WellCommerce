@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Bundle\ProductBundle\Repository;
 
-use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\VariantInterface;
 
@@ -20,7 +20,7 @@ use WellCommerce\Bundle\ProductBundle\Entity\VariantInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class VariantRepository extends AbstractEntityRepository implements VariantRepositoryInterface
+class VariantRepository extends EntityRepository implements VariantRepositoryInterface
 {
     public function findVariant(int $id, ProductInterface $product) : VariantInterface
     {

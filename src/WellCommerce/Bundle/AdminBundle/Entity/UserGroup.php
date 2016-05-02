@@ -24,22 +24,22 @@ use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
 class UserGroup extends AbstractEntity implements UserGroupInterface
 {
     use Blameable;
-
+    
     /**
      * @var string
      */
     protected $name;
-
+    
     /**
      * @var Collection
      */
     protected $users;
-
+    
     /**
      * @var Collection
      */
     protected $permissions;
-
+    
     /**
      * {@inheritdoc}
      */
@@ -47,7 +47,7 @@ class UserGroup extends AbstractEntity implements UserGroupInterface
     {
         return $this->name;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -55,7 +55,7 @@ class UserGroup extends AbstractEntity implements UserGroupInterface
     {
         $this->name = $name;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -63,7 +63,7 @@ class UserGroup extends AbstractEntity implements UserGroupInterface
     {
         return $this->users;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -71,7 +71,7 @@ class UserGroup extends AbstractEntity implements UserGroupInterface
     {
         return $this->permissions;
     }
-
+    
     /**
      * {@inheritdoc}
      */

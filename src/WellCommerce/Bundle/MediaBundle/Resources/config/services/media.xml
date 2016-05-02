@@ -8,14 +8,15 @@
     </imports>
 
     <services>
-        <service id="media.manager" class="WellCommerce\Bundle\MediaBundle\Manager\MediaManager" parent="core.manager">
-            <argument type="service" id="media.repository"/>
-            <argument type="service" id="media.factory"/>
-        </service>
-
         <service id="dataset.transformer.image_path" class="WellCommerce\Bundle\MediaBundle\DataSet\Transformer\ImagePathTransformer">
             <argument type="service" id="image.helper"/>
             <tag name="dataset.transformer" alias="image_path"/>
+        </service>
+
+        <service id="media.uploader" class="WellCommerce\Bundle\MediaBundle\Uploader\MediaUploader">
+            <argument type="service" id="media.manager"/>
+            <argument>%kernel.root_dir%/../web/media</argument>
+            <argument type="service" id="validator.helper"/>
         </service>
     </services>
 </container>

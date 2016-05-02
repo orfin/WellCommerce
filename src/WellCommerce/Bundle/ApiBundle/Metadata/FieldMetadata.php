@@ -21,12 +21,12 @@ class FieldMetadata implements FieldMetadataInterface
      * @var string
      */
     protected $name;
-
+    
     /**
      * @var array
      */
     protected $options;
-
+    
     /**
      * FieldMetadata constructor.
      *
@@ -40,7 +40,7 @@ class FieldMetadata implements FieldMetadataInterface
         $this->configureOptions($resolver);
         $this->options = $resolver->resolve($options);
     }
-
+    
     /**
      * @param OptionsResolver $resolver
      */
@@ -49,14 +49,14 @@ class FieldMetadata implements FieldMetadataInterface
         $resolver->setRequired([
             'groups',
         ]);
-
+        
         $resolver->setDefaults([
             'groups' => [],
         ]);
-
+        
         $resolver->setAllowedTypes('groups', 'array');
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -80,7 +80,7 @@ class FieldMetadata implements FieldMetadataInterface
     {
         return in_array($group, $this->getGroups());
     }
-
+    
     /**
      * {@inheritdoc}
      */

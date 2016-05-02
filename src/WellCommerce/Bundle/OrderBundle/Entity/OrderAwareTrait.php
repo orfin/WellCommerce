@@ -20,17 +20,17 @@ namespace WellCommerce\Bundle\OrderBundle\Entity;
 trait OrderAwareTrait
 {
     protected $order;
-
+    
     public function getOrder() : OrderInterface
     {
         return $this->order;
     }
-
+    
     public function setOrder(OrderInterface $order)
     {
         $this->order = $order;
     }
-
+    
     public function hasOrder() : bool
     {
         return $this->order instanceof OrderInterface;

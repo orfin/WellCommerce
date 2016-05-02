@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\OrderBundle\EventListener;
 use Doctrine\Common\Util\Debug;
 use Symfony\Component\HttpKernel\KernelEvents;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
+use WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface;
 use WellCommerce\Bundle\DoctrineBundle\Event\ResourceEvent;
 use WellCommerce\Bundle\OrderBundle\Context\Front\CartContextInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
@@ -37,12 +38,12 @@ final class OrderSubscriber extends AbstractEventSubscriber
             'order.pre_update'       => ['onOrderPreUpdateEvent', 0],
         ];
     }
-
+    
     public function onKernelController()
     {
-        $this->getOrderManager()->initializeOrder();
+//        $this->getOrderManager()->initializeOrder();
     }
-
+    
     public function onOrderPostInitEvent(ResourceEvent $event)
     {
         $order   = $event->getResource();
@@ -86,8 +87,8 @@ final class OrderSubscriber extends AbstractEventSubscriber
         return $this->container->get('order.visitor.traverser');
     }
     
-    private function getOrderManager() : OrderManagerInterface
+    private function getOrderManager() : ManagerInterface
     {
-        return $this->container->get('order.manager.front');
+        return $this->container->get('order.manager');
     }
 }

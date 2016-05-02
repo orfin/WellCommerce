@@ -6,11 +6,4 @@
     <imports>
         <import resource="admin/attribute.xml"/>
     </imports>
-
-    <services>
-        <service id="attribute.manager" class="WellCommerce\Bundle\AttributeBundle\Manager\AttributeManager" parent="core.manager">
-            <argument type="service" id="attribute.repository"/>
-            <argument type="service" id="attribute.factory"/>
-        </service>
-    </services>
 </container>

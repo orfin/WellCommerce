@@ -29,7 +29,7 @@ class Helper
     {
         return str_replace(',', '.', $value);
     }
-
+    
     /**
      * Converts string to snake-case
      *
@@ -41,10 +41,10 @@ class Helper
     public static function snake($value, $delimiter = '_')
     {
         $replace = '$1' . $delimiter . '$2';
-
+        
         return ctype_lower($value) ? $value : strtolower(preg_replace('/(.)([A-Z])/', $replace, $value));
     }
-
+    
     /**
      * Converts string to studly-case
      *
@@ -55,10 +55,10 @@ class Helper
     public static function studly($value)
     {
         $value = ucwords(str_replace(['-', '_'], ' ', $value));
-
+        
         return str_replace(' ', '', $value);
     }
-
+    
     /**
      * Converts dot-notation to proper property path notation
      * Example: menu.catalog.item > [menu][catalog][item]
@@ -76,10 +76,10 @@ class Helper
             },
             $elements
         );
-
+        
         return implode('', $path);
     }
-
+    
     /**
      * Generates a random password for given length
      *
@@ -91,10 +91,10 @@ class Helper
     {
         $chars    = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-=+;:,.?";
         $password = substr(str_shuffle($chars), 0, $length);
-
+        
         return $password;
     }
-
+    
     /**
      * Returns an array of values flattened to dot notation
      *
@@ -113,7 +113,7 @@ class Helper
             }
             $result[join('.', $keys)] = $leafValue;
         }
-
+        
         return $result;
     }
 }

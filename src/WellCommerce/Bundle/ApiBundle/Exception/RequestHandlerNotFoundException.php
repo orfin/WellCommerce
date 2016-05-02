@@ -20,7 +20,7 @@ namespace WellCommerce\Bundle\ApiBundle\Exception;
 class RequestHandlerNotFoundException extends \InvalidArgumentException
 {
     protected $message = 'Request handler for resource "%s" was not found in request handlers collection. Available request handlers are: %s';
-
+    
     public function __construct($alias, $keys)
     {
         parent::__construct(sprintf($this->message, $alias, implode(', ', $keys)));

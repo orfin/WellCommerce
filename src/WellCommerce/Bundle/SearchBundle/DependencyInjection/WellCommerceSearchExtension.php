@@ -22,18 +22,13 @@ use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
  */
 class WellCommerceSearchExtension extends AbstractExtension
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function load(array $configs, ContainerBuilder $container)
+    protected function processExtensionConfiguration(array $configuration, ContainerBuilder $container)
     {
-        parent::load($configs, $container);
+        parent::processExtensionConfiguration($configuration, $container);
 
-        $configuration = $this->getConfiguration($configs, $container);
-        $config        = $this->processConfiguration($configuration, $configs);
-        $type          = $config['type'];
+        $type = $configuration['engine']['type'];
 
-        $container->setParameter('search_term_min_length', $config['search_term_min_length']);
+        $container->setParameter('search_term_min_length', $configuration['engine']['search_term_min_length']);
         $container->setAlias('search.indexer', sprintf('search.indexer.%s', $type));
         $container->setAlias('search_index.manager', sprintf('search_index.manager.lucene', $type));
         $container->setAlias('search.provider', sprintf('search.provider.lucene', $type));

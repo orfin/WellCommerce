@@ -44,12 +44,12 @@ class ThemeDataGrid extends AbstractDataGrid
                 'type' => Filter::FILTER_BETWEEN,
             ]),
         ]));
-
+        
         $collection->add(new Column([
             'id'      => 'name',
             'caption' => $this->trans('common.label.name'),
         ]));
-
+        
         $collection->add(new Column([
             'id'      => 'folder',
             'caption' => $this->trans('theme.label.folder'),

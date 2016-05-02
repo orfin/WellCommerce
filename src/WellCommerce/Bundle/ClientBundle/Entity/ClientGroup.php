@@ -28,52 +28,52 @@ class ClientGroup extends AbstractEntity implements ClientGroupInterface
     use Translatable;
     use Timestampable;
     use Blameable;
-
+    
     /**
      * @var float
      */
     protected $discount;
-
+    
     /**
      * @var Collection
      */
     protected $clients;
-
+    
     /**
      * @var Collection
      */
     protected $pages;
-
+    
     public function getDiscount() : float
     {
         return $this->discount;
     }
-
+    
     public function setDiscount(float $discount)
     {
         $this->discount = $discount;
     }
-
+    
     public function setClients(Collection $clients)
     {
         $this->clients = $clients;
     }
-
+    
     public function getClients() : Collection
     {
         return $this->clients;
     }
-
+    
     public function addClient(ClientInterface $client)
     {
         $this->clients->add($client);
     }
-
+    
     public function getPages() : Collection
     {
         return $this->pages;
     }
-
+    
     public function setPages(Collection $pages)
     {
         $this->pages = $pages;

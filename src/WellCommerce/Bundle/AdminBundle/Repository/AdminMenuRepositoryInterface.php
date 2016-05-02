@@ -21,5 +21,5 @@ use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
  */
 interface AdminMenuRepositoryInterface extends RepositoryInterface
 {
-
+    
 }

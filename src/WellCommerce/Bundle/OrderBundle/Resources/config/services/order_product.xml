@@ -4,15 +4,10 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="order_product.manager" class="WellCommerce\Bundle\OrderBundle\Manager\OrderProductManager" parent="core.manager">
-            <argument type="service" id="order_product.repository"/>
-            <argument type="service" id="order_product.factory"/>
-        </service>
-
         <service id="form.order_product_collection.data_transformer" class="WellCommerce\Bundle\OrderBundle\Form\DataTransformer\OrderProductCollectionToArrayTransformer" shared="false">
             <argument type="service" id="doctrine.helper"/>
             <call method="setOrderProductManager">
-                <argument type="service" id="order_product.manager.admin"/>
+                <argument type="service" id="order_product.manager"/>
             </call>
             <tag name="form.data_transformer" alias="order_product_collection"/>
         </service>

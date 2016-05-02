@@ -20,7 +20,7 @@ namespace WellCommerce\Bundle\ApiBundle\Exception;
 class ResourceNotFoundException extends \InvalidArgumentException
 {
     protected $message = 'Resource "%s" for given ID "%s" was not found.';
-
+    
     public function __construct($alias, $identifier)
     {
         parent::__construct(sprintf($this->message, $alias, $identifier));

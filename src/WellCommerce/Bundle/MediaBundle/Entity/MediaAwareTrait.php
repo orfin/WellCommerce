@@ -23,7 +23,7 @@ trait MediaAwareTrait
      * @var MediaInterface
      */
     protected $photo;
-
+    
     /**
      * @return MediaInterface
      */
@@ -31,7 +31,7 @@ trait MediaAwareTrait
     {
         return $this->photo;
     }
-
+    
     /**
      * @param null|MediaInterface $photo
      */

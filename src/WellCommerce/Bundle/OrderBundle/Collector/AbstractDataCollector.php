@@ -26,12 +26,12 @@ abstract class AbstractDataCollector implements OrderDataCollectorInterface
      * @var OrderTotalDetailFactory
      */
     protected $factory;
-
+    
     /**
      * @var CurrencyHelperInterface
      */
     protected $currencyHelper;
-
+    
     /**
      * Constructor
      *
@@ -42,7 +42,7 @@ abstract class AbstractDataCollector implements OrderDataCollectorInterface
         $this->factory        = $factory;
         $this->currencyHelper = $currencyHelper;
     }
-
+    
     /**
      * @return \WellCommerce\Bundle\OrderBundle\Entity\OrderTotalDetailInterface
      */
@@ -51,7 +51,7 @@ abstract class AbstractDataCollector implements OrderDataCollectorInterface
         $resource = $this->factory->create();
         $resource->setCollector($this->getAlias());
         $resource->setHierarchy($this->getPriority());
-
+        
         return $resource;
     }
 }

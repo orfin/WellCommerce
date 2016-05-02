@@ -4,11 +4,6 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="tax.manager" class="WellCommerce\Bundle\TaxBundle\Manager\TaxManager" parent="core.manager">
-            <argument type="service" id="tax.repository"/>
-            <argument type="service" id="tax.factory"/>
-        </service>
-        
         <service id="tax.controller.admin" class="WellCommerce\Bundle\TaxBundle\Controller\Admin\TaxController">
             <argument type="service" id="tax.manager"/>
             <argument type="service" id="tax.form_builder.admin"/>
@@ -22,13 +17,14 @@
             <argument type="service" id="tax.repository"/>
         </service>
 
-        <service id="tax.dataset.admin" class="WellCommerce\Bundle\TaxBundle\DataSet\Admin\TaxDataSet" parent="core.dataset">
+        <service id="tax.dataset.admin" class="WellCommerce\Bundle\TaxBundle\DataSet\Admin\TaxDataSet">
             <argument type="service" id="tax.dataset.query_builder.admin"/>
+            <tag name="dataset"/>
         </service>
 
-        <service id="tax.datagrid" class="WellCommerce\Bundle\TaxBundle\DataGrid\TaxDataGrid" parent="core.datagrid">
-            <argument key="identifier">tax</argument>
+        <service id="tax.datagrid" class="WellCommerce\Bundle\TaxBundle\DataGrid\TaxDataGrid">
             <argument type="service" id="tax.dataset.admin"/>
+            <tag name="datagrid" alias="tax"/>
         </service>
 
         <service id="tax.form_builder.admin" class="WellCommerce\Bundle\TaxBundle\Form\Admin\TaxFormBuilder" parent="core.form_builder" />

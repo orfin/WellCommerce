@@ -18,8 +18,9 @@
             </call>
         </service>
 
-        <service id="producer.dataset.front" class="WellCommerce\Bundle\ProducerBundle\DataSet\Front\ProducerDataSet" parent="core.dataset">
+        <service id="producer.dataset.front" class="WellCommerce\Bundle\ProducerBundle\DataSet\Front\ProducerDataSet">
             <argument type="service" id="producer.dataset.query_builder.front"/>
+            <tag name="dataset"/>
         </service>
 
         <service id="producer.context.front" class="WellCommerce\Bundle\ProducerBundle\Context\Front\ProducerContext"/>

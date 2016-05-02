@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\ThemeBundle\Locator;
 
 use Symfony\Component\Config\FileLocator as BaseFileLocator;
-use WellCommerce\Bundle\ThemeBundle\Manager\ThemeManagerInterface;
 
 /**
  * Class FileLocator
@@ -23,28 +22,22 @@ use WellCommerce\Bundle\ThemeBundle\Manager\ThemeManagerInterface;
 class FileLocator extends BaseFileLocator
 {
     /**
-     * @var ThemeManagerInterface
+     * @var ThemeLocatorInterface
      */
-    protected $themeManager;
-
+    protected $themeLocator;
+    
     /**
-     * Constructor
+     * FileLocator constructor.
      *
-     * @param ThemeManagerInterface $themeManager
+     * @param ThemeLocatorInterface $themeLocator
+     * @param array                 $paths
      */
-    public function __construct(ThemeManagerInterface $themeManager, $path = null)
+    public function __construct(ThemeLocatorInterface $themeLocator, array $paths = [])
     {
-        $this->themeManager = $themeManager;
-        $this->setPaths($path);
+        parent::__construct($paths);
+        $this->themeLocator = $themeLocator;
     }
-
-    protected function setPaths($path)
-    {
-        $paths       = [];
-        $paths[]     = $path;
-        $this->paths = $paths;
-    }
-
+    
     /**
      * Returns a full path for a given template
      *
@@ -57,9 +50,9 @@ class FileLocator extends BaseFileLocator
     public function locate($name, $dir = null, $first = true)
     {
         if ('@' === $name[0]) {
-            return $this->themeManager->locateTemplate($name);
+            return $this->themeLocator->locateTemplate($name);
         }
-
+        
         return parent::locate($name, $dir, $first);
     }
 }

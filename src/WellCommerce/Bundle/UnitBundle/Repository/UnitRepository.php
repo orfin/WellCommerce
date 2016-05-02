@@ -11,13 +11,13 @@
  */
 namespace WellCommerce\Bundle\UnitBundle\Repository;
 
-use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
 
 /**
  * Class UnitRepository
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class UnitRepository extends AbstractEntityRepository implements UnitRepositoryInterface
+class UnitRepository extends EntityRepository implements UnitRepositoryInterface
 {
 }

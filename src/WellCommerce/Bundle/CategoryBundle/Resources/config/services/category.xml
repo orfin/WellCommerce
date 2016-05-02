@@ -9,11 +9,6 @@
     </imports>
 
     <services>
-        <service id="category.manager" class="WellCommerce\Bundle\CategoryBundle\Manager\CategoryManager" parent="core.manager">
-            <argument type="service" id="category.repository"/>
-            <argument type="service" id="category.factory"/>
-        </service>
-
         <service id="category.request_param_converter" class="WellCommerce\Bundle\CategoryBundle\Request\ParamConverter\CategoryParamConverter" public="false">
             <argument type="service" id="category.repository" />
             <argument>id</argument>

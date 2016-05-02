@@ -33,7 +33,7 @@ interface CartRepositoryInterface extends RepositoryInterface
      * @return null|\WellCommerce\Bundle\OrderBundle\Entity\CartInterface
      */
     public function findCart(ClientInterface $client = null, $sessionId, ShopInterface $shop);
-
+    
     /**
      * Returns client cart
      *
@@ -43,7 +43,7 @@ interface CartRepositoryInterface extends RepositoryInterface
      * @return null|\WellCommerce\Bundle\OrderBundle\Entity\CartInterface
      */
     public function getCartForClient(ClientInterface $client, ShopInterface $shop);
-
+    
     /**
      * Returns cart by session identifier
      *

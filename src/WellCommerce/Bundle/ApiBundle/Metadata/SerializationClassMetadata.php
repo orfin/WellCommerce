@@ -29,12 +29,12 @@ class SerializationClassMetadata implements SerializationClassMetadataInterface
      * @var string
      */
     protected $class;
-
+    
     /**
      * @var array
      */
     protected $options = [];
-
+    
     /**
      * SerializationClassMetadata constructor.
      *
@@ -48,7 +48,7 @@ class SerializationClassMetadata implements SerializationClassMetadataInterface
         $this->configureOptions($resolver);
         $this->options = $resolver->resolve($options);
     }
-
+    
     /**
      * @param OptionsResolver $resolver
      */
@@ -59,45 +59,45 @@ class SerializationClassMetadata implements SerializationClassMetadataInterface
             'associations',
             'callbacks',
         ]);
-
+        
         $fieldsNormalizer = function (Options $options, $fields) {
             $collection = new Collection\FieldMetadataCollection();
             $factory    = new FieldMetadataFactory();
-
+            
             foreach ($fields as $fieldName => $parameters) {
                 $fieldMetadata = $factory->create($fieldName, $parameters);
                 $collection->add($fieldMetadata);
             }
-
+            
             return $collection;
         };
-
+        
         $associationsNormalizer = function (Options $options, $associations) {
-            $collection   = new Collection\AssociationMetadataCollection();
-            $factory      = new AssociationMetadataFactory();
-
+            $collection = new Collection\AssociationMetadataCollection();
+            $factory    = new AssociationMetadataFactory();
+            
             foreach ($associations as $associationName => $parameters) {
                 $associationMetadata = $factory->create($associationName, $parameters);
                 $collection->add($associationMetadata);
             }
-
+            
             return $collection;
         };
-
+        
         $resolver->setNormalizer('fields', $fieldsNormalizer);
         $resolver->setNormalizer('associations', $associationsNormalizer);
-
+        
         $resolver->setDefaults([
             'fields'       => new Collection\FieldMetadataCollection(),
             'associations' => new Collection\AssociationMetadataCollection(),
             'callbacks'    => [],
         ]);
-
+        
         $resolver->setAllowedTypes('fields', ['array', Collection\FieldMetadataCollection::class]);
         $resolver->setAllowedTypes('associations', ['array', Collection\AssociationMetadataCollection::class]);
         $resolver->setAllowedTypes('callbacks', 'array');
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -105,7 +105,7 @@ class SerializationClassMetadata implements SerializationClassMetadataInterface
     {
         return $this->class;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -113,7 +113,7 @@ class SerializationClassMetadata implements SerializationClassMetadataInterface
     {
         return $this->options['fields'];
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -121,7 +121,7 @@ class SerializationClassMetadata implements SerializationClassMetadataInterface
     {
         return $this->options['associations'];
     }
-
+    
     /**
      * {@inheritdoc}
      */

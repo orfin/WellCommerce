@@ -30,7 +30,7 @@ class AddCartItemException extends \RuntimeException
             (null === $variant) ? 0 : $variant->getId(),
             $quantity
         );
-
+        
         parent::__construct($message, $previous->getCode(), $previous);
     }
 }

@@ -23,12 +23,12 @@ use WellCommerce\Bundle\LocaleBundle\Entity\LocaleAwareInterface;
 class ClientGroupTranslation implements LocaleAwareInterface
 {
     use Translation;
-
+    
     /**
      * @var string
      */
     private $name;
-
+    
     /**
      * @return string
      */
@@ -36,7 +36,7 @@ class ClientGroupTranslation implements LocaleAwareInterface
     {
         return $this->name;
     }
-
+    
     /**
      * @param string $name
      */
@@ -44,7 +44,7 @@ class ClientGroupTranslation implements LocaleAwareInterface
     {
         $this->name = $name;
     }
-
+    
     /**
      * {@inheritdoc}
      */

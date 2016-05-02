@@ -23,17 +23,17 @@ class Dimension
      * @var float
      */
     protected $depth;
-
+    
     /**
      * @var float
      */
     protected $width;
-
+    
     /**
      * @var float
      */
     protected $height;
-
+    
     /**
      * @return float
      */
@@ -41,7 +41,7 @@ class Dimension
     {
         return $this->depth;
     }
-
+    
     /**
      * @param float $depth
      */
@@ -49,7 +49,7 @@ class Dimension
     {
         $this->depth = (float)$depth;
     }
-
+    
     /**
      * @return float
      */
@@ -57,7 +57,7 @@ class Dimension
     {
         return $this->width;
     }
-
+    
     /**
      * @param float $width
      */
@@ -65,7 +65,7 @@ class Dimension
     {
         $this->width = (float)$width;
     }
-
+    
     /**
      * @return float
      */
@@ -73,7 +73,7 @@ class Dimension
     {
         return $this->height;
     }
-
+    
     /**
      * @param float $height
      */

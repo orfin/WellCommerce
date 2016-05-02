@@ -11,8 +11,6 @@
  */
 namespace WellCommerce\Bundle\OrderBundle\Entity;
 
-use WellCommerce\Bundle\OrderBundle\Entity\Order;
-
 /**
  * Class Cart
  *
@@ -24,17 +22,17 @@ class Cart extends Order implements CartInterface
      * @var bool
      */
     protected $copyAddress;
-
+    
     public function getCopyAddress() : bool
     {
         return $this->copyAddress;
     }
-
+    
     public function setCopyAddress(bool $copyAddress)
     {
         $this->copyAddress = $copyAddress;
     }
-
+    
     public function isEmpty() : bool
     {
         return 0 === $this->productTotal->getQuantity();

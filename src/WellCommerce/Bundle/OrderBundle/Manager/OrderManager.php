@@ -40,12 +40,12 @@ class OrderManager extends AbstractFrontManager implements OrderManagerInterface
         $client        = $this->getClient();
         $shop          = $this->getShopContext()->getCurrentShop();
         $cart          = $this->getCart($shop, $client, $sessionId, $currency);
-
+        
         $this->getCartContext()->setCurrentCart($cart);
-
+        
         return $cart;
     }
-
+    
     public function initializeOrderFromCart(CartInterface $cart) : OrderInterface
     {
         /** @var OrderInterface $order */
@@ -146,7 +146,7 @@ class OrderManager extends AbstractFrontManager implements OrderManagerInterface
         
         return $orderProduct;
     }
-
+    
     private function getOrderProductManager() : OrderProductManager
     {
         return $this->get('order_product.manager.front');

@@ -28,7 +28,7 @@ class ShopSubscriber extends AbstractEventSubscriber
             KernelEvents::REQUEST => ['onKernelRequest', 100]
         ];
     }
-
+    
     public function onKernelRequest(GetResponseEvent $event)
     {
         $this->get('shop.resolver.front')->resolve();

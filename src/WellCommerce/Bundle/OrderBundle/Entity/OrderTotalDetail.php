@@ -14,32 +14,32 @@ class OrderTotalDetail extends AbstractEntity implements OrderTotalDetailInterfa
 {
     use HierarchyAwareTrait;
     use OrderAwareTrait;
-
+    
     /**
      * @var string
      */
     protected $collector;
-
+    
     /**
      * @var OrderTotal
      */
     protected $orderTotal;
-
+    
     /**
      * @var bool
      */
     protected $subtraction;
-
+    
     /**
      * @var string
      */
     protected $modifierType;
-
+    
     /**
      * @var float
      */
     protected $modifierValue;
-
+    
     /**
      * {@inheritdoc}
      */
@@ -47,7 +47,7 @@ class OrderTotalDetail extends AbstractEntity implements OrderTotalDetailInterfa
     {
         return $this->collector;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -55,7 +55,7 @@ class OrderTotalDetail extends AbstractEntity implements OrderTotalDetailInterfa
     {
         $this->collector = $collector;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -63,7 +63,7 @@ class OrderTotalDetail extends AbstractEntity implements OrderTotalDetailInterfa
     {
         return $this->orderTotal;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -71,7 +71,7 @@ class OrderTotalDetail extends AbstractEntity implements OrderTotalDetailInterfa
     {
         $this->orderTotal = $orderTotal;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -79,7 +79,7 @@ class OrderTotalDetail extends AbstractEntity implements OrderTotalDetailInterfa
     {
         return $this->modifierType;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -87,7 +87,7 @@ class OrderTotalDetail extends AbstractEntity implements OrderTotalDetailInterfa
     {
         $this->modifierType = $modifierType;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -95,7 +95,7 @@ class OrderTotalDetail extends AbstractEntity implements OrderTotalDetailInterfa
     {
         return $this->modifierValue;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -103,7 +103,7 @@ class OrderTotalDetail extends AbstractEntity implements OrderTotalDetailInterfa
     {
         $this->modifierValue = $modifierValue;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -111,7 +111,7 @@ class OrderTotalDetail extends AbstractEntity implements OrderTotalDetailInterfa
     {
         return $this->subtraction;
     }
-
+    
     /**
      * {@inheritdoc}
      */

@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\ContactBundle\DataSet\Front;
 
-use WellCommerce\Bundle\AppBundle\DataSet\Admin\ContactDataSetQueryBuilder as BaseQueryBuilder;
+use WellCommerce\Bundle\ContactBundle\DataSet\Admin\ContactDataSetQueryBuilder as BaseQueryBuilder;
 
 /**
  * Class ContactDataSetQueryBuilder
@@ -21,5 +21,4 @@ use WellCommerce\Bundle\AppBundle\DataSet\Admin\ContactDataSetQueryBuilder as Ba
  */
 class ContactDataSetQueryBuilder extends BaseQueryBuilder
 {
-
 }

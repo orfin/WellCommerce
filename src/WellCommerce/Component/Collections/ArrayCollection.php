@@ -26,7 +26,7 @@ class ArrayCollection implements CollectionInterface
      * @var array An array containing all items in collection
      */
     protected $items = [];
-
+    
     /**
      * Initializes a new ArrayCollection.
      *
@@ -36,7 +36,7 @@ class ArrayCollection implements CollectionInterface
     {
         $this->items = $items;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -44,7 +44,7 @@ class ArrayCollection implements CollectionInterface
     {
         return new ArrayIterator($this->items);
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -52,7 +52,7 @@ class ArrayCollection implements CollectionInterface
     {
         return count($this->items);
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -60,7 +60,7 @@ class ArrayCollection implements CollectionInterface
     {
         return $this->items;
     }
-
+    
     /**
      * Returns a collection element by its key
      *
@@ -72,7 +72,7 @@ class ArrayCollection implements CollectionInterface
     {
         return $this->items[$key];
     }
-
+    
     /**
      * @return mixed
      */
@@ -80,7 +80,7 @@ class ArrayCollection implements CollectionInterface
     {
         return reset($this->items);
     }
-
+    
     /**
      * Removes an item from collection
      *
@@ -92,7 +92,7 @@ class ArrayCollection implements CollectionInterface
             unset($this->items[$key]);
         }
     }
-
+    
     /**
      * Checks whether such key exists in collection
      *
@@ -104,7 +104,7 @@ class ArrayCollection implements CollectionInterface
     {
         return array_key_exists($key, $this->items);
     }
-
+    
     /**
      * Checks whether such item exists in collection
      *
@@ -116,7 +116,7 @@ class ArrayCollection implements CollectionInterface
     {
         return in_array($item, $this->items);
     }
-
+    
     /**
      * @return array
      */
@@ -124,7 +124,7 @@ class ArrayCollection implements CollectionInterface
     {
         return array_keys($this->items);
     }
-
+    
     /**
      * @param Closure $callable
      */

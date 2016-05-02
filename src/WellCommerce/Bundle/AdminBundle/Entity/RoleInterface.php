@@ -27,22 +27,22 @@ interface RoleInterface extends BaseRoleInterface, EntityInterface
      * @param string $role
      */
     public function setRole(string $role);
-
+    
     /**
      * @return string
      */
     public function getName() : string;
-
+    
     /**
      * @param string $name
      */
     public function setName(string $name);
-
+    
     /**
      * @param Collection $users
      */
     public function setUsers(Collection $users);
-
+    
     /**
      * @return Collection
      */

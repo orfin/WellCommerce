@@ -25,7 +25,7 @@ final class OrderModifierConfigurator implements OrderModifierConfiguratorInterf
     private $description;
     private $isSubtraction;
     private $hierarchy;
-
+    
     /**
      * OrderModifierConfigurator constructor.
      *
@@ -41,7 +41,7 @@ final class OrderModifierConfigurator implements OrderModifierConfiguratorInterf
         $this->isSubtraction = $isSubtraction;
         $this->hierarchy     = $hierarchy;
     }
-
+    
     /**
      * {@inheritdoc}
      */

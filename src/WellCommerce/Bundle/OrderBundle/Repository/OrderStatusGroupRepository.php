@@ -12,13 +12,13 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Repository;
 
-use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
 
 /**
  * Class OrderStatusGroupRepository
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class OrderStatusGroupRepository extends AbstractEntityRepository implements OrderStatusGroupRepositoryInterface
+class OrderStatusGroupRepository extends EntityRepository implements OrderStatusGroupRepositoryInterface
 {
 }

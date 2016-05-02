@@ -9,9 +9,8 @@ well_commerce_product:
             api:
                 exposed: true
                 dataset: product.dataset.admin
-                manager: product.manager.admin
+                manager: product.manager
             dynamic_routing:
-                name: product
                 entity: WellCommerce\Bundle\ProductBundle\Entity\ProductRoute
                 generator: WellCommerce\Bundle\ProductBundle\Routing\ProductRouteGenerator
                 defaults:

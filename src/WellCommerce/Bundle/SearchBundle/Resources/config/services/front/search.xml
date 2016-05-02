@@ -4,10 +4,6 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="search.manager" class="WellCommerce\Bundle\SearchBundle\Manager\SearchManager" parent="core.manager">
-            <argument type="service" id="product.repository"/>
-        </service>
-
         <service id="search.dataset.query_builder.front" class="WellCommerce\Bundle\SearchBundle\DataSet\Front\SearchDataSetQueryBuilder">
             <argument type="service" id="product.repository"/>
             <call method="setSearchProvider">
@@ -18,19 +14,18 @@
             </call>
         </service>
 
-        <service id="search.dataset.front" class="WellCommerce\Bundle\SearchBundle\DataSet\Front\SearchDataSet" parent="core.dataset">
+        <service id="search.dataset.front" class="WellCommerce\Bundle\SearchBundle\DataSet\Front\SearchDataSet">
             <argument type="service" id="search.dataset.query_builder.front"/>
+            <tag name="dataset"/>
         </service>
 
         <service id="search.controller.front" class="WellCommerce\Bundle\SearchBundle\Controller\Front\SearchController">
-            <argument type="service" id="search.manager"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
         <service id="search.layout_box.controller" class="WellCommerce\Bundle\SearchBundle\Controller\Box\SearchBoxController">
-            <argument type="service" id="search.manager"/>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>

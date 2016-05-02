@@ -26,7 +26,7 @@ class OrderStatusGroupFactory extends AbstractEntityFactory
      * @var string
      */
     protected $supportsInterface = OrderStatusGroupInterface::class;
-
+    
     /**
      * @return OrderStatusGroupInterface
      */
@@ -34,7 +34,7 @@ class OrderStatusGroupFactory extends AbstractEntityFactory
     {
         /** @var  $group OrderStatusGroupInterface */
         $group = $this->init();
-
+        
         return $group;
     }
 }

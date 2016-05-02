@@ -26,7 +26,7 @@ class OrderStatusHistoryFactory extends AbstractEntityFactory
      * @var string
      */
     protected $supportsInterface = OrderStatusHistoryInterface::class;
-
+    
     /**
      * @return OrderStatusHistoryInterface
      */
@@ -36,7 +36,7 @@ class OrderStatusHistoryFactory extends AbstractEntityFactory
         $status = $this->init();
         $status->setComment('');
         $status->setNotify(false);
-
+        
         return $status;
     }
 }

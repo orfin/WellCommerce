@@ -39,47 +39,47 @@ interface ClientInterface extends
      * @return Collection
      */
     public function getOrders() : Collection;
-
+    
     /**
      * @return Collection
      */
     public function getWishlist() : Collection;
-
+    
     /**
      * @return ClientDetailsInterface
      */
     public function getClientDetails() : ClientDetailsInterface;
-
+    
     /**
      * @param ClientDetailsInterface $clientDetails
      */
     public function setClientDetails(ClientDetailsInterface $clientDetails);
-
+    
     /**
      * @return ClientContactDetailsInterface
      */
     public function getContactDetails() : ClientContactDetailsInterface;
-
+    
     /**
      * @param ClientContactDetailsInterface $contactDetails
      */
     public function setContactDetails(ClientContactDetailsInterface $contactDetails);
-
+    
     /**
      * @return ClientBillingAddressInterface
      */
     public function getBillingAddress() : ClientBillingAddressInterface;
-
+    
     /**
      * @param ClientBillingAddressInterface $billingAddress
      */
     public function setBillingAddress(ClientBillingAddressInterface $billingAddress);
-
+    
     /**
      * @return ClientShippingAddressInterface
      */
     public function getShippingAddress() : ClientShippingAddressInterface;
-
+    
     /**
      * @param ClientShippingAddressInterface $shippingAddress
      */

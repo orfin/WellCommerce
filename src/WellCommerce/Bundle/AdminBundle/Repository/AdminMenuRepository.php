@@ -12,13 +12,13 @@
 
 namespace WellCommerce\Bundle\AdminBundle\Repository;
 
-use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
 
 /**
  * Class AdminMenuRepository
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AdminMenuRepository extends AbstractEntityRepository implements AdminMenuRepositoryInterface
+class AdminMenuRepository extends EntityRepository implements AdminMenuRepositoryInterface
 {
 }

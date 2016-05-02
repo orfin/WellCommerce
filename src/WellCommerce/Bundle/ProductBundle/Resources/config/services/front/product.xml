@@ -21,8 +21,9 @@
             </call>
         </service>
 
-        <service id="product.dataset.front" class="WellCommerce\Bundle\ProductBundle\DataSet\Front\ProductDataSet" parent="core.dataset">
+        <service id="product.dataset.front" class="WellCommerce\Bundle\ProductBundle\DataSet\Front\ProductDataSet">
             <argument type="service" id="product.dataset.query_builder.front"/>
+            <tag name="dataset"/>
         </service>
 
         <service id="product.context.front" class="WellCommerce\Bundle\ProductBundle\Context\Front\ProductContext"/>

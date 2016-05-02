@@ -4,19 +4,8 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="user_group.manager.admin" class="WellCommerce\Bundle\AdminBundle\Manager\UserGroupManager">
-            <argument type="service" id="user_group.repository"/>
-            <argument type="service" id="user_group.event_dispatcher"/>
-            <argument type="service" id="user_group.factory"/>
-            <argument type="service" id="user_group.form_builder.admin"/>
-            <argument type="service" id="user_group.datagrid"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-        </service>
-        
         <service id="user_group.controller.admin" class="WellCommerce\Bundle\AdminBundle\Controller\Admin\UserGroupController">
-            <argument type="service" id="user_group.manager.admin"/>
+            <argument type="service" id="user_group.manager"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -26,13 +15,14 @@
             <argument type="service" id="user_group.repository"/>
         </service>
 
-        <service id="user_group.dataset.admin" class="WellCommerce\Bundle\AdminBundle\DataSet\Admin\UserGroupDataSet" parent="core.dataset">
+        <service id="user_group.dataset.admin" class="WellCommerce\Bundle\AdminBundle\DataSet\Admin\UserGroupDataSet">
             <argument type="service" id="user_group.dataset.query_builder.admin"/>
+            <tag name="dataset"/>
         </service>
 
-        <service id="user_group.datagrid" class="WellCommerce\Bundle\AdminBundle\DataGrid\UserGroupDataGrid" parent="core.datagrid">
-            <argument key="identifier">user_group</argument>
+        <service id="user_group.datagrid" class="WellCommerce\Bundle\AdminBundle\DataGrid\UserGroupDataGrid">
             <argument type="service" id="user_group.dataset.admin"/>
+            <tag name="datagrid" alias="user_group"/>
         </service>
 
         <service id="user_group.form_builder.admin" class="WellCommerce\Bundle\AdminBundle\Form\Admin\UserGroupFormBuilder" parent="core.form_builder" />

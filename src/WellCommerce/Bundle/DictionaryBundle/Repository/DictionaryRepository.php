@@ -11,13 +11,13 @@
  */
 namespace WellCommerce\Bundle\DictionaryBundle\Repository;
 
-use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
 
 /**
  * Class DictionaryRepository
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class DictionaryRepository extends AbstractEntityRepository implements DictionaryRepositoryInterface
+class DictionaryRepository extends EntityRepository implements DictionaryRepositoryInterface
 {
 }

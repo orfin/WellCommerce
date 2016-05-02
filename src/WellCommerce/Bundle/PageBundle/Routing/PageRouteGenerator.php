@@ -22,7 +22,7 @@ use WellCommerce\Bundle\RoutingBundle\Generator\AbstractRouteGenerator;
 class PageRouteGenerator extends AbstractRouteGenerator
 {
     const GENERATOR_STRATEGY = 'page';
-
+    
     public function supports($strategy)
     {
         return self::GENERATOR_STRATEGY === $strategy;

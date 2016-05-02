@@ -30,17 +30,17 @@ use WellCommerce\Bundle\DoctrineBundle\Helper\Doctrine\DoctrineHelperInterface;
 class GenerateSerializationMetadataCommand extends Command
 {
     protected $hiddenFields = ['createdBy', 'updatedBy', 'deletedBy', 'password', 'salt'];
-
+    
     /**
      * @var DoctrineHelperInterface
      */
     protected $doctrineHelper;
-
+    
     /**
      * @var Filesystem
      */
     protected $filesystem;
-
+    
     /**
      * GenerateMetadataCommand constructor.
      *
@@ -52,7 +52,7 @@ class GenerateSerializationMetadataCommand extends Command
         $this->doctrineHelper = $doctrineHelper;
         $this->filesystem     = new Filesystem();
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -62,7 +62,7 @@ class GenerateSerializationMetadataCommand extends Command
         $this->setName('api:generate:metadata');
         $this->addOption('force', null, InputOption::VALUE_NONE, 'Force to overwrite existing configuration files.');
     }
-
+    
     /**
      * Executes the actions
      *
@@ -73,16 +73,16 @@ class GenerateSerializationMetadataCommand extends Command
     {
         $metadataCollection = $this->doctrineHelper->getMetadataFactory()->getAllMetadata();
         $force              = true === $input->getOption('force');
-
+        
         foreach ($metadataCollection as $entityMetadata) {
             $this->dumpSerializationFile($entityMetadata, $output, $force);
         }
     }
-
+    
     protected function dumpSerializationFile(ClassMetadata $metadata, OutputInterface $output, $force = false)
     {
         $targetPath = $this->resolvePath($metadata->getReflectionClass());
-
+        
         $config = [
             $metadata->getName() => [
                 'fields'       => $this->prepareMetadataFields($metadata),
@@ -90,9 +90,9 @@ class GenerateSerializationMetadataCommand extends Command
                 'callbacks'    => [],
             ]
         ];
-
+        
         $message = 'Dumped serialization config for <info>%s</info>';
-
+        
         if ($force) {
             $this->filesystem->dumpFile($targetPath, Yaml::dump($config, 6));
         } else {
@@ -102,14 +102,14 @@ class GenerateSerializationMetadataCommand extends Command
                 $message = 'Skipped dumping serialization config for <info>%s</info>';
             }
         }
-
+        
         $output->write(sprintf($message, $metadata->getName()), true);
     }
-
+    
     protected function prepareMetadataFields(ClassMetadata $metadata)
     {
         $fields = [];
-
+        
         foreach ($metadata->getFieldNames() as $fieldName) {
             $groups = [];
             list($realName,) = explode('.', $fieldName);
@@ -118,20 +118,20 @@ class GenerateSerializationMetadataCommand extends Command
             }
             $fields[$realName]['groups'] = $groups;
         }
-
+        
         return $fields;
     }
-
+    
     protected function prepareMetadataAssociations(ClassMetadata $metadata)
     {
         $associations = [];
         foreach ($metadata->getAssociationNames() as $associationName) {
             $associations[$associationName]['groups'] = [Inflector::tableize($metadata->getReflectionClass()->getShortName())];
         }
-
+        
         return $associations;
     }
-
+    
     protected function resolvePath(\ReflectionClass $reflectionClass)
     {
         return dirname($reflectionClass->getFileName()) . '/../Resources/config/serialization/' . $reflectionClass->getShortName() . '.yml';

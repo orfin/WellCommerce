@@ -23,7 +23,7 @@ trait ClientAwareTrait
      * @var null|ClientInterface
      */
     protected $client;
-
+    
     /**
      * @return null|ClientInterface
      */
@@ -31,7 +31,7 @@ trait ClientAwareTrait
     {
         return $this->client;
     }
-
+    
     /**
      * @param null|ClientInterface $client
      */

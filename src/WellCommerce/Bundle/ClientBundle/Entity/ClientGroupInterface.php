@@ -27,18 +27,18 @@ use WellCommerce\Bundle\PageBundle\Entity\PageInterface;
 interface ClientGroupInterface extends EntityInterface, TranslatableInterface, TimestampableInterface, BlameableInterface
 {
     public function getDiscount() : float;
-
+    
     public function setDiscount(float $discount);
-
+    
     public function setClients(Collection $clients);
-
+    
     public function getClients() : Collection;
-
+    
     public function addClient(ClientInterface $client);
-
+    
     public function getPages() : Collection;
-
+    
     public function setPages(Collection $pages);
-
+    
     public function addPage(PageInterface $page);
 }

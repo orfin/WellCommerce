@@ -12,6 +12,8 @@
 
 namespace WellCommerce\Bundle\RoutingBundle\DependencyInjection;
 
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Reference;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
 
 /**
@@ -21,4 +23,15 @@ use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
  */
 class WellCommerceRoutingExtension extends AbstractExtension
 {
+    protected function processExtensionConfiguration(array $configuration, ContainerBuilder $container)
+    {
+        parent::processExtensionConfiguration($configuration, $container);
+
+        $router = $container->getDefinition('routing.chain_router');
+        foreach ($configuration['routers'] as $id => $priority) {
+            $router->addMethodCall('add', [new Reference($id), (int)$priority]);
+        }
+
+        $container->setAlias('router', 'routing.chain_router');
+    }
 }

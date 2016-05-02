@@ -29,52 +29,52 @@ class User extends AbstractEntity implements UserInterface
     use Timestampable;
     use Blameable;
     use EnableableTrait;
-
+    
     /**
      * @var string
      */
     protected $firstName;
-
+    
     /**
      * @var string
      */
     protected $lastName;
-
+    
     /**
      * @var string
      */
     protected $username;
-
+    
     /**
      * @var string
      */
     protected $apiKey;
-
+    
     /**
      * @var string
      */
     protected $password;
-
+    
     /**
      * @var string
      */
     protected $email;
-
+    
     /**
      * @var string
      */
     protected $salt;
-
+    
     /**
      * @var Collection
      */
     protected $roles;
-
+    
     /**
      * @var Collection
      */
     protected $groups;
-
+    
     /**
      * {@inheritdoc}
      */
@@ -82,7 +82,7 @@ class User extends AbstractEntity implements UserInterface
     {
         return $this->firstName;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -90,7 +90,7 @@ class User extends AbstractEntity implements UserInterface
     {
         $this->firstName = $firstName;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -98,7 +98,7 @@ class User extends AbstractEntity implements UserInterface
     {
         return $this->lastName;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -106,7 +106,7 @@ class User extends AbstractEntity implements UserInterface
     {
         $this->lastName = $lastName;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -114,7 +114,7 @@ class User extends AbstractEntity implements UserInterface
     {
         return $this->username;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -122,7 +122,7 @@ class User extends AbstractEntity implements UserInterface
     {
         $this->username = $username;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -130,7 +130,7 @@ class User extends AbstractEntity implements UserInterface
     {
         return $this->email;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -138,7 +138,7 @@ class User extends AbstractEntity implements UserInterface
     {
         $this->email = $email;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -146,7 +146,7 @@ class User extends AbstractEntity implements UserInterface
     {
         $this->salt = $salt;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -154,7 +154,7 @@ class User extends AbstractEntity implements UserInterface
     {
         return;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -162,7 +162,7 @@ class User extends AbstractEntity implements UserInterface
     {
         return $this->password;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -172,7 +172,7 @@ class User extends AbstractEntity implements UserInterface
             $this->password = password_hash($password, PASSWORD_BCRYPT, ['cost' => 12]);
         }
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -180,7 +180,7 @@ class User extends AbstractEntity implements UserInterface
     {
         return $this->roles->toArray();
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -188,7 +188,7 @@ class User extends AbstractEntity implements UserInterface
     {
         $this->roles[] = $role;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -196,14 +196,14 @@ class User extends AbstractEntity implements UserInterface
     {
         $this->roles = $roles;
     }
-
+    
     /**
      * @inheritDoc
      */
     public function eraseCredentials()
     {
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -211,7 +211,7 @@ class User extends AbstractEntity implements UserInterface
     {
         return serialize([$this->id, $this->username, $this->password]);
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -219,7 +219,7 @@ class User extends AbstractEntity implements UserInterface
     {
         list($this->id, $this->username, $this->password) = unserialize($serialized);
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -228,18 +228,18 @@ class User extends AbstractEntity implements UserInterface
         if ($this->password !== $user->getPassword()) {
             return false;
         }
-
+        
         if ($this->salt !== $user->getSalt()) {
             return false;
         }
-
+        
         if ($this->username !== $user->getUsername()) {
             return false;
         }
-
+        
         return true;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -247,7 +247,7 @@ class User extends AbstractEntity implements UserInterface
     {
         return $this->groups;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -255,7 +255,7 @@ class User extends AbstractEntity implements UserInterface
     {
         $this->groups = $groups;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -263,7 +263,7 @@ class User extends AbstractEntity implements UserInterface
     {
         return $this->apiKey;
     }
-
+    
     /**
      * {@inheritdoc}122
      */
@@ -271,7 +271,7 @@ class User extends AbstractEntity implements UserInterface
     {
         $this->apiKey = $apiKey;
     }
-
+    
     public function __toString() : string
     {
         return sprintf('%s %s', $this->getFirstName(), $this->getLastName());

@@ -11,14 +11,14 @@
  */
 namespace WellCommerce\Bundle\CurrencyBundle\Repository;
 
-use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
 
 /**
  * Class CurrencyRateRepository
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CurrencyRateRepository extends AbstractEntityRepository implements CurrencyRateRepositoryInterface
+class CurrencyRateRepository extends EntityRepository implements CurrencyRateRepositoryInterface
 {
 
 }

@@ -13,12 +13,13 @@
 namespace WellCommerce\Bundle\CoreBundle\DataSet;
 
 use Doctrine\ORM\QueryBuilder;
-use WellCommerce\Bundle\CoreBundle\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use WellCommerce\Component\DataSet\Cache\CacheOptions;
 use WellCommerce\Component\DataSet\Column\ColumnCollection;
 use WellCommerce\Component\DataSet\Column\ColumnInterface;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
 use WellCommerce\Component\DataSet\DataSetInterface;
+use WellCommerce\Component\DataSet\Event\DataSetEvent;
 use WellCommerce\Component\DataSet\Manager\DataSetManagerInterface;
 use WellCommerce\Component\DataSet\QueryBuilder\DataSetQueryBuilderInterface;
 use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
@@ -141,7 +142,11 @@ abstract class AbstractDataSet implements DataSetInterface
      */
     public function dispatchOnDataSetInitEvent()
     {
-        $this->eventDispatcher->dispatchOnDataSetInitEvent($this);
+        $reflection  = new \ReflectionClass($this);
+        $dataSetName = str_replace('DataSet', '', $reflection->getShortName());
+        $eventName   = $dataSetName . '.init';
+        $event       = new DataSetEvent($this);
+        $this->eventDispatcher->dispatch($eventName, $event);
     }
     
     /**

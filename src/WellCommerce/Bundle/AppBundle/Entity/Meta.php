@@ -23,17 +23,17 @@ class Meta
      * @var string
      */
     protected $title;
-
+    
     /**
      * @var string
      */
     protected $keywords;
-
+    
     /**
      * @var string
      */
     protected $description;
-
+    
     /**
      * Constructor
      *
@@ -47,7 +47,7 @@ class Meta
         $this->keywords    = $keywords;
         $this->description = $description;
     }
-
+    
     /**
      * @return string
      */
@@ -55,7 +55,7 @@ class Meta
     {
         return $this->title;
     }
-
+    
     /**
      * @param string $title
      */
@@ -63,7 +63,7 @@ class Meta
     {
         $this->title = $title;
     }
-
+    
     /**
      * @return string
      */
@@ -71,7 +71,7 @@ class Meta
     {
         return $this->keywords;
     }
-
+    
     /**
      * @param string $keywords
      */
@@ -79,7 +79,7 @@ class Meta
     {
         $this->keywords = $keywords;
     }
-
+    
     /**
      * @return string
      */
@@ -87,7 +87,7 @@ class Meta
     {
         return $this->description;
     }
-
+    
     /**
      * @param string $description
      */

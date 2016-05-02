@@ -26,7 +26,7 @@ class NewsFactory extends AbstractEntityFactory
      * @var string
      */
     protected $supportsInterface = NewsInterface::class;
-
+    
     /**
      * @return NewsInterface
      */
@@ -38,7 +38,7 @@ class NewsFactory extends AbstractEntityFactory
         $news->setPublish(true);
         $news->setStartDate(new \DateTime());
         $news->setEndDate(new \DateTime());
-
+        
         return $news;
     }
 }

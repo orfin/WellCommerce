@@ -16,47 +16,29 @@ use Doctrine\Common\Collections\Collection;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
+use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
 
 /**
  * Class ProductStatus
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductStatus implements ProductStatusInterface
+class ProductStatus extends AbstractEntity implements ProductStatusInterface
 {
     use Translatable;
     use Timestampable;
     use Blameable;
 
     /**
-     * @var int
-     */
-    protected $id;
-
-    /**
      * @var Collection
      */
     protected $products;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getProducts()
+    public function getProducts() : Collection
     {
         return $this->products;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setProducts(Collection $collection)
     {
         $this->products = $collection;

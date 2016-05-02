@@ -12,8 +12,6 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Entity;
 
-use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
-
 /**
  * Interface CartInterface
  *
@@ -22,8 +20,8 @@ use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 interface CartInterface extends OrderInterface
 {
     public function getCopyAddress() : bool;
-
+    
     public function setCopyAddress(bool $copyAddress);
-
+    
     public function isEmpty() : bool;
 }

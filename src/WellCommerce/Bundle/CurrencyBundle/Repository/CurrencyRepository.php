@@ -12,14 +12,14 @@
 namespace WellCommerce\Bundle\CurrencyBundle\Repository;
 
 use Symfony\Component\Intl\Intl;
-use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
 
 /**
  * Class CurrencyRepository
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CurrencyRepository extends AbstractEntityRepository implements CurrencyRepositoryInterface
+class CurrencyRepository extends EntityRepository implements CurrencyRepositoryInterface
 {
     /**
      * {@inheritdoc}

@@ -39,97 +39,97 @@ interface ShopInterface extends
      * @return string
      */
     public function getName() : string;
-
+    
     /**
      * @param string $name
      */
     public function setName(string $name);
-
+    
     /**
      * @return Collection
      */
     public function getProducts() : Collection;
-
+    
     /**
      * @param mixed $products
      */
     public function setProducts(Collection $products);
-
+    
     /**
      * @return CompanyInterface
      */
     public function getCompany() : CompanyInterface;
-
+    
     /**
      * @param CompanyInterface $company
      */
     public function setCompany(CompanyInterface $company);
-
+    
     /**
      * @return Collection
      */
     public function getCategories() : Collection;
-
+    
     /**
      * @param Collection $categories
      */
     public function setCategories(Collection $categories);
-
+    
     /**
      * @return mixed
      */
     public function getProducers() : Collection;
-
+    
     /**
      * @param mixed $producers
      */
     public function setProducers(Collection $producers);
-
+    
     /**
      * @return string
      */
     public function getUrl() : string;
-
+    
     /**
      * @param string $url
      */
     public function setUrl(string $url);
-
+    
     /**
      * @return Collection
      */
     public function getPages() : Collection;
-
+    
     /**
      * @param Collection $pages
      */
     public function setPages(Collection $pages);
-
+    
     /**
      * @return string
      */
     public function getDefaultCountry() : string;
-
+    
     /**
      * @param string $defaultCountry
      */
     public function setDefaultCountry(string $defaultCountry);
-
+    
     /**
      * @return string
      */
     public function getDefaultCurrency() : string;
-
+    
     /**
      * @param string $defaultCurrency
      */
     public function setDefaultCurrency(string $defaultCurrency);
-
+    
     /**
      * @param MailerConfiguration $configuration
      */
     public function setMailerConfiguration(MailerConfiguration $configuration);
-
+    
     /**
      * @return MailerConfiguration
      */

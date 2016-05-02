@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\ClientBundle\Factory;
 
-use WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddress;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddressInterface;
 use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 
@@ -24,7 +23,7 @@ use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 final class ClientBillingAddressFactory extends AbstractEntityFactory
 {
     protected $supportsInterface = ClientBillingAddressInterface::class;
-
+    
     public function create() : ClientBillingAddressInterface
     {
         /** @var ClientBillingAddressInterface $address */
@@ -38,7 +37,7 @@ final class ClientBillingAddressFactory extends AbstractEntityFactory
         $address->setCity('');
         $address->setCountry($this->getDefaultShop()->getDefaultCountry());
         $address->setCompanyAddress(false);
-
+        
         return $address;
     }
 }

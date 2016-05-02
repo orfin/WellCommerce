@@ -26,7 +26,7 @@ class MediaFactory extends AbstractEntityFactory
      * @var string
      */
     protected $supportsInterface = MediaInterface::class;
-
+    
     /**
      * @return MediaInterface
      */

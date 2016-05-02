@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\UnitBundle\Manager;
 
 use WellCommerce\Bundle\CoreBundle\Manager\AbstractManager;
-use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
 
 /**
  * Class UnitManager

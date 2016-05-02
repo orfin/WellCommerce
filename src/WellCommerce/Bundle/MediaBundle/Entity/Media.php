@@ -25,7 +25,7 @@ class Media extends AbstractEntity implements MediaInterface
 {
     use Timestampable;
     use Blameable;
-
+    
     /**
      * @var string
      */
@@ -50,7 +50,7 @@ class Media extends AbstractEntity implements MediaInterface
      * @var string
      */
     protected $size;
-
+    
     /**
      * {@inheritdoc}
      */
@@ -58,7 +58,7 @@ class Media extends AbstractEntity implements MediaInterface
     {
         return $this->name;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -66,7 +66,7 @@ class Media extends AbstractEntity implements MediaInterface
     {
         $this->name = $name;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -74,7 +74,7 @@ class Media extends AbstractEntity implements MediaInterface
     {
         return $this->path;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -82,7 +82,7 @@ class Media extends AbstractEntity implements MediaInterface
     {
         $this->path = $path;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -90,7 +90,7 @@ class Media extends AbstractEntity implements MediaInterface
     {
         return $this->mime;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -98,7 +98,7 @@ class Media extends AbstractEntity implements MediaInterface
     {
         $this->mime = $mime;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -106,7 +106,7 @@ class Media extends AbstractEntity implements MediaInterface
     {
         return $this->size;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -114,7 +114,7 @@ class Media extends AbstractEntity implements MediaInterface
     {
         $this->size = $size;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -122,7 +122,7 @@ class Media extends AbstractEntity implements MediaInterface
     {
         return sprintf('%s.%s', $this->id, $this->extension);
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -130,7 +130,7 @@ class Media extends AbstractEntity implements MediaInterface
     {
         return $this->extension;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -138,7 +138,7 @@ class Media extends AbstractEntity implements MediaInterface
     {
         $this->extension = $extension;
     }
-
+    
     public function preUpload()
     {
         if (null !== $this->getExtension()) {

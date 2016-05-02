@@ -1,7 +1,4 @@
 well_commerce_routing:
-    routers:
-        router.default:             100
-        routing.dynamic_router:     50
     configuration:
         routing:
             orm:
@@ -9,7 +6,12 @@ well_commerce_routing:
                 repository: WellCommerce\Bundle\RoutingBundle\Repository\RouteRepository
                 mapping: "@WellCommerceRoutingBundle/Resources/config/doctrine/Route.orm.yml"
                 entity: WellCommerce\Bundle\RoutingBundle\Entity\Route
+    routers:
+        router.default:             100
+        routing.dynamic_router:     50
 
+parameters:
+    routing_discriminator_map: ~
 
 fos_js_routing:
     router: router.default

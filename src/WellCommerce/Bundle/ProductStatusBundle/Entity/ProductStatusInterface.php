@@ -16,26 +16,16 @@ use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 
 /**
  * Interface ProductStatusInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ProductStatusInterface extends TimestampableInterface, TranslatableInterface, BlameableInterface
+interface ProductStatusInterface extends EntityInterface, TimestampableInterface, TranslatableInterface, BlameableInterface
 {
-    /**
-     * @return int
-     */
-    public function getId();
+    public function getProducts() : Collection;
 
-    /**
-     * @return Collection
-     */
-    public function getProducts();
-
-    /**
-     * @param Collection $collection
-     */
     public function setProducts(Collection $collection);
 }

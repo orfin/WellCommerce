@@ -19,58 +19,58 @@ class OrderProduct extends AbstractEntity implements OrderProductInterface
     use ProductAwareTrait;
     use VariantAwareTrait;
     use OrderAwareTrait;
-
+    
     protected $quantity;
     protected $buyPrice;
     protected $sellPrice;
     protected $weight;
     protected $options;
-
+    
     public function getQuantity() : int
     {
         return $this->quantity;
     }
-
+    
     public function setQuantity(int $quantity)
     {
         $this->quantity = $quantity;
     }
-
+    
     public function increaseQuantity(int $increase)
     {
         $this->quantity += $increase;
     }
-
+    
     public function decreaseQuantity(int $decrease)
     {
         $this->quantity -= $decrease;
     }
-
+    
     public function getSellPrice() : PriceInterface
     {
         return $this->sellPrice;
     }
-
+    
     public function setSellPrice(PriceInterface $sellPrice)
     {
         $this->sellPrice = $sellPrice;
     }
-
+    
     public function getBuyPrice() : PriceInterface
     {
         return $this->buyPrice;
     }
-
+    
     public function setBuyPrice(PriceInterface $buyPrice)
     {
         $this->buyPrice = $buyPrice;
     }
-
+    
     public function getWeight() : float
     {
         return $this->weight;
     }
-
+    
     public function setWeight(float $weight)
     {
         $this->weight = $weight;

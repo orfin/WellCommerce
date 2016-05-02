@@ -23,5 +23,5 @@ use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
  */
 interface UserRepositoryInterface extends RepositoryInterface, UserProviderInterface, UserLoaderInterface
 {
-
+    
 }

@@ -11,13 +11,13 @@
  */
 namespace WellCommerce\Bundle\AvailabilityBundle\Repository;
 
-use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
 
 /**
  * Class AvailabilityRepository
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AvailabilityRepository extends AbstractEntityRepository implements AvailabilityRepositoryInterface
+class AvailabilityRepository extends EntityRepository implements AvailabilityRepositoryInterface
 {
 }

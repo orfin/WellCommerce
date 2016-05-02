@@ -49,7 +49,7 @@ class MediaDataGrid extends AbstractDataGrid
                 'type' => Filter ::FILTER_BETWEEN,
             ]),
         ]));
-
+        
         $collection->add(new Column([
             'id'         => 'preview',
             'caption'    => $this->trans('common.label.preview'),
@@ -58,52 +58,52 @@ class MediaDataGrid extends AbstractDataGrid
                 'align' => Appearance::ALIGN_CENTER,
             ]),
         ]));
-
+        
         $collection->add(new Column([
             'id'      => 'name',
             'caption' => $this->trans('common.label.name'),
         ]));
-
+        
         $collection->add(new Column([
             'id'      => 'mime',
             'caption' => $this->trans('common.label.mime'),
         ]));
-
+        
         $collection->add(new Column([
             'id'      => 'extension',
             'caption' => $this->trans('common.label.extension'),
         ]));
-
+        
         $collection->add(new Column([
             'id'      => 'size',
             'caption' => $this->trans('common.label.size'),
         ]));
     }
-
+    
     /**
      * {@inheritdoc}
      */
     protected function configureOptions(OptionsInterface $options)
     {
         $eventHandlers = $options->getEventHandlers();
-
+        
         $eventHandlers->add(new LoadEventHandler([
             'function' => $this->getJavascriptFunctionName('load'),
             'route'    => $this->getActionUrl('grid'),
         ]));
-
+        
         $eventHandlers->add(new DeleteRowEventHandler([
             'function'   => $this->getJavascriptFunctionName('delete'),
             'row_action' => DataGridInterface::ACTION_DELETE,
             'route'      => $this->getActionUrl('delete'),
         ]));
-
+        
         $eventHandlers = $options->getEventHandlers();
-
+        
         $eventHandlers->add(new ProcessEventHandler([
             'function' => $this->getJavascriptFunctionName('process'),
         ]));
-
+        
         $eventHandlers->add(new LoadedEventHandler([
             'function' => $this->getJavascriptFunctionName('data_loaded'),
         ]));

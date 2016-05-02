@@ -20,17 +20,17 @@ namespace WellCommerce\Bundle\ClientBundle\Entity;
 trait ClientShippingAddressAwareTrait
 {
     protected $shippingAddress;
-
+    
     public function getShippingAddress() : ClientShippingAddressInterface
     {
         return $this->shippingAddress;
     }
-
+    
     public function setShippingAddress(ClientShippingAddressInterface $shippingAddress)
     {
         $this->shippingAddress = $shippingAddress;
     }
-
+    
     public function hasShippingAddress() : bool
     {
         return $this->shippingAddress instanceof ClientShippingAddressInterface;

@@ -17,13 +17,14 @@
             <argument type="service" id="client_group.repository"/>
         </service>
 
-        <service id="client_group.dataset.admin" class="WellCommerce\Bundle\ClientBundle\DataSet\Admin\ClientGroupDataSet" parent="core.dataset">
+        <service id="client_group.dataset.admin" class="WellCommerce\Bundle\ClientBundle\DataSet\Admin\ClientGroupDataSet">
             <argument type="service" id="client_group.dataset.query_builder.admin"/>
+            <tag name="dataset"/>
         </service>
 
-        <service id="client_group.datagrid" class="WellCommerce\Bundle\ClientBundle\DataGrid\ClientGroupDataGrid" parent="core.datagrid">
-            <argument key="identifier">client_group</argument>
+        <service id="client_group.datagrid" class="WellCommerce\Bundle\ClientBundle\DataGrid\ClientGroupDataGrid">
             <argument type="service" id="client_group.dataset.admin"/>
+            <tag name="datagrid" alias="client_group"/>
         </service>
 
         <service id="client_group.form_builder.admin" class="WellCommerce\Bundle\ClientBundle\Form\Admin\ClientGroupFormBuilder" parent="core.form_builder" />

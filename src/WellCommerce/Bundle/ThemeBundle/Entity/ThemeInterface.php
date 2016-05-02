@@ -28,27 +28,27 @@ interface ThemeInterface extends EntityInterface, TimestampableInterface, Blamea
      * @return string
      */
     public function getName() : string;
-
+    
     /**
      * @param string $name
      */
     public function setName(string $name);
-
+    
     /**
      * @return string
      */
     public function getFolder() : string;
-
+    
     /**
      * @param string $folder
      */
     public function setFolder(string $folder);
-
+    
     /**
      * @return Collection|ThemeCssInterface[]
      */
     public function getCss() : Collection;
-
+    
     /**
      * @param Collection $css
      */

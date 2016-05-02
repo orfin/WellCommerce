@@ -4,11 +4,6 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="layout_box.manager" class="WellCommerce\Bundle\LayoutBundle\Manager\LayoutBoxManager" parent="core.manager">
-            <argument type="service" id="layout_box.repository"/>
-            <argument type="service" id="layout_box.factory"/>
-        </service>
-
         <service id="layout_box.controller.admin" class="WellCommerce\Bundle\LayoutBundle\Controller\Admin\LayoutBoxController">
             <argument type="service" id="layout_box.manager"/>
             <argument type="service" id="layout_box.form_builder.admin"/>
@@ -22,19 +17,22 @@
             <argument type="service" id="layout_box.repository"/>
         </service>
 
-        <service id="layout_box.dataset.admin" class="WellCommerce\Bundle\LayoutBundle\DataSet\Admin\LayoutBoxDataSet" parent="core.dataset">
+        <service id="layout_box.dataset.admin" class="WellCommerce\Bundle\LayoutBundle\DataSet\Admin\LayoutBoxDataSet">
             <argument type="service" id="layout_box.dataset.query_builder"/>
+            <tag name="dataset"/>
         </service>
 
-        <service id="layout_box.datagrid" class="WellCommerce\Bundle\LayoutBundle\DataGrid\LayoutBoxDataGrid" parent="core.datagrid">
-            <argument key="identifier">layout_box</argument>
+        <service id="layout_box.datagrid" class="WellCommerce\Bundle\LayoutBundle\DataGrid\LayoutBoxDataGrid">
             <argument type="service" id="layout_box.dataset.admin"/>
+            <tag name="datagrid" alias="layout_box"/>
         </service>
 
         <service id="layout_box.form_builder.admin" class="WellCommerce\Bundle\LayoutBundle\Form\Admin\LayoutBoxFormBuilder" parent="core.form_builder" />
 
         <service id="layout_box.renderer" class="WellCommerce\Bundle\LayoutBundle\Renderer\LayoutBoxRenderer">
+            <argument type="service" id="layout_box.service_resolver" />
             <argument type="service" id="layout_box.manager" />
+            <argument type="service" id="router.helper" />
         </service>
 
         <service id="layout_box.subscriber" class="WellCommerce\Bundle\LayoutBundle\EventListener\LayoutBoxSubscriber">

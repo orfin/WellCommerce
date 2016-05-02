@@ -25,22 +25,22 @@ class OrderStatusHistory extends AbstractEntity implements OrderStatusHistoryInt
     use Timestampable;
     use Blameable;
     use OrderAwareTrait;
-
+    
     /**
      * @var OrderStatusInterface
      */
     protected $orderStatus;
-
+    
     /**
      * @var string
      */
     protected $comment;
-
+    
     /**
      * @var bool
      */
     protected $notify;
-
+    
     /**
      * {@inheritdoc}
      */
@@ -48,7 +48,7 @@ class OrderStatusHistory extends AbstractEntity implements OrderStatusHistoryInt
     {
         return $this->orderStatus;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -57,7 +57,7 @@ class OrderStatusHistory extends AbstractEntity implements OrderStatusHistoryInt
         $this->orderStatus = $orderStatus;
         $this->order->setCurrentStatus($orderStatus);
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -65,7 +65,7 @@ class OrderStatusHistory extends AbstractEntity implements OrderStatusHistoryInt
     {
         return $this->comment;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -73,7 +73,7 @@ class OrderStatusHistory extends AbstractEntity implements OrderStatusHistoryInt
     {
         $this->comment = $comment;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -81,7 +81,7 @@ class OrderStatusHistory extends AbstractEntity implements OrderStatusHistoryInt
     {
         return $this->notify;
     }
-
+    
     /**
      * {@inheritdoc}
      */

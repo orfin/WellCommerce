@@ -26,7 +26,7 @@ class PageRoute extends Route implements RouteInterface
      * @var PageInterface
      */
     protected $identifier;
-
+    
     public function getType() : string
     {
         return 'page';

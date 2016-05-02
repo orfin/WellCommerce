@@ -33,13 +33,13 @@ class EntityDenormalizer extends AbstractSerializer implements DenormalizerInter
         $serializationMetadata  = $this->getSerializationMetadata($resource);
         $serializedFields       = $serializationMetadata->getFields();
         $serializedAssociations = $serializationMetadata->getAssociations();
-
+        
         $this->updateEntityFields($data, $serializedFields, $resource);
         $this->updateEntityAssociations($data, $serializedAssociations, $resource);
-
+        
         return $resource;
     }
-
+    
     /**
      * Updates the resource fields with given data
      *
@@ -57,7 +57,7 @@ class EntityDenormalizer extends AbstractSerializer implements DenormalizerInter
             }
         }
     }
-
+    
     /**
      * Loop through all passed properties and update the associations
      *
@@ -68,14 +68,14 @@ class EntityDenormalizer extends AbstractSerializer implements DenormalizerInter
     protected function updateEntityAssociations(array $properties, AssociationMetadataCollection $collection, $resource)
     {
         $entityMetadata = $this->getEntityMetadata($resource);
-
+        
         foreach ($properties as $propertyName => $propertyValue) {
             if ($collection->has($propertyName)) {
                 $this->updateEntityAssociation($propertyName, $propertyValue, $resource, $entityMetadata);
             }
         }
     }
-
+    
     /**
      * Updates a single entity association
      *
@@ -94,7 +94,7 @@ class EntityDenormalizer extends AbstractSerializer implements DenormalizerInter
             }
         }
     }
-
+    
     /**
      * Returns the repository object for given class
      *
@@ -106,7 +106,7 @@ class EntityDenormalizer extends AbstractSerializer implements DenormalizerInter
     {
         return $this->doctrineHelper->getEntityManager()->getRepository($targetClass);
     }
-
+    
     /**
      * {@inheritdoc}
      */

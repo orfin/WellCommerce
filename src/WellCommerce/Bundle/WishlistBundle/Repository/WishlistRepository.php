@@ -14,14 +14,14 @@ namespace WellCommerce\Bundle\WishlistBundle\Repository;
 
 use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\QueryBuilder;
-use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
 
 /**
  * Class WishlistRepository
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class WishlistRepository extends AbstractEntityRepository implements WishlistRepositoryInterface
+class WishlistRepository extends EntityRepository implements WishlistRepositoryInterface
 {
     /**
      * {@inheritdoc}

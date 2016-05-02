@@ -7,11 +7,4 @@
         <import resource="admin/contact.xml"/>
         <import resource="front/contact.xml"/>
     </imports>
-
-    <services>
-        <service id="contact.manager" class="WellCommerce\Bundle\ContactBundle\Manager\ContactManager" parent="core.manager">
-            <argument type="service" id="contact.repository"/>
-            <argument type="service" id="contact.factory"/>
-        </service>
-    </services>
 </container>

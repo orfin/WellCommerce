@@ -27,12 +27,12 @@ class Tax extends AbstractEntity implements TaxInterface
     use Translatable;
     use Timestampable;
     use Blameable;
-
+    
     /**
      * @var float
      */
     protected $value;
-
+    
     /**
      * {@inheritdoc}
      */
@@ -40,7 +40,7 @@ class Tax extends AbstractEntity implements TaxInterface
     {
         return $this->value;
     }
-
+    
     /**
      * {@inheritdoc}
      */

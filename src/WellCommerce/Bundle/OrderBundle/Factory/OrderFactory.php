@@ -32,7 +32,7 @@ class OrderFactory extends AbstractEntityFactory
      * @var string
      */
     protected $supportsInterface = OrderInterface::class;
-
+    
     /**
      * @return OrderInterface
      */
@@ -53,7 +53,7 @@ class OrderFactory extends AbstractEntityFactory
         $order->setContactDetails($this->createContactDetails());
         $order->setBillingAddress($this->createBillingAddress());
         $order->setShippingAddress($this->createShippingAddress());
-
+        
         return $order;
     }
     
@@ -81,5 +81,5 @@ class OrderFactory extends AbstractEntityFactory
     {
         return $this->get('order_summary.factory')->create();
     }
-
+    
 }

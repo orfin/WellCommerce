@@ -26,17 +26,17 @@ class Role extends AbstractEntity implements RoleInterface
      * @var string
      */
     protected $name;
-
+    
     /**
      * @var string|null
      */
     protected $role;
-
+    
     /**
      * @var Collection
      */
     protected $users;
-
+    
     /**
      * {@inheritdoc}
      */
@@ -44,7 +44,7 @@ class Role extends AbstractEntity implements RoleInterface
     {
         return $this->role;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -52,7 +52,7 @@ class Role extends AbstractEntity implements RoleInterface
     {
         $this->role = $role;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -60,7 +60,7 @@ class Role extends AbstractEntity implements RoleInterface
     {
         return $this->name;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -68,7 +68,7 @@ class Role extends AbstractEntity implements RoleInterface
     {
         $this->name = $name;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -76,7 +76,7 @@ class Role extends AbstractEntity implements RoleInterface
     {
         $this->users = $users;
     }
-
+    
     /**
      * {@inheritdoc}
      */

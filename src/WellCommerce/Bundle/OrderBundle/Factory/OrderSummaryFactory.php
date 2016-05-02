@@ -23,7 +23,7 @@ use WellCommerce\Bundle\OrderBundle\Entity\OrderSummaryInterface;
 class OrderSummaryFactory extends AbstractEntityFactory
 {
     protected $supportsInterface = OrderSummaryInterface::class;
-
+    
     public function create() : OrderSummaryInterface
     {
         /** @var $summary OrderSummaryInterface */
@@ -31,7 +31,7 @@ class OrderSummaryFactory extends AbstractEntityFactory
         $summary->setGrossAmount(0);
         $summary->setNetAmount(0);
         $summary->setTaxAmount(0);
-
+        
         return $summary;
     }
 }

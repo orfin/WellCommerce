@@ -21,5 +21,4 @@ use WellCommerce\Bundle\CoreBundle\Manager\AbstractManager;
  */
 class LayeredNavigationManager extends AbstractManager
 {
-
 }

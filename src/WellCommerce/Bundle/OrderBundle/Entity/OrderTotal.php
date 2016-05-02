@@ -25,27 +25,27 @@ class OrderTotal implements OrderTotalInterface
      * @var float
      */
     protected $netAmount = 0;
-
+    
     /**
      * @var float
      */
     protected $grossAmount = 0;
-
+    
     /**
      * @var float
      */
     protected $taxAmount = 0;
-
+    
     /**
      * @var float
      */
     protected $taxRate;
-
+    
     /**
      * @var string
      */
     protected $currency;
-
+    
     /**
      * @return float
      */
@@ -53,7 +53,7 @@ class OrderTotal implements OrderTotalInterface
     {
         return $this->netAmount;
     }
-
+    
     /**
      * @param float $netAmount
      */
@@ -61,7 +61,7 @@ class OrderTotal implements OrderTotalInterface
     {
         $this->netAmount = $netAmount;
     }
-
+    
     /**
      * @return float
      */
@@ -69,7 +69,7 @@ class OrderTotal implements OrderTotalInterface
     {
         return $this->grossAmount;
     }
-
+    
     /**
      * @param float $grossAmount
      */
@@ -77,7 +77,7 @@ class OrderTotal implements OrderTotalInterface
     {
         $this->grossAmount = $grossAmount;
     }
-
+    
     /**
      * @return float|int
      */
@@ -85,7 +85,7 @@ class OrderTotal implements OrderTotalInterface
     {
         return $this->taxAmount;
     }
-
+    
     /**
      * @param float $taxAmount
      */
@@ -93,7 +93,7 @@ class OrderTotal implements OrderTotalInterface
     {
         $this->taxAmount = $taxAmount;
     }
-
+    
     /**
      * @return float
      */
@@ -101,7 +101,7 @@ class OrderTotal implements OrderTotalInterface
     {
         return (float)$this->taxRate;
     }
-
+    
     /**
      * @param float $taxRate
      */
@@ -109,7 +109,7 @@ class OrderTotal implements OrderTotalInterface
     {
         $this->taxRate = $taxRate;
     }
-
+    
     /**
      * @return string
      */
@@ -117,7 +117,7 @@ class OrderTotal implements OrderTotalInterface
     {
         return $this->currency;
     }
-
+    
     /**
      * @param string $currency
      */
@@ -125,7 +125,7 @@ class OrderTotal implements OrderTotalInterface
     {
         $this->currency = $currency;
     }
-
+    
     public function recalculate()
     {
         $this->netAmount = TaxHelper::calculateNetPrice($this->grossAmount, $this->taxRate);

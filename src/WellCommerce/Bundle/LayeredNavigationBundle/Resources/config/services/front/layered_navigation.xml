@@ -12,7 +12,7 @@
         </service>
 
         <service id="layered_navigation.controller.front" class="WellCommerce\Bundle\LayeredNavigationBundle\Controller\Front\LayeredNavigationController">
-            <argument type="service" id="layered_navigation.manager"/>
+            <argument type="service" id="product.manager"/>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>

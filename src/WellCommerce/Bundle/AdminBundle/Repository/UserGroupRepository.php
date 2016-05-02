@@ -11,13 +11,13 @@
  */
 namespace WellCommerce\Bundle\AdminBundle\Repository;
 
-use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
 
 /**
  * Class UserGroupRepository
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class UserGroupRepository extends AbstractEntityRepository implements UserGroupRepositoryInterface
+class UserGroupRepository extends EntityRepository implements UserGroupRepositoryInterface
 {
 }

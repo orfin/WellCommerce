@@ -15,14 +15,14 @@ use Doctrine\ORM\NoResultException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
-use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
 
 /**
  * Class UserRepository
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class UserRepository extends AbstractEntityRepository implements UserRepositoryInterface
+class UserRepository extends EntityRepository implements UserRepositoryInterface
 {
     public function refreshUser(UserInterface $user)
     {
@@ -30,15 +30,15 @@ class UserRepository extends AbstractEntityRepository implements UserRepositoryI
         if (!$this->supportsClass($class)) {
             throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', $class));
         }
-
+        
         return $this->loadUserByUsername($user->getUsername());
     }
-
+    
     public function supportsClass($class)
     {
         return $this->getEntityName() === $class || is_subclass_of($class, $this->getEntityName());
     }
-
+    
     public function loadUserByUsername($username)
     {
         $queryBuilder = $this->createQueryBuilder('u');
@@ -47,15 +47,15 @@ class UserRepository extends AbstractEntityRepository implements UserRepositoryI
         $queryBuilder->where('u.username = :username OR u.email = :email');
         $queryBuilder->setParameter('username', $username);
         $queryBuilder->setParameter('email', $username);
-
+        
         try {
             $user = $queryBuilder->getQuery()->getSingleResult();
         } catch (NoResultException $e) {
             $msg = sprintf('Unable to find an active admin identified by "%s".', $username);
-
+            
             throw new UsernameNotFoundException($msg);
         }
-
+        
         return $user;
     }
 }

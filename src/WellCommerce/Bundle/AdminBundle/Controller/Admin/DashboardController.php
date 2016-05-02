@@ -32,11 +32,10 @@ class DashboardController extends AbstractController
         $salesSummary = $this->getSalesSummary();
 
         return $this->displayTemplate('index', [
-                'salesChart'   => $this->getSalesChart(),
-                'salesSummary' => $salesSummary->getSummary(),
-                'currency'     => $this->getRequestHelper()->getCurrentCurrency()
-            ]
-        );
+            'salesChart'   => $this->getSalesChart(),
+            'salesSummary' => $salesSummary->getSummary(),
+            'currency'     => $this->getRequestHelper()->getCurrentCurrency()
+        ]);
     }
 
     /**

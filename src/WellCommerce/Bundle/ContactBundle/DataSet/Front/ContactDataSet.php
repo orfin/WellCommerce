@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\ContactBundle\DataSet\Front;
 
-use WellCommerce\Bundle\AppBundle\DataSet\Admin\ContactDataSet as BaseDataSet;
+use WellCommerce\Bundle\ContactBundle\DataSet\Admin\ContactDataSet as BaseDataSet;
 
 /**
  * Class ContactDataSet
@@ -21,5 +21,4 @@ use WellCommerce\Bundle\AppBundle\DataSet\Admin\ContactDataSet as BaseDataSet;
  */
 class ContactDataSet extends BaseDataSet
 {
-
 }

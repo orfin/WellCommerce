@@ -33,10 +33,10 @@ class RequestHandlerCollection extends ArrayCollection
         if ($this->has($requestHandler->getResourceType())) {
             throw new NonUniqueRequestHandlerException($requestHandler->getResourceType());
         }
-
+        
         $this->items[$requestHandler->getResourceType()] = $requestHandler;
     }
-
+    
     /**
      * Returns the request handler for given resource type
      *
@@ -49,10 +49,10 @@ class RequestHandlerCollection extends ArrayCollection
         if (false === $this->has($resourceType)) {
             throw new RequestHandlerNotFoundException($resourceType, $this->keys());
         }
-
+        
         return $this->items[$resourceType];
     }
-
+    
     /**
      * @return RequestHandlerInterface[]
      */

@@ -12,10 +12,10 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Manager;
 
+use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
 use WellCommerce\Bundle\OrderBundle\Entity\CartInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\CartProductInterface;
 use WellCommerce\Bundle\OrderBundle\Exception\DeleteCartItemException;
-use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\VariantInterface;
 
@@ -37,21 +37,21 @@ class CartProductManager extends AbstractFrontManager implements CartProductMana
         $cartProduct->setVariant($variant);
         $cartProduct->setOptions($this->prepareVariantOptions($variant));
         $cartProduct->setQuantity($quantity);
-
+        
         $this->eventDispatcher->dispatchOnPostInitResource($cartProduct);
-
+        
         return $cartProduct;
     }
-
+    
     protected function prepareVariantOptions(VariantInterface $variant = null) : array
     {
         if (null === $variant) {
             return [];
         }
-
+        
         return $this->get('variant.helper')->getVariantOptions($variant);
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -63,14 +63,14 @@ class CartProductManager extends AbstractFrontManager implements CartProductMana
             'variant' => $variant
         ]);
     }
-
+    
     /**
      * {@inheritdoc}
      */
     public function addProductToCart(CartInterface $cart, ProductInterface $product, VariantInterface $variant = null, $quantity = 1)
     {
         $cartProduct = $this->findProductInCart($cart, $product, $variant);
-
+        
         if (null === $cartProduct) {
             $cartProduct = $this->initCartProduct($cart, $product, $variant, $quantity);
             $cart->addProduct($cartProduct);
@@ -78,7 +78,7 @@ class CartProductManager extends AbstractFrontManager implements CartProductMana
             $cartProduct->increaseQuantity($quantity);
         }
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -90,14 +90,14 @@ class CartProductManager extends AbstractFrontManager implements CartProductMana
         }
         $this->removeResource($resource);
     }
-
+    
     /**
      * {@inheritdoc}
      */
     public function changeCartProductQuantity(CartInterface $cart, CartProductInterface $cartProduct, $qty)
     {
         $qty = (int)$qty;
-
+        
         if ($qty < 1) {
             $this->deleteCartProductFromCart($cartProduct, $cart);
         } else {
@@ -106,7 +106,7 @@ class CartProductManager extends AbstractFrontManager implements CartProductMana
             $this->updateResource($resource);
         }
     }
-
+    
     /**
      * Returns an item from cart
      *

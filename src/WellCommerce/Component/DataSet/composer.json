@@ -1,40 +1,46 @@
 {
-    "name": "wellcommerce/dataset",
-    "license": "MIT",
-    "minimum-stability": "dev",
-    "description": "WellCommerce DataSet",
-    "keywords": ["wellcommerce", "dataset", "component"],
-    "authors": [
-        {
-            "name": "Adam Piotrowski",
-            "email": "adam@wellcommerce.org"
-        },
-        {
-            "name": "WellCommerce Developers",
-            "email": "developers@wellcommerce.org"
-        }
-    ],
-    "support": {
-        "email": "support@wellcommerce.org",
-        "issues": "https://github.com/WellCommerce/DataSet/issues",
-        "source": "https://github.com/WellCommerce/DataSet"
+  "name": "wellcommerce/dataset",
+  "license": "MIT",
+  "minimum-stability": "dev",
+  "description": "WellCommerce DataSet",
+  "keywords": [
+    "wellcommerce",
+    "dataset",
+    "component"
+  ],
+  "authors": [
+    {
+      "name": "Adam Piotrowski",
+      "email": "adam@wellcommerce.org"
     },
-    "autoload": {
-        "psr-4": { "WellCommerce\\Component\\DataSet\\": "" }
-    },
-    "require": {
-        "php": "^7.0",
-        "doctrine/orm": "2.5.2",
-        "symfony/options-resolver": "^3.0",
-        "symfony/property-access": "^3.0",
-        "wellcommerce/collections": "^0.7@dev"
-    },
-    "require-dev": {
-        "phpunit/phpunit":  "^5.0@dev"
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "0.7.x-dev"
-        }
+    {
+      "name": "WellCommerce Developers",
+      "email": "developers@wellcommerce.org"
     }
+  ],
+  "support": {
+    "email": "support@wellcommerce.org",
+    "issues": "https://github.com/WellCommerce/DataSet/issues",
+    "source": "https://github.com/WellCommerce/DataSet"
+  },
+  "autoload": {
+    "psr-4": {
+      "WellCommerce\\Component\\DataSet\\": ""
+    }
+  },
+  "require": {
+    "php": "^7.0",
+    "doctrine/orm": "2.5.2",
+    "symfony/options-resolver": "^3.0",
+    "symfony/property-access": "^3.0",
+    "wellcommerce/collections": "^0.7@dev"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^5.0@dev"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "0.7.x-dev"
+    }
+  }
 }

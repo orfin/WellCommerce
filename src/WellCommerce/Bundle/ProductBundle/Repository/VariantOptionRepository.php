@@ -11,13 +11,13 @@
  */
 namespace WellCommerce\Bundle\ProductBundle\Repository;
 
-use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
 
 /**
  * Class VariantRepository
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class VariantOptionRepository extends AbstractEntityRepository implements VariantOptionRepositoryInterface
+class VariantOptionRepository extends EntityRepository implements VariantOptionRepositoryInterface
 {
 }

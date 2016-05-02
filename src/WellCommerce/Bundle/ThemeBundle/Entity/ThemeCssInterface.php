@@ -26,27 +26,27 @@ interface ThemeCssInterface extends EntityInterface, TimestampableInterface, The
      * @return string
      */
     public function getAttribute() : string;
-
+    
     /**
      * @param string $attribute
      */
     public function setAttribute(string $attribute);
-
+    
     /**
      * @return string
      */
     public function getClass() : string;
-
+    
     /**
      * @param string $class
      */
     public function setClass(string $class);
-
+    
     /**
      * @return string
      */
     public function getSelector() : string;
-
+    
     /**
      * @param string $selector
      */

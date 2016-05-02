@@ -30,7 +30,7 @@ class ApiController extends AbstractController
      * @var RequestHandlerCollection
      */
     protected $requestHandlerCollection;
-
+    
     /**
      * ApiController constructor.
      *
@@ -40,12 +40,12 @@ class ApiController extends AbstractController
     {
         $this->requestHandlerCollection = $requestHandlerCollection;
     }
-
+    
     public function indexAction() : Response
     {
         return new Response('documentation');
     }
-
+    
     public function createResourceAction(Request $request, string $resourceType) : Response
     {
         try {
@@ -53,10 +53,10 @@ class ApiController extends AbstractController
         } catch (\Exception $e) {
             $response = $this->jsonErrorResponse($e);
         }
-
+        
         return $response;
     }
-
+    
     public function updateResourceAction(Request $request, string $resourceType, int $identifier) : Response
     {
         try {
@@ -64,10 +64,10 @@ class ApiController extends AbstractController
         } catch (\Exception $e) {
             $response = $this->jsonErrorResponse($e);
         }
-
+        
         return $response;
     }
-
+    
     public function deleteResourceAction(Request $request, string $resourceType, int $identifier) : Response
     {
         try {
@@ -75,10 +75,10 @@ class ApiController extends AbstractController
         } catch (\Exception $e) {
             $response = $this->jsonErrorResponse($e);
         }
-
+        
         return $response;
     }
-
+    
     public function getResourceAction(Request $request, string $resourceType, int $identifier) : Response
     {
         try {
@@ -86,10 +86,10 @@ class ApiController extends AbstractController
         } catch (\Exception $e) {
             $response = $this->jsonErrorResponse($e);
         }
-
+        
         return $response;
     }
-
+    
     public function listResourceAction(Request $request, string $resourceType) : Response
     {
         try {
@@ -97,10 +97,10 @@ class ApiController extends AbstractController
         } catch (\Exception $e) {
             $response = $this->jsonErrorResponse($e);
         }
-
+        
         return $response;
     }
-
+    
     protected function jsonErrorResponse(\Exception $e) : JsonResponse
     {
         return new JsonResponse(
@@ -108,7 +108,7 @@ class ApiController extends AbstractController
             404
         );
     }
-
+    
     protected function getRequestHandler(string $resourceType) : RequestHandlerInterface
     {
         return $this->requestHandlerCollection->get($resourceType);

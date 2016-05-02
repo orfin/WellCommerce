@@ -35,31 +35,31 @@ class EntityNormalizer extends AbstractSerializer implements NormalizerInterface
         $serializationMetadata            = $this->getSerializationMetadata($object);
         $serializedFieldsCollection       = $serializationMetadata->getFields();
         $serializedAssociationsCollection = $serializationMetadata->getAssociations();
-
+        
         $this->normalizeFields(
             $this->getEntityFields($entityMetadata),
             $serializedFieldsCollection,
             $object,
             $data
         );
-
+        
         $this->normalizeEmbeddables(
             $this->getEntityEmbeddables($entityMetadata),
             $serializedFieldsCollection,
             $object,
             $data
         );
-
+        
         $this->normalizeAssociations(
             $this->getEntityAssociations($entityMetadata),
             $serializedAssociationsCollection,
             $object,
             $data
         );
-
+        
         return $data;
     }
-
+    
     /**
      * Normalizes the entity's fields
      *
@@ -77,7 +77,7 @@ class EntityNormalizer extends AbstractSerializer implements NormalizerInterface
             }
         }
     }
-
+    
     /**
      * Normalizes the entity's embeddables
      *
@@ -98,7 +98,7 @@ class EntityNormalizer extends AbstractSerializer implements NormalizerInterface
             }
         }
     }
-
+    
     /**
      * Normalizes the entity's associations
      *
@@ -119,7 +119,7 @@ class EntityNormalizer extends AbstractSerializer implements NormalizerInterface
             }
         }
     }
-
+    
     /**
      * Checks whether the field is serializable
      *
@@ -132,13 +132,13 @@ class EntityNormalizer extends AbstractSerializer implements NormalizerInterface
     {
         if ($collection->has($fieldName)) {
             $field = $collection->get($fieldName);
-
+            
             return ($field->hasGroup($this->context['group']) || $field->hasDefaultGroup());
         }
-
+        
         return false;
     }
-
+    
     /**
      * Checks whether the embeddable field is serializable
      *
@@ -151,13 +151,13 @@ class EntityNormalizer extends AbstractSerializer implements NormalizerInterface
     {
         if ($collection->has($embeddableName)) {
             $embeddable = $collection->get($embeddableName);
-
+            
             return ($embeddable->hasGroup($this->context['group']) || $embeddable->hasDefaultGroup());
         }
-
+        
         return false;
     }
-
+    
     /**
      * Checks whether the association is serializable
      *
@@ -170,13 +170,13 @@ class EntityNormalizer extends AbstractSerializer implements NormalizerInterface
     {
         if ($collection->has($associationName)) {
             $association = $collection->get($associationName);
-
+            
             return ($association->hasGroup($this->context['group']) || $association->hasDefaultGroup());
         }
-
+        
         return false;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -185,7 +185,7 @@ class EntityNormalizer extends AbstractSerializer implements NormalizerInterface
         if (!is_object($data)) {
             return false;
         }
-
+        
         return $this->doctrineHelper->hasClassMetadataForEntity($data);
     }
 }

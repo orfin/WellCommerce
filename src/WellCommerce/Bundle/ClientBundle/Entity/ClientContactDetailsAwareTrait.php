@@ -20,17 +20,17 @@ namespace WellCommerce\Bundle\ClientBundle\Entity;
 trait ClientContactDetailsAwareTrait
 {
     protected $contactDetails;
-
+    
     public function getContactDetails() : ClientContactDetailsInterface
     {
         return $this->contactDetails;
     }
-
+    
     public function setContactDetails(ClientContactDetailsInterface $contactDetails)
     {
         $this->contactDetails = $contactDetails;
     }
-
+    
     public function hasContactDetails() : bool
     {
         return $this->contactDetails instanceof ClientContactDetailsInterface;

@@ -16,7 +16,6 @@ use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
 use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactoryInterface;
 use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
-use WellCommerce\Component\Form\Elements\FormInterface;
 
 /**
  * Class AbstractManager
@@ -29,12 +28,12 @@ abstract class AbstractManager extends AbstractContainerAware implements Manager
      * @var RepositoryInterface
      */
     protected $repository;
-
+    
     /**
      * @var EntityFactoryInterface
      */
     protected $factory;
-
+    
     /**
      * AbstractManager constructor.
      *
@@ -46,46 +45,34 @@ abstract class AbstractManager extends AbstractContainerAware implements Manager
         $this->repository = $repository;
         $this->factory    = $factory;
     }
-
+    
     public function getRepository() : RepositoryInterface
     {
         return $this->repository;
     }
-
+    
     public function getFactory() : EntityFactoryInterface
     {
         return $this->factory;
     }
-
-    public function getForm($resource, array $config = []) : FormInterface
-    {
-        $builder       = $this->getFormBuilder();
-        $defaultConfig = [
-            'name'              => $this->repository->getAlias(),
-            'validation_groups' => ['Default']
-        ];
-        $config        = array_merge($defaultConfig, $config);
-
-        return $builder->createForm($config, $resource);
-    }
-
+    
     public function initResource() : EntityInterface
     {
         return $this->factory->create();
     }
-
+    
     public function createResource(EntityInterface $resource)
     {
         $em = $this->getEntityManager();
         $em->persist($resource);
         $em->flush();
     }
-
+    
     public function updateResource(EntityInterface $resource)
     {
         $this->getEntityManager()->flush();
     }
-
+    
     public function removeResource(EntityInterface $resource)
     {
         $em = $this->getEntityManager();

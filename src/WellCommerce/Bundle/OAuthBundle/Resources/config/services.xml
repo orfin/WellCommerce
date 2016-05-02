@@ -12,7 +12,7 @@
         </service>
 
         <service id="oauth.authentificator.facebook" class="WellCommerce\Bundle\OAuthBundle\Security\FacebookAuthenticator">
-            <argument type="service" id="client.manager.front"/>
+            <argument type="service" id="client.manager"/>
             <argument type="service" id="router.helper"/>
             <argument key="appId">%facebook_app_id%</argument>
             <argument key="appSecret">%facebook_app_secret%</argument>

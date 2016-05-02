@@ -27,7 +27,7 @@ class UserGroupFactory extends AbstractEntityFactory
      * @var string
      */
     protected $supportsInterface = UserGroupInterface::class;
-
+    
     /**
      * @return UserGroupInterface
      */
@@ -37,7 +37,7 @@ class UserGroupFactory extends AbstractEntityFactory
         $group = $this->init();
         $group->setName('');
         $group->setPermissions(new ArrayCollection());
-
+        
         return $group;
     }
 }

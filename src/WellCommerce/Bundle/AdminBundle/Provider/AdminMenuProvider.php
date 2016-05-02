@@ -27,17 +27,17 @@ use WellCommerce\Bundle\AdminBundle\Repository\AdminMenuRepositoryInterface;
 class AdminMenuProvider
 {
     const CACHE_FILENAME = 'admin_menu.php';
-
+    
     /**
      * @var KernelInterface
      */
     protected $kernel;
-
+    
     /**
      * @var AdminMenuRepositoryInterface
      */
     protected $adminMenuRepository;
-
+    
     /**
      * AdminMenuProvider constructor.
      *
@@ -49,7 +49,7 @@ class AdminMenuProvider
         $this->kernel              = $kernel;
         $this->adminMenuRepository = $repository;
     }
-
+    
     public function getMenu()
     {
         if (is_file($cache = $this->kernel->getCacheDir() . '/' . self::CACHE_FILENAME)) {
@@ -58,22 +58,22 @@ class AdminMenuProvider
             $menu = $this->generateMenu();
             $this->writeCache($menu);
         }
-
+        
         return $menu;
     }
-
+    
     protected function generateMenu()
     {
         $criteria = new Criteria();
         $criteria->orderBy(['hierarchy' => 'asc']);
-
+        
         $collection = $this->adminMenuRepository->matching($criteria);
         $elements   = $this->filterElements($collection, null);
         $tree       = $this->generateTree($collection, $elements);
-
+        
         return $tree;
     }
-
+    
     /**
      * Generates a tree for given children elements
      *
@@ -92,10 +92,10 @@ class AdminMenuProvider
                 'children'  => $this->generateTree($collection, $this->filterElements($collection, $menuItem))
             ];
         });
-
+        
         return $tree;
     }
-
+    
     protected function writeCache(array $menu)
     {
         $file    = $this->kernel->getCacheDir() . '/' . self::CACHE_FILENAME;
@@ -103,7 +103,7 @@ class AdminMenuProvider
         $fs      = new Filesystem();
         $fs->dumpFile($file, $content);
     }
-
+    
     /**
      * Filters the collection and returns only children elements for given parent element
      *
@@ -117,7 +117,7 @@ class AdminMenuProvider
         $children = $collection->filter(function (AdminMenuInterface $menuItem) use ($parent) {
             return $menuItem->getParent() === $parent;
         });
-
+        
         return $children;
     }
 }

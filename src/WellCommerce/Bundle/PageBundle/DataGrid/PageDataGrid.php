@@ -44,17 +44,17 @@ class PageDataGrid extends AbstractDataGrid
                 'type' => Filter::FILTER_BETWEEN,
             ]),
         ]));
-
+        
         $collection->add(new Column([
             'id'      => 'name',
             'caption' => $this->trans('common.label.name'),
         ]));
-
+        
         $collection->add(new Column([
             'id'      => 'section',
             'caption' => $this->trans('page.label.section'),
         ]));
-
+        
         $collection->add(new Column([
             'id'         => 'hierarchy',
             'caption'    => $this->trans('common.label.hierarchy'),
@@ -63,7 +63,7 @@ class PageDataGrid extends AbstractDataGrid
             ]),
             'editable'   => true,
         ]));
-
+        
         $collection->add(new Column([
             'id'         => 'publish',
             'caption'    => $this->trans('common.label.publish'),

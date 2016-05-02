@@ -9,19 +9,13 @@
     </parameters>
 
     <services>
-
-        <service id="core.dataset.manager" class="WellCommerce\Component\DataSet\Manager\DataSetManager">
+        <service id="dataset.manager" class="WellCommerce\Component\DataSet\Manager\DataSetManager">
             <argument type="service" id="dataset.context.factory"/>
             <argument type="service" id="dataset.request.factory"/>
             <argument type="service" id="dataset.transformer.factory"/>
         </service>
 
-        <service id="core.dataset" abstract="true" public="false">
-            <argument type="service" id="core.dataset.manager"/>
-            <configurator service="core.dataset.configurator" method="configure"/>
-        </service>
-
-        <service id="core.dataset.configurator" class="WellCommerce\Component\DataSet\Configurator\DataSetConfigurator"/>
+        <service id="dataset.configurator" class="WellCommerce\Component\DataSet\Configurator\DataSetConfigurator"/>
 
         <service id="dataset.paginator" class="WellCommerce\Component\DataSet\Paginator\DataSetPaginator"/>
 

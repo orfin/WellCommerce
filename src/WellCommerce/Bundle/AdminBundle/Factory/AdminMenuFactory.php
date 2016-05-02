@@ -27,7 +27,7 @@ class AdminMenuFactory extends AbstractEntityFactory
      * @var string
      */
     protected $supportsInterface = AdminMenuInterface::class;
-
+    
     /**
      * @return AdminMenuInterface
      */
@@ -37,7 +37,7 @@ class AdminMenuFactory extends AbstractEntityFactory
         $adminMenu->setParent(null);
         $adminMenu->setCssClass('');
         $adminMenu->setChildren(new ArrayCollection());
-
+        
         return $adminMenu;
     }
 }

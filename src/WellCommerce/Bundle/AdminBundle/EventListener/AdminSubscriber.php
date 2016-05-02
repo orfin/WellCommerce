@@ -31,7 +31,7 @@ class AdminSubscriber extends AbstractEventSubscriber
             'user.pre_create'        => ['onUserPreCreate', 0],
         ];
     }
-
+    
     public function onKernelController(FilterControllerEvent $event)
     {
         $user     = $this->getUser();
@@ -47,7 +47,7 @@ class AdminSubscriber extends AbstractEventSubscriber
             }
         }
     }
-
+    
     public function onUserPreCreate(ResourceEvent $resourceEvent)
     {
         $password = $this->getSecurityHelper()->generateRandomPassword();
@@ -56,7 +56,7 @@ class AdminSubscriber extends AbstractEventSubscriber
         if ($user instanceof UserInterface) {
             $user->addRole($role);
             $user->setPassword($password);
-
+            
             $this->getMailerHelper()->sendEmail([
                 'recipient'     => $user->getEmail(),
                 'subject'       => $this->getTranslatorHelper()->trans('user.email.title.register'),

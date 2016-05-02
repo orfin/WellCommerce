@@ -19,5 +19,5 @@ namespace WellCommerce\Bundle\ApiBundle\Metadata;
  */
 class AssociationMetadata extends FieldMetadata implements AssociationMetadataInterface
 {
-
+    
 }

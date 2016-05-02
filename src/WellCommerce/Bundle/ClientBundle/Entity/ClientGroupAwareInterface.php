@@ -23,7 +23,7 @@ interface ClientGroupAwareInterface
      * @param ClientGroupInterface $clientGroup
      */
     public function setClientGroup(ClientGroupInterface $clientGroup);
-
+    
     /**
      * @return ClientGroupInterface
      */

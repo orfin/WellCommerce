@@ -11,13 +11,13 @@
  */
 namespace WellCommerce\Bundle\TaxBundle\Repository;
 
-use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
 
 /**
  * Class TaxRepository
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class TaxRepository extends AbstractEntityRepository implements TaxRepositoryInterface
+class TaxRepository extends EntityRepository implements TaxRepositoryInterface
 {
 }

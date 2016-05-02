@@ -28,19 +28,19 @@ class UserManager extends AbstractManager
         $user = $this->repository->findOneBy([
             'username' => $username
         ]);
-
+        
         if (!$user instanceof UserInterface) {
             throw new ResetPasswordException($this->getTranslatorHelper()->trans('user.flash.error.wrong_username'));
         }
-
+        
         if (false === $user->getEnabled()) {
             throw new ResetPasswordException($this->getTranslatorHelper()->trans('user.flash.error.blocked_account'));
         }
-
+        
         $password = $this->getSecurityHelper()->generateRandomPassword();
         $user->setPassword($password);
         $this->updateResource($user);
-
+        
         $this->getMailerHelper()->sendEmail([
             'recipient'     => $user->getEmail(),
             'subject'       => $this->getTranslatorHelper()->trans('user.email.title.reset_password'),

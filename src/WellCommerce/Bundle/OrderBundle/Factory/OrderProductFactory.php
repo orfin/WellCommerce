@@ -23,7 +23,7 @@ use WellCommerce\Bundle\OrderBundle\Entity\OrderProductInterface;
 class OrderProductFactory extends AbstractEntityFactory
 {
     protected $supportsInterface = OrderProductInterface::class;
-
+    
     public function create() : OrderProductInterface
     {
         /** @var  $orderProduct OrderProductInterface */
@@ -34,7 +34,7 @@ class OrderProductFactory extends AbstractEntityFactory
         $orderProduct->setSellPrice($this->createPrice());
         $orderProduct->setCreatedAt(new \DateTime());
         $orderProduct->setUpdatedAt(new \DateTime());
-
+        
         return $orderProduct;
     }
 }

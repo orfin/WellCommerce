@@ -12,13 +12,13 @@
 
 namespace WellCommerce\Bundle\CompanyBundle\Repository;
 
-use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
 
 /**
  * Class CompanyRepository
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CompanyRepository extends AbstractEntityRepository implements CompanyRepositoryInterface
+class CompanyRepository extends EntityRepository implements CompanyRepositoryInterface
 {
 }

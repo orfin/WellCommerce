@@ -26,27 +26,27 @@ class NewsTranslation implements LocaleAwareInterface
 {
     use Translation;
     use Sluggable;
-
+    
     /**
      * @var string
      */
     protected $topic;
-
+    
     /**
      * @var string
      */
     protected $summary;
-
+    
     /**
      * @var string
      */
     protected $content;
-
+    
     /**
      * @var Meta
      */
     protected $meta;
-
+    
     /**
      * Constructor
      */
@@ -54,7 +54,7 @@ class NewsTranslation implements LocaleAwareInterface
     {
         $this->meta = new Meta();
     }
-
+    
     /**
      * @return string
      */
@@ -62,7 +62,7 @@ class NewsTranslation implements LocaleAwareInterface
     {
         return $this->content;
     }
-
+    
     /**
      * @param string $content
      */
@@ -70,7 +70,7 @@ class NewsTranslation implements LocaleAwareInterface
     {
         $this->content = $content;
     }
-
+    
     /**
      * @return string
      */
@@ -78,7 +78,7 @@ class NewsTranslation implements LocaleAwareInterface
     {
         return $this->summary;
     }
-
+    
     /**
      * @param string $summary
      */
@@ -86,7 +86,7 @@ class NewsTranslation implements LocaleAwareInterface
     {
         $this->summary = $summary;
     }
-
+    
     /**
      * @return string
      */
@@ -94,7 +94,7 @@ class NewsTranslation implements LocaleAwareInterface
     {
         return $this->topic;
     }
-
+    
     /**
      * @param string $topic
      */
@@ -102,7 +102,7 @@ class NewsTranslation implements LocaleAwareInterface
     {
         $this->topic = $topic;
     }
-
+    
     /**
      * @return Meta
      */
@@ -110,7 +110,7 @@ class NewsTranslation implements LocaleAwareInterface
     {
         return $this->meta;
     }
-
+    
     /**
      * @param Meta $meta
      */
@@ -118,7 +118,7 @@ class NewsTranslation implements LocaleAwareInterface
     {
         $this->meta = $meta;
     }
-
+    
     /**
      * @return array
      */
@@ -126,7 +126,7 @@ class NewsTranslation implements LocaleAwareInterface
     {
         return ['topic'];
     }
-
+    
     /**
      * {@inheritdoc}
      */

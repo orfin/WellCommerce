@@ -12,9 +12,7 @@
 
 namespace WellCommerce\Bundle\ProductBundle;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
-use WellCommerce\Bundle\ProductBundle\DependencyInjection\Compiler;
 
 /**
  * Class WellCommerceProductBundle
@@ -23,9 +21,4 @@ use WellCommerce\Bundle\ProductBundle\DependencyInjection\Compiler;
  */
 class WellCommerceProductBundle extends Bundle
 {
-    public function build(ContainerBuilder $container)
-    {
-        parent::build($container);
-        $container->addCompilerPass(new Compiler\ConfigureDynamicRoutingPass());
-    }
 }

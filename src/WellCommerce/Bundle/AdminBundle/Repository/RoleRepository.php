@@ -11,13 +11,13 @@
  */
 namespace WellCommerce\Bundle\AdminBundle\Repository;
 
-use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
 
 /**
  * Class RoleRepository
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class RoleRepository extends AbstractEntityRepository implements RoleRepositoryInterface
+class RoleRepository extends EntityRepository implements RoleRepositoryInterface
 {
 }

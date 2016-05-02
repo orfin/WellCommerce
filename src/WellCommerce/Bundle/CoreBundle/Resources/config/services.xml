@@ -11,12 +11,4 @@
         <import resource="services/datagrid.xml"/>
         <import resource="services/twig.xml"/>
     </imports>
-
-    <services>
-        <service id="core.manager" abstract="true" public="false">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-        </service>
-    </services>
 </container>

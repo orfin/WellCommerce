@@ -17,13 +17,14 @@
             <argument type="service" id="availability.repository"/>
         </service>
 
-        <service id="availability.dataset.admin" class="WellCommerce\Bundle\AvailabilityBundle\DataSet\Admin\AvailabilityDataSet" parent="core.dataset">
+        <service id="availability.dataset.admin" class="WellCommerce\Bundle\AvailabilityBundle\DataSet\Admin\AvailabilityDataSet">
             <argument type="service" id="availability.dataset.query_builder.admin"/>
+            <tag name="dataset"/>
         </service>
 
-        <service id="availability.datagrid" class="WellCommerce\Bundle\AvailabilityBundle\DataGrid\AvailabilityDataGrid" parent="core.datagrid">
-            <argument key="identifier">availability</argument>
+        <service id="availability.datagrid" class="WellCommerce\Bundle\AvailabilityBundle\DataGrid\AvailabilityDataGrid">
             <argument type="service" id="availability.dataset.admin"/>
+            <tag name="datagrid" alias="availability"/>
         </service>
 
         <service id="availability.form_builder.admin" class="WellCommerce\Bundle\AvailabilityBundle\Form\Admin\AvailabilityFormBuilder" parent="core.form_builder" />

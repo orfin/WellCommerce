@@ -23,7 +23,7 @@ use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 final class ClientContactDetailsFactory extends AbstractEntityFactory
 {
     protected $supportsInterface = ClientContactDetailsInterface::class;
-
+    
     public function create() : ClientContactDetailsInterface
     {
         /** @var ClientContactDetailsInterface $details */
@@ -33,7 +33,7 @@ final class ClientContactDetailsFactory extends AbstractEntityFactory
         $details->setEmail('');
         $details->setPhone('');
         $details->setSecondaryPhone('');
-
+        
         return $details;
     }
 }

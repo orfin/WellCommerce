@@ -15,8 +15,9 @@
             <argument type="service" id="currency.repository"/>
         </service>
 
-        <service id="currency.dataset.front" class="WellCommerce\Bundle\CurrencyBundle\DataSet\Front\CurrencyDataSet" parent="core.dataset">
+        <service id="currency.dataset.front" class="WellCommerce\Bundle\CurrencyBundle\DataSet\Front\CurrencyDataSet">
             <argument type="service" id="currency.dataset.query_builder.front"/>
+            <tag name="dataset"/>
         </service>
 
         <service id="twig.extension.currency" class="WellCommerce\Bundle\CurrencyBundle\Twig\Extension\CurrencyExtension">

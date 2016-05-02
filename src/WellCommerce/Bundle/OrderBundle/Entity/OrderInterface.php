@@ -44,74 +44,74 @@ interface OrderInterface extends
     ShippingMethodAwareInterface
 {
     public function isConfirmed() : bool;
-
+    
     public function setConfirmed(bool $confirmed);
-
+    
     public function getNumber() : string;
-
+    
     public function setNumber(string $number);
-
+    
     public function getCurrency() : string;
-
+    
     public function setCurrency(string $currency);
-
+    
     public function getCurrencyRate() : float;
-
+    
     public function setCurrencyRate(float $currencyRate);
-
+    
     public function getSessionId() : string;
-
+    
     public function setSessionId(string $sessionId);
-
+    
     public function addProduct(OrderProductInterface $orderProduct);
-
+    
     public function removeProduct(OrderProductInterface $orderProduct);
-
+    
     public function getProducts() : Collection;
-
+    
     public function setProducts(Collection $products);
-
+    
     public function getProductTotal() : OrderProductTotalInterface;
-
+    
     public function setProductTotal(OrderProductTotalInterface $productTotal);
-
+    
     public function addModifier(OrderModifierInterface $modifier);
-
+    
     public function hasModifier(string $name) : bool;
-
+    
     public function removeModifier(string $name);
-
+    
     public function getModifier(string $name) : OrderModifierInterface;
-
+    
     public function getModifiers() : Collection;
-
+    
     public function setModifiers(Collection $modifiers);
-
+    
     public function getSummary() : OrderSummaryInterface;
-
+    
     public function setSummary(OrderSummaryInterface $summary);
-
+    
     public function getCurrentStatus() : OrderStatusInterface;
-
+    
     public function setCurrentStatus(OrderStatusInterface $currentStatus);
-
+    
     public function setOrderStatusHistory(Collection $orderStatusHistory);
-
+    
     public function getOrderStatusHistory() : Collection;
-
+    
     public function addOrderStatusHistory(OrderStatusHistoryInterface $orderStatusHistory);
-
+    
     public function getComment() : string;
-
+    
     public function setComment(string $comment);
-
+    
     public function getPayments() : Collection;
-
+    
     public function setPayments(Collection $payments);
-
+    
     public function addPayment(PaymentInterface $payment);
-
+    
     public function acceptVisitor(OrderVisitorInterface $visitor);
-
+    
     public function isEmpty() : bool;
 }

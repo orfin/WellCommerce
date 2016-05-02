@@ -9,10 +9,6 @@
     </imports>
 
     <services>
-        <service id="shop.event_dispatcher" parent="core.event_dispatcher" public="false">
-            <argument type="service" id="event_dispatcher" />
-        </service>
-
         <service id="shop.subscriber" class="WellCommerce\Bundle\ShopBundle\EventListener\ShopSubscriber">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>

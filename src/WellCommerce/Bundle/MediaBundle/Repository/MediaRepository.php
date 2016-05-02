@@ -11,14 +11,14 @@
  */
 namespace WellCommerce\Bundle\MediaBundle\Repository;
 
-use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
 
 /**
  * Class MediaRepository
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class MediaRepository extends AbstractEntityRepository implements MediaRepositoryInterface
+class MediaRepository extends EntityRepository implements MediaRepositoryInterface
 {
-
+    
 }

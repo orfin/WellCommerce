@@ -23,7 +23,7 @@ trait UnitAwareTrait
      * @var UnitInterface
      */
     protected $unit;
-
+    
     /**
      * @return UnitInterface
      */
@@ -31,7 +31,7 @@ trait UnitAwareTrait
     {
         return $this->unit;
     }
-
+    
     /**
      * @param UnitInterface $unit
      */

@@ -1,39 +1,45 @@
 {
-    "name": "wellcommerce/media-bundle",
-    "type": "wellcommerce-bundle",
-    "license": "MIT",
-    "minimum-stability": "dev",
-    "description": "WellCommerce MediaBundle",
-    "keywords": ["wellcommerce","e-commerce","open-source"],
-    "authors": [
-        {
-            "name": "Adam Piotrowski",
-            "email": "adam@wellcommerce.org"
-        },
-        {
-            "name": "WellCommerce Developers",
-            "email": "developers@wellcommerce.org"
-        }
-    ],
-    "support": {
-        "email": "support@wellcommerce.org",
-        "issues": "https://github.com/WellCommerce/MediaBundle/issues",
-        "source": "https://github.com/WellCommerce/MediaBundle/"
+  "name": "wellcommerce/media-bundle",
+  "type": "wellcommerce-bundle",
+  "license": "MIT",
+  "minimum-stability": "dev",
+  "description": "WellCommerce MediaBundle",
+  "keywords": [
+    "wellcommerce",
+    "e-commerce",
+    "open-source"
+  ],
+  "authors": [
+    {
+      "name": "Adam Piotrowski",
+      "email": "adam@wellcommerce.org"
     },
-    "autoload": {
-        "psr-4": { "": "src/" }
-    },
-    "require": {
-        "php": "^7.0",
-        "wellcommerce/core-bundle": "^0.7@dev",
-        "liip/imagine-bundle": "^1.3"
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "0.7.x-dev"
-        },
-        "wellcommerce-bundle": {
-            "install-dir": "src/WellCommerce/Bundle/MediaBundle"
-        }
+    {
+      "name": "WellCommerce Developers",
+      "email": "developers@wellcommerce.org"
     }
+  ],
+  "support": {
+    "email": "support@wellcommerce.org",
+    "issues": "https://github.com/WellCommerce/MediaBundle/issues",
+    "source": "https://github.com/WellCommerce/MediaBundle/"
+  },
+  "autoload": {
+    "psr-4": {
+      "": "src/"
+    }
+  },
+  "require": {
+    "php": "^7.0",
+    "wellcommerce/core-bundle": "^0.7@dev",
+    "liip/imagine-bundle": "^1.3"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "0.7.x-dev"
+    },
+    "wellcommerce-bundle": {
+      "install-dir": "src/WellCommerce/Bundle/MediaBundle"
+    }
+  }
 }

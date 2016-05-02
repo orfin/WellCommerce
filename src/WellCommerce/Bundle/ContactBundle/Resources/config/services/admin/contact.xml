@@ -27,13 +27,14 @@
             <argument type="service" id="contact.repository"/>
         </service>
 
-        <service id="contact.dataset.admin" class="WellCommerce\Bundle\ContactBundle\DataSet\Admin\ContactDataSet" parent="core.dataset">
+        <service id="contact.dataset.admin" class="WellCommerce\Bundle\ContactBundle\DataSet\Admin\ContactDataSet">
             <argument type="service" id="contact.dataset.query_builder.admin"/>
+            <tag name="dataset"/>
         </service>
 
-        <service id="contact.datagrid" class="WellCommerce\Bundle\ContactBundle\DataGrid\ContactDataGrid" parent="core.datagrid">
-            <argument key="identifier">contact</argument>
+        <service id="contact.datagrid" class="WellCommerce\Bundle\ContactBundle\DataGrid\ContactDataGrid">
             <argument type="service" id="contact.dataset.admin"/>
+            <tag name="datagrid" alias="contact"/>
         </service>
 
         <service id="contact.form_builder.admin" class="WellCommerce\Bundle\ContactBundle\Form\Admin\ContactFormBuilder" parent="core.form_builder" />

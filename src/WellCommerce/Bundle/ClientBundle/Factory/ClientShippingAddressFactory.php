@@ -23,7 +23,7 @@ use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 final class ClientShippingAddressFactory extends AbstractEntityFactory
 {
     protected $supportsInterface = ClientShippingAddressInterface::class;
-
+    
     public function create() : ClientShippingAddressInterface
     {
         /** @var ClientShippingAddressInterface $address */
@@ -36,7 +36,7 @@ final class ClientShippingAddressFactory extends AbstractEntityFactory
         $address->setState('');
         $address->setCity('');
         $address->setCountry($this->getDefaultShop()->getDefaultCountry());
-
+        
         return $address;
     }
 }

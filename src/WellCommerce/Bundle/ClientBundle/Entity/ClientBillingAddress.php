@@ -22,58 +22,58 @@ use WellCommerce\Bundle\CoreBundle\Entity\AddressTrait;
 class ClientBillingAddress implements ClientBillingAddressInterface
 {
     use AddressTrait;
-
+    
     private $firstName;
     private $lastName;
     private $vatId;
     private $companyName;
     private $companyAddress;
-
+    
     public function getFirstName() : string
     {
         return $this->firstName;
     }
-
+    
     public function setFirstName(string $firstName)
     {
         $this->firstName = $firstName;
     }
-
+    
     public function getLastName() : string
     {
         return $this->lastName;
     }
-
+    
     public function setLastName(string $lastName)
     {
         $this->lastName = $lastName;
     }
-
+    
     public function getVatId() : string
     {
         return $this->vatId;
     }
-
+    
     public function setVatId(string $vatId)
     {
         $this->vatId = $vatId;
     }
-
+    
     public function getCompanyName() : string
     {
         return $this->companyName;
     }
-
+    
     public function setCompanyName(string $companyName)
     {
         $this->companyName = $companyName;
     }
-
+    
     public function isCompanyAddress() : bool
     {
         return $this->companyAddress;
     }
-
+    
     public function setCompanyAddress(bool $companyAddress)
     {
         $this->companyAddress = $companyAddress;

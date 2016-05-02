@@ -13,14 +13,14 @@
 namespace WellCommerce\Bundle\ClientBundle\Repository;
 
 use Doctrine\ORM\QueryBuilder;
-use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
 
 /**
  * Class ClientGroupRepository
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientGroupRepository extends AbstractEntityRepository implements ClientGroupRepositoryInterface
+class ClientGroupRepository extends EntityRepository implements ClientGroupRepositoryInterface
 {
     /**
      * {@inheritdoc}

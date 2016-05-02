@@ -17,13 +17,14 @@
             <argument type="service" id="locale.repository"/>
         </service>
 
-        <service id="locale.dataset.admin" class="WellCommerce\Bundle\LocaleBundle\DataSet\Admin\LocaleDataSet" parent="core.dataset">
+        <service id="locale.dataset.admin" class="WellCommerce\Bundle\LocaleBundle\DataSet\Admin\LocaleDataSet">
             <argument type="service" id="locale.dataset.query_builder.admin"/>
+            <tag name="dataset"/>
         </service>
 
-        <service id="locale.datagrid" class="WellCommerce\Bundle\LocaleBundle\DataGrid\LocaleDataGrid" parent="core.datagrid">
-            <argument key="identifier">locale</argument>
+        <service id="locale.datagrid" class="WellCommerce\Bundle\LocaleBundle\DataGrid\LocaleDataGrid">
             <argument type="service" id="locale.dataset.admin"/>
+            <tag name="datagrid" alias="locale"/>
         </service>
 
         <service id="locale.form_builder.admin" class="WellCommerce\Bundle\LocaleBundle\Form\Admin\LocaleFormBuilder" parent="core.form_builder" />

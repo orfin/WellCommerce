@@ -30,27 +30,27 @@ class News extends AbstractEntity implements NewsInterface
     use Timestampable;
     use Blameable;
     use MediaAwareTrait;
-
+    
     /**
      * @var bool
      */
     protected $publish;
-
+    
     /**
      * @var DateTime $startDate
      */
     protected $startDate;
-
+    
     /**
      * @var DateTime $endDate
      */
     protected $endDate;
-
+    
     /**
      * @var bool
      */
     protected $featured;
-
+    
     /**
      * {@inheritdoc}
      */
@@ -58,7 +58,7 @@ class News extends AbstractEntity implements NewsInterface
     {
         return $this->publish;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -66,7 +66,7 @@ class News extends AbstractEntity implements NewsInterface
     {
         $this->publish = $publish;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -74,7 +74,7 @@ class News extends AbstractEntity implements NewsInterface
     {
         return $this->startDate;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -82,7 +82,7 @@ class News extends AbstractEntity implements NewsInterface
     {
         $this->startDate = $startDate;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -90,7 +90,7 @@ class News extends AbstractEntity implements NewsInterface
     {
         return $this->endDate;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -98,7 +98,7 @@ class News extends AbstractEntity implements NewsInterface
     {
         $this->endDate = $endDate;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -106,7 +106,7 @@ class News extends AbstractEntity implements NewsInterface
     {
         return $this->featured;
     }
-
+    
     /**
      * {@inheritdoc}
      */

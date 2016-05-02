@@ -31,26 +31,26 @@ interface OrderProductInterface extends
     OrderAwareInterface
 {
     public function getQuantity() : int;
-
+    
     public function setQuantity(int $quantity);
-
+    
     public function increaseQuantity(int $increase);
-
+    
     public function decreaseQuantity(int $decrease);
-
+    
     public function getSellPrice() : PriceInterface;
-
+    
     public function setSellPrice(PriceInterface $sellPrice);
-
+    
     public function getBuyPrice() : PriceInterface;
-
+    
     public function setBuyPrice(PriceInterface $buyPrice);
-
+    
     public function getWeight() : float;
-
+    
     public function setWeight(float $weight);
-
+    
     public function getOptions() : array;
-
+    
     public function setOptions(array $options);
 }

@@ -186,7 +186,7 @@ abstract class AbstractFormBuilder extends AbstractContainerAware implements For
             'name'  => 'shops_data',
             'label' => $this->trans('common.fieldset.shops')
         ]));
-
+        
         $shopsData->addChild($this->getElement('multi_select', [
             'name'        => 'shops',
             'label'       => $this->trans('common.label.shops'),

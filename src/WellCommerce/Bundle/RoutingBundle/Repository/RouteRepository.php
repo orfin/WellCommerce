@@ -11,13 +11,13 @@
  */
 namespace WellCommerce\Bundle\RoutingBundle\Repository;
 
-use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
 
 /**
  * Class RouteRepository
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class RouteRepository extends AbstractEntityRepository implements RouteRepositoryInterface
+class RouteRepository extends EntityRepository implements RouteRepositoryInterface
 {
 }

@@ -5,7 +5,9 @@
 
     <services>
         <service id="review.controller.admin" class="WellCommerce\Bundle\ReviewBundle\Controller\Admin\ReviewController">
-            <argument type="service" id="review.manager.admin"/>
+            <argument type="service" id="review.manager"/>
+            <argument type="service" id="review.form_builder.admin"/>
+            <argument type="service" id="review.datagrid"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -15,13 +17,14 @@
             <argument type="service" id="review.repository"/>
         </service>
 
-        <service id="review.dataset.admin" class="WellCommerce\Bundle\ReviewBundle\DataSet\Admin\ReviewDataSet" parent="core.dataset">
+        <service id="review.dataset.admin" class="WellCommerce\Bundle\ReviewBundle\DataSet\Admin\ReviewDataSet">
             <argument type="service" id="review.dataset.query_builder.admin"/>
+            <tag name="dataset"/>
         </service>
 
-        <service id="review.datagrid" class="WellCommerce\Bundle\ReviewBundle\DataGrid\ReviewDataGrid" parent="core.datagrid">
-            <argument key="identifier">review</argument>
+        <service id="review.datagrid" class="WellCommerce\Bundle\ReviewBundle\DataGrid\ReviewDataGrid">
             <argument type="service" id="review.dataset.admin"/>
+            <tag name="datagrid" alias="review"/>
         </service>
 
         <service id="review.form_builder.admin" class="WellCommerce\Bundle\ReviewBundle\Form\Admin\ReviewFormBuilder" parent="core.form_builder" />

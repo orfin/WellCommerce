@@ -32,27 +32,27 @@ class Page extends AbstractEntity implements PageInterface
     use Blameable;
     use HierarchyAwareTrait;
     use ShopCollectionAwareTrait;
-
+    
     /**
      * @var bool
      */
     protected $publish;
-
+    
     /**
      * @var int
      */
     protected $redirectType;
-
+    
     /**
      * @var string
      */
     protected $section;
-
+    
     /**
      * @var string
      */
     protected $redirectUrl;
-
+    
     /**
      * @var string
      */
@@ -72,7 +72,7 @@ class Page extends AbstractEntity implements PageInterface
      * @var Collection
      */
     protected $children;
-
+    
     /**
      * {@inheritdoc}
      */
@@ -80,7 +80,7 @@ class Page extends AbstractEntity implements PageInterface
     {
         return $this->publish;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -88,7 +88,7 @@ class Page extends AbstractEntity implements PageInterface
     {
         $this->publish = $publish;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -96,7 +96,7 @@ class Page extends AbstractEntity implements PageInterface
     {
         return $this->parent;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -104,7 +104,7 @@ class Page extends AbstractEntity implements PageInterface
     {
         $this->parent = $parent;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -112,7 +112,7 @@ class Page extends AbstractEntity implements PageInterface
     {
         return $this->children;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -121,7 +121,7 @@ class Page extends AbstractEntity implements PageInterface
         $this->children[] = $child;
         $child->setParent($this);
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -129,7 +129,7 @@ class Page extends AbstractEntity implements PageInterface
     {
         return $this->redirectRoute;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -137,7 +137,7 @@ class Page extends AbstractEntity implements PageInterface
     {
         $this->redirectRoute = $redirectRoute;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -145,7 +145,7 @@ class Page extends AbstractEntity implements PageInterface
     {
         return $this->redirectUrl;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -153,7 +153,7 @@ class Page extends AbstractEntity implements PageInterface
     {
         $this->redirectUrl = $redirectUrl;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -161,7 +161,7 @@ class Page extends AbstractEntity implements PageInterface
     {
         return $this->clientGroups;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -169,7 +169,7 @@ class Page extends AbstractEntity implements PageInterface
     {
         $this->clientGroups = $clientGroups;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -189,7 +189,7 @@ class Page extends AbstractEntity implements PageInterface
                 break;
         }
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -197,7 +197,7 @@ class Page extends AbstractEntity implements PageInterface
     {
         return $this->redirectType;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -205,7 +205,7 @@ class Page extends AbstractEntity implements PageInterface
     {
         $this->redirectType = $redirectType;
     }
-
+    
     /**
      * @return string
      */
@@ -213,7 +213,7 @@ class Page extends AbstractEntity implements PageInterface
     {
         return $this->section;
     }
-
+    
     /**
      * @param string $section
      */

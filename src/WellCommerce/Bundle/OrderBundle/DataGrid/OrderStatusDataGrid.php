@@ -40,7 +40,7 @@ class OrderStatusDataGrid extends AbstractDataGrid
                 'type' => Filter::FILTER_BETWEEN,
             ]),
         ]));
-
+        
         $collection->add(new Column([
             'id'         => 'name',
             'caption'    => $this->trans('common.label.name'),
@@ -48,8 +48,8 @@ class OrderStatusDataGrid extends AbstractDataGrid
                 'width' => 340,
             ]),
         ]));
-
-
+        
+        
         $collection->add(new Column([
             'id'         => 'groupName',
             'caption'    => $this->trans('common.label.group'),
@@ -62,7 +62,7 @@ class OrderStatusDataGrid extends AbstractDataGrid
                 'align' => Appearance::ALIGN_CENTER
             ]),
         ]));
-
+        
         $collection->add(new Column([
             'id'         => 'createdAt',
             'caption'    => $this->trans('common.label.created_at'),
@@ -75,7 +75,7 @@ class OrderStatusDataGrid extends AbstractDataGrid
             ]),
         ]));
     }
-
+    
     /**
      * Returns order status groups to for filter
      *

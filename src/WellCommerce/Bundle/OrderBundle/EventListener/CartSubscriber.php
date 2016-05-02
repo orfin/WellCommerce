@@ -12,12 +12,12 @@
 namespace WellCommerce\Bundle\OrderBundle\EventListener;
 
 use Symfony\Component\HttpKernel\KernelEvents;
-use WellCommerce\Bundle\OrderBundle\Entity\CartInterface;
-use WellCommerce\Bundle\OrderBundle\Manager\Front\CartManagerInterface;
-use WellCommerce\Bundle\OrderBundle\Visitor\CartVisitorTraverser;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
 use WellCommerce\Bundle\DoctrineBundle\Event\ResourceEvent;
+use WellCommerce\Bundle\OrderBundle\Entity\CartInterface;
+use WellCommerce\Bundle\OrderBundle\Manager\Front\CartManagerInterface;
+use WellCommerce\Bundle\OrderBundle\Visitor\CartVisitorTraverser;
 use WellCommerce\Bundle\OrderBundle\Visitor\OrderVisitorTraverser;
 use WellCommerce\Component\Form\Event\FormEvent;
 

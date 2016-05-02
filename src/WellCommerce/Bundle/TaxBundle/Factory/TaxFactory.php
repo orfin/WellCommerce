@@ -26,7 +26,7 @@ class TaxFactory extends AbstractEntityFactory
      * @var string
      */
     protected $supportsInterface = TaxInterface::class;
-
+    
     /**
      * @return TaxInterface
      */
@@ -36,7 +36,7 @@ class TaxFactory extends AbstractEntityFactory
         $tax = $this->init();
         $tax->setValue(0);
         $tax->setCreatedAt(new \DateTime());
-
+        
         return $tax;
     }
 }

@@ -19,5 +19,5 @@ namespace WellCommerce\Bundle\MediaBundle\Exception;
  */
 class InvalidMediaException extends \RuntimeException
 {
-
+    
 }

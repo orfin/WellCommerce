@@ -23,12 +23,12 @@ use WellCommerce\Bundle\LocaleBundle\Entity\LocaleAwareInterface;
 class OrderStatusGroupTranslation implements LocaleAwareInterface
 {
     use Translation;
-
+    
     /**
      * @var string
      */
     protected $name;
-
+    
     /**
      * @return string
      */
@@ -36,7 +36,7 @@ class OrderStatusGroupTranslation implements LocaleAwareInterface
     {
         return $this->name;
     }
-
+    
     /**
      * @param string $name
      */
@@ -44,7 +44,7 @@ class OrderStatusGroupTranslation implements LocaleAwareInterface
     {
         $this->name = $name;
     }
-
+    
     /**
      * {@inheritdoc}
      */

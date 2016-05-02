@@ -26,17 +26,17 @@ interface UserGroupPermissionInterface extends EntityInterface, EnableableInterf
      * @return UserGroupInterface
      */
     public function getGroup() : UserGroupInterface;
-
+    
     /**
      * @param UserGroupInterface $group
      */
     public function setGroup(UserGroupInterface $group);
-
+    
     /**
      * @return int
      */
     public function getName() : string;
-
+    
     /**
      * @param string $name
      */

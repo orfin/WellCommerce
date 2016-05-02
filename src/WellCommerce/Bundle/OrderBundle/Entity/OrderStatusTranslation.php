@@ -23,17 +23,17 @@ use WellCommerce\Bundle\LocaleBundle\Entity\LocaleAwareInterface;
 class OrderStatusTranslation implements LocaleAwareInterface
 {
     use Translation;
-
+    
     /**
      * @var string
      */
     protected $name;
-
+    
     /**
      * @var string
      */
     protected $defaultComment;
-
+    
     /**
      * @return string
      */
@@ -41,7 +41,7 @@ class OrderStatusTranslation implements LocaleAwareInterface
     {
         return $this->name;
     }
-
+    
     /**
      * @param string $name
      */
@@ -49,7 +49,7 @@ class OrderStatusTranslation implements LocaleAwareInterface
     {
         $this->name = $name;
     }
-
+    
     /**
      * @return string
      */
@@ -57,7 +57,7 @@ class OrderStatusTranslation implements LocaleAwareInterface
     {
         return $this->defaultComment;
     }
-
+    
     /**
      * @param string $defaultComment
      */
@@ -65,7 +65,7 @@ class OrderStatusTranslation implements LocaleAwareInterface
     {
         $this->defaultComment = $defaultComment;
     }
-
+    
     /**
      * {@inheritdoc}
      */

@@ -21,12 +21,12 @@ use WellCommerce\Bundle\LocaleBundle\Entity\LocaleAwareInterface;
 class UnitTranslation implements LocaleAwareInterface
 {
     use Translation;
-
+    
     /**
      * @var string
      */
     protected $name;
-
+    
     /**
      * Get name.
      *
@@ -36,7 +36,7 @@ class UnitTranslation implements LocaleAwareInterface
     {
         return $this->name;
     }
-
+    
     /**
      * Set name.
      *
@@ -48,7 +48,7 @@ class UnitTranslation implements LocaleAwareInterface
     {
         $this->name = $name;
     }
-
+    
     /**
      * {@inheritdoc}
      */

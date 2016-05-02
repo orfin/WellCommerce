@@ -19,13 +19,14 @@
             <argument type="service" id="client.repository"/>
         </service>
 
-        <service id="client.dataset.admin" class="WellCommerce\Bundle\ClientBundle\DataSet\Admin\ClientDataSet" parent="core.dataset">
+        <service id="client.dataset.admin" class="WellCommerce\Bundle\ClientBundle\DataSet\Admin\ClientDataSet">
             <argument type="service" id="client.dataset.query_builder.admin"/>
+            <tag name="dataset"/>
         </service>
 
-        <service id="client.datagrid" class="WellCommerce\Bundle\ClientBundle\DataGrid\ClientDataGrid" parent="core.datagrid">
-            <argument key="identifier">client</argument>
+        <service id="client.datagrid" class="WellCommerce\Bundle\ClientBundle\DataGrid\ClientDataGrid">
             <argument type="service" id="client.dataset.admin"/>
+            <tag name="datagrid" alias="client"/>
         </service>
     </services>
 </container>

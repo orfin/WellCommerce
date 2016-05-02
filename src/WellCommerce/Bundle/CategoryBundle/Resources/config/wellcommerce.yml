@@ -11,7 +11,6 @@ well_commerce_category:
                 dataset: category.dataset.admin
                 manager: category.manager.admin
             dynamic_routing:
-                name: category
                 entity: WellCommerce\Bundle\CategoryBundle\Entity\CategoryRoute
                 generator: WellCommerce\Bundle\CategoryBundle\Routing\CategoryRouteGenerator
                 defaults:

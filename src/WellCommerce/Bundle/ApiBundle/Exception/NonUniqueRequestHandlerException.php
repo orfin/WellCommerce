@@ -20,7 +20,7 @@ namespace WellCommerce\Bundle\ApiBundle\Exception;
 class NonUniqueRequestHandlerException extends \InvalidArgumentException
 {
     protected $message = 'Request handler for resource "%s" already exists in collection.';
-
+    
     public function __construct($alias)
     {
         parent::__construct(sprintf($this->message, $alias));

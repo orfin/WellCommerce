@@ -28,13 +28,13 @@ class OrderShippingCostCollector extends AbstractDataCollector
     {
         $orderTotalDetail = $this->initResource();
         $shippingTotal    = $order->getShippingTotal();
-
+        
         $orderTotalDetail->setOrderTotal($shippingTotal);
         $orderTotalDetail->setOrder($order);
-
+        
         $order->addTotal($orderTotalDetail);
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -42,7 +42,7 @@ class OrderShippingCostCollector extends AbstractDataCollector
     {
         return 'shipping_cost';
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -50,7 +50,7 @@ class OrderShippingCostCollector extends AbstractDataCollector
     {
         return 'order.label.shipping_cost_description';
     }
-
+    
     /**
      * {@inheritdoc}
      */

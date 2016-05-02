@@ -27,7 +27,7 @@ final class OrderModifierProvider implements OrderModifierProviderInterface
      * @var Collection
      */
     private $defaultModifiers;
-
+    
     /**
      * OrderModifierProvider constructor.
      *
@@ -37,24 +37,24 @@ final class OrderModifierProvider implements OrderModifierProviderInterface
     {
         $this->defaultModifiers = $defaultModifiers;
     }
-
+    
     public function getOrderModifier(OrderInterface $order, string $name) : OrderModifierInterface
     {
         if (false === $order->hasModifier($name)) {
             return $this->createOrderModifier($order, $name);
         }
-
+        
         return $order->getModifier($name);
     }
-
+    
     private function createOrderModifier(OrderInterface $order, string $name): OrderModifierInterface
     {
         $modifier = $this->getDefaultOrderModifier($name);
         $modifier->setOrder($order);
-
+        
         return $modifier;
     }
-
+    
     private function getDefaultOrderModifier(string $name) : OrderModifierInterface
     {
         return $this->defaultModifiers->get($name);

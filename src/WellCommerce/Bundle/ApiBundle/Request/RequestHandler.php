@@ -35,27 +35,27 @@ class RequestHandler implements RequestHandlerInterface
      * @var ManagerInterface
      */
     protected $manager;
-
+    
     /**
      * @var DataSetInterface
      */
     protected $dataset;
-
+    
     /**
      * @var array
      */
     protected $options;
-
+    
     /**
      * @var SerializerInterface|\Symfony\Component\Serializer\Normalizer\DenormalizerInterface|\Symfony\Component\Serializer\Normalizer\NormalizerInterface
      */
     protected $serializer;
-
+    
     /**
      * @var string
      */
     protected $resourceType;
-
+    
     /**
      * RequestHandler constructor.
      *
@@ -80,7 +80,7 @@ class RequestHandler implements RequestHandlerInterface
         $this->configureOptions($resolver);
         $this->options = $resolver->resolve($options);
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -88,7 +88,7 @@ class RequestHandler implements RequestHandlerInterface
     {
         return $this->resourceType;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -96,7 +96,7 @@ class RequestHandler implements RequestHandlerInterface
     {
         return $this->dataset;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -104,7 +104,7 @@ class RequestHandler implements RequestHandlerInterface
     {
         return $this->manager;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -112,7 +112,7 @@ class RequestHandler implements RequestHandlerInterface
     {
         return $this->serializer;
     }
-
+    
     /**
      * @param OptionsResolver $resolver
      */
@@ -124,20 +124,20 @@ class RequestHandler implements RequestHandlerInterface
             'order_by',
             'order_dir',
         ]);
-
+        
         $resolver->setDefaults([
             'page'      => 1,
             'limit'     => 10,
             'order_by'  => 'id',
             'order_dir' => 'asc',
         ]);
-
+        
         $resolver->setAllowedTypes('page', 'numeric');
         $resolver->setAllowedTypes('limit', 'numeric');
         $resolver->setAllowedTypes('order_by', 'string');
         $resolver->setAllowedTypes('order_dir', 'string');
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -146,7 +146,7 @@ class RequestHandler implements RequestHandlerInterface
         $conditions         = new ConditionsCollection();
         $conditionsResolver = new ConditionsResolver();
         $conditionsResolver->resolveConditions($request->request->get('where'), $conditions);
-
+        
         $result = $this->dataset->getResult('array', [
             'limit'      => $request->request->get('limit', $this->options['limit']),
             'page'       => $request->request->get('page', $this->options['page']),
@@ -154,12 +154,12 @@ class RequestHandler implements RequestHandlerInterface
             'order_dir'  => $request->request->get('order_dir', $this->options['order_dir']),
             'conditions' => $conditions
         ]);
-
+        
         $data = $this->serializer->serialize($result, self::RESPONSE_FORMAT);
-
+        
         return new Response($data);
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -167,26 +167,26 @@ class RequestHandler implements RequestHandlerInterface
     {
         $result = $this->manager->initResource();
         $data   = $this->serializer->serialize($result, self::RESPONSE_FORMAT, ['group' => $this->getResourceType()]);
-
+        
         return new Response($data);
     }
-
+    
     /**
      * {@inheritdoc}
      */
     public function handleDeleteRequest(Request $request, $identifier)
     {
         $resource = $this->getResourceById($identifier);
-
+        
         $this->manager->removeResource($resource);
-
+        
         return new JsonResponse([
             'success'       => true,
             'identifier'    => $identifier,
             'resource_type' => $this->getResourceType()
         ]);
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -198,14 +198,14 @@ class RequestHandler implements RequestHandlerInterface
         $resource   = $this->serializer->denormalize($parameters, $className, self::RESPONSE_FORMAT, [
             'resource' => $resource
         ]);
-
+        
         $data = $this->serializer->serialize($resource, self::RESPONSE_FORMAT, ['group' => $this->getResourceType()]);
-
+        
         $this->manager->updateResource($resource);
-
+        
         return new Response($data);
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -213,10 +213,10 @@ class RequestHandler implements RequestHandlerInterface
     {
         $resource = $this->getResourceById($identifier);
         $data     = $this->serializer->serialize($resource, self::RESPONSE_FORMAT, ['group' => $this->getResourceType()]);
-
+        
         return new Response($data);
     }
-
+    
     /**
      * Returns the resource by its identifier or throws an exception if it was not found
      *
@@ -231,7 +231,7 @@ class RequestHandler implements RequestHandlerInterface
         if (null === $resource) {
             throw new ResourceNotFoundException($this->getResourceType(), $identifier);
         }
-
+        
         return $resource;
     }
 }

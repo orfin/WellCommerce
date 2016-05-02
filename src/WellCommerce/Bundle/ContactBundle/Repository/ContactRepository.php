@@ -11,13 +11,13 @@
  */
 namespace WellCommerce\Bundle\ContactBundle\Repository;
 
-use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
 
 /**
  * Class ContactRepository
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ContactRepository extends AbstractEntityRepository implements ContactRepositoryInterface
+class ContactRepository extends EntityRepository implements ContactRepositoryInterface
 {
 }

@@ -28,12 +28,12 @@ class OrderStatus extends AbstractEntity implements OrderStatusInterface
     use Blameable;
     use Translatable;
     use EnableableTrait;
-
+    
     /**
      * @var OrderStatusGroupInterface
      */
     protected $orderStatusGroup;
-
+    
     /**
      * {@inheritdoc}
      */
@@ -41,7 +41,7 @@ class OrderStatus extends AbstractEntity implements OrderStatusInterface
     {
         return $this->orderStatusGroup;
     }
-
+    
     /**
      * {@inheritdoc}
      */

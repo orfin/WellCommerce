@@ -20,8 +20,8 @@ namespace WellCommerce\Bundle\ClientBundle\Entity;
 interface ClientShippingAddressAwareInterface
 {
     public function getShippingAddress() : ClientShippingAddressInterface;
-
+    
     public function setShippingAddress(ClientShippingAddressInterface $shippingAddress);
-
+    
     public function hasShippingAddress() : bool;
 }

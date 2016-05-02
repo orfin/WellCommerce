@@ -4,11 +4,6 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="shipping_method.manager" class="WellCommerce\Bundle\ShippingBundle\Manager\ShippingMethodManager" parent="core.manager">
-            <argument type="service" id="shipping_method.repository"/>
-            <argument type="service" id="shipping_method.factory"/>
-        </service>
-
         <service id="shipping_method.controller.admin" class="WellCommerce\Bundle\ShippingBundle\Controller\Admin\ShippingMethodController">
             <argument type="service" id="shipping_method.manager"/>
             <argument type="service" id="shipping_method.form_builder.admin"/>
@@ -22,17 +17,18 @@
             <argument type="service" id="shipping_method.repository"/>
         </service>
 
-        <service id="shipping_method.dataset.admin" class="WellCommerce\Bundle\ShippingBundle\DataSet\Admin\ShippingMethodDataSet" parent="core.dataset">
+        <service id="shipping_method.dataset.admin" class="WellCommerce\Bundle\ShippingBundle\DataSet\Admin\ShippingMethodDataSet">
             <argument type="service" id="shipping_method.dataset.query_builder.admin"/>
+            <tag name="dataset"/>
         </service>
 
         <service id="shipping_method.dataset.query_builder" parent="shipping_method.dataset.query_builder.admin" public="false">
             <argument type="service" id="shipping_method.repository"/>
         </service>
 
-        <service id="shipping_method.datagrid" class="WellCommerce\Bundle\ShippingBundle\DataGrid\ShippingMethodDataGrid" parent="core.datagrid">
-            <argument key="identifier">shipping_method</argument>
+        <service id="shipping_method.datagrid" class="WellCommerce\Bundle\ShippingBundle\DataGrid\ShippingMethodDataGrid">
             <argument type="service" id="shipping_method.dataset.admin"/>
+            <tag name="datagrid" alias="shipping_method"/>
         </service>
 
         <service id="shipping_method.form_builder.admin" class="WellCommerce\Bundle\ShippingBundle\Form\Admin\ShippingMethodFormBuilder" parent="core.form_builder" />

@@ -30,14 +30,14 @@ class OrderProductTotalCollector extends AbstractDataCollector
     {
         $orderProductTotal = $this->prepareOrderProductTotal($order);
         $order->setProductTotal($orderProductTotal);
-
+        
         $orderTotalDetail = $this->initResource();
         $orderTotalDetail->setOrderTotal($orderProductTotal);
         $orderTotalDetail->setOrder($order);
-
+        
         $order->addTotal($orderTotalDetail);
     }
-
+    
     /**
      * Prepares order product totals
      *
@@ -50,13 +50,13 @@ class OrderProductTotalCollector extends AbstractDataCollector
         $grossAmountTotal = $this->calculateTotalGrossAmount($order);
         $netAmountTotal   = $this->calculateTotalNetAmount($order);
         $taxAmountTotal   = $this->calculateTotalTaxAmount($order);
-
+        
         $productTotal = new OrderTotal();
         $productTotal->setGrossAmount($grossAmountTotal);
         $productTotal->setNetAmount($netAmountTotal);
         $productTotal->setTaxAmount($taxAmountTotal);
         $productTotal->setCurrency($order->getCurrency());
-
+        
         return $productTotal;
     }
     
@@ -67,12 +67,12 @@ class OrderProductTotalCollector extends AbstractDataCollector
     {
         $price          = 0;
         $targetCurrency = $order->getCurrency();
-
+        
         $order->getProducts()->map(function (OrderProductInterface $orderProduct) use (&$price, $targetCurrency) {
             $sellPrice    = $orderProduct->getSellPrice();
             $baseCurrency = $sellPrice->getCurrency();
             $priceNet     = $sellPrice->getNetAmount();
-
+            
             $price += $this->currencyHelper->convert($priceNet, $baseCurrency, $targetCurrency, $orderProduct->getQuantity());
         });
         
@@ -86,7 +86,7 @@ class OrderProductTotalCollector extends AbstractDataCollector
     {
         $price          = 0;
         $targetCurrency = $order->getCurrency();
-
+        
         $order->getProducts()->map(function (OrderProductInterface $orderProduct) use (&$price, $targetCurrency) {
             $sellPrice    = $orderProduct->getSellPrice();
             $baseCurrency = $sellPrice->getCurrency();
@@ -105,7 +105,7 @@ class OrderProductTotalCollector extends AbstractDataCollector
     {
         $amount         = 0;
         $targetCurrency = $order->getCurrency();
-
+        
         $order->getProducts()->map(function (OrderProductInterface $orderProduct) use (&$amount, $targetCurrency) {
             $sellPrice    = $orderProduct->getSellPrice();
             $baseCurrency = $sellPrice->getCurrency();
@@ -124,7 +124,7 @@ class OrderProductTotalCollector extends AbstractDataCollector
     {
         return 'product_total';
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -132,7 +132,7 @@ class OrderProductTotalCollector extends AbstractDataCollector
     {
         return 'order.label.product_total_description';
     }
-
+    
     /**
      * {@inheritdoc}
      */

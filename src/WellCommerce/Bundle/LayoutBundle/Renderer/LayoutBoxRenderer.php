@@ -12,42 +12,105 @@
 
 namespace WellCommerce\Bundle\LayoutBundle\Renderer;
 
-use WellCommerce\Bundle\LayoutBundle\Manager\Front\LayoutBoxManager;
+use Symfony\Component\HttpFoundation\Response;
+use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
+use WellCommerce\Bundle\CoreBundle\Helper\Router\RouterHelperInterface;
+use WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface;
+use WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxSettingsCollection;
+use WellCommerce\Bundle\LayoutBundle\Entity\LayoutBoxInterface;
+use WellCommerce\Bundle\LayoutBundle\Exception\LayoutBoxNotFoundException;
+use WellCommerce\Bundle\LayoutBundle\Resolver\ServiceResolverInterface;
 
 /**
  * Class LayoutBoxRenderer
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LayoutBoxRenderer implements LayoutBoxRendererInterface
+final class LayoutBoxRenderer implements LayoutBoxRendererInterface
 {
     /**
-     * @var LayoutBoxManager
+     * @var ManagerInterface
      */
-    protected $layoutBoxManager;
+    private $manager;
+    
+    /**
+     * @var ServiceResolverInterface
+     */
+    private $serviceResolver;
 
     /**
-     * Constructor
-     *
-     * @param LayoutBoxManager $layoutBoxManager
+     * @var RouterHelperInterface
      */
-    public function __construct(LayoutBoxManager $layoutBoxManager)
+    private $routerHelper;
+
+    /**
+     * LayoutBoxRenderer constructor.
+     *
+     * @param ServiceResolverInterface $serviceResolver
+     * @param ManagerInterface         $manager
+     * @param RouterHelperInterface    $routerHelper
+     */
+    public function __construct(ServiceResolverInterface $serviceResolver, ManagerInterface $manager, RouterHelperInterface $routerHelper)
     {
-        $this->layoutBoxManager = $layoutBoxManager;
+        $this->manager         = $manager;
+        $this->serviceResolver = $serviceResolver;
+        $this->routerHelper    = $routerHelper;
+    }
+    
+    public function render(string $identifier, array $params) : string
+    {
+        $content = $this->getLayoutBoxContent($identifier, $params);
+        
+        return $content->getContent();
+    }
+
+    private function findLayoutBox($identifier) : LayoutBoxInterface
+    {
+        $layoutBox = $this->manager->getRepository()->findOneBy(['identifier' => $identifier]);
+        if (!$layoutBox instanceof LayoutBoxInterface) {
+            throw new LayoutBoxNotFoundException($identifier);
+        }
+
+        return $layoutBox;
+    }
+
+    private function getLayoutBoxContent(string $identifier, array $params = []) : Response
+    {
+        $layoutBox  = $this->findLayoutBox($identifier);
+        $controller = $this->serviceResolver->resolveControllerService($layoutBox);
+        $action     = $this->resolveControllerAction($controller);
+        $settings   = $this->makeSettingsCollection($layoutBox->getSettings(), $params);
+        
+        return call_user_func_array([$controller, $action], [$settings]);
+    }
+    
+    private function makeSettingsCollection(array $defaultSettings = [], array $params = []) : LayoutBoxSettingsCollection
+    {
+        $settings   = array_merge($defaultSettings, $params);
+        $collection = new LayoutBoxSettingsCollection();
+
+        foreach ($settings as $name => $value) {
+            $collection->add($name, $value);
+        }
+
+        return $collection;
     }
 
     /**
-     * Renders a layout box
+     * Resolves action which can be used in controller method call
      *
-     * @param string $identifier
-     * @param array  $params
+     * @param BoxControllerInterface $controller
      *
      * @return string
      */
-    public function render($identifier, $params)
+    private function resolveControllerAction(BoxControllerInterface $controller)
     {
-        $content = $this->layoutBoxManager->getLayoutBoxContent($identifier, $params);
+        $currentAction = $this->routerHelper->getCurrentAction();
 
-        return $content->getContent();
+        if ($this->routerHelper->hasControllerAction($controller, $currentAction)) {
+            return $currentAction;
+        }
+
+        return 'indexAction';
     }
 }

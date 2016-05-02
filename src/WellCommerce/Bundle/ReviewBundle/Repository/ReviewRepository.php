@@ -12,14 +12,14 @@
 namespace WellCommerce\Bundle\ReviewBundle\Repository;
 
 use Doctrine\ORM\QueryBuilder;
-use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
 
 /**
  * Class ReviewRepository
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ReviewRepository extends AbstractEntityRepository implements ReviewRepositoryInterface
+class ReviewRepository extends EntityRepository implements ReviewRepositoryInterface
 {
     /**
      * {@inheritdoc}

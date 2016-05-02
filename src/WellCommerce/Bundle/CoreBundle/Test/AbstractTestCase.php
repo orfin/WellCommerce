@@ -26,22 +26,22 @@ abstract class AbstractTestCase extends KernelTestCase
      * @var \Symfony\Bundle\FrameworkBundle\Client
      */
     protected $client = null;
-
+    
     /**
      * @var \Symfony\Component\DependencyInjection\ContainerInterface
      */
     protected $container;
-
+    
     /**
      * @var \Doctrine\ORM\EntityManager
      */
     protected $em;
-
+    
     /**
      * @var \Symfony\Component\Validator\Validator\ValidatorInterface
      */
     protected $validator;
-
+    
     /**
      * {@inheritDoc}
      */
@@ -53,7 +53,7 @@ abstract class AbstractTestCase extends KernelTestCase
         $this->validator = $this->container->get('validator');
         $this->setCurrentShop();
     }
-
+    
     /**
      * Creates a Client.
      *
@@ -65,13 +65,13 @@ abstract class AbstractTestCase extends KernelTestCase
     protected static function createClient(array $options = [], array $server = [])
     {
         static::bootKernel($options);
-
+        
         $client = static::$kernel->getContainer()->get('test.client');
         $client->setServerParameters($server);
-
+        
         return $client;
     }
-
+    
     private function setCurrentShop()
     {
         $shop = $this->container->get('shop.repository')->findOneBy([]);

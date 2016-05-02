@@ -11,13 +11,13 @@
  */
 namespace WellCommerce\Bundle\AttributeBundle\Repository;
 
-use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
 
 /**
  * Class AttributeValueRepository
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AttributeValueRepository extends AbstractEntityRepository implements AttributeValueRepositoryInterface
+class AttributeValueRepository extends EntityRepository implements AttributeValueRepositoryInterface
 {
 }

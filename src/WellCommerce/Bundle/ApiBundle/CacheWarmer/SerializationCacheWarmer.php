@@ -30,12 +30,12 @@ class SerializationCacheWarmer extends CacheWarmer
      * @var DoctrineHelperInterface
      */
     protected $doctrineHelper;
-
+    
     /**
      * @var Filesystem
      */
     protected $filesystem;
-
+    
     /**
      * SerializationCacheWarmer constructor.
      *
@@ -46,7 +46,7 @@ class SerializationCacheWarmer extends CacheWarmer
         $this->doctrineHelper = $doctrineHelper;
         $this->filesystem     = new Filesystem();
     }
-
+    
     /**
      * Warms up the cache.
      *
@@ -55,13 +55,13 @@ class SerializationCacheWarmer extends CacheWarmer
     public function warmUp($cacheDir)
     {
         $configuration = $this->getConfiguration();
-
+        
         if (count($configuration)) {
             $file = $cacheDir . '/' . SerializationMetadataLoaderInterface::CACHE_FILENAME;
             $this->writeCacheFile($file, sprintf('<?php return %s;', var_export($configuration, true)));
         }
     }
-
+    
     /**
      * @return array
      */
@@ -69,14 +69,14 @@ class SerializationCacheWarmer extends CacheWarmer
     {
         $configuration      = [];
         $metadataCollection = $this->doctrineHelper->getMetadataFactory()->getAllMetadata();
-
+        
         foreach ($metadataCollection as $entityMetadata) {
             $this->appendConfigurationFromMetadata($entityMetadata, $configuration);
         }
-
+        
         return $configuration;
     }
-
+    
     protected function appendConfigurationFromMetadata(ClassMetadata $metadata, &$configuration)
     {
         $serializationFilePath = $this->resolvePath($metadata->getReflectionClass());
@@ -85,12 +85,12 @@ class SerializationCacheWarmer extends CacheWarmer
             $configuration = array_replace_recursive($configuration, $this->parseContent($content));
         }
     }
-
+    
     protected function resolvePath(\ReflectionClass $reflectionClass)
     {
         return dirname($reflectionClass->getFileName()) . '/../Resources/config/serialization/' . $reflectionClass->getShortName() . '.yml';
     }
-
+    
     /**
      * Parses the Yaml contents
      *
@@ -102,7 +102,7 @@ class SerializationCacheWarmer extends CacheWarmer
     {
         return Yaml::parse($content);
     }
-
+    
     /**
      * Checks whether this warmer is optional or not.
      *

@@ -11,13 +11,13 @@
  */
 namespace WellCommerce\Bundle\ProductStatusBundle\Repository;
 
-use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
 
 /**
  * Class ProductStatusRepository
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductStatusRepository extends AbstractEntityRepository implements ProductStatusRepositoryInterface
+class ProductStatusRepository extends EntityRepository implements ProductStatusRepositoryInterface
 {
 }

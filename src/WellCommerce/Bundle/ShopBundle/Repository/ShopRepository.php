@@ -13,14 +13,14 @@
 namespace WellCommerce\Bundle\ShopBundle\Repository;
 
 use Doctrine\ORM\QueryBuilder;
-use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
 
 /**
  * Class ShopRepository
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class ShopRepository extends AbstractEntityRepository implements ShopRepositoryInterface
+class ShopRepository extends EntityRepository implements ShopRepositoryInterface
 {
     /**
      * {@inheritdoc}
@@ -31,7 +31,7 @@ class ShopRepository extends AbstractEntityRepository implements ShopRepositoryI
         $queryBuilder->groupBy('shop.id');
         $queryBuilder->leftJoin('shop.theme', 'shop_theme');
         $queryBuilder->leftJoin('shop.company', 'shop_company');
-
+        
         return $queryBuilder;
     }
 }

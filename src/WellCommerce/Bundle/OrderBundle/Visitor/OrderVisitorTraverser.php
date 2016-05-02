@@ -26,7 +26,7 @@ final class OrderVisitorTraverser
      * @var Collection
      */
     private $visitors;
-
+    
     /**
      * OrderVisitorTraverser constructor.
      *
@@ -36,7 +36,7 @@ final class OrderVisitorTraverser
     {
         $this->visitors = $visitors;
     }
-
+    
     public function traverse(OrderInterface $order)
     {
         $this->visitors->map(function (OrderVisitorInterface $visitor) use ($order) {

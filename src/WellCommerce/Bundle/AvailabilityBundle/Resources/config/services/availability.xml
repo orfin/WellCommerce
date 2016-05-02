@@ -6,11 +6,4 @@
     <imports>
         <import resource="admin/availability.xml"/>
     </imports>
-
-    <services>
-        <service id="availability.manager" class="WellCommerce\Bundle\AvailabilityBundle\Manager\AvailabilityManager" parent="core.manager">
-            <argument type="service" id="availability.repository"/>
-            <argument type="service" id="availability.factory"/>
-        </service>
-    </services>
 </container>

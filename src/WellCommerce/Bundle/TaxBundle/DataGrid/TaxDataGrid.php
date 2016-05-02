@@ -44,7 +44,7 @@ class TaxDataGrid extends AbstractDataGrid
                 'type' => Filter::FILTER_BETWEEN,
             ]),
         ]));
-
+        
         $collection->add(new Column([
             'id'         => 'name',
             'caption'    => $this->trans('common.label.name'),
@@ -55,7 +55,7 @@ class TaxDataGrid extends AbstractDataGrid
                 'type' => Filter::FILTER_INPUT,
             ]),
         ]));
-
+        
         $collection->add(new Column([
             'id'         => 'value',
             'caption'    => $this->trans('tax.label.value'),

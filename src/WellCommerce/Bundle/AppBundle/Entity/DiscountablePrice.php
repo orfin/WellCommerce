@@ -24,98 +24,98 @@ class DiscountablePrice extends Price implements DiscountablePriceInterface
     protected $discountedTaxAmount   = 0;
     protected $validFrom             = null;
     protected $validTo               = null;
-
+    
     public function getValidFrom()
     {
         return $this->validFrom;
     }
-
+    
     public function setValidFrom(\DateTime $validFrom = null)
     {
         if (null !== $validFrom) {
             $validFrom = $validFrom->setTime(0, 0, 0);
         }
-
+        
         $this->validFrom = $validFrom;
     }
-
+    
     public function getValidTo()
     {
         return $this->validTo;
     }
-
+    
     public function setValidTo(\DateTime $validTo = null)
     {
         if (null !== $validTo) {
             $validTo = $validTo->setTime(23, 59, 59);
         }
-
+        
         $this->validTo = $validTo;
     }
-
+    
     public function getFinalGrossAmount() : float
     {
         if ($this->isDiscountValid()) {
             return $this->getDiscountedGrossAmount();
         }
-
+        
         return $this->getGrossAmount();
     }
-
+    
     public function isDiscountValid() : bool
     {
         $now = new \DateTime();
-
+        
         if ($this->validFrom instanceof \DateTime && $this->validTo instanceof \DateTime) {
             return ($this->validFrom <= $now) && ($this->validTo >= $now);
         }
-
+        
         return false;
     }
-
+    
     public function getDiscountedGrossAmount() : float
     {
         return $this->discountedGrossAmount;
     }
-
+    
     public function setDiscountedGrossAmount(float $discountedGrossAmount)
     {
         $this->discountedGrossAmount = $discountedGrossAmount;
     }
-
+    
     public function getFinalNetAmount() : float
     {
         if ($this->isDiscountValid()) {
             return $this->getDiscountedNetAmount();
         }
-
+        
         return $this->getNetAmount();
     }
-
+    
     public function getDiscountedNetAmount() : float
     {
         return $this->discountedNetAmount;
     }
-
+    
     public function setDiscountedNetAmount(float $discountedNetAmount)
     {
         $this->discountedNetAmount = $discountedNetAmount;
     }
-
+    
     public function getFinalTaxAmount() : float
     {
         if ($this->isDiscountValid()) {
             return $this->getDiscountedTaxAmount();
         }
-
+        
         return $this->getTaxAmount();
     }
-
+    
     public function getDiscountedTaxAmount() : float
     {
         return $this->discountedTaxAmount;
     }
-
+    
     public function setDiscountedTaxAmount(float $discountedTaxAmount)
     {
         $this->discountedTaxAmount = $discountedTaxAmount;

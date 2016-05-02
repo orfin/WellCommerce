@@ -13,14 +13,14 @@ namespace WellCommerce\Bundle\ProductBundle\Repository;
 
 use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\QueryBuilder;
-use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
 
 /**
  * Class ProductRepository
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductRepository extends AbstractEntityRepository implements ProductRepositoryInterface
+class ProductRepository extends EntityRepository implements ProductRepositoryInterface
 {
     /**
      * {@inheritdoc}

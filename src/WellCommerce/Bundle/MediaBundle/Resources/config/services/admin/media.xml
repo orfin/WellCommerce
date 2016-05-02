@@ -17,13 +17,14 @@
             <argument type="service" id="media.repository"/>
         </service>
 
-        <service id="media.dataset.admin" class="WellCommerce\Bundle\MediaBundle\DataSet\Admin\MediaDataSet" parent="core.dataset">
+        <service id="media.dataset.admin" class="WellCommerce\Bundle\MediaBundle\DataSet\Admin\MediaDataSet">
             <argument type="service" id="media.dataset.query_builder.admin"/>
+            <tag name="dataset"/>
         </service>
 
-        <service id="media.datagrid" class="WellCommerce\Bundle\MediaBundle\DataGrid\MediaDataGrid" parent="core.datagrid">
-            <argument key="identifier">media</argument>
+        <service id="media.datagrid" class="WellCommerce\Bundle\MediaBundle\DataGrid\MediaDataGrid">
             <argument type="service" id="media.dataset.admin"/>
+            <tag name="datagrid" alias="media"/>
         </service>
 
         <service id="media.form_builder.admin" class="WellCommerce\Bundle\MediaBundle\Form\Admin\MediaFormBuilder" parent="core.form_builder" />

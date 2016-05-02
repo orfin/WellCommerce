@@ -13,14 +13,14 @@ namespace WellCommerce\Bundle\LocaleBundle\Repository;
 
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\Intl\Intl;
-use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
 
 /**
  * Class LocaleRepository
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LocaleRepository extends AbstractEntityRepository implements LocaleRepositoryInterface
+class LocaleRepository extends EntityRepository implements LocaleRepositoryInterface
 {
     private $currentLocales = [];
 

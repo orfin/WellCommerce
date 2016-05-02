@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\OrderBundle\Repository;
 
 use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
-use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
 use WellCommerce\Bundle\ShopBundle\Entity\ShopInterface;
 
 /**
@@ -21,7 +21,7 @@ use WellCommerce\Bundle\ShopBundle\Entity\ShopInterface;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-final class CartRepository extends AbstractEntityRepository implements CartRepositoryInterface
+final class CartRepository extends EntityRepository implements CartRepositoryInterface
 {
     public function findCart(ClientInterface $client = null, $sessionId, ShopInterface $shop)
     {
@@ -33,10 +33,10 @@ final class CartRepository extends AbstractEntityRepository implements CartRepos
         } else {
             $cart = $this->getCartBySessionId($sessionId, $shop);
         }
-
+        
         return $cart;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -47,7 +47,7 @@ final class CartRepository extends AbstractEntityRepository implements CartRepos
             'shop'   => $shop
         ]);
     }
-
+    
     /**
      * {@inheritdoc}
      */

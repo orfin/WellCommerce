@@ -21,5 +21,4 @@ use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
  */
 class WellCommerceAppExtension extends AbstractExtension
 {
-    CONST EXTENSION_NAME = 'well_commerce_app';
 }

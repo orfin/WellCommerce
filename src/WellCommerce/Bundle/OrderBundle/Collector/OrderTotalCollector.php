@@ -31,18 +31,18 @@ class OrderTotalCollector extends AbstractDataCollector
         $totals         = $order->getTotals();
         $targetCurrency = $order->getCurrency();
         $orderTotal     = new OrderTotal();
-
+        
         $grossTotal = 0;
         $netTotal   = 0;
         $taxTotal   = 0;
-
+        
         $totals->map(function (OrderTotalDetailInterface $orderTotalDetail) use (&$grossTotal, &$netTotal, &$taxTotal, $targetCurrency) {
             $total        = $orderTotalDetail->getOrderTotal();
             $baseCurrency = $total->getCurrency();
             $grossAmount  = $this->currencyHelper->convert($total->getGrossAmount(), $baseCurrency, $targetCurrency);
             $netAmount    = $this->currencyHelper->convert($total->getNetAmount(), $baseCurrency, $targetCurrency);
             $taxAmount    = $this->currencyHelper->convert($total->getTaxAmount(), $baseCurrency, $targetCurrency);
-
+            
             if ($orderTotalDetail->isSubtraction()) {
                 $grossTotal -= $grossAmount;
                 $netTotal -= $netAmount;
@@ -53,15 +53,15 @@ class OrderTotalCollector extends AbstractDataCollector
                 $taxTotal += $taxAmount;
             }
         });
-
+        
         $orderTotal->setCurrency($targetCurrency);
         $orderTotal->setGrossAmount($grossTotal);
         $orderTotal->setNetAmount($netTotal);
         $orderTotal->setTaxAmount($taxTotal);
-
+        
         $order->setOrderTotal($orderTotal);
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -69,7 +69,7 @@ class OrderTotalCollector extends AbstractDataCollector
     {
         return 'total';
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -77,7 +77,7 @@ class OrderTotalCollector extends AbstractDataCollector
     {
         return 'order.label.total_description';
     }
-
+    
     /**
      * {@inheritdoc}
      */

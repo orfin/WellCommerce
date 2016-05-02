@@ -42,7 +42,7 @@ class OrderDataGrid extends AbstractDataGrid
                 'type' => Filter::FILTER_BETWEEN,
             ]),
         ]));
-
+        
         $collection->add(new Column([
             'id'         => 'client',
             'caption'    => $this->trans('order.label.client'),
@@ -54,7 +54,7 @@ class OrderDataGrid extends AbstractDataGrid
                 'align' => Appearance::ALIGN_LEFT
             ]),
         ]));
-
+        
         $collection->add(new Column([
             'id'         => 'productTotal',
             'caption'    => $this->trans('order.label.product_total'),
@@ -66,7 +66,7 @@ class OrderDataGrid extends AbstractDataGrid
                 'align' => Appearance::ALIGN_CENTER
             ]),
         ]));
-
+        
         $collection->add(new Column([
             'id'         => 'shippingTotal',
             'caption'    => $this->trans('order.label.shipping_total'),
@@ -78,7 +78,7 @@ class OrderDataGrid extends AbstractDataGrid
                 'align' => Appearance::ALIGN_CENTER
             ]),
         ]));
-
+        
         $collection->add(new Column([
             'id'         => 'orderTotal',
             'caption'    => $this->trans('order.label.order_total'),
@@ -90,7 +90,7 @@ class OrderDataGrid extends AbstractDataGrid
                 'align' => Appearance::ALIGN_CENTER
             ]),
         ]));
-
+        
         $collection->add(new Column([
             'id'         => 'currency',
             'caption'    => $this->trans('order.label.currency'),
@@ -103,7 +103,7 @@ class OrderDataGrid extends AbstractDataGrid
                 'align'   => Appearance::ALIGN_CENTER
             ]),
         ]));
-
+        
         $collection->add(new Column([
             'id'         => 'currentStatusName',
             'caption'    => $this->trans('order.label.current_status'),
@@ -115,7 +115,7 @@ class OrderDataGrid extends AbstractDataGrid
                 'align' => Appearance::ALIGN_CENTER
             ]),
         ]));
-
+        
         $collection->add(new Column([
             'id'         => 'createdAt',
             'caption'    => $this->trans('order.label.created_at'),
@@ -128,16 +128,16 @@ class OrderDataGrid extends AbstractDataGrid
             ]),
         ]));
     }
-
+    
     /**
      * {@inheritdoc}
      */
     protected function configureOptions(OptionsInterface $options)
     {
         parent::configureOptions($options);
-
+        
         $eventHandlers = $options->getEventHandlers();
-
+        
         $eventHandlers->add(new ProcessEventHandler([
             'function' => $this->getJavascriptFunctionName('process'),
         ]));

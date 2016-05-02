@@ -13,11 +13,6 @@
     </imports>
 
     <services>
-        <service id="client.manager" class="WellCommerce\Bundle\ClientBundle\Manager\ClientManager" parent="core.manager">
-            <argument type="service" id="client.repository"/>
-            <argument type="service" id="client.factory"/>
-        </service>
-
         <service id="client_login.layout_box.controller" class="WellCommerce\Bundle\ClientBundle\Controller\Box\ClientLoginBoxController">
             <argument type="service" id="client.manager"/>
             <call method="setContainer">

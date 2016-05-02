@@ -15,8 +15,9 @@
             <argument type="service" id="product_status.repository"/>
         </service>
 
-        <service id="product_status.dataset.front" class="WellCommerce\Bundle\ProductStatusBundle\DataSet\Front\ProductStatusDataSet" parent="core.dataset">
+        <service id="product_status.dataset.front" class="WellCommerce\Bundle\ProductStatusBundle\DataSet\Front\ProductStatusDataSet">
             <argument type="service" id="product_status.dataset.query_builder.front"/>
+            <tag name="dataset"/>
         </service>
 
         <service id="product_status.context.front" class="WellCommerce\Bundle\ProductStatusBundle\Context\Front\ProductStatusContext"/>

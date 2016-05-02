@@ -31,27 +31,27 @@ class OrderClientDiscountCollector extends AbstractDataCollector
         if (null === $order->getCoupon()) {
             $orderTotal = new OrderTotal();
             $discount   = $this->getDiscountForClient($order->getClient());
-
+            
             if ($discount > 0) {
                 $productTotal = $order->getProductTotal();
-
+                
                 $orderTotal->setCurrency($order->getCurrency());
                 $orderTotal->setGrossAmount($productTotal->getGrossAmount() * $discount);
                 $orderTotal->setNetAmount($productTotal->getNetAmount() * $discount);
                 $orderTotal->setTaxAmount($productTotal->getTaxAmount() * $discount);
-
+                
                 $orderTotalDetail = $this->initResource();
                 $orderTotalDetail->setOrderTotal($orderTotal);
                 $orderTotalDetail->setModifierType('%');
                 $orderTotalDetail->setModifierValue($discount);
                 $orderTotalDetail->setOrder($order);
                 $orderTotalDetail->setSubtraction(true);
-
+                
                 $order->addTotal($orderTotalDetail);
             }
         }
     }
-
+    
     /**
      * Returns client's discount
      *
@@ -64,10 +64,10 @@ class OrderClientDiscountCollector extends AbstractDataCollector
         if (null !== $client && null !== $client->getClientGroup()) {
             return round((float)$client->getClientGroup()->getDiscount() / 100, 2);
         }
-
+        
         return 0;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -75,7 +75,7 @@ class OrderClientDiscountCollector extends AbstractDataCollector
     {
         return 'client_discount';
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -83,7 +83,7 @@ class OrderClientDiscountCollector extends AbstractDataCollector
     {
         return 'order.label.client_discount_description';
     }
-
+    
     /**
      * {@inheritdoc}
      */

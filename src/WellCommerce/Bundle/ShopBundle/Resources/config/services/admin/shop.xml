@@ -4,11 +4,6 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="shop.manager" class="WellCommerce\Bundle\ShopBundle\Manager\ShopManager" parent="core.manager">
-            <argument type="service" id="shop.repository"/>
-            <argument type="service" id="shop.factory"/>
-        </service>
-        
         <service id="shop.controller.admin" class="WellCommerce\Bundle\ShopBundle\Controller\Admin\ShopController">
             <argument type="service" id="shop.manager"/>
             <argument type="service" id="shop.form_builder.admin"/>
@@ -30,13 +25,14 @@
             <argument type="service" id="request.helper" />
         </service>
 
-        <service id="shop.dataset.admin" class="WellCommerce\Bundle\ShopBundle\DataSet\Admin\ShopDataSet" parent="core.dataset">
+        <service id="shop.dataset.admin" class="WellCommerce\Bundle\ShopBundle\DataSet\Admin\ShopDataSet">
             <argument type="service" id="shop.dataset.query_builder.admin"/>
+            <tag name="dataset"/>
         </service>
 
-        <service id="shop.datagrid" class="WellCommerce\Bundle\ShopBundle\DataGrid\ShopDataGrid" parent="core.datagrid">
-            <argument key="identifier">shop</argument>
+        <service id="shop.datagrid" class="WellCommerce\Bundle\ShopBundle\DataGrid\ShopDataGrid">
             <argument type="service" id="shop.dataset.admin"/>
+            <tag name="datagrid" alias="shop"/>
         </service>
 
         <service id="shop.form_builder.admin" class="WellCommerce\Bundle\ShopBundle\Form\Admin\ShopFormBuilder" parent="core.form_builder" />

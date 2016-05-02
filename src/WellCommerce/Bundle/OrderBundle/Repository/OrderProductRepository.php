@@ -12,14 +12,14 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Repository;
 
-use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
 
 /**
  * Class OrderProductRepository
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class OrderProductRepository extends AbstractEntityRepository implements OrderRepositoryInterface
+class OrderProductRepository extends EntityRepository implements OrderRepositoryInterface
 {
-
+    
 }

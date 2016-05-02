@@ -35,37 +35,37 @@ class FacebookAuthenticator extends AbstractGuardAuthenticator
      * @var string
      */
     const GRAPH_API_VERSION = 'v2.5';
-
+    
     /**
      * @var array
      */
     const SCOPES = ['email'];
-
+    
     /**
      * @var ManagerInterface
      */
     protected $clientManager;
-
+    
     /**
      * @var RouterHelperInterface
      */
     protected $routerHelper;
-
+    
     /**
      * @var string
      */
     protected $appId;
-
+    
     /**
      * @var string
      */
     protected $appSecret;
-
+    
     /**
      * @var Facebook
      */
     protected $facebookProvider;
-
+    
     /**
      * FacebookAuthenticator constructor.
      *
@@ -81,39 +81,39 @@ class FacebookAuthenticator extends AbstractGuardAuthenticator
         $this->appId         = $appId;
         $this->appSecret     = $appSecret;
     }
-
+    
     public function getCredentials(Request $request)
     {
         if ($request->get('_route') !== 'oauth.facebook.check') {
             return null;
         }
-
+        
         if ($code = $request->query->get('code')) {
             return $code;
         }
     }
-
+    
     public function getUser($authorizationCode, UserProviderInterface $userProvider)
     {
         $accessToken = $this->getProvider()->getAccessToken(
             'authorization_code',
             ['code' => $authorizationCode]
         );
-
+        
         /** @var FacebookUser $userDetails */
         $userDetails = $this->getProvider()->getResourceOwner($accessToken);
         $email       = $userDetails->getEmail();
         $user        = $this->clientManager->getRepository()->findOneBy([
             'clientDetails.username' => $email
         ]);
-
+        
         if (!$user instanceof ClientInterface) {
             $user = $this->autoRegisterClient($userDetails);
         }
-
+        
         return $user;
     }
-
+    
     /**
      * Automatic register process
      *
@@ -126,28 +126,28 @@ class FacebookAuthenticator extends AbstractGuardAuthenticator
         $firstName = $facebookUser->getFirstName();
         $lastName  = $facebookUser->getLastName();
         $email     = $facebookUser->getEmail();
-
+        
         /** @var $client ClientInterface */
         $client = $this->clientManager->initResource();
         $client->getClientDetails()->setUsername($email);
         $client->getClientDetails()->setPassword(Helper::generateRandomPassword());
-
+        
         $client->getContactDetails()->setEmail($email);
         $client->getContactDetails()->setFirstName($firstName);
         $client->getContactDetails()->setLastName($lastName);
         $client->getContactDetails()->setPhone(' ');
         $client->getContactDetails()->setSecondaryPhone(' ');
-
+        
         $this->clientManager->createResource($client);
-
+        
         return $client;
     }
-
+    
     public function checkCredentials($credentials, UserInterface $user)
     {
         return true;
     }
-
+    
     /**
      * Scheme used after authentification fails
      *
@@ -159,10 +159,10 @@ class FacebookAuthenticator extends AbstractGuardAuthenticator
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
         $request->getSession()->set(Security::AUTHENTICATION_ERROR, $exception);
-
+        
         return new RedirectResponse($this->routerHelper->generateUrl('front.client.login'));
     }
-
+    
     /**
      * Scheme used after authentification succeeds
      *
@@ -176,7 +176,7 @@ class FacebookAuthenticator extends AbstractGuardAuthenticator
     {
         return $this->routerHelper->redirectTo('front.client_order.index');
     }
-
+    
     /**
      * @return bool
      */
@@ -184,7 +184,7 @@ class FacebookAuthenticator extends AbstractGuardAuthenticator
     {
         return true;
     }
-
+    
     /**
      * Starts the authentication scheme.
      *
@@ -198,10 +198,10 @@ class FacebookAuthenticator extends AbstractGuardAuthenticator
         $authUrl = $this->getProvider()->getAuthorizationUrl([
             'scopes' => self::SCOPES
         ]);
-
+        
         return new RedirectResponse($authUrl);
     }
-
+    
     /**
      * @return Facebook
      */
@@ -215,10 +215,10 @@ class FacebookAuthenticator extends AbstractGuardAuthenticator
                 'graphApiVersion' => self::GRAPH_API_VERSION,
             ]);
         }
-
+        
         return $this->facebookProvider;
     }
-
+    
     /**
      * @param UserInterface $user
      * @param string        $providerKey

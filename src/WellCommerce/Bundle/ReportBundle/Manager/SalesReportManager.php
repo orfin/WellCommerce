@@ -22,5 +22,4 @@ use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
  */
 class SalesReportManager extends AbstractManager
 {
-
 }

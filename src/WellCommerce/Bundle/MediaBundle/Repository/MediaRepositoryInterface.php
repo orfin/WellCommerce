@@ -21,5 +21,5 @@ use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
  */
 interface MediaRepositoryInterface extends RepositoryInterface
 {
-
+    
 }

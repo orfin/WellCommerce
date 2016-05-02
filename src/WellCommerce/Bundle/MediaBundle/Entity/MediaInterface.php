@@ -27,52 +27,52 @@ interface MediaInterface extends EntityInterface, TimestampableInterface, Blamea
      * @return string
      */
     public function getName() : string;
-
+    
     /**
      * @param string $name
      */
     public function setName(string $name);
-
+    
     /**
      * @return string
      */
     public function getPath() : string;
-
+    
     /**
      * @param string $path
      */
     public function setPath(string $path);
-
+    
     /**
      * @return string
      */
     public function getMime() : string;
-
+    
     /**
      * @param string $mime
      */
     public function setMime(string $mime);
-
+    
     /**
      * @return int
      */
     public function getSize() : int;
-
+    
     /**
      * @param int $size
      */
     public function setSize(int $size);
-
+    
     /**
      * @return string
      */
     public function getFullName() : string;
-
+    
     /**
      * @return string
      */
     public function getExtension() : string;
-
+    
     /**
      * @param string $extension
      */

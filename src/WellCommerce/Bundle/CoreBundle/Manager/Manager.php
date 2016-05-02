@@ -17,7 +17,6 @@ use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactoryInterface;
 use WellCommerce\Bundle\DoctrineBundle\Helper\Doctrine\DoctrineHelperInterface;
 use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
-use WellCommerce\Component\Form\Elements\FormInterface;
 
 /**
  * Class Manager
@@ -30,84 +29,72 @@ final class Manager implements ManagerInterface
      * @var RepositoryInterface
      */
     private $repository;
-
+    
     /**
      * @var EntityFactoryInterface
      */
     private $factory;
-
+    
     /**
      * @var DoctrineHelperInterface
      */
-    private $doctrineHelper;
-
+    private $helper;
+    
     /**
      * Manager constructor.
      *
-     * @param RepositoryInterface     $repository
-     * @param EntityFactoryInterface  $factory
-     * @param DoctrineHelperInterface $doctrineHelper
+     * @param EntityFactoryInterface   $factory
+     * @param RepositoryInterface|null $repository
+     * @param DoctrineHelperInterface  $helper
      */
-    public function __construct(RepositoryInterface $repository, EntityFactoryInterface $factory, DoctrineHelperInterface $doctrineHelper)
+    public function __construct(EntityFactoryInterface $factory, RepositoryInterface $repository = null, DoctrineHelperInterface $helper)
     {
-        $this->repository     = $repository;
-        $this->factory        = $factory;
-        $this->doctrineHelper = $doctrineHelper;
+        $this->factory    = $factory;
+        $this->repository = $repository;
+        $this->helper     = $helper;
     }
-
+    
     public function getRepository() : RepositoryInterface
     {
         return $this->repository;
     }
-
+    
     public function getFactory() : EntityFactoryInterface
     {
         return $this->factory;
     }
-
-    public function getForm($resource, array $config = []) : FormInterface
-    {
-        $builder       = $this->getFormBuilder();
-        $defaultConfig = [
-            'name'              => $this->repository->getAlias(),
-            'validation_groups' => ['Default']
-        ];
-        $config        = array_merge($defaultConfig, $config);
-
-        return $builder->createForm($config, $resource);
-    }
-
+    
     public function initResource() : EntityInterface
     {
         return $this->factory->create();
     }
-
+    
     public function createResource(EntityInterface $resource)
     {
         $em = $this->getEntityManager();
         $em->persist($resource);
         $em->flush();
     }
-
+    
     public function updateResource(EntityInterface $resource)
     {
         $this->getEntityManager()->flush();
     }
-
+    
     public function removeResource(EntityInterface $resource)
     {
         $em = $this->getEntityManager();
         $em->remove($resource);
         $em->flush();
     }
-
+    
     public function getDoctrineHelper() : DoctrineHelperInterface
     {
-        return $this->doctrineHelper;
+        return $this->helper;
     }
-
-    private function getEntityManager() : ObjectManager
+    
+    public function getEntityManager() : ObjectManager
     {
-        return $this->doctrineHelper->getEntityManager();
+        return $this->helper->getEntityManager();
     }
 }

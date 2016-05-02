@@ -26,42 +26,42 @@ use WellCommerce\Bundle\ShopBundle\Entity\ShopAwareTrait;
 class Client extends AbstractEntity implements ClientInterface
 {
     const ROLE_CLIENT = 'ROLE_CLIENT';
-
+    
     use Timestampable;
     use Blameable;
     use ShopAwareTrait;
     use ClientGroupAwareTrait;
-
+    
     /**
      * @var Collection
      */
     protected $orders;
-
+    
     /**
      * @var Collection
      */
     protected $wishlist;
-
+    
     /**
      * @var ClientDetails
      */
     protected $clientDetails;
-
+    
     /**
      * @var ClientContactDetailsInterface
      */
     protected $contactDetails;
-
+    
     /**
      * @var ClientBillingAddressInterface
      */
     protected $billingAddress;
-
+    
     /**
      * @var ClientShippingAddressInterface
      */
     protected $shippingAddress;
-
+    
     /**
      * @inheritDoc
      */
@@ -69,7 +69,7 @@ class Client extends AbstractEntity implements ClientInterface
     {
         return $this->clientDetails->getPassword();
     }
-
+    
     /**
      * @return null
      */
@@ -77,7 +77,7 @@ class Client extends AbstractEntity implements ClientInterface
     {
         return $this->clientDetails->getSalt();
     }
-
+    
     /**
      * @inheritDoc
      */
@@ -85,14 +85,14 @@ class Client extends AbstractEntity implements ClientInterface
     {
         return $this->clientDetails->getUsername();
     }
-
+    
     /**
      * @inheritDoc
      */
     public function eraseCredentials()
     {
     }
-
+    
     /**
      * @inheritDoc
      */
@@ -102,7 +102,7 @@ class Client extends AbstractEntity implements ClientInterface
             self::ROLE_CLIENT
         ];
     }
-
+    
     /**
      * @inheritDoc
      */
@@ -110,7 +110,7 @@ class Client extends AbstractEntity implements ClientInterface
     {
         return serialize([$this->id, $this->getUsername(), $this->getPassword()]);
     }
-
+    
     /**
      * @inheritDoc
      */
@@ -123,7 +123,7 @@ class Client extends AbstractEntity implements ClientInterface
         $this->clientDetails->setUsername($username);
         $this->clientDetails->setPassword($password);
     }
-
+    
     /**
      * @inheritDoc
      */
@@ -132,18 +132,18 @@ class Client extends AbstractEntity implements ClientInterface
         if ($this->getPassword() !== $user->getPassword()) {
             return false;
         }
-
+        
         if ($this->getSalt() !== $user->getSalt()) {
             return false;
         }
-
+        
         if ($this->getUsername() !== $user->getUsername()) {
             return false;
         }
-
+        
         return true;
     }
-
+    
     /**
      * @inheritDoc
      */
@@ -151,7 +151,7 @@ class Client extends AbstractEntity implements ClientInterface
     {
         return $this->orders;
     }
-
+    
     /**
      * @inheritDoc
      */
@@ -159,7 +159,7 @@ class Client extends AbstractEntity implements ClientInterface
     {
         return $this->wishlist;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -167,7 +167,7 @@ class Client extends AbstractEntity implements ClientInterface
     {
         return $this->clientDetails;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -175,7 +175,7 @@ class Client extends AbstractEntity implements ClientInterface
     {
         $this->clientDetails = $clientDetails;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -183,7 +183,7 @@ class Client extends AbstractEntity implements ClientInterface
     {
         return $this->contactDetails;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -191,7 +191,7 @@ class Client extends AbstractEntity implements ClientInterface
     {
         $this->contactDetails = $contactDetails;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -199,7 +199,7 @@ class Client extends AbstractEntity implements ClientInterface
     {
         return $this->billingAddress;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -207,7 +207,7 @@ class Client extends AbstractEntity implements ClientInterface
     {
         $this->billingAddress = $billingAddress;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -215,7 +215,7 @@ class Client extends AbstractEntity implements ClientInterface
     {
         return $this->shippingAddress;
     }
-
+    
     /**
      * {@inheritdoc}
      */

@@ -12,16 +12,6 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Manager;
 
-use WellCommerce\Bundle\OrderBundle\Entity\CartInterface;
-use WellCommerce\Bundle\OrderBundle\Entity\CartProductInterface;
-use WellCommerce\Bundle\OrderBundle\Exception\AddCartItemException;
-use WellCommerce\Bundle\OrderBundle\Repository\CartRepositoryInterface;
-use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
-use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
-use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
-use WellCommerce\Bundle\ProductBundle\Entity\VariantInterface;
-use WellCommerce\Bundle\ShopBundle\Entity\ShopInterface;
-
 /**
  * Interface CartAddressManagerInterface
  *

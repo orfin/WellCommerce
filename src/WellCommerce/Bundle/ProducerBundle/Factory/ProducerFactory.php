@@ -23,20 +23,12 @@ use WellCommerce\Bundle\ProducerBundle\Entity\ProducerInterface;
  */
 class ProducerFactory extends AbstractEntityFactory
 {
-    /**
-     * @var string
-     */
-    protected $supportsInterface = ProducerInterface::class;
-
-    /**
-     * @return ProducerInterface
-     */
     public function create() : ProducerInterface
     {
         /** @var  $producer ProducerInterface */
         $producer = $this->init();
-        $producer->setDeliverers(new ArrayCollection());
-        $producer->setShops(new ArrayCollection());
+        $producer->setDeliverers($this->createEmptyCollection());
+        $producer->setShops($this->getDefaultShops());
         
         return $producer;
     }

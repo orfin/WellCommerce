@@ -1,8 +1,1 @@
-well_commerce_report:
-    configuration:
-        report:
-            orm:
-                factory: ~
-                repository: ~
-                mapping: ~
-                entity: ~
+

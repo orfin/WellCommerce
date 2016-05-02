@@ -19,13 +19,14 @@
             <argument type="service" id="attribute_value.repository"/>
         </service>
 
-        <service id="attribute_value.dataset.admin" class="WellCommerce\Bundle\AttributeBundle\DataSet\Admin\AttributeValueDataSet" parent="core.dataset">
+        <service id="attribute_value.dataset.admin" class="WellCommerce\Bundle\AttributeBundle\DataSet\Admin\AttributeValueDataSet">
             <argument type="service" id="attribute_value.dataset.query_builder.admin"/>
+            <tag name="dataset"/>
         </service>
 
-        <service id="attribute_value.datagrid" class="WellCommerce\Bundle\AttributeBundle\DataGrid\AttributeValueDataGrid" parent="core.datagrid">
-            <argument key="identifier">availability</argument>
+        <service id="attribute_value.datagrid" class="WellCommerce\Bundle\AttributeBundle\DataGrid\AttributeValueDataGrid">
             <argument type="service" id="attribute_value.dataset.admin"/>
+            <tag name="datagrid" alias="attribute_value"/>
         </service>
     </services>
 </container>

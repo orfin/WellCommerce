@@ -11,13 +11,13 @@
  */
 namespace WellCommerce\Bundle\DelivererBundle\Repository;
 
-use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
 
 /**
  * Class DelivererRepository
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class DelivererRepository extends AbstractEntityRepository implements DelivererRepositoryInterface
+class DelivererRepository extends EntityRepository implements DelivererRepositoryInterface
 {
 }

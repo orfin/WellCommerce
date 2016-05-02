@@ -1,76 +1,82 @@
 {
-    "name": "wellcommerce/app-bundle",
-    "type": "wellcommerce-bundle",
-    "license": "MIT",
-    "minimum-stability": "dev",
-    "description": "WellCommerce AppBundle",
-    "keywords": ["wellcommerce","e-commerce","open-source"],
-    "authors": [
-        {
-            "name": "Adam Piotrowski",
-            "email": "adam@wellcommerce.org"
-        },
-        {
-            "name": "WellCommerce Developers",
-            "email": "developers@wellcommerce.org"
-        }
-    ],
-    "support": {
-        "email": "support@wellcommerce.org",
-        "issues": "https://github.com/WellCommerce/AppBundle/issues",
-        "source": "https://github.com/WellCommerce/AppBundle/"
+  "name": "wellcommerce/app-bundle",
+  "type": "wellcommerce-bundle",
+  "license": "MIT",
+  "minimum-stability": "dev",
+  "description": "WellCommerce AppBundle",
+  "keywords": [
+    "wellcommerce",
+    "e-commerce",
+    "open-source"
+  ],
+  "authors": [
+    {
+      "name": "Adam Piotrowski",
+      "email": "adam@wellcommerce.org"
     },
-    "autoload": {
-        "psr-4": { "WellCommerce\\Bundle\\AppBundle\\": "src/WellCommerce/Bundle/AppBundle" }
-    },
-    "require": {
-        "php": "^7.0",
-        "wellcommerce/core-bundle": "^0.7@dev",
-        "wellcommerce/admin-bundle": "^0.7@dev",
-        "wellcommerce/attribute-bundle": "^0.7@dev",
-        "wellcommerce/availability-bundle": "^0.7@dev",
-        "wellcommerce/cart-bundle": "^0.7@dev",
-        "wellcommerce/category-bundle": "^0.7@dev",
-        "wellcommerce/client-bundle": "^0.7@dev",
-        "wellcommerce/company-bundle": "^0.7@dev",
-        "wellcommerce/contact-bundle": "^0.7@dev",
-        "wellcommerce/country-bundle": "^0.7@dev",
-        "wellcommerce/coupon-bundle": "^0.7@dev",
-        "wellcommerce/currency-bundle": "^0.7@dev",
-        "wellcommerce/deliverer-bundle": "^0.7@dev",
-        "wellcommerce/dictionary-bundle": "^0.7@dev",
-        "wellcommerce/distribution-bundle": "^0.7@dev",
-        "wellcommerce/doctrine-bundle": "^0.7@dev",
-        "wellcommerce/layered-navigation-bundle": "^0.7@dev",
-        "wellcommerce/layout-bundle": "^0.7@dev",
-        "wellcommerce/locale-bundle": "^0.7@dev",
-        "wellcommerce/media-bundle": "^0.7@dev",
-        "wellcommerce/news-bundle": "^0.7@dev",
-        "wellcommerce/order-bundle": "^0.7@dev",
-        "wellcommerce/oauth-bundle": "^0.7@dev",
-        "wellcommerce/page-bundle": "^0.7@dev",
-        "wellcommerce/payment-bundle": "^0.7@dev",
-        "wellcommerce/producer-bundle": "^0.7@dev",
-        "wellcommerce/product-bundle": "^0.7@dev",
-        "wellcommerce/product-status-bundle": "^0.7@dev",
-        "wellcommerce/report-bundle": "^0.7@dev",
-        "wellcommerce/review-bundle": "^0.7@dev",
-        "wellcommerce/routing-bundle": "^0.7@dev",
-        "wellcommerce/search-bundle": "^0.7@dev",
-        "wellcommerce/shipping-bundle": "^0.7@dev",
-        "wellcommerce/shop-bundle": "^0.7@dev",
-        "wellcommerce/tax-bundle": "^0.7@dev",
-        "wellcommerce/theme-bundle": "^0.7@dev",
-        "wellcommerce/unit-bundle": "^0.7@dev",
-        "wellcommerce/wishlist-bundle": "^0.7@dev",
-        "wellcommerce/wellcommerce-default-theme": "^0.7@dev"
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "0.7.x-dev"
-        },
-        "wellcommerce-bundle": {
-            "install-dir": "src/WellCommerce/Bundle/AppBundle"
-        }
+    {
+      "name": "WellCommerce Developers",
+      "email": "developers@wellcommerce.org"
     }
+  ],
+  "support": {
+    "email": "support@wellcommerce.org",
+    "issues": "https://github.com/WellCommerce/AppBundle/issues",
+    "source": "https://github.com/WellCommerce/AppBundle/"
+  },
+  "autoload": {
+    "psr-4": {
+      "WellCommerce\\Bundle\\AppBundle\\": "src/WellCommerce/Bundle/AppBundle"
+    }
+  },
+  "require": {
+    "php": "^7.0",
+    "wellcommerce/core-bundle": "^0.7@dev",
+    "wellcommerce/admin-bundle": "^0.7@dev",
+    "wellcommerce/attribute-bundle": "^0.7@dev",
+    "wellcommerce/availability-bundle": "^0.7@dev",
+    "wellcommerce/cart-bundle": "^0.7@dev",
+    "wellcommerce/category-bundle": "^0.7@dev",
+    "wellcommerce/client-bundle": "^0.7@dev",
+    "wellcommerce/company-bundle": "^0.7@dev",
+    "wellcommerce/contact-bundle": "^0.7@dev",
+    "wellcommerce/country-bundle": "^0.7@dev",
+    "wellcommerce/coupon-bundle": "^0.7@dev",
+    "wellcommerce/currency-bundle": "^0.7@dev",
+    "wellcommerce/deliverer-bundle": "^0.7@dev",
+    "wellcommerce/dictionary-bundle": "^0.7@dev",
+    "wellcommerce/distribution-bundle": "^0.7@dev",
+    "wellcommerce/doctrine-bundle": "^0.7@dev",
+    "wellcommerce/layered-navigation-bundle": "^0.7@dev",
+    "wellcommerce/layout-bundle": "^0.7@dev",
+    "wellcommerce/locale-bundle": "^0.7@dev",
+    "wellcommerce/media-bundle": "^0.7@dev",
+    "wellcommerce/news-bundle": "^0.7@dev",
+    "wellcommerce/order-bundle": "^0.7@dev",
+    "wellcommerce/oauth-bundle": "^0.7@dev",
+    "wellcommerce/page-bundle": "^0.7@dev",
+    "wellcommerce/payment-bundle": "^0.7@dev",
+    "wellcommerce/producer-bundle": "^0.7@dev",
+    "wellcommerce/product-bundle": "^0.7@dev",
+    "wellcommerce/product-status-bundle": "^0.7@dev",
+    "wellcommerce/report-bundle": "^0.7@dev",
+    "wellcommerce/review-bundle": "^0.7@dev",
+    "wellcommerce/routing-bundle": "^0.7@dev",
+    "wellcommerce/search-bundle": "^0.7@dev",
+    "wellcommerce/shipping-bundle": "^0.7@dev",
+    "wellcommerce/shop-bundle": "^0.7@dev",
+    "wellcommerce/tax-bundle": "^0.7@dev",
+    "wellcommerce/theme-bundle": "^0.7@dev",
+    "wellcommerce/unit-bundle": "^0.7@dev",
+    "wellcommerce/wishlist-bundle": "^0.7@dev",
+    "wellcommerce/wellcommerce-default-theme": "^0.7@dev"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "0.7.x-dev"
+    },
+    "wellcommerce-bundle": {
+      "install-dir": "src/WellCommerce/Bundle/AppBundle"
+    }
+  }
 }

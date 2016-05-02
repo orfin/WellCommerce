@@ -17,13 +17,14 @@
             <argument type="service" id="dictionary.repository"/>
         </service>
 
-        <service id="dictionary.dataset.admin" class="WellCommerce\Bundle\DictionaryBundle\DataSet\Admin\DictionaryDataSet" parent="core.dataset">
+        <service id="dictionary.dataset.admin" class="WellCommerce\Bundle\DictionaryBundle\DataSet\Admin\DictionaryDataSet">
             <argument type="service" id="dictionary.dataset.query_builder.admin"/>
+            <tag name="dataset"/>
         </service>
 
-        <service id="dictionary.datagrid" class="WellCommerce\Bundle\DictionaryBundle\DataGrid\DictionaryDataGrid" parent="core.datagrid">
-            <argument key="identifier">dictionary</argument>
+        <service id="dictionary.datagrid" class="WellCommerce\Bundle\DictionaryBundle\DataGrid\DictionaryDataGrid">
             <argument type="service" id="dictionary.dataset.admin"/>
+            <tag name="datagrid" alias="dictionary"/>
         </service>
 
         <service id="dictionary.form_builder.admin" class="WellCommerce\Bundle\DictionaryBundle\Form\Admin\DictionaryFormBuilder" parent="core.form_builder" />

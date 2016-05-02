@@ -23,7 +23,7 @@ interface TaxAwareInterface
      * @return TaxInterface
      */
     public function getTax() : TaxInterface;
-
+    
     /**
      * @param TaxInterface $tax
      */

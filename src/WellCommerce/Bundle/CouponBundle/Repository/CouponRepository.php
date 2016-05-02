@@ -11,13 +11,13 @@
  */
 namespace WellCommerce\Bundle\CouponBundle\Repository;
 
-use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
 
 /**
  * Class CouponRepository
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CouponRepository extends AbstractEntityRepository implements CouponRepositoryInterface
+class CouponRepository extends EntityRepository implements CouponRepositoryInterface
 {
 }

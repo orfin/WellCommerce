@@ -23,7 +23,7 @@ trait ShopAwareTrait
      * @var ShopInterface
      */
     protected $shop;
-
+    
     /**
      * @return ShopInterface
      */
@@ -31,7 +31,7 @@ trait ShopAwareTrait
     {
         return $this->shop;
     }
-
+    
     /**
      * @param Shop $shop
      */

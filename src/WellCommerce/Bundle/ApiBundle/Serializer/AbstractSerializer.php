@@ -36,37 +36,37 @@ abstract class AbstractSerializer implements SerializerAwareInterface
      * @var DoctrineHelperInterface
      */
     protected $doctrineHelper;
-
+    
     /**
      * @var \Symfony\Component\PropertyAccess\PropertyAccessor
      */
     protected $propertyAccessor;
-
+    
     /**
      * @var SerializerInterface|NormalizerInterface|DenormalizerInterface
      */
     protected $serializer;
-
+    
     /**
      * @var SerializationMetadataLoaderInterface
      */
     protected $serializationMetadataLoader;
-
+    
     /**
      * @var \WellCommerce\Bundle\ApiBundle\Metadata\Collection\SerializationMetadataCollection
      */
     protected $serializationMetadataCollection;
-
+    
     /**
      * @var array
      */
     protected $context = [];
-
+    
     /**
      * @var string
      */
     protected $format;
-
+    
     /**
      * AbstractSerializer constructor.
      *
@@ -80,7 +80,7 @@ abstract class AbstractSerializer implements SerializerAwareInterface
         $this->propertyAccessor                = PropertyAccess::createPropertyAccessor();
         $this->serializationMetadataCollection = $this->getSerializationMetadataCollection();
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -89,10 +89,10 @@ abstract class AbstractSerializer implements SerializerAwareInterface
         if (!$serializer instanceof NormalizerInterface || !$serializer instanceof DenormalizerInterface) {
             throw new LogicException('Injected serializer must implement both NormalizerInterface and DenormalizerInterface');
         }
-
+        
         $this->serializer = $serializer;
     }
-
+    
     /**
      * @return \WellCommerce\Bundle\ApiBundle\Metadata\Collection\SerializationMetadataCollection
      */
@@ -100,7 +100,7 @@ abstract class AbstractSerializer implements SerializerAwareInterface
     {
         return $this->serializationMetadataLoader->loadMetadata();
     }
-
+    
     /**
      * Returns the serialization metadata for given entity
      *
@@ -111,10 +111,10 @@ abstract class AbstractSerializer implements SerializerAwareInterface
     protected function getSerializationMetadata($entity)
     {
         $className = $this->getRealClass($entity);
-
+        
         return $this->serializationMetadataCollection->get($className);
     }
-
+    
     /**
      * Returns the metadata for entity
      *
@@ -126,7 +126,7 @@ abstract class AbstractSerializer implements SerializerAwareInterface
     {
         return $this->doctrineHelper->getClassMetadataForEntity($entity);
     }
-
+    
     /**
      * Builds property path in array-notation style from given attribute's name
      *
@@ -137,15 +137,15 @@ abstract class AbstractSerializer implements SerializerAwareInterface
     protected function getPropertyPath($attributeName)
     {
         $elements = explode('.', $attributeName);
-
+        
         $wrapped = array_map(function ($element) {
-
+            
             return "[{$element}]";
         }, $elements);
-
+        
         return new PropertyPath(implode('', $wrapped));
     }
-
+    
     /**
      * @param $propertyName
      *
@@ -156,13 +156,13 @@ abstract class AbstractSerializer implements SerializerAwareInterface
         $elements = explode('.', $propertyName);
         $wrapped  = array_map(function ($element) {
             $name = Inflector::classify($element);
-
+            
             return Inflector::camelize($name);
         }, $elements);
-
+        
         return new PropertyPath(implode('.', $wrapped));
     }
-
+    
     /**
      * Returns the entity fields
      *
@@ -179,10 +179,10 @@ abstract class AbstractSerializer implements SerializerAwareInterface
                 $fields[$field] = $field;
             }
         }
-
+        
         return $fields;
     }
-
+    
     /**
      * Returns the entity embeddable fields
      *
@@ -200,10 +200,10 @@ abstract class AbstractSerializer implements SerializerAwareInterface
                 $embeddables[$embeddablePropertyName] = $embeddablePropertyName;
             }
         }
-
+        
         return $embeddables;
     }
-
+    
     /**
      * Returns the entity fields
      *
@@ -218,10 +218,10 @@ abstract class AbstractSerializer implements SerializerAwareInterface
         foreach ($entityAssociations as $association) {
             $associations[$association] = $association;
         }
-
+        
         return $associations;
     }
-
+    
     /**
      * Returns the real class name
      *
@@ -232,7 +232,7 @@ abstract class AbstractSerializer implements SerializerAwareInterface
     private function getRealClass($object)
     {
         $className = get_class($object);
-
+        
         return ClassUtils::getRealClass($className);
     }
 }

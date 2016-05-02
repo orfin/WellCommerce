@@ -6,11 +6,4 @@
     <imports>
         <import resource="admin/order_status.xml"/>
     </imports>
-
-    <services>
-        <service id="order_status.manager" class="WellCommerce\Bundle\OrderBundle\Manager\OrderStatusManager" parent="core.manager">
-            <argument type="service" id="order_status.repository"/>
-            <argument type="service" id="order_status.factory"/>
-        </service>
-    </services>
 </container>

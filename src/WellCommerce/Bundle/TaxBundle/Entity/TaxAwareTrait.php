@@ -23,7 +23,7 @@ trait TaxAwareTrait
      * @var TaxInterface
      */
     protected $tax;
-
+    
     /**
      * @return TaxInterface
      */
@@ -31,7 +31,7 @@ trait TaxAwareTrait
     {
         return $this->tax;
     }
-
+    
     /**
      * @param TaxInterface $tax
      */

@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use WellCommerce\Bundle\CoreBundle\Controller\AbstractController;
 use WellCommerce\Bundle\CoreBundle\Manager\Front\FrontManagerInterface;
+use WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface;
 use WellCommerce\Bundle\CoreBundle\Service\Breadcrumb\BreadcrumbItem;
 
 /**
@@ -25,16 +26,16 @@ use WellCommerce\Bundle\CoreBundle\Service\Breadcrumb\BreadcrumbItem;
 abstract class AbstractFrontController extends AbstractController implements FrontControllerInterface
 {
     /**
-     * @var FrontManagerInterface
+     * @var null|ManagerInterface
      */
     protected $manager;
 
     /**
-     * Constructor
+     * AbstractFrontController constructor.
      *
-     * @param FrontManagerInterface $manager
+     * @param ManagerInterface|null $manager
      */
-    public function __construct(FrontManagerInterface $manager)
+    public function __construct(ManagerInterface $manager = null)
     {
         $this->manager = $manager;
     }

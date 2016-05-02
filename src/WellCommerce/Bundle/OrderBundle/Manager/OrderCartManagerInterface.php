@@ -35,7 +35,7 @@ interface OrderCartManagerInterface extends FrontManagerInterface
      * @return bool
      */
     public function addProductToCart(ProductInterface $product, VariantInterface $variant = null, $quantity = 1);
-
+    
     /**
      * Deletes the item from cart
      *
@@ -44,7 +44,7 @@ interface OrderCartManagerInterface extends FrontManagerInterface
      * @return bool
      */
     public function deleteCartProduct(CartProductInterface $cartProduct);
-
+    
     /**
      * Changes item quantity on cart
      *
@@ -54,13 +54,13 @@ interface OrderCartManagerInterface extends FrontManagerInterface
      * @return bool
      */
     public function changeCartProductQuantity(CartProductInterface $cartProduct, $qty);
-
+    
     /**
      * Initializes the cart for current request
      *
      * @return CartInterface
      */
     public function initializeCart();
-
+    
     public function abandonCurrentCart();
 }

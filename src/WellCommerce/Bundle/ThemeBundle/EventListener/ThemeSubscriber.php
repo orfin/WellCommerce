@@ -11,11 +11,9 @@
  */
 namespace WellCommerce\Bundle\ThemeBundle\EventListener;
 
-use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
 use WellCommerce\Bundle\ThemeBundle\Form\Admin\ThemeFormBuilder;
-use WellCommerce\Bundle\ThemeBundle\Manager\ThemeManagerInterface;
 use WellCommerce\Component\Form\Event\FormEvent;
 
 /**
@@ -26,21 +24,6 @@ use WellCommerce\Component\Form\Event\FormEvent;
 class ThemeSubscriber extends AbstractEventSubscriber
 {
     /**
-     * @var ThemeManagerInterface
-     */
-    protected $themeManager;
-
-    /**
-     * Constructor
-     *
-     * @param ThemeManagerInterface $themeManager
-     */
-    public function __construct(ThemeManagerInterface $themeManager)
-    {
-        $this->themeManager = $themeManager;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public static function getSubscribedEvents()
@@ -50,7 +33,7 @@ class ThemeSubscriber extends AbstractEventSubscriber
             ThemeFormBuilder::FORM_INIT_EVENT => 'onThemeFormInit',
         ];
     }
-
+    
     /**
      * Sets shop context related session variables
      */
@@ -60,7 +43,7 @@ class ThemeSubscriber extends AbstractEventSubscriber
         $themeContext = $this->container->get('theme.context.front');
         $themeContext->setCurrentTheme($frontContext->getCurrentShop()->getTheme());
     }
-
+    
     /**
      * Adds theme configuration fields to main theme edit form
      *
@@ -69,9 +52,9 @@ class ThemeSubscriber extends AbstractEventSubscriber
     public function onThemeFormInit(FormEvent $event)
     {
         $builder        = $event->getFormBuilder();
-        $resource       = $builder->getData();
+        $resource       = $event->getEntity();
         $fieldGenerator = $this->container->get('theme.fields_generator');
-
+        
         $fieldGenerator->loadThemeFieldsConfiguration($resource);
         $fieldGenerator->addFormFields($builder);
     }

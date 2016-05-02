@@ -20,8 +20,8 @@ namespace WellCommerce\Bundle\ClientBundle\Entity;
 interface ClientBillingAddressAwareInterface
 {
     public function getBillingAddress() : ClientBillingAddressInterface;
-
+    
     public function setBillingAddress(ClientBillingAddressInterface $billingAddress);
-
+    
     public function hasBillingAddress() : bool;
 }

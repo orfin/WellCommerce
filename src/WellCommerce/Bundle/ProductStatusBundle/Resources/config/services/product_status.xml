@@ -9,11 +9,6 @@
     </imports>
 
     <services>
-        <service id="product_status.manager" class="WellCommerce\Bundle\ProductStatusBundle\Manager\ProductStatusManager" parent="core.manager">
-            <argument type="service" id="product_status.repository"/>
-            <argument type="service" id="product_status.factory"/>
-        </service>
-
         <service id="product_status.request_param_converter" class="WellCommerce\Bundle\ProductStatusBundle\Request\ParamConverter\ProductStatusParamConverter">
             <argument type="service" id="product_status.repository" />
             <argument>id</argument>

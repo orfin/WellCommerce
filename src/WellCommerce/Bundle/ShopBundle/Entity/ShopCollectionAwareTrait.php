@@ -25,7 +25,7 @@ trait ShopCollectionAwareTrait
      * @var Collection
      */
     protected $shops;
-
+    
     /**
      * @return Collection
      */
@@ -33,7 +33,7 @@ trait ShopCollectionAwareTrait
     {
         return $this->shops;
     }
-
+    
     /**
      * @param Collection $shops
      */
@@ -41,7 +41,7 @@ trait ShopCollectionAwareTrait
     {
         $this->shops = $shops;
     }
-
+    
     /**
      * @param ShopInterface $shop
      */

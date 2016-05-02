@@ -6,11 +6,6 @@
     <services>
         <service id="knp.packagist_api.client" class="Packagist\Api\Client"/>
 
-        <service id="package.manager" class="WellCommerce\Bundle\DistributionBundle\Manager\PackageManager" parent="core.manager">
-            <argument type="service" id="package.repository"/>
-            <argument type="service" id="package.factory"/>
-        </service>
-
         <service id="package.controller.admin" class="WellCommerce\Bundle\DistributionBundle\Controller\Admin\PackageController">
             <argument type="service" id="package.manager"/>
             <argument type="service" id="package.form_builder"/>
@@ -24,13 +19,14 @@
             <argument type="service" id="package.repository"/>
         </service>
 
-        <service id="package.dataset" class="WellCommerce\Bundle\DistributionBundle\DataSet\Admin\PackageDataSet" parent="core.dataset">
+        <service id="package.dataset" class="WellCommerce\Bundle\DistributionBundle\DataSet\Admin\PackageDataSet">
             <argument type="service" id="package.dataset.query_builder"/>
+            <tag name="dataset"/>
         </service>
 
-        <service id="package.datagrid" class="WellCommerce\Bundle\DistributionBundle\DataGrid\PackageDataGrid" parent="core.datagrid">
-            <argument key="identifier">package</argument>
+        <service id="package.datagrid" class="WellCommerce\Bundle\DistributionBundle\DataGrid\PackageDataGrid">
             <argument type="service" id="package.dataset"/>
+            <tag name="datagrid" alias="package"/>
         </service>
 
         <service id="package.form_builder" class="WellCommerce\Bundle\DistributionBundle\Form\Admin\PackageFormBuilder" parent="core.form_builder" />

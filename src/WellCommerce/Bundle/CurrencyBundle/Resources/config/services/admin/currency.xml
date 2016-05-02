@@ -17,13 +17,14 @@
             <argument type="service" id="currency.repository"/>
         </service>
 
-        <service id="currency.dataset.admin" class="WellCommerce\Bundle\CurrencyBundle\DataSet\Admin\CurrencyDataSet" parent="core.dataset">
+        <service id="currency.dataset.admin" class="WellCommerce\Bundle\CurrencyBundle\DataSet\Admin\CurrencyDataSet">
             <argument type="service" id="currency.dataset.query_builder.admin"/>
+            <tag name="dataset"/>
         </service>
 
-        <service id="currency.datagrid" class="WellCommerce\Bundle\CurrencyBundle\DataGrid\CurrencyDataGrid" parent="core.datagrid">
-            <argument key="identifier">currency</argument>
+        <service id="currency.datagrid" class="WellCommerce\Bundle\CurrencyBundle\DataGrid\CurrencyDataGrid">
             <argument type="service" id="currency.dataset.admin"/>
+            <tag name="datagrid" alias="currency"/>
         </service>
 
         <service id="currency.form_builder.admin" class="WellCommerce\Bundle\CurrencyBundle\Form\Admin\CurrencyFormBuilder" parent="core.form_builder" />

@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\CoreBundle\DependencyInjection;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * Class WellCommerceCoreExtension
@@ -21,13 +20,4 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  */
 class WellCommerceCoreExtension extends AbstractExtension
 {
-    CONST EXTENSION_NAME = 'well_commerce_core';
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function setExtensionConfiguration(ContainerBuilder $container, array $parameters = [])
-    {
-        $container->setParameter(self::EXTENSION_NAME, $parameters);
-    }
 }

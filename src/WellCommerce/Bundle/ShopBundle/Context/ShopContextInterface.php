@@ -25,22 +25,22 @@ interface ShopContextInterface
      * @return ShopInterface
      */
     public function getCurrentShop() : ShopInterface;
-
+    
     /**
      * @return int
      */
     public function getCurrentShopIdentifier() : int;
-
+    
     /**
      * @param ShopInterface $shop
      */
     public function setCurrentShop(ShopInterface $shop);
-
+    
     /**
      * @return bool
      */
     public function hasCurrentShop() : bool;
-
+    
     /**
      * @return string
      */

@@ -14,14 +14,14 @@ namespace WellCommerce\Bundle\OrderBundle\Repository;
 
 use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\QueryBuilder;
-use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
 
 /**
  * Class CartProductRepository
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-final class CartProductRepository extends AbstractEntityRepository implements CartProductRepositoryInterface
+final class CartProductRepository extends EntityRepository implements CartProductRepositoryInterface
 {
     /**
      * {@inheritdoc}
@@ -37,8 +37,8 @@ final class CartProductRepository extends AbstractEntityRepository implements Ca
         $queryBuilder->leftJoin('product.productPhotos', 'gallery', Expr\Join::WITH, 'gallery.mainPhoto = :mainPhoto');
         $queryBuilder->leftJoin('gallery.photo', 'photos');
         $queryBuilder->setParameter('mainPhoto', 1);
-
-
+        
+        
         return $queryBuilder;
     }
 }

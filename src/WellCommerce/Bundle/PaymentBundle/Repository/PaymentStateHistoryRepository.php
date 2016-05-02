@@ -11,13 +11,13 @@
  */
 namespace WellCommerce\Bundle\PaymentBundle\Repository;
 
-use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
 
 /**
  * Class PaymentStateHistoryRepository
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PaymentStateHistoryRepository extends AbstractEntityRepository implements PaymentRepositoryInterface
+class PaymentStateHistoryRepository extends EntityRepository implements PaymentRepositoryInterface
 {
 }

@@ -23,17 +23,17 @@ interface SerializationClassMetadataInterface
      * @return string
      */
     public function getClass();
-
+    
     /**
      * @return \WellCommerce\Bundle\ApiBundle\Metadata\Collection\FieldMetadataCollection
      */
     public function getFields();
-
+    
     /**
      * @return \WellCommerce\Bundle\ApiBundle\Metadata\Collection\AssociationMetadataCollection
      */
     public function getAssociations();
-
+    
     /**
      * @return array
      */

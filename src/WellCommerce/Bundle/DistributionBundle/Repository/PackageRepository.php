@@ -11,13 +11,13 @@
  */
 namespace WellCommerce\Bundle\DistributionBundle\Repository;
 
-use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
 
 /**
  * Class PackageRepository
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PackageRepository extends AbstractEntityRepository implements PackageRepositoryInterface
+class PackageRepository extends EntityRepository implements PackageRepositoryInterface
 {
 }

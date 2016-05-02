@@ -8,11 +8,6 @@
     </imports>
 
     <services>
-        <service id="variant.manager" class="WellCommerce\Bundle\ProductBundle\Manager\VariantManager" parent="core.manager">
-            <argument type="service" id="variant.repository"/>
-            <argument type="service" id="variant.factory"/>
-        </service>
-
         <service id="variant.helper" class="WellCommerce\Bundle\ProductBundle\Helper\VariantHelper">
             <argument type="service" id="currency.helper"/>
         </service>

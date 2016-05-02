@@ -4,17 +4,8 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="contact.manager.front" class="WellCommerce\Bundle\ContactBundle\Manager\Front\ContactManager">
-            <argument type="service" id="contact.repository"/>
-            <argument type="service" id="contact.event_dispatcher"/>
-            <argument type="service" id="contact.factory"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-        </service>
-
         <service id="contact.controller.front" class="WellCommerce\Bundle\ContactBundle\Controller\Front\ContactController">
-            <argument type="service" id="contact.manager.front"/>
+            <argument type="service" id="contact.manager"/>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
@@ -29,8 +20,9 @@
             <argument type="service" id="contact.repository"/>
         </service>
 
-        <service id="contact.dataset.front" class="WellCommerce\Bundle\ContactBundle\DataSet\Front\ContactDataSet" parent="core.dataset">
+        <service id="contact.dataset.front" class="WellCommerce\Bundle\ContactBundle\DataSet\Front\ContactDataSet">
             <argument type="service" id="contact.dataset.query_builder.front"/>
+            <tag name="dataset"/>
         </service>
 
         <service id="contact.form_builder.front" class="WellCommerce\Bundle\ContactBundle\Form\Front\ContactFormBuilder" parent="core.form_builder" />

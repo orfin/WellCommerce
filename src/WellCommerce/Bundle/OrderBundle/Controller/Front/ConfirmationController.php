@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\OrderBundle\Controller\Front;
 
 use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
+use WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface;
 use WellCommerce\Bundle\CoreBundle\Service\Breadcrumb\BreadcrumbItem;
 use WellCommerce\Bundle\OrderBundle\Manager\Front\OrderManager;
 use WellCommerce\Bundle\PaymentBundle\Manager\Front\PaymentManagerInterface;
@@ -61,13 +62,13 @@ class ConfirmationController extends AbstractFrontController
         ]);
     }
     
-    private function getOrderManager() : OrderManager
+    private function getOrderManager() : ManagerInterface
     {
-        return $this->get('order.manager.front');
+        return $this->get('order.manager');
     }
 
-    private function getPaymentManager() : PaymentManagerInterface
+    private function getPaymentManager() : ManagerInterface
     {
-        return $this->get('payment.manager.front');
+        return $this->get('payment.manager');
     }
 }

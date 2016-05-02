@@ -3,7 +3,7 @@ well_commerce_company:
         company:
             orm:
                 factory: WellCommerce\Bundle\CompanyBundle\Factory\CompanyFactory
-                repository: WellCommerce\Bundle\CompanyBundle\Repository\CompanyRepository
+                repository: WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository
                 mapping: "@WellCommerceCompanyBundle/Resources/config/doctrine/Company.orm.yml"
                 entity: WellCommerce\Bundle\CompanyBundle\Entity\Company
             api:

@@ -25,12 +25,12 @@ interface ShopCollectionAwareInterface
      * @return Collection
      */
     public function getShops() : Collection;
-
+    
     /**
      * @param Collection $shops
      */
     public function setShops(Collection $shops);
-
+    
     /**
      * @param ShopInterface $shop
      */

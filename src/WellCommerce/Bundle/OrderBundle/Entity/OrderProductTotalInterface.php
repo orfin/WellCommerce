@@ -20,22 +20,22 @@ namespace WellCommerce\Bundle\OrderBundle\Entity;
 interface OrderProductTotalInterface
 {
     public function getQuantity() : int;
-
+    
     public function setQuantity(int $quantity);
-
+    
     public function getWeight() : float;
-
+    
     public function setWeight(float $weight);
-
+    
     public function getNetPrice() : float;
-
+    
     public function setNetPrice(float $netPrice);
-
+    
     public function getGrossPrice() : float;
-
+    
     public function setGrossPrice(float $grossPrice);
-
+    
     public function getTaxAmount() : float;
-
+    
     public function setTaxAmount(float $taxAmount);
 }

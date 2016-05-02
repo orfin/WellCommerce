@@ -23,7 +23,7 @@ use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 final class ClientGroupFactory extends AbstractEntityFactory
 {
     protected $supportsInterface = ClientGroupInterface::class;
-
+    
     public function create() : ClientGroupInterface
     {
         /** @var $group ClientGroupInterface */
@@ -31,7 +31,7 @@ final class ClientGroupFactory extends AbstractEntityFactory
         $group->setDiscount(0);
         $group->setClients($this->createEmptyCollection());
         $group->setPages($this->createEmptyCollection());
-
+        
         return $group;
     }
 }

@@ -6,10 +6,4 @@
     <imports>
         <import resource="front/wishlist.xml"/>
     </imports>
-
-    <services>
-        <service id="wishlist.event_dispatcher" parent="core.event_dispatcher" public="false">
-            <argument type="service" id="event_dispatcher"/>
-        </service>
-    </services>
 </container>

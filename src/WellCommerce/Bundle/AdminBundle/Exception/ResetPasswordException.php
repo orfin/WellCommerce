@@ -19,5 +19,5 @@ namespace WellCommerce\Bundle\AdminBundle\Exception;
  */
 class ResetPasswordException extends \RuntimeException
 {
-
+    
 }

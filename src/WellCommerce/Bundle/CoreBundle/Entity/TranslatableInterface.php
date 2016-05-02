@@ -20,13 +20,13 @@ namespace WellCommerce\Bundle\CoreBundle\Entity;
 interface TranslatableInterface
 {
     public function getTranslations();
-
+    
     public function getNewTranslations();
-
+    
     public function addTranslation($translation);
-
+    
     public function removeTranslation($translation);
-
+    
     /**
      * Translates an entity
      *
@@ -36,14 +36,14 @@ interface TranslatableInterface
      * @return object
      */
     public function translate($locale = null, $fallbackToDefault = true);
-
+    
     public function mergeNewTranslations();
-
+    
     public function setCurrentLocale($locale);
-
+    
     public function getCurrentLocale();
-
+    
     public function setDefaultLocale($locale);
-
+    
     public function getDefaultLocale();
 }

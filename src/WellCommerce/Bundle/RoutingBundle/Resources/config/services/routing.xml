@@ -9,10 +9,6 @@
     </imports>
 
     <services>
-        <service id="routing.event_dispatcher" parent="core.event_dispatcher" public="false">
-            <argument type="service" id="event_dispatcher"/>
-        </service>
-
         <service id="routable.subscriber" class="WellCommerce\Bundle\RoutingBundle\EventListener\RoutableSubscriber">
             <argument>%routing_discriminator_map%</argument>
             <tag name="doctrine.event_subscriber" />
@@ -67,6 +63,10 @@
         <service id="routing.generator" class="Symfony\Cmf\Component\Routing\ProviderBasedGenerator">
             <argument type="service" id="routing.provider" />
             <argument type="service" id="logger" on-invalid="ignore" />
+        </service>
+
+        <service id="slug.generator" class="WellCommerce\Bundle\RoutingBundle\Generator\SlugGenerator">
+            <argument type="service" id="routing.manager" />
         </service>
     </services>
 </container>

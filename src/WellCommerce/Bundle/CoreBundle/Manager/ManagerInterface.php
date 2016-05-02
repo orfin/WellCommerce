@@ -12,12 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Manager;
 
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use WellCommerce\Bundle\CoreBundle\Helper\Flash\FlashHelperInterface;
-use WellCommerce\Bundle\CoreBundle\Helper\Image\ImageHelperInterface;
-use WellCommerce\Bundle\CoreBundle\Helper\Request\RequestHelperInterface;
-use WellCommerce\Bundle\CoreBundle\Helper\Translator\TranslatorHelperInterface;
-use WellCommerce\Bundle\CoreBundle\Helper\Validator\ValidatorHelperInterface;
+use Doctrine\Common\Persistence\ObjectManager;
 use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactoryInterface;
 use WellCommerce\Bundle\DoctrineBundle\Helper\Doctrine\DoctrineHelperInterface;
@@ -36,42 +31,49 @@ interface ManagerInterface
      * @return DoctrineHelperInterface
      */
     public function getDoctrineHelper() : DoctrineHelperInterface;
-
+    
+    /**
+     * Returns the Doctrine manager
+     *
+     * @return ObjectManager
+     */
+    public function getEntityManager() : ObjectManager;
+    
     /**
      * Returns the repository
      *
      * @return RepositoryInterface
      */
     public function getRepository() : RepositoryInterface;
-
+    
     /**
      * Returns the factory
      *
      * @return EntityFactoryInterface
      */
     public function getFactory() : EntityFactoryInterface;
-
+    
     /**
      * Initializes new resource object
      *
      * @return EntityInterface
      */
     public function initResource() : EntityInterface;
-
+    
     /**
      * Persists new resource
      *
      * @param EntityInterface $resource
      */
     public function createResource(EntityInterface $resource);
-
+    
     /**
      * Updates existing resource
      *
      * @param EntityInterface $resource
      */
     public function updateResource(EntityInterface $resource);
-
+    
     /**
      * Removes a resource
      *

@@ -5,7 +5,7 @@
 
     <services>
         <service id="bank_transfer.controller.front" class="WellCommerce\Bundle\PaymentBundle\Controller\Front\BankTransferController">
-            <argument type="service" id="payment.manager.front"/>
+            <argument type="service" id="payment.manager"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>

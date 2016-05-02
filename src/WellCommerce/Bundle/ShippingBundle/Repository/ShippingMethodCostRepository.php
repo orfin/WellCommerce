@@ -11,14 +11,14 @@
  */
 namespace WellCommerce\Bundle\ShippingBundle\Repository;
 
-use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
 
 /**
  * Class ShippingMethodCostRepository
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ShippingMethodCostRepository extends AbstractEntityRepository implements ShippingMethodCostRepositoryInterface
+class ShippingMethodCostRepository extends EntityRepository implements ShippingMethodCostRepositoryInterface
 {
 
 }

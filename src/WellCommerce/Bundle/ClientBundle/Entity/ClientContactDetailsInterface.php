@@ -23,47 +23,47 @@ interface ClientContactDetailsInterface
      * @return string
      */
     public function getFirstName();
-
+    
     /**
      * @param string $firstName
      */
     public function setFirstName($firstName);
-
+    
     /**
      * @return string
      */
     public function getLastName();
-
+    
     /**
      * @param string $lastName
      */
     public function setLastName($lastName);
-
+    
     /**
      * @return string
      */
     public function getPhone();
-
+    
     /**
      * @param string $phone
      */
     public function setPhone($phone);
-
+    
     /**
      * @return string
      */
     public function getSecondaryPhone();
-
+    
     /**
      * @param string $secondaryPhone
      */
     public function setSecondaryPhone($secondaryPhone);
-
+    
     /**
      * @return string
      */
     public function getEmail();
-
+    
     /**
      * @param string $email
      */

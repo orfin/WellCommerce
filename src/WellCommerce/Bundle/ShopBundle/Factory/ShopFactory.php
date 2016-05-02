@@ -31,7 +31,7 @@ class ShopFactory extends AbstractEntityFactory
      * @var string
      */
     protected $supportsInterface = ShopInterface::class;
-
+    
     /**
      * @return ShopInterface
      */
@@ -51,27 +51,27 @@ class ShopFactory extends AbstractEntityFactory
         $shop->setDefaultCurrency($this->getDefaultCurrency()->getCode());
         $shop->setDefaultCountry($this->getDefaultCountry());
         $shop->setClientGroup($this->getDefaultClientGroup());
-
+        
         return $shop;
     }
-
+    
     private function getDefaultCountry() : string
     {
         $countries = array_keys($this->get('country.repository')->all());
-
+        
         return reset($countries);
     }
-
+    
     private function getDefaultClientGroup() : ClientGroupInterface
     {
         return $this->get('client_group.repository')->findOneBy([]);
     }
-
+    
     private function getDefaultCompany() : CompanyInterface
     {
         return $this->get('company.repository')->findOneBy([]);
     }
-
+    
     private function getDefaultTheme() : ThemeInterface
     {
         return $this->get('theme.repository')->findOneBy([]);

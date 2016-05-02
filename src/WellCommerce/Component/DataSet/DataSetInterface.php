@@ -29,14 +29,14 @@ interface DataSetInterface
      * @return ColumnCollection
      */
     public function getColumns() : ColumnCollection;
-
+    
     /**
      * Sets dataset columns
      *
      * @param ColumnCollection $columns
      */
     public function setColumns(ColumnCollection $columns);
-
+    
     /**
      * Adds default request's option
      *
@@ -44,7 +44,7 @@ interface DataSetInterface
      * @param mixed  $value
      */
     public function setDefaultRequestOption(string $name, $value);
-
+    
     /**
      * Adds default context's option
      *
@@ -52,7 +52,7 @@ interface DataSetInterface
      * @param mixed  $value
      */
     public function setDefaultContextOption(string $name, $value);
-
+    
     /**
      * Returns the dataset's result for given context type and options
      *
@@ -63,21 +63,21 @@ interface DataSetInterface
      * @return array
      */
     public function getResult(string $contextType, array $requestOptions = [], array $contextOptions = []) : array;
-
+    
     /**
      * Configures dataset options
      *
      * @param DataSetConfiguratorInterface $resolver
      */
     public function configureOptions(DataSetConfiguratorInterface $configurator);
-
+    
     /**
      * Dispatches the init event using event-dispatcher service
      *
      * @return void
      */
     public function dispatchOnDataSetInitEvent();
-
+    
     /**
      * @param CacheOptions $options
      */

@@ -4,27 +4,17 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="client_settings.manager.front" class="WellCommerce\Bundle\ClientBundle\Manager\Front\ClientSettingsManager">
-            <argument type="service" id="client.repository"/>
-            <argument type="service" id="client_settings.event_dispatcher"/>
-            <argument>null</argument>
-            <argument type="service" id="client_contact_details.form_builder.front"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-        </service>
-
         <service id="client_contact_details.form_builder.front" class="WellCommerce\Bundle\ClientBundle\Form\Front\ClientContactDetailsFormBuilder" parent="core.form_builder" />
 
         <service id="client_settings.controller.front" class="WellCommerce\Bundle\ClientBundle\Controller\Front\ClientSettingsController">
-            <argument type="service" id="client_settings.manager.front"/>
+            <argument type="service" id="client.manager"/>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
         </service>
 
         <service id="client_settings.controller.box" class="WellCommerce\Bundle\ClientBundle\Controller\Box\ClientSettingsBoxController">
-            <argument type="service" id="client_settings.manager.front"/>
+            <argument type="service" id="client.manager"/>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>

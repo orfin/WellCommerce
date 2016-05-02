@@ -30,12 +30,12 @@ class LoginFailureHandler implements AuthenticationFailureHandlerInterface
      * @var RouterInterface
      */
     protected $router;
-
+    
     /**
      * @var string
      */
     protected $loginRoute;
-
+    
     /**
      * Constructor
      *
@@ -47,11 +47,11 @@ class LoginFailureHandler implements AuthenticationFailureHandlerInterface
         $this->router     = $router;
         $this->loginRoute = $loginRoute;
     }
-
+    
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
         $request->getSession()->set(Security::AUTHENTICATION_ERROR, $exception);
-
+        
         return new RedirectResponse($this->router->generate($this->loginRoute));
     }
 }

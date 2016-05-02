@@ -25,9 +25,5 @@
         <service id="search.command.reindex.products" class="WellCommerce\Bundle\SearchBundle\Command\ReindexProductsCommand">
             <tag name="console.command"/>
         </service>
-
-        <service id="search.event_dispatcher" parent="core.event_dispatcher" public="false">
-            <argument type="service" id="event_dispatcher" />
-        </service>
     </services>
 </container>

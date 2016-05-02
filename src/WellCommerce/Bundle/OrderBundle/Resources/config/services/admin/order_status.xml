@@ -17,13 +17,14 @@
             <argument type="service" id="order_status.repository"/>
         </service>
 
-        <service id="order_status.dataset.admin" class="WellCommerce\Bundle\OrderBundle\DataSet\Admin\OrderStatusDataSet" parent="core.dataset">
+        <service id="order_status.dataset.admin" class="WellCommerce\Bundle\OrderBundle\DataSet\Admin\OrderStatusDataSet">
             <argument type="service" id="order_status.dataset.query_builder.admin"/>
+            <tag name="dataset"/>
         </service>
 
-        <service id="order_status.datagrid" class="WellCommerce\Bundle\OrderBundle\DataGrid\OrderStatusDataGrid" parent="core.datagrid">
-            <argument key="identifier">order_status</argument>
+        <service id="order_status.datagrid" class="WellCommerce\Bundle\OrderBundle\DataGrid\OrderStatusDataGrid">
             <argument type="service" id="order_status.dataset.admin"/>
+            <tag name="datagrid" alias="order_status"/>
         </service>
 
         <service id="order_status.form_builder.admin" class="WellCommerce\Bundle\OrderBundle\Form\Admin\OrderStatusFormBuilder" parent="core.form_builder" />

@@ -20,8 +20,8 @@ namespace WellCommerce\Bundle\ClientBundle\Entity;
 interface ClientContactDetailsAwareInterface
 {
     public function getContactDetails() : ClientContactDetailsInterface;
-
+    
     public function setContactDetails(ClientContactDetailsInterface $contactDetails);
-
+    
     public function hasContactDetails() : bool;
 }

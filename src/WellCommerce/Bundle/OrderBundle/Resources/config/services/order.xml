@@ -9,11 +9,6 @@
     </imports>
 
     <services>
-        <service id="order.manager" class="WellCommerce\Bundle\OrderBundle\Manager\OrderManager" parent="core.manager">
-            <argument type="service" id="order.repository"/>
-            <argument type="service" id="order.factory"/>
-        </service>
-
         <service id="order.modifier.collection" class="Doctrine\Common\Collections\ArrayCollection" shared="false" />
 
         <service id="order.modifier.provider" class="WellCommerce\Bundle\OrderBundle\Provider\OrderModifierProvider">

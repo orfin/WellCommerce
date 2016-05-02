@@ -23,27 +23,27 @@ class MailerConfiguration
      * @var string
      */
     protected $from;
-
+    
     /**
      * @var string
      */
     protected $host;
-
+    
     /**
      * @var int
      */
     protected $port;
-
+    
     /**
      * @var string
      */
     protected $user;
-
+    
     /**
      * @var string
      */
     protected $pass;
-
+    
     /**
      * @return string
      */
@@ -51,7 +51,7 @@ class MailerConfiguration
     {
         return $this->from;
     }
-
+    
     /**
      * @param string $from
      */
@@ -59,7 +59,7 @@ class MailerConfiguration
     {
         $this->from = $from;
     }
-
+    
     /**
      * @return mixed
      */
@@ -67,7 +67,7 @@ class MailerConfiguration
     {
         return $this->host;
     }
-
+    
     /**
      * @param mixed $host
      */
@@ -75,7 +75,7 @@ class MailerConfiguration
     {
         $this->host = $host;
     }
-
+    
     /**
      * @return mixed
      */
@@ -83,7 +83,7 @@ class MailerConfiguration
     {
         return $this->port;
     }
-
+    
     /**
      * @param mixed $port
      */
@@ -91,7 +91,7 @@ class MailerConfiguration
     {
         $this->port = $port;
     }
-
+    
     /**
      * @return mixed
      */
@@ -99,7 +99,7 @@ class MailerConfiguration
     {
         return $this->user;
     }
-
+    
     /**
      * @param mixed $user
      */
@@ -107,7 +107,7 @@ class MailerConfiguration
     {
         $this->user = $user;
     }
-
+    
     /**
      * @return mixed
      */
@@ -115,7 +115,7 @@ class MailerConfiguration
     {
         return $this->pass;
     }
-
+    
     /**
      * @param mixed $pass
      */

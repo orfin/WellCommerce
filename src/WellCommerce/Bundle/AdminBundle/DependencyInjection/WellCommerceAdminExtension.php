@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\AdminBundle\DependencyInjection;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
 
 /**
@@ -22,5 +21,4 @@ use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
  */
 class WellCommerceAdminExtension extends AbstractExtension
 {
-    CONST EXTENSION_NAME = 'well_commerce_admin';
 }

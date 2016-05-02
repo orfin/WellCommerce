@@ -28,17 +28,17 @@ abstract class AbstractShopResolver
      * @var ShopRepositoryInterface
      */
     protected $repository;
-
+    
     /**
      * @var RequestHelperInterface
      */
     protected $requestHelper;
-
+    
     /**
      * @var ShopContextInterface
      */
     protected $context;
-
+    
     /**
      * Constructor
      *
@@ -52,19 +52,19 @@ abstract class AbstractShopResolver
         $this->repository    = $repository;
         $this->requestHelper = $requestHelper;
     }
-
+    
     /**
      * {@inheritdoc}
      */
     abstract public function resolve();
-
+    
     protected function getDefaultShop() : ShopInterface
     {
         $shop = $this->repository->findOneBy([]);
         if (!$shop instanceof ShopInterface) {
             throw new \RuntimeException('Cannot load multistore data. Check stores configuration.');
         }
-
+        
         return $shop;
     }
 }

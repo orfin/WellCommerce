@@ -23,7 +23,7 @@ interface ClientAwareInterface
      * @param null|ClientInterface $client
      */
     public function setClient(ClientInterface $client = null);
-
+    
     /**
      * @return null|ClientInterface
      */

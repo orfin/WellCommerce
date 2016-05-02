@@ -27,36 +27,36 @@ abstract class AbstractController extends AbstractContainerAware implements Cont
     {
         return new JsonResponse($content);
     }
-
+    
     protected function redirectResponse(string $url, int $status = RedirectResponse::HTTP_FOUND) : RedirectResponse
     {
         return new RedirectResponse($url, $status);
     }
-
+    
     protected function redirectToAction(string $actionName = 'index', array $params = []) : RedirectResponse
     {
         $url = $this->getRedirectToActionUrl($actionName, $params);
-
+        
         return $this->redirectResponse($url);
     }
-
+    
     protected function redirectToRoute(string $routeName, array $routeParams = []) : RedirectResponse
     {
         $url = $this->getRouterHelper()->generateUrl($routeName, $routeParams);
-
+        
         return $this->redirectResponse($url);
     }
-
+    
     protected function getRedirectToActionUrl(string $actionName = 'index', array $params = []) : string
     {
         return $this->getRouterHelper()->getRedirectToActionUrl($actionName, $params);
     }
-
+    
     protected function renderView(string $view, array $parameters = []) : string
     {
         return $this->getTemplatingHelper()->render($view, $parameters);
     }
-
+    
     protected function displayTemplate(string $templateName, array $templateVars = []) : Response
     {
         return $this->getTemplatingHelper()->renderControllerResponse($this, $templateName, $templateVars);

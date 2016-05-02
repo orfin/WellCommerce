@@ -23,12 +23,12 @@ interface FieldMetadataInterface
      * @return string
      */
     public function getName();
-
+    
     /**
      * @return array
      */
     public function getGroups();
-
+    
     /**
      * Checks whether field is exposed for given serialization group
      *
@@ -37,7 +37,7 @@ interface FieldMetadataInterface
      * @return bool
      */
     public function hasGroup($group);
-
+    
     /**
      * Checks whether field is exposed for default serialization group
      *

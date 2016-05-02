@@ -37,52 +37,52 @@ class Shop extends AbstractEntity implements ShopInterface
      * @var string
      */
     protected $name;
-
+    
     /**
      * @var string
      */
     protected $url;
-
+    
     /**
      * @var CompanyInterface
      */
     protected $company;
-
+    
     /**
      * @var Collection
      */
     protected $products;
-
+    
     /**
      * @var Collection
      */
     protected $categories;
-
+    
     /**
      * @var Collection
      */
     protected $producers;
-
+    
     /**
      * @var Collection
      */
     protected $pages;
-
+    
     /**
      * @var string
      */
     protected $defaultCountry;
-
+    
     /**
      * @var string
      */
     protected $defaultCurrency;
-
+    
     /**
      * @var MailerConfiguration
      */
     protected $mailerConfiguration;
-
+    
     /**
      * {@inheritdoc}
      */
@@ -90,7 +90,7 @@ class Shop extends AbstractEntity implements ShopInterface
     {
         return $this->name;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -98,7 +98,7 @@ class Shop extends AbstractEntity implements ShopInterface
     {
         $this->name = $name;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -106,7 +106,7 @@ class Shop extends AbstractEntity implements ShopInterface
     {
         return $this->products;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -114,7 +114,7 @@ class Shop extends AbstractEntity implements ShopInterface
     {
         $this->products = $products;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -122,7 +122,7 @@ class Shop extends AbstractEntity implements ShopInterface
     {
         return $this->company;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -130,7 +130,7 @@ class Shop extends AbstractEntity implements ShopInterface
     {
         $this->company = $company;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -138,7 +138,7 @@ class Shop extends AbstractEntity implements ShopInterface
     {
         return $this->categories;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -146,7 +146,7 @@ class Shop extends AbstractEntity implements ShopInterface
     {
         $this->categories = $categories;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -154,7 +154,7 @@ class Shop extends AbstractEntity implements ShopInterface
     {
         return $this->producers;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -162,7 +162,7 @@ class Shop extends AbstractEntity implements ShopInterface
     {
         $this->producers = $producers;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -170,7 +170,7 @@ class Shop extends AbstractEntity implements ShopInterface
     {
         return $this->url;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -178,7 +178,7 @@ class Shop extends AbstractEntity implements ShopInterface
     {
         $this->url = $url;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -186,7 +186,7 @@ class Shop extends AbstractEntity implements ShopInterface
     {
         return $this->pages;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -194,7 +194,7 @@ class Shop extends AbstractEntity implements ShopInterface
     {
         $this->pages = $pages;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -202,7 +202,7 @@ class Shop extends AbstractEntity implements ShopInterface
     {
         return $this->defaultCountry;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -210,7 +210,7 @@ class Shop extends AbstractEntity implements ShopInterface
     {
         $this->defaultCountry = $defaultCountry;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -218,7 +218,7 @@ class Shop extends AbstractEntity implements ShopInterface
     {
         return $this->defaultCurrency;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -226,7 +226,7 @@ class Shop extends AbstractEntity implements ShopInterface
     {
         $this->defaultCurrency = $defaultCurrency;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -234,7 +234,7 @@ class Shop extends AbstractEntity implements ShopInterface
     {
         $this->mailerConfiguration = $configuration;
     }
-
+    
     /**
      * {@inheritdoc}
      */

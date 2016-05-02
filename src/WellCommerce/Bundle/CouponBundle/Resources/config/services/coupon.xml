@@ -9,11 +9,6 @@
    </imports>
 
     <services>
-        <service id="coupon.manager" class="WellCommerce\Bundle\CouponBundle\Manager\CouponManager" parent="core.manager">
-            <argument type="service" id="coupon.repository"/>
-            <argument type="service" id="coupon.factory"/>
-        </service>
-
         <service id="coupon.request_param_converter" class="WellCommerce\Bundle\CouponBundle\Request\ParamConverter\CouponParamConverter">
             <argument type="service" id="coupon.repository" />
             <argument>code</argument>

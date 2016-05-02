@@ -11,11 +11,13 @@
  */
 namespace WellCommerce\Bundle\CoreBundle\Controller\Admin;
 
+use Doctrine\Common\Util\Debug;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\AbstractController;
 use WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 use WellCommerce\Component\DataGrid\DataGridInterface;
 use WellCommerce\Component\Form\Elements\FormInterface;
 use WellCommerce\Component\Form\FormBuilderInterface;
@@ -27,10 +29,28 @@ use WellCommerce\Component\Form\FormBuilderInterface;
  */
 abstract class AbstractAdminController extends AbstractController implements AdminControllerInterface
 {
+    /**
+     * @var ManagerInterface
+     */
     protected $manager;
+
+    /**
+     * @var null|DataGridInterface
+     */
     protected $dataGrid;
+
+    /**
+     * @var null|FormBuilderInterface
+     */
     protected $formBuilder;
-    
+
+    /**
+     * AbstractAdminController constructor.
+     *
+     * @param ManagerInterface          $manager
+     * @param FormBuilderInterface|null $formBuilder
+     * @param DataGridInterface|null    $dataGrid
+     */
     public function __construct(ManagerInterface $manager, FormBuilderInterface $formBuilder = null, DataGridInterface $dataGrid = null)
     {
         $this->manager     = $manager;
@@ -63,7 +83,7 @@ abstract class AbstractAdminController extends AbstractController implements Adm
     public function addAction(Request $request) : Response
     {
         $resource = $this->manager->initResource();
-        $form     = $this->manager->getForm($resource);
+        $form     = $this->getForm($resource);
         
         if ($form->handleRequest()->isSubmitted()) {
             if ($form->isValid()) {
@@ -78,14 +98,14 @@ abstract class AbstractAdminController extends AbstractController implements Adm
         ]);
     }
     
-    public function editAction(Request $request) : Response
+    public function editAction(int $id) : Response
     {
-        $resource = $this->manager->findResource($request);
-        if (null === $resource) {
+        $resource = $this->manager->getRepository()->find($id);
+        if (!$resource instanceof EntityInterface) {
             return $this->redirectToAction('index');
         }
         
-        $form = $this->manager->getForm($resource);
+        $form = $this->getForm($resource);
         
         if ($form->handleRequest()->isSubmitted()) {
             if ($form->isValid()) {
@@ -104,12 +124,11 @@ abstract class AbstractAdminController extends AbstractController implements Adm
     public function deleteAction(int $id) : Response
     {
         $this->getDoctrineHelper()->disableFilter('locale');
-        
         try {
-            $resource = $this->manager->getRepository()->find($id);
+            $resource = $this->manager->getRepository()->findOneBy(['id' => $id]);
             $this->manager->removeResource($resource);
         } catch (\Exception $e) {
-            return $this->jsonResponse(['error' => $e->getMessage()]);
+            return $this->jsonResponse(['error' => $e->getTraceAsString()]);
         }
         
         return $this->jsonResponse(['success' => true]);
@@ -124,5 +143,22 @@ abstract class AbstractAdminController extends AbstractController implements Adm
             'redirectTo' => $this->getRedirectToActionUrl('index'),
             'error'      => $form->getError(),
         ]);
+    }
+
+    protected function getForm($resource, array $config = []) : FormInterface
+    {
+        $builder       = $this->getFormBuilder();
+        $defaultConfig = [
+            'name'              => $this->manager->getRepository()->getAlias(),
+            'validation_groups' => ['Default']
+        ];
+        $config        = array_merge($defaultConfig, $config);
+
+        return $builder->createForm($config, $resource);
+    }
+
+    protected function getFormBuilder() : FormBuilderInterface
+    {
+        return $this->formBuilder;
     }
 }

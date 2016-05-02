@@ -27,7 +27,7 @@ use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 final class ClientFactory extends AbstractEntityFactory
 {
     protected $supportsInterface = ClientInterface::class;
-
+    
     public function create() : ClientInterface
     {
         /** @var $client ClientInterface */
@@ -38,25 +38,25 @@ final class ClientFactory extends AbstractEntityFactory
         $client->setShippingAddress($this->createShippingAddress());
         $client->setShop($this->getDefaultShop());
         $client->setClientGroup($this->getDefaultShop()->getClientGroup());
-
+        
         return $client;
     }
-
+    
     private function createClientContactDetails() : ClientContactDetailsInterface
     {
         return $this->get('client_contact_details.factory')->create();
     }
-
+    
     private function createClientDetails() : ClientDetailsInterface
     {
         return $this->get('client_details.factory')->create();
     }
-
+    
     private function createBillingAddress() : ClientBillingAddressInterface
     {
         return $this->get('client_billing_address.factory')->create();
     }
-
+    
     private function createShippingAddress() : ClientShippingAddressInterface
     {
         return $this->get('client_shipping_address.factory')->create();

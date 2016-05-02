@@ -23,7 +23,7 @@ use WellCommerce\Bundle\OrderBundle\Entity\OrderModifierInterface;
 final class OrderModifierFactory extends AbstractEntityFactory
 {
     protected $supportsInterface = OrderModifierInterface::class;
-
+    
     public function create() : OrderModifierInterface
     {
         /** @var $modifier OrderModifierInterface */
@@ -31,7 +31,7 @@ final class OrderModifierFactory extends AbstractEntityFactory
         $modifier->setGrossAmount(0);
         $modifier->setNetAmount(0);
         $modifier->setTaxAmount(0);
-
+        
         return $modifier;
     }
 }

@@ -5,7 +5,7 @@
 
     <services>
         <service id="order.controller.admin" class="WellCommerce\Bundle\OrderBundle\Controller\Admin\OrderController">
-            <argument type="service" id="order.manager.admin"/>
+            <argument type="service" id="order.manager"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -17,13 +17,14 @@
             <argument type="service" id="order.repository"/>
         </service>
 
-        <service id="order.dataset.admin" class="WellCommerce\Bundle\OrderBundle\DataSet\Admin\OrderDataSet" parent="core.dataset">
+        <service id="order.dataset.admin" class="WellCommerce\Bundle\OrderBundle\DataSet\Admin\OrderDataSet">
             <argument type="service" id="order.dataset.query_builder.admin"/>
+            <tag name="dataset"/>
         </service>
 
-        <service id="order.datagrid" class="WellCommerce\Bundle\OrderBundle\DataGrid\OrderDataGrid" parent="core.datagrid">
-            <argument key="identifier">orders</argument>
+        <service id="order.datagrid" class="WellCommerce\Bundle\OrderBundle\DataGrid\OrderDataGrid">
             <argument type="service" id="order.dataset.admin"/>
+            <tag name="datagrid" alias="orders"/>
         </service>
 
         <service id="order.context.admin" class="WellCommerce\Bundle\OrderBundle\Context\Admin\OrderContext"/>

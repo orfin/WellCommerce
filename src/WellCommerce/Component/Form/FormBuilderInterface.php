@@ -33,7 +33,7 @@ interface FormBuilderInterface
      * @return FormInterface
      */
     public function createForm(array $options, $formData = null) : FormInterface;
-
+    
     /**
      * Returns an element object by its type
      *
@@ -43,7 +43,7 @@ interface FormBuilderInterface
      * @return ElementInterface
      */
     public function getElement(string $type, array $options = []) : ElementInterface;
-
+    
     /**
      * Returns a filter object by its type
      *
@@ -53,7 +53,7 @@ interface FormBuilderInterface
      * @return FilterInterface
      */
     public function getFilter(string $type, array $options = []) : FilterInterface;
-
+    
     /**
      * Returns a dependency object by its type
      *

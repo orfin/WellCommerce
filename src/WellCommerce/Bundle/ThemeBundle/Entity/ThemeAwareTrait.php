@@ -23,7 +23,7 @@ trait ThemeAwareTrait
      * @var ThemeInterface
      */
     protected $theme;
-
+    
     /**
      * @return ThemeInterface
      */
@@ -31,7 +31,7 @@ trait ThemeAwareTrait
     {
         return $this->theme;
     }
-
+    
     /**
      * @param ThemeInterface $theme
      */

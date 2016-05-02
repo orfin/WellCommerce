@@ -12,13 +12,13 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Repository;
 
-use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
 
 /**
  * Class OrderStatusHistoryRepository
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class OrderStatusHistoryRepository extends AbstractEntityRepository implements OrderStatusHistoryRepositoryInterface
+class OrderStatusHistoryRepository extends EntityRepository implements OrderStatusHistoryRepositoryInterface
 {
 }

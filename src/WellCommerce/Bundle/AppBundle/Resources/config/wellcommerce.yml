@@ -44,7 +44,6 @@ imports:
     - { resource: "@WellCommerceWishlistBundle/Resources/config/wellcommerce.yml" }
 
 parameters:
-    routing_discriminator_map: ~
     fixtures_load_order:
         WellCommerce\Bundle\AdminBundle\DataFixtures\ORM\LoadAdminMenuData: 0
         WellCommerce\Bundle\ThemeBundle\DataFixtures\ORM\LoadThemeData: 10
@@ -100,7 +99,6 @@ parameters:
         WellCommerce\Bundle\ShippingBundle\DataFixtures\ORM\LoadShippingMethodData: true
         WellCommerce\Bundle\PaymentBundle\DataFixtures\ORM\LoadPaymentMethodData: true
         WellCommerce\Bundle\PageBundle\DataFixtures\ORM\LoadPageData: true
-    knp.doctrine_behaviors.blameable_listener.user_entity: WellCommerce\AdminBundle\Entity\User
 
 well_commerce_app:
     configuration:

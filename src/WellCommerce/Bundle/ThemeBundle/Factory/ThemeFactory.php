@@ -27,7 +27,7 @@ class ThemeFactory extends AbstractEntityFactory
      * @var string
      */
     protected $supportsInterface = ThemeInterface::class;
-
+    
     /**
      * @return ThemeInterface
      */
@@ -38,14 +38,14 @@ class ThemeFactory extends AbstractEntityFactory
         $theme->setCss(new ArrayCollection());
         $theme->setName('');
         $theme->setFolder($this->getDefaultFolder());
-
+        
         return $theme;
     }
-
+    
     private function getDefaultFolder() : string
     {
         $themeFolders = $this->get('theme.locator')->getThemeFolders();
-
+        
         return reset($themeFolders);
     }
 }

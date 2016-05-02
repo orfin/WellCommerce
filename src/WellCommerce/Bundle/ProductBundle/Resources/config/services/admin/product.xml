@@ -20,13 +20,14 @@
             </call>
         </service>
 
-        <service id="product.dataset.admin" class="WellCommerce\Bundle\ProductBundle\DataSet\Admin\ProductDataSet" parent="core.dataset">
+        <service id="product.dataset.admin" class="WellCommerce\Bundle\ProductBundle\DataSet\Admin\ProductDataSet">
             <argument type="service" id="product.dataset.query_builder.admin"/>
+            <tag name="dataset"/>
         </service>
 
-        <service id="product.datagrid" class="WellCommerce\Bundle\ProductBundle\DataGrid\ProductDataGrid" parent="core.datagrid">
-            <argument key="identifier">product</argument>
+        <service id="product.datagrid" class="WellCommerce\Bundle\ProductBundle\DataGrid\ProductDataGrid">
             <argument type="service" id="product.dataset.admin"/>
+            <tag name="datagrid" alias="product"/>
         </service>
 
         <service id="product.form_builder.admin" class="WellCommerce\Bundle\ProductBundle\Form\Admin\ProductFormBuilder" parent="core.form_builder" />

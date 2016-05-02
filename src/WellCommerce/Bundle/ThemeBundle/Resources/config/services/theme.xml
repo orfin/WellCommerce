@@ -4,24 +4,21 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="theme.manager" class="WellCommerce\Bundle\ThemeBundle\Manager\ThemeManager" parent="core.manager">
-            <argument type="service" id="theme.repository"/>
-            <argument type="service" id="theme.factory"/>
-        </service>
-
         <service id="theme.controller.admin" class="WellCommerce\Bundle\ThemeBundle\Controller\Admin\ThemeController">
-            <argument type="service" id="theme.manager.admin"/>
+            <argument type="service" id="theme.manager"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
         <service id="theme.locator" class="WellCommerce\Bundle\ThemeBundle\Locator\ThemeLocator">
+            <argument type="service" id="kernel" />
+            <argument type="service" id="theme.context.front" />
+            <argument>%fallback_theme%</argument>
             <argument>%kernel.root_dir%/../web/themes</argument>
         </service>
 
         <service id="theme.subscriber" class="WellCommerce\Bundle\ThemeBundle\EventListener\ThemeSubscriber">
-            <argument type="service" id="theme.manager"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -29,8 +26,10 @@
         </service>
 
         <service id="theme.file_locator" class="WellCommerce\Bundle\ThemeBundle\Locator\FileLocator">
-            <argument type="service" id="theme.manager" />
-            <argument>%kernel.root_dir%/Resources</argument>
+            <argument type="service" id="theme.locator" />
+            <argument type="collection">
+                <argument>%kernel.root_dir%/Resources</argument>
+            </argument>
         </service>
 
         <service id="theme.templating_locator" class="WellCommerce\Bundle\ThemeBundle\Locator\TemplateLocator">
@@ -42,14 +41,14 @@
             <argument type="service" id="theme.repository"/>
         </service>
 
-        <service id="theme.dataset.admin" class="WellCommerce\Bundle\ThemeBundle\DataSet\Admin\ThemeDataSet" parent="core.dataset">
+        <service id="theme.dataset.admin" class="WellCommerce\Bundle\ThemeBundle\DataSet\Admin\ThemeDataSet">
             <argument type="service" id="theme.dataset.query_builder"/>
-            <argument type="service" id="dataset.manager"/>
+            <tag name="dataset"/>
         </service>
 
-        <service id="theme.datagrid" class="WellCommerce\Bundle\ThemeBundle\DataGrid\ThemeDataGrid" parent="core.datagrid">
-            <argument key="identifier">theme</argument>
+        <service id="theme.datagrid" class="WellCommerce\Bundle\ThemeBundle\DataGrid\ThemeDataGrid">
             <argument type="service" id="theme.dataset.admin"/>
+            <tag name="datagrid" alias="theme"/>
         </service>
 
         <service id="theme.form_builder.admin" class="WellCommerce\Bundle\ThemeBundle\Form\Admin\ThemeFormBuilder" parent="core.form_builder" />

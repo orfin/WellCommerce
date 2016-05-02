@@ -25,11 +25,6 @@ use WellCommerce\Component\Form\Elements\FormInterface;
  */
 class CategoryController extends AbstractAdminController
 {
-    /**
-     * @var \WellCommerce\Bundle\CategoryBundle\Manager\Admin\CategoryManager
-     */
-    protected $manager;
-
     public function indexAction() : Response
     {
         $categories = $this->manager->getRepository()->matching(new Criteria());
@@ -63,14 +58,14 @@ class CategoryController extends AbstractAdminController
         ]);
     }
 
-    public function editAction(Request $request) : Response
+    public function editAction(int $id) : Response
     {
-        $resource = $this->manager->findResource($request);
-        $form     = $this->manager->getForm($resource);
+        $category = $this->manager->getRepository()->find($id);
+        $form     = $this->getForm($category);
 
         if ($form->handleRequest()->isSubmitted()) {
             if ($form->isValid()) {
-                $this->manager->updateResource($resource);
+                $this->manager->updateResource($category);
             }
 
             return $this->createFormDefaultJsonResponse($form);
@@ -79,7 +74,7 @@ class CategoryController extends AbstractAdminController
         return $this->displayTemplate('edit', [
             'tree'     => $this->createCategoryTreeForm(),
             'form'     => $form,
-            'resource' => $resource
+            'resource' => $category
         ]);
     }
 

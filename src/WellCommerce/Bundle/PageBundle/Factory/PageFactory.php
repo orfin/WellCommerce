@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\PageBundle\Factory;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
 use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 use WellCommerce\Bundle\PageBundle\Entity\PageInterface;
@@ -28,7 +27,7 @@ class PageFactory extends AbstractEntityFactory
      * @var string
      */
     protected $supportsInterface = PageInterface::class;
-
+    
     /**
      * @return PageInterface
      */
@@ -44,10 +43,10 @@ class PageFactory extends AbstractEntityFactory
         $page->setPublish(true);
         $page->setRedirectType(1);
         $page->setSection('');
-
+        
         return $page;
     }
-
+    
     private function getDefaultClientGroups()
     {
         return $this->get('client_group.repository')->matching(new Criteria());

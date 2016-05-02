@@ -27,5 +27,5 @@ interface LayoutBoxRendererInterface
      *
      * @return string
      */
-    public function render($identifier, $params);
+    public function render(string $identifier, array $params) : string;
 }

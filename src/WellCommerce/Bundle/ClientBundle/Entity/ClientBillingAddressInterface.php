@@ -20,14 +20,14 @@ namespace WellCommerce\Bundle\ClientBundle\Entity;
 interface ClientBillingAddressInterface extends ClientAddressInterface
 {
     public function setVatId(string $vatId);
-
+    
     public function getVatId() : string;
-
+    
     public function setCompanyName(string $companyName);
-
+    
     public function getCompanyName() : string;
-
+    
     public function isCompanyAddress() : bool;
-
+    
     public function setCompanyAddress(bool $companyAddress);
 }

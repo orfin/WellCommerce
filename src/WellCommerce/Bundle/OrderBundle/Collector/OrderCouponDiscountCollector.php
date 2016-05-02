@@ -32,26 +32,26 @@ class OrderCouponDiscountCollector extends AbstractDataCollector
             $productTotal = $order->getProductTotal();
             $coupon       = $order->getCoupon();
             $modifier     = $this->calculateModifierValue($coupon, $productTotal->getGrossAmount(), $order->getCurrency());
-
+            
             if ($modifier > 0) {
                 $orderTotal = new OrderTotal();
                 $orderTotal->setCurrency($order->getCurrency());
                 $orderTotal->setGrossAmount($productTotal->getGrossAmount() * $modifier);
                 $orderTotal->setNetAmount($productTotal->getNetAmount() * $modifier);
                 $orderTotal->setTaxAmount($productTotal->getTaxAmount() * $modifier);
-
+                
                 $orderTotalDetail = $this->initResource();
                 $orderTotalDetail->setOrderTotal($orderTotal);
                 $orderTotalDetail->setModifierType($coupon->getModifierType());
                 $orderTotalDetail->setModifierValue($modifier);
                 $orderTotalDetail->setOrder($order);
                 $orderTotalDetail->setSubtraction(true);
-
+                
                 $order->addTotal($orderTotalDetail);
             }
         }
     }
-
+    
     /**
      * Calculates the modifier's value according to current currency and coupon's modifier
      *
@@ -66,7 +66,7 @@ class OrderCouponDiscountCollector extends AbstractDataCollector
         $modifierType  = $coupon->getModifierType();
         $modifierValue = $coupon->getModifierValue();
         $baseCurrency  = $coupon->getCurrency();
-
+        
         switch ($modifierType) {
             case '-':
                 $modifierValue = $this->currencyHelper->convert($modifierValue, $baseCurrency, $targetCurrency);
@@ -78,10 +78,10 @@ class OrderCouponDiscountCollector extends AbstractDataCollector
             default:
                 $modifier = 0;
         }
-
+        
         return $modifier;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -89,7 +89,7 @@ class OrderCouponDiscountCollector extends AbstractDataCollector
     {
         return 'coupon_discount';
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -97,7 +97,7 @@ class OrderCouponDiscountCollector extends AbstractDataCollector
     {
         return 'order.label.coupon_discount_description';
     }
-
+    
     /**
      * {@inheritdoc}
      */

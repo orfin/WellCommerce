@@ -27,62 +27,62 @@ interface AdminMenuInterface extends EntityInterface, HierarchyAwareInterface
      * @return string
      */
     public function getName() : string;
-
+    
     /**
      * @param string $name
      */
     public function setName(string $name);
-
+    
     /**
      * @return string
      */
     public function getIdentifier() : string;
-
+    
     /**
      * @param string $identifier
      */
     public function setIdentifier(string $identifier);
-
+    
     /**
      * @return AdminMenuInterface|null
      */
     public function getParent();
-
+    
     /**
      * @param AdminMenuInterface|null $parent
      */
     public function setParent(AdminMenuInterface $parent = null);
-
+    
     /**
      * @param Collection $children
      */
     public function setChildren(Collection $children);
-
+    
     /**
      * @return Collection|AdminMenuInterface[]
      */
     public function getChildren() : Collection;
-
+    
     /**
      * @param AdminMenuInterface $child
      */
     public function addChild(AdminMenuInterface $child);
-
+    
     /**
      * @return string
      */
     public function getRouteName() : string;
-
+    
     /**
      * @param string $routeName
      */
     public function setRouteName(string $routeName);
-
+    
     /**
      * @return string
      */
     public function getCssClass() : string;
-
+    
     /**
      * @param string $cssClass
      */

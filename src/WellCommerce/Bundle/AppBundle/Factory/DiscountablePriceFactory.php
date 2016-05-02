@@ -23,7 +23,7 @@ use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 final class DiscountablePriceFactory extends AbstractEntityFactory
 {
     protected $supportsInterface = DiscountablePriceInterface::class;
-
+    
     public function create() : DiscountablePriceInterface
     {
         /** @var $price DiscountablePriceInterface */
@@ -33,7 +33,7 @@ final class DiscountablePriceFactory extends AbstractEntityFactory
         $price->setTaxAmount(0);
         $price->setTaxRate($this->getDefaultTax()->getValue());
         $price->setCurrency($this->getDefaultShop()->getDefaultCurrency());
-
+        
         return $price;
     }
 }

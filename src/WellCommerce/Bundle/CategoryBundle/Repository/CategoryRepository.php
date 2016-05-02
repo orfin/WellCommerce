@@ -13,14 +13,14 @@
 namespace WellCommerce\Bundle\CategoryBundle\Repository;
 
 use Doctrine\ORM\QueryBuilder;
-use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
 
 /**
  * Class CategoryRepository
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CategoryRepository extends AbstractEntityRepository implements CategoryRepositoryInterface
+class CategoryRepository extends EntityRepository implements CategoryRepositoryInterface
 {
     /**
      * {@inheritdoc}

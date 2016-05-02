@@ -34,7 +34,7 @@ interface OrderStatusInterface extends
      * @return OrderStatusGroupInterface
      */
     public function getOrderStatusGroup() : OrderStatusGroupInterface;
-
+    
     /**
      * @param OrderStatusGroupInterface $orderStatusGroup
      */

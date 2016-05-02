@@ -8,8 +8,9 @@
             <argument type="service" id="locale.repository"/>
         </service>
 
-        <service id="locale.dataset.front" class="WellCommerce\Bundle\LocaleBundle\DataSet\Front\LocaleDataSet" parent="core.dataset">
+        <service id="locale.dataset.front" class="WellCommerce\Bundle\LocaleBundle\DataSet\Front\LocaleDataSet">
             <argument type="service" id="locale.dataset.query_builder.front"/>
+            <tag name="dataset"/>
         </service>
 
         <service id="twig.extension.locale" class="WellCommerce\Bundle\LocaleBundle\Twig\Extension\LocaleExtension">

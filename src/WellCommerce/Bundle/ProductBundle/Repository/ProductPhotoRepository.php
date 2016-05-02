@@ -11,14 +11,14 @@
  */
 namespace WellCommerce\Bundle\ProductBundle\Repository;
 
-use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
 
 /**
  * Class ProductPhotoRepository
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductPhotoRepository extends AbstractEntityRepository implements ProductPhotoRepositoryInterface
+class ProductPhotoRepository extends EntityRepository implements ProductPhotoRepositoryInterface
 {
     /**
      * {@inheritdoc}

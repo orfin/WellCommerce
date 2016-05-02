@@ -13,14 +13,14 @@ namespace WellCommerce\Bundle\AttributeBundle\Repository;
 
 use Doctrine\Common\Collections\Criteria;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroupInterface;
-use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
 
 /**
  * Class AttributeGroupRepository
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AttributeGroupRepository extends AbstractEntityRepository implements AttributeGroupRepositoryInterface
+class AttributeGroupRepository extends EntityRepository implements AttributeGroupRepositoryInterface
 {
     public function getAttributeGroupSet() : array
     {

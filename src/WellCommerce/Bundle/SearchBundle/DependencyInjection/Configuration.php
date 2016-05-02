@@ -11,28 +11,35 @@
 
 namespace WellCommerce\Bundle\SearchBundle\DependencyInjection;
 
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\Configuration as BaseConfiguration;
 
 /**
  * Class Configuration
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Configuration implements ConfigurationInterface
+class Configuration extends BaseConfiguration
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getConfigTreeBuilder()
+    //@formatter:off
+    protected function addCustomConfigurationNode()
     {
-        $treeBuilder = new TreeBuilder();
-        $treeBuilder
-            ->root('well_commerce_search')
-            ->useAttributeAsKey('name')
-            ->prototype('scalar')->defaultValue('lucene')->isRequired()
-            ->end();
+        $builder = new TreeBuilder();
+        $node    =
+            $builder->root('engine')
+                    ->children()
+                        ->scalarNode('search_term_min_length')->defaultValue(3)->end()
+                        ->scalarNode('type')->defaultValue('lucene')->end()
+                        ->arrayNode('parameters')
+                            ->useAttributeAsKey('name')
+                            ->prototype('scalar')
+                        ->end()
+                    ->end()
+                ->end();
 
-        return $treeBuilder;
+        return $node;
     }
+    //@formatter:on
 }

@@ -28,7 +28,7 @@ interface TaxInterface extends EntityInterface, TranslatableInterface, Timestamp
      * @return float
      */
     public function getValue() : float;
-
+    
     /**
      * @param float $value
      */

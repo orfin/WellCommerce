@@ -4,21 +4,6 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="payment_method.manager" class="WellCommerce\Bundle\PaymentBundle\Manager\PaymentMethodManager" parent="core.manager">
-            <argument type="service" id="payment_method.repository"/>
-            <argument type="service" id="payment_method.factory"/>
-        </service>
-
-        <service id="payment.manager" class="WellCommerce\Bundle\PaymentBundle\Manager\PaymentManager" parent="core.manager">
-            <argument type="service" id="payment.repository"/>
-            <argument type="service" id="payment.factory"/>
-        </service>
-
-        <service id="payment_state_history.manager" class="WellCommerce\Bundle\PaymentBundle\Manager\PaymentStateHistoryManager" parent="core.manager">
-            <argument type="service" id="payment_state_history.repository"/>
-            <argument type="service" id="payment_state_history.factory"/>
-        </service>
-
         <service id="payment_method.controller.admin" class="WellCommerce\Bundle\PaymentBundle\Controller\Admin\PaymentMethodController">
             <argument type="service" id="payment_method.manager"/>
             <argument type="service" id="payment_method.form_builder.admin"/>
@@ -46,21 +31,23 @@
             <argument type="service" id="payment_method.repository"/>
         </service>
 
-        <service id="payment_method.dataset.admin" class="WellCommerce\Bundle\PaymentBundle\DataSet\Admin\PaymentMethodDataSet" parent="core.dataset">
+        <service id="payment_method.dataset.admin" class="WellCommerce\Bundle\PaymentBundle\DataSet\Admin\PaymentMethodDataSet">
             <argument type="service" id="payment_method.dataset.query_builder.admin"/>
+            <tag name="dataset"/>
         </service>
 
         <service id="payment_method.dataset.query_builder.front" class="WellCommerce\Bundle\PaymentBundle\DataSet\Front\PaymentMethodDataSetQueryBuilder" public="false">
             <argument type="service" id="payment_method.repository"/>
         </service>
 
-        <service id="payment_method.dataset.front" class="WellCommerce\Bundle\PaymentBundle\DataSet\Front\PaymentMethodDataSet" parent="core.dataset">
+        <service id="payment_method.dataset.front" class="WellCommerce\Bundle\PaymentBundle\DataSet\Front\PaymentMethodDataSet">
             <argument type="service" id="payment_method.dataset.query_builder.front"/>
+            <tag name="dataset"/>
         </service>
 
-        <service id="payment_method.datagrid" class="WellCommerce\Bundle\PaymentBundle\DataGrid\PaymentMethodDataGrid" parent="core.datagrid">
-            <argument key="identifier">payment_method</argument>
+        <service id="payment_method.datagrid" class="WellCommerce\Bundle\PaymentBundle\DataGrid\PaymentMethodDataGrid">
             <argument type="service" id="payment_method.dataset.admin"/>
+            <tag name="datagrid" alias="payment_method"/>
         </service>
 
         <service id="payment_method.form_builder.admin" class="WellCommerce\Bundle\PaymentBundle\Form\Admin\PaymentMethodFormBuilder" parent="core.form_builder" />

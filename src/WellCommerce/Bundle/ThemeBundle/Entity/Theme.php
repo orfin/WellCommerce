@@ -26,22 +26,22 @@ class Theme extends AbstractEntity implements ThemeInterface
 {
     use Timestampable;
     use Blameable;
-
+    
     /**
      * @var string
      */
     protected $name;
-
+    
     /**
      * @var string
      */
     protected $folder;
-
+    
     /**
      * @var Collection|ThemeCssInterface[]
      */
     protected $css;
-
+    
     /**
      * {@inheritdoc}
      */
@@ -49,7 +49,7 @@ class Theme extends AbstractEntity implements ThemeInterface
     {
         return $this->name;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -57,7 +57,7 @@ class Theme extends AbstractEntity implements ThemeInterface
     {
         $this->name = $name;
     }
-
+    
     /**
      * @return string
      */
@@ -65,7 +65,7 @@ class Theme extends AbstractEntity implements ThemeInterface
     {
         return $this->folder;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -73,7 +73,7 @@ class Theme extends AbstractEntity implements ThemeInterface
     {
         $this->folder = $folder;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -81,7 +81,7 @@ class Theme extends AbstractEntity implements ThemeInterface
     {
         return $this->css;
     }
-
+    
     /**
      * {@inheritdoc}
      */

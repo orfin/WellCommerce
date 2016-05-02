@@ -6,8 +6,8 @@
     <services>
         <service id="user.controller.admin" class="WellCommerce\Bundle\AdminBundle\Controller\Admin\UserController">
             <argument type="service" id="user.manager"/>
-            <argument type="service" id="user.manager.admin"/>
-            <argument type="service" id="user.manager.admin"/>
+            <argument type="service" id="user.form_builder.admin"/>
+            <argument type="service" id="user.datagrid"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -17,19 +17,20 @@
             <argument type="service" id="user.repository"/>
         </service>
 
-        <service id="user.dataset.admin" class="WellCommerce\Bundle\AdminBundle\DataSet\Admin\UserDataSet" parent="core.dataset">
+        <service id="user.dataset.admin" class="WellCommerce\Bundle\AdminBundle\DataSet\Admin\UserDataSet">
             <argument type="service" id="user.dataset.query_builder.admin"/>
+            <tag name="dataset"/>
         </service>
 
-        <service id="user.datagrid" class="WellCommerce\Bundle\AdminBundle\DataGrid\UserDataGrid" parent="core.datagrid">
-            <argument key="identifier">user</argument>
+        <service id="user.datagrid" class="WellCommerce\Bundle\AdminBundle\DataGrid\UserDataGrid">
             <argument type="service" id="user.dataset.admin"/>
+            <tag name="datagrid" alias="user"/>
         </service>
 
-        <service id="user.form_builder.admin" class="WellCommerce\Bundle\AdminBundle\Form\Admin\UserFormBuilder" parent="form_builder" />
+        <service id="user.form_builder.admin" class="WellCommerce\Bundle\AdminBundle\Form\Admin\UserFormBuilder" parent="core.form_builder" />
 
-        <service id="user_login.form_builder" class="WellCommerce\Bundle\AdminBundle\Form\Admin\UserLoginFormBuilder" parent="form_builder" />
+        <service id="user_login.form_builder" class="WellCommerce\Bundle\AdminBundle\Form\Admin\UserLoginFormBuilder" parent="core.form_builder" />
 
-        <service id="user_reset_password.form_builder" class="WellCommerce\Bundle\AdminBundle\Form\Admin\UserResetPasswordFormBuilder" parent="form_builder" />
+        <service id="user_reset_password.form_builder" class="WellCommerce\Bundle\AdminBundle\Form\Admin\UserResetPasswordFormBuilder" parent="core.form_builder" />
     </services>
 </container>

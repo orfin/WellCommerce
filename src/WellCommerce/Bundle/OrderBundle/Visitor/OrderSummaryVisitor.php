@@ -14,8 +14,6 @@ namespace WellCommerce\Bundle\OrderBundle\Visitor;
 
 use WellCommerce\Bundle\CurrencyBundle\Helper\CurrencyHelperInterface;
 use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactoryInterface;
-use WellCommerce\Bundle\OrderBundle\Entity\CartInterface;
-use WellCommerce\Bundle\OrderBundle\Entity\CartModifierInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\CartSummaryInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderModifierInterface;
@@ -55,7 +53,7 @@ final class OrderSummaryVisitor implements OrderVisitorInterface
         $productTotal   = $order->getProductTotal();
         $modifiers      = $order->getModifiers();
         $targetCurrency = $order->getCurrency();
-
+        
         /** @var OrderSummaryInterface $summary */
         $summary = $this->factory->create();
         $summary->setGrossAmount($productTotal->getGrossPrice());
@@ -67,7 +65,7 @@ final class OrderSummaryVisitor implements OrderVisitorInterface
             $grossAmount  = $this->helper->convert($modifier->getGrossAmount(), $baseCurrency, $targetCurrency);
             $netAmount    = $this->helper->convert($modifier->getNetAmount(), $baseCurrency, $targetCurrency);
             $taxAmount    = $this->helper->convert($modifier->getTaxAmount(), $baseCurrency, $targetCurrency);
-
+            
             if ($modifier->isSubtraction()) {
                 $summary->setGrossAmount($summary->getGrossAmount() - $grossAmount);
                 $summary->setNetAmount($summary->getNetAmount() - $netAmount);
@@ -78,7 +76,7 @@ final class OrderSummaryVisitor implements OrderVisitorInterface
                 $summary->setTaxAmount($summary->getTaxAmount() + $taxAmount);
             }
         });
-
+        
         $order->setSummary($summary);
     }
 }

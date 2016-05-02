@@ -24,37 +24,37 @@ use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
 class AdminMenu extends AbstractEntity implements AdminMenuInterface
 {
     use HierarchyAwareTrait;
-
+    
     /**
      * @var string
      */
     protected $identifier;
-
+    
     /**
      * @var string
      */
     protected $name;
-
+    
     /**
      * @var string
      */
     protected $routeName;
-
+    
     /**
      * @var string
      */
     protected $cssClass;
-
+    
     /**
      * @var null|AdminMenuInterface
      */
     protected $parent;
-
+    
     /**
      * @var Collection
      */
     protected $children;
-
+    
     /**
      * {@inheritdoc}
      */
@@ -62,7 +62,7 @@ class AdminMenu extends AbstractEntity implements AdminMenuInterface
     {
         return $this->identifier;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -70,7 +70,7 @@ class AdminMenu extends AbstractEntity implements AdminMenuInterface
     {
         $this->identifier = $identifier;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -78,7 +78,7 @@ class AdminMenu extends AbstractEntity implements AdminMenuInterface
     {
         return $this->name;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -86,7 +86,7 @@ class AdminMenu extends AbstractEntity implements AdminMenuInterface
     {
         $this->name = $name;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -94,7 +94,7 @@ class AdminMenu extends AbstractEntity implements AdminMenuInterface
     {
         return $this->parent;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -102,7 +102,7 @@ class AdminMenu extends AbstractEntity implements AdminMenuInterface
     {
         $this->parent = $parent;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -110,7 +110,7 @@ class AdminMenu extends AbstractEntity implements AdminMenuInterface
     {
         $this->children = $children;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -118,7 +118,7 @@ class AdminMenu extends AbstractEntity implements AdminMenuInterface
     {
         return $this->children;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -127,7 +127,7 @@ class AdminMenu extends AbstractEntity implements AdminMenuInterface
         $this->children[] = $child;
         $child->setParent($this);
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -135,7 +135,7 @@ class AdminMenu extends AbstractEntity implements AdminMenuInterface
     {
         return $this->routeName;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -143,7 +143,7 @@ class AdminMenu extends AbstractEntity implements AdminMenuInterface
     {
         $this->routeName = $routeName;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -151,7 +151,7 @@ class AdminMenu extends AbstractEntity implements AdminMenuInterface
     {
         return $this->cssClass;
     }
-
+    
     /**
      * {@inheritdoc}
      */

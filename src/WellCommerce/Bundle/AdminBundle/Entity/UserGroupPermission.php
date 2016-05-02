@@ -25,17 +25,17 @@ class UserGroupPermission extends AbstractEntity implements UserGroupPermissionI
 {
     use Timestampable;
     use EnableableTrait;
-
+    
     /**
      * @var UserGroupInterface
      */
     protected $group;
-
+    
     /**
      * @var string
      */
     protected $name;
-
+    
     /**
      * {@inheritdoc}
      */
@@ -43,7 +43,7 @@ class UserGroupPermission extends AbstractEntity implements UserGroupPermissionI
     {
         return $this->group;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -51,7 +51,7 @@ class UserGroupPermission extends AbstractEntity implements UserGroupPermissionI
     {
         $this->group = $group;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -59,7 +59,7 @@ class UserGroupPermission extends AbstractEntity implements UserGroupPermissionI
     {
         return $this->name;
     }
-
+    
     /**
      * {@inheritdoc}
      */

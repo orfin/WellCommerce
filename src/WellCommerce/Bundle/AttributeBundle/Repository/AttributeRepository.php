@@ -15,14 +15,14 @@ use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroupInterface;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeInterface;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeValueInterface;
-use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
 
 /**
  * Class AttributeRepository
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AttributeRepository extends AbstractEntityRepository implements AttributeRepositoryInterface
+class AttributeRepository extends EntityRepository implements AttributeRepositoryInterface
 {
     /**
      * {@inheritdoc}

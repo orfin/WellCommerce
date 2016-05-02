@@ -1,38 +1,44 @@
 {
-    "name": "wellcommerce/attribute-bundle",
-    "type": "wellcommerce-bundle",
-    "license": "MIT",
-    "minimum-stability": "dev",
-    "description": "WellCommerce AttributeBundle",
-    "keywords": ["symfony","e-commerce","open-source"],
-    "authors": [
-        {
-            "name": "Adam Piotrowski",
-            "email": "adam@wellcommerce.org"
-        },
-        {
-            "name": "WellCommerce Developers",
-            "email": "developers@wellcommerce.org"
-        }
-    ],
-    "support": {
-        "email": "support@wellcommerce.org",
-        "issues": "https://github.com/WellCommerce/AttributeBundle/issues",
-        "source": "https://github.com/WellCommerce/AttributeBundle/"
+  "name": "wellcommerce/attribute-bundle",
+  "type": "wellcommerce-bundle",
+  "license": "MIT",
+  "minimum-stability": "dev",
+  "description": "WellCommerce AttributeBundle",
+  "keywords": [
+    "symfony",
+    "e-commerce",
+    "open-source"
+  ],
+  "authors": [
+    {
+      "name": "Adam Piotrowski",
+      "email": "adam@wellcommerce.org"
     },
-    "autoload": {
-        "psr-4": { "": "src/" }
-    },
-    "require": {
-        "php": "^7.0",
-        "wellcommerce/core-bundle": "^0.7@dev"
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "0.7.x-dev"
-        },
-        "wellcommerce-bundle": {
-            "install-dir": "src/WellCommerce/Bundle/AttributeBundle"
-        }
+    {
+      "name": "WellCommerce Developers",
+      "email": "developers@wellcommerce.org"
     }
+  ],
+  "support": {
+    "email": "support@wellcommerce.org",
+    "issues": "https://github.com/WellCommerce/AttributeBundle/issues",
+    "source": "https://github.com/WellCommerce/AttributeBundle/"
+  },
+  "autoload": {
+    "psr-4": {
+      "": "src/"
+    }
+  },
+  "require": {
+    "php": "^7.0",
+    "wellcommerce/core-bundle": "^0.7@dev"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "0.7.x-dev"
+    },
+    "wellcommerce-bundle": {
+      "install-dir": "src/WellCommerce/Bundle/AttributeBundle"
+    }
+  }
 }

@@ -27,7 +27,7 @@ class OrderStatusFactory extends AbstractEntityFactory
      * @var string
      */
     protected $supportsInterface = OrderStatusInterface::class;
-
+    
     /**
      * @return OrderStatusInterface
      */
@@ -37,10 +37,10 @@ class OrderStatusFactory extends AbstractEntityFactory
         $status = $this->init();
         $status->setEnabled(true);
         $status->setOrderStatusGroup($this->getDefaultOrderStatusGroup());
-
+        
         return $status;
     }
-
+    
     private function getDefaultOrderStatusGroup() : OrderStatusGroupInterface
     {
         return $this->get('order_status_group.repository')->findOneBy([]);

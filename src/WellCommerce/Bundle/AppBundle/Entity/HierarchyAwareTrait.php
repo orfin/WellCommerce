@@ -23,7 +23,7 @@ trait HierarchyAwareTrait
      * @var int
      */
     protected $hierarchy;
-
+    
     /**
      * @return int
      */
@@ -31,7 +31,7 @@ trait HierarchyAwareTrait
     {
         return $this->hierarchy;
     }
-
+    
     /**
      * @param int $hierarchy
      */

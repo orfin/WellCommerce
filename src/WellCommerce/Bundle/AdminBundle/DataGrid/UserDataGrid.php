@@ -45,27 +45,27 @@ class UserDataGrid extends AbstractDataGrid
                 'type' => Filter::FILTER_BETWEEN,
             ]),
         ]));
-
+        
         $collection->add(new Column([
             'id'      => 'username',
             'caption' => $this->trans('user.label.username'),
         ]));
-
+        
         $collection->add(new Column([
             'id'      => 'email',
             'caption' => $this->trans('user.label.email'),
         ]));
-
+        
         $collection->add(new Column([
             'id'      => 'first_name',
             'caption' => $this->trans('user.label.first_name'),
         ]));
-
+        
         $collection->add(new Column([
             'id'      => 'last_name',
             'caption' => $this->trans('user.label.last_name'),
         ]));
-
+        
         $collection->add(new Column([
             'id'      => 'enabled',
             'caption' => $this->trans('user.label.enabled'),

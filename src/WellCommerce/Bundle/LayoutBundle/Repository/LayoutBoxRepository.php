@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Bundle\LayoutBundle\Repository;
 
-use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
 use WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxCollection;
 
 /**
@@ -19,7 +19,7 @@ use WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxCollection;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LayoutBoxRepository extends AbstractEntityRepository implements LayoutBoxRepositoryInterface
+class LayoutBoxRepository extends EntityRepository implements LayoutBoxRepositoryInterface
 {
     /**
      * {@inheritdoc}

@@ -9,11 +9,6 @@
     </imports>
 
     <services>
-        <service id="locale.manager" class="WellCommerce\Bundle\LocaleBundle\Manager\LocaleManager" parent="core.manager">
-            <argument type="service" id="locale.repository"/>
-            <argument type="service" id="locale.factory"/>
-        </service>
-
         <service id="locale.subscriber" class="WellCommerce\Bundle\LocaleBundle\EventListener\LocaleSubscriber">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
@@ -22,9 +17,9 @@
         </service>
 
         <service id="locale.add.command" class="WellCommerce\Bundle\LocaleBundle\Command\AddLocaleCommand">
-            <argument type="service" id="locale.manager.admin"/>
-            <argument type="service" id="locale.dataset.admin"/>
-            <argument type="service" id="currency.dataset.admin"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
             <tag name="console.command" />
         </service>
 

@@ -12,14 +12,14 @@
 namespace WellCommerce\Bundle\PageBundle\Repository;
 
 use Doctrine\ORM\QueryBuilder;
-use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
 
 /**
  * Class PageRepository
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PageRepository extends AbstractEntityRepository implements PageRepositoryInterface
+class PageRepository extends EntityRepository implements PageRepositoryInterface
 {
     /**
      * {@inheritdoc}
@@ -31,7 +31,7 @@ class PageRepository extends AbstractEntityRepository implements PageRepositoryI
         $queryBuilder->leftJoin('page.children', 'page_children');
         $queryBuilder->leftJoin('page.shops', 'page_shops');
         $queryBuilder->groupBy('page.id');
-
+        
         return $queryBuilder;
     }
 }

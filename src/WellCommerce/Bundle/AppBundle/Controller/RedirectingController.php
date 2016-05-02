@@ -33,9 +33,9 @@ class RedirectingController extends Controller
     {
         $pathInfo   = $request->getPathInfo();
         $requestUri = $request->getRequestUri();
-
+        
         $url = str_replace($pathInfo, rtrim($pathInfo, ' /'), $requestUri);
-
+        
         return $this->redirect($url, 301);
     }
 }

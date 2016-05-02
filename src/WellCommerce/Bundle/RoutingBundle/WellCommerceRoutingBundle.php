@@ -26,8 +26,7 @@ class WellCommerceRoutingBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         parent::build($container);
-
         $container->addCompilerPass(new Compiler\RouteGeneratorPass());
-        $container->addCompilerPass(new Compiler\RouterPass());
+        $container->addCompilerPass(new Compiler\RegisterRoutingDiscriminatorsPass());
     }
 }

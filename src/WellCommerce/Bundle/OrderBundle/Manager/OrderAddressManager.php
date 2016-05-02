@@ -12,9 +12,7 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Manager;
 
-use WellCommerce\Bundle\OrderBundle\Entity\CartInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
-use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
 
 /**
  * Class OrderAddressManager
@@ -27,7 +25,7 @@ final class OrderAddressManager extends AbstractOrderManager
     {
         $client = $this->getClient();
         $cart   = $this->getCartContext()->getCurrentCart();
-
+        
         if ($client instanceof ClientInterface) {
             $cart->setBillingAddress($client->getBillingAddress());
             $cart->setShippingAddress($client->getShippingAddress());

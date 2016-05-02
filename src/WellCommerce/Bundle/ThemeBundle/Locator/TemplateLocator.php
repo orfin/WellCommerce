@@ -34,12 +34,12 @@ class TemplateLocator extends BaseTemplateLocator
     {
         return $this->locator;
     }
-
+    
     protected function getCacheKey($template)
     {
         return $template->getLogicalName();
     }
-
+    
     /**
      * Returns a full path for a given file.
      *
@@ -54,9 +54,9 @@ class TemplateLocator extends BaseTemplateLocator
         if (!$template instanceof TemplateReferenceInterface) {
             throw new \InvalidArgumentException("The template must be an instance of TemplateReferenceInterface.");
         }
-
+        
         $key = $this->getCacheKey($template);
-
+        
         if (!isset($this->cache[$key])) {
             try {
                 $this->cache[$key] = $this->locator->locate($template->getPath(), $currentPath);
@@ -68,7 +68,7 @@ class TemplateLocator extends BaseTemplateLocator
                 ));
             }
         }
-
+        
         return $this->cache[$key];
     }
 }

@@ -20,28 +20,28 @@ namespace WellCommerce\Bundle\ClientBundle\Entity;
 interface ClientDetailsInterface
 {
     public function getDiscount() : float;
-
+    
     public function setDiscount(float $discount);
-
+    
     public function setPassword(string $password);
-
+    
     public function resetPassword();
-
+    
     public function getUsername() : string;
-
+    
     public function setUsername(string $username);
-
+    
     public function setSalt(string $salt);
-
+    
     public function isConditionsAccepted() : bool;
-
+    
     public function setConditionsAccepted(bool $conditionsAccepted);
-
+    
     public function isNewsletterAccepted() : bool;
-
+    
     public function setNewsletterAccepted(bool $newsletterAccepted);
-
+    
     public function getResetPasswordHash() : string;
-
+    
     public function setResetPasswordHash(string $resetPasswordHash);
 }

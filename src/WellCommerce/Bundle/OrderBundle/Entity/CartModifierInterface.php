@@ -12,8 +12,6 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Entity;
 
-use WellCommerce\Bundle\OrderBundle\Entity\OrderModifierInterface;
-
 /**
  * Interface CartModifierInterface
  *

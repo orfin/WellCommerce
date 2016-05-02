@@ -11,13 +11,13 @@
  */
 namespace WellCommerce\Bundle\ThemeBundle\Repository;
 
-use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
 
 /**
  * Class ThemeRepository
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ThemeRepository extends AbstractEntityRepository implements ThemeRepositoryInterface
+class ThemeRepository extends EntityRepository implements ThemeRepositoryInterface
 {
 }

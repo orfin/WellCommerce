@@ -11,6 +11,7 @@
  */
 namespace WellCommerce\Bundle\CoreBundle\DataGrid;
 
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
 use WellCommerce\Component\DataGrid\Column\ColumnCollection;
@@ -36,41 +37,45 @@ abstract class AbstractDataGrid extends AbstractContainerAware implements DataGr
      * @var string
      */
     protected $identifier;
-
+    
     /**
      * @var ColumnCollection
      */
     protected $columns;
-
+    
     /**
      * @var OptionsInterface
      */
     protected $options;
-
+    
     /**
      * @var DataSetInterface
      */
     protected $dataset;
-
+    
+    protected $eventDispatcher;
+    
     /**
      * @var bool
      */
     protected $booted = false;
-
+    
     /**
-     * Constructor
+     * AbstractDataGrid constructor.
      *
-     * @param string           $identifier
-     * @param DataSetInterface $dataset
+     * @param DataSetInterface         $dataset
+     * @param string                   $identifier
+     * @param EventDispatcherInterface $eventDispatcher
      */
-    public function __construct($identifier, DataSetInterface $dataset)
+    public function __construct(DataSetInterface $dataset, string $identifier, EventDispatcherInterface $eventDispatcher)
     {
-        $this->identifier = $identifier;
-        $this->dataset    = $dataset;
-        $this->columns    = new ColumnCollection();
-        $this->options    = new Options();
+        $this->identifier      = $identifier;
+        $this->dataset         = $dataset;
+        $this->eventDispatcher = $eventDispatcher;
+        $this->columns         = new ColumnCollection();
+        $this->options         = new Options();
     }
-
+    
     /**
      * Returns current DataGrid
      *
@@ -81,10 +86,10 @@ abstract class AbstractDataGrid extends AbstractContainerAware implements DataGr
         if (!$this->booted) {
             $this->configure();
         }
-
+        
         return $this;
     }
-
+    
     /**
      * Boots current datagrid
      */
@@ -94,14 +99,14 @@ abstract class AbstractDataGrid extends AbstractContainerAware implements DataGr
         $this->configureOptions($this->options);
         $this->booted = true;
     }
-
+    
     /**
      * Configures DataGrid columns
      *
      * @param ColumnCollection $columns
      */
     abstract protected function configureColumns(ColumnCollection $columns);
-
+    
     /**
      * Configures DataGrid options
      *
@@ -110,30 +115,30 @@ abstract class AbstractDataGrid extends AbstractContainerAware implements DataGr
     protected function configureOptions(OptionsInterface $options)
     {
         $eventHandlers = $options->getEventHandlers();
-
+        
         $eventHandlers->add(new LoadEventHandler([
             'function' => $this->getJavascriptFunctionName('load'),
             'route'    => $this->getActionUrl('grid'),
         ]));
-
+        
         $eventHandlers->add(new EditRowEventHandler([
             'function'   => $this->getJavascriptFunctionName('edit'),
             'row_action' => DataGridInterface::ACTION_EDIT,
             'route'      => $this->getActionUrl('edit'),
         ]));
-
+        
         $eventHandlers->add(new ClickRowEventHandler([
             'function' => $this->getJavascriptFunctionName('click'),
             'route'    => $this->getActionUrl('edit'),
         ]));
-
+        
         $eventHandlers->add(new DeleteRowEventHandler([
             'function'   => $this->getJavascriptFunctionName('delete'),
             'row_action' => DataGridInterface::ACTION_DELETE,
             'route'      => $this->getActionUrl('delete'),
         ]));
     }
-
+    
     /**
      * Returns the absolute URL pointing to the controller action
      *
@@ -145,7 +150,7 @@ abstract class AbstractDataGrid extends AbstractContainerAware implements DataGr
     {
         return $this->getRouterHelper()->getActionForCurrentController($actionName);
     }
-
+    
     /**
      * Returns javascript function name
      *
@@ -158,10 +163,10 @@ abstract class AbstractDataGrid extends AbstractContainerAware implements DataGr
         $functionName = sprintf('%s%s', $name, ucfirst($this->identifier));
         $functionName = ucwords(str_replace(['-', '_'], ' ', $functionName));
         $functionName = str_replace(' ', '', $functionName);
-
+        
         return lcfirst($functionName);
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -169,7 +174,7 @@ abstract class AbstractDataGrid extends AbstractContainerAware implements DataGr
     {
         return $this->identifier;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -177,7 +182,7 @@ abstract class AbstractDataGrid extends AbstractContainerAware implements DataGr
     {
         $this->columns = $columns;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -185,7 +190,7 @@ abstract class AbstractDataGrid extends AbstractContainerAware implements DataGr
     {
         return $this->columns;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -193,7 +198,7 @@ abstract class AbstractDataGrid extends AbstractContainerAware implements DataGr
     {
         $this->options = $options;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -201,7 +206,7 @@ abstract class AbstractDataGrid extends AbstractContainerAware implements DataGr
     {
         return $this->options;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -211,7 +216,7 @@ abstract class AbstractDataGrid extends AbstractContainerAware implements DataGr
         $conditions         = new ConditionsCollection();
         $conditionsResolver = new ConditionsResolver();
         $conditionsResolver->resolveConditions($request->request->get('where'), $conditions);
-
+        
         $requestOptions = [
             'page'       => $page,
             'limit'      => $request->request->get('limit'),
@@ -219,7 +224,7 @@ abstract class AbstractDataGrid extends AbstractContainerAware implements DataGr
             'order_dir'  => $request->request->get('order_dir'),
             'conditions' => $conditions,
         ];
-
+        
         return $this->dataset->getResult('datagrid', $requestOptions);
     }
 }

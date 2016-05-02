@@ -26,9 +26,9 @@ class OrderPaymentSurchargeCollector implements OrderDataCollectorInterface
      */
     public function visitOrder(OrderInterface $order)
     {
-
+        
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -36,7 +36,7 @@ class OrderPaymentSurchargeCollector implements OrderDataCollectorInterface
     {
         return 'payment_surcharge';
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -44,7 +44,7 @@ class OrderPaymentSurchargeCollector implements OrderDataCollectorInterface
     {
         return 'order.label.payment_surcharge_description';
     }
-
+    
     /**
      * {@inheritdoc}
      */

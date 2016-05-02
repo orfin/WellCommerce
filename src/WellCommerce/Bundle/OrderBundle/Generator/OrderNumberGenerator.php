@@ -26,7 +26,7 @@ final class OrderNumberGenerator implements OrderNumberGeneratorInterface
      * @var OrderRepositoryInterface
      */
     private $orderRepository;
-
+    
     /**
      * OrderNumberGenerator constructor.
      *
@@ -36,14 +36,14 @@ final class OrderNumberGenerator implements OrderNumberGeneratorInterface
     {
         $this->orderRepository = $orderRepository;
     }
-
+    
     public function generateOrderNumber(OrderInterface $order) : string
     {
         // TODO: Implement generateOrderNumber() method.
     }
-
+    
     private function findLastOrderToday()
     {
-
+        
     }
 }

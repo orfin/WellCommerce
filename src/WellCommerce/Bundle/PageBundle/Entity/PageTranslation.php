@@ -27,27 +27,27 @@ class PageTranslation implements RoutableSubjectInterface, LocaleAwareInterface
 {
     use Translation;
     use RoutableTrait;
-
+    
     /**
      * @var string
      */
     protected $name;
-
+    
     /**
      * @var string
      */
     protected $content;
-
+    
     /**
      * @var PageRoute
      */
     protected $route;
-
+    
     /**
      * @var Meta
      */
     protected $meta;
-
+    
     /**
      * Constructor
      */
@@ -55,7 +55,7 @@ class PageTranslation implements RoutableSubjectInterface, LocaleAwareInterface
     {
         $this->meta = new Meta();
     }
-
+    
     /**
      * @return string
      */
@@ -63,7 +63,7 @@ class PageTranslation implements RoutableSubjectInterface, LocaleAwareInterface
     {
         return $this->content;
     }
-
+    
     /**
      * @param string $content
      */
@@ -71,7 +71,7 @@ class PageTranslation implements RoutableSubjectInterface, LocaleAwareInterface
     {
         $this->content = $content;
     }
-
+    
     /**
      * @return string
      */
@@ -79,7 +79,7 @@ class PageTranslation implements RoutableSubjectInterface, LocaleAwareInterface
     {
         return $this->name;
     }
-
+    
     /**
      * @param string $name
      */
@@ -87,7 +87,7 @@ class PageTranslation implements RoutableSubjectInterface, LocaleAwareInterface
     {
         $this->name = $name;
     }
-
+    
     /**
      * @return Meta
      */
@@ -95,7 +95,7 @@ class PageTranslation implements RoutableSubjectInterface, LocaleAwareInterface
     {
         return $this->meta;
     }
-
+    
     /**
      * @param Meta $meta
      */
@@ -103,7 +103,7 @@ class PageTranslation implements RoutableSubjectInterface, LocaleAwareInterface
     {
         $this->meta = $meta;
     }
-
+    
     /**
      * @return PageRoute|\WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface
      */
@@ -111,7 +111,7 @@ class PageTranslation implements RoutableSubjectInterface, LocaleAwareInterface
     {
         return new PageRoute();
     }
-
+    
     /**
      * {@inheritdoc}
      */

@@ -20,14 +20,14 @@ namespace WellCommerce\Bundle\OrderBundle\Entity;
 interface OrderSummaryInterface
 {
     public function getNetAmount() : float;
-
+    
     public function setNetAmount(float $netPrice);
-
+    
     public function getGrossAmount() : float;
-
+    
     public function setGrossAmount(float $grossPrice);
-
+    
     public function getTaxAmount() : float;
-
+    
     public function setTaxAmount(float $taxAmount);
 }

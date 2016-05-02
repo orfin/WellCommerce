@@ -34,27 +34,27 @@ class ThemeFieldsGenerator extends AbstractContainer implements ContainerAwareIn
     protected $themeDir;
     protected $configurationFile = 'fields.xml';
     protected $defaultValues;
-
+    
     /**
      * @var Theme
      */
     protected $theme;
-
+    
     /**
      * @var FormBuilderInterface
      */
     protected $builder;
-
+    
     /**
      * @var Form
      */
     protected $form;
-
+    
     /**
      * @var \DOMDocument
      */
     protected $configuration;
-
+    
     /**
      * Initializes generator configuration
      *
@@ -68,7 +68,7 @@ class ThemeFieldsGenerator extends AbstractContainer implements ContainerAwareIn
         $this->configuration     = $this->loadConfiguration();
         $this->layoutBoxSelector = $layoutBoxSelector;
     }
-
+    
     /**
      * Returns theme working directory
      *
@@ -78,7 +78,7 @@ class ThemeFieldsGenerator extends AbstractContainer implements ContainerAwareIn
     {
         return $this->getThemeDir($this->theme->getFolder());
     }
-
+    
     /**
      * Loads fields configuration from fields.xml file
      *
@@ -92,17 +92,17 @@ class ThemeFieldsGenerator extends AbstractContainer implements ContainerAwareIn
         if ($files->count() == 0) {
             throw new FileNotFoundException('Theme configuration file "fields.xml" was not found.');
         }
-
+        
         /**
          * @var $file \SplFileInfo
          */
         foreach ($files as $file) {
             return $this->loadFile($file->getRealpath());
         }
-
+        
         return null;
     }
-
+    
     /**
      * Parses XML file
      *
@@ -114,7 +114,7 @@ class ThemeFieldsGenerator extends AbstractContainer implements ContainerAwareIn
     {
         return XmlUtils::loadFile($file);
     }
-
+    
     /**
      * Adds required theme configuration fields to form
      *
@@ -124,12 +124,12 @@ class ThemeFieldsGenerator extends AbstractContainer implements ContainerAwareIn
     {
         $this->builder = $builder;
         $this->form    = $builder->getForm();
-
+        
         foreach ($this->configuration->documentElement->getElementsByTagName('fieldset') as $fieldset) {
             $this->addFieldset($fieldset);
         }
     }
-
+    
     /**
      * Adds new configuration fieldset to form
      *
@@ -141,7 +141,7 @@ class ThemeFieldsGenerator extends AbstractContainer implements ContainerAwareIn
             'name'  => $node->getAttribute('name'),
             'label' => $this->trans($node->getAttribute('label'))
         ]));
-
+        
         foreach ($node->getElementsByTagName('field') as $field) {
             if (false !== $element = $this->addField($field)) {
                 $element->populate($this->getDefaultValues($field));
@@ -149,7 +149,7 @@ class ThemeFieldsGenerator extends AbstractContainer implements ContainerAwareIn
             }
         }
     }
-
+    
     /**
      * Resolves field type and adds it to fieldset
      *
@@ -159,14 +159,14 @@ class ThemeFieldsGenerator extends AbstractContainer implements ContainerAwareIn
     {
         $type         = $field->getAttribute('type');
         $functionName = 'addField' . $this->getFieldTypeSuffix($type);
-
+        
         if (!is_callable([$this, $functionName])) {
             return false;
         }
-
+        
         return call_user_func([$this, $functionName], $field);
     }
-
+    
     /**
      * Returns field element suffix
      *
@@ -178,7 +178,7 @@ class ThemeFieldsGenerator extends AbstractContainer implements ContainerAwareIn
     {
         return str_replace(' ', '', ucwords(str_replace('-', ' ', $type)));
     }
-
+    
     /**
      * Returns default values for field
      *
@@ -194,10 +194,10 @@ class ThemeFieldsGenerator extends AbstractContainer implements ContainerAwareIn
         } else {
             $defaultValues = $xml['default'];
         }
-
+        
         return $defaultValues;
     }
-
+    
     /**
      * Adds width input
      *
@@ -209,7 +209,7 @@ class ThemeFieldsGenerator extends AbstractContainer implements ContainerAwareIn
     {
         return $this->addSizeInput('width', $this->getFieldAttributes($field));
     }
-
+    
     /**
      * Adds height input
      *
@@ -221,7 +221,7 @@ class ThemeFieldsGenerator extends AbstractContainer implements ContainerAwareIn
     {
         return $this->addSizeInput('height', $this->getFieldAttributes($field));
     }
-
+    
     /**
      * Returns text field
      *
@@ -238,7 +238,7 @@ class ThemeFieldsGenerator extends AbstractContainer implements ContainerAwareIn
                 'css_attribute' => $type,
             ]);
     }
-
+    
     /**
      * Returns an array containing all required field attributes
      *
@@ -252,7 +252,7 @@ class ThemeFieldsGenerator extends AbstractContainer implements ContainerAwareIn
         $label    = '';
         $comment  = '';
         $selector = '';
-
+        
         foreach ($item->childNodes as $child) {
             if (!$child instanceof \DOMElement) {
                 continue;
@@ -269,7 +269,7 @@ class ThemeFieldsGenerator extends AbstractContainer implements ContainerAwareIn
                     break;
             }
         }
-
+        
         return [
             'name'     => $name,
             'label'    => $label,
@@ -277,7 +277,7 @@ class ThemeFieldsGenerator extends AbstractContainer implements ContainerAwareIn
             'selector' => $selector,
         ];
     }
-
+    
     /**
      * Returns form name or sets it automatically
      *
@@ -289,15 +289,15 @@ class ThemeFieldsGenerator extends AbstractContainer implements ContainerAwareIn
     {
         $name = $item->getAttribute('name');
         $type = $item->getAttribute('type');
-
+        
         if (empty($name)) {
             $name = 'auto_field_' . ($this->nextFieldId++);
             $item->setAttribute('name', $name);
         }
-
+        
         return sprintf('%s_%s', $name, $type);
     }
-
+    
     /**
      * Returns field specific selector
      *
@@ -309,7 +309,7 @@ class ThemeFieldsGenerator extends AbstractContainer implements ContainerAwareIn
     {
         return str_replace('<layout-box/>', $this->layoutBoxSelector, $item->nodeValue);
     }
-
+    
     /**
      * Adds font selector
      *
@@ -321,10 +321,10 @@ class ThemeFieldsGenerator extends AbstractContainer implements ContainerAwareIn
     {
         $attributes = $this->getFieldAttributes($field);
         $element    = $this->builder->getElement('font_style', $attributes);
-
+        
         return $element;
     }
-
+    
     /**
      * Adds background selector
      *
@@ -336,7 +336,7 @@ class ThemeFieldsGenerator extends AbstractContainer implements ContainerAwareIn
     {
         $attributes = $this->getFieldAttributes($field);
         $xml        = simplexml_import_dom($field);
-
+        
         return $this->builder->getElement('colour_scheme_picker', $attributes + [
                 'gradient_height' => (string)$xml->height,
                 'file_source'     => $this->themeDir . '/assets/images',

@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\ClientBundle\Factory;
 
-use WellCommerce\Bundle\ClientBundle\Entity\ClientDetails;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientDetailsInterface;
 use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 
@@ -24,7 +23,7 @@ use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 final class ClientDetailsFactory extends AbstractEntityFactory
 {
     protected $supportsInterface = ClientDetailsInterface::class;
-
+    
     public function create() : ClientDetailsInterface
     {
         /** @var ClientDetailsInterface $details */
@@ -33,7 +32,7 @@ final class ClientDetailsFactory extends AbstractEntityFactory
         $details->setDiscount(0);
         $details->setNewsletterAccepted(false);
         $details->setSalt(base_convert(sha1(uniqid(mt_rand(), true)), 16, 36));
-
+        
         return $details;
     }
 }

@@ -20,15 +20,15 @@ namespace WellCommerce\Component\Form;
 class Option
 {
     protected $value;
-
+    
     protected $label;
-
+    
     public function __construct($value, $label)
     {
         $this->value = $value;
         $this->label = $label;
     }
-
+    
     public static function make($array, $default = '')
     {
         $result = [];
@@ -38,15 +38,15 @@ class Option
         foreach ($array as $key => $value) {
             $result[] = new self($key, $value);
         }
-
+        
         return $result;
     }
-
+    
     public function __toString()
     {
         $value = addslashes($this->value);
         $label = addslashes($this->label);
-
+        
         return "{sValue: '{$value}', sLabel: '{$label}'}";
     }
 }

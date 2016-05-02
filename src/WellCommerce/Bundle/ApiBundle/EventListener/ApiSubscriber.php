@@ -28,7 +28,7 @@ class ApiSubscriber extends AbstractEventSubscriber
             KernelEvents::REQUEST => ['onKernelRequestEvent'],
         ];
     }
-
+    
     public function onKernelRequestEvent(GetResponseEvent $event)
     {
         $request = $event->getRequest();

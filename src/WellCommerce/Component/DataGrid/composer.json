@@ -1,41 +1,47 @@
 {
-    "name": "wellcommerce/datagrid",
-    "license": "MIT",
-    "minimum-stability": "dev",
-    "description": "WellCommerce DataGrid",
-    "keywords": ["wellcommerce", "datagrid", "component"],
-    "authors": [
-        {
-            "name": "Adam Piotrowski",
-            "email": "adam@wellcommerce.org"
-        },
-        {
-            "name": "WellCommerce Developers",
-            "email": "developers@wellcommerce.org"
-        }
-    ],
-    "support": {
-        "email": "support@wellcommerce.org",
-        "issues": "https://github.com/WellCommerce/DataGrid/issues",
-        "source": "https://github.com/WellCommerce/DataGrid"
+  "name": "wellcommerce/datagrid",
+  "license": "MIT",
+  "minimum-stability": "dev",
+  "description": "WellCommerce DataGrid",
+  "keywords": [
+    "wellcommerce",
+    "datagrid",
+    "component"
+  ],
+  "authors": [
+    {
+      "name": "Adam Piotrowski",
+      "email": "adam@wellcommerce.org"
     },
-    "autoload": {
-        "psr-4": { "WellCommerce\\Component\\DataGrid\\": "" }
-    },
-    "require": {
-        "php": "^7.0",
-        "symfony/http-foundation": "^3.0",
-        "symfony/options-resolver": "^3.0",
-        "wellcommerce/collections": "^0.7@dev",
-        "wellcommerce/dataset": "^0.7@dev",
-        "zendframework/zend-json": "^2.6@dev"
-    },
-    "require-dev": {
-        "phpunit/phpunit":  "^5.0@dev"
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "0.7.x-dev"
-        }
+    {
+      "name": "WellCommerce Developers",
+      "email": "developers@wellcommerce.org"
     }
+  ],
+  "support": {
+    "email": "support@wellcommerce.org",
+    "issues": "https://github.com/WellCommerce/DataGrid/issues",
+    "source": "https://github.com/WellCommerce/DataGrid"
+  },
+  "autoload": {
+    "psr-4": {
+      "WellCommerce\\Component\\DataGrid\\": ""
+    }
+  },
+  "require": {
+    "php": "^7.0",
+    "symfony/http-foundation": "^3.0",
+    "symfony/options-resolver": "^3.0",
+    "wellcommerce/collections": "^0.7@dev",
+    "wellcommerce/dataset": "^0.7@dev",
+    "zendframework/zend-json": "^2.6@dev"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^5.0@dev"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "0.7.x-dev"
+    }
+  }
 }

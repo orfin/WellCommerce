@@ -11,13 +11,13 @@
  */
 namespace WellCommerce\Bundle\NewsBundle\Repository;
 
-use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
 
 /**
  * Class NewsRepository
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class NewsRepository extends AbstractEntityRepository implements NewsRepositoryInterface
+class NewsRepository extends EntityRepository implements NewsRepositoryInterface
 {
 }

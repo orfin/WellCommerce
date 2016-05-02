@@ -23,7 +23,7 @@ interface MediaAwareInterface
      * @return MediaInterface
      */
     public function getPhoto();
-
+    
     /**
      * @param null|MediaInterface $media
      */

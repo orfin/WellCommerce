@@ -24,22 +24,22 @@ class ThemeCss extends AbstractEntity implements ThemeCssInterface
 {
     use Timestampable;
     use ThemeAwareTrait;
-
+    
     /**
      * @var string
      */
     protected $class;
-
+    
     /**
      * @var string
      */
     protected $selector;
-
+    
     /**
      * @var string
      */
     protected $attribute;
-
+    
     /**
      * @return string
      */
@@ -47,7 +47,7 @@ class ThemeCss extends AbstractEntity implements ThemeCssInterface
     {
         return $this->attribute;
     }
-
+    
     /**
      * @param string $attribute
      */
@@ -55,7 +55,7 @@ class ThemeCss extends AbstractEntity implements ThemeCssInterface
     {
         $this->attribute = $attribute;
     }
-
+    
     /**
      * @return string
      */
@@ -63,7 +63,7 @@ class ThemeCss extends AbstractEntity implements ThemeCssInterface
     {
         return $this->class;
     }
-
+    
     /**
      * @param string $class
      */
@@ -71,7 +71,7 @@ class ThemeCss extends AbstractEntity implements ThemeCssInterface
     {
         $this->class = $class;
     }
-
+    
     /**
      * @return string
      */
@@ -79,7 +79,7 @@ class ThemeCss extends AbstractEntity implements ThemeCssInterface
     {
         return $this->selector;
     }
-
+    
     /**
      * @param string $selector
      */

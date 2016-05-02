@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\CurrencyBundle;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use WellCommerce\Bundle\CurrencyBundle\DependencyInjection\Compiler;
 

@@ -44,7 +44,7 @@ class ShopDataGrid extends AbstractDataGrid
                 'type' => Filter::FILTER_BETWEEN,
             ]),
         ]));
-
+        
         $collection->add(new Column([
             'id'         => 'name',
             'caption'    => $this->trans('common.label.name'),
@@ -53,7 +53,7 @@ class ShopDataGrid extends AbstractDataGrid
                 'align' => Appearance::ALIGN_LEFT
             ]),
         ]));
-
+        
         $collection->add(new Column([
             'id'         => 'url',
             'caption'    => $this->trans('common.label.url'),
@@ -62,7 +62,7 @@ class ShopDataGrid extends AbstractDataGrid
                 'align' => Appearance::ALIGN_CENTER
             ]),
         ]));
-
+        
         $collection->add(new Column([
             'id'         => 'company',
             'caption'    => $this->trans('shop.label.company'),
@@ -71,7 +71,7 @@ class ShopDataGrid extends AbstractDataGrid
                 'align' => Appearance::ALIGN_CENTER
             ]),
         ]));
-
+        
         $collection->add(new Column([
             'id'         => 'theme',
             'caption'    => $this->trans('shop.label.theme'),
@@ -80,7 +80,7 @@ class ShopDataGrid extends AbstractDataGrid
                 'align' => Appearance::ALIGN_CENTER
             ]),
         ]));
-
+        
         $collection->add(new Column([
             'id'         => 'country',
             'caption'    => $this->trans('shop.label.default_country'),
@@ -89,7 +89,7 @@ class ShopDataGrid extends AbstractDataGrid
                 'align' => Appearance::ALIGN_CENTER
             ]),
         ]));
-
+        
         $collection->add(new Column([
             'id'         => 'currency',
             'caption'    => $this->trans('shop.label.default_currency'),

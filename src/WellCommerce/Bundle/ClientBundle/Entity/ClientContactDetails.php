@@ -23,27 +23,27 @@ class ClientContactDetails implements ClientContactDetailsInterface
      * @var string
      */
     protected $firstName;
-
+    
     /**
      * @var string
      */
     protected $lastName;
-
+    
     /**
      * @var string
      */
     protected $phone;
-
+    
     /**
      * @var string
      */
     protected $secondaryPhone;
-
+    
     /**
      * @var string
      */
     protected $email;
-
+    
     /**
      * {@inheritdoc}
      */
@@ -51,7 +51,7 @@ class ClientContactDetails implements ClientContactDetailsInterface
     {
         return $this->firstName;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -59,7 +59,7 @@ class ClientContactDetails implements ClientContactDetailsInterface
     {
         $this->firstName = $firstName;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -67,7 +67,7 @@ class ClientContactDetails implements ClientContactDetailsInterface
     {
         return $this->lastName;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -75,7 +75,7 @@ class ClientContactDetails implements ClientContactDetailsInterface
     {
         $this->lastName = $lastName;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -83,7 +83,7 @@ class ClientContactDetails implements ClientContactDetailsInterface
     {
         return $this->phone;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -91,7 +91,7 @@ class ClientContactDetails implements ClientContactDetailsInterface
     {
         $this->phone = $phone;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -99,7 +99,7 @@ class ClientContactDetails implements ClientContactDetailsInterface
     {
         return $this->secondaryPhone;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -107,7 +107,7 @@ class ClientContactDetails implements ClientContactDetailsInterface
     {
         $this->secondaryPhone = $secondaryPhone;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -115,7 +115,7 @@ class ClientContactDetails implements ClientContactDetailsInterface
     {
         return $this->email;
     }
-
+    
     /**
      * {@inheritdoc}
      */

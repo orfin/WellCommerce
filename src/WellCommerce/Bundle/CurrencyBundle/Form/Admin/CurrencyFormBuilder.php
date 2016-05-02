@@ -23,11 +23,6 @@ use WellCommerce\Component\Form\Elements\FormInterface;
 class CurrencyFormBuilder extends AbstractFormBuilder
 {
     /**
-     * @var CurrencyRepositoryInterface
-     */
-    private $repository;
-
-    /**
      * {@inheritdoc}
      */
     public function buildForm(FormInterface $form)
@@ -40,7 +35,7 @@ class CurrencyFormBuilder extends AbstractFormBuilder
         $requiredData->addChild($this->getElement('select', [
             'name'    => 'code',
             'label'   => $this->trans('currency.label.code'),
-            'options' => $this->repository->getCurrenciesToSelect()
+            'options' => $this->getCurrencyRepository()->getCurrenciesToSelect()
         ]));
 
         $requiredData->addChild($this->getElement('checkbox', [
@@ -54,13 +49,8 @@ class CurrencyFormBuilder extends AbstractFormBuilder
         $form->addFilter($this->getFilter('secure'));
     }
 
-    /**
-     * Sets currency repository
-     *
-     * @param CurrencyRepositoryInterface $repository
-     */
-    public function setRepository(CurrencyRepositoryInterface $repository)
+    private function getCurrencyRepository() : CurrencyRepositoryInterface
     {
-        $this->repository = $repository;
+        return $this->get('currency.repository');
     }
 }

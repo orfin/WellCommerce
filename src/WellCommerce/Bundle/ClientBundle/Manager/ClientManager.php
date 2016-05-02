@@ -28,15 +28,15 @@ class ClientManager extends AbstractManager
         if (false === filter_var($username, FILTER_VALIDATE_EMAIL)) {
             throw new ResetPasswordException('client.flash.reset_password.wrong_email');
         }
-
+        
         if (null === $client = $this->findClient($username)) {
             throw new ResetPasswordException(sprintf('client.flash.reset_password.email_not_found', $username));
         }
-
+        
         $this->setClientResetPasswordHash($client);
         $this->sendResetInstructions($client);
     }
-
+    
     /**
      * @param ClientInterface $client
      *
@@ -48,7 +48,7 @@ class ClientManager extends AbstractManager
         $client->getClientDetails()->setResetPasswordHash($hash);
         $this->updateResource($client);
     }
-
+    
     /**
      * Sends the reset instructions to client
      *
@@ -68,7 +68,7 @@ class ClientManager extends AbstractManager
             'configuration' => $client->getShop(),
         ]);
     }
-
+    
     /**
      * Returns the client's account or null if it was not found
      *
@@ -79,7 +79,7 @@ class ClientManager extends AbstractManager
     protected function findClient($username)
     {
         $resource = $this->getRepository()->findOneBy(['clientDetails.username' => $username]);
-
+        
         return $resource;
     }
 }

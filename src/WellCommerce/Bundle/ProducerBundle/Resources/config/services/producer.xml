@@ -9,11 +9,6 @@
     </imports>
 
     <services>
-        <service id="producer.manager" class="WellCommerce\Bundle\ProducerBundle\Manager\ProducerManager" parent="core.manager">
-            <argument type="service" id="producer.repository"/>
-            <argument type="service" id="producer.factory"/>
-        </service>
-
         <service id="producer.request_param_converter" class="WellCommerce\Bundle\ProducerBundle\Request\ParamConverter\ProducerParamConverter">
             <argument type="service" id="producer.repository" />
             <argument>id</argument>

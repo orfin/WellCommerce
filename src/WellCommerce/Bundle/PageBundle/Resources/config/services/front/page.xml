@@ -25,8 +25,9 @@
             </call>
         </service>
 
-        <service id="page.dataset.front" class="WellCommerce\Bundle\PageBundle\DataSet\Front\PageDataSet" parent="core.dataset">
+        <service id="page.dataset.front" class="WellCommerce\Bundle\PageBundle\DataSet\Front\PageDataSet">
             <argument type="service" id="page.dataset.query_builder.front"/>
+            <tag name="dataset"/>
         </service>
 
         <service id="twig.extension.page" class="WellCommerce\Bundle\PageBundle\Twig\Extension\PageExtension">

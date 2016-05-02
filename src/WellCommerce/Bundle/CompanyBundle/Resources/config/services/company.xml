@@ -6,11 +6,4 @@
     <imports>
         <import resource="admin/company.xml"/>
     </imports>
-
-    <services>
-        <service id="company.manager" class="WellCommerce\Bundle\CompanyBundle\Manager\CompanyManager" parent="core.manager">
-            <argument type="service" id="company.repository"/>
-            <argument type="service" id="company.factory"/>
-        </service>
-    </services>
 </container>

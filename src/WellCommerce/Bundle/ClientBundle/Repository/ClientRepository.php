@@ -18,14 +18,14 @@ use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use WellCommerce\Bundle\AdminBundle\Repository\UserRepositoryInterface;
-use WellCommerce\Bundle\DoctrineBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
 
 /**
  * Class ClientGroupRepository
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientRepository extends AbstractEntityRepository implements ClientRepositoryInterface, UserRepositoryInterface
+class ClientRepository extends EntityRepository implements ClientRepositoryInterface, UserRepositoryInterface
 {
     /**
      * {@inheritdoc}

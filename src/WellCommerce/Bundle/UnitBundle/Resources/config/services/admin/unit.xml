@@ -4,19 +4,10 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="unit.manager.admin" class="WellCommerce\Bundle\UnitBundle\Manager\Admin\UnitManager">
-            <argument type="service" id="unit.repository"/>
-            <argument type="service" id="unit.event_dispatcher"/>
-            <argument type="service" id="unit.factory"/>
+        <service id="unit.controller.admin" class="WellCommerce\Bundle\UnitBundle\Controller\Admin\UnitController">
+            <argument type="service" id="unit.manager"/>
             <argument type="service" id="unit.form_builder.admin"/>
             <argument type="service" id="unit.datagrid"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-        </service>
-        
-        <service id="unit.controller.admin" class="WellCommerce\Bundle\UnitBundle\Controller\Admin\UnitController">
-            <argument type="service" id="unit.manager.admin"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -26,13 +17,14 @@
             <argument type="service" id="unit.repository"/>
         </service>
 
-        <service id="unit.dataset.admin" class="WellCommerce\Bundle\UnitBundle\DataSet\Admin\UnitDataSet" parent="core.dataset">
+        <service id="unit.dataset.admin" class="WellCommerce\Bundle\UnitBundle\DataSet\Admin\UnitDataSet">
             <argument type="service" id="unit.dataset.query_builder.admin"/>
+            <tag name="dataset"/>
         </service>
 
-        <service id="unit.datagrid" class="WellCommerce\Bundle\UnitBundle\DataGrid\UnitDataGrid" parent="core.datagrid">
-            <argument key="identifier">unit</argument>
+        <service id="unit.datagrid" class="WellCommerce\Bundle\UnitBundle\DataGrid\UnitDataGrid">
             <argument type="service" id="unit.dataset.admin"/>
+            <tag name="datagrid" alias="unit"/>
         </service>
 
         <service id="unit.form_builder.admin" class="WellCommerce\Bundle\UnitBundle\Form\Admin\UnitFormBuilder" parent="core.form_builder" />

@@ -26,7 +26,7 @@ class UnitFactory extends AbstractEntityFactory
      * @var string
      */
     protected $supportsInterface = UnitInterface::class;
-
+    
     /**
      * @return UnitInterface
      */
@@ -35,7 +35,7 @@ class UnitFactory extends AbstractEntityFactory
         /** @var  $unit UnitInterface */
         $unit = $this->init();
         $unit->setCreatedAt(new \DateTime());
-
+        
         return $unit;
     }
 }

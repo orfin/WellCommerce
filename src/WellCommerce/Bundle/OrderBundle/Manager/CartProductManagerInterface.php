@@ -12,9 +12,9 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Manager;
 
+use WellCommerce\Bundle\CoreBundle\Manager\Front\FrontManagerInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\CartInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\CartProductInterface;
-use WellCommerce\Bundle\CoreBundle\Manager\Front\FrontManagerInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\VariantInterface;
 
@@ -36,8 +36,8 @@ interface CartProductManagerInterface extends FrontManagerInterface
      * @return \WellCommerce\Bundle\OrderBundle\Entity\CartProductInterface
      */
     public function initCartProduct(CartInterface $cart, ProductInterface $product, VariantInterface $variant = null, $quantity = 1);
-
-
+    
+    
     /**
      * Removes a product from cart
      *
@@ -45,7 +45,7 @@ interface CartProductManagerInterface extends FrontManagerInterface
      * @param CartInterface        $cart
      */
     public function deleteCartProductFromCart(CartProductInterface $cartProduct, CartInterface $cart);
-
+    
     /**
      * Returns the CartProduct object from cart or null if it was not found
      *
@@ -56,7 +56,7 @@ interface CartProductManagerInterface extends FrontManagerInterface
      * @return null|\WellCommerce\Bundle\OrderBundle\Entity\CartProductInterface
      */
     public function findProductInCart(CartInterface $cart, ProductInterface $product, VariantInterface $variant = null);
-
+    
     /**
      * Adds a new product to cart or increments its quantity
      *
@@ -66,7 +66,7 @@ interface CartProductManagerInterface extends FrontManagerInterface
      * @param int                   $quantity
      */
     public function addProductToCart(CartInterface $cart, ProductInterface $product, VariantInterface $variant = null, $quantity = 1);
-
+    
     /**
      * Changes products quantity or deletes it from cart if 0 quantity was given
      *

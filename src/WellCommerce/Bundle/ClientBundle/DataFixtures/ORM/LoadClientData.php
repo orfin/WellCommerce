@@ -56,22 +56,24 @@ class LoadClientData extends AbstractDataFixture
         $billingAddress = new ClientBillingAddress();
         $billingAddress->setFirstName($firstName);
         $billingAddress->setLastName($lastName);
-        $billingAddress->setLine1($fakerGenerator->streetName . ' ' . $fakerGenerator->streetSuffix);
-        $billingAddress->setLine2($fakerGenerator->buildingNumber);
+        $billingAddress->setLine1($fakerGenerator->address);
+        $billingAddress->setLine2('');
         $billingAddress->setPostalCode($fakerGenerator->postcode);
         $billingAddress->setCity($fakerGenerator->city);
         $billingAddress->setCountry($fakerGenerator->countryCode);
         $billingAddress->setVatId(666777888999);
         $billingAddress->setCompanyName($fakerGenerator->company);
+        $billingAddress->setState('');
 
         $shippingAddress = new ClientShippingAddress();
         $shippingAddress->setFirstName($firstName);
         $shippingAddress->setLastName($lastName);
-        $shippingAddress->setLine1($fakerGenerator->streetName . ' ' . $fakerGenerator->streetSuffix);
-        $shippingAddress->setLine2($fakerGenerator->buildingNumber);
+        $shippingAddress->setLine1($fakerGenerator->address);
+        $shippingAddress->setLine2('');
         $shippingAddress->setPostalCode($fakerGenerator->postcode);
         $shippingAddress->setCity($fakerGenerator->city);
         $shippingAddress->setCountry($fakerGenerator->countryCode);
+        $shippingAddress->setState('');
 
         $client->setBillingAddress($billingAddress);
         $client->setShippingAddress($shippingAddress);

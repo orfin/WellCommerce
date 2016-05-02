@@ -29,37 +29,37 @@ interface NewsInterface extends EntityInterface, TimestampableInterface, Transla
      * @return bool
      */
     public function getPublish() : bool;
-
+    
     /**
      * @param bool $publish
      */
     public function setPublish(bool $publish);
-
+    
     /**
      * @return DateTime
      */
     public function getStartDate() : DateTime;
-
+    
     /**
      * @param DateTime $startDate
      */
     public function setStartDate(DateTime $startDate);
-
+    
     /**
      * @return DateTime
      */
     public function getEndDate() : DateTime;
-
+    
     /**
      * @param DateTime $endDate
      */
     public function setEndDate(DateTime $endDate);
-
+    
     /**
      * @return bool
      */
     public function getFeatured() : bool;
-
+    
     /**
      * @param bool $featured
      */

@@ -28,7 +28,7 @@ class ApiTokenAuthenticator extends AbstractGuardAuthenticator
      * @var UserRepositoryInterface
      */
     protected $userRepository;
-
+    
     /**
      * ApiTokenAuthenticator constructor.
      *
@@ -38,36 +38,36 @@ class ApiTokenAuthenticator extends AbstractGuardAuthenticator
     {
         $this->userRepository = $userRepository;
     }
-
+    
     public function getCredentials(Request $request)
     {
         if ($request->query->has('apiKey')) {
             return $request->query->get('apiKey');
         }
-
+        
         if ($request->headers->has('X-Api-Key')) {
             return $request->headers->get('X-Api-Key');
         }
-
+        
         return false;
     }
-
+    
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
         $user = $this->userRepository->findOneBy(['apiKey' => $credentials]);
-
+        
         if (!$user) {
             throw new AuthenticationCredentialsNotFoundException();
         }
-
+        
         return $user;
     }
-
+    
     public function checkCredentials($credentials, UserInterface $user)
     {
         return true;
     }
-
+    
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
         return new JsonResponse(
@@ -75,17 +75,17 @@ class ApiTokenAuthenticator extends AbstractGuardAuthenticator
             403
         );
     }
-
+    
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
         return;
     }
-
+    
     public function supportsRememberMe()
     {
         return false;
     }
-
+    
     public function start(Request $request, AuthenticationException $authException = null)
     {
         return new JsonResponse(
