@@ -17,16 +17,9 @@ namespace WellCommerce\Component\DataSet\Request;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class DataSetRequestFactory
+final class DataSetRequestFactory
 {
-    /**
-     * Creates a request object
-     *
-     * @param array $options
-     *
-     * @return DataSetRequest
-     */
-    public function create(array $options = [])
+    public function create(array $options = []) : DataSetRequestInterface
     {
         return new DataSetRequest($options);
     }

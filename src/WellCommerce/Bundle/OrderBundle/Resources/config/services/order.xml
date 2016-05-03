@@ -33,14 +33,25 @@
         </service>
 
         <service id="order.subscriber" class="WellCommerce\Bundle\OrderBundle\EventListener\OrderSubscriber">
+            <argument type="service" id="request.helper"/>
+            <argument type="service" id="security.helper"/>
+            <argument type="service" id="order.manager"/>
+            <argument type="service" id="order.storage"/>
+            <argument type="service" id="shop.storage"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="order.doctrine.subscriber" class="WellCommerce\Bundle\OrderBundle\Doctrine\OrderSubscriber">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
-            <tag name="kernel.event_subscriber"/>
+            <tag name="doctrine.event_subscriber" connection="default" />
         </service>
 
         <service id="order.dataset.transformer.order_client" class="WellCommerce\Bundle\OrderBundle\DataSet\Transformer\ClientTransformer">
             <tag name="dataset.transformer" alias="order_client"/>
         </service>
+
+        <service id="order.storage" class="WellCommerce\Bundle\OrderBundle\Storage\OrderStorage"/>
     </services>
 </container>

@@ -13,13 +13,9 @@
             </call>
         </service>
 
-        <service id="product_status.dataset.query_builder.admin" class="WellCommerce\Bundle\ProductStatusBundle\DataSet\Admin\ProductStatusDataSetQueryBuilder" public="false">
-            <argument type="service" id="product_status.repository"/>
-        </service>
-
         <service id="product_status.dataset.admin" class="WellCommerce\Bundle\ProductStatusBundle\DataSet\Admin\ProductStatusDataSet">
-            <argument type="service" id="product_status.dataset.query_builder.admin"/>
-            <tag name="dataset"/>
+            <argument type="service" id="product_status.repository"/>
+            <tag name="dataset" alias="product_status.admin"/>
         </service>
 
         <service id="product_status.datagrid" class="WellCommerce\Bundle\ProductStatusBundle\DataGrid\ProductStatusDataGrid">

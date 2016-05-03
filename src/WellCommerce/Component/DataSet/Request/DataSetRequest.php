@@ -14,6 +14,7 @@ namespace WellCommerce\Component\DataSet\Request;
 
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use WellCommerce\Component\DataSet\Conditions\ConditionInterface;
 use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
 
 /**
@@ -78,33 +79,21 @@ class DataSetRequest implements DataSetRequestInterface
         $resolver->setAllowedTypes('conditions', ConditionsCollection::class);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getOffset() : int
     {
         return $this->options['offset'];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getLimit() : int
     {
         return $this->options['limit'];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getOrderBy() : string
     {
         return $this->options['order_by'];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getOrderDir() : string
     {
         $order = strtolower($this->options['order_dir']);
@@ -112,11 +101,13 @@ class DataSetRequest implements DataSetRequestInterface
         return in_array($order, ['asc', 'desc']) ? $order : 'asc';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getConditions() : ConditionsCollection
     {
         return $this->options['conditions'];
+    }
+
+    public function addCondition(ConditionInterface $condition)
+    {
+        $this->getConditions()->add($condition);
     }
 }

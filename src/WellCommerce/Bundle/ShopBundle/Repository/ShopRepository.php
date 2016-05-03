@@ -12,8 +12,10 @@
 
 namespace WellCommerce\Bundle\ShopBundle\Repository;
 
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
+use WellCommerce\Bundle\ShopBundle\Entity\ShopInterface;
 
 /**
  * Class ShopRepository
@@ -22,9 +24,6 @@ use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
  */
 class ShopRepository extends EntityRepository implements ShopRepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getDataSetQueryBuilder() : QueryBuilder
     {
         $queryBuilder = $this->getQueryBuilder();
@@ -33,5 +32,14 @@ class ShopRepository extends EntityRepository implements ShopRepositoryInterface
         $queryBuilder->leftJoin('shop.company', 'shop_company');
         
         return $queryBuilder;
+    }
+
+    public function resolve(int $currentShopId, string $url) : ShopInterface
+    {
+        $criteria = new Criteria();
+        $criteria->where($criteria->expr()->eq('id', $currentShopId));
+        $criteria->orWhere($criteria->expr()->eq('url', $url));
+        
+        return $this->matching($criteria)->first();
     }
 }

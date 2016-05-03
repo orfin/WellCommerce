@@ -13,6 +13,7 @@
 namespace WellCommerce\Component\DataSet\Request;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use WellCommerce\Component\DataSet\Conditions\ConditionInterface;
 use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
 
 /**
@@ -65,4 +66,11 @@ interface DataSetRequestInterface
      * @return ConditionsCollection
      */
     public function getConditions() : ConditionsCollection;
+
+    /**
+     * Adds new condition to collection
+     *
+     * @param ConditionInterface $condition
+     */
+    public function addCondition(ConditionInterface $condition);
 }

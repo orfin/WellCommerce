@@ -18,16 +18,9 @@
             </call>
         </service>
 
-        <service id="page.dataset.query_builder.front" class="WellCommerce\Bundle\PageBundle\DataSet\Front\PageDataSetQueryBuilder" public="false">
-            <argument type="service" id="page.repository"/>
-            <call method="setShopContext">
-                <argument type="service" id="shop.context.front"/>
-            </call>
-        </service>
-
         <service id="page.dataset.front" class="WellCommerce\Bundle\PageBundle\DataSet\Front\PageDataSet">
-            <argument type="service" id="page.dataset.query_builder.front"/>
-            <tag name="dataset"/>
+            <argument type="service" id="page.repository"/>
+            <tag name="dataset" alias="page.front"/>
         </service>
 
         <service id="twig.extension.page" class="WellCommerce\Bundle\PageBundle\Twig\Extension\PageExtension">

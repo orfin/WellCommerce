@@ -23,16 +23,13 @@ use WellCommerce\Component\DataSet\Transformer\ColumnTransformerCollection;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class DataSetConfigurator implements DataSetConfiguratorInterface
+final class DataSetConfigurator implements DataSetConfiguratorInterface
 {
     /**
      * @var DataSetInterface
      */
-    protected $dataset;
+    private $dataset;
 
-    /**
-     * {@inheritdoc}
-     */
     public function configure(DataSetInterface $dataset)
     {
         $this->dataset = $dataset;
@@ -40,9 +37,6 @@ class DataSetConfigurator implements DataSetConfiguratorInterface
         $dataset->dispatchOnDataSetInitEvent();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setColumns(array $columns = [])
     {
         $collection = new ColumnCollection();
@@ -57,9 +51,6 @@ class DataSetConfigurator implements DataSetConfiguratorInterface
         $this->dataset->setColumns($collection);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setColumnTransformers(array $transformers = [])
     {
         $collection = new ColumnTransformerCollection();
@@ -70,9 +61,6 @@ class DataSetConfigurator implements DataSetConfiguratorInterface
         $this->dataset->setDefaultContextOption('column_transformers', $collection);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setCacheOptions(CacheOptions $options)
     {
         $this->dataset->setCacheOptions($options);

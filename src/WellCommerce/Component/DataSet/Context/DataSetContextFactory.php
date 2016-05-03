@@ -17,12 +17,12 @@ namespace WellCommerce\Component\DataSet\Context;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class DataSetContextFactory
+final class DataSetContextFactory
 {
     /**
      * @var DataSetContextCollection
      */
-    protected $collection;
+    private $collection;
 
     /**
      * Constructor
@@ -34,15 +34,7 @@ class DataSetContextFactory
         $this->collection = $collection;
     }
 
-    /**
-     * Creates a dataset's context for given type
-     *
-     * @param string $type
-     * @param array  $options
-     *
-     * @return DataSetContextInterface
-     */
-    public function create($type, array $options = [])
+    public function create(string $type, array $options = []) : DataSetContextInterface
     {
         $context = $this->collection->get($type);
         $context->configure($options);

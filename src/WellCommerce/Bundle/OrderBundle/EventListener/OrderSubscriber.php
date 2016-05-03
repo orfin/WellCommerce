@@ -11,84 +11,87 @@
  */
 namespace WellCommerce\Bundle\OrderBundle\EventListener;
 
-use Doctrine\Common\Util\Debug;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
-use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
-use WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface;
-use WellCommerce\Bundle\DoctrineBundle\Event\ResourceEvent;
-use WellCommerce\Bundle\OrderBundle\Context\Front\CartContextInterface;
+use WellCommerce\Bundle\CoreBundle\Helper\Request\RequestHelperInterface;
+use WellCommerce\Bundle\CoreBundle\Helper\Security\SecurityHelperInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
-use WellCommerce\Bundle\OrderBundle\Manager\Front\CartManagerInterface;
-use WellCommerce\Bundle\OrderBundle\Manager\Front\OrderManagerInterface;
-use WellCommerce\Bundle\OrderBundle\Visitor\OrderVisitorTraverser;
+use WellCommerce\Bundle\OrderBundle\Manager\OrderManagerInterface;
+use WellCommerce\Bundle\OrderBundle\Storage\OrderStorageInterface;
+use WellCommerce\Bundle\ShopBundle\Storage\ShopStorageInterface;
 
 /**
  * Class OrderSubscriber
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-final class OrderSubscriber extends AbstractEventSubscriber
+final class OrderSubscriber implements EventSubscriberInterface
 {
+    /**
+     * @var RequestHelperInterface
+     */
+    private $requestHelper;
+
+    /**
+     * @var SecurityHelperInterface
+     */
+    private $securityHelper;
+
+    /**
+     * @var OrderManagerInterface
+     */
+    private $orderManager;
+
+    /**
+     * @var OrderStorageInterface
+     */
+    private $orderStorage;
+
+    /**
+     * @var ShopStorageInterface
+     */
+    private $shopStorage;
+
+    /**
+     * OrderSubscriber constructor.
+     *
+     * @param RequestHelperInterface  $requestHelper
+     * @param SecurityHelperInterface $securityHelper
+     * @param OrderManagerInterface   $orderManager
+     * @param OrderStorageInterface   $orderStorage
+     * @param ShopStorageInterface    $shopStorage
+     */
+    public function __construct(
+        RequestHelperInterface $requestHelper,
+        SecurityHelperInterface $securityHelper,
+        OrderManagerInterface $orderManager,
+        OrderStorageInterface $orderStorage,
+        ShopStorageInterface $shopStorage
+    ) {
+        $this->requestHelper  = $requestHelper;
+        $this->securityHelper = $securityHelper;
+        $this->orderManager   = $orderManager;
+        $this->orderStorage   = $orderStorage;
+        $this->shopStorage    = $shopStorage;
+    }
+    
     public static function getSubscribedEvents()
     {
         return [
             KernelEvents::CONTROLLER => ['onKernelController', -150],
-            'order.post_init'        => ['onOrderPostInitEvent', 0],
-            'order.post_create'      => ['onOrderPostCreateEvent', 0],
-            'order.pre_update'       => ['onOrderPreUpdateEvent', 0],
         ];
     }
     
     public function onKernelController()
     {
-//        $this->getOrderManager()->initializeOrder();
-    }
-    
-    public function onOrderPostInitEvent(ResourceEvent $event)
-    {
-        $order   = $event->getResource();
-        $context = $this->getCartContext();
-        if ($order instanceof OrderInterface && $context->hasCurrentCart()) {
-            $this->getOrderConfirmationManager()->prepareOrderFromCart($order, $context->getCurrentCart());
+        if (false === $this->securityHelper->isActiveAdminFirewall()) {
+            $currency  = $this->requestHelper->getCurrentCurrency();
+            $sessionId = $this->requestHelper->getSessionId();
+            $client    = $this->securityHelper->getCurrentClient();
+            $shop      = $this->shopStorage->getCurrentShop();
+            $order     = $this->orderManager->findOrder($currency, $sessionId, $client, $shop);
+
+            $this->orderStorage->setCurrentOrder($order);
         }
-        
-        Debug::dump($order);
-        die();
-    }
-    
-    public function onOrderPostCreateEvent()
-    {
-        $this->getCartManager()->abandonCurrentCart();
-    }
-    
-    public function onOrderPostPreparedEvent(ResourceEvent $event)
-    {
-        $order = $event->getResource();
-        if ($order instanceof OrderInterface) {
-            $this->traverseOrder($order);
-        }
-    }
-    
-    public function onOrderPreUpdateEvent(ResourceEvent $event)
-    {
-        $order = $event->getResource();
-        if ($order instanceof OrderInterface) {
-            $this->traverseOrder($order);
-        }
-    }
-    
-    private function traverseOrder(OrderInterface $order)
-    {
-        $this->getOrderVisitorTraverser()->traverse($order);
-    }
-    
-    private function getOrderVisitorTraverser() : OrderVisitorTraverser
-    {
-        return $this->container->get('order.visitor.traverser');
-    }
-    
-    private function getOrderManager() : ManagerInterface
-    {
-        return $this->container->get('order.manager');
     }
 }

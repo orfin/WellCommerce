@@ -13,17 +13,9 @@
             </call>
         </service>
 
-        <service id="shipping_method.dataset.query_builder.admin" class="WellCommerce\Bundle\ShippingBundle\DataSet\Admin\ShippingMethodDataSetQueryBuilder" public="false">
-            <argument type="service" id="shipping_method.repository"/>
-        </service>
-
         <service id="shipping_method.dataset.admin" class="WellCommerce\Bundle\ShippingBundle\DataSet\Admin\ShippingMethodDataSet">
-            <argument type="service" id="shipping_method.dataset.query_builder.admin"/>
-            <tag name="dataset"/>
-        </service>
-
-        <service id="shipping_method.dataset.query_builder" parent="shipping_method.dataset.query_builder.admin" public="false">
             <argument type="service" id="shipping_method.repository"/>
+            <tag name="dataset" alias="shipping_method.admin"/>
         </service>
 
         <service id="shipping_method.datagrid" class="WellCommerce\Bundle\ShippingBundle\DataGrid\ShippingMethodDataGrid">

@@ -4,13 +4,9 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="news.dataset.query_builder.front" class="WellCommerce\Bundle\NewsBundle\DataSet\Front\NewsDataSetQueryBuilder" public="false">
-            <argument type="service" id="news.repository"/>
-        </service>
-
         <service id="news.dataset.front" class="WellCommerce\Bundle\NewsBundle\DataSet\Front\NewsDataSet">
-            <argument type="service" id="news.dataset.query_builder.front"/>
-            <tag name="dataset"/>
+            <argument type="service" id="news.repository"/>
+            <tag name="dataset" alias="news.front"/>
         </service>
 
         <service id="news.context.front" class="WellCommerce\Bundle\NewsBundle\Context\Front\NewsContext"/>

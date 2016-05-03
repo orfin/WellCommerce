@@ -6,11 +6,4 @@
     <imports>
         <import resource="admin/user.xml"/>
     </imports>
-
-    <services>
-        <service id="admin.helper" class="WellCommerce\Bundle\AdminBundle\Helper\Admin\AdminHelper">
-            <argument type="service" id="security.token_storage"/>
-            <argument type="service" id="user.repository"/>
-        </service>
-    </services>
 </container>

@@ -23,7 +23,7 @@ use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-final class Manager implements ManagerInterface
+class Manager implements ManagerInterface
 {
     /**
      * @var RepositoryInterface

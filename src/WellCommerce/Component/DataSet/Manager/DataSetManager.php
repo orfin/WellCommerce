@@ -13,69 +13,79 @@
 namespace WellCommerce\Component\DataSet\Manager;
 
 use WellCommerce\Component\DataSet\Context\DataSetContextFactory;
+use WellCommerce\Component\DataSet\Context\DataSetContextInterface;
+use WellCommerce\Component\DataSet\QueryBuilder\DataSetQueryBuilderFactory;
+use WellCommerce\Component\DataSet\QueryBuilder\DataSetQueryBuilderInterface;
+use WellCommerce\Component\DataSet\Repository\DataSetAwareRepositoryInterface;
 use WellCommerce\Component\DataSet\Request\DataSetRequestFactory;
+use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
 use WellCommerce\Component\DataSet\Transformer\DataSetTransformerFactory;
+use WellCommerce\Component\DataSet\Transformer\DataSetTransformerInterface;
 
 /**
  * Class DataSetManagerInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class DataSetManager implements DataSetManagerInterface
+final class DataSetManager implements DataSetManagerInterface
 {
     /**
      * @var DataSetContextFactory
      */
-    protected $contextFactory;
+    private $contextFactory;
 
     /**
      * @var DataSetRequestFactory
      */
-    protected $requestFactory;
+    private $requestFactory;
 
     /**
      * @var DataSetTransformerFactory
      */
-    protected $transformerFactory;
+    private $transformerFactory;
 
     /**
-     * Constructor
+     * @var DataSetQueryBuilderFactory
+     */
+    private $queryBuilderFactory;
+
+    /**
+     * DataSetManager constructor.
      *
-     * @param DataSetContextFactory     $contextFactory
-     * @param DataSetRequestFactory     $requestFactory
-     * @param DataSetTransformerFactory $transformerFactory
+     * @param DataSetContextFactory      $contextFactory
+     * @param DataSetRequestFactory      $requestFactory
+     * @param DataSetTransformerFactory  $transformerFactory
+     * @param DataSetQueryBuilderFactory $queryBuilderFactory
      */
     public function __construct(
         DataSetContextFactory $contextFactory,
         DataSetRequestFactory $requestFactory,
-        DataSetTransformerFactory $transformerFactory
+        DataSetTransformerFactory $transformerFactory,
+        DataSetQueryBuilderFactory $queryBuilderFactory
     ) {
-        $this->contextFactory     = $contextFactory;
-        $this->requestFactory     = $requestFactory;
-        $this->transformerFactory = $transformerFactory;
+        $this->contextFactory      = $contextFactory;
+        $this->requestFactory      = $requestFactory;
+        $this->transformerFactory  = $transformerFactory;
+        $this->queryBuilderFactory = $queryBuilderFactory;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function createContext($contextType, array $options = [])
+    public function createContext(string $contextType, array $options = []) : DataSetContextInterface
     {
         return $this->contextFactory->create($contextType, $options);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function createTransformer($transformerType, array $options = [])
+    public function createTransformer(string $transformerType, array $options = []) : DataSetTransformerInterface
     {
         return $this->transformerFactory->create($transformerType, $options);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function createRequest(array $options = [])
+    public function createRequest(array $options = []) : DataSetRequestInterface
     {
         return $this->requestFactory->create($options);
+    }
+    
+    public function createQueryBuilder(DataSetAwareRepositoryInterface $repository) : DataSetQueryBuilderInterface
+    {
+        return $this->queryBuilderFactory->create($repository);
     }
 }

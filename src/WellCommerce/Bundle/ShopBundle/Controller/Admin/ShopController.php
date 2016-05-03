@@ -22,10 +22,9 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
  */
 class ShopController extends AbstractAdminController
 {
-    public function changeContextAction(int $id) : JsonResponse
+    public function switchShopAction(int $id) : JsonResponse
     {
-        $sessionAttributeName = $this->manager->getShopContext()->getSessionAttributeName();
-        $this->getRequestHelper()->setSessionAttribute($sessionAttributeName, $id);
+        $this->getRequestHelper()->setSessionAttribute('admin/shop/id', $id);
 
         return $this->jsonResponse([
             'success' => true

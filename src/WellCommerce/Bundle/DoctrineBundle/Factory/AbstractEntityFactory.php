@@ -74,7 +74,7 @@ abstract class AbstractEntityFactory extends AbstractContainerAware implements E
     
     protected function getDefaultShop() : ShopInterface
     {
-        return $this->get('shop.context.admin')->getCurrentShop();
+        return $this->getDefaultShops()->first();
     }
     
     protected function createEmptyCollection() : Collection

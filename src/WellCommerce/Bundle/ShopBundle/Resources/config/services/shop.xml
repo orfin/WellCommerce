@@ -5,10 +5,11 @@
 
     <imports>
         <import resource="admin/shop.xml"/>
-        <import resource="front/shop.xml"/>
     </imports>
 
     <services>
+        <service id="shop.storage" class="WellCommerce\Bundle\ShopBundle\Storage\ShopStorage" />
+
         <service id="shop.subscriber" class="WellCommerce\Bundle\ShopBundle\EventListener\ShopSubscriber">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
@@ -17,8 +18,7 @@
         </service>
 
         <service id="twig.extension.shop" class="WellCommerce\Bundle\ShopBundle\Twig\Extension\ShopExtension">
-            <argument type="service" id="shop.context.front"/>
-            <argument type="service" id="shop.context.admin"/>
+            <argument type="service" id="shop.storage"/>
             <argument type="service" id="shop.dataset.admin"/>
             <tag name="twig.extension"/>
         </service>

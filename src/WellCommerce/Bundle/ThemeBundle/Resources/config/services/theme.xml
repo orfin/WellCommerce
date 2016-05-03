@@ -37,13 +37,9 @@
             <argument>%kernel.cache_dir%</argument>
         </service>
 
-        <service id="theme.dataset.query_builder" class="WellCommerce\Bundle\ThemeBundle\DataSet\Admin\ThemeDataSetQueryBuilder" public="false">
-            <argument type="service" id="theme.repository"/>
-        </service>
-
         <service id="theme.dataset.admin" class="WellCommerce\Bundle\ThemeBundle\DataSet\Admin\ThemeDataSet">
-            <argument type="service" id="theme.dataset.query_builder"/>
-            <tag name="dataset"/>
+            <argument type="service" id="theme.repository"/>
+            <tag name="dataset" alias="theme.admin"/>
         </service>
 
         <service id="theme.datagrid" class="WellCommerce\Bundle\ThemeBundle\DataGrid\ThemeDataGrid">

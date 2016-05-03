@@ -25,16 +25,9 @@
             </call>
         </service>
 
-        <service id="category.dataset.query_builder.front" class="WellCommerce\Bundle\CategoryBundle\DataSet\Front\CategoryDataSetQueryBuilder">
-            <argument type="service" id="category.repository"/>
-            <call method="setShopContext">
-                <argument type="service" id="shop.context.front"/>
-            </call>
-        </service>
-
         <service id="category.dataset.front" class="WellCommerce\Bundle\CategoryBundle\DataSet\Front\CategoryDataSet">
-            <argument type="service" id="category.dataset.query_builder.front"/>
-            <tag name="dataset"/>
+            <argument type="service" id="category.repository"/>
+            <tag name="dataset" alias="category.front"/>
         </service>
 
         <service id="category_products.layout_box.controller" class="WellCommerce\Bundle\CategoryBundle\Controller\Box\CategoryProductsBoxController">

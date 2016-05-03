@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Factory;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddressInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetailsInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddressInterface;
@@ -28,14 +27,6 @@ use WellCommerce\Bundle\OrderBundle\Entity\OrderSummaryInterface;
  */
 class OrderFactory extends AbstractEntityFactory
 {
-    /**
-     * @var string
-     */
-    protected $supportsInterface = OrderInterface::class;
-    
-    /**
-     * @return OrderInterface
-     */
     public function create() : OrderInterface
     {
         /** @var  $order OrderInterface */
@@ -44,8 +35,8 @@ class OrderFactory extends AbstractEntityFactory
         $order->setProducts($this->createEmptyCollection());
         $order->setProductTotal($this->createOrderProductTotal());
         $order->setModifiers($this->createEmptyCollection());
-        $order->setPayments(new ArrayCollection());
-        $order->setOrderStatusHistory(new ArrayCollection());
+        $order->setPayments($this->createEmptyCollection());
+        $order->setOrderStatusHistory($this->createEmptyCollection());
         $order->setComment('');
         $order->setCurrency($this->getRequestHelper()->getCurrentCurrency());
         $order->setSessionId($this->getRequestHelper()->getSessionId());
@@ -81,5 +72,4 @@ class OrderFactory extends AbstractEntityFactory
     {
         return $this->get('order_summary.factory')->create();
     }
-    
 }

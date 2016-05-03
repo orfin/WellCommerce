@@ -16,7 +16,7 @@
 
         <service id="search.dataset.front" class="WellCommerce\Bundle\SearchBundle\DataSet\Front\SearchDataSet">
             <argument type="service" id="search.dataset.query_builder.front"/>
-            <tag name="dataset"/>
+            <tag name="dataset" alias="search.front"/>
         </service>
 
         <service id="search.controller.front" class="WellCommerce\Bundle\SearchBundle\Controller\Front\SearchController">

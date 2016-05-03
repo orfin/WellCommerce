@@ -23,13 +23,9 @@
             <tag name="layout_box.configurator" />
         </service>
 
-        <service id="contact.dataset.query_builder.admin" class="WellCommerce\Bundle\ContactBundle\DataSet\Admin\ContactDataSetQueryBuilder" public="false">
-            <argument type="service" id="contact.repository"/>
-        </service>
-
         <service id="contact.dataset.admin" class="WellCommerce\Bundle\ContactBundle\DataSet\Admin\ContactDataSet">
-            <argument type="service" id="contact.dataset.query_builder.admin"/>
-            <tag name="dataset"/>
+            <argument type="service" id="contact.repository"/>
+            <tag name="dataset" alias="contact.admin"/>
         </service>
 
         <service id="contact.datagrid" class="WellCommerce\Bundle\ContactBundle\DataGrid\ContactDataGrid">

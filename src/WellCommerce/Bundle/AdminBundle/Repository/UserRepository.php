@@ -14,7 +14,8 @@ namespace WellCommerce\Bundle\AdminBundle\Repository;
 use Doctrine\ORM\NoResultException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\UserInterface as BaseUserInterface;
+use WellCommerce\Bundle\AdminBundle\Entity\UserInterface;
 use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
 
 /**
@@ -24,7 +25,7 @@ use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
  */
 class UserRepository extends EntityRepository implements UserRepositoryInterface
 {
-    public function refreshUser(UserInterface $user)
+    public function refreshUser(BaseUserInterface $user)
     {
         $class = get_class($user);
         if (!$this->supportsClass($class)) {
@@ -57,5 +58,21 @@ class UserRepository extends EntityRepository implements UserRepositoryInterface
         }
         
         return $user;
+    }
+
+    public function getUserPermission(string $name, UserInterface $user)
+    {
+        $queryBuilder = $this->createQueryBuilder('u');
+        $queryBuilder->select('ugp.id');
+        $queryBuilder->leftJoin('u.groups', 'ug');
+        $queryBuilder->leftJoin('ug.permissions', 'ugp');
+        $queryBuilder->where('u.id = :id');
+        $queryBuilder->andWhere('ugp.name = :name');
+        $queryBuilder->andWhere('ugp.enabled = :enabled');
+        $queryBuilder->setParameter('id', $user->getId());
+        $queryBuilder->setParameter('name', $name);
+        $queryBuilder->setParameter('enabled', 1);
+
+        return $queryBuilder->getQuery()->getResult();
     }
 }

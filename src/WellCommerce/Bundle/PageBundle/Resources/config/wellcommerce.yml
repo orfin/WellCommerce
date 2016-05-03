@@ -9,7 +9,7 @@ well_commerce_page:
             api:
                 exposed: true
                 dataset: page.dataset.admin
-                manager: page.manager.admin
+                manager: page.manager
             dynamic_routing:
                 entity: WellCommerce\Bundle\PageBundle\Entity\PageRoute
                 generator: WellCommerce\Bundle\PageBundle\Routing\PageRouteGenerator

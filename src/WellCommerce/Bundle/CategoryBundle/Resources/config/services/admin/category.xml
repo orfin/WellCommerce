@@ -32,16 +32,9 @@
             <tag name="layout_box.configurator" />
         </service>
 
-        <service id="category.dataset.query_builder.admin" class="WellCommerce\Bundle\CategoryBundle\DataSet\Admin\CategoryDataSetQueryBuilder" public="false">
-            <argument type="service" id="category.repository"/>
-            <call method="setShopContext">
-                <argument type="service" id="shop.context.admin"/>
-            </call>
-        </service>
-
         <service id="category.dataset.admin" class="WellCommerce\Bundle\CategoryBundle\DataSet\Admin\CategoryDataSet">
-            <argument type="service" id="category.dataset.query_builder.admin"/>
-            <tag name="dataset"/>
+            <argument type="service" id="category.repository"/>
+            <tag name="dataset" alias="category.admin"/>
         </service>
 
         <service id="category.form_builder.admin" class="WellCommerce\Bundle\CategoryBundle\Form\Admin\CategoryFormBuilder" parent="core.form_builder" />

@@ -13,13 +13,9 @@
             </call>
         </service>
 
-        <service id="routing.dataset.query_builder.admin" class="WellCommerce\Bundle\RoutingBundle\DataSet\Admin\RoutingDataSetQueryBuilder" public="false">
-            <argument type="service" id="routing.repository"/>
-        </service>
-
         <service id="routing.dataset.admin" class="WellCommerce\Bundle\RoutingBundle\DataSet\Admin\RoutingDataSet">
-            <argument type="service" id="routing.dataset.query_builder.admin"/>
-            <tag name="dataset"/>
+            <argument type="service" id="routing.repository"/>
+            <tag name="dataset" alias="routing.admin"/>
         </service>
 
         <service id="routing.datagrid" class="WellCommerce\Bundle\RoutingBundle\DataGrid\RoutingDataGrid">

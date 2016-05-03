@@ -13,13 +13,9 @@
             </call>
         </service>
 
-        <service id="tax.dataset.query_builder.admin" class="WellCommerce\Bundle\TaxBundle\DataSet\Admin\TaxDataSetQueryBuilder" public="false">
-            <argument type="service" id="tax.repository"/>
-        </service>
-
         <service id="tax.dataset.admin" class="WellCommerce\Bundle\TaxBundle\DataSet\Admin\TaxDataSet">
-            <argument type="service" id="tax.dataset.query_builder.admin"/>
-            <tag name="dataset"/>
+            <argument type="service" id="tax.repository"/>
+            <tag name="dataset" alias="tax.admin"/>
         </service>
 
         <service id="tax.datagrid" class="WellCommerce\Bundle\TaxBundle\DataGrid\TaxDataGrid">

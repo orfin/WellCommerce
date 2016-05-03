@@ -13,13 +13,9 @@
             </call>
         </service>
 
-        <service id="deliverer.dataset.query_builder.admin" class="WellCommerce\Bundle\DelivererBundle\DataSet\Admin\DelivererDataSetQueryBuilder" public="false">
-            <argument type="service" id="deliverer.repository"/>
-        </service>
-
         <service id="deliverer.dataset.admin" class="WellCommerce\Bundle\DelivererBundle\DataSet\Admin\DelivererDataSet">
-            <argument type="service" id="deliverer.dataset.query_builder.admin"/>
-            <tag name="dataset"/>
+            <argument type="service" id="deliverer.repository"/>
+            <tag name="dataset" alias="deliverer.admin"/>
         </service>
 
         <service id="deliverer.datagrid" class="WellCommerce\Bundle\DelivererBundle\DataGrid\DelivererDataGrid">

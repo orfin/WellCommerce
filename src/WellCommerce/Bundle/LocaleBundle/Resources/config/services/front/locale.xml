@@ -4,13 +4,9 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="locale.dataset.query_builder.front" class="WellCommerce\Bundle\LocaleBundle\DataSet\Front\LocaleDataSetQueryBuilder" public="false">
-            <argument type="service" id="locale.repository"/>
-        </service>
-
         <service id="locale.dataset.front" class="WellCommerce\Bundle\LocaleBundle\DataSet\Front\LocaleDataSet">
-            <argument type="service" id="locale.dataset.query_builder.front"/>
-            <tag name="dataset"/>
+            <argument type="service" id="locale.repository"/>
+            <tag name="dataset" alias="locale.front"/>
         </service>
 
         <service id="twig.extension.locale" class="WellCommerce\Bundle\LocaleBundle\Twig\Extension\LocaleExtension">

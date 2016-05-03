@@ -13,13 +13,9 @@
             </call>
         </service>
 
-        <service id="locale.dataset.query_builder.admin" class="WellCommerce\Bundle\LocaleBundle\DataSet\Admin\LocaleDataSetQueryBuilder" public="false">
-            <argument type="service" id="locale.repository"/>
-        </service>
-
         <service id="locale.dataset.admin" class="WellCommerce\Bundle\LocaleBundle\DataSet\Admin\LocaleDataSet">
-            <argument type="service" id="locale.dataset.query_builder.admin"/>
-            <tag name="dataset"/>
+            <argument type="service" id="locale.repository"/>
+            <tag name="dataset" alias="locale.admin"/>
         </service>
 
         <service id="locale.datagrid" class="WellCommerce\Bundle\LocaleBundle\DataGrid\LocaleDataGrid">

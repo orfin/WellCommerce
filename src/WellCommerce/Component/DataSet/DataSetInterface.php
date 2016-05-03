@@ -15,6 +15,7 @@ namespace WellCommerce\Component\DataSet;
 use WellCommerce\Component\DataSet\Cache\CacheOptions;
 use WellCommerce\Component\DataSet\Column\ColumnCollection;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
+use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
 
 /**
  * Interface DataSetInterface

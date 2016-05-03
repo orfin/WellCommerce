@@ -19,9 +19,10 @@ use WellCommerce\Component\DataSet\Column\ColumnCollection;
 use WellCommerce\Component\DataSet\Column\ColumnInterface;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
 use WellCommerce\Component\DataSet\DataSetInterface;
-use WellCommerce\Component\DataSet\Event\DataSetEvent;
+use WellCommerce\Component\DataSet\Event\DataSetInitEvent;
+use WellCommerce\Component\DataSet\Event\DataSetRequestEvent;
 use WellCommerce\Component\DataSet\Manager\DataSetManagerInterface;
-use WellCommerce\Component\DataSet\QueryBuilder\DataSetQueryBuilderInterface;
+use WellCommerce\Component\DataSet\Repository\DataSetAwareRepositoryInterface;
 use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
 use WellCommerce\Component\DataSet\Transformer\ColumnTransformerCollection;
 use WellCommerce\Component\DataSet\Transformer\DataSetTransformerInterface;
@@ -34,19 +35,24 @@ use WellCommerce\Component\DataSet\Transformer\DataSetTransformerInterface;
 abstract class AbstractDataSet implements DataSetInterface
 {
     /**
+     * @var string
+     */
+    private $alias;
+
+    /**
      * @var ColumnCollection
      */
     protected $columns;
     
     /**
-     * @var DataSetQueryBuilderInterface
+     * @var DataSetAwareRepositoryInterface
      */
-    protected $dataSetQueryBuilder;
+    private $repository;
     
     /**
      * @var EventDispatcherInterface
      */
-    protected $eventDispatcher;
+    private $eventDispatcher;
     
     /**
      * @var ColumnTransformerCollection
@@ -56,7 +62,7 @@ abstract class AbstractDataSet implements DataSetInterface
     /**
      * @var DataSetManagerInterface
      */
-    protected $manager;
+    private $manager;
     
     /**
      * @var array
@@ -72,102 +78,77 @@ abstract class AbstractDataSet implements DataSetInterface
      * @var CacheOptions
      */
     protected $cacheOptions;
-    
+
     /**
      * AbstractDataSet constructor.
      *
-     * @param DataSetQueryBuilderInterface $dataSetQueryBuilder
-     * @param DataSetManagerInterface      $manager
-     * @param EventDispatcherInterface     $eventDispatcher
+     * @param DataSetAwareRepositoryInterface $repository
+     * @param string                          $alias
+     * @param DataSetManagerInterface         $manager
+     * @param EventDispatcherInterface        $eventDispatcher
      */
     public function __construct(
-        DataSetQueryBuilderInterface $dataSetQueryBuilder,
+        DataSetAwareRepositoryInterface $repository,
+        string $alias,
         DataSetManagerInterface $manager,
         EventDispatcherInterface $eventDispatcher
     ) {
-        $this->dataSetQueryBuilder = $dataSetQueryBuilder;
-        $this->manager             = $manager;
-        $this->eventDispatcher     = $eventDispatcher;
-        $this->columns             = new ColumnCollection();
-        $this->cacheOptions        = new CacheOptions();
+        $this->repository      = $repository;
+        $this->alias           = $alias;
+        $this->manager         = $manager;
+        $this->eventDispatcher = $eventDispatcher;
+        $this->columns         = new ColumnCollection();
+        $this->cacheOptions    = new CacheOptions();
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function setCacheOptions(CacheOptions $options)
     {
         $this->cacheOptions = $options;
     }
-    
-    /**
-     * {@inheritdoc}
-     */
+
     public function getColumns() : ColumnCollection
     {
         return $this->columns;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function setColumns(ColumnCollection $columns)
     {
         $this->columns = $columns;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function addColumn(ColumnInterface $column)
     {
         $this->columns->add($column);
     }
     
-    /**
-     * {@inheritdoc}
-     */
     abstract public function configureOptions(DataSetConfiguratorInterface $configurator);
     
-    /**
-     * {@inheritdoc}
-     */
     public function setDefaultRequestOption(string $name, $value)
     {
         $this->defaultRequestOptions[$name] = $value;
     }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function dispatchOnDataSetInitEvent()
-    {
-        $reflection  = new \ReflectionClass($this);
-        $dataSetName = str_replace('DataSet', '', $reflection->getShortName());
-        $eventName   = $dataSetName . '.init';
-        $event       = new DataSetEvent($this);
-        $this->eventDispatcher->dispatch($eventName, $event);
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
+
     public function setDefaultContextOption(string $name, $value)
     {
         $this->defaultContextOptions[$name] = $value;
     }
-    
-    /**
-     * {@inheritdoc}
-     */
+
+    public function dispatchOnDataSetInitEvent()
+    {
+        $eventName = sprintf('%s.%s', $this->alias, DataSetInitEvent::EVENT_SUFFIX);
+        $event     = new DataSetInitEvent($this);
+
+        $this->eventDispatcher->dispatch($eventName, $event);
+    }
+
     public function getResult(string $contextType, array $requestOptions = [], array $contextOptions = []) : array
     {
         $contextOptions = $this->getContextOptions($contextOptions);
         $requestOptions = $this->getRequestOptions($requestOptions);
         $context        = $this->manager->createContext($contextType, $contextOptions);
-        $request        = $this->manager->createRequest($requestOptions);
+        $request        = $this->getDataSetRequest($requestOptions);
         $queryBuilder   = $this->getQueryBuilder($request);
-        
+
         try {
             return $context->getResult($queryBuilder, $request, $this->columns, $this->cacheOptions);
         } catch (\Exception $e) {
@@ -176,60 +157,46 @@ abstract class AbstractDataSet implements DataSetInterface
             ];
         }
     }
-    
-    /**
-     * Returns the default context's options
-     *
-     * @param array $contextOptions
-     *
-     * @return array
-     */
-    protected function getContextOptions(array $contextOptions = []) : array
+
+    protected function getDataSetRequest(array $requestOptions = []) : DataSetRequestInterface
     {
-        $contextOptions = array_merge($this->defaultContextOptions, $contextOptions);
-        
-        return $contextOptions;
+        $request = $this->manager->createRequest($requestOptions);
+        $this->dispatchDataSetRequestEvent($request);
+
+        return $request;
     }
-    
-    /**
-     * Returns the default request's options
-     *
-     * @param array $requestOptions
-     *
-     * @return array
-     */
-    protected function getRequestOptions(array $requestOptions = []) : array
-    {
-        $requestOptions = array_merge($this->defaultRequestOptions, $requestOptions);
-        
-        return $requestOptions;
-    }
-    
-    /**
-     * Creates a dataset's transformer using factory
-     *
-     * @param string $type
-     * @param array  $options
-     *
-     * @return DataSetTransformerInterface
-     */
+
     protected function getDataSetTransformer(string $type, array $options = []) : DataSetTransformerInterface
     {
         return $this->manager->createTransformer($type, $options);
     }
-    
-    /**
-     * Prepares and returns the Doctrine's QueryBuilder
-     *
-     * @param DataSetRequestInterface $request
-     *
-     * @return QueryBuilder
-     */
-    protected function getQueryBuilder(DataSetRequestInterface $request) : QueryBuilder
+
+    private function getContextOptions(array $contextOptions = []) : array
     {
-        $columns      = $this->getColumns();
-        $queryBuilder = $this->dataSetQueryBuilder->getQueryBuilder($columns, $request);
-        
-        return $queryBuilder;
+        $contextOptions = array_merge($this->defaultContextOptions, $contextOptions);
+
+        return $contextOptions;
+    }
+
+    private function getRequestOptions(array $requestOptions = []) : array
+    {
+        $requestOptions = array_merge($this->defaultRequestOptions, $requestOptions);
+
+        return $requestOptions;
+    }
+
+    private function getQueryBuilder(DataSetRequestInterface $request) : QueryBuilder
+    {
+        $dataSetQueryBuilder = $this->manager->createQueryBuilder($this->repository);
+
+        return $dataSetQueryBuilder->getQueryBuilder($this->columns, $request);
+    }
+
+    private function dispatchDataSetRequestEvent(DataSetRequestInterface $request)
+    {
+        $eventName = sprintf('%s.%s', $this->alias, DataSetRequestEvent::EVENT_SUFFIX);
+        $event     = new DataSetRequestEvent($this, $request);
+
+        $this->eventDispatcher->dispatch($eventName, $event);
     }
 }

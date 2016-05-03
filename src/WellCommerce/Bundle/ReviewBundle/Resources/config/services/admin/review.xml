@@ -13,13 +13,9 @@
             </call>
         </service>
 
-        <service id="review.dataset.query_builder.admin" class="WellCommerce\Bundle\ReviewBundle\DataSet\Admin\ReviewDataSetQueryBuilder" public="false">
-            <argument type="service" id="review.repository"/>
-        </service>
-
         <service id="review.dataset.admin" class="WellCommerce\Bundle\ReviewBundle\DataSet\Admin\ReviewDataSet">
-            <argument type="service" id="review.dataset.query_builder.admin"/>
-            <tag name="dataset"/>
+            <argument type="service" id="review.repository"/>
+            <tag name="dataset" alias="review.admin"/>
         </service>
 
         <service id="review.datagrid" class="WellCommerce\Bundle\ReviewBundle\DataGrid\ReviewDataGrid">

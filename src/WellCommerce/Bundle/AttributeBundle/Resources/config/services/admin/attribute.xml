@@ -15,13 +15,9 @@
 
         <service id="attribute.form_builder.admin" class="WellCommerce\Bundle\AttributeBundle\Form\Admin\AttributeFormBuilder" parent="core.form_builder" />
 
-        <service id="attribute.dataset.query_builder.admin" class="WellCommerce\Bundle\AttributeBundle\DataSet\Admin\AttributeDataSetQueryBuilder" public="false">
-            <argument type="service" id="attribute.repository"/>
-        </service>
-
         <service id="attribute.dataset.admin" class="WellCommerce\Bundle\AttributeBundle\DataSet\Admin\AttributeDataSet">
-            <argument type="service" id="attribute.dataset.query_builder.admin"/>
-            <tag name="dataset"/>
+            <argument type="service" id="attribute.repository"/>
+            <tag name="dataset" alias="attribute.admin"/>
         </service>
 
         <service id="attribute.datagrid" class="WellCommerce\Bundle\AttributeBundle\DataGrid\AttributeDataGrid">

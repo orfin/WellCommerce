@@ -68,13 +68,13 @@ final class ShippingMethodOrderVisitor implements OrderVisitorInterface
         $modifier->setNetAmount($cost->getCost()->getNetAmount());
         $modifier->setTaxAmount($cost->getCost()->getTaxAmount());
         
-        $cart->setShippingMethod($cost->getShippingMethod());
+        $order->setShippingMethod($cost->getShippingMethod());
     }
     
     /**
      * Returns the costs collection for existing shipping method or all shipping methods if current method is not longer available
      *
-     * @param CartInterface $cart
+     * @param OrderInterface $order
      *
      * @return Collection
      */

@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\ShippingBundle\Context;
 
-use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 use WellCommerce\Bundle\ShippingBundle\Calculator\ShippingSubjectInterface;
 
@@ -40,19 +39,29 @@ class OrderContext implements ShippingSubjectInterface
 
     public function getQuantity() : int
     {
-        return $this->order->getSummary()->getQuantity();
+        return $this->order->getProductTotal()->getQuantity();
     }
     
     public function getWeight() : float
     {
-        return $this->order->getSummary()->getWeight();
+        return $this->order->getProductTotal()->getWeight();
     }
     
     public function getGrossPrice() : float
     {
-        return $this->order->getSummary()->getGrossPrice();
+        return $this->order->getProductTotal()->getGrossPrice();
     }
-    
+
+    public function getNetPrice() : float
+    {
+        return $this->order->getProductTotal()->getNetPrice();
+    }
+
+    public function getTaxAmount() : float
+    {
+        return $this->order->getProductTotal()->getTaxAmount();
+    }
+
     public function getCurrency() : string
     {
         return $this->order->getCurrency();

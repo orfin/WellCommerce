@@ -23,16 +23,9 @@
             <tag name="layout_box.configurator" />
         </service>
 
-        <service id="page.dataset.query_builder.admin" class="WellCommerce\Bundle\PageBundle\DataSet\Admin\PageDataSetQueryBuilder" public="false">
-            <argument type="service" id="page.repository"/>
-            <call method="setShopContext">
-                <argument type="service" id="shop.context.admin"/>
-            </call>
-        </service>
-
         <service id="page.dataset.admin" class="WellCommerce\Bundle\PageBundle\DataSet\Admin\PageDataSet">
-            <argument type="service" id="page.dataset.query_builder.admin"/>
-            <tag name="dataset"/>
+            <argument type="service" id="page.repository"/>
+            <tag name="dataset" alias="page.admin"/>
         </service>
 
         <service id="page.datagrid" class="WellCommerce\Bundle\PageBundle\DataGrid\PageDataGrid">

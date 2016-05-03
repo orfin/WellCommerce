@@ -174,9 +174,7 @@ class Order extends AbstractEntity implements OrderInterface
     
     public function setProducts(Collection $products)
     {
-        $products->map(function (OrderProductInterface $orderProduct) {
-            $this->addProduct($orderProduct);
-        });
+        $this->products = $products;
     }
     
     public function getProductTotal() : OrderProductTotalInterface
@@ -216,9 +214,7 @@ class Order extends AbstractEntity implements OrderInterface
     
     public function setModifiers(Collection $modifiers)
     {
-        $modifiers->map(function (OrderModifierInterface $modifier) {
-            $this->addModifier($modifier);
-        });
+        $this->modifiers = $modifiers;
     }
     
     public function getSummary() : OrderSummaryInterface

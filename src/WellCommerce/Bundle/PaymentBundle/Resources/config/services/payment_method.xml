@@ -27,22 +27,14 @@
             </call>
         </service>
 
-        <service id="payment_method.dataset.query_builder.admin" class="WellCommerce\Bundle\PaymentBundle\DataSet\Admin\PaymentMethodDataSetQueryBuilder" public="false">
-            <argument type="service" id="payment_method.repository"/>
-        </service>
-
         <service id="payment_method.dataset.admin" class="WellCommerce\Bundle\PaymentBundle\DataSet\Admin\PaymentMethodDataSet">
-            <argument type="service" id="payment_method.dataset.query_builder.admin"/>
-            <tag name="dataset"/>
-        </service>
-
-        <service id="payment_method.dataset.query_builder.front" class="WellCommerce\Bundle\PaymentBundle\DataSet\Front\PaymentMethodDataSetQueryBuilder" public="false">
             <argument type="service" id="payment_method.repository"/>
+            <tag name="dataset" alias="payment_method.admin"/>
         </service>
 
         <service id="payment_method.dataset.front" class="WellCommerce\Bundle\PaymentBundle\DataSet\Front\PaymentMethodDataSet">
-            <argument type="service" id="payment_method.dataset.query_builder.front"/>
-            <tag name="dataset"/>
+            <argument type="service" id="payment_method.repository"/>
+            <tag name="dataset" alias="payment_method.front"/>
         </service>
 
         <service id="payment_method.datagrid" class="WellCommerce\Bundle\PaymentBundle\DataGrid\PaymentMethodDataGrid">

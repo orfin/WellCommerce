@@ -16,13 +16,9 @@
             <argument type="service" id="contact.repository"/>
         </service>
 
-        <service id="contact.dataset.query_builder.front" class="WellCommerce\Bundle\ContactBundle\DataSet\Front\ContactDataSetQueryBuilder" public="false">
-            <argument type="service" id="contact.repository"/>
-        </service>
-
         <service id="contact.dataset.front" class="WellCommerce\Bundle\ContactBundle\DataSet\Front\ContactDataSet">
-            <argument type="service" id="contact.dataset.query_builder.front"/>
-            <tag name="dataset"/>
+            <argument type="service" id="contact.repository"/>
+            <tag name="dataset" alias="contact.front"/>
         </service>
 
         <service id="contact.form_builder.front" class="WellCommerce\Bundle\ContactBundle\Form\Front\ContactFormBuilder" parent="core.form_builder" />

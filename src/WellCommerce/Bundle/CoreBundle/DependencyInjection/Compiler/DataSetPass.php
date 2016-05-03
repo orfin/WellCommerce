@@ -45,6 +45,7 @@ class DataSetPass implements CompilerPassInterface
                 );
             }
 
+            $definition->addArgument($id);
             $definition->addArgument(new Reference('dataset.manager'));
             $definition->addArgument(new Reference('event_dispatcher'));
             $definition->setConfigurator([new Reference('dataset.configurator'), 'configure']);

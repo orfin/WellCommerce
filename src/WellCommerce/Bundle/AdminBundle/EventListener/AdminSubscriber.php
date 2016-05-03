@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\AdminBundle\EventListener;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use WellCommerce\Bundle\AdminBundle\Entity\UserInterface;
+use WellCommerce\Bundle\AdminBundle\Repository\UserRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
 use WellCommerce\Bundle\DoctrineBundle\Event\ResourceEvent;
 
@@ -34,13 +35,12 @@ class AdminSubscriber extends AbstractEventSubscriber
     
     public function onKernelController(FilterControllerEvent $event)
     {
-        $user     = $this->getUser();
-        $hasRoute = $this->getRequestHelper()->getAttributesBagParam('_route');
-        if ($user instanceof UserInterface && $hasRoute) {
+        if ($this->getSecurityHelper()->isActiveFirewall('admin')) {
             $route = $this->getRouterHelper()->getCurrentRoute();
             if ($route->hasOption('require_admin_permission')) {
                 $name       = $route->getOption('require_admin_permission');
-                $permission = $this->getSecurityHelper()->getPermission($name, $user);
+                $user       = $this->getSecurityHelper()->getCurrentUser();
+                $permission = $this->getUserRepository()->getUserPermission($name, $user);
                 if (empty($permission)) {
                     $event->setController([$this->get('user.controller.admin'), 'accessDeniedAction']);
                 }
@@ -68,5 +68,10 @@ class AdminSubscriber extends AbstractEventSubscriber
                 'configuration' => $this->get('shop.context.admin')->getCurrentShop()->getMailerConfiguration(),
             ]);
         }
+    }
+    
+    private function getUserRepository() : UserRepositoryInterface
+    {
+        return $this->get('user.repository');
     }
 }

@@ -19,40 +19,33 @@ use Swift_Plugins_Loggers_EchoLogger;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use WellCommerce\Bundle\AppBundle\Entity\MailerConfiguration;
-use WellCommerce\Bundle\CoreBundle\Helper\Templating\TemplatingHelperInterface;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
 
 /**
  * Class MailerHelper
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class MailerHelper implements MailerHelperInterface
+final class MailerHelper extends AbstractContainerAware implements MailerHelperInterface
 {
-    /**
-     * @var TemplatingHelperInterface
-     */
-    protected $templatingHelper;
-    
     /**
      * @var array
      */
-    protected $options = [];
+    private $options = [];
 
     /**
      * @var bool
      */
-    protected $debug;
+    private $debug;
 
     /**
      * MailerHelper constructor.
      *
-     * @param TemplatingHelperInterface $templatingHelper
-     * @param bool                      $debug
+     * @param bool $debug
      */
-    public function __construct(TemplatingHelperInterface $templatingHelper, bool $debug = false)
+    public function __construct(bool $debug = false)
     {
-        $this->templatingHelper = $templatingHelper;
-        $this->debug            = $debug;
+        $this->debug = $debug;
     }
     
     public function sendEmail(array $options) : int
@@ -84,7 +77,7 @@ class MailerHelper implements MailerHelperInterface
     protected function setBody(Message $message, string $template, array $parameters = [])
     {
         $parameters['message'] = $message;
-        $body                  = $this->templatingHelper->render($template, $parameters);
+        $body                  = $this->getTemplatingHelper()->render($template, $parameters);
 
         $message->setBody($body, 'text/html');
     }
@@ -107,6 +100,10 @@ class MailerHelper implements MailerHelperInterface
 
         $resolver->setDefault('reply_to', function (Options $options) {
             return $options['configuration']->getFrom();
+        });
+
+        $resolver->setNormalizer('subject', function (Options $options) {
+            return $this->getTranslatorHelper()->trans($options['subject']);
         });
 
         $resolver->setAllowedTypes('recipient', ['string', 'array']);

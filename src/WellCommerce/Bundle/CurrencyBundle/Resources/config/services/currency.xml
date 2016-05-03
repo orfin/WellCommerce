@@ -35,5 +35,10 @@
             <argument type="service" id="currency.converter" />
             <argument type="service" id="currency.formatter"/>
         </service>
+
+        <service id="currency.order.visitor" class="WellCommerce\Bundle\CurrencyBundle\Visitor\CurrencyOrderVisitor">
+            <argument type="service" id="currency.converter"/>
+            <tag name="order.visitor" alias="currency"/>
+        </service>
     </services>
 </container>

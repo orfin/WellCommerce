@@ -41,8 +41,15 @@
         </service>
 
         <service id="mailer.helper" class="WellCommerce\Bundle\CoreBundle\Helper\Mailer\MailerHelper">
-            <argument type="service" id="templating.helper"/>
             <argument>%kernel.debug%</argument>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="security.helper" class="WellCommerce\Bundle\CoreBundle\Helper\Security\SecurityHelper">
+            <argument type="service" id="security.token_storage"/>
+            <argument type="service" id="request.helper"/>
         </service>
     </services>
 </container>

@@ -13,13 +13,9 @@
             </call>
         </service>
 
-        <service id="coupon.dataset.query_builder" class="WellCommerce\Bundle\CouponBundle\DataSet\Admin\CouponDataSetQueryBuilder" public="false">
-            <argument type="service" id="coupon.repository"/>
-        </service>
-
         <service id="coupon.dataset.admin" class="WellCommerce\Bundle\CouponBundle\DataSet\Admin\CouponDataSet">
-            <argument type="service" id="coupon.dataset.query_builder"/>
-            <tag name="dataset"/>
+            <argument type="service" id="coupon.repository"/>
+            <tag name="dataset" alias="coupon.admin"/>
         </service>
 
         <service id="coupon.datagrid" class="WellCommerce\Bundle\CouponBundle\DataGrid\CouponDataGrid">

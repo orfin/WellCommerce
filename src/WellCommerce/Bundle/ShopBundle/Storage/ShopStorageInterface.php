@@ -10,39 +10,22 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\ShopBundle\Context;
+namespace WellCommerce\Bundle\ShopBundle\Storage;
 
 use WellCommerce\Bundle\ShopBundle\Entity\ShopInterface;
 
 /**
- * Interface ShopContextInterface
+ * Interface ShopStorageInterface
  *
- * @author Adam Piotrowski <adam@wellcommerce.org>
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ShopContextInterface
+interface ShopStorageInterface
 {
-    /**
-     * @return ShopInterface
-     */
     public function getCurrentShop() : ShopInterface;
-    
-    /**
-     * @return int
-     */
+
     public function getCurrentShopIdentifier() : int;
-    
-    /**
-     * @param ShopInterface $shop
-     */
+
     public function setCurrentShop(ShopInterface $shop);
-    
-    /**
-     * @return bool
-     */
+
     public function hasCurrentShop() : bool;
-    
-    /**
-     * @return string
-     */
-    public function getSessionAttributeName() : string;
 }

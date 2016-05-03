@@ -11,13 +11,9 @@
             </call>
         </service>
 
-        <service id="user_group.dataset.query_builder.admin" class="WellCommerce\Bundle\AdminBundle\DataSet\Admin\UserGroupDataSetQueryBuilder" public="false">
-            <argument type="service" id="user_group.repository"/>
-        </service>
-
         <service id="user_group.dataset.admin" class="WellCommerce\Bundle\AdminBundle\DataSet\Admin\UserGroupDataSet">
-            <argument type="service" id="user_group.dataset.query_builder.admin"/>
-            <tag name="dataset"/>
+            <argument type="service" id="user_group.repository"/>
+            <tag name="dataset" alias="user_group.admin"/>
         </service>
 
         <service id="user_group.datagrid" class="WellCommerce\Bundle\AdminBundle\DataGrid\UserGroupDataGrid">

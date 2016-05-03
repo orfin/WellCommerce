@@ -32,8 +32,8 @@
         <option key="require_admin_permission">shop.delete</option>
     </route>
 
-    <route id="admin.shop.change_context" path="/change/{id}">
-        <default key="_controller">shop.controller.admin:changeContextAction</default>
+    <route id="admin.shop.change_context" path="/switch/{id}">
+        <default key="_controller">shop.controller.admin:switchShopAction</default>
         <option key="expose">true</option>
         <option key="require_admin_permission">shop.index</option>
     </route>

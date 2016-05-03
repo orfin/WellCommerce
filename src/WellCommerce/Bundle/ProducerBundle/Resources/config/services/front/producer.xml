@@ -11,16 +11,9 @@
             </call>
         </service>
 
-        <service id="producer.dataset.query_builder.front" class="WellCommerce\Bundle\ProducerBundle\DataSet\Front\ProducerDataSetQueryBuilder" public="false">
-            <argument type="service" id="producer.repository"/>
-            <call method="setShopContext">
-                <argument type="service" id="shop.context.front"/>
-            </call>
-        </service>
-
         <service id="producer.dataset.front" class="WellCommerce\Bundle\ProducerBundle\DataSet\Front\ProducerDataSet">
-            <argument type="service" id="producer.dataset.query_builder.front"/>
-            <tag name="dataset"/>
+            <argument type="service" id="producer.repository"/>
+            <tag name="dataset" alias="producer.front"/>
         </service>
 
         <service id="producer.context.front" class="WellCommerce\Bundle\ProducerBundle\Context\Front\ProducerContext"/>

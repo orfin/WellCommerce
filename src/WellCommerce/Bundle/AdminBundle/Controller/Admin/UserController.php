@@ -26,11 +26,6 @@ use WellCommerce\Component\Form\Elements\FormInterface;
  */
 class UserController extends AbstractAdminController
 {
-    /**
-     * @var \WellCommerce\Bundle\AdminBundle\Manager\Admin\UserManager
-     */
-    protected $manager;
-
     public function loginAction(Request $request) : Response
     {
         $form = $this->get('user_login.form_builder')->createForm([
@@ -103,12 +98,12 @@ class UserController extends AbstractAdminController
 
     public function deleteAction(int $id) : Response
     {
-        $user = $this->getUser();
+        $user = $this->getSecurityHelper()->getUser();
         if (null !== $user && $user->getId() === $id) {
             return $this->jsonResponse(['error' => 'You cannot delete your own admin account.']);
         }
 
-        $em = $this->manager->getDoctrineHelper()->getEntityManager();
+        $em = $this->getDoctrineHelper()->getEntityManager();
 
         try {
             $resource = $this->manager->getRepository()->find($id);

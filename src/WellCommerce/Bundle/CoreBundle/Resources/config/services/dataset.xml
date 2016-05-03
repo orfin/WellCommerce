@@ -13,7 +13,10 @@
             <argument type="service" id="dataset.context.factory"/>
             <argument type="service" id="dataset.request.factory"/>
             <argument type="service" id="dataset.transformer.factory"/>
+            <argument type="service" id="dataset.query_builder.factory"/>
         </service>
+
+        <service id="dataset.query_builder.factory" class="WellCommerce\Component\DataSet\QueryBuilder\DataSetQueryBuilderFactory"/>
 
         <service id="dataset.configurator" class="WellCommerce\Component\DataSet\Configurator\DataSetConfigurator"/>
 

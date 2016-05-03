@@ -13,6 +13,7 @@ namespace WellCommerce\Bundle\ShopBundle\Twig\Extension;
 
 use WellCommerce\Bundle\ShopBundle\Context\ShopContextInterface;
 use WellCommerce\Bundle\ShopBundle\Entity\ShopInterface;
+use WellCommerce\Bundle\ShopBundle\Storage\ShopStorageInterface;
 use WellCommerce\Component\DataSet\DataSetInterface;
 
 /**
@@ -23,14 +24,9 @@ use WellCommerce\Component\DataSet\DataSetInterface;
 class ShopExtension extends \Twig_Extension
 {
     /**
-     * @var ShopContextInterface
+     * @var ShopStorageInterface
      */
-    protected $frontContext;
-
-    /**
-     * @var ShopContextInterface
-     */
-    protected $adminContext;
+    protected $shopStorage;
 
     /**
      * @var DataSetInterface
@@ -40,36 +36,28 @@ class ShopExtension extends \Twig_Extension
     /**
      * ShopExtension constructor.
      *
-     * @param ShopContextInterface $frontContext
-     * @param ShopContextInterface $adminContext
+     * @param ShopStorageInterface $shopStorage
      * @param DataSetInterface     $shopDataset
      */
-    public function __construct(ShopContextInterface $frontContext, ShopContextInterface $adminContext, DataSetInterface $shopDataset)
+    public function __construct(ShopStorageInterface $shopStorage, DataSetInterface $shopDataset)
     {
-        $this->frontContext = $frontContext;
-        $this->adminContext = $adminContext;
-        $this->shopDataset  = $shopDataset;
+        $this->shopStorage = $shopStorage;
+        $this->shopDataset = $shopDataset;
     }
 
     public function getFunctions()
     {
         return [
             new \Twig_SimpleFunction('currentShop', [$this, 'getCurrentShop'], ['is_safe' => ['html']]),
-            new \Twig_SimpleFunction('currentAdminShop', [$this, 'getCurrentAdminShop'], ['is_safe' => ['html']]),
             new \Twig_SimpleFunction('shops', [$this, 'getShops'], ['is_safe' => ['html']]),
         ];
     }
     
     public function getCurrentShop() : ShopInterface
     {
-        return $this->frontContext->getCurrentShop();
+        return $this->shopStorage->getCurrentShop();
     }
 
-    public function getCurrentAdminShop() : ShopInterface
-    {
-        return $this->adminContext->getCurrentShop();
-    }
-    
     public function getShops() : array
     {
         return $this->shopDataset->getResult('select');

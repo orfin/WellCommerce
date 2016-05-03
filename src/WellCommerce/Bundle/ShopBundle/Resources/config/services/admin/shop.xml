@@ -13,21 +13,9 @@
             </call>
         </service>
 
-        <service id="shop.dataset.query_builder.admin" class="WellCommerce\Bundle\ShopBundle\DataSet\Admin\ShopDataSetQueryBuilder" public="false">
-            <argument type="service" id="shop.repository"/>
-        </service>
-
-        <service id="shop.context.admin" class="WellCommerce\Bundle\ShopBundle\Context\Admin\ShopContext" />
-
-        <service id="shop.resolver.admin" class="WellCommerce\Bundle\ShopBundle\Resolver\Admin\ShopResolver">
-            <argument type="service" id="shop.context.admin" />
-            <argument type="service" id="shop.repository" />
-            <argument type="service" id="request.helper" />
-        </service>
-
         <service id="shop.dataset.admin" class="WellCommerce\Bundle\ShopBundle\DataSet\Admin\ShopDataSet">
-            <argument type="service" id="shop.dataset.query_builder.admin"/>
-            <tag name="dataset"/>
+            <argument type="service" id="shop.repository"/>
+            <tag name="dataset" alias="shop.admin"/>
         </service>
 
         <service id="shop.datagrid" class="WellCommerce\Bundle\ShopBundle\DataGrid\ShopDataGrid">

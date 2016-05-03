@@ -13,13 +13,9 @@
             </call>
         </service>
 
-        <service id="layout_box.dataset.query_builder" class="WellCommerce\Bundle\LayoutBundle\DataSet\Admin\LayoutBoxDataSetQueryBuilder" public="false">
-            <argument type="service" id="layout_box.repository"/>
-        </service>
-
         <service id="layout_box.dataset.admin" class="WellCommerce\Bundle\LayoutBundle\DataSet\Admin\LayoutBoxDataSet">
-            <argument type="service" id="layout_box.dataset.query_builder"/>
-            <tag name="dataset"/>
+            <argument type="service" id="layout_box.repository"/>
+            <tag name="dataset" alias="layout_box.admin"/>
         </service>
 
         <service id="layout_box.datagrid" class="WellCommerce\Bundle\LayoutBundle\DataGrid\LayoutBoxDataGrid">

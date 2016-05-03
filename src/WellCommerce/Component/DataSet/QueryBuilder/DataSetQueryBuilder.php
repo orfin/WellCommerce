@@ -26,25 +26,25 @@ use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractDataSetQueryBuilder implements DataSetQueryBuilderInterface
+final class DataSetQueryBuilder implements DataSetQueryBuilderInterface
 {
     /**
      * @var DataSetAwareRepositoryInterface
      */
-    protected $repository;
+    private $repository;
 
     /**
      * @var int
      */
-    protected $paramIteration = 0;
+    private $paramIteration = 0;
 
     /**
      * @var ConditionsCollection
      */
-    protected $conditions;
+    private $conditions;
 
     /**
-     * Constructor
+     * DataSetQueryBuilder constructor.
      *
      * @param DataSetAwareRepositoryInterface $repository
      */
@@ -80,11 +80,12 @@ abstract class AbstractDataSetQueryBuilder implements DataSetQueryBuilderInterfa
 
     /**
      * Returns the query conditions
-     *Ž
+     *
+     * @param DataSetRequestInterface $request
      *
      * @return ConditionsCollection
      */
-    protected function getConditions(DataSetRequestInterface $request) : ConditionsCollection
+    private function getConditions(DataSetRequestInterface $request) : ConditionsCollection
     {
         return $request->getConditions();
     }
@@ -97,7 +98,7 @@ abstract class AbstractDataSetQueryBuilder implements DataSetQueryBuilderInterfa
      *
      * @return Expr\OrderBy
      */
-    protected function getOrderByExpression(DataSetRequestInterface $request, ColumnCollection $columns) : Expr\OrderBy
+    private function getOrderByExpression(DataSetRequestInterface $request, ColumnCollection $columns) : Expr\OrderBy
     {
         $column   = $columns->get($request->getOrderBy());
         $orderBy  = ($column->isAggregated()) ? $column->getAlias() : $column->getSource();
@@ -112,7 +113,7 @@ abstract class AbstractDataSetQueryBuilder implements DataSetQueryBuilderInterfa
      * @param QueryBuilder     $queryBuilder
      * @param ColumnCollection $columns
      */
-    protected function setColumnConditions(QueryBuilder $queryBuilder, ColumnCollection $columns)
+    private function setColumnConditions(QueryBuilder $queryBuilder, ColumnCollection $columns)
     {
         foreach ($this->conditions->all() as $condition) {
             $column = $columns->get($condition->getIdentifier());
@@ -127,7 +128,7 @@ abstract class AbstractDataSetQueryBuilder implements DataSetQueryBuilderInterfa
      * @param ColumnInterface    $column
      * @param ConditionInterface $condition
      */
-    protected function addColumnConditionToQueryBuilder(QueryBuilder $queryBuilder, ColumnInterface $column, ConditionInterface $condition)
+    private function addColumnConditionToQueryBuilder(QueryBuilder $queryBuilder, ColumnInterface $column, ConditionInterface $condition)
     {
         $source     = $column->getSource();
         $alias      = $column->getAlias();

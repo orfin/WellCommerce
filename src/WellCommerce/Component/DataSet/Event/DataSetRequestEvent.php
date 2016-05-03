@@ -14,36 +14,46 @@ namespace WellCommerce\Component\DataSet\Event;
 
 use Symfony\Component\EventDispatcher\Event;
 use WellCommerce\Component\DataSet\DataSetInterface;
+use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
 
 /**
  * Class DataSetEvent
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class DataSetEvent extends Event
+final class DataSetRequestEvent extends Event
 {
+    const EVENT_SUFFIX = 'request';
+    
     /**
      * @var DataSetInterface
      */
-    protected $dataset;
+    private $dataset;
 
     /**
-     * Constructor
-     *
-     * @param DataSetInterface $dataset
+     * @var DataSetRequestInterface
      */
-    public function __construct(DataSetInterface $dataset)
+    private $request;
+
+    /**
+     * DataSetRequestEvent constructor.
+     *
+     * @param DataSetInterface        $dataset
+     * @param DataSetRequestInterface $request
+     */
+    public function __construct(DataSetInterface $dataset, DataSetRequestInterface $request)
     {
         $this->dataset = $dataset;
+        $this->request = $request;
     }
 
-    /**
-     * Returns current dataset
-     *
-     * @return DataSetInterface
-     */
-    public function getDataSet()
+    public function getDataSet() : DataSetInterface
     {
         return $this->dataset;
+    }
+
+    public function getRequest() : DataSetRequestInterface
+    {
+        return $this->request;
     }
 }

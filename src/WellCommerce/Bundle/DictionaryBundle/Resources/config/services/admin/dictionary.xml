@@ -13,13 +13,9 @@
             </call>
         </service>
 
-        <service id="dictionary.dataset.query_builder.admin" class="WellCommerce\Bundle\DictionaryBundle\DataSet\Admin\DictionaryDataSetQueryBuilder" public="false">
-            <argument type="service" id="dictionary.repository"/>
-        </service>
-
         <service id="dictionary.dataset.admin" class="WellCommerce\Bundle\DictionaryBundle\DataSet\Admin\DictionaryDataSet">
-            <argument type="service" id="dictionary.dataset.query_builder.admin"/>
-            <tag name="dataset"/>
+            <argument type="service" id="dictionary.repository"/>
+            <tag name="dataset" alias="dictionary.admin"/>
         </service>
 
         <service id="dictionary.datagrid" class="WellCommerce\Bundle\DictionaryBundle\DataGrid\DictionaryDataGrid">

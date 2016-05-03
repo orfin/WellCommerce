@@ -9,6 +9,7 @@ well_commerce_order:
     configuration:
         order:
             orm:
+                manager: WellCommerce\Bundle\OrderBundle\Manager\OrderManager
                 factory: WellCommerce\Bundle\OrderBundle\Factory\OrderFactory
                 repository: WellCommerce\Bundle\OrderBundle\Repository\OrderRepository
                 mapping: "@WellCommerceOrderBundle/Resources/config/doctrine/Order.orm.yml"
@@ -75,7 +76,8 @@ well_commerce_order:
 
 parameters:
     order_visitor_hierarchy:
-        product_total: 0
-        shipping_method: 10
-        payment_method: 20
+        currency: 0
+        product_total: 10
+        shipping_method: 20
+        payment_method: 30
         summary: 900

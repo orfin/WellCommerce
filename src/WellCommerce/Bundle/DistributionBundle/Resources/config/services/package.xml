@@ -15,13 +15,9 @@
             </call>
         </service>
 
-        <service id="package.dataset.query_builder" class="WellCommerce\Bundle\DistributionBundle\DataSet\Admin\PackageDataSetQueryBuilder" public="false">
-            <argument type="service" id="package.repository"/>
-        </service>
-
         <service id="package.dataset" class="WellCommerce\Bundle\DistributionBundle\DataSet\Admin\PackageDataSet">
-            <argument type="service" id="package.dataset.query_builder"/>
-            <tag name="dataset"/>
+            <argument type="service" id="package.repository"/>
+            <tag name="dataset" alias="package"/>
         </service>
 
         <service id="package.datagrid" class="WellCommerce\Bundle\DistributionBundle\DataGrid\PackageDataGrid">

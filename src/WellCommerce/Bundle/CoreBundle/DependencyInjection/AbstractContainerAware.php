@@ -17,18 +17,18 @@ use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpKernel\KernelInterface;
-use WellCommerce\Bundle\AdminBundle\Helper\Admin\AdminHelperInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Flash\FlashHelperInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Image\ImageHelperInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Mailer\MailerHelperInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Request\RequestHelperInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Router\RouterHelperInterface;
+use WellCommerce\Bundle\CoreBundle\Helper\Security\SecurityHelperInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Templating\TemplatingHelperInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Translator\TranslatorHelperInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Validator\ValidatorHelperInterface;
 use WellCommerce\Bundle\CurrencyBundle\Helper\CurrencyHelperInterface;
 use WellCommerce\Bundle\DoctrineBundle\Helper\Doctrine\DoctrineHelperInterface;
-use WellCommerce\Bundle\PaymentBundle\Helper\PaymentMethodHelperInterface;
+use WellCommerce\Bundle\ShopBundle\Storage\ShopStorageInterface;
 
 /**
  * Class AbstractContainerAware
@@ -112,9 +112,9 @@ abstract class AbstractContainerAware
         return $this->get('currency.helper');
     }
     
-    public function getSecurityHelper() : AdminHelperInterface
+    public function getSecurityHelper() : SecurityHelperInterface
     {
-        return $this->get('admin.helper');
+        return $this->get('security.helper');
     }
     
     public function getMailerHelper() : MailerHelperInterface
@@ -141,12 +141,9 @@ abstract class AbstractContainerAware
     {
         return $this->get('event_dispatcher');
     }
-    
-    /**
-     * @return object|null
-     */
-    public function getUser()
+
+    public function getShopStorage() : ShopStorageInterface
     {
-        return $this->getSecurityHelper()->getUser();
+        return $this->get('shop.storage');
     }
 }

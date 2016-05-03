@@ -10,53 +10,41 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\ShopBundle\Context;
+namespace WellCommerce\Bundle\ShopBundle\Storage;
 
 use WellCommerce\Bundle\ShopBundle\Entity\ShopInterface;
 
 /**
- * Class AbstractShopContext
+ * Class ShopStorage
  *
- * @author Adam Piotrowski <adam@wellcommerce.org>
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractShopContext
+final class ShopStorage implements ShopStorageInterface
 {
     /**
      * @var ShopInterface
      */
-    protected $currentShop;
-    
-    /**
-     * {@inheritdoc}
-     */
+    private $currentShop;
+
     public function getCurrentShopIdentifier() : int
     {
         if ($this->hasCurrentShop()) {
             return $this->getCurrentShop()->getId();
         }
-        
+
         return 0;
     }
-    
-    /**
-     * {@inheritdoc}
-     */
+
     public function hasCurrentShop() : bool
     {
         return $this->currentShop instanceof ShopInterface;
     }
-    
-    /**
-     * {@inheritdoc}
-     */
+
     public function getCurrentShop() : ShopInterface
     {
         return $this->currentShop;
     }
-    
-    /**
-     * {@inheritdoc}
-     */
+
     public function setCurrentShop(ShopInterface $shop)
     {
         $this->currentShop = $shop;

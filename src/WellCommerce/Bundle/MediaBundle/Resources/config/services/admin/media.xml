@@ -13,13 +13,9 @@
             </call>
         </service>
 
-        <service id="media.dataset.query_builder.admin" class="WellCommerce\Bundle\MediaBundle\DataSet\Admin\MediaDataSetQueryBuilder" public="false">
-            <argument type="service" id="media.repository"/>
-        </service>
-
         <service id="media.dataset.admin" class="WellCommerce\Bundle\MediaBundle\DataSet\Admin\MediaDataSet">
-            <argument type="service" id="media.dataset.query_builder.admin"/>
-            <tag name="dataset"/>
+            <argument type="service" id="media.repository"/>
+            <tag name="dataset" alias="media.admin"/>
         </service>
 
         <service id="media.datagrid" class="WellCommerce\Bundle\MediaBundle\DataGrid\MediaDataGrid">

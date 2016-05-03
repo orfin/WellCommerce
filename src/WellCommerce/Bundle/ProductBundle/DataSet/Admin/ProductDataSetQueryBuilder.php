@@ -12,9 +12,7 @@
 
 namespace WellCommerce\Bundle\ProductBundle\DataSet\Admin;
 
-use Doctrine\ORM\QueryBuilder;
-use WellCommerce\Bundle\ShopBundle\Context\ShopContextInterface;
-use WellCommerce\Component\DataSet\Column\ColumnCollection;
+use WellCommerce\Bundle\ShopBundle\Storage\ShopStorageInterface;
 use WellCommerce\Component\DataSet\Conditions\Condition\Eq;
 use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
 use WellCommerce\Component\DataSet\QueryBuilder\AbstractDataSetQueryBuilder;
@@ -28,22 +26,22 @@ use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
 class ProductDataSetQueryBuilder extends AbstractDataSetQueryBuilder
 {
     /**
-     * @var ShopContextInterface
+     * @var ShopStorageInterface
      */
-    protected $context;
+    protected $shopStorage;
 
     /**
-     * @param ShopContextInterface $context
+     * @param ShopStorageInterface $shopStorage
      */
-    public function setShopContext(ShopContextInterface $context)
+    public function setShopStorage(ShopStorageInterface $shopStorage)
     {
-        $this->context = $context;
+        $this->shopStorage = $shopStorage;
     }
 
     protected function getConditions(DataSetRequestInterface $request) : ConditionsCollection
     {
         $conditions = parent::getConditions($request);
-        $conditions->add(new Eq('shop', $this->context->getCurrentShopIdentifier()));
+        $conditions->add(new Eq('shop', $this->shopStorage->getCurrentShopIdentifier()));
 
         return $conditions;
     }
