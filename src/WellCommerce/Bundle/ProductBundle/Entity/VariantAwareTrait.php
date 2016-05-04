@@ -12,28 +12,31 @@
 
 namespace WellCommerce\Bundle\ProductBundle\Entity;
 
-
+/**
+ * Class VariantAwareTrait
+ *
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
+ */
 trait VariantAwareTrait
 {
     /**
-     * @var null|VariantInterface
+     * @var VariantInterface
      */
     protected $variant;
 
-    /**
-     * @return null|VariantInterface
-     */
-    public function getVariant()
+    public function getVariant() : VariantInterface
     {
         return $this->variant;
     }
 
-    /**
-     * @param null|VariantInterface $variant
-     */
-    public function setVariant(VariantInterface $variant = null)
+    public function setVariant(VariantInterface $variant)
     {
         $this->variant = $variant;
+    }
+
+    public function hasVariant() : bool
+    {
+        return $this->variant instanceof VariantInterface;
     }
 }
 

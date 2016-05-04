@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\OrderBundle\Manager;
 
 use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
-use WellCommerce\Bundle\CoreBundle\Manager\Manager;
+use WellCommerce\Bundle\DoctrineBundle\Manager\Manager;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 use WellCommerce\Bundle\ShopBundle\Entity\ShopInterface;
 
@@ -24,7 +24,7 @@ use WellCommerce\Bundle\ShopBundle\Entity\ShopInterface;
  */
 class OrderManager extends Manager implements OrderManagerInterface
 {
-    public function findOrder(string $currency, string $sessionId, ClientInterface $client = null, ShopInterface $shop) : OrderInterface
+    public function findOrder(string $sessionId, ClientInterface $client = null, ShopInterface $shop) : OrderInterface
     {
         $order = $this->findCurrentOrder($client, $sessionId, $shop);
 
@@ -37,18 +37,7 @@ class OrderManager extends Manager implements OrderManagerInterface
             $this->createResource($order);
         }
 
-        if ($this->isOrderDirty($order, $currency, $client)) {
-            $order->setCurrency($currency);
-            $order->setClient($client);
-            $this->updateResource($order);
-        }
-
         return $order;
-    }
-
-    private function isOrderDirty(OrderInterface $order, string $currency, ClientInterface $client = null) : bool
-    {
-        return $order->getClient() !== $client || $order->getCurrency() !== $currency;
     }
 
     private function findCurrentOrder(ClientInterface $client = null, $sessionId, ShopInterface $shop)

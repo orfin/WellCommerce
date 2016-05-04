@@ -15,7 +15,7 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use WellCommerce\Bundle\ApiBundle\Request\RequestHandler;
-use WellCommerce\Bundle\CoreBundle\Manager\Manager;
+use WellCommerce\Bundle\DoctrineBundle\Manager\Manager;
 
 /**
  * Class Configuration
@@ -24,6 +24,9 @@ use WellCommerce\Bundle\CoreBundle\Manager\Manager;
  */
 class Configuration implements ConfigurationInterface
 {
+    /**
+     * @var string
+     */
     protected $treeRoot;
     
     /**
@@ -42,7 +45,6 @@ class Configuration implements ConfigurationInterface
         if (null !== $this->treeRoot) {
             $rootNode = $treeBuilder->root($this->treeRoot);
             $this->addBaseExtensionConfiguration($rootNode);
-            $this->addCustomConfigurationNode($rootNode);
         }
         
         return $treeBuilder;

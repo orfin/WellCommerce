@@ -11,15 +11,12 @@
  */
 namespace WellCommerce\Bundle\CoreBundle\Controller\Admin;
 
-use Doctrine\Common\Util\Debug;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\AbstractController;
-use WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface;
 use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
+use WellCommerce\Bundle\DoctrineBundle\Manager\ManagerInterface;
 use WellCommerce\Component\DataGrid\DataGridInterface;
-use WellCommerce\Component\Form\Elements\FormInterface;
 use WellCommerce\Component\Form\FormBuilderInterface;
 
 /**
@@ -30,19 +27,9 @@ use WellCommerce\Component\Form\FormBuilderInterface;
 abstract class AbstractAdminController extends AbstractController implements AdminControllerInterface
 {
     /**
-     * @var ManagerInterface
-     */
-    protected $manager;
-
-    /**
      * @var null|DataGridInterface
      */
-    protected $dataGrid;
-
-    /**
-     * @var null|FormBuilderInterface
-     */
-    protected $formBuilder;
+    private $dataGrid;
 
     /**
      * AbstractAdminController constructor.
@@ -53,11 +40,10 @@ abstract class AbstractAdminController extends AbstractController implements Adm
      */
     public function __construct(ManagerInterface $manager, FormBuilderInterface $formBuilder = null, DataGridInterface $dataGrid = null)
     {
-        $this->manager     = $manager;
-        $this->dataGrid    = $dataGrid;
-        $this->formBuilder = $formBuilder;
+        parent::__construct($manager, $formBuilder);
+        $this->dataGrid = $dataGrid;
     }
-    
+
     public function indexAction() : Response
     {
         return $this->displayTemplate('index', [
@@ -72,7 +58,7 @@ abstract class AbstractAdminController extends AbstractController implements Adm
         }
         
         try {
-            $results = $this->dataGrid->loadResults($request);
+            $results = $this->getDataGrid()->loadResults($request);
         } catch (\Exception $e) {
             $results = nl2br($e->getMessage());
         }
@@ -82,12 +68,12 @@ abstract class AbstractAdminController extends AbstractController implements Adm
     
     public function addAction(Request $request) : Response
     {
-        $resource = $this->manager->initResource();
+        $resource = $this->getManager()->initResource();
         $form     = $this->getForm($resource);
         
         if ($form->handleRequest()->isSubmitted()) {
             if ($form->isValid()) {
-                $this->manager->createResource($resource);
+                $this->getManager()->createResource($resource);
             }
             
             return $this->createFormDefaultJsonResponse($form);
@@ -100,7 +86,8 @@ abstract class AbstractAdminController extends AbstractController implements Adm
     
     public function editAction(int $id) : Response
     {
-        $resource = $this->manager->getRepository()->find($id);
+        $resource = $this->getManager()->getRepository()->find($id);
+
         if (!$resource instanceof EntityInterface) {
             return $this->redirectToAction('index');
         }
@@ -109,7 +96,7 @@ abstract class AbstractAdminController extends AbstractController implements Adm
         
         if ($form->handleRequest()->isSubmitted()) {
             if ($form->isValid()) {
-                $this->manager->updateResource($resource);
+                $this->getManager()->updateResource($resource);
             }
             
             return $this->createFormDefaultJsonResponse($form);
@@ -125,40 +112,17 @@ abstract class AbstractAdminController extends AbstractController implements Adm
     {
         $this->getDoctrineHelper()->disableFilter('locale');
         try {
-            $resource = $this->manager->getRepository()->findOneBy(['id' => $id]);
-            $this->manager->removeResource($resource);
+            $resource = $this->getManager()->getRepository()->findOneBy(['id' => $id]);
+            $this->getManager()->removeResource($resource);
         } catch (\Exception $e) {
             return $this->jsonResponse(['error' => $e->getTraceAsString()]);
         }
         
         return $this->jsonResponse(['success' => true]);
     }
-    
-    protected function createFormDefaultJsonResponse(FormInterface $form) : JsonResponse
-    {
-        return $this->jsonResponse([
-            'valid'      => $form->isValid(),
-            'continue'   => $form->isAction('continue'),
-            'next'       => $form->isAction('next'),
-            'redirectTo' => $this->getRedirectToActionUrl('index'),
-            'error'      => $form->getError(),
-        ]);
-    }
 
-    protected function getForm($resource, array $config = []) : FormInterface
+    protected function getDataGrid() : DataGridInterface
     {
-        $builder       = $this->getFormBuilder();
-        $defaultConfig = [
-            'name'              => $this->manager->getRepository()->getAlias(),
-            'validation_groups' => ['Default']
-        ];
-        $config        = array_merge($defaultConfig, $config);
-
-        return $builder->createForm($config, $resource);
-    }
-
-    protected function getFormBuilder() : FormBuilderInterface
-    {
-        return $this->formBuilder;
+        return $this->dataGrid;
     }
 }

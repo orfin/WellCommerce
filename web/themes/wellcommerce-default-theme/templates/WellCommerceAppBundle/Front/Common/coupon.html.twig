@@ -1,5 +1,5 @@
-{% if currentCart().hasCoupon() %}
-    {% set coupon = currentCart().getCoupon() %}
+{% if currentOrder().hasCoupon() %}
+    {% set coupon = currentOrder().getCoupon() %}
     <div class="col-lg-7 col-xs-6">
         <div class="coupon">
             <h4>Coupon code</h4>

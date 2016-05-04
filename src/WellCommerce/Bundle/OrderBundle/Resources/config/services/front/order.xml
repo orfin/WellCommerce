@@ -9,5 +9,26 @@
                 <argument type="service" id="service_container"/>
             </call>
         </service>
+
+        <service id="order_cart.controller.front" class="WellCommerce\Bundle\OrderBundle\Controller\Front\OrderCartController">
+            <argument type="service" id="order_product.manager"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="order_address.controller.front" class="WellCommerce\Bundle\OrderBundle\Controller\Front\OrderAddressController">
+            <argument type="service" id="order.manager"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="order_confirmation.controller.front" class="WellCommerce\Bundle\OrderBundle\Controller\Front\OrderConfirmationController">
+            <argument type="service" id="order.manager"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
     </services>
 </container>

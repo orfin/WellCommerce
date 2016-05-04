@@ -21,6 +21,13 @@
             <argument type="service" id="order.visitor.collection"/>
         </service>
 
+        <service id="order_product.order.visitor" class="WellCommerce\Bundle\OrderBundle\Visitor\OrderProductVisitor">
+            <argument type="service" id="currency.helper"/>
+            <argument type="service" id="variant.helper"/>
+            <argument type="service" id="price.factory"/>
+            <tag name="order.visitor" alias="order_product"/>
+        </service>
+
         <service id="product_total.order.visitor" class="WellCommerce\Bundle\OrderBundle\Visitor\OrderProductTotalVisitor">
             <argument type="service" id="currency.helper"/>
             <tag name="order.visitor" alias="product_total"/>
@@ -38,14 +45,8 @@
             <argument type="service" id="order.manager"/>
             <argument type="service" id="order.storage"/>
             <argument type="service" id="shop.storage"/>
+            <argument type="service" id="order.visitor.traverser"/>
             <tag name="kernel.event_subscriber"/>
-        </service>
-
-        <service id="order.doctrine.subscriber" class="WellCommerce\Bundle\OrderBundle\Doctrine\OrderSubscriber">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-            <tag name="doctrine.event_subscriber" connection="default" />
         </service>
 
         <service id="order.dataset.transformer.order_client" class="WellCommerce\Bundle\OrderBundle\DataSet\Transformer\ClientTransformer">
@@ -53,5 +54,11 @@
         </service>
 
         <service id="order.storage" class="WellCommerce\Bundle\OrderBundle\Storage\OrderStorage"/>
+
+        <service id="twig.extension.order" class="WellCommerce\Bundle\OrderBundle\Twig\Extension\OrderExtension">
+            <argument type="service" id="order.storage"/>
+            <argument type="service" id="order_product.dataset.front"/>
+            <tag name="twig.extension"/>
+        </service>
     </services>
 </container>

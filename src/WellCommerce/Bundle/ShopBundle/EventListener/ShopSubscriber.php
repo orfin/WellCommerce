@@ -28,9 +28,15 @@ class ShopSubscriber extends AbstractEventSubscriber
     public static function getSubscribedEvents()
     {
         return [
-            KernelEvents::REQUEST        => ['onKernelRequest', 100],
-            'page.dataset.front.request' => ['onPageDataSetRequest', 0],
-            'page.dataset.admin.request' => ['onPageDataSetRequest', 0],
+            KernelEvents::REQUEST            => ['onKernelRequest', 100],
+            'page.dataset.front.request'     => ['onShopAwareDataSetRequest', 0],
+            'page.dataset.admin.request'     => ['onShopAwareDataSetRequest', 0],
+            'category.dataset.front.request' => ['onShopAwareDataSetRequest', 0],
+            'category.dataset.admin.request' => ['onShopAwareDataSetRequest', 0],
+            'product.dataset.front.request'  => ['onShopAwareDataSetRequest', 0],
+            'product.dataset.admin.request'  => ['onShopAwareDataSetRequest', 0],
+            'producer.dataset.front.request' => ['onShopAwareDataSetRequest', 0],
+            'producer.dataset.admin.request' => ['onShopAwareDataSetRequest', 0],
         ];
     }
     
@@ -51,7 +57,7 @@ class ShopSubscriber extends AbstractEventSubscriber
         return $this->get('shop.repository');
     }
 
-    public function onPageDataSetRequest(DataSetRequestEvent $event)
+    public function onShopAwareDataSetRequest(DataSetRequestEvent $event)
     {
         $request = $event->getRequest();
         $request->addCondition(new Eq('shop', $this->getShopStorage()->getCurrentShopIdentifier()));

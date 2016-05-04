@@ -19,13 +19,9 @@ namespace WellCommerce\Bundle\ProductBundle\Entity;
  */
 interface VariantAwareInterface
 {
-    /**
-     * @param null|VariantInterface $variant
-     */
-    public function setVariant(VariantInterface $variant = null);
+    public function setVariant(VariantInterface $variant);
 
-    /**
-     * @return null|VariantInterface
-     */
-    public function getVariant();
+    public function getVariant() : VariantInterface;
+
+    public function hasVariant() : bool;
 }

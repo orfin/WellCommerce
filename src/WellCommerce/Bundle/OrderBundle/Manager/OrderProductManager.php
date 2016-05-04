@@ -12,101 +12,62 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Manager;
 
-use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
-use WellCommerce\Bundle\OrderBundle\Entity\CartProductInterface;
+use WellCommerce\Bundle\DoctrineBundle\Manager\Manager;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderProductInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\VariantInterface;
 
 /**
  * Class OrderProductManager
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class OrderProductManager extends AbstractFrontManager
+class OrderProductManager extends Manager
 {
-    public function transformCartProduct(CartProductInterface $cartProduct) : OrderProductInterface
+    public function addProductToOrder(ProductInterface $product, VariantInterface $variant = null, int $quantity = 1, OrderInterface $order)
+    {
+        $orderProduct = $this->findProductInOrder($product, $variant, $order);
+        
+        if (!$orderProduct instanceof OrderProductInterface) {
+            $orderProduct = $this->createOrderProduct($product, $variant, $order);
+            $orderProduct->setQuantity($quantity);
+            $this->createResource($orderProduct, false);
+        } else {
+            $orderProduct->increaseQuantity($quantity);
+            $this->updateResource($orderProduct, false);
+        }
+
+        $this->updateResource($order);
+    }
+    
+    public function findProductInOrder(ProductInterface $product, VariantInterface $variant = null, OrderInterface $order)
+    {
+        return $this->getRepository()->findOneBy([
+            'order'   => $order,
+            'product' => $product,
+            'variant' => $variant
+        ]);
+    }
+    
+    public function createOrderProduct(
+        ProductInterface $product,
+        VariantInterface $variant = null,
+        OrderInterface $order
+    ) : OrderProductInterface
     {
         /** @var OrderProductInterface $orderProduct */
-        $orderProduct   = $this->initResource();
-        $product        = $cartProduct->getProduct();
-        $variant        = $cartProduct->getVariant();
-        $sellPrice      = $cartProduct->getSellPrice();
-        $baseCurrency   = $sellPrice->getCurrency();
-        $targetCurrency = $order->getCurrency();
-        
-        $grossAmount = $this->getCurrencyHelper()->convert($sellPrice->getFinalGrossAmount(), $baseCurrency, $targetCurrency);
-        $netAmount   = $this->getCurrencyHelper()->convert($sellPrice->getFinalNetAmount(), $baseCurrency, $targetCurrency);
-        $taxAmount   = $this->getCurrencyHelper()->convert($sellPrice->getFinalTaxAmount(), $baseCurrency, $targetCurrency);
-        
-        $sellPrice = new Price();
-        $sellPrice->setGrossAmount($grossAmount);
-        $sellPrice->setNetAmount($netAmount);
-        $sellPrice->setTaxAmount($taxAmount);
-        $sellPrice->setTaxRate($sellPrice->getTaxRate());
-        $sellPrice->setCurrency($targetCurrency);
-        
-        $orderProduct->setSellPrice($sellPrice);
-        $orderProduct->setBuyPrice($product->getBuyPrice());
-        $orderProduct->setQuantity($cartProduct->getQuantity());
-        $orderProduct->setWeight($cartProduct->getWeight());
-        $orderProduct->setVariant($variant);
+        $orderProduct = $this->initResource();
+        $orderProduct->setOrder($order);
         $orderProduct->setProduct($product);
-        
-        return $orderProduct;
-    }
-    
-    protected function prepareOrderProducts(CartInterface $cart, OrderInterface $order)
-    {
-        $cart->getProducts()->map(function (CartProductInterface $cartProduct) use ($order) {
-            $orderProduct = $this->prepareOrderProduct($cartProduct, $order);
-            $orderProduct->setOrder($order);
-            $order->addProduct($orderProduct);
-        });
-    }
-    
-    protected function prepareOrderShippingDetails(CartInterface $cart, OrderInterface $order)
-    {
-        $cost        = $cart->getShippingMethodCost()->getCost();
-        $grossAmount = $this->getCurrencyHelper()->convert($cost->getGrossAmount(), $cost->getCurrency(), $order->getCurrency());
-        $taxRate     = $cost->getTaxRate();
-        $orderTotal  = $this->orderTotalFactory->createFromSpecifiedValues($grossAmount, $taxRate, $order->getCurrency());
-        
-        $order->setShippingTotal($orderTotal);
-    }
-    
-    /**
-     * @param CartProductInterface $cartProduct
-     * @param OrderInterface       $order
-     *
-     * @return \WellCommerce\Bundle\OrderBundle\Entity\OrderProductInterface
-     */
-    public function prepareOrderProduct(CartProductInterface $cartProduct, OrderInterface $order)
-    {
-        $orderProduct   = $this->orderProductFactory->create();
-        $product        = $cartProduct->getProduct();
-        $variant        = $cartProduct->getVariant();
-        $sellPrice      = $cartProduct->getSellPrice();
-        $baseCurrency   = $sellPrice->getCurrency();
-        $targetCurrency = $order->getCurrency();
-        
-        $grossAmount = $this->getCurrencyHelper()->convert($sellPrice->getFinalGrossAmount(), $baseCurrency, $targetCurrency);
-        $netAmount   = $this->getCurrencyHelper()->convert($sellPrice->getFinalNetAmount(), $baseCurrency, $targetCurrency);
-        $taxAmount   = $this->getCurrencyHelper()->convert($sellPrice->getFinalTaxAmount(), $baseCurrency, $targetCurrency);
-        
-        $sellPrice = new Price();
-        $sellPrice->setGrossAmount($grossAmount);
-        $sellPrice->setNetAmount($netAmount);
-        $sellPrice->setTaxAmount($taxAmount);
-        $sellPrice->setTaxRate($sellPrice->getTaxRate());
-        $sellPrice->setCurrency($targetCurrency);
-        
-        $orderProduct->setSellPrice($sellPrice);
+        $orderProduct->setWeight($product->getWeight());
+        $orderProduct->setSellPrice($product->getSellPrice());
         $orderProduct->setBuyPrice($product->getBuyPrice());
-        $orderProduct->setQuantity($cartProduct->getQuantity());
-        $orderProduct->setWeight($cartProduct->getWeight());
-        $orderProduct->setVariant($variant);
-        $orderProduct->setProduct($product);
-        
+
+        if ($variant instanceof VariantInterface) {
+            $orderProduct->setVariant($variant);
+        }
+
         return $orderProduct;
     }
 }

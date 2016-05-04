@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\PageBundle\Controller\Front;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\CoreBundle\Service\Breadcrumb\BreadcrumbItem;
 
@@ -44,5 +45,29 @@ class PageController extends AbstractFrontController
         return $this->displayTemplate('index', [
             'page' => $page
         ]);
+    }
+
+    /**
+     * Returns resource by ID parameter
+     *
+     * @param Request $request
+     * @param array   $criteria
+     *
+     * @return mixed
+     */
+    protected function findOr404(Request $request, array $criteria = [])
+    {
+        // check whether request contains ID attribute
+        if (!$request->attributes->has('id')) {
+            throw new \LogicException('Request does not have "id" attribute set.');
+        }
+
+        $criteria['id'] = $request->attributes->get('id');
+
+        if (null === $resource = $this->manager->getRepository()->findOneBy($criteria)) {
+            throw new NotFoundHttpException(sprintf('Resource not found'));
+        }
+
+        return $resource;
     }
 }

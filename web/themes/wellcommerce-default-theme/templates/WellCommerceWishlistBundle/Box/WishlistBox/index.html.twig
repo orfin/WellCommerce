@@ -31,7 +31,7 @@
                         </div>
 
                         <div class="col-lg-4 col-md-5 col-xs-12 buttons text-right">
-                            <a href="{{ path('front.cart.add',{"id": item.id}) }}" class="btn btn-primary add-cart text-left">Add to cart<i class="pull-right"><img src="{{ asset('themes/wellcommerce-default-theme/assets/img/add-to-cart.png') }}" /></i></a>
+                            <a href="{{ path('front.order_product.add',{"id": item.id}) }}" class="btn btn-primary add-cart text-left">Add to cart<i class="pull-right"><img src="{{ asset('themes/wellcommerce-default-theme/assets/img/add-to-cart.png') }}" /></i></a>
 
                             <a href="{{ path('front.wishlist.delete',{"id": item.id}) }}" class="btn btn-link">Remove product</a>
                         </div>

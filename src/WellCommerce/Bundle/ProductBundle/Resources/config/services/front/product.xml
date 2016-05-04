@@ -13,7 +13,10 @@
 
         <service id="product.dataset.front" class="WellCommerce\Bundle\ProductBundle\DataSet\Front\ProductDataSet">
             <argument type="service" id="product.repository"/>
-            <tag name="dataset" alias="product.front"/>
+            <call method="setRequestHelper">
+                <argument type="service" id="request.helper"/>
+            </call>
+            <tag name="dataset"/>
         </service>
 
         <service id="product.context.front" class="WellCommerce\Bundle\ProductBundle\Context\Front\ProductContext"/>

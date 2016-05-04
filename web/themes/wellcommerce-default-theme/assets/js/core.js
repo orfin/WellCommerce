@@ -306,7 +306,7 @@ new GPlugin('GCart', oCartDefaults, GCart);
  * GProductAddCartForm
  */
 var oProductCartAddFormDefaults = {
-    sAddProductRoute: 'front.cart.add'
+    sAddProductRoute: 'front.order_product.add'
 };
 
 var GProductAddCartForm = function(oOptions) {

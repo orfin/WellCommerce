@@ -18,7 +18,6 @@ use Doctrine\Common\Collections\Criteria;
 use WellCommerce\Bundle\AppBundle\Entity\DiscountablePriceInterface;
 use WellCommerce\Bundle\AppBundle\Entity\PriceInterface;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
-use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 use WellCommerce\Bundle\CurrencyBundle\Entity\CurrencyInterface;
 use WellCommerce\Bundle\ShopBundle\Entity\ShopInterface;
 use WellCommerce\Bundle\TaxBundle\Entity\TaxInterface;
@@ -30,7 +29,10 @@ use WellCommerce\Bundle\TaxBundle\Entity\TaxInterface;
  */
 abstract class AbstractEntityFactory extends AbstractContainerAware implements EntityFactoryInterface
 {
-    protected $className;
+    /**
+     * @var string
+     */
+    private $className;
 
     /**
      * AbstractEntityFactory constructor.
@@ -74,7 +76,7 @@ abstract class AbstractEntityFactory extends AbstractContainerAware implements E
     
     protected function getDefaultShop() : ShopInterface
     {
-        return $this->getDefaultShops()->first();
+        return $this->get('shop.storage')->getCurrentShop();
     }
     
     protected function createEmptyCollection() : Collection

@@ -9,7 +9,7 @@ $(document).ready(function () {
         sVariantSelector: '#variant',
         sQuantitySelector: '#quantity',
         sPriceSelector: '#price',
-        sAddProductRoute: 'front.cart.add',
+        sAddProductRoute: 'front.order_product.add',
         sAttributesSelectClass: '.attribute'
     };
 

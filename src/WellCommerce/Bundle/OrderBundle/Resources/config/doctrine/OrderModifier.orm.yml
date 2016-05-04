@@ -50,7 +50,7 @@ WellCommerce\Bundle\OrderBundle\Entity\OrderModifier:
         order:
             targetEntity: WellCommerce\Bundle\OrderBundle\Entity\OrderInterface
             fetch: LAZY
-            inversedBy: totals
+            inversedBy: modifiers
             joinColumns:
                 order_id:
                     referencedColumnName: id

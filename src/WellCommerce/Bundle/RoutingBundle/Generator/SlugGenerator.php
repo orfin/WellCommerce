@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\RoutingBundle\Generator;
 
 use WellCommerce\Bundle\CoreBundle\Helper\Sluggable;
-use WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface;
+use WellCommerce\Bundle\DoctrineBundle\Manager\ManagerInterface;
 use WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface;
 
 /**

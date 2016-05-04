@@ -23,11 +23,8 @@ use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class LocaleDataSet extends AbstractDataSet
+final class LocaleDataSet extends AbstractDataSet
 {
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(DataSetConfiguratorInterface $configurator)
     {
         $configurator->setColumns([

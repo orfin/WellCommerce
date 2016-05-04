@@ -257,6 +257,7 @@ abstract class AbstractExtension extends Extension
         $definition->addArgument($factoryService);
         $definition->addArgument($repositoryService);
         $definition->addArgument(new Reference('doctrine.helper'));
+        $definition->addArgument(new Reference('event_dispatcher'));
         $container->setDefinition($managerServiceName, $definition);
     }
     

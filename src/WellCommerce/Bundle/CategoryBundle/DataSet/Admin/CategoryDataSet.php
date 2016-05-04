@@ -13,18 +13,18 @@
 namespace WellCommerce\Bundle\CategoryBundle\DataSet\Admin;
 
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
+use WellCommerce\Bundle\ShopBundle\Storage\ShopStorageInterface;
+use WellCommerce\Component\DataSet\Conditions\Condition\Eq;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
+use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
 
 /**
  * Class CategoryDataSet
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class CategoryDataSet extends AbstractDataSet
+final class CategoryDataSet extends AbstractDataSet
 {
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(DataSetConfiguratorInterface $configurator)
     {
         $configurator->setColumns([

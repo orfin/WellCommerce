@@ -25,26 +25,27 @@ class ClientRegistrationBoxController extends AbstractBoxController
 {
     public function indexAction(LayoutBoxSettingsCollection $boxSettings) : Response
     {
-        $resource = $this->manager->initResource();
-        $resource->setShop($this->manager->getShopContext()->getCurrentShop());
-
-        $form = $this->manager->getForm($resource, [
+        $manager  = $this->getManager();
+        $resource = $manager->initResource();
+        $resource->setShop($manager->getShopContext()->getCurrentShop());
+        
+        $form = $this->getForm($resource, [
             'name'              => 'register',
             'validation_groups' => ['client_registration']
         ]);
-
+        
         if ($form->handleRequest()->isSubmitted()) {
             if ($form->isValid()) {
-                $this->manager->createResource($resource);
-
-                $this->manager->getFlashHelper()->addSuccess('client.flash.registration.success');
-
+                $manager->createResource($resource);
+                
+                $this->getFlashHelper()->addSuccess('client.flash.registration.success');
+                
                 return $this->getRouterHelper()->redirectTo('front.client.login');
             }
-
-            $this->manager->getFlashHelper()->addError('client.flash.registration.error');
+            
+            $this->getFlashHelper()->addError('client.flash.registration.error');
         }
-
+        
         return $this->displayTemplate('index', [
             'form' => $form,
         ]);

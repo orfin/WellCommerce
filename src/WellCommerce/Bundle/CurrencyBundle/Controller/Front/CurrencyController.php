@@ -21,7 +21,7 @@ use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CurrencyController extends AbstractFrontController
+final class CurrencyController extends AbstractFrontController
 {
     /**
      * Sets new session currency

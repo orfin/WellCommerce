@@ -22,11 +22,8 @@ use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class CurrencyDataSet extends AbstractDataSet
+final class CurrencyDataSet extends AbstractDataSet
 {
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(DataSetConfiguratorInterface $configurator)
     {
         $configurator->setColumns([

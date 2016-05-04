@@ -12,46 +12,47 @@
 
 namespace WellCommerce\Bundle\WishlistBundle\Manager;
 
+use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\AbstractManager;
 use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
+use WellCommerce\Bundle\DoctrineBundle\Manager\Manager;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
+use WellCommerce\Bundle\WishlistBundle\Entity\WishlistInterface;
 
 /**
  * Class WishlistManager
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class WishlistManager extends AbstractManager
+final class WishlistManager extends Manager
 {
-    public function addProductToWishlist(ProductInterface $product)
+    public function addProductToWishlist(ProductInterface $product, ClientInterface $client)
     {
-        $client   = $this->getClient();
-        $wishlist = $this->findWishlist($product);
+        $wishlist = $this->findWishlist($product, $client);
 
-        if (null === $wishlist) {
-            $wishlist = $this->factory->create();
+        if (!$wishlist instanceof WishlistInterface) {
+            /** @var WishlistInterface $wishlist */
+            $wishlist = $this->initResource();
             $wishlist->setClient($client);
             $wishlist->setProduct($product);
             $this->createResource($wishlist);
         }
     }
 
-    public function findWishlist(ProductInterface $product)
+    public function deleteProductFromWishlist(ProductInterface $product, ClientInterface $client)
     {
-        $client = $this->getClient();
+        $wishlist = $this->findWishlist($product, $client);
 
-        return $this->repository->findOneBy([
+        if ($wishlist instanceof WishlistInterface) {
+            $this->removeResource($wishlist);
+        }
+    }
+
+    private function findWishlist(ProductInterface $product, ClientInterface $client)
+    {
+        return $this->getRepository()->findOneBy([
             'client'  => $client,
             'product' => $product
         ]);
-    }
-
-    public function deleteProductFromWishlist(ProductInterface $product)
-    {
-        $wishlist = $this->findWishlist($product);
-
-        if (null !== $wishlist) {
-            $this->removeResource($wishlist);
-        }
     }
 }

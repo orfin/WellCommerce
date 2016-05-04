@@ -15,7 +15,7 @@ namespace WellCommerce\Bundle\OrderBundle\Controller\Front;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
-use WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface;
+use WellCommerce\Bundle\DoctrineBundle\Manager\ManagerInterface;
 use WellCommerce\Bundle\CoreBundle\Service\Breadcrumb\BreadcrumbItem;
 use WellCommerce\Bundle\OrderBundle\Manager\Front\OrderManager;
 use WellCommerce\Bundle\OrderBundle\Manager\Front\OrderManagerInterface;

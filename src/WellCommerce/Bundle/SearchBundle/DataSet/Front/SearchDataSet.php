@@ -12,19 +12,29 @@
 
 namespace WellCommerce\Bundle\SearchBundle\DataSet\Front;
 
+use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
+use WellCommerce\Bundle\SearchBundle\Provider\SearchProviderInterface;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
+use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
 
 /**
  * Class SearchDataSet
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class SearchDataSet extends AbstractDataSet
+final class SearchDataSet extends AbstractDataSet
 {
     /**
-     * {@inheritdoc}
+     * @var SearchProviderInterface
      */
+    private $provider;
+    
+    public function setSearchProvider(SearchProviderInterface $provider)
+    {
+        $this->provider = $provider;
+    }
+    
     public function configureOptions(DataSetConfiguratorInterface $configurator)
     {
         $configurator->setColumns([
@@ -49,9 +59,17 @@ class SearchDataSet extends AbstractDataSet
             'status'           => 'statuses.id',
             'score'            => 'FIELD(product.id, :scores)',
         ]);
-
+        
         $configurator->setColumnTransformers([
             'route' => $this->getDataSetTransformer('route')
         ]);
+    }
+    
+    protected function getQueryBuilder(DataSetRequestInterface $request) : QueryBuilder
+    {
+        $queryBuilder = parent::getQueryBuilder($request);
+        $queryBuilder->setParameter('scores', $this->provider->getResultIdentifiers());
+
+        return $queryBuilder;
     }
 }

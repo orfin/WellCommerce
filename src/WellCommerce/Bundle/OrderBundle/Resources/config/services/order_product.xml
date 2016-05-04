@@ -4,6 +4,14 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
+        <service id="order_product.dataset.front" class="WellCommerce\Bundle\OrderBundle\DataSet\Front\OrderProductDataSet">
+            <argument type="service" id="order_product.repository"/>
+            <call method="setOrderStorage">
+                <argument type="service" id="order.storage"/>
+            </call>
+            <tag name="dataset"/>
+        </service>
+
         <service id="form.order_product_collection.data_transformer" class="WellCommerce\Bundle\OrderBundle\Form\DataTransformer\OrderProductCollectionToArrayTransformer" shared="false">
             <argument type="service" id="doctrine.helper"/>
             <call method="setOrderProductManager">

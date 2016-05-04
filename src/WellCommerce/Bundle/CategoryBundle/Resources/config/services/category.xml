@@ -23,5 +23,7 @@
             <argument type="service" id="category.dataset.front"/>
             <tag name="twig.extension"/>
         </service>
+
+        <service id="category.storage" class="WellCommerce\Bundle\CategoryBundle\Storage\CategoryStorage"/>
     </services>
 </container>

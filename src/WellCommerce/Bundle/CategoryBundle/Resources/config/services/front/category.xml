@@ -27,7 +27,7 @@
 
         <service id="category.dataset.front" class="WellCommerce\Bundle\CategoryBundle\DataSet\Front\CategoryDataSet">
             <argument type="service" id="category.repository"/>
-            <tag name="dataset" alias="category.front"/>
+            <tag name="dataset"/>
         </service>
 
         <service id="category_products.layout_box.controller" class="WellCommerce\Bundle\CategoryBundle\Controller\Box\CategoryProductsBoxController">
@@ -36,7 +36,5 @@
                 <argument type="service" id="service_container" />
             </call>
         </service>
-
-        <service id="category.context.front" class="WellCommerce\Bundle\CategoryBundle\Context\Front\CategoryContext"/>
     </services>
 </container>

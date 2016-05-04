@@ -34,7 +34,7 @@
 
         <service id="category.dataset.admin" class="WellCommerce\Bundle\CategoryBundle\DataSet\Admin\CategoryDataSet">
             <argument type="service" id="category.repository"/>
-            <tag name="dataset" alias="category.admin"/>
+            <tag name="dataset"/>
         </service>
 
         <service id="category.form_builder.admin" class="WellCommerce\Bundle\CategoryBundle\Form\Admin\CategoryFormBuilder" parent="core.form_builder" />

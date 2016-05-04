@@ -34,7 +34,7 @@ interface RequestHandlerInterface
     public function getDataset();
     
     /**
-     * @return \WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface
+     * @return \WellCommerce\Bundle\DoctrineBundle\Manager\ManagerInterface
      */
     public function getManager();
     

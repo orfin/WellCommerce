@@ -115,17 +115,4 @@ class CategoryManager extends AbstractManager
 
         return $slug;
     }
-
-    /**
-     * Returns a collection of dynamic conditions
-     *
-     * @return ConditionsCollection
-     */
-    public function getCurrentCategoryConditions()
-    {
-        $conditions = new ConditionsCollection();
-        $conditions->add(new Eq('category', $this->getCategoryContext()->getCurrentCategoryIdentifier()));
-
-        return $conditions;
-    }
 }

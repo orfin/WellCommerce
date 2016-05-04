@@ -28,6 +28,7 @@ use WellCommerce\Bundle\CoreBundle\Helper\Translator\TranslatorHelperInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Validator\ValidatorHelperInterface;
 use WellCommerce\Bundle\CurrencyBundle\Helper\CurrencyHelperInterface;
 use WellCommerce\Bundle\DoctrineBundle\Helper\Doctrine\DoctrineHelperInterface;
+use WellCommerce\Bundle\OrderBundle\Storage\OrderStorageInterface;
 use WellCommerce\Bundle\ShopBundle\Storage\ShopStorageInterface;
 
 /**
@@ -145,5 +146,10 @@ abstract class AbstractContainerAware
     public function getShopStorage() : ShopStorageInterface
     {
         return $this->get('shop.storage');
+    }
+
+    public function getOrderStorage() : OrderStorageInterface
+    {
+        return $this->get('order.storage');
     }
 }

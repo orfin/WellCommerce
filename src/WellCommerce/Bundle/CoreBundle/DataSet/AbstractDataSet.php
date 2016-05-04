@@ -171,6 +171,13 @@ abstract class AbstractDataSet implements DataSetInterface
         return $this->manager->createTransformer($type, $options);
     }
 
+    protected function getQueryBuilder(DataSetRequestInterface $request) : QueryBuilder
+    {
+        $dataSetQueryBuilder = $this->manager->createQueryBuilder($this->repository);
+
+        return $dataSetQueryBuilder->getQueryBuilder($this->columns, $request);
+    }
+
     private function getContextOptions(array $contextOptions = []) : array
     {
         $contextOptions = array_merge($this->defaultContextOptions, $contextOptions);
@@ -183,13 +190,6 @@ abstract class AbstractDataSet implements DataSetInterface
         $requestOptions = array_merge($this->defaultRequestOptions, $requestOptions);
 
         return $requestOptions;
-    }
-
-    private function getQueryBuilder(DataSetRequestInterface $request) : QueryBuilder
-    {
-        $dataSetQueryBuilder = $this->manager->createQueryBuilder($this->repository);
-
-        return $dataSetQueryBuilder->getQueryBuilder($this->columns, $request);
     }
 
     private function dispatchDataSetRequestEvent(DataSetRequestInterface $request)

@@ -34,6 +34,7 @@ class OrderProductFactory extends AbstractEntityFactory
         $orderProduct->setSellPrice($this->createPrice());
         $orderProduct->setCreatedAt(new \DateTime());
         $orderProduct->setUpdatedAt(new \DateTime());
+        $orderProduct->setOptions([]);
         
         return $orderProduct;
     }

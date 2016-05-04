@@ -23,6 +23,8 @@ WellCommerce\Bundle\OrderBundle\Entity\OrderProduct:
             scale: 4
             nullable: false
             precision: 15
+        options:
+            type: json_array
     manyToOne:
         order:
             targetEntity: WellCommerce\Bundle\OrderBundle\Entity\Order

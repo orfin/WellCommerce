@@ -15,7 +15,7 @@
 
         <service id="product.dataset.admin" class="WellCommerce\Bundle\ProductBundle\DataSet\Admin\ProductDataSet">
             <argument type="service" id="product.repository"/>
-            <tag name="dataset" alias="product.admin"/>
+            <tag name="dataset"/>
         </service>
 
         <service id="product.datagrid" class="WellCommerce\Bundle\ProductBundle\DataGrid\ProductDataGrid">
