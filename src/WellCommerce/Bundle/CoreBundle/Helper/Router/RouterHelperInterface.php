@@ -15,6 +15,7 @@ namespace WellCommerce\Bundle\CoreBundle\Helper\Router;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RequestContext;
+use Symfony\Component\Routing\Route;
 use WellCommerce\Bundle\CoreBundle\Controller\ControllerInterface;
 
 /**
@@ -47,7 +48,7 @@ interface RouterHelperInterface
     public function getRouterRequestContext() : RequestContext;
 
     /**
-     * Redirects user to another resource
+     * Redirects the user to another resource
      *
      * @param string $route
      * @param array  $routeParams
@@ -67,7 +68,7 @@ interface RouterHelperInterface
     public function redirectToAction(string $action, array $params = []) : RedirectResponse;
 
     /**
-     * Resolves route for given action
+     * Resolves the route for given action
      *
      * @param string $action
      *
@@ -76,7 +77,7 @@ interface RouterHelperInterface
     public function getActionForCurrentController(string $action) : string;
 
     /**
-     * Creates absolute url pointing to particular controller action
+     * Generates an absolute url pointing to particular controller action
      *
      * @param string $action
      * @param array  $params
@@ -86,18 +87,27 @@ interface RouterHelperInterface
     public function getRedirectToActionUrl(string $action, array $params = []) : string;
 
     /**
-     * Generates an url
+     * Generates an URL
      *
-     * @param       $routeName
-     * @param array $params
-     * @param int   $referenceType
+     * @param string $routeName
+     * @param array  $params
+     * @param int    $referenceType
      *
-     * @return mixed
+     * @return string
      */
     public function generateUrl(string $routeName, array $params = [], int $referenceType = UrlGeneratorInterface::ABSOLUTE_URL) : string;
 
     /**
-     * @return \Symfony\Component\Routing\Route
+     * Returns current Route object
+     *
+     * @return Route
      */
-    public function getCurrentRoute();
+    public function getCurrentRoute() : Route;
+
+    /**
+     * Returns current route name
+     *
+     * @return string
+     */
+    public function getCurrentRouteName() : string;
 }

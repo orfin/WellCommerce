@@ -13,10 +13,10 @@
 namespace WellCommerce\Bundle\AdminBundle\Service;
 
 use WellCommerce\Bundle\AdminBundle\Entity\UserInterface;
-use WellCommerce\Bundle\AdminBundle\Exception\ResetPasswordException;
 use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 use WellCommerce\Bundle\CoreBundle\Helper\Mailer\MailerHelperInterface;
 use WellCommerce\Bundle\DoctrineBundle\Manager\ManagerInterface;
+use WellCommerce\Bundle\ShopBundle\Storage\ShopStorageInterface;
 
 /**
  * Class ResetPasswordService
@@ -36,31 +36,26 @@ final class ResetPasswordService implements ResetPasswordServiceInterface
     private $mailerHelper;
     
     /**
+     * @var ShopStorageInterface
+     */
+    private $shopStorage;
+    
+    /**
      * ResetPasswordService constructor.
      *
      * @param ManagerInterface      $manager
      * @param MailerHelperInterface $mailerHelper
+     * @param ShopStorageInterface  $shopStorage
      */
-    public function __construct(ManagerInterface $manager, MailerHelperInterface $mailerHelper)
+    public function __construct(ManagerInterface $manager, MailerHelperInterface $mailerHelper, ShopStorageInterface $shopStorage)
     {
         $this->manager      = $manager;
         $this->mailerHelper = $mailerHelper;
+        $this->shopStorage  = $shopStorage;
     }
     
-    public function resetPassword(string $username)
+    public function resetPasswordForUser(UserInterface $user)
     {
-        $user = $this->manager->getRepository()->findOneBy([
-            'username' => $username
-        ]);
-        
-        if (!$user instanceof UserInterface) {
-            throw new ResetPasswordException('user.flash.error.wrong_username');
-        }
-        
-        if (false === $user->getEnabled()) {
-            throw new ResetPasswordException('user.flash.error.blocked_account');
-        }
-        
         $password = Helper::generateRandomPassword();
         $user->setPassword($password);
         $this->manager->updateResource($user);
@@ -73,7 +68,7 @@ final class ResetPasswordService implements ResetPasswordServiceInterface
                 'user'     => $user,
                 'password' => $password
             ],
-            'configuration' => $this->get('shop.context.admin')->getCurrentShop()->getMailerConfiguration(),
+            'configuration' => $this->shopStorage->getCurrentShop()->getMailerConfiguration(),
         ]);
     }
 }

@@ -1,0 +1,52 @@
+admin.product.index:
+    path: /admin/catalog/product/index
+    defaults:
+        _controller: 'product.controller.admin:indexAction'
+    options:
+        require_admin_permission: product.index
+admin.product.grid:
+    path: /admin/catalog/product/grid
+    defaults:
+        _controller: 'product.controller.admin:gridAction'
+    options:
+        expose: true
+        require_admin_permission: product.index
+admin.product.add:
+    path: /admin/catalog/product/add
+    defaults:
+        _controller: 'product.controller.admin:addAction'
+    options:
+        require_admin_permission: product.add
+admin.product.edit:
+    path: '/admin/catalog/product/edit/{id}'
+    defaults:
+        _controller: 'product.controller.admin:editAction'
+    options:
+        expose: true
+        require_admin_permission: product.edit
+admin.product.duplicate:
+    path: '/admin/catalog/product/duplicate/{id}'
+    defaults:
+        _controller: 'product.controller.admin:duplicateAction'
+    options:
+        expose: true
+        require_admin_permission: product.duplicate
+admin.product.update:
+    path: /admin/catalog/product/update
+    defaults:
+        _controller: 'product.controller.admin:updateAction'
+    options:
+        expose: true
+        require_admin_permission: product.edit
+admin.product.delete:
+    path: '/admin/catalog/product/delete/{id}'
+    defaults:
+        _controller: 'product.controller.admin:deleteAction'
+    options:
+        expose: true
+        require_admin_permission: product.delete
+front.product.view:
+    path: '/product/view/{id}'
+    defaults:
+        _controller: 'product.controller.front:viewAction'
+    options: {  }

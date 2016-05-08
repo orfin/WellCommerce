@@ -23,61 +23,56 @@ use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
  */
 class ClientForgotPasswordBoxController extends AbstractBoxController
 {
-    /**
-     * @var \WellCommerce\Bundle\ClientBundle\Manager\Front\ClientForgotPasswordManager
-     */
-    protected $manager;
-
     public function resetAction()
     {
-        $form = $this->manager->getForm(null);
-
+        $form = $this->getForm(null);
+        
         if ($form->handleRequest()->isSubmitted()) {
             $data = $form->getValue();
-
+            
             try {
                 $this->manager->resetPassword($data['_username']);
-                $this->manager->getFlashHelper()->addSuccess('client.flash.reset_password.success');
+                $this->getFlashHelper()->addSuccess('client.flash.reset_password.success');
             } catch (ResetPasswordException $e) {
-                $this->manager->getFlashHelper()->addError($e->getMessage());
+                $this->getFlashHelper()->addError($e->getMessage());
             }
-
+            
             return $this->getRouterHelper()->redirectTo('front.client_password.reset');
         }
-
+        
         return $this->displayTemplate('reset', [
             'form' => $form,
         ]);
     }
-
+    
     public function changeAction()
     {
         $hash   = $this->getRequestHelper()->getAttributesBagParam('hash');
-        $client = $this->manager->getRepository()->findOneBy(['clientDetails.resetPasswordHash' => $hash]);
-
+        $client = $this->getManager()->getRepository()->findOneBy(['clientDetails.resetPasswordHash' => $hash]);
+        
         if (!$client instanceof ClientInterface) {
             return $this->getRouterHelper()->redirectToAction('reset');
         }
-
+        
         $client->getClientDetails()->resetPassword();
         $form = $this->createChangePasswordForm($client);
-
+        
         if ($form->handleRequest()->isSubmitted()) {
             if ($form->isValid()) {
-                $this->manager->updateResource($client);
-                $this->manager->getFlashHelper()->addSuccess('client.flash.change_password.success');
-
+                $this->getManager()->updateResource($client);
+                $this->getFlashHelper()->addSuccess('client.flash.change_password.success');
+                
                 return $this->getRouterHelper()->redirectTo('front.client.login');
             }
-
-            $this->manager->getFlashHelper()->addError('client.flash.change_password.error');
+            
+            $this->getFlashHelper()->addError('client.flash.change_password.error');
         }
-
+        
         return $this->displayTemplate('change', [
             'form' => $form,
         ]);
     }
-
+    
     /**
      * Creates a change password form for client
      *

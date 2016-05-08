@@ -32,7 +32,7 @@ class ProducerMenuBoxController extends AbstractBoxController
 
         return $this->displayTemplate('index', [
             'producers'      => $producers,
-            'activeProducer' => $this->manager->getProducerContext()->getCurrentProducerIdentifier()
+            'activeProducer' => $this->getProducerStorage()->getCurrentProducerIdentifier()
         ]);
     }
 }

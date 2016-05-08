@@ -1,0 +1,23 @@
+
+services:
+    availability.controller.admin:
+        class: WellCommerce\Bundle\AvailabilityBundle\Controller\Admin\AvailabilityController
+        arguments: ['@availability.manager', '@availability.form_builder.admin', '@availability.datagrid']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    availability.dataset.admin:
+        class: WellCommerce\Bundle\AvailabilityBundle\DataSet\Admin\AvailabilityDataSet
+        tags:
+            - { name: dataset, alias: availability }
+        arguments: ['@availability.repository']
+
+    availability.datagrid:
+        class: WellCommerce\Bundle\AvailabilityBundle\DataGrid\AvailabilityDataGrid
+        tags:
+            - { name: datagrid, alias: availability }
+        arguments: ['@availability.dataset.admin']
+
+    availability.form_builder.admin:
+        class: WellCommerce\Bundle\AvailabilityBundle\Form\Admin\AvailabilityFormBuilder
+        parent: core.form_builder

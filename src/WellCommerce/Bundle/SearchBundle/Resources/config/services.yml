@@ -1,0 +1,45 @@
+
+services:
+    search.layout_box.configurator:
+        class: WellCommerce\Bundle\LayoutBundle\Configurator\SearchBoxConfigurator
+        tags:
+            - { name: layout_box.configurator }
+        arguments: [Search, search.layout_box.controller, '@translator.helper']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    search.dataset.query_builder.front:
+        class: WellCommerce\Bundle\SearchBundle\DataSet\Front\SearchDataSetQueryBuilder
+        arguments: ['@product.repository']
+        calls:
+            - [setSearchProvider, ['@search.provider']]
+            - [setRequestHelper, ['@request.helper']]
+
+    search.dataset.front:
+        class: WellCommerce\Bundle\SearchBundle\DataSet\Front\SearchDataSet
+        tags:
+            - { name: dataset, alias: search.front }
+        arguments: ['@search.dataset.query_builder.front']
+    search.controller.front:
+        class: WellCommerce\Bundle\SearchBundle\Controller\Front\SearchController
+        calls:
+            - [setContainer, ['@service_container']]
+
+    search.layout_box.controller:
+        class: WellCommerce\Bundle\SearchBundle\Controller\Box\SearchBoxController
+        calls:
+            - [setContainer, ['@service_container']]
+
+    search_index.manager.lucene:
+        class: WellCommerce\Bundle\SearchBundle\Manager\LuceneSearchIndexManager
+        arguments: ['@kernel']
+    search.indexer.lucene:
+        class: WellCommerce\Bundle\SearchBundle\Indexer\LuceneProductIndexer
+        arguments: ['@search_index.manager.lucene', '@product.repository']
+    search.provider.lucene:
+        class: WellCommerce\Bundle\SearchBundle\Provider\LuceneSearchProvider
+        arguments: ['@search_index.manager.lucene']
+    search.command.reindex.products:
+        class: WellCommerce\Bundle\SearchBundle\Command\ReindexProductsCommand
+        tags:
+            - { name: console.command }

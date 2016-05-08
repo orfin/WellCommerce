@@ -7,4 +7,9 @@
         <import resource="admin/page.xml"/>
         <import resource="front/page.xml"/>
     </imports>
+
+    <services>
+
+        <service id="page.storage" class="WellCommerce\Bundle\PageBundle\Storage\Front\PageStorage"/>
+    </services>
 </container>

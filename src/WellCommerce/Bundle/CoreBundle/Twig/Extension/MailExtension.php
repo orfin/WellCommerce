@@ -15,16 +15,16 @@ namespace WellCommerce\Bundle\CoreBundle\Twig\Extension;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
- * Class MailerCidExtension
+ * Class MailExtension
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class MailExtension extends \Twig_Extension
+final class MailExtension extends \Twig_Extension
 {
     /**
      * @var KernelInterface
      */
-    protected $kernel;
+    private $kernel;
 
     /**
      * MailExtension constructor.
@@ -39,25 +39,16 @@ class MailExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('cid', [$this, 'getCid'], ['is_safe' => ['html']]),
+            new \Twig_SimpleFunction('cid', [$this, 'getCidPath'], ['is_safe' => ['html']]),
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return 'cid';
     }
 
-    /**
-     * @param $path
-     * @param $filter
-     *
-     * @return mixed
-     */
-    public function getCid(\Swift_Message $message, $imagePath)
+    public function getCidPath(\Swift_Message $message, string $imagePath) : string
     {
         $path = $this->kernel->getRootDir() . '/../' . $imagePath;
 

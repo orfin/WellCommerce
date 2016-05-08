@@ -54,7 +54,7 @@
                 </td>
                 <td class="text-center">
                     {% if confirmation == false %}
-                    <a href="{{ path('front.cart.delete',{"id": item.id}) }}" class="btn btn-link light btn-remove"><img src="{{ asset('themes/wellcommerce-default-theme/assets/img/ico-remove.png') }}"/></a>
+                    <a href="{{ path('front.order_cart.delete',{"id": item.id}) }}" class="btn btn-link light btn-remove"><img src="{{ asset('themes/wellcommerce-default-theme/assets/img/ico-remove.png') }}"/></a>
                     {% endif %}
                 </td>
             </tr>

@@ -1,0 +1,35 @@
+admin.category.index:
+    path: /admin/catalog/category/index
+    defaults:
+        _controller: 'category.controller.admin:indexAction'
+    options:
+        expose: true
+        require_admin_permission: category.index
+admin.category.grid:
+    path: /admin/catalog/category/grid
+    defaults:
+        _controller: 'category.controller.admin:gridAction'
+    options:
+        expose: true
+        require_admin_permission: category.index
+admin.category.add:
+    path: /admin/catalog/category/add
+    defaults:
+        _controller: 'category.controller.admin:addAction'
+    options:
+        expose: true
+        require_admin_permission: category.add
+admin.category.edit:
+    path: '/admin/catalog/category/edit/{id}'
+    defaults:
+        _controller: 'category.controller.admin:editAction'
+    options:
+        expose: true
+        require_admin_permission: category.edit
+admin.category.delete:
+    path: '/admin/catalog/category/delete/{id}'
+    defaults:
+        _controller: 'category.controller.admin:deleteAction'
+    options:
+        expose: true
+        require_admin_permission: category.delete

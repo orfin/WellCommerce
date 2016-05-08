@@ -19,11 +19,11 @@ use WellCommerce\Bundle\RoutingBundle\Generator\AbstractRouteGenerator;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProducerRouteGenerator extends AbstractRouteGenerator
+final class ProducerRouteGenerator extends AbstractRouteGenerator
 {
     const GENERATOR_STRATEGY = 'producer';
 
-    public function supports($strategy)
+    public function supports(string $strategy) : bool
     {
         return self::GENERATOR_STRATEGY === $strategy;
     }

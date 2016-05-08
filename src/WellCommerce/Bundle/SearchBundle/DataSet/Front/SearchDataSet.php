@@ -14,7 +14,9 @@ namespace WellCommerce\Bundle\SearchBundle\DataSet\Front;
 
 use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
+use WellCommerce\Bundle\CoreBundle\Helper\Request\RequestHelperInterface;
 use WellCommerce\Bundle\SearchBundle\Provider\SearchProviderInterface;
+use WellCommerce\Bundle\SearchBundle\Query\SimpleQuery;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
 use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
 
@@ -29,12 +31,12 @@ final class SearchDataSet extends AbstractDataSet
      * @var SearchProviderInterface
      */
     private $provider;
-    
+
     public function setSearchProvider(SearchProviderInterface $provider)
     {
         $this->provider = $provider;
     }
-    
+
     public function configureOptions(DataSetConfiguratorInterface $configurator)
     {
         $configurator->setColumns([
@@ -69,7 +71,7 @@ final class SearchDataSet extends AbstractDataSet
     {
         $queryBuilder = parent::getQueryBuilder($request);
         $queryBuilder->setParameter('scores', $this->provider->getResultIdentifiers());
-
+        
         return $queryBuilder;
     }
 }

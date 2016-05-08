@@ -1,0 +1,51 @@
+admin.package.index:
+    path: /admin/distribution/package/index
+    defaults:
+        _controller: 'package.controller.admin:indexAction'
+    options:
+        require_admin_permission: package.index
+admin.package.grid:
+    path: /admin/distribution/package/grid
+    defaults:
+        _controller: 'package.controller.admin:gridAction'
+    options:
+        expose: true
+        require_admin_permission: package.index
+admin.package.require:
+    path: '/admin/distribution/package/{operation},{id}'
+    defaults:
+        _controller: 'package.controller.admin:packageAction'
+        operation: require
+    options:
+        expose: true
+        require_admin_permission: package.add
+admin.package.update:
+    path: '/admin/distribution/package/{operation},{id}'
+    defaults:
+        _controller: 'package.controller.admin:packageAction'
+        operation: update
+    options:
+        expose: true
+        require_admin_permission: package.edit
+admin.package.remove:
+    path: '/admin/distribution/package/{operation},{id}'
+    defaults:
+        _controller: 'package.controller.admin:packageAction'
+        operation: remove
+    options:
+        expose: true
+        require_admin_permission: package.delete
+admin.package.sync:
+    path: /admin/distribution/package/sync
+    defaults:
+        _controller: 'package.controller.admin:syncAction'
+    options:
+        expose: true
+        require_admin_permission: package.index
+admin.package.console:
+    path: '/admin/distribution/package/console/{id},{port},{operation}'
+    defaults:
+        _controller: 'package.controller.admin:consoleAction'
+    options:
+        expose: true
+        require_admin_permission: package.index

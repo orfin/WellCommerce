@@ -1,0 +1,6 @@
+front.layered_navigation.filter:
+    path: /filter
+    defaults:
+        _controller: 'layered_navigation.controller.front:filterAction'
+    options:
+        expose: true

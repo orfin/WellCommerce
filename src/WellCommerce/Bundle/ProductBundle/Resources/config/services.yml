@@ -1,0 +1,95 @@
+
+services:
+    product.controller.admin:
+        class: WellCommerce\Bundle\ProductBundle\Controller\Admin\ProductController
+        arguments: ['@product.manager', '@product.form_builder.admin', '@product.datagrid']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    product.dataset.admin:
+        class: WellCommerce\Bundle\ProductBundle\DataSet\Admin\ProductDataSet
+        tags:
+            - { name: dataset }
+        arguments: ['@product.repository']
+
+    product.datagrid:
+        class: WellCommerce\Bundle\ProductBundle\DataGrid\ProductDataGrid
+        tags:
+            - { name: datagrid, alias: product }
+        arguments: ['@product.dataset.admin']
+
+    product.form_builder.admin:
+        class: WellCommerce\Bundle\ProductBundle\Form\Admin\ProductFormBuilder
+        parent: core.form_builder
+
+    product_info.layout_box.configurator:
+        class: WellCommerce\Bundle\LayoutBundle\Configurator\ProductInfoBoxConfigurator
+        tags:
+            - { name: layout_box.configurator }
+        arguments: [ProductInfo, product_info.layout_box.controller, '@translator.helper']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    product.controller.front:
+        class: WellCommerce\Bundle\ProductBundle\Controller\Front\ProductController
+        arguments: ['@product.manager']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    product.dataset.front:
+        class: WellCommerce\Bundle\ProductBundle\DataSet\Front\ProductDataSet
+        tags:
+            - { name: dataset }
+        arguments: ['@product.repository']
+        calls:
+            - [setRequestHelper, ['@request.helper']]
+
+    product.storage:
+        class: WellCommerce\Bundle\ProductBundle\Storage\ProductStorage
+
+    product_info.layout_box.controller:
+        class: WellCommerce\Bundle\ProductBundle\Controller\Box\ProductInfoBoxController
+        arguments: ['@product.manager']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    product.doctrine.event_subscriber:
+        class: WellCommerce\Bundle\ProductBundle\EventListener\ProductDoctrineEventSubscriber
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
+
+    product.helper:
+        class: WellCommerce\Bundle\ProductBundle\Helper\ProductHelper
+        arguments: ['@product.dataset.front', '@shipping_method.provider', '@variant.helper']
+
+    product.request_param_converter:
+        class: WellCommerce\Bundle\ProductBundle\Request\ParamConverter\ProductParamConverter
+        tags:
+            - { name: request.param_converter, converter: product, priority: 0 }
+        arguments: ['@product.repository', id, [WellCommerce\Bundle\ProductBundle\Entity\Product, WellCommerce\Bundle\ProductBundle\Entity\ProductInterface]]
+
+    form.product_photo_collection.data_transformer:
+        class: WellCommerce\Bundle\ProductBundle\Form\DataTransformer\ProductPhotoCollectionToArrayTransformer
+        tags:
+            - { name: form.data_transformer, alias: product_photo_collection }
+        arguments: ['@doctrine.helper']
+        shared: false
+
+    variant.helper:
+        class: WellCommerce\Bundle\ProductBundle\Helper\VariantHelper
+        arguments: ['@currency.helper']
+
+    variant.request_param_converter:
+        class: WellCommerce\Bundle\ProductBundle\Request\ParamConverter\VariantParamConverter
+        tags:
+            - { name: request.param_converter, converter: variant, priority: 10 }
+        arguments: ['@variant.repository', variant, [WellCommerce\Bundle\ProductBundle\Entity\Variant, WellCommerce\Bundle\ProductBundle\Entity\VariantInterface]]
+
+    form.variant_collection.data_transformer:
+        class: WellCommerce\Bundle\ProductBundle\Form\DataTransformer\VariantCollectionToArrayTransformer
+        tags:
+            - { name: form.data_transformer, alias: variant_collection }
+        arguments: ['@doctrine.helper']
+        calls:
+            - [setVariantManager, ['@variant.manager']]
+        shared: false

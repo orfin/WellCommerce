@@ -1,0 +1,73 @@
+services:
+    dataset.manager:
+        class: WellCommerce\Component\DataSet\Manager\DataSetManager
+        arguments: ['@dataset.context.factory', '@dataset.request.factory', '@dataset.transformer.factory', '@dataset.query_builder.factory']
+
+    dataset.query_builder.factory:
+        class: WellCommerce\Component\DataSet\QueryBuilder\DataSetQueryBuilderFactory
+
+    dataset.configurator:
+        class: WellCommerce\Component\DataSet\Configurator\DataSetConfigurator
+
+    dataset.paginator:
+        class: WellCommerce\Component\DataSet\Paginator\DataSetPaginator
+
+    dataset.pagination:
+        class: WellCommerce\Component\DataSet\Pagination\DataSetPagination
+        arguments: ['@dataset.paginator']
+
+    dataset.context.collection:
+        class: WellCommerce\Component\DataSet\Context\DataSetContextCollection
+
+    dataset.transformer.collection:
+        class: WellCommerce\Component\DataSet\Transformer\DataSetTransformerCollection
+
+    dataset.context.factory:
+        class: WellCommerce\Component\DataSet\Context\DataSetContextFactory
+        arguments: ['@dataset.context.collection']
+
+    dataset.cache.manager:
+        class: WellCommerce\Component\DataSet\Cache\DataSetCacheManager
+        arguments: ['@cache.provider.filesystem', '@doctrine.helper']
+
+    dataset.transformer.factory:
+        class: WellCommerce\Component\DataSet\Transformer\DataSetTransformerFactory
+        arguments: ['@dataset.transformer.collection']
+
+    dataset.request.factory:
+        class: WellCommerce\Component\DataSet\Request\DataSetRequestFactory
+
+    dataset.context.array:
+        class: WellCommerce\Component\DataSet\Context\ArrayContext
+        tags:
+            - { name: dataset.context, alias: array }
+        arguments: ['@dataset.pagination', '@dataset.cache.manager']
+
+    dataset.context.datagrid:
+        class: WellCommerce\Component\DataSet\Context\DataGridContext
+        tags:
+            - { name: dataset.context, alias: datagrid }
+        arguments: ['@dataset.paginator', '@dataset.cache.manager']
+
+    dataset.context.select:
+        class: WellCommerce\Component\DataSet\Context\SelectContext
+        tags:
+            - { name: dataset.context, alias: select }
+        arguments: ['@dataset.pagination', '@dataset.cache.manager']
+
+    dataset.context.tree:
+        class: WellCommerce\Component\DataSet\Context\TreeContext
+        tags:
+            - { name: dataset.context, alias: tree }
+        arguments: ['@dataset.pagination', '@dataset.cache.manager']
+
+    dataset.context.flat_tree:
+        class: WellCommerce\Component\DataSet\Context\FlatTreeContext
+        tags:
+            - { name: dataset.context, alias: flat_tree }
+        arguments: ['@dataset.pagination', '@dataset.cache.manager']
+
+    dataset.transformer.date:
+        class: WellCommerce\Component\DataSet\Transformer\DateTransformer
+        tags:
+            - { name: dataset.transformer, alias: date }

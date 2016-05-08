@@ -19,7 +19,7 @@
             <tag name="dataset"/>
         </service>
 
-        <service id="product.context.front" class="WellCommerce\Bundle\ProductBundle\Context\Front\ProductContext"/>
+        <service id="product.storage" class="WellCommerce\Bundle\ProductBundle\Storage\ProductStorage"/>
 
         <service id="product_info.layout_box.controller" class="WellCommerce\Bundle\ProductBundle\Controller\Box\ProductInfoBoxController">
             <argument type="service" id="product.manager"/>

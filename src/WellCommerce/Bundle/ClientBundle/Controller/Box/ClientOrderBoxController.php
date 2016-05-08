@@ -25,7 +25,7 @@ class ClientOrderBoxController extends AbstractBoxController
 {
     public function indexAction(LayoutBoxSettingsCollection $boxSettings) : Response
     {
-        $orders = $this->manager->getClient()->getOrders();
+        $orders = $this->getAuthenticatedClient()->getOrders();
 
         return $this->displayTemplate('index', [
             'orders' => $orders
@@ -35,8 +35,11 @@ class ClientOrderBoxController extends AbstractBoxController
     public function viewAction() : Response
     {
         $id     = (int)$this->getRequestHelper()->getAttributesBagParam('id');
-        $client = $this->manager->getClient();
-        $order  = $this->get('order.repository')->findOneBy(['id' => $id, 'client' => $client]);
+        $client = $this->getAuthenticatedClient();
+        $order  = $this->get('order.repository')->findOneBy([
+            'id'     => $id,
+            'client' => $client
+        ]);
 
         if (null === $order) {
             return $this->redirectToAction('index');

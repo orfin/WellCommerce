@@ -1,0 +1,27 @@
+admin.review.index:
+    path: /admin/catalog/product/review/index
+    defaults:
+        _controller: 'review.controller.admin:indexAction'
+    options:
+        require_admin_permission: review.index
+admin.review.grid:
+    path: /admin/catalog/product/review/grid
+    defaults:
+        _controller: 'review.controller.admin:gridAction'
+    options:
+        expose: true
+        require_admin_permission: review.index
+admin.review.edit:
+    path: '/admin/catalog/product/review/edit/{id}'
+    defaults:
+        _controller: 'review.controller.admin:editAction'
+    options:
+        expose: true
+        require_admin_permission: review.edit
+admin.review.delete:
+    path: '/admin/catalog/product/review/delete/{id}'
+    defaults:
+        _controller: 'review.controller.admin:deleteAction'
+    options:
+        expose: true
+        require_admin_permission: review.delete

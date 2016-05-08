@@ -14,14 +14,12 @@ namespace WellCommerce\Bundle\OrderBundle\Controller\Front;
 
 use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
-use WellCommerce\Bundle\CoreBundle\Service\Breadcrumb\BreadcrumbItem;
-use WellCommerce\Bundle\OrderBundle\Entity\CartInterface;
-use WellCommerce\Bundle\OrderBundle\Entity\CartProductInterface;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderProductInterface;
 use WellCommerce\Bundle\OrderBundle\Exception\AddCartItemException;
-use WellCommerce\Bundle\OrderBundle\Exception\DeleteCartItemException;
+use WellCommerce\Bundle\OrderBundle\Manager\OrderProductManager;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\VariantInterface;
-use WellCommerce\Component\Form\Elements\FormInterface;
+use WellCommerce\Component\Breadcrumb\Model\Breadcrumb;
 
 /**
  * Class OrderCartController
@@ -30,25 +28,20 @@ use WellCommerce\Component\Form\Elements\FormInterface;
  */
 final class OrderCartController extends AbstractFrontController
 {
-    /**
-     * @var \WellCommerce\Bundle\OrderBundle\Manager\OrderProductManager
-     */
-    protected $manager;
-    
     public function indexAction() : Response
     {
-        $this->addBreadCrumbItem(new BreadcrumbItem([
-            'name' => $this->trans('cart.heading.index')
+        $this->getBreadcrumbProvider()->add(new Breadcrumb([
+            'label' => $this->trans('cart.heading.index')
         ]));
-
-        $order    = $this->getOrderStorage()->getCurrentOrder();
-        $form = $this->manager->getForm($cart, [
+        
+        $order = $this->getOrderStorage()->getCurrentOrder();
+        $form  = $this->getForm($order, [
             'validation_groups' => ['order_cart']
         ]);
         
         if ($form->handleRequest()->isSubmitted()) {
             if ($form->isValid()) {
-                $this->manager->updateResource($cart);
+                $this->getManager()->updateResource($order);
                 
                 return $this->getRouterHelper()->redirectTo('front.cart.index');
             }
@@ -74,13 +67,18 @@ final class OrderCartController extends AbstractFrontController
         }
         
         try {
-            $this->manager->addProductToOrder($product, $variant, $quantity, $order);
+            $this->getManager()->addProductToOrder(
+                $product,
+                $variant,
+                $quantity,
+                $order
+            );
         } catch (AddCartItemException $exception) {
             return $this->jsonResponse([
                 'error' => $exception->getMessage(),
             ]);
         }
-
+        
         $category        = $product->getCategories()->first();
         $recommendations = $this->get('product.helper')->getProductRecommendationsForCategory($category);
         
@@ -98,13 +96,18 @@ final class OrderCartController extends AbstractFrontController
         ]);
     }
     
-    public function editAction(CartProductInterface $cartProduct, int $quantity) : Response
+    public function editAction(OrderProductInterface $orderProduct, int $quantity) : Response
     {
+        $success = true;
         $message = null;
+        $order   = $this->getOrderStorage()->getCurrentOrder();
         
         try {
-            $this->manager->changeCartProductQuantity($cartProduct, $quantity);
-            $success = true;
+            $this->getManager()->changeOrderProductQuantity(
+                $orderProduct,
+                $order,
+                $quantity
+            );
         } catch (\Exception $e) {
             $success = false;
             $message = $e->getMessage();
@@ -116,21 +119,22 @@ final class OrderCartController extends AbstractFrontController
         ]);
     }
     
-    public function deleteAction(CartProductInterface $cartProduct) : Response
+    public function deleteAction(OrderProductInterface $orderProduct) : Response
     {
         try {
-            $this->manager->deleteCartProduct($cartProduct);
-        } catch (DeleteCartItemException $exception) {
-            $this->getFlashHelper()->addError($exception->getMessage());
+            $this->getManager()->deleteOrderProduct(
+                $orderProduct,
+                $this->getOrderStorage()->getCurrentOrder()
+            );
+        } catch (\Exception $e) {
+            $this->getFlashHelper()->addError($e->getMessage());
         }
         
         return $this->redirectToAction('index');
     }
     
-    private function createCartAddressForm(CartInterface $cart) : FormInterface
+    protected function getManager() : OrderProductManager
     {
-        return $this->get('cart_address.form_builder')->createForm([
-            'name' => 'cart_address',
-        ], $cart);
+        return parent::getManager();
     }
 }

@@ -12,20 +12,20 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Exception;
 
+use WellCommerce\Bundle\OrderBundle\Entity\OrderProductInterface;
+
 /**
- * Class DeleteCartItemException
+ * Class DeleteOrderProductException
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class DeleteCartItemException extends \RuntimeException
+class DeleteOrderProductException extends \RuntimeException
 {
-    /**
-     * Constructor
-     *
-     * @param string $id Cart item id
-     */
-    public function __construct($id)
+    const ERROR_MESSAGE = 'Cannot delete item "%s". It does not belongs to order.';
+
+    public function __construct(OrderProductInterface $orderProduct)
     {
-        parent::__construct(sprintf('Cannot delete item "%s" from cart', $id));
+        $message = sprintf(self::ERROR_MESSAGE, $orderProduct->getId());
+        parent::__construct($message);
     }
 }

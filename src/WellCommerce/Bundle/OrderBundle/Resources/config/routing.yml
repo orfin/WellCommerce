@@ -1,0 +1,141 @@
+admin.order.index:
+    path: /admin/order/index
+    defaults:
+        _controller: 'order.controller.admin:indexAction'
+    options:
+        require_admin_permission: order.index
+admin.order.grid:
+    path: /admin/order/grid
+    defaults:
+        _controller: 'order.controller.admin:gridAction'
+    options:
+        expose: true
+        require_admin_permission: order.index
+admin.order.products.grid:
+    path: /admin/order/products/grid
+    defaults:
+        _controller: 'order.controller.admin:viewProductsGridAction'
+    options:
+        expose: true
+        require_admin_permission: order.edit
+admin.order.add:
+    path: /admin/order/add
+    defaults:
+        _controller: 'order.controller.admin:addAction'
+    options:
+        require_admin_permission: order.add
+admin.order.edit:
+    path: '/admin/order/edit/{id}'
+    defaults:
+        _controller: 'order.controller.admin:editAction'
+    options:
+        expose: true
+        require_admin_permission: order.edit
+admin.order.delete:
+    path: '/admin/order/delete/{id}'
+    defaults:
+        _controller: 'order.controller.admin:deleteAction'
+    options:
+        expose: true
+        require_admin_permission: order.delete
+front.order_cart.index:
+    path: /order/cart
+    defaults:
+        _controller: 'order_cart.controller.front:indexAction'
+    options: {  }
+front.order_cart.add:
+    path: '/order/cart/add/{id},{variant},{quantity}'
+    defaults:
+        _controller: 'order_cart.controller.front:addAction'
+        variant: 'null'
+        quantity: '1'
+    options:
+        expose: true
+front.order_cart.edit:
+    path: '/order/cart/edit/{id},{quantity}'
+    defaults:
+        _controller: 'order_cart.controller.front:editAction'
+    options:
+        expose: true
+front.order_cart.delete:
+    path: '/order/cart/delete/{id}'
+    defaults:
+        _controller: 'order_cart.controller.front:deleteAction'
+    options:
+        expose: true
+front.order_address.index:
+    path: /order/address
+    defaults:
+        _controller: 'order_address.controller.front:indexAction'
+    options: {  }
+front.order_confirm.index:
+    path: /order/confirm
+    defaults:
+        _controller: 'order_confirmation.controller.front:indexAction'
+    options: {  }
+admin.order_status.index:
+    path: /admin/order/status/index
+    defaults:
+        _controller: 'order_status.controller.admin:indexAction'
+    options:
+        require_admin_permission: order_status.index
+admin.order_status.grid:
+    path: /admin/order/status/grid
+    defaults:
+        _controller: 'order_status.controller.admin:gridAction'
+    options:
+        expose: true
+        require_admin_permission: order_status.index
+admin.order_status.add:
+    path: /admin/order/status/add
+    defaults:
+        _controller: 'order_status.controller.admin:addAction'
+    options:
+        require_admin_permission: order_status.add
+admin.order_status.edit:
+    path: '/admin/order/status/edit/{id}'
+    defaults:
+        _controller: 'order_status.controller.admin:editAction'
+    options:
+        expose: true
+        require_admin_permission: order_status.edit
+admin.order_status.delete:
+    path: '/admin/order/status/delete/{id}'
+    defaults:
+        _controller: 'order_status.controller.admin:deleteAction'
+    options:
+        expose: true
+        require_admin_permission: order_status.delete
+admin.order_status_group.index:
+    path: /admin/order/status/group/index
+    defaults:
+        _controller: 'order_status_group.controller.admin:indexAction'
+    options:
+        require_admin_permission: order_status_group.index
+admin.order_status_group.grid:
+    path: /admin/order/status/group/grid
+    defaults:
+        _controller: 'order_status_group.controller.admin:gridAction'
+    options:
+        expose: true
+        require_admin_permission: order_status_group.index
+admin.order_status_group.add:
+    path: /admin/order/status/group/add
+    defaults:
+        _controller: 'order_status_group.controller.admin:addAction'
+    options:
+        require_admin_permission: order_status_group.add
+admin.order_status_group.edit:
+    path: '/admin/order/status/group/edit/{id}'
+    defaults:
+        _controller: 'order_status_group.controller.admin:editAction'
+    options:
+        expose: true
+        require_admin_permission: order_status_group.edit
+admin.order_status_group.delete:
+    path: '/admin/order/status/group/delete/{id}'
+    defaults:
+        _controller: 'order_status_group.controller.admin:deleteAction'
+    options:
+        expose: true
+        require_admin_permission: order_status_group.delete

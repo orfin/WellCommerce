@@ -16,8 +16,6 @@
             <tag name="dataset" alias="producer.front"/>
         </service>
 
-        <service id="producer.context.front" class="WellCommerce\Bundle\ProducerBundle\Context\Front\ProducerContext"/>
-
         <service id="producer_menu.layout_box.controller" class="WellCommerce\Bundle\ProducerBundle\Controller\Box\ProducerMenuBoxController">
             <argument type="service" id="producer.manager"/>
             <call method="setContainer">

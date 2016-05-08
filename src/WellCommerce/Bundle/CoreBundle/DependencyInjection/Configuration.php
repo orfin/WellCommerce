@@ -89,7 +89,7 @@ class Configuration implements ConfigurationInterface
                                        ->useAttributeAsKey('name')
                                         ->prototype('scalar')->end()
                                     ->end()
-                                    ->scalarNode('pattern')->defaultNull()->end()
+                                    ->scalarNode('pattern')->defaultValue('')->end()
                                 ->end()
                             ->end()
                         ->end()

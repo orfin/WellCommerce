@@ -2,7 +2,7 @@
 
 <li class="dropdown" id="cart-preview">
 	<span class="push-search btn btn-link hidden-md hidden-lg"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
-    <a href="{{ path('front.order.cart') }}" class="dropdown-toggle cartQty" data-target="#" {% if false == currentOrder().isEmpty %}data-toggle="dropdown"{% endif %} role="button" aria-expanded="true">
+    <a href="{{ path('front.order_cart.index') }}" class="dropdown-toggle cartQty" data-target="#" {% if false == currentOrder().isEmpty %}data-toggle="dropdown"{% endif %} role="button" aria-expanded="true">
         Cart<span class="cart-qty">{{ currentOrder().productTotal.quantity }}</span>
     </a>
     {% if false == currentOrder().isEmpty %}
@@ -13,7 +13,7 @@
                 {% for item in currentOrderProducts().rows %}
                 <tr>
                 	<td>
-                        <a href="{{ path('front.order_product.delete',{"id": item.id }) }}" class="delete" title="Remove item">
+                        <a href="{{ path('front.order_cart.delete',{"id": item.id }) }}" class="delete" title="Remove item">
                             <img src="{{ asset('themes/wellcommerce-default-theme/assets/img/delete-ico.png') }}"/>
                         </a>
                     </td>
@@ -38,7 +38,7 @@
                 {% endfor %}
                 <tr>
                     <td colspan="3">
-                        <a href="{{ path('front.order.cart') }}">
+                        <a href="{{ path('front.order_cart.index') }}">
                             {% trans %}cart.link.checkout{% endtrans %} <img src="{{ asset('themes/wellcommerce-default-theme/assets/img/arrow-right-ico.png') }}"/>
                         </a>
                     </td>

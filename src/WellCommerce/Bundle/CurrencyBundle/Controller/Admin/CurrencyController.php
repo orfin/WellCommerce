@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CurrencyBundle\Controller\Admin;
 
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 
 /**
@@ -21,15 +22,10 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
  */
 class CurrencyController extends AbstractAdminController
 {
-    /**
-     * Synchronizes exchange rates
-     *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function syncExchangeRatesAction()
+    public function syncExchangeRatesAction() : RedirectResponse
     {
         $this->get('currency.importer.ecb')->importExchangeRates();
-        $this->manager->getFlashHelper()->addSuccess('currency.flashes.success.exchange_rates_synchronization');
+        $this->getFlashHelper()->addSuccess('currency.flashes.success.exchange_rates_synchronization');
 
         return $this->redirectToAction('index');
     }

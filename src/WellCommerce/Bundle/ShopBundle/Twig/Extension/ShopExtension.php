@@ -11,7 +11,6 @@
  */
 namespace WellCommerce\Bundle\ShopBundle\Twig\Extension;
 
-use WellCommerce\Bundle\ShopBundle\Context\ShopContextInterface;
 use WellCommerce\Bundle\ShopBundle\Entity\ShopInterface;
 use WellCommerce\Bundle\ShopBundle\Storage\ShopStorageInterface;
 use WellCommerce\Component\DataSet\DataSetInterface;

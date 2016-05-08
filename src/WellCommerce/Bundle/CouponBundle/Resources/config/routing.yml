@@ -1,0 +1,45 @@
+front.coupon.add:
+    path: /coupon/add
+    defaults:
+        _controller: 'coupon.controller.front:addAction'
+    options:
+        expose: true
+front.coupon.delete:
+    path: /coupon/delete
+    defaults:
+        _controller: 'coupon.controller.front:deleteAction'
+    options:
+        expose: true
+admin.coupon.index:
+    path: /admin/promotion/coupon/index
+    defaults:
+        _controller: 'coupon.controller.admin:indexAction'
+    options:
+        require_admin_permission: coupon.index
+admin.coupon.grid:
+    path: /admin/promotion/coupon/grid
+    defaults:
+        _controller: 'coupon.controller.admin:gridAction'
+    options:
+        expose: true
+        require_admin_permission: coupon.index
+admin.coupon.add:
+    path: /admin/promotion/coupon/add
+    defaults:
+        _controller: 'coupon.controller.admin:addAction'
+    options:
+        require_admin_permission: coupon.add
+admin.coupon.edit:
+    path: '/admin/promotion/coupon/edit/{id}'
+    defaults:
+        _controller: 'coupon.controller.admin:editAction'
+    options:
+        expose: true
+        require_admin_permission: coupon.edit
+admin.coupon.delete:
+    path: '/admin/promotion/coupon/delete/{id}'
+    defaults:
+        _controller: 'coupon.controller.admin:deleteAction'
+    options:
+        expose: true
+        require_admin_permission: coupon.delete

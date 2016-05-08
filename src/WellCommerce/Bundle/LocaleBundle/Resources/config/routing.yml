@@ -1,0 +1,38 @@
+admin.locale.index:
+    path: /admin/configuration/intl/locale/index
+    defaults:
+        _controller: 'locale.controller.admin:indexAction'
+    options:
+        require_admin_permission: locale.index
+admin.locale.grid:
+    path: /admin/configuration/intl/locale/grid
+    defaults:
+        _controller: 'locale.controller.admin:gridAction'
+    options:
+        expose: true
+        require_admin_permission: locale.index
+admin.locale.add:
+    path: /admin/configuration/intl/locale/add
+    defaults:
+        _controller: 'locale.controller.admin:addAction'
+    options:
+        require_admin_permission: locale.add
+admin.locale.edit:
+    path: '/admin/configuration/intl/locale/edit/{id}'
+    defaults:
+        _controller: 'locale.controller.admin:editAction'
+    options:
+        expose: true
+        require_admin_permission: locale.edit
+admin.locale.delete:
+    path: '/admin/configuration/intl/locale/delete/{id}'
+    defaults:
+        _controller: 'locale.controller.admin:deleteAction'
+    options:
+        expose: true
+        require_admin_permission: locale.delete
+front.locale.switch:
+    path: '/locale/switch/{_locale}'
+    defaults:
+        _controller: 'locale.controller.front:switchAction'
+    options: {  }

@@ -1,0 +1,18 @@
+parameters:
+    dataset.loader.class: WellCommerce\Component\DataSet\Loader\DataSetLoader
+
+services:
+    datagrid_options:
+        class: WellCommerce\Component\DataGrid\Options\Options
+
+    datagrid_columns:
+        class: WellCommerce\Component\DataGrid\Column\ColumnCollection
+
+    datagrid.column_collection:
+        class: WellCommerce\Component\DataGrid\Column\ColumnCollection
+
+    twig.extension.datagrid:
+        class: WellCommerce\Bundle\CoreBundle\Twig\Extension\DataGridExtension
+        tags:
+            - { name: twig.extension }
+        arguments: ['WellCommerceCoreBundle:DataGrid:datagrid.html.twig']

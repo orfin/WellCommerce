@@ -1,0 +1,46 @@
+
+services:
+    api.security.token_authenticator:
+        class: WellCommerce\Bundle\ApiBundle\Security\ApiTokenAuthenticator
+        arguments: ['@user.repository']
+    api.subscriber:
+        class: WellCommerce\Bundle\ApiBundle\EventListener\ApiSubscriber
+        tags:
+            - { name: kernel.event_subscriber }
+        calls:
+            - [setContainer, ['@service_container']]
+
+    api.request_handler.collection:
+        class: WellCommerce\Bundle\ApiBundle\Request\RequestHandlerCollection
+    api.controller.front:
+        class: WellCommerce\Bundle\ApiBundle\Controller\ApiController
+        arguments: ['@api.request_handler.collection']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    api.serializer.normalizer:
+        class: WellCommerce\Bundle\ApiBundle\Serializer\EntityNormalizer
+        public: false
+        tags:
+            - { name: serializer.normalizer }
+        arguments: ['@doctrine.helper', '@api.serialization.metadata_loader']
+    api.serializer.denormalizer:
+        class: WellCommerce\Bundle\ApiBundle\Serializer\EntityDenormalizer
+        public: false
+        tags:
+            - { name: serializer.normalizer }
+        arguments: ['@doctrine.helper', '@api.serialization.metadata_loader']
+    api.serialization.cache_warmer:
+        class: WellCommerce\Bundle\ApiBundle\CacheWarmer\SerializationCacheWarmer
+        public: false
+        tags:
+            - { name: kernel.cache_warmer }
+        arguments: ['@doctrine.helper']
+    api.generate_serialization_metadata.command:
+        class: WellCommerce\Bundle\ApiBundle\Command\GenerateSerializationMetadataCommand
+        tags:
+            - { name: console.command }
+        arguments: ['@doctrine.helper']
+    api.serialization.metadata_loader:
+        class: WellCommerce\Bundle\ApiBundle\Metadata\Loader\SerializationMetadataLoader
+        arguments: ['@kernel']

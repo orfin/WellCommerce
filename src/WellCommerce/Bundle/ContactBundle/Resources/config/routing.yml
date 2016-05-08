@@ -1,0 +1,38 @@
+admin.contact.index:
+    path: /admin/cms/contact/index
+    defaults:
+        _controller: 'contact.controller.admin:indexAction'
+    options:
+        require_admin_permission: contact.index
+admin.contact.grid:
+    path: /admin/cms/contact/grid
+    defaults:
+        _controller: 'contact.controller.admin:gridAction'
+    options:
+        expose: true
+        require_admin_permission: contact.index
+admin.contact.add:
+    path: /admin/cms/contact/add
+    defaults:
+        _controller: 'contact.controller.admin:addAction'
+    options:
+        require_admin_permission: contact.add
+admin.contact.edit:
+    path: '/admin/cms/contact/edit/{id}'
+    defaults:
+        _controller: 'contact.controller.admin:editAction'
+    options:
+        expose: true
+        require_admin_permission: contact.edit
+admin.contact.delete:
+    path: '/admin/cms/contact/delete/{id}'
+    defaults:
+        _controller: 'contact.controller.admin:deleteAction'
+    options:
+        expose: true
+        require_admin_permission: contact.delete
+front.contact.index:
+    path: /contact/index
+    defaults:
+        _controller: 'contact.controller.front:indexAction'
+    options: {  }

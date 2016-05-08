@@ -19,20 +19,20 @@ use WellCommerce\Component\Form\Renderer\FormRendererInterface;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class FormJavascriptExtension extends \Twig_Extension
+final class FormJavascriptExtension extends \Twig_Extension
 {
     /**
      * @var FormRendererInterface
      */
-    protected $renderer;
+    private $renderer;
 
     /**
      * @var \Twig_Environment
      */
-    protected $environment;
+    private $environment;
 
     /**
-     * Constructor
+     * FormJavascriptExtension constructor.
      *
      * @param FormRendererInterface $renderer
      */
@@ -41,21 +41,11 @@ class FormJavascriptExtension extends \Twig_Extension
         $this->renderer = $renderer;
     }
 
-    /**
-     * Initializes Twig
-     *
-     * @param \Twig_Environment $environment
-     */
     public function initRuntime(\Twig_Environment $environment)
     {
         $this->environment = $environment;
     }
 
-    /**
-     * Returns extension functions
-     *
-     * @return \Twig_SimpleFunction[]
-     */
     public function getFunctions()
     {
         return [
@@ -63,24 +53,12 @@ class FormJavascriptExtension extends \Twig_Extension
         ];
     }
 
-    /**
-     * Returns extension alias
-     *
-     * @return string
-     */
     public function getName()
     {
         return 'form_js';
     }
 
-    /**
-     * Renders the javascript part
-     *
-     * @param FormInterface $form
-     *
-     * @return string
-     */
-    public function render(FormInterface $form)
+    public function render(FormInterface $form) : string
     {
         $templateVars = [
             'form'            => $form,

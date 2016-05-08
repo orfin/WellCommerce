@@ -1,0 +1,82 @@
+
+services:
+    routing.controller.admin:
+        class: WellCommerce\Bundle\RoutingBundle\Controller\Admin\RoutingController
+        arguments: ['@routing.manager', '@routing.form_builder.admin', '@routing.datagrid']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    routing.dataset.admin:
+        class: WellCommerce\Bundle\RoutingBundle\DataSet\Admin\RoutingDataSet
+        tags:
+            - { name: dataset }
+        arguments: ['@routing.repository']
+
+    routing.datagrid:
+        class: WellCommerce\Bundle\RoutingBundle\DataGrid\RoutingDataGrid
+        tags:
+            - { name: datagrid, alias: routing }
+        arguments: ['@routing.dataset.admin']
+
+    routing.form_builder.admin:
+        class: WellCommerce\Bundle\RoutingBundle\Form\Admin\RoutingFormBuilder
+        parent: core.form_builder
+
+    route.generator.collection:
+        class: WellCommerce\Bundle\RoutingBundle\Generator\RouteGeneratorCollection
+
+    routable.subscriber:
+        class: WellCommerce\Bundle\RoutingBundle\EventListener\RoutableSubscriber
+        tags:
+            - { name: doctrine.event_subscriber }
+        arguments: ['%routing_discriminator_map%']
+
+    dataset.transformer.route:
+        class: WellCommerce\Bundle\RoutingBundle\DataSet\Transformer\RouteTransformer
+        tags:
+            - { name: dataset.transformer, alias: route }
+        arguments: ['@routing.generator']
+
+    routing.orm.validator.unique:
+        class: WellCommerce\Bundle\RoutingBundle\Doctrine\Validator\Constraints\UniqueEntityValidator
+        tags:
+            - { name: validator.constraint_validator, alias: routing.orm.validator.unique }
+        arguments: ['@routing.repository', '@router.helper']
+
+    routing.provider:
+        class: WellCommerce\Bundle\RoutingBundle\Provider\RouteProvider
+        arguments: ['@route.generator.collection', '@routing.repository']
+
+    routing.chain_router:
+        class: Symfony\Cmf\Component\Routing\ChainRouter
+        arguments: ['@logger']
+        calls:
+            - [setContext, ['@router.request_context']]
+
+    routing.nested_matcher:
+        class: Symfony\Cmf\Component\Routing\NestedMatcher\NestedMatcher
+        arguments: ['@routing.provider', '@routing.final_matcher']
+
+    routing.matcher.dummy_collection:
+        class: Symfony\Component\Routing\RouteCollection
+        public: false
+
+    routing.matcher.dummy_context:
+        class: Symfony\Component\Routing\RequestContext
+        public: false
+
+    routing.final_matcher:
+        class: Symfony\Cmf\Component\Routing\NestedMatcher\UrlMatcher
+        arguments: ['@routing.matcher.dummy_collection', '@routing.matcher.dummy_context']
+
+    routing.dynamic_router:
+        class: Symfony\Cmf\Component\Routing\DynamicRouter
+        arguments: ['@router.request_context', '@routing.nested_matcher', '@routing.generator', null, '@?event_dispatcher', '@routing.provider']
+
+    routing.generator:
+        class: Symfony\Cmf\Component\Routing\ProviderBasedGenerator
+        arguments: ['@routing.provider', '@?logger']
+
+    slug.generator:
+        class: WellCommerce\Bundle\RoutingBundle\Generator\SlugGenerator
+        arguments: ['@routing.manager']

@@ -1,0 +1,10 @@
+oauth.facebook.connect:
+    path: /oauth/connect/facebook
+    defaults:
+        _controller: 'oauth.controller.facebook:connectAction'
+    options: {  }
+oauth.facebook.check:
+    path: /oauth/check/facebook
+    defaults:
+        _controller: 'oauth.controller.facebook:checkAction'
+    options: {  }

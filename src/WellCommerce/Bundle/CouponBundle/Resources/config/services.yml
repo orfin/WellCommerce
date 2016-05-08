@@ -1,0 +1,56 @@
+
+services:
+    coupon.controller.admin:
+        class: WellCommerce\Bundle\CouponBundle\Controller\Admin\CouponController
+        arguments: ['@coupon.manager', '@coupon.form_builder.admin', '@coupon.datagrid']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    coupon.dataset.admin:
+        class: WellCommerce\Bundle\CouponBundle\DataSet\Admin\CouponDataSet
+        tags:
+            - { name: dataset }
+        arguments: ['@coupon.repository']
+
+    coupon.datagrid:
+        class: WellCommerce\Bundle\CouponBundle\DataGrid\CouponDataGrid
+        tags:
+            - { name: datagrid, alias: coupon }
+        arguments: ['@coupon.dataset.admin']
+
+    coupon.form_builder.admin:
+        class: WellCommerce\Bundle\CouponBundle\Form\Admin\CouponFormBuilder
+        parent: core.form_builder
+
+    coupon.controller.front:
+        class: WellCommerce\Bundle\CouponBundle\Controller\Front\CouponController
+        arguments: ['@coupon.manager']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    coupon.request_param_converter:
+        class: WellCommerce\Bundle\CouponBundle\Request\ParamConverter\CouponParamConverter
+        tags:
+            - { name: request.param_converter, converter: category, priority: 0 }
+        arguments: ['@coupon.repository', code, [WellCommerce\Bundle\CouponBundle\Entity\Coupon, WellCommerce\Bundle\CouponBundle\Entity\CouponInterface]]
+
+    coupon.checker:
+        class: WellCommerce\Bundle\CouponBundle\Checker\CouponChecker
+        arguments: ['@order.repository']
+
+    coupon.order.visitor:
+        class: WellCommerce\Bundle\CouponBundle\Visitor\CouponOrderVisitor
+        tags:
+            - { name: order.visitor, alias: coupon }
+        arguments: ['@order.modifier.provider', '@currency.helper']
+
+    coupon_discount.order.modifier.configurator:
+        class: WellCommerce\Bundle\OrderBundle\Configurator\OrderModifierConfigurator
+        arguments: { name: coupon_discount, description: order.label.coupon_discount, subtraction: true, hierarchy: 100 }
+
+    coupon_discount.order.modifier:
+        class: WellCommerce\Bundle\OrderBundle\Entity\OrderModifier
+        factory: ['@order_modifier.factory', create]
+        configurator: ['@coupon_discount.order.modifier.configurator', configure]
+        tags:
+            - { name: order.modifier, alias: coupon_discount }

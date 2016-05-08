@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\AttributeBundle\Generator\CartesianProductGenerator;
+use WellCommerce\Bundle\AttributeBundle\Manager\AttributeManager;
 use WellCommerce\Bundle\AttributeBundle\Repository\AttributeRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 
@@ -26,11 +27,7 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
  */
 class AttributeController extends AbstractAdminController
 {
-    /**
-     * @var \WellCommerce\Bundle\AttributeBundle\Manager\AttributeManager
-     */
-    protected $manager;
-    
+
     /**
      * Ajax action for listing attributes in variants editor
      *
@@ -45,10 +42,10 @@ class AttributeController extends AbstractAdminController
         }
         
         $attributeGroupId = (int)$request->request->get('id');
-        $attributeGroup   = $this->manager->findAttributeGroup($attributeGroupId);
+        $attributeGroup   = $this->getManager()->findAttributeGroup($attributeGroupId);
 
         return $this->jsonResponse([
-            'attributes' => $this->getRepository()->getAttributeSet($attributeGroup),
+            'attributes' => $this->getManager()->getAttributeSet($attributeGroup),
         ]);
     }
     
@@ -69,7 +66,7 @@ class AttributeController extends AbstractAdminController
         $attributeGroupId = (int)$request->request->get('set');
         
         try {
-            $attribute = $this->manager->createAttribute($attributeName, $attributeGroupId);
+            $attribute = $this->getManager()->createAttribute($attributeName, $attributeGroupId);
             
             return $this->jsonResponse([
                 'id' => $attribute->getId()
@@ -98,9 +95,9 @@ class AttributeController extends AbstractAdminController
             'variants' => $variantsCombinations
         ]);
     }
-    
-    private function getRepository() : AttributeRepositoryInterface
+
+    protected function getManager() : AttributeManager
     {
-        return $this->manager->getRepository();
+        return parent::getManager();
     }
 }

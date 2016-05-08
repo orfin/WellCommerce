@@ -20,7 +20,7 @@ use WellCommerce\Bundle\ShippingBundle\Calculator\ShippingSubjectInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class OrderContext implements ShippingSubjectInterface
+final class OrderContext implements ShippingSubjectInterface
 {
     /**
      * @var OrderInterface

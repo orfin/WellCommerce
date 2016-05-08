@@ -78,6 +78,16 @@ final class SecurityHelper implements SecurityHelperInterface
         return $user instanceof UserInterface ? $user : null;
     }
 
+    public function getAuthenticatedClient() : ClientInterface
+    {
+        return $this->getCurrentUser();
+    }
+
+    public function getAuthenticatedAdmin() : UserInterface
+    {
+        return $this->getCurrentUser();
+    }
+
     public function isActiveFirewall(string $name) : bool
     {
         $request = $this->requestHelper->getCurrentRequest();

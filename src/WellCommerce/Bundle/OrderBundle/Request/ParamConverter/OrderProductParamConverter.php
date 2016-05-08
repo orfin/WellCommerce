@@ -15,7 +15,7 @@ namespace WellCommerce\Bundle\OrderBundle\Request\ParamConverter;
 use WellCommerce\Bundle\CoreBundle\Request\ParamConverter\AbstractEntityParamConverter;
 
 /**
- * Class CartProductParamConverter
+ * Class OrderProductParamConverter
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */

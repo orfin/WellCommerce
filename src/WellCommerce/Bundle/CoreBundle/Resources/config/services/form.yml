@@ -1,0 +1,328 @@
+services:
+    core.form_builder:
+        abstract: true
+        arguments: ['@form.resolver.factory', '@form.handler']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    form.data_transformer.collection:
+        class: WellCommerce\Component\Form\DataTransformer\DataTransformerCollection
+
+    form.data_transformer.factory:
+        class: WellCommerce\Bundle\CoreBundle\Form\DataTransformer\DataTransformerFactory
+        arguments: ['@form.data_transformer.collection']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    form.collection.data_transformer:
+        class: WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer
+        tags:
+            - { name: form.data_transformer, alias: collection }
+        arguments: ['@doctrine.helper']
+        shared: false
+
+    form.entity.data_transformer:
+        class: WellCommerce\Bundle\CoreBundle\Form\DataTransformer\EntityToIdentifierTransformer
+        tags:
+            - { name: form.data_transformer, alias: entity }
+        arguments: ['@doctrine.helper']
+        shared: false
+
+    form.formatter.javascript:
+        class: WellCommerce\Component\Form\Formatter\JavascriptFormatter
+
+    form.renderer.javascript:
+        class: WellCommerce\Component\Form\Renderer\JavascriptRenderer
+        arguments: ['@form.formatter.javascript', 'WellCommerceCoreBundle:Form:form.html.twig']
+
+    form.property_accessor:
+        class: Symfony\Component\PropertyAccess\PropertyAccess
+        factory: [Symfony\Component\PropertyAccess\PropertyAccess, createPropertyAccessor]
+
+    form.data_mapper:
+        class: WellCommerce\Component\Form\DataMapper\FormDataMapper
+        arguments: ['@form.property_accessor']
+
+    form.request_handler:
+        class: WellCommerce\Component\Form\Request\FormRequestHandler
+        arguments: ['@request_stack']
+
+    form.constraints_mapper:
+        class: WellCommerce\Component\Form\Validator\ConstraintViolationMapper
+
+    form.validator:
+        class: WellCommerce\Component\Form\Validator\FormValidator
+        arguments: ['@validator', '@form.constraints_mapper']
+
+    form.handler:
+        class: WellCommerce\Component\Form\Handler\FormHandler
+        arguments: ['@event_dispatcher', '@form.data_mapper', '@form.validator', '@form.request_handler']
+
+    form.resolver.factory:
+        class: WellCommerce\Component\Form\Resolver\FormResolverFactory
+
+    form.resolver.element:
+        class: WellCommerce\Component\Form\Resolver\ElementResolver
+        tags:
+            - { name: form.resolver, type: element }
+
+    form.resolver.filter:
+        class: WellCommerce\Component\Form\Resolver\FilterResolver
+        tags:
+            - { name: form.resolver, type: filter }
+
+    form.resolver.dependency:
+        class: WellCommerce\Component\Form\Resolver\DependencyResolver
+        tags:
+            - { name: form.resolver, type: dependency }
+
+    form.resolver.rule:
+        class: WellCommerce\Component\Form\Resolver\RuleResolver
+        tags:
+            - { name: form.resolver, type: rule }
+
+    form.element.form:
+        class: WellCommerce\Component\Form\Elements\Form
+        tags:
+            - { name: form.element, alias: form }
+        shared: false
+
+    form.element.attribute_editor:
+        class: WellCommerce\Component\Form\Elements\Editor\AttributeEditor
+        tags:
+            - { name: form.element, alias: attribute_editor }
+        shared: false
+
+    form.element.text_field:
+        class: WellCommerce\Component\Form\Elements\Input\TextField
+        tags:
+            - { name: form.element, alias: text_field }
+        shared: false
+
+    form.element.slug_field:
+        class: WellCommerce\Component\Form\Elements\Input\SlugField
+        tags:
+            - { name: form.element, alias: slug_field }
+        shared: false
+
+    form.element.date:
+        class: WellCommerce\Component\Form\Elements\Input\Date
+        tags:
+            - { name: form.element, alias: date }
+        shared: false
+
+    form.element.date_time:
+        class: WellCommerce\Component\Form\Elements\Input\DateTime
+        tags:
+            - { name: form.element, alias: date_time }
+        shared: false
+
+    form.element.font_style:
+        class: WellCommerce\Component\Form\Elements\Input\FontStyle
+        tags:
+            - { name: form.element, alias: font_style }
+        shared: false
+
+    form.element.submit:
+        class: WellCommerce\Component\Form\Elements\Button\Submit
+        tags:
+            - { name: form.element, alias: submit }
+        shared: false
+
+    form.element.price:
+        class: WellCommerce\Component\Form\Elements\Editor\PriceEditor
+        tags:
+            - { name: form.element, alias: price_editor }
+        shared: false
+
+    form.element.variant_editor:
+        class: WellCommerce\Component\Form\Elements\Editor\VariantEditor
+        tags:
+            - { name: form.element, alias: variant_editor }
+        shared: false
+
+    form.element.password:
+        class: WellCommerce\Component\Form\Elements\Input\Password
+        tags:
+            - { name: form.element, alias: password }
+        shared: false
+
+    form.element.button:
+        class: WellCommerce\Component\Form\Elements\Button\Button
+        tags:
+            - { name: form.element, alias: button }
+        shared: false
+
+    form.element.constant:
+        class: WellCommerce\Component\Form\Elements\Input\Constant
+        tags:
+            - { name: form.element, alias: constant }
+        shared: false
+
+    form.element.hidden:
+        class: WellCommerce\Component\Form\Elements\Input\Hidden
+        tags:
+            - { name: form.element, alias: hidden }
+        shared: false
+
+    form.element.tip:
+        class: WellCommerce\Component\Form\Elements\Fixed\Tip
+        tags:
+            - { name: form.element, alias: tip }
+        shared: false
+
+    form.element.rich_text_editor:
+        class: WellCommerce\Component\Form\Elements\Input\RichTextEditor
+        tags:
+            - { name: form.element, alias: rich_text_editor }
+        shared: false
+
+    form.element.text_area:
+        class: WellCommerce\Component\Form\Elements\Input\TextArea
+        tags:
+            - { name: form.element, alias: text_area }
+        shared: false
+
+    form.element.tree:
+        class: WellCommerce\Component\Form\Elements\Tree\Tree
+        tags:
+            - { name: form.element, alias: tree }
+        shared: false
+
+    form.element.checkbox:
+        class: WellCommerce\Component\Form\Elements\Input\Checkbox
+        tags:
+            - { name: form.element, alias: checkbox }
+        shared: false
+
+    form.element.select:
+        class: WellCommerce\Component\Form\Elements\Optioned\Select
+        tags:
+            - { name: form.element, alias: select }
+        shared: false
+
+    form.element.multi_select:
+        class: WellCommerce\Component\Form\Elements\Optioned\MultiSelect
+        tags:
+            - { name: form.element, alias: multi_select }
+        shared: false
+
+    form.element.radio_group:
+        class: WellCommerce\Component\Form\Elements\Optioned\RadioGroup
+        tags:
+            - { name: form.element, alias: radio_group }
+        shared: false
+
+    form.element.static_text:
+        class: WellCommerce\Component\Form\Elements\Fixed\StaticText
+        tags:
+            - { name: form.element, alias: static_text }
+        shared: false
+
+    form.element.fieldset:
+        class: WellCommerce\Component\Form\Elements\Fieldset\NestedFieldset
+        tags:
+            - { name: form.element, alias: nested_fieldset }
+        shared: false
+
+    form.element.fieldset_language:
+        class: WellCommerce\Component\Form\Elements\Fieldset\LanguageFieldset
+        tags:
+            - { name: form.element, alias: language_fieldset }
+        arguments: ['@=service(''locale.repository'').getAvailableLocales()']
+        shared: false
+
+    form.element.fieldset_repeatable:
+        class: WellCommerce\Component\Form\Elements\Fieldset\RepeatableFieldset
+        tags:
+            - { name: form.element, alias: repeatable_fieldset }
+        shared: false
+
+    form.element.layout_boxes_list:
+        class: WellCommerce\Component\Form\Elements\Editor\LayoutBoxesList
+        tags:
+            - { name: form.element, alias: layout_boxes_list }
+        shared: false
+
+    form.element.range_editor:
+        class: WellCommerce\Component\Form\Elements\Editor\RangeEditor
+        tags:
+            - { name: form.element, alias: range_editor }
+        shared: false
+
+    form.element.image:
+        class: WellCommerce\Component\Form\Elements\Upload\Image
+        tags:
+            - { name: form.element, alias: image }
+        shared: false
+
+    form.element.console_output:
+        class: WellCommerce\Component\Form\Elements\Progress\ConsoleOutput
+        tags:
+            - { name: form.element, alias: console_output }
+        shared: false
+
+    form.element.rights_table:
+        class: WellCommerce\Component\Form\Elements\Editor\RightsTable
+        tags:
+            - { name: form.element, alias: rights_table }
+        shared: false
+
+    form.element.order_editor:
+        class: WellCommerce\Component\Form\Elements\Editor\OrderEditor
+        tags:
+            - { name: form.element, alias: order_editor }
+        shared: false
+
+    form.element.client_select:
+        class: WellCommerce\Component\Form\Elements\Editor\ClientSelect
+        tags:
+            - { name: form.element, alias: client_select }
+        shared: false
+
+    form.element.columns:
+        class: WellCommerce\Component\Form\Elements\Fieldset\Columns
+        tags:
+            - { name: form.element, alias: columns }
+        shared: false
+
+    form.filter.no_code:
+        class: WellCommerce\Component\Form\Filters\NoCode
+        tags:
+            - { name: form.filter, alias: no_code }
+        shared: false
+    form.filter.secure:
+        class: WellCommerce\Component\Form\Filters\Secure
+        tags:
+            - { name: form.filter, alias: secure }
+        shared: false
+
+    form.filter.trim:
+        class: WellCommerce\Component\Form\Filters\Trim
+        tags:
+            - { name: form.filter, alias: trim }
+        shared: false
+
+    form.filter.comma_to_dot_changer:
+        class: WellCommerce\Component\Form\Filters\CommaToDotChanger
+        tags:
+            - { name: form.filter, alias: comma_to_dot_changer }
+        shared: false
+
+    form.dependency.show:
+        class: WellCommerce\Component\Form\Dependencies\Show
+        tags:
+            - { name: form.dependency, alias: show }
+        shared: false
+
+    form.rule.required:
+        class: WellCommerce\Component\Form\Rules\Required
+        tags:
+            - { name: form.rule, alias: required }
+        shared: false
+
+    twig.extension.form:
+        class: WellCommerce\Bundle\CoreBundle\Twig\Extension\FormJavascriptExtension
+        tags:
+            - { name: twig.extension }
+        arguments: ['@form.renderer.javascript']

@@ -1,0 +1,54 @@
+
+services:
+    contact.controller.admin:
+        class: WellCommerce\Bundle\ContactBundle\Controller\Admin\ContactController
+        arguments: ['@contact.manager', '@contact.form_builder.admin', '@contact.datagrid']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    contact.layout_box.configurator:
+        class: WellCommerce\Bundle\LayoutBundle\Configurator\ContactBoxConfigurator
+        tags:
+            - { name: layout_box.configurator }
+        arguments: [Contact, contact.layout_box.controller, '@translator.helper']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    contact.dataset.admin:
+        class: WellCommerce\Bundle\ContactBundle\DataSet\Admin\ContactDataSet
+        tags:
+            - { name: dataset }
+        arguments: ['@contact.repository']
+
+    contact.datagrid:
+        class: WellCommerce\Bundle\ContactBundle\DataGrid\ContactDataGrid
+        tags:
+            - { name: datagrid, alias: contact }
+        arguments: ['@contact.dataset.admin']
+
+    contact.form_builder.admin:
+        class: WellCommerce\Bundle\ContactBundle\Form\Admin\ContactFormBuilder
+        parent: core.form_builder
+
+    contact.controller.front:
+        class: WellCommerce\Bundle\ContactBundle\Controller\Front\ContactController
+        arguments: ['@contact.manager']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    contact.layout_box.controller:
+        class: WellCommerce\Bundle\ContactBundle\Controller\Box\ContactBoxController
+        arguments: ['@service_container', '@contact.repository']
+
+    contact.dataset.front:
+        class: WellCommerce\Bundle\ContactBundle\DataSet\Front\ContactDataSet
+        tags:
+            - { name: dataset, alias: contact.front }
+        arguments: ['@contact.repository']
+
+    contact.form_builder.front:
+        class: WellCommerce\Bundle\ContactBundle\Form\Front\ContactFormBuilder
+        parent: core.form_builder
+
+    contact.context.front:
+        class: WellCommerce\Bundle\ContactBundle\Context\Front\ContactContext

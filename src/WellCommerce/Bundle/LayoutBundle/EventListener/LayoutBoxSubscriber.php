@@ -14,8 +14,9 @@ namespace WellCommerce\Bundle\LayoutBundle\EventListener;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
-use WellCommerce\Bundle\DoctrineBundle\Event\ResourceEvent;
+use WellCommerce\Bundle\DoctrineBundle\Event\EntityEvent;
 use WellCommerce\Bundle\LayoutBundle\Configurator\LayoutBoxConfiguratorInterface;
+use WellCommerce\Bundle\LayoutBundle\Entity\LayoutBoxInterface;
 use WellCommerce\Component\Form\Event\FormEvent;
 
 /**
@@ -29,7 +30,7 @@ class LayoutBoxSubscriber extends AbstractEventSubscriber
     {
         return [
             'layout_box.form_init'  => 'onLayoutBoxFormInit',
-            'layout_box.pre_update' => 'onLayoutBoxPreResourceUpdate'
+            'layout_box.pre_update' => 'onLayoutBoxPreUpdate'
         ];
     }
 
@@ -43,7 +44,7 @@ class LayoutBoxSubscriber extends AbstractEventSubscriber
     {
         $builder       = $event->getFormBuilder();
         $form          = $event->getForm();
-        $resource      = $event->getDefaultData();
+        $resource      = $event->getEntity();
         $configurators = $this->container->get('layout_box.configurator.collection')->all();
         $boxSettings   = $resource->getSettings();
 
@@ -62,14 +63,16 @@ class LayoutBoxSubscriber extends AbstractEventSubscriber
     /**
      * Sets resource settings fetched from fieldset corresponding to selected box type
      *
-     * @param ResourceEvent $event
+     * @param EntityEvent $event
      */
-    public function onLayoutBoxPreResourceUpdate(ResourceEvent $event)
+    public function onLayoutBoxPreUpdate(EntityEvent $event)
     {
-        $request  = $this->getRequestHelper()->getCurrentRequest();
-        $settings = $this->getBoxSettingsFromRequest($request);
-        $resource = $event->getResource();
-        $resource->setSettings($settings);
+        $resource = $event->getEntity();
+        if ($resource instanceof LayoutBoxInterface) {
+            $request  = $this->getRequestHelper()->getCurrentRequest();
+            $settings = $this->getBoxSettingsFromRequest($request);
+            $resource->setSettings($settings);
+        }
     }
 
     protected function getBoxSettingsFromRequest(Request $request)

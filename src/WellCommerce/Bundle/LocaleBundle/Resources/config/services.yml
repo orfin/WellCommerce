@@ -1,0 +1,72 @@
+
+services:
+    locale.controller.admin:
+        class: WellCommerce\Bundle\LocaleBundle\Controller\Admin\LocaleController
+        arguments: ['@locale.manager', '@locale.form_builder.admin', '@locale.datagrid']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    locale.dataset.admin:
+        class: WellCommerce\Bundle\LocaleBundle\DataSet\Admin\LocaleDataSet
+        tags:
+            - { name: dataset }
+        arguments: ['@locale.repository']
+
+    locale.datagrid:
+        class: WellCommerce\Bundle\LocaleBundle\DataGrid\LocaleDataGrid
+        tags:
+            - { name: datagrid, alias: locale }
+        arguments: ['@locale.dataset.admin']
+
+    locale.form_builder.admin:
+        class: WellCommerce\Bundle\LocaleBundle\Form\Admin\LocaleFormBuilder
+        parent: core.form_builder
+
+    locale.dataset.front:
+        class: WellCommerce\Bundle\LocaleBundle\DataSet\Front\LocaleDataSet
+        tags:
+            - { name: dataset, alias: locale.front }
+        arguments: ['@locale.repository']
+
+    twig.extension.locale:
+        class: WellCommerce\Bundle\LocaleBundle\Twig\Extension\LocaleExtension
+        tags:
+            - { name: twig.extension }
+        arguments: ['@locale.dataset.front']
+
+    locale.controller.front:
+        class: WellCommerce\Bundle\LocaleBundle\Controller\Front\LocaleController
+        arguments: ['@locale.manager']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    locale.subscriber:
+        class: WellCommerce\Bundle\LocaleBundle\EventListener\LocaleSubscriber
+        tags:
+            - { name: kernel.event_subscriber }
+        calls:
+            - [setContainer, ['@service_container']]
+
+    locale.add.command:
+        class: WellCommerce\Bundle\LocaleBundle\Command\AddLocaleCommand
+        tags:
+            - { name: console.command }
+        calls:
+            - [setContainer, ['@service_container']]
+
+    locale.copier:
+        class: WellCommerce\Bundle\LocaleBundle\Copier\LocaleCopier
+        arguments: ['@doctrine.helper']
+
+    locale.delete.command:
+        class: WellCommerce\Bundle\LocaleBundle\Command\DeleteLocaleCommand
+        tags:
+            - { name: console.command }
+        arguments: ['@doctrine.helper', '@locale.repository']
+
+    form.translation.data_transformer:
+        class: WellCommerce\Bundle\LocaleBundle\Form\DataTransformer\TranslationTransformer
+        tags:
+            - { name: form.data_transformer, alias: translation }
+        arguments: ['@doctrine.helper']
+        shared: false

@@ -15,6 +15,7 @@ namespace WellCommerce\Bundle\CategoryBundle\Controller\Admin;
 use Doctrine\Common\Collections\Criteria;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use WellCommerce\Bundle\CategoryBundle\Manager\CategoryManager;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 use WellCommerce\Component\Form\Elements\FormInterface;
 
@@ -27,7 +28,7 @@ class CategoryController extends AbstractAdminController
 {
     public function indexAction() : Response
     {
-        $categories = $this->manager->getRepository()->matching(new Criteria());
+        $categories = $this->getManager()->getRepository()->matching(new Criteria());
         $tree       = $this->createCategoryTreeForm();
 
         if ($categories->count()) {
@@ -51,7 +52,7 @@ class CategoryController extends AbstractAdminController
 
         $categoriesName = (string)$request->request->get('name');
         $parentCategory = (int)$request->request->get('parent');
-        $category       = $this->manager->quickAddCategory($categoriesName, $parentCategory);
+        $category       = $this->getManager()->quickAddCategory($categoriesName, $parentCategory);
 
         return $this->jsonResponse([
             'id' => $category->getId(),
@@ -60,12 +61,12 @@ class CategoryController extends AbstractAdminController
 
     public function editAction(int $id) : Response
     {
-        $category = $this->manager->getRepository()->find($id);
+        $category = $this->getManager()->getRepository()->find($id);
         $form     = $this->getForm($category);
 
         if ($form->handleRequest()->isSubmitted()) {
             if ($form->isValid()) {
-                $this->manager->updateResource($category);
+                $this->getManager()->updateResource($category);
             }
 
             return $this->createFormDefaultJsonResponse($form);
@@ -84,5 +85,10 @@ class CategoryController extends AbstractAdminController
             'name'  => 'category_tree',
             'class' => 'category-select',
         ]);
+    }
+
+    protected function getManager() : CategoryManager
+    {
+        return parent::getManager();
     }
 }

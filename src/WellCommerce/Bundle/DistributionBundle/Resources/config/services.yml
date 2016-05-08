@@ -1,0 +1,77 @@
+
+services:
+    knp.packagist_api.client:
+        class: Packagist\Api\Client
+
+    package.controller.admin:
+        class: WellCommerce\Bundle\DistributionBundle\Controller\Admin\PackageController
+        arguments: ['@package.manager', '@package.form_builder', '@package.datagrid']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    package.dataset:
+        class: WellCommerce\Bundle\DistributionBundle\DataSet\Admin\PackageDataSet
+        tags:
+            - { name: dataset }
+        arguments: ['@package.repository']
+
+    package.datagrid:
+        class: WellCommerce\Bundle\DistributionBundle\DataGrid\PackageDataGrid
+        tags:
+            - { name: datagrid, alias: package }
+        arguments: ['@package.dataset']
+
+    package.form_builder:
+        class: WellCommerce\Bundle\DistributionBundle\Form\Admin\PackageFormBuilder
+        parent: core.form_builder
+
+    package.command.plugin.require:
+        class: WellCommerce\Bundle\DistributionBundle\Command\Package\RequireCommand
+        tags:
+            - { name: console.command }
+
+    package.command.plugin.update:
+        class: WellCommerce\Bundle\DistributionBundle\Command\Package\UpdateCommand
+        tags:
+            - { name: console.command }
+
+    package.command.plugin.remove:
+        class: WellCommerce\Bundle\DistributionBundle\Command\Package\RemoveCommand
+        tags:
+            - { name: console.command }
+
+    dataset.transformer.package_version_reference:
+        class: WellCommerce\Bundle\DistributionBundle\DataSet\Transformer\VersionReferenceTransformer
+        tags:
+            - { name: dataset.transformer, alias: package_version_reference }
+
+    package.helper:
+        class: WellCommerce\Bundle\DistributionBundle\Helper\Package\PackageHelper
+        arguments: ['@knp.packagist_api.client']
+
+    distribution.console.action_executor:
+        class: WellCommerce\Bundle\DistributionBundle\Console\ConsoleActionExecutor
+        arguments: ['@kernel']
+
+    distribution.install.command:
+        class: WellCommerce\Bundle\DistributionBundle\Command\InstallCommand
+        tags:
+            - { name: console.command }
+        arguments: ['@distribution.console.action_executor']
+
+    distribution.bundle.locator:
+        class: WellCommerce\Bundle\DistributionBundle\Locator\BundleLocator
+        public: false
+        arguments: ['@kernel']
+
+    distribution.bundle.loader:
+        class: WellCommerce\Bundle\DistributionBundle\Loader\BundleLoader
+        public: false
+        arguments: ['@kernel']
+
+    distribution.bundle.cache_warmer:
+        class: WellCommerce\Bundle\DistributionBundle\CacheWarmer\BundleCacheWarmer
+        public: false
+        tags:
+            - { name: kernel.cache_warmer }
+        arguments: ['@distribution.bundle.loader']

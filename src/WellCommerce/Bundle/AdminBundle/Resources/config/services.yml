@@ -1,0 +1,87 @@
+services:
+    dashboard.controller.admin:
+        class: WellCommerce\Bundle\AdminBundle\Controller\Admin\DashboardController
+        calls:
+            - [setContainer, ['@service_container']]
+
+    user.controller.admin:
+        class: WellCommerce\Bundle\AdminBundle\Controller\Admin\UserController
+        arguments: ['@user.manager', '@user.form_builder.admin', '@user.datagrid']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    user.dataset.admin:
+        class: WellCommerce\Bundle\AdminBundle\DataSet\Admin\UserDataSet
+        tags:
+            - { name: dataset }
+        arguments: ['@user.repository']
+
+    user.datagrid:
+        class: WellCommerce\Bundle\AdminBundle\DataGrid\UserDataGrid
+        tags:
+            - { name: datagrid, alias: user }
+        arguments: ['@user.dataset.admin']
+
+    user.form_builder.admin:
+        class: WellCommerce\Bundle\AdminBundle\Form\Admin\UserFormBuilder
+        parent: core.form_builder
+
+    user_login.form_builder:
+        class: WellCommerce\Bundle\AdminBundle\Form\Admin\UserLoginFormBuilder
+        parent: core.form_builder
+
+    user_reset_password.form_builder:
+        class: WellCommerce\Bundle\AdminBundle\Form\Admin\UserResetPasswordFormBuilder
+        parent: core.form_builder
+
+    user_group.controller.admin:
+        class: WellCommerce\Bundle\AdminBundle\Controller\Admin\UserGroupController
+        arguments: ['@user_group.manager']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    user_group.dataset.admin:
+        class: WellCommerce\Bundle\AdminBundle\DataSet\Admin\UserGroupDataSet
+        tags:
+            - { name: dataset, alias: user_group.admin }
+        arguments: ['@user_group.repository']
+
+    user_group.datagrid:
+        class: WellCommerce\Bundle\AdminBundle\DataGrid\UserGroupDataGrid
+        tags:
+            - { name: datagrid, alias: user_group }
+        arguments: ['@user_group.dataset.admin']
+
+    user_group.form_builder.admin:
+        class: WellCommerce\Bundle\AdminBundle\Form\Admin\UserGroupFormBuilder
+        parent: core.form_builder
+
+    form.user_group_permission.data_transformer:
+        class: WellCommerce\Bundle\AdminBundle\Form\DataTransformer\UserGroupPermissionToArrayTransformer
+        tags:
+            - { name: form.data_transformer, alias: user_group_permission }
+        arguments: ['@doctrine.helper']
+        shared: false
+
+    admin_menu.importer.xml:
+        class: WellCommerce\Bundle\AdminBundle\Importer\XmlImporter
+        arguments: ['@doctrine.helper', '@admin_menu.factory', '@admin_menu.repository']
+
+    admin_menu.provider:
+        class: WellCommerce\Bundle\AdminBundle\Provider\AdminMenuProvider
+        public: false
+        arguments: ['@kernel', '@admin_menu.repository']
+
+    twig.extension.admin:
+        class: WellCommerce\Bundle\AdminBundle\Twig\Extension\AdminExtension
+        tags:
+            - { name: twig.extension }
+        arguments: ['@admin_menu.provider']
+
+    admin.subscriber:
+        class: WellCommerce\Bundle\AdminBundle\EventListener\AdminSubscriber
+        tags:
+            - { name: kernel.event_subscriber }
+        calls:
+            - [setContainer, ['@service_container']]
+

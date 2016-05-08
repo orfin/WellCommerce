@@ -1,0 +1,14 @@
+
+services:
+    sales_report.controller.admin:
+        class: WellCommerce\Bundle\ReportBundle\Controller\Admin\SalesReportController
+        arguments: ['@order.manager']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    sales_report.provider:
+        class: WellCommerce\Bundle\ReportBundle\Provider\SalesReportProvider
+        arguments: ['@order.repository']
+        calls:
+            - [setContainer, ['@service_container']]
+

@@ -18,15 +18,15 @@ use WellCommerce\Bundle\CoreBundle\Helper\Image\ImageHelperInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ImageExtension extends \Twig_Extension
+final class ImageExtension extends \Twig_Extension
 {
     /**
      * @var ImageHelperInterface
      */
-    protected $helper;
+    private $helper;
 
     /**
-     * Constructor
+     * ImageExtension constructor.
      *
      * @param ImageHelperInterface $helper
      */
@@ -38,25 +38,16 @@ class ImageExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('image', [$this, 'getImage'], ['is_safe' => ['html']]),
+            new \Twig_SimpleFunction('image', [$this, 'getImagePath'], ['is_safe' => ['html']]),
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return 'image';
     }
 
-    /**
-     * @param $path
-     * @param $filter
-     *
-     * @return mixed
-     */
-    public function getImage($path, $filter)
+    public function getImagePath(string $path, string $filter) : string
     {
         return $this->helper->getImage($path, $filter);
     }

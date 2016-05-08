@@ -1,0 +1,47 @@
+
+services:
+    media.controller.admin:
+        class: WellCommerce\Bundle\MediaBundle\Controller\Admin\MediaController
+        arguments: ['@media.manager', '@media.form_builder.admin', '@media.datagrid']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    media.dataset.admin:
+        class: WellCommerce\Bundle\MediaBundle\DataSet\Admin\MediaDataSet
+        tags:
+            - { name: dataset }
+        arguments: ['@media.repository']
+
+    media.datagrid:
+        class: WellCommerce\Bundle\MediaBundle\DataGrid\MediaDataGrid
+        tags:
+            - { name: datagrid, alias: media }
+        arguments: ['@media.dataset.admin']
+
+    media.form_builder.admin:
+        class: WellCommerce\Bundle\MediaBundle\Form\Admin\MediaFormBuilder
+        parent: core.form_builder
+
+    form.media_collection.data_transformer:
+        class: WellCommerce\Bundle\MediaBundle\Form\DataTransformer\MediaCollectionToArrayTransformer
+        tags:
+            - { name: form.data_transformer, alias: media_collection }
+        arguments: ['@doctrine.helper']
+        shared: false
+
+    form.media_entity.data_transformer:
+        class: WellCommerce\Bundle\MediaBundle\Form\DataTransformer\MediaEntityToIdentifierTransformer
+        tags:
+            - { name: form.data_transformer, alias: media_entity }
+        arguments: ['@doctrine.helper']
+        shared: false
+
+    dataset.transformer.image_path:
+        class: WellCommerce\Bundle\MediaBundle\DataSet\Transformer\ImagePathTransformer
+        tags:
+            - { name: dataset.transformer, alias: image_path }
+        arguments: ['@image.helper']
+
+    media.uploader:
+        class: WellCommerce\Bundle\MediaBundle\Uploader\MediaUploader
+        arguments: ['@media.manager', '%kernel.root_dir%/../web/media', '@validator.helper']

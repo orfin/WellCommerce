@@ -15,7 +15,6 @@ namespace WellCommerce\Bundle\OrderBundle\Tests\Controller\Admin;
 use Doctrine\Common\Collections\Criteria;
 use WellCommerce\Bundle\CoreBundle\Test\Controller\Admin\AbstractAdminControllerTestCase;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderStatusInterface;
-use WellCommerce\Bundle\OrderBundle\Entity\PageInterface;
 
 /**
  * Class OrderStatusControllerTest

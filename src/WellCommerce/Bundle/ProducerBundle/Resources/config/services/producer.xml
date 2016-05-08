@@ -18,5 +18,7 @@
             </argument>
             <tag name="request.param_converter" converter="producer" priority="0"/>
         </service>
+
+        <service id="producer.storage" class="WellCommerce\Bundle\ProducerBundle\Storage\Front\ProducerStorage"/>
     </services>
 </container>

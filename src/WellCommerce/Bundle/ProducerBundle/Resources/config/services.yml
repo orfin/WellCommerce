@@ -1,0 +1,72 @@
+
+services:
+    producer.controller.admin:
+        class: WellCommerce\Bundle\ProducerBundle\Controller\Admin\ProducerController
+        arguments: ['@producer.manager', '@producer.form_builder.admin', '@producer.datagrid']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    producer.dataset.admin:
+        class: WellCommerce\Bundle\ProducerBundle\DataSet\Admin\ProducerDataSet
+        tags:
+            - { name: dataset, alias: producer.admin }
+        arguments: ['@producer.repository']
+
+    producer.datagrid:
+        class: WellCommerce\Bundle\ProducerBundle\DataGrid\ProducerDataGrid
+        tags:
+            - { name: datagrid, alias: producer }
+        arguments: ['@producer.dataset.admin']
+
+    producer.form_builder.admin:
+        class: WellCommerce\Bundle\ProducerBundle\Form\Admin\ProducerFormBuilder
+        parent: core.form_builder
+
+    producer_menu.layout_box.configurator:
+        class: WellCommerce\Bundle\LayoutBundle\Configurator\ProducerMenuBoxConfigurator
+        tags:
+            - { name: layout_box.configurator }
+        arguments: [ProducerMenu, producer_menu.layout_box.controller, '@translator.helper']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    producer_products.layout_box.configurator:
+        class: WellCommerce\Bundle\LayoutBundle\Configurator\ProducerProductsBoxConfigurator
+        tags:
+            - { name: layout_box.configurator }
+        arguments: [ProducerProducts, producer_products.layout_box.controller, '@translator.helper']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    producer.controller.front:
+        class: WellCommerce\Bundle\ProducerBundle\Controller\Front\ProducerController
+        arguments: ['@producer.manager']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    producer.dataset.front:
+        class: WellCommerce\Bundle\ProducerBundle\DataSet\Front\ProducerDataSet
+        tags:
+            - { name: dataset }
+        arguments: ['@producer.repository']
+
+    producer_menu.layout_box.controller:
+        class: WellCommerce\Bundle\ProducerBundle\Controller\Box\ProducerMenuBoxController
+        arguments: ['@producer.manager']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    producer_products.layout_box.controller:
+        class: WellCommerce\Bundle\ProducerBundle\Controller\Box\ProducerProductsBoxController
+        arguments: ['@producer.manager']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    producer.request_param_converter:
+        class: WellCommerce\Bundle\ProducerBundle\Request\ParamConverter\ProducerParamConverter
+        tags:
+            - { name: request.param_converter, converter: producer, priority: 0 }
+        arguments: ['@producer.repository', id, [WellCommerce\Bundle\ProducerBundle\Entity\Producer, WellCommerce\Bundle\ProducerBundle\Entity\ProducerInterface]]
+
+    producer.storage:
+        class: WellCommerce\Bundle\ProducerBundle\Storage\Front\ProducerStorage

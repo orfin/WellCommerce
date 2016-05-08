@@ -25,7 +25,7 @@ class ClientController extends AbstractFrontController
 {
     public function loginAction() : Response
     {
-        if ($this->manager->getClient() instanceof ClientInterface) {
+        if ($this->getSecurityHelper()->getCurrentClient() instanceof ClientInterface) {
             return $this->redirectToRoute('front.client_order.index');
         }
 

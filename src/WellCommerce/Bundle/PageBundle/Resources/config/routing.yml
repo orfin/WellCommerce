@@ -1,0 +1,33 @@
+admin.page.index:
+    path: /admin/cms/page/index
+    defaults:
+        _controller: 'page.controller.admin:indexAction'
+    options:
+        require_admin_permission: page.index
+admin.page.grid:
+    path: /admin/cms/page/grid
+    defaults:
+        _controller: 'page.controller.admin:gridAction'
+    options:
+        expose: true
+        require_admin_permission: page.index
+admin.page.add:
+    path: /admin/cms/page/add
+    defaults:
+        _controller: 'page.controller.admin:addAction'
+    options:
+        require_admin_permission: page.add
+admin.page.edit:
+    path: '/admin/cms/page/edit/{id}'
+    defaults:
+        _controller: 'page.controller.admin:editAction'
+    options:
+        expose: true
+        require_admin_permission: page.edit
+admin.page.delete:
+    path: '/admin/cms/page/delete/{id}'
+    defaults:
+        _controller: 'page.controller.admin:deleteAction'
+    options:
+        expose: true
+        require_admin_permission: page.delete

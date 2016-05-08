@@ -1,0 +1,33 @@
+admin.product_status.index:
+    path: /admin/catalog/product/status/index
+    defaults:
+        _controller: 'product_status.controller.admin:indexAction'
+    options:
+        require_admin_permission: product_status.index
+admin.product_status.grid:
+    path: /admin/catalog/product/status/grid
+    defaults:
+        _controller: 'product_status.controller.admin:gridAction'
+    options:
+        expose: true
+        require_admin_permission: product_status.index
+admin.product_status.add:
+    path: /admin/catalog/product/status/add
+    defaults:
+        _controller: 'product_status.controller.admin:addAction'
+    options:
+        require_admin_permission: product_status.add
+admin.product_status.edit:
+    path: '/admin/catalog/product/status/edit/{id}'
+    defaults:
+        _controller: 'product_status.controller.admin:editAction'
+    options:
+        expose: true
+        require_admin_permission: product_status.edit
+admin.product_status.delete:
+    path: '/admin/catalog/product/status/delete/{id}'
+    defaults:
+        _controller: 'product_status.controller.admin:deleteAction'
+    options:
+        expose: true
+        require_admin_permission: product_status.delete

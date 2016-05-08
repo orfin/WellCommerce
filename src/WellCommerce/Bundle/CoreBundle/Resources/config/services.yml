@@ -1,0 +1,66 @@
+imports:
+    - { resource: 'services/breadcrumb.yml' }
+    - { resource: 'services/datagrid.yml' }
+    - { resource: 'services/dataset.yml' }
+    - { resource: 'services/form.yml' }
+
+services:
+    flash.helper:
+        class: WellCommerce\Bundle\CoreBundle\Helper\Flash\FlashHelper
+        arguments: ['@session', '@translator.helper']
+
+    image.helper:
+        class: WellCommerce\Bundle\CoreBundle\Helper\Image\ImageHelper
+        arguments: ['@liip_imagine.cache.manager']
+
+    router.helper:
+        class: WellCommerce\Bundle\CoreBundle\Helper\Router\RouterHelper
+        arguments: ['@router', '@request.helper']
+
+    request.helper:
+        class: WellCommerce\Bundle\CoreBundle\Helper\Request\RequestHelper
+        arguments: ['@request_stack']
+
+    environment_helper:
+        class: WellCommerce\Bundle\CoreBundle\Helper\Environment\EnvironmentHelper
+        arguments: ['@kernel']
+
+    validator.helper:
+        class: WellCommerce\Bundle\CoreBundle\Helper\Validator\ValidatorHelper
+        arguments: ['@validator']
+
+    translator.helper:
+        class: WellCommerce\Bundle\CoreBundle\Helper\Translator\TranslatorHelper
+        arguments: ['@translator']
+
+    templating.helper:
+        class: WellCommerce\Bundle\CoreBundle\Helper\Templating\TemplatingHelper
+        arguments: ['@templating', '@kernel']
+
+    mailer.helper:
+        class: WellCommerce\Bundle\CoreBundle\Helper\Mailer\MailerHelper
+        arguments: ['%kernel.debug%']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    security.helper:
+        class: WellCommerce\Bundle\CoreBundle\Helper\Security\SecurityHelper
+        arguments: ['@security.token_storage', '@request.helper']
+
+    twig.extension.image:
+        class: WellCommerce\Bundle\CoreBundle\Twig\Extension\ImageExtension
+        tags:
+            - { name: twig.extension }
+        arguments: ['@image.helper']
+
+    twig.extension.dynamic_routing:
+        class: WellCommerce\Bundle\CoreBundle\Twig\Extension\DynamicRoutingExtension
+        tags:
+            - { name: twig.extension }
+        arguments: ['@router', '@request.helper']
+
+    twig.extension.mail:
+        class: WellCommerce\Bundle\CoreBundle\Twig\Extension\MailExtension
+        tags:
+            - { name: twig.extension }
+        arguments: ['@kernel']

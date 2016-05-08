@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\AttributeBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use WellCommerce\Bundle\AttributeBundle\Manager\AttributeValueManager;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 
 /**
@@ -23,18 +24,6 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
  */
 class AttributeValueController extends AbstractAdminController
 {
-    /**
-     * @var \WellCommerce\Bundle\AttributeBundle\Manager\AttributeValueManager
-     */
-    protected $manager;
-
-    /**
-     * Adds new attribute value using ajax request
-     *
-     * @param Request $request
-     *
-     * @return Response
-     */
     public function ajaxAddAction(Request $request) : Response
     {
         if (!$request->isXmlHttpRequest()) {
@@ -43,10 +32,15 @@ class AttributeValueController extends AbstractAdminController
 
         $attributeValueName = $request->request->get('name');
         $attributeId        = $request->request->get('attribute');
-        $value              = $this->manager->addAttributeValue($attributeValueName, $attributeId);
+        $value              = $this->getManager()->addAttributeValue($attributeValueName, $attributeId);
 
         return $this->jsonResponse([
             'id' => $value->getId(),
         ]);
+    }
+
+    protected function getManager() : AttributeValueManager
+    {
+        return parent::getManager();
     }
 }

@@ -1,0 +1,22 @@
+
+services:
+    wishlist.controller.front:
+        class: WellCommerce\Bundle\WishlistBundle\Controller\Front\WishlistController
+        arguments: ['@wishlist.manager']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    wishlist.layout_box.controller:
+        class: WellCommerce\Bundle\WishlistBundle\Controller\Box\WishlistBoxController
+        arguments: ['@client.manager']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    wishlist.configurator:
+        class: WellCommerce\Bundle\LayoutBundle\Configurator\WishlistBoxConfigurator
+        tags:
+            - { name: layout_box.configurator }
+        arguments: [Wishlist, wishlist.layout_box.controller, '@translator.helper']
+        calls:
+            - [setContainer, ['@service_container']]
+

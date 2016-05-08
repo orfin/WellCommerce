@@ -1,0 +1,32 @@
+
+services:
+    news.controller.admin:
+        class: WellCommerce\Bundle\NewsBundle\Controller\Admin\NewsController
+        arguments: ['@news.manager', '@news.form_builder.admin', '@news.datagrid']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    news.dataset.admin:
+        class: WellCommerce\Bundle\NewsBundle\DataSet\Admin\NewsDataSet
+        tags:
+            - { name: dataset }
+        arguments: ['@news.repository']
+
+    news.datagrid:
+        class: WellCommerce\Bundle\NewsBundle\DataGrid\NewsDataGrid
+        tags:
+            - { name: datagrid, alias: news }
+        arguments: ['@news.dataset.admin']
+
+    news.form_builder.admin:
+        class: WellCommerce\Bundle\NewsBundle\Form\Admin\NewsFormBuilder
+        parent: core.form_builder
+
+    news.dataset.front:
+        class: WellCommerce\Bundle\NewsBundle\DataSet\Front\NewsDataSet
+        tags:
+            - { name: dataset, alias: news.front }
+        arguments: ['@news.repository']
+
+    news.context.front:
+        class: WellCommerce\Bundle\NewsBundle\Context\Front\NewsContext

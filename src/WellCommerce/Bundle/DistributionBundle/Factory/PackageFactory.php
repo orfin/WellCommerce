@@ -22,15 +22,7 @@ use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
  */
 class PackageFactory extends AbstractEntityFactory
 {
-    /**
-     * @var string
-     */
-    protected $supportsInterface = PackageInterface::class;
-
-    /**
-     * @return PackageInterface
-     */
-    public function create() : DictionaryInterface
+    public function create() : PackageInterface
     {
         /** @var  $package PackageInterface */
         $package = $this->init();

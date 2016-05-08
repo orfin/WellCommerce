@@ -1,0 +1,33 @@
+admin.media.index:
+    path: /admin/cms/media/index
+    defaults:
+        _controller: 'media.controller.admin:indexAction'
+    options:
+        require_admin_permission: media.index
+admin.media.grid:
+    path: /admin/cms/media/grid
+    defaults:
+        _controller: 'media.controller.admin:gridAction'
+    options:
+        expose: true
+        require_admin_permission: media.index
+admin.media.add:
+    path: /admin/cms/media/add
+    defaults:
+        _controller: 'media.controller.admin:addAction'
+    options:
+        require_admin_permission: media.add
+admin.media.edit:
+    path: '/admin/cms/media/edit/{id}'
+    defaults:
+        _controller: 'media.controller.admin:editAction'
+    options:
+        expose: true
+        require_admin_permission: media.edit
+admin.media.delete:
+    path: '/admin/cms/media/delete/{id}'
+    defaults:
+        _controller: 'media.controller.admin:deleteAction'
+    options:
+        expose: true
+        require_admin_permission: media.delete

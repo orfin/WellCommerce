@@ -1,0 +1,49 @@
+
+services:
+    layout_box.controller.admin:
+        class: WellCommerce\Bundle\LayoutBundle\Controller\Admin\LayoutBoxController
+        arguments: ['@layout_box.manager', '@layout_box.form_builder.admin', '@layout_box.datagrid']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    layout_box.dataset.admin:
+        class: WellCommerce\Bundle\LayoutBundle\DataSet\Admin\LayoutBoxDataSet
+        tags:
+            - { name: dataset }
+        arguments: ['@layout_box.repository']
+
+    layout_box.datagrid:
+        class: WellCommerce\Bundle\LayoutBundle\DataGrid\LayoutBoxDataGrid
+        tags:
+            - { name: datagrid, alias: layout_box }
+        arguments: ['@layout_box.dataset.admin']
+
+    layout_box.form_builder.admin:
+        class: WellCommerce\Bundle\LayoutBundle\Form\Admin\LayoutBoxFormBuilder
+        parent: core.form_builder
+
+    layout_box.renderer:
+        class: WellCommerce\Bundle\LayoutBundle\Renderer\LayoutBoxRenderer
+        arguments: ['@layout_box.service_resolver', '@layout_box.manager', '@router.helper']
+
+    layout_box.subscriber:
+        class: WellCommerce\Bundle\LayoutBundle\EventListener\LayoutBoxSubscriber
+        tags:
+            - { name: kernel.event_subscriber }
+        calls:
+            - [setContainer, ['@service_container']]
+
+    layout_box.service_resolver:
+        class: WellCommerce\Bundle\LayoutBundle\Resolver\ServiceResolver
+        arguments: ['@layout_box.configurator.collection']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    layout_box.configurator.collection:
+        class: WellCommerce\Bundle\LayoutBundle\Configurator\LayoutBoxConfiguratorCollection
+
+    twig.extension.layout_box:
+        class: WellCommerce\Bundle\LayoutBundle\Twig\Extension\LayoutBoxExtension
+        tags:
+            - { name: twig.extension }
+        arguments: ['@layout_box.renderer']

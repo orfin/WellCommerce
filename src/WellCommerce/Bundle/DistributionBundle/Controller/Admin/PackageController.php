@@ -15,6 +15,7 @@ namespace WellCommerce\Bundle\DistributionBundle\Controller\Admin;
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 use WellCommerce\Bundle\DistributionBundle\Helper\Package\PackageHelperInterface;
+use WellCommerce\Bundle\DistributionBundle\Manager\PackageManager;
 
 /**
  * Class PackageController
@@ -23,11 +24,6 @@ use WellCommerce\Bundle\DistributionBundle\Helper\Package\PackageHelperInterface
  */
 class PackageController extends AbstractAdminController
 {
-    /**
-     * @var \WellCommerce\Bundle\DistributionBundle\Manager\Admin\PackageManager
-     */
-    protected $manager;
-
     /**
      * Action used to sync packages from remote servers ie. packagist.org
      *
@@ -80,5 +76,10 @@ class PackageController extends AbstractAdminController
     protected function getHelper()
     {
         return $this->get('environment_helper');
+    }
+
+    protected function getManager() : PackageManager
+    {
+        return parent::getManager();
     }
 }

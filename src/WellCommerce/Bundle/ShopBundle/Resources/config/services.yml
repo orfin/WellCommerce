@@ -1,0 +1,38 @@
+
+services:
+    shop.controller.admin:
+        class: WellCommerce\Bundle\ShopBundle\Controller\Admin\ShopController
+        arguments: ['@shop.manager', '@shop.form_builder.admin', '@shop.datagrid']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    shop.dataset.admin:
+        class: WellCommerce\Bundle\ShopBundle\DataSet\Admin\ShopDataSet
+        tags:
+            - { name: dataset, alias: shop.admin }
+        arguments: ['@shop.repository']
+
+    shop.datagrid:
+        class: WellCommerce\Bundle\ShopBundle\DataGrid\ShopDataGrid
+        tags:
+            - { name: datagrid, alias: shop }
+        arguments: ['@shop.dataset.admin']
+
+    shop.form_builder.admin:
+        class: WellCommerce\Bundle\ShopBundle\Form\Admin\ShopFormBuilder
+
+    shop.storage:
+        class: WellCommerce\Bundle\ShopBundle\Storage\ShopStorage
+
+    shop.subscriber:
+        class: WellCommerce\Bundle\ShopBundle\EventListener\ShopSubscriber
+        tags:
+            - { name: kernel.event_subscriber }
+        calls:
+            - [setContainer, ['@service_container']]
+
+    twig.extension.shop:
+        class: WellCommerce\Bundle\ShopBundle\Twig\Extension\ShopExtension
+        tags:
+            - { name: twig.extension }
+        arguments: ['@shop.storage', '@shop.dataset.admin']

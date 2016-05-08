@@ -44,9 +44,6 @@ class LuceneSearchProvider implements SearchProviderInterface
     }
 
     /**
-     * {@inheritdoc}
-     */
-    /**
      * @param SimpleQuery $simpleQuery
      *
      * @return $this

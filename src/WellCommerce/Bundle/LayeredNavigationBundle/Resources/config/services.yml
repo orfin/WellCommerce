@@ -1,0 +1,28 @@
+
+services:
+    layered_navigation.layout_box.configurator:
+        class: WellCommerce\Bundle\LayoutBundle\Configurator\LayeredNavigationBoxConfigurator
+        tags:
+            - { name: layout_box.configurator }
+        arguments: [LayeredNavigation, layered_navigation.layout_box.controller, '@translator.helper']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    layered_navigation.helper:
+        class: WellCommerce\Bundle\LayeredNavigationBundle\Helper\LayeredNavigationHelper
+        arguments: ['@producer.repository']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    layered_navigation.controller.front:
+        class: WellCommerce\Bundle\LayeredNavigationBundle\Controller\Front\LayeredNavigationController
+        arguments: ['@product.manager']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    layered_navigation.layout_box.controller:
+        class: WellCommerce\Bundle\LayeredNavigationBundle\Controller\Box\LayeredNavigationBoxController
+        arguments: ['@product.manager']
+        calls:
+            - [setContainer, ['@service_container']]
+

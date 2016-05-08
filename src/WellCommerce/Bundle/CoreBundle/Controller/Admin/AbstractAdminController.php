@@ -13,6 +13,7 @@ namespace WellCommerce\Bundle\CoreBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use WellCommerce\Bundle\AdminBundle\Entity\UserInterface;
 use WellCommerce\Bundle\CoreBundle\Controller\AbstractController;
 use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 use WellCommerce\Bundle\DoctrineBundle\Manager\ManagerInterface;
@@ -124,5 +125,10 @@ abstract class AbstractAdminController extends AbstractController implements Adm
     protected function getDataGrid() : DataGridInterface
     {
         return $this->dataGrid;
+    }
+
+    protected function getAuthenticatedAdmin() : UserInterface
+    {
+        return $this->getSecurityHelper()->getAuthenticatedAdmin();
     }
 }

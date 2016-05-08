@@ -14,7 +14,6 @@ namespace WellCommerce\Bundle\OrderBundle\Visitor;
 
 use WellCommerce\Bundle\CurrencyBundle\Helper\CurrencyHelperInterface;
 use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactoryInterface;
-use WellCommerce\Bundle\OrderBundle\Entity\CartSummaryInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderModifierInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderSummaryInterface;

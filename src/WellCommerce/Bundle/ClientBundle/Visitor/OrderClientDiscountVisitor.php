@@ -16,7 +16,6 @@ use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderTotal;
-use WellCommerce\Bundle\OrderBundle\Factory\OrderTotalDetailFactory;
 use WellCommerce\Bundle\OrderBundle\Visitor\OrderVisitorInterface;
 
 /**

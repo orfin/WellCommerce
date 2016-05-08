@@ -15,7 +15,7 @@ namespace WellCommerce\Bundle\SearchBundle\Controller\Front;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
-use WellCommerce\Bundle\CoreBundle\Service\Breadcrumb\BreadcrumbItem;
+use WellCommerce\Component\Breadcrumb\Model\Breadcrumb;
 use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
 
 /**
@@ -25,29 +25,24 @@ use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
  */
 class SearchController extends AbstractFrontController
 {
-    /**
-     * @var \WellCommerce\Bundle\SearchBundle\Manager\Front\SearchManager
-     */
-    protected $manager;
-
     public function indexAction() : Response
     {
-        $requestHelper = $this->manager->getRequestHelper();
+        $requestHelper = $this->getRequestHelper();
         $phrase        = $requestHelper->getAttributesBagParam('phrase');
 
-        $this->addBreadCrumbItem(new BreadcrumbItem([
-            'name' => $this->trans('search.heading.index')
+        $this->getBreadcrumbProvider()->add(new Breadcrumb([
+            'label' => $this->trans('search.heading.index')
         ]));
 
-        $this->addBreadCrumbItem(new BreadcrumbItem([
-            'name' => $phrase
+        $this->getBreadcrumbProvider()->add(new Breadcrumb([
+            'label' => $phrase
         ]));
 
         return $this->displayTemplate('index', [
             'phrase' => $phrase,
         ]);
     }
-
+    
     public function viewAction() : JsonResponse
     {
         $requestHelper = $this->getRequestHelper();
@@ -57,9 +52,8 @@ class SearchController extends AbstractFrontController
         } else {
             $dataset    = $this->get('search.dataset.front');
             $conditions = new ConditionsCollection();
-            $conditions = $this->manager->addSearchConditions($conditions);
             $conditions = $this->get('layered_navigation.helper')->addLayeredNavigationConditions($conditions);
-
+            
             $products = $dataset->getResult('array', [
                 'limit'      => 20,
                 'page'       => 1,
@@ -67,12 +61,12 @@ class SearchController extends AbstractFrontController
                 'order_dir'  => 'asc',
                 'conditions' => $conditions,
             ]);
-
+            
             $liveSearchContent = $this->renderView('WellCommerceSearchBundle:Front/Search:view.html.twig', [
                 'dataset' => $products,
             ]);
         }
-
+        
         return $this->jsonResponse([
             'liveSearchContent' => $liveSearchContent
         ]);

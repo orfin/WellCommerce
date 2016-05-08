@@ -11,47 +11,45 @@
  */
 namespace WellCommerce\Bundle\CoreBundle\Twig\Extension;
 
-use WellCommerce\Bundle\CoreBundle\Service\Breadcrumb\BreadcrumbItemCollectionInterface;
+use Doctrine\Common\Collections\Collection;
+use WellCommerce\Component\Breadcrumb\Provider\BreadcrumbProviderInterface;
 
 /**
  * Class BreadcrumbExtension
  *
- * @author  Adam Piotrowski <adam@wellcommerce.org>
+ * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class BreadcrumbExtension extends \Twig_Extension
+final class BreadcrumbExtension extends \Twig_Extension
 {
     /**
-     * @var
+     * @var BreadcrumbProviderInterface
      */
-    protected $collection;
+    private $provider;
 
     /**
-     * Constructor
+     * BreadcrumbExtension constructor.
      *
-     * @param BreadcrumbItemCollectionInterface $builder
+     * @param BreadcrumbProviderInterface $provider
      */
-    public function __construct(BreadcrumbItemCollectionInterface $collection)
+    public function __construct(BreadcrumbProviderInterface $provider)
     {
-        $this->collection = $collection;
-    }
-
-    public function getBreadcrumbs()
-    {
-        return $this->collection->all();
+        $this->provider = $provider;
     }
 
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('breadcrumbs', [$this, 'getBreadcrumbs'], ['is_safe' => ['html']]),
+            new \Twig_SimpleFunction('breadcrumbs', [$this, 'getBreadcrumbs'], ['is_safe' => ['html', 'javascript']])
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return 'breadcrumb';
+    }
+
+    public function getBreadcrumbs() : Collection
+    {
+        return $this->provider->getBreadcrumbs();
     }
 }

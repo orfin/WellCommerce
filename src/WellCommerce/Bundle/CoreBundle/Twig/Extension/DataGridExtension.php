@@ -19,17 +19,17 @@ use WellCommerce\Component\DataGrid\DataGridInterface;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class DataGridExtension extends \Twig_Extension
+final class DataGridExtension extends \Twig_Extension
 {
     /**
      * @var string Template name
      */
-    protected $templateName;
+    private $templateName;
 
     /**
      * @var \Twig_Environment
      */
-    protected $environment;
+    private $environment;
 
     /**
      * Constructor

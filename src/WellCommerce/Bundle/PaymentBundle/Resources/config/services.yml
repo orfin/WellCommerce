@@ -1,0 +1,137 @@
+
+services:
+    payment_method.controller.admin:
+        class: WellCommerce\Bundle\PaymentBundle\Controller\Admin\PaymentMethodController
+        arguments: ['@payment_method.manager', '@payment_method.form_builder.admin', '@payment_method.datagrid']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    payment_method.doctrine.event_subscriber:
+        class: WellCommerce\Bundle\PaymentBundle\EventListener\PaymentMethodDoctrineEventSubscriber
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
+        calls:
+            - [setContainer, ['@service_container']]
+
+    payment.doctrine.event_subscriber:
+        class: WellCommerce\Bundle\PaymentBundle\EventListener\PaymentDoctrineEventSubscriber
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
+        calls:
+            - [setContainer, ['@service_container']]
+
+    payment_method.dataset.admin:
+        class: WellCommerce\Bundle\PaymentBundle\DataSet\Admin\PaymentMethodDataSet
+        tags:
+            - { name: dataset }
+        arguments: ['@payment_method.repository']
+
+    payment_method.dataset.front:
+        class: WellCommerce\Bundle\PaymentBundle\DataSet\Front\PaymentMethodDataSet
+        tags:
+            - { name: dataset }
+        arguments: ['@payment_method.repository']
+
+    payment_method.datagrid:
+        class: WellCommerce\Bundle\PaymentBundle\DataGrid\PaymentMethodDataGrid
+        tags:
+            - { name: datagrid, alias: payment_method }
+        arguments: ['@payment_method.dataset.admin']
+
+    payment_method.form_builder.admin:
+        class: WellCommerce\Bundle\PaymentBundle\Form\Admin\PaymentMethodFormBuilder
+        parent: core.form_builder
+
+    payment.processor.collection:
+        class: WellCommerce\Bundle\PaymentBundle\Processor\PaymentProcessorCollection
+
+    payment_method.order.visitor:
+        class: WellCommerce\Bundle\PaymentBundle\Visitor\PaymentMethodOrderVisitor
+        tags:
+            - { name: order.visitor, alias: payment_method }
+        arguments: ['@order.modifier.provider']
+
+    payment_surcharge.order.modifier.configurator:
+        class: WellCommerce\Bundle\OrderBundle\Configurator\OrderModifierConfigurator
+        arguments: { name: payment_surcharge, description: order.label.payment_surcharge, subtraction: false, hierarchy: 900 }
+
+    payment_surcharge.order.modifier:
+        class: WellCommerce\Bundle\OrderBundle\Entity\OrderModifier
+        tags:
+            - { name: order.modifier, alias: payment_surcharge }
+        factory: ['@order_modifier.factory', create]
+        configurator: ['@payment_surcharge.order.modifier.configurator', configure]
+
+    bank_transfer.controller.front:
+        class: WellCommerce\Bundle\PaymentBundle\Controller\Front\BankTransferController
+        arguments: ['@payment.manager']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    bank_transfer.gateway:
+        class: WellCommerce\Bundle\PaymentBundle\Gateway\OfflinePaymentGateway
+        shared: false
+
+    bank_transfer.configurator:
+        class: WellCommerce\Bundle\PaymentBundle\Configurator\BankTransferConfigurator
+        calls:
+            - [setContainer, ['@service_container']]
+        shared: false
+
+    bank_transfer.processor:
+        class: WellCommerce\Bundle\PaymentBundle\Processor\BankTransferProcessor
+        tags:
+            - { name: payment.processor }
+        arguments: ['@bank_transfer.gateway', '@bank_transfer.configurator']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    cash_on_delivery.controller.front:
+        class: WellCommerce\Bundle\PaymentBundle\Controller\Front\CashOnDeliveryController
+        arguments: ['@payment.manager']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    cash_on_delivery.gateway:
+        class: WellCommerce\Bundle\PaymentBundle\Gateway\OfflinePaymentGateway
+        shared: false
+
+    cash_on_delivery.configurator:
+        class: WellCommerce\Bundle\PaymentBundle\Configurator\CashOnDeliveryConfigurator
+        calls:
+            - [setContainer, ['@service_container']]
+        shared: false
+
+    cash_on_delivery.processor:
+        class: WellCommerce\Bundle\PaymentBundle\Processor\CashOnDeliveryProcessor
+        tags:
+            - { name: payment.processor }
+        arguments: ['@cash_on_delivery.gateway', '@cash_on_delivery.configurator']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    paypal.controller.front:
+        class: WellCommerce\Bundle\PaymentBundle\Controller\Front\PayPalController
+        arguments: ['@payment.manager']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    paypal.configurator:
+        class: WellCommerce\Bundle\PaymentBundle\Configurator\PayPalConfigurator
+        calls:
+            - [setContainer, ['@service_container']]
+        shared: false
+
+    paypal.gateway:
+        class: WellCommerce\Bundle\PaymentBundle\Gateway\PayPalGateway
+        arguments: [{ log.FileName: '%kernel.logs_dir%/PayPal.log' }]
+        shared: false
+
+    paypal.processor:
+        class: WellCommerce\Bundle\PaymentBundle\Processor\PayPalProcessor
+        tags:
+            - { name: payment.processor }
+        arguments: ['@paypal.gateway', '@paypal.configurator']
+        calls:
+            - [setContainer, ['@service_container']]
+

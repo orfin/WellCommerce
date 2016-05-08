@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\ProductStatusBundle\DependencyInjection;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
 
 /**
@@ -20,6 +19,6 @@ use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class WellCommerceProductStatusExtension extends AbstractExtension
+final class WellCommerceProductStatusExtension extends AbstractExtension
 {
 }

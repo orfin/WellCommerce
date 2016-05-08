@@ -19,21 +19,21 @@ use Liip\ImagineBundle\Imagine\Cache\CacheManager;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ImageHelper implements ImageHelperInterface
+final class ImageHelper implements ImageHelperInterface
 {
     /**
-     * @var \Liip\ImagineBundle\Imagine\Cache\CacheManager
+     * @var CacheManager
      */
-    private $manager;
+    private $cacheManager;
 
     /**
-     * Constructor
+     * ImageHelper constructor.
      *
-     * @param CacheManager $manager
+     * @param CacheManager $cacheManager
      */
-    public function __construct(CacheManager $manager)
+    public function __construct(CacheManager $cacheManager)
     {
-        $this->manager = $manager;
+        $this->cacheManager = $cacheManager;
     }
 
     /**
@@ -41,6 +41,6 @@ class ImageHelper implements ImageHelperInterface
      */
     public function getImage(string $path, string $filter, array $config = []) : string
     {
-        return $this->manager->getBrowserPath($path, $filter, $config);
+        return $this->cacheManager->getBrowserPath($path, $filter, $config);
     }
 }

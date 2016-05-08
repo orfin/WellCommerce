@@ -1,0 +1,46 @@
+
+services:
+    review.controller.admin:
+        class: WellCommerce\Bundle\ReviewBundle\Controller\Admin\ReviewController
+        arguments: ['@review.manager', '@review.form_builder.admin', '@review.datagrid']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    review.dataset.admin:
+        class: WellCommerce\Bundle\ReviewBundle\DataSet\Admin\ReviewDataSet
+        tags:
+            - { name: dataset }
+        arguments: ['@review.repository']
+
+    review.datagrid:
+        class: WellCommerce\Bundle\ReviewBundle\DataGrid\ReviewDataGrid
+        tags:
+            - { name: datagrid, alias: review }
+        arguments: ['@review.dataset.admin']
+
+    review.form_builder.admin:
+        class: WellCommerce\Bundle\ReviewBundle\Form\Admin\ReviewFormBuilder
+        parent: core.form_builder
+
+    review.layout_box.configurator:
+        class: WellCommerce\Bundle\LayoutBundle\Configurator\ReviewBoxConfigurator
+        tags:
+            - { name: layout_box.configurator }
+        arguments: [Review, review.layout_box.controller, '@translator.helper']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    review.form_builder.front:
+        class: WellCommerce\Bundle\ReviewBundle\Form\Front\ReviewFormBuilder
+        parent: core.form_builder
+
+    review.layout_box.controller:
+        class: WellCommerce\Bundle\ReviewBundle\Controller\Box\ReviewBoxController
+        arguments: ['@review.manager']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    twig.extension.review:
+        class: WellCommerce\Bundle\ReviewBundle\Twig\Extension\ReviewExtension
+        tags:
+            - { name: twig.extension }

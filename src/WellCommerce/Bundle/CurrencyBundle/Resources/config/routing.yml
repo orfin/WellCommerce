@@ -1,0 +1,45 @@
+admin.currency.index:
+    path: /admin/configuration/intl/currency/index
+    defaults:
+        _controller: 'currency.controller.admin:indexAction'
+    options:
+        require_admin_permission: currency.index
+admin.currency.grid:
+    path: /admin/configuration/intl/currency/grid
+    defaults:
+        _controller: 'currency.controller.admin:gridAction'
+    options:
+        expose: true
+        require_admin_permission: currency.index
+admin.currency.add:
+    path: /admin/configuration/intl/currency/add
+    defaults:
+        _controller: 'currency.controller.admin:addAction'
+    options:
+        require_admin_permission: currency.add
+admin.currency.edit:
+    path: '/admin/configuration/intl/currency/edit/{id}'
+    defaults:
+        _controller: 'currency.controller.admin:editAction'
+    options:
+        expose: true
+        require_admin_permission: currency.edit
+admin.currency.sync:
+    path: /admin/configuration/intl/currency/sync
+    defaults:
+        _controller: 'currency.controller.admin:syncExchangeRatesAction'
+    options:
+        expose: true
+        require_admin_permission: currency.edit
+admin.currency.delete:
+    path: '/admin/configuration/intl/currency/delete/{id}'
+    defaults:
+        _controller: 'currency.controller.admin:deleteAction'
+    options:
+        expose: true
+        require_admin_permission: currency.delete
+front.currency.switch:
+    path: '/currency/switch/{currency}'
+    defaults:
+        _controller: 'currency.controller.front:switchAction'
+    options: {  }

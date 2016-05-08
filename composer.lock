@@ -13,12 +13,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/beberlei/DoctrineExtensions.git",
-                "reference": "a9d9bb48ceb6b4222e233b3b05341470b8cb127f"
+                "reference": "9f18dbf699800755b516dd98951d11bfd7a7bc43"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/beberlei/DoctrineExtensions/zipball/a9d9bb48ceb6b4222e233b3b05341470b8cb127f",
-                "reference": "a9d9bb48ceb6b4222e233b3b05341470b8cb127f",
+                "url": "https://api.github.com/repos/beberlei/DoctrineExtensions/zipball/9f18dbf699800755b516dd98951d11bfd7a7bc43",
+                "reference": "9f18dbf699800755b516dd98951d11bfd7a7bc43",
                 "shasum": ""
             },
             "require": {
@@ -67,7 +67,7 @@
                 "doctrine",
                 "orm"
             ],
-            "time": "2016-04-30 09:54:13"
+            "time": "2016-05-03 20:50:03"
         },
         {
             "name": "behat/transliterator",
@@ -823,12 +823,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/data-fixtures.git",
-                "reference": "b4213c21f138c96c29ba2f57349d6fca5b2878a9"
+                "reference": "73c46507fc4244525a402b66fb0339d230717023"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/data-fixtures/zipball/b4213c21f138c96c29ba2f57349d6fca5b2878a9",
-                "reference": "b4213c21f138c96c29ba2f57349d6fca5b2878a9",
+                "url": "https://api.github.com/repos/doctrine/data-fixtures/zipball/73c46507fc4244525a402b66fb0339d230717023",
+                "reference": "73c46507fc4244525a402b66fb0339d230717023",
                 "shasum": ""
             },
             "require": {
@@ -872,7 +872,7 @@
             "keywords": [
                 "database"
             ],
-            "time": "2015-11-02 22:38:12"
+            "time": "2016-05-05 03:37:05"
         },
         {
             "name": "doctrine/dbal",
@@ -1810,12 +1810,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "7011740238e3468486889c194f209bba51118f95"
+                "reference": "58e54017e95418968bddb1b16548e2e119312776"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/7011740238e3468486889c194f209bba51118f95",
-                "reference": "7011740238e3468486889c194f209bba51118f95",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/58e54017e95418968bddb1b16548e2e119312776",
+                "reference": "58e54017e95418968bddb1b16548e2e119312776",
                 "shasum": ""
             },
             "require": {
@@ -1864,7 +1864,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2016-04-29 17:35:12"
+            "time": "2016-05-06 16:50:02"
         },
         {
             "name": "guzzlehttp/promises",
@@ -2360,12 +2360,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "94294e4b9feec0b9a126d729812eb411ec7b577d"
+                "reference": "f9523f5cdb0d61953cf2cc968f973d40bf760088"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/94294e4b9feec0b9a126d729812eb411ec7b577d",
-                "reference": "94294e4b9feec0b9a126d729812eb411ec7b577d",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/f9523f5cdb0d61953cf2cc968f973d40bf760088",
+                "reference": "f9523f5cdb0d61953cf2cc968f973d40bf760088",
                 "shasum": ""
             },
             "require": {
@@ -2435,7 +2435,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2016-04-26 07:20:38"
+            "time": "2016-05-06 23:17:05"
         },
         {
             "name": "league/oauth2-client",
@@ -2553,16 +2553,16 @@
         },
         {
             "name": "liip/imagine-bundle",
-            "version": "1.5.2",
+            "version": "1.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/liip/LiipImagineBundle.git",
-                "reference": "3be0322e0007b54dbffd5a96faf1c11f6f91cf46"
+                "reference": "b657b6601a24da525645fb5358ce77fdf57889f1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/liip/LiipImagineBundle/zipball/3be0322e0007b54dbffd5a96faf1c11f6f91cf46",
-                "reference": "3be0322e0007b54dbffd5a96faf1c11f6f91cf46",
+                "url": "https://api.github.com/repos/liip/LiipImagineBundle/zipball/b657b6601a24da525645fb5358ce77fdf57889f1",
+                "reference": "b657b6601a24da525645fb5358ce77fdf57889f1",
                 "shasum": ""
             },
             "require": {
@@ -2623,7 +2623,7 @@
                 "image",
                 "imagine"
             ],
-            "time": "2016-02-16 19:35:14"
+            "time": "2016-05-06 06:27:38"
         },
         {
             "name": "mcuelenaere/composer-revision-plugin",
@@ -2972,16 +2972,16 @@
         },
         {
             "name": "paragonie/random_compat",
-            "version": "v1.x-dev",
+            "version": "v2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/random_compat.git",
-                "reference": "1115ffa06bad72d01735d91f51eb022db556e205"
+                "reference": "088c04e2f261c33bed6ca5245491cfca69195ccf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/1115ffa06bad72d01735d91f51eb022db556e205",
-                "reference": "1115ffa06bad72d01735d91f51eb022db556e205",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/088c04e2f261c33bed6ca5245491cfca69195ccf",
+                "reference": "088c04e2f261c33bed6ca5245491cfca69195ccf",
                 "shasum": ""
             },
             "require": {
@@ -3016,7 +3016,7 @@
                 "pseudorandom",
                 "random"
             ],
-            "time": "2016-04-03 05:47:09"
+            "time": "2016-04-03 06:00:07"
         },
         {
             "name": "paypal/rest-api-sdk-php",
@@ -3428,16 +3428,16 @@
         },
         {
             "name": "react/promise",
-            "version": "v2.4.0",
+            "version": "v2.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/reactphp/promise.git",
-                "reference": "f942da7b505d1a294284ab343d05df42d02ad6d9"
+                "reference": "8025426794f1944de806618671d4fa476dc7626f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/reactphp/promise/zipball/f942da7b505d1a294284ab343d05df42d02ad6d9",
-                "reference": "f942da7b505d1a294284ab343d05df42d02ad6d9",
+                "url": "https://api.github.com/repos/reactphp/promise/zipball/8025426794f1944de806618671d4fa476dc7626f",
+                "reference": "8025426794f1944de806618671d4fa476dc7626f",
                 "shasum": ""
             },
             "require": {
@@ -3468,7 +3468,7 @@
                 }
             ],
             "description": "A lightweight implementation of CommonJS Promises/A for PHP",
-            "time": "2016-03-31 13:10:33"
+            "time": "2016-05-03 17:50:52"
         },
         {
             "name": "react/socket",
@@ -4333,12 +4333,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "28ec06b69f277abe3bcf7d9620a24fa609d7d3e4"
+                "reference": "8950500057ad13a76121dac9622ddcf61f64e04d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/28ec06b69f277abe3bcf7d9620a24fa609d7d3e4",
-                "reference": "28ec06b69f277abe3bcf7d9620a24fa609d7d3e4",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/8950500057ad13a76121dac9622ddcf61f64e04d",
+                "reference": "8950500057ad13a76121dac9622ddcf61f64e04d",
                 "shasum": ""
             },
             "require": {
@@ -4455,7 +4455,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2016-05-01 03:15:06"
+            "time": "2016-05-05 08:15:23"
         },
         {
             "name": "twig/extensions",
@@ -4975,12 +4975,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-http.git",
-                "reference": "e9c373642d49ab849e1794c93f72bd1acf76db64"
+                "reference": "d2871da70b6103e403b2feb50849d07a0e1d5c0c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-http/zipball/e9c373642d49ab849e1794c93f72bd1acf76db64",
-                "reference": "e9c373642d49ab849e1794c93f72bd1acf76db64",
+                "url": "https://api.github.com/repos/zendframework/zend-http/zipball/d2871da70b6103e403b2feb50849d07a0e1d5c0c",
+                "reference": "d2871da70b6103e403b2feb50849d07a0e1d5c0c",
                 "shasum": ""
             },
             "require": {
@@ -5017,7 +5017,7 @@
                 "http",
                 "zf2"
             ],
-            "time": "2016-03-07 15:49:10"
+            "time": "2016-05-06 13:56:49"
         },
         {
             "name": "zendframework/zend-hydrator",
@@ -5138,20 +5138,20 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-loader.git",
-                "reference": "dd6c9335146fb8eb1f5905d65c95235cfe7f5a9b"
+                "reference": "dcacfc3bd1cb0721409d62dc309f5d29eb1f4631"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-loader/zipball/dd6c9335146fb8eb1f5905d65c95235cfe7f5a9b",
-                "reference": "dd6c9335146fb8eb1f5905d65c95235cfe7f5a9b",
+                "url": "https://api.github.com/repos/zendframework/zend-loader/zipball/dcacfc3bd1cb0721409d62dc309f5d29eb1f4631",
+                "reference": "dcacfc3bd1cb0721409d62dc309f5d29eb1f4631",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.5"
+                "php": "^5.5 || ^7.0"
             },
             "require-dev": {
                 "fabpot/php-cs-fixer": "1.7.*",
-                "phpunit/phpunit": "~4.0"
+                "phpunit/phpunit": "^4.8"
             },
             "type": "library",
             "extra": {
@@ -5174,7 +5174,7 @@
                 "loader",
                 "zf2"
             ],
-            "time": "2016-03-07 15:49:24"
+            "time": "2016-05-05 14:59:09"
         },
         {
             "name": "zendframework/zend-log",
@@ -5670,12 +5670,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "6d3b505cb3a6143adcd58375870eb0b4b98636bc"
+                "reference": "9eb699e97e0097f05bcf1cd9bbb91c582a48bf9e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/6d3b505cb3a6143adcd58375870eb0b4b98636bc",
-                "reference": "6d3b505cb3a6143adcd58375870eb0b4b98636bc",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/9eb699e97e0097f05bcf1cd9bbb91c582a48bf9e",
+                "reference": "9eb699e97e0097f05bcf1cd9bbb91c582a48bf9e",
                 "shasum": ""
             },
             "require": {
@@ -5725,7 +5725,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2016-04-21 05:23:34"
+            "time": "2016-05-04 12:34:12"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -5911,12 +5911,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "a6e1988caf6cf5a77a04936c46825fc5a6d7b2d0"
+                "reference": "82a3aafd187033fd5572ad28dfff7c1989cbf68d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/a6e1988caf6cf5a77a04936c46825fc5a6d7b2d0",
-                "reference": "a6e1988caf6cf5a77a04936c46825fc5a6d7b2d0",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/82a3aafd187033fd5572ad28dfff7c1989cbf68d",
+                "reference": "82a3aafd187033fd5572ad28dfff7c1989cbf68d",
                 "shasum": ""
             },
             "require": {
@@ -5978,7 +5978,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2016-04-29 09:30:50"
+            "time": "2016-05-05 07:36:17"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -6203,12 +6203,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/environment.git",
-                "reference": "dc7a29032cf72b54f36dac15a1ca5b3a1b6029bf"
+                "reference": "2292b116f43c272ff4328083096114f84ea46a56"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/dc7a29032cf72b54f36dac15a1ca5b3a1b6029bf",
-                "reference": "dc7a29032cf72b54f36dac15a1ca5b3a1b6029bf",
+                "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/2292b116f43c272ff4328083096114f84ea46a56",
+                "reference": "2292b116f43c272ff4328083096114f84ea46a56",
                 "shasum": ""
             },
             "require": {
@@ -6245,7 +6245,7 @@
                 "environment",
                 "hhvm"
             ],
-            "time": "2016-02-26 18:40:46"
+            "time": "2016-05-04 07:59:13"
         },
         {
             "name": "sebastian/exporter",

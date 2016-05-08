@@ -251,8 +251,8 @@ GAjaxRequest = function (sUrl, oRequest, fCallBack) {
 };
 
 var oCartDefaults = {
-    sChangeQuantityRoute: 'front.cart.edit',
-    sDeleteRoute: 'front.cart.delete',
+    sChangeQuantityRoute: 'front.order_cart.edit',
+    sDeleteRoute: 'front.order_cart.delete'
 };
 
 var GCart = function(oOptions) {
@@ -306,7 +306,7 @@ new GPlugin('GCart', oCartDefaults, GCart);
  * GProductAddCartForm
  */
 var oProductCartAddFormDefaults = {
-    sAddProductRoute: 'front.order_product.add'
+    sAddProductRoute: 'front.order_cart.add'
 };
 
 var GProductAddCartForm = function(oOptions) {

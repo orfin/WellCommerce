@@ -15,7 +15,7 @@
             <div class="cart">
                 <div class="clearfix">
                     <a href="{{ path('front.home_page.index') }}" class="btn btn-link light btn-lg notransform nopadding">Back to shopping</a>
-                    <a href="{{ path('front.order.address') }}" class="btn btn-primary btn-lg pull-right">Place an order</a>
+                    <a href="{{ path('front.order_address.index') }}" class="btn btn-primary btn-lg pull-right">Place an order</a>
                 </div>
                 {% include 'WellCommerceAppBundle:Front/Common:discounts.html.twig' %}
                 {% include 'WellCommerceAppBundle:Front/Common:products_table.html.twig' with {'confirmation': false} %}
@@ -24,7 +24,7 @@
 
                 <div class="clearfix">
                     <a href="{{ path('front.home_page.index') }}" class="btn btn-link light btn-lg notransform nopadding">Back to shopping</a>
-                    <a href="{{ path('front.cart_address.index') }}" class="btn btn-primary btn-lg pull-right">Place an order</a>
+                    <a href="{{ path('front.order_address.index') }}" class="btn btn-primary btn-lg pull-right">Place an order</a>
                 </div>
             </div>
             {% endif %}

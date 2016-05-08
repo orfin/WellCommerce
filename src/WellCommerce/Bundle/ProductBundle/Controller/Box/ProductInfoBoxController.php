@@ -25,7 +25,7 @@ class ProductInfoBoxController extends AbstractBoxController
 {
     public function indexAction(LayoutBoxSettingsCollection $boxSettings) : Response
     {
-        $product      = $this->manager->getProductContext()->getCurrentProduct();
+        $product      = $this->getProductStorage()->getCurrentProduct();
         $templateData = $this->get('product.helper')->getProductDefaultTemplateData($product);
 
         return $this->displayTemplate('index', $templateData);

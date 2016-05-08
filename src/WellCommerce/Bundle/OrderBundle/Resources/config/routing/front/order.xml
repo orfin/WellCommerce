@@ -4,32 +4,32 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-    <route id="front.order.cart" path="cart">
+    <route id="front.order_cart.index" path="cart">
         <default key="_controller">order_cart.controller.front:indexAction</default>
     </route>
 
-    <route id="front.order.address" path="address">
-        <default key="_controller">order_address.controller.front:indexAction</default>
-    </route>
-
-    <route id="front.order.confirm" path="confirm">
-        <default key="_controller">order_confirmation.controller.front:indexAction</default>
-    </route>
-
-    <route id="front.order_product.add" path="product/add/{id},{variant},{quantity}">
+    <route id="front.order_cart.add" path="cart/add/{id},{variant},{quantity}">
         <default key="_controller">order_cart.controller.front:addAction</default>
         <default key="variant">null</default>
         <default key="quantity">1</default>
         <option key="expose">true</option>
     </route>
 
-    <route id="front.order_product.edit" path="product/edit/{id},{quantity}">
+    <route id="front.order_cart.edit" path="cart/edit/{id},{quantity}">
         <default key="_controller">order_cart.controller.front:editAction</default>
         <option key="expose">true</option>
     </route>
 
-    <route id="front.order_product.delete" path="product/delete/{id}">
+    <route id="front.order_cart.delete" path="cart/delete/{id}">
         <default key="_controller">order_cart.controller.front:deleteAction</default>
         <option key="expose">true</option>
+    </route>
+
+    <route id="front.order_address.index" path="address">
+        <default key="_controller">order_address.controller.front:indexAction</default>
+    </route>
+
+    <route id="front.order_confirm.index" path="confirm">
+        <default key="_controller">order_confirmation.controller.front:indexAction</default>
     </route>
 </routes>

@@ -1,0 +1,33 @@
+admin.news.index:
+    path: /admin/cms/news/index
+    defaults:
+        _controller: 'news.controller.admin:indexAction'
+    options:
+        require_admin_permission: news.index
+admin.news.grid:
+    path: /admin/cms/news/grid
+    defaults:
+        _controller: 'news.controller.admin:gridAction'
+    options:
+        expose: true
+        require_admin_permission: news.index
+admin.news.add:
+    path: /admin/cms/news/add
+    defaults:
+        _controller: 'news.controller.admin:addAction'
+    options:
+        require_admin_permission: news.add
+admin.news.edit:
+    path: '/admin/cms/news/edit/{id}'
+    defaults:
+        _controller: 'news.controller.admin:editAction'
+    options:
+        expose: true
+        require_admin_permission: news.edit
+admin.news.delete:
+    path: '/admin/cms/news/delete/{id}'
+    defaults:
+        _controller: 'news.controller.admin:deleteAction'
+    options:
+        expose: true
+        require_admin_permission: news.delete

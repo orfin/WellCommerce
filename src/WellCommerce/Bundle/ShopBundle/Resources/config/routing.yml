@@ -1,0 +1,40 @@
+admin.shop.index:
+    path: /admin/configuration/multistore/shop/index
+    defaults:
+        _controller: 'shop.controller.admin:indexAction'
+    options:
+        require_admin_permission: shop.index
+admin.shop.grid:
+    path: /admin/configuration/multistore/shop/grid
+    defaults:
+        _controller: 'shop.controller.admin:gridAction'
+    options:
+        expose: true
+        require_admin_permission: shop.index
+admin.shop.add:
+    path: /admin/configuration/multistore/shop/add
+    defaults:
+        _controller: 'shop.controller.admin:addAction'
+    options:
+        require_admin_permission: shop.add
+admin.shop.edit:
+    path: '/admin/configuration/multistore/shop/edit/{id}'
+    defaults:
+        _controller: 'shop.controller.admin:editAction'
+    options:
+        expose: true
+        require_admin_permission: shop.edit
+admin.shop.delete:
+    path: '/admin/configuration/multistore/shop/delete/{id}'
+    defaults:
+        _controller: 'shop.controller.admin:deleteAction'
+    options:
+        expose: true
+        require_admin_permission: shop.delete
+admin.shop.change_context:
+    path: '/admin/configuration/multistore/shop/switch/{id}'
+    defaults:
+        _controller: 'shop.controller.admin:switchShopAction'
+    options:
+        expose: true
+        require_admin_permission: shop.index

@@ -619,7 +619,7 @@ a.button-green span img,span.button-green span img {
 	font-weight: bold;
 }
 
-.block .field-textarea span.field textarea,.block .field-rich-text-editor span.field textarea
+.block .field-textarea span.field textarea, .block .field-rich-text-editor span.field textarea,
 .block.ui-tabs-panel .field-textarea span.field textarea {
 	width: 500px;
 }
@@ -3579,8 +3579,8 @@ form {
 	text-decoration: none;
 }
 
-.allegro-category-selector ul.ui-tabs-nav li a:hover,.allegro-category-selector ul.ui-tabs-nav li a:focus,.allegro-category-selector ul.ui-tabs-nav li a:active
-.allegro-params-selector ul.ui-tabs-nav li a:hover,.allegro-params-selector ul.ui-tabs-nav li a:focus,.allegro-params-selector ul.ui-tabs-nav li a:active
+.allegro-category-selector ul.ui-tabs-nav li a:hover, .allegro-category-selector ul.ui-tabs-nav li a:focus, .allegro-category-selector ul.ui-tabs-nav li a:active,
+.allegro-params-selector ul.ui-tabs-nav li a:hover, .allegro-params-selector ul.ui-tabs-nav li a:focus, .allegro-params-selector ul.ui-tabs-nav li a:active
 	{
 	color: #000 !important;
 }
@@ -3630,8 +3630,8 @@ form {
 	color: #a80000 !important;
 }
 
-.allegro-category-selector .ui-tabs-panel ul li a:hover,.allegro-category-selector .ui-tabs-panel ul li a:focus,.allegro-category-selector .ui-tabs-panel ul li a:active
-.allegro-params-selector .ui-tabs-panel ul li a:hover,.allegro-params-selector .ui-tabs-panel ul li a:focus,.allegro-params-selector .ui-tabs-panel ul li a:active
+.allegro-category-selector .ui-tabs-panel ul li a:hover, .allegro-category-selector .ui-tabs-panel ul li a:focus, .allegro-category-selector .ui-tabs-panel ul li a:active,
+.allegro-params-selector .ui-tabs-panel ul li a:hover, .allegro-params-selector .ui-tabs-panel ul li a:focus, .allegro-params-selector .ui-tabs-panel ul li a:active
 	{
 	color: #000 !important;
 	text-decoration: underline;

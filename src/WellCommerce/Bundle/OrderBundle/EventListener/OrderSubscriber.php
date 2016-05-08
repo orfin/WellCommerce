@@ -92,6 +92,7 @@ final class OrderSubscriber implements EventSubscriberInterface
             KernelEvents::CONTROLLER => ['onKernelController', -150],
             'order.pre_create'       => ['onOrderChangedEvent', 0],
             'order.pre_update'       => ['onOrderChangedEvent', 0],
+
         ];
     }
     

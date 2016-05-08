@@ -1,0 +1,33 @@
+admin.unit.index:
+    path: /admin/unit/index
+    defaults:
+        _controller: 'unit.controller.admin:indexAction'
+    options:
+        require_admin_permission: unit.index
+admin.unit.grid:
+    path: /admin/unit/grid
+    defaults:
+        _controller: 'unit.controller.admin:gridAction'
+    options:
+        expose: true
+        require_admin_permission: unit.index
+admin.unit.add:
+    path: /admin/unit/add
+    defaults:
+        _controller: 'unit.controller.admin:addAction'
+    options:
+        require_admin_permission: unit.add
+admin.unit.edit:
+    path: '/admin/unit/edit/{id}'
+    defaults:
+        _controller: 'unit.controller.admin:editAction'
+    options:
+        expose: true
+        require_admin_permission: unit.edit
+admin.unit.delete:
+    path: '/admin/unit/delete/{id}'
+    defaults:
+        _controller: 'unit.controller.admin:deleteAction'
+    options:
+        expose: true
+        require_admin_permission: unit.delete

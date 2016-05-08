@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\ShippingBundle\Visitor;
 
 use Doctrine\Common\Collections\Collection;
-use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 use WellCommerce\Bundle\OrderBundle\Provider\OrderModifierProviderInterface;
 use WellCommerce\Bundle\OrderBundle\Visitor\OrderVisitorInterface;

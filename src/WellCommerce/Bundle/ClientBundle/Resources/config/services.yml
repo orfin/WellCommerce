@@ -1,0 +1,219 @@
+
+services:
+    client.controller.admin:
+        class: WellCommerce\Bundle\ClientBundle\Controller\Admin\ClientController
+        arguments: ['@client.manager', '@client.form_builder.admin', '@client.datagrid']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    client.form_builder.admin:
+        class: WellCommerce\Bundle\ClientBundle\Form\Admin\ClientFormBuilder
+        parent: core.form_builder
+
+    client.dataset.admin:
+        class: WellCommerce\Bundle\ClientBundle\DataSet\Admin\ClientDataSet
+        tags:
+            - { name: dataset }
+        arguments: ['@client.repository']
+
+    client.datagrid:
+        class: WellCommerce\Bundle\ClientBundle\DataGrid\ClientDataGrid
+        tags:
+            - { name: datagrid, alias: client }
+        arguments: ['@client.dataset.admin']
+
+    client.controller.front:
+        class: WellCommerce\Bundle\ClientBundle\Controller\Front\ClientController
+        arguments: ['@client.manager']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    client_order.controller.front:
+        class: WellCommerce\Bundle\ClientBundle\Controller\Front\ClientOrderController
+        arguments: ['@client.manager']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    client_login.form_builder.front:
+        class: WellCommerce\Bundle\ClientBundle\Form\Front\ClientLoginFormBuilder
+        parent: core.form_builder
+
+    client_login.layout_box.controller:
+        class: WellCommerce\Bundle\ClientBundle\Controller\Box\ClientLoginBoxController
+        arguments: ['@client.manager']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    client_login.layout_box.configurator:
+        class: WellCommerce\Bundle\LayoutBundle\Configurator\ClientLoginBoxConfigurator
+        tags:
+            - { name: layout_box.configurator }
+        arguments: [ClientLogin, client_login.layout_box.controller, '@translator.helper']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    client_menu.layout_box.controller:
+        class: WellCommerce\Bundle\ClientBundle\Controller\Box\ClientMenuBoxController
+        arguments: ['@client.manager']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    client_menu.layout_box.configurator:
+        class: WellCommerce\Bundle\LayoutBundle\Configurator\ClientMenuBoxConfigurator
+        tags:
+            - { name: layout_box.configurator }
+        arguments: [ClientMenu, client_menu.layout_box.controller, '@translator.helper']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    client_order.layout_box.controller:
+        class: WellCommerce\Bundle\ClientBundle\Controller\Box\ClientOrderBoxController
+        arguments: ['@client.manager']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    client_order.configurator:
+        class: WellCommerce\Bundle\LayoutBundle\Configurator\ClientOrderBoxConfigurator
+        tags:
+            - { name: layout_box.configurator }
+        arguments: [ClientOrder, client_order.layout_box.controller, '@translator.helper']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    client_contact_details.form_builder.front:
+        class: WellCommerce\Bundle\ClientBundle\Form\Front\ClientContactDetailsFormBuilder
+        parent: core.form_builder
+
+    client_settings.controller.front:
+        class: WellCommerce\Bundle\ClientBundle\Controller\Front\ClientSettingsController
+        arguments: ['@client.manager']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    client_settings.controller.box:
+        class: WellCommerce\Bundle\ClientBundle\Controller\Box\ClientSettingsBoxController
+        arguments: ['@client.manager']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    client_settings.configurator:
+        class: WellCommerce\Bundle\LayoutBundle\Configurator\ClientSettingsBoxConfigurator
+        tags:
+            - { name: layout_box.configurator }
+        arguments: [ClientSettings, client_settings.controller.box, '@translator.helper']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    client_register.form_builder.front:
+        class: WellCommerce\Bundle\ClientBundle\Form\Front\ClientRegisterFormBuilder
+        parent: core.form_builder
+
+    client_registration.layout_box.controller:
+        class: WellCommerce\Bundle\ClientBundle\Controller\Box\ClientRegistrationBoxController
+        arguments: ['@client.manager']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    client_registration.layout_box.configurator:
+        class: WellCommerce\Bundle\LayoutBundle\Configurator\ClientRegistrationBoxConfigurator
+        tags:
+            - { name: layout_box.configurator }
+        arguments: [ClientRegistration, client_registration.layout_box.controller, '@translator.helper']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    client_forgot_password.controller.front:
+        class: WellCommerce\Bundle\ClientBundle\Controller\Front\ClientForgotPasswordController
+        arguments: ['@client.manager']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    client_forgot_password_reset.form_builder.front:
+        class: WellCommerce\Bundle\ClientBundle\Form\Front\ClientResetPasswordFormBuilder
+        parent: core.form_builder
+
+    client_forgot_password_change.form_builder.front:
+        class: WellCommerce\Bundle\ClientBundle\Form\Front\ClientChangePasswordFormBuilder
+        parent: core.form_builder
+
+    client_forgot_password.layout_box.controller:
+        class: WellCommerce\Bundle\ClientBundle\Controller\Box\ClientForgotPasswordBoxController
+        arguments: ['@client.manager']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    client_forgot_password.layout_box.configurator:
+        class: WellCommerce\Bundle\LayoutBundle\Configurator\ClientForgotPasswordBoxConfigurator
+        tags:
+            - { name: layout_box.configurator }
+        arguments: [ClientForgotPassword, client_forgot_password.layout_box.controller, '@translator.helper']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    client_address_book.form_builder.front:
+        class: WellCommerce\Bundle\ClientBundle\Form\Front\ClientAddressBookFormBuilder
+        parent: core.form_builder
+
+    client_address_book.controller.front:
+        class: WellCommerce\Bundle\ClientBundle\Controller\Front\ClientAddressBookController
+        arguments: ['@client.manager']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    client_address_book.layout_box.controller:
+        class: WellCommerce\Bundle\ClientBundle\Controller\Box\ClientAddressBookBoxController
+        arguments: ['@client.manager']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    client_address_book.layout_box.configurator:
+        class: WellCommerce\Bundle\LayoutBundle\Configurator\ClientAddressBookBoxConfigurator
+        tags:
+            - { name: layout_box.configurator }
+        arguments: [ClientAddressBook, client_address_book.layout_box.controller, '@translator.helper']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    client.subscriber:
+        class: WellCommerce\Bundle\ClientBundle\EventListener\ClientSubscriber
+        tags:
+            - { name: kernel.event_subscriber }
+        calls:
+            - [setContainer, ['@service_container']]
+
+    twig.extension.client_address_formatter:
+        class: WellCommerce\Bundle\ClientBundle\Twig\Extension\ClientAddressFormatterExtension
+        tags:
+            - { name: twig.extension }
+
+    client.failure.handler:
+        class: WellCommerce\Bundle\ClientBundle\Handler\LoginFailureHandler
+        arguments: ['@router', front.client.login]
+
+    client.orm.validator.unique:
+        class: WellCommerce\Bundle\ClientBundle\Doctrine\Validator\Constraints\UniqueUsernameValidator
+        tags:
+            - { name: validator.constraint_validator, alias: client.orm.validator.unique }
+        arguments: ['@client.repository', '@router.helper']
+
+    client_group.controller.admin:
+        class: WellCommerce\Bundle\ClientBundle\Controller\Admin\ClientGroupController
+        arguments: ['@client_group.manager', '@client_group.form_builder.admin', '@client_group.datagrid']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    client_group.dataset.admin:
+        class: WellCommerce\Bundle\ClientBundle\DataSet\Admin\ClientGroupDataSet
+        tags:
+            - { name: dataset }
+        arguments: ['@client_group.repository']
+
+    client_group.datagrid:
+        class: WellCommerce\Bundle\ClientBundle\DataGrid\ClientGroupDataGrid
+        tags:
+            - { name: datagrid, alias: client_group }
+        arguments: ['@client_group.dataset.admin']
+
+    client_group.form_builder.admin:
+        class: WellCommerce\Bundle\ClientBundle\Form\Admin\ClientGroupFormBuilder
+        parent: core.form_builder

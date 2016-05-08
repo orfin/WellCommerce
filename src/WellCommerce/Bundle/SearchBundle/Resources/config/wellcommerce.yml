@@ -3,6 +3,6 @@ well_commerce_search:
         search_term_min_length: 3
         type: lucene
         parameters:
-            host: 127.0.0.1
+            host: ~
             pass: ~
-            port: 80
+            port: ~

@@ -1,0 +1,23 @@
+
+services:
+    tax.controller.admin:
+        class: WellCommerce\Bundle\TaxBundle\Controller\Admin\TaxController
+        arguments: ['@tax.manager', '@tax.form_builder.admin', '@tax.datagrid']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    tax.dataset.admin:
+        class: WellCommerce\Bundle\TaxBundle\DataSet\Admin\TaxDataSet
+        tags:
+            - { name: dataset, alias: tax.admin }
+        arguments: ['@tax.repository']
+
+    tax.datagrid:
+        class: WellCommerce\Bundle\TaxBundle\DataGrid\TaxDataGrid
+        tags:
+            - { name: datagrid, alias: tax }
+        arguments: ['@tax.dataset.admin']
+
+    tax.form_builder.admin:
+        class: WellCommerce\Bundle\TaxBundle\Form\Admin\TaxFormBuilder
+        parent: core.form_builder

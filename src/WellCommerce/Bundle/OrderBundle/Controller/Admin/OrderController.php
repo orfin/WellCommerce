@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Controller\Admin;
 
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
@@ -26,22 +25,22 @@ use WellCommerce\Component\Form\Elements\FormInterface;
  */
 class OrderController extends AbstractAdminController
 {
-    public function editAction(Request $request) : Response
+    public function editAction(int $id) : Response
     {
-        $resource = $this->manager->findResource($request);
+        $resource = $this->getManager()->getRepository()->find($id);
         if (!$resource instanceof OrderInterface) {
             return $this->redirectToAction('index');
         }
         
-        $this->manager->getOrderContext()->setCurrentOrder($resource);
+        $this->getOrderStorage()->setCurrentOrder($resource);
         
-        $form = $this->manager->getForm($resource, [
+        $form = $this->getForm($resource, [
             'class' => 'editOrder'
         ]);
         
         if ($form->handleRequest()->isSubmitted()) {
             if ($form->isValid()) {
-                $this->manager->updateResource($resource);
+                $this->getManager()->updateResource($resource);
             }
             
             return $this->createFormDefaultJsonResponse($form);

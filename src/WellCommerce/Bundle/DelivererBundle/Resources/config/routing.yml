@@ -1,0 +1,33 @@
+admin.deliverer.index:
+    path: /admin/catalog/deliverer/index
+    defaults:
+        _controller: 'deliverer.controller.admin:indexAction'
+    options:
+        require_admin_permission: deliverer.index
+admin.deliverer.grid:
+    path: /admin/catalog/deliverer/grid
+    defaults:
+        _controller: 'deliverer.controller.admin:gridAction'
+    options:
+        expose: true
+        require_admin_permission: deliverer.index
+admin.deliverer.add:
+    path: /admin/catalog/deliverer/add
+    defaults:
+        _controller: 'deliverer.controller.admin:addAction'
+    options:
+        require_admin_permission: deliverer.add
+admin.deliverer.edit:
+    path: '/admin/catalog/deliverer/edit/{id}'
+    defaults:
+        _controller: 'deliverer.controller.admin:editAction'
+    options:
+        expose: true
+        require_admin_permission: deliverer.edit
+admin.deliverer.delete:
+    path: '/admin/catalog/deliverer/delete/{id}'
+    defaults:
+        _controller: 'deliverer.controller.admin:deleteAction'
+    options:
+        expose: true
+        require_admin_permission: deliverer.delete

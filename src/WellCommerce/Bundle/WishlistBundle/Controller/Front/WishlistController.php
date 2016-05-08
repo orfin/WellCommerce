@@ -22,13 +22,13 @@ use WellCommerce\Bundle\WishlistBundle\Manager\WishlistManager;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-final class WishlistController extends AbstractFrontController
+class WishlistController extends AbstractFrontController
 {
     public function addAction(ProductInterface $product) : RedirectResponse
     {
         $this->getManager()->addProductToWishlist(
             $product,
-            $this->getSecurityHelper()->getCurrentClient()
+            $this->getAuthenticatedClient()
         );
 
         return $this->redirectToAction('index');
@@ -38,12 +38,12 @@ final class WishlistController extends AbstractFrontController
     {
         $this->getManager()->deleteProductFromWishlist(
             $product,
-            $this->getSecurityHelper()->getCurrentClient()
+            $this->getAuthenticatedClient()
         );
 
         return $this->redirectToAction('index');
     }
-    
+
     protected function getManager() : WishlistManager
     {
         return parent::getManager();

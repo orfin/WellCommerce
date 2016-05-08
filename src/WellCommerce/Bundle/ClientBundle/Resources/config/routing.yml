@@ -1,0 +1,113 @@
+admin.client.index:
+    path: /admin/crm/client/index
+    defaults:
+        _controller: 'client.controller.admin:indexAction'
+    options:
+        require_admin_permission: client.index
+admin.client.grid:
+    path: /admin/crm/client/grid
+    defaults:
+        _controller: 'client.controller.admin:gridAction'
+    options:
+        expose: true
+        require_admin_permission: client.index
+admin.client.add:
+    path: /admin/crm/client/add
+    defaults:
+        _controller: 'client.controller.admin:addAction'
+    options:
+        require_admin_permission: client.add
+admin.client.edit:
+    path: '/admin/crm/client/edit/{id}'
+    defaults:
+        _controller: 'client.controller.admin:editAction'
+    options:
+        expose: true
+        require_admin_permission: client.edit
+admin.client.delete:
+    path: '/admin/crm/client/delete/{id}'
+    defaults:
+        _controller: 'client.controller.admin:deleteAction'
+    options:
+        expose: true
+        require_admin_permission: client.delete
+front.client.login:
+    path: /client/login
+    defaults:
+        _controller: 'client.controller.front:loginAction'
+    options:
+        allow_page_redirect: 'true'
+front.client.login_check:
+    path: /client/login_check
+    options: {  }
+front.client.logout:
+    path: /client/logout
+    options: {  }
+front.client_settings.index:
+    path: /client/settings/index
+    defaults:
+        _controller: 'client_settings.controller.front:indexAction'
+    options: {  }
+front.client_order.index:
+    path: /client/order/index
+    defaults:
+        _controller: 'client_order.controller.front:indexAction'
+    options:
+        allow_page_redirect: 'true'
+front.client_order.view:
+    path: '/client/order/view/{id}'
+    defaults:
+        _controller: 'client_order.controller.front:viewAction'
+        id: 'null'
+    options: {  }
+front.client_password.reset:
+    path: /client/password/reset
+    defaults:
+        _controller: 'client_forgot_password.controller.front:resetAction'
+    options: {  }
+front.client_password.change:
+    path: '/client/password/change/{hash}'
+    defaults:
+        _controller: 'client_forgot_password.controller.front:changeAction'
+        phrase: 'null'
+    options: {  }
+    requirements:
+        hash: '[^,]+'
+front.client_address_book.index:
+    path: /client/address/index
+    defaults:
+        _controller: 'client_address_book.controller.front:indexAction'
+    options: {  }
+admin.client_group.index:
+    path: /admin/crm/client/group/index
+    defaults:
+        _controller: 'client_group.controller.admin:indexAction'
+    options:
+        require_admin_permission: client_group.index
+admin.client_group.grid:
+    path: /admin/crm/client/group/grid
+    defaults:
+        _controller: 'client_group.controller.admin:gridAction'
+    options:
+        expose: true
+        require_admin_permission: client_group.index
+admin.client_group.add:
+    path: /admin/crm/client/group/add
+    defaults:
+        _controller: 'client_group.controller.admin:addAction'
+    options:
+        require_admin_permission: client_group.add
+admin.client_group.edit:
+    path: '/admin/crm/client/group/edit/{id}'
+    defaults:
+        _controller: 'client_group.controller.admin:editAction'
+    options:
+        expose: true
+        require_admin_permission: client_group.edit
+admin.client_group.delete:
+    path: '/admin/crm/client/group/delete/{id}'
+    defaults:
+        _controller: 'client_group.controller.admin:deleteAction'
+    options:
+        expose: true
+        require_admin_permission: client_group.delete

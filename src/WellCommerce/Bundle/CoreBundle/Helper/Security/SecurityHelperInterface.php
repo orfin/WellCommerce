@@ -13,6 +13,8 @@
 namespace WellCommerce\Bundle\CoreBundle\Helper\Security;
 
 use Symfony\Component\HttpFoundation\Request;
+use WellCommerce\Bundle\AdminBundle\Entity\UserInterface;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
 
 /**
  * Interface TranslatorHelperInterface
@@ -26,6 +28,10 @@ interface SecurityHelperInterface
     public function getCurrentClient();
 
     public function getCurrentAdmin();
+
+    public function getAuthenticatedClient() : ClientInterface;
+
+    public function getAuthenticatedAdmin() : UserInterface;
 
     public function isActiveFirewall(string $name) : bool;
 

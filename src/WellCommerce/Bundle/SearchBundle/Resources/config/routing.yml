@@ -1,0 +1,36 @@
+front.search.index:
+    path: '/search/index/{phrase},{page},{limit},{orderBy},{orderDir},{priceFrom},{priceTo},{view},{producers},{attributes}'
+    defaults:
+        _controller: 'search.controller.front:indexAction'
+        phrase: 'null'
+        page: '1'
+        limit: '12'
+        orderBy: score
+        orderDir: asc
+        priceFrom: '0'
+        priceTo: '9999'
+        view: grid
+        producers: 'null'
+        attributes: 'null'
+    options:
+        expose: true
+    requirements:
+        phrase: '[^,]+'
+        limit: '\d{1,10}'
+        page: '\d{1,10}'
+        orderBy: name|finalPrice|score
+        orderDir: asc|desc
+        priceFrom: '\d{1,10}'
+        priceTo: '\d{1,10}'
+        view: grid|list
+        producers: '[\d+_]+'
+        attributes: '[\d+_]+'
+front.search.view:
+    path: '/search/view/{phrase}'
+    defaults:
+        _controller: 'search.controller.front:viewAction'
+        phrase: 'null'
+    options:
+        expose: true
+    requirements:
+        phrase: '[^,]+'

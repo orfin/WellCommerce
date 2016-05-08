@@ -31,8 +31,6 @@ class PayPalController extends AbstractPaymentController
         return $this->displayTemplate($processor->getConfigurator()->getName() . '_confirm', [
             'payment' => $payment
         ]);
-        
-        return $processor->confirmPayment($payment);
     }
     
     public function cancelAction($token) : Response

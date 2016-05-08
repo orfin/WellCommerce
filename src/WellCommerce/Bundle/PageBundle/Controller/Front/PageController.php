@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
-use WellCommerce\Bundle\CoreBundle\Service\Breadcrumb\BreadcrumbItem;
+use WellCommerce\Component\Breadcrumb\Model\Breadcrumb;
 
 /**
  * Class PageController
@@ -33,13 +33,13 @@ class PageController extends AbstractFrontController
         $page = $this->findOr404($request);
 
         if (null !== $page->getParent()) {
-            $this->addBreadCrumbItem(new BreadcrumbItem([
-                'name' => $page->getParent()->translate()->getName(),
+            $this->getBreadcrumbProvider()->add(new Breadcrumb([
+                'label' => $page->getParent()->translate()->getName(),
             ]));
         }
-        
-        $this->addBreadCrumbItem(new BreadcrumbItem([
-            'name' => $page->translate()->getName(),
+
+        $this->getBreadcrumbProvider()->add(new Breadcrumb([
+            'label' => $page->translate()->getName(),
         ]));
 
         return $this->displayTemplate('index', [
@@ -64,7 +64,7 @@ class PageController extends AbstractFrontController
 
         $criteria['id'] = $request->attributes->get('id');
 
-        if (null === $resource = $this->manager->getRepository()->findOneBy($criteria)) {
+        if (null === $resource = $this->getManager()->getRepository()->findOneBy($criteria)) {
             throw new NotFoundHttpException(sprintf('Resource not found'));
         }
 

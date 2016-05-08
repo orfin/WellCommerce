@@ -1,0 +1,10 @@
+
+services:
+    oauth.controller.facebook:
+        class: WellCommerce\Bundle\OAuthBundle\Controller\FacebookController
+        calls:
+            - [setContainer, ['@service_container']]
+
+    oauth.authentificator.facebook:
+        class: WellCommerce\Bundle\OAuthBundle\Security\FacebookAuthenticator
+        arguments: { 0: '@client.manager', 1: '@router.helper', appId: '%facebook_app_id%', appSecret: '%facebook_app_secret%' }

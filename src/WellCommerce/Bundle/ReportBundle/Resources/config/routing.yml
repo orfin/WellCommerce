@@ -1,0 +1,20 @@
+admin.sales_report.index:
+    path: /admin/report/sales/index
+    defaults:
+        _controller: 'sales_report.controller.admin:indexAction'
+    options:
+        require_admin_permission: sales_report.index
+admin.sales_report.grid:
+    path: /admin/report/sales/grid
+    defaults:
+        _controller: 'sales_report.controller.admin:gridAction'
+    options:
+        expose: true
+        require_admin_permission: sales_report.index
+admin.sales_report.view:
+    path: /admin/report/sales/view
+    defaults:
+        _controller: 'sales_report.controller.admin:viewAction'
+    options:
+        expose: true
+        require_admin_permission: sales_report.view

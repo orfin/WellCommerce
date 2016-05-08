@@ -1,0 +1,70 @@
+
+services:
+    currency.controller.admin:
+        class: WellCommerce\Bundle\CurrencyBundle\Controller\Admin\CurrencyController
+        arguments: ['@currency.manager', '@currency.form_builder.admin', '@currency.datagrid']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    currency.dataset.admin:
+        class: WellCommerce\Bundle\CurrencyBundle\DataSet\Admin\CurrencyDataSet
+        tags:
+            - { name: dataset }
+        arguments: ['@currency.repository']
+
+    currency.datagrid:
+        class: WellCommerce\Bundle\CurrencyBundle\DataGrid\CurrencyDataGrid
+        tags:
+            - { name: datagrid, alias: currency }
+        arguments: ['@currency.dataset.admin']
+
+    currency.form_builder.admin:
+        class: WellCommerce\Bundle\CurrencyBundle\Form\Admin\CurrencyFormBuilder
+        parent: core.form_builder
+
+    currency.controller.front:
+        class: WellCommerce\Bundle\CurrencyBundle\Controller\Front\CurrencyController
+        arguments: ['@currency.manager']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    currency.dataset.front:
+        class: WellCommerce\Bundle\CurrencyBundle\DataSet\Front\CurrencyDataSet
+        tags:
+            - { name: dataset, alias: currency.front }
+        arguments: ['@currency.repository']
+
+    twig.extension.currency:
+        class: WellCommerce\Bundle\CurrencyBundle\Twig\Extension\CurrencyExtension
+        tags:
+            - { name: twig.extension }
+        arguments: ['@currency.helper', '@currency.dataset.front']
+
+    currency.subscriber:
+        class: WellCommerce\Bundle\CurrencyBundle\EventListener\CurrencySubscriber
+        tags:
+            - { name: kernel.event_subscriber }
+        calls:
+            - [setContainer, ['@service_container']]
+
+    currency.importer.ecb:
+        class: WellCommerce\Bundle\CurrencyBundle\Importer\EcbRatesImporter
+        arguments: ['@currency.repository', '@currency_rate.repository', '@doctrine.helper']
+
+    currency.converter:
+        class: WellCommerce\Bundle\CurrencyBundle\Converter\CurrencyConverter
+        arguments: ['@currency_rate.repository', '@request.helper']
+
+    currency.formatter:
+        class: WellCommerce\Bundle\CurrencyBundle\Formatter\CurrencyFormatter
+        arguments: ['@request.helper']
+
+    currency.helper:
+        class: WellCommerce\Bundle\CurrencyBundle\Helper\CurrencyHelper
+        arguments: ['@currency.converter', '@currency.formatter']
+
+    currency.order.visitor:
+        class: WellCommerce\Bundle\CurrencyBundle\Visitor\CurrencyOrderVisitor
+        tags:
+            - { name: order.visitor, alias: currency }
+        arguments: ['@currency.converter']

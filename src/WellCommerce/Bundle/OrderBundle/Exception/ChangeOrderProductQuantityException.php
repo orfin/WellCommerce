@@ -12,20 +12,20 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Exception;
 
+use WellCommerce\Bundle\OrderBundle\Entity\OrderProductInterface;
+
 /**
- * Class ChangeCartItemQuantityException
+ * Class ChangeOrderProductQuantityException
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ChangeCartItemQuantityException extends \RuntimeException
+class ChangeOrderProductQuantityException extends \InvalidArgumentException
 {
-    /**
-     * Constructor
-     *
-     * @param string $id Cart item id
-     */
-    public function __construct($id)
+    const ERROR_MESSAGE = 'Cannot change quantity of item "%s". It does not belongs to order.';
+
+    public function __construct(OrderProductInterface $orderProduct)
     {
-        parent::__construct(sprintf('Cannot change item "%s" quantity on cart', $id));
+        $message = sprintf(self::ERROR_MESSAGE, $orderProduct->getId());
+        parent::__construct($message);
     }
 }

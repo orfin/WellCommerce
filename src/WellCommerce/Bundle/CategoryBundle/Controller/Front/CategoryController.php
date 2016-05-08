@@ -14,9 +14,7 @@ namespace WellCommerce\Bundle\CategoryBundle\Controller\Front;
 
 use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CategoryBundle\Entity\CategoryInterface;
-use WellCommerce\Bundle\CategoryBundle\Storage\CategoryStorageInterface;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
-use WellCommerce\Bundle\CoreBundle\Service\Breadcrumb\BreadcrumbItem;
 
 /**
  * Class CategoryController
@@ -27,10 +25,6 @@ final class CategoryController extends AbstractFrontController
 {
     public function indexAction(CategoryInterface $category) : Response
     {
-        $this->addBreadCrumbItem(new BreadcrumbItem([
-            'name' => $category->translate()->getName(),
-        ]));
-
         $this->getCategoryStorage()->setCurrentCategory($category);
 
         return $this->displayTemplate('index', [

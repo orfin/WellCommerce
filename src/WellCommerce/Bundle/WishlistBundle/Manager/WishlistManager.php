@@ -13,8 +13,6 @@
 namespace WellCommerce\Bundle\WishlistBundle\Manager;
 
 use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
-use WellCommerce\Bundle\CoreBundle\Manager\AbstractManager;
-use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
 use WellCommerce\Bundle\DoctrineBundle\Manager\Manager;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 use WellCommerce\Bundle\WishlistBundle\Entity\WishlistInterface;

@@ -15,6 +15,7 @@ namespace WellCommerce\Bundle\CouponBundle\Controller\Front;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
+use WellCommerce\Bundle\CouponBundle\Checker\CouponCheckerInterface;
 use WellCommerce\Bundle\CouponBundle\Entity\CouponInterface;
 use WellCommerce\Bundle\CouponBundle\Exception\CouponException;
 
@@ -25,15 +26,14 @@ use WellCommerce\Bundle\CouponBundle\Exception\CouponException;
  */
 class CouponController extends AbstractFrontController
 {
-    /**
-     * @var \WellCommerce\Bundle\CouponBundle\Manager\Front\CouponManager
-     */
-    protected $manager;
-
     public function addAction(CouponInterface $coupon = null) : JsonResponse
     {
         try {
-            $this->manager->useCoupon($coupon);
+            if (!$this->getCouponChecker()->isValid($coupon)) {
+                throw new CouponException($this->getCouponChecker()->getError());
+            }
+
+            $this->getOrderStorage()->getCurrentOrder()->setCoupon($coupon);
 
             $result = [
                 'success' => true
@@ -55,7 +55,7 @@ class CouponController extends AbstractFrontController
         }
 
         try {
-            $this->manager->removeCartCoupon();
+            $this->getOrderStorage()->getCurrentOrder()->removeCoupon();
 
             $result = [
                 'success' => true
@@ -68,5 +68,10 @@ class CouponController extends AbstractFrontController
         }
 
         return $this->jsonResponse($result);
+    }
+
+    protected function getCouponChecker() : CouponCheckerInterface
+    {
+        return $this->get('coupon.checker');
     }
 }

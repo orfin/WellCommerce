@@ -29,12 +29,12 @@ use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
 class Manager implements ManagerInterface
 {
     /**
-     * @var RepositoryInterface
+     * @var null|RepositoryInterface
      */
     private $repository;
     
     /**
-     * @var EntityFactoryInterface
+     * @var null|EntityFactoryInterface
      */
     private $factory;
     
@@ -51,13 +51,13 @@ class Manager implements ManagerInterface
     /**
      * Manager constructor.
      *
-     * @param EntityFactoryInterface   $factory
+     * @param EntityFactoryInterface|null   $factory
      * @param RepositoryInterface|null $repository
      * @param DoctrineHelperInterface  $helper
      * @param EventDispatcherInterface $eventDispatcher
      */
     public function __construct(
-        EntityFactoryInterface $factory,
+        EntityFactoryInterface $factory = null,
         RepositoryInterface $repository = null,
         DoctrineHelperInterface $helper,
         EventDispatcherInterface $eventDispatcher

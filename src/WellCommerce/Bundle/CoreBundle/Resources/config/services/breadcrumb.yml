@@ -1,0 +1,14 @@
+services:
+    breadcrumb.collection:
+        class: WellCommerce\Component\Breadcrumb\Model\BreadcrumbCollection
+        shared: false
+
+    breadcrumb.provider:
+        class: WellCommerce\Component\Breadcrumb\Provider\BreadcrumbProvider
+        arguments: ['@breadcrumb.collection']
+
+    twig.extension.breadcrumb:
+        class: WellCommerce\Bundle\CoreBundle\Twig\Extension\BreadcrumbExtension
+        tags:
+            - { name: twig.extension }
+        arguments: ['@breadcrumb.provider']

@@ -62,8 +62,8 @@ abstract class AbstractExtension extends Extension
         $directory  = dirname($reflection->getFileName());
         $locator    = new FileLocator($directory . '/../Resources/config');
         
-        $xmlLoader = new Loader\XmlFileLoader($container, $locator);
-        $xmlLoader->load('services.xml');
+        $xmlLoader = new Loader\YamlFileLoader($container, $locator);
+        $xmlLoader->load('services.yml');
         
         $configuration = $this->getConfiguration($configs, $container);
         $config        = $this->processConfiguration($configuration, $configs);
@@ -162,6 +162,7 @@ abstract class AbstractExtension extends Extension
             'defaults'     => $configuration['defaults'],
             'requirements' => $configuration['requirements'],
             'pattern'      => $configuration['pattern'],
+            'options'      => $configuration['options'] ?? [],
         ]);
         
         $definition->addTag('route.generator');

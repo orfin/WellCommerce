@@ -1,0 +1,18 @@
+front.wishlist.index:
+    path: /wishlist/index
+    defaults:
+        _controller: 'wishlist.controller.front:indexAction'
+    options:
+        allow_page_redirect: 'true'
+front.wishlist.add:
+    path: '/wishlist/add/{id}'
+    defaults:
+        _controller: 'wishlist.controller.front:addAction'
+    options:
+        id: 'null'
+front.wishlist.delete:
+    path: '/wishlist/delete/{id}'
+    defaults:
+        _controller: 'wishlist.controller.front:deleteAction'
+    options:
+        id: 'null'

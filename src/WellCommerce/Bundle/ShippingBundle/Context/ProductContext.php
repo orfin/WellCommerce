@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\ShippingBundle\Calculator\Adapter;
 
-use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 use WellCommerce\Bundle\ShippingBundle\Calculator\ShippingSubjectInterface;
 
@@ -21,15 +20,15 @@ use WellCommerce\Bundle\ShippingBundle\Calculator\ShippingSubjectInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductContext implements ShippingSubjectInterface
+final class ProductContext implements ShippingSubjectInterface
 {
     /**
-     * @var CartInterface
+     * @var ProductInterface
      */
     protected $product;
-
+    
     /**
-     * ProductAdapter constructor.
+     * ProductContext constructor.
      *
      * @param ProductInterface $product
      */
@@ -42,17 +41,27 @@ class ProductContext implements ShippingSubjectInterface
     {
         return 1;
     }
-    
+
     public function getWeight() : float
     {
         return $this->product->getWeight();
     }
-    
+
     public function getGrossPrice() : float
     {
-        return $this->product->getSellPrice()->getGrossAmount();
+        return $this->product->getSellPrice()->getFinalGrossAmount();
     }
-    
+
+    public function getNetPrice() : float
+    {
+        return $this->product->getSellPrice()->getFinalNetAmount();
+    }
+
+    public function getTaxAmount() : float
+    {
+        return $this->product->getSellPrice()->getFinalTaxAmount();
+    }
+
     public function getCurrency() : string
     {
         return $this->product->getSellPrice()->getCurrency();

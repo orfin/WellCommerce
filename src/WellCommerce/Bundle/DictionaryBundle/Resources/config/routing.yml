@@ -1,0 +1,42 @@
+admin.dictionary.index:
+    path: /admin/configuration/intl/dictionary/index
+    defaults:
+        _controller: 'dictionary.controller.admin:indexAction'
+    options:
+        expose: true
+        require_admin_permission: dictionary.index
+admin.dictionary.grid:
+    path: /admin/configuration/intl/dictionary/grid
+    defaults:
+        _controller: 'dictionary.controller.admin:gridAction'
+    options:
+        expose: true
+        require_admin_permission: dictionary.index
+admin.dictionary.add:
+    path: /admin/configuration/intl/dictionary/add
+    defaults:
+        _controller: 'dictionary.controller.admin:addAction'
+    options:
+        expose: true
+        require_admin_permission: dictionary.add
+admin.dictionary.edit:
+    path: '/admin/configuration/intl/dictionary/edit/{id}'
+    defaults:
+        _controller: 'dictionary.controller.admin:editAction'
+    options:
+        expose: true
+        require_admin_permission: dictionary.edit
+admin.dictionary.sync:
+    path: /admin/configuration/intl/dictionary/sync
+    defaults:
+        _controller: 'dictionary.controller.admin:syncAction'
+    options:
+        expose: true
+        require_admin_permission: dictionary.edit
+admin.dictionary.delete:
+    path: '/admin/configuration/intl/dictionary/delete/{id}'
+    defaults:
+        _controller: 'dictionary.controller.admin:deleteAction'
+    options:
+        expose: true
+        require_admin_permission: dictionary.delete

@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\AttributeBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use WellCommerce\Bundle\AttributeBundle\Repository\AttributeGroupRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 
 /**
@@ -23,19 +24,19 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
  */
 class AttributeGroupController extends AbstractAdminController
 {
-    /**
-     * @var \WellCommerce\Bundle\AttributeBundle\Manager\AttributeGroupManager
-     */
-    protected $manager;
-
     public function ajaxIndexAction(Request $request) : JsonResponse
     {
         if (!$request->isXmlHttpRequest()) {
             return $this->redirectToAction('index');
         }
-
+        
         return $this->jsonResponse([
-            'sets' => $this->manager->getAttributeGroupSets()
+            'sets' => $this->getRepository()->getAttributeGroupSet()
         ]);
+    }
+    
+    protected function getRepository() : AttributeGroupRepositoryInterface
+    {
+        return $this->getManager()->getRepository();
     }
 }

@@ -1,0 +1,155 @@
+admin.attribute.index:
+    path: /admin/attribute/index
+    defaults:
+        _controller: 'attribute.controller.admin:indexAction'
+    options:
+        require_admin_permission: attribute.index
+admin.attribute.grid:
+    path: /admin/attribute/grid
+    defaults:
+        _controller: 'attribute.controller.admin:gridAction'
+    options:
+        expose: true
+        require_admin_permission: attribute.index
+admin.attribute.add:
+    path: /admin/attribute/add
+    defaults:
+        _controller: 'attribute.controller.admin:addAction'
+    options:
+        require_admin_permission: attribute.add
+admin.attribute.edit:
+    path: '/admin/attribute/edit/{id}'
+    defaults:
+        _controller: 'attribute.controller.admin:editAction'
+    options:
+        expose: true
+        require_admin_permission: attribute.edit
+admin.attribute.delete:
+    path: '/admin/attribute/delete/{id}'
+    defaults:
+        _controller: 'attribute.controller.admin:deleteAction'
+    options:
+        expose: true
+        require_admin_permission: attribute.delete
+admin.attribute.ajax.index:
+    path: /admin/attribute/ajax/index
+    defaults:
+        _controller: 'attribute.controller.admin:ajaxIndexAction'
+    options:
+        expose: true
+        require_admin_permission: attribute.index
+admin.attribute.ajax.add:
+    path: /admin/attribute/ajax/add
+    defaults:
+        _controller: 'attribute.controller.admin:ajaxAddAction'
+    options:
+        expose: true
+        require_admin_permission: attribute.add
+admin.attribute.ajax.generate:
+    path: /admin/attribute/ajax/generate
+    defaults:
+        _controller: 'attribute.controller.admin:ajaxGenerateCartesianAction'
+    options:
+        expose: true
+        require_admin_permission: attribute.add
+admin.attribute_group.index:
+    path: /admin/attribute/group/index
+    defaults:
+        _controller: 'attribute_group.controller.admin:indexAction'
+    options:
+        require_admin_permission: attribute_group.index
+admin.attribute_group.grid:
+    path: /admin/attribute/group/grid
+    defaults:
+        _controller: 'attribute_group.controller.admin:gridAction'
+    options:
+        expose: true
+        require_admin_permission: attribute_group.index
+admin.attribute_group.add:
+    path: /admin/attribute/group/add
+    defaults:
+        _controller: 'attribute_group.controller.admin:addAction'
+    options:
+        require_admin_permission: attribute_group.add
+admin.attribute_group.edit:
+    path: '/admin/attribute/group/edit/{id}'
+    defaults:
+        _controller: 'attribute_group.controller.admin:editAction'
+    options:
+        expose: true
+        require_admin_permission: attribute_group.edit
+admin.attribute_group.delete:
+    path: '/admin/attribute/group/delete/{id}'
+    defaults:
+        _controller: 'attribute_group.controller.admin:deleteAction'
+    options:
+        expose: true
+        require_admin_permission: attribute_group.delete
+admin.attribute_group.ajax.index:
+    path: /admin/attribute/group/ajax/index
+    defaults:
+        _controller: 'attribute_group.controller.admin:ajaxIndexAction'
+    options:
+        expose: true
+        require_admin_permission: attribute_group.index
+admin.attribute_value.index:
+    path: /admin/attribute/value/index
+    defaults:
+        _controller: 'attribute_value.controller.admin:indexAction'
+    options:
+        require_admin_permission: attribute_value.index
+admin.attribute_value.grid:
+    path: /admin/attribute/value/grid
+    defaults:
+        _controller: 'attribute_value.controller.admin:gridAction'
+    options:
+        expose: true
+        require_admin_permission: attribute_value.index
+admin.attribute_value.add:
+    path: /admin/attribute/value/add
+    defaults:
+        _controller: 'attribute_value.controller.admin:addAction'
+    options:
+        require_admin_permission: attribute_value.add
+admin.attribute_value.edit:
+    path: '/admin/attribute/value/edit/{id}'
+    defaults:
+        _controller: 'attribute_value.controller.admin:editAction'
+    options:
+        expose: true
+        require_admin_permission: attribute_value.edit
+admin.attribute_value.delete:
+    path: '/admin/attribute/value/delete/{id}'
+    defaults:
+        _controller: 'attribute_value.controller.admin:deleteAction'
+    options:
+        expose: true
+        require_admin_permission: attribute_value.delete
+admin.attribute_value.ajax.index:
+    path: /admin/attribute/value/ajax/index
+    defaults:
+        _controller: 'attribute_value.controller.admin:ajaxIndexAction'
+    options:
+        expose: true
+        require_admin_permission: attribute_value.index
+admin.attribute_value.ajax.add:
+    path: /admin/attribute/value/ajax/add
+    defaults:
+        _controller: 'attribute_value.controller.admin:ajaxAddAction'
+    options:
+        expose: true
+        require_admin_permission: attribute_value.add
+admin.attribute_value.ajax.edit:
+    path: '/admin/attribute/value/ajax/edit/{id}'
+    defaults:
+        _controller: 'attribute_value.controller.admin:ajaxEditAction'
+    options:
+        expose: true
+        require_admin_permission: attribute_value.edit
+admin.attribute_value.ajax.delete:
+    path: '/admin/attribute/value/ajax/delete/{id}'
+    defaults:
+        _controller: 'attribute_value.controller.admin:ajaxDeleteAction'
+    options:
+        expose: true
+        require_admin_permission: attribute_value.delete

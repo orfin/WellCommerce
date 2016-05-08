@@ -1,0 +1,90 @@
+services:
+    category.controller.admin:
+        class: WellCommerce\Bundle\CategoryBundle\Controller\Admin\CategoryController
+        arguments: ['@category.manager', '@category.form_builder.admin']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    category_menu.layout_box.configurator:
+        class: WellCommerce\Bundle\LayoutBundle\Configurator\CategoryMenuBoxConfigurator
+        tags:
+            - { name: layout_box.configurator }
+        arguments: [CategoryMenu, category_menu.layout_box.controller, '@translator.helper']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    category_info.layout_box.configurator:
+        class: WellCommerce\Bundle\LayoutBundle\Configurator\CategoryInfoBoxConfigurator
+        tags:
+            - { name: layout_box.configurator }
+        arguments: [CategoryInfo, category_info.layout_box.controller, '@translator.helper']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    category.dataset.admin:
+        class: WellCommerce\Bundle\CategoryBundle\DataSet\Admin\CategoryDataSet
+        tags:
+            - { name: dataset }
+        arguments: ['@category.repository']
+
+    category.form_builder.admin:
+        class: WellCommerce\Bundle\CategoryBundle\Form\Admin\CategoryFormBuilder
+        parent: core.form_builder
+
+    category_tree.form_builder.admin:
+        class: WellCommerce\Bundle\CategoryBundle\Form\Admin\CategoryTreeFormBuilder
+        parent: core.form_builder
+
+    category_products.layout_box.configurator:
+        class: WellCommerce\Bundle\LayoutBundle\Configurator\CategoryProductsBoxConfigurator
+        tags:
+            - { name: layout_box.configurator }
+        arguments: [CategoryProducts, category_products.layout_box.controller, '@translator.helper']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    category.controller.front:
+        class: WellCommerce\Bundle\CategoryBundle\Controller\Front\CategoryController
+        arguments: ['@category.manager']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    category_menu.layout_box.controller:
+        class: WellCommerce\Bundle\CategoryBundle\Controller\Box\CategoryMenuBoxController
+        arguments: ['@category.manager']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    category_info.layout_box.controller:
+        class: WellCommerce\Bundle\CategoryBundle\Controller\Box\CategoryInfoBoxController
+        arguments: ['@category.manager']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    category.dataset.front:
+        class: WellCommerce\Bundle\CategoryBundle\DataSet\Front\CategoryDataSet
+        tags:
+            - { name: dataset }
+        arguments: ['@category.repository']
+
+    category_products.layout_box.controller:
+        class: WellCommerce\Bundle\CategoryBundle\Controller\Box\CategoryProductsBoxController
+        arguments: ['@category.manager']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    category.request_param_converter:
+        class: WellCommerce\Bundle\CategoryBundle\Request\ParamConverter\CategoryParamConverter
+        public: false
+        tags:
+            - { name: request.param_converter, converter: category, priority: 0 }
+        arguments: ['@category.repository', id, [WellCommerce\Bundle\CategoryBundle\Entity\Category, WellCommerce\Bundle\CategoryBundle\Entity\CategoryInterface]]
+
+    twig.extension.category:
+        class: WellCommerce\Bundle\CategoryBundle\Twig\Extension\CategoryExtension
+        tags:
+            - { name: twig.extension }
+        arguments: ['@category.dataset.front']
+
+    category.storage:
+        class: WellCommerce\Bundle\CategoryBundle\Storage\CategoryStorage

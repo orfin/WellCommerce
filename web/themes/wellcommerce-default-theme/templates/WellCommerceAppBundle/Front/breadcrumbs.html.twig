@@ -1,9 +1,9 @@
 <ul class="breadcrumbs">
     {% for crumb in breadcrumbs() %}
-        {% if crumb.link != '' %}
-		<li><a href="{{ crumb.getLink() }}" class="{{ crumb.getClass() }}">{{ crumb.getName() }}</a></li>
+        {% if crumb.url != '' %}
+		<li><a href="{{ crumb.url }}" class="{{ crumb.cssClass }}">{{ crumb.label }}</a></li>
         {% else %}
-        <li class="{{ crumb.getClass() }}">{{ crumb.getName() }}</li>
+        <li class="{{ crumb.cssClass }}">{{ crumb.label }}</li>
         {% endif %}
     {% endfor %}
 </ul>

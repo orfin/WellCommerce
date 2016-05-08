@@ -1,0 +1,63 @@
+front.payment.initialize:
+    path: '/payment/initialize/{token}'
+    defaults:
+        _controller: 'payment.controller.front:initializeAction'
+    options:
+        expose: true
+front.payment.confirm:
+    path: '/payment/confirm/{token}'
+    defaults:
+        _controller: 'payment.controller.front:confirmAction'
+    options:
+        expose: true
+front.payment.cancel:
+    path: '/payment/cancel/{token}'
+    defaults:
+        _controller: 'payment.controller.front:cancelAction'
+    options:
+        expose: true
+front.payment.execute:
+    path: '/payment/execute/{token}'
+    defaults:
+        _controller: 'payment.controller.front:executeAction'
+    options:
+        expose: true
+front.payment.notify:
+    path: '/payment/notify/{token}'
+    defaults:
+        _controller: 'payment.controller.front:notifyAction'
+    options:
+        expose: true
+admin.payment_method.index:
+    path: /admin/configuration/payment/index
+    defaults:
+        _controller: 'payment_method.controller.admin:indexAction'
+    options:
+        require_admin_permission: payment_method.index
+admin.payment_method.grid:
+    path: /admin/configuration/payment/grid
+    defaults:
+        _controller: 'payment_method.controller.admin:gridAction'
+    options:
+        expose: true
+        require_admin_permission: payment_method.index
+admin.payment_method.add:
+    path: /admin/configuration/payment/add
+    defaults:
+        _controller: 'payment_method.controller.admin:addAction'
+    options:
+        require_admin_permission: payment_method.add
+admin.payment_method.edit:
+    path: '/admin/configuration/payment/edit/{id}'
+    defaults:
+        _controller: 'payment_method.controller.admin:editAction'
+    options:
+        expose: true
+        require_admin_permission: payment_method.edit
+admin.payment_method.delete:
+    path: '/admin/configuration/payment/delete/{id}'
+    defaults:
+        _controller: 'payment_method.controller.admin:deleteAction'
+    options:
+        expose: true
+        require_admin_permission: payment_method.delete

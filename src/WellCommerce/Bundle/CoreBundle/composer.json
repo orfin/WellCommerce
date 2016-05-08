@@ -32,6 +32,7 @@
   "require": {
     "php": "^7.0",
     "wellcommerce/composer-plugin": "^1.0@dev",
+    "wellcommerce/breadcrumb": "^0.7@dev",
     "wellcommerce/collections": "^0.7@dev",
     "wellcommerce/datagrid": "^0.7@dev",
     "wellcommerce/dataset": "^0.7@dev",

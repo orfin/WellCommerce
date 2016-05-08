@@ -41,7 +41,7 @@
 
         <div class="modal-footer">
             <button type="button" class="btn btn-link dark nopadding notransform pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span> Back to shopping</button>
-            <button type="button" class="btn btn-primary" onclick="window.location.href = '{{ path('front.order.cart') }}';">Go to cart<span class="cart-qty">{{ currentOrder().productTotal.quantity }}</span></button>
+            <button type="button" class="btn btn-primary" onclick="window.location.href = '{{ path('front.order_cart.index') }}';">Go to cart<span class="cart-qty">{{ currentOrder().productTotal.quantity }}</span></button>
         </div>
     </div>
 </div>

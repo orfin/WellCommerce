@@ -1,0 +1,33 @@
+admin.availability.index:
+    path: /admin/availability/index
+    defaults:
+        _controller: 'availability.controller.admin:indexAction'
+    options:
+        require_admin_permission: availability.index
+admin.availability.grid:
+    path: /admin/availability/grid
+    defaults:
+        _controller: 'availability.controller.admin:gridAction'
+    options:
+        expose: true
+        require_admin_permission: availability.index
+admin.availability.add:
+    path: /admin/availability/add
+    defaults:
+        _controller: 'availability.controller.admin:addAction'
+    options:
+        require_admin_permission: availability.add
+admin.availability.edit:
+    path: '/admin/availability/edit/{id}'
+    defaults:
+        _controller: 'availability.controller.admin:editAction'
+    options:
+        expose: true
+        require_admin_permission: availability.edit
+admin.availability.delete:
+    path: '/admin/availability/delete/{id}'
+    defaults:
+        _controller: 'availability.controller.admin:deleteAction'
+    options:
+        expose: true
+        require_admin_permission: availability.delete

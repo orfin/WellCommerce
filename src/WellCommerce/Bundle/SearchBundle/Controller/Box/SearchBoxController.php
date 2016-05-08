@@ -25,11 +25,6 @@ use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
 class SearchBoxController extends AbstractBoxController
 {
     /**
-     * @var \WellCommerce\Bundle\SearchBundle\Manager\Front\SearchManager
-     */
-    protected $manager;
-
-    /**
      * {@inheritdoc}
      */
     public function indexAction(LayoutBoxSettingsCollection $boxSettings) : Response
@@ -37,7 +32,7 @@ class SearchBoxController extends AbstractBoxController
         $dataset       = $this->get('search.dataset.front');
         $conditions    = $this->getConditions();
         $requestHelper = $this->getRequestHelper();
-        $limit         = $this->manager->getRequestHelper()->getAttributesBagParam('limit', $boxSettings->getParam('per_page', 12));
+        $limit         = $this->getRequestHelper()->getAttributesBagParam('limit', $boxSettings->getParam('per_page', 12));
 
         $products = $dataset->getResult('array', [
             'limit'      => $limit,

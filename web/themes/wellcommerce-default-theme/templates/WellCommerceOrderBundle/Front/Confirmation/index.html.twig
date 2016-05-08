@@ -47,21 +47,21 @@
                             <div class="client-details">
                                 <div class="row">
                                     <div class="col-sm-4">
-                                        <h4>Delivery address <a href="{{ path('front.order.address') }}">Change</a></h4>
+                                        <h4>Delivery address <a href="{{ path('front.order_address.index') }}">Change</a></h4>
 
                                         <p>
                                             {{ format_billing_address(currentOrder().billingAddress) }}
                                         </p>
                                     </div>
                                     <div class="col-sm-4">
-                                        <h4>Contact info <a href="{{ path('front.order.address') }}">Change</a></h4>
+                                        <h4>Contact info <a href="{{ path('front.order_address.index') }}">Change</a></h4>
 
                                         <p>
                                             {{ format_contact_details(currentOrder().contactDetails) }}
                                         </p>
                                     </div>
                                     <div class="col-sm-4">
-                                        <h4>Billing data <a href="{{ path('front.order.address') }}">Change</a></h4>
+                                        <h4>Billing data <a href="{{ path('front.order_address.index') }}">Change</a></h4>
 
                                         <p>
                                             {{ format_shipping_address(currentOrder().shippingAddress) }}
@@ -111,7 +111,7 @@
                 </div>
 
                 <div class="clearfix">
-                    <a href="{{ path('front.order.address') }}" class="btn btn-link light btn-lg notransform nopadding">Back to address details</a>
+                    <a href="{{ path('front.order_address.index') }}" class="btn btn-link light btn-lg notransform nopadding">Back to address details</a>
                     <button class="btn btn-primary btn-lg pull-right">Place an order</button>
                 </div>
             </div>

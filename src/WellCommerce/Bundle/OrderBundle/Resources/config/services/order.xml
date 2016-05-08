@@ -55,6 +55,16 @@
 
         <service id="order.storage" class="WellCommerce\Bundle\OrderBundle\Storage\OrderStorage"/>
 
+        <service id="order_product.request_param_converter" class="WellCommerce\Bundle\OrderBundle\Request\ParamConverter\OrderProductParamConverter">
+            <argument type="service" id="order_product.repository" />
+            <argument>id</argument>
+            <argument type="collection">
+                <argument>WellCommerce\Bundle\OrderBundle\Entity\OrderProduct</argument>
+                <argument>WellCommerce\Bundle\OrderBundle\Entity\OrderProductInterface</argument>
+            </argument>
+            <tag name="request.param_converter" converter="cart_product" priority="10"/>
+        </service>
+
         <service id="twig.extension.order" class="WellCommerce\Bundle\OrderBundle\Twig\Extension\OrderExtension">
             <argument type="service" id="order.storage"/>
             <argument type="service" id="order_product.dataset.front"/>

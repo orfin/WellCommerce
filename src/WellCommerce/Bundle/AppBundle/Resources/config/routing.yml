@@ -1,110 +1,107 @@
 wellcommerce_api:
-    resource: "@WellCommerceApiBundle/Resources/config/routing.xml"
-
-wellcommerce_app:
-    resource: "@WellCommerceAppBundle/Resources/config/routing.xml"
+    resource: "@WellCommerceApiBundle/Resources/config/routing.yml"
 
 wellcommerce_attribute:
-    resource: "@WellCommerceAttributeBundle/Resources/config/routing.xml"
+    resource: "@WellCommerceAttributeBundle/Resources/config/routing.yml"
 
 wellcommerce_availability:
-    resource: "@WellCommerceAvailabilityBundle/Resources/config/routing.xml"
+    resource: "@WellCommerceAvailabilityBundle/Resources/config/routing.yml"
 
 wellcommerce_category:
-    resource: "@WellCommerceCategoryBundle/Resources/config/routing.xml"
+    resource: "@WellCommerceCategoryBundle/Resources/config/routing.yml"
 
 wellcommerce_contact:
-    resource: "@WellCommerceContactBundle/Resources/config/routing.xml"
+    resource: "@WellCommerceContactBundle/Resources/config/routing.yml"
 
 wellcommerce_currency:
-    resource: "@WellCommerceCurrencyBundle/Resources/config/routing.xml"
+    resource: "@WellCommerceCurrencyBundle/Resources/config/routing.yml"
 
 wellcommerce_deliverer:
-    resource: "@WellCommerceDelivererBundle/Resources/config/routing.xml"
+    resource: "@WellCommerceDelivererBundle/Resources/config/routing.yml"
 
 wellcommerce_dictionary:
-    resource: "@WellCommerceDictionaryBundle/Resources/config/routing.xml"
+    resource: "@WellCommerceDictionaryBundle/Resources/config/routing.yml"
 
 wellcommerce_distribution:
-    resource: "@WellCommerceDistributionBundle/Resources/config/routing.xml"
+    resource: "@WellCommerceDistributionBundle/Resources/config/routing.yml"
 
 wellcommerce_layered_navigation:
-    resource: "@WellCommerceLayeredNavigationBundle/Resources/config/routing.xml"
+    resource: "@WellCommerceLayeredNavigationBundle/Resources/config/routing.yml"
 
 wellcommerce_layout:
-    resource: "@WellCommerceLayoutBundle/Resources/config/routing.xml"
+    resource: "@WellCommerceLayoutBundle/Resources/config/routing.yml"
 
 wellcommerce_locale:
-    resource: "@WellCommerceLocaleBundle/Resources/config/routing.xml"
+    resource: "@WellCommerceLocaleBundle/Resources/config/routing.yml"
 
 wellcommerce_shop:
-    resource: "@WellCommerceShopBundle/Resources/config/routing.xml"
+    resource: "@WellCommerceShopBundle/Resources/config/routing.yml"
 
 wellcommerce_company:
-    resource: "@WellCommerceCompanyBundle/Resources/config/routing.xml"
+    resource: "@WellCommerceCompanyBundle/Resources/config/routing.yml"
 
 wellcommerce_coupon:
-    resource: "@WellCommerceCouponBundle/Resources/config/routing.xml"
+    resource: "@WellCommerceCouponBundle/Resources/config/routing.yml"
 
 wellcommerce_client:
-    resource: "@WellCommerceClientBundle/Resources/config/routing.xml"
+    resource: "@WellCommerceClientBundle/Resources/config/routing.yml"
 
 wellcommerce_media:
-    resource: "@WellCommerceMediaBundle/Resources/config/routing.xml"
+    resource: "@WellCommerceMediaBundle/Resources/config/routing.yml"
 
 wellcommerce_news:
-    resource: "@WellCommerceNewsBundle/Resources/config/routing.xml"
+    resource: "@WellCommerceNewsBundle/Resources/config/routing.yml"
 
 wellcommerce_admin:
-    resource: "@WellCommerceAdminBundle/Resources/config/routing.xml"
+    resource: "@WellCommerceAdminBundle/Resources/config/routing.yml"
 
 wellcommerce_oauth:
-    resource: "@WellCommerceOAuthBundle/Resources/config/routing.xml"
+    resource: "@WellCommerceOAuthBundle/Resources/config/routing.yml"
 
 wellcommerce_order:
-    resource: "@WellCommerceOrderBundle/Resources/config/routing.xml"
+    resource: "@WellCommerceOrderBundle/Resources/config/routing.yml"
 
 wellcommerce_page:
-    resource: "@WellCommercePageBundle/Resources/config/routing.xml"
+    resource: "@WellCommercePageBundle/Resources/config/routing.yml"
 
 wellcommerce_payment:
-    resource: "@WellCommercePaymentBundle/Resources/config/routing.xml"
+    resource: "@WellCommercePaymentBundle/Resources/config/routing.yml"
 
 wellcommerce_producer:
-    resource: "@WellCommerceProducerBundle/Resources/config/routing.xml"
+    resource: "@WellCommerceProducerBundle/Resources/config/routing.yml"
 
 wellcommerce_product:
-    resource: "@WellCommerceProductBundle/Resources/config/routing.xml"
+    resource: "@WellCommerceProductBundle/Resources/config/routing.yml"
 
 wellcommerce_product_status:
-    resource: "@WellCommerceProductStatusBundle/Resources/config/routing.xml"
+    resource: "@WellCommerceProductStatusBundle/Resources/config/routing.yml"
 
 wellcommerce_report:
-    resource: "@WellCommerceReportBundle/Resources/config/routing.xml"
+    resource: "@WellCommerceReportBundle/Resources/config/routing.yml"
 
 wellcommerce_review:
-    resource: "@WellCommerceReviewBundle/Resources/config/routing.xml"
+    resource: "@WellCommerceReviewBundle/Resources/config/routing.yml"
 
 wellcommerce_routing:
-    resource: "@WellCommerceRoutingBundle/Resources/config/routing.xml"
+    resource: "@WellCommerceRoutingBundle/Resources/config/routing.yml"
 
 wellcommerce_search:
-    resource: "@WellCommerceSearchBundle/Resources/config/routing.xml"
+    resource: "@WellCommerceSearchBundle/Resources/config/routing.yml"
 
 wellcommerce_shipping:
-    resource: "@WellCommerceShippingBundle/Resources/config/routing.xml"
+    resource: "@WellCommerceShippingBundle/Resources/config/routing.yml"
 
 wellcommerce_tax:
-    resource: "@WellCommerceTaxBundle/Resources/config/routing.xml"
+    resource: "@WellCommerceTaxBundle/Resources/config/routing.yml"
 
 wellcommerce_theme:
-    resource: "@WellCommerceThemeBundle/Resources/config/routing.xml"
+    resource: "@WellCommerceThemeBundle/Resources/config/routing.yml"
 
 wellcommerce_unit:
-    resource: "@WellCommerceUnitBundle/Resources/config/routing.xml"
+    resource: "@WellCommerceUnitBundle/Resources/config/routing.yml"
 
 wellcommerce_wishlist:
-    resource: "@WellCommerceWishlistBundle/Resources/config/routing.xml"
+    resource: "@WellCommerceWishlistBundle/Resources/config/routing.yml"
 
 fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
@@ -114,6 +111,11 @@ _bazinga_jstranslation:
 
 _liip_imagine:
     resource: "@LiipImagineBundle/Resources/config/routing.xml"
+
+front.home_page.index:
+    path: /
+    defaults:
+        _controller: 'web.home_page.controller.front:indexAction'
 
 root:
     path: /admin

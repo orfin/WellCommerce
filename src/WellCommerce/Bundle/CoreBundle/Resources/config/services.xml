@@ -11,4 +11,9 @@
         <import resource="services/datagrid.xml"/>
         <import resource="services/twig.xml"/>
     </imports>
+    <services>
+        <service id="configuration_convert.command" class="WellCommerce\Bundle\CoreBundle\Command\ConvertConfigurationCommand">
+            <tag name="console.command"/>
+        </service>
+    </services>
 </container>

@@ -41,7 +41,7 @@ class WishlistBoxController extends AbstractBoxController
 
     protected function getConditions() : ConditionsCollection
     {
-        $wishlist   = $this->manager->getClient()->getWishlist();
+        $wishlist   = $this->getAuthenticatedClient()->getWishlist();
         $productIds = [];
 
         $wishlist->map(function (WishlistInterface $wishlist) use (&$productIds) {

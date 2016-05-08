@@ -19,14 +19,11 @@ use WellCommerce\Bundle\RoutingBundle\Generator\AbstractRouteGenerator;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CategoryRouteGenerator extends AbstractRouteGenerator
+final class CategoryRouteGenerator extends AbstractRouteGenerator
 {
     const GENERATOR_STRATEGY = 'category';
 
-    /**
-     * {@inheritdoc}
-     */
-    public function supports($strategy)
+    public function supports(string $strategy) : bool
     {
         return self::GENERATOR_STRATEGY === $strategy;
     }

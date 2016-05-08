@@ -1,0 +1,55 @@
+
+services:
+    theme.controller.admin:
+        class: WellCommerce\Bundle\ThemeBundle\Controller\Admin\ThemeController
+        arguments: ['@theme.manager']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    theme.locator:
+        class: WellCommerce\Bundle\ThemeBundle\Locator\ThemeLocator
+        arguments: ['@kernel', '@theme.context.front', '%fallback_theme%', '%kernel.root_dir%/../web/themes']
+
+    theme.subscriber:
+        class: WellCommerce\Bundle\ThemeBundle\EventListener\ThemeSubscriber
+        tags:
+            - { name: kernel.event_subscriber }
+        calls:
+            - [setContainer, ['@service_container']]
+
+    theme.file_locator:
+        class: WellCommerce\Bundle\ThemeBundle\Locator\FileLocator
+        arguments: ['@theme.locator', ['%kernel.root_dir%/Resources']]
+
+    theme.templating_locator:
+        class: WellCommerce\Bundle\ThemeBundle\Locator\TemplateLocator
+        arguments: ['@theme.file_locator', '%kernel.cache_dir%']
+
+    theme.dataset.admin:
+        class: WellCommerce\Bundle\ThemeBundle\DataSet\Admin\ThemeDataSet
+        tags:
+            - { name: dataset }
+        arguments: ['@theme.repository']
+
+    theme.datagrid:
+        class: WellCommerce\Bundle\ThemeBundle\DataGrid\ThemeDataGrid
+        tags:
+            - { name: datagrid, alias: theme }
+        arguments: ['@theme.dataset.admin']
+
+    theme.form_builder.admin:
+        class: WellCommerce\Bundle\ThemeBundle\Form\Admin\ThemeFormBuilder
+        parent: core.form_builder
+
+    theme.context.front:
+        class: WellCommerce\Bundle\ThemeBundle\Context\Front\ThemeContext
+
+    theme.fields_generator:
+        class: WellCommerce\Bundle\ThemeBundle\Generator\ThemeFieldsGenerator
+        calls:
+            - [setContainer, ['@service_container']]
+
+    theme.template_paths.cache_warmer:
+        class: WellCommerce\Bundle\ThemeBundle\CacheWarmer\TemplatePathsCacheWarmer
+        public: false
+        arguments: ['@templating.finder', '@theme.templating_locator']

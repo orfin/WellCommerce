@@ -13,7 +13,7 @@ namespace WellCommerce\Bundle\ClientBundle\EventListener;
 
 use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
-use WellCommerce\Bundle\DoctrineBundle\Event\ResourceEvent;
+use WellCommerce\Bundle\DoctrineBundle\Event\EntityEvent;
 
 /**
  * Class ClientSubscriber
@@ -30,18 +30,18 @@ class ClientSubscriber extends AbstractEventSubscriber
         ];
     }
 
-    public function onClientPreCreate(ResourceEvent $event)
+    public function onClientPreCreate(EntityEvent $event)
     {
-        $client = $event->getResource();
+        $client = $event->getEntity();
         if ($client instanceof ClientInterface) {
             $userName = $client->getUsername();
             $client->getContactDetails()->setEmail($userName);
         }
     }
 
-    public function onClientPostCreate(ResourceEvent $event)
+    public function onClientPostCreate(EntityEvent $event)
     {
-        $client = $event->getResource();
+        $client = $event->getEntity();
         if ($client instanceof ClientInterface) {
             $this->getMailerHelper()->sendEmail([
                 'recipient'     => $client->getContactDetails()->getEmail(),

@@ -7,7 +7,7 @@
     <div class="dropdown pull-right">
         <button class="btn btn-default dropdown-toggle btn-sm" type="button" id="CurrencyMenu" data-toggle="dropdown" aria-expanded="true">
             {% for sort in sortingOptions if sort.active %}
-                {% trans %}product.options.label.order{% endtrans %}: {{ sort.label }}
+                {% trans %}product.options.label.order{% endtrans %}: {{ sort.label|trans }}
             {% endfor %}
             <span class="caret"></span>
         </button>
@@ -16,7 +16,7 @@
             {% for sort in sortingOptions %}
                 <li>
                     <a href="{{ dynamic_path({'orderBy': sort.orderBy,'orderDir':  sort.orderDir}) }}">
-                        {{ sort.label }}
+                        {{ sort.label|trans }}
                     </a>
                 </li>
             {% endfor %}
