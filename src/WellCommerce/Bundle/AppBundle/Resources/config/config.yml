@@ -8,6 +8,40 @@
 
 imports:
     - { resource: "app/" }
+    - { resource: "@WellCommerceAdminBundle/Resources/config/config.yml" }
+    - { resource: "@WellCommerceApiBundle/Resources/config/config.yml" }
+    - { resource: "@WellCommerceAttributeBundle/Resources/config/config.yml" }
+    - { resource: "@WellCommerceAvailabilityBundle/Resources/config/config.yml" }
+    - { resource: "@WellCommerceCategoryBundle/Resources/config/config.yml" }
+    - { resource: "@WellCommerceClientBundle/Resources/config/config.yml" }
+    - { resource: "@WellCommerceCompanyBundle/Resources/config/config.yml" }
+    - { resource: "@WellCommerceContactBundle/Resources/config/config.yml" }
+    - { resource: "@WellCommerceCouponBundle/Resources/config/config.yml" }
+    - { resource: "@WellCommerceCurrencyBundle/Resources/config/config.yml" }
+    - { resource: "@WellCommerceDelivererBundle/Resources/config/config.yml" }
+    - { resource: "@WellCommerceDictionaryBundle/Resources/config/config.yml" }
+    - { resource: "@WellCommerceDistributionBundle/Resources/config/config.yml" }
+    - { resource: "@WellCommerceDoctrineBundle/Resources/config/config.yml" }
+    - { resource: "@WellCommerceLayoutBundle/Resources/config/config.yml" }
+    - { resource: "@WellCommerceLocaleBundle/Resources/config/config.yml" }
+    - { resource: "@WellCommerceMediaBundle/Resources/config/config.yml" }
+    - { resource: "@WellCommerceNewsBundle/Resources/config/config.yml" }
+    - { resource: "@WellCommerceOrderBundle/Resources/config/config.yml" }
+    - { resource: "@WellCommercePageBundle/Resources/config/config.yml" }
+    - { resource: "@WellCommercePaymentBundle/Resources/config/config.yml" }
+    - { resource: "@WellCommerceProducerBundle/Resources/config/config.yml" }
+    - { resource: "@WellCommerceProductBundle/Resources/config/config.yml" }
+    - { resource: "@WellCommerceProductStatusBundle/Resources/config/config.yml" }
+    - { resource: "@WellCommerceReportBundle/Resources/config/config.yml" }
+    - { resource: "@WellCommerceReviewBundle/Resources/config/config.yml" }
+    - { resource: "@WellCommerceRoutingBundle/Resources/config/config.yml" }
+    - { resource: "@WellCommerceSearchBundle/Resources/config/config.yml" }
+    - { resource: "@WellCommerceShippingBundle/Resources/config/config.yml" }
+    - { resource: "@WellCommerceShopBundle/Resources/config/config.yml" }
+    - { resource: "@WellCommerceTaxBundle/Resources/config/config.yml" }
+    - { resource: "@WellCommerceThemeBundle/Resources/config/config.yml" }
+    - { resource: "@WellCommerceUnitBundle/Resources/config/config.yml" }
+    - { resource: "@WellCommerceWishlistBundle/Resources/config/config.yml" }
 
 parameters:
     fixtures_load_order:
