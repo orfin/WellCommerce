@@ -19,7 +19,6 @@ use WellCommerce\Bundle\OrderBundle\Exception\AddCartItemException;
 use WellCommerce\Bundle\OrderBundle\Manager\OrderProductManager;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\VariantInterface;
-use WellCommerce\Component\Breadcrumb\Model\Breadcrumb;
 
 /**
  * Class OrderCartController
@@ -30,10 +29,6 @@ final class OrderCartController extends AbstractFrontController
 {
     public function indexAction() : Response
     {
-        $this->getBreadcrumbProvider()->add(new Breadcrumb([
-            'label' => $this->trans('cart.heading.index')
-        ]));
-        
         $order = $this->getOrderStorage()->getCurrentOrder();
         $form  = $this->getForm($order, [
             'validation_groups' => ['order_cart']

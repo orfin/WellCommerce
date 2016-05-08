@@ -1,0 +1,42 @@
+{
+  "name": "wellcommerce/breadcrumb",
+  "license": "MIT",
+  "minimum-stability": "dev",
+  "description": "WellCommerce Breadcrumb",
+  "keywords": [
+    "wellcommerce",
+    "breadcrumb",
+    "component"
+  ],
+  "authors": [
+    {
+      "name": "Adam Piotrowski",
+      "email": "adam@wellcommerce.org"
+    },
+    {
+      "name": "WellCommerce Developers",
+      "email": "developers@wellcommerce.org"
+    }
+  ],
+  "support": {
+    "email": "support@wellcommerce.org",
+    "issues": "https://github.com/WellCommerce/Breadcrumb/issues",
+    "source": "https://github.com/WellCommerce/Breadcrumb"
+  },
+  "autoload": {
+    "psr-4": {
+      "WellCommerce\\Component\\Breadcrumb\\": ""
+    }
+  },
+  "require": {
+    "php": "^7.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^5.0@dev"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "0.7.x-dev"
+    }
+  }
+}

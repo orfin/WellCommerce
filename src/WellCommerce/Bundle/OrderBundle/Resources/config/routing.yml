@@ -38,11 +38,16 @@ admin.order.delete:
     options:
         expose: true
         require_admin_permission: order.delete
+
 front.order_cart.index:
     path: /order/cart
     defaults:
         _controller: 'order_cart.controller.front:indexAction'
-    options: {  }
+    options:
+        breadcrumb:
+            label: order.breadcrumb.cart
+            route: front.order_cart.index
+
 front.order_cart.add:
     path: '/order/cart/add/{id},{variant},{quantity}'
     defaults:

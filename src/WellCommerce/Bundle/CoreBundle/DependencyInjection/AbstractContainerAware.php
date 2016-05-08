@@ -30,6 +30,7 @@ use WellCommerce\Bundle\CurrencyBundle\Helper\CurrencyHelperInterface;
 use WellCommerce\Bundle\DoctrineBundle\Helper\Doctrine\DoctrineHelperInterface;
 use WellCommerce\Bundle\OrderBundle\Storage\OrderStorageInterface;
 use WellCommerce\Bundle\ShopBundle\Storage\ShopStorageInterface;
+use WellCommerce\Component\Breadcrumb\Provider\BreadcrumbProviderInterface;
 
 /**
  * Class AbstractContainerAware
@@ -151,5 +152,10 @@ abstract class AbstractContainerAware
     public function getOrderStorage() : OrderStorageInterface
     {
         return $this->get('order.storage');
+    }
+
+    public function getBreadcrumbProvider() : BreadcrumbProviderInterface
+    {
+        return $this->get('breadcrumb.provider');
     }
 }

@@ -1,9 +1,10 @@
+{% trans_default_domain "wellcommerce" %}
 <ul class="breadcrumbs">
     {% for crumb in breadcrumbs() %}
         {% if crumb.url != '' %}
-		<li><a href="{{ crumb.url }}" class="{{ crumb.cssClass }}">{{ crumb.label }}</a></li>
+		<li><a href="{{ crumb.url }}" class="{{ crumb.cssClass }}">{{ crumb.label|trans }}</a></li>
         {% else %}
-        <li class="{{ crumb.cssClass }}">{{ crumb.label }}</li>
+        <li class="{{ crumb.cssClass }}">{{ crumb.label|trans }}</li>
         {% endif %}
     {% endfor %}
 </ul>

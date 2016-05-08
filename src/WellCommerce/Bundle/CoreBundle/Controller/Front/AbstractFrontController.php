@@ -18,7 +18,6 @@ use WellCommerce\Bundle\PageBundle\Storage\Front\PageStorageInterface;
 use WellCommerce\Bundle\ProducerBundle\Storage\Front\ProducerStorageInterface;
 use WellCommerce\Bundle\ProductBundle\Storage\ProductStorageInterface;
 use WellCommerce\Bundle\ProductStatusBundle\Storage\ProductStatusStorageInterface;
-use WellCommerce\Component\Breadcrumb\Provider\BreadcrumbProviderInterface;
 
 /**
  * Class AbstractFrontController
@@ -27,11 +26,6 @@ use WellCommerce\Component\Breadcrumb\Provider\BreadcrumbProviderInterface;
  */
 abstract class AbstractFrontController extends AbstractController implements FrontControllerInterface
 {
-    protected function getBreadcrumbProvider() : BreadcrumbProviderInterface
-    {
-        return $this->get('breadcrumb.provider');
-    }
-
     protected function getCategoryStorage() : CategoryStorageInterface
     {
         return $this->get('category.storage');
