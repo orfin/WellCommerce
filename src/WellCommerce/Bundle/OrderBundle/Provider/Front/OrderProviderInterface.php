@@ -1,0 +1,29 @@
+<?php
+/*
+ * WellCommerce Open-Source E-Commerce Platform
+ * 
+ * This file is part of the WellCommerce package.
+ *
+ * (c) Adam Piotrowski <adam@wellcommerce.org>
+ * 
+ * For the full copyright and license information,
+ * please view the LICENSE file that was distributed with this source code.
+ */
+
+namespace WellCommerce\Bundle\OrderBundle\Provider\Front;
+
+use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
+
+/**
+ * Interface OrderProviderInterface
+ *
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
+ */
+interface OrderProviderInterface
+{
+    public function getCurrentOrder() : OrderInterface;
+
+    public function hasCurrentOrder() : bool;
+
+    public function getCurrentOrderIdentifier() : int;
+}

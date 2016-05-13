@@ -12,8 +12,11 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\Controller\Front;
 
+use Doctrine\Common\Inflector\Inflector;
+use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
-use WellCommerce\Bundle\PaymentBundle\Manager\Front\PaymentManagerInterface;
+use WellCommerce\Bundle\PaymentBundle\Manager\PaymentManagerInterface;
+use WellCommerce\Bundle\PaymentBundle\Processor\PaymentProcessorInterface;
 
 /**
  * Class PaymentController
@@ -29,17 +32,16 @@ class PaymentController extends AbstractFrontController
     
     public function initializeAction(string $token)
     {
-        if ($this->manager->getOrderContext()->hasCurrentOrder()) {
-            $order     = $this->manager->getOrderContext()->getCurrentOrder();
-            $processor = $this->manager->getPaymentProcessor($order->getPaymentMethod()->getProcessor());
-            $payment   = $this->manager->getFirstPaymentForOrder($order, $processor);
-            
-            return $this->displayTemplate('initialize', [
-                'payment' => $payment
-            ]);
-        }
-        
-        return $this->redirectToRoute('front.home_page.index');
+        $payment       = $this->getManager()->findPaymentByToken($token);
+        $order         = $payment->getOrder();
+        $processor     = $this->getPaymentProcessor($order->getPaymentMethod()->getProcessor());
+        $processorName = ucfirst(Inflector::camelize($processor->getConfigurator()->getName()));
+
+        $content = $this->renderView(sprintf('WellCommercePaymentBundle:Front/%s:initialize.html.twig', $processorName), [
+            'payment' => $payment
+        ]);
+
+        return new Response($content);
     }
 
     public function confirmAction(string $token)
@@ -60,5 +62,15 @@ class PaymentController extends AbstractFrontController
     public function notifyAction(string $token)
     {
         
+    }
+
+    protected function getManager() : PaymentManagerInterface
+    {
+        return parent::getManager();
+    }
+
+    private function getPaymentProcessor(string $name) : PaymentProcessorInterface
+    {
+        return $this->get('payment.processor.collection')->get($name);
     }
 }

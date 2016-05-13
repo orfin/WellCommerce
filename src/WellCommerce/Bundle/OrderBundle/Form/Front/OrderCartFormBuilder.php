@@ -12,6 +12,7 @@
 namespace WellCommerce\Bundle\OrderBundle\Form\Front;
 
 use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
+use WellCommerce\Bundle\OrderBundle\Provider\Front\OrderProviderInterface;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodInterface;
 use WellCommerce\Bundle\ShippingBundle\Context\OrderContext;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCostInterface;
@@ -28,9 +29,6 @@ use WellCommerce\Component\Form\Elements\Optioned\RadioGroup;
  */
 final class OrderCartFormBuilder extends AbstractFormBuilder
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormInterface $form)
     {
         $shippingMethod = $form->addChild($this->getElement('radio_group', [
@@ -61,7 +59,7 @@ final class OrderCartFormBuilder extends AbstractFormBuilder
      */
     private function addShippingOptions(ElementInterface $radioGroup)
     {
-        $order      = $this->getOrderStorage()->getCurrentOrder();
+        $order      = $this->getOrderProvider()->getCurrentOrder();
         $collection = $this->getShippingMethodProvider()->getCosts(new OrderContext($order));
 
         $collection->map(function (ShippingMethodCostInterface $shippingMethodCost) use ($radioGroup) {
@@ -85,7 +83,7 @@ final class OrderCartFormBuilder extends AbstractFormBuilder
      */
     private function addPaymentOptions(ElementInterface $radioGroup)
     {
-        $order          = $this->getOrderStorage()->getCurrentOrder();
+        $order          = $this->getOrderProvider()->getCurrentOrder();
         $shippingMethod = $order->getShippingMethod();
         if ($shippingMethod instanceof ShippingMethodInterface) {
             $collection = $shippingMethod->getPaymentMethods();
@@ -99,5 +97,10 @@ final class OrderCartFormBuilder extends AbstractFormBuilder
     private function getShippingMethodProvider() : ShippingMethodProviderInterface
     {
         return $this->get('shipping_method.provider');
+    }
+
+    private function getOrderProvider() : OrderProviderInterface
+    {
+        return $this->get('order.provider.front');
     }
 }

@@ -5,7 +5,7 @@
     {% include 'WellCommerceAppBundle:Front:breadcrumbs.html.twig' %}
     <div class="row">
         <div class="col-md-9 col-xs-12">
-            {% if currentOrder().isEmpty %}
+            {% if order.isEmpty %}
             <div class="cart">
                 <div class="alert alert-info mtp30">
                     <strong>{% trans %}cart.flash.empty{% endtrans %}</strong>
@@ -17,10 +17,10 @@
                     <a href="{{ path('front.home_page.index') }}" class="btn btn-link light btn-lg notransform nopadding">Back to shopping</a>
                     <a href="{{ path('front.order_address.index') }}" class="btn btn-primary btn-lg pull-right">Place an order</a>
                 </div>
-                {% include 'WellCommerceAppBundle:Front/Common:discounts.html.twig' %}
-                {% include 'WellCommerceAppBundle:Front/Common:products_table.html.twig' with {'confirmation': false} %}
-                {% include 'WellCommerceAppBundle:Front/Common:methods.html.twig' %}
-                {% include 'WellCommerceAppBundle:Front/Common:summary.html.twig' %}
+                {% include 'WellCommerceOrderBundle:Front/Common:discounts.html.twig' %}
+                {% include 'WellCommerceOrderBundle:Front/Common:products_table.html.twig' with {'confirmation': false} %}
+                {% include 'WellCommerceOrderBundle:Front/Common:methods.html.twig' %}
+                {% include 'WellCommerceOrderBundle:Front/Common:summary.html.twig' %}
 
                 <div class="clearfix">
                     <a href="{{ path('front.home_page.index') }}" class="btn btn-link light btn-lg notransform nopadding">Back to shopping</a>

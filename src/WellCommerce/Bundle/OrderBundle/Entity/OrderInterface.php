@@ -47,7 +47,7 @@ interface OrderInterface extends
     
     public function setConfirmed(bool $confirmed);
     
-    public function getNumber() : string;
+    public function getNumber();
     
     public function setNumber(string $number);
     
@@ -90,7 +90,9 @@ interface OrderInterface extends
     public function getSummary() : OrderSummaryInterface;
     
     public function setSummary(OrderSummaryInterface $summary);
-    
+
+    public function hasCurrentStatus() : bool;
+
     public function getCurrentStatus() : OrderStatusInterface;
     
     public function setCurrentStatus(OrderStatusInterface $currentStatus);

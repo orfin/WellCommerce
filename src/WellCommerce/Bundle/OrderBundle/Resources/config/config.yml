@@ -1,3 +1,14 @@
+
+parameters:
+    order_visitor_hierarchy:
+        currency: 0
+        order_product: 100
+        product_total: 200
+        shipping_method: 300
+        payment_method: 400
+        summary: 500
+        order_confirmation: 600
+
 doctrine:
     orm:
         resolve_target_entities:
@@ -74,12 +85,3 @@ well_commerce_order:
             orm:
                 mapping: "@WellCommerceOrderBundle/Resources/config/doctrine/OrderStatusGroupTranslation.orm.yml"
                 entity: WellCommerce\Bundle\OrderBundle\Entity\OrderStatusGroupTranslation
-
-parameters:
-    order_visitor_hierarchy:
-        currency: 0
-        order_product: 10
-        product_total: 20
-        shipping_method: 30
-        payment_method: 40
-        summary: 900

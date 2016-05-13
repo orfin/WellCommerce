@@ -25,7 +25,8 @@ class ClientShippingAddress implements ClientShippingAddressInterface
     
     private $firstName;
     private $lastName;
-    
+    private $copyBillingAddress;
+
     public function getFirstName() : string
     {
         return $this->firstName;
@@ -44,5 +45,15 @@ class ClientShippingAddress implements ClientShippingAddressInterface
     public function setLastName(string $lastName)
     {
         $this->lastName = $lastName;
+    }
+
+    public function getCopyBillingAddress() : bool
+    {
+        return $this->copyBillingAddress;
+    }
+
+    public function setCopyBillingAddress(bool $copyBillingAddress)
+    {
+        $this->copyBillingAddress = $copyBillingAddress;
     }
 }

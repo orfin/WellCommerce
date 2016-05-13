@@ -24,5 +24,7 @@ use WellCommerce\Bundle\ShopBundle\Entity\ShopInterface;
  */
 interface OrderManagerInterface extends ManagerInterface
 {
-    public function findOrder(string $sessionId, ClientInterface $client = null, ShopInterface $shop) : OrderInterface;
+    public function getOrder(string $sessionId, ClientInterface $client = null, ShopInterface $shop, string $currency) : OrderInterface;
+
+    public function findOrder(string $sessionId, ClientInterface $client = null, ShopInterface $shop);
 }

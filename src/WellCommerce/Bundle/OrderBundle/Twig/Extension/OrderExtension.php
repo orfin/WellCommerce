@@ -11,7 +11,8 @@
  */
 namespace WellCommerce\Bundle\OrderBundle\Twig\Extension;
 
-use WellCommerce\Bundle\OrderBundle\Storage\OrderStorageInterface;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
+use WellCommerce\Bundle\OrderBundle\Provider\Front\OrderProviderInterface;
 use WellCommerce\Component\DataSet\DataSetInterface;
 
 /**
@@ -22,9 +23,9 @@ use WellCommerce\Component\DataSet\DataSetInterface;
 final class OrderExtension extends \Twig_Extension
 {
     /**
-     * @var OrderStorageInterface
+     * @var OrderProviderInterface
      */
-    private $orderStorage;
+    private $orderProvider;
 
     /**
      * @var DataSetInterface
@@ -34,36 +35,39 @@ final class OrderExtension extends \Twig_Extension
     /**
      * OrderExtension constructor.
      *
-     * @param OrderStorageInterface $orderStorage
-     * @param DataSetInterface      $dataset
+     * @param OrderProviderInterface $orderStorage
+     * @param DataSetInterface       $dataset
      */
-    public function __construct(OrderStorageInterface $orderStorage, DataSetInterface $dataset)
+    public function __construct(OrderProviderInterface $orderProvider, DataSetInterface $dataset)
     {
-        $this->orderStorage        = $orderStorage;
+        $this->orderProvider       = $orderProvider;
         $this->orderProductDataSet = $dataset;
     }
 
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('currentOrder', [$this, 'getCurrentOrder'], ['is_safe' => ['html']]),
+            new \Twig_SimpleFunction('getCurrentOrder', [$this, 'getCurrentOrder'], ['is_safe' => ['html']]),
+            new \Twig_SimpleFunction('hasCurrentOrder', [$this, 'hasCurrentOrder'], ['is_safe' => ['html']]),
             new \Twig_SimpleFunction('currentOrderProducts', [$this, 'getCurrentOrderProducts'], ['is_safe' => ['html']]),
         ];
     }
 
-    public function getCurrentOrder()
+    public function hasCurrentOrder() : bool
     {
-        return $this->orderStorage->getCurrentOrder();
+        return $this->orderProvider->hasCurrentOrder();
     }
 
-    public function getCurrentOrderProducts()
+    public function getCurrentOrder() : OrderInterface
+    {
+        return $this->orderProvider->getCurrentOrder();
+    }
+
+    public function getCurrentOrderProducts() : array
     {
         return $this->orderProductDataSet->getResult('array', [], ['pagination' => false]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return 'order';

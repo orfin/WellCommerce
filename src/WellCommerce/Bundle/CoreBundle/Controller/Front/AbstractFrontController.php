@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\CoreBundle\Controller\Front;
 use WellCommerce\Bundle\CategoryBundle\Storage\CategoryStorageInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
 use WellCommerce\Bundle\CoreBundle\Controller\AbstractController;
+use WellCommerce\Bundle\OrderBundle\Provider\Front\OrderProviderInterface;
 use WellCommerce\Bundle\PageBundle\Storage\Front\PageStorageInterface;
 use WellCommerce\Bundle\ProducerBundle\Storage\Front\ProducerStorageInterface;
 use WellCommerce\Bundle\ProductBundle\Storage\ProductStorageInterface;
@@ -50,7 +51,12 @@ abstract class AbstractFrontController extends AbstractController implements Fro
     {
         return $this->get('page.storage');
     }
-    
+
+    protected function getOrderProvider() : OrderProviderInterface
+    {
+        return $this->get('order.provider.front');
+    }
+
     protected function getAuthenticatedClient() : ClientInterface
     {
         return $this->getSecurityHelper()->getAuthenticatedClient();

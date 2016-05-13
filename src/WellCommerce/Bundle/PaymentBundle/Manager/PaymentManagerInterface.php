@@ -12,11 +12,9 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\Manager;
 
-use WellCommerce\Bundle\CoreBundle\Manager\Front\FrontManagerInterface;
 use WellCommerce\Bundle\DoctrineBundle\Manager\ManagerInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
-use WellCommerce\Bundle\PaymentBundle\Processor\PaymentProcessorInterface;
 
 /**
  * Interface PaymentManagerInterface
@@ -25,21 +23,7 @@ use WellCommerce\Bundle\PaymentBundle\Processor\PaymentProcessorInterface;
  */
 interface PaymentManagerInterface extends ManagerInterface
 {
-    /**
-     * Returns the first payment for order or creates a new one
-     *
-     * @param OrderInterface            $order
-     *
-     * @return PaymentInterface
-     */
-    public function createFirstPaymentForOrder(OrderInterface $order) : PaymentInterface;
+    public function createPaymentForOrder(OrderInterface $order) : PaymentInterface;
 
-    /**
-     * Returns the processor object for given name
-     *
-     * @param string $name
-     *
-     * @return PaymentProcessorInterface
-     */
-    public function getPaymentProcessor(string $name) : PaymentProcessorInterface;
+    public function findPaymentByToken(string $token) : PaymentInterface;
 }

@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\OrderBundle\Factory;
 
 use WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddressInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetailsInterface;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddressInterface;
 use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
@@ -39,12 +40,23 @@ class OrderFactory extends AbstractEntityFactory
         $order->setOrderStatusHistory($this->createEmptyCollection());
         $order->setComment('');
         $order->setCurrency($this->getRequestHelper()->getCurrentCurrency());
-        $order->setSessionId($this->getRequestHelper()->getSessionId());
         $order->setSummary($this->createOrderSummary());
-        $order->setContactDetails($this->createContactDetails());
-        $order->setBillingAddress($this->createBillingAddress());
-        $order->setShippingAddress($this->createShippingAddress());
-        
+        $order->setShop($this->getShopStorage()->getCurrentShop());
+        $order->setClient($this->getSecurityHelper()->getCurrentClient());
+        $order->setSessionId($this->getRequestHelper()->getSessionId());
+
+        $client = $this->getSecurityHelper()->getCurrentClient();
+
+        if ($client instanceof ClientInterface) {
+            $order->setContactDetails($client->getContactDetails());
+            $order->setBillingAddress($client->getBillingAddress());
+            $order->setShippingAddress($client->getShippingAddress());
+        } else {
+            $order->setContactDetails($this->createContactDetails());
+            $order->setBillingAddress($this->createBillingAddress());
+            $order->setShippingAddress($this->createShippingAddress());
+        }
+
         return $order;
     }
     

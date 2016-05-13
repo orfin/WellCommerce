@@ -117,7 +117,7 @@ class Order extends AbstractEntity implements OrderInterface
         $this->confirmed = $confirmed;
     }
     
-    public function getNumber() : string
+    public function getNumber()
     {
         return $this->number;
     }
@@ -226,7 +226,12 @@ class Order extends AbstractEntity implements OrderInterface
     {
         $this->summary = $summary;
     }
-    
+
+    public function hasCurrentStatus() : bool
+    {
+        return $this->currentStatus instanceof OrderStatusInterface;
+    }
+
     public function getCurrentStatus() : OrderStatusInterface
     {
         return $this->currentStatus;

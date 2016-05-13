@@ -12,23 +12,26 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\Manager;
 
-use WellCommerce\Bundle\CoreBundle\Manager\AbstractManager;
-use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
+use WellCommerce\Bundle\DoctrineBundle\Manager\Manager;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
+use WellCommerce\Bundle\PaymentBundle\Entity\PaymentStateHistoryInterface;
 
 /**
  * Class PaymentStateHistoryManager
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class PaymentStateHistoryManager extends AbstractManager
+final class PaymentStateHistoryManager extends Manager implements PaymentStateHistoryManagerInterface
 {
-    public function createPaymentStateHistory(PaymentInterface $payment)
+    public function createPaymentStateHistory(PaymentInterface $payment) : PaymentStateHistoryInterface
     {
+        /** @var PaymentStateHistoryInterface $paymentStateHistory */
         $paymentStateHistory = $this->initResource();
         $paymentStateHistory->setState($payment->getState());
         $paymentStateHistory->setPayment($payment);
         $paymentStateHistory->setComment($payment->getComment());
-        $this->createResource($paymentStateHistory);
+        $this->createResource($paymentStateHistory, false);
+
+        return $paymentStateHistory;
     }
 }

@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\OrderBundle\Form\Admin;
 use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
 use WellCommerce\Bundle\OrderBundle\Context\Admin\OrderContextInterface;
+use WellCommerce\Bundle\OrderBundle\Provider\Admin\OrderProviderInterface;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface;
 use WellCommerce\Bundle\ShippingBundle\Provider\ShippingMethodProviderInterface;
 use WellCommerce\Component\Form\Elements\ElementInterface;
@@ -24,7 +25,7 @@ use WellCommerce\Component\Form\Elements\FormInterface;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class OrderFormBuilder extends AbstractFormBuilder
+final class OrderFormBuilder extends AbstractFormBuilder
 {
     /**
      * @var ShippingMethodProviderInterface
@@ -32,24 +33,18 @@ class OrderFormBuilder extends AbstractFormBuilder
     protected $shippingMethodProvider;
 
     /**
-     * @var OrderContextInterface
+     * @var OrderProviderInterface
      */
-    protected $orderContext;
+    protected $orderProvider;
 
-    /**
-     * @param ShippingMethodProviderInterface $shippingMethodProvider
-     */
     public function setShippingMethodProvider(ShippingMethodProviderInterface $shippingMethodProvider)
     {
         $this->shippingMethodProvider = $shippingMethodProvider;
     }
 
-    /**
-     * @param OrderContextInterface $orderContext
-     */
-    public function setOrderContext(OrderContextInterface $orderContext)
+    public function setOrderProvider(OrderProviderInterface $orderProvider)
     {
-        $this->orderContext = $orderContext;
+        $this->orderProvider = $orderProvider;
     }
 
     /**
@@ -57,7 +52,7 @@ class OrderFormBuilder extends AbstractFormBuilder
      */
     public function buildForm(FormInterface $form)
     {
-        $currentOrder    = $this->orderContext->getCurrentOrder();
+        $currentOrder    = $this->orderProvider->getCurrentOrder();
         $shippingMethods = $this->shippingMethodProvider->getShippingMethodOptions($currentOrder);
         $paymentMethods  = $this->shippingMethodProvider->getShippingMethodsPaymentOptions($currentOrder);
         $countries       = $this->get('country.repository')->all();

@@ -1,0 +1,159 @@
+{% extends 'WellCommerceAppBundle:Front:layout.html.twig' %}
+{% trans_default_domain "wellcommerce" %}
+{% import "WellCommerceAppBundle:Front/Form:macros.html.twig" as macros %}
+{% block content %}
+    {% include 'WellCommerceAppBundle:Front:breadcrumbs.html.twig' %}
+    <div class="row">
+        <div class="col-md-9 col-xs-12">
+            {{ macros.form_begin(form, 'cart-address') }}
+            <div class="well-form">
+                <h4 class="mtp30">{% trans %}contact_details.heading.details{% endtrans %}</h4>
+
+                <div class="row">
+                    <div class="col-sm-6 col-xs-12">
+                        {{ macros.element(form.getChildren().get('contactDetails').getChildren().get('contactDetails.firstName')) }}
+                    </div>
+                    <div class="col-sm-6 col-xs-12">
+                        {{ macros.element(form.getChildren().get('contactDetails').getChildren().get('contactDetails.lastName')) }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6 col-xs-12">
+                        {{ macros.element(form.getChildren().get('contactDetails').getChildren().get('contactDetails.email')) }}
+
+                    </div>
+                    <div class="col-sm-3 col-xs-6">
+                        {{ macros.element(form.getChildren().get('contactDetails').getChildren().get('contactDetails.phone')) }}
+                    </div>
+
+                    <div class="col-sm-3 col-xs-6">
+                        {{ macros.element(form.getChildren().get('contactDetails').getChildren().get('contactDetails.secondaryPhone')) }}
+                    </div>
+                </div>
+
+                <h4>{% trans %}address.heading.billing_address{% endtrans %}</h4>
+
+                <div class="row">
+                    <div class="col-sm-6 col-xs-12">
+                        {{ macros.element(form.getChildren().get('billingAddress').getChildren().get('billingAddress.firstName')) }}
+                    </div>
+                    <div class="col-sm-6 col-xs-12">
+                        {{ macros.element(form.getChildren().get('billingAddress').getChildren().get('billingAddress.lastName')) }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6 col-xs-12">
+                        {{ macros.element(form.getChildren().get('billingAddress').getChildren().get('billingAddress.line1')) }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6 col-xs-12">
+                        {{ macros.element(form.getChildren().get('billingAddress').getChildren().get('billingAddress.line2')) }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-2 col-xs-6">
+                        {{ macros.element(form.getChildren().get('billingAddress').getChildren().get('billingAddress.postalCode')) }}
+                    </div>
+                    <div class="col-sm-5 col-xs-12">
+                        {{ macros.element(form.getChildren().get('billingAddress').getChildren().get('billingAddress.city')) }}
+                    </div>
+                    <div class="col-sm-5 col-xs-12">
+                        {{ macros.element(form.getChildren().get('billingAddress').getChildren().get('billingAddress.state')) }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6 col-xs-12">
+                        {{ macros.element(form.getChildren().get('billingAddress').getChildren().get('billingAddress.country')) }}
+                    </div>
+                </div>
+
+                {{ macros.element(form.getChildren().get('shippingAddress').getChildren().get('shippingAddress.copyBillingAddress')) }}
+
+                <div class="collapse" id="shipping-wrap">
+                    <h4>{% trans %}address.heading.shipping_address{% endtrans %}</h4>
+
+                    <div class="row">
+                        <div class="col-sm-6 col-xs-12">
+                            {{ macros.element(form.getChildren().get('shippingAddress').getChildren().get('shippingAddress.firstName')) }}
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            {{ macros.element(form.getChildren().get('shippingAddress').getChildren().get('shippingAddress.lastName')) }}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6 col-xs-12">
+                            {{ macros.element(form.getChildren().get('shippingAddress').getChildren().get('shippingAddress.line1')) }}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6 col-xs-12">
+                            {{ macros.element(form.getChildren().get('shippingAddress').getChildren().get('shippingAddress.line2')) }}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-2 col-xs-6">
+                            {{ macros.element(form.getChildren().get('shippingAddress').getChildren().get('shippingAddress.postalCode')) }}
+                        </div>
+                        <div class="col-sm-5 col-xs-12">
+                            {{ macros.element(form.getChildren().get('shippingAddress').getChildren().get('shippingAddress.city')) }}
+                        </div>
+                        <div class="col-sm-5 col-xs-12">
+                            {{ macros.element(form.getChildren().get('shippingAddress').getChildren().get('shippingAddress.state')) }}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6 col-xs-12">
+                            {{ macros.element(form.getChildren().get('shippingAddress').getChildren().get('shippingAddress.country')) }}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="clearfix mtp60">
+                <a href="{{ path('front.home_page.index') }}" class="btn btn-link light btn-lg notransform nopadding">Back to shopping</a>
+                <button class="btn btn-primary btn-lg pull-right">{% trans %}order.button.confirm{% endtrans %}</button>
+            </div>
+
+            {{ macros.form_end(form) }}
+        </div>
+
+        <div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
+            {% include 'WellCommerceAppBundle:Front/Common:sidebar_contact.html.twig' %}
+        </div>
+    </div>
+
+    <script>
+    $(document).ready(function(){
+		$('#company-wrap').find('input').attr('tabindex', -1);
+		$('#client-type').unbind('change').bind('change', function(){
+			$('#company-wrap').collapse($(this).val() == 2 ? 'show' : 'hide');
+			if($(this).val() == 2){
+				$('#company-wrap').find('input').removeAttr('tabindex');
+			}else{
+				$('#company-wrap').find('input').attr('tabindex', -1);
+			}
+		});
+
+		$('#copyAddress').unbind('change').bind('change', function(){
+			$('#shipping-wrap').collapse($(this).is(':checked') ? 'hide' : 'show');
+		});
+
+        $('#copyAddress').change();
+
+		$('#password-collapse').unbind('change').bind('change', function(){
+			$('#password-wrap').collapse($(this).is(':checked') ? 'show' : 'hide');
+		});
+	});
+    </script>
+{% endblock %}

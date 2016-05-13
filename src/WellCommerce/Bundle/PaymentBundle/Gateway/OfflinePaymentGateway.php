@@ -19,35 +19,23 @@ use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class OfflinePaymentGateway implements PaymentGatewayInterface
+final class OfflinePaymentGateway implements PaymentGatewayInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function executePayment(PaymentInterface $payment)
     {
         $payment->setState(PaymentInterface::PAYMENT_STATE_CREATED);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function confirmPayment(PaymentInterface $payment)
     {
         $payment->setState(PaymentInterface::PAYMENT_STATE_APPROVED);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function cancelPayment(PaymentInterface $payment)
     {
         $payment->setState(PaymentInterface::PAYMENT_STATE_CANCELLED);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function notifyPayment(PaymentInterface $payment)
     {
         $payment->setState(PaymentInterface::PAYMENT_STATE_PENDING);

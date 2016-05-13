@@ -35,3 +35,9 @@ WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddress:
             type: string
             length: 3
             nullable: true
+        copyBillingAddress:
+            type: boolean
+            nullable: false
+            column: copy_billing_address
+            options:
+                default: true

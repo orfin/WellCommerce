@@ -20,5 +20,4 @@ use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
  */
 class PaymentRepository extends EntityRepository implements PaymentRepositoryInterface
 {
-
 }

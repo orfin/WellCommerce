@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\PaymentBundle\Repository;
 
 use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
+use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodInterface;
 
 /**
  * Interface PaymentMethodRepositoryInterface
@@ -21,10 +22,5 @@ use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
  */
 interface PaymentMethodRepositoryInterface extends RepositoryInterface
 {
-    /**
-     * Returns default shipping method
-     *
-     * @return null|\WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodInterface
-     */
-    public function getDefaultPaymentMethod();
+    public function getDefaultPaymentMethod() : PaymentMethodInterface;
 }

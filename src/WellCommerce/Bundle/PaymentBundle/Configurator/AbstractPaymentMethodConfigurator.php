@@ -23,14 +23,8 @@ use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodInterface;
  */
 abstract class AbstractPaymentMethodConfigurator extends AbstractContainerAware implements PaymentMethodConfiguratorInterface
 {
-    /**
-     * @var array
-     */
     protected $configuration;
-    
-    /**
-     * {@inheritdoc}
-     */
+
     public function configure(PaymentMethodInterface $paymentMethod)
     {
         $configuration = $paymentMethod->getConfiguration();
@@ -38,10 +32,7 @@ abstract class AbstractPaymentMethodConfigurator extends AbstractContainerAware 
         $this->configureOptions($resolver);
         $this->configuration = $resolver->resolve($configuration);
     }
-    
-    /**
-     * {@inheritdoc}
-     */
+
     public function getConfiguration() : array
     {
         if (null === $this->configuration) {
@@ -51,17 +42,11 @@ abstract class AbstractPaymentMethodConfigurator extends AbstractContainerAware 
         return $this->configuration;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function getConfigurationKey(string $name) : string
     {
         return sprintf('%s_%s', $this->getName(), $name);
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function getConfigurationValue(string $name)
     {
         $key = $this->getConfigurationKey($name);
@@ -69,17 +54,11 @@ abstract class AbstractPaymentMethodConfigurator extends AbstractContainerAware 
         return $this->configuration[$key] ?? null;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     protected function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setRequired($this->getSupportedConfigurationKeys());
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function getSupportedConfigurationKeys() : array
     {
         return [];

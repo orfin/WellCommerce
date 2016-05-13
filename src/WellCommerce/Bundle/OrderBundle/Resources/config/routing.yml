@@ -68,16 +68,22 @@ front.order_cart.delete:
         _controller: 'order_cart.controller.front:deleteAction'
     options:
         expose: true
+
 front.order_address.index:
     path: /order/address
     defaults:
         _controller: 'order_address.controller.front:indexAction'
     options: {  }
+
 front.order_confirm.index:
     path: /order/confirm
     defaults:
         _controller: 'order_confirmation.controller.front:indexAction'
-    options: {  }
+    options:
+        breadcrumb:
+            label: order.breadcrumb.confirmation
+            route: front.order_confirm.index
+
 admin.order_status.index:
     path: /admin/order/status/index
     defaults:

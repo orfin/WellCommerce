@@ -5,14 +5,8 @@ WellCommerce\Bundle\ClientBundle\Entity\ClientGroup:
     id:
         id:
             type: integer
-            scale: 0
-            length: null
-            unique: false
-            nullable: false
-            precision: 0
-            id: true
             generator:
-                strategy: IDENTITY
+                strategy: AUTO
     fields:
         discount:
             type: decimal
@@ -24,7 +18,6 @@ WellCommerce\Bundle\ClientBundle\Entity\ClientGroup:
     oneToMany:
         clients:
             targetEntity: WellCommerce\Bundle\ClientBundle\Entity\Client
-            cascade: {  }
             fetch: LAZY
             mappedBy: clientGroup
             inversedBy: null

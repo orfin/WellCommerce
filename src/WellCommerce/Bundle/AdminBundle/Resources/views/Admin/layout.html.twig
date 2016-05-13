@@ -67,7 +67,7 @@
             <div class="field-select">
                 <select id="change-context">
                     {% for id, name in shops() %}
-                        <option value="{{ id }}" {% if currentAdminShop().id == id %}selected{% endif %}>{{ name }}</option>
+                        <option value="{{ id }}" {% if currentShop().id == id %}selected{% endif %}>{{ name }}</option>
                     {% endfor %}
                 </select>
             </div>

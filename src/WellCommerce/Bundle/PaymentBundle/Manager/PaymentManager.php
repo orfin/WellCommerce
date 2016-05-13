@@ -12,41 +12,33 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\Manager;
 
-use WellCommerce\Bundle\CoreBundle\Manager\AbstractManager;
-use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
+use WellCommerce\Bundle\DoctrineBundle\Manager\Manager;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
-use WellCommerce\Bundle\PaymentBundle\Processor\PaymentProcessorInterface;
 
 /**
  * Class PaymentManager
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class PaymentManager extends AbstractManager implements PaymentManagerInterface
+final class PaymentManager extends Manager implements PaymentManagerInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function createFirstPaymentForOrder(OrderInterface $order) : PaymentInterface
+    public function createPaymentForOrder(OrderInterface $order) : PaymentInterface
     {
         $processor = $order->getPaymentMethod()->getProcessor();
-        $payment   = $this->initResource();
+
+        /** @var PaymentInterface $payment */
+        $payment = $this->initResource();
         $payment->setOrder($order);
         $payment->setState(PaymentInterface::PAYMENT_STATE_CREATED);
         $payment->setProcessor($processor);
-        $this->createResource($payment);
-        
+        $this->createResource($payment, false);
+
         return $payment;
     }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function getPaymentProcessor(string $alias) : PaymentProcessorInterface
+
+    public function findPaymentByToken(string $token) : PaymentInterface
     {
-        $processors = $this->get('payment.processor.collection');
-        
-        return $processors->get($alias);
+        return $this->getRepository()->findOneBy(['token' => $token]);
     }
 }

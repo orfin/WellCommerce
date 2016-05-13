@@ -1,0 +1,97 @@
+{% extends 'WellCommerceAppBundle:Front:layout.html.twig' %}
+{% trans_default_domain "wellcommerce" %}
+{% import "WellCommerceAppBundle:Front/Form:macros.html.twig" as macros %}
+{% block content %}
+    {% include 'WellCommerceAppBundle:Front:breadcrumbs.html.twig' %}
+    <div class="row">
+        <div class="col-lg-9 col-xs-12">
+            {{ macros.form_begin(form, 'cart-address') }}
+            <div class="cart">
+                {% include 'WellCommerceOrderBundle:Front/Common:products_table.html.twig' with {'confirmation': true} %}
+                <div class="methods">
+                    <div class="row mbt60">
+                        <div class="col-sm-5 col-xs-12">
+                            <div class="order-details">
+                                <h4 class="mbt20">Shipping and payment method</h4>
+
+                                <table class="table">
+                                    <tbody>
+                                    <tr>
+                                        <td>Shipping</td>
+                                        <td>{{ order.getShippingMethod().translate().name }}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Payment</td>
+                                        <td>{{ order.getPaymentMethod().translate().name }}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-5 col-xs-12 col-sm-offset-2">
+                            <div class="row">
+                                <div class="col-xs-6 text-right">
+                                    <h4><br/><br/><br/>Cost of delivery</h4>
+                                </div>
+                                <div class="col-xs-6">
+                                    <h4><strong><br/><br/>{{ format_price(order.getModifier('shipping_cost').grossAmount, order.getModifier('shipping_cost').currency) }}</strong></h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mbt60">
+                        <div class="col-xs-12">
+                            <div class="client-details">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <h4>Delivery address <a href="{{ path('front.order_address.index') }}">Change</a></h4>
+
+                                        <p>
+                                            {{ format_billing_address(order.billingAddress) }}
+                                        </p>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <h4>Contact info <a href="{{ path('front.order_address.index') }}">Change</a></h4>
+
+                                        <p>
+                                            {{ format_contact_details(order.contactDetails) }}
+                                        </p>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <h4>Billing data <a href="{{ path('front.order_address.index') }}">Change</a></h4>
+
+                                        <p>
+                                            {{ format_shipping_address(order.shippingAddress) }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mbt60">
+                        <div class="col-xs-12">
+                            {{ macros.element(form.getChildren().get('comment')) }}
+                        </div>
+                    </div>
+
+                </div>
+
+                {% include 'WellCommerceOrderBundle:Front/Common:summary.html.twig' %}
+
+                <div class="clearfix">
+                    <a href="{{ path('front.order_address.index') }}" class="btn btn-link light btn-lg notransform nopadding">Back to address details</a>
+                    <button class="btn btn-primary btn-lg pull-right">Place an order</button>
+                </div>
+            </div>
+        </div>
+        {{ macros.form_end(form) }}
+
+        <div class="col-lg-3 hidden-md hidden-sm hidden-xs">
+            {% include 'WellCommerceAppBundle:Front/Common:sidebar_contact.html.twig' %}
+        </div>
+    </div>
+{% endblock %}

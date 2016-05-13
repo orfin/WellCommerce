@@ -21,5 +21,4 @@ use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
  */
 interface PaymentRepositoryInterface extends RepositoryInterface
 {
-
 }

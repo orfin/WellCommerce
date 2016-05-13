@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Controller\Front;
 
+use Doctrine\Common\Util\Debug;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,27 +25,22 @@ use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
  */
 final class OrderAddressController extends AbstractFrontController
 {
-    /**
-     * @var \WellCommerce\Bundle\OrderBundle\Manager\Front\CartManagerInterface
-     */
-    protected $manager;
-    
     public function indexAction(Request $request) : Response
     {
-        $cart = $this->manager->getCartContext()->getCurrentCart();
-        $form = $this->manager->getForm($cart, [
+        $order = $this->getOrderProvider()->getCurrentOrder();
+        $form  = $this->getForm($order, [
             'validation_groups' => $this->getValidationGroupsForRequest($request)
         ]);
 
-        if ($form->isSubmitted() && 1 === (int)$request->request->get('copyAddress')) {
+        if ($form->isSubmitted() && 1 === (int)$request->request->get('shippingAddress.copyBillingAddress')) {
             $this->copyShippingAddress($request->request);
         }
 
         if ($form->handleRequest()->isSubmitted()) {
             if ($form->isValid()) {
-                $this->manager->updateResource($cart);
-                
-                return $this->getRouterHelper()->redirectTo('front.order.confirm');
+                $this->getManager()->updateResource($order);
+
+                return $this->getRouterHelper()->redirectTo('front.order_confirm.index');
             }
             
             if (count($form->getError())) {
@@ -61,12 +57,12 @@ final class OrderAddressController extends AbstractFrontController
     private function getValidationGroupsForRequest(Request $request) : array
     {
         $validationGroups = [
-            'cart_client_contact_details',
-            'cart_client_billing_address',
+            'order_client_contact_details',
+            'order_client_billing_address',
         ];
         
-        if ($request->isMethod('POST') && 0 === (int)$request->request->filter('copyAddress')) {
-            $validationGroups[] = 'cart_client_shipping_address';
+        if ($request->isMethod('POST') && 0 === (int)$request->request->filter('shippingAddress.copyBillingAddress')) {
+            $validationGroups[] = 'order_client_shipping_address';
         }
         
         return $validationGroups;

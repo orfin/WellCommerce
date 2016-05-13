@@ -7,9 +7,9 @@
             <div class="cart">
                 <div class="alert alert-info mtp30">
                     <p><strong>{% trans %}payment.flash.thank_you{% endtrans %}</strong></p>
-                    <p>{% trans %}order.label.order_no{% endtrans %}: <strong>{{ payment.order.id }}</strong></p>
+                    <p>{% trans %}order.label.order_no{% endtrans %}: <strong>{{ payment.order.number }}</strong></p>
                     <p>{% trans %}order.label.payment_method{% endtrans %}: <strong>{{ payment.order.paymentMethod.translate.name }}</strong></p>
-                    <p>{% trans %}order.label.order_total{% endtrans %}: <strong>{{ format_price(payment.order.orderTotal.grossAmount, payment.order.currency) }}</strong></p>
+                    <p>{% trans %}order.label.order_total{% endtrans %}: <strong>{{ format_price(payment.order.summary.grossAmount, payment.order.currency) }}</strong></p>
                     <br />
                     <p><strong>{% trans %}payment_method.bank_transfer.tip{% endtrans %}:</strong></p>
                     {% if payment.configuration is not empty %}
@@ -17,7 +17,7 @@
                     <p>{% trans %}payment_method.label.bank_transfer.account_owner{% endtrans %}: {{ payment.configuration.bank_transfer_account_owner }}</p>
                     <p>{% trans %}payment_method.label.bank_transfer.sort_number{% endtrans %}: {{ payment.configuration.bank_transfer_sort_number }}</p>
                     {% endif %}
-                    <p>{% trans %}payment_method.label.bank_transfer.title{% endtrans %}: #{{ payment.order.getId }}</p>
+                    <p>{% trans %}payment_method.label.bank_transfer.title{% endtrans %}: {{ payment.order.number }}</p>
                 </div>
                 <div class="clearfix">
                     <a href="{{ path('front.home_page.index') }}" class="btn btn-link light btn-lg notransform nopadding">Back to shopping</a>

@@ -29,7 +29,7 @@ final class OrderCartController extends AbstractFrontController
 {
     public function indexAction() : Response
     {
-        $order = $this->getOrderStorage()->getCurrentOrder();
+        $order = $this->getOrderProvider()->getCurrentOrder();
         $form  = $this->getForm($order, [
             'validation_groups' => ['order_cart']
         ]);
@@ -38,7 +38,7 @@ final class OrderCartController extends AbstractFrontController
             if ($form->isValid()) {
                 $this->getManager()->updateResource($order);
                 
-                return $this->getRouterHelper()->redirectTo('front.cart.index');
+                return $this->getRouterHelper()->redirectTo('front.order_cart.index');
             }
             
             if (count($form->getError())) {
@@ -48,6 +48,7 @@ final class OrderCartController extends AbstractFrontController
         
         return $this->displayTemplate('index', [
             'form'     => $form,
+            'order'    => $order,
             'elements' => $form->getChildren(),
         ]);
     }
@@ -55,7 +56,7 @@ final class OrderCartController extends AbstractFrontController
     public function addAction(ProductInterface $product, VariantInterface $variant = null, int $quantity = 1) : Response
     {
         $variants = $product->getVariants();
-        $order    = $this->getOrderStorage()->getCurrentOrder();
+        $order    = $this->getOrderProvider()->getCurrentOrder();
         
         if ($variants->count() && false === $variants->contains($variant)) {
             return $this->redirectToRoute('front.product.view', ['id' => $product->getId()]);
@@ -79,6 +80,7 @@ final class OrderCartController extends AbstractFrontController
         
         $basketModalContent = $this->renderView('WellCommerceOrderBundle:Front/OrderCart:add.html.twig', [
             'product'         => $product,
+            'order'           => $order,
             'recommendations' => $recommendations
         ]);
         
@@ -95,7 +97,7 @@ final class OrderCartController extends AbstractFrontController
     {
         $success = true;
         $message = null;
-        $order   = $this->getOrderStorage()->getCurrentOrder();
+        $order   = $this->getOrderProvider()->getCurrentOrder();
         
         try {
             $this->getManager()->changeOrderProductQuantity(
@@ -119,7 +121,7 @@ final class OrderCartController extends AbstractFrontController
         try {
             $this->getManager()->deleteOrderProduct(
                 $orderProduct,
-                $this->getOrderStorage()->getCurrentOrder()
+                $this->getOrderProvider()->getCurrentOrder()
             );
         } catch (\Exception $e) {
             $this->getFlashHelper()->addError($e->getMessage());

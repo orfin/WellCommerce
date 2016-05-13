@@ -24,23 +24,27 @@ use WellCommerce\Bundle\ShopBundle\Entity\ShopInterface;
  */
 class OrderManager extends Manager implements OrderManagerInterface
 {
-    public function findOrder(string $sessionId, ClientInterface $client = null, ShopInterface $shop) : OrderInterface
+    public function getOrder(string $sessionId, ClientInterface $client = null, ShopInterface $shop, string $currency) : OrderInterface
     {
-        $order = $this->findCurrentOrder($client, $sessionId, $shop);
+        $order = $this->findOrder($sessionId, $client, $shop);
 
         if (!$order instanceof OrderInterface) {
             /** @var OrderInterface $order */
             $order = $this->initResource();
+            $this->createResource($order);
+        }
+
+        if ($this->isOrderDirty($order, $currency, $client, $sessionId)) {
+            $order->setCurrency($currency);
             $order->setClient($client);
             $order->setSessionId($sessionId);
-            $order->setShop($shop);
-            $this->createResource($order);
+            $this->updateResource($order);
         }
 
         return $order;
     }
 
-    private function findCurrentOrder(ClientInterface $client = null, $sessionId, ShopInterface $shop)
+    public function findOrder(string $sessionId, ClientInterface $client = null, ShopInterface $shop)
     {
         if (null !== $client) {
             $order = $this->getCurrentClientOrder($client, $shop);
@@ -70,5 +74,10 @@ class OrderManager extends Manager implements OrderManagerInterface
             'shop'      => $shop,
             'confirmed' => false
         ]);
+    }
+
+    private function isOrderDirty(OrderInterface $order, string $currency, ClientInterface $client = null, string $sessionId) : bool
+    {
+        return $order->getClient() !== $client || $order->getCurrency() !== $currency || $order->getSessionId() !== $sessionId;
     }
 }

@@ -19,4 +19,7 @@ namespace WellCommerce\Bundle\ClientBundle\Entity;
  */
 interface ClientShippingAddressInterface extends ClientAddressInterface
 {
+    public function getCopyBillingAddress() : bool;
+
+    public function setCopyBillingAddress(bool $copyBillingAddress);
 }

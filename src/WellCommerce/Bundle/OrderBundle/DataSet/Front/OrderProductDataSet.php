@@ -16,7 +16,7 @@ use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Bundle\OrderBundle\Entity\Order;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderProduct;
-use WellCommerce\Bundle\OrderBundle\Storage\OrderStorageInterface;
+use WellCommerce\Bundle\OrderBundle\Provider\Front\OrderProviderInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\Product;
 use WellCommerce\Bundle\ProductBundle\Entity\Variant;
 use WellCommerce\Bundle\TaxBundle\Entity\Tax;
@@ -32,13 +32,13 @@ use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
 class OrderProductDataSet extends AbstractDataSet
 {
     /**
-     * @var OrderStorageInterface
+     * @var OrderProviderInterface
      */
-    protected $storage;
+    protected $provider;
 
-    public function setOrderStorage(OrderStorageInterface $storage)
+    public function setOrderProvider(OrderProviderInterface $provider)
     {
-        $this->storage = $storage;
+        $this->provider = $provider;
     }
 
     public function configureOptions(DataSetConfiguratorInterface $configurator)
@@ -78,7 +78,7 @@ class OrderProductDataSet extends AbstractDataSet
         $queryBuilder = parent::getQueryBuilder($request);
         $expression   = $queryBuilder->expr()->eq('order_product.order', ':order');
         $queryBuilder->andWhere($expression);
-        $queryBuilder->setParameter('order', $this->storage->getCurrentOrderIdentifier());
+        $queryBuilder->setParameter('order', $this->provider->getCurrentOrderIdentifier());
         $queryBuilder->setParameter('date', (new \DateTime())->setTime(0, 0, 1));
 
         return $queryBuilder;

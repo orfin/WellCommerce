@@ -33,7 +33,9 @@ class CouponController extends AbstractFrontController
                 throw new CouponException($this->getCouponChecker()->getError());
             }
 
-            $this->getOrderStorage()->getCurrentOrder()->setCoupon($coupon);
+            $order = $this->getOrderProvider()->getCurrentOrder();
+            $order->setCoupon($coupon);
+            $this->getManager()->updateResource($order);
 
             $result = [
                 'success' => true
@@ -55,7 +57,9 @@ class CouponController extends AbstractFrontController
         }
 
         try {
-            $this->getOrderStorage()->getCurrentOrder()->removeCoupon();
+            $order = $this->getOrderProvider()->getCurrentOrder();
+            $order->removeCoupon();
+            $this->getManager()->updateResource($order);
 
             $result = [
                 'success' => true

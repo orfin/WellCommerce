@@ -62,8 +62,8 @@ services:
         factory: ['@order_modifier.factory', create]
         configurator: ['@payment_surcharge.order.modifier.configurator', configure]
 
-    bank_transfer.controller.front:
-        class: WellCommerce\Bundle\PaymentBundle\Controller\Front\BankTransferController
+    payment.controller.front:
+        class: WellCommerce\Bundle\PaymentBundle\Controller\Front\PaymentController
         arguments: ['@payment.manager']
         calls:
             - [setContainer, ['@service_container']]
@@ -86,12 +86,6 @@ services:
         calls:
             - [setContainer, ['@service_container']]
 
-    cash_on_delivery.controller.front:
-        class: WellCommerce\Bundle\PaymentBundle\Controller\Front\CashOnDeliveryController
-        arguments: ['@payment.manager']
-        calls:
-            - [setContainer, ['@service_container']]
-
     cash_on_delivery.gateway:
         class: WellCommerce\Bundle\PaymentBundle\Gateway\OfflinePaymentGateway
         shared: false
@@ -107,12 +101,6 @@ services:
         tags:
             - { name: payment.processor }
         arguments: ['@cash_on_delivery.gateway', '@cash_on_delivery.configurator']
-        calls:
-            - [setContainer, ['@service_container']]
-
-    paypal.controller.front:
-        class: WellCommerce\Bundle\PaymentBundle\Controller\Front\PayPalController
-        arguments: ['@payment.manager']
         calls:
             - [setContainer, ['@service_container']]
 

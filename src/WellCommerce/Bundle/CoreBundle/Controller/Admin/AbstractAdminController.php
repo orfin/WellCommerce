@@ -17,6 +17,7 @@ use WellCommerce\Bundle\AdminBundle\Entity\UserInterface;
 use WellCommerce\Bundle\CoreBundle\Controller\AbstractController;
 use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 use WellCommerce\Bundle\DoctrineBundle\Manager\ManagerInterface;
+use WellCommerce\Bundle\OrderBundle\Provider\Admin\OrderProviderInterface;
 use WellCommerce\Component\DataGrid\DataGridInterface;
 use WellCommerce\Component\Form\FormBuilderInterface;
 
@@ -31,7 +32,7 @@ abstract class AbstractAdminController extends AbstractController implements Adm
      * @var null|DataGridInterface
      */
     private $dataGrid;
-
+    
     /**
      * AbstractAdminController constructor.
      *
@@ -44,7 +45,7 @@ abstract class AbstractAdminController extends AbstractController implements Adm
         parent::__construct($manager, $formBuilder);
         $this->dataGrid = $dataGrid;
     }
-
+    
     public function indexAction() : Response
     {
         return $this->displayTemplate('index', [
@@ -88,7 +89,7 @@ abstract class AbstractAdminController extends AbstractController implements Adm
     public function editAction(int $id) : Response
     {
         $resource = $this->getManager()->getRepository()->find($id);
-
+        
         if (!$resource instanceof EntityInterface) {
             return $this->redirectToAction('index');
         }
@@ -121,12 +122,17 @@ abstract class AbstractAdminController extends AbstractController implements Adm
         
         return $this->jsonResponse(['success' => true]);
     }
-
+    
     protected function getDataGrid() : DataGridInterface
     {
         return $this->dataGrid;
     }
-
+    
+    protected function getOrderProvider() : OrderProviderInterface
+    {
+        return $this->get('order.provider.admin');
+    }
+    
     protected function getAuthenticatedAdmin() : UserInterface
     {
         return $this->getSecurityHelper()->getAuthenticatedAdmin();

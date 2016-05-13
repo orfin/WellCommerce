@@ -7,12 +7,14 @@ well_commerce_payment:
     configuration:
         payment:
             orm:
+                manager: WellCommerce\Bundle\PaymentBundle\Manager\PaymentManager
                 factory: WellCommerce\Bundle\PaymentBundle\Factory\PaymentFactory
                 repository: WellCommerce\Bundle\PaymentBundle\Repository\PaymentRepository
                 mapping: "@WellCommercePaymentBundle/Resources/config/doctrine/Payment.orm.yml"
                 entity: WellCommerce\Bundle\PaymentBundle\Entity\Payment
         payment_state_history:
             orm:
+                manager: WellCommerce\Bundle\PaymentBundle\Manager\PaymentStateHistoryManager
                 factory: WellCommerce\Bundle\PaymentBundle\Factory\PaymentStateHistoryFactory
                 repository: WellCommerce\Bundle\PaymentBundle\Repository\PaymentStateHistoryRepository
                 mapping: "@WellCommercePaymentBundle/Resources/config/doctrine/PaymentStateHistory.orm.yml"
@@ -26,7 +28,7 @@ well_commerce_payment:
             api:
                 exposed: true
                 dataset: payment_method.dataset.admin
-                manager: payment_method.manager.admin
+                manager: payment_method.manager
         payment_method_translation:
             orm:
                 mapping: "@WellCommercePaymentBundle/Resources/config/doctrine/PaymentMethodTranslation.orm.yml"

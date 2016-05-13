@@ -24,7 +24,9 @@ interface ClientDetailsInterface
     public function setDiscount(float $discount);
     
     public function setPassword(string $password);
-    
+
+    public function setHashedPassword(string $password);
+
     public function resetPassword();
     
     public function getUsername() : string;

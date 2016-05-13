@@ -14,58 +14,49 @@ namespace WellCommerce\Bundle\OrderBundle\Controller\Front;
 
 use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
-use WellCommerce\Bundle\DoctrineBundle\Manager\ManagerInterface;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
+use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
 
 /**
  * Class OrderConfirmationController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class OrderConfirmationController extends AbstractFrontController
+final class OrderConfirmationController extends AbstractFrontController
 {
     public function indexAction() : Response
     {
-        $cart = $this->manager->getCartContext()->getCurrentCart();
+        $order = $this->getOrderProvider()->getCurrentOrder();
+        $order->setConfirmed(true);
 
-        if ($cart->isEmpty()) {
-            return $this->redirectToRoute('front.cart.index');
+        if ($order->isEmpty()) {
+            return $this->redirectToRoute('front.order_cart.index');
         }
-        
-        $this->addBreadCrumbItem(new BreadcrumbItem([
-            'name' => $this->trans('order.heading.confirmation'),
-        ]));
 
-        $order = $this->manager->initResource();
-        $form  = $this->manager->getForm($order);
+        $form = $this->getForm($order);
         
         if ($form->handleRequest()->isSubmitted()) {
             if ($form->isValid()) {
-                $this->getOrderManager()->createResource($order);
-                $payment = $this->getPaymentManager()->createFirstPaymentForOrder($order);
-
+                $this->getManager()->updateResource($order);
+                $payment = $this->getPaymentForOrder($order);
+                
                 return $this->redirectToRoute('front.payment.initialize', ['token' => $payment->getToken()]);
             }
             
             if (count($form->getError())) {
-                $this->manager->getFlashHelper()->addError('order.form.error.confirmation');
+                $this->getFlashHelper()->addError('order.form.error.confirmation');
             }
         }
         
         return $this->displayTemplate('index', [
             'form'     => $form,
+            'order'    => $order,
             'elements' => $form->getChildren(),
-            'summary'  => $this->get('cart_summary.collector')->collect($cart),
-            'order'    => $order
         ]);
     }
-    
-    private function getOrderManager() : ManagerInterface
-    {
-        return $this->get('order.manager');
-    }
 
-    private function getPaymentManager() : ManagerInterface
+    private function getPaymentForOrder(OrderInterface $order) : PaymentInterface
     {
-        return $this->get('payment.manager');
+        return $order->getPayments()->first();
     }
 }

@@ -4,30 +4,35 @@ front.payment.initialize:
         _controller: 'payment.controller.front:initializeAction'
     options:
         expose: true
+
 front.payment.confirm:
     path: '/payment/confirm/{token}'
     defaults:
         _controller: 'payment.controller.front:confirmAction'
     options:
         expose: true
+
 front.payment.cancel:
     path: '/payment/cancel/{token}'
     defaults:
         _controller: 'payment.controller.front:cancelAction'
     options:
         expose: true
+
 front.payment.execute:
     path: '/payment/execute/{token}'
     defaults:
         _controller: 'payment.controller.front:executeAction'
     options:
         expose: true
+
 front.payment.notify:
     path: '/payment/notify/{token}'
     defaults:
         _controller: 'payment.controller.front:notifyAction'
     options:
         expose: true
+
 admin.payment_method.index:
     path: /admin/configuration/payment/index
     defaults:

@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\Configurator;
 
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use WellCommerce\Component\Form\Dependencies\DependencyInterface;
 use WellCommerce\Component\Form\Elements\ElementInterface;
 use WellCommerce\Component\Form\FormBuilderInterface;
@@ -22,19 +21,13 @@ use WellCommerce\Component\Form\FormBuilderInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CashOnDeliveryConfigurator extends AbstractPaymentMethodConfigurator
+final class CashOnDeliveryConfigurator extends AbstractPaymentMethodConfigurator
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getName() : string
     {
         return 'cash_on_delivery';
     }
-
-    /**
-     * {@inheritdoc}
-     */
+    
     public function addConfigurationFields(FormBuilderInterface $builder, ElementInterface $fieldset, DependencyInterface $dependency)
     {
         $fieldset->addChild($builder->getElement('tip', [

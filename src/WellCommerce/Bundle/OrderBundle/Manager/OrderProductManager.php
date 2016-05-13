@@ -25,7 +25,7 @@ use WellCommerce\Bundle\ProductBundle\Entity\VariantInterface;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class OrderProductManager extends Manager
+class OrderProductManager extends Manager implements OrderProductManagerInterface
 {
     public function addProductToOrder(ProductInterface $product, VariantInterface $variant = null, int $quantity = 1, OrderInterface $order)
     {

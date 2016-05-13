@@ -24,7 +24,7 @@ services:
 
     coupon.controller.front:
         class: WellCommerce\Bundle\CouponBundle\Controller\Front\CouponController
-        arguments: ['@coupon.manager']
+        arguments: ['@order.manager']
         calls:
             - [setContainer, ['@service_container']]
 

@@ -27,12 +27,12 @@ use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PayPalGateway implements PayPalGatewayInterface
+final class PayPalGateway implements PayPalGatewayInterface
 {
     /**
      * @var array
      */
-    protected $options;
+    private $options;
 
     /**
      * PayPalGateway constructor.
@@ -91,7 +91,7 @@ class PayPalGateway implements PayPalGatewayInterface
     /**
      * {@inheritdoc}
      */
-    protected function configureOptions(OptionsResolver $resolver)
+    private function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setRequired([
             'log.LogEnabled',
@@ -126,7 +126,7 @@ class PayPalGateway implements PayPalGatewayInterface
      *
      * @return ApiContext
      */
-    protected function getApiContext(string $clientId, string $clientSecret, string $mode) : ApiContext
+    private function getApiContext(string $clientId, string $clientSecret, string $mode) : ApiContext
     {
         PayPalHttpConfig::$defaultCurlOptions[CURLOPT_SSLVERSION] = 6;
         

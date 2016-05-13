@@ -22,19 +22,13 @@ use WellCommerce\Component\Form\FormBuilderInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PayPalConfigurator extends AbstractPaymentMethodConfigurator
+final class PayPalConfigurator extends AbstractPaymentMethodConfigurator
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getName() : string
     {
         return 'paypal';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addConfigurationFields(FormBuilderInterface $builder, ElementInterface $fieldset, DependencyInterface $dependency)
     {
         $fieldset->addChild($builder->getElement('text_field', [

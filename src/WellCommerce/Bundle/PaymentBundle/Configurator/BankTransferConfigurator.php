@@ -22,19 +22,13 @@ use WellCommerce\Component\Form\FormBuilderInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class BankTransferConfigurator extends AbstractPaymentMethodConfigurator
+final class BankTransferConfigurator extends AbstractPaymentMethodConfigurator
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getName() : string
     {
         return 'bank_transfer';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addConfigurationFields(FormBuilderInterface $builder, ElementInterface $fieldset, DependencyInterface $dependency)
     {
         $fieldset->addChild($builder->getElement('text_field', [

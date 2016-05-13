@@ -7,9 +7,9 @@
             <div class="cart">
                 <div class="alert alert-info mtp30">
                     <p><strong>{% trans %}payment.flash.thank_you{% endtrans %}</strong></p>
-                    <p>{% trans %}order.label.order_no{% endtrans %}: <strong>{{ payment.order.id }}</strong></p>
+                    <p>{% trans %}order.label.order_no{% endtrans %}: <strong>{{ payment.order.number }}</strong></p>
                     <p>{% trans %}order.label.payment_method{% endtrans %}: <strong>{{ payment.order.paymentMethod.translate.name }}</strong></p>
-                    <p>{% trans %}order.label.order_total{% endtrans %}: <strong>{{ format_price(payment.order.orderTotal.grossAmount, payment.order.currency) }}</strong></p>
+                    <p>{% trans %}order.label.order_total{% endtrans %}: <strong>{{ format_price(payment.order.summary.grossAmount, payment.order.currency) }}</strong></p>
                 </div>
                 <div class="clearfix">
                     <a href="{{ path('front.home_page.index') }}" class="btn btn-link light btn-lg notransform nopadding">Back to shopping</a>

@@ -47,7 +47,7 @@ class LoadClientData extends AbstractDataFixture
 
         $client->getClientDetails()->setDiscount(25);
         $client->getClientDetails()->setUsername($email);
-        $client->getClientDetails()->setPassword('demo');
+        $client->getClientDetails()->setHashedPassword('demo');
         $client->getClientDetails()->setConditionsAccepted(true);
         $client->getClientDetails()->setNewsletterAccepted(true);
 
@@ -74,6 +74,7 @@ class LoadClientData extends AbstractDataFixture
         $shippingAddress->setCity($fakerGenerator->city);
         $shippingAddress->setCountry($fakerGenerator->countryCode);
         $shippingAddress->setState('');
+        $shippingAddress->setCopyBillingAddress(true);
 
         $client->setBillingAddress($billingAddress);
         $client->setShippingAddress($shippingAddress);
