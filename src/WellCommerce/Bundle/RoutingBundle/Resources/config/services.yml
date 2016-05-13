@@ -20,7 +20,8 @@ services:
 
     routing.form_builder.admin:
         class: WellCommerce\Bundle\RoutingBundle\Form\Admin\RoutingFormBuilder
-        parent: core.form_builder
+        tags:
+            - { name: form_builder }
 
     route.generator.collection:
         class: WellCommerce\Bundle\RoutingBundle\Generator\RouteGeneratorCollection

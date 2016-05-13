@@ -22,7 +22,7 @@ WellCommerce\Bundle\ClientBundle\Entity\Client:
             columnPrefix: contact_details_
     oneToMany:
         wishlist:
-            targetEntity: WellCommerce\Bundle\WishlistBundle\Entity\Wishlist
+            targetEntity: WellCommerce\Bundle\ClientBundle\Entity\ClientWishlist
             cascade:
                 - remove
                 - persist

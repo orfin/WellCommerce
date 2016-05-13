@@ -13,10 +13,8 @@
 namespace WellCommerce\Bundle\SearchBundle\DataSet\Front;
 
 use Doctrine\ORM\QueryBuilder;
-use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
-use WellCommerce\Bundle\CoreBundle\Helper\Request\RequestHelperInterface;
-use WellCommerce\Bundle\SearchBundle\Provider\SearchProviderInterface;
-use WellCommerce\Bundle\SearchBundle\Query\SimpleQuery;
+use WellCommerce\Bundle\ProductBundle\DataSet\Front\ProductDataSet;
+use WellCommerce\Bundle\SearchBundle\Manager\SearchManagerInterface;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
 use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
 
@@ -25,16 +23,16 @@ use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-final class SearchDataSet extends AbstractDataSet
+final class SearchDataSet extends ProductDataSet
 {
     /**
-     * @var SearchProviderInterface
+     * @var SearchManagerInterface
      */
-    private $provider;
+    private $manager;
 
-    public function setSearchProvider(SearchProviderInterface $provider)
+    public function setSearchManager(SearchManagerInterface $manager)
     {
-        $this->provider = $provider;
+        $this->manager = $manager;
     }
 
     public function configureOptions(DataSetConfiguratorInterface $configurator)
@@ -69,9 +67,13 @@ final class SearchDataSet extends AbstractDataSet
     
     protected function getQueryBuilder(DataSetRequestInterface $request) : QueryBuilder
     {
+        $identifiers  = $this->manager->getResultIdentifiers();
         $queryBuilder = parent::getQueryBuilder($request);
-        $queryBuilder->setParameter('scores', $this->provider->getResultIdentifiers());
-        
+        $expression   = $queryBuilder->expr()->in('product.id', ':identifiers');
+        $queryBuilder->andWhere($expression);
+        $queryBuilder->setParameter('identifiers', $identifiers);
+        $queryBuilder->setParameter('scores', $this->manager->getResultIdentifiers());
+
         return $queryBuilder;
     }
 }

@@ -20,7 +20,8 @@ services:
 
     product_status.form_builder.admin:
         class: WellCommerce\Bundle\ProductStatusBundle\Form\Admin\ProductStatusFormBuilder
-        parent: core.form_builder
+        tags:
+            - { name: form_builder }
 
     product_showcase.layout_box.configurator:
         class: WellCommerce\Bundle\LayoutBundle\Configurator\ProductShowcaseBoxConfigurator

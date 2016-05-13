@@ -38,7 +38,7 @@ class LoadTaxData extends AbstractDataFixture
             $name = sprintf('%s%s', $val, '%');
             $tax  = new Tax();
             $tax->setValue($val);
-            $tax->translate('en')->setName($name . ' VAT');
+            $tax->translate($this->getDefaultLocale())->setName($name . ' VAT');
             $tax->mergeNewTranslations();
             $manager->persist($tax);
             $this->setReference('tax_' . $val, $tax);

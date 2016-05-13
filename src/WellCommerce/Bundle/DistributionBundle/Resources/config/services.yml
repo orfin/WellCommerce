@@ -23,7 +23,8 @@ services:
 
     package.form_builder:
         class: WellCommerce\Bundle\DistributionBundle\Form\Admin\PackageFormBuilder
-        parent: core.form_builder
+        tags:
+            - { name: form_builder }
 
     package.command.plugin.require:
         class: WellCommerce\Bundle\DistributionBundle\Command\Package\RequireCommand

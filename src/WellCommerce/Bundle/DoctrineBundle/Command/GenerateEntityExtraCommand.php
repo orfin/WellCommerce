@@ -94,7 +94,25 @@ class GenerateEntityExtraCommand extends Command
             $this->filesystem->dumpFile($reflectionClass->getFileName(), $code);
         }
 
+        $this->executeMetadataCacheClear($output);
         $this->executeSchemaUpdate($output);
+    }
+
+    /**
+     * Executes the cache clear through separate process
+     *
+     * @param OutputInterface $output
+     */
+    protected function executeMetadataCacheClear(OutputInterface $output)
+    {
+        $arguments = [
+            'app/console',
+            'doctrine:cache:clear-metadata'
+        ];
+
+        $process = $this->environmentHelper->getProcess($arguments, 360);
+        $process->run();
+        $output->write($process->getOutput());
     }
 
     /**

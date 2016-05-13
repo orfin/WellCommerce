@@ -1,4 +1,4 @@
-WellCommerce\Bundle\WishlistBundle\Entity\Wishlist:
+WellCommerce\Bundle\ClientBundle\Entity\Wishlist:
     fields:
         id:
             groups:

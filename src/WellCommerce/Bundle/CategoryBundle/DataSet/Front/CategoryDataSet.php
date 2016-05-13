@@ -17,6 +17,7 @@ use WellCommerce\Bundle\CategoryBundle\Entity\CategoryTranslation;
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Component\DataSet\Cache\CacheOptions;
 use WellCommerce\Component\DataSet\Conditions\Condition\Eq;
+use WellCommerce\Component\DataSet\Conditions\Condition\Gt;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
 use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
 
@@ -56,6 +57,7 @@ final class CategoryDataSet extends AbstractDataSet
     {
         $request = parent::getDataSetRequest($requestOptions);
         $request->addCondition(new Eq('enabled', true));
+        $request->addCondition(new Gt('products', 0));
 
         return $request;
     }

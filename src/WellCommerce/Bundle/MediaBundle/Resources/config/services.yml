@@ -20,7 +20,8 @@ services:
 
     media.form_builder.admin:
         class: WellCommerce\Bundle\MediaBundle\Form\Admin\MediaFormBuilder
-        parent: core.form_builder
+        tags:
+            - { name: form_builder }
 
     form.media_collection.data_transformer:
         class: WellCommerce\Bundle\MediaBundle\Form\DataTransformer\MediaCollectionToArrayTransformer

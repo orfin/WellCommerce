@@ -8,19 +8,23 @@ services:
 
     order.form_builder.admin:
         class: WellCommerce\Bundle\OrderBundle\Form\Admin\OrderFormBuilder
-        parent: core.form_builder
+        tags:
+            - { name: form_builder }
 
     order_cart.form_builder.front:
         class: WellCommerce\Bundle\OrderBundle\Form\Front\OrderCartFormBuilder
-        parent: core.form_builder
+        tags:
+            - { name: form_builder }
 
     order_address.form_builder.front:
         class: WellCommerce\Bundle\OrderBundle\Form\Front\OrderAddressFormBuilder
-        parent: core.form_builder
+        tags:
+            - { name: form_builder }
 
     order_confirmation.form_builder.front:
         class: WellCommerce\Bundle\OrderBundle\Form\Front\OrderConfirmationFormBuilder
-        parent: core.form_builder
+        tags:
+            - { name: form_builder }
 
     order.dataset.admin:
         class: WellCommerce\Bundle\OrderBundle\DataSet\Admin\OrderDataSet
@@ -165,11 +169,13 @@ services:
 
     order_status.form_builder.admin:
         class: WellCommerce\Bundle\OrderBundle\Form\Admin\OrderStatusFormBuilder
-        parent: core.form_builder
+        tags:
+            - { name: form_builder }
 
     order_status_history.form_builder.admin:
         class: WellCommerce\Bundle\OrderBundle\Form\Admin\OrderStatusHistoryFormBuilder
-        parent: core.form_builder
+        tags:
+            - { name: form_builder }
 
     order_status_group.controller.admin:
         class: WellCommerce\Bundle\OrderBundle\Controller\Admin\OrderStatusGroupController
@@ -191,4 +197,5 @@ services:
 
     order_status_group.form_builder.admin:
         class: WellCommerce\Bundle\OrderBundle\Form\Admin\OrderStatusGroupFormBuilder
-        parent: core.form_builder
+        tags:
+            - { name: form_builder }

@@ -9,7 +9,7 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Bundle\WishlistBundle\Entity;
+namespace WellCommerce\Bundle\ClientBundle\Entity;
 
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientAwareTrait;
@@ -17,11 +17,11 @@ use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareTrait;
 
 /**
- * Class Client
+ * Class ClientWishlist
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Wishlist extends AbstractEntity implements WishlistInterface
+class ClientWishlist extends AbstractEntity implements ClientWishlistInterface
 {
     use Timestampable;
     use ClientAwareTrait;

@@ -13,7 +13,10 @@
 namespace WellCommerce\Bundle\SearchBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Reference;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
+use WellCommerce\Bundle\SearchBundle\Manager\SearchManager;
 
 /**
  * Class WellCommerceSearchExtension
@@ -25,12 +28,20 @@ class WellCommerceSearchExtension extends AbstractExtension
     protected function processExtensionConfiguration(array $configuration, ContainerBuilder $container)
     {
         parent::processExtensionConfiguration($configuration, $container);
-
-        $type = $configuration['engine']['type'];
-
-        $container->setParameter('search_term_min_length', $configuration['engine']['search_term_min_length']);
-        $container->setAlias('search.indexer', sprintf('search.indexer.%s', $type));
-        $container->setAlias('search_index.manager', sprintf('search_index.manager.lucene', $type));
-        $container->setAlias('search.provider', sprintf('search.provider.lucene', $type));
+        
+        $indexes = $configuration['indexes'];
+        
+        foreach ($indexes as $indexName => $parameters) {
+            $this->createSearchManager($indexName, $parameters, $container);
+        }
+    }
+    
+    protected function createSearchManager(string $indexName, array $parameters, ContainerBuilder $container)
+    {
+        $serviceName = 'search.manager.' . $indexName;
+        $definition  = new Definition(SearchManager::class);
+        $definition->addArgument(new Reference($parameters['indexer']));
+        $definition->addArgument(new Reference($parameters['provider']));
+        $container->setDefinition($serviceName, $definition);
     }
 }

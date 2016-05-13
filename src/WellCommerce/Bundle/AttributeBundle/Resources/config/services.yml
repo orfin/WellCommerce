@@ -8,7 +8,8 @@ services:
 
     attribute.form_builder.admin:
         class: WellCommerce\Bundle\AttributeBundle\Form\Admin\AttributeFormBuilder
-        parent: core.form_builder
+        tags:
+            - { name: form_builder }
 
     attribute.dataset.admin:
         class: WellCommerce\Bundle\AttributeBundle\DataSet\Admin\AttributeDataSet
@@ -30,7 +31,8 @@ services:
 
     attribute_group.form_builder.admin:
         class: WellCommerce\Bundle\AttributeBundle\Form\Admin\AttributeGroupFormBuilder
-        parent: core.form_builder
+        tags:
+            - { name: form_builder }
 
     attribute_group.dataset.admin:
         class: WellCommerce\Bundle\AttributeBundle\DataSet\Admin\AttributeGroupDataSet
@@ -52,7 +54,8 @@ services:
 
     attribute_value.form_builder.admin:
         class: WellCommerce\Bundle\AttributeBundle\Form\Admin\AttributeValueFormBuilder
-        parent: core.form_builder
+        tags:
+            - { name: form_builder }
 
     attribute_value.dataset.admin:
         class: WellCommerce\Bundle\AttributeBundle\DataSet\Admin\AttributeValueDataSet

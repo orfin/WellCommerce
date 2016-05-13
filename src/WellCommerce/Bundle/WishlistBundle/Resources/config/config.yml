@@ -1,8 +1,0 @@
-well_commerce_wishlist:
-    configuration:
-        wishlist:
-            orm:
-                factory: WellCommerce\Bundle\WishlistBundle\Factory\WishlistFactory
-                repository: WellCommerce\Bundle\WishlistBundle\Repository\WishlistRepository
-                mapping: "@WellCommerceWishlistBundle/Resources/config/doctrine/Wishlist.orm.yml"
-                entity: WellCommerce\Bundle\WishlistBundle\Entity\Wishlist

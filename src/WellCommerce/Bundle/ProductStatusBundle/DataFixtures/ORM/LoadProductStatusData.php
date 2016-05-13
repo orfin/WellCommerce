@@ -37,9 +37,9 @@ class LoadProductStatusData extends AbstractDataFixture
 
         foreach (self::$samples as $name) {
             $status = new ProductStatus();
-            $status->translate('en')->setName($name);
-            $status->translate('en')->setSlug($slug = Sluggable::makeSlug($name));
-            $status->translate('en')->setCssClass($slug);
+            $status->translate($this->getDefaultLocale())->setName($name);
+            $status->translate($this->getDefaultLocale())->setSlug($slug = Sluggable::makeSlug($name));
+            $status->translate($this->getDefaultLocale())->setCssClass($slug);
             $status->mergeNewTranslations();
             $manager->persist($status);
             $this->addReference('product_status_' . $name, $status);

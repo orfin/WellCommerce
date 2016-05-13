@@ -34,10 +34,10 @@ class LoadContactData extends AbstractDataFixture
 
         $contact = new Contact();
         $contact->setEnabled(1);
-        $contact->translate('en')->setName('Sales department');
-        $contact->translate('en')->setEmail('sales@domain.org');
-        $contact->translate('en')->setPhone('555 123-345-678');
-        $contact->translate('en')->setBusinessHours($this->getBusinessHours());
+        $contact->translate($this->getDefaultLocale())->setName('Sales department');
+        $contact->translate($this->getDefaultLocale())->setEmail('sales@domain.org');
+        $contact->translate($this->getDefaultLocale())->setPhone('555 123-345-678');
+        $contact->translate($this->getDefaultLocale())->setBusinessHours($this->getBusinessHours());
         $contact->mergeNewTranslations();
         $manager->persist($contact);
         $manager->flush();

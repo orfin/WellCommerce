@@ -13,32 +13,29 @@
 namespace WellCommerce\Bundle\SearchBundle\Query;
 
 /**
- * Class SimpleQuery
+ * Class SearchQuery
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class SimpleQuery
+final class SearchQuery
 {
     /**
      * @var string
      */
-    protected $searchPhrase;
+    private $phrase;
 
     /**
-     * Term constructor.
+     * SearchQuery constructor.
      *
-     * @param string $searchPhrase
+     * @param string $phrase
      */
-    public function __construct($searchPhrase)
+    public function __construct(string $phrase)
     {
-        $this->searchPhrase = $searchPhrase;
+        $this->phrase = $phrase;
     }
 
-    /**
-     * @return string
-     */
-    public function getSearchPhrase()
+    public function getSearchPhrase() : string
     {
-        return $this->searchPhrase;
+        return $this->phrase;
     }
 }

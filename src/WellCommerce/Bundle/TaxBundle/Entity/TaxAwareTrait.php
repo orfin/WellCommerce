@@ -19,24 +19,20 @@ namespace WellCommerce\Bundle\TaxBundle\Entity;
  */
 trait TaxAwareTrait
 {
-    /**
-     * @var TaxInterface
-     */
     protected $tax;
     
-    /**
-     * @return TaxInterface
-     */
     public function getTax() : TaxInterface
     {
         return $this->tax;
     }
     
-    /**
-     * @param TaxInterface $tax
-     */
     public function setTax(TaxInterface $tax)
     {
         $this->tax = $tax;
+    }
+
+    public function hasTax() : bool
+    {
+        return $this->tax instanceof TaxInterface;
     }
 }

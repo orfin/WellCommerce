@@ -20,6 +20,8 @@ services:
 
     shop.form_builder.admin:
         class: WellCommerce\Bundle\ShopBundle\Form\Admin\ShopFormBuilder
+        tags:
+            - { name: form_builder }
 
     shop.storage:
         class: WellCommerce\Bundle\ShopBundle\Storage\ShopStorage

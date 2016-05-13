@@ -13,8 +13,10 @@
 namespace WellCommerce\Bundle\SearchBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use WellCommerce\Bundle\SearchBundle\Manager\SearchManagerInterface;
 
 /**
  * Class ReindexProductsCommand
@@ -25,15 +27,31 @@ class ReindexProductsCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
-        $this->setDescription('Reindexes all products');
-        $this->setName('wellcommerce:search:reindex-products');
+        $this->setDescription('Reindexes search data');
+        $this->setName('wellcommerce:search:reindex');
+        $this->addArgument(
+            'index',
+            InputArgument::REQUIRED,
+            'Index name'
+        );
     }
-
+    
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $indexer = $this->getContainer()->get('search.indexer');
-        $indexer->reindexProducts();
-
-        $output->write('Reindexing done.', true);
+        $index   = $input->getArgument('index');
+        $manager = $this->getSearchManager($index);
+        $manager->getIndexer()->setConsoleOutput($output);
+        $manager->reindex();
+        
+        $output->write('<info>Reindexing done.</info>', true);
+    }
+    
+    private function getSearchManager(string $index) : SearchManagerInterface
+    {
+        if (false === $this->getContainer()->has('search.manager.' . $index)) {
+            throw new \InvalidArgumentException('Search manager for given index does not exists');
+        }
+        
+        return $this->getContainer()->get('search.manager.' . $index);
     }
 }

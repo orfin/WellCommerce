@@ -10,22 +10,19 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\WishlistBundle\Repository;
+namespace WellCommerce\Bundle\ClientBundle\Repository;
 
 use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
 
 /**
- * Class WishlistRepository
+ * Class ClientWishlistRepository
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class WishlistRepository extends EntityRepository implements WishlistRepositoryInterface
+class ClientWishlistRepository extends EntityRepository implements WishlistRepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getDataSetQueryBuilder() : QueryBuilder
     {
         $queryBuilder = $this->getQueryBuilder();

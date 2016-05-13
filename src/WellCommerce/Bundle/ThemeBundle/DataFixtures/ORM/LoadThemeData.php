@@ -21,11 +21,8 @@ use WellCommerce\Bundle\ThemeBundle\Entity\Theme;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LoadThemeData extends AbstractDataFixture
+final class LoadThemeData extends AbstractDataFixture
 {
-    /**
-     * {@inheritDoc}
-     */
     public function load(ObjectManager $manager)
     {
         if (!$this->isEnabled()) {

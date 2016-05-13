@@ -20,7 +20,8 @@ services:
 
     product.form_builder.admin:
         class: WellCommerce\Bundle\ProductBundle\Form\Admin\ProductFormBuilder
-        parent: core.form_builder
+        tags:
+            - { name: form_builder }
 
     product_info.layout_box.configurator:
         class: WellCommerce\Bundle\LayoutBundle\Configurator\ProductInfoBoxConfigurator
@@ -93,3 +94,9 @@ services:
         calls:
             - [setVariantManager, ['@variant.manager']]
         shared: false
+
+    dataset.transformer.category:
+        class: WellCommerce\Bundle\ProductBundle\DataSet\Transformer\CategoryTransformer
+        tags:
+            - { name: dataset.transformer, alias: category }
+        arguments: ['@routing.generator', '@category.repository']

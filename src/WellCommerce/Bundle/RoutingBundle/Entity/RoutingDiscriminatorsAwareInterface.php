@@ -19,5 +19,4 @@ namespace WellCommerce\Bundle\RoutingBundle\Entity;
  */
 interface RoutingDiscriminatorsAwareInterface
 {
-    
 }

@@ -39,7 +39,8 @@ class ShopRepository extends EntityRepository implements ShopRepositoryInterface
         $criteria = new Criteria();
         $criteria->where($criteria->expr()->eq('id', $currentShopId));
         $criteria->orWhere($criteria->expr()->eq('url', $url));
-        
+        $criteria->orWhere($criteria->expr()->gte('id', 1));
+
         return $this->matching($criteria)->first();
     }
 }

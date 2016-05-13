@@ -43,35 +43,23 @@ abstract class AbstractMappingEnhancer implements MappingEnhancerInterface
         return $collection;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function visitClassMetadata(ClassMetadataInfo $metadata)
     {
         $collection = $this->getMappingDefinitionCollection();
         $this->extendClassMetadata($metadata, $collection);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function visitTraitGenerator(TraitGenerator $generator)
     {
         $collection = $this->getMappingDefinitionCollection();
         $this->extendTrait($generator, $collection);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function supportsEntity(string $className) : bool
     {
         return $className === $this->getSupportedEntityClass();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function supportsEntityExtraTrait(string $className) : bool
     {
         return $className === $this->getSupportedEntityExtraTraitClass();

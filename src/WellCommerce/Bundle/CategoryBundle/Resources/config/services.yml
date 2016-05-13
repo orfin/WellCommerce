@@ -29,11 +29,13 @@ services:
 
     category.form_builder.admin:
         class: WellCommerce\Bundle\CategoryBundle\Form\Admin\CategoryFormBuilder
-        parent: core.form_builder
+        tags:
+            - { name: form_builder }
 
     category_tree.form_builder.admin:
         class: WellCommerce\Bundle\CategoryBundle\Form\Admin\CategoryTreeFormBuilder
-        parent: core.form_builder
+        tags:
+            - { name: form_builder }
 
     category_products.layout_box.configurator:
         class: WellCommerce\Bundle\LayoutBundle\Configurator\CategoryProductsBoxConfigurator

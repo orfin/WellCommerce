@@ -40,8 +40,8 @@ class LoadProducerData extends AbstractDataFixture
         foreach (self::$samples as $name) {
             $producer = new Producer();
             $producer->addShop($shop);
-            $producer->translate('en')->setName($name);
-            $producer->translate('en')->setSlug(Sluggable::makeSlug($name));
+            $producer->translate($this->getDefaultLocale())->setName($name);
+            $producer->translate($this->getDefaultLocale())->setSlug(Sluggable::makeSlug($name));
             $producer->mergeNewTranslations();
             $manager->persist($producer);
             $this->setReference('producer_' . $name, $producer);

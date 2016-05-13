@@ -20,7 +20,8 @@ services:
 
     producer.form_builder.admin:
         class: WellCommerce\Bundle\ProducerBundle\Form\Admin\ProducerFormBuilder
-        parent: core.form_builder
+        tags:
+            - { name: form_builder }
 
     producer_menu.layout_box.configurator:
         class: WellCommerce\Bundle\LayoutBundle\Configurator\ProducerMenuBoxConfigurator

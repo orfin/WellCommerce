@@ -13,19 +13,18 @@
 namespace WellCommerce\Bundle\CategoryBundle\Manager;
 
 use WellCommerce\Bundle\CategoryBundle\Entity\Category;
+use WellCommerce\Bundle\CategoryBundle\Entity\CategoryInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Sluggable;
-use WellCommerce\Bundle\CoreBundle\Manager\AbstractManager;
-use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
+use WellCommerce\Bundle\DoctrineBundle\Manager\Manager;
 use WellCommerce\Bundle\LocaleBundle\Entity\Locale;
-use WellCommerce\Component\DataSet\Conditions\Condition\Eq;
-use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
+use WellCommerce\Bundle\ShopBundle\Entity\ShopInterface;
 
 /**
  * Class CategoryManager
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CategoryManager extends AbstractManager
+class CategoryManager extends Manager
 {
     /**
      * Sorts categories passed in request
@@ -58,15 +57,14 @@ class CategoryManager extends AbstractManager
      *
      * @return Category
      */
-    public function quickAddCategory($name, $parent)
+    public function quickAddCategory(string $name, int $parent, ShopInterface $shop) : CategoryInterface
     {
-        $em             = $this->getDoctrineHelper()->getEntityManager();
-        $currentShop    = $this->getShopContext()->getCurrentShop();
-        $parentCategory = $this->getRepository()->find((int)$parent);
+        $parentCategory = $this->getRepository()->find($parent);
 
-        $category = $this->getFactory()->create();
+        /** @var CategoryInterface $category */
+        $category = $this->initResource();
         $category->setParent($parentCategory);
-        $category->addShop($currentShop);
+        $category->addShop($shop);
 
         foreach ($this->getLocales() as $locale) {
             $this->translateCategory($locale, $category, $name);
@@ -77,6 +75,7 @@ class CategoryManager extends AbstractManager
 
         return $category;
     }
+
 
     /**
      * Translates the category

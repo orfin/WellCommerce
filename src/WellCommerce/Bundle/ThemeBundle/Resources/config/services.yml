@@ -2,7 +2,7 @@
 services:
     theme.controller.admin:
         class: WellCommerce\Bundle\ThemeBundle\Controller\Admin\ThemeController
-        arguments: ['@theme.manager']
+        arguments: ['@theme.manager', '@theme.form_builder.admin', '@theme.datagrid']
         calls:
             - [setContainer, ['@service_container']]
 
@@ -39,7 +39,8 @@ services:
 
     theme.form_builder.admin:
         class: WellCommerce\Bundle\ThemeBundle\Form\Admin\ThemeFormBuilder
-        parent: core.form_builder
+        tags:
+            - { name: form_builder }
 
     theme.context.front:
         class: WellCommerce\Bundle\ThemeBundle\Context\Front\ThemeContext

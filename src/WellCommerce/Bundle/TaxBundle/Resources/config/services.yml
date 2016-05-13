@@ -20,4 +20,5 @@ services:
 
     tax.form_builder.admin:
         class: WellCommerce\Bundle\TaxBundle\Form\Admin\TaxFormBuilder
-        parent: core.form_builder
+        tags:
+            - { name: form_builder }

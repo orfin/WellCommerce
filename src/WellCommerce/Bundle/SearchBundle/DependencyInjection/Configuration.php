@@ -28,14 +28,12 @@ class Configuration extends BaseConfiguration
     {
         $builder = new TreeBuilder();
         $node    =
-            $builder->root('engine')
+            $builder->root('indexes')
+                ->useAttributeAsKey('name')
+                ->prototype('array')
                     ->children()
-                        ->scalarNode('search_term_min_length')->defaultValue(3)->end()
-                        ->scalarNode('type')->defaultValue('lucene')->end()
-                        ->arrayNode('parameters')
-                            ->useAttributeAsKey('name')
-                            ->prototype('scalar')
-                        ->end()
+                        ->scalarNode('indexer')->defaultNull()->end()
+                        ->scalarNode('provider')->defaultNull()->end()
                     ->end()
                 ->end();
 

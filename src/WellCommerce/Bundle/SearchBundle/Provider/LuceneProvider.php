@@ -21,7 +21,7 @@ use WellCommerce\Bundle\SearchBundle\Query\SimpleQuery;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LuceneSearchProvider implements SearchProviderInterface
+class LuceneProvider implements ResultProviderInterface
 {
     /**
      * @var SearchIndexManagerInterface

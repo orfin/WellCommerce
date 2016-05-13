@@ -59,7 +59,7 @@ class DataGridContext extends AbstractDataSetContext
             'rows_num'      => $total,
             'starting_from' => $request->getOffset(),
             'total'         => $total,
-            'filtered'      => $filtered,
+            'filtered'      => $total,
             'rows'          => $result
         ];
     }

@@ -95,7 +95,7 @@ final class OrderProvider implements OrderProviderInterface
     public function hasCurrentOrder() : bool
     {
         $order = $this->findCurrentOrder();
-        
+
         return $order instanceof OrderInterface;
     }
 

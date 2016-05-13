@@ -30,7 +30,7 @@ use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-final class ProductDataSet extends AbstractDataSet
+class ProductDataSet extends AbstractDataSet
 {
     /**
      * @var RequestHelperInterface
@@ -63,14 +63,15 @@ final class ProductDataSet extends AbstractDataSet
             'stock'            => 'product.stock',
             'producerId'       => 'IDENTITY(product.producer)',
             'producerName'     => 'producers_translation.name',
-            'category'         => 'categories.id',
+            'category'         => 'GROUP_CONCAT(DISTINCT categories.id SEPARATOR \',\')',
             'shop'             => 'product_shops.id',
             'photo'            => 'photos.path',
             'status'           => 'statuses.id',
         ]);
 
         $configurator->setColumnTransformers([
-            'route' => $this->getDataSetTransformer('route')
+            'route'    => $this->getDataSetTransformer('route'),
+            'category' => $this->getDataSetTransformer('category')
         ]);
 
         $configurator->setCacheOptions(new CacheOptions(true, 3600, [

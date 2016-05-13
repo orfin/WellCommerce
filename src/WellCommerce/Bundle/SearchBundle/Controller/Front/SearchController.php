@@ -15,6 +15,8 @@ namespace WellCommerce\Bundle\SearchBundle\Controller\Front;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
+use WellCommerce\Bundle\SearchBundle\Manager\SearchManagerInterface;
+use WellCommerce\Bundle\SearchBundle\Query\SearchQuery;
 use WellCommerce\Component\Breadcrumb\Model\Breadcrumb;
 use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
 
@@ -47,9 +49,12 @@ class SearchController extends AbstractFrontController
     {
         $requestHelper = $this->getRequestHelper();
         $phrase        = $requestHelper->getAttributesBagParam('phrase');
+
         if (strlen($phrase) < $this->container->getParameter('search_term_min_length')) {
             $liveSearchContent = '';
         } else {
+            $this->getSearchManager()->search(new SearchQuery($phrase));
+
             $dataset    = $this->get('search.dataset.front');
             $conditions = new ConditionsCollection();
             $conditions = $this->get('layered_navigation.helper')->addLayeredNavigationConditions($conditions);
@@ -61,7 +66,7 @@ class SearchController extends AbstractFrontController
                 'order_dir'  => 'asc',
                 'conditions' => $conditions,
             ]);
-            
+
             $liveSearchContent = $this->renderView('WellCommerceSearchBundle:Front/Search:view.html.twig', [
                 'dataset' => $products,
             ]);
@@ -70,5 +75,10 @@ class SearchController extends AbstractFrontController
         return $this->jsonResponse([
             'liveSearchContent' => $liveSearchContent
         ]);
+    }
+
+    protected function getSearchManager() : SearchManagerInterface
+    {
+        return $this->get('search.manager.product');
     }
 }

@@ -59,7 +59,7 @@ class CategoryExtension extends \Twig_Extension
      *
      * @return array
      */
-    public function getCategoriesTree($limit = 10, $orderBy = 'hierarchy', $orderDir = 'asc')
+    public function getCategoriesTree($limit = 1000, $orderBy = 'hierarchy', $orderDir = 'asc')
     {
         return $this->dataset->getResult('tree', [
             'limit'     => $limit,

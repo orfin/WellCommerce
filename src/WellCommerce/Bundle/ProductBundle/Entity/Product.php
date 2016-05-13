@@ -27,6 +27,7 @@ use WellCommerce\Bundle\DoctrineBundle\Behaviours\Enableable\EnableableTrait;
 use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
 use WellCommerce\Bundle\MediaBundle\Entity\MediaAwareTrait;
 use WellCommerce\Bundle\ProducerBundle\Entity\ProducerAwareTrait;
+use WellCommerce\Bundle\ProductBundle\Entity\Extra\ProductExtraTrait;
 use WellCommerce\Bundle\ShopBundle\Entity\ShopCollectionAwareTrait;
 use WellCommerce\Bundle\TaxBundle\Entity\TaxInterface;
 use WellCommerce\Bundle\UnitBundle\Entity\UnitAwareTrait;
@@ -48,6 +49,7 @@ class Product extends AbstractEntity implements ProductInterface
     use ProducerAwareTrait;
     use UnitAwareTrait;
     use AvailabilityAwareTrait;
+    use ProductExtraTrait;
 
     /**
      * @var string

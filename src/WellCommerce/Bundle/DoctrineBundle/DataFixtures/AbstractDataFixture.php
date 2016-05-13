@@ -74,7 +74,7 @@ abstract class AbstractDataFixture extends AbstractFixture implements OrderedFix
         $enabledFixtures = $this->container->getParameter('enabled_fixtures');
         $className       = get_class($this);
 
-        if (isset($enabledFixtures[$className])) {
+        if (array_key_exists($className, $enabledFixtures)) {
             return (bool)$enabledFixtures[$className];
         }
 
@@ -120,6 +120,11 @@ abstract class AbstractDataFixture extends AbstractFixture implements OrderedFix
     protected function get($name)
     {
         return $this->container->get($name);
+    }
+
+    protected function getDefaultLocale() : string
+    {
+        return $this->container->getParameter('locale');
     }
 
     protected function importAdminMenuConfiguration($file)

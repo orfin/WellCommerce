@@ -1,10 +1,4 @@
 services:
-    core.form_builder:
-        abstract: true
-        arguments: ['@form.resolver.factory', '@form.handler']
-        calls:
-            - [setContainer, ['@service_container']]
-
     form.data_transformer.collection:
         class: WellCommerce\Component\Form\DataTransformer\DataTransformerCollection
 

@@ -25,6 +25,7 @@ front.search.index:
         view: grid|list
         producers: '[\d+_]+'
         attributes: '[\d+_]+'
+
 front.search.view:
     path: '/search/view/{phrase}'
     defaults:

@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\RoutingBundle\Generator;
 
+use Doctrine\Common\Util\Debug;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
 use WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface;

@@ -35,7 +35,7 @@ class LoadDelivererData extends AbstractDataFixture
         $fakerGenerator = $this->getFakerGenerator();
         $deliverer      = new Deliverer();
         $name           = $fakerGenerator->company;
-        $deliverer->translate('en')->setName($name);
+        $deliverer->translate($this->getDefaultLocale())->setName($name);
         $deliverer->mergeNewTranslations();
         $manager->persist($deliverer);
         $manager->flush();

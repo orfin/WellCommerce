@@ -15,15 +15,14 @@ namespace WellCommerce\Bundle\CoreBundle\DependencyInjection\Compiler;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
-use WellCommerce\Component\DataSet\Configurator\DataSetConfigurator;
-use WellCommerce\Component\DataSet\DataSetInterface;
+use WellCommerce\Component\Form\FormBuilderInterface;
 
 /**
- * Class DataSetPass
+ * Class FormBuilderPass
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class DataSetPass implements CompilerPassInterface
+class FormBuilderPass implements CompilerPassInterface
 {
     /**
      * Processes the container
@@ -32,8 +31,8 @@ class DataSetPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        $tag       = 'dataset';
-        $interface = DataSetInterface::class;
+        $tag       = 'form_builder';
+        $interface = FormBuilderInterface::class;
 
         foreach ($container->findTaggedServiceIds($tag) as $id => $attributes) {
             $definition = $container->getDefinition($id);
@@ -41,13 +40,15 @@ class DataSetPass implements CompilerPassInterface
 
             if (!$refClass->implementsInterface($interface)) {
                 throw new \InvalidArgumentException(
-                    sprintf('DataSet "%s" tagged with "%s" must implement interface "%s".', $id, $tag, $interface)
+                    sprintf('FormBuilder "%s" tagged with "%s" must implement interface "%s".', $id, $tag, $interface)
                 );
             }
 
-            $definition->addArgument(new Reference('dataset.manager'));
+            $definition->addArgument($id);
+            $definition->addArgument(new Reference('form.resolver.factory'));
+            $definition->addArgument(new Reference('form.handler'));
             $definition->addArgument(new Reference('event_dispatcher'));
-            $definition->setConfigurator([new Reference('dataset.configurator'), 'configure']);
+            $definition->addMethodCall('setContainer', [new Reference('service_container')]);
         }
     }
 }

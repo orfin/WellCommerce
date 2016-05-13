@@ -20,7 +20,8 @@ services:
 
     locale.form_builder.admin:
         class: WellCommerce\Bundle\LocaleBundle\Form\Admin\LocaleFormBuilder
-        parent: core.form_builder
+        tags:
+            - { name: form_builder }
 
     locale.dataset.front:
         class: WellCommerce\Bundle\LocaleBundle\DataSet\Front\LocaleDataSet

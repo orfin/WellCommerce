@@ -1,22 +1,25 @@
 <?php
 /*
  * WellCommerce Open-Source E-Commerce Platform
- *
+ * 
  * This file is part of the WellCommerce package.
  *
  * (c) Adam Piotrowski <adam@wellcommerce.org>
- *
+ * 
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\LayoutBundle\Configurator;
+namespace WellCommerce\Bundle\SearchBundle\Provider;
+
+use WellCommerce\Bundle\SearchBundle\Query\SearchQuery;
 
 /**
- * Class WishlistBoxConfigurator
+ * Interface SearchProviderInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class WishlistBoxConfigurator extends AbstractLayoutBoxConfigurator
+interface ResultProviderInterface
 {
+    public function search(SearchQuery $query) : array;
 }

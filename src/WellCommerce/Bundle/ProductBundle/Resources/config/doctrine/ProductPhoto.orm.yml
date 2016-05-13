@@ -42,12 +42,11 @@ WellCommerce\Bundle\ProductBundle\Entity\ProductPhoto:
                     referencedColumnName: id
         product:
             targetEntity: WellCommerce\Bundle\ProductBundle\Entity\Product
-            cascade: {  }
             fetch: LAZY
             mappedBy: null
             inversedBy: productPhotos
             joinColumns:
                 product_id:
                     referencedColumnName: id
+                    onDelete: CASCADE
             orphanRemoval: false
-    lifecycleCallbacks: {  }

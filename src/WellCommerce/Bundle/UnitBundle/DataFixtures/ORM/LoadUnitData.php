@@ -36,7 +36,7 @@ class LoadUnitData extends AbstractDataFixture
 
         foreach (self::$samples as $name) {
             $unit = new Unit();
-            $unit->translate('en')->setName($name);
+            $unit->translate($this->getDefaultLocale())->setName($name);
             $unit->mergeNewTranslations();
             $manager->persist($unit);
             $this->setReference('unit_' . $name, $unit);

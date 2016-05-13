@@ -86,9 +86,9 @@ class LoadPageData extends AbstractDataFixture
         $page->setRedirectType(0);
         $page->setSection('');
         $page->addShop($this->shop);
-        $page->translate('en')->setName($name);
-        $page->translate('en')->setSlug(Sluggable::makeSlug($name));
-        $page->translate('en')->setContent($this->defaultText);
+        $page->translate($this->getDefaultLocale())->setName($name);
+        $page->translate($this->getDefaultLocale())->setSlug(Sluggable::makeSlug($name));
+        $page->translate($this->getDefaultLocale())->setContent($this->defaultText);
         $page->mergeNewTranslations();
 
         $this->manager->persist($page);

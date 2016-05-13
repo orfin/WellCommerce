@@ -19,20 +19,9 @@ namespace WellCommerce\Bundle\AppBundle\Entity;
  */
 class Dimension
 {
-    /**
-     * @var float
-     */
-    protected $depth;
-    
-    /**
-     * @var float
-     */
-    protected $width;
-    
-    /**
-     * @var float
-     */
-    protected $height;
+    protected $depth = 0;
+    protected $width = 0;
+    protected $height = 0;
     
     /**
      * @return float

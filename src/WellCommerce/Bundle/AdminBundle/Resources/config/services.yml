@@ -24,15 +24,18 @@ services:
 
     user.form_builder.admin:
         class: WellCommerce\Bundle\AdminBundle\Form\Admin\UserFormBuilder
-        parent: core.form_builder
+        tags:
+            - { name: form_builder }
 
     user_login.form_builder:
         class: WellCommerce\Bundle\AdminBundle\Form\Admin\UserLoginFormBuilder
-        parent: core.form_builder
+        tags:
+            - { name: form_builder }
 
     user_reset_password.form_builder:
         class: WellCommerce\Bundle\AdminBundle\Form\Admin\UserResetPasswordFormBuilder
-        parent: core.form_builder
+        tags:
+            - { name: form_builder }
 
     user_group.controller.admin:
         class: WellCommerce\Bundle\AdminBundle\Controller\Admin\UserGroupController
@@ -54,7 +57,8 @@ services:
 
     user_group.form_builder.admin:
         class: WellCommerce\Bundle\AdminBundle\Form\Admin\UserGroupFormBuilder
-        parent: core.form_builder
+        tags:
+            - { name: form_builder }
 
     form.user_group_permission.data_transformer:
         class: WellCommerce\Bundle\AdminBundle\Form\DataTransformer\UserGroupPermissionToArrayTransformer

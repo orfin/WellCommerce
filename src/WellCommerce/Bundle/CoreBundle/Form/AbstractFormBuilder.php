@@ -12,13 +12,15 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form;
 
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
-use WellCommerce\Bundle\DoctrineBundle\Manager\ManagerInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
 use WellCommerce\Component\Form\DataTransformer\DataTransformerInterface;
 use WellCommerce\Component\Form\Dependencies\DependencyInterface;
 use WellCommerce\Component\Form\Elements\ElementInterface;
 use WellCommerce\Component\Form\Elements\FormInterface;
+use WellCommerce\Component\Form\Event\FormEvent;
 use WellCommerce\Component\Form\Filters\FilterInterface;
 use WellCommerce\Component\Form\FormBuilderInterface;
 use WellCommerce\Component\Form\Handler\FormHandlerInterface;
@@ -33,6 +35,11 @@ use WellCommerce\Component\Form\Rules\RuleInterface;
 abstract class AbstractFormBuilder extends AbstractContainerAware implements FormBuilderInterface
 {
     /**
+     * @var string
+     */
+    protected $alias;
+
+    /**
      * @var FormResolverFactoryInterface
      */
     protected $resolverFactory;
@@ -41,20 +48,30 @@ abstract class AbstractFormBuilder extends AbstractContainerAware implements For
      * @var FormHandlerInterface
      */
     protected $formHandler;
-    
+
+    /**
+     * @var EventDispatcherInterface
+     */
+    protected $eventDispatcher;
+
     /**
      * AbstractFormBuilder constructor.
      *
+     * @param string                       $alias
      * @param FormResolverFactoryInterface $resolverFactory
      * @param FormHandlerInterface         $formHandler
-     * @param ManagerInterface             $manager
+     * @param EventDispatcherInterface     $eventDispatcher
      */
     public function __construct(
+        string $alias,
         FormResolverFactoryInterface $resolverFactory,
-        FormHandlerInterface $formHandler
+        FormHandlerInterface $formHandler,
+        EventDispatcherInterface $eventDispatcher
     ) {
+        $this->alias           = $alias;
         $this->resolverFactory = $resolverFactory;
         $this->formHandler     = $formHandler;
+        $this->eventDispatcher = $eventDispatcher;
     }
     
     /**
@@ -65,10 +82,26 @@ abstract class AbstractFormBuilder extends AbstractContainerAware implements For
         $form = $this->getFormService($options);
         $this->buildForm($form);
         $this->formHandler->initForm($form, $defaultData);
-        
+
+        $this->dispatchOnInitEvent($form, $defaultData);
+
         return $form;
     }
-    
+
+    /**
+     * Dispatches the event after form initialization
+     *
+     * @param FormInterface        $form
+     * @param EntityInterface|null $entity
+     */
+    protected function dispatchOnInitEvent(FormInterface $form, EntityInterface $entity = null)
+    {
+        $eventName = sprintf('%s.%s', $this->alias, FormEvent::FORM_INIT_EVENT);
+        $event     = new FormEvent($this, $form, $entity);
+
+        $this->eventDispatcher->dispatch($eventName, $event);
+    }
+
     /**
      * {@inheritdoc}
      */

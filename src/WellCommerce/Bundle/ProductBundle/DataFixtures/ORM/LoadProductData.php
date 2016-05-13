@@ -114,10 +114,10 @@ class LoadProductData extends AbstractDataFixture
         $product->addShop($shop);
         $product->setStatuses($statuses);
 
-        $product->translate('en')->setName($name);
-        $product->translate('en')->setSlug(Sluggable::makeSlug($name));
-        $product->translate('en')->setShortDescription($shortDescription);
-        $product->translate('en')->setDescription($description);
+        $product->translate($this->getDefaultLocale())->setName($name);
+        $product->translate($this->getDefaultLocale())->setSlug(Sluggable::makeSlug($name));
+        $product->translate($this->getDefaultLocale())->setShortDescription($shortDescription);
+        $product->translate($this->getDefaultLocale())->setDescription($description);
         $product->mergeNewTranslations();
 
         $product->setProductPhotos($this->getPhotos($product, $manager));

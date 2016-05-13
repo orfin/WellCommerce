@@ -23,55 +23,36 @@ use ZendSearch\Lucene\Document\Field;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LuceneProductIndexer implements ProductIndexerInterface
+final class LuceneProductIndexer implements IndexerInterface
 {
-    /**
-     * @var SearchIndexManagerInterface
-     */
-    protected $searchIndexManager;
 
-    /**
-     * @var ProductRepositoryInterface
-     */
-    protected $productRepository;
-
-    /**
-     * LuceneProductIndexer constructor.
-     *
-     * @param SearchIndexManagerInterface $searchIndexManager
-     */
-    public function __construct(SearchIndexManagerInterface $searchIndexManager, ProductRepositoryInterface $productRepository)
+    public function __construct(string $indexName)
     {
-        $this->searchIndexManager = $searchIndexManager;
-        $this->productRepository  = $productRepository;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function addProduct(ProductInterface $product, $indexName = ProductIndexerInterface::DEFAULT_INDEX_NAME)
+    public function create()
     {
-        $index = $this->searchIndexManager->getIndex(ProductIndexerInterface::DEFAULT_INDEX_NAME);
-
-        $document = new Document();
-        $document->addField(Field::unIndexed('identifier', $product->getId()));
-        $document->addField(Field::text('name', $product->translate('en')->getName()));
-        $document->addField(Field::text('shortDescription', $product->translate()->getShortDescription()));
-        $document->addField(Field::text('description', $product->translate()->getDescription()));
-        $index->addDocument($document);
-        $index->commit();
+        // TODO: Implement create() method.
     }
 
-    public function reindexProducts()
+    public function get()
     {
-        $products = $this->productRepository->findAll();
-        $this->searchIndexManager->eraseIndex(ProductIndexerInterface::DEFAULT_INDEX_NAME);
-
-        foreach ($products as $product) {
-            $this->addProduct($product);
-        }
-
-        $index = $this->searchIndexManager->getIndex(ProductIndexerInterface::DEFAULT_INDEX_NAME);
-        $index->optimize();
+        // TODO: Implement get() method.
     }
+
+    public function remove()
+    {
+        // TODO: Implement remove() method.
+    }
+
+    public function erase()
+    {
+        // TODO: Implement erase() method.
+    }
+
+    public function reindex()
+    {
+        // TODO: Implement reindex() method.
+    }
+
 }

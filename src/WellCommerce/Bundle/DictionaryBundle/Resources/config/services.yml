@@ -20,7 +20,8 @@ services:
 
     dictionary.form_builder.admin:
         class: WellCommerce\Bundle\DictionaryBundle\Form\Admin\DictionaryFormBuilder
-        parent: core.form_builder
+        tags:
+            - { name: form_builder }
 
     package.command.purge.translations:
         class: WellCommerce\Bundle\DictionaryBundle\Command\PurgeTranslationsCommand

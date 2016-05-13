@@ -40,7 +40,8 @@ services:
 
     payment_method.form_builder.admin:
         class: WellCommerce\Bundle\PaymentBundle\Form\Admin\PaymentMethodFormBuilder
-        parent: core.form_builder
+        tags:
+            - { name: form_builder }
 
     payment.processor.collection:
         class: WellCommerce\Bundle\PaymentBundle\Processor\PaymentProcessorCollection

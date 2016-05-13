@@ -20,4 +20,5 @@ services:
 
     company.form_builder.admin:
         class: WellCommerce\Bundle\CompanyBundle\Form\Admin\CompanyFormBuilder
-        parent: core.form_builder
+        tags:
+            - { name: form_builder }

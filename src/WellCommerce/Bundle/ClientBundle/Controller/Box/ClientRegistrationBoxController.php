@@ -27,7 +27,6 @@ class ClientRegistrationBoxController extends AbstractBoxController
     {
         $manager  = $this->getManager();
         $resource = $manager->initResource();
-        $resource->setShop($manager->getShopContext()->getCurrentShop());
         
         $form = $this->getForm($resource, [
             'name'              => 'register',

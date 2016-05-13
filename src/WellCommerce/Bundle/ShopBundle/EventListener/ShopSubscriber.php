@@ -11,6 +11,7 @@
  */
 namespace WellCommerce\Bundle\ShopBundle\EventListener;
 
+use Symfony\Component\Console\ConsoleEvents;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
@@ -39,7 +40,7 @@ class ShopSubscriber extends AbstractEventSubscriber
             'producer.dataset.admin.request' => ['onShopAwareDataSetRequest', 0],
         ];
     }
-    
+
     public function onKernelRequest(GetResponseEvent $event)
     {
         $firewallName         = $this->getSecurityHelper()->getFirewallNameForRequest($event->getRequest());

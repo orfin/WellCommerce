@@ -10,15 +10,13 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\WishlistBundle\Repository;
-
-use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
+namespace WellCommerce\Bundle\LayoutBundle\Configurator;
 
 /**
- * Interface WishlistRepositoryInterface
+ * Class ClientWishlistBoxConfigurator
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface WishlistRepositoryInterface extends RepositoryInterface
+final class ClientWishlistBoxConfigurator extends AbstractLayoutBoxConfigurator
 {
 }

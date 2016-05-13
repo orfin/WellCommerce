@@ -20,7 +20,8 @@ services:
 
     news.form_builder.admin:
         class: WellCommerce\Bundle\NewsBundle\Form\Admin\NewsFormBuilder
-        parent: core.form_builder
+        tags:
+            - { name: form_builder }
 
     news.dataset.front:
         class: WellCommerce\Bundle\NewsBundle\DataSet\Front\NewsDataSet

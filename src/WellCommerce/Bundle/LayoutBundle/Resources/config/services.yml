@@ -20,7 +20,8 @@ services:
 
     layout_box.form_builder.admin:
         class: WellCommerce\Bundle\LayoutBundle\Form\Admin\LayoutBoxFormBuilder
-        parent: core.form_builder
+        tags:
+            - { name: form_builder }
 
     layout_box.renderer:
         class: WellCommerce\Bundle\LayoutBundle\Renderer\LayoutBoxRenderer

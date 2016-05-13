@@ -10,29 +10,21 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\WishlistBundle\Factory;
+namespace WellCommerce\Bundle\ClientBundle\Factory;
 
+use WellCommerce\Bundle\ClientBundle\Entity\ClientWishlistInterface;
 use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
-use WellCommerce\Bundle\WishlistBundle\Entity\WishlistInterface;
 
 /**
- * Class WishlistFactory
+ * Class ClientWishlistFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class WishlistFactory extends AbstractEntityFactory
+final class ClientWishlistFactory extends AbstractEntityFactory
 {
-    /**
-     * @var string
-     */
-    protected $supportsInterface = WishlistInterface::class;
-
-    /**
-     * @return WishlistInterface
-     */
-    public function create() : WishlistInterface
+    public function create() : ClientWishlistInterface
     {
-        /** @var  $wishlist WishlistInterface */
+        /** @var  $wishlist ClientWishlistInterface */
         $wishlist = $this->init();
 
         return $wishlist;

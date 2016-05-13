@@ -28,7 +28,8 @@ services:
 
     page.form_builder.admin:
         class: WellCommerce\Bundle\PageBundle\Form\Admin\PageFormBuilder
-        parent: core.form_builder
+        tags:
+            - { name: form_builder }
 
     page.controller.front:
         class: WellCommerce\Bundle\PageBundle\Controller\Front\PageController

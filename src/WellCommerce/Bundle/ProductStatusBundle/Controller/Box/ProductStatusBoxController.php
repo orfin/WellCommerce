@@ -15,6 +15,7 @@ namespace WellCommerce\Bundle\ProductStatusBundle\Controller\Box;
 use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 use WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxSettingsCollection;
+use WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusInterface;
 use WellCommerce\Component\DataSet\Conditions\Condition\Eq;
 use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
 
@@ -30,7 +31,8 @@ class ProductStatusBoxController extends AbstractBoxController
         $dataset       = $this->get('product.dataset.front');
         $requestHelper = $this->getRequestHelper();
         $limit         = $requestHelper->getQueryBagParam('limit', $boxSettings->getParam('per_page', 12));
-        $conditions    = $this->createConditionsCollection($boxSettings->getParam('status'));
+        $status        = $this->getProductStatus($boxSettings->getParam('status'));
+        $conditions    = $this->createConditionsCollection($status);
         $conditions    = $this->get('layered_navigation.helper')->addLayeredNavigationConditions($conditions);
 
         $products = $dataset->getResult('array', [
@@ -43,17 +45,25 @@ class ProductStatusBoxController extends AbstractBoxController
 
         return $this->displayTemplate('index', [
             'dataset' => $products,
+            'status'  => $status
         ]);
     }
-    
-    protected function createConditionsCollection($status) : ConditionsCollection
+
+    protected function getProductStatus(int $id = null) : ProductStatusInterface
     {
-        if (null === $status) {
-            $status = $this->getProductStatusStorage()->getCurrentProductStatusIdentifier();
+        if (null === $id) {
+            $status = $this->getProductStatusStorage()->getCurrentProductStatus();
+        } else {
+            $status = $this->get('product_status.repository')->find($id);
         }
 
+        return $status;
+    }
+
+    protected function createConditionsCollection(ProductStatusInterface $status) : ConditionsCollection
+    {
         $conditions = new ConditionsCollection();
-        $conditions->add(new Eq('status', $status));
+        $conditions->add(new Eq('status', $status->getId()));
 
         return $conditions;
     }

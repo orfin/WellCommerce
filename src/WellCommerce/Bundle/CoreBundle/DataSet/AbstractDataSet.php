@@ -35,11 +35,6 @@ use WellCommerce\Component\DataSet\Transformer\DataSetTransformerInterface;
 abstract class AbstractDataSet implements DataSetInterface
 {
     /**
-     * @var string
-     */
-    private $alias;
-
-    /**
      * @var ColumnCollection
      */
     protected $columns;
@@ -83,18 +78,15 @@ abstract class AbstractDataSet implements DataSetInterface
      * AbstractDataSet constructor.
      *
      * @param DataSetAwareRepositoryInterface $repository
-     * @param string                          $alias
      * @param DataSetManagerInterface         $manager
      * @param EventDispatcherInterface        $eventDispatcher
      */
     public function __construct(
         DataSetAwareRepositoryInterface $repository,
-        string $alias,
         DataSetManagerInterface $manager,
         EventDispatcherInterface $eventDispatcher
     ) {
         $this->repository      = $repository;
-        $this->alias           = $alias;
         $this->manager         = $manager;
         $this->eventDispatcher = $eventDispatcher;
         $this->columns         = new ColumnCollection();
@@ -135,10 +127,7 @@ abstract class AbstractDataSet implements DataSetInterface
 
     public function dispatchOnDataSetInitEvent()
     {
-        $eventName = sprintf('%s.%s', $this->alias, DataSetInitEvent::EVENT_SUFFIX);
-        $event     = new DataSetInitEvent($this);
-
-        $this->eventDispatcher->dispatch($eventName, $event);
+        $this->eventDispatcher->dispatch($this->getEventName(DataSetInitEvent::EVENT_SUFFIX), new DataSetInitEvent($this));
     }
 
     public function getResult(string $contextType, array $requestOptions = [], array $contextOptions = []) : array
@@ -194,9 +183,11 @@ abstract class AbstractDataSet implements DataSetInterface
 
     private function dispatchDataSetRequestEvent(DataSetRequestInterface $request)
     {
-        $eventName = sprintf('%s.%s', $this->alias, DataSetRequestEvent::EVENT_SUFFIX);
-        $event     = new DataSetRequestEvent($this, $request);
-
-        $this->eventDispatcher->dispatch($eventName, $event);
+        $this->eventDispatcher->dispatch($this->getEventName(DataSetRequestEvent::EVENT_SUFFIX), new DataSetRequestEvent($this, $request));
+    }
+    
+    private function getEventName(string $eventSuffix): string
+    {
+        return sprintf('%s.%s', $this->repository->getAlias(), $eventSuffix);
     }
 }

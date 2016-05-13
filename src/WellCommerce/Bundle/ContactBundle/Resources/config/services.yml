@@ -28,7 +28,8 @@ services:
 
     contact.form_builder.admin:
         class: WellCommerce\Bundle\ContactBundle\Form\Admin\ContactFormBuilder
-        parent: core.form_builder
+        tags:
+            - { name: form_builder }
 
     contact.controller.front:
         class: WellCommerce\Bundle\ContactBundle\Controller\Front\ContactController
@@ -48,7 +49,8 @@ services:
 
     contact.form_builder.front:
         class: WellCommerce\Bundle\ContactBundle\Form\Front\ContactFormBuilder
-        parent: core.form_builder
+        tags:
+            - { name: form_builder }
 
     contact.context.front:
         class: WellCommerce\Bundle\ContactBundle\Context\Front\ContactContext

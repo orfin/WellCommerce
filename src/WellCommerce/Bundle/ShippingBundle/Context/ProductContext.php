@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\ShippingBundle\Calculator\Adapter;
+namespace WellCommerce\Bundle\ShippingBundle\Context;
 
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 use WellCommerce\Bundle\ShippingBundle\Calculator\ShippingSubjectInterface;

@@ -20,7 +20,8 @@ services:
 
     currency.form_builder.admin:
         class: WellCommerce\Bundle\CurrencyBundle\Form\Admin\CurrencyFormBuilder
-        parent: core.form_builder
+        tags:
+            - { name: form_builder }
 
     currency.controller.front:
         class: WellCommerce\Bundle\CurrencyBundle\Controller\Front\CurrencyController
@@ -57,7 +58,7 @@ services:
 
     currency.formatter:
         class: WellCommerce\Bundle\CurrencyBundle\Formatter\CurrencyFormatter
-        arguments: ['@request.helper']
+        arguments: ['@request.helper', '%number_formatter_locale%']
 
     currency.helper:
         class: WellCommerce\Bundle\CurrencyBundle\Helper\CurrencyHelper

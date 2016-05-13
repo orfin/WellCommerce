@@ -76,6 +76,6 @@ doctrine:
                         type: service
                         id: doctrine_cache.providers.file_system
                     region_lock_lifetime: 60
-                    log_enabled:          "%kernel.debug%"
+                    log_enabled:          false
                     region_lifetime:      3600
                     enabled:              true

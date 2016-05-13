@@ -1,3 +1,6 @@
+parameters:
+    number_formatter_locale: ~
+
 well_commerce_currency:
     configuration:
         currency:

@@ -20,7 +20,7 @@ use WellCommerce\Bundle\CurrencyBundle\Exception\CurrencyFormatterException;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CurrencyFormatter implements CurrencyFormatterInterface
+final class CurrencyFormatter implements CurrencyFormatterInterface
 {
     /**
      * @var RequestHelperInterface
@@ -28,13 +28,20 @@ class CurrencyFormatter implements CurrencyFormatterInterface
     protected $requestHelper;
 
     /**
-     * Constructor
+     * @var null|string
+     */
+    protected $forcedLocale;
+
+    /**
+     * CurrencyFormatter constructor.
      *
      * @param RequestHelperInterface $requestHelper
+     * @param null                   $forcedLocale
      */
-    public function __construct(RequestHelperInterface $requestHelper)
+    public function __construct(RequestHelperInterface $requestHelper, $forcedLocale = null)
     {
         $this->requestHelper = $requestHelper;
+        $this->forcedLocale  = $forcedLocale;
     }
 
     /**
@@ -46,15 +53,25 @@ class CurrencyFormatter implements CurrencyFormatterInterface
             $currency = $this->requestHelper->getCurrentCurrency();
         }
 
-        if (null === $locale) {
-            $locale = $this->requestHelper->getCurrentLocale();
-        }
-
+        $locale    = $this->getLocale($locale);
         $formatter = new \NumberFormatter($locale, \NumberFormatter::CURRENCY);
         if (false === $result = $formatter->formatCurrency($amount, $currency)) {
             throw new CurrencyFormatterException($amount, $currency, $locale);
         }
 
         return $result;
+    }
+
+    private function getLocale(string $locale = null) : string
+    {
+        if (null === $locale) {
+            if (null === $this->forcedLocale) {
+                return $this->requestHelper->getCurrentLocale();
+            } else {
+                return $this->forcedLocale;
+            }
+        }
+
+        return $locale;
     }
 }

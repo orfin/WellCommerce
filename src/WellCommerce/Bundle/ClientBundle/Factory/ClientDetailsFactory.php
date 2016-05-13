@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\ClientBundle\Factory;
 
 use WellCommerce\Bundle\ClientBundle\Entity\ClientDetailsInterface;
+use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 
 /**
@@ -28,11 +29,13 @@ final class ClientDetailsFactory extends AbstractEntityFactory
     {
         /** @var ClientDetailsInterface $details */
         $details = $this->init();
+        $details->setUsername('');
         $details->setConditionsAccepted(false);
         $details->setDiscount(0);
         $details->setNewsletterAccepted(false);
         $details->setSalt(base_convert(sha1(uniqid(mt_rand(), true)), 16, 36));
-        
+        $details->setPassword('');
+
         return $details;
     }
 }

@@ -10,12 +10,12 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\WishlistBundle\Controller\Box;
+namespace WellCommerce\Bundle\ClientBundle\Controller\Box;
 
 use Symfony\Component\HttpFoundation\Response;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientWishlistInterface;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 use WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxSettingsCollection;
-use WellCommerce\Bundle\WishlistBundle\Entity\WishlistInterface;
 use WellCommerce\Component\DataSet\Conditions\Condition\In;
 use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
 
@@ -24,7 +24,7 @@ use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class WishlistBoxController extends AbstractBoxController
+class ClientWishlistBoxController extends AbstractBoxController
 {
     public function indexAction(LayoutBoxSettingsCollection $boxSettings) : Response
     {
@@ -44,7 +44,7 @@ class WishlistBoxController extends AbstractBoxController
         $wishlist   = $this->getAuthenticatedClient()->getWishlist();
         $productIds = [];
 
-        $wishlist->map(function (WishlistInterface $wishlist) use (&$productIds) {
+        $wishlist->map(function (ClientWishlistInterface $wishlist) use (&$productIds) {
             $productIds[] = $wishlist->getProduct()->getId();
         });
 

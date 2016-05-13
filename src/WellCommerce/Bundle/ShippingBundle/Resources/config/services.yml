@@ -20,7 +20,8 @@ services:
 
     shipping_method.form_builder.admin:
         class: WellCommerce\Bundle\ShippingBundle\Form\Admin\ShippingMethodFormBuilder
-        parent: core.form_builder
+        tags:
+            - { name: form_builder }
 
     shipping_method.calculator.collection:
         class: Doctrine\Common\Collections\ArrayCollection

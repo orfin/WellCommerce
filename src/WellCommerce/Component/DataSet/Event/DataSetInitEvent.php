@@ -22,7 +22,7 @@ use WellCommerce\Component\DataSet\DataSetInterface;
  */
 final class DataSetInitEvent extends Event
 {
-    const EVENT_SUFFIX = 'init';
+    const EVENT_SUFFIX = 'dataset_init';
     
     /**
      * @var DataSetInterface

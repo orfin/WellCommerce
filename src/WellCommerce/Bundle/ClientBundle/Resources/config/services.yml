@@ -8,7 +8,8 @@ services:
 
     client.form_builder.admin:
         class: WellCommerce\Bundle\ClientBundle\Form\Admin\ClientFormBuilder
-        parent: core.form_builder
+        tags:
+            - { name: form_builder }
 
     client.dataset.admin:
         class: WellCommerce\Bundle\ClientBundle\DataSet\Admin\ClientDataSet
@@ -36,7 +37,8 @@ services:
 
     client_login.form_builder.front:
         class: WellCommerce\Bundle\ClientBundle\Form\Front\ClientLoginFormBuilder
-        parent: core.form_builder
+        tags:
+            - { name: form_builder }
 
     client_login.layout_box.controller:
         class: WellCommerce\Bundle\ClientBundle\Controller\Box\ClientLoginBoxController
@@ -82,7 +84,8 @@ services:
 
     client_contact_details.form_builder.front:
         class: WellCommerce\Bundle\ClientBundle\Form\Front\ClientContactDetailsFormBuilder
-        parent: core.form_builder
+        tags:
+            - { name: form_builder }
 
     client_settings.controller.front:
         class: WellCommerce\Bundle\ClientBundle\Controller\Front\ClientSettingsController
@@ -106,11 +109,12 @@ services:
 
     client_register.form_builder.front:
         class: WellCommerce\Bundle\ClientBundle\Form\Front\ClientRegisterFormBuilder
-        parent: core.form_builder
+        tags:
+            - { name: form_builder }
 
     client_registration.layout_box.controller:
         class: WellCommerce\Bundle\ClientBundle\Controller\Box\ClientRegistrationBoxController
-        arguments: ['@client.manager']
+        arguments: ['@client.manager', '@client_register.form_builder.front']
         calls:
             - [setContainer, ['@service_container']]
 
@@ -130,15 +134,17 @@ services:
 
     client_forgot_password_reset.form_builder.front:
         class: WellCommerce\Bundle\ClientBundle\Form\Front\ClientResetPasswordFormBuilder
-        parent: core.form_builder
+        tags:
+            - { name: form_builder }
 
     client_forgot_password_change.form_builder.front:
         class: WellCommerce\Bundle\ClientBundle\Form\Front\ClientChangePasswordFormBuilder
-        parent: core.form_builder
+        tags:
+            - { name: form_builder }
 
     client_forgot_password.layout_box.controller:
         class: WellCommerce\Bundle\ClientBundle\Controller\Box\ClientForgotPasswordBoxController
-        arguments: ['@client.manager']
+        arguments: ['@client.manager', '@client_forgot_password_reset.form_builder.front']
         calls:
             - [setContainer, ['@service_container']]
 
@@ -152,7 +158,8 @@ services:
 
     client_address_book.form_builder.front:
         class: WellCommerce\Bundle\ClientBundle\Form\Front\ClientAddressBookFormBuilder
-        parent: core.form_builder
+        tags:
+            - { name: form_builder }
 
     client_address_book.controller.front:
         class: WellCommerce\Bundle\ClientBundle\Controller\Front\ClientAddressBookController
@@ -162,7 +169,7 @@ services:
 
     client_address_book.layout_box.controller:
         class: WellCommerce\Bundle\ClientBundle\Controller\Box\ClientAddressBookBoxController
-        arguments: ['@client.manager']
+        arguments: ['@client.manager', '@client_address_book.form_builder.front']
         calls:
             - [setContainer, ['@service_container']]
 
@@ -216,4 +223,25 @@ services:
 
     client_group.form_builder.admin:
         class: WellCommerce\Bundle\ClientBundle\Form\Admin\ClientGroupFormBuilder
-        parent: core.form_builder
+        tags:
+            - { name: form_builder }
+
+    client_wishlist.controller.front:
+        class: WellCommerce\Bundle\ClientBundle\Controller\Front\ClientWishlistController
+        arguments: ['@client_wishlist.manager']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    client_wishlist.layout_box.controller:
+        class: WellCommerce\Bundle\ClientBundle\Controller\Box\ClientWishlistBoxController
+        arguments: ['@client_wishlist.manager']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    client_wishlist.configurator:
+        class: WellCommerce\Bundle\LayoutBundle\Configurator\ClientWishlistBoxConfigurator
+        tags:
+            - { name: layout_box.configurator }
+        arguments: [ClientWishlist, client_wishlist.layout_box.controller, '@translator.helper']
+        calls:
+            - [setContainer, ['@service_container']]

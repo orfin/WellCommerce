@@ -15,6 +15,8 @@ namespace WellCommerce\Bundle\SearchBundle\Controller\Box;
 use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 use WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxSettingsCollection;
+use WellCommerce\Bundle\SearchBundle\Manager\SearchManagerInterface;
+use WellCommerce\Bundle\SearchBundle\Query\SearchQuery;
 use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
 
 /**
@@ -24,15 +26,16 @@ use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
  */
 class SearchBoxController extends AbstractBoxController
 {
-    /**
-     * {@inheritdoc}
-     */
     public function indexAction(LayoutBoxSettingsCollection $boxSettings) : Response
     {
-        $dataset       = $this->get('search.dataset.front');
-        $conditions    = $this->getConditions();
         $requestHelper = $this->getRequestHelper();
-        $limit         = $this->getRequestHelper()->getAttributesBagParam('limit', $boxSettings->getParam('per_page', 12));
+        $phrase        = $requestHelper->getAttributesBagParam('phrase');
+        $this->getSearchManager()->search(new SearchQuery($phrase));
+
+        $limit      = $this->getRequestHelper()->getAttributesBagParam('limit', $boxSettings->getParam('per_page', 12));
+        $dataset    = $this->get('search.dataset.front');
+        $conditions = new ConditionsCollection();
+        $conditions = $this->get('layered_navigation.helper')->addLayeredNavigationConditions($conditions);
 
         $products = $dataset->getResult('array', [
             'limit'      => $limit,
@@ -47,12 +50,8 @@ class SearchBoxController extends AbstractBoxController
         ]);
     }
 
-    protected function getConditions() : ConditionsCollection
+    protected function getSearchManager() : SearchManagerInterface
     {
-        $conditions = new ConditionsCollection();
-        $conditions = $this->manager->addSearchConditions($conditions);
-        $conditions = $this->get('layered_navigation.helper')->addLayeredNavigationConditions($conditions);
-
-        return $conditions;
+        return $this->get('search.manager.product');
     }
 }

@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Bundle\LocaleBundle\EventListener;
 
-use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
+use Symfony\Component\Console\ConsoleEvents;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -27,8 +27,16 @@ class LocaleSubscriber extends AbstractEventSubscriber
     public static function getSubscribedEvents()
     {
         return [
-            KernelEvents::REQUEST    => ['onKernelRequest', 15],
+            KernelEvents::REQUEST  => ['onKernelRequest', 15],
+            ConsoleEvents::COMMAND => ['onConsoleCommand', 0],
         ];
+    }
+
+    public function onConsoleCommand()
+    {
+        $filter = $this->getDoctrineHelper()->enableFilter('locale');
+        $locale = $this->container->getParameter('locale');
+        $filter->setParameter('locale', $locale);
     }
 
     public function onKernelRequest(GetResponseEvent $event)

@@ -49,3 +49,10 @@ well_commerce_client:
                 factory: WellCommerce\Bundle\ClientBundle\Factory\ClientShippingAddressFactory
                 mapping: "@WellCommerceClientBundle/Resources/config/doctrine/ClientShippingAddress.orm.yml"
                 entity: WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddress
+        client_wishlist:
+            orm:
+                manager: WellCommerce\Bundle\ClientBundle\Manager\ClientWishlistManager
+                factory: WellCommerce\Bundle\ClientBundle\Factory\ClientWishlistFactory
+                repository: WellCommerce\Bundle\ClientBundle\Repository\ClientWishlistRepository
+                mapping: "@WellCommerceClientBundle/Resources/config/doctrine/ClientWishlist.orm.yml"
+                entity: WellCommerce\Bundle\ClientBundle\Entity\ClientWishlist

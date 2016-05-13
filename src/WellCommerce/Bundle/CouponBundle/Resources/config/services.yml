@@ -20,7 +20,8 @@ services:
 
     coupon.form_builder.admin:
         class: WellCommerce\Bundle\CouponBundle\Form\Admin\CouponFormBuilder
-        parent: core.form_builder
+        tags:
+            - { name: form_builder }
 
     coupon.controller.front:
         class: WellCommerce\Bundle\CouponBundle\Controller\Front\CouponController

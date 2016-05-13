@@ -1,8 +1,12 @@
+parameters:
+    search_term_min_length: 3
+
 well_commerce_search:
-    engine:
-        search_term_min_length: 3
-        type: lucene
-        parameters:
-            host: ~
-            pass: ~
-            port: ~
+    indexes:
+        product:
+            indexer: lucene.indexer.product
+            provider: lucene.provider.product
+        producer:
+            indexer: lucene.indexer.producer
+            provider: lucene.provider.producer
+

@@ -12,23 +12,24 @@
 
 namespace WellCommerce\Bundle\SearchBundle\Indexer;
 
-use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Interface ProductIndexerInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ProductIndexerInterface
+interface IndexerInterface
 {
-    const DEFAULT_INDEX_NAME = 'products';
+    public function create();
 
-    /**
-     * Adds a product to index
-     *
-     * @param ProductInterface $product
-     */
-    public function addProduct(ProductInterface $product, $indexName = self::DEFAULT_INDEX_NAME);
+    public function get();
 
-    public function reindexProducts();
+    public function remove();
+
+    public function erase();
+
+    public function reindex();
+
+    public function setConsoleOutput(OutputInterface $output);
 }

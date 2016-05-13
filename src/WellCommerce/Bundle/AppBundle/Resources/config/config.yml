@@ -41,7 +41,6 @@ imports:
     - { resource: "@WellCommerceTaxBundle/Resources/config/config.yml" }
     - { resource: "@WellCommerceThemeBundle/Resources/config/config.yml" }
     - { resource: "@WellCommerceUnitBundle/Resources/config/config.yml" }
-    - { resource: "@WellCommerceWishlistBundle/Resources/config/config.yml" }
 
 parameters:
     fixtures_load_order:
