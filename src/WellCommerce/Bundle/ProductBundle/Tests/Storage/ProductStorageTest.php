@@ -16,20 +16,20 @@ use WellCommerce\Bundle\CoreBundle\Test\AbstractTestCase;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 
 /**
- * Class ProductContextTest
+ * Class ProductStorageTest
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductContextTest extends AbstractTestCase
+class ProductStorageTest extends AbstractTestCase
 {
     public function testContextReturnsValidData()
     {
         $factory = $this->container->get('product.factory');
-        $context = $this->container->get('product.context.front');
+        $storage = $this->container->get('product.storage');
         $product = $factory->create();
 
-        $context->setCurrentProduct($factory->create());
-        $this->assertInstanceOf(ProductInterface::class, $context->getCurrentProduct());
-        $this->assertEquals($product, $context->getCurrentProduct());
+        $storage->setCurrentProduct($factory->create());
+        $this->assertInstanceOf(ProductInterface::class, $storage->getCurrentProduct());
+        $this->assertEquals($product, $storage->getCurrentProduct());
     }
 }

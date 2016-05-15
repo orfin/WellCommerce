@@ -57,7 +57,7 @@
 			{% if app.user and is_granted('ROLE_CLIENT') %}
 			<li><a href="{{ path('front.client_settings.index') }}">{% trans %}client.link.settings{% endtrans %}</a></li>
 			<li><a href="{{ path('front.client_order.index') }}">{% trans %}client.link.orders{% endtrans %}</a></li>
-			<li><a href="{{ path('front.wishlist.index') }}">{% trans %}client.link.wishlist{% endtrans %}</a></li>
+			<li><a href="{{ path('front.client_wishlist.index') }}">{% trans %}client.link.wishlist{% endtrans %}</a></li>
 			<li><a href="{{ path('front.client.logout') }}">{% trans %}client.link.logout{% endtrans %}</a></li>
 			{%  else %}
 			<li><a href="{{ path('front.client.login') }}">{% trans %}client.link.login{% endtrans %}</a></li>

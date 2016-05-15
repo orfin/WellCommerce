@@ -9,4 +9,4 @@ well_commerce_locale:
             api:
                 exposed: true
                 dataset: locale.dataset.admin
-                manager: locale.manager.admin
+                manager: locale.manager

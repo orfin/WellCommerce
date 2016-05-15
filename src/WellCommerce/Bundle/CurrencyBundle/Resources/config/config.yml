@@ -12,7 +12,7 @@ well_commerce_currency:
             api:
                 exposed: true
                 dataset: currency.dataset.admin
-                manager: currency.manager.admin
+                manager: currency.manager
         currency_rate:
             orm:
                 factory: WellCommerce\Bundle\CurrencyBundle\Factory\CurrencyRateFactory

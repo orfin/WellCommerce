@@ -9,7 +9,7 @@ well_commerce_tax:
             api:
                 exposed: true
                 dataset: tax.dataset.admin
-                manager: tax.manager.admin
+                manager: tax.manager
         tax_translation:
             orm:
                 mapping: "@WellCommerceTaxBundle/Resources/config/doctrine/TaxTranslation.orm.yml"

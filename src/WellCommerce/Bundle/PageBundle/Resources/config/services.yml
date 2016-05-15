@@ -56,4 +56,4 @@ services:
         arguments: ['@page.dataset.front']
 
     page.storage:
-        class: WellCommerce\Bundle\PageBundle\Storage\Front\PageStorage
+        class: WellCommerce\Bundle\PageBundle\Storage\PageStorage

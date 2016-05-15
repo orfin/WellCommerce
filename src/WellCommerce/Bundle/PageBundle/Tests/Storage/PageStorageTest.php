@@ -10,26 +10,26 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\PageBundle\Tests\Context\Front;
+namespace WellCommerce\Bundle\PageBundle\Tests\Storage;
 
 use WellCommerce\Bundle\CoreBundle\Test\AbstractTestCase;
 use WellCommerce\Bundle\PageBundle\Entity\PageInterface;
 
 /**
- * Class PageContextTest
+ * Class PageStorageTest
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PageContextTest extends AbstractTestCase
+class PageStorageTest extends AbstractTestCase
 {
-    public function testContextReturnsValidData()
+    public function testStorageReturnsValidData()
     {
         $factory = $this->container->get('page.factory');
-        $context = $this->container->get('page.context.front');
+        $storage = $this->container->get('page.storage');
         $page    = $factory->create();
 
-        $context->setCurrentPage($factory->create());
-        $this->assertInstanceOf(PageInterface::class, $context->getCurrentPage());
-        $this->assertEquals($page, $context->getCurrentPage());
+        $storage->setCurrentPage($factory->create());
+        $this->assertInstanceOf(PageInterface::class, $storage->getCurrentPage());
+        $this->assertEquals($page, $storage->getCurrentPage());
     }
 }

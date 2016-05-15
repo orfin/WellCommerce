@@ -9,7 +9,7 @@ well_commerce_company:
             api:
                 exposed: true
                 dataset: company.dataset.admin
-                manager: company.manager.admin
+                manager: company.manager
         company_address:
             orm:
                 factory: WellCommerce\Bundle\CompanyBundle\Factory\CompanyAddressFactory

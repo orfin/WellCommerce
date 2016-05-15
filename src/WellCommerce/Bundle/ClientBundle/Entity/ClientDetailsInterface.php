@@ -43,7 +43,7 @@ interface ClientDetailsInterface
     
     public function setNewsletterAccepted(bool $newsletterAccepted);
     
-    public function getResetPasswordHash() : string;
+    public function getResetPasswordHash();
     
     public function setResetPasswordHash(string $resetPasswordHash);
 }

@@ -95,7 +95,7 @@ services:
 
     client_settings.controller.box:
         class: WellCommerce\Bundle\ClientBundle\Controller\Box\ClientSettingsBoxController
-        arguments: ['@client.manager']
+        arguments: ['@client.manager', '@client_contact_details.form_builder.front']
         calls:
             - [setContainer, ['@service_container']]
 

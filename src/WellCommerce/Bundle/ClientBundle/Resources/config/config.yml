@@ -14,7 +14,7 @@ well_commerce_client:
             api:
                 exposed: true
                 dataset: client.dataset.admin
-                manager: client.manager.admin
+                manager: client.manager
         client_billing_address:
             orm:
                 factory: WellCommerce\Bundle\ClientBundle\Factory\ClientBillingAddressFactory
@@ -39,7 +39,7 @@ well_commerce_client:
             api:
                 exposed: true
                 dataset: client_group.dataset.admin
-                manager: client_group.manager.admin
+                manager: client_group.manager
         client_group_translation:
             orm:
                 mapping: "@WellCommerceClientBundle/Resources/config/doctrine/ClientGroupTranslation.orm.yml"

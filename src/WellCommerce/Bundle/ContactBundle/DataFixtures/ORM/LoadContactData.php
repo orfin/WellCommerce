@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\ContactBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use WellCommerce\Bundle\ContactBundle\Entity\Contact;
+use WellCommerce\Bundle\ContactBundle\Entity\ContactTranslation;
 use WellCommerce\Bundle\DoctrineBundle\DataFixtures\AbstractDataFixture;
 
 /**
@@ -34,10 +35,20 @@ class LoadContactData extends AbstractDataFixture
 
         $contact = new Contact();
         $contact->setEnabled(1);
-        $contact->translate($this->getDefaultLocale())->setName('Sales department');
-        $contact->translate($this->getDefaultLocale())->setEmail('sales@domain.org');
-        $contact->translate($this->getDefaultLocale())->setPhone('555 123-345-678');
-        $contact->translate($this->getDefaultLocale())->setBusinessHours($this->getBusinessHours());
+
+        /** @var ContactTranslation $translation */
+        $translation = $contact->translate();
+        $translation->setName('Sales department');
+        $translation->setEmail('sales@domain.org');
+        $translation->setBusinessHours($this->getBusinessHours());
+        $translation->setCity('');
+        $translation->setCountry('');
+        $translation->setLine1('');
+        $translation->setLine2('');
+        $translation->setPostalCode('');
+        $translation->setState('');
+        $translation->setPhone('555 123-345-678');
+
         $contact->mergeNewTranslations();
         $manager->persist($contact);
         $manager->flush();

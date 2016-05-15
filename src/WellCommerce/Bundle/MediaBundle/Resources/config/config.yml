@@ -9,7 +9,7 @@ well_commerce_media:
             api:
                 exposed: true
                 dataset: media.dataset.admin
-                manager: media.manager.admin
+                manager: media.manager
 
 liip_imagine:
     loaders:

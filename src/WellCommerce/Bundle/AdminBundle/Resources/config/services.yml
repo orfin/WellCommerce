@@ -39,7 +39,7 @@ services:
 
     user_group.controller.admin:
         class: WellCommerce\Bundle\AdminBundle\Controller\Admin\UserGroupController
-        arguments: ['@user_group.manager']
+        arguments: ['@user_group.manager', '@user_group.form_builder.admin', '@user_group.datagrid']
         calls:
             - [setContainer, ['@service_container']]
 

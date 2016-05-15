@@ -13,6 +13,8 @@
 namespace WellCommerce\Bundle\CoreBundle\Test\Form;
 
 use WellCommerce\Bundle\CoreBundle\Test\AbstractTestCase;
+use WellCommerce\Component\Form\Elements\FormInterface;
+use WellCommerce\Component\Form\FormBuilderInterface;
 
 /**
  * Class AbstractDataGridTestCase
@@ -26,7 +28,7 @@ abstract class AbstractFormBuilderTestCase extends AbstractTestCase
         $formBuilder = $this->getFormBuilderService();
 
         if (null !== $formBuilder) {
-            $this->assertInstanceOf('WellCommerce\Component\Form\FormBuilderInterface', $formBuilder);
+            $this->assertInstanceOf(FormBuilderInterface::class, $formBuilder);
         }
     }
 
@@ -45,9 +47,9 @@ abstract class AbstractFormBuilderTestCase extends AbstractTestCase
         if (null !== $formBuilder) {
             $form = $formBuilder->createForm([
                 'name' => 'test'
-            ], null);
+            ], $this->getSampleData());
 
-            $this->assertInstanceOf('WellCommerce\Component\Form\Elements\FormInterface', $form);
+            $this->assertInstanceOf(FormInterface::class, $form);
         }
     }
 

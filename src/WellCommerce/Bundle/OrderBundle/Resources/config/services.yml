@@ -2,7 +2,7 @@
 services:
     order.controller.admin:
         class: WellCommerce\Bundle\OrderBundle\Controller\Admin\OrderController
-        arguments: ['@order.manager']
+        arguments: ['@order.manager', '@order.form_builder.admin', '@order.datagrid']
         calls:
             - [setContainer, ['@service_container']]
 

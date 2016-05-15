@@ -9,7 +9,7 @@ well_commerce_producer:
             api:
                 exposed: true
                 dataset: producer.dataset.admin
-                manager: producer.manager.admin
+                manager: producer.manager
             dynamic_routing:
                 entity: WellCommerce\Bundle\ProducerBundle\Entity\ProducerRoute
                 generator: WellCommerce\Bundle\ProducerBundle\Routing\ProducerRouteGenerator

@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\ContactBundle\Factory;
 
 use WellCommerce\Bundle\ContactBundle\Entity\ContactInterface;
+use WellCommerce\Bundle\ContactBundle\Entity\ContactTranslation;
 use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 
 /**
@@ -36,6 +37,19 @@ class ContactFactory extends AbstractEntityFactory
         $contact = $this->init();
         $contact->setEnabled(true);
         $contact->setCreatedAt(new \DateTime());
+
+        /** @var ContactTranslation $translation */
+        $translation = $contact->translate();
+        $translation->setName('');
+        $translation->setEmail('');
+        $translation->setBusinessHours('');
+        $translation->setCity('');
+        $translation->setCountry('');
+        $translation->setLine1('');
+        $translation->setLine2('');
+        $translation->setPostalCode('');
+        $translation->setState('');
+        $translation->setPhone('');
 
         return $contact;
     }

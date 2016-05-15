@@ -32,7 +32,6 @@ class OrderDataGridTest extends AbstractDataGridTestCase
             'id',
             'client',
             'productTotal',
-            'shippingTotal',
             'orderTotal',
             'currency',
             'currentStatusName',

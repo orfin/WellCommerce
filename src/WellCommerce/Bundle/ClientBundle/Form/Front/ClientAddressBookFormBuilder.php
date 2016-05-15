@@ -27,7 +27,7 @@ class ClientAddressBookFormBuilder extends AbstractFormBuilder
     public function buildForm(FormInterface $form)
     {
         $countries      = $this->get('country.repository')->all();
-        $defaultCountry = $this->get('shop.context.front')->getCurrentShop()->getDefaultCountry();
+        $defaultCountry = $this->getShopStorage()->getCurrentShop()->getDefaultCountry();
 
         $billingAddress = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'billingAddress',

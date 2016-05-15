@@ -10,26 +10,26 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\ProducerBundle\Tests\Context\Front;
+namespace WellCommerce\Bundle\ProducerBundle\Tests\Storage;
 
 use WellCommerce\Bundle\CoreBundle\Test\AbstractTestCase;
 use WellCommerce\Bundle\ProducerBundle\Entity\ProducerInterface;
 
 /**
- * Class ProducerContextTest
+ * Class ProducerStorageTest
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProducerContextTest extends AbstractTestCase
+class ProducerStorageTest extends AbstractTestCase
 {
     public function testContextReturnsValidData()
     {
         $factory  = $this->container->get('producer.factory');
-        $context  = $this->container->get('producer.context.front');
+        $storage  = $this->container->get('producer.storage');
         $producer = $factory->create();
 
-        $context->setCurrentProducer($factory->create());
-        $this->assertInstanceOf(ProducerInterface::class, $context->getCurrentProducer());
-        $this->assertEquals($producer, $context->getCurrentProducer());
+        $storage->setCurrentProducer($factory->create());
+        $this->assertInstanceOf(ProducerInterface::class, $storage->getCurrentProducer());
+        $this->assertEquals($producer, $storage->getCurrentProducer());
     }
 }

@@ -31,9 +31,8 @@ class OrderDataSetTest extends AbstractDataSetTestCase
         return [
             'id'                => 'orders.id',
             'client'            => 'CONCAT_WS(\':\', orders.billingAddress.firstName, orders.billingAddress.lastName, orders.contactDetails.phone)',
-            'productTotal'      => 'orders.productTotal.grossAmount',
-            'shippingTotal'     => 'orders.shippingTotal.grossAmount',
-            'orderTotal'        => 'orders.orderTotal.grossAmount',
+            'productTotal'      => 'orders.productTotal.grossPrice',
+            'orderTotal'        => 'orders.summary.grossAmount',
             'currentStatusId'   => 'IDENTITY(orders.currentStatus)',
             'currentStatusName' => 'status_translation.name',
             'currency'          => 'orders.currency',

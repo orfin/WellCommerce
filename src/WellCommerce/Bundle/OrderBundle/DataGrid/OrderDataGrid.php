@@ -68,18 +68,6 @@ class OrderDataGrid extends AbstractDataGrid
         ]));
         
         $collection->add(new Column([
-            'id'         => 'shippingTotal',
-            'caption'    => $this->trans('order.label.shipping_total'),
-            'filter'     => new Filter([
-                'type' => Filter::FILTER_BETWEEN,
-            ]),
-            'appearance' => new Appearance([
-                'width' => 40,
-                'align' => Appearance::ALIGN_CENTER
-            ]),
-        ]));
-        
-        $collection->add(new Column([
             'id'         => 'orderTotal',
             'caption'    => $this->trans('order.label.order_total'),
             'filter'     => new Filter([

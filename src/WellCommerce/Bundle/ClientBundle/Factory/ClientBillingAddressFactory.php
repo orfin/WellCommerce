@@ -37,7 +37,9 @@ final class ClientBillingAddressFactory extends AbstractEntityFactory
         $address->setCity('');
         $address->setCountry($this->getDefaultShop()->getDefaultCountry());
         $address->setCompanyAddress(false);
-        
+        $address->setCompanyName('');
+        $address->setVatId('');
+
         return $address;
     }
 }

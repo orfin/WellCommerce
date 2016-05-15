@@ -9,7 +9,7 @@ well_commerce_unit:
             api:
                 exposed: true
                 dataset: unit.dataset.admin
-                manager: unit.manager.admin
+                manager: unit.manager
         unit_translation:
             orm:
                 mapping: "@WellCommerceUnitBundle/Resources/config/doctrine/UnitTranslation.orm.yml"

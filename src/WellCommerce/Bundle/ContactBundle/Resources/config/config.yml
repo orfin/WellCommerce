@@ -9,7 +9,7 @@ well_commerce_contact:
             api:
                 exposed: true
                 dataset: contact.dataset.admin
-                manager: contact.manager.admin
+                manager: contact.manager
         contact_translation:
             orm:
                 mapping: "@WellCommerceContactBundle/Resources/config/doctrine/ContactTranslation.orm.yml"

@@ -14,7 +14,7 @@ well_commerce_coupon:
             api:
                 exposed: true
                 dataset: coupon.dataset.admin
-                manager: coupon.manager.admin
+                manager: coupon.manager
         coupon_translation:
             orm:
                 mapping: "@WellCommerceCouponBundle/Resources/config/doctrine/CouponTranslation.orm.yml"

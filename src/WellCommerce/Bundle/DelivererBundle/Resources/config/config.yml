@@ -9,7 +9,7 @@ well_commerce_deliverer:
             api:
                 exposed: true
                 dataset: deliverer.dataset.admin
-                manager: deliverer.manager.admin
+                manager: deliverer.manager
         deliverer_translation:
             orm:
                 mapping: "@WellCommerceDelivererBundle/Resources/config/doctrine/DelivererTranslation.orm.yml"

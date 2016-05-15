@@ -28,7 +28,7 @@ well_commerce_order:
             api:
                 exposed: true
                 dataset: order.dataset.admin
-                manager: order.manager.admin
+                manager: order.manager
         order_modifier:
             orm:
                 factory: WellCommerce\Bundle\OrderBundle\Factory\OrderModifierFactory
@@ -60,7 +60,7 @@ well_commerce_order:
             api:
                 exposed: true
                 dataset: order_status.dataset.admin
-                manager: order_status.manager.admin
+                manager: order_status.manager
         order_status_history:
             orm:
                 factory: WellCommerce\Bundle\OrderBundle\Factory\OrderStatusHistoryFactory
@@ -80,7 +80,7 @@ well_commerce_order:
             api:
                 exposed: true
                 dataset: order_status_group.dataset.admin
-                manager: order_status_group.manager.admin
+                manager: order_status_group.manager
         order_status_group_translation:
             orm:
                 mapping: "@WellCommerceOrderBundle/Resources/config/doctrine/OrderStatusGroupTranslation.orm.yml"

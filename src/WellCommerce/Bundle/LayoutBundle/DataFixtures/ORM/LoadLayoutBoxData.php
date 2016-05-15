@@ -99,9 +99,9 @@ class LoadLayoutBoxData extends AbstractDataFixture
                 'identifier' => 'client_menu',
                 'name'       => 'Client menu'
             ],
-            'Wishlist'             => [
-                'identifier' => 'wishlist',
-                'name'       => 'Wishlist'
+            'ClientWishlist'             => [
+                'identifier' => 'client_wishlist',
+                'name'       => 'Client Wishlist'
             ],
             'ClientForgotPassword' => [
                 'identifier' => 'client_forgot_password',

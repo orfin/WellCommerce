@@ -26,11 +26,6 @@ use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
 class ProducerProductsBoxController extends AbstractBoxController
 {
     /**
-     * @var \WellCommerce\Bundle\ProducerBundle\Manager\Front\ProducerManager
-     */
-    protected $manager;
-
-    /**
      * {@inheritdoc}
      */
     public function indexAction(LayoutBoxSettingsCollection $boxSettings) : Response
@@ -38,7 +33,7 @@ class ProducerProductsBoxController extends AbstractBoxController
         $dataset       = $this->get('product.dataset.front');
         $requestHelper = $this->getRequestHelper();
         $limit         = $requestHelper->getAttributesBagParam('limit', $boxSettings->getParam('per_page', 12));
-        $conditions    = $this->manager->getCurrentProducerConditions();
+        $conditions    = $this->getCurrentProducerConditions();
         $conditions    = $this->get('layered_navigation.helper')->addLayeredNavigationConditions($conditions);
 
         $products = $dataset->getResult('array', [

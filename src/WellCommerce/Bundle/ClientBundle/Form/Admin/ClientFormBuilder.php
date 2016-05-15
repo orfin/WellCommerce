@@ -27,7 +27,7 @@ class ClientFormBuilder extends AbstractFormBuilder
     public function buildForm(FormInterface $form)
     {
         $countries      = $this->get('country.repository')->all();
-        $defaultCountry = $this->get('shop.context.admin')->getCurrentShop()->getDefaultCountry();
+        $defaultCountry = $this->getShopStorage()->getCurrentShop()->getDefaultCountry();
 
         $requiredData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'contactDetails',

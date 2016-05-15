@@ -14,7 +14,7 @@ well_commerce_shipping:
             api:
                 exposed: true
                 dataset: shipping_method.dataset.admin
-                manager: shipping_method.manager.admin
+                manager: shipping_method.manager
         shipping_method_cost:
             orm:
                 repository: WellCommerce\Bundle\ShippingBundle\Repository\ShippingMethodCostRepository

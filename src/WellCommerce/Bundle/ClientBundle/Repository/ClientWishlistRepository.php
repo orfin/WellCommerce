@@ -21,7 +21,7 @@ use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientWishlistRepository extends EntityRepository implements WishlistRepositoryInterface
+class ClientWishlistRepository extends EntityRepository implements ClientWishlistRepositoryInterface
 {
     public function getDataSetQueryBuilder() : QueryBuilder
     {

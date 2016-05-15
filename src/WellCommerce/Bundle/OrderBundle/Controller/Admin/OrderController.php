@@ -51,7 +51,7 @@ class OrderController extends AbstractAdminController
 
         if ($orderStatusHistoryForm->handleRequest()->isSubmitted()) {
             if ($orderStatusHistoryForm->isValid()) {
-                $this->get('order_status_history.manager.admin')->createResource($orderStatusHistory);
+                $this->get('order_status_history.manager')->createResource($orderStatusHistory);
             }
 
             return $this->jsonResponse([

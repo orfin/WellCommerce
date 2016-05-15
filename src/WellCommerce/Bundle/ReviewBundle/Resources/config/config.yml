@@ -9,4 +9,4 @@ well_commerce_review:
             api:
                 exposed: true
                 dataset: review.dataset.admin
-                manager: review.manager.admin
+                manager: review.manager

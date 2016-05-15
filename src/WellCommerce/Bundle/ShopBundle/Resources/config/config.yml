@@ -9,7 +9,7 @@ well_commerce_shop:
             api:
                 exposed: true
                 dataset: shop.dataset.admin
-                manager: shop.manager.admin
+                manager: shop.manager
 
 doctrine:
     orm:

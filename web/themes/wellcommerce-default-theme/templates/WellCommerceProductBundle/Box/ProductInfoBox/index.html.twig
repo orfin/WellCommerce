@@ -87,7 +87,7 @@
 
             <div class="additional text-center">
                 {% if app.user and is_granted('ROLE_CLIENT') %}
-                <a href="{{ path('front.wishlist.add', {"id": product.id}) }}">Add to wishlist</a><br />
+                <a href="{{ path('front.client_wishlist.add', {"id": product.id}) }}">Add to wishlist</a><br />
                 {% endif %}
                 <a href="#" class="coming-soon">Add to compare</a>
             </div>

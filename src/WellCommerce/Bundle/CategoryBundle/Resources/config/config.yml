@@ -10,7 +10,7 @@ well_commerce_category:
             api:
                 exposed: true
                 dataset: category.dataset.admin
-                manager: category.manager.admin
+                manager: category.manager
             dynamic_routing:
                 entity: WellCommerce\Bundle\CategoryBundle\Entity\CategoryRoute
                 generator: WellCommerce\Bundle\CategoryBundle\Routing\CategoryRouteGenerator

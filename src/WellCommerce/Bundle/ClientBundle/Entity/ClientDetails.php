@@ -124,7 +124,7 @@ class ClientDetails implements ClientDetailsInterface
         $this->newsletterAccepted = $newsletterAccepted;
     }
     
-    public function getResetPasswordHash() : string
+    public function getResetPasswordHash()
     {
         return $this->resetPasswordHash;
     }

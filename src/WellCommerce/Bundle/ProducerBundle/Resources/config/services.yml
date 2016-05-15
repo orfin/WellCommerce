@@ -70,4 +70,4 @@ services:
         arguments: ['@producer.repository', id, [WellCommerce\Bundle\ProducerBundle\Entity\Producer, WellCommerce\Bundle\ProducerBundle\Entity\ProducerInterface]]
 
     producer.storage:
-        class: WellCommerce\Bundle\ProducerBundle\Storage\Front\ProducerStorage
+        class: WellCommerce\Bundle\ProducerBundle\Storage\ProducerStorage
