@@ -10,18 +10,16 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\SearchBundle\Indexer;
+namespace WellCommerce\Bundle\SearchBundle\Context;
 
-use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
+use Doctrine\Common\Collections\Collection;
 
 /**
- * Interface IndexerInterface
+ * Interface DocumentContextInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface IndexerInterface
+interface DocumentContextInterface
 {
-    public function index(EntityInterface $entity);
-
-    public function deindex(EntityInterface $entity);
+    public function getFieldsCollection() : Collection;
 }

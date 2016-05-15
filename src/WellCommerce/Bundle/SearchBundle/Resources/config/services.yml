@@ -15,7 +15,7 @@ services:
         arguments: ['@product.repository']
         calls:
             - [setRequestHelper, ['@request.helper']]
-            - [setSearchManager, ['@search.manager.product']]
+            - [setResultStorage, ['@search.result.storage']]
 
     search.controller.front:
         class: WellCommerce\Bundle\SearchBundle\Controller\Front\SearchController
@@ -29,7 +29,11 @@ services:
         calls:
             - [setContainer, ['@service_container']]
 
-    search.command.reindex.products:
-        class: WellCommerce\Bundle\SearchBundle\Command\ReindexProductsCommand
+    search.result.storage:
+        class: WellCommerce\Bundle\SearchBundle\Storage\SearchResultStorage
+        public: false
+
+    search.command.reindex:
+        class: WellCommerce\Bundle\SearchBundle\Command\ReindexCommand
         tags:
             - { name: console.command }

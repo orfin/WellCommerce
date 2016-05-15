@@ -17,6 +17,7 @@ use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Bundle\CoreBundle\Helper\Request\RequestHelperInterface;
+use WellCommerce\Bundle\CurrencyBundle\Entity\CurrencyRate;
 use WellCommerce\Bundle\ProducerBundle\Entity\Producer;
 use WellCommerce\Bundle\ProducerBundle\Entity\ProducerTranslation;
 use WellCommerce\Bundle\ProductBundle\Entity\Product;
@@ -63,15 +64,14 @@ class ProductDataSet extends AbstractDataSet
             'stock'            => 'product.stock',
             'producerId'       => 'IDENTITY(product.producer)',
             'producerName'     => 'producers_translation.name',
-            'category'         => 'GROUP_CONCAT(DISTINCT categories.id SEPARATOR \',\')',
+            'category'         => 'categories.id',
             'shop'             => 'product_shops.id',
             'photo'            => 'photos.path',
             'status'           => 'statuses.id',
         ]);
 
         $configurator->setColumnTransformers([
-            'route'    => $this->getDataSetTransformer('route'),
-            'category' => $this->getDataSetTransformer('category')
+            'route' => $this->getDataSetTransformer('route'),
         ]);
 
         $configurator->setCacheOptions(new CacheOptions(true, 3600, [
@@ -91,7 +91,7 @@ class ProductDataSet extends AbstractDataSet
         $this->filterZeroPrices($queryBuilder);
 
         $queryBuilder->leftJoin(
-            'WellCommerce\Bundle\CurrencyBundle\Entity\CurrencyRate',
+            CurrencyRate::class,
             'currency_rate',
             Expr\Join::WITH,
             'currency_rate.currencyFrom = product.sellPrice.currency AND currency_rate.currencyTo = :targetCurrency'

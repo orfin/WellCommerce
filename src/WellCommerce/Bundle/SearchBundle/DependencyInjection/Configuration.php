@@ -11,9 +11,7 @@
 
 namespace WellCommerce\Bundle\SearchBundle\DependencyInjection;
 
-use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
-use Symfony\Component\Config\Definition\ConfigurationInterface;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\Configuration as BaseConfiguration;
 
 /**
@@ -28,12 +26,30 @@ class Configuration extends BaseConfiguration
     {
         $builder = new TreeBuilder();
         $node    =
-            $builder->root('indexes')
-                ->useAttributeAsKey('name')
-                ->prototype('array')
-                    ->children()
-                        ->scalarNode('indexer')->defaultNull()->end()
-                        ->scalarNode('provider')->defaultNull()->end()
+            $builder->root('engine')
+                ->children()
+                    ->arrayNode('indexes')->isRequired()
+                        ->useAttributeAsKey('name')
+                        ->prototype('array')
+                            ->children()
+                                ->arrayNode('adapter')->isRequired()
+                                    ->children()
+                                        ->scalarNode('class')->isRequired()->end()
+                                        ->arrayNode('options')
+                                            ->useAttributeAsKey('name')
+                                            ->prototype('scalar')->end()
+                                        ->end()
+                                    ->end()
+                                ->end()
+                                ->scalarNode('repository')->isRequired()->end()
+                                ->arrayNode('document')->isRequired()
+                                    ->children()
+                                        ->scalarNode('factory')->isRequired()->end()
+                                        ->scalarNode('context')->isRequired()->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
                     ->end()
                 ->end();
 

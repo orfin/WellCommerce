@@ -63,11 +63,14 @@ interface RepositoryInterface extends DataSetAwareRepositoryInterface
     /**
      * Returns all entities using additional criteria
      *
-     * @param array $criteria
+     * @param array      $criteria
+     * @param array|null $orderBy
+     * @param null       $limit
+     * @param null       $offset
      *
      * @return mixed
      */
-    public function findBy(array $criteria);
+    public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null);
 
     /**
      * Creates QueryBuilder instance
@@ -90,4 +93,11 @@ interface RepositoryInterface extends DataSetAwareRepositoryInterface
      * @return Collection
      */
     public function matching(Criteria $criteria);
+
+    /**
+     * Returns the total count of entities in repository
+     *
+     * @return int
+     */
+    public function getTotalCount() : int;
 }

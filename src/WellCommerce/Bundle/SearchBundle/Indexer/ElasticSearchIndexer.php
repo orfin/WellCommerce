@@ -15,13 +15,19 @@ namespace WellCommerce\Bundle\SearchBundle\Indexer;
 use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 
 /**
- * Interface IndexerInterface
+ * Class ElasticSearchIndexer
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface IndexerInterface
+class ElasticSearchIndexer implements IndexerInterface
 {
-    public function index(EntityInterface $entity);
+    public function index(EntityInterface $entity)
+    {
+        // TODO: Implement index() method.
+    }
 
-    public function deindex(EntityInterface $entity);
+    public function deindex(EntityInterface $entity)
+    {
+        // TODO: Implement deindex() method.
+    }
 }

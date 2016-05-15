@@ -10,18 +10,19 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\SearchBundle\Indexer;
+namespace WellCommerce\Bundle\SearchBundle\Factory;
 
 use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 
 /**
- * Interface IndexerInterface
+ * Class ElasticSearchDocumentFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface IndexerInterface
+class ElasticSearchDocumentFactory implements DocumentFactoryInterface
 {
-    public function index(EntityInterface $entity);
-
-    public function deindex(EntityInterface $entity);
+    public function createDocument(EntityInterface $entity)
+    {
+        // TODO: Implement create() method.
+    }
 }

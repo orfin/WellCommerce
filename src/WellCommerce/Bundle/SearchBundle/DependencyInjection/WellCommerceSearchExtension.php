@@ -16,32 +16,58 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
-use WellCommerce\Bundle\SearchBundle\Manager\SearchManager;
+use WellCommerce\Bundle\SearchBundle\Manager\IndexManager;
 
 /**
  * Class WellCommerceSearchExtension
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class WellCommerceSearchExtension extends AbstractExtension
+final class WellCommerceSearchExtension extends AbstractExtension
 {
     protected function processExtensionConfiguration(array $configuration, ContainerBuilder $container)
     {
         parent::processExtensionConfiguration($configuration, $container);
-        
-        $indexes = $configuration['indexes'];
-        
-        foreach ($indexes as $indexName => $parameters) {
-            $this->createSearchManager($indexName, $parameters, $container);
+
+        $indexes = $configuration['engine']['indexes'];
+        foreach ($indexes as $indexName => $indexConfiguration) {
+            $this->createIndexManager($indexName, $indexConfiguration, $container);
         }
     }
     
-    protected function createSearchManager(string $indexName, array $parameters, ContainerBuilder $container)
+    private function createIndexManager(string $indexName, array $configuration, ContainerBuilder $container)
     {
-        $serviceName = 'search.manager.' . $indexName;
-        $definition  = new Definition(SearchManager::class);
-        $definition->addArgument(new Reference($parameters['indexer']));
-        $definition->addArgument(new Reference($parameters['provider']));
-        $container->setDefinition($serviceName, $definition);
+        $documentFactory = $this->createDocumentFactory($indexName, $configuration, $container);
+        $adapter         = $this->createAdapter($indexName, $configuration, $container);
+
+        $indexManagerServiceName = $indexName . '.index.manager';
+        $indexManager            = new Definition(IndexManager::class);
+        $indexManager->addArgument($indexName);
+        $indexManager->addArgument($documentFactory);
+        $indexManager->addArgument(new Reference($adapter));
+        $indexManager->addArgument(new Reference($configuration['repository']));
+        $indexManager->addArgument(new Reference('search.result.storage'));
+        $container->setDefinition($indexManagerServiceName, $indexManager);
+    }
+    
+    private function createDocumentFactory(string $indexName, array $configuration, ContainerBuilder $container) : Reference
+    {
+        $documentFactoryServiceName = $indexName . '.document.factory';
+        $documentFactory            = new Definition($configuration['document']['factory']);
+        $documentFactory->addArgument($configuration['document']['context']);
+        $documentFactory->setPublic(false);
+        $container->setDefinition($documentFactoryServiceName, $documentFactory);
+
+        return new Reference($documentFactoryServiceName);
+    }
+    
+    private function createAdapter(string $indexName, array $configuration, ContainerBuilder $container) : Reference
+    {
+        $adapterServiceName = $indexName . '.search.adapter';
+        $adapter            = new Definition($configuration['adapter']['class']);
+        $adapter->addArgument($configuration['adapter']['options']);
+        $container->setDefinition($adapterServiceName, $adapter);
+
+        return new Reference($adapterServiceName);
     }
 }

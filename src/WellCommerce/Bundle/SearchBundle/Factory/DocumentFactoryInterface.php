@@ -10,18 +10,17 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\SearchBundle\Indexer;
+namespace WellCommerce\Bundle\SearchBundle\Factory;
 
 use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
+use WellCommerce\Bundle\SearchBundle\Document\DocumentInterface;
 
 /**
- * Interface IndexerInterface
+ * Interface DocumentFactoryInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface IndexerInterface
+interface DocumentFactoryInterface
 {
-    public function index(EntityInterface $entity);
-
-    public function deindex(EntityInterface $entity);
+    public function createDocument(EntityInterface $entity);
 }

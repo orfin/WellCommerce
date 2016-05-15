@@ -18,6 +18,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use WellCommerce\Bundle\DistributionBundle\Console\Action\InstallAssetsAction;
 use WellCommerce\Bundle\DistributionBundle\Console\Action\InstallDatabaseAction;
 use WellCommerce\Bundle\DistributionBundle\Console\Action\InstallFixturesAction;
+use WellCommerce\Bundle\DistributionBundle\Console\Action\ReindexAction;
 use WellCommerce\Bundle\DistributionBundle\Console\ConsoleActionExecutorInterface;
 
 /**
@@ -63,6 +64,7 @@ class InstallCommand extends Command
         $actions = [
             new InstallDatabaseAction(),
             new InstallFixturesAction(),
+            new ReindexAction(),
             new InstallAssetsAction()
         ];
 

@@ -15,6 +15,7 @@ namespace WellCommerce\Bundle\CategoryBundle\Controller\Front;
 use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CategoryBundle\Entity\CategoryInterface;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
+use WellCommerce\Bundle\SearchBundle\Query\SearchQuery;
 
 /**
  * Class CategoryController

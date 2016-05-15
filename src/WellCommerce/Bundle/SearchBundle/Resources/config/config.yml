@@ -2,11 +2,17 @@ parameters:
     search_term_min_length: 3
 
 well_commerce_search:
-    indexes:
-        product:
-            indexer: lucene.indexer.product
-            provider: lucene.provider.product
-        producer:
-            indexer: lucene.indexer.producer
-            provider: lucene.provider.producer
-
+    engine:
+        indexes:
+            product:
+                document:
+                    factory: WellCommerce\Bundle\SearchBundle\Factory\ZendLuceneDocumentFactory
+                    context: WellCommerce\Bundle\SearchBundle\Context\ProductContext
+                adapter:
+                    class: WellCommerce\Bundle\SearchBundle\Adapter\ZendLuceneAdapter
+                    options:
+                        index_file: "%kernel.root_dir%/lucene/product"
+                        max_buffered_docs: 10
+                        max_merge_docs: 100000
+                        merge_factor: 10
+                repository: product.repository

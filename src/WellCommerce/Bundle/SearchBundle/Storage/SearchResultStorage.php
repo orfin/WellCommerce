@@ -10,18 +10,24 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\SearchBundle\Indexer;
-
-use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
+namespace WellCommerce\Bundle\SearchBundle\Storage;
 
 /**
- * Interface IndexerInterface
+ * Class SearchResultStorage
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface IndexerInterface
+final class SearchResultStorage
 {
-    public function index(EntityInterface $entity);
+    private $result = [];
 
-    public function deindex(EntityInterface $entity);
+    public function getResult() : array
+    {
+        return (0 !== count($this->result)) ? $this->result : [0];
+    }
+
+    public function setResult(array $result)
+    {
+        $this->result = $result;
+    }
 }
