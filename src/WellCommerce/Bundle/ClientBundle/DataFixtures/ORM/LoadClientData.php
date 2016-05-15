@@ -64,6 +64,7 @@ class LoadClientData extends AbstractDataFixture
         $billingAddress->setVatId(666777888999);
         $billingAddress->setCompanyName($fakerGenerator->company);
         $billingAddress->setState('');
+        $billingAddress->setCompanyAddress(false);
 
         $shippingAddress = new ClientShippingAddress();
         $shippingAddress->setFirstName($firstName);
