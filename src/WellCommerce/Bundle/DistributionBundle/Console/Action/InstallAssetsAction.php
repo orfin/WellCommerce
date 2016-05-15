@@ -22,7 +22,10 @@ class InstallAssetsAction implements ConsoleActionInterface
     public function getCommandsToExecute()
     {
         return [
-            'assets:install'              => [],
+            'assets:install'              => [
+                '--symlink'  => true,
+                '--relative' => true,
+            ],
             'bazinga:js-translation:dump' => [],
             'fos:js-routing:dump'         => []
         ];
