@@ -28,10 +28,9 @@ use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
  */
 class SearchController extends AbstractFrontController
 {
-    public function indexAction() : Response
+    public function indexAction(string $phrase) : Response
     {
-        $requestHelper = $this->getRequestHelper();
-        $phrase        = $requestHelper->getAttributesBagParam('phrase');
+        $this->search($phrase);
 
         $this->getBreadcrumbProvider()->add(new Breadcrumb([
             'label' => $this->trans('search.heading.index')
@@ -46,15 +45,12 @@ class SearchController extends AbstractFrontController
         ]);
     }
     
-    public function viewAction() : JsonResponse
+    public function viewAction(string $phrase) : JsonResponse
     {
-        $requestHelper = $this->getRequestHelper();
-        $phrase        = $requestHelper->getAttributesBagParam('phrase');
-
         if (strlen($phrase) < $this->container->getParameter('search_term_min_length')) {
             $liveSearchContent = '';
         } else {
-            $this->getIndexManager()->search(new SearchQuery($phrase));
+            $this->search($phrase);
 
             $dataset    = $this->get('search.dataset.front');
             $conditions = new ConditionsCollection();
@@ -76,6 +72,11 @@ class SearchController extends AbstractFrontController
         return $this->jsonResponse([
             'liveSearchContent' => $liveSearchContent
         ]);
+    }
+
+    protected function search(string $phrase) : array
+    {
+        return $this->getIndexManager()->search(new SearchQuery($phrase));
     }
 
     protected function getIndexManager() : IndexManager
