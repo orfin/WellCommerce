@@ -12,8 +12,10 @@
 
 namespace WellCommerce\Bundle\OrderBundle\DataSet\Admin;
 
+use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
+use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
 
 /**
  * Class OrderDataSet
@@ -42,5 +44,15 @@ class OrderDataSet extends AbstractDataSet
             'createdAt' => $this->getDataSetTransformer('date', ['format' => 'Y-m-d H:i:s']),
             'client'    => $this->getDataSetTransformer('order_client'),
         ]);
+    }
+
+    protected function getQueryBuilder(DataSetRequestInterface $request) : QueryBuilder
+    {
+        $queryBuilder = parent::getQueryBuilder($request);
+        $expression   = $queryBuilder->expr()->eq('orders.confirmed', ':confirmed');
+        $queryBuilder->andWhere($expression);
+        $queryBuilder->setParameter('confirmed', true);
+
+        return $queryBuilder;
     }
 }

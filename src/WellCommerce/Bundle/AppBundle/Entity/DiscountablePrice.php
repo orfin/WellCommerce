@@ -19,9 +19,9 @@ namespace WellCommerce\Bundle\AppBundle\Entity;
  */
 class DiscountablePrice extends Price implements DiscountablePriceInterface
 {
-    protected $discountedNetAmount   = 0;
-    protected $discountedGrossAmount = 0;
-    protected $discountedTaxAmount   = 0;
+    protected $discountedNetAmount   = 0.00;
+    protected $discountedGrossAmount = 0.00;
+    protected $discountedTaxAmount   = 0.00;
     protected $validFrom             = null;
     protected $validTo               = null;
     
