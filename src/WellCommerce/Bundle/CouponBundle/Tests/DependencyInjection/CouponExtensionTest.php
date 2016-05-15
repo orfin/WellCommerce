@@ -31,7 +31,7 @@ class CouponExtensionTest extends AbstractExtensionTestCase
                 [
                     'coupon.repository',
                     'coupon.factory',
-                    'coupon.event_dispatcher',
+                    'coupon.manager',
                     'coupon.form_builder.admin',
                     'coupon.dataset.admin',
                     'coupon.datagrid',

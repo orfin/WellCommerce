@@ -10,19 +10,19 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\NewsBundle\Tests\Manager;
+namespace WellCommerce\Bundle\CouponBundle\Tests\Manager;
 
 use WellCommerce\Bundle\CoreBundle\Test\Manager\AbstractManagerTestCase;
 
 /**
- * Class NewsManagerTest
+ * Class CouponManagerTest
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class NewsManagerTest extends AbstractManagerTestCase
+class CouponManagerTest extends AbstractManagerTestCase
 {
     protected function get()
     {
-        return $this->container->get('news.manager');
+        return $this->container->get('coupon.manager');
     }
 }

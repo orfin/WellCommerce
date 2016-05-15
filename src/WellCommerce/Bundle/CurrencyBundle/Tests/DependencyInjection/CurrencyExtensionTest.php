@@ -31,7 +31,7 @@ class CurrencyExtensionTest extends AbstractExtensionTestCase
                 [
                     'currency.repository',
                     'currency.factory',
-                    'currency.event_dispatcher',
+                    'currency.manager',
                     'currency.form_builder.admin',
                     'currency.dataset.admin',
                     'currency.dataset.front',

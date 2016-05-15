@@ -31,7 +31,7 @@ class PaymentMethodExtensionTest extends AbstractExtensionTestCase
                 [
                     'payment_method.repository',
                     'payment_method.factory',
-                    'payment_method.event_dispatcher',
+                    'payment_method.manager',
                     'payment_method.form_builder.admin',
                     'payment_method.dataset.admin',
                     'payment_method.datagrid',

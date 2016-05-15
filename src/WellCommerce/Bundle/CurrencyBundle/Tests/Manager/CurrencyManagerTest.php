@@ -10,19 +10,19 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\NewsBundle\Tests\Manager;
+namespace WellCommerce\Bundle\CurrencyBundle\Tests\Manager;
 
 use WellCommerce\Bundle\CoreBundle\Test\Manager\AbstractManagerTestCase;
 
 /**
- * Class NewsManagerTest
+ * Class CurrencyManagerTest
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class NewsManagerTest extends AbstractManagerTestCase
+class CurrencyManagerTest extends AbstractManagerTestCase
 {
     protected function get()
     {
-        return $this->container->get('news.manager');
+        return $this->container->get('currency.manager');
     }
 }

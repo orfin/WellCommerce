@@ -31,7 +31,7 @@ class NewsExtensionTest extends AbstractExtensionTestCase
                 [
                     'news.repository',
                     'news.factory',
-                    'news.event_dispatcher',
+                    'news.manager',
                     'news.form_builder.admin',
                     'news.dataset.admin',
                     'news.datagrid',

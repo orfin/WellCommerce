@@ -31,7 +31,7 @@ class MediaExtensionTest extends AbstractExtensionTestCase
                 [
                     'media.repository',
                     'media.factory',
-                    'media.event_dispatcher',
+                    'media.manager',
                     'media.form_builder.admin',
                     'media.dataset.admin',
                     'media.datagrid',

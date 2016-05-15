@@ -31,7 +31,7 @@ class LocaleExtensionTest extends AbstractExtensionTestCase
                 [
                     'locale.repository',
                     'locale.factory',
-                    'locale.event_dispatcher',
+                    'locale.manager',
                     'locale.form_builder.admin',
                     'locale.dataset.admin',
                     'locale.dataset.front',

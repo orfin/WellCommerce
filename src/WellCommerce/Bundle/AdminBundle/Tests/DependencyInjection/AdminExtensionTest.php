@@ -32,7 +32,7 @@ class AdminExtensionTest extends AbstractExtensionTestCase
                     // user
                     'user.repository',
                     'user.factory',
-                    'user.event_dispatcher',
+                    'user.manager',
                     'user.form_builder.admin',
                     'user.dataset.admin',
                     'user.datagrid',
@@ -40,7 +40,7 @@ class AdminExtensionTest extends AbstractExtensionTestCase
                     // user group
                     'user_group.repository',
                     'user_group.factory',
-                    'user_group.event_dispatcher',
+                    'user_group.manager',
                     'user_group.form_builder.admin',
                     'user_group.dataset.admin',
                     'user_group.datagrid',

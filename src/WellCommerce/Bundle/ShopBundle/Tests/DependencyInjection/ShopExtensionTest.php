@@ -31,7 +31,7 @@ class ShopExtensionTest extends AbstractExtensionTestCase
                 [
                     'shop.repository',
                     'shop.factory',
-                    'shop.event_dispatcher',
+                    'shop.manager',
                     'shop.form_builder.admin',
                     'shop.dataset.admin',
                     'shop.datagrid',

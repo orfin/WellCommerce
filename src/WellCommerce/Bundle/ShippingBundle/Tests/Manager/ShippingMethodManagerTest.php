@@ -10,19 +10,19 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\NewsBundle\Tests\Manager;
+namespace WellCommerce\Bundle\ShippingBundle\Tests\Manager;
 
 use WellCommerce\Bundle\CoreBundle\Test\Manager\AbstractManagerTestCase;
 
 /**
- * Class NewsManagerTest
+ * Class ShippingMethodManagerTest
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class NewsManagerTest extends AbstractManagerTestCase
+class ShippingMethodManagerTest extends AbstractManagerTestCase
 {
     protected function get()
     {
-        return $this->container->get('news.manager');
+        return $this->container->get('shipping_method.manager');
     }
 }

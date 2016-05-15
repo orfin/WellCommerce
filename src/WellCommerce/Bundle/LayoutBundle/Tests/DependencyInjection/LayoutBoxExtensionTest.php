@@ -31,7 +31,7 @@ class LayoutBoxExtensionTest extends AbstractExtensionTestCase
                 [
                     'layout_box.repository',
                     'layout_box.factory',
-                    'layout_box.event_dispatcher',
+                    'layout_box.manager',
                     'layout_box.form_builder.admin',
                     'layout_box.dataset.admin',
                     'layout_box.datagrid',

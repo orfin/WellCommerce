@@ -31,7 +31,7 @@ class DelivererExtensionTest extends AbstractExtensionTestCase
                 [
                     'deliverer.repository',
                     'deliverer.factory',
-                    'deliverer.event_dispatcher',
+                    'deliverer.manager',
                     'deliverer.form_builder.admin',
                     'deliverer.dataset.admin',
                     'deliverer.datagrid',

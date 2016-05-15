@@ -31,7 +31,7 @@ class UnitExtensionTest extends AbstractExtensionTestCase
                 [
                     'unit.repository',
                     'unit.factory',
-                    'unit.event_dispatcher',
+                    'unit.manager',
                     'unit.form_builder.admin',
                     'unit.dataset.admin',
                     'unit.datagrid',

@@ -31,7 +31,7 @@ class ClientExtensionTest extends AbstractExtensionTestCase
                 [
                     'client.repository',
                     'client.factory',
-                    'client.event_dispatcher',
+                    'client.manager',
                     'client.form_builder.admin',
                     'client.dataset.admin',
                     'client.datagrid',
@@ -39,7 +39,7 @@ class ClientExtensionTest extends AbstractExtensionTestCase
 
                     'client_group.repository',
                     'client_group.factory',
-                    'client_group.event_dispatcher',
+                    'client_group.manager',
                     'client_group.form_builder.admin',
                     'client_group.dataset.admin',
                     'client_group.datagrid',

@@ -31,7 +31,7 @@ class AvailabilityExtensionTest extends AbstractExtensionTestCase
                 [
                     'availability.repository',
                     'availability.factory',
-                    'availability.event_dispatcher',
+                    'availability.manager',
                     'availability.form_builder.admin',
                     'availability.dataset.admin',
                     'availability.datagrid',

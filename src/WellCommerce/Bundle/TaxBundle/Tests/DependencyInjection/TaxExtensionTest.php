@@ -31,7 +31,7 @@ class TaxExtensionTest extends AbstractExtensionTestCase
                 [
                     'tax.repository',
                     'tax.factory',
-                    'tax.event_dispatcher',
+                    'tax.manager',
                     'tax.form_builder.admin',
                     'tax.dataset.admin',
                     'tax.datagrid',

@@ -31,7 +31,7 @@ class PageExtensionTest extends AbstractExtensionTestCase
                 [
                     'page.repository',
                     'page.factory',
-                    'page.event_dispatcher',
+                    'page.manager',
                     'page.form_builder.admin',
                     'page.dataset.admin',
                     'page.datagrid',

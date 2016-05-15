@@ -31,7 +31,7 @@ class ProductStatusExtensionTest extends AbstractExtensionTestCase
                 [
                     'product_status.repository',
                     'product_status.factory',
-                    'product_status.event_dispatcher',
+                    'product_status.manager',
                     'product_status.form_builder.admin',
                     'product_status.dataset.admin',
                     'product_status.dataset.front',

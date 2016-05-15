@@ -10,19 +10,21 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\NewsBundle\Tests\Manager;
+namespace WellCommerce\Bundle\AdminBundle\Tests\Manager;
 
+use WellCommerce\Bundle\AdminBundle\Factory\UserGroupFactory;
+use WellCommerce\Bundle\AdminBundle\Repository\UserGroupRepository;
 use WellCommerce\Bundle\CoreBundle\Test\Manager\AbstractManagerTestCase;
 
 /**
- * Class NewsManagerTest
+ * Class UserManagerTest
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class NewsManagerTest extends AbstractManagerTestCase
+class UserGroupManagerTest extends AbstractManagerTestCase
 {
     protected function get()
     {
-        return $this->container->get('news.manager');
+        return $this->container->get('user_group.manager');
     }
 }

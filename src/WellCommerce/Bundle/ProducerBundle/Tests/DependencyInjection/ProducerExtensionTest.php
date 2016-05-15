@@ -31,7 +31,7 @@ class ProducerExtensionTest extends AbstractExtensionTestCase
                 [
                     'producer.repository',
                     'producer.factory',
-                    'producer.event_dispatcher',
+                    'producer.manager',
                     'producer.form_builder.admin',
                     'producer.dataset.admin',
                     'producer.datagrid',

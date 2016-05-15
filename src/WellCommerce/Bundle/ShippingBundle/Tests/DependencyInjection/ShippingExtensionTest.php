@@ -31,7 +31,7 @@ class ShippingMethodExtensionTest extends AbstractExtensionTestCase
                 [
                     'shipping_method.repository',
                     'shipping_method.factory',
-                    'shipping_method.event_dispatcher',
+                    'shipping_method.manager',
                     'shipping_method.form_builder.admin',
                     'shipping_method.dataset.admin',
                     'shipping_method.datagrid',

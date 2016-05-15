@@ -31,7 +31,7 @@ class ThemeExtensionTest extends AbstractExtensionTestCase
                 [
                     'theme.repository',
                     'theme.factory',
-                    'theme.event_dispatcher',
+                    'theme.manager',
                     'theme.form_builder.admin',
                     'theme.dataset.admin',
                     'theme.datagrid',

@@ -31,7 +31,7 @@ class CategoryExtensionTest extends AbstractExtensionTestCase
                 [
                     'category.repository',
                     'category.factory',
-                    'category.event_dispatcher',
+                    'category.manager',
                     'category.form_builder.admin',
                     'category.dataset.admin',
                     'category.controller.admin',

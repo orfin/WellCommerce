@@ -31,7 +31,7 @@ class ReviewExtensionTest extends AbstractExtensionTestCase
                 [
                     'review.repository',
                     'review.factory',
-                    'review.event_dispatcher',
+                    'review.manager',
                     'review.form_builder.admin',
                     'review.dataset.admin',
                     'review.datagrid',

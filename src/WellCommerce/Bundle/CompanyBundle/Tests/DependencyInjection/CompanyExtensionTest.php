@@ -31,7 +31,7 @@ class CompanyExtensionTest extends AbstractExtensionTestCase
                 [
                     'company.repository',
                     'company.factory',
-                    'company.event_dispatcher',
+                    'company.manager',
                     'company.form_builder.admin',
                     'company.dataset.admin',
                     'company.datagrid',

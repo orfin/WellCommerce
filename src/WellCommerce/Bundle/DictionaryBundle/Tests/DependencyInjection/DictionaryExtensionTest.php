@@ -31,7 +31,7 @@ class DictionaryExtensionTest extends AbstractExtensionTestCase
                 [
                     'dictionary.repository',
                     'dictionary.factory',
-                    'dictionary.event_dispatcher',
+                    'dictionary.manager',
                     'dictionary.form_builder.admin',
                     'dictionary.dataset.admin',
                     'dictionary.datagrid',

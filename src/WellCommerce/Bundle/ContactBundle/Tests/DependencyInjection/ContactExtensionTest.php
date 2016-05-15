@@ -31,7 +31,7 @@ class ContactExtensionTest extends AbstractExtensionTestCase
                 [
                     'contact.repository',
                     'contact.factory',
-                    'contact.event_dispatcher',
+                    'contact.manager',
                     'contact.form_builder.admin',
                     'contact.dataset.admin',
                     'contact.datagrid',
