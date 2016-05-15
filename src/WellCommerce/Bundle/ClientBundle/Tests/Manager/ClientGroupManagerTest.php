@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\ClientBundle\Tests\Manager;
 
 use WellCommerce\Bundle\CoreBundle\Test\Manager\AbstractManagerTestCase;
+use WellCommerce\Bundle\DoctrineBundle\Manager\ManagerInterface;
 
 /**
  * Class ClientGroupManagerTest
@@ -21,7 +22,7 @@ use WellCommerce\Bundle\CoreBundle\Test\Manager\AbstractManagerTestCase;
  */
 class ClientGroupManagerTest extends AbstractManagerTestCase
 {
-    protected function get()
+    protected function get() : ManagerInterface
     {
         return $this->container->get('client_group.manager');
     }

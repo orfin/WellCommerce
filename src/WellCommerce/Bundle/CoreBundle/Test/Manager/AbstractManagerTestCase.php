@@ -46,7 +46,7 @@ abstract class AbstractManagerTestCase extends AbstractTestCase
     {
         return ManagerInterface::class;
     }
-    
+
     protected function getRepositoryInterfaceClass() : string
     {
         return RepositoryInterface::class;

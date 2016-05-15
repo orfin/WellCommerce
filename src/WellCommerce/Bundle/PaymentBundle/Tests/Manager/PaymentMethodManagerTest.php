@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\PaymentBundle\Tests\Manager;
 
 use WellCommerce\Bundle\CoreBundle\Test\Manager\AbstractManagerTestCase;
+use WellCommerce\Bundle\DoctrineBundle\Manager\ManagerInterface;
 
 /**
  * Class PaymentMethodManagerTest
@@ -21,7 +22,7 @@ use WellCommerce\Bundle\CoreBundle\Test\Manager\AbstractManagerTestCase;
  */
 class PaymentMethodManagerTest extends AbstractManagerTestCase
 {
-    protected function get()
+    protected function get() : ManagerInterface
     {
         return $this->container->get('payment_method.manager');
     }

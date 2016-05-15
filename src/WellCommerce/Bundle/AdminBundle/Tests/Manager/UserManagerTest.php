@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\AdminBundle\Tests\Manager;
 
 use WellCommerce\Bundle\CoreBundle\Test\Manager\AbstractManagerTestCase;
+use WellCommerce\Bundle\DoctrineBundle\Manager\ManagerInterface;
 
 /**
  * Class UserManagerTest
@@ -21,7 +22,7 @@ use WellCommerce\Bundle\CoreBundle\Test\Manager\AbstractManagerTestCase;
  */
 class UserManagerTest extends AbstractManagerTestCase
 {
-    protected function get()
+    protected function get() : ManagerInterface
     {
         return $this->container->get('user.manager');
     }

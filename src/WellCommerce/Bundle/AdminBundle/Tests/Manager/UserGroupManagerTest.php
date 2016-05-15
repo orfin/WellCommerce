@@ -12,9 +12,8 @@
 
 namespace WellCommerce\Bundle\AdminBundle\Tests\Manager;
 
-use WellCommerce\Bundle\AdminBundle\Factory\UserGroupFactory;
-use WellCommerce\Bundle\AdminBundle\Repository\UserGroupRepository;
 use WellCommerce\Bundle\CoreBundle\Test\Manager\AbstractManagerTestCase;
+use WellCommerce\Bundle\DoctrineBundle\Manager\ManagerInterface;
 
 /**
  * Class UserManagerTest
@@ -23,7 +22,7 @@ use WellCommerce\Bundle\CoreBundle\Test\Manager\AbstractManagerTestCase;
  */
 class UserGroupManagerTest extends AbstractManagerTestCase
 {
-    protected function get()
+    protected function get() : ManagerInterface
     {
         return $this->container->get('user_group.manager');
     }

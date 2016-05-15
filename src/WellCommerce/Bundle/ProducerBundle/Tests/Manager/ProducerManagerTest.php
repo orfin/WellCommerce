@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\ProducerBundle\Tests\Manager;
 
 use WellCommerce\Bundle\CoreBundle\Test\Manager\AbstractManagerTestCase;
+use WellCommerce\Bundle\DoctrineBundle\Manager\ManagerInterface;
 
 /**
  * Class ProducerManagerTest
@@ -21,7 +22,7 @@ use WellCommerce\Bundle\CoreBundle\Test\Manager\AbstractManagerTestCase;
  */
 class ProducerManagerTest extends AbstractManagerTestCase
 {
-    protected function get()
+    protected function get() : ManagerInterface
     {
         return $this->container->get('producer.manager');
     }
