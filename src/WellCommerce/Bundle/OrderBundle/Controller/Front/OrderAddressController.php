@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Controller\Front;
 
-use Doctrine\Common\Util\Debug;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,15 +30,15 @@ final class OrderAddressController extends AbstractFrontController
         $form  = $this->getForm($order, [
             'validation_groups' => $this->getValidationGroupsForRequest($request)
         ]);
-
+        
         if ($form->isSubmitted() && 1 === (int)$request->request->get('shippingAddress.copyBillingAddress')) {
             $this->copyShippingAddress($request->request);
         }
-
+        
         if ($form->handleRequest()->isSubmitted()) {
             if ($form->isValid()) {
                 $this->getManager()->updateResource($order);
-
+                
                 return $this->getRouterHelper()->redirectTo('front.order_confirm.index');
             }
             
@@ -57,17 +56,18 @@ final class OrderAddressController extends AbstractFrontController
     private function getValidationGroupsForRequest(Request $request) : array
     {
         $validationGroups = [
-            'order_client_contact_details',
-            'order_client_billing_address',
+            'order_billing_address',
+            'order_clien_details',
+            'order_contact_details',
         ];
         
         if ($request->isMethod('POST') && 0 === (int)$request->request->filter('shippingAddress.copyBillingAddress')) {
-            $validationGroups[] = 'order_client_shipping_address';
+            $validationGroups[] = 'order_address_shipping_address';
         }
         
         return $validationGroups;
     }
-
+    
     /**
      * Copies billing address to shipping address
      *
@@ -77,12 +77,12 @@ final class OrderAddressController extends AbstractFrontController
     {
         $billingAddress  = $parameters->get('billingAddress');
         $shippingAddress = [];
-
+        
         foreach ($billingAddress as $key => $value) {
             list(, $fieldName) = explode('.', $key);
             $shippingAddress['shippingAddress.' . $fieldName] = $value;
         }
-
+        
         $parameters->set('shippingAddress', $shippingAddress);
     }
 }

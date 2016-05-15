@@ -235,6 +235,6 @@ class RequestHelper implements RequestHelperInterface
      */
     public function getCurrentCurrency() : string
     {
-        return $this->getSessionAttribute('_currency', 'GBP');
+        return $this->getSessionAttribute('_currency', '');
     }
 }
