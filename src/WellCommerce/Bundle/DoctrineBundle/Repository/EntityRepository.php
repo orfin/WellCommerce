@@ -18,7 +18,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 
 /**
- * Class AbstractEntityRepository
+ * Class EntityRepository
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
