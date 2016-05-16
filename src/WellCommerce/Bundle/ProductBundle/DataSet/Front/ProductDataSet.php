@@ -65,13 +65,16 @@ class ProductDataSet extends AbstractDataSet
             'producerId'       => 'IDENTITY(product.producer)',
             'producerName'     => 'producers_translation.name',
             'category'         => 'categories.id',
+            'categoryName'     => 'categories_translation.name',
+            'categoryRoute'    => 'IDENTITY(categories_translation.route)',
             'shop'             => 'product_shops.id',
             'photo'            => 'photos.path',
             'status'           => 'statuses.id',
         ]);
 
         $configurator->setColumnTransformers([
-            'route' => $this->getDataSetTransformer('route'),
+            'route'         => $this->getDataSetTransformer('route'),
+            'categoryRoute' => $this->getDataSetTransformer('route'),
         ]);
 
         $configurator->setCacheOptions(new CacheOptions(true, 3600, [
