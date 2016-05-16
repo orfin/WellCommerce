@@ -17,7 +17,7 @@ namespace WellCommerce\Component\DataSet\Conditions;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>\
  */
-abstract class AbstractCondition
+abstract class AbstractCondition implements ConditionInterface
 {
     /**
      * @var string
@@ -46,12 +46,12 @@ abstract class AbstractCondition
         $this->value = $value;
     }
 
-    public function getOperator()
+    public function getOperator() : string
     {
         return $this->operator;
     }
 
-    public function getIdentifier()
+    public function getIdentifier() : string
     {
         return $this->field;
     }

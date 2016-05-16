@@ -13,14 +13,13 @@
 namespace WellCommerce\Component\DataSet\Conditions\Condition;
 
 use WellCommerce\Component\DataSet\Conditions\AbstractCondition;
-use WellCommerce\Component\DataSet\Conditions\ConditionInterface;
 
 /**
  * Class Neq
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Neq extends AbstractCondition implements ConditionInterface
+final class Neq extends AbstractCondition
 {
     protected $operator = 'neq';
 }

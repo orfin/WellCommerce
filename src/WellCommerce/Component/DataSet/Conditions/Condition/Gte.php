@@ -13,14 +13,13 @@
 namespace WellCommerce\Component\DataSet\Conditions\Condition;
 
 use WellCommerce\Component\DataSet\Conditions\AbstractCondition;
-use WellCommerce\Component\DataSet\Conditions\ConditionInterface;
 
 /**
  * Class Gte
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Gte extends AbstractCondition implements ConditionInterface
+final class Gte extends AbstractCondition
 {
     protected $operator = 'gte';
 }

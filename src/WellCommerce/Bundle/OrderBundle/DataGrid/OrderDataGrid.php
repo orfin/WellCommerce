@@ -26,9 +26,6 @@ use WellCommerce\Component\DataGrid\Options\OptionsInterface;
  */
 class OrderDataGrid extends AbstractDataGrid
 {
-    /**
-     * {@inheritdoc}
-     */
     public function configureColumns(ColumnCollection $collection)
     {
         $collection->add(new Column([
@@ -117,9 +114,6 @@ class OrderDataGrid extends AbstractDataGrid
         ]));
     }
     
-    /**
-     * {@inheritdoc}
-     */
     protected function configureOptions(OptionsInterface $options)
     {
         parent::configureOptions($options);

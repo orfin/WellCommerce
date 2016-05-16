@@ -13,14 +13,13 @@
 namespace WellCommerce\Component\DataSet\Conditions\Condition;
 
 use WellCommerce\Component\DataSet\Conditions\AbstractCondition;
-use WellCommerce\Component\DataSet\Conditions\ConditionInterface;
 
 /**
  * Class Like
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Like extends AbstractCondition implements ConditionInterface
+final class Like extends AbstractCondition
 {
     protected $operator = 'like';
 }

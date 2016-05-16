@@ -13,14 +13,13 @@
 namespace WellCommerce\Component\DataSet\Conditions\Condition;
 
 use WellCommerce\Component\DataSet\Conditions\AbstractCondition;
-use WellCommerce\Component\DataSet\Conditions\ConditionInterface;
 
 /**
  * Class Eq
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Eq extends AbstractCondition implements ConditionInterface
+final class Eq extends AbstractCondition
 {
     protected $operator = 'eq';
 }

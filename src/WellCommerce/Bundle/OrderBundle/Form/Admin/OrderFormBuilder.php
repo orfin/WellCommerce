@@ -11,14 +11,16 @@
  */
 namespace WellCommerce\Bundle\OrderBundle\Form\Admin;
 
-use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
-use WellCommerce\Bundle\OrderBundle\Context\Admin\OrderContextInterface;
 use WellCommerce\Bundle\OrderBundle\Provider\Admin\OrderProviderInterface;
+use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodInterface;
+use WellCommerce\Bundle\ShippingBundle\Context\OrderContext;
+use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCostInterface;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface;
 use WellCommerce\Bundle\ShippingBundle\Provider\ShippingMethodProviderInterface;
 use WellCommerce\Component\Form\Elements\ElementInterface;
 use WellCommerce\Component\Form\Elements\FormInterface;
+use WellCommerce\Component\Form\Elements\Optioned\Select;
 
 /**
  * Class OrderFormBuilder
@@ -28,34 +30,11 @@ use WellCommerce\Component\Form\Elements\FormInterface;
 final class OrderFormBuilder extends AbstractFormBuilder
 {
     /**
-     * @var ShippingMethodProviderInterface
-     */
-    protected $shippingMethodProvider;
-
-    /**
-     * @var OrderProviderInterface
-     */
-    protected $orderProvider;
-
-    public function setShippingMethodProvider(ShippingMethodProviderInterface $shippingMethodProvider)
-    {
-        $this->shippingMethodProvider = $shippingMethodProvider;
-    }
-
-    public function setOrderProvider(OrderProviderInterface $orderProvider)
-    {
-        $this->orderProvider = $orderProvider;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function buildForm(FormInterface $form)
     {
-        $currentOrder    = $this->orderProvider->getCurrentOrder();
-        $shippingMethods = $this->shippingMethodProvider->getShippingMethodOptions($currentOrder);
-        $paymentMethods  = $this->shippingMethodProvider->getShippingMethodsPaymentOptions($currentOrder);
-        $countries       = $this->get('country.repository')->all();
+        $countries = $this->get('country.repository')->all();
 
         $requiredData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'required_data',
@@ -83,19 +62,21 @@ final class OrderFormBuilder extends AbstractFormBuilder
             'label' => $this->trans('client.heading.billing_address'),
         ]));
 
-        $paymentShippingData->addChild($this->getElement('select', [
+        $shippingMethod = $paymentShippingData->addChild($this->getElement('select', [
             'name'        => 'shippingMethod',
             'label'       => $this->trans('order.label.shipping_method'),
-            'options'     => $shippingMethods,
             'transformer' => $this->getRepositoryTransformer('entity', $this->get('shipping_method.repository'))
         ]));
 
-        $paymentShippingData->addChild($this->getElement('select', [
+        $this->addShippingOptions($shippingMethod);
+
+        $paymentMethod = $paymentShippingData->addChild($this->getElement('select', [
             'name'        => 'paymentMethod',
             'label'       => $this->trans('order.label.payment_method'),
-            'options'     => $paymentMethods,
             'transformer' => $this->getRepositoryTransformer('entity', $this->get('payment_method.repository'))
         ]));
+
+        $this->addPaymentOptions($paymentMethod);
 
         $orderTotalData = $orderDetails->addChild($this->getElement('nested_fieldset', [
             'name'  => 'orderTotalData',
@@ -248,26 +229,57 @@ final class OrderFormBuilder extends AbstractFormBuilder
         $form->addFilter($this->getFilter('trim'));
         $form->addFilter($this->getFilter('secure'));
     }
-    
-    private function getShippingMethodOptions(Collection $collection) : array
+
+    private function getOrderProvider() : OrderProviderInterface
     {
-        $options = [];
-
-        $collection->map(function (ShippingMethodInterface $shippingMethod) use (&$options) {
-            $options[$shippingMethod->getId()] = $shippingMethod->translate()->getName();
-        });
-
-        return $options;
+        return $this->get('order.provider.admin');
     }
-    
-    private function getPaymentMethodOptions(Collection $collection) : array
+
+    private function getShippingMethodProvider() : ShippingMethodProviderInterface
     {
-        $options = [];
-        
-        $collection->map(function (ShippingMethodInterface $shippingMethod) use (&$options) {
-            $options[$shippingMethod->getId()] = $shippingMethod->translate()->getName();
+        return $this->get('shipping_method.provider');
+    }
+
+    /**
+     * Adds shipping method options to select
+     *
+     * @param ElementInterface|Select $radioGroup
+     */
+    private function addShippingOptions(ElementInterface $radioGroup)
+    {
+        $order      = $this->getOrderProvider()->getCurrentOrder();
+        $collection = $this->getShippingMethodProvider()->getCosts(new OrderContext($order));
+
+        $collection->map(function (ShippingMethodCostInterface $shippingMethodCost) use ($radioGroup) {
+            $shippingMethod = $shippingMethodCost->getShippingMethod();
+            $baseCurrency   = $shippingMethod->getCurrency()->getCode();
+            $grossAmount    = $shippingMethodCost->getCost()->getGrossAmount();
+
+            $label = sprintf(
+                '%s (%s)',
+                $shippingMethod->translate()->getName(),
+                $this->getCurrencyHelper()->convertAndFormat($grossAmount, $baseCurrency)
+            );
+
+            $radioGroup->addOptionToSelect($shippingMethod->getId(), $label);
         });
-        
-        return $options;
+    }
+
+    /**
+     * Adds payment method options to select
+     *
+     * @param ElementInterface|Select $radioGroup
+     */
+    private function addPaymentOptions(ElementInterface $radioGroup)
+    {
+        $order          = $this->getOrderProvider()->getCurrentOrder();
+        $shippingMethod = $order->getShippingMethod();
+        if ($shippingMethod instanceof ShippingMethodInterface) {
+            $collection = $shippingMethod->getPaymentMethods();
+
+            $collection->map(function (PaymentMethodInterface $paymentMethod) use ($radioGroup) {
+                $radioGroup->addOptionToSelect($paymentMethod->getId(), $paymentMethod->translate()->getName());
+            });
+        }
     }
 }

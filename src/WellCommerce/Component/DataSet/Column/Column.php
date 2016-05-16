@@ -20,15 +20,15 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Column implements ColumnInterface
+final class Column implements ColumnInterface
 {
     /**
      * @var array
      */
-    protected $options = [];
+    private $options = [];
 
     /**
-     * Constructor
+     * Column constructor.
      *
      * @param array $options
      */
@@ -39,10 +39,32 @@ class Column implements ColumnInterface
         $this->options = $optionsResolver->resolve($options);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function configureOptions(OptionsResolver $resolver)
+    public function getAlias() : string
+    {
+        return $this->options['alias'];
+    }
+
+    public function getPaginatorSource() : string
+    {
+        return $this->options['paginator_source'];
+    }
+
+    public function getSource() : string
+    {
+        return $this->options['source'];
+    }
+
+    public function getRawSelect() : string
+    {
+        return sprintf('%s AS %s', $this->options['source'], $this->options['alias']);
+    }
+
+    public function isAggregated() : bool
+    {
+        return $this->options['aggregated'];
+    }
+
+    private function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setRequired([
             'alias',
@@ -65,7 +87,7 @@ class Column implements ColumnInterface
         });
     }
 
-    protected function normalizePaginatorSource(Options $options) : string
+    private function normalizePaginatorSource(Options $options) : string
     {
         if (true === $this->isAggregateColumn($options['source'], ['GROUP_CONCAT'])) {
             $parts = explode(' ', $options['source']);
@@ -84,50 +106,10 @@ class Column implements ColumnInterface
      *
      * @return bool
      */
-    protected function isAggregateColumn(string $source, array $aggregates) : bool
+    private function isAggregateColumn(string $source, array $aggregates) : bool
     {
         $regex = '/(' . implode('|', $aggregates) . ')/i';
 
         return (bool)(preg_match($regex, $source));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAlias() : string
-    {
-        return $this->options['alias'];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPaginatorSource() : string
-    {
-        return $this->options['paginator_source'];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getSource() : string
-    {
-        return $this->options['source'];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getRawSelect() : string
-    {
-        return sprintf('%s AS %s', $this->options['source'], $this->options['alias']);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isAggregated() : bool
-    {
-        return $this->options['aggregated'];
     }
 }

@@ -25,8 +25,6 @@ interface OrderModifierConfiguratorInterface
      * Configures the order modifier
      *
      * @param OrderModifierInterface $modifier
-     *
-     * @return mixed
      */
     public function configure(OrderModifierInterface $modifier);
 }

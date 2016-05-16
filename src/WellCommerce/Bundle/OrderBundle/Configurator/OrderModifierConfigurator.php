@@ -42,9 +42,6 @@ final class OrderModifierConfigurator implements OrderModifierConfiguratorInterf
         $this->hierarchy     = $hierarchy;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function configure(OrderModifierInterface $modifier)
     {
         $modifier->setName($this->name);

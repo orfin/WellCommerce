@@ -13,19 +13,18 @@
 namespace WellCommerce\Component\DataSet\Conditions\Condition;
 
 use WellCommerce\Component\DataSet\Conditions\AbstractCondition;
-use WellCommerce\Component\DataSet\Conditions\ConditionInterface;
 
 /**
  * Class In
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class In extends AbstractCondition implements ConditionInterface
+final class In extends AbstractCondition
 {
     protected $operator = 'in';
 
     public function getValue()
     {
-        return !is_array($this->value) ? (array) $this->value : $this->value;
+        return !is_array($this->value) ? (array)$this->value : $this->value;
     }
 }

@@ -24,14 +24,14 @@ interface ConditionInterface
      *
      * @return string
      */
-    public function getOperator();
+    public function getOperator() : string;
 
     /**
      * Returns field identifier
      *
      * @return string
      */
-    public function getIdentifier();
+    public function getIdentifier() : string;
 
     /**
      * Returns field value

@@ -32,7 +32,7 @@ class OrderController extends AbstractAdminController
             return $this->redirectToAction('index');
         }
         
-        $this->getOrderStorage()->setCurrentOrder($resource);
+        $this->getOrderProvider()->setCurrentOrder($resource);
         
         $form = $this->getForm($resource, [
             'class' => 'editOrder'

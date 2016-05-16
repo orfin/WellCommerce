@@ -13,14 +13,13 @@
 namespace WellCommerce\Component\DataSet\Conditions\Condition;
 
 use WellCommerce\Component\DataSet\Conditions\AbstractCondition;
-use WellCommerce\Component\DataSet\Conditions\ConditionInterface;
 
 /**
  * Class Gt
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Gt extends AbstractCondition implements ConditionInterface
+final class Gt extends AbstractCondition
 {
     protected $operator = 'gt';
 }
