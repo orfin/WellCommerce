@@ -23,6 +23,7 @@ interface MappingDefinitionInterface
 {
     const CLASS_METADATA_METHOD_FIELD        = 'mapField';
     const CLASS_METADATA_METHOD_MANY_TO_MANY = 'mapManyToMany';
+    const CLASS_METADATA_METHOD_MANY_TO_ONE  = 'mapManyToOne';
 
     /**
      * @param OptionsResolver $resolver
