@@ -69,7 +69,7 @@ final class DynamicRoutingExtension extends \Twig_Extension
         $routeParams             = array_merge($routeParams, $currentQueryParams);
         
         unset($routeParams['_route_object']);
-        
+
         return $this->generator->generate($route, $routeParams);
     }
     

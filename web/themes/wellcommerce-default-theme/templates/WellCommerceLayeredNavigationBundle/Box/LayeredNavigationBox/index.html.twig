@@ -18,7 +18,7 @@
                     {% for producer in producers.rows %}
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" name="producer[]" value="{{ producer.id }}" {% if producer.id in activeProducers %}checked{% endif %}>
+                                <input type="checkbox" name="producers[]" value="{{ producer.id }}" {% if producer.id in activeProducers %}checked{% endif %}>
                                 {{ producer.name }}
                             </label>
                         </div>

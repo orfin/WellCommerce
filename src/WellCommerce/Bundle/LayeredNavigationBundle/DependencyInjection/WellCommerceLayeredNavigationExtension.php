@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\LayeredNavigationBundle\DependencyInjection;
 
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
 
 /**
@@ -21,4 +22,12 @@ use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
  */
 class WellCommerceLayeredNavigationExtension extends AbstractExtension
 {
+    protected function processExtensionConfiguration(array $configuration, ContainerBuilder $container)
+    {
+        parent::processExtensionConfiguration($configuration, $container);
+
+        $filters = $configuration['filters'];
+        
+        $container->setParameter('layered_navigation.filters', $filters);
+    }
 }

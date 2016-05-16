@@ -10,7 +10,7 @@ services:
 
     layered_navigation.helper:
         class: WellCommerce\Bundle\LayeredNavigationBundle\Helper\LayeredNavigationHelper
-        arguments: ['@producer.repository']
+        arguments: ['%layered_navigation.filters%']
         calls:
             - [setContainer, ['@service_container']]
 

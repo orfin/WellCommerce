@@ -12,159 +12,105 @@
 
 namespace WellCommerce\Bundle\LayeredNavigationBundle\Helper;
 
-use Doctrine\Common\Collections\Criteria;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
-use WellCommerce\Bundle\ProducerBundle\Entity\ProducerInterface;
-use WellCommerce\Bundle\ProducerBundle\Repository\ProducerRepositoryInterface;
-use WellCommerce\Component\DataSet\Conditions\Condition\Gte;
-use WellCommerce\Component\DataSet\Conditions\Condition\In;
-use WellCommerce\Component\DataSet\Conditions\Condition\Lte;
+use WellCommerce\Component\DataSet\Conditions\ConditionInterface;
 use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
 
 /**
- * Interface LayeredNavigationHelperInterface
+ * Class LayeredNavigationHelper
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LayeredNavigationHelper extends AbstractContainerAware implements LayeredNavigationHelperInterface
+final class LayeredNavigationHelper extends AbstractContainerAware implements LayeredNavigationHelperInterface
 {
-    /**
-     * @var ProducerRepositoryInterface
-     */
-    protected $producerRepository;
-
     /**
      * @var array
      */
-    protected $requiredAttributes = ['priceFrom', 'priceTo', 'producers', 'attributes'];
-
+    private $filters = [];
+    
     /**
-     * Constructor
+     * LayeredNavigationHelper constructor.
      *
-     * @param ProducerRepositoryInterface $producerRepository
+     * @param array $filters
      */
-    public function __construct(ProducerRepositoryInterface $producerRepository)
+    public function __construct(array $filters = [])
     {
-        $this->producerRepository = $producerRepository;
+        $this->filters = $this->getFilters($filters);
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function generateRedirectUrl()
+    
+    public function generateRedirectUrl() : string
     {
         $formParams              = $this->parseFormParameters($this->getRequestHelper()->getRequestBagParam('form', '', FILTER_DEFAULT));
         $route                   = $this->getRequestHelper()->getRequestBagParam('route', 0);
         $currentAttributesParams = $this->getRequestHelper()->getRequestBagParam('route_params', []);
-        $producers               = isset($formParams['producer']) ? $this->filterProducers((array)$formParams['producer']) : [];
+        $replacements            = [];
 
-        $replacements = [
-            'priceFrom' => (int)$formParams['priceFrom'],
-            'priceTo'   => (int)$formParams['priceTo'],
-            'producers' => $this->getProducersRouteParam($producers)
-        ];
+        foreach ($this->filters as $parameterName => $configuration) {
+            if (isset($formParams[$parameterName])) {
+                $value = $formParams[$parameterName];
 
+                if ($configuration['type'] === self::VALUE_TYPE_ARRAY) {
+                    $replacements[$parameterName] = empty($value) ? 0 : implode(self::MULTI_VALUE_SEPARATOR, $value);
+                } else {
+                    $replacements[$parameterName] = $formParams[$parameterName];
+                }
+            }
+        }
+        
         $routeParams = array_replace($currentAttributesParams, $replacements);
 
         return $this->getRouterHelper()->generateUrl($route, $routeParams);
     }
-
-    /**
-     * Returns the producers string or null
-     *
-     * @param array $producers
-     *
-     * @return null|string
-     */
-    protected function getProducersRouteParam(array $producers = [])
-    {
-        if (count($producers) > 0) {
-            return implode(LayeredNavigationHelperInterface::MULTIVALUE_SEPARATOR, $producers);
-        }
-
-        return null;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
+    
     public function addLayeredNavigationConditions(ConditionsCollection $collection)
     {
         if (false === $this->isLayeredNavigationEnabled()) {
             return $collection;
         }
-
-        $priceFrom            = $this->getRequestHelper()->getAttributesBagParam('priceFrom');
-        $priceTo              = $this->getRequestHelper()->getAttributesBagParam('priceTo');
-        $producersIdentifiers = explode(self::MULTIVALUE_SEPARATOR, $this->getRequestHelper()->getAttributesBagParam('producers'));
-        $producers            = $this->filterProducers($producersIdentifiers);
-
-        $collection->add(new Gte('finalPrice', $priceFrom));
-        $collection->add(new Lte('finalPrice', $priceTo));
-        if (count($producers)) {
-            $collection->add(new In('producerId', $producers));
+        
+        foreach ($this->filters as $parameterName => $configuration) {
+            $currentAttributeValue = $this->getCurrentAttributeValue($parameterName, $configuration['type']);
+            if (!empty($currentAttributeValue)) {
+                $collection->add($this->createFilterCondition($currentAttributeValue, $configuration));
+            }
         }
-
+        
         return $collection;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isLayeredNavigationEnabled()
+    
+    public function isLayeredNavigationEnabled() : bool
     {
-        return $this->getRequestHelper()->hasAttributesBagParams($this->requiredAttributes);
+        return $this->getRequestHelper()->hasAttributesBagParams(array_keys($this->filters));
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function filterProducers(array $identifiers = [])
+    
+    private function createFilterCondition($currentAttributeValue, array $configuration) : ConditionInterface
     {
-        $producers  = [];
-        $collection = $this->getProducerCollection($identifiers);
-        $collection->map(function (ProducerInterface $producer) use (&$producers) {
-            $producers[] = $producer->getId();
-        });
-
-        return $producers;
+        return new $configuration['condition']($configuration['column'], $currentAttributeValue);
     }
-
-    /**
-     * Returns the collection of producers for given identifiers
-     *
-     * @param array $identifiers
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    protected function getProducerCollection(array $identifiers = [])
+    
+    private function getCurrentAttributeValue(string $parameterName, string $type)
     {
-        $criteria = new Criteria();
-        $criteria->orderBy(['id' => 'asc']);
-        $criteria->where($criteria->expr()->in('id', $identifiers));
-
-        return $this->producerRepository->matching($criteria);
+        if ($type === self::VALUE_TYPE_ARRAY) {
+            $parameterValue = $this->getRequestHelper()->getAttributesBagParam($parameterName);
+            $parameterValue = explode(self::MULTI_VALUE_SEPARATOR, $parameterValue);
+            
+            return array_filter($parameterValue);
+        }
+        
+        return $this->getRequestHelper()->getAttributesBagParam($parameterName);
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function filterAttributes(array $identifiers = [])
+    
+    private function getFilters(array $filters) : array
     {
-
+        return array_filter($filters, function ($v) {
+            return (bool)$v['enabled'];
+        }, ARRAY_FILTER_USE_BOTH);
     }
-
-    /**
-     * Parses the given query string parameters
-     *
-     * @param string $queryString
-     *
-     * @return array
-     */
-    protected function parseFormParameters($queryString)
+    
+    private function parseFormParameters(string $queryString) : array
     {
         parse_str($queryString, $params);
-
+        
         return $params;
     }
 }

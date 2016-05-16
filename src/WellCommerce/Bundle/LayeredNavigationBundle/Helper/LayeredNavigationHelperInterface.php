@@ -21,7 +21,10 @@ use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
  */
 interface LayeredNavigationHelperInterface
 {
-    const MULTIVALUE_SEPARATOR = '_';
+    const MULTI_VALUE_SEPARATOR = '_';
+    const VALUE_TYPE_FLOAT      = 'float';
+    const VALUE_TYPE_ARRAY      = 'array';
+    const VALUE_TYPE_INTEGER    = 'integer';
 
     /**
      * Adds layered's navigation conditions to collection
@@ -37,30 +40,12 @@ interface LayeredNavigationHelperInterface
      *
      * @return string
      */
-    public function generateRedirectUrl();
+    public function generateRedirectUrl() : string;
 
     /**
      * Returns true if layered navigation is enabled on current page. False otherwise.
      *
      * @return bool
      */
-    public function isLayeredNavigationEnabled();
-
-    /**
-     * Filters given identifiers and returns only allowed producers
-     *
-     * @param array $identifiers
-     *
-     * @return array
-     */
-    public function filterProducers(array $identifiers = []);
-
-    /**
-     * Filters given identifiers and returns only allowed attributes
-     *
-     * @param array $identifiers
-     *
-     * @return array
-     */
-    public function filterAttributes(array $identifiers = []);
+    public function isLayeredNavigationEnabled() : bool;
 }

@@ -1,0 +1,22 @@
+well_commerce_layered_navigation:
+    filters:
+        priceFrom:
+            type: integer
+            condition: WellCommerce\Component\DataSet\Conditions\Condition\Gte
+            enabled: true
+            column: finalPrice
+        priceTo:
+            type: integer
+            condition: WellCommerce\Component\DataSet\Conditions\Condition\Lte
+            enabled: true
+            column: finalPrice
+        attributes:
+            type: array
+            condition: WellCommerce\Component\DataSet\Conditions\Condition\In
+            enabled: true
+            column: attribute
+        producers:
+            type: array
+            condition: WellCommerce\Component\DataSet\Conditions\Condition\In
+            enabled: true
+            column: producerId
