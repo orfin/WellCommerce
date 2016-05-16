@@ -23,3 +23,5 @@ category:
         edit: Edit category
     comment:
         enabled: Enable category visibility
+    flash:
+        empty_category: Category is empty

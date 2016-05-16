@@ -23,4 +23,6 @@ category:
         edit: Edytuj kategorię
     comment:
         enabled: Włącz widoczność kategorii
+    flash:
+        empty_category: Kategoria jest pusta.
 
