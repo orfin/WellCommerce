@@ -12,6 +12,7 @@
 namespace WellCommerce\Bundle\OrderBundle\Form\Admin;
 
 use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderModifierInterface;
 use WellCommerce\Bundle\OrderBundle\Provider\Admin\OrderProviderInterface;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodInterface;
 use WellCommerce\Bundle\ShippingBundle\Context\OrderContext;
@@ -34,6 +35,7 @@ final class OrderFormBuilder extends AbstractFormBuilder
      */
     public function buildForm(FormInterface $form)
     {
+        $order     = $this->getOrderProvider()->getCurrentOrder();
         $countries = $this->get('country.repository')->all();
 
         $requiredData = $form->addChild($this->getElement('nested_fieldset', [
@@ -78,14 +80,46 @@ final class OrderFormBuilder extends AbstractFormBuilder
 
         $this->addPaymentOptions($paymentMethod);
 
-        $orderTotalData = $orderDetails->addChild($this->getElement('nested_fieldset', [
-            'name'  => 'orderTotalData',
+        $order->getModifiers()->map(function (OrderModifierInterface $modifier) use ($paymentShippingData) {
+            $paymentShippingData->addChild($this->getElement('constant', [
+                'name'  => 'summary.' . $modifier->getName(),
+                'label' => $modifier->getDescription()
+            ]))->setValue($modifier->getGrossAmount());
+        });
+
+        $summaryData = $orderDetails->addChild($this->getElement('nested_fieldset', [
+            'name'  => 'summary',
             'label' => $this->trans('order.heading.order_total'),
         ]));
 
-        $orderTotalData->addChild($this->getElement('text_field', [
-            'name'  => 'shippingTotal.grossAmount',
-            'label' => $this->trans('order.label.shipping_total'),
+        $summaryData->addChild($this->getElement('constant', [
+            'name'  => 'productTotal.netPrice',
+            'label' => $this->trans('order.label.product_total.net_price'),
+        ]));
+
+        $summaryData->addChild($this->getElement('constant', [
+            'name'  => 'productTotal.taxAmount',
+            'label' => $this->trans('order.label.product_total.tax_amount'),
+        ]));
+
+        $summaryData->addChild($this->getElement('constant', [
+            'name'  => 'productTotal.grossPrice',
+            'label' => $this->trans('order.label.product_total.gross_price'),
+        ]));
+
+        $summaryData->addChild($this->getElement('constant', [
+            'name'  => 'summary.netAmount',
+            'label' => $this->trans('order.label.summary.net_amount'),
+        ]));
+
+        $summaryData->addChild($this->getElement('constant', [
+            'name'  => 'summary.taxAmount',
+            'label' => $this->trans('order.label.summary.tax_amount'),
+        ]));
+
+        $summaryData->addChild($this->getElement('constant', [
+            'name'  => 'summary.grossAmount',
+            'label' => $this->trans('order.label.summary.gross_amount'),
         ]));
 
         $contactDetails = $form->addChild($this->getElement('nested_fieldset', [
