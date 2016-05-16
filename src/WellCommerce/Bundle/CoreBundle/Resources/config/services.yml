@@ -39,9 +39,7 @@ services:
 
     mailer.helper:
         class: WellCommerce\Bundle\CoreBundle\Helper\Mailer\MailerHelper
-        arguments: ['%kernel.debug%']
-        calls:
-            - [setContainer, ['@service_container']]
+        arguments: ['@templating.helper', '%kernel.debug%']
 
     security.helper:
         class: WellCommerce\Bundle\CoreBundle\Helper\Security\SecurityHelper
