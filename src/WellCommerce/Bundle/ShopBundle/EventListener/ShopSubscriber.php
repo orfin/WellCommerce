@@ -48,7 +48,6 @@ class ShopSubscriber extends AbstractEventSubscriber
         $currentShopId        = $this->getRequestHelper()->getSessionAttribute($sessionAttributeName);
         $host                 = $this->getRequestHelper()->getCurrentHost();
         $shop                 = $this->getShopRepository()->resolve((int)$currentShopId, $host);
-
         $this->getShopStorage()->setCurrentShop($shop);
         $this->getRequestHelper()->setSessionAttribute($sessionAttributeName, $shop->getId());
     }

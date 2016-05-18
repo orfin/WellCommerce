@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CategoryBundle\DataSet\Front;
 
+use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 use WellCommerce\Bundle\CategoryBundle\Entity\CategoryInterface;
 use WellCommerce\Bundle\CategoryBundle\Entity\CategoryTranslation;
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
@@ -31,16 +32,16 @@ final class CategoryDataSet extends AbstractDataSet
     public function configureOptions(DataSetConfiguratorInterface $configurator)
     {
         $configurator->setColumns([
-            'id'        => 'category.id',
-            'hierarchy' => 'category.hierarchy',
-            'enabled'   => 'category.enabled',
-            'parent'    => 'IDENTITY(category.parent)',
-            'children'  => 'COUNT(category_children.id)',
-            'products'  => 'COUNT(category_products.id)',
-            'name'      => 'category_translation.name',
-            'slug'      => 'category_translation.slug',
-            'shop'      => 'category_shops.id',
-            'route'     => 'IDENTITY(category_translation.route)',
+            'id'            => 'category.id',
+            'hierarchy'     => 'category.hierarchy',
+            'enabled'       => 'category.enabled',
+            'parent'        => 'IDENTITY(category.parent)',
+            'childrenCount' => 'category.childrenCount',
+            'productsCount' => 'category.productsCount',
+            'name'          => 'category_translation.name',
+            'slug'          => 'category_translation.slug',
+            'shop'          => 'category_shops.id',
+            'route'         => 'IDENTITY(category_translation.route)',
         ]);
 
         $configurator->setColumnTransformers([
@@ -48,6 +49,7 @@ final class CategoryDataSet extends AbstractDataSet
         ]);
         
         $configurator->setCacheOptions(new CacheOptions(true, 3600, [
+            Category::class,
             CategoryInterface::class,
             CategoryTranslation::class
         ]));
@@ -57,7 +59,7 @@ final class CategoryDataSet extends AbstractDataSet
     {
         $request = parent::getDataSetRequest($requestOptions);
         $request->addCondition(new Eq('enabled', true));
-        $request->addCondition(new Gt('products', 0));
+        $request->addCondition(new Gt('productsCount', 0));
 
         return $request;
     }

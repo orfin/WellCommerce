@@ -9,3 +9,9 @@
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+
+twig_cache:
+    profiler: '%kernel.debug%'
+    service: doctrine_cache.providers.file_system
+    strategy: twig_cache.strategy
+    key_generator: twig_cache.strategy.spl_object_hash_key_generator

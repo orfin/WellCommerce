@@ -29,16 +29,16 @@ class CategoryDataSetTest extends AbstractDataSetTestCase
     protected function getColumns()
     {
         return [
-            'id'        => 'category.id',
-            'hierarchy' => 'category.hierarchy',
-            'enabled'   => 'category.enabled',
-            'parent'    => 'IDENTITY(category.parent)',
-            'children'  => 'COUNT(category_children.id)',
-            'products'  => 'COUNT(category_products.id)',
-            'name'      => 'category_translation.name',
-            'slug'      => 'category_translation.slug',
-            'shop'      => 'category_shops.id',
-            'route'     => 'IDENTITY(category_translation.route)',
+            'id'            => 'category.id',
+            'hierarchy'     => 'category.hierarchy',
+            'enabled'       => 'category.enabled',
+            'parent'        => 'IDENTITY(category.parent)',
+            'childrenCount' => 'category.childrenCount',
+            'productsCount' => 'category.productsCount',
+            'name'          => 'category_translation.name',
+            'slug'          => 'category_translation.slug',
+            'shop'          => 'category_shops.id',
+            'route'         => 'IDENTITY(category_translation.route)',
         ];
     }
 }

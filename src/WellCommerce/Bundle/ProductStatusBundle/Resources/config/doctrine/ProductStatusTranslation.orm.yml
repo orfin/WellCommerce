@@ -1,6 +1,8 @@
 WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusTranslation:
     type: entity
     table: product_status_translation
+    cache:
+        usage: NONSTRICT_READ_WRITE
     embedded:
         meta:
             class: WellCommerce\Bundle\AppBundle\Entity\Meta

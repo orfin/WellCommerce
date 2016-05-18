@@ -109,7 +109,7 @@ WellCommerce\Bundle\ProductBundle\Entity\Product:
     manyToMany:
         categories:
             targetEntity: WellCommerce\Bundle\CategoryBundle\Entity\Category
-            fetch: LAZY
+            fetch: EXTRA_LAZY
             inversedBy: products
             joinTable:
                 name: category_product
@@ -122,24 +122,6 @@ WellCommerce\Bundle\ProductBundle\Entity\Product:
                 inverseJoinColumns:
                     -
                         name: category_id
-                        nullable: false
-                        onDelete: CASCADE
-                        referencedColumnName: id
-        statuses:
-            targetEntity: WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatus
-            fetch: LAZY
-            inversedBy: products
-            joinTable:
-                name: product_product_status
-                joinColumns:
-                    -
-                        name: product_id
-                        nullable: false
-                        onDelete: CASCADE
-                        referencedColumnName: id
-                inverseJoinColumns:
-                    -
-                        name: product_status_id
                         nullable: false
                         onDelete: CASCADE
                         referencedColumnName: id
@@ -172,6 +154,14 @@ WellCommerce\Bundle\ProductBundle\Entity\Product:
         variants:
             targetEntity: WellCommerce\Bundle\ProductBundle\Entity\Variant
             cascade:
+                - persist
+            fetch: LAZY
+            mappedBy: product
+            orphanRemoval: true
+        distinctions:
+            targetEntity: WellCommerce\Bundle\ProductBundle\Entity\ProductDistinction
+            cascade:
+                - remove
                 - persist
             fetch: LAZY
             mappedBy: product

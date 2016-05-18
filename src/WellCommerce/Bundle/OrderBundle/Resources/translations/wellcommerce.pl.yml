@@ -10,6 +10,7 @@ order:
         order_total: Suma
         products: Produkty
         contact_details: Dane kontaktowe
+        products_in_cart: Produkty w Twoim koszyku
     button:
         confirm: Przejdź do potwierdzenia
         add_product: Dodaj produkt
@@ -19,6 +20,8 @@ order:
         client: Klient
         product_total: Wartość produktów
         shipping_total: Koszty wysyłki
+        shipping_cost: Przesyłka
+        coupon_discount: Kupon
         order_total: Wartość zamówienia
         variant: Wariant
         weight: Waga
@@ -33,7 +36,7 @@ order:
         product_name: Produkt
         tax_value: Podatek
         gross_amount: Cena
-        gross_total: Suma
+        gross_total: Łącznie
         currency: Waluta
     description:
         product_total: Wartość produktów

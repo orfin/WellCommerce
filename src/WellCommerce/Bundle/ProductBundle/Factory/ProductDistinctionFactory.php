@@ -10,24 +10,20 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\ProductStatusBundle\Factory;
+namespace WellCommerce\Bundle\ProductBundle\Factory;
 
 use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
-use WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductDistinctionInterface;
 
 /**
- * Class ProductStatusFactory
+ * Class ProductDistinctionFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductStatusFactory extends AbstractEntityFactory
+class ProductDistinctionFactory extends AbstractEntityFactory
 {
-    public function create() : ProductStatusInterface
+    public function create() : ProductDistinctionInterface
     {
-        /** @var  $status ProductStatusInterface */
-        $status = $this->init();
-        $status->setSymbol('');
-        
-        return $status;
+        return $this->init();
     }
 }

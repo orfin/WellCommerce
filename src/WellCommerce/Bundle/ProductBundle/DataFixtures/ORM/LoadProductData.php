@@ -26,7 +26,6 @@ use WellCommerce\Bundle\MediaBundle\DataFixtures\ORM\LoadMediaData;
 use WellCommerce\Bundle\ProducerBundle\DataFixtures\ORM\LoadProducerData;
 use WellCommerce\Bundle\ProductBundle\Entity\Product;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductPhoto;
-use WellCommerce\Bundle\ProductStatusBundle\DataFixtures\ORM\LoadProductStatusData;
 use WellCommerce\Bundle\TaxBundle\DataFixtures\ORM\LoadTaxData;
 use WellCommerce\Bundle\UnitBundle\DataFixtures\ORM\LoadUnitData;
 
@@ -76,7 +75,6 @@ class LoadProductData extends AbstractDataFixture
         $producer         = $this->randomizeSamples('producer', LoadProducerData::$samples);
         $availability     = $this->randomizeSamples('availability', LoadAvailabilityData::$samples);
         $categories       = $this->randomizeSamples('category', $s = LoadCategoryData::$samples, rand(2, 4));
-        $statuses         = $this->randomizeSamples('product_status', LoadProductStatusData::$samples, rand(2, 3));
         $tax              = $this->randomizeSamples('tax', LoadTaxData::$samples);
         $unit             = $this->randomizeSamples('unit', LoadUnitData::$samples);
 
@@ -93,16 +91,12 @@ class LoadProductData extends AbstractDataFixture
         $sellPrice->setGrossAmount($price = rand(100, 200));
         $sellPrice->setCurrency($currency->getCode());
 
-        foreach ($statuses as $status) {
-            if ($status->translate()->getName() === 'Promotions') {
-                $sellPrice->setDiscountedGrossAmount($price * (rand(80, 95) / 100));
-                $sellPrice->setValidFrom(new \DateTime());
-                $sellPrice->setValidTo((new \DateTime())->modify('+30 days'));
-            }
-        }
+        $sellPrice->setDiscountedGrossAmount($price * (rand(80, 95) / 100));
+        $sellPrice->setValidFrom(new \DateTime());
+        $sellPrice->setValidTo((new \DateTime())->modify('+30 days'));
 
         $product = new Product();
-        $product->setSKU($sku);
+        $product->setSku($sku);
         $product->setHierarchy(rand(0, 10));
         $product->setEnabled(true);
         $product->setAvailability($availability);
@@ -112,8 +106,7 @@ class LoadProductData extends AbstractDataFixture
         $product->setSellPriceTax($tax);
         $product->setCategories($categories);
         $product->addShop($shop);
-        $product->setStatuses($statuses);
-
+        
         $product->translate($this->getDefaultLocale())->setName($name);
         $product->translate($this->getDefaultLocale())->setSlug(Sluggable::makeSlug($name));
         $product->translate($this->getDefaultLocale())->setShortDescription($shortDescription);

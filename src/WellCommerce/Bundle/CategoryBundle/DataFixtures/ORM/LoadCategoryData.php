@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CategoryBundle\DataFixtures\ORM;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -53,6 +54,10 @@ class LoadCategoryData extends AbstractDataFixture implements FixtureInterface, 
             $category->setEnabled(true);
             $category->setHierarchy($hierarchy);
             $category->setParent(null);
+            $category->setProducts(new ArrayCollection());
+            $category->setChildren(new ArrayCollection());
+            $category->setChildrenCount(0);
+            $category->setProductsCount(0);
             $category->addShop($shop);
             $category->translate($this->container->getParameter('locale'))->setName($name);
             $category->translate($this->container->getParameter('locale'))->setSlug(Sluggable::makeSlug($name));

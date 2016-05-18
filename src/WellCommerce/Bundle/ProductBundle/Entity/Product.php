@@ -50,87 +50,87 @@ class Product extends AbstractEntity implements ProductInterface
     use UnitAwareTrait;
     use AvailabilityAwareTrait;
     use ProductExtraTrait;
-
+    
     /**
      * @var string
      */
     protected $sku = '';
-
+    
     /**
      * @var Collection
      */
     protected $categories;
-
+    
     /**
      * @var Collection
      */
-    protected $statuses;
-
+    protected $distinctions;
+    
     /**
      * @var Collection
      */
     protected $productPhotos;
-
+    
     /**
      * @var Collection
      */
     protected $reviews;
-
+    
     /**
      * @var int
      */
     protected $stock = 0;
-
+    
     /**
      * @var Price
      */
     protected $buyPrice;
-
+    
     /**
      * @var TaxInterface
      */
     protected $buyPriceTax;
-
+    
     /**
      * @var DiscountablePrice
      */
     protected $sellPrice;
-
+    
     /**
      * @var TaxInterface
      */
     protected $sellPriceTax;
-
+    
     /**
      * @var Collection
      */
     protected $variants;
-
+    
     /**
      * @var AttributeGroupInterface
      */
     protected $attributeGroup;
-
+    
     /**
      * @var bool
      */
     protected $trackStock = true;
-
+    
     /**
      * @var float
      */
     protected $weight = 0;
-
+    
     /**
      * @var Dimension
      */
     protected $dimension;
-
+    
     /**
      * @var float
      */
     protected $packageSize = 1;
-
+    
     /**
      * {@inheritdoc}
      */
@@ -138,7 +138,7 @@ class Product extends AbstractEntity implements ProductInterface
     {
         return $this->sku;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -146,7 +146,7 @@ class Product extends AbstractEntity implements ProductInterface
     {
         $this->sku = $sku;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -154,211 +154,154 @@ class Product extends AbstractEntity implements ProductInterface
     {
         return $this->stock;
     }
-
-    /**
-     * {@inheritdoc}
-     */
+    
     public function setStock(int $stock)
     {
         $this->stock = $stock;
     }
-
-    /**
-     * {@inheritdoc}
-     */
+    
     public function getTrackStock() : bool
     {
         return $this->trackStock;
     }
-
-    /**
-     * {@inheritdoc}
-     */
+    
     public function setTrackStock(bool $trackStock)
     {
         $this->trackStock = $trackStock;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getStatuses() : Collection
+    
+    public function getDistinctions() : Collection
     {
-        return $this->statuses;
+        return $this->distinctions;
+    }
+    
+    public function setDistinctions(Collection $distinctions)
+    {
+        if ($this->distinctions instanceof Collection) {
+            $this->synchronizeDistinctions($distinctions);
+        }
+
+        $this->distinctions = $distinctions;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setStatuses(Collection $statuses)
+    protected function synchronizeDistinctions(Collection $distinctions)
     {
-        $this->statuses = $statuses;
+        $this->distinctions->map(function (ProductDistinctionInterface $distinction) use ($distinctions) {
+            if (false === $distinctions->contains($distinction)) {
+                $this->removeDistinction($distinction);
+            }
+        });
+    }
+    
+    public function removeDistinction(ProductDistinctionInterface $distinction)
+    {
+        $this->distinctions->removeElement($distinction);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getProductPhotos() : Collection
     {
         return $this->productPhotos;
     }
-
-    /**
-     * {@inheritdoc}
-     */
+    
     public function setProductPhotos(Collection $photos)
     {
         $this->productPhotos = $photos;
     }
-
-    /**
-     * {@inheritdoc}
-     */
+    
     public function addProductPhoto(ProductPhoto $photo)
     {
         $this->productPhotos[] = $photo;
     }
-
-    /**
-     * {@inheritdoc}
-     */
+    
     public function getCategories() : Collection
     {
         return $this->categories;
     }
-
-    /**
-     * {@inheritdoc}
-     */
+    
     public function setCategories(Collection $collection)
     {
         $this->categories = $collection;
     }
-
-    /**
-     * {@inheritdoc}
-     */
+    
     public function addCategory(CategoryInterface $category)
     {
         $this->categories[] = $category;
     }
-
-    /**
-     * {@inheritdoc}
-     */
+    
     public function getSellPrice() : DiscountablePrice
     {
         return $this->sellPrice;
     }
-
-    /**
-     * {@inheritdoc}
-     */
+    
     public function setSellPrice(DiscountablePrice $sellPrice)
     {
         $this->sellPrice = $sellPrice;
     }
-
-    /**
-     * {@inheritdoc}
-     */
+    
     public function getBuyPrice() : Price
     {
         return $this->buyPrice;
     }
-
-    /**
-     * {@inheritdoc}
-     */
+    
     public function setBuyPrice(Price $buyPrice)
     {
         $this->buyPrice = $buyPrice;
     }
-
-    /**
-     * {@inheritdoc}
-     */
+    
     public function getWeight() : float
     {
         return $this->weight;
     }
-
-    /**
-     * {@inheritdoc}
-     */
+    
     public function setWeight(float $weight)
     {
         $this->weight = $weight;
     }
-
-    /**
-     * {@inheritdoc}
-     */
+    
     public function getDimension() : Dimension
     {
         return $this->dimension;
     }
-
-    /**
-     * {@inheritdoc}
-     */
+    
     public function setDimension(Dimension $dimension)
     {
         $this->dimension = $dimension;
     }
-
-    /**
-     * {@inheritdoc}
-     */
+    
     public function getPackageSize() : float
     {
         return $this->packageSize;
     }
-
-    /**
-     * {@inheritdoc}
-     */
+    
     public function setPackageSize(float $packageSize)
     {
         $this->packageSize = $packageSize;
     }
-
-    /**
-     * {@inheritdoc}
-     */
+    
     public function getAttributeGroup()
     {
         return $this->attributeGroup;
     }
-
-    /**
-     * {@inheritdoc}
-     */
+    
     public function setAttributeGroup(AttributeGroupInterface $attributeGroup)
     {
         $this->attributeGroup = $attributeGroup;
     }
-
-    /**
-     * {@inheritdoc}
-     */
+    
     public function getVariants() : Collection
     {
         return $this->variants;
     }
-
-    /**
-     * {@inheritdoc}
-     */
+    
     public function setVariants(Collection $variants)
     {
         if ($this->variants instanceof Collection) {
             $this->synchronizeVariants($variants);
         }
-
+        
         $this->variants = $variants;
     }
-
+    
     protected function synchronizeVariants(Collection $variants)
     {
         $this->variants->map(function (VariantInterface $variant) use ($variants) {
@@ -367,82 +310,52 @@ class Product extends AbstractEntity implements ProductInterface
             }
         });
     }
-
-    /**
-     * {@inheritdoc}
-     */
+    
     public function removeVariant(VariantInterface $variant)
     {
         $this->variants->removeElement($variant);
     }
-
-    /**
-     * {@inheritdoc}
-     */
+    
     public function getBuyPriceTax() : TaxInterface
     {
         return $this->buyPriceTax;
     }
-
-    /**
-     * {@inheritdoc}
-     */
+    
     public function setBuyPriceTax(TaxInterface $buyPriceTax)
     {
         $this->buyPriceTax = $buyPriceTax;
     }
-
-    /**
-     * {@inheritdoc}
-     */
+    
     public function getSellPriceTax() : TaxInterface
     {
         return $this->sellPriceTax;
     }
-
-    /**
-     * {@inheritdoc}
-     */
+    
     public function setSellPriceTax(TaxInterface $sellPriceTax)
     {
         $this->sellPriceTax = $sellPriceTax;
     }
-
-    /**
-     * {@inheritdoc}
-     */
+    
     public function getShippingCostQuantity() : int
     {
         return 1;
     }
-
-    /**
-     * {@inheritdoc}
-     */
+    
     public function getShippingCostWeight() : float
     {
         return $this->weight;
     }
-
-    /**
-     * {@inheritdoc}
-     */
+    
     public function getShippingCostGrossPrice() : float
     {
         return $this->sellPrice->getFinalGrossAmount();
     }
-
-    /**
-     * {@inheritdoc}
-     */
+    
     public function getShippingCostCurrency() : string
     {
         return $this->sellPrice->getCurrency();
     }
-
-    /**
-     * {@inheritdoc}
-     */
+    
     public function getReviews() : Collection
     {
         return $this->reviews;

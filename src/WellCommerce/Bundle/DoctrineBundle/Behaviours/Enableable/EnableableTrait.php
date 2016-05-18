@@ -19,22 +19,13 @@ namespace WellCommerce\Bundle\DoctrineBundle\Behaviours\Enableable;
  */
 trait EnableableTrait
 {
-    /**
-     * @var bool
-     */
     protected $enabled;
 
-    /**
-     * @return bool
-     */
-    public function getEnabled() : bool
+    public function isEnabled() : bool
     {
         return $this->enabled;
     }
 
-    /**
-     * @param bool $enabled
-     */
     public function setEnabled(bool $enabled)
     {
         $this->enabled = $enabled;

@@ -13,9 +13,8 @@
 namespace WellCommerce\Bundle\ProductStatusBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use WellCommerce\Bundle\CoreBundle\Helper\Sluggable;
 use WellCommerce\Bundle\DoctrineBundle\DataFixtures\AbstractDataFixture;
-use WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatus;
+use WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusInterface;
 
 /**
  * Class LoadProductStatusData
@@ -24,8 +23,6 @@ use WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatus;
  */
 class LoadProductStatusData extends AbstractDataFixture
 {
-    public static $samples = ['Promotions', 'New arrivals', 'Featured', 'Bestsellers'];
-
     /**
      * {@inheritDoc}
      */
@@ -35,15 +32,55 @@ class LoadProductStatusData extends AbstractDataFixture
             return;
         }
 
-        foreach (self::$samples as $name) {
-            $status = new ProductStatus();
-            $status->translate($this->getDefaultLocale())->setName($name);
-            $status->translate($this->getDefaultLocale())->setSlug($slug = Sluggable::makeSlug($name));
-            $status->translate($this->getDefaultLocale())->setCssClass($slug);
-            $status->mergeNewTranslations();
-            $manager->persist($status);
-            $this->addReference('product_status_' . $name, $status);
-        }
+        /** @var ProductStatusInterface $bestseller */
+        $bestseller = $this->container->get('product_status.factory')->create();
+        $bestseller->setSymbol('bestseller');
+        $bestseller->translate($this->getDefaultLocale())->setName('Bestsellers');
+        $bestseller->translate($this->getDefaultLocale())->setSlug('bestseller');
+        $bestseller->translate($this->getDefaultLocale())->setCssClass('bestseller');
+        $bestseller->mergeNewTranslations();
+        $manager->persist($bestseller);
+        $this->addReference('product_status_bestseller', $bestseller);
+
+        /** @var ProductStatusInterface $bestseller */
+        $featured = $this->container->get('product_status.factory')->create();
+        $featured->setSymbol('featured');
+        $featured->translate($this->getDefaultLocale())->setName('Featured');
+        $featured->translate($this->getDefaultLocale())->setSlug('featured');
+        $featured->translate($this->getDefaultLocale())->setCssClass('featured');
+        $featured->mergeNewTranslations();
+        $manager->persist($featured);
+        $this->addReference('product_status_featured', $featured);
+
+        /** @var ProductStatusInterface $bestseller */
+        $announcement = $this->container->get('product_status.factory')->create();
+        $announcement->setSymbol('announcement');
+        $announcement->translate($this->getDefaultLocale())->setName('Announcements');
+        $announcement->translate($this->getDefaultLocale())->setSlug('announcement');
+        $announcement->translate($this->getDefaultLocale())->setCssClass('announcement');
+        $announcement->mergeNewTranslations();
+        $manager->persist($announcement);
+        $this->addReference('product_status_announcement', $announcement);
+
+        /** @var ProductStatusInterface $bestseller */
+        $novelty = $this->container->get('product_status.factory')->create();
+        $novelty->setSymbol('novelty');
+        $novelty->translate($this->getDefaultLocale())->setName('New products');
+        $novelty->translate($this->getDefaultLocale())->setSlug('novelty');
+        $novelty->translate($this->getDefaultLocale())->setCssClass('novelty');
+        $novelty->mergeNewTranslations();
+        $manager->persist($novelty);
+        $this->addReference('product_status_novelty', $novelty);
+
+        /** @var ProductStatusInterface $bestseller */
+        $promotion = $this->container->get('product_status.factory')->create();
+        $promotion->setSymbol('promotion');
+        $promotion->translate($this->getDefaultLocale())->setName('Promotions');
+        $promotion->translate($this->getDefaultLocale())->setSlug('promotion');
+        $promotion->translate($this->getDefaultLocale())->setCssClass('promotion');
+        $promotion->mergeNewTranslations();
+        $manager->persist($promotion);
+        $this->addReference('product_status_promotion', $novelty);
 
         $manager->flush();
     }

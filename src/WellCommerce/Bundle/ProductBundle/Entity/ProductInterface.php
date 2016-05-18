@@ -80,12 +80,12 @@ interface ProductInterface extends
     /**
      * @return Collection
      */
-    public function getStatuses() : Collection;
+    public function getDistinctions() : Collection;
 
     /**
-     * @return Collection
+     * @param Collection $distinctions
      */
-    public function setStatuses(Collection $statuses);
+    public function setDistinctions(Collection $distinctions);
 
     /**
      * @return Collection

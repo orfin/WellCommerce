@@ -69,7 +69,7 @@ class ProductDataSet extends AbstractDataSet
             'categoryRoute'    => 'IDENTITY(categories_translation.route)',
             'shop'             => 'product_shops.id',
             'photo'            => 'photos.path',
-            'status'           => 'statuses.id',
+            'status'           => 'IDENTITY(distinction.status)',
         ]);
 
         $configurator->setColumnTransformers([
@@ -90,9 +90,6 @@ class ProductDataSet extends AbstractDataSet
     {
         $queryBuilder = parent::getQueryBuilder($request);
 
-        $this->filterNotEnabled($queryBuilder);
-        $this->filterZeroPrices($queryBuilder);
-
         $queryBuilder->leftJoin(
             CurrencyRate::class,
             'currency_rate',
@@ -104,23 +101,5 @@ class ProductDataSet extends AbstractDataSet
         $queryBuilder->setParameter('date', (new \DateTime())->setTime(0, 0, 1));
 
         return $queryBuilder;
-    }
-
-    private function filterNotEnabled(QueryBuilder $queryBuilder)
-    {
-        $expression = $queryBuilder->expr()->eq('product.enabled', ':enabled1');
-        $queryBuilder->andWhere($expression);
-        $queryBuilder->setParameter('enabled1', true);
-
-        $expression = $queryBuilder->expr()->eq('categories.enabled', ':enabled2');
-        $queryBuilder->andWhere($expression);
-        $queryBuilder->setParameter('enabled2', true);
-    }
-
-    private function filterZeroPrices(QueryBuilder $queryBuilder)
-    {
-        $expression = $queryBuilder->expr()->gt('product.sellPrice.grossAmount', ':price');
-        $queryBuilder->andWhere($expression);
-        $queryBuilder->setParameter('price', 0);
     }
 }

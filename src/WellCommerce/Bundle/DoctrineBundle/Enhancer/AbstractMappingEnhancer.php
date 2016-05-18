@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\DoctrineBundle\Enhancer;
 
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
 use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 use WellCommerce\Bundle\DoctrineBundle\Definition\MappingDefinitionCollection;
 use WellCommerce\Bundle\DoctrineBundle\Definition\MappingDefinitionInterface;
@@ -28,7 +29,7 @@ use Wingu\OctopusCore\CodeGenerator\PHP\ParameterGenerator;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractMappingEnhancer implements MappingEnhancerInterface
+abstract class AbstractMappingEnhancer extends AbstractContainerAware implements MappingEnhancerInterface
 {
     abstract protected function configureMappingDefinition(MappingDefinitionCollection $collection);
 

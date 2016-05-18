@@ -15,6 +15,18 @@ WellCommerce\Bundle\CategoryBundle\Entity\Category:
             nullable: false
             options:
                 default: 0
+        productsCount:
+            type: integer
+            nullable: false
+            options:
+                default: 0
+            column: products_count
+        childrenCount:
+            type: integer
+            nullable: false
+            options:
+                default: 0
+            column: children_count
         enabled:
             type: boolean
             nullable: false
@@ -35,7 +47,7 @@ WellCommerce\Bundle\CategoryBundle\Entity\Category:
     manyToMany:
         products:
             targetEntity: WellCommerce\Bundle\ProductBundle\Entity\Product
-            fetch: LAZY
+            fetch: EXTRA_LAZY
             mappedBy: categories
         shops:
             targetEntity: WellCommerce\Bundle\ShopBundle\Entity\ShopInterface

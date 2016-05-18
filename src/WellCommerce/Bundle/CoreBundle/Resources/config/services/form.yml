@@ -87,6 +87,12 @@ services:
             - { name: form.element, alias: attribute_editor }
         shared: false
 
+    form.element.distinction_editor:
+        class: WellCommerce\Component\Form\Elements\Editor\DistinctionEditor
+        tags:
+            - { name: form.element, alias: distinction_editor }
+        shared: false
+
     form.element.text_field:
         class: WellCommerce\Component\Form\Elements\Input\TextField
         tags:

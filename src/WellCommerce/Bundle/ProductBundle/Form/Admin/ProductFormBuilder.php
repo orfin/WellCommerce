@@ -13,6 +13,7 @@ namespace WellCommerce\Bundle\ProductBundle\Form\Admin;
 
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
+use Symfony\Component\PropertyAccess\PropertyPath;
 use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
 use WellCommerce\Component\Form\DataTransformer\DateTransformer;
 use WellCommerce\Component\Form\Elements\ElementInterface;
@@ -320,16 +321,16 @@ class ProductFormBuilder extends AbstractFormBuilder
             'session_name' => $this->getRequestHelper()->getSessionName(),
         ]));
 
-        $statusesData = $form->addChild($this->getElement('nested_fieldset', [
-            'name'  => 'statuses_data',
-            'label' => $this->trans('product.form.fieldset.statuses')
+        $distinctionData = $form->addChild($this->getElement('nested_fieldset', [
+            'name'          => 'distinctions',
+            'label'         => $this->trans('product.form.fieldset.statuses'),
         ]));
 
-        $statusesData->addChild($this->getElement('multi_select', [
-            'name'        => 'statuses',
-            'label'       => $this->trans('product.label.statuses'),
-            'options'     => $this->get('product_status.dataset.admin')->getResult('select'),
-            'transformer' => $this->getRepositoryTransformer('collection', $this->get('product_status.repository'))
+        $distinctionData->addChild($this->getElement('distinction_editor', [
+            'name'        => 'distinctions',
+            'label'       => $this->trans('product.label.distinctions'),
+            'transformer' => $this->getRepositoryTransformer('distinction_collection', $this->get('product_status.repository')),
+            'statuses'    => $this->get('product_status.dataset.admin')->getResult('select')
         ]));
 
         if ($this->getAttributeGroups()->count()) {

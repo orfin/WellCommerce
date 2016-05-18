@@ -95,6 +95,15 @@ services:
             - [setVariantManager, ['@variant.manager']]
         shared: false
 
+    form.distinction_collection.data_transformer:
+        class: WellCommerce\Bundle\ProductBundle\Form\DataTransformer\ProductDistinctionCollectionToArrayTransformer
+        tags:
+            - { name: form.data_transformer, alias: distinction_collection }
+        arguments: ['@doctrine.helper']
+        calls:
+            - [setProductDistinctionManager, ['@product_distinction.manager']]
+        shared: false
+
     dataset.transformer.category:
         class: WellCommerce\Bundle\ProductBundle\DataSet\Transformer\CategoryTransformer
         tags:

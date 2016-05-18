@@ -12,5 +12,7 @@ coupon:
         modifier_value: Wartość modyfikatora
         modifier_type_percent: '%'
         modifier_type_subtract: '-'
+        accept: Zapisz
+        remove: Usuń
     error:
         not_found: Kod kuponu jest nieprawidłowy

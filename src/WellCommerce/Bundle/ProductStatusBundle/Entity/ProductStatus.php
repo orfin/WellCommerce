@@ -29,18 +29,15 @@ class ProductStatus extends AbstractEntity implements ProductStatusInterface
     use Timestampable;
     use Blameable;
 
-    /**
-     * @var Collection
-     */
-    protected $products;
+    protected $symbol;
 
-    public function getProducts() : Collection
+    public function getSymbol() : string
     {
-        return $this->products;
+        return $this->symbol;
     }
 
-    public function setProducts(Collection $collection)
+    public function setSymbol(string $symbol)
     {
-        $this->products = $collection;
+        $this->symbol = $symbol;
     }
 }

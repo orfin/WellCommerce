@@ -16,6 +16,7 @@ use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\UserInterface as BaseUserInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
+use WellCommerce\Bundle\DoctrineBundle\Behaviours\Enableable\EnableableInterface;
 use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 
 /**
@@ -23,7 +24,7 @@ use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface UserInterface extends \Serializable, EquatableInterface, BaseUserInterface, TimestampableInterface, EntityInterface
+interface UserInterface extends \Serializable, EquatableInterface, BaseUserInterface, TimestampableInterface, EntityInterface, EnableableInterface
 {
     /**
      * @return string
@@ -110,16 +111,6 @@ interface UserInterface extends \Serializable, EquatableInterface, BaseUserInter
      * @param Collection $groups
      */
     public function setGroups(Collection $groups);
-    
-    /**
-     * @return bool
-     */
-    public function getEnabled() : bool;
-    
-    /**
-     * @param bool $enabled
-     */
-    public function setEnabled(bool $enabled);
     
     /**
      * @return string

@@ -90,3 +90,8 @@ services:
 
     category.storage:
         class: WellCommerce\Bundle\CategoryBundle\Storage\CategoryStorage
+
+    category.doctrine.event_subscriber:
+        class: WellCommerce\Bundle\CategoryBundle\EventListener\CategoryDoctrineEventSubscriber
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }

@@ -50,69 +50,70 @@ class Category extends AbstractEntity implements CategoryInterface
      * @var Collection
      */
     protected $products;
+    
+    /**
+     * @var int
+     */
+    protected $productsCount;
 
     /**
-     * {@inheritdoc}
+     * @var int
      */
+    protected $childrenCount;
+    
     public function getParent()
     {
         return $this->parent;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setParent(CategoryInterface $parent = null)
     {
         $this->parent = $parent;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setChildren(Collection $children)
     {
         $this->children = $children;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getChildren()
+    public function getChildren() : Collection
     {
         return $this->children;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addChild(CategoryInterface $child)
     {
         $this->children[] = $child;
         $child->setParent($this);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getProducts()
+    public function getProducts() : Collection
     {
         return $this->products;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setProducts(Collection $products)
     {
         $this->products = $products;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function addProduct(ProductInterface $product)
+    public function getProductsCount() : int
     {
-        $this->products[] = $product;
+        return $this->productsCount;
+    }
+
+    public function setProductsCount(int $productsCount)
+    {
+        $this->productsCount = $productsCount;
+    }
+
+    public function getChildrenCount() : int
+    {
+        return $this->childrenCount;
+    }
+
+    public function setChildrenCount(int $childrenCount)
+    {
+        $this->childrenCount = $childrenCount;
     }
 }

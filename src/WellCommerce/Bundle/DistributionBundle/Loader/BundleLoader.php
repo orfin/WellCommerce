@@ -93,11 +93,16 @@ class BundleLoader
             \Knp\DoctrineBehaviors\Bundle\DoctrineBehaviorsBundle::class,
             \Cache\AdapterBundle\CacheAdapterBundle::class,
             \WellCommerce\Bundle\AppBundle\WellCommerceAppBundle::class,
+            \EmanueleMinotto\TwigCacheBundle\TwigCacheBundle::class
         ];
 
         if (in_array($this->kernel->getEnvironment(), ['dev', 'test'])) {
             $bundles[] = \Symfony\Bundle\WebProfilerBundle\WebProfilerBundle::class;
             $bundles[] = \Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle::class;
+        }
+
+        if (in_array($this->kernel->getEnvironment(), ['prod'])) {
+            $bundles[] = \Symfony\Bundle\WebProfilerBundle\WebProfilerBundle::class;
         }
 
         return $bundles;

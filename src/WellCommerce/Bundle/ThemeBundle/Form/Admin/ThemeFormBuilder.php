@@ -22,8 +22,6 @@ use WellCommerce\Component\Form\Elements\FormInterface;
  */
 class ThemeFormBuilder extends AbstractFormBuilder
 {
-    const FORM_INIT_EVENT = 'theme.form.init';
-
     /**
      * {@inheritdoc}
      */

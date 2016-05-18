@@ -15,8 +15,9 @@ WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatus:
             id: true
             generator:
                 strategy: IDENTITY
-    manyToMany:
-        products:
-            targetEntity: WellCommerce\Bundle\ProductBundle\Entity\Product
-            fetch: LAZY
-            mappedBy: statuses
+    fields:
+        symbol:
+            type: string
+            length: 64
+            nullable: false
+            unique: true

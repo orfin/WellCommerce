@@ -133,7 +133,7 @@ final class DataSetQueryBuilder implements DataSetQueryBuilderInterface
         $source     = $column->getSource();
         $alias      = $column->getAlias();
         $operator   = $condition->getOperator();
-        $identifier = sprintf('%s_%s', $condition->getIdentifier(), $this->paramIteration++);
+        $identifier = $condition->getIdentifier();
 
         if ($column->isAggregated()) {
             $expression = $queryBuilder->expr()->{$operator}($alias, ':' . $identifier);

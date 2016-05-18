@@ -102,13 +102,9 @@ final class SecurityHelper implements SecurityHelperInterface
 
     public function getFirewallNameForRequest(Request $request)
     {
-        foreach ($this->firewallMap as $firewallName => $requestMatcher) {
-            if (null === $requestMatcher || $requestMatcher->matches($request)) {
-                return $firewallName;
-            }
-        }
+        list($mode,) = explode('/', $request->getPathInfo());
 
-        return null;
+        return ($mode === 'admin') ?? 'client';
     }
 
     public function generateRandomPassword(int $length = 8) : string

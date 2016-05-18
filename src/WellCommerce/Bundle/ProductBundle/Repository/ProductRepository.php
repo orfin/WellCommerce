@@ -37,9 +37,10 @@ class ProductRepository extends EntityRepository implements ProductRepositoryInt
         $queryBuilder->leftJoin('producers.translations', 'producers_translation');
         $queryBuilder->leftJoin('product.productPhotos', 'gallery', Expr\Join::WITH, 'gallery.mainPhoto = :mainPhoto');
         $queryBuilder->leftJoin('gallery.photo', 'photos');
-        $queryBuilder->leftJoin('product.statuses', 'statuses');
+        $queryBuilder->leftJoin('product.distinctions', 'distinction', Expr\Join::WITH, 'distinction.status = :status');
         $queryBuilder->leftJoin('product.shops', 'product_shops');
         $queryBuilder->setParameter('mainPhoto', 1);
+        $queryBuilder->setParameter('status', 0);
 
         return $queryBuilder;
     }

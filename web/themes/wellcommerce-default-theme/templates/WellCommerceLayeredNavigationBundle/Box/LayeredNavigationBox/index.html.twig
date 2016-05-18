@@ -15,7 +15,7 @@
 
                 <fieldset>
                     <h5>{% trans %}product.label.layered_navigation.brand{% endtrans %}</h5>
-                    {% for producer in producers.rows %}
+                    {% for producer in producers().rows %}
                         <div class="checkbox">
                             <label>
                                 <input type="checkbox" name="producers[]" value="{{ producer.id }}" {% if producer.id in activeProducers %}checked{% endif %}>

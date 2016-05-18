@@ -23,7 +23,8 @@ use WellCommerce\Component\Form\FormBuilderInterface;
  */
 final class FormEvent extends Event
 {
-    const FORM_INIT_EVENT = 'form_init';
+    const FORM_PRE_INIT_EVENT  = 'pre_form_init';
+    const FORM_POST_INIT_EVENT = 'post_form_init';
 
     private $formBuilder;
     private $form;

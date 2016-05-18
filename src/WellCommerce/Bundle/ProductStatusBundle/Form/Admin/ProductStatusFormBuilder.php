@@ -31,6 +31,14 @@ class ProductStatusFormBuilder extends AbstractFormBuilder
             'label' => $this->trans('common.fieldset.general')
         ]));
 
+        $mainData->addChild($this->getElement('text_field', [
+            'name'  => 'symbol',
+            'label' => $this->trans('common.label.symbol'),
+            'rules' => [
+                $this->getRule('required')
+            ]
+        ]));
+
         $languageData = $mainData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
             'label'       => $this->trans('common.fieldset.translations'),

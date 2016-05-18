@@ -24,7 +24,6 @@ interface FormInterface extends ElementInterface
     const TABS_VERTICAL   = 0;
     const TABS_HORIZONTAL = 1;
     const FORM_METHOD     = 'POST';
-    const FORM_INIT_EVENT = 'form.init';
 
     /**
      * @param FormHandlerInterface $formHandler

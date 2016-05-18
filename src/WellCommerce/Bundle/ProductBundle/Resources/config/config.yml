@@ -15,6 +15,12 @@ well_commerce_product:
                 generator: WellCommerce\Bundle\ProductBundle\Routing\ProductRouteGenerator
                 defaults:
                     _controller: product.controller.front:indexAction
+        product_distinction:
+            orm:
+                factory: WellCommerce\Bundle\ProductBundle\Factory\ProductDistinctionFactory
+                repository: WellCommerce\Bundle\ProductBundle\Repository\ProductDistinctionRepository
+                mapping: "@WellCommerceProductBundle/Resources/config/doctrine/ProductDistinction.orm.yml"
+                entity: WellCommerce\Bundle\ProductBundle\Entity\ProductDistinction
         variant:
             orm:
                 factory: WellCommerce\Bundle\ProductBundle\Factory\VariantFactory

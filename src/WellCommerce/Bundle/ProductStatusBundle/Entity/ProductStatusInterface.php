@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\ProductStatusBundle\Entity;
 
-use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
@@ -25,7 +24,7 @@ use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
  */
 interface ProductStatusInterface extends EntityInterface, TimestampableInterface, TranslatableInterface, BlameableInterface
 {
-    public function getProducts() : Collection;
+    public function getSymbol() : string;
 
-    public function setProducts(Collection $collection);
+    public function setSymbol(string $symbol);
 }

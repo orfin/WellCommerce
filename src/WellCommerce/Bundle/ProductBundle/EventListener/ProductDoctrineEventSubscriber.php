@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\ProductBundle\EventListener;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
+use WellCommerce\Bundle\CategoryBundle\Entity\CategoryInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\VariantInterface;
 use WellCommerce\Bundle\TaxBundle\Helper\TaxHelper;
@@ -109,7 +110,7 @@ class ProductDoctrineEventSubscriber implements EventSubscriber
     /**
      * Calculates new amount for attribute
      *
-     * @param VariantInterface $variant
+     * @param VariantInterface          $variant
      * @param                           $amount
      *
      * @return float
@@ -153,10 +154,14 @@ class ProductDoctrineEventSubscriber implements EventSubscriber
 
     protected function syncProductStock(ProductInterface $product)
     {
-        $trackStock = $product->getTrackStock();
+        $trackStock       = $product->getTrackStock();
+        $stock            = $product->getStock();
+        $grossPrice       = $product->getSellPrice()->getFinalGrossAmount();
+        $isStockAvailable = (true === $trackStock) ? $stock > 0 : 1;
+        $isPriceNonZero   = $grossPrice > 0;
 
-        if (true === $trackStock) {
-            $product->setEnabled(($product->getStock() > 0));
+        if (false === $isStockAvailable && false === $isPriceNonZero) {
+            $product->setEnabled(false);
         }
     }
 }

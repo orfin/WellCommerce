@@ -30,8 +30,6 @@ class CategoryRepository extends EntityRepository implements CategoryRepositoryI
         $queryBuilder = $this->getQueryBuilder();
         $queryBuilder->groupBy('category.id');
         $queryBuilder->leftJoin('category.translations', 'category_translation');
-        $queryBuilder->leftJoin('category.children', 'category_children');
-        $queryBuilder->leftJoin('category.products', 'category_products');
         $queryBuilder->leftJoin('category.shops', 'category_shops');
 
         return $queryBuilder;

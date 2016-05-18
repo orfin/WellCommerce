@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\ProductBundle\Factory;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\Bundle\AppBundle\Entity\Dimension;
 use WellCommerce\Bundle\AppBundle\Entity\DiscountablePriceInterface;
 use WellCommerce\Bundle\AppBundle\Entity\PriceInterface;
@@ -27,14 +26,6 @@ use WellCommerce\Bundle\UnitBundle\Entity\UnitInterface;
  */
 class ProductFactory extends AbstractEntityFactory
 {
-    /**
-     * @var string
-     */
-    protected $supportsInterface = ProductInterface::class;
-
-    /**
-     * @return ProductInterface
-     */
     public function create() : ProductInterface
     {
         $unit = $this->getDefaultUnit();
@@ -42,10 +33,10 @@ class ProductFactory extends AbstractEntityFactory
 
         /** @var  $product ProductInterface */
         $product = $this->init();
-        $product->setCategories(new ArrayCollection());
-        $product->setProductPhotos(new ArrayCollection());
-        $product->setStatuses(new ArrayCollection());
-        $product->setVariants(new ArrayCollection());
+        $product->setCategories($this->createEmptyCollection());
+        $product->setProductPhotos($this->createEmptyCollection());
+        $product->setDistinctions($this->createEmptyCollection());
+        $product->setVariants($this->createEmptyCollection());
         $product->setShops($this->getDefaultShops());
         $product->setEnabled(true);
         $product->setSellPrice($this->createDefaultDiscountablePrice());

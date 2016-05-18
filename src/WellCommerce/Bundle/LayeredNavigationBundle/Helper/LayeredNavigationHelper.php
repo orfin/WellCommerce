@@ -54,6 +54,8 @@ final class LayeredNavigationHelper extends AbstractContainerAware implements La
                 } else {
                     $replacements[$parameterName] = $formParams[$parameterName];
                 }
+            }else{
+                $replacements[$parameterName] = 0;
             }
         }
         

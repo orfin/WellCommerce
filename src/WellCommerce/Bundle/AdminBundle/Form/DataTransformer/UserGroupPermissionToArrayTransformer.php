@@ -36,7 +36,7 @@ class UserGroupPermissionToArrayTransformer extends CollectionToArrayTransformer
         if ($modelData instanceof Collection) {
             $modelData->map(function (UserGroupPermission $userGroupPermission) use (&$values) {
                 list($permissionType, $action) = explode('.', $userGroupPermission->getName());
-                $values[$permissionType][$action] = $userGroupPermission->getEnabled();
+                $values[$permissionType][$action] = $userGroupPermission->isEnabled();
             });
         }
 

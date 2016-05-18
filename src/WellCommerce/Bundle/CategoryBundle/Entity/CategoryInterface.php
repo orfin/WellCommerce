@@ -36,43 +36,25 @@ interface CategoryInterface extends
     ShopCollectionAwareInterface,
     HierarchyAwareInterface
 {
-    /**
-     * @return null|CategoryInterface
-     */
     public function getParent();
 
-    /**
-     * @param CategoryInterface|null $parent
-     */
     public function setParent(CategoryInterface $parent = null);
 
-    /**
-     * @param Collection $children
-     */
     public function setChildren(Collection $children);
 
-    /**
-     * @return Collection
-     */
-    public function getChildren();
+    public function getChildren() : Collection;
 
-    /**
-     * @param CategoryInterface $child
-     */
     public function addChild(CategoryInterface $child);
 
-    /**
-     * @return Collection
-     */
-    public function getProducts();
+    public function getProducts() : Collection;
 
-    /**
-     * @param Collection $products
-     */
     public function setProducts(Collection $products);
 
-    /**
-     * @param ProductInterface $product
-     */
-    public function addProduct(ProductInterface $product);
+    public function getProductsCount() : int;
+
+    public function setProductsCount(int $productsCount);
+
+    public function getChildrenCount() : int;
+
+    public function setChildrenCount(int $childrenCount);
 }
