@@ -19,12 +19,15 @@ use WellCommerce\Bundle\AppBundle\Entity\DiscountablePrice;
 use WellCommerce\Bundle\AppBundle\Entity\Price;
 use WellCommerce\Bundle\AvailabilityBundle\DataFixtures\ORM\LoadAvailabilityData;
 use WellCommerce\Bundle\CategoryBundle\DataFixtures\ORM\LoadCategoryData;
+use WellCommerce\Bundle\CategoryBundle\Entity\CategoryInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Sluggable;
 use WellCommerce\Bundle\CurrencyBundle\DataFixtures\ORM\LoadCurrencyData;
 use WellCommerce\Bundle\DoctrineBundle\DataFixtures\AbstractDataFixture;
 use WellCommerce\Bundle\MediaBundle\DataFixtures\ORM\LoadMediaData;
 use WellCommerce\Bundle\ProducerBundle\DataFixtures\ORM\LoadProducerData;
 use WellCommerce\Bundle\ProductBundle\Entity\Product;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductDistinction;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductPhoto;
 use WellCommerce\Bundle\TaxBundle\DataFixtures\ORM\LoadTaxData;
 use WellCommerce\Bundle\UnitBundle\DataFixtures\ORM\LoadUnitData;
@@ -57,9 +60,19 @@ class LoadProductData extends AbstractDataFixture
             $names[$name] = $name;
         }
 
+        $products = new ArrayCollection();
         foreach ($names as $name) {
-            $this->createRandomProduct($name, $manager);
+            $products->add($this->createRandomProduct($name, $manager));
         }
+
+        $manager->flush();
+        
+        $products->map(function (ProductInterface $product) {
+            $product->getCategories()->map(function (CategoryInterface $category) {
+                $category->setProductsCount($category->getProducts()->count());
+                $category->setChildrenCount($category->getChildren()->count());
+            });
+        });
 
         $manager->flush();
     }
@@ -122,7 +135,37 @@ class LoadProductData extends AbstractDataFixture
         $product->setPackageSize(1);
         $product->setWeight(rand(0, 5));
 
+        $distinctions = new ArrayCollection();
+
+        $distinction  = new ProductDistinction();
+        $distinction->setProduct($product);
+        $distinction->setStatus($this->getReference('product_status_bestseller'));
+        $manager->persist($distinction);
+        $distinctions->add($distinction);
+
+        $distinction  = new ProductDistinction();
+        $distinction->setProduct($product);
+        $distinction->setStatus($this->getReference('product_status_featured'));
+        $manager->persist($distinction);
+        $distinctions->add($distinction);
+
+        $distinction  = new ProductDistinction();
+        $distinction->setProduct($product);
+        $distinction->setStatus($this->getReference('product_status_novelty'));
+        $manager->persist($distinction);
+        $distinctions->add($distinction);
+
+        $distinction  = new ProductDistinction();
+        $distinction->setProduct($product);
+        $distinction->setStatus($this->getReference('product_status_promotion'));
+        $manager->persist($distinction);
+        $distinctions->add($distinction);
+
+        $product->setDistinctions($distinctions);
+        
         $manager->persist($product);
+        
+        return $product;
     }
 
     protected function getPhotos(Product $product, ObjectManager $manager)

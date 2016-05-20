@@ -15,7 +15,7 @@
 				<a class="collapsed coll" data-toggle="collapse" href="#categories" aria-expanded="false" aria-controls="#categories">Categories <span class="caret bordered"></span></a>
 				<ul id="categories" class="subcategories collapse">
 					{% for category in categoriesTree() %}
-					<li><a href=">{{ category.route }}">{{ category.name }} <small>({{ category.products }})</small></a></li>
+					<li><a href=">{{ category.route }}">{{ category.name }} <small>({{ category.products_count }})</small></a></li>
 					{% endfor %}
 				</ul>
 			</li>

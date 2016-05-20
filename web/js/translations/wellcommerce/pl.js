@@ -173,6 +173,7 @@
     Translator.add("category.heading.add", "Dodaj kategori\u0119", "wellcommerce", "pl");
     Translator.add("category.heading.edit", "Edytuj kategori\u0119", "wellcommerce", "pl");
     Translator.add("category.comment.enabled", "W\u0142\u0105cz widoczno\u015b\u0107 kategorii", "wellcommerce", "pl");
+    Translator.add("category.flash.empty_category", "Kategoria jest pusta.", "wellcommerce", "pl");
     Translator.add("client.label.username", "Login (e-mail)", "wellcommerce", "pl");
     Translator.add("client.label.password", "Has\u0142o", "wellcommerce", "pl");
     Translator.add("client.label.confirm_password", "Potwierd\u017a has\u0142o", "wellcommerce", "pl");
@@ -257,6 +258,8 @@
     Translator.add("coupon.label.modifier_value", "Warto\u015b\u0107 modyfikatora", "wellcommerce", "pl");
     Translator.add("coupon.label.modifier_type_percent", "%", "wellcommerce", "pl");
     Translator.add("coupon.label.modifier_type_subtract", "-", "wellcommerce", "pl");
+    Translator.add("coupon.label.accept", "Zapisz", "wellcommerce", "pl");
+    Translator.add("coupon.label.remove", "Usu\u0144", "wellcommerce", "pl");
     Translator.add("coupon.error.not_found", "Kod kuponu jest nieprawid\u0142owy", "wellcommerce", "pl");
     Translator.add("currency.heading.index", "Waluty", "wellcommerce", "pl");
     Translator.add("currency.heading.add", "Dodaj walut\u0119", "wellcommerce", "pl");
@@ -327,6 +330,7 @@
     Translator.add("order.heading.order_total", "Suma", "wellcommerce", "pl");
     Translator.add("order.heading.products", "Produkty", "wellcommerce", "pl");
     Translator.add("order.heading.contact_details", "Dane kontaktowe", "wellcommerce", "pl");
+    Translator.add("order.heading.products_in_cart", "Produkty w Twoim koszyku", "wellcommerce", "pl");
     Translator.add("order.button.confirm", "Przejd\u017a do potwierdzenia", "wellcommerce", "pl");
     Translator.add("order.button.add_product", "Dodaj produkt", "wellcommerce", "pl");
     Translator.add("order.label.id", "ID", "wellcommerce", "pl");
@@ -334,6 +338,8 @@
     Translator.add("order.label.client", "Klient", "wellcommerce", "pl");
     Translator.add("order.label.product_total", "Warto\u015b\u0107\u00a0produkt\u00f3w", "wellcommerce", "pl");
     Translator.add("order.label.shipping_total", "Koszty wysy\u0142ki", "wellcommerce", "pl");
+    Translator.add("order.label.shipping_cost", "Przesy\u0142ka", "wellcommerce", "pl");
+    Translator.add("order.label.coupon_discount", "Kupon", "wellcommerce", "pl");
     Translator.add("order.label.order_total", "Warto\u015b\u0107 zam\u00f3wienia", "wellcommerce", "pl");
     Translator.add("order.label.variant", "Wariant", "wellcommerce", "pl");
     Translator.add("order.label.weight", "Waga", "wellcommerce", "pl");
@@ -348,7 +354,7 @@
     Translator.add("order.label.product_name", "Produkt", "wellcommerce", "pl");
     Translator.add("order.label.tax_value", "Podatek", "wellcommerce", "pl");
     Translator.add("order.label.gross_amount", "Cena", "wellcommerce", "pl");
-    Translator.add("order.label.gross_total", "Suma", "wellcommerce", "pl");
+    Translator.add("order.label.gross_total", "\u0141\u0105cznie", "wellcommerce", "pl");
     Translator.add("order.label.currency", "Waluta", "wellcommerce", "pl");
     Translator.add("order.description.product_total", "Warto\u015b\u0107 produkt\u00f3w", "wellcommerce", "pl");
     Translator.add("order.description.shipping_cost", "Koszty wysy\u0142ki", "wellcommerce", "pl");

@@ -1,18 +1,26 @@
 parameters:
     search_term_min_length: 3
+    search_index_name: 'wellcommerce'
 
 well_commerce_search:
-    engine:
-        indexes:
-            product:
-                document:
-                    factory: WellCommerce\Bundle\SearchBundle\Factory\ZendLuceneDocumentFactory
-                    context: WellCommerce\Bundle\SearchBundle\Context\ProductContext
-                adapter:
-                    class: WellCommerce\Bundle\SearchBundle\Adapter\ZendLuceneAdapter
-                    options:
-                        index_file: "%kernel.root_dir%/lucene/product"
-                        max_buffered_docs: 10
-                        max_merge_docs: 100000
-                        merge_factor: 10
-                repository: product.repository
+    engines:
+        elasticsearch:
+            adapter:
+                class: WellCommerce\Component\SearchEngine\Adapter\ElasticSearchAdapter
+                options:
+                    index_name: '%search_index_name%'
+                    number_of_shards: 2
+                    number_of_replicas: 0
+            query_builder:
+                class: WellCommerce\Component\SearchEngine\Builder\ElasticSearchQueryBuilder
+        lucene:
+            adapter:
+                class: WellCommerce\Component\SearchEngine\Adapter\ZendLuceneAdapter
+                options:
+                    index_file: "%kernel.root_dir%/lucene/%search_index_name%"
+                    max_buffered_docs: 10
+                    max_merge_docs: 100000
+                    merge_factor: 10
+            query_builder:
+                class: WellCommerce\Component\SearchEngine\Builder\ZendLuceneQueryBuilder
+

@@ -26,32 +26,26 @@ class Configuration extends BaseConfiguration
     {
         $builder = new TreeBuilder();
         $node    =
-            $builder->root('engine')
-                ->children()
-                    ->arrayNode('indexes')->isRequired()
-                        ->useAttributeAsKey('name')
-                        ->prototype('array')
-                            ->children()
-                                ->arrayNode('adapter')->isRequired()
-                                    ->children()
-                                        ->scalarNode('class')->isRequired()->end()
-                                        ->arrayNode('options')
-                                            ->useAttributeAsKey('name')
-                                            ->prototype('scalar')->end()
-                                        ->end()
-                                    ->end()
-                                ->end()
-                                ->scalarNode('repository')->isRequired()->end()
-                                ->arrayNode('document')->isRequired()
-                                    ->children()
-                                        ->scalarNode('factory')->isRequired()->end()
-                                        ->scalarNode('context')->isRequired()->end()
+            $builder->root('engines')
+                    ->useAttributeAsKey('name')
+                    ->prototype('array')
+                        ->children()
+                            ->arrayNode('adapter')->isRequired()
+                                ->children()
+                                    ->scalarNode('class')->isRequired()->end()
+                                    ->arrayNode('options')
+                                        ->useAttributeAsKey('name')
+                                        ->prototype('scalar')->end()
                                     ->end()
                                 ->end()
                             ->end()
+                            ->arrayNode('query_builder')->isRequired()
+                                ->children()
+                                    ->scalarNode('class')->isRequired()->end()
+                                ->end()
+                            ->end()
                         ->end()
-                    ->end()
-                ->end();
+                    ->end();
 
         return $node;
     }

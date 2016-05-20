@@ -12,6 +12,8 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Entity;
 
+use Doctrine\Common\Collections\Collection;
+
 /**
  * Interface TranslatableInterface
  *
@@ -19,6 +21,9 @@ namespace WellCommerce\Bundle\CoreBundle\Entity;
  */
 interface TranslatableInterface
 {
+    /**
+     * @return Collection
+     */
     public function getTranslations();
     
     public function getNewTranslations();

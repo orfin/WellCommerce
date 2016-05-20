@@ -4,9 +4,60 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "192c3de4bd5d02b491f4a9ead6aa7167",
-    "content-hash": "595dd28d8947d43f901230f224ebb734",
+    "hash": "ce519378fd95f730614fa2e132259442",
+    "content-hash": "bcc58ad97488770312f82861a381ad81",
     "packages": [
+        {
+            "name": "asm89/twig-cache-extension",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/asm89/twig-cache-extension.git",
+                "reference": "7b16bd429d3d1681ffb26319d2d9db1920cb9389"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/asm89/twig-cache-extension/zipball/7b16bd429d3d1681ffb26319d2d9db1920cb9389",
+                "reference": "7b16bd429d3d1681ffb26319d2d9db1920cb9389",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "twig/twig": "~1.0"
+            },
+            "require-dev": {
+                "doctrine/cache": "~1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexander",
+                    "email": "iam.asm89@gmail.com"
+                }
+            ],
+            "description": "Cache fragments of templates directly within Twig.",
+            "homepage": "https://github.com/asm89/twig-cache-extension",
+            "keywords": [
+                "cache",
+                "extension",
+                "twig"
+            ],
+            "time": "2016-02-14 13:55:53"
+        },
         {
             "name": "beberlei/DoctrineExtensions",
             "version": "dev-master",
@@ -1556,6 +1607,66 @@
             "time": "2016-01-05 21:34:58"
         },
         {
+            "name": "emanueleminotto/twig-cache-bundle",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/EmanueleMinotto/TwigCacheBundle.git",
+                "reference": "37aa9e138d730f2089e2d57703e2c5b35ecd8b96"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/EmanueleMinotto/TwigCacheBundle/zipball/37aa9e138d730f2089e2d57703e2c5b35ecd8b96",
+                "reference": "37aa9e138d730f2089e2d57703e2c5b35ecd8b96",
+                "shasum": ""
+            },
+            "require": {
+                "asm89/twig-cache-extension": "^1.0"
+            },
+            "require-dev": {
+                "doctrine/cache": "^1.4",
+                "matthiasnoback/symfony-dependency-injection-test": "^0.7.6",
+                "phpunit/phpunit": "^4.4|^5.0",
+                "symfony/framework-bundle": "^2.6|^3.0",
+                "symfony/twig-bundle": "^2.6|^3.0"
+            },
+            "suggest": {
+                "itinance/doctrine-cache-adapter-with-site-context": "a Cache Adapter used to respect the current site context in a white-label/multi-site environment"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ],
+                "psr-4": {
+                    "EmanueleMinotto\\TwigCacheBundle\\": "."
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Emanuele Minotto",
+                    "email": "minottoemanuele@gmail.com"
+                }
+            ],
+            "description": "Symfony 2 Bundle for asm89/twig-cache-extension",
+            "keywords": [
+                "bundle",
+                "cache",
+                "symfony",
+                "twig"
+            ],
+            "time": "2016-04-05 07:36:38"
+        },
+        {
             "name": "evenement/evenement",
             "version": "dev-master",
             "source": {
@@ -1868,16 +1979,16 @@
         },
         {
             "name": "guzzlehttp/promises",
-            "version": "1.1.0",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/promises.git",
-                "reference": "bb9024c526b22f3fe6ae55a561fd70653d470aa8"
+                "reference": "c10d860e2a9595f8883527fa0021c7da9e65f579"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/promises/zipball/bb9024c526b22f3fe6ae55a561fd70653d470aa8",
-                "reference": "bb9024c526b22f3fe6ae55a561fd70653d470aa8",
+                "url": "https://api.github.com/repos/guzzle/promises/zipball/c10d860e2a9595f8883527fa0021c7da9e65f579",
+                "reference": "c10d860e2a9595f8883527fa0021c7da9e65f579",
                 "shasum": ""
             },
             "require": {
@@ -1915,7 +2026,7 @@
             "keywords": [
                 "promise"
             ],
-            "time": "2016-03-08 01:15:46"
+            "time": "2016-05-18 16:56:05"
         },
         {
             "name": "guzzlehttp/psr7",
@@ -3992,12 +4103,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-intl-icu.git",
-                "reference": "8328069d9f5322f0e7b3c3518485acfdc94c3942"
+                "reference": "0f8dc2c45f69f8672379e9210bca4a115cd5146f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-intl-icu/zipball/8328069d9f5322f0e7b3c3518485acfdc94c3942",
-                "reference": "8328069d9f5322f0e7b3c3518485acfdc94c3942",
+                "url": "https://api.github.com/repos/symfony/polyfill-intl-icu/zipball/0f8dc2c45f69f8672379e9210bca4a115cd5146f",
+                "reference": "0f8dc2c45f69f8672379e9210bca4a115cd5146f",
                 "shasum": ""
             },
             "require": {
@@ -4010,7 +4121,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1-dev"
+                    "dev-master": "1.2-dev"
                 }
             },
             "autoload": {
@@ -4042,7 +4153,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2016-02-26 16:18:12"
+            "time": "2016-05-18 14:26:46"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -4050,12 +4161,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "6bab34bbffa5f5ac079fdc4a68e143f158e87b7d"
+                "reference": "dff51f72b0706335131b00a7f49606168c582594"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/6bab34bbffa5f5ac079fdc4a68e143f158e87b7d",
-                "reference": "6bab34bbffa5f5ac079fdc4a68e143f158e87b7d",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/dff51f72b0706335131b00a7f49606168c582594",
+                "reference": "dff51f72b0706335131b00a7f49606168c582594",
                 "shasum": ""
             },
             "require": {
@@ -4067,7 +4178,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1-dev"
+                    "dev-master": "1.2-dev"
                 }
             },
             "autoload": {
@@ -4101,7 +4212,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2016-04-15 07:04:29"
+            "time": "2016-05-18 14:26:46"
         },
         {
             "name": "symfony/polyfill-php56",
@@ -4109,12 +4220,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php56.git",
-                "reference": "4d891fff050101a53a4caabb03277284942d1ad9"
+                "reference": "3edf57a8fbf9a927533344cef65ad7e1cf31030a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php56/zipball/4d891fff050101a53a4caabb03277284942d1ad9",
-                "reference": "4d891fff050101a53a4caabb03277284942d1ad9",
+                "url": "https://api.github.com/repos/symfony/polyfill-php56/zipball/3edf57a8fbf9a927533344cef65ad7e1cf31030a",
+                "reference": "3edf57a8fbf9a927533344cef65ad7e1cf31030a",
                 "shasum": ""
             },
             "require": {
@@ -4124,7 +4235,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1-dev"
+                    "dev-master": "1.2-dev"
                 }
             },
             "autoload": {
@@ -4157,7 +4268,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2016-01-20 09:13:37"
+            "time": "2016-05-18 14:26:46"
         },
         {
             "name": "symfony/polyfill-php70",
@@ -4165,12 +4276,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php70.git",
-                "reference": "f1e0e50388b4402b5849f830b8340328fcd2b8da"
+                "reference": "a42f4b6b05ed458910f8af4c4e1121b0101b2d85"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php70/zipball/f1e0e50388b4402b5849f830b8340328fcd2b8da",
-                "reference": "f1e0e50388b4402b5849f830b8340328fcd2b8da",
+                "url": "https://api.github.com/repos/symfony/polyfill-php70/zipball/a42f4b6b05ed458910f8af4c4e1121b0101b2d85",
+                "reference": "a42f4b6b05ed458910f8af4c4e1121b0101b2d85",
                 "shasum": ""
             },
             "require": {
@@ -4180,7 +4291,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1-dev"
+                    "dev-master": "1.2-dev"
                 }
             },
             "autoload": {
@@ -4216,7 +4327,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2016-04-30 08:55:12"
+            "time": "2016-05-18 14:26:46"
         },
         {
             "name": "symfony/polyfill-util",
@@ -4224,12 +4335,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-util.git",
-                "reference": "8de62801aa12bc4dfcf85eef5d21981ae7bb3cc4"
+                "reference": "ef830ce3d218e622b221d6bfad42c751d974bf99"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-util/zipball/8de62801aa12bc4dfcf85eef5d21981ae7bb3cc4",
-                "reference": "8de62801aa12bc4dfcf85eef5d21981ae7bb3cc4",
+                "url": "https://api.github.com/repos/symfony/polyfill-util/zipball/ef830ce3d218e622b221d6bfad42c751d974bf99",
+                "reference": "ef830ce3d218e622b221d6bfad42c751d974bf99",
                 "shasum": ""
             },
             "require": {
@@ -4238,7 +4349,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1-dev"
+                    "dev-master": "1.2-dev"
                 }
             },
             "autoload": {
@@ -4268,7 +4379,7 @@
                 "polyfill",
                 "shim"
             ],
-            "time": "2016-01-20 09:13:37"
+            "time": "2016-05-18 14:26:46"
         },
         {
             "name": "symfony/swiftmailer-bundle",
@@ -4333,12 +4444,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "2484087a12455f9ad156841b9049be01dc383599"
+                "reference": "720dac1fbc12f56697c8aab3728ae91e3d48c35b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/2484087a12455f9ad156841b9049be01dc383599",
-                "reference": "2484087a12455f9ad156841b9049be01dc383599",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/720dac1fbc12f56697c8aab3728ae91e3d48c35b",
+                "reference": "720dac1fbc12f56697c8aab3728ae91e3d48c35b",
                 "shasum": ""
             },
             "require": {
@@ -4455,7 +4566,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2016-05-15 09:45:37"
+            "time": "2016-05-17 18:41:18"
         },
         {
             "name": "twig/extensions",
@@ -5408,12 +5519,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-validator.git",
-                "reference": "c507359fdfb859e0083ddf17732e0c76ec25a232"
+                "reference": "59270e9f3bf8c25d3e7701ec8321879806d0d817"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-validator/zipball/c507359fdfb859e0083ddf17732e0c76ec25a232",
-                "reference": "c507359fdfb859e0083ddf17732e0c76ec25a232",
+                "url": "https://api.github.com/repos/zendframework/zend-validator/zipball/59270e9f3bf8c25d3e7701ec8321879806d0d817",
+                "reference": "59270e9f3bf8c25d3e7701ec8321879806d0d817",
                 "shasum": ""
             },
             "require": {
@@ -5448,8 +5559,8 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.7-dev",
-                    "dev-develop": "2.8-dev"
+                    "dev-master": "2.8-dev",
+                    "dev-develop": "2.9-dev"
                 },
                 "zf": {
                     "component": "Zend\\Validator",
@@ -5471,7 +5582,7 @@
                 "validator",
                 "zf2"
             ],
-            "time": "2016-05-13 18:23:44"
+            "time": "2016-05-16 13:44:55"
         },
         {
             "name": "zendframework/zendsearch",
@@ -5914,12 +6025,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "bfc346b0813e100cdbcc1c2314cf83e51cd0a8d0"
+                "reference": "e63d3e17f27a5e5193b2d1460ee9f7f58d0cd721"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/bfc346b0813e100cdbcc1c2314cf83e51cd0a8d0",
-                "reference": "bfc346b0813e100cdbcc1c2314cf83e51cd0a8d0",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/e63d3e17f27a5e5193b2d1460ee9f7f58d0cd721",
+                "reference": "e63d3e17f27a5e5193b2d1460ee9f7f58d0cd721",
                 "shasum": ""
             },
             "require": {
@@ -5981,7 +6092,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2016-05-12 16:54:56"
+            "time": "2016-05-18 13:38:49"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -6206,12 +6317,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/environment.git",
-                "reference": "2292b116f43c272ff4328083096114f84ea46a56"
+                "reference": "4e8f0da10ac5802913afc151413bc8c53b6c2716"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/2292b116f43c272ff4328083096114f84ea46a56",
-                "reference": "2292b116f43c272ff4328083096114f84ea46a56",
+                "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/4e8f0da10ac5802913afc151413bc8c53b6c2716",
+                "reference": "4e8f0da10ac5802913afc151413bc8c53b6c2716",
                 "shasum": ""
             },
             "require": {
@@ -6248,7 +6359,7 @@
                 "environment",
                 "hhvm"
             ],
-            "time": "2016-05-04 07:59:13"
+            "time": "2016-05-17 03:18:57"
         },
         {
             "name": "sebastian/exporter",

@@ -33,7 +33,7 @@ services:
         class: WellCommerce\Bundle\SearchBundle\Storage\SearchResultStorage
         public: false
 
-    search.command.reindex:
-        class: WellCommerce\Bundle\SearchBundle\Command\ReindexCommand
+    search.command.reindex.products:
+        class: WellCommerce\Bundle\SearchBundle\Command\ReindexProductsCommand
         tags:
             - { name: console.command }

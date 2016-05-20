@@ -2,7 +2,7 @@
     <div class="list-group main-categories">
         {% for category in categoriesTree() %}
         <a href="{{ category.route }}" class="list-group-item {% if category.id == active %}active{% endif %}">{{ category.name }}
-            <small>({{ category.products }})</small>
+            <small>({{ category.products_count }})</small>
             <span class="triangle"></span>
         </a>
         {% endfor %}

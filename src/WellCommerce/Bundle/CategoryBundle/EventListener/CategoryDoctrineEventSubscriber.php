@@ -13,10 +13,11 @@
 namespace WellCommerce\Bundle\CategoryBundle\EventListener;
 
 use Doctrine\Common\EventSubscriber;
-use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Event\OnFlushEventArgs;
 use Doctrine\ORM\Query\Expr;
+use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 use WellCommerce\Bundle\CategoryBundle\Entity\CategoryInterface;
-use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 
 /**
  * Class CategoryDoctrineEventSubscriber
@@ -28,27 +29,35 @@ class CategoryDoctrineEventSubscriber implements EventSubscriber
     public function getSubscribedEvents()
     {
         return [
-            'prePersist',
-            'preUpdate',
+            'onFlush'
         ];
     }
 
-    public function preUpdate(LifecycleEventArgs $args)
+    public function onFlush(OnFlushEventArgs $args)
     {
-        $this->onCategoryDataBeforeSave($args);
+//        $em  = $args->getEntityManager();
+//        $uow = $em->getUnitOfWork();
+//
+//        $scheduledEntityChanges = [
+//            'insert' => $uow->getScheduledEntityInsertions(),
+//            'update' => $uow->getScheduledEntityUpdates(),
+//            'delete' => $uow->getScheduledEntityDeletions()
+//        ];
+//
+//        foreach ($scheduledEntityChanges as $change => $entities) {
+//            foreach ($entities as $entity) {
+//                if ($entity instanceof CategoryInterface) {
+//                    $this->recalculateCategoryTotals($entity, $em);
+//                }
+//            }
+//        }
     }
 
-    public function prePersist(LifecycleEventArgs $args)
+    private function recalculateCategoryTotals(CategoryInterface $category, EntityManager $em)
     {
-        $this->onCategoryDataBeforeSave($args);
-    }
-
-    public function onCategoryDataBeforeSave(LifecycleEventArgs $args)
-    {
-        $entity = $args->getObject();
-        if ($entity instanceof CategoryInterface) {
-            $entity->setProductsCount($entity->getProducts()->count());
-            $entity->setChildrenCount($entity->getChildren()->count());
-        }
+//        $category->setProductsCount($category->getProducts()->count());
+//        $category->setChildrenCount($category->getChildren()->count());
+//        $metadata = $em->getClassMetadata(Category::class);
+//        $em->getUnitOfWork()->recomputeSingleEntityChangeSet($metadata, $category);
     }
 }

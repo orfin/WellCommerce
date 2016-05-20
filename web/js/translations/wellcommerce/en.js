@@ -173,6 +173,7 @@
     Translator.add("category.heading.add", "Create a new category", "wellcommerce", "en");
     Translator.add("category.heading.edit", "Edit category", "wellcommerce", "en");
     Translator.add("category.comment.enabled", "Enable category visibility", "wellcommerce", "en");
+    Translator.add("category.flash.empty_category", "Category is empty", "wellcommerce", "en");
     Translator.add("client.label.username", "Login (e-mail)", "wellcommerce", "en");
     Translator.add("client.label.password", "Password", "wellcommerce", "en");
     Translator.add("client.label.confirm_password", "Confirm password", "wellcommerce", "en");

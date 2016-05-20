@@ -35,7 +35,7 @@ final class LayeredNavigationHelper extends AbstractContainerAware implements La
      */
     public function __construct(array $filters = [])
     {
-        $this->filters = $this->getFilters($filters);
+        $this->setFilters($filters);
     }
     
     public function generateRedirectUrl() : string
@@ -54,7 +54,7 @@ final class LayeredNavigationHelper extends AbstractContainerAware implements La
                 } else {
                     $replacements[$parameterName] = $formParams[$parameterName];
                 }
-            }else{
+            } else {
                 $replacements[$parameterName] = 0;
             }
         }
@@ -102,9 +102,9 @@ final class LayeredNavigationHelper extends AbstractContainerAware implements La
         return $this->getRequestHelper()->getAttributesBagParam($parameterName);
     }
     
-    private function getFilters(array $filters) : array
+    private function setFilters(array $filters)
     {
-        return array_filter($filters, function ($v) {
+        $this->filters = array_filter($filters, function ($v) {
             return (bool)$v['enabled'];
         }, ARRAY_FILTER_USE_BOTH);
     }

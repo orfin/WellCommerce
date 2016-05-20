@@ -148,14 +148,14 @@ WellCommerce\Bundle\ProductBundle\Entity\Product:
             cascade:
                 - remove
                 - persist
-            fetch: LAZY
+            fetch: EXTRA_LAZY
             mappedBy: product
             orphanRemoval: true
         variants:
             targetEntity: WellCommerce\Bundle\ProductBundle\Entity\Variant
             cascade:
                 - persist
-            fetch: LAZY
+            fetch: EXTRA_LAZY
             mappedBy: product
             orphanRemoval: true
         distinctions:
@@ -163,13 +163,13 @@ WellCommerce\Bundle\ProductBundle\Entity\Product:
             cascade:
                 - remove
                 - persist
-            fetch: LAZY
+            fetch: EXTRA_LAZY
             mappedBy: product
             orphanRemoval: true
         reviews:
             targetEntity: WellCommerce\Bundle\ReviewBundle\Entity\Review
             cascade:
               - all
-            fetch: LAZY
+            fetch: EXTRA_LAZY
             mappedBy: product
             orphanRemoval: true

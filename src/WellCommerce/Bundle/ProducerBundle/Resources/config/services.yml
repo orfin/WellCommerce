@@ -71,3 +71,10 @@ services:
 
     producer.storage:
         class: WellCommerce\Bundle\ProducerBundle\Storage\ProducerStorage
+
+    twig.extension.producer:
+        class: WellCommerce\Bundle\ProducerBundle\Twig\Extension\ProducerExtension
+        tags:
+            - { name: twig.extension }
+        arguments: ['@producer.dataset.front']
+

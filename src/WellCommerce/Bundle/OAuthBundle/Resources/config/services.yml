@@ -2,6 +2,7 @@
 services:
     oauth.controller.facebook:
         class: WellCommerce\Bundle\OAuthBundle\Controller\FacebookController
+        arguments: ['@client.manager']
         calls:
             - [setContainer, ['@service_container']]
 

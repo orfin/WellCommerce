@@ -165,21 +165,13 @@ class LoadLayoutBoxData extends AbstractDataFixture
             ],
             3 => [
                 'type'       => 'ProductStatus',
-                'identifier' => 'product_announcement',
-                'name'       => 'Announcements',
-                'settings'   => [
-                    'status' => $this->getReference('product_status_announcement')->getId()
-                ]
-            ],
-            4 => [
-                'type'       => 'ProductStatus',
                 'identifier' => 'product_promotion',
                 'name'       => 'Promotions',
                 'settings'   => [
                     'status' => $this->getReference('product_status_promotion')->getId()
                 ]
             ],
-            5 => [
+            4 => [
                 'type'       => 'ProductShowcase',
                 'identifier' => 'product_showcase',
                 'name'       => 'Showcase',
@@ -187,13 +179,13 @@ class LoadLayoutBoxData extends AbstractDataFixture
                     'status' => $this->getReference('product_status_featured')->getId()
                 ]
             ],
-            6 => [
+            5 => [
                 'type'       => 'Search',
                 'identifier' => 'search',
                 'name'       => 'Product search box',
                 'settings'   => []
             ],
-            7 => [
+            6 => [
                 'type'       => 'ProductStatus',
                 'identifier' => 'product_dynamic_status',
                 'name'       => 'Dynamic product status box',

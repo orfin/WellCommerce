@@ -33,6 +33,7 @@ class ProductStatusDataSetTest extends AbstractDataSetTestCase
             'name'      => 'product_status_translation.name',
             'route'     => 'IDENTITY(product_status_translation.route)',
             'css_class' => 'product_status_translation.cssClass',
+            'symbol'    => 'product_status.symbol',
         ];
     }
 }

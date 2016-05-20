@@ -57,7 +57,7 @@ final class SearchDataSet extends ProductDataSet
             'category'         => 'categories.id',
             'shop'             => 'product_shops.id',
             'photo'            => 'photos.path',
-            'status'           => 'statuses.id',
+            'status'           => 'IDENTITY(distinction.status)',
             'score'            => 'FIELD(product.id, :identifiers)',
         ]);
         

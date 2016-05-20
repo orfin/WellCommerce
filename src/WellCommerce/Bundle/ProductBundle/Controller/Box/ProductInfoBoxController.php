@@ -27,7 +27,7 @@ class ProductInfoBoxController extends AbstractBoxController
     {
         $product      = $this->getProductStorage()->getCurrentProduct();
         $templateData = $this->get('product.helper')->getProductDefaultTemplateData($product);
-
+        
         return $this->displayTemplate('index', $templateData);
     }
 }

@@ -53,16 +53,6 @@ class LoadProductStatusData extends AbstractDataFixture
         $this->addReference('product_status_featured', $featured);
 
         /** @var ProductStatusInterface $bestseller */
-        $announcement = $this->container->get('product_status.factory')->create();
-        $announcement->setSymbol('announcement');
-        $announcement->translate($this->getDefaultLocale())->setName('Announcements');
-        $announcement->translate($this->getDefaultLocale())->setSlug('announcement');
-        $announcement->translate($this->getDefaultLocale())->setCssClass('announcement');
-        $announcement->mergeNewTranslations();
-        $manager->persist($announcement);
-        $this->addReference('product_status_announcement', $announcement);
-
-        /** @var ProductStatusInterface $bestseller */
         $novelty = $this->container->get('product_status.factory')->create();
         $novelty->setSymbol('novelty');
         $novelty->translate($this->getDefaultLocale())->setName('New products');
@@ -80,7 +70,7 @@ class LoadProductStatusData extends AbstractDataFixture
         $promotion->translate($this->getDefaultLocale())->setCssClass('promotion');
         $promotion->mergeNewTranslations();
         $manager->persist($promotion);
-        $this->addReference('product_status_promotion', $novelty);
+        $this->addReference('product_status_promotion', $promotion);
 
         $manager->flush();
     }
