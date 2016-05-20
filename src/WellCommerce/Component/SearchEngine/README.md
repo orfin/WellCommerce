@@ -1,0 +1,2 @@
+# SearchEngine
+WellCommerce SearchEngine Component
