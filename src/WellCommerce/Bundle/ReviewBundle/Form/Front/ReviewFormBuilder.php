@@ -37,6 +37,16 @@ class ReviewFormBuilder extends AbstractFormBuilder
             'label' => $this->trans('review.label.rating'),
         ]));
 
+        $form->addChild($this->getElement('hidden', [
+            'name'  => 'ratingLevel',
+            'label' => $this->trans('review.label.rating'),
+        ]));
+
+        $form->addChild($this->getElement('hidden', [
+            'name'  => 'ratingRecommendation',
+            'label' => $this->trans('review.label.rating'),
+        ]));
+
         $form->addChild($this->getElement('text_area', [
             'name'  => 'review',
             'label' => $this->trans('review.label.review'),

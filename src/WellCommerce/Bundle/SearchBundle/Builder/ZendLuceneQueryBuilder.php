@@ -10,25 +10,29 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Component\SearchEngine\Builder;
+namespace WellCommerce\Bundle\SearchBundle\Builder;
+
+use Doctrine\Common\Collections\ArrayCollection;
+use WellCommerce\Bundle\SearchBundle\Query\SearchQuery;
 
 /**
  * Class SearchQueryBuilder
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ElasticSearchQueryBuilder implements SearchQueryBuilderInterface
+class ZendLuceneQueryBuilder implements SearchQueryBuilderInterface
 {
-    private $queries = [];
+    private $queries;
+
+    public function __construct()
+    {
+        $this->queries = new ArrayCollection();
+    }
 
     public function addMatchQuery(string $fieldName, $value) : SearchQueryBuilderInterface
     {
-        $this->queries['query_string'] = [
-            'phrase_slop'                  => 1,
-            'auto_generate_phrase_queries' => true,
-            "fields"                       => ["description", "name_pl^5"],
-            "query"                        => $value . '*'
-        ];
+        $query = new MatchQueryType($fieldName, $value);
+        $this->queries->add($query);
 
         return $this;
     }
@@ -57,7 +61,7 @@ class ElasticSearchQueryBuilder implements SearchQueryBuilderInterface
         return $this;
     }
     
-    public function getQuery()
+    public function getQuery() : SearchQuery
     {
         return $this->queries;
     }

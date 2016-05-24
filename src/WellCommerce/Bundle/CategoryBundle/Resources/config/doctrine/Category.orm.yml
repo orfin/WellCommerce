@@ -42,7 +42,7 @@ WellCommerce\Bundle\CategoryBundle\Entity\Category:
     oneToMany:
         children:
             targetEntity: WellCommerce\Bundle\CategoryBundle\Entity\Category
-            fetch: LAZY
+            fetch: EXTRA_LAZY
             mappedBy: parent
     manyToMany:
         products:

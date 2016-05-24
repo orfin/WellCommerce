@@ -4,6 +4,7 @@ admin.client.index:
         _controller: 'client.controller.admin:indexAction'
     options:
         require_admin_permission: client.index
+
 admin.client.grid:
     path: /admin/crm/client/grid
     defaults:
@@ -11,12 +12,14 @@ admin.client.grid:
     options:
         expose: true
         require_admin_permission: client.index
+
 admin.client.add:
     path: /admin/crm/client/add
     defaults:
         _controller: 'client.controller.admin:addAction'
     options:
         require_admin_permission: client.add
+
 admin.client.edit:
     path: '/admin/crm/client/edit/{id}'
     defaults:
@@ -24,6 +27,7 @@ admin.client.edit:
     options:
         expose: true
         require_admin_permission: client.edit
+
 admin.client.delete:
     path: '/admin/crm/client/delete/{id}'
     defaults:
@@ -37,53 +41,71 @@ front.client.login:
         _controller: 'client.controller.front:loginAction'
     options:
         allow_page_redirect: 'true'
+
 front.client.login_check:
     path: /client/login_check
-    options: {  }
+
 front.client.logout:
     path: /client/logout
-    options: {  }
+
 front.client_settings.index:
     path: /client/settings/index
     defaults:
         _controller: 'client_settings.controller.front:indexAction'
-    options: {  }
+    options:
+        breadcrumb:
+            label: client.heading.settings
+
 front.client_order.index:
     path: /client/order/index
     defaults:
         _controller: 'client_order.controller.front:indexAction'
     options:
         allow_page_redirect: 'true'
+        breadcrumb:
+            label: client.heading.orders
+
 front.client_order.view:
     path: '/client/order/view/{id}'
     defaults:
         _controller: 'client_order.controller.front:viewAction'
         id: 'null'
     options: {  }
+
 front.client_password.reset:
     path: /client/password/reset
     defaults:
         _controller: 'client_forgot_password.controller.front:resetAction'
-    options: {  }
+    options:
+        breadcrumb:
+            label: client.heading.reset_password
+
 front.client_password.change:
     path: '/client/password/change/{hash}'
     defaults:
         _controller: 'client_forgot_password.controller.front:changeAction'
         phrase: 'null'
-    options: {  }
+    options:
+        breadcrumb:
+            label: client.heading.change_password
     requirements:
         hash: '[^,]+'
+
 front.client_address_book.index:
     path: /client/address/index
     defaults:
         _controller: 'client_address_book.controller.front:indexAction'
-    options: {  }
+    options:
+        breadcrumb:
+            label: client.heading.address_book
+
 admin.client_group.index:
     path: /admin/crm/client/group/index
     defaults:
         _controller: 'client_group.controller.admin:indexAction'
     options:
         require_admin_permission: client_group.index
+
 admin.client_group.grid:
     path: /admin/crm/client/group/grid
     defaults:
@@ -118,6 +140,8 @@ front.client_wishlist.index:
         _controller: 'client_wishlist.controller.front:indexAction'
     options:
         allow_page_redirect: 'true'
+        breadcrumb:
+            label: client.heading.wishlist
 
 front.client_wishlist.add:
     path: /client/wishlist/add/{id}

@@ -15,3 +15,22 @@ contact_details:
     label:
         first_name: Imię
         last_name: Nazwisko
+
+contact_ticket:
+    index:
+        contact: Kontakt
+    flash:
+        success: Wiadomość została wysłana.
+        error: Wiadomość nie została wysłana. Formularz zawiera błędy.
+    error:
+        email:
+            not_valid: Podany adres e-mail jest nieprawidłowy
+            not_blank: Pole "Adres e-mail" nie może być puste
+        subject:
+            not_blank: Pole "Temat wiadomości" nie może być puste
+        content:
+            not_blank: Pole "Treść wiadomości" nie może być puste
+    label:
+        email: Adres e-mail
+        subject: Temat wiadomości
+        content: Treść wiadomości

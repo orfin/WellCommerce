@@ -14,72 +14,32 @@ namespace WellCommerce\Bundle\ClientBundle\Manager;
 
 use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
 use WellCommerce\Bundle\ClientBundle\Exception\ResetPasswordException;
-use WellCommerce\Bundle\CoreBundle\Manager\AbstractManager;
+use WellCommerce\Bundle\CoreBundle\Helper\Helper;
+use WellCommerce\Bundle\DoctrineBundle\Manager\Manager;
 
 /**
  * Class ClientManager
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientManager extends AbstractManager
+class ClientManager extends Manager
 {
-    public function resetPassword($username)
+    public function getClientByUsername(string $username) : ClientInterface
     {
-        if (false === filter_var($username, FILTER_VALIDATE_EMAIL)) {
-            throw new ResetPasswordException('client.flash.reset_password.wrong_email');
-        }
-        
-        if (null === $client = $this->findClient($username)) {
+        $client = $this->getRepository()->findOneBy(['clientDetails.username' => $username]);
+
+        if (!$client instanceof ClientInterface) {
             throw new ResetPasswordException(sprintf('client.flash.reset_password.email_not_found', $username));
         }
-        
-        $this->setClientResetPasswordHash($client);
-        $this->sendResetInstructions($client);
+
+        return $client;
     }
-    
-    /**
-     * @param ClientInterface $client
-     *
-     * @return int
-     */
-    protected function setClientResetPasswordHash(ClientInterface $client)
+
+    public function resetPassword(ClientInterface $client)
     {
         $hash = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36) . $client->getId();
         $client->getClientDetails()->setResetPasswordHash($hash);
+        $client->getClientDetails()->setHashedPassword(Helper::generateRandomPassword(8));
         $this->updateResource($client);
-    }
-    
-    /**
-     * Sends the reset instructions to client
-     *
-     * @param ClientInterface $client
-     *
-     * @return int
-     */
-    protected function sendResetInstructions(ClientInterface $client) : int
-    {
-        return $this->getMailerHelper()->sendEmail([
-            'recipient'     => $client->getContactDetails()->getEmail(),
-            'subject'       => $this->getTranslatorHelper()->trans('client.email.heading.reset_password'),
-            'template'      => 'WellCommerceAppBundle:Email:reset_password.html.twig',
-            'parameters'    => [
-                'client' => $client
-            ],
-            'configuration' => $client->getShop(),
-        ]);
-    }
-    
-    /**
-     * Returns the client's account or null if it was not found
-     *
-     * @param string $username
-     *
-     * @return null|ClientInterface
-     */
-    protected function findClient($username)
-    {
-        $resource = $this->getRepository()->findOneBy(['clientDetails.username' => $username]);
-        
-        return $resource;
     }
 }

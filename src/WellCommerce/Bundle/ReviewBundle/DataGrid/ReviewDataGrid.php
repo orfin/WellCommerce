@@ -50,6 +50,7 @@ class ReviewDataGrid extends AbstractDataGrid
             'caption'    => $this->trans('review.label.nick'),
             'appearance' => new Appearance([
                 'width' => 70,
+                'align' => Appearance::ALIGN_CENTER
             ]),
             'filter'     => new Filter([
                 'type' => Filter::FILTER_INPUT,
@@ -61,12 +62,13 @@ class ReviewDataGrid extends AbstractDataGrid
             'caption'    => $this->trans('review.label.created_at'),
             'appearance' => new Appearance([
                 'width' => 70,
+                'align' => Appearance::ALIGN_CENTER
             ]),
             'filter'     => new Filter([
                 'type' => Filter::FILTER_INPUT,
             ]),
         ]));
-
+        
         $collection->add(new Column([
             'id'         => 'product',
             'caption'    => $this->trans('review.label.product'),
@@ -83,6 +85,31 @@ class ReviewDataGrid extends AbstractDataGrid
             'caption'    => $this->trans('review.label.rating'),
             'appearance' => new Appearance([
                 'width' => 70,
+                'align' => Appearance::ALIGN_CENTER
+            ]),
+            'filter'     => new Filter([
+                'type' => Filter::FILTER_BETWEEN,
+            ]),
+        ]));
+
+        $collection->add(new Column([
+            'id'         => 'rating_level',
+            'caption'    => $this->trans('review.label.rating_level'),
+            'appearance' => new Appearance([
+                'width' => 70,
+                'align' => Appearance::ALIGN_CENTER
+            ]),
+            'filter'     => new Filter([
+                'type' => Filter::FILTER_BETWEEN,
+            ]),
+        ]));
+
+        $collection->add(new Column([
+            'id'         => 'rating_recommendation',
+            'caption'    => $this->trans('review.label.rating_recommendation'),
+            'appearance' => new Appearance([
+                'width' => 70,
+                'align' => Appearance::ALIGN_CENTER
             ]),
             'filter'     => new Filter([
                 'type' => Filter::FILTER_BETWEEN,

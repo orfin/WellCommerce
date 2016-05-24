@@ -25,3 +25,7 @@ admin.review.delete:
     options:
         expose: true
         require_admin_permission: review.delete
+product.review.report:
+    path: /product/review/report/{id}
+    defaults:
+        _controller: 'review.layout_box.controller:reportAction'

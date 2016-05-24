@@ -53,4 +53,25 @@ interface ReviewInterface extends EntityInterface, EnableableInterface, ProductA
      * @param int $rating
      */
     public function setRating(int $rating);
+
+    /**
+     * @return int
+     */
+    public function getRatingLevel() : int;
+
+    /**
+     * @param int $rating
+     */
+    public function setRatingLevel(int $ratingLevel);
+
+    /**
+     * @return int
+     */
+    public function getRatingRecommendation() : int;
+
+    /**
+     * @param int $rating
+     */
+    public function setRatingRecommendation(int $ratingRecommendation);
+
 }

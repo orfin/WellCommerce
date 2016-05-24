@@ -1,0 +1,19 @@
+WellCommerce\Bundle\ContactBundle\Entity\ContactTicket:
+    type: entity
+    table: contact_ticket
+    repositoryClass: WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        email:
+            type: string
+            nullable: false
+        subject:
+            type: string
+            nullable: false
+        content:
+            type: text
+            nullable: false

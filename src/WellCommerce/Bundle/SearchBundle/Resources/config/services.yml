@@ -33,6 +33,10 @@ services:
         class: WellCommerce\Bundle\SearchBundle\Storage\SearchResultStorage
         public: false
 
+    search.query_builder.collection:
+        class: WellCommerce\Bundle\SearchBundle\Builder\SearchQueryBuilderCollection
+        public: false
+
     search.command.reindex.products:
         class: WellCommerce\Bundle\SearchBundle\Command\ReindexProductsCommand
         tags:

@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\ProductBundle\Controller\Front;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
+use WellCommerce\Bundle\CategoryBundle\Entity\CategoryInterface;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 use WellCommerce\Component\Breadcrumb\Model\Breadcrumb;
@@ -27,10 +28,7 @@ class ProductController extends AbstractFrontController
 {
     public function indexAction(ProductInterface $product) : Response
     {
-        $this->getBreadcrumbProvider()->add(new Breadcrumb([
-            'label' => $product->translate()->getName(),
-        ]));
-
+        $this->addBreadcrumbs($product);
         $this->getProductStorage()->setCurrentProduct($product);
 
         return $this->displayTemplate('index', [
@@ -49,5 +47,23 @@ class ProductController extends AbstractFrontController
             'basketModalContent' => $basketModalContent,
             'templateData'       => $templateData
         ]);
+    }
+
+    private function addBreadcrumbs(ProductInterface $product)
+    {
+        $category = $product->getCategories()->last();
+        $paths    = $this->get('category.repository')->getCategoryPath($category);
+
+        /** @var CategoryInterface $path */
+        foreach ($paths as $path) {
+            $this->getBreadcrumbProvider()->add(new Breadcrumb([
+                'label' => $path->translate()->getName(),
+                'url'   => $this->getRouterHelper()->generateUrl($path->translate()->getRoute()->getId())
+            ]));
+        }
+
+        $this->getBreadcrumbProvider()->add(new Breadcrumb([
+            'label' => $product->translate()->getName(),
+        ]));
     }
 }

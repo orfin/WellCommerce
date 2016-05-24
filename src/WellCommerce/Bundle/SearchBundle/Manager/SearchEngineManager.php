@@ -13,15 +13,16 @@
 namespace WellCommerce\Bundle\SearchBundle\Manager;
 
 use WellCommerce\Bundle\SearchBundle\Storage\SearchResultStorage;
-use WellCommerce\Component\SearchEngine\Adapter\AdapterInterface;
-use WellCommerce\Component\SearchEngine\Builder\SearchQueryBuilderInterface;
+use WellCommerce\Bundle\SearchBundle\Adapter\AdapterInterface;
+use WellCommerce\Bundle\SearchBundle\Builder\SearchQueryBuilderCollection;
+use WellCommerce\Bundle\SearchBundle\Builder\SearchQueryBuilderInterface;
 
 /**
  * Class SearchEngineManager
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-final class SearchEngineManager
+final class SearchEngineManager implements SearchEngineManagerInterface
 {
     /**
      * @var AdapterInterface
@@ -29,9 +30,9 @@ final class SearchEngineManager
     private $adapter;
 
     /**
-     * @var SearchQueryBuilderInterface
+     * @var SearchQueryBuilderCollection
      */
-    private $queryBuilder;
+    private $builders;
 
     /**
      * @var SearchResultStorage
@@ -41,20 +42,15 @@ final class SearchEngineManager
     /**
      * SearchEngineManager constructor.
      *
-     * @param AdapterInterface            $adapter
-     * @param SearchQueryBuilderInterface $queryBuilder
-     * @param SearchResultStorage         $storage
+     * @param AdapterInterface             $adapter
+     * @param SearchQueryBuilderCollection $builders
+     * @param SearchResultStorage          $storage
      */
-    public function __construct(AdapterInterface $adapter, SearchQueryBuilderInterface $queryBuilder, SearchResultStorage $storage)
+    public function __construct(AdapterInterface $adapter, SearchQueryBuilderCollection $builders, SearchResultStorage $storage)
     {
-        $this->adapter      = $adapter;
-        $this->queryBuilder = $queryBuilder;
-        $this->storage      = $storage;
-    }
-
-    public function getQueryBuilder() : SearchQueryBuilderInterface
-    {
-        return $this->queryBuilder;
+        $this->adapter       = $adapter;
+        $this->builders = $builders;
+        $this->storage       = $storage;
     }
 
     public function getAdapter() : AdapterInterface
@@ -62,7 +58,7 @@ final class SearchEngineManager
         return $this->adapter;
     }
     
-    public function search(SearchQueryBuilderInterface $queryBuilder, string $type)
+    public function search(SearchQueryBuilderInterface $queryBuilder, string $type) : array
     {
         $results = $this->adapter->search($queryBuilder, $type);
 

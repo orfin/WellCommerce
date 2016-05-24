@@ -17,6 +17,12 @@ WellCommerce\Bundle\ReviewBundle\Entity\Review:
         rating:
             type: integer
             nullable: false
+        ratingLevel:
+            type: integer
+            nullable: false
+        ratingRecommendation:
+            type: integer
+            nullable: false
         enabled:
             type: boolean
             nullable: false

@@ -57,7 +57,7 @@ class ClientRegisterFormBuilder extends AbstractFormBuilder
         ]));
 
         $clientDetails->addChild($this->getElement('password', [
-            'name'  => 'clientDetails.password',
+            'name'  => 'clientDetails.hashedPassword',
             'label' => $this->trans('client.label.password'),
         ]));
 
@@ -65,13 +65,13 @@ class ClientRegisterFormBuilder extends AbstractFormBuilder
             'name'    => 'clientDetails.conditionsAccepted',
             'label'   => $this->trans('client.label.accept_conditions'),
             'default' => false,
-            'comment' => $this->trans('client.comment.accept_conditions')
+            'comment' => $this->trans('client.label.accept_conditions')
         ]));
 
         $clientDetails->addChild($this->getElement('checkbox', [
             'name'    => 'clientDetails.newsletterAccepted',
             'label'   => $this->trans('client.label.accept_newsletter'),
-            'comment' => $this->trans('client.comment.accept_newsletter'),
+            'comment' => $this->trans('client.label.accept_newsletter'),
         ]));
 
         $form->addFilter($this->getFilter('no_code'));

@@ -113,7 +113,7 @@ services:
 
     paypal.gateway:
         class: WellCommerce\Bundle\PaymentBundle\Gateway\PayPalGateway
-        arguments: [{ log.FileName: '%kernel.logs_dir%/PayPal.log' }]
+        arguments: [{ log.FileName: '%kernel.logs_dir%/PayPal.log' }, '@router.helper']
         shared: false
 
     paypal.processor:

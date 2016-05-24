@@ -12,9 +12,10 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\Controller\Front;
 
-use Doctrine\Common\Inflector\Inflector;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
+use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
 use WellCommerce\Bundle\PaymentBundle\Manager\PaymentManagerInterface;
 use WellCommerce\Bundle\PaymentBundle\Processor\PaymentProcessorInterface;
 
@@ -25,28 +26,43 @@ use WellCommerce\Bundle\PaymentBundle\Processor\PaymentProcessorInterface;
  */
 class PaymentController extends AbstractFrontController
 {
-    /**
-     * @var PaymentManagerInterface
-     */
-    protected $manager;
-    
     public function initializeAction(string $token)
     {
-        $payment       = $this->getManager()->findPaymentByToken($token);
-        $order         = $payment->getOrder();
-        $processor     = $this->getPaymentProcessor($order->getPaymentMethod()->getProcessor());
-        $processorName = ucfirst(Inflector::camelize($processor->getConfigurator()->getName()));
+        $payment   = $this->getManager()->findPaymentByToken($token);
+        $order     = $payment->getOrder();
+        $processor = $this->getPaymentProcessor($order->getPaymentMethod()->getProcessor());
 
-        $content = $this->renderView(sprintf('WellCommercePaymentBundle:Front/%s:initialize.html.twig', $processorName), [
-            'payment' => $payment
+        $processor->getGateway()->initializePayment($payment);
+
+        $this->getManager()->updateResource($payment);
+
+        $content = $this->renderView($processor->getConfigurator()->getInitializeTemplateName(), [
+            'payment'       => $payment,
+            'configuration' => $order->getPaymentMethod()->getConfiguration()
         ]);
 
         return new Response($content);
     }
 
-    public function confirmAction(string $token)
+    public function confirmAction(string $token, Request $request)
     {
+        $payment   = $this->getManager()->findPaymentByToken($token);
+        $order     = $payment->getOrder();
+        $processor = $this->getPaymentProcessor($order->getPaymentMethod()->getProcessor());
 
+        $processor->getGateway()->confirmPayment($payment, $request);
+
+        $this->getManager()->updateResource($payment);
+
+        if ($payment->getState() === PaymentInterface::PAYMENT_STATE_APPROVED) {
+            $order->setCurrentStatus($order->getPaymentMethod()->getPaymentSuccessOrderStatus());
+            $this->getManager()->updateResource($order);
+        }
+
+        return $this->displayTemplate('confirm', [
+            'payment'       => $payment,
+            'configuration' => $order->getPaymentMethod()->getConfiguration()
+        ]);
     }
     
     public function cancelAction(string $token)
@@ -54,9 +70,16 @@ class PaymentController extends AbstractFrontController
         
     }
     
-    public function executeAction(string $token)
+    public function executeAction(string $token, Request $request)
     {
-        
+        $payment   = $this->getManager()->findPaymentByToken($token);
+        $order     = $payment->getOrder();
+        $processor = $this->getPaymentProcessor($order->getPaymentMethod()->getProcessor());
+        $response  = $processor->getGateway()->executePayment($payment, $request);
+
+        $this->getManager()->updateResource($payment);
+
+        return $response;
     }
 
     public function notifyAction(string $token)

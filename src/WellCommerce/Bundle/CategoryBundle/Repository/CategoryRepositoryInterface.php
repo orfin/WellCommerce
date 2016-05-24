@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CategoryBundle\Repository;
 
+use WellCommerce\Bundle\CategoryBundle\Entity\CategoryInterface;
 use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
 
 /**
@@ -21,5 +22,5 @@ use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
  */
 interface CategoryRepositoryInterface extends RepositoryInterface
 {
-
+    public function getCategoryPath(CategoryInterface $category) : array;
 }

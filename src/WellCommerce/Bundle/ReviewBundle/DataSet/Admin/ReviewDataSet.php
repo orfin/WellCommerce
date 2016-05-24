@@ -28,11 +28,13 @@ class ReviewDataSet extends AbstractDataSet
     public function configureOptions(DataSetConfiguratorInterface $configurator)
     {
         $configurator->setColumns([
-            'id'        => 'review.id',
-            'nick'      => 'review.nick',
-            'rating'    => 'review.rating',
-            'createdAt' => 'review.createdAt',
-            'product'   => 'product_translation.name',
+            'id'                    => 'review.id',
+            'nick'                  => 'review.nick',
+            'rating'                => 'review.rating',
+            'rating_level'          => 'review.ratingLevel',
+            'rating_recommendation' => 'review.ratingRecommendation',
+            'createdAt'             => 'review.createdAt',
+            'product'               => 'product_translation.name',
         ]);
 
         $configurator->setColumnTransformers([

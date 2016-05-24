@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\Gateway;
 
+use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
 
 /**
@@ -21,22 +22,27 @@ use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
  */
 final class OfflinePaymentGateway implements PaymentGatewayInterface
 {
-    public function executePayment(PaymentInterface $payment)
+    public function initializePayment(PaymentInterface $payment)
     {
         $payment->setState(PaymentInterface::PAYMENT_STATE_CREATED);
     }
 
-    public function confirmPayment(PaymentInterface $payment)
+    public function executePayment(PaymentInterface $payment, Request $request)
+    {
+        $payment->setState(PaymentInterface::PAYMENT_STATE_CREATED);
+    }
+
+    public function confirmPayment(PaymentInterface $payment, Request $request)
     {
         $payment->setState(PaymentInterface::PAYMENT_STATE_APPROVED);
     }
 
-    public function cancelPayment(PaymentInterface $payment)
+    public function cancelPayment(PaymentInterface $payment, Request $request)
     {
         $payment->setState(PaymentInterface::PAYMENT_STATE_CANCELLED);
     }
 
-    public function notifyPayment(PaymentInterface $payment)
+    public function notifyPayment(PaymentInterface $payment, Request $request)
     {
         $payment->setState(PaymentInterface::PAYMENT_STATE_PENDING);
     }

@@ -77,7 +77,6 @@ final class ReindexProductsCommand extends ContainerAwareCommand
         }
 
         $progress->finish();
-        $output->writeln('');
         $manager->getAdapter()->optimizeIndex();
     }
     

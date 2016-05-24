@@ -16,6 +16,14 @@ WellCommerce\Bundle\ReviewBundle\Entity\Review:
             groups:
                 - default
                 - review
+        ratingLevel:
+            groups:
+                - default
+                - review
+        ratingRecommendation:
+            groups:
+                - default
+                - review
         createdAt:
             groups:
                 - default

@@ -10,14 +10,13 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Component\SearchEngine\Document;
+namespace WellCommerce\Bundle\SearchBundle\Manager;
 
 /**
- * Interface DocumentFactoryInterface
+ * Interface SearchIndexManagerInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface DocumentFactoryInterface
+interface SearchIndexManagerInterface
 {
-    public function create($resource) : DocumentInterface;
 }

@@ -35,9 +35,11 @@ class ReviewFactory extends AbstractEntityFactory
         /** @var  $review ReviewInterface */
         $review = $this->init();
         $review->setNick('');
-        $review->setRating(0);
+        $review->setRating(5);
+        $review->setRatingLevel(5);
+        $review->setRatingRecommendation(5);
         $review->setReview('');
-        $review->setEnabled(false);
+        $review->setEnabled(true);
 
         return $review;
     }

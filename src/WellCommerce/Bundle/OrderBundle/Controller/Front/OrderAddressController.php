@@ -16,9 +16,10 @@ use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
+use WellCommerce\Component\Breadcrumb\Model\Breadcrumb;
 
 /**
- * Class CartAddressController
+ * Class OrderAddressController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */

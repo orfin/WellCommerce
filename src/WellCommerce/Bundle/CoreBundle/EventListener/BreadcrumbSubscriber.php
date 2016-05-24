@@ -31,11 +31,13 @@ final class BreadcrumbSubscriber extends AbstractEventSubscriber
     public function onKernelRequest()
     {
         $currentRoute = $this->getRouterHelper()->getCurrentRoute();
+
         if ($currentRoute->hasOption('breadcrumb')) {
             $options = $currentRoute->getOption('breadcrumb');
 
             $this->getBreadcrumbProvider()->add(new Breadcrumb([
-                'label' => $options['label']
+                'label' => $this->trans($options['label']),
+                'url'   => $currentRoute->getPath()
             ]));
         }
     }

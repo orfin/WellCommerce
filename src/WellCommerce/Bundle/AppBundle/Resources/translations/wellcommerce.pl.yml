@@ -88,11 +88,10 @@ common:
         last_name: Nazwisko
         client_group: Grupa klientów
         address: Adresy
-        street: Ulica
-        street_no: Numer ulicy
-        flat_no: Numer domu/lokalu
+        line1: Pierwsza linia adresu
+        line2: Druga linia adresu
         province: Prowincja
-        post_code: Kod pocztowy
+        postal_code: Kod pocztowy
         country: Państwo
         phone: Telefon
         secondary_phone: Telefon dodatkowy

@@ -46,3 +46,8 @@ services:
         class: WellCommerce\Bundle\ReviewBundle\Twig\Extension\ReviewExtension
         tags:
             - { name: twig.extension }
+
+    review.orm.validator.bad_words:
+        class: WellCommerce\Bundle\ReviewBundle\Doctrine\Validator\Constraints\BadWordsValidator
+        tags:
+            - { name: validator.constraint_validator, alias: review.orm.validator.bad_words }

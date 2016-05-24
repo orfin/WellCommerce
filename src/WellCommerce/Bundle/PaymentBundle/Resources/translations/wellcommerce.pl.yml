@@ -1,4 +1,6 @@
 payment:
+    heading:
+        initialize: Płatność
     flash:
         thank_you: "Dziękujemy za złożenie zamówienia. Poniżej prezentujemy jego szczegóły:"
 
@@ -17,8 +19,8 @@ payment_method:
         payment_pending_order_status: Oczekuje na płatność
         payment_success_order_status: Płatność zakończona
         payment_failure_order_status: Płatność anulowana
-    bank_transfer:
-        tip: Twoje zamówienie będzie realizowane po otrzymaniu przelewu na poniższe dane rachunku.
-        account: Numer rachunku
-        sort_number: Sort code banku
-        title: Tytuł przelewu
+        bank_transfer:
+            tip: Twoje zamówienie będzie realizowane po otrzymaniu przelewu na poniższe dane rachunku.
+            account: Numer rachunku
+            sort_number: Sort code banku
+            title: Tytuł przelewu

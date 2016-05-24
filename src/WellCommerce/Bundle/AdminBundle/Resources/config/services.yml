@@ -1,6 +1,7 @@
 services:
     dashboard.controller.admin:
         class: WellCommerce\Bundle\AdminBundle\Controller\Admin\DashboardController
+        arguments: ['@order.manager']
         calls:
             - [setContainer, ['@service_container']]
 

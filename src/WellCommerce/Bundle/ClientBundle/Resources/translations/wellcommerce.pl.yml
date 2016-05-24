@@ -6,6 +6,7 @@ client:
         new_password: Nowe hasło
         accept_conditions: Akceptuję regulamin sklepu
         accept_newsletter: Zapisz się na nasz newsleter
+        terms_and_conditions: Zasady oraz warunki
         contact_details:
             first_name: Imię
             last_name: Nazwisko
@@ -15,18 +16,20 @@ client:
         address:
             first_name: Imię
             last_name: Nazwisko
-            street: Ulica
-            street_no: Numer budynku
-            flat_no: Numer lokalu
+            line1: Pierwsza linia adresu
+            line2: Druga linia adresu
             province: Prowincja
-            post_code: Kod pocztowy
+            postal_code: Kod pocztowy
             country: Państwo
             city: Miejscowość
             copy_address: Adres dostawy jest taki sam jak adres płatnika
-            vat_id: NIP
-            company_name: Nazwa firmy
+            state: Województwo
+            vat_id: NIP (opcjonalnie)
+            company_name: Nazwa firmy (opcjonalnie)
+            copy_address: Adres dostawy taki sam jak adres klienta
     heading:
         index: Klienci
+        client: Klient
         add: Dodaj klienta
         edit: Edytuj klienta
         login: Logowanie
@@ -38,6 +41,10 @@ client:
         shipping_address: Adres dostawy
         reset_password: Zresetuj hasło
         change_password: Zmień hasło
+        orders: Zamówienia
+        address_book: Adresy
+        settings: Ustawienia
+        wishlist: Lista życzeń
     link:
         login: 'Zaloguj lub zarejestruj się'
         register: Rejestracja
@@ -52,9 +59,11 @@ client:
         register: Zarejestruj się
         reset_password: Potwierdź zresetowanie hasła
         change_password: Potwierdź zmianę hasła
+        save_changes: Zapisz zmiany
     flash:
         registration:
             error: Formularz zawiera niepoprawne dane.
+            success: Twoje konto zostało założone. Możesz się teraz zalogować.
         reset_password:
             wrong_email: Podano niepoprawny adres e-mail.
             email_not_found: Podany adres e-mail nie występuje w naszej bazie.

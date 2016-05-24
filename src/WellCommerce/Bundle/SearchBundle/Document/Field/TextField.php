@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Component\SearchEngine\Document\Field;
+namespace WellCommerce\Bundle\SearchBundle\Document\Field;
 
 /**
  * Class DocumentField
@@ -35,6 +35,11 @@ final class TextField implements DocumentFieldInterface
     private $indexed;
 
     /**
+     * @var bool
+     */
+    private $analyzed;
+
+    /**
      * @var float
      */
     private $boost;
@@ -47,12 +52,13 @@ final class TextField implements DocumentFieldInterface
      * @param bool   $indexed
      * @param float  $boost
      */
-    public function __construct(string $name, string $value, bool $indexed = true, float $boost = 1.0)
+    public function __construct(string $name, string $value, bool $indexed = true, float $boost = 1.0, bool $analyzed = true)
     {
-        $this->name    = $name;
-        $this->value   = $value;
-        $this->indexed = $indexed;
-        $this->boost   = $boost;
+        $this->name     = $name;
+        $this->value    = $value;
+        $this->indexed  = $indexed;
+        $this->analyzed = $analyzed;
+        $this->boost    = $boost;
     }
 
     public function getName() : string
@@ -68,6 +74,11 @@ final class TextField implements DocumentFieldInterface
     public function isIndexed() : bool
     {
         return $this->indexed;
+    }
+
+    public function isAnalyzed() : bool
+    {
+        return $this->analyzed;
     }
 
     public function getBoost() : float

@@ -27,7 +27,12 @@ final class CashOnDeliveryConfigurator extends AbstractPaymentMethodConfigurator
     {
         return 'cash_on_delivery';
     }
-    
+
+    public function getInitializeTemplateName() : string
+    {
+        return 'WellCommercePaymentBundle:Front/CashOnDelivery:initialize.html.twig';
+    }
+
     public function addConfigurationFields(FormBuilderInterface $builder, ElementInterface $fieldset, DependencyInterface $dependency)
     {
         $fieldset->addChild($builder->getElement('tip', [

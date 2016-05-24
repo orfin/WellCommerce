@@ -1,4 +1,11 @@
 services:
+    breadcrumb.subscriber:
+        class: WellCommerce\Bundle\CoreBundle\EventListener\BreadcrumbSubscriber
+        tags:
+            - { name: kernel.event_subscriber }
+        calls:
+            - [setContainer, ['@service_container']]
+
     breadcrumb.collection:
         class: WellCommerce\Component\Breadcrumb\Model\BreadcrumbCollection
         shared: false

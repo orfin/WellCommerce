@@ -10,18 +10,15 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Component\SearchEngine\Document\Field;
+namespace WellCommerce\Bundle\SearchBundle\Document\Field;
+
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Interface DocumentFieldInterface
+ * Class DocumentFieldCollection
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface DocumentFieldInterface
+class DocumentFieldCollection extends ArrayCollection
 {
-    public function getName() : string;
-
-    public function getValue() : string;
-
-    public function getType() : string;
 }

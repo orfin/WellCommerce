@@ -10,22 +10,22 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Component\SearchEngine\Adapter;
+namespace WellCommerce\Bundle\SearchBundle\Adapter;
 
 use Doctrine\Common\Collections\Collection;
 use Elasticsearch\Client;
 use Elasticsearch\ClientBuilder;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use WellCommerce\Component\SearchEngine\Builder\SearchQueryBuilderInterface;
-use WellCommerce\Component\SearchEngine\Document\DocumentInterface;
-use WellCommerce\Component\SearchEngine\Document\Field\DocumentFieldInterface;
+use WellCommerce\Bundle\SearchBundle\Builder\SearchQueryBuilderInterface;
+use WellCommerce\Bundle\SearchBundle\Document\DocumentInterface;
+use WellCommerce\Bundle\SearchBundle\Document\Field\DocumentFieldInterface;
 
 /**
  * Class ElasticSearchAdapter
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-final class ElasticSearchAdapter implements AdapterInterface
+final class ElasticSearchAdapter implements SearchAdapterInterface
 {
     /**
      * @var array

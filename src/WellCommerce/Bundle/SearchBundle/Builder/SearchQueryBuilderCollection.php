@@ -10,20 +10,15 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Component\SearchEngine\Document;
+namespace WellCommerce\Bundle\SearchBundle\Builder;
 
-use WellCommerce\Component\SearchEngine\Document\Field\DocumentFieldCollection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Interface DocumentInterface
+ * Class SearchQueryBuilderCollection
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface DocumentInterface
+class SearchQueryBuilderCollection extends ArrayCollection
 {
-    public function getIdentifier() : int;
-    
-    public function getFields() : DocumentFieldCollection;
-    
-    public function getType();
 }

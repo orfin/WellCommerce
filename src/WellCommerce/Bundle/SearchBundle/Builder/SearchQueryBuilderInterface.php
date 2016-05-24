@@ -10,7 +10,9 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Component\SearchEngine\Builder;
+namespace WellCommerce\Bundle\SearchBundle\Builder;
+
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Interface SearchQueryBuilderInterface
@@ -19,13 +21,7 @@ namespace WellCommerce\Component\SearchEngine\Builder;
  */
 interface SearchQueryBuilderInterface
 {
-    public function addMatchQuery(string $fieldName, $value) : SearchQueryBuilderInterface;
-
-    public function addFilterQuery(string $fieldName, $value) : SearchQueryBuilderInterface;
-
-    public function addBoolQuery(string $fieldName, $value) : SearchQueryBuilderInterface;
-
-    public function addFuzzyQuery(string $fieldName, $value) : SearchQueryBuilderInterface;
-
+    public function buildFromRequest(Request $request);
+    
     public function getQuery();
 }

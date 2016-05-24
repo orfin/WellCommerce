@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\SearchBundle\Controller\Front;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\SearchBundle\Manager\SearchEngineManager;
@@ -26,9 +27,10 @@ use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
  */
 class SearchController extends AbstractFrontController
 {
-    public function indexAction(string $phrase) : Response
+    public function indexAction(string $index, Request $request) : Response
     {
-        $this->search($phrase);
+        $phrase  = $request->get('phrase');
+        $results = $this->search($index, $request);
         
         $this->getBreadcrumbProvider()->add(new Breadcrumb([
             'label' => $this->trans('search.heading.index')
@@ -39,17 +41,19 @@ class SearchController extends AbstractFrontController
         ]));
         
         return $this->displayTemplate('index', [
-            'phrase' => $phrase,
+            'phrase'  => $phrase,
+            'results' => $results,
         ]);
     }
     
-    public function viewAction(string $phrase) : JsonResponse
+    public function viewAction(string $index, Request $request) : JsonResponse
     {
         $liveSearchContent = '';
-        $identifiers       = [];
-
+        $result            = [];
+        $phrase            = $request->get('phrase');
+        
         if (strlen($phrase) >= $this->container->getParameter('search_term_min_length')) {
-            $identifiers = $this->search($phrase);
+            $result = $this->search($index, $request);
             
             $dataset    = $this->get('search.dataset.front');
             $conditions = new ConditionsCollection();
@@ -70,19 +74,21 @@ class SearchController extends AbstractFrontController
         
         return $this->jsonResponse([
             'liveSearchContent' => $liveSearchContent,
-            'total'             => count($identifiers)
+            'result'            => $result,
+            'total'             => count($result)
         ]);
     }
     
-    protected function search(string $phrase) : array
+    protected function search(string $index, Request $request) : array
     {
+        print_r($request->get('fields'));
+        die();
         $queryBuilder = $this->getSearchEngineManager()->getQueryBuilder();
-        $queryBuilder->addMatchQuery('name_pl', $phrase);
-        $result = $this->getSearchEngineManager()->search($queryBuilder, 'product');
-
-        return $result;
+        $queryBuilder->buildFromRequest($request);
+        
+        return $this->getSearchEngineManager()->search($queryBuilder, $index);
     }
-
+    
     private function getSearchEngineManager() : SearchEngineManager
     {
         return $this->get('search.engine.manager');

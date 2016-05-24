@@ -11,6 +11,8 @@
  */
 namespace WellCommerce\Bundle\ProductStatusBundle\Twig\Extension;
 
+use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
+use WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusInterface;
 use WellCommerce\Component\DataSet\DataSetInterface;
 
 /**
@@ -26,40 +28,31 @@ class ProductStatusExtension extends \Twig_Extension
     protected $dataset;
 
     /**
-     * Constructor
-     *
-     * @param DataSetInterface $dataset
+     * @var RepositoryInterface
      */
-    public function __construct(DataSetInterface $dataset)
+    protected $repository;
+
+    /**
+     * ProductStatusExtension constructor.
+     *
+     * @param DataSetInterface    $dataset
+     * @param RepositoryInterface $repository
+     */
+    public function __construct(DataSetInterface $dataset, RepositoryInterface $repository)
     {
-        $this->dataset = $dataset;
+        $this->dataset    = $dataset;
+        $this->repository = $repository;
     }
 
     public function getFunctions()
     {
         return [
             new \Twig_SimpleFunction('productStatuses', [$this, 'getProductStatuses'], ['is_safe' => ['html']]),
+            new \Twig_SimpleFunction('productStatus', [$this, 'getProductStatusBySymbol'], ['is_safe' => ['html']]),
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'product_status';
-    }
-
-    /**
-     * Returns product statuses
-     *
-     * @param int    $limit
-     * @param string $orderBy
-     * @param string $orderDir
-     *
-     * @return array
-     */
-    public function getProductStatuses($limit = 5, $orderBy = 'name', $orderDir = 'asc')
+    public function getProductStatuses(int $limit = 5, string $orderBy = 'name', string $orderDir = 'asc') : array
     {
         return $this->dataset->getResult('array', [
             'limit'     => $limit,
@@ -68,5 +61,15 @@ class ProductStatusExtension extends \Twig_Extension
         ], [
             'pagination' => false
         ]);
+    }
+
+    public function getProductStatusBySymbol(string $symbol) : ProductStatusInterface
+    {
+        return $this->repository->findOneBy(['symbol' => $symbol]);
+    }
+
+    public function getName()
+    {
+        return 'product_status';
     }
 }

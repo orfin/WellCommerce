@@ -14,3 +14,9 @@ well_commerce_contact:
             orm:
                 mapping: "@WellCommerceContactBundle/Resources/config/doctrine/ContactTranslation.orm.yml"
                 entity: WellCommerce\Bundle\ContactBundle\Entity\ContactTranslation
+        contact_ticket:
+            orm:
+                factory: WellCommerce\Bundle\ContactBundle\Factory\ContactTicketFactory
+                repository: WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository
+                mapping: "@WellCommerceContactBundle/Resources/config/doctrine/ContactTicket.orm.yml"
+                entity: WellCommerce\Bundle\ContactBundle\Entity\ContactTicket

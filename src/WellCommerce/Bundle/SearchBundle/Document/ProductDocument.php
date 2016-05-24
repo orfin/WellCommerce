@@ -14,9 +14,9 @@ namespace WellCommerce\Bundle\SearchBundle\Document;
 
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductTranslation;
-use WellCommerce\Component\SearchEngine\Document\DocumentInterface;
-use WellCommerce\Component\SearchEngine\Document\Field\DocumentFieldCollection;
-use WellCommerce\Component\SearchEngine\Document\Field\TextField;
+use WellCommerce\Bundle\SearchBundle\Document\DocumentInterface;
+use WellCommerce\Bundle\SearchBundle\Document\Field\DocumentFieldCollection;
+use WellCommerce\Bundle\SearchBundle\Document\Field\TextField;
 
 /**
  * Class ProductDocument
@@ -63,5 +63,13 @@ final class ProductDocument implements DocumentInterface
     public function getType()
     {
         return 'product';
+    }
+    
+    public function getMapping() : array
+    {
+        return [
+            'phrase' => 'name',
+            'author' => 'author'
+        ];
     }
 }

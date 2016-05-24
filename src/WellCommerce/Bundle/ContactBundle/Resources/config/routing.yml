@@ -4,6 +4,7 @@ admin.contact.index:
         _controller: 'contact.controller.admin:indexAction'
     options:
         require_admin_permission: contact.index
+
 admin.contact.grid:
     path: /admin/cms/contact/grid
     defaults:
@@ -11,12 +12,14 @@ admin.contact.grid:
     options:
         expose: true
         require_admin_permission: contact.index
+
 admin.contact.add:
     path: /admin/cms/contact/add
     defaults:
         _controller: 'contact.controller.admin:addAction'
     options:
         require_admin_permission: contact.add
+
 admin.contact.edit:
     path: '/admin/cms/contact/edit/{id}'
     defaults:
@@ -24,6 +27,7 @@ admin.contact.edit:
     options:
         expose: true
         require_admin_permission: contact.edit
+
 admin.contact.delete:
     path: '/admin/cms/contact/delete/{id}'
     defaults:
@@ -31,8 +35,11 @@ admin.contact.delete:
     options:
         expose: true
         require_admin_permission: contact.delete
+
 front.contact.index:
-    path: /contact/index
+    path: /contact
+    options:
+        breadcrumb:
+            label: contact_ticket.index.contact
     defaults:
         _controller: 'contact.controller.front:indexAction'
-    options: {  }

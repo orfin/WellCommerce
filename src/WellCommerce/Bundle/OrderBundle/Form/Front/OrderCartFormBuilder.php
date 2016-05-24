@@ -33,7 +33,7 @@ final class OrderCartFormBuilder extends AbstractFormBuilder
     {
         $shippingMethod = $form->addChild($this->getElement('radio_group', [
             'name'        => 'shippingMethod',
-            'label'       => $this->trans('cart.label.shipping_method'),
+            'label'       => $this->trans('order.label.shipping_method'),
             'transformer' => $this->getRepositoryTransformer('entity', $this->get('shipping_method.repository'))
         ]));
 
@@ -41,7 +41,7 @@ final class OrderCartFormBuilder extends AbstractFormBuilder
 
         $paymentMethod = $form->addChild($this->getElement('radio_group', [
             'name'        => 'paymentMethod',
-            'label'       => $this->trans('cart.label.payment_method'),
+            'label'       => $this->trans('order.label.payment_method'),
             'transformer' => $this->getRepositoryTransformer('entity', $this->get('payment_method.repository'))
         ]));
 

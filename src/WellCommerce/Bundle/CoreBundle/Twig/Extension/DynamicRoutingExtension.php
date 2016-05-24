@@ -15,6 +15,7 @@ namespace WellCommerce\Bundle\CoreBundle\Twig\Extension;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 use WellCommerce\Bundle\CoreBundle\Helper\Request\RequestHelperInterface;
+use WellCommerce\Bundle\RoutingBundle\Provider\RouteProvider;
 
 /**
  * Class DynamicRoutingExtension
@@ -49,6 +50,7 @@ final class DynamicRoutingExtension extends \Twig_Extension
     {
         return [
             new \Twig_SimpleFunction('dynamic_path', [$this, 'getDynamicPath'], ['is_safe' => ['html']]),
+            new \Twig_SimpleFunction('dynamic_url', [$this, 'getDynamicUrl'], ['is_safe' => ['html']]),
             new \Twig_SimpleFunction('isActiveRoute', [$this, 'checkRouteIsActive'], ['is_safe' => ['html']]),
             new \Twig_SimpleFunction('sortingOptions', [$this, 'getSortingOptions'], ['is_safe' => ['html']]),
             new \Twig_SimpleFunction('activeSorting', [$this, 'getActiveSortingOption'], ['is_safe' => ['html']]),
@@ -59,7 +61,12 @@ final class DynamicRoutingExtension extends \Twig_Extension
     {
         return 'dynamic_path';
     }
-    
+
+    public function getDynamicUrl(int $id) : string
+    {
+        return $this->generator->generate(RouteProvider::DYNAMIC_PREFIX . $id);
+    }
+
     public function getDynamicPath(array $replacements = []) : string
     {
         $route                   = $this->requestHelper->getAttributesBagParam('_route');

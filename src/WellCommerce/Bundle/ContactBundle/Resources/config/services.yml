@@ -33,7 +33,7 @@ services:
 
     contact.controller.front:
         class: WellCommerce\Bundle\ContactBundle\Controller\Front\ContactController
-        arguments: ['@contact.manager']
+        arguments: ['@contact.manager', '@contact.form_builder.front']
         calls:
             - [setContainer, ['@service_container']]
 

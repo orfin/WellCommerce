@@ -7,10 +7,13 @@ order:
         edit: Edytuj zamówienie
         address: Adresy
         confirmation: Potwierdzenie
+        confirm: Potwierdzenie zamówienia
         order_total: Suma
         products: Produkty
         contact_details: Dane kontaktowe
         products_in_cart: Produkty w Twoim koszyku
+        cart: Koszyk
+        comments: Twoje uwagi
     button:
         confirm: Przejdź do potwierdzenia
         add_product: Dodaj produkt
@@ -76,11 +79,10 @@ order:
         label:
             copy_address: Adres dostawy jest taki sam jak adres płatnika
             addresses: Adresy
-            street: Ulica
-            street_no: Numer ulicy
-            flat_no: Numer domu/lokalu
+            line1: Pierwsza linia adresu
+            line2: Druga linia adresu
             province: Prowincja
-            post_code: Kod pocztowy
+            postal_code: Kod pocztowy
             country: Państwo
             city: Miejscowość
 

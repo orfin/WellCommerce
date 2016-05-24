@@ -29,6 +29,11 @@ final class PayPalConfigurator extends AbstractPaymentMethodConfigurator
         return 'paypal';
     }
 
+    public function getInitializeTemplateName() : string
+    {
+        return 'WellCommercePaymentBundle:Front/PayPal:initialize.html.twig';
+    }
+
     public function addConfigurationFields(FormBuilderInterface $builder, ElementInterface $fieldset, DependencyInterface $dependency)
     {
         $fieldset->addChild($builder->getElement('text_field', [
@@ -52,6 +57,16 @@ final class PayPalConfigurator extends AbstractPaymentMethodConfigurator
             ],
             'dependencies' => [$dependency]
         ]));
+
+        $fieldset->addChild($builder->getElement('select', [
+            'name'         => $this->getConfigurationKey('type'),
+            'label'        => $this->trans('paypal.label.type'),
+            'options'      => [
+                'paypal'      => 'paypal',
+                'credit_card' => 'credit_card'
+            ],
+            'dependencies' => [$dependency]
+        ]));
     }
 
     /**
@@ -64,8 +79,10 @@ final class PayPalConfigurator extends AbstractPaymentMethodConfigurator
         $resolver->setAllowedTypes($this->getConfigurationKey('client_id'), 'string');
         $resolver->setAllowedTypes($this->getConfigurationKey('client_secret'), 'string');
         $resolver->setAllowedTypes($this->getConfigurationKey('mode'), 'string');
+        $resolver->setAllowedTypes($this->getConfigurationKey('type'), 'string');
 
         $resolver->setAllowedValues($this->getConfigurationKey('mode'), ['sandbox', 'live']);
+        $resolver->setAllowedValues($this->getConfigurationKey('type'), ['paypal', 'credit_card']);
     }
     
     /**
@@ -76,7 +93,8 @@ final class PayPalConfigurator extends AbstractPaymentMethodConfigurator
         return [
             $this->getConfigurationKey('client_id'),
             $this->getConfigurationKey('client_secret'),
-            $this->getConfigurationKey('mode')
+            $this->getConfigurationKey('mode'),
+            $this->getConfigurationKey('type')
         ];
     }
 }

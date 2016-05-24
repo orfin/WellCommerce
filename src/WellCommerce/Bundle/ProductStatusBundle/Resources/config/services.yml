@@ -81,4 +81,4 @@ services:
         class: WellCommerce\Bundle\ProductStatusBundle\Twig\Extension\ProductStatusExtension
         tags:
             - { name: twig.extension }
-        arguments: ['@product_status.dataset.front']
+        arguments: ['@product_status.dataset.front', '@product_status.repository']

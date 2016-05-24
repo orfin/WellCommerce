@@ -19,9 +19,6 @@ namespace WellCommerce\Bundle\PaymentBundle\Processor;
  */
 class CashOnDeliveryProcessor extends AbstractPaymentProcessor
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getInitializeUrl() : string
     {
         return $this->getRouterHelper()->generateUrl('front.cash_on_delivery.initialize');

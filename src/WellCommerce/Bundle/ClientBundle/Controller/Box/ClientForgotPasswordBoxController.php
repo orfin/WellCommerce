@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\ClientBundle\Controller\Box;
 
 use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
 use WellCommerce\Bundle\ClientBundle\Exception\ResetPasswordException;
+use WellCommerce\Bundle\ClientBundle\Manager\ClientManager;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 
 /**
@@ -31,8 +32,20 @@ class ClientForgotPasswordBoxController extends AbstractBoxController
             $data = $form->getValue();
             
             try {
-                $this->manager->resetPassword($data['_username']);
+                $client = $this->getManager()->getClientByUsername($data['_username']);
+                $this->getManager()->resetPassword($client);
                 $this->getFlashHelper()->addSuccess('client.flash.reset_password.success');
+                
+                $this->getMailerHelper()->sendEmail([
+                    'recipient'     => $client->getContactDetails()->getEmail(),
+                    'subject'       => $this->getTranslatorHelper()->trans('client.email.heading.reset_password'),
+                    'template'      => 'WellCommerceClientBundle:Email:reset_password.html.twig',
+                    'parameters'    => [
+                        'client' => $client
+                    ],
+                    'configuration' => $client->getShop()->getMailerConfiguration(),
+                ]);
+                
             } catch (ResetPasswordException $e) {
                 $this->getFlashHelper()->addError($e->getMessage());
             }
@@ -54,7 +67,7 @@ class ClientForgotPasswordBoxController extends AbstractBoxController
             return $this->getRouterHelper()->redirectToAction('reset');
         }
         
-        $client->getClientDetails()->resetPassword();
+        $client->getClientDetails()->setPassword('');
         $form = $this->createChangePasswordForm($client);
         
         if ($form->handleRequest()->isSubmitted()) {
@@ -73,6 +86,11 @@ class ClientForgotPasswordBoxController extends AbstractBoxController
         ]);
     }
     
+    protected function getManager() : ClientManager
+    {
+        return parent::getManager();
+    }
+    
     /**
      * Creates a change password form for client
      *
@@ -80,11 +98,12 @@ class ClientForgotPasswordBoxController extends AbstractBoxController
      *
      * @return \WellCommerce\Component\Form\Elements\FormInterface
      */
-    protected function createChangePasswordForm(ClientInterface $client)
+    private function createChangePasswordForm(ClientInterface $client)
     {
         return $this->get('client_forgot_password_change.form_builder.front')->createForm([
             'name'              => 'change_password',
             'validation_groups' => ['client_password_change']
         ], $client);
     }
+    
 }

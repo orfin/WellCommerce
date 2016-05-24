@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
+
+    <class name="WellCommerce\Bundle\ContactBundle\Entity\ContactTicket">
+        <property name="subject">
+            <constraint name="NotBlank">
+                <option name="message">contact_ticket.error.subject.not_blank</option>
+            </constraint>
+            <constraint name="NotNull" />
+        </property>
+        <property name="email">
+            <constraint name="NotBlank">
+                <option name="message">contact_ticket.error.email.not_blank</option>
+            </constraint>
+            <constraint name="NotNull" />
+            <constraint name="Email">
+                <option name="message">contact_ticket.error.email.not_valid</option>
+            </constraint>
+        </property>
+        <property name="content">
+            <constraint name="NotBlank">
+                <option name="message">contact_ticket.error.email.not_blank</option>
+            </constraint>
+            <constraint name="NotNull" />
+        </property>
+    </class>
+</constraint-mapping>

@@ -4,6 +4,7 @@ admin.order.index:
         _controller: 'order.controller.admin:indexAction'
     options:
         require_admin_permission: order.index
+
 admin.order.grid:
     path: /admin/order/grid
     defaults:
@@ -11,6 +12,7 @@ admin.order.grid:
     options:
         expose: true
         require_admin_permission: order.index
+
 admin.order.products.grid:
     path: /admin/order/products/grid
     defaults:
@@ -18,12 +20,14 @@ admin.order.products.grid:
     options:
         expose: true
         require_admin_permission: order.edit
+
 admin.order.add:
     path: /admin/order/add
     defaults:
         _controller: 'order.controller.admin:addAction'
     options:
         require_admin_permission: order.add
+
 admin.order.edit:
     path: '/admin/order/edit/{id}'
     defaults:
@@ -31,6 +35,7 @@ admin.order.edit:
     options:
         expose: true
         require_admin_permission: order.edit
+
 admin.order.delete:
     path: '/admin/order/delete/{id}'
     defaults:
@@ -45,8 +50,7 @@ front.order_cart.index:
         _controller: 'order_cart.controller.front:indexAction'
     options:
         breadcrumb:
-            label: order.breadcrumb.cart
-            route: front.order_cart.index
+            label: order.heading.cart
 
 front.order_cart.add:
     path: '/order/cart/add/{id},{variant},{quantity}'
@@ -56,12 +60,14 @@ front.order_cart.add:
         quantity: '1'
     options:
         expose: true
+
 front.order_cart.edit:
     path: '/order/cart/edit/{id},{quantity}'
     defaults:
         _controller: 'order_cart.controller.front:editAction'
     options:
         expose: true
+
 front.order_cart.delete:
     path: '/order/cart/delete/{id}'
     defaults:
@@ -73,7 +79,9 @@ front.order_address.index:
     path: /order/address
     defaults:
         _controller: 'order_address.controller.front:indexAction'
-    options: {  }
+    options:
+        breadcrumb:
+            label: order.heading.address
 
 front.order_confirm.index:
     path: /order/confirm
@@ -81,8 +89,7 @@ front.order_confirm.index:
         _controller: 'order_confirmation.controller.front:indexAction'
     options:
         breadcrumb:
-            label: order.breadcrumb.confirmation
-            route: front.order_confirm.index
+            label: order.heading.confirm
 
 admin.order_status.index:
     path: /admin/order/status/index
@@ -90,6 +97,7 @@ admin.order_status.index:
         _controller: 'order_status.controller.admin:indexAction'
     options:
         require_admin_permission: order_status.index
+
 admin.order_status.grid:
     path: /admin/order/status/grid
     defaults:
@@ -97,6 +105,7 @@ admin.order_status.grid:
     options:
         expose: true
         require_admin_permission: order_status.index
+
 admin.order_status.add:
     path: /admin/order/status/add
     defaults:
@@ -110,6 +119,7 @@ admin.order_status.edit:
     options:
         expose: true
         require_admin_permission: order_status.edit
+
 admin.order_status.delete:
     path: '/admin/order/status/delete/{id}'
     defaults:
@@ -117,12 +127,14 @@ admin.order_status.delete:
     options:
         expose: true
         require_admin_permission: order_status.delete
+
 admin.order_status_group.index:
     path: /admin/order/status/group/index
     defaults:
         _controller: 'order_status_group.controller.admin:indexAction'
     options:
         require_admin_permission: order_status_group.index
+
 admin.order_status_group.grid:
     path: /admin/order/status/group/grid
     defaults:
@@ -130,12 +142,14 @@ admin.order_status_group.grid:
     options:
         expose: true
         require_admin_permission: order_status_group.index
+
 admin.order_status_group.add:
     path: /admin/order/status/group/add
     defaults:
         _controller: 'order_status_group.controller.admin:addAction'
     options:
         require_admin_permission: order_status_group.add
+
 admin.order_status_group.edit:
     path: '/admin/order/status/group/edit/{id}'
     defaults:
@@ -143,6 +157,7 @@ admin.order_status_group.edit:
     options:
         expose: true
         require_admin_permission: order_status_group.edit
+
 admin.order_status_group.delete:
     path: '/admin/order/status/group/delete/{id}'
     defaults:

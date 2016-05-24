@@ -43,6 +43,8 @@ final class LayeredNavigationHelper extends AbstractContainerAware implements La
         $formParams              = $this->parseFormParameters($this->getRequestHelper()->getRequestBagParam('form', '', FILTER_DEFAULT));
         $route                   = $this->getRequestHelper()->getRequestBagParam('route', 0);
         $currentAttributesParams = $this->getRequestHelper()->getRequestBagParam('route_params', []);
+        $currentQueryParams      = $this->getRequestHelper()->getRequestBagParam('query_params', []);
+        $currentRouteParams      = array_merge($currentAttributesParams, $currentQueryParams);
         $replacements            = [];
 
         foreach ($this->filters as $parameterName => $configuration) {
@@ -58,8 +60,8 @@ final class LayeredNavigationHelper extends AbstractContainerAware implements La
                 $replacements[$parameterName] = 0;
             }
         }
-        
-        $routeParams = array_replace($currentAttributesParams, $replacements);
+
+        $routeParams = array_replace($currentRouteParams, $replacements);
 
         return $this->getRouterHelper()->generateUrl($route, $routeParams);
     }

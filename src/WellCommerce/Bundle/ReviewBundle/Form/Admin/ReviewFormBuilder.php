@@ -31,6 +31,11 @@ class ReviewFormBuilder extends AbstractFormBuilder
             'label' => $this->trans('common.fieldset.general')
         ]));
 
+        $mainData->addChild($this->getElement('checkbox', [
+            'name'    => 'enabled',
+            'label'   => $this->trans('common.label.enabled'),
+        ]));
+
         $mainData->addChild($this->getElement('text_field', [
             'name'  => 'nick',
             'label' => $this->trans('review.label.nick'),
@@ -39,6 +44,17 @@ class ReviewFormBuilder extends AbstractFormBuilder
         $mainData->addChild($this->getElement('text_field', [
             'name'  => 'rating',
             'label' => $this->trans('review.label.rating'),
+        ]));
+
+        $mainData->addChild($this->getElement('text_field', [
+            'name'  => 'ratingLevel',
+            'label' => $this->trans('review.label.rating_level'),
+        ]));
+
+
+        $mainData->addChild($this->getElement('text_field', [
+            'name'  => 'ratingRecommendation',
+            'label' => $this->trans('review.label.rating_recommendation'),
         ]));
 
         $mainData->addChild($this->getElement('text_area', [

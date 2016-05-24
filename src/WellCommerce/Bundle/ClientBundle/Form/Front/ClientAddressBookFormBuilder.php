@@ -45,6 +45,16 @@ class ClientAddressBookFormBuilder extends AbstractFormBuilder
         ]));
 
         $billingAddress->addChild($this->getElement('text_field', [
+            'name'  => 'billingAddress.companyName',
+            'label' => $this->trans('client.label.address.company_name'),
+        ]));
+
+        $billingAddress->addChild($this->getElement('text_field', [
+            'name'  => 'billingAddress.vatId',
+            'label' => $this->trans('client.label.address.vat_id'),
+        ]));
+
+        $billingAddress->addChild($this->getElement('text_field', [
             'name'  => 'billingAddress.line1',
             'label' => $this->trans('client.label.address.line1'),
         ]));

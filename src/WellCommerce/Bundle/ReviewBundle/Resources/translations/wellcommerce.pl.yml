@@ -9,9 +9,15 @@ review:
         created_at: Utworzono
         product: Produkt
         id: ID
+        content: Zostaw tutaj swój komentarz
     button:
         add_opinion: Wyślij opinię
     link:
         first_review: Bądź pierwszą osobą która doda opinię
     flash:
         success: Opinia dodana prawidłowo.
+        error: Opinia nie została dodana. Formularz zawiera błędy.
+report:
+    flash:
+        success: Raport opinii został wysłany.
+        error: Raport opinii nie został wysłany.

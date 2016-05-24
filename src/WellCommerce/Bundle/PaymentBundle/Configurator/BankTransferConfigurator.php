@@ -29,6 +29,11 @@ final class BankTransferConfigurator extends AbstractPaymentMethodConfigurator
         return 'bank_transfer';
     }
 
+    public function getInitializeTemplateName() : string
+    {
+        return 'WellCommercePaymentBundle:Front/BankTransfer:initialize.html.twig';
+    }
+
     public function addConfigurationFields(FormBuilderInterface $builder, ElementInterface $fieldset, DependencyInterface $dependency)
     {
         $fieldset->addChild($builder->getElement('text_field', [
@@ -50,9 +55,6 @@ final class BankTransferConfigurator extends AbstractPaymentMethodConfigurator
         ]));
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureOptions(OptionsResolver $resolver)
     {
         parent::configureOptions($resolver);
@@ -62,9 +64,6 @@ final class BankTransferConfigurator extends AbstractPaymentMethodConfigurator
         $resolver->setAllowedTypes($this->getConfigurationKey('sort_number'), 'string');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSupportedConfigurationKeys() : array
     {
         return [

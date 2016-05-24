@@ -47,12 +47,6 @@
             </constraint>
         </property>
         <property name="line2">
-            <constraint name="NotBlank">
-                <option name="groups">
-                    <value>order_billing_address</value>
-                    <value>client_address_book</value>
-                </option>
-            </constraint>
             <constraint name="NotNull">
                 <option name="groups">
                     <value>order_billing_address</value>

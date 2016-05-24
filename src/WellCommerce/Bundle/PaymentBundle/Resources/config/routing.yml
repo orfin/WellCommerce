@@ -4,6 +4,8 @@ front.payment.initialize:
         _controller: 'payment.controller.front:initializeAction'
     options:
         expose: true
+        breadcrumb:
+            label: payment.heading.initialize
 
 front.payment.confirm:
     path: '/payment/confirm/{token}'
@@ -11,6 +13,8 @@ front.payment.confirm:
         _controller: 'payment.controller.front:confirmAction'
     options:
         expose: true
+        breadcrumb:
+            label: payment.heading.confirm
 
 front.payment.cancel:
     path: '/payment/cancel/{token}'
@@ -18,6 +22,8 @@ front.payment.cancel:
         _controller: 'payment.controller.front:cancelAction'
     options:
         expose: true
+        breadcrumb:
+            label: payment.heading.cancel
 
 front.payment.execute:
     path: '/payment/execute/{token}'
@@ -25,6 +31,8 @@ front.payment.execute:
         _controller: 'payment.controller.front:executeAction'
     options:
         expose: true
+        breadcrumb:
+            label: payment.heading.execute
 
 front.payment.notify:
     path: '/payment/notify/{token}'
@@ -32,6 +40,8 @@ front.payment.notify:
         _controller: 'payment.controller.front:notifyAction'
     options:
         expose: true
+        breadcrumb:
+            label: payment.heading.notify
 
 admin.payment_method.index:
     path: /admin/configuration/payment/index

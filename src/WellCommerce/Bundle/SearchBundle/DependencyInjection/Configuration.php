@@ -26,11 +26,11 @@ class Configuration extends BaseConfiguration
     {
         $builder = new TreeBuilder();
         $node    =
-            $builder->root('engines')
-                    ->useAttributeAsKey('name')
-                    ->prototype('array')
-                        ->children()
-                            ->arrayNode('adapter')->isRequired()
+                $builder->root('engine')
+                    ->children()
+                        ->arrayNode('adapters')->isRequired()
+                            ->useAttributeAsKey('name')
+                            ->prototype('array')
                                 ->children()
                                     ->scalarNode('class')->isRequired()->end()
                                     ->arrayNode('options')
@@ -39,13 +39,29 @@ class Configuration extends BaseConfiguration
                                     ->end()
                                 ->end()
                             ->end()
-                            ->arrayNode('query_builder')->isRequired()
+                        ->end()
+                        ->arrayNode('indexes')->isRequired()
+                            ->useAttributeAsKey('name')
+                            ->prototype('array')
                                 ->children()
-                                    ->scalarNode('class')->isRequired()->end()
+                                    ->scalarNode('adapter')->defaultValue('lucene')->isRequired()->end()
+                                    ->scalarNode('repository')->isRequired()->end()
+                                    ->arrayNode('fields')->isRequired()
+                                        ->useAttributeAsKey('name')
+                                        ->prototype('array')
+                                            ->children()
+                                                ->booleanNode('indexed')->isRequired()->defaultValue(true)->end()
+                                                ->floatNode('boost')->isRequired()->defaultValue(true)->end()
+                                                ->booleanNode('translatable')->isRequired()->defaultValue(false)->end()
+                                                ->scalarNode('property')->isRequired()->end()
+                                                ->scalarNode('analyzer')->defaultValue(null)->end()
+                                            ->end()
+                                        ->end()
+                                    ->end()
                                 ->end()
                             ->end()
                         ->end()
-                    ->end();
+                ->end();
 
         return $node;
     }

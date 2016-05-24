@@ -50,7 +50,7 @@ class ClientSubscriber extends AbstractEventSubscriber
                 'parameters'    => [
                     'client' => $client
                 ],
-                'configuration' => $client->getShop(),
+                'configuration' => $client->getShop()->getMailerConfiguration(),
             ]);
         }
     }

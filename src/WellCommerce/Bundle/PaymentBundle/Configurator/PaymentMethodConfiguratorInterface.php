@@ -37,4 +37,6 @@ interface PaymentMethodConfiguratorInterface
     public function addConfigurationFields(FormBuilderInterface $builder, ElementInterface $fieldset, DependencyInterface $dependency);
 
     public function getSupportedConfigurationKeys() : array;
+
+    public function getInitializeTemplateName() : string;
 }

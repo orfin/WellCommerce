@@ -10,6 +10,7 @@ order:
         order_total: Summary
         products: Products
         contact_details: Contact details
+        cart: Cart
     button:
         confirm: Go to confirmation
         add_product: Add product
@@ -73,11 +74,10 @@ address:
     label:
         copy_address: Shipping address same as billing address
         addresses: Addresses
-        street: Street
-        street_no: Street no.
-        flat_no: Flat no.
+        line1: Address line 1
+        line2: Address line 2
         province: Province
-        post_code: Post code
+        postal_code: Post code
         country: Country
         city: City
 

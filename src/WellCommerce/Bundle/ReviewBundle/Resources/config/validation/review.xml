@@ -4,6 +4,7 @@
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
 
     <class name="WellCommerce\Bundle\ReviewBundle\Entity\Review">
+        <constraint name="WellCommerce\Bundle\ReviewBundle\Doctrine\Validator\Constraints\BadWords" />
         <property name="nick">
             <constraint name="NotBlank">
                 <option name="message">review.error.nick.not_blank</option>
@@ -15,6 +16,22 @@
                 <option name="message">review.error.review.not_blank</option>
             </constraint>
             <constraint name="NotNull" />
+        </property>
+        <property name="rating">
+            <constraint name="NotBlank">
+                <option name="message">review.error.rating.not_blank</option>
+            </constraint>
+            <constraint name="NotNull" />
+            <constraint name="Type">
+                <option name="type">integer</option>
+                <option name="message">review.error.rating.not_blank</option>
+            </constraint>
+            <constraint name="Range">
+                <option name="min">0</option>
+                <option name="max">5</option>
+                <option name="minMessage">review.error.rating.bad_val</option>
+                <option name="maxMessage">review.error.rating.bad_val</option>
+            </constraint>
         </property>
     </class>
 </constraint-mapping>

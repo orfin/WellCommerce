@@ -30,4 +30,22 @@ class ProductInfoBoxController extends AbstractBoxController
         
         return $this->displayTemplate('index', $templateData);
     }
+    
+    private function addBreadcrumbs(CategoryInterface $category)
+    {
+        $paths = $this->getRepository()->getCategoryPath($category);
+        
+        /** @var CategoryInterface $path */
+        foreach ($paths as $path) {
+            $this->getBreadcrumbProvider()->add(new Breadcrumb([
+                'label' => $path->translate()->getName(),
+                'url'   => $this->getRouterHelper()->generateUrl($path->translate()->getRoute()->getId())
+            ]));
+        }
+    }
+    
+    private function getRepository() : CategoryRepositoryInterface
+    {
+        return $this->getManager()->getRepository();
+    }
 }

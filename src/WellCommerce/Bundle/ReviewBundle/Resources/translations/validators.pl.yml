@@ -1,0 +1,7 @@
+review:
+    error:
+        nick:
+            not_blank: Pole "Imię" musi być uzupełnione
+        content:
+            not_blank: Pole "Treść" musi być uzupełnione
+            bad_words: Pole "Treść" nie może zawierać przekleństw
