@@ -10,15 +10,20 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\SearchBundle\Document\Field;
-
-use Doctrine\Common\Collections\ArrayCollection;
+namespace WellCommerce\Bundle\SearchBundle\Document;
 
 /**
- * Class DocumentFieldCollection
+ * Interface DocumentFieldInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class DocumentFieldCollection extends ArrayCollection
+interface DocumentFieldInterface
 {
+    public function getName() : string;
+
+    public function getValue() : string;
+
+    public function isIndexable() : bool;
+
+    public function getBoost() : float;
 }

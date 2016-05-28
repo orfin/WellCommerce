@@ -28,7 +28,7 @@ $(document).ready(function () {
 
     $('form#search').GSearch({
         sProductSearchRoute:        'front.search.index',
-        sProductLiveSearchRoute:    'front.search.view',
+        sProductLiveSearchRoute:    'front.search.quick',
         sPhraseInputSelector:       '#phrase',
         sSearchResultsSelector:     'div#search-results',
         oAddCartButtonSettings:     oAddCartButtonSettings

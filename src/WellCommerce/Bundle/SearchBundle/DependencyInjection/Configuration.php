@@ -13,6 +13,7 @@ namespace WellCommerce\Bundle\SearchBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\Configuration as BaseConfiguration;
+use WellCommerce\Bundle\SearchBundle\Type\IndexType;
 
 /**
  * Class Configuration
@@ -26,41 +27,42 @@ class Configuration extends BaseConfiguration
     {
         $builder = new TreeBuilder();
         $node    =
-                $builder->root('engine')
-                    ->children()
-                        ->arrayNode('adapters')->isRequired()
-                            ->useAttributeAsKey('name')
-                            ->prototype('array')
-                                ->children()
-                                    ->scalarNode('class')->isRequired()->end()
-                                    ->arrayNode('options')
-                                        ->useAttributeAsKey('name')
-                                        ->prototype('scalar')->end()
-                                    ->end()
+            $builder->root('engine')
+                ->children()
+                    ->arrayNode('adapters')->isRequired()
+                        ->useAttributeAsKey('name')
+                        ->prototype('array')
+                            ->children()
+                                ->scalarNode('class')->isRequired()->end()
+                                ->arrayNode('options')
+                                    ->useAttributeAsKey('name')
+                                    ->prototype('scalar')->end()
                                 ->end()
                             ->end()
                         ->end()
-                        ->arrayNode('indexes')->isRequired()
-                            ->useAttributeAsKey('name')
-                            ->prototype('array')
-                                ->children()
-                                    ->scalarNode('adapter')->defaultValue('lucene')->isRequired()->end()
-                                    ->scalarNode('repository')->isRequired()->end()
-                                    ->arrayNode('fields')->isRequired()
-                                        ->useAttributeAsKey('name')
-                                        ->prototype('array')
-                                            ->children()
-                                                ->booleanNode('indexed')->isRequired()->defaultValue(true)->end()
-                                                ->floatNode('boost')->isRequired()->defaultValue(true)->end()
-                                                ->booleanNode('translatable')->isRequired()->defaultValue(false)->end()
-                                                ->scalarNode('property')->isRequired()->end()
-                                                ->scalarNode('analyzer')->defaultValue(null)->end()
+                    ->end()
+                    ->arrayNode('index')->isRequired()
+                        ->children()
+                            ->arrayNode('types')->isRequired()
+                                ->useAttributeAsKey('name')
+                                ->prototype('array')
+                                    ->children()
+                                        ->scalarNode('class')->defaultValue(IndexType::class)->end()
+                                        ->arrayNode('mapping')
+                                            ->useAttributeAsKey('name')
+                                            ->prototype('array')
+                                                ->children()
+                                                    ->booleanNode('indexable')->defaultValue(true)->isRequired()->end()
+                                                    ->floatNode('boost')->defaultValue(1)->isRequired()->end()
+                                                    ->scalarNode('value_expression')->isRequired()->end()
+                                                ->end()
                                             ->end()
                                         ->end()
                                     ->end()
                                 ->end()
                             ->end()
                         ->end()
+                    ->end()
                 ->end();
 
         return $node;

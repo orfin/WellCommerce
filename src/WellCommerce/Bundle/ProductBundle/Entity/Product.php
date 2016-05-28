@@ -131,16 +131,25 @@ class Product extends AbstractEntity implements ProductInterface
      */
     protected $packageSize = 1;
     
+    /**
+     * {@inheritdoc}
+     */
     public function getSku() : string
     {
         return $this->sku;
     }
     
+    /**
+     * {@inheritdoc}
+     */
     public function setSku(string $sku)
     {
         $this->sku = $sku;
     }
     
+    /**
+     * {@inheritdoc}
+     */
     public function getStock() : int
     {
         return $this->stock;

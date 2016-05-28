@@ -27,15 +27,16 @@ parameters:
 
     developer_mode.ip: 127.0.0.1
 
-    search_engine: lucene
-
     php_binary_path: ~
 
-    facebook_app_id: ~
-    facebook_app_secret: ~
+    search_engine: elasticsearch
+
+    facebook:
+        app_id: ~
+        app_secret: ~
 
     pdo.db_options:
-      db_table:    session
-      db_id_col:   session_id
-      db_data_col: session_value
-      db_time_col: session_time
+        db_table:    session
+        db_id_col:   session_id
+        db_data_col: session_value
+        db_time_col: session_time

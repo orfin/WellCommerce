@@ -12,30 +12,45 @@
 
 namespace WellCommerce\Bundle\SearchBundle\Adapter;
 
-use Doctrine\Common\Collections\Collection;
-use WellCommerce\Bundle\SearchBundle\Builder\SearchQueryBuilderInterface;
+use WellCommerce\Bundle\SearchBundle\Document;
 use WellCommerce\Bundle\SearchBundle\Document\DocumentInterface;
+use WellCommerce\Bundle\SearchBundle\Type\IndexType;
 
 /**
  * Class ZendLuceneAdapter
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-final class ZendLuceneAdapter implements SearchAdapterInterface
+class ZendLuceneAdapter implements AdapterInterface
 {
+    public function getIndexName(string $locale) : string
+    {
+        // TODO: Implement getIndexName() method.
+    }
+
+    public function createIndex(string $locale)
+    {
+        // TODO: Implement createIndex() method.
+    }
+
+    public function removeIndex(string $locale)
+    {
+        // TODO: Implement removeIndex() method.
+    }
+
+    public function flushIndex(string $locale)
+    {
+        // TODO: Implement flushIndex() method.
+    }
+
+    public function optimizeIndex(string $locale)
+    {
+        // TODO: Implement optimizeIndex() method.
+    }
+
     public function addDocument(DocumentInterface $document)
     {
         // TODO: Implement addDocument() method.
-    }
-
-    public function addDocuments(Collection $collection)
-    {
-        // TODO: Implement addDocuments() method.
-    }
-
-    public function removeDocument(DocumentInterface $document)
-    {
-        // TODO: Implement removeDocument() method.
     }
 
     public function updateDocument(DocumentInterface $document)
@@ -43,33 +58,8 @@ final class ZendLuceneAdapter implements SearchAdapterInterface
         // TODO: Implement updateDocument() method.
     }
 
-    public function createIndex()
+    public function removeDocument(DocumentInterface $document)
     {
-        // TODO: Implement createIndex() method.
-    }
-
-    public function removeIndex()
-    {
-        // TODO: Implement removeIndex() method.
-    }
-
-    public function flushIndex()
-    {
-        // TODO: Implement flushIndex() method.
-    }
-
-    public function optimizeIndex()
-    {
-        // TODO: Implement optimizeIndex() method.
-    }
-
-    public function getStats()
-    {
-        // TODO: Implement getStats() method.
-    }
-
-    public function search(SearchQueryBuilderInterface $builder, string $type) : array
-    {
-        // TODO: Implement search() method.
+        // TODO: Implement removeDocument() method.
     }
 }

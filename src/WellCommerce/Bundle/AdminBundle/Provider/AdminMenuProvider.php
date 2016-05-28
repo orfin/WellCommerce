@@ -54,11 +54,13 @@ class AdminMenuProvider
     {
         if (is_file($cache = $this->kernel->getCacheDir() . '/' . self::CACHE_FILENAME)) {
             $menu = require $cache;
-        } else {
-            $menu = $this->generateMenu();
-            $this->writeCache($menu);
+
+            return $menu;
         }
-        
+
+        $menu = $this->generateMenu();
+        $this->writeCache($menu);
+
         return $menu;
     }
     

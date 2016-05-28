@@ -10,15 +10,15 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\SearchBundle\Mapping;
+namespace WellCommerce\Bundle\SearchBundle\Document;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Class FieldsCollection
+ * Class DocumentFieldCollection
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class FieldsCollection extends ArrayCollection
+final class DocumentFieldCollection extends ArrayCollection
 {
 }

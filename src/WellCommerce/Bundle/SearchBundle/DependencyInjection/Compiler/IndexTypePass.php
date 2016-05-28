@@ -15,14 +15,14 @@ namespace WellCommerce\Bundle\SearchBundle\DependencyInjection\Compiler;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
-use WellCommerce\Component\Form\FormBuilderInterface;
+use WellCommerce\Bundle\SearchBundle\Type\IndexTypeInterface;
 
 /**
- * Class FormBuilderPass
+ * Class IndexTypePass
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class SearchQueryBuilderPass implements CompilerPassInterface
+class IndexTypePass implements CompilerPassInterface
 {
     /**
      * Processes the container
@@ -31,24 +31,24 @@ class SearchQueryBuilderPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        $tag       = 'form_builder';
-        $interface = FormBuilderInterface::class;
+        $tag                            = 'search.index_type';
+        $interface                      = IndexTypeInterface::class;
+        $typeCollectionDefinition       = $container->getDefinition('search.index_type.collection');
 
         foreach ($container->findTaggedServiceIds($tag) as $id => $attributes) {
-            $definition = $container->getDefinition($id);
-            $refClass   = new \ReflectionClass($definition->getClass());
+            $itemDefinition = $container->getDefinition($id);
+            $refClass       = new \ReflectionClass($itemDefinition->getClass());
 
             if (!$refClass->implementsInterface($interface)) {
                 throw new \InvalidArgumentException(
-                    sprintf('FormBuilder "%s" tagged with "%s" must implement interface "%s".', $id, $tag, $interface)
+                    sprintf('Index type "%s" tagged with "%s" must implement interface "%s".', $id, $tag, $interface)
                 );
             }
 
-            $definition->addArgument($id);
-            $definition->addArgument(new Reference('form.resolver.factory'));
-            $definition->addArgument(new Reference('form.handler'));
-            $definition->addArgument(new Reference('event_dispatcher'));
-            $definition->addMethodCall('setContainer', [new Reference('service_container')]);
+            $typeCollectionDefinition->addMethodCall('set', [
+                $attributes[0]['type'],
+                new Reference($id)
+            ]);
         }
     }
 }

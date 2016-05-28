@@ -10,24 +10,18 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\SearchBundle\Document;
+namespace WellCommerce\Bundle\SearchBundle\Converter;
 
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
+use WellCommerce\Bundle\SearchBundle\Document\DocumentInterface;
 use WellCommerce\Bundle\SearchBundle\Type\IndexTypeInterface;
 
 /**
- * Interface DocumentInterface
+ * Interface EntityConverterInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface DocumentInterface
+interface EntityConverterInterface
 {
-    public function getIdentifier() : int;
-
-    public function getIndexType() : IndexTypeInterface;
-
-    public function getLocale() : string;
-
-    public function addField(DocumentFieldInterface $field) : self;
-
-    public function getFields() : DocumentFieldCollection;
+    public function convert(EntityInterface $entity, IndexTypeInterface $type, string $locale) : DocumentInterface;
 }

@@ -1,8 +1,8 @@
 front.search.index:
-    path: '/search/index/{index},{page},{limit},{orderBy},{orderDir},{priceFrom},{priceTo},{view},{producers},{attributes}'
+    path: '/search/index/{indexType},{page},{limit},{orderBy},{orderDir},{priceFrom},{priceTo},{view},{producers},{attributes}'
     defaults:
         _controller: 'search.controller.front:indexAction'
-        index: 'product'
+        indexType: 'product'
         page: '1'
         limit: '12'
         orderBy: score
@@ -26,10 +26,10 @@ front.search.index:
         producers: '[\d+_]+'
         attributes: '[\d+_]+'
 
-front.search.view:
-    path: '/search/view/{index}'
+front.search.quick:
+    path: '/search/quick/{indexType}'
     defaults:
-        _controller: 'search.controller.front:viewAction'
-        index: 'product'
+        _controller: 'search.controller.front:quickSearchAction'
+        indexType: 'product'
     options:
         expose: true

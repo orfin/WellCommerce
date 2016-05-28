@@ -12,7 +12,9 @@
 
 namespace WellCommerce\Bundle\SearchBundle;
 
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
+use WellCommerce\Bundle\SearchBundle\DependencyInjection\Compiler\IndexTypePass;
 
 /**
  * Class WellCommerceSearchBundle
@@ -21,4 +23,9 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  */
 class WellCommerceSearchBundle extends Bundle
 {
+    public function build(ContainerBuilder $container)
+    {
+        parent::build($container);
+        $container->addCompilerPass(new IndexTypePass());
+    }
 }

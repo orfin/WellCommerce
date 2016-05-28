@@ -10,18 +10,19 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\SearchBundle\Document\Field;
+namespace WellCommerce\Bundle\SearchBundle\Type;
+
+use WellCommerce\Bundle\SearchBundle\Property\MappedProperty;
 
 /**
- * Interface DocumentFieldInterface
+ * Class IndexTypeMapping
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface DocumentFieldInterface
+class IndexTypeMapping
 {
-    public function getName() : string;
-
-    public function getValue() : string;
-
-    public function getType() : string;
+    public function addField(string $name, bool $indexable, float $boost, MappedProperty $property)
+    {
+        
+    }
 }

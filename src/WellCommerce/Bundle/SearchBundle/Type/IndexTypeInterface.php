@@ -10,13 +10,18 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\SearchBundle\Manager;
+namespace WellCommerce\Bundle\SearchBundle\Type;
+
+use WellCommerce\Bundle\SearchBundle\Document\DocumentInterface;
 
 /**
- * Interface SearchIndexManagerInterface
+ * Interface IndexTypeInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface SearchIndexManagerInterface
+interface IndexTypeInterface
 {
+    public function getName() : string;
+
+    public function getFields() : IndexTypeFieldCollection;
 }

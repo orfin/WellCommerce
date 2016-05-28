@@ -1,6 +1,3 @@
-parameters:
-    search_term_min_length: 3
-
 well_commerce_search:
     engine:
         adapters:
@@ -9,50 +6,44 @@ well_commerce_search:
                 options:
                     number_of_shards: 2
                     number_of_replicas: 0
+                    index_prefix: wellcommerce_
+                    query_min_length: 3
             lucene:
                 class: WellCommerce\Bundle\SearchBundle\Adapter\ZendLuceneAdapter
                 options:
-                    index_file: "%kernel.root_dir%/lucene/"
+                    index_path: "%kernel.root_dir%/lucene/"
                     max_buffered_docs: 10
                     max_merge_docs: 100000
                     merge_factor: 10
-        indexes:
-            product:
-                adapter: "%search_adapter%"
-                repository: product.repository
-                fields:
-                    sku:
-                        indexed: true
-                        type: text
-                        boost: 1
-                        translatable: false
-                        property: sku
-                        analyzer: ~
-                    name:
-                        indexed: true
-                        type: text
-                        boost: 1
-                        translatable: true
-                        property: name
-                        analyzer: ~
-                    short_description:
-                        indexed: true
-                        type: text
-                        boost: 0.5
-                        translatable: true
-                        property: shortDescription
-                        analyzer: ~
-                    author:
-                        indexed: true
-                        type: text
-                        boost: 1
-                        translatable: false
-                        property: author
-                        analyzer: ~
-                    isbn:
-                        indexed: true
-                        type: text
-                        boost: 1
-                        translatable: false
-                        property: isbn
-                        analyzer: ~
+                    index_prefix: wellcommerce_
+                    query_min_length: 3
+        index:
+            types:
+                product:
+                    entity: WellCommerce\Bundle\ProductBundle\Entity\Product
+                    mapping:
+                        sku:
+                            indexable: true
+                            boost: 1
+                            value_expression: resource.getSku()
+                        name:
+                            indexable: true
+                            boost: 1
+                            value_expression: resource.translate(locale).getName()
+                        short_description:
+                            indexable: true
+                            boost: 0.5
+                            value_expression: resource.translate(locale).getShortDescription()
+                        description:
+                            indexable: true
+                            boost: 0.5
+                            value_expression: resource.translate(locale).getDescription()
+                        producer:
+                            indexable: true
+                            boost: 0.5
+                            value_expression: resource.getProducer().translate(locale).getName()
+                        category:
+                            indexable: true
+                            boost: 0.5
+                            value_expression: resource.getCategories().first().translate(locale).getName()
+

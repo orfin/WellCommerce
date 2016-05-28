@@ -16,6 +16,8 @@ use League\OAuth2\Client\Provider\Facebook;
 use League\OAuth2\Client\Provider\FacebookUser;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\OptionsResolver\Options;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
@@ -29,62 +31,52 @@ use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 use WellCommerce\Bundle\CoreBundle\Helper\Router\RouterHelperInterface;
 use WellCommerce\Bundle\DoctrineBundle\Manager\ManagerInterface;
 
-class FacebookAuthenticator extends AbstractGuardAuthenticator
+/**
+ * Class FacebookAuthenticator
+ *
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
+ */
+final class FacebookAuthenticator extends AbstractGuardAuthenticator
 {
-    /**
-     * @var string
-     */
-    const GRAPH_API_VERSION = 'v2.5';
-    
-    /**
-     * @var array
-     */
-    const SCOPES = ['email'];
-    
     /**
      * @var ManagerInterface
      */
-    protected $clientManager;
+    private $clientManager;
     
     /**
      * @var RouterHelperInterface
      */
-    protected $routerHelper;
-    
-    /**
-     * @var string
-     */
-    protected $appId;
-    
-    /**
-     * @var string
-     */
-    protected $appSecret;
-    
+    private $routerHelper;
+
     /**
      * @var Facebook
      */
-    protected $facebookProvider;
-    
+    private $facebookProvider;
+
+    /**
+     * @var array
+     */
+    private $options;
+
     /**
      * FacebookAuthenticator constructor.
      *
      * @param ManagerInterface      $clientManager
      * @param RouterHelperInterface $routerHelper
-     * @param string                $appId
-     * @param string                $appSecret
+     * @param array                 $options
      */
-    public function __construct(ManagerInterface $clientManager, RouterHelperInterface $routerHelper, $appId, $appSecret)
+    public function __construct(ManagerInterface $clientManager, RouterHelperInterface $routerHelper, array $options)
     {
         $this->clientManager = $clientManager;
         $this->routerHelper  = $routerHelper;
-        $this->appId         = $appId;
-        $this->appSecret     = $appSecret;
+        $resolver            = new OptionsResolver();
+        $this->configureOptions($resolver);
+        $this->options = $resolver->resolve($options);
     }
     
     public function getCredentials(Request $request)
     {
-        if ($request->get('_route') !== 'oauth.facebook.check') {
+        if ($request->get('_route') !== $this->options['redirect_route']) {
             return null;
         }
         
@@ -196,7 +188,7 @@ class FacebookAuthenticator extends AbstractGuardAuthenticator
     public function start(Request $request, AuthenticationException $authException = null)
     {
         $authUrl = $this->getProvider()->getAuthorizationUrl([
-            'scopes' => self::SCOPES
+            'scopes' => $this->options['scopes']
         ]);
         
         return new RedirectResponse($authUrl);
@@ -209,10 +201,10 @@ class FacebookAuthenticator extends AbstractGuardAuthenticator
     {
         if (null === $this->facebookProvider) {
             $this->facebookProvider = new Facebook([
-                'clientId'        => $this->appId,
-                'clientSecret'    => $this->appSecret,
-                'redirectUri'     => $this->routerHelper->generateUrl('oauth.facebook.check', [], UrlGeneratorInterface::ABSOLUTE_URL),
-                'graphApiVersion' => self::GRAPH_API_VERSION,
+                'clientId'        => $this->options['app_id'],
+                'clientSecret'    => $this->options['app_secret'],
+                'redirectUri'     => $this->options['redirect_uri'],
+                'graphApiVersion' => $this->options['graph_version'],
             ]);
         }
         
@@ -233,5 +225,31 @@ class FacebookAuthenticator extends AbstractGuardAuthenticator
             $providerKey,
             $user->getRoles()
         );
+    }
+
+    private function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setRequired([
+            'app_id',
+            'app_secret',
+            'scopes',
+            'graph_version',
+            'redirect_route',
+            'redirect_uri',
+        ]);
+
+        $resolver->setDefault('graph_version', 'v2.5');
+        $resolver->setDefault('scopes', ['email']);
+        $resolver->setDefault('redirect_route', 'oauth.facebook.check');
+        $resolver->setDefault('redirect_uri', function (Options $options) {
+            return $this->routerHelper->generateUrl($options['redirect_route'], [], UrlGeneratorInterface::ABSOLUTE_URL);
+        });
+
+        $resolver->setAllowedTypes('app_id', ['string', 'null']);
+        $resolver->setAllowedTypes('app_secret', ['string', 'null']);
+        $resolver->setAllowedTypes('scopes', 'array');
+        $resolver->setAllowedTypes('graph_version', 'string');
+        $resolver->setAllowedTypes('redirect_route', 'string');
+        $resolver->setAllowedTypes('redirect_uri', 'string');
     }
 }

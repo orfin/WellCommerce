@@ -12,21 +12,26 @@
 
 namespace WellCommerce\Bundle\SearchBundle\Adapter;
 
-use Doctrine\Common\Collections\Collection;
 use Elasticsearch\Client;
 use Elasticsearch\ClientBuilder;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use WellCommerce\Bundle\SearchBundle\Builder\SearchQueryBuilderInterface;
+use WellCommerce\Bundle\SearchBundle\Document\DocumentFieldInterface;
 use WellCommerce\Bundle\SearchBundle\Document\DocumentInterface;
-use WellCommerce\Bundle\SearchBundle\Document\Field\DocumentFieldInterface;
+use WellCommerce\Bundle\SearchBundle\Type\IndexTypeInterface;
 
 /**
  * Class ElasticSearchAdapter
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-final class ElasticSearchAdapter implements SearchAdapterInterface
+final class ElasticSearchAdapter implements AdapterInterface
 {
+    /**
+     * @var string
+     */
+    private $indexName;
+
     /**
      * @var array
      */
@@ -36,12 +41,7 @@ final class ElasticSearchAdapter implements SearchAdapterInterface
      * @var Client
      */
     private $client;
-
-    /**
-     * @var string|null
-     */
-    private $index = null;
-
+    
     /**
      * ElasticSearchAdapter constructor.
      *
@@ -52,25 +52,41 @@ final class ElasticSearchAdapter implements SearchAdapterInterface
         $resolver = new OptionsResolver();
         $this->configureOptions($resolver);
         $this->options = $resolver->resolve($options);
-        $this->client  = $this->createClient();
     }
     
-    public function search(SearchQueryBuilderInterface $builder, string $type) : array
+    public function search(IndexTypeInterface $indexType, Request $request, int $limit = 100) : array
     {
         $params = [
-            'index' => $this->getIndex(),
-            'type'  => $type,
-            'size'  => 100,
+            'index' => $this->getIndexName($request->getLocale()),
+            'type'  => $indexType->getName(),
+            "size"  => $limit,
             'body'  => [
-                'query' => $builder->getQuery()
+                'query' => [
+                    'template' => [
+                        'inline' => [
+                            "query_string" => [
+                                'phrase_slop'                  => 1,
+                                'auto_generate_phrase_queries' => true,
+                                'query'                        => '{{query_string}}',
+                                'fields'                       => ["name_en^5", "description_*"],
+                            ]
+                        ],
+                        'params' => [
+                            'query_string' => 'perspiciatis',
+                        ]
+                    ],
+                ]
             ]
         ];
 
         $results = $this->client->search($params);
 
+        print_r($results);
+        die();
+
         return $this->processResults($results);
     }
-    
+
     public function addDocument(DocumentInterface $document)
     {
         $body = [];
@@ -80,45 +96,20 @@ final class ElasticSearchAdapter implements SearchAdapterInterface
         });
         
         $params = [
-            'index' => $this->getIndex(),
-            'type'  => $document->getType(),
+            'index' => $this->getIndexName($document->getLocale()),
+            'type'  => $document->getIndexType()->getName(),
             'id'    => $document->getIdentifier(),
             'body'  => $body
         ];
         
         $this->client->index($params);
     }
-
-    public function addDocuments(Collection $collection)
-    {
-        $params = ['body' => []];
-
-        $collection->map(function (DocumentInterface $document) use ($params) {
-            $params['body'][] = [
-                'index' => [
-                    '_index' => $this->getIndex(),
-                    '_type'  => $document->getType(),
-                    '_id'    => $document->getIdentifier()
-                ]
-            ];
-
-            $body = [];
-
-            $document->getFields()->map(function (DocumentFieldInterface $field) use (&$body) {
-                $body[$field->getName()] = $field->getValue();
-            });
-
-            $params['body'][] = $body;
-
-            $this->client->bulk($params);
-        });
-    }
     
     public function removeDocument(DocumentInterface $document)
     {
         $params = [
             'index' => $this->getIndex(),
-            'type'  => $document->getType(),
+            'type'  => $document->getType()->getName(),
             'id'    => $document->getIdentifier(),
         ];
         
@@ -135,18 +126,30 @@ final class ElasticSearchAdapter implements SearchAdapterInterface
         
         $params = [
             'index' => $this->getIndex(),
-            'type'  => $document->getType(),
+            'type'  => $document->getType()->getName(),
             'id'    => $document->getIdentifier(),
             'body'  => $body
         ];
         
         $this->client->update($params);
     }
-    
-    public function createIndex()
+
+    public function getIndexName(string $locale) : string
     {
-        return $this->client->indices()->create([
-            'index' => $this->options['index_name'],
+        return sprintf('%s%s', $this->options['index_prefix'], $locale);
+    }
+
+    public function hasIndex(string $locale) : bool
+    {
+        return $this->getClient()->indices()->exists([
+            'index' => $this->getIndexName($locale)
+        ]);
+    }
+
+    public function createIndex(string $locale)
+    {
+        return $this->getClient()->indices()->create([
+            'index' => $this->getIndexName($locale),
             'body'  => [
                 'settings' => [
                     'number_of_shards'   => $this->options['number_of_shards'],
@@ -155,76 +158,79 @@ final class ElasticSearchAdapter implements SearchAdapterInterface
             ]
         ]);
     }
-    
-    public function removeIndex()
+
+    public function removeIndex(string $locale)
     {
-        return $this->client->indices()->delete([
-            'index' => $this->getIndex()
+        if (false === $this->hasIndex($locale)) {
+            return false;
+        }
+
+        return $this->getClient()->indices()->delete([
+            'index' => $this->getIndexName($locale)
         ]);
     }
     
-    public function flushIndex()
+    public function flushIndex(string $locale)
     {
-        return $this->client->indices()->flush([
-            'index' => $this->getIndex()
+        if (false === $this->hasIndex($locale)) {
+            return $this->createIndex($locale);
+        }
+
+        return $this->getClient()->indices()->flush([
+            'index' => $this->getIndexName($locale)
         ]);
+
     }
 
-    public function optimizeIndex()
+    public function optimizeIndex(string $locale)
     {
-        return $this->client->indices()->optimize([
-            'index' => $this->getIndex()
+        if (false === $this->hasIndex($locale)) {
+            $this->createIndex($locale);
+        }
+
+        return $this->getClient()->indices()->optimize([
+            'index' => $this->getIndexName($locale)
         ]);
     }
     
-    public function getStats()
+    public function getStats(string $locale)
     {
-        return $this->client->indices()->stats([
-            'index' => $this->getIndex()
+        if (false === $this->hasIndex($locale)) {
+            $this->createIndex($locale);
+        }
+
+        return $this->getClient()->indices()->stats([
+            'index' => $this->getIndexName($locale)
         ]);
     }
     
     private function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setRequired([
-            'index_name',
+            'index_prefix',
+            'query_min_length',
             'number_of_shards',
             'number_of_replicas',
         ]);
         
-        $resolver->setDefault('settings', []);
+        $resolver->setDefault('index_prefix', 'wellcommerce_');
+        $resolver->setDefault('query_min_length', 3);
         $resolver->setDefault('number_of_shards', 2);
         $resolver->setDefault('number_of_replicas', 0);
 
-        $resolver->setAllowedTypes('index_name', 'string');
+        $resolver->setAllowedTypes('index_prefix', 'string');
+        $resolver->setAllowedTypes('query_min_length', 'integer');
         $resolver->setAllowedTypes('number_of_shards', 'integer');
         $resolver->setAllowedTypes('number_of_replicas', 'integer');
     }
     
-    private function hasIndex() : bool
+    private function getClient() : Client
     {
-        return $this->client->indices()->exists([
-            'index' => $this->options['index_name']
-        ]);
-    }
-    
-    private function createClient() : Client
-    {
-        return ClientBuilder::create()->build();
-    }
-    
-    private function getIndex()
-    {
-        if (null === $this->index) {
-
-            if (false === $this->hasIndex()) {
-                $this->createIndex();
-            }
-
-            $this->index = $this->options['index_name'];
+        if (null === $this->client) {
+            $this->client = ClientBuilder::create()->build();
         }
 
-        return $this->index;
+        return $this->client;
     }
 
     private function processResults(array $results) : array

@@ -12,12 +12,13 @@
 
 namespace WellCommerce\Bundle\SearchBundle\Document;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
- * Interface DocumentFactoryInterface
+ * Class DocumentCollection
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface DocumentFactoryInterface
+class DocumentCollection extends ArrayCollection
 {
-    public function create($resource) : DocumentInterface;
 }

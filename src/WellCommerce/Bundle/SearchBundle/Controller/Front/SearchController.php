@@ -12,13 +12,16 @@
 
 namespace WellCommerce\Bundle\SearchBundle\Controller\Front;
 
+use Doctrine\Common\Util\Debug;
+use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
-use WellCommerce\Bundle\SearchBundle\Manager\SearchEngineManager;
+use WellCommerce\Bundle\SearchBundle\Manager\SearchManagerInterface;
 use WellCommerce\Component\Breadcrumb\Model\Breadcrumb;
 use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
+use WellCommerce\Bundle\SearchBundle\Type\IndexType;
 
 /**
  * Class SearchController
@@ -27,33 +30,42 @@ use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
  */
 class SearchController extends AbstractFrontController
 {
-    public function indexAction(string $index, Request $request) : Response
+    public function indexAction(IndexType $indexType, Request $request) : Response
     {
-        $phrase  = $request->get('phrase');
-        $results = $this->search($index, $request);
+        $results = $this->getSearchManager()->search($indexType, $request);
+        print_r($results);
+        die();
+        
+        $this->search($index, $request);
         
         $this->getBreadcrumbProvider()->add(new Breadcrumb([
             'label' => $this->trans('search.heading.index')
         ]));
         
         $this->getBreadcrumbProvider()->add(new Breadcrumb([
-            'label' => $phrase
+            'label' => $request->get('phrase')
         ]));
         
         return $this->displayTemplate('index', [
-            'phrase'  => $phrase,
-            'results' => $results,
+            'phrase' => $request->get('phrase')
         ]);
     }
-    
-    public function viewAction(string $index, Request $request) : JsonResponse
+
+    public function advancedSearchAction() : Response {
+
+    }
+
+    public function quickSearchAction(IndexType $indexType, Request $request) : JsonResponse
     {
+        echo $indexType->getName();
+        die();
+        
         $liveSearchContent = '';
-        $result            = [];
+        $identifiers       = [];
         $phrase            = $request->get('phrase');
         
         if (strlen($phrase) >= $this->container->getParameter('search_term_min_length')) {
-            $result = $this->search($index, $request);
+            $identifiers = $this->search($index, $request);
             
             $dataset    = $this->get('search.dataset.front');
             $conditions = new ConditionsCollection();
@@ -74,23 +86,20 @@ class SearchController extends AbstractFrontController
         
         return $this->jsonResponse([
             'liveSearchContent' => $liveSearchContent,
-            'result'            => $result,
-            'total'             => count($result)
+            'total'             => count($identifiers)
         ]);
     }
     
     protected function search(string $index, Request $request) : array
     {
-        print_r($request->get('fields'));
-        die();
         $queryBuilder = $this->getSearchEngineManager()->getQueryBuilder();
         $queryBuilder->buildFromRequest($request);
         
         return $this->getSearchEngineManager()->search($queryBuilder, $index);
     }
     
-    private function getSearchEngineManager() : SearchEngineManager
+    private function getSearchManager() : SearchManagerInterface
     {
-        return $this->get('search.engine.manager');
+        return $this->get('search.manager');
     }
 }

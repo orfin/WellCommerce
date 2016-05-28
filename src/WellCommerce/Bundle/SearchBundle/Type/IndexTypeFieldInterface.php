@@ -10,18 +10,20 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\SearchBundle\Builder;
-
-use Symfony\Component\HttpFoundation\Request;
+namespace WellCommerce\Bundle\SearchBundle\Type;
 
 /**
- * Interface SearchQueryBuilderInterface
+ * Interface IndexTypeFieldInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface SearchQueryBuilderInterface
+interface IndexTypeFieldInterface
 {
-    public function buildFromRequest(Request $request);
+    public function getName() : string;
     
-    public function getQuery();
+    public function isIndexable() : bool;
+
+    public function getBoost() : float;
+
+    public function getPathExpression() : string;
 }

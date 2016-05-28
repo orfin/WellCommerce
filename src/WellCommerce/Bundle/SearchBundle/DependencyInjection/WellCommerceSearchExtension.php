@@ -26,36 +26,32 @@ final class WellCommerceSearchExtension extends AbstractExtension
     protected function processExtensionConfiguration(array $configuration, ContainerBuilder $container)
     {
         parent::processExtensionConfiguration($configuration, $container);
-        
+
         $adapters = $configuration['engine']['adapters'];
-        $indexes  = $configuration['engine']['indexes'];
+        $index    = $configuration['engine']['index'];
+        $adapter  = $adapters[$container->getParameter('search_engine')] ?? current($adapters);
 
-        foreach ($adapters as $adapterName => $adapterConfiguration) {
-            $this->createSearchAdapter($adapterName, $adapterConfiguration, $container);
+        $this->processIndexTypes($index['types'], $container);
+        $this->processAdapterConfiguration($adapter, $container);
+    }
+    
+    private function processIndexTypes(array $types, ContainerBuilder $container)
+    {
+        foreach ($types as $name => $options) {
+            $definition = new Definition($options['class']);
+            $definition->addArgument($name);
+            $definition->addArgument($options['mapping']);
+            $definition->setPublic(false);
+            $definition->addTag('search.index_type', ['type' => $name]);
+            $container->setDefinition('search.index_type.' . $name, $definition);
         }
+    }
 
-        foreach ($indexes as $indexName => $indexConfiguration) {
-            $this->createIndexManager($indexName, $indexConfiguration, $container);
-        }
-    }
-    
-    private function createSearchAdapter(string $adapterName, array $adapterConfiguration, ContainerBuilder $container)
+    private function processAdapterConfiguration(array $configuration, ContainerBuilder $container)
     {
-        $adapterName = $this->getSearchAdapterServiceName($adapterName);
-        $adapter     = new Definition($adapterConfiguration['class']);
-        $adapter->addArgument($adapterConfiguration['options']);
-        $adapter->setPublic(false);
-        $container->setDefinition($adapterName, $adapter);
-    }
-    
-    private function createIndexManager(string $indexName, array $indexConfiguration, ContainerBuilder $container)
-    {
-        print_r($indexConfiguration);
-        die();
-    }
-    
-    private function getSearchAdapterServiceName(string $adapterName) : string
-    {
-        return sprintf('search.adapter.%s', $adapterName);
+        $definition = new Definition($configuration['class']);
+        $definition->addArgument($configuration['options']);
+        $definition->setPublic(false);
+        $container->setDefinition('search.adapter', $definition);
     }
 }

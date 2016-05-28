@@ -33,11 +33,25 @@ services:
         class: WellCommerce\Bundle\SearchBundle\Storage\SearchResultStorage
         public: false
 
-    search.query_builder.collection:
-        class: WellCommerce\Bundle\SearchBundle\Builder\SearchQueryBuilderCollection
-        public: false
-
-    search.command.reindex.products:
-        class: WellCommerce\Bundle\SearchBundle\Command\ReindexProductsCommand
+    search.command.reindex:
+        class: WellCommerce\Bundle\SearchBundle\Command\ReindexCommand
+        arguments: ['%locale%']
         tags:
             - { name: console.command }
+
+    search.index_type.collection:
+        class: WellCommerce\Bundle\SearchBundle\Type\IndexTypeCollection
+        public: false
+
+    search.entity_converter:
+        class: WellCommerce\Bundle\SearchBundle\Converter\EntityConverter
+
+    search.manager:
+        class: WellCommerce\Bundle\SearchBundle\Manager\SearchManager
+        arguments: ["@search.index_type.collection", "@search.result.storage", "@search.entity_converter", "@search.adapter"]
+
+    search.index_type.request_param_converter:
+        class: WellCommerce\Bundle\SearchBundle\Request\ParamConverter\IndexTypeParamConverter
+        tags:
+            - { name: request.param_converter, converter: index_type, priority: 10 }
+        arguments: ['@search.manager']
