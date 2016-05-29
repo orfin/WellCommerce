@@ -22,11 +22,6 @@ use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
  */
 class CompanyAddressFactory extends AbstractEntityFactory
 {
-    /**
-     * @var string
-     */
-    protected $supportsInterface = CompanyAddressInterface::class;
-
     public function create() : CompanyAddressInterface
     {
         /** @var $address CompanyAddressInterface */

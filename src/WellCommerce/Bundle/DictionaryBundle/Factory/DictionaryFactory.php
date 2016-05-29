@@ -22,14 +22,6 @@ use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
  */
 class DictionaryFactory extends AbstractEntityFactory
 {
-    /**
-     * @var string
-     */
-    protected $supportsInterface = DictionaryInterface::class;
-
-    /**
-     * @return DictionaryInterface
-     */
     public function create() : DictionaryInterface
     {
         /** @var $dictionary DictionaryInterface */

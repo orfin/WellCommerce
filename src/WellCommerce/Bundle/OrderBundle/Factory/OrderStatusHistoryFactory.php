@@ -22,14 +22,6 @@ use WellCommerce\Bundle\OrderBundle\Entity\OrderStatusHistoryInterface;
  */
 class OrderStatusHistoryFactory extends AbstractEntityFactory
 {
-    /**
-     * @var string
-     */
-    protected $supportsInterface = OrderStatusHistoryInterface::class;
-    
-    /**
-     * @return OrderStatusHistoryInterface
-     */
     public function create() : OrderStatusHistoryInterface
     {
         /** @var  $status OrderStatusHistoryInterface */

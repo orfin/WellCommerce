@@ -22,14 +22,6 @@ use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
  */
 class ContactTicketFactory extends AbstractEntityFactory
 {
-    /**
-     * @var string
-     */
-    protected $supportsInterface = ContactTicketInterface::class;
-
-    /**
-     * @return ContactTicketInterface
-     */
     public function create() : ContactTicketInterface
     {
         /** @var $contact ContactTicketInterface */

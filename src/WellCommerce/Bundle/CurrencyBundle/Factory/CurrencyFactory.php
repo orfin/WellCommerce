@@ -22,14 +22,6 @@ use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
  */
 class CurrencyFactory extends AbstractEntityFactory
 {
-    /**
-     * @var string
-     */
-    protected $supportsInterface = CurrencyInterface::class;
-
-    /**
-     * @return CurrencyInterface
-     */
     public function create() : CurrencyInterface
     {
         /** @var $currency CurrencyInterface */

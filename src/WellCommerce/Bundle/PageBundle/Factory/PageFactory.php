@@ -23,14 +23,6 @@ use WellCommerce\Bundle\PageBundle\Entity\PageInterface;
  */
 class PageFactory extends AbstractEntityFactory
 {
-    /**
-     * @var string
-     */
-    protected $supportsInterface = PageInterface::class;
-    
-    /**
-     * @return PageInterface
-     */
     public function create() : PageInterface
     {
         /** @var  $page PageInterface */

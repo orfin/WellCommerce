@@ -23,20 +23,12 @@ use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
  */
 class AttributeFactory extends AbstractEntityFactory
 {
-    /**
-     * @var string
-     */
-    protected $supportsInterface = AttributeInterface::class;
-
-    /**
-     * @return AttributeInterface
-     */
     public function create() : AttributeInterface
     {
         /** @var $attribute AttributeInterface */
         $attribute = $this->init();
-        $attribute->setValues(new ArrayCollection());
-        $attribute->setGroups(new ArrayCollection());
+        $attribute->setValues($this->createEmptyCollection());
+        $attribute->setGroups($this->createEmptyCollection());
 
         return $attribute;
     }

@@ -18,7 +18,7 @@ use WellCommerce\Component\Search\Adapter\AdapterInterface;
 use WellCommerce\Component\Search\Adapter\QueryBuilderInterface;
 use WellCommerce\Component\Search\Model\DocumentInterface;
 use WellCommerce\Component\Search\Model\FieldInterface;
-use WellCommerce\Component\Search\Model\SearchRequestInterface;
+use WellCommerce\Component\Search\Request\SearchRequestInterface;
 use ZendSearch\Lucene\Analysis\Analyzer\Analyzer;
 use ZendSearch\Lucene\Analysis\Analyzer\Common\Utf8\CaseInsensitive;
 use ZendSearch\Lucene\Document;

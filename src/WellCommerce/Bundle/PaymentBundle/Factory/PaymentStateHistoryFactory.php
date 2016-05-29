@@ -23,14 +23,6 @@ use WellCommerce\Bundle\PaymentBundle\Entity\PaymentStateHistoryInterface;
  */
 class PaymentStateHistoryFactory extends AbstractEntityFactory
 {
-    /**
-     * @var string
-     */
-    protected $supportsInterface = PaymentStateHistoryInterface::class;
-
-    /**
-     * @return PaymentStateHistoryInterface
-     */
     public function create() : PaymentStateHistoryInterface
     {
         /** @var  $paymentStateHistory PaymentStateHistoryInterface */

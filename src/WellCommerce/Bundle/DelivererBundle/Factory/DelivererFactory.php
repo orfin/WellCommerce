@@ -23,19 +23,11 @@ use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
  */
 class DelivererFactory extends AbstractEntityFactory
 {
-    /**
-     * @var string
-     */
-    protected $supportsInterface = DelivererInterface::class;
-
-    /**
-     * @return DelivererInterface
-     */
     public function create() : DelivererInterface
     {
         /** @var $deliverer DelivererInterface */
         $deliverer = $this->init();
-        $deliverer->setProducers(new ArrayCollection());
+        $deliverer->setProducers($this->createEmptyCollection());
 
         return $deliverer;
     }

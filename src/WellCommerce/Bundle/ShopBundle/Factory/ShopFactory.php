@@ -27,24 +27,16 @@ use WellCommerce\Bundle\ThemeBundle\Entity\ThemeInterface;
  */
 class ShopFactory extends AbstractEntityFactory
 {
-    /**
-     * @var string
-     */
-    protected $supportsInterface = ShopInterface::class;
-    
-    /**
-     * @return ShopInterface
-     */
     public function create() : ShopInterface
     {
         /** @var  $shop ShopInterface */
         $shop = $this->init();
         $shop->setName('');
         $shop->setUrl('');
-        $shop->setProducts(new ArrayCollection());
-        $shop->setCategories(new ArrayCollection());
-        $shop->setPages(new ArrayCollection());
-        $shop->setProducers(new ArrayCollection());
+        $shop->setProducts($this->createEmptyCollection());
+        $shop->setCategories($this->createEmptyCollection());
+        $shop->setPages($this->createEmptyCollection());
+        $shop->setProducers($this->createEmptyCollection());
         $shop->setMailerConfiguration(new MailerConfiguration());
         $shop->setCompany($this->getDefaultCompany());
         $shop->setTheme($this->getDefaultTheme());

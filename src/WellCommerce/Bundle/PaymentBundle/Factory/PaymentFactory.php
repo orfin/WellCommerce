@@ -22,14 +22,6 @@ use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
  */
 class PaymentFactory extends AbstractEntityFactory
 {
-    /**
-     * @var string
-     */
-    protected $supportsInterface = PaymentInterface::class;
-    
-    /**
-     * @return PaymentInterface
-     */
     public function create() : PaymentInterface
     {
         /** @var  $payment PaymentInterface */

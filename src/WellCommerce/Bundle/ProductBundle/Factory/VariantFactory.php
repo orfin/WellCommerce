@@ -23,14 +23,6 @@ use WellCommerce\Bundle\ProductBundle\Entity\VariantInterface;
  */
 class VariantFactory extends AbstractEntityFactory
 {
-    /**
-     * @var string
-     */
-    protected $supportsInterface = VariantInterface::class;
-
-    /**
-     * @return VariantInterface
-     */
     public function create() : VariantInterface
     {
         /** @var  $variant VariantInterface */

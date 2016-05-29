@@ -18,8 +18,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInte
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\SearchBundle\Manager\SearchManagerInterface;
 use WellCommerce\Component\Search\Model\FieldInterface;
-use WellCommerce\Component\Search\Model\SearchRequest;
-use WellCommerce\Component\Search\Model\SearchRequestInterface;
+use WellCommerce\Component\Search\Request\SearchRequest;
+use WellCommerce\Component\Search\Request\SearchRequestInterface;
 
 /**
  * Class SearchRequestParamConverter

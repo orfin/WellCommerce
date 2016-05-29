@@ -24,14 +24,6 @@ use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodInterface;
  */
 class PaymentMethodFactory extends AbstractEntityFactory
 {
-    /**
-     * @var string
-     */
-    protected $supportsInterface = PaymentMethodInterface::class;
-
-    /**
-     * @return PaymentMethodInterface
-     */
     public function create() : PaymentMethodInterface
     {
         $defaultOrderStatus = $this->getDefaultOrderStatus();
@@ -41,7 +33,7 @@ class PaymentMethodFactory extends AbstractEntityFactory
         $paymentMethod->setHierarchy(0);
         $paymentMethod->setEnabled(true);
         $paymentMethod->setConfiguration([]);
-        $paymentMethod->setShippingMethods(new ArrayCollection());
+        $paymentMethod->setShippingMethods($this->createEmptyCollection());
         $paymentMethod->setProcessor($this->getDefaultProcessor());
         $paymentMethod->setPaymentPendingOrderStatus($defaultOrderStatus);
         $paymentMethod->setPaymentFailureOrderStatus($defaultOrderStatus);

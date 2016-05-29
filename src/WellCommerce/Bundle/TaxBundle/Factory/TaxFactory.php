@@ -22,14 +22,6 @@ use WellCommerce\Bundle\TaxBundle\Entity\TaxInterface;
  */
 class TaxFactory extends AbstractEntityFactory
 {
-    /**
-     * @var string
-     */
-    protected $supportsInterface = TaxInterface::class;
-    
-    /**
-     * @return TaxInterface
-     */
     public function create() : TaxInterface
     {
         /** @var  $tax TaxInterface */

@@ -22,8 +22,6 @@ use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
  */
 final class ClientBillingAddressFactory extends AbstractEntityFactory
 {
-    protected $supportsInterface = ClientBillingAddressInterface::class;
-    
     public function create() : ClientBillingAddressInterface
     {
         /** @var ClientBillingAddressInterface $address */

@@ -22,14 +22,6 @@ use WellCommerce\Bundle\LocaleBundle\Entity\LocaleInterface;
  */
 class LocaleFactory extends AbstractEntityFactory
 {
-    /**
-     * @var string
-     */
-    protected $supportsInterface = LocaleInterface::class;
-
-    /**
-     * @return LocaleInterface
-     */
     public function create() : LocaleInterface
     {
         /** @var $locale LocaleInterface */

@@ -23,20 +23,12 @@ use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
  */
 class UserGroupFactory extends AbstractEntityFactory
 {
-    /**
-     * @var string
-     */
-    protected $supportsInterface = UserGroupInterface::class;
-    
-    /**
-     * @return UserGroupInterface
-     */
     public function create() : UserGroupInterface
     {
         /** @var $group UserGroupInterface */
         $group = $this->init();
         $group->setName('');
-        $group->setPermissions(new ArrayCollection());
+        $group->setPermissions($this->createEmptyCollection());
         
         return $group;
     }

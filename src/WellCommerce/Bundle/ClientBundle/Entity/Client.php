@@ -63,40 +63,25 @@ class Client extends AbstractEntity implements ClientInterface
      */
     protected $shippingAddress;
     
-    /**
-     * @inheritDoc
-     */
     public function getPassword()
     {
         return $this->clientDetails->getPassword();
     }
     
-    /**
-     * @return null
-     */
     public function getSalt()
     {
         return $this->clientDetails->getSalt();
     }
     
-    /**
-     * @inheritDoc
-     */
     public function getUsername()
     {
         return $this->clientDetails->getUsername();
     }
     
-    /**
-     * @inheritDoc
-     */
     public function eraseCredentials()
     {
     }
     
-    /**
-     * @inheritDoc
-     */
     public function getRoles()
     {
         return [
@@ -112,9 +97,6 @@ class Client extends AbstractEntity implements ClientInterface
         return serialize([$this->id, $this->getUsername(), $this->getPassword()]);
     }
     
-    /**
-     * @inheritDoc
-     */
     public function unserialize($serialized)
     {
         list($this->id, $username, $password) = unserialize($serialized);
@@ -125,9 +107,6 @@ class Client extends AbstractEntity implements ClientInterface
         $this->clientDetails->setPassword($password);
     }
     
-    /**
-     * @inheritDoc
-     */
     public function isEqualTo(BaseUserInterface $user)
     {
         if ($this->getPassword() !== $user->getPassword()) {
@@ -152,73 +131,46 @@ class Client extends AbstractEntity implements ClientInterface
         });
     }
     
-    /**
-     * @inheritDoc
-     */
     public function getWishlist() : Collection
     {
         return $this->wishlist;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function getClientDetails() : ClientDetailsInterface
     {
         return $this->clientDetails;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function setClientDetails(ClientDetailsInterface $clientDetails)
     {
         $this->clientDetails = $clientDetails;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function getContactDetails() : ClientContactDetailsInterface
     {
         return $this->contactDetails;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function setContactDetails(ClientContactDetailsInterface $contactDetails)
     {
         $this->contactDetails = $contactDetails;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function getBillingAddress() : ClientBillingAddressInterface
     {
         return $this->billingAddress;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function setBillingAddress(ClientBillingAddressInterface $billingAddress)
     {
         $this->billingAddress = $billingAddress;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function getShippingAddress() : ClientShippingAddressInterface
     {
         return $this->shippingAddress;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function setShippingAddress(ClientShippingAddressInterface $shippingAddress)
     {
         $this->shippingAddress = $shippingAddress;

@@ -22,8 +22,6 @@ use WellCommerce\Bundle\OrderBundle\Entity\OrderSummaryInterface;
  */
 class OrderSummaryFactory extends AbstractEntityFactory
 {
-    protected $supportsInterface = OrderSummaryInterface::class;
-    
     public function create() : OrderSummaryInterface
     {
         /** @var $summary OrderSummaryInterface */

@@ -22,14 +22,6 @@ use WellCommerce\Bundle\NewsBundle\Entity\NewsInterface;
  */
 class NewsFactory extends AbstractEntityFactory
 {
-    /**
-     * @var string
-     */
-    protected $supportsInterface = NewsInterface::class;
-    
-    /**
-     * @return NewsInterface
-     */
     public function create() : NewsInterface
     {
         /** @var $news NewsInterface */

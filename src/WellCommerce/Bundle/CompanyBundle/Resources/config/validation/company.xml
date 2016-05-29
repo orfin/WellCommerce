@@ -10,8 +10,5 @@
         <property name="shortName">
             <constraint name="NotBlank" />
         </property>
-        <property name="country">
-            <constraint name="Country" />
-        </property>
     </class>
 </constraint-mapping>

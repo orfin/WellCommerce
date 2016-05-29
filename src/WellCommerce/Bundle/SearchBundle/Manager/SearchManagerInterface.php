@@ -13,8 +13,8 @@
 namespace WellCommerce\Bundle\SearchBundle\Manager;
 
 use WellCommerce\Component\Search\Model\DocumentInterface;
-use WellCommerce\Component\Search\Model\SearchRequestInterface;
 use WellCommerce\Component\Search\Model\TypeInterface;
+use WellCommerce\Component\Search\Request\SearchRequestInterface;
 
 /**
  * Interface SearchManagerInterface

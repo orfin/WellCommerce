@@ -22,8 +22,6 @@ use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
  */
 final class DiscountablePriceFactory extends AbstractEntityFactory
 {
-    protected $supportsInterface = DiscountablePriceInterface::class;
-    
     public function create() : DiscountablePriceInterface
     {
         /** @var $price DiscountablePriceInterface */

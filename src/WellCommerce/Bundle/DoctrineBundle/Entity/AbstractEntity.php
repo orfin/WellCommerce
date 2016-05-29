@@ -19,14 +19,8 @@ namespace WellCommerce\Bundle\DoctrineBundle\Entity;
  */
 abstract class AbstractEntity
 {
-    /**
-     * @var int
-     */
     protected $id;
 
-    /**
-     * @return int
-     */
     public function getId() : int
     {
         return $this->id;

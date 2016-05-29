@@ -22,8 +22,6 @@ use WellCommerce\Bundle\OrderBundle\Entity\OrderProductTotalInterface;
  */
 final class OrderProductTotalFactory extends AbstractEntityFactory
 {
-    protected $supportsInterface = OrderProductTotalInterface::class;
-    
     public function create() : OrderProductTotalInterface
     {
         return $this->init();

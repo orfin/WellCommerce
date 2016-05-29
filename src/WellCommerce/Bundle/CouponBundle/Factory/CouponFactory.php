@@ -22,14 +22,6 @@ use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
  */
 class CouponFactory extends AbstractEntityFactory
 {
-    /**
-     * @var string
-     */
-    protected $supportsInterface = CouponInterface::class;
-
-    /**
-     * @return CouponInterface
-     */
     public function create() : CouponInterface
     {
         /** @var $coupon CouponInterface */

@@ -23,14 +23,6 @@ use WellCommerce\Bundle\OrderBundle\Entity\OrderStatusInterface;
  */
 class OrderStatusFactory extends AbstractEntityFactory
 {
-    /**
-     * @var string
-     */
-    protected $supportsInterface = OrderStatusInterface::class;
-    
-    /**
-     * @return OrderStatusInterface
-     */
     public function create() : OrderStatusInterface
     {
         /** @var  $status OrderStatusInterface */

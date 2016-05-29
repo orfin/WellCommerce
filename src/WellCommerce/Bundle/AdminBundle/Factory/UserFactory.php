@@ -22,14 +22,6 @@ use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
  */
 class UserFactory extends AbstractEntityFactory
 {
-    /**
-     * @var string
-     */
-    protected $supportsInterface = UserInterface::class;
-    
-    /**
-     * @return UserInterface
-     */
     public function create() : UserInterface
     {
         /** @var $user UserInterface */

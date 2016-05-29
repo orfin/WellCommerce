@@ -22,8 +22,6 @@ use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
  */
 final class ClientGroupFactory extends AbstractEntityFactory
 {
-    protected $supportsInterface = ClientGroupInterface::class;
-    
     public function create() : ClientGroupInterface
     {
         /** @var $group ClientGroupInterface */

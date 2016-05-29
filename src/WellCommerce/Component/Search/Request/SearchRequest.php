@@ -10,9 +10,10 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Component\Search\Model;
+namespace WellCommerce\Component\Search\Request;
 
 use Doctrine\Common\Collections\Collection;
+use WellCommerce\Component\Search\Model\TypeInterface;
 
 /**
  * Class SearchRequest

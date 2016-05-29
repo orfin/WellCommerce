@@ -23,14 +23,6 @@ use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
  */
 class ContactFactory extends AbstractEntityFactory
 {
-    /**
-     * @var string
-     */
-    protected $supportsInterface = ContactInterface::class;
-
-    /**
-     * @return ContactInterface
-     */
     public function create() : ContactInterface
     {
         /** @var $contact ContactInterface */

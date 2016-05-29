@@ -22,14 +22,6 @@ use WellCommerce\Bundle\MediaBundle\Entity\MediaInterface;
  */
 class MediaFactory extends AbstractEntityFactory
 {
-    /**
-     * @var string
-     */
-    protected $supportsInterface = MediaInterface::class;
-    
-    /**
-     * @return MediaInterface
-     */
     public function create() : MediaInterface
     {
         /** @var $media MediaInterface */

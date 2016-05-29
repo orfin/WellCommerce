@@ -22,14 +22,6 @@ use WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface;
  */
 class RouteFactory extends AbstractEntityFactory
 {
-    /**
-     * @var string
-     */
-    protected $supportsInterface = RouteInterface::class;
-
-    /**
-     * @return RouteInterface
-     */
     public function create() : RouteInterface
     {
         /** @var  $route RouteInterface */

@@ -22,14 +22,6 @@ use WellCommerce\Bundle\UnitBundle\Entity\UnitInterface;
  */
 class UnitFactory extends AbstractEntityFactory
 {
-    /**
-     * @var string
-     */
-    protected $supportsInterface = UnitInterface::class;
-    
-    /**
-     * @return UnitInterface
-     */
     public function create() : UnitInterface
     {
         /** @var  $unit UnitInterface */

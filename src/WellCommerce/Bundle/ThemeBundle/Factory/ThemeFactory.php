@@ -23,19 +23,11 @@ use WellCommerce\Bundle\ThemeBundle\Entity\ThemeInterface;
  */
 class ThemeFactory extends AbstractEntityFactory
 {
-    /**
-     * @var string
-     */
-    protected $supportsInterface = ThemeInterface::class;
-    
-    /**
-     * @return ThemeInterface
-     */
     public function create() : ThemeInterface
     {
         /** @var  $theme ThemeInterface */
         $theme = $this->init();
-        $theme->setCss(new ArrayCollection());
+        $theme->setCss($this->createEmptyCollection());
         $theme->setName('');
         $theme->setFolder($this->getDefaultFolder());
         

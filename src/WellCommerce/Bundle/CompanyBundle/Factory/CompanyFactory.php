@@ -23,14 +23,6 @@ use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
  */
 class CompanyFactory extends AbstractEntityFactory
 {
-    /**
-     * @var string
-     */
-    protected $supportsInterface = CompanyInterface::class;
-
-    /**
-     * @return CompanyInterface
-     */
     public function create() : CompanyInterface
     {
         /** @var $company CompanyInterface */

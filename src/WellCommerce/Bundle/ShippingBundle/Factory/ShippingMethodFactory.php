@@ -24,19 +24,11 @@ use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface;
  */
 class ShippingMethodFactory extends AbstractEntityFactory
 {
-    /**
-     * @var string
-     */
-    protected $supportsInterface = ShippingMethodInterface::class;
-
-    /**
-     * @return ShippingMethodInterface
-     */
     public function create() : ShippingMethodInterface
     {
         /** @var  $shippingMethod ShippingMethodInterface */
         $shippingMethod = $this->init();
-        $shippingMethod->setCosts(new ArrayCollection());
+        $shippingMethod->setCosts($this->createEmptyCollection());
         $shippingMethod->setEnabled(true);
         $shippingMethod->setHierarchy(0);
         $shippingMethod->setCurrency($this->getDefaultCurrency());

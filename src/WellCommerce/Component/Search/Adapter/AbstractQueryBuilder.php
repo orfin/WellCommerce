@@ -14,7 +14,7 @@ namespace WellCommerce\Component\Search\Adapter;
 
 use Doctrine\Common\Collections\Collection;
 use WellCommerce\Component\Search\Model\FieldInterface;
-use WellCommerce\Component\Search\Model\SearchRequestInterface;
+use WellCommerce\Component\Search\Request\SearchRequestInterface;
 
 /**
  * Class AbstractQueryBuilder

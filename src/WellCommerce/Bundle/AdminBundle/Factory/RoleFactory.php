@@ -22,8 +22,6 @@ use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
  */
 class RoleFactory extends AbstractEntityFactory
 {
-    protected $supportsInterface = RoleInterface::class;
-    
     public function create() : RoleInterface
     {
         $role = $this->init();

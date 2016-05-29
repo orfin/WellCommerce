@@ -22,14 +22,6 @@ use WellCommerce\Bundle\OrderBundle\Entity\OrderStatusGroupInterface;
  */
 class OrderStatusGroupFactory extends AbstractEntityFactory
 {
-    /**
-     * @var string
-     */
-    protected $supportsInterface = OrderStatusGroupInterface::class;
-    
-    /**
-     * @return OrderStatusGroupInterface
-     */
     public function create() : OrderStatusGroupInterface
     {
         /** @var  $group OrderStatusGroupInterface */

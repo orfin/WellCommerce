@@ -22,14 +22,6 @@ use WellCommerce\Bundle\ProductBundle\Entity\VariantOptionInterface;
  */
 class VariantOptionFactory extends AbstractEntityFactory
 {
-    /**
-     * @var string
-     */
-    protected $supportsInterface = VariantOptionInterface::class;
-
-    /**
-     * @return VariantOptionInterface
-     */
     public function create() : VariantOptionInterface
     {
         /** @var  $variantOption VariantOptionInterface */

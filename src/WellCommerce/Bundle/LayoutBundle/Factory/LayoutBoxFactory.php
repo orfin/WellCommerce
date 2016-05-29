@@ -22,14 +22,6 @@ use WellCommerce\Bundle\LayoutBundle\Entity\LayoutBoxInterface;
  */
 class LayoutBoxFactory extends AbstractEntityFactory
 {
-    /**
-     * @var string
-     */
-    protected $supportsInterface = LayoutBoxInterface::class;
-    
-    /**
-     * @return LayoutBoxInterface
-     */
     public function create() : LayoutBoxInterface
     {
         /** @var $box LayoutBoxInterface */

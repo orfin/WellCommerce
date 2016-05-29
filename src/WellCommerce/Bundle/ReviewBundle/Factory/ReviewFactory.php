@@ -22,14 +22,6 @@ use WellCommerce\Bundle\ReviewBundle\Entity\ReviewInterface;
  */
 class ReviewFactory extends AbstractEntityFactory
 {
-    /**
-     * @var string
-     */
-    protected $supportsInterface = ReviewInterface::class;
-
-    /**
-     * @return ReviewInterface
-     */
     public function create() : ReviewInterface
     {
         /** @var  $review ReviewInterface */

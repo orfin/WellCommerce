@@ -13,7 +13,7 @@
 namespace WellCommerce\Component\Search\Adapter;
 
 use WellCommerce\Component\Search\Model\DocumentInterface;
-use WellCommerce\Component\Search\Model\SearchRequestInterface;
+use WellCommerce\Component\Search\Request\SearchRequestInterface;
 
 /**
  * Interface AdapterInterface

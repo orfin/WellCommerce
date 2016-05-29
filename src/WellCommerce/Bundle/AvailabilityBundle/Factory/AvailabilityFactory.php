@@ -22,14 +22,6 @@ use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
  */
 class AvailabilityFactory extends AbstractEntityFactory
 {
-    /**
-     * @var string
-     */
-    protected $supportsInterface = AvailabilityInterface::class;
-
-    /**
-     * @return AvailabilityInterface
-     */
     public function create() : AvailabilityInterface
     {
         /** @var $availability AvailabilityInterface */
