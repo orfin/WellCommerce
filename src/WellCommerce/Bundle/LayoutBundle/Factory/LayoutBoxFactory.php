@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\LayoutBundle\Factory;
 
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
 use WellCommerce\Bundle\LayoutBundle\Entity\LayoutBoxInterface;
 
 /**
@@ -20,7 +20,7 @@ use WellCommerce\Bundle\LayoutBundle\Entity\LayoutBoxInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LayoutBoxFactory extends AbstractEntityFactory
+class LayoutBoxFactory extends EntityFactory
 {
     public function create() : LayoutBoxInterface
     {

@@ -8,5 +8,6 @@ well_commerce_dictionary:
                 entity: WellCommerce\Bundle\DictionaryBundle\Entity\Dictionary
         dictionary_translation:
             orm:
+                manager: false
                 mapping: "@WellCommerceDictionaryBundle/Resources/config/doctrine/DictionaryTranslation.orm.yml"
                 entity: WellCommerce\Bundle\DictionaryBundle\Entity\DictionaryTranslation

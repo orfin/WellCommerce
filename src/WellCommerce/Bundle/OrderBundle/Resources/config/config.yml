@@ -69,6 +69,7 @@ well_commerce_order:
                 entity: WellCommerce\Bundle\OrderBundle\Entity\OrderStatusHistory
         order_status_translation:
             orm:
+                manager: false
                 mapping: "@WellCommerceOrderBundle/Resources/config/doctrine/OrderStatusTranslation.orm.yml"
                 entity: WellCommerce\Bundle\OrderBundle\Entity\OrderStatusTranslation
         order_status_group:
@@ -83,5 +84,6 @@ well_commerce_order:
                 manager: order_status_group.manager
         order_status_group_translation:
             orm:
+                manager: false
                 mapping: "@WellCommerceOrderBundle/Resources/config/doctrine/OrderStatusGroupTranslation.orm.yml"
                 entity: WellCommerce\Bundle\OrderBundle\Entity\OrderStatusGroupTranslation

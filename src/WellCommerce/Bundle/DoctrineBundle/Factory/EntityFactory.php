@@ -23,11 +23,11 @@ use WellCommerce\Bundle\ShopBundle\Entity\ShopInterface;
 use WellCommerce\Bundle\TaxBundle\Entity\TaxInterface;
 
 /**
- * Class AbstractFactory
+ * Class EntityFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractEntityFactory extends AbstractContainerAware implements EntityFactoryInterface
+class EntityFactory extends AbstractContainerAware implements EntityFactoryInterface
 {
     /**
      * @var string
@@ -35,13 +35,18 @@ abstract class AbstractEntityFactory extends AbstractContainerAware implements E
     private $className;
 
     /**
-     * AbstractEntityFactory constructor.
+     * EntityFactory constructor.
      *
      * @param string $className
      */
     public function __construct(string $className)
     {
         $this->className = $className;
+    }
+
+    public function create()
+    {
+        return $this->init();
     }
     
     protected function init()

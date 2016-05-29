@@ -16,7 +16,7 @@ use WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddressInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetailsInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddressInterface;
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderProductTotalInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderSummaryInterface;
@@ -26,7 +26,7 @@ use WellCommerce\Bundle\OrderBundle\Entity\OrderSummaryInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class OrderFactory extends AbstractEntityFactory
+class OrderFactory extends EntityFactory
 {
     public function create() : OrderInterface
     {

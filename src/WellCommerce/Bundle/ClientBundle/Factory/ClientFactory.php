@@ -17,14 +17,14 @@ use WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetailsInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientDetailsInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddressInterface;
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
 
 /**
  * Class ClientFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-final class ClientFactory extends AbstractEntityFactory
+final class ClientFactory extends EntityFactory
 {
     public function create() : ClientInterface
     {

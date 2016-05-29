@@ -203,7 +203,7 @@ abstract class AbstractExtension extends Extension
     {
         $factoryService = null;
         
-        if (null !== $configuration['factory']) {
+        if (false !== $configuration['factory']) {
             $definition = new Definition($configuration['factory']);
             $definition->addArgument($configuration['entity']);
             $definition->addMethodCall('setContainer', [new Reference('service_container')]);
@@ -228,8 +228,8 @@ abstract class AbstractExtension extends Extension
     private function registerRepository(string $name, array $configuration, ContainerBuilder $container)
     {
         $repositoryService = null;
-        
-        if (null !== $configuration['repository']) {
+
+        if (false !== $configuration['repository']) {
             $definition = new Definition($configuration['repository']);
             $definition->setFactory([new Reference('doctrine.orm.entity_manager'), 'getRepository']);
             $definition->addArgument($configuration['entity']);
@@ -253,13 +253,15 @@ abstract class AbstractExtension extends Extension
      */
     private function registerManager(string $name, $factoryService, $repositoryService, array $configuration, ContainerBuilder $container)
     {
-        $managerServiceName = $this->getAutoServiceName($name, 'manager');
-        $definition         = new Definition($configuration['manager']);
-        $definition->addArgument($factoryService);
-        $definition->addArgument($repositoryService);
-        $definition->addArgument(new Reference('doctrine.helper'));
-        $definition->addArgument(new Reference('event_dispatcher'));
-        $container->setDefinition($managerServiceName, $definition);
+        if(false !== $configuration['manager']){
+            $managerServiceName = $this->getAutoServiceName($name, 'manager');
+            $definition         = new Definition($configuration['manager']);
+            $definition->addArgument($factoryService);
+            $definition->addArgument($repositoryService);
+            $definition->addArgument(new Reference('doctrine.helper'));
+            $definition->addArgument(new Reference('event_dispatcher'));
+            $container->setDefinition($managerServiceName, $definition);
+        }
     }
     
     /**

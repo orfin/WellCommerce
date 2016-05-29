@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Factory;
 
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderStatusHistoryInterface;
 
 /**
@@ -20,7 +20,7 @@ use WellCommerce\Bundle\OrderBundle\Entity\OrderStatusHistoryInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class OrderStatusHistoryFactory extends AbstractEntityFactory
+class OrderStatusHistoryFactory extends EntityFactory
 {
     public function create() : OrderStatusHistoryInterface
     {

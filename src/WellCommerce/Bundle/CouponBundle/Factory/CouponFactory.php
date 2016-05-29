@@ -13,14 +13,14 @@
 namespace WellCommerce\Bundle\CouponBundle\Factory;
 
 use WellCommerce\Bundle\CouponBundle\Entity\CouponInterface;
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
 
 /**
  * Class CouponFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CouponFactory extends AbstractEntityFactory
+class CouponFactory extends EntityFactory
 {
     public function create() : CouponInterface
     {

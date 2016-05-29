@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Factory;
 
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderModifierInterface;
 
 /**
@@ -20,7 +20,7 @@ use WellCommerce\Bundle\OrderBundle\Entity\OrderModifierInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-final class OrderModifierFactory extends AbstractEntityFactory
+final class OrderModifierFactory extends EntityFactory
 {
     public function create() : OrderModifierInterface
     {

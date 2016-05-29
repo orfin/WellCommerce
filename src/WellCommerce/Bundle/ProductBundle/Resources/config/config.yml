@@ -44,6 +44,7 @@ well_commerce_product:
                 entity: WellCommerce\Bundle\ProductBundle\Entity\ProductRoute
         product_translation:
             orm:
+                manager: false
                 mapping: "@WellCommerceProductBundle/Resources/config/doctrine/ProductTranslation.orm.yml"
                 entity: WellCommerce\Bundle\ProductBundle\Entity\ProductTranslation
 

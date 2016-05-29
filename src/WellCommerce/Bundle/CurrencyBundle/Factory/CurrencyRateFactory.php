@@ -13,14 +13,14 @@
 namespace WellCommerce\Bundle\CurrencyBundle\Factory;
 
 use WellCommerce\Bundle\CurrencyBundle\Entity\CurrencyRateInterface;
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
 
 /**
  * Class CurrencyRateFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CurrencyRateFactory extends AbstractEntityFactory
+class CurrencyRateFactory extends EntityFactory
 {
     public function create() : CurrencyRateInterface
     {

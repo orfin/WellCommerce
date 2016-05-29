@@ -43,6 +43,7 @@ well_commerce_client:
                 manager: client_group.manager
         client_group_translation:
             orm:
+                manager: false
                 mapping: "@WellCommerceClientBundle/Resources/config/doctrine/ClientGroupTranslation.orm.yml"
                 entity: WellCommerce\Bundle\ClientBundle\Entity\ClientGroupTranslation
         client_shipping_address:

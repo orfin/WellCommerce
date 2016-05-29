@@ -21,6 +21,7 @@ well_commerce_page:
                 entity: WellCommerce\Bundle\PageBundle\Entity\PageRoute
         page_translation:
             orm:
+                manager: false
                 mapping: "@WellCommercePageBundle/Resources/config/doctrine/PageTranslation.orm.yml"
                 entity: WellCommerce\Bundle\PageBundle\Entity\PageTranslation
 

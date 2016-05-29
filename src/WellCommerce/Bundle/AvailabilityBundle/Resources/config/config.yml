@@ -2,7 +2,7 @@ well_commerce_availability:
     configuration:
         availability:
             orm:
-                factory: WellCommerce\Bundle\AvailabilityBundle\Factory\AvailabilityFactory
+                factory: ~
                 repository: WellCommerce\Bundle\AvailabilityBundle\Repository\AvailabilityRepository
                 mapping: "@WellCommerceAvailabilityBundle/Resources/config/doctrine/Availability.orm.yml"
                 entity: WellCommerce\Bundle\AvailabilityBundle\Entity\Availability
@@ -12,6 +12,7 @@ well_commerce_availability:
                 manager: availability.manager
         availability_translation:
             orm:
+                manager: false
                 mapping: "@WellCommerceAvailabilityBundle/Resources/config/doctrine/AvailabilityTranslation.orm.yml"
                 entity: WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityTranslation
 

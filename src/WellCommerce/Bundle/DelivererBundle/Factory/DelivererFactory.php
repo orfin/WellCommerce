@@ -14,14 +14,14 @@ namespace WellCommerce\Bundle\DelivererBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\Bundle\DelivererBundle\Entity\DelivererInterface;
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
 
 /**
  * Class DelivererFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class DelivererFactory extends AbstractEntityFactory
+class DelivererFactory extends EntityFactory
 {
     public function create() : DelivererInterface
     {

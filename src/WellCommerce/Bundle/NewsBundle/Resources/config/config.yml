@@ -12,5 +12,6 @@ well_commerce_news:
                 manager: news.manager
         news_translation:
             orm:
+                manager: false
                 mapping: "@WellCommerceNewsBundle/Resources/config/doctrine/NewsTranslation.orm.yml"
                 entity: WellCommerce\Bundle\NewsBundle\Entity\NewsTranslation

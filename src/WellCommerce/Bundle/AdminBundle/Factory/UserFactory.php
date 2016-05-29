@@ -13,14 +13,14 @@
 namespace WellCommerce\Bundle\AdminBundle\Factory;
 
 use WellCommerce\Bundle\AdminBundle\Entity\UserInterface;
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
 
 /**
  * Class UserFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class UserFactory extends AbstractEntityFactory
+class UserFactory extends EntityFactory
 {
     public function create() : UserInterface
     {

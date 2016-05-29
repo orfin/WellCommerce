@@ -13,14 +13,14 @@
 namespace WellCommerce\Bundle\AdminBundle\Factory;
 
 use WellCommerce\Bundle\AdminBundle\Entity\AdminMenuInterface;
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
 
 /**
  * Class AdminMenuFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AdminMenuFactory extends AbstractEntityFactory
+class AdminMenuFactory extends EntityFactory
 {
     public function create() : AdminMenuInterface
     {

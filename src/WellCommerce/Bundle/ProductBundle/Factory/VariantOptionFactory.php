@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\ProductBundle\Factory;
 
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
 use WellCommerce\Bundle\ProductBundle\Entity\VariantOptionInterface;
 
 /**
@@ -20,7 +20,7 @@ use WellCommerce\Bundle\ProductBundle\Entity\VariantOptionInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class VariantOptionFactory extends AbstractEntityFactory
+class VariantOptionFactory extends EntityFactory
 {
     public function create() : VariantOptionInterface
     {

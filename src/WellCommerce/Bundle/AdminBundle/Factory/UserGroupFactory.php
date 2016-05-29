@@ -14,14 +14,14 @@ namespace WellCommerce\Bundle\AdminBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\Bundle\AdminBundle\Entity\UserGroupInterface;
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
 
 /**
  * Class UserGroupFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class UserGroupFactory extends AbstractEntityFactory
+class UserGroupFactory extends EntityFactory
 {
     public function create() : UserGroupInterface
     {

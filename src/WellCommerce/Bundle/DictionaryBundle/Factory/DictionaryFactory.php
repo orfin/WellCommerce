@@ -13,14 +13,14 @@
 namespace WellCommerce\Bundle\DictionaryBundle\Factory;
 
 use WellCommerce\Bundle\DictionaryBundle\Entity\DictionaryInterface;
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
 
 /**
  * Class DictionaryFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class DictionaryFactory extends AbstractEntityFactory
+class DictionaryFactory extends EntityFactory
 {
     public function create() : DictionaryInterface
     {

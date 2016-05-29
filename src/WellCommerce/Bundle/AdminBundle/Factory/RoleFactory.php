@@ -13,14 +13,14 @@
 namespace WellCommerce\Bundle\AdminBundle\Factory;
 
 use WellCommerce\Bundle\AdminBundle\Entity\RoleInterface;
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
 
 /**
  * Class RoleFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class RoleFactory extends AbstractEntityFactory
+class RoleFactory extends EntityFactory
 {
     public function create() : RoleInterface
     {

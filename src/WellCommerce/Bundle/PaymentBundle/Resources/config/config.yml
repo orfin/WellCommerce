@@ -31,5 +31,6 @@ well_commerce_payment:
                 manager: payment_method.manager
         payment_method_translation:
             orm:
+                manager: false
                 mapping: "@WellCommercePaymentBundle/Resources/config/doctrine/PaymentMethodTranslation.orm.yml"
                 entity: WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodTranslation

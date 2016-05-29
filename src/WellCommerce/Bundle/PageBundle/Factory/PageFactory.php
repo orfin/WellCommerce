@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\PageBundle\Factory;
 
 use Doctrine\Common\Collections\Criteria;
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
 use WellCommerce\Bundle\PageBundle\Entity\PageInterface;
 
 /**
@@ -21,7 +21,7 @@ use WellCommerce\Bundle\PageBundle\Entity\PageInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PageFactory extends AbstractEntityFactory
+class PageFactory extends EntityFactory
 {
     public function create() : PageInterface
     {

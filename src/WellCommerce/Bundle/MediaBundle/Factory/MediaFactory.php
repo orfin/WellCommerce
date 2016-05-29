@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\MediaBundle\Factory;
 
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
 use WellCommerce\Bundle\MediaBundle\Entity\MediaInterface;
 
 /**
@@ -20,7 +20,7 @@ use WellCommerce\Bundle\MediaBundle\Entity\MediaInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class MediaFactory extends AbstractEntityFactory
+class MediaFactory extends EntityFactory
 {
     public function create() : MediaInterface
     {

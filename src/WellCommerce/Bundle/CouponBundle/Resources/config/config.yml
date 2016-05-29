@@ -17,5 +17,6 @@ well_commerce_coupon:
                 manager: coupon.manager
         coupon_translation:
             orm:
+                manager: false
                 mapping: "@WellCommerceCouponBundle/Resources/config/doctrine/CouponTranslation.orm.yml"
                 entity: WellCommerce\Bundle\CouponBundle\Entity\CouponTranslation

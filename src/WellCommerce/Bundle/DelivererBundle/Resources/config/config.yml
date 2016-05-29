@@ -12,5 +12,6 @@ well_commerce_deliverer:
                 manager: deliverer.manager
         deliverer_translation:
             orm:
+                manager: false
                 mapping: "@WellCommerceDelivererBundle/Resources/config/doctrine/DelivererTranslation.orm.yml"
                 entity: WellCommerce\Bundle\DelivererBundle\Entity\DelivererTranslation

@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\NewsBundle\Factory;
 
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
 use WellCommerce\Bundle\NewsBundle\Entity\NewsInterface;
 
 /**
@@ -20,7 +20,7 @@ use WellCommerce\Bundle\NewsBundle\Entity\NewsInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class NewsFactory extends AbstractEntityFactory
+class NewsFactory extends EntityFactory
 {
     public function create() : NewsInterface
     {

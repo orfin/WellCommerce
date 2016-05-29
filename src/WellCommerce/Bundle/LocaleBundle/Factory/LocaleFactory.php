@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\LocaleBundle\Factory;
 
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
 use WellCommerce\Bundle\LocaleBundle\Entity\LocaleInterface;
 
 /**
@@ -20,7 +20,7 @@ use WellCommerce\Bundle\LocaleBundle\Entity\LocaleInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LocaleFactory extends AbstractEntityFactory
+class LocaleFactory extends EntityFactory
 {
     public function create() : LocaleInterface
     {

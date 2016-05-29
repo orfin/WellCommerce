@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\RoutingBundle\Factory;
 
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
 use WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface;
 
 /**
@@ -20,7 +20,7 @@ use WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class RouteFactory extends AbstractEntityFactory
+class RouteFactory extends EntityFactory
 {
     public function create() : RouteInterface
     {

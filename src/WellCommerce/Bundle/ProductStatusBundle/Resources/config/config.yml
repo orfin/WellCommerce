@@ -37,10 +37,12 @@ well_commerce_product_status:
                 pattern: "{page},{limit},{orderBy},{orderDir},{priceFrom},{priceTo},{view},{producers},{attributes}"
         product_status_route:
             orm:
+                manager: false
                 mapping: "@WellCommerceProductStatusBundle/Resources/config/doctrine/ProductStatusRoute.orm.yml"
                 entity: WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusRoute
         product_status_translation:
             orm:
+                manager: false
                 mapping: "@WellCommerceProductStatusBundle/Resources/config/doctrine/ProductStatusTranslation.orm.yml"
                 entity: WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusTranslation
 

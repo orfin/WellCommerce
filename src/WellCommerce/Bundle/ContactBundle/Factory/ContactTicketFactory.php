@@ -13,14 +13,14 @@
 namespace WellCommerce\Bundle\ContactBundle\Factory;
 
 use WellCommerce\Bundle\ContactBundle\Entity\ContactTicketInterface;
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
 
 /**
  * Class ContactTicketFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ContactTicketFactory extends AbstractEntityFactory
+class ContactTicketFactory extends EntityFactory
 {
     public function create() : ContactTicketInterface
     {

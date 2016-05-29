@@ -8,5 +8,6 @@ well_commerce_layout:
                 entity: WellCommerce\Bundle\LayoutBundle\Entity\LayoutBox
         layout_box_translation:
             orm:
+                manager: false
                 mapping: "@WellCommerceLayoutBundle/Resources/config/doctrine/LayoutBoxTranslation.orm.yml"
                 entity: WellCommerce\Bundle\LayoutBundle\Entity\LayoutBoxTranslation

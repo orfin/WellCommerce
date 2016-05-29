@@ -13,14 +13,14 @@
 namespace WellCommerce\Bundle\DistributionBundle\Factory;
 
 use WellCommerce\Bundle\DistributionBundle\Entity\PackageInterface;
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
 
 /**
  * Class ChannelFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PackageFactory extends AbstractEntityFactory
+class PackageFactory extends EntityFactory
 {
     public function create() : PackageInterface
     {

@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\TaxBundle\Factory;
 
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
 use WellCommerce\Bundle\TaxBundle\Entity\TaxInterface;
 
 /**
@@ -20,7 +20,7 @@ use WellCommerce\Bundle\TaxBundle\Entity\TaxInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class TaxFactory extends AbstractEntityFactory
+class TaxFactory extends EntityFactory
 {
     public function create() : TaxInterface
     {

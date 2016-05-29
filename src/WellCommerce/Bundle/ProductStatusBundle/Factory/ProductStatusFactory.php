@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\ProductStatusBundle\Factory;
 
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
 use WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusInterface;
 
 /**
@@ -20,7 +20,7 @@ use WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductStatusFactory extends AbstractEntityFactory
+class ProductStatusFactory extends EntityFactory
 {
     public function create() : ProductStatusInterface
     {

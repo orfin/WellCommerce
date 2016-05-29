@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\Factory;
 
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentStateHistoryInterface;
 
@@ -21,7 +21,7 @@ use WellCommerce\Bundle\PaymentBundle\Entity\PaymentStateHistoryInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PaymentStateHistoryFactory extends AbstractEntityFactory
+class PaymentStateHistoryFactory extends EntityFactory
 {
     public function create() : PaymentStateHistoryInterface
     {

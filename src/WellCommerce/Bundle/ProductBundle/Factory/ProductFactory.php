@@ -15,7 +15,7 @@ namespace WellCommerce\Bundle\ProductBundle\Factory;
 use WellCommerce\Bundle\AppBundle\Entity\Dimension;
 use WellCommerce\Bundle\AppBundle\Entity\DiscountablePriceInterface;
 use WellCommerce\Bundle\AppBundle\Entity\PriceInterface;
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 use WellCommerce\Bundle\UnitBundle\Entity\UnitInterface;
 
@@ -24,7 +24,7 @@ use WellCommerce\Bundle\UnitBundle\Entity\UnitInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductFactory extends AbstractEntityFactory
+class ProductFactory extends EntityFactory
 {
     public function create() : ProductInterface
     {

@@ -13,14 +13,14 @@
 namespace WellCommerce\Bundle\CategoryBundle\Factory;
 
 use WellCommerce\Bundle\CategoryBundle\Entity\CategoryInterface;
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
 
 /**
  * Class CategoryFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CategoryFactory extends AbstractEntityFactory
+class CategoryFactory extends EntityFactory
 {
     public function create() : CategoryInterface
     {

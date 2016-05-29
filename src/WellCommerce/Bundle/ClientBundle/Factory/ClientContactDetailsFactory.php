@@ -13,14 +13,14 @@
 namespace WellCommerce\Bundle\ClientBundle\Factory;
 
 use WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetailsInterface;
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
 
 /**
  * Class ClientContactDetailsFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-final class ClientContactDetailsFactory extends AbstractEntityFactory
+final class ClientContactDetailsFactory extends EntityFactory
 {
     public function create() : ClientContactDetailsInterface
     {

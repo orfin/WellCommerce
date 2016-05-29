@@ -13,9 +13,9 @@
 namespace WellCommerce\Bundle\AppBundle\Factory;
 
 use WellCommerce\Bundle\AppBundle\Entity\PriceInterface;
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
 
-final class PriceFactory extends AbstractEntityFactory
+final class PriceFactory extends EntityFactory
 {
     public function create() : PriceInterface
     {

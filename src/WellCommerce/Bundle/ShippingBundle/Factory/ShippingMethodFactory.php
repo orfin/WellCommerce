@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\ShippingBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
 use WellCommerce\Bundle\ShippingBundle\Calculator\ShippingCalculatorInterface;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface;
 
@@ -22,7 +22,7 @@ use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ShippingMethodFactory extends AbstractEntityFactory
+class ShippingMethodFactory extends EntityFactory
 {
     public function create() : ShippingMethodInterface
     {

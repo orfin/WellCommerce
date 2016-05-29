@@ -12,5 +12,6 @@ well_commerce_tax:
                 manager: tax.manager
         tax_translation:
             orm:
+                manager: false
                 mapping: "@WellCommerceTaxBundle/Resources/config/doctrine/TaxTranslation.orm.yml"
                 entity: WellCommerce\Bundle\TaxBundle\Entity\TaxTranslation

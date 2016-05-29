@@ -14,14 +14,14 @@ namespace WellCommerce\Bundle\ContactBundle\Factory;
 
 use WellCommerce\Bundle\ContactBundle\Entity\ContactInterface;
 use WellCommerce\Bundle\ContactBundle\Entity\ContactTranslation;
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
 
 /**
  * Class ContactFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ContactFactory extends AbstractEntityFactory
+class ContactFactory extends EntityFactory
 {
     public function create() : ContactInterface
     {

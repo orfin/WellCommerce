@@ -13,14 +13,14 @@
 namespace WellCommerce\Bundle\ClientBundle\Factory;
 
 use WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddressInterface;
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
 
 /**
  * Class ClientBillingAddressFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-final class ClientBillingAddressFactory extends AbstractEntityFactory
+final class ClientBillingAddressFactory extends EntityFactory
 {
     public function create() : ClientBillingAddressInterface
     {

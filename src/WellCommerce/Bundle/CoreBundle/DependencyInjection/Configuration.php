@@ -15,7 +15,9 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use WellCommerce\Bundle\ApiBundle\Request\RequestHandler;
+use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
 use WellCommerce\Bundle\DoctrineBundle\Manager\Manager;
+use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
 
 /**
  * Class Configuration
@@ -63,8 +65,8 @@ class Configuration implements ConfigurationInterface
                             ->arrayNode('orm')->addDefaultsIfNotSet()
                                 ->children()
                                     ->scalarNode('manager')->defaultValue(Manager::class)->end()
-                                    ->scalarNode('repository')->defaultNull()->end()
-                                    ->scalarNode('factory')->defaultNull()->end()
+                                    ->scalarNode('repository')->defaultFalse()->treatNullLike(EntityRepository::class)->end()
+                                    ->scalarNode('factory')->defaultFalse()->treatNullLike(EntityFactory::class)->end()
                                     ->scalarNode('entity')->isRequired()->end()
                                     ->scalarNode('mapping')->isRequired()->end()
                                 ->end()

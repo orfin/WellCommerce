@@ -13,14 +13,14 @@
 namespace WellCommerce\Bundle\AppBundle\Factory;
 
 use WellCommerce\Bundle\AppBundle\Entity\DiscountablePriceInterface;
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
 
 /**
  * Class DiscountablePriceFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-final class DiscountablePriceFactory extends AbstractEntityFactory
+final class DiscountablePriceFactory extends EntityFactory
 {
     public function create() : DiscountablePriceInterface
     {

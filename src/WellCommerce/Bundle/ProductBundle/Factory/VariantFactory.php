@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\ProductBundle\Factory;
 
 use WellCommerce\Bundle\AppBundle\Entity\DiscountablePrice;
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
 use WellCommerce\Bundle\ProductBundle\Entity\VariantInterface;
 
 /**
@@ -21,7 +21,7 @@ use WellCommerce\Bundle\ProductBundle\Entity\VariantInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class VariantFactory extends AbstractEntityFactory
+class VariantFactory extends EntityFactory
 {
     public function create() : VariantInterface
     {

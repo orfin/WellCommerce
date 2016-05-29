@@ -41,6 +41,7 @@ well_commerce_producer:
                 entity: WellCommerce\Bundle\ProducerBundle\Entity\ProducerRoute
         producer_translation:
             orm:
+                manager: false
                 mapping: "@WellCommerceProducerBundle/Resources/config/doctrine/ProducerTranslation.orm.yml"
                 entity: WellCommerce\Bundle\ProducerBundle\Entity\ProducerTranslation
 

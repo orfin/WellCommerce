@@ -42,6 +42,7 @@ well_commerce_category:
                 entity: WellCommerce\Bundle\CategoryBundle\Entity\CategoryRoute
         category_translation:
             orm:
+                manager: false
                 mapping: "@WellCommerceCategoryBundle/Resources/config/doctrine/CategoryTranslation.orm.yml"
                 entity: WellCommerce\Bundle\CategoryBundle\Entity\CategoryTranslation
 

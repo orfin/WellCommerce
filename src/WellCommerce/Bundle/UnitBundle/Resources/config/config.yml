@@ -12,5 +12,6 @@ well_commerce_unit:
                 manager: unit.manager
         unit_translation:
             orm:
+                manager: false
                 mapping: "@WellCommerceUnitBundle/Resources/config/doctrine/UnitTranslation.orm.yml"
                 entity: WellCommerce\Bundle\UnitBundle\Entity\UnitTranslation
