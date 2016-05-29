@@ -46,7 +46,7 @@ class ProductDataSetTest extends AbstractDataSetTestCase
             'category'         => 'categories.id',
             'shop'             => 'product_shops.id',
             'photo'            => 'photos.path',
-            'status'           => 'statuses.id',
+            'status'           => 'IDENTITY(distinction.status)',
         ];
     }
 }
