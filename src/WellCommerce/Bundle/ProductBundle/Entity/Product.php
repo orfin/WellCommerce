@@ -336,26 +336,6 @@ class Product extends AbstractEntity implements ProductInterface
         $this->sellPriceTax = $sellPriceTax;
     }
     
-    public function getShippingCostQuantity() : int
-    {
-        return 1;
-    }
-    
-    public function getShippingCostWeight() : float
-    {
-        return $this->weight;
-    }
-    
-    public function getShippingCostGrossPrice() : float
-    {
-        return $this->sellPrice->getFinalGrossAmount();
-    }
-    
-    public function getShippingCostCurrency() : string
-    {
-        return $this->sellPrice->getCurrency();
-    }
-    
     public function getReviews() : Collection
     {
         return $this->reviews;
