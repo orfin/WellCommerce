@@ -26,7 +26,7 @@ use WellCommerce\Bundle\CoreBundle\Helper\Templating\TemplatingHelperInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class MailerHelper implements MailerHelperInterface
+final class MailerHelper implements MailerHelperInterface
 {
     /**
      * @var TemplatingHelperInterface
