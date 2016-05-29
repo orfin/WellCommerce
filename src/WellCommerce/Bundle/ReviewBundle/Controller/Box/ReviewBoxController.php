@@ -16,13 +16,13 @@ use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 use WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxSettingsCollection;
 use WellCommerce\Bundle\ReviewBundle\Entity\ReviewInterface;
+use WellCommerce\Bundle\ReviewBundle\Repository\ReviewRepositoryInterface;
 
 /**
  * Class ReviewBoxController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-
 class ReviewBoxController extends AbstractBoxController
 {
     public function indexAction(LayoutBoxSettingsCollection $boxSettings) : Response
@@ -51,35 +51,39 @@ class ReviewBoxController extends AbstractBoxController
 
         return $this->displayTemplate('index', [
             'form'    => $form,
-            'reviews' => $product->getReviews()
+            'reviews' => $this->getRepository()->getProductReviews($product)
         ]);
-
-
     }
 
-    public function reportAction(int $id) {
+    public function reportAction(int $id)
+    {
         $review = $this->getManager()->getRepository()->findOneBy([
-            'id' => $id,
+            'id'      => $id,
             'enabled' => 1
         ]);
-        if(null !== $review) {
-            //$review->setEnabled(false);
-            //$this->getManager()->updateResource($review);
-            $currentRoute = $review->getProduct()->translate()->getRoute()->getId();
+
+        if ($review instanceof ReviewInterface) {
+            $currentRoute        = $review->getProduct()->translate()->getRoute()->getId();
+            $mailerConfiguration = $this->getShopStorage()->getCurrentShop()->getMailerConfiguration();
 
             $this->getMailerHelper()->sendEmail([
-                'recipient' => 'rafal@wellcommerce.org',
-                'subject' => 'Raport opinii.',
-                'template' => 'WellCommerceAppBundle:Email:report_review.html.twig',
-                'parameters' => [
+                'recipient'     => $mailerConfiguration->getFrom(),
+                'subject'       => $this->trans('review.email.heading.report'),
+                'template'      => 'WellCommerceAppBundle:Email:report_review.html.twig',
+                'parameters'    => [
                     'review' => $review,
                 ],
-                'configuration' => $this->getShopStorage()->getCurrentShop()->getMailerConfiguration(),
+                'configuration' => $mailerConfiguration,
             ]);
+
             $this->getFlashHelper()->addSuccess('report.flash.success');
+
             return $this->getRouterHelper()->redirectTo('dynamic_' . $currentRoute);
-        } else {
-            return $this->getRouterHelper()->redirectTo('front.home_page.index');
         }
+    }
+
+    private function getRepository() : ReviewRepositoryInterface
+    {
+        return $this->getManager()->getRepository();
     }
 }

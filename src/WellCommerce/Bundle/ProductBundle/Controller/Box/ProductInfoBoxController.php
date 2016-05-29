@@ -15,6 +15,10 @@ namespace WellCommerce\Bundle\ProductBundle\Controller\Box;
 use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 use WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxSettingsCollection;
+use WellCommerce\Bundle\ProductBundle\Helper\VariantHelperInterface;
+use WellCommerce\Bundle\ReviewBundle\Repository\ReviewRepositoryInterface;
+use WellCommerce\Bundle\ShippingBundle\Context\ProductContext;
+use WellCommerce\Bundle\ShippingBundle\Provider\ShippingMethodProviderInterface;
 
 /**
  * Class ProductInfoBoxController
@@ -25,27 +29,32 @@ class ProductInfoBoxController extends AbstractBoxController
 {
     public function indexAction(LayoutBoxSettingsCollection $boxSettings) : Response
     {
-        $product      = $this->getProductStorage()->getCurrentProduct();
-        $templateData = $this->get('product.helper')->getProductDefaultTemplateData($product);
-        
-        return $this->displayTemplate('index', $templateData);
+        $product             = $this->getProductStorage()->getCurrentProduct();
+        $shippingMethodCosts = $this->getShippingMethodProvider()->getCosts(new ProductContext($product));
+        $variants            = $this->getVariantHelper()->getVariants($product);
+        $attributes          = $this->getVariantHelper()->getAttributes($product);
+
+        return $this->displayTemplate('index', [
+            'product'       => $product,
+            'shippingCosts' => $shippingMethodCosts,
+            'variants'      => json_encode($variants),
+            'attributes'    => $attributes,
+            'reviews'       => $this->getReviewRepository()->getProductReviews($product)
+        ]);
     }
-    
-    private function addBreadcrumbs(CategoryInterface $category)
+
+    private function getShippingMethodProvider() : ShippingMethodProviderInterface
     {
-        $paths = $this->getRepository()->getCategoryPath($category);
-        
-        /** @var CategoryInterface $path */
-        foreach ($paths as $path) {
-            $this->getBreadcrumbProvider()->add(new Breadcrumb([
-                'label' => $path->translate()->getName(),
-                'url'   => $this->getRouterHelper()->generateUrl($path->translate()->getRoute()->getId())
-            ]));
-        }
+        return $this->get('shipping_method.provider');
     }
-    
-    private function getRepository() : CategoryRepositoryInterface
+
+    private function getVariantHelper() : VariantHelperInterface
     {
-        return $this->getManager()->getRepository();
+        return $this->get('variant.helper');
+    }
+
+    private function getReviewRepository() : ReviewRepositoryInterface
+    {
+        return $this->get('review.repository');
     }
 }

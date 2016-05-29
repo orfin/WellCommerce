@@ -1,5 +1,5 @@
 {% trans_default_domain "wellcommerce" %}
-{% set score = productReviewAverage(product.reviews) %}
+{% set score = productReviewAverage(reviews) %}
 
 <div class="product-details">
     <div class="row">
@@ -31,8 +31,8 @@
 
 	                <div class="reviews">
 	                    <div class="stars rat"></div>
-                        {% if product.reviews.count > 0 %}
-	                        <span>{{ score }} / <a href="#add-opinion-alert">see {{ product.reviews.count }} reviews</a></span>
+                        {% if reviews.count > 0 %}
+	                        <span>{{ score }} / <a href="#add-opinion-alert">see {{ reviews.count }} reviews</a></span>
                         {% else %}
                             <span>{{ score }} / <a href="#add-opinion-alert">{% trans %}product_review.link.first_review{% endtrans %}</a></span>
                         {% endif %}

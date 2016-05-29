@@ -30,7 +30,6 @@ WellCommerce\Bundle\ReviewBundle\Entity\Review:
         product:
             targetEntity: WellCommerce\Bundle\ProductBundle\Entity\Product
             fetch: LAZY
-            inversedBy: reviews
             joinColumns:
                 product_id:
                     referencedColumnName: id

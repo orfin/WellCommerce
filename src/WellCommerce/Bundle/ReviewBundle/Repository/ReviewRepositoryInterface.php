@@ -12,7 +12,9 @@
 
 namespace WellCommerce\Bundle\ReviewBundle\Repository;
 
+use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 
 /**
  * Interface ReviewRepositoryInterface
@@ -21,4 +23,5 @@ use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
  */
 interface ReviewRepositoryInterface extends RepositoryInterface
 {
+    public function getProductReviews(ProductInterface $product) : Collection;
 }

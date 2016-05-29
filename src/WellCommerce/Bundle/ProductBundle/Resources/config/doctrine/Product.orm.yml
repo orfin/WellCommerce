@@ -166,10 +166,3 @@ WellCommerce\Bundle\ProductBundle\Entity\Product:
             fetch: EXTRA_LAZY
             mappedBy: product
             orphanRemoval: true
-        reviews:
-            targetEntity: WellCommerce\Bundle\ReviewBundle\Entity\Review
-            cascade:
-              - all
-            fetch: EXTRA_LAZY
-            mappedBy: product
-            orphanRemoval: true

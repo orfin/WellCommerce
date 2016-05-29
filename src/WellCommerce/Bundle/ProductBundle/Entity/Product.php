@@ -72,11 +72,6 @@ class Product extends AbstractEntity implements ProductInterface
     protected $productPhotos;
     
     /**
-     * @var Collection
-     */
-    protected $reviews;
-    
-    /**
      * @var int
      */
     protected $stock = 0;
@@ -334,10 +329,5 @@ class Product extends AbstractEntity implements ProductInterface
     public function setSellPriceTax(TaxInterface $sellPriceTax)
     {
         $this->sellPriceTax = $sellPriceTax;
-    }
-    
-    public function getReviews() : Collection
-    {
-        return $this->reviews;
     }
 }

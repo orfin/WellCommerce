@@ -11,8 +11,11 @@
  */
 namespace WellCommerce\Bundle\ReviewBundle\Repository;
 
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 
 /**
  * Class ReviewRepository
@@ -32,5 +35,14 @@ class ReviewRepository extends EntityRepository implements ReviewRepositoryInter
         $queryBuilder->leftJoin('product_info.translations', 'product_translation');
 
         return $queryBuilder;
+    }
+
+    public function getProductReviews(ProductInterface $product) : Collection
+    {
+        $criteria = new Criteria();
+        $criteria->where($criteria->expr()->eq('product', $product));
+        $criteria->andWhere($criteria->expr()->eq('enabled', true));
+
+        return $this->matching($criteria);
     }
 }
