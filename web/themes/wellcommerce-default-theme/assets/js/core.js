@@ -492,7 +492,8 @@ new GPlugin('GCoupon', oCouponDefaults, GCoupon);
 var oLayeredNavigationDefaults = {
     sFilterRoute:      'front.product_layered.filter',
     sCurrentRoute:      '',
-    sCurrentRouteParams:      'front.product_layered.filter'
+    sCurrentRouteParams: {},
+    sCurrentQueryParams: {},
 };
 
 var GLayeredNavigation = function(oOptions) {
@@ -511,7 +512,8 @@ var GLayeredNavigation = function(oOptions) {
         var oRequest = {
             form: $(gThis).serialize(),
             route: gThis.m_oOptions.sCurrentRoute,
-            route_params: gThis.m_oOptions.sCurrentRouteParams
+            route_params: gThis.m_oOptions.sCurrentRouteParams,
+            query_params: gThis.m_oOptions.sCurrentQueryParams,
         };
 
         GAjaxRequest(Routing.generate(gThis.m_oOptions.sFilterRoute), oRequest, function(oResponse){

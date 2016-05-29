@@ -10,20 +10,26 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\SearchBundle\Document;
+namespace WellCommerce\Component\Search\Model;
 
 /**
- * Interface DocumentFieldInterface
+ * Interface FieldInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface DocumentFieldInterface
+interface FieldInterface
 {
     public function getName() : string;
 
     public function getValue() : string;
 
+    public function setValue(string $value);
+
     public function isIndexable() : bool;
 
     public function getBoost() : float;
+
+    public function getFuzziness() : float;
+
+    public function getValueExpression() : string;
 }

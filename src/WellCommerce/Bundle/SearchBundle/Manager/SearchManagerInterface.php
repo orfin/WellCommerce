@@ -12,12 +12,9 @@
 
 namespace WellCommerce\Bundle\SearchBundle\Manager;
 
-use Symfony\Component\HttpFoundation\Request;
-use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
-use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
-use WellCommerce\Bundle\SearchBundle\Adapter\AdapterInterface;
-use WellCommerce\Bundle\SearchBundle\Document\DocumentInterface;
-use WellCommerce\Bundle\SearchBundle\Type\IndexTypeInterface;
+use WellCommerce\Component\Search\Model\DocumentInterface;
+use WellCommerce\Component\Search\Model\SearchRequestInterface;
+use WellCommerce\Component\Search\Model\TypeInterface;
 
 /**
  * Interface SearchManagerInterface
@@ -26,17 +23,19 @@ use WellCommerce\Bundle\SearchBundle\Type\IndexTypeInterface;
  */
 interface SearchManagerInterface
 {
-    public function search(IndexTypeInterface $indexType, Request $request) : array;
+    public function search(SearchRequestInterface $request) : array;
 
-    public function getAdapter() : AdapterInterface;
+    public function addDocument(DocumentInterface $document);
 
-    public function createDocument(EntityInterface $entity, IndexTypeInterface $indexType, string $locale) : DocumentInterface;
+    public function updateDocument(DocumentInterface $document);
 
-    public function addEntity(EntityInterface $entity, IndexTypeInterface $indexType, string $locale);
+    public function removeDocument(DocumentInterface $document);
 
-    public function updateEntity(EntityInterface $entity, IndexTypeInterface $indexType, string $locale);
+    public function flushIndex(string $locale);
 
-    public function removeEntity(EntityInterface $entity, IndexTypeInterface $indexType, string $locale);
+    public function optimizeIndex(string $locale);
 
-    public function getIndexType(string $type) : IndexTypeInterface;
+    public function removeIndex(string $locale);
+
+    public function getType(string $type) : TypeInterface;
 }

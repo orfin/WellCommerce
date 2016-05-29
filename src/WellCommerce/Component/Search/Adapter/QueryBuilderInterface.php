@@ -10,20 +10,14 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\SearchBundle\Type;
+namespace WellCommerce\Component\Search\Adapter;
 
 /**
- * Interface IndexTypeFieldInterface
+ * Interface SearchQueryAdapterInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface IndexTypeFieldInterface
+interface QueryBuilderInterface
 {
-    public function getName() : string;
-    
-    public function isIndexable() : bool;
-
-    public function getBoost() : float;
-
-    public function getPathExpression() : string;
+    public function getQuery();
 }

@@ -12,11 +12,13 @@
 
 namespace WellCommerce\Bundle\ProductBundle\Search;
 
+use Doctrine\Common\Collections\Collection;
+use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
-use WellCommerce\Bundle\SearchBundle\Document\DocumentField;
-use WellCommerce\Bundle\SearchBundle\Document\DocumentFieldCollection;
-use WellCommerce\Bundle\SearchBundle\Document\DocumentInterface;
-use WellCommerce\Bundle\SearchBundle\Type\IndexTypeInterface;
+use WellCommerce\Component\Search\Model\DocumentInterface;
+use WellCommerce\Component\Search\Model\FieldInterface;
+use WellCommerce\Component\Search\Model\TypeInterface;
 
 /**
  * Class ProductDocument
@@ -31,6 +33,11 @@ class ProductDocument implements DocumentInterface
     private $product;
     
     /**
+     * @var TypeInterface
+     */
+    private $type;
+    
+    /**
      * @var string
      */
     private $locale;
@@ -39,11 +46,13 @@ class ProductDocument implements DocumentInterface
      * ProductDocument constructor.
      *
      * @param ProductInterface $product
+     * @param TypeInterface    $type
      * @param string           $locale
      */
-    public function __construct(ProductInterface $product, string $locale)
+    public function __construct(ProductInterface $product, TypeInterface $type, string $locale)
     {
         $this->product = $product;
+        $this->type    = $type;
         $this->locale  = $locale;
     }
     
@@ -52,32 +61,41 @@ class ProductDocument implements DocumentInterface
         return $this->product->getId();
     }
     
-    public function getIndexType() : IndexTypeInterface
+    public function getEntity() : EntityInterface
     {
-        // TODO: Implement getIndexType() method.
+        return $this->product;
     }
-    
+
+    public function getType() : TypeInterface
+    {
+        return $this->type;
+    }
+
     public function getLocale() : string
     {
         return $this->locale;
     }
     
-    public function getFields() : DocumentFieldCollection
+    public function getFields() : Collection
     {
-        $collection  = new DocumentFieldCollection();
-        $translation = $this->product->translate($this->locale);
-        $producer    = $this->product->getProducer()->translate($this->locale)->getName();
+        $language = new ExpressionLanguage();
+        $fields   = $this->type->getFields();
         
-        $collection->add(new DocumentField([
-            'name' => 'sku',    
-            'value' => 'sku',    
-            'indexable' => 'sku',    
-        ]));
+        $fields->map(function (FieldInterface $field) use ($language) {
+            $value = $this->getFieldValue($field->getValueExpression(), $language);
+            $field->setValue($value);
+        });
         
-        $collection->add(new DocumentField('sku', $this->product->getSku(), true, 1));
-        $collection->add(new DocumentField('name', $translation->getName(), true, 1));
-        $collection->add(new DocumentField('description', $translation->getDescription(), true, 0.5));
-        $collection->add(new DocumentField('short_description', $translation->getShortDescription(), true, 0.5));
-        $collection->add(new DocumentField('producer', $producer, true, 0.5));
+        return $fields;
+    }
+    
+    private function getFieldValue(string $expression, ExpressionLanguage $language) : string
+    {
+        $value = $language->evaluate($expression, [
+            'resource' => $this->product,
+            'locale'   => $this->locale
+        ]);
+        
+        return $value ?? '';
     }
 }

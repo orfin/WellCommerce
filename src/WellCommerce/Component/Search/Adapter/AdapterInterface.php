@@ -10,9 +10,10 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\SearchBundle\Adapter;
+namespace WellCommerce\Component\Search\Adapter;
 
-use WellCommerce\Bundle\SearchBundle\Document\DocumentInterface;
+use WellCommerce\Component\Search\Model\DocumentInterface;
+use WellCommerce\Component\Search\Model\SearchRequestInterface;
 
 /**
  * Interface AdapterInterface
@@ -21,7 +22,7 @@ use WellCommerce\Bundle\SearchBundle\Document\DocumentInterface;
  */
 interface AdapterInterface
 {
-    public function getIndexName(string $locale) : string;
+    public function search(SearchRequestInterface $request) : array;
 
     public function createIndex(string $locale);
 

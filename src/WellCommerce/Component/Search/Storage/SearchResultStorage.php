@@ -10,15 +10,24 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\SearchBundle\Type;
-
-use Doctrine\Common\Collections\ArrayCollection;
+namespace WellCommerce\Component\Search\Storage;
 
 /**
- * Class IndexTypeCollection
+ * Class SearchResultStorage
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class IndexTypeCollection extends ArrayCollection
+final class SearchResultStorage
 {
+    private $result = [];
+
+    public function getResult() : array
+    {
+        return (0 !== count($this->result)) ? $this->result : [0];
+    }
+
+    public function setResult(array $result)
+    {
+        $this->result = $result;
+    }
 }

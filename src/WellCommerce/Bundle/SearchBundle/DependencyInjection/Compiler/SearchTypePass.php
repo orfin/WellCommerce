@@ -15,14 +15,14 @@ namespace WellCommerce\Bundle\SearchBundle\DependencyInjection\Compiler;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
-use WellCommerce\Bundle\SearchBundle\Type\IndexTypeInterface;
+use WellCommerce\Component\Search\Model\TypeInterface;
 
 /**
- * Class IndexTypePass
+ * Class SearchTypePass
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class IndexTypePass implements CompilerPassInterface
+class SearchTypePass implements CompilerPassInterface
 {
     /**
      * Processes the container
@@ -31,9 +31,9 @@ class IndexTypePass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        $tag                            = 'search.index_type';
-        $interface                      = IndexTypeInterface::class;
-        $typeCollectionDefinition       = $container->getDefinition('search.index_type.collection');
+        $tag                            = 'search.type';
+        $interface                      = TypeInterface::class;
+        $typeCollectionDefinition       = $container->getDefinition('search.type.collection');
 
         foreach ($container->findTaggedServiceIds($tag) as $id => $attributes) {
             $itemDefinition = $container->getDefinition($id);
@@ -41,7 +41,7 @@ class IndexTypePass implements CompilerPassInterface
 
             if (!$refClass->implementsInterface($interface)) {
                 throw new \InvalidArgumentException(
-                    sprintf('Index type "%s" tagged with "%s" must implement interface "%s".', $id, $tag, $interface)
+                    sprintf('Search type "%s" tagged with "%s" must implement interface "%s".', $id, $tag, $interface)
                 );
             }
 

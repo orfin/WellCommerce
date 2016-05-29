@@ -10,15 +10,16 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\SearchBundle\Adapter;
+namespace WellCommerce\Component\Search\Adapter\ElasticSearch;
 
 use Elasticsearch\Client;
 use Elasticsearch\ClientBuilder;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use WellCommerce\Bundle\SearchBundle\Document\DocumentFieldInterface;
-use WellCommerce\Bundle\SearchBundle\Document\DocumentInterface;
-use WellCommerce\Bundle\SearchBundle\Type\IndexTypeInterface;
+use WellCommerce\Component\Search\Adapter\AdapterInterface;
+use WellCommerce\Component\Search\Adapter\QueryBuilderInterface;
+use WellCommerce\Component\Search\Model\DocumentInterface;
+use WellCommerce\Component\Search\Model\FieldInterface;
+use WellCommerce\Component\Search\Model\SearchRequestInterface;
 
 /**
  * Class ElasticSearchAdapter
@@ -28,11 +29,6 @@ use WellCommerce\Bundle\SearchBundle\Type\IndexTypeInterface;
 final class ElasticSearchAdapter implements AdapterInterface
 {
     /**
-     * @var string
-     */
-    private $indexName;
-
-    /**
      * @var array
      */
     private $options = [];
@@ -41,7 +37,7 @@ final class ElasticSearchAdapter implements AdapterInterface
      * @var Client
      */
     private $client;
-    
+
     /**
      * ElasticSearchAdapter constructor.
      *
@@ -54,96 +50,60 @@ final class ElasticSearchAdapter implements AdapterInterface
         $this->options = $resolver->resolve($options);
     }
     
-    public function search(IndexTypeInterface $indexType, Request $request, int $limit = 100) : array
+    public function search(SearchRequestInterface $request) : array
     {
         $params = [
             'index' => $this->getIndexName($request->getLocale()),
-            'type'  => $indexType->getName(),
-            "size"  => $limit,
+            'type'  => $request->getType()->getName(),
+            "size"  => $this->options['result_limit'],
             'body'  => [
-                'query' => [
-                    'template' => [
-                        'inline' => [
-                            "query_string" => [
-                                'phrase_slop'                  => 1,
-                                'auto_generate_phrase_queries' => true,
-                                'query'                        => '{{query_string}}',
-                                'fields'                       => ["name_en^5", "description_*"],
-                            ]
-                        ],
-                        'params' => [
-                            'query_string' => 'perspiciatis',
-                        ]
-                    ],
-                ]
+                'query' => $this->createQueryBuilder($request)->getQuery()
             ]
         ];
 
-        $results = $this->client->search($params);
-
-        print_r($results);
-        die();
+        $results = $this->getClient()->search($params);
 
         return $this->processResults($results);
     }
 
     public function addDocument(DocumentInterface $document)
     {
-        $body = [];
-        
-        $document->getFields()->map(function (DocumentFieldInterface $field) use (&$body) {
-            $body[$field->getName()] = $field->getValue();
-        });
-        
         $params = [
             'index' => $this->getIndexName($document->getLocale()),
-            'type'  => $document->getIndexType()->getName(),
+            'type'  => $document->getType()->getName(),
             'id'    => $document->getIdentifier(),
-            'body'  => $body
+            'body'  => $this->createDocumentBody($document)
         ];
         
-        $this->client->index($params);
+        $this->getClient()->index($params);
     }
     
     public function removeDocument(DocumentInterface $document)
     {
         $params = [
-            'index' => $this->getIndex(),
+            'index' => $this->getIndexName($document->getLocale()),
             'type'  => $document->getType()->getName(),
             'id'    => $document->getIdentifier(),
         ];
         
-        $this->client->delete($params);
+        $this->getClient()->delete($params);
     }
     
     public function updateDocument(DocumentInterface $document)
     {
-        $body = [];
-        
-        $document->getFields()->map(function (DocumentFieldInterface $field) use (&$body) {
-            $body[$field->getName()] = $field->getValue();
-        });
-        
         $params = [
-            'index' => $this->getIndex(),
+            'index' => $this->getIndexName($document->getLocale()),
             'type'  => $document->getType()->getName(),
             'id'    => $document->getIdentifier(),
-            'body'  => $body
+            'body'  => $this->createDocumentBody($document)
         ];
         
-        $this->client->update($params);
+        $this->getClient()->update($params);
     }
 
     public function getIndexName(string $locale) : string
     {
         return sprintf('%s%s', $this->options['index_prefix'], $locale);
-    }
-
-    public function hasIndex(string $locale) : bool
-    {
-        return $this->getClient()->indices()->exists([
-            'index' => $this->getIndexName($locale)
-        ]);
     }
 
     public function createIndex(string $locale)
@@ -203,27 +163,49 @@ final class ElasticSearchAdapter implements AdapterInterface
             'index' => $this->getIndexName($locale)
         ]);
     }
+
+    private function createQueryBuilder(SearchRequestInterface $request) : QueryBuilderInterface
+    {
+        return new $this->options['query_builder_class']($request, $this->options['query_min_length']);
+    }
     
     private function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setRequired([
             'index_prefix',
             'query_min_length',
+            'result_limit',
             'number_of_shards',
             'number_of_replicas',
+            'query_builder_class'
         ]);
         
         $resolver->setDefault('index_prefix', 'wellcommerce_');
         $resolver->setDefault('query_min_length', 3);
+        $resolver->setDefault('result_limit', 100);
         $resolver->setDefault('number_of_shards', 2);
         $resolver->setDefault('number_of_replicas', 0);
+        $resolver->setDefault('query_builder_class', ElasticSearchQueryBuilder::class);
 
         $resolver->setAllowedTypes('index_prefix', 'string');
         $resolver->setAllowedTypes('query_min_length', 'integer');
+        $resolver->setAllowedTypes('result_limit', 'integer');
         $resolver->setAllowedTypes('number_of_shards', 'integer');
         $resolver->setAllowedTypes('number_of_replicas', 'integer');
+        $resolver->setAllowedTypes('query_builder_class', 'string');
     }
-    
+
+    private function createDocumentBody(DocumentInterface $document) : array
+    {
+        $body = [];
+
+        $document->getFields()->map(function (FieldInterface $field) use (&$body) {
+            $body[$field->getName()] = $field->getValue();
+        });
+
+        return $body;
+    }
+
     private function getClient() : Client
     {
         if (null === $this->client) {
@@ -231,6 +213,13 @@ final class ElasticSearchAdapter implements AdapterInterface
         }
 
         return $this->client;
+    }
+    
+    private function hasIndex(string $locale) : bool
+    {
+        return $this->getClient()->indices()->exists([
+            'index' => $this->getIndexName($locale)
+        ]);
     }
 
     private function processResults(array $results) : array

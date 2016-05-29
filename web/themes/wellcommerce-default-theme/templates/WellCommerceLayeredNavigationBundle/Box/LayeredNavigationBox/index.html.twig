@@ -37,7 +37,8 @@
         $('#layered-navigation-form').GLayeredNavigation({
             sFilterRoute: 'front.layered_navigation.filter',
             sCurrentRoute: '{{ app.request.get('_route') }}',
-            sCurrentRouteParams: {{ app.request.get('_route_params')|json_encode|raw }}
+            sCurrentRouteParams: {{ app.request.get('_route_params')|json_encode|raw }},
+            sCurrentQueryParams: {{ app.request.query.all|json_encode|raw }},
         });
     });
 </script>

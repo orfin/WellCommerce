@@ -19,13 +19,7 @@ namespace WellCommerce\Bundle\UnitBundle\Entity;
  */
 interface UnitAwareInterface
 {
-    /**
-     * @param UnitInterface $unit
-     */
     public function setUnit(UnitInterface $unit);
     
-    /**
-     * @return UnitInterface
-     */
     public function getUnit() : UnitInterface;
 }

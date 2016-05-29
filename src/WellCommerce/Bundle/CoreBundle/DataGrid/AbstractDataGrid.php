@@ -52,7 +52,10 @@ abstract class AbstractDataGrid extends AbstractContainerAware implements DataGr
      * @var DataSetInterface
      */
     protected $dataset;
-    
+
+    /**
+     * @var EventDispatcherInterface
+     */
     protected $eventDispatcher;
     
     /**

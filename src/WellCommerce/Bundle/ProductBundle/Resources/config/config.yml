@@ -46,3 +46,41 @@ well_commerce_product:
             orm:
                 mapping: "@WellCommerceProductBundle/Resources/config/doctrine/ProductTranslation.orm.yml"
                 entity: WellCommerce\Bundle\ProductBundle\Entity\ProductTranslation
+
+well_commerce_search:
+    engine:
+        index:
+            types:
+                product:
+                    class: WellCommerce\Bundle\ProductBundle\Search\ProductType
+                    mapping:
+                        sku:
+                            indexable: true
+                            boost: 1
+                            fuzziness: 2
+                            value_expression: resource.getSku()
+                        name:
+                            indexable: true
+                            boost: 1
+                            fuzziness: 3
+                            value_expression: resource.translate(locale).getName()
+                        short_description:
+                            indexable: true
+                            boost: 0.5
+                            fuzziness: 0
+                            value_expression: resource.translate(locale).getShortDescription()
+                        description:
+                            indexable: true
+                            boost: 0.5
+                            fuzziness: 0
+                            value_expression: resource.translate(locale).getDescription()
+                        producer:
+                            indexable: true
+                            boost: 0.5
+                            fuzziness: 2
+                            value_expression: resource.getProducer().translate(locale).getName()
+                        category:
+                            indexable: true
+                            boost: 0.5
+                            fuzziness: 2
+                            value_expression: resource.getCategories().first().translate(locale).getName()

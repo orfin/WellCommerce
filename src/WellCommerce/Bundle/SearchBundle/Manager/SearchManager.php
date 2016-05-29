@@ -12,15 +12,14 @@
 
 namespace WellCommerce\Bundle\SearchBundle\Manager;
 
-use Symfony\Component\HttpFoundation\Request;
-use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
-use WellCommerce\Bundle\SearchBundle\Converter\EntityConverterInterface;
-use WellCommerce\Bundle\SearchBundle\Storage\SearchResultStorage;
-use WellCommerce\Bundle\SearchBundle\Adapter\AdapterInterface;
-use WellCommerce\Bundle\SearchBundle\Document\DocumentInterface;
-use WellCommerce\Bundle\SearchBundle\Exception\IndexTypeNotFoundException;
-use WellCommerce\Bundle\SearchBundle\Type\IndexTypeCollection;
-use WellCommerce\Bundle\SearchBundle\Type\IndexTypeInterface;
+use Doctrine\Common\Collections\Collection;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use WellCommerce\Component\Search\Adapter\AdapterInterface;
+use WellCommerce\Component\Search\Exception\TypeNotFoundException;
+use WellCommerce\Component\Search\Model\DocumentInterface;
+use WellCommerce\Component\Search\Model\SearchRequestInterface;
+use WellCommerce\Component\Search\Model\TypeInterface;
+use WellCommerce\Component\Search\Storage\SearchResultStorage;
 
 /**
  * Class SearchManager
@@ -30,9 +29,9 @@ use WellCommerce\Bundle\SearchBundle\Type\IndexTypeInterface;
 final class SearchManager implements SearchManagerInterface
 {
     /**
-     * @var IndexTypeCollection
+     * @var Collection
      */
-    private $indexTypes;
+    private $types;
     
     /**
      * @var SearchResultStorage
@@ -40,70 +39,85 @@ final class SearchManager implements SearchManagerInterface
     private $storage;
     
     /**
-     * @var EntityConverterInterface
-     */
-    private $converter;
-    
-    /**
      * @var AdapterInterface
      */
     private $adapter;
-    
+
+    /**
+     * @var EventDispatcherInterface
+     */
+    private $eventDispatcher;
+
     /**
      * SearchManager constructor.
      *
-     * @param IndexTypeCollection      $indexTypes
+     * @param Collection               $types
      * @param SearchResultStorage      $storage
-     * @param EntityConverterInterface $converter
      * @param AdapterInterface         $adapter
+     * @param EventDispatcherInterface $eventDispatcher
      */
     public function __construct(
-        IndexTypeCollection $indexTypes,
+        Collection $types,
         SearchResultStorage $storage,
-        EntityConverterInterface $converter,
-        AdapterInterface $adapter
+        AdapterInterface $adapter,
+        EventDispatcherInterface $eventDispatcher
     ) {
-        $this->indexTypes = $indexTypes;
-        $this->storage    = $storage;
-        $this->converter  = $converter;
-        $this->adapter    = $adapter;
+        $this->types           = $types;
+        $this->storage         = $storage;
+        $this->adapter         = $adapter;
+        $this->eventDispatcher = $eventDispatcher;
     }
     
-    public function search(IndexTypeInterface $indexType, Request $request) : array
+    public function search(SearchRequestInterface $request) : array
     {
+        $result = $this->adapter->search($request);
+
+        $this->storage->setResult($result);
+
+        return $result;
     }
     
-    public function getAdapter() : AdapterInterface
+    public function addDocument(DocumentInterface $document)
     {
-        return $this->adapter;
-    }
-
-    public function createDocument(EntityInterface $entity, IndexTypeInterface $indexType, string $locale) : DocumentInterface
-    {
-        return $this->converter->convert($entity, $indexType, $locale);
-    }
-
-    public function addEntity(EntityInterface $entity, IndexTypeInterface $indexType, string $locale)
-    {
-        return $this->adapter->addDocument($this->createDocument($entity, $indexType, $locale));
-    }
-
-    public function updateEntity(EntityInterface $entity, IndexTypeInterface $indexType, string $locale)
-    {
-        return $this->adapter->updateDocument($this->createDocument($entity, $indexType, $locale));
-    }
-
-    public function removeEntity(EntityInterface $entity, IndexTypeInterface $indexType, string $locale)
-    {
-        return $this->adapter->removeDocument($this->createDocument($entity, $indexType, $locale));
+        return $this->adapter->addDocument($document);
     }
     
-    public function getIndexType(string $type) : IndexTypeInterface
+    public function updateDocument(DocumentInterface $document)
     {
-        if (false === $this->indexTypes->containsKey($type)) {
-            throw new IndexTypeNotFoundException($type, $this->indexTypes->getKeys());
+        return $this->adapter->addDocument($document);
+    }
+    
+    public function removeDocument(DocumentInterface $document)
+    {
+        return $this->adapter->addDocument($document);
+    }
+    
+    public function createIndex(string $locale)
+    {
+        $this->adapter->createIndex($locale);
+    }
+    
+    public function flushIndex(string $locale)
+    {
+        $this->adapter->flushIndex($locale);
+    }
+    
+    public function optimizeIndex(string $locale)
+    {
+        $this->adapter->optimizeIndex($locale);
+    }
+    
+    public function removeIndex(string $locale)
+    {
+        $this->adapter->removeIndex($locale);
+    }
+    
+    public function getType(string $type) : TypeInterface
+    {
+        if (false === $this->types->containsKey($type)) {
+            throw new TypeNotFoundException($type, $this->types->getKeys());
         }
         
-        return $this->indexTypes->get($type);
+        return $this->types->get($type);
     }
 }

@@ -22,7 +22,9 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
+use WellCommerce\Bundle\LocaleBundle\Entity\LocaleInterface;
 use WellCommerce\Bundle\SearchBundle\Manager\SearchManagerInterface;
+use WellCommerce\Component\Search\Model\TypeInterface;
 
 /**
  * Class ReindexCommand
@@ -32,20 +34,24 @@ use WellCommerce\Bundle\SearchBundle\Manager\SearchManagerInterface;
 final class ReindexCommand extends ContainerAwareCommand
 {
     /**
-     * @var string
+     * @var TypeInterface
      */
-    private $defaultLocale;
+    private $type;
 
     /**
-     * ReindexCommand constructor.
-     *
-     * @param string $defaultLocale
+     * @var int
      */
-    public function __construct(string $defaultLocale)
-    {
-        $this->defaultLocale = $defaultLocale;
-        parent::__construct(null);
-    }
+    private $batchSize;
+
+    /**
+     * @var RepositoryInterface
+     */
+    private $repository;
+
+    /**
+     * @var SearchManagerInterface
+     */
+    private $manager;
 
     protected function configure()
     {
@@ -59,7 +65,7 @@ final class ReindexCommand extends ContainerAwareCommand
             'Index type',
             'product'
         );
-
+        
         $this->addOption(
             'batch',
             null,
@@ -67,7 +73,7 @@ final class ReindexCommand extends ContainerAwareCommand
             'Batch size',
             100
         );
-
+        
         $this->addOption(
             'repository',
             null,
@@ -76,61 +82,78 @@ final class ReindexCommand extends ContainerAwareCommand
             'product.repository'
         );
     }
-    
+
+    protected function initialize(InputInterface $input, OutputInterface $output)
+    {
+        $this->manager    = $this->getSearchManager();
+        $this->type       = $this->manager->getType($input->getOption('type'));
+        $this->batchSize  = $input->getOption('batch');
+        $this->repository = $this->getRepository($input->getOption('repository'));
+    }
+
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $type          = $input->getOption('type');
-        $batchSize     = $input->getOption('batch');
-        $manager       = $this->getSearchManager();
-        $adapter       = $manager->getAdapter();
-        $indexName     = $adapter->getIndexName($locale);
-        $indexType     = $manager->getIndexType($type);
-        $repository    = $this->getRepository($input->getOption('repository'));
-        $totalEntities = $repository->getTotalCount();
-        $iterations    = $this->getIterations($repository->getTotalCount(), $batchSize);
-        
-        $output->writeln(sprintf('<comment>Total entities:</comment> %s', $totalEntities));
-        $output->writeln(sprintf('<comment>Batch size:</comment> %s', $batchSize));
-        $output->writeln(sprintf('<comment>Iterations:</comment> %s', $iterations));
-        $output->writeln(sprintf('<comment>Locale:</comment> %s', $locale));
-        
-        $output->writeln(sprintf('<info>Flushing index: </info> %s', $indexName));
-        $manager->getAdapter()->flushIndex($locale);
+        $this->getLocales()->map(function (LocaleInterface $locale) use ($output) {
+            $output->writeln(sprintf('<info>Reindexing locale:</info> %s', $locale->getCode()));
+            $this->reindex($locale->getCode(), $output);
+        });
+    }
 
-        $output->writeln(sprintf('<info>Reindexing index: </info> %s', $indexName));
-        
+    private function reindex(string $locale, OutputInterface $output)
+    {
+        $totalEntities = $this->repository->getTotalCount();
+        $iterations    = $this->getIterations($totalEntities, $this->batchSize);
+
+        $output->writeln(sprintf('<comment>Total entities:</comment> %s', $totalEntities));
+        $output->writeln(sprintf('<comment>Batch size:</comment> %s', $this->batchSize));
+        $output->writeln(sprintf('<comment>Iterations:</comment> %s', count($iterations)));
+        $output->writeln(sprintf('<comment>Locale:</comment> %s', $locale));
+
+        $output->writeln('<info>Flushing index</info>');
+        $this->manager->flushIndex($locale);
+
         $progress = new ProgressBar($output, $totalEntities);
         $progress->setFormat('verbose');
-        $progress->setRedrawFrequency($batchSize);
+        $progress->setRedrawFrequency($this->batchSize);
         $progress->start();
-        
-        for ($i = 0; $i < $iterations; $i++) {
-            $entities = $repository->findBy([], null, $batchSize, $i * $batchSize);
+
+        foreach ($iterations as $iteration) {
+            $entities = $this->getEntities($iteration);
             foreach ($entities as $entity) {
-                $manager->addEntity($entity, $indexType, $locale);
+                $document = $this->type->createDocument($entity, $locale);
+                $this->manager->addDocument($document);
                 $progress->advance();
             }
         }
-        
+
         $progress->finish();
         $output->writeln('');
-        $output->writeln(sprintf('<info>Optimizing index: </info> %s', $indexName));
-        $adapter->optimizeIndex($locale);
+        $output->writeln('<info>Optimizing index</info>');
+        $this->manager->optimizeIndex($locale);
     }
-    
+
+    private function getEntities(int $iteration) : array
+    {
+        return $this->repository->findBy([], null, $this->batchSize, $iteration * $this->batchSize);
+    }
+
     private function getLocales() : Collection
     {
         return $this->getContainer()->get('locale.repository')->matching(new Criteria());
     }
-
+    
     private function getRepository(string $serviceId) : RepositoryInterface
     {
+        if (false === $this->getContainer()->has($serviceId)) {
+            return $this->getContainer()->get($this->type->getName() . '.repository');
+        }
+
         return $this->getContainer()->get($serviceId);
     }
     
-    private function getIterations(int $total, int $batchSize) : int
+    private function getIterations(int $total, int $batchSize) : array
     {
-        return ceil($total / $batchSize);
+        return range(0, ceil($total / $batchSize));
     }
     
     private function getSearchManager() : SearchManagerInterface

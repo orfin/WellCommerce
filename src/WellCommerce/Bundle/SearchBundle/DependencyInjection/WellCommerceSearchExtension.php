@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\SearchBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Reference;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
 
 /**
@@ -26,27 +27,27 @@ final class WellCommerceSearchExtension extends AbstractExtension
     protected function processExtensionConfiguration(array $configuration, ContainerBuilder $container)
     {
         parent::processExtensionConfiguration($configuration, $container);
-
+        
         $adapters = $configuration['engine']['adapters'];
         $index    = $configuration['engine']['index'];
         $adapter  = $adapters[$container->getParameter('search_engine')] ?? current($adapters);
-
-        $this->processIndexTypes($index['types'], $container);
+        
+        $this->processTypes($index['types'], $container);
         $this->processAdapterConfiguration($adapter, $container);
     }
     
-    private function processIndexTypes(array $types, ContainerBuilder $container)
+    private function processTypes(array $types, ContainerBuilder $container)
     {
         foreach ($types as $name => $options) {
             $definition = new Definition($options['class']);
             $definition->addArgument($name);
             $definition->addArgument($options['mapping']);
             $definition->setPublic(false);
-            $definition->addTag('search.index_type', ['type' => $name]);
-            $container->setDefinition('search.index_type.' . $name, $definition);
+            $definition->addTag('search.type', ['type' => $name]);
+            $container->setDefinition('search.type.' . $name, $definition);
         }
     }
-
+    
     private function processAdapterConfiguration(array $configuration, ContainerBuilder $container)
     {
         $definition = new Definition($configuration['class']);

@@ -14,10 +14,9 @@ namespace WellCommerce\Bundle\SearchBundle\DataSet\Front;
 
 use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\ProductBundle\DataSet\Front\ProductDataSet;
-use WellCommerce\Bundle\SearchBundle\Manager\SearchManagerInterface;
-use WellCommerce\Bundle\SearchBundle\Storage\SearchResultStorage;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
 use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
+use WellCommerce\Component\Search\Storage\SearchResultStorage;
 
 /**
  * Class SearchDataSet

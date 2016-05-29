@@ -2,48 +2,23 @@ well_commerce_search:
     engine:
         adapters:
             elasticsearch:
-                class: WellCommerce\Bundle\SearchBundle\Adapter\ElasticSearchAdapter
+                class: WellCommerce\Component\Search\Adapter\ElasticSearch\ElasticSearchAdapter
                 options:
                     number_of_shards: 2
                     number_of_replicas: 0
                     index_prefix: wellcommerce_
                     query_min_length: 3
+                    result_limit: 100
+                    query_builder_class: WellCommerce\Component\Search\Adapter\ElasticSearch\ElasticSearchQueryBuilder
             lucene:
-                class: WellCommerce\Bundle\SearchBundle\Adapter\ZendLuceneAdapter
+                class: WellCommerce\Component\Search\Adapter\ZendLucene\ZendLuceneAdapter
                 options:
-                    index_path: "%kernel.root_dir%/lucene/"
+                    index_path: "%kernel.root_dir%/lucene"
                     max_buffered_docs: 10
                     max_merge_docs: 100000
                     merge_factor: 10
                     index_prefix: wellcommerce_
                     query_min_length: 3
-        index:
-            types:
-                product:
-                    entity: WellCommerce\Bundle\ProductBundle\Entity\Product
-                    mapping:
-                        sku:
-                            indexable: true
-                            boost: 1
-                            value_expression: resource.getSku()
-                        name:
-                            indexable: true
-                            boost: 1
-                            value_expression: resource.translate(locale).getName()
-                        short_description:
-                            indexable: true
-                            boost: 0.5
-                            value_expression: resource.translate(locale).getShortDescription()
-                        description:
-                            indexable: true
-                            boost: 0.5
-                            value_expression: resource.translate(locale).getDescription()
-                        producer:
-                            indexable: true
-                            boost: 0.5
-                            value_expression: resource.getProducer().translate(locale).getName()
-                        category:
-                            indexable: true
-                            boost: 0.5
-                            value_expression: resource.getCategories().first().translate(locale).getName()
+                    result_limit: 100
+                    query_builder_class: WellCommerce\Component\Search\Adapter\ZendLucene\ZendLuceneQueryBuilder
 

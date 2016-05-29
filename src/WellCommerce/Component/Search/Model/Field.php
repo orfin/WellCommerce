@@ -10,42 +10,59 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\SearchBundle\Document;
+namespace WellCommerce\Component\Search\Model;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class DocumentField
+ * Class Field
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-final class DocumentField implements DocumentFieldInterface
+final class Field implements FieldInterface
 {
+    /**
+     * @var string
+     */
+    private $name;
+
     /**
      * @var array
      */
     private $options;
-    
+
     /**
-     * DocumentField constructor.
-     *
-     * @param array $options
+     * @var string
      */
-    public function __construct(array $options)
+    private $value;
+
+    /**
+     * Field constructor.
+     *
+     * @param string $name
+     * @param array  $options
+     */
+    public function __construct(string $name, array $options)
     {
         $resolver = new OptionsResolver();
         $this->configureOptions($resolver);
         $this->options = $resolver->resolve($options);
+        $this->name    = $name;
     }
     
     public function getName() : string
     {
-        return $this->options['name'];
+        return $this->name;
     }
     
     public function getValue() : string
     {
-        return $this->options['value'];
+        return $this->value;
+    }
+
+    public function setValue(string $value)
+    {
+        $this->value = $value;
     }
     
     public function isIndexable() : bool
@@ -57,22 +74,33 @@ final class DocumentField implements DocumentFieldInterface
     {
         return $this->options['boost'];
     }
-    
+
+    public function getFuzziness() : float
+    {
+        return $this->options['fuzziness'];
+    }
+
+    public function getValueExpression() : string
+    {
+        return $this->options['value_expression'];
+    }
+
     private function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setRequired([
-            'name',
-            'value',
             'indexable',
             'boost',
+            'fuzziness',
+            'value_expression',
         ]);
         
         $resolver->setDefault('indexable', true);
         $resolver->setDefault('boost', 1);
-        
-        $resolver->setAllowedTypes('name', 'string');
-        $resolver->setAllowedTypes('value', 'string');
+        $resolver->setDefault('fuzziness', 1);
+
         $resolver->setAllowedTypes('indexable', 'bool');
         $resolver->setAllowedTypes('boost', ['float', 'int']);
+        $resolver->setAllowedTypes('fuzziness', ['float', 'int']);
+        $resolver->setAllowedTypes('value_expression', 'string');
     }
 }

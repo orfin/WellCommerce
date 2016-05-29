@@ -10,15 +10,22 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\SearchBundle\Document;
+namespace WellCommerce\Component\Search\Model;
 
-use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /**
- * Class DocumentFieldCollection
+ * Interface SearchRequestInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-final class DocumentFieldCollection extends ArrayCollection
+interface SearchRequestInterface
 {
+    public function getType() : TypeInterface;
+
+    public function getFields() : Collection;
+
+    public function getPhrase() : string;
+
+    public function getLocale() : string;
 }

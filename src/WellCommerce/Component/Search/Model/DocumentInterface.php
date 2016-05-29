@@ -10,9 +10,9 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\SearchBundle\Document;
+namespace WellCommerce\Component\Search\Model;
 
-use WellCommerce\Bundle\SearchBundle\Type\IndexTypeInterface;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * Interface DocumentInterface
@@ -23,11 +23,9 @@ interface DocumentInterface
 {
     public function getIdentifier() : int;
 
-    public function getIndexType() : IndexTypeInterface;
-
     public function getLocale() : string;
 
-    public function addField(DocumentFieldInterface $field) : self;
+    public function getType() : TypeInterface;
 
-    public function getFields() : DocumentFieldCollection;
+    public function getFields() : Collection;
 }

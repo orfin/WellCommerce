@@ -22,17 +22,17 @@ final class CacheOptions
     /**
      * @var bool
      */
-    protected $enabled;
+    private $enabled;
 
     /**
      * @var int
      */
-    protected $ttl;
+    private $ttl;
 
     /**
      * @var array
      */
-    protected $tags;
+    private $tags;
 
     /**
      * CacheOptions constructor.

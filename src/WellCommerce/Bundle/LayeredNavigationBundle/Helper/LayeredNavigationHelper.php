@@ -50,7 +50,6 @@ final class LayeredNavigationHelper extends AbstractContainerAware implements La
         foreach ($this->filters as $parameterName => $configuration) {
             if (isset($formParams[$parameterName])) {
                 $value = $formParams[$parameterName];
-
                 if ($configuration['type'] === self::VALUE_TYPE_ARRAY) {
                     $replacements[$parameterName] = empty($value) ? 0 : implode(self::MULTI_VALUE_SEPARATOR, $value);
                 } else {
@@ -78,7 +77,7 @@ final class LayeredNavigationHelper extends AbstractContainerAware implements La
                 $collection->add($this->createFilterCondition($currentAttributeValue, $configuration));
             }
         }
-        
+
         return $collection;
     }
     
@@ -98,7 +97,9 @@ final class LayeredNavigationHelper extends AbstractContainerAware implements La
             $parameterValue = $this->getRequestHelper()->getAttributesBagParam($parameterName);
             $parameterValue = explode(self::MULTI_VALUE_SEPARATOR, $parameterValue);
             
-            return array_filter($parameterValue);
+            return array_filter($parameterValue, function ($v) {
+                return 0 !== (int)$v;
+            }, ARRAY_FILTER_USE_BOTH);
         }
         
         return $this->getRequestHelper()->getAttributesBagParam($parameterName);

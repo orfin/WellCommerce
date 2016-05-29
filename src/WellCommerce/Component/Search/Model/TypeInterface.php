@@ -10,18 +10,21 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\SearchBundle\Type;
+namespace WellCommerce\Component\Search\Model;
 
-use WellCommerce\Bundle\SearchBundle\Document\DocumentInterface;
+use Doctrine\Common\Collections\Collection;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 
 /**
- * Interface IndexTypeInterface
+ * Interface TypeInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface IndexTypeInterface
+interface TypeInterface
 {
     public function getName() : string;
 
-    public function getFields() : IndexTypeFieldCollection;
+    public function createDocument(EntityInterface $entity, string $locale) : DocumentInterface;
+
+    public function getFields() : Collection;
 }
