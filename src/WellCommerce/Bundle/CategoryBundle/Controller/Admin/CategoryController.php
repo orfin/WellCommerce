@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\CategoryBundle\Controller\Admin;
 
 use Doctrine\Common\Collections\Criteria;
-use Doctrine\Common\Util\Debug;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CategoryBundle\Manager\CategoryManager;

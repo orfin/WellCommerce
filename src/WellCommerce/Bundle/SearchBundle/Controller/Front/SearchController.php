@@ -16,9 +16,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\SearchBundle\Manager\SearchManagerInterface;
-use WellCommerce\Component\Search\Model\SearchRequestInterface;
 use WellCommerce\Component\Breadcrumb\Model\Breadcrumb;
 use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
+use WellCommerce\Component\Search\Model\SearchRequestInterface;
 
 /**
  * Class SearchController

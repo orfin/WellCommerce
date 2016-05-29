@@ -14,7 +14,6 @@ namespace WellCommerce\Bundle\ShippingBundle\Repository;
 
 use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
-use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface;
 
 /**
  * Interface ShippingMethodRepositoryInterface

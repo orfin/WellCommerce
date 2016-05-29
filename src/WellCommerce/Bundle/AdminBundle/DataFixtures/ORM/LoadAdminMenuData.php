@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\AdminBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Symfony\Component\Config\FileLocator;
 use WellCommerce\Bundle\DoctrineBundle\DataFixtures\AbstractDataFixture;
 
 /**

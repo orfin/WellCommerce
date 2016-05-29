@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\ProductStatusBundle\Entity;
 
-use Doctrine\Common\Collections\Collection;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;

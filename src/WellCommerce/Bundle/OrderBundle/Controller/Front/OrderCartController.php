@@ -19,7 +19,6 @@ use WellCommerce\Bundle\OrderBundle\Exception\AddCartItemException;
 use WellCommerce\Bundle\OrderBundle\Manager\OrderProductManager;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\VariantInterface;
-use WellCommerce\Component\Breadcrumb\Model\Breadcrumb;
 
 /**
  * Class OrderCartController

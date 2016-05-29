@@ -12,9 +12,9 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Repository;
 
+use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
-use Doctrine\ORM\Query\Expr;
 
 /**
  * Class OrderProductRepository

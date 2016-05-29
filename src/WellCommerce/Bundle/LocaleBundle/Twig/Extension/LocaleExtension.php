@@ -11,7 +11,6 @@
  */
 namespace WellCommerce\Bundle\LocaleBundle\Twig\Extension;
 
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use WellCommerce\Component\DataSet\DataSetInterface;
 
 /**

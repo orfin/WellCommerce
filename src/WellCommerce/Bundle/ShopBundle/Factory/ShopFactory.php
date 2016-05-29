@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\ShopBundle\Factory;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\Bundle\AppBundle\Entity\MailerConfiguration;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientGroupInterface;
 use WellCommerce\Bundle\CompanyBundle\Entity\CompanyInterface;

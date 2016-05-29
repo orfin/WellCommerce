@@ -14,7 +14,6 @@ namespace WellCommerce\Bundle\ProductBundle\Entity;
 
 use DateTime;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
-use WellCommerce\Bundle\DoctrineBundle\Behaviours\Enableable\EnableableTrait;
 use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
 use WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusInterface;
 

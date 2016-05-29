@@ -18,7 +18,6 @@ use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransfo
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderProductInterface;
 use WellCommerce\Bundle\OrderBundle\Manager\OrderProductManager;
-use WellCommerce\Bundle\ProductBundle\Entity\VariantInterface;
 
 /**
  * Class OrderProductCollectionToArrayTransformer

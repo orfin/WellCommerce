@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Visitor;
 
-use Doctrine\Common\Util\Debug;
 use WellCommerce\Bundle\AppBundle\Factory\PriceFactory;
 use WellCommerce\Bundle\CurrencyBundle\Helper\CurrencyHelperInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;

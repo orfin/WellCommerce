@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\ReviewBundle\Controller\Box;
 
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Yaml\Yaml;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 use WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxSettingsCollection;
 use WellCommerce\Bundle\ReviewBundle\Entity\ReviewInterface;

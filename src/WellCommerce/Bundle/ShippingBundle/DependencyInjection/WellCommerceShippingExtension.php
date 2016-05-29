@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\ShippingBundle\DependencyInjection;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
 
 /**

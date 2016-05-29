@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\AttributeBundle\Factory;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroupInterface;
 use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
 

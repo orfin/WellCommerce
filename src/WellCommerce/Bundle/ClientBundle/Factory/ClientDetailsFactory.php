@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\ClientBundle\Factory;
 
 use WellCommerce\Bundle\ClientBundle\Entity\ClientDetailsInterface;
-use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
 
 /**

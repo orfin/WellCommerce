@@ -11,7 +11,6 @@
  */
 namespace WellCommerce\Bundle\AdminBundle\Twig\Extension;
 
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use WellCommerce\Bundle\AdminBundle\Provider\AdminMenuProvider;
 
 /**

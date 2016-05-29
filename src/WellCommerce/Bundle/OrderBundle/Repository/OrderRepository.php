@@ -13,9 +13,7 @@
 namespace WellCommerce\Bundle\OrderBundle\Repository;
 
 use Doctrine\ORM\QueryBuilder;
-use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
 use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
-use WellCommerce\Bundle\ShopBundle\Entity\ShopInterface;
 
 /**
  * Class OrderRepository

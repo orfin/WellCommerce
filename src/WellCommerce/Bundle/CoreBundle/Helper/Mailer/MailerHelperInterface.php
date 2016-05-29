@@ -12,8 +12,6 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Helper\Mailer;
 
-use WellCommerce\Bundle\AppBundle\Entity\MailerConfiguration;
-
 /**
  * Interface MailerHelperInterface
  *

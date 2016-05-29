@@ -17,8 +17,8 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use WellCommerce\Component\Search\Adapter\AdapterInterface;
 use WellCommerce\Component\Search\Exception\TypeNotFoundException;
 use WellCommerce\Component\Search\Model\DocumentInterface;
-use WellCommerce\Component\Search\Request\SearchRequestInterface;
 use WellCommerce\Component\Search\Model\TypeInterface;
+use WellCommerce\Component\Search\Request\SearchRequestInterface;
 use WellCommerce\Component\Search\Storage\SearchResultStorage;
 
 /**

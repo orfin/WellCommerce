@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Component\DataSet\Manager;
 
-use WellCommerce\Component\DataSet\Column\ColumnCollection;
 use WellCommerce\Component\DataSet\Context\DataSetContextInterface;
 use WellCommerce\Component\DataSet\QueryBuilder\DataSetQueryBuilderInterface;
 use WellCommerce\Component\DataSet\Repository\DataSetAwareRepositoryInterface;

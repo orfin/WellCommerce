@@ -29,7 +29,7 @@ class CollectionToArrayTransformer extends AbstractDataTransformer
     public function transform($modelData)
     {
         $items      = [];
-        $meta       = $this->getRepository()->getMetadata();
+        $meta       = $this->getRepository()->getMetaData();
         $identifier = $meta->getSingleIdentifierFieldName();
 
         if ($modelData instanceof Collection) {

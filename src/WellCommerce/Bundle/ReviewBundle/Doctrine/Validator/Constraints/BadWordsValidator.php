@@ -10,7 +10,7 @@
  */
 
 namespace WellCommerce\Bundle\ReviewBundle\Doctrine\Validator\Constraints;
-use \Expalmer\PhpBadWords\PhpBadWords as PhpBadWords;
+use Expalmer\PhpBadWords\PhpBadWords as PhpBadWords;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;

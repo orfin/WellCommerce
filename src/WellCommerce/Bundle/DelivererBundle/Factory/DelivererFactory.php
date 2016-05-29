@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\DelivererBundle\Factory;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\Bundle\DelivererBundle\Entity\DelivererInterface;
 use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
 

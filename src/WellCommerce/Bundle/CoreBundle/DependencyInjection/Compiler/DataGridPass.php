@@ -16,8 +16,6 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 use WellCommerce\Component\DataGrid\DataGridInterface;
-use WellCommerce\Component\DataSet\Configurator\DataSetConfigurator;
-use WellCommerce\Component\DataSet\DataSetInterface;
 
 /**
  * Class DataSetPass

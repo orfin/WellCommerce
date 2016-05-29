@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Component\DataSet\Context;
 
-use Cache\Taggable\TaggablePoolInterface;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Component\DataSet\Cache\CacheOptions;

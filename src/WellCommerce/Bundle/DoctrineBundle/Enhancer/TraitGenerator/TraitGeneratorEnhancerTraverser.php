@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\DoctrineBundle\Enhancer\TraitGenerator;
 
-use Doctrine\Common\Util\Debug;
 use Wingu\OctopusCore\CodeGenerator\PHP\OOP\TraitGenerator;
 
 /**
