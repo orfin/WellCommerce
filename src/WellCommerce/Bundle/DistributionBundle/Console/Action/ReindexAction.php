@@ -22,8 +22,8 @@ class ReindexAction implements ConsoleActionInterface
     public function getCommandsToExecute()
     {
         return [
-            'wellcommerce:search:reindex-products' => [
-                '--batch_size' => 10
+            'wellcommerce:search:reindex' => [
+                '--batch' => 10
             ]
         ];
     }
