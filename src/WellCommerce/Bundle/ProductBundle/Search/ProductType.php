@@ -87,8 +87,10 @@ final class ProductType implements TypeInterface
         $collection = new ArrayCollection();
         
         foreach ($this->mapping as $name => $options) {
-            $field = new Field($name, $options);
-            $collection->set($name, $field);
+            if($options['indexable']){
+                $field = new Field($name, $options);
+                $collection->set($name, $field);
+            }
         }
         
         return $collection;
