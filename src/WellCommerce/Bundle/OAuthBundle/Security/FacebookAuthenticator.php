@@ -232,6 +232,7 @@ final class FacebookAuthenticator extends AbstractGuardAuthenticator
         $resolver->setRequired([
             'app_id',
             'app_secret',
+            'page_token',
             'scopes',
             'graph_version',
             'redirect_route',
@@ -245,8 +246,9 @@ final class FacebookAuthenticator extends AbstractGuardAuthenticator
             return $this->routerHelper->generateUrl($options['redirect_route'], [], UrlGeneratorInterface::ABSOLUTE_URL);
         });
 
-        $resolver->setAllowedTypes('app_id', ['string', 'null']);
+        $resolver->setAllowedTypes('app_id', ['string', 'int', 'null']);
         $resolver->setAllowedTypes('app_secret', ['string', 'null']);
+        $resolver->setAllowedTypes('page_token', ['string', 'null']);
         $resolver->setAllowedTypes('scopes', 'array');
         $resolver->setAllowedTypes('graph_version', 'string');
         $resolver->setAllowedTypes('redirect_route', 'string');
