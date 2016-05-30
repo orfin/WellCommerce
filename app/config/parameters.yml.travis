@@ -34,6 +34,7 @@ parameters:
     facebook:
         app_id: ~
         app_secret: ~
+        page_token: ~
 
     pdo.db_options:
         db_table:    session
