@@ -8,7 +8,6 @@ app/logs/*
 app/sessions/*
 app/sql/*
 app/lucene/*
-app/phpunit.xml
 src/*/Bundle/*/Entity/Extra/*
 /bin/
 /vendor/

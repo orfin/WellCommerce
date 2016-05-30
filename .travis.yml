@@ -30,7 +30,7 @@ before_script:
     - php app/console cache:warmup --env=test
 
 script:
-    - php phpunit.phar -c app/phpunit.xml.dist
+    - php phpunit.phar -c phpunit.xml.dist
 
 notifications:
     email: false
