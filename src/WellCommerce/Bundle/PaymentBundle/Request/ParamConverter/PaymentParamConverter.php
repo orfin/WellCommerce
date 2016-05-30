@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Request\ParamConverter\AbstractEntityParamConverter;
 
 /**
- * Class ProductParamConverter
+ * Class PaymentParamConverter
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
@@ -25,7 +25,7 @@ class PaymentParamConverter extends AbstractEntityParamConverter
     protected function findByRequestParameter(Request $request)
     {
         return $this->repository->findOneBy([
-            'token'      => $request->attributes->get($this->requestAttributeName),
+            'token' => $request->attributes->get($this->requestAttributeName),
         ]);
     }
 }
