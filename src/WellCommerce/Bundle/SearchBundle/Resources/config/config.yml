@@ -1,5 +1,9 @@
 well_commerce_search:
     engine:
+        quick_search:
+            limit: 20
+            order_by: "score"
+            order_dir: "asc"
         adapters:
             elasticsearch:
                 class: WellCommerce\Component\Search\Adapter\ElasticSearch\ElasticSearchAdapter

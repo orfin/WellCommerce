@@ -29,6 +29,13 @@ class Configuration extends BaseConfiguration
         $node    =
             $builder->root('engine')
                 ->children()
+                    ->arrayNode('quick_search')->isRequired()
+                        ->children()
+                            ->scalarNode('limit')->defaultValue(20)->end()
+                            ->scalarNode('order_by')->defaultValue('score')->end()
+                            ->enumNode('order_dir')->values(['asc', 'desc'])->defaultValue('asc')->end()
+                        ->end()
+                    ->end()
                     ->arrayNode('adapters')->isRequired()
                         ->useAttributeAsKey('name')
                         ->prototype('array')

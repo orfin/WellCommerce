@@ -55,12 +55,13 @@ class SearchController extends AbstractFrontController
         $dataset     = $this->get('search.dataset.front');
         $conditions  = new ConditionsCollection();
         $conditions  = $this->get('layered_navigation.helper')->addLayeredNavigationConditions($conditions);
+        $settings    = $this->container->getParameter('quick_search');
 
         $products = $dataset->getResult('array', [
-            'limit'      => 5,
+            'limit'      => $settings['limit'],
             'page'       => 1,
-            'order_by'   => 'score',
-            'order_dir'  => 'asc',
+            'order_by'   => $settings['order_by'],
+            'order_dir'  => $settings['order_dir'],
             'conditions' => $conditions,
         ]);
 

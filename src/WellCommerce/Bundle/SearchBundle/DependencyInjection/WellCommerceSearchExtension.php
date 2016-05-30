@@ -27,12 +27,13 @@ final class WellCommerceSearchExtension extends AbstractExtension
     {
         parent::processExtensionConfiguration($configuration, $container);
         
-        $adapters = $configuration['engine']['adapters'];
-        $index    = $configuration['engine']['index'];
-        $adapter  = $adapters[$container->getParameter('search_engine')] ?? current($adapters);
-        
+        $adapters            = $configuration['engine']['adapters'];
+        $index               = $configuration['engine']['index'];
+        $adapter             = $adapters[$container->getParameter('search_engine')] ?? current($adapters);
+
         $this->processTypes($index['types'], $container);
         $this->processAdapterConfiguration($adapter, $container);
+        $container->setParameter('quick_search', $configuration['engine']['quick_search']);
     }
     
     private function processTypes(array $types, ContainerBuilder $container)
