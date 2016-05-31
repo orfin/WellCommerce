@@ -17,18 +17,13 @@ namespace WellCommerce\Component\Payment\Helper;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CreditCardHelper
+class CreditCardHelper implements CreditCardHelperInterface
 {
-    const CREDIT_CARD_TYPE_AMEX       = 'amex';
-    const CREDIT_CARD_TYPE_DISCOVER   = 'discover';
-    const CREDIT_CARD_TYPE_MASTERCARD = 'mastercard';
-    const CREDIT_CARD_TYPE_VISA       = 'visa';
-
     public function getCreditCardType(string $number) : string
     {
         $number = $this->clearNumber($number);
 
-        foreach ($this->getPatterns() as $type => $pattern) {
+        foreach ($this->getCreditCardPatterns() as $type => $pattern) {
             if (preg_match($pattern, $number)) {
                 return $type;
             }
@@ -37,38 +32,29 @@ class CreditCardHelper
         return '';
     }
 
-    public function isAmex(string $number) : bool
+    public function isType(string $number, string $type) : bool
     {
-        return preg_match($this->getPatterns()[self::CREDIT_CARD_TYPE_AMEX], $number);
+        $pattern = $this->getCreditCardPatterns()[$type] ?? null;
+
+        if (null === $pattern) {
+            return false;
+        }
+
+        return preg_match($this->getCreditCardPatterns()[$type], $number);
     }
 
-    public function isDiscover(string $number) : bool
-    {
-        return preg_match($this->getPatterns()[self::CREDIT_CARD_TYPE_DISCOVER], $number);
-    }
-
-    public function isMasterCard(string $number) : bool
-    {
-        return preg_match($this->getPatterns()[self::CREDIT_CARD_TYPE_MASTERCARD], $number);
-    }
-
-    public function isVisa(string $number) : bool
-    {
-        return preg_match($this->getPatterns()[self::CREDIT_CARD_TYPE_VISA], $number);
-    }
-
-    private function clearNumber(string $number) : string
+    public function clearNumber(string $number) : string
     {
         return preg_replace('/[^\d]/', '', $number);
     }
 
-    private function getPatterns() : array
+    public function getCreditCardPatterns() : array
     {
         return [
-            self::CREDIT_CARD_TYPE_AMEX       => '/^3[47][0-9]{13}$/',
-            self::CREDIT_CARD_TYPE_DISCOVER   => '/^6(?:011|5[0-9][0-9])[0-9]{12}$/',
-            self::CREDIT_CARD_TYPE_MASTERCARD => '/^5[1-5][0-9]{14}$/',
-            self::CREDIT_CARD_TYPE_VISA       => '/^4[0-9]{12}(?:[0-9]{3})?$/',
+            self::CREDIT_CARD_TYPE_AMEX       => self::CREDIT_CARD_PATTERN_AMEX,
+            self::CREDIT_CARD_TYPE_DISCOVER   => self::CREDIT_CARD_PATTERN_DISCOVER,
+            self::CREDIT_CARD_TYPE_MASTERCARD => self::CREDIT_CARD_PATTERN_MASTERCARD,
+            self::CREDIT_CARD_TYPE_VISA       => self::CREDIT_CARD_PATTERN_VISA,
         ];
     }
 }
