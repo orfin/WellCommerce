@@ -10,20 +10,20 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CoreBundle\Exception;
+namespace WellCommerce\Component\Form\Exception;
 
 /**
- * Class MissingDataGridException
+ * Class MissingFormBuilderException
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class MissingDataGridException extends \LogicException
+class MissingFormBuilderException extends \LogicException
 {
     /**
      * @param string $className
      */
     public function __construct($className)
     {
-        parent::__construct(sprintf('DataGrid service is missing in "%s"', $className));
+        parent::__construct(sprintf('FormBuilder service is missing in "%s"', $className));
     }
 }

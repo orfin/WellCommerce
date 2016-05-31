@@ -45,15 +45,6 @@ class Attribute extends AbstractEntity implements AttributeInterface
     protected $values;
 
     /**
-     * Attribute constructor.
-     */
-    public function __construct()
-    {
-        $this->groups = new ArrayCollection();
-        $this->values = new ArrayCollection();
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function getGroups() : Collection

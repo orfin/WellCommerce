@@ -45,17 +45,11 @@ abstract class AbstractPaymentProcessor extends AbstractContainerAware implement
         $this->configurator = $configurator;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function getGateway() : PaymentGatewayInterface
     {
         return $this->gateway;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function getConfigurator() : PaymentMethodConfiguratorInterface
     {
         return $this->configurator;
