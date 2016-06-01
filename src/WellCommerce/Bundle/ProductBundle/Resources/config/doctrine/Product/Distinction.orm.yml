@@ -1,7 +1,7 @@
-WellCommerce\Bundle\ProductBundle\Entity\ProductDistinction:
+WellCommerce\Bundle\ProductBundle\Entity\Product\Distinction:
     type: entity
     table: product_distinction
-    repositoryClass: WellCommerce\Bundle\ProductBundle\Repository\ProductDistinctionRepository
+    repositoryClass: WellCommerce\Bundle\ProductBundle\Repository\Product\DistinctionRepository
     id:
         id:
             type: integer

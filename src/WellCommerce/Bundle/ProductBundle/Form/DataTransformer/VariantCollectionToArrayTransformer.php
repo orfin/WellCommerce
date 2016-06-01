@@ -17,6 +17,7 @@ use Symfony\Component\PropertyAccess\PropertyPathInterface;
 use WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityInterface;
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\Variant\OptionInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\VariantInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\VariantOptionInterface;
 use WellCommerce\Bundle\ProductBundle\Manager\Admin\VariantManager;
@@ -82,7 +83,7 @@ class VariantCollectionToArrayTransformer extends CollectionToArrayTransformer
         }
 
         $values = [];
-        $collection->map(function (VariantOptionInterface $variantOption) use (&$values) {
+        $collection->map(function (OptionInterface $variantOption) use (&$values) {
             $values[$variantOption->getAttribute()->getId()] = $variantOption->getAttributeValue()->getId();
         });
 

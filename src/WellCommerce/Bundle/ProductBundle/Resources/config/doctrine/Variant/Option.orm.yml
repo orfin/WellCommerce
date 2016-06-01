@@ -1,4 +1,4 @@
-WellCommerce\Bundle\ProductBundle\Entity\VariantOption:
+WellCommerce\Bundle\ProductBundle\Entity\Variant\Option:
     type: entity
     table: variant_option
     id:

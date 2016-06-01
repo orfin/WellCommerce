@@ -10,15 +10,15 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\ProductBundle\Repository;
+namespace WellCommerce\Bundle\ProductBundle\Repository\Variant;
 
 use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
 
 /**
- * Interface VariantOptionRepositoryInterface
+ * Interface OptionRepositoryInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface VariantOptionRepositoryInterface extends RepositoryInterface
+interface OptionRepositoryInterface extends RepositoryInterface
 {
 }

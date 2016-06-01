@@ -10,23 +10,20 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\ProductBundle\Factory;
+namespace WellCommerce\Bundle\ProductBundle\Factory\Product;
 
 use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
-use WellCommerce\Bundle\ProductBundle\Entity\VariantOptionInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\Product\DistinctionInterface;
 
 /**
- * Class VariantFactory
+ * Class DistinctionFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class VariantOptionFactory extends EntityFactory
+class DistinctionFactory extends EntityFactory
 {
-    public function create() : VariantOptionInterface
+    public function create() : DistinctionInterface
     {
-        /** @var  $variantOption VariantOptionInterface */
-        $variantOption = $this->init();
-
-        return $variantOption;
+        return $this->init();
     }
 }

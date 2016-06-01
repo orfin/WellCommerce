@@ -159,7 +159,7 @@ WellCommerce\Bundle\ProductBundle\Entity\Product:
             mappedBy: product
             orphanRemoval: true
         distinctions:
-            targetEntity: WellCommerce\Bundle\ProductBundle\Entity\ProductDistinction
+            targetEntity: WellCommerce\Bundle\ProductBundle\Entity\Product\Distinction
             cascade:
                 - remove
                 - persist

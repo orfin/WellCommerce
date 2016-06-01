@@ -28,6 +28,7 @@ use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
 use WellCommerce\Bundle\MediaBundle\Entity\MediaAwareTrait;
 use WellCommerce\Bundle\ProducerBundle\Entity\ProducerAwareTrait;
 use WellCommerce\Bundle\ProductBundle\Entity\Extra\ProductExtraTrait;
+use WellCommerce\Bundle\ProductBundle\Entity\Product\DistinctionInterface;
 use WellCommerce\Bundle\ShopBundle\Entity\ShopCollectionAwareTrait;
 use WellCommerce\Bundle\TaxBundle\Entity\TaxInterface;
 use WellCommerce\Bundle\UnitBundle\Entity\UnitAwareTrait;
@@ -181,14 +182,14 @@ class Product extends AbstractEntity implements ProductInterface
 
     protected function synchronizeDistinctions(Collection $distinctions)
     {
-        $this->distinctions->map(function (ProductDistinctionInterface $distinction) use ($distinctions) {
+        $this->distinctions->map(function (DistinctionInterface $distinction) use ($distinctions) {
             if (false === $distinctions->contains($distinction)) {
                 $this->removeDistinction($distinction);
             }
         });
     }
     
-    public function removeDistinction(ProductDistinctionInterface $distinction)
+    public function removeDistinction(DistinctionInterface $distinction)
     {
         $this->distinctions->removeElement($distinction);
     }

@@ -10,19 +10,20 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\ProductBundle\Entity;
+namespace WellCommerce\Bundle\ProductBundle\Entity\Product;
 
 use DateTime;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareInterface;
 use WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusInterface;
 
 /**
- * Interface ProductDistinctionInterface
+ * Interface DistinctionInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ProductDistinctionInterface extends EntityInterface, TimestampableInterface, ProductAwareInterface
+interface DistinctionInterface extends EntityInterface, TimestampableInterface, ProductAwareInterface
 {
     public function getValidFrom();
 

@@ -17,10 +17,10 @@ well_commerce_product:
                     _controller: product.controller.front:indexAction
         product_distinction:
             orm:
-                factory: WellCommerce\Bundle\ProductBundle\Factory\ProductDistinctionFactory
-                repository: WellCommerce\Bundle\ProductBundle\Repository\ProductDistinctionRepository
-                mapping: "@WellCommerceProductBundle/Resources/config/doctrine/ProductDistinction.orm.yml"
-                entity: WellCommerce\Bundle\ProductBundle\Entity\ProductDistinction
+                factory: WellCommerce\Bundle\ProductBundle\Factory\Product\DistinctionFactory
+                repository: WellCommerce\Bundle\ProductBundle\Repository\Product\DistinctionRepository
+                mapping: "@WellCommerceProductBundle/Resources/config/doctrine/Product/Distinction.orm.yml"
+                entity: WellCommerce\Bundle\ProductBundle\Entity\Product\Distinction
         variant:
             orm:
                 factory: WellCommerce\Bundle\ProductBundle\Factory\VariantFactory
@@ -29,10 +29,10 @@ well_commerce_product:
                 entity: WellCommerce\Bundle\ProductBundle\Entity\Variant
         variant_option:
             orm:
-                factory: WellCommerce\Bundle\ProductBundle\Factory\VariantOptionFactory
-                repository: WellCommerce\Bundle\ProductBundle\Repository\VariantOptionRepository
-                mapping: "@WellCommerceProductBundle/Resources/config/doctrine/VariantOption.orm.yml"
-                entity: WellCommerce\Bundle\ProductBundle\Entity\VariantOption
+                factory: WellCommerce\Bundle\ProductBundle\Factory\Variant\OptionFactory
+                repository: WellCommerce\Bundle\ProductBundle\Repository\Variant\OptionRepository
+                mapping: "@WellCommerceProductBundle/Resources/config/doctrine/Variant/Option.orm.yml"
+                entity: WellCommerce\Bundle\ProductBundle\Entity\Variant\Option
         product_photo:
             orm:
                 repository: WellCommerce\Bundle\ProductBundle\Repository\ProductPhotoRepository

@@ -19,6 +19,7 @@ use WellCommerce\Bundle\AppBundle\Entity\HierarchyAwareTrait;
 use WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityAwareTrait;
 use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
 use WellCommerce\Bundle\MediaBundle\Entity\MediaAwareTrait;
+use WellCommerce\Bundle\ProductBundle\Entity\Variant\OptionInterface;
 
 /**
  * Class Variant
@@ -90,7 +91,7 @@ class Variant extends AbstractEntity implements VariantInterface
 
     protected function synchronizeOptions(Collection $options)
     {
-        $this->options->map(function (VariantOptionInterface $option) use ($options) {
+        $this->options->map(function (OptionInterface $option) use ($options) {
             if (false === $options->contains($option)) {
                 $this->options->removeElement($option);
             }

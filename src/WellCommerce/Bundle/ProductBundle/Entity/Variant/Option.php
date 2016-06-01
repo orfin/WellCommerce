@@ -10,18 +10,19 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\ProductBundle\Entity;
+namespace WellCommerce\Bundle\ProductBundle\Entity\Variant;
 
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeInterface;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeValueInterface;
 use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
+use WellCommerce\Bundle\ProductBundle\Entity\VariantInterface;
 
 /**
- * Class VariantOption
+ * Class Option
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class VariantOption extends AbstractEntity implements VariantOptionInterface
+class Option extends AbstractEntity implements OptionInterface
 {
     /**
      * @var VariantInterface
