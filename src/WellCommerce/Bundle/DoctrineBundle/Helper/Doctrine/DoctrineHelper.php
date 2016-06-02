@@ -14,7 +14,13 @@ namespace WellCommerce\Bundle\DoctrineBundle\Helper\Doctrine;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\Common\Persistence\Mapping\ClassMetadata;
+use Doctrine\Common\Persistence\Mapping\ClassMetadataFactory;
+use Doctrine\Common\Persistence\ObjectRepository;
 use Doctrine\Common\Util\ClassUtils;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\Filter\SQLFilter;
+use Doctrine\ORM\Query\FilterCollection;
 use Doctrine\ORM\QueryBuilder;
 
 /**
@@ -22,15 +28,15 @@ use Doctrine\ORM\QueryBuilder;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class DoctrineHelper implements DoctrineHelperInterface
+final class DoctrineHelper implements DoctrineHelperInterface
 {
     /**
      * @var ManagerRegistry
      */
-    protected $registry;
+    private $registry;
     
     /**
-     * Constructor
+     * DoctrineHelper constructor.
      *
      * @param ManagerRegistry $registry
      */
@@ -39,85 +45,51 @@ class DoctrineHelper implements DoctrineHelperInterface
         $this->registry = $registry;
     }
     
-    /**
-     * {@inheritdoc}
-     */
-    public function disableFilter($filter)
+    public function disableFilter(string $filter)
     {
         $this->getDoctrineFilters()->disable($filter);
     }
     
-    /**
-     * {@inheritdoc}
-     */
-    public function enableFilter($filter)
+    public function enableFilter(string $filter) : SQLFilter
     {
         return $this->getDoctrineFilters()->enable($filter);
     }
     
-    /**
-     * {@inheritdoc}
-     */
-    public function getDoctrineFilters()
+    public function getDoctrineFilters() : FilterCollection
     {
         return $this->getEntityManager()->getFilters();
     }
     
-    /**
-     * {@inheritdoc}
-     */
-    public function getEntityManager()
+    public function getEntityManager() : EntityManager
     {
         return $this->registry->getManager();
     }
     
-    /**
-     * {@inheritdoc}
-     */
-    public function getClassMetadata($className)
+    public function getClassMetadata(string $className) : ClassMetadata
     {
         return $this->getEntityManager()->getClassMetadata($className);
     }
     
-    /**
-     * {@inheritdoc}
-     */
-    public function getClassMetadataForEntity($object)
+    public function getClassMetadataForEntity($object) : ClassMetadata
     {
-        $className = ClassUtils::getRealClass(get_class($object));
-        
-        return $this->getClassMetadata($className);
+        return $this->getClassMetadata($this->getRealClass($object));
     }
     
-    /**
-     * {@inheritdoc}
-     */
-    public function getAllMetadata()
+    public function getAllMetadata() : array
     {
         return $this->getMetadataFactory()->getAllMetadata();
     }
     
-    /**
-     * {@inheritdoc}
-     */
-    public function hasClassMetadataForEntity($object)
+    public function hasClassMetadataForEntity($object) : bool
     {
-        $className = ClassUtils::getRealClass(get_class($object));
-        
-        return $this->getMetadataFactory()->hasMetadataFor($className);
+        return $this->getMetadataFactory()->hasMetadataFor($this->getRealClass($object));
     }
     
-    /**
-     * {@inheritdoc}
-     */
-    public function getMetadataFactory()
+    public function getMetadataFactory() : ClassMetadataFactory
     {
         return $this->getEntityManager()->getMetadataFactory();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getAllClassesForQueryBuilder(QueryBuilder $queryBuilder) : array
     {
         $classes      = [];
@@ -130,20 +102,13 @@ class DoctrineHelper implements DoctrineHelperInterface
         
         return $classes;
     }
-    
-    protected function addAssociationsTargetClasses(ClassMetadata $metadata, array &$classes)
+
+    public function getRepositoryForClass(string $className) : EntityRepository
     {
-        $associationNames = $metadata->getAssociationNames();
-        foreach ($associationNames as $associationName) {
-            $associationClass           = $metadata->getAssociationTargetClass($associationName);
-            $classes[$associationClass] = $associationClass;
-        }
+        return $this->getEntityManager()->getRepository($className);
     }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function truncateTable($className)
+
+    public function truncateTable(string $className)
     {
         $entityManager = $this->getEntityManager();
         $metadata      = $this->getClassMetadata($className);
@@ -161,5 +126,19 @@ class DoctrineHelper implements DoctrineHelperInterface
         }
         
         return false;
+    }
+
+    private function addAssociationsTargetClasses(ClassMetadata $metadata, array &$classes)
+    {
+        $associationNames = $metadata->getAssociationNames();
+        foreach ($associationNames as $associationName) {
+            $associationClass           = $metadata->getAssociationTargetClass($associationName);
+            $classes[$associationClass] = $associationClass;
+        }
+    }
+
+    private function getRealClass($object) : string
+    {
+        return ClassUtils::getRealClass(get_class($object));
     }
 }

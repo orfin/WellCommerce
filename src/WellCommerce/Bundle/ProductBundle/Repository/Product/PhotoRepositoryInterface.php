@@ -10,15 +10,15 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\ProductBundle\Repository;
+namespace WellCommerce\Bundle\ProductBundle\Repository\Product;
 
 use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
 
 /**
- * Interface ProductPhotoRepositoryInterface
+ * Interface PhotoRepositoryInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ProductPhotoRepositoryInterface extends RepositoryInterface
+interface PhotoRepositoryInterface extends RepositoryInterface
 {
 }

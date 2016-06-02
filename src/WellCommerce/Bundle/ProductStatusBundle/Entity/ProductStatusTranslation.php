@@ -17,6 +17,7 @@ use WellCommerce\Bundle\AppBundle\Entity\Meta;
 use WellCommerce\Bundle\LocaleBundle\Entity\LocaleAwareInterface;
 use WellCommerce\Bundle\RoutingBundle\Entity\RoutableSubjectInterface;
 use WellCommerce\Bundle\RoutingBundle\Entity\RoutableTrait;
+use WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface;
 
 /**
  * Class ProductStatusTranslation
@@ -34,7 +35,7 @@ class ProductStatusTranslation implements LocaleAwareInterface, RoutableSubjectI
     protected $name;
 
     /**
-     * @var ProductStatusRoute|\WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface
+     * @var RouteInterface
      */
     protected $route;
 
@@ -104,21 +105,8 @@ class ProductStatusTranslation implements LocaleAwareInterface, RoutableSubjectI
         $this->meta = $meta;
     }
 
-    /**
-     * @return \WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface
-     */
-    public function getRouteEntity()
+    public function getRouteEntity() : RouteInterface
     {
         return new ProductStatusRoute();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCopyingSensitiveProperties() : array
-    {
-        return [
-            'slug',
-        ];
     }
 }

@@ -58,3 +58,10 @@ well_commerce_client:
                 repository: WellCommerce\Bundle\ClientBundle\Repository\ClientWishlistRepository
                 mapping: "@WellCommerceClientBundle/Resources/config/doctrine/ClientWishlist.orm.yml"
                 entity: WellCommerce\Bundle\ClientBundle\Entity\ClientWishlist
+
+well_commerce_locale:
+    copier:
+        entities:
+            WellCommerce\Bundle\ClientBundle\Entity\ClientGroupTranslation:
+                properties:
+                    - name

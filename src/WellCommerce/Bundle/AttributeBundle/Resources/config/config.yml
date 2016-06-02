@@ -33,3 +33,17 @@ well_commerce_attribute:
                 manager: false
                 mapping: "@WellCommerceAttributeBundle/Resources/config/doctrine/AttributeValueTranslation.orm.yml"
                 entity: WellCommerce\Bundle\AttributeBundle\Entity\AttributeValueTranslation
+
+well_commerce_locale:
+    copier:
+        entities:
+            WellCommerce\Bundle\AttributeBundle\Entity\AttributeTranslation:
+                properties:
+                    - name
+                    - shortDescription
+            WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroupTranslation:
+                properties:
+                    - name
+            WellCommerce\Bundle\AttributeBundle\Entity\AttributeValueTranslation:
+                properties:
+                    - name

@@ -65,14 +65,4 @@ class CouponTranslation implements LocaleAwareInterface
     {
         $this->description = $description;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCopyingSensitiveProperties() : array
-    {
-        return [
-            'name',
-        ];
-    }
 }

@@ -33,29 +33,11 @@ interface RoutableSubjectInterface
      */
     public function getTranslatable();
 
-    /**
-     * Returns slug
-     *
-     * @return string
-     */
-    public function getSlug();
+    public function getSlug() : string;
 
-    /**
-     * Returns a route bound to entity
-     *
-     * @return RouteInterface
-     */
-    public function getRoute();
+    public function getRoute() : RouteInterface;
 
-    /**
-     * Sets route
-     *
-     * @param RouteInterface $route
-     */
     public function setRoute(RouteInterface $route);
 
-    /**
-     * @return RouteInterface
-     */
-    public function getRouteEntity();
+    public function getRouteEntity() : RouteInterface;
 }

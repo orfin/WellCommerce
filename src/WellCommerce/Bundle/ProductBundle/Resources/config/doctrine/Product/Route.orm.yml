@@ -1,8 +1,8 @@
-WellCommerce\Bundle\ProductBundle\Entity\ProductRoute:
+WellCommerce\Bundle\ProductBundle\Entity\Product\Route:
     type: entity
     cache:
         usage: NONSTRICT_READ_WRITE
-    table: route_product
+    table: product_route
     manyToOne:
         identifier:
             targetEntity: WellCommerce\Bundle\ProductBundle\Entity\Product

@@ -46,3 +46,10 @@ well_commerce_product_status:
                 mapping: "@WellCommerceProductStatusBundle/Resources/config/doctrine/ProductStatusTranslation.orm.yml"
                 entity: WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusTranslation
 
+well_commerce_locale:
+    copier:
+        entities:
+            WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusTranslation:
+                properties:
+                    - name
+                    - slug

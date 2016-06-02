@@ -15,3 +15,11 @@ well_commerce_news:
                 manager: false
                 mapping: "@WellCommerceNewsBundle/Resources/config/doctrine/NewsTranslation.orm.yml"
                 entity: WellCommerce\Bundle\NewsBundle\Entity\NewsTranslation
+
+well_commerce_locale:
+    copier:
+        entities:
+            WellCommerce\Bundle\NewsBundle\Entity\NewsTranslation:
+                properties:
+                    - topic
+                    - slug

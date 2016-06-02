@@ -10,27 +10,24 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\ProductBundle\Entity;
+namespace WellCommerce\Bundle\ProductBundle\Entity\Product;
 
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use WellCommerce\Bundle\AppBundle\Entity\HierarchyAwareTrait;
+use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
 use WellCommerce\Bundle\MediaBundle\Entity\MediaInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareTrait;
 
 /**
- * Class ProductPhoto
+ * Class Photo
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductPhoto implements ProductPhotoInterface
+class Photo extends AbstractEntity implements PhotoInterface
 {
     use Timestampable;
     use HierarchyAwareTrait;
     use ProductAwareTrait;
-
-    /**
-     * @var int
-     */
-    protected $id;
 
     /**
      * @var MediaInterface
@@ -42,43 +39,23 @@ class ProductPhoto implements ProductPhotoInterface
      */
     protected $mainPhoto;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPhoto()
+    public function getPhoto() : MediaInterface
     {
         return $this->photo;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setPhoto(MediaInterface $photo)
     {
         $this->photo = $photo;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getMainPhoto()
+    public function isMainPhoto() : bool
     {
         return $this->mainPhoto;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setMainPhoto($mainPhoto)
+    public function setMainPhoto(bool $mainPhoto)
     {
-        $this->mainPhoto = (bool)$mainPhoto;
+        $this->mainPhoto = $mainPhoto;
     }
 }

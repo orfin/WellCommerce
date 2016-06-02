@@ -65,14 +65,4 @@ class OrderStatusTranslation implements LocaleAwareInterface
     {
         $this->defaultComment = $defaultComment;
     }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function getCopyingSensitiveProperties() : array
-    {
-        return [
-            'name',
-        ];
-    }
 }

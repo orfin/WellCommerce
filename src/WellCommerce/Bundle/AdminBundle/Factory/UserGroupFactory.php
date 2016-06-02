@@ -12,22 +12,24 @@
 
 namespace WellCommerce\Bundle\AdminBundle\Factory;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use WellCommerce\Bundle\AdminBundle\Entity\UserGroup;
 use WellCommerce\Bundle\AdminBundle\Entity\UserGroupInterface;
-use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactoryInterface;
 
 /**
  * Class UserGroupFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class UserGroupFactory extends EntityFactory
+class UserGroupFactory implements EntityFactoryInterface
 {
     public function create() : UserGroupInterface
     {
         /** @var $group UserGroupInterface */
-        $group = $this->init();
+        $group = new UserGroup();
         $group->setName('');
-        $group->setPermissions($this->createEmptyCollection());
+        $group->setPermissions(new ArrayCollection());
         
         return $group;
     }

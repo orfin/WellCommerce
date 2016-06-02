@@ -11,7 +11,7 @@ well_commerce_product:
                 dataset: product.dataset.admin
                 manager: product.manager
             dynamic_routing:
-                entity: WellCommerce\Bundle\ProductBundle\Entity\ProductRoute
+                entity: WellCommerce\Bundle\ProductBundle\Entity\Product\Route
                 generator: WellCommerce\Bundle\ProductBundle\Routing\ProductRouteGenerator
                 defaults:
                     _controller: product.controller.front:indexAction
@@ -35,13 +35,13 @@ well_commerce_product:
                 entity: WellCommerce\Bundle\ProductBundle\Entity\Variant\Option
         product_photo:
             orm:
-                repository: WellCommerce\Bundle\ProductBundle\Repository\ProductPhotoRepository
-                mapping: "@WellCommerceProductBundle/Resources/config/doctrine/ProductPhoto.orm.yml"
-                entity: WellCommerce\Bundle\ProductBundle\Entity\ProductPhoto
+                repository: WellCommerce\Bundle\ProductBundle\Repository\Product\PhotoRepository
+                mapping: "@WellCommerceProductBundle/Resources/config/doctrine/Product/Photo.orm.yml"
+                entity: WellCommerce\Bundle\ProductBundle\Entity\Product\Photo
         product_route:
             orm:
-                mapping: "@WellCommerceProductBundle/Resources/config/doctrine/ProductRoute.orm.yml"
-                entity: WellCommerce\Bundle\ProductBundle\Entity\ProductRoute
+                mapping: "@WellCommerceProductBundle/Resources/config/doctrine/Product/Route.orm.yml"
+                entity: WellCommerce\Bundle\ProductBundle\Entity\Product\Route
         product_translation:
             orm:
                 manager: false
@@ -85,3 +85,11 @@ well_commerce_search:
                             boost: 0.5
                             fuzziness: 2
                             value_expression: resource.getCategories().first().translate(locale).getName()
+
+well_commerce_locale:
+    copier:
+        entities:
+            WellCommerce\Bundle\ProductBundle\Entity\ProductTranslation:
+                properties:
+                    - name
+                    - slug

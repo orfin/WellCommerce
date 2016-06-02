@@ -33,7 +33,7 @@ class MediaCollectionToArrayTransformer extends CollectionToArrayTransformer
 
         $items = [];
         foreach ($modelData as $item) {
-            if ($item->getMainPhoto() == 1) {
+            if ($item->isMainPhoto() == 1) {
                 $items['main_photo'] = $item->getPhoto()->getId();
             }
             $items['photos'][] = $item->getPhoto()->getId();

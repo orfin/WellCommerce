@@ -10,41 +10,26 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\ProductBundle\Entity;
+namespace WellCommerce\Bundle\ProductBundle\Entity\Product;
 
 use WellCommerce\Bundle\AppBundle\Entity\HierarchyAwareInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 use WellCommerce\Bundle\MediaBundle\Entity\MediaInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareInterface;
 
 /**
- * Interface ProductPhotoInterface
+ * Interface PhotoInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ProductPhotoInterface extends TimestampableInterface, ProductAwareInterface, HierarchyAwareInterface
+interface PhotoInterface extends EntityInterface, TimestampableInterface, ProductAwareInterface, HierarchyAwareInterface
 {
-    /**
-     * @return int
-     */
-    public function getId();
+    public function getPhoto() : MediaInterface;
 
-    /**
-     * @return MediaInterface
-     */
-    public function getPhoto();
-
-    /**
-     * @param MediaInterface $photo
-     */
     public function setPhoto(MediaInterface $photo);
 
-    /**
-     * @return bool
-     */
-    public function getMainPhoto();
+    public function isMainPhoto() : bool;
 
-    /**
-     * @param $mainPhoto
-     */
-    public function setMainPhoto($mainPhoto);
+    public function setMainPhoto(bool $mainPhoto);
 }

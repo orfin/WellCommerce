@@ -15,3 +15,10 @@ well_commerce_deliverer:
                 manager: false
                 mapping: "@WellCommerceDelivererBundle/Resources/config/doctrine/DelivererTranslation.orm.yml"
                 entity: WellCommerce\Bundle\DelivererBundle\Entity\DelivererTranslation
+
+well_commerce_locale:
+    copier:
+        entities:
+            WellCommerce\Bundle\DelivererBundle\Entity\DelivererTranslation:
+                properties:
+                    - name

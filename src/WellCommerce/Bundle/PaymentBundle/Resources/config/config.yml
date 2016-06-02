@@ -34,3 +34,10 @@ well_commerce_payment:
                 manager: false
                 mapping: "@WellCommercePaymentBundle/Resources/config/doctrine/PaymentMethodTranslation.orm.yml"
                 entity: WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodTranslation
+
+well_commerce_locale:
+    copier:
+        entities:
+            WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodTranslation:
+                properties:
+                    - name

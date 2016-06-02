@@ -15,8 +15,10 @@ namespace WellCommerce\Bundle\ProductBundle\Entity;
 use Knp\DoctrineBehaviors\Model\Translatable\Translation;
 use WellCommerce\Bundle\AppBundle\Entity\Meta;
 use WellCommerce\Bundle\LocaleBundle\Entity\LocaleAwareInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\Product\Route;
 use WellCommerce\Bundle\RoutingBundle\Entity\RoutableSubjectInterface;
 use WellCommerce\Bundle\RoutingBundle\Entity\RoutableTrait;
+use WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface;
 
 /**
  * Class ProductTranslation
@@ -49,7 +51,7 @@ class ProductTranslation implements LocaleAwareInterface, RoutableSubjectInterfa
     protected $meta;
 
     /**
-     * @var ProductRoute|\WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface
+     * @var RouteInterface
      */
     protected $route;
 
@@ -125,22 +127,8 @@ class ProductTranslation implements LocaleAwareInterface, RoutableSubjectInterfa
         $this->meta = $meta;
     }
 
-    /**
-     * @return ProductRoute|\WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface
-     */
-    public function getRouteEntity()
+    public function getRouteEntity() : RouteInterface
     {
-        return new ProductRoute();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCopyingSensitiveProperties() : array
-    {
-        return [
-            'name',
-            'slug',
-        ];
+        return new Route();
     }
 }

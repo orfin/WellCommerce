@@ -15,3 +15,10 @@ well_commerce_tax:
                 manager: false
                 mapping: "@WellCommerceTaxBundle/Resources/config/doctrine/TaxTranslation.orm.yml"
                 entity: WellCommerce\Bundle\TaxBundle\Entity\TaxTranslation
+
+well_commerce_locale:
+    copier:
+        entities:
+            WellCommerce\Bundle\TaxBundle\Entity\TaxTranslation:
+                properties:
+                    - name

@@ -11,3 +11,10 @@ well_commerce_layout:
                 manager: false
                 mapping: "@WellCommerceLayoutBundle/Resources/config/doctrine/LayoutBoxTranslation.orm.yml"
                 entity: WellCommerce\Bundle\LayoutBundle\Entity\LayoutBoxTranslation
+
+well_commerce_locale:
+    copier:
+        entities:
+            WellCommerce\Bundle\LayoutBundle\Entity\LayoutBoxTranslation:
+                properties:
+                    - name

@@ -18,8 +18,10 @@ use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 use WellCommerce\Bundle\AppBundle\Entity\Dimension;
 use WellCommerce\Bundle\AppBundle\Entity\DiscountablePrice;
+use WellCommerce\Bundle\AppBundle\Entity\DiscountablePriceInterface;
 use WellCommerce\Bundle\AppBundle\Entity\HierarchyAwareTrait;
 use WellCommerce\Bundle\AppBundle\Entity\Price;
+use WellCommerce\Bundle\AppBundle\Entity\PriceInterface;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroupInterface;
 use WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityAwareTrait;
 use WellCommerce\Bundle\CategoryBundle\Entity\CategoryInterface;
@@ -29,6 +31,7 @@ use WellCommerce\Bundle\MediaBundle\Entity\MediaAwareTrait;
 use WellCommerce\Bundle\ProducerBundle\Entity\ProducerAwareTrait;
 use WellCommerce\Bundle\ProductBundle\Entity\Extra\ProductExtraTrait;
 use WellCommerce\Bundle\ProductBundle\Entity\Product\DistinctionInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\Product\PhotoInterface;
 use WellCommerce\Bundle\ShopBundle\Entity\ShopCollectionAwareTrait;
 use WellCommerce\Bundle\TaxBundle\Entity\TaxInterface;
 use WellCommerce\Bundle\UnitBundle\Entity\UnitAwareTrait;
@@ -127,25 +130,16 @@ class Product extends AbstractEntity implements ProductInterface
      */
     protected $packageSize = 1;
     
-    /**
-     * {@inheritdoc}
-     */
     public function getSku() : string
     {
         return $this->sku;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function setSku(string $sku)
     {
         $this->sku = $sku;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function getStock() : int
     {
         return $this->stock;
@@ -204,7 +198,7 @@ class Product extends AbstractEntity implements ProductInterface
         $this->productPhotos = $photos;
     }
     
-    public function addProductPhoto(ProductPhoto $photo)
+    public function addProductPhoto(PhotoInterface $photo)
     {
         $this->productPhotos[] = $photo;
     }
@@ -224,22 +218,22 @@ class Product extends AbstractEntity implements ProductInterface
         $this->categories[] = $category;
     }
     
-    public function getSellPrice() : DiscountablePrice
+    public function getSellPrice() : DiscountablePriceInterface
     {
         return $this->sellPrice;
     }
     
-    public function setSellPrice(DiscountablePrice $sellPrice)
+    public function setSellPrice(DiscountablePriceInterface $sellPrice)
     {
         $this->sellPrice = $sellPrice;
     }
     
-    public function getBuyPrice() : Price
+    public function getBuyPrice() : PriceInterface
     {
         return $this->buyPrice;
     }
     
-    public function setBuyPrice(Price $buyPrice)
+    public function setBuyPrice(PriceInterface $buyPrice)
     {
         $this->buyPrice = $buyPrice;
     }
@@ -330,5 +324,10 @@ class Product extends AbstractEntity implements ProductInterface
     public function setSellPriceTax(TaxInterface $sellPriceTax)
     {
         $this->sellPriceTax = $sellPriceTax;
+    }
+
+    public static function getTranslationEntityClass()
+    {
+        return ProductTranslation::class;
     }
 }

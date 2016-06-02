@@ -45,3 +45,10 @@ well_commerce_producer:
                 mapping: "@WellCommerceProducerBundle/Resources/config/doctrine/ProducerTranslation.orm.yml"
                 entity: WellCommerce\Bundle\ProducerBundle\Entity\ProducerTranslation
 
+well_commerce_locale:
+    copier:
+        entities:
+            WellCommerce\Bundle\ProducerBundle\Entity\ProducerTranslation:
+                properties:
+                    - name
+                    - slug

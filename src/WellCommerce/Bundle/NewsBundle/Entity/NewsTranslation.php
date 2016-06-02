@@ -126,15 +126,4 @@ class NewsTranslation implements LocaleAwareInterface
     {
         return ['topic'];
     }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function getCopyingSensitiveProperties() : array
-    {
-        return [
-            'topic',
-            'slug'
-        ];
-    }
 }

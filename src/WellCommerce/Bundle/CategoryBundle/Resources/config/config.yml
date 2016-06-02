@@ -46,3 +46,11 @@ well_commerce_category:
                 mapping: "@WellCommerceCategoryBundle/Resources/config/doctrine/CategoryTranslation.orm.yml"
                 entity: WellCommerce\Bundle\CategoryBundle\Entity\CategoryTranslation
 
+
+well_commerce_locale:
+    copier:
+        entities:
+            WellCommerce\Bundle\CategoryBundle\Entity\CategoryTranslation:
+                properties:
+                    - name
+                    - slug

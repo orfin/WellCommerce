@@ -55,10 +55,6 @@ services:
         calls:
             - [setContainer, ['@service_container']]
 
-    locale.copier:
-        class: WellCommerce\Bundle\LocaleBundle\Copier\LocaleCopier
-        arguments: ['@doctrine.helper']
-
     locale.delete.command:
         class: WellCommerce\Bundle\LocaleBundle\Command\DeleteLocaleCommand
         tags:

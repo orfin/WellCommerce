@@ -10,26 +10,24 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\ProductBundle\Entity;
+namespace WellCommerce\Bundle\ProductBundle\Entity\Product;
 
-use WellCommerce\Bundle\RoutingBundle\Entity\Route;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
+use WellCommerce\Bundle\RoutingBundle\Entity\Route as BaseRoute;
 use WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface;
 
 /**
- * Class ProductRoute
+ * Class Route
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductRoute extends Route implements RouteInterface
+class Route extends BaseRoute implements RouteInterface
 {
     /**
      * @var ProductInterface
      */
     protected $identifier;
 
-    /**
-     * @return string
-     */
     public function getType() : string
     {
         return 'product';

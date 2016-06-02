@@ -21,5 +21,4 @@ use WellCommerce\Bundle\CoreBundle\Request\ParamConverter\AbstractEntityParamCon
  */
 class VariantParamConverter extends AbstractEntityParamConverter
 {
-
 }

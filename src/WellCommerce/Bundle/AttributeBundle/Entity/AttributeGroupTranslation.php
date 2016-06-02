@@ -44,15 +44,4 @@ class AttributeGroupTranslation implements LocaleAwareInterface
     {
         $this->name = $name;
     }
-
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCopyingSensitiveProperties() : array
-    {
-        return [
-            'name'
-        ];
-    }
 }

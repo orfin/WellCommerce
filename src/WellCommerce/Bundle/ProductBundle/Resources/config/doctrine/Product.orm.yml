@@ -144,7 +144,7 @@ WellCommerce\Bundle\ProductBundle\Entity\Product:
                         referencedColumnName: id
     oneToMany:
         productPhotos:
-            targetEntity: WellCommerce\Bundle\ProductBundle\Entity\ProductPhoto
+            targetEntity: WellCommerce\Bundle\ProductBundle\Entity\Product\Photo
             cascade:
                 - remove
                 - persist

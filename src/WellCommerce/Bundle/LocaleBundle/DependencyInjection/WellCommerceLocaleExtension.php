@@ -12,6 +12,9 @@
 
 namespace WellCommerce\Bundle\LocaleBundle\DependencyInjection;
 
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Reference;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
 
 /**
@@ -21,4 +24,16 @@ use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
  */
 class WellCommerceLocaleExtension extends AbstractExtension
 {
+    protected function processExtensionConfiguration(array $configuration, ContainerBuilder $container)
+    {
+        parent::processExtensionConfiguration($configuration, $container);
+
+        $copier   = $configuration['copier'];
+        $entities = $copier['entities'];
+
+        $definition = new Definition($copier['class']);
+        $definition->addArgument($entities);
+        $definition->addArgument(new Reference('doctrine.helper'));
+        $container->setDefinition('locale.copier', $definition);
+    }
 }

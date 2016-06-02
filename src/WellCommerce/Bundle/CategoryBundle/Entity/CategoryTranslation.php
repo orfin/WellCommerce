@@ -7,6 +7,7 @@ use WellCommerce\Bundle\AppBundle\Entity\Meta;
 use WellCommerce\Bundle\LocaleBundle\Entity\LocaleAwareInterface;
 use WellCommerce\Bundle\RoutingBundle\Entity\RoutableSubjectInterface;
 use WellCommerce\Bundle\RoutingBundle\Entity\RoutableTrait;
+use WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface;
 
 /**
  * Class CategoryTranslation
@@ -118,19 +119,8 @@ class CategoryTranslation implements RoutableSubjectInterface, LocaleAwareInterf
     /**
      * @return CategoryRoute|\WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface
      */
-    public function getRouteEntity()
+    public function getRouteEntity() : RouteInterface
     {
         return new CategoryRoute();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCopyingSensitiveProperties() : array
-    {
-        return [
-            'name',
-            'slug'
-        ];
     }
 }

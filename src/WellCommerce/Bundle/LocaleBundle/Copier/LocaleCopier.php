@@ -12,10 +12,8 @@
 
 namespace WellCommerce\Bundle\LocaleBundle\Copier;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
-use Doctrine\ORM\EntityRepository;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use WellCommerce\Bundle\DoctrineBundle\Helper\Doctrine\DoctrineHelperInterface;
 use WellCommerce\Bundle\LocaleBundle\Entity\LocaleAwareInterface;
@@ -26,88 +24,65 @@ use WellCommerce\Bundle\LocaleBundle\Entity\LocaleInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LocaleCopier implements LocaleCopierInterface
+final class LocaleCopier implements LocaleCopierInterface
 {
+    /**
+     * @var array
+     */
+    private $entityClasses;
+    
     /**
      * @var DoctrineHelperInterface
      */
     protected $doctrineHelper;
-
-    /**
-     * @var \Doctrine\Common\Persistence\ObjectManager|object
-     */
-    protected $entityManager;
-
+    
     /**
      * @var \Symfony\Component\PropertyAccess\PropertyAccessor
      */
     protected $propertyAccessor;
-
+    
     /**
      * LocaleCopier constructor.
      *
+     * @param array                   $entityClasses
      * @param DoctrineHelperInterface $doctrineHelper
      */
-    public function __construct(DoctrineHelperInterface $doctrineHelper)
+    public function __construct(array $entityClasses, DoctrineHelperInterface $doctrineHelper)
     {
+        $this->entityClasses    = $entityClasses;
         $this->doctrineHelper   = $doctrineHelper;
-        $this->entityManager    = $doctrineHelper->getEntityManager();
         $this->propertyAccessor = PropertyAccess::createPropertyAccessor();
-
     }
-
+    
     public function copyLocaleData(LocaleInterface $sourceLocale, LocaleInterface $targetLocale)
     {
-        $repositories = $this->getTranslatableRespositories();
+        $criteria = new Criteria();
+        $criteria->where($criteria->expr()->eq('locale', $sourceLocale->getCode()));
+        
+        foreach ($this->entityClasses as $className => $options) {
+            $repository = $this->doctrineHelper->getRepositoryForClass($className);
+            $entities   = $repository->matching($criteria);
+            $this->duplicateTranslatableEntities($entities, $options['properties'], $targetLocale);
+        }
 
-        $repositories->map(function (EntityRepository $repository) use ($sourceLocale, $targetLocale) {
-            $this->copyTranslatableEntities($repository, $sourceLocale, $targetLocale);
-        });
-
-        $this->entityManager->flush();
+        $this->doctrineHelper->getEntityManager()->flush();
     }
-
-    protected function copyTranslatableEntities(EntityRepository $repository, LocaleInterface $sourceLocale, LocaleInterface $targetLocale)
+    
+    private function duplicateTranslatableEntities(Collection $entities, array $properties, LocaleInterface $targetLocale)
     {
-        $entities = $this->findTranslatableEntities($repository, $sourceLocale);
-
-        $entities->map(function (LocaleAwareInterface $entity) use ($targetLocale) {
-            $this->copyTranslatableEntity($entity, $targetLocale);
+        $entities->map(function (LocaleAwareInterface $entity) use ($properties, $targetLocale) {
+            $this->duplicateTranslatableEntity($entity, $properties, $targetLocale);
         });
     }
-
-    protected function copyTranslatableEntity(LocaleAwareInterface $entity, LocaleInterface $targetLocale)
+    
+    private function duplicateTranslatableEntity(LocaleAwareInterface $entity, array $properties, LocaleInterface $targetLocale)
     {
         $duplicate = clone $entity;
-        foreach ($entity->getCopyingSensitiveProperties() as $propertyName) {
+        foreach ($properties as $propertyName) {
             $value = sprintf('%s-%s', $this->propertyAccessor->getValue($entity, $propertyName), $targetLocale->getCode());
             $this->propertyAccessor->setValue($duplicate, $propertyName, $value);
             $duplicate->setLocale($targetLocale->getCode());
-            $this->entityManager->persist($duplicate);
+            $this->doctrineHelper->getEntityManager()->persist($duplicate);
         }
-    }
-
-    protected function getTranslatableRespositories() : Collection
-    {
-        $collection = new ArrayCollection();
-        $metadata   = $this->doctrineHelper->getAllMetadata();
-        foreach ($metadata as $classMetadata) {
-            $reflectionClass = $classMetadata->getReflectionClass();
-            if ($reflectionClass->implementsInterface(LocaleAwareInterface::class)) {
-                $repository = $this->entityManager->getRepository($reflectionClass->getName());
-                $collection->add($repository);
-            }
-        }
-
-        return $collection;
-    }
-
-    protected function findTranslatableEntities(EntityRepository $repository, LocaleInterface $locale) : Collection
-    {
-        $criteria = new Criteria();
-        $criteria->where($criteria->expr()->eq('locale', $locale->getCode()));
-        $collection = $repository->matching($criteria);
-
-        return $collection;
     }
 }

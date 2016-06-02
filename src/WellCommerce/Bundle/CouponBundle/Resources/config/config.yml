@@ -20,3 +20,10 @@ well_commerce_coupon:
                 manager: false
                 mapping: "@WellCommerceCouponBundle/Resources/config/doctrine/CouponTranslation.orm.yml"
                 entity: WellCommerce\Bundle\CouponBundle\Entity\CouponTranslation
+
+well_commerce_locale:
+    copier:
+        entities:
+            WellCommerce\Bundle\CouponBundle\Entity\CouponTranslation:
+                properties:
+                    - name

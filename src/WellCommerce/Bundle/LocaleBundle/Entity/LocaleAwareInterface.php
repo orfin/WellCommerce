@@ -28,12 +28,4 @@ interface LocaleAwareInterface
      * @return string
      */
     public function getLocale();
-
-    /**
-     * Returns an array of property names which values should be protected
-     * against duplication when adding new locale
-     *
-     * @return array
-     */
-    public function getCopyingSensitiveProperties() : array;
 }

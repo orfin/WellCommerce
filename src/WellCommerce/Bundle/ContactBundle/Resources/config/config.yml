@@ -21,3 +21,10 @@ well_commerce_contact:
                 repository: WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository
                 mapping: "@WellCommerceContactBundle/Resources/config/doctrine/ContactTicket.orm.yml"
                 entity: WellCommerce\Bundle\ContactBundle\Entity\ContactTicket
+
+well_commerce_locale:
+    copier:
+        entities:
+            WellCommerce\Bundle\ContactBundle\Entity\ContactTranslation:
+                properties:
+                    - name

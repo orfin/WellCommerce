@@ -87,3 +87,13 @@ well_commerce_order:
                 manager: false
                 mapping: "@WellCommerceOrderBundle/Resources/config/doctrine/OrderStatusGroupTranslation.orm.yml"
                 entity: WellCommerce\Bundle\OrderBundle\Entity\OrderStatusGroupTranslation
+
+well_commerce_locale:
+    copier:
+        entities:
+            WellCommerce\Bundle\OrderBundle\Entity\OrderStatusTranslation:
+                properties:
+                    - name
+            WellCommerce\Bundle\OrderBundle\Entity\OrderStatusGroupTranslation:
+                properties:
+                    - name

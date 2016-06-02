@@ -25,4 +25,10 @@ well_commerce_page:
                 mapping: "@WellCommercePageBundle/Resources/config/doctrine/PageTranslation.orm.yml"
                 entity: WellCommerce\Bundle\PageBundle\Entity\PageTranslation
 
-
+well_commerce_locale:
+    copier:
+        entities:
+            WellCommerce\Bundle\PageBundle\Entity\PageTranslation:
+                properties:
+                    - name
+                    - slug

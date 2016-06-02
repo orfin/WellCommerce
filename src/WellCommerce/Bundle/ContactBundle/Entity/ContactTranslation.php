@@ -134,11 +134,4 @@ class ContactTranslation implements LocaleAwareInterface
     {
         $this->country = $country;
     }
-
-    public function getCopyingSensitiveProperties() : array
-    {
-        return [
-            'name',
-        ];
-    }
 }

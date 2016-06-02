@@ -12,7 +12,16 @@
 
 namespace WellCommerce\Bundle\DoctrineBundle\Helper\Doctrine;
 
+use Doctrine\Common\Persistence\Mapping\ClassMetadata;
+use Doctrine\Common\Persistence\Mapping\ClassMetadataFactory;
+use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\Persistence\ObjectRepository;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\Filter\SQLFilter;
+use Doctrine\ORM\Query\FilterCollection;
 use Doctrine\ORM\QueryBuilder;
+use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
 
 /**
  * Interface DoctrineHelperInterface
@@ -21,86 +30,30 @@ use Doctrine\ORM\QueryBuilder;
  */
 interface DoctrineHelperInterface
 {
-    /**
-     * Gets the enabled filters.
-     *
-     * @return \Doctrine\ORM\Query\FilterCollection The active filter collection.
-     */
-    public function getDoctrineFilters();
+    public function getDoctrineFilters() : FilterCollection;
 
-    /**
-     * Returns Doctrine manager
-     *
-     * @return \Doctrine\Common\Persistence\ObjectManager|object
-     */
-    public function getEntityManager();
+    public function getEntityManager() : EntityManager;
 
-    /**
-     * Disables Doctrine filter
-     *
-     * @param string $filter Filter name
-     */
-    public function disableFilter($filter);
+    public function getRepositoryForClass(string $className) : EntityRepository;
 
-    /**
-     * Enables Doctrine filter
-     *
-     * @param string $filter
-     *
-     * @return \Doctrine\ORM\Query\Filter\SQLFilter
-     */
-    public function enableFilter($filter);
+    public function disableFilter(string $filter);
 
-    /**
-     * Returns class metadata for given class name
-     *
-     * @param string $className
-     *
-     * @return \Doctrine\Common\Persistence\Mapping\ClassMetadata
-     */
-    public function getClassMetadata($className);
+    public function enableFilter(string $filter) : SQLFilter;
 
-    /**
-     * Returns class metadata for given object
-     *
-     * @param object $entity
-     *
-     * @return \Doctrine\Common\Persistence\Mapping\ClassMetadata
-     */
-    public function getClassMetadataForEntity($entity);
+    public function getClassMetadata(string $className) : ClassMetadata;
 
-    /**
-     * Returns true if entity is managed through Doctrine, false otherwise
-     *
-     * @param object $object
-     *
-     * @return bool
-     */
-    public function hasClassMetadataForEntity($object);
+    public function getClassMetadataForEntity($entity) : ClassMetadata;
+
+    public function hasClassMetadataForEntity($object) : bool;
 
     /**
      * @return \Doctrine\Common\Persistence\Mapping\ClassMetadata[]
      */
-    public function getAllMetadata();
+    public function getAllMetadata() : array;
 
-    /**
-     * Truncates table
-     *
-     * @param string $className
-     */
-    public function truncateTable($className);
+    public function truncateTable(string $className);
 
-    /**
-     * @return \Doctrine\Common\Persistence\Mapping\ClassMetadataFactory
-     */
-    public function getMetadataFactory();
+    public function getMetadataFactory() : ClassMetadataFactory;
 
-    /**
-     * Returns the root and association classes used in given QueryBuilder
-     *
-     * @param QueryBuilder $queryBuilder
-     *
-     * @return array
-     */
     public function getAllClassesForQueryBuilder(QueryBuilder $queryBuilder) : array;
 }

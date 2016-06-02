@@ -44,14 +44,4 @@ class DictionaryTranslation implements LocaleAwareInterface
     {
         $this->value = $value;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCopyingSensitiveProperties() : array
-    {
-        return [
-            'value',
-        ];
-    }
 }
