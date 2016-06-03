@@ -27,7 +27,6 @@ use WellCommerce\Bundle\MediaBundle\DataFixtures\ORM\LoadMediaData;
 use WellCommerce\Bundle\ProducerBundle\DataFixtures\ORM\LoadProducerData;
 use WellCommerce\Bundle\ProductBundle\Entity\Product;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
-use WellCommerce\Bundle\ProductBundle\Entity\ProductPhoto;
 use WellCommerce\Bundle\TaxBundle\DataFixtures\ORM\LoadTaxData;
 use WellCommerce\Bundle\UnitBundle\DataFixtures\ORM\LoadUnitData;
 
@@ -136,25 +135,25 @@ class LoadProductData extends AbstractDataFixture
 
         $distinctions = new ArrayCollection();
 
-        $distinction  = new Product\Distinction();
+        $distinction = new Product\Distinction();
         $distinction->setProduct($product);
         $distinction->setStatus($this->getReference('product_status_bestseller'));
         $manager->persist($distinction);
         $distinctions->add($distinction);
 
-        $distinction  = new Product\Distinction();
+        $distinction = new Product\Distinction();
         $distinction->setProduct($product);
         $distinction->setStatus($this->getReference('product_status_featured'));
         $manager->persist($distinction);
         $distinctions->add($distinction);
 
-        $distinction  = new Product\Distinction();
+        $distinction = new Product\Distinction();
         $distinction->setProduct($product);
         $distinction->setStatus($this->getReference('product_status_novelty'));
         $manager->persist($distinction);
         $distinctions->add($distinction);
 
-        $distinction  = new Product\Distinction();
+        $distinction = new Product\Distinction();
         $distinction->setProduct($product);
         $distinction->setStatus($this->getReference('product_status_promotion'));
         $manager->persist($distinction);
@@ -174,7 +173,7 @@ class LoadProductData extends AbstractDataFixture
         $isMainPhoto   = true;
 
         foreach ($mediaFiles as $media) {
-            $productPhoto = new ProductPhoto();
+            $productPhoto = new Product\Photo();
             $productPhoto->setHierarchy(0);
             $productPhoto->setMainPhoto($isMainPhoto);
             $productPhoto->setPhoto($media);
