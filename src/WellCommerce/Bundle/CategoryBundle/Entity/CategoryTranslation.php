@@ -20,7 +20,7 @@ class CategoryTranslation implements RoutableSubjectInterface, LocaleAwareInterf
     use RoutableTrait;
 
     /**
-     * @var \WellCommerce\Bundle\CategoryBundle\Entity\CategoryRoute
+     * @var RouteInterface
      */
     protected $route;
 
@@ -52,73 +52,46 @@ class CategoryTranslation implements RoutableSubjectInterface, LocaleAwareInterf
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName() : string
     {
         return $this->name;
     }
 
-    /**
-     * @param $name
-     */
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = $name;
     }
 
-    /**
-     * @return string
-     */
-    public function getShortDescription()
+    public function getShortDescription() : string
     {
         return $this->shortDescription;
     }
 
-    /**
-     * @param $shortDescription
-     */
-    public function setShortDescription($shortDescription)
+    public function setShortDescription(string $shortDescription)
     {
         $this->shortDescription = $shortDescription;
     }
 
-    /**
-     * @return string
-     */
-    public function getDescription()
+    public function getDescription() : string
     {
         return $this->description;
     }
 
-    /**
-     * @param string $description
-     */
-    public function setDescription($description)
+    public function setDescription(string $description)
     {
         $this->description = $description;
     }
 
-    /**
-     * @return Meta
-     */
-    public function getMeta()
+    public function getMeta() : Meta
     {
         return $this->meta;
     }
 
-    /**
-     * @param Meta $meta
-     */
     public function setMeta(Meta $meta)
     {
         $this->meta = $meta;
     }
 
-    /**
-     * @return CategoryRoute|\WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface
-     */
     public function getRouteEntity() : RouteInterface
     {
         return new CategoryRoute();

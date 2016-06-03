@@ -1,4 +1,4 @@
-WellCommerce\Bundle\ProductBundle\Entity\ProductRoute:
+WellCommerce\Bundle\ProductBundle\Entity\Product\Route:
     fields:
         id:
             groups:

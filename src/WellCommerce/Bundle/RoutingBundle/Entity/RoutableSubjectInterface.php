@@ -19,18 +19,8 @@ namespace WellCommerce\Bundle\RoutingBundle\Entity;
  */
 interface RoutableSubjectInterface
 {
-    /**
-     * Returns locale for translation
-     *
-     * @return mixed
-     */
     public function getLocale();
 
-    /**
-     * Returns constraint identifier for translation
-     *
-     * @return mixed
-     */
     public function getTranslatable();
 
     public function getSlug() : string;
