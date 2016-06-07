@@ -16,20 +16,6 @@ WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethod:
             groups:
                 - default
                 - shipping_method
-        createdAt:
-            groups:
-                - default
-                - shipping_method
-        updatedAt:
-            groups:
-                - default
-                - shipping_method
-        createdBy:
-            groups: {  }
-        updatedBy:
-            groups: {  }
-        deletedBy:
-            groups: {  }
     associations:
         costs:
             groups:
@@ -46,4 +32,3 @@ WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethod:
         translations:
             groups:
                 - shipping_method
-    callbacks: {  }

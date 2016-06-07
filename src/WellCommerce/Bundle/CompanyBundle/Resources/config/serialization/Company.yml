@@ -17,18 +17,17 @@ WellCommerce\Bundle\CompanyBundle\Entity\Company:
                 - default
                 - company
         createdAt:
-            groups:
-                - default
-                - company
+            groups: {  }
         updatedAt:
-            groups:
-                - default
-                - company
+            groups: {  }
+    associations:
         createdBy:
-            groups: {  }
+            groups:
+                - company
         updatedBy:
-            groups: {  }
+            groups:
+                - company
         deletedBy:
-            groups: {  }
-    associations: {  }
+            groups:
+                - company
     callbacks: {  }

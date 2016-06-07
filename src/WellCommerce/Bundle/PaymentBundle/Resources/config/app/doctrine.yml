@@ -1,0 +1,38 @@
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
+
+doctrine:
+    orm:
+        resolve_target_entities:
+            WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface: WellCommerce\Bundle\PaymentBundle\Entity\Payment
+            WellCommerce\Bundle\PaymentBundle\Entity\PaymentStateHistoryInterface: WellCommerce\Bundle\PaymentBundle\Entity\PaymentStateHistory
+            WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodInterface: WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod
+
+well_commerce_doctrine:
+    configuration:
+        payment:
+            manager: WellCommerce\Bundle\PaymentBundle\Manager\PaymentManager
+            factory: WellCommerce\Bundle\PaymentBundle\Factory\PaymentFactory
+            repository: WellCommerce\Bundle\PaymentBundle\Repository\PaymentRepository
+            mapping: "@WellCommercePaymentBundle/Resources/config/doctrine/Payment.orm.yml"
+            entity: WellCommerce\Bundle\PaymentBundle\Entity\Payment
+        payment_state_history:
+            manager: WellCommerce\Bundle\PaymentBundle\Manager\PaymentStateHistoryManager
+            factory: WellCommerce\Bundle\PaymentBundle\Factory\PaymentStateHistoryFactory
+            repository: WellCommerce\Bundle\PaymentBundle\Repository\PaymentStateHistoryRepository
+            mapping: "@WellCommercePaymentBundle/Resources/config/doctrine/PaymentStateHistory.orm.yml"
+            entity: WellCommerce\Bundle\PaymentBundle\Entity\PaymentStateHistory
+        payment_method:
+            factory: WellCommerce\Bundle\PaymentBundle\Factory\PaymentMethodFactory
+            repository: WellCommerce\Bundle\PaymentBundle\Repository\PaymentMethodRepository
+            mapping: "@WellCommercePaymentBundle/Resources/config/doctrine/PaymentMethod.orm.yml"
+            entity: WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod
+        payment_method_translation:
+            manager: false
+            mapping: "@WellCommercePaymentBundle/Resources/config/doctrine/PaymentMethodTranslation.orm.yml"
+            entity: WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodTranslation

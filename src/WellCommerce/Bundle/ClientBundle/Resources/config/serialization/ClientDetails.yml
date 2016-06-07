@@ -4,15 +4,7 @@ WellCommerce\Bundle\ClientBundle\Entity\ClientDetails:
             groups:
                 - default
                 - client_details
-        password:
-            groups: {  }
         username:
-            groups:
-                - default
-                - client_details
-        salt:
-            groups: {  }
-        resetPasswordHash:
             groups:
                 - default
                 - client_details
@@ -24,5 +16,3 @@ WellCommerce\Bundle\ClientBundle\Entity\ClientDetails:
             groups:
                 - default
                 - client_details
-    associations: {  }
-    callbacks: {  }

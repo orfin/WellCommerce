@@ -1,0 +1,43 @@
+WellCommerce\Bundle\NewsBundle\Entity\News:
+    fields:
+        id:
+            groups:
+                - default
+                - news
+        publish:
+            groups:
+                - default
+                - news
+        startDate:
+            groups:
+                - default
+                - news
+        endDate:
+            groups:
+                - default
+                - news
+        featured:
+            groups:
+                - default
+                - news
+        createdAt:
+            groups: {  }
+        updatedAt:
+            groups: {  }
+    associations:
+        photo:
+            groups:
+                - news
+        createdBy:
+            groups:
+                - news
+        updatedBy:
+            groups:
+                - news
+        deletedBy:
+            groups:
+                - news
+        translations:
+            groups:
+                - news
+    callbacks: {  }

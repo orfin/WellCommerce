@@ -1,0 +1,20 @@
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
+
+doctrine:
+    orm:
+        resolve_target_entities:
+            WellCommerce\Bundle\LocaleBundle\Entity\LocaleInterface: WellCommerce\Bundle\LocaleBundle\Entity\Locale
+
+well_commerce_doctrine:
+    configuration:
+        locale:
+            factory: WellCommerce\Bundle\LocaleBundle\Factory\LocaleFactory
+            repository: WellCommerce\Bundle\LocaleBundle\Repository\LocaleRepository
+            mapping: "@WellCommerceLocaleBundle/Resources/config/doctrine/Locale.orm.yml"
+            entity: WellCommerce\Bundle\LocaleBundle\Entity\Locale

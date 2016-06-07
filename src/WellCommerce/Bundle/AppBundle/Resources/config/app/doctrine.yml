@@ -1,0 +1,32 @@
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
+
+well_commerce_doctrine:
+    configuration:
+        dimension:
+            manager: false
+            mapping: "@WellCommerceAppBundle/Resources/config/doctrine/Dimension.orm.yml"
+            entity: WellCommerce\Bundle\AppBundle\Entity\Dimension
+        discountable_price:
+            manager: false
+            factory: WellCommerce\Bundle\AppBundle\Factory\DiscountablePriceFactory
+            mapping: "@WellCommerceAppBundle/Resources/config/doctrine/DiscountablePrice.orm.yml"
+            entity: WellCommerce\Bundle\AppBundle\Entity\DiscountablePrice
+        mailer_configuration:
+            manager: false
+            mapping: "@WellCommerceAppBundle/Resources/config/doctrine/MailerConfiguration.orm.yml"
+            entity: WellCommerce\Bundle\AppBundle\Entity\MailerConfiguration
+        meta:
+            manager: false
+            mapping: "@WellCommerceAppBundle/Resources/config/doctrine/Meta.orm.yml"
+            entity: WellCommerce\Bundle\AppBundle\Entity\Meta
+        price:
+            manager: false
+            factory: WellCommerce\Bundle\AppBundle\Factory\PriceFactory
+            mapping: "@WellCommerceAppBundle/Resources/config/doctrine/Price.orm.yml"
+            entity: WellCommerce\Bundle\AppBundle\Entity\Price

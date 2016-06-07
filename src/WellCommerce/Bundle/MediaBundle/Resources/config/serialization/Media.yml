@@ -25,18 +25,17 @@ WellCommerce\Bundle\MediaBundle\Entity\Media:
                 - default
                 - media
         createdAt:
-            groups:
-                - default
-                - media
+            groups: {  }
         updatedAt:
-            groups:
-                - default
-                - media
+            groups: {  }
+    associations:
         createdBy:
-            groups: {  }
+            groups:
+                - media
         updatedBy:
-            groups: {  }
+            groups:
+                - media
         deletedBy:
-            groups: {  }
-    associations: {  }
+            groups:
+                - media
     callbacks: {  }

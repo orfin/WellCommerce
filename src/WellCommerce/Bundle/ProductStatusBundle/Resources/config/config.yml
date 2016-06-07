@@ -1,55 +1,10 @@
-well_commerce_product_status:
-    configuration:
-        product_status:
-            orm:
-                factory: WellCommerce\Bundle\ProductStatusBundle\Factory\ProductStatusFactory
-                repository: WellCommerce\Bundle\ProductStatusBundle\Repository\ProductStatusRepository
-                mapping: "@WellCommerceProductStatusBundle/Resources/config/doctrine/ProductStatus.orm.yml"
-                entity: WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatus
-            api:
-                exposed: true
-                dataset: product_status.dataset.admin
-                manager: product_status.manager
-            dynamic_routing:
-                entity: WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusRoute
-                generator: WellCommerce\Bundle\ProductStatusBundle\Routing\ProductStatusRouteGenerator
-                defaults:
-                    _controller: product_status.controller.front:indexAction
-                    limit: 12
-                    page: 1
-                    orderBy: name
-                    orderDir: asc
-                    priceFrom: 0
-                    priceTo: 9999
-                    view: grid
-                    producers: ~
-                    attributes: ~
-                requirements:
-                    limit: "\\d{1,10}"
-                    page: "\\d{1,10}"
-                    orderBy: "name|finalPrice"
-                    orderDir: "asc|desc"
-                    priceFrom: "\\d{1,10}"
-                    priceTo: "\\d{1,10}"
-                    view: "grid|list"
-                    producers: "[\\d+_]+"
-                    attributes: "[\\d+_]+"
-                pattern: "{page},{limit},{orderBy},{orderDir},{priceFrom},{priceTo},{view},{producers},{attributes}"
-        product_status_route:
-            orm:
-                manager: false
-                mapping: "@WellCommerceProductStatusBundle/Resources/config/doctrine/ProductStatusRoute.orm.yml"
-                entity: WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusRoute
-        product_status_translation:
-            orm:
-                manager: false
-                mapping: "@WellCommerceProductStatusBundle/Resources/config/doctrine/ProductStatusTranslation.orm.yml"
-                entity: WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusTranslation
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
 
-well_commerce_locale:
-    copier:
-        entities:
-            WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusTranslation:
-                properties:
-                    - name
-                    - slug
+imports:
+    - { resource: "app/" }

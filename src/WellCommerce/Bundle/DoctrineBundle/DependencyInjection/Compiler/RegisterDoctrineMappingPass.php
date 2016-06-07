@@ -24,17 +24,7 @@ final class RegisterDoctrineMappingPass extends AbstractMappingCompilerPass
 {
     public function process(ContainerBuilder $container)
     {
-        foreach ($container->getExtensions() as $extension) {
-            $parameterName = $extension->getAlias() . '.doctrine_orm_mapping.map';
-            if ($container->hasParameter($parameterName)) {
-                $this->processParameters($container->getParameter($parameterName), $container);
-            }
-        }
-    }
-
-    private function processParameters(array $parameters, ContainerBuilder $container)
-    {
-        foreach ($parameters as $entity => $mapping) {
+        foreach ($container->getParameter('doctrine_orm_mapping_map') as $entity => $mapping) {
             $this->addEntityMapping($container, 'default', $entity, $mapping);
         }
     }

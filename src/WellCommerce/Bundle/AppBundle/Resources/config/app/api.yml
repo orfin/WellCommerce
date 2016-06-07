@@ -1,0 +1,20 @@
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
+
+well_commerce_api:
+    serialization:
+        WellCommerce\Bundle\AppBundle\Entity\Dimension:
+            mapping: "@WellCommerceAppBundle/Resources/config/serialization/Dimension.yml"
+        WellCommerce\Bundle\AppBundle\Entity\DiscountablePrice:
+            mapping: "@WellCommerceAppBundle/Resources/config/serialization/DiscountablePrice.yml"
+        WellCommerce\Bundle\AppBundle\Entity\MailerConfiguration:
+            mapping: "@WellCommerceAppBundle/Resources/config/serialization/MailerConfiguration.yml"
+        WellCommerce\Bundle\AppBundle\Entity\Meta:
+            mapping: "@WellCommerceAppBundle/Resources/config/serialization/Meta.yml"
+        WellCommerce\Bundle\AppBundle\Entity\Price:
+            mapping: "@WellCommerceAppBundle/Resources/config/serialization/Price.yml"

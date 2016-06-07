@@ -22,7 +22,6 @@ knp_doctrine_behaviors:
     translatable:   true
 
 parameters:
-    doctrine_orm_mapping_map: []
     knp.doctrine_behaviors.blameable_subscriber.user_entity: WellCommerce\Bundle\AdminBundle\Entity\User
     knp.doctrine_behaviors.blameable_subscriber.class: WellCommerce\Bundle\DoctrineBundle\EventListener\BlameableSubscriber
 

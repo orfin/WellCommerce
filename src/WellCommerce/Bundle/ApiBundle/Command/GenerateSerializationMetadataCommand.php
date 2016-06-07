@@ -20,6 +20,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Yaml\Yaml;
+use WellCommerce\Bundle\DistributionBundle\Resolver\ConfigurationFileResolverInterface;
 use WellCommerce\Bundle\DoctrineBundle\Helper\Doctrine\DoctrineHelperInterface;
 
 /**
@@ -27,29 +28,46 @@ use WellCommerce\Bundle\DoctrineBundle\Helper\Doctrine\DoctrineHelperInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class GenerateSerializationMetadataCommand extends Command
+final class GenerateSerializationMetadataCommand extends Command
 {
-    protected $hiddenFields = ['createdBy', 'updatedBy', 'deletedBy', 'password', 'salt'];
-    
+    /**
+     * @var array
+     */
+    private $hiddenFields = ['createdAt', 'updatedAt', 'createdBy', 'updatedBy', 'deletedBy', 'password', 'salt'];
+
+    /**
+     * @var ConfigurationFileResolverInterface
+     */
+    private $resolver;
+
     /**
      * @var DoctrineHelperInterface
      */
-    protected $doctrineHelper;
+    private $doctrineHelper;
+    
+    /**
+     * @var array
+     */
+    private $mapping;
     
     /**
      * @var Filesystem
      */
-    protected $filesystem;
+    private $filesystem;
     
     /**
-     * GenerateMetadataCommand constructor.
+     * GenerateSerializationMetadataCommand constructor.
      *
-     * @param DoctrineHelperInterface $doctrineHelper
+     * @param ConfigurationFileResolverInterface $resolver
+     * @param DoctrineHelperInterface            $doctrineHelper
+     * @param array                              $mapping
      */
-    public function __construct(DoctrineHelperInterface $doctrineHelper)
+    public function __construct(ConfigurationFileResolverInterface $resolver, DoctrineHelperInterface $doctrineHelper, array $mapping = [])
     {
         parent::__construct();
+        $this->resolver       = $resolver;
         $this->doctrineHelper = $doctrineHelper;
+        $this->mapping        = $mapping;
         $this->filesystem     = new Filesystem();
     }
     
@@ -71,18 +89,18 @@ class GenerateSerializationMetadataCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $metadataCollection = $this->doctrineHelper->getMetadataFactory()->getAllMetadata();
-        $force              = true === $input->getOption('force');
+        $force = true === $input->getOption('force');
         
-        foreach ($metadataCollection as $entityMetadata) {
-            $this->dumpSerializationFile($entityMetadata, $output, $force);
+        foreach ($this->mapping as $className => $options) {
+            $metadata = $this->doctrineHelper->getClassMetadata($className);
+            $this->dumpSerializationFile($metadata, $options, $output, $force);
         }
     }
     
-    protected function dumpSerializationFile(ClassMetadata $metadata, OutputInterface $output, $force = false)
+    protected function dumpSerializationFile(ClassMetadata $metadata, array $options, OutputInterface $output, $force = false)
     {
-        $targetPath = $this->resolvePath($metadata->getReflectionClass());
-        
+        $targetPath = $this->resolver->resolvePath($options['mapping']);
+
         $config = [
             $metadata->getName() => [
                 'fields'       => $this->prepareMetadataFields($metadata),
@@ -122,7 +140,7 @@ class GenerateSerializationMetadataCommand extends Command
         return $fields;
     }
     
-    protected function prepareMetadataAssociations(ClassMetadata $metadata)
+    private function prepareMetadataAssociations(ClassMetadata $metadata)
     {
         $associations = [];
         foreach ($metadata->getAssociationNames() as $associationName) {
@@ -130,10 +148,5 @@ class GenerateSerializationMetadataCommand extends Command
         }
         
         return $associations;
-    }
-    
-    protected function resolvePath(\ReflectionClass $reflectionClass)
-    {
-        return dirname($reflectionClass->getFileName()) . '/../Resources/config/serialization/' . $reflectionClass->getShortName() . '.yml';
     }
 }

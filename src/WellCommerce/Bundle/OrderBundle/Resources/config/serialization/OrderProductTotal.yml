@@ -1,0 +1,24 @@
+WellCommerce\Bundle\OrderBundle\Entity\OrderProductTotal:
+    fields:
+        quantity:
+            groups:
+                - default
+                - order_product_total
+        weight:
+            groups:
+                - default
+                - order_product_total
+        netPrice:
+            groups:
+                - default
+                - order_product_total
+        grossPrice:
+            groups:
+                - default
+                - order_product_total
+        taxAmount:
+            groups:
+                - default
+                - order_product_total
+    associations: {  }
+    callbacks: {  }

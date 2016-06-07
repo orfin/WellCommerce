@@ -1,0 +1,18 @@
+WellCommerce\Bundle\ClientBundle\Entity\ClientWishlist:
+    fields:
+        id:
+            groups:
+                - default
+                - client_wishlist
+        createdAt:
+            groups: {  }
+        updatedAt:
+            groups: {  }
+    associations:
+        client:
+            groups:
+                - client_wishlist
+        product:
+            groups:
+                - client_wishlist
+    callbacks: {  }

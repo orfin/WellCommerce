@@ -24,11 +24,7 @@ WellCommerce\Bundle\ReviewBundle\Entity\Review:
             groups:
                 - default
                 - review
-        createdAt:
-            groups:
-                - default
-                - review
-        updatedAt:
+        enabled:
             groups:
                 - default
                 - review
@@ -36,4 +32,3 @@ WellCommerce\Bundle\ReviewBundle\Entity\Review:
         product:
             groups:
                 - review
-    callbacks: {  }

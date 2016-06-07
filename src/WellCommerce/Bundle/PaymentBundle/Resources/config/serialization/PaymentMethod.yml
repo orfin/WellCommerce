@@ -4,10 +4,6 @@ WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod:
             groups:
                 - default
                 - payment_method
-        processor:
-            groups:
-                - default
-                - payment_method
         enabled:
             groups:
                 - default
@@ -16,28 +12,38 @@ WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod:
             groups:
                 - default
                 - payment_method
-        createdAt:
+        processor:
             groups:
                 - default
                 - payment_method
-        updatedAt:
-            groups:
-                - default
-                - payment_method
-        createdBy:
-            groups: {  }
-        updatedBy:
-            groups: {  }
-        deletedBy:
-            groups: {  }
-    associations:
         configuration:
             groups:
+                - default
                 - payment_method
-        defaultOrderStatus:
+        createdAt:
+            groups: {  }
+        updatedAt:
+            groups: {  }
+    associations:
+        paymentPendingOrderStatus:
+            groups:
+                - payment_method
+        paymentSuccessOrderStatus:
+            groups:
+                - payment_method
+        paymentFailureOrderStatus:
             groups:
                 - payment_method
         shippingMethods:
+            groups:
+                - payment_method
+        createdBy:
+            groups:
+                - payment_method
+        updatedBy:
+            groups:
+                - payment_method
+        deletedBy:
             groups:
                 - payment_method
         translations:

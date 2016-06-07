@@ -4,22 +4,7 @@ WellCommerce\Bundle\UnitBundle\Entity\Unit:
             groups:
                 - default
                 - unit
-        createdAt:
-            groups:
-                - default
-                - unit
-        updatedAt:
-            groups:
-                - default
-                - unit
-        createdBy:
-            groups: {  }
-        updatedBy:
-            groups: {  }
-        deletedBy:
-            groups: {  }
     associations:
         translations:
             groups:
                 - unit
-    callbacks: {  }

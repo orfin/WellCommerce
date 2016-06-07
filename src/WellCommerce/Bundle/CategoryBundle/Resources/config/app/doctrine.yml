@@ -1,0 +1,23 @@
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
+
+well_commerce_doctrine:
+    configuration:
+        category:
+            manager: WellCommerce\Bundle\CategoryBundle\Manager\CategoryManager
+            factory: WellCommerce\Bundle\CategoryBundle\Factory\CategoryFactory
+            repository: WellCommerce\Bundle\CategoryBundle\Repository\CategoryRepository
+            mapping: "@WellCommerceCategoryBundle/Resources/config/doctrine/Category.orm.yml"
+            entity: WellCommerce\Bundle\CategoryBundle\Entity\Category
+        category_route:
+            mapping: "@WellCommerceCategoryBundle/Resources/config/doctrine/CategoryRoute.orm.yml"
+            entity: WellCommerce\Bundle\CategoryBundle\Entity\CategoryRoute
+        category_translation:
+            manager: false
+            mapping: "@WellCommerceCategoryBundle/Resources/config/doctrine/CategoryTranslation.orm.yml"
+            entity: WellCommerce\Bundle\CategoryBundle\Entity\CategoryTranslation

@@ -12,46 +12,47 @@
 
 namespace WellCommerce\Bundle\ApiBundle\CacheWarmer;
 
-use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\CacheWarmer\CacheWarmer;
 use Symfony\Component\Yaml\Yaml;
 use WellCommerce\Bundle\ApiBundle\Metadata\Loader\SerializationMetadataLoaderInterface;
-use WellCommerce\Bundle\DoctrineBundle\Helper\Doctrine\DoctrineHelperInterface;
+use WellCommerce\Bundle\DistributionBundle\Resolver\ConfigurationFileResolverInterface;
 
 /**
  * Class SerializationCacheWarmer
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class SerializationCacheWarmer extends CacheWarmer
+final class SerializationCacheWarmer extends CacheWarmer
 {
     /**
-     * @var DoctrineHelperInterface
+     * @var ConfigurationFileResolverInterface
      */
-    protected $doctrineHelper;
-    
+    private $resolver;
+
+    /**
+     * @var array
+     */
+    private $mapping;
+
     /**
      * @var Filesystem
      */
-    protected $filesystem;
+    private $filesystem;
     
     /**
      * SerializationCacheWarmer constructor.
      *
-     * @param DoctrineHelperInterface $doctrineHelper
+     * @param ConfigurationFileResolverInterface $resolver
+     * @param array                              $mapping
      */
-    public function __construct(DoctrineHelperInterface $doctrineHelper)
+    public function __construct(ConfigurationFileResolverInterface $resolver, array $mapping)
     {
-        $this->doctrineHelper = $doctrineHelper;
-        $this->filesystem     = new Filesystem();
+        $this->resolver   = $resolver;
+        $this->mapping    = $mapping;
+        $this->filesystem = new Filesystem();
     }
     
-    /**
-     * Warms up the cache.
-     *
-     * @param string $cacheDir The cache directory
-     */
     public function warmUp($cacheDir)
     {
         $configuration = $this->getConfiguration();
@@ -62,52 +63,26 @@ class SerializationCacheWarmer extends CacheWarmer
         }
     }
     
-    /**
-     * @return array
-     */
-    protected function getConfiguration()
+    private function getConfiguration() : array
     {
-        $configuration      = [];
-        $metadataCollection = $this->doctrineHelper->getMetadataFactory()->getAllMetadata();
-        
-        foreach ($metadataCollection as $entityMetadata) {
-            $this->appendConfigurationFromMetadata($entityMetadata, $configuration);
+        $configuration = [];
+
+        foreach ($this->mapping as $className => $options) {
+            $path = $this->resolver->resolvePath($options['mapping']);
+            if ($this->filesystem->exists($path)) {
+                $content       = file_get_contents($path);
+                $configuration = array_replace_recursive($configuration, $this->parseContent($content));
+            }
         }
         
         return $configuration;
     }
-    
-    protected function appendConfigurationFromMetadata(ClassMetadata $metadata, &$configuration)
-    {
-        $serializationFilePath = $this->resolvePath($metadata->getReflectionClass());
-        if ($this->filesystem->exists($serializationFilePath)) {
-            $content       = file_get_contents($serializationFilePath);
-            $configuration = array_replace_recursive($configuration, $this->parseContent($content));
-        }
-    }
-    
-    protected function resolvePath(\ReflectionClass $reflectionClass)
-    {
-        return dirname($reflectionClass->getFileName()) . '/../Resources/config/serialization/' . $reflectionClass->getShortName() . '.yml';
-    }
-    
-    /**
-     * Parses the Yaml contents
-     *
-     * @param string $content
-     *
-     * @return array
-     */
-    private function parseContent($content)
+
+    private function parseContent(string $content) : array
     {
         return Yaml::parse($content);
     }
     
-    /**
-     * Checks whether this warmer is optional or not.
-     *
-     * @return Boolean always true
-     */
     public function isOptional()
     {
         return false;

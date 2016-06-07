@@ -4,25 +4,11 @@ WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatus:
             groups:
                 - default
                 - product_status
-        createdAt:
+        symbol:
             groups:
                 - default
                 - product_status
-        updatedAt:
-            groups:
-                - default
-                - product_status
-        createdBy:
-            groups: {  }
-        updatedBy:
-            groups: {  }
-        deletedBy:
-            groups: {  }
     associations:
-        products:
-            groups:
-                - product_status
         translations:
             groups:
                 - product_status
-    callbacks: {  }

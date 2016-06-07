@@ -1,17 +1,18 @@
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
+
+imports:
+    - { resource: "app/" }
+
 well_commerce_routing:
-    configuration:
-        routing:
-            orm:
-                factory: WellCommerce\Bundle\RoutingBundle\Factory\RouteFactory
-                repository: WellCommerce\Bundle\RoutingBundle\Repository\RouteRepository
-                mapping: "@WellCommerceRoutingBundle/Resources/config/doctrine/Route.orm.yml"
-                entity: WellCommerce\Bundle\RoutingBundle\Entity\Route
     routers:
         router.default:             100
         routing.dynamic_router:     50
-
-parameters:
-    routing_discriminator_map: ~
 
 fos_js_routing:
     router: router.default

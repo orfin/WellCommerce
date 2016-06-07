@@ -8,22 +8,7 @@ WellCommerce\Bundle\TaxBundle\Entity\Tax:
             groups:
                 - default
                 - tax
-        createdAt:
-            groups:
-                - default
-                - tax
-        updatedAt:
-            groups:
-                - default
-                - tax
-        createdBy:
-            groups: {  }
-        updatedBy:
-            groups: {  }
-        deletedBy:
-            groups: {  }
     associations:
         translations:
             groups:
                 - tax
-    callbacks: {  }

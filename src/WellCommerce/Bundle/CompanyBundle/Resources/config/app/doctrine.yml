@@ -1,0 +1,19 @@
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
+
+well_commerce_doctrine:
+    configuration:
+        company:
+            factory: WellCommerce\Bundle\CompanyBundle\Factory\CompanyFactory
+            repository: WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository
+            mapping: "@WellCommerceCompanyBundle/Resources/config/doctrine/Company.orm.yml"
+            entity: WellCommerce\Bundle\CompanyBundle\Entity\Company
+        company_address:
+            factory: WellCommerce\Bundle\CompanyBundle\Factory\CompanyAddressFactory
+            mapping: "@WellCommerceCompanyBundle/Resources/config/doctrine/CompanyAddress.orm.yml"
+            entity: WellCommerce\Bundle\CompanyBundle\Entity\CompanyAddress

@@ -11,7 +11,9 @@
 
 namespace WellCommerce\Bundle\LayeredNavigationBundle\DependencyInjection;
 
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
+use Symfony\Component\Config\Definition\ConfigurationInterface;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\Configuration as BaseConfiguration;
 
 /**
@@ -19,25 +21,34 @@ use WellCommerce\Bundle\CoreBundle\DependencyInjection\Configuration as BaseConf
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Configuration extends BaseConfiguration
+class Configuration implements ConfigurationInterface
 {
-    //@formatter:off
-    protected function addCustomConfigurationNode()
+    public function getConfigTreeBuilder()
     {
-        $builder = new TreeBuilder();
-        $node    =
-            $builder->root('filters')
-                ->useAttributeAsKey('name')
-                ->prototype('array')
-                    ->children()
-                        ->scalarNode('type')->isRequired()->end()
-                        ->scalarNode('condition')->isRequired()->end()
-                        ->booleanNode('enabled')->isRequired()->end()
-                        ->scalarNode('column')->isRequired()->end()
-                    ->end()
-                ->end();
+        $treeBuilder = new TreeBuilder();
+        $rootNode    = $treeBuilder->root('well_commerce_layered_navigation');
+        $this->processConfiguration($rootNode);
 
-        return $node;
+        return $treeBuilder;
+    }
+
+    //@formatter:off
+    protected function processConfiguration(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('filters')
+                    ->useAttributeAsKey('name')
+                    ->prototype('array')
+                        ->children()
+                            ->scalarNode('type')->isRequired()->end()
+                            ->scalarNode('condition')->isRequired()->end()
+                            ->booleanNode('enabled')->isRequired()->end()
+                            ->scalarNode('column')->isRequired()->end()
+                            ->end()
+                    ->end()
+                ->end()
+            ->end();
     }
     //@formatter:on
 }

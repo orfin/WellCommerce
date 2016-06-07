@@ -1,21 +1,13 @@
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
+
 parameters:
     number_formatter_locale: ~
 
-well_commerce_currency:
-    configuration:
-        currency:
-            orm:
-                factory: WellCommerce\Bundle\CurrencyBundle\Factory\CurrencyFactory
-                repository: WellCommerce\Bundle\CurrencyBundle\Repository\CurrencyRepository
-                mapping: "@WellCommerceCurrencyBundle/Resources/config/doctrine/Currency.orm.yml"
-                entity: WellCommerce\Bundle\CurrencyBundle\Entity\Currency
-            api:
-                exposed: true
-                dataset: currency.dataset.admin
-                manager: currency.manager
-        currency_rate:
-            orm:
-                factory: WellCommerce\Bundle\CurrencyBundle\Factory\CurrencyRateFactory
-                repository: WellCommerce\Bundle\CurrencyBundle\Repository\CurrencyRateRepository
-                mapping: "@WellCommerceCurrencyBundle/Resources/config/doctrine/CurrencyRate.orm.yml"
-                entity: WellCommerce\Bundle\CurrencyBundle\Entity\CurrencyRate
+imports:
+    - { resource: "app/" }

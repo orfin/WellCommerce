@@ -8,19 +8,22 @@ WellCommerce\Bundle\CurrencyBundle\Entity\Currency:
             groups:
                 - default
                 - currency
+        enabled:
+            groups:
+                - default
+                - currency
         createdAt:
-            groups:
-                - default
-                - currency
+            groups: {  }
         updatedAt:
-            groups:
-                - default
-                - currency
+            groups: {  }
+    associations:
         createdBy:
-            groups: {  }
+            groups:
+                - currency
         updatedBy:
-            groups: {  }
+            groups:
+                - currency
         deletedBy:
-            groups: {  }
-    associations: {  }
+            groups:
+                - currency
     callbacks: {  }

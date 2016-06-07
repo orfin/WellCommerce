@@ -99,33 +99,3 @@ parameters:
         WellCommerce\Bundle\ShippingBundle\DataFixtures\ORM\LoadShippingMethodData: true
         WellCommerce\Bundle\PaymentBundle\DataFixtures\ORM\LoadPaymentMethodData: true
         WellCommerce\Bundle\PageBundle\DataFixtures\ORM\LoadPageData: true
-
-well_commerce_app:
-    configuration:
-        dimension:
-            orm:
-                manager: false
-                mapping: "@WellCommerceAppBundle/Resources/config/doctrine/Dimension.orm.yml"
-                entity: WellCommerce\Bundle\AppBundle\Entity\Dimension
-        discountable_price:
-            orm:
-                manager: false
-                factory: WellCommerce\Bundle\AppBundle\Factory\DiscountablePriceFactory
-                mapping: "@WellCommerceAppBundle/Resources/config/doctrine/DiscountablePrice.orm.yml"
-                entity: WellCommerce\Bundle\AppBundle\Entity\DiscountablePrice
-        mailer_configuration:
-            orm:
-                manager: false
-                mapping: "@WellCommerceAppBundle/Resources/config/doctrine/MailerConfiguration.orm.yml"
-                entity: WellCommerce\Bundle\AppBundle\Entity\MailerConfiguration
-        meta:
-            orm:
-                manager: false
-                mapping: "@WellCommerceAppBundle/Resources/config/doctrine/Meta.orm.yml"
-                entity: WellCommerce\Bundle\AppBundle\Entity\Meta
-        price:
-            orm:
-                manager: false
-                factory: WellCommerce\Bundle\AppBundle\Factory\PriceFactory
-                mapping: "@WellCommerceAppBundle/Resources/config/doctrine/Price.orm.yml"
-                entity: WellCommerce\Bundle\AppBundle\Entity\Price

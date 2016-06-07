@@ -4,6 +4,14 @@ WellCommerce\Bundle\OrderBundle\Entity\Order:
             groups:
                 - default
                 - order
+        confirmed:
+            groups:
+                - default
+                - order
+        number:
+            groups:
+                - default
+                - order
         sessionId:
             groups:
                 - default
@@ -12,7 +20,19 @@ WellCommerce\Bundle\OrderBundle\Entity\Order:
             groups:
                 - default
                 - order
+        currencyRate:
+            groups:
+                - default
+                - order
         comment:
+            groups:
+                - default
+                - order
+        productTotal:
+            groups:
+                - default
+                - order
+        summary:
             groups:
                 - default
                 - order
@@ -28,31 +48,18 @@ WellCommerce\Bundle\OrderBundle\Entity\Order:
             groups:
                 - default
                 - order
-        orderTotal:
-            groups:
-                - default
-                - order
-        productTotal:
-            groups:
-                - default
-                - order
-        shippingTotal:
-            groups:
-                - default
-                - order
         createdAt:
-            groups:
-                - default
-                - order
+            groups: {  }
         updatedAt:
-            groups:
-                - default
-                - order
+            groups: {  }
     associations:
         products:
             groups:
                 - order
-        totals:
+        orderStatusHistory:
+            groups:
+                - order
+        modifiers:
             groups:
                 - order
         payments:

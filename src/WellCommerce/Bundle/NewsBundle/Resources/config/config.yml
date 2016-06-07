@@ -1,25 +1,10 @@
-well_commerce_news:
-    configuration:
-        news:
-            orm:
-                factory: WellCommerce\Bundle\NewsBundle\Factory\NewsFactory
-                repository: WellCommerce\Bundle\NewsBundle\Repository\NewsRepository
-                mapping: "@WellCommerceNewsBundle/Resources/config/doctrine/News.orm.yml"
-                entity: WellCommerce\Bundle\NewsBundle\Entity\News
-            api:
-                exposed: true
-                dataset: news.dataset.admin
-                manager: news.manager
-        news_translation:
-            orm:
-                manager: false
-                mapping: "@WellCommerceNewsBundle/Resources/config/doctrine/NewsTranslation.orm.yml"
-                entity: WellCommerce\Bundle\NewsBundle\Entity\NewsTranslation
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
 
-well_commerce_locale:
-    copier:
-        entities:
-            WellCommerce\Bundle\NewsBundle\Entity\NewsTranslation:
-                properties:
-                    - topic
-                    - slug
+imports:
+    - { resource: "app/" }

@@ -1,20 +1,10 @@
-well_commerce_layout:
-    configuration:
-        layout_box:
-            orm:
-                factory: WellCommerce\Bundle\LayoutBundle\Factory\LayoutBoxFactory
-                repository: WellCommerce\Bundle\LayoutBundle\Repository\LayoutBoxRepository
-                mapping: "@WellCommerceLayoutBundle/Resources/config/doctrine/LayoutBox.orm.yml"
-                entity: WellCommerce\Bundle\LayoutBundle\Entity\LayoutBox
-        layout_box_translation:
-            orm:
-                manager: false
-                mapping: "@WellCommerceLayoutBundle/Resources/config/doctrine/LayoutBoxTranslation.orm.yml"
-                entity: WellCommerce\Bundle\LayoutBundle\Entity\LayoutBoxTranslation
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
 
-well_commerce_locale:
-    copier:
-        entities:
-            WellCommerce\Bundle\LayoutBundle\Entity\LayoutBoxTranslation:
-                properties:
-                    - name
+imports:
+    - { resource: "app/" }

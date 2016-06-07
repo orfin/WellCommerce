@@ -1,95 +1,10 @@
-well_commerce_product:
-    configuration:
-        product:
-            orm:
-                factory: WellCommerce\Bundle\ProductBundle\Factory\ProductFactory
-                repository: WellCommerce\Bundle\ProductBundle\Repository\ProductRepository
-                mapping: "@WellCommerceProductBundle/Resources/config/doctrine/Product.orm.yml"
-                entity: WellCommerce\Bundle\ProductBundle\Entity\Product
-            api:
-                exposed: true
-                dataset: product.dataset.admin
-                manager: product.manager
-            dynamic_routing:
-                entity: WellCommerce\Bundle\ProductBundle\Entity\Product\Route
-                generator: WellCommerce\Bundle\ProductBundle\Routing\ProductRouteGenerator
-                defaults:
-                    _controller: product.controller.front:indexAction
-        product_distinction:
-            orm:
-                factory: WellCommerce\Bundle\ProductBundle\Factory\Product\DistinctionFactory
-                repository: WellCommerce\Bundle\ProductBundle\Repository\Product\DistinctionRepository
-                mapping: "@WellCommerceProductBundle/Resources/config/doctrine/Product/Distinction.orm.yml"
-                entity: WellCommerce\Bundle\ProductBundle\Entity\Product\Distinction
-        variant:
-            orm:
-                factory: WellCommerce\Bundle\ProductBundle\Factory\VariantFactory
-                repository: WellCommerce\Bundle\ProductBundle\Repository\VariantRepository
-                mapping: "@WellCommerceProductBundle/Resources/config/doctrine/Variant.orm.yml"
-                entity: WellCommerce\Bundle\ProductBundle\Entity\Variant
-        variant_option:
-            orm:
-                factory: WellCommerce\Bundle\ProductBundle\Factory\Variant\OptionFactory
-                repository: WellCommerce\Bundle\ProductBundle\Repository\Variant\OptionRepository
-                mapping: "@WellCommerceProductBundle/Resources/config/doctrine/Variant/Option.orm.yml"
-                entity: WellCommerce\Bundle\ProductBundle\Entity\Variant\Option
-        product_photo:
-            orm:
-                repository: WellCommerce\Bundle\ProductBundle\Repository\Product\PhotoRepository
-                mapping: "@WellCommerceProductBundle/Resources/config/doctrine/Product/Photo.orm.yml"
-                entity: WellCommerce\Bundle\ProductBundle\Entity\Product\Photo
-        product_route:
-            orm:
-                mapping: "@WellCommerceProductBundle/Resources/config/doctrine/Product/Route.orm.yml"
-                entity: WellCommerce\Bundle\ProductBundle\Entity\Product\Route
-        product_translation:
-            orm:
-                manager: false
-                mapping: "@WellCommerceProductBundle/Resources/config/doctrine/ProductTranslation.orm.yml"
-                entity: WellCommerce\Bundle\ProductBundle\Entity\ProductTranslation
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
 
-well_commerce_search:
-    engine:
-        index:
-            types:
-                product:
-                    class: WellCommerce\Bundle\ProductBundle\Search\ProductType
-                    mapping:
-                        sku:
-                            indexable: true
-                            boost: 1
-                            fuzziness: 2
-                            value_expression: resource.getSku()
-                        name:
-                            indexable: true
-                            boost: 1
-                            fuzziness: 3
-                            value_expression: resource.translate(locale).getName()
-                        short_description:
-                            indexable: true
-                            boost: 0.5
-                            fuzziness: 0
-                            value_expression: resource.translate(locale).getShortDescription()
-                        description:
-                            indexable: true
-                            boost: 0.5
-                            fuzziness: 0
-                            value_expression: resource.translate(locale).getDescription()
-                        producer:
-                            indexable: true
-                            boost: 0.5
-                            fuzziness: 2
-                            value_expression: resource.getProducer().translate(locale).getName()
-                        category:
-                            indexable: true
-                            boost: 0.5
-                            fuzziness: 2
-                            value_expression: resource.getCategories().first().translate(locale).getName()
-
-well_commerce_locale:
-    copier:
-        entities:
-            WellCommerce\Bundle\ProductBundle\Entity\ProductTranslation:
-                properties:
-                    - name
-                    - slug
+imports:
+    - { resource: "app/" }

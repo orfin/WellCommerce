@@ -17,13 +17,9 @@ WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCost:
                 - default
                 - shipping_method_cost
         createdAt:
-            groups:
-                - default
-                - shipping_method_cost
+            groups: {  }
         updatedAt:
-            groups:
-                - default
-                - shipping_method_cost
+            groups: {  }
     associations:
         shippingMethod:
             groups:

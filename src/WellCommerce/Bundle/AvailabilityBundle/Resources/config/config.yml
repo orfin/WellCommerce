@@ -1,24 +1,10 @@
-well_commerce_availability:
-    configuration:
-        availability:
-            orm:
-                factory: ~
-                repository: WellCommerce\Bundle\AvailabilityBundle\Repository\AvailabilityRepository
-                mapping: "@WellCommerceAvailabilityBundle/Resources/config/doctrine/Availability.orm.yml"
-                entity: WellCommerce\Bundle\AvailabilityBundle\Entity\Availability
-            api:
-                exposed: true
-                dataset: availability.dataset.admin
-                manager: availability.manager
-        availability_translation:
-            orm:
-                manager: false
-                mapping: "@WellCommerceAvailabilityBundle/Resources/config/doctrine/AvailabilityTranslation.orm.yml"
-                entity: WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityTranslation
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
 
-well_commerce_locale:
-    copier:
-        entities:
-            WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityTranslation:
-                properties:
-                    - name
+imports:
+    - { resource: "app/" }

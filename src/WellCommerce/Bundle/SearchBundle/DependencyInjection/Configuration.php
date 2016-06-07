@@ -11,58 +11,68 @@
 
 namespace WellCommerce\Bundle\SearchBundle\DependencyInjection;
 
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
-use WellCommerce\Bundle\CoreBundle\DependencyInjection\Configuration as BaseConfiguration;
-use WellCommerce\Bundle\SearchBundle\Type\IndexType;
+use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
  * Class Configuration
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Configuration extends BaseConfiguration
+class Configuration implements ConfigurationInterface
 {
-    //@formatter:off
-    protected function addCustomConfigurationNode()
+    public function getConfigTreeBuilder()
     {
-        $builder = new TreeBuilder();
-        $node    =
-            $builder->root('engine')
-                ->children()
-                    ->arrayNode('quick_search')->isRequired()
-                        ->children()
-                            ->scalarNode('limit')->defaultValue(20)->end()
-                            ->scalarNode('order_by')->defaultValue('score')->end()
-                            ->enumNode('order_dir')->values(['asc', 'desc'])->defaultValue('asc')->end()
-                        ->end()
-                    ->end()
-                    ->arrayNode('adapters')->isRequired()
-                        ->useAttributeAsKey('name')
-                        ->prototype('array')
+        $treeBuilder = new TreeBuilder();
+        $rootNode    = $treeBuilder->root('well_commerce_search');
+        $this->processConfiguration($rootNode);
+
+        return $treeBuilder;
+    }
+
+    //@formatter:off
+    protected function processConfiguration(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('engine')
+                    ->children()
+                        ->arrayNode('quick_search')->isRequired()
                             ->children()
-                                ->scalarNode('class')->isRequired()->end()
-                                ->arrayNode('options')
-                                    ->useAttributeAsKey('name')
-                                    ->prototype('scalar')->end()
+                                ->scalarNode('limit')->defaultValue(20)->end()
+                                ->scalarNode('order_by')->defaultValue('score')->end()
+                                ->enumNode('order_dir')->values(['asc', 'desc'])->defaultValue('asc')->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode('adapters')->isRequired()
+                            ->useAttributeAsKey('name')
+                            ->prototype('array')
+                                ->children()
+                                    ->scalarNode('class')->isRequired()->end()
+                                    ->arrayNode('options')
+                                        ->useAttributeAsKey('name')
+                                        ->prototype('scalar')->end()
+                                    ->end()
                                 ->end()
                             ->end()
                         ->end()
-                    ->end()
-                    ->arrayNode('index')->isRequired()
-                        ->children()
-                            ->arrayNode('types')->isRequired()
-                                ->useAttributeAsKey('name')
-                                ->prototype('array')
-                                    ->children()
-                                        ->scalarNode('class')->isRequired()->end()
-                                        ->arrayNode('mapping')
-                                            ->useAttributeAsKey('name')
-                                            ->prototype('array')
-                                                ->children()
-                                                    ->booleanNode('indexable')->defaultValue(true)->isRequired()->end()
-                                                    ->floatNode('boost')->defaultValue(1)->isRequired()->end()
-                                                    ->floatNode('fuzziness')->defaultValue(1)->isRequired()->end()
-                                                    ->scalarNode('value_expression')->isRequired()->end()
+                        ->arrayNode('index')->isRequired()
+                            ->children()
+                                ->arrayNode('types')->isRequired()
+                                    ->useAttributeAsKey('name')
+                                    ->prototype('array')
+                                        ->children()
+                                            ->scalarNode('class')->isRequired()->end()
+                                            ->arrayNode('mapping')
+                                                ->useAttributeAsKey('name')
+                                                ->prototype('array')
+                                                    ->children()
+                                                        ->booleanNode('indexable')->defaultValue(true)->isRequired()->end()
+                                                        ->floatNode('boost')->defaultValue(1)->isRequired()->end()
+                                                        ->floatNode('fuzziness')->defaultValue(1)->isRequired()->end()
+                                                        ->scalarNode('value_expression')->isRequired()->end()
+                                                    ->end()
                                                 ->end()
                                             ->end()
                                         ->end()
@@ -71,9 +81,8 @@ class Configuration extends BaseConfiguration
                             ->end()
                         ->end()
                     ->end()
-                ->end();
-
-        return $node;
+                ->end()
+            ->end();
     }
     //@formatter:on
 }

@@ -1,0 +1,17 @@
+WellCommerce\Bundle\ProductBundle\Entity\Variant\Option:
+    fields:
+        id:
+            groups:
+                - default
+                - option
+    associations:
+        variant:
+            groups:
+                - option
+        attribute:
+            groups:
+                - option
+        attributeValue:
+            groups:
+                - option
+    callbacks: {  }

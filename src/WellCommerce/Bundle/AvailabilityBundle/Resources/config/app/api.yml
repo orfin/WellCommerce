@@ -1,0 +1,18 @@
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
+
+well_commerce_api:
+    request_handler:
+        availability:
+            manager: availability.manager
+    serialization:
+        WellCommerce\Bundle\AvailabilityBundle\Entity\Availability:
+            mapping: "@WellCommerceAvailabilityBundle/Resources/config/serialization/Availability.yml"
+        WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityTranslation:
+            mapping: "@WellCommerceAvailabilityBundle/Resources/config/serialization/AvailabilityTranslation.yml"
+

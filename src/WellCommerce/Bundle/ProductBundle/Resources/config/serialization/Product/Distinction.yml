@@ -1,0 +1,26 @@
+WellCommerce\Bundle\ProductBundle\Entity\Product\Distinction:
+    fields:
+        id:
+            groups:
+                - default
+                - distinction
+        validFrom:
+            groups:
+                - default
+                - distinction
+        validTo:
+            groups:
+                - default
+                - distinction
+        createdAt:
+            groups: {  }
+        updatedAt:
+            groups: {  }
+    associations:
+        product:
+            groups:
+                - distinction
+        status:
+            groups:
+                - distinction
+    callbacks: {  }

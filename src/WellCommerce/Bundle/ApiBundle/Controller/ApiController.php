@@ -15,32 +15,16 @@ namespace WellCommerce\Bundle\ApiBundle\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use WellCommerce\Bundle\ApiBundle\Request\RequestHandlerCollection;
-use WellCommerce\Bundle\ApiBundle\Request\RequestHandlerInterface;
-use WellCommerce\Bundle\CoreBundle\Controller\AbstractController;
+use WellCommerce\Bundle\ApiBundle\Handler\RequestHandlerInterface;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
 
 /**
  * Class ApiController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ApiController extends AbstractController
+final class ApiController extends AbstractContainerAware
 {
-    /**
-     * @var RequestHandlerCollection
-     */
-    protected $requestHandlerCollection;
-    
-    /**
-     * ApiController constructor.
-     *
-     * @param RequestHandlerCollection $requestHandlerCollection
-     */
-    public function __construct(RequestHandlerCollection $requestHandlerCollection)
-    {
-        $this->requestHandlerCollection = $requestHandlerCollection;
-    }
-    
     public function indexAction() : Response
     {
         return new Response('documentation');
@@ -101,7 +85,7 @@ class ApiController extends AbstractController
         return $response;
     }
     
-    protected function jsonErrorResponse(\Exception $e) : JsonResponse
+    private function jsonErrorResponse(\Exception $e) : JsonResponse
     {
         return new JsonResponse(
             ['message' => $e->getMessage()],
@@ -109,8 +93,8 @@ class ApiController extends AbstractController
         );
     }
     
-    protected function getRequestHandler(string $resourceType) : RequestHandlerInterface
+    private function getRequestHandler(string $resourceType) : RequestHandlerInterface
     {
-        return $this->requestHandlerCollection->get($resourceType);
+        return $this->get('api.request_handler.collection')->get($resourceType);
     }
 }

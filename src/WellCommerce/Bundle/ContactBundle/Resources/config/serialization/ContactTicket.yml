@@ -1,0 +1,24 @@
+WellCommerce\Bundle\ContactBundle\Entity\ContactTicket:
+    fields:
+        id:
+            groups:
+                - default
+                - contact_ticket
+        email:
+            groups:
+                - default
+                - contact_ticket
+        subject:
+            groups:
+                - default
+                - contact_ticket
+        content:
+            groups:
+                - default
+                - contact_ticket
+        createdAt:
+            groups: {  }
+        updatedAt:
+            groups: {  }
+    associations: {  }
+    callbacks: {  }

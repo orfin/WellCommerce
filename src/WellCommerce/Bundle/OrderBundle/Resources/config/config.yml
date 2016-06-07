@@ -1,3 +1,10 @@
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
 
 parameters:
     order_visitor_hierarchy:
@@ -9,91 +16,6 @@ parameters:
         summary: 500
         order_confirmation: 600
 
-doctrine:
-    orm:
-        resolve_target_entities:
-            WellCommerce\Bundle\OrderBundle\Entity\OrderInterface: WellCommerce\Bundle\OrderBundle\Entity\Order
-            WellCommerce\Bundle\OrderBundle\Entity\OrderSummaryInterface: WellCommerce\Bundle\OrderBundle\Entity\OrderSummary
-            WellCommerce\Bundle\OrderBundle\Entity\OrderProductTotalInterface: WellCommerce\Bundle\OrderBundle\Entity\OrderProductTotal
+imports:
+    - { resource: "app/" }
 
-well_commerce_order:
-    configuration:
-        order:
-            orm:
-                manager: WellCommerce\Bundle\OrderBundle\Manager\OrderManager
-                factory: WellCommerce\Bundle\OrderBundle\Factory\OrderFactory
-                repository: WellCommerce\Bundle\OrderBundle\Repository\OrderRepository
-                mapping: "@WellCommerceOrderBundle/Resources/config/doctrine/Order.orm.yml"
-                entity: WellCommerce\Bundle\OrderBundle\Entity\Order
-            api:
-                exposed: true
-                dataset: order.dataset.admin
-                manager: order.manager
-        order_modifier:
-            orm:
-                factory: WellCommerce\Bundle\OrderBundle\Factory\OrderModifierFactory
-                mapping: "@WellCommerceOrderBundle/Resources/config/doctrine/OrderModifier.orm.yml"
-                entity: WellCommerce\Bundle\OrderBundle\Entity\OrderModifier
-        order_summary:
-            orm:
-                factory: WellCommerce\Bundle\OrderBundle\Factory\OrderSummaryFactory
-                mapping: "@WellCommerceOrderBundle/Resources/config/doctrine/OrderSummary.orm.yml"
-                entity: WellCommerce\Bundle\OrderBundle\Entity\OrderSummary
-        order_product:
-            orm:
-                manager: WellCommerce\Bundle\OrderBundle\Manager\OrderProductManager
-                factory: WellCommerce\Bundle\OrderBundle\Factory\OrderProductFactory
-                repository: WellCommerce\Bundle\OrderBundle\Repository\OrderProductRepository
-                mapping: "@WellCommerceOrderBundle/Resources/config/doctrine/OrderProduct.orm.yml"
-                entity: WellCommerce\Bundle\OrderBundle\Entity\OrderProduct
-        order_product_total:
-            orm:
-                factory: WellCommerce\Bundle\OrderBundle\Factory\OrderProductTotalFactory
-                mapping: "@WellCommerceOrderBundle/Resources/config/doctrine/OrderProductTotal.orm.yml"
-                entity: WellCommerce\Bundle\OrderBundle\Entity\OrderProductTotal
-        order_status:
-            orm:
-                factory: WellCommerce\Bundle\OrderBundle\Factory\OrderStatusFactory
-                repository: WellCommerce\Bundle\OrderBundle\Repository\OrderStatusRepository
-                mapping: "@WellCommerceOrderBundle/Resources/config/doctrine/OrderStatus.orm.yml"
-                entity: WellCommerce\Bundle\OrderBundle\Entity\OrderStatus
-            api:
-                exposed: true
-                dataset: order_status.dataset.admin
-                manager: order_status.manager
-        order_status_history:
-            orm:
-                factory: WellCommerce\Bundle\OrderBundle\Factory\OrderStatusHistoryFactory
-                repository: WellCommerce\Bundle\OrderBundle\Repository\OrderStatusHistoryRepository
-                mapping: "@WellCommerceOrderBundle/Resources/config/doctrine/OrderStatusHistory.orm.yml"
-                entity: WellCommerce\Bundle\OrderBundle\Entity\OrderStatusHistory
-        order_status_translation:
-            orm:
-                manager: false
-                mapping: "@WellCommerceOrderBundle/Resources/config/doctrine/OrderStatusTranslation.orm.yml"
-                entity: WellCommerce\Bundle\OrderBundle\Entity\OrderStatusTranslation
-        order_status_group:
-            orm:
-                factory: WellCommerce\Bundle\OrderBundle\Factory\OrderStatusGroupFactory
-                repository: WellCommerce\Bundle\OrderBundle\Repository\OrderStatusGroupRepository
-                mapping: "@WellCommerceOrderBundle/Resources/config/doctrine/OrderStatusGroup.orm.yml"
-                entity: WellCommerce\Bundle\OrderBundle\Entity\OrderStatusGroup
-            api:
-                exposed: true
-                dataset: order_status_group.dataset.admin
-                manager: order_status_group.manager
-        order_status_group_translation:
-            orm:
-                manager: false
-                mapping: "@WellCommerceOrderBundle/Resources/config/doctrine/OrderStatusGroupTranslation.orm.yml"
-                entity: WellCommerce\Bundle\OrderBundle\Entity\OrderStatusGroupTranslation
-
-well_commerce_locale:
-    copier:
-        entities:
-            WellCommerce\Bundle\OrderBundle\Entity\OrderStatusTranslation:
-                properties:
-                    - name
-            WellCommerce\Bundle\OrderBundle\Entity\OrderStatusGroupTranslation:
-                properties:
-                    - name

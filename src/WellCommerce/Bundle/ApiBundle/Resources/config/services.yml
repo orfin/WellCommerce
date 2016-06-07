@@ -3,6 +3,7 @@ services:
     api.security.token_authenticator:
         class: WellCommerce\Bundle\ApiBundle\Security\ApiTokenAuthenticator
         arguments: ['@user.repository']
+
     api.subscriber:
         class: WellCommerce\Bundle\ApiBundle\EventListener\ApiSubscriber
         tags:
@@ -11,10 +12,10 @@ services:
             - [setContainer, ['@service_container']]
 
     api.request_handler.collection:
-        class: WellCommerce\Bundle\ApiBundle\Request\RequestHandlerCollection
+        class: WellCommerce\Bundle\ApiBundle\Handler\RequestHandlerCollection
+
     api.controller.front:
         class: WellCommerce\Bundle\ApiBundle\Controller\ApiController
-        arguments: ['@api.request_handler.collection']
         calls:
             - [setContainer, ['@service_container']]
 
@@ -24,23 +25,27 @@ services:
         tags:
             - { name: serializer.normalizer }
         arguments: ['@doctrine.helper', '@api.serialization.metadata_loader']
+
     api.serializer.denormalizer:
         class: WellCommerce\Bundle\ApiBundle\Serializer\EntityDenormalizer
         public: false
         tags:
             - { name: serializer.normalizer }
         arguments: ['@doctrine.helper', '@api.serialization.metadata_loader']
+
     api.serialization.cache_warmer:
         class: WellCommerce\Bundle\ApiBundle\CacheWarmer\SerializationCacheWarmer
         public: false
         tags:
             - { name: kernel.cache_warmer }
-        arguments: ['@doctrine.helper']
+        arguments: ['@distribution.configuration_file_resolver', '%api.serialization_mapping_map%']
+
     api.generate_serialization_metadata.command:
         class: WellCommerce\Bundle\ApiBundle\Command\GenerateSerializationMetadataCommand
         tags:
             - { name: console.command }
-        arguments: ['@doctrine.helper']
+        arguments: ['@distribution.configuration_file_resolver', '@doctrine.helper', '%api.serialization_mapping_map%']
+
     api.serialization.metadata_loader:
         class: WellCommerce\Bundle\ApiBundle\Metadata\Loader\SerializationMetadataLoader
         arguments: ['@kernel']

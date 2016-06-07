@@ -1,0 +1,19 @@
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
+
+well_commerce_api:
+    request_handler:
+        page:
+            manager: page.manager
+    serialization:
+        WellCommerce\Bundle\PageBundle\Entity\Page:
+            mapping: "@WellCommercePageBundle/Resources/config/serialization/Page.yml"
+        WellCommerce\Bundle\PageBundle\Entity\PageRoute:
+            mapping: "@WellCommercePageBundle/Resources/config/serialization/PageRoute.yml"
+        WellCommerce\Bundle\PageBundle\Entity\PageTranslation:
+            mapping: "@WellCommercePageBundle/Resources/config/serialization/PageTranslation.yml"

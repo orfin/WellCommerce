@@ -8,8 +8,6 @@ WellCommerce\Bundle\ProductBundle\Entity\Product:
             groups:
                 - default
                 - product
-                - order
-                - order_product
         stock:
             groups:
                 - default
@@ -46,28 +44,14 @@ WellCommerce\Bundle\ProductBundle\Entity\Product:
             groups:
                 - default
                 - product
-        createdAt:
-            groups:
-                - default
-                - product
-        updatedAt:
-            groups:
-                - default
-                - product
-        createdBy:
-            groups: {  }
-        updatedBy:
-            groups: {  }
-        deletedBy:
-            groups: {  }
     associations:
         productPhotos:
             groups:
                 - product
-        attributes:
+        variants:
             groups:
                 - product
-        reviews:
+        distinctions:
             groups:
                 - product
         producer:
@@ -94,13 +78,10 @@ WellCommerce\Bundle\ProductBundle\Entity\Product:
         categories:
             groups:
                 - product
-        statuses:
+        translations:
             groups:
                 - product
         shops:
-            groups:
-                - product
-        translations:
             groups:
                 - product
     callbacks: {  }

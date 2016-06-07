@@ -1,8 +1,10 @@
-well_commerce_distribution:
-    configuration:
-        package:
-            orm:
-                factory: WellCommerce\Bundle\DistributionBundle\Factory\PackageFactory
-                repository: WellCommerce\Bundle\DistributionBundle\Repository\PackageRepository
-                mapping: "@WellCommerceDistributionBundle/Resources/config/doctrine/Package.orm.yml"
-                entity: WellCommerce\Bundle\DistributionBundle\Entity\Package
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
+
+imports:
+    - { resource: "app/" }

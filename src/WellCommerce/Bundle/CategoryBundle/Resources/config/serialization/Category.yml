@@ -8,38 +8,25 @@ WellCommerce\Bundle\CategoryBundle\Entity\Category:
             groups:
                 - default
                 - category
+        productsCount:
+            groups:
+                - default
+                - category
+        childrenCount:
+            groups:
+                - default
+                - category
         enabled:
             groups:
                 - default
                 - category
-        createdAt:
-            groups:
-                - default
-                - category
-        updatedAt:
-            groups:
-                - default
-                - category
-        createdBy:
-            groups: {  }
-        updatedBy:
-            groups: {  }
-        deletedBy:
-            groups: {  }
     associations:
-        children:
-            groups:
-                - category
         parent:
-            groups:
-                - category
-        products:
-            groups:
-                - category
-        shops:
             groups:
                 - category
         translations:
             groups:
                 - category
-    callbacks: {  }
+        shops:
+            groups:
+                - category

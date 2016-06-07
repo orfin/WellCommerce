@@ -1,0 +1,14 @@
+
+well_commerce_locale:
+    copier:
+        entities:
+            WellCommerce\Bundle\AttributeBundle\Entity\AttributeTranslation:
+                properties:
+                    - name
+                    - shortDescription
+            WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroupTranslation:
+                properties:
+                    - name
+            WellCommerce\Bundle\AttributeBundle\Entity\AttributeValueTranslation:
+                properties:
+                    - name

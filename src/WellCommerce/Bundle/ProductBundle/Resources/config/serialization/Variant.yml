@@ -33,14 +33,13 @@ WellCommerce\Bundle\ProductBundle\Entity\Variant:
                 - default
                 - variant
         createdAt:
-            groups:
-                - default
-                - variant
+            groups: {  }
         updatedAt:
-            groups:
-                - default
-                - variant
+            groups: {  }
     associations:
+        options:
+            groups:
+                - variant
         product:
             groups:
                 - variant

@@ -70,6 +70,10 @@ services:
         public: false
         arguments: ['@kernel']
 
+    distribution.configuration_file_resolver:
+        class: WellCommerce\Bundle\DistributionBundle\Resolver\ConfigurationFileResolver
+        arguments: ['@kernel']
+
     distribution.bundle.cache_warmer:
         class: WellCommerce\Bundle\DistributionBundle\CacheWarmer\BundleCacheWarmer
         public: false

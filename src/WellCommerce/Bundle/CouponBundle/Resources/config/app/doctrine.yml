@@ -1,0 +1,24 @@
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
+
+doctrine:
+    orm:
+        resolve_target_entities:
+            WellCommerce\Bundle\CouponBundle\Entity\CouponInterface: WellCommerce\Bundle\CouponBundle\Entity\Coupon
+
+well_commerce_doctrine:
+    configuration:
+        coupon:
+            factory: WellCommerce\Bundle\CouponBundle\Factory\CouponFactory
+            repository: WellCommerce\Bundle\CouponBundle\Repository\CouponRepository
+            mapping: "@WellCommerceCouponBundle/Resources/config/doctrine/Coupon.orm.yml"
+            entity: WellCommerce\Bundle\CouponBundle\Entity\Coupon
+        coupon_translation:
+            manager: false
+            mapping: "@WellCommerceCouponBundle/Resources/config/doctrine/CouponTranslation.orm.yml"
+            entity: WellCommerce\Bundle\CouponBundle\Entity\CouponTranslation

@@ -6,43 +6,23 @@ WellCommerce\Bundle\ShopBundle\Entity\Shop:
                 - shop
         name:
             groups:
-                - default
                 - shop
         url:
             groups:
-                - default
                 - shop
         defaultCountry:
             groups:
-                - default
                 - shop
         defaultCurrency:
             groups:
-                - default
                 - shop
-        mailerConfiguration:
-            groups:
-                - default
-                - shop
-        createdAt:
-            groups:
-                - default
-                - shop
-        updatedAt:
-            groups:
-                - default
-                - shop
-        createdBy:
-            groups: {  }
-        updatedBy:
-            groups: {  }
-        deletedBy:
-            groups: {  }
     associations:
         company:
+            groups:
+                - shop
+        clientGroup:
             groups:
                 - shop
         theme:
             groups:
                 - shop
-    callbacks: {  }

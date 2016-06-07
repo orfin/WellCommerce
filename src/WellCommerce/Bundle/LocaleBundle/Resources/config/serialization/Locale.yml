@@ -8,22 +8,25 @@ WellCommerce\Bundle\LocaleBundle\Entity\Locale:
             groups:
                 - default
                 - locale
+        enabled:
+            groups:
+                - default
+                - locale
         createdAt:
-            groups:
-                - default
-                - locale
+            groups: {  }
         updatedAt:
-            groups:
-                - default
-                - locale
-        createdBy:
-            groups: {  }
-        updatedBy:
-            groups: {  }
-        deletedBy:
             groups: {  }
     associations:
         currency:
+            groups:
+                - locale
+        createdBy:
+            groups:
+                - locale
+        updatedBy:
+            groups:
+                - locale
+        deletedBy:
             groups:
                 - locale
     callbacks: {  }

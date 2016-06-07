@@ -1,0 +1,19 @@
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
+
+well_commerce_api:
+    request_handler:
+        product_status:
+            manager: product_status.manager
+    serialization:
+        WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatus:
+            mapping: "@WellCommerceProductStatusBundle/Resources/config/serialization/ProductStatus.yml"
+        WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusRoute:
+            mapping: "@WellCommerceProductStatusBundle/Resources/config/serialization/ProductStatusRoute.yml"
+        WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusTranslation:
+            mapping: "@WellCommerceProductStatusBundle/Resources/config/serialization/ProductStatusTranslation.yml"

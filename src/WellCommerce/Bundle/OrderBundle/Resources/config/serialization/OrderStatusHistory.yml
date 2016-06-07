@@ -1,0 +1,35 @@
+WellCommerce\Bundle\OrderBundle\Entity\OrderStatusHistory:
+    fields:
+        id:
+            groups:
+                - default
+                - order_status_history
+        notify:
+            groups:
+                - default
+                - order_status_history
+        comment:
+            groups:
+                - default
+                - order_status_history
+        createdAt:
+            groups: {  }
+        updatedAt:
+            groups: {  }
+    associations:
+        order:
+            groups:
+                - order_status_history
+        orderStatus:
+            groups:
+                - order_status_history
+        createdBy:
+            groups:
+                - order_status_history
+        updatedBy:
+            groups:
+                - order_status_history
+        deletedBy:
+            groups:
+                - order_status_history
+    callbacks: {  }

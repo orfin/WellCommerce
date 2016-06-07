@@ -9,21 +9,20 @@ WellCommerce\Bundle\OrderBundle\Entity\OrderStatus:
                 - default
                 - order_status
         createdAt:
-            groups:
-                - default
-                - order_status
+            groups: {  }
         updatedAt:
-            groups:
-                - default
-                - order_status
-        createdBy:
-            groups: {  }
-        updatedBy:
-            groups: {  }
-        deletedBy:
             groups: {  }
     associations:
         orderStatusGroup:
+            groups:
+                - order_status
+        createdBy:
+            groups:
+                - order_status
+        updatedBy:
+            groups:
+                - order_status
+        deletedBy:
             groups:
                 - order_status
         translations:

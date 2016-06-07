@@ -1,0 +1,27 @@
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
+
+doctrine:
+    orm:
+        resolve_target_entities:
+            WellCommerce\Bundle\ProducerBundle\Entity\ProducerInterface: WellCommerce\Bundle\ProducerBundle\Entity\Producer
+
+well_commerce_doctrine:
+    configuration:
+        producer:
+            factory: WellCommerce\Bundle\ProducerBundle\Factory\ProducerFactory
+            repository: WellCommerce\Bundle\ProducerBundle\Repository\ProducerRepository
+            mapping: "@WellCommerceProducerBundle/Resources/config/doctrine/Producer.orm.yml"
+            entity: WellCommerce\Bundle\ProducerBundle\Entity\Producer
+        producer_route:
+            mapping: "@WellCommerceProducerBundle/Resources/config/doctrine/ProducerRoute.orm.yml"
+            entity: WellCommerce\Bundle\ProducerBundle\Entity\ProducerRoute
+        producer_translation:
+            manager: false
+            mapping: "@WellCommerceProducerBundle/Resources/config/doctrine/ProducerTranslation.orm.yml"
+            entity: WellCommerce\Bundle\ProducerBundle\Entity\ProducerTranslation

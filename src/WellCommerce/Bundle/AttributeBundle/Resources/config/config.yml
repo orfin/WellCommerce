@@ -1,49 +1,10 @@
-well_commerce_attribute:
-    configuration:
-        attribute:
-            orm:
-                factory: WellCommerce\Bundle\AttributeBundle\Factory\AttributeFactory
-                repository: WellCommerce\Bundle\AttributeBundle\Repository\AttributeRepository
-                mapping: "@WellCommerceAttributeBundle/Resources/config/doctrine/Attribute.orm.yml"
-                entity: WellCommerce\Bundle\AttributeBundle\Entity\Attribute
-        attribute_translation:
-            orm:
-                manager: false
-                mapping: "@WellCommerceAttributeBundle/Resources/config/doctrine/AttributeTranslation.orm.yml"
-                entity: WellCommerce\Bundle\AttributeBundle\Entity\AttributeTranslation
-        attribute_group:
-            orm:
-                factory: WellCommerce\Bundle\AttributeBundle\Factory\AttributeGroupFactory
-                repository: WellCommerce\Bundle\AttributeBundle\Repository\AttributeGroupRepository
-                mapping: "@WellCommerceAttributeBundle/Resources/config/doctrine/AttributeGroup.orm.yml"
-                entity: WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroup
-        attribute_group_translation:
-            orm:
-                manager: false
-                mapping: "@WellCommerceAttributeBundle/Resources/config/doctrine/AttributeGroupTranslation.orm.yml"
-                entity: WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroupTranslation
-        attribute_value:
-            orm:
-                factory: WellCommerce\Bundle\AttributeBundle\Factory\AttributeValueFactory
-                repository: WellCommerce\Bundle\AttributeBundle\Repository\AttributeValueRepository
-                mapping: "@WellCommerceAttributeBundle/Resources/config/doctrine/AttributeValue.orm.yml"
-                entity: WellCommerce\Bundle\AttributeBundle\Entity\AttributeValue
-        attribute_value_translation:
-            orm:
-                manager: false
-                mapping: "@WellCommerceAttributeBundle/Resources/config/doctrine/AttributeValueTranslation.orm.yml"
-                entity: WellCommerce\Bundle\AttributeBundle\Entity\AttributeValueTranslation
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
 
-well_commerce_locale:
-    copier:
-        entities:
-            WellCommerce\Bundle\AttributeBundle\Entity\AttributeTranslation:
-                properties:
-                    - name
-                    - shortDescription
-            WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroupTranslation:
-                properties:
-                    - name
-            WellCommerce\Bundle\AttributeBundle\Entity\AttributeValueTranslation:
-                properties:
-                    - name
+imports:
+    - { resource: "app/" }

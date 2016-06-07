@@ -1,0 +1,31 @@
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
+
+well_commerce_api:
+    request_handler:
+        client:
+            manager: client.manager
+        client_group:
+            manager: client_group.manager
+    serialization:
+        WellCommerce\Bundle\ClientBundle\Entity\Client:
+            mapping: "@WellCommerceClientBundle/Resources/config/serialization/Client.yml"
+        WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddress:
+            mapping: "@WellCommerceClientBundle/Resources/config/serialization/ClientBillingAddress.yml"
+        WellCommerce\Bundle\ClientBundle\Entity\ClientDetails:
+            mapping: "@WellCommerceClientBundle/Resources/config/serialization/ClientDetails.yml"
+        WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetails:
+            mapping: "@WellCommerceClientBundle/Resources/config/serialization/ClientContactDetails.yml"
+        WellCommerce\Bundle\ClientBundle\Entity\ClientGroup:
+            mapping: "@WellCommerceClientBundle/Resources/config/serialization/ClientGroup.yml"
+        WellCommerce\Bundle\ClientBundle\Entity\ClientGroupTranslation:
+            mapping: "@WellCommerceClientBundle/Resources/config/serialization/ClientGroupTranslation.yml"
+        WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddress:
+            mapping: "@WellCommerceClientBundle/Resources/config/serialization/ClientShippingAddress.yml"
+        WellCommerce\Bundle\ClientBundle\Entity\ClientWishlist:
+            mapping: "@WellCommerceClientBundle/Resources/config/serialization/ClientWishlist.yml"

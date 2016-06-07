@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\ApiBundle\Serializer;
 
+use Doctrine\Common\Util\Debug;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use WellCommerce\Bundle\ApiBundle\Metadata\Collection\AssociationMetadataCollection;
 use WellCommerce\Bundle\ApiBundle\Metadata\Collection\FieldMetadataCollection;
@@ -185,7 +186,7 @@ class EntityNormalizer extends AbstractSerializer implements NormalizerInterface
         if (!is_object($data)) {
             return false;
         }
-        
-        return $this->doctrineHelper->hasClassMetadataForEntity($data);
+
+        return $this->hasSerializationMetadata($data);
     }
 }

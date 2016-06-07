@@ -114,7 +114,14 @@ abstract class AbstractSerializer implements SerializerAwareInterface
         
         return $this->serializationMetadataCollection->get($className);
     }
-    
+
+    protected function hasSerializationMetadata($entity)
+    {
+        $className = $this->getRealClass($entity);
+
+        return $this->serializationMetadataCollection->has($className);
+    }
+
     /**
      * Returns the metadata for entity
      *

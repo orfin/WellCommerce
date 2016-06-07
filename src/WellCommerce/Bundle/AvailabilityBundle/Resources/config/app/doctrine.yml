@@ -1,0 +1,12 @@
+
+well_commerce_doctrine:
+    configuration:
+        availability:
+            factory: ~
+            repository: WellCommerce\Bundle\AvailabilityBundle\Repository\AvailabilityRepository
+            mapping: "@WellCommerceAvailabilityBundle/Resources/config/doctrine/Availability.orm.yml"
+            entity: WellCommerce\Bundle\AvailabilityBundle\Entity\Availability
+        availability_translation:
+            manager: false
+            mapping: "@WellCommerceAvailabilityBundle/Resources/config/doctrine/AvailabilityTranslation.orm.yml"
+            entity: WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityTranslation

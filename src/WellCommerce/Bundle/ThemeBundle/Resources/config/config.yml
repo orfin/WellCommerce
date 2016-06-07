@@ -1,17 +1,10 @@
-well_commerce_theme:
-    configuration:
-        theme:
-            orm:
-                factory: WellCommerce\Bundle\ThemeBundle\Factory\ThemeFactory
-                repository: WellCommerce\Bundle\ThemeBundle\Repository\ThemeRepository
-                mapping: "@WellCommerceThemeBundle/Resources/config/doctrine/Theme.orm.yml"
-                entity: WellCommerce\Bundle\ThemeBundle\Entity\Theme
-        theme_css:
-            orm:
-                mapping: "@WellCommerceThemeBundle/Resources/config/doctrine/ThemeCss.orm.yml"
-                entity: WellCommerce\Bundle\ThemeBundle\Entity\ThemeCss
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
 
-doctrine:
-    orm:
-        resolve_target_entities:
-            WellCommerce\Bundle\ThemeBundle\Entity\ThemeInterface: WellCommerce\Bundle\ThemeBundle\Entity\Theme
+imports:
+    - { resource: "app/" }

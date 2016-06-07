@@ -17,18 +17,17 @@ WellCommerce\Bundle\CurrencyBundle\Entity\CurrencyRate:
                 - default
                 - currency_rate
         createdAt:
-            groups:
-                - default
-                - currency_rate
+            groups: {  }
         updatedAt:
-            groups:
-                - default
-                - currency_rate
+            groups: {  }
+    associations:
         createdBy:
-            groups: {  }
+            groups:
+                - currency_rate
         updatedBy:
-            groups: {  }
+            groups:
+                - currency_rate
         deletedBy:
-            groups: {  }
-    associations: {  }
+            groups:
+                - currency_rate
     callbacks: {  }

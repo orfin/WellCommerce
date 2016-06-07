@@ -1,0 +1,37 @@
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
+
+well_commerce_api:
+    request_handler:
+        order:
+            manager: order.manager
+        order_status:
+            manager: order_status.manager
+        order_status_group:
+            manager: order_status_group.manager
+    serialization:
+        WellCommerce\Bundle\OrderBundle\Entity\Order:
+            mapping: "@WellCommerceOrderBundle/Resources/config/serialization/Order.yml"
+        WellCommerce\Bundle\OrderBundle\Entity\OrderModifier:
+            mapping: "@WellCommerceOrderBundle/Resources/config/serialization/OrderModifier.yml"
+        WellCommerce\Bundle\OrderBundle\Entity\OrderSummary:
+            mapping: "@WellCommerceOrderBundle/Resources/config/serialization/OrderSummary.yml"
+        WellCommerce\Bundle\OrderBundle\Entity\OrderProduct:
+            mapping: "@WellCommerceOrderBundle/Resources/config/serialization/OrderProduct.yml"
+        WellCommerce\Bundle\OrderBundle\Entity\OrderProductTotal:
+            mapping: "@WellCommerceOrderBundle/Resources/config/serialization/OrderProductTotal.yml"
+        WellCommerce\Bundle\OrderBundle\Entity\OrderStatus:
+            mapping: "@WellCommerceOrderBundle/Resources/config/serialization/OrderStatus.yml"
+        WellCommerce\Bundle\OrderBundle\Entity\OrderStatusHistory:
+            mapping: "@WellCommerceOrderBundle/Resources/config/serialization/OrderStatusHistory.yml"
+        WellCommerce\Bundle\OrderBundle\Entity\OrderStatusTranslation:
+            mapping: "@WellCommerceOrderBundle/Resources/config/serialization/OrderStatusTranslation.yml"
+        WellCommerce\Bundle\OrderBundle\Entity\OrderStatusGroup:
+            mapping: "@WellCommerceOrderBundle/Resources/config/serialization/OrderStatusGroup.yml"
+        WellCommerce\Bundle\OrderBundle\Entity\OrderStatusGroupTranslation:
+            mapping: "@WellCommerceOrderBundle/Resources/config/serialization/OrderStatusGroupTranslation.yml"

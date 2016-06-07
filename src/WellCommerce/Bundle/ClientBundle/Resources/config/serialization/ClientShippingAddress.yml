@@ -32,5 +32,9 @@ WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddress:
             groups:
                 - default
                 - client_shipping_address
+        copyBillingAddress:
+            groups:
+                - default
+                - client_shipping_address
     associations: {  }
     callbacks: {  }

@@ -5,21 +5,20 @@ WellCommerce\Bundle\DelivererBundle\Entity\Deliverer:
                 - default
                 - deliverer
         createdAt:
-            groups:
-                - default
-                - deliverer
+            groups: {  }
         updatedAt:
-            groups:
-                - default
-                - deliverer
-        createdBy:
-            groups: {  }
-        updatedBy:
-            groups: {  }
-        deletedBy:
             groups: {  }
     associations:
         producers:
+            groups:
+                - deliverer
+        createdBy:
+            groups:
+                - deliverer
+        updatedBy:
+            groups:
+                - deliverer
+        deletedBy:
             groups:
                 - deliverer
         translations:

@@ -4,15 +4,46 @@ WellCommerce\Bundle\PaymentBundle\Entity\Payment:
             groups:
                 - default
                 - payment
+        processor:
+            groups:
+                - default
+                - payment
+        configuration:
+            groups:
+                - default
+                - payment
+        comment:
+            groups:
+                - default
+                - payment
+        state:
+            groups:
+                - default
+                - payment
+        token:
+            groups:
+                - default
+                - payment
+        externalIdentifier:
+            groups:
+                - default
+                - payment
+        externalToken:
+            groups:
+                - default
+                - payment
+        redirectUrl:
+            groups:
+                - default
+                - payment
         createdAt:
-            groups:
-                - default
-                - payment
+            groups: {  }
         updatedAt:
-            groups:
-                - default
-                - payment
+            groups: {  }
     associations:
+        paymentStateHistory:
+            groups:
+                - payment
         order:
             groups:
                 - payment

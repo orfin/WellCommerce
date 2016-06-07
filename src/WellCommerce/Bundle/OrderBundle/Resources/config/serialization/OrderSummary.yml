@@ -1,0 +1,16 @@
+WellCommerce\Bundle\OrderBundle\Entity\OrderSummary:
+    fields:
+        netAmount:
+            groups:
+                - default
+                - order_summary
+        grossAmount:
+            groups:
+                - default
+                - order_summary
+        taxAmount:
+            groups:
+                - default
+                - order_summary
+    associations: {  }
+    callbacks: {  }

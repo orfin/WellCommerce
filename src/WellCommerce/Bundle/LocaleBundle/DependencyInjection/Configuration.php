@@ -11,7 +11,9 @@
 
 namespace WellCommerce\Bundle\LocaleBundle\DependencyInjection;
 
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
+use Symfony\Component\Config\Definition\ConfigurationInterface;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\Configuration as BaseConfiguration;
 use WellCommerce\Bundle\LocaleBundle\Copier\LocaleCopier;
 use WellCommerce\Bundle\SearchBundle\Type\IndexType;
@@ -21,15 +23,24 @@ use WellCommerce\Bundle\SearchBundle\Type\IndexType;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Configuration extends BaseConfiguration
+class Configuration implements ConfigurationInterface
 {
-    //@formatter:off
-    protected function addCustomConfigurationNode()
+    public function getConfigTreeBuilder()
     {
-        $builder = new TreeBuilder();
-        $node    =
-            $builder->root('copier')
-                ->children()
+        $treeBuilder = new TreeBuilder();
+        $rootNode    = $treeBuilder->root('well_commerce_locale');
+        $this->processConfiguration($rootNode);
+
+        return $treeBuilder;
+    }
+
+    //@formatter:off
+    protected function processConfiguration(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('copier')
+                    ->children()
                     ->scalarNode('class')->defaultValue(LocaleCopier::class)->end()
                     ->arrayNode('entities')->isRequired()
                         ->useAttributeAsKey('name')
@@ -42,9 +53,8 @@ class Configuration extends BaseConfiguration
                             ->end()
                         ->end()
                     ->end()
-                ->end();
-
-        return $node;
+                ->end()
+            ->end();
     }
     //@formatter:on
 }

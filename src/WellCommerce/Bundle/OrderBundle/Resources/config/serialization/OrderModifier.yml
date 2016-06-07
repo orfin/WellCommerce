@@ -1,0 +1,43 @@
+WellCommerce\Bundle\OrderBundle\Entity\OrderModifier:
+    fields:
+        id:
+            groups:
+                - default
+                - order_modifier
+        name:
+            groups:
+                - default
+                - order_modifier
+        description:
+            groups:
+                - default
+                - order_modifier
+        subtraction:
+            groups:
+                - default
+                - order_modifier
+        hierarchy:
+            groups:
+                - default
+                - order_modifier
+        netAmount:
+            groups:
+                - default
+                - order_modifier
+        grossAmount:
+            groups:
+                - default
+                - order_modifier
+        taxAmount:
+            groups:
+                - default
+                - order_modifier
+        currency:
+            groups:
+                - default
+                - order_modifier
+    associations:
+        order:
+            groups:
+                - order_modifier
+    callbacks: {  }

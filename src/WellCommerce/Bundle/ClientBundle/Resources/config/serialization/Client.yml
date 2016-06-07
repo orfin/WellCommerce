@@ -20,31 +20,10 @@ WellCommerce\Bundle\ClientBundle\Entity\Client:
             groups:
                 - default
                 - client
-        createdAt:
-            groups:
-                - default
-                - client
-        updatedAt:
-            groups:
-                - default
-                - client
-        createdBy:
-            groups: {  }
-        updatedBy:
-            groups: {  }
-        deletedBy:
-            groups: {  }
     associations:
-        wishlist:
-            groups:
-                - client
-        orders:
-            groups:
-                - client
         clientGroup:
             groups:
                 - client
         shop:
             groups:
                 - client
-    callbacks: {  }

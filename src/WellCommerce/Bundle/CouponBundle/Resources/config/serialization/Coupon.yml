@@ -37,20 +37,19 @@ WellCommerce\Bundle\CouponBundle\Entity\Coupon:
                 - default
                 - coupon
         createdAt:
-            groups:
-                - default
-                - coupon
+            groups: {  }
         updatedAt:
-            groups:
-                - default
-                - coupon
-        createdBy:
-            groups: {  }
-        updatedBy:
-            groups: {  }
-        deletedBy:
             groups: {  }
     associations:
+        createdBy:
+            groups:
+                - coupon
+        updatedBy:
+            groups:
+                - coupon
+        deletedBy:
+            groups:
+                - coupon
         translations:
             groups:
                 - coupon
