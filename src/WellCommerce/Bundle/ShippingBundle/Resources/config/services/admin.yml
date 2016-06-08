@@ -29,5 +29,3 @@ services:
         class: WellCommerce\Bundle\ShippingBundle\Form\Admin\ShippingMethodFormBuilder
         tags:
             - { name: form_builder }
-
-        arguments: ['@currency.converter']
