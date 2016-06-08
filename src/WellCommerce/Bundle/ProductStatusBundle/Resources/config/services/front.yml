@@ -1,0 +1,32 @@
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
+
+services:
+    product_status.controller.front:
+        class: WellCommerce\Bundle\ProductStatusBundle\Controller\Front\ProductStatusController
+        arguments: ['@product_status.manager']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    product_status.dataset.front:
+        class: WellCommerce\Bundle\ProductStatusBundle\DataSet\Front\ProductStatusDataSet
+        tags:
+            - { name: dataset, alias: product_status.front }
+        arguments: ['@product_status.repository']
+
+    product_showcase.layout_box.controller:
+        class: WellCommerce\Bundle\ProductStatusBundle\Controller\Box\ProductShowcaseBoxController
+        arguments: ['@product_status.manager']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    product_status.layout_box.controller:
+        class: WellCommerce\Bundle\ProductStatusBundle\Controller\Box\ProductStatusBoxController
+        arguments: ['@product_status.manager']
+        calls:
+            - [setContainer, ['@service_container']]

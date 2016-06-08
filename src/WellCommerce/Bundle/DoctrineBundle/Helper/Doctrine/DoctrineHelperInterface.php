@@ -14,14 +14,11 @@ namespace WellCommerce\Bundle\DoctrineBundle\Helper\Doctrine;
 
 use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Doctrine\Common\Persistence\Mapping\ClassMetadataFactory;
-use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\Common\Persistence\ObjectRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query\Filter\SQLFilter;
 use Doctrine\ORM\Query\FilterCollection;
 use Doctrine\ORM\QueryBuilder;
-use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
 
 /**
  * Interface DoctrineHelperInterface

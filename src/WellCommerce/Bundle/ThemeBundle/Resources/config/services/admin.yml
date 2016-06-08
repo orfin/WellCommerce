@@ -1,0 +1,31 @@
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
+
+services:
+    theme.controller.admin:
+        class: WellCommerce\Bundle\ThemeBundle\Controller\Admin\ThemeController
+        arguments: ['@theme.manager', '@theme.form_builder.admin', '@theme.datagrid']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    theme.dataset.admin:
+        class: WellCommerce\Bundle\ThemeBundle\DataSet\Admin\ThemeDataSet
+        tags:
+            - { name: dataset }
+        arguments: ['@theme.repository']
+
+    theme.datagrid:
+        class: WellCommerce\Bundle\ThemeBundle\DataGrid\ThemeDataGrid
+        tags:
+            - { name: datagrid, alias: theme }
+        arguments: ['@theme.dataset.admin']
+
+    theme.form_builder.admin:
+        class: WellCommerce\Bundle\ThemeBundle\Form\Admin\ThemeFormBuilder
+        tags:
+            - { name: form_builder }

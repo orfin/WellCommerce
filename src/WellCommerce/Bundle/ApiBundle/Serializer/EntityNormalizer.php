@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\ApiBundle\Serializer;
 
-use Doctrine\Common\Util\Debug;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use WellCommerce\Bundle\ApiBundle\Metadata\Collection\AssociationMetadataCollection;
 use WellCommerce\Bundle\ApiBundle\Metadata\Collection\FieldMetadataCollection;

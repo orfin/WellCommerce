@@ -1,33 +1,11 @@
-admin.theme.index:
-    path: /admin/layout/theme/index
-    defaults:
-        _controller: 'theme.controller.admin:indexAction'
-    options:
-        require_admin_permission: theme.index
-admin.theme.grid:
-    path: /admin/layout/theme/grid
-    defaults:
-        _controller: 'theme.controller.admin:gridAction'
-    options:
-        expose: true
-        require_admin_permission: theme.index
-admin.theme.add:
-    path: /admin/layout/theme/add
-    defaults:
-        _controller: 'theme.controller.admin:addAction'
-    options:
-        require_admin_permission: theme.add
-admin.theme.edit:
-    path: '/admin/layout/theme/edit/{id}'
-    defaults:
-        _controller: 'theme.controller.admin:editAction'
-    options:
-        expose: true
-        require_admin_permission: theme.edit
-admin.theme.delete:
-    path: '/admin/layout/theme/delete/{id}'
-    defaults:
-        _controller: 'theme.controller.admin:deleteAction'
-    options:
-        expose: true
-        require_admin_permission: theme.delete
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
+
+_admin:
+    resource: "@WellCommerceThemeBundle/Resources/config/routing/admin.yml"
+    prefix: /admin/theme

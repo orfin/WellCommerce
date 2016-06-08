@@ -1,34 +1,11 @@
-admin.tax.index:
-    path: /admin/configuration/tax/index
-    defaults:
-        _controller: 'tax.controller.admin:indexAction'
-    options:
-        require_permission: 'true'
-        require_admin_permission: tax.index
-admin.tax.grid:
-    path: /admin/configuration/tax/grid
-    defaults:
-        _controller: 'tax.controller.admin:gridAction'
-    options:
-        expose: true
-        require_admin_permission: tax.index
-admin.tax.add:
-    path: /admin/configuration/tax/add
-    defaults:
-        _controller: 'tax.controller.admin:addAction'
-    options:
-        require_admin_permission: tax.add
-admin.tax.edit:
-    path: '/admin/configuration/tax/edit/{id}'
-    defaults:
-        _controller: 'tax.controller.admin:editAction'
-    options:
-        expose: true
-        require_admin_permission: tax.edit
-admin.tax.delete:
-    path: '/admin/configuration/tax/delete/{id}'
-    defaults:
-        _controller: 'tax.controller.admin:deleteAction'
-    options:
-        expose: true
-        require_admin_permission: tax.delete
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
+
+_admin:
+    resource: "@WellCommerceTaxBundle/Resources/config/routing/admin.yml"
+    prefix: /admin/configuration/tax

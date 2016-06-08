@@ -1,33 +1,11 @@
-admin.shipping_method.index:
-    path: /admin/configuration/shipping/index
-    defaults:
-        _controller: 'shipping_method.controller.admin:indexAction'
-    options:
-        require_admin_permission: shipping_method.index
-admin.shipping_method.grid:
-    path: /admin/configuration/shipping/grid
-    defaults:
-        _controller: 'shipping_method.controller.admin:gridAction'
-    options:
-        expose: true
-        require_admin_permission: shipping_method.index
-admin.shipping_method.add:
-    path: /admin/configuration/shipping/add
-    defaults:
-        _controller: 'shipping_method.controller.admin:addAction'
-    options:
-        require_admin_permission: shipping_method.add
-admin.shipping_method.edit:
-    path: '/admin/configuration/shipping/edit/{id}'
-    defaults:
-        _controller: 'shipping_method.controller.admin:editAction'
-    options:
-        expose: true
-        require_admin_permission: shipping_method.edit
-admin.shipping_method.delete:
-    path: '/admin/configuration/shipping/delete/{id}'
-    defaults:
-        _controller: 'shipping_method.controller.admin:deleteAction'
-    options:
-        expose: true
-        require_admin_permission: shipping_method.delete
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
+
+_admin:
+    resource: "@WellCommerceShippingBundle/Resources/config/routing/admin.yml"
+    prefix: /admin/configuration/shipping

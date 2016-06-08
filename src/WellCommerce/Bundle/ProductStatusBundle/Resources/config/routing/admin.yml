@@ -1,0 +1,45 @@
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
+
+admin.product_status.index:
+    path: /index
+    defaults:
+        _controller: 'product_status.controller.admin:indexAction'
+    options:
+        require_admin_permission: product_status.index
+
+admin.product_status.grid:
+    path: /grid
+    defaults:
+        _controller: 'product_status.controller.admin:gridAction'
+    options:
+        expose: true
+        require_admin_permission: product_status.index
+
+admin.product_status.add:
+    path: /add
+    defaults:
+        _controller: 'product_status.controller.admin:addAction'
+    options:
+        require_admin_permission: product_status.add
+
+admin.product_status.edit:
+    path: '/edit/{id}'
+    defaults:
+        _controller: 'product_status.controller.admin:editAction'
+    options:
+        expose: true
+        require_admin_permission: product_status.edit
+
+admin.product_status.delete:
+    path: '/delete/{id}'
+    defaults:
+        _controller: 'product_status.controller.admin:deleteAction'
+    options:
+        expose: true
+        require_admin_permission: product_status.delete

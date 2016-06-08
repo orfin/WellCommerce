@@ -1,31 +1,15 @@
-admin.review.index:
-    path: /admin/catalog/product/review/index
-    defaults:
-        _controller: 'review.controller.admin:indexAction'
-    options:
-        require_admin_permission: review.index
-admin.review.grid:
-    path: /admin/catalog/product/review/grid
-    defaults:
-        _controller: 'review.controller.admin:gridAction'
-    options:
-        expose: true
-        require_admin_permission: review.index
-admin.review.edit:
-    path: '/admin/catalog/product/review/edit/{id}'
-    defaults:
-        _controller: 'review.controller.admin:editAction'
-    options:
-        expose: true
-        require_admin_permission: review.edit
-admin.review.delete:
-    path: '/admin/catalog/product/review/delete/{id}'
-    defaults:
-        _controller: 'review.controller.admin:deleteAction'
-    options:
-        expose: true
-        require_admin_permission: review.delete
-product.review.report:
-    path: /product/review/report/{id}
-    defaults:
-        _controller: 'review.layout_box.controller:reportAction'
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
+
+_admin:
+    resource: "@WellCommerceReviewBundle/Resources/config/routing/admin.yml"
+    prefix: /admin/review
+
+_front:
+    resource: "@WellCommerceReviewBundle/Resources/config/routing/front.yml"
+    prefix: /review

@@ -1,0 +1,61 @@
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
+
+admin.product.index:
+    path: /index
+    defaults:
+        _controller: 'product.controller.admin:indexAction'
+    options:
+        require_admin_permission: product.index
+
+admin.product.grid:
+    path: /grid
+    defaults:
+        _controller: 'product.controller.admin:gridAction'
+    options:
+        expose: true
+        require_admin_permission: product.index
+
+admin.product.add:
+    path: /add
+    defaults:
+        _controller: 'product.controller.admin:addAction'
+    options:
+        require_admin_permission: product.add
+
+admin.product.edit:
+    path: '/edit/{id}'
+    defaults:
+        _controller: 'product.controller.admin:editAction'
+    options:
+        expose: true
+        require_admin_permission: product.edit
+
+admin.product.duplicate:
+    path: '/duplicate/{id}'
+    defaults:
+        _controller: 'product.controller.admin:duplicateAction'
+    options:
+        expose: true
+        require_admin_permission: product.duplicate
+
+admin.product.update:
+    path: /update
+    defaults:
+        _controller: 'product.controller.admin:updateAction'
+    options:
+        expose: true
+        require_admin_permission: product.edit
+
+admin.product.delete:
+    path: '/delete/{id}'
+    defaults:
+        _controller: 'product.controller.admin:deleteAction'
+    options:
+        expose: true
+        require_admin_permission: product.delete

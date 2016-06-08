@@ -1,54 +1,12 @@
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
 
-services:
-    search.layout_box.configurator:
-        class: WellCommerce\Bundle\LayoutBundle\Configurator\SearchBoxConfigurator
-        tags:
-            - { name: layout_box.configurator }
-        arguments: [Search, search.layout_box.controller, '@translator.helper']
-        calls:
-            - [setContainer, ['@service_container']]
-
-    search.dataset.front:
-        class: WellCommerce\Bundle\SearchBundle\DataSet\Front\SearchDataSet
-        tags:
-            - { name: dataset }
-        arguments: ['@product.repository']
-        calls:
-            - [setRequestHelper, ['@request.helper']]
-            - [setResultStorage, ['@search.result.storage']]
-
-    search.controller.front:
-        class: WellCommerce\Bundle\SearchBundle\Controller\Front\SearchController
-        arguments: ['@product.manager']
-        calls:
-            - [setContainer, ['@service_container']]
-
-    search.layout_box.controller:
-        class: WellCommerce\Bundle\SearchBundle\Controller\Box\SearchBoxController
-        arguments: ['@product.manager']
-        calls:
-            - [setContainer, ['@service_container']]
-
-    search.result.storage:
-        class: WellCommerce\Component\Search\Storage\SearchResultStorage
-        public: false
-
-    search.command.reindex:
-        class: WellCommerce\Bundle\SearchBundle\Command\ReindexCommand
-        arguments: ['%locale%']
-        tags:
-            - { name: console.command }
-
-    search.type.collection:
-        class: Doctrine\Common\Collections\ArrayCollection
-        public: false
-
-    search.manager:
-        class: WellCommerce\Bundle\SearchBundle\Manager\SearchManager
-        arguments: ["@search.type.collection", "@search.result.storage", "@search.adapter", "@event_dispatcher"]
-
-    search_request.request_param_converter:
-        class: WellCommerce\Bundle\SearchBundle\Request\ParamConverter\SearchRequestParamConverter
-        tags:
-            - { name: request.param_converter, converter: search_request, priority: 10 }
-        arguments: ['@search.manager']
+imports:
+    - { resource: 'services/admin.yml' }
+    - { resource: 'services/front.yml' }
+    - { resource: 'services/common.yml' }

@@ -1,84 +1,12 @@
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
 
-services:
-    product_status.controller.admin:
-        class: WellCommerce\Bundle\ProductStatusBundle\Controller\Admin\ProductStatusController
-        arguments: ['@product_status.manager', '@product_status.form_builder.admin', '@product_status.datagrid']
-        calls:
-            - [setContainer, ['@service_container']]
-
-    product_status.dataset.admin:
-        class: WellCommerce\Bundle\ProductStatusBundle\DataSet\Admin\ProductStatusDataSet
-        tags:
-            - { name: dataset, alias: product_status.admin }
-        arguments: ['@product_status.repository']
-
-    product_status.datagrid:
-        class: WellCommerce\Bundle\ProductStatusBundle\DataGrid\ProductStatusDataGrid
-        tags:
-            - { name: datagrid, alias: product_status }
-        arguments: ['@product_status.dataset.admin']
-
-    product_status.form_builder.admin:
-        class: WellCommerce\Bundle\ProductStatusBundle\Form\Admin\ProductStatusFormBuilder
-        tags:
-            - { name: form_builder }
-
-    product_showcase.layout_box.configurator:
-        class: WellCommerce\Bundle\LayoutBundle\Configurator\ProductShowcaseBoxConfigurator
-        tags:
-            - { name: layout_box.configurator }
-        arguments: [ProductShowcase, product_showcase.layout_box.controller, '@translator.helper']
-        calls:
-            - [setContainer, ['@service_container']]
-
-    product_status.layout_box.configurator:
-        class: WellCommerce\Bundle\LayoutBundle\Configurator\ProductStatusBoxConfigurator
-        tags:
-            - { name: layout_box.configurator }
-        arguments: [ProductStatus, product_status.layout_box.controller, '@translator.helper']
-        calls:
-            - [setContainer, ['@service_container']]
-
-    product_status.controller.front:
-        class: WellCommerce\Bundle\ProductStatusBundle\Controller\Front\ProductStatusController
-        arguments: ['@product_status.manager']
-        calls:
-            - [setContainer, ['@service_container']]
-
-    product_status.dataset.front:
-        class: WellCommerce\Bundle\ProductStatusBundle\DataSet\Front\ProductStatusDataSet
-        tags:
-            - { name: dataset, alias: product_status.front }
-        arguments: ['@product_status.repository']
-
-    product_status.storage:
-        class: WellCommerce\Bundle\ProductStatusBundle\Storage\ProductStatusStorage
-
-    product_showcase.layout_box.controller:
-        class: WellCommerce\Bundle\ProductStatusBundle\Controller\Box\ProductShowcaseBoxController
-        arguments: ['@product_status.manager']
-        calls:
-            - [setContainer, ['@service_container']]
-
-    product_status.layout_box.controller:
-        class: WellCommerce\Bundle\ProductStatusBundle\Controller\Box\ProductStatusBoxController
-        arguments: ['@product_status.manager']
-        calls:
-            - [setContainer, ['@service_container']]
-
-    product_status.request_param_converter:
-        class: WellCommerce\Bundle\ProductStatusBundle\Request\ParamConverter\ProductStatusParamConverter
-        tags:
-            - { name: request.param_converter, converter: product, priority: 0 }
-        arguments: ['@product_status.repository', id, [WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatus, WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusInterface]]
-
-    product_status.transformer:
-        class: WellCommerce\Bundle\ProductStatusBundle\DataSet\Transformer\ProductStatusTransformer
-        tags:
-            - { name: dataset.transformer, alias: product_status }
-
-    twig.extension.product_status:
-        class: WellCommerce\Bundle\ProductStatusBundle\Twig\Extension\ProductStatusExtension
-        tags:
-            - { name: twig.extension }
-        arguments: ['@product_status.dataset.front', '@product_status.repository']
+imports:
+    - { resource: 'services/admin.yml' }
+    - { resource: 'services/front.yml' }
+    - { resource: 'services/common.yml' }

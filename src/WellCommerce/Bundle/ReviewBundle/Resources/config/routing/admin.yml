@@ -1,0 +1,38 @@
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
+
+admin.review.index:
+    path: /index
+    defaults:
+        _controller: 'review.controller.admin:indexAction'
+    options:
+        require_admin_permission: review.index
+
+admin.review.grid:
+    path: /grid
+    defaults:
+        _controller: 'review.controller.admin:gridAction'
+    options:
+        expose: true
+        require_admin_permission: review.index
+
+admin.review.edit:
+    path: '/edit/{id}'
+    defaults:
+        _controller: 'review.controller.admin:editAction'
+    options:
+        expose: true
+        require_admin_permission: review.edit
+
+admin.review.delete:
+    path: '/delete/{id}'
+    defaults:
+        _controller: 'review.controller.admin:deleteAction'
+    options:
+        expose: true
+        require_admin_permission: review.delete

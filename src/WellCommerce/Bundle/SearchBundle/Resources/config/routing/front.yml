@@ -1,0 +1,43 @@
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
+
+front.search.index:
+    path: '/index/{type},{page},{limit},{orderBy},{orderDir},{priceFrom},{priceTo},{view},{producers},{attributes}'
+    defaults:
+        _controller: 'search.controller.front:indexAction'
+        type: 'product'
+        page: '1'
+        limit: '12'
+        orderBy: score
+        orderDir: asc
+        priceFrom: '0'
+        priceTo: '9999'
+        view: grid
+        producers: 'null'
+        attributes: 'null'
+    options:
+        expose: true
+    requirements:
+        index: '[^,]+'
+        limit: '\d{1,10}'
+        page: '\d{1,10}'
+        orderBy: name|finalPrice|score
+        orderDir: asc|desc
+        priceFrom: '\d{1,10}'
+        priceTo: '\d{1,10}'
+        view: grid|list
+        producers: '[\d+_]+'
+        attributes: '[\d+_]+'
+
+front.search.quick:
+    path: '/quick/{type}'
+    defaults:
+        _controller: 'search.controller.front:quickSearchAction'
+        type: 'product'
+    options:
+        expose: true

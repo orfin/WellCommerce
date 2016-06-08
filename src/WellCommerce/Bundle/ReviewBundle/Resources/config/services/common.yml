@@ -1,0 +1,18 @@
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
+
+services:
+    twig.extension.review:
+        class: WellCommerce\Bundle\ReviewBundle\Twig\Extension\ReviewExtension
+        tags:
+            - { name: twig.extension }
+
+    review.orm.validator.bad_words:
+        class: WellCommerce\Bundle\ReviewBundle\Doctrine\Validator\Constraints\BadWordsValidator
+        tags:
+            - { name: validator.constraint_validator, alias: review.orm.validator.bad_words }

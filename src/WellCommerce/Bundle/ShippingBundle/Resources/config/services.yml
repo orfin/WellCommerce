@@ -1,71 +1,11 @@
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
 
-services:
-    shipping_method.controller.admin:
-        class: WellCommerce\Bundle\ShippingBundle\Controller\Admin\ShippingMethodController
-        arguments: ['@shipping_method.manager', '@shipping_method.form_builder.admin', '@shipping_method.datagrid']
-        calls:
-            - [setContainer, ['@service_container']]
-
-    shipping_method.dataset.admin:
-        class: WellCommerce\Bundle\ShippingBundle\DataSet\Admin\ShippingMethodDataSet
-        tags:
-            - { name: dataset }
-        arguments: ['@shipping_method.repository']
-
-    shipping_method.datagrid:
-        class: WellCommerce\Bundle\ShippingBundle\DataGrid\ShippingMethodDataGrid
-        tags:
-            - { name: datagrid, alias: shipping_method }
-        arguments: ['@shipping_method.dataset.admin']
-
-    shipping_method.form_builder.admin:
-        class: WellCommerce\Bundle\ShippingBundle\Form\Admin\ShippingMethodFormBuilder
-        tags:
-            - { name: form_builder }
-
-    shipping_method.calculator.collection:
-        class: Doctrine\Common\Collections\ArrayCollection
-
-    shipping_method.provider:
-        class: WellCommerce\Bundle\ShippingBundle\Provider\ShippingMethodProvider
-        arguments: ['@shipping_method.repository', '@shipping_method.calculator.collection']
-
-    shipping_method_cost.doctrine.event_subscriber:
-        class: WellCommerce\Bundle\ShippingBundle\EventListener\ShippingMethodCostEventSubscriber
-        tags:
-            - { name: doctrine.event_subscriber, connection: default }
-
-    form.shipping_cost_collection.data_transformer:
-        class: WellCommerce\Bundle\ShippingBundle\Form\DataTransformer\ShippingCostCollectionToArrayTransformer
-        tags:
-            - { name: form.data_transformer, alias: shipping_cost_collection }
-        arguments: ['@doctrine.helper']
-        shared: false
-
-    weight_table.calculator:
-        class: WellCommerce\Bundle\ShippingBundle\Calculator\WeightTableCalculator
-        tags:
-            - { name: shipping_method.calculator, alias: weight_table }
-
-    price_table.calculator:
-        class: WellCommerce\Bundle\ShippingBundle\Calculator\PriceTableCalculator
-        tags:
-            - { name: shipping_method.calculator, alias: price_table }
-        arguments: ['@currency.converter']
-
-    shipping_method.order.visitor:
-        class: WellCommerce\Bundle\ShippingBundle\Visitor\ShippingMethodOrderVisitor
-        tags:
-            - { name: order.visitor, alias: shipping_method }
-        arguments: ['@order.modifier.provider', '@shipping_method.provider']
-
-    shipping_cost.order.modifier.configurator:
-        class: WellCommerce\Bundle\OrderBundle\Configurator\OrderModifierConfigurator
-        arguments: { name: shipping_cost, description: order.label.shipping_cost, subtraction: false, hierarchy: 0 }
-
-    shipping_cost.order.modifier:
-        class: WellCommerce\Bundle\OrderBundle\Entity\OrderModifier
-        tags:
-            - { name: order.modifier, alias: shipping_cost }
-        factory: ['@order_modifier.factory', create]
-        configurator: ['@shipping_cost.order.modifier.configurator', configure]
+imports:
+    - { resource: 'services/admin.yml' }
+    - { resource: 'services/common.yml' }

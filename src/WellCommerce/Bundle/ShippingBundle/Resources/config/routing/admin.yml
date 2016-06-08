@@ -1,0 +1,45 @@
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
+
+admin.shipping_method.index:
+    path: /index
+    defaults:
+        _controller: 'shipping_method.controller.admin:indexAction'
+    options:
+        require_admin_permission: shipping_method.index
+
+admin.shipping_method.grid:
+    path: /grid
+    defaults:
+        _controller: 'shipping_method.controller.admin:gridAction'
+    options:
+        expose: true
+        require_admin_permission: shipping_method.index
+
+admin.shipping_method.add:
+    path: /add
+    defaults:
+        _controller: 'shipping_method.controller.admin:addAction'
+    options:
+        require_admin_permission: shipping_method.add
+
+admin.shipping_method.edit:
+    path: '/edit/{id}'
+    defaults:
+        _controller: 'shipping_method.controller.admin:editAction'
+    options:
+        expose: true
+        require_admin_permission: shipping_method.edit
+
+admin.shipping_method.delete:
+    path: '/delete/{id}'
+    defaults:
+        _controller: 'shipping_method.controller.admin:deleteAction'
+    options:
+        expose: true
+        require_admin_permission: shipping_method.delete

@@ -15,7 +15,6 @@ namespace WellCommerce\Bundle\DoctrineBundle\Helper\Doctrine;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Doctrine\Common\Persistence\Mapping\ClassMetadataFactory;
-use Doctrine\Common\Persistence\ObjectRepository;
 use Doctrine\Common\Util\ClassUtils;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
