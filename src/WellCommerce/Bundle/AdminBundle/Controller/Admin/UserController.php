@@ -97,10 +97,12 @@ class UserController extends AbstractAdminController
     }
 
     public function deleteAction(int $id) : Response
-    { 
-        $user = $this->getSecurityHelper()->getUser();
+    {
+        $user = $this->getSecurityHelper()->getAuthenticatedAdmin();
         if (null !== $user && $user->getId() === $id) {
-            return $this->jsonResponse(['error' => 'You cannot delete your own admin account.']);
+            return $this->jsonResponse([
+                'error' => 'You cannot delete your own admin account.'
+            ]);
         }
 
         $em = $this->getDoctrineHelper()->getEntityManager();
