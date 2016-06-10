@@ -16,15 +16,16 @@ use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 use WellCommerce\Bundle\AvailabilityBundle\Entity\Extra\AvailabilityExtraTrait;
-use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableTrait;
 
 /**
  * Class Availability
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Availability extends AbstractEntity implements AvailabilityInterface
+class Availability implements AvailabilityInterface
 {
+    use IdentifiableTrait;
     use Translatable;
     use Timestampable;
     use Blameable;

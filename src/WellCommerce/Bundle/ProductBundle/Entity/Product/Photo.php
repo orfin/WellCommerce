@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\ProductBundle\Entity\Product;
 
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use WellCommerce\Bundle\AppBundle\Entity\HierarchyAwareTrait;
-use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableTrait;
 use WellCommerce\Bundle\MediaBundle\Entity\MediaInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareTrait;
 
@@ -23,8 +23,9 @@ use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareTrait;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Photo extends AbstractEntity implements PhotoInterface
+class Photo implements PhotoInterface
 {
+    use IdentifiableTrait;
     use Timestampable;
     use HierarchyAwareTrait;
     use ProductAwareTrait;

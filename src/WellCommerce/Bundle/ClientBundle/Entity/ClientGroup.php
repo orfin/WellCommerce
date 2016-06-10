@@ -15,7 +15,7 @@ use Doctrine\Common\Collections\Collection;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
-use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableTrait;
 use WellCommerce\Bundle\PageBundle\Entity\PageInterface;
 
 /**
@@ -23,8 +23,9 @@ use WellCommerce\Bundle\PageBundle\Entity\PageInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientGroup extends AbstractEntity implements ClientGroupInterface
+class ClientGroup implements ClientGroupInterface
 {
+    use IdentifiableTrait;
     use Translatable;
     use Timestampable;
     use Blameable;

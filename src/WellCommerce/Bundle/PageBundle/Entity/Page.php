@@ -17,7 +17,7 @@ use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 use WellCommerce\Bundle\AppBundle\Entity\HierarchyAwareTrait;
-use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableTrait;
 use WellCommerce\Bundle\ShopBundle\Entity\ShopCollectionAwareTrait;
 
 /**
@@ -25,8 +25,9 @@ use WellCommerce\Bundle\ShopBundle\Entity\ShopCollectionAwareTrait;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Page extends AbstractEntity implements PageInterface
+class Page implements PageInterface
 {
+    use IdentifiableTrait;
     use Translatable;
     use Timestampable;
     use Blameable;

@@ -13,15 +13,16 @@ namespace WellCommerce\Bundle\OrderBundle\Entity;
 
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
-use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableTrait;
 
 /**
  * Class OrderStatus
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class OrderStatusHistory extends AbstractEntity implements OrderStatusHistoryInterface
+class OrderStatusHistory implements OrderStatusHistoryInterface
 {
+    use IdentifiableTrait;
     use Timestampable;
     use Blameable;
     use OrderAwareTrait;

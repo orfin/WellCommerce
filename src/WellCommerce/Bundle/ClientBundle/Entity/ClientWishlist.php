@@ -12,7 +12,7 @@
 namespace WellCommerce\Bundle\ClientBundle\Entity;
 
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
-use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableTrait;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareTrait;
 
 /**
@@ -20,8 +20,9 @@ use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareTrait;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientWishlist extends AbstractEntity implements ClientWishlistInterface
+class ClientWishlist implements ClientWishlistInterface
 {
+    use IdentifiableTrait;
     use Timestampable;
     use ClientAwareTrait;
     use ProductAwareTrait;

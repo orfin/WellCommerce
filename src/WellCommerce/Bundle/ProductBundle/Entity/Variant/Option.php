@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\ProductBundle\Entity\Variant;
 
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeInterface;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeValueInterface;
-use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableTrait;
 use WellCommerce\Bundle\ProductBundle\Entity\VariantInterface;
 
 /**
@@ -22,8 +22,10 @@ use WellCommerce\Bundle\ProductBundle\Entity\VariantInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Option extends AbstractEntity implements OptionInterface
+class Option implements OptionInterface
 {
+    use IdentifiableTrait;
+    
     /**
      * @var VariantInterface
      */

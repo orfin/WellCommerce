@@ -14,15 +14,16 @@ namespace WellCommerce\Bundle\CompanyBundle\Entity;
 
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
-use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableTrait;
 
 /**
  * Class Company
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Company extends AbstractEntity implements CompanyInterface
+class Company implements CompanyInterface
 {
+    use IdentifiableTrait;
     use Timestampable;
     use Blameable;
 

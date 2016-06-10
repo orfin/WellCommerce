@@ -14,15 +14,16 @@ namespace WellCommerce\Bundle\CurrencyBundle\Entity;
 
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
-use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableTrait;
 
 /**
  * Class CurrencyRate
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CurrencyRate extends AbstractEntity implements CurrencyRateInterface
+class CurrencyRate implements CurrencyRateInterface
 {
+    use IdentifiableTrait;
     use Timestampable;
     use Blameable;
     

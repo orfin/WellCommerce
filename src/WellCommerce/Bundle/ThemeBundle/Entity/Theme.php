@@ -15,15 +15,16 @@ namespace WellCommerce\Bundle\ThemeBundle\Entity;
 use Doctrine\Common\Collections\Collection;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
-use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableTrait;
 
 /**
  * Class Theme
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Theme extends AbstractEntity implements ThemeInterface
+class Theme implements ThemeInterface
 {
+    use IdentifiableTrait;
     use Timestampable;
     use Blameable;
     

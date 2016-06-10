@@ -13,15 +13,16 @@
 namespace WellCommerce\Bundle\ThemeBundle\Entity;
 
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
-use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableTrait;
 
 /**
  * Class ThemeCss
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ThemeCss extends AbstractEntity implements ThemeCssInterface
+class ThemeCss implements ThemeCssInterface
 {
+    use IdentifiableTrait;
     use Timestampable;
     use ThemeAwareTrait;
     

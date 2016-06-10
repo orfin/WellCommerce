@@ -26,7 +26,7 @@ use WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroupInterface;
 use WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityAwareTrait;
 use WellCommerce\Bundle\CategoryBundle\Entity\CategoryInterface;
 use WellCommerce\Bundle\DoctrineBundle\Behaviours\Enableable\EnableableTrait;
-use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableTrait;
 use WellCommerce\Bundle\MediaBundle\Entity\MediaAwareTrait;
 use WellCommerce\Bundle\ProducerBundle\Entity\ProducerAwareTrait;
 use WellCommerce\Bundle\ProductBundle\Entity\Extra\ProductExtraTrait;
@@ -41,8 +41,9 @@ use WellCommerce\Bundle\UnitBundle\Entity\UnitAwareTrait;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Product extends AbstractEntity implements ProductInterface
+class Product implements ProductInterface
 {
+    use IdentifiableTrait;
     use Translatable;
     use Timestampable;
     use Blameable;

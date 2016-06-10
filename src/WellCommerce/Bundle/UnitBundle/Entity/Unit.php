@@ -15,15 +15,16 @@ namespace WellCommerce\Bundle\UnitBundle\Entity;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
-use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableTrait;
 
 /**
  * Class Unit
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Unit extends AbstractEntity implements UnitInterface
+class Unit implements UnitInterface
 {
+    use IdentifiableTrait;
     use Translatable;
     use Timestampable;
     use Blameable;

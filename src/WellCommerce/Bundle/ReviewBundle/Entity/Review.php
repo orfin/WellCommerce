@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\ReviewBundle\Entity;
 
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use WellCommerce\Bundle\DoctrineBundle\Behaviours\Enableable\EnableableTrait;
-use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableTrait;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareTrait;
 
 /**
@@ -22,8 +22,9 @@ use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareTrait;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Review extends AbstractEntity implements ReviewInterface
+class Review implements ReviewInterface
 {
+    use IdentifiableTrait;
     use Timestampable;
     use ProductAwareTrait;
     use EnableableTrait;

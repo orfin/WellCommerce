@@ -50,5 +50,4 @@ interface ContactTicketInterface extends EntityInterface
      * @param string $content
      */
     public function setContent(string $content);
-
 }

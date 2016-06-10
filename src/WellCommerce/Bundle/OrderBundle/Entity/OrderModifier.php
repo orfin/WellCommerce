@@ -12,15 +12,17 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Entity;
 
-use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableTrait;
 
 /**
  * Class OrderModifier
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class OrderModifier extends AbstractEntity implements OrderModifierInterface
+class OrderModifier implements OrderModifierInterface
 {
+    use IdentifiableTrait;
+
     protected $order;
     protected $name;
     protected $description;

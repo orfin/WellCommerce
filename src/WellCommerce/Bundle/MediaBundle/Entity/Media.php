@@ -14,15 +14,16 @@ namespace WellCommerce\Bundle\MediaBundle\Entity;
 
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
-use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableTrait;
 
 /**
  * Class Media
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Media extends AbstractEntity implements MediaInterface
+class Media implements MediaInterface
 {
+    use IdentifiableTrait;
     use Timestampable;
     use Blameable;
     

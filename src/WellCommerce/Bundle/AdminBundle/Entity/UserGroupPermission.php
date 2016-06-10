@@ -14,15 +14,16 @@ namespace WellCommerce\Bundle\AdminBundle\Entity;
 
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use WellCommerce\Bundle\DoctrineBundle\Behaviours\Enableable\EnableableTrait;
-use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableTrait;
 
 /**
  * Class UserGroupPermission
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class UserGroupPermission extends AbstractEntity implements UserGroupPermissionInterface
+class UserGroupPermission implements UserGroupPermissionInterface
 {
+    use IdentifiableTrait;
     use Timestampable;
     use EnableableTrait;
     

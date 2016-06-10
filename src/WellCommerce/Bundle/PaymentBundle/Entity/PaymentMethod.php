@@ -18,7 +18,7 @@ use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 use WellCommerce\Bundle\AppBundle\Entity\HierarchyAwareTrait;
 use WellCommerce\Bundle\DoctrineBundle\Behaviours\Enableable\EnableableTrait;
-use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableTrait;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderStatusInterface;
 
 /**
@@ -26,8 +26,9 @@ use WellCommerce\Bundle\OrderBundle\Entity\OrderStatusInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PaymentMethod extends AbstractEntity implements PaymentMethodInterface
+class PaymentMethod implements PaymentMethodInterface
 {
+    use IdentifiableTrait;
     use Translatable;
     use Timestampable;
     use Blameable;

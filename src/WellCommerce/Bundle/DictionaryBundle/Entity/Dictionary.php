@@ -15,13 +15,14 @@ namespace WellCommerce\Bundle\DictionaryBundle\Entity;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
-use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableTrait;
 
 /**
  * Dictionary
  */
-class Dictionary extends AbstractEntity implements DictionaryInterface
+class Dictionary implements DictionaryInterface
 {
+    use IdentifiableTrait;
     use Timestampable;
     use Translatable;
     use Blameable;

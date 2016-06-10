@@ -13,15 +13,16 @@ namespace WellCommerce\Bundle\PaymentBundle\Entity;
 
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
-use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableTrait;
 
 /**
  * Class PaymentStateHistory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PaymentStateHistory extends AbstractEntity implements PaymentStateHistoryInterface
+class PaymentStateHistory implements PaymentStateHistoryInterface
 {
+    use IdentifiableTrait;
     use Timestampable;
     use Blameable;
 

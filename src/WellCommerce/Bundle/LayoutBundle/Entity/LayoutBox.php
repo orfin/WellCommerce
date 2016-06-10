@@ -15,15 +15,16 @@ namespace WellCommerce\Bundle\LayoutBundle\Entity;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
-use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableTrait;
 
 /**
  * Class LayoutBox
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LayoutBox extends AbstractEntity implements LayoutBoxInterface
+class LayoutBox implements LayoutBoxInterface
 {
+    use IdentifiableTrait;
     use Timestampable;
     use Translatable;
     use Blameable;

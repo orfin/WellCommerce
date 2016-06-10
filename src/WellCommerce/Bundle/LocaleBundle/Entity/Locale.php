@@ -16,15 +16,16 @@ use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use WellCommerce\Bundle\CurrencyBundle\Entity\CurrencyAwareTrait;
 use WellCommerce\Bundle\DoctrineBundle\Behaviours\Enableable\EnableableTrait;
-use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableTrait;
 
 /**
  * Class Locale
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Locale extends AbstractEntity implements LocaleInterface
+class Locale implements LocaleInterface
 {
+    use IdentifiableTrait;
     use Timestampable;
     use Blameable;
     use CurrencyAwareTrait;

@@ -14,15 +14,16 @@ namespace WellCommerce\Bundle\AdminBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\AppBundle\Entity\HierarchyAwareTrait;
-use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableTrait;
 
 /**
  * Class Category
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AdminMenu extends AbstractEntity implements AdminMenuInterface
+class AdminMenu implements AdminMenuInterface
 {
+    use IdentifiableTrait;
     use HierarchyAwareTrait;
     
     /**

@@ -17,15 +17,16 @@ use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Symfony\Component\Security\Core\User\UserInterface as BaseUserInterface;
 use WellCommerce\Bundle\DoctrineBundle\Behaviours\Enableable\EnableableTrait;
-use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableTrait;
 
 /**
  * Class User
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class User extends AbstractEntity implements UserInterface
+class User implements UserInterface
 {
+    use IdentifiableTrait;
     use Timestampable;
     use Blameable;
     use EnableableTrait;
@@ -265,7 +266,7 @@ class User extends AbstractEntity implements UserInterface
     }
     
     /**
-     * {@inheritdoc}122
+     * {@inheritdoc}
      */
     public function setApiKey(string $apiKey)
     {

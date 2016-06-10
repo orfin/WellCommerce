@@ -14,15 +14,16 @@ namespace WellCommerce\Bundle\AdminBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
-use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableTrait;
 
 /**
  * Class UserGroup
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class UserGroup extends AbstractEntity implements UserGroupInterface
+class UserGroup implements UserGroupInterface
 {
+    use IdentifiableTrait;
     use Blameable;
     
     /**

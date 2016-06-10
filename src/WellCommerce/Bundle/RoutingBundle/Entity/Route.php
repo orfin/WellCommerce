@@ -12,15 +12,17 @@
 
 namespace WellCommerce\Bundle\RoutingBundle\Entity;
 
-use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableTrait;
 
 /**
  * Class Route
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Route extends AbstractEntity implements RouteInterface, RoutingDiscriminatorsAwareInterface
+class Route implements RouteInterface, RoutingDiscriminatorsAwareInterface
 {
+    use IdentifiableTrait;
+    
     protected $path;
 
     protected $locale;

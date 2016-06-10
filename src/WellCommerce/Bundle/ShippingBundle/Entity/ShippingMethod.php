@@ -19,7 +19,7 @@ use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 use WellCommerce\Bundle\AppBundle\Entity\HierarchyAwareTrait;
 use WellCommerce\Bundle\CurrencyBundle\Entity\CurrencyInterface;
 use WellCommerce\Bundle\DoctrineBundle\Behaviours\Enableable\EnableableTrait;
-use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableTrait;
 use WellCommerce\Bundle\TaxBundle\Entity\TaxAwareTrait;
 
 /**
@@ -27,8 +27,9 @@ use WellCommerce\Bundle\TaxBundle\Entity\TaxAwareTrait;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ShippingMethod extends AbstractEntity implements ShippingMethodInterface
+class ShippingMethod implements ShippingMethodInterface
 {
+    use IdentifiableTrait;
     use Translatable;
     use Timestampable;
     use Blameable;

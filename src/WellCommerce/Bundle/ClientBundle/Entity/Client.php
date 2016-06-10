@@ -15,7 +15,7 @@ use Doctrine\Common\Collections\Collection;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Symfony\Component\Security\Core\User\UserInterface as BaseUserInterface;
-use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableTrait;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 use WellCommerce\Bundle\ShopBundle\Entity\ShopAwareTrait;
 
@@ -24,10 +24,11 @@ use WellCommerce\Bundle\ShopBundle\Entity\ShopAwareTrait;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Client extends AbstractEntity implements ClientInterface
+class Client implements ClientInterface
 {
     const ROLE_CLIENT = 'ROLE_CLIENT';
-    
+
+    use IdentifiableTrait;
     use Timestampable;
     use Blameable;
     use ShopAwareTrait;

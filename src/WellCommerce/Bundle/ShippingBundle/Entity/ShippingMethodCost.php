@@ -4,15 +4,16 @@ namespace WellCommerce\Bundle\ShippingBundle\Entity;
 
 use WellCommerce\Bundle\AppBundle\Entity\Price;
 use WellCommerce\Bundle\DoctrineBundle\Behaviours\Timestampable\TimestampableTrait;
-use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableTrait;
 
 /**
  * Class ShippingMethodCost
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ShippingMethodCost extends AbstractEntity implements ShippingMethodCostInterface
+class ShippingMethodCost implements ShippingMethodCostInterface
 {
+    use IdentifiableTrait;
     use TimestampableTrait;
     use ShippingMethodAwareTrait;
 

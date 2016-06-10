@@ -18,7 +18,7 @@ use WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetailsAwareTrait;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddressAwareTrait;
 use WellCommerce\Bundle\CouponBundle\Entity\CouponAwareTrait;
 use WellCommerce\Bundle\DoctrineBundle\Behaviours\Timestampable\TimestampableTrait;
-use WellCommerce\Bundle\DoctrineBundle\Entity\AbstractEntity;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableTrait;
 use WellCommerce\Bundle\OrderBundle\Visitor\OrderVisitorInterface;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodAwareTrait;
@@ -30,8 +30,9 @@ use WellCommerce\Bundle\ShopBundle\Entity\ShopAwareTrait;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Order extends AbstractEntity implements OrderInterface
+class Order implements OrderInterface
 {
+    use IdentifiableTrait;
     use TimestampableTrait;
     use ShopAwareTrait;
     use ShippingMethodAwareTrait;
