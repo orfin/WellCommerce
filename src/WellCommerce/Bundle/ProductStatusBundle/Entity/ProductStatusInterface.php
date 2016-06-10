@@ -15,14 +15,14 @@ namespace WellCommerce\Bundle\ProductStatusBundle\Entity;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
-use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityInterface;
 
 /**
  * Interface ProductStatusInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ProductStatusInterface extends EntityInterface, TimestampableInterface, TranslatableInterface, BlameableInterface
+interface ProductStatusInterface extends IdentifiableEntityInterface, TimestampableInterface, TranslatableInterface, BlameableInterface
 {
     public function getSymbol() : string;
 

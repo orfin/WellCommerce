@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\AdminBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
-use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableTrait;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityTrait;
 
 /**
  * Class Role
@@ -22,7 +22,7 @@ use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableTrait;
  */
 class Role implements RoleInterface
 {
-    use IdentifiableTrait;
+    use IdentifiableEntityTrait;
 
     /**
      * @var string

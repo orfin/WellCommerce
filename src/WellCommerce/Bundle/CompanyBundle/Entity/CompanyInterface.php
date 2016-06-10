@@ -14,14 +14,14 @@ namespace WellCommerce\Bundle\CompanyBundle\Entity;
 
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
-use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityInterface;
 
 /**
  * Interface CompanyInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface CompanyInterface extends EntityInterface, TimestampableInterface, BlameableInterface
+interface CompanyInterface extends IdentifiableEntityInterface, TimestampableInterface, BlameableInterface
 {
     /**
      * @return string

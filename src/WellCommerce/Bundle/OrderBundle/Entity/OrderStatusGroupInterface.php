@@ -15,13 +15,13 @@ namespace WellCommerce\Bundle\OrderBundle\Entity;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
-use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityInterface;
 
 /**
  * Interface OrderStatusGroupInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface OrderStatusGroupInterface extends EntityInterface, TranslatableInterface, TimestampableInterface, BlameableInterface
+interface OrderStatusGroupInterface extends IdentifiableEntityInterface, TranslatableInterface, TimestampableInterface, BlameableInterface
 {
 }

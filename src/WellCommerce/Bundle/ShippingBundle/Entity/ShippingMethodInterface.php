@@ -19,7 +19,7 @@ use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
 use WellCommerce\Bundle\CurrencyBundle\Entity\CurrencyInterface;
 use WellCommerce\Bundle\DoctrineBundle\Behaviours\Enableable\EnableableInterface;
-use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityInterface;
 use WellCommerce\Bundle\TaxBundle\Entity\TaxAwareInterface;
 
 /**
@@ -28,7 +28,7 @@ use WellCommerce\Bundle\TaxBundle\Entity\TaxAwareInterface;
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface ShippingMethodInterface extends
-    EntityInterface,
+    IdentifiableEntityInterface,
     EnableableInterface,
     TimestampableInterface,
     TranslatableInterface,

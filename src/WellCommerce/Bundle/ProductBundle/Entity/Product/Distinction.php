@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\ProductBundle\Entity\Product;
 
 use DateTime;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
-use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableTrait;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityTrait;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareTrait;
 use WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusInterface;
 
@@ -25,7 +25,7 @@ use WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusInterface;
  */
 class Distinction implements DistinctionInterface
 {
-    use IdentifiableTrait;
+    use IdentifiableEntityTrait;
     use Timestampable;
     use ProductAwareTrait;
 

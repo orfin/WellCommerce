@@ -12,14 +12,14 @@
 
 namespace WellCommerce\Bundle\CurrencyBundle\Entity;
 
-use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityInterface;
 
 /**
  * Interface CurrencyRateInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface CurrencyRateInterface extends EntityInterface
+interface CurrencyRateInterface extends IdentifiableEntityInterface
 {
     /**
      * @return string

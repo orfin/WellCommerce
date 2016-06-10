@@ -4,7 +4,7 @@ namespace WellCommerce\Bundle\ShippingBundle\Entity;
 
 use WellCommerce\Bundle\AppBundle\Entity\Price;
 use WellCommerce\Bundle\DoctrineBundle\Behaviours\Timestampable\TimestampableTrait;
-use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableTrait;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityTrait;
 
 /**
  * Class ShippingMethodCost
@@ -13,7 +13,7 @@ use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableTrait;
  */
 class ShippingMethodCost implements ShippingMethodCostInterface
 {
-    use IdentifiableTrait;
+    use IdentifiableEntityTrait;
     use TimestampableTrait;
     use ShippingMethodAwareTrait;
 

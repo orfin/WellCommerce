@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\ProductBundle\Entity\Product;
 
 use WellCommerce\Bundle\AppBundle\Entity\HierarchyAwareInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
-use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityInterface;
 use WellCommerce\Bundle\MediaBundle\Entity\MediaInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareInterface;
 
@@ -23,7 +23,7 @@ use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface PhotoInterface extends EntityInterface, TimestampableInterface, ProductAwareInterface, HierarchyAwareInterface
+interface PhotoInterface extends IdentifiableEntityInterface, TimestampableInterface, ProductAwareInterface, HierarchyAwareInterface
 {
     public function getPhoto() : MediaInterface;
 

@@ -16,14 +16,14 @@ use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CurrencyBundle\Entity\CurrencyAwareInterface;
 use WellCommerce\Bundle\DoctrineBundle\Behaviours\Enableable\EnableableInterface;
-use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityInterface;
 
 /**
  * Interface LocaleInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface LocaleInterface extends EntityInterface, EnableableInterface, TimestampableInterface, BlameableInterface, CurrencyAwareInterface
+interface LocaleInterface extends IdentifiableEntityInterface, EnableableInterface, TimestampableInterface, BlameableInterface, CurrencyAwareInterface
 {
     /**
      * @return string

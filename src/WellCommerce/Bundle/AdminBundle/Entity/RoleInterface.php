@@ -14,14 +14,14 @@ namespace WellCommerce\Bundle\AdminBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Security\Core\Role\RoleInterface as BaseRoleInterface;
-use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityInterface;
 
 /**
  * Interface RoleInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface RoleInterface extends BaseRoleInterface, EntityInterface
+interface RoleInterface extends BaseRoleInterface, IdentifiableEntityInterface
 {
     /**
      * @param string $role

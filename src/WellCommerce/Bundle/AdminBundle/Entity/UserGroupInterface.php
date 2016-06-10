@@ -14,14 +14,14 @@ namespace WellCommerce\Bundle\AdminBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
-use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityInterface;
 
 /**
  * Interface UserGroupInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface UserGroupInterface extends EntityInterface, BlameableInterface
+interface UserGroupInterface extends IdentifiableEntityInterface, BlameableInterface
 {
     /**
      * @return string

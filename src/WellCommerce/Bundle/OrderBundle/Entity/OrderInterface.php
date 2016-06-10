@@ -19,7 +19,7 @@ use WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetailsAwareInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddressAwareInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CouponBundle\Entity\CouponAwareInterface;
-use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityInterface;
 use WellCommerce\Bundle\OrderBundle\Visitor\OrderVisitorInterface;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodAwareInterface;
@@ -32,7 +32,7 @@ use WellCommerce\Bundle\ShopBundle\Entity\ShopAwareInterface;
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface OrderInterface extends
-    EntityInterface,
+    IdentifiableEntityInterface,
     TimestampableInterface,
     ShopAwareInterface,
     PaymentMethodAwareInterface,

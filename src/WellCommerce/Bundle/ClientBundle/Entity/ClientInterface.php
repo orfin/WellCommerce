@@ -17,7 +17,7 @@ use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\UserInterface as BaseUserInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
-use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityInterface;
 use WellCommerce\Bundle\ShopBundle\Entity\ShopAwareInterface;
 
 /**
@@ -26,7 +26,7 @@ use WellCommerce\Bundle\ShopBundle\Entity\ShopAwareInterface;
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface ClientInterface extends
-    EntityInterface,
+    IdentifiableEntityInterface,
     \Serializable,
     BaseUserInterface,
     EquatableInterface,

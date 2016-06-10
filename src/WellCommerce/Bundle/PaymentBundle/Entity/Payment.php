@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\PaymentBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
-use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableTrait;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityTrait;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderAwareTrait;
 
 /**
@@ -24,7 +24,7 @@ use WellCommerce\Bundle\OrderBundle\Entity\OrderAwareTrait;
  */
 class Payment implements PaymentInterface
 {
-    use IdentifiableTrait;
+    use IdentifiableEntityTrait;
     use Timestampable;
     use OrderAwareTrait;
 

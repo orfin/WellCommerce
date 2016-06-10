@@ -15,14 +15,14 @@ namespace WellCommerce\Bundle\CouponBundle\Entity;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
-use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityInterface;
 
 /**
  * Interface CouponInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface CouponInterface extends EntityInterface, TranslatableInterface, TimestampableInterface, BlameableInterface
+interface CouponInterface extends IdentifiableEntityInterface, TranslatableInterface, TimestampableInterface, BlameableInterface
 {
     /**
      * @return string

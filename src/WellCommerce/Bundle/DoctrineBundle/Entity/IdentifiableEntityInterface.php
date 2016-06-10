@@ -13,11 +13,14 @@
 namespace WellCommerce\Bundle\DoctrineBundle\Entity;
 
 /**
- * Interface IdentifiableInterface
+ * Interface IdentifiableEntityInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface IdentifiableInterface
+interface IdentifiableEntityInterface
 {
+    /**
+     * @return int
+     */
     public function getId() : int;
 }

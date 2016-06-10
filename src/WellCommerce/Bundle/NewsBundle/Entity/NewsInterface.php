@@ -16,14 +16,14 @@ use DateTime;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
-use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityInterface;
 
 /**
  * Interface NewsInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface NewsInterface extends EntityInterface, TimestampableInterface, TranslatableInterface, BlameableInterface
+interface NewsInterface extends IdentifiableEntityInterface, TimestampableInterface, TranslatableInterface, BlameableInterface
 {
     /**
      * @return bool

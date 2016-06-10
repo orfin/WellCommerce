@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\PaymentBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
-use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderAwareInterface;
 
 /**
@@ -22,7 +22,7 @@ use WellCommerce\Bundle\OrderBundle\Entity\OrderAwareInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface PaymentInterface extends EntityInterface, TimestampableInterface, OrderAwareInterface
+interface PaymentInterface extends IdentifiableEntityInterface, TimestampableInterface, OrderAwareInterface
 {
     const PAYMENT_STATE_CREATED     = 'created';
     const PAYMENT_STATE_APPROVED    = 'approved';

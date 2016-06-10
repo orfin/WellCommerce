@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\AdminBundle\Entity\UserInterface;
 use WellCommerce\Bundle\CoreBundle\Controller\AbstractController;
-use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityInterface;
 use WellCommerce\Bundle\DoctrineBundle\Manager\ManagerInterface;
 use WellCommerce\Bundle\OrderBundle\Provider\Admin\OrderProviderInterface;
 use WellCommerce\Component\DataGrid\DataGridInterface;
@@ -90,7 +90,7 @@ abstract class AbstractAdminController extends AbstractController implements Adm
     {
         $resource = $this->getManager()->getRepository()->find($id);
         
-        if (!$resource instanceof EntityInterface) {
+        if (!$resource instanceof IdentifiableEntityInterface) {
             return $this->redirectToAction('index');
         }
         

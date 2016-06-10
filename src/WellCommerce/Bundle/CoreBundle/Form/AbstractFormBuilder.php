@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\CoreBundle\Form;
 
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
-use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityInterface;
 use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
 use WellCommerce\Component\Form\DataTransformer\DataTransformerInterface;
 use WellCommerce\Component\Form\Dependencies\DependencyInterface;
@@ -92,10 +92,10 @@ abstract class AbstractFormBuilder extends AbstractContainerAware implements For
      * Dispatches a form event
      *
      * @param FormInterface        $form
-     * @param EntityInterface|null $entity
+     * @param IdentifiableEntityInterface|null $entity
      * @param string               $name
      */
-    protected function dispatchFormEvent(FormInterface $form, EntityInterface $entity = null, string $name)
+    protected function dispatchFormEvent(FormInterface $form, IdentifiableEntityInterface $entity = null, string $name)
     {
         $eventName = sprintf('%s.%s', $this->alias, $name);
 

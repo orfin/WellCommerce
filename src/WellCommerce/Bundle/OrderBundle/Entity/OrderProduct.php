@@ -4,7 +4,7 @@ namespace WellCommerce\Bundle\OrderBundle\Entity;
 
 use WellCommerce\Bundle\AppBundle\Entity\PriceInterface;
 use WellCommerce\Bundle\DoctrineBundle\Behaviours\Timestampable\TimestampableTrait;
-use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableTrait;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityTrait;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareTrait;
 use WellCommerce\Bundle\ProductBundle\Entity\VariantAwareTrait;
 
@@ -15,7 +15,7 @@ use WellCommerce\Bundle\ProductBundle\Entity\VariantAwareTrait;
  */
 class OrderProduct implements OrderProductInterface
 {
-    use IdentifiableTrait;
+    use IdentifiableEntityTrait;
     use TimestampableTrait;
     use ProductAwareTrait;
     use VariantAwareTrait;

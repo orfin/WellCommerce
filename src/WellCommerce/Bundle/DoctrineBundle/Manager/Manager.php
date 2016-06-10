@@ -15,7 +15,7 @@ namespace WellCommerce\Bundle\DoctrineBundle\Manager;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Helper;
-use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityInterface;
 use WellCommerce\Bundle\DoctrineBundle\Event\EntityEvent;
 use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactoryInterface;
 use WellCommerce\Bundle\DoctrineBundle\Helper\Doctrine\DoctrineHelperInterface;
@@ -78,7 +78,7 @@ class Manager implements ManagerInterface
         return $this->factory;
     }
     
-    public function initResource() : EntityInterface
+    public function initResource() : IdentifiableEntityInterface
     {
         $entity = $this->factory->create();
         $this->dispatchEvent(self::POST_ENTITY_INIT_EVENT, $entity);
@@ -86,7 +86,7 @@ class Manager implements ManagerInterface
         return $entity;
     }
     
-    public function createResource(EntityInterface $entity, bool $flush = true)
+    public function createResource(IdentifiableEntityInterface $entity, bool $flush = true)
     {
         $this->dispatchEvent(self::PRE_ENTITY_CREATE_EVENT, $entity);
         $this->getEntityManager()->persist($entity);
@@ -97,7 +97,7 @@ class Manager implements ManagerInterface
         }
     }
     
-    public function updateResource(EntityInterface $entity, bool $flush = true)
+    public function updateResource(IdentifiableEntityInterface $entity, bool $flush = true)
     {
         $this->dispatchEvent(self::PRE_ENTITY_UPDATE_EVENT, $entity);
         $this->getEntityManager()->persist($entity);
@@ -108,7 +108,7 @@ class Manager implements ManagerInterface
         }
     }
     
-    public function removeResource(EntityInterface $entity, bool $flush = true)
+    public function removeResource(IdentifiableEntityInterface $entity, bool $flush = true)
     {
         $this->dispatchEvent(self::PRE_ENTITY_REMOVE_EVENT, $entity);
         $this->getEntityManager()->remove($entity);
@@ -129,7 +129,7 @@ class Manager implements ManagerInterface
         return $this->helper->getEntityManager();
     }
     
-    private function dispatchEvent(string $name, EntityInterface $entity)
+    private function dispatchEvent(string $name, IdentifiableEntityInterface $entity)
     {
         $reflection = new \ReflectionClass($entity);
         $eventName  = $this->getEventName($reflection->getShortName(), $name);

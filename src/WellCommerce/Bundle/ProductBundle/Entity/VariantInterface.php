@@ -17,7 +17,7 @@ use WellCommerce\Bundle\AppBundle\Entity\DiscountablePrice;
 use WellCommerce\Bundle\AppBundle\Entity\HierarchyAwareInterface;
 use WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityAwareInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
-use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityInterface;
 use WellCommerce\Bundle\MediaBundle\Entity\MediaAwareInterface;
 
 /**
@@ -26,7 +26,7 @@ use WellCommerce\Bundle\MediaBundle\Entity\MediaAwareInterface;
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface VariantInterface extends
-    EntityInterface,
+    IdentifiableEntityInterface,
     TimestampableInterface,
     AvailabilityAwareInterface,
     ProductAwareInterface,

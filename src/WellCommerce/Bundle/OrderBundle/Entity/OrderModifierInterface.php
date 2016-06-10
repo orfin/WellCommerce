@@ -12,14 +12,14 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Entity;
 
-use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityInterface;
 
 /**
  * Interface OrderModifierInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface OrderModifierInterface extends EntityInterface
+interface OrderModifierInterface extends IdentifiableEntityInterface
 {
     public function setOrder(OrderInterface $order);
     

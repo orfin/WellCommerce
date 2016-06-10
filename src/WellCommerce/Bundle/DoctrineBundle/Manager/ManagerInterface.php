@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\DoctrineBundle\Manager;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityInterface;
 use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactoryInterface;
 use WellCommerce\Bundle\DoctrineBundle\Helper\Doctrine\DoctrineHelperInterface;
 use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
@@ -64,31 +64,31 @@ interface ManagerInterface
     /**
      * Initializes new resource object
      *
-     * @return EntityInterface
+     * @return IdentifiableEntityInterface
      */
-    public function initResource() : EntityInterface;
+    public function initResource() : IdentifiableEntityInterface;
     
     /**
      * Persists new resource
      *
-     * @param EntityInterface $resource
+     * @param IdentifiableEntityInterface $resource
      * @param bool            $flush
      */
-    public function createResource(EntityInterface $resource, bool $flush = true);
+    public function createResource(IdentifiableEntityInterface $resource, bool $flush = true);
     
     /**
      * Updates existing resource
      *
-     * @param EntityInterface $resource
+     * @param IdentifiableEntityInterface $resource
      * @param bool            $flush
      */
-    public function updateResource(EntityInterface $resource, bool $flush = true);
+    public function updateResource(IdentifiableEntityInterface $resource, bool $flush = true);
     
     /**
      * Removes a resource
      *
-     * @param EntityInterface $resource
+     * @param IdentifiableEntityInterface $resource
      * @param bool            $flush
      */
-    public function removeResource(EntityInterface $resource, bool $flush = true);
+    public function removeResource(IdentifiableEntityInterface $resource, bool $flush = true);
 }

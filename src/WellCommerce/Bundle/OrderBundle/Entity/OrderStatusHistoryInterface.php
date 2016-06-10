@@ -14,14 +14,14 @@ namespace WellCommerce\Bundle\OrderBundle\Entity;
 
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
-use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityInterface;
 
 /**
  * Interface OrderStatusHistoryInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface OrderStatusHistoryInterface extends EntityInterface, OrderAwareInterface, TimestampableInterface, BlameableInterface
+interface OrderStatusHistoryInterface extends IdentifiableEntityInterface, OrderAwareInterface, TimestampableInterface, BlameableInterface
 {
     /**
      * @return OrderStatusInterface

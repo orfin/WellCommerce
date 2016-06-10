@@ -18,7 +18,7 @@ use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
 use WellCommerce\Bundle\DoctrineBundle\Behaviours\Enableable\EnableableInterface;
-use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityInterface;
 
 /**
  * Interface AttributeInterface
@@ -26,7 +26,7 @@ use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface AttributeInterface extends
-    EntityInterface,
+    IdentifiableEntityInterface,
     EnableableInterface,
     HierarchyAwareInterface,
     TimestampableInterface,

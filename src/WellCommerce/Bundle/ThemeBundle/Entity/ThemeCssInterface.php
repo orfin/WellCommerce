@@ -13,14 +13,14 @@
 namespace WellCommerce\Bundle\ThemeBundle\Entity;
 
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
-use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityInterface;
 
 /**
  * Interface ThemeCssInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ThemeCssInterface extends EntityInterface, TimestampableInterface, ThemeAwareInterface
+interface ThemeCssInterface extends IdentifiableEntityInterface, TimestampableInterface, ThemeAwareInterface
 {
     /**
      * @return string

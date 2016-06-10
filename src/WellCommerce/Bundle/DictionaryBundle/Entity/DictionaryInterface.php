@@ -15,14 +15,14 @@ namespace WellCommerce\Bundle\DictionaryBundle\Entity;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
-use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityInterface;
 
 /**
  * Interface DictionaryInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface DictionaryInterface extends EntityInterface, TranslatableInterface, TimestampableInterface, BlameableInterface
+interface DictionaryInterface extends IdentifiableEntityInterface, TranslatableInterface, TimestampableInterface, BlameableInterface
 {
     /**
      * @return string
