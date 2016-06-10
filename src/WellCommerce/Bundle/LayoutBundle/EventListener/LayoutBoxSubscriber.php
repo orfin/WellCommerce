@@ -45,7 +45,7 @@ class LayoutBoxSubscriber extends AbstractEventSubscriber
         $builder       = $event->getFormBuilder();
         $form          = $event->getForm();
         $configurators = $this->container->get('layout_box.configurator.collection')->all();
-        $resource      = $event->getEntity();
+        $resource      = $event->getResource();
         $boxSettings   = $resource->getSettings();
 
         foreach ($configurators as $configurator) {

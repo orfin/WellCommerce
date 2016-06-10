@@ -28,20 +28,20 @@ final class FormEvent extends Event
 
     private $formBuilder;
     private $form;
-    private $entity;
+    private $resource;
 
     /**
      * FormEvent constructor.
      *
      * @param FormBuilderInterface $formBuilder
      * @param FormInterface        $form
-     * @param EntityInterface|null $entity
+     * @param null                 $resource
      */
-    public function __construct(FormBuilderInterface $formBuilder, FormInterface $form, EntityInterface $entity = null)
+    public function __construct(FormBuilderInterface $formBuilder, FormInterface $form, $resource = null)
     {
         $this->formBuilder = $formBuilder;
         $this->form        = $form;
-        $this->entity      = $entity;
+        $this->resource    = $resource;
     }
 
     public function getFormBuilder() : FormBuilderInterface
@@ -57,8 +57,8 @@ final class FormEvent extends Event
     /**
      * @return null|object
      */
-    public function getEntity()
+    public function getResource()
     {
-        return $this->entity;
+        return $this->resource;
     }
 }
