@@ -6,5 +6,16 @@
 # For the full copyright and license information,
 # please view the LICENSE file that was distributed with this source code.
 
-imports:
-    - { resource: "app/" }
+well_commerce_locale:
+    copier:
+        entities:
+            WellCommerce\Bundle\AttributeBundle\Entity\AttributeTranslation:
+                properties:
+                    - name
+                    - shortDescription
+            WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroupTranslation:
+                properties:
+                    - name
+            WellCommerce\Bundle\AttributeBundle\Entity\AttributeValueTranslation:
+                properties:
+                    - name

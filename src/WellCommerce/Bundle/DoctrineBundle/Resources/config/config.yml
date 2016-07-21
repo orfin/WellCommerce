@@ -54,7 +54,7 @@ doctrine:
                 result_cache_driver:
                     type: service
                     id: doctrine_cache.providers.file_system
-                auto_mapping: false
+                auto_mapping: true
                 dql:
                     string_functions:
                         CONCAT_WS: DoctrineExtensions\Query\Mysql\ConcatWs

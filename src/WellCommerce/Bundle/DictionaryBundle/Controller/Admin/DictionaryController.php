@@ -12,7 +12,9 @@
 
 namespace WellCommerce\Bundle\DictionaryBundle\Controller\Admin;
 
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
+use WellCommerce\Bundle\DictionaryBundle\Manager\DictionaryManager;
 
 /**
  * Class DictionaryController
@@ -22,15 +24,15 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 class DictionaryController extends AbstractAdminController
 {
     /**
-     * Synchronizes translations to filesystem and database
-     *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @var DictionaryManager
      */
-    public function syncAction()
+    protected $manager;
+    
+    public function syncAction() : RedirectResponse
     {
         $this->manager->syncDictionary();
         $this->manager->getFlashHelper()->addSuccess('translation.flashes.success.synchronization');
-
+        
         return $this->redirectToAction('index');
     }
 }

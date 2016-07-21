@@ -6,5 +6,32 @@
 # For the full copyright and license information,
 # please view the LICENSE file that was distributed with this source code.
 
-imports:
-    - { resource: "app/" }
+doctrine:
+    orm:
+        resolve_target_entities:
+            WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface: WellCommerce\Bundle\PaymentBundle\Entity\Payment
+            WellCommerce\Bundle\PaymentBundle\Entity\PaymentStateHistoryInterface: WellCommerce\Bundle\PaymentBundle\Entity\PaymentStateHistory
+            WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodInterface: WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod
+
+well_commerce_api:
+    request_handler:
+        payment:
+            manager: payment.manager
+        payment_method:
+            manager: payment_method.manager
+    serialization:
+        WellCommerce\Bundle\PaymentBundle\Entity\Payment:
+            mapping: "@WellCommercePaymentBundle/Resources/config/serialization/Payment.yml"
+        WellCommerce\Bundle\PaymentBundle\Entity\PaymentStateHistory:
+            mapping: "@WellCommercePaymentBundle/Resources/config/serialization/PaymentStateHistory.yml"
+        WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod:
+            mapping: "@WellCommercePaymentBundle/Resources/config/serialization/PaymentMethod.yml"
+        WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodTranslation:
+            mapping: "@WellCommercePaymentBundle/Resources/config/serialization/PaymentMethodTranslation.yml"
+
+well_commerce_locale:
+    copier:
+        entities:
+            WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodTranslation:
+                properties:
+                    - name

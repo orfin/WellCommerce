@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\DoctrineBundle\DependencyInjection\Compiler;
 
 use Mmoreram\SimpleDoctrineMapping\CompilerPass\Abstracts\AbstractMappingCompilerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 
 /**
  * Class RegisterClassMetadataEnhancerPass
@@ -22,6 +23,21 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  */
 final class RegisterDoctrineMappingPass extends AbstractMappingCompilerPass
 {
+    /**
+     * @var BundleInterface
+     */
+    private $bundle;
+    
+    /**
+     * RegisterDoctrineMappingPass constructor.
+     *
+     * @param BundleInterface $bundle
+     */
+    public function __construct(BundleInterface $bundle)
+    {
+        $this->bundle = $bundle;
+    }
+    
     public function process(ContainerBuilder $container)
     {
         foreach ($container->getParameter('doctrine_orm_mapping_map') as $entity => $mapping) {

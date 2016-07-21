@@ -6,5 +6,15 @@
 # For the full copyright and license information,
 # please view the LICENSE file that was distributed with this source code.
 
-imports:
-    - { resource: "app/" }
+doctrine:
+    orm:
+        resolve_target_entities:
+            WellCommerce\Bundle\ReviewBundle\Entity\ReviewInterface: WellCommerce\Bundle\ReviewBundle\Entity\Review
+
+well_commerce_api:
+    request_handler:
+        review:
+            manager: review.manager
+    serialization:
+        WellCommerce\Bundle\ReviewBundle\Entity\Review:
+            mapping: "@WellCommerceReviewBundle/Resources/config/serialization/Review.yml"

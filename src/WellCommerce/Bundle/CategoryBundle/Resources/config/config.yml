@@ -6,5 +6,50 @@
 # For the full copyright and license information,
 # please view the LICENSE file that was distributed with this source code.
 
-imports:
-    - { resource: "app/" }
+well_commerce_api:
+    request_handler:
+        category:
+            manager: category.manager
+    serialization:
+        WellCommerce\Bundle\CategoryBundle\Entity\Category:
+            mapping: "@WellCommerceCategoryBundle/Resources/config/serialization/Category.yml"
+        WellCommerce\Bundle\CategoryBundle\Entity\CategoryRoute:
+            mapping: "@WellCommerceCategoryBundle/Resources/config/serialization/CategoryRoute.yml"
+        WellCommerce\Bundle\CategoryBundle\Entity\CategoryTranslation:
+            mapping: "@WellCommerceCategoryBundle/Resources/config/serialization/CategoryTranslation.yml"
+
+well_commerce_routing:
+    dynamic_routing:
+        category:
+            entity: WellCommerce\Bundle\CategoryBundle\Entity\CategoryRoute
+            generator: WellCommerce\Bundle\CategoryBundle\Routing\CategoryRouteGenerator
+            defaults:
+                _controller: category.controller.front:indexAction
+                limit: 12
+                page: 1
+                orderBy: name
+                orderDir: asc
+                priceFrom: 0
+                priceTo: 9999
+                view: grid
+                producers: ~
+                attributes: ~
+            requirements:
+                limit: "\\d{1,10}"
+                page: "\\d{1,10}"
+                orderBy: "name|finalPrice"
+                orderDir: "asc|desc"
+                priceFrom: "\\d{1,10}"
+                priceTo: "\\d{1,10}"
+                view: "grid|list"
+                producers: "[\\d+_]+"
+                attributes: "[\\d+_]+"
+            pattern: "{page},{limit},{orderBy},{orderDir},{priceFrom},{priceTo},{view},{producers},{attributes}"
+
+well_commerce_locale:
+    copier:
+        entities:
+            WellCommerce\Bundle\CategoryBundle\Entity\CategoryTranslation:
+                properties:
+                    - name
+                    - slug

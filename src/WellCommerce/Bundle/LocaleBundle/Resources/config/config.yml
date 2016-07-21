@@ -6,5 +6,15 @@
 # For the full copyright and license information,
 # please view the LICENSE file that was distributed with this source code.
 
-imports:
-    - { resource: "app/" }
+doctrine:
+    orm:
+        resolve_target_entities:
+            WellCommerce\Bundle\LocaleBundle\Entity\LocaleInterface: WellCommerce\Bundle\LocaleBundle\Entity\Locale
+
+well_commerce_api:
+    request_handler:
+        locale:
+            manager: locale.manager
+    serialization:
+        WellCommerce\Bundle\LocaleBundle\Entity\Locale:
+            mapping: "@WellCommerceLocaleBundle/Resources/config/serialization/Locale.yml"

@@ -6,5 +6,25 @@
 # For the full copyright and license information,
 # please view the LICENSE file that was distributed with this source code.
 
-imports:
-    - { resource: "app/" }
+doctrine:
+    orm:
+        resolve_target_entities:
+            WellCommerce\Bundle\NewsBundle\Entity\NewsInterface: WellCommerce\Bundle\NewsBundle\Entity\News
+
+well_commerce_api:
+    request_handler:
+        news:
+            manager: news.manager
+    serialization:
+        WellCommerce\Bundle\NewsBundle\Entity\News:
+            mapping: "@WellCommerceNewsBundle/Resources/config/serialization/News.yml"
+        WellCommerce\Bundle\NewsBundle\Entity\NewsTranslation:
+            mapping: "@WellCommerceNewsBundle/Resources/config/serialization/NewsTranslation.yml"
+
+well_commerce_locale:
+    copier:
+        entities:
+            WellCommerce\Bundle\NewsBundle\Entity\NewsTranslation:
+                properties:
+                    - topic
+                    - slug

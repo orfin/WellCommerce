@@ -6,5 +6,76 @@
 # For the full copyright and license information,
 # please view the LICENSE file that was distributed with this source code.
 
-imports:
-    - { resource: "app/" }
+well_commerce_api:
+    request_handler:
+        product:
+            manager: product.manager
+    serialization:
+        WellCommerce\Bundle\ProductBundle\Entity\Product:
+            mapping: "@WellCommerceProductBundle/Resources/config/serialization/Product.yml"
+        WellCommerce\Bundle\ProductBundle\Entity\Product\Distinction:
+            mapping: "@WellCommerceProductBundle/Resources/config/serialization/Product/Distinction.yml"
+        WellCommerce\Bundle\ProductBundle\Entity\Variant:
+            mapping: "@WellCommerceProductBundle/Resources/config/serialization/Variant.yml"
+        WellCommerce\Bundle\ProductBundle\Entity\Variant\Option:
+            mapping: "@WellCommerceProductBundle/Resources/config/serialization/Variant/Option.yml"
+        WellCommerce\Bundle\ProductBundle\Entity\Product\Photo:
+            mapping: "@WellCommerceProductBundle/Resources/config/serialization/Product/Photo.yml"
+        WellCommerce\Bundle\ProductBundle\Entity\Product\Route:
+            mapping: "@WellCommerceProductBundle/Resources/config/serialization/Product/Route.yml"
+        WellCommerce\Bundle\ProductBundle\Entity\ProductTranslation:
+            mapping: "@WellCommerceProductBundle/Resources/config/serialization/ProductTranslation.yml"
+
+well_commerce_locale:
+    copier:
+        entities:
+            WellCommerce\Bundle\ProductBundle\Entity\ProductTranslation:
+                properties:
+                    - name
+                    - slug
+
+well_commerce_routing:
+    dynamic_routing:
+        product:
+            entity: WellCommerce\Bundle\ProductBundle\Entity\Product\Route
+            generator: WellCommerce\Bundle\ProductBundle\Routing\ProductRouteGenerator
+            defaults:
+                _controller: product.controller.front:indexAction
+
+well_commerce_search:
+    engine:
+        index:
+            types:
+                product:
+                    class: WellCommerce\Bundle\ProductBundle\Search\ProductType
+                    mapping:
+                        sku:
+                            indexable: true
+                            boost: 1
+                            fuzziness: 2
+                            value_expression: resource.getSku()
+                        name:
+                            indexable: true
+                            boost: 1
+                            fuzziness: 3
+                            value_expression: resource.translate(locale).getName()
+                        short_description:
+                            indexable: true
+                            boost: 0.5
+                            fuzziness: 0
+                            value_expression: resource.translate(locale).getShortDescription()
+                        description:
+                            indexable: true
+                            boost: 0.5
+                            fuzziness: 0
+                            value_expression: resource.translate(locale).getDescription()
+                        producer:
+                            indexable: true
+                            boost: 0.5
+                            fuzziness: 2
+                            value_expression: resource.getProducer().translate(locale).getName()
+                        category:
+                            indexable: true
+                            boost: 0.5
+                            fuzziness: 2
+                            value_expression: resource.getCategories().first().translate(locale).getName()

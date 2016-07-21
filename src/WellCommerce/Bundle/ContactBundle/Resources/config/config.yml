@@ -6,5 +6,21 @@
 # For the full copyright and license information,
 # please view the LICENSE file that was distributed with this source code.
 
-imports:
-    - { resource: "app/" }
+well_commerce_api:
+    request_handler:
+        contact:
+            manager: contact.manager
+    serialization:
+        WellCommerce\Bundle\ContactBundle\Entity\Contact:
+            mapping: "@WellCommerceContactBundle/Resources/config/serialization/Contact.yml"
+        WellCommerce\Bundle\ContactBundle\Entity\ContactTranslation:
+            mapping: "@WellCommerceContactBundle/Resources/config/serialization/ContactTranslation.yml"
+        WellCommerce\Bundle\ContactBundle\Entity\ContactTicket:
+            mapping: "@WellCommerceContactBundle/Resources/config/serialization/ContactTicket.yml"
+
+well_commerce_locale:
+    copier:
+        entities:
+            WellCommerce\Bundle\ContactBundle\Entity\ContactTranslation:
+                properties:
+                    - name

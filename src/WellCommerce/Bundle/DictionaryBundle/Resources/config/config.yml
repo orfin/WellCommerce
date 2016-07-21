@@ -6,5 +6,14 @@
 # For the full copyright and license information,
 # please view the LICENSE file that was distributed with this source code.
 
-imports:
-    - { resource: "app/" }
+doctrine:
+    orm:
+        resolve_target_entities:
+            WellCommerce\Bundle\DictionaryBundle\Entity\DictionaryInterface: WellCommerce\Bundle\DictionaryBundle\Entity\Dictionary
+
+well_commerce_locale:
+    copier:
+        entities:
+            WellCommerce\Bundle\DictionaryBundle\Entity\DictionaryTranslation:
+                properties:
+                    - value

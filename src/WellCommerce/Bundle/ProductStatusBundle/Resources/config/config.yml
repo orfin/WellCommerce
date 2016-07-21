@@ -6,5 +6,55 @@
 # For the full copyright and license information,
 # please view the LICENSE file that was distributed with this source code.
 
-imports:
-    - { resource: "app/" }
+doctrine:
+    orm:
+        resolve_target_entities:
+            WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusInterface: WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatus
+
+well_commerce_api:
+    request_handler:
+        product_status:
+            manager: product_status.manager
+    serialization:
+        WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatus:
+            mapping: "@WellCommerceProductStatusBundle/Resources/config/serialization/ProductStatus.yml"
+        WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusRoute:
+            mapping: "@WellCommerceProductStatusBundle/Resources/config/serialization/ProductStatusRoute.yml"
+        WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusTranslation:
+            mapping: "@WellCommerceProductStatusBundle/Resources/config/serialization/ProductStatusTranslation.yml"
+
+well_commerce_locale:
+    copier:
+        entities:
+            WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusTranslation:
+                properties:
+                    - name
+                    - slug
+
+well_commerce_routing:
+    dynamic_routing:
+        product_status:
+            entity: WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusRoute
+            generator: WellCommerce\Bundle\ProductStatusBundle\Routing\ProductStatusRouteGenerator
+            defaults:
+                _controller: product_status.controller.front:indexAction
+                limit: 12
+                page: 1
+                orderBy: name
+                orderDir: asc
+                priceFrom: 0
+                priceTo: 9999
+                view: grid
+                producers: ~
+                attributes: ~
+            requirements:
+                limit: "\\d{1,10}"
+                page: "\\d{1,10}"
+                orderBy: "name|finalPrice"
+                orderDir: "asc|desc"
+                priceFrom: "\\d{1,10}"
+                priceTo: "\\d{1,10}"
+                view: "grid|list"
+                producers: "[\\d+_]+"
+                attributes: "[\\d+_]+"
+            pattern: "{page},{limit},{orderBy},{orderDir},{priceFrom},{priceTo},{view},{producers},{attributes}"

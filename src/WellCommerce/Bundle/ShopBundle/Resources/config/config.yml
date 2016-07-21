@@ -6,5 +6,15 @@
 # For the full copyright and license information,
 # please view the LICENSE file that was distributed with this source code.
 
-imports:
-    - { resource: "app/" }
+doctrine:
+    orm:
+        resolve_target_entities:
+            WellCommerce\Bundle\ShopBundle\Entity\ShopInterface: WellCommerce\Bundle\ShopBundle\Entity\Shop
+
+well_commerce_api:
+    request_handler:
+        shop:
+            manager: shop.manager
+    serialization:
+        WellCommerce\Bundle\ShopBundle\Entity\Shop:
+            mapping: "@WellCommerceShopBundle/Resources/config/serialization/Shop.yml"

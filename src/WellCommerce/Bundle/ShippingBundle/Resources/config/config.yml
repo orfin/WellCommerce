@@ -6,5 +6,27 @@
 # For the full copyright and license information,
 # please view the LICENSE file that was distributed with this source code.
 
-imports:
-    - { resource: "app/" }
+well_commerce_api:
+    request_handler:
+        shipping_method:
+            manager: shipping_method.manager
+    serialization:
+        WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethod:
+            mapping: "@WellCommerceShippingBundle/Resources/config/serialization/ShippingMethod.yml"
+        WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCost:
+            mapping: "@WellCommerceShippingBundle/Resources/config/serialization/ShippingMethodCost.yml"
+        WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodTranslation:
+            mapping: "@WellCommerceShippingBundle/Resources/config/serialization/ShippingMethodTranslation.yml"
+
+doctrine:
+    orm:
+        resolve_target_entities:
+            WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface: WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethod
+            WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCostInterface: WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCost
+
+well_commerce_locale:
+    copier:
+        entities:
+            WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodTranslation:
+                properties:
+                    - name

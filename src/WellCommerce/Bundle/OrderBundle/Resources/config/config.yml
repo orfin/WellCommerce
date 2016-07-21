@@ -16,6 +16,49 @@ parameters:
         summary: 500
         order_confirmation: 600
 
-imports:
-    - { resource: "app/" }
+doctrine:
+    orm:
+        resolve_target_entities:
+            WellCommerce\Bundle\OrderBundle\Entity\OrderInterface: WellCommerce\Bundle\OrderBundle\Entity\Order
+            WellCommerce\Bundle\OrderBundle\Entity\OrderSummaryInterface: WellCommerce\Bundle\OrderBundle\Entity\OrderSummary
+            WellCommerce\Bundle\OrderBundle\Entity\OrderProductTotalInterface: WellCommerce\Bundle\OrderBundle\Entity\OrderProductTotal
 
+well_commerce_api:
+    request_handler:
+        order:
+            manager: order.manager
+        order_status:
+            manager: order_status.manager
+        order_status_group:
+            manager: order_status_group.manager
+    serialization:
+        WellCommerce\Bundle\OrderBundle\Entity\Order:
+            mapping: "@WellCommerceOrderBundle/Resources/config/serialization/Order.yml"
+        WellCommerce\Bundle\OrderBundle\Entity\OrderModifier:
+            mapping: "@WellCommerceOrderBundle/Resources/config/serialization/OrderModifier.yml"
+        WellCommerce\Bundle\OrderBundle\Entity\OrderSummary:
+            mapping: "@WellCommerceOrderBundle/Resources/config/serialization/OrderSummary.yml"
+        WellCommerce\Bundle\OrderBundle\Entity\OrderProduct:
+            mapping: "@WellCommerceOrderBundle/Resources/config/serialization/OrderProduct.yml"
+        WellCommerce\Bundle\OrderBundle\Entity\OrderProductTotal:
+            mapping: "@WellCommerceOrderBundle/Resources/config/serialization/OrderProductTotal.yml"
+        WellCommerce\Bundle\OrderBundle\Entity\OrderStatus:
+            mapping: "@WellCommerceOrderBundle/Resources/config/serialization/OrderStatus.yml"
+        WellCommerce\Bundle\OrderBundle\Entity\OrderStatusHistory:
+            mapping: "@WellCommerceOrderBundle/Resources/config/serialization/OrderStatusHistory.yml"
+        WellCommerce\Bundle\OrderBundle\Entity\OrderStatusTranslation:
+            mapping: "@WellCommerceOrderBundle/Resources/config/serialization/OrderStatusTranslation.yml"
+        WellCommerce\Bundle\OrderBundle\Entity\OrderStatusGroup:
+            mapping: "@WellCommerceOrderBundle/Resources/config/serialization/OrderStatusGroup.yml"
+        WellCommerce\Bundle\OrderBundle\Entity\OrderStatusGroupTranslation:
+            mapping: "@WellCommerceOrderBundle/Resources/config/serialization/OrderStatusGroupTranslation.yml"
+
+well_commerce_locale:
+    copier:
+        entities:
+            WellCommerce\Bundle\OrderBundle\Entity\OrderStatusTranslation:
+                properties:
+                    - name
+            WellCommerce\Bundle\OrderBundle\Entity\OrderStatusGroupTranslation:
+                properties:
+                    - name

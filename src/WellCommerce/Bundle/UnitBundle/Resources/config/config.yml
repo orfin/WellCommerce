@@ -6,5 +6,24 @@
 # For the full copyright and license information,
 # please view the LICENSE file that was distributed with this source code.
 
-imports:
-    - { resource: "app/" }
+doctrine:
+    orm:
+        resolve_target_entities:
+            WellCommerce\Bundle\UnitBundle\Entity\UnitInterface: WellCommerce\Bundle\UnitBundle\Entity\Unit
+
+well_commerce_api:
+    request_handler:
+        unit:
+            manager: unit.manager
+    serialization:
+        WellCommerce\Bundle\UnitBundle\Entity\Unit:
+            mapping: "@WellCommerceUnitBundle/Resources/config/serialization/Unit.yml"
+        WellCommerce\Bundle\UnitBundle\Entity\UnitTranslation:
+            mapping: "@WellCommerceUnitBundle/Resources/config/serialization/UnitTranslation.yml"
+
+well_commerce_locale:
+    copier:
+        entities:
+            WellCommerce\Bundle\UnitBundle\Entity\UnitTranslation:
+                properties:
+                    - name

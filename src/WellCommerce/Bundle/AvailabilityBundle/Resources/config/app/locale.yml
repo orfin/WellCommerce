@@ -1,7 +1,0 @@
-
-well_commerce_locale:
-    copier:
-        entities:
-            WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityTranslation:
-                properties:
-                    - name

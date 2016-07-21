@@ -6,5 +6,24 @@
 # For the full copyright and license information,
 # please view the LICENSE file that was distributed with this source code.
 
-imports:
-    - { resource: "app/" }
+doctrine:
+    orm:
+        resolve_target_entities:
+            WellCommerce\Bundle\TaxBundle\Entity\TaxInterface: WellCommerce\Bundle\TaxBundle\Entity\Tax
+
+well_commerce_api:
+    request_handler:
+        tax:
+            manager: tax.manager
+    serialization:
+        WellCommerce\Bundle\TaxBundle\Entity\Tax:
+            mapping: "@WellCommerceTaxBundle/Resources/config/serialization/Tax.yml"
+        WellCommerce\Bundle\TaxBundle\Entity\TaxTranslation:
+            mapping: "@WellCommerceTaxBundle/Resources/config/serialization/TaxTranslation.yml"
+
+well_commerce_locale:
+    copier:
+        entities:
+            WellCommerce\Bundle\TaxBundle\Entity\TaxTranslation:
+                properties:
+                    - name

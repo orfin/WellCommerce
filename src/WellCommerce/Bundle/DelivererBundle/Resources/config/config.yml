@@ -6,5 +6,24 @@
 # For the full copyright and license information,
 # please view the LICENSE file that was distributed with this source code.
 
-imports:
-    - { resource: "app/" }
+doctrine:
+    orm:
+        resolve_target_entities:
+            WellCommerce\Bundle\DelivererBundle\Entity\DelivererInterface: WellCommerce\Bundle\DelivererBundle\Entity\Deliverer
+
+well_commerce_api:
+    request_handler:
+        deliverer:
+            manager: deliverer.manager
+    serialization:
+        WellCommerce\Bundle\DelivererBundle\Entity\Deliverer:
+            mapping: "@WellCommerceDelivererBundle/Resources/config/serialization/Deliverer.yml"
+        WellCommerce\Bundle\DelivererBundle\Entity\DelivererTranslation:
+            mapping: "@WellCommerceDelivererBundle/Resources/config/serialization/DelivererTranslation.yml"
+
+well_commerce_locale:
+    copier:
+        entities:
+            WellCommerce\Bundle\DelivererBundle\Entity\DelivererTranslation:
+                properties:
+                    - name

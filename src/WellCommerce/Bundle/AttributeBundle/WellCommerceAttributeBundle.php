@@ -15,6 +15,7 @@ namespace WellCommerce\Bundle\AttributeBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\Compiler\AutoRegisterServicesPass;
+use WellCommerce\Bundle\DoctrineBundle\DependencyInjection\Compiler\RegisterDoctrineMappingPass;
 
 /**
  * Class WellCommerceAttributeBundle

@@ -6,5 +6,12 @@
 # For the full copyright and license information,
 # please view the LICENSE file that was distributed with this source code.
 
-imports:
-    - { resource: "app/" }
+well_commerce_api:
+    request_handler:
+        company:
+            manager: company.manager
+    serialization:
+        WellCommerce\Bundle\CompanyBundle\Entity\Company:
+            mapping: "@WellCommerceCompanyBundle/Resources/config/serialization/Company.yml"
+        WellCommerce\Bundle\CompanyBundle\Entity\CompanyAddress:
+            mapping: "@WellCommerceCompanyBundle/Resources/config/serialization/CompanyAddress.yml"

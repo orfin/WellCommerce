@@ -9,5 +9,17 @@
 parameters:
     number_formatter_locale: ~
 
-imports:
-    - { resource: "app/" }
+doctrine:
+    orm:
+        resolve_target_entities:
+            WellCommerce\Bundle\CouponBundle\Entity\CouponInterface: WellCommerce\Bundle\CouponBundle\Entity\Coupon
+
+well_commerce_api:
+    request_handler:
+        currency:
+            manager: currency.manager
+    serialization:
+        WellCommerce\Bundle\CurrencyBundle\Entity\Currency:
+            mapping: "@WellCommerceCurrencyBundle/Resources/config/serialization/Currency.yml"
+        WellCommerce\Bundle\CurrencyBundle\Entity\CurrencyRate:
+            mapping: "@WellCommerceCurrencyBundle/Resources/config/serialization/CurrencyRate.yml"
