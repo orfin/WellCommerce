@@ -18,11 +18,11 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 use WellCommerce\Bundle\RoutingBundle\Generator\SlugGeneratorInterface;
 
 /**
- * Class RoutingController
+ * Class RouteController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class RoutingController extends AbstractAdminController
+class RouteController extends AbstractAdminController
 {
     /**
      * Generates slug using ajax request

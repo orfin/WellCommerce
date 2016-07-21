@@ -15,10 +15,10 @@ namespace WellCommerce\Bundle\RoutingBundle\Manager;
 use WellCommerce\Bundle\DoctrineBundle\Manager\AbstractManager;
 
 /**
- * Class RoutingManager
+ * Class RouteManager
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-final class RoutingManager extends AbstractManager
+final class RouteManager extends AbstractManager
 {
 }

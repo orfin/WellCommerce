@@ -6,49 +6,10 @@
 # For the full copyright and license information,
 # please view the LICENSE file that was distributed with this source code.
 
-admin.routing.index:
-    path: /index
-    defaults:
-        _controller: 'routing.controller.admin:indexAction'
-    options:
-        require_admin_permission: routing.index
-
-admin.routing.grid:
-    path: /grid
-    condition: "request.isXmlHttpRequest()"
-    defaults:
-        _controller: 'routing.controller.admin:gridAction'
-    options:
-        expose: true
-        require_admin_permission: routing.index
-
 admin.routing.generate:
     path: /generate
     defaults:
-        _controller: 'routing.controller.admin:generateAction'
+        _controller: 'route.controller.admin:generateAction'
     options:
         expose: true
         require_admin_permission: routing.index
-
-admin.routing.add:
-    path: /add
-    defaults:
-        _controller: 'routing.controller.admin:addAction'
-    options:
-        require_admin_permission: routing.add
-
-admin.routing.edit:
-    path: '/edit/{id}'
-    defaults:
-        _controller: 'routing.controller.admin:editAction'
-    options:
-        expose: true
-        require_admin_permission: routing.edit
-
-admin.routing.delete:
-    path: '/delete/{id}'
-    defaults:
-        _controller: 'routing.controller.admin:deleteAction'
-    options:
-        expose: true
-        require_admin_permission: routing.delete

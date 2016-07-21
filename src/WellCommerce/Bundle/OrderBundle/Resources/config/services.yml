@@ -103,15 +103,3 @@ services:
 
         shared: false
 
-    order_status.controller.admin:
-        class: WellCommerce\Bundle\OrderBundle\Controller\Admin\OrderStatusController
-        arguments: ['@order_status.manager', '@order_status.form_builder.admin', '@order_status.datagrid']
-        calls:
-            - [setContainer, ['@service_container']]
-
-    order_status_group.controller.admin:
-        class: WellCommerce\Bundle\OrderBundle\Controller\Admin\OrderStatusGroupController
-        arguments: ['@order_status_group.manager', '@order_status_group.form_builder.admin', '@order_status_group.datagrid']
-        calls:
-            - [setContainer, ['@service_container']]
-

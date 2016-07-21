@@ -1,11 +1,5 @@
 
 services:
-    routing.controller.admin:
-        class: WellCommerce\Bundle\RoutingBundle\Controller\Admin\RoutingController
-        arguments: ['@routing.manager']
-        calls:
-            - [setContainer, ['@service_container']]
-
     route.generator.collection:
         class: WellCommerce\Bundle\RoutingBundle\Generator\RouteGeneratorCollection
 
@@ -63,4 +57,4 @@ services:
 
     slug.generator:
         class: WellCommerce\Bundle\RoutingBundle\Generator\SlugGenerator
-        arguments: ['@routing.manager']
+        arguments: ['@route.manager']
