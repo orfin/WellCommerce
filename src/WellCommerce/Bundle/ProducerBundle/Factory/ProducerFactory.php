@@ -12,7 +12,8 @@
 
 namespace WellCommerce\Bundle\ProducerBundle\Factory;
 
-use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\ProducerBundle\Entity\Producer;
 use WellCommerce\Bundle\ProducerBundle\Entity\ProducerInterface;
 
 /**
@@ -20,12 +21,11 @@ use WellCommerce\Bundle\ProducerBundle\Entity\ProducerInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProducerFactory extends EntityFactory
+class ProducerFactory extends AbstractEntityFactory
 {
     public function create() : ProducerInterface
     {
-        /** @var  $producer ProducerInterface */
-        $producer = $this->init();
+        $producer = new Producer();
         $producer->setDeliverers($this->createEmptyCollection());
         $producer->setShops($this->getDefaultShops());
         

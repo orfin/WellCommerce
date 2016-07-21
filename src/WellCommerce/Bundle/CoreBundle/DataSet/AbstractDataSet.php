@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\CoreBundle\DataSet;
 
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
 use WellCommerce\Component\DataSet\Cache\CacheOptions;
 use WellCommerce\Component\DataSet\Column\ColumnCollection;
 use WellCommerce\Component\DataSet\Column\ColumnInterface;
@@ -32,7 +33,7 @@ use WellCommerce\Component\DataSet\Transformer\DataSetTransformerInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractDataSet implements DataSetInterface
+abstract class AbstractDataSet extends AbstractContainerAware implements DataSetInterface
 {
     /**
      * @var ColumnCollection
@@ -42,7 +43,7 @@ abstract class AbstractDataSet implements DataSetInterface
     /**
      * @var DataSetAwareRepositoryInterface
      */
-    private $repository;
+    protected $repository;
     
     /**
      * @var EventDispatcherInterface

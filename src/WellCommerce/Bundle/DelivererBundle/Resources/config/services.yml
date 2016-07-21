@@ -5,20 +5,3 @@ services:
         arguments: ['@deliverer.manager', '@deliverer.form_builder.admin', '@deliverer.datagrid']
         calls:
             - [setContainer, ['@service_container']]
-
-    deliverer.dataset.admin:
-        class: WellCommerce\Bundle\DelivererBundle\DataSet\Admin\DelivererDataSet
-        tags:
-            - { name: dataset }
-        arguments: ['@deliverer.repository']
-
-    deliverer.datagrid:
-        class: WellCommerce\Bundle\DelivererBundle\DataGrid\DelivererDataGrid
-        tags:
-            - { name: datagrid, alias: deliverer }
-        arguments: ['@deliverer.dataset.admin']
-
-    deliverer.form_builder.admin:
-        class: WellCommerce\Bundle\DelivererBundle\Form\Admin\DelivererFormBuilder
-        tags:
-            - { name: form_builder }

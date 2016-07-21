@@ -6,65 +6,14 @@ services:
         calls:
             - [setContainer, ['@service_container']]
 
-    attribute.form_builder.admin:
-        class: WellCommerce\Bundle\AttributeBundle\Form\Admin\AttributeFormBuilder
-        tags:
-            - { name: form_builder }
-
-    attribute.dataset.admin:
-        class: WellCommerce\Bundle\AttributeBundle\DataSet\Admin\AttributeDataSet
-        tags:
-            - { name: dataset, alias: attribute.admin }
-        arguments: ['@attribute.repository']
-
-    attribute.datagrid:
-        class: WellCommerce\Bundle\AttributeBundle\DataGrid\AttributeDataGrid
-        tags:
-            - { name: datagrid, alias: availability }
-        arguments: ['@attribute.dataset.admin']
-
     attribute_group.controller.admin:
         class: WellCommerce\Bundle\AttributeBundle\Controller\Admin\AttributeGroupController
         arguments: ['@attribute_group.manager', '@attribute_group.form_builder.admin', '@attribute_group.datagrid']
         calls:
             - [setContainer, ['@service_container']]
 
-    attribute_group.form_builder.admin:
-        class: WellCommerce\Bundle\AttributeBundle\Form\Admin\AttributeGroupFormBuilder
-        tags:
-            - { name: form_builder }
-
-    attribute_group.dataset.admin:
-        class: WellCommerce\Bundle\AttributeBundle\DataSet\Admin\AttributeGroupDataSet
-        tags:
-            - { name: dataset, alias: attribute_group.admin }
-        arguments: ['@attribute_group.repository']
-
-    attribute_group.datagrid:
-        class: WellCommerce\Bundle\AttributeBundle\DataGrid\AttributeGroupDataGrid
-        tags:
-            - { name: datagrid, alias: attribute_group }
-        arguments: ['@attribute_group.dataset.admin']
-
     attribute_value.controller.admin:
         class: WellCommerce\Bundle\AttributeBundle\Controller\Admin\AttributeValueController
         arguments: ['@attribute_value.manager', '@attribute_value.form_builder.admin', '@attribute_value.datagrid']
         calls:
             - [setContainer, ['@service_container']]
-
-    attribute_value.form_builder.admin:
-        class: WellCommerce\Bundle\AttributeBundle\Form\Admin\AttributeValueFormBuilder
-        tags:
-            - { name: form_builder }
-
-    attribute_value.dataset.admin:
-        class: WellCommerce\Bundle\AttributeBundle\DataSet\Admin\AttributeValueDataSet
-        tags:
-            - { name: dataset, alias: attribute_value.admin }
-        arguments: ['@attribute_value.repository']
-
-    attribute_value.datagrid:
-        class: WellCommerce\Bundle\AttributeBundle\DataGrid\AttributeValueDataGrid
-        tags:
-            - { name: datagrid, alias: attribute_value }
-        arguments: ['@attribute_value.dataset.admin']

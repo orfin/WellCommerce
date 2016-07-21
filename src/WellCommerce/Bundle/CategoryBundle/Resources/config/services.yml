@@ -21,11 +21,11 @@ services:
         calls:
             - [setContainer, ['@service_container']]
 
-    category.dataset.admin:
-        class: WellCommerce\Bundle\CategoryBundle\DataSet\Admin\CategoryDataSet
-        tags:
-            - { name: dataset }
-        arguments: ['@category.repository']
+#    category.dataset.admin:
+#        class: WellCommerce\Bundle\CategoryBundle\DataSet\Admin\CategoryDataSet
+#        tags:
+#            - { name: dataset }
+#        arguments: ['@category.repository']
 
     category.form_builder.admin:
         class: WellCommerce\Bundle\CategoryBundle\Form\Admin\CategoryFormBuilder
@@ -63,11 +63,11 @@ services:
         calls:
             - [setContainer, ['@service_container']]
 
-    category.dataset.front:
-        class: WellCommerce\Bundle\CategoryBundle\DataSet\Front\CategoryDataSet
-        tags:
-            - { name: dataset }
-        arguments: ['@category.repository']
+#    category.dataset.front:
+#        class: WellCommerce\Bundle\CategoryBundle\DataSet\Front\CategoryDataSet
+#        tags:
+#            - { name: dataset }
+#        arguments: ['@category.repository']
 
     category_products.layout_box.controller:
         class: WellCommerce\Bundle\CategoryBundle\Controller\Box\CategoryProductsBoxController

@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\DoctrineBundle\Manager;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactoryInterface;
 use WellCommerce\Bundle\DoctrineBundle\Helper\Doctrine\DoctrineHelperInterface;
 use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
@@ -34,20 +34,6 @@ interface ManagerInterface
     const POST_ENTITY_REMOVE_EVENT = 'post_remove';
     
     /**
-     * Returns the helper for Doctrine calls
-     *
-     * @return DoctrineHelperInterface
-     */
-    public function getDoctrineHelper() : DoctrineHelperInterface;
-    
-    /**
-     * Returns the Doctrine manager
-     *
-     * @return ObjectManager
-     */
-    public function getEntityManager() : ObjectManager;
-    
-    /**
      * Returns the repository
      *
      * @return RepositoryInterface
@@ -55,40 +41,33 @@ interface ManagerInterface
     public function getRepository() : RepositoryInterface;
     
     /**
-     * Returns the factory
-     *
-     * @return EntityFactoryInterface
-     */
-    public function getFactory() : EntityFactoryInterface;
-    
-    /**
      * Initializes new resource object
      *
-     * @return IdentifiableEntityInterface
+     * @return EntityInterface
      */
-    public function initResource() : IdentifiableEntityInterface;
+    public function initResource() : EntityInterface;
     
     /**
      * Persists new resource
      *
-     * @param IdentifiableEntityInterface $resource
+     * @param EntityInterface $resource
      * @param bool            $flush
      */
-    public function createResource(IdentifiableEntityInterface $resource, bool $flush = true);
+    public function createResource(EntityInterface $resource, bool $flush = true);
     
     /**
      * Updates existing resource
      *
-     * @param IdentifiableEntityInterface $resource
+     * @param EntityInterface $resource
      * @param bool            $flush
      */
-    public function updateResource(IdentifiableEntityInterface $resource, bool $flush = true);
+    public function updateResource(EntityInterface $resource, bool $flush = true);
     
     /**
      * Removes a resource
      *
-     * @param IdentifiableEntityInterface $resource
+     * @param EntityInterface $resource
      * @param bool            $flush
      */
-    public function removeResource(IdentifiableEntityInterface $resource, bool $flush = true);
+    public function removeResource(EntityInterface $resource, bool $flush = true);
 }

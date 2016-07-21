@@ -13,18 +13,6 @@ services:
         calls:
             - [setContainer, ['@service_container']]
 
-    shop.dataset.admin:
-        class: WellCommerce\Bundle\ShopBundle\DataSet\Admin\ShopDataSet
-        tags:
-            - { name: dataset, alias: shop.admin }
-        arguments: ['@shop.repository']
-
-    shop.datagrid:
-        class: WellCommerce\Bundle\ShopBundle\DataGrid\ShopDataGrid
-        tags:
-            - { name: datagrid, alias: shop }
-        arguments: ['@shop.dataset.admin']
-
     shop.form_builder.admin:
         class: WellCommerce\Bundle\ShopBundle\Form\Admin\ShopFormBuilder
         tags:

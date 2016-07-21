@@ -12,13 +12,20 @@
 
 namespace WellCommerce\Bundle\ReviewBundle;
 
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\Compiler\AutoRegisterServicesPass;
 
 /**
  * Class WellCommerceReviewBundle
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class WellCommerceReviewBundle extends Bundle
+final class WellCommerceReviewBundle extends Bundle
 {
+    public function build(ContainerBuilder $container)
+    {
+        parent::build($container);
+        $container->addCompilerPass(new AutoRegisterServicesPass($this));
+    }
 }

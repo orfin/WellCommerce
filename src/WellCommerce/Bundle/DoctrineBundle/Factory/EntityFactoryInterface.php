@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\DoctrineBundle\Factory;
 
-use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 
 /**
  * Interface EntityFactoryInterface
@@ -22,7 +22,7 @@ use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityInterface;
 interface EntityFactoryInterface
 {
     /**
-     * @return IdentifiableEntityInterface
+     * @return EntityInterface
      */
     public function create();
 }

@@ -12,7 +12,8 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Factory;
 
-use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderProductTotal;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderProductTotalInterface;
 
 /**
@@ -20,10 +21,10 @@ use WellCommerce\Bundle\OrderBundle\Entity\OrderProductTotalInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-final class OrderProductTotalFactory extends EntityFactory
+final class OrderProductTotalFactory extends AbstractEntityFactory
 {
     public function create() : OrderProductTotalInterface
     {
-        return $this->init();
+        return new OrderProductTotal();
     }
 }

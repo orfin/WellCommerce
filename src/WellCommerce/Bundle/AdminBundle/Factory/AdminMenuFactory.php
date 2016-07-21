@@ -12,19 +12,20 @@
 
 namespace WellCommerce\Bundle\AdminBundle\Factory;
 
+use WellCommerce\Bundle\AdminBundle\Entity\AdminMenu;
 use WellCommerce\Bundle\AdminBundle\Entity\AdminMenuInterface;
-use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 
 /**
  * Class AdminMenuFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AdminMenuFactory extends EntityFactory
+final class AdminMenuFactory extends AbstractEntityFactory
 {
     public function create() : AdminMenuInterface
     {
-        $adminMenu = $this->init();
+        $adminMenu = new AdminMenu();
         $adminMenu->setParent(null);
         $adminMenu->setCssClass('');
         $adminMenu->setChildren($this->createEmptyCollection());

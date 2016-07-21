@@ -12,13 +12,20 @@
 
 namespace WellCommerce\Bundle\ClientBundle;
 
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\Compiler\AutoRegisterServicesPass;
 
 /**
  * Class WellCommerceClientBundle
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class WellCommerceClientBundle extends Bundle
+final class WellCommerceClientBundle extends Bundle
 {
+    public function build(ContainerBuilder $container)
+    {
+        parent::build($container);
+        $container->addCompilerPass(new AutoRegisterServicesPass($this));
+    }
 }

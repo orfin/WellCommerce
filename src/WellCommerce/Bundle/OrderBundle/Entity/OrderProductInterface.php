@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\OrderBundle\Entity;
 
 use WellCommerce\Bundle\AppBundle\Entity\PriceInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
-use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\VariantAwareInterface;
 
@@ -24,7 +24,7 @@ use WellCommerce\Bundle\ProductBundle\Entity\VariantAwareInterface;
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface OrderProductInterface extends
-    IdentifiableEntityInterface,
+    EntityInterface,
     ProductAwareInterface,
     VariantAwareInterface,
     TimestampableInterface,

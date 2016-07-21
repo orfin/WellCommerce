@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\ProductBundle\Entity\Product;
 
 use DateTime;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
-use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareInterface;
 use WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusInterface;
 
@@ -23,7 +23,7 @@ use WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface DistinctionInterface extends IdentifiableEntityInterface, TimestampableInterface, ProductAwareInterface
+interface DistinctionInterface extends EntityInterface, TimestampableInterface, ProductAwareInterface
 {
     public function getValidFrom();
 

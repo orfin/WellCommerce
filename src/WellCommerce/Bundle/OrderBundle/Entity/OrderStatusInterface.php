@@ -16,7 +16,7 @@ use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
 use WellCommerce\Bundle\DoctrineBundle\Behaviours\Enableable\EnableableInterface;
-use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 
 /**
  * Interface OrderStatusInterface
@@ -24,7 +24,7 @@ use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityInterface;
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface OrderStatusInterface extends
-    IdentifiableEntityInterface,
+    EntityInterface,
     EnableableInterface,
     TimestampableInterface,
     TranslatableInterface,

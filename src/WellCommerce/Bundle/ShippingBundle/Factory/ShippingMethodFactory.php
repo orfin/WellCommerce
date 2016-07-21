@@ -12,8 +12,9 @@
 
 namespace WellCommerce\Bundle\ShippingBundle\Factory;
 
-use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 use WellCommerce\Bundle\ShippingBundle\Calculator\ShippingCalculatorInterface;
+use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethod;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface;
 
 /**
@@ -21,12 +22,11 @@ use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ShippingMethodFactory extends EntityFactory
+class ShippingMethodFactory extends AbstractEntityFactory
 {
     public function create() : ShippingMethodInterface
     {
-        /** @var  $shippingMethod ShippingMethodInterface */
-        $shippingMethod = $this->init();
+        $shippingMethod = new ShippingMethod();
         $shippingMethod->setCosts($this->createEmptyCollection());
         $shippingMethod->setEnabled(true);
         $shippingMethod->setHierarchy(0);

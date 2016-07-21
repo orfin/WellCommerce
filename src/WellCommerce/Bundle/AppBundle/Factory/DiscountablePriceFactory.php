@@ -12,20 +12,20 @@
 
 namespace WellCommerce\Bundle\AppBundle\Factory;
 
+use WellCommerce\Bundle\AppBundle\Entity\DiscountablePrice;
 use WellCommerce\Bundle\AppBundle\Entity\DiscountablePriceInterface;
-use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 
 /**
  * Class DiscountablePriceFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-final class DiscountablePriceFactory extends EntityFactory
+final class DiscountablePriceFactory extends AbstractEntityFactory
 {
     public function create() : DiscountablePriceInterface
     {
-        /** @var $price DiscountablePriceInterface */
-        $price = $this->init();
+        $price = new DiscountablePrice();
         $price->setGrossAmount(0);
         $price->setNetAmount(0);
         $price->setTaxAmount(0);

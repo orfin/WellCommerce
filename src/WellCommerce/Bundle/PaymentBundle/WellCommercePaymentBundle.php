@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\PaymentBundle;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\Compiler\AutoRegisterServicesPass;
 use WellCommerce\Bundle\PaymentBundle\DependencyInjection\Compiler;
 
 /**
@@ -21,11 +22,12 @@ use WellCommerce\Bundle\PaymentBundle\DependencyInjection\Compiler;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class WellCommercePaymentBundle extends Bundle
+final class WellCommercePaymentBundle extends Bundle
 {
     public function build(ContainerBuilder $container)
     {
         parent::build($container);
         $container->addCompilerPass(new Compiler\RegisterPaymentProcessorPass());
+        $container->addCompilerPass(new AutoRegisterServicesPass($this));
     }
 }

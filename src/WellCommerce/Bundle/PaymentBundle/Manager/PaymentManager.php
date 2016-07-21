@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\Manager;
 
-use WellCommerce\Bundle\DoctrineBundle\Manager\Manager;
+use WellCommerce\Bundle\DoctrineBundle\Manager\AbstractManager;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
 
@@ -21,7 +21,7 @@ use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-final class PaymentManager extends Manager implements PaymentManagerInterface
+final class PaymentManager extends AbstractManager implements PaymentManagerInterface
 {
     public function createPaymentForOrder(OrderInterface $order) : PaymentInterface
     {

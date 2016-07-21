@@ -12,20 +12,20 @@
 
 namespace WellCommerce\Bundle\AdminBundle\Factory;
 
+use WellCommerce\Bundle\AdminBundle\Entity\User;
 use WellCommerce\Bundle\AdminBundle\Entity\UserInterface;
-use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 
 /**
  * Class UserFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class UserFactory extends EntityFactory
+class UserFactory extends AbstractEntityFactory
 {
     public function create() : UserInterface
     {
-        /** @var $user UserInterface */
-        $user = $this->init();
+        $user = new User();
         $user->setFirstName('');
         $user->setLastName('');
         $user->setEmail('');

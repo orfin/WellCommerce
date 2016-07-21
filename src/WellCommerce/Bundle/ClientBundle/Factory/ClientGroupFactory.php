@@ -12,20 +12,20 @@
 
 namespace WellCommerce\Bundle\ClientBundle\Factory;
 
+use WellCommerce\Bundle\ClientBundle\Entity\ClientGroup;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientGroupInterface;
-use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 
 /**
  * Class ClientGroupFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-final class ClientGroupFactory extends EntityFactory
+final class ClientGroupFactory extends AbstractEntityFactory
 {
     public function create() : ClientGroupInterface
     {
-        /** @var $group ClientGroupInterface */
-        $group = $this->init();
+        $group = new ClientGroup();
         $group->setDiscount(0);
         $group->setClients($this->createEmptyCollection());
         $group->setPages($this->createEmptyCollection());

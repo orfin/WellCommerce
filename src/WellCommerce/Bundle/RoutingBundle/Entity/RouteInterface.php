@@ -12,14 +12,14 @@
 
 namespace WellCommerce\Bundle\RoutingBundle\Entity;
 
-use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 
 /**
  * Interface RouteInterface
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-interface RouteInterface extends IdentifiableEntityInterface
+interface RouteInterface extends EntityInterface
 {
     /**
      * @return string

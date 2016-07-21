@@ -17,7 +17,7 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Yaml\Yaml;
-use WellCommerce\Bundle\CoreBundle\Manager\AbstractManager;
+use WellCommerce\Bundle\DoctrineBundle\Manager\AbstractManager;
 use WellCommerce\Bundle\DictionaryBundle\Entity\DictionaryInterface;
 use WellCommerce\Bundle\LocaleBundle\Entity\LocaleInterface;
 
@@ -26,7 +26,7 @@ use WellCommerce\Bundle\LocaleBundle\Entity\LocaleInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class DictionaryManager extends AbstractManager
+final class DictionaryManager extends AbstractManager
 {
     /**
      * @var KernelInterface

@@ -12,8 +12,9 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\Factory;
 
-use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderStatusInterface;
+use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodInterface;
 
 /**
@@ -21,14 +22,13 @@ use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PaymentMethodFactory extends EntityFactory
+class PaymentMethodFactory extends AbstractEntityFactory
 {
     public function create() : PaymentMethodInterface
     {
         $defaultOrderStatus = $this->getDefaultOrderStatus();
 
-        /** @var  $paymentMethod PaymentMethodInterface */
-        $paymentMethod = $this->init();
+        $paymentMethod = new PaymentMethod();
         $paymentMethod->setHierarchy(0);
         $paymentMethod->setEnabled(true);
         $paymentMethod->setConfiguration([]);

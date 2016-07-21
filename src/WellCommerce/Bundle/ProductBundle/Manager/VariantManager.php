@@ -16,7 +16,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeInterface;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeValueInterface;
-use WellCommerce\Bundle\CoreBundle\Manager\AbstractManager;
+use WellCommerce\Bundle\DoctrineBundle\Manager\AbstractManager;
 use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\VariantInterface;

@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\AdminBundle\Entity\UserInterface;
 use WellCommerce\Bundle\CoreBundle\Controller\AbstractController;
-use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 use WellCommerce\Bundle\DoctrineBundle\Manager\ManagerInterface;
 use WellCommerce\Bundle\OrderBundle\Provider\Admin\OrderProviderInterface;
 use WellCommerce\Component\DataGrid\DataGridInterface;
@@ -31,7 +31,7 @@ abstract class AbstractAdminController extends AbstractController implements Adm
     /**
      * @var null|DataGridInterface
      */
-    private $dataGrid;
+    protected $dataGrid;
     
     /**
      * AbstractAdminController constructor.
@@ -60,7 +60,7 @@ abstract class AbstractAdminController extends AbstractController implements Adm
         }
         
         try {
-            $results = $this->getDataGrid()->loadResults($request);
+            $results = $this->dataGrid->loadResults($request);
         } catch (\Exception $e) {
             $results = nl2br($e->getMessage());
         }
@@ -90,7 +90,7 @@ abstract class AbstractAdminController extends AbstractController implements Adm
     {
         $resource = $this->getManager()->getRepository()->find($id);
         
-        if (!$resource instanceof IdentifiableEntityInterface) {
+        if (!$resource instanceof EntityInterface) {
             return $this->redirectToAction('index');
         }
         
@@ -121,11 +121,6 @@ abstract class AbstractAdminController extends AbstractController implements Adm
         }
         
         return $this->jsonResponse(['success' => true]);
-    }
-    
-    protected function getDataGrid() : DataGridInterface
-    {
-        return $this->dataGrid;
     }
     
     protected function getOrderProvider() : OrderProviderInterface

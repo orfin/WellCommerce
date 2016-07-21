@@ -12,7 +12,8 @@
 
 namespace WellCommerce\Bundle\ProductBundle\Factory\Variant;
 
-use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\ProductBundle\Entity\Variant\Option;
 use WellCommerce\Bundle\ProductBundle\Entity\Variant\OptionInterface;
 
 /**
@@ -20,12 +21,11 @@ use WellCommerce\Bundle\ProductBundle\Entity\Variant\OptionInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class OptionFactory extends EntityFactory
+class OptionFactory extends AbstractEntityFactory
 {
     public function create() : OptionInterface
     {
-        /** @var  $option OptionInterface */
-        $option = $this->init();
+        $option = new Option();
 
         return $option;
     }

@@ -12,14 +12,14 @@
 
 namespace WellCommerce\Bundle\ContactBundle\Entity;
 
-use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 
 /**
  * Class ReviewInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ContactTicketInterface extends IdentifiableEntityInterface
+interface ContactTicketInterface extends EntityInterface
 {
     /**
      * @return string

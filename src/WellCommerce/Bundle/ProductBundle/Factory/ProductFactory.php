@@ -15,7 +15,8 @@ namespace WellCommerce\Bundle\ProductBundle\Factory;
 use WellCommerce\Bundle\AppBundle\Entity\Dimension;
 use WellCommerce\Bundle\AppBundle\Entity\DiscountablePriceInterface;
 use WellCommerce\Bundle\AppBundle\Entity\PriceInterface;
-use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\ProductBundle\Entity\Product;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 use WellCommerce\Bundle\UnitBundle\Entity\UnitInterface;
 
@@ -24,7 +25,7 @@ use WellCommerce\Bundle\UnitBundle\Entity\UnitInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductFactory extends EntityFactory
+class ProductFactory extends AbstractEntityFactory
 {
     public function create() : ProductInterface
     {
@@ -32,7 +33,7 @@ class ProductFactory extends EntityFactory
         $tax  = $this->getDefaultTax();
 
         /** @var  $product ProductInterface */
-        $product = $this->init();
+        $product = new Product();
         $product->setCategories($this->createEmptyCollection());
         $product->setProductPhotos($this->createEmptyCollection());
         $product->setDistinctions($this->createEmptyCollection());

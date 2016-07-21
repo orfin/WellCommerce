@@ -12,7 +12,8 @@
 
 namespace WellCommerce\Bundle\ProductBundle\Factory\Product;
 
-use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\ProductBundle\Entity\Product\Distinction;
 use WellCommerce\Bundle\ProductBundle\Entity\Product\DistinctionInterface;
 
 /**
@@ -20,10 +21,12 @@ use WellCommerce\Bundle\ProductBundle\Entity\Product\DistinctionInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class DistinctionFactory extends EntityFactory
+class DistinctionFactory extends AbstractEntityFactory
 {
     public function create() : DistinctionInterface
     {
-        return $this->init();
+        $distinction = new Distinction();
+        
+        return $distinction;
     }
 }

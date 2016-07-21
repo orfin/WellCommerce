@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Manager;
 
-use WellCommerce\Bundle\DoctrineBundle\Manager\Manager;
+use WellCommerce\Bundle\DoctrineBundle\Manager\AbstractManager;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderProductInterface;
 use WellCommerce\Bundle\OrderBundle\Exception\ChangeOrderProductQuantityException;
@@ -25,7 +25,7 @@ use WellCommerce\Bundle\ProductBundle\Entity\VariantInterface;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class OrderProductManager extends Manager implements OrderProductManagerInterface
+final class OrderProductManager extends AbstractManager implements OrderProductManagerInterface
 {
     public function addProductToOrder(ProductInterface $product, VariantInterface $variant = null, int $quantity = 1, OrderInterface $order)
     {

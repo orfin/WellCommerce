@@ -23,37 +23,12 @@ use WellCommerce\Bundle\ShopBundle\Entity\ShopInterface;
 use WellCommerce\Bundle\TaxBundle\Entity\TaxInterface;
 
 /**
- * Class EntityFactory
+ * Class AbstractEntityFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class EntityFactory extends AbstractContainerAware implements EntityFactoryInterface
+abstract class AbstractEntityFactory implements EntityFactoryInterface
 {
-    /**
-     * @var string
-     */
-    private $className;
-
-    /**
-     * EntityFactory constructor.
-     *
-     * @param string $className
-     */
-    public function __construct(string $className)
-    {
-        $this->className = $className;
-    }
-
-    public function create()
-    {
-        return $this->init();
-    }
-    
-    protected function init()
-    {
-        return new $this->className;
-    }
-
     protected function createDiscountablePrice() : DiscountablePriceInterface
     {
         return $this->get('discountable_price.factory')->create();

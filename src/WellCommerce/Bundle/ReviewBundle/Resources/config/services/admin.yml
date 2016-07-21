@@ -13,23 +13,6 @@ services:
         calls:
             - [setContainer, ['@service_container']]
 
-    review.dataset.admin:
-        class: WellCommerce\Bundle\ReviewBundle\DataSet\Admin\ReviewDataSet
-        tags:
-            - { name: dataset }
-        arguments: ['@review.repository']
-
-    review.datagrid:
-        class: WellCommerce\Bundle\ReviewBundle\DataGrid\ReviewDataGrid
-        tags:
-            - { name: datagrid, alias: review }
-        arguments: ['@review.dataset.admin']
-
-    review.form_builder.admin:
-        class: WellCommerce\Bundle\ReviewBundle\Form\Admin\ReviewFormBuilder
-        tags:
-            - { name: form_builder }
-
     review.layout_box.configurator:
         class: WellCommerce\Bundle\LayoutBundle\Configurator\ReviewBoxConfigurator
         tags:

@@ -5,20 +5,3 @@ services:
         arguments: ['@company.manager', '@company.form_builder.admin', '@company.datagrid']
         calls:
             - [setContainer, ['@service_container']]
-
-    company.dataset.admin:
-        class: WellCommerce\Bundle\CompanyBundle\DataSet\Admin\CompanyDataSet
-        tags:
-            - { name: dataset }
-        arguments: ['@company.repository']
-
-    company.datagrid:
-        class: WellCommerce\Bundle\CompanyBundle\DataGrid\CompanyDataGrid
-        tags:
-            - { name: datagrid, alias: company }
-        arguments: ['@company.dataset.admin']
-
-    company.form_builder.admin:
-        class: WellCommerce\Bundle\CompanyBundle\Form\Admin\CompanyFormBuilder
-        tags:
-            - { name: form_builder }

@@ -6,28 +6,10 @@ services:
         calls:
             - [setContainer, ['@service_container']]
 
-    locale.dataset.admin:
-        class: WellCommerce\Bundle\LocaleBundle\DataSet\Admin\LocaleDataSet
-        tags:
-            - { name: dataset }
-        arguments: ['@locale.repository']
-
-    locale.datagrid:
-        class: WellCommerce\Bundle\LocaleBundle\DataGrid\LocaleDataGrid
-        tags:
-            - { name: datagrid, alias: locale }
-        arguments: ['@locale.dataset.admin']
-
     locale.form_builder.admin:
         class: WellCommerce\Bundle\LocaleBundle\Form\Admin\LocaleFormBuilder
         tags:
             - { name: form_builder }
-
-    locale.dataset.front:
-        class: WellCommerce\Bundle\LocaleBundle\DataSet\Front\LocaleDataSet
-        tags:
-            - { name: dataset, alias: locale.front }
-        arguments: ['@locale.repository']
 
     twig.extension.locale:
         class: WellCommerce\Bundle\LocaleBundle\Twig\Extension\LocaleExtension
@@ -47,19 +29,6 @@ services:
             - { name: kernel.event_subscriber }
         calls:
             - [setContainer, ['@service_container']]
-
-    locale.add.command:
-        class: WellCommerce\Bundle\LocaleBundle\Command\AddLocaleCommand
-        tags:
-            - { name: console.command }
-        calls:
-            - [setContainer, ['@service_container']]
-
-    locale.delete.command:
-        class: WellCommerce\Bundle\LocaleBundle\Command\DeleteLocaleCommand
-        tags:
-            - { name: console.command }
-        arguments: ['@doctrine.helper', '@locale.repository']
 
     form.translation.data_transformer:
         class: WellCommerce\Bundle\LocaleBundle\Form\DataTransformer\TranslationTransformer

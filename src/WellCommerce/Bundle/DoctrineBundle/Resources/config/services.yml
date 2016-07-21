@@ -24,11 +24,7 @@ services:
         tags:
             - { name: doctrine.event_subscriber, connection: default }
         arguments: ['@cache']
-    doctrine.command.generate_entity_extra:
-        class: WellCommerce\Bundle\DoctrineBundle\Command\GenerateEntityExtraCommand
-        tags:
-            - { name: console.command }
-        arguments: ['@doctrine.trait_generator.enhancer_collection', '@doctrine.trait_generator.enhancer_traverser', '@environment_helper']
+
     doctrine.helper:
         class: WellCommerce\Bundle\DoctrineBundle\Helper\Doctrine\DoctrineHelper
         arguments: ['@doctrine']

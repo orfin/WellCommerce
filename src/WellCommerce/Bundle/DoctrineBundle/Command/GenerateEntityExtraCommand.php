@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\DoctrineBundle\Command;
 
-use Symfony\Component\Console\Command\Command;
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
@@ -27,28 +27,28 @@ use Wingu\OctopusCore\Reflection\ReflectionClass;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class GenerateEntityExtraCommand extends Command
+class GenerateEntityExtraCommand extends ContainerAwareCommand
 {
     /**
      * @var TraitGeneratorEnhancerCollection
      */
     protected $collection;
-
+    
     /**
      * @var TraitGeneratorEnhancerTraverserInterface
      */
     protected $traverser;
-
+    
     /**
      * @var Filesystem
      */
     protected $filesystem;
-
+    
     /**
      * @var EnvironmentHelperInterface
      */
     protected $environmentHelper;
-
+    
     /**
      * GenerateEntityExtraCommand constructor.
      *
@@ -56,18 +56,18 @@ class GenerateEntityExtraCommand extends Command
      * @param TraitGeneratorEnhancerTraverserInterface $traverser
      * @param EnvironmentHelperInterface               $environmentHelper
      */
-    public function __construct(
-        TraitGeneratorEnhancerCollection $collection,
-        TraitGeneratorEnhancerTraverserInterface $traverser,
-        EnvironmentHelperInterface $environmentHelper
-    ) {
-        parent::__construct();
-        $this->collection        = $collection;
-        $this->traverser         = $traverser;
-        $this->filesystem        = new Filesystem();
-        $this->environmentHelper = $environmentHelper;
-    }
-
+//    public function __construct(
+//        TraitGeneratorEnhancerCollection $collection,
+//        TraitGeneratorEnhancerTraverserInterface $traverser,
+//        EnvironmentHelperInterface $environmentHelper
+//    ) {
+//        parent::__construct();
+//        $this->collection        = $collection;
+//        $this->traverser         = $traverser;
+//        $this->filesystem        = new Filesystem();
+//        $this->environmentHelper = $environmentHelper;
+//    }
+    
     /**
      * {@inheritdoc}
      */
@@ -76,7 +76,7 @@ class GenerateEntityExtraCommand extends Command
         $this->setDescription('Generates extra trait classes for entities');
         $this->setName('wellcommerce:doctrine:generate-entity-extra');
     }
-
+    
     /**
      * Executes the command
      *
@@ -93,11 +93,11 @@ class GenerateEntityExtraCommand extends Command
             $code = $this->generateTrait($reflectionClass);
             $this->filesystem->dumpFile($reflectionClass->getFileName(), $code);
         }
-
+        
         $this->executeMetadataCacheClear($output);
         $this->executeSchemaUpdate($output);
     }
-
+    
     /**
      * Executes the cache clear through separate process
      *
@@ -109,12 +109,12 @@ class GenerateEntityExtraCommand extends Command
             'app/console',
             'doctrine:cache:clear-metadata'
         ];
-
+        
         $process = $this->environmentHelper->getProcess($arguments, 360);
         $process->run();
         $output->write($process->getOutput());
     }
-
+    
     /**
      * Executes the schema update through separate process
      *
@@ -127,12 +127,12 @@ class GenerateEntityExtraCommand extends Command
             'doctrine:schema:update',
             '--force'
         ];
-
+        
         $process = $this->environmentHelper->getProcess($arguments, 360);
         $process->run();
         $output->write($process->getOutput());
     }
-
+    
     /**
      * Generates a trait class
      *
@@ -144,7 +144,12 @@ class GenerateEntityExtraCommand extends Command
     {
         $generator = new TraitGenerator($reflectionClass->getShortName(), $reflectionClass->getNamespaceName());
         $this->traverser->traverse($generator);
-
+        
         return '<?php' . str_repeat(PHP_EOL, 2) . $generator->generate();
+    }
+    
+    private function getTraitGeneratorEnhancer() : TraitGeneratorEnhancerTraverserInterface
+    {
+        
     }
 }

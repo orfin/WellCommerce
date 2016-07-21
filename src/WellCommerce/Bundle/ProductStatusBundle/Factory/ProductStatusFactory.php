@@ -12,7 +12,8 @@
 
 namespace WellCommerce\Bundle\ProductStatusBundle\Factory;
 
-use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatus;
 use WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusInterface;
 
 /**
@@ -20,12 +21,11 @@ use WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductStatusFactory extends EntityFactory
+class ProductStatusFactory extends AbstractEntityFactory
 {
     public function create() : ProductStatusInterface
     {
-        /** @var  $status ProductStatusInterface */
-        $status = $this->init();
+        $status = new ProductStatus();
         $status->setSymbol('');
         
         return $status;

@@ -12,7 +12,8 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Factory;
 
-use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderProduct;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderProductInterface;
 
 /**
@@ -20,12 +21,11 @@ use WellCommerce\Bundle\OrderBundle\Entity\OrderProductInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class OrderProductFactory extends EntityFactory
+class OrderProductFactory extends AbstractEntityFactory
 {
     public function create() : OrderProductInterface
     {
-        /** @var  $orderProduct OrderProductInterface */
-        $orderProduct = $this->init();
+        $orderProduct = new OrderProduct();
         $orderProduct->setQuantity(1);
         $orderProduct->setWeight(0);
         $orderProduct->setBuyPrice($this->createPrice());

@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\OrderBundle\Manager;
 
 use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
-use WellCommerce\Bundle\DoctrineBundle\Manager\Manager;
+use WellCommerce\Bundle\DoctrineBundle\Manager\AbstractManager;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 use WellCommerce\Bundle\ShopBundle\Entity\ShopInterface;
 
@@ -22,7 +22,7 @@ use WellCommerce\Bundle\ShopBundle\Entity\ShopInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class OrderManager extends Manager implements OrderManagerInterface
+final class OrderManager extends AbstractManager implements OrderManagerInterface
 {
     public function getOrder(string $sessionId, ClientInterface $client = null, ShopInterface $shop, string $currency) : OrderInterface
     {

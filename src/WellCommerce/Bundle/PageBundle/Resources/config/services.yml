@@ -14,18 +14,6 @@ services:
         calls:
             - [setContainer, ['@service_container']]
 
-    page.dataset.admin:
-        class: WellCommerce\Bundle\PageBundle\DataSet\Admin\PageDataSet
-        tags:
-            - { name: dataset }
-        arguments: ['@page.repository']
-
-    page.datagrid:
-        class: WellCommerce\Bundle\PageBundle\DataGrid\PageDataGrid
-        tags:
-            - { name: datagrid, alias: page }
-        arguments: ['@page.dataset.admin']
-
     page.form_builder.admin:
         class: WellCommerce\Bundle\PageBundle\Form\Admin\PageFormBuilder
         tags:
@@ -42,12 +30,6 @@ services:
         arguments: ['@page.manager']
         calls:
             - [setContainer, ['@service_container']]
-
-    page.dataset.front:
-        class: WellCommerce\Bundle\PageBundle\DataSet\Front\PageDataSet
-        tags:
-            - { name: dataset, alias: page.front }
-        arguments: ['@page.repository']
 
     twig.extension.page:
         class: WellCommerce\Bundle\PageBundle\Twig\Extension\PageExtension

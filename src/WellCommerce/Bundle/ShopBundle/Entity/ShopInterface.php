@@ -19,7 +19,7 @@ use WellCommerce\Bundle\CompanyBundle\Entity\CompanyAwareInterface;
 use WellCommerce\Bundle\CompanyBundle\Entity\CompanyInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
-use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 use WellCommerce\Bundle\ThemeBundle\Entity\ThemeAwareInterface;
 
 /**
@@ -28,7 +28,7 @@ use WellCommerce\Bundle\ThemeBundle\Entity\ThemeAwareInterface;
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface ShopInterface extends
-    IdentifiableEntityInterface,
+    EntityInterface,
     ClientGroupAwareInterface,
     TimestampableInterface,
     BlameableInterface,

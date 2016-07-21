@@ -12,7 +12,8 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Factory;
 
-use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderStatusHistory;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderStatusHistoryInterface;
 
 /**
@@ -20,12 +21,11 @@ use WellCommerce\Bundle\OrderBundle\Entity\OrderStatusHistoryInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class OrderStatusHistoryFactory extends EntityFactory
+class OrderStatusHistoryFactory extends AbstractEntityFactory
 {
     public function create() : OrderStatusHistoryInterface
     {
-        /** @var  $status OrderStatusHistoryInterface */
-        $status = $this->init();
+        $status = new OrderStatusHistory();
         $status->setComment('');
         $status->setNotify(false);
         

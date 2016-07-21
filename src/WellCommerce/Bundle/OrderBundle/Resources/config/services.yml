@@ -6,38 +6,6 @@ services:
         calls:
             - [setContainer, ['@service_container']]
 
-    order.form_builder.admin:
-        class: WellCommerce\Bundle\OrderBundle\Form\Admin\OrderFormBuilder
-        tags:
-            - { name: form_builder }
-
-    order_cart.form_builder.front:
-        class: WellCommerce\Bundle\OrderBundle\Form\Front\OrderCartFormBuilder
-        tags:
-            - { name: form_builder }
-
-    order_address.form_builder.front:
-        class: WellCommerce\Bundle\OrderBundle\Form\Front\OrderAddressFormBuilder
-        tags:
-            - { name: form_builder }
-
-    order_confirmation.form_builder.front:
-        class: WellCommerce\Bundle\OrderBundle\Form\Front\OrderConfirmationFormBuilder
-        tags:
-            - { name: form_builder }
-
-    order.dataset.admin:
-        class: WellCommerce\Bundle\OrderBundle\DataSet\Admin\OrderDataSet
-        tags:
-            - { name: dataset, alias: order.admin }
-        arguments: ['@order.repository']
-
-    order.datagrid:
-        class: WellCommerce\Bundle\OrderBundle\DataGrid\OrderDataGrid
-        tags:
-            - { name: datagrid, alias: orders }
-        arguments: ['@order.dataset.admin']
-
     order_cart.controller.front:
         class: WellCommerce\Bundle\OrderBundle\Controller\Front\OrderCartController
         arguments: ['@order_product.manager', '@order_cart.form_builder.front']
@@ -131,14 +99,6 @@ services:
             - { name: twig.extension }
         arguments: ['@order.provider.front', '@order_product.dataset.front']
 
-    order_product.dataset.front:
-        class: WellCommerce\Bundle\OrderBundle\DataSet\Front\OrderProductDataSet
-        tags:
-            - { name: dataset }
-        arguments: ['@order_product.repository']
-        calls:
-            - [setOrderProvider, ['@order.provider.front']]
-
     form.order_product_collection.data_transformer:
         class: WellCommerce\Bundle\OrderBundle\Form\DataTransformer\OrderProductCollectionToArrayTransformer
         tags:
@@ -155,47 +115,9 @@ services:
         calls:
             - [setContainer, ['@service_container']]
 
-    order_status.dataset.admin:
-        class: WellCommerce\Bundle\OrderBundle\DataSet\Admin\OrderStatusDataSet
-        tags:
-            - { name: dataset }
-        arguments: ['@order_status.repository']
-
-    order_status.datagrid:
-        class: WellCommerce\Bundle\OrderBundle\DataGrid\OrderStatusDataGrid
-        tags:
-            - { name: datagrid, alias: order_status }
-        arguments: ['@order_status.dataset.admin']
-
-    order_status.form_builder.admin:
-        class: WellCommerce\Bundle\OrderBundle\Form\Admin\OrderStatusFormBuilder
-        tags:
-            - { name: form_builder }
-
-    order_status_history.form_builder.admin:
-        class: WellCommerce\Bundle\OrderBundle\Form\Admin\OrderStatusHistoryFormBuilder
-        tags:
-            - { name: form_builder }
-
     order_status_group.controller.admin:
         class: WellCommerce\Bundle\OrderBundle\Controller\Admin\OrderStatusGroupController
         arguments: ['@order_status_group.manager', '@order_status_group.form_builder.admin', '@order_status_group.datagrid']
         calls:
             - [setContainer, ['@service_container']]
 
-    order_status_group.dataset.admin:
-        class: WellCommerce\Bundle\OrderBundle\DataSet\Admin\OrderStatusGroupDataSet
-        tags:
-            - { name: dataset }
-        arguments: ['@order_status_group.repository']
-
-    order_status_group.datagrid:
-        class: WellCommerce\Bundle\OrderBundle\DataGrid\OrderStatusGroupDataGrid
-        tags:
-            - { name: datagrid, alias: order_status_group }
-        arguments: ['@order_status_group.dataset.admin']
-
-    order_status_group.form_builder.admin:
-        class: WellCommerce\Bundle\OrderBundle\Form\Admin\OrderStatusGroupFormBuilder
-        tags:
-            - { name: form_builder }

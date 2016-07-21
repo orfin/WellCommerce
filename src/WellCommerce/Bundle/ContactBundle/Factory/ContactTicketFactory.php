@@ -12,20 +12,20 @@
 
 namespace WellCommerce\Bundle\ContactBundle\Factory;
 
+use WellCommerce\Bundle\ContactBundle\Entity\ContactTicket;
 use WellCommerce\Bundle\ContactBundle\Entity\ContactTicketInterface;
-use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 
 /**
  * Class ContactTicketFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ContactTicketFactory extends EntityFactory
+class ContactTicketFactory extends AbstractEntityFactory
 {
     public function create() : ContactTicketInterface
     {
-        /** @var $contact ContactTicketInterface */
-        $contactTicket = $this->init();
+        $contactTicket = new ContactTicket();
         $contactTicket->setEmail('');
         $contactTicket->setSubject('');
         $contactTicket->setContent('');

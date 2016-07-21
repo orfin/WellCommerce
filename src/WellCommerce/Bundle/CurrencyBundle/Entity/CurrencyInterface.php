@@ -15,14 +15,14 @@ namespace WellCommerce\Bundle\CurrencyBundle\Entity;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\DoctrineBundle\Behaviours\Enableable\EnableableInterface;
-use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 
 /**
  * Interface CurrencyInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface CurrencyInterface extends IdentifiableEntityInterface, EnableableInterface, TimestampableInterface, BlameableInterface
+interface CurrencyInterface extends EntityInterface, EnableableInterface, TimestampableInterface, BlameableInterface
 {
     /**
      * @param string $code

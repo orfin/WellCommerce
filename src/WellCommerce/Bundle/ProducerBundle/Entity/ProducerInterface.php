@@ -17,7 +17,7 @@ use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
 use WellCommerce\Bundle\DelivererBundle\Entity\DelivererInterface;
-use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 use WellCommerce\Bundle\ShopBundle\Entity\ShopCollectionAwareInterface;
 
 /**
@@ -26,7 +26,7 @@ use WellCommerce\Bundle\ShopBundle\Entity\ShopCollectionAwareInterface;
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface ProducerInterface extends
-    IdentifiableEntityInterface,
+    EntityInterface,
     TranslatableInterface,
     TimestampableInterface,
     BlameableInterface,

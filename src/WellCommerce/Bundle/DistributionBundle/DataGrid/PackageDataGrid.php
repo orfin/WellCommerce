@@ -27,7 +27,7 @@ use WellCommerce\Component\DataGrid\Options\OptionsInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PackageDataGrid extends AbstractDataGrid
+final class PackageDataGrid extends AbstractDataGrid
 {
     /**
      * {@inheritdoc}

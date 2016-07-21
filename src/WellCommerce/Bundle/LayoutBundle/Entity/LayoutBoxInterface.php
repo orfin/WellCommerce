@@ -15,14 +15,14 @@ namespace WellCommerce\Bundle\LayoutBundle\Entity;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
-use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 
 /**
  * Interface LayoutBoxInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface LayoutBoxInterface extends IdentifiableEntityInterface, TimestampableInterface, TranslatableInterface, BlameableInterface
+interface LayoutBoxInterface extends EntityInterface, TimestampableInterface, TranslatableInterface, BlameableInterface
 {
     /**
      * @return string

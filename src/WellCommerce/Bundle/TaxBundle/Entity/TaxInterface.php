@@ -15,14 +15,14 @@ namespace WellCommerce\Bundle\TaxBundle\Entity;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
-use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 
 /**
  * Interface TaxInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface TaxInterface extends IdentifiableEntityInterface, TranslatableInterface, TimestampableInterface, BlameableInterface
+interface TaxInterface extends EntityInterface, TranslatableInterface, TimestampableInterface, BlameableInterface
 {
     /**
      * @return float

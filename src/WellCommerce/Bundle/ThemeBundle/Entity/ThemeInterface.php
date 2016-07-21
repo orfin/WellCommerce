@@ -15,14 +15,14 @@ namespace WellCommerce\Bundle\ThemeBundle\Entity;
 use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
-use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 
 /**
  * Interface ThemeInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ThemeInterface extends IdentifiableEntityInterface, TimestampableInterface, BlameableInterface
+interface ThemeInterface extends EntityInterface, TimestampableInterface, BlameableInterface
 {
     /**
      * @return string

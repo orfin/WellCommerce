@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\LayoutBundle;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\Compiler\AutoRegisterServicesPass;
 use WellCommerce\Bundle\LayoutBundle\DependencyInjection\Compiler;
 
 /**
@@ -27,5 +28,6 @@ class WellCommerceLayoutBundle extends Bundle
     {
         parent::build($container);
         $container->addCompilerPass(new Compiler\LayoutBoxConfiguratorPass());
+        $container->addCompilerPass(new AutoRegisterServicesPass($this));
     }
 }

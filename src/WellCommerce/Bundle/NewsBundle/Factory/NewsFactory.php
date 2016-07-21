@@ -12,7 +12,8 @@
 
 namespace WellCommerce\Bundle\NewsBundle\Factory;
 
-use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\NewsBundle\Entity\News;
 use WellCommerce\Bundle\NewsBundle\Entity\NewsInterface;
 
 /**
@@ -20,12 +21,11 @@ use WellCommerce\Bundle\NewsBundle\Entity\NewsInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class NewsFactory extends EntityFactory
+class NewsFactory extends AbstractEntityFactory
 {
     public function create() : NewsInterface
     {
-        /** @var $news NewsInterface */
-        $news = $this->init();
+        $news = new News();
         $news->setFeatured(false);
         $news->setPublish(true);
         $news->setStartDate(new \DateTime());

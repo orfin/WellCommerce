@@ -12,7 +12,8 @@
 
 namespace WellCommerce\Bundle\LocaleBundle\Factory;
 
-use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\LocaleBundle\Entity\Locale;
 use WellCommerce\Bundle\LocaleBundle\Entity\LocaleInterface;
 
 /**
@@ -20,12 +21,11 @@ use WellCommerce\Bundle\LocaleBundle\Entity\LocaleInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LocaleFactory extends EntityFactory
+class LocaleFactory extends AbstractEntityFactory
 {
     public function create() : LocaleInterface
     {
-        /** @var $locale LocaleInterface */
-        $locale = $this->init();
+        $locale = new Locale();
         $locale->setCode('');
         $locale->setEnabled(true);
         $locale->setCurrency($this->getDefaultCurrency());

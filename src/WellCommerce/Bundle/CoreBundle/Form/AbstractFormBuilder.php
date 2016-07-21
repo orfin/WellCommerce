@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\CoreBundle\Form;
 
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
-use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
 use WellCommerce\Component\Form\DataTransformer\DataTransformerInterface;
 use WellCommerce\Component\Form\Dependencies\DependencyInterface;
@@ -35,11 +35,6 @@ use WellCommerce\Component\Form\Rules\RuleInterface;
 abstract class AbstractFormBuilder extends AbstractContainerAware implements FormBuilderInterface
 {
     /**
-     * @var string
-     */
-    protected $alias;
-
-    /**
      * @var FormResolverFactoryInterface
      */
     protected $resolverFactory;
@@ -48,27 +43,24 @@ abstract class AbstractFormBuilder extends AbstractContainerAware implements For
      * @var FormHandlerInterface
      */
     protected $formHandler;
-
+    
     /**
      * @var EventDispatcherInterface
      */
     protected $eventDispatcher;
-
+    
     /**
      * AbstractFormBuilder constructor.
      *
-     * @param string                       $alias
      * @param FormResolverFactoryInterface $resolverFactory
      * @param FormHandlerInterface         $formHandler
      * @param EventDispatcherInterface     $eventDispatcher
      */
     public function __construct(
-        string $alias,
         FormResolverFactoryInterface $resolverFactory,
         FormHandlerInterface $formHandler,
         EventDispatcherInterface $eventDispatcher
     ) {
-        $this->alias           = $alias;
         $this->resolverFactory = $resolverFactory;
         $this->formHandler     = $formHandler;
         $this->eventDispatcher = $eventDispatcher;
@@ -84,24 +76,24 @@ abstract class AbstractFormBuilder extends AbstractContainerAware implements For
         $this->dispatchFormEvent($form, $defaultData, FormEvent::FORM_PRE_INIT_EVENT);
         $this->formHandler->initForm($form, $defaultData);
         $this->dispatchFormEvent($form, $defaultData, FormEvent::FORM_POST_INIT_EVENT);
-
+        
         return $form;
     }
-
+    
     /**
      * Dispatches a form event
      *
      * @param FormInterface        $form
-     * @param IdentifiableEntityInterface|null $entity
+     * @param EntityInterface|null $entity
      * @param string               $name
      */
-    protected function dispatchFormEvent(FormInterface $form, IdentifiableEntityInterface $entity = null, string $name)
+    protected function dispatchFormEvent(FormInterface $form, EntityInterface $entity = null, string $name)
     {
-        $eventName = sprintf('%s.%s', $this->alias, $name);
-
+        $eventName = sprintf('%s.%s', $form->getOption('name'), $name);
+        
         $this->eventDispatcher->dispatch($eventName, new FormEvent($this, $form, $entity));
     }
-
+    
     /**
      * {@inheritdoc}
      */

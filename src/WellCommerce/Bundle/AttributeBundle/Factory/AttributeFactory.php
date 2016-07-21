@@ -12,20 +12,20 @@
 
 namespace WellCommerce\Bundle\AttributeBundle\Factory;
 
+use WellCommerce\Bundle\AttributeBundle\Entity\Attribute;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeInterface;
-use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 
 /**
  * Class AttributeFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AttributeFactory extends EntityFactory
+class AttributeFactory extends AbstractEntityFactory
 {
     public function create() : AttributeInterface
     {
-        /** @var $attribute AttributeInterface */
-        $attribute = $this->init();
+        $attribute = new Attribute();
         $attribute->setValues($this->createEmptyCollection());
         $attribute->setGroups($this->createEmptyCollection());
 

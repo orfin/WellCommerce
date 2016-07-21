@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\SerializerInterface;
 use WellCommerce\Bundle\ApiBundle\Exception\ResourceNotFoundException;
-use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 use WellCommerce\Bundle\DoctrineBundle\Manager\ManagerInterface;
 
 /**
@@ -130,7 +130,7 @@ final class RequestHandler implements RequestHandlerInterface
         return new Response($data);
     }
     
-    private function getResourceById(int $identifier) : IdentifiableEntityInterface
+    private function getResourceById(int $identifier) : EntityInterface
     {
         $resource = $this->manager->getRepository()->find($identifier);
         if (null === $resource) {

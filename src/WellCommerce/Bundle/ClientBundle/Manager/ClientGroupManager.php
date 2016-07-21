@@ -12,13 +12,13 @@
 
 namespace WellCommerce\Bundle\ClientBundle\Manager;
 
-use WellCommerce\Bundle\CoreBundle\Manager\AbstractManager;
+use WellCommerce\Bundle\DoctrineBundle\Manager\AbstractManager;
 
 /**
  * Class ClientGroupManager
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientGroupManager extends AbstractManager
+final class ClientGroupManager extends AbstractManager
 {
 }

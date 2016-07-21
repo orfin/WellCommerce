@@ -12,20 +12,20 @@
 
 namespace WellCommerce\Bundle\DictionaryBundle\Factory;
 
+use WellCommerce\Bundle\DictionaryBundle\Entity\Dictionary;
 use WellCommerce\Bundle\DictionaryBundle\Entity\DictionaryInterface;
-use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 
 /**
  * Class DictionaryFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class DictionaryFactory extends EntityFactory
+class DictionaryFactory extends AbstractEntityFactory
 {
     public function create() : DictionaryInterface
     {
-        /** @var $dictionary DictionaryInterface */
-        $dictionary = $this->init();
+        $dictionary = new Dictionary();
         $dictionary->setIdentifier('');
 
         return $dictionary;

@@ -13,14 +13,14 @@
 namespace WellCommerce\Bundle\AdminBundle\Entity;
 
 use WellCommerce\Bundle\DoctrineBundle\Behaviours\Enableable\EnableableInterface;
-use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 
 /**
  * Class UserGroupPermission
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface UserGroupPermissionInterface extends IdentifiableEntityInterface, EnableableInterface
+interface UserGroupPermissionInterface extends EntityInterface, EnableableInterface
 {
     /**
      * @return UserGroupInterface

@@ -12,7 +12,8 @@
 
 namespace WellCommerce\Bundle\ReviewBundle\Factory;
 
-use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\ReviewBundle\Entity\Review;
 use WellCommerce\Bundle\ReviewBundle\Entity\ReviewInterface;
 
 /**
@@ -20,12 +21,12 @@ use WellCommerce\Bundle\ReviewBundle\Entity\ReviewInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ReviewFactory extends EntityFactory
+class ReviewFactory extends AbstractEntityFactory
 {
     public function create() : ReviewInterface
     {
         /** @var  $review ReviewInterface */
-        $review = $this->init();
+        $review = new Review();
         $review->setNick('');
         $review->setRating(5);
         $review->setRatingLevel(5);

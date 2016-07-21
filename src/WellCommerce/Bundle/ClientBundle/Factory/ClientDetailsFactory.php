@@ -12,20 +12,20 @@
 
 namespace WellCommerce\Bundle\ClientBundle\Factory;
 
+use WellCommerce\Bundle\ClientBundle\Entity\ClientDetails;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientDetailsInterface;
-use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 
 /**
  * Class ClientDetailsFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-final class ClientDetailsFactory extends EntityFactory
+final class ClientDetailsFactory extends AbstractEntityFactory
 {
     public function create() : ClientDetailsInterface
     {
-        /** @var ClientDetailsInterface $details */
-        $details = $this->init();
+        $details = new ClientDetails();
         $details->setUsername('');
         $details->setConditionsAccepted(false);
         $details->setDiscount(0);

@@ -5,25 +5,3 @@ services:
         arguments: ['@dictionary.manager', '@dictionary.form_builder.admin', '@dictionary.datagrid']
         calls:
             - [setContainer, ['@service_container']]
-
-    dictionary.dataset.admin:
-        class: WellCommerce\Bundle\DictionaryBundle\DataSet\Admin\DictionaryDataSet
-        tags:
-            - { name: dataset }
-        arguments: ['@dictionary.repository']
-
-    dictionary.datagrid:
-        class: WellCommerce\Bundle\DictionaryBundle\DataGrid\DictionaryDataGrid
-        tags:
-            - { name: datagrid, alias: dictionary }
-        arguments: ['@dictionary.dataset.admin']
-
-    dictionary.form_builder.admin:
-        class: WellCommerce\Bundle\DictionaryBundle\Form\Admin\DictionaryFormBuilder
-        tags:
-            - { name: form_builder }
-
-    package.command.purge.translations:
-        class: WellCommerce\Bundle\DictionaryBundle\Command\PurgeTranslationsCommand
-        tags:
-            - { name: console.command }

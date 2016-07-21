@@ -12,7 +12,8 @@
 
 namespace WellCommerce\Bundle\ThemeBundle\Factory;
 
-use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\ThemeBundle\Entity\Theme;
 use WellCommerce\Bundle\ThemeBundle\Entity\ThemeInterface;
 
 /**
@@ -20,12 +21,11 @@ use WellCommerce\Bundle\ThemeBundle\Entity\ThemeInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ThemeFactory extends EntityFactory
+class ThemeFactory extends AbstractEntityFactory
 {
     public function create() : ThemeInterface
     {
-        /** @var  $theme ThemeInterface */
-        $theme = $this->init();
+        $theme = new Theme();
         $theme->setCss($this->createEmptyCollection());
         $theme->setName('');
         $theme->setFolder($this->getDefaultFolder());

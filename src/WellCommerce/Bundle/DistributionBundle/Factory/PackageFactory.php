@@ -12,20 +12,20 @@
 
 namespace WellCommerce\Bundle\DistributionBundle\Factory;
 
+use WellCommerce\Bundle\DistributionBundle\Entity\Package;
 use WellCommerce\Bundle\DistributionBundle\Entity\PackageInterface;
-use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 
 /**
  * Class ChannelFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PackageFactory extends EntityFactory
+class PackageFactory extends AbstractEntityFactory
 {
     public function create() : PackageInterface
     {
-        /** @var  $package PackageInterface */
-        $package = $this->init();
+        $package = new Package();
 
         return $package;
     }

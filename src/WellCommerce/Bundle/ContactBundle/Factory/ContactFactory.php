@@ -12,21 +12,21 @@
 
 namespace WellCommerce\Bundle\ContactBundle\Factory;
 
+use WellCommerce\Bundle\ContactBundle\Entity\Contact;
 use WellCommerce\Bundle\ContactBundle\Entity\ContactInterface;
 use WellCommerce\Bundle\ContactBundle\Entity\ContactTranslation;
-use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 
 /**
  * Class ContactFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ContactFactory extends EntityFactory
+class ContactFactory extends AbstractEntityFactory
 {
     public function create() : ContactInterface
     {
-        /** @var $contact ContactInterface */
-        $contact = $this->init();
+        $contact = new Contact();
         $contact->setEnabled(true);
         $contact->setCreatedAt(new \DateTime());
 

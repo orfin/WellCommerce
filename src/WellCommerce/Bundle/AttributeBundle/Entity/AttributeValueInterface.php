@@ -16,14 +16,14 @@ use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
-use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 
 /**
  * Interface AttributeValueInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface AttributeValueInterface extends IdentifiableEntityInterface, TranslatableInterface, TimestampableInterface, BlameableInterface
+interface AttributeValueInterface extends EntityInterface, TranslatableInterface, TimestampableInterface, BlameableInterface
 {
     /**
      * @return Collection

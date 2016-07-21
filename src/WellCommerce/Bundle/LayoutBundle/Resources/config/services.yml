@@ -6,23 +6,6 @@ services:
         calls:
             - [setContainer, ['@service_container']]
 
-    layout_box.dataset.admin:
-        class: WellCommerce\Bundle\LayoutBundle\DataSet\Admin\LayoutBoxDataSet
-        tags:
-            - { name: dataset }
-        arguments: ['@layout_box.repository']
-
-    layout_box.datagrid:
-        class: WellCommerce\Bundle\LayoutBundle\DataGrid\LayoutBoxDataGrid
-        tags:
-            - { name: datagrid, alias: layout_box }
-        arguments: ['@layout_box.dataset.admin']
-
-    layout_box.form_builder.admin:
-        class: WellCommerce\Bundle\LayoutBundle\Form\Admin\LayoutBoxFormBuilder
-        tags:
-            - { name: form_builder }
-
     layout_box.renderer:
         class: WellCommerce\Bundle\LayoutBundle\Renderer\LayoutBoxRenderer
         arguments: ['@layout_box.service_resolver', '@layout_box.manager', '@router.helper']

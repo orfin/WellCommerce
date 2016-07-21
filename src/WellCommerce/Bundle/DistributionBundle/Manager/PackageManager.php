@@ -16,7 +16,7 @@ use ComposerRevisions\Revisions;
 use Doctrine\ORM\EntityNotFoundException;
 use Packagist\Api\Result\Package as RemotePackage;
 use Symfony\Component\HttpFoundation\Request;
-use WellCommerce\Bundle\CoreBundle\Manager\AbstractManager;
+use WellCommerce\Bundle\DoctrineBundle\Manager\AbstractManager;
 use WellCommerce\Bundle\DistributionBundle\Entity\Package;
 use WellCommerce\Bundle\DistributionBundle\Entity\PackageInterface;
 use WellCommerce\Bundle\DistributionBundle\Helper\Package\PackageHelperInterface;
@@ -26,7 +26,7 @@ use WellCommerce\Bundle\DistributionBundle\Helper\Package\PackageHelperInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PackageManager extends AbstractManager
+final class PackageManager extends AbstractManager
 {
     /**
      * @var PackageHelperInterface

@@ -13,7 +13,8 @@
 namespace WellCommerce\Bundle\PageBundle\Factory;
 
 use Doctrine\Common\Collections\Criteria;
-use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\PageBundle\Entity\Page;
 use WellCommerce\Bundle\PageBundle\Entity\PageInterface;
 
 /**
@@ -21,12 +22,11 @@ use WellCommerce\Bundle\PageBundle\Entity\PageInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PageFactory extends EntityFactory
+class PageFactory extends AbstractEntityFactory
 {
     public function create() : PageInterface
     {
-        /** @var  $page PageInterface */
-        $page = $this->init();
+        $page = new Page();
         $page->setHierarchy(0);
         $page->setCreatedAt(new \DateTime());
         $page->setClientGroups($this->getDefaultClientGroups());

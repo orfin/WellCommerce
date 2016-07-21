@@ -16,7 +16,7 @@ use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
-use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 use WellCommerce\Bundle\PageBundle\Entity\PageInterface;
 
 /**
@@ -24,7 +24,7 @@ use WellCommerce\Bundle\PageBundle\Entity\PageInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ClientGroupInterface extends IdentifiableEntityInterface, TranslatableInterface, TimestampableInterface, BlameableInterface
+interface ClientGroupInterface extends EntityInterface, TranslatableInterface, TimestampableInterface, BlameableInterface
 {
     public function getDiscount() : float;
     

@@ -22,11 +22,6 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 class DictionaryController extends AbstractAdminController
 {
     /**
-     * @var \WellCommerce\Bundle\DictionaryBundle\Manager\Admin\DictionaryManager
-     */
-    protected $manager;
-
-    /**
      * Synchronizes translations to filesystem and database
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse

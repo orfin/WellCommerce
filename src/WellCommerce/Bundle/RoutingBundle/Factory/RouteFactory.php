@@ -12,7 +12,8 @@
 
 namespace WellCommerce\Bundle\RoutingBundle\Factory;
 
-use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\RoutingBundle\Entity\Route;
 use WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface;
 
 /**
@@ -20,12 +21,11 @@ use WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class RouteFactory extends EntityFactory
+class RouteFactory extends AbstractEntityFactory
 {
     public function create() : RouteInterface
     {
-        /** @var  $route RouteInterface */
-        $route = $this->init();
+        $route = new Route();
 
         return $route;
     }

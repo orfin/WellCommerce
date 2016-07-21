@@ -13,64 +13,60 @@
 namespace WellCommerce\Bundle\DistributionBundle\Entity;
 
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 
 /**
  * Interface PackageInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface PackageInterface extends TimestampableInterface
+interface PackageInterface extends EntityInterface, TimestampableInterface
 {
-    /**
-     * @return integer
-     */
-    public function getId();
-
     /**
      * @return string
      */
     public function getFullName();
-
+    
     /**
      * @param string $fullName
      */
     public function setFullName($fullName);
-
+    
     /**
      * @return string
      */
     public function getName();
-
+    
     /**
      * @param string $name
      */
     public function setName($name);
-
+    
     /**
      * @return string
      */
     public function getVendor();
-
+    
     /**
      * @param string $vendor
      */
     public function setVendor($vendor);
-
+    
     /**
      * @return string
      */
     public function getLocalVersion();
-
+    
     /**
      * @param string $localVersion
      */
     public function setLocalVersion($localVersion);
-
+    
     /**
      * @return string
      */
     public function getRemoteVersion();
-
+    
     /**
      * @param string $remoteVersion
      */

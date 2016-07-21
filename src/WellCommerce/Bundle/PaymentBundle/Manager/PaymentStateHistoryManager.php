@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\Manager;
 
-use WellCommerce\Bundle\DoctrineBundle\Manager\Manager;
+use WellCommerce\Bundle\DoctrineBundle\Manager\AbstractManager;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentStateHistoryInterface;
 
@@ -21,7 +21,7 @@ use WellCommerce\Bundle\PaymentBundle\Entity\PaymentStateHistoryInterface;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-final class PaymentStateHistoryManager extends Manager implements PaymentStateHistoryManagerInterface
+final class PaymentStateHistoryManager extends AbstractManager implements PaymentStateHistoryManagerInterface
 {
     public function createPaymentStateHistory(PaymentInterface $payment) : PaymentStateHistoryInterface
     {

@@ -12,20 +12,20 @@
 
 namespace WellCommerce\Bundle\CurrencyBundle\Factory;
 
+use WellCommerce\Bundle\CurrencyBundle\Entity\Currency;
 use WellCommerce\Bundle\CurrencyBundle\Entity\CurrencyInterface;
-use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 
 /**
  * Class CurrencyFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CurrencyFactory extends EntityFactory
+class CurrencyFactory extends AbstractEntityFactory
 {
     public function create() : CurrencyInterface
     {
-        /** @var $currency CurrencyInterface */
-        $currency = $this->init();
+        $currency = new Currency();
         $currency->setEnabled(true);
         $currency->setCode('');
 

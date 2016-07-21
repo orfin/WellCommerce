@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\ClientBundle\Manager;
 
 use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientWishlistInterface;
-use WellCommerce\Bundle\DoctrineBundle\Manager\Manager;
+use WellCommerce\Bundle\DoctrineBundle\Manager\AbstractManager;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 
 /**
@@ -22,7 +22,7 @@ use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-final class ClientWishlistManager extends Manager
+final class ClientWishlistManager extends AbstractManager
 {
     public function addProductToWishlist(ProductInterface $product, ClientInterface $client)
     {

@@ -11,17 +11,17 @@ services:
         tags:
             - { name: form_builder }
 
-    client.dataset.admin:
-        class: WellCommerce\Bundle\ClientBundle\DataSet\Admin\ClientDataSet
-        tags:
-            - { name: dataset }
-        arguments: ['@client.repository']
+#    client.dataset.admin:
+#        class: WellCommerce\Bundle\ClientBundle\DataSet\Admin\ClientDataSet
+#        tags:
+#            - { name: dataset }
+#        arguments: ['@client.repository']
 
-    client.datagrid:
-        class: WellCommerce\Bundle\ClientBundle\DataGrid\ClientDataGrid
-        tags:
-            - { name: datagrid, alias: client }
-        arguments: ['@client.dataset.admin']
+#    client.datagrid:
+#        class: WellCommerce\Bundle\ClientBundle\DataGrid\ClientDataGrid
+#        tags:
+#            - { name: datagrid, alias: client }
+#        arguments: ['@client.dataset.admin']
 
     client.controller.front:
         class: WellCommerce\Bundle\ClientBundle\Controller\Front\ClientController
@@ -208,18 +208,6 @@ services:
         arguments: ['@client_group.manager', '@client_group.form_builder.admin', '@client_group.datagrid']
         calls:
             - [setContainer, ['@service_container']]
-
-    client_group.dataset.admin:
-        class: WellCommerce\Bundle\ClientBundle\DataSet\Admin\ClientGroupDataSet
-        tags:
-            - { name: dataset }
-        arguments: ['@client_group.repository']
-
-    client_group.datagrid:
-        class: WellCommerce\Bundle\ClientBundle\DataGrid\ClientGroupDataGrid
-        tags:
-            - { name: datagrid, alias: client_group }
-        arguments: ['@client_group.dataset.admin']
 
     client_group.form_builder.admin:
         class: WellCommerce\Bundle\ClientBundle\Form\Admin\ClientGroupFormBuilder

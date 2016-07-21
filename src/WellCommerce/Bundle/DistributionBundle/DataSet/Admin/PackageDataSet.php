@@ -37,7 +37,7 @@ class PackageDataSet extends AbstractDataSet
             'createdAt'     => 'package.createdAt',
             'updatedAt'     => 'package.updatedAt',
         ]);
-
+        
         $configurator->setColumnTransformers([
             'createdAt'     => $this->getDataSetTransformer('date', ['format' => 'Y-m-d H:i:s']),
             'updatedAt'     => $this->getDataSetTransformer('date', ['format' => 'Y-m-d H:i:s']),

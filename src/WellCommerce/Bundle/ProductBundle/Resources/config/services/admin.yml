@@ -13,23 +13,6 @@ services:
         calls:
             - [setContainer, ['@service_container']]
 
-    product.dataset.admin:
-        class: WellCommerce\Bundle\ProductBundle\DataSet\Admin\ProductDataSet
-        tags:
-            - { name: dataset }
-        arguments: ['@product.repository']
-
-    product.datagrid:
-        class: WellCommerce\Bundle\ProductBundle\DataGrid\ProductDataGrid
-        tags:
-            - { name: datagrid, alias: product }
-        arguments: ['@product.dataset.admin']
-
-    product.form_builder.admin:
-        class: WellCommerce\Bundle\ProductBundle\Form\Admin\ProductFormBuilder
-        tags:
-            - { name: form_builder }
-
     product_info.layout_box.configurator:
         class: WellCommerce\Bundle\LayoutBundle\Configurator\ProductInfoBoxConfigurator
         tags:

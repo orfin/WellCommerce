@@ -12,19 +12,20 @@
 
 namespace WellCommerce\Bundle\AdminBundle\Factory;
 
+use WellCommerce\Bundle\AdminBundle\Entity\Role;
 use WellCommerce\Bundle\AdminBundle\Entity\RoleInterface;
-use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 
 /**
  * Class RoleFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class RoleFactory extends EntityFactory
+class RoleFactory extends AbstractEntityFactory
 {
     public function create() : RoleInterface
     {
-        $role = $this->init();
+        $role = new Role();
         $role->setName('');
         $role->setUsers($this->createEmptyCollection());
         

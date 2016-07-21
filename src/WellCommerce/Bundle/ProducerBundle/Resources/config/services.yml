@@ -6,18 +6,6 @@ services:
         calls:
             - [setContainer, ['@service_container']]
 
-    producer.dataset.admin:
-        class: WellCommerce\Bundle\ProducerBundle\DataSet\Admin\ProducerDataSet
-        tags:
-            - { name: dataset, alias: producer.admin }
-        arguments: ['@producer.repository']
-
-    producer.datagrid:
-        class: WellCommerce\Bundle\ProducerBundle\DataGrid\ProducerDataGrid
-        tags:
-            - { name: datagrid, alias: producer }
-        arguments: ['@producer.dataset.admin']
-
     producer.form_builder.admin:
         class: WellCommerce\Bundle\ProducerBundle\Form\Admin\ProducerFormBuilder
         tags:
@@ -44,12 +32,6 @@ services:
         arguments: ['@producer.manager']
         calls:
             - [setContainer, ['@service_container']]
-
-    producer.dataset.front:
-        class: WellCommerce\Bundle\ProducerBundle\DataSet\Front\ProducerDataSet
-        tags:
-            - { name: dataset }
-        arguments: ['@producer.repository']
 
     producer_menu.layout_box.controller:
         class: WellCommerce\Bundle\ProducerBundle\Controller\Box\ProducerMenuBoxController

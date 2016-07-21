@@ -12,20 +12,20 @@
 
 namespace WellCommerce\Bundle\ClientBundle\Factory;
 
+use WellCommerce\Bundle\ClientBundle\Entity\ClientWishlist;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientWishlistInterface;
-use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 
 /**
  * Class ClientWishlistFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-final class ClientWishlistFactory extends EntityFactory
+final class ClientWishlistFactory extends AbstractEntityFactory
 {
     public function create() : ClientWishlistInterface
     {
-        /** @var  $wishlist ClientWishlistInterface */
-        $wishlist = $this->init();
+        $wishlist = new ClientWishlist();
 
         return $wishlist;
     }

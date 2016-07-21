@@ -12,20 +12,3 @@ services:
         arguments: ['@shipping_method.manager', '@shipping_method.form_builder.admin', '@shipping_method.datagrid']
         calls:
             - [setContainer, ['@service_container']]
-
-    shipping_method.dataset.admin:
-        class: WellCommerce\Bundle\ShippingBundle\DataSet\Admin\ShippingMethodDataSet
-        tags:
-            - { name: dataset }
-        arguments: ['@shipping_method.repository']
-
-    shipping_method.datagrid:
-        class: WellCommerce\Bundle\ShippingBundle\DataGrid\ShippingMethodDataGrid
-        tags:
-            - { name: datagrid, alias: shipping_method }
-        arguments: ['@shipping_method.dataset.admin']
-
-    shipping_method.form_builder.admin:
-        class: WellCommerce\Bundle\ShippingBundle\Form\Admin\ShippingMethodFormBuilder
-        tags:
-            - { name: form_builder }

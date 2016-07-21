@@ -35,7 +35,8 @@ class CurrencyFormBuilder extends AbstractFormBuilder
         $requiredData->addChild($this->getElement('select', [
             'name'    => 'code',
             'label'   => $this->trans('currency.label.code'),
-            'options' => $this->getCurrencyRepository()->getCurrenciesToSelect()
+            'options' => $this->getCurrencyRepository()->getCurrenciesToSelect(),
+            'default' => $this->getRequestHelper()->getCurrentCurrency()
         ]));
 
         $requiredData->addChild($this->getElement('checkbox', [

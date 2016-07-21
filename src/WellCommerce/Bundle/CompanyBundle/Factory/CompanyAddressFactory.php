@@ -12,20 +12,20 @@
 
 namespace WellCommerce\Bundle\CompanyBundle\Factory;
 
+use WellCommerce\Bundle\CompanyBundle\Entity\CompanyAddress;
 use WellCommerce\Bundle\CompanyBundle\Entity\CompanyAddressInterface;
-use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 
 /**
  * Class CompanyAddressFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CompanyAddressFactory extends EntityFactory
+class CompanyAddressFactory extends AbstractEntityFactory
 {
     public function create() : CompanyAddressInterface
     {
-        /** @var $address CompanyAddressInterface */
-        $address = $this->init();
+        $address = new CompanyAddress();
         $address->setLine1('');
         $address->setLine2('');
         $address->setPostalCode('');

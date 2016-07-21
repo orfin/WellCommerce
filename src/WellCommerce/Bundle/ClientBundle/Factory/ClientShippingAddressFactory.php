@@ -12,20 +12,20 @@
 
 namespace WellCommerce\Bundle\ClientBundle\Factory;
 
+use WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddress;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddressInterface;
-use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 
 /**
  * Class ClientShippingAddressFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-final class ClientShippingAddressFactory extends EntityFactory
+final class ClientShippingAddressFactory extends AbstractEntityFactory
 {
     public function create() : ClientShippingAddressInterface
     {
-        /** @var ClientShippingAddressInterface $address */
-        $address = $this->init();
+        $address = new ClientShippingAddress();
         $address->setFirstName('');
         $address->setLastName('');
         $address->setLine1('');

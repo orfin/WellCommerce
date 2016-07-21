@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\ThemeBundle;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\Compiler\AutoRegisterServicesPass;
 use WellCommerce\Bundle\ThemeBundle\DependencyInjection\Compiler;
 
 /**
@@ -21,11 +22,12 @@ use WellCommerce\Bundle\ThemeBundle\DependencyInjection\Compiler;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class WellCommerceThemeBundle extends Bundle
+final class WellCommerceThemeBundle extends Bundle
 {
     public function build(ContainerBuilder $container)
     {
         parent::build($container);
         $container->addCompilerPass(new Compiler\ThemeCompilerPass());
+        $container->addCompilerPass(new AutoRegisterServicesPass($this));
     }
 }

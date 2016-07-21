@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\ProductBundle\Search;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 use WellCommerce\Component\Search\Model\DocumentInterface;
 use WellCommerce\Component\Search\Model\Field;
@@ -59,7 +59,7 @@ final class ProductType implements TypeInterface
         return $this->name;
     }
     
-    public function createDocument(IdentifiableEntityInterface $entity, string $locale) : DocumentInterface
+    public function createDocument(EntityInterface $entity, string $locale) : DocumentInterface
     {
         if (!$entity instanceof ProductInterface) {
             throw new \InvalidArgumentException(sprintf(

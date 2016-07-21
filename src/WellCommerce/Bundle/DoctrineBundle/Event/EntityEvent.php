@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\DoctrineBundle\Event;
 
 use Symfony\Component\EventDispatcher\Event;
-use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 
 /**
  * Class EntityEvent
@@ -27,14 +27,14 @@ final class EntityEvent extends Event
     /**
      * EntityEvent constructor.
      *
-     * @param IdentifiableEntityInterface $entity
+     * @param EntityInterface $entity
      */
-    public function __construct(IdentifiableEntityInterface $entity)
+    public function __construct(EntityInterface $entity)
     {
         $this->entity = $entity;
     }
 
-    public function getEntity() : IdentifiableEntityInterface
+    public function getEntity() : EntityInterface
     {
         return $this->entity;
     }

@@ -12,7 +12,8 @@
 
 namespace WellCommerce\Bundle\TaxBundle\Factory;
 
-use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\TaxBundle\Entity\Tax;
 use WellCommerce\Bundle\TaxBundle\Entity\TaxInterface;
 
 /**
@@ -20,12 +21,11 @@ use WellCommerce\Bundle\TaxBundle\Entity\TaxInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class TaxFactory extends EntityFactory
+class TaxFactory extends AbstractEntityFactory
 {
     public function create() : TaxInterface
     {
-        /** @var  $tax TaxInterface */
-        $tax = $this->init();
+        $tax = new Tax();
         $tax->setValue(0);
         $tax->setCreatedAt(new \DateTime());
         

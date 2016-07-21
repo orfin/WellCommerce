@@ -12,20 +12,20 @@
 
 namespace WellCommerce\Bundle\DelivererBundle\Factory;
 
+use WellCommerce\Bundle\DelivererBundle\Entity\Deliverer;
 use WellCommerce\Bundle\DelivererBundle\Entity\DelivererInterface;
-use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 
 /**
  * Class DelivererFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class DelivererFactory extends EntityFactory
+class DelivererFactory extends AbstractEntityFactory
 {
     public function create() : DelivererInterface
     {
-        /** @var $deliverer DelivererInterface */
-        $deliverer = $this->init();
+        $deliverer = new Deliverer();
         $deliverer->setProducers($this->createEmptyCollection());
 
         return $deliverer;

@@ -12,7 +12,8 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Factory;
 
-use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderStatusGroup;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderStatusGroupInterface;
 
 /**
@@ -20,12 +21,11 @@ use WellCommerce\Bundle\OrderBundle\Entity\OrderStatusGroupInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class OrderStatusGroupFactory extends EntityFactory
+class OrderStatusGroupFactory extends AbstractEntityFactory
 {
     public function create() : OrderStatusGroupInterface
     {
-        /** @var  $group OrderStatusGroupInterface */
-        $group = $this->init();
+        $group = new OrderStatusGroup();
         
         return $group;
     }

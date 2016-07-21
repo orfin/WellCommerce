@@ -12,13 +12,21 @@
 
 namespace WellCommerce\Bundle\UnitBundle\Factory;
 
-use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\UnitBundle\Entity\Unit;
+use WellCommerce\Bundle\UnitBundle\Entity\UnitInterface;
 
 /**
  * Class UnitFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class UnitFactory extends EntityFactory
+class UnitFactory extends AbstractEntityFactory
 {
+    public function create() : UnitInterface
+    {
+        $unit = new Unit();
+        
+        return $unit;
+    }
 }

@@ -14,14 +14,14 @@ namespace WellCommerce\Bundle\AdminBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\AppBundle\Entity\HierarchyAwareInterface;
-use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 
 /**
  * Interface AdminMenuInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface AdminMenuInterface extends IdentifiableEntityInterface, HierarchyAwareInterface
+interface AdminMenuInterface extends EntityInterface, HierarchyAwareInterface
 {
     /**
      * @return string

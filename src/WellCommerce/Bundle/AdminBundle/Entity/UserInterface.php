@@ -17,14 +17,14 @@ use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\UserInterface as BaseUserInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\DoctrineBundle\Behaviours\Enableable\EnableableInterface;
-use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 
 /**
  * Interface UserInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface UserInterface extends \Serializable, EquatableInterface, BaseUserInterface, TimestampableInterface, IdentifiableEntityInterface, EnableableInterface
+interface UserInterface extends \Serializable, EquatableInterface, BaseUserInterface, TimestampableInterface, EntityInterface, EnableableInterface
 {
     /**
      * @return string

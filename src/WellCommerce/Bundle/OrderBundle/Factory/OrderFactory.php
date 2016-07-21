@@ -16,7 +16,8 @@ use WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddressInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetailsInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddressInterface;
-use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\OrderBundle\Entity\Order;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderProductTotalInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderSummaryInterface;
@@ -26,12 +27,11 @@ use WellCommerce\Bundle\OrderBundle\Entity\OrderSummaryInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class OrderFactory extends EntityFactory
+class OrderFactory extends AbstractEntityFactory
 {
     public function create() : OrderInterface
     {
-        /** @var  $order OrderInterface */
-        $order = $this->init();
+        $order = new Order();
         $order->setConfirmed(false);
         $order->setProducts($this->createEmptyCollection());
         $order->setProductTotal($this->createOrderProductTotal());

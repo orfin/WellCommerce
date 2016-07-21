@@ -10,17 +10,15 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\DoctrineBundle\Entity;
+namespace WellCommerce\Bundle\ReviewBundle\Manager;
+
+use WellCommerce\Bundle\DoctrineBundle\Manager\AbstractManager;
 
 /**
- * Interface IdentifiableEntityInterface
+ * Class ReviewManager
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface IdentifiableEntityInterface
+final class ReviewManager extends AbstractManager
 {
-    /**
-     * @return int
-     */
-    public function getId() : int;
 }

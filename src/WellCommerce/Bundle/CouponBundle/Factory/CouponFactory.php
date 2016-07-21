@@ -12,20 +12,20 @@
 
 namespace WellCommerce\Bundle\CouponBundle\Factory;
 
+use WellCommerce\Bundle\CouponBundle\Entity\Coupon;
 use WellCommerce\Bundle\CouponBundle\Entity\CouponInterface;
-use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 
 /**
  * Class CouponFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CouponFactory extends EntityFactory
+class CouponFactory extends AbstractEntityFactory
 {
     public function create() : CouponInterface
     {
-        /** @var $coupon CouponInterface */
-        $coupon = $this->init();
+        $coupon = new Coupon();
         $coupon->setClientUsageLimit(1);
         $coupon->setGlobalUsageLimit(1);
         $coupon->setModifierType('%');

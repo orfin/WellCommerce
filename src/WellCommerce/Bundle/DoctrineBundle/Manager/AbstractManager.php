@@ -12,13 +12,11 @@
 
 namespace WellCommerce\Bundle\DoctrineBundle\Manager;
 
-use Doctrine\Common\Persistence\ObjectManager;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
 use WellCommerce\Bundle\CoreBundle\Helper\Helper;
-use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 use WellCommerce\Bundle\DoctrineBundle\Event\EntityEvent;
 use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactoryInterface;
-use WellCommerce\Bundle\DoctrineBundle\Helper\Doctrine\DoctrineHelperInterface;
 use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
 
 /**
@@ -26,46 +24,28 @@ use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Manager implements ManagerInterface
+abstract class AbstractManager extends AbstractContainerAware implements ManagerInterface
 {
     /**
-     * @var null|RepositoryInterface
+     * @var RepositoryInterface
      */
-    private $repository;
+    protected $repository;
     
     /**
-     * @var null|EntityFactoryInterface
+     * @var EntityFactoryInterface
      */
-    private $factory;
+    protected $factory;
     
     /**
-     * @var DoctrineHelperInterface
-     */
-    private $helper;
-    
-    /**
-     * @var EventDispatcherInterface
-     */
-    private $eventDispatcher;
-    
-    /**
-     * Manager constructor.
+     * AbstractManager constructor.
      *
-     * @param EntityFactoryInterface|null   $factory
-     * @param RepositoryInterface|null $repository
-     * @param DoctrineHelperInterface  $helper
-     * @param EventDispatcherInterface $eventDispatcher
+     * @param EntityFactoryInterface $factory
+     * @param RepositoryInterface    $repository
      */
-    public function __construct(
-        EntityFactoryInterface $factory = null,
-        RepositoryInterface $repository = null,
-        DoctrineHelperInterface $helper,
-        EventDispatcherInterface $eventDispatcher
-    ) {
-        $this->factory         = $factory;
-        $this->repository      = $repository;
-        $this->helper          = $helper;
-        $this->eventDispatcher = $eventDispatcher;
+    public function __construct(EntityFactoryInterface $factory, RepositoryInterface $repository)
+    {
+        $this->factory    = $factory;
+        $this->repository = $repository;
     }
     
     public function getRepository() : RepositoryInterface
@@ -73,68 +53,53 @@ class Manager implements ManagerInterface
         return $this->repository;
     }
     
-    public function getFactory() : EntityFactoryInterface
-    {
-        return $this->factory;
-    }
-    
-    public function initResource() : IdentifiableEntityInterface
+    public function initResource() : EntityInterface
     {
         $entity = $this->factory->create();
         $this->dispatchEvent(self::POST_ENTITY_INIT_EVENT, $entity);
-
+        
         return $entity;
     }
     
-    public function createResource(IdentifiableEntityInterface $entity, bool $flush = true)
+    public function createResource(EntityInterface $entity, bool $flush = true)
     {
         $this->dispatchEvent(self::PRE_ENTITY_CREATE_EVENT, $entity);
         $this->getEntityManager()->persist($entity);
         $this->dispatchEvent(self::POST_ENTITY_CREATE_EVENT, $entity);
-
+        
         if ($flush) {
             $this->getEntityManager()->flush();
         }
     }
     
-    public function updateResource(IdentifiableEntityInterface $entity, bool $flush = true)
+    public function updateResource(EntityInterface $entity, bool $flush = true)
     {
         $this->dispatchEvent(self::PRE_ENTITY_UPDATE_EVENT, $entity);
         $this->getEntityManager()->persist($entity);
         $this->dispatchEvent(self::POST_ENTITY_UPDATE_EVENT, $entity);
-
+        
         if ($flush) {
             $this->getEntityManager()->flush();
         }
     }
     
-    public function removeResource(IdentifiableEntityInterface $entity, bool $flush = true)
+    public function removeResource(EntityInterface $entity, bool $flush = true)
     {
         $this->dispatchEvent(self::PRE_ENTITY_REMOVE_EVENT, $entity);
         $this->getEntityManager()->remove($entity);
         $this->dispatchEvent(self::POST_ENTITY_REMOVE_EVENT, $entity);
-
+        
         if ($flush) {
             $this->getEntityManager()->flush();
         }
     }
     
-    public function getDoctrineHelper() : DoctrineHelperInterface
-    {
-        return $this->helper;
-    }
-    
-    public function getEntityManager() : ObjectManager
-    {
-        return $this->helper->getEntityManager();
-    }
-    
-    private function dispatchEvent(string $name, IdentifiableEntityInterface $entity)
+    private function dispatchEvent(string $name, EntityInterface $entity)
     {
         $reflection = new \ReflectionClass($entity);
         $eventName  = $this->getEventName($reflection->getShortName(), $name);
         $event      = new EntityEvent($entity);
-        $this->eventDispatcher->dispatch($eventName, $event);
+        $this->getEventDispatcher()->dispatch($eventName, $event);
     }
     
     private function getEventName($class, $name)

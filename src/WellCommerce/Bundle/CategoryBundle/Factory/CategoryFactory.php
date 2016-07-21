@@ -12,20 +12,20 @@
 
 namespace WellCommerce\Bundle\CategoryBundle\Factory;
 
+use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 use WellCommerce\Bundle\CategoryBundle\Entity\CategoryInterface;
-use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 
 /**
  * Class CategoryFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CategoryFactory extends EntityFactory
+class CategoryFactory extends AbstractEntityFactory
 {
     public function create() : CategoryInterface
     {
-        /** @var $category CategoryInterface */
-        $category = $this->init();
+        $category = new Category();
         $category->setEnabled(true);
         $category->setHierarchy(0);
         $category->setParent(null);

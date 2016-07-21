@@ -15,7 +15,8 @@ namespace WellCommerce\Bundle\ShopBundle\Factory;
 use WellCommerce\Bundle\AppBundle\Entity\MailerConfiguration;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientGroupInterface;
 use WellCommerce\Bundle\CompanyBundle\Entity\CompanyInterface;
-use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\ShopBundle\Entity\Shop;
 use WellCommerce\Bundle\ShopBundle\Entity\ShopInterface;
 use WellCommerce\Bundle\ThemeBundle\Entity\ThemeInterface;
 
@@ -24,12 +25,11 @@ use WellCommerce\Bundle\ThemeBundle\Entity\ThemeInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ShopFactory extends EntityFactory
+class ShopFactory extends AbstractEntityFactory
 {
     public function create() : ShopInterface
     {
-        /** @var  $shop ShopInterface */
-        $shop = $this->init();
+        $shop = new Shop();
         $shop->setName('');
         $shop->setUrl('');
         $shop->setProducts($this->createEmptyCollection());

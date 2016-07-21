@@ -12,7 +12,8 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\Factory;
 
-use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\PaymentBundle\Entity\Payment;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
 
 /**
@@ -20,12 +21,11 @@ use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PaymentFactory extends EntityFactory
+class PaymentFactory extends AbstractEntityFactory
 {
     public function create() : PaymentInterface
     {
-        /** @var  $payment PaymentInterface */
-        $payment = $this->init();
+        $payment = new Payment();
         $payment->setState(PaymentInterface::PAYMENT_STATE_CREATED);
         $payment->setConfiguration([]);
         $payment->setToken($this->generateToken());

@@ -12,15 +12,20 @@
 
 namespace WellCommerce\Bundle\AppBundle\Factory;
 
+use WellCommerce\Bundle\AppBundle\Entity\Price;
 use WellCommerce\Bundle\AppBundle\Entity\PriceInterface;
-use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 
-final class PriceFactory extends EntityFactory
+/**
+ * Class PriceFactory
+ *
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
+ */
+final class PriceFactory extends AbstractEntityFactory
 {
     public function create() : PriceInterface
     {
-        /** @var $price PriceInterface */
-        $price = $this->init();
+        $price = new Price();
         $price->setGrossAmount(0);
         $price->setNetAmount(0);
         $price->setTaxAmount(0);

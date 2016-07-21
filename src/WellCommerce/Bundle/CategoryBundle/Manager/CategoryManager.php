@@ -15,6 +15,7 @@ namespace WellCommerce\Bundle\CategoryBundle\Manager;
 use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 use WellCommerce\Bundle\CategoryBundle\Entity\CategoryInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Sluggable;
+use WellCommerce\Bundle\DoctrineBundle\Manager\AbstractManager;
 use WellCommerce\Bundle\DoctrineBundle\Manager\Manager;
 use WellCommerce\Bundle\LocaleBundle\Entity\Locale;
 use WellCommerce\Bundle\ShopBundle\Entity\ShopInterface;
@@ -24,7 +25,7 @@ use WellCommerce\Bundle\ShopBundle\Entity\ShopInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CategoryManager extends Manager
+class CategoryManager extends AbstractManager
 {
     /**
      * Sorts categories passed in request

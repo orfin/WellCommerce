@@ -6,34 +6,11 @@ services:
         calls:
             - [setContainer, ['@service_container']]
 
-    currency.dataset.admin:
-        class: WellCommerce\Bundle\CurrencyBundle\DataSet\Admin\CurrencyDataSet
-        tags:
-            - { name: dataset }
-        arguments: ['@currency.repository']
-
-    currency.datagrid:
-        class: WellCommerce\Bundle\CurrencyBundle\DataGrid\CurrencyDataGrid
-        tags:
-            - { name: datagrid, alias: currency }
-        arguments: ['@currency.dataset.admin']
-
-    currency.form_builder.admin:
-        class: WellCommerce\Bundle\CurrencyBundle\Form\Admin\CurrencyFormBuilder
-        tags:
-            - { name: form_builder }
-
     currency.controller.front:
         class: WellCommerce\Bundle\CurrencyBundle\Controller\Front\CurrencyController
         arguments: ['@currency.manager']
         calls:
             - [setContainer, ['@service_container']]
-
-    currency.dataset.front:
-        class: WellCommerce\Bundle\CurrencyBundle\DataSet\Front\CurrencyDataSet
-        tags:
-            - { name: dataset, alias: currency.front }
-        arguments: ['@currency.repository']
 
     twig.extension.currency:
         class: WellCommerce\Bundle\CurrencyBundle\Twig\Extension\CurrencyExtension

@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\ProductBundle\Entity\Variant;
 
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeInterface;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeValueInterface;
-use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\VariantInterface;
 
 /**
@@ -22,7 +22,7 @@ use WellCommerce\Bundle\ProductBundle\Entity\VariantInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface OptionInterface extends IdentifiableEntityInterface
+interface OptionInterface extends EntityInterface
 {
     public function getVariant() : VariantInterface;
 

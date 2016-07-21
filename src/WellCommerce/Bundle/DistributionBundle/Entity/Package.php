@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\DistributionBundle\Entity;
 
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityTrait;
 
 /**
  * Class Package
@@ -21,12 +22,8 @@ use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
  */
 class Package implements PackageInterface
 {
+    use IdentifiableEntityTrait;
     use Timestampable;
-
-    /**
-     * @var int
-     */
-    protected $id;
 
     /**
      * @var string
@@ -52,14 +49,6 @@ class Package implements PackageInterface
      * @var string
      */
     protected $remoteVersion;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 
     /**
      * {@inheritdoc}

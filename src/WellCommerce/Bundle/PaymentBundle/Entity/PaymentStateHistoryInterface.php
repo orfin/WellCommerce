@@ -14,14 +14,14 @@ namespace WellCommerce\Bundle\PaymentBundle\Entity;
 
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
-use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityInterface;
+use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 
 /**
  * Interface PaymentStateHistoryInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface PaymentStateHistoryInterface extends IdentifiableEntityInterface, TimestampableInterface, BlameableInterface
+interface PaymentStateHistoryInterface extends EntityInterface, TimestampableInterface, BlameableInterface
 {
     /**
      * @param PaymentInterface $payment

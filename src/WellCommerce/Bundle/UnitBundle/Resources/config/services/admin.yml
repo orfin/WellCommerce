@@ -12,20 +12,3 @@ services:
         arguments: ['@unit.manager', '@unit.form_builder.admin', '@unit.datagrid']
         calls:
             - [setContainer, ['@service_container']]
-
-    unit.dataset.admin:
-        class: WellCommerce\Bundle\UnitBundle\DataSet\Admin\UnitDataSet
-        tags:
-            - { name: dataset }
-        arguments: ['@unit.repository']
-
-    unit.datagrid:
-        class: WellCommerce\Bundle\UnitBundle\DataGrid\UnitDataGrid
-        tags:
-            - { name: datagrid, alias: unit }
-        arguments: ['@unit.dataset.admin']
-
-    unit.form_builder.admin:
-        class: WellCommerce\Bundle\UnitBundle\Form\Admin\UnitFormBuilder
-        tags:
-            - { name: form_builder }

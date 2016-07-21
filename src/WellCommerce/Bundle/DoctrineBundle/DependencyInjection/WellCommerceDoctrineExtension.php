@@ -39,10 +39,10 @@ class WellCommerceDoctrineExtension extends AbstractExtension
     {
         $this->doctrineMappingMap[$ormConfiguration['entity']] = $ormConfiguration['mapping'];
 
-        $factoryService    = $this->registerFactory($name, $ormConfiguration, $container);
-        $repositoryService = $this->registerRepository($name, $ormConfiguration, $container);
-        
-        $this->registerManager($name, $factoryService, $repositoryService, $ormConfiguration, $container);
+//        $factoryService    = $this->registerFactory($name, $ormConfiguration, $container);
+//        $repositoryService = $this->registerRepository($name, $ormConfiguration, $container);
+//
+//        $this->registerManager($name, $factoryService, $repositoryService, $ormConfiguration, $container);
     }
     
     /**

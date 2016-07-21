@@ -5,41 +5,9 @@ services:
 
     package.controller.admin:
         class: WellCommerce\Bundle\DistributionBundle\Controller\Admin\PackageController
-        arguments: ['@package.manager', '@package.form_builder', '@package.datagrid']
+        arguments: ['@package.manager', '@package.form_builder.admin', '@package.datagrid']
         calls:
             - [setContainer, ['@service_container']]
-
-    package.dataset:
-        class: WellCommerce\Bundle\DistributionBundle\DataSet\Admin\PackageDataSet
-        tags:
-            - { name: dataset }
-        arguments: ['@package.repository']
-
-    package.datagrid:
-        class: WellCommerce\Bundle\DistributionBundle\DataGrid\PackageDataGrid
-        tags:
-            - { name: datagrid, alias: package }
-        arguments: ['@package.dataset']
-
-    package.form_builder:
-        class: WellCommerce\Bundle\DistributionBundle\Form\Admin\PackageFormBuilder
-        tags:
-            - { name: form_builder }
-
-    package.command.plugin.require:
-        class: WellCommerce\Bundle\DistributionBundle\Command\Package\RequireCommand
-        tags:
-            - { name: console.command }
-
-    package.command.plugin.update:
-        class: WellCommerce\Bundle\DistributionBundle\Command\Package\UpdateCommand
-        tags:
-            - { name: console.command }
-
-    package.command.plugin.remove:
-        class: WellCommerce\Bundle\DistributionBundle\Command\Package\RemoveCommand
-        tags:
-            - { name: console.command }
 
     dataset.transformer.package_version_reference:
         class: WellCommerce\Bundle\DistributionBundle\DataSet\Transformer\VersionReferenceTransformer

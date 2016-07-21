@@ -12,8 +12,9 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\Factory;
 
-use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
+use WellCommerce\Bundle\PaymentBundle\Entity\PaymentStateHistory;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentStateHistoryInterface;
 
 /**
@@ -21,12 +22,11 @@ use WellCommerce\Bundle\PaymentBundle\Entity\PaymentStateHistoryInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PaymentStateHistoryFactory extends EntityFactory
+class PaymentStateHistoryFactory extends AbstractEntityFactory
 {
     public function create() : PaymentStateHistoryInterface
     {
-        /** @var  $paymentStateHistory PaymentStateHistoryInterface */
-        $paymentStateHistory = $this->init();
+        $paymentStateHistory = new PaymentStateHistory();
         $paymentStateHistory->setState(PaymentInterface::PAYMENT_STATE_CREATED);
         $paymentStateHistory->setComment('');
 

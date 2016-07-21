@@ -12,7 +12,8 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Factory;
 
-use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactory;
+use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderSummary;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderSummaryInterface;
 
 /**
@@ -20,12 +21,11 @@ use WellCommerce\Bundle\OrderBundle\Entity\OrderSummaryInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class OrderSummaryFactory extends EntityFactory
+class OrderSummaryFactory extends AbstractEntityFactory
 {
     public function create() : OrderSummaryInterface
     {
-        /** @var $summary OrderSummaryInterface */
-        $summary = $this->init();
+        $summary = new OrderSummary();
         $summary->setGrossAmount(0);
         $summary->setNetAmount(0);
         $summary->setTaxAmount(0);

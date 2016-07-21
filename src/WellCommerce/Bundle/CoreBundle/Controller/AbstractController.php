@@ -31,12 +31,12 @@ abstract class AbstractController extends AbstractContainerAware implements Cont
     /**
      * @var ManagerInterface
      */
-    private $manager;
+    protected $manager;
     
     /**
      * @var null|FormBuilderInterface
      */
-    private $formBuilder;
+    protected $formBuilder;
     
     /**
      * AbstractController constructor.
