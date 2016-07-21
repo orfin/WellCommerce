@@ -6,6 +6,7 @@ admin.currency.index:
         require_admin_permission: currency.index
 admin.currency.grid:
     path: /admin/configuration/intl/currency/grid
+    condition: "request.isXmlHttpRequest()"
     defaults:
         _controller: 'currency.controller.admin:gridAction'
     options:

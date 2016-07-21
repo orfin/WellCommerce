@@ -6,6 +6,7 @@ admin.media.index:
         require_admin_permission: media.index
 admin.media.grid:
     path: /admin/cms/media/grid
+    condition: "request.isXmlHttpRequest()"
     defaults:
         _controller: 'media.controller.admin:gridAction'
     options:

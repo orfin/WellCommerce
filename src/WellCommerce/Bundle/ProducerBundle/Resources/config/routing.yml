@@ -6,6 +6,7 @@ admin.producer.index:
         require_admin_permission: producer.index
 admin.producer.grid:
     path: /admin/catalog/producer/grid
+    condition: "request.isXmlHttpRequest()"
     defaults:
         _controller: 'producer.controller.admin:gridAction'
     options:

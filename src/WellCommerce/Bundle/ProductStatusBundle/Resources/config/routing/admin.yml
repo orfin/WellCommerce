@@ -15,6 +15,7 @@ admin.product_status.index:
 
 admin.product_status.grid:
     path: /grid
+    condition: "request.isXmlHttpRequest()"
     defaults:
         _controller: 'product_status.controller.admin:gridAction'
     options:

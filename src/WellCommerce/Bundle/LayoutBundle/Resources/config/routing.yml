@@ -6,6 +6,7 @@ admin.layout_box.index:
         require_admin_permission: layout_box.index
 admin.layout_box.grid:
     path: /admin/layout/box/grid
+    condition: "request.isXmlHttpRequest()"
     defaults:
         _controller: 'layout_box.controller.admin:gridAction'
     options:

@@ -6,6 +6,7 @@ admin.deliverer.index:
         require_admin_permission: deliverer.index
 admin.deliverer.grid:
     path: /admin/catalog/deliverer/grid
+    condition: "request.isXmlHttpRequest()"
     defaults:
         _controller: 'deliverer.controller.admin:gridAction'
     options:

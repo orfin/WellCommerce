@@ -7,6 +7,7 @@ admin.order.index:
 
 admin.order.grid:
     path: /admin/order/grid
+    condition: "request.isXmlHttpRequest()"
     defaults:
         _controller: 'order.controller.admin:gridAction'
     options:
@@ -15,6 +16,7 @@ admin.order.grid:
 
 admin.order.products.grid:
     path: /admin/order/products/grid
+    condition: "request.isXmlHttpRequest()"
     defaults:
         _controller: 'order.controller.admin:viewProductsGridAction'
     options:
@@ -100,6 +102,7 @@ admin.order_status.index:
 
 admin.order_status.grid:
     path: /admin/order/status/grid
+    condition: "request.isXmlHttpRequest()"
     defaults:
         _controller: 'order_status.controller.admin:gridAction'
     options:
@@ -137,6 +140,7 @@ admin.order_status_group.index:
 
 admin.order_status_group.grid:
     path: /admin/order/status/group/grid
+    condition: "request.isXmlHttpRequest()"
     defaults:
         _controller: 'order_status_group.controller.admin:gridAction'
     options:

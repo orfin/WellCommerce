@@ -6,23 +6,6 @@ services:
         calls:
             - [setContainer, ['@service_container']]
 
-    media.dataset.admin:
-        class: WellCommerce\Bundle\MediaBundle\DataSet\Admin\MediaDataSet
-        tags:
-            - { name: dataset }
-        arguments: ['@media.repository']
-
-    media.datagrid:
-        class: WellCommerce\Bundle\MediaBundle\DataGrid\MediaDataGrid
-        tags:
-            - { name: datagrid, alias: media }
-        arguments: ['@media.dataset.admin']
-
-    media.form_builder.admin:
-        class: WellCommerce\Bundle\MediaBundle\Form\Admin\MediaFormBuilder
-        tags:
-            - { name: form_builder }
-
     form.media_collection.data_transformer:
         class: WellCommerce\Bundle\MediaBundle\Form\DataTransformer\MediaCollectionToArrayTransformer
         tags:

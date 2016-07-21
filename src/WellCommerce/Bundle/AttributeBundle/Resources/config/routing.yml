@@ -6,6 +6,7 @@ admin.attribute.index:
         require_admin_permission: attribute.index
 admin.attribute.grid:
     path: /admin/attribute/grid
+    condition: "request.isXmlHttpRequest()"
     defaults:
         _controller: 'attribute.controller.admin:gridAction'
     options:
@@ -60,6 +61,7 @@ admin.attribute_group.index:
         require_admin_permission: attribute_group.index
 admin.attribute_group.grid:
     path: /admin/attribute/group/grid
+    condition: "request.isXmlHttpRequest()"
     defaults:
         _controller: 'attribute_group.controller.admin:gridAction'
     options:
@@ -100,6 +102,7 @@ admin.attribute_value.index:
         require_admin_permission: attribute_value.index
 admin.attribute_value.grid:
     path: /admin/attribute/value/grid
+    condition: "request.isXmlHttpRequest()"
     defaults:
         _controller: 'attribute_value.controller.admin:gridAction'
     options:

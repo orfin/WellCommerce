@@ -15,6 +15,7 @@ admin.unit.index:
 
 admin.unit.grid:
     path: /grid
+    condition: "request.isXmlHttpRequest()"
     defaults:
         _controller: 'unit.controller.admin:gridAction'
     options:

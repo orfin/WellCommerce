@@ -2,10 +2,5 @@
 services:
     web.home_page.controller.front:
         class: WellCommerce\Bundle\AppBundle\Controller\Front\HomePageController
-        arguments: ['@home_page.manager']
         calls:
             - [setContainer, ['@service_container']]
-
-    home_page.manager:
-        class: WellCommerce\Bundle\DoctrineBundle\Manager\Manager
-        arguments: [null, null, '@doctrine.helper', '@event_dispatcher']

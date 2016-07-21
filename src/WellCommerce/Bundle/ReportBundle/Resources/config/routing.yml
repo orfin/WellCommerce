@@ -6,6 +6,7 @@ admin.sales_report.index:
         require_admin_permission: sales_report.index
 admin.sales_report.grid:
     path: /admin/report/sales/grid
+    condition: "request.isXmlHttpRequest()"
     defaults:
         _controller: 'sales_report.controller.admin:gridAction'
     options:

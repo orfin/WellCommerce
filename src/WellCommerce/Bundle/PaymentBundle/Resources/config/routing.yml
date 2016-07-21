@@ -51,6 +51,7 @@ admin.payment_method.index:
         require_admin_permission: payment_method.index
 admin.payment_method.grid:
     path: /admin/configuration/payment/grid
+    condition: "request.isXmlHttpRequest()"
     defaults:
         _controller: 'payment_method.controller.admin:gridAction'
     options:

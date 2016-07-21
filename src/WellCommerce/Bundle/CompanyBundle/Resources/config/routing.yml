@@ -6,6 +6,7 @@ admin.company.index:
         require_admin_permission: company.index
 admin.company.grid:
     path: /admin/configuration/multistore/company/grid
+    condition: "request.isXmlHttpRequest()"
     defaults:
         _controller: 'company.controller.admin:gridAction'
     options:

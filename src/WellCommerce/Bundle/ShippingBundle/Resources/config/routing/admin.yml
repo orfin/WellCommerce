@@ -15,6 +15,7 @@ admin.shipping_method.index:
 
 admin.shipping_method.grid:
     path: /grid
+    condition: "request.isXmlHttpRequest()"
     defaults:
         _controller: 'shipping_method.controller.admin:gridAction'
     options:

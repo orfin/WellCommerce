@@ -18,6 +18,7 @@ admin.coupon.index:
         require_admin_permission: coupon.index
 admin.coupon.grid:
     path: /admin/promotion/coupon/grid
+    condition: "request.isXmlHttpRequest()"
     defaults:
         _controller: 'coupon.controller.admin:gridAction'
     options:

@@ -7,6 +7,7 @@ admin.category.index:
         require_admin_permission: category.index
 admin.category.grid:
     path: /admin/catalog/category/grid
+    condition: "request.isXmlHttpRequest()"
     defaults:
         _controller: 'category.controller.admin:gridAction'
     options:

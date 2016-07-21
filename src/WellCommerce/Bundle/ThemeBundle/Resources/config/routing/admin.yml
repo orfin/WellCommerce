@@ -15,6 +15,7 @@ admin.theme.index:
 
 admin.theme.grid:
     path: /theme/grid
+    condition: "request.isXmlHttpRequest()"
     defaults:
         _controller: 'theme.controller.admin:gridAction'
     options:

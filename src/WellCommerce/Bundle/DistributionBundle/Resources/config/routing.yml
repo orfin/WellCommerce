@@ -6,6 +6,7 @@ admin.package.index:
         require_admin_permission: package.index
 admin.package.grid:
     path: /admin/distribution/package/grid
+    condition: "request.isXmlHttpRequest()"
     defaults:
         _controller: 'package.controller.admin:gridAction'
     options:

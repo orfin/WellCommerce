@@ -15,6 +15,7 @@ admin.shop.index:
 
 admin.shop.grid:
     path: /grid
+    condition: "request.isXmlHttpRequest()"
     defaults:
         _controller: 'shop.controller.admin:gridAction'
     options:

@@ -15,6 +15,7 @@ admin.review.index:
 
 admin.review.grid:
     path: /grid
+    condition: "request.isXmlHttpRequest()"
     defaults:
         _controller: 'review.controller.admin:gridAction'
     options:

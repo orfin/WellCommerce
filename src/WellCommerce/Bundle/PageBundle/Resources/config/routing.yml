@@ -6,6 +6,7 @@ admin.page.index:
         require_admin_permission: page.index
 admin.page.grid:
     path: /admin/cms/page/grid
+    condition: "request.isXmlHttpRequest()"
     defaults:
         _controller: 'page.controller.admin:gridAction'
     options:

@@ -15,6 +15,7 @@ admin.routing.index:
 
 admin.routing.grid:
     path: /grid
+    condition: "request.isXmlHttpRequest()"
     defaults:
         _controller: 'routing.controller.admin:gridAction'
     options:

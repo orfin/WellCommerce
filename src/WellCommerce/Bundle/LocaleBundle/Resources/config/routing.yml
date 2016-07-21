@@ -6,6 +6,7 @@ admin.locale.index:
         require_admin_permission: locale.index
 admin.locale.grid:
     path: /admin/configuration/intl/locale/grid
+    condition: "request.isXmlHttpRequest()"
     defaults:
         _controller: 'locale.controller.admin:gridAction'
     options:

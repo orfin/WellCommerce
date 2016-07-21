@@ -6,6 +6,7 @@ admin.news.index:
         require_admin_permission: news.index
 admin.news.grid:
     path: /admin/cms/news/grid
+    condition: "request.isXmlHttpRequest()"
     defaults:
         _controller: 'news.controller.admin:gridAction'
     options:

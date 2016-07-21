@@ -16,6 +16,7 @@ admin.tax.index:
 
 admin.tax.grid:
     path: /grid
+    condition: "request.isXmlHttpRequest()"
     defaults:
         _controller: 'tax.controller.admin:gridAction'
     options:

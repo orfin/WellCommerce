@@ -7,6 +7,7 @@ admin.contact.index:
 
 admin.contact.grid:
     path: /admin/cms/contact/grid
+    condition: "request.isXmlHttpRequest()"
     defaults:
         _controller: 'contact.controller.admin:gridAction'
     options:

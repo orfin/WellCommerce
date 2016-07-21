@@ -6,6 +6,7 @@ admin.availability.index:
         require_admin_permission: availability.index
 admin.availability.grid:
     path: /admin/availability/grid
+    condition: "request.isXmlHttpRequest()"
     defaults:
         _controller: 'availability.controller.admin:gridAction'
     options:
