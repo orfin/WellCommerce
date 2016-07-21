@@ -1,16 +1,5 @@
 
 services:
-    locale.controller.admin:
-        class: WellCommerce\Bundle\LocaleBundle\Controller\Admin\LocaleController
-        arguments: ['@locale.manager', '@locale.form_builder.admin', '@locale.datagrid']
-        calls:
-            - [setContainer, ['@service_container']]
-
-    locale.form_builder.admin:
-        class: WellCommerce\Bundle\LocaleBundle\Form\Admin\LocaleFormBuilder
-        tags:
-            - { name: form_builder }
-
     twig.extension.locale:
         class: WellCommerce\Bundle\LocaleBundle\Twig\Extension\LocaleExtension
         tags:

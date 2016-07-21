@@ -1,16 +1,5 @@
 
 services:
-    producer.controller.admin:
-        class: WellCommerce\Bundle\ProducerBundle\Controller\Admin\ProducerController
-        arguments: ['@producer.manager', '@producer.form_builder.admin', '@producer.datagrid']
-        calls:
-            - [setContainer, ['@service_container']]
-
-    producer.form_builder.admin:
-        class: WellCommerce\Bundle\ProducerBundle\Form\Admin\ProducerFormBuilder
-        tags:
-            - { name: form_builder }
-
     producer_menu.layout_box.configurator:
         class: WellCommerce\Bundle\LayoutBundle\Configurator\ProducerMenuBoxConfigurator
         tags:

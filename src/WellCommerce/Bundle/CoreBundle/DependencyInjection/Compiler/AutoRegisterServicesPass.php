@@ -18,6 +18,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\ClassFinder;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\Definition\AdminControllerDefinitionFactory;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\Definition\DataGridDefinitionFactory;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\Definition\DataSetDefinitionFactory;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\Definition\EntityFactoryDefinitionFactory;
@@ -25,7 +26,6 @@ use WellCommerce\Bundle\CoreBundle\DependencyInjection\Definition\FormBuilderDef
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\Definition\ManagerDefinitionFactory;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\Definition\RepositoryDefinitionFactory;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\ServiceIdGenerator;
-use WellCommerce\Bundle\DistributionBundle\WellCommerceDistributionBundle;
 
 /**
  * Class AutoRegisterServicesPass
@@ -71,6 +71,7 @@ final class AutoRegisterServicesPass implements CompilerPassInterface
         $this->registerAdminFormBuilders($container);
         $this->registerFrontFormBuilders($container);
         $this->registerManager($container);
+        $this->registerAdminController($container);
     }
     
     private function registerRepositories(ContainerBuilder $container)
@@ -192,6 +193,26 @@ final class AutoRegisterServicesPass implements CompilerPassInterface
                 $repository          = $container->has($repositoryServiceId) ? new Reference($repositoryServiceId) : null;
                 $definition          = $definitionFactory->create($className, $factory, $repository);
                 $container->setDefinition($managerServiceId, $definition);
+            }
+        }
+    }
+    
+    private function registerAdminController(ContainerBuilder $container)
+    {
+        $definitionFactory = new AdminControllerDefinitionFactory();
+        $classes           = $this->classFinder->findAdminControllerClasses($this->bundle);
+        
+        foreach ($classes as $baseName => $className) {
+            $controllerServiceId = $this->serviceIdGenerator->getServiceId($baseName, 'controller.admin');
+            if (false === $container->has($controllerServiceId)) {
+                $managerServiceId     = $this->serviceIdGenerator->getServiceId($baseName, 'manager');
+                $formBuilderServiceId = $this->serviceIdGenerator->getServiceId($baseName, 'form_builder.admin');
+                $dataGridServiceId    = $this->serviceIdGenerator->getServiceId($baseName, 'datagrid');
+                $manager              = $container->has($managerServiceId) ? new Reference($managerServiceId) : null;
+                $formBuilder          = $container->has($formBuilderServiceId) ? new Reference($formBuilderServiceId) : null;
+                $dataGrid             = $container->has($dataGridServiceId) ? new Reference($dataGridServiceId) : null;
+                $definition           = $definitionFactory->create($className, $manager, $formBuilder, $dataGrid);
+                $container->setDefinition($controllerServiceId, $definition);
             }
         }
     }

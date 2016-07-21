@@ -33,7 +33,7 @@ class ModelDataMapper extends AbstractDataMapper
     {
         $this->mapModelDataToElementCollection($form->getChildren());
     }
-
+    
     /**
      * Maps all submitted values to model data representation
      *
@@ -43,7 +43,7 @@ class ModelDataMapper extends AbstractDataMapper
     {
         $this->mapElementCollectionToModelData($form->getChildren());
     }
-
+    
     /**
      * @param ElementCollection $children
      */
@@ -53,7 +53,7 @@ class ModelDataMapper extends AbstractDataMapper
             $this->mapElementToModelData($child);
         });
     }
-
+    
     /**
      * Maps element value to model data
      *
@@ -62,13 +62,13 @@ class ModelDataMapper extends AbstractDataMapper
     protected function mapElementToModelData(ElementInterface $child)
     {
         $this->setModelValueFromElement($child);
-
+        
         $children = $child->getChildren();
         if ($children->count()) {
             $this->mapElementCollectionToModelData($children);
         }
     }
-
+    
     /**
      * Maps data to single element
      *
@@ -77,14 +77,14 @@ class ModelDataMapper extends AbstractDataMapper
     protected function mapModelDataToElement(ElementInterface $child)
     {
         $this->setDefaultElementValue($child);
-
+        
         $children = $child->getChildren();
-
+        
         if ($children->count()) {
             $this->mapModelDataToElementCollection($children);
         }
     }
-
+    
     /**
      * Maps data using recursion to all children
      *
@@ -96,7 +96,7 @@ class ModelDataMapper extends AbstractDataMapper
             $this->mapModelDataToElement($child);
         }
     }
-
+    
     /**
      * Sets value for element
      *
@@ -105,24 +105,24 @@ class ModelDataMapper extends AbstractDataMapper
     protected function setDefaultElementValue(ElementInterface $element)
     {
         $propertyPath = $element->getPropertyPath();
-
+        
         if ($propertyPath instanceof PropertyPathInterface) {
             if ($this->propertyAccessor->isReadable($this->data, $propertyPath)) {
                 $value = $this->propertyAccessor->getValue($this->data, $propertyPath);
-                if (empty($value)) {
+                if (0 !== $value && empty($value)) {
                     $value = $element->getDefaultValue();
                 }
-
+                
                 if ($element->hasTransformer() && is_object($value)) {
                     $transformer = $element->getTransformer();
                     $value       = $transformer->transform($value);
                 }
-
+                
                 $element->setValue($value);
             }
         }
     }
-
+    
     /**
      * Transforms value if needed or directly changes model property
      *
@@ -131,7 +131,7 @@ class ModelDataMapper extends AbstractDataMapper
     protected function setModelValueFromElement(ElementInterface $child)
     {
         $propertyPath = $child->getPropertyPath();
-
+        
         if ($propertyPath instanceof PropertyPathInterface) {
             if ($this->propertyAccessor->isWritable($this->data, $propertyPath)) {
                 if ($child->hasTransformer()) {

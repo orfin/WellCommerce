@@ -1,7 +1,0 @@
-
-services:
-    dictionary.controller.admin:
-        class: WellCommerce\Bundle\DictionaryBundle\Controller\Admin\DictionaryController
-        arguments: ['@dictionary.manager', '@dictionary.form_builder.admin', '@dictionary.datagrid']
-        calls:
-            - [setContainer, ['@service_container']]

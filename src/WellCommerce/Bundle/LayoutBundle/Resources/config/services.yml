@@ -1,11 +1,5 @@
 
 services:
-    layout_box.controller.admin:
-        class: WellCommerce\Bundle\LayoutBundle\Controller\Admin\LayoutBoxController
-        arguments: ['@layout_box.manager', '@layout_box.form_builder.admin', '@layout_box.datagrid']
-        calls:
-            - [setContainer, ['@service_container']]
-
     layout_box.renderer:
         class: WellCommerce\Bundle\LayoutBundle\Renderer\LayoutBoxRenderer
         arguments: ['@layout_box.service_resolver', '@layout_box.manager', '@router.helper']

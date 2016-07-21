@@ -1,11 +1,5 @@
 
 services:
-    currency.controller.admin:
-        class: WellCommerce\Bundle\CurrencyBundle\Controller\Admin\CurrencyController
-        arguments: ['@currency.manager', '@currency.form_builder.admin', '@currency.datagrid']
-        calls:
-            - [setContainer, ['@service_container']]
-
     currency.controller.front:
         class: WellCommerce\Bundle\CurrencyBundle\Controller\Front\CurrencyController
         arguments: ['@currency.manager']

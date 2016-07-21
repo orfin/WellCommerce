@@ -1,11 +1,5 @@
 
 services:
-    payment_method.controller.admin:
-        class: WellCommerce\Bundle\PaymentBundle\Controller\Admin\PaymentMethodController
-        arguments: ['@payment_method.manager', '@payment_method.form_builder.admin', '@payment_method.datagrid']
-        calls:
-            - [setContainer, ['@service_container']]
-
     payment_method.doctrine.event_subscriber:
         class: WellCommerce\Bundle\PaymentBundle\EventListener\PaymentMethodDoctrineEventSubscriber
         tags:

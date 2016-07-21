@@ -1,11 +1,5 @@
 
 services:
-    media.controller.admin:
-        class: WellCommerce\Bundle\MediaBundle\Controller\Admin\MediaController
-        arguments: ['@media.manager', '@media.form_builder.admin', '@media.datagrid']
-        calls:
-            - [setContainer, ['@service_container']]
-
     form.media_collection.data_transformer:
         class: WellCommerce\Bundle\MediaBundle\Form\DataTransformer\MediaCollectionToArrayTransformer
         tags:

@@ -1,11 +1,5 @@
 
 services:
-    contact.controller.admin:
-        class: WellCommerce\Bundle\ContactBundle\Controller\Admin\ContactController
-        arguments: ['@contact.manager', '@contact.form_builder.admin', '@contact.datagrid']
-        calls:
-            - [setContainer, ['@service_container']]
-
     contact.layout_box.configurator:
         class: WellCommerce\Bundle\LayoutBundle\Configurator\ContactBoxConfigurator
         tags:

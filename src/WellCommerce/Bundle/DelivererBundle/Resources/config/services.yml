@@ -1,7 +1,0 @@
-
-services:
-    deliverer.controller.admin:
-        class: WellCommerce\Bundle\DelivererBundle\Controller\Admin\DelivererController
-        arguments: ['@deliverer.manager', '@deliverer.form_builder.admin', '@deliverer.datagrid']
-        calls:
-            - [setContainer, ['@service_container']]

@@ -30,13 +30,14 @@ abstract class AbstractExtension extends Extension
         $reflection = new ReflectionClass($this);
         $directory  = dirname($reflection->getFileName());
         $locator    = new FileLocator($directory . '/../Resources/config');
-        
-        $xmlLoader = new Loader\YamlFileLoader($container, $locator);
-        $xmlLoader->load('services.yml');
+        $xmlLoader  = new Loader\YamlFileLoader($container, $locator);
+        if (!empty($locator->locate('services.yml'))) {
+            $xmlLoader->load('services.yml');
+        }
         
         $configuration = $this->getConfiguration($configs, $container);
         $config        = $this->processConfiguration($configuration, $configs);
-
+        
         $this->processExtensionConfiguration($config, $container);
     }
     
@@ -48,18 +49,5 @@ abstract class AbstractExtension extends Extension
      */
     protected function processExtensionConfiguration(array $configuration, ContainerBuilder $container)
     {
-    }
-
-    /**
-     * Returns a friendly service name for given type
-     *
-     * @param string $name
-     * @param string $type
-     *
-     * @return string
-     */
-    protected function getAutoServiceName(string $name, string $type) : string
-    {
-        return sprintf('%s.%s', $name, $type);
     }
 }

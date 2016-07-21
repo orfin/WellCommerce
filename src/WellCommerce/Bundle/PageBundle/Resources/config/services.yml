@@ -1,11 +1,5 @@
 
 services:
-    page.controller.admin:
-        class: WellCommerce\Bundle\PageBundle\Controller\Admin\PageController
-        arguments: ['@page.manager', '@page.form_builder.admin', '@page.datagrid']
-        calls:
-            - [setContainer, ['@service_container']]
-
     page.layout_box.configurator:
         class: WellCommerce\Bundle\LayoutBundle\Configurator\PageBoxConfigurator
         tags:
@@ -13,11 +7,6 @@ services:
         arguments: [Page, page.layout_box.controller, '@translator.helper']
         calls:
             - [setContainer, ['@service_container']]
-
-    page.form_builder.admin:
-        class: WellCommerce\Bundle\PageBundle\Form\Admin\PageFormBuilder
-        tags:
-            - { name: form_builder }
 
     page.controller.front:
         class: WellCommerce\Bundle\PageBundle\Controller\Front\PageController

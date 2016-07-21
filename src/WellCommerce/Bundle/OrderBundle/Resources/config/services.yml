@@ -1,11 +1,5 @@
 
 services:
-    order.controller.admin:
-        class: WellCommerce\Bundle\OrderBundle\Controller\Admin\OrderController
-        arguments: ['@order.manager', '@order.form_builder.admin', '@order.datagrid']
-        calls:
-            - [setContainer, ['@service_container']]
-
     order_cart.controller.front:
         class: WellCommerce\Bundle\OrderBundle\Controller\Front\OrderCartController
         arguments: ['@order_product.manager', '@order_cart.form_builder.front']

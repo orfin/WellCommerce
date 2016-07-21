@@ -5,18 +5,6 @@ services:
         calls:
             - [setContainer, ['@service_container']]
 
-    user.controller.admin:
-        class: WellCommerce\Bundle\AdminBundle\Controller\Admin\UserController
-        arguments: ['@user.manager', '@user.form_builder.admin', '@user.datagrid']
-        calls:
-            - [setContainer, ['@service_container']]
-
-    user_group.controller.admin:
-        class: WellCommerce\Bundle\AdminBundle\Controller\Admin\UserGroupController
-        arguments: ['@user_group.manager', '@user_group.form_builder.admin', '@user_group.datagrid']
-        calls:
-            - [setContainer, ['@service_container']]
-
     form.user_group_permission.data_transformer:
         class: WellCommerce\Bundle\AdminBundle\Form\DataTransformer\UserGroupPermissionToArrayTransformer
         tags:

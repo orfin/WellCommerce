@@ -1,11 +1,5 @@
 
 services:
-    coupon.controller.admin:
-        class: WellCommerce\Bundle\CouponBundle\Controller\Admin\CouponController
-        arguments: ['@coupon.manager', '@coupon.form_builder.admin', '@coupon.datagrid']
-        calls:
-            - [setContainer, ['@service_container']]
-
     coupon.controller.front:
         class: WellCommerce\Bundle\CouponBundle\Controller\Front\CouponController
         arguments: ['@order.manager']

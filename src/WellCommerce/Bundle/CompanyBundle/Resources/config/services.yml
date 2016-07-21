@@ -1,7 +1,0 @@
-
-services:
-    company.controller.admin:
-        class: WellCommerce\Bundle\CompanyBundle\Controller\Admin\CompanyController
-        arguments: ['@company.manager', '@company.form_builder.admin', '@company.datagrid']
-        calls:
-            - [setContainer, ['@service_container']]

@@ -203,7 +203,7 @@ abstract class AbstractDataGrid extends AbstractContainerAware implements DataGr
     /**
      * {@inheritdoc}
      */
-    public function loadResults(Request $request) : array
+    public function loadResults(Request $request)
     {
         $page               = ($request->request->get('starting_from') / $request->request->get('limit')) + 1;
         $conditions         = new ConditionsCollection();
@@ -218,6 +218,12 @@ abstract class AbstractDataGrid extends AbstractContainerAware implements DataGr
             'conditions' => $conditions,
         ];
         
-        return $this->dataset->getResult('datagrid', $requestOptions);
+        try {
+            $results = $this->dataset->getResult('datagrid', $requestOptions);
+        } catch (\Exception $e) {
+            $results = nl2br($e->getMessage());
+        }
+        
+        return $results;
     }
 }

@@ -1,7 +1,0 @@
-
-services:
-    availability.controller.admin:
-        class: WellCommerce\Bundle\AvailabilityBundle\Controller\Admin\AvailabilityController
-        arguments: ['@availability.manager', '@availability.form_builder.admin', '@availability.datagrid']
-        calls:
-            - [setContainer, ['@service_container']]

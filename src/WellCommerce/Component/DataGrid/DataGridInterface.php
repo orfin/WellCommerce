@@ -87,7 +87,7 @@ interface DataGridInterface
      *
      * @param Request $request
      *
-     * @return array
+     * @return array|string
      */
-    public function loadResults(Request $request) : array;
+    public function loadResults(Request $request);
 }

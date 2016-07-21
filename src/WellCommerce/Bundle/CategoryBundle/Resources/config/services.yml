@@ -1,10 +1,4 @@
 services:
-    category.controller.admin:
-        class: WellCommerce\Bundle\CategoryBundle\Controller\Admin\CategoryController
-        arguments: ['@category.manager', '@category.form_builder.admin']
-        calls:
-            - [setContainer, ['@service_container']]
-
     category_menu.layout_box.configurator:
         class: WellCommerce\Bundle\LayoutBundle\Configurator\CategoryMenuBoxConfigurator
         tags:

@@ -3,12 +3,6 @@ services:
     knp.packagist_api.client:
         class: Packagist\Api\Client
 
-    package.controller.admin:
-        class: WellCommerce\Bundle\DistributionBundle\Controller\Admin\PackageController
-        arguments: ['@package.manager', '@package.form_builder.admin', '@package.datagrid']
-        calls:
-            - [setContainer, ['@service_container']]
-
     dataset.transformer.package_version_reference:
         class: WellCommerce\Bundle\DistributionBundle\DataSet\Transformer\VersionReferenceTransformer
         tags:

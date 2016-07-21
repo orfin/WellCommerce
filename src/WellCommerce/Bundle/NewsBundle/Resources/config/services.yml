@@ -1,10 +1,11 @@
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
 
 services:
-    news.controller.admin:
-        class: WellCommerce\Bundle\NewsBundle\Controller\Admin\NewsController
-        arguments: ['@news.manager', '@news.form_builder.admin', '@news.datagrid']
-        calls:
-            - [setContainer, ['@service_container']]
-
     news.context.front:
         class: WellCommerce\Bundle\NewsBundle\Context\Front\NewsContext

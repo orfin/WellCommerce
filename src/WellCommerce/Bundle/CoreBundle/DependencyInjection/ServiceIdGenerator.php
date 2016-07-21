@@ -21,8 +21,6 @@ use Symfony\Component\DependencyInjection\Container;
  */
 final class ServiceIdGenerator
 {
-    private $replacements = ['Repository', 'DataSet', 'DataGrid', 'FormBuilder', 'Factory', 'Manager'];
-    
     public function getServiceId(string $baseName, string $type)
     {
         $prefix = $this->getServicePrefix($baseName);
@@ -32,6 +30,8 @@ final class ServiceIdGenerator
     
     private function getServicePrefix(string $baseName) : string
     {
-        return str_replace($this->replacements, '', $baseName);
+        $replacements = ['Repository', 'DataSet', 'DataGrid', 'FormBuilder', 'Factory', 'Manager', 'Controller'];
+        
+        return str_replace($replacements, '', $baseName);
     }
 }

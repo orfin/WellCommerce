@@ -85,6 +85,7 @@ abstract class AbstractManager extends AbstractContainerAware implements Manager
     
     public function removeResource(EntityInterface $entity, bool $flush = true)
     {
+        $this->getDoctrineHelper()->disableFilter('locale');
         $this->dispatchEvent(self::PRE_ENTITY_REMOVE_EVENT, $entity);
         $this->getEntityManager()->remove($entity);
         $this->dispatchEvent(self::POST_ENTITY_REMOVE_EVENT, $entity);
