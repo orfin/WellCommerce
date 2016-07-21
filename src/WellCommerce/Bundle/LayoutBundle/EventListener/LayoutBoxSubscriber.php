@@ -29,7 +29,7 @@ class LayoutBoxSubscriber extends AbstractEventSubscriber
     public static function getSubscribedEvents()
     {
         return [
-            'layout_box.form_builder.admin.pre_form_init' => 'onLayoutBoxFormInit',
+            'layout_box.pre_form_init' => 'onLayoutBoxFormInit',
             'layout_box.pre_update'                       => 'onLayoutBoxPreUpdate'
         ];
     }

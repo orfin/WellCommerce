@@ -30,13 +30,13 @@ class LayoutBoxFormBuilder extends AbstractFormBuilder
             'name'  => 'required_data',
             'label' => $this->trans('common.fieldset.general')
         ]));
-
+        
         $languageData = $requiredData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
             'label'       => $this->trans('common.fieldset.translations'),
             'transformer' => $this->getRepositoryTransformer('translation', $this->get('layout_box.repository'))
         ]));
-
+        
         $languageData->addChild($this->getElement('text_field', [
             'name'  => 'name',
             'label' => $this->trans('layout_box.label.name'),
@@ -44,7 +44,7 @@ class LayoutBoxFormBuilder extends AbstractFormBuilder
                 $this->getRule('required')
             ],
         ]));
-
+        
         $requiredData->addChild($this->getElement('text_field', [
             'name'    => 'identifier',
             'label'   => $this->trans('layout_box.label.identifier'),
@@ -53,14 +53,22 @@ class LayoutBoxFormBuilder extends AbstractFormBuilder
                 $this->getRule('required')
             ],
         ]));
-
+        
         $requiredData->addChild($this->getElement('select', [
-            'name'  => 'boxType',
-            'label' => $this->trans('layout_box.label.box_type'),
+            'name'    => 'boxType',
+            'label'   => $this->trans('layout_box.label.box_type'),
+            'default' => $this->getDefaultLayoutBoxType()
         ]));
-
+        
         $form->addFilter($this->getFilter('no_code'));
         $form->addFilter($this->getFilter('trim'));
         $form->addFilter($this->getFilter('secure'));
+    }
+    
+    private function getDefaultLayoutBoxType() : string
+    {
+        $type = $this->container->get('layout_box.configurator.collection')->first();
+        
+        return $type->getType();
     }
 }
