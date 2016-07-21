@@ -13,11 +13,11 @@
 namespace WellCommerce\Bundle\DoctrineBundle\Entity;
 
 /**
- * Class IdentifiableEntityTrait
+ * Class IdentifiableTrait
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-trait IdentifiableEntityTrait
+trait IdentifiableTrait
 {
     protected $id;
 

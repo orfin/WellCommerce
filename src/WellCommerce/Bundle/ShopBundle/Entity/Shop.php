@@ -18,7 +18,7 @@ use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use WellCommerce\Bundle\AppBundle\Entity\MailerConfiguration;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientGroupAwareTrait;
 use WellCommerce\Bundle\CompanyBundle\Entity\CompanyInterface;
-use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityTrait;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableTrait;
 use WellCommerce\Bundle\ThemeBundle\Entity\ThemeAwareTrait;
 
 /**
@@ -28,7 +28,7 @@ use WellCommerce\Bundle\ThemeBundle\Entity\ThemeAwareTrait;
  */
 class Shop implements ShopInterface
 {
-    use IdentifiableEntityTrait;
+    use IdentifiableTrait;
     use Timestampable;
     use Blameable;
     use ThemeAwareTrait;

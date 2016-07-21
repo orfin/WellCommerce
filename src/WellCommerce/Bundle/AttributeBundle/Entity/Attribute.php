@@ -18,7 +18,7 @@ use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 use WellCommerce\Bundle\AppBundle\Entity\HierarchyAwareTrait;
 use WellCommerce\Bundle\DoctrineBundle\Behaviours\Enableable\EnableableTrait;
-use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityTrait;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableTrait;
 
 /**
  * Class Attribute
@@ -27,7 +27,7 @@ use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityTrait;
  */
 class Attribute implements AttributeInterface
 {
-    use IdentifiableEntityTrait;
+    use IdentifiableTrait;
     use Translatable;
     use Timestampable;
     use Blameable;

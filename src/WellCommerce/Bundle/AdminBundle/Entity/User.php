@@ -17,7 +17,7 @@ use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Symfony\Component\Security\Core\User\UserInterface as BaseUserInterface;
 use WellCommerce\Bundle\DoctrineBundle\Behaviours\Enableable\EnableableTrait;
-use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityTrait;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableTrait;
 
 /**
  * Class User
@@ -26,7 +26,7 @@ use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityTrait;
  */
 class User implements UserInterface
 {
-    use IdentifiableEntityTrait;
+    use IdentifiableTrait;
     use Timestampable;
     use Blameable;
     use EnableableTrait;

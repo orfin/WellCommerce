@@ -16,7 +16,7 @@ use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 use WellCommerce\Bundle\AvailabilityBundle\Entity\Extra\AvailabilityExtraTrait;
-use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityTrait;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableTrait;
 
 /**
  * Class Availability
@@ -25,7 +25,7 @@ use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityTrait;
  */
 class Availability implements AvailabilityInterface
 {
-    use IdentifiableEntityTrait;
+    use IdentifiableTrait;
     use Translatable;
     use Timestampable;
     use Blameable;

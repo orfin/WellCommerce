@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\RoutingBundle\Entity;
 
-use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityTrait;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableTrait;
 
 /**
  * Class Route
@@ -21,7 +21,7 @@ use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityTrait;
  */
 class Route implements RouteInterface, RoutingDiscriminatorsAwareInterface
 {
-    use IdentifiableEntityTrait;
+    use IdentifiableTrait;
     
     protected $path;
 

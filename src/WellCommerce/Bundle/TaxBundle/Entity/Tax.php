@@ -15,7 +15,7 @@ namespace WellCommerce\Bundle\TaxBundle\Entity;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
-use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityTrait;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableTrait;
 
 /**
  * Class Tax
@@ -24,7 +24,7 @@ use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityTrait;
  */
 class Tax implements TaxInterface
 {
-    use IdentifiableEntityTrait;
+    use IdentifiableTrait;
     use Translatable;
     use Timestampable;
     use Blameable;

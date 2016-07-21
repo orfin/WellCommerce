@@ -15,7 +15,7 @@ namespace WellCommerce\Bundle\CouponBundle\Entity;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
-use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityTrait;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableTrait;
 
 /**
  * Class Coupon
@@ -24,7 +24,7 @@ use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityTrait;
  */
 class Coupon implements CouponInterface
 {
-    use IdentifiableEntityTrait;
+    use IdentifiableTrait;
     use Translatable;
     use Timestampable;
     use Blameable;

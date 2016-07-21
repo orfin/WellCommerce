@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Entity;
 
-use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityTrait;
+use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableTrait;
 
 /**
  * Class OrderModifier
@@ -21,7 +21,7 @@ use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableEntityTrait;
  */
 class OrderModifier implements OrderModifierInterface
 {
-    use IdentifiableEntityTrait;
+    use IdentifiableTrait;
 
     protected $order;
     protected $name;
