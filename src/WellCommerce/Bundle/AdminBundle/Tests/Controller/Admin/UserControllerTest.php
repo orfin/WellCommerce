@@ -61,10 +61,13 @@ class UserControllerTest extends AbstractAdminControllerTestCase
             $this->assertEquals(1, $crawler->filter('html:contains("' . $user->getUsername() . '")')->count());
         });
     }
-
+    
     public function testGridAction()
     {
-        $this->client->request('GET', $this->generateUrl('admin.user.grid'));
-        $this->assertTrue($this->client->getResponse()->isRedirect($this->generateUrl('admin.user.index', [], true)));
+        $this->client->request('GET', $this->generateUrl('admin.user.grid'), [], [], [
+            'HTTP_X-Requested-With' => 'XMLHttpRequest',
+        ]);
+        
+        $this->assertTrue($this->client->getResponse()->isSuccessful(), $this->client->getResponse()->getContent());
     }
 }

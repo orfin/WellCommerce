@@ -32,10 +32,13 @@ class PaymentMethodFormBuilder extends AbstractFormBuilder
         $orderStatuses = $this->get('order_status.dataset.admin')->getResult('select');
         $options       = [];
         $processors    = $this->getPaymentProcessorCollection();
+        $processorKeys = $processors->keys();
         foreach ($processors->all() as $processor) {
             $processorName           = $processor->getConfigurator()->getName();
             $options[$processorName] = $processorName;
         }
+        
+        $defaultProcessor = reset($processorKeys);
         
         $requiredData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'required_data',
@@ -60,6 +63,7 @@ class PaymentMethodFormBuilder extends AbstractFormBuilder
             'name'    => 'processor',
             'label'   => $this->trans('payment_method.label.processor'),
             'options' => $options,
+            'default' => $defaultProcessor
         ]));
         
         $requiredData->addChild($this->getElement('checkbox', [
@@ -86,14 +90,14 @@ class PaymentMethodFormBuilder extends AbstractFormBuilder
             'options'     => $orderStatuses,
             'transformer' => $this->getRepositoryTransformer('entity', $this->get('order_status.repository'))
         ]));
-
+        
         $statusesData->addChild($this->getElement('select', [
             'name'        => 'paymentSuccessOrderStatus',
             'label'       => $this->trans('payment_method.label.payment_success_order_status'),
             'options'     => $orderStatuses,
             'transformer' => $this->getRepositoryTransformer('entity', $this->get('order_status.repository'))
         ]));
-
+        
         $statusesData->addChild($this->getElement('select', [
             'name'        => 'paymentFailureOrderStatus',
             'label'       => $this->trans('payment_method.label.payment_failure_order_status'),

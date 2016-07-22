@@ -13,16 +13,16 @@ well_commerce_api:
     serialization:
         WellCommerce\Bundle\ProductBundle\Entity\Product:
             mapping: "@WellCommerceProductBundle/Resources/config/serialization/Product.yml"
-        WellCommerce\Bundle\ProductBundle\Entity\Product\Distinction:
-            mapping: "@WellCommerceProductBundle/Resources/config/serialization/Product/Distinction.yml"
+        WellCommerce\Bundle\ProductBundle\Entity\ProductDistinction:
+            mapping: "@WellCommerceProductBundle/Resources/config/serialization/ProductDistinction.yml"
         WellCommerce\Bundle\ProductBundle\Entity\Variant:
             mapping: "@WellCommerceProductBundle/Resources/config/serialization/Variant.yml"
-        WellCommerce\Bundle\ProductBundle\Entity\Variant\Option:
-            mapping: "@WellCommerceProductBundle/Resources/config/serialization/Variant/Option.yml"
-        WellCommerce\Bundle\ProductBundle\Entity\Product\Photo:
-            mapping: "@WellCommerceProductBundle/Resources/config/serialization/Product/Photo.yml"
-        WellCommerce\Bundle\ProductBundle\Entity\Product\Route:
-            mapping: "@WellCommerceProductBundle/Resources/config/serialization/Product/Route.yml"
+        WellCommerce\Bundle\ProductBundle\Entity\VariantOption:
+            mapping: "@WellCommerceProductBundle/Resources/config/serialization/VariantOption.yml"
+        WellCommerce\Bundle\ProductBundle\Entity\ProductPhoto:
+            mapping: "@WellCommerceProductBundle/Resources/config/serialization/ProductPhoto.yml"
+        WellCommerce\Bundle\ProductBundle\Entity\ProductRoute:
+            mapping: "@WellCommerceProductBundle/Resources/config/serialization/ProductRoute.yml"
         WellCommerce\Bundle\ProductBundle\Entity\ProductTranslation:
             mapping: "@WellCommerceProductBundle/Resources/config/serialization/ProductTranslation.yml"
 
@@ -37,7 +37,7 @@ well_commerce_locale:
 well_commerce_routing:
     dynamic_routing:
         product:
-            entity: WellCommerce\Bundle\ProductBundle\Entity\Product\Route
+            entity: WellCommerce\Bundle\ProductBundle\Entity\ProductRoute
             generator: WellCommerce\Bundle\ProductBundle\Routing\ProductRouteGenerator
             defaults:
                 _controller: product.controller.front:indexAction

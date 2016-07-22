@@ -3,7 +3,7 @@
 {% block content %}
     <h2>{% trans %}order.heading.index{% endtrans %}</h2>
     <script type="text/javascript">
-        var processOrders = function(oRow){
+        var processOrderDataGrid = function(oRow){
             oRow.productTotal   = oRow.productTotal + ' ' + oRow.currency;
             oRow.shippingTotal  = oRow.shippingTotal + ' ' + oRow.currency;
             oRow.orderTotal     = oRow.orderTotal + ' ' + oRow.currency;

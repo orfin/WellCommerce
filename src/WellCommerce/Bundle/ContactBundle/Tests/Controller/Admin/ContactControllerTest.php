@@ -64,7 +64,10 @@ class ContactControllerTest extends AbstractAdminControllerTestCase
 
     public function testGridAction()
     {
-        $this->client->request('GET', $this->generateUrl('admin.contact.grid'));
-        $this->assertTrue($this->client->getResponse()->isRedirect($this->generateUrl('admin.contact.index', [], true)));
+        $this->client->request('GET', $this->generateUrl('admin.contact.grid'), [], [], [
+            'HTTP_X-Requested-With' => 'XMLHttpRequest',
+        ]);
+    
+        $this->assertTrue($this->client->getResponse()->isSuccessful());
     }
 }

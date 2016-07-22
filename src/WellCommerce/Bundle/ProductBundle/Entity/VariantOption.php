@@ -10,19 +10,18 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\ProductBundle\Entity\Variant;
+namespace WellCommerce\Bundle\ProductBundle\Entity;
 
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeInterface;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeValueInterface;
 use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableTrait;
-use WellCommerce\Bundle\ProductBundle\Entity\VariantInterface;
 
 /**
- * Class Option
+ * Class VariantOption
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Option implements OptionInterface
+class VariantOption implements VariantOptionInterface
 {
     use IdentifiableTrait;
     
@@ -30,17 +29,17 @@ class Option implements OptionInterface
      * @var VariantInterface
      */
     protected $variant;
-
+    
     /**
      * @var AttributeInterface
      */
     protected $attribute;
-
+    
     /**
      * @var AttributeValueInterface
      */
     protected $attributeValue;
-
+    
     /**
      * {@inheritdoc}
      */
@@ -48,7 +47,7 @@ class Option implements OptionInterface
     {
         return $this->variant;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -56,7 +55,7 @@ class Option implements OptionInterface
     {
         $this->variant = $variant;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -64,7 +63,7 @@ class Option implements OptionInterface
     {
         return $this->attribute;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -72,7 +71,7 @@ class Option implements OptionInterface
     {
         $this->attribute = $attribute;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -80,7 +79,7 @@ class Option implements OptionInterface
     {
         return $this->attributeValue;
     }
-
+    
     /**
      * {@inheritdoc}
      */

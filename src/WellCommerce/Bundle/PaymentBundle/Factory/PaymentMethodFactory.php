@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\PaymentBundle\Factory;
 
 use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
-use WellCommerce\Bundle\OrderBundle\Entity\OrderStatusInterface;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodInterface;
 
@@ -26,30 +25,13 @@ class PaymentMethodFactory extends AbstractEntityFactory
 {
     public function create() : PaymentMethodInterface
     {
-        $defaultOrderStatus = $this->getDefaultOrderStatus();
-
         $paymentMethod = new PaymentMethod();
         $paymentMethod->setHierarchy(0);
         $paymentMethod->setEnabled(true);
         $paymentMethod->setConfiguration([]);
         $paymentMethod->setShippingMethods($this->createEmptyCollection());
-        $paymentMethod->setProcessor($this->getDefaultProcessor());
-        $paymentMethod->setPaymentPendingOrderStatus($defaultOrderStatus);
-        $paymentMethod->setPaymentFailureOrderStatus($defaultOrderStatus);
-        $paymentMethod->setPaymentSuccessOrderStatus($defaultOrderStatus);
-
+        $paymentMethod->setProcessor('');
+        
         return $paymentMethod;
-    }
-
-    protected function getDefaultOrderStatus() : OrderStatusInterface
-    {
-        return $this->get('order_status.repository')->findOneBy([]);
-    }
-
-    protected function getDefaultProcessor() : string
-    {
-        $processors = $this->get('payment.processor.collection')->keys();
-
-        return current($processors);
     }
 }

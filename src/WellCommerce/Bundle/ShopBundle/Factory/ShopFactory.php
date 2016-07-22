@@ -37,34 +37,12 @@ class ShopFactory extends AbstractEntityFactory
         $shop->setPages($this->createEmptyCollection());
         $shop->setProducers($this->createEmptyCollection());
         $shop->setMailerConfiguration(new MailerConfiguration());
-        $shop->setCompany($this->getDefaultCompany());
-        $shop->setTheme($this->getDefaultTheme());
-        $shop->setDefaultCurrency($this->getDefaultCurrency()->getCode());
-        $shop->setDefaultCountry($this->getDefaultCountry());
-        $shop->setClientGroup($this->getDefaultClientGroup());
+        $shop->setCompany(null);
+        $shop->setTheme(null);
+        $shop->setDefaultCurrency('');
+        $shop->setDefaultCountry('');
+        $shop->setClientGroup(null);
         
         return $shop;
-    }
-    
-    private function getDefaultCountry() : string
-    {
-        $countries = array_keys($this->get('country.repository')->all());
-        
-        return reset($countries);
-    }
-    
-    private function getDefaultClientGroup() : ClientGroupInterface
-    {
-        return $this->get('client_group.repository')->findOneBy([]);
-    }
-    
-    private function getDefaultCompany() : CompanyInterface
-    {
-        return $this->get('company.repository')->findOneBy([]);
-    }
-    
-    private function getDefaultTheme() : ThemeInterface
-    {
-        return $this->get('theme.repository')->findOneBy([]);
     }
 }

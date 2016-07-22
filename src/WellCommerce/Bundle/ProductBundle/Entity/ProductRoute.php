@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\ProductBundle\Entity\Product;
+namespace WellCommerce\Bundle\ProductBundle\Entity;
 
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 use WellCommerce\Bundle\RoutingBundle\Entity\Route as BaseRoute;
@@ -21,7 +21,7 @@ use WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Route extends BaseRoute implements RouteInterface
+class ProductRoute extends BaseRoute implements RouteInterface
 {
     /**
      * @var ProductInterface

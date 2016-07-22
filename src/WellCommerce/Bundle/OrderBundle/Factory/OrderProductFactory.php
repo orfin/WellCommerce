@@ -12,6 +12,8 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Factory;
 
+use WellCommerce\Bundle\AppBundle\Entity\DiscountablePrice;
+use WellCommerce\Bundle\AppBundle\Entity\Price;
 use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderProduct;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderProductInterface;
@@ -28,8 +30,8 @@ class OrderProductFactory extends AbstractEntityFactory
         $orderProduct = new OrderProduct();
         $orderProduct->setQuantity(1);
         $orderProduct->setWeight(0);
-        $orderProduct->setBuyPrice($this->createPrice());
-        $orderProduct->setSellPrice($this->createPrice());
+        $orderProduct->setBuyPrice(new Price());
+        $orderProduct->setSellPrice(new DiscountablePrice());
         $orderProduct->setCreatedAt(new \DateTime());
         $orderProduct->setUpdatedAt(new \DateTime());
         $orderProduct->setOptions([]);

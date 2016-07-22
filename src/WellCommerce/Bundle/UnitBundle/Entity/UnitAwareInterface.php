@@ -19,7 +19,9 @@ namespace WellCommerce\Bundle\UnitBundle\Entity;
  */
 interface UnitAwareInterface
 {
-    public function setUnit(UnitInterface $unit);
+    public function setUnit(UnitInterface $unit = null);
     
-    public function getUnit() : UnitInterface;
+    public function getUnit();
+    
+    public function hasUnit() : bool;
 }

@@ -205,16 +205,16 @@ abstract class AbstractDataGrid extends AbstractContainerAware implements DataGr
      */
     public function loadResults(Request $request)
     {
-        $page               = ($request->request->get('starting_from') / $request->request->get('limit')) + 1;
+        $page               = ($request->request->get('starting_from', 0) / $request->request->get('limit', 10)) + 1;
         $conditions         = new ConditionsCollection();
         $conditionsResolver = new ConditionsResolver();
         $conditionsResolver->resolveConditions($request->request->get('where'), $conditions);
         
         $requestOptions = [
             'page'       => $page,
-            'limit'      => $request->request->get('limit'),
-            'order_by'   => $request->request->get('order_by'),
-            'order_dir'  => $request->request->get('order_dir'),
+            'limit'      => $request->request->get('limit', 10),
+            'order_by'   => $request->request->get('order_by', 'id'),
+            'order_dir'  => $request->request->get('order_dir', 'desc'),
             'conditions' => $conditions,
         ];
         

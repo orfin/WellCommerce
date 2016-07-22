@@ -22,20 +22,30 @@ use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CompanyFactory extends AbstractEntityFactory
+final class CompanyFactory extends AbstractEntityFactory
 {
+    /**
+     * @var CompanyAddressFactory
+     */
+    private $companyAddressFactory;
+    
+    /**
+     * CompanyFactory constructor.
+     *
+     * @param CompanyAddressFactory $companyAddressFactory
+     */
+    public function __construct(CompanyAddressFactory $companyAddressFactory)
+    {
+        $this->companyAddressFactory = $companyAddressFactory;
+    }
+    
     public function create() : CompanyInterface
     {
         $company = new Company();
         $company->setName('');
         $company->setShortName('');
-        $company->setAddress($this->createDefaultCompanyAddress());
+        $company->setAddress($this->companyAddressFactory->create());
 
         return $company;
-    }
-
-    private function createDefaultCompanyAddress() : CompanyAddressInterface
-    {
-        return $this->get('company_address.factory')->create();
     }
 }

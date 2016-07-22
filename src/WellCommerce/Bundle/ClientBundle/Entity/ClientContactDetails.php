@@ -44,6 +44,15 @@ class ClientContactDetails implements ClientContactDetailsInterface
      */
     protected $email;
     
+    public function __construct()
+    {
+        $this->setFirstName('');
+        $this->setLastName('');
+        $this->setEmail('');
+        $this->setPhone('');
+        $this->setSecondaryPhone('');
+    }
+    
     /**
      * {@inheritdoc}
      */

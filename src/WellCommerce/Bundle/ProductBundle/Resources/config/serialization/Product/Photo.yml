@@ -1,4 +1,4 @@
-WellCommerce\Bundle\ProductBundle\Entity\Product\Photo:
+WellCommerce\Bundle\ProductBundle\Entity\ProductPhoto:
     fields:
         id:
             groups:

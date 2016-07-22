@@ -36,12 +36,6 @@ abstract class AbstractManagerTestCase extends AbstractTestCase
         $this->assertInstanceOf($this->getRepositoryInterfaceClass(), $manager->getRepository());
     }
 
-    public function testManagerReturnsValidFactory()
-    {
-        $manager = $this->get();
-        $this->assertInstanceOf($this->getFactoryInterfaceClass(), $manager->getFactory());
-    }
-
     protected function getManagerInterfaceName() : string
     {
         return ManagerInterface::class;

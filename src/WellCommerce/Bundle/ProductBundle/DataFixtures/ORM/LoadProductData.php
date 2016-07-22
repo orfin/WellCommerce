@@ -27,6 +27,7 @@ use WellCommerce\Bundle\MediaBundle\DataFixtures\ORM\LoadMediaData;
 use WellCommerce\Bundle\ProducerBundle\DataFixtures\ORM\LoadProducerData;
 use WellCommerce\Bundle\ProductBundle\Entity\Product;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductPhoto;
 use WellCommerce\Bundle\TaxBundle\DataFixtures\ORM\LoadTaxData;
 use WellCommerce\Bundle\UnitBundle\DataFixtures\ORM\LoadUnitData;
 
@@ -173,7 +174,7 @@ class LoadProductData extends AbstractDataFixture
         $isMainPhoto   = true;
 
         foreach ($mediaFiles as $media) {
-            $productPhoto = new Product\Photo();
+            $productPhoto = new ProductPhoto();
             $productPhoto->setHierarchy(0);
             $productPhoto->setMainPhoto($isMainPhoto);
             $productPhoto->setPhoto($media);

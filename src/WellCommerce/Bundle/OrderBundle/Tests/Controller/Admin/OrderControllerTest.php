@@ -52,7 +52,10 @@ class OrderControllerTest extends AbstractAdminControllerTestCase
 
     public function testGridAction()
     {
-        $this->client->request('GET', $this->generateUrl('admin.order.grid'));
-        $this->assertTrue($this->client->getResponse()->isRedirect($this->generateUrl('admin.order.index', [], true)));
+        $this->client->request('GET', $this->generateUrl('admin.order.grid'), [], [], [
+            'HTTP_X-Requested-With' => 'XMLHttpRequest',
+        ]);
+    
+        $this->assertTrue($this->client->getResponse()->isSuccessful());
     }
 }

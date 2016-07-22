@@ -26,12 +26,12 @@ interface OrderStatusHistoryInterface extends EntityInterface, OrderAwareInterfa
     /**
      * @return OrderStatusInterface
      */
-    public function getOrderStatus() : OrderStatusInterface;
+    public function getOrderStatus();
     
     /**
      * @param OrderStatusInterface $orderStatus
      */
-    public function setOrderStatus(OrderStatusInterface $orderStatus);
+    public function setOrderStatus(OrderStatusInterface $orderStatus = null);
     
     /**
      * @return string

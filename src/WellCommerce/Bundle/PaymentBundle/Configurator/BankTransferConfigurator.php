@@ -28,42 +28,45 @@ final class BankTransferConfigurator extends AbstractPaymentMethodConfigurator
     {
         return 'bank_transfer';
     }
-
+    
     public function getInitializeTemplateName() : string
     {
         return 'WellCommercePaymentBundle:Front/BankTransfer:initialize.html.twig';
     }
-
+    
     public function addConfigurationFields(FormBuilderInterface $builder, ElementInterface $fieldset, DependencyInterface $dependency)
     {
         $fieldset->addChild($builder->getElement('text_field', [
             'name'         => $this->getConfigurationKey('account_number'),
             'label'        => $this->trans('payment_method.bank_transfer.account_number'),
-            'dependencies' => [$dependency]
+            'dependencies' => [$dependency],
+            'default'      => ''
         ]));
 
         $fieldset->addChild($builder->getElement('text_field', [
             'name'         => $this->getConfigurationKey('account_owner'),
             'label'        => $this->trans('payment_method.bank_transfer.account_owner'),
-            'dependencies' => [$dependency]
+            'dependencies' => [$dependency],
+            'default'      => ''
         ]));
-        
+
         $fieldset->addChild($builder->getElement('text_field', [
             'name'         => $this->getConfigurationKey('sort_number'),
             'label'        => $this->trans('payment_method.bank_transfer.sort_number'),
-            'dependencies' => [$dependency]
+            'dependencies' => [$dependency],
+            'default'      => ''
         ]));
     }
-
+    
     protected function configureOptions(OptionsResolver $resolver)
     {
         parent::configureOptions($resolver);
-
+        
         $resolver->setAllowedTypes($this->getConfigurationKey('account_number'), 'string');
         $resolver->setAllowedTypes($this->getConfigurationKey('account_owner'), 'string');
         $resolver->setAllowedTypes($this->getConfigurationKey('sort_number'), 'string');
     }
-
+    
     public function getSupportedConfigurationKeys() : array
     {
         return [

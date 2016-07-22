@@ -15,7 +15,6 @@ namespace WellCommerce\Bundle\ProductBundle\Entity;
 use Knp\DoctrineBehaviors\Model\Translatable\Translation;
 use WellCommerce\Bundle\AppBundle\Entity\Meta;
 use WellCommerce\Bundle\LocaleBundle\Entity\LocaleAwareInterface;
-use WellCommerce\Bundle\ProductBundle\Entity\Product\Route;
 use WellCommerce\Bundle\RoutingBundle\Entity\RoutableSubjectInterface;
 use WellCommerce\Bundle\RoutingBundle\Entity\RoutableTrait;
 use WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface;
@@ -129,6 +128,6 @@ class ProductTranslation implements LocaleAwareInterface, RoutableSubjectInterfa
 
     public function getRouteEntity() : RouteInterface
     {
-        return new Route();
+        return new ProductRoute();
     }
 }

@@ -93,9 +93,9 @@ interface OrderInterface extends
 
     public function hasCurrentStatus() : bool;
 
-    public function getCurrentStatus() : OrderStatusInterface;
+    public function getCurrentStatus();
     
-    public function setCurrentStatus(OrderStatusInterface $currentStatus);
+    public function setCurrentStatus(OrderStatusInterface $currentStatus = null);
     
     public function setOrderStatusHistory(Collection $orderStatusHistory);
     

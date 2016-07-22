@@ -63,7 +63,10 @@ class ThemeControllerTest extends AbstractAdminControllerTestCase
 
     public function testGridAction()
     {
-        $this->client->request('GET', $this->generateUrl('admin.theme.grid'));
-        $this->assertTrue($this->client->getResponse()->isRedirect($this->generateUrl('admin.theme.index', [], true)));
+        $this->client->request('GET', $this->generateUrl('admin.theme.grid'), [], [], [
+            'HTTP_X-Requested-With' => 'XMLHttpRequest',
+        ]);
+    
+        $this->assertTrue($this->client->getResponse()->isSuccessful());
     }
 }

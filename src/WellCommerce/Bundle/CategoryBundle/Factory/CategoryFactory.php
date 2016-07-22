@@ -29,7 +29,7 @@ class CategoryFactory extends AbstractEntityFactory
         $category->setEnabled(true);
         $category->setHierarchy(0);
         $category->setParent(null);
-        $category->setShops($this->getDefaultShops());
+        $category->setShops($this->createEmptyCollection());
         $category->setChildren($this->createEmptyCollection());
         $category->setProducts($this->createEmptyCollection());
         $category->setProductsCount(0);

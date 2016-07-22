@@ -27,7 +27,7 @@ abstract class AbstractReportProvider extends AbstractContainerAware
      * @var RepositoryInterface
      */
     protected $repository;
-
+    
     /**
      * Constructor
      *
@@ -37,7 +37,7 @@ abstract class AbstractReportProvider extends AbstractContainerAware
     {
         $this->repository = $repository;
     }
-
+    
     /**
      * Converts the order's gross total to target currency
      *
@@ -47,9 +47,9 @@ abstract class AbstractReportProvider extends AbstractContainerAware
      */
     protected function convertAmount(OrderInterface $order)
     {
-        $amount       = $order->getOrderTotal()->getGrossAmount();
+        $amount       = $order->getSummary()->getGrossAmount();
         $baseCurrency = $order->getCurrency();
-
+        
         return $this->getCurrencyHelper()->convert($amount, $baseCurrency);
     }
 }

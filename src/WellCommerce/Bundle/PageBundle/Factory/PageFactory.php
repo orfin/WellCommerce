@@ -29,18 +29,13 @@ class PageFactory extends AbstractEntityFactory
         $page = new Page();
         $page->setHierarchy(0);
         $page->setCreatedAt(new \DateTime());
-        $page->setClientGroups($this->getDefaultClientGroups());
-        $page->setShops($this->getDefaultShops());
+        $page->setClientGroups($this->createEmptyCollection());
+        $page->setShops($this->createEmptyCollection());
         $page->setParent(null);
         $page->setPublish(true);
         $page->setRedirectType(1);
         $page->setSection('');
         
         return $page;
-    }
-    
-    private function getDefaultClientGroups()
-    {
-        return $this->get('client_group.repository')->matching(new Criteria());
     }
 }

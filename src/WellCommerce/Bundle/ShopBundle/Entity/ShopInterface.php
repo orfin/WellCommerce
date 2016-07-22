@@ -56,16 +56,6 @@ interface ShopInterface extends
     public function setProducts(Collection $products);
     
     /**
-     * @return CompanyInterface
-     */
-    public function getCompany() : CompanyInterface;
-    
-    /**
-     * @param CompanyInterface $company
-     */
-    public function setCompany(CompanyInterface $company);
-    
-    /**
      * @return Collection
      */
     public function getCategories() : Collection;

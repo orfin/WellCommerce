@@ -62,7 +62,10 @@ class LocaleControllerTest extends AbstractAdminControllerTestCase
 
     public function testGridAction()
     {
-        $this->client->request('GET', $this->generateUrl('admin.locale.grid'));
-        $this->assertTrue($this->client->getResponse()->isRedirect($this->generateUrl('admin.locale.index', [], true)));
+        $this->client->request('GET', $this->generateUrl('admin.locale.grid'), [], [], [
+            'HTTP_X-Requested-With' => 'XMLHttpRequest',
+        ]);
+    
+        $this->assertTrue($this->client->getResponse()->isSuccessful());
     }
 }

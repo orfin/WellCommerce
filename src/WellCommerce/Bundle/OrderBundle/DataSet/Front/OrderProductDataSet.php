@@ -31,16 +31,6 @@ use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
  */
 class OrderProductDataSet extends AbstractDataSet
 {
-    /**
-     * @var OrderProviderInterface
-     */
-    protected $provider;
-
-    public function setOrderProvider(OrderProviderInterface $provider)
-    {
-        $this->provider = $provider;
-    }
-
     public function configureOptions(DataSetConfiguratorInterface $configurator)
     {
         $configurator->setColumns([
@@ -59,11 +49,11 @@ class OrderProductDataSet extends AbstractDataSet
             'tax'             => 'sell_tax.value',
             'photo'           => 'photos.path'
         ]);
-
+        
         $configurator->setColumnTransformers([
             'route' => $this->getDataSetTransformer('route'),
         ]);
-
+        
         $configurator->setCacheOptions(new CacheOptions(true, 3600, [
             Order::class,
             OrderProduct::class,
@@ -78,9 +68,14 @@ class OrderProductDataSet extends AbstractDataSet
         $queryBuilder = parent::getQueryBuilder($request);
         $expression   = $queryBuilder->expr()->eq('order_product.order', ':order');
         $queryBuilder->andWhere($expression);
-        $queryBuilder->setParameter('order', $this->provider->getCurrentOrderIdentifier());
+        $queryBuilder->setParameter('order', $this->getOrderProvider()->getCurrentOrderIdentifier());
         $queryBuilder->setParameter('date', (new \DateTime())->setTime(0, 0, 1));
-
+        
         return $queryBuilder;
+    }
+    
+    private function getOrderProvider() : OrderProviderInterface
+    {
+        return $this->get('order.provider.front');
     }
 }

@@ -30,15 +30,10 @@ class ShippingMethodFactory extends AbstractEntityFactory
         $shippingMethod->setCosts($this->createEmptyCollection());
         $shippingMethod->setEnabled(true);
         $shippingMethod->setHierarchy(0);
-        $shippingMethod->setCurrency($this->getDefaultCurrency());
-        $shippingMethod->setTax($this->getDefaultTax());
-        $shippingMethod->setCalculator($this->getDefaultCalculator()->getAlias());
+        $shippingMethod->setCurrency(null);
+        $shippingMethod->setTax(null);
+        $shippingMethod->setCalculator('');
 
         return $shippingMethod;
-    }
-
-    private function getDefaultCalculator() : ShippingCalculatorInterface
-    {
-        return $this->get('shipping_method.calculator.collection')->first();
     }
 }

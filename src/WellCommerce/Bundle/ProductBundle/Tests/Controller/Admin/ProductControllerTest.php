@@ -63,7 +63,10 @@ class ProductControllerTest extends AbstractAdminControllerTestCase
 
     public function testGridAction()
     {
-        $this->client->request('GET', $this->generateUrl('admin.product.grid'));
-        $this->assertTrue($this->client->getResponse()->isRedirect($this->generateUrl('admin.product.index', [], true)));
+        $this->client->request('GET', $this->generateUrl('admin.product.grid'), [], [], [
+            'HTTP_X-Requested-With' => 'XMLHttpRequest',
+        ]);
+    
+        $this->assertTrue($this->client->getResponse()->isSuccessful());
     }
 }

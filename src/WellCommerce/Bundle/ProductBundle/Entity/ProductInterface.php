@@ -26,7 +26,6 @@ use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
 use WellCommerce\Bundle\DoctrineBundle\Behaviours\Enableable\EnableableInterface;
 use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 use WellCommerce\Bundle\ProducerBundle\Entity\ProducerAwareInterface;
-use WellCommerce\Bundle\ProductBundle\Entity\Product\PhotoInterface;
 use WellCommerce\Bundle\ShopBundle\Entity\ShopCollectionAwareInterface;
 use WellCommerce\Bundle\TaxBundle\Entity\TaxInterface;
 use WellCommerce\Bundle\UnitBundle\Entity\UnitAwareInterface;
@@ -49,68 +48,68 @@ interface ProductInterface extends
     AvailabilityAwareInterface
 {
     public function getSku() : string;
-
+    
     public function setSku(string $sku);
-
+    
     public function getStock() : int;
-
+    
     public function setStock(int $stock);
-
+    
     public function getTrackStock() : bool;
-
+    
     public function setTrackStock(bool $trackStock);
-
+    
     public function getDistinctions() : Collection;
-
+    
     public function setDistinctions(Collection $distinctions);
-
+    
     public function getProductPhotos() : Collection;
-
+    
     public function setProductPhotos(Collection $photos);
-
-    public function addProductPhoto(PhotoInterface $photo);
-
+    
+    public function addProductPhoto(ProductPhotoInterface $photo);
+    
     public function getCategories() : Collection;
-
+    
     public function setCategories(Collection $collection);
-
+    
     public function addCategory(CategoryInterface $category);
-
+    
     public function getSellPrice() : DiscountablePriceInterface;
-
+    
     public function setSellPrice(DiscountablePriceInterface $sellPrice);
-
+    
     public function getBuyPrice() : PriceInterface;
-
+    
     public function setBuyPrice(PriceInterface $buyPrice);
-
+    
     public function getWeight() : float;
-
+    
     public function setWeight(float $weight);
-
+    
     public function getDimension() : Dimension;
-
+    
     public function setDimension(Dimension $dimension);
-
+    
     public function getPackageSize() : float;
-
+    
     public function setPackageSize(float $packageSize);
-
+    
     public function getAttributeGroup();
-
+    
     public function setAttributeGroup(AttributeGroupInterface $attributeGroup);
-
+    
     public function getVariants() : Collection;
-
+    
     public function setVariants(Collection $attributes);
-
+    
     public function removeVariant(VariantInterface $variant);
-
-    public function getBuyPriceTax() : TaxInterface;
-
-    public function setBuyPriceTax(TaxInterface $buyPriceTax);
-
-    public function getSellPriceTax() : TaxInterface;
-
-    public function setSellPriceTax(TaxInterface $sellPriceTax);
+    
+    public function getBuyPriceTax();
+    
+    public function setBuyPriceTax(TaxInterface $buyPriceTax = null);
+    
+    public function getSellPriceTax();
+    
+    public function setSellPriceTax(TaxInterface $sellPriceTax = null);
 }

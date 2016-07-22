@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\ProductBundle\Entity\Product;
+namespace WellCommerce\Bundle\ProductBundle\Entity;
 
 use DateTime;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
@@ -19,11 +19,11 @@ use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareTrait;
 use WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusInterface;
 
 /**
- * Class Distinction
+ * Class ProductDistinction
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Distinction implements DistinctionInterface
+class ProductDistinction implements ProductDistinctionInterface
 {
     use IdentifiableTrait;
     use Timestampable;

@@ -13,7 +13,9 @@
 namespace WellCommerce\Bundle\ProductBundle\Factory;
 
 use WellCommerce\Bundle\AppBundle\Entity\Dimension;
+use WellCommerce\Bundle\AppBundle\Entity\DiscountablePrice;
 use WellCommerce\Bundle\AppBundle\Entity\DiscountablePriceInterface;
+use WellCommerce\Bundle\AppBundle\Entity\Price;
 use WellCommerce\Bundle\AppBundle\Entity\PriceInterface;
 use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 use WellCommerce\Bundle\ProductBundle\Entity\Product;
@@ -29,40 +31,21 @@ class ProductFactory extends AbstractEntityFactory
 {
     public function create() : ProductInterface
     {
-        $unit = $this->getDefaultUnit();
-        $tax  = $this->getDefaultTax();
-
-        /** @var  $product ProductInterface */
         $product = new Product();
         $product->setCategories($this->createEmptyCollection());
         $product->setProductPhotos($this->createEmptyCollection());
         $product->setDistinctions($this->createEmptyCollection());
         $product->setVariants($this->createEmptyCollection());
-        $product->setShops($this->getDefaultShops());
+        $product->setShops($this->createEmptyCollection());
         $product->setEnabled(true);
-        $product->setSellPrice($this->createDefaultDiscountablePrice());
+        $product->setSellPrice(new DiscountablePrice());
         $product->setDimension(new Dimension());
-        $product->setBuyPrice($this->createDefaultPrice());
-        $product->setBuyPriceTax($tax);
-        $product->setSellPriceTax($tax);
-        $product->setUnit($unit);
+        $product->setBuyPrice(new Price());
+        $product->setBuyPriceTax(null);
+        $product->setSellPriceTax(null);
+        $product->setUnit(null);
         $product->setHierarchy(0);
 
         return $product;
-    }
-    
-    private function getDefaultUnit() : UnitInterface
-    {
-        return $this->get('unit.repository')->findOneBy([]);
-    }
-
-    private function createDefaultDiscountablePrice() : DiscountablePriceInterface
-    {
-        return $this->get('discountable_price.factory')->create();
-    }
-
-    private function createDefaultPrice() : PriceInterface
-    {
-        return $this->get('price.factory')->create();
     }
 }

@@ -32,6 +32,13 @@ class ShippingMethodFormBuilder extends AbstractFormBuilder
      */
     public function buildForm(FormInterface $form)
     {
+        $calculatorOptions = [];
+        $calculators = $this->getCalculators();
+    
+        $calculators->map(function (ShippingCalculatorInterface $calculator) use (&$calculatorOptions) {
+            $calculatorOptions[$calculator->getAlias()] = $calculator->getAlias();
+        });
+        
         $requiredData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'required_data',
             'label' => $this->trans('common.fieldset.general')
@@ -72,11 +79,9 @@ class ShippingMethodFormBuilder extends AbstractFormBuilder
         $calculator = $costsData->addChild($this->getElement('select', [
             'name'    => 'calculator',
             'label'   => $this->trans('shipping_method.label.calculator'),
-            'options' => [],
+            'options' => $calculatorOptions
         ]));
 
-        $this->addCalculatorOptions($calculator);
-        
         $costsData->addChild($this->getElement('select', [
             'name'        => 'currency',
             'label'       => $this->trans('common.label.currency'),
@@ -102,20 +107,6 @@ class ShippingMethodFormBuilder extends AbstractFormBuilder
         $form->addFilter($this->getFilter('no_code'));
         $form->addFilter($this->getFilter('trim'));
         $form->addFilter($this->getFilter('secure'));
-    }
-
-    /**
-     * Adds calculator options to select
-     *
-     * @param ElementInterface|Select $select
-     */
-    private function addCalculatorOptions(ElementInterface $select)
-    {
-        $collection = $this->getCalculators();
-
-        $collection->map(function (ShippingCalculatorInterface $calculator) use ($select) {
-            $select->addOptionToSelect($calculator->getAlias(), $calculator->getAlias());
-        });
     }
 
     private function getCalculators() : Collection

@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\ProductBundle\Entity\Product;
+namespace WellCommerce\Bundle\ProductBundle\Entity;
 
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use WellCommerce\Bundle\AppBundle\Entity\HierarchyAwareTrait;
@@ -23,7 +23,7 @@ use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareTrait;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Photo implements PhotoInterface
+class ProductPhoto implements ProductPhotoInterface
 {
     use IdentifiableTrait;
     use Timestampable;

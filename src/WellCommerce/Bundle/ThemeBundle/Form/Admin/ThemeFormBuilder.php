@@ -11,7 +11,6 @@
  */
 namespace WellCommerce\Bundle\ThemeBundle\Form\Admin;
 
-use Symfony\Component\Finder\Finder;
 use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
 use WellCommerce\Component\Form\Elements\FormInterface;
 
@@ -27,11 +26,13 @@ class ThemeFormBuilder extends AbstractFormBuilder
      */
     public function buildForm(FormInterface $form)
     {
+        $themeFolders = $this->get('theme.locator')->getThemeFolders();
+        
         $requiredData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'required_data',
             'label' => $this->trans('common.fieldset.general')
         ]));
-
+        
         $requiredData->addChild($this->getElement('text_field', [
             'name'  => 'name',
             'label' => $this->trans('common.label.name'),
@@ -39,14 +40,15 @@ class ThemeFormBuilder extends AbstractFormBuilder
                 $this->getRule('required')
             ],
         ]));
-
+        
         $requiredData->addChild($this->getElement('select', [
             'name'    => 'folder',
             'label'   => $this->trans('theme.label.folder'),
             'comment' => $this->trans('theme.comment.folder'),
-            'options' => $this->get('theme.locator')->getThemeFolders()
+            'options' => $themeFolders,
+            'default' => reset($themeFolders)
         ]));
-
+        
         $form->addFilter($this->getFilter('no_code'));
         $form->addFilter($this->getFilter('trim'));
         $form->addFilter($this->getFilter('secure'));

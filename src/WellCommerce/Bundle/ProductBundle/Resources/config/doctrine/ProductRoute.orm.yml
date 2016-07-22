@@ -1,4 +1,4 @@
-WellCommerce\Bundle\ProductBundle\Entity\Product\Route:
+WellCommerce\Bundle\ProductBundle\Entity\ProductRoute:
     type: entity
     cache:
         usage: NONSTRICT_READ_WRITE

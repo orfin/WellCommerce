@@ -28,7 +28,7 @@ class LocaleFactory extends AbstractEntityFactory
         $locale = new Locale();
         $locale->setCode('');
         $locale->setEnabled(true);
-        $locale->setCurrency($this->getDefaultCurrency());
+        $locale->setCurrency(null);
 
         return $locale;
     }

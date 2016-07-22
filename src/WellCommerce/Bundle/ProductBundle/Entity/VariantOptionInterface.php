@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\ProductBundle\Entity\Variant;
+namespace WellCommerce\Bundle\ProductBundle\Entity;
 
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeInterface;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeValueInterface;
@@ -18,11 +18,11 @@ use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\VariantInterface;
 
 /**
- * Interface VariantInterface
+ * Interface VariantOptionInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface OptionInterface extends EntityInterface
+interface VariantOptionInterface extends EntityInterface
 {
     public function getVariant() : VariantInterface;
 

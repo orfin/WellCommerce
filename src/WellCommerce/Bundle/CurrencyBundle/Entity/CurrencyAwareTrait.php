@@ -23,20 +23,22 @@ trait CurrencyAwareTrait
      * @var CurrencyInterface
      */
     protected $currency;
-
+    
     /**
      * @return CurrencyInterface
      */
-    public function getCurrency() : CurrencyInterface
+    public function getCurrency()
     {
         return $this->currency;
     }
-
-    /**
-     * @param CurrencyInterface $currency
-     */
-    public function setCurrency(CurrencyInterface $currency)
+    
+    public function setCurrency(CurrencyInterface $currency = null)
     {
         $this->currency = $currency;
+    }
+    
+    public function hasCurrency() : bool
+    {
+        return $this->currency instanceof CurrencyInterface;
     }
 }

@@ -19,9 +19,9 @@ namespace WellCommerce\Bundle\TaxBundle\Entity;
  */
 interface TaxAwareInterface
 {
-    public function getTax() : TaxInterface;
+    public function getTax();
     
-    public function setTax(TaxInterface $tax);
+    public function setTax(TaxInterface $tax = null);
 
     public function hasTax() : bool;
 }

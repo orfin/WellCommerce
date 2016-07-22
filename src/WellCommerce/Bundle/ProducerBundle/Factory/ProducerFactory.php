@@ -27,7 +27,7 @@ class ProducerFactory extends AbstractEntityFactory
     {
         $producer = new Producer();
         $producer->setDeliverers($this->createEmptyCollection());
-        $producer->setShops($this->getDefaultShops());
+        $producer->setShops($this->createEmptyCollection());
         
         return $producer;
     }

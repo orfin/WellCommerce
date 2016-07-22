@@ -28,7 +28,7 @@ class UserGroupFactory extends AbstractEntityFactory
     {
         $group = new UserGroup();
         $group->setName('');
-        $group->setPermissions(new ArrayCollection());
+        $group->setPermissions($this->createEmptyCollection());
         
         return $group;
     }

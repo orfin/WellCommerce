@@ -39,13 +39,13 @@ final class PayPalConfigurator extends AbstractPaymentMethodConfigurator
         $fieldset->addChild($builder->getElement('text_field', [
             'name'         => $this->getConfigurationKey('client_id'),
             'label'        => $this->trans('paypal.label.client_id'),
-            'dependencies' => [$dependency]
+            'dependencies' => [$dependency],
         ]));
 
         $fieldset->addChild($builder->getElement('text_field', [
             'name'         => $this->getConfigurationKey('client_secret'),
             'label'        => $this->trans('paypal.label.client_secret'),
-            'dependencies' => [$dependency]
+            'dependencies' => [$dependency],
         ]));
 
         $fieldset->addChild($builder->getElement('select', [
@@ -55,7 +55,7 @@ final class PayPalConfigurator extends AbstractPaymentMethodConfigurator
                 'live'    => 'live',
                 'sandbox' => 'sandbox'
             ],
-            'dependencies' => [$dependency]
+            'dependencies' => [$dependency],
         ]));
 
         $fieldset->addChild($builder->getElement('select', [
@@ -65,7 +65,7 @@ final class PayPalConfigurator extends AbstractPaymentMethodConfigurator
                 'paypal'      => 'paypal',
                 'credit_card' => 'credit_card'
             ],
-            'dependencies' => [$dependency]
+            'dependencies' => [$dependency],
         ]));
     }
 

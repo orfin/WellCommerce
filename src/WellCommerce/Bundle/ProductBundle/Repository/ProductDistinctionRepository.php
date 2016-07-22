@@ -9,15 +9,15 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Bundle\ProductBundle\Repository\Product;
+namespace WellCommerce\Bundle\ProductBundle\Repository;
 
 use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
 
 /**
- * Class DistinctionRepository
+ * Class ProductDistinctionRepository
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class DistinctionRepository extends EntityRepository implements DistinctionRepositoryInterface
+class ProductDistinctionRepository extends EntityRepository implements ProductDistinctionRepositoryInterface
 {
 }

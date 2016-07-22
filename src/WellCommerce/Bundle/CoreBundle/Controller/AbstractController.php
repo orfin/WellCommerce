@@ -18,7 +18,6 @@ use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
 use WellCommerce\Bundle\CoreBundle\Helper\Validator\ValidatorHelperInterface;
 use WellCommerce\Bundle\DoctrineBundle\Manager\ManagerInterface;
 use WellCommerce\Component\Form\Elements\FormInterface;
-use WellCommerce\Component\Form\Exception\MissingFormBuilderException;
 use WellCommerce\Component\Form\FormBuilderInterface;
 
 /**
@@ -29,7 +28,7 @@ use WellCommerce\Component\Form\FormBuilderInterface;
 abstract class AbstractController extends AbstractContainerAware implements ControllerInterface
 {
     /**
-     * @var ManagerInterface
+     * @var null|ManagerInterface
      */
     protected $manager;
     
@@ -41,10 +40,10 @@ abstract class AbstractController extends AbstractContainerAware implements Cont
     /**
      * AbstractController constructor.
      *
-     * @param ManagerInterface          $manager
+     * @param ManagerInterface|null     $manager
      * @param FormBuilderInterface|null $formBuilder
      */
-    public function __construct(ManagerInterface $manager, FormBuilderInterface $formBuilder = null)
+    public function __construct(ManagerInterface $manager = null, FormBuilderInterface $formBuilder = null)
     {
         $this->manager     = $manager;
         $this->formBuilder = $formBuilder;
@@ -57,13 +56,9 @@ abstract class AbstractController extends AbstractContainerAware implements Cont
     
     protected function getFormBuilder()
     {
-        if (!$this->formBuilder instanceof FormBuilderInterface) {
-            throw new MissingFormBuilderException(get_class($this));
-        }
-
         return $this->formBuilder;
     }
-
+    
     protected function createFormDefaultJsonResponse(FormInterface $form) : JsonResponse
     {
         return $this->jsonResponse([
@@ -74,7 +69,7 @@ abstract class AbstractController extends AbstractContainerAware implements Cont
             'error'      => $form->getError(),
         ]);
     }
-
+    
     protected function getForm($resource, array $config = []) : FormInterface
     {
         $builder       = $this->getFormBuilder();
@@ -82,12 +77,12 @@ abstract class AbstractController extends AbstractContainerAware implements Cont
             'name'              => $this->getManager()->getRepository()->getAlias(),
             'validation_groups' => ValidatorHelperInterface::DEFAULT_VALIDATOR_GROUPS
         ];
-
+        
         $config = array_merge($defaultConfig, $config);
-
+        
         return $builder->createForm($config, $resource);
     }
-
+    
     protected function jsonResponse(array $content) : JsonResponse
     {
         return new JsonResponse($content);

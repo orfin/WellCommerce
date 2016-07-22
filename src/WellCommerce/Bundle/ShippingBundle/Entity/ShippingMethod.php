@@ -43,7 +43,7 @@ class ShippingMethod implements ShippingMethodInterface
     protected $calculator;
 
     /**
-     * @var string
+     * @var CurrencyInterface
      */
     protected $currency;
 
@@ -92,7 +92,7 @@ class ShippingMethod implements ShippingMethodInterface
     /**
      * {@inheritdoc}
      */
-    public function getCurrency() : CurrencyInterface
+    public function getCurrency()
     {
         return $this->currency;
     }
@@ -100,7 +100,7 @@ class ShippingMethod implements ShippingMethodInterface
     /**
      * {@inheritdoc}
      */
-    public function setCurrency(CurrencyInterface $currency)
+    public function setCurrency(CurrencyInterface $currency = null)
     {
         $this->currency = $currency;
     }

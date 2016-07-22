@@ -116,7 +116,7 @@ class PaymentMethod implements PaymentMethodInterface
     /**
      * {@inheritdoc}
      */
-    public function getPaymentPendingOrderStatus() : OrderStatusInterface
+    public function getPaymentPendingOrderStatus()
     {
         return $this->paymentPendingOrderStatus;
     }
@@ -132,7 +132,7 @@ class PaymentMethod implements PaymentMethodInterface
     /**
      * {@inheritdoc}
      */
-    public function getPaymentSuccessOrderStatus() : OrderStatusInterface
+    public function getPaymentSuccessOrderStatus()
     {
         return $this->paymentSuccessOrderStatus;
     }
@@ -148,7 +148,7 @@ class PaymentMethod implements PaymentMethodInterface
     /**
      * {@inheritdoc}
      */
-    public function getPaymentFailureOrderStatus() : OrderStatusInterface
+    public function getPaymentFailureOrderStatus()
     {
         return $this->paymentFailureOrderStatus;
     }

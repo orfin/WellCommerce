@@ -14,8 +14,8 @@ namespace WellCommerce\Bundle\ProductBundle\Helper;
 
 use WellCommerce\Bundle\CurrencyBundle\Helper\CurrencyHelperInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
-use WellCommerce\Bundle\ProductBundle\Entity\Variant\OptionInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\VariantInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\VariantOptionInterface;
 
 /**
  * Class VariantHelper
@@ -69,7 +69,7 @@ class VariantHelper implements VariantHelperInterface
 
     protected function extractAttributesData(VariantInterface $variant, &$attributes)
     {
-        $variant->getOptions()->map(function (OptionInterface $variantOption) use (&$attributes) {
+        $variant->getOptions()->map(function (VariantOptionInterface $variantOption) use (&$attributes) {
             $attribute                                                           = $variantOption->getAttribute();
             $attributeValue                                                      = $variantOption->getAttributeValue();
             $attributes[$attribute->getId()]['name']                             = $attribute->translate()->getName();
@@ -97,7 +97,7 @@ class VariantHelper implements VariantHelperInterface
     {
         $options = [];
 
-        $variant->getOptions()->map(function (OptionInterface $variantOption) use (&$options) {
+        $variant->getOptions()->map(function (VariantOptionInterface $variantOption) use (&$options) {
             $attribute      = $variantOption->getAttribute();
             $attributeValue = $variantOption->getAttributeValue();
             $key            = sprintf('%s:%s', $attribute->getId(), $attributeValue->getId());
@@ -113,7 +113,7 @@ class VariantHelper implements VariantHelperInterface
     {
         $options = [];
 
-        $variant->getOptions()->map(function (OptionInterface $variantOption) use (&$options) {
+        $variant->getOptions()->map(function (VariantOptionInterface $variantOption) use (&$options) {
             $attribute                                   = $variantOption->getAttribute();
             $attributeValue                              = $variantOption->getAttributeValue();
             $options[$attribute->translate()->getName()] = $attributeValue->translate()->getName();

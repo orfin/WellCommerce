@@ -31,7 +31,7 @@ class CouponFactory extends AbstractEntityFactory
         $coupon->setModifierType('%');
         $coupon->setModifierValue(100);
         $coupon->setCode(strtoupper(uniqid()));
-        $coupon->setCurrency($this->getDefaultCurrency()->getCode());
+        $coupon->setCurrency('');
         
         return $coupon;
     }

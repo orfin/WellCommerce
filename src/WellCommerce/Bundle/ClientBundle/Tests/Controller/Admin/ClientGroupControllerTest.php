@@ -27,44 +27,47 @@ class ClientGroupControllerTest extends AbstractAdminControllerTestCase
     {
         $url     = $this->generateUrl('admin.client_group.index');
         $crawler = $this->client->request('GET', $url);
-
+        
         $this->assertTrue($this->client->getResponse()->isSuccessful());
         $this->assertEquals(1, $crawler->filter('html:contains("' . $this->trans('client_group.heading.index') . '")')->count());
         $this->assertEquals(1, $crawler->filter('html:contains("' . $this->jsDataGridClass . '")')->count());
         $this->assertEquals(0, $crawler->filter('html:contains("' . $this->jsFormClass . '")')->count());
     }
-
+    
     public function testAddAction()
     {
         $url     = $this->generateUrl('admin.client_group.add');
         $crawler = $this->client->request('GET', $url);
-
+        
         $this->assertTrue($this->client->getResponse()->isSuccessful());
         $this->assertEquals(1, $crawler->filter('html:contains("' . $this->trans('client_group.heading.add') . '")')->count());
         $this->assertEquals(0, $crawler->filter('html:contains("' . $this->jsDataGridClass . '")')->count());
         $this->assertEquals(1, $crawler->filter('html:contains("' . $this->jsFormClass . '")')->count());
     }
-
+    
     public function testEditAction()
     {
         $collection = $this->container->get('client_group.repository')->matching(new Criteria());
-
+        
         $collection->map(function (ClientGroupInterface $clientGroup) {
             $url     = $this->generateUrl('admin.client_group.edit', ['id' => $clientGroup->getId()]);
             $crawler = $this->client->request('GET', $url);
-
+            
             $this->assertTrue($this->client->getResponse()->isSuccessful());
             $this->assertEquals(1, $crawler->filter('html:contains("' . $this->trans('client_group.heading.edit') . '")')->count());
             $this->assertEquals(0, $crawler->filter('html:contains("' . $this->jsDataGridClass . '")')->count());
             $this->assertEquals(1, $crawler->filter('html:contains("' . $this->jsFormClass . '")')->count());
             $this->assertEquals(1, $crawler->filter('html:contains("' . $clientGroup->translate()->getName() . '")')->count());
         });
-
+        
     }
-
+    
     public function testGridAction()
     {
-        $this->client->request('GET', $this->generateUrl('admin.client_group.grid'));
-        $this->assertTrue($this->client->getResponse()->isRedirect($this->generateUrl('admin.client_group.index', [], true)));
+        $this->client->request('GET', $this->generateUrl('admin.client_group.grid'), [], [], [
+            'HTTP_X-Requested-With' => 'XMLHttpRequest',
+        ]);
+    
+        $this->assertTrue($this->client->getResponse()->isSuccessful());
     }
 }

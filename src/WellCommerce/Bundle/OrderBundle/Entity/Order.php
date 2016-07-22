@@ -233,12 +233,12 @@ class Order implements OrderInterface
         return $this->currentStatus instanceof OrderStatusInterface;
     }
 
-    public function getCurrentStatus() : OrderStatusInterface
+    public function getCurrentStatus()
     {
         return $this->currentStatus;
     }
     
-    public function setCurrentStatus(OrderStatusInterface $currentStatus)
+    public function setCurrentStatus(OrderStatusInterface $currentStatus = null)
     {
         $this->currentStatus = $currentStatus;
     }

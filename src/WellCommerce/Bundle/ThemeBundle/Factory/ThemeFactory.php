@@ -28,15 +28,8 @@ class ThemeFactory extends AbstractEntityFactory
         $theme = new Theme();
         $theme->setCss($this->createEmptyCollection());
         $theme->setName('');
-        $theme->setFolder($this->getDefaultFolder());
+        $theme->setFolder('');
         
         return $theme;
-    }
-    
-    private function getDefaultFolder() : string
-    {
-        $themeFolders = $this->get('theme.locator')->getThemeFolders();
-        
-        return reset($themeFolders);
     }
 }

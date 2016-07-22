@@ -19,13 +19,9 @@ namespace WellCommerce\Bundle\ThemeBundle\Entity;
  */
 interface ThemeAwareInterface
 {
-    /**
-     * @param ThemeInterface $theme
-     */
-    public function setTheme(ThemeInterface $theme);
+    public function setTheme(ThemeInterface $theme = null);
     
-    /**
-     * @return ThemeInterface
-     */
-    public function getTheme() : ThemeInterface;
+    public function getTheme();
+    
+    public function hasTheme() : bool;
 }

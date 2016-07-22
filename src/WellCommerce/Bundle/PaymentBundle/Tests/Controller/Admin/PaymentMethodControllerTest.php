@@ -63,7 +63,10 @@ class PaymentMethodControllerTest extends AbstractAdminControllerTestCase
 
     public function testGridAction()
     {
-        $this->client->request('GET', $this->generateUrl('admin.payment_method.grid'));
-        $this->assertTrue($this->client->getResponse()->isRedirect($this->generateUrl('admin.payment_method.index', [], true)));
+        $this->client->request('GET', $this->generateUrl('admin.payment_method.grid'), [], [], [
+            'HTTP_X-Requested-With' => 'XMLHttpRequest',
+        ]);
+    
+        $this->assertTrue($this->client->getResponse()->isSuccessful());
     }
 }

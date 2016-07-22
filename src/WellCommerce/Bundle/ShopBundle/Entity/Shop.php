@@ -119,7 +119,7 @@ class Shop implements ShopInterface
     /**
      * {@inheritdoc}
      */
-    public function getCompany() : CompanyInterface
+    public function getCompany()
     {
         return $this->company;
     }
@@ -127,7 +127,7 @@ class Shop implements ShopInterface
     /**
      * {@inheritdoc}
      */
-    public function setCompany(CompanyInterface $company)
+    public function setCompany(CompanyInterface $company = null)
     {
         $this->company = $company;
     }

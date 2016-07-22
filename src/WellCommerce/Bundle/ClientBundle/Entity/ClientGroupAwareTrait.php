@@ -24,18 +24,12 @@ trait ClientGroupAwareTrait
      */
     protected $clientGroup;
     
-    /**
-     * @return ClientGroupInterface
-     */
-    public function getClientGroup() : ClientGroupInterface
+    public function getClientGroup()
     {
         return $this->clientGroup;
     }
     
-    /**
-     * @inheritDoc
-     */
-    public function setClientGroup(ClientGroupInterface $clientGroup)
+    public function setClientGroup(ClientGroupInterface $clientGroup = null)
     {
         $this->clientGroup = $clientGroup;
     }

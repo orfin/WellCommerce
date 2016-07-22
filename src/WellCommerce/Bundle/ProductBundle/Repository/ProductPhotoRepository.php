@@ -9,16 +9,16 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Bundle\ProductBundle\Repository\Product;
+namespace WellCommerce\Bundle\ProductBundle\Repository;
 
 use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
 
 /**
- * Class PhotoRepository
+ * Class ProductPhotoRepository
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PhotoRepository extends EntityRepository implements PhotoRepositoryInterface
+class ProductPhotoRepository extends EntityRepository implements ProductPhotoRepositoryInterface
 {
     /**
      * {@inheritdoc}

@@ -45,7 +45,7 @@ class OrderStatusHistory implements OrderStatusHistoryInterface
     /**
      * {@inheritdoc}
      */
-    public function getOrderStatus() : OrderStatusInterface
+    public function getOrderStatus()
     {
         return $this->orderStatus;
     }
@@ -53,10 +53,10 @@ class OrderStatusHistory implements OrderStatusHistoryInterface
     /**
      * {@inheritdoc}
      */
-    public function setOrderStatus(OrderStatusInterface $orderStatus)
+    public function setOrderStatus(OrderStatusInterface $orderStatus = null)
     {
         $this->orderStatus = $orderStatus;
-        $this->order->setCurrentStatus($orderStatus);
+        $this->getOrder()->setCurrentStatus($orderStatus);
     }
     
     /**

@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\ProductBundle\Entity\Product;
+namespace WellCommerce\Bundle\ProductBundle\Entity;
 
 use WellCommerce\Bundle\AppBundle\Entity\HierarchyAwareInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
@@ -23,7 +23,7 @@ use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface PhotoInterface extends EntityInterface, TimestampableInterface, ProductAwareInterface, HierarchyAwareInterface
+interface ProductPhotoInterface extends EntityInterface, TimestampableInterface, ProductAwareInterface, HierarchyAwareInterface
 {
     public function getPhoto() : MediaInterface;
 

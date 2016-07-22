@@ -27,16 +27,18 @@ trait ThemeAwareTrait
     /**
      * @return ThemeInterface
      */
-    public function getTheme() : ThemeInterface
+    public function getTheme()
     {
         return $this->theme;
     }
     
-    /**
-     * @param ThemeInterface $theme
-     */
-    public function setTheme(ThemeInterface $theme)
+    public function setTheme(ThemeInterface $theme = null)
     {
         $this->theme = $theme;
+    }
+    
+    public function hasTheme() : bool
+    {
+        return $this->theme instanceof ThemeInterface;
     }
 }

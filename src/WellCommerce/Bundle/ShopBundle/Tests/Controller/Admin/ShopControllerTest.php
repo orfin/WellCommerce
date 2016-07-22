@@ -63,7 +63,10 @@ class ShopControllerTest extends AbstractAdminControllerTestCase
 
     public function testGridAction()
     {
-        $this->client->request('GET', $this->generateUrl('admin.shop.grid'));
-        $this->assertTrue($this->client->getResponse()->isRedirect($this->generateUrl('admin.shop.index', [], true)));
+        $this->client->request('GET', $this->generateUrl('admin.shop.grid'), [], [], [
+            'HTTP_X-Requested-With' => 'XMLHttpRequest',
+        ]);
+    
+        $this->assertTrue($this->client->getResponse()->isSuccessful());
     }
 }

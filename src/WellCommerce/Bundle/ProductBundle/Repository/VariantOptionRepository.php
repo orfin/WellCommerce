@@ -9,16 +9,15 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
+namespace WellCommerce\Bundle\ProductBundle\Repository;
 
-namespace WellCommerce\Bundle\ProductBundle\Repository\Product;
-
-use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
+use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
 
 /**
- * Interface DistinctionRepositoryInterface
+ * Class VariantOptionRepository
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface DistinctionRepositoryInterface extends RepositoryInterface
+class VariantOptionRepository extends EntityRepository implements VariantOptionRepositoryInterface
 {
 }

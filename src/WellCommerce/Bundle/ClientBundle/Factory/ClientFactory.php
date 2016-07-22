@@ -13,12 +13,9 @@
 namespace WellCommerce\Bundle\ClientBundle\Factory;
 
 use WellCommerce\Bundle\ClientBundle\Entity\Client;
-use WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddressInterface;
-use WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetailsInterface;
-use WellCommerce\Bundle\ClientBundle\Entity\ClientDetailsInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
-use WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddressInterface;
 use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\ShopBundle\Storage\ShopStorage;
 
 /**
  * Class ClientFactory
@@ -27,36 +24,64 @@ use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
  */
 final class ClientFactory extends AbstractEntityFactory
 {
+    /**
+     * @var ClientContactDetailsFactory
+     */
+    private $contactDetailsFactory;
+    
+    /**
+     * @var ClientDetailsFactory
+     */
+    private $detailsFactory;
+    
+    /**
+     * @var ClientBillingAddressFactory
+     */
+    private $billingAddressFactory;
+    
+    /**
+     * @var ClientShippingAddressFactory
+     */
+    private $shippingAddressFactory;
+    
+    /**
+     * @var ShopStorage
+     */
+    private $shopStorage;
+    
+    /**
+     * ClientFactory constructor.
+     *
+     * @param ClientContactDetailsFactory  $contactDetailsFactory
+     * @param ClientDetailsFactory         $detailsFactory
+     * @param ClientBillingAddressFactory  $billingAddressFactory
+     * @param ClientShippingAddressFactory $shippingAddressFactory
+     * @param ShopStorage                  $shopStorage
+     */
+    public function __construct(
+        ClientContactDetailsFactory $contactDetailsFactory,
+        ClientDetailsFactory $detailsFactory,
+        ClientBillingAddressFactory $billingAddressFactory,
+        ClientShippingAddressFactory $shippingAddressFactory,
+        ShopStorage $shopStorage
+    ) {
+        $this->contactDetailsFactory  = $contactDetailsFactory;
+        $this->detailsFactory         = $detailsFactory;
+        $this->billingAddressFactory  = $billingAddressFactory;
+        $this->shippingAddressFactory = $shippingAddressFactory;
+        $this->shopStorage            = $shopStorage;
+    }
+    
     public function create() : ClientInterface
     {
         $client = new Client();
-        $client->setContactDetails($this->createClientContactDetails());
-        $client->setClientDetails($this->createClientDetails());
-        $client->setBillingAddress($this->createBillingAddress());
-        $client->setShippingAddress($this->createShippingAddress());
-        $client->setShop($this->getDefaultShop());
-        $client->setClientGroup($this->getDefaultShop()->getClientGroup());
+        $client->setContactDetails($this->contactDetailsFactory->create());
+        $client->setClientDetails($this->detailsFactory->create());
+        $client->setBillingAddress($this->billingAddressFactory->create());
+        $client->setShippingAddress($this->shippingAddressFactory->create());
+        $client->setShop($this->shopStorage->getCurrentShop());
+        $client->setClientGroup($this->shopStorage->getCurrentShop()->getClientGroup());
         
         return $client;
-    }
-    
-    private function createClientContactDetails() : ClientContactDetailsInterface
-    {
-        return $this->get('client_contact_details.factory')->create();
-    }
-    
-    private function createClientDetails() : ClientDetailsInterface
-    {
-        return $this->get('client_details.factory')->create();
-    }
-    
-    private function createBillingAddress() : ClientBillingAddressInterface
-    {
-        return $this->get('client_billing_address.factory')->create();
-    }
-    
-    private function createShippingAddress() : ClientShippingAddressInterface
-    {
-        return $this->get('client_shipping_address.factory')->create();
     }
 }

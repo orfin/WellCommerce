@@ -17,10 +17,9 @@ use Symfony\Component\PropertyAccess\PropertyPathInterface;
 use WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityInterface;
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
-use WellCommerce\Bundle\ProductBundle\Entity\Variant\OptionInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\VariantInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\VariantOptionInterface;
-use WellCommerce\Bundle\ProductBundle\Manager\Admin\VariantManager;
+use WellCommerce\Bundle\ProductBundle\Manager\VariantManager;
 
 /**
  * Class VariantCollectionToArrayTransformer
@@ -33,7 +32,7 @@ class VariantCollectionToArrayTransformer extends CollectionToArrayTransformer
      * @var VariantManager
      */
     protected $variantManager;
-
+    
     /**
      * @param VariantManager $variantManager
      */
@@ -41,14 +40,14 @@ class VariantCollectionToArrayTransformer extends CollectionToArrayTransformer
     {
         $this->variantManager = $variantManager;
     }
-
+    
     /**
      * {@inheritdoc}
      */
     public function transform($modelData)
     {
         $values = [];
-
+        
         if ($modelData instanceof Collection) {
             $modelData->map(function (VariantInterface $variant) use (&$values) {
                 $values[] = [
@@ -63,33 +62,33 @@ class VariantCollectionToArrayTransformer extends CollectionToArrayTransformer
                 ];
             });
         }
-
+        
         return $values;
     }
-
+    
     private function transformAvailability(AvailabilityInterface $availability = null)
     {
         if (null !== $availability) {
             return $availability->getId();
         }
-
+        
         return null;
     }
-
+    
     public function transformOptions(Collection $collection = null) : array
     {
         if (null === $collection) {
             return [];
         }
-
+        
         $values = [];
-        $collection->map(function (OptionInterface $variantOption) use (&$values) {
+        $collection->map(function (VariantOptionInterface $variantOption) use (&$values) {
             $values[$variantOption->getAttribute()->getId()] = $variantOption->getAttributeValue()->getId();
         });
-
+        
         return $values;
     }
-
+    
     /**
      * {@inheritdoc}
      */

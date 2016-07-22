@@ -45,6 +45,15 @@
 
                 <div class="row">
                     <div class="col-sm-6 col-xs-12">
+                        {{ macros.element(form.getChildren().get('billingAddress').getChildren().get('billingAddress.companyName')) }}
+                    </div>
+                    <div class="col-sm-6 col-xs-12">
+                        {{ macros.element(form.getChildren().get('billingAddress').getChildren().get('billingAddress.vatId')) }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6 col-xs-12">
                         {{ macros.element(form.getChildren().get('billingAddress').getChildren().get('billingAddress.line1')) }}
                     </div>
                 </div>

@@ -29,8 +29,8 @@ final class PriceFactory extends AbstractEntityFactory
         $price->setGrossAmount(0);
         $price->setNetAmount(0);
         $price->setTaxAmount(0);
-        $price->setTaxRate($this->getDefaultTax()->getValue());
-        $price->setCurrency($this->getDefaultShop()->getDefaultCurrency());
+        $price->setTaxRate(0);
+        $price->setCurrency('');
         
         return $price;
     }

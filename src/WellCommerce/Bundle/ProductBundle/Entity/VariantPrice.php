@@ -10,16 +10,16 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\ProductBundle\Entity\Variant;
+namespace WellCommerce\Bundle\ProductBundle\Entity;
 
 use WellCommerce\Bundle\AppBundle\Entity\DiscountablePrice;
 
 /**
- * Class Price
+ * Class VariantPrice
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Price extends DiscountablePrice
+class VariantPrice extends DiscountablePrice
 {
     /**
      * @var string

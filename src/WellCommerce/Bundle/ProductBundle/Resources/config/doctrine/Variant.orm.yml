@@ -63,7 +63,7 @@ WellCommerce\Bundle\ProductBundle\Entity\Variant:
                     onDelete: 'SET NULL'
     oneToMany:
         options:
-            targetEntity: WellCommerce\Bundle\ProductBundle\Entity\Variant\Option
+            targetEntity: WellCommerce\Bundle\ProductBundle\Entity\VariantOption
             cascade:
                 - persist
             fetch: LAZY

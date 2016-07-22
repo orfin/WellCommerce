@@ -25,7 +25,7 @@ WellCommerce\Bundle\ProductBundle\Entity\ProductTranslation:
             nullable: false
     oneToOne:
         route:
-            targetEntity: WellCommerce\Bundle\ProductBundle\Entity\Product\Route
+            targetEntity: WellCommerce\Bundle\ProductBundle\Entity\ProductRoute
             cascade:
                 - remove
                 - persist

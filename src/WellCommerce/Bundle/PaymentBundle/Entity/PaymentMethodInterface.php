@@ -61,7 +61,7 @@ interface PaymentMethodInterface extends
     /**
      * @return OrderStatusInterface
      */
-    public function getPaymentPendingOrderStatus() : OrderStatusInterface;
+    public function getPaymentPendingOrderStatus();
 
     /**
      * @param OrderStatusInterface $paymentPendingOrderStatus
@@ -71,7 +71,7 @@ interface PaymentMethodInterface extends
     /**
      * @return OrderStatusInterface
      */
-    public function getPaymentSuccessOrderStatus() : OrderStatusInterface;
+    public function getPaymentSuccessOrderStatus();
 
     /**
      * @param OrderStatusInterface $paymentSuccessOrderStatus
@@ -81,7 +81,7 @@ interface PaymentMethodInterface extends
     /**
      * @return OrderStatusInterface
      */
-    public function getPaymentFailureOrderStatus() : OrderStatusInterface;
+    public function getPaymentFailureOrderStatus();
 
     /**
      * @param OrderStatusInterface $paymentFailureOrderStatus

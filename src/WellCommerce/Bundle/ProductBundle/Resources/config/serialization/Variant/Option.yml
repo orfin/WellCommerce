@@ -1,4 +1,4 @@
-WellCommerce\Bundle\ProductBundle\Entity\Variant\Option:
+WellCommerce\Bundle\ProductBundle\Entity\VariantOption:
     fields:
         id:
             groups:

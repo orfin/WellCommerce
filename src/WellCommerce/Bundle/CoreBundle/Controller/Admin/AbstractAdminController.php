@@ -55,15 +55,7 @@ abstract class AbstractAdminController extends AbstractController implements Adm
     
     public function gridAction(Request $request) : Response
     {
-        if (!$request->isXmlHttpRequest()) {
-            return $this->getRouterHelper()->redirectToAction('index');
-        }
-        
-        try {
-            $results = $this->dataGrid->loadResults($request);
-        } catch (\Exception $e) {
-            $results = nl2br($e->getMessage());
-        }
+        $results = $this->dataGrid->loadResults($request);
         
         return $this->jsonResponse($results);
     }

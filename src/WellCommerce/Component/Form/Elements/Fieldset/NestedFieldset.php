@@ -30,8 +30,10 @@ class NestedFieldset extends AbstractFieldset implements FieldsetInterface
 
         $this->getChildren()->forAll(function (ElementInterface $child) use ($data, $accessor) {
             if (null !== $propertyPath = $child->getPropertyPath(true)) {
-                $value = $accessor->getValue($data, $propertyPath);
-                $child->setValue($value);
+                if ($accessor->isReadable($data, $propertyPath)) {
+                    $value = $accessor->getValue($data, $propertyPath);
+                    $child->setValue($value);
+                }
             }
         });
     }

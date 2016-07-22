@@ -57,14 +57,14 @@ interface ShippingMethodInterface extends
     public function setCosts(Collection $costs);
 
     /**
-     * @return CurrencyInterface
+     * @return CurrencyInterface|null
      */
-    public function getCurrency() : CurrencyInterface;
+    public function getCurrency();
 
     /**
-     * @param CurrencyInterface $currency
+     * @param CurrencyInterface|null $currency
      */
-    public function setCurrency(CurrencyInterface $currency);
+    public function setCurrency(CurrencyInterface $currency = null);
 
     /**
      * @return Collection

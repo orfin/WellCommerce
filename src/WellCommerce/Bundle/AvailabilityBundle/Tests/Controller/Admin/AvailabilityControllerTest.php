@@ -60,11 +60,14 @@ class AvailabilityControllerTest extends AbstractAdminControllerTestCase
             $this->assertEquals(1, $crawler->filter('html:contains("' . $availability->translate()->getName() . '")')->count());
         });
     }
-
+    
+    
     public function testGridAction()
     {
-        $this->client->request('GET', $this->generateUrl('admin.availability.grid'));
-        $this->assertTrue($this->client->getResponse()->isRedirect($this->generateUrl('admin.availability.index', [], true)));
+        $this->client->request('GET', $this->generateUrl('admin.availability.grid'), [], [], [
+            'HTTP_X-Requested-With' => 'XMLHttpRequest',
+        ]);
+        
+        $this->assertTrue($this->client->getResponse()->isSuccessful());
     }
-
 }

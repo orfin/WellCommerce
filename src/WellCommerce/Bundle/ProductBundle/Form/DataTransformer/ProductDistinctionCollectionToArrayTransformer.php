@@ -18,7 +18,6 @@ use Doctrine\Common\Collections\Collection;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
 use WellCommerce\Bundle\DoctrineBundle\Manager\ManagerInterface;
-use WellCommerce\Bundle\ProductBundle\Entity\Product\DistinctionInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductDistinctionInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 use WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusInterface;
@@ -49,7 +48,7 @@ final class ProductDistinctionCollectionToArrayTransformer extends CollectionToA
     {
         $values = [];
         if ($modelData instanceof Collection) {
-            $modelData->map(function (DistinctionInterface $distinction) use (&$values) {
+            $modelData->map(function (ProductDistinctionInterface $distinction) use (&$values) {
                 $values[$distinction->getStatus()->getId()] = [
                     'valid_from' => $this->transformDate($distinction->getValidFrom()),
                     'valid_to'   => $this->transformDate($distinction->getValidTo()),
@@ -78,15 +77,15 @@ final class ProductDistinctionCollectionToArrayTransformer extends CollectionToA
         }
     }
 
-    private function getProductDistinction(ProductInterface $product, ProductStatusInterface $status) : DistinctionInterface
+    private function getProductDistinction(ProductInterface $product, ProductStatusInterface $status) : ProductDistinctionInterface
     {
         $distinction = $this->manager->getRepository()->findOneBy([
             'product' => $product,
             'status'  => $status
         ]);
 
-        if (!$distinction instanceof DistinctionInterface) {
-            /** @var DistinctionInterface $distinction */
+        if (!$distinction instanceof ProductDistinctionInterface) {
+            /** @var ProductDistinctionInterface $distinction */
             $distinction = $this->manager->initResource();
             $distinction->setProduct($product);
             $distinction->setStatus($status);

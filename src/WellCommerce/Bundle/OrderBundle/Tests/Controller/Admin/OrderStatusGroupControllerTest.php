@@ -63,7 +63,10 @@ class OrderStatusGroupControllerTest extends AbstractAdminControllerTestCase
 
     public function testGridAction()
     {
-        $this->client->request('GET', $this->generateUrl('admin.order_status_group.grid'));
-        $this->assertTrue($this->client->getResponse()->isRedirect($this->generateUrl('admin.order_status_group.index', [], true)));
+        $this->client->request('GET', $this->generateUrl('admin.order_status_group.grid'), [], [], [
+            'HTTP_X-Requested-With' => 'XMLHttpRequest',
+        ]);
+    
+        $this->assertTrue($this->client->getResponse()->isSuccessful());
     }
 }

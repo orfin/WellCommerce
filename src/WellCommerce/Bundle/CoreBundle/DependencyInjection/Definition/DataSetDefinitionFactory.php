@@ -30,6 +30,7 @@ final class DataSetDefinitionFactory
         $definition->addArgument(new Reference('dataset.manager'));
         $definition->addArgument(new Reference('event_dispatcher'));
         $definition->setConfigurator([new Reference('dataset.configurator'), 'configure']);
+        $definition->addMethodCall('setContainer', [new Reference('service_container')]);
         
         return $definition;
     }

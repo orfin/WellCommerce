@@ -34,16 +34,6 @@ use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
 class ProductDataSet extends AbstractDataSet
 {
     /**
-     * @var RequestHelperInterface
-     */
-    private $requestHelper;
-
-    public function setRequestHelper(RequestHelperInterface $requestHelper)
-    {
-        $this->requestHelper = $requestHelper;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function configureOptions(DataSetConfiguratorInterface $configurator)
@@ -97,7 +87,7 @@ class ProductDataSet extends AbstractDataSet
             'currency_rate.currencyFrom = product.sellPrice.currency AND currency_rate.currencyTo = :targetCurrency'
         );
 
-        $queryBuilder->setParameter('targetCurrency', $this->requestHelper->getCurrentCurrency());
+        $queryBuilder->setParameter('targetCurrency', $this->getRequestHelper()->getCurrentCurrency());
         $queryBuilder->setParameter('date', (new \DateTime())->setTime(0, 0, 1));
 
         return $queryBuilder;

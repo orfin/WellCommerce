@@ -19,13 +19,7 @@ namespace WellCommerce\Bundle\CompanyBundle\Entity;
  */
 interface CompanyAwareInterface
 {
-    /**
-     * @param CompanyInterface $company
-     */
-    public function setCompany(CompanyInterface $company);
+    public function setCompany(CompanyInterface $company = null);
 
-    /**
-     * @return CompanyInterface
-     */
     public function getCompany();
 }

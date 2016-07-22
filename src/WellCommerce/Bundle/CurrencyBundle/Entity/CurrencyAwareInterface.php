@@ -19,13 +19,9 @@ namespace WellCommerce\Bundle\CurrencyBundle\Entity;
  */
 interface CurrencyAwareInterface
 {
-    /**
-     * @param CurrencyInterface $currency
-     */
-    public function setCurrency(CurrencyInterface $currency);
-
-    /**
-     * @return CurrencyInterface
-     */
-    public function getCurrency() : CurrencyInterface;
+    public function setCurrency(CurrencyInterface $currency = null);
+    
+    public function getCurrency();
+    
+    public function hasCurrency() : bool;
 }

@@ -144,7 +144,7 @@ WellCommerce\Bundle\ProductBundle\Entity\Product:
                         referencedColumnName: id
     oneToMany:
         productPhotos:
-            targetEntity: WellCommerce\Bundle\ProductBundle\Entity\Product\Photo
+            targetEntity: WellCommerce\Bundle\ProductBundle\Entity\ProductPhoto
             cascade:
                 - remove
                 - persist
@@ -159,7 +159,7 @@ WellCommerce\Bundle\ProductBundle\Entity\Product:
             mappedBy: product
             orphanRemoval: true
         distinctions:
-            targetEntity: WellCommerce\Bundle\ProductBundle\Entity\Product\Distinction
+            targetEntity: WellCommerce\Bundle\ProductBundle\Entity\ProductDistinction
             cascade:
                 - remove
                 - persist

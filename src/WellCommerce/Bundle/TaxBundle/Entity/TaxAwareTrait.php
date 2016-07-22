@@ -21,12 +21,12 @@ trait TaxAwareTrait
 {
     protected $tax;
     
-    public function getTax() : TaxInterface
+    public function getTax()
     {
         return $this->tax;
     }
     
-    public function setTax(TaxInterface $tax)
+    public function setTax(TaxInterface $tax = null)
     {
         $this->tax = $tax;
     }

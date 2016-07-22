@@ -30,8 +30,6 @@ use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableTrait;
 use WellCommerce\Bundle\MediaBundle\Entity\MediaAwareTrait;
 use WellCommerce\Bundle\ProducerBundle\Entity\ProducerAwareTrait;
 use WellCommerce\Bundle\ProductBundle\Entity\Extra\ProductExtraTrait;
-use WellCommerce\Bundle\ProductBundle\Entity\Product\DistinctionInterface;
-use WellCommerce\Bundle\ProductBundle\Entity\Product\PhotoInterface;
 use WellCommerce\Bundle\ShopBundle\Entity\ShopCollectionAwareTrait;
 use WellCommerce\Bundle\TaxBundle\Entity\TaxInterface;
 use WellCommerce\Bundle\UnitBundle\Entity\UnitAwareTrait;
@@ -171,24 +169,24 @@ class Product implements ProductInterface
         if ($this->distinctions instanceof Collection) {
             $this->synchronizeDistinctions($distinctions);
         }
-
+        
         $this->distinctions = $distinctions;
     }
-
+    
     protected function synchronizeDistinctions(Collection $distinctions)
     {
-        $this->distinctions->map(function (DistinctionInterface $distinction) use ($distinctions) {
+        $this->distinctions->map(function (ProductDistinctionInterface $distinction) use ($distinctions) {
             if (false === $distinctions->contains($distinction)) {
                 $this->removeDistinction($distinction);
             }
         });
     }
     
-    public function removeDistinction(DistinctionInterface $distinction)
+    public function removeDistinction(ProductDistinctionInterface $distinction)
     {
         $this->distinctions->removeElement($distinction);
     }
-
+    
     public function getProductPhotos() : Collection
     {
         return $this->productPhotos;
@@ -199,7 +197,7 @@ class Product implements ProductInterface
         $this->productPhotos = $photos;
     }
     
-    public function addProductPhoto(PhotoInterface $photo)
+    public function addProductPhoto(ProductPhotoInterface $photo)
     {
         $this->productPhotos[] = $photo;
     }
@@ -307,28 +305,23 @@ class Product implements ProductInterface
         $this->variants->removeElement($variant);
     }
     
-    public function getBuyPriceTax() : TaxInterface
+    public function getBuyPriceTax()
     {
         return $this->buyPriceTax;
     }
     
-    public function setBuyPriceTax(TaxInterface $buyPriceTax)
+    public function setBuyPriceTax(TaxInterface $buyPriceTax = null)
     {
         $this->buyPriceTax = $buyPriceTax;
     }
     
-    public function getSellPriceTax() : TaxInterface
+    public function getSellPriceTax()
     {
         return $this->sellPriceTax;
     }
     
-    public function setSellPriceTax(TaxInterface $sellPriceTax)
+    public function setSellPriceTax(TaxInterface $sellPriceTax = null)
     {
         $this->sellPriceTax = $sellPriceTax;
-    }
-
-    public static function getTranslationEntityClass()
-    {
-        return ProductTranslation::class;
     }
 }

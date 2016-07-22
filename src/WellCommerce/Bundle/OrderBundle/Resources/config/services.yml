@@ -68,6 +68,12 @@ services:
             - { name: kernel.event_subscriber }
         arguments: ['@order.visitor.traverser']
 
+    order_status.subscriber:
+        class: WellCommerce\Bundle\OrderBundle\EventListener\OrderStatusSubscriber
+        arguments: ['@order_status_group.repository']
+        tags:
+            - { name: kernel.event_subscriber }
+
     order.dataset.transformer.order_client:
         class: WellCommerce\Bundle\OrderBundle\DataSet\Transformer\ClientTransformer
         tags:

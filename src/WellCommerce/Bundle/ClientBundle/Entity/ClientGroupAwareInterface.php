@@ -19,13 +19,7 @@ namespace WellCommerce\Bundle\ClientBundle\Entity;
  */
 interface ClientGroupAwareInterface
 {
-    /**
-     * @param ClientGroupInterface $clientGroup
-     */
-    public function setClientGroup(ClientGroupInterface $clientGroup);
+    public function setClientGroup(ClientGroupInterface $clientGroup = null);
     
-    /**
-     * @return ClientGroupInterface
-     */
     public function getClientGroup();
 }
