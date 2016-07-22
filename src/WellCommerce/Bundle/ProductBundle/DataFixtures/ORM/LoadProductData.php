@@ -26,6 +26,7 @@ use WellCommerce\Bundle\DoctrineBundle\DataFixtures\AbstractDataFixture;
 use WellCommerce\Bundle\MediaBundle\DataFixtures\ORM\LoadMediaData;
 use WellCommerce\Bundle\ProducerBundle\DataFixtures\ORM\LoadProducerData;
 use WellCommerce\Bundle\ProductBundle\Entity\Product;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductDistinction;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductPhoto;
 use WellCommerce\Bundle\TaxBundle\DataFixtures\ORM\LoadTaxData;
@@ -136,25 +137,25 @@ class LoadProductData extends AbstractDataFixture
 
         $distinctions = new ArrayCollection();
 
-        $distinction = new Product\Distinction();
+        $distinction = new ProductDistinction();
         $distinction->setProduct($product);
         $distinction->setStatus($this->getReference('product_status_bestseller'));
         $manager->persist($distinction);
         $distinctions->add($distinction);
 
-        $distinction = new Product\Distinction();
+        $distinction = new ProductDistinction();
         $distinction->setProduct($product);
         $distinction->setStatus($this->getReference('product_status_featured'));
         $manager->persist($distinction);
         $distinctions->add($distinction);
 
-        $distinction = new Product\Distinction();
+        $distinction = new ProductDistinction();
         $distinction->setProduct($product);
         $distinction->setStatus($this->getReference('product_status_novelty'));
         $manager->persist($distinction);
         $distinctions->add($distinction);
 
-        $distinction = new Product\Distinction();
+        $distinction = new ProductDistinction();
         $distinction->setProduct($product);
         $distinction->setStatus($this->getReference('product_status_promotion'));
         $manager->persist($distinction);
