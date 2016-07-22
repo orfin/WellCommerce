@@ -12,7 +12,6 @@ well_commerce_locale:
             WellCommerce\Bundle\AttributeBundle\Entity\AttributeTranslation:
                 properties:
                     - name
-                    - shortDescription
             WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroupTranslation:
                 properties:
                     - name
