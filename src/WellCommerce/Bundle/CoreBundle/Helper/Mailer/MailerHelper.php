@@ -112,11 +112,11 @@ final class MailerHelper implements MailerHelperInterface
         ]);
 
         $resolver->setDefault('bcc', function (Options $options) {
-            return $options['configuration']->getFrom();
+            return $options['configuration']->getFrom() ?? [];
         });
 
         $resolver->setDefault('reply_to', function (Options $options) {
-            return $options['configuration']->getFrom();
+            return $options['configuration']->getFrom() ?? [];
         });
 
         $resolver->setDefault('attachments', []);

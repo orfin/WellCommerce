@@ -9,14 +9,14 @@
                 <option name="groups">
                     <value>client_registration</value>
                     <value>client_settings</value>
-                    <value>cart_client_contact_details</value>
+                    <value>order_contact_details</value>
                 </option>
             </constraint>
             <constraint name="NotNull">
                 <option name="groups">
                     <value>client_registration</value>
                     <value>client_settings</value>
-                    <value>cart_client_contact_details</value>
+                    <value>order_contact_details</value>
                 </option>
             </constraint>
         </property>
@@ -25,14 +25,14 @@
                 <option name="groups">
                     <value>client_registration</value>
                     <value>client_settings</value>
-                    <value>cart_client_contact_details</value>
+                    <value>order_contact_details</value>
                 </option>
             </constraint>
             <constraint name="NotNull">
                 <option name="groups">
                     <value>client_registration</value>
                     <value>client_settings</value>
-                    <value>cart_client_contact_details</value>
+                    <value>order_contact_details</value>
                 </option>
             </constraint>
         </property>
@@ -41,14 +41,14 @@
                 <option name="groups">
                     <value>client_registration</value>
                     <value>client_settings</value>
-                    <value>cart_client_contact_details</value>
+                    <value>order_contact_details</value>
                 </option>
             </constraint>
             <constraint name="NotBlank">
                 <option name="groups">
                     <value>client_registration</value>
                     <value>client_settings</value>
-                    <value>cart_client_contact_details</value>
+                    <value>order_contact_details</value>
                 </option>
             </constraint>
         </property>
@@ -56,7 +56,7 @@
             <constraint name="NotNull">
                 <option name="groups">
                     <value>client_settings</value>
-                    <value>cart_client_contact_details</value>
+                    <value>order_contact_details</value>
                 </option>
             </constraint>
         </property>

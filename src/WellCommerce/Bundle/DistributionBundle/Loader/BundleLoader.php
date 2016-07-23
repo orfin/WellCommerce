@@ -12,6 +12,24 @@
 
 namespace WellCommerce\Bundle\DistributionBundle\Loader;
 
+use Bazinga\Bundle\JsTranslationBundle\BazingaJsTranslationBundle;
+use Cache\AdapterBundle\CacheAdapterBundle;
+use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
+use Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle;
+use Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle;
+use Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle;
+use EmanueleMinotto\TwigCacheBundle\TwigCacheBundle;
+use FOS\JsRoutingBundle\FOSJsRoutingBundle;
+use Knp\DoctrineBehaviors\Bundle\DoctrineBehaviorsBundle;
+use Liip\ImagineBundle\LiipImagineBundle;
+use Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle;
+use Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle;
+use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
+use Symfony\Bundle\MonologBundle\MonologBundle;
+use Symfony\Bundle\SecurityBundle\SecurityBundle;
+use Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle;
+use Symfony\Bundle\TwigBundle\TwigBundle;
+use Symfony\Bundle\WebProfilerBundle\WebProfilerBundle;
 use Symfony\Component\HttpKernel\KernelInterface;
 use WellCommerce\Bundle\DistributionBundle\Locator\BundleLocator;
 
@@ -20,15 +38,15 @@ use WellCommerce\Bundle\DistributionBundle\Locator\BundleLocator;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class BundleLoader
+final class BundleLoader
 {
     const CACHE_FILENAME = 'bundles.php';
-
+    
     /**
      * @var KernelInterface
      */
-    protected $kernel;
-
+    private $kernel;
+    
     /**
      * BundleLoader constructor.
      *
@@ -38,80 +56,67 @@ class BundleLoader
     {
         $this->kernel = $kernel;
     }
-
-    /**
-     * @return \Symfony\Component\HttpKernel\Bundle\BundleInterface
-     */
-    public function loadBundles()
+    
+    public function loadBundles() : array
     {
         $bundles = [];
-
+        
         if (is_file($cache = $this->kernel->getCacheDir() . '/' . self::CACHE_FILENAME)) {
             $bundleClasses = require $cache;
         } else {
             $bundleClasses = $this->getManagedBundleClasses();
         }
-
+        
         foreach ($bundleClasses as $bundleClass) {
             $bundles[] = new $bundleClass;
         }
-
+        
         return $bundles;
     }
-
-    /**
-     * @return array
-     */
-    public function getManagedBundleClasses()
+    
+    public function getManagedBundleClasses() : array
     {
         $bundles = $this->getCoreBundlesClasses();
         $locator = $this->getLocator();
         $bundles = array_merge($bundles, $locator->locateBundleClasses());
-
+        
         return $bundles;
     }
-
-    /**
-     * @return array
-     */
-    protected function getCoreBundlesClasses()
+    
+    private function getCoreBundlesClasses() : array
     {
         $bundles = [
-            \Symfony\Bundle\FrameworkBundle\FrameworkBundle::class,
-            \Symfony\Bundle\SecurityBundle\SecurityBundle::class,
-            \Symfony\Bundle\TwigBundle\TwigBundle::class,
-            \Symfony\Bundle\MonologBundle\MonologBundle::class,
-            \Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle::class,
-            \Doctrine\Bundle\DoctrineBundle\DoctrineBundle::class,
-            \Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle::class,
-            \Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle::class,
-            \Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle::class,
-            \Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle::class,
-            \FOS\JsRoutingBundle\FOSJsRoutingBundle::class,
-            \Bazinga\Bundle\JsTranslationBundle\BazingaJsTranslationBundle::class,
-            \Liip\ImagineBundle\LiipImagineBundle::class,
-            \Knp\DoctrineBehaviors\Bundle\DoctrineBehaviorsBundle::class,
-            \Cache\AdapterBundle\CacheAdapterBundle::class,
-            \WellCommerce\Bundle\AppBundle\WellCommerceAppBundle::class,
-            \EmanueleMinotto\TwigCacheBundle\TwigCacheBundle::class
+            FrameworkBundle::class,
+            SecurityBundle::class,
+            TwigBundle::class,
+            MonologBundle::class,
+            SwiftmailerBundle::class,
+            DoctrineBundle::class,
+            DoctrineCacheBundle::class,
+            DoctrineMigrationsBundle::class,
+            DoctrineFixturesBundle::class,
+            SensioFrameworkExtraBundle::class,
+            FOSJsRoutingBundle::class,
+            BazingaJsTranslationBundle::class,
+            LiipImagineBundle::class,
+            DoctrineBehaviorsBundle::class,
+            CacheAdapterBundle::class,
+            TwigCacheBundle::class
         ];
-
+        
         if (in_array($this->kernel->getEnvironment(), ['dev', 'test'])) {
-            $bundles[] = \Symfony\Bundle\WebProfilerBundle\WebProfilerBundle::class;
-            $bundles[] = \Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle::class;
+            $bundles[] = WebProfilerBundle::class;
+            $bundles[] = SensioGeneratorBundle::class;
         }
-
+        
         if (in_array($this->kernel->getEnvironment(), ['prod'])) {
-            $bundles[] = \Symfony\Bundle\WebProfilerBundle\WebProfilerBundle::class;
+            $bundles[] = WebProfilerBundle::class;
         }
-
+        
         return $bundles;
     }
-
-    /**
-     * @return BundleLocator
-     */
-    protected function getLocator()
+    
+    private function getLocator() : BundleLocator
     {
         return new BundleLocator($this->kernel);
     }

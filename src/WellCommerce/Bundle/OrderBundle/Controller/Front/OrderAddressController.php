@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Controller\Front;
 
+use Doctrine\Common\Util\Debug;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -57,12 +58,12 @@ final class OrderAddressController extends AbstractFrontController
     {
         $validationGroups = [
             'order_billing_address',
-            'order_clien_details',
+            'order_client_details',
             'order_contact_details',
         ];
         
         if ($request->isMethod('POST') && 0 === (int)$request->request->filter('shippingAddress.copyBillingAddress')) {
-            $validationGroups[] = 'order_address_shipping_address';
+            $validationGroups[] = 'order_shipping_address';
         }
         
         return $validationGroups;

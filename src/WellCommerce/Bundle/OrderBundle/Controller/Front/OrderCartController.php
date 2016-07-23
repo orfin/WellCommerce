@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Controller\Front;
 
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderProductInterface;
@@ -93,7 +94,7 @@ final class OrderCartController extends AbstractFrontController
         ]);
     }
     
-    public function editAction(OrderProductInterface $orderProduct, int $quantity) : Response
+    public function editAction(Request $request, OrderProductInterface $orderProduct, int $quantity) : Response
     {
         $success = true;
         $message = null;
@@ -110,10 +111,14 @@ final class OrderCartController extends AbstractFrontController
             $message = $e->getMessage();
         }
         
-        return $this->jsonResponse([
-            'success' => $success,
-            'message' => $message,
-        ]);
+        if ($request->isXmlHttpRequest()) {
+            return $this->jsonResponse([
+                'success' => $success,
+                'message' => $message,
+            ]);
+        }
+        
+        return $this->redirectResponse($request->headers->get('referer'));
     }
     
     public function deleteAction(OrderProductInterface $orderProduct) : Response

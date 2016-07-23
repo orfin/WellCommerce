@@ -44,7 +44,7 @@ class AttributeController extends AbstractAdminController
         $attributeGroup   = $this->getManager()->findAttributeGroup($attributeGroupId);
 
         return $this->jsonResponse([
-            'attributes' => $this->getManager()->getAttributeSet($attributeGroup),
+            'attributes' => $this->getManager()->getRepository()->getAttributeSet($attributeGroup),
         ]);
     }
     

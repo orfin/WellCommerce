@@ -46,36 +46,6 @@ interface ShopInterface extends
     public function setName(string $name);
     
     /**
-     * @return Collection
-     */
-    public function getProducts() : Collection;
-    
-    /**
-     * @param mixed $products
-     */
-    public function setProducts(Collection $products);
-    
-    /**
-     * @return Collection
-     */
-    public function getCategories() : Collection;
-    
-    /**
-     * @param Collection $categories
-     */
-    public function setCategories(Collection $categories);
-    
-    /**
-     * @return mixed
-     */
-    public function getProducers() : Collection;
-    
-    /**
-     * @param mixed $producers
-     */
-    public function setProducers(Collection $producers);
-    
-    /**
      * @return string
      */
     public function getUrl() : string;

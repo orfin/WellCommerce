@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\AttributeBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
@@ -33,17 +34,23 @@ class Attribute implements AttributeInterface
     use Blameable;
     use EnableableTrait;
     use HierarchyAwareTrait;
-
+    
     /**
      * @var Collection
      */
     protected $groups;
-
+    
     /**
      * @var Collection
      */
     protected $values;
-
+    
+    public function __construct()
+    {
+        $this->groups = new ArrayCollection();
+        $this->values = new ArrayCollection();
+    }
+    
     /**
      * {@inheritdoc}
      */
@@ -51,7 +58,7 @@ class Attribute implements AttributeInterface
     {
         return $this->groups;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -62,14 +69,14 @@ class Attribute implements AttributeInterface
                 $group->removeAttribute($this);
             }
         });
-
+        
         $groups->map(function (AttributeGroupInterface $group) {
             if (false === $this->groups->contains($group)) {
                 $group->addAttribute($this);
             }
         });
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -78,7 +85,7 @@ class Attribute implements AttributeInterface
         $this->groups->add($group);
         $group->addAttribute($this);
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -86,7 +93,7 @@ class Attribute implements AttributeInterface
     {
         return $this->values;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -94,7 +101,7 @@ class Attribute implements AttributeInterface
     {
         $this->values = $collection;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -102,7 +109,7 @@ class Attribute implements AttributeInterface
     {
         $this->values->removeElement($value);
     }
-
+    
     /**
      * {@inheritdoc}
      */

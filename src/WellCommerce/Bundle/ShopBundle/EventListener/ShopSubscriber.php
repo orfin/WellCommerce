@@ -11,10 +11,10 @@
  */
 namespace WellCommerce\Bundle\ShopBundle\EventListener;
 
-use Symfony\Component\Console\ConsoleEvents;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
+use WellCommerce\Bundle\ShopBundle\Entity\Shop;
 use WellCommerce\Bundle\ShopBundle\Repository\ShopRepositoryInterface;
 use WellCommerce\Component\DataSet\Conditions\Condition\Eq;
 use WellCommerce\Component\DataSet\Event\DataSetRequestEvent;
@@ -40,23 +40,29 @@ class ShopSubscriber extends AbstractEventSubscriber
             'producer.dataset.admin.request' => ['onShopAwareDataSetRequest', 0],
         ];
     }
-
+    
     public function onKernelRequest(GetResponseEvent $event)
     {
         $firewallName         = $this->getSecurityHelper()->getFirewallNameForRequest($event->getRequest());
         $sessionAttributeName = $firewallName . '/shop/id';
-        $currentShopId        = $this->getRequestHelper()->getSessionAttribute($sessionAttributeName);
-        $host                 = $this->getRequestHelper()->getCurrentHost();
-        $shop                 = $this->getShopRepository()->resolve((int)$currentShopId, $host);
+        
+        if (false === $this->getRequestHelper()->hasSessionAttribute($sessionAttributeName)) {
+            $host = $this->getRequestHelper()->getCurrentHost();
+            $shop = $this->getShopRepository()->resolve(0, $host);
+            $this->getRequestHelper()->setSessionAttribute($sessionAttributeName, $shop->getId());
+        } else {
+            $currentShopId = $this->getRequestHelper()->getSessionAttribute($sessionAttributeName);
+            $shop          = $this->getDoctrineHelper()->getEntityManager()->getReference(Shop::class, $currentShopId);
+        }
+        
         $this->getShopStorage()->setCurrentShop($shop);
-        $this->getRequestHelper()->setSessionAttribute($sessionAttributeName, $shop->getId());
     }
     
     private function getShopRepository() : ShopRepositoryInterface
     {
         return $this->get('shop.repository');
     }
-
+    
     public function onShopAwareDataSetRequest(DataSetRequestEvent $event)
     {
         $request = $event->getRequest();

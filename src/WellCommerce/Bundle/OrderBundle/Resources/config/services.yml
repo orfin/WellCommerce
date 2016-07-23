@@ -97,7 +97,7 @@ services:
         class: WellCommerce\Bundle\OrderBundle\Twig\Extension\OrderExtension
         tags:
             - { name: twig.extension }
-        arguments: ['@order.provider.front', '@order_product.dataset.front']
+        arguments: ['@order.provider.front', '@order_product.dataset.front','@shipping_method.provider']
 
     form.order_product_collection.data_transformer:
         class: WellCommerce\Bundle\OrderBundle\Form\DataTransformer\OrderProductCollectionToArrayTransformer

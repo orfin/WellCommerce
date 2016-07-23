@@ -57,7 +57,7 @@ final class ShippingMethodProvider implements ShippingMethodProviderInterface
         
         $methods->map(function (ShippingMethodInterface $shippingMethod) use ($subject, $collection) {
             $costs = $this->getShippingMethodCosts($shippingMethod, $subject);
-
+            
             $costs->map(function (ShippingMethodCostInterface $cost) use ($collection) {
                 $collection->add($cost);
             });
@@ -65,11 +65,11 @@ final class ShippingMethodProvider implements ShippingMethodProviderInterface
         
         return $collection;
     }
-
+    
     public function getShippingMethodCosts(ShippingMethodInterface $method, ShippingSubjectInterface $subject) : Collection
     {
         $calculator = $this->getCalculator($method);
-
+        
         return $calculator->calculate($method, $subject);
     }
     

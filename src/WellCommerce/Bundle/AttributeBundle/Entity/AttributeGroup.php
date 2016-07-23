@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\AttributeBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
@@ -34,7 +35,12 @@ class AttributeGroup implements AttributeGroupInterface
      * @var Collection
      */
     protected $attributes;
-
+    
+    public function __construct()
+    {
+        $this->attributes = new ArrayCollection();
+    }
+    
     /**
      * {@inheritdoc}
      */

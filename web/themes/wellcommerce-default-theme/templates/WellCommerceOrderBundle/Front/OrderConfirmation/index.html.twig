@@ -50,7 +50,7 @@
                                         <h4>Delivery address <a href="{{ path('front.order_address.index') }}">Change</a></h4>
 
                                         <p>
-                                            {{ format_billing_address(order.billingAddress) }}
+                                            {{ format_shipping_address(order.shippingAddress) }}
                                         </p>
                                     </div>
                                     <div class="col-sm-4">
@@ -64,7 +64,7 @@
                                         <h4>Billing data <a href="{{ path('front.order_address.index') }}">Change</a></h4>
 
                                         <p>
-                                            {{ format_shipping_address(order.shippingAddress) }}
+                                            {{ format_billing_address(order.billingAddress) }}
                                         </p>
                                     </div>
                                 </div>

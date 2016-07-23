@@ -1,7 +1,7 @@
 WellCommerce\Bundle\ProductBundle\Entity\ProductPhoto:
     type: entity
     table: product_photo
-    repositoryClass: WellCommerce\Bundle\AppBundle\Repository\ProductPhotoRepository
+    repositoryClass: WellCommerce\Bundle\ProductBundle\Repository\ProductPhotoRepository
     id:
         id:
             type: integer

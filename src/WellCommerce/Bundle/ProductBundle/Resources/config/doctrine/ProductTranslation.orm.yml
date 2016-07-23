@@ -21,7 +21,6 @@ WellCommerce\Bundle\ProductBundle\Entity\ProductTranslation:
         slug:
             type: string
             length: 255
-            unique: true
             nullable: false
     oneToOne:
         route:

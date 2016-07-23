@@ -12,9 +12,9 @@
 
 namespace WellCommerce\Bundle\ShippingBundle\Calculator;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface;
-use WellCommerce\Component\Collections\ArrayCollection;
 
 /**
  * Class WeightTableCalculator
@@ -30,7 +30,7 @@ class WeightTableCalculator implements ShippingCalculatorInterface
     {
         return new ArrayCollection();
     }
-
+    
     public function getAlias() : string
     {
         return 'weight_table';

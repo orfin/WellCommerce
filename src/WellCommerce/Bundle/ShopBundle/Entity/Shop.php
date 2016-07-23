@@ -52,21 +52,6 @@ class Shop implements ShopInterface
     /**
      * @var Collection
      */
-    protected $products;
-    
-    /**
-     * @var Collection
-     */
-    protected $categories;
-    
-    /**
-     * @var Collection
-     */
-    protected $producers;
-    
-    /**
-     * @var Collection
-     */
     protected $pages;
     
     /**
@@ -103,22 +88,6 @@ class Shop implements ShopInterface
     /**
      * {@inheritdoc}
      */
-    public function getProducts() : Collection
-    {
-        return $this->products;
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function setProducts(Collection $products)
-    {
-        $this->products = $products;
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
     public function getCompany()
     {
         return $this->company;
@@ -130,38 +99,6 @@ class Shop implements ShopInterface
     public function setCompany(CompanyInterface $company = null)
     {
         $this->company = $company;
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function getCategories() : Collection
-    {
-        return $this->categories;
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function setCategories(Collection $categories)
-    {
-        $this->categories = $categories;
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function getProducers() : Collection
-    {
-        return $this->producers;
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function setProducers(Collection $producers)
-    {
-        $this->producers = $producers;
     }
     
     /**

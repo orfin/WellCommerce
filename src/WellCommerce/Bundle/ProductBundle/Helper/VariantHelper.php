@@ -28,7 +28,7 @@ class VariantHelper implements VariantHelperInterface
      * @var CurrencyHelperInterface
      */
     protected $currencyHelper;
-
+    
     /**
      * VariantHelper constructor.
      *
@@ -38,35 +38,35 @@ class VariantHelper implements VariantHelperInterface
     {
         $this->currencyHelper = $currencyHelper;
     }
-
+    
     /**
      * {@inheritdoc}
      */
     public function getVariants(ProductInterface $product) : array
     {
         $variants = [];
-
+        
         $product->getVariants()->map(function (VariantInterface $variant) use (&$variants) {
             $this->extractVariantData($variant, $variants);
         });
-
+        
         return $variants;
     }
-
+    
     /**
      * {@inheritdoc}
      */
     public function getAttributes(ProductInterface $product) : array
     {
         $attributes = [];
-
+        
         $product->getVariants()->map(function (VariantInterface $variant) use (&$attributes) {
             $this->extractAttributesData($variant, $attributes);
         });
-
+        
         return $attributes;
     }
-
+    
     protected function extractAttributesData(VariantInterface $variant, &$attributes)
     {
         $variant->getOptions()->map(function (VariantOptionInterface $variantOption) use (&$attributes) {
@@ -76,13 +76,13 @@ class VariantHelper implements VariantHelperInterface
             $attributes[$attribute->getId()]['values'][$attributeValue->getId()] = $attributeValue->translate()->getName();
         });
     }
-
+    
     protected function extractVariantData(VariantInterface $variant, array &$variants)
     {
         $sellPrice    = $variant->getSellPrice();
         $baseCurrency = $sellPrice->getCurrency();
         $key          = $this->getVariantOptionsKey($variant);
-
+        
         $variants[$key] = [
             'id'                 => $variant->getId(),
             'finalPriceGross'    => $this->currencyHelper->convertAndFormat($sellPrice->getFinalGrossAmount(), $baseCurrency),
@@ -90,35 +90,36 @@ class VariantHelper implements VariantHelperInterface
             'discountPriceGross' => $this->currencyHelper->convertAndFormat($sellPrice->getDiscountedGrossAmount(), $baseCurrency),
             'stock'              => $variant->getStock(),
             'symbol'             => $variant->getSymbol(),
+            'options'            => $this->getVariantOptions($variant)
         ];
     }
-
+    
     protected function getVariantOptionsKey(VariantInterface $variant) : string
     {
         $options = [];
-
+        
         $variant->getOptions()->map(function (VariantOptionInterface $variantOption) use (&$options) {
             $attribute      = $variantOption->getAttribute();
             $attributeValue = $variantOption->getAttributeValue();
             $key            = sprintf('%s:%s', $attribute->getId(), $attributeValue->getId());
             $options[$key]  = $key;
         });
-
+        
         ksort($options);
-
+        
         return implode(',', $options);
     }
-
+    
     public function getVariantOptions(VariantInterface $variant) : array
     {
         $options = [];
-
+        
         $variant->getOptions()->map(function (VariantOptionInterface $variantOption) use (&$options) {
             $attribute                                   = $variantOption->getAttribute();
             $attributeValue                              = $variantOption->getAttributeValue();
             $options[$attribute->translate()->getName()] = $attributeValue->translate()->getName();
         });
-
+        
         return $options;
     }
 }

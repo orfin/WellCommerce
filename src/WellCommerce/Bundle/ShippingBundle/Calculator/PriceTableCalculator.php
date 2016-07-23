@@ -28,7 +28,7 @@ final class PriceTableCalculator implements ShippingCalculatorInterface
      * @var CurrencyConverterInterface
      */
     private $currencyConverter;
-
+    
     /**
      * PriceTableCalculator constructor.
      *
@@ -38,26 +38,21 @@ final class PriceTableCalculator implements ShippingCalculatorInterface
     {
         $this->currencyConverter = $currencyConverter;
     }
-
+    
     public function calculate(ShippingMethodInterface $shippingMethod, ShippingSubjectInterface $subject) : Collection
     {
         $ranges         = $shippingMethod->getCosts();
         $baseCurrency   = $subject->getCurrency();
         $targetCurrency = $shippingMethod->getCurrency()->getCode();
         $grossAmount    = $this->currencyConverter->convert($subject->getGrossPrice(), $baseCurrency, $targetCurrency);
-
-        return $this->filterRanges($ranges, $grossAmount);
-    }
-
-    public function getAlias() : string
-    {
-        return 'price_table';
-    }
-
-    private function filterRanges(Collection $ranges, float $grossAmount) : Collection
-    {
+        
         return $ranges->filter(function (ShippingMethodCostInterface $cost) use ($grossAmount) {
             return ($cost->getRangeFrom() <= $grossAmount && $cost->getRangeTo() >= $grossAmount);
         });
+    }
+    
+    public function getAlias() : string
+    {
+        return 'price_table';
     }
 }

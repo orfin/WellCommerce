@@ -9,7 +9,6 @@
 services:
     search.result.storage:
         class: WellCommerce\Component\Search\Storage\SearchResultStorage
-        public: false
 
     search.command.reindex:
         class: WellCommerce\Bundle\SearchBundle\Command\ReindexCommand

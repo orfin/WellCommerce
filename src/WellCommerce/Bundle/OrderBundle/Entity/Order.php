@@ -16,6 +16,7 @@ use WellCommerce\Bundle\ClientBundle\Entity\ClientAwareTrait;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddressAwareTrait;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetailsAwareTrait;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddressAwareTrait;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientDetailsAwareTrait;
 use WellCommerce\Bundle\CouponBundle\Entity\CouponAwareTrait;
 use WellCommerce\Bundle\DoctrineBundle\Behaviours\Timestampable\TimestampableTrait;
 use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableTrait;
@@ -38,6 +39,7 @@ class Order implements OrderInterface
     use ShippingMethodAwareTrait;
     use PaymentMethodAwareTrait;
     use ClientAwareTrait;
+    use ClientDetailsAwareTrait;
     use ClientContactDetailsAwareTrait;
     use ClientBillingAddressAwareTrait;
     use ClientShippingAddressAwareTrait;

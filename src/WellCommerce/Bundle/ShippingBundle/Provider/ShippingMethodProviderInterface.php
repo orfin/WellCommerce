@@ -24,6 +24,6 @@ use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface;
 interface ShippingMethodProviderInterface
 {
     public function getCosts(ShippingSubjectInterface $subject) : Collection;
-
+    
     public function getShippingMethodCosts(ShippingMethodInterface $method, ShippingSubjectInterface $subject) : Collection;
 }

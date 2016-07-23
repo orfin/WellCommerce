@@ -15,6 +15,7 @@ namespace WellCommerce\Bundle\DistributionBundle\Locator;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 use Symfony\Component\HttpKernel\KernelInterface;
+use WellCommerce\Bundle\AppBundle\WellCommerceAppBundle;
 use Wingu\OctopusCore\Reflection\ReflectionFile;
 
 /**
@@ -22,13 +23,13 @@ use Wingu\OctopusCore\Reflection\ReflectionFile;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class BundleLocator
+final class BundleLocator
 {
     /**
      * @var string
      */
-    protected $rootDir;
-
+    private $rootDir;
+    
     /**
      * BundleLocator constructor.
      *
@@ -38,28 +39,39 @@ class BundleLocator
     {
         $this->rootDir = $kernel->getRootDir() . '/../src';
     }
-
-    /**
-     * @return array
-     */
-    public function locateBundleClasses()
+    
+    public function locateBundleClasses() : array
     {
         $finder = new Finder();
-        $finder->in($this->rootDir)->name('*Bundle.php')->notName('WellCommerceAppBundle*')->depth(3);
-        $bundles = [];
-
+        $finder->in($this->rootDir)->name('*Bundle.php')->notName('WellCommerceAppBundle.php')->depth(3);
+        $bundles = [WellCommerceAppBundle::class];
+        
         foreach ($finder->files() as $file) {
             $bundle = $this->getBundleClass($file);
             if (null !== $bundle) {
                 $bundles[] = $bundle;
             }
         }
-
-        natsort($bundles);
-
+        
+        $this->sortBundles($bundles);
+        
         return $bundles;
     }
-
+    
+    private function sortBundles(array &$bundles)
+    {
+        uasort($bundles, function (string $class) {
+            return $this->getBundleVendor($class) === 'WellCommerce';
+        });
+    }
+    
+    private function getBundleVendor(string $class)
+    {
+        list($vendor,) = explode('\\', ltrim($class, '\\'));
+        
+        return $vendor;
+    }
+    
     /**
      * Returns FQCN for file
      *
@@ -71,11 +83,11 @@ class BundleLocator
     {
         $reflection = new ReflectionFile($fileInfo->getRealPath());
         $baseName   = $fileInfo->getBasename('.php');
-
+        
         foreach ($reflection->getNamespaces() as $namespace) {
             return $namespace . '\\' . $baseName;
         }
-
+        
         return null;
     }
 }

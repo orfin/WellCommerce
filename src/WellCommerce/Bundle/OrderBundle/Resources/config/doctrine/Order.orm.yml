@@ -22,6 +22,9 @@ WellCommerce\Bundle\OrderBundle\Entity\Order:
         shippingAddress:
             class: WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddress
             columnPrefix: shipping_address_
+        clientDetails:
+            class: WellCommerce\Bundle\ClientBundle\Entity\ClientDetails
+            columnPrefix: client_details_
         contactDetails:
             class: WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetails
             columnPrefix: contact_details_

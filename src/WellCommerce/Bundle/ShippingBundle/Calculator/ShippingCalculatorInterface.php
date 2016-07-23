@@ -23,7 +23,7 @@ use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface;
 interface ShippingCalculatorInterface
 {
     public function getAlias() : string;
-
+    
     /**
      * Returns the shipping costs collection for given amount
      *

@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\ProductBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use WellCommerce\Bundle\AppBundle\Entity\DiscountablePrice;
@@ -69,6 +70,11 @@ class Variant implements VariantInterface
      */
     protected $modifierValue;
 
+    public function __construct()
+    {
+        $this->options = new ArrayCollection();
+    }
+    
     /**
      * {@inheritdoc}
      */

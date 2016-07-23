@@ -25,16 +25,6 @@ use WellCommerce\Component\Search\Storage\SearchResultStorage;
  */
 final class SearchDataSet extends ProductDataSet
 {
-    /**
-     * @var SearchResultStorage
-     */
-    private $storage;
-
-    public function setResultStorage(SearchResultStorage $storage)
-    {
-        $this->storage = $storage;
-    }
-
     public function configureOptions(DataSetConfiguratorInterface $configurator)
     {
         $configurator->setColumns([
@@ -67,12 +57,17 @@ final class SearchDataSet extends ProductDataSet
     
     protected function getQueryBuilder(DataSetRequestInterface $request) : QueryBuilder
     {
-        $identifiers  = $this->storage->getResult();
+        $identifiers  = $this->getSearchResultStorage()->getResult();
         $queryBuilder = parent::getQueryBuilder($request);
         $expression   = $queryBuilder->expr()->in('product.id', ':identifiers');
         $queryBuilder->andWhere($expression);
         $queryBuilder->setParameter('identifiers', $identifiers);
-
+        
         return $queryBuilder;
+    }
+    
+    private function getSearchResultStorage() : SearchResultStorage
+    {
+        return $this->get('search.result.storage');
     }
 }

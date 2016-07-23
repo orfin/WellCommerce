@@ -11,10 +11,10 @@ services:
         class: WellCommerce\Bundle\SearchBundle\DataSet\Front\SearchDataSet
         tags:
             - { name: dataset }
-        arguments: ['@product.repository']
+        arguments: ['@product.repository','@dataset.manager','@event_dispatcher']
+        configurator: ['@dataset.configurator', configure]
         calls:
-            - [setRequestHelper, ['@request.helper']]
-            - [setResultStorage, ['@search.result.storage']]
+            - [setContainer, ['@service_container']]
 
     search.controller.front:
         class: WellCommerce\Bundle\SearchBundle\Controller\Front\SearchController
