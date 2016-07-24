@@ -30,10 +30,10 @@ class LayoutBoxSubscriber extends AbstractEventSubscriber
     {
         return [
             'layout_box.pre_form_init' => 'onLayoutBoxFormInit',
-            'layout_box.pre_update'                       => 'onLayoutBoxPreUpdate'
+            'layout_box.pre_update'    => 'onLayoutBoxPreUpdate'
         ];
     }
-
+    
     /**
      * Adds configurator fields to main layout box edit form.
      * Loops through all configurators, renders the fieldset and sets default data
@@ -47,19 +47,19 @@ class LayoutBoxSubscriber extends AbstractEventSubscriber
         $configurators = $this->container->get('layout_box.configurator.collection')->all();
         $resource      = $event->getResource();
         $boxSettings   = $resource->getSettings();
-
+        
         foreach ($configurators as $configurator) {
             if ($configurator instanceof LayoutBoxConfiguratorInterface) {
                 $defaults = [];
                 if ($resource->getBoxType() == $configurator->getType()) {
                     $defaults = $boxSettings;
                 }
-
+                
                 $configurator->addFormFields($builder, $form, $defaults);
             }
         }
     }
-
+    
     /**
      * Sets resource settings fetched from fieldset corresponding to selected box type
      *
@@ -71,11 +71,12 @@ class LayoutBoxSubscriber extends AbstractEventSubscriber
         if ($resource instanceof LayoutBoxInterface) {
             $request  = $this->getRequestHelper()->getCurrentRequest();
             $settings = $this->getBoxSettingsFromRequest($request);
+            $settings = $this->mergeUnmodifiedSettings($resource->getSettings(), $settings);
             $resource->setSettings($settings);
         }
     }
-
-    protected function getBoxSettingsFromRequest(Request $request)
+    
+    private function getBoxSettingsFromRequest(Request $request)
     {
         $settings   = [];
         $accessor   = PropertyAccess::createPropertyAccessor();
@@ -84,7 +85,18 @@ class LayoutBoxSubscriber extends AbstractEventSubscriber
         if ($accessor->isReadable($parameters, '[' . $boxType . ']')) {
             $settings = $accessor->getValue($parameters, '[' . $boxType . ']');
         }
-
+        
         return !is_array($settings) ? [] : $settings;
+    }
+    
+    private function mergeUnmodifiedSettings(array $oldSettings, array $newSettings) : array
+    {
+        foreach ($newSettings as $key => $setting) {
+            if (isset($setting['unmodified']) && 1 === (int)$setting['unmodified']) {
+                $newSettings[$key][0] = $oldSettings[$key][0];
+            }
+        }
+        
+        return $newSettings;
     }
 }

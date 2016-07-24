@@ -37,12 +37,12 @@ final class LayoutBoxRenderer implements LayoutBoxRendererInterface
      * @var ServiceResolverInterface
      */
     private $serviceResolver;
-
+    
     /**
      * @var RouterHelperInterface
      */
     private $routerHelper;
-
+    
     /**
      * LayoutBoxRenderer constructor.
      *
@@ -63,39 +63,44 @@ final class LayoutBoxRenderer implements LayoutBoxRendererInterface
         
         return $content->getContent();
     }
-
+    
     private function findLayoutBox($identifier) : LayoutBoxInterface
     {
         $layoutBox = $this->manager->getRepository()->findOneBy(['identifier' => $identifier]);
+        
         if (!$layoutBox instanceof LayoutBoxInterface) {
             throw new LayoutBoxNotFoundException($identifier);
         }
-
+        
         return $layoutBox;
     }
-
+    
     private function getLayoutBoxContent(string $identifier, array $params = []) : Response
     {
         $layoutBox  = $this->findLayoutBox($identifier);
         $controller = $this->serviceResolver->resolveControllerService($layoutBox);
         $action     = $this->resolveControllerAction($controller);
-        $settings   = $this->makeSettingsCollection($layoutBox->getSettings(), $params);
+        $settings   = $this->makeSettingsCollection($layoutBox, $params);
         
         return call_user_func_array([$controller, $action], [$settings]);
     }
     
-    private function makeSettingsCollection(array $defaultSettings = [], array $params = []) : LayoutBoxSettingsCollection
+    private function makeSettingsCollection(LayoutBoxInterface $box, array $params = []) : LayoutBoxSettingsCollection
     {
-        $settings   = array_merge($defaultSettings, $params);
-        $collection = new LayoutBoxSettingsCollection();
-
+        $defaultSettings = $box->getSettings();
+        $settings        = array_merge($defaultSettings, $params);
+        $collection      = new LayoutBoxSettingsCollection();
+        
         foreach ($settings as $name => $value) {
             $collection->add($name, $value);
         }
-
+        
+        $collection->add('name', $box->translate()->getName());
+        $collection->add('content', $box->translate()->getContent());
+        
         return $collection;
     }
-
+    
     /**
      * Resolves action which can be used in controller method call
      *
@@ -106,11 +111,11 @@ final class LayoutBoxRenderer implements LayoutBoxRendererInterface
     private function resolveControllerAction(BoxControllerInterface $controller)
     {
         $currentAction = $this->routerHelper->getCurrentAction();
-
+        
         if ($this->routerHelper->hasControllerAction($controller, $currentAction)) {
             return $currentAction;
         }
-
+        
         return 'indexAction';
     }
 }
