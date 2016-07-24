@@ -24,21 +24,21 @@ use WellCommerce\Bundle\RoutingBundle\Entity\RoutingDiscriminatorsAwareInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class RoutableSubscriber implements EventSubscriber
+final class RoutableSubscriber implements EventSubscriber
 {
     /**
      * @var array
      */
-    protected $routingDiscriminatorsMap;
+    private $routingDiscriminatorMap;
     
     /**
      * RoutableSubscriber constructor.
      *
      * @param array $routingDiscriminatorsMap
      */
-    public function __construct(array $routingDiscriminatorsMap = [])
+    public function __construct(array $routingDiscriminatorMap = [])
     {
-        $this->routingDiscriminatorsMap = $routingDiscriminatorsMap;
+        $this->routingDiscriminatorMap = $routingDiscriminatorMap;
     }
     
     public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
@@ -47,7 +47,7 @@ class RoutableSubscriber implements EventSubscriber
         /** @var $reflectionClass \ReflectionClass */
         $reflectionClass = $metadata->getReflectionClass();
         if ($reflectionClass->implementsInterface(RoutingDiscriminatorsAwareInterface::class)) {
-            $metadata->setDiscriminatorMap($this->routingDiscriminatorsMap);
+            $metadata->setDiscriminatorMap($this->routingDiscriminatorMap);
         }
     }
     
@@ -64,7 +64,7 @@ class RoutableSubscriber implements EventSubscriber
             $entity->setRoute($route);
         }
     }
-
+    
     /**
      * Adds new route
      *

@@ -35,6 +35,5 @@ well_commerce_routing:
     dynamic_routing:
         page:
             entity: WellCommerce\Bundle\PageBundle\Entity\PageRoute
-            generator: WellCommerce\Bundle\PageBundle\Routing\PageRouteGenerator
             defaults:
                 _controller: page.controller.front:indexAction

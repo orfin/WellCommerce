@@ -13,14 +13,12 @@
 namespace WellCommerce\Bundle\RoutingBundle\Provider;
 
 use Doctrine\Common\Collections\Criteria;
+use Doctrine\Common\Util\ClassUtils;
 use Symfony\Cmf\Component\Routing\RouteProviderInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Route as SymfonyRoute;
 use Symfony\Component\Routing\RouteCollection;
 use WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface;
-use WellCommerce\Bundle\RoutingBundle\Generator\RouteGeneratorCollection;
-use WellCommerce\Bundle\RoutingBundle\Generator\RouteGeneratorInterface;
 use WellCommerce\Bundle\RoutingBundle\Repository\RouteRepositoryInterface;
 
 /**
@@ -28,34 +26,33 @@ use WellCommerce\Bundle\RoutingBundle\Repository\RouteRepositoryInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class RouteProvider implements RouteProviderInterface
+final class RouteProvider implements RouteProviderInterface
 {
-    const DYNAMIC_PREFIX   = 'dynamic_';
-
+    const DYNAMIC_PREFIX        = 'dynamic_';
+    const PATH_PARAMS_SEPARATOR = ',';
+    
     /**
-     * Collection of route generators available in collection
-     *
-     * @var RouteGeneratorCollection
+     * @var array
      */
-    protected $generators;
-
+    private $routingGeneratorMap;
+    
     /**
      * @var RouteRepositoryInterface
      */
-    protected $repository;
-
+    private $repository;
+    
     /**
-     * Constructor
+     * RouteProvider constructor.
      *
-     * @param RouteGeneratorCollection $generators
+     * @param array                    $routingGeneratorMap
      * @param RouteRepositoryInterface $repository
      */
-    public function __construct(RouteGeneratorCollection $generators, RouteRepositoryInterface $repository)
+    public function __construct(array $routingGeneratorMap = [], RouteRepositoryInterface $repository)
     {
-        $this->generators = $generators;
-        $this->repository = $repository;
+        $this->routingGeneratorMap = $routingGeneratorMap;
+        $this->repository          = $repository;
     }
-
+    
     /**
      * Returns route collection for current request
      *
@@ -68,7 +65,7 @@ class RouteProvider implements RouteProviderInterface
         $collection = new RouteCollection();
         $path       = $this->getNormalizedPath($request);
         $resource   = $this->repository->findOneBy(['path' => $path]);
-
+        
         if ($resource) {
             $route = $this->createRoute($resource);
             $collection->add(
@@ -76,10 +73,10 @@ class RouteProvider implements RouteProviderInterface
                 $route
             );
         }
-
+        
         return $collection;
     }
-
+    
     /**
      * Returns route by its identifier
      *
@@ -91,26 +88,26 @@ class RouteProvider implements RouteProviderInterface
     {
         $id       = str_replace(self::DYNAMIC_PREFIX, '', $identifier);
         $resource = $this->repository->find($id);
-
+        
         if ($resource instanceof RouteInterface) {
             return $this->createRoute($resource);
         }
-
+        
         return null;
     }
-
+    
     public function getRoutesByNames($names, $parameters = [])
     {
         $collection = $this->repository->matching(new Criteria());
         $routes     = [];
-
+        
         $collection->map(function (RouteInterface $route) use (&$routes) {
             $routes[] = $this->getRouteByName($route->getId());
         });
-
+        
         return $routes;
     }
-
+    
     /**
      * Returns normalized path used in resource query
      *
@@ -121,33 +118,59 @@ class RouteProvider implements RouteProviderInterface
     private function getNormalizedPath(Request $request)
     {
         $path  = ltrim($request->getPathInfo(), '/');
-        $paths = explode(RouteGeneratorInterface::PATH_PARAMS_SEPARATOR, $path);
-
+        $paths = explode(self::PATH_PARAMS_SEPARATOR, $path);
+        
         return current($paths);
     }
-
+    
     /**
-     * Creates a route
+     * Creates a route object
      *
      * @param RouteInterface $resource
      *
-     * @return null|SymfonyRoute
+     * @return SymfonyRoute
      */
-    private function createRoute(RouteInterface $resource)
+    private function createRoute(RouteInterface $resource) : SymfonyRoute
     {
-        $route = null;
-
-        foreach ($this->generators->all() as $generator) {
-            if ($generator->supports($resource->getType())) {
-                $route = $generator->generate($resource);
-                break;
-            }
+        $settings                        = $this->getRouteGenerationSettings($resource);
+        $settings['defaults']['id']      = $resource->getIdentifier()->getId();
+        $settings['defaults']['_locale'] = $resource->getLocale();
+        
+        return new SymfonyRoute(
+            $this->getPath($resource, $settings['pattern']),
+            $settings['defaults'],
+            $settings['requirements'],
+            $settings['options']
+        );
+    }
+    
+    private function getRouteGenerationSettings(RouteInterface $resource) : array
+    {
+        $class = ClassUtils::getRealClass(get_class($resource));
+        
+        if (!isset($this->routingGeneratorMap[$class])) {
+            throw new \InvalidArgumentException(
+                sprintf('Route resource of type "%s" has invalid/missing configuration.', $class)
+            );
         }
-
-        if (null === $route) {
-            throw new RouteNotFoundException(sprintf('No possible generator found for route "%s"', $resource->getId()));
+        
+        return $this->routingGeneratorMap[$class];
+    }
+    
+    /**
+     * Returns a concatenated path
+     *
+     * @param RouteInterface $resource
+     * @param string         $pattern
+     *
+     * @return string
+     */
+    private function getPath(RouteInterface $resource, string $pattern) : string
+    {
+        if (strlen($pattern)) {
+            return $resource->getPath() . self::PATH_PARAMS_SEPARATOR . $pattern;
         }
-
-        return $route;
+        
+        return $resource->getPath();
     }
 }

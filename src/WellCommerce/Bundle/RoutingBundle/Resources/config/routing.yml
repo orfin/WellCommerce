@@ -6,6 +6,10 @@
 # For the full copyright and license information,
 # please view the LICENSE file that was distributed with this source code.
 
-_admin:
-    resource: "@WellCommerceRoutingBundle/Resources/config/routing/admin.yml"
-    prefix: /admin/configuration/routing
+admin.routing.generate:
+    path: /routing/generate
+    defaults:
+        _controller: 'route.controller.admin:generateAction'
+    options:
+        expose: true
+        require_admin_permission: routing.index

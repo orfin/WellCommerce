@@ -35,7 +35,6 @@ well_commerce_routing:
     dynamic_routing:
         product_status:
             entity: WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusRoute
-            generator: WellCommerce\Bundle\ProductStatusBundle\Routing\ProductStatusRouteGenerator
             defaults:
                 _controller: product_status.controller.front:indexAction
                 limit: 12
