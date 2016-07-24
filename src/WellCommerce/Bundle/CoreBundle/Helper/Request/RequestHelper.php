@@ -20,28 +20,35 @@ use Symfony\Component\HttpFoundation\RequestStack;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class RequestHelper implements RequestHelperInterface
+final class RequestHelper implements RequestHelperInterface
 {
     /**
      * @var RequestStack
      */
-    protected $requestStack;
-
+    private $requestStack;
+    
     /**
      * @var null|Request
      */
-    protected $request;
-
+    private $request;
+    
     /**
-     * Constructor
+     * @var string
+     */
+    private $fallBackLocale;
+    
+    /**
+     * RequestHelper constructor.
      *
      * @param RequestStack $requestStack
+     * @param string       $fallBackLocale
      */
-    public function __construct(RequestStack $requestStack)
+    public function __construct(RequestStack $requestStack, string $fallBackLocale)
     {
-        $this->requestStack = $requestStack;
+        $this->requestStack   = $requestStack;
+        $this->fallBackLocale = $fallBackLocale;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -50,10 +57,10 @@ class RequestHelper implements RequestHelperInterface
         if (null === $this->request) {
             $this->request = $this->requestStack->getMasterRequest();
         }
-
+        
         return $this->request;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -62,18 +69,18 @@ class RequestHelper implements RequestHelperInterface
         if (!is_object($this->getCurrentRequest()) || !is_object($this->request->server)) {
             return null;
         }
-
+        
         if (null !== $url = $this->request->server->get('SERVER_NAME')) {
             return $url;
         }
-
+        
         if (null !== $url = $this->request->server->get('HTTP_HOST')) {
             return parse_url($url, PHP_URL_HOST);
         }
-
+        
         return null;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -82,10 +89,10 @@ class RequestHelper implements RequestHelperInterface
         if (null !== $this->getCurrentRequest() && $this->request->hasSession()) {
             return $this->request->getSession()->get($name, $default);
         }
-
+        
         return $default;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -94,10 +101,10 @@ class RequestHelper implements RequestHelperInterface
         if (null === $this->getCurrentRequest() || false === $this->request->hasSession()) {
             throw new \LogicException('Cannot set session attributes without valid session.');
         }
-
+        
         return $this->request->getSession()->set($name, $value);
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -106,10 +113,10 @@ class RequestHelper implements RequestHelperInterface
         if (null !== $this->getCurrentRequest() && $this->request->hasSession()) {
             return $this->request->getSession()->has($name);
         }
-
+        
         return false;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -118,10 +125,10 @@ class RequestHelper implements RequestHelperInterface
         if (null !== $this->getCurrentRequest() && $this->request->hasSession()) {
             return $this->request->getSession()->getId();
         }
-
+        
         return '';
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -130,10 +137,10 @@ class RequestHelper implements RequestHelperInterface
         if (null !== $this->getCurrentRequest() && $this->request->hasSession()) {
             return $this->request->getSession()->getName();
         }
-
+        
         return '';
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -142,10 +149,10 @@ class RequestHelper implements RequestHelperInterface
         if ($this->getCurrentRequest() instanceof Request) {
             return $this->request->request->has($name);
         }
-
+        
         return false;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -156,10 +163,10 @@ class RequestHelper implements RequestHelperInterface
                 return false;
             }
         }
-
+        
         return true;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -168,10 +175,10 @@ class RequestHelper implements RequestHelperInterface
         if (false === $this->hasRequestBagParam($name)) {
             return $default;
         }
-
+        
         return $this->request->request->filter($name, $default, $filter);
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -180,10 +187,10 @@ class RequestHelper implements RequestHelperInterface
         if (null === $this->getCurrentRequest() || false === $this->request->query->has($name)) {
             return $default;
         }
-
+        
         return $this->request->query->filter($name, $default, $filter);
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -192,10 +199,10 @@ class RequestHelper implements RequestHelperInterface
         if ($this->getCurrentRequest() instanceof Request) {
             return $this->request->attributes->has($name);
         }
-
+        
         return false;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -206,10 +213,10 @@ class RequestHelper implements RequestHelperInterface
                 return false;
             }
         }
-
+        
         return true;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -218,18 +225,22 @@ class RequestHelper implements RequestHelperInterface
         if (false === $this->hasAttributesBagParam($name)) {
             return $default;
         }
-
+        
         return $this->request->attributes->filter($name, $default, $filter);
     }
-
+    
     /**
      * {@inheritdoc}
      */
     public function getCurrentLocale() : string
     {
-        return $this->getCurrentRequest()->getLocale();
+        if (null !== $this->getCurrentRequest()) {
+            return $this->getCurrentRequest()->getLocale();
+        }
+        
+        return $this->fallBackLocale;
     }
-
+    
     /**
      * {@inheritdoc}
      */
