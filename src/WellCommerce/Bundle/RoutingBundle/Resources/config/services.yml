@@ -1,8 +1,5 @@
 
 services:
-    route.generator.collection:
-        class: WellCommerce\Bundle\RoutingBundle\Generator\RouteGeneratorCollection
-
     routable.subscriber:
         class: WellCommerce\Bundle\RoutingBundle\EventListener\RoutableSubscriber
         tags:
@@ -23,7 +20,7 @@ services:
 
     routing.provider:
         class: WellCommerce\Bundle\RoutingBundle\Provider\RouteProvider
-        arguments: ['@route.generator.collection', '@route.repository']
+        arguments: ['%routing_generator_map%', '@route.repository']
 
     routing.chain_router:
         class: Symfony\Cmf\Component\Routing\ChainRouter
