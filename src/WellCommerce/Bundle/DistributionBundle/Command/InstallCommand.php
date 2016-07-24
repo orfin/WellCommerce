@@ -15,6 +15,7 @@ namespace WellCommerce\Bundle\DistributionBundle\Command;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use WellCommerce\Bundle\DistributionBundle\Console\Action\ClearCacheAction;
 use WellCommerce\Bundle\DistributionBundle\Console\Action\InstallAssetsAction;
 use WellCommerce\Bundle\DistributionBundle\Console\Action\InstallDatabaseAction;
 use WellCommerce\Bundle\DistributionBundle\Console\Action\InstallFixturesAction;
@@ -32,7 +33,7 @@ class InstallCommand extends Command
      * @var ConsoleActionExecutorInterface
      */
     protected $executor;
-
+    
     /**
      * InstallCommand constructor.
      *
@@ -43,7 +44,7 @@ class InstallCommand extends Command
         parent::__construct();
         $this->executor = $executor;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -52,7 +53,7 @@ class InstallCommand extends Command
         $this->setDescription('Installs WellCommerce');
         $this->setName('wellcommerce:install');
     }
-
+    
     /**
      * Executes the actions
      *
@@ -62,12 +63,13 @@ class InstallCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $actions = [
+            new ClearCacheAction(),
             new InstallDatabaseAction(),
             new InstallFixturesAction(),
             new ReindexAction(),
             new InstallAssetsAction()
         ];
-
+        
         $this->executor->execute($actions, $output);
     }
 }
