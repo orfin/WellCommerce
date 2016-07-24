@@ -36,22 +36,15 @@ final class SecurityHelper implements SecurityHelperInterface
     private $requestHelper;
 
     /**
-     * @var array|\Symfony\Component\HttpFoundation\RequestMatcher[]
-     */
-    private $firewallMap;
-
-    /**
      * SecurityHelper constructor.
      *
      * @param TokenStorageInterface  $tokenStorage
      * @param RequestHelperInterface $requestHelper
-     * @param array                  $firewallMap
      */
-    public function __construct(TokenStorageInterface $tokenStorage, RequestHelperInterface $requestHelper, array $firewallMap = [])
+    public function __construct(TokenStorageInterface $tokenStorage, RequestHelperInterface $requestHelper)
     {
         $this->tokenStorage  = $tokenStorage;
         $this->requestHelper = $requestHelper;
-        $this->firewallMap   = $firewallMap;
     }
 
     public function getCurrentUser()
