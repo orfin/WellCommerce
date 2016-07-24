@@ -56,16 +56,6 @@ interface ShopInterface extends
     public function setUrl(string $url);
     
     /**
-     * @return Collection
-     */
-    public function getPages() : Collection;
-    
-    /**
-     * @param Collection $pages
-     */
-    public function setPages(Collection $pages);
-    
-    /**
      * @return string
      */
     public function getDefaultCountry() : string;

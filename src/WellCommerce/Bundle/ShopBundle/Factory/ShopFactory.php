@@ -32,10 +32,6 @@ class ShopFactory extends AbstractEntityFactory
         $shop = new Shop();
         $shop->setName('');
         $shop->setUrl('');
-        $shop->setProducts($this->createEmptyCollection());
-        $shop->setCategories($this->createEmptyCollection());
-        $shop->setPages($this->createEmptyCollection());
-        $shop->setProducers($this->createEmptyCollection());
         $shop->setMailerConfiguration(new MailerConfiguration());
         $shop->setCompany(null);
         $shop->setTheme(null);

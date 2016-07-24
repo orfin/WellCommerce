@@ -50,11 +50,6 @@ class Shop implements ShopInterface
     protected $company;
     
     /**
-     * @var Collection
-     */
-    protected $pages;
-    
-    /**
      * @var string
      */
     protected $defaultCountry;
@@ -115,22 +110,6 @@ class Shop implements ShopInterface
     public function setUrl(string $url)
     {
         $this->url = $url;
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function getPages() : Collection
-    {
-        return $this->pages;
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function setPages(Collection $pages)
-    {
-        $this->pages = $pages;
     }
     
     /**
