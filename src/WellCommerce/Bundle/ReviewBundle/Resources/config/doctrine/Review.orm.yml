@@ -12,7 +12,7 @@ WellCommerce\Bundle\ReviewBundle\Entity\Review:
             type: string
             nullable: false
         review:
-            type: string
+            type: text
             nullable: false
         rating:
             type: integer
