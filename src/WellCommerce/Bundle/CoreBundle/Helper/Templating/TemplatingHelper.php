@@ -17,6 +17,7 @@ use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
+use Twig_Environment as Environment;
 use WellCommerce\Bundle\CoreBundle\Controller\ControllerInterface;
 
 /**
@@ -30,24 +31,31 @@ class TemplatingHelper implements TemplatingHelperInterface
      * @var EngineInterface
      */
     protected $engine;
-
+    
+    /**
+     * @var Environment
+     */
+    protected $environment;
+    
     /**
      * @var KernelInterface
      */
     protected $kernel;
-
+    
     /**
      * TemplatingHelper constructor.
      *
      * @param EngineInterface $engine
      * @param KernelInterface $kernel
+     * @param Environment     $environment
      */
-    public function __construct(EngineInterface $engine, KernelInterface $kernel)
+    public function __construct(EngineInterface $engine, KernelInterface $kernel, Environment $environment)
     {
-        $this->engine = $engine;
-        $this->kernel = $kernel;
+        $this->engine      = $engine;
+        $this->environment = $environment;
+        $this->kernel      = $kernel;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -55,17 +63,27 @@ class TemplatingHelper implements TemplatingHelperInterface
     {
         return $this->engine->render($name, $parameters);
     }
-
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function renderTemplateString(string $template, array $parameters = []) : string
+    {
+        $template = $this->environment->createTemplate($template);
+        
+        return $template->render($parameters);
+    }
+    
     /**
      * {@inheritdoc}
      */
     public function renderControllerResponse(ControllerInterface $controller, string $templateName, array $parameters = []) : Response
     {
         $template = $this->resolveControllerTemplate($controller, $templateName);
-
+        
         return $this->engine->renderResponse($template, $parameters);
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -74,10 +92,10 @@ class TemplatingHelper implements TemplatingHelperInterface
         $reflectionClass = new ReflectionClass($controller);
         $controllerName  = $this->getControllerLogicalName($reflectionClass);
         $bundleName      = $this->getBundleName($reflectionClass);
-
+        
         return sprintf('%s:%s:%s.html.twig', $bundleName, $controllerName, $templateName);
     }
-
+    
     /**
      * Returns the controller's logical name
      *
@@ -89,10 +107,10 @@ class TemplatingHelper implements TemplatingHelperInterface
     {
         $className = $reflectionClass->getName();
         preg_match('/Controller\\\(.+)Controller$/', $className, $matchController);
-
+        
         return $matchController[1];
     }
-
+    
     /**
      * Returns the bundle's name
      *
@@ -103,10 +121,10 @@ class TemplatingHelper implements TemplatingHelperInterface
     protected function getBundleName(ReflectionClass $reflectionClass) : string
     {
         $currentBundle = $this->getBundleForClass($reflectionClass);
-
+        
         return $currentBundle->getName();
     }
-
+    
     /**
      * Returns bundle for particular controller
      *
@@ -117,7 +135,7 @@ class TemplatingHelper implements TemplatingHelperInterface
     protected function getBundleForClass(ReflectionClass $reflectionClass) : BundleInterface
     {
         $bundles = $this->kernel->getBundles();
-
+        
         do {
             $namespace = $reflectionClass->getNamespaceName();
             foreach ($bundles as $bundle) {

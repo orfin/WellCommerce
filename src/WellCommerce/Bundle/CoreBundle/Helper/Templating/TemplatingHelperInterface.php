@@ -31,7 +31,7 @@ interface TemplatingHelperInterface
      * @return string
      */
     public function render(string $name, array $parameters = []) : string;
-
+    
     /**
      * Resolves the controller's template name
      *
@@ -41,7 +41,7 @@ interface TemplatingHelperInterface
      * @return string
      */
     public function resolveControllerTemplate(ControllerInterface $class, string $templateName) : string;
-
+    
     /**
      * Renders the controller's response
      *
@@ -52,4 +52,14 @@ interface TemplatingHelperInterface
      * @return Response
      */
     public function renderControllerResponse(ControllerInterface $controller, string $templateName, array $parameters = []) : Response;
+    
+    /**
+     * Renders a given template string
+     *
+     * @param string $template
+     * @param array  $parameters
+     *
+     * @return string
+     */
+    public function renderTemplateString(string $template, array $parameters = []) : string;
 }

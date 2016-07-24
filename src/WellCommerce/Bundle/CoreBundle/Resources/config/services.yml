@@ -35,7 +35,7 @@ services:
 
     templating.helper:
         class: WellCommerce\Bundle\CoreBundle\Helper\Templating\TemplatingHelper
-        arguments: ['@templating', '@kernel']
+        arguments: ['@templating', '@kernel', '@twig']
 
     mailer.helper:
         class: WellCommerce\Bundle\CoreBundle\Helper\Mailer\MailerHelper
