@@ -74,7 +74,7 @@ abstract class AbstractDataSet extends AbstractContainerAware implements DataSet
      * @var CacheOptions
      */
     protected $cacheOptions;
-
+    
     /**
      * AbstractDataSet constructor.
      *
@@ -98,7 +98,7 @@ abstract class AbstractDataSet extends AbstractContainerAware implements DataSet
     {
         $this->cacheOptions = $options;
     }
-
+    
     public function getColumns() : ColumnCollection
     {
         return $this->columns;
@@ -120,68 +120,74 @@ abstract class AbstractDataSet extends AbstractContainerAware implements DataSet
     {
         $this->defaultRequestOptions[$name] = $value;
     }
-
+    
     public function setDefaultContextOption(string $name, $value)
     {
         $this->defaultContextOptions[$name] = $value;
     }
-
+    
     public function dispatchOnDataSetInitEvent()
     {
         $this->eventDispatcher->dispatch($this->getEventName(DataSetInitEvent::EVENT_SUFFIX), new DataSetInitEvent($this));
     }
-
+    
     public function getResult(string $contextType, array $requestOptions = [], array $contextOptions = []) : array
     {
+        $this->getDoctrineHelper()->enableFilter('locale')->setParameter('locale', $this->getRequestHelper()->getCurrentLocale());
+        
         $contextOptions = $this->getContextOptions($contextOptions);
         $requestOptions = $this->getRequestOptions($requestOptions);
         $context        = $this->manager->createContext($contextType, $contextOptions);
         $request        = $this->getDataSetRequest($requestOptions);
         $queryBuilder   = $this->getQueryBuilder($request);
-
+        
         try {
-            return $context->getResult($queryBuilder, $request, $this->columns, $this->cacheOptions);
+            $result = $context->getResult($queryBuilder, $request, $this->columns, $this->cacheOptions);
         } catch (\Exception $e) {
-            return [
+            $result = [
                 'error' => $e->getMessage()
             ];
         }
+        
+        $this->getDoctrineHelper()->disableFilter('locale');
+        
+        return $result;
     }
-
+    
     protected function getDataSetRequest(array $requestOptions = []) : DataSetRequestInterface
     {
         $request = $this->manager->createRequest($requestOptions);
         $this->dispatchDataSetRequestEvent($request);
-
+        
         return $request;
     }
-
+    
     protected function getDataSetTransformer(string $type, array $options = []) : DataSetTransformerInterface
     {
         return $this->manager->createTransformer($type, $options);
     }
-
+    
     protected function getQueryBuilder(DataSetRequestInterface $request) : QueryBuilder
     {
         $dataSetQueryBuilder = $this->manager->createQueryBuilder($this->repository);
-
+        
         return $dataSetQueryBuilder->getQueryBuilder($this->columns, $request);
     }
-
+    
     private function getContextOptions(array $contextOptions = []) : array
     {
         $contextOptions = array_merge($this->defaultContextOptions, $contextOptions);
-
+        
         return $contextOptions;
     }
-
+    
     private function getRequestOptions(array $requestOptions = []) : array
     {
         $requestOptions = array_merge($this->defaultRequestOptions, $requestOptions);
-
+        
         return $requestOptions;
     }
-
+    
     private function dispatchDataSetRequestEvent(DataSetRequestInterface $request)
     {
         $this->eventDispatcher->dispatch($this->getEventName(DataSetRequestEvent::EVENT_SUFFIX), new DataSetRequestEvent($this, $request));
