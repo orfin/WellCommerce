@@ -27,6 +27,11 @@ class ClientDetails implements ClientDetailsInterface
     /**
      * @var string
      */
+    protected $passwordConfirm;
+    
+    /**
+     * @var string
+     */
     protected $username;
     
     /**
@@ -82,6 +87,21 @@ class ClientDetails implements ClientDetailsInterface
     public function setHashedPassword(string $password)
     {
         $this->password = password_hash($password, PASSWORD_BCRYPT, ['cost' => 12]);
+    }
+    
+    public function setPasswordConfirm($password)
+    {
+        $this->passwordConfirm = $password;
+    }
+    
+    public function getPasswordConfirm()
+    {
+        return $this->passwordConfirm;
+    }
+    
+    public function isPasswordConfirmed() : bool
+    {
+        return password_verify($this->passwordConfirm, $this->password);
     }
     
     public function getSalt()

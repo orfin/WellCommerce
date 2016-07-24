@@ -19,6 +19,11 @@
                 <option name="traverse">true</option>
             </constraint>
         </property>
+        <property name="clientDetails">
+            <constraint name="Valid">
+                <option name="traverse">true</option>
+            </constraint>
+        </property>
         <property name="shippingMethod">
             <constraint name="Type">
                 <option name="type">WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface</option>

@@ -150,6 +150,11 @@ services:
             - { name: validator.constraint_validator, alias: client.orm.validator.unique }
         arguments: ['@client.repository', '@router.helper']
 
+    client.orm.validator.password:
+        class: WellCommerce\Bundle\ClientBundle\Doctrine\Validator\Constraints\ClientPasswordValidator
+        tags:
+            - { name: validator.constraint_validator, alias: client.orm.validator.password }
+
     client_wishlist.controller.front:
         class: WellCommerce\Bundle\ClientBundle\Controller\Front\ClientWishlistController
         arguments: ['@client_wishlist.manager']

@@ -9,6 +9,11 @@
                 <value>client_registration</value>
             </option>
         </constraint>
+        <constraint name="WellCommerce\Bundle\ClientBundle\Doctrine\Validator\Constraints\ClientPassword">
+            <option name="groups">
+                <value>client_registration</value>
+            </option>
+        </constraint>
         <property name="conditionsAccepted">
             <constraint name="EqualTo">
                 <option name="value">1</option>
@@ -39,6 +44,7 @@
             <constraint name="NotNull">
                 <option name="groups">
                     <value>client_registration</value>
+                    <value>order_client_registration</value>
                 </option>
             </constraint>
             <constraint name="NotBlank">
