@@ -1,9 +1,18 @@
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
+
 admin.layout_box.index:
     path: /admin/layout/box/index
     defaults:
         _controller: 'layout_box.controller.admin:indexAction'
     options:
         require_admin_permission: layout_box.index
+
 admin.layout_box.grid:
     path: /admin/layout/box/grid
     condition: "request.isXmlHttpRequest()"
@@ -12,12 +21,14 @@ admin.layout_box.grid:
     options:
         expose: true
         require_admin_permission: layout_box.index
+
 admin.layout_box.add:
     path: /admin/layout/box/add
     defaults:
         _controller: 'layout_box.controller.admin:addAction'
     options:
         require_admin_permission: layout_box.add
+
 admin.layout_box.edit:
     path: '/admin/layout/box/edit/{id}'
     defaults:
@@ -25,6 +36,7 @@ admin.layout_box.edit:
     options:
         expose: true
         require_admin_permission: layout_box.edit
+
 admin.layout_box.delete:
     path: '/admin/layout/box/delete/{id}'
     defaults:
