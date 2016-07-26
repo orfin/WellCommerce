@@ -21,12 +21,12 @@ trait PaymentMethodAwareTrait
 {
     protected $paymentMethod;
 
-    public function getPaymentMethod() : PaymentMethodInterface
+    public function getPaymentMethod()
     {
         return $this->paymentMethod;
     }
 
-    public function setPaymentMethod(PaymentMethodInterface $paymentMethod)
+    public function setPaymentMethod(PaymentMethodInterface $paymentMethod = null)
     {
         $this->paymentMethod = $paymentMethod;
     }

@@ -6,5 +6,7 @@ shipping_method:
     label:
         calculator: Type of costs calculation
         costs: Shipping costs
+        options_provider: Options provider service
     fieldset:
         costs: Shipping costs settings
+        countries: Countries

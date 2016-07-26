@@ -28,6 +28,7 @@ final class WellCommerceShippingBundle extends Bundle
     {
         parent::build($container);
         $container->addCompilerPass(new Compiler\RegisterShippingMethodCalculatorPass());
+        $container->addCompilerPass(new Compiler\RegisterShippingMethodOptionsProviderPass());
         $container->addCompilerPass(new AutoRegisterServicesPass($this));
     }
 }

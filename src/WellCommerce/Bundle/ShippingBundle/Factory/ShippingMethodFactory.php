@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\ShippingBundle\Factory;
 
 use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
-use WellCommerce\Bundle\ShippingBundle\Calculator\ShippingCalculatorInterface;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethod;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface;
 
@@ -33,7 +32,9 @@ class ShippingMethodFactory extends AbstractEntityFactory
         $shippingMethod->setCurrency(null);
         $shippingMethod->setTax(null);
         $shippingMethod->setCalculator('');
-
+        $shippingMethod->setCountries([]);
+        $shippingMethod->setOptionsProvider('');
+        
         return $shippingMethod;
     }
 }

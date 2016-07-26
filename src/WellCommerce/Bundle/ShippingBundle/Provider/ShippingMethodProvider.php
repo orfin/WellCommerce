@@ -52,7 +52,7 @@ final class ShippingMethodProvider implements ShippingMethodProviderInterface
     
     public function getCosts(ShippingSubjectInterface $subject) : Collection
     {
-        $methods    = $this->repository->getShippingMethods();
+        $methods    = $this->getShippingMethods($subject);
         $collection = new ArrayCollection();
         
         $methods->map(function (ShippingMethodInterface $shippingMethod) use ($subject, $collection) {
@@ -69,6 +69,12 @@ final class ShippingMethodProvider implements ShippingMethodProviderInterface
     public function getShippingMethodCosts(ShippingMethodInterface $method, ShippingSubjectInterface $subject) : Collection
     {
         $calculator = $this->getCalculator($method);
+        $country    = $subject->getCountry();
+        $countries  = $method->getCountries();
+        
+        if (strlen($country) && count($countries) && !in_array($country, $countries)) {
+            return new ArrayCollection();
+        }
         
         return $calculator->calculate($method, $subject);
     }
@@ -82,5 +88,23 @@ final class ShippingMethodProvider implements ShippingMethodProviderInterface
         }
         
         return $this->calculators->get($calculator);
+    }
+    
+    private function getShippingMethods(ShippingSubjectInterface $subject) : Collection
+    {
+        $methods = $this->repository->getShippingMethods();
+        $country = $subject->getCountry();
+        
+        if (strlen($country)) {
+            return $methods->filter(function (ShippingMethodInterface $method) use ($country) {
+                if (count($method->getCountries()) && !in_array($country, $method->getCountries())) {
+                    return false;
+                }
+                
+                return true;
+            });
+        }
+        
+        return $methods;
     }
 }

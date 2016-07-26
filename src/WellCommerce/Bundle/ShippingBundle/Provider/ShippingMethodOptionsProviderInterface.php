@@ -10,18 +10,13 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\PaymentBundle\Entity;
+namespace WellCommerce\Bundle\ShippingBundle\Provider;
 
 /**
- * Interface PaymentMethodAwareInterface
+ * Interface ShippingMethodOptionsProviderInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface PaymentMethodAwareInterface
+interface ShippingMethodOptionsProviderInterface
 {
-    public function getPaymentMethod();
-
-    public function setPaymentMethod(PaymentMethodInterface $paymentMethod = null);
-
-    public function hasPaymentMethod() : bool;
 }

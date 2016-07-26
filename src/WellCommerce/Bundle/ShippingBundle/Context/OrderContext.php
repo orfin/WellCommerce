@@ -26,7 +26,7 @@ final class OrderContext implements ShippingSubjectInterface
      * @var OrderInterface
      */
     protected $order;
-
+    
     /**
      * OrderAdapter constructor.
      *
@@ -36,7 +36,7 @@ final class OrderContext implements ShippingSubjectInterface
     {
         $this->order = $order;
     }
-
+    
     public function getQuantity() : int
     {
         return $this->order->getProductTotal()->getQuantity();
@@ -51,19 +51,24 @@ final class OrderContext implements ShippingSubjectInterface
     {
         return $this->order->getProductTotal()->getGrossPrice();
     }
-
+    
     public function getNetPrice() : float
     {
         return $this->order->getProductTotal()->getNetPrice();
     }
-
+    
     public function getTaxAmount() : float
     {
         return $this->order->getProductTotal()->getTaxAmount();
     }
-
+    
     public function getCurrency() : string
     {
         return $this->order->getCurrency();
+    }
+    
+    public function getCountry() : string
+    {
+        return $this->order->getShippingAddress()->getCountry();
     }
 }

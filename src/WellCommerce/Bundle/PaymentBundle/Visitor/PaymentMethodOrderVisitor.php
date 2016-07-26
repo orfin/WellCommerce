@@ -27,7 +27,7 @@ final class PaymentMethodOrderVisitor implements OrderVisitorInterface
      * @var OrderModifierProviderInterface
      */
     private $orderModifierProvider;
-
+    
     /**
      * PaymentMethodOrderVisitor constructor.
      *
@@ -43,13 +43,20 @@ final class PaymentMethodOrderVisitor implements OrderVisitorInterface
      */
     public function visitOrder(OrderInterface $order)
     {
+        if (false === $order->hasShippingMethod()) {
+            $order->removeModifier('payment_surcharge');
+            $order->setPaymentMethod(null);
+            
+            return;
+        }
+        
         $shippingMethod = $order->getShippingMethod();
         $paymentMethods = $shippingMethod->getPaymentMethods();
-
+        
         if (false === $order->hasPaymentMethod() || false === $paymentMethods->contains($order->getPaymentMethod())) {
             $order->setPaymentMethod($paymentMethods->first());
         }
-
+        
         $modifier = $this->orderModifierProvider->getOrderModifier($order, 'payment_surcharge');
         $modifier->setCurrency($order->getCurrency());
         $modifier->setGrossAmount(0);

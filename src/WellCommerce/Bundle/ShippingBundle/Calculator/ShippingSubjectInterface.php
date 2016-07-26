@@ -30,4 +30,6 @@ interface ShippingSubjectInterface
     public function getTaxAmount() : float;
 
     public function getCurrency() : string;
+    
+    public function getCountry() : string;
 }

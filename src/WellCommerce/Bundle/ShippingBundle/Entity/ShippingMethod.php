@@ -36,27 +36,37 @@ class ShippingMethod implements ShippingMethodInterface
     use EnableableTrait;
     use HierarchyAwareTrait;
     use TaxAwareTrait;
-
+    
     /**
      * @var string
      */
     protected $calculator;
-
+    
+    /**
+     * @var string
+     */
+    protected $optionsProvider;
+    
     /**
      * @var CurrencyInterface
      */
     protected $currency;
-
+    
     /**
      * @var Collection
      */
     protected $costs;
-
+    
     /**
      * @var Collection
      */
     protected $paymentMethods;
-
+    
+    /**
+     * @var array
+     */
+    protected $countries;
+    
     /**
      * {@inheritdoc}
      */
@@ -64,7 +74,7 @@ class ShippingMethod implements ShippingMethodInterface
     {
         return $this->calculator;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -72,7 +82,23 @@ class ShippingMethod implements ShippingMethodInterface
     {
         $this->calculator = $calculator;
     }
-
+    
+    /**
+     * @return string
+     */
+    public function getOptionsProvider() : string
+    {
+        return $this->optionsProvider;
+    }
+    
+    /**
+     * @param string $optionsProvider
+     */
+    public function setOptionsProvider(string $optionsProvider)
+    {
+        $this->optionsProvider = $optionsProvider;
+    }
+    
     /**
      * {@inheritdoc}
      */
@@ -80,7 +106,7 @@ class ShippingMethod implements ShippingMethodInterface
     {
         return $this->costs;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -88,7 +114,7 @@ class ShippingMethod implements ShippingMethodInterface
     {
         $this->costs = $costs;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -96,7 +122,7 @@ class ShippingMethod implements ShippingMethodInterface
     {
         return $this->currency;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -104,12 +130,28 @@ class ShippingMethod implements ShippingMethodInterface
     {
         $this->currency = $currency;
     }
-
+    
     /**
      * {@inheritdoc}
      */
     public function getPaymentMethods() : Collection
     {
         return $this->paymentMethods;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function getCountries(): array
+    {
+        return $this->countries;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function setCountries(array $countries)
+    {
+        $this->countries = $countries;
     }
 }

@@ -6,5 +6,7 @@ shipping_method:
     label:
         calculator: Rodzaj kalkulacji kosztów
         costs: Koszty wysyłki
+        options_provider: Service opcji wysyłki
     fieldset:
         costs: Ustawienia kosztów wysyłki
+        countries: Państwa

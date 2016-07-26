@@ -31,14 +31,14 @@ class ShippingMethodRepository extends EntityRepository implements ShippingMetho
         $criteria = new Criteria();
         $criteria->where($criteria->expr()->eq('enabled', true));
         $criteria->orderBy(['hierarchy' => 'asc']);
-
+        
         $methods = $this->matching($criteria)->filter(function (ShippingMethodInterface $shippingMethod) {
             $paymentMethodsCount     = $shippingMethod->getPaymentMethods()->count();
             $shippingMethodCostCount = $shippingMethod->getCosts()->count();
-
+            
             return $paymentMethodsCount > 0 && $shippingMethodCostCount > 0;
         });
-
+        
         return $methods;
     }
 }

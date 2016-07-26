@@ -30,7 +30,7 @@ final class ShippingMethodOrderVisitor implements OrderVisitorInterface
      * @var OrderModifierProviderInterface
      */
     private $modifierProvider;
-
+    
     /**
      * @var
      */
@@ -56,7 +56,10 @@ final class ShippingMethodOrderVisitor implements OrderVisitorInterface
         $costs = $this->getCostCollection($order);
         
         if (0 === $costs->count()) {
-            throw new \Exception('There are no possible shipping methods for cart');
+            $order->removeModifier('shipping_cost');
+            $order->setShippingMethod(null);
+            
+            return;
         }
         
         $cost     = $costs->first();

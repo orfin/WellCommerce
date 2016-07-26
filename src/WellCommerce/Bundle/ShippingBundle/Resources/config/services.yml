@@ -10,12 +10,16 @@ services:
     shipping_method.calculator.collection:
         class: Doctrine\Common\Collections\ArrayCollection
 
+    shipping_method.options_provider.collection:
+        class: Doctrine\Common\Collections\ArrayCollection
+
     shipping_method.provider:
         class: WellCommerce\Bundle\ShippingBundle\Provider\ShippingMethodProvider
         arguments: ['@shipping_method.repository', '@shipping_method.calculator.collection']
 
     shipping_method_cost.doctrine.event_subscriber:
-        class: WellCommerce\Bundle\ShippingBundle\EventListener\ShippingMethodCostEventSubscriber
+        class: WellCommerce\Bundle\ShippingBundle\EventListener\ShippingMethodEventSubscriber
+        arguments: ['@country.repository']
         tags:
             - { name: doctrine.event_subscriber, connection: default }
 

@@ -45,7 +45,17 @@ interface ShippingMethodInterface extends
      * @param $calculator
      */
     public function setCalculator(string $calculator);
-
+    
+    /**
+     * @return string
+     */
+    public function getOptionsProvider() : string;
+    
+    /**
+     * @param string $optionsProvider
+     */
+    public function setOptionsProvider(string $optionsProvider);
+    
     /**
      * @return Collection
      */
@@ -70,4 +80,14 @@ interface ShippingMethodInterface extends
      * @return Collection
      */
     public function getPaymentMethods() : Collection;
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function getCountries(): array;
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function setCountries(array $countries);
 }

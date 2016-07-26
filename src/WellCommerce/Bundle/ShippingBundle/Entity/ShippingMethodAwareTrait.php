@@ -21,12 +21,12 @@ trait ShippingMethodAwareTrait
 {
     protected $shippingMethod;
 
-    public function getShippingMethod() : ShippingMethodInterface
+    public function getShippingMethod()
     {
         return $this->shippingMethod;
     }
 
-    public function setShippingMethod(ShippingMethodInterface $shippingMethod)
+    public function setShippingMethod(ShippingMethodInterface $shippingMethod = null)
     {
         $this->shippingMethod = $shippingMethod;
     }

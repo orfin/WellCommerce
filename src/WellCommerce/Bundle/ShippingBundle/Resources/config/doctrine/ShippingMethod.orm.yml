@@ -12,6 +12,11 @@ WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethod:
             type: string
             length: 64
             nullable: false
+        optionsProvider:
+            type: string
+            length: 64
+            nullable: false
+            column: options_provider
         enabled:
             type: boolean
             nullable: false
@@ -20,6 +25,8 @@ WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethod:
             nullable: false
             options:
                 default: 0
+        countries:
+            type: json_array
     manyToOne:
         currency:
             targetEntity: WellCommerce\Bundle\CurrencyBundle\Entity\Currency
