@@ -15,6 +15,7 @@ namespace WellCommerce\Bundle\ClientBundle\Factory;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddress;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddressInterface;
 use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\ShopBundle\Storage\ShopStorage;
 
 /**
  * Class ClientShippingAddressFactory
@@ -23,6 +24,21 @@ use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
  */
 final class ClientShippingAddressFactory extends AbstractEntityFactory
 {
+    /**
+     * @var ShopStorage
+     */
+    private $shopStorage;
+    
+    /**
+     * ClientShippingAddressFactory constructor.
+     *
+     * @param ShopStorage $storage
+     */
+    public function __construct(ShopStorage $storage)
+    {
+        $this->shopStorage = $storage;
+    }
+    
     public function create() : ClientShippingAddressInterface
     {
         $address = new ClientShippingAddress();
@@ -33,7 +49,7 @@ final class ClientShippingAddressFactory extends AbstractEntityFactory
         $address->setPostalCode('');
         $address->setState('');
         $address->setCity('');
-        $address->setCountry('');
+        $address->setCountry($this->shopStorage->getCurrentShop()->getDefaultCountry());
         $address->setCopyBillingAddress(true);
         
         return $address;

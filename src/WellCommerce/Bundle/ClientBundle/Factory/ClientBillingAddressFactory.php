@@ -15,6 +15,7 @@ namespace WellCommerce\Bundle\ClientBundle\Factory;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddress;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddressInterface;
 use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\ShopBundle\Storage\ShopStorage;
 
 /**
  * Class ClientBillingAddressFactory
@@ -23,6 +24,21 @@ use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
  */
 final class ClientBillingAddressFactory extends AbstractEntityFactory
 {
+    /**
+     * @var ShopStorage
+     */
+    private $shopStorage;
+    
+    /**
+     * ClientBillingAddressFactory constructor.
+     *
+     * @param ShopStorage $storage
+     */
+    public function __construct(ShopStorage $storage)
+    {
+        $this->shopStorage = $storage;
+    }
+    
     public function create() : ClientBillingAddressInterface
     {
         $address = new ClientBillingAddress();
@@ -33,11 +49,11 @@ final class ClientBillingAddressFactory extends AbstractEntityFactory
         $address->setPostalCode('');
         $address->setState('');
         $address->setCity('');
-        $address->setCountry('');
+        $address->setCountry($this->shopStorage->getCurrentShop()->getDefaultCountry());
         $address->setCompanyAddress(false);
         $address->setCompanyName('');
         $address->setVatId('');
-
+        
         return $address;
     }
 }
