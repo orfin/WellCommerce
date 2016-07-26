@@ -8,8 +8,16 @@
             {{ macros.form_begin(form, 'cart') }}
             <div class="row mbt30">
                 <div class="col-lg-6 col-xs-12">
+                    <div class="row">
+                        <div class="col-lg-10">
+                            {{ macros.element(form.children.get('shippingAddress').children.get('shippingAddress.country'), 'hide-label') }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mbt30">
+                <div class="col-lg-6 col-xs-12">
                     <h4>Choose delivery</h4>
-
                     <div class="row">
                         <div class="col-lg-10">
                             {{ macros.element(form.getChildren().get('shippingMethod')) }}

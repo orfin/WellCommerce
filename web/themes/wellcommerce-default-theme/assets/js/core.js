@@ -266,6 +266,7 @@ var GCart = function(oOptions) {
 
     gThis.InitializeEvents = function(){
         $("input[type='radio']", gThis.m_gForm).bind('change', gThis.SubmitForm);
+        $("select", gThis.m_gForm).bind('change', gThis.SubmitForm);
         $('.' + gThis.m_oOptions.sQuantitySpinnerClass, gThis).bind('change', gThis.ChangeItemQuantity);
     };
 
@@ -335,7 +336,6 @@ var GProductAddCartForm = function(oOptions) {
 
         if(gThis.m_oOptions.aoVariants[checkedVariant] != undefined){
             var variant = gThis.m_oOptions.aoVariants[checkedVariant];
-            console.log(variant);
             gThis.m_oOptions.oVariant.val(variant.id);
             gThis.m_oOptions.oPrice.text(variant.finalPriceGross);
             gThis.m_gForm.find('button[type="submit"]').show();
@@ -414,6 +414,7 @@ var GProductAddCartButton = function(oOptions) {
                     aoVariants: variants
                 });
             }
+            $(this).off('shown.bs.modal');
         });
 
         if(oResponse.cartPreviewContent != undefined) {
