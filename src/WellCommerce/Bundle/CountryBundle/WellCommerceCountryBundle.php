@@ -12,13 +12,13 @@
 
 namespace WellCommerce\Bundle\CountryBundle;
 
-use Symfony\Component\HttpKernel\Bundle\Bundle;
+use WellCommerce\Bundle\CoreBundle\HttpKernel\AbstractWellCommerceBundle;
 
 /**
  * Class WellCommerceCountryBundle
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class WellCommerceCountryBundle extends Bundle
+final class WellCommerceCountryBundle extends AbstractWellCommerceBundle
 {
 }

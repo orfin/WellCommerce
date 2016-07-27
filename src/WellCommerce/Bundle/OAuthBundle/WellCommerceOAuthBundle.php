@@ -12,15 +12,14 @@
 
 namespace WellCommerce\Bundle\OAuthBundle;
 
-use Symfony\Component\HttpKernel\Bundle\Bundle;
+use WellCommerce\Bundle\CoreBundle\HttpKernel\AbstractWellCommerceBundle;
 
 /**
  * Class WellCommerceOAuthBundle
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @module  created by Rafał Martonik <rafal@wellcommerce.org>
+ * @author  Rafał Martonik <rafal@wellcommerce.org>
  */
-class WellCommerceOAuthBundle extends Bundle
+final class WellCommerceOAuthBundle extends AbstractWellCommerceBundle
 {
 }

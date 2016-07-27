@@ -15,17 +15,13 @@ namespace WellCommerce\Bundle\ProductBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\Compiler\AutoRegisterServicesPass;
+use WellCommerce\Bundle\CoreBundle\HttpKernel\AbstractWellCommerceBundle;
 
 /**
  * Class WellCommerceProductBundle
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-final class WellCommerceProductBundle extends Bundle
+final class WellCommerceProductBundle extends AbstractWellCommerceBundle
 {
-    public function build(ContainerBuilder $container)
-    {
-        parent::build($container);
-        $container->addCompilerPass(new AutoRegisterServicesPass($this));
-    }
 }

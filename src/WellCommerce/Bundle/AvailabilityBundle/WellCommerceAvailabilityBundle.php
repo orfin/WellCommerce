@@ -12,20 +12,13 @@
 
 namespace WellCommerce\Bundle\AvailabilityBundle;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\HttpKernel\Bundle\Bundle;
-use WellCommerce\Bundle\CoreBundle\DependencyInjection\Compiler\AutoRegisterServicesPass;
+use WellCommerce\Bundle\CoreBundle\HttpKernel\AbstractWellCommerceBundle;
 
 /**
  * Class WellCommerceAvailabilityBundle
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-final class WellCommerceAvailabilityBundle extends Bundle
+final class WellCommerceAvailabilityBundle extends AbstractWellCommerceBundle
 {
-    public function build(ContainerBuilder $container)
-    {
-        parent::build($container);
-        $container->addCompilerPass(new AutoRegisterServicesPass($this));
-    }
 }

@@ -12,20 +12,13 @@
 
 namespace WellCommerce\Bundle\MediaBundle;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\HttpKernel\Bundle\Bundle;
-use WellCommerce\Bundle\CoreBundle\DependencyInjection\Compiler\AutoRegisterServicesPass;
+use WellCommerce\Bundle\CoreBundle\HttpKernel\AbstractWellCommerceBundle;
 
 /**
  * Class WellCommerceMediaBundle
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-final class WellCommerceMediaBundle extends Bundle
+final class WellCommerceMediaBundle extends AbstractWellCommerceBundle
 {
-    public function build(ContainerBuilder $container)
-    {
-        parent::build($container);
-        $container->addCompilerPass(new AutoRegisterServicesPass($this));
-    }
 }

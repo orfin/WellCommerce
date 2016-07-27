@@ -12,13 +12,13 @@
 
 namespace WellCommerce\Bundle\LayeredNavigationBundle;
 
-use Symfony\Component\HttpKernel\Bundle\Bundle;
+use WellCommerce\Bundle\CoreBundle\HttpKernel\AbstractWellCommerceBundle;
 
 /**
  * Class WellCommerceLayeredNavigationBundle
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class WellCommerceLayeredNavigationBundle extends Bundle
+final class WellCommerceLayeredNavigationBundle extends AbstractWellCommerceBundle
 {
 }

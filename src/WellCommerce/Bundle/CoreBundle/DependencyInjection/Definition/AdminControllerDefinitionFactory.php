@@ -22,7 +22,7 @@ use Symfony\Component\DependencyInjection\Reference;
  */
 final class AdminControllerDefinitionFactory
 {
-    public function create(string $class, Reference $manager, Reference $formBuilder = null, Reference $dataGrid = null) : Definition
+    public function create(string $class, Reference $manager = null, Reference $formBuilder = null, Reference $dataGrid = null) : Definition
     {
         $definition = new Definition();
         $definition->setClass($class);

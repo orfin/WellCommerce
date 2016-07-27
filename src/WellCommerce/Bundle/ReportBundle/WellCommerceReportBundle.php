@@ -13,12 +13,13 @@
 namespace WellCommerce\Bundle\ReportBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
+use WellCommerce\Bundle\CoreBundle\HttpKernel\AbstractWellCommerceBundle;
 
 /**
  * Class WellCommerceReportBundle
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class WellCommerceReportBundle extends Bundle
+final class WellCommerceReportBundle extends AbstractWellCommerceBundle
 {
 }

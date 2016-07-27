@@ -14,15 +14,15 @@ namespace WellCommerce\Bundle\ApiBundle;
 
 use Symfony\Component\DependencyInjection\Compiler\PassConfig;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\HttpKernel\Bundle\Bundle;
 use WellCommerce\Bundle\ApiBundle\DependencyInjection\Compiler;
+use WellCommerce\Bundle\CoreBundle\HttpKernel\AbstractWellCommerceBundle;
 
 /**
  * Class WellCommerceApiBundle
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class WellCommerceApiBundle extends Bundle
+class WellCommerceApiBundle extends AbstractWellCommerceBundle
 {
     public function build(ContainerBuilder $container)
     {

@@ -36,12 +36,15 @@ abstract class AbstractAdminController extends AbstractController implements Adm
     /**
      * AbstractAdminController constructor.
      *
-     * @param ManagerInterface          $manager
+     * @param ManagerInterface|null     $manager
      * @param FormBuilderInterface|null $formBuilder
      * @param DataGridInterface|null    $dataGrid
      */
-    public function __construct(ManagerInterface $manager, FormBuilderInterface $formBuilder = null, DataGridInterface $dataGrid = null)
-    {
+    public function __construct(
+        ManagerInterface $manager = null,
+        FormBuilderInterface $formBuilder = null,
+        DataGridInterface $dataGrid = null
+    ) {
         parent::__construct($manager, $formBuilder);
         $this->dataGrid = $dataGrid;
     }

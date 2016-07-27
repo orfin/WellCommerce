@@ -16,6 +16,7 @@ use Symfony\Component\DependencyInjection\Compiler\PassConfig;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\Compiler\AutoRegisterServicesPass;
+use WellCommerce\Bundle\CoreBundle\HttpKernel\AbstractWellCommerceBundle;
 use WellCommerce\Bundle\OrderBundle\DependencyInjection\Compiler;
 
 /**
@@ -23,13 +24,12 @@ use WellCommerce\Bundle\OrderBundle\DependencyInjection\Compiler;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-final class WellCommerceOrderBundle extends Bundle
+final class WellCommerceOrderBundle extends AbstractWellCommerceBundle
 {
     public function build(ContainerBuilder $container)
     {
         parent::build($container);
         $container->addCompilerPass(new Compiler\RegisterOrderVisitorPass());
         $container->addCompilerPass(new Compiler\RegisterOrderModifierPass());
-        $container->addCompilerPass(new AutoRegisterServicesPass($this));
     }
 }
