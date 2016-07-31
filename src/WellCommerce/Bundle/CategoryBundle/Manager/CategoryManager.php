@@ -12,11 +12,9 @@
 
 namespace WellCommerce\Bundle\CategoryBundle\Manager;
 
-use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 use WellCommerce\Bundle\CategoryBundle\Entity\CategoryInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Sluggable;
 use WellCommerce\Bundle\DoctrineBundle\Manager\AbstractManager;
-use WellCommerce\Bundle\DoctrineBundle\Manager\Manager;
 use WellCommerce\Bundle\LocaleBundle\Entity\Locale;
 use WellCommerce\Bundle\ShopBundle\Entity\ShopInterface;
 
@@ -57,7 +55,7 @@ class CategoryManager extends AbstractManager
      * @param int $parent
      * @param ShopInterface $shop
      *
-     * @return Category|CategoryInterface
+     * @return CategoryInterface
      */
     public function quickAddCategory(string $name, int $parent, ShopInterface $shop) : CategoryInterface
     {
@@ -83,10 +81,10 @@ class CategoryManager extends AbstractManager
      * Translates the category
      *
      * @param Locale   $locale
-     * @param Category $category
+     * @param CategoryInterface $category
      * @param string   $name
      */
-    protected function translateCategory(Locale $locale, Category $category, $name)
+    protected function translateCategory(Locale $locale, CategoryInterface $category, $name)
     {
         /**
          * @var $translation \WellCommerce\Bundle\CategoryBundle\Entity\CategoryTranslation
