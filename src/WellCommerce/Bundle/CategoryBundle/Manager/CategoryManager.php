@@ -54,9 +54,10 @@ class CategoryManager extends AbstractManager
      * Adds a new category
      *
      * @param string $name
-     * @param int    $parent
+     * @param int $parent
+     * @param ShopInterface $shop
      *
-     * @return Category
+     * @return Category|CategoryInterface
      */
     public function quickAddCategory(string $name, int $parent, ShopInterface $shop) : CategoryInterface
     {
@@ -70,7 +71,7 @@ class CategoryManager extends AbstractManager
         foreach ($this->getLocales() as $locale) {
             $this->translateCategory($locale, $category, $name);
         }
-
+        $em = $this->getDoctrineHelper()->getEntityManager();
         $em->persist($category);
         $em->flush();
 
