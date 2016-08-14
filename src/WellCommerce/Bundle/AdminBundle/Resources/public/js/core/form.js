@@ -4065,6 +4065,11 @@ var GForm = GCore.ExtendClass(GFormContainer, function() {
 
 		if(oResponse.valid == false){
 			gThis.PopulateErrors(oResponse.error);
+            $(gThis).find('.invalid').first().find('input, select').focus();
+			GAlert.DestroyAll();
+			GAlert(GForm.Language.form_data_invalid,'', {
+				bAutoFocus: false
+			});
 		}else{
 			if(oResponse.next == false && oResponse.continue == false){
 				window.location.href = oResponse.redirectTo;
@@ -7843,13 +7848,8 @@ var GFormTree = GCore.ExtendClass(GFormField, function() {
 
 		if (gThis.m_oOptions.bChoosable) {
 			gThis.m_jFieldWrapper.empty();
-			for (var i in mValue) {
-				if (i == 'toJSON') {
-					continue;
-				}
-				gThis.m_jFieldWrapper.append('<input type="hidden" name="' + gThis.GetName() + '" value="' + mValue[i] + '"/>');
-				gThis.m_jNode.find('input:radio[value="' + mValue[i] + '"]').click();
-			}
+			gThis.m_jFieldWrapper.append('<input type="hidden" name="' + gThis.GetName() + '" value="' + mValue + '"/>');
+			gThis.m_jNode.find('input:radio[value="' + mValue + '"]').click();
 		}
 		else if (gThis.m_oOptions.bSelectable) {
 			gThis.m_jNode.unCheckCheckboxes();
