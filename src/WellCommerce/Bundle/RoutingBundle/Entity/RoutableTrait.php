@@ -20,17 +20,17 @@ namespace WellCommerce\Bundle\RoutingBundle\Entity;
 trait RoutableTrait
 {
     protected $needsFlush = false;
-
+    
     /**
      * @var string
      */
     protected $slug;
-
+    
     public function getSlug() : string
     {
         return $this->slug;
     }
-
+    
     public function setSlug(string $slug)
     {
         $this->slug = $slug;
@@ -38,12 +38,17 @@ trait RoutableTrait
             $this->route->setPath($slug);
         }
     }
-
-    public function getRoute() : RouteInterface
+    
+    public function getRoute()
     {
         return $this->route;
     }
-
+    
+    public function hasRoute() : bool
+    {
+        return $this->route instanceof RouteInterface;
+    }
+    
     public function setRoute(RouteInterface $route)
     {
         $this->route = $route;

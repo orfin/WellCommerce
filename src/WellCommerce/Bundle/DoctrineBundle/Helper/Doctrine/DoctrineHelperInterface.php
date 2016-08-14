@@ -32,9 +32,7 @@ interface DoctrineHelperInterface
     public function getEntityManager() : EntityManager;
 
     public function getRepositoryForClass(string $className) : EntityRepository;
-    
-    public function clearResultCache(string $resultCacheId) : bool;
-    
+
     public function disableFilter(string $filter);
 
     public function enableFilter(string $filter) : SQLFilter;

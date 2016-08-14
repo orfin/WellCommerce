@@ -37,7 +37,7 @@ class DataSetPaginator implements DataSetPaginatorInterface
         
         $query = $builder->getQuery();
         $query->useQueryCache(true);
-        $query->useResultCache(true, 3600, 'dataset_paginator');
+        $query->useResultCache(true, 3600, self::RESULT_CACHE_ID);
         $paginator = new Paginator($query, true);
         $paginator->setUseOutputWalkers(false);
         

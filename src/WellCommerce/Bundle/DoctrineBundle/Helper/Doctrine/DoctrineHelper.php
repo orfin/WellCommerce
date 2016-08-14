@@ -59,11 +59,6 @@ final class DoctrineHelper implements DoctrineHelperInterface
         return $this->getEntityManager()->getFilters();
     }
     
-    public function clearResultCache(string $resultCacheId) : bool
-    {
-        return $this->getEntityManager()->getConfiguration()->getResultCacheImpl()->delete($resultCacheId);
-    }
-    
     public function getEntityManager() : EntityManager
     {
         return $this->registry->getManager();

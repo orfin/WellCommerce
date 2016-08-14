@@ -19,6 +19,7 @@ use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 use WellCommerce\Bundle\DoctrineBundle\Manager\ManagerInterface;
 use WellCommerce\Bundle\OrderBundle\Provider\Admin\OrderProviderInterface;
 use WellCommerce\Component\DataGrid\DataGridInterface;
+use WellCommerce\Component\DataSet\Paginator\DataSetPaginatorInterface;
 use WellCommerce\Component\Form\FormBuilderInterface;
 
 /**
@@ -114,8 +115,6 @@ abstract class AbstractAdminController extends AbstractController implements Adm
             return $this->jsonResponse(['error' => $e->getTraceAsString()]);
         }
     
-        $this->getDoctrineHelper()->clearResultCache('dataset_paginator');
-        
         return $this->jsonResponse(['success' => true]);
     }
     
@@ -129,8 +128,6 @@ abstract class AbstractAdminController extends AbstractController implements Adm
         }
         
         $this->getEntityManager()->flush();
-        
-        $this->getDoctrineHelper()->clearResultCache('dataset_paginator');
         
         return $this->jsonResponse(['success' => true]);
     }

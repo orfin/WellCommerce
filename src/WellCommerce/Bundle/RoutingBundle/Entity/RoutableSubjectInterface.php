@@ -20,14 +20,16 @@ namespace WellCommerce\Bundle\RoutingBundle\Entity;
 interface RoutableSubjectInterface
 {
     public function getLocale();
-
+    
     public function getTranslatable();
-
+    
     public function getSlug() : string;
-
-    public function getRoute() : RouteInterface;
-
+    
+    public function getRoute();
+    
+    public function hasRoute() : bool;
+    
     public function setRoute(RouteInterface $route);
-
+    
     public function getRouteEntity() : RouteInterface;
 }

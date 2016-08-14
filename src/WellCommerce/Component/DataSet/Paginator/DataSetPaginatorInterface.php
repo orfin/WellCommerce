@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Component\DataSet\Paginator;
 
-use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Component\DataSet\Column\ColumnCollection;
 
@@ -23,6 +22,8 @@ use WellCommerce\Component\DataSet\Column\ColumnCollection;
  */
 interface DataSetPaginatorInterface
 {
+    CONST RESULT_CACHE_ID = 'dataset_paginator';
+    
     /**
      * Returns total count
      *

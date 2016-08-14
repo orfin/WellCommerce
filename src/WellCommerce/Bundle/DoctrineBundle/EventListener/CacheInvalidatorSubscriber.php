@@ -16,6 +16,7 @@ use Cache\Taggable\TaggablePoolInterface;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\OnFlushEventArgs;
 use Doctrine\ORM\Events;
+use WellCommerce\Component\DataSet\Paginator\DataSetPaginatorInterface;
 
 /**
  * Class CacheInvalidatorSubscriber
@@ -38,31 +39,32 @@ class CacheInvalidatorSubscriber implements EventSubscriber
     {
         $this->cachePool = $cachePool;
     }
-
+    
     public function onFlush(OnFlushEventArgs $args)
     {
         $em  = $args->getEntityManager();
         $uow = $em->getUnitOfWork();
-
+        
         $scheduledEntityChanges = [
             'insert' => $uow->getScheduledEntityInsertions(),
             'update' => $uow->getScheduledEntityUpdates(),
             'delete' => $uow->getScheduledEntityDeletions()
         ];
-
+        
         $cacheIds = [];
-
+        
         foreach ($scheduledEntityChanges as $change => $entities) {
             foreach ($entities as $entity) {
                 $cacheIds[get_class($entity)] = get_class($entity);
             }
         }
-
+        
         if (count($cacheIds)) {
             $this->cachePool->clearTags($cacheIds);
+            $em->getConfiguration()->getResultCacheImpl()->delete(DataSetPaginatorInterface::RESULT_CACHE_ID);
         }
     }
-
+    
     public function getSubscribedEvents()
     {
         return [
