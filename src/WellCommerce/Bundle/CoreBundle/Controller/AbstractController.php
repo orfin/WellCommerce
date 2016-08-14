@@ -77,7 +77,7 @@ abstract class AbstractController extends AbstractContainerAware implements Cont
             'name'              => $this->getManager()->getRepository()->getAlias(),
             'validation_groups' => ValidatorHelperInterface::DEFAULT_VALIDATOR_GROUPS
         ];
-        
+
         $config = array_merge($defaultConfig, $config);
         
         return $builder->createForm($config, $resource);
