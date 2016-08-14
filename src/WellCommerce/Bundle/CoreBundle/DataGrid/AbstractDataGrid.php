@@ -35,6 +35,16 @@ use WellCommerce\Component\DataSet\DataSetInterface;
 abstract class AbstractDataGrid extends AbstractContainerAware implements DataGridInterface
 {
     /**
+     * @var string
+     */
+    protected $identifier;
+    
+    /**
+     * @var EventDispatcherInterface
+     */
+    protected $eventDispatcher;
+    
+    /**
      * @var ColumnCollection
      */
     protected $columns;

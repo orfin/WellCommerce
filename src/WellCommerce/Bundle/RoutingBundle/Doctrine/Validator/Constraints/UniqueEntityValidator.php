@@ -24,18 +24,18 @@ use WellCommerce\Bundle\RoutingBundle\Repository\RouteRepositoryInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class UniqueEntityValidator extends ConstraintValidator
+final class UniqueEntityValidator extends ConstraintValidator
 {
     /**
      * @var RouteRepositoryInterface
      */
-    protected $routeRepository;
-
+    private $routeRepository;
+    
     /**
      * @var RouterHelperInterface
      */
-    protected $routerHelper;
-
+    private $routerHelper;
+    
     /**
      * UniqueEntityValidator constructor.
      *
@@ -47,7 +47,7 @@ class UniqueEntityValidator extends ConstraintValidator
         $this->routeRepository = $routeRepository;
         $this->routerHelper    = $routerHelper;
     }
-
+    
     /**
      * Validate the route entity
      *
@@ -57,24 +57,24 @@ class UniqueEntityValidator extends ConstraintValidator
     public function validate($entity, Constraint $constraint)
     {
         if (!$entity instanceof RoutableSubjectInterface) {
-            throw new \InvalidArgumentException('Expected instance of WellCommerce\Bundle\RoutingBundle\Entity\RoutableSubjectInterface');
+            throw new \InvalidArgumentException(sprintf('Expected instance of %s', RoutableSubjectInterface::class));
         }
-
+        
         $route  = $entity->getRoute();
         $slug   = $entity->getSlug();
         $locale = $entity->getLocale();
         $result = $this->routeRepository->findOneBy(['path' => $slug, 'locale' => $locale]);
-
+        
         // route is unique always if no result was found
         if (null === $result) {
             return;
         }
-
+        
         // skip validation if there is exact match
         if ($route instanceof RouteInterface && $result->getIdentifier()->getId() === $route->getIdentifier()->getId()) {
             return;
         }
-
+        
         if ($this->context instanceof ExecutionContextInterface) {
             $this->context
                 ->buildViolation($constraint->message)
@@ -85,13 +85,13 @@ class UniqueEntityValidator extends ConstraintValidator
                 ->addViolation();
         }
     }
-
+    
     /**
      * @param RouteInterface $route
      *
      * @return string
      */
-    protected function generatePath(RouteInterface $route)
+    private function generatePath(RouteInterface $route)
     {
         return $this->routerHelper->generateUrl('dynamic_' . $route->getId());
     }

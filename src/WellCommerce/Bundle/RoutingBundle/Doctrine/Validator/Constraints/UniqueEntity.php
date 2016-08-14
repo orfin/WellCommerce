@@ -19,7 +19,7 @@ use Symfony\Component\Validator\Constraint;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class UniqueEntity extends Constraint
+final class UniqueEntity extends Constraint
 {
     public $message    = 'This value is already used in {{ type }}. Follow <a target="_blank" href="{{ url }}">this link</a>';
     public $service    = 'routing.orm.validator.unique';
