@@ -37,3 +37,11 @@ admin.review.delete:
     options:
         expose: true
         require_admin_permission: review.delete
+
+admin.review.delete_group:
+    path: '/delete_group'
+    defaults:
+        _controller: 'review.controller.admin:deleteGroupAction'
+    options:
+        expose: true
+        require_admin_permission: review.delete

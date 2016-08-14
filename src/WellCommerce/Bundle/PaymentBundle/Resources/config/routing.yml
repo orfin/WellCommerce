@@ -49,6 +49,7 @@ admin.payment_method.index:
         _controller: 'payment_method.controller.admin:indexAction'
     options:
         require_admin_permission: payment_method.index
+
 admin.payment_method.grid:
     path: /admin/configuration/payment/grid
     condition: "request.isXmlHttpRequest()"
@@ -57,12 +58,14 @@ admin.payment_method.grid:
     options:
         expose: true
         require_admin_permission: payment_method.index
+
 admin.payment_method.add:
     path: /admin/configuration/payment/add
     defaults:
         _controller: 'payment_method.controller.admin:addAction'
     options:
         require_admin_permission: payment_method.add
+
 admin.payment_method.edit:
     path: '/admin/configuration/payment/edit/{id}'
     defaults:
@@ -70,10 +73,19 @@ admin.payment_method.edit:
     options:
         expose: true
         require_admin_permission: payment_method.edit
+
 admin.payment_method.delete:
     path: '/admin/configuration/payment/delete/{id}'
     defaults:
         _controller: 'payment_method.controller.admin:deleteAction'
+    options:
+        expose: true
+        require_admin_permission: payment_method.delete
+
+admin.payment_method.delete_group:
+    path: '/admin/configuration/payment/delete_group'
+    defaults:
+        _controller: 'payment_method.controller.admin:deleteGroupAction'
     options:
         expose: true
         require_admin_permission: payment_method.delete

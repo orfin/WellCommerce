@@ -4,6 +4,7 @@ admin.news.index:
         _controller: 'news.controller.admin:indexAction'
     options:
         require_admin_permission: news.index
+
 admin.news.grid:
     path: /admin/cms/news/grid
     condition: "request.isXmlHttpRequest()"
@@ -12,12 +13,14 @@ admin.news.grid:
     options:
         expose: true
         require_admin_permission: news.index
+
 admin.news.add:
     path: /admin/cms/news/add
     defaults:
         _controller: 'news.controller.admin:addAction'
     options:
         require_admin_permission: news.add
+
 admin.news.edit:
     path: '/admin/cms/news/edit/{id}'
     defaults:
@@ -25,10 +28,19 @@ admin.news.edit:
     options:
         expose: true
         require_admin_permission: news.edit
+
 admin.news.delete:
     path: '/admin/cms/news/delete/{id}'
     defaults:
         _controller: 'news.controller.admin:deleteAction'
+    options:
+        expose: true
+        require_admin_permission: news.delete
+
+admin.news.delete_group:
+    path: '/admin/cms/news/delete_group'
+    defaults:
+        _controller: 'news.controller.admin:deleteGroupAction'
     options:
         expose: true
         require_admin_permission: news.delete

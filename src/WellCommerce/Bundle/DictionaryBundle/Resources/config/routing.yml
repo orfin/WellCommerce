@@ -5,6 +5,7 @@ admin.dictionary.index:
     options:
         expose: true
         require_admin_permission: dictionary.index
+
 admin.dictionary.grid:
     path: /admin/configuration/intl/dictionary/grid
     condition: "request.isXmlHttpRequest()"
@@ -13,6 +14,7 @@ admin.dictionary.grid:
     options:
         expose: true
         require_admin_permission: dictionary.index
+
 admin.dictionary.add:
     path: /admin/configuration/intl/dictionary/add
     defaults:
@@ -20,6 +22,7 @@ admin.dictionary.add:
     options:
         expose: true
         require_admin_permission: dictionary.add
+
 admin.dictionary.edit:
     path: '/admin/configuration/intl/dictionary/edit/{id}'
     defaults:
@@ -27,6 +30,7 @@ admin.dictionary.edit:
     options:
         expose: true
         require_admin_permission: dictionary.edit
+
 admin.dictionary.sync:
     path: /admin/configuration/intl/dictionary/sync
     defaults:
@@ -34,10 +38,19 @@ admin.dictionary.sync:
     options:
         expose: true
         require_admin_permission: dictionary.edit
+
 admin.dictionary.delete:
     path: '/admin/configuration/intl/dictionary/delete/{id}'
     defaults:
         _controller: 'dictionary.controller.admin:deleteAction'
+    options:
+        expose: true
+        require_admin_permission: dictionary.delete
+
+admin.dictionary.delete_group:
+    path: '/admin/configuration/intl/dictionary/delete_group'
+    defaults:
+        _controller: 'dictionary.controller.admin:deleteGroupAction'
     options:
         expose: true
         require_admin_permission: dictionary.delete

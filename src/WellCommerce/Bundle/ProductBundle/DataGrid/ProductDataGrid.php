@@ -16,7 +16,9 @@ use WellCommerce\Component\DataGrid\Column\Column;
 use WellCommerce\Component\DataGrid\Column\ColumnCollection;
 use WellCommerce\Component\DataGrid\Column\Options\Appearance;
 use WellCommerce\Component\DataGrid\Column\Options\Filter;
+use WellCommerce\Component\DataGrid\Configuration\EventHandler\DeleteGroupEventHandler;
 use WellCommerce\Component\DataGrid\Configuration\EventHandler\UpdateRowEventHandler;
+use WellCommerce\Component\DataGrid\DataGridInterface;
 use WellCommerce\Component\DataGrid\Options\OptionsInterface;
 
 /**
@@ -42,7 +44,7 @@ class ProductDataGrid extends AbstractDataGrid
                 'type' => Filter::FILTER_BETWEEN,
             ]),
         ]));
-
+        
         $collection->add(new Column([
             'id'         => 'name',
             'caption'    => $this->trans('common.label.name'),
@@ -50,18 +52,18 @@ class ProductDataGrid extends AbstractDataGrid
                 'width' => 200,
             ]),
         ]));
-
+        
         $collection->add(new Column([
             'id'       => 'sku',
             'editable' => true,
             'caption'  => $this->trans('common.label.sku'),
         ]));
-
+        
         $collection->add(new Column([
             'id'      => 'category',
             'caption' => $this->trans('common.label.categories'),
         ]));
-
+        
         $collection->add(new Column([
             'id'       => 'grossAmount',
             'caption'  => $this->trans('common.label.gross_price'),
@@ -70,7 +72,7 @@ class ProductDataGrid extends AbstractDataGrid
                 'type' => Filter::FILTER_BETWEEN,
             ]),
         ]));
-
+        
         $collection->add(new Column([
             'id'       => 'stock',
             'caption'  => $this->trans('common.label.stock'),
@@ -79,7 +81,7 @@ class ProductDataGrid extends AbstractDataGrid
                 'type' => Filter::FILTER_BETWEEN,
             ]),
         ]));
-
+        
         $collection->add(new Column([
             'id'       => 'weight',
             'caption'  => $this->trans('common.label.dimension.weight'),
@@ -89,16 +91,16 @@ class ProductDataGrid extends AbstractDataGrid
             ]),
         ]));
     }
-
+    
     /**
      * {@inheritdoc}
      */
     protected function configureOptions(OptionsInterface $options)
     {
         parent::configureOptions($options);
-
+        
         $eventHandlers = $options->getEventHandlers();
-
+        
         $eventHandlers->add(new UpdateRowEventHandler([
             'function' => $this->getJavascriptFunctionName('update'),
             'route'    => $this->getActionUrl('update'),

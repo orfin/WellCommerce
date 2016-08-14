@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
 use WellCommerce\Component\DataGrid\Column\ColumnCollection;
 use WellCommerce\Component\DataGrid\Configuration\EventHandler\ClickRowEventHandler;
+use WellCommerce\Component\DataGrid\Configuration\EventHandler\DeleteGroupEventHandler;
 use WellCommerce\Component\DataGrid\Configuration\EventHandler\DeleteRowEventHandler;
 use WellCommerce\Component\DataGrid\Configuration\EventHandler\EditRowEventHandler;
 use WellCommerce\Component\DataGrid\Configuration\EventHandler\LoadEventHandler;
@@ -129,6 +130,12 @@ abstract class AbstractDataGrid extends AbstractContainerAware implements DataGr
             'function'   => $this->getJavascriptFunctionName('delete'),
             'row_action' => DataGridInterface::ACTION_DELETE,
             'route'      => $this->getActionUrl('delete'),
+        ]));
+        
+        $eventHandlers->add(new DeleteGroupEventHandler([
+            'function'     => $this->getJavascriptFunctionName('delete_group'),
+            'group_action' => DataGridInterface::ACTION_DELETE_GROUP,
+            'route'        => $this->getActionUrl('delete_group'),
         ]));
     }
     

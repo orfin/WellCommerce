@@ -4,6 +4,7 @@ admin.deliverer.index:
         _controller: 'deliverer.controller.admin:indexAction'
     options:
         require_admin_permission: deliverer.index
+
 admin.deliverer.grid:
     path: /admin/catalog/deliverer/grid
     condition: "request.isXmlHttpRequest()"
@@ -12,12 +13,14 @@ admin.deliverer.grid:
     options:
         expose: true
         require_admin_permission: deliverer.index
+
 admin.deliverer.add:
     path: /admin/catalog/deliverer/add
     defaults:
         _controller: 'deliverer.controller.admin:addAction'
     options:
         require_admin_permission: deliverer.add
+
 admin.deliverer.edit:
     path: '/admin/catalog/deliverer/edit/{id}'
     defaults:
@@ -25,10 +28,19 @@ admin.deliverer.edit:
     options:
         expose: true
         require_admin_permission: deliverer.edit
+
 admin.deliverer.delete:
     path: '/admin/catalog/deliverer/delete/{id}'
     defaults:
         _controller: 'deliverer.controller.admin:deleteAction'
+    options:
+        expose: true
+        require_admin_permission: deliverer.delete
+
+admin.deliverer.delete_group:
+    path: '/admin/catalog/deliverer/delete_group'
+    defaults:
+        _controller: 'deliverer.controller.admin:deleteGroupAction'
     options:
         expose: true
         require_admin_permission: deliverer.delete

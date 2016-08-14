@@ -44,3 +44,11 @@ admin.unit.delete:
     options:
         expose: true
         require_admin_permission: unit.delete
+
+admin.unit.delete_group:
+    path: '/delete_group'
+    defaults:
+        _controller: 'unit.controller.admin:deleteGroupAction'
+    options:
+        expose: true
+        require_admin_permission: unit.delete

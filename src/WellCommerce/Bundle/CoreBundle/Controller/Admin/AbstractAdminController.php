@@ -113,6 +113,24 @@ abstract class AbstractAdminController extends AbstractController implements Adm
         } catch (\Exception $e) {
             return $this->jsonResponse(['error' => $e->getTraceAsString()]);
         }
+    
+        $this->getDoctrineHelper()->clearResultCache('dataset_paginator');
+        
+        return $this->jsonResponse(['success' => true]);
+    }
+    
+    public function deleteGroupAction(Request $request) : Response
+    {
+        $identifiers = $request->request->filter('identifiers');
+        
+        foreach ($identifiers as $id) {
+            $resource = $this->getManager()->getRepository()->findOneBy(['id' => $id]);
+            $this->getManager()->removeResource($resource, false);
+        }
+        
+        $this->getEntityManager()->flush();
+        
+        $this->getDoctrineHelper()->clearResultCache('dataset_paginator');
         
         return $this->jsonResponse(['success' => true]);
     }

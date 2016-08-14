@@ -4,6 +4,7 @@ admin.company.index:
         _controller: 'company.controller.admin:indexAction'
     options:
         require_admin_permission: company.index
+
 admin.company.grid:
     path: /admin/configuration/multistore/company/grid
     condition: "request.isXmlHttpRequest()"
@@ -12,12 +13,14 @@ admin.company.grid:
     options:
         expose: true
         require_admin_permission: company.index
+
 admin.company.add:
     path: /admin/configuration/multistore/company/add
     defaults:
         _controller: 'company.controller.admin:addAction'
     options:
         require_admin_permission: company.add
+
 admin.company.edit:
     path: '/admin/configuration/multistore/company/edit/{id}'
     defaults:
@@ -25,10 +28,19 @@ admin.company.edit:
     options:
         expose: true
         require_admin_permission: company.edit
+
 admin.company.delete:
     path: '/admin/configuration/multistore/company/delete/{id}'
     defaults:
         _controller: 'company.controller.admin:deleteAction'
+    options:
+        expose: true
+        require_admin_permission: company.delete
+
+admin.company.delete_group:
+    path: '/admin/configuration/multistore/company/delete_group'
+    defaults:
+        _controller: 'company.controller.admin:deleteGroupAction'
     options:
         expose: true
         require_admin_permission: company.delete

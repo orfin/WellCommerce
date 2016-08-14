@@ -32,7 +32,7 @@ class Appearance extends AbstractOption
         ]);
 
         $resolver->setDefaults([
-            'column_select'  => false,
+            'column_select'  => true,
             'column_options' => true,
             'header'         => true,
             'filter'         => true,

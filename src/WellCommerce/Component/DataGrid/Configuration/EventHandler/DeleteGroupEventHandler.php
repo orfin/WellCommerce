@@ -34,6 +34,8 @@ class DeleteGroupEventHandler extends AbstractEventHandler
      */
     public function configureOptions(OptionsResolver $resolver)
     {
+        parent::configureOptions($resolver);
+        
         $resolver->setRequired([
             'route',
             'group_action',

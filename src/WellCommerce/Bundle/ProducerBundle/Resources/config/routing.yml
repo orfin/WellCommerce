@@ -4,6 +4,7 @@ admin.producer.index:
         _controller: 'producer.controller.admin:indexAction'
     options:
         require_admin_permission: producer.index
+
 admin.producer.grid:
     path: /admin/catalog/producer/grid
     condition: "request.isXmlHttpRequest()"
@@ -12,12 +13,14 @@ admin.producer.grid:
     options:
         expose: true
         require_admin_permission: producer.index
+
 admin.producer.add:
     path: /admin/catalog/producer/add
     defaults:
         _controller: 'producer.controller.admin:addAction'
     options:
         require_admin_permission: producer.add
+
 admin.producer.edit:
     path: '/admin/catalog/producer/edit/{id}'
     defaults:
@@ -25,10 +28,19 @@ admin.producer.edit:
     options:
         expose: true
         require_admin_permission: producer.edit
+
 admin.producer.delete:
     path: '/admin/catalog/producer/delete/{id}'
     defaults:
         _controller: 'producer.controller.admin:deleteAction'
+    options:
+        expose: true
+        require_admin_permission: producer.delete
+
+admin.producer.delete_group:
+    path: '/admin/catalog/producer/delete_group'
+    defaults:
+        _controller: 'producer.controller.admin:deleteGroupAction'
     options:
         expose: true
         require_admin_permission: producer.delete

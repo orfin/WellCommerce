@@ -44,3 +44,11 @@ admin.layout_box.delete:
     options:
         expose: true
         require_admin_permission: layout_box.delete
+
+admin.layout_box.delete_group:
+    path: '/admin/layout/box/delete_group'
+    defaults:
+        _controller: 'layout_box.controller.admin:deleteGroupAction'
+    options:
+        expose: true
+        require_admin_permission: layout_box.delete

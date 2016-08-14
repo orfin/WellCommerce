@@ -25,7 +25,7 @@ abstract class AbstractOption implements OptionInterface
      * @var array
      */
     protected $options;
-
+    
     /**
      * Constructor
      *
@@ -37,41 +37,35 @@ abstract class AbstractOption implements OptionInterface
         $this->configureOptions($resolver);
         $this->options = $resolver->resolve($options);
     }
-
+    
     /**
      * {@inheritdoc}
      */
     abstract public function configureOptions(OptionsResolver $resolver);
-
-    /**
-     * Checks if key exists in options array
-     *
-     * @param $key
-     *
-     * @return bool
-     */
+    
     public function has(string $key) : bool
     {
         return isset($this->options[$key]);
     }
-
-    /**
-     * Returns option value if exists
-     *
-     * @param $key
-     *
-     * @return mixed
-     * @throws \InvalidArgumentException
-     */
+    
     public function get(string $key)
     {
         if (!$this->has($key)) {
             throw new \InvalidArgumentException(sprintf('DataGrid option key "%s" was not found.', $key));
         }
-
+        
         return $this->options[$key];
     }
-
+    
+    public function set(string $key, $value)
+    {
+        if (!$this->has($key)) {
+            throw new \InvalidArgumentException(sprintf('DataGrid option key "%s" was not found.', $key));
+        }
+        
+        $this->options[$key] = $value;
+    }
+    
     /**
      * Prepares value to use in DataGrid JS configuration
      *
@@ -90,7 +84,7 @@ abstract class AbstractOption implements OptionInterface
                 return "'" . $value . "'";
         }
     }
-
+    
     /**
      * Returns string containing all DataGrid options
      *
@@ -102,7 +96,7 @@ abstract class AbstractOption implements OptionInterface
         foreach ($this->options as $option => $value) {
             $attributes[] = sprintf('%s: %s', $option, $this->prepareValue($value));
         }
-
+        
         return implode(",\n", $attributes);
     }
 }

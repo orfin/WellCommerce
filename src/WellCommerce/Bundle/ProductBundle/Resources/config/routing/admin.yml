@@ -60,3 +60,11 @@ admin.product.delete:
     options:
         expose: true
         require_admin_permission: product.delete
+
+admin.product.delete_group:
+    path: '/delete_group'
+    defaults:
+        _controller: 'product.controller.admin:deleteGroupAction'
+    options:
+        expose: true
+        require_admin_permission: product.delete

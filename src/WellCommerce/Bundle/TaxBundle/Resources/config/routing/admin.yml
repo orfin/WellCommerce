@@ -45,3 +45,11 @@ admin.tax.delete:
     options:
         expose: true
         require_admin_permission: tax.delete
+
+admin.tax.delete_group:
+    path: '/delete_group'
+    defaults:
+        _controller: 'tax.controller.admin:deleteGroupAction'
+    options:
+        expose: true
+        require_admin_permission: tax.delete

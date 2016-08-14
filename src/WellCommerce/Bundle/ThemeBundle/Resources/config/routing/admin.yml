@@ -44,3 +44,11 @@ admin.theme.delete:
     options:
         expose: true
         require_admin_permission: theme.delete
+
+admin.theme.delete_group:
+    path: '/theme/delete_group'
+    defaults:
+        _controller: 'theme.controller.admin:deleteGroupAction'
+    options:
+        expose: true
+        require_admin_permission: theme.delete

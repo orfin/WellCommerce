@@ -45,6 +45,14 @@ admin.shop.delete:
         expose: true
         require_admin_permission: shop.delete
 
+admin.shop.delete_group:
+    path: '/delete_group'
+    defaults:
+        _controller: 'shop.controller.admin:deleteGroupAction'
+    options:
+        expose: true
+        require_admin_permission: shop.delete
+
 admin.shop.change_context:
     path: '/switch/{id}'
     defaults:

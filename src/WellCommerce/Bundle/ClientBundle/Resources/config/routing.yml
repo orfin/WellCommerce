@@ -36,6 +36,15 @@ admin.client.delete:
     options:
         expose: true
         require_admin_permission: client.delete
+
+admin.client.delete_group:
+    path: '/admin/crm/client/delete_group'
+    defaults:
+        _controller: 'client.controller.admin:deleteGroupAction'
+    options:
+        expose: true
+        require_admin_permission: client.delete
+
 front.client.login:
     path: /client/login
     defaults:
@@ -121,6 +130,7 @@ admin.client_group.add:
         _controller: 'client_group.controller.admin:addAction'
     options:
         require_admin_permission: client_group.add
+
 admin.client_group.edit:
     path: '/admin/crm/client/group/edit/{id}'
     defaults:
@@ -128,10 +138,19 @@ admin.client_group.edit:
     options:
         expose: true
         require_admin_permission: client_group.edit
+
 admin.client_group.delete:
     path: '/admin/crm/client/group/delete/{id}'
     defaults:
         _controller: 'client_group.controller.admin:deleteAction'
+    options:
+        expose: true
+        require_admin_permission: client_group.delete
+
+admin.client_group.delete_group:
+    path: '/admin/crm/client/group/delete_group'
+    defaults:
+        _controller: 'client_group.controller.admin:deleteGroupAction'
     options:
         expose: true
         require_admin_permission: client_group.delete

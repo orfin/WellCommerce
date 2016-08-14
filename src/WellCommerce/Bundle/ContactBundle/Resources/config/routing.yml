@@ -37,6 +37,14 @@ admin.contact.delete:
         expose: true
         require_admin_permission: contact.delete
 
+admin.contact.delete_group:
+    path: '/admin/cms/contact/delete_group'
+    defaults:
+        _controller: 'contact.controller.admin:deleteGroupAction'
+    options:
+        expose: true
+        require_admin_permission: contact.delete
+
 front.contact.index:
     path: /contact
     options:

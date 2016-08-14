@@ -4,6 +4,7 @@ admin.media.index:
         _controller: 'media.controller.admin:indexAction'
     options:
         require_admin_permission: media.index
+
 admin.media.grid:
     path: /admin/cms/media/grid
     condition: "request.isXmlHttpRequest()"
@@ -12,12 +13,14 @@ admin.media.grid:
     options:
         expose: true
         require_admin_permission: media.index
+
 admin.media.add:
     path: /admin/cms/media/add
     defaults:
         _controller: 'media.controller.admin:addAction'
     options:
         require_admin_permission: media.add
+
 admin.media.edit:
     path: '/admin/cms/media/edit/{id}'
     defaults:
@@ -25,10 +28,19 @@ admin.media.edit:
     options:
         expose: true
         require_admin_permission: media.edit
+
 admin.media.delete:
     path: '/admin/cms/media/delete/{id}'
     defaults:
         _controller: 'media.controller.admin:deleteAction'
+    options:
+        expose: true
+        require_admin_permission: media.delete
+
+admin.media.delete_group:
+    path: '/admin/cms/media/delete_group'
+    defaults:
+        _controller: 'media.controller.admin:deleteGroupAction'
     options:
         expose: true
         require_admin_permission: media.delete

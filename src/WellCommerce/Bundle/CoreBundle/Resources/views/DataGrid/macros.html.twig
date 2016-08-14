@@ -134,10 +134,10 @@
 
         var func = function(p) {
             oRequest = {
-                ids: p.ids
+                identifiers: p.ids
             }
 
-            DataGrid.MakeRequest(Routing.generate('{{ options.route }}', {ids: p.ids}), {}, function(oData){
+            DataGrid.MakeRequest(Routing.generate('{{ options.route }}'), oRequest, function(oData){
                 if(oData.success){
                     GMessage('Rows successfully deleted');
                     DataGrid.LoadData();

@@ -34,16 +34,16 @@ class DataSetPaginator implements DataSetPaginatorInterface
         if (is_object($having)) {
             $this->replaceHaving($having, $columns, $builder);
         }
-
+        
         $query = $builder->getQuery();
         $query->useQueryCache(true);
-        $query->useResultCache(true);
+        $query->useResultCache(true, 3600, 'dataset_paginator');
         $paginator = new Paginator($query, true);
         $paginator->setUseOutputWalkers(false);
-
+        
         return $paginator->count();
     }
-
+    
     /**
      * Replaces all having clauses and resets DQL's having part
      *
@@ -56,11 +56,11 @@ class DataSetPaginator implements DataSetPaginatorInterface
         foreach ($having->getParts() as $part) {
             $this->replaceSingleHavingClause($part, $columns, $queryBuilder);
         }
-
+        
         $queryBuilder->resetDQLPart('having');
         $queryBuilder->resetDQLPart('groupBy');
     }
-
+    
     /**
      * Replaces a single having clause because scalar types are not supported in doctrine paginator by default
      *
@@ -76,7 +76,7 @@ class DataSetPaginator implements DataSetPaginatorInterface
         $expression = $queryBuilder->expr()->{$operator}($source, $param);
         $queryBuilder->andWhere($expression);
     }
-
+    
     protected function getOperator(string $operator) : string
     {
         $operators = [
@@ -88,7 +88,7 @@ class DataSetPaginator implements DataSetPaginatorInterface
             Query\Expr\Comparison::GTE => 'gte',
             'LIKE'                     => 'like',
         ];
-
+        
         return $operators[$operator] ?? 'eq';
     }
 }

@@ -46,6 +46,14 @@ admin.order.delete:
         expose: true
         require_admin_permission: order.delete
 
+admin.order.delete_group:
+    path: '/admin/order/delete_group'
+    defaults:
+        _controller: 'order.controller.admin:deleteGroupAction'
+    options:
+        expose: true
+        require_admin_permission: order.delete
+
 front.order_cart.index:
     path: /order/cart
     defaults:
@@ -131,6 +139,14 @@ admin.order_status.delete:
         expose: true
         require_admin_permission: order_status.delete
 
+admin.order_status.delete_group:
+    path: '/admin/order/status/delete_group'
+    defaults:
+        _controller: 'order_status.controller.admin:deleteGroupAction'
+    options:
+        expose: true
+        require_admin_permission: order_status.delete
+
 admin.order_status_group.index:
     path: /admin/order/status/group/index
     defaults:
@@ -166,6 +182,14 @@ admin.order_status_group.delete:
     path: '/admin/order/status/group/delete/{id}'
     defaults:
         _controller: 'order_status_group.controller.admin:deleteAction'
+    options:
+        expose: true
+        require_admin_permission: order_status_group.delete
+
+admin.order_status_group.delete_group:
+    path: '/admin/order/status/group/delete_group'
+    defaults:
+        _controller: 'order_status_group.controller.admin:deleteGroupAction'
     options:
         expose: true
         require_admin_permission: order_status_group.delete

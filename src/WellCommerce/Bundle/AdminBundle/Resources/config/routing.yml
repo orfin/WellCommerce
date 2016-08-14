@@ -4,12 +4,14 @@ admin.dashboard.index:
         _controller: 'dashboard.controller.admin:indexAction'
     options:
         require_admin_permission: dashboard.index
+
 admin.user.index:
     path: /admin/user/index
     defaults:
         _controller: 'user.controller.admin:indexAction'
     options:
         require_admin_permission: user.index
+
 admin.user.grid:
     path: /admin/user/grid
     condition: "request.isXmlHttpRequest()"
@@ -18,12 +20,14 @@ admin.user.grid:
     options:
         expose: true
         require_admin_permission: user.index
+
 admin.user.add:
     path: /admin/user/add
     defaults:
         _controller: 'user.controller.admin:addAction'
     options:
         require_admin_permission: user.add
+
 admin.user.edit:
     path: '/admin/user/edit/{id}'
     defaults:
@@ -31,6 +35,7 @@ admin.user.edit:
     options:
         expose: true
         require_admin_permission: user.edit
+
 admin.user.delete:
     path: '/admin/user/delete/{id}'
     defaults:
@@ -38,28 +43,38 @@ admin.user.delete:
     options:
         expose: true
         require_admin_permission: user.delete
+
+admin.user.delete_group:
+    path: '/admin/user/delete_group'
+    defaults:
+        _controller: 'user.controller.admin:deleteGroupAction'
+    options:
+        expose: true
+        require_admin_permission: user.delete
+
 admin.user.login:
     path: /admin/user/login
     defaults:
         _controller: 'user.controller.admin:loginAction'
-    options: {  }
+
 admin.user.reset_password:
     path: /admin/user/reset
     defaults:
         _controller: 'user.controller.admin:resetPasswordAction'
-    options: {  }
+
 admin.user.login_check:
     path: /admin/user/login_check
-    options: {  }
+
 admin.user.logout:
     path: /admin/user/logout
-    options: {  }
+
 admin.user_group.index:
     path: /admin/user/group/index
     defaults:
         _controller: 'user_group.controller.admin:indexAction'
     options:
         require_admin_permission: user_group.index
+
 admin.user_group.grid:
     path: /admin/user/group/grid
     condition: "request.isXmlHttpRequest()"
@@ -68,12 +83,14 @@ admin.user_group.grid:
     options:
         expose: true
         require_admin_permission: user_group.index
+
 admin.user_group.add:
     path: /admin/user/group/add
     defaults:
         _controller: 'user_group.controller.admin:addAction'
     options:
         require_admin_permission: user_group.add
+
 admin.user_group.edit:
     path: '/admin/user/group/edit/{id}'
     defaults:
@@ -81,10 +98,19 @@ admin.user_group.edit:
     options:
         expose: true
         require_admin_permission: user_group.edit
+
 admin.user_group.delete:
     path: '/admin/user/group/delete/{id}'
     defaults:
         _controller: 'user_group.controller.admin:deleteAction'
+    options:
+        expose: true
+        require_admin_permission: user_group.delete
+
+admin.user_group.delete_group:
+    path: '/admin/user/group/delete_group'
+    defaults:
+        _controller: 'user_group.controller.admin:deleteGroupAction'
     options:
         expose: true
         require_admin_permission: user_group.delete

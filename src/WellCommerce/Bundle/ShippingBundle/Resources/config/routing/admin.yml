@@ -44,3 +44,11 @@ admin.shipping_method.delete:
     options:
         expose: true
         require_admin_permission: shipping_method.delete
+
+admin.shipping_method.delete_group:
+    path: '/delete_group'
+    defaults:
+        _controller: 'shipping_method.controller.admin:deleteGroupAction'
+    options:
+        expose: true
+        require_admin_permission: shipping_method.delete

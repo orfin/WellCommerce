@@ -4,6 +4,7 @@ admin.availability.index:
         _controller: 'availability.controller.admin:indexAction'
     options:
         require_admin_permission: availability.index
+
 admin.availability.grid:
     path: /admin/availability/grid
     condition: "request.isXmlHttpRequest()"
@@ -12,12 +13,14 @@ admin.availability.grid:
     options:
         expose: true
         require_admin_permission: availability.index
+
 admin.availability.add:
     path: /admin/availability/add
     defaults:
         _controller: 'availability.controller.admin:addAction'
     options:
         require_admin_permission: availability.add
+
 admin.availability.edit:
     path: '/admin/availability/edit/{id}'
     defaults:
@@ -25,10 +28,19 @@ admin.availability.edit:
     options:
         expose: true
         require_admin_permission: availability.edit
+
 admin.availability.delete:
     path: '/admin/availability/delete/{id}'
     defaults:
         _controller: 'availability.controller.admin:deleteAction'
+    options:
+        expose: true
+        require_admin_permission: availability.delete
+
+admin.availability.delete_group:
+    path: '/admin/availability/delete_group'
+    defaults:
+        _controller: 'availability.controller.admin:deleteGroupAction'
     options:
         expose: true
         require_admin_permission: availability.delete
