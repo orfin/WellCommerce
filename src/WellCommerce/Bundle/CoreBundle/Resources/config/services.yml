@@ -19,7 +19,7 @@ services:
 
     request.helper:
         class: WellCommerce\Bundle\CoreBundle\Helper\Request\RequestHelper
-        arguments: ['@request_stack']
+        arguments: ['@request_stack','%locale%']
 
     environment_helper:
         class: WellCommerce\Bundle\CoreBundle\Helper\Environment\EnvironmentHelper
