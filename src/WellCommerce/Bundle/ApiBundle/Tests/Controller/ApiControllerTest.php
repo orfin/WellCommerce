@@ -50,20 +50,25 @@ class ApiControllerTest extends AbstractTestCase
         $orderBy    = 'id';
         $orderDir   = 'asc';
         $result     = $requestHandler->getManager()->getRepository()->findBy([], [$orderBy => $orderDir], $limit, $offset);
-        $data       = $serializer->serialize($result, 'json', ['group' => $requestHandler->getResourceType()]);
         
-        $url = $this->generateUrl('api.resource.list', [
-            'resourceType' => $requestHandler->getResourceType(),
-            'apiKey'       => $this->apiKey
-        ]);
-        
-        $this->client->request('GET', $url);
-        
-        $this->assertTrue($this->client->getResponse()->isSuccessful());
-        $this->assertEquals($data, $this->client->getResponse()->getContent(), sprintf(
-            'Wrong "list" response received for %s',
-            $requestHandler->getResourceType()
-        ));
+        try {
+            $data = $serializer->serialize($result, 'json', ['group' => $requestHandler->getResourceType()]);
+            
+            $url = $this->generateUrl('api.resource.list', [
+                'resourceType' => $requestHandler->getResourceType(),
+                'apiKey'       => $this->apiKey
+            ]);
+            
+            $this->client->request('GET', $url);
+            
+            $this->assertTrue($this->client->getResponse()->isSuccessful());
+            $this->assertEquals($data, $this->client->getResponse()->getContent(), sprintf(
+                'Wrong "list" response received for %s',
+                $requestHandler->getResourceType()
+            ));
+        } catch (\Exception $e) {
+            throw new \RuntimeException('Cannot serialize data for ' . $requestHandler->getResourceType());
+        }
     }
     
     protected function runRequestHandlerGetTest(RequestHandlerInterface $requestHandler)
