@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\RoutingBundle\Generator;
 
+use Doctrine\Common\Util\Debug;
 use WellCommerce\Bundle\CoreBundle\Helper\Sluggable;
 use WellCommerce\Bundle\DoctrineBundle\Manager\ManagerInterface;
 use WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface;
@@ -76,7 +77,7 @@ final class SlugGenerator implements SlugGeneratorInterface
      */
     private function hasRouteSameLocaleAndId(RouteInterface $route, string $locale, $id) : bool
     {
-        return ($route->getIdentifier()->getId() === $id && $route->getLocale() === $locale);
+        return ((int)$route->getIdentifier()->getId() === (int)$id && $route->getLocale() === $locale);
     }
     
     /**
