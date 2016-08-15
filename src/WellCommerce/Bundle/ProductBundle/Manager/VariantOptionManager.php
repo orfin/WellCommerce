@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\ProductBundle\Manager;
 
-use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
 use WellCommerce\Bundle\DoctrineBundle\Manager\AbstractManager;
 
 /**
