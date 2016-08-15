@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\PageBundle\Factory;
 
-use Doctrine\Common\Collections\Criteria;
 use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 use WellCommerce\Bundle\PageBundle\Entity\Page;
 use WellCommerce\Bundle\PageBundle\Entity\PageInterface;

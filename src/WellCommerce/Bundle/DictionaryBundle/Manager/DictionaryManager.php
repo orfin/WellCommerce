@@ -17,8 +17,8 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Yaml\Yaml;
-use WellCommerce\Bundle\DoctrineBundle\Manager\AbstractManager;
 use WellCommerce\Bundle\DictionaryBundle\Entity\DictionaryInterface;
+use WellCommerce\Bundle\DoctrineBundle\Manager\AbstractManager;
 use WellCommerce\Bundle\LocaleBundle\Entity\LocaleInterface;
 
 /**

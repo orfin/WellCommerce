@@ -16,9 +16,7 @@ use WellCommerce\Component\DataGrid\Column\Column;
 use WellCommerce\Component\DataGrid\Column\ColumnCollection;
 use WellCommerce\Component\DataGrid\Column\Options\Appearance;
 use WellCommerce\Component\DataGrid\Column\Options\Filter;
-use WellCommerce\Component\DataGrid\Configuration\EventHandler\DeleteGroupEventHandler;
 use WellCommerce\Component\DataGrid\Configuration\EventHandler\UpdateRowEventHandler;
-use WellCommerce\Component\DataGrid\DataGridInterface;
 use WellCommerce\Component\DataGrid\Options\OptionsInterface;
 
 /**

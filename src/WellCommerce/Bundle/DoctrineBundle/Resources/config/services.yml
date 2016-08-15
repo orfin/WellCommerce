@@ -2,23 +2,29 @@
 services:
     doctrine.class_metadata.enhancer_collection:
         class: WellCommerce\Bundle\DoctrineBundle\Enhancer\ClassMetadata\ClassMetadataEnhancerCollection
+
     doctrine.class_metadata.enhancer_traverser:
         class: WellCommerce\Bundle\DoctrineBundle\Enhancer\ClassMetadata\ClassMetadataEnhancerTraverser
         arguments: ['@doctrine.class_metadata.enhancer_collection']
+
     doctrine.trait_generator.enhancer_collection:
         class: WellCommerce\Bundle\DoctrineBundle\Enhancer\TraitGenerator\TraitGeneratorEnhancerCollection
+
     doctrine.trait_generator.enhancer_traverser:
         class: WellCommerce\Bundle\DoctrineBundle\Enhancer\TraitGenerator\TraitGeneratorEnhancerTraverser
         arguments: ['@doctrine.trait_generator.enhancer_collection']
+
     doctrine.class_metadata.event_subscriber:
         class: WellCommerce\Bundle\DoctrineBundle\EventListener\ClassMetadataEventSubscriber
         tags:
             - { name: doctrine.event_subscriber, connection: default }
         arguments: ['@doctrine.class_metadata.enhancer_traverser']
+
     doctrine.timestampable.event_subscriber:
         class: WellCommerce\Bundle\DoctrineBundle\EventListener\TimestampableSubscriber
         tags:
             - { name: doctrine.event_subscriber }
+
     doctrine.cache_invalidator.event_subscriber:
         class: WellCommerce\Bundle\DoctrineBundle\EventListener\CacheInvalidatorSubscriber
         tags:

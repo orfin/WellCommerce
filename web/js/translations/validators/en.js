@@ -81,12 +81,12 @@
     Translator.add("This form should not contain extra fields.", "This form should not contain extra fields.", "validators", "en");
     Translator.add("The uploaded file was too large. Please try to upload a smaller file.", "The uploaded file was too large. Please try to upload a smaller file.", "validators", "en");
     Translator.add("The CSRF token is invalid. Please try to resubmit the form.", "The CSRF token is invalid. Please try to resubmit the form.", "validators", "en");
-    Translator.add("client.conditions_not_accepted", "You must accept store conditions", "validators", "en");
-    Translator.add("client.email_not_unique", "You have an account already. Please login first.", "validators", "en");
     Translator.add("contact_ticket.flash.success", "Wiadomo\u015b\u0107 zosta\u0142a wys\u0142ana.", "validators", "en");
     Translator.add("contact_ticket.flash.error", "Wiadomo\u015b\u0107 nie zosta\u0142a wys\u0142ana. Formularz zawiera b\u0142\u0119dy.", "validators", "en");
     Translator.add("contact_ticket.error.email.not_valid", "Podany adres e-mail jest nieprawid\u0142owy", "validators", "en");
     Translator.add("contact_ticket.error.email.not_blank", "Pole \"Adres e-mail\" nie mo\u017ce by\u0107 puste", "validators", "en");
     Translator.add("contact_ticket.error.subject.not_blank", "Pole \"Temat wiadomo\u015bci\" nie mo\u017ce by\u0107 puste", "validators", "en");
     Translator.add("contact_ticket.error.content.not_blank", "Pole \"Tre\u015b\u0107 wiadomo\u015bci\" nie mo\u017ce by\u0107 puste", "validators", "en");
+    Translator.add("client.conditions_not_accepted", "You must accept store conditions", "validators", "en");
+    Translator.add("client.email_not_unique", "You have an account already. Please login first.", "validators", "en");
 })(Translator);

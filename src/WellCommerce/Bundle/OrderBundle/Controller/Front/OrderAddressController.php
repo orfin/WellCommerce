@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Controller\Front;
 
-use Doctrine\Common\Util\Debug;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

@@ -12,10 +12,7 @@
 
 namespace WellCommerce\Bundle\DoctrineBundle\Manager;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
-use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactoryInterface;
-use WellCommerce\Bundle\DoctrineBundle\Helper\Doctrine\DoctrineHelperInterface;
 use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
 
 /**

@@ -21,12 +21,11 @@ use WellCommerce\Bundle\ThemeBundle\Entity\ThemeInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ThemeFactory extends AbstractEntityFactory
+final class ThemeFactory extends AbstractEntityFactory
 {
     public function create() : ThemeInterface
     {
         $theme = new Theme();
-        $theme->setCss($this->createEmptyCollection());
         $theme->setName('');
         $theme->setFolder('');
         

@@ -11,13 +11,10 @@
 
 namespace WellCommerce\Bundle\ClientBundle\Doctrine\Validator\Constraints;
 
-use Doctrine\Common\Util\Debug;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientDetailsInterface;
-use WellCommerce\Bundle\ClientBundle\Repository\ClientRepositoryInterface;
-use WellCommerce\Bundle\CoreBundle\Helper\Router\RouterHelperInterface;
 
 /**
  * Class ClientPasswordValidator

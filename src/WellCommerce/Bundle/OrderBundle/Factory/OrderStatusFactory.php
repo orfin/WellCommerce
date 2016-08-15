@@ -14,10 +14,7 @@ namespace WellCommerce\Bundle\OrderBundle\Factory;
 
 use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderStatus;
-use WellCommerce\Bundle\OrderBundle\Entity\OrderStatusGroupInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderStatusInterface;
-use WellCommerce\Bundle\OrderBundle\Repository\OrderStatusGroupRepository;
-use WellCommerce\Bundle\OrderBundle\Repository\OrderStatusGroupRepositoryInterface;
 
 /**
  * Class OrderStatusFactory

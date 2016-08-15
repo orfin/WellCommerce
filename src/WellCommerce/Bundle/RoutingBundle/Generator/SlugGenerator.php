@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\RoutingBundle\Generator;
 
-use Doctrine\Common\Util\Debug;
 use WellCommerce\Bundle\CoreBundle\Helper\Sluggable;
 use WellCommerce\Bundle\DoctrineBundle\Manager\ManagerInterface;
 use WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface;

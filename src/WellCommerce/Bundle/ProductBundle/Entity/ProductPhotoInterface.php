@@ -16,7 +16,6 @@ use WellCommerce\Bundle\AppBundle\Entity\HierarchyAwareInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 use WellCommerce\Bundle\MediaBundle\Entity\MediaInterface;
-use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareInterface;
 
 /**
  * Interface PhotoInterface

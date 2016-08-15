@@ -12,7 +12,6 @@
 namespace WellCommerce\Component\Form\Event;
 
 use Symfony\Component\EventDispatcher\Event;
-use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 use WellCommerce\Component\Form\Elements\FormInterface;
 use WellCommerce\Component\Form\FormBuilderInterface;
 

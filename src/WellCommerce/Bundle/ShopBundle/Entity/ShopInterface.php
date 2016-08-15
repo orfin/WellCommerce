@@ -12,11 +12,9 @@
 
 namespace WellCommerce\Bundle\ShopBundle\Entity;
 
-use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\AppBundle\Entity\MailerConfiguration;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientGroupAwareInterface;
 use WellCommerce\Bundle\CompanyBundle\Entity\CompanyAwareInterface;
-use WellCommerce\Bundle\CompanyBundle\Entity\CompanyInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;

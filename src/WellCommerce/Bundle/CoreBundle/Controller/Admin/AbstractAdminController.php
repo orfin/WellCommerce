@@ -19,7 +19,6 @@ use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
 use WellCommerce\Bundle\DoctrineBundle\Manager\ManagerInterface;
 use WellCommerce\Bundle\OrderBundle\Provider\Admin\OrderProviderInterface;
 use WellCommerce\Component\DataGrid\DataGridInterface;
-use WellCommerce\Component\DataSet\Paginator\DataSetPaginatorInterface;
 use WellCommerce\Component\Form\FormBuilderInterface;
 
 /**

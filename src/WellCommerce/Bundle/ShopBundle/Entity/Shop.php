@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\ShopBundle\Entity;
 
-use Doctrine\Common\Collections\Collection;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use WellCommerce\Bundle\AppBundle\Entity\MailerConfiguration;

@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\AdminBundle\Factory;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\Bundle\AdminBundle\Entity\UserGroup;
 use WellCommerce\Bundle\AdminBundle\Entity\UserGroupInterface;
 use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;

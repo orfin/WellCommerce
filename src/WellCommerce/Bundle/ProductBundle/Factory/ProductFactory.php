@@ -14,13 +14,10 @@ namespace WellCommerce\Bundle\ProductBundle\Factory;
 
 use WellCommerce\Bundle\AppBundle\Entity\Dimension;
 use WellCommerce\Bundle\AppBundle\Entity\DiscountablePrice;
-use WellCommerce\Bundle\AppBundle\Entity\DiscountablePriceInterface;
 use WellCommerce\Bundle\AppBundle\Entity\Price;
-use WellCommerce\Bundle\AppBundle\Entity\PriceInterface;
 use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
 use WellCommerce\Bundle\ProductBundle\Entity\Product;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
-use WellCommerce\Bundle\UnitBundle\Entity\UnitInterface;
 
 /**
  * Class ProductFactory

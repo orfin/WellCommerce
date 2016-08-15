@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\ReportBundle;
 
-use Symfony\Component\HttpKernel\Bundle\Bundle;
 use WellCommerce\Bundle\CoreBundle\HttpKernel\AbstractWellCommerceBundle;
 
 /**

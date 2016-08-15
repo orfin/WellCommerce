@@ -13,8 +13,6 @@
 namespace WellCommerce\Bundle\ShippingBundle;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\HttpKernel\Bundle\Bundle;
-use WellCommerce\Bundle\CoreBundle\DependencyInjection\Compiler\AutoRegisterServicesPass;
 use WellCommerce\Bundle\CoreBundle\HttpKernel\AbstractWellCommerceBundle;
 use WellCommerce\Bundle\ShippingBundle\DependencyInjection\Compiler;
 

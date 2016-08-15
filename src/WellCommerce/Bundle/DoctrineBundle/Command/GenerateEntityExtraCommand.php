@@ -27,47 +27,8 @@ use Wingu\OctopusCore\Reflection\ReflectionClass;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class GenerateEntityExtraCommand extends ContainerAwareCommand
+final class GenerateEntityExtraCommand extends ContainerAwareCommand
 {
-    /**
-     * @var TraitGeneratorEnhancerCollection
-     */
-    protected $collection;
-    
-    /**
-     * @var TraitGeneratorEnhancerTraverserInterface
-     */
-    protected $traverser;
-    
-    /**
-     * @var Filesystem
-     */
-    protected $filesystem;
-    
-    /**
-     * @var EnvironmentHelperInterface
-     */
-    protected $environmentHelper;
-    
-    /**
-     * GenerateEntityExtraCommand constructor.
-     *
-     * @param TraitGeneratorEnhancerCollection         $collection
-     * @param TraitGeneratorEnhancerTraverserInterface $traverser
-     * @param EnvironmentHelperInterface               $environmentHelper
-     */
-//    public function __construct(
-//        TraitGeneratorEnhancerCollection $collection,
-//        TraitGeneratorEnhancerTraverserInterface $traverser,
-//        EnvironmentHelperInterface $environmentHelper
-//    ) {
-//        parent::__construct();
-//        $this->collection        = $collection;
-//        $this->traverser         = $traverser;
-//        $this->filesystem        = new Filesystem();
-//        $this->environmentHelper = $environmentHelper;
-//    }
-    
     /**
      * {@inheritdoc}
      */
@@ -77,21 +38,17 @@ class GenerateEntityExtraCommand extends ContainerAwareCommand
         $this->setName('wellcommerce:doctrine:generate-entity-extra');
     }
     
-    /**
-     * Executes the command
-     *
-     * @param InputInterface  $input
-     * @param OutputInterface $output
-     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $traits = $this->collection->keys();
-        $output->write('Enhancers: <info>' . $this->collection->count() . '</info>', true);
+        $filesystem = new Filesystem();
+        $collection = $this->getTraitGeneratorEnhancerCollection();
+        $traits     = $collection->keys();
+        $output->write('Enhancers: <info>' . $collection->count() . '</info>', true);
         foreach ($traits as $traitName) {
             $reflectionClass = new ReflectionClass($traitName);
             $output->write('Extending <info>' . $traitName . '</info> finished', true);
             $code = $this->generateTrait($reflectionClass);
-            $this->filesystem->dumpFile($reflectionClass->getFileName(), $code);
+            $filesystem->dumpFile($reflectionClass->getFileName(), $code);
         }
         
         $this->executeMetadataCacheClear($output);
@@ -110,7 +67,7 @@ class GenerateEntityExtraCommand extends ContainerAwareCommand
             'doctrine:cache:clear-metadata'
         ];
         
-        $process = $this->environmentHelper->getProcess($arguments, 360);
+        $process = $this->getEnvironmentHelper()->getProcess($arguments, 360);
         $process->run();
         $output->write($process->getOutput());
     }
@@ -128,7 +85,7 @@ class GenerateEntityExtraCommand extends ContainerAwareCommand
             '--force'
         ];
         
-        $process = $this->environmentHelper->getProcess($arguments, 360);
+        $process = $this->getEnvironmentHelper()->getProcess($arguments, 360);
         $process->run();
         $output->write($process->getOutput());
     }
@@ -143,13 +100,23 @@ class GenerateEntityExtraCommand extends ContainerAwareCommand
     protected function generateTrait(ReflectionClass $reflectionClass) : string
     {
         $generator = new TraitGenerator($reflectionClass->getShortName(), $reflectionClass->getNamespaceName());
-        $this->traverser->traverse($generator);
+        $this->getTraitGeneratorEnhancerTraverser()->traverse($generator);
         
         return '<?php' . str_repeat(PHP_EOL, 2) . $generator->generate();
     }
     
-    private function getTraitGeneratorEnhancer() : TraitGeneratorEnhancerTraverserInterface
+    private function getTraitGeneratorEnhancerCollection() : TraitGeneratorEnhancerCollection
     {
-        
+        return $this->getContainer()->get('doctrine.trait_generator.enhancer_collection');
+    }
+    
+    private function getTraitGeneratorEnhancerTraverser() : TraitGeneratorEnhancerTraverserInterface
+    {
+        return $this->getContainer()->get('doctrine.trait_generator.enhancer_traverser');
+    }
+    
+    private function getEnvironmentHelper() : EnvironmentHelperInterface
+    {
+        return $this->getContainer()->get('environment_helper');
     }
 }

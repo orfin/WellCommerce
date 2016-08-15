@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\ProductBundle\Entity;
 
-use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 use WellCommerce\Bundle\RoutingBundle\Entity\Route as BaseRoute;
 use WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface;
 

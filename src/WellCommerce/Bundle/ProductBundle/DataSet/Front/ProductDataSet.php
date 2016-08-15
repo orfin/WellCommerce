@@ -16,7 +16,6 @@ use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
-use WellCommerce\Bundle\CoreBundle\Helper\Request\RequestHelperInterface;
 use WellCommerce\Bundle\CurrencyBundle\Entity\CurrencyRate;
 use WellCommerce\Bundle\ProducerBundle\Entity\Producer;
 use WellCommerce\Bundle\ProducerBundle\Entity\ProducerTranslation;

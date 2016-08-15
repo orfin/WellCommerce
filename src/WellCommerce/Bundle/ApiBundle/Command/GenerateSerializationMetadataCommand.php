@@ -77,7 +77,7 @@ final class GenerateSerializationMetadataCommand extends Command
     protected function configure()
     {
         $this->setDescription('Generates serialization metadata for entities');
-        $this->setName('api:generate:metadata');
+        $this->setName('wellcommerce:api:generate-metadata');
         $this->addOption('force', null, InputOption::VALUE_NONE, 'Force to overwrite existing configuration files.');
     }
     
