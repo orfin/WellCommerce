@@ -154,11 +154,11 @@
 			}
 		});
 
-		$('#copyAddress').unbind('change').bind('change', function(){
+		$('#shippingAddress\\.copyBillingAddress').unbind('change').bind('change', function(){
 			$('#shipping-wrap').collapse($(this).is(':checked') ? 'hide' : 'show');
 		});
 
-        $('#copyAddress').change();
+        $('#shippingAddress\\.copyBillingAddress').change();
 
 		$('#password-collapse').unbind('change').bind('change', function(){
 			$('#password-wrap').collapse($(this).is(':checked') ? 'show' : 'hide');

@@ -31,7 +31,7 @@ final class OrderAddressController extends AbstractFrontController
             'validation_groups' => $this->getValidationGroupsForRequest($request)
         ]);
         
-        if ($form->isSubmitted() && 1 === (int)$request->request->get('shippingAddress.copyBillingAddress')) {
+        if ($form->isSubmitted() && $this->isCopyBillingAddress($request)) {
             $this->copyShippingAddress($request->request);
         }
         
@@ -61,7 +61,7 @@ final class OrderAddressController extends AbstractFrontController
             'order_contact_details',
         ];
         
-        if ($request->isMethod('POST') && 0 === (int)$request->request->filter('shippingAddress.copyBillingAddress')) {
+        if ($request->isMethod('POST') && $this->isCopyBillingAddress($request)) {
             $validationGroups[] = 'order_shipping_address';
         }
         
@@ -75,8 +75,11 @@ final class OrderAddressController extends AbstractFrontController
      */
     private function copyShippingAddress(ParameterBag $parameters)
     {
-        $billingAddress  = $parameters->get('billingAddress');
-        $shippingAddress = [];
+        $billingAddress = $parameters->get('billingAddress');
+        
+        $shippingAddress = [
+            'shippingAddress.copyBillingAddress' => true
+        ];
         
         foreach ($billingAddress as $key => $value) {
             list(, $fieldName) = explode('.', $key);
@@ -84,5 +87,14 @@ final class OrderAddressController extends AbstractFrontController
         }
         
         $parameters->set('shippingAddress', $shippingAddress);
+    }
+    
+    
+    private function isCopyBillingAddress(Request $request) : bool
+    {
+        $shippingAddress    = $request->request->filter('shippingAddress');
+        $copyBillingAddress = $shippingAddress['shippingAddress.copyBillingAddress'] ?? 0;
+        
+        return 1 === (int)$copyBillingAddress;
     }
 }
