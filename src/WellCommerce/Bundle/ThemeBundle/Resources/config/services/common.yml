@@ -26,11 +26,6 @@ services:
         class: WellCommerce\Bundle\ThemeBundle\Locator\TemplateLocator
         arguments: ['@theme.file_locator', '%kernel.cache_dir%']
 
-    theme.fields_generator:
-        class: WellCommerce\Bundle\ThemeBundle\Generator\ThemeFieldsGenerator
-        calls:
-            - [setContainer, ['@service_container']]
-
     theme.template_paths.cache_warmer:
         class: WellCommerce\Bundle\ThemeBundle\CacheWarmer\TemplatePathsCacheWarmer
         public: false

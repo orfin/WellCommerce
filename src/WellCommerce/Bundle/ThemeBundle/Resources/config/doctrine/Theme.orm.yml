@@ -20,9 +20,3 @@ WellCommerce\Bundle\ThemeBundle\Entity\Theme:
             length: 255
             unique: true
             nullable: false
-    oneToMany:
-        css:
-            targetEntity: WellCommerce\Bundle\ThemeBundle\Entity\ThemeCss
-            fetch: LAZY
-            mappedBy: theme
-            orphanRemoval: false

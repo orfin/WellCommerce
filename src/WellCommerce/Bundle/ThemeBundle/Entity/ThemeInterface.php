@@ -43,14 +43,4 @@ interface ThemeInterface extends EntityInterface, TimestampableInterface, Blamea
      * @param string $folder
      */
     public function setFolder(string $folder);
-    
-    /**
-     * @return Collection|ThemeCssInterface[]
-     */
-    public function getCss() : Collection;
-    
-    /**
-     * @param Collection $css
-     */
-    public function setCss(Collection $css);
 }

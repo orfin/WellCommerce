@@ -39,11 +39,6 @@ class Theme implements ThemeInterface
     protected $folder;
     
     /**
-     * @var Collection|ThemeCssInterface[]
-     */
-    protected $css;
-    
-    /**
      * {@inheritdoc}
      */
     public function getName() : string
@@ -73,21 +68,5 @@ class Theme implements ThemeInterface
     public function setFolder(string $folder)
     {
         $this->folder = $folder;
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function getCss() : Collection
-    {
-        return $this->css;
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function setCss(Collection $css)
-    {
-        $this->css = $css;
     }
 }

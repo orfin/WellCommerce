@@ -10,3 +10,11 @@ doctrine:
     orm:
         resolve_target_entities:
             WellCommerce\Bundle\ThemeBundle\Entity\ThemeInterface: WellCommerce\Bundle\ThemeBundle\Entity\Theme
+
+well_commerce_api:
+    request_handler:
+        theme:
+            manager: theme.manager
+    serialization:
+        WellCommerce\Bundle\ThemeBundle\Entity\Theme:
+            mapping: "@WellCommerceThemeBundle/Resources/config/serialization/Theme.yml"
