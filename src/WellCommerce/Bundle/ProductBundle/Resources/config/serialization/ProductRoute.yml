@@ -16,4 +16,3 @@ WellCommerce\Bundle\ProductBundle\Entity\ProductRoute:
         identifier:
             groups:
                 - route
-    callbacks: {  }

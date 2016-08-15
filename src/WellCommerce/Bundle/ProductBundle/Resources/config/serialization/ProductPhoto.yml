@@ -12,15 +12,7 @@ WellCommerce\Bundle\ProductBundle\Entity\ProductPhoto:
             groups:
                 - default
                 - photo
-        createdAt:
-            groups: {  }
-        updatedAt:
-            groups: {  }
     associations:
         photo:
             groups:
                 - photo
-        product:
-            groups:
-                - photo
-    callbacks: {  }

@@ -2,7 +2,7 @@ WellCommerce\Bundle\ProductBundle\Entity\ProductRoute:
     type: entity
     cache:
         usage: NONSTRICT_READ_WRITE
-    table: product_route
+    table: route_product
     manyToOne:
         identifier:
             targetEntity: WellCommerce\Bundle\ProductBundle\Entity\Product

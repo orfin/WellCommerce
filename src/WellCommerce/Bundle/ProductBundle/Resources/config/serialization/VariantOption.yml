@@ -14,4 +14,3 @@ WellCommerce\Bundle\ProductBundle\Entity\VariantOption:
         attributeValue:
             groups:
                 - option
-    callbacks: {  }

@@ -32,10 +32,6 @@ WellCommerce\Bundle\ProductBundle\Entity\Variant:
             groups:
                 - default
                 - variant
-        createdAt:
-            groups: {  }
-        updatedAt:
-            groups: {  }
     associations:
         options:
             groups:
@@ -49,4 +45,3 @@ WellCommerce\Bundle\ProductBundle\Entity\Variant:
         photo:
             groups:
                 - variant
-    callbacks: {  }

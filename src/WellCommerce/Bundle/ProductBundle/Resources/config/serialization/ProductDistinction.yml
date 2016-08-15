@@ -1,4 +1,4 @@
-WellCommerce\Bundle\ProductBundle\Entity\Product\Distinction:
+WellCommerce\Bundle\ProductBundle\Entity\ProductDistinction:
     fields:
         id:
             groups:
@@ -12,15 +12,7 @@ WellCommerce\Bundle\ProductBundle\Entity\Product\Distinction:
             groups:
                 - default
                 - distinction
-        createdAt:
-            groups: {  }
-        updatedAt:
-            groups: {  }
     associations:
-        product:
-            groups:
-                - distinction
         status:
             groups:
                 - distinction
-    callbacks: {  }

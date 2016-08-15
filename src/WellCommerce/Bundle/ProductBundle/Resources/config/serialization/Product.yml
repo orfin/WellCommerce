@@ -84,4 +84,3 @@ WellCommerce\Bundle\ProductBundle\Entity\Product:
         shops:
             groups:
                 - product
-    callbacks: {  }

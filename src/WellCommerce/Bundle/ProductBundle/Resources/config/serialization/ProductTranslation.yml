@@ -35,4 +35,3 @@ WellCommerce\Bundle\ProductBundle\Entity\ProductTranslation:
         translatable:
             groups:
                 - product_translation
-    callbacks: {  }
