@@ -1,5 +1,5 @@
 {% trans_default_domain "wellcommerce" %}
-{% cache 'wellcommerce-default-theme/footer' {time: 3600} %}
+{# {% cache 'wellcommerce-default-theme/footer' {time: 3600} %} #}
 <footer>
     <div class="container">
         <div class="row">
@@ -39,17 +39,15 @@
     <div class="copy">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6 left">
+                <div class="col-lg-6">
                     {{ "now"|date("Y") }} © {{ currentShop().name }} / All rights reserved
                 </div>
-                <div class="col-lg-6 right text-right">
-                    Powered by <a href="http://wellcommerce.org" title="WellCommerce - an open-source e-commerce solution">
-                        <img src="{{ asset('themes/wellcommerce-default-theme/assets/img/footer-print.png') }}"/>
-                    </a>
+                <div class="col-lg-6 text-right">
+                    Powered by <a href="http://wellcommerce.org" class="logo" title="WellCommerce - an open-source e-commerce solution"><img src="{{ asset('themes/wellcommerce-default-theme/assets/img/logo-white.svg') }}"/></a>
                 </div>
             </div>
         </div>
     </div>
     {% include 'WellCommerceAppBundle:Front:modals.html.twig' %}
 </footer>
-{% endcache %}
+{# {% endcache %} #}

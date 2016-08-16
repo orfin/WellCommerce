@@ -1,4 +1,6 @@
 @import 'mixins.less';
+@brand-primary-color: #ffd700;
+@font-primary-color: #dcbc26;
 
 /*
 * DEFAULT PAGE STYLES
@@ -69,18 +71,18 @@ img {
 	}
 
 	&:focus {
-		border-color: #ffd700;
+		border-color: @brand-primary-color;
 		-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(255, 215, 0, .6);
 				box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(255, 215, 0, .6);
 	}
 }
 
 ::selection {
-	background: #ffd700;
+	background: @brand-primary-color;
 }
 
 ::-moz-selection {
-	background: #ffd700;
+	background: @brand-primary-color;
 }
 
 .dropdown-menu > li > a:hover,
@@ -139,7 +141,7 @@ img {
 }
 
 .price {
-	color: #dcbc26;
+	color: @font-primary-color;
 	font-size: 22px;
 	line-height: 1em;
 	font-weight: 300;
@@ -200,7 +202,7 @@ img {
 	}
 
 	&.btn-primary {
-		background: #ffd700;
+		background: @brand-primary-color;
 		color: #454847;
 	}
 
@@ -631,7 +633,7 @@ header {
 
 				tr:last-child td {
 					border-top: 0;
-					background: #ffd700;
+					background: @brand-primary-color;
 					text-transform: uppercase;
 					color: #454847;
 					padding-top: 10px;
@@ -666,7 +668,7 @@ header {
 				}
 
 				td:last-child {
-					color: #dcbc26;
+					color: @font-primary-color;
 					padding-right: 30px;
 
 					small {
@@ -677,7 +679,11 @@ header {
 				}
 
 				.delete {
-					width: 12px;
+					color: #ed1c24;
+				}
+
+				.glyphicon {
+					top: 2px;
 				}
 			}
 		}
@@ -729,7 +735,7 @@ header {
 				}
 
 				&:after {
-					background: #ffd700;
+					background: @brand-primary-color;
 				}
 			}
 
@@ -794,8 +800,13 @@ footer {
 		color: rgba(255, 255, 255, 0.2);
 		line-height: 34px;
 
-		.right > img {
+		.logo {
 			margin-left: 15px;
+
+			img {
+				max-height: 34px;
+				opacity: .2;
+			}
 		}
 	}
 
@@ -926,7 +937,7 @@ footer {
 
 	> a {
 		border-color: #f2cc00;
-		background-color: #ffd700;
+		background-color: @brand-primary-color;
 		color: #555b5a;
 		font-size: 16px;
 
@@ -958,7 +969,7 @@ footer {
 		&.active:hover,
 		&.active {
 			margin-left: -18px;
-			background-color: #ffd700;
+			background-color: @brand-primary-color;
 			color: #555b5a;
 			-webkit-box-shadow: 0 1px 13px rgba(0, 0, 0, 0.1);
 			box-shadow: 0 1px 13px rgba(0, 0, 0, 0.1);
@@ -1263,7 +1274,7 @@ footer {
 	width: 100%;
 
 	.label {
-		background: #ffd700;
+		background: @brand-primary-color;
 		text-transform: uppercase;
 		font-weight: normal;
 		font-size: 10px;
@@ -1278,7 +1289,7 @@ footer {
 			height: 0;
 			border-style: solid;
 			border-width: 7px 0 0 7px;
-			border-color: transparent transparent transparent #ffd700;
+			border-color: transparent transparent transparent @brand-primary-color;
 			display: block;
 			position: absolute;
 			top: -7px;
@@ -1394,31 +1405,23 @@ footer {
 		}
 
 		.showcase-control {
-			width: 13px;
-			height: 23px;
 			position: absolute;
+			font-size: 22px;
+			line-height: 1em;
 			top: 50%;
-			margin-top: -6.5px;
+			.transform(translateY(-50%));
+			.transition(color .3s ease);
 
 			&:hover {
-				background-position-y: bottom;
+				color: @font-primary-color;
 			}
 
 			&.left {
-				background-image: url(../img/carousel_prev.png);
 				left: 20px;
 			}
 
 			&.right {
-				background-image: url(../img/carousel_next.png);
 				right: 20px;
-			}
-
-			span {
-				overflow: hidden;
-				width: 1px;
-				height: 1px;
-				position: absolute;
 			}
 		}
 	}
@@ -1434,7 +1437,7 @@ footer {
 			border-top: 5px solid transparent;
 
 			&.active {
-				border-color: #ffd700;
+				border-color: @brand-primary-color;
 
 				> a {
 					font-weight: 500;
@@ -1916,7 +1919,7 @@ footer {
 		}
 
 		.value {
-			color: #dcbc26;
+			color: @font-primary-color;
 			font-size: 30px;
 			font-weight: 500;
 			line-height: 1;
@@ -2369,11 +2372,27 @@ body {
 		}
 
 		.hamburger-close {
+			position: relative;
 			height: 30px;
 			width: 30px;
 			margin: 15px 0;
-			background: url(../img/hamburger-close.png) no-repeat center center;
+// 			background: url(../img/hamburger-close.png) no-repeat center center;
 			cursor: pointer;
+
+			> span {
+				position: absolute;
+				top: 50%;
+				.transform(translateY(-50%));
+				font-size: 14px;
+
+				&:first-child {
+					left: 4.5px;
+				}
+
+				&:last-child {
+					right: 4.5px;
+				}
+			}
 		}
 	}
 

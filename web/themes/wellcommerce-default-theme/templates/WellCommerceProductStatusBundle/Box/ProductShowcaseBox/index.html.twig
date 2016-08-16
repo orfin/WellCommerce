@@ -24,19 +24,16 @@
 				    </div>
 				    {% endfor %}
 				</div>
-
 				<a class="left showcase-control" href="#showcase-{{ category.id }}" role="button" data-slide="prev">
-					<span>Previous slide</span>
+					<span class="glyphicon glyphicon-menu-left"></span>
 				</a>
-
 				<a class="right showcase-control" href="#showcase-{{ category.id }}" role="button" data-slide="next">
-					<span>Next slide</span>
+					<span class="glyphicon glyphicon-menu-right"></span>
 				</a>
 			</div>
 		</div>
 		{% endfor %}
 	</div>
-
 	<ul class="clearfix" role="tablist">
 		{% for category in showcase.rows %}
 		<li role="presentation" {% if loop.first %}class="active"{% endif %}><a href="#category-{{ category.id }}" aria-controls="category-{{ category.id }}" role="tab" data-toggle="tab">{{ category.name }}</a></li>
