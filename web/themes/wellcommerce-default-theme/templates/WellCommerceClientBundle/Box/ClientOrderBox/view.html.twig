@@ -72,11 +72,11 @@
             <tfoot>
             <tr>
                 <td colspan="3"><strong>{{ order.shippingMethod.translate().name }}</strong></td>
-                <td><strong>{{ format_price(order.shippingTotal.grossAmount, order.currency, order.currency) }}</strong></td>
+                <td><strong>{{ format_price(order.getModifier('shipping_cost').grossAmount, order.currency, order.currency) }}</strong></td>
             </tr>
             <tr>
                 <td colspan="3"><h4>Summary</h4></td>
-                <td><span class="price">{{ format_price(order.orderTotal.grossAmount, order.currency, order.currency) }}</span></td>
+                <td><span class="price">{{ format_price(order.summary.grossAmount, order.currency, order.currency) }}</span></td>
             </tr>
             </tfoot>
 
