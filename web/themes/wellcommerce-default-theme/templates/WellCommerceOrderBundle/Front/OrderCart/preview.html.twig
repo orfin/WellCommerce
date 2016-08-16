@@ -13,7 +13,7 @@
                     <tr>
                         <td>
                             <a href="{{ path('front.order_cart.delete',{"id": item.id }) }}" class="delete" title="Remove item">
-                                <img src="{{ asset('themes/wellcommerce-default-theme/assets/img/delete-ico.png') }}"/>
+                                <span class="glyphicon glyphicon-remove-circle"></span>
                             </a>
                         </td>
                         <td>
@@ -38,7 +38,7 @@
                 <tr>
                     <td colspan="3">
                         <a href="{{ path('front.order_cart.index') }}">
-                            {% trans %}cart.link.checkout{% endtrans %} <img src="{{ asset('themes/wellcommerce-default-theme/assets/img/arrow-right-ico.png') }}"/>
+                            {% trans %}cart.link.checkout{% endtrans %} <span class="glyphicon glyphicon-menu-right"></span>
                         </a>
                     </td>
                     <td>
