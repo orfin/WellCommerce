@@ -37,7 +37,6 @@ class ClientPasswordValidator extends ConstraintValidator
 
         $result = $entity->isPasswordConfirmed();
 
-        // route is unique always if no result was found
         if (true === $result) {
             return;
         }

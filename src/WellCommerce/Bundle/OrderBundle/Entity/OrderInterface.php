@@ -16,6 +16,7 @@ use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientAwareInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddressAwareInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetailsAwareInterface;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientDetailsAwareInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddressAwareInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CouponBundle\Entity\CouponAwareInterface;
@@ -37,6 +38,7 @@ interface OrderInterface extends
     ShopAwareInterface,
     PaymentMethodAwareInterface,
     ClientAwareInterface,
+    ClientDetailsAwareInterface,
     ClientContactDetailsAwareInterface,
     ClientBillingAddressAwareInterface,
     ClientShippingAddressAwareInterface,

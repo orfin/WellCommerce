@@ -15,7 +15,11 @@ namespace WellCommerce\Bundle\OrderBundle\Controller\Front;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 
 /**
  * Class OrderAddressController
@@ -37,6 +41,10 @@ final class OrderAddressController extends AbstractFrontController
         
         if ($form->handleRequest()->isSubmitted()) {
             if ($form->isValid()) {
+                if ($this->isCreateAccount($request)) {
+                    $client = $this->autoRegisterClient($order);
+                    $order->setClient($client);
+                }
                 $this->getManager()->updateResource($order);
                 
                 return $this->getRouterHelper()->redirectTo('front.order_confirm.index');
@@ -65,6 +73,10 @@ final class OrderAddressController extends AbstractFrontController
             $validationGroups[] = 'order_shipping_address';
         }
         
+        if ($request->isMethod('POST') && $this->isCreateAccount($request)) {
+            $validationGroups[] = 'client_registration';
+        }
+        
         return $validationGroups;
     }
     
@@ -89,12 +101,39 @@ final class OrderAddressController extends AbstractFrontController
         $parameters->set('shippingAddress', $shippingAddress);
     }
     
-    
     private function isCopyBillingAddress(Request $request) : bool
     {
         $shippingAddress    = $request->request->filter('shippingAddress');
         $copyBillingAddress = $shippingAddress['shippingAddress.copyBillingAddress'] ?? 0;
         
         return 1 === (int)$copyBillingAddress;
+    }
+    
+    private function isCreateAccount(Request $request) : bool
+    {
+        $clientDetails = $request->request->filter('clientDetails');
+        $createAccount = $clientDetails['clientDetails.createAccount'] ?? 0;
+        
+        return 1 === (int)$createAccount;
+    }
+    
+    private function autoRegisterClient(OrderInterface $order) : ClientInterface
+    {
+        /** @var $client ClientInterface */
+        $client = $this->get('client.manager')->initResource();
+        $client->setClientDetails($order->getClientDetails());
+        $client->setContactDetails($order->getContactDetails());
+        $client->setBillingAddress($order->getBillingAddress());
+        $client->setShippingAddress($order->getShippingAddress());
+        
+        $this->get('client.manager')->createResource($client);
+        
+        $token = new UsernamePasswordToken($client, $client->getPassword(), "client", $client->getRoles());
+        $this->container->get('security.token_storage')->setToken($token);
+        
+        $event = new InteractiveLoginEvent($this->getRequestHelper()->getCurrentRequest(), $token);
+        $this->get("event_dispatcher")->dispatch('security.interactive_login', $event);
+        
+        return $client;
     }
 }

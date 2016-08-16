@@ -30,6 +30,7 @@ client:
         edit: Edit client
         login: 'Sign in'
         register: 'Sign up'
+        create_account: 'Create an account'
         contact_details: 'Contact details'
         footer_links: 'Your account'
         contact_details: Contact details
