@@ -26,22 +26,16 @@ class LoadMediaData extends AbstractDataFixture
 {
     public static $samples
         = [
-            'prod1.jpg',
-            'prod2.jpg',
-            'prod3.jpg',
-            'prod4.jpg',
-            'prod5.jpg',
-            'prod6.jpg',
-            'prod7.jpg',
-            'prod8.jpg',
-            'prod9.jpg',
-            'prod10.jpg',
-            'prod11.jpg',
-            'prod12.jpg',
-            'prod13.jpg',
-            'prod14.jpg',
-            'prod15.jpg',
-            'prod16.jpg'
+            'product1.jpg',
+            'product2.jpg',
+            'product3.jpg',
+            'product4.jpg',
+            'product5.jpg',
+            'product6.jpg',
+            'product7.jpg',
+            'product8.jpg',
+            'product9.jpg',
+            'product10.jpg'
         ];
 
     /**
@@ -53,7 +47,7 @@ class LoadMediaData extends AbstractDataFixture
             return;
         }
 
-        $rootPath   = $this->container->get('kernel')->getRootDir() . '/../web/themes/wellcommerce-default-theme/assets/prod/';
+        $rootPath   = $this->container->get('kernel')->getRootDir() . '/../web/themes/wellcommerce-default-theme/assets/products/';
         $uploader   = $this->container->get('media.uploader');
         $uploadPath = $uploader->getUploadDir('images');
         $filesystem = $this->container->get('filesystem');
