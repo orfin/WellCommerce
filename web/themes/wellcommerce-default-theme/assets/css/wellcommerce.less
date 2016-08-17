@@ -220,7 +220,7 @@ img {
 		color: #555b5a;
 		font-weight: 400;
 
-		&.light {
+		&.btn-light {
 			color: #a7a7a7;
 			font-weight: 300;
 		}
@@ -255,8 +255,29 @@ img {
 		background-color: #3b5998;
 	}
 
-	&.btn-remove img {
-		min-width: 12px;
+	&.btn-remove {
+		color: #e1e1e1;
+
+		> span {
+			position: relative;
+			display: block;
+			width: 12px;
+
+			> span {
+				position: absolute;
+				top: 50%;
+				.transform(translateY(-50%));
+				font-size: 12px;
+
+				&:first-child {
+					left: 3px;
+				}
+
+				&:last-child {
+					right: 3px;
+				}
+			}
+		}
 	}
 
 	&.text-left {
@@ -1417,23 +1438,25 @@ footer {
 			}
 
 			&.left {
-				left: 20px;
+				left: 10px;
 			}
 
 			&.right {
-				right: 20px;
+				right: 10px;
 			}
 		}
 	}
 
 	> ul {
+		display: table;
+		width: 100%;
 		list-style-type: none;
 		padding: 0;
 		margin: 0;
 
 		> li {
 			position: relative;
-			float: left;
+			display: table-cell;
 			border-top: 5px solid transparent;
 
 			&.active {
@@ -1446,7 +1469,8 @@ footer {
 
 			> a {
 				display: block;
-				padding: 10px 35px 15px;
+				padding: 10px 15px 15px;
+				text-align: center;
 				line-height: 20px;
 
 				&:hover {
@@ -2378,20 +2402,13 @@ body {
 			margin: 15px 0;
 // 			background: url(../img/hamburger-close.png) no-repeat center center;
 			cursor: pointer;
+			color: #555b5a;
 
 			> span {
 				position: absolute;
 				top: 50%;
-				.transform(translateY(-50%));
-				font-size: 14px;
-
-				&:first-child {
-					left: 4.5px;
-				}
-
-				&:last-child {
-					right: 4.5px;
-				}
+				left: 50%;
+				.transform(translateX(-50%) translateY(-50%));
 			}
 		}
 	}

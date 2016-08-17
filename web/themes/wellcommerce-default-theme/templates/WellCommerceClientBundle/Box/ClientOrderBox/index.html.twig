@@ -28,7 +28,7 @@
                 <td><strong>{{ format_price(order.summary.grossAmount, order.currency, order.currency) }}</strong></td>
                 <td>{{ order.paymentMethod.translate().name }}</td>
                 <td>{{ order.currentStatus.translate().name }}</td>
-                <td><a href="{{ path('front.client_order.view',{"id": order.id}) }}" class="btn btn-link light">Show details</a></td>
+                <td><a href="{{ path('front.client_order.view',{"id": order.id}) }}" class="btn btn-link btn-light">Show details</a></td>
             </tr>
             {% endfor %}
             </tbody>

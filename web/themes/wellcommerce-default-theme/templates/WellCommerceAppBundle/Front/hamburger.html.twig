@@ -5,13 +5,13 @@
 			<a class="logo pull-left" href="index.php">
 				<img alt="Brand" src="{{ asset( 'themes/wellcommerce-default-theme/assets/img/logo.svg' ) }}">
 			</a>
-
-			<span class="hamburger-close push-hamburger pull-right">
-				<span class="glyphicon glyphicon-menu-right"></span>
-				<span class="glyphicon glyphicon-menu-left"></span>
+			<span class="hamburger-close push-hamburger btn btn-remove pull-right">
+				<span>
+					<span class="glyphicon glyphicon-menu-left"></span>
+					<span class="glyphicon glyphicon-menu-right"></span>
+				</span>
 			</span>
 		</div>
-
 		<ul class="hamburger-nav">
 			{% if categoriesTree()|length > 0 %}
 			<li>
@@ -43,29 +43,26 @@
 			{% endif %}
 			{% endfor %}
 		</ul>
-
 		<ul class="hamburger-tools">
 			{% set currencies = currencies() %}
 			{% if currencies|length > 1 %}
-			<li>
-				<a class="collapsed coll" data-toggle="collapse" href="#currency" aria-expanded="false" aria-controls="#currency">{% trans %}currency.label{% endtrans %}: {{ app.request.session.get('_currency')|upper }} <span class="caret"></span></a>
-				<ul id="currency" class="subcategories collapse">
-					{% for currency in currencies %}
-					<li><a href="{{ path('front.currency.switch',{"currency": currency }) }}">{{ currency }}</a></li>
-					{% endfor %}
-				</ul>
-			</li>
+				<li>
+					<a class="collapsed coll" data-toggle="collapse" href="#currency" aria-expanded="false" aria-controls="#currency">{% trans %}currency.label{% endtrans %}: {{ app.request.session.get('_currency')|upper }} <span class="caret"></span></a>
+					<ul id="currency" class="subcategories collapse">
+						{% for currency in currencies %}
+						<li><a href="{{ path('front.currency.switch',{"currency": currency }) }}">{{ currency }}</a></li>
+						{% endfor %}
+					</ul>
+				</li>
 			{% endif %}
-
 			{% if app.user and is_granted('ROLE_CLIENT') %}
-			<li><a href="{{ path('front.client_settings.index') }}">{% trans %}client.link.settings{% endtrans %}</a></li>
-			<li><a href="{{ path('front.client_order.index') }}">{% trans %}client.link.orders{% endtrans %}</a></li>
-			<li><a href="{{ path('front.client_wishlist.index') }}">{% trans %}client.link.wishlist{% endtrans %}</a></li>
-			<li><a href="{{ path('front.client.logout') }}">{% trans %}client.link.logout{% endtrans %}</a></li>
+				<li><a href="{{ path('front.client_settings.index') }}">{% trans %}client.link.settings{% endtrans %}</a></li>
+				<li><a href="{{ path('front.client_order.index') }}">{% trans %}client.link.orders{% endtrans %}</a></li>
+				<li><a href="{{ path('front.client_wishlist.index') }}">{% trans %}client.link.wishlist{% endtrans %}</a></li>
+				<li><a href="{{ path('front.client.logout') }}">{% trans %}client.link.logout{% endtrans %}</a></li>
 			{%  else %}
-			<li><a href="{{ path('front.client.login') }}">{% trans %}client.link.login{% endtrans %}</a></li>
+				<li><a href="{{ path('front.client.login') }}">{% trans %}client.link.login{% endtrans %}</a></li>
 			{% endif %}
-
 		</ul>
 	</div>
 </div>
