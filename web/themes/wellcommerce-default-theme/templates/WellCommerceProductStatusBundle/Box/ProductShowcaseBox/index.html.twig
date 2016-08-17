@@ -8,12 +8,12 @@
 				    {% for item in category.dataset.rows %}
 				    <div class="item {% if loop.first %}active{% endif %}">
 						<div class="row">
-					        <div class="col-md-7 col-xs-6">
+					        <div class="col-md-7 col-xs-12">
 					            <a href="{{ item.route }}" class="photo text-center">
 					                <img src="{{ image(item.photo, 'large') }}" alt="{{ item.name }}" />
 					            </a>
 					        </div>
-					        <div class="col-md-5 col-xs-6 info">
+					        <div class="col-md-5 col-xs-12 info">
 					            <h3>{{ item.name }}<small>{% trans %}product.label.manufactured_by{% endtrans %} {{ item.producerName }}</small></h3>
 					            <span class="price">{{ format_price(item.price, item.currency) }}</span>
 					            <a href="{{ path('front.order_cart.add',{"id": item.id}) }}" class="btn btn-primary text-left add-cart">
@@ -34,9 +34,11 @@
 		</div>
 		{% endfor %}
 	</div>
-	<ul class="clearfix" role="tablist">
-		{% for category in showcase.rows %}
-		<li role="presentation" {% if loop.first %}class="active"{% endif %}><a href="#category-{{ category.id }}" aria-controls="category-{{ category.id }}" role="tab" data-toggle="tab">{{ category.name }}</a></li>
-		{% endfor %}
-	</ul>
+	<div class="table-responsive">
+		<ul class="clearfix" role="tablist">
+			{% for category in showcase.rows %}
+			<li role="presentation" {% if loop.first %}class="active"{% endif %}><a href="#category-{{ category.id }}" aria-controls="category-{{ category.id }}" role="tab" data-toggle="tab">{{ category.name }}</a></li>
+			{% endfor %}
+		</ul>
+	</div>
 </div>

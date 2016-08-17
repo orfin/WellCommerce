@@ -3,7 +3,7 @@
     <span class="push-search btn btn-link hidden-md hidden-lg"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
     {% if hasCurrentOrder() %}
     <a href="{{ path('front.order_cart.index') }}" class="dropdown-toggle cartQty" data-target="#" data-toggle="dropdown" role="button" aria-expanded="true">
-        Cart<span class="cart-qty">{{ getCurrentOrder().productTotal.quantity }}</span>
+        <span class="hidden-xs">Cart</span><span class="cart-qty">{{ getCurrentOrder().productTotal.quantity }}</span>
     </a>
     <ul class="dropdown-menu" role="menu">
         <li>
@@ -51,7 +51,7 @@
     </ul>
     {% else %}
     <a href="#" class="dropdown-toggle cartQty" data-target="#" role="button" aria-expanded="true">
-        Cart<span class="cart-qty">0</span>
+        <span class="hidden-xs">Cart</span><span class="cart-qty">0</span>
     </a>
     {% endif %}
 </li>
