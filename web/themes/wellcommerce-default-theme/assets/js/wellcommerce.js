@@ -55,9 +55,9 @@ $(document).ready(function () {
         }
     });
 
-	 $('.sliding-search > div > form').click(function(event){
-	     event.stopPropagation();
-	 });
+	$('.sliding-search > div > form').click(function(event){
+		event.stopPropagation();
+	});
 
     $('.push-hamburger').click(function() {
 		$('body').toggleClass('hamburger-is-open');
