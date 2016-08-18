@@ -104,6 +104,7 @@
     Translator.add("client.heading.edit", "Edit client", "wellcommerce", "en");
     Translator.add("client.heading.login", "Sign in", "wellcommerce", "en");
     Translator.add("client.heading.register", "Sign up", "wellcommerce", "en");
+    Translator.add("client.heading.create_account", "Create an account", "wellcommerce", "en");
     Translator.add("client.heading.contact_details", "Contact details", "wellcommerce", "en");
     Translator.add("client.heading.footer_links", "Your account", "wellcommerce", "en");
     Translator.add("client.heading.billing_address", "Billing address", "wellcommerce", "en");

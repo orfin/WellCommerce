@@ -121,6 +121,7 @@
     Translator.add("client.heading.edit", "Edytuj klienta", "wellcommerce", "pl");
     Translator.add("client.heading.login", "Logowanie", "wellcommerce", "pl");
     Translator.add("client.heading.register", "Rejestracja", "wellcommerce", "pl");
+    Translator.add("client.heading.create_account", "Utw\u00f3rz konto w sklepie", "wellcommerce", "pl");
     Translator.add("client.heading.contact_details", "Dane kontaktowe", "wellcommerce", "pl");
     Translator.add("client.heading.footer_links", "Twoje konto", "wellcommerce", "pl");
     Translator.add("client.heading.billing_address", "Adres p\u0142atnika", "wellcommerce", "pl");
