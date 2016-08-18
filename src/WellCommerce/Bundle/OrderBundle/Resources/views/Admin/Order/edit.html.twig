@@ -11,11 +11,11 @@
 
         <fieldset class="no-margin">
             <legend><span>{% trans %}common.fieldset.general{% endtrans %}</span></legend>
-            {{ form_js(form) }}
+            {{ render_form(form) }}
             <div class="layout-two-columns">
                 <div class="column">
                     <h3><span><strong>{% trans %}order_status_history.heading.add{% endtrans %}</strong></span></h3>
-                    {{ form_js(orderStatusHistoryForm) }}
+                    {{ render_form(orderStatusHistoryForm) }}
                 </div>
             </div>
         </fieldset>

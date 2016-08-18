@@ -14,9 +14,9 @@
         caption: '{{ options.caption }}',
         editable: {{ options.editable ? 'true' : 'false' }},
         selectable: {{ options.selectable ? 'true' : 'false' }},
-        sorting: {{ options.sorting|raw }},
-        appearance: {{ options.appearance|raw }},
-        filter: {{ options.filter|raw }}
+        sorting: {{ render_datagrid_options(options.sorting) }},
+        appearance: {{ render_datagrid_options(options.appearance) }},
+        filter: {{ render_datagrid_options(options.filter) }},
     });
 {% endmacro %}
 
@@ -24,10 +24,10 @@
     var options = {
         id: '{{ datagrid.getIdentifier() }}',
         appearance: {
-            {{ datagrid.getOptions().getAppearance()|raw }}
+            {{ render_datagrid_options(datagrid.getOptions().getAppearance()) }}
         },
         mechanics: {
-            {{ datagrid.getOptions().getMechanics()|raw }}
+            {{ render_datagrid_options(datagrid.getOptions().getMechanics()) }}
         },
         event_handlers: {
             {% for name, event in datagrid.getOptions().getEventHandlers() if event.isCustomEvent() == false %}

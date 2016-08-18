@@ -11,6 +11,7 @@
  */
 namespace WellCommerce\Bundle\CoreBundle\Twig\Extension;
 
+use WellCommerce\Component\DataGrid\Configuration\OptionInterface;
 use WellCommerce\Component\DataGrid\DataGridInterface;
 
 
@@ -25,12 +26,12 @@ final class DataGridExtension extends \Twig_Extension
      * @var string Template name
      */
     private $templateName;
-
+    
     /**
      * @var \Twig_Environment
      */
     private $environment;
-
+    
     /**
      * Constructor
      *
@@ -40,7 +41,7 @@ final class DataGridExtension extends \Twig_Extension
     {
         $this->templateName = $templateName;
     }
-
+    
     /**
      * Initializes Twig
      *
@@ -50,19 +51,20 @@ final class DataGridExtension extends \Twig_Extension
     {
         $this->environment = $environment;
     }
-
+    
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('datagrid_renderer', [$this, 'render'], ['is_safe' => ['html', 'javascript']])
+            new \Twig_SimpleFunction('datagrid_renderer', [$this, 'render'], ['is_safe' => ['html', 'javascript']]),
+            new \Twig_SimpleFunction('render_datagrid_options', [$this, 'renderOptions'], ['is_safe' => ['html', 'javascript']])
         ];
     }
-
+    
     public function getName()
     {
         return 'datagrid_renderer';
     }
-
+    
     /**
      * Renders the datagrid
      *
@@ -75,5 +77,10 @@ final class DataGridExtension extends \Twig_Extension
         return $this->environment->render($this->templateName, [
             'datagrid' => $datagrid
         ]);
+    }
+
+    public function renderOptions($options) : string
+    {
+        return $options;
     }
 }

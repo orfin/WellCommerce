@@ -6,7 +6,7 @@
         <li><a href="{{ path('admin.product.index') }}" class="button return"><span></span></a></li>
         <li><a href="#{{ form.getName() }}" rel="submit" class="button"><span>{% trans %}common.button.save_and_finish{% endtrans %}</span></a></li>
     </ul>
-    {{ form_js(form) }}
+    {{ render_form(form) }}
     <script type="text/javascript">
         onTaxAdd = function(oRequest){
             console.log(oRequest);

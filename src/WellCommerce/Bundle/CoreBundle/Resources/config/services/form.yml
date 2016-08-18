@@ -322,7 +322,7 @@ services:
         shared: false
 
     twig.extension.form:
-        class: WellCommerce\Bundle\CoreBundle\Twig\Extension\FormJavascriptExtension
+        class: WellCommerce\Bundle\CoreBundle\Twig\Extension\FormExtension
+        arguments: ['@form.renderer.javascript']
         tags:
             - { name: twig.extension }
-        arguments: ['@form.renderer.javascript']

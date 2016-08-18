@@ -3,6 +3,6 @@
 </form>
 <script type="text/javascript">
 GCore.OnLoad(function () {
-    $('#{{ form.getName() }}').GForm({{ form_javascript(form) }});
+    $('#{{ form.getName() }}').GForm({{ render_form_javascript(form) }});
 });
 </script>

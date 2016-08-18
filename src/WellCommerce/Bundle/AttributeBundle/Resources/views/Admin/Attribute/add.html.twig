@@ -7,5 +7,5 @@
         <li><a href="#{{ form.getName() }}" rel="submit" class="button"><span>{% trans %}common.button.save_and_finish{% endtrans %}</span></a></li>
         <li><a href="#{{ form.getName() }}" rel="submit[next]" class="button"><span>{% trans %}common.button.save_and_add_another{% endtrans %}</span></a></li>
     </ul>
-    {{ form_js(form) }}
+    {{ render_form(form) }}
 {% endblock %}

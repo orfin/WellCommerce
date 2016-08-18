@@ -126,12 +126,15 @@
             currency: '{{ currency }} '
         };
 
+        var labels = '{{ salesChart.labels|json_encode|escape('js') }}';
+        var values = '{{ salesChart.values|json_encode|escape('js') }}';
+
         new Chartist.Line('.sales-chart', {
             fullWidth: true,
             onlyInteger: true,
-            labels: {{ salesChart.labels|json_encode|raw }},
+            labels: $.parseJSON(labels),
             series: [
-                {{ salesChart.values|json_encode|raw }}
+                $.parseJSON(values),
             ]
         }, {
             plugins: [

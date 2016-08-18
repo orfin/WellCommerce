@@ -15,11 +15,11 @@ use WellCommerce\Component\Form\Elements\FormInterface;
 use WellCommerce\Component\Form\Renderer\FormRendererInterface;
 
 /**
- * Class FormJavascriptExtension
+ * Class FormExtension
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-final class FormJavascriptExtension extends \Twig_Extension
+final class FormExtension extends \Twig_Extension
 {
     /**
      * @var FormRendererInterface
@@ -49,27 +49,25 @@ final class FormJavascriptExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('form_js', [$this, 'render'], ['is_safe' => ['html', 'javascript']]),
-            new \Twig_SimpleFunction('form_javascript', [$this, 'renderJavascript'], ['is_safe' => ['html', 'javascript']])
+            new \Twig_SimpleFunction('render_form', [$this, 'renderForm'], ['is_safe' => ['html', 'javascript']]),
+            new \Twig_SimpleFunction('render_form_javascript', [$this, 'renderFormJavascript'], ['is_safe' => ['html', 'javascript']])
         ];
+    }
+    
+    public function renderForm(FormInterface $form) : string
+    {
+        return $this->environment->render($this->renderer->getTemplateName(), [
+            'form' => $form
+        ]);
+    }
+    
+    public function renderFormJavascript(FormInterface $form) : string
+    {
+        return $this->renderer->renderForm($form);
     }
     
     public function getName()
     {
-        return 'form_js';
-    }
-    
-    public function render(FormInterface $form) : string
-    {
-        $templateVars = [
-            'form' => $form
-        ];
-        
-        return $this->environment->render($this->renderer->getTemplateName(), $templateVars);
-    }
-    
-    public function renderJavascript(FormInterface $form) : string
-    {
-        return $this->renderer->renderForm($form);
+        return 'form';
     }
 }
