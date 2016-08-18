@@ -15,6 +15,7 @@ namespace WellCommerce\Bundle\ClientBundle\Controller\Box;
 use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 use WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxSettingsCollection;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 
 /**
  * Class ClientOrderBoxController
@@ -26,25 +27,24 @@ class ClientOrderBoxController extends AbstractBoxController
     public function indexAction(LayoutBoxSettingsCollection $boxSettings) : Response
     {
         $orders = $this->getAuthenticatedClient()->getOrders();
-
+        
         return $this->displayTemplate('index', [
             'orders' => $orders
         ]);
     }
-
+    
     public function viewAction() : Response
     {
-        $id     = (int)$this->getRequestHelper()->getAttributesBagParam('id');
-        $client = $this->getAuthenticatedClient();
-        $order  = $this->get('order.repository')->findOneBy([
+        $id    = (int)$this->getRequestHelper()->getAttributesBagParam('id');
+        $order = $this->get('order.repository')->findOneBy([
             'id'     => $id,
-            'client' => $client
+            'client' => $this->getAuthenticatedClient()
         ]);
-
-        if (null === $order) {
+        
+        if (!$order instanceof OrderInterface) {
             return $this->redirectToAction('index');
         }
-
+        
         return $this->displayTemplate('view', [
             'order' => $order
         ]);

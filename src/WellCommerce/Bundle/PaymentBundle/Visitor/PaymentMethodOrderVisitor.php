@@ -44,7 +44,6 @@ final class PaymentMethodOrderVisitor implements OrderVisitorInterface
     public function visitOrder(OrderInterface $order)
     {
         if (false === $order->hasShippingMethod()) {
-            $order->removeModifier('payment_surcharge');
             $order->setPaymentMethod(null);
             
             return;
@@ -56,11 +55,5 @@ final class PaymentMethodOrderVisitor implements OrderVisitorInterface
         if (false === $order->hasPaymentMethod() || false === $paymentMethods->contains($order->getPaymentMethod())) {
             $order->setPaymentMethod($paymentMethods->first());
         }
-        
-        $modifier = $this->orderModifierProvider->getOrderModifier($order, 'payment_surcharge');
-        $modifier->setCurrency($order->getCurrency());
-        $modifier->setGrossAmount(0);
-        $modifier->setNetAmount(0);
-        $modifier->setTaxAmount(0);
     }
 }

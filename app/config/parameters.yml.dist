@@ -15,7 +15,7 @@ parameters:
     prod_log_path:     "%kernel.logs_dir%/%kernel.environment%.log"
 
     locale:            en
-    secret:            ThisTokenIsNotSoSecretChangeIt
+    secret:            870773bfa775d367fb77df62112586d2762767d8
 
     debug_toolbar:          true
     debug_redirects:        false
