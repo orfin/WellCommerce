@@ -89,8 +89,7 @@ final class PayPalGateway implements PayPalGatewayInterface
             try {
                 $payPalPayment->create($apiContext);
             } catch (PayPalConnectionException $e) {
-                echo $e->getMessage();
-                print_r($e->getData());
+                throw $e;
             }
             
             $payment->setRedirectUrl($payPalPayment->getApprovalLink());
@@ -112,36 +111,36 @@ final class PayPalGateway implements PayPalGatewayInterface
         $ccNumber      = str_replace(' ', '', $request->request->get('number'));
         $ccExpiry      = $request->request->get('expiry');
         $ccCvc         = $request->request->get('cvc');
-
+        
         if (strlen($ccExpiry) == 0 || strlen($ccExpiry) < 5) {
             return new JsonResponse([
                 'success' => false,
                 'message' => 'Upsss! Wygląda na to, że data ważności karty wpisana jest nieprawidłowo. Prosimy wprowadź ją w formacie MM/YY'
             ]);
         }
-
+        
         list($ccExpiryMonth, $ccExpiryYear) = explode('/', $ccExpiry);
         if (substr($ccExpiryMonth, 0, 1) == 0) {
             $ccExpiryMonth = substr($ccExpiryMonth, 1, 1);
         }
-
+        
         $ccExpiryYear = '20' . $ccExpiryYear;
         $cardType     = $this->cardType($ccNumber);
-
+        
         if (strlen($ccExpiryMonth) == 0 || strlen($ccExpiryYear) < 4) {
             return new JsonResponse([
                 'success' => false,
                 'message' => 'Upsss! Wygląda na to, że data ważności karty wpisana jest nieprawidłowo. Prosimy wprowadź ją w formacie MM/YY'
             ]);
         }
-
+        
         if ('' == $cardType) {
             return new JsonResponse([
                 'success' => false,
                 'message' => 'Upsss! Wygląda na to, że wpisany numer karty jest nieprawidłowy. Prosimy wprowadź numer ponownie.'
             ]);
         }
-
+        
         $card = new CreditCard();
         $card->setType($cardType);
         $card->setNumber($ccNumber);
@@ -151,21 +150,21 @@ final class PayPalGateway implements PayPalGatewayInterface
         $card->setFirstName($ccFirstname);
         $card->setLastName($ccLastname);
         $card->setBillingAddress($this->createAddress($order));
-
+        
         $fundingInstrument = new FundingInstrument();
         $fundingInstrument->setCreditCard($card);
-
+        
         $payer = $this->createPayer($configuration['paypal_type']);
         $payer->setFundingInstruments([$fundingInstrument]);
-
+        
         $amount      = $this->createAmount($order);
         $transaction = $this->createTransaction($order);
-
+        
         $payPalPayment = new Payment();
         $payPalPayment->setIntent("sale");
         $payPalPayment->setPayer($payer);
         $payPalPayment->setTransactions([$transaction]);
-
+        
         try {
             $payPalPayment->create($apiContext);
         } catch (PayPalConnectionException $e) {
@@ -196,24 +195,24 @@ final class PayPalGateway implements PayPalGatewayInterface
                     $message = 'Upsss! Podałeś niepoprawne dane karty. Spróbuj ponownie.';
                     break;
             }
-
+            
             return new JsonResponse([
                 'success' => false,
                 'message' => $message
             ]);
         }
-
+        
         $payment->setExternalIdentifier($payPalPayment->getId());
-
+        
         if ($payment->getState() == 'approved') {
             $payment->setState(PaymentInterface::PAYMENT_STATE_APPROVED);
-
+            
             return new JsonResponse([
                 'success' => true,
                 'message' => 'Płatność zakończona sukcesem',
             ]);
         }
-
+        
         return new JsonResponse([
             'success' => false,
             'message' => 'Wystąpił nieoczekiwany błąd. Skontaktuj się z obsługą sklepu'
@@ -262,7 +261,7 @@ final class PayPalGateway implements PayPalGatewayInterface
     {
         $payer = new Payer();
         $payer->setPaymentMethod($paymentMethod);
-
+        
         return $payer;
     }
     
