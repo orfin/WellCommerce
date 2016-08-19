@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\CouponBundle\Checker;
 
 use WellCommerce\Bundle\CouponBundle\Entity\CouponInterface;
-use WellCommerce\Bundle\OrderBundle\Repository\OrderRepositoryInterface;
 
 /**
  * Class CouponChecker

@@ -12,14 +12,10 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\Processor;
 
-use PayPal\Api\Payment;
-use PayPal\Api\RedirectUrls;
-use PayPal\Rest\ApiContext;
-use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
 
 /**
- * Class PayPal
+ * Class PayPalProcessor
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
