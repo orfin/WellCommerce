@@ -20,7 +20,10 @@
         "source": "https://github.com/WellCommerce/WellCommerce/"
     },
     "autoload": {
-        "psr-4": { "": "src/" },
+        "psr-4": {
+            "WellCommerce\\Component\\": "src/WellCommerce/Component",
+            "WellCommerce\\Bundle\\": "src/WellCommerce/Bundle"
+        },
         "files": [ "app/AppKernel.php" ]
     },
     "require": {
