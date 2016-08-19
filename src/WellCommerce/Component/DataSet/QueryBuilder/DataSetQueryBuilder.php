@@ -34,11 +34,6 @@ final class DataSetQueryBuilder implements DataSetQueryBuilderInterface
     private $repository;
 
     /**
-     * @var int
-     */
-    private $paramIteration = 0;
-
-    /**
      * @var ConditionsCollection
      */
     private $conditions;

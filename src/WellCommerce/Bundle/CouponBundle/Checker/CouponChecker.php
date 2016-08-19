@@ -23,24 +23,9 @@ use WellCommerce\Bundle\OrderBundle\Repository\OrderRepositoryInterface;
 final class CouponChecker implements CouponCheckerInterface
 {
     /**
-     * @var OrderRepositoryInterface
-     */
-    private $orderRepository;
-
-    /**
      * @var string
      */
     private $error = '';
-
-    /**
-     * CouponChecker constructor.
-     *
-     * @param OrderRepositoryInterface $orderRepository
-     */
-    public function __construct(OrderRepositoryInterface $orderRepository)
-    {
-        $this->orderRepository = $orderRepository;
-    }
 
     /**
      * {@inheritdoc}

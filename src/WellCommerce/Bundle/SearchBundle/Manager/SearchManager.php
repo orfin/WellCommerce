@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\SearchBundle\Manager;
 
 use Doctrine\Common\Collections\Collection;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use WellCommerce\Component\Search\Adapter\AdapterInterface;
 use WellCommerce\Component\Search\Exception\TypeNotFoundException;
 use WellCommerce\Component\Search\Model\DocumentInterface;
@@ -42,38 +41,27 @@ final class SearchManager implements SearchManagerInterface
      * @var AdapterInterface
      */
     private $adapter;
-
-    /**
-     * @var EventDispatcherInterface
-     */
-    private $eventDispatcher;
-
+    
     /**
      * SearchManager constructor.
      *
-     * @param Collection               $types
-     * @param SearchResultStorage      $storage
-     * @param AdapterInterface         $adapter
-     * @param EventDispatcherInterface $eventDispatcher
+     * @param Collection          $types
+     * @param SearchResultStorage $storage
+     * @param AdapterInterface    $adapter
      */
-    public function __construct(
-        Collection $types,
-        SearchResultStorage $storage,
-        AdapterInterface $adapter,
-        EventDispatcherInterface $eventDispatcher
-    ) {
-        $this->types           = $types;
-        $this->storage         = $storage;
-        $this->adapter         = $adapter;
-        $this->eventDispatcher = $eventDispatcher;
+    public function __construct(Collection $types, SearchResultStorage $storage, AdapterInterface $adapter)
+    {
+        $this->types   = $types;
+        $this->storage = $storage;
+        $this->adapter = $adapter;
     }
     
     public function search(SearchRequestInterface $request) : array
     {
         $result = $this->adapter->search($request);
-
+        
         $this->storage->setResult($result);
-
+        
         return $result;
     }
     

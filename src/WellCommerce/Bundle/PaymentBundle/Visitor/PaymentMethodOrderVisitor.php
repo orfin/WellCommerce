@@ -24,21 +24,6 @@ use WellCommerce\Bundle\OrderBundle\Visitor\OrderVisitorInterface;
 final class PaymentMethodOrderVisitor implements OrderVisitorInterface
 {
     /**
-     * @var OrderModifierProviderInterface
-     */
-    private $orderModifierProvider;
-    
-    /**
-     * PaymentMethodOrderVisitor constructor.
-     *
-     * @param OrderModifierProviderInterface $orderModifierProvider
-     */
-    public function __construct(OrderModifierProviderInterface $orderModifierProvider)
-    {
-        $this->orderModifierProvider = $orderModifierProvider;
-    }
-    
-    /**
      * {@inheritdoc}
      */
     public function visitOrder(OrderInterface $order)

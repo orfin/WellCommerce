@@ -21,7 +21,6 @@ services:
         class: WellCommerce\Bundle\PaymentBundle\Visitor\PaymentMethodOrderVisitor
         tags:
             - { name: order.visitor, alias: payment_method }
-        arguments: ['@order.modifier.provider']
 
     payment_surcharge.order.modifier.configurator:
         class: WellCommerce\Bundle\OrderBundle\Configurator\OrderModifierConfigurator

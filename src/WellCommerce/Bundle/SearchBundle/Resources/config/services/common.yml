@@ -22,7 +22,7 @@ services:
 
     search.manager:
         class: WellCommerce\Bundle\SearchBundle\Manager\SearchManager
-        arguments: ["@search.type.collection", "@search.result.storage", "@search.adapter", "@event_dispatcher"]
+        arguments: ["@search.type.collection", "@search.result.storage", "@search.adapter"]
 
     search_request.request_param_converter:
         class: WellCommerce\Bundle\SearchBundle\Request\ParamConverter\SearchRequestParamConverter

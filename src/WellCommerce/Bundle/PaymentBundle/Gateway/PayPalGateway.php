@@ -157,7 +157,6 @@ final class PayPalGateway implements PayPalGatewayInterface
         $payer = $this->createPayer($configuration['paypal_type']);
         $payer->setFundingInstruments([$fundingInstrument]);
         
-        $amount      = $this->createAmount($order);
         $transaction = $this->createTransaction($order);
         
         $payPalPayment = new Payment();
@@ -240,12 +239,10 @@ final class PayPalGateway implements PayPalGatewayInterface
     
     public function cancelPayment(PaymentInterface $payment, Request $request)
     {
-        // TODO: Implement cancelPayment() method.
     }
     
     public function notifyPayment(PaymentInterface $payment, Request $request)
     {
-        // TODO: Implement notifyPayment() method.
     }
     
     private function createRedirectUrls(PaymentInterface $payment) : RedirectUrls
