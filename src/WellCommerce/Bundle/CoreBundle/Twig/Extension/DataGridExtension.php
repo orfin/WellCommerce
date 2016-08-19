@@ -11,9 +11,7 @@
  */
 namespace WellCommerce\Bundle\CoreBundle\Twig\Extension;
 
-use WellCommerce\Component\DataGrid\Configuration\OptionInterface;
 use WellCommerce\Component\DataGrid\DataGridInterface;
-
 
 /**
  * Class DataGridExtension
@@ -78,7 +76,7 @@ final class DataGridExtension extends \Twig_Extension
             'datagrid' => $datagrid
         ]);
     }
-
+    
     public function renderOptions($options) : string
     {
         return $options;

@@ -17,7 +17,6 @@ use WellCommerce\Bundle\AdminBundle\Entity\UserInterface;
 use WellCommerce\Bundle\AdminBundle\Repository\UserRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
 use WellCommerce\Bundle\DoctrineBundle\Event\EntityEvent;
-use WellCommerce\Bundle\DoctrineBundle\Event\ResourceEvent;
 
 /**
  * Class AdminSubscriber

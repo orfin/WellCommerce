@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\CurrencyBundle\Visitor;
 
-use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 use WellCommerce\Bundle\CurrencyBundle\Converter\CurrencyConverterInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 use WellCommerce\Bundle\OrderBundle\Visitor\OrderVisitorInterface;
