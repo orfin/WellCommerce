@@ -103,8 +103,7 @@ return [
     'carpetmuncher',
     'chink',
     'choad',
-    'clitface'
-    ,
+    'clitface',
     'clusterfuck',
     'cockass',
     'cockbite',

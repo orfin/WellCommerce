@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\ReviewBundle\Checker;
 
 use Expalmer\PhpBadWords\PhpBadWords;
+use ReflectionClass;
 
 /**
  * Class BadWordsChecker
@@ -23,8 +24,10 @@ class BadWordsChecker
 {
     public function isBadWord(string $phrase) : bool
     {
-        $badWords = new PhpBadWords();
-        $badWords->setDictionaryFromFile(__DIR__ . '/dictionary.php');
+        $reflection = new ReflectionClass($this);
+        $directory  = dirname($reflection->getFileName());
+        $badWords   = new PhpBadWords();
+        $badWords->setDictionaryFromFile($directory . '/dictionary.php');
         $badWords->setText($phrase);
         
         return $badWords->check();
