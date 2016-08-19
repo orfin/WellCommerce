@@ -20,6 +20,7 @@ framework:
     trusted_hosts:   ~
     trusted_proxies: ~
     session:
+        name: "WELLSESSID"
         handler_id: session.handler.native_file
         save_path: "%kernel.root_dir%/sessions"
     fragments:       ~
