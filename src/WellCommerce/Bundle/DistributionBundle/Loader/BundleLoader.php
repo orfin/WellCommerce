@@ -14,7 +14,6 @@ namespace WellCommerce\Bundle\DistributionBundle\Loader;
 
 use Bazinga\Bundle\JsTranslationBundle\BazingaJsTranslationBundle;
 use Cache\AdapterBundle\CacheAdapterBundle;
-use Doctrine\Bundle\CoreBundle\CoreBundle;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle;
 use Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle;
