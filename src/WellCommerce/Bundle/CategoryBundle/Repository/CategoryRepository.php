@@ -16,7 +16,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\CategoryBundle\Entity\CategoryInterface;
-use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
+use WellCommerce\Bundle\CoreBundle\Repository\EntityRepository;
 
 /**
  * Class CategoryRepository

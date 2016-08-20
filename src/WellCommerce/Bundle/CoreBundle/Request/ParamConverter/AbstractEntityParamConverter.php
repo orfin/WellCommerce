@@ -16,7 +16,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
+use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**
  * Class AbstractEntityParamConverter

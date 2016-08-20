@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\Factory;
 
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\CoreBundle\Factory\AbstractEntityFactory;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodInterface;
 

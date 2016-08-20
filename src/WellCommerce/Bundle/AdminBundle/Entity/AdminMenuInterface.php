@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\AdminBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\AppBundle\Entity\HierarchyAwareInterface;
-use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\EntityInterface;
 
 /**
  * Interface AdminMenuInterface

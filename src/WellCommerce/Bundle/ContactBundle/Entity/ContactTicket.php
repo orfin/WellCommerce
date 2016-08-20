@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\ContactBundle\Entity;
 
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
-use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableTrait;
+use WellCommerce\Bundle\CoreBundle\Entity\IdentifiableTrait;
 
 /**
  * Class ContactTicket

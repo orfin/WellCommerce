@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\AdminBundle\Repository;
 
-use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
+use WellCommerce\Bundle\CoreBundle\Repository\EntityRepository;
 
 /**
  * Class AdminMenuRepository

@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\AdminBundle\Factory;
 
 use WellCommerce\Bundle\AdminBundle\Entity\Role;
 use WellCommerce\Bundle\AdminBundle\Entity\RoleInterface;
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\CoreBundle\Factory\AbstractEntityFactory;
 
 /**
  * Class RoleFactory

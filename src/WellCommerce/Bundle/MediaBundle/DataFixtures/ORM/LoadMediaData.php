@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\MediaBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use WellCommerce\Bundle\DoctrineBundle\DataFixtures\AbstractDataFixture;
+use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
 use WellCommerce\Bundle\MediaBundle\Entity\Media;
 
 /**

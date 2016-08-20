@@ -13,9 +13,9 @@
 namespace WellCommerce\Bundle\CoreBundle\Test\Manager;
 
 use WellCommerce\Bundle\CoreBundle\Test\AbstractTestCase;
-use WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactoryInterface;
-use WellCommerce\Bundle\DoctrineBundle\Manager\ManagerInterface;
-use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
+use WellCommerce\Bundle\CoreBundle\Factory\EntityFactoryInterface;
+use WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface;
+use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**
  * Class AbstractManagerTestCase

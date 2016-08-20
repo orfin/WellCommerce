@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\AdminBundle\Factory;
 
 use WellCommerce\Bundle\AdminBundle\Entity\User;
 use WellCommerce\Bundle\AdminBundle\Entity\UserInterface;
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\CoreBundle\Factory\AbstractEntityFactory;
 
 /**
  * Class UserFactory

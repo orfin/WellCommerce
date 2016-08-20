@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\ContactBundle\Factory;
 
 use WellCommerce\Bundle\ContactBundle\Entity\ContactTicket;
 use WellCommerce\Bundle\ContactBundle\Entity\ContactTicketInterface;
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\CoreBundle\Factory\AbstractEntityFactory;
 
 /**
  * Class ContactTicketFactory

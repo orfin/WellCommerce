@@ -14,8 +14,8 @@ namespace WellCommerce\Bundle\CoreBundle\Form;
 
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
-use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
-use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\EntityInterface;
+use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 use WellCommerce\Component\Form\DataTransformer\DataTransformerInterface;
 use WellCommerce\Component\Form\Dependencies\DependencyInterface;
 use WellCommerce\Component\Form\Elements\ElementInterface;

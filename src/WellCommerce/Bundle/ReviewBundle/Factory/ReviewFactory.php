@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\ReviewBundle\Factory;
 
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\CoreBundle\Factory\AbstractEntityFactory;
 use WellCommerce\Bundle\ReviewBundle\Entity\Review;
 use WellCommerce\Bundle\ReviewBundle\Entity\ReviewInterface;
 

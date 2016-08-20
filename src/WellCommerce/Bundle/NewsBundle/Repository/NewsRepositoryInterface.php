@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\NewsBundle\Repository;
 
-use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
+use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**
  * Interface NewsRepositoryInterface

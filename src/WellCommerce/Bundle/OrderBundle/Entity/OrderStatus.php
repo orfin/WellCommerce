@@ -14,8 +14,8 @@ namespace WellCommerce\Bundle\OrderBundle\Entity;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
-use WellCommerce\Bundle\DoctrineBundle\Behaviours\Enableable\EnableableTrait;
-use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableTrait;
+use WellCommerce\Bundle\CoreBundle\Behaviours\Enableable\EnableableTrait;
+use WellCommerce\Bundle\CoreBundle\Entity\IdentifiableTrait;
 
 /**
  * Class OrderStatus

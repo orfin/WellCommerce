@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\CouponBundle\Manager;
 
-use WellCommerce\Bundle\DoctrineBundle\Manager\AbstractManager;
+use WellCommerce\Bundle\CoreBundle\Manager\AbstractManager;
 
 /**
  * Class CouponManager

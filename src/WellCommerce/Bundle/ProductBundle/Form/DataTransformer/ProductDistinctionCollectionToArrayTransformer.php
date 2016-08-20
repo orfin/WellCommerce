@@ -17,7 +17,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
-use WellCommerce\Bundle\DoctrineBundle\Manager\ManagerInterface;
+use WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductDistinctionInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 use WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusInterface;

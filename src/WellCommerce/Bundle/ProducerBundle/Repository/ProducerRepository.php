@@ -12,7 +12,7 @@
 namespace WellCommerce\Bundle\ProducerBundle\Repository;
 
 use Doctrine\ORM\QueryBuilder;
-use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
+use WellCommerce\Bundle\CoreBundle\Repository\EntityRepository;
 
 /**
  * Class ProducerRepository

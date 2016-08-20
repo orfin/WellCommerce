@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\AvailabilityBundle\Factory;
 
 use WellCommerce\Bundle\AvailabilityBundle\Entity\Availability;
 use WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityInterface;
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\CoreBundle\Factory\AbstractEntityFactory;
 
 /**
  * Class AvailabilityFactory

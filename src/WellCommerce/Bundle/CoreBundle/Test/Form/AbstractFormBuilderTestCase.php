@@ -77,7 +77,7 @@ abstract class AbstractFormBuilderTestCase extends AbstractTestCase
     }
 
     /**
-     * @return \WellCommerce\Bundle\DoctrineBundle\Factory\EntityFactoryInterface
+     * @return \WellCommerce\Bundle\CoreBundle\Factory\EntityFactoryInterface
      */
     abstract protected function getFactoryService();
 

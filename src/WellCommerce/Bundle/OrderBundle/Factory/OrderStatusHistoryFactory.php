@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Factory;
 
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\CoreBundle\Factory\AbstractEntityFactory;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderStatusHistory;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderStatusHistoryInterface;
 

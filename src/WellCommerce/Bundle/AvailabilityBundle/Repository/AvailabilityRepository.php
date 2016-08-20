@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Bundle\AvailabilityBundle\Repository;
 
-use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
+use WellCommerce\Bundle\CoreBundle\Repository\EntityRepository;
 
 /**
  * Class AvailabilityRepository

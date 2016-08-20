@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Entity;
 
-use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableTrait;
+use WellCommerce\Bundle\CoreBundle\Entity\IdentifiableTrait;
 
 /**
  * Class OrderModifier

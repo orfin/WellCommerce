@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Bundle\ProductStatusBundle\Twig\Extension;
 
-use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
+use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 use WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusInterface;
 use WellCommerce\Component\DataSet\DataSetInterface;
 

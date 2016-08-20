@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\OrderBundle\Factory;
 
 use WellCommerce\Bundle\AppBundle\Entity\DiscountablePrice;
 use WellCommerce\Bundle\AppBundle\Entity\Price;
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\CoreBundle\Factory\AbstractEntityFactory;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderProduct;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderProductInterface;
 

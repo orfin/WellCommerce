@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\DistributionBundle\Entity;
 
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
-use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\EntityInterface;
 
 /**
  * Interface PackageInterface

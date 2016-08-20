@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\RoutingBundle\Manager;
 
-use WellCommerce\Bundle\DoctrineBundle\Manager\AbstractManager;
+use WellCommerce\Bundle\CoreBundle\Manager\AbstractManager;
 
 /**
  * Class RouteManager

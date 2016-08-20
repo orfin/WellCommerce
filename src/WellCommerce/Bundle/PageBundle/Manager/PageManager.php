@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\PageBundle\Manager;
 
-use WellCommerce\Bundle\DoctrineBundle\Manager\AbstractManager;
+use WellCommerce\Bundle\CoreBundle\Manager\AbstractManager;
 
 /**
  * Class PageManager

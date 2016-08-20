@@ -15,7 +15,7 @@ namespace WellCommerce\Bundle\ContactBundle\Factory;
 use WellCommerce\Bundle\ContactBundle\Entity\Contact;
 use WellCommerce\Bundle\ContactBundle\Entity\ContactInterface;
 use WellCommerce\Bundle\ContactBundle\Entity\ContactTranslation;
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\CoreBundle\Factory\AbstractEntityFactory;
 
 /**
  * Class ContactFactory

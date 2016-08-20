@@ -15,7 +15,7 @@ namespace WellCommerce\Bundle\AdminBundle\Repository;
 use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use WellCommerce\Bundle\AdminBundle\Entity\UserInterface;
-use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
+use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**
  * Interface UserRepositoryInterface

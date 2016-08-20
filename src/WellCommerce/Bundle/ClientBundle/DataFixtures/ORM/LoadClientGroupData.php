@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\ClientBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientGroup;
-use WellCommerce\Bundle\DoctrineBundle\DataFixtures\AbstractDataFixture;
+use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
 
 /**
  * Class LoadClientGroupData

@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\ClientBundle\Repository;
 
 use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\QueryBuilder;
-use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
+use WellCommerce\Bundle\CoreBundle\Repository\EntityRepository;
 
 /**
  * Class ClientWishlistRepository

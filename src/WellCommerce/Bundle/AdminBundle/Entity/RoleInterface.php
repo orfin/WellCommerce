@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\AdminBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Security\Core\Role\RoleInterface as BaseRoleInterface;
-use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\EntityInterface;
 
 /**
  * Interface RoleInterface

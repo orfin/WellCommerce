@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Manager;
 
-use WellCommerce\Bundle\DoctrineBundle\Manager\AbstractManager;
+use WellCommerce\Bundle\CoreBundle\Manager\AbstractManager;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderProductInterface;
 use WellCommerce\Bundle\OrderBundle\Exception\ChangeOrderProductQuantityException;

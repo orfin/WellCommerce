@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\MediaBundle\Entity;
 
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
-use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableTrait;
+use WellCommerce\Bundle\CoreBundle\Entity\IdentifiableTrait;
 
 /**
  * Class Media

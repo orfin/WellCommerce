@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\ThemeBundle\Repository;
 
-use WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface;
+use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**
  * Interface ThemeRepositoryInterface

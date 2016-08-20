@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\MediaBundle\Factory;
 
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\CoreBundle\Factory\AbstractEntityFactory;
 use WellCommerce\Bundle\MediaBundle\Entity\Media;
 use WellCommerce\Bundle\MediaBundle\Entity\MediaInterface;
 

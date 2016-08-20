@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\MediaBundle\Uploader;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use WellCommerce\Bundle\CoreBundle\Helper\Validator\ValidatorHelperInterface;
-use WellCommerce\Bundle\DoctrineBundle\Manager\ManagerInterface;
+use WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface;
 use WellCommerce\Bundle\MediaBundle\Entity\MediaInterface;
 use WellCommerce\Bundle\MediaBundle\Exception\InvalidMediaException;
 

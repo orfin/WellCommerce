@@ -15,7 +15,7 @@ namespace WellCommerce\Bundle\ApiBundle\Handler;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\SerializerInterface;
-use WellCommerce\Bundle\DoctrineBundle\Manager\ManagerInterface;
+use WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface;
 
 /**
  * Interface RequestHandlerInterface

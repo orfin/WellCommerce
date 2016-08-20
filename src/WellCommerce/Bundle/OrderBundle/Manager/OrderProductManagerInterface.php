@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Manager;
 
-use WellCommerce\Bundle\DoctrineBundle\Manager\ManagerInterface;
+use WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderProductInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;

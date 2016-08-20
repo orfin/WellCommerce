@@ -19,7 +19,7 @@ use WellCommerce\Bundle\ClientBundle\Factory\ClientDetailsFactory;
 use WellCommerce\Bundle\ClientBundle\Factory\ClientShippingAddressFactory;
 use WellCommerce\Bundle\CoreBundle\Helper\Request\RequestHelperInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Security\SecurityHelperInterface;
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\CoreBundle\Factory\AbstractEntityFactory;
 use WellCommerce\Bundle\OrderBundle\Entity\Order;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderProductTotal;

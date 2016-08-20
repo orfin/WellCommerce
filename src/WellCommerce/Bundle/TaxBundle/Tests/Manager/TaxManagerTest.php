@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\TaxBundle\Tests\Manager;
 
 use WellCommerce\Bundle\CoreBundle\Test\Manager\AbstractManagerTestCase;
-use WellCommerce\Bundle\DoctrineBundle\Manager\ManagerInterface;
+use WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface;
 
 /**
  * Class TaxManagerTest

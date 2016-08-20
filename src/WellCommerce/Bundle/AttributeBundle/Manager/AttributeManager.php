@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\AttributeBundle\Manager;
 
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroupInterface;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeInterface;
-use WellCommerce\Bundle\DoctrineBundle\Manager\AbstractManager;
+use WellCommerce\Bundle\CoreBundle\Manager\AbstractManager;
 
 /**
  * Class AttributeManager

@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\ClientBundle\Factory;
 
 use WellCommerce\Bundle\ClientBundle\Entity\ClientGroup;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientGroupInterface;
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\CoreBundle\Factory\AbstractEntityFactory;
 
 /**
  * Class ClientGroupFactory

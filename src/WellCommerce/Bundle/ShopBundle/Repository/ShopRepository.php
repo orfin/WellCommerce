@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\ShopBundle\Repository;
 
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\QueryBuilder;
-use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
+use WellCommerce\Bundle\CoreBundle\Repository\EntityRepository;
 use WellCommerce\Bundle\ShopBundle\Entity\ShopInterface;
 
 /**

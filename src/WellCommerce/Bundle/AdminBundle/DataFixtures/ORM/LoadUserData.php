@@ -17,7 +17,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use WellCommerce\Bundle\AdminBundle\Entity\UserGroupInterface;
 use WellCommerce\Bundle\AdminBundle\Entity\UserGroupPermission;
 use WellCommerce\Bundle\CoreBundle\Helper\Helper;
-use WellCommerce\Bundle\DoctrineBundle\DataFixtures\AbstractDataFixture;
+use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
 
 /**
  * Class LoadUserData

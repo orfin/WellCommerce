@@ -31,12 +31,12 @@ abstract class AbstractRepositoryTestCase extends AbstractTestCase
         $repository = $this->get();
 
         if (null !== $repository) {
-            $this->assertInstanceOf(\WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface::class, $repository);
+            $this->assertInstanceOf(\WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface::class, $repository);
         }
     }
 
     /**
-     * @return null|\WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface
+     * @return null|\WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface
      */
     protected function get()
     {

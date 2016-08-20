@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\ShippingBundle\Factory;
 
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\CoreBundle\Factory\AbstractEntityFactory;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethod;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface;
 

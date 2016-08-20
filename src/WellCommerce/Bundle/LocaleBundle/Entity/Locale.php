@@ -15,8 +15,8 @@ namespace WellCommerce\Bundle\LocaleBundle\Entity;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use WellCommerce\Bundle\CurrencyBundle\Entity\CurrencyAwareTrait;
-use WellCommerce\Bundle\DoctrineBundle\Behaviours\Enableable\EnableableTrait;
-use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableTrait;
+use WellCommerce\Bundle\CoreBundle\Behaviours\Enableable\EnableableTrait;
+use WellCommerce\Bundle\CoreBundle\Entity\IdentifiableTrait;
 
 /**
  * Class Locale

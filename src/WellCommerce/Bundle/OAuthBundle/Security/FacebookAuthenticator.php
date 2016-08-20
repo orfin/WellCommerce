@@ -29,7 +29,7 @@ use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 use WellCommerce\Bundle\CoreBundle\Helper\Router\RouterHelperInterface;
-use WellCommerce\Bundle\DoctrineBundle\Manager\ManagerInterface;
+use WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface;
 
 /**
  * Class FacebookAuthenticator

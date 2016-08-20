@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\LocaleBundle\Factory;
 
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\CoreBundle\Factory\AbstractEntityFactory;
 use WellCommerce\Bundle\LocaleBundle\Entity\Locale;
 use WellCommerce\Bundle\LocaleBundle\Entity\LocaleInterface;
 

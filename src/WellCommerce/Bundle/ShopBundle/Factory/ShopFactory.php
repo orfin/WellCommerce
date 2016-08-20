@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\ShopBundle\Factory;
 
 use WellCommerce\Bundle\AppBundle\Entity\MailerConfiguration;
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\CoreBundle\Factory\AbstractEntityFactory;
 use WellCommerce\Bundle\ShopBundle\Entity\Shop;
 use WellCommerce\Bundle\ShopBundle\Entity\ShopInterface;
 

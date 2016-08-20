@@ -9,7 +9,7 @@
 WellCommerce\Bundle\ContactBundle\Entity\ContactTicket:
     type: entity
     table: contact_ticket
-    repositoryClass: WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository
+    repositoryClass: WellCommerce\Bundle\CoreBundle\Repository\EntityRepository
     id:
         id:
             type: integer

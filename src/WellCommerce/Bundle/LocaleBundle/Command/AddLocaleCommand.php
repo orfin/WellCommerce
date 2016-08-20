@@ -19,7 +19,7 @@ use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Intl\Intl;
 use WellCommerce\Bundle\CurrencyBundle\DataSet\Admin\CurrencyDataSet;
 use WellCommerce\Bundle\CurrencyBundle\Entity\CurrencyInterface;
-use WellCommerce\Bundle\DoctrineBundle\Manager\ManagerInterface;
+use WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface;
 use WellCommerce\Bundle\LocaleBundle\Copier\LocaleCopierInterface;
 use WellCommerce\Bundle\LocaleBundle\DataSet\Admin\LocaleDataSet;
 use WellCommerce\Bundle\LocaleBundle\Entity\LocaleInterface;

@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\AppBundle\Factory;
 
 use WellCommerce\Bundle\AppBundle\Entity\Price;
 use WellCommerce\Bundle\AppBundle\Entity\PriceInterface;
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\CoreBundle\Factory\AbstractEntityFactory;
 
 /**
  * Class PriceFactory

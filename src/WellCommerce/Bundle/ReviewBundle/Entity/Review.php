@@ -13,8 +13,8 @@
 namespace WellCommerce\Bundle\ReviewBundle\Entity;
 
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
-use WellCommerce\Bundle\DoctrineBundle\Behaviours\Enableable\EnableableTrait;
-use WellCommerce\Bundle\DoctrineBundle\Entity\IdentifiableTrait;
+use WellCommerce\Bundle\CoreBundle\Behaviours\Enableable\EnableableTrait;
+use WellCommerce\Bundle\CoreBundle\Entity\IdentifiableTrait;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareTrait;
 
 /**

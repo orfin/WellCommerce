@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\AdminBundle\Manager;
 
 use WellCommerce\Bundle\AdminBundle\Entity\UserInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Helper;
-use WellCommerce\Bundle\DoctrineBundle\Manager\AbstractManager;
+use WellCommerce\Bundle\CoreBundle\Manager\AbstractManager;
 
 /**
  * Class UserManager

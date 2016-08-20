@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\ShippingBundle\Entity;
 
 use WellCommerce\Bundle\AppBundle\Entity\Price;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
-use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\EntityInterface;
 
 /**
  * Interface ShippingMethodCostInterface

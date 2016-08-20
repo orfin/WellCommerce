@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\CategoryBundle\Manager;
 
 use WellCommerce\Bundle\CategoryBundle\Entity\CategoryInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Sluggable;
-use WellCommerce\Bundle\DoctrineBundle\Manager\AbstractManager;
+use WellCommerce\Bundle\CoreBundle\Manager\AbstractManager;
 use WellCommerce\Bundle\LocaleBundle\Entity\Locale;
 use WellCommerce\Bundle\ShopBundle\Entity\ShopInterface;
 

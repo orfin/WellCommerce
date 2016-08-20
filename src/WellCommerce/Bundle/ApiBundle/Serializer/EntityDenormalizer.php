@@ -100,7 +100,7 @@ class EntityDenormalizer extends AbstractSerializer implements DenormalizerInter
      *
      * @param string $targetClass
      *
-     * @return \WellCommerce\Bundle\DoctrineBundle\Repository\RepositoryInterface
+     * @return \WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface
      */
     protected function getRepositoryByTargetClass($targetClass)
     {

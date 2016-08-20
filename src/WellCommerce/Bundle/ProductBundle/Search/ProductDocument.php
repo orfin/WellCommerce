@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\ProductBundle\Search;
 
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
-use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\EntityInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 use WellCommerce\Component\Search\Model\DocumentInterface;
 use WellCommerce\Component\Search\Model\FieldInterface;

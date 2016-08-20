@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\RoutingBundle\Factory;
 
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\CoreBundle\Factory\AbstractEntityFactory;
 use WellCommerce\Bundle\RoutingBundle\Entity\Route;
 use WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface;
 

@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\AttributeBundle\Factory;
 
 use WellCommerce\Bundle\AttributeBundle\Entity\Attribute;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeInterface;
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\CoreBundle\Factory\AbstractEntityFactory;
 
 /**
  * Class AttributeFactory

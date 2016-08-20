@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\ClientBundle\Manager;
 
 use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientWishlistInterface;
-use WellCommerce\Bundle\DoctrineBundle\Manager\AbstractManager;
+use WellCommerce\Bundle\CoreBundle\Manager\AbstractManager;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 
 /**

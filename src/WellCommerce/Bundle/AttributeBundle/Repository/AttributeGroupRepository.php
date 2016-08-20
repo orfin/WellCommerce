@@ -13,7 +13,7 @@ namespace WellCommerce\Bundle\AttributeBundle\Repository;
 
 use Doctrine\Common\Collections\Criteria;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroupInterface;
-use WellCommerce\Bundle\DoctrineBundle\Repository\EntityRepository;
+use WellCommerce\Bundle\CoreBundle\Repository\EntityRepository;
 
 /**
  * Class AttributeGroupRepository

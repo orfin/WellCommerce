@@ -20,7 +20,7 @@ use WellCommerce\Bundle\ClientBundle\Entity\ClientDetailsAwareInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddressAwareInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CouponBundle\Entity\CouponAwareInterface;
-use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\EntityInterface;
 use WellCommerce\Bundle\OrderBundle\Visitor\OrderVisitorInterface;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodAwareInterface;

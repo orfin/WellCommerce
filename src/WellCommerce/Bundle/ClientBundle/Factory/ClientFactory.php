@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\ClientBundle\Factory;
 
 use WellCommerce\Bundle\ClientBundle\Entity\Client;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\CoreBundle\Factory\AbstractEntityFactory;
 use WellCommerce\Bundle\ShopBundle\Storage\ShopStorage;
 
 /**

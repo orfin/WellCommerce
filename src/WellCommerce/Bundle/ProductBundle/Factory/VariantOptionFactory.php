@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\ProductBundle\Factory;
 
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\CoreBundle\Factory\AbstractEntityFactory;
 use WellCommerce\Bundle\ProductBundle\Entity\VariantOption;
 use WellCommerce\Bundle\ProductBundle\Entity\VariantOptionInterface;
 

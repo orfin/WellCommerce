@@ -19,7 +19,7 @@ use Symfony\Component\Console\Exception\InvalidArgumentException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ChoiceQuestion;
-use WellCommerce\Bundle\DoctrineBundle\Helper\Doctrine\DoctrineHelperInterface;
+use WellCommerce\Bundle\CoreBundle\Helper\Doctrine\DoctrineHelperInterface;
 use WellCommerce\Bundle\LocaleBundle\Entity\LocaleAwareInterface;
 use WellCommerce\Bundle\LocaleBundle\Entity\LocaleInterface;
 use WellCommerce\Bundle\LocaleBundle\Repository\LocaleRepositoryInterface;

@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\ContactBundle\Entity;
 
-use WellCommerce\Bundle\DoctrineBundle\Entity\EntityInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\EntityInterface;
 
 /**
  * Class ReviewInterface

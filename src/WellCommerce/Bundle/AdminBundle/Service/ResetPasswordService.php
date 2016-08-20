@@ -15,7 +15,7 @@ namespace WellCommerce\Bundle\AdminBundle\Service;
 use WellCommerce\Bundle\AdminBundle\Entity\UserInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 use WellCommerce\Bundle\CoreBundle\Helper\Mailer\MailerHelperInterface;
-use WellCommerce\Bundle\DoctrineBundle\Manager\ManagerInterface;
+use WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface;
 use WellCommerce\Bundle\ShopBundle\Storage\ShopStorageInterface;
 
 /**

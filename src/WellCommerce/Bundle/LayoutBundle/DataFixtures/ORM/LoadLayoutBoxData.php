@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\LayoutBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use WellCommerce\Bundle\DoctrineBundle\DataFixtures\AbstractDataFixture;
+use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
 use WellCommerce\Bundle\LayoutBundle\Entity\LayoutBox;
 
 /**

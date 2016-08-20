@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\ThemeBundle\Factory;
 
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\CoreBundle\Factory\AbstractEntityFactory;
 use WellCommerce\Bundle\ThemeBundle\Entity\Theme;
 use WellCommerce\Bundle\ThemeBundle\Entity\ThemeInterface;
 

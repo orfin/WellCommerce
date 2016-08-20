@@ -3,6 +3,7 @@ imports:
     - { resource: 'services/datagrid.yml' }
     - { resource: 'services/dataset.yml' }
     - { resource: 'services/form.yml' }
+    - { resource: 'services/doctrine.yml' }
 
 services:
     flash.helper:

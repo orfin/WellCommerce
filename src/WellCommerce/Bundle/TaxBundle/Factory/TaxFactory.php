@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\TaxBundle\Factory;
 
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\CoreBundle\Factory\AbstractEntityFactory;
 use WellCommerce\Bundle\TaxBundle\Entity\Tax;
 use WellCommerce\Bundle\TaxBundle\Entity\TaxInterface;
 

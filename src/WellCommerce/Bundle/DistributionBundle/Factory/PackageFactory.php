@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\DistributionBundle\Factory;
 
 use WellCommerce\Bundle\DistributionBundle\Entity\Package;
 use WellCommerce\Bundle\DistributionBundle\Entity\PackageInterface;
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\CoreBundle\Factory\AbstractEntityFactory;
 
 /**
  * Class ChannelFactory

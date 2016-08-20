@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\DistributionBundle\Entity\Package;
 use WellCommerce\Bundle\DistributionBundle\Entity\PackageInterface;
 use WellCommerce\Bundle\DistributionBundle\Helper\Package\PackageHelperInterface;
-use WellCommerce\Bundle\DoctrineBundle\Manager\AbstractManager;
+use WellCommerce\Bundle\CoreBundle\Manager\AbstractManager;
 
 /**
  * Class PackageManager

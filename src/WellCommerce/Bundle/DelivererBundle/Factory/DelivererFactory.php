@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\DelivererBundle\Factory;
 
 use WellCommerce\Bundle\DelivererBundle\Entity\Deliverer;
 use WellCommerce\Bundle\DelivererBundle\Entity\DelivererInterface;
-use WellCommerce\Bundle\DoctrineBundle\Factory\AbstractEntityFactory;
+use WellCommerce\Bundle\CoreBundle\Factory\AbstractEntityFactory;
 
 /**
  * Class DelivererFactory
