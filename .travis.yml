@@ -14,7 +14,7 @@ before_install:
     - if [[ $TRAVIS_PHP_VERSION = 7.* ]] ; then pecl config-set preferred_state beta; echo yes | pecl install apcu; fi;
 
 before_script:
-    - if [[ $TRAVIS_PHP_VERSION = 7.* ]] ; then echo '' > ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini; fi;
+    - phpenv config-rm xdebug.ini
     - if [[ $TRAVIS_PHP_VERSION = 7.* ]] ; then echo "zend.enable_gc = 0" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini; fi;
     - if [[ $TRAVIS_PHP_VERSION = 7.* ]] ; then echo "apc.enabled = 1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini; fi;
     - if [[ $TRAVIS_PHP_VERSION = 7.* ]] ; then echo "memory_limit=4096M" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini; fi;
