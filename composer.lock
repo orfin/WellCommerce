@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a694661d32197e5c398444ba3bae85bc",
-    "content-hash": "b5d2a4412eff47b256215461b3462a0c",
+    "hash": "880336f884421cb4bb06266024c19425",
+    "content-hash": "8d57f3602eba5b628575ffb2f4da5ee3",
     "packages": [
         {
             "name": "asm89/twig-cache-extension",
@@ -2302,6 +2302,57 @@
             "time": "2016-04-13 16:32:01"
         },
         {
+            "name": "hirak/prestissimo",
+            "version": "0.3.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hirak/prestissimo.git",
+                "reference": "3a9facbf4e1130f81eacf5a16a256186a3047dff"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hirak/prestissimo/zipball/3a9facbf4e1130f81eacf5a16a256186a3047dff",
+                "reference": "3a9facbf4e1130f81eacf5a16a256186a3047dff",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.0.0",
+                "ext-curl": "*",
+                "php": "^5.3.2 || ^7.0"
+            },
+            "require-dev": {
+                "composer/composer": "1.0.0",
+                "phpunit/phpunit": "^4.8",
+                "squizlabs/php_codesniffer": "^2.5"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "Hirak\\Prestissimo\\Plugin"
+            },
+            "autoload": {
+                "psr-4": {
+                    "Hirak\\Prestissimo\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Hiraku NAKANO",
+                    "email": "hiraku@tojiru.net"
+                }
+            ],
+            "description": "composer parallel install plugin",
+            "keywords": [
+                "install",
+                "parallel",
+                "speedup"
+            ],
+            "time": "2016-07-21 23:47:17"
+        },
+        {
             "name": "imagine/imagine",
             "version": "v0.6.3",
             "source": {
@@ -3946,7 +3997,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/9b91c95b58ee1d7289aa6fa542c1127b403fca00",
+                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/f8ace5c71ee309492b027ef71215577f5a52b4ea",
                 "reference": "9b91c95b58ee1d7289aa6fa542c1127b403fca00",
                 "shasum": ""
             },
@@ -4156,7 +4207,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/17ba8f8fc03074f90771e52b226698e37bc2c115",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/0b3e60404c3e398f521e9f366555678178695d91",
                 "reference": "17ba8f8fc03074f90771e52b226698e37bc2c115",
                 "shasum": ""
             },
@@ -4903,7 +4954,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/b7cd3a88dcab5189a7f6d7f8756b17cd25faf759",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/ffa2b812b07cceb163b30091aa54048b856d087b",
                 "reference": "b7cd3a88dcab5189a7f6d7f8756b17cd25faf759",
                 "shasum": ""
             },
