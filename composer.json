@@ -36,9 +36,6 @@
     {
       "type": "composer",
       "url": "http://packages.wellcommerce.org"
-    },
-    {
-      "packagist": false
     }
   ],
   "require": {
