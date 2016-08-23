@@ -36,8 +36,7 @@ final class PackageManager extends AbstractManager
         $criteria      = ['type' => $type];
         $em            = $this->getDoctrineHelper()->getEntityManager();
         $searchResults = $this->getHelper()->getPackages($criteria);
-        print_r($searchResults);
-        die();
+
         foreach ($searchResults as $result) {
             $package = $this->getHelper()->getPackage($result);
             $this->syncPackage($package);

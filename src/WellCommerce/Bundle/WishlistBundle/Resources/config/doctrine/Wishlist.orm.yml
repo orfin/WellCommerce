@@ -19,7 +19,6 @@ WellCommerce\Bundle\WishlistBundle\Entity\Wishlist:
         client:
             targetEntity: WellCommerce\Bundle\ClientBundle\Entity\Client
             fetch: LAZY
-            inversedBy: wishlist
             joinColumns:
                 client_id:
                     referencedColumnName: id

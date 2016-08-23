@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "880336f884421cb4bb06266024c19425",
-    "content-hash": "8d57f3602eba5b628575ffb2f4da5ee3",
+    "hash": "f871d674dff680c743976c5f4dfc841d",
+    "content-hash": "057c840e53e99bf018f5bfe9f2912d7c",
     "packages": [
         {
             "name": "asm89/twig-cache-extension",
@@ -2302,57 +2302,6 @@
             "time": "2016-04-13 16:32:01"
         },
         {
-            "name": "hirak/prestissimo",
-            "version": "0.3.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/hirak/prestissimo.git",
-                "reference": "3a9facbf4e1130f81eacf5a16a256186a3047dff"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/hirak/prestissimo/zipball/3a9facbf4e1130f81eacf5a16a256186a3047dff",
-                "reference": "3a9facbf4e1130f81eacf5a16a256186a3047dff",
-                "shasum": ""
-            },
-            "require": {
-                "composer-plugin-api": "^1.0.0",
-                "ext-curl": "*",
-                "php": "^5.3.2 || ^7.0"
-            },
-            "require-dev": {
-                "composer/composer": "1.0.0",
-                "phpunit/phpunit": "^4.8",
-                "squizlabs/php_codesniffer": "^2.5"
-            },
-            "type": "composer-plugin",
-            "extra": {
-                "class": "Hirak\\Prestissimo\\Plugin"
-            },
-            "autoload": {
-                "psr-4": {
-                    "Hirak\\Prestissimo\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Hiraku NAKANO",
-                    "email": "hiraku@tojiru.net"
-                }
-            ],
-            "description": "composer parallel install plugin",
-            "keywords": [
-                "install",
-                "parallel",
-                "speedup"
-            ],
-            "time": "2016-07-21 23:47:17"
-        },
-        {
             "name": "imagine/imagine",
             "version": "v0.6.3",
             "source": {
@@ -3941,16 +3890,16 @@
         },
         {
             "name": "react/stream",
-            "version": "v0.4.3",
+            "version": "v0.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/reactphp/stream.git",
-                "reference": "305b2328d2a2e157bc13b61a0f5c6e41b666b188"
+                "reference": "fcc9e7cea126962cff303c90c05e2efdcec09a27"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/reactphp/stream/zipball/305b2328d2a2e157bc13b61a0f5c6e41b666b188",
-                "reference": "305b2328d2a2e157bc13b61a0f5c6e41b666b188",
+                "url": "https://api.github.com/repos/reactphp/stream/zipball/fcc9e7cea126962cff303c90c05e2efdcec09a27",
+                "reference": "fcc9e7cea126962cff303c90c05e2efdcec09a27",
                 "shasum": ""
             },
             "require": {
@@ -3958,6 +3907,7 @@
                 "php": ">=5.3.8"
             },
             "require-dev": {
+                "clue/stream-filter": "~1.2",
                 "react/event-loop": "^0.4|^0.3",
                 "react/promise": "^2.0|^1.0"
             },
@@ -3966,11 +3916,6 @@
                 "react/promise": "^2.0"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.5-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "React\\Stream\\": "src"
@@ -3985,7 +3930,7 @@
                 "pipe",
                 "stream"
             ],
-            "time": "2015-10-07 18:32:58"
+            "time": "2016-08-22 09:51:07"
         },
         {
             "name": "sensio/distribution-bundle",
@@ -3993,12 +3938,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioDistributionBundle.git",
-                "reference": "9b91c95b58ee1d7289aa6fa542c1127b403fca00"
+                "reference": "f8ace5c71ee309492b027ef71215577f5a52b4ea"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/f8ace5c71ee309492b027ef71215577f5a52b4ea",
-                "reference": "9b91c95b58ee1d7289aa6fa542c1127b403fca00",
+                "reference": "f8ace5c71ee309492b027ef71215577f5a52b4ea",
                 "shasum": ""
             },
             "require": {
@@ -4037,7 +3982,7 @@
                 "configuration",
                 "distribution"
             ],
-            "time": "2016-06-23 08:54:40"
+            "time": "2016-08-17 18:16:49"
         },
         {
             "name": "sensio/framework-extra-bundle",
@@ -4203,12 +4148,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "17ba8f8fc03074f90771e52b226698e37bc2c115"
+                "reference": "0b3e60404c3e398f521e9f366555678178695d91"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/0b3e60404c3e398f521e9f366555678178695d91",
-                "reference": "17ba8f8fc03074f90771e52b226698e37bc2c115",
+                "reference": "0b3e60404c3e398f521e9f366555678178695d91",
                 "shasum": ""
             },
             "require": {
@@ -4248,7 +4193,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2016-07-09 18:06:48"
+            "time": "2016-08-19 20:47:22"
         },
         {
             "name": "symfony-cmf/routing",
@@ -4433,12 +4378,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "8a6bdec191138e01c92ae026e5aacb7b3e66267d"
+                "reference": "988cbed31ec9493057bcfc545b13447521849702"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/8a6bdec191138e01c92ae026e5aacb7b3e66267d",
-                "reference": "8a6bdec191138e01c92ae026e5aacb7b3e66267d",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/988cbed31ec9493057bcfc545b13447521849702",
+                "reference": "988cbed31ec9493057bcfc545b13447521849702",
                 "shasum": ""
             },
             "require": {
@@ -4484,7 +4429,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2016-06-29 14:58:48"
+            "time": "2016-08-17 08:39:54"
         },
         {
             "name": "symfony/polyfill-php56",
@@ -4492,12 +4437,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php56.git",
-                "reference": "3edf57a8fbf9a927533344cef65ad7e1cf31030a"
+                "reference": "3dd0fbb5810358b86b5a8ebb4529134597a0f95f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php56/zipball/3edf57a8fbf9a927533344cef65ad7e1cf31030a",
-                "reference": "3edf57a8fbf9a927533344cef65ad7e1cf31030a",
+                "url": "https://api.github.com/repos/symfony/polyfill-php56/zipball/3dd0fbb5810358b86b5a8ebb4529134597a0f95f",
+                "reference": "3dd0fbb5810358b86b5a8ebb4529134597a0f95f",
                 "shasum": ""
             },
             "require": {
@@ -4540,7 +4485,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2016-05-18 14:26:46"
+            "time": "2016-08-17 08:39:54"
         },
         {
             "name": "symfony/polyfill-php70",
@@ -4847,52 +4792,6 @@
             "time": "2016-07-30 09:31:00"
         },
         {
-            "name": "symplify/default-autowire",
-            "version": "v1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Symplify/DefaultAutowire.git",
-                "reference": "4b95a79641293c6ab9d35cc96bd1a06dff03e7db"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Symplify/DefaultAutowire/zipball/4b95a79641293c6ab9d35cc96bd1a06dff03e7db",
-                "reference": "4b95a79641293c6ab9d35cc96bd1a06dff03e7db",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.0",
-                "symfony/config": "~3.0",
-                "symfony/dependency-injection": "~3.0",
-                "symfony/http-kernel": "~3.0"
-            },
-            "require-dev": {
-                "doctrine/doctrine-bundle": "^1.6",
-                "doctrine/orm": "^2.5",
-                "nette/utils": "^2.3",
-                "phpunit/phpunit": "^5.4",
-                "symfony/form": "^3.0",
-                "symplify/coding-standard": "^0.3",
-                "tracy/tracy": "^2.4"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Symplify\\DefaultAutowire\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Adds autowire to services when needed.",
-            "keywords": [
-                "autowire",
-                "symfony"
-            ],
-            "time": "2016-08-08 01:16:53"
-        },
-        {
             "name": "twig/extensions",
             "version": "dev-master",
             "source": {
@@ -4950,12 +4849,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "b7cd3a88dcab5189a7f6d7f8756b17cd25faf759"
+                "reference": "ffa2b812b07cceb163b30091aa54048b856d087b"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/twigphp/Twig/zipball/ffa2b812b07cceb163b30091aa54048b856d087b",
-                "reference": "b7cd3a88dcab5189a7f6d7f8756b17cd25faf759",
+                "reference": "ffa2b812b07cceb163b30091aa54048b856d087b",
                 "shasum": ""
             },
             "require": {
@@ -5003,7 +4902,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2016-07-28 20:58:48"
+            "time": "2016-08-18 00:09:08"
         },
         {
             "name": "wellcommerce/composer-plugin",

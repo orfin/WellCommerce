@@ -17,7 +17,6 @@ use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\EntityRepository;
-use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 
 /**
  * Class OrderRepository
