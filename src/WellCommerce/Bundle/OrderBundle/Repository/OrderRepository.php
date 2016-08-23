@@ -12,8 +12,12 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Repository;
 
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\QueryBuilder;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\EntityRepository;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 
 /**
  * Class OrderRepository
@@ -31,7 +35,15 @@ final class OrderRepository extends EntityRepository implements OrderRepositoryI
         
         return $queryBuilder;
     }
-
+    
+    public function getClientOrdersCollection(ClientInterface $client) : Collection
+    {
+        $criteria = new Criteria();
+        $criteria->where($criteria->expr()->eq('client', $client));
+        
+        return $this->matching($criteria);
+    }
+    
     public function getAlias() : string
     {
         return 'orders';

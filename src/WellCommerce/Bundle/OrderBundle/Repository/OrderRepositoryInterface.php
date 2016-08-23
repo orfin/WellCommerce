@@ -12,6 +12,8 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Repository;
 
+use Doctrine\Common\Collections\Collection;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**
@@ -21,4 +23,5 @@ use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
  */
 interface OrderRepositoryInterface extends RepositoryInterface
 {
+    public function getClientOrdersCollection(ClientInterface $client) : Collection;
 }

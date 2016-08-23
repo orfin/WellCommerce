@@ -19,13 +19,14 @@ namespace WellCommerce\Bundle\DistributionBundle\Helper\Package;
  */
 interface PackageHelperInterface
 {
+    const PACKAGIST_URL               = 'http://packages.wellcommerce.org';
     const DEFAULT_BRANCH_VERSION      = 'dev-master';
     const DEFAULT_PACKAGE_BUNDLE_TYPE = 'wellcommerce-bundle';
     const DEFAULT_PACKAGE_THEME_TYPE  = 'wellcommerce-theme';
     const ACTION_REQUIRE              = 'require';
     const ACTION_UPDATE               = 'update';
     const ACTION_REMOVE               = 'remove';
-
+    
     /**
      * Returns all packages
      *
@@ -34,7 +35,7 @@ interface PackageHelperInterface
      * @return array
      */
     public function getPackages(array $criteria);
-
+    
     /**
      * Returns information about package
      *

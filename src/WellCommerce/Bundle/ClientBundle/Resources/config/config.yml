@@ -32,8 +32,6 @@ well_commerce_api:
             mapping: "@WellCommerceClientBundle/Resources/config/serialization/ClientGroupTranslation.yml"
         WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddress:
             mapping: "@WellCommerceClientBundle/Resources/config/serialization/ClientShippingAddress.yml"
-        WellCommerce\Bundle\ClientBundle\Entity\ClientWishlist:
-            mapping: "@WellCommerceClientBundle/Resources/config/serialization/ClientWishlist.yml"
 
 well_commerce_locale:
     copier:

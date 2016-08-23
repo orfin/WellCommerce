@@ -28,23 +28,6 @@ WellCommerce\Bundle\ClientBundle\Entity\Client:
         contactDetails:
             class: WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetails
             columnPrefix: contact_details_
-    oneToMany:
-        wishlist:
-            targetEntity: WellCommerce\Bundle\ClientBundle\Entity\ClientWishlist
-            cascade:
-                - remove
-                - persist
-            fetch: LAZY
-            mappedBy: client
-            orphanRemoval: true
-        orders:
-            targetEntity: WellCommerce\Bundle\OrderBundle\Entity\Order
-            cascade:
-                - remove
-                - persist
-            fetch: LAZY
-            mappedBy: client
-            orphanRemoval: true
     manyToOne:
         shop:
             targetEntity: WellCommerce\Bundle\ShopBundle\Entity\ShopInterface

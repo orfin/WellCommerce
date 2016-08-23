@@ -154,22 +154,3 @@ admin.client_group.delete_group:
     options:
         expose: true
         require_admin_permission: client_group.delete
-
-front.client_wishlist.index:
-    path: /client/wishlist/index
-    defaults:
-        _controller: 'client_wishlist.controller.front:indexAction'
-    options:
-        allow_page_redirect: 'true'
-        breadcrumb:
-            label: client.heading.wishlist
-
-front.client_wishlist.add:
-    path: /client/wishlist/add/{id}
-    defaults:
-        _controller: 'client_wishlist.controller.front:addAction'
-
-front.client_wishlist.delete:
-    path: /client/wishlist/delete/{id}
-    defaults:
-        _controller: 'client_wishlist.controller.front:deleteAction'

@@ -25,7 +25,7 @@ class PackageHelper implements PackageHelperInterface
      * @var Client
      */
     protected $client;
-
+    
     /**
      * Constructor
      *
@@ -35,15 +35,17 @@ class PackageHelper implements PackageHelperInterface
     {
         $this->client = $client;
     }
-
+    
     /**
      * {@inheritdoc}
      */
     public function getPackages(array $criteria)
     {
+        $this->client->setPackagistUrl(self::PACKAGIST_URL);
+        
         return $this->client->all($criteria);
     }
-
+    
     /**
      * {@inheritdoc}
      */

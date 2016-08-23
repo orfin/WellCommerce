@@ -10,42 +10,42 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\ClientBundle\Manager;
+namespace WellCommerce\Bundle\WishlistBundle\Manager;
 
 use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
-use WellCommerce\Bundle\ClientBundle\Entity\ClientWishlistInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\AbstractManager;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
+use WellCommerce\Bundle\WishlistBundle\Entity\WishlistInterface;
 
 /**
- * Class ClientWishlistManager
+ * Class WishlistManager
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-final class ClientWishlistManager extends AbstractManager
+final class WishlistManager extends AbstractManager
 {
     public function addProductToWishlist(ProductInterface $product, ClientInterface $client)
     {
         $wishlist = $this->findWishlist($product, $client);
-
-        if (!$wishlist instanceof ClientWishlistInterface) {
-            /** @var ClientWishlistInterface $wishlist */
+        
+        if (!$wishlist instanceof WishlistInterface) {
+            /** @var WishlistInterface $wishlist */
             $wishlist = $this->initResource();
             $wishlist->setClient($client);
             $wishlist->setProduct($product);
             $this->createResource($wishlist);
         }
     }
-
+    
     public function deleteProductFromWishlist(ProductInterface $product, ClientInterface $client)
     {
         $wishlist = $this->findWishlist($product, $client);
-
-        if ($wishlist instanceof ClientWishlistInterface) {
+        
+        if ($wishlist instanceof WishlistInterface) {
             $this->removeResource($wishlist);
         }
     }
-
+    
     private function findWishlist(ProductInterface $product, ClientInterface $client)
     {
         return $this->getRepository()->findOneBy([

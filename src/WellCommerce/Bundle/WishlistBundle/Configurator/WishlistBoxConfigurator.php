@@ -10,13 +10,15 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\LayoutBundle\Configurator;
+namespace WellCommerce\Bundle\WishlistBundle\Configurator;
+
+use WellCommerce\Bundle\LayoutBundle\Configurator\AbstractLayoutBoxConfigurator;
 
 /**
- * Class ClientWishlistBoxConfigurator
+ * Class WishlistBoxConfigurator
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-final class ClientWishlistBoxConfigurator extends AbstractLayoutBoxConfigurator
+final class WishlistBoxConfigurator extends AbstractLayoutBoxConfigurator
 {
 }

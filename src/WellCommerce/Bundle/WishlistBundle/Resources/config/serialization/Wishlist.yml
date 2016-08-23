@@ -6,21 +6,16 @@
 # For the full copyright and license information,
 # please view the LICENSE file that was distributed with this source code.
 
-WellCommerce\Bundle\ClientBundle\Entity\ClientWishlist:
+WellCommerce\Bundle\WishlistBundle\Entity\Wishlist:
     fields:
         id:
             groups:
                 - default
-                - client_wishlist
-        createdAt:
-            groups: {  }
-        updatedAt:
-            groups: {  }
+                - wishlist
     associations:
         client:
             groups:
-                - client_wishlist
+                - wishlist
         product:
             groups:
-                - client_wishlist
-    callbacks: {  }
+                - wishlist

@@ -10,20 +10,20 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\ClientBundle\Controller\Front;
+namespace WellCommerce\Bundle\WishlistBundle\Controller\Front;
 
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
-use WellCommerce\Bundle\ClientBundle\Manager\ClientWishlistManager;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
+use WellCommerce\Bundle\WishlistBundle\Manager\WishlistManager;
 
 /**
- * Class ClientWishlistController
+ * Class WishlistController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientWishlistController extends AbstractFrontController
+class WishlistController extends AbstractFrontController
 {
     public function indexAction() : Response
     {
@@ -36,21 +36,21 @@ class ClientWishlistController extends AbstractFrontController
             $product,
             $this->getAuthenticatedClient()
         );
-
+        
         return $this->redirectToAction('index');
     }
-
+    
     public function deleteAction(ProductInterface $product) : RedirectResponse
     {
         $this->getManager()->deleteProductFromWishlist(
             $product,
             $this->getAuthenticatedClient()
         );
-
+        
         return $this->redirectToAction('index');
     }
-
-    protected function getManager() : ClientWishlistManager
+    
+    protected function getManager() : WishlistManager
     {
         return parent::getManager();
     }

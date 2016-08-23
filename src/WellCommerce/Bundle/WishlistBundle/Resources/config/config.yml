@@ -6,3 +6,15 @@
 # For the full copyright and license information,
 # please view the LICENSE file that was distributed with this source code.
 
+doctrine:
+    orm:
+        resolve_target_entities:
+            WellCommerce\Bundle\WishlistBundle\Entity\WishlistInterface: WellCommerce\Bundle\WishlistBundle\Entity\Wishlist
+
+well_commerce_api:
+    request_handler:
+        wishlist:
+            manager: wishlist.manager
+    serialization:
+        WellCommerce\Bundle\WishlistBundle\Entity\Wishlist:
+            mapping: "@WellCommerceWishlistBundle/Resources/config/serialization/Wishlist.yml"

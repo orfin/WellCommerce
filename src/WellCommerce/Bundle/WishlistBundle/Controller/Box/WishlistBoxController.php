@@ -10,12 +10,13 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\ClientBundle\Controller\Box;
+namespace WellCommerce\Bundle\WishlistBundle\Controller\Box;
 
 use Symfony\Component\HttpFoundation\Response;
-use WellCommerce\Bundle\ClientBundle\Entity\ClientWishlistInterface;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 use WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxSettingsCollection;
+use WellCommerce\Bundle\WishlistBundle\Entity\WishlistInterface;
+use WellCommerce\Bundle\WishlistBundle\Repository\WishlistRepositoryInterface;
 use WellCommerce\Component\DataSet\Conditions\Condition\In;
 use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
 
@@ -24,7 +25,7 @@ use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientWishlistBoxController extends AbstractBoxController
+class WishlistBoxController extends AbstractBoxController
 {
     public function indexAction(LayoutBoxSettingsCollection $boxSettings) : Response
     {
@@ -33,24 +34,29 @@ class ClientWishlistBoxController extends AbstractBoxController
             'order_dir'  => 'asc',
             'conditions' => $this->getConditions()
         ]);
-
+        
         return $this->displayTemplate('index', [
             'dataset' => $dataset
         ]);
     }
-
-    protected function getConditions() : ConditionsCollection
+    
+    private function getConditions() : ConditionsCollection
     {
-        $wishlist   = $this->getAuthenticatedClient()->getWishlist();
+        $wishlist   = $this->getWishlistRepository()->getClientWishlistCollection($this->getAuthenticatedClient());
         $productIds = [];
-
-        $wishlist->map(function (ClientWishlistInterface $wishlist) use (&$productIds) {
+        
+        $wishlist->map(function (WishlistInterface $wishlist) use (&$productIds) {
             $productIds[] = $wishlist->getProduct()->getId();
         });
-
+        
         $conditions = new ConditionsCollection();
         $conditions->add(new In('id', $productIds));
-
+        
         return $conditions;
+    }
+    
+    private function getWishlistRepository() : WishlistRepositoryInterface
+    {
+        return $this->manager->getRepository();
     }
 }

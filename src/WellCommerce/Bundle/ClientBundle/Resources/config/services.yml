@@ -154,23 +154,3 @@ services:
         class: WellCommerce\Bundle\ClientBundle\Doctrine\Validator\Constraints\ClientPasswordValidator
         tags:
             - { name: validator.constraint_validator, alias: client.orm.validator.password }
-
-    client_wishlist.controller.front:
-        class: WellCommerce\Bundle\ClientBundle\Controller\Front\ClientWishlistController
-        arguments: ['@client_wishlist.manager']
-        calls:
-            - [setContainer, ['@service_container']]
-
-    client_wishlist.layout_box.controller:
-        class: WellCommerce\Bundle\ClientBundle\Controller\Box\ClientWishlistBoxController
-        arguments: ['@client_wishlist.manager']
-        calls:
-            - [setContainer, ['@service_container']]
-
-    client_wishlist.configurator:
-        class: WellCommerce\Bundle\LayoutBundle\Configurator\ClientWishlistBoxConfigurator
-        tags:
-            - { name: layout_box.configurator }
-        arguments: [ClientWishlist, client_wishlist.layout_box.controller, '@translator.helper']
-        calls:
-            - [setContainer, ['@service_container']]

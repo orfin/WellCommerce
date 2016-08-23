@@ -108,6 +108,9 @@ wellcommerce_theme:
 wellcommerce_unit:
     resource: "@WellCommerceUnitBundle/Resources/config/routing.yml"
 
+wellcommerce_wishlist:
+    resource: "@WellCommerceWishlistBundle/Resources/config/routing.yml"
+
 fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
 

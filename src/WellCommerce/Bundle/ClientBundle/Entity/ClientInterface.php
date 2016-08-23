@@ -41,11 +41,6 @@ interface ClientInterface extends
     public function getOrders() : Collection;
     
     /**
-     * @return Collection
-     */
-    public function getWishlist() : Collection;
-    
-    /**
      * @return ClientDetailsInterface
      */
     public function getClientDetails() : ClientDetailsInterface;

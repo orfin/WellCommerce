@@ -21,7 +21,7 @@ use WellCommerce\Bundle\CoreBundle\Repository\EntityRepository;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class OrderProductRepository extends EntityRepository implements OrderRepositoryInterface
+class OrderProductRepository extends EntityRepository implements OrderProductRepositoryInterface
 {
     /**
      * {@inheritdoc}

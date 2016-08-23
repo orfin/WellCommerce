@@ -6,10 +6,10 @@
 # For the full copyright and license information,
 # please view the LICENSE file that was distributed with this source code.
 
-WellCommerce\Bundle\ClientBundle\Entity\ClientWishlist:
+WellCommerce\Bundle\WishlistBundle\Entity\Wishlist:
     type: entity
-    table: client_wishlist
-    repositoryClass: WellCommerce\Bundle\ClientBundle\Repository\ClientWishlistRepository
+    table: wishlist
+    repositoryClass: WellCommerce\Bundle\WishlistBundle\Repository\WishlistRepository
     id:
         id:
             type: integer

@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 use WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxSettingsCollection;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
+use WellCommerce\Bundle\OrderBundle\Repository\OrderRepositoryInterface;
 
 /**
  * Class ClientOrderBoxController
@@ -26,7 +27,7 @@ class ClientOrderBoxController extends AbstractBoxController
 {
     public function indexAction(LayoutBoxSettingsCollection $boxSettings) : Response
     {
-        $orders = $this->getAuthenticatedClient()->getOrders();
+        $orders = $this->getOrderRepository()->getClientOrdersCollection($this->getAuthenticatedClient());
         
         return $this->displayTemplate('index', [
             'orders' => $orders
@@ -35,9 +36,8 @@ class ClientOrderBoxController extends AbstractBoxController
     
     public function viewAction() : Response
     {
-        $id    = (int)$this->getRequestHelper()->getAttributesBagParam('id');
-        $order = $this->get('order.repository')->findOneBy([
-            'id'     => $id,
+        $order = $this->getOrderRepository()->findOneBy([
+            'id'     => (int)$this->getRequestHelper()->getAttributesBagParam('id'),
             'client' => $this->getAuthenticatedClient()
         ]);
         
@@ -48,5 +48,10 @@ class ClientOrderBoxController extends AbstractBoxController
         return $this->displayTemplate('view', [
             'order' => $order
         ]);
+    }
+    
+    private function getOrderRepository() : OrderRepositoryInterface
+    {
+        return $this->get('order.repository');
     }
 }

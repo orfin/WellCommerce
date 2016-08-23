@@ -10,15 +10,18 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\ClientBundle\Repository;
+namespace WellCommerce\Bundle\WishlistBundle\Repository;
 
+use Doctrine\Common\Collections\Collection;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**
- * Interface ClientWishlistRepositoryInterface
+ * Interface WishlistRepositoryInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ClientWishlistRepositoryInterface extends RepositoryInterface
+interface WishlistRepositoryInterface extends RepositoryInterface
 {
+    public function getClientWishlistCollection(ClientInterface $client) : Collection;
 }

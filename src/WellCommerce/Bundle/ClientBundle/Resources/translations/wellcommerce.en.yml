@@ -45,7 +45,6 @@ client:
         orders: Orders
         address_book: Addressess
         settings: Settings
-        wishlist: Wishlist
         password_forgotten: 'Reset password'
     button:
         login: 'Sign in'

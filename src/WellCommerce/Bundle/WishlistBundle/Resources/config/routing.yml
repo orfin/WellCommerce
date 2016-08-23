@@ -1,0 +1,26 @@
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
+
+front.wishlist.index:
+    path: /client/wishlist/index
+    defaults:
+        _controller: 'wishlist.controller.front:indexAction'
+    options:
+        allow_page_redirect: 'true'
+        breadcrumb:
+            label: client.heading.wishlist
+
+front.wishlist.add:
+    path: /client/wishlist/add/{id}
+    defaults:
+        _controller: 'wishlist.controller.front:addAction'
+
+front.wishlist.delete:
+    path: /client/wishlist/delete/{id}
+    defaults:
+        _controller: 'wishlist.controller.front:deleteAction'

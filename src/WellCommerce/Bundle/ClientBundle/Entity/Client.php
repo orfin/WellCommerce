@@ -40,11 +40,6 @@ class Client implements ClientInterface
     protected $orders;
     
     /**
-     * @var Collection
-     */
-    protected $wishlist;
-    
-    /**
      * @var ClientDetails
      */
     protected $clientDetails;
@@ -130,11 +125,6 @@ class Client implements ClientInterface
         return $this->orders->filter(function (OrderInterface $order) {
             return $order->isConfirmed();
         });
-    }
-    
-    public function getWishlist() : Collection
-    {
-        return $this->wishlist;
     }
     
     public function getClientDetails() : ClientDetailsInterface

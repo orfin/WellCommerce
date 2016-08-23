@@ -10,17 +10,18 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\ClientBundle\Entity;
+namespace WellCommerce\Bundle\WishlistBundle\Entity;
 
-use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientAwareInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\EntityInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareInterface;
 
 /**
- * Interface ClientWishlistInterface
+ * Interface WishlistInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ClientWishlistInterface extends EntityInterface, ClientAwareInterface, TimestampableInterface, ProductAwareInterface
+interface WishlistInterface extends EntityInterface, ClientAwareInterface, TimestampableInterface, ProductAwareInterface
 {
 }
