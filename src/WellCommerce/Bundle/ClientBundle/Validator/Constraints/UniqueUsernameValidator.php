@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\ClientBundle\Doctrine\Validator\Constraints;
+namespace WellCommerce\Bundle\ClientBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;

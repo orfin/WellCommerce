@@ -144,13 +144,13 @@ services:
         class: WellCommerce\Bundle\ClientBundle\Handler\LoginFailureHandler
         arguments: ['@router', front.client.login]
 
-    client.orm.validator.unique:
-        class: WellCommerce\Bundle\ClientBundle\Doctrine\Validator\Constraints\UniqueUsernameValidator
+    client.validator.unique_username:
+        class: WellCommerce\Bundle\ClientBundle\Validator\Constraints\UniqueUsernameValidator
         tags:
-            - { name: validator.constraint_validator, alias: client.orm.validator.unique }
+            - { name: validator.constraint_validator, alias: client.validator.unique_username }
         arguments: ['@client.repository', '@router.helper']
 
-    client.orm.validator.password:
-        class: WellCommerce\Bundle\ClientBundle\Doctrine\Validator\Constraints\ClientPasswordValidator
+    client.validator.valid_password:
+        class: WellCommerce\Bundle\ClientBundle\Validator\Constraints\ClientPasswordValidator
         tags:
-            - { name: validator.constraint_validator, alias: client.orm.validator.password }
+            - { name: validator.constraint_validator, alias: client.validator.valid_password }

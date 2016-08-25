@@ -10,19 +10,19 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\ClientBundle\Doctrine\Validator\Constraints;
+namespace WellCommerce\Bundle\ClientBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
 /**
- * Class UniqueUsername
+ * Class ClientPassword
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class UniqueUsername extends Constraint
+class ClientPassword extends Constraint
 {
-    public $message    = 'client.email_not_unique';
-    public $service    = 'client.orm.validator.unique';
+    public $message    = 'client.password_not_valid';
+    public $service    = 'client.validator.valid_password';
     public $fields     = [];
     public $errorPath  = null;
     public $ignoreNull = true;

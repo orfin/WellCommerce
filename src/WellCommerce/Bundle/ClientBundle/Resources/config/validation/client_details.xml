@@ -4,12 +4,12 @@
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
 
     <class name="WellCommerce\Bundle\ClientBundle\Entity\ClientDetails">
-        <constraint name="WellCommerce\Bundle\ClientBundle\Doctrine\Validator\Constraints\UniqueUsername">
+        <constraint name="WellCommerce\Bundle\ClientBundle\Validator\Constraints\UniqueUsername">
             <option name="groups">
                 <value>client_registration</value>
             </option>
         </constraint>
-        <constraint name="WellCommerce\Bundle\ClientBundle\Doctrine\Validator\Constraints\ClientPassword">
+        <constraint name="WellCommerce\Bundle\ClientBundle\Validator\Constraints\ClientPassword">
             <option name="groups">
                 <value>client_registration</value>
             </option>
