@@ -109,10 +109,6 @@ final class BundleLoader
             $bundles[] = SensioGeneratorBundle::class;
         }
         
-        if (in_array($this->kernel->getEnvironment(), ['prod'])) {
-            $bundles[] = WebProfilerBundle::class;
-        }
-        
         return $bundles;
     }
     

@@ -3994,7 +3994,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/4669acb652d53915380162f9b9614a116485474b",
+                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/5c8a8817c40c484d17807819c82d38f6b71d5854",
                 "reference": "4669acb652d53915380162f9b9614a116485474b",
                 "shasum": ""
             },
@@ -4964,7 +4964,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/willdurand/BazingaJsTranslationBundle/zipball/577484e74c058f09cacda658490ab2687bd7f6ff",
+                "url": "https://api.github.com/repos/willdurand/BazingaJsTranslationBundle/zipball/e90f25e4905dcbd45c591949e8257fcd858c942f",
                 "reference": "577484e74c058f09cacda658490ab2687bd7f6ff",
                 "shasum": ""
             },

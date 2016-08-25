@@ -63,3 +63,9 @@ services:
         tags:
             - { name: twig.extension }
         arguments: ['@kernel']
+
+    twig.extension.event:
+        class: WellCommerce\Bundle\CoreBundle\Twig\Extension\EventExtension
+        arguments: ['@event_dispatcher']
+        tags:
+            - { name: twig.extension }
