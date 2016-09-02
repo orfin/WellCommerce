@@ -111,12 +111,6 @@ final class ThemeLocator implements ThemeLocatorInterface
         return $this->locateBundlesResource($bundles, $parameters, $path);
     }
     
-    public function getThemePathPattern() : string
-    {
-        return '%themes_path%/%current_theme%/templates/%bundle_name%/%template%';
-        
-    }
-    
     private function getBundleNameAndPath(string $name) : array
     {
         $bundleName = substr($name, 1);
@@ -153,13 +147,11 @@ final class ThemeLocator implements ThemeLocatorInterface
     
     private function locateThemePathForBundleResource(BundleInterface $bundle, array $parameters, array &$checkPaths)
     {
-        $pathPattern = $this->getThemePathPattern();
         $parameters  = array_merge($parameters, [
-            '%bundle_path%' => $bundle->getPath(),
             '%bundle_name%' => $bundle->getName(),
         ]);
         
-        $path = strtr($pathPattern, $parameters);
+        $path = strtr(self::THEME_PATH_PATTERN, $parameters);
         
         if ($this->isValidPath($path)) {
             $checkPaths[] = $path;

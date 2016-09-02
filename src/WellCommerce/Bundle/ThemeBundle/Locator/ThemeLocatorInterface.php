@@ -19,12 +19,7 @@ namespace WellCommerce\Bundle\ThemeBundle\Locator;
  */
 interface ThemeLocatorInterface
 {
-    /**
-     * Returns path patterns to theme folder
-     *
-     * @return string
-     */
-    public function getThemePathPattern() : string;
+    const THEME_PATH_PATTERN = '%themes_path%/%current_theme%/templates/%bundle_name%/%template%';
     
     /**
      * Returns current theme folder
