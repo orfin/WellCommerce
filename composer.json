@@ -32,12 +32,6 @@
       "app/AppKernel.php"
     ]
   },
-  "repositories": [
-    {
-      "type": "composer",
-      "url": "http://packages.wellcommerce.org"
-    }
-  ],
   "require": {
     "php": "^7.0",
     "ext-mbstring": "*",
@@ -62,7 +56,7 @@
     "doctrine/doctrine-migrations-bundle": "^1.0@dev",
     "twig/twig": "^1.2@dev",
     "wellcommerce/composer-plugin": "^1.0@dev",
-    "react/child-process": "0.5.*@dev",
+    "react/child-process": "dev-master",
     "knplabs/packagist-api": "1.*@dev",
     "mcuelenaere/composer-revision-plugin": "0.1.*",
     "devristo/phpws": "dev-master",
