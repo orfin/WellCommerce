@@ -78,9 +78,9 @@ final class RequestHandler implements RequestHandlerInterface
         $offset   = $request->get('offset') ?? 0;
         $orderBy  = $request->get('order_by') ?? 'id';
         $orderDir = $request->get('order_dir') ?? 'asc';
-
-        $result = $this->manager->getRepository()->findBy([], [$orderBy => $orderDir], $limit, $offset);
-        $data   = $this->serializer->serialize($result, self::RESPONSE_FORMAT, ['group' => $this->getResourceType()]);
+        $criteria = $request->request->get('where') ?? [];
+        $result   = $this->manager->getRepository()->findBy($criteria, [$orderBy => $orderDir], $limit, $offset);
+        $data     = $this->serializer->serialize($result, self::RESPONSE_FORMAT, ['group' => $this->getResourceType()]);
         
         return new Response($data);
     }

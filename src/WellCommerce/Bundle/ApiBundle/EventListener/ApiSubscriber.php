@@ -32,7 +32,7 @@ class ApiSubscriber extends AbstractEventSubscriber
     public function onKernelRequestEvent(GetResponseEvent $event)
     {
         $request = $event->getRequest();
-        if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
+        if (false !== strpos($request->headers->get('Content-Type'), 'application/json')) {
             $data = json_decode($request->getContent(), true);
             if (is_array($data)) {
                 $request->request->replace($data);
