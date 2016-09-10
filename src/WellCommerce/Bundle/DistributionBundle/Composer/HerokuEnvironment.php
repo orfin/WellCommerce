@@ -28,7 +28,7 @@ class HerokuEnvironment
      */
     public static function populateEnvironment(Event $event)
     {
-        $url = getenv('JAWSDB_MARIA_URL');
+        $url = getenv('CLEARDB_DATABASE_URL');
 
         if ($url) {
             $url = parse_url($url);
@@ -41,7 +41,7 @@ class HerokuEnvironment
             putenv("SYMFONY_PROD_LOG_PATH=php://stderr");
 
             $io = $event->getIO();
-            $io->write('JAWSDB_MARIA_URL=' . getenv('JAWSDB_MARIA_URL'));
+            $io->write('CLEARDB_DATABASE_URL=' . getenv('CLEARDB_DATABASE_URL'));
             $io->write('SYMFONY_PROD_LOG_PATH=' . getenv('SYMFONY_PROD_LOG_PATH'));
         }
     }
