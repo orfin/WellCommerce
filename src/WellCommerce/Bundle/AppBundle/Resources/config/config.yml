@@ -72,7 +72,7 @@ parameters:
         WellCommerce\Bundle\ShippingBundle\DataFixtures\ORM\LoadShippingMethodData: 220
         WellCommerce\Bundle\PaymentBundle\DataFixtures\ORM\LoadPaymentMethodData: 230
         WellCommerce\Bundle\PageBundle\DataFixtures\ORM\LoadPageData: 240
-    fixtures_product_limit: 100
+    fixtures_product_limit: 50
     enabled_fixtures:
         WellCommerce\Bundle\AdminBundle\DataFixtures\ORM\LoadAdminMenuData: true
         WellCommerce\Bundle\ThemeBundle\DataFixtures\ORM\LoadThemeData: true
