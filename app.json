@@ -8,7 +8,7 @@
     "e-commerce"
   ],
   "addons": [
-    "cleardb:ignite"
+    "jawsdb-maria:kitefin"
   ],
   "website": "https://wellcommerce.org",
   "repository": "https://github.com/WellCommerce/WellCommerce/tree/development",
