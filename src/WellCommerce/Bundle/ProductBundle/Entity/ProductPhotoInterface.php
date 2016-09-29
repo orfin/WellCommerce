@@ -13,8 +13,8 @@
 namespace WellCommerce\Bundle\ProductBundle\Entity;
 
 use WellCommerce\Bundle\AppBundle\Entity\HierarchyAwareInterface;
-use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\EntityInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\MediaBundle\Entity\MediaInterface;
 
 /**

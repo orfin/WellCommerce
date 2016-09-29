@@ -15,8 +15,6 @@ namespace WellCommerce\Bundle\ReviewBundle\Entity;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use WellCommerce\Bundle\CoreBundle\Behaviours\Enableable\EnableableTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\IdentifiableTrait;
-use WellCommerce\Bundle\ReviewBundle\Entity\ReviewInterface;
-use WellCommerce\Bundle\ReviewBundle\Entity\ReviewRecommendationInterface;
 
 /**
  * Class Review
@@ -28,22 +26,22 @@ class ReviewRecommendation implements ReviewRecommendationInterface
     use IdentifiableTrait;
     use Timestampable;
     use EnableableTrait;
-
+    
     /**
-     * @var liked
+     * @var int
      */
     protected $liked;
-
+    
     /**
-     * @var unliked
+     * @var int
      */
     protected $unliked;
-
+    
     /**
-     * @var string
+     * @var ReviewInterface
      */
     protected $review;
-
+    
     /**
      * {@inheritdoc}
      */
@@ -51,7 +49,7 @@ class ReviewRecommendation implements ReviewRecommendationInterface
     {
         return $this->liked;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -59,7 +57,7 @@ class ReviewRecommendation implements ReviewRecommendationInterface
     {
         $this->liked = $liked;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -67,7 +65,7 @@ class ReviewRecommendation implements ReviewRecommendationInterface
     {
         $this->unliked = $unliked;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -75,7 +73,7 @@ class ReviewRecommendation implements ReviewRecommendationInterface
     {
         return $this->unliked;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -83,7 +81,7 @@ class ReviewRecommendation implements ReviewRecommendationInterface
     {
         return $this->review;
     }
-
+    
     /**
      * {@inheritdoc}
      */

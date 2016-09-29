@@ -16,9 +16,9 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
-use WellCommerce\Bundle\CoreBundle\Helper\Environment\EnvironmentHelperInterface;
 use WellCommerce\Bundle\CoreBundle\Enhancer\TraitGenerator\TraitGeneratorEnhancerCollection;
 use WellCommerce\Bundle\CoreBundle\Enhancer\TraitGenerator\TraitGeneratorEnhancerTraverserInterface;
+use WellCommerce\Bundle\CoreBundle\Helper\Environment\EnvironmentHelperInterface;
 use Wingu\OctopusCore\CodeGenerator\PHP\OOP\TraitGenerator;
 use Wingu\OctopusCore\Reflection\ReflectionClass;
 

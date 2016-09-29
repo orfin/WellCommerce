@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Generator;
 
-use Carbon\Carbon;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;

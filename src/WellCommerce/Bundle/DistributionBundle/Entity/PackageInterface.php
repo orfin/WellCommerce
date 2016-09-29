@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\DistributionBundle\Entity;
 
-use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\EntityInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 
 /**
  * Interface PackageInterface

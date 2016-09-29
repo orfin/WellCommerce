@@ -12,9 +12,9 @@
 
 namespace WellCommerce\Bundle\CurrencyBundle\Factory;
 
+use WellCommerce\Bundle\CoreBundle\Factory\AbstractEntityFactory;
 use WellCommerce\Bundle\CurrencyBundle\Entity\Currency;
 use WellCommerce\Bundle\CurrencyBundle\Entity\CurrencyInterface;
-use WellCommerce\Bundle\CoreBundle\Factory\AbstractEntityFactory;
 
 /**
  * Class CurrencyFactory

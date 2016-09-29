@@ -12,10 +12,9 @@
 
 namespace WellCommerce\Bundle\ReviewBundle\Entity;
 
-use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Behaviours\Enableable\EnableableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\EntityInterface;
-use WellCommerce\Bundle\ReviewBundle\Entity\ReviewInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 
 /**
  * Class ReviewInterface
@@ -28,30 +27,30 @@ interface ReviewRecommendationInterface extends EntityInterface, EnableableInter
      * @return bool
      */
     public function getLiked() : bool;
-
+    
     /**
-     * @param string $like
+     * @param bool $like
      */
     public function setLiked(bool $like);
-
+    
     /**
      * @return bool
      */
     public function getUnliked() : bool;
-
+    
     /**
-     * @param string $like
+     * @param bool $unlike
      */
     public function setUnliked(bool $unlike);
-
+    
     /**
-     * @return review
+     * @return ReviewInterface
      */
     public function getReview() : ReviewInterface;
-
+    
     /**
      * {@inheritdoc}
      */
     public function setReview(ReviewInterface $review);
-
+    
 }

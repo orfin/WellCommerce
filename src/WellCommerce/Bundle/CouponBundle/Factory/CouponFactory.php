@@ -12,9 +12,9 @@
 
 namespace WellCommerce\Bundle\CouponBundle\Factory;
 
+use WellCommerce\Bundle\CoreBundle\Factory\AbstractEntityFactory;
 use WellCommerce\Bundle\CouponBundle\Entity\Coupon;
 use WellCommerce\Bundle\CouponBundle\Entity\CouponInterface;
-use WellCommerce\Bundle\CoreBundle\Factory\AbstractEntityFactory;
 
 /**
  * Class CouponFactory
