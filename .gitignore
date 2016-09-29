@@ -6,7 +6,6 @@ app/logs/*
 app/sessions/*
 app/sql/*
 app/lucene/*
-src/*/Bundle/*/Entity/Extra/*
 /bin/
 /vendor/
 *node_modules
