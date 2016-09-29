@@ -87,6 +87,9 @@
     Translator.add("contact_ticket.error.email.not_blank", "Pole \"Adres e-mail\" nie mo\u017ce by\u0107 puste", "validators", "en");
     Translator.add("contact_ticket.error.subject.not_blank", "Pole \"Temat wiadomo\u015bci\" nie mo\u017ce by\u0107 puste", "validators", "en");
     Translator.add("contact_ticket.error.content.not_blank", "Pole \"Tre\u015b\u0107 wiadomo\u015bci\" nie mo\u017ce by\u0107 puste", "validators", "en");
+    Translator.add("review.error.nick.not_blank", "Nick is required", "validators", "en");
+    Translator.add("review.error.content.not_blank", "The review's content is required", "validators", "en");
+    Translator.add("review.error.content.bad_words", "The review's content cannot contain swear words", "validators", "en");
     Translator.add("client.conditions_not_accepted", "You must accept store conditions", "validators", "en");
     Translator.add("client.email_not_unique", "You have an account already. Please login first.", "validators", "en");
 })(Translator);

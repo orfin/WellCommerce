@@ -52,6 +52,17 @@ final class ApiController extends AbstractContainerAware
         return $response;
     }
     
+    public function updateCollectionAction(Request $request, string $resourceType) : Response
+    {
+        try {
+            $response = $this->getRequestHandler($resourceType)->handleUpdateCollectionRequest($request);
+        } catch (\Exception $e) {
+            $response = $this->jsonErrorResponse($e);
+        }
+        
+        return $response;
+    }
+    
     public function deleteResourceAction(Request $request, string $resourceType, int $identifier) : Response
     {
         try {
@@ -78,6 +89,17 @@ final class ApiController extends AbstractContainerAware
     {
         try {
             $response = $this->getRequestHandler($resourceType)->handleListRequest($request);
+        } catch (\Exception $e) {
+            $response = $this->jsonErrorResponse($e);
+        }
+        
+        return $response;
+    }
+    
+    public function countResourceAction(Request $request, string $resourceType) : Response
+    {
+        try {
+            $response = $this->getRequestHandler($resourceType)->handleCountRequest($request);
         } catch (\Exception $e) {
             $response = $this->jsonErrorResponse($e);
         }

@@ -24,14 +24,3 @@ WellCommerce\Bundle\ProductBundle\Entity\ProductTranslation:
             groups:
                 - default
                 - product_translation
-        id:
-            groups:
-                - default
-                - product_translation
-    associations:
-        route:
-            groups:
-                - product_translation
-        translatable:
-            groups:
-                - product_translation

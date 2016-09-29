@@ -11,3 +11,10 @@ services:
         class: WellCommerce\Bundle\AppBundle\Controller\Front\HomePageController
         calls:
             - [setContainer, ['@service_container']]
+
+    exception.subscriber:
+        class: WellCommerce\Bundle\AppBundle\EventListener\ExceptionSubscriber
+        tags:
+            - { name: kernel.event_subscriber }
+        calls:
+            - [setContainer, ['@service_container']]

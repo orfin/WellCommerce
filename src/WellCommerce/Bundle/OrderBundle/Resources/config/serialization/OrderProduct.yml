@@ -24,18 +24,12 @@ WellCommerce\Bundle\OrderBundle\Entity\OrderProduct:
             groups:
                 - default
                 - order_product
-        createdAt:
-            groups: {  }
-        updatedAt:
-            groups: {  }
     associations:
-        order:
-            groups:
-                - order_product
         product:
             groups:
                 - order_product
+                - default
         variant:
             groups:
                 - order_product
-    callbacks: {  }
+                - default

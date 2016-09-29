@@ -37,25 +37,25 @@ final class MailerHelper implements MailerHelperInterface
      * @var array
      */
     protected $options = [];
-
+    
     /**
      * @var bool
      */
     protected $debug;
-
+    
     /**
      * MailerHelper constructor.
      *
      * @param TemplatingHelperInterface $templatingHelper
      * @param bool                      $debug
      */
-    public function __construct(TemplatingHelperInterface $templatingHelper, bool $debug = false)
+    public function __construct (TemplatingHelperInterface $templatingHelper, bool $debug = false)
     {
         $this->templatingHelper = $templatingHelper;
         $this->debug            = $debug;
     }
     
-    public function sendEmail(array $options) : int
+    public function sendEmail (array $options) : int
     {
         $resolver = new OptionsResolver();
         $this->configureOptions($resolver);
@@ -63,11 +63,19 @@ final class MailerHelper implements MailerHelperInterface
         
         $mailer  = $this->createMailer();
         $message = $this->createMessage();
-
-        return $mailer->send($message);
+        
+        try {
+            return $mailer->send($message);
+        } catch (\Exception $e) {
+            if ($this->debug) {
+                throw $e;
+            }
+        }
+        
+        return 0;
     }
     
-    protected function createMessage() : Message
+    protected function createMessage () : Message
     {
         $message = Message::newInstance();
         $message->setSubject($this->options['subject']);
@@ -75,30 +83,30 @@ final class MailerHelper implements MailerHelperInterface
         $message->setTo($this->options['recipient']);
         $message->setReplyTo($this->options['reply_to']);
         $message->setBcc($this->options['bcc']);
-
+        
         $this->setBody($message, $this->options['template'], $this->options['parameters']);
-
+        
         foreach ($this->options['attachments'] as $file) {
             $message->attach($this->createAttachment($file));
         }
-
+        
         return $message;
     }
-
-    protected function createAttachment(string $path) : \Swift_Mime_Attachment
+    
+    protected function createAttachment (string $path) : \Swift_Mime_Attachment
     {
         return \Swift_Attachment::fromPath($path);
     }
-
-    protected function setBody(Message $message, string $template, array $parameters = [])
+    
+    protected function setBody (Message $message, string $template, array $parameters = [])
     {
         $parameters['message'] = $message;
         $body                  = $this->templatingHelper->render($template, $parameters);
-
+        
         $message->setBody($body, 'text/html');
     }
     
-    protected function configureOptions(OptionsResolver $resolver)
+    protected function configureOptions (OptionsResolver $resolver)
     {
         $resolver->setRequired([
             'recipient',
@@ -108,19 +116,19 @@ final class MailerHelper implements MailerHelperInterface
             'template',
             'parameters',
             'configuration',
-            'attachments'
+            'attachments',
         ]);
-
+        
         $resolver->setDefault('bcc', function (Options $options) {
             return $options['configuration']->getFrom() ?? [];
         });
-
+        
         $resolver->setDefault('reply_to', function (Options $options) {
             return $options['configuration']->getFrom() ?? [];
         });
-
+        
         $resolver->setDefault('attachments', []);
-
+        
         $resolver->setAllowedTypes('recipient', ['string', 'array']);
         $resolver->setAllowedTypes('bcc', ['string', 'array']);
         $resolver->setAllowedTypes('reply_to', ['string', 'array']);
@@ -131,7 +139,7 @@ final class MailerHelper implements MailerHelperInterface
         $resolver->setAllowedTypes('configuration', MailerConfiguration::class);
     }
     
-    protected function createMailer() : Mailer
+    protected function createMailer () : Mailer
     {
         $configuration = $this->options['configuration'];
         $transport     = new \Swift_SmtpTransport($configuration->getHost(), $configuration->getPort(), 'tls');
@@ -139,12 +147,12 @@ final class MailerHelper implements MailerHelperInterface
         $transport->setPassword($configuration->getPass());
         $transport->setStreamOptions([
             'ssl' => [
-                'verify_peer' => false
-            ]
+                'verify_peer' => false,
+            ],
         ]);
-
+        
         $mailer = Mailer::newInstance($transport);
-
+        
         if ($this->debug) {
             $logger = new Swift_Plugins_Loggers_EchoLogger();
             $mailer->registerPlugin(new Swift_Plugins_LoggerPlugin($logger));

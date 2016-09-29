@@ -69,9 +69,6 @@ WellCommerce\Bundle\ProductBundle\Entity\Product:
         sellPriceTax:
             groups:
                 - product
-        attributeGroup:
-            groups:
-                - product
         photo:
             groups:
                 - product

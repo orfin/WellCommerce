@@ -21,7 +21,7 @@ trait CouponAwareTrait
 {
     protected $coupon;
 
-    public function getCoupon() : CouponInterface
+    public function getCoupon()
     {
         return $this->coupon;
     }

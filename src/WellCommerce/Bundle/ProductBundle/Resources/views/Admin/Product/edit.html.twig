@@ -4,6 +4,7 @@
     <h2>{% trans %}product.heading.edit{% endtrans %} &raquo; {{ resource.translate().name }}</h2>
     <ul class="possibilities">
         <li><a href="{{ path('admin.product.index') }}" class="button return"><span></span></a></li>
+        <li><a href="{{ path('dynamic_' ~ resource.translate.route.id) }}" class="button show" target="_blank"><span>{% trans %}product.button.show_in_shop{% endtrans %}</span></a></li>
         <li><a href="#{{ form.getName() }}" rel="submit" class="button"><span>{% trans %}common.button.save_and_finish{% endtrans %}</span></a></li>
         <li><a href="#{{ form.getName() }}" rel="submit[continue]" class="button"><span>{% trans %}common.button.save_and_continue{% endtrans %}</span></a></li>
     </ul>

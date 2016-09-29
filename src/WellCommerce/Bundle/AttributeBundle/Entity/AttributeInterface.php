@@ -27,8 +27,6 @@ use WellCommerce\Bundle\CoreBundle\Entity\EntityInterface;
  */
 interface AttributeInterface extends
     EntityInterface,
-    EnableableInterface,
-    HierarchyAwareInterface,
     TimestampableInterface,
     TranslatableInterface,
     BlameableInterface

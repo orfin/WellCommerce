@@ -1,11 +1,3 @@
-# WellCommerce Open-Source E-Commerce Platform
-#
-# This file is part of the WellCommerce package.
-# (c) Adam Piotrowski <adam@wellcommerce.org>
-#
-# For the full copyright and license information,
-# please view the LICENSE file that was distributed with this source code.
-
 review:
     heading:
         index: Reviews
@@ -17,6 +9,8 @@ review:
         created_at: Created at
         product: Product
         id: ID
+        recommendation_exists: Review has already been assessed.
+        review_not_exists: Review not exists.
     button:
         add_opinion: Submit review
     link:

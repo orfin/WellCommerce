@@ -10,37 +10,43 @@ api.index:
     path: /api
     defaults:
         _controller: 'api.controller.front:indexAction'
-    options: {  }
+
 api.resource.list:
     path: '/api/{resourceType}/list'
     defaults:
         _controller: 'api.controller.front:listResourceAction'
         resourceType: 'null'
-    options: {  }
+
 api.resource.create:
     path: '/api/{resourceType}/create'
     defaults:
         _controller: 'api.controller.front:createResourceAction'
         resourceType: 'null'
-    options: {  }
+
 api.resource.get:
     path: '/api/{resourceType}/get/{identifier}'
     defaults:
         _controller: 'api.controller.front:getResourceAction'
         resourceType: 'null'
         identifier: 'null'
-    options: {  }
+
 api.resource.update:
     path: '/api/{resourceType}/update/{identifier}'
     defaults:
         _controller: 'api.controller.front:updateResourceAction'
         resourceType: 'null'
         identifier: 'null'
-    options: {  }
+
 api.resource.delete:
     path: '/api/{resourceType}/delete/{identifier}'
     defaults:
         _controller: 'api.controller.front:deleteResourceAction'
         resourceType: 'null'
         identifier: 'null'
-    options: {  }
+
+api.resource.count:
+    path: '/api/{resourceType}/count/{identifier}'
+    defaults:
+        _controller: 'api.controller.front:countResourceAction'
+        resourceType: 'null'
+        identifier: 'null'

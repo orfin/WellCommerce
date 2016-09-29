@@ -21,7 +21,7 @@ interface VariantAwareInterface
 {
     public function setVariant(VariantInterface $variant);
 
-    public function getVariant() : VariantInterface;
+    public function getVariant();
 
     public function hasVariant() : bool;
 }

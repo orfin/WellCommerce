@@ -42,7 +42,7 @@ class ProductStatusBoxController extends AbstractBoxController
             'order_dir'  => $requestHelper->getAttributesBagParam('orderDir', 'asc'),
             'conditions' => $conditions,
         ]);
-
+        
         return $this->displayTemplate('index', [
             'dataset' => $products,
             'status'  => $status

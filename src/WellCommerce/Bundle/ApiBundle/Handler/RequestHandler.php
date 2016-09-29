@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\ApiBundle\Handler;
 
 use Doctrine\Common\Util\ClassUtils;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -126,6 +127,21 @@ final class RequestHandler implements RequestHandlerInterface
     {
         $resource = $this->getResourceById($identifier);
         $data     = $this->serializer->serialize($resource, self::RESPONSE_FORMAT, ['group' => $this->getResourceType()]);
+        
+        return new Response($data);
+    }
+    
+    public function handleCountRequest() : Response
+    {
+        $repository   = $this->manager->getRepository();
+        $queryBuilder = $repository->getQueryBuilder();
+        $query        = $queryBuilder->getQuery();
+        $query->useQueryCache(true);
+        $query->useResultCache(true);
+        $paginator = new Paginator($query, true);
+        $paginator->setUseOutputWalkers(false);
+        
+        $data = $this->serializer->serialize($paginator->count(), self::RESPONSE_FORMAT, ['group' => $this->getResourceType()]);
         
         return new Response($data);
     }

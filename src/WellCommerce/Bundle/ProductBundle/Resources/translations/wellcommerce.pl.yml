@@ -66,6 +66,7 @@ product:
         description: Opis
     button:
         filter: Filtrowanie wyników
+        show_in_shop: Pokaż w sklepie
     heading:
         recommendations: 'Polecamy Ci również'
     options:

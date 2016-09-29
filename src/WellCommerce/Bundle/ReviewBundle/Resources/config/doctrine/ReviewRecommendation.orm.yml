@@ -1,0 +1,24 @@
+WellCommerce\Bundle\ReviewBundle\Entity\ReviewRecommendation:
+    type: entity
+    table: review_recommendation
+    repositoryClass: WellCommerce\Bundle\ReviewBundle\Repository\ReviewRecommendationRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        liked:
+            type: boolean
+            nullable: false
+        unliked:
+            type: boolean
+            nullable: false
+    manyToOne:
+        review:
+            targetEntity: WellCommerce\Bundle\ReviewBundle\Entity\Review
+            fetch: LAZY
+            joinColumns:
+                review_id:
+                    referencedColumnName: id
+                    onDelete: CASCADE

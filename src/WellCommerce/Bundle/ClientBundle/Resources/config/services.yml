@@ -145,12 +145,12 @@ services:
         arguments: ['@router', front.client.login]
 
     client.validator.unique_username:
-        class: WellCommerce\Bundle\ClientBundle\Validator\Constraints\UniqueUsernameValidator
+        class: WellCommerce\Bundle\ClientBundle\Validator\UniqueUsernameValidator
         tags:
             - { name: validator.constraint_validator, alias: client.validator.unique_username }
         arguments: ['@client.repository', '@router.helper']
 
     client.validator.valid_password:
-        class: WellCommerce\Bundle\ClientBundle\Validator\Constraints\ClientPasswordValidator
+        class: WellCommerce\Bundle\ClientBundle\Validator\ClientPasswordValidator
         tags:
             - { name: validator.constraint_validator, alias: client.validator.valid_password }

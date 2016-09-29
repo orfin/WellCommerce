@@ -42,20 +42,16 @@ final class OrderNumberGenerator implements OrderNumberGeneratorInterface
     
     public function generateOrderNumber(OrderInterface $order) : string
     {
-        $date   = Carbon::now()->format('d/m/Y');
         $orders = $this->findPreviousOrdersToday();
-        $number = sprintf('%s/%s', $orders->count() + 1, $date);
-
-        return $number;
+        
+        return $orders->count() + 1;
     }
-
+    
     private function findPreviousOrdersToday() : Collection
     {
-        $today    = Carbon::now()->startOfDay();
         $criteria = new Criteria();
-        $criteria->where($criteria->expr()->gte('updatedAt', $today));
         $criteria->andWhere($criteria->expr()->eq('confirmed', true));
-
+        
         return $this->orderRepository->matching($criteria);
     }
 }

@@ -10,16 +10,15 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CouponBundle\Entity;
+namespace WellCommerce\Bundle\ContactBundle\Manager;
 
+use WellCommerce\Bundle\CoreBundle\Manager\AbstractManager;
 
-interface CouponAwareInterface
+/**
+ * Class ContactTicketManager
+ *
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
+ */
+final class ContactTicketManager extends AbstractManager
 {
-    public function setCoupon(CouponInterface $coupon);
-
-    public function getCoupon();
-
-    public function hasCoupon() : bool;
-
-    public function removeCoupon();
 }

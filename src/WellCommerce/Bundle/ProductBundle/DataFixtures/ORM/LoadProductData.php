@@ -108,7 +108,8 @@ class LoadProductData extends AbstractDataFixture
         $sellPrice->setValidFrom(new \DateTime());
         $sellPrice->setValidTo((new \DateTime())->modify('+30 days'));
 
-        $product = new Product();
+        /** @var ProductInterface $product */
+        $product = $this->get('product.factory')->create();
         $product->setSku($sku);
         $product->setHierarchy(rand(0, 10));
         $product->setEnabled(true);

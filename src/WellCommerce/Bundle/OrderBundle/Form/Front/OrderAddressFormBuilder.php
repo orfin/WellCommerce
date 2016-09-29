@@ -20,7 +20,7 @@ use WellCommerce\Component\Form\Elements\FormInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-final class OrderAddressFormBuilder extends AbstractFormBuilder
+class OrderAddressFormBuilder extends AbstractFormBuilder
 {
     /**
      * {@inheritdoc}
@@ -37,7 +37,7 @@ final class OrderAddressFormBuilder extends AbstractFormBuilder
         $form->addFilter($this->getFilter('secure'));
     }
     
-    private function addBillingAddressFieldset(FormInterface $form)
+    protected function addBillingAddressFieldset(FormInterface $form)
     {
         $billingAddress = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'billingAddress',
@@ -99,7 +99,7 @@ final class OrderAddressFormBuilder extends AbstractFormBuilder
         ]));
     }
     
-    private function addShippingAddressFieldset(FormInterface $form)
+    protected function addShippingAddressFieldset(FormInterface $form)
     {
         $shippingAddress = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'shippingAddress',
@@ -156,7 +156,7 @@ final class OrderAddressFormBuilder extends AbstractFormBuilder
         ]));
     }
     
-    private function addContactDetailsFieldset(FormInterface $form)
+    protected function addContactDetailsFieldset(FormInterface $form)
     {
         $contactDetails = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'contactDetails',
@@ -189,7 +189,7 @@ final class OrderAddressFormBuilder extends AbstractFormBuilder
         ]));
     }
     
-    private function addClientDetailsFieldset(FormInterface $form)
+    protected function addClientDetailsFieldset(FormInterface $form)
     {
         if (!$this->getSecurityHelper()->getCurrentClient() instanceof ClientInterface) {
             $clientDetails = $form->addChild($this->getElement('nested_fieldset', [

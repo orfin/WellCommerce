@@ -24,7 +24,7 @@ trait VariantAwareTrait
      */
     protected $variant;
 
-    public function getVariant() : VariantInterface
+    public function getVariant()
     {
         return $this->variant;
     }

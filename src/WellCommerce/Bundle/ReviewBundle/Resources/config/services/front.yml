@@ -12,3 +12,15 @@ services:
         arguments: ['@review.manager', '@review.form_builder.front']
         calls:
             - [setContainer, ['@service_container']]
+
+    review.twig.extension:
+        class: WellCommerce\Bundle\ReviewBundle\Twig\Extension\ReviewExtension
+        tags:
+            - { name: twig.extension }
+        arguments:
+            - '@review_recommendation.repository'
+
+    review.doctrine.event_subscriber:
+        class: WellCommerce\Bundle\ReviewBundle\EventListener\ReviewEventSubscriber
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }

@@ -12,28 +12,8 @@ WellCommerce\Bundle\AttributeBundle\Entity\AttributeValue:
             groups:
                 - default
                 - attribute_value
-        createdAt:
-            groups:
-                - default
-                - attribute_value
-        updatedAt:
-            groups:
-                - default
-                - attribute_value
-        createdBy:
-            groups: {  }
-        updatedBy:
-            groups: {  }
-        deletedBy:
-            groups: {  }
     associations:
-        attribute:
-            groups:
-                - attribute_value
-        productAttributeValues:
-            groups:
-                - attribute_value
         translations:
             groups:
+                - default
                 - attribute_value
-    callbacks: {  }

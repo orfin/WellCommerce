@@ -32,6 +32,7 @@ class VariantFactory extends AbstractEntityFactory
         $variant->setModifierValue(100);
         $variant->setSellPrice(new DiscountablePrice());
         $variant->setAvailability(null);
+        $variant->setEnabled(false);
 
         return $variant;
     }

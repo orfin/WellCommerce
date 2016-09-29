@@ -35,9 +35,7 @@ WellCommerce\Bundle\ProductBundle\Entity\Variant:
     associations:
         options:
             groups:
-                - variant
-        product:
-            groups:
+                - default
                 - variant
         availability:
             groups:

@@ -18,6 +18,7 @@ use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use WellCommerce\Bundle\AppBundle\Entity\DiscountablePrice;
 use WellCommerce\Bundle\AppBundle\Entity\HierarchyAwareTrait;
 use WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityAwareTrait;
+use WellCommerce\Bundle\CoreBundle\Behaviours\Enableable\EnableableTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\IdentifiableTrait;
 use WellCommerce\Bundle\MediaBundle\Entity\MediaAwareTrait;
 
@@ -34,6 +35,7 @@ class Variant implements VariantInterface
     use MediaAwareTrait;
     use AvailabilityAwareTrait;
     use ProductAwareTrait;
+    use EnableableTrait;
 
     /**
      * @var Collection

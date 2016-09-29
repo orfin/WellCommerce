@@ -12,21 +12,7 @@ WellCommerce\Bundle\AvailabilityBundle\Entity\Availability:
             groups:
                 - default
                 - availability
-        createdAt:
-            groups: {  }
-        updatedAt:
-            groups: {  }
     associations:
-        createdBy:
-            groups:
-                - availability
-        updatedBy:
-            groups:
-                - availability
-        deletedBy:
-            groups:
-                - availability
         translations:
             groups:
                 - availability
-    callbacks: {  }

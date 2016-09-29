@@ -1,24 +1,23 @@
 <?php
 /*
  * WellCommerce Open-Source E-Commerce Platform
- * 
+ *
  * This file is part of the WellCommerce package.
  *
  * (c) Adam Piotrowski <adam@wellcommerce.org>
- * 
+ *
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
+namespace WellCommerce\Bundle\ReviewBundle\Repository;
 
-namespace WellCommerce\Bundle\ContactBundle\Manager;
-
-use WellCommerce\Bundle\CoreBundle\Manager\AbstractManager;
+use WellCommerce\Bundle\CoreBundle\Repository\EntityRepository;
 
 /**
- * Class ContactManager
+ * Class ReviewRecommendationRepository
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-final class ContactManager extends AbstractManager
+final class ReviewRecommendationRepository extends EntityRepository implements ReviewRecommendationRepositoryInterface
 {
 }

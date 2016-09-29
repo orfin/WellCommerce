@@ -42,6 +42,10 @@ class ReviewRepository extends EntityRepository implements ReviewRepositoryInter
         $criteria = new Criteria();
         $criteria->where($criteria->expr()->eq('product', $product));
         $criteria->andWhere($criteria->expr()->eq('enabled', true));
+        $criteria->orderBy([
+           'ratio'  => 'DESC',
+            'likes' => 'ASC'
+        ]);
 
         return $this->matching($criteria);
     }

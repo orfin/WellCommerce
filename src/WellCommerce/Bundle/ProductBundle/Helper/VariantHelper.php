@@ -47,7 +47,9 @@ class VariantHelper implements VariantHelperInterface
         $variants = [];
         
         $product->getVariants()->map(function (VariantInterface $variant) use (&$variants) {
-            $this->extractVariantData($variant, $variants);
+            if ($variant->isEnabled()) {
+                $this->extractVariantData($variant, $variants);
+            }
         });
         
         return $variants;
@@ -61,7 +63,9 @@ class VariantHelper implements VariantHelperInterface
         $attributes = [];
         
         $product->getVariants()->map(function (VariantInterface $variant) use (&$attributes) {
-            $this->extractAttributesData($variant, $attributes);
+            if ($variant->isEnabled()) {
+                $this->extractAttributesData($variant, $attributes);
+            }
         });
         
         return $attributes;

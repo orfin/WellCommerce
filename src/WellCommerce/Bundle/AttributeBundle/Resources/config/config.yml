@@ -6,6 +6,16 @@
 # For the full copyright and license information,
 # please view the LICENSE file that was distributed with this source code.
 
+well_commerce_api:
+    request_handler:
+        attribute_value:
+            manager: attribute_value.manager
+    serialization:
+        WellCommerce\Bundle\AttributeBundle\Entity\AttributeValue:
+            mapping: "@WellCommerceAttributeBundle/Resources/config/serialization/AttributeValue.yml"
+        WellCommerce\Bundle\AttributeBundle\Entity\AttributeValueTranslation:
+            mapping: "@WellCommerceAttributeBundle/Resources/config/serialization/AttributeValueTranslation.yml"
+
 well_commerce_locale:
     copier:
         entities:

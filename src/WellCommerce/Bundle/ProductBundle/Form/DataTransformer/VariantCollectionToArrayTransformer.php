@@ -56,6 +56,7 @@ class VariantCollectionToArrayTransformer extends CollectionToArrayTransformer
                     'modifier'     => $variant->getModifierValue(),
                     'stock'        => $variant->getStock(),
                     'symbol'       => $variant->getSymbol(),
+                    'status'       => $variant->isEnabled(),
                     'weight'       => $variant->getWeight(),
                     'availability' => $this->transformAvailability($variant->getAvailability()),
                     'attributes'   => $this->transformOptions($variant->getOptions()),

@@ -16,6 +16,7 @@ use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Behaviours\Enableable\EnableableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\EntityInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareInterface;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * Class ReviewInterface
@@ -58,9 +59,9 @@ interface ReviewInterface extends EntityInterface, EnableableInterface, ProductA
      * @return int
      */
     public function getRatingLevel() : int;
-
+    
     /**
-     * @param int $rating
+     * @param int $ratingLevel
      */
     public function setRatingLevel(int $ratingLevel);
 
@@ -70,8 +71,17 @@ interface ReviewInterface extends EntityInterface, EnableableInterface, ProductA
     public function getRatingRecommendation() : int;
 
     /**
-     * @param int $rating
+     * @param int $ratingRecommendation
      */
     public function setRatingRecommendation(int $ratingRecommendation);
 
+    /**
+     * @return int
+     */
+    public function getReviewRecommendations() : Collection;
+    
+    /**
+     * @param Collection $reviewRecommendations
+     */
+    public function setReviewRecommendations(Collection $reviewRecommendations);
 }

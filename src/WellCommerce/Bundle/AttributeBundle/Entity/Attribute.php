@@ -32,8 +32,6 @@ class Attribute implements AttributeInterface
     use Translatable;
     use Timestampable;
     use Blameable;
-    use EnableableTrait;
-    use HierarchyAwareTrait;
     
     /**
      * @var Collection

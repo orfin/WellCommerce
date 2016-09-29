@@ -26,7 +26,7 @@ use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-final class OrderAddressController extends AbstractFrontController
+class OrderAddressController extends AbstractFrontController
 {
     public function indexAction(Request $request) : Response
     {
@@ -61,7 +61,7 @@ final class OrderAddressController extends AbstractFrontController
         ]);
     }
     
-    private function getValidationGroupsForRequest(Request $request) : array
+    protected function getValidationGroupsForRequest(Request $request) : array
     {
         $validationGroups = [
             'order_billing_address',
@@ -85,7 +85,7 @@ final class OrderAddressController extends AbstractFrontController
      *
      * @param ParameterBag $parameters
      */
-    private function copyShippingAddress(ParameterBag $parameters)
+    protected function copyShippingAddress(ParameterBag $parameters)
     {
         $billingAddress = $parameters->get('billingAddress');
         
@@ -101,7 +101,7 @@ final class OrderAddressController extends AbstractFrontController
         $parameters->set('shippingAddress', $shippingAddress);
     }
     
-    private function isCopyBillingAddress(Request $request) : bool
+    protected function isCopyBillingAddress(Request $request) : bool
     {
         $shippingAddress    = $request->request->filter('shippingAddress');
         $copyBillingAddress = $shippingAddress['shippingAddress.copyBillingAddress'] ?? 0;
@@ -109,7 +109,7 @@ final class OrderAddressController extends AbstractFrontController
         return 1 === (int)$copyBillingAddress;
     }
     
-    private function isCreateAccount(Request $request) : bool
+    protected function isCreateAccount(Request $request) : bool
     {
         $clientDetails = $request->request->filter('clientDetails');
         $createAccount = $clientDetails['clientDetails.createAccount'] ?? 0;
@@ -117,7 +117,7 @@ final class OrderAddressController extends AbstractFrontController
         return 1 === (int)$createAccount;
     }
     
-    private function autoRegisterClient(OrderInterface $order) : ClientInterface
+    protected function autoRegisterClient(OrderInterface $order) : ClientInterface
     {
         /** @var $client ClientInterface */
         $client = $this->get('client.manager')->initResource();

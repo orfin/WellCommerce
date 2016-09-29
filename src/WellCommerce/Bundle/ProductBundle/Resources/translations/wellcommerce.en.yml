@@ -68,6 +68,7 @@ product:
         description: Description
     button:
         filter: Filter results
+        show_in_shop: Show in shop
     heading:
         recommendations: 'You might also like'
     options:

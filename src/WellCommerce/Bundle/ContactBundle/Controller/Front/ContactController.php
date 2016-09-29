@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\ContactBundle\Controller\Front;
 
+use WellCommerce\Bundle\ContactBundle\Entity\ContactTicketInterface;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 
 /**
@@ -23,36 +24,36 @@ class ContactController extends AbstractFrontController
 {
     public function indexAction()
     {
-        /** @var ReviewInterface $resource */
+        /** @var ContactTicketInterface $resource */
         $resource = $this->get('contact_ticket.manager')->initResource();
-
-        $form         = $this->getForm($resource);
-
+        
+        $form = $this->getForm($resource);
+        
         if ($form->handleRequest()->isSubmitted()) {
             if ($form->isValid()) {
                 $this->getManager()->createResource($resource);
-
+                
                 $this->getMailerHelper()->sendEmail([
-                    'recipient' => ['rafal@wellcommerce.org', $resource->getEmail()],
-                    'subject' => $resource->getSubject(),
-                    'template' => 'WellCommerceAppBundle:Email:contact.html.twig',
-                    'parameters' => [
+                    'recipient'     => [$resource->getEmail()],
+                    'subject'       => $resource->getSubject(),
+                    'template'      => 'WellCommerceAppBundle:Email:contact.html.twig',
+                    'parameters'    => [
                         'contact' => $resource,
                     ],
                     'configuration' => $this->getShopStorage()->getCurrentShop()->getMailerConfiguration(),
                 ]);
-
+                
                 $this->getFlashHelper()->addSuccess('contact_ticket.flash.success');
-
+                
                 return $this->getRouterHelper()->redirectTo('front.contact.index');
             }
-
+            
             $this->getFlashHelper()->addError('contact_ticket.flash.error');
         }
-
+        
         return $this->displayTemplate('index', [
-            'form'    => $form
+            'form' => $form
         ]);
-
+        
     }
 }

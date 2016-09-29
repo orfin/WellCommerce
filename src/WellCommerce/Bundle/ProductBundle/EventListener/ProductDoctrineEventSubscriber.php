@@ -32,17 +32,17 @@ class ProductDoctrineEventSubscriber implements EventSubscriber
             'preUpdate',
         ];
     }
-
+    
     public function preUpdate(LifecycleEventArgs $args)
     {
         $this->onProductDataBeforeSave($args);
     }
-
+    
     public function prePersist(LifecycleEventArgs $args)
     {
         $this->onProductDataBeforeSave($args);
     }
-
+    
     public function onProductDataBeforeSave(LifecycleEventArgs $args)
     {
         $entity = $args->getObject();
@@ -51,12 +51,13 @@ class ProductDoctrineEventSubscriber implements EventSubscriber
             $this->refreshProductBuyPrices($entity);
             $this->syncProductStock($entity);
         }
-
+        
         if ($entity instanceof VariantInterface) {
             $this->refreshProductVariantSellPrice($entity);
+            $this->syncVariantStock($entity);
         }
     }
-
+    
     /**
      * Recalculates sell prices for product
      *
@@ -70,14 +71,14 @@ class ProductDoctrineEventSubscriber implements EventSubscriber
         $taxRate               = $product->getSellPriceTax()->getValue();
         $netAmount             = TaxHelper::calculateNetPrice($grossAmount, $taxRate);
         $discountedNetAmount   = TaxHelper::calculateNetPrice($discountedGrossAmount, $taxRate);
-
+        
         $sellPrice->setTaxRate($taxRate);
         $sellPrice->setTaxAmount($grossAmount - $netAmount);
         $sellPrice->setNetAmount($netAmount);
         $sellPrice->setDiscountedTaxAmount($discountedGrossAmount - $discountedNetAmount);
         $sellPrice->setDiscountedNetAmount($discountedNetAmount);
     }
-
+    
     /**
      * Recalculates sell prices for single product attribute
      *
@@ -92,7 +93,7 @@ class ProductDoctrineEventSubscriber implements EventSubscriber
         $taxRate               = $product->getSellPriceTax()->getValue();
         $netAmount             = TaxHelper::calculateNetPrice($grossAmount, $taxRate);
         $discountedNetAmount   = TaxHelper::calculateNetPrice($discountedGrossAmount, $taxRate);
-
+        
         $productAttributeSellPrice = $variant->getSellPrice();
         $productAttributeSellPrice->setTaxRate($taxRate);
         $productAttributeSellPrice->setTaxAmount($grossAmount - $netAmount);
@@ -105,7 +106,7 @@ class ProductDoctrineEventSubscriber implements EventSubscriber
         $productAttributeSellPrice->setValidTo($sellPrice->getValidTo());
         $productAttributeSellPrice->setCurrency($sellPrice->getCurrency());
     }
-
+    
     /**
      * Calculates new amount for attribute
      *
@@ -118,7 +119,7 @@ class ProductDoctrineEventSubscriber implements EventSubscriber
     {
         $modifierType  = $variant->getModifierType();
         $modifierValue = $variant->getModifierValue();
-
+        
         switch ($modifierType) {
             case '+':
                 $amount = $amount + $modifierValue;
@@ -130,10 +131,10 @@ class ProductDoctrineEventSubscriber implements EventSubscriber
                 $amount = $amount * ($modifierValue / 100);
                 break;
         }
-
+        
         return round($amount, 2);
     }
-
+    
     /**
      * Recalculates buy prices for product
      *
@@ -145,22 +146,51 @@ class ProductDoctrineEventSubscriber implements EventSubscriber
         $grossAmount = $buyPrice->getGrossAmount();
         $taxRate     = $product->getBuyPriceTax()->getValue();
         $netAmount   = TaxHelper::calculateNetPrice($grossAmount, $taxRate);
-
+        
         $buyPrice->setTaxRate($taxRate);
         $buyPrice->setTaxAmount($grossAmount - $netAmount);
         $buyPrice->setNetAmount($netAmount);
     }
-
+    
     protected function syncProductStock(ProductInterface $product)
     {
         $trackStock       = $product->getTrackStock();
-        $stock            = $product->getStock();
+        $stock            = $this->getProductStock($product);
         $grossPrice       = $product->getSellPrice()->getFinalGrossAmount();
         $isStockAvailable = (true === $trackStock) ? $stock > 0 : 1;
         $isPriceNonZero   = $grossPrice > 0;
-
-        if (false === $isStockAvailable && false === $isPriceNonZero) {
+        
+        if(false === $product->isEnabled() && true === $trackStock){
+            $product->setEnabled($isStockAvailable);
+        }
+       
+        $product->setStock($stock);
+        
+        if (false === $isPriceNonZero) {
             $product->setEnabled(false);
         }
+    }
+    
+    protected function syncVariantStock(VariantInterface $variant)
+    {
+        $product          = $variant->getProduct();
+        $trackStock       = $product->getTrackStock();
+        $stock            = $variant->getStock();
+        $isStockAvailable = (true === $trackStock) ? $stock > 0 : 1;
+        $variant->setEnabled($isStockAvailable);
+    }
+    
+    protected function getProductStock(ProductInterface $product) : int
+    {
+        if (0 === $product->getVariants()->count()) {
+            return $product->getStock();
+        }
+        
+        $stock = 0;
+        $product->getVariants()->map(function (VariantInterface $variant) use (&$stock) {
+            $stock = $stock + $variant->getStock();
+        });
+        
+        return $stock;
     }
 }

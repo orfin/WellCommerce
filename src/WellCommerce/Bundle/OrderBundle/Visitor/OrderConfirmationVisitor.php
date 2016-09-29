@@ -52,6 +52,7 @@ final class OrderConfirmationVisitor implements OrderVisitorInterface
             $this->setOrderNumber($order);
             $this->setInitialOrderStatus($order);
             $this->setInitialPayment($order);
+            $order->setCreatedAt(new \DateTime());
         }
     }
     

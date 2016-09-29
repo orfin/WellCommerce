@@ -38,6 +38,9 @@ WellCommerce\Bundle\ProductBundle\Entity\Variant:
             nullable: false
             options:
                 default: 0
+        enabled:
+            type: boolean
+            nullable: false
     manyToOne:
         product:
             targetEntity: WellCommerce\Bundle\ProductBundle\Entity\Product

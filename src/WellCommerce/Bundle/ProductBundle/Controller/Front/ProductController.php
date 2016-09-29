@@ -28,9 +28,13 @@ class ProductController extends AbstractFrontController
 {
     public function indexAction(ProductInterface $product) : Response
     {
+        if ($product->getCategories()->isEmpty()) {
+            return $this->redirectToRoute('front.home_page.index');
+        }
+        
         $this->addBreadcrumbs($product);
         $this->getProductStorage()->setCurrentProduct($product);
-
+        
         return $this->displayTemplate('index', [
             'product' => $product
         ]);
@@ -39,21 +43,21 @@ class ProductController extends AbstractFrontController
     public function viewAction(ProductInterface $product) : JsonResponse
     {
         $this->getProductStorage()->setCurrentProduct($product);
-
+        
         $templateData       = $this->get('product.helper')->getProductDefaultTemplateData($product);
         $basketModalContent = $this->renderView('WellCommerceProductBundle:Front/Product:view.html.twig', $templateData);
-
+        
         return $this->jsonResponse([
             'basketModalContent' => $basketModalContent,
             'templateData'       => $templateData
         ]);
     }
-
+    
     private function addBreadcrumbs(ProductInterface $product)
     {
         $category = $product->getCategories()->last();
         $paths    = $this->get('category.repository')->getCategoryPath($category);
-
+        
         /** @var CategoryInterface $path */
         foreach ($paths as $path) {
             $this->getBreadcrumbProvider()->add(new Breadcrumb([
@@ -61,7 +65,7 @@ class ProductController extends AbstractFrontController
                 'url'   => $this->getRouterHelper()->generateUrl($path->translate()->getRoute()->getId())
             ]));
         }
-
+        
         $this->getBreadcrumbProvider()->add(new Breadcrumb([
             'label' => $product->translate()->getName(),
         ]));

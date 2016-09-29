@@ -218,11 +218,11 @@ class PageFormBuilder extends AbstractFormBuilder
         /**
          * @var $route \Symfony\Component\Routing\Route
          */
-        foreach ($this->get('router')->getRouteCollection()->all() as $name => $route) {
-            if ($route->hasOption('allow_page_redirect')) {
-                $availableRoutes[$name] = $route->getPath();
-            }
-        }
+//        foreach ($this->get('router')->getRouteCollection()->all() as $name => $route) {
+//            if ($route->hasOption('allow_page_redirect')) {
+//                $availableRoutes[$name] = $route->getPath();
+//            }
+//        }
 
         return $availableRoutes;
     }

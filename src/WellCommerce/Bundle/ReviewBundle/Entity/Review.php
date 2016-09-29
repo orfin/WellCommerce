@@ -16,6 +16,7 @@ use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use WellCommerce\Bundle\CoreBundle\Behaviours\Enableable\EnableableTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\IdentifiableTrait;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareTrait;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * Class Review
@@ -53,6 +54,21 @@ class Review implements ReviewInterface
      * @var int
      */
     protected $ratingRecommendation;
+
+    /**
+     * @var float
+     */
+    protected $ratio;
+
+    /**
+     * @var int
+     */
+    protected $likes;
+
+    /**
+     * @var Collection
+     */
+    protected $reviewRecommendations;
 
     /**
      * {@inheritdoc}
@@ -118,6 +134,39 @@ class Review implements ReviewInterface
         $this->ratingLevel = $ratingLevel;
     }
 
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRatio() : float
+    {
+        return $this->ratio;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setRatio(float $ratio)
+    {
+        $this->ratio = $ratio;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLikes() : int
+    {
+        return $this->likes;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setLikes(int $likes)
+    {
+        $this->likes = $likes;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -132,5 +181,26 @@ class Review implements ReviewInterface
     public function setRatingRecommendation(int $ratingRecommendation)
     {
         $this->ratingRecommendation = $ratingRecommendation;
+    }
+
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getReviewRecommendations() : Collection
+    {
+        return $this->reviewRecommendations;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setReviewRecommendations(Collection $reviewRecommendations)
+    {
+        $this->reviewRecommendations = $reviewRecommendations;
+    }
+
+    public function addRecommendation(ReviewRecommendationInterface $reviewRecommendation) {
+        $this->reviewRecommendations[] = $reviewRecommendation;
     }
 }
