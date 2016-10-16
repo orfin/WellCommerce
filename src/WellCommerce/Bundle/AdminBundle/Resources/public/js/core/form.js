@@ -13681,7 +13681,7 @@ var GFormImage = GCore.ExtendClass(GFormFile, function() {
 		        max_file_size : '10mb',
 		        mime_types: [{
 		        	title : "Image files",
-		            extensions : "jpg,gif,png"
+		            extensions : "jpg,jpeg,gif,png"
 		        }]
 		    },
 		    init: {
@@ -16174,44 +16174,17 @@ var GFormRichTextEditor = GCore.ExtendClass(GFormTextArea, function() {
 
 	var gThis = this;
 
-	gThis.OnShow = function() {
-		if (gThis.m_bShown) {
-			return;
-		}
-
-		if(!gThis.m_bShown){
-            $('#' + gThis.GetId()).trumbowyg({
-                resetCss: true,
-                removeformatPasted: true,
-                fullscreenable: false,
-                btns: [
-                    'viewHTML',
-                    '|',
-                    'formatting',
-                    '|',
-                    'btnGrp-design',
-                    '|',
-                    'btnGrp-justify',
-                    '|',
-                    'btnGrp-lists',
-                    '|',
-                    'horizontalRule'
-                ]
-            });
-
-			gThis.m_bShown = true;
-		}
-	};
-
-    gThis.SetValue = function(mValue, sRepetition) {
-        if (gThis.m_jField == undefined) {
-            return;
-        }
-
-        $('#' + gThis.GetId()).trumbowyg('html', mValue);
-        gThis._GetField(sRepetition).val(mValue);
-    };
-
+  gThis.OnShow = function() {
+  		if (gThis.m_bShown) {
+  			return;
+  		}
+  		var iDelay = 500;
+  		gThis.m_bShown = true;
+  		var editor = CKEDITOR.replace(gThis.GetId());
+      editor.on( 'change', function( evt ) {
+          $('#' + gThis.GetId()).val(evt.editor.getData());
+      });
+  	};
 }, oDefaults);
 
 /*
