@@ -26,19 +26,20 @@ class ClientSubscriber extends AbstractEventSubscriber
     {
         return [
             'client.post_create' => ['onClientPostCreate'],
-            'client.pre_create'  => ['onClientPreCreate']
+            'client.pre_create'  => ['onClientPreCreate'],
         ];
     }
-
+    
     public function onClientPreCreate(EntityEvent $event)
     {
         $client = $event->getEntity();
         if ($client instanceof ClientInterface) {
             $userName = $client->getUsername();
             $client->getContactDetails()->setEmail($userName);
+            $client->setClientGroup($client->getShop()->getClientGroup());
         }
     }
-
+    
     public function onClientPostCreate(EntityEvent $event)
     {
         $client = $event->getEntity();
