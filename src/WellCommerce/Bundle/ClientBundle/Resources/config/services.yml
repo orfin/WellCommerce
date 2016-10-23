@@ -154,3 +154,37 @@ services:
         class: WellCommerce\Bundle\ClientBundle\Validator\ClientPasswordValidator
         tags:
             - { name: validator.constraint_validator, alias: client.validator.valid_password }
+
+    client_discount.order.visitor:
+        class: WellCommerce\Bundle\ClientBundle\Visitor\OrderClientDiscountVisitor
+        arguments: ['@order.modifier.provider', '@currency.helper']
+        tags:
+            - { name: order.visitor, alias: client_discount }
+
+    client_discount.order.modifier.configurator:
+        class: WellCommerce\Bundle\OrderBundle\Configurator\OrderModifierConfigurator
+        arguments: { name: client_discount, description: client.label.client_discount, subtraction: true, hierarchy: 100 }
+
+    client_discount.order.modifier:
+        class: WellCommerce\Bundle\OrderBundle\Entity\OrderModifier
+        factory: ['@order_modifier.factory', create]
+        configurator: ['@client_discount.order.modifier.configurator', configure]
+        tags:
+            - { name: order.modifier, alias: client_discount }
+
+    client_group_discount.order.visitor:
+        class: WellCommerce\Bundle\ClientBundle\Visitor\OrderClientGroupDiscountVisitor
+        arguments: ['@order.modifier.provider', '@currency.helper']
+        tags:
+            - { name: order.visitor, alias: client_group_discount }
+
+    client_group_discount.order.modifier.configurator:
+        class: WellCommerce\Bundle\OrderBundle\Configurator\OrderModifierConfigurator
+        arguments: { name: client_group_discount, description: client.label.client_group_discount, subtraction: true, hierarchy: 100 }
+
+    client_group_discount.order.modifier:
+        class: WellCommerce\Bundle\OrderBundle\Entity\OrderModifier
+        factory: ['@order_modifier.factory', create]
+        configurator: ['@client_group_discount.order.modifier.configurator', configure]
+        tags:
+            - { name: order.modifier, alias: client_group_discount }
