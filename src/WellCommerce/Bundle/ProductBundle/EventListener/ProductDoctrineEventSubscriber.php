@@ -160,13 +160,17 @@ class ProductDoctrineEventSubscriber implements EventSubscriber
         $isStockAvailable = (true === $trackStock) ? $stock > 0 : 1;
         $isPriceNonZero   = $grossPrice > 0;
         
-        if(false === $product->isEnabled() && true === $trackStock){
+        if (false === $product->isEnabled() && true === $trackStock) {
             $product->setEnabled($isStockAvailable);
         }
-       
+        
         $product->setStock($stock);
         
         if (false === $isPriceNonZero) {
+            $product->setEnabled(false);
+        }
+        
+        if (0 === $product->getCategories()->count()) {
             $product->setEnabled(false);
         }
     }
@@ -178,6 +182,10 @@ class ProductDoctrineEventSubscriber implements EventSubscriber
         $stock            = $variant->getStock();
         $isStockAvailable = (true === $trackStock) ? $stock > 0 : 1;
         $variant->setEnabled($isStockAvailable);
+        
+        if (false === $product->isEnabled()) {
+            $variant->setEnabled(false);
+        }
     }
     
     protected function getProductStock(ProductInterface $product) : int

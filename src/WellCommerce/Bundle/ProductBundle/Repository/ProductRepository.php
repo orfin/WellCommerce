@@ -31,6 +31,7 @@ class ProductRepository extends EntityRepository implements ProductRepositoryInt
         $queryBuilder->groupBy('product.id');
         $queryBuilder->leftJoin('product.translations', 'product_translation');
         $queryBuilder->leftJoin('product.categories', 'categories');
+        $queryBuilder->leftJoin('product.categories', 'filtered_categories');
         $queryBuilder->leftJoin('product.producer', 'producers');
         $queryBuilder->leftJoin('product.sellPriceTax', 'sell_tax');
         $queryBuilder->leftJoin('categories.translations', 'categories_translation');

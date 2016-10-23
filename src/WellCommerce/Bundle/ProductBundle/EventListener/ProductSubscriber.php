@@ -13,8 +13,6 @@
 namespace WellCommerce\Bundle\ProductBundle\EventListener;
 
 use Composer\EventDispatcher\EventSubscriberInterface;
-use WellCommerce\Bundle\SearchBundle\Document\DocumentField;
-use WellCommerce\Bundle\SearchBundle\Event\DocumentEvent;
 
 /**
  * Class ProductSubscriber
@@ -27,16 +25,6 @@ class ProductSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            'product.document.pre_index' => ['onPreIndexProductEvent', 0],
         ];
-    }
-    
-    public function onIndexDocumentEvent(DocumentEvent $event)
-    {
-        $document = $event->getDocument();
-        $document->addField(new DocumentField([
-            'name'  => 'sku',
-            'value' => 'sku',
-        ]));
     }
 }

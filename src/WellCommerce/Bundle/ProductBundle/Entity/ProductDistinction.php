@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\ProductBundle\Entity;
 
+use Carbon\Carbon;
 use DateTime;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use WellCommerce\Bundle\CoreBundle\Entity\IdentifiableTrait;
@@ -79,5 +80,13 @@ class ProductDistinction implements ProductDistinctionInterface
     public function getStatus() : ProductStatusInterface
     {
         return $this->status;
+    }
+    
+    public function isValid() : bool
+    {
+        $validFrom = ($this->validFrom === null) ? Carbon::now()->startOfDay() : Carbon::instance($this->validFrom)->startOfDay();
+        $validTo   = ($this->validTo === null) ? Carbon::now()->endOfDay() : Carbon::instance($this->validTo)->endOfDay();
+        
+        return $validFrom->isPast() && $validTo->isFuture();
     }
 }

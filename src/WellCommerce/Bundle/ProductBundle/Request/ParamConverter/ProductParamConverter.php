@@ -25,8 +25,7 @@ class ProductParamConverter extends AbstractEntityParamConverter
     protected function findByRequestParameter(Request $request)
     {
         return $this->repository->findOneBy([
-            'id'      => (int)$request->attributes->get($this->requestAttributeName),
-            'enabled' => true
+            'id' => (int)$request->attributes->get($this->requestAttributeName),
         ]);
     }
 }

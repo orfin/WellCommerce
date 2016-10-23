@@ -35,4 +35,6 @@ interface ProductDistinctionInterface extends EntityInterface, TimestampableInte
     public function setStatus(ProductStatusInterface $status);
 
     public function getStatus() : ProductStatusInterface;
+    
+    public function isValid() : bool;
 }
