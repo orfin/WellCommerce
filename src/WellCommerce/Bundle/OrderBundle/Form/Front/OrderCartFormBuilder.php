@@ -44,13 +44,13 @@ final class OrderCartFormBuilder extends AbstractFormBuilder
             'name'    => 'shippingAddress.country',
             'label'   => $this->trans('client.label.address.country'),
             'options' => $this->get('country.repository')->all(),
-            'default' => $this->getShopStorage()->getCurrentShop()->getDefaultCountry()
+            'default' => $this->getShopStorage()->getCurrentShop()->getDefaultCountry(),
         ]));
         
         $shippingMethods = $form->addChild($this->getElement('radio_group', [
             'name'        => 'shippingMethod',
             'label'       => $this->trans('order.label.shipping_method'),
-            'transformer' => $this->getRepositoryTransformer('entity', $this->get('shipping_method.repository'))
+            'transformer' => $this->getRepositoryTransformer('entity', $this->get('shipping_method.repository')),
         ]));
         
         $this->addShippingMethods($order, $shippingMethods);
@@ -60,7 +60,7 @@ final class OrderCartFormBuilder extends AbstractFormBuilder
         $paymentMethods = $form->addChild($this->getElement('radio_group', [
             'name'        => 'paymentMethod',
             'label'       => $this->trans('order.label.payment_method'),
-            'transformer' => $this->getRepositoryTransformer('entity', $this->get('payment_method.repository'))
+            'transformer' => $this->getRepositoryTransformer('entity', $this->get('payment_method.repository')),
         ]));
         
         $this->addPaymentMethods($order, $paymentMethods);
@@ -84,7 +84,7 @@ final class OrderCartFormBuilder extends AbstractFormBuilder
                 $form->addChild($this->getElement('select', [
                     'name'    => 'shippingMethodOption',
                     'label'   => $this->trans('order.label.shipping_method'),
-                    'options' => ['Wybierz sklep', 'Kraków', 'Warszawa']
+                    'options' => $provider->getShippingOptions(),
                 ]));
             }
         }
@@ -98,7 +98,7 @@ final class OrderCartFormBuilder extends AbstractFormBuilder
      */
     private function addShippingMethods(OrderInterface $order, ElementInterface $radioGroup)
     {
-        $collection = $this->getShippingMethodProvider()->getCosts(new OrderContext($order));
+        $collection    = $this->getShippingMethodProvider()->getCosts(new OrderContext($order));
         
         $collection->map(function (ShippingMethodCostInterface $shippingMethodCost) use ($radioGroup) {
             $shippingMethod = $shippingMethodCost->getShippingMethod();
@@ -107,7 +107,7 @@ final class OrderCartFormBuilder extends AbstractFormBuilder
             
             $label = [
                 'name'    => $shippingMethod->translate()->getName(),
-                'comment' => $this->getCurrencyHelper()->convertAndFormat($grossAmount, $baseCurrency)
+                'comment' => $this->getCurrencyHelper()->convertAndFormat($grossAmount, $baseCurrency),
             ];
             
             $radioGroup->addOptionToSelect($shippingMethod->getId(), $label);
@@ -128,7 +128,9 @@ final class OrderCartFormBuilder extends AbstractFormBuilder
             $collection = $order->getShippingMethod()->getPaymentMethods();
             
             $collection->map(function (PaymentMethodInterface $paymentMethod) use ($radioGroup) {
-                $radioGroup->addOptionToSelect($paymentMethod->getId(), $paymentMethod->translate()->getName());
+                if ($paymentMethod->isEnabled()) {
+                    $radioGroup->addOptionToSelect($paymentMethod->getId(), $paymentMethod->translate()->getName());
+                }
             });
         }
     }
