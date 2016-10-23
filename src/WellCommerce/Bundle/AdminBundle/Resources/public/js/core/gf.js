@@ -4103,7 +4103,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 
 	this._InitializeRowEvents = function(jTr) {
 		jTr.find('select').GSelect();
-		jTr.click(this.SelectThisRow).mousedown(GF.PreventDefault);
+		jTr.click(this.SelectThisRow);
 		this.m_oOptions.context_actions.length &&	jTr.click(this._HandleShowContextMenu).mouseout(this._HandleHideContextMenu);
 		(this.m_oOptions.event_handlers.view_row instanceof Function) && jTr.dblclick(this.HandleDoubleClick);
 		jTr.find('.GF_Datagrid_Col__select input:checkbox').click(this._HandleCheckRowsCheckbox);
