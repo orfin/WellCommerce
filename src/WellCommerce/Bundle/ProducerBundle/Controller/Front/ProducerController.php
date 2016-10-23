@@ -34,6 +34,7 @@ class ProducerController extends AbstractFrontController
 
         return $this->displayTemplate('index', [
             'producer' => $producer,
+            'metadata' => $producer->translate()->getMeta()
         ]);
     }
 }
