@@ -20,3 +20,8 @@ well_commerce_layered_navigation:
             condition: WellCommerce\Component\DataSet\Conditions\Condition\In
             enabled: true
             column: producerId
+        categories:
+            type: array
+            condition: WellCommerce\Component\DataSet\Conditions\Condition\In
+            enabled: true
+            column: filteredCategory
