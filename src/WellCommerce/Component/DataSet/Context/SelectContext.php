@@ -31,10 +31,10 @@ class SelectContext extends ArrayContext
     public function getResult(QueryBuilder $builder, DataSetRequestInterface $request, ColumnCollection $columns, CacheOptions $cache)
     {
         $result = parent::getResult($builder, $request, $columns, $cache);
-
+        
         return $this->makeOptions($result['rows']);
     }
-
+    
     /**
      * Processes dataset rows as select options
      *
@@ -44,15 +44,15 @@ class SelectContext extends ArrayContext
      */
     private function makeOptions(array $result)
     {
-        $options = [];
-
+        $options = (null !== $this->options['default_option']) ? [0 => $this->options['default_option']] : [];
+        
         foreach ($result as $row) {
             $this->makeOption($row, $options);
         }
-
+        
         return $options;
     }
-
+    
     /**
      * Processes single row
      *
@@ -65,26 +65,29 @@ class SelectContext extends ArrayContext
         $label           = $this->propertyAccessor->getValue($row, "[{$this->options['label_column']}]");
         $options[$value] = $label;
     }
-
+    
     /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         parent::configureOptions($resolver);
-
+        
         $resolver->setRequired([
             'value_column',
             'label_column',
+            'default_option',
         ]);
-
+        
         $resolver->setDefaults([
-            'value_column' => 'id',
-            'label_column' => 'name',
-            'pagination'   => false
+            'value_column'   => 'id',
+            'label_column'   => 'name',
+            'pagination'     => false,
+            'default_option' => null,
         ]);
-
+        
         $resolver->setAllowedTypes('value_column', 'string');
         $resolver->setAllowedTypes('label_column', 'string');
+        $resolver->setAllowedTypes('default_option', ['string', 'null']);
     }
 }
