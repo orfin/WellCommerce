@@ -28,5 +28,3 @@ framework:
     assets: ~
     serializer:
         enabled: true
-    profiler:
-        matcher: { ip: "%developer_mode.ip%" }
