@@ -68,6 +68,9 @@ class ClientForgotPasswordBoxController extends AbstractBoxController
         }
         
         $client->getClientDetails()->setPassword('');
+        $client->getClientDetails()->setLegacyPasswordEncoder(null);
+        $client->getClientDetails()->setLegacyPassword(null);
+        
         $form = $this->createChangePasswordForm($client);
         
         if ($form->handleRequest()->isSubmitted()) {
@@ -80,6 +83,7 @@ class ClientForgotPasswordBoxController extends AbstractBoxController
             
             $this->getFlashHelper()->addError('client.flash.change_password.error');
         }
+
         
         return $this->displayTemplate('change', [
             'form' => $form,
@@ -100,7 +104,7 @@ class ClientForgotPasswordBoxController extends AbstractBoxController
      */
     private function createChangePasswordForm(ClientInterface $client)
     {
-        return $this->get('client_forgot_password_change.form_builder.front')->createForm([
+        return $this->get('client_change_password.form_builder.front')->createForm([
             'name'              => 'change_password',
             'validation_groups' => ['client_password_change']
         ], $client);

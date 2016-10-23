@@ -32,7 +32,7 @@ class ClientChangePasswordFormBuilder extends AbstractFormBuilder
         ]));
 
         $clientDetails->addChild($this->getElement('password', [
-            'name'  => 'clientDetails.password',
+            'name'  => 'clientDetails.hashedPassword',
             'label' => $this->trans('client.label.new_password'),
         ]));
 
