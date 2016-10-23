@@ -31,37 +31,37 @@ class PaymentController extends AbstractFrontController
         $payment   = $this->getManager()->findPaymentByToken($token);
         $order     = $payment->getOrder();
         $processor = $this->getPaymentProcessor($order->getPaymentMethod()->getProcessor());
-
+        
         $processor->getGateway()->initializePayment($payment);
-
+        
         $this->getManager()->updateResource($payment);
-
+        
         $content = $this->renderView($processor->getConfigurator()->getInitializeTemplateName(), [
             'payment'       => $payment,
-            'configuration' => $order->getPaymentMethod()->getConfiguration()
+            'configuration' => $order->getPaymentMethod()->getConfiguration(),
         ]);
-
+        
         return new Response($content);
     }
-
+    
     public function confirmAction(string $token, Request $request)
     {
         $payment   = $this->getManager()->findPaymentByToken($token);
         $order     = $payment->getOrder();
         $processor = $this->getPaymentProcessor($order->getPaymentMethod()->getProcessor());
-
+        
         $processor->getGateway()->confirmPayment($payment, $request);
-
+        
         $this->getManager()->updateResource($payment);
-
+        
         if ($payment->getState() === PaymentInterface::PAYMENT_STATE_APPROVED) {
             $order->setCurrentStatus($order->getPaymentMethod()->getPaymentSuccessOrderStatus());
-            $this->getManager()->updateResource($order);
+            $this->getDoctrineHelper()->getEntityManager()->flush();
         }
-
+        
         return $this->displayTemplate('confirm', [
             'payment'       => $payment,
-            'configuration' => $order->getPaymentMethod()->getConfiguration()
+            'configuration' => $order->getPaymentMethod()->getConfiguration(),
         ]);
     }
     
@@ -76,22 +76,34 @@ class PaymentController extends AbstractFrontController
         $order     = $payment->getOrder();
         $processor = $this->getPaymentProcessor($order->getPaymentMethod()->getProcessor());
         $response  = $processor->getGateway()->executePayment($payment, $request);
-
+        
         $this->getManager()->updateResource($payment);
-
+        
         return $response;
     }
-
-    public function notifyAction(string $token)
+    
+    public function notifyAction(string $token, Request $request)
     {
+        $payment   = $this->getManager()->findPaymentByToken($token);
+        $order     = $payment->getOrder();
+        $processor = $this->getPaymentProcessor($order->getPaymentMethod()->getProcessor());
+        $response  = $processor->getGateway()->notifyPayment($payment, $request);
         
+        $this->getManager()->updateResource($payment);
+        
+        if ($payment->getState() === PaymentInterface::PAYMENT_STATE_APPROVED) {
+            $order->setCurrentStatus($order->getPaymentMethod()->getPaymentSuccessOrderStatus());
+            $this->getEntityManager()->flush();
+        }
+        
+        return $response;
     }
-
+    
     protected function getManager() : PaymentManagerInterface
     {
         return parent::getManager();
     }
-
+    
     private function getPaymentProcessor(string $name) : PaymentProcessorInterface
     {
         return $this->get('payment.processor.collection')->get($name);
