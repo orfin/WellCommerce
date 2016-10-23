@@ -64,6 +64,7 @@ class ProductStatusBoxController extends AbstractBoxController
     {
         $conditions = new ConditionsCollection();
         $conditions->add(new Eq('status', $status->getId()));
+        $conditions->add(new Eq('isStatusValid', true));
 
         return $conditions;
     }

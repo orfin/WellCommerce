@@ -37,7 +37,7 @@ well_commerce_routing:
             entity: WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusRoute
             defaults:
                 _controller: product_status.controller.front:indexAction
-                limit: 12
+                limit: 10
                 page: 1
                 orderBy: name
                 orderDir: asc
