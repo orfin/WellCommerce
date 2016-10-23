@@ -14,6 +14,7 @@ services:
 
     coupon.checker:
         class: WellCommerce\Bundle\CouponBundle\Checker\CouponChecker
+        arguments: ['@order.provider.front', '@order.repository', '@currency.helper']
 
     coupon.order.visitor:
         class: WellCommerce\Bundle\CouponBundle\Visitor\CouponOrderVisitor

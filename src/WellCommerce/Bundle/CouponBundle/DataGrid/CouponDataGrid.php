@@ -44,32 +44,37 @@ class CouponDataGrid extends AbstractDataGrid
                 'type' => Filter::FILTER_BETWEEN,
             ]),
         ]));
-
+        
         $collection->add(new Column([
             'id'      => 'name',
             'caption' => $this->trans('common.label.name'),
         ]));
-
+        
         $collection->add(new Column([
             'id'      => 'code',
             'caption' => $this->trans('common.label.code'),
         ]));
-
+        
         $collection->add(new Column([
             'id'      => 'discount',
             'caption' => $this->trans('common.label.discount'),
         ]));
-
+        
+        $collection->add(new Column([
+            'id'      => 'minimumOrderValue',
+            'caption' => $this->trans('common.label.minimum_order_value'),
+        ]));
+        
         $collection->add(new Column([
             'id'      => 'createdAt',
             'caption' => $this->trans('common.label.created_at'),
         ]));
-
+        
         $collection->add(new Column([
             'id'      => 'validFrom',
             'caption' => $this->trans('common.label.valid_from'),
         ]));
-
+        
         $collection->add(new Column([
             'id'      => 'validTo',
             'caption' => $this->trans('common.label.valid_to'),

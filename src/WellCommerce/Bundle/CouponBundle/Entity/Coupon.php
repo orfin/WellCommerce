@@ -68,7 +68,17 @@ class Coupon implements CouponInterface
      * @var int
      */
     protected $globalUsageLimit;
-
+    
+    /**
+     * @var float
+     */
+    protected $minimumOrderValue;
+    
+    /**
+     * @var bool
+     */
+    protected $excludePromotions;
+    
     /**
      * {@inheritdoc}
      */
@@ -195,5 +205,37 @@ class Coupon implements CouponInterface
     public function setGlobalUsageLimit(int $globalUsageLimit)
     {
         $this->globalUsageLimit = $globalUsageLimit;
+    }
+    
+    /**
+     * @return float
+     */
+    public function getMinimumOrderValue(): float
+    {
+        return $this->minimumOrderValue;
+    }
+    
+    /**
+     * @param float $minimumOrderValue
+     */
+    public function setMinimumOrderValue(float $minimumOrderValue)
+    {
+        $this->minimumOrderValue = $minimumOrderValue;
+    }
+    
+    /**
+     * @return boolean
+     */
+    public function isExcludePromotions(): bool
+    {
+        return $this->excludePromotions;
+    }
+    
+    /**
+     * @param boolean $excludePromotions
+     */
+    public function setExcludePromotions(bool $excludePromotions)
+    {
+        $this->excludePromotions = $excludePromotions;
     }
 }

@@ -32,6 +32,8 @@ class CouponFactory extends AbstractEntityFactory
         $coupon->setModifierValue(100);
         $coupon->setCode(strtoupper(uniqid()));
         $coupon->setCurrency('');
+        $coupon->setMinimumOrderValue(1);
+        $coupon->setExcludePromotions(true);
         
         return $coupon;
     }

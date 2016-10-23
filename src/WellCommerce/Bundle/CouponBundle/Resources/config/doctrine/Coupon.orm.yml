@@ -44,3 +44,14 @@ WellCommerce\Bundle\CouponBundle\Entity\Coupon:
             length: 16
             nullable: true
             column: currency
+        minimumOrderValue:
+            type: decimal
+            scale: 2
+            nullable: false
+            precision: 15
+            column: minimum_order_value
+        excludePromotions:
+            type: boolean
+            nullable: false
+            options:
+                default: true

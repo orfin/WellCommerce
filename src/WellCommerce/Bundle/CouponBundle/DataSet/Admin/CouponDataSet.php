@@ -28,15 +28,17 @@ class CouponDataSet extends AbstractDataSet
     public function configureOptions(DataSetConfiguratorInterface $configurator)
     {
         $configurator->setColumns([
-            'id'        => 'coupon.id',
-            'name'      => 'coupon_translation.name',
-            'code'      => 'coupon.code',
-            'createdAt' => 'coupon.createdAt',
-            'validFrom' => 'coupon.validFrom',
-            'validTo'   => 'coupon.validTo',
-            'discount'  => 'IF_ELSE(coupon.modifierType = \'%\', CONCAT_WS(\'\', coupon.modifierValue, coupon.modifierType), CONCAT_WS(\' \', coupon.modifierValue, coupon.currency))',
+            'id'                => 'coupon.id',
+            'name'              => 'coupon_translation.name',
+            'code'              => 'coupon.code',
+            'createdAt'         => 'coupon.createdAt',
+            'validFrom'         => 'coupon.validFrom',
+            'validTo'           => 'coupon.validTo',
+            'currency'          => 'coupon.currency',
+            'minimumOrderValue' => 'coupon.minimumOrderValue',
+            'discount'          => 'IF_ELSE(coupon.modifierType = \'%\', CONCAT_WS(\'\', coupon.modifierValue, coupon.modifierType), CONCAT_WS(\' \', coupon.modifierValue, coupon.currency))',
         ]);
-
+        
         $configurator->setColumnTransformers([
             'createdAt' => $this->getDataSetTransformer('date', ['format' => 'Y-m-d H:i:s']),
             'validFrom' => $this->getDataSetTransformer('date', ['format' => 'Y-m-d']),

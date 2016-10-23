@@ -12,14 +12,32 @@
 
 namespace WellCommerce\Bundle\CouponBundle\Entity;
 
-
+/**
+ * Interface CouponAwareInterface
+ *
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
+ */
 interface CouponAwareInterface
 {
+    /**
+     * @param CouponInterface $coupon
+     *
+     * @return mixed
+     */
     public function setCoupon(CouponInterface $coupon);
-
+    
+    /**
+     * @return CouponInterface|null
+     */
     public function getCoupon();
-
+    
+    /**
+     * @return bool
+     */
     public function hasCoupon() : bool;
-
+    
+    /**
+     * @return void
+     */
     public function removeCoupon();
 }

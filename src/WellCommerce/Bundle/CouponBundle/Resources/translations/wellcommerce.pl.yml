@@ -12,7 +12,12 @@ coupon:
         modifier_value: Wartość modyfikatora
         modifier_type_percent: '%'
         modifier_type_subtract: '-'
+        minimum_order_value: "Minimalna kwota zamówienia"
         accept: Zapisz
         remove: Usuń
     error:
         not_found: Kod kuponu jest nieprawidłowy
+        future_coupon: Data wykorzystania kuponu jest w przyszłości
+        coupon_expired: Kupon wygasł
+        minimum_order_value: Wartość produktów w koszyku jest niewystarczająca do wykorzystania kuponu
+        only_promotion_products: "Tego kuponu nie możesz wykorzystać z produktami będącymi w promocji"

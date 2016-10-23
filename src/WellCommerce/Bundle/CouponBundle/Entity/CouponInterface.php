@@ -103,4 +103,24 @@ interface CouponInterface extends EntityInterface, TranslatableInterface, Timest
      * @param int $globalUsageLimit
      */
     public function setGlobalUsageLimit(int $globalUsageLimit);
+    
+    /**
+     * @return float
+     */
+    public function getMinimumOrderValue(): float;
+    
+    /**
+     * @param float $minimumOrderValue
+     */
+    public function setMinimumOrderValue(float $minimumOrderValue);
+    
+    /**
+     * @return boolean
+     */
+    public function isExcludePromotions(): bool;
+    
+    /**
+     * @param boolean $excludePromotions
+     */
+    public function setExcludePromotions(bool $excludePromotions);
 }

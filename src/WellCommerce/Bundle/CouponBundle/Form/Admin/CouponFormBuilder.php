@@ -97,29 +97,38 @@ class CouponFormBuilder extends AbstractFormBuilder
             'name'  => 'discount_pane',
             'label' => $this->trans('coupon.fieldset.discount_settings')
         ]));
-
-        $modifierType = $discountPane->addChild($this->getElement('select', [
-            'name'    => 'modifierType',
-            'label'   => $this->trans('coupon.label.modifier_type'),
-            'options' => $this->getModifierTypes()
-        ]));
-
+    
         $discountPane->addChild($this->getElement('select', [
             'name'         => 'currency',
             'label'        => $this->trans('common.label.currency'),
             'options'      => $currencies,
-            'dependencies' => [
-                $this->getDependency('show', [
-                    'form'      => $form,
-                    'field'     => $modifierType,
-                    'condition' => new Equals('-')
-                ])
-            ]
         ]));
-
+        
+        $discountPane->addChild($this->getElement('select', [
+            'name'    => 'modifierType',
+            'label'   => $this->trans('coupon.label.modifier_type'),
+            'options' => $this->getModifierTypes()
+        ]));
+        
         $discountPane->addChild($this->getElement('text_field', [
             'name'  => 'modifierValue',
             'label' => $this->trans('coupon.label.modifier_value'),
+            'rules' => [
+                $this->getRule('required')
+            ],
+        ]));
+    
+        $discountPane->addChild($this->getElement('text_field', [
+            'name'  => 'minimumOrderValue',
+            'label' => $this->trans('coupon.label.minimum_order_value'),
+            'rules' => [
+                $this->getRule('required')
+            ],
+        ]));
+    
+        $discountPane->addChild($this->getElement('checkbox', [
+            'name'  => 'excludePromotions',
+            'label' => $this->trans('coupon.label.exclude_promotions'),
             'rules' => [
                 $this->getRule('required')
             ],

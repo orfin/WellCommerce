@@ -12,5 +12,10 @@ coupon:
         modifier_value: Value of modifier
         modifier_type_percent: '%'
         modifier_type_subtract: '-'
+        minimum_order_value: "Minimal order value"
     error:
         not_found: Coupon code is invalid
+        future_coupon: Coupon is not yet valid
+        coupon_expired: Coupon is expired
+        minimum_order_value: "The value of the products in the basket is not sufficient to use the coupon"
+        only_promotion_products: "Coupon cannot be used with promotions"
