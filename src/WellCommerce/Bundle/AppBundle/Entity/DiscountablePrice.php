@@ -12,6 +12,8 @@
 
 namespace WellCommerce\Bundle\AppBundle\Entity;
 
+use Carbon\Carbon;
+
 /**
  * Class DiscountablePrice
  *
@@ -64,13 +66,10 @@ class DiscountablePrice extends Price implements DiscountablePriceInterface
     
     public function isDiscountValid() : bool
     {
-        $now = new \DateTime();
+        $validFrom = ($this->validFrom === null) ? Carbon::now()->startOfDay() : Carbon::instance($this->validFrom)->startOfDay();
+        $validTo   = ($this->validTo === null) ? Carbon::now()->endOfDay() : Carbon::instance($this->validTo)->endOfDay();
         
-        if ($this->validFrom instanceof \DateTime && $this->validTo instanceof \DateTime) {
-            return ($this->validFrom <= $now) && ($this->validTo >= $now);
-        }
-        
-        return false;
+        return $validFrom->isPast() && $validTo->isFuture() && $this->discountedGrossAmount > 0;
     }
     
     public function getDiscountedGrossAmount() : float
