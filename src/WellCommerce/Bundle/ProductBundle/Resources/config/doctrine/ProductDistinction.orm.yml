@@ -1,6 +1,8 @@
 WellCommerce\Bundle\ProductBundle\Entity\ProductDistinction:
     type: entity
     table: product_distinction
+    cache:
+        usage: NONSTRICT_READ_WRITE
     repositoryClass: WellCommerce\Bundle\ProductBundle\Repository\ProductDistinctionRepository
     id:
         id:
