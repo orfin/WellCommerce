@@ -27,6 +27,7 @@ class OrderStatusFactory extends AbstractEntityFactory
     {
         $status = new OrderStatus();
         $status->setEnabled(true);
+        $status->setColour('#000');
         
         return $status;
     }

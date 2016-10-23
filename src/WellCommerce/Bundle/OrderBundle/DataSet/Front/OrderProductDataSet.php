@@ -34,20 +34,20 @@ class OrderProductDataSet extends AbstractDataSet
     public function configureOptions(DataSetConfiguratorInterface $configurator)
     {
         $configurator->setColumns([
-            'id'              => 'order_product.id',
-            'price'           => 'IF_ELSE(order_product.variant IS NOT NULL, product_variant.sellPrice.grossAmount, product.sellPrice.grossAmount)',
-            'discountedPrice' => 'IF_ELSE(order_product.variant IS NOT NULL, product_variant.sellPrice.discountedGrossAmount, product.sellPrice.discountedGrossAmount)',
-            'currency'        => 'IF_ELSE(order_product.variant IS NOT NULL, product_variant.sellPrice.currency, product.sellPrice.currency)',
-            'stock'           => 'IF_ELSE(order_product.variant IS NOT NULL, product_variant.stock, product.stock)',
-            'weight'          => 'IF_ELSE(order_product.variant IS NOT NULL, product_variant.weight, product.weight)',
-            'quantity'        => 'order_product.quantity',
-            'variant'         => 'IDENTITY(order_product.variant)',
-            'options'         => 'order_product.options',
-            'name'            => 'product_translation.name',
-            'route'           => 'IDENTITY(product_translation.route)',
-            'isDiscountValid' => 'IF_ELSE(:date BETWEEN product.sellPrice.validFrom AND product.sellPrice.validTo, 1, 0)',
-            'tax'             => 'sell_tax.value',
-            'photo'           => 'photos.path'
+            'id'          => 'order_product.id',
+            'grossAmount' => 'order_product.sellPrice.grossAmount',
+            'netAmount'   => 'order_product.sellPrice.netAmount',
+            'taxAmount'   => 'order_product.sellPrice.taxAmount',
+            'currency'    => 'order_product.sellPrice.currency',
+            'stock'       => 'IF_ELSE(order_product.variant IS NOT NULL, product_variant.stock, product.stock)',
+            'weight'      => 'IF_ELSE(order_product.variant IS NOT NULL, product_variant.weight, product.weight)',
+            'quantity'    => 'order_product.quantity',
+            'variant'     => 'IDENTITY(order_product.variant)',
+            'options'     => 'order_product.options',
+            'name'        => 'product_translation.name',
+            'route'       => 'IDENTITY(product_translation.route)',
+            'tax'         => 'sell_tax.value',
+            'photo'       => 'photos.path',
         ]);
         
         $configurator->setColumnTransformers([
@@ -59,7 +59,7 @@ class OrderProductDataSet extends AbstractDataSet
             OrderProduct::class,
             Product::class,
             Variant::class,
-            Tax::class
+            Tax::class,
         ]));
     }
     
@@ -69,7 +69,6 @@ class OrderProductDataSet extends AbstractDataSet
         $expression   = $queryBuilder->expr()->eq('order_product.order', ':order');
         $queryBuilder->andWhere($expression);
         $queryBuilder->setParameter('order', $this->getOrderProvider()->getCurrentOrderIdentifier());
-        $queryBuilder->setParameter('date', (new \DateTime())->setTime(0, 0, 1));
         
         return $queryBuilder;
     }

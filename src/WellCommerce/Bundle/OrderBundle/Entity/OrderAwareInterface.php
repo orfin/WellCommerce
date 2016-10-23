@@ -23,5 +23,7 @@ interface OrderAwareInterface
     
     public function getOrder() : OrderInterface;
     
+    public function removeFromOrder();
+    
     public function hasOrder() : bool;
 }

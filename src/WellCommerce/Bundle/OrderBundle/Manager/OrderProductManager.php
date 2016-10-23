@@ -38,7 +38,7 @@ final class OrderProductManager extends AbstractManager implements OrderProductM
         } else {
             $orderProduct->increaseQuantity($quantity);
         }
-
+        
         $this->updateResource($order);
     }
     
@@ -47,7 +47,7 @@ final class OrderProductManager extends AbstractManager implements OrderProductM
         return $this->getRepository()->findOneBy([
             'order'   => $order,
             'product' => $product,
-            'variant' => $variant
+            'variant' => $variant,
         ]);
     }
     
@@ -61,9 +61,6 @@ final class OrderProductManager extends AbstractManager implements OrderProductM
         $orderProduct = $this->initResource();
         $orderProduct->setOrder($order);
         $orderProduct->setProduct($product);
-        $orderProduct->setWeight($product->getWeight());
-        $orderProduct->setSellPrice($product->getSellPrice());
-        $orderProduct->setBuyPrice($product->getBuyPrice());
         
         if ($variant instanceof VariantInterface) {
             $orderProduct->setVariant($variant);
@@ -77,7 +74,7 @@ final class OrderProductManager extends AbstractManager implements OrderProductM
         if (false === $order->getProducts()->contains($orderProduct)) {
             throw new DeleteOrderProductException($orderProduct);
         }
-
+        
         $this->removeResource($orderProduct);
         $this->updateResource($order);
     }
@@ -87,13 +84,13 @@ final class OrderProductManager extends AbstractManager implements OrderProductM
         if (false === $order->getProducts()->contains($orderProduct)) {
             throw new ChangeOrderProductQuantityException($orderProduct);
         }
-
+        
         if ($quantity < 1) {
             $this->deleteOrderProduct($orderProduct, $order);
         } else {
             $orderProduct->setQuantity($quantity);
         }
-
+        
         $this->updateResource($order);
     }
 }

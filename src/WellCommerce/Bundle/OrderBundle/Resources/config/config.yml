@@ -13,8 +13,11 @@ parameters:
         product_total: 200
         shipping_method: 300
         payment_method: 400
-        summary: 500
-        order_confirmation: 600
+        coupon: 500
+        client_discount: 600
+        client_group_discount: 700
+        summary: 800
+        order_confirmation: 900
 
 doctrine:
     orm:

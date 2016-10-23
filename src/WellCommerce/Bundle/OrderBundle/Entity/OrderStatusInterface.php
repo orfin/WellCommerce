@@ -39,4 +39,14 @@ interface OrderStatusInterface extends
      * @param OrderStatusGroupInterface $orderStatusGroup
      */
     public function setOrderStatusGroup(OrderStatusGroupInterface $orderStatusGroup);
+    
+    /**
+     * @return string
+     */
+    public function getColour();
+    
+    /**
+     * @param string $colour
+     */
+    public function setColour(string $colour);
 }

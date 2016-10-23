@@ -2,6 +2,7 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Entity;
 
+use WellCommerce\Bundle\AppBundle\Entity\DiscountablePriceInterface;
 use WellCommerce\Bundle\AppBundle\Entity\PriceInterface;
 use WellCommerce\Bundle\CoreBundle\Behaviours\Timestampable\TimestampableTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\IdentifiableTrait;
@@ -21,11 +22,53 @@ class OrderProduct implements OrderProductInterface
     use VariantAwareTrait;
     use OrderAwareTrait;
     
+    /**
+     * @var int
+     */
     protected $quantity;
+    
+    /**
+     * @var PriceInterface
+     */
     protected $buyPrice;
+    
+    /**
+     * @var PriceInterface
+     */
     protected $sellPrice;
+    
+    /**
+     * @var float
+     */
     protected $weight;
+    
+    /**
+     * @var array
+     */
     protected $options;
+    
+    /**
+     * @var bool
+     */
+    protected $locked;
+    
+    public function getCurrentStock() : int
+    {
+        if ($this->hasVariant()) {
+            return $this->getVariant()->getStock();
+        }
+        
+        return $this->getProduct()->getStock();
+    }
+    
+    public function getCurrentSellPrice() : DiscountablePriceInterface
+    {
+        if ($this->hasVariant()) {
+            return $this->getVariant()->getSellPrice();
+        }
+        
+        return $this->getProduct()->getSellPrice();
+    }
     
     public function getQuantity() : int
     {
@@ -85,5 +128,15 @@ class OrderProduct implements OrderProductInterface
     public function setOptions(array $options)
     {
         $this->options = $options;
+    }
+    
+    public function isLocked(): bool
+    {
+        return $this->locked;
+    }
+    
+    public function setLocked(bool $locked)
+    {
+        $this->locked = $locked;
     }
 }

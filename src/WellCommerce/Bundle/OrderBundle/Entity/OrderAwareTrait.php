@@ -26,6 +26,11 @@ trait OrderAwareTrait
         return $this->order;
     }
     
+    public function removeFromOrder()
+    {
+        $this->order = null;
+    }
+    
     public function setOrder(OrderInterface $order)
     {
         $this->order = $order;

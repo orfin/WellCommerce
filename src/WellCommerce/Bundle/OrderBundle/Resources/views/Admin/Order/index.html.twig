@@ -12,4 +12,10 @@
         };
     </script>
     {{ datagrid_renderer(datagrid) }}
+    <script>
+        $(document).ready(function(){
+            $('.GF_Datagrid_Col_createdAt .GF_Datagrid_filter_between .from').datepicker({dateFormat: 'yy-mm-dd 00:00:00'});
+            $('.GF_Datagrid_Col_createdAt .GF_Datagrid_filter_between .to').datepicker({dateFormat: 'yy-mm-dd 23:59:59'});
+        });
+    </script>
 {% endblock %}

@@ -11,6 +11,9 @@ WellCommerce\Bundle\OrderBundle\Entity\OrderStatus:
         enabled:
             type: boolean
             nullable: false
+        colour:
+            type: string
+            nullable: true
     manyToOne:
         orderStatusGroup:
             targetEntity: WellCommerce\Bundle\OrderBundle\Entity\OrderStatusGroup

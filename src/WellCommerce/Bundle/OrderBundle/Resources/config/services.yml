@@ -1,3 +1,10 @@
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
 
 services:
     order_cart.controller.front:
@@ -20,7 +27,7 @@ services:
 
     order.number_generator:
         class: WellCommerce\Bundle\OrderBundle\Generator\OrderNumberGenerator
-        arguments: ['@order.repository']
+        arguments: ['@doctrine.helper']
 
     order.modifier.collection:
         class: Doctrine\Common\Collections\ArrayCollection
@@ -74,10 +81,22 @@ services:
         tags:
             - { name: kernel.event_subscriber }
 
+    order_status_history.subscriber:
+        class: WellCommerce\Bundle\OrderBundle\EventListener\OrderStatusHistorySubscriber
+        arguments: ['@mailer.helper']
+        tags:
+            - { name: kernel.event_subscriber }
+
     order.dataset.transformer.order_client:
         class: WellCommerce\Bundle\OrderBundle\DataSet\Transformer\ClientTransformer
         tags:
             - { name: dataset.transformer, alias: order_client }
+
+    order.dataset.transformer.order_products:
+        class: WellCommerce\Bundle\OrderBundle\DataSet\Transformer\OrderProductsTransformer
+        arguments: ['@order_product.repository']
+        tags:
+            - { name: dataset.transformer, alias: order_products }
 
     order.provider.admin:
         class: WellCommerce\Bundle\OrderBundle\Provider\Admin\OrderProvider

@@ -36,6 +36,11 @@ class OrderStatus implements OrderStatusInterface
     protected $orderStatusGroup;
     
     /**
+     * @var string
+     */
+    protected $colour;
+    
+    /**
      * {@inheritdoc}
      */
     public function getOrderStatusGroup() : OrderStatusGroupInterface
@@ -49,5 +54,21 @@ class OrderStatus implements OrderStatusInterface
     public function setOrderStatusGroup(OrderStatusGroupInterface $orderStatusGroup)
     {
         $this->orderStatusGroup = $orderStatusGroup;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getColour()
+    {
+        return $this->colour;
+    }
+    
+    /**
+     * @param string $colour
+     */
+    public function setColour(string $colour)
+    {
+        $this->colour = $colour;
     }
 }

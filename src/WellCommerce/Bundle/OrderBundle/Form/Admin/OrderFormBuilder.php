@@ -61,7 +61,7 @@ final class OrderFormBuilder extends AbstractFormBuilder
 
         $paymentShippingData = $orderDetails->addChild($this->getElement('nested_fieldset', [
             'name'  => 'methods',
-            'label' => $this->trans('client.heading.billing_address'),
+            'label' => $this->trans('order.heading.methods'),
         ]));
 
         $shippingMethod = $paymentShippingData->addChild($this->getElement('select', [
@@ -83,7 +83,7 @@ final class OrderFormBuilder extends AbstractFormBuilder
         $order->getModifiers()->map(function (OrderModifierInterface $modifier) use ($paymentShippingData) {
             $paymentShippingData->addChild($this->getElement('constant', [
                 'name'  => 'summary.' . $modifier->getName(),
-                'label' => $modifier->getDescription()
+                'label' => $this->trans($modifier->getDescription())
             ]))->setValue($modifier->getGrossAmount());
         });
 

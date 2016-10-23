@@ -108,9 +108,19 @@ class Order implements OrderInterface
     protected $summary;
     
     /**
+     * @var string|null
+     */
+    protected $shippingMethodOption;
+    
+    /**
      * @var string
      */
     protected $comment;
+    
+    /**
+     * @var bool
+     */
+    protected $conditionsAccepted;
     
     public function isConfirmed() : bool
     {
@@ -170,6 +180,7 @@ class Order implements OrderInterface
     public function removeProduct(OrderProductInterface $orderProduct)
     {
         $this->products->removeElement($orderProduct);
+        $orderProduct->removeFromOrder();
     }
     
     public function getProducts() : Collection
@@ -295,5 +306,37 @@ class Order implements OrderInterface
     public function isEmpty() : bool
     {
         return 0 === $this->productTotal->getQuantity();
+    }
+    
+    /**
+     * @return null|string
+     */
+    public function getShippingMethodOption()
+    {
+        return $this->shippingMethodOption;
+    }
+    
+    /**
+     * @param null|string $shippingMethodOption
+     */
+    public function setShippingMethodOption($shippingMethodOption)
+    {
+        $this->shippingMethodOption = $shippingMethodOption;
+    }
+    
+    /**
+     * @return boolean
+     */
+    public function isConditionsAccepted(): bool
+    {
+        return $this->conditionsAccepted;
+    }
+    
+    /**
+     * @param boolean $conditionsAccepted
+     */
+    public function setConditionsAccepted(bool $conditionsAccepted)
+    {
+        $this->conditionsAccepted = $conditionsAccepted;
     }
 }

@@ -16,6 +16,7 @@ use WellCommerce\Component\DataGrid\Column\Column;
 use WellCommerce\Component\DataGrid\Column\ColumnCollection;
 use WellCommerce\Component\DataGrid\Column\Options\Appearance;
 use WellCommerce\Component\DataGrid\Column\Options\Filter;
+use WellCommerce\Component\DataGrid\Column\Options\Sorting;
 use WellCommerce\Component\DataGrid\Configuration\EventHandler\ProcessEventHandler;
 use WellCommerce\Component\DataGrid\Options\OptionsInterface;
 
@@ -32,11 +33,27 @@ class OrderDataGrid extends AbstractDataGrid
             'id'         => 'id',
             'caption'    => $this->trans('order.label.id'),
             'appearance' => new Appearance([
-                'width' => 40,
-                'align' => Appearance::ALIGN_CENTER
+                'width'   => 40,
+                'visible' => false,
+                'align'   => Appearance::ALIGN_CENTER,
             ]),
             'filter'     => new Filter([
                 'type' => Filter::FILTER_BETWEEN,
+            ]),
+        ]));
+    
+        $collection->add(new Column([
+            'id'         => 'number',
+            'caption'    => $this->trans('order.label.number'),
+            'filter'     => new Filter([
+                'type' => Filter::FILTER_INPUT,
+            ]),
+            'sorting'    => new Sorting([
+                'default_order' => Sorting::SORT_DIR_DESC,
+            ]),
+            'appearance' => new Appearance([
+                'width' => 40,
+                'align' => Appearance::ALIGN_CENTER,
             ]),
         ]));
         
@@ -48,19 +65,31 @@ class OrderDataGrid extends AbstractDataGrid
             ]),
             'appearance' => new Appearance([
                 'width' => 140,
-                'align' => Appearance::ALIGN_LEFT
+                'align' => Appearance::ALIGN_LEFT,
+            ]),
+        ]));
+    
+        $collection->add(new Column([
+            'id'         => 'products',
+            'caption'    => $this->trans('order.label.products'),
+            'filter'     => new Filter([
+                'type' => Filter::FILTER_INPUT,
+            ]),
+            'appearance' => new Appearance([
+                'width' => 140,
+                'align' => Appearance::ALIGN_LEFT,
             ]),
         ]));
         
         $collection->add(new Column([
             'id'         => 'productTotal',
-            'caption'    => $this->trans('order.label.product_total'),
+            'caption'    => $this->trans('order.label.product_total.gross_price'),
             'filter'     => new Filter([
                 'type' => Filter::FILTER_BETWEEN,
             ]),
             'appearance' => new Appearance([
                 'width' => 40,
-                'align' => Appearance::ALIGN_CENTER
+                'align' => Appearance::ALIGN_CENTER,
             ]),
         ]));
         
@@ -72,7 +101,7 @@ class OrderDataGrid extends AbstractDataGrid
             ]),
             'appearance' => new Appearance([
                 'width' => 40,
-                'align' => Appearance::ALIGN_CENTER
+                'align' => Appearance::ALIGN_CENTER,
             ]),
         ]));
         
@@ -85,7 +114,7 @@ class OrderDataGrid extends AbstractDataGrid
             'appearance' => new Appearance([
                 'width'   => 40,
                 'visible' => false,
-                'align'   => Appearance::ALIGN_CENTER
+                'align'   => Appearance::ALIGN_CENTER,
             ]),
         ]));
         
@@ -97,7 +126,31 @@ class OrderDataGrid extends AbstractDataGrid
             ]),
             'appearance' => new Appearance([
                 'width' => 40,
-                'align' => Appearance::ALIGN_CENTER
+                'align' => Appearance::ALIGN_CENTER,
+            ]),
+        ]));
+    
+        $collection->add(new Column([
+            'id'         => 'paymentMethodName',
+            'caption'    => $this->trans('order.label.payment_method'),
+            'filter'     => new Filter([
+                'type' => Filter::FILTER_INPUT,
+            ]),
+            'appearance' => new Appearance([
+                'width' => 80,
+                'align' => Appearance::ALIGN_CENTER,
+            ]),
+        ]));
+    
+        $collection->add(new Column([
+            'id'         => 'shippingMethodName',
+            'caption'    => $this->trans('order.label.shipping_method'),
+            'filter'     => new Filter([
+                'type' => Filter::FILTER_INPUT,
+            ]),
+            'appearance' => new Appearance([
+                'width' => 80,
+                'align' => Appearance::ALIGN_CENTER,
             ]),
         ]));
         
@@ -109,7 +162,7 @@ class OrderDataGrid extends AbstractDataGrid
             ]),
             'appearance' => new Appearance([
                 'width' => 40,
-                'align' => Appearance::ALIGN_CENTER
+                'align' => Appearance::ALIGN_CENTER,
             ]),
         ]));
     }
@@ -117,6 +170,8 @@ class OrderDataGrid extends AbstractDataGrid
     protected function configureOptions(OptionsInterface $options)
     {
         parent::configureOptions($options);
+    
+        $options->getMechanics()->set('default_sorting', 'createdAt');
         
         $eventHandlers = $options->getEventHandlers();
         

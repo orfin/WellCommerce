@@ -112,22 +112,25 @@ class OrderFactory extends AbstractEntityFactory
         $order->setShop($this->shopStorage->getCurrentShop());
         $order->setClient($this->securityHelper->getCurrentClient());
         $order->setSessionId($this->requestHelper->getSessionId());
-
+        $order->setShippingMethodOption(null);
+        $order->setConditionsAccepted(false);
+        
         $client = $this->securityHelper->getCurrentClient();
-
+        
         if ($client instanceof ClientInterface) {
             $order->setClientDetails($client->getClientDetails());
             $order->setContactDetails($client->getContactDetails());
             $order->setBillingAddress($client->getBillingAddress());
             $order->setShippingAddress($client->getShippingAddress());
+            $order->getClientDetails()->setResetPasswordHash(null);
         } else {
             $order->setClientDetails($this->detailsFactory->create());
             $order->setContactDetails($this->contactDetailsFactory->create());
             $order->setBillingAddress($this->billingAddressFactory->create());
             $order->setShippingAddress($this->shippingAddressFactory->create());
         }
-
-
+        
+        
         return $order;
     }
 }

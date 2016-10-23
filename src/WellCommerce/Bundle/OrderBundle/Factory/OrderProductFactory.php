@@ -35,6 +35,7 @@ class OrderProductFactory extends AbstractEntityFactory
         $orderProduct->setCreatedAt(new \DateTime());
         $orderProduct->setUpdatedAt(new \DateTime());
         $orderProduct->setOptions([]);
+        $orderProduct->setLocked(false);
         
         return $orderProduct;
     }

@@ -32,7 +32,7 @@ final class OrderCartController extends AbstractFrontController
     {
         $order = $this->getOrderProvider()->getCurrentOrder();
         $form  = $this->getForm($order, [
-            'validation_groups' => ['order_cart']
+            'validation_groups' => ['order_cart'],
         ]);
         
         if ($form->handleRequest()->isSubmitted()) {
@@ -82,7 +82,7 @@ final class OrderCartController extends AbstractFrontController
         $basketModalContent = $this->renderView('WellCommerceOrderBundle:Front/OrderCart:add.html.twig', [
             'product'         => $product,
             'order'           => $order,
-            'recommendations' => $recommendations
+            'recommendations' => $recommendations,
         ]);
         
         $cartPreviewContent = $this->renderView('WellCommerceOrderBundle:Front/OrderCart:preview.html.twig');
@@ -91,6 +91,10 @@ final class OrderCartController extends AbstractFrontController
             'basketModalContent' => $basketModalContent,
             'cartPreviewContent' => $cartPreviewContent,
             'templateData'       => [],
+            'productTotal'       => [
+                'quantity'    => $order->getProductTotal()->getQuantity(),
+                'grossAmount' => $this->getCurrencyHelper()->convertAndFormat($order->getProductTotal()->getGrossPrice()),
+            ],
         ]);
     }
     

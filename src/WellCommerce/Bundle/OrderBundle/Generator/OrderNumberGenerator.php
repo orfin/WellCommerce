@@ -12,10 +12,8 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Generator;
 
-use Doctrine\Common\Collections\Collection;
-use Doctrine\Common\Collections\Criteria;
+use WellCommerce\Bundle\CoreBundle\Helper\Doctrine\DoctrineHelperInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
-use WellCommerce\Bundle\OrderBundle\Repository\OrderRepositoryInterface;
 
 /**
  * Class OrderNumberGenerator
@@ -25,32 +23,28 @@ use WellCommerce\Bundle\OrderBundle\Repository\OrderRepositoryInterface;
 final class OrderNumberGenerator implements OrderNumberGeneratorInterface
 {
     /**
-     * @var OrderRepositoryInterface
+     * @var DoctrineHelperInterface
      */
-    private $orderRepository;
+    private $helper;
     
     /**
      * OrderNumberGenerator constructor.
      *
-     * @param OrderRepositoryInterface $orderRepository
+     * @param DoctrineHelperInterface $helper
      */
-    public function __construct(OrderRepositoryInterface $orderRepository)
+    public function __construct(DoctrineHelperInterface $helper)
     {
-        $this->orderRepository = $orderRepository;
+        $this->helper = $helper;
     }
     
     public function generateOrderNumber(OrderInterface $order) : string
     {
-        $orders = $this->findPreviousOrdersToday();
+        $sql  = "SELECT MAX(CAST(orders.number AS INT)) AS last_order FROM orders WHERE confirmed = 1";
+        $em   = $this->helper->getEntityManager();
+        $stmt = $em->getConnection()->prepare($sql);
+        $stmt->execute();
+        $rs = $stmt->fetch();
         
-        return $orders->count() + 1;
-    }
-    
-    private function findPreviousOrdersToday() : Collection
-    {
-        $criteria = new Criteria();
-        $criteria->andWhere($criteria->expr()->eq('confirmed', true));
-        
-        return $this->orderRepository->matching($criteria);
+        return $rs['last_order'] + 1;
     }
 }

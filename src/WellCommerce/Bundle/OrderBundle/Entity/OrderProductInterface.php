@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Entity;
 
+use WellCommerce\Bundle\AppBundle\Entity\DiscountablePriceInterface;
 use WellCommerce\Bundle\AppBundle\Entity\PriceInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\EntityInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
@@ -53,4 +54,12 @@ interface OrderProductInterface extends
     public function getOptions() : array;
     
     public function setOptions(array $options);
+    
+    public function isLocked(): bool;
+    
+    public function setLocked(bool $locked);
+    
+    public function getCurrentStock() : int;
+    
+    public function getCurrentSellPrice() : DiscountablePriceInterface;
 }

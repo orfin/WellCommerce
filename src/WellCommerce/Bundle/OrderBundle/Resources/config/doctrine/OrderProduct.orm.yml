@@ -25,6 +25,10 @@ WellCommerce\Bundle\OrderBundle\Entity\OrderProduct:
             precision: 15
         options:
             type: json_array
+        locked:
+            type: boolean
+            options:
+                default: false
     manyToOne:
         order:
             targetEntity: WellCommerce\Bundle\OrderBundle\Entity\Order

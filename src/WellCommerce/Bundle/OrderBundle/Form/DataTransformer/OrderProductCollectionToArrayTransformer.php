@@ -30,7 +30,7 @@ class OrderProductCollectionToArrayTransformer extends CollectionToArrayTransfor
      * @var OrderProductManager
      */
     protected $manager;
-
+    
     /**
      * @param OrderProductManager $manager
      */
@@ -38,19 +38,19 @@ class OrderProductCollectionToArrayTransformer extends CollectionToArrayTransfor
     {
         $this->manager = $manager;
     }
-
+    
     /**
      * {@inheritdoc}
      */
     public function transform($modelData)
     {
         $values = [];
-
+        
         if ($modelData instanceof Collection) {
             $modelData->map(function (OrderProductInterface $orderProduct) use (&$values) {
-
+                
                 $variantId = $this->getVariantId($orderProduct);
-
+                
                 $values[] = [
                     'id'               => $orderProduct->getId(),
                     'product_id'       => $orderProduct->getProduct()->getId(),
@@ -64,24 +64,39 @@ class OrderProductCollectionToArrayTransformer extends CollectionToArrayTransfor
                     'tax_value'        => $orderProduct->getSellPrice()->getTaxAmount(),
                     'previousvariant'  => $variantId,
                     'variant'          => $variantId,
+                    'variant_options'  => $this->getVariantOptions($orderProduct),
                     'weight'           => $orderProduct->getWeight(),
-                    'stock'            => $orderProduct->getProduct()->getStock()
+                    'stock'            => $orderProduct->getProduct()->getStock(),
                 ];
             });
         }
-
+        
         return $values;
     }
-
+    
     protected function getVariantId(OrderProductInterface $orderProduct)
     {
-        if($orderProduct->hasVariant()){
+        if ($orderProduct->hasVariant()) {
             return $orderProduct->getVariant()->getId();
         }
-
+        
         return 0;
     }
-
+    
+    protected function getVariantOptions(OrderProductInterface $orderProduct)
+    {
+        if ($orderProduct->hasVariant()) {
+            $options = [];
+            foreach ($orderProduct->getOptions() as $name => $option) {
+                $options[] = $option;
+            }
+            
+            return implode(', ', $options);
+        }
+        
+        return '';
+    }
+    
     /**
      * {@inheritdoc}
      */

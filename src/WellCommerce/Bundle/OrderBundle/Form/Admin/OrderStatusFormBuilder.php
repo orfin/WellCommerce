@@ -37,7 +37,13 @@ class OrderStatusFormBuilder extends AbstractFormBuilder
             'comment' => $this->trans('order_status.comment.enabled'),
             'default' => 1
         ]));
-
+    
+        $requiredData->addChild($this->getElement('text_field', [
+            'name'    => 'colour',
+            'label'   => $this->trans('order_status.label.colour'),
+            'default' => '#000'
+        ]));
+        
         $orderStatusGroups = $this->get('order_status_group.dataset.admin')->getResult('select');
 
         $requiredData->addChild($this->getElement('select', [

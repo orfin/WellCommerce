@@ -118,4 +118,24 @@ interface OrderInterface extends
     public function acceptVisitor(OrderVisitorInterface $visitor);
     
     public function isEmpty() : bool;
+    
+    /**
+     * @return null|string
+     */
+    public function getShippingMethodOption();
+    
+    /**
+     * @param null|string $shippingMethodOption
+     */
+    public function setShippingMethodOption($shippingMethodOption);
+    
+    /**
+     * @return boolean
+     */
+    public function isConditionsAccepted(): bool;
+    
+    /**
+     * @param boolean $conditionsAccepted
+     */
+    public function setConditionsAccepted(bool $conditionsAccepted);
 }
