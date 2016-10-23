@@ -17,6 +17,8 @@ use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 use WellCommerce\Bundle\OrderBundle\Provider\OrderModifierProviderInterface;
 use WellCommerce\Bundle\OrderBundle\Visitor\OrderVisitorInterface;
 use WellCommerce\Bundle\ShippingBundle\Context\OrderContext;
+use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface;
+use WellCommerce\Bundle\ShippingBundle\Provider\ShippingMethodOptionsProviderInterface;
 use WellCommerce\Bundle\ShippingBundle\Provider\ShippingMethodProviderInterface;
 
 /**
@@ -37,15 +39,24 @@ final class ShippingMethodOrderVisitor implements OrderVisitorInterface
     private $methodProvider;
     
     /**
+     * @var Collection
+     */
+    private $optionsProviderCollection;
+    
+    /**
      * ShippingMethodOrderVisitor constructor.
      *
      * @param OrderModifierProviderInterface  $modifierProvider
      * @param ShippingMethodProviderInterface $methodProvider
      */
-    public function __construct(OrderModifierProviderInterface $modifierProvider, ShippingMethodProviderInterface $methodProvider)
-    {
-        $this->modifierProvider = $modifierProvider;
-        $this->methodProvider   = $methodProvider;
+    public function __construct(
+        OrderModifierProviderInterface $modifierProvider,
+        ShippingMethodProviderInterface $methodProvider,
+        Collection $optionsProviderCollection
+    ) {
+        $this->modifierProvider          = $modifierProvider;
+        $this->methodProvider            = $methodProvider;
+        $this->optionsProviderCollection = $optionsProviderCollection;
     }
     
     /**
@@ -58,6 +69,7 @@ final class ShippingMethodOrderVisitor implements OrderVisitorInterface
         if (0 === $costs->count()) {
             $order->removeModifier('shipping_cost');
             $order->setShippingMethod(null);
+            $order->setShippingMethodOption(null);
             
             return;
         }
@@ -71,6 +83,24 @@ final class ShippingMethodOrderVisitor implements OrderVisitorInterface
         $modifier->setTaxAmount($cost->getCost()->getTaxAmount());
         
         $order->setShippingMethod($cost->getShippingMethod());
+        $this->setShippingMethodOption($order, $cost->getShippingMethod());
+    }
+    
+    private function setShippingMethodOption(OrderInterface $order, ShippingMethodInterface $shippingMethod)
+    {
+        $optionsProvider = $this->getOptionsProvider($shippingMethod);
+        $selectedOption  = $order->getShippingMethodOption();
+        
+        if ($optionsProvider instanceof ShippingMethodOptionsProviderInterface) {
+            $options       = $optionsProvider->getShippingOptions();
+            $defaultOption = current(array_keys($options));
+            
+            if (!isset($options[$selectedOption])) {
+                $order->setShippingMethodOption($defaultOption);
+            }
+        } else {
+            $order->setShippingMethodOption(null);
+        }
     }
     
     /**
@@ -114,5 +144,16 @@ final class ShippingMethodOrderVisitor implements OrderVisitorInterface
     private function getCurrentShippingMethodCostsCollection(OrderInterface $order) : Collection
     {
         return $this->methodProvider->getShippingMethodCosts($order->getShippingMethod(), new OrderContext($order));
+    }
+    
+    private function getOptionsProvider(ShippingMethodInterface $method)
+    {
+        $provider = $method->getOptionsProvider();
+        
+        if ($this->optionsProviderCollection->containsKey($provider)) {
+            return $this->optionsProviderCollection->get($provider);
+        }
+        
+        return null;
     }
 }

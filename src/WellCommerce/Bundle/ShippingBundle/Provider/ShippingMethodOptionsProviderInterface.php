@@ -19,4 +19,5 @@ namespace WellCommerce\Bundle\ShippingBundle\Provider;
  */
 interface ShippingMethodOptionsProviderInterface
 {
+    public function getShippingOptions() : array;
 }

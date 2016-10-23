@@ -45,7 +45,7 @@ services:
         class: WellCommerce\Bundle\ShippingBundle\Visitor\ShippingMethodOrderVisitor
         tags:
             - { name: order.visitor, alias: shipping_method }
-        arguments: ['@order.modifier.provider', '@shipping_method.provider']
+        arguments: ['@order.modifier.provider', '@shipping_method.provider', '@shipping_method.options_provider.collection']
 
     shipping_cost.order.modifier.configurator:
         class: WellCommerce\Bundle\OrderBundle\Configurator\OrderModifierConfigurator
