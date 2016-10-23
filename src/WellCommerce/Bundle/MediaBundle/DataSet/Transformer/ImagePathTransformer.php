@@ -27,38 +27,42 @@ class ImagePathTransformer extends AbstractDataSetTransformer
      * @var ImageHelperInterface
      */
     protected $imageHelper;
-
+    
     /**
      * Constructor
      *
      * @param ImageHelperInterface $imageHelper
      */
-    public function __construct(ImageHelperInterface $imageHelper)
+    public function __construct (ImageHelperInterface $imageHelper)
     {
         $this->imageHelper = $imageHelper;
     }
-
+    
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions (OptionsResolver $resolver)
     {
         $resolver->setRequired([
-            'filter'
+            'filter',
         ]);
-
+        
         $resolver->setDefaults([
-            'filter' => 'medium'
+            'filter' => 'medium',
         ]);
-
+        
         $resolver->setAllowedTypes('filter', 'string');
     }
-
+    
     /**
      * {@inheritdoc}
      */
-    public function transformValue($value)
+    public function transformValue ($value)
     {
+        if (null === $value) {
+            return '';
+        }
+        
         return $this->imageHelper->getImage($value, $this->options['filter']);
     }
 }
