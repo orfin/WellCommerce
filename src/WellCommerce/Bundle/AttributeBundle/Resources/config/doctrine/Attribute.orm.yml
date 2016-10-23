@@ -9,6 +9,8 @@
 WellCommerce\Bundle\AttributeBundle\Entity\Attribute:
     type: entity
     table: attribute
+    cache:
+        usage: NONSTRICT_READ_WRITE
     repositoryClass: WellCommerce\Bundle\AttributeBundle\Repository\AttributeRepository
     id:
         id:
