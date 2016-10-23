@@ -26,11 +26,11 @@ use WellCommerce\Component\Form\Event\FormEvent;
  */
 class LayoutBoxSubscriber extends AbstractEventSubscriber
 {
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents ()
     {
         return [
             'layout_box.pre_form_init' => 'onLayoutBoxFormInit',
-            'layout_box.pre_update'    => 'onLayoutBoxPreUpdate'
+            'layout_box.pre_update'    => 'onLayoutBoxPreUpdate',
         ];
     }
     
@@ -40,7 +40,7 @@ class LayoutBoxSubscriber extends AbstractEventSubscriber
      *
      * @param FormEvent $event
      */
-    public function onLayoutBoxFormInit(FormEvent $event)
+    public function onLayoutBoxFormInit (FormEvent $event)
     {
         $builder       = $event->getFormBuilder();
         $form          = $event->getForm();
@@ -65,7 +65,7 @@ class LayoutBoxSubscriber extends AbstractEventSubscriber
      *
      * @param EntityEvent $event
      */
-    public function onLayoutBoxPreUpdate(EntityEvent $event)
+    public function onLayoutBoxPreUpdate (EntityEvent $event)
     {
         $resource = $event->getEntity();
         if ($resource instanceof LayoutBoxInterface) {
@@ -76,24 +76,24 @@ class LayoutBoxSubscriber extends AbstractEventSubscriber
         }
     }
     
-    private function getBoxSettingsFromRequest(Request $request)
+    private function getBoxSettingsFromRequest (Request $request)
     {
         $settings   = [];
         $accessor   = PropertyAccess::createPropertyAccessor();
         $parameters = $request->request->all();
         $boxType    = $accessor->getValue($parameters, '[required_data][boxType]');
-        if ($accessor->isReadable($parameters, '[' . $boxType . ']')) {
-            $settings = $accessor->getValue($parameters, '[' . $boxType . ']');
+        if ($accessor->isReadable($parameters, '['.$boxType.']')) {
+            $settings = $accessor->getValue($parameters, '['.$boxType.']');
         }
         
         return !is_array($settings) ? [] : $settings;
     }
     
-    private function mergeUnmodifiedSettings(array $oldSettings, array $newSettings) : array
+    private function mergeUnmodifiedSettings (array $oldSettings, array $newSettings) : array
     {
-        foreach ($newSettings as $key => $setting) {
-            if (isset($setting['unmodified']) && 1 === (int)$setting['unmodified']) {
-                $newSettings[$key][0] = $oldSettings[$key][0];
+        foreach ($newSettings as $key => &$setting) {
+            if (is_array($setting) && array_key_exists('unmodified', $setting)) {
+                $setting[0] = (0 !== (int)$setting[0]) ? $setting[0] : $oldSettings[$key][0];
             }
         }
         
