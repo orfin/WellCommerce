@@ -33,20 +33,20 @@ class ReviewRepository extends EntityRepository implements ReviewRepositoryInter
         $queryBuilder->groupBy('review.id');
         $queryBuilder->leftJoin('review.product', 'product_info');
         $queryBuilder->leftJoin('product_info.translations', 'product_translation');
-
+        
         return $queryBuilder;
     }
-
+    
     public function getProductReviews(ProductInterface $product) : Collection
     {
         $criteria = new Criteria();
         $criteria->where($criteria->expr()->eq('product', $product));
         $criteria->andWhere($criteria->expr()->eq('enabled', true));
         $criteria->orderBy([
-           'ratio'  => 'DESC',
-            'likes' => 'ASC'
+            'ratio' => 'desc',
+            'likes' => 'asc',
         ]);
-
+        
         return $this->matching($criteria);
     }
 }
