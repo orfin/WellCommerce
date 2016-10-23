@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\CoreBundle\Helper\Doctrine;
 
 use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Doctrine\Common\Persistence\Mapping\ClassMetadataFactory;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query\Filter\SQLFilter;
 use Doctrine\ORM\Query\FilterCollection;
@@ -29,7 +29,7 @@ interface DoctrineHelperInterface
 {
     public function getDoctrineFilters() : FilterCollection;
 
-    public function getEntityManager() : EntityManager;
+    public function getEntityManager() : EntityManagerInterface;
 
     public function getRepositoryForClass(string $className) : EntityRepository;
 

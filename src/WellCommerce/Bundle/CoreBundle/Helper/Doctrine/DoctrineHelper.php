@@ -16,7 +16,7 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Doctrine\Common\Persistence\Mapping\ClassMetadataFactory;
 use Doctrine\Common\Util\ClassUtils;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query\Filter\SQLFilter;
 use Doctrine\ORM\Query\FilterCollection;
@@ -59,7 +59,7 @@ final class DoctrineHelper implements DoctrineHelperInterface
         return $this->getEntityManager()->getFilters();
     }
     
-    public function getEntityManager() : EntityManager
+    public function getEntityManager() : EntityManagerInterface
     {
         return $this->registry->getManager();
     }
