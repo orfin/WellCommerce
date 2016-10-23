@@ -26,17 +26,18 @@ use WellCommerce\Component\Breadcrumb\Model\Breadcrumb;
  */
 class ProductController extends AbstractFrontController
 {
-    public function indexAction(ProductInterface $product) : Response
+    public function indexAction(ProductInterface $product = null) : Response
     {
-        if ($product->getCategories()->isEmpty()) {
+        if (!$product instanceof ProductInterface || $product->getCategories()->isEmpty()) {
             return $this->redirectToRoute('front.home_page.index');
         }
-        
+
         $this->addBreadcrumbs($product);
         $this->getProductStorage()->setCurrentProduct($product);
         
         return $this->displayTemplate('index', [
-            'product' => $product
+            'product' => $product,
+            'metadata' => $product->translate()->getMeta()
         ]);
     }
     
@@ -49,7 +50,7 @@ class ProductController extends AbstractFrontController
         
         return $this->jsonResponse([
             'basketModalContent' => $basketModalContent,
-            'templateData'       => $templateData
+            'templateData'       => $templateData,
         ]);
     }
     
@@ -62,7 +63,7 @@ class ProductController extends AbstractFrontController
         foreach ($paths as $path) {
             $this->getBreadcrumbProvider()->add(new Breadcrumb([
                 'label' => $path->translate()->getName(),
-                'url'   => $this->getRouterHelper()->generateUrl($path->translate()->getRoute()->getId())
+                'url'   => $this->getRouterHelper()->generateUrl($path->translate()->getRoute()->getId()),
             ]));
         }
         
