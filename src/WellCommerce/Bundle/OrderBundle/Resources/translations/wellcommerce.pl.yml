@@ -14,16 +14,24 @@ order:
         products_in_cart: Produkty w Twoim koszyku
         cart: Koszyk
         comments: Twoje uwagi
+        methods: Płatność i wysyłka
     button:
         confirm: Przejdź do potwierdzenia
         add_product: Dodaj produkt
     label:
         id: ID
-        order_no: Numer zamówienia
+        number: Numer zamówienia
         client: Klient
-        product_total: Wartość produktów
-        shipping_total: Koszty wysyłki
-        shipping_cost: Przesyłka
+        product_total:
+            net_price: Wartość netto produktów
+            tax_amount: Wartość podatku produktów
+            gross_price: Wartość brutto produktów
+        summary:
+            net_amount: Wartość netto
+            tax_amount: Wartość podatku
+            gross_amount: Wartość brutto
+        shipping_total: Koszty przesyłki
+        shipping_cost: Koszty przesyłki
         coupon_discount: Kupon
         order_total: Wartość zamówienia
         variant: Wariant
@@ -41,6 +49,10 @@ order:
         gross_amount: Cena
         gross_total: Łącznie
         currency: Waluta
+        products: Produkty
+        order_no: Numer zamówienia
+        variant_options: Wybrane opcje
+        accept_conditions: Akceptuję regulamin sklepu internetowego
     description:
         product_total: Wartość produktów
         shipping_cost: Koszty wysyłki
@@ -79,8 +91,8 @@ order:
         label:
             copy_address: Adres dostawy jest taki sam jak adres płatnika
             addresses: Adresy
-            line1: Pierwsza linia adresu
-            line2: Druga linia adresu
+            line1: Adres
+            line2: Adres cd.
             province: Prowincja
             postal_code: Kod pocztowy
             country: Państwo

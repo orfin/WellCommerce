@@ -24,6 +24,8 @@ client:
             copy_address: Shipping address same as billing address
             vat_id: VAT ID
             company_name: Company
+        client_discount: Client's discount
+        client_group_discount: Client's group discount
     heading:
         index: Clients
         add: Create a client

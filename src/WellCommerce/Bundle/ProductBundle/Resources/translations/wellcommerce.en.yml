@@ -11,6 +11,7 @@ product:
             variants: Variants
             shops: Shops
             description: Description
+            variants: Variants
     comment:
         enabled: Enable product's visibility
         track_stock: Enabling inventory tracking, the quantity of items will be updated automatically. A products with tracking switched on, which quantity equals 0, would not be able to order by clients.

@@ -4,9 +4,11 @@ client:
         password: Hasło
         confirm_password: Potwierdź hasło
         new_password: Nowe hasło
+        conditions_accepted: Akceptuję regulamin sklepu
         accept_conditions: Akceptuję regulamin sklepu
         accept_newsletter: Zapisz się na nasz newsleter
         terms_and_conditions: Zasady oraz warunki
+        create_account: Załóż konto
         contact_details:
             first_name: Imię
             last_name: Nazwisko
@@ -16,8 +18,8 @@ client:
         address:
             first_name: Imię
             last_name: Nazwisko
-            line1: Pierwsza linia adresu
-            line2: Druga linia adresu
+            line1: Adres
+            line2: Adres cd.
             province: Prowincja
             postal_code: Kod pocztowy
             country: Państwo
@@ -27,6 +29,8 @@ client:
             vat_id: NIP (opcjonalnie)
             company_name: Nazwa firmy (opcjonalnie)
             copy_address: Adres dostawy taki sam jak adres klienta
+        client_discount: Rabat klienta
+        client_group_discount: Rabat grupy klienta
     heading:
         index: Klienci
         client: Klient

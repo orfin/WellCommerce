@@ -11,6 +11,7 @@ product:
             attributes: Warianty
             shops: Sklepy
             description: Opis
+            variants: Warianty
     comment:
         enabled: Włącz widoczność produktu w sklepie
         track_stock: Śledzenie stanu magazynowego spowoduje, że stan magazynowy będzie się zmieniał automatycznie w przypadku zamówień. Produkty z włączonym śledzeniem i ilością 0 nie będą mogły być zamówione przez klientów.
@@ -78,11 +79,11 @@ product:
             list_view: Lista
         order_by:
             name:
-                asc: Nazwa - od A d Z
-                desc: Nazwa - od Z a A
+                asc: Od A do Z
+                desc: Od Z do A
             final_price:
-                asc: Cena - od najniższej
-                desc: Cena - od najwyższej
+                asc: Cena - ↑
+                desc: Cena - ↓
             score:
                 asc: Najlepsze trafienie
         limit:  Wyników na stronę

@@ -16,7 +16,7 @@ order:
         add_product: Add product
     label:
         id: ID
-        order_no: Order no.
+        number: Order no.
         client: Client
         product_total: Products value
         shipping_total: Shipping cost
@@ -36,6 +36,9 @@ order:
         gross_amount: Price
         gross_total: Total
         currency: Currency
+        products: Products
+        variant_options: Wybrane opcje
+        accept_conditions: I accept the shop conditions
     description:
         product_total: Total products value
         shipping_cost: Shipping costs
