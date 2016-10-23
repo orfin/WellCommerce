@@ -12,9 +12,7 @@
 
 namespace WellCommerce\Bundle\ShipmentBundle;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use WellCommerce\Bundle\CoreBundle\HttpKernel\AbstractWellCommerceBundle;
-use WellCommerce\Bundle\ShippingBundle\DependencyInjection\Compiler;
 
 /**
  * Class WellCommerceShippingBundle

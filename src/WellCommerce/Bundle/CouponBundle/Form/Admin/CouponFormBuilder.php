@@ -12,7 +12,6 @@
 namespace WellCommerce\Bundle\CouponBundle\Form\Admin;
 
 use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
-use WellCommerce\Component\Form\Conditions\Equals;
 use WellCommerce\Component\Form\DataTransformer\DateTransformer;
 use WellCommerce\Component\Form\Elements\FormInterface;
 

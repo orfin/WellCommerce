@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\ShipmentBundle\Repository;
 
-use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**

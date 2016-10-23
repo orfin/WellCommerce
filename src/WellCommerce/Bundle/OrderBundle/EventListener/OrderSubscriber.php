@@ -13,7 +13,6 @@ namespace WellCommerce\Bundle\OrderBundle\EventListener;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use WellCommerce\Bundle\CoreBundle\Event\EntityEvent;
-use WellCommerce\Bundle\CoreBundle\Helper\Mailer\MailerHelperInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 use WellCommerce\Bundle\OrderBundle\Visitor\OrderVisitorTraverser;
 
