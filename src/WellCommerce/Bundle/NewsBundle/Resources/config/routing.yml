@@ -44,3 +44,8 @@ admin.news.delete_group:
     options:
         expose: true
         require_admin_permission: news.delete
+
+front.news.index:
+    path: /news
+    defaults:
+        _controller: 'news.controller.front:indexAction'

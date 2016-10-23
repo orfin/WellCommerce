@@ -9,3 +9,15 @@
 services:
     news.context.front:
         class: WellCommerce\Bundle\NewsBundle\Context\Front\NewsContext
+
+    news.controller.front:
+        class: WellCommerce\Bundle\NewsBundle\Controller\Front\NewsController
+        arguments: ['@news.manager']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    twig.extension.news:
+        class: WellCommerce\Bundle\NewsBundle\Twig\Extension\NewsExtension
+        tags:
+            - { name: twig.extension }
+        arguments: ['@news.dataset.front']

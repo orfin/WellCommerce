@@ -12,20 +12,22 @@
 
 namespace WellCommerce\Bundle\NewsBundle\Entity;
 
-use Knp\DoctrineBehaviors\Model\Sluggable\Sluggable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translation;
 use WellCommerce\Bundle\AppBundle\Entity\Meta;
 use WellCommerce\Bundle\LocaleBundle\Entity\LocaleAwareInterface;
+use WellCommerce\Bundle\RoutingBundle\Entity\RoutableSubjectInterface;
+use WellCommerce\Bundle\RoutingBundle\Entity\RoutableTrait;
+use WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface;
 
 /**
  * Class NewsTranslation
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class NewsTranslation implements LocaleAwareInterface
+class NewsTranslation implements RoutableSubjectInterface, LocaleAwareInterface
 {
     use Translation;
-    use Sluggable;
+    use RoutableTrait;
     
     /**
      * @var string
@@ -46,6 +48,11 @@ class NewsTranslation implements LocaleAwareInterface
      * @var Meta
      */
     protected $meta;
+    
+    /**
+     * @var NewsRoute
+     */
+    protected $route;
     
     /**
      * Constructor
@@ -119,11 +126,8 @@ class NewsTranslation implements LocaleAwareInterface
         $this->meta = $meta;
     }
     
-    /**
-     * @return array
-     */
-    public function getSluggableFields()
+    public function getRouteEntity() : RouteInterface
     {
-        return ['topic'];
+        return new NewsRoute();
     }
 }

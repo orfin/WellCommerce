@@ -1,0 +1,13 @@
+WellCommerce\Bundle\NewsBundle\Entity\NewsRoute:
+    type: entity
+    cache:
+        usage: NONSTRICT_READ_WRITE
+    table: route_news
+    manyToOne:
+        identifier:
+            targetEntity: WellCommerce\Bundle\NewsBundle\Entity\News
+            fetch: LAZY
+            joinColumns:
+                foreign_id:
+                    referencedColumnName: id
+                    onDelete: CASCADE

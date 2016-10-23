@@ -11,6 +11,7 @@
  */
 namespace WellCommerce\Bundle\NewsBundle\Repository;
 
+use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\CoreBundle\Repository\EntityRepository;
 
 /**
@@ -20,4 +21,16 @@ use WellCommerce\Bundle\CoreBundle\Repository\EntityRepository;
  */
 class NewsRepository extends EntityRepository implements NewsRepositoryInterface
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function getDataSetQueryBuilder() : QueryBuilder
+    {
+        $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder->leftJoin('news.translations', 'news_translation');
+        $queryBuilder->leftJoin('news.photo', 'photos');
+        $queryBuilder->groupBy('news.id');
+        
+        return $queryBuilder;
+    }
 }

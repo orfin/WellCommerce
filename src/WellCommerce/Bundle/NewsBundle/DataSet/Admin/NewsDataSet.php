@@ -28,8 +28,19 @@ class NewsDataSet extends AbstractDataSet
     public function configureOptions(DataSetConfiguratorInterface $configurator)
     {
         $configurator->setColumns([
-            'id'   => 'news.id',
-            'name' => 'news_translation.topic',
+            'id'        => 'news.id',
+            'createdAt' => 'news.createdAt',
+            'startDate' => 'news.startDate',
+            'endDate'   => 'news.endDate',
+            'topic'     => 'news_translation.topic',
+            'summary'   => 'news_translation.summary',
+            'content'   => 'news_translation.content',
+            'slug'      => 'news_translation.slug',
+            'locale'    => 'news_translation.locale',
+            'route'     => 'IDENTITY(news_translation.route)',
+            'publish'   => 'news.publish',
+            'featured'  => 'news.featured',
+            'photo'     => 'photos.path',
         ]);
     }
 }

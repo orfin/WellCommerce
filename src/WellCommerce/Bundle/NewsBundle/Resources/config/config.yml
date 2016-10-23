@@ -21,6 +21,13 @@ well_commerce_api:
         WellCommerce\Bundle\NewsBundle\Entity\NewsTranslation:
             mapping: "@WellCommerceNewsBundle/Resources/config/serialization/NewsTranslation.yml"
 
+well_commerce_routing:
+    dynamic_routing:
+        news:
+            entity: WellCommerce\Bundle\NewsBundle\Entity\NewsRoute
+            defaults:
+                _controller: news.controller.front:viewAction
+
 well_commerce_locale:
     copier:
         entities:

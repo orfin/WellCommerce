@@ -46,8 +46,8 @@ class NewsDataGrid extends AbstractDataGrid
         ]));
         
         $collection->add(new Column([
-            'id'      => 'name',
-            'caption' => $this->trans('common.label.name'),
+            'id'      => 'topic',
+            'caption' => $this->trans('news.label.topic'),
         ]));
     }
 }
