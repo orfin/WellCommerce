@@ -34,10 +34,11 @@
                     <value>client_registration</value>
                 </option>
             </constraint>
-            <constraint name="Email">
+            <constraint name="Regex">
                 <option name="groups">
                     <value>client_registration</value>
                 </option>
+                <option name="pattern">/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.(?:[A-Z]{2}|com|org|net|gov|mil|biz|info|mobi|name|aero|jobs|museum|pro)$/i</option>
             </constraint>
         </property>
         <property name="password">

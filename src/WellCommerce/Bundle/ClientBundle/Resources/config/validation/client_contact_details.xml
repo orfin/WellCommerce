@@ -36,6 +36,30 @@
                 </option>
             </constraint>
         </property>
+        <property name="email">
+            <constraint name="NotNull">
+                <option name="groups">
+                    <value>order_contact_details</value>
+                </option>
+            </constraint>
+            <constraint name="NotBlank">
+                <option name="groups">
+                    <value>order_contact_details</value>
+                </option>
+            </constraint>
+            <constraint name="Regex">
+                <option name="groups">
+                    <value>order_contact_details</value>
+                </option>
+                <option name="pattern">/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.(?:[A-Z]{2}|com|org|net|gov|mil|biz|info|mobi|name|aero|jobs|museum|pro)$/i</option>
+            </constraint>
+            <constraint name="Email">
+                <option name="groups">
+                    <value>order_contact_details</value>
+                </option>
+                <option name="strict">false</option>
+            </constraint>
+        </property>
         <property name="phone">
             <constraint name="NotNull">
                 <option name="groups">
