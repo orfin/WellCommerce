@@ -1,0 +1,12 @@
+{% extends 'WellCommerceAdminBundle:Admin:layout.html.twig' %}
+{% trans_default_domain "wellcommerce" %}
+{% block content %}
+    <h2>{% trans %}shipment.heading.index{% endtrans %}</h2>
+    <ul class="possibilities">
+        <li><a href="#" class="button" title="{% trans %}common.button.add{% endtrans %}"><span>Pobierz naklejki (dzisiaj)</span></a></li>
+        <li><a href="#" class="button" title="{% trans %}common.button.add{% endtrans %}"><span>Pobierz protokoły (dzisiaj)</span></a></li>
+        <li><a href="#" class="button" title="{% trans %}common.button.add{% endtrans %}"><span>Pobierz naklejki (wczoraj)</span></a></li>
+        <li><a href="#" class="button" title="{% trans %}common.button.add{% endtrans %}"><span>Pobierz protokoły (wczoraj)</span></a></li>
+    </ul>
+    {{ datagrid_renderer(datagrid) }}
+{% endblock %}

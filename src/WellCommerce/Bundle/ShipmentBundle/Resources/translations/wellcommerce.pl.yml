@@ -1,0 +1,13 @@
+shipment:
+    heading:
+        index: Przesyłki
+        add: Dodaj przesyłkę
+        edit: Edytuj przesyłkę
+    label:
+        guid: GUID
+        package_number: Numer przesyłki
+        courier: Kurier
+        order_number: Numer zamówienia
+    fieldset:
+        costs: Ustawienia kosztów wysyłki
+        countries: Państwa

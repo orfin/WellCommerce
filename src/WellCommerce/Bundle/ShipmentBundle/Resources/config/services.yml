@@ -1,0 +1,36 @@
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
+
+services:
+    elektroniczny_nadawca.shipment.adapter:
+        class: WellCommerce\Bundle\ShipmentBundle\Adapter\ElektronicznyNadawcaAdapter
+        tags:
+            - { name: shipment.adapter }
+        calls:
+            - [setContainer, ['@service_container']]
+
+    inpost.shipment.adapter:
+        class: WellCommerce\Bundle\ShipmentBundle\Adapter\InpostAdapter
+        tags:
+            - { name: shipment.adapter }
+        calls:
+            - [setContainer, ['@service_container']]
+
+    fedex.shipment.adapter:
+        class: WellCommerce\Bundle\ShipmentBundle\Adapter\FedExAdapter
+        tags:
+            - { name: shipment.adapter }
+        calls:
+            - [setContainer, ['@service_container']]
+
+    fedex_domestic.shipment.adapter:
+        class: WellCommerce\Bundle\ShipmentBundle\Adapter\FedExDomesticAdapter
+        tags:
+            - { name: shipment.adapter }
+        calls:
+            - [setContainer, ['@service_container']]

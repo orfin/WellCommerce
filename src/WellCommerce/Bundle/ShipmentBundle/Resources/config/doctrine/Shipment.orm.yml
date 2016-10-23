@@ -1,0 +1,38 @@
+WellCommerce\Bundle\ShipmentBundle\Entity\Shipment:
+    type: entity
+    table: shipment
+    repositoryClass: WellCommerce\Bundle\ShipmentBundle\Repository\ShipmentRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        guid:
+            type: string
+            length: 64
+            nullable: false
+        packageNumber:
+            type: string
+            length: 255
+            nullable: false
+            column: package_number
+        courier:
+            type: string
+            length: 64
+            nullable: false
+        sent:
+            type: boolean
+            nullable: false
+            options:
+                default: false
+        formData:
+            type: json_array
+            nullable: true
+    manyToOne:
+        order:
+            targetEntity: WellCommerce\Bundle\OrderBundle\Entity\Order
+            joinColumn:
+                name: order_id
+                referencedColumnName: id
+                onDelete: CASCADE

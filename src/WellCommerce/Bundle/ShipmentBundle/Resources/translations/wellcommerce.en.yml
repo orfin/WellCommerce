@@ -1,0 +1,12 @@
+shipping_method:
+    heading:
+        index: Shipping methods
+        add: Add a shipping method
+        edit: Edit a shipping method
+    label:
+        calculator: Type of costs calculation
+        costs: Shipping costs
+        options_provider: Options provider service
+    fieldset:
+        costs: Shipping costs settings
+        countries: Countries
