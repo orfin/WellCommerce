@@ -60,6 +60,7 @@ doctrine:
                         CONCAT_WS: DoctrineExtensions\Query\Mysql\ConcatWs
                         GROUP_CONCAT: DoctrineExtensions\Query\Mysql\GroupConcat
                         IF_ELSE: DoctrineExtensions\Query\Mysql\IfElse
+                        IF_NULL: DoctrineExtensions\Query\Mysql\IfNull
                         DAY: DoctrineExtensions\Query\Mysql\Day
                         MONTH: DoctrineExtensions\Query\Mysql\Month
                         QUARTER: DoctrineExtensions\Query\Mysql\Quarter
