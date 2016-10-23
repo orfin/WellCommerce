@@ -53,7 +53,7 @@ class ReviewBoxController extends AbstractBoxController
                 
                 $this->getFlashHelper()->addSuccess('review.flash.success');
                 
-                return $this->getRouterHelper()->redirectTo('dynamic_' . $currentRoute);
+                return $this->getRouterHelper()->redirectTo('dynamic_'.$currentRoute);
             }
             
             $this->getFlashHelper()->addError('review.flash.error');
@@ -61,7 +61,8 @@ class ReviewBoxController extends AbstractBoxController
         
         return $this->displayTemplate('index', [
             'form'    => $form,
-            'reviews' => $this->getRepository()->getProductReviews($product)
+            'product' => $product,
+            'reviews' => $this->getRepository()->getProductReviews($product),
         ]);
     }
     
@@ -69,7 +70,7 @@ class ReviewBoxController extends AbstractBoxController
     {
         $review = $this->getManager()->getRepository()->findOneBy([
             'id'      => $id,
-            'enabled' => 1
+            'enabled' => 1,
         ]);
         
         if ($review instanceof ReviewInterface) {
@@ -88,7 +89,7 @@ class ReviewBoxController extends AbstractBoxController
             
             $this->getFlashHelper()->addSuccess('report.flash.success');
             
-            return $this->getRouterHelper()->redirectTo('dynamic_' . $currentRoute);
+            return $this->getRouterHelper()->redirectTo('dynamic_'.$currentRoute);
         }
     }
     
@@ -109,7 +110,7 @@ class ReviewBoxController extends AbstractBoxController
             
             $review = $this->getManager()->getRepository()->findOneBy([
                 'id'      => $id,
-                'enabled' => 1
+                'enabled' => 1,
             ]);
             
             if (null === $review) {
@@ -132,18 +133,18 @@ class ReviewBoxController extends AbstractBoxController
             
             $reviewLikes = $reviewRecommendationFactory->getRepository()->findBy([
                 'review' => $review,
-                'liked'  => true
+                'liked'  => true,
             ]);
             
             $reviewUnlikes = $reviewRecommendationFactory->getRepository()->findBy([
                 'review'  => $review,
-                'unliked' => true
+                'unliked' => true,
             ]);
             
             $result = [
                 'success' => true,
                 'likes'   => count($reviewLikes),
-                'unlikes' => count($reviewUnlikes)
+                'unlikes' => count($reviewUnlikes),
             ];
         } catch (Exception $e) {
             $result = [
