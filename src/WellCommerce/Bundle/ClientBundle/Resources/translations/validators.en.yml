@@ -7,5 +7,6 @@
 # please view the LICENSE file that was distributed with this source code.
 
 client:
-    conditions_not_accepted: 'Musisz zaakceptować regulamin sklepu'
-    email_not_unique: 'Posiadasz już konto w naszym sklepie. Zaloguj się lub przypomnij hasło.'
+    conditions_not_accepted: You must accept store conditions
+    email_not_unique: 'You have an account already. Please login first.'
+    password_not_valid: 'Password is not valid.'
