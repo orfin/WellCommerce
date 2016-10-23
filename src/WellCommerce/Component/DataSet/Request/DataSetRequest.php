@@ -58,7 +58,7 @@ class DataSetRequest implements DataSetRequestInterface
         $resolver->setDefaults([
             'offset'     => 0,
             'page'       => 1,
-            'limit'      => 100,
+            'limit'      => 150,
             'order_by'   => 'name',
             'order_dir'  => 'asc',
             'conditions' => new ConditionsCollection(),
