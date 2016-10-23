@@ -55,6 +55,7 @@ class SalesReportProvider extends AbstractReportProvider implements ReportProvid
         $criteria = new Criteria();
         $criteria->where($criteria->expr()->gte('createdAt', $configuration->getStartDate()));
         $criteria->andWhere($criteria->expr()->lte('createdAt', $configuration->getEndDate()));
+        $criteria->andWhere($criteria->expr()->eq('confirmed', true));
 
         return $criteria;
     }
