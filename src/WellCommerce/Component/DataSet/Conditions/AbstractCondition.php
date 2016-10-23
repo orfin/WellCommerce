@@ -50,7 +50,12 @@ abstract class AbstractCondition implements ConditionInterface
     {
         return $this->operator;
     }
-
+    
+    public function isRangedOperator() : bool
+    {
+        return false;
+    }
+    
     public function getIdentifier() : string
     {
         return $this->field;

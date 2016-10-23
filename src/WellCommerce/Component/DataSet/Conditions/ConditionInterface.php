@@ -39,4 +39,9 @@ interface ConditionInterface
      * @return string|array
      */
     public function getValue();
+    
+    /**
+     * @return bool
+     */
+    public function isRangedOperator() : bool;
 }

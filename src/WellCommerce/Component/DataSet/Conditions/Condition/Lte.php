@@ -22,4 +22,9 @@ use WellCommerce\Component\DataSet\Conditions\AbstractCondition;
 final class Lte extends AbstractCondition
 {
     protected $operator = 'lte';
+    
+    public function isRangedOperator() : bool
+    {
+        return true;
+    }
 }

@@ -22,4 +22,9 @@ use WellCommerce\Component\DataSet\Conditions\AbstractCondition;
 final class Gte extends AbstractCondition
 {
     protected $operator = 'gte';
+    
+    public function isRangedOperator() : bool
+    {
+        return true;
+    }
 }
