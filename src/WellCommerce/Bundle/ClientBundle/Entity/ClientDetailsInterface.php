@@ -45,5 +45,25 @@ interface ClientDetailsInterface
     
     public function getResetPasswordHash();
     
-    public function setResetPasswordHash(string $resetPasswordHash);
+    public function setResetPasswordHash($resetPasswordHash);
+    
+    /**
+     * @return null|string
+     */
+    public function getLegacyPassword ();
+    
+    /**
+     * @param null|string $legacyPassword
+     */
+    public function setLegacyPassword ($legacyPassword);
+    
+    /**
+     * @return null|string
+     */
+    public function getLegacyPasswordEncoder ();
+    
+    /**
+     * @param null|string $legacyPasswordEncoder
+     */
+    public function setLegacyPasswordEncoder ($legacyPasswordEncoder);
 }

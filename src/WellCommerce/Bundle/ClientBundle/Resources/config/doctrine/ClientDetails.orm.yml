@@ -41,3 +41,11 @@ WellCommerce\Bundle\ClientBundle\Entity\ClientDetails:
             type: boolean
             nullable: false
             column: newsletter_accepted
+        legacyPassword:
+            type: string
+            length: 255
+            nullable: true
+        legacyPasswordEncoder:
+            type: string
+            length: 255
+            nullable: true

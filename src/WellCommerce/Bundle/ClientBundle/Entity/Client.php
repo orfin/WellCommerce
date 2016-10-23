@@ -166,4 +166,9 @@ class Client implements ClientInterface
     {
         $this->shippingAddress = $shippingAddress;
     }
+    
+    public function getEncoderName()
+    {
+        return $this->clientDetails->getLegacyPasswordEncoder() ?? null;
+    }
 }
