@@ -32,6 +32,7 @@ final class CategoryController extends AbstractFrontController
 
         return $this->displayTemplate('index', [
             'category' => $category,
+            'metadata' => $category->translate()->getMeta()
         ]);
     }
 
