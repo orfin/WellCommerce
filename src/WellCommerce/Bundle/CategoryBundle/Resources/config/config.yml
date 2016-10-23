@@ -33,6 +33,7 @@ well_commerce_routing:
                 view: grid
                 producers: ~
                 attributes: ~
+                categories: ~
             requirements:
                 limit: "\\d{1,10}"
                 page: "\\d{1,10}"
@@ -43,7 +44,8 @@ well_commerce_routing:
                 view: "grid|list"
                 producers: "[\\d+_]+"
                 attributes: "[\\d+_]+"
-            pattern: "{page},{limit},{orderBy},{orderDir},{priceFrom},{priceTo},{view},{producers},{attributes}"
+                categories: "[\\d+_]+"
+            pattern: "{page},{limit},{orderBy},{orderDir},{priceFrom},{priceTo},{view},{producers},{attributes},{categories}"
 
 well_commerce_locale:
     copier:
