@@ -29,6 +29,7 @@ final class SearchDataSet extends ProductDataSet
     {
         $configurator->setColumns([
             'id'               => 'product.id',
+            'enabled'          => 'product.enabled',
             'name'             => 'product_translation.name',
             'shortDescription' => 'product_translation.shortDescription',
             'description'      => 'product_translation.description',
@@ -51,7 +52,7 @@ final class SearchDataSet extends ProductDataSet
         ]);
         
         $configurator->setColumnTransformers([
-            'route' => $this->getDataSetTransformer('route')
+            'route' => $this->getDataSetTransformer('route'),
         ]);
     }
     
