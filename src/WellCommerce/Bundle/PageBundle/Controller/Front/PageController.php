@@ -43,7 +43,8 @@ class PageController extends AbstractFrontController
         ]));
 
         return $this->displayTemplate('index', [
-            'page' => $page
+            'page' => $page,
+            'metadata' => $page->translate()->getMeta()
         ]);
     }
 

@@ -25,13 +25,15 @@ class PageDataSet extends AbstractDataSet
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(DataSetConfiguratorInterface $configurator)
+    public function configureOptions (DataSetConfiguratorInterface $configurator)
     {
         $configurator->setColumns([
             'id'        => 'page.id',
+            'createdAt' => 'page.createdAt',
             'parent'    => 'IDENTITY(page.parent)',
             'children'  => 'page_translation.name',
             'name'      => 'page_translation.name',
+            'content'   => 'page_translation.content',
             'slug'      => 'page_translation.slug',
             'locale'    => 'page_translation.locale',
             'route'     => 'IDENTITY(page_translation.route)',
@@ -39,6 +41,10 @@ class PageDataSet extends AbstractDataSet
             'section'   => 'page.section',
             'shop'      => 'page_shops.id',
             'hierarchy' => 'page.hierarchy',
+        ]);
+        
+        $configurator->setColumnTransformers([
+            'createdAt' => $this->getDataSetTransformer('date', ['format' => 'Y-m-d H:i:s']),
         ]);
     }
 }
