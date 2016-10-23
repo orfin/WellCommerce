@@ -95,9 +95,9 @@ final class SecurityHelper implements SecurityHelperInterface
 
     public function getFirewallNameForRequest(Request $request)
     {
-        list($mode,) = explode('/', $request->getPathInfo());
+        list($mode,) = explode('/', ltrim($request->getPathInfo(), '/'));
 
-        return ($mode === 'admin') ?? 'client';
+        return ($mode === 'admin') ? 'admin' : 'client';
     }
 
     public function generateRandomPassword(int $length = 8) : string
