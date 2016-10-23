@@ -38,6 +38,7 @@ imports:
     - { resource: "@WellCommerceRoutingBundle/Resources/config/config.yml" }
     - { resource: "@WellCommerceSearchBundle/Resources/config/config.yml" }
     - { resource: "@WellCommerceShippingBundle/Resources/config/config.yml" }
+    - { resource: "@WellCommerceShipmentBundle/Resources/config/config.yml" }
     - { resource: "@WellCommerceShopBundle/Resources/config/config.yml" }
     - { resource: "@WellCommerceTaxBundle/Resources/config/config.yml" }
     - { resource: "@WellCommerceThemeBundle/Resources/config/config.yml" }
