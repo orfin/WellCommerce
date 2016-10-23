@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\OrderBundle\Visitor;
 
 use WellCommerce\Bundle\CurrencyBundle\Helper\CurrencyHelperInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderProductInterface;
 use WellCommerce\Bundle\OrderBundle\Generator\OrderNumberGeneratorInterface;
 use WellCommerce\Bundle\PaymentBundle\Manager\PaymentManagerInterface;
 
@@ -52,7 +53,7 @@ final class OrderConfirmationVisitor implements OrderVisitorInterface
             $this->setOrderNumber($order);
             $this->setInitialOrderStatus($order);
             $this->setInitialPayment($order);
-            $order->setCreatedAt(new \DateTime());
+            $this->lockProducts($order);
         }
     }
     
@@ -79,5 +80,12 @@ final class OrderConfirmationVisitor implements OrderVisitorInterface
             $payment = $this->paymentManager->createPaymentForOrder($order);
             $order->addPayment($payment);
         }
+    }
+    
+    private function lockProducts(OrderInterface $order)
+    {
+        $order->getProducts()->map(function (OrderProductInterface $orderProduct) {
+            $orderProduct->setLocked(true);
+        });
     }
 }

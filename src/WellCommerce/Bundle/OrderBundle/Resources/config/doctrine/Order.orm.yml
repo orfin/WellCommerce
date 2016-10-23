@@ -4,6 +4,9 @@ WellCommerce\Bundle\OrderBundle\Entity\Order:
         usage: NONSTRICT_READ_WRITE
     table: orders
     repositoryClass: WellCommerce\Bundle\OrderBundle\Repository\OrderRepository
+    indexes:
+        IDX_orders_number:
+            columns: [number]
     id:
         id:
             type: integer
@@ -53,6 +56,16 @@ WellCommerce\Bundle\OrderBundle\Entity\Order:
             type: string
             length: 1000
             nullable: false
+        shippingMethodOption:
+            type: string
+            length: 255
+            nullable: true
+        conditionsAccepted:
+            type: boolean
+            nullable: false
+            column: conditions_accepted
+            options:
+                default: true
     oneToMany:
         products:
             targetEntity: WellCommerce\Bundle\OrderBundle\Entity\OrderProduct
@@ -60,6 +73,7 @@ WellCommerce\Bundle\OrderBundle\Entity\Order:
                 - persist
             fetch: LAZY
             mappedBy: order
+            orphanRemoval: true
         orderStatusHistory:
             targetEntity: WellCommerce\Bundle\OrderBundle\Entity\OrderStatusHistory
             cascade:

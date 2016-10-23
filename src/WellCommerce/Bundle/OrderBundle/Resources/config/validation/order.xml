@@ -42,5 +42,14 @@
                 <option name="minMessage">order.empty_product_collection</option>
             </constraint>
         </property>
+        <property name="conditionsAccepted">
+            <constraint name="EqualTo">
+                <option name="value">1</option>
+                <option name="message">client.conditions_not_accepted</option>
+                <option name="groups">
+                    <value>order_confirmation</value>
+                </option>
+            </constraint>
+        </property>
     </class>
 </constraint-mapping>
