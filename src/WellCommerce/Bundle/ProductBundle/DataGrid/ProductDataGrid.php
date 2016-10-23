@@ -16,6 +16,9 @@ use WellCommerce\Component\DataGrid\Column\Column;
 use WellCommerce\Component\DataGrid\Column\ColumnCollection;
 use WellCommerce\Component\DataGrid\Column\Options\Appearance;
 use WellCommerce\Component\DataGrid\Column\Options\Filter;
+use WellCommerce\Component\DataGrid\Configuration\EventHandler\DataLoadedEventHandler;
+use WellCommerce\Component\DataGrid\Configuration\EventHandler\LoadedEventHandler;
+use WellCommerce\Component\DataGrid\Configuration\EventHandler\ProcessEventHandler;
 use WellCommerce\Component\DataGrid\Configuration\EventHandler\UpdateRowEventHandler;
 use WellCommerce\Component\DataGrid\Options\OptionsInterface;
 
@@ -102,6 +105,14 @@ class ProductDataGrid extends AbstractDataGrid
         $eventHandlers->add(new UpdateRowEventHandler([
             'function' => $this->getJavascriptFunctionName('update'),
             'route'    => $this->getActionUrl('update'),
+        ]));
+    
+        $eventHandlers->add(new ProcessEventHandler([
+            'function' => $this->getJavascriptFunctionName('process'),
+        ]));
+    
+        $eventHandlers->add(new LoadedEventHandler([
+            'function' => $this->getJavascriptFunctionName('loaded'),
         ]));
     }
 }

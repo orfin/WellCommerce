@@ -71,3 +71,9 @@ services:
         tags:
             - { name: dataset.transformer, alias: category }
         arguments: ['@routing.generator', '@category.repository']
+
+    dataset.transformer.distinctions:
+        class: WellCommerce\Bundle\ProductBundle\DataSet\Transformer\DistinctionsTransformer
+        tags:
+            - { name: dataset.transformer, alias: distinctions }
+        arguments: ['@product.repository']

@@ -13,7 +13,9 @@
 namespace WellCommerce\Bundle\ProductBundle\DataSet\Admin;
 
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
+use WellCommerce\Component\DataSet\Conditions\Condition\Eq;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
+use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
 
 /**
  * Class ProductDataSet
@@ -28,15 +30,28 @@ class ProductDataSet extends AbstractDataSet
     public function configureOptions(DataSetConfiguratorInterface $configurator)
     {
         $configurator->setColumns([
-            'id'          => 'product.id',
-            'name'        => 'product_translation.name',
-            'sku'         => 'product.sku',
-            'weight'      => 'product.weight',
-            'grossAmount' => 'product.sellPrice.grossAmount',
-            'stock'       => 'product.stock',
-            'shop'        => 'product_shops.id',
-            'tax'         => 'sell_tax.value',
-            'category'    => 'GROUP_CONCAT(DISTINCT categories_translation.name ORDER BY categories_translation.name ASC SEPARATOR \', \')',
+            'id'              => 'product.id',
+            'name'            => 'product_translation.name',
+            'sku'             => 'product.sku',
+            'weight'          => 'product.weight',
+            'grossAmount'     => 'product.sellPrice.grossAmount',
+            'stock'           => 'product.stock',
+            'shop'            => 'product_shops.id',
+            'tax'             => 'sell_tax.value',
+            'photo'           => 'photos.path',
+            'category'        => 'GROUP_CONCAT(DISTINCT categories_translation.name ORDER BY categories_translation.name ASC SEPARATOR \', \')',
         ]);
+        
+        $configurator->setColumnTransformers([
+            'photo' => $this->getDataSetTransformer('image_path', ['filter' => 'small']),
+        ]);
+    }
+    
+    protected function getDataSetRequest(array $requestOptions = []) : DataSetRequestInterface
+    {
+        $request = parent::getDataSetRequest($requestOptions);
+        $request->addCondition(new Eq('shop', $this->getShopStorage()->getCurrentShopIdentifier()));
+        
+        return $request;
     }
 }

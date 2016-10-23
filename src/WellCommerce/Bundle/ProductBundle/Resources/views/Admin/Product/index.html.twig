@@ -19,6 +19,21 @@
             action: duplicateProduct,
             img: '{{ asset('bundles/wellcommerceadmin/images/datagrid/duplicate-row.png') }}',
         });
+
+        var loadedProductDataGrid = function(dDg) {
+            dDg.m_jBody.find('.show-thumb').mouseenter(GTooltip.ShowThumbForThis).mouseleave(GTooltip.HideThumbForThis);
+        };
+
+        var processProductDataGrid = function(oRow) {
+            if (oRow.photo != '') {
+                oRow.name = '<a title="" href="' + oRow.photo + '" class="show-thumb"><img src="{{ asset('images/icons/datagrid/details.png') }}" style="vertical-align: middle;" /></a> '+ oRow.name;
+            }else{
+                oRow.name = '<img style="opacity: 0.2;vertical-align: middle;" src="{{ asset('images/icons/datagrid/details.png') }}" style="vertical-align: middle;" /> '+ oRow.name;
+            }
+
+            return oRow;
+        };
+
     </script>
 
     {{ datagrid_renderer(datagrid) }}
