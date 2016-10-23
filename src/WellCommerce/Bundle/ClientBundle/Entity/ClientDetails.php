@@ -59,6 +59,16 @@ class ClientDetails implements ClientDetailsInterface
      */
     protected $resetPasswordHash;
     
+    /**
+     * @var string|null
+     */
+    protected $legacyPassword;
+    
+    /**
+     * @var string|null
+     */
+    protected $legacyPasswordEncoder;
+    
     public function getDiscount() : float
     {
         return $this->discount;
@@ -149,8 +159,40 @@ class ClientDetails implements ClientDetailsInterface
         return $this->resetPasswordHash;
     }
     
-    public function setResetPasswordHash(string $resetPasswordHash)
+    public function setResetPasswordHash($resetPasswordHash)
     {
         $this->resetPasswordHash = $resetPasswordHash;
+    }
+    
+    /**
+     * @return null|string
+     */
+    public function getLegacyPassword ()
+    {
+        return $this->legacyPassword;
+    }
+    
+    /**
+     * @param null|string $legacyPassword
+     */
+    public function setLegacyPassword ($legacyPassword)
+    {
+        $this->legacyPassword = $legacyPassword;
+    }
+    
+    /**
+     * @return null|string
+     */
+    public function getLegacyPasswordEncoder ()
+    {
+        return $this->legacyPasswordEncoder;
+    }
+    
+    /**
+     * @param null|string $legacyPasswordEncoder
+     */
+    public function setLegacyPasswordEncoder ($legacyPasswordEncoder)
+    {
+        $this->legacyPasswordEncoder = $legacyPasswordEncoder;
     }
 }
