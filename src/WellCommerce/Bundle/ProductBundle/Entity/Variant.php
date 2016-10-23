@@ -21,6 +21,7 @@ use WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityAwareTrait;
 use WellCommerce\Bundle\CoreBundle\Behaviours\Enableable\EnableableTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\IdentifiableTrait;
 use WellCommerce\Bundle\MediaBundle\Entity\MediaAwareTrait;
+use WellCommerce\Bundle\ProductBundle\Entity\Extra\VariantExtraTrait;
 
 /**
  * Class Variant
@@ -36,42 +37,43 @@ class Variant implements VariantInterface
     use AvailabilityAwareTrait;
     use ProductAwareTrait;
     use EnableableTrait;
-
+    use VariantExtraTrait;
+    
     /**
      * @var Collection
      */
     protected $options;
-
+    
     /**
      * @var DiscountablePrice
      */
     protected $sellPrice;
-
+    
     /**
      * @var float
      */
     protected $weight;
-
+    
     /**
      * @var string
      */
     protected $symbol;
-
+    
     /**
      * @var int
      */
     protected $stock;
-
+    
     /**
      * @var string
      */
     protected $modifierType;
-
+    
     /**
      * @var float
      */
     protected $modifierValue;
-
+    
     public function __construct()
     {
         $this->options = new ArrayCollection();
@@ -84,7 +86,7 @@ class Variant implements VariantInterface
     {
         return $this->options;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -93,10 +95,10 @@ class Variant implements VariantInterface
         if ($this->options instanceof Collection) {
             $this->synchronizeOptions($options);
         }
-
+        
         $this->options = $options;
     }
-
+    
     protected function synchronizeOptions(Collection $options)
     {
         $this->options->map(function (VariantOptionInterface $option) use ($options) {
@@ -105,7 +107,7 @@ class Variant implements VariantInterface
             }
         });
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -113,7 +115,7 @@ class Variant implements VariantInterface
     {
         return $this->weight;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -121,7 +123,7 @@ class Variant implements VariantInterface
     {
         $this->weight = $weight;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -129,7 +131,7 @@ class Variant implements VariantInterface
     {
         return $this->symbol;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -137,7 +139,7 @@ class Variant implements VariantInterface
     {
         $this->symbol = $symbol;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -145,7 +147,7 @@ class Variant implements VariantInterface
     {
         return $this->stock;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -153,7 +155,7 @@ class Variant implements VariantInterface
     {
         $this->stock = $stock;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -161,7 +163,7 @@ class Variant implements VariantInterface
     {
         return $this->sellPrice;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -169,7 +171,7 @@ class Variant implements VariantInterface
     {
         $this->sellPrice = $sellPrice;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -177,7 +179,7 @@ class Variant implements VariantInterface
     {
         return $this->modifierValue;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -185,7 +187,7 @@ class Variant implements VariantInterface
     {
         $this->modifierValue = $modifierValue;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -193,7 +195,7 @@ class Variant implements VariantInterface
     {
         return $this->modifierType;
     }
-
+    
     /**
      * {@inheritdoc}
      */
