@@ -256,6 +256,12 @@ services:
             - { name: form.element, alias: image }
         shared: false
 
+    form.element.local_file:
+        class: WellCommerce\Component\Form\Elements\Upload\LocalFile
+        tags:
+            - { name: form.element, alias: local_file }
+        shared: false
+
     form.element.console_output:
         class: WellCommerce\Component\Form\Elements\Progress\ConsoleOutput
         tags:
