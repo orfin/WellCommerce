@@ -1,6 +1,8 @@
 WellCommerce\Bundle\ProductBundle\Entity\ProductPhoto:
     type: entity
     table: product_photo
+    cache:
+        usage: NONSTRICT_READ_WRITE
     repositoryClass: WellCommerce\Bundle\ProductBundle\Repository\ProductPhotoRepository
     id:
         id:
