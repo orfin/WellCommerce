@@ -13,7 +13,9 @@
 namespace WellCommerce\Bundle\CategoryBundle\DataSet\Admin;
 
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
+use WellCommerce\Component\DataSet\Conditions\Condition\Eq;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
+use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
 
 /**
  * Class CategoryDataSet
@@ -36,5 +38,13 @@ final class CategoryDataSet extends AbstractDataSet
             'shop'           => 'category_shops.id',
             'route'          => 'IDENTITY(category_translation.route)',
         ]);
+    }
+    
+    protected function getDataSetRequest(array $requestOptions = []) : DataSetRequestInterface
+    {
+        $request = parent::getDataSetRequest($requestOptions);
+        $request->addCondition(new Eq('shop', $this->getShopStorage()->getCurrentShopIdentifier()));
+        
+        return $request;
     }
 }
