@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\DependencyInjection;
 
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -135,7 +135,7 @@ abstract class AbstractContainerAware
         return $this->get('validator.helper');
     }
     
-    public function getEntityManager() : ObjectManager
+    public function getEntityManager() : EntityManagerInterface
     {
         return $this->getDoctrineHelper()->getEntityManager();
     }
