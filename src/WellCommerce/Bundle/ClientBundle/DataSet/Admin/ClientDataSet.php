@@ -13,7 +13,9 @@
 namespace WellCommerce\Bundle\ClientBundle\DataSet\Admin;
 
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
+use WellCommerce\Component\DataSet\Conditions\Condition\Eq;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
+use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
 
 /**
  * Class ClientDataSet
@@ -35,10 +37,19 @@ class ClientDataSet extends AbstractDataSet
             'phone'     => 'client.contactDetails.phone',
             'groupName' => 'client_group_translation.name',
             'createdAt' => 'client.createdAt',
+            'shop'      => 'IDENTITY(client.shop)',
         ]);
-
+        
         $configurator->setColumnTransformers([
-            'createdAt' => $this->getDataSetTransformer('date', ['format' => 'Y-m-d H:i:s'])
+            'createdAt' => $this->getDataSetTransformer('date', ['format' => 'Y-m-d H:i:s']),
         ]);
+    }
+    
+    protected function getDataSetRequest(array $requestOptions = []) : DataSetRequestInterface
+    {
+        $request = parent::getDataSetRequest($requestOptions);
+        $request->addCondition(new Eq('shop', $this->getShopStorage()->getCurrentShopIdentifier()));
+        
+        return $request;
     }
 }
