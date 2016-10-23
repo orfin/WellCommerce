@@ -99,6 +99,9 @@ wellcommerce_search:
 wellcommerce_shipping:
     resource: "@WellCommerceShippingBundle/Resources/config/routing.yml"
 
+wellcommerce_shipment:
+    resource: "@WellCommerceShipmentBundle/Resources/config/routing.yml"
+
 wellcommerce_tax:
     resource: "@WellCommerceTaxBundle/Resources/config/routing.yml"
 
