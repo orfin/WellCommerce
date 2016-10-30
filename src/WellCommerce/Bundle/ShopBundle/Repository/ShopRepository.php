@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\ShopBundle\Repository;
 
-use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\CoreBundle\Repository\EntityRepository;
 use WellCommerce\Bundle\ShopBundle\Entity\ShopInterface;
@@ -33,14 +32,22 @@ class ShopRepository extends EntityRepository implements ShopRepositoryInterface
         
         return $queryBuilder;
     }
-
+    
     public function resolve(int $currentShopId, string $url) : ShopInterface
     {
-        $criteria = new Criteria();
-        $criteria->where($criteria->expr()->eq('id', $currentShopId));
-        $criteria->orWhere($criteria->expr()->eq('url', $url));
-        $criteria->orWhere($criteria->expr()->gte('id', 1));
-
-        return $this->matching($criteria)->first();
+        if (0 === $currentShopId) {
+            $currentShop = $this->findOneBy(['url' => $url]);
+            
+            if ($currentShop instanceof ShopInterface) {
+                return $currentShop;
+            }
+        }
+        
+        $currentShop = $this->find($currentShopId);
+        if ($currentShop instanceof ShopInterface) {
+            return $currentShop;
+        }
+        
+        return $this->findOneBy([]);
     }
 }

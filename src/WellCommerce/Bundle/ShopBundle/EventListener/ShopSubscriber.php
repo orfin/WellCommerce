@@ -54,7 +54,7 @@ class ShopSubscriber extends AbstractEventSubscriber
             $currentShopId = $this->getRequestHelper()->getSessionAttribute($sessionAttributeName);
             $shop          = $this->getDoctrineHelper()->getEntityManager()->getReference(Shop::class, $currentShopId);
         }
-        
+    
         $this->getShopStorage()->setCurrentShop($shop);
     }
     
