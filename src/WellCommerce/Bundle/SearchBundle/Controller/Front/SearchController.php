@@ -44,11 +44,6 @@ class SearchController extends AbstractFrontController
         ]);
     }
 
-    public function advancedSearchAction() : Response
-    {
-
-    }
-
     public function quickSearchAction(SearchRequestInterface $searchRequest) : JsonResponse
     {
         $identifiers = $this->getSearchManager()->search($searchRequest);
