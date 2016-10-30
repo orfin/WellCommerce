@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\OrderBundle\DataSet\Admin;
 
 use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
+use WellCommerce\Component\DataSet\Conditions\Condition\Eq;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
 use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
 
@@ -43,6 +44,7 @@ class OrderDataSet extends AbstractDataSet
             'currentStatusName'  => 'status_translation.name',
             'currency'           => 'orders.currency',
             'createdAt'          => 'orders.createdAt',
+            'shop'               => 'IDENTITY(orders.shop)',
         ]);
         
         $configurator->setColumnTransformers([
@@ -60,5 +62,13 @@ class OrderDataSet extends AbstractDataSet
         $queryBuilder->setParameter('confirmed', true);
         
         return $queryBuilder;
+    }
+    
+    protected function getDataSetRequest(array $requestOptions = []) : DataSetRequestInterface
+    {
+        $request = parent::getDataSetRequest($requestOptions);
+        $request->addCondition(new Eq('shop', $this->getShopStorage()->getCurrentShopIdentifier()));
+        
+        return $request;
     }
 }
