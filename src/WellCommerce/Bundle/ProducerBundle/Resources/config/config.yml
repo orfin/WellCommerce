@@ -39,7 +39,7 @@ well_commerce_routing:
                 _controller: producer.controller.front:indexAction
                 limit: 12
                 page: 1
-                orderBy: name
+                orderBy: hierarchy
                 orderDir: asc
                 priceFrom: 0
                 priceTo: 9999
@@ -49,7 +49,7 @@ well_commerce_routing:
             requirements:
                 limit: "\\d{1,10}"
                 page: "\\d{1,10}"
-                orderBy: "name|finalPrice"
+                orderBy: "hierarchy|name|finalPrice"
                 orderDir: "asc|desc"
                 priceFrom: "\\d{1,10}"
                 priceTo: "\\d{1,10}"

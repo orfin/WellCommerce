@@ -46,6 +46,7 @@ class ProductDataSet extends AbstractDataSet
             'description'      => 'product_translation.description',
             'route'            => 'IDENTITY(product_translation.route)',
             'weight'           => 'product.weight',
+            'netPrice'         => 'product.sellPrice.netAmount',
             'price'            => 'product.sellPrice.grossAmount',
             'discountedPrice'  => 'product.sellPrice.discountedGrossAmount',
             'isDiscountValid'  => 'IF_ELSE(:date BETWEEN IF_NULL(product.sellPrice.validFrom, :date) AND IF_NULL(product.sellPrice.validTo, :date), 1, 0)',
@@ -62,7 +63,9 @@ class ProductDataSet extends AbstractDataSet
             'shop'             => 'product_shops.id',
             'photo'            => 'photos.path',
             'status'           => 'IDENTITY(distinction.status)',
+            'variantOption'    => 'IDENTITY(variant_option.attributeValue)',
             'distinctions'     => 'product.id',
+            'hierarchy'        => 'product.hierarchy',
             'isStatusValid'    => 'IF_ELSE(:date BETWEEN IF_NULL(distinction.validFrom, :date) AND IF_NULL(distinction.validTo, :date), 1, 0)',
         ]);
         

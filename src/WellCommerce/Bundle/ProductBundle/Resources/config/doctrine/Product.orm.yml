@@ -7,6 +7,8 @@ WellCommerce\Bundle\ProductBundle\Entity\Product:
     indexes:
         IDX_product_enabled:
             columns: [enabled]
+        IDX_product_sku:
+            columns: [sku]
     id:
         id:
             type: integer

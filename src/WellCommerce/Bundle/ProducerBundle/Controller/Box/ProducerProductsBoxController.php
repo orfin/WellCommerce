@@ -39,7 +39,7 @@ class ProducerProductsBoxController extends AbstractBoxController
         $products = $dataset->getResult('array', [
             'limit'      => $limit,
             'page'       => $requestHelper->getAttributesBagParam('page', 1),
-            'order_by'   => $requestHelper->getAttributesBagParam('orderBy', 'name'),
+            'order_by'   => $requestHelper->getAttributesBagParam('orderBy', 'hierarchy'),
             'order_dir'  => $requestHelper->getAttributesBagParam('orderDir', 'asc'),
             'conditions' => $conditions,
         ]);

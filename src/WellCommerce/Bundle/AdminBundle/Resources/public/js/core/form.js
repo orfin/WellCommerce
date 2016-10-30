@@ -16618,6 +16618,7 @@ var GFormVariantEditor = GCore.ExtendClass(GFormField, function () {
     gThis.m_jDatagrid;
     gThis.m_gDatagrid;
     gThis.m_gDataProvider;
+    gThis.m_jAttributeGroupSelect;
     gThis.m_jSetSelect;
     gThis.m_jSetSelectNode;
     gThis.m_jSetEditor;
@@ -16683,7 +16684,7 @@ var GFormVariantEditor = GCore.ExtendClass(GFormField, function () {
         for (var i = 0; i < gThis.m_oOptions.aoSuffixes.length; i++) {
             jModifierType.append('<option' + ((gThis.m_oOptions.aoSuffixes[i] == oVariant.modifier_type) ? ' selected="selected"' : '') + ' value="' + gThis.m_oOptions.aoSuffixes[i] + '">' + gThis.m_oOptions.aoSuffixes[i] + '</option>');
         }
-        console.log(oVariant);
+
         jSpecification.append($('<div class="field-select"/>').append('<label for="' + gThis.GetId() + '__modifier_type">' + GForm.Language.product_variants_editor_variant_editor_modifier_type + '</label>').append($('<span class="field"/>').append(jModifierType)));
         jModifierType.GSelect();
 
@@ -17069,10 +17070,13 @@ var GFormVariantEditor = GCore.ExtendClass(GFormField, function () {
     };
 
     gThis._CreateSetSelectNode = function (aoOptions) {
+        m_jAttributeGroupSelect = gThis.m_gForm.GetField(gThis.m_oOptions.sAttributeGroupField);
+        var sSet = m_jAttributeGroupSelect.GetValue();
+
         gThis.m_jSetSelect = $('<select id="' + gThis.GetId() + '__set" name="' + gThis.GetName() + '[set]"/>');
         gThis.m_jSetSelectNode.empty().append($('<span class="field"/>').append(gThis.m_jSetSelect));
         for (var i = 0; i < aoOptions.length; i++) {
-            gThis.m_jSetSelect.append('<option' + ((aoOptions[i].id == gThis.m_oOptions.sSet) ? ' selected="selected"' : '') + ' value="' + aoOptions[i].id + '"' + (aoOptions[i].current_category ? ' class="strong"' : '') + '>' + aoOptions[i].name + '</option>');
+            gThis.m_jSetSelect.append('<option' + ((aoOptions[i].id == sSet) ? ' selected="selected"' : '') + ' value="' + aoOptions[i].id + '"' + (aoOptions[i].current_category ? ' class="strong"' : '') + '>' + aoOptions[i].name + '</option>');
         }
     };
 
@@ -17108,6 +17112,7 @@ var GFormVariantEditor = GCore.ExtendClass(GFormField, function () {
         gThis.m_jSetSelect.closest('.' + gThis._GetClass('FieldSpan')).parent().find('.' + gThis._GetClass('Waiting')).fadeOut(250, function () {
             $(this).remove();
         });
+
         gThis.m_jSetSelect.change(GEventHandler(function () {
             gThis.LoadAttributes();
         })).change();
@@ -17247,6 +17252,10 @@ var GFormVariantEditor = GCore.ExtendClass(GFormField, function () {
         gThis.m_jVariantEditorWrapper.animate({opacity: .5}, 250);
         (!gThis.m_jSetEditorLabel.find('.' + gThis._GetClass('Waiting')).length) && gThis.m_jSetEditorLabel.append($('<span class="' + gThis._GetClass('Waiting') + '"/>').css('display', 'none').fadeIn(150));
         var sSetId = gThis.m_jSetSelect.find('option:selected').attr('value');
+
+        m_jAttributeGroupSelect = gThis.m_gForm.GetField(gThis.m_oOptions.sAttributeGroupField);
+        m_jAttributeGroupSelect.SetValue(sSetId);
+
         GF_Ajax_Request(Routing.generate(gThis.m_oOptions.sGetAttributesRoute), {
             id: sSetId
         }, gThis.OnAttributesLoaded);
@@ -17330,6 +17339,7 @@ var GFormVariantEditor = GCore.ExtendClass(GFormField, function () {
                 gThis.m_gDatagrid.LoadData();
             }
         }
+
         gThis.LoadSets();
     };
 

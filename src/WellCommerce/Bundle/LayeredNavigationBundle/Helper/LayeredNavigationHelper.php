@@ -80,10 +80,25 @@ final class LayeredNavigationHelper extends AbstractContainerAware implements La
 
         return $collection;
     }
-    
+
     public function isLayeredNavigationEnabled() : bool
     {
-        return $this->getRequestHelper()->hasAttributesBagParams(array_keys($this->filters));
+        $route     = $this->getRouterHelper()->getCurrentRoute();
+        $keys      = array_keys($this->filters);
+        $isEnabled = false;
+
+        foreach ($keys as $key) {
+            $value        = $this->getRequestHelper()->getAttributesBagParam($key);
+            $defaultValue = null;
+            if ($route->hasDefault($key)) {
+                $defaultValue = $route->getDefault($key);
+            }
+            if (null !== $value && $value != $defaultValue) {
+                $isEnabled = true;
+            }
+        }
+
+        return $isEnabled;
     }
     
     private function createFilterCondition($currentAttributeValue, array $configuration) : ConditionInterface

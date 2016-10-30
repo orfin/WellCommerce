@@ -32,9 +32,10 @@ class VariantEditor extends AbstractField implements ElementInterface
     public function configureOptions(OptionsResolver $resolver)
     {
         parent::configureOptions($resolver);
-
+        
         $resolver->setRequired([
             'set',
+            'attribute_group_field',
             'category_field',
             'price_field',
             'availability_field',
@@ -45,7 +46,7 @@ class VariantEditor extends AbstractField implements ElementInterface
             'get_groups_route',
             'get_attributes_route',
         ]);
-
+        
         $resolver->setDefaults([
             'set'                         => null,
             'allow_generate'              => true,
@@ -59,8 +60,9 @@ class VariantEditor extends AbstractField implements ElementInterface
             'add_attribute_value_route'   => 'admin.attribute_value.ajax.add',
             'generate_cartesian_route'    => 'admin.attribute.ajax.generate',
         ]);
-
+        
         $resolver->setAllowedTypes('allow_generate', 'bool');
+        $resolver->setAllowedTypes('attribute_group_field', ElementInterface::class);
         $resolver->setAllowedTypes('availability_field', ElementInterface::class);
         $resolver->setAllowedTypes('vat_field', ElementInterface::class);
         $resolver->setAllowedTypes('vat_values', 'array');
@@ -68,21 +70,22 @@ class VariantEditor extends AbstractField implements ElementInterface
         $resolver->setAllowedTypes('availability', 'array');
         $resolver->setAllowedTypes('price_field', ElementInterface::class);
         $resolver->setAllowedTypes('category_field', ElementInterface::class);
-
+        
         $fieldNormalizer = function (Options $options, $value) {
             if (!$value instanceof ElementInterface) {
                 throw new \InvalidArgumentException('Passed field should implement "ElementInterface" and have accessible "getName" method.');
             }
-
+            
             return $value->getName();
         };
-
+        
+        $resolver->setNormalizer('attribute_group_field', $fieldNormalizer);
         $resolver->setNormalizer('vat_field', $fieldNormalizer);
         $resolver->setNormalizer('price_field', $fieldNormalizer);
         $resolver->setNormalizer('category_field', $fieldNormalizer);
         $resolver->setNormalizer('availability_field', $fieldNormalizer);
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -103,6 +106,7 @@ class VariantEditor extends AbstractField implements ElementInterface
         $collection->add(new Attribute('aoPhotos', $this->getOption('photos'), Attribute::TYPE_ARRAY));
         $collection->add(new Attribute('aoAvailability', $this->getOption('availability'), Attribute::TYPE_ARRAY));
         $collection->add(new Attribute('aoSuffixes', $this->getOption('suffixes'), Attribute::TYPE_ARRAY));
+        $collection->add(new Attribute('sAttributeGroupField', $this->getOption('attribute_group_field')));
         $collection->add(new Attribute('sSet', $this->getOption('set')));
     }
 }

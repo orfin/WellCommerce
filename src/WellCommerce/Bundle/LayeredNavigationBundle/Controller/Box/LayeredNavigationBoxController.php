@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\LayeredNavigationBundle\Controller\Box;
 
 use Symfony\Component\HttpFoundation\Response;
+use WellCommerce\Bundle\CategoryBundle\Entity\CategoryInterface;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 use WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxSettingsCollection;
 
@@ -35,14 +36,35 @@ class LayeredNavigationBoxController extends AbstractBoxController
             'pagination' => false,
         ]);
         
-        $category = null;
+        $category   = null;
+        $attributes = [];
+        
         if ($this->getCategoryStorage()->hasCurrentCategory()) {
-            $category = $this->getCategoryStorage()->getCurrentCategory();
+            $category   = $this->getCategoryStorage()->getCurrentCategory();
+            $attributes = $this->getAttributesForCategory($category);
         }
         
         return $this->displayTemplate('index', [
-            'producers' => $producers,
-            'category'  => $category,
+            'producers'  => $producers,
+            'category'   => $category,
+            'attributes' => $attributes,
         ]);
+    }
+    
+    private function getAttributesForCategory(CategoryInterface $category) : array
+    {
+        $helper  = $this->get('variant.helper');
+        $attributes = $this->get('variant_option.repository')->getVariantOptionsForCategory($category);
+        $filter  = [];
+        
+        foreach ($attributes as $option) {
+            $filter[$option['attributeName']][$option['value']] = $option['valueName'];
+        }
+    
+        foreach ($filter as $id => &$data) {
+            $helper->sortOptions($data);
+        }
+        
+        return $filter;
     }
 }

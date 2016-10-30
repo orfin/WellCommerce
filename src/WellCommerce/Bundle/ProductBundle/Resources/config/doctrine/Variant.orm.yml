@@ -7,6 +7,9 @@ WellCommerce\Bundle\ProductBundle\Entity\Variant:
             type: integer
             generator:
                 strategy: AUTO
+    indexes:
+        IDX_variant_symbol:
+            columns: [symbol]
     embedded:
         sellPrice:
             class: WellCommerce\Bundle\AppBundle\Entity\DiscountablePrice
