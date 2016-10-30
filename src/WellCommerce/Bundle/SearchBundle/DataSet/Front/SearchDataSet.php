@@ -35,6 +35,7 @@ final class SearchDataSet extends ProductDataSet
             'description'      => 'product_translation.description',
             'route'            => 'IDENTITY(product_translation.route)',
             'weight'           => 'product.weight',
+            'netPrice'         => 'product.sellPrice.netAmount',
             'price'            => 'product.sellPrice.grossAmount',
             'discountedPrice'  => 'product.sellPrice.discountedGrossAmount',
             'isDiscountValid'  => 'IF_ELSE(:date BETWEEN product.sellPrice.validFrom AND product.sellPrice.validTo, 1, 0)',
