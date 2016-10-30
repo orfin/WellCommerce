@@ -26,27 +26,27 @@ class ClientPasswordValidator extends ConstraintValidator
     /**
      * Validate the route entity
      *
-     * @param mixed      $entity
-     * @param Constraint $constraint
+     * @param ClientDetailsInterface $entity
+     * @param Constraint             $constraint
      */
     public function validate($entity, Constraint $constraint)
     {
         if (!$entity instanceof ClientDetailsInterface) {
             throw new \InvalidArgumentException('Expected instance of ClientDetailsInterface');
         }
-
+        
         $result = $entity->isPasswordConfirmed();
-
+        
         if (true === $result) {
             return;
         }
-
+        
         if ($this->context instanceof ExecutionContextInterface) {
             $this->context
                 ->buildViolation($constraint->message)
                 ->atPath('hashedPassword')
                 ->addViolation();
-
+            
             $this->context
                 ->buildViolation($constraint->message)
                 ->atPath('passwordConfirm')

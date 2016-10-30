@@ -10,3 +10,5 @@ client:
     conditions_not_accepted: 'Musisz zaakceptować regulamin sklepu'
     email_not_unique: 'Posiadasz już konto w naszym sklepie. Zaloguj się lub przypomnij hasło.'
     password_not_valid: 'Wprowadzone hasło nie jest poprawne'
+    vatid_not_valid: Numer NIP nie jest poprawny
+    company_name_not_valid: Nazwa firmy nie jest poprawna

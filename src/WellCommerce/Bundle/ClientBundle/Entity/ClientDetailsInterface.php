@@ -26,7 +26,9 @@ interface ClientDetailsInterface
     public function setPassword(string $password);
 
     public function setHashedPassword(string $password);
-
+    
+    public function setPasswordConfirm($password);
+    
     public function resetPassword();
     
     public function getUsername() : string;

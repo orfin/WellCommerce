@@ -33,63 +33,84 @@ class ClientDataGrid extends AbstractDataGrid
             'id'         => 'id',
             'caption'    => $this->trans('common.label.id'),
             'appearance' => new Appearance([
-                'width'   => 90,
+                'width'   => 60,
                 'visible' => false,
             ]),
             'filter'     => new Filter([
                 'type' => Filter::FILTER_BETWEEN,
             ]),
         ]));
-
+        
         $collection->add(new Column([
             'id'         => 'firstName',
             'caption'    => $this->trans('common.label.first_name'),
             'appearance' => new Appearance([
-                'width' => 140,
-                'align' => Appearance::ALIGN_LEFT
+                'width' => 60,
+                'align' => Appearance::ALIGN_LEFT,
             ]),
         ]));
-
+        
         $collection->add(new Column([
             'id'         => 'lastName',
             'caption'    => $this->trans('common.label.last_name'),
             'appearance' => new Appearance([
-                'width' => 140,
-                'align' => Appearance::ALIGN_LEFT
+                'width' => 80,
+                'align' => Appearance::ALIGN_LEFT,
             ]),
         ]));
-
+        
+        $collection->add(new Column([
+            'id'         => 'companyName',
+            'caption'    => $this->trans('client.label.address.company'),
+            'appearance' => new Appearance([
+                'width' => 100,
+                'align' => Appearance::ALIGN_CENTER,
+            ]),
+        ]));
+    
+        $collection->add(new Column([
+            'id'         => 'vatId',
+            'caption'    => $this->trans('client.label.address.vat_id'),
+            'appearance' => new Appearance([
+                'width' => 60,
+                'align' => Appearance::ALIGN_CENTER,
+            ]),
+        ]));
+        
         $collection->add(new Column([
             'id'         => 'email',
             'caption'    => $this->trans('common.label.email'),
             'appearance' => new Appearance([
                 'width' => 60,
-                'align' => Appearance::ALIGN_CENTER
+                'align' => Appearance::ALIGN_CENTER,
             ]),
         ]));
-
+        
         $collection->add(new Column([
             'id'         => 'phone',
             'caption'    => $this->trans('common.label.phone'),
             'appearance' => new Appearance([
                 'width' => 80,
-                'align' => Appearance::ALIGN_CENTER
+                'align' => Appearance::ALIGN_CENTER,
             ]),
         ]));
-
+        
         $collection->add(new Column([
             'id'         => 'groupName',
             'caption'    => $this->trans('common.label.client_group'),
             'filter'     => new Filter([
                 'type'    => Filter::FILTER_SELECT,
-                'options' => $this->get('client_group.dataset.admin')->getResult('select')
+                'options' => $this->get('client_group.dataset.admin')->getResult('select', ['order_by' => 'id'], [
+                    'label_column' => 'name',
+                    'value_column' => 'name',
+                ]),
             ]),
             'appearance' => new Appearance([
                 'width' => 140,
-                'align' => Appearance::ALIGN_CENTER
+                'align' => Appearance::ALIGN_CENTER,
             ]),
         ]));
-
+        
         $collection->add(new Column([
             'id'         => 'createdAt',
             'caption'    => $this->trans('common.label.created_at'),
@@ -98,7 +119,7 @@ class ClientDataGrid extends AbstractDataGrid
             ]),
             'appearance' => new Appearance([
                 'width' => 40,
-                'align' => Appearance::ALIGN_CENTER
+                'align' => Appearance::ALIGN_CENTER,
             ]),
         ]));
     }

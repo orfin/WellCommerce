@@ -19,13 +19,18 @@ client:
             line2: Address line 2
             province: Province
             postal_code: Post code
+            company: Company
             country: Country
             city: City
             copy_address: Shipping address same as billing address
+            state: State
             vat_id: VAT ID
             company_name: Company
+            company_address: I want to enter the company's details
         client_discount: Client's discount
         client_group_discount: Client's group discount
+        create_account: I want to register as a client
+        conditions_accepted: I have read and agree to the Privacy Policy
     heading:
         index: Clients
         add: Create a client
@@ -33,6 +38,7 @@ client:
         login: 'Sign in'
         register: 'Sign up'
         create_account: 'Create an account'
+        client_details: 'Account settings'
         contact_details: 'Contact details'
         footer_links: 'Your account'
         contact_details: Contact details

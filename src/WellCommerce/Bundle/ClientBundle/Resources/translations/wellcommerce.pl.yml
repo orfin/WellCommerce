@@ -22,15 +22,18 @@ client:
             line2: Adres cd.
             province: Prowincja
             postal_code: Kod pocztowy
+            company: Nazwa firmy
             country: Państwo
             city: Miejscowość
             copy_address: Adres dostawy jest taki sam jak adres płatnika
             state: Województwo
-            vat_id: NIP (opcjonalnie)
-            company_name: Nazwa firmy (opcjonalnie)
+            vat_id: NIP
+            company_name: Nazwa firmy
             copy_address: Adres dostawy taki sam jak adres klienta
         client_discount: Rabat klienta
         client_group_discount: Rabat grupy klienta
+        create_account: Chcę założyć konto w sklepie
+        conditions_accepted: Akceptuję warunki użytkowania sklepu
     heading:
         index: Klienci
         client: Klient
@@ -41,6 +44,7 @@ client:
         create_account: 'Utwórz konto w sklepie'
         contact_details: Dane kontaktowe
         footer_links: Twoje konto
+        client_details: Dane konta
         contact_details: Dane kontaktowe
         billing_address: Adres płatnika
         shipping_address: Adres dostawy

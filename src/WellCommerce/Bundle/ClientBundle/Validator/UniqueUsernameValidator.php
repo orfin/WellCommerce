@@ -62,7 +62,6 @@ class UniqueUsernameValidator extends ConstraintValidator
         $username = $entity->getUsername();
         $result   = $this->clientRepository->findOneBy(['clientDetails.username' => $username]);
 
-        // route is unique always if no result was found
         if (null === $result) {
             return;
         }

@@ -21,5 +21,8 @@ interface ClientGroupAwareInterface
 {
     public function setClientGroup(ClientGroupInterface $clientGroup = null);
     
+    /**
+     * @return null|ClientGroupInterface
+     */
     public function getClientGroup();
 }

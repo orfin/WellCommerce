@@ -111,7 +111,7 @@ class ClientDetails implements ClientDetailsInterface
     
     public function isPasswordConfirmed() : bool
     {
-        return password_verify($this->passwordConfirm, $this->password);
+        return strlen($this->passwordConfirm) && password_verify($this->passwordConfirm, $this->password);
     }
     
     public function getSalt()

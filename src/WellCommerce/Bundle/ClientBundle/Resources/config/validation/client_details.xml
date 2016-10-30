@@ -45,7 +45,6 @@
             <constraint name="NotNull">
                 <option name="groups">
                     <value>client_registration</value>
-                    <value>order_client_registration</value>
                 </option>
             </constraint>
             <constraint name="NotBlank">

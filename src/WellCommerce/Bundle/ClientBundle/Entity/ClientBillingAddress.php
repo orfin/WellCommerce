@@ -23,10 +23,29 @@ class ClientBillingAddress implements ClientBillingAddressInterface
 {
     use AddressTrait;
     
+    /**
+     * @var string
+     */
     private $firstName;
+    
+    /**
+     * @var string
+     */
     private $lastName;
+    
+    /**
+     * @var string
+     */
     private $vatId;
+    
+    /**
+     * @var string
+     */
     private $companyName;
+    
+    /**
+     * @var bool
+     */
     private $companyAddress;
     
     public function getFirstName() : string

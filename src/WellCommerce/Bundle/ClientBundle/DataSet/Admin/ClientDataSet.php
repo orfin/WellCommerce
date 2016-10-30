@@ -30,14 +30,16 @@ class ClientDataSet extends AbstractDataSet
     public function configureOptions(DataSetConfiguratorInterface $configurator)
     {
         $configurator->setColumns([
-            'id'        => 'client.id',
-            'firstName' => 'client.contactDetails.firstName',
-            'lastName'  => 'client.contactDetails.lastName',
-            'email'     => 'client.contactDetails.email',
-            'phone'     => 'client.contactDetails.phone',
-            'groupName' => 'client_group_translation.name',
-            'createdAt' => 'client.createdAt',
-            'shop'      => 'IDENTITY(client.shop)',
+            'id'          => 'client.id',
+            'firstName'   => 'client.contactDetails.firstName',
+            'lastName'    => 'client.contactDetails.lastName',
+            'companyName' => 'client.billingAddress.companyName',
+            'vatId'       => 'client.billingAddress.vatId',
+            'email'       => 'client.contactDetails.email',
+            'phone'       => 'client.contactDetails.phone',
+            'groupName'   => 'client_group_translation.name',
+            'createdAt'   => 'client.createdAt',
+            'shop'        => 'IDENTITY(client.shop)',
         ]);
         
         $configurator->setColumnTransformers([

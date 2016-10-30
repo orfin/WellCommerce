@@ -150,6 +150,11 @@ services:
             - { name: validator.constraint_validator, alias: client.validator.unique_username }
         arguments: ['@client.repository', '@router.helper']
 
+    client.validator.company_address:
+        class: WellCommerce\Bundle\ClientBundle\Validator\CompanyAddressValidator
+        tags:
+            - { name: validator.constraint_validator, alias: client.validator.company_address }
+
     client.validator.valid_password:
         class: WellCommerce\Bundle\ClientBundle\Validator\ClientPasswordValidator
         tags:
