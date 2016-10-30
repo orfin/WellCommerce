@@ -1,5 +1,9 @@
 {% extends 'WellCommerceAppBundle:Front:layout.html.twig' %}
 {% trans_default_domain "wellcommerce" %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('themes/wellcommerce-default-theme/assets/js/order_address.js') }}"></script>
+{% endblock %}
 {% import "WellCommerceAppBundle:Front/Form:macros.html.twig" as macros %}
 {% block content %}
     {% include 'WellCommerceAppBundle:Front:breadcrumbs.html.twig' %}
@@ -34,21 +38,25 @@
 
                 <h4>{% trans %}address.heading.billing_address{% endtrans %}</h4>
 
+                {{ macros.element(form.getChildren().get('billingAddress').getChildren().get('billingAddress.companyAddress')) }}
+
+                <div class="collapse" id="company-wrap">
+                    <div class="row">
+                        <div class="col-sm-6 col-xs-12">
+                            {{ macros.element(form.getChildren().get('billingAddress').getChildren().get('billingAddress.companyName')) }}
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            {{ macros.element(form.getChildren().get('billingAddress').getChildren().get('billingAddress.vatId')) }}
+                        </div>
+                    </div>
+                </div>
+
                 <div class="row">
                     <div class="col-sm-6 col-xs-12">
                         {{ macros.element(form.getChildren().get('billingAddress').getChildren().get('billingAddress.firstName')) }}
                     </div>
                     <div class="col-sm-6 col-xs-12">
                         {{ macros.element(form.getChildren().get('billingAddress').getChildren().get('billingAddress.lastName')) }}
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-6 col-xs-12">
-                        {{ macros.element(form.getChildren().get('billingAddress').getChildren().get('billingAddress.companyName')) }}
-                    </div>
-                    <div class="col-sm-6 col-xs-12">
-                        {{ macros.element(form.getChildren().get('billingAddress').getChildren().get('billingAddress.vatId')) }}
                     </div>
                 </div>
 
@@ -155,34 +163,4 @@
             {% include 'WellCommerceAppBundle:Front/Common:sidebar_contact.html.twig' %}
         </div>
     </div>
-
-    <script>
-    $(document).ready(function(){
-		$('#company-wrap').find('input').attr('tabindex', -1);
-		$('#client-type').unbind('change').bind('change', function(){
-			$('#company-wrap').collapse($(this).val() == 2 ? 'show' : 'hide');
-			if($(this).val() == 2){
-				$('#company-wrap').find('input').removeAttr('tabindex');
-			}else{
-				$('#company-wrap').find('input').attr('tabindex', -1);
-			}
-		});
-
-		$('#shippingAddress\\.copyBillingAddress').unbind('change').bind('change', function(){
-			$('#shipping-wrap').collapse($(this).is(':checked') ? 'hide' : 'show');
-		});
-
-		$('#clientDetails\\.createAccount').unbind('change').bind('change', function(){
-			$('#create-account').collapse($(this).is(':checked') ? 'show' : 'hide');
-		});
-
-        $('#shippingAddress\\.copyBillingAddress').change();
-
-        $('#clientDetails\\.createAccount').change();
-
-		$('#password-collapse').unbind('change').bind('change', function(){
-			$('#password-wrap').collapse($(this).is(':checked') ? 'show' : 'hide');
-		});
-	});
-    </script>
 {% endblock %}
