@@ -26,12 +26,7 @@
                             {{ item.quantity|number_format(0) }}
                         </td>
                         <td class="text-right">
-                            {% if item.isDiscountValid == 1 %}
-                                {{ format_price(item.discountedPrice, item.currency, null, null, item.quantity) }}
-                                <small>{{ format_price(item.price, item.currency, null, null, item.quantity) }}</small>
-                            {% else %}
-                                {{ format_price(item.price, item.currency, null, null, item.quantity) }}
-                            {% endif %}
+                            {{ format_price(item.grossAmount, item.currency, null, null, item.quantity) }}
                         </td>
                     </tr>
                 {% endfor %}

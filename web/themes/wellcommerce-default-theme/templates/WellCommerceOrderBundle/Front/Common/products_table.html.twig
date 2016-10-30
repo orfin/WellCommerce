@@ -22,16 +22,9 @@
                     {% endfor %}
                 </td>
                 <td class="text-center">
-                    {% if item.isDiscountValid == 1 %}
-                        <span class="price promo">
-					        <small class="block">{{ format_price(item.price, item.currency) }}</small>
-                            {{ format_price(item.discountedPrice, item.currency) }}
-					    </span>
-                    {% else %}
-                        <span class="price">
-						    {{ format_price(item.price, item.currency) }}
-						</span>
-                    {% endif %}
+                    <span class="price">
+                        {{ format_price(item.grossAmount, item.currency) }}
+                    </span>
                 </td>
                 <td class="text-center">
                     {% if confirmation == true %}
@@ -41,16 +34,9 @@
                     {% endif %}
                 </td>
                 <td class="text-center">
-                    {% if item.isDiscountValid == 1 %}
-                        <span class="price promo">
-					        <small class="block">{{ format_price(item.price, item.currency, null, null, item.quantity) }}</small>
-                            {{ format_price(item.discountedPrice, item.currency, null, null, item.quantity) }}
-					    </span>
-                    {% else %}
-                        <span class="price">
-						    {{ format_price(item.price, item.currency, null, null, item.quantity) }}
-						</span>
-                    {% endif %}
+                    <span class="price">
+                        {{ format_price(item.grossAmount, item.currency, null, null, item.quantity) }}
+                    </span>
                 </td>
                 <td class="text-center">
                     {% if confirmation == false %}
