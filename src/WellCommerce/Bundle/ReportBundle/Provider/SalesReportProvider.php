@@ -33,16 +33,16 @@ class SalesReportProvider extends AbstractReportProvider implements ReportProvid
         $criteria   = $this->getCriteria($configuration);
         $collection = $this->repository->matching($criteria);
         $report     = new ReportRowCollection();
-
+        
         $collection->map(function (OrderInterface $order) use ($configuration, $report) {
             $date   = $order->getCreatedAt()->format($configuration->getGroupByDateFormat());
             $amount = $this->convertAmount($order);
             $report->add(new ReportRow($date, $amount));
         });
-
+        
         return $report;
     }
-
+    
     /**
      * Returns the report's criteria
      *
@@ -56,7 +56,8 @@ class SalesReportProvider extends AbstractReportProvider implements ReportProvid
         $criteria->where($criteria->expr()->gte('createdAt', $configuration->getStartDate()));
         $criteria->andWhere($criteria->expr()->lte('createdAt', $configuration->getEndDate()));
         $criteria->andWhere($criteria->expr()->eq('confirmed', true));
-
+        $criteria->andWhere($criteria->expr()->eq('shop', $this->getShopStorage()->getCurrentShop()));
+        
         return $criteria;
     }
 }
