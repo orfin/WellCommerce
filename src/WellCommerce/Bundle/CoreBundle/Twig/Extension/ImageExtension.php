@@ -24,7 +24,7 @@ final class ImageExtension extends \Twig_Extension
      * @var ImageHelperInterface
      */
     private $helper;
-
+    
     /**
      * ImageExtension constructor.
      *
@@ -34,21 +34,25 @@ final class ImageExtension extends \Twig_Extension
     {
         $this->helper = $helper;
     }
-
+    
     public function getFunctions()
     {
         return [
             new \Twig_SimpleFunction('image', [$this, 'getImagePath'], ['is_safe' => ['html']]),
         ];
     }
-
+    
     public function getName()
     {
         return 'image';
     }
-
-    public function getImagePath(string $path, string $filter) : string
+    
+    public function getImagePath(string $path = null, string $filter) : string
     {
+        if (null === $path) {
+            return '';
+        }
+        
         return $this->helper->getImage($path, $filter);
     }
 }
