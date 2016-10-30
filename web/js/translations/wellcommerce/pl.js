@@ -136,12 +136,13 @@
     Translator.add("client.label.address.line2", "Adres cd.", "wellcommerce", "pl");
     Translator.add("client.label.address.province", "Prowincja", "wellcommerce", "pl");
     Translator.add("client.label.address.postal_code", "Kod pocztowy", "wellcommerce", "pl");
+    Translator.add("client.label.address.company", "Nazwa firmy", "wellcommerce", "pl");
     Translator.add("client.label.address.country", "Pa\u0144stwo", "wellcommerce", "pl");
     Translator.add("client.label.address.city", "Miejscowo\u015b\u0107", "wellcommerce", "pl");
     Translator.add("client.label.address.copy_address", "Adres dostawy jest taki sam jak adres p\u0142atnika", "wellcommerce", "pl");
     Translator.add("client.label.address.state", "Wojew\u00f3dztwo", "wellcommerce", "pl");
-    Translator.add("client.label.address.vat_id", "NIP (opcjonalnie)", "wellcommerce", "pl");
-    Translator.add("client.label.address.company_name", "Nazwa firmy (opcjonalnie)", "wellcommerce", "pl");
+    Translator.add("client.label.address.vat_id", "NIP", "wellcommerce", "pl");
+    Translator.add("client.label.address.company_name", "Nazwa firmy", "wellcommerce", "pl");
     Translator.add("client.label.client_discount", "Rabat klienta", "wellcommerce", "pl");
     Translator.add("client.label.client_group_discount", "Rabat grupy klienta", "wellcommerce", "pl");
     Translator.add("client.heading.index", "Klienci", "wellcommerce", "pl");
@@ -153,6 +154,7 @@
     Translator.add("client.heading.create_account", "Utw\u00f3rz konto w sklepie", "wellcommerce", "pl");
     Translator.add("client.heading.contact_details", "Dane kontaktowe", "wellcommerce", "pl");
     Translator.add("client.heading.footer_links", "Twoje konto", "wellcommerce", "pl");
+    Translator.add("client.heading.client_details", "Dane konta", "wellcommerce", "pl");
     Translator.add("client.heading.billing_address", "Adres p\u0142atnika", "wellcommerce", "pl");
     Translator.add("client.heading.shipping_address", "Adres dostawy", "wellcommerce", "pl");
     Translator.add("client.heading.reset_password", "Zresetuj has\u0142o", "wellcommerce", "pl");
@@ -314,6 +316,7 @@
     Translator.add("order.label.order_no", "Numer zam\u00f3wienia", "wellcommerce", "pl");
     Translator.add("order.label.variant_options", "Wybrane opcje", "wellcommerce", "pl");
     Translator.add("order.label.accept_conditions", "Akceptuj\u0119 regulamin sklepu internetowego", "wellcommerce", "pl");
+    Translator.add("order.label.issue_invoice", "Prosz\u0119 o wystawienie faktury VAT", "wellcommerce", "pl");
     Translator.add("order.description.product_total", "Warto\u015b\u0107 produkt\u00f3w", "wellcommerce", "pl");
     Translator.add("order.description.shipping_cost", "Koszty wysy\u0142ki", "wellcommerce", "pl");
     Translator.add("order.notice.empty_order_list", "Nie z\u0142o\u017cy\u0142e\u015b jeszcze \u017cadnych zam\u00f3wie\u0144", "wellcommerce", "pl");

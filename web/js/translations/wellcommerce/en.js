@@ -129,6 +129,7 @@
     Translator.add("client.label.address.line2", "Address line 2", "wellcommerce", "en");
     Translator.add("client.label.address.province", "Province", "wellcommerce", "en");
     Translator.add("client.label.address.postal_code", "Post code", "wellcommerce", "en");
+    Translator.add("client.label.address.company", "Company", "wellcommerce", "en");
     Translator.add("client.label.address.country", "Country", "wellcommerce", "en");
     Translator.add("client.label.address.city", "City", "wellcommerce", "en");
     Translator.add("client.label.address.copy_address", "Shipping address same as billing address", "wellcommerce", "en");
@@ -142,6 +143,7 @@
     Translator.add("client.heading.login", "Sign in", "wellcommerce", "en");
     Translator.add("client.heading.register", "Sign up", "wellcommerce", "en");
     Translator.add("client.heading.create_account", "Create an account", "wellcommerce", "en");
+    Translator.add("client.heading.client_details", "Account settings", "wellcommerce", "en");
     Translator.add("client.heading.contact_details", "Contact details", "wellcommerce", "en");
     Translator.add("client.heading.footer_links", "Your account", "wellcommerce", "en");
     Translator.add("client.heading.billing_address", "Billing address", "wellcommerce", "en");
@@ -275,6 +277,7 @@
     Translator.add("order.label.products", "Products", "wellcommerce", "en");
     Translator.add("order.label.variant_options", "Wybrane opcje", "wellcommerce", "en");
     Translator.add("order.label.accept_conditions", "I accept the shop conditions", "wellcommerce", "en");
+    Translator.add("order.label.issue_invoice", "Please send me an invoice", "wellcommerce", "en");
     Translator.add("order.description.product_total", "Total products value", "wellcommerce", "en");
     Translator.add("order.description.shipping_cost", "Shipping costs", "wellcommerce", "en");
     Translator.add("order.notice.empty_order_list", "You have not placed any orders", "wellcommerce", "en");

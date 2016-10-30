@@ -15,6 +15,7 @@ order:
         cart: Koszyk
         comments: Twoje uwagi
         methods: Płatność i wysyłka
+        confirm: Potwierdzenie zamówienia
     button:
         confirm: Przejdź do potwierdzenia
         add_product: Dodaj produkt
@@ -53,6 +54,7 @@ order:
         order_no: Numer zamówienia
         variant_options: Wybrane opcje
         accept_conditions: Akceptuję regulamin sklepu internetowego
+        issue_invoice: Proszę o wystawienie faktury VAT
     description:
         product_total: Wartość produktów
         shipping_cost: Koszty wysyłki
