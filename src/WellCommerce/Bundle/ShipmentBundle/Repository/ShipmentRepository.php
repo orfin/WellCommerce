@@ -13,7 +13,6 @@ namespace WellCommerce\Bundle\ShipmentBundle\Repository;
 
 use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\CoreBundle\Repository\EntityRepository;
-use WellCommerce\Bundle\ShippingBundle\Entity\ShipmentInterface;
 
 /**
  * Class ShipmentRepository
