@@ -95,7 +95,7 @@ class VariantCollectionToArrayTransformer extends CollectionToArrayTransformer
      */
     public function reverseTransform($modelData, PropertyPathInterface $propertyPath, $values)
     {
-        if ($modelData instanceof ProductInterface) {
+        if ($modelData instanceof ProductInterface && null !== $values) {
             $collection = $this->variantManager->getAttributesCollectionForProduct($modelData, $values);
             $modelData->setVariants($collection);
         }
