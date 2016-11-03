@@ -39,7 +39,6 @@ class UserGroupFormBuilder extends AbstractFormBuilder
             ],
         ]));
 
-
         $requiredData->addChild($this->getElement('rights_table', [
             'name'        => 'permissions',
             'label'       => $this->trans('user_group.label.permissions'),
