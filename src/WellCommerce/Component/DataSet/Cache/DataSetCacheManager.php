@@ -26,7 +26,7 @@ class DataSetCacheManager implements DataSetCacheManagerInterface
      * @var TaggablePoolInterface
      */
     protected $cachePool;
-
+    
     /**
      * DataSetCacheManager constructor.
      *
@@ -36,7 +36,7 @@ class DataSetCacheManager implements DataSetCacheManagerInterface
     {
         $this->cachePool = $cachePool;
     }
-
+    
     public function getCachedDataSetResult(Query $query, CacheOptions $options) : array
     {
         $hash = $this->getHash($query);
@@ -49,7 +49,7 @@ class DataSetCacheManager implements DataSetCacheManagerInterface
             $item->expiresAfter($options->getTtl());
             $this->cachePool->save($item);
         }
-
+        
         return $result;
     }
     
@@ -68,12 +68,12 @@ class DataSetCacheManager implements DataSetCacheManagerInterface
         
         return $result;
     }
-
+    
     protected function getHash(Query $query) : string
     {
         $sql    = $query->getSQL();
         $params = $query->getParameters();
-
-        return sha1($sql . serialize($params));
+        
+        return sha1($sql.serialize($params));
     }
 }
