@@ -60,7 +60,6 @@ class CategoryFormBuilder extends AbstractFormBuilder
             'name'    => 'enabled',
             'label'   => $this->trans('category.label.enabled'),
             'comment' => $this->trans('category.comment.enabled'),
-            'default' => 1
         ]));
 
         $requiredData->addChild($this->getElement('text_field', [
