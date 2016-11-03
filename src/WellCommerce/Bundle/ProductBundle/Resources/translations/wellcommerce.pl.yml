@@ -84,6 +84,8 @@ product:
             final_price:
                 asc: Cena - ↑
                 desc: Cena - ↓
+            hierarchy:
+                asc: Domyślnie
             score:
                 asc: Najlepsze trafienie
         limit:  Wyników na stronę
