@@ -130,10 +130,9 @@ services:
 
     client.subscriber:
         class: WellCommerce\Bundle\ClientBundle\EventListener\ClientSubscriber
+        arguments: ['@client.manager', '@mailer.helper']
         tags:
             - { name: kernel.event_subscriber }
-        calls:
-            - [setContainer, ['@service_container']]
 
     twig.extension.client_address_formatter:
         class: WellCommerce\Bundle\ClientBundle\Twig\Extension\ClientAddressFormatterExtension
@@ -146,9 +145,9 @@ services:
 
     client.validator.unique_username:
         class: WellCommerce\Bundle\ClientBundle\Validator\UniqueUsernameValidator
+        arguments: ['@client.repository', '@router.helper']
         tags:
             - { name: validator.constraint_validator, alias: client.validator.unique_username }
-        arguments: ['@client.repository', '@router.helper']
 
     client.validator.company_address:
         class: WellCommerce\Bundle\ClientBundle\Validator\CompanyAddressValidator
