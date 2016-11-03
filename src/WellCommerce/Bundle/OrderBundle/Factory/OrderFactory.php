@@ -114,6 +114,7 @@ class OrderFactory extends AbstractEntityFactory
         $order->setSessionId($this->requestHelper->getSessionId());
         $order->setShippingMethodOption(null);
         $order->setConditionsAccepted(false);
+        $order->setIssueInvoice(false);
         
         $client = $this->securityHelper->getCurrentClient();
         

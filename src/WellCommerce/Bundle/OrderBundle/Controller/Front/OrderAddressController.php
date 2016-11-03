@@ -32,7 +32,7 @@ class OrderAddressController extends AbstractFrontController
     {
         $order = $this->getOrderProvider()->getCurrentOrder();
         $form  = $this->getForm($order, [
-            'validation_groups' => $this->getValidationGroupsForRequest($request)
+            'validation_groups' => $this->getValidationGroupsForRequest($request),
         ]);
         
         if ($form->isSubmitted() && $this->isCopyBillingAddress($request)) {
@@ -69,7 +69,7 @@ class OrderAddressController extends AbstractFrontController
             'order_contact_details',
         ];
         
-        if ($request->isMethod('POST') && $this->isCopyBillingAddress($request)) {
+        if ($request->isMethod('POST') && false === $this->isCopyBillingAddress($request)) {
             $validationGroups[] = 'order_shipping_address';
         }
         
@@ -90,12 +90,12 @@ class OrderAddressController extends AbstractFrontController
         $billingAddress = $parameters->get('billingAddress');
         
         $shippingAddress = [
-            'shippingAddress.copyBillingAddress' => true
+            'shippingAddress.copyBillingAddress' => true,
         ];
         
         foreach ($billingAddress as $key => $value) {
             list(, $fieldName) = explode('.', $key);
-            $shippingAddress['shippingAddress.' . $fieldName] = $value;
+            $shippingAddress['shippingAddress.'.$fieldName] = $value;
         }
         
         $parameters->set('shippingAddress', $shippingAddress);
@@ -104,9 +104,8 @@ class OrderAddressController extends AbstractFrontController
     protected function isCopyBillingAddress(Request $request) : bool
     {
         $shippingAddress    = $request->request->filter('shippingAddress');
-        $copyBillingAddress = $shippingAddress['shippingAddress.copyBillingAddress'] ?? 0;
         
-        return 1 === (int)$copyBillingAddress;
+        return 1 === (int)$shippingAddress['shippingAddress.copyBillingAddress'];
     }
     
     protected function isCreateAccount(Request $request) : bool

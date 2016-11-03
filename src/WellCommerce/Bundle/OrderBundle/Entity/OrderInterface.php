@@ -138,4 +138,14 @@ interface OrderInterface extends
      * @param boolean $conditionsAccepted
      */
     public function setConditionsAccepted(bool $conditionsAccepted);
+    
+    /**
+     * @return boolean
+     */
+    public function isIssueInvoice(): bool;
+    
+    /**
+     * @param boolean $issueInvoice
+     */
+    public function setIssueInvoice(bool $issueInvoice);
 }

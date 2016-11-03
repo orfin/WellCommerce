@@ -43,9 +43,24 @@
             </constraint>
         </property>
         <property name="conditionsAccepted">
-            <constraint name="EqualTo">
-                <option name="value">1</option>
+            <constraint name="IsTrue">
                 <option name="message">client.conditions_not_accepted</option>
+                <option name="groups">
+                    <value>order_confirmation</value>
+                </option>
+            </constraint>
+        </property>
+        <property name="issueInvoice">
+            <constraint name="NotNull">
+                <option name="groups">
+                    <value>order_confirmation</value>
+                </option>
+            </constraint>
+        </property>
+        <property name="comment">
+            <constraint name="Length">
+                <option name="min">0</option>
+                <option name="max">500</option>
                 <option name="groups">
                     <value>order_confirmation</value>
                 </option>

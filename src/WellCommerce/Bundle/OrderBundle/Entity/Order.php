@@ -120,6 +120,11 @@ class Order implements OrderInterface
     /**
      * @var bool
      */
+    protected $issueInvoice;
+    
+    /**
+     * @var bool
+     */
     protected $conditionsAccepted;
     
     public function isConfirmed() : bool
@@ -338,5 +343,21 @@ class Order implements OrderInterface
     public function setConditionsAccepted(bool $conditionsAccepted)
     {
         $this->conditionsAccepted = $conditionsAccepted;
+    }
+    
+    /**
+     * @return boolean
+     */
+    public function isIssueInvoice(): bool
+    {
+        return $this->issueInvoice;
+    }
+    
+    /**
+     * @param boolean $issueInvoice
+     */
+    public function setIssueInvoice(bool $issueInvoice)
+    {
+        $this->issueInvoice = $issueInvoice;
     }
 }

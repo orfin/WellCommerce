@@ -11,6 +11,7 @@
  */
 namespace WellCommerce\Bundle\OrderBundle\Form\Front;
 
+use WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddressInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
 use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
 use WellCommerce\Component\Form\Elements\FormInterface;
@@ -54,6 +55,11 @@ class OrderAddressFormBuilder extends AbstractFormBuilder
             'label' => $this->trans('client.label.contact_details.last_name'),
         ]));
         
+        $billingAddress->addChild($this->getElement('checkbox', [
+            'name'  => 'billingAddress.companyAddress',
+            'label' => $this->trans('client.label.address.company_address'),
+        ]));
+        
         $billingAddress->addChild($this->getElement('text_field', [
             'name'  => 'billingAddress.companyName',
             'label' => $this->trans('client.label.address.company_name'),
@@ -95,7 +101,7 @@ class OrderAddressFormBuilder extends AbstractFormBuilder
             'name'    => 'billingAddress.country',
             'label'   => $this->trans('client.label.address.country'),
             'options' => $this->get('country.repository')->all(),
-            'default' => $this->getShopStorage()->getCurrentShop()->getDefaultCountry()
+            'default' => $this->getShopStorage()->getCurrentShop()->getDefaultCountry(),
         ]));
     }
     
@@ -152,7 +158,7 @@ class OrderAddressFormBuilder extends AbstractFormBuilder
             'name'    => 'shippingAddress.country',
             'label'   => $this->trans('client.label.address.country'),
             'options' => $this->get('country.repository')->all(),
-            'default' => $this->getShopStorage()->getCurrentShop()->getDefaultCountry()
+            'default' => $this->getShopStorage()->getCurrentShop()->getDefaultCountry(),
         ]));
     }
     

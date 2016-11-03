@@ -66,6 +66,12 @@ WellCommerce\Bundle\OrderBundle\Entity\Order:
             column: conditions_accepted
             options:
                 default: true
+        issueInvoice:
+            type: boolean
+            nullable: false
+            column: issue_invoice
+            options:
+                default: false
     oneToMany:
         products:
             targetEntity: WellCommerce\Bundle\OrderBundle\Entity\OrderProduct
