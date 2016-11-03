@@ -272,7 +272,7 @@ class Product implements ProductInterface
         return $this->attributeGroup;
     }
     
-    public function setAttributeGroup(AttributeGroupInterface $attributeGroup)
+    public function setAttributeGroup(AttributeGroupInterface $attributeGroup = null)
     {
         $this->attributeGroup = $attributeGroup;
     }

@@ -97,7 +97,7 @@ interface ProductInterface extends
     
     public function getAttributeGroup();
     
-    public function setAttributeGroup(AttributeGroupInterface $attributeGroup);
+    public function setAttributeGroup(AttributeGroupInterface $attributeGroup = null);
     
     public function getVariants() : Collection;
     
