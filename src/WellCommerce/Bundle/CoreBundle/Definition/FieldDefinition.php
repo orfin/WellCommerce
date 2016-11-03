@@ -24,7 +24,7 @@ class FieldDefinition extends AbstractMappingDefinition
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions (OptionsResolver $resolver)
     {
         $resolver->setRequired([
             'fieldName',
@@ -33,26 +33,29 @@ class FieldDefinition extends AbstractMappingDefinition
             'unique',
             'nullable',
             'columnName',
+            'options',
         ]);
-
+        
         $resolver->setDefaults([
             'length'   => 50,
             'unique'   => false,
             'nullable' => true,
+            'options'  => [],
         ]);
-
+        
         $resolver->setAllowedTypes('fieldName', 'string');
         $resolver->setAllowedTypes('type', 'string');
         $resolver->setAllowedTypes('length', 'integer');
         $resolver->setAllowedTypes('unique', 'boolean');
         $resolver->setAllowedTypes('nullable', 'boolean');
         $resolver->setAllowedTypes('columnName', 'string');
+        $resolver->setAllowedTypes('options', 'array');
     }
-
+    
     /**
      * {@inheritdoc}
      */
-    public function getClassMetadataMethod()
+    public function getClassMetadataMethod ()
     {
         return MappingDefinitionInterface::CLASS_METADATA_METHOD_FIELD;
     }
