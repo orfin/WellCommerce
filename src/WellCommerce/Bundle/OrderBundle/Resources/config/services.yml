@@ -45,6 +45,10 @@ services:
         class: WellCommerce\Bundle\OrderBundle\Visitor\OrderVisitorTraverser
         arguments: ['@order.visitor.collection']
 
+    order_product_total.calculator:
+        class: WellCommerce\Bundle\OrderBundle\Calculator\OrderProductTotalCalculator
+        arguments: ['@currency.helper']
+
     order_confirmation.order.visitor:
         class: WellCommerce\Bundle\OrderBundle\Visitor\OrderConfirmationVisitor
         tags:
@@ -59,9 +63,9 @@ services:
 
     product_total.order.visitor:
         class: WellCommerce\Bundle\OrderBundle\Visitor\OrderProductTotalVisitor
+        arguments: ['@order_product_total.calculator']
         tags:
             - { name: order.visitor, alias: product_total }
-        arguments: ['@currency.helper']
 
     summary.order.visitor:
         class: WellCommerce\Bundle\OrderBundle\Visitor\OrderSummaryVisitor

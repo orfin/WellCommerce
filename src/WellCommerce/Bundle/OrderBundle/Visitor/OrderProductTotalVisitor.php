@@ -12,9 +12,8 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Visitor;
 
-use WellCommerce\Bundle\CurrencyBundle\Helper\CurrencyHelperInterface;
+use WellCommerce\Bundle\OrderBundle\Calculator\OrderProductTotalCalculatorInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
-use WellCommerce\Bundle\OrderBundle\Entity\OrderProductInterface;
 
 /**
  * Class OrderProductTotalVisitor
@@ -24,92 +23,27 @@ use WellCommerce\Bundle\OrderBundle\Entity\OrderProductInterface;
 final class OrderProductTotalVisitor implements OrderVisitorInterface
 {
     /**
-     * @var CurrencyHelperInterface
+     * @var OrderProductTotalCalculatorInterface
      */
-    private $helper;
+    private $calculator;
     
     /**
      * OrderProductTotalVisitor constructor.
      *
-     * @param CurrencyHelperInterface $helper
+     * @param OrderProductTotalCalculatorInterface $calculator
      */
-    public function __construct(CurrencyHelperInterface $helper)
+    public function __construct (OrderProductTotalCalculatorInterface $calculator)
     {
-        $this->helper = $helper;
+        $this->calculator = $calculator;
     }
     
-    public function visitOrder(OrderInterface $order)
+    public function visitOrder (OrderInterface $order)
     {
         $summary = $order->getProductTotal();
-        $summary->setQuantity($this->calculateQuantity($order));
-        $summary->setWeight($this->calculateWeight($order));
-        $summary->setNetPrice($this->calculateNetPrice($order));
-        $summary->setGrossPrice($this->calculateGrossPrice($order));
-        $summary->setTaxAmount($this->calculateTaxAmount($order));
-    }
-    
-    private function calculateQuantity(OrderInterface $order) : int
-    {
-        $quantity = 0;
-        $order->getProducts()->map(function (OrderProductInterface $orderProduct) use (&$quantity) {
-            $quantity += $orderProduct->getQuantity();
-        });
-        
-        return $quantity;
-    }
-    
-    private function calculateWeight(OrderInterface $order) : float
-    {
-        $weight = 0;
-        $order->getProducts()->map(function (OrderProductInterface $orderProduct) use (&$weight) {
-            $weight += $orderProduct->getWeight() * $orderProduct->getQuantity();
-        });
-        
-        return $weight;
-    }
-    
-    private function calculateNetPrice(OrderInterface $order) : float
-    {
-        $targetCurrency = $order->getCurrency();
-        $net            = 0;
-        $order->getProducts()->map(function (OrderProductInterface $orderProduct) use (&$net, $targetCurrency) {
-            $sellPrice    = $orderProduct->getSellPrice();
-            $baseCurrency = $sellPrice->getCurrency();
-            $priceNet     = $sellPrice->getNetAmount();
-            
-            $net += $this->helper->convert($priceNet, $baseCurrency, $targetCurrency, $orderProduct->getQuantity());
-        });
-        
-        return $net;
-    }
-    
-    private function calculateGrossPrice(OrderInterface $order) : float
-    {
-        $targetCurrency = $order->getCurrency();
-        $gross          = 0;
-        $order->getProducts()->map(function (OrderProductInterface $orderProduct) use (&$gross, $targetCurrency) {
-            $sellPrice    = $orderProduct->getSellPrice();
-            $baseCurrency = $sellPrice->getCurrency();
-            $priceGross   = $sellPrice->getGrossAmount();
-            
-            $gross += $this->helper->convert($priceGross, $baseCurrency, $targetCurrency, $orderProduct->getQuantity());
-        });
-        
-        return $gross;
-    }
-    
-    private function calculateTaxAmount(OrderInterface $order) : float
-    {
-        $targetCurrency = $order->getCurrency();
-        $tax            = 0;
-        $order->getProducts()->map(function (OrderProductInterface $orderProduct) use (&$tax, $targetCurrency) {
-            $sellPrice    = $orderProduct->getSellPrice();
-            $baseCurrency = $sellPrice->getCurrency();
-            $taxAmount    = $sellPrice->getTaxAmount();
-            
-            $tax += $this->helper->convert($taxAmount, $baseCurrency, $targetCurrency, $orderProduct->getQuantity());
-        });
-        
-        return $tax;
+        $summary->setQuantity($this->calculator->getTotalQuantity($order));
+        $summary->setWeight($this->calculator->getTotalWeight($order));
+        $summary->setNetPrice($this->calculator->getTotalNetAmount($order));
+        $summary->setGrossPrice($this->calculator->getTotalGrossAmount($order));
+        $summary->setTaxAmount($this->calculator->getTotalTaxAmount($order));
     }
 }
