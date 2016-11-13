@@ -17,6 +17,7 @@ use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 use WellCommerce\Bundle\AppBundle\Entity\HierarchyAwareTrait;
+use WellCommerce\Bundle\CategoryBundle\Entity\Extra\CategoryExtraTrait;
 use WellCommerce\Bundle\CoreBundle\Behaviours\Enableable\EnableableTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\IdentifiableTrait;
 use WellCommerce\Bundle\ShopBundle\Entity\ShopCollectionAwareTrait;
@@ -35,17 +36,18 @@ class Category implements CategoryInterface
     use EnableableTrait;
     use ShopCollectionAwareTrait;
     use HierarchyAwareTrait;
-
+    use CategoryExtraTrait;
+    
     /**
      * @var null|CategoryInterface
      */
     protected $parent;
-
+    
     /**
      * @var Collection
      */
     protected $children;
-
+    
     /**
      * @var Collection
      */
@@ -55,7 +57,7 @@ class Category implements CategoryInterface
      * @var int
      */
     protected $productsCount;
-
+    
     /**
      * @var int
      */
@@ -65,53 +67,53 @@ class Category implements CategoryInterface
     {
         return $this->parent;
     }
-
+    
     public function setParent(CategoryInterface $parent = null)
     {
         $this->parent = $parent;
     }
-
+    
     public function setChildren(Collection $children)
     {
         $this->children = $children;
     }
-
+    
     public function getChildren() : Collection
     {
         return $this->children;
     }
-
+    
     public function addChild(CategoryInterface $child)
     {
         $this->children[] = $child;
         $child->setParent($this);
     }
-
+    
     public function getProducts() : Collection
     {
         return $this->products;
     }
-
+    
     public function setProducts(Collection $products)
     {
         $this->products = $products;
     }
-
+    
     public function getProductsCount() : int
     {
         return $this->productsCount;
     }
-
+    
     public function setProductsCount(int $productsCount)
     {
         $this->productsCount = $productsCount;
     }
-
+    
     public function getChildrenCount() : int
     {
         return $this->childrenCount;
     }
-
+    
     public function setChildrenCount(int $childrenCount)
     {
         $this->childrenCount = $childrenCount;
