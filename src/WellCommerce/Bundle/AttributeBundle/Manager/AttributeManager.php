@@ -23,7 +23,7 @@ use WellCommerce\Bundle\CoreBundle\Manager\AbstractManager;
  */
 class AttributeManager extends AbstractManager
 {
-    public function createAttribute(string $attributeName, int $attributeGroupId) : AttributeInterface
+    public function createAttribute (string $attributeName, int $attributeGroupId) : AttributeInterface
     {
         /** @var $attribute AttributeInterface */
         $attribute = $this->initResource();
@@ -33,29 +33,29 @@ class AttributeManager extends AbstractManager
         }
         $attribute->addGroup($group);
         $attribute->mergeNewTranslations();
-        $this->saveResource($attribute);
-
+        $this->createResource($attribute);
+        
         return $attribute;
     }
-
-    public function getAttributeSet(int $attributeGroupId) : array
+    
+    public function getAttributeSet (int $attributeGroupId) : array
     {
         $sets                 = [];
         $attributeGroup       = $this->findAttributeGroup($attributeGroupId);
         $attributesCollection = $attributeGroup->getAttributes();
-
+        
         $attributesCollection->map(function (AttributeInterface $attribute) use (&$sets) {
             $sets[] = [
                 'id'     => $attribute->getId(),
                 'name'   => $attribute->translate()->getName(),
-                'values' => $this->getAttributeValuesSet($attribute)
+                'values' => $this->getAttributeValuesSet($attribute),
             ];
         });
-
+        
         return $sets;
     }
-
-    public function findAttributeGroup(int $id) : AttributeGroupInterface
+    
+    public function findAttributeGroup (int $id) : AttributeGroupInterface
     {
         return $this->get('attribute_group.repository')->find($id);
     }
