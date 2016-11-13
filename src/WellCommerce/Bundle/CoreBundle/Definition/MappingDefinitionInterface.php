@@ -24,24 +24,25 @@ interface MappingDefinitionInterface
     const CLASS_METADATA_METHOD_FIELD        = 'mapField';
     const CLASS_METADATA_METHOD_MANY_TO_MANY = 'mapManyToMany';
     const CLASS_METADATA_METHOD_MANY_TO_ONE  = 'mapManyToOne';
-
+    const CLASS_METADATA_METHOD_ONE_TO_MANY  = 'mapOneToMany';
+    
     /**
      * @param OptionsResolver $resolver
      */
-    public function configureOptions(OptionsResolver $resolver);
-
+    public function configureOptions (OptionsResolver $resolver);
+    
     /**
      * @return array
      */
-    public function getOptions();
-
+    public function getOptions ();
+    
     /**
      * @return string
      */
-    public function getClassMetadataMethod();
-
+    public function getClassMetadataMethod ();
+    
     /**
      * @return string
      */
-    public function getPropertyName();
+    public function getPropertyName ();
 }
