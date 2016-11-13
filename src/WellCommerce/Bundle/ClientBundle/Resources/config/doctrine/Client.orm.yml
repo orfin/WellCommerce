@@ -10,6 +10,9 @@ WellCommerce\Bundle\ClientBundle\Entity\Client:
     type: entity
     table: client
     repositoryClass: WellCommerce\Bundle\ClientBundle\Repository\ClientRepository
+    indexes:
+        IDX_client_username:
+            columns: [client_details_username]
     id:
         id:
             type: integer
