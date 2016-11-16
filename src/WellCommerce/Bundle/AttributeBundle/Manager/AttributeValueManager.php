@@ -47,7 +47,7 @@ class AttributeValueManager extends AbstractManager
 
         $value->mergeNewTranslations();
         $value->addAttribute($attribute);
-        $this->saveResource($value);
+        $this->createResource($value);
 
         return $value;
     }

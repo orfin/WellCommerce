@@ -33,7 +33,7 @@ class AttributeManager extends AbstractManager
         }
         $attribute->addGroup($group);
         $attribute->mergeNewTranslations();
-        $this->saveResource($attribute);
+        $this->createResource($attribute);
 
         return $attribute;
     }
