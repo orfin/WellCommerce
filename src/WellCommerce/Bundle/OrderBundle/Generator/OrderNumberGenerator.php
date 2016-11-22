@@ -39,7 +39,7 @@ final class OrderNumberGenerator implements OrderNumberGeneratorInterface
     
     public function generateOrderNumber(OrderInterface $order) : string
     {
-        $sql  = "SELECT MAX(CAST(orders.number AS INT)) AS last_order FROM orders WHERE confirmed = 1";
+        $sql  = "SELECT MAX(CAST(orders.number AS UNSIGNED)) AS last_order FROM orders WHERE confirmed = 1";
         $em   = $this->helper->getEntityManager();
         $stmt = $em->getConnection()->prepare($sql);
         $stmt->execute();
