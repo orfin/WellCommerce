@@ -41,17 +41,11 @@ class AttributeGroup implements AttributeGroupInterface
         $this->attributes = new ArrayCollection();
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function getAttributes(): Collection
     {
         return $this->attributes;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function setAttributes(Collection $attributes)
     {
         if ($this->attributes instanceof Collection) {
@@ -65,17 +59,11 @@ class AttributeGroup implements AttributeGroupInterface
         $this->attributes = $attributes;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function removeAttribute(AttributeInterface $attribute)
     {
         $this->attributes->removeElement($attribute);
     }
-    
-    /**
-     * {@inheritdoc}
-     */
+
     public function addAttribute(AttributeInterface $attribute)
     {
         $this->attributes->add($attribute);

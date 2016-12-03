@@ -23,24 +23,15 @@ use WellCommerce\Bundle\LocaleBundle\Entity\LocaleAwareInterface;
 class AttributeValueTranslation implements LocaleAwareInterface
 {
     use Translation;
-
-    /**
-     * @var string
-     */
-    protected $name;
-
-    /**
-     * @return string
-     */
-    public function getName()
+    
+    protected $name = '';
+    
+    public function getName(): string
     {
         return $this->name;
     }
-
-    /**
-     * @param $name
-     */
-    public function setName($name)
+    
+    public function setName(string $name)
     {
         $this->name = $name;
     }

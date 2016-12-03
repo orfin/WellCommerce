@@ -25,23 +25,11 @@ use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
  */
 interface AttributeGroupInterface extends EntityInterface, TimestampableInterface, TranslatableInterface, BlameableInterface
 {
-    /**
-     * @return Collection
-     */
     public function getAttributes() : Collection;
-
-    /**
-     * @param Collection $collection
-     */
+    
     public function setAttributes(Collection $collection);
 
-    /**
-     * @param AttributeInterface $attribute
-     */
     public function addAttribute(AttributeInterface $attribute);
 
-    /**
-     * @param AttributeInterface $attribute
-     */
     public function removeAttribute(AttributeInterface $attribute);
 }

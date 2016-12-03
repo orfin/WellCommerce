@@ -36,25 +36,16 @@ class AttributeValue implements AttributeValueInterface
      */
     protected $attributes;
     
-    /**
-     * AttributeValue constructor.
-     */
     public function __construct()
     {
         $this->attributes = new ArrayCollection();
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function getAttributes(): Collection
     {
         return $this->attributes;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function setAttributes(Collection $attributes)
     {
         $this->syncOldAttributes($attributes);
@@ -67,7 +58,7 @@ class AttributeValue implements AttributeValueInterface
         $attribute->addValue($this);
     }
     
-    protected function syncOldAttributes(Collection $attributes)
+    private function syncOldAttributes(Collection $attributes)
     {
         $this->attributes->map(function (AttributeInterface $attribute) use ($attributes) {
             if (false === $attributes->contains($attribute)) {
@@ -76,7 +67,7 @@ class AttributeValue implements AttributeValueInterface
         });
     }
     
-    protected function syncNewAttributes(Collection $attributes)
+    private function syncNewAttributes(Collection $attributes)
     {
         $attributes->map(function (AttributeInterface $attribute) {
             if (false === $this->attributes->contains($attribute)) {
