@@ -25,7 +25,7 @@ use WellCommerce\Bundle\CoreBundle\Helper\Helper;
  */
 class ClientController extends AbstractAdminController
 {
-    public function addAction(Request $request) : Response
+    public function addAction(Request $request): Response
     {
         /** @var ClientInterface $resource */
         $resource = $this->getManager()->initResource();

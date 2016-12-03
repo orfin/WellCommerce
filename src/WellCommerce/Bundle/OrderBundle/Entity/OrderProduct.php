@@ -2,8 +2,8 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Entity;
 
-use WellCommerce\Bundle\AppBundle\Entity\DiscountablePriceInterface;
-use WellCommerce\Bundle\AppBundle\Entity\PriceInterface;
+use WellCommerce\Bundle\AppBundle\Entity\DiscountablePrice;
+use WellCommerce\Bundle\AppBundle\Entity\Price;
 use WellCommerce\Bundle\CoreBundle\Behaviours\Timestampable\TimestampableTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\IdentifiableTrait;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareTrait;
@@ -28,12 +28,12 @@ class OrderProduct implements OrderProductInterface
     protected $quantity;
     
     /**
-     * @var PriceInterface
+     * @var Price
      */
     protected $buyPrice;
     
     /**
-     * @var PriceInterface
+     * @var Price
      */
     protected $sellPrice;
     
@@ -52,7 +52,7 @@ class OrderProduct implements OrderProductInterface
      */
     protected $locked;
     
-    public function getCurrentStock() : int
+    public function getCurrentStock(): int
     {
         if ($this->hasVariant()) {
             return $this->getVariant()->getStock();
@@ -61,7 +61,7 @@ class OrderProduct implements OrderProductInterface
         return $this->getProduct()->getStock();
     }
     
-    public function getCurrentSellPrice() : DiscountablePriceInterface
+    public function getCurrentSellPrice(): DiscountablePrice
     {
         if ($this->hasVariant()) {
             return $this->getVariant()->getSellPrice();
@@ -70,7 +70,7 @@ class OrderProduct implements OrderProductInterface
         return $this->getProduct()->getSellPrice();
     }
     
-    public function getQuantity() : int
+    public function getQuantity(): int
     {
         return $this->quantity;
     }
@@ -90,27 +90,27 @@ class OrderProduct implements OrderProductInterface
         $this->quantity -= $decrease;
     }
     
-    public function getSellPrice() : PriceInterface
+    public function getSellPrice(): Price
     {
         return $this->sellPrice;
     }
     
-    public function setSellPrice(PriceInterface $sellPrice)
+    public function setSellPrice(Price $sellPrice)
     {
         $this->sellPrice = $sellPrice;
     }
     
-    public function getBuyPrice() : PriceInterface
+    public function getBuyPrice(): Price
     {
         return $this->buyPrice;
     }
     
-    public function setBuyPrice(PriceInterface $buyPrice)
+    public function setBuyPrice(Price $buyPrice)
     {
         $this->buyPrice = $buyPrice;
     }
     
-    public function getWeight() : float
+    public function getWeight(): float
     {
         return $this->weight;
     }
@@ -120,7 +120,7 @@ class OrderProduct implements OrderProductInterface
         $this->weight = $weight;
     }
     
-    public function getOptions() : array
+    public function getOptions(): array
     {
         return $this->options;
     }

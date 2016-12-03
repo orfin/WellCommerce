@@ -39,60 +39,60 @@ interface PaymentMethodInterface extends
      *
      * @return string
      */
-    public function getProcessor() : string;
-
+    public function getProcessor(): string;
+    
     /**
      * Sets payment method processor
      *
      * @param string $processor
      */
     public function setProcessor(string $processor);
-
+    
     /**
      * @return Collection
      */
-    public function getShippingMethods() : Collection;
-
+    public function getShippingMethods(): Collection;
+    
     /**
      * @param Collection $shippingMethods
      */
     public function setShippingMethods(Collection $shippingMethods);
-
+    
     /**
      * @return OrderStatusInterface
      */
     public function getPaymentPendingOrderStatus();
-
+    
     /**
      * @param OrderStatusInterface $paymentPendingOrderStatus
      */
     public function setPaymentPendingOrderStatus(OrderStatusInterface $paymentPendingOrderStatus);
-
+    
     /**
      * @return OrderStatusInterface
      */
     public function getPaymentSuccessOrderStatus();
-
+    
     /**
      * @param OrderStatusInterface $paymentSuccessOrderStatus
      */
     public function setPaymentSuccessOrderStatus(OrderStatusInterface $paymentSuccessOrderStatus);
-
+    
     /**
      * @return OrderStatusInterface
      */
     public function getPaymentFailureOrderStatus();
-
+    
     /**
      * @param OrderStatusInterface $paymentFailureOrderStatus
      */
     public function setPaymentFailureOrderStatus(OrderStatusInterface $paymentFailureOrderStatus);
-
+    
     /**
      * @return array
      */
-    public function getConfiguration() : array;
-
+    public function getConfiguration(): array;
+    
     /**
      * @param array $configuration
      */

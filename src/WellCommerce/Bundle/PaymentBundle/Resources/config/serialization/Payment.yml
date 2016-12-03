@@ -41,10 +41,6 @@ WellCommerce\Bundle\PaymentBundle\Entity\Payment:
         updatedAt:
             groups: {  }
     associations:
-        paymentStateHistory:
-            groups:
-                - payment
         order:
             groups:
                 - payment
-    callbacks: {  }

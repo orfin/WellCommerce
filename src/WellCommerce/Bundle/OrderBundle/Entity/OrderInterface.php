@@ -45,7 +45,7 @@ interface OrderInterface extends
     CouponAwareInterface,
     ShippingMethodAwareInterface
 {
-    public function isConfirmed() : bool;
+    public function isConfirmed(): bool;
     
     public function setConfirmed(bool $confirmed);
     
@@ -53,15 +53,15 @@ interface OrderInterface extends
     
     public function setNumber(string $number);
     
-    public function getCurrency() : string;
+    public function getCurrency(): string;
     
     public function setCurrency(string $currency);
     
-    public function getCurrencyRate() : float;
+    public function getCurrencyRate(): float;
     
     public function setCurrencyRate(float $currencyRate);
     
-    public function getSessionId() : string;
+    public function getSessionId(): string;
     
     public function setSessionId(string $sessionId);
     
@@ -69,47 +69,47 @@ interface OrderInterface extends
     
     public function removeProduct(OrderProductInterface $orderProduct);
     
-    public function getProducts() : Collection;
+    public function getProducts(): Collection;
     
     public function setProducts(Collection $products);
     
-    public function getProductTotal() : OrderProductTotalInterface;
+    public function getProductTotal(): OrderProductTotalInterface;
     
     public function setProductTotal(OrderProductTotalInterface $productTotal);
     
     public function addModifier(OrderModifierInterface $modifier);
     
-    public function hasModifier(string $name) : bool;
+    public function hasModifier(string $name): bool;
     
     public function removeModifier(string $name);
     
-    public function getModifier(string $name) : OrderModifierInterface;
+    public function getModifier(string $name): OrderModifierInterface;
     
-    public function getModifiers() : Collection;
+    public function getModifiers(): Collection;
     
     public function setModifiers(Collection $modifiers);
     
-    public function getSummary() : OrderSummaryInterface;
+    public function getSummary(): OrderSummary;
     
-    public function setSummary(OrderSummaryInterface $summary);
-
-    public function hasCurrentStatus() : bool;
-
+    public function setSummary(OrderSummary $summary);
+    
+    public function hasCurrentStatus(): bool;
+    
     public function getCurrentStatus();
     
     public function setCurrentStatus(OrderStatusInterface $currentStatus = null);
     
     public function setOrderStatusHistory(Collection $orderStatusHistory);
     
-    public function getOrderStatusHistory() : Collection;
+    public function getOrderStatusHistory(): Collection;
     
     public function addOrderStatusHistory(OrderStatusHistoryInterface $orderStatusHistory);
     
-    public function getComment() : string;
+    public function getComment(): string;
     
     public function setComment(string $comment);
     
-    public function getPayments() : Collection;
+    public function getPayments(): Collection;
     
     public function setPayments(Collection $payments);
     
@@ -117,7 +117,7 @@ interface OrderInterface extends
     
     public function acceptVisitor(OrderVisitorInterface $visitor);
     
-    public function isEmpty() : bool;
+    public function isEmpty(): bool;
     
     /**
      * @return null|string

@@ -85,6 +85,7 @@ class ClientFormBuilder extends AbstractFormBuilder
             'rules'   => [
                 $this->getRule('required'),
             ],
+            'default' => 0,
         ]));
         
         if ($this->getRouterHelper()->getCurrentAction() === 'addAction') {
@@ -198,6 +199,11 @@ class ClientFormBuilder extends AbstractFormBuilder
         $shippingAddress->addChild($this->getElement('text_field', [
             'name'  => 'shippingAddress.line1',
             'label' => $this->trans('client.label.address.line1'),
+        ]));
+    
+        $shippingAddress->addChild($this->getElement('text_field', [
+            'name'  => 'shippingAddress.companyName',
+            'label' => $this->trans('client.label.address.company_name'),
         ]));
         
         $shippingAddress->addChild($this->getElement('text_field', [

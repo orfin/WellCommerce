@@ -31,6 +31,11 @@ WellCommerce\Bundle\ClientBundle\Entity\Client:
         contactDetails:
             class: WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetails
             columnPrefix: contact_details_
+    manyToMany:
+        orders:
+            targetEntity: WellCommerce\Bundle\OrderBundle\Entity\Order
+            fetch: EXTRA_LAZY
+            mappedBy: client
     manyToOne:
         shop:
             targetEntity: WellCommerce\Bundle\ShopBundle\Entity\ShopInterface

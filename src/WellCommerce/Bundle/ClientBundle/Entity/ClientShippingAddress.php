@@ -23,10 +23,25 @@ class ClientShippingAddress implements ClientShippingAddressInterface
 {
     use AddressTrait;
     
+    /**
+     * @var string
+     */
     private $firstName;
+    
+    /**
+     * @var string
+     */
     private $lastName;
+    
+    /**
+     * @var bool
+     */
     private $copyBillingAddress;
-
+    /**
+     * @var string
+     */
+    private $companyName;
+    
     public function getFirstName() : string
     {
         return $this->firstName;
@@ -55,5 +70,15 @@ class ClientShippingAddress implements ClientShippingAddressInterface
     public function setCopyBillingAddress(bool $copyBillingAddress)
     {
         $this->copyBillingAddress = $copyBillingAddress;
+    }
+    
+    public function getCompanyName()
+    {
+        return $this->companyName;
+    }
+    
+    public function setCompanyName(string $companyName)
+    {
+        $this->companyName = $companyName;
     }
 }

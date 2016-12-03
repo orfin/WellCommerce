@@ -31,20 +31,23 @@ class OrderDataSet extends AbstractDataSet
     public function configureOptions(DataSetConfiguratorInterface $configurator)
     {
         $configurator->setColumns([
-            'id'                 => 'orders.id',
-            'number'             => 'orders.number',
-            'client'             => 'CONCAT_WS(\':\', orders.billingAddress.firstName, orders.billingAddress.lastName, orders.contactDetails.phone)',
-            'productTotal'       => 'orders.productTotal.grossPrice',
-            'products'           => 'GROUP_CONCAT(DISTINCT product_translation.name ORDER BY product_translation.name ASC SEPARATOR \'<br />\')',
-            'productsFull'       => 'GROUP_CONCAT(DISTINCT order_product.id SEPARATOR \',\')',
-            'orderTotal'         => 'orders.summary.grossAmount',
-            'paymentMethodName'  => 'payment_method_translation.name',
-            'shippingMethodName' => 'shipping_method_translation.name',
-            'currentStatusId'    => 'IDENTITY(orders.currentStatus)',
-            'currentStatusName'  => 'status_translation.name',
-            'currency'           => 'orders.currency',
-            'createdAt'          => 'orders.createdAt',
-            'shop'               => 'IDENTITY(orders.shop)',
+            'id'                  => 'orders.id',
+            'number'              => 'orders.number',
+            'client'              => 'CONCAT_WS(\':\', orders.billingAddress.firstName, orders.billingAddress.lastName, orders.contactDetails.phone)',
+            'productTotal'        => 'orders.productTotal.grossPrice',
+            'products'            => 'GROUP_CONCAT(DISTINCT product_translation.name ORDER BY product_translation.name ASC SEPARATOR \'<br />\')',
+            'productsFull'        => 'GROUP_CONCAT(DISTINCT order_product.id SEPARATOR \',\')',
+            'orderTotal'          => 'orders.summary.grossAmount',
+            'paymentMethodId'     => 'IDENTITY(orders.paymentMethod)',
+            'paymentMethodName'   => 'payment_method_translation.name',
+            'shippingMethodId'    => 'IDENTITY(orders.shippingMethod)',
+            'shippingMethodName'  => 'shipping_method_translation.name',
+            'currentStatusId'     => 'IDENTITY(orders.currentStatus)',
+            'currentStatusName'   => 'status_translation.name',
+            'currentStatusColour' => 'status.colour',
+            'currency'            => 'orders.currency',
+            'createdAt'           => 'orders.createdAt',
+            'shop'                => 'IDENTITY(orders.shop)',
         ]);
         
         $configurator->setColumnTransformers([

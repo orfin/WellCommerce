@@ -7,5 +7,20 @@
         <li><a href="{{ path('admin.client.add') }}" class="button" title="{% trans %}common.button.add{% endtrans %}"><span>{% trans %}common.button.add{% endtrans %}</span></a></li>
     </ul>
 
+    <script>
+        var loadedClientDataGrid = function(dDg) {
+            dDg.m_jBody.find('.show-info').mouseenter(GTooltip.ShowInfoForThis).mouseleave(GTooltip.HideInfoForThis);
+        };
+
+        var processClientDataGrid = function(oRow) {
+            if (oRow.cart != '') {
+                oRow.cart = '<a title="'+ oRow.cart +'" href="#" class="show-info"><img src="{{ asset('images/icons/datagrid/details.png') }}" style="vertical-align: middle;" /></a> '+ oRow.cartValue;
+            }
+
+            return oRow;
+        };
+
+    </script>
+
     {{ datagrid_renderer(datagrid) }}
 {% endblock %}

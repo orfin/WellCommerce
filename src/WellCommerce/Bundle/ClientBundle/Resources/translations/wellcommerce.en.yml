@@ -6,6 +6,8 @@ client:
         new_password: New password
         accept_conditions: Accept store conditions
         accept_newsletter: Sign up for our newsletter
+        last_active: Last active
+        cart: Cart
         contact_details:
             first_name: First name
             last_name: Last name

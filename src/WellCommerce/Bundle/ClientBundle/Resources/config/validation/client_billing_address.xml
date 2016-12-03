@@ -4,18 +4,13 @@
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
 
     <class name="WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddress">
-        <constraint name="WellCommerce\Bundle\ClientBundle\Validator\CompanyAddress">
-            <option name="groups">
-                <value>order_billing_address</value>
-                <value>client_address_book</value>
-            </option>
-        </constraint>
         <property name="firstName">
             <constraint name="NotBlank">
                 <option name="groups">
                     <value>order_billing_address</value>
                     <value>client_address_book</value>
                 </option>
+                <option name="message">client_billing_address.first_name_empty</option>
             </constraint>
             <constraint name="NotNull">
                 <option name="groups">
@@ -30,11 +25,38 @@
                     <value>order_billing_address</value>
                     <value>client_address_book</value>
                 </option>
+                <option name="message">client_billing_address.last_name_empty</option>
             </constraint>
             <constraint name="NotNull">
                 <option name="groups">
                     <value>order_billing_address</value>
                     <value>client_address_book</value>
+                </option>
+            </constraint>
+        </property>
+        <property name="companyName">
+            <constraint name="NotBlank">
+                <option name="groups">
+                    <value>order_issue_invoice</value>
+                </option>
+                <option name="message">client_billing_address.company_name_empty</option>
+            </constraint>
+            <constraint name="NotNull">
+                <option name="groups">
+                    <value>order_issue_invoice</value>
+                </option>
+            </constraint>
+        </property>
+        <property name="vatId">
+            <constraint name="NotBlank">
+                <option name="groups">
+                    <value>order_issue_invoice</value>
+                </option>
+                <option name="message">client_billing_address.vatid_empty</option>
+            </constraint>
+            <constraint name="NotNull">
+                <option name="groups">
+                    <value>order_issue_invoice</value>
                 </option>
             </constraint>
         </property>
@@ -44,6 +66,7 @@
                     <value>order_billing_address</value>
                     <value>client_address_book</value>
                 </option>
+                <option name="message">client_billing_address.line1_empty</option>
             </constraint>
             <constraint name="NotNull">
                 <option name="groups">
@@ -53,6 +76,13 @@
             </constraint>
         </property>
         <property name="line2">
+            <constraint name="NotBlank">
+                <option name="groups">
+                    <value>order_billing_address</value>
+                    <value>client_address_book</value>
+                </option>
+                <option name="message">client_billing_address.line2_empty</option>
+            </constraint>
             <constraint name="NotNull">
                 <option name="groups">
                     <value>order_billing_address</value>
@@ -66,6 +96,7 @@
                     <value>order_billing_address</value>
                     <value>client_address_book</value>
                 </option>
+                <option name="message">client_billing_address.postal_code_empty</option>
             </constraint>
             <constraint name="NotNull">
                 <option name="groups">
@@ -80,6 +111,7 @@
                     <value>order_billing_address</value>
                     <value>client_address_book</value>
                 </option>
+                <option name="message">client_billing_address.city_empty</option>
             </constraint>
             <constraint name="NotNull">
                 <option name="groups">
@@ -91,7 +123,6 @@
         <property name="country">
             <constraint name="Country">
                 <option name="groups">
-                    <value>order_billing_address</value>
                     <value>client_address_book</value>
                 </option>
             </constraint>

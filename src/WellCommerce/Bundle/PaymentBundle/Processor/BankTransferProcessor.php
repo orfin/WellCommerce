@@ -17,13 +17,6 @@ namespace WellCommerce\Bundle\PaymentBundle\Processor;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class BankTransferProcessor extends AbstractPaymentProcessor
+final class BankTransferProcessor extends AbstractPaymentProcessor
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getInitializeUrl() : string
-    {
-        return $this->getRouterHelper()->generateUrl('front.bank_transfer.initialize');
-    }
 }

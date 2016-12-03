@@ -11,52 +11,26 @@
  */
 namespace WellCommerce\Bundle\ClientBundle\EventListener;
 
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
 use WellCommerce\Bundle\CoreBundle\Event\EntityEvent;
-use WellCommerce\Bundle\CoreBundle\Helper\Mailer\MailerHelperInterface;
-use WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface;
-use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
+use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
 
 /**
  * Class ClientSubscriber
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-final class ClientSubscriber implements EventSubscriberInterface
+class ClientSubscriber extends AbstractEventSubscriber
 {
-    /**
-     * @var ManagerInterface
-     */
-    private $clientManager;
-    
-    /**
-     * @var MailerHelperInterface
-     */
-    private $mailerHelper;
-    
-    /**
-     * ClientSubscriber constructor.
-     *
-     * @param ManagerInterface      $clientManager
-     * @param MailerHelperInterface $mailerHelper
-     */
-    public function __construct (ManagerInterface $clientManager, MailerHelperInterface $mailerHelper)
-    {
-        $this->clientManager = $clientManager;
-        $this->mailerHelper  = $mailerHelper;
-    }
-    
-    public static function getSubscribedEvents ()
+    public static function getSubscribedEvents()
     {
         return [
             'client.post_create' => ['onClientPostCreate'],
             'client.pre_create'  => ['onClientPreCreate'],
-            'order.post_update'  => ['onOrderChangedEvent', 0],
         ];
     }
     
-    public function onClientPreCreate (EntityEvent $event)
+    public function onClientPreCreate(EntityEvent $event)
     {
         $client = $event->getEntity();
         if ($client instanceof ClientInterface) {
@@ -68,23 +42,8 @@ final class ClientSubscriber implements EventSubscriberInterface
         }
     }
     
-    public function onOrderChangedEvent (EntityEvent $event)
+    public function onClientPostCreate(EntityEvent $event)
     {
-        $order = $event->getEntity();
-        if ($order instanceof OrderInterface) {
-            $client = $order->getClient();
-            if (null !== $order->getClient()) {
-                $client->setContactDetails($order->getContactDetails());
-                $client->setBillingAddress($order->getBillingAddress());
-                $client->setShippingAddress($order->getShippingAddress());
-                $this->clientManager->updateResource($client);
-            }
-        }
-    }
-    
-    public function onClientPostCreate (EntityEvent $event)
-    {
-
 //        $client = $event->getEntity();
 //        if ($client instanceof ClientInterface) {
 //            $this->getMailerHelper()->sendEmail([

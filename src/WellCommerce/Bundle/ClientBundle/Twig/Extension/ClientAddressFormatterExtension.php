@@ -23,7 +23,7 @@ use WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddressInterface;
 class ClientAddressFormatterExtension extends \Twig_Extension
 {
     const LINES_SEPARATOR = '<br />';
-
+    
     public function getFunctions()
     {
         return [
@@ -32,7 +32,7 @@ class ClientAddressFormatterExtension extends \Twig_Extension
             new \Twig_SimpleFunction('format_contact_details', [$this, 'formatContactDetails'], ['is_safe' => ['html']]),
         ];
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -40,7 +40,7 @@ class ClientAddressFormatterExtension extends \Twig_Extension
     {
         return 'address_formatter';
     }
-
+    
     /**
      * Formats the billing address
      *
@@ -53,13 +53,16 @@ class ClientAddressFormatterExtension extends \Twig_Extension
     {
         $lines   = [];
         $lines[] = sprintf('%s %s', $address->getFirstName(), $address->getLastName());
+        if ('' !== $address->getCompanyName()) {
+            $lines[] = $address->getCompanyName();
+        }
         $lines[] = $address->getLine1();
         $lines[] = $address->getLine2();
         $lines[] = sprintf('%s, %s %s', $address->getCountry(), $address->getPostalCode(), $address->getCity());
-
+        
         return implode($lineSeparator, $lines);
     }
-
+    
     /**
      * Formats the shipping address
      *
@@ -72,13 +75,16 @@ class ClientAddressFormatterExtension extends \Twig_Extension
     {
         $lines   = [];
         $lines[] = sprintf('%s %s', $address->getFirstName(), $address->getLastName());
+        if ('' !== $address->getCompanyName()) {
+            $lines[] = $address->getCompanyName();
+        }
         $lines[] = $address->getLine1();
         $lines[] = $address->getLine2();
         $lines[] = sprintf('%s, %s %s', $address->getCountry(), $address->getPostalCode(), $address->getCity());
-
+        
         return implode($lineSeparator, $lines);
     }
-
+    
     /**
      * Formats the contact details
      *
@@ -93,7 +99,7 @@ class ClientAddressFormatterExtension extends \Twig_Extension
         $lines[] = sprintf('%s %s', $details->getFirstName(), $details->getLastName());
         $lines[] = sprintf('%s %s', $details->getPhone(), $details->getSecondaryPhone());
         $lines[] = $details->getEmail();
-
+        
         return implode($lineSeparator, $lines);
     }
 }

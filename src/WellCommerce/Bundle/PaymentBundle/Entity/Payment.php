@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\Entity;
 
-use Doctrine\Common\Collections\Collection;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use WellCommerce\Bundle\CoreBundle\Entity\IdentifiableTrait;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderAwareTrait;
@@ -27,27 +26,27 @@ class Payment implements PaymentInterface
     use IdentifiableTrait;
     use Timestampable;
     use OrderAwareTrait;
-
+    
     /**
      * @var string
      */
     protected $processor;
-
+    
     /**
      * @var array
      */
-    protected $configuration;
-
+    protected $configuration = [];
+    
     /**
      * @var string
      */
-    protected $state;
-
+    protected $state = PaymentInterface::PAYMENT_STATE_CREATED;
+    
     /**
      * @var string
      */
     protected $token;
-
+    
     /**
      * @var string
      */
@@ -57,30 +56,25 @@ class Payment implements PaymentInterface
      * @var string|null
      */
     protected $externalIdentifier;
-
+    
     /**
      * @var string
      */
     protected $redirectUrl;
-
+    
     /**
      * @var string
      */
-    protected $comment;
-
-    /**
-     * @var Collection
-     */
-    protected $paymentStateHistory;
-
+    protected $comment = '';
+    
     /**
      * {@inheritdoc}
      */
-    public function getProcessor() : string
+    public function getProcessor(): string
     {
         return $this->processor;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -88,31 +82,15 @@ class Payment implements PaymentInterface
     {
         $this->processor = $processor;
     }
-
+    
     /**
      * {@inheritdoc}
      */
-    public function getState() : string
-    {
-        return $this->state;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setState(string $state)
-    {
-        $this->state = $state;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getConfiguration() : array
+    public function getConfiguration(): array
     {
         return $this->configuration;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -120,15 +98,15 @@ class Payment implements PaymentInterface
     {
         $this->configuration = $configuration;
     }
-
+    
     /**
      * {@inheritdoc}
      */
-    public function getToken() : string
+    public function getToken(): string
     {
         return $this->token;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -136,7 +114,7 @@ class Payment implements PaymentInterface
     {
         $this->token = $token;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -144,7 +122,7 @@ class Payment implements PaymentInterface
     {
         return $this->externalIdentifier;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -152,8 +130,8 @@ class Payment implements PaymentInterface
     {
         $this->externalIdentifier = $identifier;
     }
-
-
+    
+    
     /**
      * {@inheritdoc}
      */
@@ -161,7 +139,7 @@ class Payment implements PaymentInterface
     {
         return $this->externalToken;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -169,7 +147,7 @@ class Payment implements PaymentInterface
     {
         $this->externalToken = $externalToken;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -177,7 +155,7 @@ class Payment implements PaymentInterface
     {
         return $this->redirectUrl;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -185,87 +163,135 @@ class Payment implements PaymentInterface
     {
         $this->redirectUrl = $redirectUrl;
     }
-
+    
     /**
      * {@inheritdoc}
      */
-    public function isCreated() : bool
+    public function isCreated(): bool
     {
-        return $this->getState() === PaymentInterface::PAYMENT_STATE_CREATED;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isApproved() : bool
-    {
-        return $this->getState() === PaymentInterface::PAYMENT_STATE_APPROVED;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isFailed() : bool
-    {
-        return $this->getState() === PaymentInterface::PAYMENT_STATE_FAILED;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isCancelled() : bool
-    {
-        return $this->getState() === PaymentInterface::PAYMENT_STATE_CANCELLED;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isExpired() : bool
-    {
-        return $this->getState() === PaymentInterface::PAYMENT_STATE_EXPIRED;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isPending() : bool
-    {
-        return $this->getState() === PaymentInterface::PAYMENT_STATE_PENDING;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isInProgress() : bool
-    {
-        return $this->getState() === PaymentInterface::PAYMENT_STATE_IN_PROGRESS;
+        return $this->state === PaymentInterface::PAYMENT_STATE_CREATED;
     }
     
     /**
      * {@inheritdoc}
      */
-    public function getPaymentStateHistory() : Collection
+    public function setCreated()
     {
-        return $this->paymentStateHistory;
+        $this->state = PaymentInterface::PAYMENT_STATE_CREATED;
     }
     
     /**
      * {@inheritdoc}
      */
-    public function addPaymentStateHistory(PaymentStateHistoryInterface $paymentStateHistory)
+    public function isApproved(): bool
     {
-        $this->getPaymentStateHistory()->add($paymentStateHistory);
+        return $this->state === PaymentInterface::PAYMENT_STATE_APPROVED;
     }
     
     /**
      * {@inheritdoc}
      */
-    public function getComment() : string
+    public function setApproved()
+    {
+        $this->state = PaymentInterface::PAYMENT_STATE_APPROVED;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function isFailed(): bool
+    {
+        return $this->state === PaymentInterface::PAYMENT_STATE_FAILED;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function setFailed()
+    {
+        $this->state = PaymentInterface::PAYMENT_STATE_FAILED;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function isCancelled(): bool
+    {
+        return $this->state === PaymentInterface::PAYMENT_STATE_CANCELLED;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function setCancelled()
+    {
+        $this->state = PaymentInterface::PAYMENT_STATE_CANCELLED;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function isExpired(): bool
+    {
+        return $this->state === PaymentInterface::PAYMENT_STATE_EXPIRED;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function setExpired()
+    {
+        $this->state = PaymentInterface::PAYMENT_STATE_EXPIRED;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function isPending(): bool
+    {
+        return $this->state === PaymentInterface::PAYMENT_STATE_PENDING;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function setPending()
+    {
+        $this->state = PaymentInterface::PAYMENT_STATE_PENDING;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function isInProgress(): bool
+    {
+        return $this->state === PaymentInterface::PAYMENT_STATE_IN_PROGRESS;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function setInProgress()
+    {
+        $this->state = PaymentInterface::PAYMENT_STATE_IN_PROGRESS;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function getState(): string
+    {
+        return $this->state;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function getComment(): string
     {
         return $this->comment;
     }
-
+    
     /**
      * {@inheritdoc}
      */

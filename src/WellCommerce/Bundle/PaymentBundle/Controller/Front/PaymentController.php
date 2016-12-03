@@ -17,7 +17,6 @@ use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
 use WellCommerce\Bundle\PaymentBundle\Manager\PaymentManagerInterface;
-use WellCommerce\Bundle\PaymentBundle\Processor\PaymentProcessorInterface;
 
 /**
  * Class PaymentController
@@ -26,86 +25,73 @@ use WellCommerce\Bundle\PaymentBundle\Processor\PaymentProcessorInterface;
  */
 class PaymentController extends AbstractFrontController
 {
-    public function initializeAction(string $token)
+    /**
+     * @var PaymentManagerInterface
+     */
+    protected $manager;
+    
+    public function initializeAction (PaymentInterface $payment)
     {
-        $payment   = $this->getManager()->findPaymentByToken($token);
         $order     = $payment->getOrder();
-        $processor = $this->getPaymentProcessor($order->getPaymentMethod()->getProcessor());
+        $processor = $this->manager->getPaymentProcessor($order);
         
-        $processor->getGateway()->initializePayment($payment);
+        if (!$payment->isInProgress()) {
+            $processor->getGateway()->initializePayment($payment);
+            $this->manager->updatePaymentState($payment);
+        }
         
-        $this->getManager()->updateResource($payment);
+        if ($payment->isInProgress()) {
+            return new Response($this->renderView($processor->getConfigurator()->getInitializeTemplateName(), [
+                'payment' => $payment,
+            ]));
+        }
         
-        $content = $this->renderView($processor->getConfigurator()->getInitializeTemplateName(), [
-            'payment'       => $payment,
-            'configuration' => $order->getPaymentMethod()->getConfiguration(),
+        return $this->redirectToAction('cancel', [
+            'token' => $payment->getToken(),
         ]);
-        
-        return new Response($content);
     }
     
-    public function confirmAction(string $token, Request $request)
+    public function confirmAction (PaymentInterface $payment, Request $request)
     {
-        $payment   = $this->getManager()->findPaymentByToken($token);
-        $order     = $payment->getOrder();
-        $processor = $this->getPaymentProcessor($order->getPaymentMethod()->getProcessor());
-        
-        $processor->getGateway()->confirmPayment($payment, $request);
-        
-        $this->getManager()->updateResource($payment);
-        
-        if ($payment->getState() === PaymentInterface::PAYMENT_STATE_APPROVED) {
-            $order->setCurrentStatus($order->getPaymentMethod()->getPaymentSuccessOrderStatus());
-            $this->getDoctrineHelper()->getEntityManager()->flush();
+        if (!$payment->isApproved()) {
+            $order     = $payment->getOrder();
+            $processor = $this->manager->getPaymentProcessor($order);
+            $processor->getGateway()->confirmPayment($payment, $request);
+            $this->manager->updatePaymentState($payment);
         }
         
         return $this->displayTemplate('confirm', [
-            'payment'       => $payment,
-            'configuration' => $order->getPaymentMethod()->getConfiguration(),
+            'payment' => $payment,
         ]);
     }
     
-    public function cancelAction(string $token)
+    public function cancelAction (PaymentInterface $payment, Request $request)
     {
-        
-    }
-    
-    public function executeAction(string $token, Request $request)
-    {
-        $payment   = $this->getManager()->findPaymentByToken($token);
-        $order     = $payment->getOrder();
-        $processor = $this->getPaymentProcessor($order->getPaymentMethod()->getProcessor());
-        $response  = $processor->getGateway()->executePayment($payment, $request);
-        
-        $this->getManager()->updateResource($payment);
-        
-        return $response;
-    }
-    
-    public function notifyAction(string $token, Request $request)
-    {
-        $payment   = $this->getManager()->findPaymentByToken($token);
-        $order     = $payment->getOrder();
-        $processor = $this->getPaymentProcessor($order->getPaymentMethod()->getProcessor());
-        $response  = $processor->getGateway()->notifyPayment($payment, $request);
-        
-        $this->getManager()->updateResource($payment);
-        
-        if ($payment->getState() === PaymentInterface::PAYMENT_STATE_APPROVED) {
-            $order->setCurrentStatus($order->getPaymentMethod()->getPaymentSuccessOrderStatus());
-            $this->getEntityManager()->flush();
+        if (!$payment->isCancelled()) {
+            $order     = $payment->getOrder();
+            $processor = $this->manager->getPaymentProcessor($order);
+            $processor->getGateway()->cancelPayment($payment, $request);
+            $this->manager->updatePaymentState($payment);
         }
         
-        return $response;
+        return $this->displayTemplate('cancel', [
+            'payment' => $payment,
+        ]);
     }
     
-    protected function getManager() : PaymentManagerInterface
+    public function executeAction (PaymentInterface $payment, Request $request)
     {
-        return parent::getManager();
     }
     
-    private function getPaymentProcessor(string $name) : PaymentProcessorInterface
+    public function notifyAction (PaymentInterface $payment, Request $request)
     {
-        return $this->get('payment.processor.collection')->get($name);
+        if (!$payment->isApproved()) {
+            $order     = $payment->getOrder();
+            $processor = $this->manager->getPaymentProcessor($order);
+            $processor->getGateway()->notifyPayment($payment, $request);
+            $this->manager->updatePaymentState($payment);
+        }
+        
+        return new Response('OK');
     }
 }

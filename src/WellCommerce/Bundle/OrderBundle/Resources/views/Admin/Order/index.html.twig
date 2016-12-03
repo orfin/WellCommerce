@@ -3,19 +3,92 @@
 {% block content %}
     <h2>{% trans %}order.heading.index{% endtrans %}</h2>
     <script type="text/javascript">
-        var processOrderDataGrid = function(oRow){
-            oRow.productTotal   = oRow.productTotal + ' ' + oRow.currency;
-            oRow.shippingTotal  = oRow.shippingTotal + ' ' + oRow.currency;
-            oRow.orderTotal     = oRow.orderTotal + ' ' + oRow.currency;
-
-            return oRow;
-        };
-    </script>
-    {{ datagrid_renderer(datagrid) }}
-    <script>
         $(document).ready(function(){
             $('.GF_Datagrid_Col_createdAt .GF_Datagrid_filter_between .from').datepicker({dateFormat: 'yy-mm-dd 00:00:00'});
             $('.GF_Datagrid_Col_createdAt .GF_Datagrid_filter_between .to').datepicker({dateFormat: 'yy-mm-dd 23:59:59'});
         });
+
+        function changeStatus(dg, id, status) {
+            var oRequest = {
+                id: id,
+                status: status
+            };
+            DataGrid.MakeRequest(Routing.generate('admin.order.ajax_change_order_status'), oRequest, function(oResult){
+                if(oResult.success){
+                    GMessage('Status dla zamówienia '+ oResult.number +' został zmieniony');
+                    DataGrid.LoadData();
+                    DataGrid.ClearSelection();
+                }
+
+                if(oResult.error){
+                    GError(oData.error);
+                    DataGrid.ClearSelection();
+                }
+            });
+        }
+
+        function changeStatusMulti(dg, ids, status) {
+            var oRequest = {
+                ids: ids,
+                status: status
+            };
+            DataGrid.MakeRequest(Routing.generate('admin.order.ajax_change_order_status_multi'), oRequest, function(oResult){
+                if(oResult.success){
+                    GMessage('Status dla zamówień '+ oResult.ids +' został zmieniony');
+                    DataGrid.LoadData();
+                    DataGrid.ClearSelection();
+                }
+
+                if(oResult.error){
+                    GError(oData.error);
+                    DataGrid.ClearSelection();
+                }
+            });
+        }
+
+        var processOrderDataGrid = function(oRow){
+            oRow.productTotal   = oRow.productTotal + ' ' + oRow.currency;
+            oRow.shippingTotal  = oRow.shippingTotal + ' ' + oRow.currency;
+            oRow.orderTotal     = oRow.orderTotal + ' ' + oRow.currency;
+            oRow.products       = oRow.productsFull;
+            oRow.currentStatusName =  '<span style="color: ' + oRow.currentStatusColour + ';">' + oRow.currentStatusName +'</span>';
+
+            return oRow;
+        };
+
+        function loadedOrderDataGrid(dDg) {
+            $('.GF_Datagrid_Col_currentStatusName span span').each(function(){
+                var color = $(this).css('color');
+
+                $(this).parent().parent().css({
+                    'background-color': color,
+                    'color': 'white'
+                });
+
+                $(this).parent().parent().mouseover(function(){
+                    $(this).css({
+                        'background-color': color,
+                        'color': 'white'
+                    });
+                });
+                $(this).css('color', 'white');
+            });
+        }
+
+        var changeStatusMultiOrderDataGrid = new GF_Action({
+            img: '{{ asset('images/datagrid/change-status.png') }}',
+            caption: 'Zmień status',
+            action: changeStatusMulti,
+            values: {{ statuses|json_encode|raw }}
+        });
+
+        var action_changeStatus = new GF_Action({
+            img: '{{ asset('images/datagrid/change-status.png') }}',
+            caption: 'Zmień status',
+            action: changeStatus,
+            values: {{ statuses|json_encode|raw }}
+        });
+
     </script>
+    {{ datagrid_renderer(datagrid) }}
 {% endblock %}

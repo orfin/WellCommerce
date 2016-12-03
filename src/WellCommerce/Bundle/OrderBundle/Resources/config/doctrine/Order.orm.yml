@@ -7,6 +7,10 @@ WellCommerce\Bundle\OrderBundle\Entity\Order:
     indexes:
         IDX_orders_number:
             columns: [number]
+        IDX_orders_client_shop_confirmed:
+            columns: [client_id, shop_id, confirmed]
+        IDX_orders_session_shop_confirmed:
+            columns: [session_id, shop_id, confirmed]
     id:
         id:
             type: integer
@@ -112,7 +116,7 @@ WellCommerce\Bundle\OrderBundle\Entity\Order:
             joinColumns:
                 client_id:
                     referencedColumnName: id
-                    onDelete: CASCADE
+                    onDelete: SET NULL
         paymentMethod:
             targetEntity: WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod
             fetch: LAZY

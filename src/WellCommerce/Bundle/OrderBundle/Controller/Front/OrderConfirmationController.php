@@ -24,22 +24,22 @@ use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
  */
 final class OrderConfirmationController extends AbstractFrontController
 {
-    public function indexAction () : Response
+    public function indexAction() : Response
     {
         $order = $this->getOrderProvider()->getCurrentOrder();
         $order->setConfirmed(true);
-        
+
         if ($order->isEmpty()) {
             return $this->redirectToRoute('front.order_cart.index');
         }
-        
+
         $form = $this->getForm($order);
         
         if ($form->handleRequest()->isSubmitted()) {
             if ($form->isValid()) {
                 $this->getManager()->updateResource($order);
                 $payment = $this->getPaymentForOrder($order);
-
+                
                 return $this->redirectToRoute('front.payment.initialize', ['token' => $payment->getToken()]);
             }
             
@@ -54,8 +54,8 @@ final class OrderConfirmationController extends AbstractFrontController
             'elements' => $form->getChildren(),
         ]);
     }
-    
-    private function getPaymentForOrder (OrderInterface $order) : PaymentInterface
+
+    private function getPaymentForOrder(OrderInterface $order) : PaymentInterface
     {
         return $order->getPayments()->first();
     }

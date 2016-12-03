@@ -103,7 +103,7 @@ class Order implements OrderInterface
     protected $modifiers;
     
     /**
-     * @var OrderSummaryInterface
+     * @var OrderSummary
      */
     protected $summary;
     
@@ -127,7 +127,7 @@ class Order implements OrderInterface
      */
     protected $conditionsAccepted;
     
-    public function isConfirmed() : bool
+    public function isConfirmed(): bool
     {
         return $this->confirmed;
     }
@@ -147,7 +147,7 @@ class Order implements OrderInterface
         $this->number = $number;
     }
     
-    public function getCurrency() : string
+    public function getCurrency(): string
     {
         return $this->currency;
     }
@@ -157,7 +157,7 @@ class Order implements OrderInterface
         $this->currency = $currency;
     }
     
-    public function getCurrencyRate() : float
+    public function getCurrencyRate(): float
     {
         return $this->currencyRate;
     }
@@ -167,7 +167,7 @@ class Order implements OrderInterface
         $this->currencyRate = $currencyRate;
     }
     
-    public function getSessionId() : string
+    public function getSessionId(): string
     {
         return $this->sessionId;
     }
@@ -188,17 +188,25 @@ class Order implements OrderInterface
         $orderProduct->removeFromOrder();
     }
     
-    public function getProducts() : Collection
+    public function getProducts(): Collection
     {
         return $this->products;
     }
     
     public function setProducts(Collection $products)
     {
+        if ($this->products instanceof Collection) {
+            $this->products->map(function (OrderProductInterface $orderProduct) use ($products) {
+                if (false === $products->contains($orderProduct)) {
+                    $this->products->removeElement($orderProduct);
+                }
+            });
+        }
+        
         $this->products = $products;
     }
     
-    public function getProductTotal() : OrderProductTotalInterface
+    public function getProductTotal(): OrderProductTotalInterface
     {
         return $this->productTotal;
     }
@@ -213,7 +221,7 @@ class Order implements OrderInterface
         $this->modifiers->set($modifier->getName(), $modifier);
     }
     
-    public function hasModifier(string $name) : bool
+    public function hasModifier(string $name): bool
     {
         return $this->modifiers->containsKey($name);
     }
@@ -223,12 +231,12 @@ class Order implements OrderInterface
         $this->modifiers->remove($name);
     }
     
-    public function getModifier(string $name) : OrderModifierInterface
+    public function getModifier(string $name): OrderModifierInterface
     {
         return $this->modifiers->get($name);
     }
     
-    public function getModifiers() : Collection
+    public function getModifiers(): Collection
     {
         return $this->modifiers;
     }
@@ -238,21 +246,21 @@ class Order implements OrderInterface
         $this->modifiers = $modifiers;
     }
     
-    public function getSummary() : OrderSummaryInterface
+    public function getSummary(): OrderSummary
     {
         return $this->summary;
     }
     
-    public function setSummary(OrderSummaryInterface $summary)
+    public function setSummary(OrderSummary $summary)
     {
         $this->summary = $summary;
     }
-
-    public function hasCurrentStatus() : bool
+    
+    public function hasCurrentStatus(): bool
     {
         return $this->currentStatus instanceof OrderStatusInterface;
     }
-
+    
     public function getCurrentStatus()
     {
         return $this->currentStatus;
@@ -268,7 +276,7 @@ class Order implements OrderInterface
         $this->orderStatusHistory = $orderStatusHistory;
     }
     
-    public function getOrderStatusHistory() : Collection
+    public function getOrderStatusHistory(): Collection
     {
         return $this->orderStatusHistory;
     }
@@ -278,7 +286,7 @@ class Order implements OrderInterface
         $this->orderStatusHistory->add($orderStatusHistory);
     }
     
-    public function getComment() : string
+    public function getComment(): string
     {
         return $this->comment;
     }
@@ -288,7 +296,7 @@ class Order implements OrderInterface
         $this->comment = $comment;
     }
     
-    public function getPayments() : Collection
+    public function getPayments(): Collection
     {
         return $this->payments;
     }
@@ -308,7 +316,7 @@ class Order implements OrderInterface
         $visitor->visitOrder($this);
     }
     
-    public function isEmpty() : bool
+    public function isEmpty(): bool
     {
         return 0 === $this->productTotal->getQuantity();
     }

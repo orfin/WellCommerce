@@ -10,6 +10,7 @@
                     <value>order_shipping_address</value>
                     <value>client_address_book</value>
                 </option>
+                <option name="message">client_shipping_address.first_name_empty</option>
             </constraint>
             <constraint name="NotNull">
                 <option name="groups">
@@ -24,6 +25,7 @@
                     <value>order_shipping_address</value>
                     <value>client_address_book</value>
                 </option>
+                <option name="message">client_shipping_address.last_name_empty</option>
             </constraint>
             <constraint name="NotNull">
                 <option name="groups">
@@ -38,6 +40,22 @@
                     <value>order_shipping_address</value>
                     <value>client_address_book</value>
                 </option>
+                <option name="message">client_shipping_address.line1_empty</option>
+            </constraint>
+            <constraint name="NotNull">
+                <option name="groups">
+                    <value>order_shipping_address</value>
+                    <value>client_address_book</value>
+                </option>
+            </constraint>
+        </property>
+        <property name="line2">
+            <constraint name="NotBlank">
+                <option name="groups">
+                    <value>order_shipping_address</value>
+                    <value>client_address_book</value>
+                </option>
+                <option name="message">client_shipping_address.line2_empty</option>
             </constraint>
             <constraint name="NotNull">
                 <option name="groups">
@@ -52,6 +70,7 @@
                     <value>order_shipping_address</value>
                     <value>client_address_book</value>
                 </option>
+                <option name="message">client_shipping_address.postal_code_empty</option>
             </constraint>
             <constraint name="NotNull">
                 <option name="groups">
@@ -66,6 +85,7 @@
                     <value>order_shipping_address</value>
                     <value>client_address_book</value>
                 </option>
+                <option name="message">client_shipping_address.city_empty</option>
             </constraint>
             <constraint name="NotNull">
                 <option name="groups">

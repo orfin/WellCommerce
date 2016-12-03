@@ -51,6 +51,7 @@ final class ClientShippingAddressFactory extends AbstractEntityFactory
         $address->setCity('');
         $address->setCountry($this->shopStorage->getCurrentShop()->getDefaultCountry());
         $address->setCopyBillingAddress(true);
+        $address->setCompanyName('');
         
         return $address;
     }

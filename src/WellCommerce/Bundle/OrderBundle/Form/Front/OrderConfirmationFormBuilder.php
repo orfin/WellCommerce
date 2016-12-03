@@ -26,25 +26,18 @@ final class OrderConfirmationFormBuilder extends AbstractFormBuilder
      */
     public function buildForm(FormInterface $form)
     {
-        $form->addChild($this->getElement('checkbox', [
-            'name'    => 'issueInvoice',
-            'label'   => $this->trans('order.label.issue_invoice'),
-            'default' => false,
-            'comment' => $this->trans('order.label.issue_invoice'),
-        ]));
-        
         $form->addChild($this->getElement('text_area', [
             'name'  => 'comment',
             'rows'  => 5,
             'cols'  => 20,
             'label' => $this->trans('order.label.comment'),
         ]));
-        
+    
         $form->addChild($this->getElement('checkbox', [
             'name'    => 'conditionsAccepted',
             'label'   => $this->trans('order.label.accept_conditions'),
             'default' => false,
-            'comment' => $this->trans('order.label.accept_conditions'),
+            'comment' => $this->trans('order.label.accept_conditions')
         ]));
         
         $form->addFilter($this->getFilter('no_code'));

@@ -15,7 +15,6 @@ order:
         cart: Koszyk
         comments: Twoje uwagi
         methods: Płatność i wysyłka
-        confirm: Potwierdzenie zamówienia
     button:
         confirm: Przejdź do potwierdzenia
         add_product: Dodaj produkt
@@ -30,7 +29,7 @@ order:
         summary:
             net_amount: Wartość netto
             tax_amount: Wartość podatku
-            gross_amount: Wartość brutto
+            gross_amount: Wartość brutto łączna
         shipping_total: Koszty przesyłki
         shipping_cost: Koszty przesyłki
         coupon_discount: Kupon
@@ -55,6 +54,9 @@ order:
         variant_options: Wybrane opcje
         accept_conditions: Akceptuję regulamin sklepu internetowego
         issue_invoice: Proszę o wystawienie faktury VAT
+        coupon:
+            code: Kod kuponu
+            modifier: Rabat kuponu
     description:
         product_total: Wartość produktów
         shipping_cost: Koszty wysyłki
@@ -93,8 +95,8 @@ order:
         label:
             copy_address: Adres dostawy jest taki sam jak adres płatnika
             addresses: Adresy
-            line1: Adres
-            line2: Adres cd.
+            line1: Ulica
+            line2: Nr. budynku, nr. lokalu
             province: Prowincja
             postal_code: Kod pocztowy
             country: Państwo

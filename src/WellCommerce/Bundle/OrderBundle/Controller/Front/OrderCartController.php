@@ -26,7 +26,7 @@ use WellCommerce\Bundle\ProductBundle\Entity\VariantInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-final class OrderCartController extends AbstractFrontController
+class OrderCartController extends AbstractFrontController
 {
     public function indexAction() : Response
     {

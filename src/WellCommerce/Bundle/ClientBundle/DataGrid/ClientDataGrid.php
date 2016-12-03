@@ -16,6 +16,9 @@ use WellCommerce\Component\DataGrid\Column\Column;
 use WellCommerce\Component\DataGrid\Column\ColumnCollection;
 use WellCommerce\Component\DataGrid\Column\Options\Appearance;
 use WellCommerce\Component\DataGrid\Column\Options\Filter;
+use WellCommerce\Component\DataGrid\Configuration\EventHandler\LoadedEventHandler;
+use WellCommerce\Component\DataGrid\Configuration\EventHandler\ProcessEventHandler;
+use WellCommerce\Component\DataGrid\Options\OptionsInterface;
 
 /**
  * Class ClientDataGrid
@@ -67,7 +70,7 @@ class ClientDataGrid extends AbstractDataGrid
                 'align' => Appearance::ALIGN_CENTER,
             ]),
         ]));
-    
+        
         $collection->add(new Column([
             'id'         => 'vatId',
             'caption'    => $this->trans('client.label.address.vat_id'),
@@ -106,7 +109,7 @@ class ClientDataGrid extends AbstractDataGrid
                 ]),
             ]),
             'appearance' => new Appearance([
-                'width' => 140,
+                'width' => 100,
                 'align' => Appearance::ALIGN_CENTER,
             ]),
         ]));
@@ -121,6 +124,48 @@ class ClientDataGrid extends AbstractDataGrid
                 'width' => 40,
                 'align' => Appearance::ALIGN_CENTER,
             ]),
+        ]));
+        
+        $collection->add(new Column([
+            'id'         => 'lastActive',
+            'caption'    => $this->trans('client.label.last_active'),
+            'filter'     => new Filter([
+                'type' => Filter::FILTER_BETWEEN,
+            ]),
+            'appearance' => new Appearance([
+                'width' => 60,
+                'align' => Appearance::ALIGN_CENTER,
+            ]),
+        ]));
+        
+        $collection->add(new Column([
+            'id'         => 'cart',
+            'caption'    => $this->trans('client.label.cart'),
+            'filter'     => new Filter([
+                'type' => Filter::FILTER_BETWEEN,
+            ]),
+            'appearance' => new Appearance([
+                'width' => 60,
+                'align' => Appearance::ALIGN_CENTER,
+            ]),
+        ]));
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    protected function configureOptions(OptionsInterface $options)
+    {
+        parent::configureOptions($options);
+        
+        $eventHandlers = $options->getEventHandlers();
+        
+        $eventHandlers->add(new ProcessEventHandler([
+            'function' => $this->getJavascriptFunctionName('process'),
+        ]));
+        
+        $eventHandlers->add(new LoadedEventHandler([
+            'function' => $this->getJavascriptFunctionName('loaded'),
         ]));
     }
 }

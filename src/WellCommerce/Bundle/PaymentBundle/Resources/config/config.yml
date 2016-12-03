@@ -10,7 +10,6 @@ doctrine:
     orm:
         resolve_target_entities:
             WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface: WellCommerce\Bundle\PaymentBundle\Entity\Payment
-            WellCommerce\Bundle\PaymentBundle\Entity\PaymentStateHistoryInterface: WellCommerce\Bundle\PaymentBundle\Entity\PaymentStateHistory
             WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodInterface: WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod
 
 well_commerce_api:
@@ -22,8 +21,6 @@ well_commerce_api:
     serialization:
         WellCommerce\Bundle\PaymentBundle\Entity\Payment:
             mapping: "@WellCommercePaymentBundle/Resources/config/serialization/Payment.yml"
-        WellCommerce\Bundle\PaymentBundle\Entity\PaymentStateHistory:
-            mapping: "@WellCommercePaymentBundle/Resources/config/serialization/PaymentStateHistory.yml"
         WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod:
             mapping: "@WellCommercePaymentBundle/Resources/config/serialization/PaymentMethod.yml"
         WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodTranslation:

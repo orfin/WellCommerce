@@ -33,11 +33,13 @@
                 <option name="groups">
                     <value>client_registration</value>
                 </option>
+                <option name="message">client_details.username_empty</option>
             </constraint>
             <constraint name="Regex">
                 <option name="groups">
                     <value>client_registration</value>
                 </option>
+                <option name="message">client_details.username_not_valid</option>
                 <option name="pattern">/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.(?:[A-Z]{2}|com|org|net|gov|mil|biz|info|mobi|name|aero|jobs|museum|pro)$/i</option>
             </constraint>
         </property>
@@ -45,12 +47,14 @@
             <constraint name="NotNull">
                 <option name="groups">
                     <value>client_registration</value>
+                    <value>order_client_registration</value>
                 </option>
             </constraint>
             <constraint name="NotBlank">
                 <option name="groups">
                     <value>client_registration</value>
                 </option>
+                <option name="message">client_details.password_empty</option>
             </constraint>
         </property>
         <property name="discount">

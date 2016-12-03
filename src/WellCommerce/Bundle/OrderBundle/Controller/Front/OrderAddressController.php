@@ -76,6 +76,10 @@ class OrderAddressController extends AbstractFrontController
         if ($request->isMethod('POST') && $this->isCreateAccount($request)) {
             $validationGroups[] = 'client_registration';
         }
+    
+        if ($request->isMethod('POST') && $this->isIssueInvoice($request)) {
+            $validationGroups[] = 'order_issue_invoice';
+        }
         
         return $validationGroups;
     }
@@ -114,6 +118,11 @@ class OrderAddressController extends AbstractFrontController
         $createAccount = $clientDetails['clientDetails.createAccount'] ?? 0;
         
         return 1 === (int)$createAccount;
+    }
+    
+    protected function isIssueInvoice(Request $request) : bool
+    {
+        return 1 === (int)$request->request->filter('issueInvoice');
     }
     
     protected function autoRegisterClient(OrderInterface $order) : ClientInterface

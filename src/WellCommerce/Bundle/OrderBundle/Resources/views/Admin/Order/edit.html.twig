@@ -29,7 +29,7 @@
                         <li>
                             <h4><span>{{ entry.createdAt|date }} - <em>{% if entry.notify == true %}{% trans %}order_status_history.label.client_notified{% endtrans %}{% else %}{% trans %}order_status_history.label.client_not_notified{% endtrans %}{% endif %}</em></span></h4>
                             <p>{% trans %}order_status_history.label.order_status{% endtrans %}: <strong>{{ entry.orderStatus.translate.name }}</strong></p>
-                            {% if entry.comment != '' %}<p>{% trans %}order_status_history.label.comment{% endtrans %}: <strong>{{ entry.comment }}</strong></p>{% endif %}
+                            {% if entry.comment != '' %}<p>{% trans %}order_status_history.label.comment{% endtrans %}: <strong>{{ entry.comment|raw }}</strong></p>{% endif %}
                             {% if entry.createdBy is not null %}<p class="author">{% trans %}order_status_history.label.created_by{% endtrans %}: <strong>{{ entry.createdBy }}</strong></p>{% endif %}
                         </li>
                     {% endfor %}

@@ -24,77 +24,63 @@ use WellCommerce\Component\Form\FormBuilderInterface;
  */
 final class PayPalConfigurator extends AbstractPaymentMethodConfigurator
 {
-    public function getName() : string
+    public function getName () : string
     {
         return 'paypal';
     }
-
-    public function getInitializeTemplateName() : string
+    
+    public function getInitializeTemplateName () : string
     {
         return 'WellCommercePaymentBundle:Front/PayPal:initialize.html.twig';
     }
-
-    public function addConfigurationFields(FormBuilderInterface $builder, ElementInterface $fieldset, DependencyInterface $dependency)
+    
+    public function addConfigurationFields (FormBuilderInterface $builder, ElementInterface $fieldset, DependencyInterface $dependency)
     {
         $fieldset->addChild($builder->getElement('text_field', [
             'name'         => $this->getConfigurationKey('client_id'),
             'label'        => $this->trans('paypal.label.client_id'),
             'dependencies' => [$dependency],
         ]));
-
+        
         $fieldset->addChild($builder->getElement('text_field', [
             'name'         => $this->getConfigurationKey('client_secret'),
             'label'        => $this->trans('paypal.label.client_secret'),
             'dependencies' => [$dependency],
         ]));
-
+        
         $fieldset->addChild($builder->getElement('select', [
             'name'         => $this->getConfigurationKey('mode'),
             'label'        => $this->trans('paypal.label.mode'),
             'options'      => [
                 'live'    => 'live',
-                'sandbox' => 'sandbox'
+                'sandbox' => 'sandbox',
             ],
             'dependencies' => [$dependency],
         ]));
-
-        $fieldset->addChild($builder->getElement('select', [
-            'name'         => $this->getConfigurationKey('type'),
-            'label'        => $this->trans('paypal.label.type'),
-            'options'      => [
-                'paypal'      => 'paypal',
-                'credit_card' => 'credit_card'
-            ],
-            'dependencies' => [$dependency],
-        ]));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function configureOptions(OptionsResolver $resolver)
-    {
-        parent::configureOptions($resolver);
-
-        $resolver->setAllowedTypes($this->getConfigurationKey('client_id'), 'string');
-        $resolver->setAllowedTypes($this->getConfigurationKey('client_secret'), 'string');
-        $resolver->setAllowedTypes($this->getConfigurationKey('mode'), 'string');
-        $resolver->setAllowedTypes($this->getConfigurationKey('type'), 'string');
-
-        $resolver->setAllowedValues($this->getConfigurationKey('mode'), ['sandbox', 'live']);
-        $resolver->setAllowedValues($this->getConfigurationKey('type'), ['paypal', 'credit_card']);
     }
     
     /**
      * {@inheritdoc}
      */
-    public function getSupportedConfigurationKeys() : array
+    protected function configureOptions (OptionsResolver $resolver)
+    {
+        parent::configureOptions($resolver);
+        
+        $resolver->setAllowedTypes($this->getConfigurationKey('client_id'), 'string');
+        $resolver->setAllowedTypes($this->getConfigurationKey('client_secret'), 'string');
+        $resolver->setAllowedTypes($this->getConfigurationKey('mode'), 'string');
+        $resolver->setAllowedValues($this->getConfigurationKey('mode'), ['sandbox', 'live']);
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function getSupportedConfigurationKeys () : array
     {
         return [
             $this->getConfigurationKey('client_id'),
             $this->getConfigurationKey('client_secret'),
             $this->getConfigurationKey('mode'),
-            $this->getConfigurationKey('type')
         ];
     }
 }

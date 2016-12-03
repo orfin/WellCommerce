@@ -17,13 +17,13 @@ namespace WellCommerce\Bundle\OrderBundle\Entity;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class OrderSummary implements OrderSummaryInterface
+class OrderSummary
 {
     private $netAmount   = 0;
     private $grossAmount = 0;
     private $taxAmount   = 0;
     
-    public function getNetAmount() : float
+    public function getNetAmount(): float
     {
         return $this->netAmount;
     }
@@ -33,7 +33,7 @@ class OrderSummary implements OrderSummaryInterface
         $this->netAmount = $netAmount;
     }
     
-    public function getGrossAmount() : float
+    public function getGrossAmount(): float
     {
         return $this->grossAmount;
     }
@@ -43,7 +43,7 @@ class OrderSummary implements OrderSummaryInterface
         $this->grossAmount = $grossAmount;
     }
     
-    public function getTaxAmount() : float
+    public function getTaxAmount(): float
     {
         return $this->taxAmount;
     }

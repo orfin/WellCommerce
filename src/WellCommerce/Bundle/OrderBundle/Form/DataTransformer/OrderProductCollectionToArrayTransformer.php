@@ -12,31 +12,40 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Form\DataTransformer;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
+use WellCommerce\Bundle\CoreBundle\Helper\Image\ImageHelperInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderProductInterface;
-use WellCommerce\Bundle\OrderBundle\Manager\OrderProductManager;
+use WellCommerce\Bundle\OrderBundle\Manager\OrderProductManagerInterface;
 
 /**
  * Class OrderProductCollectionToArrayTransformer
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class OrderProductCollectionToArrayTransformer extends CollectionToArrayTransformer
+final class OrderProductCollectionToArrayTransformer extends CollectionToArrayTransformer
 {
     /**
-     * @var OrderProductManager
+     * @var OrderProductManagerInterface
      */
-    protected $manager;
+    private $manager;
     
     /**
-     * @param OrderProductManager $manager
+     * @var ImageHelperInterface
      */
-    public function setOrderProductManager(OrderProductManager $manager)
+    private $imageHelper;
+    
+    public function setOrderProductManager(OrderProductManagerInterface $manager)
     {
         $this->manager = $manager;
+    }
+    
+    public function setImageHelper(ImageHelperInterface $imageHelper)
+    {
+        $this->imageHelper = $imageHelper;
     }
     
     /**
@@ -49,7 +58,9 @@ class OrderProductCollectionToArrayTransformer extends CollectionToArrayTransfor
         if ($modelData instanceof Collection) {
             $modelData->map(function (OrderProductInterface $orderProduct) use (&$values) {
                 
-                $variantId = $this->getVariantId($orderProduct);
+                $variantId = $orderProduct->hasVariant() ? $orderProduct->getVariant()->getId() : 0;
+                $photoPath = $orderProduct->getProduct()->getPhoto()->getPath();
+                $symbol    = $orderProduct->hasVariant() ? $orderProduct->getVariant()->getSymbol() : $orderProduct->getProduct()->getSku();
                 
                 $values[] = [
                     'id'               => $orderProduct->getId(),
@@ -57,7 +68,7 @@ class OrderProductCollectionToArrayTransformer extends CollectionToArrayTransfor
                     'product_name'     => $orderProduct->getProduct()->translate()->getName(),
                     'gross_amount'     => $orderProduct->getSellPrice()->getGrossAmount(),
                     'quantity'         => $orderProduct->getQuantity(),
-                    'ean'              => $orderProduct->getProduct()->getSku(),
+                    'ean'              => $symbol,
                     'previousquantity' => $orderProduct->getQuantity(),
                     'trackstock'       => $orderProduct->getProduct()->getTrackStock(),
                     'tax_rate'         => $orderProduct->getSellPrice()->getTaxRate(),
@@ -67,20 +78,12 @@ class OrderProductCollectionToArrayTransformer extends CollectionToArrayTransfor
                     'variant_options'  => $this->getVariantOptions($orderProduct),
                     'weight'           => $orderProduct->getWeight(),
                     'stock'            => $orderProduct->getProduct()->getStock(),
+                    'thumb'            => null !== $photoPath ? $this->imageHelper->getImage($photoPath, 'medium') : '',
                 ];
             });
         }
         
         return $values;
-    }
-    
-    protected function getVariantId(OrderProductInterface $orderProduct)
-    {
-        if ($orderProduct->hasVariant()) {
-            return $orderProduct->getVariant()->getId();
-        }
-        
-        return 0;
     }
     
     protected function getVariantOptions(OrderProductInterface $orderProduct)
@@ -102,10 +105,14 @@ class OrderProductCollectionToArrayTransformer extends CollectionToArrayTransfor
      */
     public function reverseTransform($modelData, PropertyPathInterface $propertyPath, $values)
     {
+        $collection = new ArrayCollection();
         if ($modelData instanceof OrderInterface) {
             foreach ($values as $product) {
-                $this->manager->addUpdateOrderProduct($product, $modelData);
+                $orderProduct = $this->manager->addUpdateOrderProduct($product, $modelData);
+                $collection->add($orderProduct);
             }
+        
+            $modelData->setProducts($collection);
         }
     }
 }

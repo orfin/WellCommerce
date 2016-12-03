@@ -8,6 +8,8 @@ client:
         accept_conditions: Akceptuję regulamin sklepu
         accept_newsletter: Zapisz się na nasz newsleter
         terms_and_conditions: Zasady oraz warunki
+        last_active: Aktywny
+        cart: Koszyk
         create_account: Załóż konto
         contact_details:
             first_name: Imię
@@ -18,8 +20,8 @@ client:
         address:
             first_name: Imię
             last_name: Nazwisko
-            line1: Adres
-            line2: Adres cd.
+            line1: Ulica
+            line2: Nr. budynku, nr. lokalu
             province: Prowincja
             postal_code: Kod pocztowy
             company: Nazwa firmy

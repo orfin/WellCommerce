@@ -12,13 +12,16 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Manager;
 
+use WellCommerce\Bundle\AppBundle\Entity\Price;
 use WellCommerce\Bundle\CoreBundle\Manager\AbstractManager;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderProductInterface;
 use WellCommerce\Bundle\OrderBundle\Exception\ChangeOrderProductQuantityException;
 use WellCommerce\Bundle\OrderBundle\Exception\DeleteOrderProductException;
+use WellCommerce\Bundle\ProductBundle\Entity\Product;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\VariantInterface;
+use WellCommerce\Bundle\TaxBundle\Helper\TaxHelper;
 
 /**
  * Class OrderProductManager
@@ -92,5 +95,65 @@ final class OrderProductManager extends AbstractManager implements OrderProductM
         }
         
         $this->updateResource($order);
+    }
+    
+    public function addUpdateOrderProduct(array $productValues, OrderInterface $order) : OrderProductInterface
+    {
+        $orderProduct = $this->getRepository()->findOneBy(['id' => $productValues['id']]);
+        if (!$orderProduct instanceof OrderProductInterface) {
+            $orderProduct = $this->addOrderProduct($productValues, $order);
+            $order->addProduct($orderProduct);
+        } else {
+            $this->updateOrderProduct($orderProduct, $productValues);
+        }
+        
+        return $orderProduct;
+    }
+    
+    private function updateOrderProduct(OrderProductInterface $orderProduct, array $productValues)
+    {
+        $sellPrice   = $orderProduct->getSellPrice();
+        $grossAmount = $productValues['gross_amount'];
+        $taxRate     = $orderProduct->getSellPrice()->getTaxRate();
+        $netAmount   = TaxHelper::calculateNetPrice($grossAmount, $taxRate);
+        
+        $sellPrice->setTaxRate($taxRate);
+        $sellPrice->setTaxAmount($grossAmount - $netAmount);
+        $sellPrice->setNetAmount($netAmount);
+        $sellPrice->setGrossAmount($grossAmount);
+        $orderProduct->setWeight($productValues['weight']);
+        $orderProduct->setQuantity($productValues['quantity']);
+    }
+    
+    private function addOrderProduct(array $productValues, OrderInterface $order) : OrderProductInterface
+    {
+        $productId = (int)$productValues['product_id'];
+        $product   = $this->getEntityManager()->getRepository(Product::class)->find($productId);
+        if (!$product instanceof ProductInterface) {
+            throw new \InvalidArgumentException(sprintf('Cannot add product to order. ID "%s" does not exists.', $productId));
+        }
+        
+        /** @var OrderProductInterface $orderProduct */
+        $orderProduct = $this->initResource();
+        $orderProduct->setBuyPrice($product->getBuyPrice());
+        $orderProduct->setOrder($order);
+        $orderProduct->setProduct($product);
+        $orderProduct->setQuantity($productValues['quantity']);
+        $orderProduct->setWeight($productValues['weight']);
+        
+        $sellPrice   = new Price();
+        $grossAmount = $productValues['gross_amount'];
+        $taxRate     = $product->getSellPriceTax()->getValue();
+        $netAmount   = TaxHelper::calculateNetPrice($grossAmount, $taxRate);
+        
+        $sellPrice->setTaxRate($taxRate);
+        $sellPrice->setTaxAmount($grossAmount - $netAmount);
+        $sellPrice->setNetAmount($netAmount);
+        $sellPrice->setGrossAmount($grossAmount);
+        $sellPrice->setCurrency($order->getCurrency());
+        
+        $orderProduct->setSellPrice($sellPrice);
+        
+        return $orderProduct;
     }
 }

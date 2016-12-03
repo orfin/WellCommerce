@@ -12,3 +12,30 @@ client:
     password_not_valid: 'Password is not valid.'
     vatid_not_valid: VAT ID is not valid
     company_name_not_valid: Company name is not valid
+    first_name_empty: Pole "Imię" nie może być puste
+client_shipping_address:
+    first_name_empty: Field "First name" can't be empty
+    last_name_empty: Field "Last name" can't be empty
+    line1_empty: Field "Address line 1" can't be empty
+    line2_empty: Field "Address line 2" can't be empty
+    postal_code_empty: Field "Post code" can't be empty
+    city_empty: Field "City" can't be empty
+client_billing_address:
+    first_name_empty: Field "First name" can't be empty
+    last_name_empty: Field "Last name" can't be empty
+    line1_empty: Field "Address line 1" can't be empty
+    line2_empty: Field "Address line 2" can't be empty
+    postal_code_empty: Field "Post code" can't be empty
+    city_empty: Field "City" can't be empty
+    company_name_empty: Field "Company" can't be empty
+    vatid_empty: Field "VAT ID" can't be empty
+client_details:
+    password_empty: Field "Password" can't be empty
+    username_empty: E-mail address can't be empty
+    username_not_valid: E-mail address is not valid
+client_contact_details:
+    first_name_empty: Field "First name" can't be empty
+    last_name_empty: Field "Last name" can't be empty
+    email_empty: E-mail address can't be empty
+    email_not_valid: E-mail address is not valid
+    phone_empty: Field "Phone" can't be empty

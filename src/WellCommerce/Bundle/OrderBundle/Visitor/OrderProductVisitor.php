@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Visitor;
 
+use WellCommerce\Bundle\AppBundle\Entity\Price;
 use WellCommerce\Bundle\AppBundle\Factory\PriceFactory;
 use WellCommerce\Bundle\CurrencyBundle\Helper\CurrencyHelperInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
@@ -36,22 +37,15 @@ final class OrderProductVisitor implements OrderVisitorInterface
     private $variantHelper;
     
     /**
-     * @var PriceFactory
-     */
-    private $priceFactory;
-    
-    /**
      * OrderProductVisitor constructor.
      *
      * @param CurrencyHelperInterface $currencyHelper
      * @param VariantHelperInterface  $variantHelper
-     * @param PriceFactory            $priceFactory
      */
-    public function __construct(CurrencyHelperInterface $currencyHelper, VariantHelperInterface $variantHelper, PriceFactory $priceFactory)
+    public function __construct(CurrencyHelperInterface $currencyHelper, VariantHelperInterface $variantHelper)
     {
         $this->currencyHelper = $currencyHelper;
         $this->variantHelper  = $variantHelper;
-        $this->priceFactory   = $priceFactory;
     }
     
     public function visitOrder(OrderInterface $order)
@@ -67,7 +61,7 @@ final class OrderProductVisitor implements OrderVisitorInterface
         });
     }
     
-    private function checkOrderStock(OrderInterface $order, OrderProductInterface $orderProduct) : bool
+    private function checkOrderStock(OrderInterface $order, OrderProductInterface $orderProduct): bool
     {
         $trackStock      = $orderProduct->getProduct()->getTrackStock();
         $orderedQuantity = $orderProduct->getQuantity();
@@ -95,7 +89,7 @@ final class OrderProductVisitor implements OrderVisitorInterface
         $netAmount      = $this->currencyHelper->convert($baseSellPrice->getFinalNetAmount(), $baseCurrency, $targetCurrency);
         $taxAmount      = $this->currencyHelper->convert($baseSellPrice->getFinalTaxAmount(), $baseCurrency, $targetCurrency);
         
-        $sellPrice = $this->priceFactory->create();
+        $sellPrice = new Price();
         $sellPrice->setCurrency($targetCurrency);
         $sellPrice->setGrossAmount($grossAmount);
         $sellPrice->setNetAmount($netAmount);
@@ -114,7 +108,7 @@ final class OrderProductVisitor implements OrderVisitorInterface
         $netAmount      = $this->currencyHelper->convert($baseBuyPrice->getNetAmount(), $baseCurrency, $targetCurrency);
         $taxAmount      = $this->currencyHelper->convert($baseBuyPrice->getTaxAmount(), $baseCurrency, $targetCurrency);
         
-        $buyPrice = $this->priceFactory->create();
+        $buyPrice = new Price();
         $buyPrice->setCurrency($targetCurrency);
         $buyPrice->setGrossAmount($grossAmount);
         $buyPrice->setNetAmount($netAmount);

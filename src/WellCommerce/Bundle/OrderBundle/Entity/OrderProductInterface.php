@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Entity;
 
-use WellCommerce\Bundle\AppBundle\Entity\DiscountablePriceInterface;
-use WellCommerce\Bundle\AppBundle\Entity\PriceInterface;
+use WellCommerce\Bundle\AppBundle\Entity\DiscountablePrice;
+use WellCommerce\Bundle\AppBundle\Entity\Price;
 use WellCommerce\Bundle\CoreBundle\Entity\EntityInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareInterface;
@@ -31,7 +31,7 @@ interface OrderProductInterface extends
     TimestampableInterface,
     OrderAwareInterface
 {
-    public function getQuantity() : int;
+    public function getQuantity(): int;
     
     public function setQuantity(int $quantity);
     
@@ -39,19 +39,19 @@ interface OrderProductInterface extends
     
     public function decreaseQuantity(int $decrease);
     
-    public function getSellPrice() : PriceInterface;
+    public function getSellPrice(): Price;
     
-    public function setSellPrice(PriceInterface $sellPrice);
+    public function setSellPrice(Price $sellPrice);
     
-    public function getBuyPrice() : PriceInterface;
+    public function getBuyPrice(): Price;
     
-    public function setBuyPrice(PriceInterface $buyPrice);
+    public function setBuyPrice(Price $buyPrice);
     
-    public function getWeight() : float;
+    public function getWeight(): float;
     
     public function setWeight(float $weight);
     
-    public function getOptions() : array;
+    public function getOptions(): array;
     
     public function setOptions(array $options);
     
@@ -59,7 +59,7 @@ interface OrderProductInterface extends
     
     public function setLocked(bool $locked);
     
-    public function getCurrentStock() : int;
+    public function getCurrentStock(): int;
     
-    public function getCurrentSellPrice() : DiscountablePriceInterface;
+    public function getCurrentSellPrice(): DiscountablePrice;
 }

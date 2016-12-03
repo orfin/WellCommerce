@@ -12,3 +12,29 @@ client:
     password_not_valid: 'Wprowadzone hasło nie jest poprawne'
     vatid_not_valid: Numer NIP nie jest poprawny
     company_name_not_valid: Nazwa firmy nie jest poprawna
+client_shipping_address:
+    first_name_empty: Pole "Imię" nie może być puste
+    last_name_empty: Pole "Nazwisko" nie może być puste
+    line1_empty: Pole "Ulica" nie może być puste
+    line2_empty: Pole "Nr budynku, nr lokalu" nie może być puste
+    postal_code_empty: Pole "Kod pocztowy" nie może być puste
+    city_empty: Pole "Miasto" nie może być puste
+client_billing_address:
+    first_name_empty: Pole "Imię" nie może być puste
+    last_name_empty: Pole "Nazwisko" nie może być puste
+    line1_empty: Pole "Ulica" nie może być puste
+    line2_empty: Pole "Nr budynku, nr lokalu" nie może być puste
+    postal_code_empty: Pole "Kod pocztowy" nie może być puste
+    city_empty: Pole "Miasto" nie może być puste
+    company_name_empty: Pole "Nazwa firmy" nie może być puste
+    vatid_empty: Pole "NIP" nie może być puste
+client_details:
+    password_empty: Hasło nie może być puste
+    username_empty: Adres e-mail nie może być pusty
+    username_not_valid: Podany adres e-mail jest nieprawidłowy
+client_contact_details:
+    first_name_empty: Pole "Imię" nie może być puste
+    last_name_empty: Pole "Nazwisko" nie może być puste
+    email_empty: Adres e-mail nie może być pusty
+    email_not_valid: Podany adres e-mail jest nieprawidłowy
+    phone_empty: Pole "Telefon" nie może być puste

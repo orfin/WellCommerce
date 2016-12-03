@@ -49,3 +49,8 @@ WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddress:
             column: copy_billing_address
             options:
                 default: true
+        companyName:
+            type: string
+            length: 255
+            nullable: true
+            column: company_name

@@ -11,6 +11,7 @@
                     <value>client_settings</value>
                     <value>order_contact_details</value>
                 </option>
+                <option name="message">client_contact_details.first_name_empty</option>
             </constraint>
             <constraint name="NotNull">
                 <option name="groups">
@@ -27,6 +28,7 @@
                     <value>client_settings</value>
                     <value>order_contact_details</value>
                 </option>
+                <option name="message">client_contact_details.last_name_empty</option>
             </constraint>
             <constraint name="NotNull">
                 <option name="groups">
@@ -46,18 +48,21 @@
                 <option name="groups">
                     <value>order_contact_details</value>
                 </option>
+                <option name="message">client_contact_details.email_empty</option>
             </constraint>
             <constraint name="Regex">
                 <option name="groups">
                     <value>order_contact_details</value>
                 </option>
                 <option name="pattern">/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.(?:[A-Z]{2}|com|org|net|gov|mil|biz|info|mobi|name|aero|jobs|museum|pro)$/i</option>
+                <option name="message">client_contact_details.email_not_valid</option>
             </constraint>
             <constraint name="Email">
                 <option name="groups">
                     <value>order_contact_details</value>
                 </option>
                 <option name="strict">false</option>
+                <option name="message">client_contact_details.email_not_valid</option>
             </constraint>
         </property>
         <property name="phone">
@@ -74,6 +79,7 @@
                     <value>client_settings</value>
                     <value>order_contact_details</value>
                 </option>
+                <option name="message">client_contact_details.phone_empty</option>
             </constraint>
         </property>
         <property name="secondaryPhone">

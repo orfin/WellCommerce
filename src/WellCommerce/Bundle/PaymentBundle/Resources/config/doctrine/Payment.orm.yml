@@ -39,13 +39,6 @@ WellCommerce\Bundle\PaymentBundle\Entity\Payment:
             type: string
             nullable: true
             length: 255
-    oneToMany:
-        paymentStateHistory:
-            targetEntity: WellCommerce\Bundle\PaymentBundle\Entity\PaymentStateHistory
-            cascade:
-                - persist
-            fetch: LAZY
-            mappedBy: payment
     manyToOne:
         order:
             targetEntity: WellCommerce\Bundle\OrderBundle\Entity\Order

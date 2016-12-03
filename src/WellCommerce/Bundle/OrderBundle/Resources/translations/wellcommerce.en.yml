@@ -11,7 +11,6 @@ order:
         products: Products
         contact_details: Contact details
         cart: Cart
-        confirm: Confirmation
     button:
         confirm: Go to confirmation
         add_product: Add product
@@ -41,6 +40,9 @@ order:
         variant_options: Wybrane opcje
         accept_conditions: I accept the shop conditions
         issue_invoice: Please send me an invoice
+        coupon:
+            code: Coupon code
+            modifier: Coupon modifier
     description:
         product_total: Total products value
         shipping_cost: Shipping costs

@@ -12,11 +12,10 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Visitor;
 
-use WellCommerce\Bundle\CoreBundle\Factory\EntityFactoryInterface;
 use WellCommerce\Bundle\CurrencyBundle\Helper\CurrencyHelperInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderModifierInterface;
-use WellCommerce\Bundle\OrderBundle\Entity\OrderSummaryInterface;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderSummary;
 
 /**
  * Class OrderSummaryVisitor
@@ -31,20 +30,13 @@ final class OrderSummaryVisitor implements OrderVisitorInterface
     private $helper;
     
     /**
-     * @var EntityFactoryInterface
-     */
-    private $factory;
-    
-    /**
      * CartSummaryVisitor constructor.
      *
      * @param CurrencyHelperInterface $helper
-     * @param EntityFactoryInterface  $factory
      */
-    public function __construct(CurrencyHelperInterface $helper, EntityFactoryInterface $factory)
+    public function __construct(CurrencyHelperInterface $helper)
     {
-        $this->helper  = $helper;
-        $this->factory = $factory;
+        $this->helper = $helper;
     }
     
     public function visitOrder(OrderInterface $order)
@@ -53,8 +45,7 @@ final class OrderSummaryVisitor implements OrderVisitorInterface
         $modifiers      = $order->getModifiers();
         $targetCurrency = $order->getCurrency();
         
-        /** @var OrderSummaryInterface $summary */
-        $summary = $this->factory->create();
+        $summary = new OrderSummary();
         $summary->setGrossAmount($productTotal->getGrossPrice());
         $summary->setNetAmount($productTotal->getNetPrice());
         $summary->setTaxAmount($productTotal->getTaxAmount());

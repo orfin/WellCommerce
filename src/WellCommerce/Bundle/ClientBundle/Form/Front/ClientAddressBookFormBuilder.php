@@ -100,7 +100,12 @@ class ClientAddressBookFormBuilder extends AbstractFormBuilder
             'name'  => 'shippingAddress.lastName',
             'label' => $this->trans('client.label.address.last_name'),
         ]));
-
+    
+        $shippingAddress->addChild($this->getElement('text_field', [
+            'name'  => 'shippingAddress.companyName',
+            'label' => $this->trans('client.label.address.company_name'),
+        ]));
+        
         $shippingAddress->addChild($this->getElement('text_field', [
             'name'  => 'shippingAddress.line1',
             'label' => $this->trans('client.label.address.line1'),

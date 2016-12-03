@@ -53,7 +53,6 @@ final class OrderStatusHistorySubscriber implements EventSubscriberInterface
             if ($history->isNotify()) {
                 $this->mailerHelper->sendEmail([
                     'recipient'     => $order->getContactDetails()->getEmail(),
-                    'bcc'           => [],
                     'subject'       => sprintf('Zmiana statusu zamówienia %s', $order->getNumber()),
                     'template'      => 'WellCommerceAppBundle:Email:order_status.html.twig',
                     'parameters'    => [
@@ -63,6 +62,8 @@ final class OrderStatusHistorySubscriber implements EventSubscriberInterface
                     'configuration' => $order->getShop()->getMailerConfiguration(),
                 ]);
             }
+            
+            $order->setCurrentStatus($history->getOrderStatus());
         }
     }
 }

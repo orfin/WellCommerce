@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\ClientBundle\Repository;
 
 use Doctrine\ORM\NoResultException;
+use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
@@ -37,25 +38,27 @@ class ClientRepository extends EntityRepository implements ClientRepositoryInter
         $queryBuilder->groupBy('client.id');
         $queryBuilder->leftJoin('client.clientGroup', 'client_group');
         $queryBuilder->leftJoin('client_group.translations', 'client_group_translation');
-
+        $queryBuilder->leftJoin('client.orders', 'client_cart', Expr\Join::WITH, 'client_cart.confirmed = :confirmed');
+        $queryBuilder->setParameter('confirmed', 0);
+        
         return $queryBuilder;
     }
-
+    
     public function refreshUser(UserInterface $user)
     {
         $class = get_class($user);
         if (!$this->supportsClass($class)) {
             throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', $class));
         }
-
+        
         return $this->loadUserByUsername($user->getUsername());
     }
-
+    
     public function supportsClass($class)
     {
         return $this->getEntityName() === $class || is_subclass_of($class, $this->getEntityName());
     }
-
+    
     public function loadUserByUsername($username)
     {
         $queryBuilder = $this->createQueryBuilder('c')
@@ -63,7 +66,7 @@ class ClientRepository extends EntityRepository implements ClientRepositoryInter
             ->where('c.clientDetails.username = :username')
             ->setParameter('username', $username)
             ->getQuery();
-
+        
         try {
             $user = $queryBuilder->getSingleResult();
         } catch (NoResultException $e) {
@@ -73,7 +76,7 @@ class ClientRepository extends EntityRepository implements ClientRepositoryInter
             );
             throw new UsernameNotFoundException($msg);
         }
-
+        
         return $user;
     }
 }

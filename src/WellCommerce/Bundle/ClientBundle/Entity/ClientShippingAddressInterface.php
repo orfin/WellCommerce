@@ -22,4 +22,8 @@ interface ClientShippingAddressInterface extends ClientAddressInterface
     public function getCopyBillingAddress() : bool;
 
     public function setCopyBillingAddress(bool $copyBillingAddress);
+    
+    public function getCompanyName();
+    
+    public function setCompanyName(string $companyName);
 }

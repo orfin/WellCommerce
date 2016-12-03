@@ -43,16 +43,6 @@ interface PaymentInterface extends EntityInterface, TimestampableInterface, Orde
     public function setProcessor(string $processor);
 
     /**
-     * @return string
-     */
-    public function getState() : string;
-
-    /**
-     * @param string $state
-     */
-    public function setState(string $state);
-
-    /**
      * @return array
      */
     public function getConfiguration() : array;
@@ -106,47 +96,77 @@ interface PaymentInterface extends EntityInterface, TimestampableInterface, Orde
      * @return bool
      */
     public function isCreated() : bool;
-
+    
+    /**
+     * @return void
+     */
+    public function setCreated ();
+    
     /**
      * @return bool
      */
     public function isApproved() : bool;
-
+    
+    /**
+     * @return void
+     */
+    public function setApproved ();
+    
     /**
      * @return bool
      */
     public function isFailed() : bool;
-
+    
+    /**
+     * @return void
+     */
+    public function setFailed ();
+    
     /**
      * @return bool
      */
     public function isCancelled() : bool;
-
+    
+    /**
+     * @return void
+     */
+    public function setCancelled ();
+    
     /**
      * @return bool
      */
     public function isExpired() : bool;
-
+    
+    /**
+     * @return void
+     */
+    public function setExpired ();
+    
     /**
      * @return bool
      */
     public function isPending() : bool;
-
+    
+    /**
+     * @return void
+     */
+    public function setPending ();
+        
     /**
      * @return bool
      */
     public function isInProgress() : bool;
-
+    
     /**
-     * @return Collection
+     * @return void
      */
-    public function getPaymentStateHistory() : Collection;
-
+    public function setInProgress ();
+    
     /**
-     * @param PaymentStateHistoryInterface $paymentStateHistory
+     * @return string
      */
-    public function addPaymentStateHistory(PaymentStateHistoryInterface $paymentStateHistory);
-
+    public function getState () : string;
+    
     /**
      * @return string
      */

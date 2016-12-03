@@ -54,6 +54,22 @@ admin.order.delete_group:
         expose: true
         require_admin_permission: order.delete
 
+admin.order.ajax_change_order_status:
+    path: '/admin/order/status/change'
+    defaults:
+        _controller: 'order.controller.admin:ajaxChangeOrderStatusAction'
+    options:
+        expose: true
+        require_admin_permission: order.edit
+
+admin.order.ajax_change_order_status_multi:
+    path: '/admin/order/statuses/change'
+    defaults:
+        _controller: 'order.controller.admin:ajaxChangeOrderStatusMultiAction'
+    options:
+        expose: true
+        require_admin_permission: order.edit
+
 front.order_cart.index:
     path: /order/cart
     defaults:

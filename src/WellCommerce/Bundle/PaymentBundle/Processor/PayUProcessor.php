@@ -1,23 +1,22 @@
 <?php
 /*
  * WellCommerce Open-Source E-Commerce Platform
- *
+ * 
  * This file is part of the WellCommerce package.
  *
  * (c) Adam Piotrowski <adam@wellcommerce.org>
- *
+ * 
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Bundle\PaymentBundle\Repository;
 
-use WellCommerce\Bundle\CoreBundle\Repository\EntityRepository;
+namespace WellCommerce\Bundle\PaymentBundle\Processor;
 
 /**
- * Class PaymentStateHistoryRepository
+ * Class PayUProcessor
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PaymentStateHistoryRepository extends EntityRepository implements PaymentRepositoryInterface
+final class PayUProcessor extends AbstractPaymentProcessor
 {
 }
