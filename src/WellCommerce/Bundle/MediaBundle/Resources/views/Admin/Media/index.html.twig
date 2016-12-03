@@ -7,13 +7,13 @@
                title="{% trans %}common.button.add{% endtrans %}"><span>{% trans %}common.button.add{% endtrans %}</span></a></li>
     </ul>
     <script type="text/javascript">
-        function processMedia(row) {
+        function processMediaDataGrid(row) {
             var icon =
             row.preview = '<a title="'+ row.name +'" href="' + row.preview + '" class="show-thumb"><img src="{{ asset('bundles/wellcommerceadmin/images/icons/datagrid/details.png') }}" style="vertical-align: middle;" /></a>';
             return row;
         }
 
-        function dataLoadedMedia(dDg) {
+        function dataLoadedMediaDataGrid(dDg) {
             dDg.m_jBody.find('.show-thumb').mouseenter(GTooltip.ShowThumbForThis).mouseleave(GTooltip.HideThumbForThis);
         }
     </script>

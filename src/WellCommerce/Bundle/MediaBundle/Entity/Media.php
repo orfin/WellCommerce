@@ -30,32 +30,32 @@ class Media implements MediaInterface
     /**
      * @var string
      */
-    protected $name;
+    protected $name = '';
     
     /**
      * @var string
      */
-    protected $path;
+    protected $path = '';
     
     /**
      * @var string
      */
-    protected $extension;
+    protected $extension = '';
     
     /**
      * @var string
      */
-    protected $mime;
+    protected $mime = '';
     
     /**
      * @var string
      */
-    protected $size;
+    protected $size = 0;
     
     /**
      * {@inheritdoc}
      */
-    public function getName() : string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -71,7 +71,7 @@ class Media implements MediaInterface
     /**
      * {@inheritdoc}
      */
-    public function getPath() : string
+    public function getPath(): string
     {
         return $this->path;
     }
@@ -87,7 +87,7 @@ class Media implements MediaInterface
     /**
      * {@inheritdoc}
      */
-    public function getMime() : string
+    public function getMime(): string
     {
         return $this->mime;
     }
@@ -103,7 +103,7 @@ class Media implements MediaInterface
     /**
      * {@inheritdoc}
      */
-    public function getSize() : int
+    public function getSize(): int
     {
         return $this->size;
     }
@@ -119,7 +119,7 @@ class Media implements MediaInterface
     /**
      * {@inheritdoc}
      */
-    public function getFullName() : string
+    public function getFullName(): string
     {
         return sprintf('%s.%s', $this->id, $this->extension);
     }
@@ -127,7 +127,7 @@ class Media implements MediaInterface
     /**
      * {@inheritdoc}
      */
-    public function getExtension() : string
+    public function getExtension(): string
     {
         return $this->extension;
     }
