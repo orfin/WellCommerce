@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CategoryBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
@@ -56,12 +57,19 @@ class Category implements CategoryInterface
     /**
      * @var int
      */
-    protected $productsCount;
+    protected $productsCount = 0;
     
     /**
      * @var int
      */
-    protected $childrenCount;
+    protected $childrenCount = 0;
+    
+    public function __construct()
+    {
+        $this->shops    = new ArrayCollection();
+        $this->children = new ArrayCollection();
+        $this->products = new ArrayCollection();
+    }
     
     public function getParent()
     {
@@ -78,7 +86,7 @@ class Category implements CategoryInterface
         $this->children = $children;
     }
     
-    public function getChildren() : Collection
+    public function getChildren(): Collection
     {
         return $this->children;
     }
@@ -89,7 +97,7 @@ class Category implements CategoryInterface
         $child->setParent($this);
     }
     
-    public function getProducts() : Collection
+    public function getProducts(): Collection
     {
         return $this->products;
     }
@@ -99,7 +107,7 @@ class Category implements CategoryInterface
         $this->products = $products;
     }
     
-    public function getProductsCount() : int
+    public function getProductsCount(): int
     {
         return $this->productsCount;
     }
@@ -109,7 +117,7 @@ class Category implements CategoryInterface
         $this->productsCount = $productsCount;
     }
     
-    public function getChildrenCount() : int
+    public function getChildrenCount(): int
     {
         return $this->childrenCount;
     }
