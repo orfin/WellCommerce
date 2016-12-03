@@ -30,12 +30,12 @@ class AttributeValue implements AttributeValueInterface
     use Translatable;
     use Timestampable;
     use Blameable;
-
+    
     /**
      * @var Collection
      */
     protected $attributes;
-
+    
     /**
      * AttributeValue constructor.
      */
@@ -43,15 +43,15 @@ class AttributeValue implements AttributeValueInterface
     {
         $this->attributes = new ArrayCollection();
     }
-
+    
     /**
      * {@inheritdoc}
      */
-    public function getAttributes() : Collection
+    public function getAttributes(): Collection
     {
         return $this->attributes;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -60,13 +60,13 @@ class AttributeValue implements AttributeValueInterface
         $this->syncOldAttributes($attributes);
         $this->syncNewAttributes($attributes);
     }
-
+    
     public function addAttribute(AttributeInterface $attribute)
     {
         $this->attributes->add($attribute);
         $attribute->addValue($this);
     }
-
+    
     protected function syncOldAttributes(Collection $attributes)
     {
         $this->attributes->map(function (AttributeInterface $attribute) use ($attributes) {
@@ -75,7 +75,7 @@ class AttributeValue implements AttributeValueInterface
             }
         });
     }
-
+    
     protected function syncNewAttributes(Collection $attributes)
     {
         $attributes->map(function (AttributeInterface $attribute) {

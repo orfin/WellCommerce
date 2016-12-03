@@ -23,44 +23,19 @@ use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface AttributeInterface extends
-    EntityInterface,
-    TimestampableInterface,
-    TranslatableInterface,
-    BlameableInterface
+interface AttributeInterface extends EntityInterface, TimestampableInterface, TranslatableInterface, BlameableInterface
 {
-    /**
-     * @return Collection
-     */
-    public function getGroups() : Collection;
-
-    /**
-     * @param Collection $groups
-     */
+    public function getGroups(): Collection;
+    
     public function setGroups(Collection $groups);
-
-    /**
-     * @param AttributeGroupInterface $group
-     */
+    
     public function addGroup(AttributeGroupInterface $group);
-
-    /**
-     * @return Collection
-     */
-    public function getValues() : Collection;
-
-    /**
-     * @param Collection $collection
-     */
+    
+    public function getValues(): Collection;
+    
     public function setValues(Collection $collection);
-
-    /**
-     * @param AttributeValueInterface $value
-     */
+    
     public function removeValue(AttributeValueInterface $value);
-
-    /**
-     * @param AttributeValueInterface $value
-     */
+    
     public function addValue(AttributeValueInterface $value);
 }

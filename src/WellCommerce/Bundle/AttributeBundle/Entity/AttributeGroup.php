@@ -30,7 +30,7 @@ class AttributeGroup implements AttributeGroupInterface
     use Translatable;
     use Timestampable;
     use Blameable;
-
+    
     /**
      * @var Collection
      */
@@ -44,11 +44,11 @@ class AttributeGroup implements AttributeGroupInterface
     /**
      * {@inheritdoc}
      */
-    public function getAttributes() : Collection
+    public function getAttributes(): Collection
     {
         return $this->attributes;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -61,10 +61,10 @@ class AttributeGroup implements AttributeGroupInterface
                 }
             });
         }
-
+        
         $this->attributes = $attributes;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -72,7 +72,7 @@ class AttributeGroup implements AttributeGroupInterface
     {
         $this->attributes->removeElement($attribute);
     }
-
+    
     /**
      * {@inheritdoc}
      */

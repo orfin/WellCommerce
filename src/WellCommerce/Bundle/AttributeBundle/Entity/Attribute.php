@@ -47,17 +47,11 @@ class Attribute implements AttributeInterface
         $this->values = new ArrayCollection();
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function getGroups() : Collection
     {
         return $this->groups;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function setGroups(Collection $groups)
     {
         $this->groups->map(function (AttributeGroupInterface $group) use ($groups) {
@@ -73,42 +67,27 @@ class Attribute implements AttributeInterface
         });
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function addGroup(AttributeGroupInterface $group)
     {
         $this->groups->add($group);
         $group->addAttribute($this);
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function getValues() : Collection
     {
         return $this->values;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function setValues(Collection $collection)
     {
         $this->values = $collection;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function removeValue(AttributeValueInterface $value)
     {
         $this->values->removeElement($value);
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function addValue(AttributeValueInterface $value)
     {
         $this->values->add($value);
