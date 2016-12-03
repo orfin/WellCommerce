@@ -65,9 +65,9 @@ abstract class AbstractOptions
      *
      * @param string $value
      *
-     * @return Expr
+     * @return Expr|mixed
      */
-    private function getValue($value)
+    protected function getValue($value)
     {
         if (is_array($value) || is_bool($value)) {
             return $value;

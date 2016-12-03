@@ -54,3 +54,11 @@ admin.category.delete_group:
     options:
         expose: true
         require_admin_permission: category.delete
+
+admin.category.ajax.get_children:
+    path: '/admin/catalog/category/ajax/children'
+    defaults:
+        _controller: 'category.controller.admin:ajaxGetChildrenAction'
+    options:
+        expose: true
+        require_admin_permission: category.index

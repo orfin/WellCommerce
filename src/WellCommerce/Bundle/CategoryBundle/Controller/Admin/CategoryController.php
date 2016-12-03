@@ -13,9 +13,11 @@
 namespace WellCommerce\Bundle\CategoryBundle\Controller\Admin;
 
 use Doctrine\Common\Collections\Criteria;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CategoryBundle\Manager\CategoryManager;
+use WellCommerce\Bundle\CategoryBundle\Repository\CategoryRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 use WellCommerce\Component\Form\Elements\FormInterface;
 
@@ -26,69 +28,80 @@ use WellCommerce\Component\Form\Elements\FormInterface;
  */
 class CategoryController extends AbstractAdminController
 {
-    public function indexAction() : Response
+    public function indexAction(): Response
     {
         $categories = $this->getManager()->getRepository()->matching(new Criteria());
         $tree       = $this->createCategoryTreeForm();
-
+        
         if ($categories->count()) {
             $category = $categories->first();
-
+            
             return $this->redirectToAction('edit', [
-                'id' => $category->getId()
+                'id' => $category->getId(),
             ]);
         }
-
+        
         return $this->displayTemplate('index', [
-            'tree' => $tree
+            'tree' => $tree,
         ]);
     }
-
-    public function addAction(Request $request) : Response
+    
+    public function addAction(Request $request): Response
     {
         if (!$request->isXmlHttpRequest()) {
             return $this->redirectToAction('index');
         }
-
+        
         $categoriesName = (string)$request->request->get('name');
         $parentCategory = (int)$request->request->get('parent');
-        $shop = $this->getShopStorage()->getCurrentShop();
-        $category = $this->getManager()->quickAddCategory($categoriesName, $parentCategory, $shop);
-
+        $shop           = $this->getShopStorage()->getCurrentShop();
+        $category       = $this->getManager()->quickAddCategory($categoriesName, $parentCategory, $shop);
+        
         return $this->jsonResponse([
             'id' => $category->getId(),
         ]);
     }
-
-    public function editAction(int $id) : Response
+    
+    public function editAction(int $id): Response
     {
         $category = $this->getManager()->getRepository()->find($id);
         $form     = $this->getForm($category);
-
+        
         if ($form->handleRequest()->isSubmitted()) {
             if ($form->isValid()) {
                 $this->getManager()->updateResource($category);
             }
-
+            
             return $this->createFormDefaultJsonResponse($form);
         }
-
+        
         return $this->displayTemplate('edit', [
             'tree'     => $this->createCategoryTreeForm(),
             'form'     => $form,
-            'resource' => $category
+            'resource' => $category,
         ]);
     }
-
-    protected function createCategoryTreeForm() : FormInterface
+    
+    protected function createCategoryTreeForm(): FormInterface
     {
         return $this->get('category_tree.form_builder.admin')->createForm([
             'name'  => 'category_tree',
             'class' => 'category-select',
         ]);
     }
-
-    protected function getManager() : CategoryManager
+    
+    public function ajaxGetChildrenAction(Request $request): JsonResponse
+    {
+        /** @var CategoryRepositoryInterface $repository */
+        $repository = $this->manager->getRepository();
+        $parentId   = $request->request->get('parent');
+        $parent     = $repository->find($parentId);
+        $items      = $repository->getDataGridFilterOptions($parent);
+        
+        return $this->jsonResponse($items);
+    }
+    
+    protected function getManager(): CategoryManager
     {
         return parent::getManager();
     }

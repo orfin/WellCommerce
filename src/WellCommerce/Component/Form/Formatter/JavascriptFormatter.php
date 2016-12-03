@@ -32,12 +32,11 @@ class JavascriptFormatter implements FormatterInterface
      */
     public function formatAttributes(array $attributes = [])
     {
-        $json    = Json::encode($attributes, false, ['enableJsonExprFinder' => true]);
-        $content = Json::prettyPrint($json, ['indent' => '    ']);
-
-        return $content;
+        $json = Json::encode($attributes, false, ['enableJsonExprFinder' => true]);
+        
+        return $json;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -45,10 +44,10 @@ class JavascriptFormatter implements FormatterInterface
     {
         $collection = new AttributeCollection();
         $element->prepareAttributesCollection($collection);
-
+        
         return $this->formatAttributesCollection($collection);
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -58,10 +57,10 @@ class JavascriptFormatter implements FormatterInterface
         $collection->forAll(function (Attribute $attribute) use (&$attributes) {
             $attributes[$attribute->getName()] = $this->formatAttributeValue($attribute);
         });
-
+        
         return $attributes;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -71,10 +70,10 @@ class JavascriptFormatter implements FormatterInterface
         foreach ($dependencies as $dependency) {
             $formattedDependencies[] = $this->formatDependency($dependency);
         }
-
+        
         return $formattedDependencies;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -84,10 +83,10 @@ class JavascriptFormatter implements FormatterInterface
         foreach ($rules as $rule) {
             $formattedRules[] = $this->formatRule($rule);
         }
-
+        
         return $formattedRules;
     }
-
+    
     /**
      * Formats single dependency
      *
@@ -99,7 +98,7 @@ class JavascriptFormatter implements FormatterInterface
     {
         return new Expr($dependency->renderJs());
     }
-
+    
     /**
      * Formats single rule
      *
@@ -111,7 +110,7 @@ class JavascriptFormatter implements FormatterInterface
     {
         return new Expr($rule->renderJs());
     }
-
+    
     /**
      * Formats attributes value
      *
@@ -122,11 +121,11 @@ class JavascriptFormatter implements FormatterInterface
     protected function formatAttributeValue(Attribute $attribute)
     {
         $value = $attribute->getValue();
-
+        
         if ($attribute->getType() === Attribute::TYPE_FUNCTION && strlen($value)) {
             return new Expr($value);
         }
-
+        
         return $value;
     }
 }

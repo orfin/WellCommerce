@@ -22,5 +22,7 @@ use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
  */
 interface CategoryRepositoryInterface extends RepositoryInterface
 {
-    public function getCategoryPath(CategoryInterface $category) : array;
+    public function getCategoryPath(CategoryInterface $category): array;
+    
+    public function getDataGridFilterOptions(CategoryInterface $parent = null): array;
 }

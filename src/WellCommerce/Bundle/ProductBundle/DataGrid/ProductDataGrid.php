@@ -63,6 +63,12 @@ class ProductDataGrid extends AbstractDataGrid
         $collection->add(new Column([
             'id'      => 'category',
             'caption' => $this->trans('common.label.categories'),
+            'filter'  => new Filter([
+                'type'                => Filter::FILTER_TREE,
+                'filtered_column'     => 'categoryId',
+                'options'             => $this->get('category.repository')->getDataGridFilterOptions(),
+                'load_children_route' => 'admin.category.ajax.get_children',
+            ]),
         ]));
         
         $collection->add(new Column([
@@ -106,11 +112,11 @@ class ProductDataGrid extends AbstractDataGrid
             'function' => $this->getJavascriptFunctionName('update'),
             'route'    => $this->getActionUrl('update'),
         ]));
-    
+        
         $eventHandlers->add(new ProcessEventHandler([
             'function' => $this->getJavascriptFunctionName('process'),
         ]));
-    
+        
         $eventHandlers->add(new LoadedEventHandler([
             'function' => $this->getJavascriptFunctionName('loaded'),
         ]));
