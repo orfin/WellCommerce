@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\NewsBundle\Entity;
 
+use Carbon\Carbon;
 use DateTime;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
@@ -35,7 +36,12 @@ class News implements NewsInterface
     /**
      * @var bool
      */
-    protected $publish;
+    protected $publish = true;
+    
+    /**
+     * @var bool
+     */
+    protected $featured = false;
     
     /**
      * @var DateTime $startDate
@@ -47,15 +53,16 @@ class News implements NewsInterface
      */
     protected $endDate;
     
-    /**
-     * @var bool
-     */
-    protected $featured;
+    public function __construct()
+    {
+        $this->startDate = Carbon::now();
+        $this->endDate   = Carbon::now()->addMonth(1);
+    }
     
     /**
      * {@inheritdoc}
      */
-    public function getPublish() : bool
+    public function getPublish(): bool
     {
         return $this->publish;
     }
@@ -71,7 +78,7 @@ class News implements NewsInterface
     /**
      * {@inheritdoc}
      */
-    public function getStartDate() : DateTime
+    public function getStartDate(): DateTime
     {
         return $this->startDate;
     }
@@ -87,7 +94,7 @@ class News implements NewsInterface
     /**
      * {@inheritdoc}
      */
-    public function getEndDate() : DateTime
+    public function getEndDate(): DateTime
     {
         return $this->endDate;
     }
@@ -103,7 +110,7 @@ class News implements NewsInterface
     /**
      * {@inheritdoc}
      */
-    public function getFeatured() : bool
+    public function getFeatured(): bool
     {
         return $this->featured;
     }
