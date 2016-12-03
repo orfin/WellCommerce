@@ -17,7 +17,6 @@ use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\EntityInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
-use WellCommerce\Bundle\ProducerBundle\Entity\ProducerInterface;
 
 /**
  * Interface DelivererInterface
@@ -26,18 +25,7 @@ use WellCommerce\Bundle\ProducerBundle\Entity\ProducerInterface;
  */
 interface DelivererInterface extends EntityInterface, TranslatableInterface, TimestampableInterface, BlameableInterface
 {
-    /**
-     * @return Collection
-     */
-    public function getProducers() : Collection;
-
-    /**
-     * @param Collection $collection
-     */
+    public function getProducers(): Collection;
+    
     public function setProducers(Collection $collection);
-
-    /**
-     * @param ProducerInterface $producer
-     */
-    public function addProducer(ProducerInterface $producer);
 }

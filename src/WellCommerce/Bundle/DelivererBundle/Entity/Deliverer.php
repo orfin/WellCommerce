@@ -12,12 +12,12 @@
 
 namespace WellCommerce\Bundle\DelivererBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 use WellCommerce\Bundle\CoreBundle\Entity\IdentifiableTrait;
-use WellCommerce\Bundle\ProducerBundle\Entity\ProducerInterface;
 
 /**
  * Class Deliverer
@@ -30,38 +30,24 @@ class Deliverer implements DelivererInterface
     use Translatable;
     use Timestampable;
     use Blameable;
-
-    /**
-     * @var integer
-     */
-    protected $id;
-
+    
     /**
      * @var Collection
      */
     protected $producers;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getProducers() : Collection
+    
+    public function __construct()
+    {
+        $this->producers = new ArrayCollection();
+    }
+    
+    public function getProducers(): Collection
     {
         return $this->producers;
     }
-
-    /**
-     * {@inheritdoc}
-     */
+    
     public function setProducers(Collection $collection)
     {
         $this->producers = $collection;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addProducer(ProducerInterface $producer)
-    {
-        $this->producers[] = $producer;
     }
 }
