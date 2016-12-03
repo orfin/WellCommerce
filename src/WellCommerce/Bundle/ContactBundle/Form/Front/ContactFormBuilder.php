@@ -28,20 +28,30 @@ class ContactFormBuilder extends AbstractFormBuilder
     {
 
         $form->addChild($this->getElement('text_field', [
-            'name'  => 'email',
-            'label' => $this->trans('contact_ticket.label.email'),
+            'name'  => 'name',
+            'label' => $this->trans('contact_ticket.label.name'),
         ]));
 
         $form->addChild($this->getElement('text_field', [
-            'name'  => 'subject',
-            'label' => $this->trans('contact_ticket.label.subject'),
+            'name'  => 'surname',
+            'label' => $this->trans('contact_ticket.label.surname'),
+        ]));
+
+        $form->addChild($this->getElement('text_field', [
+            'name'  => 'phone',
+            'label' => $this->trans('contact_ticket.label.phone_number'),
+        ]));
+
+        $form->addChild($this->getElement('text_field', [
+            'name'  => 'email',
+            'label' => $this->trans('contact_ticket.label.email'),
         ]));
 
         $form->addChild($this->getElement('text_area', [
             'name'  => 'content',
             'label' => $this->trans('contact_ticket.label.content'),
             'rows'  => 5,
-            'cols'  => 10
+            'cols'  => 20
         ]));
 
         $form->addFilter($this->getFilter('no_code'));

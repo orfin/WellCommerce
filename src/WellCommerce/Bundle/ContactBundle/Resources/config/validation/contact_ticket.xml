@@ -4,9 +4,15 @@
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
 
     <class name="WellCommerce\Bundle\ContactBundle\Entity\ContactTicket">
-        <property name="subject">
+        <property name="name">
             <constraint name="NotBlank">
-                <option name="message">contact_ticket.error.subject.not_blank</option>
+                <option name="message">contact_ticket.error.name.not_blank</option>
+            </constraint>
+            <constraint name="NotNull" />
+        </property>
+        <property name="surname">
+            <constraint name="NotBlank">
+                <option name="message">contact_ticket.error.surname.not_blank</option>
             </constraint>
             <constraint name="NotNull" />
         </property>
@@ -21,7 +27,7 @@
         </property>
         <property name="content">
             <constraint name="NotBlank">
-                <option name="message">contact_ticket.error.email.not_blank</option>
+                <option name="message">contact_ticket.error.content.not_blank</option>
             </constraint>
             <constraint name="NotNull" />
         </property>

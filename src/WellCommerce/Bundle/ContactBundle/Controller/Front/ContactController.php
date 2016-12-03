@@ -47,7 +47,7 @@ class ContactController extends AbstractFrontController
                 
                 return $this->getRouterHelper()->redirectTo('front.contact.index');
             }
-            
+
             $this->getFlashHelper()->addError('contact_ticket.flash.error');
         }
         

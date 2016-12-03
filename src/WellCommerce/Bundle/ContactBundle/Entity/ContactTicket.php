@@ -28,7 +28,24 @@ class ContactTicket implements ContactTicketInterface
     /**
      * @var string
      */
+    protected $name;
+
+
+    /**
+     * @var string
+     */
+    protected $surname;
+
+    /**
+     * @var string
+     */
     protected $subject;
+
+    /**
+     * @var string
+     */
+    protected $phone;
+
 
     /**
      * @var string
@@ -40,6 +57,54 @@ class ContactTicket implements ContactTicketInterface
      */
     protected $content;
 
+    /**
+     * {@inheritdoc}
+     */
+    public function setName(string $name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName() : string
+    {
+        return $this->name;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setSurname(string $surname)
+    {
+        $this->surname = $surname;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSurname() : string
+    {
+        return $this->surname;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPhone(string $phone)
+    {
+        $this->phone = $phone;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPhone() : string
+    {
+        return $this->phone;
+    }
+
 
     /**
      * {@inheritdoc}
@@ -48,6 +113,7 @@ class ContactTicket implements ContactTicketInterface
     {
         return $this->subject;
     }
+
 
     /**
      * {@inheritdoc}

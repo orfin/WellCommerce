@@ -16,6 +16,15 @@ WellCommerce\Bundle\ContactBundle\Entity\ContactTicket:
             generator:
                 strategy: AUTO
     fields:
+        name:
+            type: string
+            nullable: false
+        surname:
+            type: string
+            nullable: false
+        phone:
+            type: string
+            nullable: false
         email:
             type: string
             nullable: false

@@ -26,7 +26,10 @@ class ContactTicketFactory extends AbstractEntityFactory
     public function create() : ContactTicketInterface
     {
         $contactTicket = new ContactTicket();
+        $contactTicket->setName('');
+        $contactTicket->setSurname('');
         $contactTicket->setEmail('');
+        $contactTicket->setPhone('');
         $contactTicket->setSubject('');
         $contactTicket->setContent('');
 

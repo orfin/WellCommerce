@@ -18,3 +18,7 @@ contact_ticket:
             not_blank: Pole "Temat wiadomości" nie może być puste
         content:
             not_blank: Pole "Treść wiadomości" nie może być puste
+        name:
+            not_blank: Pole "Imię" nie może być puste
+        surname:
+            not_blank: Pole "Nazwisko" nie może być puste
