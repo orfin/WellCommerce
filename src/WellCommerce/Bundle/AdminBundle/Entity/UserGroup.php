@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\AdminBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use WellCommerce\Bundle\CoreBundle\Entity\IdentifiableTrait;
@@ -26,10 +27,7 @@ class UserGroup implements UserGroupInterface
     use IdentifiableTrait;
     use Blameable;
     
-    /**
-     * @var string
-     */
-    protected $name;
+    protected $name = '';
     
     /**
      * @var Collection
@@ -41,41 +39,32 @@ class UserGroup implements UserGroupInterface
      */
     protected $permissions;
     
-    /**
-     * {@inheritdoc}
-     */
-    public function getName() : string
+    public function __construct()
+    {
+        $this->users       = new ArrayCollection();
+        $this->permissions = new ArrayCollection();
+    }
+    
+    public function getName(): string
     {
         return $this->name;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function setName(string $name)
     {
         $this->name = $name;
     }
     
-    /**
-     * {@inheritdoc}
-     */
-    public function getUsers() : Collection
+    public function getUsers(): Collection
     {
         return $this->users;
     }
     
-    /**
-     * {@inheritdoc}
-     */
-    public function getPermissions() : Collection
+    public function getPermissions(): Collection
     {
         return $this->permissions;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function setPermissions(Collection $permissions)
     {
         $this->permissions = $permissions;

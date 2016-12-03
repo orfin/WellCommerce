@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\AdminBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\CoreBundle\Entity\IdentifiableTrait;
 
@@ -23,23 +24,21 @@ use WellCommerce\Bundle\CoreBundle\Entity\IdentifiableTrait;
 class Role implements RoleInterface
 {
     use IdentifiableTrait;
-
-    /**
-     * @var string
-     */
-    protected $name;
     
-    /**
-     * @var string|null
-     */
-    protected $role;
+    protected $name = '';
+    protected $role = '';
     
     /**
      * @var Collection
      */
     protected $users;
     
-    public function getRole() : string
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    }
+    
+    public function getRole(): string
     {
         return $this->role;
     }
@@ -49,7 +48,7 @@ class Role implements RoleInterface
         $this->role = $role;
     }
     
-    public function getName() : string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -64,7 +63,7 @@ class Role implements RoleInterface
         $this->users = $users;
     }
     
-    public function getUsers() : Collection
+    public function getUsers(): Collection
     {
         return $this->users;
     }
