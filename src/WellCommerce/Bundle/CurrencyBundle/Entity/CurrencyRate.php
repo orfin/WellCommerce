@@ -30,22 +30,22 @@ class CurrencyRate implements CurrencyRateInterface
     /**
      * @var CurrencyInterface
      */
-    protected $currencyFrom;
+    protected $currencyFrom = '';
     
     /**
      * @var CurrencyInterface
      */
-    protected $currencyTo;
+    protected $currencyTo = '';
     
     /**
      * @var float
      */
-    protected $exchangeRate;
+    protected $exchangeRate = 1;
     
     /**
      * {@inheritdoc}
      */
-    public function getCurrencyFrom() : string
+    public function getCurrencyFrom(): string
     {
         return $this->currencyFrom;
     }
@@ -61,7 +61,7 @@ class CurrencyRate implements CurrencyRateInterface
     /**
      * {@inheritdoc}
      */
-    public function getCurrencyTo() : string
+    public function getCurrencyTo(): string
     {
         return $this->currencyTo;
     }
@@ -77,7 +77,7 @@ class CurrencyRate implements CurrencyRateInterface
     /**
      * {@inheritdoc}
      */
-    public function getExchangeRate() : float
+    public function getExchangeRate(): float
     {
         return $this->exchangeRate;
     }

@@ -28,12 +28,12 @@ class Currency implements CurrencyInterface
     use Timestampable;
     use Blameable;
     use EnableableTrait;
-
+    
     /**
      * @var string
      */
-    protected $code;
-
+    protected $code = '';
+    
     /**
      * {@inheritdoc}
      */
@@ -41,11 +41,11 @@ class Currency implements CurrencyInterface
     {
         $this->code = $code;
     }
-
+    
     /**
      * {@inheritdoc}
      */
-    public function getCode() : string
+    public function getCode(): string
     {
         return $this->code;
     }
