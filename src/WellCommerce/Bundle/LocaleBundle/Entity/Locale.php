@@ -30,20 +30,20 @@ class Locale implements LocaleInterface
     use Blameable;
     use CurrencyAwareTrait;
     use EnableableTrait;
-
+    
     /**
      * @var string
      */
-    protected $code;
-
+    protected $code = '';
+    
     /**
      * {@inheritdoc}
      */
-    public function getCode() : string
+    public function getCode(): string
     {
         return $this->code;
     }
-
+    
     /**
      * {@inheritdoc}
      */
