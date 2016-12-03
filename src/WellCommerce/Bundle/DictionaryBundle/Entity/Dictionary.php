@@ -26,20 +26,20 @@ class Dictionary implements DictionaryInterface
     use Timestampable;
     use Translatable;
     use Blameable;
-
+    
     /**
      * @var string
      */
-    protected $identifier;
-
+    protected $identifier = '';
+    
     /**
      * {@inheritdoc}
      */
-    public function getIdentifier() : string
+    public function getIdentifier(): string
     {
         return $this->identifier;
     }
-
+    
     /**
      * {@inheritdoc}
      */

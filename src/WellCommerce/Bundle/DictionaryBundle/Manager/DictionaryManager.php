@@ -18,6 +18,7 @@ use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Yaml\Yaml;
 use WellCommerce\Bundle\CoreBundle\Manager\AbstractManager;
+use WellCommerce\Bundle\DictionaryBundle\Entity\Dictionary;
 use WellCommerce\Bundle\DictionaryBundle\Entity\DictionaryInterface;
 use WellCommerce\Bundle\LocaleBundle\Entity\LocaleInterface;
 
@@ -32,22 +33,27 @@ final class DictionaryManager extends AbstractManager
      * @var KernelInterface
      */
     protected $kernel;
-
+    
     /**
      * @var array|\WellCommerce\Bundle\LocaleBundle\Entity\Locale[]
      */
     protected $locales;
-
+    
     /**
      * @var \Symfony\Component\PropertyAccess\PropertyAccessorInterface
      */
     protected $propertyAccessor;
-
+    
     /**
      * @var Filesystem
      */
     protected $filesystem;
-
+    
+    /**
+     * @var array
+     */
+    protected $translations = [];
+    
     /**
      * Synchronizes database and filesystem translations
      */
@@ -57,15 +63,15 @@ final class DictionaryManager extends AbstractManager
         $this->locales          = $this->getLocales();
         $this->propertyAccessor = PropertyAccess::createPropertyAccessor();
         $this->filesystem       = new Filesystem();
-
+        
         foreach ($this->locales as $locale) {
-            $this->updateTranslationsForLocale($locale);
+            $this->updateFilesystemTranslationsForLocale($locale);
         }
-
-        $this->getDoctrineHelper()->getEntityManager()->flush();
+        
+        $this->synchronizeDatabaseTranslations();
     }
-
-    protected function updateTranslationsForLocale(LocaleInterface $locale)
+    
+    protected function updateFilesystemTranslationsForLocale(LocaleInterface $locale)
     {
         $fsTranslations     = $this->getTranslatorHelper()->getMessages($locale->getCode());
         $dbTranslations     = $this->getDatabaseTranslations($locale);
@@ -74,25 +80,31 @@ final class DictionaryManager extends AbstractManager
         $path               = $this->getFilesystemTranslationsPath() . DIRECTORY_SEPARATOR . $filename;
         $content            = Yaml::dump($mergedTranslations, 6);
         $this->filesystem->dumpFile($path, $content);
-
-        $this->synchronizeDatabaseTranslations($mergedTranslations, $locale);
+        
+        foreach ($mergedTranslations as $identifier => $translation) {
+            $this->translations[$identifier][$locale->getCode()] = $translation;
+        }
     }
-
-    protected function synchronizeDatabaseTranslations(array $messages, LocaleInterface $locale)
+    
+    protected function synchronizeDatabaseTranslations()
     {
-        $this->getDoctrineHelper()->truncateTable('WellCommerce\Bundle\DictionaryBundle\Entity\Dictionary');
-
+        $this->getDoctrineHelper()->truncateTable(Dictionary::class);
         $em = $this->getDoctrineHelper()->getEntityManager();
-
-        foreach ($messages as $identifier => $translation) {
+        
+        foreach ($this->translations as $identifier => $translation) {
+            /** @var Dictionary $dictionary */
             $dictionary = $this->factory->create();
             $dictionary->setIdentifier($identifier);
-            $dictionary->translate($locale->getCode())->setValue($translation);
+            foreach ($translation as $locale => $value) {
+                $dictionary->translate($locale)->setValue($value);
+            }
             $dictionary->mergeNewTranslations();
             $em->persist($dictionary);
         }
+        
+        $this->getDoctrineHelper()->getEntityManager()->flush();
     }
-
+    
     /**
      * Returns an array containing all previously imported translations
      *
@@ -104,19 +116,19 @@ final class DictionaryManager extends AbstractManager
     {
         $messages   = [];
         $collection = $this->repository->matching(new Criteria());
-
+        
         $collection->map(function (DictionaryInterface $dictionary) use ($locale, &$messages) {
             $messages[$dictionary->getIdentifier()] = $dictionary->translate($locale->getCode())->getValue();
         });
-
+        
         return $messages;
     }
-
-
+    
+    
     protected function getFilesystemTranslationsPath()
     {
         $kernelDir = $this->kernel->getRootDir();
-
+        
         return $kernelDir . DIRECTORY_SEPARATOR . 'Resources' . DIRECTORY_SEPARATOR . 'translations';
     }
 }
