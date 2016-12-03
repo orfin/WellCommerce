@@ -85,7 +85,22 @@ final class OrderConfirmationVisitor implements OrderVisitorInterface
     private function lockProducts(OrderInterface $order)
     {
         $order->getProducts()->map(function (OrderProductInterface $orderProduct) {
+            if ($orderProduct->getProduct()->getTrackStock()) {
+                $this->decrementStock($orderProduct);
+            }
+            
             $orderProduct->setLocked(true);
         });
+    }
+    
+    private function decrementStock(OrderProductInterface $orderProduct)
+    {
+        if ($orderProduct->hasVariant()) {
+            $currentStock = $orderProduct->getVariant()->getStock();
+            $orderProduct->getVariant()->setStock($currentStock - $orderProduct->getQuantity());
+        } else {
+            $currentStock = $orderProduct->getProduct()->getStock();
+            $orderProduct->getProduct()->setStock($currentStock - $orderProduct->getQuantity());
+        }
     }
 }
