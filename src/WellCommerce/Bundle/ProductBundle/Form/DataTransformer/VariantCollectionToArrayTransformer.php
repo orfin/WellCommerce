@@ -36,7 +36,7 @@ class VariantCollectionToArrayTransformer extends CollectionToArrayTransformer
     /**
      * @param VariantManager $variantManager
      */
-    public function setVariantManager(VariantManager $variantManager)
+    public function setVariantManager (VariantManager $variantManager)
     {
         $this->variantManager = $variantManager;
     }
@@ -44,7 +44,7 @@ class VariantCollectionToArrayTransformer extends CollectionToArrayTransformer
     /**
      * {@inheritdoc}
      */
-    public function transform($modelData)
+    public function transform ($modelData)
     {
         $values = [];
         
@@ -56,6 +56,7 @@ class VariantCollectionToArrayTransformer extends CollectionToArrayTransformer
                     'modifier'     => $variant->getModifierValue(),
                     'stock'        => $variant->getStock(),
                     'symbol'       => $variant->getSymbol(),
+                    'hierarchy'    => $variant->getHierarchy(),
                     'status'       => $variant->isEnabled(),
                     'weight'       => $variant->getWeight(),
                     'availability' => $this->transformAvailability($variant->getAvailability()),
@@ -67,7 +68,7 @@ class VariantCollectionToArrayTransformer extends CollectionToArrayTransformer
         return $values;
     }
     
-    private function transformAvailability(AvailabilityInterface $availability = null)
+    private function transformAvailability (AvailabilityInterface $availability = null)
     {
         if (null !== $availability) {
             return $availability->getId();
@@ -76,7 +77,7 @@ class VariantCollectionToArrayTransformer extends CollectionToArrayTransformer
         return null;
     }
     
-    public function transformOptions(Collection $collection = null) : array
+    public function transformOptions (Collection $collection = null) : array
     {
         if (null === $collection) {
             return [];
@@ -93,7 +94,7 @@ class VariantCollectionToArrayTransformer extends CollectionToArrayTransformer
     /**
      * {@inheritdoc}
      */
-    public function reverseTransform($modelData, PropertyPathInterface $propertyPath, $values)
+    public function reverseTransform ($modelData, PropertyPathInterface $propertyPath, $values)
     {
         if ($modelData instanceof ProductInterface && null !== $values) {
             $collection = $this->variantManager->getAttributesCollectionForProduct($modelData, $values);
