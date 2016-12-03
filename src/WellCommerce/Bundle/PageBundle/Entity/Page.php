@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\PageBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
@@ -37,17 +38,17 @@ class Page implements PageInterface
     /**
      * @var bool
      */
-    protected $publish;
-    
-    /**
-     * @var int
-     */
-    protected $redirectType;
+    protected $publish = true;
     
     /**
      * @var string
      */
-    protected $section;
+    protected $section = '';
+    
+    /**
+     * @var int
+     */
+    protected $redirectType = 1;
     
     /**
      * @var string
@@ -74,10 +75,16 @@ class Page implements PageInterface
      */
     protected $children;
     
+    public function __construct()
+    {
+        $this->clientGroups = new ArrayCollection();
+        $this->shops        = new ArrayCollection();
+    }
+    
     /**
      * {@inheritdoc}
      */
-    public function getPublish() : bool
+    public function getPublish(): bool
     {
         return $this->publish;
     }
@@ -109,7 +116,7 @@ class Page implements PageInterface
     /**
      * {@inheritdoc}
      */
-    public function getChildren() : Collection
+    public function getChildren(): Collection
     {
         return $this->children;
     }
@@ -158,7 +165,7 @@ class Page implements PageInterface
     /**
      * {@inheritdoc}
      */
-    public function getClientGroups() : Collection
+    public function getClientGroups(): Collection
     {
         return $this->clientGroups;
     }
@@ -210,7 +217,7 @@ class Page implements PageInterface
     /**
      * @return string
      */
-    public function getSection() : string
+    public function getSection(): string
     {
         return $this->section;
     }
