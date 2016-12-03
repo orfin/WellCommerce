@@ -19,35 +19,12 @@ namespace WellCommerce\Bundle\AppBundle\Entity;
  */
 class MailerConfiguration
 {
-    /**
-     * @var string
-     */
-    private $from;
-    
-    /**
-     * @var string
-     */
-    private $host;
-    
-    /**
-     * @var int
-     */
-    private $port;
-    
-    /**
-     * @var string
-     */
-    private $user;
-    
-    /**
-     * @var string
-     */
-    private $pass;
-    
-    /**
-     * @var string
-     */
-    private $bcc;
+    protected $from = '';
+    protected $host = '';
+    protected $port = 587;
+    protected $user = '';
+    protected $pass = '';
+    protected $bcc  = '';
     
     public function getFrom(): string
     {

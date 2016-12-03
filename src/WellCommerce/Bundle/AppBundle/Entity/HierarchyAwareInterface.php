@@ -19,13 +19,7 @@ namespace WellCommerce\Bundle\AppBundle\Entity;
  */
 interface HierarchyAwareInterface
 {
-    /**
-     * @param int $hierarchy
-     */
     public function setHierarchy(int $hierarchy);
     
-    /**
-     * @return int
-     */
     public function getHierarchy() : int;
 }

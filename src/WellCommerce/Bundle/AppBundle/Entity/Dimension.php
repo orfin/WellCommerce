@@ -19,55 +19,37 @@ namespace WellCommerce\Bundle\AppBundle\Entity;
  */
 class Dimension
 {
-    protected $depth = 0;
-    protected $width = 0;
-    protected $height = 0;
+    protected $depth  = 0.0000;
+    protected $width  = 0.0000;
+    protected $height = 0.0000;
     
-    /**
-     * @return float
-     */
-    public function getDepth()
+    public function getDepth(): float
     {
         return $this->depth;
     }
     
-    /**
-     * @param float $depth
-     */
-    public function setDepth($depth)
+    public function setDepth(float $depth)
     {
-        $this->depth = (float)$depth;
+        $this->depth = $depth;
     }
     
-    /**
-     * @return float
-     */
-    public function getWidth()
+    public function getWidth(): float
     {
         return $this->width;
     }
     
-    /**
-     * @param float $width
-     */
-    public function setWidth($width)
+    public function setWidth(float $width)
     {
-        $this->width = (float)$width;
+        $this->width = $width;
     }
     
-    /**
-     * @return float
-     */
-    public function getHeight()
+    public function getHeight(): float
     {
         return $this->height;
     }
     
-    /**
-     * @param float $height
-     */
-    public function setHeight($height)
+    public function setHeight(float $height)
     {
-        $this->height = (float)$height;
+        $this->height = $height;
     }
 }

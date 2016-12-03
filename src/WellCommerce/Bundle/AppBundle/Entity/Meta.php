@@ -19,79 +19,36 @@ namespace WellCommerce\Bundle\AppBundle\Entity;
  */
 class Meta
 {
-    /**
-     * @var string
-     */
-    protected $title;
+    protected $title       = '';
+    protected $keywords    = '';
+    protected $description = '';
     
-    /**
-     * @var string
-     */
-    protected $keywords;
-    
-    /**
-     * @var string
-     */
-    protected $description;
-    
-    /**
-     * Constructor
-     *
-     * @param string $title
-     * @param string $keywords
-     * @param string $description
-     */
-    public function __construct($title = '', $keywords = '', $description = '')
-    {
-        $this->title       = $title;
-        $this->keywords    = $keywords;
-        $this->description = $description;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
     
-    /**
-     * @param string $title
-     */
-    public function setTitle($title)
+    public function setTitle(string $title)
     {
         $this->title = $title;
     }
     
-    /**
-     * @return string
-     */
-    public function getKeywords()
+    public function getKeywords(): string
     {
         return $this->keywords;
     }
     
-    /**
-     * @param string $keywords
-     */
-    public function setKeywords($keywords)
+    public function setKeywords(string $keywords)
     {
         $this->keywords = $keywords;
     }
     
-    /**
-     * @return string
-     */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
     
-    /**
-     * @param string $description
-     */
-    public function setDescription($description)
+    public function setDescription(string $description)
     {
         $this->description = $description;
     }

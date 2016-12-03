@@ -19,22 +19,13 @@ namespace WellCommerce\Bundle\AppBundle\Entity;
  */
 trait HierarchyAwareTrait
 {
-    /**
-     * @var int
-     */
     protected $hierarchy = 0;
-    
-    /**
-     * @return int
-     */
+
     public function getHierarchy(): int
     {
         return $this->hierarchy;
     }
-    
-    /**
-     * @param int $hierarchy
-     */
+
     public function setHierarchy(int $hierarchy)
     {
         $this->hierarchy = $hierarchy;
