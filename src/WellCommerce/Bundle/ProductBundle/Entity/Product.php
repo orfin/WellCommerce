@@ -12,16 +12,15 @@
 
 namespace WellCommerce\Bundle\ProductBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 use WellCommerce\Bundle\AppBundle\Entity\Dimension;
 use WellCommerce\Bundle\AppBundle\Entity\DiscountablePrice;
-use WellCommerce\Bundle\AppBundle\Entity\DiscountablePriceInterface;
 use WellCommerce\Bundle\AppBundle\Entity\HierarchyAwareTrait;
 use WellCommerce\Bundle\AppBundle\Entity\Price;
-use WellCommerce\Bundle\AppBundle\Entity\PriceInterface;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroupInterface;
 use WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityAwareTrait;
 use WellCommerce\Bundle\CategoryBundle\Entity\CategoryInterface;
@@ -129,7 +128,19 @@ class Product implements ProductInterface
      */
     protected $packageSize = 1;
     
-    public function getSku() : string
+    public function __construct()
+    {
+        $this->categories    = new ArrayCollection();
+        $this->productPhotos = new ArrayCollection();
+        $this->distinctions  = new ArrayCollection();
+        $this->variants      = new ArrayCollection();
+        $this->shops         = new ArrayCollection();
+        $this->sellPrice     = new DiscountablePrice();
+        $this->buyPrice      = new Price();
+        $this->dimension     = new Dimension();
+    }
+    
+    public function getSku(): string
     {
         return $this->sku;
     }
@@ -139,7 +150,7 @@ class Product implements ProductInterface
         $this->sku = $sku;
     }
     
-    public function getStock() : int
+    public function getStock(): int
     {
         return $this->stock;
     }
@@ -149,7 +160,7 @@ class Product implements ProductInterface
         $this->stock = $stock;
     }
     
-    public function getTrackStock() : bool
+    public function getTrackStock(): bool
     {
         return $this->trackStock;
     }
@@ -159,7 +170,7 @@ class Product implements ProductInterface
         $this->trackStock = $trackStock;
     }
     
-    public function getDistinctions() : Collection
+    public function getDistinctions(): Collection
     {
         return $this->distinctions;
     }
@@ -187,7 +198,7 @@ class Product implements ProductInterface
         $this->distinctions->removeElement($distinction);
     }
     
-    public function getProductPhotos() : Collection
+    public function getProductPhotos(): Collection
     {
         return $this->productPhotos;
     }
@@ -202,7 +213,7 @@ class Product implements ProductInterface
         $this->productPhotos[] = $photo;
     }
     
-    public function getCategories() : Collection
+    public function getCategories(): Collection
     {
         return $this->categories;
     }
@@ -217,27 +228,27 @@ class Product implements ProductInterface
         $this->categories[] = $category;
     }
     
-    public function getSellPrice() : DiscountablePriceInterface
+    public function getSellPrice(): DiscountablePrice
     {
         return $this->sellPrice;
     }
     
-    public function setSellPrice(DiscountablePriceInterface $sellPrice)
+    public function setSellPrice(DiscountablePrice $sellPrice)
     {
         $this->sellPrice = $sellPrice;
     }
     
-    public function getBuyPrice() : PriceInterface
+    public function getBuyPrice(): Price
     {
         return $this->buyPrice;
     }
     
-    public function setBuyPrice(PriceInterface $buyPrice)
+    public function setBuyPrice(Price $buyPrice)
     {
         $this->buyPrice = $buyPrice;
     }
     
-    public function getWeight() : float
+    public function getWeight(): float
     {
         return $this->weight;
     }
@@ -247,7 +258,7 @@ class Product implements ProductInterface
         $this->weight = $weight;
     }
     
-    public function getDimension() : Dimension
+    public function getDimension(): Dimension
     {
         return $this->dimension;
     }
@@ -257,7 +268,7 @@ class Product implements ProductInterface
         $this->dimension = $dimension;
     }
     
-    public function getPackageSize() : float
+    public function getPackageSize(): float
     {
         return $this->packageSize;
     }
@@ -277,7 +288,7 @@ class Product implements ProductInterface
         $this->attributeGroup = $attributeGroup;
     }
     
-    public function getVariants() : Collection
+    public function getVariants(): Collection
     {
         return $this->variants;
     }

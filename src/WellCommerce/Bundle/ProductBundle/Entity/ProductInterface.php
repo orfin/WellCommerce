@@ -14,9 +14,9 @@ namespace WellCommerce\Bundle\ProductBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\AppBundle\Entity\Dimension;
-use WellCommerce\Bundle\AppBundle\Entity\DiscountablePriceInterface;
+use WellCommerce\Bundle\AppBundle\Entity\DiscountablePrice;
 use WellCommerce\Bundle\AppBundle\Entity\HierarchyAwareInterface;
-use WellCommerce\Bundle\AppBundle\Entity\PriceInterface;
+use WellCommerce\Bundle\AppBundle\Entity\Price;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroupInterface;
 use WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityAwareInterface;
 use WellCommerce\Bundle\CategoryBundle\Entity\CategoryInterface;
@@ -25,6 +25,7 @@ use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\EntityInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
+use WellCommerce\Bundle\MediaBundle\Entity\MediaAwareInterface;
 use WellCommerce\Bundle\ProducerBundle\Entity\ProducerAwareInterface;
 use WellCommerce\Bundle\ShopBundle\Entity\ShopCollectionAwareInterface;
 use WellCommerce\Bundle\TaxBundle\Entity\TaxInterface;
@@ -45,53 +46,54 @@ interface ProductInterface extends
     ShopCollectionAwareInterface,
     ProducerAwareInterface,
     UnitAwareInterface,
+    MediaAwareInterface,
     AvailabilityAwareInterface
 {
-    public function getSku() : string;
+    public function getSku(): string;
     
     public function setSku(string $sku);
     
-    public function getStock() : int;
+    public function getStock(): int;
     
     public function setStock(int $stock);
     
-    public function getTrackStock() : bool;
+    public function getTrackStock(): bool;
     
     public function setTrackStock(bool $trackStock);
     
-    public function getDistinctions() : Collection;
+    public function getDistinctions(): Collection;
     
     public function setDistinctions(Collection $distinctions);
     
-    public function getProductPhotos() : Collection;
+    public function getProductPhotos(): Collection;
     
     public function setProductPhotos(Collection $photos);
     
     public function addProductPhoto(ProductPhotoInterface $photo);
     
-    public function getCategories() : Collection;
+    public function getCategories(): Collection;
     
     public function setCategories(Collection $collection);
     
     public function addCategory(CategoryInterface $category);
     
-    public function getSellPrice() : DiscountablePriceInterface;
+    public function getSellPrice(): DiscountablePrice;
     
-    public function setSellPrice(DiscountablePriceInterface $sellPrice);
+    public function setSellPrice(DiscountablePrice $sellPrice);
     
-    public function getBuyPrice() : PriceInterface;
+    public function getBuyPrice(): Price;
     
-    public function setBuyPrice(PriceInterface $buyPrice);
+    public function setBuyPrice(Price $buyPrice);
     
-    public function getWeight() : float;
+    public function getWeight(): float;
     
     public function setWeight(float $weight);
     
-    public function getDimension() : Dimension;
+    public function getDimension(): Dimension;
     
     public function setDimension(Dimension $dimension);
     
-    public function getPackageSize() : float;
+    public function getPackageSize(): float;
     
     public function setPackageSize(float $packageSize);
     
@@ -99,7 +101,7 @@ interface ProductInterface extends
     
     public function setAttributeGroup(AttributeGroupInterface $attributeGroup = null);
     
-    public function getVariants() : Collection;
+    public function getVariants(): Collection;
     
     public function setVariants(Collection $attributes);
     
