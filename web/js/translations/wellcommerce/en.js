@@ -118,6 +118,8 @@
     Translator.add("client.label.new_password", "New password", "wellcommerce", "en");
     Translator.add("client.label.accept_conditions", "Accept store conditions", "wellcommerce", "en");
     Translator.add("client.label.accept_newsletter", "Sign up for our newsletter", "wellcommerce", "en");
+    Translator.add("client.label.last_active", "Last active", "wellcommerce", "en");
+    Translator.add("client.label.cart", "Cart", "wellcommerce", "en");
     Translator.add("client.label.contact_details.first_name", "First name", "wellcommerce", "en");
     Translator.add("client.label.contact_details.last_name", "Last name", "wellcommerce", "en");
     Translator.add("client.label.contact_details.phone", "Phone", "wellcommerce", "en");
@@ -133,10 +135,14 @@
     Translator.add("client.label.address.country", "Country", "wellcommerce", "en");
     Translator.add("client.label.address.city", "City", "wellcommerce", "en");
     Translator.add("client.label.address.copy_address", "Shipping address same as billing address", "wellcommerce", "en");
+    Translator.add("client.label.address.state", "State", "wellcommerce", "en");
     Translator.add("client.label.address.vat_id", "VAT ID", "wellcommerce", "en");
     Translator.add("client.label.address.company_name", "Company", "wellcommerce", "en");
+    Translator.add("client.label.address.company_address", "I want to enter the company's details", "wellcommerce", "en");
     Translator.add("client.label.client_discount", "Client's discount", "wellcommerce", "en");
     Translator.add("client.label.client_group_discount", "Client's group discount", "wellcommerce", "en");
+    Translator.add("client.label.create_account", "I want to register as a client", "wellcommerce", "en");
+    Translator.add("client.label.conditions_accepted", "I have read and agree to the Privacy Policy", "wellcommerce", "en");
     Translator.add("client.heading.index", "Clients", "wellcommerce", "en");
     Translator.add("client.heading.add", "Create a client", "wellcommerce", "en");
     Translator.add("client.heading.edit", "Edit client", "wellcommerce", "en");
@@ -278,6 +284,8 @@
     Translator.add("order.label.variant_options", "Wybrane opcje", "wellcommerce", "en");
     Translator.add("order.label.accept_conditions", "I accept the shop conditions", "wellcommerce", "en");
     Translator.add("order.label.issue_invoice", "Please send me an invoice", "wellcommerce", "en");
+    Translator.add("order.label.coupon.code", "Coupon code", "wellcommerce", "en");
+    Translator.add("order.label.coupon.modifier", "Coupon modifier", "wellcommerce", "en");
     Translator.add("order.description.product_total", "Total products value", "wellcommerce", "en");
     Translator.add("order.description.shipping_cost", "Shipping costs", "wellcommerce", "en");
     Translator.add("order.notice.empty_order_list", "You have not placed any orders", "wellcommerce", "en");
@@ -442,6 +450,7 @@
     Translator.add("sales_report.label.orders", "Orders", "wellcommerce", "en");
     Translator.add("sales_report.label.today", "today", "wellcommerce", "en");
     Translator.add("sales_report.label.current_month", "current month", "wellcommerce", "en");
+    Translator.add("sales_report.label.current_period", "current period", "wellcommerce", "en");
     Translator.add("channel.heading.index", "Channel", "wellcommerce", "en");
     Translator.add("channel.heading.add", "Add a new channel", "wellcommerce", "en");
     Translator.add("channel.label.name", "Name", "wellcommerce", "en");
@@ -483,6 +492,7 @@
     Translator.add("shop.label.mailer_configuration.port", "SMTP port", "wellcommerce", "en");
     Translator.add("shop.label.mailer_configuration.user", "SMTP username", "wellcommerce", "en");
     Translator.add("shop.label.mailer_configuration.pass", "SMTP password", "wellcommerce", "en");
+    Translator.add("shop.label.mailer_configuration.bcc", "BCC", "wellcommerce", "en");
     Translator.add("locale.heading.index", "Locales", "wellcommerce", "en");
     Translator.add("locale.heading.add", "Add a locale", "wellcommerce", "en");
     Translator.add("locale.heading.edit", "Edit a locale", "wellcommerce", "en");
