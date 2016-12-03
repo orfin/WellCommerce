@@ -28,30 +28,30 @@ class LayoutBox implements LayoutBoxInterface
     use Timestampable;
     use Translatable;
     use Blameable;
-
+    
     /**
      * @var string
      */
-    protected $boxType;
-
+    protected $boxType = '';
+    
+    /**
+     * @var array
+     */
+    protected $settings = [];
+    
     /**
      * @var string
      */
-    protected $settings;
-
-    /**
-     * @var string
-     */
-    protected $identifier;
-
+    protected $identifier = '';
+    
     /**
      * {@inheritdoc}
      */
-    public function getBoxType() : string
+    public function getBoxType(): string
     {
         return $this->boxType;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -59,15 +59,15 @@ class LayoutBox implements LayoutBoxInterface
     {
         $this->boxType = $boxType;
     }
-
+    
     /**
      * {@inheritdoc}
      */
-    public function getSettings() : array
+    public function getSettings(): array
     {
         return $this->settings;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -75,15 +75,15 @@ class LayoutBox implements LayoutBoxInterface
     {
         $this->settings = $settings;
     }
-
+    
     /**
      * {@inheritdoc}
      */
-    public function getIdentifier() : string
+    public function getIdentifier(): string
     {
         return $this->identifier;
     }
-
+    
     /**
      * {@inheritdoc}
      */
