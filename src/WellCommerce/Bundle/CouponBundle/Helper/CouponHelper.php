@@ -11,12 +11,12 @@ use WellCommerce\Bundle\CouponBundle\Entity\CouponInterface;
  */
 class CouponHelper
 {
-    public static function formatModifier(CouponInterface $coupon) : string
+    public static function formatModifier(CouponInterface $coupon): string
     {
         if ($coupon->getModifierType() === '%') {
             return sprintf('-%s%s', $coupon->getModifierValue(), $coupon->getModifierType());
         }
-    
+        
         return sprintf('-%s%s', $coupon->getModifierValue(), $coupon->getCurrency());
     }
 }
