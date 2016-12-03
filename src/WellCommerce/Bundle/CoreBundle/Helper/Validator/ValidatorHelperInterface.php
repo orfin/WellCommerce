@@ -22,24 +22,24 @@ use Symfony\Component\Validator\ConstraintViolationListInterface;
 interface ValidatorHelperInterface
 {
     const DEFAULT_VALIDATOR_GROUPS = ['Default'];
-
+    
     /**
-     * Validates the object
+     * Validates a given value
      *
-     * @param object $value
-     * @param array  $groups
+     * @param mixed $value
+     * @param array $groups
      *
      * @return ConstraintViolationListInterface
      */
-    public function validate($value, array $groups = []) : ConstraintViolationListInterface;
-
+    public function validate($value, array $constraints = null, array $groups = []): ConstraintViolationListInterface;
+    
     /**
      * Checks whether the given value is valid
      *
-     * @param object $value
-     * @param array  $groups
+     * @param mixed $value
+     * @param array $groups
      *
      * @return bool
      */
-    public function isValid($value, array $groups = []) : bool;
+    public function isValid($value, array $constraints = null, array $groups = []): bool;
 }

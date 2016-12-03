@@ -22,105 +22,90 @@ class MailerConfiguration
     /**
      * @var string
      */
-    protected $from;
+    private $from;
     
     /**
      * @var string
      */
-    protected $host;
+    private $host;
     
     /**
      * @var int
      */
-    protected $port;
+    private $port;
     
     /**
      * @var string
      */
-    protected $user;
+    private $user;
     
     /**
      * @var string
      */
-    protected $pass;
+    private $pass;
     
     /**
-     * @return string
+     * @var string
      */
-    public function getFrom()
+    private $bcc;
+    
+    public function getFrom(): string
     {
         return $this->from;
     }
     
-    /**
-     * @param string $from
-     */
-    public function setFrom($from)
+    public function setFrom(string $from)
     {
         $this->from = $from;
     }
     
-    /**
-     * @return mixed
-     */
-    public function getHost()
+    public function getHost(): string
     {
         return $this->host;
     }
     
-    /**
-     * @param mixed $host
-     */
-    public function setHost($host)
+    public function setHost(string $host)
     {
         $this->host = $host;
     }
     
-    /**
-     * @return mixed
-     */
-    public function getPort()
+    public function getPort(): int
     {
         return $this->port;
     }
     
-    /**
-     * @param mixed $port
-     */
-    public function setPort($port)
+    public function setPort(int $port)
     {
         $this->port = $port;
     }
     
-    /**
-     * @return mixed
-     */
-    public function getUser()
+    public function getUser(): string
     {
         return $this->user;
     }
     
-    /**
-     * @param mixed $user
-     */
-    public function setUser($user)
+    public function setUser(string $user)
     {
         $this->user = $user;
     }
     
-    /**
-     * @return mixed
-     */
-    public function getPass()
+    public function getPass(): string
     {
         return $this->pass;
     }
     
-    /**
-     * @param mixed $pass
-     */
-    public function setPass($pass)
+    public function setPass(string $pass)
     {
         $this->pass = $pass;
+    }
+    
+    public function getBcc(): string
+    {
+        return $this->bcc;
+    }
+    
+    public function setBcc(string $bcc)
+    {
+        $this->bcc = $bcc;
     }
 }

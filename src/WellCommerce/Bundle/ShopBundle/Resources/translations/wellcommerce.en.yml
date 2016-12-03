@@ -19,3 +19,4 @@ shop:
             port: SMTP port
             user: SMTP username
             pass: SMTP password
+            bcc: BCC

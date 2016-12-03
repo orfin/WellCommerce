@@ -32,7 +32,7 @@ class LoadShopData extends AbstractDataFixture
         if (!$this->isEnabled()) {
             return;
         }
-
+        
         /**
          * @var $theme       \WellCommerce\Bundle\ThemeBundle\Entity\ThemeInterface
          * @var $company     \WellCommerce\Bundle\CompanyBundle\Entity\CompanyInterface
@@ -41,7 +41,7 @@ class LoadShopData extends AbstractDataFixture
         $theme    = $this->getReference('theme');
         $company  = $this->getReference('company');
         $currency = $this->randomizeSamples('currency', LoadCurrencyData::$samples);
-
+        
         $shop = $this->container->get('shop.factory')->create();
         $shop->setName('WellCommerce');
         $shop->setCompany($company);
@@ -50,19 +50,20 @@ class LoadShopData extends AbstractDataFixture
         $shop->setDefaultCountry('US');
         $shop->setDefaultCurrency($currency->getCode());
         $shop->setClientGroup($this->getReference('client_group'));
-
+        
         $mailerConfiguration = new MailerConfiguration();
         $mailerConfiguration->setFrom($this->container->getParameter('mailer_from'));
         $mailerConfiguration->setHost($this->container->getParameter('mailer_host'));
         $mailerConfiguration->setPort($this->container->getParameter('mailer_port'));
         $mailerConfiguration->setUser($this->container->getParameter('mailer_user'));
         $mailerConfiguration->setPass($this->container->getParameter('mailer_password'));
-
+        $mailerConfiguration->setBcc($this->container->getParameter('mailer_from'));
+        
         $shop->setMailerConfiguration($mailerConfiguration);
-
+        
         $manager->persist($shop);
         $manager->flush();
-
+        
         $this->get('shop.storage')->setCurrentShop($shop);
         $this->setReference('shop', $shop);
     }

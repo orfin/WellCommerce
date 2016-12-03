@@ -20,6 +20,7 @@ use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use WellCommerce\Bundle\AppBundle\Entity\MailerConfiguration;
 use WellCommerce\Bundle\CoreBundle\Helper\Templating\TemplatingHelperInterface;
+use WellCommerce\Bundle\CoreBundle\Helper\Validator\ValidatorHelperInterface;
 
 /**
  * Class MailerHelper
@@ -31,31 +32,46 @@ final class MailerHelper implements MailerHelperInterface
     /**
      * @var TemplatingHelperInterface
      */
-    protected $templatingHelper;
+    private $templatingHelper;
+    
+    /**
+     * @var ValidatorHelperInterface
+     */
+    private $validatorHelper;
     
     /**
      * @var array
      */
-    protected $options = [];
+    private $options = [];
     
     /**
      * @var bool
      */
-    protected $debug;
+    private $debug;
     
     /**
      * MailerHelper constructor.
      *
      * @param TemplatingHelperInterface $templatingHelper
+     * @param ValidatorHelperInterface  $validatorHelper
      * @param bool                      $debug
      */
-    public function __construct (TemplatingHelperInterface $templatingHelper, bool $debug = false)
+    public function __construct(TemplatingHelperInterface $templatingHelper, ValidatorHelperInterface $validatorHelper, bool $debug = false)
     {
         $this->templatingHelper = $templatingHelper;
+        $this->validatorHelper  = $validatorHelper;
         $this->debug            = $debug;
     }
     
-    public function sendEmail (array $options) : int
+    public function isEmailValid(string $email): bool
+    {
+        return $this->validatorHelper->isValid($email, [
+            new \Symfony\Component\Validator\Constraints\Email(),
+            new \Symfony\Component\Validator\Constraints\NotBlank(),
+        ]);
+    }
+    
+    public function sendEmail(array $options): int
     {
         $resolver = new OptionsResolver();
         $this->configureOptions($resolver);
@@ -75,7 +91,7 @@ final class MailerHelper implements MailerHelperInterface
         return 0;
     }
     
-    protected function createMessage () : Message
+    private function createMessage(): Message
     {
         $message = Message::newInstance();
         $message->setSubject($this->options['subject']);
@@ -93,12 +109,12 @@ final class MailerHelper implements MailerHelperInterface
         return $message;
     }
     
-    protected function createAttachment (string $path) : \Swift_Mime_Attachment
+    private function createAttachment(string $path): \Swift_Mime_Attachment
     {
         return \Swift_Attachment::fromPath($path);
     }
     
-    protected function setBody (Message $message, string $template, array $parameters = [])
+    private function setBody(Message $message, string $template, array $parameters = [])
     {
         $parameters['message'] = $message;
         $body                  = $this->templatingHelper->render($template, $parameters);
@@ -106,7 +122,7 @@ final class MailerHelper implements MailerHelperInterface
         $message->setBody($body, 'text/html');
     }
     
-    protected function configureOptions (OptionsResolver $resolver)
+    private function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setRequired([
             'recipient',
@@ -120,6 +136,10 @@ final class MailerHelper implements MailerHelperInterface
         ]);
         
         $resolver->setDefault('bcc', function (Options $options) {
+            if ($this->isEmailValid($options['configuration']->getBcc())) {
+                return $options['configuration']->getBcc();
+            }
+            
             return $options['configuration']->getFrom() ?? [];
         });
         
@@ -139,7 +159,7 @@ final class MailerHelper implements MailerHelperInterface
         $resolver->setAllowedTypes('configuration', MailerConfiguration::class);
     }
     
-    protected function createMailer () : Mailer
+    private function createMailer(): Mailer
     {
         $configuration = $this->options['configuration'];
         $transport     = new \Swift_SmtpTransport($configuration->getHost(), $configuration->getPort(), 'tls');

@@ -28,3 +28,7 @@ WellCommerce\Bundle\AppBundle\Entity\MailerConfiguration:
             type: string
             length: 64
             nullable: true
+        bcc:
+            type: string
+            length: 64
+            nullable: true
