@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\ProducerBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
@@ -34,44 +35,38 @@ class Producer implements ProducerInterface
     use Blameable;
     use MediaAwareTrait;
     use ShopCollectionAwareTrait;
-
+    
     /**
      * @var Collection
      */
     protected $products;
-
+    
     /**
      * @var Collection
      */
     protected $deliverers;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getProducts() : Collection
+    
+    public function __construct()
+    {
+        $this->products   = new ArrayCollection();
+        $this->deliverers = new ArrayCollection();
+    }
+    
+    public function getProducts(): Collection
     {
         return $this->products;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getDeliverers() : Collection
+    
+    public function getDeliverers(): Collection
     {
         return $this->deliverers;
     }
-
-    /**
-     * {@inheritdoc}
-     */
+    
     public function setDeliverers(Collection $collection)
     {
         $this->deliverers = $collection;
     }
-
-    /**
-     * {@inheritdoc}
-     */
+    
     public function addDeliverer(DelivererInterface $deliverer)
     {
         $this->deliverers = $deliverer;
