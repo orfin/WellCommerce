@@ -40,7 +40,7 @@ services:
 
     mailer.helper:
         class: WellCommerce\Bundle\CoreBundle\Helper\Mailer\MailerHelper
-        arguments: ['@templating.helper', '%kernel.debug%']
+        arguments: ['@templating.helper', '@validator.helper', '%kernel.debug%']
 
     security.helper:
         class: WellCommerce\Bundle\CoreBundle\Helper\Security\SecurityHelper
