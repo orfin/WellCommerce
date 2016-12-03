@@ -24,7 +24,7 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 class ProductController extends AbstractAdminController
 {
     /**
-     * @var \WellCommerce\Bundle\ProductBundle\Manager\Admin\ProductManager
+     * @var \WellCommerce\Bundle\ProductBundle\Manager\ProductManager
      */
     protected $manager;
 

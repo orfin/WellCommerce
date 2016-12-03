@@ -155,6 +155,7 @@ WellCommerce\Bundle\ProductBundle\Entity\Product:
             orphanRemoval: true
         variants:
             targetEntity: WellCommerce\Bundle\ProductBundle\Entity\Variant
+            orderBy: { 'hierarchy': 'ASC' }
             cascade:
                 - persist
             fetch: EXTRA_LAZY

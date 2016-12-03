@@ -57,6 +57,7 @@ class VariantManager extends AbstractManager
         $variant->setStock($value['stock']);
         $variant->setSymbol($value['symbol']);
         $variant->setWeight($value['weight']);
+        $variant->setHierarchy($value['hierarchy']);
         $variant->setOptions($variantOptions);
 
         return $variant;
