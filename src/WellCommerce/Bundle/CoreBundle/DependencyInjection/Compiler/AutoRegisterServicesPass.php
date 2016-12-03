@@ -170,7 +170,7 @@ final class AutoRegisterServicesPass implements CompilerPassInterface
     private function registerEntityFactory(ContainerBuilder $container)
     {
         $definitionFactory = new EntityFactoryDefinitionFactory();
-        $classes           = $this->classFinder->findEntityFactoryClasses($this->bundle);
+        $classes           = $this->classFinder->findEntityClasses($this->bundle);
         foreach ($classes as $baseName => $className) {
             $entityFactoryServiceId = $this->serviceIdGenerator->getServiceId($baseName, 'factory');
             if (false === $container->has($entityFactoryServiceId)) {

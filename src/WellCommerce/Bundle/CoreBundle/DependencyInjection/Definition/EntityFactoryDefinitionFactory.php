@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\CoreBundle\DependencyInjection\Definition;
 
 use Symfony\Component\DependencyInjection\Definition;
+use WellCommerce\Bundle\CoreBundle\Factory\EntityFactory;
 
 /**
  * Class RepositoryDefinitionFactory
@@ -21,10 +22,10 @@ use Symfony\Component\DependencyInjection\Definition;
  */
 final class EntityFactoryDefinitionFactory
 {
-    public function create(string $class) : Definition
+    public function create(string $class): Definition
     {
-        $definition = new Definition($class);
-        $definition->setAutowired(true);
+        $definition = new Definition(EntityFactory::class);
+        $definition->setArguments([$class]);
         
         return $definition;
     }
