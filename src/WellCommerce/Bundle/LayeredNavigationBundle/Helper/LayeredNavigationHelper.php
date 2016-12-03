@@ -38,7 +38,7 @@ final class LayeredNavigationHelper extends AbstractContainerAware implements La
         $this->setFilters($filters);
     }
     
-    public function generateRedirectUrl() : string
+    public function generateRedirectUrl(): string
     {
         $formParams              = $this->parseFormParameters($this->getRequestHelper()->getRequestBagParam('form', '', FILTER_DEFAULT));
         $route                   = $this->getRequestHelper()->getRequestBagParam('route', 0);
@@ -46,7 +46,7 @@ final class LayeredNavigationHelper extends AbstractContainerAware implements La
         $currentQueryParams      = $this->getRequestHelper()->getRequestBagParam('query_params', []);
         $currentRouteParams      = array_merge($currentAttributesParams, $currentQueryParams);
         $replacements            = [];
-
+        
         foreach ($this->filters as $parameterName => $configuration) {
             if (isset($formParams[$parameterName])) {
                 $value = $formParams[$parameterName];
@@ -59,9 +59,9 @@ final class LayeredNavigationHelper extends AbstractContainerAware implements La
                 $replacements[$parameterName] = 0;
             }
         }
-
+        
         $routeParams = array_replace($currentRouteParams, $replacements);
-
+        
         return $this->getRouterHelper()->generateUrl($route, $routeParams);
     }
     
@@ -77,16 +77,16 @@ final class LayeredNavigationHelper extends AbstractContainerAware implements La
                 $collection->add($this->createFilterCondition($currentAttributeValue, $configuration));
             }
         }
-
+        
         return $collection;
     }
-
-    public function isLayeredNavigationEnabled() : bool
+    
+    public function isLayeredNavigationEnabled(): bool
     {
         $route     = $this->getRouterHelper()->getCurrentRoute();
         $keys      = array_keys($this->filters);
         $isEnabled = false;
-
+        
         foreach ($keys as $key) {
             $value        = $this->getRequestHelper()->getAttributesBagParam($key);
             $defaultValue = null;
@@ -94,14 +94,16 @@ final class LayeredNavigationHelper extends AbstractContainerAware implements La
                 $defaultValue = $route->getDefault($key);
             }
             if (null !== $value && $value != $defaultValue) {
-                $isEnabled = true;
+                if ($this->filters[$key]['type'] !== self::VALUE_TYPE_ARRAY || ($this->filters[$key]['type'] === self::VALUE_TYPE_ARRAY && $value != 0)) {
+                    $isEnabled = true;
+                }
             }
         }
-
+        
         return $isEnabled;
     }
     
-    private function createFilterCondition($currentAttributeValue, array $configuration) : ConditionInterface
+    private function createFilterCondition($currentAttributeValue, array $configuration): ConditionInterface
     {
         return new $configuration['condition']($configuration['column'], $currentAttributeValue);
     }
@@ -127,7 +129,7 @@ final class LayeredNavigationHelper extends AbstractContainerAware implements La
         }, ARRAY_FILTER_USE_BOTH);
     }
     
-    private function parseFormParameters(string $queryString) : array
+    private function parseFormParameters(string $queryString): array
     {
         parse_str($queryString, $params);
         
