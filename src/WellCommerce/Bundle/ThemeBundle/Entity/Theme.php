@@ -30,17 +30,17 @@ class Theme implements ThemeInterface
     /**
      * @var string
      */
-    protected $name;
+    protected $name = '';
     
     /**
      * @var string
      */
-    protected $folder;
+    protected $folder = '';
     
     /**
      * {@inheritdoc}
      */
-    public function getName() : string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -56,7 +56,7 @@ class Theme implements ThemeInterface
     /**
      * @return string
      */
-    public function getFolder() : string
+    public function getFolder(): string
     {
         return $this->folder;
     }
