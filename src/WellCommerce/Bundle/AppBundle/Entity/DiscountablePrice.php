@@ -13,13 +13,14 @@
 namespace WellCommerce\Bundle\AppBundle\Entity;
 
 use Carbon\Carbon;
+use DateTime;
 
 /**
  * Class DiscountablePrice
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class DiscountablePrice extends Price implements DiscountablePriceInterface
+class DiscountablePrice extends Price
 {
     protected $discountedNetAmount   = 0.00;
     protected $discountedGrossAmount = 0.00;
@@ -32,7 +33,7 @@ class DiscountablePrice extends Price implements DiscountablePriceInterface
         return $this->validFrom;
     }
     
-    public function setValidFrom(\DateTime $validFrom = null)
+    public function setValidFrom(DateTime $validFrom = null)
     {
         if (null !== $validFrom) {
             $validFrom = $validFrom->setTime(0, 0, 0);
@@ -46,7 +47,7 @@ class DiscountablePrice extends Price implements DiscountablePriceInterface
         return $this->validTo;
     }
     
-    public function setValidTo(\DateTime $validTo = null)
+    public function setValidTo(DateTime $validTo = null)
     {
         if (null !== $validTo) {
             $validTo = $validTo->setTime(23, 59, 59);
@@ -55,7 +56,7 @@ class DiscountablePrice extends Price implements DiscountablePriceInterface
         $this->validTo = $validTo;
     }
     
-    public function getFinalGrossAmount() : float
+    public function getFinalGrossAmount(): float
     {
         if ($this->isDiscountValid()) {
             return $this->getDiscountedGrossAmount();
@@ -64,7 +65,7 @@ class DiscountablePrice extends Price implements DiscountablePriceInterface
         return $this->getGrossAmount();
     }
     
-    public function isDiscountValid() : bool
+    public function isDiscountValid(): bool
     {
         $validFrom = ($this->validFrom === null) ? Carbon::now()->startOfDay() : Carbon::instance($this->validFrom)->startOfDay();
         $validTo   = ($this->validTo === null) ? Carbon::now()->endOfDay() : Carbon::instance($this->validTo)->endOfDay();
@@ -72,7 +73,7 @@ class DiscountablePrice extends Price implements DiscountablePriceInterface
         return $validFrom->isPast() && $validTo->isFuture() && $this->discountedGrossAmount > 0;
     }
     
-    public function getDiscountedGrossAmount() : float
+    public function getDiscountedGrossAmount(): float
     {
         return $this->discountedGrossAmount;
     }
@@ -82,7 +83,7 @@ class DiscountablePrice extends Price implements DiscountablePriceInterface
         $this->discountedGrossAmount = $discountedGrossAmount;
     }
     
-    public function getFinalNetAmount() : float
+    public function getFinalNetAmount(): float
     {
         if ($this->isDiscountValid()) {
             return $this->getDiscountedNetAmount();
@@ -91,7 +92,7 @@ class DiscountablePrice extends Price implements DiscountablePriceInterface
         return $this->getNetAmount();
     }
     
-    public function getDiscountedNetAmount() : float
+    public function getDiscountedNetAmount(): float
     {
         return $this->discountedNetAmount;
     }
@@ -101,7 +102,7 @@ class DiscountablePrice extends Price implements DiscountablePriceInterface
         $this->discountedNetAmount = $discountedNetAmount;
     }
     
-    public function getFinalTaxAmount() : float
+    public function getFinalTaxAmount(): float
     {
         if ($this->isDiscountValid()) {
             return $this->getDiscountedTaxAmount();
@@ -110,7 +111,7 @@ class DiscountablePrice extends Price implements DiscountablePriceInterface
         return $this->getTaxAmount();
     }
     
-    public function getDiscountedTaxAmount() : float
+    public function getDiscountedTaxAmount(): float
     {
         return $this->discountedTaxAmount;
     }

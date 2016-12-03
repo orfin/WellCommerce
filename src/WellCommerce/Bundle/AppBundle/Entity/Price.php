@@ -17,7 +17,7 @@ namespace WellCommerce\Bundle\AppBundle\Entity;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Price implements PriceInterface
+class Price
 {
     protected $netAmount    = 0;
     protected $grossAmount  = 0;
@@ -26,7 +26,7 @@ class Price implements PriceInterface
     protected $currency     = '';
     protected $exchangeRate = 0;
     
-    public function getNetAmount() : float
+    public function getNetAmount(): float
     {
         return $this->netAmount;
     }
@@ -36,7 +36,7 @@ class Price implements PriceInterface
         $this->netAmount = $netAmount;
     }
     
-    public function getGrossAmount() : float
+    public function getGrossAmount(): float
     {
         return $this->grossAmount;
     }
@@ -46,7 +46,7 @@ class Price implements PriceInterface
         $this->grossAmount = $grossAmount;
     }
     
-    public function getTaxAmount() : float
+    public function getTaxAmount(): float
     {
         return $this->taxAmount;
     }
@@ -56,7 +56,7 @@ class Price implements PriceInterface
         $this->taxAmount = $taxAmount;
     }
     
-    public function getTaxRate() : float
+    public function getTaxRate(): float
     {
         return $this->taxRate;
     }
@@ -66,7 +66,7 @@ class Price implements PriceInterface
         $this->taxRate = $taxRate;
     }
     
-    public function getCurrency() : string
+    public function getCurrency(): string
     {
         return $this->currency;
     }
