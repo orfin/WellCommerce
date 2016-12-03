@@ -3781,7 +3781,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 				jFilter.data('jPanel', jPanel);
 				var jList = $('<ul/>');
 				jFilter.append(jList);
-				jPanel.data('fLoadTree', oF.load_children);
+				jPanel.data('fLoadChildren', oF.load_children_function);
 				var jUl = $('<ul/>');
 				jPanel.append(jUl);
 				jPanel.GShadow();
@@ -3910,10 +3910,6 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		jLi.data('sId', oItem.id);
 		jLi.data('bLoaded', false);
 		jLi.data('bHasChildren', oItem.hasChildren);
-		/*if (gThis.m_jFieldWrapper.find('input[value="' + sId + '"]').length) {
-			jField.click();
-			jField.attr('checked', 'checked');
-		}*/
 		jLi.append($('<label/>').append(jField).append(oItem.name));
 		if (oItem.hasChildren) {
 			var jExpander = $('<span class="expander"/>');
@@ -3954,26 +3950,24 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		if (!bExpanded) {
 			$(this).closest('li').addClass('expanded');
 			if (!bLoaded) {
-				var fHandler = $(this).closest('.GF_Datagrid_filter_tree_panel').data('fLoadTree');
-				fHandler({
-					parentId: sId
-				}, GCallback(function(eEvent) {
-					var jLi = eEvent.jParent;
+				var sLoadChildrenRoute = $(this).closest('.GF_Datagrid_filter_tree_panel').data('sLoadChildrenRoute');
+				var jParent = $(this).closest('li');
+				var oRequest = {
+					parent: sId
+				};
+
+				GF_Ajax_Request(Routing.generate('admin.category.ajax.get_children'), oRequest, function(aoItems){
+					var jLi = jParent;
 					jLi.data('bLoaded', true);
 					var jUl = jLi.children('ul');
 					jUl.empty();
-					var iLength = eEvent.aoItems.length;
+					var iLength = aoItems.length;
 					for (var i = 0; i < iLength; i++) {
 						var jLi = $('<li/>');
 						jUl.append(jLi);
-						dDg._WriteTreeItem.apply(dDg, [jLi, eEvent.aoItems[i], bChecked]);
+						dDg._WriteTreeItem.apply(dDg, [jLi, aoItems[i], bChecked]);
 					}
-				}, {
-					jParent: $(this).closest('li')
-				}));
-			}
-			else {
-
+				});
 			}
 		}
 		else {
@@ -4551,7 +4545,7 @@ GF_Datagrid_Column = GF_Config.GF_Extend('GF_Datagrid_Column', function(options)
 			filtered_column: GF.NULL,
 			source: GF.NULL,
 			options: [],
-			load_children: GF.NULL
+			load_children_route: GF.NULL
 		};
 
 		this._Process(options);

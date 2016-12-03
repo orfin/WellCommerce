@@ -7,3 +7,4 @@ sales_report:
         orders: Zamówienia
         today: dzisiaj
         current_month: w tym miesiącu
+        current_period: w tym okresie

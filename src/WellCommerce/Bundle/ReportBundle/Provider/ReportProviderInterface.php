@@ -12,7 +12,8 @@
 
 namespace WellCommerce\Bundle\ReportBundle\Provider;
 
-use WellCommerce\Bundle\ReportBundle\Configuration\ReportConfiguration;
+use DateTime;
+use WellCommerce\Bundle\ReportBundle\Context\LineChartContext;
 
 /**
  * Interface ReportProviderInterface
@@ -21,12 +22,7 @@ use WellCommerce\Bundle\ReportBundle\Configuration\ReportConfiguration;
  */
 interface ReportProviderInterface
 {
-    /**
-     * Returns a report
-     *
-     * @param ReportConfiguration $configuration
-     *
-     * @return \WellCommerce\Bundle\AppBundle\Data\ReportRowCollection
-     */
-    public function getReport(ReportConfiguration $configuration);
+    public function getSummary(DateTime $startDate, DateTime $endDate);
+    
+    public function getChartData(DateTime $startDate, DateTime $endDate): LineChartContext;
 }

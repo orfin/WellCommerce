@@ -6,3 +6,8 @@ services:
         calls:
             - [setContainer, ['@service_container']]
 
+    twig.extension.report:
+        class: WellCommerce\Bundle\ReportBundle\Twig\Extension\ReportExtension
+        arguments: ['WellCommerceReportBundle:Admin/SalesReport:sales_report.html.twig', '@sales_report.provider', '@request.helper']
+        tags:
+            - { name: twig.extension }

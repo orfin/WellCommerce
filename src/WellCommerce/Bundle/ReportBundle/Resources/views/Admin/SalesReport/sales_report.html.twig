@@ -1,0 +1,81 @@
+{% trans_default_domain "wellcommerce" %}
+<div style="float: right;margin-right: 6px;">
+    <div class="field-text" style="float: left">
+        <span class="field" style="width: 150px;">
+            <input type="text" id="startDate" class="period" style="width:142px" value="{{ startDate }}"/>
+        </span>
+    </div>
+    <div class="field-text" style="float: left">
+        <span class="field" style="width: 150px;">
+            <input type="text" id="endDate" class="period" style="width:142px" value="{{ endDate }}"/>
+        </span>
+    </div>
+</div>
+
+<div class="simple-stats layout-two-columns">
+    <div class="column narrow">
+        <dl class="stats-summary">
+            <dt>{% trans %}sales_report.label.sales{% endtrans %} ({% trans %}sales_report.label.today{% endtrans %} / {% trans %}
+                sales_report.label.current_period{% endtrans %})
+            </dt>
+            <dd> {{ format_price(salesSummary.currentValue) }} / {{ format_price(salesSummary.totalValue) }}</dd>
+            <dt>{% trans %}sales_report.label.orders{% endtrans %} ({% trans %}sales_report.label.today{% endtrans %} / {% trans %}
+                sales_report.label.current_period{% endtrans %})
+            </dt>
+            <dd> {{ salesSummary.currentCount }} / {{ salesSummary.totalCount }}</dd>
+            <dt>{% trans %}sales_report.label.clients{% endtrans %} ({% trans %}sales_report.label.today{% endtrans %} / {% trans %}
+                sales_report.label.current_period{% endtrans %})
+            </dt>
+            <dd> 0 / 0</dd>
+        </dl>
+    </div>
+    <div class="column wide" style="width: 850px;">
+        <div class="box">
+            <div>
+                <div class="chart sales-chart"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var defaultOptions = {
+        currency: '{{ currency }} '
+    };
+
+    var labels = '{{ salesChart.labels|json_encode|escape('js') }}';
+    var values = '{{ salesChart.values|json_encode|escape('js') }}';
+
+    new Chartist.Line('.sales-chart', {
+        fullWidth: true,
+        onlyInteger: true,
+        labels: $.parseJSON(labels),
+        series: [
+            $.parseJSON(values),
+        ]
+    }, {
+        plugins: [
+            Chartist.plugins.tooltip(defaultOptions)
+        ],
+        low: 0,
+        showArea: true,
+        lineSmooth: Chartist.Interpolation.simple({
+            divisor: 2
+        })
+    });
+
+    $(document).ready(function () {
+        $('.period').datepicker({dateFormat: 'yy-mm-dd'}).change(function () {
+            var startDate = $('#startDate').val();
+            var endDate = $('#endDate').val();
+
+            if (startDate != '' && endDate != '') {
+                window.location.href = Routing.generate('admin.sales_report.index', {
+                    startDate: startDate,
+                    endDate: endDate
+                });
+            }
+        });
+    });
+
+</script>

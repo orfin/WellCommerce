@@ -12,9 +12,13 @@
 
 namespace WellCommerce\Bundle\ReportBundle\Provider;
 
+use DateInterval;
+use DateTime;
 use Doctrine\Common\Collections\Criteria;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
+use WellCommerce\Bundle\ReportBundle\Calculator\SalesSummaryCalculator;
 use WellCommerce\Bundle\ReportBundle\Configuration\ReportConfiguration;
+use WellCommerce\Bundle\ReportBundle\Context\LineChartContext;
 use WellCommerce\Bundle\ReportBundle\Data\ReportRow;
 use WellCommerce\Bundle\ReportBundle\Data\ReportRowCollection;
 
@@ -25,12 +29,32 @@ use WellCommerce\Bundle\ReportBundle\Data\ReportRowCollection;
  */
 class SalesReportProvider extends AbstractReportProvider implements ReportProviderInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getReport(ReportConfiguration $configuration)
+    public function getSummary(DateTime $startDate, DateTime $endDate)
     {
-        $criteria   = $this->getCriteria($configuration);
+        $interval      = new DateInterval('P1D');
+        $configuration = new ReportConfiguration($startDate, $endDate, $interval, 'Y-m-d', 'Y-m-d');
+        $report        = $this->getReport($configuration);
+        
+        return new SalesSummaryCalculator($report, $configuration);
+    }
+    
+    public function getChartData(DateTime $startDate, DateTime $endDate): LineChartContext
+    {
+        $groupByFormat = 'd';
+        if ($startDate->format('Ym') !== $endDate->format('Ym')) {
+            $groupByFormat = 'm';
+        }
+        
+        $interval      = new DateInterval('P1D');
+        $configuration = new ReportConfiguration($startDate, $endDate, $interval, $groupByFormat, 'Y-m-d');
+        $report        = $this->getReport($configuration);
+        
+        return new LineChartContext($report, $configuration);
+    }
+    
+    private function getReport(ReportConfiguration $configuration): ReportRowCollection
+    {
+        $criteria   = $this->createCriteria($configuration);
         $collection = $this->repository->matching($criteria);
         $report     = new ReportRowCollection();
         
@@ -43,14 +67,7 @@ class SalesReportProvider extends AbstractReportProvider implements ReportProvid
         return $report;
     }
     
-    /**
-     * Returns the report's criteria
-     *
-     * @param ReportConfiguration $configuration
-     *
-     * @return Criteria
-     */
-    protected function getCriteria(ReportConfiguration $configuration)
+    private function createCriteria(ReportConfiguration $configuration): Criteria
     {
         $criteria = new Criteria();
         $criteria->where($criteria->expr()->gte('createdAt', $configuration->getStartDate()));

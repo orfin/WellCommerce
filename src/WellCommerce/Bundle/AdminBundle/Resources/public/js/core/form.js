@@ -16118,8 +16118,15 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 		return oProduct;
 	};
 
-	gThis._ProcessSelectedProduct = function(oProduct) {
-		return gThis.m_fProcessProduct(oProduct);
+  gThis._ProcessSelectedProduct = function(oProduct) {
+		oProduct = gThis.m_fProcessProduct(oProduct);
+		if (oProduct.thumb != '') {
+			oProduct.product_name = '<a title="" href="' + oProduct.thumb + '" class="show-thumb"><img src="' + GCore.DESIGN_PATH + 'images/icons/datagrid/details.png" style="vertical-align: middle;" /></a> '+ oProduct.product_name + '<br /><small>' + oProduct.ean + '</small>';
+		}else{
+			oProduct.product_name = '<img style="opacity: 0.2;vertical-align: middle;" src="' + GCore.DESIGN_PATH + 'images/icons/datagrid/details.png" style="vertical-align: middle;" /> '+ oProduct.product_name + '<br /><small>' + oProduct.ean + '</small>';
+		}
+
+		return oProduct;
 	};
 
 	gThis._InitColumns = function() {
@@ -16363,8 +16370,8 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
     		},
     		event_handlers: {
     			load: function(oRequest){
-                    gThis.m_gDatagrid.MakeRequest(Routing.generate(gThis.m_sLoadProductsRoute), oRequest, GF_Datagrid.ProcessIncomingData);
-                },
+              gThis.m_gDatagrid.MakeRequest(Routing.generate(gThis.m_sLoadProductsRoute), oRequest, GF_Datagrid.ProcessIncomingData);
+          },
     			process: gThis.m_fProcessProduct,
     			select: gThis._OnSelect,
     			deselect: gThis._OnDeselect
@@ -16389,22 +16396,19 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 
 	gThis._CalculateRow = function(oRow) {
         oRow.weight           = isNaN(parseFloat(oRow.weight)) ? 0 : parseFloat(oRow.weight);
-		oRow.quantity         = isNaN(parseFloat(oRow.quantity)) ? 0 : parseFloat(oRow.quantity);
-		oRow.gross_amount     = String(oRow.gross_amount).replace(/,/, '.');
-		oRow.gross_amount     = isNaN(parseFloat(oRow.gross_amount)) ? 0 : parseFloat(oRow.gross_amount);
-		oRow.gross_amount     = oRow.gross_amount.toFixed(2);
+    		oRow.quantity         = isNaN(parseFloat(oRow.quantity)) ? 0 : parseFloat(oRow.quantity);
+    		oRow.gross_amount     = String(oRow.gross_amount).replace(/,/, '.');
+    		oRow.gross_amount     = isNaN(parseFloat(oRow.gross_amount)) ? 0 : parseFloat(oRow.gross_amount);
+    		oRow.gross_amount     = oRow.gross_amount.toFixed(2);
         oRow.net_amount       = parseFloat(oRow.gross_amount) / (1 + (parseFloat(oRow.tax_rate) / 100)).toFixed(2);
         oRow.net_amount       = oRow.net_amount.toFixed(2);
         oRow.gross_total      = oRow.gross_amount * oRow.quantity;
-		oRow.gross_total      = oRow.gross_total.toFixed(2);
+		    oRow.gross_total      = oRow.gross_total.toFixed(2);
         oRow.tax_rate         = isNaN(parseFloat(oRow.tax_rate)) ? 0 : parseFloat(oRow.tax_rate);
         oRow.net_total        = oRow.net_amount * oRow.quantity;
         oRow.tax_value        = oRow.gross_total - oRow.net_total;
-		oRow.tax_rate         = oRow.tax_rate.toFixed(2) + '%';
-		oRow.tax_value        = oRow.tax_value.toFixed(2);
-
-console.log(oRow);
-
+    		oRow.tax_rate         = oRow.tax_rate.toFixed(2) + '%';
+    		oRow.tax_value        = oRow.tax_value.toFixed(2);
 		return oRow;
 	};
 
@@ -16693,7 +16697,18 @@ var GFormVariantEditor = GCore.ExtendClass(GFormField, function () {
         }).blur(function () {
             $(this).closest('.field').removeClass('focus');
         });
+
         jSpecification.append($('<div class="field-text"/>').append('<label for="' + gThis.GetId() + '__modifier_value">' + GForm.Language.product_variants_editor_variant_editor_modifier_value + '</label>').append($('<span class="field"/>').append(jModifierValue)));
+
+        jModifierValue.val(oVariant.modifier_value).keypress(fHandler).blur(fHandler).blur(gThis.Validation);
+
+        var jHierarchy = $('<input type="text" id="' + gThis.GetId() + '__hierarchy"/>').focus(function () {
+            $(this).closest('.field').addClass('focus');
+        }).blur(function () {
+            $(this).closest('.field').removeClass('focus');
+        });
+
+        jSpecification.append($('<div class="field-text"/>').append('<label for="' + gThis.GetId() + '__hierarchy">' + GTranslation('common.label.hierarchy') + '</label>').append($('<span class="field"/>').append(jHierarchy)));
 
         var fHandler = GEventHandler(function (eEvent) {
             if (eEvent.keyCode == 13) {
@@ -16703,13 +16718,14 @@ var GFormVariantEditor = GCore.ExtendClass(GFormField, function () {
             }
         });
 
-        jModifierValue.val(oVariant.modifier_value).keypress(fHandler).blur(fHandler).blur(gThis.Validation);
+        jHierarchy.val(oVariant.hierarchy).keypress(fHandler).blur(fHandler).blur(gThis.Validation);
 
         var jStock = $('<input type="text" id="' + gThis.GetId() + '__stock"/>').focus(function () {
             $(this).closest('.field').addClass('focus');
         }).blur(function () {
             $(this).closest('.field').removeClass('focus');
         });
+
         jSpecification.append($('<div class="field-text"/>').append('<label for="' + gThis.GetId() + '__stock">' + GForm.Language.product_variants_editor_variant_editor_stock + '</label>').append($('<span class="field"/>').append(jStock)));
         jStock.val(oVariant.stock);
 
@@ -16921,6 +16937,7 @@ var GFormVariantEditor = GCore.ExtendClass(GFormField, function () {
             id: gThis.m_sEditedVariant,
             modifier_type: modifierField.text(),
             modifier_value: $('#' + gThis.GetId() + '__modifier_value').val(),
+            hierarchy: $('#' + gThis.GetId() + '__hierarchy').val(),
             photo: $('#' + gThis.GetId() + '__photo').val(),
             availability: $('#' + gThis.GetId() + '__availability').val(),
             stock: $('#' + gThis.GetId() + '__stock').val().replace(/,/, '.'),
@@ -17027,13 +17044,13 @@ var GFormVariantEditor = GCore.ExtendClass(GFormField, function () {
     };
 
     gThis._OnVariantsGenerated = GEventHandler(function (eEvent) {
-        console.log(gThis.m_aoAttributes);
         $.each(eEvent.variants, function (k, key) {
             var sId = 'new-' + gThis.m_sRepetitionCounter++;
             var oRow = {
                 id: sId,
                 modifier_type: '%',
                 modifier_value: 100,
+                hierarchy: '0',
                 stock: 0,
                 photo: 0,
                 availability: 0,
@@ -17294,6 +17311,7 @@ var GFormVariantEditor = GCore.ExtendClass(GFormField, function () {
                     id: mValue[i].id,
                     modifier_type: mValue[i].suffix,
                     modifier_value: mValue[i].modifier,
+                    hierarchy: mValue[i].hierarchy,
                     stock: mValue[i].stock,
                     availability: mValue[i].availability,
                     photo: mValue[i].photo,
@@ -17352,6 +17370,18 @@ var GFormVariantEditor = GCore.ExtendClass(GFormField, function () {
         var column_id = new GF_Datagrid_Column({
             id: 'id',
             caption: GForm.Language.product_variants_editor_id,
+            appearance: {
+                width: 40,
+                visible: false
+            },
+            filter: {
+                type: GF_Datagrid.FILTER_BETWEEN
+            }
+        });
+
+        var column_hierarchy = new GF_Datagrid_Column({
+            id: 'hierarchy',
+            caption: GTranslation('common.label.hierarchy'),
             appearance: {
                 width: 40,
                 visible: false
@@ -17424,11 +17454,11 @@ var GFormVariantEditor = GCore.ExtendClass(GFormField, function () {
             column_symbol,
             column_status,
             column_weight,
-            column_modifier
+            column_modifier,
+            column_hierarchy
         ]);
 
         return aoColumns;
-
     };
 
     gThis.DeleteVariant = function (iDg, mId) {
@@ -17459,6 +17489,7 @@ var GFormVariantEditor = GCore.ExtendClass(GFormField, function () {
             id: sId,
             modifier_type: '%',
             modifier_value: '100.00',
+            hierarchy: '0',
             stock: '0',
             symbol: '',
             status: 1,
@@ -17488,6 +17519,7 @@ var GFormVariantEditor = GCore.ExtendClass(GFormField, function () {
             var oVariant = gThis.m_aoVariants[i];
             gThis.m_jField.append('<input value="' + oVariant['modifier_type'] + '" name="' + gThis.GetName() + '[' + oVariant.id + '][suffix]" type="hidden"/>');
             gThis.m_jField.append('<input value="' + oVariant['modifier_value'] + '" name="' + gThis.GetName() + '[' + oVariant.id + '][modifier]" type="hidden"/>');
+            gThis.m_jField.append('<input value="' + oVariant['hierarchy'] + '" name="' + gThis.GetName() + '[' + oVariant.id + '][hierarchy]" type="hidden"/>');
             gThis.m_jField.append('<input value="' + oVariant['stock'] + '" name="' + gThis.GetName() + '[' + oVariant.id + '][stock]" type="hidden"/>');
             gThis.m_jField.append('<input value="' + oVariant['symbol'] + '" name="' + gThis.GetName() + '[' + oVariant.id + '][symbol]" type="hidden"/>');
             gThis.m_jField.append('<input value="' + oVariant['status'] + '" name="' + gThis.GetName() + '[' + oVariant.id + '][status]" type="hidden"/>');;
@@ -17584,6 +17616,7 @@ var GFormVariantEditor = GCore.ExtendClass(GFormField, function () {
             mechanics: {
                 rows_per_page: 150,
                 key: 'id',
+                default_sorting: 'hierarchy',
                 only_one_selected: true,
                 persistent: false
             },
@@ -17608,7 +17641,6 @@ var GFormVariantEditor = GCore.ExtendClass(GFormField, function () {
         gThis.m_gDatagrid = new GF_Datagrid(gThis.m_jDatagrid, oOptions);
 
         gThis.Update();
-
     };
 
 }, oDefaults);

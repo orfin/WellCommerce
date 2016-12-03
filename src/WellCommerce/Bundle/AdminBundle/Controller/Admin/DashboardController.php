@@ -14,6 +14,8 @@ namespace WellCommerce\Bundle\AdminBundle\Controller\Admin;
 
 use Carbon\Carbon;
 use DateInterval;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\Criteria;
 use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\Controller\AbstractController;
 use WellCommerce\Bundle\ReportBundle\Calculator\SalesSummaryCalculator;
@@ -27,39 +29,48 @@ use WellCommerce\Bundle\ReportBundle\Context\LineChartContext;
  */
 class DashboardController extends AbstractController
 {
-    public function indexAction() : Response
+    public function indexAction(): Response
     {
-        $salesSummary = $this->getSalesSummary();
-
         return $this->displayTemplate('index', [
-            'salesChart'   => $this->getSalesChart(),
-            'salesSummary' => $salesSummary->getSummary(),
-            'currency'     => $this->getRequestHelper()->getCurrentCurrency()
+            'reviews'      => $this->getReviews(),
+            'orders'       => $this->getOrders(),
+            'clients'      => $this->getClients(),
+            'carts'        => $this->getCarts(),
         ]);
     }
-
-    /**
-     * @return LineChartContext
-     */
-    protected function getSalesChart() : LineChartContext
+    
+    protected function getReviews(): array
     {
-        $startDate     = Carbon::now()->startOfMonth();
-        $endDate       = Carbon::now()->endOfMonth();
-        $interval      = new DateInterval('P1D');
-        $configuration = new ReportConfiguration($startDate, $endDate, $interval, 'd', 'Y-m-d');
-        $report        = $this->get('sales_report.provider')->getReport($configuration);
-
-        return new LineChartContext($report, $configuration);
+        return $this->get('review.repository')->findBy([
+            'enabled' => true,
+        ], ['createdAt' => 'desc'], 10);
     }
-
-    protected function getSalesSummary() : SalesSummaryCalculator
+    
+    protected function getOrders(): array
     {
-        $startDate     = Carbon::now()->startOfMonth();
-        $endDate       = Carbon::now()->endOfMonth();
-        $interval      = new DateInterval('P1D');
-        $configuration = new ReportConfiguration($startDate, $endDate, $interval, 'Y-m-d', 'Y-m-d');
-        $report        = $this->get('sales_report.provider')->getReport($configuration);
-
-        return new SalesSummaryCalculator($report, $configuration);
+        return $this->get('order.repository')->findBy([
+            'confirmed' => true,
+            'shop'      => $this->getShopStorage()->getCurrentShop(),
+        ], ['createdAt' => 'desc'], 10);
+    }
+    
+    protected function getClients(): array
+    {
+        return $this->get('client.repository')->findBy([
+            'shop' => $this->getShopStorage()->getCurrentShop(),
+        ], ['createdAt' => 'desc'], 10);
+    }
+    
+    protected function getCarts(): Collection
+    {
+        $criteria = new Criteria();
+        $criteria->where($criteria->expr()->eq('confirmed', false));
+        $criteria->andWhere($criteria->expr()->eq('shop', $this->getShopStorage()->getCurrentShop()));
+        $criteria->andWhere($criteria->expr()->neq('client', null));
+        $criteria->andWhere($criteria->expr()->gt('productTotal.quantity', 0));
+        $criteria->orderBy(['createdAt' => 'desc']);
+        $criteria->setMaxResults(30);
+        
+        return $this->get('order.repository')->matching($criteria);
     }
 }

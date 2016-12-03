@@ -7,3 +7,4 @@ sales_report:
         orders: Orders
         today: today
         current_month: current month
+        current_period: current period
