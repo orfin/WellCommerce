@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\AdminBundle\Importer;
 
 use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\Config\Util\XmlUtils;
-use WellCommerce\Bundle\AdminBundle\Factory\AdminMenuFactory;
+use WellCommerce\Bundle\AdminBundle\Entity\AdminMenu;
 use WellCommerce\Bundle\AdminBundle\Repository\AdminMenuRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Doctrine\DoctrineHelperInterface;
 
@@ -23,37 +23,27 @@ use WellCommerce\Bundle\CoreBundle\Helper\Doctrine\DoctrineHelperInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class XmlImporter implements AdminMenuImporterInterface
+final class XmlImporter implements AdminMenuImporterInterface
 {
     /**
      * @var DoctrineHelperInterface
      */
-    protected $doctrineHelper;
-    
-    /**
-     * @var AdminMenuFactory
-     */
-    protected $adminMenuFactory;
+    private $doctrineHelper;
     
     /**
      * @var AdminMenuRepositoryInterface
      */
-    protected $adminMenuRepository;
+    private $adminMenuRepository;
     
     /**
      * Constructor
      *
      * @param DoctrineHelperInterface      $doctrineHelper
-     * @param AdminMenuFactory             $adminMenuFactory
      * @param AdminMenuRepositoryInterface $adminMenuRepository
      */
-    public function __construct(
-        DoctrineHelperInterface $doctrineHelper,
-        AdminMenuFactory $adminMenuFactory,
-        AdminMenuRepositoryInterface $adminMenuRepository
-    ) {
+    public function __construct(DoctrineHelperInterface $doctrineHelper, AdminMenuRepositoryInterface $adminMenuRepository)
+    {
         $this->doctrineHelper      = $doctrineHelper;
-        $this->adminMenuFactory    = $adminMenuFactory;
         $this->adminMenuRepository = $adminMenuRepository;
     }
     
@@ -94,7 +84,7 @@ class XmlImporter implements AdminMenuImporterInterface
         $parent        = $this->adminMenuRepository->findOneBy(['identifier' => (string)$item->parent]);
         
         if (null === $adminMenuItem) {
-            $adminMenuItem = $this->adminMenuFactory->create();
+            $adminMenuItem = new AdminMenu();
             $adminMenuItem->setCssClass((string)$item->css_class);
             $adminMenuItem->setIdentifier((string)$item->identifier);
             $adminMenuItem->setName((string)$item->name);
@@ -107,14 +97,7 @@ class XmlImporter implements AdminMenuImporterInterface
         }
     }
     
-    /**
-     * Parses a XML file
-     *
-     * @param string $file
-     *
-     * @return \DOMDocument
-     */
-    protected function parseFile($file)
+    private function parseFile(string $file): \DOMDocument
     {
         return XmlUtils::loadFile($file);
     }

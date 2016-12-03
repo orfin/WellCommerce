@@ -22,7 +22,7 @@ services:
 
     admin_menu.importer.xml:
         class: WellCommerce\Bundle\AdminBundle\Importer\XmlImporter
-        arguments: ['@doctrine.helper', '@admin_menu.factory', '@admin_menu.repository']
+        arguments: ['@doctrine.helper', '@admin_menu.repository']
 
     admin_menu.provider:
         class: WellCommerce\Bundle\AdminBundle\Provider\AdminMenuProvider
