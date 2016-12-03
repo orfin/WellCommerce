@@ -24,132 +24,69 @@ class ContactTicket implements ContactTicketInterface
 {
     use IdentifiableTrait;
     use Timestampable;
-
-    /**
-     * @var string
-     */
-    protected $name;
-
-
-    /**
-     * @var string
-     */
-    protected $surname;
-
-    /**
-     * @var string
-     */
-    protected $subject;
-
-    /**
-     * @var string
-     */
-    protected $phone;
-
-
-    /**
-     * @var string
-     */
-    protected $email;
-
-    /**
-     * @var string
-     */
-    protected $content;
-
-    /**
-     * {@inheritdoc}
-     */
+    
+    protected $name    = '';
+    protected $surname = '';
+    protected $subject = '';
+    protected $phone   = '';
+    protected $email   = '';
+    protected $content = '';
+    
+    public function getName(): string
+    {
+        return $this->name;
+    }
+    
     public function setName(string $name)
     {
         $this->name = $name;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName() : string
+    
+    public function getSurname(): string
     {
-        return $this->name;
+        return $this->surname;
     }
-
-    /**
-     * {@inheritdoc}
-     */
+    
     public function setSurname(string $surname)
     {
         $this->surname = $surname;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getSurname() : string
-    {
-        return $this->surname;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setPhone(string $phone)
-    {
-        $this->phone = $phone;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPhone() : string
-    {
-        return $this->phone;
-    }
-
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getSubject() : string
+    
+    public function getSubject(): string
     {
         return $this->subject;
     }
-
-
-    /**
-     * {@inheritdoc}
-     */
+    
     public function setSubject(string $subject)
     {
         $this->subject = $subject;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getEmail() : string
+    
+    public function getPhone(): string
+    {
+        return $this->phone;
+    }
+    
+    public function setPhone(string $phone)
+    {
+        $this->phone = $phone;
+    }
+    
+    public function getEmail(): string
     {
         return $this->email;
     }
-
-    /**
-     * {@inheritdoc}
-     */
+    
     public function setEmail(string $email)
     {
         $this->email = $email;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getContent() : string
+    
+    public function getContent(): string
     {
         return $this->content;
     }
-
-    /**
-     * {@inheritdoc}
-     */
+    
     public function setContent(string $content)
     {
         $this->content = $content;
