@@ -22,12 +22,12 @@ trait HierarchyAwareTrait
     /**
      * @var int
      */
-    protected $hierarchy;
+    protected $hierarchy = 0;
     
     /**
      * @return int
      */
-    public function getHierarchy() : int
+    public function getHierarchy(): int
     {
         return $this->hierarchy;
     }
