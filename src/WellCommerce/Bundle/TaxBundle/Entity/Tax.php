@@ -32,12 +32,12 @@ class Tax implements TaxInterface
     /**
      * @var float
      */
-    protected $value;
+    protected $value = 0.00;
     
     /**
      * {@inheritdoc}
      */
-    public function getValue() : float
+    public function getValue(): float
     {
         return $this->value;
     }
