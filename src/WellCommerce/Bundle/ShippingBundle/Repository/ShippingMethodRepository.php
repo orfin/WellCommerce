@@ -23,10 +23,7 @@ use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface;
  */
 class ShippingMethodRepository extends EntityRepository implements ShippingMethodRepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getShippingMethods() : Collection
+    public function getShippingMethods(): Collection
     {
         $criteria = new Criteria();
         $criteria->where($criteria->expr()->eq('enabled', true));
@@ -40,5 +37,22 @@ class ShippingMethodRepository extends EntityRepository implements ShippingMetho
         });
         
         return $methods;
+    }
+    
+    public function getDataGridFilterOptions(): array
+    {
+        $options = [];
+        $methods = $this->matching(new Criteria());
+        $methods->map(function (ShippingMethodInterface $method) use (&$options) {
+            $options[] = [
+                'id'          => $method->getId(),
+                'name'        => $method->translate()->getName(),
+                'hasChildren' => false,
+                'parent'      => null,
+                'weight'      => $method->getId(),
+            ];
+        });
+        
+        return $options;
     }
 }

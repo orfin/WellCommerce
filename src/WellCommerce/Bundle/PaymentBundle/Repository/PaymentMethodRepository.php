@@ -11,6 +11,7 @@
  */
 namespace WellCommerce\Bundle\PaymentBundle\Repository;
 
+use Doctrine\Common\Collections\Criteria;
 use WellCommerce\Bundle\CoreBundle\Repository\EntityRepository;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodInterface;
 
@@ -21,8 +22,25 @@ use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodInterface;
  */
 class PaymentMethodRepository extends EntityRepository implements PaymentMethodRepositoryInterface
 {
-    public function getDefaultPaymentMethod() : PaymentMethodInterface
+    public function getDefaultPaymentMethod(): PaymentMethodInterface
     {
         return $this->findOneBy([], ['hierarchy' => 'asc']);
+    }
+    
+    public function getDataGridFilterOptions(): array
+    {
+        $options = [];
+        $methods = $this->matching(new Criteria());
+        $methods->map(function (PaymentMethodInterface $method) use (&$options) {
+            $options[] = [
+                'id'          => $method->getId(),
+                'name'        => $method->translate()->getName(),
+                'hasChildren' => false,
+                'parent'      => null,
+                'weight'      => $method->getId(),
+            ];
+        });
+        
+        return $options;
     }
 }

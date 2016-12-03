@@ -12,8 +12,10 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Repository;
 
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\CoreBundle\Repository\EntityRepository;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderStatusInterface;
 
 /**
  * Class OrderStatusRepository
@@ -25,7 +27,7 @@ class OrderStatusRepository extends EntityRepository implements OrderStatusRepos
     /**
      * {@inheritdoc}
      */
-    public function getDataSetQueryBuilder() : QueryBuilder
+    public function getDataSetQueryBuilder(): QueryBuilder
     {
         $queryBuilder = $this->getQueryBuilder();
         $queryBuilder->groupBy('order_status.id');
@@ -34,5 +36,22 @@ class OrderStatusRepository extends EntityRepository implements OrderStatusRepos
         $queryBuilder->leftJoin('order_status_group.translations', 'order_status_group_translation');
         
         return $queryBuilder;
+    }
+    
+    public function getDataGridFilterOptions(): array
+    {
+        $options  = [];
+        $statuses = $this->matching(new Criteria());
+        $statuses->map(function (OrderStatusInterface $status) use (&$options) {
+            $options[] = [
+                'id'          => $status->getId(),
+                'name'        => $status->translate()->getName(),
+                'hasChildren' => false,
+                'parent'      => null,
+                'weight'      => $status->getId(),
+            ];
+        });
+        
+        return $options;
     }
 }

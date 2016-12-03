@@ -22,10 +22,7 @@ use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
  */
 interface ShippingMethodRepositoryInterface extends RepositoryInterface
 {
-    /**
-     * Returns all valid shipping methods
-     *
-     * @return Collection
-     */
-    public function getShippingMethods() : Collection;
+    public function getShippingMethods(): Collection;
+    
+    public function getDataGridFilterOptions(): array;
 }

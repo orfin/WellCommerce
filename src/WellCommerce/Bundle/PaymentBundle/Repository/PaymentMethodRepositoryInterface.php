@@ -23,4 +23,6 @@ use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodInterface;
 interface PaymentMethodRepositoryInterface extends RepositoryInterface
 {
     public function getDefaultPaymentMethod() : PaymentMethodInterface;
+    
+    public function getDataGridFilterOptions(): array;
 }
