@@ -31,22 +31,13 @@ class Locale implements LocaleInterface
     use CurrencyAwareTrait;
     use EnableableTrait;
     
-    /**
-     * @var string
-     */
     protected $code = '';
     
-    /**
-     * {@inheritdoc}
-     */
     public function getCode(): string
     {
         return $this->code;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function setCode(string $code)
     {
         $this->code = $code;

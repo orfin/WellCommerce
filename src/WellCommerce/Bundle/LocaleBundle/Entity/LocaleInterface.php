@@ -25,13 +25,7 @@ use WellCommerce\Bundle\CurrencyBundle\Entity\CurrencyAwareInterface;
  */
 interface LocaleInterface extends EntityInterface, EnableableInterface, TimestampableInterface, BlameableInterface, CurrencyAwareInterface
 {
-    /**
-     * @return string
-     */
     public function getCode() : string;
 
-    /**
-     * @param string $code
-     */
     public function setCode(string $code);
 }
