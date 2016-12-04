@@ -27,114 +27,62 @@ class Media implements MediaInterface
     use Timestampable;
     use Blameable;
     
-    /**
-     * @var string
-     */
-    protected $name = '';
-    
-    /**
-     * @var string
-     */
-    protected $path = '';
-    
-    /**
-     * @var string
-     */
+    protected $name      = '';
+    protected $path      = '';
     protected $extension = '';
+    protected $mime      = '';
+    protected $size      = 0;
     
-    /**
-     * @var string
-     */
-    protected $mime = '';
-    
-    /**
-     * @var string
-     */
-    protected $size = 0;
-    
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): string
     {
         return $this->name;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function setName(string $name)
     {
         $this->name = $name;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function getPath(): string
     {
         return $this->path;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function setPath(string $path)
     {
         $this->path = $path;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function getMime(): string
     {
         return $this->mime;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function setMime(string $mime)
     {
         $this->mime = $mime;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function getSize(): int
     {
         return $this->size;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function setSize(int $size)
     {
         $this->size = $size;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function getFullName(): string
     {
         return sprintf('%s.%s', $this->id, $this->extension);
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function getExtension(): string
     {
         return $this->extension;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function setExtension(string $extension)
     {
         $this->extension = $extension;

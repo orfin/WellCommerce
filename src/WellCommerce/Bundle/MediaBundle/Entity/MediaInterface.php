@@ -23,58 +23,25 @@ use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
  */
 interface MediaInterface extends EntityInterface, TimestampableInterface, BlameableInterface
 {
-    /**
-     * @return string
-     */
-    public function getName() : string;
+    public function getName(): string;
     
-    /**
-     * @param string $name
-     */
     public function setName(string $name);
     
-    /**
-     * @return string
-     */
-    public function getPath() : string;
+    public function getPath(): string;
     
-    /**
-     * @param string $path
-     */
     public function setPath(string $path);
     
-    /**
-     * @return string
-     */
-    public function getMime() : string;
+    public function getMime(): string;
     
-    /**
-     * @param string $mime
-     */
     public function setMime(string $mime);
     
-    /**
-     * @return int
-     */
-    public function getSize() : int;
+    public function getSize(): int;
     
-    /**
-     * @param int $size
-     */
     public function setSize(int $size);
     
-    /**
-     * @return string
-     */
-    public function getFullName() : string;
+    public function getFullName(): string;
     
-    /**
-     * @return string
-     */
-    public function getExtension() : string;
+    public function getExtension(): string;
     
-    /**
-     * @param string $extension
-     */
     public function setExtension(string $extension);
 }
