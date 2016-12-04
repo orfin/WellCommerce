@@ -33,53 +33,23 @@ interface ShopInterface extends
     ThemeAwareInterface,
     CompanyAwareInterface
 {
-    /**
-     * @return string
-     */
-    public function getName() : string;
+    public function getName(): string;
     
-    /**
-     * @param string $name
-     */
     public function setName(string $name);
     
-    /**
-     * @return string
-     */
-    public function getUrl() : string;
+    public function getUrl(): string;
     
-    /**
-     * @param string $url
-     */
     public function setUrl(string $url);
     
-    /**
-     * @return string
-     */
-    public function getDefaultCountry() : string;
+    public function getDefaultCountry(): string;
     
-    /**
-     * @param string $defaultCountry
-     */
     public function setDefaultCountry(string $defaultCountry);
     
-    /**
-     * @return string
-     */
-    public function getDefaultCurrency() : string;
+    public function getDefaultCurrency(): string;
     
-    /**
-     * @param string $defaultCurrency
-     */
     public function setDefaultCurrency(string $defaultCurrency);
     
-    /**
-     * @param MailerConfiguration $configuration
-     */
     public function setMailerConfiguration(MailerConfiguration $configuration);
     
-    /**
-     * @return MailerConfiguration
-     */
-    public function getMailerConfiguration() : MailerConfiguration;
+    public function getMailerConfiguration(): MailerConfiguration;
 }

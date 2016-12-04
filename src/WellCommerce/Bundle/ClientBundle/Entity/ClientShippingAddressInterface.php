@@ -19,11 +19,11 @@ namespace WellCommerce\Bundle\ClientBundle\Entity;
  */
 interface ClientShippingAddressInterface extends ClientAddressInterface
 {
-    public function getCopyBillingAddress() : bool;
-
+    public function isCopyBillingAddress(): bool;
+    
     public function setCopyBillingAddress(bool $copyBillingAddress);
     
-    public function getCompanyName();
+    public function getCompanyName(): string;
     
     public function setCompanyName(string $companyName);
 }

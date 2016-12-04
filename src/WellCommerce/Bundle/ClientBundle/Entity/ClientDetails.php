@@ -19,57 +19,23 @@ namespace WellCommerce\Bundle\ClientBundle\Entity;
  */
 class ClientDetails implements ClientDetailsInterface
 {
-    /**
-     * @var string
-     */
-    protected $password;
+    protected $password              = '';
+    protected $passwordConfirm       = '';
+    protected $username              = '';
+    protected $salt                  = '';
+    protected $discount              = 0.00;
+    protected $conditionsAccepted    = false;
+    protected $newsletterAccepted    = false;
+    protected $resetPasswordHash     = '';
+    protected $legacyPassword        = '';
+    protected $legacyPasswordEncoder = '';
     
-    /**
-     * @var string
-     */
-    protected $passwordConfirm;
+    public function __construct()
+    {
+        $this->salt = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
+    }
     
-    /**
-     * @var string
-     */
-    protected $username;
-    
-    /**
-     * @var string
-     */
-    protected $salt;
-    
-    /**
-     * @var float
-     */
-    protected $discount;
-    
-    /**
-     * @var bool
-     */
-    protected $conditionsAccepted;
-    
-    /**
-     * @var bool
-     */
-    protected $newsletterAccepted;
-    
-    /**
-     * @var string
-     */
-    protected $resetPasswordHash;
-    
-    /**
-     * @var string|null
-     */
-    protected $legacyPassword;
-    
-    /**
-     * @var string|null
-     */
-    protected $legacyPasswordEncoder;
-    
-    public function getDiscount() : float
+    public function getDiscount(): float
     {
         return $this->discount;
     }
@@ -79,7 +45,7 @@ class ClientDetails implements ClientDetailsInterface
         $this->discount = $discount;
     }
     
-    public function getPassword() : string
+    public function getPassword(): string
     {
         return $this->password;
     }
@@ -109,7 +75,7 @@ class ClientDetails implements ClientDetailsInterface
         return $this->passwordConfirm;
     }
     
-    public function isPasswordConfirmed() : bool
+    public function isPasswordConfirmed(): bool
     {
         return strlen($this->passwordConfirm) && password_verify($this->passwordConfirm, $this->password);
     }
@@ -124,7 +90,7 @@ class ClientDetails implements ClientDetailsInterface
         $this->salt = $salt;
     }
     
-    public function getUsername() : string
+    public function getUsername(): string
     {
         return $this->username;
     }
@@ -134,7 +100,7 @@ class ClientDetails implements ClientDetailsInterface
         $this->username = $username;
     }
     
-    public function isConditionsAccepted() : bool
+    public function isConditionsAccepted(): bool
     {
         return $this->conditionsAccepted;
     }
@@ -144,7 +110,7 @@ class ClientDetails implements ClientDetailsInterface
         $this->conditionsAccepted = $conditionsAccepted;
     }
     
-    public function isNewsletterAccepted() : bool
+    public function isNewsletterAccepted(): bool
     {
         return $this->newsletterAccepted;
     }
@@ -164,34 +130,22 @@ class ClientDetails implements ClientDetailsInterface
         $this->resetPasswordHash = $resetPasswordHash;
     }
     
-    /**
-     * @return null|string
-     */
-    public function getLegacyPassword ()
+    public function getLegacyPassword(): string
     {
         return $this->legacyPassword;
     }
     
-    /**
-     * @param null|string $legacyPassword
-     */
-    public function setLegacyPassword ($legacyPassword)
+    public function setLegacyPassword(string $legacyPassword)
     {
         $this->legacyPassword = $legacyPassword;
     }
     
-    /**
-     * @return null|string
-     */
-    public function getLegacyPasswordEncoder ()
+    public function getLegacyPasswordEncoder(): string
     {
         return $this->legacyPasswordEncoder;
     }
     
-    /**
-     * @param null|string $legacyPasswordEncoder
-     */
-    public function setLegacyPasswordEncoder ($legacyPasswordEncoder)
+    public function setLegacyPasswordEncoder(string $legacyPasswordEncoder)
     {
         $this->legacyPasswordEncoder = $legacyPasswordEncoder;
     }

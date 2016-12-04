@@ -11,6 +11,7 @@
  */
 namespace WellCommerce\Bundle\ClientBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
@@ -30,10 +31,7 @@ class ClientGroup implements ClientGroupInterface
     use Timestampable;
     use Blameable;
     
-    /**
-     * @var float
-     */
-    protected $discount;
+    protected $discount = 0.00;
     
     /**
      * @var Collection
@@ -45,7 +43,13 @@ class ClientGroup implements ClientGroupInterface
      */
     protected $pages;
     
-    public function getDiscount() : float
+    public function __construct()
+    {
+        $this->clients = new ArrayCollection();
+        $this->pages   = new ArrayCollection();
+    }
+    
+    public function getDiscount(): float
     {
         return $this->discount;
     }
@@ -60,7 +64,7 @@ class ClientGroup implements ClientGroupInterface
         $this->clients = $clients;
     }
     
-    public function getClients() : Collection
+    public function getClients(): Collection
     {
         return $this->clients;
     }
@@ -70,7 +74,7 @@ class ClientGroup implements ClientGroupInterface
         $this->clients->add($client);
     }
     
-    public function getPages() : Collection
+    public function getPages(): Collection
     {
         return $this->pages;
     }

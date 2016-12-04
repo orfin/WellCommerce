@@ -28,14 +28,14 @@ class ProductStatus implements ProductStatusInterface
     use Translatable;
     use Timestampable;
     use Blameable;
-
-    protected $symbol;
-
-    public function getSymbol() : string
+    
+    protected $symbol = '';
+    
+    public function getSymbol(): string
     {
         return $this->symbol;
     }
-
+    
     public function setSymbol(string $symbol)
     {
         $this->symbol = $symbol;

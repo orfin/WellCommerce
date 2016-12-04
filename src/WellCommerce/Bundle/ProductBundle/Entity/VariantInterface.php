@@ -35,73 +35,31 @@ interface VariantInterface extends
     MediaAwareInterface,
     EnableableInterface
 {
-    /**
-     * @return float
-     */
     public function getWeight() : float;
-
-    /**
-     * @param float $weight
-     */
+    
     public function setWeight(float $weight);
 
-    /**
-     * @return string
-     */
     public function getSymbol() : string;
 
-    /**
-     * @param string $symbol
-     */
     public function setSymbol(string $symbol);
-
-    /**
-     * @return int
-     */
+    
     public function getStock() : int;
 
-    /**
-     * @param int $stock
-     */
     public function setStock(int $stock);
 
-    /**
-     * @return DiscountablePrice
-     */
     public function getSellPrice() : DiscountablePrice;
 
-    /**
-     * @param DiscountablePrice $sellPrice
-     */
     public function setSellPrice(DiscountablePrice $sellPrice);
 
-    /**
-     * @return float
-     */
     public function getModifierValue() : float;
 
-    /**
-     * @param float $modifierValue
-     */
     public function setModifierValue(float $modifierValue);
 
-    /**
-     * @return string
-     */
     public function getModifierType() : string;
 
-    /**
-     * @param string $modifierType
-     */
     public function setModifierType(string $modifierType);
 
-    /**
-     * @return Collection
-     */
     public function getOptions() : Collection;
 
-    /**
-     * @param Collection $sets
-     */
     public function setOptions(Collection $options);
 }

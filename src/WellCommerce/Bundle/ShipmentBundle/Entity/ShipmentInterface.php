@@ -22,54 +22,23 @@ use WellCommerce\Bundle\OrderBundle\Entity\OrderAwareInterface;
  */
 interface ShipmentInterface extends EntityInterface, OrderAwareInterface
 {
-    /**
-     * @return string
-     */
     public function getGuid(): string;
     
-    /**
-     * @param string $guid
-     */
     public function setGuid(string $guid);
     
-    /**
-     * @return string
-     */
     public function getPackageNumber(): string;
     
-    /**
-     * @param string $packageNumber
-     */
     public function setPackageNumber(string $packageNumber);
     
-    /**
-     * @return string
-     */
     public function getCourier(): string;
     
-    /**
-     * @param string $courier
-     */
     public function setCourier(string $courier);
     
-    /**
-     * @return boolean
-     */
     public function isSent(): bool;
     
-    /**
-     * @param boolean $sent
-     */
     public function setSent(bool $sent);
     
-    
-    /**
-     * @return array
-     */
     public function getFormData(): array;
     
-    /**
-     * @param array $formData
-     */
     public function setFormData(array $formData);
 }

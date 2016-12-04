@@ -39,10 +39,11 @@ class Variant implements VariantInterface
     use EnableableTrait;
     use VariantExtraTrait;
     
-    /**
-     * @var Collection
-     */
-    protected $options;
+    protected $weight        = 0.00;
+    protected $symbol        = '';
+    protected $stock         = 0;
+    protected $modifierType  = '%';
+    protected $modifierValue = 100.00;
     
     /**
      * @var DiscountablePrice
@@ -50,46 +51,21 @@ class Variant implements VariantInterface
     protected $sellPrice;
     
     /**
-     * @var float
+     * @var Collection
      */
-    protected $weight;
-    
-    /**
-     * @var string
-     */
-    protected $symbol;
-    
-    /**
-     * @var int
-     */
-    protected $stock;
-    
-    /**
-     * @var string
-     */
-    protected $modifierType;
-    
-    /**
-     * @var float
-     */
-    protected $modifierValue;
+    protected $options;
     
     public function __construct()
     {
-        $this->options = new ArrayCollection();
+        $this->sellPrice = new DiscountablePrice();
+        $this->options   = new ArrayCollection();
     }
     
-    /**
-     * {@inheritdoc}
-     */
-    public function getOptions() : Collection
+    public function getOptions(): Collection
     {
         return $this->options;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function setOptions(Collection $options)
     {
         if ($this->options instanceof Collection) {
@@ -99,7 +75,7 @@ class Variant implements VariantInterface
         $this->options = $options;
     }
     
-    protected function synchronizeOptions(Collection $options)
+    private function synchronizeOptions(Collection $options)
     {
         $this->options->map(function (VariantOptionInterface $option) use ($options) {
             if (false === $options->contains($option)) {
@@ -108,97 +84,61 @@ class Variant implements VariantInterface
         });
     }
     
-    /**
-     * {@inheritdoc}
-     */
-    public function getWeight() : float
+    public function getWeight(): float
     {
         return $this->weight;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function setWeight(float $weight)
     {
         $this->weight = $weight;
     }
     
-    /**
-     * {@inheritdoc}
-     */
-    public function getSymbol() : string
+    public function getSymbol(): string
     {
         return $this->symbol;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function setSymbol(string $symbol)
     {
         $this->symbol = $symbol;
     }
     
-    /**
-     * {@inheritdoc}
-     */
-    public function getStock() : int
+    public function getStock(): int
     {
         return $this->stock;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function setStock(int $stock)
     {
         $this->stock = $stock;
     }
     
-    /**
-     * {@inheritdoc}
-     */
-    public function getSellPrice() : DiscountablePrice
+    public function getSellPrice(): DiscountablePrice
     {
         return $this->sellPrice;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function setSellPrice(DiscountablePrice $sellPrice)
     {
         $this->sellPrice = $sellPrice;
     }
     
-    /**
-     * {@inheritdoc}
-     */
-    public function getModifierValue() : float
+    public function getModifierValue(): float
     {
         return $this->modifierValue;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function setModifierValue(float $modifierValue)
     {
         $this->modifierValue = $modifierValue;
     }
     
-    /**
-     * {@inheritdoc}
-     */
-    public function getModifierType() : string
+    public function getModifierType(): string
     {
         return $this->modifierType;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function setModifierType(string $modifierType)
     {
         $this->modifierType = $modifierType;

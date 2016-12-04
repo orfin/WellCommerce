@@ -23,34 +23,15 @@ use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
  */
 interface ReviewRecommendationInterface extends EntityInterface, EnableableInterface, TimestampableInterface
 {
-    /**
-     * @return bool
-     */
-    public function getLiked() : bool;
+    public function getLiked(): bool;
     
-    /**
-     * @param bool $like
-     */
     public function setLiked(bool $like);
     
-    /**
-     * @return bool
-     */
-    public function getUnliked() : bool;
+    public function getUnliked(): bool;
     
-    /**
-     * @param bool $unlike
-     */
     public function setUnliked(bool $unlike);
     
-    /**
-     * @return ReviewInterface
-     */
-    public function getReview() : ReviewInterface;
+    public function getReview(): ReviewInterface;
     
-    /**
-     * {@inheritdoc}
-     */
     public function setReview(ReviewInterface $review);
-    
 }

@@ -53,30 +53,12 @@ class Product implements ProductInterface
     use AvailabilityAwareTrait;
     use ProductExtraTrait;
     
-    /**
-     * @var string
-     */
-    protected $sku = '';
     
-    /**
-     * @var Collection
-     */
-    protected $categories;
-    
-    /**
-     * @var Collection
-     */
-    protected $distinctions;
-    
-    /**
-     * @var Collection
-     */
-    protected $productPhotos;
-    
-    /**
-     * @var int
-     */
-    protected $stock = 0;
+    protected $sku         = '';
+    protected $stock       = 0;
+    protected $trackStock  = true;
+    protected $weight      = 0.00;
+    protected $packageSize = 1.00;
     
     /**
      * @var Price
@@ -99,9 +81,9 @@ class Product implements ProductInterface
     protected $sellPriceTax;
     
     /**
-     * @var Collection
+     * @var Dimension
      */
-    protected $variants;
+    protected $dimension;
     
     /**
      * @var AttributeGroupInterface
@@ -109,24 +91,24 @@ class Product implements ProductInterface
     protected $attributeGroup;
     
     /**
-     * @var bool
+     * @var Collection
      */
-    protected $trackStock = true;
+    protected $variants;
     
     /**
-     * @var float
+     * @var Collection
      */
-    protected $weight = 0;
+    protected $categories;
     
     /**
-     * @var Dimension
+     * @var Collection
      */
-    protected $dimension;
+    protected $distinctions;
     
     /**
-     * @var float
+     * @var Collection
      */
-    protected $packageSize = 1;
+    protected $productPhotos;
     
     public function __construct()
     {

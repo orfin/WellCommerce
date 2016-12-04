@@ -19,53 +19,23 @@ namespace WellCommerce\Bundle\ClientBundle\Entity;
  */
 interface ClientContactDetailsInterface
 {
-    /**
-     * @return string
-     */
-    public function getFirstName();
+    public function getFirstName(): string;
     
-    /**
-     * @param string $firstName
-     */
-    public function setFirstName($firstName);
+    public function setFirstName(string $firstName);
     
-    /**
-     * @return string
-     */
-    public function getLastName();
+    public function getLastName(): string;
     
-    /**
-     * @param string $lastName
-     */
-    public function setLastName($lastName);
+    public function setLastName(string $lastName);
     
-    /**
-     * @return string
-     */
-    public function getPhone();
+    public function getPhone(): string;
     
-    /**
-     * @param string $phone
-     */
-    public function setPhone($phone);
+    public function setPhone(string $phone);
     
-    /**
-     * @return string
-     */
-    public function getSecondaryPhone();
+    public function getSecondaryPhone(): string;
     
-    /**
-     * @param string $secondaryPhone
-     */
-    public function setSecondaryPhone($secondaryPhone);
+    public function setSecondaryPhone(string $secondaryPhone);
     
-    /**
-     * @return string
-     */
-    public function getEmail();
+    public function getEmail(): string;
     
-    /**
-     * @param string $email
-     */
-    public function setEmail($email);
+    public function setEmail(string $email);
 }

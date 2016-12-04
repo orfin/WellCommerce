@@ -27,64 +27,39 @@ class ReviewRecommendation implements ReviewRecommendationInterface
     use Timestampable;
     use EnableableTrait;
     
-    /**
-     * @var int
-     */
-    protected $liked;
-    
-    /**
-     * @var int
-     */
-    protected $unliked;
+    protected $liked   = false;
+    protected $unliked = false;
     
     /**
      * @var ReviewInterface
      */
     protected $review;
     
-    /**
-     * {@inheritdoc}
-     */
-    public function getLiked() : bool
+    public function getLiked(): bool
     {
         return $this->liked;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function setLiked(bool $liked)
     {
         $this->liked = $liked;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function setUnliked(bool $unliked)
     {
         $this->unliked = $unliked;
     }
     
-    /**
-     * {@inheritdoc}
-     */
-    public function getUnliked() : bool
+    public function getUnliked(): bool
     {
         return $this->unliked;
     }
     
-    /**
-     * {@inheritdoc}
-     */
-    public function getReview() : ReviewInterface
+    public function getReview(): ReviewInterface
     {
         return $this->review;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function setReview(ReviewInterface $review)
     {
         $this->review = $review;

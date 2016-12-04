@@ -28,109 +28,74 @@ class Shipment implements ShipmentInterface
     use Timestampable;
     use Blameable;
     use OrderAwareTrait;
-
-    /**
-     * @var string
-     */
-    protected $guid;
     
-    /**
-     * @var string
-     */
-    protected $packageNumber;
+    protected $guid          = '';
+    protected $packageNumber = '';
+    protected $courier       = '';
+    protected $sent          = false;
+    protected $formData      = [];
     
-    /**
-     * @var string
-     */
-    protected $courier;
+    public function __construct()
+    {
+        $this->guid = $this->generateGuid();
+    }
     
-    /**
-     * @var bool
-     */
-    protected $sent;
-    
-    /**
-     * @var array
-     */
-    protected $formData;
-    
-    /**
-     * @return string
-     */
     public function getGuid(): string
     {
         return $this->guid;
     }
     
-    /**
-     * @param string $guid
-     */
     public function setGuid(string $guid)
     {
         $this->guid = $guid;
     }
     
-    /**
-     * @return string
-     */
     public function getPackageNumber(): string
     {
         return $this->packageNumber;
     }
     
-    /**
-     * @param string $packageNumber
-     */
     public function setPackageNumber(string $packageNumber)
     {
         $this->packageNumber = $packageNumber;
     }
-    
-    /**
-     * @return string
-     */
+
     public function getCourier(): string
     {
         return $this->courier;
     }
     
-    /**
-     * @param string $courier
-     */
     public function setCourier(string $courier)
     {
         $this->courier = $courier;
     }
     
-    /**
-     * @return boolean
-     */
     public function isSent(): bool
     {
         return $this->sent;
     }
     
-    /**
-     * @param boolean $sent
-     */
     public function setSent(bool $sent)
     {
         $this->sent = $sent;
     }
     
-    /**
-     * @return array
-     */
     public function getFormData(): array
     {
         return $this->formData;
     }
     
-    /**
-     * @param array $formData
-     */
     public function setFormData(array $formData)
     {
         $this->formData = $formData;
+    }
+    
+    private function generateGuid(): string
+    {
+        mt_srand((double)microtime() * 10000);
+        $charid = strtoupper(md5(uniqid(rand(), true)));
+        $guid   = substr($charid, 0, 32);
+        
+        return $guid;
     }
 }

@@ -28,32 +28,32 @@ class ProductPhoto implements ProductPhotoInterface
     use Timestampable;
     use HierarchyAwareTrait;
     use ProductAwareTrait;
-
+    
     /**
      * @var MediaInterface
      */
     protected $photo;
-
+    
     /**
      * @var bool
      */
-    protected $mainPhoto;
-
-    public function getPhoto() : MediaInterface
+    protected $mainPhoto = true;
+    
+    public function getPhoto(): MediaInterface
     {
         return $this->photo;
     }
-
+    
     public function setPhoto(MediaInterface $photo)
     {
         $this->photo = $photo;
     }
-
-    public function isMainPhoto() : bool
+    
+    public function isMainPhoto(): bool
     {
         return $this->mainPhoto;
     }
-
+    
     public function setMainPhoto(bool $mainPhoto)
     {
         $this->mainPhoto = $mainPhoto;

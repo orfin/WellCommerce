@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\ShippingBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
@@ -37,15 +38,9 @@ class ShippingMethod implements ShippingMethodInterface
     use HierarchyAwareTrait;
     use TaxAwareTrait;
     
-    /**
-     * @var string
-     */
-    protected $calculator;
-    
-    /**
-     * @var string
-     */
-    protected $optionsProvider;
+    protected $calculator      = '';
+    protected $optionsProvider = '';
+    protected $countries       = [];
     
     /**
      * @var CurrencyInterface
@@ -62,94 +57,62 @@ class ShippingMethod implements ShippingMethodInterface
      */
     protected $paymentMethods;
     
-    /**
-     * @var array
-     */
-    protected $countries;
+    public function __construct()
+    {
+        $this->costs          = new ArrayCollection();
+        $this->paymentMethods = new ArrayCollection();
+    }
     
-    /**
-     * {@inheritdoc}
-     */
-    public function getCalculator() : string
+    public function getCalculator(): string
     {
         return $this->calculator;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function setCalculator(string $calculator)
     {
         $this->calculator = $calculator;
     }
     
-    /**
-     * @return string
-     */
-    public function getOptionsProvider() : string
+    public function getOptionsProvider(): string
     {
         return $this->optionsProvider;
     }
     
-    /**
-     * @param string $optionsProvider
-     */
     public function setOptionsProvider(string $optionsProvider)
     {
         $this->optionsProvider = $optionsProvider;
     }
     
-    /**
-     * {@inheritdoc}
-     */
-    public function getCosts() : Collection
+    public function getCosts(): Collection
     {
         return $this->costs;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function setCosts(Collection $costs)
     {
         $this->costs = $costs;
     }
     
-    /**
-     * {@inheritdoc}
-     */
-    public function getCurrency()
+    public function getCurrency(): CurrencyInterface
     {
         return $this->currency;
     }
     
-    /**
-     * {@inheritdoc}
-     */
-    public function setCurrency(CurrencyInterface $currency = null)
+    public function setCurrency(CurrencyInterface $currency)
     {
         $this->currency = $currency;
     }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function getPaymentMethods() : Collection
+
+    public function getPaymentMethods(): Collection
     {
         return $this->paymentMethods;
     }
-    
-    /**
-     * {@inheritdoc}
-     */
+
     public function getCountries(): array
     {
         return $this->countries;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function setCountries(array $countries)
     {
         $this->countries = $countries;

@@ -25,63 +25,27 @@ use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareInterface;
  */
 interface ReviewInterface extends EntityInterface, EnableableInterface, ProductAwareInterface, TimestampableInterface
 {
-    /**
-     * @return string
-     */
-    public function getNick() : string;
+    public function getNick(): string;
     
-    /**
-     * @param string $nick
-     */
     public function setNick(string $nick);
     
-    /**
-     * @return string
-     */
-    public function getReview() : string;
+    public function getReview(): string;
     
-    /**
-     * @param string $review
-     */
     public function setReview(string $review);
     
-    /**
-     * @return int
-     */
-    public function getRating() : int;
+    public function getRating(): int;
     
-    /**
-     * @param int $rating
-     */
     public function setRating(int $rating);
     
-    /**
-     * @return int
-     */
-    public function getRatingLevel() : int;
+    public function getRatingLevel(): int;
     
-    /**
-     * @param int $ratingLevel
-     */
     public function setRatingLevel(int $ratingLevel);
     
-    /**
-     * @return int
-     */
-    public function getRatingRecommendation() : int;
+    public function getRatingRecommendation(): int;
     
-    /**
-     * @param int $ratingRecommendation
-     */
     public function setRatingRecommendation(int $ratingRecommendation);
     
-    /**
-     * @return Collection
-     */
-    public function getReviewRecommendations() : Collection;
+    public function getReviewRecommendations(): Collection;
     
-    /**
-     * @param Collection $reviewRecommendations
-     */
     public function setReviewRecommendations(Collection $reviewRecommendations);
 }

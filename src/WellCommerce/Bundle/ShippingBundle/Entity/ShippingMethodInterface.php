@@ -36,58 +36,25 @@ interface ShippingMethodInterface extends
     TaxAwareInterface,
     HierarchyAwareInterface
 {
-    /**
-     * @return string
-     */
-    public function getCalculator() : string;
-
-    /**
-     * @param $calculator
-     */
+    public function getCalculator(): string;
+    
     public function setCalculator(string $calculator);
     
-    /**
-     * @return string
-     */
-    public function getOptionsProvider() : string;
+    public function getOptionsProvider(): string;
     
-    /**
-     * @param string $optionsProvider
-     */
     public function setOptionsProvider(string $optionsProvider);
     
-    /**
-     * @return Collection
-     */
-    public function getCosts() : Collection;
-
-    /**
-     * @param Collection $costs
-     */
-    public function setCosts(Collection $costs);
-
-    /**
-     * @return CurrencyInterface|null
-     */
-    public function getCurrency();
-
-    /**
-     * @param CurrencyInterface|null $currency
-     */
-    public function setCurrency(CurrencyInterface $currency = null);
-
-    /**
-     * @return Collection
-     */
-    public function getPaymentMethods() : Collection;
+    public function getCosts(): Collection;
     
-    /**
-     * {@inheritdoc}
-     */
+    public function setCosts(Collection $costs);
+    
+    public function getCurrency();
+    
+    public function setCurrency(CurrencyInterface $currency = null);
+    
+    public function getPaymentMethods(): Collection;
+    
     public function getCountries(): array;
     
-    /**
-     * {@inheritdoc}
-     */
     public function setCountries(array $countries);
 }

@@ -19,116 +19,58 @@ namespace WellCommerce\Bundle\ClientBundle\Entity;
  */
 class ClientContactDetails implements ClientContactDetailsInterface
 {
-    /**
-     * @var string
-     */
-    protected $firstName;
+    protected $firstName      = '';
+    protected $lastName       = '';
+    protected $phone          = '';
+    protected $secondaryPhone = '';
+    protected $email          = '';
     
-    /**
-     * @var string
-     */
-    protected $lastName;
-    
-    /**
-     * @var string
-     */
-    protected $phone;
-    
-    /**
-     * @var string
-     */
-    protected $secondaryPhone;
-    
-    /**
-     * @var string
-     */
-    protected $email;
-    
-    public function __construct()
-    {
-        $this->setFirstName('');
-        $this->setLastName('');
-        $this->setEmail('');
-        $this->setPhone('');
-        $this->setSecondaryPhone('');
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function getFirstName()
+    public function getFirstName(): string
     {
         return $this->firstName;
     }
     
-    /**
-     * {@inheritdoc}
-     */
-    public function setFirstName($firstName)
+    public function setFirstName(string $firstName)
     {
         $this->firstName = $firstName;
     }
     
-    /**
-     * {@inheritdoc}
-     */
-    public function getLastName()
+    public function getLastName(): string
     {
         return $this->lastName;
     }
     
-    /**
-     * {@inheritdoc}
-     */
-    public function setLastName($lastName)
+    public function setLastName(string $lastName)
     {
         $this->lastName = $lastName;
     }
     
-    /**
-     * {@inheritdoc}
-     */
-    public function getPhone()
+    public function getPhone(): string
     {
         return $this->phone;
     }
     
-    /**
-     * {@inheritdoc}
-     */
-    public function setPhone($phone)
+    public function setPhone(string $phone)
     {
         $this->phone = $phone;
     }
     
-    /**
-     * {@inheritdoc}
-     */
-    public function getSecondaryPhone()
+    public function getSecondaryPhone(): string
     {
         return $this->secondaryPhone;
     }
     
-    /**
-     * {@inheritdoc}
-     */
-    public function setSecondaryPhone($secondaryPhone)
+    public function setSecondaryPhone(string $secondaryPhone)
     {
         $this->secondaryPhone = $secondaryPhone;
     }
     
-    /**
-     * {@inheritdoc}
-     */
-    public function getEmail()
+    public function getEmail(): string
     {
         return $this->email;
     }
     
-    /**
-     * {@inheritdoc}
-     */
-    public function setEmail($email)
+    public function setEmail(string $email)
     {
         $this->email = $email;
     }
