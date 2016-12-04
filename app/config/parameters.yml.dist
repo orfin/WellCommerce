@@ -7,10 +7,11 @@ parameters:
     database_password: ~
 
     mailer_host:               127.0.0.1
-    mailer_from:               ~
+    mailer_from:               ""
     mailer_port:               25
-    mailer_user:               ~
-    mailer_password:           ~
+    mailer_user:               ""
+    mailer_password:           ""
+    mailer_bcc:                ""
 
     prod_log_path:     "%kernel.logs_dir%/%kernel.environment%.log"
 
