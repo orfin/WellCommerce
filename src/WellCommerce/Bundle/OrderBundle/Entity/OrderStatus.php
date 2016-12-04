@@ -30,43 +30,28 @@ class OrderStatus implements OrderStatusInterface
     use Translatable;
     use EnableableTrait;
     
+    protected $colour = '#fff';
+    
     /**
      * @var OrderStatusGroupInterface
      */
     protected $orderStatusGroup;
     
-    /**
-     * @var string
-     */
-    protected $colour;
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function getOrderStatusGroup() : OrderStatusGroupInterface
+    public function getOrderStatusGroup(): OrderStatusGroupInterface
     {
         return $this->orderStatusGroup;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function setOrderStatusGroup(OrderStatusGroupInterface $orderStatusGroup)
     {
         $this->orderStatusGroup = $orderStatusGroup;
     }
     
-    /**
-     * @return string
-     */
-    public function getColour()
+    public function getColour(): string
     {
         return $this->colour;
     }
     
-    /**
-     * @param string $colour
-     */
     public function setColour(string $colour)
     {
         $this->colour = $colour;

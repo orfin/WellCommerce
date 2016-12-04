@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Entity;
 
+use WellCommerce\Bundle\AppBundle\Entity\HierarchyAwareInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\EntityInterface;
 
 /**
@@ -19,7 +20,7 @@ use WellCommerce\Bundle\CoreBundle\Entity\EntityInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface OrderModifierInterface extends EntityInterface
+interface OrderModifierInterface extends EntityInterface, HierarchyAwareInterface
 {
     public function setOrder(OrderInterface $order);
     
@@ -34,10 +35,6 @@ interface OrderModifierInterface extends EntityInterface
     public function isSubtraction() : bool;
     
     public function setSubtraction(bool $subtraction);
-    
-    public function getHierarchy() : int;
-    
-    public function setHierarchy(int $hierarchy);
     
     public function getNetAmount() : float;
     

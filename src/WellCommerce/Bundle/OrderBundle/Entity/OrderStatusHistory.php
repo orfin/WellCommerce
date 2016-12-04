@@ -27,65 +27,40 @@ class OrderStatusHistory implements OrderStatusHistoryInterface
     use Blameable;
     use OrderAwareTrait;
     
+    protected $comment = '';
+    protected $notify  = false;
+    
     /**
      * @var OrderStatusInterface
      */
     protected $orderStatus;
     
-    /**
-     * @var string
-     */
-    protected $comment;
-    
-    /**
-     * @var bool
-     */
-    protected $notify;
-    
-    /**
-     * {@inheritdoc}
-     */
     public function getOrderStatus()
     {
         return $this->orderStatus;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function setOrderStatus(OrderStatusInterface $orderStatus = null)
     {
         $this->orderStatus = $orderStatus;
         $this->getOrder()->setCurrentStatus($orderStatus);
     }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function getComment() : string
+
+    public function getComment(): string
     {
         return $this->comment;
     }
-    
-    /**
-     * {@inheritdoc}
-     */
+
     public function setComment(string $comment)
     {
         $this->comment = $comment;
     }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function isNotify() : bool
+
+    public function isNotify(): bool
     {
         return $this->notify;
     }
-    
-    /**
-     * {@inheritdoc}
-     */
+
     public function setNotify(bool $notify)
     {
         $this->notify = $notify;

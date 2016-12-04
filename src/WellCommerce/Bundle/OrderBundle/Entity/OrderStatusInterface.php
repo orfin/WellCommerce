@@ -30,23 +30,11 @@ interface OrderStatusInterface extends
     TranslatableInterface,
     BlameableInterface
 {
-    /**
-     * @return OrderStatusGroupInterface
-     */
-    public function getOrderStatusGroup() : OrderStatusGroupInterface;
+    public function getOrderStatusGroup(): OrderStatusGroupInterface;
     
-    /**
-     * @param OrderStatusGroupInterface $orderStatusGroup
-     */
     public function setOrderStatusGroup(OrderStatusGroupInterface $orderStatusGroup);
     
-    /**
-     * @return string
-     */
-    public function getColour();
+    public function getColour(): string;
     
-    /**
-     * @param string $colour
-     */
     public function setColour(string $colour);
 }

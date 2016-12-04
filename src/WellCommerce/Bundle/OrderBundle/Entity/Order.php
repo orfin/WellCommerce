@@ -11,6 +11,7 @@
  */
 namespace WellCommerce\Bundle\OrderBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientAwareTrait;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddressAwareTrait;
@@ -47,40 +48,15 @@ class Order implements OrderInterface
     use CouponAwareTrait;
     use OrderExtraTrait;
     
-    /**
-     * @var bool
-     */
-    protected $confirmed;
-    
-    /**
-     * @var string
-     */
-    protected $number;
-    
-    /**
-     * @var Collection|OrderProductInterface[]
-     */
-    protected $products;
-    
-    /**
-     * @var string
-     */
-    protected $currency;
-    
-    /**
-     * @var float
-     */
-    protected $currencyRate;
-    
-    /**
-     * @var Collection|PaymentInterface[]
-     */
-    protected $payments;
-    
-    /**
-     * @var string
-     */
-    protected $sessionId;
+    protected $confirmed            = false;
+    protected $number               = null;
+    protected $currency             = null;
+    protected $currencyRate         = 1.0000;
+    protected $sessionId            = '';
+    protected $shippingMethodOption = null;
+    protected $comment              = '';
+    protected $issueInvoice         = false;
+    protected $conditionsAccepted   = false;
     
     /**
      * @var OrderStatusInterface
@@ -88,9 +64,9 @@ class Order implements OrderInterface
     protected $currentStatus;
     
     /**
-     * @var Collection|OrderStatusHistoryInterface[]
+     * @var OrderSummary
      */
-    protected $orderStatusHistory;
+    protected $summary;
     
     /**
      * @var OrderProductTotalInterface
@@ -98,34 +74,34 @@ class Order implements OrderInterface
     protected $productTotal;
     
     /**
-     * @var Collection|OrderModifierInterface[]
+     * @var Collection
+     */
+    protected $products;
+    
+    /**
+     * @var Collection
+     */
+    protected $payments;
+    
+    /**
+     * @var Collection
+     */
+    protected $orderStatusHistory;
+    
+    /**
+     * @var Collection
      */
     protected $modifiers;
     
-    /**
-     * @var OrderSummary
-     */
-    protected $summary;
-    
-    /**
-     * @var string|null
-     */
-    protected $shippingMethodOption;
-    
-    /**
-     * @var string
-     */
-    protected $comment;
-    
-    /**
-     * @var bool
-     */
-    protected $issueInvoice;
-    
-    /**
-     * @var bool
-     */
-    protected $conditionsAccepted;
+    public function __construct()
+    {
+        $this->products           = new ArrayCollection();
+        $this->modifiers          = new ArrayCollection();
+        $this->payments           = new ArrayCollection();
+        $this->orderStatusHistory = new ArrayCollection();
+        $this->productTotal       = new OrderProductTotal();
+        $this->summary            = new OrderSummary();
+    }
     
     public function isConfirmed(): bool
     {
@@ -321,49 +297,31 @@ class Order implements OrderInterface
         return 0 === $this->productTotal->getQuantity();
     }
     
-    /**
-     * @return null|string
-     */
     public function getShippingMethodOption()
     {
         return $this->shippingMethodOption;
     }
     
-    /**
-     * @param null|string $shippingMethodOption
-     */
     public function setShippingMethodOption($shippingMethodOption)
     {
         $this->shippingMethodOption = $shippingMethodOption;
     }
     
-    /**
-     * @return boolean
-     */
     public function isConditionsAccepted(): bool
     {
         return $this->conditionsAccepted;
     }
     
-    /**
-     * @param boolean $conditionsAccepted
-     */
     public function setConditionsAccepted(bool $conditionsAccepted)
     {
         $this->conditionsAccepted = $conditionsAccepted;
     }
     
-    /**
-     * @return boolean
-     */
     public function isIssueInvoice(): bool
     {
         return $this->issueInvoice;
     }
     
-    /**
-     * @param boolean $issueInvoice
-     */
     public function setIssueInvoice(bool $issueInvoice)
     {
         $this->issueInvoice = $issueInvoice;

@@ -23,33 +23,15 @@ use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
  */
 interface OrderStatusHistoryInterface extends EntityInterface, OrderAwareInterface, TimestampableInterface, BlameableInterface
 {
-    /**
-     * @return OrderStatusInterface
-     */
     public function getOrderStatus();
-    
-    /**
-     * @param OrderStatusInterface $orderStatus
-     */
+
     public function setOrderStatus(OrderStatusInterface $orderStatus = null);
-    
-    /**
-     * @return string
-     */
+
     public function getComment() : string;
-    
-    /**
-     * @param string $comment
-     */
+
     public function setComment(string $comment);
-    
-    /**
-     * @return bool
-     */
+
     public function isNotify() : bool;
-    
-    /**
-     * @param bool $notify
-     */
+
     public function setNotify(bool $notify);
 }

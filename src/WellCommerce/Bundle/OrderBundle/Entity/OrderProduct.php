@@ -22,10 +22,10 @@ class OrderProduct implements OrderProductInterface
     use VariantAwareTrait;
     use OrderAwareTrait;
     
-    /**
-     * @var int
-     */
-    protected $quantity;
+    protected $quantity = 1;
+    protected $weight   = 0.00;
+    protected $options  = [];
+    protected $locked   = false;
     
     /**
      * @var Price
@@ -37,20 +37,11 @@ class OrderProduct implements OrderProductInterface
      */
     protected $sellPrice;
     
-    /**
-     * @var float
-     */
-    protected $weight;
-    
-    /**
-     * @var array
-     */
-    protected $options;
-    
-    /**
-     * @var bool
-     */
-    protected $locked;
+    public function __construct()
+    {
+        $this->buyPrice  = new Price();
+        $this->sellPrice = new Price();
+    }
     
     public function getCurrentStock(): int
     {

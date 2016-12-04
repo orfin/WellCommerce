@@ -24,26 +24,41 @@ use WellCommerce\Bundle\ShopBundle\Entity\ShopInterface;
  */
 final class OrderManager extends AbstractManager implements OrderManagerInterface
 {
-    public function getOrder(string $sessionId, ClientInterface $client = null, ShopInterface $shop, string $currency) : OrderInterface
+    public function getOrder(string $sessionId, ClientInterface $client = null, ShopInterface $shop, string $currency): OrderInterface
     {
         $order = $this->findOrder($sessionId, $client, $shop);
-
-        if (!$order instanceof OrderInterface) {
-            /** @var OrderInterface $order */
-            $order = $this->initResource();
-            $this->createResource($order);
+        
+        if ($order instanceof OrderInterface) {
+            if ($this->isOrderDirty($order, $currency, $client, $sessionId)) {
+                $order->setCurrency($currency);
+                $order->setClient($client);
+                $order->setSessionId($sessionId);
+                $this->updateResource($order);
+            }
+            
+            return $order;
         }
-
-        if ($this->isOrderDirty($order, $currency, $client, $sessionId)) {
-            $order->setCurrency($currency);
-            $order->setClient($client);
-            $order->setSessionId($sessionId);
-            $this->updateResource($order);
+        
+        /** @var OrderInterface $order */
+        $order = $this->initResource();
+        $order->setCurrency($currency);
+        $order->setShop($shop);
+        $order->setClient($client);
+        $order->setSessionId($sessionId);
+        
+        if ($client instanceof ClientInterface) {
+            $order->setClientDetails($client->getClientDetails());
+            $order->setContactDetails($client->getContactDetails());
+            $order->setBillingAddress($client->getBillingAddress());
+            $order->setShippingAddress($client->getShippingAddress());
+            $order->getClientDetails()->setResetPasswordHash(null);
         }
-
+        
+        $this->createResource($order);
+        
         return $order;
     }
-
+    
     public function findOrder(string $sessionId, ClientInterface $client = null, ShopInterface $shop)
     {
         if (null !== $client) {
@@ -54,29 +69,29 @@ final class OrderManager extends AbstractManager implements OrderManagerInterfac
         } else {
             $order = $this->getCurrentSessionOrder($sessionId, $shop);
         }
-
+        
         return $order;
     }
-
+    
     private function getCurrentClientOrder(ClientInterface $client, ShopInterface $shop)
     {
         return $this->getRepository()->findOneBy([
             'client'    => $client,
             'shop'      => $shop,
-            'confirmed' => false
+            'confirmed' => false,
         ]);
     }
-
+    
     private function getCurrentSessionOrder($sessionId, ShopInterface $shop)
     {
         return $this->getRepository()->findOneBy([
             'sessionId' => $sessionId,
             'shop'      => $shop,
-            'confirmed' => false
+            'confirmed' => false,
         ]);
     }
-
-    private function isOrderDirty(OrderInterface $order, string $currency, ClientInterface $client = null, string $sessionId) : bool
+    
+    private function isOrderDirty(OrderInterface $order, string $currency, ClientInterface $client = null, string $sessionId): bool
     {
         return $order->getClient() !== $client || $order->getCurrency() !== $currency || $order->getSessionId() !== $sessionId;
     }
