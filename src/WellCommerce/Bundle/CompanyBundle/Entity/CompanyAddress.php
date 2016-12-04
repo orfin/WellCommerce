@@ -19,7 +19,7 @@ use WellCommerce\Bundle\CoreBundle\Entity\AddressTrait;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CompanyAddress implements CompanyAddressInterface
+class CompanyAddress
 {
     use AddressTrait;
 }

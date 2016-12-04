@@ -26,66 +26,42 @@ class Company implements CompanyInterface
     use IdentifiableTrait;
     use Timestampable;
     use Blameable;
-
-    /**
-     * @var string
-     */
-    protected $name;
     
-    /**
-     * @var string
-     */
-    protected $shortName;
-
-    /**
-     * @var CompanyAddressInterface
-     */
+    protected $name      = '';
+    protected $shortName = '';
     protected $address;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName() : string
+    
+    public function __construct()
+    {
+        $this->address = new CompanyAddress();
+    }
+    
+    public function getName(): string
     {
         return $this->name;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function setName(string $name)
     {
         $this->name = $name;
     }
     
-    /**
-     * {@inheritdoc}
-     */
-    public function getShortName() : string
+    public function getShortName(): string
     {
         return $this->shortName;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function setShortName(string $shortName)
     {
         $this->shortName = $shortName;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAddress() : CompanyAddressInterface
+    
+    public function getAddress(): CompanyAddress
     {
         return $this->address;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setAddress(CompanyAddressInterface $address)
+    
+    public function setAddress(CompanyAddress $address)
     {
         $this->address = $address;
     }

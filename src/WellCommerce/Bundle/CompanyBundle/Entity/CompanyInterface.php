@@ -23,33 +23,15 @@ use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
  */
 interface CompanyInterface extends EntityInterface, TimestampableInterface, BlameableInterface
 {
-    /**
-     * @return string
-     */
-    public function getName() : string;
-
-    /**
-     * @param string $name
-     */
+    public function getName(): string;
+    
     public function setName(string $name);
-
-    /**
-     * @return string
-     */
-    public function getShortName() : string;
-
-    /**
-     * @param string $shortName
-     */
+    
+    public function getShortName(): string;
+    
     public function setShortName(string $shortName);
-
-    /**
-     * @return CompanyAddressInterface
-     */
-    public function getAddress() : CompanyAddressInterface;
-
-    /**
-     * @param CompanyAddressInterface $address
-     */
-    public function setAddress(CompanyAddressInterface $address);
+    
+    public function getAddress(): CompanyAddress;
+    
+    public function setAddress(CompanyAddress $address);
 }

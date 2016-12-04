@@ -19,14 +19,14 @@ namespace WellCommerce\Bundle\CoreBundle\Entity;
  */
 trait AddressTrait
 {
-    private $line1;
-    private $line2;
-    private $postalCode;
-    private $state;
-    private $city;
-    private $country;
+    protected $line1      = '';
+    protected $line2      = '';
+    protected $postalCode = '';
+    protected $state      = '';
+    protected $city       = '';
+    protected $country    = '';
     
-    public function getLine1() : string
+    public function getLine1(): string
     {
         return $this->line1;
     }
@@ -36,7 +36,7 @@ trait AddressTrait
         $this->line1 = $line1;
     }
     
-    public function getLine2() : string
+    public function getLine2(): string
     {
         return $this->line2;
     }
@@ -46,7 +46,7 @@ trait AddressTrait
         $this->line2 = $line2;
     }
     
-    public function getPostalCode() : string
+    public function getPostalCode(): string
     {
         return $this->postalCode;
     }
@@ -56,7 +56,7 @@ trait AddressTrait
         $this->postalCode = $postalCode;
     }
     
-    public function getState() : string
+    public function getState(): string
     {
         return $this->state;
     }
@@ -66,7 +66,7 @@ trait AddressTrait
         $this->state = $state;
     }
     
-    public function getCity() : string
+    public function getCity(): string
     {
         return $this->city;
     }
@@ -76,7 +76,7 @@ trait AddressTrait
         $this->city = $city;
     }
     
-    public function getCountry() : string
+    public function getCountry(): string
     {
         return $this->country;
     }
