@@ -20,6 +20,7 @@ use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 use WellCommerce\Bundle\AppBundle\Entity\HierarchyAwareTrait;
 use WellCommerce\Bundle\CoreBundle\Behaviours\Enableable\EnableableTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\IdentifiableTrait;
+use WellCommerce\Bundle\CurrencyBundle\Entity\CurrencyAwareTrait;
 use WellCommerce\Bundle\CurrencyBundle\Entity\CurrencyInterface;
 use WellCommerce\Bundle\TaxBundle\Entity\TaxAwareTrait;
 
@@ -37,6 +38,7 @@ class ShippingMethod implements ShippingMethodInterface
     use EnableableTrait;
     use HierarchyAwareTrait;
     use TaxAwareTrait;
+    use CurrencyAwareTrait;
     
     protected $calculator      = '';
     protected $optionsProvider = '';
@@ -93,21 +95,11 @@ class ShippingMethod implements ShippingMethodInterface
         $this->costs = $costs;
     }
     
-    public function getCurrency(): CurrencyInterface
-    {
-        return $this->currency;
-    }
-    
-    public function setCurrency(CurrencyInterface $currency)
-    {
-        $this->currency = $currency;
-    }
-
     public function getPaymentMethods(): Collection
     {
         return $this->paymentMethods;
     }
-
+    
     public function getCountries(): array
     {
         return $this->countries;

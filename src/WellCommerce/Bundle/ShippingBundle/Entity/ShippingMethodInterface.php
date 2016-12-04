@@ -48,10 +48,6 @@ interface ShippingMethodInterface extends
     
     public function setCosts(Collection $costs);
     
-    public function getCurrency();
-    
-    public function setCurrency(CurrencyInterface $currency = null);
-    
     public function getPaymentMethods(): Collection;
     
     public function getCountries(): array;
