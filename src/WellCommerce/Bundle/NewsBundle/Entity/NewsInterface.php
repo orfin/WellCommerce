@@ -25,43 +25,19 @@ use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
  */
 interface NewsInterface extends EntityInterface, TimestampableInterface, TranslatableInterface, BlameableInterface
 {
-    /**
-     * @return bool
-     */
-    public function getPublish() : bool;
+    public function getPublish(): bool;
     
-    /**
-     * @param bool $publish
-     */
     public function setPublish(bool $publish);
     
-    /**
-     * @return DateTime
-     */
-    public function getStartDate() : DateTime;
+    public function getStartDate(): DateTime;
     
-    /**
-     * @param DateTime $startDate
-     */
     public function setStartDate(DateTime $startDate);
     
-    /**
-     * @return DateTime
-     */
-    public function getEndDate() : DateTime;
+    public function getEndDate(): DateTime;
     
-    /**
-     * @param DateTime $endDate
-     */
     public function setEndDate(DateTime $endDate);
     
-    /**
-     * @return bool
-     */
-    public function getFeatured() : bool;
+    public function getFeatured(): bool;
     
-    /**
-     * @param bool $featured
-     */
     public function setFeatured($featured);
 }

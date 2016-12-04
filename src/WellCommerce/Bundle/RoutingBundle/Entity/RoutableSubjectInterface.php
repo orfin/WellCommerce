@@ -23,13 +23,13 @@ interface RoutableSubjectInterface
     
     public function getTranslatable();
     
-    public function getSlug() : string;
+    public function getSlug(): string;
     
     public function getRoute();
     
-    public function hasRoute() : bool;
+    public function hasRoute(): bool;
     
     public function setRoute(RouteInterface $route);
     
-    public function getRouteEntity() : RouteInterface;
+    public function getRouteEntity(): RouteInterface;
 }

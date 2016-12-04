@@ -33,14 +33,7 @@ class News implements NewsInterface
     use Blameable;
     use MediaAwareTrait;
     
-    /**
-     * @var bool
-     */
-    protected $publish = true;
-    
-    /**
-     * @var bool
-     */
+    protected $publish  = true;
     protected $featured = false;
     
     /**
@@ -59,65 +52,41 @@ class News implements NewsInterface
         $this->endDate   = Carbon::now()->addMonth(1);
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function getPublish(): bool
     {
         return $this->publish;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function setPublish(bool $publish)
     {
         $this->publish = $publish;
     }
-    
-    /**
-     * {@inheritdoc}
-     */
+
     public function getStartDate(): DateTime
     {
         return $this->startDate;
     }
-    
-    /**
-     * {@inheritdoc}
-     */
+
     public function setStartDate(DateTime $startDate)
     {
         $this->startDate = $startDate;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function getEndDate(): DateTime
     {
         return $this->endDate;
     }
-    
-    /**
-     * {@inheritdoc}
-     */
+
     public function setEndDate(DateTime $endDate)
     {
         $this->endDate = $endDate;
     }
-    
-    /**
-     * {@inheritdoc}
-     */
+
     public function getFeatured(): bool
     {
         return $this->featured;
     }
-    
-    /**
-     * {@inheritdoc}
-     */
+
     public function setFeatured($featured)
     {
         $this->featured = $featured;

@@ -29,24 +29,9 @@ class NewsTranslation implements RoutableSubjectInterface, LocaleAwareInterface
     use Translation;
     use RoutableTrait;
     
-    /**
-     * @var string
-     */
-    protected $topic;
-    
-    /**
-     * @var string
-     */
-    protected $summary;
-    
-    /**
-     * @var string
-     */
-    protected $content;
-    
-    /**
-     * @var Meta
-     */
+    protected $topic   = '';
+    protected $summary = '';
+    protected $content = '';
     protected $meta;
     
     /**
@@ -54,79 +39,52 @@ class NewsTranslation implements RoutableSubjectInterface, LocaleAwareInterface
      */
     protected $route;
     
-    /**
-     * Constructor
-     */
     public function __construct()
     {
         $this->meta = new Meta();
     }
     
-    /**
-     * @return string
-     */
-    public function getContent()
-    {
-        return $this->content;
-    }
-    
-    /**
-     * @param string $content
-     */
-    public function setContent($content)
-    {
-        $this->content = $content;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getSummary()
-    {
-        return $this->summary;
-    }
-    
-    /**
-     * @param string $summary
-     */
-    public function setSummary($summary)
-    {
-        $this->summary = $summary;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getTopic()
+    public function getTopic(): string
     {
         return $this->topic;
     }
     
-    /**
-     * @param string $topic
-     */
-    public function setTopic($topic)
+    public function setTopic(string $topic)
     {
         $this->topic = $topic;
     }
     
-    /**
-     * @return Meta
-     */
-    public function getMeta()
+    public function getSummary(): string
+    {
+        return $this->summary;
+    }
+    
+    public function setSummary(string $summary)
+    {
+        $this->summary = $summary;
+    }
+    
+    public function getContent(): string
+    {
+        return $this->content;
+    }
+    
+    public function setContent(string $content)
+    {
+        $this->content = $content;
+    }
+    
+    public function getMeta(): Meta
     {
         return $this->meta;
     }
     
-    /**
-     * @param Meta $meta
-     */
     public function setMeta(Meta $meta)
     {
         $this->meta = $meta;
     }
     
-    public function getRouteEntity() : RouteInterface
+    public function getRouteEntity(): RouteInterface
     {
         return new NewsRoute();
     }
