@@ -20,15 +20,15 @@ namespace WellCommerce\Bundle\ClientBundle\Entity;
 class ClientDetails implements ClientDetailsInterface
 {
     protected $password              = '';
-    protected $passwordConfirm       = '';
+    protected $passwordConfirm       = null;
     protected $username              = '';
     protected $salt                  = '';
     protected $discount              = 0.00;
     protected $conditionsAccepted    = false;
     protected $newsletterAccepted    = false;
-    protected $resetPasswordHash     = '';
-    protected $legacyPassword        = '';
-    protected $legacyPasswordEncoder = '';
+    protected $resetPasswordHash     = null;
+    protected $legacyPassword        = null;
+    protected $legacyPasswordEncoder = null;
     
     public function __construct()
     {
@@ -130,22 +130,22 @@ class ClientDetails implements ClientDetailsInterface
         $this->resetPasswordHash = $resetPasswordHash;
     }
     
-    public function getLegacyPassword(): string
+    public function getLegacyPassword()
     {
         return $this->legacyPassword;
     }
     
-    public function setLegacyPassword(string $legacyPassword)
+    public function setLegacyPassword($legacyPassword)
     {
         $this->legacyPassword = $legacyPassword;
     }
     
-    public function getLegacyPasswordEncoder(): string
+    public function getLegacyPasswordEncoder()
     {
         return $this->legacyPasswordEncoder;
     }
     
-    public function setLegacyPasswordEncoder(string $legacyPasswordEncoder)
+    public function setLegacyPasswordEncoder($legacyPasswordEncoder)
     {
         $this->legacyPasswordEncoder = $legacyPasswordEncoder;
     }

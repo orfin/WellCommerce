@@ -11,6 +11,7 @@
  */
 namespace WellCommerce\Bundle\ClientBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
@@ -27,7 +28,7 @@ use WellCommerce\Bundle\ShopBundle\Entity\ShopAwareTrait;
 class Client implements ClientInterface
 {
     const ROLE_CLIENT = 'ROLE_CLIENT';
-
+    
     use IdentifiableTrait;
     use Timestampable;
     use Blameable;
@@ -59,6 +60,15 @@ class Client implements ClientInterface
      */
     protected $shippingAddress;
     
+    public function __construct()
+    {
+        $this->orders          = new ArrayCollection();
+        $this->clientDetails   = new ClientDetails();
+        $this->contactDetails  = new ClientContactDetails();
+        $this->billingAddress  = new ClientBillingAddress();
+        $this->shippingAddress = new ClientShippingAddress();
+    }
+    
     public function getPassword()
     {
         return $this->clientDetails->getPassword();
@@ -81,13 +91,10 @@ class Client implements ClientInterface
     public function getRoles()
     {
         return [
-            self::ROLE_CLIENT
+            self::ROLE_CLIENT,
         ];
     }
     
-    /**
-     * @inheritDoc
-     */
     public function serialize()
     {
         return serialize([$this->id, $this->getUsername(), $this->getPassword()]);
@@ -120,14 +127,14 @@ class Client implements ClientInterface
         return true;
     }
     
-    public function getOrders() : Collection
+    public function getOrders(): Collection
     {
         return $this->orders->filter(function (OrderInterface $order) {
             return $order->isConfirmed();
         });
     }
     
-    public function getClientDetails() : ClientDetailsInterface
+    public function getClientDetails(): ClientDetailsInterface
     {
         return $this->clientDetails;
     }
@@ -137,7 +144,7 @@ class Client implements ClientInterface
         $this->clientDetails = $clientDetails;
     }
     
-    public function getContactDetails() : ClientContactDetailsInterface
+    public function getContactDetails(): ClientContactDetailsInterface
     {
         return $this->contactDetails;
     }
@@ -147,7 +154,7 @@ class Client implements ClientInterface
         $this->contactDetails = $contactDetails;
     }
     
-    public function getBillingAddress() : ClientBillingAddressInterface
+    public function getBillingAddress(): ClientBillingAddressInterface
     {
         return $this->billingAddress;
     }
@@ -157,7 +164,7 @@ class Client implements ClientInterface
         $this->billingAddress = $billingAddress;
     }
     
-    public function getShippingAddress() : ClientShippingAddressInterface
+    public function getShippingAddress(): ClientShippingAddressInterface
     {
         return $this->shippingAddress;
     }

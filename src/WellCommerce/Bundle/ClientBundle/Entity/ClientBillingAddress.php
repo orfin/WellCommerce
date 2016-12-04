@@ -23,32 +23,13 @@ class ClientBillingAddress implements ClientBillingAddressInterface
 {
     use AddressTrait;
     
-    /**
-     * @var string
-     */
-    private $firstName;
+    protected $firstName      = '';
+    protected $lastName       = '';
+    protected $vatId          = '';
+    protected $companyName    = '';
+    protected $companyAddress = false;
     
-    /**
-     * @var string
-     */
-    private $lastName;
-    
-    /**
-     * @var string
-     */
-    private $vatId;
-    
-    /**
-     * @var string
-     */
-    private $companyName;
-    
-    /**
-     * @var bool
-     */
-    private $companyAddress;
-    
-    public function getFirstName() : string
+    public function getFirstName(): string
     {
         return $this->firstName;
     }
@@ -58,7 +39,7 @@ class ClientBillingAddress implements ClientBillingAddressInterface
         $this->firstName = $firstName;
     }
     
-    public function getLastName() : string
+    public function getLastName(): string
     {
         return $this->lastName;
     }
@@ -68,7 +49,7 @@ class ClientBillingAddress implements ClientBillingAddressInterface
         $this->lastName = $lastName;
     }
     
-    public function getVatId() : string
+    public function getVatId(): string
     {
         return $this->vatId;
     }
@@ -78,7 +59,7 @@ class ClientBillingAddress implements ClientBillingAddressInterface
         $this->vatId = $vatId;
     }
     
-    public function getCompanyName() : string
+    public function getCompanyName(): string
     {
         return $this->companyName;
     }
@@ -88,7 +69,7 @@ class ClientBillingAddress implements ClientBillingAddressInterface
         $this->companyName = $companyName;
     }
     
-    public function isCompanyAddress() : bool
+    public function isCompanyAddress(): bool
     {
         return $this->companyAddress;
     }

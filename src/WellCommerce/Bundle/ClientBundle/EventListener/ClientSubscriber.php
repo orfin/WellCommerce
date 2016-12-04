@@ -25,20 +25,20 @@ class ClientSubscriber extends AbstractEventSubscriber
     public static function getSubscribedEvents()
     {
         return [
+            'client.post_init'   => ['onClientPostInit'],
             'client.post_create' => ['onClientPostCreate'],
-            'client.pre_create'  => ['onClientPreCreate'],
         ];
     }
     
-    public function onClientPreCreate(EntityEvent $event)
+    public function onClientPostInit(EntityEvent $event)
     {
         $client = $event->getEntity();
+        $shop   = $this->getShopStorage()->getCurrentShop();
         if ($client instanceof ClientInterface) {
-            $userName = $client->getUsername();
-            $client->getContactDetails()->setEmail($userName);
-            if (null === $client->getClientGroup()) {
-                $client->setClientGroup($client->getShop()->getClientGroup());
-            }
+            $client->setShop($shop);
+            $client->getBillingAddress()->setCountry($shop->getDefaultCountry());
+            $client->getShippingAddress()->setCountry($shop->getDefaultCountry());
+            $client->setClientGroup($shop->getClientGroup());
         }
     }
     
