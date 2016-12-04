@@ -24,44 +24,20 @@ use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
  */
 interface CouponInterface extends EntityInterface, TranslatableInterface, TimestampableInterface, BlameableInterface
 {
-    /**
-     * @return string
-     */
     public function getCode() : string;
-
-    /**
-     * @param string $code
-     */
+    
     public function setCode(string $code);
 
-    /**
-     * @return string
-     */
     public function getCurrency() : string;
-
-    /**
-     * @param string $currency
-     */
+    
     public function setCurrency(string $currency);
-
-    /**
-     * @return string
-     */
+    
     public function getModifierType() : string;
-
-    /**
-     * @param string $modifierType
-     */
+    
     public function setModifierType(string $modifierType);
-
-    /**
-     * @return float
-     */
+    
     public function getModifierValue() : float;
-
-    /**
-     * @param float $modifierValue
-     */
+    
     public function setModifierValue(float $modifierValue);
 
     /**
@@ -83,44 +59,20 @@ interface CouponInterface extends EntityInterface, TranslatableInterface, Timest
      * @param \DateTime|null $validTo
      */
     public function setValidTo(\DateTime $validTo = null);
-
-    /**
-     * @return int
-     */
+    
     public function getClientUsageLimit() : int;
-
-    /**
-     * @param int $clientUsageLimit
-     */
+    
     public function setClientUsageLimit(int $clientUsageLimit);
-
-    /**
-     * @return int
-     */
+    
     public function getGlobalUsageLimit() : int;
-
-    /**
-     * @param int $globalUsageLimit
-     */
+    
     public function setGlobalUsageLimit(int $globalUsageLimit);
-    
-    /**
-     * @return float
-     */
+
     public function getMinimumOrderValue(): float;
-    
-    /**
-     * @param float $minimumOrderValue
-     */
+
     public function setMinimumOrderValue(float $minimumOrderValue);
     
-    /**
-     * @return boolean
-     */
     public function isExcludePromotions(): bool;
     
-    /**
-     * @param boolean $excludePromotions
-     */
     public function setExcludePromotions(bool $excludePromotions);
 }

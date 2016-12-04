@@ -23,45 +23,26 @@ use WellCommerce\Bundle\LocaleBundle\Entity\LocaleAwareInterface;
 class CouponTranslation implements LocaleAwareInterface
 {
     use Translation;
-
-    /**
-     * @var string
-     */
-    protected $name;
-
-    /**
-     * @var string
-     */
-    protected $description;
-
-    /**
-     * @return string
-     */
-    public function getName()
+    
+    protected $name        = '';
+    protected $description = '';
+    
+    public function getName(): string
     {
         return $this->name;
     }
-
-    /**
-     * @param string $name
-     */
-    public function setName($name)
+    
+    public function setName(string $name)
     {
         $this->name = $name;
     }
-
-    /**
-     * @return string
-     */
-    public function getDescription()
+    
+    public function getDescription(): string
     {
         return $this->description;
     }
-
-    /**
-     * @param string $description
-     */
-    public function setDescription($description)
+    
+    public function setDescription(string $description)
     {
         $this->description = $description;
     }
