@@ -25,9 +25,9 @@ class CurrencyFormBuilderTest extends AbstractFormBuilderTestCase
     {
         return $this->container->get('currency.form_builder.admin');
     }
-
-    protected function getFactoryService()
+    
+    protected function getDefaultFormData()
     {
-        return $this->container->get('currency.factory');
+        return $this->container->get('currency.manager')->initResource();
     }
 }

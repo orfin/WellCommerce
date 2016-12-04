@@ -25,9 +25,9 @@ class TaxFormBuilderTest extends AbstractFormBuilderTestCase
     {
         return $this->container->get('tax.form_builder.admin');
     }
-
-    protected function getFactoryService()
+    
+    protected function getDefaultFormData()
     {
-        return $this->container->get('tax.factory');
+        return $this->container->get('tax.manager')->initResource();
     }
 }

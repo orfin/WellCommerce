@@ -25,9 +25,9 @@ class ProductStatusFormBuilderTest extends AbstractFormBuilderTestCase
     {
         return $this->container->get('product_status.form_builder.admin');
     }
-
-    protected function getFactoryService()
+    
+    protected function getDefaultFormData()
     {
-        return $this->container->get('product_status.factory');
+        return $this->container->get('product_status.manager')->initResource();
     }
 }

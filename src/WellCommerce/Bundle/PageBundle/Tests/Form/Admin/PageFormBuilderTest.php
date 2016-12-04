@@ -25,9 +25,9 @@ class PageFormBuilderTest extends AbstractFormBuilderTestCase
     {
         return $this->container->get('page.form_builder.admin');
     }
-
-    protected function getFactoryService()
+    
+    protected function getDefaultFormData()
     {
-        return $this->container->get('page.factory');
+        return $this->container->get('page.manager')->initResource();
     }
 }

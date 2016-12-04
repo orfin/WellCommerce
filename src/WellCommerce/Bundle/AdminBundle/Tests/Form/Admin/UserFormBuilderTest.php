@@ -25,9 +25,9 @@ class UserFormBuilderTest extends AbstractFormBuilderTestCase
     {
         return $this->container->get('user.form_builder.admin');
     }
-
-    protected function getFactoryService()
+    
+    protected function getDefaultFormData()
     {
-        return $this->container->get('user.factory');
+        return $this->container->get('user.manager')->initResource();
     }
 }

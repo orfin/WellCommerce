@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\ClientBundle\Manager;
 
 use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
 use WellCommerce\Bundle\ClientBundle\Exception\ResetPasswordException;
+use WellCommerce\Bundle\CoreBundle\Entity\EntityInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 use WellCommerce\Bundle\CoreBundle\Manager\AbstractManager;
 
@@ -24,7 +25,23 @@ use WellCommerce\Bundle\CoreBundle\Manager\AbstractManager;
  */
 class ClientManager extends AbstractManager
 {
-    public function getClientByUsername(string $username) : ClientInterface
+    public function initResource(): EntityInterface
+    {
+        /** @var ClientInterface $client */
+        $client = $this->factory->create();
+        $shop   = $this->getShopStorage()->getCurrentShop();
+        
+        $client->setShop($shop);
+        $client->getBillingAddress()->setCountry($shop->getDefaultCountry());
+        $client->getShippingAddress()->setCountry($shop->getDefaultCountry());
+        $client->setClientGroup($shop->getClientGroup());
+        
+        $this->dispatchEvent(self::POST_ENTITY_INIT_EVENT, $client);
+        
+        return $client;
+    }
+    
+    public function getClientByUsername(string $username): ClientInterface
     {
         $client = $this->getRepository()->findOneBy(['clientDetails.username' => $username]);
         

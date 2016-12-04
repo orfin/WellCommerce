@@ -11,7 +11,6 @@
  */
 namespace WellCommerce\Bundle\ClientBundle\EventListener;
 
-use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
 use WellCommerce\Bundle\CoreBundle\Event\EntityEvent;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
 
@@ -25,21 +24,8 @@ class ClientSubscriber extends AbstractEventSubscriber
     public static function getSubscribedEvents()
     {
         return [
-            'client.post_init'   => ['onClientPostInit'],
             'client.post_create' => ['onClientPostCreate'],
         ];
-    }
-    
-    public function onClientPostInit(EntityEvent $event)
-    {
-        $client = $event->getEntity();
-        $shop   = $this->getShopStorage()->getCurrentShop();
-        if ($client instanceof ClientInterface) {
-            $client->setShop($shop);
-            $client->getBillingAddress()->setCountry($shop->getDefaultCountry());
-            $client->getShippingAddress()->setCountry($shop->getDefaultCountry());
-            $client->setClientGroup($shop->getClientGroup());
-        }
     }
     
     public function onClientPostCreate(EntityEvent $event)

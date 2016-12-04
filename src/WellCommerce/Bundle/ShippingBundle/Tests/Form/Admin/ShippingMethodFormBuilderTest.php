@@ -25,9 +25,9 @@ class ShippingMethodFormBuilderTest extends AbstractFormBuilderTestCase
     {
         return $this->container->get('shipping_method.form_builder.admin');
     }
-
-    protected function getFactoryService()
+    
+    protected function getDefaultFormData()
     {
-        return $this->container->get('shipping_method.factory');
+        return $this->container->get('shipping_method.manager')->initResource();
     }
 }

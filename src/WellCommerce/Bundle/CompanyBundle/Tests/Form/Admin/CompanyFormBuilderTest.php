@@ -25,9 +25,9 @@ class CompanyFormBuilderTest extends AbstractFormBuilderTestCase
     {
         return $this->container->get('company.form_builder.admin');
     }
-
-    protected function getFactoryService()
+    
+    protected function getDefaultFormData()
     {
-        return $this->container->get('company.factory');
+        return $this->container->get('company.manager')->initResource();
     }
 }

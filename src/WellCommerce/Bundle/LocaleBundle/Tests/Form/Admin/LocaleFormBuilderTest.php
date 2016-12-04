@@ -25,9 +25,9 @@ class LocaleFormBuilderTest extends AbstractFormBuilderTestCase
     {
         return $this->container->get('locale.form_builder.admin');
     }
-
-    protected function getFactoryService()
+    
+    protected function getDefaultFormData()
     {
-        return $this->container->get('locale.factory');
+        return $this->container->get('locale.manager')->initResource();
     }
 }

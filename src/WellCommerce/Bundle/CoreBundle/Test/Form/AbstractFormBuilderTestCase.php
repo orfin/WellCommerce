@@ -47,7 +47,7 @@ abstract class AbstractFormBuilderTestCase extends AbstractTestCase
         if (null !== $formBuilder) {
             $form = $formBuilder->createForm([
                 'name' => 'test'
-            ], $this->getSampleData());
+            ], $this->getDefaultFormData());
 
             $this->assertInstanceOf(FormInterface::class, $form);
         }
@@ -58,7 +58,7 @@ abstract class AbstractFormBuilderTestCase extends AbstractTestCase
         $formBuilder = $this->getFormBuilderService();
 
         if (null !== $formBuilder) {
-            $sample = $this->getSampleData();
+            $sample = $this->getDefaultFormData();
 
             $form = $formBuilder->createForm([
                 'name' => 'test'
@@ -67,26 +67,15 @@ abstract class AbstractFormBuilderTestCase extends AbstractTestCase
             $this->assertEquals($sample, $form->getModelData());
         }
     }
-
-    /**
-     * @return object
-     */
-    protected function getSampleData()
-    {
-        return $this->getFactoryService()->create();
-    }
-
-    /**
-     * @return \WellCommerce\Bundle\CoreBundle\Factory\EntityFactoryInterface
-     */
-    abstract protected function getFactoryService();
+    
+    abstract protected function getDefaultFormData();
 
     public function testFormHasNonEmptyElementsCollection()
     {
         $formBuilder = $this->getFormBuilderService();
 
         if (null !== $formBuilder) {
-            $sample = $this->getSampleData();
+            $sample = $this->getDefaultFormData();
 
             $form = $formBuilder->createForm([
                 'name' => 'test'

@@ -25,9 +25,9 @@ class CategoryFormBuilderTest extends AbstractFormBuilderTestCase
     {
         return $this->container->get('category.form_builder.admin');
     }
-
-    protected function getFactoryService()
+    
+    protected function getDefaultFormData()
     {
-        return $this->container->get('category.factory');
+        return $this->container->get('category.manager')->initResource();
     }
 }

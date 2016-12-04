@@ -25,9 +25,9 @@ class DelivererFormBuilderTest extends AbstractFormBuilderTestCase
     {
         return $this->container->get('deliverer.form_builder.admin');
     }
-
-    protected function getFactoryService()
+    
+    protected function getDefaultFormData()
     {
-        return $this->container->get('deliverer.factory');
+        return $this->container->get('deliverer.manager')->initResource();
     }
 }

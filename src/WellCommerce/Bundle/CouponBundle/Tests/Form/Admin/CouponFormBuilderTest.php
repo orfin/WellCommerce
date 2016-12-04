@@ -25,9 +25,9 @@ class CouponFormBuilderTest extends AbstractFormBuilderTestCase
     {
         return $this->container->get('coupon.form_builder.admin');
     }
-
-    protected function getFactoryService()
+    
+    protected function getDefaultFormData()
     {
-        return $this->container->get('coupon.factory');
+        return $this->container->get('coupon.manager')->initResource();
     }
 }

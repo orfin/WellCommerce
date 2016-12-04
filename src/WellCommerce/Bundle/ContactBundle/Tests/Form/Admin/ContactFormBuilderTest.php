@@ -25,9 +25,9 @@ class ContactFormBuilderTest extends AbstractFormBuilderTestCase
     {
         return $this->container->get('contact.form_builder.admin');
     }
-
-    protected function getFactoryService()
+    
+    protected function getDefaultFormData()
     {
-        return $this->container->get('contact.factory');
+        return $this->container->get('contact.manager')->initResource();
     }
 }

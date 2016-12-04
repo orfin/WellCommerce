@@ -25,9 +25,9 @@ class DictionaryFormBuilderTest extends AbstractFormBuilderTestCase
     {
         return $this->container->get('dictionary.form_builder.admin');
     }
-
-    protected function getFactoryService()
+    
+    protected function getDefaultFormData()
     {
-        return $this->container->get('dictionary.factory');
+        return $this->container->get('dictionary.manager')->initResource();
     }
 }

@@ -25,9 +25,9 @@ class LayoutBoxFormBuilderTest extends AbstractFormBuilderTestCase
     {
         return $this->container->get('layout_box.form_builder.admin');
     }
-
-    protected function getFactoryService()
+    
+    protected function getDefaultFormData()
     {
-        return $this->container->get('layout_box.factory');
+        return $this->container->get('layout_box.manager')->initResource();
     }
 }

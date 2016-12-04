@@ -25,9 +25,9 @@ class ThemeFormBuilderTest extends AbstractFormBuilderTestCase
     {
         return $this->container->get('theme.form_builder.admin');
     }
-
-    protected function getFactoryService()
+    
+    protected function getDefaultFormData()
     {
-        return $this->container->get('theme.factory');
+        return $this->container->get('theme.manager')->initResource();
     }
 }

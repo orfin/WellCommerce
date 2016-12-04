@@ -25,9 +25,9 @@ class NewsFormBuilderTest extends AbstractFormBuilderTestCase
     {
         return $this->container->get('news.form_builder.admin');
     }
-
-    protected function getFactoryService()
+    
+    protected function getDefaultFormData()
     {
-        return $this->container->get('news.factory');
+        return $this->container->get('news.manager')->initResource();
     }
 }

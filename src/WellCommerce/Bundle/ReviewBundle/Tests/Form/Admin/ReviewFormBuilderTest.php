@@ -25,9 +25,9 @@ class ReviewFormBuilderTest extends AbstractFormBuilderTestCase
     {
         return $this->container->get('review.form_builder.admin');
     }
-
-    protected function getFactoryService()
+    
+    protected function getDefaultFormData()
     {
-        return $this->container->get('review.factory');
+        return $this->container->get('review.manager')->initResource();
     }
 }

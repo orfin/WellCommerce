@@ -48,12 +48,12 @@ abstract class AbstractManager extends AbstractContainerAware implements Manager
         $this->repository = $repository;
     }
     
-    public function getRepository() : RepositoryInterface
+    public function getRepository(): RepositoryInterface
     {
         return $this->repository;
     }
     
-    public function initResource() : EntityInterface
+    public function initResource(): EntityInterface
     {
         $entity = $this->factory->create();
         $this->dispatchEvent(self::POST_ENTITY_INIT_EVENT, $entity);
@@ -94,7 +94,7 @@ abstract class AbstractManager extends AbstractContainerAware implements Manager
         }
     }
     
-    private function dispatchEvent(string $name, EntityInterface $entity)
+    protected function dispatchEvent(string $name, EntityInterface $entity)
     {
         $reflection = new \ReflectionClass($entity);
         $eventName  = $this->getEventName($reflection->getShortName(), $name);

@@ -25,9 +25,9 @@ class UserGroupFormBuilderTest extends AbstractFormBuilderTestCase
     {
         return $this->container->get('user_group.form_builder.admin');
     }
-
-    protected function getFactoryService()
+    
+    protected function getDefaultFormData()
     {
-        return $this->container->get('user_group.factory');
+        return $this->container->get('user_group.manager')->initResource();
     }
 }

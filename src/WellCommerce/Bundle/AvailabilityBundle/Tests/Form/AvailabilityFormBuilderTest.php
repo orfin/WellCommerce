@@ -25,9 +25,9 @@ class AvailabilityFormBuilderTest extends AbstractFormBuilderTestCase
     {
         return $this->container->get('availability.form_builder.admin');
     }
-
-    protected function getFactoryService()
+    
+    protected function getDefaultFormData()
     {
-        return $this->container->get('availability.factory');
+        return $this->container->get('availability.manager')->initResource();
     }
 }
