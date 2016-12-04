@@ -18,81 +18,67 @@ class CategoryTranslation implements RoutableSubjectInterface, LocaleAwareInterf
 {
     use Translation;
     use RoutableTrait;
-
+    
+    protected $name             = '';
+    protected $shortDescription = '';
+    protected $description      = '';
+    
     /**
      * @var RouteInterface
      */
     protected $route;
-
-    /**
-     * @var string
-     */
-    protected $name;
-
-    /**
-     * @var string
-     */
-    protected $shortDescription;
-
+    
     /**
      * @var Meta
      */
     protected $meta;
-
-    /**
-     * @var string
-     */
-    protected $description;
-
-    /**
-     * @return int
-     */
-    public function getId()
+    
+    public function __construct()
     {
-        return $this->id;
+        $this->meta = new Meta();
     }
-
-    public function getName() : string
+    
+    public function getName(): string
     {
-        return (string)$this->name;
+        return $this->name;
     }
-
+    
     public function setName(string $name)
     {
         $this->name = $name;
     }
-
-    public function getShortDescription() : string
+    
+    public function getShortDescription(): string
     {
-        return (string)$this->shortDescription;
+        return $this->shortDescription;
     }
-
+    
     public function setShortDescription(string $shortDescription)
     {
         $this->shortDescription = $shortDescription;
     }
-
-    public function getDescription() : string
+    
+    public function getDescription(): string
     {
-        return (string)$this->description;
+        return $this->description;
     }
-
+    
     public function setDescription(string $description)
     {
         $this->description = $description;
     }
-
-    public function getMeta() : Meta
+    
+    public function getMeta(): Meta
     {
         return $this->meta;
     }
-
+    
     public function setMeta(Meta $meta)
     {
         $this->meta = $meta;
     }
-
-    public function getRouteEntity() : RouteInterface
+    
+    public function getRouteEntity(): RouteInterface
     {
         return new CategoryRoute();
     }

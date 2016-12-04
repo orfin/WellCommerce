@@ -39,6 +39,9 @@ class Category implements CategoryInterface
     use HierarchyAwareTrait;
     use CategoryExtraTrait;
     
+    protected $productsCount = 0;
+    protected $childrenCount = 0;
+    
     /**
      * @var null|CategoryInterface
      */
@@ -53,16 +56,6 @@ class Category implements CategoryInterface
      * @var Collection
      */
     protected $products;
-    
-    /**
-     * @var int
-     */
-    protected $productsCount = 0;
-    
-    /**
-     * @var int
-     */
-    protected $childrenCount = 0;
     
     public function __construct()
     {
