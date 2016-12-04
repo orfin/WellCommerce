@@ -23,45 +23,26 @@ use WellCommerce\Bundle\LocaleBundle\Entity\LocaleAwareInterface;
 class LayoutBoxTranslation implements LocaleAwareInterface
 {
     use Translation;
-
-    /**
-     * @var string
-     */
-    protected $name;
-
-    /**
-     * @var string
-     */
-    protected $content;
-
-    /**
-     * @return string
-     */
-    public function getName()
+    
+    protected $name    = '';
+    protected $content = '';
+    
+    public function getName(): string
     {
         return $this->name;
     }
-
-    /**
-     * @param string $name
-     */
-    public function setName($name)
+    
+    public function setName(string $name)
     {
         $this->name = $name;
     }
-
-    /**
-     * @return string
-     */
-    public function getContent()
+    
+    public function getContent(): string
     {
         return $this->content;
     }
-
-    /**
-     * @param string $content
-     */
-    public function setContent($content)
+    
+    public function setContent(string $content)
     {
         $this->content = $content;
     }

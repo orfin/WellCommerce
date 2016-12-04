@@ -24,33 +24,15 @@ use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
  */
 interface LayoutBoxInterface extends EntityInterface, TimestampableInterface, TranslatableInterface, BlameableInterface
 {
-    /**
-     * @return string
-     */
     public function getBoxType() : string;
-
-    /**
-     * @param string $boxType
-     */
+    
     public function setBoxType(string $boxType);
-
-    /**
-     * @return array
-     */
+    
     public function getSettings() : array;
 
-    /**
-     * @param array $settings
-     */
     public function setSettings(array $settings);
 
-    /**
-     * @return string
-     */
     public function getIdentifier() : string;
 
-    /**
-     * @param string $identifier
-     */
     public function setIdentifier(string $identifier);
 }

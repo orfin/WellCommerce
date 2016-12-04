@@ -29,64 +29,35 @@ class LayoutBox implements LayoutBoxInterface
     use Translatable;
     use Blameable;
     
-    /**
-     * @var string
-     */
-    protected $boxType = '';
-    
-    /**
-     * @var array
-     */
-    protected $settings = [];
-    
-    /**
-     * @var string
-     */
+    protected $boxType    = '';
     protected $identifier = '';
+    protected $settings   = [];
     
-    /**
-     * {@inheritdoc}
-     */
     public function getBoxType(): string
     {
         return $this->boxType;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function setBoxType(string $boxType)
     {
         $this->boxType = $boxType;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function getSettings(): array
     {
         return $this->settings;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function setSettings(array $settings)
     {
         $this->settings = $settings;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function getIdentifier(): string
     {
         return $this->identifier;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function setIdentifier(string $identifier)
     {
         $this->identifier = $identifier;
