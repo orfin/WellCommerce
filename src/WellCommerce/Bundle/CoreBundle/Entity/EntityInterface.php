@@ -19,8 +19,5 @@ namespace WellCommerce\Bundle\CoreBundle\Entity;
  */
 interface EntityInterface
 {
-    /**
-     * @return int
-     */
-    public function getId() : int;
+    public function getId(): int;
 }

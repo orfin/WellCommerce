@@ -20,8 +20,8 @@ namespace WellCommerce\Bundle\CoreBundle\Entity;
 trait IdentifiableTrait
 {
     protected $id;
-
-    public function getId() : int
+    
+    public function getId(): int
     {
         return $this->id;
     }
