@@ -23,24 +23,15 @@ use WellCommerce\Bundle\LocaleBundle\Entity\LocaleAwareInterface;
 class DictionaryTranslation implements LocaleAwareInterface
 {
     use Translation;
-
-    /**
-     * @var string
-     */
-    protected $value;
-
-    /**
-     * @return string
-     */
-    public function getValue()
+    
+    protected $value = '';
+    
+    public function getValue(): string
     {
         return $this->value;
     }
-
-    /**
-     * @param string $value
-     */
-    public function setValue($value)
+    
+    public function setValue(string $value)
     {
         $this->value = $value;
     }

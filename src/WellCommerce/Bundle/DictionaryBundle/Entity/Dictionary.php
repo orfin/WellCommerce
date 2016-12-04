@@ -27,22 +27,13 @@ class Dictionary implements DictionaryInterface
     use Translatable;
     use Blameable;
     
-    /**
-     * @var string
-     */
     protected $identifier = '';
     
-    /**
-     * {@inheritdoc}
-     */
     public function getIdentifier(): string
     {
         return $this->identifier;
     }
-    
-    /**
-     * {@inheritdoc}
-     */
+
     public function setIdentifier(string $identifier)
     {
         $this->identifier = $identifier;

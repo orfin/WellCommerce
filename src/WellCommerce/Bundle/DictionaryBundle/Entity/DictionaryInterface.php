@@ -24,13 +24,7 @@ use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
  */
 interface DictionaryInterface extends EntityInterface, TranslatableInterface, TimestampableInterface, BlameableInterface
 {
-    /**
-     * @return string
-     */
     public function getIdentifier() : string;
-
-    /**
-     * @param string $identifier
-     */
+    
     public function setIdentifier(string $identifier);
 }
