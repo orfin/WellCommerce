@@ -22,12 +22,7 @@ use WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface;
  */
 class NewsRoute extends Route implements RouteInterface
 {
-    /**
-     * @var NewsInterface
-     */
-    protected $identifier;
-    
-    public function getType() : string
+    public function getType(): string
     {
         return 'news';
     }

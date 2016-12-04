@@ -21,38 +21,17 @@ use WellCommerce\Bundle\CoreBundle\Entity\EntityInterface;
  */
 interface RouteInterface extends EntityInterface
 {
-    /**
-     * @return string
-     */
-    public function getPath() : string;
-
-    /**
-     * @param string $path
-     */
+    public function getPath(): string;
+    
     public function setPath(string $path);
-
-    /**
-     * @return string
-     */
-    public function getLocale() : string;
-
-    /**
-     * @param string $locale
-     */
+    
+    public function getLocale(): string;
+    
     public function setLocale(string $locale);
-
-    /**
-     * @param object $identifier
-     */
+    
     public function setIdentifier($identifier);
-
-    /**
-     * @return object
-     */
+    
     public function getIdentifier();
-
-    /**
-     * @return string
-     */
-    public function getType() : string;
+    
+    public function getType(): string;
 }

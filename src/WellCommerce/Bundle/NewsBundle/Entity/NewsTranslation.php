@@ -34,11 +34,6 @@ class NewsTranslation implements RoutableSubjectInterface, LocaleAwareInterface
     protected $content = '';
     protected $meta;
     
-    /**
-     * @var NewsRoute
-     */
-    protected $route;
-    
     public function __construct()
     {
         $this->meta = new Meta();

@@ -22,12 +22,7 @@ use WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface;
  */
 class ProducerRoute extends Route implements RouteInterface
 {
-    /**
-     * @var ProducerInterface
-     */
-    protected $identifier;
-
-    public function getType() : string
+    public function getType(): string
     {
         return 'producer';
     }

@@ -22,11 +22,6 @@ use WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface;
  */
 class CategoryRoute extends Route implements RouteInterface
 {
-    /**
-     * @var CategoryInterface
-     */
-    protected $identifier;
-
     public function getType() : string
     {
         return 'category';

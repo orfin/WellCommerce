@@ -22,15 +22,7 @@ use WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface;
  */
 class ProductStatusRoute extends Route implements RouteInterface
 {
-    /**
-     * @var ProductStatusInterface
-     */
-    protected $identifier;
-
-    /**
-     * @return string
-     */
-    public function getType() : string
+    public function getType(): string
     {
         return 'product_status';
     }

@@ -28,105 +28,58 @@ class ProducerTranslation implements RoutableSubjectInterface, LocaleAwareInterf
 {
     use Translation;
     use RoutableTrait;
-
-    /**
-     * @var ProducerRoute
-     */
-    protected $route;
     
-    /**
-     * @var string
-     */
-    protected $name;
-    
-    /**
-     * @var string
-     */
-    protected $shortDescription;
-    
-    /**
-     * @var string
-     */
-    protected $description;
-
-    /**
-     * @var Meta
-     */
+    protected $name             = '';
+    protected $shortDescription = '';
+    protected $description      = '';
     protected $meta;
-
-    /**
-     * Constructor
-     */
+    
     public function __construct()
     {
         $this->meta = new Meta();
     }
-
-    /**
-     * @return string
-     */
-    public function getName()
+    
+    public function getName(): string
     {
         return $this->name;
     }
-
-    /**
-     * @param string $name
-     */
-    public function setName($name)
+    
+    public function setName(string $name)
     {
         $this->name = $name;
     }
-
-    /**
-     * @return string
-     */
-    public function getShortDescription()
+    
+    public function getShortDescription(): string
     {
         return $this->shortDescription;
     }
-
-    /**
-     * @param string $shortDescription
-     */
-    public function setShortDescription($shortDescription)
+    
+    public function setShortDescription(string $shortDescription)
     {
         $this->shortDescription = $shortDescription;
     }
-
-    /**
-     * @return string
-     */
-    public function getDescription()
+    
+    public function getDescription(): string
     {
         return $this->description;
     }
-
-    /**
-     * @param string $description
-     */
-    public function setDescription($description)
+    
+    public function setDescription(string $description)
     {
         $this->description = $description;
     }
-
-    /**
-     * @return Meta
-     */
-    public function getMeta()
+    
+    public function getMeta(): Meta
     {
         return $this->meta;
     }
-
-    /**
-     * @param Meta $meta
-     */
+    
     public function setMeta(Meta $meta)
     {
         $this->meta = $meta;
     }
-
-    public function getRouteEntity() : RouteInterface
+    
+    public function getRouteEntity(): RouteInterface
     {
         return new ProducerRoute();
     }

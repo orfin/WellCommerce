@@ -23,43 +23,41 @@ class Route implements RouteInterface, RoutingDiscriminatorsAwareInterface
 {
     use IdentifiableTrait;
     
-    protected $path;
-
-    protected $locale;
-
+    protected $path   = '';
+    protected $locale = '';
     protected $identifier;
-
-    public function getPath() : string
+    
+    public function getPath(): string
     {
         return $this->path;
     }
-
+    
     public function setPath(string $path)
     {
         $this->path = $path;
     }
-
-    public function getLocale() : string
+    
+    public function getLocale(): string
     {
         return $this->locale;
     }
-
+    
     public function setLocale(string $locale)
     {
         $this->locale = $locale;
     }
-
+    
     public function getIdentifier()
     {
         return $this->identifier;
     }
-
+    
     public function setIdentifier($identifier)
     {
         $this->identifier = $identifier;
     }
-
-    public function getType() : string
+    
+    public function getType(): string
     {
         return 'route';
     }

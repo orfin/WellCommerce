@@ -22,15 +22,6 @@ class CategoryTranslation implements RoutableSubjectInterface, LocaleAwareInterf
     protected $name             = '';
     protected $shortDescription = '';
     protected $description      = '';
-    
-    /**
-     * @var RouteInterface
-     */
-    protected $route;
-    
-    /**
-     * @var Meta
-     */
     protected $meta;
     
     public function __construct()

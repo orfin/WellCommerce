@@ -35,15 +35,7 @@ class News implements NewsInterface
     
     protected $publish  = true;
     protected $featured = false;
-    
-    /**
-     * @var DateTime $startDate
-     */
     protected $startDate;
-    
-    /**
-     * @var DateTime $endDate
-     */
     protected $endDate;
     
     public function __construct()
@@ -61,12 +53,12 @@ class News implements NewsInterface
     {
         $this->publish = $publish;
     }
-
+    
     public function getStartDate(): DateTime
     {
         return $this->startDate;
     }
-
+    
     public function setStartDate(DateTime $startDate)
     {
         $this->startDate = $startDate;
@@ -76,17 +68,17 @@ class News implements NewsInterface
     {
         return $this->endDate;
     }
-
+    
     public function setEndDate(DateTime $endDate)
     {
         $this->endDate = $endDate;
     }
-
+    
     public function getFeatured(): bool
     {
         return $this->featured;
     }
-
+    
     public function setFeatured($featured)
     {
         $this->featured = $featured;

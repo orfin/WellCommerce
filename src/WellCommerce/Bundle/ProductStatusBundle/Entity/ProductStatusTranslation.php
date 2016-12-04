@@ -29,83 +29,46 @@ class ProductStatusTranslation implements LocaleAwareInterface, RoutableSubjectI
     use Translation;
     use RoutableTrait;
     
-    /**
-     * @var string
-     */
-    protected $name;
-
-    /**
-     * @var RouteInterface
-     */
-    protected $route;
-
-    /**
-     * @var string
-     */
-    protected $cssClass;
-
-    /**
-     * @var Meta
-     */
+    protected $name     = '';
+    protected $cssClass = '';
     protected $meta;
-
-    /**
-     * Constructor
-     */
+    
     public function __construct()
     {
         $this->meta = new Meta();
     }
-
-    /**
-     * @return string
-     */
-    public function getName()
+    
+    public function getName(): string
     {
         return $this->name;
     }
-
-    /**
-     * @param string $name
-     */
-    public function setName($name)
+    
+    public function setName(string $name)
     {
         $this->name = $name;
     }
-
-    /**
-     * @return string
-     */
-    public function getCssClass()
+    
+    public function getCssClass(): string
     {
         return $this->cssClass;
     }
-
-    /**
-     * @param string $cssClass
-     */
-    public function setCssClass($cssClass)
+    
+    public function setCssClass(string $cssClass)
     {
         $this->cssClass = $cssClass;
     }
-
-    /**
-     * @return Meta
-     */
-    public function getMeta()
+    
+    public function getMeta(): Meta
     {
         return $this->meta;
     }
-
-    /**
-     * @param Meta $meta
-     */
+    
     public function setMeta(Meta $meta)
     {
         $this->meta = $meta;
     }
-
-    public function getRouteEntity() : RouteInterface
+    
+    public function getRouteEntity(): RouteInterface
     {
         return new ProductStatusRoute();
     }

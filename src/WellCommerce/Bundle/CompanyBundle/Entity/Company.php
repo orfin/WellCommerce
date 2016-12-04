@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\CompanyBundle\Entity;
 
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
+use WellCommerce\Bundle\CoreBundle\Entity\AddressTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\IdentifiableTrait;
 
 /**
