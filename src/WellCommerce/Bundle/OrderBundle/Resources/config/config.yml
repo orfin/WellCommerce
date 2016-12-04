@@ -23,8 +23,6 @@ doctrine:
     orm:
         resolve_target_entities:
             WellCommerce\Bundle\OrderBundle\Entity\OrderInterface: WellCommerce\Bundle\OrderBundle\Entity\Order
-            WellCommerce\Bundle\OrderBundle\Entity\OrderSummaryInterface: WellCommerce\Bundle\OrderBundle\Entity\OrderSummary
-            WellCommerce\Bundle\OrderBundle\Entity\OrderProductTotalInterface: WellCommerce\Bundle\OrderBundle\Entity\OrderProductTotal
 
 well_commerce_api:
     request_handler:

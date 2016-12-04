@@ -69,7 +69,7 @@ class Order implements OrderInterface
     protected $summary;
     
     /**
-     * @var OrderProductTotalInterface
+     * @var OrderProductTotal
      */
     protected $productTotal;
     
@@ -182,12 +182,12 @@ class Order implements OrderInterface
         $this->products = $products;
     }
     
-    public function getProductTotal(): OrderProductTotalInterface
+    public function getProductTotal(): OrderProductTotal
     {
         return $this->productTotal;
     }
     
-    public function setProductTotal(OrderProductTotalInterface $productTotal)
+    public function setProductTotal(OrderProductTotal $productTotal)
     {
         $this->productTotal = $productTotal;
     }

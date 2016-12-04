@@ -17,15 +17,15 @@ namespace WellCommerce\Bundle\OrderBundle\Entity;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class OrderProductTotal implements OrderProductTotalInterface
+class OrderProductTotal
 {
     protected $quantity   = 0;
-    protected $weight     = 0;
-    protected $netPrice   = 0;
-    protected $grossPrice = 0;
-    protected $taxAmount  = 0;
+    protected $weight     = 0.00;
+    protected $netPrice   = 0.00;
+    protected $grossPrice = 0.00;
+    protected $taxAmount  = 0.00;
     
-    public function getQuantity() : int
+    public function getQuantity(): int
     {
         return $this->quantity;
     }
@@ -35,7 +35,7 @@ class OrderProductTotal implements OrderProductTotalInterface
         $this->quantity = $quantity;
     }
     
-    public function getWeight() : float
+    public function getWeight(): float
     {
         return $this->weight;
     }
@@ -45,7 +45,7 @@ class OrderProductTotal implements OrderProductTotalInterface
         $this->weight = $weight;
     }
     
-    public function getNetPrice() : float
+    public function getNetPrice(): float
     {
         return $this->netPrice;
     }
@@ -55,7 +55,7 @@ class OrderProductTotal implements OrderProductTotalInterface
         $this->netPrice = $netPrice;
     }
     
-    public function getGrossPrice() : float
+    public function getGrossPrice(): float
     {
         return $this->grossPrice;
     }
@@ -65,7 +65,7 @@ class OrderProductTotal implements OrderProductTotalInterface
         $this->grossPrice = $grossPrice;
     }
     
-    public function getTaxAmount() : float
+    public function getTaxAmount(): float
     {
         return $this->taxAmount;
     }

@@ -73,9 +73,9 @@ interface OrderInterface extends
     
     public function setProducts(Collection $products);
     
-    public function getProductTotal(): OrderProductTotalInterface;
+    public function getProductTotal(): OrderProductTotal;
     
-    public function setProductTotal(OrderProductTotalInterface $productTotal);
+    public function setProductTotal(OrderProductTotal $productTotal);
     
     public function addModifier(OrderModifierInterface $modifier);
     
