@@ -24,13 +24,7 @@ use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
  */
 interface CurrencyInterface extends EntityInterface, EnableableInterface, TimestampableInterface, BlameableInterface
 {
-    /**
-     * @param string $code
-     */
     public function setCode(string $code);
-
-    /**
-     * @return string
-     */
+    
     public function getCode() : string;
 }

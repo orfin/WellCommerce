@@ -29,22 +29,13 @@ class Currency implements CurrencyInterface
     use Blameable;
     use EnableableTrait;
     
-    /**
-     * @var string
-     */
     protected $code = '';
     
-    /**
-     * {@inheritdoc}
-     */
     public function setCode(string $code)
     {
         $this->code = $code;
     }
-    
-    /**
-     * {@inheritdoc}
-     */
+
     public function getCode(): string
     {
         return $this->code;

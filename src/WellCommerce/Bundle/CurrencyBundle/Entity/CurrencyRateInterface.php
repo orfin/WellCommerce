@@ -21,33 +21,15 @@ use WellCommerce\Bundle\CoreBundle\Entity\EntityInterface;
  */
 interface CurrencyRateInterface extends EntityInterface
 {
-    /**
-     * @return string
-     */
     public function getCurrencyFrom() : string;
-
-    /**
-     * @param string $currencyFrom
-     */
+    
     public function setCurrencyFrom(string $currencyFrom);
-
-    /**
-     * @return string
-     */
+    
     public function getCurrencyTo() : string;
 
-    /**
-     * @param string $currencyTo
-     */
     public function setCurrencyTo(string $currencyTo);
 
-    /**
-     * @return float
-     */
     public function getExchangeRate() : float;
 
-    /**
-     * @param float $exchangeRate
-     */
     public function setExchangeRate(float $exchangeRate);
 }

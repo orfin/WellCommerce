@@ -27,64 +27,35 @@ class CurrencyRate implements CurrencyRateInterface
     use Timestampable;
     use Blameable;
     
-    /**
-     * @var CurrencyInterface
-     */
     protected $currencyFrom = '';
+    protected $currencyTo   = '';
+    protected $exchangeRate = 1.0000;
     
-    /**
-     * @var CurrencyInterface
-     */
-    protected $currencyTo = '';
-    
-    /**
-     * @var float
-     */
-    protected $exchangeRate = 1;
-    
-    /**
-     * {@inheritdoc}
-     */
     public function getCurrencyFrom(): string
     {
         return $this->currencyFrom;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function setCurrencyFrom(string $currencyFrom)
     {
         $this->currencyFrom = $currencyFrom;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function getCurrencyTo(): string
     {
         return $this->currencyTo;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function setCurrencyTo(string $currencyTo)
     {
         $this->currencyTo = $currencyTo;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function getExchangeRate(): float
     {
         return $this->exchangeRate;
     }
     
-    /**
-     * {@inheritdoc}
-     */
     public function setExchangeRate(float $exchangeRate)
     {
         $this->exchangeRate = $exchangeRate;
