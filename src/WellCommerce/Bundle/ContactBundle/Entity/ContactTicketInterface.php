@@ -21,33 +21,15 @@ use WellCommerce\Bundle\CoreBundle\Entity\EntityInterface;
  */
 interface ContactTicketInterface extends EntityInterface
 {
-    /**
-     * @return string
-     */
-    public function getSubject() : string;
-
-    /**
-     * @param string $subject
-     */
+    public function getSubject(): string;
+    
     public function setSubject(string $subject);
-
-    /**
-     * @return string
-     */
-    public function getEmail() : string;
-
-    /**
-     * @param string $email
-     */
+    
+    public function getEmail(): string;
+    
     public function setEmail(string $email);
-
-    /**
-     * @return string
-     */
-    public function getContent() : string;
-
-    /**
-     * @param string $content
-     */
+    
+    public function getContent(): string;
+    
     public function setContent(string $content);
 }

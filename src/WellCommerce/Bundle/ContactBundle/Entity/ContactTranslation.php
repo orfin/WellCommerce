@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\ContactBundle\Entity;
 
 use Knp\DoctrineBehaviors\Model\Translatable\Translation;
+use WellCommerce\Bundle\CoreBundle\Entity\AddressTrait;
 use WellCommerce\Bundle\LocaleBundle\Entity\LocaleAwareInterface;
 
 /**
@@ -23,17 +24,12 @@ use WellCommerce\Bundle\LocaleBundle\Entity\LocaleAwareInterface;
 class ContactTranslation implements LocaleAwareInterface
 {
     use Translation;
+    use AddressTrait;
     
-    private $name          = '';
-    private $email         = '';
-    private $phone         = '';
-    private $businessHours = '';
-    private $line1         = '';
-    private $line2         = '';
-    private $postalCode    = '';
-    private $state         = '';
-    private $city          = '';
-    private $country       = '';
+    protected $name          = '';
+    protected $email         = '';
+    protected $phone         = '';
+    protected $businessHours = '';
     
     public function getName(): string
     {
@@ -73,65 +69,5 @@ class ContactTranslation implements LocaleAwareInterface
     public function setBusinessHours(string $businessHours)
     {
         $this->businessHours = $businessHours;
-    }
-    
-    public function getLine1(): string
-    {
-        return $this->line1;
-    }
-    
-    public function setLine1(string $line1)
-    {
-        $this->line1 = $line1;
-    }
-    
-    public function getLine2(): string
-    {
-        return $this->line2;
-    }
-    
-    public function setLine2(string $line2)
-    {
-        $this->line2 = $line2;
-    }
-    
-    public function getPostalCode(): string
-    {
-        return $this->postalCode;
-    }
-    
-    public function setPostalCode(string $postalCode)
-    {
-        $this->postalCode = $postalCode;
-    }
-    
-    public function getState(): string
-    {
-        return $this->state;
-    }
-    
-    public function setState(string $state)
-    {
-        $this->state = $state;
-    }
-    
-    public function getCity(): string
-    {
-        return $this->city;
-    }
-    
-    public function setCity(string $city)
-    {
-        $this->city = $city;
-    }
-    
-    public function getCountry(): string
-    {
-        return $this->country;
-    }
-    
-    public function setCountry(string $country)
-    {
-        $this->country = $country;
     }
 }
