@@ -14,9 +14,13 @@ namespace WellCommerce\Bundle\OrderBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientAwareTrait;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddress;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddressAwareTrait;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetails;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetailsAwareTrait;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientDetails;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientDetailsAwareTrait;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddress;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddressAwareTrait;
 use WellCommerce\Bundle\CoreBundle\Behaviours\Timestampable\TimestampableTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\IdentifiableTrait;
@@ -101,6 +105,10 @@ class Order implements OrderInterface
         $this->orderStatusHistory = new ArrayCollection();
         $this->productTotal       = new OrderProductTotal();
         $this->summary            = new OrderSummary();
+        $this->clientDetails      = new ClientDetails();
+        $this->contactDetails     = new ClientContactDetails();
+        $this->billingAddress     = new ClientBillingAddress();
+        $this->shippingAddress    = new ClientShippingAddress();
     }
     
     public function isConfirmed(): bool
