@@ -22,53 +22,23 @@ use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
  */
 interface PackageInterface extends EntityInterface, TimestampableInterface
 {
-    /**
-     * @return string
-     */
-    public function getFullName();
+    public function getFullName(): string;
     
-    /**
-     * @param string $fullName
-     */
-    public function setFullName($fullName);
+    public function setFullName(string $fullName);
     
-    /**
-     * @return string
-     */
-    public function getName();
+    public function getName(): string;
     
-    /**
-     * @param string $name
-     */
-    public function setName($name);
+    public function setName(string $name);
     
-    /**
-     * @return string
-     */
-    public function getVendor();
+    public function getVendor(): string;
     
-    /**
-     * @param string $vendor
-     */
-    public function setVendor($vendor);
+    public function setVendor(string $vendor);
     
-    /**
-     * @return string
-     */
-    public function getLocalVersion();
+    public function getLocalVersion(): string;
     
-    /**
-     * @param string $localVersion
-     */
-    public function setLocalVersion($localVersion);
+    public function setLocalVersion(string $localVersion);
     
-    /**
-     * @return string
-     */
-    public function getRemoteVersion();
+    public function getRemoteVersion(): string;
     
-    /**
-     * @param string $remoteVersion
-     */
-    public function setRemoteVersion($remoteVersion);
+    public function setRemoteVersion(string $remoteVersion);
 }

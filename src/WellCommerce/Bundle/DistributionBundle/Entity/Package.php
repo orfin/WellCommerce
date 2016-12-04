@@ -24,108 +24,59 @@ class Package implements PackageInterface
 {
     use IdentifiableTrait;
     use Timestampable;
-
-    /**
-     * @var string
-     */
-    protected $fullName;
-
-    /**
-     * @var string
-     */
-    protected $name;
-
-    /**
-     * @var string
-     */
-    protected $vendor;
-
-    /**
-     * @var string
-     */
-    protected $localVersion;
-
-    /**
-     * @var string
-     */
-    protected $remoteVersion;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getFullName()
+    
+    protected $fullName      = '';
+    protected $name          = '';
+    protected $vendor        = '';
+    protected $localVersion  = '';
+    protected $remoteVersion = '';
+    
+    public function getFullName(): string
     {
         return $this->fullName;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setFullName($fullName)
+    
+    public function setFullName(string $fullName)
     {
         $this->fullName = $fullName;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
+    
+    public function getName(): string
     {
         return $this->name;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setName($name)
+    
+    public function setName(string $name)
     {
         $this->name = $name;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getVendor()
+    
+    public function getVendor(): string
     {
         return $this->vendor;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setVendor($vendor)
+    
+    public function setVendor(string $vendor)
     {
         $this->vendor = $vendor;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getLocalVersion()
+    public function getLocalVersion(): string
     {
         return $this->localVersion;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setLocalVersion($localVersion)
+    
+    public function setLocalVersion(string $localVersion)
     {
         $this->localVersion = $localVersion;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getRemoteVersion()
+    
+    public function getRemoteVersion(): string
     {
         return $this->remoteVersion;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setRemoteVersion($remoteVersion)
+    
+    public function setRemoteVersion(string $remoteVersion)
     {
         $this->remoteVersion = $remoteVersion;
     }
