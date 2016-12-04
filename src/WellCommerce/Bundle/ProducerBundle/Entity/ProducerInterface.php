@@ -32,23 +32,11 @@ interface ProducerInterface extends
     BlameableInterface,
     ShopCollectionAwareInterface
 {
-    /**
-     * @return Collection
-     */
-    public function getProducts() : Collection;
-
-    /**
-     * @return Collection
-     */
-    public function getDeliverers() : Collection;
-
-    /**
-     * @param Collection $collection
-     */
+    public function getProducts(): Collection;
+    
+    public function getDeliverers(): Collection;
+    
     public function setDeliverers(Collection $collection);
-
-    /**
-     * @param DelivererInterface $deliverer
-     */
+    
     public function addDeliverer(DelivererInterface $deliverer);
 }

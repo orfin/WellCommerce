@@ -35,30 +35,11 @@ class Page implements PageInterface
     use HierarchyAwareTrait;
     use ShopCollectionAwareTrait;
     
-    /**
-     * @var bool
-     */
-    protected $publish = true;
-    
-    /**
-     * @var string
-     */
-    protected $section = '';
-    
-    /**
-     * @var int
-     */
-    protected $redirectType = 1;
-    
-    /**
-     * @var string
-     */
-    protected $redirectUrl;
-    
-    /**
-     * @var string
-     */
-    protected $redirectRoute;
+    protected $publish       = true;
+    protected $section       = '';
+    protected $redirectType  = 1;
+    protected $redirectUrl   = '';
+    protected $redirectRoute = '';
     
     /**
      * @var PageInterface|null
