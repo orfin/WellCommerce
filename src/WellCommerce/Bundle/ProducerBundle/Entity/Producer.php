@@ -50,6 +50,7 @@ class Producer implements ProducerInterface
     {
         $this->products   = new ArrayCollection();
         $this->deliverers = new ArrayCollection();
+        $this->shops      = new ArrayCollection();
     }
     
     public function getProducts(): Collection

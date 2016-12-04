@@ -63,7 +63,7 @@ class Shop implements ShopInterface
         $this->name = $name;
     }
     
-    public function getCompany(): CompanyInterface
+    public function getCompany()
     {
         return $this->company;
     }
