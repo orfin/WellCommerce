@@ -1,24 +1,17 @@
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
 
 services:
     producer_menu.layout_box.configurator:
-        class: WellCommerce\Bundle\LayoutBundle\Configurator\ProducerMenuBoxConfigurator
+        class: WellCommerce\Bundle\ProducerBundle\Configurator\ProducerMenuBoxConfigurator
         tags:
             - { name: layout_box.configurator }
         arguments: [ProducerMenu, producer_menu.layout_box.controller, '@translator.helper']
-        calls:
-            - [setContainer, ['@service_container']]
-
-    producer_products.layout_box.configurator:
-        class: WellCommerce\Bundle\LayoutBundle\Configurator\ProducerProductsBoxConfigurator
-        tags:
-            - { name: layout_box.configurator }
-        arguments: [ProducerProducts, producer_products.layout_box.controller, '@translator.helper']
-        calls:
-            - [setContainer, ['@service_container']]
-
-    producer.controller.front:
-        class: WellCommerce\Bundle\ProducerBundle\Controller\Front\ProducerController
-        arguments: ['@producer.manager']
         calls:
             - [setContainer, ['@service_container']]
 
@@ -28,8 +21,22 @@ services:
         calls:
             - [setContainer, ['@service_container']]
 
+    producer_products.layout_box.configurator:
+        class: WellCommerce\Bundle\ProducerBundle\Configurator\ProducerProductsBoxConfigurator
+        tags:
+            - { name: layout_box.configurator }
+        arguments: [ProducerProducts, producer_products.layout_box.controller, '@translator.helper']
+        calls:
+            - [setContainer, ['@service_container']]
+
     producer_products.layout_box.controller:
         class: WellCommerce\Bundle\ProducerBundle\Controller\Box\ProducerProductsBoxController
+        arguments: ['@producer.manager']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    producer.controller.front:
+        class: WellCommerce\Bundle\ProducerBundle\Controller\Front\ProducerController
         arguments: ['@producer.manager']
         calls:
             - [setContainer, ['@service_container']]

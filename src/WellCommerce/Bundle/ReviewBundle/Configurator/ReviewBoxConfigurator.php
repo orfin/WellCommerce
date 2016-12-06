@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * WellCommerce Open-Source E-Commerce Platform
  *
  * This file is part of the WellCommerce package.
@@ -10,8 +10,9 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\LayoutBundle\Configurator;
+namespace WellCommerce\Bundle\ReviewBundle\Configurator;
 
+use WellCommerce\Bundle\LayoutBundle\Configurator\AbstractLayoutBoxConfigurator;
 use WellCommerce\Component\Form\Elements\FormInterface;
 use WellCommerce\Component\Form\FormBuilderInterface;
 
@@ -20,7 +21,7 @@ use WellCommerce\Component\Form\FormBuilderInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ReviewBoxConfigurator extends AbstractLayoutBoxConfigurator
+final class ReviewBoxConfigurator extends AbstractLayoutBoxConfigurator
 {
     /**
      * {@inheritdoc}
@@ -28,9 +29,9 @@ class ReviewBoxConfigurator extends AbstractLayoutBoxConfigurator
     public function addFormFields(FormBuilderInterface $builder, FormInterface $form, $defaults)
     {
         $fieldset = $this->getFieldset($builder, $form);
-
+        
         $fieldset->addChild($builder->getElement('tip', [
-            'tip' => $this->trans('layout_box.review.tip')
+            'tip' => $this->trans('layout_box.review.tip'),
         ]));
     }
 }

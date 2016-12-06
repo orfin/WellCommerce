@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * WellCommerce Open-Source E-Commerce Platform
  *
  * This file is part of the WellCommerce package.
@@ -10,17 +10,18 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\LayoutBundle\Configurator;
+namespace WellCommerce\Bundle\PageBundle\Configurator;
 
+use WellCommerce\Bundle\LayoutBundle\Configurator\AbstractLayoutBoxConfigurator;
 use WellCommerce\Component\Form\Elements\FormInterface;
 use WellCommerce\Component\Form\FormBuilderInterface;
 
 /**
- * Class ProductInfoBoxConfigurator
+ * Class PageBoxConfigurator
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductInfoBoxConfigurator extends AbstractLayoutBoxConfigurator
+final class PageBoxConfigurator extends AbstractLayoutBoxConfigurator
 {
     /**
      * {@inheritdoc}
@@ -28,9 +29,9 @@ class ProductInfoBoxConfigurator extends AbstractLayoutBoxConfigurator
     public function addFormFields(FormBuilderInterface $builder, FormInterface $form, $defaults)
     {
         $fieldset = $this->getFieldset($builder, $form);
-
+        
         $fieldset->addChild($builder->getElement('tip', [
-            'tip' => $this->trans('layout_box.product.info.tip')
+            'tip' => $this->trans('page.box.help'),
         ]));
     }
 }

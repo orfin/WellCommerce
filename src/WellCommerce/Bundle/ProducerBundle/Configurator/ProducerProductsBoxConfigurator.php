@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * WellCommerce Open-Source E-Commerce Platform
  *
  * This file is part of the WellCommerce package.
@@ -10,13 +10,15 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\LayoutBundle\Configurator;
+namespace WellCommerce\Bundle\ProducerBundle\Configurator;
+
+use WellCommerce\Bundle\LayoutBundle\Configurator\AbstractLayoutBoxConfigurator;
 
 /**
- * Class ClientForgotPasswordBoxConfigurator
+ * Class ProducerProductsBoxConfigurator
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientForgotPasswordBoxConfigurator extends AbstractLayoutBoxConfigurator
+final class ProducerProductsBoxConfigurator extends AbstractLayoutBoxConfigurator
 {
 }

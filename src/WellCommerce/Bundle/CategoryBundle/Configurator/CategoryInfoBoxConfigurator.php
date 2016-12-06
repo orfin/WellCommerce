@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * WellCommerce Open-Source E-Commerce Platform
  *
  * This file is part of the WellCommerce package.
@@ -10,17 +10,18 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\LayoutBundle\Configurator;
+namespace WellCommerce\Bundle\CategoryBundle\Configurator;
 
+use WellCommerce\Bundle\LayoutBundle\Configurator\AbstractLayoutBoxConfigurator;
 use WellCommerce\Component\Form\Elements\FormInterface;
 use WellCommerce\Component\Form\FormBuilderInterface;
 
 /**
- * Class ContactBoxConfigurator
+ * Class CategoryInfoBoxConfigurator
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ContactBoxConfigurator extends AbstractLayoutBoxConfigurator
+final class CategoryInfoBoxConfigurator extends AbstractLayoutBoxConfigurator
 {
     /**
      * {@inheritdoc}
@@ -28,9 +29,9 @@ class ContactBoxConfigurator extends AbstractLayoutBoxConfigurator
     public function addFormFields(FormBuilderInterface $builder, FormInterface $form, $defaults)
     {
         $fieldset = $this->getFieldset($builder, $form);
-
+        
         $fieldset->addChild($builder->getElement('tip', [
-            'tip' => $this->trans('contact.box.help')
+            'tip' => $this->trans('Choose categories which should be not visible in box.'),
         ]));
     }
 }

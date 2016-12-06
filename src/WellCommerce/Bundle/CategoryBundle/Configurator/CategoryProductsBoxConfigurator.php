@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * WellCommerce Open-Source E-Commerce Platform
  *
  * This file is part of the WellCommerce package.
@@ -10,17 +10,18 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\LayoutBundle\Configurator;
+namespace WellCommerce\Bundle\CategoryBundle\Configurator;
 
+use WellCommerce\Bundle\LayoutBundle\Configurator\AbstractLayoutBoxConfigurator;
 use WellCommerce\Component\Form\Elements\FormInterface;
 use WellCommerce\Component\Form\FormBuilderInterface;
 
 /**
- * Class CategoryInfoBoxConfigurator
+ * Class CategoryProductsBoxConfigurator
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CategoryInfoBoxConfigurator extends AbstractLayoutBoxConfigurator
+final class CategoryProductsBoxConfigurator extends AbstractLayoutBoxConfigurator
 {
     /**
      * {@inheritdoc}
@@ -28,9 +29,10 @@ class CategoryInfoBoxConfigurator extends AbstractLayoutBoxConfigurator
     public function addFormFields(FormBuilderInterface $builder, FormInterface $form, $defaults)
     {
         $fieldset = $this->getFieldset($builder, $form);
-
-        $fieldset->addChild($builder->getElement('tip', [
-            'tip' => $this->trans('Choose categories which should be not visible in box.')
+        
+        $fieldset->addChild($builder->getElement('text_field', [
+            'name'  => 'per_page',
+            'label' => $this->trans('layout_box.category_products.per_page'),
         ]));
     }
 }

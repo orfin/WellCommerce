@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * WellCommerce Open-Source E-Commerce Platform
  *
  * This file is part of the WellCommerce package.
@@ -10,8 +10,9 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\LayoutBundle\Configurator;
+namespace WellCommerce\Bundle\CategoryBundle\Configurator;
 
+use WellCommerce\Bundle\LayoutBundle\Configurator\AbstractLayoutBoxConfigurator;
 use WellCommerce\Component\Form\Elements\FormInterface;
 use WellCommerce\Component\Form\FormBuilderInterface;
 
@@ -20,7 +21,7 @@ use WellCommerce\Component\Form\FormBuilderInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CategoryMenuBoxConfigurator extends AbstractLayoutBoxConfigurator
+final class CategoryMenuBoxConfigurator extends AbstractLayoutBoxConfigurator
 {
     /**
      * {@inheritdoc}

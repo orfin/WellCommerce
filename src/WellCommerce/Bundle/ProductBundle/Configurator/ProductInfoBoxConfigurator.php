@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * WellCommerce Open-Source E-Commerce Platform
  *
  * This file is part of the WellCommerce package.
@@ -10,17 +10,18 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\LayoutBundle\Configurator;
+namespace WellCommerce\Bundle\ProductBundle\Configurator;
 
+use WellCommerce\Bundle\LayoutBundle\Configurator\AbstractLayoutBoxConfigurator;
 use WellCommerce\Component\Form\Elements\FormInterface;
 use WellCommerce\Component\Form\FormBuilderInterface;
 
 /**
- * Class ProducerBoxConfigurator
+ * Class ProductInfoBoxConfigurator
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProducerBoxConfigurator extends AbstractLayoutBoxConfigurator
+final class ProductInfoBoxConfigurator extends AbstractLayoutBoxConfigurator
 {
     /**
      * {@inheritdoc}
@@ -28,20 +29,9 @@ class ProducerBoxConfigurator extends AbstractLayoutBoxConfigurator
     public function addFormFields(FormBuilderInterface $builder, FormInterface $form, $defaults)
     {
         $fieldset = $this->getFieldset($builder, $form);
-
+        
         $fieldset->addChild($builder->getElement('tip', [
-            'tip' => $this->trans('Select view type used in template.')
+            'tip' => $this->trans('layout_box.product.info.tip'),
         ]));
-
-        $viewType = $fieldset->addChild($builder->getElement('select', [
-            'name'    => 'view_type',
-            'label'   => $this->trans('View type'),
-            'options' => [
-                0 => $this->trans('List'),
-                1 => $this->trans('Select'),
-            ]
-        ]));
-
-        $viewType->setValue($this->getPropertyAccessor()->getValue($defaults, '[view_type]'));
     }
 }

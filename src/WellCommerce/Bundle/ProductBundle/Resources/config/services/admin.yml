@@ -14,7 +14,7 @@ services:
             - [setContainer, ['@service_container']]
 
     product_info.layout_box.configurator:
-        class: WellCommerce\Bundle\LayoutBundle\Configurator\ProductInfoBoxConfigurator
+        class: WellCommerce\Bundle\ProductBundle\Configurator\ProductInfoBoxConfigurator
         tags:
             - { name: layout_box.configurator }
         arguments: [ProductInfo, product_info.layout_box.controller, '@translator.helper']

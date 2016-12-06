@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * WellCommerce Open-Source E-Commerce Platform
  *
  * This file is part of the WellCommerce package.
@@ -10,17 +10,18 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\LayoutBundle\Configurator;
+namespace WellCommerce\Bundle\ProducerBundle\Configurator;
 
+use WellCommerce\Bundle\LayoutBundle\Configurator\AbstractLayoutBoxConfigurator;
 use WellCommerce\Component\Form\Elements\FormInterface;
 use WellCommerce\Component\Form\FormBuilderInterface;
 
 /**
- * Class ProductShowcaseBoxConfigurator
+ * Class ProducerMenuBoxConfigurator
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductShowcaseBoxConfigurator extends AbstractLayoutBoxConfigurator
+final class ProducerMenuBoxConfigurator extends AbstractLayoutBoxConfigurator
 {
     /**
      * {@inheritdoc}
@@ -30,15 +31,7 @@ class ProductShowcaseBoxConfigurator extends AbstractLayoutBoxConfigurator
         $fieldset = $this->getFieldset($builder, $form);
         
         $fieldset->addChild($builder->getElement('tip', [
-            'tip' => $this->trans('product_showcase.tip')
+            'tip' => $this->trans('producer.box.info'),
         ]));
-        
-        $status = $fieldset->addChild($builder->getElement('select', [
-            'name'    => 'status',
-            'label'   => $this->trans('product_showcase.label.status'),
-            'options' => $this->get('product_status.dataset.admin')->getResult('select'),
-        ]));
-    
-        $status->setValue($this->getPropertyAccessor()->getValue($defaults, '[status]'));
     }
 }

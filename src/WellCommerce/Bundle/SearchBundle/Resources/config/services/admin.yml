@@ -8,7 +8,7 @@
 
 services:
     search.layout_box.configurator:
-        class: WellCommerce\Bundle\LayoutBundle\Configurator\SearchBoxConfigurator
+        class: WellCommerce\Bundle\SearchBundle\Configurator\SearchBoxConfigurator
         tags:
             - { name: layout_box.configurator }
         arguments: [Search, search.layout_box.controller, '@translator.helper']

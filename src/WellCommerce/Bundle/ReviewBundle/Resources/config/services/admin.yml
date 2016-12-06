@@ -14,7 +14,7 @@ services:
             - [setContainer, ['@service_container']]
 
     review.layout_box.configurator:
-        class: WellCommerce\Bundle\LayoutBundle\Configurator\ReviewBoxConfigurator
+        class: WellCommerce\Bundle\ReviewBundle\Configurator\ReviewBoxConfigurator
         tags:
             - { name: layout_box.configurator }
         arguments: [Review, review.layout_box.controller, '@translator.helper']

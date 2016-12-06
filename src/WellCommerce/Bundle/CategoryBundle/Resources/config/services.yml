@@ -8,7 +8,7 @@
 
 services:
     category_menu.layout_box.configurator:
-        class: WellCommerce\Bundle\LayoutBundle\Configurator\CategoryMenuBoxConfigurator
+        class: WellCommerce\Bundle\CategoryBundle\Configurator\CategoryMenuBoxConfigurator
         tags:
             - { name: layout_box.configurator }
         arguments: [CategoryMenu, category_menu.layout_box.controller, '@translator.helper']
@@ -16,7 +16,7 @@ services:
             - [setContainer, ['@service_container']]
 
     category_info.layout_box.configurator:
-        class: WellCommerce\Bundle\LayoutBundle\Configurator\CategoryInfoBoxConfigurator
+        class: WellCommerce\Bundle\CategoryBundle\Configurator\CategoryInfoBoxConfigurator
         tags:
             - { name: layout_box.configurator }
         arguments: [CategoryInfo, category_info.layout_box.controller, '@translator.helper']
@@ -24,7 +24,7 @@ services:
             - [setContainer, ['@service_container']]
 
     category_products.layout_box.configurator:
-        class: WellCommerce\Bundle\LayoutBundle\Configurator\CategoryProductsBoxConfigurator
+        class: WellCommerce\Bundle\CategoryBundle\Configurator\CategoryProductsBoxConfigurator
         tags:
             - { name: layout_box.configurator }
         arguments: [CategoryProducts, category_products.layout_box.controller, '@translator.helper']
