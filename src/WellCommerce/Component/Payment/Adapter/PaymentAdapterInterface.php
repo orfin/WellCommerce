@@ -19,5 +19,4 @@ namespace WellCommerce\Component\Payment;
  */
 interface PaymentAdapterInterface
 {
-    
 }
