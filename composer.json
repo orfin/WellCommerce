@@ -64,7 +64,7 @@
     "zendframework/zendsearch": "dev-master",
     "zendframework/zend-json": "^2.6@dev",
     "mmoreram/simple-doctrine-mapping": "^1.1",
-    "league/oauth2-facebook": "~1.0",
+    "league/oauth2-facebook": "1.4.4",
     "wingu/code-generator": "^1.0",
     "sensio/generator-bundle": "^3.0@dev",
     "doctrine/doctrine-fixtures-bundle": "^2.2",

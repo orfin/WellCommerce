@@ -239,7 +239,7 @@ final class FacebookAuthenticator extends AbstractGuardAuthenticator
             'redirect_uri',
         ]);
 
-        $resolver->setDefault('graph_version', 'v2.5');
+        $resolver->setDefault('graph_version', 'v2.8');
         $resolver->setDefault('scopes', ['email']);
         $resolver->setDefault('redirect_route', 'oauth.facebook.check');
         $resolver->setDefault('redirect_uri', function (Options $options) {
