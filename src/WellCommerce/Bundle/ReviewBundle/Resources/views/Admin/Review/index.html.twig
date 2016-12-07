@@ -2,5 +2,48 @@
 {% trans_default_domain "wellcommerce" %}
 {% block content %}
     <h2>{% trans %}review.heading.index{% endtrans %}</h2>
+    <script type="text/javascript">
+        function enableOpinion(dg, id) {
+            DataGrid.MakeRequest(Routing.generate('admin.review.enable',{id: id}), {}, function(oResult){
+                if(oResult.success){
+                    DataGrid.LoadData();
+                    DataGrid.ClearSelection();
+                }
+
+                if(oResult.error){
+                    GError(oData.error);
+                    DataGrid.ClearSelection();
+                }
+            });
+        }
+
+        function disableOpinion(dg, id) {
+            DataGrid.MakeRequest(Routing.generate('admin.review.disable',{id: id}), {}, function(oResult){
+                if(oResult.success){
+                    DataGrid.LoadData();
+                    DataGrid.ClearSelection();
+                }
+
+                if(oResult.error){
+                    GError(oData.error);
+                    DataGrid.ClearSelection();
+                }
+            });
+        }
+
+        var action_enableOpinion = new GF_Action({
+            caption: '{% trans %}common.label.enable{% endtrans %}',
+            action: enableOpinion,
+            img: '{{ asset('images/icons/datagrid/on.png') }}',
+            condition: function(oR) { return oR['enabled'] != '1'; }
+        });
+
+        var action_disableOpinion = new GF_Action({
+            caption: '{% trans %}common.label.disable{% endtrans %}',
+            action: disableOpinion,
+            img: '{{ asset('images/icons/datagrid/off.png') }}',
+            condition: function(oR) { return oR['enabled'] == '1'; }
+        });
+    </script>
     {{ datagrid_renderer(datagrid) }}
 {% endblock %}

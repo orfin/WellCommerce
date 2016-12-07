@@ -45,3 +45,19 @@ admin.review.delete_group:
     options:
         expose: true
         require_admin_permission: review.delete
+
+admin.review.enable:
+    path: '/enable/{id}'
+    defaults:
+        _controller: 'review.controller.admin:enableAction'
+    options:
+        expose: true
+        require_admin_permission: review.edit
+
+admin.review.disable:
+    path: '/disable/{id}'
+    defaults:
+        _controller: 'review.controller.admin:disableAction'
+    options:
+        expose: true
+        require_admin_permission: review.edit

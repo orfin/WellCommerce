@@ -17,6 +17,8 @@ use WellCommerce\Component\DataGrid\Column\ColumnCollection;
 use WellCommerce\Component\DataGrid\Column\Options\Appearance;
 use WellCommerce\Component\DataGrid\Column\Options\Filter;
 use WellCommerce\Component\DataGrid\Column\Options\Sorting;
+use WellCommerce\Component\DataGrid\Configuration\EventHandler\CustomRowEventHandler;
+use WellCommerce\Component\DataGrid\Options\OptionsInterface;
 
 /**
  * Class ReviewDataGrid
@@ -44,25 +46,25 @@ class ReviewDataGrid extends AbstractDataGrid
                 'type' => Filter::FILTER_BETWEEN,
             ]),
         ]));
-
+        
         $collection->add(new Column([
             'id'         => 'nick',
             'caption'    => $this->trans('review.label.nick'),
             'appearance' => new Appearance([
                 'width' => 70,
-                'align' => Appearance::ALIGN_CENTER
+                'align' => Appearance::ALIGN_CENTER,
             ]),
             'filter'     => new Filter([
                 'type' => Filter::FILTER_INPUT,
             ]),
         ]));
-
+        
         $collection->add(new Column([
             'id'         => 'createdAt',
             'caption'    => $this->trans('review.label.created_at'),
             'appearance' => new Appearance([
                 'width' => 70,
-                'align' => Appearance::ALIGN_CENTER
+                'align' => Appearance::ALIGN_CENTER,
             ]),
             'filter'     => new Filter([
                 'type' => Filter::FILTER_INPUT,
@@ -79,41 +81,44 @@ class ReviewDataGrid extends AbstractDataGrid
                 'type' => Filter::FILTER_INPUT,
             ]),
         ]));
-
+        
+        $collection->add(new Column([
+            'id'         => 'review',
+            'caption'    => $this->trans('review.label.review'),
+            'appearance' => new Appearance([
+                'width' => 200,
+            ]),
+        ]));
+        
         $collection->add(new Column([
             'id'         => 'rating',
             'caption'    => $this->trans('review.label.rating'),
             'appearance' => new Appearance([
                 'width' => 70,
-                'align' => Appearance::ALIGN_CENTER
+                'align' => Appearance::ALIGN_CENTER,
             ]),
             'filter'     => new Filter([
                 'type' => Filter::FILTER_BETWEEN,
             ]),
         ]));
-
-        $collection->add(new Column([
-            'id'         => 'rating_level',
-            'caption'    => $this->trans('review.label.rating_level'),
-            'appearance' => new Appearance([
-                'width' => 70,
-                'align' => Appearance::ALIGN_CENTER
-            ]),
-            'filter'     => new Filter([
-                'type' => Filter::FILTER_BETWEEN,
-            ]),
+    }
+    
+    protected function configureOptions(OptionsInterface $options)
+    {
+        parent::configureOptions($options);
+        
+        $eventHandlers = $options->getEventHandlers();
+        
+        $eventHandlers->add(new CustomRowEventHandler([
+            'function'      => $this->getJavascriptFunctionName('enableOpinion'),
+            'function_name' => 'enableOpinion',
+            'row_action'    => 'action_enableOpinion'
         ]));
-
-        $collection->add(new Column([
-            'id'         => 'rating_recommendation',
-            'caption'    => $this->trans('review.label.rating_recommendation'),
-            'appearance' => new Appearance([
-                'width' => 70,
-                'align' => Appearance::ALIGN_CENTER
-            ]),
-            'filter'     => new Filter([
-                'type' => Filter::FILTER_BETWEEN,
-            ]),
+        
+        $eventHandlers->add(new CustomRowEventHandler([
+            'function'      => $this->getJavascriptFunctionName('disableOpinion'),
+            'function_name' => 'disableOpinion',
+            'row_action'    => 'action_disableOpinion'
         ]));
     }
 }

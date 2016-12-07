@@ -27,17 +27,17 @@ class ReviewRepository extends EntityRepository implements ReviewRepositoryInter
     /**
      * {@inheritdoc}
      */
-    public function getDataSetQueryBuilder() : QueryBuilder
+    public function getDataSetQueryBuilder(): QueryBuilder
     {
         $queryBuilder = $this->getQueryBuilder();
-        $queryBuilder->groupBy('review.id');
-        $queryBuilder->leftJoin('review.product', 'product_info');
+        $queryBuilder->groupBy('reviews.id');
+        $queryBuilder->leftJoin('reviews.product', 'product_info');
         $queryBuilder->leftJoin('product_info.translations', 'product_translation');
         
         return $queryBuilder;
     }
     
-    public function getProductReviews(ProductInterface $product) : Collection
+    public function getProductReviews(ProductInterface $product): Collection
     {
         $criteria = new Criteria();
         $criteria->where($criteria->expr()->eq('product', $product));
@@ -48,5 +48,10 @@ class ReviewRepository extends EntityRepository implements ReviewRepositoryInter
         ]);
         
         return $this->matching($criteria);
+    }
+    
+    public function getAlias(): string
+    {
+        return 'reviews';
     }
 }
