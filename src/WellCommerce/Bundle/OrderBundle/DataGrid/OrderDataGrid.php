@@ -95,7 +95,6 @@ class OrderDataGrid extends AbstractDataGrid
             ]),
             'appearance' => new Appearance([
                 'width'   => 40,
-                'visible' => false,
                 'align'   => Appearance::ALIGN_CENTER,
             ]),
         ]));

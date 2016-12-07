@@ -56,3 +56,20 @@ WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethod:
             targetEntity: WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod
             fetch: LAZY
             mappedBy: shippingMethods
+        shops:
+            targetEntity: WellCommerce\Bundle\ShopBundle\Entity\ShopInterface
+            fetch: LAZY
+            joinTable:
+                name: shop_shipping_method
+                joinColumns:
+                    -
+                        name: shipping_method_id
+                        nullable: false
+                        onDelete: CASCADE
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    -
+                        name: shop_id
+                        nullable: false
+                        onDelete: CASCADE
+                        referencedColumnName: id

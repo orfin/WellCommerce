@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\AdminBundle\Tests\Manager;
 
+use WellCommerce\Bundle\AdminBundle\Entity\UserGroupInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface;
 use WellCommerce\Bundle\CoreBundle\Test\Manager\AbstractManagerTestCase;
 
@@ -25,5 +26,10 @@ class UserGroupManagerTest extends AbstractManagerTestCase
     protected function get() : ManagerInterface
     {
         return $this->container->get('user_group.manager');
+    }
+    
+    protected function getExpectedEntityInterface(): string
+    {
+        return UserGroupInterface::class;
     }
 }

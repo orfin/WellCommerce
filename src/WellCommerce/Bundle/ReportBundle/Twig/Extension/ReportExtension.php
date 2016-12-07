@@ -75,21 +75,22 @@ final class ReportExtension extends \Twig_Extension
     }
     
     
-    public function renderSalesReport(): string
+    public function renderSalesReport(string $redirectRouteName): string
     {
         $start     = $this->requestHelper->getCurrentRequest()->get('startDate') ?? null;
         $end       = $this->requestHelper->getCurrentRequest()->get('endDate') ?? null;
-        $startDate = (null === $start) ? Carbon::now()->startOfMonth() : Carbon::createFromTimestamp(strtotime($start));
-        $endDate   = (null === $end) ? Carbon::now()->endOfMonth() : Carbon::createFromTimestamp(strtotime($end));
+        $startDate = (null === $start) ? Carbon::now()->startOfMonth() : Carbon::createFromTimestamp(strtotime($start))->startOfDay();
+        $endDate   = (null === $end) ? Carbon::now()->endOfMonth() : Carbon::createFromTimestamp(strtotime($end))->endOfDay();
         $summary   = $this->salesReportProvider->getSummary($startDate, $endDate);
         $chartData = $this->salesReportProvider->getChartData($startDate, $endDate);
         
         return $this->environment->render($this->templateName, [
-            'salesChart'   => $chartData,
-            'salesSummary' => $summary->getSummary(),
-            'currency'     => $this->requestHelper->getCurrentCurrency(),
-            'startDate'    => $startDate->format('Y-m-d'),
-            'endDate'      => $endDate->format('Y-m-d'),
+            'salesChart'        => $chartData,
+            'salesSummary'      => $summary->getSummary(),
+            'currency'          => $this->requestHelper->getCurrentCurrency(),
+            'startDate'         => $startDate->format('Y-m-d'),
+            'endDate'           => $endDate->format('Y-m-d'),
+            'redirectRouteName' => $redirectRouteName,
         ]);
     }
     

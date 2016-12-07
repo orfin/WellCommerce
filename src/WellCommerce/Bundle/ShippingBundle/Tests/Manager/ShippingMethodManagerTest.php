@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\ShippingBundle\Tests\Manager;
 
 use WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface;
 use WellCommerce\Bundle\CoreBundle\Test\Manager\AbstractManagerTestCase;
+use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface;
 
 /**
  * Class ShippingMethodManagerTest
@@ -25,5 +26,10 @@ class ShippingMethodManagerTest extends AbstractManagerTestCase
     protected function get() : ManagerInterface
     {
         return $this->container->get('shipping_method.manager');
+    }
+    
+    protected function getExpectedEntityInterface(): string
+    {
+        return ShippingMethodInterface::class;
     }
 }

@@ -41,7 +41,7 @@ class CategoryTranslation implements RoutableSubjectInterface, LocaleAwareInterf
     
     public function getShortDescription(): string
     {
-        return $this->shortDescription;
+        return (string)$this->shortDescription;
     }
     
     public function setShortDescription(string $shortDescription)
@@ -51,7 +51,7 @@ class CategoryTranslation implements RoutableSubjectInterface, LocaleAwareInterf
     
     public function getDescription(): string
     {
-        return $this->description;
+        return (string)$this->description;
     }
     
     public function setDescription(string $description)

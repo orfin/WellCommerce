@@ -60,7 +60,7 @@ class ClientShippingAddress implements ClientShippingAddressInterface
     
     public function getCompanyName(): string
     {
-        return $this->companyName;
+        return (string)$this->companyName;
     }
     
     public function setCompanyName(string $companyName)

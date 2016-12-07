@@ -37,38 +37,43 @@ final class OrderContext implements ShippingSubjectInterface
         $this->order = $order;
     }
     
-    public function getQuantity() : int
+    public function getQuantity(): int
     {
         return $this->order->getProductTotal()->getQuantity();
     }
     
-    public function getWeight() : float
+    public function getWeight(): float
     {
         return $this->order->getProductTotal()->getWeight();
     }
     
-    public function getGrossPrice() : float
+    public function getGrossPrice(): float
     {
         return $this->order->getProductTotal()->getGrossPrice();
     }
     
-    public function getNetPrice() : float
+    public function getNetPrice(): float
     {
         return $this->order->getProductTotal()->getNetPrice();
     }
     
-    public function getTaxAmount() : float
+    public function getTaxAmount(): float
     {
         return $this->order->getProductTotal()->getTaxAmount();
     }
     
-    public function getCurrency() : string
+    public function getCurrency(): string
     {
         return $this->order->getCurrency();
     }
     
-    public function getCountry() : string
+    public function getCountry(): string
     {
         return $this->order->getShippingAddress()->getCountry();
+    }
+    
+    public function getShop()
+    {
+        return $this->order->getShop();
     }
 }

@@ -23,9 +23,9 @@ class ReviewRepositoryTest extends AbstractRepositoryTestCase
 {
     protected function getAlias()
     {
-        return 'review';
+        return 'reviews';
     }
-
+    
     protected function get()
     {
         return $this->container->get('review.repository');

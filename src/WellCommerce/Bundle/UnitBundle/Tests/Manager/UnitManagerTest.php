@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\UnitBundle\Tests\Manager;
 
 use WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface;
 use WellCommerce\Bundle\CoreBundle\Test\Manager\AbstractManagerTestCase;
+use WellCommerce\Bundle\UnitBundle\Entity\UnitInterface;
 
 /**
  * Class UnitManagerTest
@@ -25,5 +26,10 @@ class UnitManagerTest extends AbstractManagerTestCase
     protected function get() : ManagerInterface
     {
         return $this->container->get('unit.manager');
+    }
+    
+    protected function getExpectedEntityInterface(): string
+    {
+        return UnitInterface::class;
     }
 }

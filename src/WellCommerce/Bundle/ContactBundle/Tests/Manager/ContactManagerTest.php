@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\ContactBundle\Tests\Manager;
 
+use WellCommerce\Bundle\ContactBundle\Entity\ContactInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface;
 use WellCommerce\Bundle\CoreBundle\Test\Manager\AbstractManagerTestCase;
 
@@ -25,5 +26,10 @@ class ContactManagerTest extends AbstractManagerTestCase
     protected function get() : ManagerInterface
     {
         return $this->container->get('contact.manager');
+    }
+    
+    protected function getExpectedEntityInterface(): string
+    {
+        return ContactInterface::class;
     }
 }

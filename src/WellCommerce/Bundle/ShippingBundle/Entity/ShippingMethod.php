@@ -22,6 +22,7 @@ use WellCommerce\Bundle\CoreBundle\Behaviours\Enableable\EnableableTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\IdentifiableTrait;
 use WellCommerce\Bundle\CurrencyBundle\Entity\CurrencyAwareTrait;
 use WellCommerce\Bundle\CurrencyBundle\Entity\CurrencyInterface;
+use WellCommerce\Bundle\ShopBundle\Entity\ShopCollectionAwareTrait;
 use WellCommerce\Bundle\TaxBundle\Entity\TaxAwareTrait;
 
 /**
@@ -39,6 +40,7 @@ class ShippingMethod implements ShippingMethodInterface
     use HierarchyAwareTrait;
     use TaxAwareTrait;
     use CurrencyAwareTrait;
+    use ShopCollectionAwareTrait;
     
     protected $calculator      = '';
     protected $optionsProvider = '';
@@ -63,6 +65,7 @@ class ShippingMethod implements ShippingMethodInterface
     {
         $this->costs          = new ArrayCollection();
         $this->paymentMethods = new ArrayCollection();
+        $this->shops          = new ArrayCollection();
     }
     
     public function getCalculator(): string

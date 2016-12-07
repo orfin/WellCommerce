@@ -37,38 +37,43 @@ final class ProductContext implements ShippingSubjectInterface
         $this->product = $product;
     }
     
-    public function getQuantity() : int
+    public function getQuantity(): int
     {
         return 1;
     }
     
-    public function getWeight() : float
+    public function getWeight(): float
     {
         return $this->product->getWeight();
     }
     
-    public function getGrossPrice() : float
+    public function getGrossPrice(): float
     {
         return $this->product->getSellPrice()->getFinalGrossAmount();
     }
     
-    public function getNetPrice() : float
+    public function getNetPrice(): float
     {
         return $this->product->getSellPrice()->getFinalNetAmount();
     }
     
-    public function getTaxAmount() : float
+    public function getTaxAmount(): float
     {
         return $this->product->getSellPrice()->getFinalTaxAmount();
     }
     
-    public function getCurrency() : string
+    public function getCurrency(): string
     {
         return $this->product->getSellPrice()->getCurrency();
     }
     
-    public function getCountry() : string
+    public function getCountry(): string
     {
         return '';
+    }
+    
+    public function getShop()
+    {
+        return null;
     }
 }

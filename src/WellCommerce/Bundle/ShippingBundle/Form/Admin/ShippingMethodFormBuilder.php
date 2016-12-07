@@ -118,7 +118,8 @@ class ShippingMethodFormBuilder extends AbstractFormBuilder
             'label'   => $this->trans('address.label.country'),
             'options' => $this->get('country.repository')->all(),
         ]));
-        
+    
+        $this->addShopsFieldset($form);
         
         $form->addFilter($this->getFilter('no_code'));
         $form->addFilter($this->getFilter('trim'));

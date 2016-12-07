@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\ProductStatusBundle\Tests\Manager;
 
 use WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface;
 use WellCommerce\Bundle\CoreBundle\Test\Manager\AbstractManagerTestCase;
+use WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusInterface;
 
 /**
  * Class ProductStatusManagerTest
@@ -25,5 +26,10 @@ class ProductStatusManagerTest extends AbstractManagerTestCase
     protected function get() : ManagerInterface
     {
         return $this->container->get('product_status.manager');
+    }
+    
+    protected function getExpectedEntityInterface(): string
+    {
+        return ProductStatusInterface::class;
     }
 }

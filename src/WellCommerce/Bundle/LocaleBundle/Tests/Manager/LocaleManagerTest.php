@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\LocaleBundle\Tests\Manager\Admin;
 
 use WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface;
 use WellCommerce\Bundle\CoreBundle\Test\Manager\AbstractManagerTestCase;
+use WellCommerce\Bundle\LocaleBundle\Entity\LocaleInterface;
 
 /**
  * Class LocaleManagerTest
@@ -25,5 +26,10 @@ class LocaleManagerTest extends AbstractManagerTestCase
     protected function get() : ManagerInterface
     {
         return $this->container->get('locale.manager');
+    }
+    
+    protected function getExpectedEntityInterface(): string
+    {
+        return LocaleInterface::class;
     }
 }

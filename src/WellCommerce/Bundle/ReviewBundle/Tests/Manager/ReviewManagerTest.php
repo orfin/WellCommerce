@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\ReviewBundle\Tests\Manager;
 
 use WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface;
 use WellCommerce\Bundle\CoreBundle\Test\Manager\AbstractManagerTestCase;
+use WellCommerce\Bundle\ReviewBundle\Entity\ReviewInterface;
 
 /**
  * Class ReviewManagerTest
@@ -25,5 +26,10 @@ class ReviewManagerTest extends AbstractManagerTestCase
     protected function get() : ManagerInterface
     {
         return $this->container->get('review.manager');
+    }
+    
+    protected function getExpectedEntityInterface(): string
+    {
+        return ReviewInterface::class;
     }
 }

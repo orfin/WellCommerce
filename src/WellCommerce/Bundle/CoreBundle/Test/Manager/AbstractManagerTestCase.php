@@ -29,29 +29,36 @@ abstract class AbstractManagerTestCase extends AbstractTestCase
         $manager = $this->get();
         $this->assertInstanceOf($this->getManagerInterfaceName(), $manager);
     }
-
+    
     public function testManagerReturnsValidRepository()
     {
         $manager = $this->get();
         $this->assertInstanceOf($this->getRepositoryInterfaceClass(), $manager->getRepository());
     }
-
-    protected function getManagerInterfaceName() : string
+    
+    public function testManagerReturnsValidEntityAfterInitialization()
+    {
+        $manager  = $this->get();
+        $resource = $manager->initResource();
+        $this->assertInstanceOf($this->getExpectedEntityInterface(), $resource);
+    }
+    
+    protected function getManagerInterfaceName(): string
     {
         return ManagerInterface::class;
     }
-
-    protected function getRepositoryInterfaceClass() : string
+    
+    protected function getRepositoryInterfaceClass(): string
     {
         return RepositoryInterface::class;
     }
-
-    protected function getFactoryInterfaceClass() : string
+    
+    protected function getFactoryInterfaceClass(): string
     {
         return EntityFactoryInterface::class;
     }
-
-    abstract protected function get() : ManagerInterface;
-
-
+    
+    abstract protected function get(): ManagerInterface;
+    
+    abstract protected function getExpectedEntityInterface(): string;
 }

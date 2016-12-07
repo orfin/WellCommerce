@@ -41,13 +41,13 @@ final class ValidatorHelper implements ValidatorHelperInterface
     {
         $groups = array_merge(self::DEFAULT_VALIDATOR_GROUPS, $groups);
         
-        return $this->validator->validate($value, null, $groups);
+        return $this->validator->validate($value, $constraints, $groups);
     }
     
     public function isValid($value, array $constraints = null, array $groups = []): bool
     {
         $groups = array_merge(self::DEFAULT_VALIDATOR_GROUPS, $groups);
-        $errors = $this->validator->validate($value, null, $groups);
+        $errors = $this->validator->validate($value, $constraints, $groups);
         
         return 0 === $errors->count();
     }

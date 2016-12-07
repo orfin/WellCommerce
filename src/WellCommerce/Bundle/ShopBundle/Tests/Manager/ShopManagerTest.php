@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\ShopBundle\Tests\Manager;
 
 use WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface;
 use WellCommerce\Bundle\CoreBundle\Test\Manager\AbstractManagerTestCase;
+use WellCommerce\Bundle\ShopBundle\Entity\ShopInterface;
 
 /**
  * Class ShopManagerTest
@@ -25,5 +26,10 @@ class ShopManagerTest extends AbstractManagerTestCase
     protected function get() : ManagerInterface
     {
         return $this->container->get('shop.manager');
+    }
+    
+    protected function getExpectedEntityInterface(): string
+    {
+        return ShopInterface::class;
     }
 }

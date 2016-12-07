@@ -7,6 +7,7 @@ admin.sales_report.index:
     options:
         expose: true
         require_admin_permission: sales_report.index
+
 admin.sales_report.grid:
     path: /admin/report/sales/grid
     condition: "request.isXmlHttpRequest()"
@@ -15,6 +16,7 @@ admin.sales_report.grid:
     options:
         expose: true
         require_admin_permission: sales_report.index
+
 admin.sales_report.view:
     path: /admin/report/sales/view
     defaults:

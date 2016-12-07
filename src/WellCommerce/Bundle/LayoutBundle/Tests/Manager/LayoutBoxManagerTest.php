@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\LayoutBundle\Tests\Manager;
 
 use WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface;
 use WellCommerce\Bundle\CoreBundle\Test\Manager\AbstractManagerTestCase;
+use WellCommerce\Bundle\LayoutBundle\Entity\LayoutBoxInterface;
 
 /**
  * Class LayoutBoxManagerTest
@@ -25,5 +26,10 @@ class LayoutBoxManagerTest extends AbstractManagerTestCase
     protected function get() : ManagerInterface
     {
         return $this->container->get('layout_box.manager');
+    }
+    
+    protected function getExpectedEntityInterface(): string
+    {
+        return LayoutBoxInterface::class;
     }
 }

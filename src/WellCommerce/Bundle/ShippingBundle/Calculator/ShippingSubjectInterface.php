@@ -12,6 +12,8 @@
 
 namespace WellCommerce\Bundle\ShippingBundle\Calculator;
 
+use Doctrine\Common\Collections\Collection;
+
 /**
  * Interface ShippingSubjectInterface
  *
@@ -19,17 +21,19 @@ namespace WellCommerce\Bundle\ShippingBundle\Calculator;
  */
 interface ShippingSubjectInterface
 {
-    public function getQuantity() : int;
+    public function getQuantity(): int;
     
-    public function getWeight() : float;
-
-    public function getNetPrice() : float;
-
-    public function getGrossPrice() : float;
-
-    public function getTaxAmount() : float;
-
-    public function getCurrency() : string;
+    public function getWeight(): float;
     
-    public function getCountry() : string;
+    public function getNetPrice(): float;
+    
+    public function getGrossPrice(): float;
+    
+    public function getTaxAmount(): float;
+    
+    public function getCurrency(): string;
+    
+    public function getCountry(): string;
+    
+    public function getShop();
 }

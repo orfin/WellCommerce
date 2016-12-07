@@ -12,6 +12,7 @@ admin.dashboard.index:
         _controller: 'dashboard.controller.admin:indexAction'
     options:
         require_admin_permission: dashboard.index
+        expose: true
 
 admin.user.index:
     path: /admin/user/index

@@ -20,6 +20,8 @@ use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCostInterface;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface;
 use WellCommerce\Bundle\ShippingBundle\Exception\CalculatorNotFoundException;
 use WellCommerce\Bundle\ShippingBundle\Repository\ShippingMethodRepositoryInterface;
+use WellCommerce\Bundle\ShopBundle\Entity\ShopInterface;
+use WellCommerce\Bundle\ShopBundle\Storage\ShopStorageInterface;
 
 /**
  * Class ShippingMethodProvider
@@ -39,18 +41,25 @@ final class ShippingMethodProvider implements ShippingMethodProviderInterface
     private $calculators;
     
     /**
-     * AbstractShippingMethodProvider constructor.
+     * @var ShopStorageInterface
+     */
+    private $shopStorage;
+    
+    /**
+     * ShippingMethodProvider constructor.
      *
      * @param ShippingMethodRepositoryInterface $repository
      * @param Collection                        $calculators
+     * @param ShopStorageInterface              $shopStorage
      */
-    public function __construct(ShippingMethodRepositoryInterface $repository, Collection $calculators)
+    public function __construct(ShippingMethodRepositoryInterface $repository, Collection $calculators, ShopStorageInterface $shopStorage)
     {
         $this->repository  = $repository;
         $this->calculators = $calculators;
+        $this->shopStorage = $shopStorage;
     }
     
-    public function getCosts(ShippingSubjectInterface $subject) : Collection
+    public function getCosts(ShippingSubjectInterface $subject): Collection
     {
         $methods    = $this->getShippingMethods($subject);
         $collection = new ArrayCollection();
@@ -66,20 +75,25 @@ final class ShippingMethodProvider implements ShippingMethodProviderInterface
         return $collection;
     }
     
-    public function getShippingMethodCosts(ShippingMethodInterface $method, ShippingSubjectInterface $subject) : Collection
+    public function getShippingMethodCosts(ShippingMethodInterface $method, ShippingSubjectInterface $subject): Collection
     {
         $calculator = $this->getCalculator($method);
         $country    = $subject->getCountry();
         $countries  = $method->getCountries();
+        $shop       = $this->getCurrentShop($subject);
         
         if (strlen($country) && count($countries) && !in_array($country, $countries)) {
+            return new ArrayCollection();
+        }
+        
+        if (false === $method->getShops()->contains($shop)) {
             return new ArrayCollection();
         }
         
         return $calculator->calculate($method, $subject);
     }
     
-    private function getCalculator(ShippingMethodInterface $shippingMethod) : ShippingCalculatorInterface
+    private function getCalculator(ShippingMethodInterface $shippingMethod): ShippingCalculatorInterface
     {
         $calculator = $shippingMethod->getCalculator();
         
@@ -90,21 +104,27 @@ final class ShippingMethodProvider implements ShippingMethodProviderInterface
         return $this->calculators->get($calculator);
     }
     
-    private function getShippingMethods(ShippingSubjectInterface $subject) : Collection
+    private function getShippingMethods(ShippingSubjectInterface $subject): Collection
     {
         $methods = $this->repository->getShippingMethods();
         $country = $subject->getCountry();
+        $shop    = $this->getCurrentShop($subject);
         
-        if (strlen($country)) {
-            return $methods->filter(function (ShippingMethodInterface $method) use ($country) {
-                if (count($method->getCountries()) && !in_array($country, $method->getCountries())) {
-                    return false;
-                }
-                
-                return true;
-            });
+        return $methods->filter(function (ShippingMethodInterface $method) use ($country, $shop) {
+            if (strlen($country) && count($method->getCountries()) && !in_array($country, $method->getCountries())) {
+                return false;
+            }
+            
+            return $method->getShops()->contains($shop);
+        });
+    }
+    
+    private function getCurrentShop(ShippingSubjectInterface $subject): ShopInterface
+    {
+        if (!$subject->getShop() instanceof ShopInterface) {
+            return $this->shopStorage->getCurrentShop();
         }
         
-        return $methods;
+        return $subject->getShop();
     }
 }
