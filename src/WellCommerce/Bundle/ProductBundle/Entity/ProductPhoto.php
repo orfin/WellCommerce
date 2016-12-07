@@ -37,7 +37,7 @@ class ProductPhoto implements ProductPhotoInterface
     /**
      * @var bool
      */
-    protected $mainPhoto = true;
+    protected $mainPhoto = false;
     
     public function getPhoto(): MediaInterface
     {

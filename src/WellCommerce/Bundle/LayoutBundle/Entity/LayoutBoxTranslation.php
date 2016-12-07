@@ -39,7 +39,7 @@ class LayoutBoxTranslation implements LocaleAwareInterface
     
     public function getContent(): string
     {
-        return $this->content;
+        return (string)$this->content;
     }
     
     public function setContent(string $content)

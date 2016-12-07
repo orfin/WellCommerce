@@ -63,7 +63,7 @@ class ContactTranslation implements LocaleAwareInterface
     
     public function getBusinessHours(): string
     {
-        return $this->businessHours;
+        return (string)$this->businessHours;
     }
     
     public function setBusinessHours(string $businessHours)
