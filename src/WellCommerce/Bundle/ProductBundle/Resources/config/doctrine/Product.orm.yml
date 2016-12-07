@@ -147,6 +147,7 @@ WellCommerce\Bundle\ProductBundle\Entity\Product:
     oneToMany:
         productPhotos:
             targetEntity: WellCommerce\Bundle\ProductBundle\Entity\ProductPhoto
+            orderBy: { 'hierarchy': 'ASC' }
             cascade:
                 - remove
                 - persist

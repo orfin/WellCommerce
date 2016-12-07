@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\ProductBundle\Form\DataTransformer;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\PersistentCollection;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 use WellCommerce\Bundle\MediaBundle\Entity\MediaInterface;
 use WellCommerce\Bundle\MediaBundle\Form\DataTransformer\MediaCollectionToArrayTransformer;
@@ -31,28 +32,48 @@ class ProductPhotoCollectionToArrayTransformer extends MediaCollectionToArrayTra
     /**
      * {@inheritdoc}
      */
+    public function transform($modelData)
+    {
+        if (null === $modelData || !$modelData instanceof PersistentCollection) {
+            return [];
+        }
+        
+        $items = [];
+        foreach ($modelData as $item) {
+            if ($item->isMainPhoto() == 1) {
+                $items['main_photo'] = $item->getPhoto()->getId();
+            }
+            $items['photos'][] = $item->getPhoto()->getId();
+        }
+        
+        return $items;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
     public function reverseTransform($modelData, PropertyPathInterface $propertyPath, $values)
     {
         if (!$modelData instanceof ProductInterface) {
             throw new \InvalidArgumentException(sprintf('Wrong entity passed "%s"', get_class($modelData)));
         }
-
+        
         if ($this->isPhotoCollectionUnModified($values)) {
             return false;
         }
-
+        
         $previousCollection = $this->propertyAccessor->getValue($modelData, $propertyPath);
         $this->clearPreviousCollection($previousCollection);
-
+        
         $collection = $this->createPhotosCollection($modelData, $values);
-
+        
         if (0 === $collection->count()) {
             $modelData->setPhoto(null);
         }
-
+        
         $this->propertyAccessor->setValue($modelData, $propertyPath, $collection);
     }
-
+    
     /**
      * Checks whether photo collection was modified
      *
@@ -64,7 +85,7 @@ class ProductPhotoCollectionToArrayTransformer extends MediaCollectionToArrayTra
     {
         return (isset($values['unmodified']) && (int)$values['unmodified'] === 1);
     }
-
+    
     /**
      * Resets previous photo collection
      *
@@ -78,7 +99,7 @@ class ProductPhotoCollectionToArrayTransformer extends MediaCollectionToArrayTra
             }
         }
     }
-
+    
     /**
      * Returns new photos collection
      *
@@ -91,18 +112,20 @@ class ProductPhotoCollectionToArrayTransformer extends MediaCollectionToArrayTra
     {
         $photos      = new ArrayCollection();
         $identifiers = $this->getMediaIdentifiers($values);
-
+        $hierarchy   = 0;
+        
         foreach ($identifiers as $id) {
             $media = $this->getMediaById($id);
             $photo = $this->getProductPhoto($media, $product, $values);
+            $photo->setHierarchy($hierarchy++);
             if (!$photos->contains($photo)) {
                 $photos->add($photo);
             }
         }
-
+        
         return $photos;
     }
-
+    
     /**
      * Fetch only media identifiers from an array
      *
@@ -113,16 +136,16 @@ class ProductPhotoCollectionToArrayTransformer extends MediaCollectionToArrayTra
     private function getMediaIdentifiers($values)
     {
         $identifiers = [];
-
+        
         foreach ($values as $key => $id) {
             if (is_int($key)) {
                 $identifiers[] = $id;
             }
         }
-
+        
         return $identifiers;
     }
-
+    
     /**
      * Returns media entity by its identifier
      *
@@ -134,7 +157,7 @@ class ProductPhotoCollectionToArrayTransformer extends MediaCollectionToArrayTra
     {
         return $this->getRepository()->find($id);
     }
-
+    
     /**
      * Returns product photo model
      *
@@ -151,14 +174,14 @@ class ProductPhotoCollectionToArrayTransformer extends MediaCollectionToArrayTra
         $productPhoto->setPhoto($media);
         $productPhoto->setMainPhoto($mainPhoto);
         $productPhoto->setProduct($modelData);
-
+        
         if ($mainPhoto) {
             $modelData->setPhoto($media);
         }
-
+        
         return $productPhoto;
     }
-
+    
     /**
      * Checks whether photo was chosen as main product photo
      *
