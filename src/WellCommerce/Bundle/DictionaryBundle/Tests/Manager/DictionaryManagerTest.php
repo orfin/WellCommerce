@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\DictionaryBundle\Tests\Manager;
 
 use WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface;
 use WellCommerce\Bundle\CoreBundle\Test\Manager\AbstractManagerTestCase;
+use WellCommerce\Bundle\DictionaryBundle\Entity\DictionaryInterface;
 
 /**
  * Class DictionaryManagerTest
@@ -22,8 +23,13 @@ use WellCommerce\Bundle\CoreBundle\Test\Manager\AbstractManagerTestCase;
  */
 class DictionaryManagerTest extends AbstractManagerTestCase
 {
-    protected function get() : ManagerInterface
+    protected function get(): ManagerInterface
     {
         return $this->container->get('dictionary.manager');
+    }
+    
+    protected function getExpectedEntityInterface(): string
+    {
+        return DictionaryInterface::class;
     }
 }
