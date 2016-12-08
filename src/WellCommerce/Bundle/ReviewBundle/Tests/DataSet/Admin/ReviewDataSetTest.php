@@ -29,10 +29,12 @@ class ReviewDataSetTest extends AbstractDataSetTestCase
     protected function getColumns()
     {
         return [
-            'id'        => 'review.id',
-            'nick'      => 'review.nick',
-            'rating'    => 'review.rating',
-            'createdAt' => 'review.createdAt',
+            'id'        => 'reviews.id',
+            'nick'      => 'reviews.nick',
+            'enabled'   => 'reviews.enabled',
+            'rating'    => 'reviews.rating',
+            'review'    => 'reviews.review',
+            'createdAt' => 'reviews.createdAt',
             'product'   => 'product_translation.name',
         ];
     }

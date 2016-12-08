@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\ProductBundle\EventListener;
 
-use Composer\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Class ProductSubscriber
@@ -21,10 +21,8 @@ use Composer\EventDispatcher\EventSubscriberInterface;
  */
 class ProductSubscriber implements EventSubscriberInterface
 {
-    
     public static function getSubscribedEvents()
     {
-        return [
-        ];
+        return [];
     }
 }
