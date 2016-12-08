@@ -23,28 +23,15 @@ use WellCommerce\Bundle\CoreBundle\Entity\EntityInterface;
  */
 interface UserGroupInterface extends EntityInterface, BlameableInterface
 {
-    /**
-     * @return string
-     */
     public function getName() : string;
     
-    /**
-     * @param string $name
-     */
     public function setName(string $name);
     
-    /**
-     * @return Collection
-     */
     public function getUsers() : Collection;
     
-    /**
-     * @return Collection
-     */
+    public function setUsers(Collection $users);
+    
     public function getPermissions() : Collection;
     
-    /**
-     * @param Collection $permissions
-     */
     public function setPermissions(Collection $permissions);
 }

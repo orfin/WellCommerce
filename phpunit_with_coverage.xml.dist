@@ -16,7 +16,9 @@
     </php>
 
     <filter>
-        <whitelist>
+        <whitelist
+                addUncoveredFilesFromWhitelist="true"
+                processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">./src/</directory>
             <exclude>
                 <directory>src/*/*Bundle/Resources</directory>
@@ -26,6 +28,11 @@
             </exclude>
         </whitelist>
     </filter>
+
+    <logging>
+        <log type="coverage-html" target="./tests/coverage/html/"/>
+        <log type="coverage-clover" target="./tests/coverage/coverage.xml"/>
+    </logging>
 
     <testsuites>
         <testsuite name="WellCommerce">

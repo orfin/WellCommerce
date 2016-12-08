@@ -60,6 +60,11 @@ class UserGroup implements UserGroupInterface
         return $this->users;
     }
     
+    public function setUsers(Collection $users)
+    {
+        $this->users = $users;
+    }
+    
     public function getPermissions(): Collection
     {
         return $this->permissions;
