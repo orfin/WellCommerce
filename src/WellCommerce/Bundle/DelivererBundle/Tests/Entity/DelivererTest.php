@@ -12,8 +12,10 @@
 
 namespace WellCommerce\Bundle\DelivererBundle\Tests\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\Bundle\CoreBundle\Test\Entity\AbstractEntityTestCase;
 use WellCommerce\Bundle\DelivererBundle\Entity\Deliverer;
+use WellCommerce\Bundle\ProducerBundle\Entity\Producer;
 
 /**
  * Class DelivererTest
@@ -22,23 +24,19 @@ use WellCommerce\Bundle\DelivererBundle\Entity\Deliverer;
  */
 class DelivererTest extends AbstractEntityTestCase
 {
-    public function testNewEntityPassesValidation()
+    protected function createEntity()
     {
-        $entity = new Deliverer();
-        $entity->translate('en')->setName('Test');
-        $entity->mergeNewTranslations();
-
-        $errors = $this->validator->validate($entity);
-        $this->assertEquals(0, count($errors));
+        return new Deliverer();
     }
-
-    public function testEntityRequiresNonEmptyName()
+    
+    public function providerTestAccessor()
     {
-        $entity = new Deliverer();
-        $entity->translate('en')->setName('');
-        $entity->mergeNewTranslations();
-
-        $errors = $this->validator->validate($entity);
-        $this->assertEquals(1, count($errors));
+        return [
+            ['producers', new ArrayCollection()],
+            ['producers', new ArrayCollection([new Producer()])],
+            ['producers', new ArrayCollection([new Producer(), new Producer()])],
+            ['createdAt', new \DateTime()],
+            ['updatedAt', new \DateTime()],
+        ];
     }
 }

@@ -12,6 +12,8 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Test;
 
+use Faker\Factory as FakerFactory;
+use Faker\Generator;
 use Symfony\Bundle\FrameworkBundle\Client;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
@@ -70,6 +72,11 @@ abstract class AbstractTestCase extends KernelTestCase
         $client->setServerParameters($server);
         
         return $client;
+    }
+    
+    protected function getFakerGenerator(): Generator
+    {
+        return FakerFactory::create();
     }
     
     private function setCurrentShop()

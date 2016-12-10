@@ -22,36 +22,19 @@ use WellCommerce\Bundle\TaxBundle\Entity\Tax;
  */
 class TaxTest extends AbstractEntityTestCase
 {
-    public function testNewEntityPassesValidation()
+    protected function createEntity()
     {
-        $entity = new Tax();
-        $entity->setValue(10);
-        $entity->translate('en')->setName('Test');
-        $entity->mergeNewTranslations();
-
-        $errors = $this->validator->validate($entity);
-        $this->assertEquals(0, count($errors));
+        return new Tax();
     }
-
-    public function testValidationFailsIfEmptyName()
+    
+    public function providerTestAccessor()
     {
-        $entity = new Tax();
-        $entity->setValue(10);
-        $entity->translate('en')->setName('');
-        $entity->mergeNewTranslations();
-
-        $errors = $this->validator->validate($entity);
-        $this->assertEquals(1, count($errors));
-    }
-
-    public function testValidationFailsIfWrongValue()
-    {
-        $entity = new Tax();
-        $entity->setValue(-10);
-        $entity->translate('en')->setName('Test');
-        $entity->mergeNewTranslations();
-
-        $errors = $this->validator->validate($entity);
-        $this->assertEquals(1, count($errors));
+        return [
+            ['value', 0.00],
+            ['value', 17.99],
+            ['value', 22.49],
+            ['createdAt', new \DateTime()],
+            ['updatedAt', new \DateTime()],
+        ];
     }
 }

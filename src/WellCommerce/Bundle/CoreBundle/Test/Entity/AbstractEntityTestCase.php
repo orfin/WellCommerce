@@ -35,6 +35,4 @@ abstract class AbstractEntityTestCase extends AbstractTestCase
     }
     
     abstract protected function createEntity();
-    
-    
 }
