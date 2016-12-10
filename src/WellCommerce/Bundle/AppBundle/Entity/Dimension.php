@@ -19,9 +19,9 @@ namespace WellCommerce\Bundle\AppBundle\Entity;
  */
 class Dimension
 {
-    protected $depth  = 0.0000;
-    protected $width  = 0.0000;
-    protected $height = 0.0000;
+    protected $depth  = 1.0000;
+    protected $width  = 1.0000;
+    protected $height = 1.0000;
     
     public function getDepth(): float
     {
