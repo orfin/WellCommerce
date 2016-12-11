@@ -27,10 +27,15 @@ class WishlistControllerTest extends AbstractFrontControllerTestCase
     public function testIndexActionForGuest()
     {
         $url         = $this->generateUrl('front.wishlist.index');
-        $redirectUrl = $this->generateUrl('front.client.login');
+        $redirectUrl = $this->generateUrl('front.client.login', [], false);
         $this->client->request('GET', $url);
         
-        $this->assertTrue($this->client->getResponse()->isRedirect($redirectUrl));
+        $this->assertTrue($this->client->getResponse()->isRedirect($redirectUrl), sprintf(
+            'Location: %s',
+            'Redirect: %s',
+            $this->client->getResponse()->headers->get('location'),
+            $redirectUrl
+        ));
     }
     
     public function testIndexClientActionForClient()
@@ -47,10 +52,15 @@ class WishlistControllerTest extends AbstractFrontControllerTestCase
         $product = $this->container->get('product.repository')->findOneBy(['enabled' => true]);
         if ($product instanceof ProductInterface) {
             $url         = $this->generateUrl('front.wishlist.add', ['id' => $product->getId()]);
-            $redirectUrl = $this->generateUrl('front.client.login');
+            $redirectUrl = $this->generateUrl('front.client.login', [], false);
             $this->client->request('GET', $url);
-            
-            $this->assertTrue($this->client->getResponse()->isRedirect($redirectUrl));
+    
+            $this->assertTrue($this->client->getResponse()->isRedirect($redirectUrl), sprintf(
+                'Location: %s',
+                'Redirect: %s',
+                $this->client->getResponse()->headers->get('location'),
+                $redirectUrl
+            ));
         }
     }
     
