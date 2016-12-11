@@ -7,7 +7,7 @@
 # please view the LICENSE file that was distributed with this source code.
 
 front.wishlist.index:
-    path: /client/wishlist/index
+    path: "/client/wishlist/index"
     defaults:
         _controller: 'wishlist.controller.front:indexAction'
     options:
@@ -16,11 +16,11 @@ front.wishlist.index:
             label: client.heading.wishlist
 
 front.wishlist.add:
-    path: /client/wishlist/add/{id}
+    path: "/client/wishlist/add/{id}"
     defaults:
         _controller: 'wishlist.controller.front:addAction'
 
 front.wishlist.delete:
-    path: /client/wishlist/delete/{id}
+    path: "/client/wishlist/delete/{id}"
     defaults:
         _controller: 'wishlist.controller.front:deleteAction'
