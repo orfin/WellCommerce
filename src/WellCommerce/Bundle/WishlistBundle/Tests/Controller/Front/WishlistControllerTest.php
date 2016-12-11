@@ -27,7 +27,7 @@ class WishlistControllerTest extends AbstractFrontControllerTestCase
     public function testIndexActionForGuest()
     {
         $url         = $this->generateUrl('front.wishlist.index');
-        $redirectUrl = $this->generateUrl('front.client.login', [], false);
+        $redirectUrl = $this->generateUrl('front.client.login');
         $this->client->request('GET', $url);
         
         $this->assertTrue($this->client->getResponse()->isRedirect($redirectUrl), sprintf(
@@ -51,7 +51,7 @@ class WishlistControllerTest extends AbstractFrontControllerTestCase
         $product = $this->container->get('product.repository')->findOneBy(['enabled' => true]);
         if ($product instanceof ProductInterface) {
             $url         = $this->generateUrl('front.wishlist.add', ['id' => $product->getId()]);
-            $redirectUrl = $this->generateUrl('front.client.login', [], false);
+            $redirectUrl = $this->generateUrl('front.client.login');
             $this->client->request('GET', $url);
     
             $this->assertTrue($this->client->getResponse()->isRedirect($redirectUrl), sprintf(
