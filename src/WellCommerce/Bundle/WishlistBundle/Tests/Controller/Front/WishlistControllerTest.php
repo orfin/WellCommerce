@@ -31,8 +31,7 @@ class WishlistControllerTest extends AbstractFrontControllerTestCase
         $this->client->request('GET', $url);
         
         $this->assertTrue($this->client->getResponse()->isRedirect($redirectUrl), sprintf(
-            'Location: %s',
-            'Redirect: %s',
+            'Location: %s, Redirect: %s',
             $this->client->getResponse()->headers->get('location'),
             $redirectUrl
         ));
@@ -56,8 +55,7 @@ class WishlistControllerTest extends AbstractFrontControllerTestCase
             $this->client->request('GET', $url);
     
             $this->assertTrue($this->client->getResponse()->isRedirect($redirectUrl), sprintf(
-                'Location: %s',
-                'Redirect: %s',
+                'Location: %s, Redirect: %s',
                 $this->client->getResponse()->headers->get('location'),
                 $redirectUrl
             ));
