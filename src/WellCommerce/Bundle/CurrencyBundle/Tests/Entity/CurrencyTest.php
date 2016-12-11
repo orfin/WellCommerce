@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\CurrencyBundle\Tests\Entity;
 
-use Carbon\Carbon;
 use WellCommerce\Bundle\CoreBundle\Test\Entity\AbstractEntityTestCase;
 use WellCommerce\Bundle\CurrencyBundle\Entity\Currency;
 
@@ -34,8 +33,8 @@ class CurrencyTest extends AbstractEntityTestCase
         
         return [
             ['code', $faker->currencyCode],
-            ['createdAt', Carbon::now()],
-            ['updatedAt', Carbon::now()],
+            ['createdAt', $faker->dateTime],
+            ['updatedAt', $faker->dateTime],
         ];
     }
 }

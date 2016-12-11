@@ -35,6 +35,8 @@ class CurrencyRateTest extends AbstractEntityTestCase
             ['currencyFrom', $faker->currencyCode],
             ['currencyTo', $faker->currencyCode],
             ['exchangeRate', $faker->randomFloat(4)],
+            ['createdAt', $faker->dateTime],
+            ['updatedAt', $faker->dateTime],
         ];
     }
 }

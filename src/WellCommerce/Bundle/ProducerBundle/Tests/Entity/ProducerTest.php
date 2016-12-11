@@ -10,21 +10,23 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CouponBundle\Tests\Entity;
+namespace WellCommerce\Bundle\ProducerBundle\Tests\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\Bundle\CoreBundle\Test\Entity\AbstractEntityTestCase;
-use WellCommerce\Bundle\CouponBundle\Entity\Coupon;
+use WellCommerce\Bundle\MediaBundle\Entity\Media;
+use WellCommerce\Bundle\ProducerBundle\Entity\Producer;
 
 /**
- * Class CouponTest
+ * Class ProducerTest
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CouponTest extends AbstractEntityTestCase
+class ProducerTest extends AbstractEntityTestCase
 {
     protected function createEntity()
     {
-        return new Coupon();
+        return new Producer();
     }
     
     public function providerTestAccessor()
@@ -32,16 +34,9 @@ class CouponTest extends AbstractEntityTestCase
         $faker = $this->getFakerGenerator();
         
         return [
-            ['code', $faker->randomDigit],
-            ['currency', $faker->currencyCode],
-            ['modifierType', '%'],
-            ['modifierType', '-'],
-            ['modifierValue', rand(0, 100)],
-            ['clientUsageLimit', rand(0, 100)],
-            ['globalUsageLimit', rand(0, 100)],
-            ['minimumOrderValue', rand(0, 100)],
-            ['validFrom', $faker->dateTime],
-            ['validTo', $faker->dateTime],
+            ['photo', new Media()],
+            ['deliverers', new ArrayCollection()],
+            ['shops', new ArrayCollection()],
             ['createdAt', $faker->dateTime],
             ['updatedAt', $faker->dateTime],
         ];

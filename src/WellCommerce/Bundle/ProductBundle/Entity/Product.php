@@ -53,7 +53,6 @@ class Product implements ProductInterface
     use AvailabilityAwareTrait;
     use ProductExtraTrait;
     
-    
     protected $sku         = '';
     protected $stock       = 0;
     protected $trackStock  = true;

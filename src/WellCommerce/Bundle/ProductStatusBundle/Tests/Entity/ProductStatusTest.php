@@ -10,21 +10,21 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CouponBundle\Tests\Entity;
+namespace WellCommerce\Bundle\ProductStatusBundle\Tests\Entity;
 
 use WellCommerce\Bundle\CoreBundle\Test\Entity\AbstractEntityTestCase;
-use WellCommerce\Bundle\CouponBundle\Entity\Coupon;
+use WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatus;
 
 /**
- * Class CouponTest
+ * Class ProductStatusTest
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CouponTest extends AbstractEntityTestCase
+class ProductStatusTest extends AbstractEntityTestCase
 {
     protected function createEntity()
     {
-        return new Coupon();
+        return new ProductStatus();
     }
     
     public function providerTestAccessor()
@@ -32,16 +32,7 @@ class CouponTest extends AbstractEntityTestCase
         $faker = $this->getFakerGenerator();
         
         return [
-            ['code', $faker->randomDigit],
-            ['currency', $faker->currencyCode],
-            ['modifierType', '%'],
-            ['modifierType', '-'],
-            ['modifierValue', rand(0, 100)],
-            ['clientUsageLimit', rand(0, 100)],
-            ['globalUsageLimit', rand(0, 100)],
-            ['minimumOrderValue', rand(0, 100)],
-            ['validFrom', $faker->dateTime],
-            ['validTo', $faker->dateTime],
+            ['symbol', $faker->randomAscii],
             ['createdAt', $faker->dateTime],
             ['updatedAt', $faker->dateTime],
         ];

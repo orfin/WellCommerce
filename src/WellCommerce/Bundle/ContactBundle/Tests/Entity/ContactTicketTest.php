@@ -38,6 +38,8 @@ class ContactTicketTest extends AbstractEntityTestCase
             ['phone', $faker->phoneNumber],
             ['email', $faker->email],
             ['content', $faker->randomAscii],
+            ['createdAt', $faker->dateTime],
+            ['updatedAt', $faker->dateTime],
         ];
     }
 }

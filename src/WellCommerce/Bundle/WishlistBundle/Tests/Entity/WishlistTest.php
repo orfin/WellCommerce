@@ -31,9 +31,13 @@ class WishlistTest extends AbstractEntityTestCase
     
     public function providerTestAccessor()
     {
+        $faker = $this->getFakerGenerator();
+        
         return [
             ['client', new Client()],
             ['product', new Product()],
+            ['createdAt', $faker->dateTime],
+            ['updatedAt', $faker->dateTime],
         ];
     }
 }

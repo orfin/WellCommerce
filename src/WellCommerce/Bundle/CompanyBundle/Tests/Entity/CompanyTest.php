@@ -36,6 +36,8 @@ class CompanyTest extends AbstractEntityTestCase
             ['address', new CompanyAddress()],
             ['name', $faker->company],
             ['shortName', $faker->company],
+            ['createdAt', $faker->dateTime],
+            ['updatedAt', $faker->dateTime],
         ];
     }
 }

@@ -45,8 +45,8 @@ class ShopTest extends AbstractEntityTestCase
             ['theme', null],
             ['clientGroup', new ClientGroup()],
             ['clientGroup', null],
-            ['createdAt', new \DateTime()],
-            ['updatedAt', new \DateTime()],
+            ['createdAt', $faker->dateTime],
+            ['updatedAt', $faker->dateTime],
         ];
     }
 }

@@ -29,9 +29,11 @@ class UnitTest extends AbstractEntityTestCase
     
     public function providerTestAccessor()
     {
+        $faker = $this->getFakerGenerator();
+        
         return [
-            ['createdAt', new \DateTime()],
-            ['updatedAt', new \DateTime()],
+            ['createdAt', $faker->dateTime],
+            ['updatedAt', $faker->dateTime],
         ];
     }
 }
