@@ -26,15 +26,9 @@ class WishlistControllerTest extends AbstractFrontControllerTestCase
 {
     public function testIndexActionForGuest()
     {
-        $url         = $this->generateUrl('front.wishlist.index');
-        $redirectUrl = $this->generateUrl('front.client.login');
-        $this->client->request('GET', $url);
+        $this->client->request('GET', $this->generateUrl('front.wishlist.index'));
         
-        $this->assertTrue($this->client->getResponse()->isRedirect($redirectUrl), sprintf(
-            'Location: %s, Redirect: %s',
-            $this->client->getResponse()->headers->get('location'),
-            $redirectUrl
-        ));
+        $this->assertIsLoginRedirect();
     }
     
     public function testIndexClientActionForClient()
@@ -50,15 +44,10 @@ class WishlistControllerTest extends AbstractFrontControllerTestCase
     {
         $product = $this->container->get('product.repository')->findOneBy(['enabled' => true]);
         if ($product instanceof ProductInterface) {
-            $url         = $this->generateUrl('front.wishlist.add', ['id' => $product->getId()]);
-            $redirectUrl = $this->generateUrl('front.client.login');
+            $url = $this->generateUrl('front.wishlist.add', ['id' => $product->getId()]);
             $this->client->request('GET', $url);
-    
-            $this->assertTrue($this->client->getResponse()->isRedirect($redirectUrl), sprintf(
-                'Location: %s, Redirect: %s',
-                $this->client->getResponse()->headers->get('location'),
-                $redirectUrl
-            ));
+            
+            $this->assertIsLoginRedirect();
         }
     }
     
@@ -74,6 +63,16 @@ class WishlistControllerTest extends AbstractFrontControllerTestCase
             
             $this->assertTrue($this->client->getResponse()->isRedirect($redirectUrl));
         }
+    }
+    
+    public function testDeleteActionForGuest()
+    {
+        /** @var ProductInterface $product */
+        $product = $this->container->get('product.repository')->findOneBy(['enabled' => true]);
+        $url     = $this->generateUrl('front.wishlist.delete', ['id' => $product->getId()]);
+        $this->client->request('GET', $url);
+        
+        $this->assertIsLoginRedirect();
     }
     
     public function testDeleteAction()

@@ -79,4 +79,16 @@ class AbstractFrontControllerTestCase extends AbstractTestCase
     {
         return $this->container->get('translator.helper')->trans($message, [], $domain);
     }
+    
+    protected function assertIsLoginRedirect()
+    {
+        $redirectUrl = $this->generateUrl('front.client.login');
+        
+        $this->assertTrue($this->client->getResponse()->isRedirect($redirectUrl), sprintf(
+            'Location: %s, Redirect: %s',
+            $this->client->getResponse()->headers->get('location'),
+            $redirectUrl
+        ));
+        
+    }
 }
