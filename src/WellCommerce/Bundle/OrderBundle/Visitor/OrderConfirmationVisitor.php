@@ -67,7 +67,7 @@ final class OrderConfirmationVisitor implements OrderVisitorInterface
     
     private function setInitialOrderStatus(OrderInterface $order)
     {
-        if (false === $order->hasCurrentStatus()) {
+        if (!$order->hasCurrentStatus() && $order->hasPaymentMethod()) {
             $paymentMethod = $order->getPaymentMethod();
             $order->setCurrentStatus($paymentMethod->getPaymentPendingOrderStatus());
         }
@@ -76,7 +76,7 @@ final class OrderConfirmationVisitor implements OrderVisitorInterface
     private function setInitialPayment(OrderInterface $order)
     {
         $payments = $order->getPayments();
-        if (0 === $payments->count()) {
+        if (0 === $payments->count() && $order->hasPaymentMethod()) {
             $payment = $this->paymentManager->createPaymentForOrder($order);
             $order->addPayment($payment);
         }
