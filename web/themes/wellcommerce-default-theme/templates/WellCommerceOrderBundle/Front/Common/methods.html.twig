@@ -39,6 +39,7 @@
             {{ macros.form_end(form) }}
         </div>
 
+        {% if order.hasModifier('shipping_cost') %}
         <div class="col-lg-5 col-sm-6 col-xs-12">
             <div class="row">
                 <div class="col-xs-6 text-right">
@@ -49,5 +50,6 @@
                 </div>
             </div>
         </div>
+        {% endif %}
     </div>
 </div>

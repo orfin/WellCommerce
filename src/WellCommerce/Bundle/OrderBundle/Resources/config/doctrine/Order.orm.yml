@@ -113,6 +113,7 @@ WellCommerce\Bundle\OrderBundle\Entity\Order:
         client:
             targetEntity: WellCommerce\Bundle\ClientBundle\Entity\Client
             fetch: LAZY
+            inversedBy: orders
             joinColumns:
                 client_id:
                     referencedColumnName: id

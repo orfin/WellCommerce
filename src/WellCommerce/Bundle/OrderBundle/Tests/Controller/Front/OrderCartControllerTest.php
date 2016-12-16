@@ -40,4 +40,12 @@ class OrderCartControllerTest extends AbstractFrontControllerTestCase
             }
         });
     }
+    
+    public function testIndexAction()
+    {
+        $url     = $this->generateUrl('front.order_cart.index');
+        $crawler = $this->client->request('GET', $url);
+        $this->assertTrue($this->client->getResponse()->isSuccessful());
+        $this->assertEquals(1, $crawler->filter('html:contains("' . $this->trans('order.heading.edit') . '")')->count());
+    }
 }

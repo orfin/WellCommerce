@@ -48,6 +48,8 @@ order:
         shipping_cost: Shipping costs
     notice:
         empty_order_list: You have not placed any orders
+    error:
+        no_methods: There are no available shipping & payment methods for this order
     cart:
         flash:
             added: was added to cart

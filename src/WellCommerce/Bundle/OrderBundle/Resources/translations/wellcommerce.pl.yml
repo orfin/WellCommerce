@@ -60,6 +60,8 @@ order:
     description:
         product_total: Wartość produktów
         shipping_cost: Koszty wysyłki
+    error:
+        no_methods: Nie ma dostępnych form wysyłki i płatności dla tego zamówienia
     notice:
         empty_order_list: Nie złożyłeś jeszcze żadnych zamówień
     cart:
