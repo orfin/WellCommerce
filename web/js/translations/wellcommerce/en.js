@@ -289,6 +289,7 @@
     Translator.add("order.description.product_total", "Total products value", "wellcommerce", "en");
     Translator.add("order.description.shipping_cost", "Shipping costs", "wellcommerce", "en");
     Translator.add("order.notice.empty_order_list", "You have not placed any orders", "wellcommerce", "en");
+    Translator.add("order.error.no_methods", "There are no available shipping & payment methods for this order", "wellcommerce", "en");
     Translator.add("order.cart.flash.added", "was added to cart", "wellcommerce", "en");
     Translator.add("order.cart.flash.empty", "Cart is empty.", "wellcommerce", "en");
     Translator.add("order.cart.button.add", "Add to cart", "wellcommerce", "en");

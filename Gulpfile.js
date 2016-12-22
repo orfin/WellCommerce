@@ -16,9 +16,8 @@ var paths = {
             'web/bundles/bazingajstranslation/js/translator.min.js',
             'js/translations/config.js',
             'web/js/translations/**/*.js',
-            'web/bundles/wellcommerceadmin/js/core/core.js',
             'web/bundles/wellcommerceadmin/js/core/plugin/*.js',
-            'web/bundles/wellcommerceadmin/js/core/form.js',
+            'web/bundles/wellcommerceadmin/js/core/form/*.js',
             'web/bundles/wellcommerceadmin/js/core/language/*.js'
         ],
         core: [

@@ -328,6 +328,7 @@
     Translator.add("order.label.coupon.modifier", "Rabat kuponu", "wellcommerce", "pl");
     Translator.add("order.description.product_total", "Warto\u015b\u0107 produkt\u00f3w", "wellcommerce", "pl");
     Translator.add("order.description.shipping_cost", "Koszty wysy\u0142ki", "wellcommerce", "pl");
+    Translator.add("order.error.no_methods", "Nie ma dost\u0119pnych form wysy\u0142ki i p\u0142atno\u015bci dla tego zam\u00f3wienia", "wellcommerce", "pl");
     Translator.add("order.notice.empty_order_list", "Nie z\u0142o\u017cy\u0142e\u015b jeszcze \u017cadnych zam\u00f3wie\u0144", "wellcommerce", "pl");
     Translator.add("order.cart.flash.added", "zosta\u0142 dodany do koszyka", "wellcommerce", "pl");
     Translator.add("order.cart.flash.empty", "Koszyk jest pusty.", "wellcommerce", "pl");
