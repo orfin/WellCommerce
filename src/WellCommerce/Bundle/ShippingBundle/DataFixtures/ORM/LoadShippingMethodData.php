@@ -36,54 +36,61 @@ class LoadShippingMethodData extends AbstractDataFixture
         if (!$this->isEnabled()) {
             return;
         }
-
+        
         $tax      = $this->randomizeSamples('tax', LoadTaxData::$samples);
         $currency = $this->randomizeSamples('currency', LoadCurrencyData::$samples);
-        $factory  = $this->container->get('shipping_method.factory');
-
-        $fedEx = $factory->create();
+        $shops    = new ArrayCollection([$this->getReference('shop')]);
+        
+        $fedEx = $this->createShippingMethod();
         $fedEx->setCalculator('price_table');
         $fedEx->setTax($tax);
         $fedEx->setCurrency($currency);
         $fedEx->translate($this->container->getParameter('locale'))->setName('FedEx');
         $fedEx->mergeNewTranslations();
         $fedEx->setCosts($this->getShippingCostsCollection($fedEx));
+        $fedEx->setShops($shops);
         $manager->persist($fedEx);
-
-        $ups = $factory->create();
+        
+        $ups = $this->createShippingMethod();
         $ups->setCalculator('price_table');
         $ups->setTax($tax);
         $ups->setCurrency($currency);
         $ups->translate($this->container->getParameter('locale'))->setName('UPS');
         $ups->mergeNewTranslations();
         $ups->setCosts($this->getShippingCostsCollection($ups));
+        $fedEx->setShops($shops);
         $manager->persist($ups);
-
+        
         $manager->flush();
-
+        
         $this->setReference('shipping_method_fedex', $fedEx);
         $this->setReference('shipping_method_ups', $ups);
     }
-
-    protected function getShippingCostsCollection(ShippingMethodInterface $shippingMethod)
+    
+    private function getShippingCostsCollection(ShippingMethodInterface $shippingMethod)
     {
         $collection = new ArrayCollection();
-
+        
         $cost = new ShippingMethodCost();
         $cost->setRangeFrom(0);
         $cost->setRangeTo(100000);
-
+        
         $price = new Price();
         $price->setCurrency('EUR');
         $price->setNetAmount(10);
         $price->setTaxAmount(2.3);
         $price->setTaxRate(23);
         $price->setGrossAmount(12.3);
-
+        
         $cost->setCost($price);
         $cost->setShippingMethod($shippingMethod);
         $collection->add($cost);
-
+        
         return $collection;
+    }
+    
+    private function createShippingMethod(): ShippingMethodInterface
+    {
+        return $this->container->get('shipping_method.factory')->create();
     }
 }
