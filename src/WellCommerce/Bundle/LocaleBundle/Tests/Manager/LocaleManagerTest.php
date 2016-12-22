@@ -23,7 +23,7 @@ use WellCommerce\Bundle\LocaleBundle\Entity\LocaleInterface;
  */
 class LocaleManagerTest extends AbstractManagerTestCase
 {
-    protected function get() : ManagerInterface
+    protected function get(): ManagerInterface
     {
         return $this->container->get('locale.manager');
     }

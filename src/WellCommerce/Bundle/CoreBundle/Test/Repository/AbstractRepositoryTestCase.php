@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Test\Repository;
 
+use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Test\AbstractTestCase;
 
 /**
@@ -25,16 +26,16 @@ abstract class AbstractRepositoryTestCase extends AbstractTestCase
      * @return string
      */
     abstract protected function getAlias();
-
+    
     public function testRepositoryServiceIsCreated()
     {
         $repository = $this->get();
-
+        
         if (null !== $repository) {
-            $this->assertInstanceOf(\WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface::class, $repository);
+            $this->assertInstanceOf(RepositoryInterface::class, $repository);
         }
     }
-
+    
     /**
      * @return null|\WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface
      */
@@ -42,7 +43,7 @@ abstract class AbstractRepositoryTestCase extends AbstractTestCase
     {
         return null;
     }
-
+    
     public function testRepositoryHasDatasetQueryBuilder()
     {
         $repository = $this->get();
@@ -50,7 +51,7 @@ abstract class AbstractRepositoryTestCase extends AbstractTestCase
             $this->assertInstanceOf(\Doctrine\ORM\QueryBuilder::class, $repository->getDataSetQueryBuilder());
         }
     }
-
+    
     public function testQueryBuilderReturnsValidQuery()
     {
         $repository = $this->get();
@@ -58,7 +59,7 @@ abstract class AbstractRepositoryTestCase extends AbstractTestCase
             $this->assertInstanceOf(\Doctrine\ORM\Query::class, $repository->getDataSetQueryBuilder()->getQuery());
         }
     }
-
+    
     public function testRepositoryAliasIsValid()
     {
         $repository = $this->get();

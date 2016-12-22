@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Tests\Controller\Front;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
 use WellCommerce\Bundle\CoreBundle\Test\Controller\Front\AbstractFrontControllerTestCase;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
@@ -25,6 +26,7 @@ class OrderCartControllerTest extends AbstractFrontControllerTestCase
 {
     public function testAddAction()
     {
+        /** @var Collection $collection */
         $collection = $this->container->get('product.repository')->matching(new Criteria());
         
         $collection->map(function (ProductInterface $product) {
@@ -46,6 +48,5 @@ class OrderCartControllerTest extends AbstractFrontControllerTestCase
         $url     = $this->generateUrl('front.order_cart.index');
         $crawler = $this->client->request('GET', $url);
         $this->assertTrue($this->client->getResponse()->isSuccessful());
-        $this->assertEquals(1, $crawler->filter('html:contains("' . $this->trans('order.heading.edit') . '")')->count());
     }
 }

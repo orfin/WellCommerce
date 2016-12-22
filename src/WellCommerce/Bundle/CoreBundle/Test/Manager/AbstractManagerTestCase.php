@@ -24,19 +24,19 @@ use WellCommerce\Bundle\CoreBundle\Test\AbstractTestCase;
  */
 abstract class AbstractManagerTestCase extends AbstractTestCase
 {
-    public function testManagerServiceIsValid()
+    public function testServiceIsValid()
     {
         $manager = $this->get();
         $this->assertInstanceOf($this->getManagerInterfaceName(), $manager);
     }
     
-    public function testManagerReturnsValidRepository()
+    public function testReturnsValidRepository()
     {
         $manager = $this->get();
         $this->assertInstanceOf($this->getRepositoryInterfaceClass(), $manager->getRepository());
     }
     
-    public function testManagerReturnsValidEntityAfterInitialization()
+    public function testReturnsValidEntityAfterInitialization()
     {
         $manager  = $this->get();
         $resource = $manager->initResource();
