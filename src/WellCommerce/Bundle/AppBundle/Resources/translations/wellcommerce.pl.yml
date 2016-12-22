@@ -85,6 +85,7 @@ common:
         discounted_price: Cena promocyjna
         gross_price: Cena brutto
         net_price: Cena netto
+        tax_rate: Stawka VAT
         first_name: Imię
         last_name: Nazwisko
         client_group: Grupa klientów
@@ -100,6 +101,8 @@ common:
         meta_title: Tytuł meta
         meta_description: Opis meta
         meta_keywords: Słowa kluczowe meta
+        yes: Tak
+        no: Nie
     flashes:
         success: Sukces!
 
