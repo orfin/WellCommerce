@@ -40,6 +40,7 @@ class ProductDataSet extends AbstractDataSet
     {
         $configurator->setColumns([
             'id'               => 'product.id',
+            'sku'              => 'product.sku',
             'enabled'          => 'product.enabled',
             'name'             => 'product_translation.name',
             'shortDescription' => 'product_translation.shortDescription',
@@ -84,7 +85,7 @@ class ProductDataSet extends AbstractDataSet
         ]));
     }
     
-    protected function getQueryBuilder(DataSetRequestInterface $request) : QueryBuilder
+    protected function getQueryBuilder(DataSetRequestInterface $request): QueryBuilder
     {
         $queryBuilder = parent::getQueryBuilder($request);
         
@@ -101,7 +102,7 @@ class ProductDataSet extends AbstractDataSet
         return $queryBuilder;
     }
     
-    protected function getDataSetRequest(array $requestOptions = []) : DataSetRequestInterface
+    protected function getDataSetRequest(array $requestOptions = []): DataSetRequestInterface
     {
         $request = parent::getDataSetRequest($requestOptions);
         $request->addCondition(new Eq('enabled', true));

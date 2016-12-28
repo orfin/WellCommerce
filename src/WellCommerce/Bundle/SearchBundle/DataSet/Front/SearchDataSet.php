@@ -29,6 +29,7 @@ final class SearchDataSet extends ProductDataSet
     {
         $configurator->setColumns([
             'id'               => 'product.id',
+            'sku'              => 'product.sku',
             'enabled'          => 'product.enabled',
             'name'             => 'product_translation.name',
             'shortDescription' => 'product_translation.shortDescription',
@@ -57,7 +58,7 @@ final class SearchDataSet extends ProductDataSet
         ]);
     }
     
-    protected function getQueryBuilder(DataSetRequestInterface $request) : QueryBuilder
+    protected function getQueryBuilder(DataSetRequestInterface $request): QueryBuilder
     {
         $identifiers  = $this->getSearchResultStorage()->getResult();
         $queryBuilder = parent::getQueryBuilder($request);
@@ -68,7 +69,7 @@ final class SearchDataSet extends ProductDataSet
         return $queryBuilder;
     }
     
-    private function getSearchResultStorage() : SearchResultStorage
+    private function getSearchResultStorage(): SearchResultStorage
     {
         return $this->get('search.result.storage');
     }
