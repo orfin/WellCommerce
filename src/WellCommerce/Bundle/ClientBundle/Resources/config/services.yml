@@ -194,3 +194,11 @@ services:
         tags:
             - { name: dataset.transformer, alias: client_cart }
         arguments: ['@translator.helper', '@order.repository']
+
+    twig.extension.quick_login:
+        class: WellCommerce\Bundle\ClientBundle\Twig\Extension\QuickLoginExtension
+        arguments:
+            - '@client_login.form_builder.front'
+            - '@router.helper'
+        tags:
+            - { name: twig.extension }
