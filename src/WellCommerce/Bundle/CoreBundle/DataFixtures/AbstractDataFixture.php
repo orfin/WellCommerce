@@ -20,6 +20,7 @@ use Faker\Factory as FakerFactory;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use WellCommerce\Bundle\LocaleBundle\Entity\LocaleInterface;
 
 /**
  * Class AbstractDataFixture
@@ -29,24 +30,24 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 abstract class AbstractDataFixture extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
     const FALLBACK_HIERARCHY = 999;
-
+    
     /**
      * @var array
      */
     protected $hierarchy;
-
+    
     /**
      * @var ContainerInterface
      */
     protected $container;
-
+    
     /**
      * Load data fixtures with the passed EntityManager
      *
      * @param ObjectManager $manager
      */
     abstract public function load(ObjectManager $manager);
-
+    
     /**
      * {@inheritDoc}
      */
@@ -54,7 +55,7 @@ abstract class AbstractDataFixture extends AbstractFixture implements OrderedFix
     {
         $this->container = $container;
     }
-
+    
     public function getOrder()
     {
         $hierarchy = $this->container->getParameter('fixtures_load_order');
@@ -62,10 +63,10 @@ abstract class AbstractDataFixture extends AbstractFixture implements OrderedFix
         if (isset($hierarchy[$className]) && (int)$hierarchy[$className] >= 0) {
             return (int)$hierarchy[$className];
         }
-
+        
         return self::FALLBACK_HIERARCHY;
     }
-
+    
     /**
      * @return bool
      */
@@ -73,14 +74,14 @@ abstract class AbstractDataFixture extends AbstractFixture implements OrderedFix
     {
         $enabledFixtures = $this->container->getParameter('enabled_fixtures');
         $className       = get_class($this);
-
+        
         if (array_key_exists($className, $enabledFixtures)) {
             return (bool)$enabledFixtures[$className];
         }
-
+        
         return false;
     }
-
+    
     /**
      * @return \Faker\Generator
      */
@@ -88,7 +89,7 @@ abstract class AbstractDataFixture extends AbstractFixture implements OrderedFix
     {
         return FakerFactory::create();
     }
-
+    
     /**
      * Returns random entity or collection of entities
      *
@@ -101,10 +102,10 @@ abstract class AbstractDataFixture extends AbstractFixture implements OrderedFix
     protected function randomizeSamples($referencePrefix, array $samples, $limit = 1)
     {
         $sample = array_rand($samples, $limit);
-
+        
         if (1 === $limit) {
             $referenceName = sprintf('%s_%s', $referencePrefix, $samples[$sample]);
-
+            
             return $this->getReference($referenceName);
         } else {
             $collection = new ArrayCollection();
@@ -112,28 +113,36 @@ abstract class AbstractDataFixture extends AbstractFixture implements OrderedFix
                 $referenceName = sprintf('%s_%s', $referencePrefix, $samples[$index]);
                 $collection->add($this->getReference($referenceName));
             }
-
+            
             return $collection;
         }
     }
-
+    
     protected function get($name)
     {
         return $this->container->get($name);
     }
-
-    protected function getDefaultLocale() : string
+    
+    protected function getDefaultLocale(): string
     {
         return $this->container->getParameter('locale');
     }
-
+    
+    /**
+     * @return array|LocaleInterface[]
+     */
+    protected function getLocales(): array
+    {
+        return $this->container->get('locale.repository')->findAll();
+    }
+    
     protected function importAdminMenuConfiguration($file)
     {
         $reflection = new \ReflectionClass($this);
         $directory  = dirname($reflection->getFileName());
         $locator    = new FileLocator($directory . '/../../Resources/config/admin_menu');
         $importer   = $this->container->get('admin_menu.importer.xml');
-
+        
         $importer->import($file, $locator);
     }
 }

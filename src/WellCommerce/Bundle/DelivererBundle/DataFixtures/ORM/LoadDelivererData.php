@@ -31,15 +31,18 @@ class LoadDelivererData extends AbstractDataFixture
         if (!$this->isEnabled()) {
             return;
         }
-
+        
         $fakerGenerator = $this->getFakerGenerator();
         $deliverer      = new Deliverer();
         $name           = $fakerGenerator->company;
-        $deliverer->translate($this->getDefaultLocale())->setName($name);
+        foreach ($this->getLocales() as $locale) {
+            $deliverer->translate($locale->getCode())->setName($name);
+        }
+        
         $deliverer->mergeNewTranslations();
         $manager->persist($deliverer);
         $manager->flush();
-
+        
         $this->setReference('deliverer', $deliverer);
     }
 }

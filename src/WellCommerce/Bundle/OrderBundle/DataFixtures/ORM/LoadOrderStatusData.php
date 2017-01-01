@@ -37,8 +37,11 @@ class LoadOrderStatusData extends AbstractDataFixture
             $status = new OrderStatus();
             $status->setEnabled(1);
             $status->setOrderStatusGroup($this->getReference($sample['order_status_group_reference']));
-            $status->translate($this->container->getParameter('locale'))->setName($sample['name']);
-            $status->translate($this->container->getParameter('locale'))->setDefaultComment($sample['default_comment']);
+            foreach ($this->getLocales() as $locale) {
+                $status->translate($locale->getCode())->setName($sample['name']);
+                $status->translate($locale->getCode())->setDefaultComment($sample['default_comment']);
+            }
+            
             $status->mergeNewTranslations();
             $manager->persist($status);
             $this->setReference('order_status_' . $key, $status);
@@ -79,7 +82,7 @@ class LoadOrderStatusData extends AbstractDataFixture
                 'name'                         => 'Payment failed',
                 'default_comment'              => 'Payment for the order was not successful.',
                 'order_status_group_reference' => 'order_status_group_Processing',
-            ]
+            ],
         ];
     }
 }

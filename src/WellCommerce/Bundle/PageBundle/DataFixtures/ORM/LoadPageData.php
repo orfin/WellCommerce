@@ -26,14 +26,14 @@ use WellCommerce\Bundle\PageBundle\Entity\PageInterface;
 class LoadPageData extends AbstractDataFixture
 {
     protected $shop;
-
+    
     protected $defaultText;
-
+    
     /**
      * @var ObjectManager
      */
     protected $manager;
-
+    
     /**
      * {@inheritDoc}
      */
@@ -42,11 +42,11 @@ class LoadPageData extends AbstractDataFixture
         if (!$this->isEnabled()) {
             return;
         }
-
+        
         $this->manager     = $manager;
         $this->shop        = $this->getReference('shop');
         $this->defaultText = $this->getFakerGenerator()->text(600);
-
+        
         $aboutUs = $this->createPage('About us', 0, null);
         $this->setReference('page_about_us', $aboutUs);
         $this->createPage('News feed', 10, $aboutUs);
@@ -55,7 +55,7 @@ class LoadPageData extends AbstractDataFixture
         $this->createPage('Our brand', 40, $aboutUs);
         $this->createPage('About company', 50, $aboutUs);
         $this->createPage('Wholesale', 60, $aboutUs);
-
+        
         $help = $this->createPage('Help', 10, null);
         $this->setReference('page_help', $aboutUs);
         $this->createPage('Conditions', 10, $help);
@@ -64,10 +64,10 @@ class LoadPageData extends AbstractDataFixture
         $this->createPage('Availability & delivery times', 40, $help);
         $this->createPage('Payment', 50, $help);
         $this->createPage('Site map', 60, $help);
-
+        
         $manager->flush();
     }
-
+    
     /**
      * Creates a cms page
      *
@@ -86,13 +86,16 @@ class LoadPageData extends AbstractDataFixture
         $page->setRedirectType(0);
         $page->setSection('');
         $page->addShop($this->shop);
-        $page->translate($this->getDefaultLocale())->setName($name);
-        $page->translate($this->getDefaultLocale())->setSlug(Sluggable::makeSlug($name));
-        $page->translate($this->getDefaultLocale())->setContent($this->defaultText);
+        foreach ($this->getLocales() as $locale) {
+            $page->translate($locale->getCode())->setName($name);
+            $page->translate($locale->getCode())->setSlug(Sluggable::makeSlug($name));
+            $page->translate($locale->getCode())->setContent($this->defaultText);
+        }
+        
         $page->mergeNewTranslations();
-
+        
         $this->manager->persist($page);
-
+        
         return $page;
     }
 }

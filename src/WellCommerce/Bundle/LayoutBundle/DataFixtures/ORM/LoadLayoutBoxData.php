@@ -55,19 +55,19 @@ class LoadLayoutBoxData extends AbstractDataFixture
             'CategoryMenu'     => [
                 'identifier' => 'category_menu',
                 'name'       => 'Categories',
-                'settings'   => []
+                'settings'   => [],
             ],
             'CategoryInfo'     => [
                 'identifier' => 'category_info',
                 'name'       => 'Category',
-                'settings'   => []
+                'settings'   => [],
             ],
             'CategoryProducts' => [
                 'identifier' => 'category_products',
                 'name'       => 'Category products',
                 'settings'   => [
-                    'per_page' => 10
-                ]
+                    'per_page' => 10,
+                ],
             ],
         ];
         
@@ -81,35 +81,35 @@ class LoadLayoutBoxData extends AbstractDataFixture
         $boxes = [
             'ClientRegistration'   => [
                 'identifier' => 'client_registration',
-                'name'       => 'Sign-in'
+                'name'       => 'Sign-in',
             ],
             'ClientLogin'          => [
                 'identifier' => 'client_login',
-                'name'       => 'Sign-up'
+                'name'       => 'Sign-up',
             ],
             'ClientOrder'          => [
                 'identifier' => 'client_order',
-                'name'       => 'Orders'
+                'name'       => 'Orders',
             ],
             'ClientSettings'       => [
                 'identifier' => 'client_settings',
-                'name'       => 'Account settings'
+                'name'       => 'Account settings',
             ],
             'ClientMenu'           => [
                 'identifier' => 'client_menu',
-                'name'       => 'Client menu'
+                'name'       => 'Client menu',
             ],
-            'Wishlist'       => [
+            'Wishlist'             => [
                 'identifier' => 'wishlist',
-                'name'       => 'Wishlist'
+                'name'       => 'Wishlist',
             ],
             'ClientForgotPassword' => [
                 'identifier' => 'client_forgot_password',
-                'name'       => 'Password reset'
+                'name'       => 'Password reset',
             ],
             'ClientAddressBook'    => [
                 'identifier' => 'client_address_book',
-                'name'       => 'Address book'
+                'name'       => 'Address book',
             ],
         ];
         
@@ -123,11 +123,11 @@ class LoadLayoutBoxData extends AbstractDataFixture
         $boxes = [
             'ProducerMenu'     => [
                 'identifier' => 'producer_menu',
-                'name'       => 'Producers'
+                'name'       => 'Producers',
             ],
             'ProducerProducts' => [
                 'identifier' => 'producer_products',
-                'name'       => 'Producer products'
+                'name'       => 'Producer products',
             ],
         ];
         
@@ -144,52 +144,52 @@ class LoadLayoutBoxData extends AbstractDataFixture
                 'identifier' => 'product_bestseller',
                 'name'       => 'Bestsellers',
                 'settings'   => [
-                    'status' => $this->getReference('product_status_bestseller')->getId()
-                ]
+                    'status' => $this->getReference('product_status_bestseller')->getId(),
+                ],
             ],
             1 => [
                 'type'       => 'ProductStatus',
                 'identifier' => 'product_novelty',
                 'name'       => 'New arrivals',
                 'settings'   => [
-                    'status' => $this->getReference('product_status_novelty')->getId()
-                ]
+                    'status' => $this->getReference('product_status_novelty')->getId(),
+                ],
             ],
             2 => [
                 'type'       => 'ProductStatus',
                 'identifier' => 'product_featured',
                 'name'       => 'Featured',
                 'settings'   => [
-                    'status' => $this->getReference('product_status_featured')->getId()
-                ]
+                    'status' => $this->getReference('product_status_featured')->getId(),
+                ],
             ],
             3 => [
                 'type'       => 'ProductStatus',
                 'identifier' => 'product_promotion',
                 'name'       => 'Promotions',
                 'settings'   => [
-                    'status' => $this->getReference('product_status_promotion')->getId()
-                ]
+                    'status' => $this->getReference('product_status_promotion')->getId(),
+                ],
             ],
             4 => [
                 'type'       => 'ProductShowcase',
                 'identifier' => 'product_showcase',
                 'name'       => 'Showcase',
                 'settings'   => [
-                    'status' => $this->getReference('product_status_featured')->getId()
-                ]
+                    'status' => $this->getReference('product_status_featured')->getId(),
+                ],
             ],
             5 => [
                 'type'       => 'Search',
                 'identifier' => 'search',
                 'name'       => 'Product search box',
-                'settings'   => []
+                'settings'   => [],
             ],
             6 => [
                 'type'       => 'ProductStatus',
                 'identifier' => 'product_dynamic_status',
                 'name'       => 'Dynamic product status box',
-                'settings'   => []
+                'settings'   => [],
             ],
         ];
         
@@ -203,19 +203,19 @@ class LoadLayoutBoxData extends AbstractDataFixture
         $boxes = [
             'Cart'         => [
                 'identifier' => 'cart',
-                'name'       => 'Cart'
+                'name'       => 'Cart',
             ],
             'Checkout'     => [
                 'identifier' => 'checkout',
-                'name'       => 'Checkout'
+                'name'       => 'Checkout',
             ],
             'Finalization' => [
                 'identifier' => 'finalization',
-                'name'       => 'Summary'
+                'name'       => 'Summary',
             ],
             'Payment'      => [
                 'identifier' => 'payment',
-                'name'       => 'Payment'
+                'name'       => 'Payment',
             ],
         ];
         
@@ -229,15 +229,15 @@ class LoadLayoutBoxData extends AbstractDataFixture
         $boxes = [
             'ProductInfo'       => [
                 'identifier' => 'product_info',
-                'name'       => 'Product'
+                'name'       => 'Product',
             ],
             'Review'            => [
                 'identifier' => 'review',
-                'name'       => 'Product reviews'
+                'name'       => 'Product reviews',
             ],
             'LayeredNavigation' => [
                 'identifier' => 'layered_navigation',
-                'name'       => 'Layered navigation'
+                'name'       => 'Layered navigation',
             ],
         ];
         
@@ -252,7 +252,10 @@ class LoadLayoutBoxData extends AbstractDataFixture
         $layoutBox->setBoxType($type);
         $layoutBox->setIdentifier($identifier);
         $layoutBox->setSettings($settings);
-        $layoutBox->translate($this->getDefaultLocale())->setName($name);
+        foreach ($this->getLocales() as $locale) {
+            $layoutBox->translate($locale->getCode())->setName($name);
+        }
+        
         $layoutBox->mergeNewTranslations();
         
         $this->manager->persist($layoutBox);

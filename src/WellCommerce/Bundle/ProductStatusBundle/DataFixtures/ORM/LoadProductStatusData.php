@@ -31,47 +31,58 @@ class LoadProductStatusData extends AbstractDataFixture
         if (!$this->isEnabled()) {
             return;
         }
-
+        
         /** @var ProductStatusInterface $bestseller */
         $bestseller = $this->container->get('product_status.factory')->create();
         $bestseller->setSymbol('bestseller');
-        $bestseller->translate($this->getDefaultLocale())->setName('Bestsellers');
-        $bestseller->translate($this->getDefaultLocale())->setSlug('bestseller');
-        $bestseller->translate($this->getDefaultLocale())->setCssClass('bestseller');
+        foreach ($this->getLocales() as $locale) {
+            $bestseller->translate($locale->getCode())->setName('Bestsellers');
+            $bestseller->translate($locale->getCode())->setSlug($locale->getCode() . '/' . 'bestseller');
+            $bestseller->translate($locale->getCode())->setCssClass('bestseller');
+        }
+        
         $bestseller->mergeNewTranslations();
         $manager->persist($bestseller);
         $this->addReference('product_status_bestseller', $bestseller);
-
+        
         /** @var ProductStatusInterface $bestseller */
         $featured = $this->container->get('product_status.factory')->create();
         $featured->setSymbol('featured');
-        $featured->translate($this->getDefaultLocale())->setName('Featured');
-        $featured->translate($this->getDefaultLocale())->setSlug('featured');
-        $featured->translate($this->getDefaultLocale())->setCssClass('featured');
+        foreach ($this->getLocales() as $locale) {
+            $featured->translate($locale->getCode())->setName('Featured');
+            $featured->translate($locale->getCode())->setSlug($locale->getCode() . '/' . 'featured');
+            $featured->translate($locale->getCode())->setCssClass('featured');
+        }
         $featured->mergeNewTranslations();
         $manager->persist($featured);
         $this->addReference('product_status_featured', $featured);
-
+        
         /** @var ProductStatusInterface $bestseller */
         $novelty = $this->container->get('product_status.factory')->create();
         $novelty->setSymbol('novelty');
-        $novelty->translate($this->getDefaultLocale())->setName('New products');
-        $novelty->translate($this->getDefaultLocale())->setSlug('novelty');
-        $novelty->translate($this->getDefaultLocale())->setCssClass('novelty');
+        foreach ($this->getLocales() as $locale) {
+            $novelty->translate($locale->getCode())->setName('New products');
+            $novelty->translate($locale->getCode())->setSlug($locale->getCode() . '/' . 'novelty');
+            $novelty->translate($locale->getCode())->setCssClass('novelty');
+        }
+        
         $novelty->mergeNewTranslations();
         $manager->persist($novelty);
         $this->addReference('product_status_novelty', $novelty);
-
+        
         /** @var ProductStatusInterface $bestseller */
         $promotion = $this->container->get('product_status.factory')->create();
         $promotion->setSymbol('promotion');
-        $promotion->translate($this->getDefaultLocale())->setName('Promotions');
-        $promotion->translate($this->getDefaultLocale())->setSlug('promotion');
-        $promotion->translate($this->getDefaultLocale())->setCssClass('promotion');
+        foreach ($this->getLocales() as $locale) {
+            $promotion->translate($locale->getCode())->setName('Promotions');
+            $promotion->translate($locale->getCode())->setSlug($locale->getCode() . '/' . 'promotion');
+            $promotion->translate($locale->getCode())->setCssClass('promotion');
+        }
+        
         $promotion->mergeNewTranslations();
         $manager->persist($promotion);
         $this->addReference('product_status_promotion', $promotion);
-
+        
         $manager->flush();
     }
 }

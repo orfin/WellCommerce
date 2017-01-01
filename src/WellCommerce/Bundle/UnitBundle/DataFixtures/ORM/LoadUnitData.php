@@ -24,7 +24,7 @@ use WellCommerce\Bundle\UnitBundle\Entity\Unit;
 class LoadUnitData extends AbstractDataFixture
 {
     public static $samples = ['pcs.', 'set'];
-
+    
     /**
      * {@inheritDoc}
      */
@@ -33,15 +33,17 @@ class LoadUnitData extends AbstractDataFixture
         if (!$this->isEnabled()) {
             return;
         }
-
+        
         foreach (self::$samples as $name) {
             $unit = new Unit();
-            $unit->translate($this->getDefaultLocale())->setName($name);
+            foreach ($this->getLocales() as $locale) {
+                $unit->translate($locale->getCode())->setName($name);
+            }
             $unit->mergeNewTranslations();
             $manager->persist($unit);
             $this->setReference('unit_' . $name, $unit);
         }
-
+        
         $manager->flush();
     }
 }

@@ -32,30 +32,33 @@ class LoadContactData extends AbstractDataFixture
         if (!$this->isEnabled()) {
             return;
         }
-
+        
         $contact = new Contact();
         $contact->setEnabled(1);
-
-        /** @var ContactTranslation $translation */
-        $translation = $contact->translate();
-        $translation->setName('Sales department');
-        $translation->setEmail('sales@domain.org');
-        $translation->setBusinessHours($this->getBusinessHours());
-        $translation->setCity('');
-        $translation->setCountry('');
-        $translation->setLine1('');
-        $translation->setLine2('');
-        $translation->setPostalCode('');
-        $translation->setState('');
-        $translation->setPhone('555 123-345-678');
-
+        
+        foreach ($this->getLocales() as $locale) {
+            /** @var ContactTranslation $translation */
+            $translation = $contact->translate($locale->getCode());
+            $translation->setName('Sales department');
+            $translation->setEmail('sales@domain.org');
+            $translation->setBusinessHours($this->getBusinessHours());
+            $translation->setCity('');
+            $translation->setCountry('');
+            $translation->setLine1('');
+            $translation->setLine2('');
+            $translation->setPostalCode('');
+            $translation->setState('');
+            $translation->setPhone('555 123-345-678');
+        }
+        
+        
         $contact->mergeNewTranslations();
         $manager->persist($contact);
         $manager->flush();
-
+        
         $this->setReference('contact', $contact);
     }
-
+    
     protected function getBusinessHours()
     {
         $hours = [
@@ -65,9 +68,9 @@ class LoadContactData extends AbstractDataFixture
             'thu: 9am-5:30pm',
             'fri: 9am-5:30pm',
             'sat: 10am-2pm',
-            'sun: not available'
+            'sun: not available',
         ];
-
+        
         return implode('<br />', $hours);
     }
 }

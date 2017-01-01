@@ -25,7 +25,7 @@ use WellCommerce\Bundle\ProducerBundle\Entity\Producer;
 class LoadProducerData extends AbstractDataFixture
 {
     public static $samples = ['LG', 'Samsung', 'Sony', 'Panasonic', 'Toshiba'];
-
+    
     /**
      * {@inheritDoc}
      */
@@ -34,19 +34,22 @@ class LoadProducerData extends AbstractDataFixture
         if (!$this->isEnabled()) {
             return;
         }
-
+        
         $shop = $this->getReference('shop');
-
+        
         foreach (self::$samples as $name) {
             $producer = new Producer();
             $producer->addShop($shop);
-            $producer->translate($this->getDefaultLocale())->setName($name);
-            $producer->translate($this->getDefaultLocale())->setSlug(Sluggable::makeSlug($name));
+            foreach ($this->getLocales() as $locale) {
+                $producer->translate($locale->getCode())->setName($name);
+                $producer->translate($locale->getCode())->setSlug($locale->getCode() . '/' . Sluggable::makeSlug($name));
+            }
+            
             $producer->mergeNewTranslations();
             $manager->persist($producer);
             $this->setReference('producer_' . $name, $producer);
         }
-
+        
         $manager->flush();
     }
 }
