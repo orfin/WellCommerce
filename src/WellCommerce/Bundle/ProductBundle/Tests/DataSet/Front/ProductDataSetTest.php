@@ -30,6 +30,7 @@ class ProductDataSetTest extends AbstractDataSetTestCase
     {
         return [
             'id'               => 'product.id',
+            'sku'              => 'product.sku',
             'enabled'          => 'product.enabled',
             'name'             => 'product_translation.name',
             'shortDescription' => 'product_translation.shortDescription',
@@ -39,8 +40,8 @@ class ProductDataSetTest extends AbstractDataSetTestCase
             'netPrice'         => 'product.sellPrice.netAmount',
             'price'            => 'product.sellPrice.grossAmount',
             'discountedPrice'  => 'product.sellPrice.discountedGrossAmount',
-            'isDiscountValid'  => 'IF_ELSE(:date BETWEEN IF_NULL(product.sellPrice.validFrom, :date) AND IF_NULL(product.sellPrice.validTo, :date), 1, 0)',
-            'finalPrice'       => 'IF_ELSE(:date BETWEEN IF_NULL(product.sellPrice.validFrom, :date) AND IF_NULL(product.sellPrice.validTo, :date), product.sellPrice.discountedGrossAmount, product.sellPrice.grossAmount) * currency_rate.exchangeRate',
+            'isDiscountValid'  => 'IF_ELSE(:date BETWEEN IF_NULL(product.sellPrice.validFrom, :date) AND IF_NULL(product.sellPrice.validTo, :date) AND product.sellPrice.discountedGrossAmount > 0, 1, 0)',
+            'finalPrice'       => 'IF_ELSE(:date BETWEEN IF_NULL(product.sellPrice.validFrom, :date) AND IF_NULL(product.sellPrice.validTo, :date) AND product.sellPrice.discountedGrossAmount > 0, product.sellPrice.discountedGrossAmount, product.sellPrice.grossAmount) * currency_rate.exchangeRate',
             'currency'         => 'product.sellPrice.currency',
             'tax'              => 'sell_tax.value',
             'stock'            => 'product.stock',
