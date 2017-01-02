@@ -35,7 +35,7 @@ class LoadClientGroupData extends AbstractDataFixture
         $clientGroup = new ClientGroup();
         $clientGroup->setDiscount(10);
         foreach ($this->getLocales() as $locale) {
-            $clientGroup->translate($locale)->setName('Default client group');
+            $clientGroup->translate($locale->getCode())->setName('Default client group');
         }
         
         $clientGroup->mergeNewTranslations();
