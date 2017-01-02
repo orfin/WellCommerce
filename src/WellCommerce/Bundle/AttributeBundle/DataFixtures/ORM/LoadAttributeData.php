@@ -33,14 +33,4 @@ class LoadAttributeData extends AbstractDataFixture
             return;
         }
     }
-
-    protected function createAttributeGroup() : AttributeGroupInterface
-    {
-        return $this->container->get('attribute_group.factory')->create();
-    }
-
-    protected function createAttributeValue() : AttributeValueInterface
-    {
-        return $this->container->get('attribute_value.factory')->create();
-    }
 }

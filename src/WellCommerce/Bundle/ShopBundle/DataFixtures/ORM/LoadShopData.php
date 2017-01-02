@@ -16,6 +16,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use WellCommerce\Bundle\AppBundle\Entity\MailerConfiguration;
 use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
 use WellCommerce\Bundle\CurrencyBundle\DataFixtures\ORM\LoadCurrencyData;
+use WellCommerce\Bundle\ShopBundle\Entity\Shop;
 
 /**
  * Class LoadShopData
@@ -42,7 +43,7 @@ class LoadShopData extends AbstractDataFixture
         $company  = $this->getReference('company');
         $currency = $this->randomizeSamples('currency', LoadCurrencyData::$samples);
         
-        $shop = $this->container->get('shop.factory')->create();
+        $shop = new Shop();
         $shop->setName('WellCommerce');
         $shop->setCompany($company);
         $shop->setTheme($theme);

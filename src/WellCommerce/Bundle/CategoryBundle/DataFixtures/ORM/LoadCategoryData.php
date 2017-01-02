@@ -35,9 +35,9 @@ class LoadCategoryData extends AbstractDataFixture implements FixtureInterface, 
             'DVD & Blue-ray players',
             'Audio players',
             'Projectors',
-            'Home theater'
+            'Home theater',
         ];
-
+    
     /**
      * {@inheritDoc}
      */
@@ -46,9 +46,9 @@ class LoadCategoryData extends AbstractDataFixture implements FixtureInterface, 
         if (!$this->isEnabled()) {
             return;
         }
-
+        
         $shop = $this->getReference('shop');
-
+        
         foreach (self::$samples as $hierarchy => $name) {
             $category = new Category();
             $category->setEnabled(true);
@@ -59,15 +59,18 @@ class LoadCategoryData extends AbstractDataFixture implements FixtureInterface, 
             $category->setChildrenCount(0);
             $category->setProductsCount(0);
             $category->addShop($shop);
-            $category->translate($this->container->getParameter('locale'))->setName($name);
-            $category->translate($this->container->getParameter('locale'))->setSlug(Sluggable::makeSlug($name));
-            $category->translate($this->container->getParameter('locale'))->setShortDescription('');
-            $category->translate($this->container->getParameter('locale'))->setDescription('');
+            foreach ($this->getLocales() as $locale) {
+                $name = sprintf('%s/%s', $locale->getCode(), $name);
+                $category->translate($locale)->setName($name);
+                $category->translate($locale)->setSlug(Sluggable::makeSlug($name));
+                $category->translate($locale)->setShortDescription('');
+                $category->translate($locale)->setDescription('');
+            }
             $category->mergeNewTranslations();
             $manager->persist($category);
             $this->setReference('category_' . $name, $category);
         }
-
+        
         $manager->flush();
     }
 }

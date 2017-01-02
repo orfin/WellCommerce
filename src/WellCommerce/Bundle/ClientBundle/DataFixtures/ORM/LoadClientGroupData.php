@@ -31,14 +31,17 @@ class LoadClientGroupData extends AbstractDataFixture
         if (!$this->isEnabled()) {
             return;
         }
-
+        
         $clientGroup = new ClientGroup();
         $clientGroup->setDiscount(10);
-        $clientGroup->translate($this->getDefaultLocale())->setName('Default client group');
+        foreach ($this->getLocales() as $locale) {
+            $clientGroup->translate($locale)->setName('Default client group');
+        }
+        
         $clientGroup->mergeNewTranslations();
         $manager->persist($clientGroup);
         $manager->flush();
-
+        
         $this->setReference('client_group', $clientGroup);
     }
 }

@@ -51,7 +51,6 @@ class LoadContactData extends AbstractDataFixture
             $translation->setPhone('555 123-345-678');
         }
         
-        
         $contact->mergeNewTranslations();
         $manager->persist($contact);
         $manager->flush();

@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\AvailabilityBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use WellCommerce\Bundle\AvailabilityBundle\Entity\Availability;
 use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
 
 /**
@@ -34,11 +35,10 @@ class LoadAvailabilityData extends AbstractDataFixture
         }
         
         foreach (self::$samples as $name) {
-            $availability = $this->get('availability.factory')->create();
+            $availability = new Availability();
             foreach ($this->getLocales() as $locale) {
                 $availability->translate($locale->getCode())->setName($name);
             }
-            
             $availability->mergeNewTranslations();
             $manager->persist($availability);
             $this->setReference('availability_' . $name, $availability);

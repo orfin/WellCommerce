@@ -17,6 +17,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use WellCommerce\Bundle\AppBundle\Entity\Price;
 use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
 use WellCommerce\Bundle\CurrencyBundle\DataFixtures\ORM\LoadCurrencyData;
+use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethod;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCost;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface;
 use WellCommerce\Bundle\TaxBundle\DataFixtures\ORM\LoadTaxData;
@@ -41,7 +42,7 @@ class LoadShippingMethodData extends AbstractDataFixture
         $currency = $this->randomizeSamples('currency', LoadCurrencyData::$samples);
         $shops    = new ArrayCollection([$this->getReference('shop')]);
         
-        $fedEx = $this->createShippingMethod();
+        $fedEx = new ShippingMethod();
         $fedEx->setCalculator('price_table');
         $fedEx->setTax($tax);
         $fedEx->setCurrency($currency);
@@ -53,7 +54,7 @@ class LoadShippingMethodData extends AbstractDataFixture
         $fedEx->setShops($shops);
         $manager->persist($fedEx);
         
-        $ups = $this->createShippingMethod();
+        $ups = new ShippingMethod();
         $ups->setCalculator('price_table');
         $ups->setTax($tax);
         $ups->setCurrency($currency);
@@ -91,10 +92,5 @@ class LoadShippingMethodData extends AbstractDataFixture
         $collection->add($cost);
         
         return $collection;
-    }
-    
-    private function createShippingMethod(): ShippingMethodInterface
-    {
-        return $this->container->get('shipping_method.factory')->create();
     }
 }

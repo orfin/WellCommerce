@@ -42,7 +42,9 @@ class LoadPaymentMethodData extends AbstractDataFixture
         $cod->setEnabled(1);
         $cod->setHierarchy(10);
         $cod->setProcessor('cash_on_delivery');
-        $cod->translate($this->getDefaultLocale())->setName('Cash on delivery');
+        foreach($this->getLocales() as $locale){
+            $cod->translate($locale->getCode())->setName('Cash on delivery');
+        }
         $cod->setShippingMethods($shippingMethods);
         $cod->setPaymentPendingOrderStatus($this->getReference('order_status_pending_payment'));
         $cod->setPaymentFailureOrderStatus($this->getReference('order_status_payment_failed'));
@@ -55,7 +57,9 @@ class LoadPaymentMethodData extends AbstractDataFixture
         $bankTransfer->setEnabled(1);
         $bankTransfer->setHierarchy(20);
         $bankTransfer->setProcessor('bank_transfer');
-        $bankTransfer->translate($this->getDefaultLocale())->setName('Bank transfer');
+        foreach($this->getLocales() as $locale){
+            $bankTransfer->translate($locale->getCode())->setName('Bank transfer');
+        }
         $bankTransfer->setShippingMethods($shippingMethods);
         $bankTransfer->setPaymentPendingOrderStatus($this->getReference('order_status_pending_payment'));
         $bankTransfer->setPaymentFailureOrderStatus($this->getReference('order_status_payment_failed'));
@@ -72,7 +76,9 @@ class LoadPaymentMethodData extends AbstractDataFixture
         $payPal->setEnabled(1);
         $payPal->setHierarchy(30);
         $payPal->setProcessor('paypal');
-        $payPal->translate($this->getDefaultLocale())->setName('PayPal');
+        foreach($this->getLocales() as $locale){
+            $payPal->translate($locale->getCode())->setName('PayPal');
+        }
         $payPal->setShippingMethods($shippingMethods);
         $payPal->setPaymentPendingOrderStatus($this->getReference('order_status_pending_payment'));
         $payPal->setPaymentFailureOrderStatus($this->getReference('order_status_payment_failed'));

@@ -14,6 +14,9 @@ namespace WellCommerce\Bundle\AdminBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
+use WellCommerce\Bundle\AdminBundle\Entity\Role;
+use WellCommerce\Bundle\AdminBundle\Entity\User;
+use WellCommerce\Bundle\AdminBundle\Entity\UserGroup;
 use WellCommerce\Bundle\AdminBundle\Entity\UserGroupInterface;
 use WellCommerce\Bundle\AdminBundle\Entity\UserGroupPermission;
 use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
@@ -34,22 +37,22 @@ class LoadUserData extends AbstractDataFixture
         if (!$this->isEnabled()) {
             return;
         }
-
-        $role = $this->container->get('role.factory')->create();
+        
+        $role = new Role();
         $role->setName('admin');
         $role->setRole('ROLE_ADMIN');
         $manager->persist($role);
-
+        
         $this->setReference('default_role', $role);
-
-        $group = $this->container->get('user_group.factory')->create();
+        
+        $group = new UserGroup();
         $group->setName('Administration');
         $group->setPermissions($this->getPermissions($group));
         $manager->persist($group);
-
+        
         $this->setReference('default_group', $group);
-
-        $user = $this->container->get('user.factory')->create();
+        
+        $user = new User();
         $user->setFirstName('John');
         $user->setLastName('Doe');
         $user->setUsername('admin');
@@ -60,11 +63,11 @@ class LoadUserData extends AbstractDataFixture
         $user->getGroups()->add($group);
         $user->setApiKey(Helper::generateRandomPassword(8));
         $manager->persist($user);
-
+        
         $manager->flush();
     }
-
-    protected function getPermissions(UserGroupInterface $group)
+    
+    private function getPermissions(UserGroupInterface $group)
     {
         $collection = new ArrayCollection();
         foreach ($this->container->get('router')->getRouteCollection()->all() as $name => $route) {
@@ -76,7 +79,7 @@ class LoadUserData extends AbstractDataFixture
                 $collection->add($permission);
             }
         }
-
+        
         return $collection;
     }
 }

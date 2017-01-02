@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\ClientBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use WellCommerce\Bundle\ClientBundle\Entity\Client;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddress;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddress;
@@ -40,9 +41,7 @@ class LoadClientData extends AbstractDataFixture
         $lastName       = $fakerGenerator->lastName;
         $clientGroup    = $this->getReference('client_group');
         
-        /** @var ClientInterface $client */
-        $client = $this->container->get('client.factory')->create();
-        
+        $client = new Client();
         $client->getContactDetails()->setFirstName($firstName);
         $client->getContactDetails()->setLastName($lastName);
         $client->getContactDetails()->setEmail($email);
@@ -64,7 +63,7 @@ class LoadClientData extends AbstractDataFixture
         $billingAddress->setPostalCode($fakerGenerator->postcode);
         $billingAddress->setCity($fakerGenerator->city);
         $billingAddress->setCountry($fakerGenerator->countryCode);
-        $billingAddress->setVatId(666777888999);
+        $billingAddress->setVatId($fakerGenerator->vat);
         $billingAddress->setCompanyName($fakerGenerator->company);
         $billingAddress->setState('');
         $billingAddress->setCompanyAddress(false);

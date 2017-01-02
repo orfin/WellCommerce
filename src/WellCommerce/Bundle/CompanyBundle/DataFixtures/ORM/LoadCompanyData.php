@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\CompanyBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use WellCommerce\Bundle\CompanyBundle\Entity\Company;
 use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
 
 /**
@@ -30,9 +31,9 @@ class LoadCompanyData extends AbstractDataFixture
         if (!$this->isEnabled()) {
             return;
         }
-
+        
         $fakerGenerator = $this->getFakerGenerator();
-        $company        = $this->container->get('company.factory')->create();
+        $company        = new Company();
         $company->setName($fakerGenerator->company . ' ' . $fakerGenerator->companySuffix);
         $company->setShortName($fakerGenerator->company);
         $company->getAddress()->setCountry($fakerGenerator->countryCode);
@@ -43,7 +44,7 @@ class LoadCompanyData extends AbstractDataFixture
         $company->getAddress()->setCity($fakerGenerator->city);
         $manager->persist($company);
         $manager->flush();
-
+        
         $this->setReference('company', $company);
     }
 }

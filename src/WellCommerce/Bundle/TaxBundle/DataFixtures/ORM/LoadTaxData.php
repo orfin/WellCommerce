@@ -24,7 +24,7 @@ use WellCommerce\Bundle\TaxBundle\Entity\Tax;
 class LoadTaxData extends AbstractDataFixture
 {
     public static $samples = [0, 3, 5, 7, 23];
-
+    
     /**
      * {@inheritDoc}
      */
@@ -33,17 +33,20 @@ class LoadTaxData extends AbstractDataFixture
         if (!$this->isEnabled()) {
             return;
         }
-
+        
         foreach (self::$samples as $val) {
             $name = sprintf('%s%s', $val, '%');
             $tax  = new Tax();
             $tax->setValue($val);
-            $tax->translate($this->getDefaultLocale())->setName($name . ' VAT');
+            foreach ($this->getLocales() as $locale) {
+                $tax->translate($locale->getCode())->setName($name . ' VAT');
+            }
+            
             $tax->mergeNewTranslations();
             $manager->persist($tax);
             $this->setReference('tax_' . $val, $tax);
         }
-
+        
         $manager->flush();
     }
 }

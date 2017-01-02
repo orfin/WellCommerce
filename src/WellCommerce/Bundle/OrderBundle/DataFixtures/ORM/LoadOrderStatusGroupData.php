@@ -23,9 +23,9 @@ use WellCommerce\Bundle\OrderBundle\Entity\OrderStatusGroup;
  */
 class LoadOrderStatusGroupData extends AbstractDataFixture
 {
-
+    
     public static $samples = ['Processing', 'Prepared', 'Completed', 'Cancelled'];
-
+    
     /**
      * {@inheritDoc}
      */
@@ -34,15 +34,18 @@ class LoadOrderStatusGroupData extends AbstractDataFixture
         if (!$this->isEnabled()) {
             return;
         }
-
+        
         foreach (self::$samples as $name) {
             $orderStatusGroup = new OrderStatusGroup();
-            $orderStatusGroup->translate($this->container->getParameter('locale'))->setName($name);
+            foreach ($this->getLocales() as $locale) {
+                $orderStatusGroup->translate($locale->getCode())->setName($name);
+            }
+            
             $orderStatusGroup->mergeNewTranslations();
             $manager->persist($orderStatusGroup);
             $this->setReference('order_status_group_' . $name, $orderStatusGroup);
         }
-
+        
         $manager->flush();
     }
 }

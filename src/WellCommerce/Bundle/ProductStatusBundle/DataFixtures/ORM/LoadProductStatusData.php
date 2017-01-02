@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\ProductStatusBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
-use WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusInterface;
+use WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatus;
 
 /**
  * Class LoadProductStatusData
@@ -32,8 +32,7 @@ class LoadProductStatusData extends AbstractDataFixture
             return;
         }
         
-        /** @var ProductStatusInterface $bestseller */
-        $bestseller = $this->container->get('product_status.factory')->create();
+        $bestseller = new ProductStatus();
         $bestseller->setSymbol('bestseller');
         foreach ($this->getLocales() as $locale) {
             $bestseller->translate($locale->getCode())->setName('Bestsellers');
@@ -45,8 +44,7 @@ class LoadProductStatusData extends AbstractDataFixture
         $manager->persist($bestseller);
         $this->addReference('product_status_bestseller', $bestseller);
         
-        /** @var ProductStatusInterface $bestseller */
-        $featured = $this->container->get('product_status.factory')->create();
+        $featured = new ProductStatus();
         $featured->setSymbol('featured');
         foreach ($this->getLocales() as $locale) {
             $featured->translate($locale->getCode())->setName('Featured');
@@ -57,8 +55,7 @@ class LoadProductStatusData extends AbstractDataFixture
         $manager->persist($featured);
         $this->addReference('product_status_featured', $featured);
         
-        /** @var ProductStatusInterface $bestseller */
-        $novelty = $this->container->get('product_status.factory')->create();
+        $novelty = new ProductStatus();
         $novelty->setSymbol('novelty');
         foreach ($this->getLocales() as $locale) {
             $novelty->translate($locale->getCode())->setName('New products');
@@ -70,8 +67,7 @@ class LoadProductStatusData extends AbstractDataFixture
         $manager->persist($novelty);
         $this->addReference('product_status_novelty', $novelty);
         
-        /** @var ProductStatusInterface $bestseller */
-        $promotion = $this->container->get('product_status.factory')->create();
+        $promotion = new ProductStatus();
         $promotion->setSymbol('promotion');
         foreach ($this->getLocales() as $locale) {
             $promotion->translate($locale->getCode())->setName('Promotions');
