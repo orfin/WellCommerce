@@ -60,11 +60,10 @@ class LoadCategoryData extends AbstractDataFixture implements FixtureInterface, 
             $category->setProductsCount(0);
             $category->addShop($shop);
             foreach ($this->getLocales() as $locale) {
-                $name = sprintf('%s/%s', $locale->getCode(), $name);
-                $category->translate($locale)->setName($name);
-                $category->translate($locale)->setSlug(Sluggable::makeSlug($name));
-                $category->translate($locale)->setShortDescription('');
-                $category->translate($locale)->setDescription('');
+                $category->translate($locale->getCode())->setName($name);
+                $category->translate($locale->getCode())->setSlug($locale->getCode() . '/' . Sluggable::makeSlug($name));
+                $category->translate($locale->getCode())->setShortDescription('');
+                $category->translate($locale->getCode())->setDescription('');
             }
             $category->mergeNewTranslations();
             $manager->persist($category);
