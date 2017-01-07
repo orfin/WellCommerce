@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\UnitBundle\DataSet\Admin;
 
+use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
 
@@ -31,5 +32,14 @@ class UnitDataSet extends AbstractDataSet
             'id'   => 'unit.id',
             'name' => 'unit_translation.name',
         ]);
+    }
+    
+    protected function createQueryBuilder(): QueryBuilder
+    {
+        $queryBuilder = $this->repository->getQueryBuilder();
+        $queryBuilder->groupBy('unit.id');
+        $queryBuilder->leftJoin('unit.translations', 'unit_translation');
+        
+        return $queryBuilder;
     }
 }

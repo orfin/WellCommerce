@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\DelivererBundle\DataSet\Admin;
 
+use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
 
@@ -31,5 +32,14 @@ class DelivererDataSet extends AbstractDataSet
             'id'   => 'deliverer.id',
             'name' => 'deliverer_translation.name',
         ]);
+    }
+    
+    protected function createQueryBuilder(): QueryBuilder
+    {
+        $queryBuilder = $this->repository->getQueryBuilder();
+        $queryBuilder->groupBy('deliverer.id');
+        $queryBuilder->leftJoin('deliverer.translations', 'deliverer_translation');
+        
+        return $queryBuilder;
     }
 }

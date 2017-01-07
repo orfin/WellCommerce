@@ -18,7 +18,6 @@ use WellCommerce\Component\DataSet\Column\ColumnCollection;
 use WellCommerce\Component\DataSet\Column\ColumnInterface;
 use WellCommerce\Component\DataSet\Conditions\ConditionInterface;
 use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
-use WellCommerce\Component\DataSet\Repository\DataSetAwareRepositoryInterface;
 use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
 
 /**
@@ -34,9 +33,9 @@ final class DataSetQueryBuilder implements DataSetQueryBuilderInterface
     private $paramIteration = 0;
     
     /**
-     * @var DataSetAwareRepositoryInterface
+     * @var QueryBuilder
      */
-    private $repository;
+    private $queryBuilder;
     
     /**
      * @var ConditionsCollection
@@ -46,11 +45,11 @@ final class DataSetQueryBuilder implements DataSetQueryBuilderInterface
     /**
      * DataSetQueryBuilder constructor.
      *
-     * @param DataSetAwareRepositoryInterface $repository
+     * @param QueryBuilder $queryBuilder
      */
-    public function __construct(DataSetAwareRepositoryInterface $repository)
+    public function __construct(QueryBuilder $queryBuilder)
     {
-        $this->repository = $repository;
+        $this->queryBuilder = $queryBuilder;
     }
     
     /**
@@ -61,21 +60,20 @@ final class DataSetQueryBuilder implements DataSetQueryBuilderInterface
      *
      * @return QueryBuilder
      */
-    public function getQueryBuilder(ColumnCollection $columns, DataSetRequestInterface $request) : QueryBuilder
+    public function getQueryBuilder(ColumnCollection $columns, DataSetRequestInterface $request): QueryBuilder
     {
         $this->conditions = $this->getConditions($request);
-        $queryBuilder     = $this->repository->getDataSetQueryBuilder();
         
-        $queryBuilder->select($columns->getSelectClause());
-        $queryBuilder->addOrderBy($this->getOrderByExpression($request, $columns));
-        $queryBuilder->setFirstResult($request->getOffset());
-        $this->setColumnConditions($queryBuilder, $columns);
+        $this->queryBuilder->select($columns->getSelectClause());
+        $this->queryBuilder->addOrderBy($this->getOrderByExpression($request, $columns));
+        $this->queryBuilder->setFirstResult($request->getOffset());
+        $this->setColumnConditions($columns);
         
         if ($request->getLimit() > 0) {
-            $queryBuilder->setMaxResults($request->getLimit());
+            $this->queryBuilder->setMaxResults($request->getLimit());
         }
         
-        return $queryBuilder;
+        return $this->queryBuilder;
     }
     
     /**
@@ -85,7 +83,7 @@ final class DataSetQueryBuilder implements DataSetQueryBuilderInterface
      *
      * @return ConditionsCollection
      */
-    private function getConditions(DataSetRequestInterface $request) : ConditionsCollection
+    private function getConditions(DataSetRequestInterface $request): ConditionsCollection
     {
         return $request->getConditions();
     }
@@ -98,7 +96,7 @@ final class DataSetQueryBuilder implements DataSetQueryBuilderInterface
      *
      * @return Expr\OrderBy
      */
-    private function getOrderByExpression(DataSetRequestInterface $request, ColumnCollection $columns) : Expr\OrderBy
+    private function getOrderByExpression(DataSetRequestInterface $request, ColumnCollection $columns): Expr\OrderBy
     {
         $column   = $columns->get($request->getOrderBy());
         $orderBy  = ($column->isAggregated()) ? $column->getAlias() : $column->getSource();
@@ -110,25 +108,23 @@ final class DataSetQueryBuilder implements DataSetQueryBuilderInterface
     /**
      * Adds additional conditions to query
      *
-     * @param QueryBuilder     $queryBuilder
      * @param ColumnCollection $columns
      */
-    private function setColumnConditions(QueryBuilder $queryBuilder, ColumnCollection $columns)
+    private function setColumnConditions(ColumnCollection $columns)
     {
         foreach ($this->conditions->all() as $condition) {
             $column = $columns->get($condition->getIdentifier());
-            $this->addColumnConditionToQueryBuilder($queryBuilder, $column, $condition);
+            $this->addColumnConditionToQueryBuilder($column, $condition);
         }
     }
     
     /**
      * Adds additional where/having clauses for given dataset's column
      *
-     * @param QueryBuilder       $queryBuilder
      * @param ColumnInterface    $column
      * @param ConditionInterface $condition
      */
-    private function addColumnConditionToQueryBuilder(QueryBuilder $queryBuilder, ColumnInterface $column, ConditionInterface $condition)
+    private function addColumnConditionToQueryBuilder(ColumnInterface $column, ConditionInterface $condition)
     {
         $source   = $column->getSource();
         $alias    = $column->getAlias();
@@ -141,13 +137,13 @@ final class DataSetQueryBuilder implements DataSetQueryBuilderInterface
         }
         
         if ($column->isAggregated()) {
-            $expression = $queryBuilder->expr()->{$operator}($alias, ':'.$identifier);
-            $queryBuilder->andHaving($expression);
+            $expression = $this->queryBuilder->expr()->{$operator}($alias, ':' . $identifier);
+            $this->queryBuilder->andHaving($expression);
         } else {
-            $expression = $queryBuilder->expr()->{$operator}($source, ':'.$identifier);
-            $queryBuilder->andWhere($expression);
+            $expression = $this->queryBuilder->expr()->{$operator}($source, ':' . $identifier);
+            $this->queryBuilder->andWhere($expression);
         }
         
-        $queryBuilder->setParameter($identifier, $condition->getValue());
+        $this->queryBuilder->setParameter($identifier, $condition->getValue());
     }
 }

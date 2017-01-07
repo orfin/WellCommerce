@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\ThemeBundle\DataSet\Admin;
 
+use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
 
@@ -32,5 +33,13 @@ class ThemeDataSet extends AbstractDataSet
             'name'   => 'theme.name',
             'folder' => 'theme.folder',
         ]);
+    }
+    
+    protected function createQueryBuilder(): QueryBuilder
+    {
+        $queryBuilder = $this->repository->getQueryBuilder();
+        $queryBuilder->groupBy('theme.id');
+        
+        return $queryBuilder;
     }
 }

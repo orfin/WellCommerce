@@ -12,6 +12,8 @@
 
 namespace WellCommerce\Bundle\ClientBundle\DataSet\Admin;
 
+use Doctrine\ORM\Query\Expr;
+use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Component\DataSet\Conditions\Condition\Eq;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
@@ -52,11 +54,23 @@ class ClientDataSet extends AbstractDataSet
         ]);
     }
     
-    protected function getDataSetRequest(array $requestOptions = []) : DataSetRequestInterface
+    protected function getDataSetRequest(array $requestOptions = []): DataSetRequestInterface
     {
         $request = parent::getDataSetRequest($requestOptions);
         $request->addCondition(new Eq('shop', $this->getShopStorage()->getCurrentShopIdentifier()));
         
         return $request;
+    }
+    
+    protected function createQueryBuilder(): QueryBuilder
+    {
+        $queryBuilder = $this->repository->getQueryBuilder();
+        $queryBuilder->groupBy('client.id');
+        $queryBuilder->leftJoin('client.clientGroup', 'client_group');
+        $queryBuilder->leftJoin('client_group.translations', 'client_group_translation');
+        $queryBuilder->leftJoin('client.orders', 'client_cart', Expr\Join::WITH, 'client_cart.confirmed = 0');
+        $queryBuilder->where($queryBuilder->expr()->eq('client.shop', $this->getShopStorage()->getCurrentShopIdentifier()));
+        
+        return $queryBuilder;
     }
 }

@@ -17,7 +17,6 @@ use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Bundle\CurrencyBundle\Entity\Currency;
 use WellCommerce\Component\DataSet\Cache\CacheOptions;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
-use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
 
 /**
  * Class CurrencyDataSet
@@ -36,17 +35,16 @@ final class CurrencyDataSet extends AbstractDataSet
         $this->setDefaultRequestOption('order_by', 'code');
         
         $configurator->setCacheOptions(new CacheOptions(true, 3600, [
-            Currency::class
+            Currency::class,
         ]));
     }
     
-    protected function getQueryBuilder(DataSetRequestInterface $request) : QueryBuilder
+    protected function createQueryBuilder(): QueryBuilder
     {
-        $queryBuilder = parent::getQueryBuilder($request);
-        $expression   = $queryBuilder->expr()->eq('currency.enabled', ':enabled');
-        $queryBuilder->andWhere($expression);
-        $queryBuilder->setParameter('enabled', true);
-
+        $queryBuilder = $this->repository->getQueryBuilder();
+        $queryBuilder->groupBy('currency.id');
+        $queryBuilder->andWhere($queryBuilder->expr()->eq('currency.enabled', true));
+        
         return $queryBuilder;
     }
 }

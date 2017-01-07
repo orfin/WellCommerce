@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CouponBundle\DataSet\Admin;
 
+use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
 
@@ -44,5 +45,14 @@ class CouponDataSet extends AbstractDataSet
             'validFrom' => $this->getDataSetTransformer('date', ['format' => 'Y-m-d']),
             'validTo'   => $this->getDataSetTransformer('date', ['format' => 'Y-m-d']),
         ]);
+    }
+    
+    protected function createQueryBuilder(): QueryBuilder
+    {
+        $queryBuilder = $this->repository->getQueryBuilder();
+        $queryBuilder->groupBy('coupon.id');
+        $queryBuilder->leftJoin('coupon.translations', 'coupon_translation');
+        
+        return $queryBuilder;
     }
 }

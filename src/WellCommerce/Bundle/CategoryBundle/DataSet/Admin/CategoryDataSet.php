@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CategoryBundle\DataSet\Admin;
 
+use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Component\DataSet\Conditions\Condition\Eq;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
@@ -40,11 +41,15 @@ final class CategoryDataSet extends AbstractDataSet
         ]);
     }
     
-    protected function getDataSetRequest(array $requestOptions = []) : DataSetRequestInterface
+    protected function createQueryBuilder(): QueryBuilder
     {
-        $request = parent::getDataSetRequest($requestOptions);
-        $request->addCondition(new Eq('shop', $this->getShopStorage()->getCurrentShopIdentifier()));
+        $queryBuilder = $this->repository->getQueryBuilder();
+        $queryBuilder->groupBy('category.id');
+        $queryBuilder->leftJoin('category.translations', 'category_translation');
+        $queryBuilder->leftJoin('category.shops', 'category_shops');
+        $queryBuilder->where($queryBuilder->expr()->eq('category_shops.shop', ':shop'));
+        $queryBuilder->setParameter('shop', $this->getShopStorage()->getCurrentShopIdentifier());
         
-        return $request;
+        return $queryBuilder;
     }
 }

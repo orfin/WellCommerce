@@ -22,9 +22,7 @@ use WellCommerce\Bundle\ProducerBundle\Entity\ProducerTranslation;
 use WellCommerce\Bundle\ProductBundle\Entity\Product;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductTranslation;
 use WellCommerce\Component\DataSet\Cache\CacheOptions;
-use WellCommerce\Component\DataSet\Conditions\Condition\Eq;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
-use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
 
 /**
  * Class ProductDataSet
@@ -85,28 +83,37 @@ class ProductDataSet extends AbstractDataSet
         ]));
     }
     
-    protected function getQueryBuilder(DataSetRequestInterface $request): QueryBuilder
+    protected function createQueryBuilder(): QueryBuilder
     {
-        $queryBuilder = parent::getQueryBuilder($request);
-        
+        $queryBuilder = $this->repository->getQueryBuilder();
+        $queryBuilder->groupBy('product.id');
+        $queryBuilder->leftJoin('product.translations', 'product_translation');
+        $queryBuilder->leftJoin('product.categories', 'categories');
+        $queryBuilder->leftJoin('product.categories', 'filtered_categories');
+        $queryBuilder->leftJoin('product.producer', 'producers');
+        $queryBuilder->leftJoin('product.sellPriceTax', 'sell_tax');
+        $queryBuilder->leftJoin('categories.translations', 'categories_translation');
+        $queryBuilder->leftJoin('producers.translations', 'producers_translation');
+        $queryBuilder->leftJoin('product.productPhotos', 'gallery', Expr\Join::WITH, 'gallery.mainPhoto = :mainPhoto');
+        $queryBuilder->leftJoin('gallery.photo', 'photos');
+        $queryBuilder->leftJoin('product.distinctions', 'distinction', Expr\Join::WITH, 'distinction.status = :status');
+        $queryBuilder->leftJoin('product.shops', 'product_shops');
+        $queryBuilder->leftJoin('product.variants', 'variant', Expr\Join::WITH, 'variant.enabled = :variantEnabled');
+        $queryBuilder->leftJoin('variant.options', 'variant_option');
         $queryBuilder->leftJoin(
             CurrencyRate::class,
             'currency_rate',
             Expr\Join::WITH,
             'currency_rate.currencyFrom = product.sellPrice.currency AND currency_rate.currencyTo = :targetCurrency'
         );
-        
+        $queryBuilder->where($queryBuilder->expr()->eq('product_shops.id', $this->getShopStorage()->getCurrentShopIdentifier()));
+        $queryBuilder->andWhere($queryBuilder->expr()->eq('product.enabled', true));
+        $queryBuilder->setParameter('mainPhoto', 1);
+        $queryBuilder->setParameter('status', 0);
+        $queryBuilder->setParameter('variantEnabled', 1);
         $queryBuilder->setParameter('targetCurrency', $this->getRequestHelper()->getCurrentCurrency());
         $queryBuilder->setParameter('date', (new \DateTime())->setTime(0, 0, 1));
         
         return $queryBuilder;
-    }
-    
-    protected function getDataSetRequest(array $requestOptions = []): DataSetRequestInterface
-    {
-        $request = parent::getDataSetRequest($requestOptions);
-        $request->addCondition(new Eq('enabled', true));
-        
-        return $request;
     }
 }

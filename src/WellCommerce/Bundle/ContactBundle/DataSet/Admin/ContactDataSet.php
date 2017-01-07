@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\ContactBundle\DataSet\Admin;
 
+use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
 
@@ -31,5 +32,14 @@ class ContactDataSet extends AbstractDataSet
             'id'   => 'contact.id',
             'name' => 'contact_translation.name',
         ]);
+    }
+    
+    protected function createQueryBuilder(): QueryBuilder
+    {
+        $queryBuilder = $this->repository->getQueryBuilder();
+        $queryBuilder->groupBy('contact.id');
+        $queryBuilder->leftJoin('contact.translations', 'contact_translation');
+        
+        return $queryBuilder;
     }
 }

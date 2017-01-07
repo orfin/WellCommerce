@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\LocaleBundle\DataSet\Admin;
 
+use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Bundle\CurrencyBundle\Entity\Currency;
 use WellCommerce\Bundle\LocaleBundle\Entity\Locale;
@@ -32,12 +33,21 @@ final class LocaleDataSet extends AbstractDataSet
             'code'     => 'locale.code',
             'currency' => 'default_currency.code',
         ]);
-
+        
         $this->setDefaultRequestOption('order_by', 'code');
-
+        
         $configurator->setCacheOptions(new CacheOptions(true, 3600, [
-           Locale::class,
-           Currency::class
+            Locale::class,
+            Currency::class,
         ]));
+    }
+    
+    protected function createQueryBuilder(): QueryBuilder
+    {
+        $queryBuilder = $this->repository->getQueryBuilder();
+        $queryBuilder->groupBy('locale.id');
+        $queryBuilder->leftJoin('locale.currency', 'default_currency');
+        
+        return $queryBuilder;
     }
 }

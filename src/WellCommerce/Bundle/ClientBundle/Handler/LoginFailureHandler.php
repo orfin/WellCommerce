@@ -24,25 +24,25 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationFailureHandlerI
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LoginFailureHandler implements AuthenticationFailureHandlerInterface
+final class LoginFailureHandler implements AuthenticationFailureHandlerInterface
 {
     /**
      * @var RouterInterface
      */
-    protected $router;
+    private $router;
     
     /**
      * @var string
      */
-    protected $loginRoute;
+    private $loginRoute;
     
     /**
-     * Constructor
+     * LoginFailureHandler constructor.
      *
      * @param RouterInterface $router
      * @param string          $loginRoute
      */
-    public function __construct(RouterInterface $router, $loginRoute)
+    public function __construct(RouterInterface $router, string $loginRoute)
     {
         $this->router     = $router;
         $this->loginRoute = $loginRoute;

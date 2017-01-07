@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\DictionaryBundle\DataSet\Admin;
 
+use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
 
@@ -33,5 +34,14 @@ class DictionaryDataSet extends AbstractDataSet
             'translation' => 'dictionary_translation.value',
             'locale'      => 'dictionary_translation.locale',
         ]);
+    }
+    
+    protected function createQueryBuilder(): QueryBuilder
+    {
+        $queryBuilder = $this->repository->getQueryBuilder();
+        $queryBuilder->groupBy('dictionary.id');
+        $queryBuilder->leftJoin('dictionary.translations', 'dictionary_translation');
+        
+        return $queryBuilder;
     }
 }

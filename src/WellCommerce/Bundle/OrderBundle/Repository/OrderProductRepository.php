@@ -23,22 +23,4 @@ use WellCommerce\Bundle\CoreBundle\Repository\EntityRepository;
  */
 class OrderProductRepository extends EntityRepository implements OrderProductRepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getDataSetQueryBuilder() : QueryBuilder
-    {
-        $queryBuilder = $this->getQueryBuilder();
-        $queryBuilder->groupBy('order_product.id');
-        $queryBuilder->leftJoin('order_product.product', 'product');
-        $queryBuilder->leftJoin('order_product.variant', 'product_variant');
-        $queryBuilder->leftJoin('product.translations', 'product_translation');
-        $queryBuilder->leftJoin('product.sellPriceTax', 'sell_tax');
-        $queryBuilder->leftJoin('product.productPhotos', 'gallery', Expr\Join::WITH, 'gallery.mainPhoto = :mainPhoto');
-        $queryBuilder->leftJoin('gallery.photo', 'photos');
-        $queryBuilder->setParameter('mainPhoto', 1);
-        
-        
-        return $queryBuilder;
-    }
 }

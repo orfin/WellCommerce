@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\AvailabilityBundle\DataSet\Admin;
 
+use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
 
@@ -31,5 +32,14 @@ class AvailabilityDataSet extends AbstractDataSet
             'id'   => 'availability.id',
             'name' => 'availability_translation.name',
         ]);
+    }
+    
+    protected function createQueryBuilder(): QueryBuilder
+    {
+        $queryBuilder = $this->repository->getQueryBuilder();
+        $queryBuilder->groupBy('availability.id');
+        $queryBuilder->leftJoin('availability.translations', 'availability_translation');
+        
+        return $queryBuilder;
     }
 }

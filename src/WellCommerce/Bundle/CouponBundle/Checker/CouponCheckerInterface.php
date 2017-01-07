@@ -21,15 +21,11 @@ use WellCommerce\Bundle\CouponBundle\Entity\CouponInterface;
  */
 interface CouponCheckerInterface
 {
-    /**
-     * Checks whether the coupon is valid for use
-     *
-     * @return bool
-     */
-    public function isValid(CouponInterface $coupon) : bool;
-
-    /**
-     * @return string
-     */
-    public function getError() : string;
+    public function isValid(CouponInterface $coupon): bool;
+    
+    public function getError(): string;
+    
+    public function isStartDateValid(CouponInterface $coupon): bool;
+    
+    public function isNotExpired(CouponInterface $coupon): bool;
 }

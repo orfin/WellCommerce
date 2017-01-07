@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\PageBundle\DataSet\Admin;
 
+use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
 
@@ -25,7 +26,7 @@ class PageDataSet extends AbstractDataSet
     /**
      * {@inheritdoc}
      */
-    public function configureOptions (DataSetConfiguratorInterface $configurator)
+    public function configureOptions(DataSetConfiguratorInterface $configurator)
     {
         $configurator->setColumns([
             'id'        => 'page.id',
@@ -46,5 +47,16 @@ class PageDataSet extends AbstractDataSet
         $configurator->setColumnTransformers([
             'createdAt' => $this->getDataSetTransformer('date', ['format' => 'Y-m-d H:i:s']),
         ]);
+    }
+    
+    protected function createQueryBuilder(): QueryBuilder
+    {
+        $queryBuilder = $this->repository->getQueryBuilder();
+        $queryBuilder->leftJoin('page.translations', 'page_translation');
+        $queryBuilder->leftJoin('page.children', 'page_children');
+        $queryBuilder->leftJoin('page.shops', 'page_shops');
+        $queryBuilder->groupBy('page.id');
+        
+        return $queryBuilder;
     }
 }

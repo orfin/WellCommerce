@@ -62,10 +62,7 @@ final class CouponChecker implements CouponCheckerInterface
         $this->currencyHelper  = $currencyHelper;
     }
     
-    /**
-     * {@inheritdoc}
-     */
-    public function isValid(CouponInterface $coupon = null) : bool
+    public function isValid(CouponInterface $coupon = null): bool
     {
         if (null === $coupon) {
             $this->error = 'coupon.error.not_found';
@@ -100,22 +97,12 @@ final class CouponChecker implements CouponCheckerInterface
         return true;
     }
     
-    /**
-     * {@inheritdoc}
-     */
-    public function getError() : string
+    public function getError(): string
     {
         return $this->error;
     }
     
-    /**
-     * Checks whether the coupon's start date is valid
-     *
-     * @param CouponInterface $coupon
-     *
-     * @return bool
-     */
-    private function isStartDateValid(CouponInterface $coupon) : bool
+    public function isStartDateValid(CouponInterface $coupon): bool
     {
         $now             = new \DateTime();
         $couponStartDate = $coupon->getValidFrom();
@@ -127,14 +114,7 @@ final class CouponChecker implements CouponCheckerInterface
         return true;
     }
     
-    /**
-     * Checks whether the coupon is not expired
-     *
-     * @param CouponInterface $coupon
-     *
-     * @return bool
-     */
-    private function isNotExpired(CouponInterface $coupon) : bool
+    public function isNotExpired(CouponInterface $coupon): bool
     {
         $now           = new \DateTime();
         $couponEndDate = $coupon->getValidTo();
@@ -153,7 +133,7 @@ final class CouponChecker implements CouponCheckerInterface
      *
      * @return bool
      */
-    private function hasMinimumOrderValue(CouponInterface $coupon) : bool
+    private function hasMinimumOrderValue(CouponInterface $coupon): bool
     {
         $order         = $this->orderProvider->getCurrentOrder();
         $productsValue = $order->getProductTotal()->getGrossPrice();
@@ -167,7 +147,7 @@ final class CouponChecker implements CouponCheckerInterface
      *
      * @return bool
      */
-    private function hasOnlyPromotionProducts() : bool
+    private function hasOnlyPromotionProducts(): bool
     {
         $hasOnlyPromotionProducts = true;
         $order                    = $this->orderProvider->getCurrentOrder();

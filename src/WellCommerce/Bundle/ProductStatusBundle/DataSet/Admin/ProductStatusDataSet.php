@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\ProductStatusBundle\DataSet\Admin;
 
+use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
 
@@ -31,5 +32,14 @@ class ProductStatusDataSet extends AbstractDataSet
             'id'   => 'product_status.id',
             'name' => 'product_status_translation.name',
         ]);
+    }
+    
+    protected function createQueryBuilder(): QueryBuilder
+    {
+        $queryBuilder = $this->repository->getQueryBuilder();
+        $queryBuilder->groupBy('product_status.id');
+        $queryBuilder->leftJoin('product_status.translations', 'product_status_translation');
+        
+        return $queryBuilder;
     }
 }

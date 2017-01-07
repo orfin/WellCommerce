@@ -27,20 +27,6 @@ class AttributeRepository extends EntityRepository implements AttributeRepositor
     /**
      * {@inheritdoc}
      */
-    public function getDataSetQueryBuilder() : QueryBuilder
-    {
-        $queryBuilder = $this->getQueryBuilder();
-        $queryBuilder->groupBy('attribute.id');
-        $queryBuilder->leftJoin('attribute.translations', 'attribute_translation');
-        $queryBuilder->leftJoin('attribute.groups', 'attribute_groups');
-        $queryBuilder->leftJoin('attribute_groups.translations', 'attribute_groups_translation');
-
-        return $queryBuilder;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getAttributeSet(AttributeGroupInterface $attributeGroup) : array
     {
         $sets                 = [];

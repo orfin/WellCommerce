@@ -40,29 +40,6 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
         return Helper::snake($entityName);
     }
 
-    public function getDataSetQueryBuilder() : QueryBuilder
-    {
-        $queryBuilder    = $this->getQueryBuilder();
-        $metadata        = $this->getMetadata();
-        $identifierField = sprintf('%s.%s', $metadata->getTableName(), $metadata->getSingleIdentifierFieldName());
-
-        if ($metadata->hasAssociation(self::TRANSLATIONS_ASSOCIATION_NAME)) {
-            $association          = $metadata->getAssociationTargetClass(self::TRANSLATIONS_ASSOCIATION_NAME);
-            $associationMetaData  = $this->getEntityManager()->getClassMetadata($association);
-            $associationTableName = $associationMetaData->getTableName();
-            $translationField     = sprintf('%s.%s', $associationTableName, self::TRANSLATIONS_ASSOCIATION_FIELD);
-
-            $queryBuilder->leftJoin(
-                $association,
-                $associationMetaData->getTableName(),
-                'WITH',
-                "{$identifierField} = {$translationField}"
-            );
-        }
-
-        return $queryBuilder;
-    }
-
     public function getQueryBuilder() : QueryBuilder
     {
         return $this->createQueryBuilder($this->getAlias());

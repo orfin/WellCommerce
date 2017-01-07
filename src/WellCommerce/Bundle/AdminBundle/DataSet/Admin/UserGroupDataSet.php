@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\AdminBundle\DataSet\Admin;
 
+use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
 
@@ -31,5 +32,13 @@ class UserGroupDataSet extends AbstractDataSet
             'id'   => 'user_group.id',
             'name' => 'user_group.name',
         ]);
+    }
+    
+    protected function createQueryBuilder(): QueryBuilder
+    {
+        $queryBuilder = $this->repository->getQueryBuilder();
+        $queryBuilder->groupBy('user_group.id');
+        
+        return $queryBuilder;
     }
 }

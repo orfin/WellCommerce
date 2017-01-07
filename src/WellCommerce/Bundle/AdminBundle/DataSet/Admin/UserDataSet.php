@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\AdminBundle\DataSet\Admin;
 
+use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
 
@@ -36,5 +37,13 @@ class UserDataSet extends AbstractDataSet
             'email'      => 'user.email',
             'enabled'    => 'user.enabled',
         ]);
+    }
+    
+    protected function createQueryBuilder(): QueryBuilder
+    {
+        $queryBuilder = $this->repository->getQueryBuilder();
+        $queryBuilder->groupBy('user.id');
+        
+        return $queryBuilder;
     }
 }

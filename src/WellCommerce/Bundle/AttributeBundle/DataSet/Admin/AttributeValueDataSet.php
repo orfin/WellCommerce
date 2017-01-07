@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\AttributeBundle\DataSet\Admin;
 
+use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
 
@@ -31,5 +32,14 @@ class AttributeValueDataSet extends AbstractDataSet
             'id'   => 'attribute_value.id',
             'name' => 'attribute_value_translation.name',
         ]);
+    }
+    
+    protected function createQueryBuilder(): QueryBuilder
+    {
+        $queryBuilder = $this->repository->getQueryBuilder();
+        $queryBuilder->groupBy('attribute_value.id');
+        $queryBuilder->leftJoin('attribute_value.translations', 'attribute_value_translation');
+        
+        return $queryBuilder;
     }
 }

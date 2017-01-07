@@ -36,6 +36,9 @@ class AttributeGroup implements AttributeGroupInterface
      */
     protected $attributes;
     
+    /**
+     * AttributeGroup constructor.
+     */
     public function __construct()
     {
         $this->attributes = new ArrayCollection();
@@ -63,7 +66,7 @@ class AttributeGroup implements AttributeGroupInterface
     {
         $this->attributes->removeElement($attribute);
     }
-
+    
     public function addAttribute(AttributeInterface $attribute)
     {
         $this->attributes->add($attribute);

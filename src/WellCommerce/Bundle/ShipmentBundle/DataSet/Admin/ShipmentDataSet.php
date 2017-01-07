@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\ShipmentBundle\DataSet\Admin;
 
+use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
 
@@ -39,5 +40,14 @@ class ShipmentDataSet extends AbstractDataSet
         $configurator->setColumnTransformers([
             'createdAt' => $this->getDataSetTransformer('date', ['format' => 'Y-m-d H:i:s']),
         ]);
+    }
+    
+    protected function createQueryBuilder(): QueryBuilder
+    {
+        $queryBuilder = $this->repository->getQueryBuilder();
+        $queryBuilder->leftJoin('shipment.order', 'orders');
+        $queryBuilder->groupBy('shipment.id');
+        
+        return $queryBuilder;
     }
 }

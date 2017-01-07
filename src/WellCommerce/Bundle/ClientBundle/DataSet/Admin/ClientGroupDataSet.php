@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\ClientBundle\DataSet\Admin;
 
+use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
 
@@ -32,5 +33,14 @@ class ClientGroupDataSet extends AbstractDataSet
             'name'         => 'client_group_translation.name',
             'totalClients' => 'COUNT(client)',
         ]);
+    }
+    
+    protected function createQueryBuilder(): QueryBuilder
+    {
+        $queryBuilder = $this->repository->getQueryBuilder();
+        $queryBuilder->groupBy('client_group.id');
+        $queryBuilder->leftJoin('client_group.translations', 'client_group_translation');
+        
+        return $queryBuilder;
     }
 }

@@ -12,13 +12,12 @@
 
 namespace WellCommerce\Bundle\NewsBundle\DataSet\Front;
 
+use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\NewsBundle\DataSet\Admin\NewsDataSet as BaseDataSet;
 use WellCommerce\Bundle\NewsBundle\Entity\News;
 use WellCommerce\Bundle\NewsBundle\Entity\NewsTranslation;
 use WellCommerce\Component\DataSet\Cache\CacheOptions;
-use WellCommerce\Component\DataSet\Conditions\Condition\Eq;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
-use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
 
 /**
  * Class NewsDataSet
@@ -45,12 +44,14 @@ class NewsDataSet extends BaseDataSet
         ]));
     }
     
-    protected function getDataSetRequest(array $requestOptions = []) : DataSetRequestInterface
+    protected function createQueryBuilder(): QueryBuilder
     {
-        $request = parent::getDataSetRequest($requestOptions);
+        $queryBuilder = $this->repository->getQueryBuilder();
+        $queryBuilder->leftJoin('news.translations', 'news_translation');
+        $queryBuilder->leftJoin('news.photo', 'photos');
+        $queryBuilder->groupBy('news.id');
+        $queryBuilder->andWhere($queryBuilder->expr()->eq('news.publish', true));
         
-        $request->addCondition(new Eq('publish', true));
-        
-        return $request;
+        return $queryBuilder;
     }
 }

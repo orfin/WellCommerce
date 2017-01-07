@@ -44,22 +44,6 @@ abstract class AbstractRepositoryTestCase extends AbstractTestCase
         return null;
     }
     
-    public function testRepositoryHasDatasetQueryBuilder()
-    {
-        $repository = $this->get();
-        if (null !== $repository) {
-            $this->assertInstanceOf(\Doctrine\ORM\QueryBuilder::class, $repository->getDataSetQueryBuilder());
-        }
-    }
-    
-    public function testQueryBuilderReturnsValidQuery()
-    {
-        $repository = $this->get();
-        if (null !== $repository) {
-            $this->assertInstanceOf(\Doctrine\ORM\Query::class, $repository->getDataSetQueryBuilder()->getQuery());
-        }
-    }
-    
     public function testRepositoryAliasIsValid()
     {
         $repository = $this->get();

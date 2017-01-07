@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\DistributionBundle\DataSet\Admin;
 
+use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
 
@@ -42,7 +43,15 @@ class PackageDataSet extends AbstractDataSet
             'createdAt'     => $this->getDataSetTransformer('date', ['format' => 'Y-m-d H:i:s']),
             'updatedAt'     => $this->getDataSetTransformer('date', ['format' => 'Y-m-d H:i:s']),
             'localVersion'  => $this->getDataSetTransformer('package_version_reference'),
-            'remoteVersion' => $this->getDataSetTransformer('package_version_reference')
+            'remoteVersion' => $this->getDataSetTransformer('package_version_reference'),
         ]);
+    }
+    
+    protected function createQueryBuilder(): QueryBuilder
+    {
+        $queryBuilder = $this->repository->getQueryBuilder();
+        $queryBuilder->groupBy('package.id');
+        
+        return $queryBuilder;
     }
 }

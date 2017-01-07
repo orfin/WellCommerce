@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\OrderBundle\DataSet\Admin;
 
+use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
 
@@ -33,9 +34,20 @@ class OrderStatusDataSet extends AbstractDataSet
             'createdAt' => 'order_status.createdAt',
             'groupName' => 'order_status_group_translation.name',
         ]);
-
+        
         $configurator->setColumnTransformers([
             'createdAt' => $this->getDataSetTransformer('date', ['format' => 'Y-m-d H:i:s']),
         ]);
+    }
+    
+    protected function createQueryBuilder(): QueryBuilder
+    {
+        $queryBuilder = $this->repository->getQueryBuilder();
+        $queryBuilder->groupBy('order_status.id');
+        $queryBuilder->leftJoin('order_status.translations', 'order_status_translation');
+        $queryBuilder->leftJoin('order_status.orderStatusGroup', 'order_status_group');
+        $queryBuilder->leftJoin('order_status_group.translations', 'order_status_group_translation');
+        
+        return $queryBuilder;
     }
 }

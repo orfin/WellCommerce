@@ -12,13 +12,12 @@
 
 namespace WellCommerce\Bundle\PageBundle\DataSet\Front;
 
+use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\PageBundle\DataSet\Admin\PageDataSet as BaseDataSet;
 use WellCommerce\Bundle\PageBundle\Entity\Page;
 use WellCommerce\Bundle\PageBundle\Entity\PageTranslation;
 use WellCommerce\Component\DataSet\Cache\CacheOptions;
-use WellCommerce\Component\DataSet\Conditions\Condition\Eq;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
-use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
 
 /**
  * Class PageDataSet
@@ -35,21 +34,25 @@ class PageDataSet extends BaseDataSet
         parent::configureOptions($configurator);
         
         $configurator->setColumnTransformers([
-            'route' => $this->getDataSetTransformer('route')
+            'route' => $this->getDataSetTransformer('route'),
         ]);
         
         $configurator->setCacheOptions(new CacheOptions(true, 3600, [
             Page::class,
-            PageTranslation::class
+            PageTranslation::class,
         ]));
     }
     
-    protected function getDataSetRequest(array $requestOptions = []) : DataSetRequestInterface
+    protected function createQueryBuilder(): QueryBuilder
     {
-        $request = parent::getDataSetRequest($requestOptions);
-
-        $request->addCondition(new Eq('publish', true));
-
-        return $request;
+        $queryBuilder = $this->repository->getQueryBuilder();
+        $queryBuilder->leftJoin('page.translations', 'page_translation');
+        $queryBuilder->leftJoin('page.children', 'page_children');
+        $queryBuilder->leftJoin('page.shops', 'page_shops');
+        $queryBuilder->groupBy('page.id');
+        $queryBuilder->where('page.publish = :publish');
+        $queryBuilder->setParameter('publish', true);
+        
+        return $queryBuilder;
     }
 }

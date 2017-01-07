@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\DataSet\Front;
 
+use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\PaymentBundle\DataSet\Admin\PaymentMethodDataSet as BaseDataSet;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethod;
@@ -31,10 +32,19 @@ class PaymentMethodDataSet extends BaseDataSet
     public function configureOptions(DataSetConfiguratorInterface $configurator)
     {
         parent::configureOptions($configurator);
-
+        
         $configurator->setCacheOptions(new CacheOptions(true, 3600, [
             PaymentMethod::class,
-            ShippingMethod::class
+            ShippingMethod::class,
         ]));
+    }
+    
+    protected function createQueryBuilder(): QueryBuilder
+    {
+        $queryBuilder = $this->repository->getQueryBuilder();
+        $queryBuilder->leftJoin('payment_method.translations', 'payment_method_translation');
+        $queryBuilder->groupBy('payment_method.id');
+        
+        return $queryBuilder;
     }
 }

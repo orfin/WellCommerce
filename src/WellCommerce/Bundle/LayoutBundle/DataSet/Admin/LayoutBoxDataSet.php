@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\LayoutBundle\DataSet\Admin;
 
+use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
 
@@ -33,5 +34,14 @@ class LayoutBoxDataSet extends AbstractDataSet
             'identifier' => 'layout_box.identifier',
             'boxType'    => 'layout_box.boxType',
         ]);
+    }
+    
+    protected function createQueryBuilder(): QueryBuilder
+    {
+        $queryBuilder = $this->repository->getQueryBuilder();
+        $queryBuilder->groupBy('layout_box.id');
+        $queryBuilder->leftJoin('layout_box.translations', 'layout_box_translation');
+        
+        return $queryBuilder;
     }
 }

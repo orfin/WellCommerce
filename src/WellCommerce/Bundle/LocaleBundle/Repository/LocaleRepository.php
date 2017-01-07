@@ -27,18 +27,6 @@ class LocaleRepository extends EntityRepository implements LocaleRepositoryInter
     /**
      * {@inheritdoc}
      */
-    public function getDataSetQueryBuilder() : QueryBuilder
-    {
-        $queryBuilder = $this->getQueryBuilder();
-        $queryBuilder->groupBy('locale.id');
-        $queryBuilder->leftJoin('locale.currency', 'default_currency');
-
-        return $queryBuilder;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getAvailableLocaleCodes() : array
     {
         if (empty($this->currentLocales)) {

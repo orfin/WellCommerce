@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\ProductStatusBundle\DataSet\Front;
 
+use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatus;
 use WellCommerce\Bundle\ProductStatusBundle\Entity\ProductStatusTranslation;
@@ -37,14 +38,23 @@ class ProductStatusDataSet extends AbstractDataSet
             'css_class' => 'product_status_translation.cssClass',
             'symbol'    => 'product_status.symbol',
         ]);
-
+        
         $configurator->setColumnTransformers([
-            'route' => $this->getDataSetTransformer('route')
+            'route' => $this->getDataSetTransformer('route'),
         ]);
-
+        
         $configurator->setCacheOptions(new CacheOptions(true, 3600, [
             ProductStatus::class,
-            ProductStatusTranslation::class
+            ProductStatusTranslation::class,
         ]));
+    }
+    
+    protected function createQueryBuilder(): QueryBuilder
+    {
+        $queryBuilder = $this->repository->getQueryBuilder();
+        $queryBuilder->groupBy('product_status.id');
+        $queryBuilder->leftJoin('product_status.translations', 'product_status_translation');
+        
+        return $queryBuilder;
     }
 }

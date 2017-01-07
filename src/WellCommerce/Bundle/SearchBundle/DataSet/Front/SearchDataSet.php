@@ -15,7 +15,6 @@ namespace WellCommerce\Bundle\SearchBundle\DataSet\Front;
 use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\ProductBundle\DataSet\Front\ProductDataSet;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
-use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
 use WellCommerce\Component\Search\Storage\SearchResultStorage;
 
 /**
@@ -58,10 +57,10 @@ final class SearchDataSet extends ProductDataSet
         ]);
     }
     
-    protected function getQueryBuilder(DataSetRequestInterface $request): QueryBuilder
+    protected function createQueryBuilder(): QueryBuilder
     {
         $identifiers  = $this->getSearchResultStorage()->getResult();
-        $queryBuilder = parent::getQueryBuilder($request);
+        $queryBuilder = parent::createQueryBuilder();
         $expression   = $queryBuilder->expr()->in('product.id', ':identifiers');
         $queryBuilder->andWhere($expression);
         $queryBuilder->setParameter('identifiers', $identifiers);

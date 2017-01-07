@@ -24,19 +24,6 @@ use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
  */
 class ReviewRepository extends EntityRepository implements ReviewRepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getDataSetQueryBuilder(): QueryBuilder
-    {
-        $queryBuilder = $this->getQueryBuilder();
-        $queryBuilder->groupBy('reviews.id');
-        $queryBuilder->leftJoin('reviews.product', 'product_info');
-        $queryBuilder->leftJoin('product_info.translations', 'product_translation');
-        
-        return $queryBuilder;
-    }
-    
     public function getProductReviews(ProductInterface $product): Collection
     {
         $criteria = new Criteria();

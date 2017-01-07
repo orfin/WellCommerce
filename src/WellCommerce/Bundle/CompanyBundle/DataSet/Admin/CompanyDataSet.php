@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CompanyBundle\DataSet\Admin;
 
+use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
 
@@ -33,9 +34,17 @@ class CompanyDataSet extends AbstractDataSet
             'shortName' => 'company.shortName',
             'createdAt' => 'company.createdAt',
         ]);
-
+        
         $configurator->setColumnTransformers([
             'createdAt' => $this->getDataSetTransformer('date', ['format' => 'Y-m-d H:i:s']),
         ]);
+    }
+    
+    protected function createQueryBuilder(): QueryBuilder
+    {
+        $queryBuilder = $this->repository->getQueryBuilder();
+        $queryBuilder->groupBy('company.id');
+        
+        return $queryBuilder;
     }
 }

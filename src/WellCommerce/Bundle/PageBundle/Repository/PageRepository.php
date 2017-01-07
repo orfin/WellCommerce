@@ -21,17 +21,4 @@ use WellCommerce\Bundle\CoreBundle\Repository\EntityRepository;
  */
 class PageRepository extends EntityRepository implements PageRepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getDataSetQueryBuilder() : QueryBuilder
-    {
-        $queryBuilder = $this->getQueryBuilder();
-        $queryBuilder->leftJoin('page.translations', 'page_translation');
-        $queryBuilder->leftJoin('page.children', 'page_children');
-        $queryBuilder->leftJoin('page.shops', 'page_shops');
-        $queryBuilder->groupBy('page.id');
-        
-        return $queryBuilder;
-    }
 }

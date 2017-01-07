@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\ProducerBundle\DataSet\Front;
 
+use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\ProducerBundle\DataSet\Admin\ProducerDataSet as BaseDataSet;
 use WellCommerce\Bundle\ProducerBundle\Entity\Producer;
 use WellCommerce\Bundle\ProducerBundle\Entity\ProducerTranslation;
@@ -38,15 +39,26 @@ class ProducerDataSet extends BaseDataSet
             'shop'     => 'producer_shops.id',
             'products' => 'COUNT(producer_products.id)',
         ]);
-
+        
         $configurator->setColumnTransformers([
-            'route' => $this->getDataSetTransformer('route')
+            'route' => $this->getDataSetTransformer('route'),
         ]);
-
+        
         $configurator->setCacheOptions(new CacheOptions(true, 3600, [
             Product::class,
             Producer::class,
-            ProducerTranslation::class
+            ProducerTranslation::class,
         ]));
+    }
+    
+    protected function createQueryBuilder(): QueryBuilder
+    {
+        $queryBuilder = $this->repository->getQueryBuilder();
+        $queryBuilder->groupBy('producer.id');
+        $queryBuilder->leftJoin('producer.translations', 'producer_translation');
+        $queryBuilder->leftJoin('producer.products', 'producer_products');
+        $queryBuilder->leftJoin('producer.shops', 'producer_shops');
+        
+        return $queryBuilder;
     }
 }

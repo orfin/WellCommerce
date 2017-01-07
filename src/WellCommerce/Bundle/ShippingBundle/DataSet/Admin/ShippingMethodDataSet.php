@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\ShippingBundle\DataSet\Admin;
 
+use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
 
@@ -33,5 +34,14 @@ class ShippingMethodDataSet extends AbstractDataSet
             'calculator' => 'shipping_method.calculator',
             'hierarchy'  => 'shipping_method.hierarchy',
         ]);
+    }
+    
+    protected function createQueryBuilder(): QueryBuilder
+    {
+        $queryBuilder = $this->repository->getQueryBuilder();
+        $queryBuilder->groupBy('shipping_method.id');
+        $queryBuilder->leftJoin('shipping_method.translations', 'shipping_method_translation');
+        
+        return $queryBuilder;
     }
 }

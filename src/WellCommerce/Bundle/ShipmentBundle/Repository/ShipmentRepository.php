@@ -21,12 +21,4 @@ use WellCommerce\Bundle\CoreBundle\Repository\EntityRepository;
  */
 class ShipmentRepository extends EntityRepository implements ShipmentRepositoryInterface
 {
-    public function getDataSetQueryBuilder() : QueryBuilder
-    {
-        $queryBuilder = $this->getQueryBuilder();
-        $queryBuilder->leftJoin('shipment.order', 'orders');
-        $queryBuilder->groupBy('shipment.id');
-        
-        return $queryBuilder;
-    }
 }

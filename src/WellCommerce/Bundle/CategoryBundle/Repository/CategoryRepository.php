@@ -26,16 +26,6 @@ use WellCommerce\Bundle\CoreBundle\Repository\EntityRepository;
  */
 class CategoryRepository extends EntityRepository implements CategoryRepositoryInterface
 {
-    public function getDataSetQueryBuilder(): QueryBuilder
-    {
-        $queryBuilder = $this->getQueryBuilder();
-        $queryBuilder->groupBy('category.id');
-        $queryBuilder->leftJoin('category.translations', 'category_translation');
-        $queryBuilder->leftJoin('category.shops', 'category_shops');
-        
-        return $queryBuilder;
-    }
-    
     public function getCategoryPath(CategoryInterface $category): array
     {
         $collection = new ArrayCollection();

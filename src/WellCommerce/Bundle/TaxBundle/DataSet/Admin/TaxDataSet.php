@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\TaxBundle\DataSet\Admin;
 
+use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
 
@@ -32,5 +33,14 @@ class TaxDataSet extends AbstractDataSet
             'name'  => 'tax_translation.name',
             'value' => 'tax.value',
         ]);
+    }
+    
+    protected function createQueryBuilder(): QueryBuilder
+    {
+        $queryBuilder = $this->repository->getQueryBuilder();
+        $queryBuilder->groupBy('tax.id');
+        $queryBuilder->leftJoin('tax.translations', 'tax_translation');
+        
+        return $queryBuilder;
     }
 }

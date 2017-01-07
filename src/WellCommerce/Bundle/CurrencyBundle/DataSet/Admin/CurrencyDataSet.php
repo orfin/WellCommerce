@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CurrencyBundle\DataSet\Admin;
 
+use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Bundle\CurrencyBundle\Entity\Currency;
 use WellCommerce\Component\DataSet\Cache\CacheOptions;
@@ -30,11 +31,19 @@ final class CurrencyDataSet extends AbstractDataSet
             'id'   => 'currency.id',
             'code' => 'currency.code',
         ]);
-
+        
         $this->setDefaultRequestOption('order_by', 'code');
-
+        
         $configurator->setCacheOptions(new CacheOptions(true, 3600, [
-            Currency::class
+            Currency::class,
         ]));
+    }
+    
+    protected function createQueryBuilder(): QueryBuilder
+    {
+        $queryBuilder = $this->repository->getQueryBuilder();
+        $queryBuilder->groupBy('currency.id');
+        
+        return $queryBuilder;
     }
 }

@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\ShopBundle\Repository;
 
-use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\CoreBundle\Repository\EntityRepository;
 use WellCommerce\Bundle\ShopBundle\Entity\ShopInterface;
 
@@ -23,17 +22,7 @@ use WellCommerce\Bundle\ShopBundle\Entity\ShopInterface;
  */
 class ShopRepository extends EntityRepository implements ShopRepositoryInterface
 {
-    public function getDataSetQueryBuilder() : QueryBuilder
-    {
-        $queryBuilder = $this->getQueryBuilder();
-        $queryBuilder->groupBy('shop.id');
-        $queryBuilder->leftJoin('shop.theme', 'shop_theme');
-        $queryBuilder->leftJoin('shop.company', 'shop_company');
-        
-        return $queryBuilder;
-    }
-    
-    public function resolve(int $currentShopId, string $url) : ShopInterface
+    public function resolve(int $currentShopId, string $url): ShopInterface
     {
         if (0 === $currentShopId) {
             $currentShop = $this->findOneBy(['url' => $url]);

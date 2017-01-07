@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\MediaBundle\DataSet\Admin;
 
+use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
 
@@ -35,9 +36,17 @@ class MediaDataSet extends AbstractDataSet
             'size'      => 'media.size',
             'preview'   => 'media.path',
         ]);
-
+        
         $configurator->setColumnTransformers([
-            'preview' => $this->getDataSetTransformer('image_path', ['filter' => 'medium'])
+            'preview' => $this->getDataSetTransformer('image_path', ['filter' => 'medium']),
         ]);
+    }
+    
+    protected function createQueryBuilder(): QueryBuilder
+    {
+        $queryBuilder = $this->repository->getQueryBuilder();
+        $queryBuilder->groupBy('media.id');
+        
+        return $queryBuilder;
     }
 }

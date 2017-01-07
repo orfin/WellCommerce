@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\ShopBundle\DataSet\Admin;
 
+use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
 
@@ -36,5 +37,15 @@ class ShopDataSet extends AbstractDataSet
             'currency' => 'shop.defaultCurrency',
             'country'  => 'shop.defaultCountry',
         ]);
+    }
+    
+    protected function createQueryBuilder(): QueryBuilder
+    {
+        $queryBuilder = $this->repository->getQueryBuilder();
+        $queryBuilder->groupBy('shop.id');
+        $queryBuilder->leftJoin('shop.theme', 'shop_theme');
+        $queryBuilder->leftJoin('shop.company', 'shop_company');
+        
+        return $queryBuilder;
     }
 }

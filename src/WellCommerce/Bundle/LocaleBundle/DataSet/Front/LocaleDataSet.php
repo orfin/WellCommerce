@@ -18,7 +18,6 @@ use WellCommerce\Bundle\CurrencyBundle\Entity\Currency;
 use WellCommerce\Bundle\LocaleBundle\Entity\Locale;
 use WellCommerce\Component\DataSet\Cache\CacheOptions;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
-use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
 
 /**
  * Class LocaleDataSet
@@ -39,17 +38,17 @@ final class LocaleDataSet extends AbstractDataSet
         
         $configurator->setCacheOptions(new CacheOptions(true, 3600, [
             Locale::class,
-            Currency::class
+            Currency::class,
         ]));
     }
-
-    protected function getQueryBuilder(DataSetRequestInterface $request) : QueryBuilder
+    
+    protected function createQueryBuilder(): QueryBuilder
     {
-        $queryBuilder = parent::getQueryBuilder($request);
-        $expression   = $queryBuilder->expr()->eq('locale.enabled', ':enabled');
-        $queryBuilder->andWhere($expression);
-        $queryBuilder->setParameter('enabled', true);
-
+        $queryBuilder = $this->repository->getQueryBuilder();
+        $queryBuilder->groupBy('locale.id');
+        $queryBuilder->leftJoin('locale.currency', 'default_currency');
+        $queryBuilder->andWhere($queryBuilder->expr()->eq('locale.enabled', true));
+        
         return $queryBuilder;
     }
 }

@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\NewsBundle\DataSet\Admin;
 
+use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
 
@@ -42,5 +43,15 @@ class NewsDataSet extends AbstractDataSet
             'featured'  => 'news.featured',
             'photo'     => 'photos.path',
         ]);
+    }
+    
+    protected function createQueryBuilder(): QueryBuilder
+    {
+        $queryBuilder = $this->repository->getQueryBuilder();
+        $queryBuilder->leftJoin('news.translations', 'news_translation');
+        $queryBuilder->leftJoin('news.photo', 'photos');
+        $queryBuilder->groupBy('news.id');
+        
+        return $queryBuilder;
     }
 }

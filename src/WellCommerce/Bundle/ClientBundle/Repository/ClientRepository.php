@@ -13,8 +13,6 @@
 namespace WellCommerce\Bundle\ClientBundle\Repository;
 
 use Doctrine\ORM\NoResultException;
-use Doctrine\ORM\Query\Expr;
-use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
@@ -29,21 +27,6 @@ use WellCommerce\Bundle\CoreBundle\Repository\EntityRepository;
  */
 class ClientRepository extends EntityRepository implements ClientRepositoryInterface, UserProviderInterface, UserLoaderInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getDataSetQueryBuilder() : QueryBuilder
-    {
-        $queryBuilder = $this->getQueryBuilder();
-        $queryBuilder->groupBy('client.id');
-        $queryBuilder->leftJoin('client.clientGroup', 'client_group');
-        $queryBuilder->leftJoin('client_group.translations', 'client_group_translation');
-        $queryBuilder->leftJoin('client.orders', 'client_cart', Expr\Join::WITH, 'client_cart.confirmed = :confirmed');
-        $queryBuilder->setParameter('confirmed', 0);
-        
-        return $queryBuilder;
-    }
-    
     public function refreshUser(UserInterface $user)
     {
         $class = get_class($user);

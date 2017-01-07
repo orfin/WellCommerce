@@ -5,7 +5,6 @@ WellCommerce\Bundle\OrderBundle\Entity\OrderStatusTranslation:
         name:
             type: string
             length: 255
-            unique: true
             nullable: false
         defaultComment:
             type: text

@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\ProducerBundle\DataSet\Admin;
 
+use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
 
@@ -33,5 +34,16 @@ class ProducerDataSet extends AbstractDataSet
             'shop'  => 'producer_shops.id',
             'route' => 'IDENTITY(producer_translation.route)',
         ]);
+    }
+    
+    protected function createQueryBuilder(): QueryBuilder
+    {
+        $queryBuilder = $this->repository->getQueryBuilder();
+        $queryBuilder->groupBy('producer.id');
+        $queryBuilder->leftJoin('producer.translations', 'producer_translation');
+        $queryBuilder->leftJoin('producer.products', 'producer_products');
+        $queryBuilder->leftJoin('producer.shops', 'producer_shops');
+        
+        return $queryBuilder;
     }
 }

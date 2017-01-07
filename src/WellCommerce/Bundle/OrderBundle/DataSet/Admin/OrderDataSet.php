@@ -14,9 +14,7 @@ namespace WellCommerce\Bundle\OrderBundle\DataSet\Admin;
 
 use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
-use WellCommerce\Component\DataSet\Conditions\Condition\Eq;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
-use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
 
 /**
  * Class OrderDataSet
@@ -57,21 +55,22 @@ class OrderDataSet extends AbstractDataSet
         ]);
     }
     
-    protected function getQueryBuilder(DataSetRequestInterface $request) : QueryBuilder
+    protected function createQueryBuilder(): QueryBuilder
     {
-        $queryBuilder = parent::getQueryBuilder($request);
-        $expression   = $queryBuilder->expr()->eq('orders.confirmed', ':confirmed');
-        $queryBuilder->andWhere($expression);
-        $queryBuilder->setParameter('confirmed', true);
+        $queryBuilder = $this->repository->getQueryBuilder();
+        $queryBuilder->groupBy('orders.id');
+        $queryBuilder->leftJoin('orders.currentStatus', 'status');
+        $queryBuilder->leftJoin('status.translations', 'status_translation');
+        $queryBuilder->leftJoin('orders.paymentMethod', 'payment_method');
+        $queryBuilder->leftJoin('payment_method.translations', 'payment_method_translation');
+        $queryBuilder->leftJoin('orders.shippingMethod', 'shipping_method');
+        $queryBuilder->leftJoin('shipping_method.translations', 'shipping_method_translation');
+        $queryBuilder->leftJoin('orders.products', 'order_product');
+        $queryBuilder->leftJoin('order_product.product', 'product');
+        $queryBuilder->leftJoin('product.translations', 'product_translation');
+        $queryBuilder->where($queryBuilder->expr()->eq('orders.shop', $this->getShopStorage()->getCurrentShopIdentifier()));
+        $queryBuilder->andWhere($queryBuilder->expr()->eq('orders.confirmed', true));
         
         return $queryBuilder;
-    }
-    
-    protected function getDataSetRequest(array $requestOptions = []) : DataSetRequestInterface
-    {
-        $request = parent::getDataSetRequest($requestOptions);
-        $request->addCondition(new Eq('shop', $this->getShopStorage()->getCurrentShopIdentifier()));
-        
-        return $request;
     }
 }

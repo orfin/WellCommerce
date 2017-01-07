@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\OrderBundle\DataSet\Front;
 
+use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Bundle\OrderBundle\Entity\Order;
@@ -22,7 +23,6 @@ use WellCommerce\Bundle\ProductBundle\Entity\Variant;
 use WellCommerce\Bundle\TaxBundle\Entity\Tax;
 use WellCommerce\Component\DataSet\Cache\CacheOptions;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
-use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
 
 /**
  * Class OrderProductDataSet
@@ -63,17 +63,24 @@ class OrderProductDataSet extends AbstractDataSet
         ]));
     }
     
-    protected function getQueryBuilder(DataSetRequestInterface $request) : QueryBuilder
+    public function createQueryBuilder(): QueryBuilder
     {
-        $queryBuilder = parent::getQueryBuilder($request);
-        $expression   = $queryBuilder->expr()->eq('order_product.order', ':order');
-        $queryBuilder->andWhere($expression);
+        $queryBuilder = $this->repository->getQueryBuilder();
+        $queryBuilder->groupBy('order_product.id');
+        $queryBuilder->leftJoin('order_product.product', 'product');
+        $queryBuilder->leftJoin('order_product.variant', 'product_variant');
+        $queryBuilder->leftJoin('product.translations', 'product_translation');
+        $queryBuilder->leftJoin('product.sellPriceTax', 'sell_tax');
+        $queryBuilder->leftJoin('product.productPhotos', 'gallery', Expr\Join::WITH, 'gallery.mainPhoto = :mainPhoto');
+        $queryBuilder->leftJoin('gallery.photo', 'photos');
+        $queryBuilder->andWhere($queryBuilder->expr()->eq('order_product.order', ':order'));
         $queryBuilder->setParameter('order', $this->getOrderProvider()->getCurrentOrderIdentifier());
+        $queryBuilder->setParameter('mainPhoto', 1);
         
         return $queryBuilder;
     }
     
-    private function getOrderProvider() : OrderProviderInterface
+    private function getOrderProvider(): OrderProviderInterface
     {
         return $this->get('order.provider.front');
     }
