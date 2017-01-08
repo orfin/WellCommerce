@@ -49,9 +49,9 @@ class OrderDataSet extends AbstractDataSet
         ]);
         
         $configurator->setColumnTransformers([
-            'createdAt'    => $this->getDataSetTransformer('date', ['format' => 'Y-m-d H:i:s']),
-            'client'       => $this->getDataSetTransformer('order_client'),
-            'productsFull' => $this->getDataSetTransformer('order_products'),
+            'createdAt'    => $this->manager->createTransformer('date', ['format' => 'Y-m-d H:i:s']),
+            'client'       => $this->manager->createTransformer('order_client'),
+            'productsFull' => $this->manager->createTransformer('order_products'),
         ]);
     }
     

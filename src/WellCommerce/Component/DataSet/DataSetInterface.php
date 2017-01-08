@@ -15,6 +15,7 @@ namespace WellCommerce\Component\DataSet;
 use WellCommerce\Component\DataSet\Cache\CacheOptions;
 use WellCommerce\Component\DataSet\Column\ColumnCollection;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
+use WellCommerce\Component\DataSet\Transformer\ColumnTransformerCollection;
 
 /**
  * Interface DataSetInterface
@@ -38,20 +39,9 @@ interface DataSetInterface
     public function setColumns(ColumnCollection $columns);
     
     /**
-     * Adds default request's option
-     *
-     * @param string $name
-     * @param mixed  $value
+     * @param ColumnTransformerCollection $transformers
      */
-    public function setDefaultRequestOption(string $name, $value);
-    
-    /**
-     * Adds default context's option
-     *
-     * @param string $name
-     * @param mixed  $value
-     */
-    public function setDefaultContextOption(string $name, $value);
+    public function setColumnTransformers(ColumnTransformerCollection $transformers);
     
     /**
      * Returns the dataset's result for given context type and options

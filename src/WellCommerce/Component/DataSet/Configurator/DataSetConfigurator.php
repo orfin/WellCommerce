@@ -29,38 +29,38 @@ final class DataSetConfigurator implements DataSetConfiguratorInterface
      * @var DataSetInterface
      */
     private $dataset;
-
+    
     public function configure(DataSetInterface $dataset)
     {
         $this->dataset = $dataset;
         $dataset->configureOptions($this);
         $dataset->dispatchOnDataSetInitEvent();
     }
-
+    
     public function setColumns(array $columns = [])
     {
         $collection = new ColumnCollection();
-
+        
         foreach ($columns as $alias => $source) {
             $collection->add(new Column([
                 'alias'  => $alias,
                 'source' => $source,
             ]));
         }
-
+        
         $this->dataset->setColumns($collection);
     }
-
+    
     public function setColumnTransformers(array $transformers = [])
     {
         $collection = new ColumnTransformerCollection();
         foreach ($transformers as $column => $transformer) {
             $collection->add($column, $transformer);
         }
-
-        $this->dataset->setDefaultContextOption('column_transformers', $collection);
+        
+        $this->dataset->setColumnTransformers($collection);
     }
-
+    
     public function setCacheOptions(CacheOptions $options)
     {
         $this->dataset->setCacheOptions($options);

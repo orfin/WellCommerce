@@ -14,9 +14,7 @@ namespace WellCommerce\Bundle\CategoryBundle\DataSet\Admin;
 
 use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
-use WellCommerce\Component\DataSet\Conditions\Condition\Eq;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
-use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
 
 /**
  * Class CategoryDataSet
@@ -47,8 +45,7 @@ final class CategoryDataSet extends AbstractDataSet
         $queryBuilder->groupBy('category.id');
         $queryBuilder->leftJoin('category.translations', 'category_translation');
         $queryBuilder->leftJoin('category.shops', 'category_shops');
-        $queryBuilder->where($queryBuilder->expr()->eq('category_shops.shop', ':shop'));
-        $queryBuilder->setParameter('shop', $this->getShopStorage()->getCurrentShopIdentifier());
+        $queryBuilder->where($queryBuilder->expr()->eq('category_shops.id', $this->getShopStorage()->getCurrentShopIdentifier()));
         
         return $queryBuilder;
     }

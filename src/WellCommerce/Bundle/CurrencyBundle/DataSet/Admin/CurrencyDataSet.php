@@ -32,8 +32,6 @@ final class CurrencyDataSet extends AbstractDataSet
             'code' => 'currency.code',
         ]);
         
-        $this->setDefaultRequestOption('order_by', 'code');
-        
         $configurator->setCacheOptions(new CacheOptions(true, 3600, [
             Currency::class,
         ]));
@@ -43,6 +41,7 @@ final class CurrencyDataSet extends AbstractDataSet
     {
         $queryBuilder = $this->repository->getQueryBuilder();
         $queryBuilder->groupBy('currency.id');
+        $queryBuilder->orderBy('currency.code', 'asc');
         
         return $queryBuilder;
     }

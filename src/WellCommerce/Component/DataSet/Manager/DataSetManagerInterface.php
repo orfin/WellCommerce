@@ -16,6 +16,7 @@ use WellCommerce\Component\DataSet\Context\DataSetContextInterface;
 use WellCommerce\Component\DataSet\QueryBuilder\DataSetQueryBuilderInterface;
 use WellCommerce\Component\DataSet\Repository\DataSetAwareRepositoryInterface;
 use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
+use WellCommerce\Component\DataSet\Transformer\ColumnTransformerCollection;
 use WellCommerce\Component\DataSet\Transformer\DataSetTransformerInterface;
 
 /**
@@ -26,15 +27,16 @@ use WellCommerce\Component\DataSet\Transformer\DataSetTransformerInterface;
 interface DataSetManagerInterface
 {
     /**
-     * Creates a dataset's context using factory service
+     * Creates a dataset's context using factory
      *
-     * @param string $contextType
-     * @param array  $options
+     * @param string                      $type
+     * @param array                       $options
+     * @param ColumnTransformerCollection $transformers
      *
      * @return DataSetContextInterface
      */
-    public function createContext(string $contextType, array $options = []) : DataSetContextInterface;
-
+    public function createContext(string $type, array $options = [], ColumnTransformerCollection $transformers): DataSetContextInterface;
+    
     /**
      * Creates a dataset's transformer using factory service
      *
@@ -43,8 +45,8 @@ interface DataSetManagerInterface
      *
      * @return DataSetTransformerInterface
      */
-    public function createTransformer(string $transformerType, array $options = []) : DataSetTransformerInterface;
-
+    public function createTransformer(string $transformerType, array $options = []): DataSetTransformerInterface;
+    
     /**
      * Creates a dataset's request using factory service
      *
@@ -52,8 +54,8 @@ interface DataSetManagerInterface
      *
      * @return DataSetRequestInterface
      */
-    public function createRequest(array $options = []) : DataSetRequestInterface;
-
+    public function createRequest(array $options = []): DataSetRequestInterface;
+    
     /**
      * Creates a QueryBuilder
      *
@@ -61,5 +63,5 @@ interface DataSetManagerInterface
      *
      * @return DataSetQueryBuilderInterface
      */
-    public function createQueryBuilder(DataSetAwareRepositoryInterface $repository) : DataSetQueryBuilderInterface;
+    public function createQueryBuilder(DataSetAwareRepositoryInterface $repository): DataSetQueryBuilderInterface;
 }

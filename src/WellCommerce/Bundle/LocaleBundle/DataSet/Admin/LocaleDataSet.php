@@ -34,8 +34,6 @@ final class LocaleDataSet extends AbstractDataSet
             'currency' => 'default_currency.code',
         ]);
         
-        $this->setDefaultRequestOption('order_by', 'code');
-        
         $configurator->setCacheOptions(new CacheOptions(true, 3600, [
             Locale::class,
             Currency::class,
@@ -47,6 +45,7 @@ final class LocaleDataSet extends AbstractDataSet
         $queryBuilder = $this->repository->getQueryBuilder();
         $queryBuilder->groupBy('locale.id');
         $queryBuilder->leftJoin('locale.currency', 'default_currency');
+        $queryBuilder->orderBy('locale.code', 'asc');
         
         return $queryBuilder;
     }

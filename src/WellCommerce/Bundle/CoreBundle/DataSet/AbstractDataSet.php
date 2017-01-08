@@ -22,12 +22,10 @@ use WellCommerce\Component\DataSet\Column\ColumnInterface;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
 use WellCommerce\Component\DataSet\DataSetInterface;
 use WellCommerce\Component\DataSet\Event\DataSetInitEvent;
-use WellCommerce\Component\DataSet\Event\DataSetRequestEvent;
 use WellCommerce\Component\DataSet\Manager\DataSetManagerInterface;
 use WellCommerce\Component\DataSet\QueryBuilder\DataSetQueryBuilder;
 use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
 use WellCommerce\Component\DataSet\Transformer\ColumnTransformerCollection;
-use WellCommerce\Component\DataSet\Transformer\DataSetTransformerInterface;
 
 /**
  * Class AbstractDataSet
@@ -49,7 +47,7 @@ abstract class AbstractDataSet extends AbstractContainerAware implements DataSet
     /**
      * @var EventDispatcherInterface
      */
-    private $eventDispatcher;
+    protected $eventDispatcher;
     
     /**
      * @var ColumnTransformerCollection
@@ -59,17 +57,7 @@ abstract class AbstractDataSet extends AbstractContainerAware implements DataSet
     /**
      * @var DataSetManagerInterface
      */
-    private $manager;
-    
-    /**
-     * @var array
-     */
-    protected $defaultContextOptions = [];
-    
-    /**
-     * @var array
-     */
-    protected $defaultRequestOptions = [];
+    protected $manager;
     
     /**
      * @var CacheOptions
@@ -88,11 +76,12 @@ abstract class AbstractDataSet extends AbstractContainerAware implements DataSet
         DataSetManagerInterface $manager,
         EventDispatcherInterface $eventDispatcher
     ) {
-        $this->repository      = $repository;
-        $this->manager         = $manager;
-        $this->eventDispatcher = $eventDispatcher;
-        $this->columns         = new ColumnCollection();
-        $this->cacheOptions    = new CacheOptions();
+        $this->repository         = $repository;
+        $this->manager            = $manager;
+        $this->eventDispatcher    = $eventDispatcher;
+        $this->columns            = new ColumnCollection();
+        $this->columnTransformers = new ColumnTransformerCollection();
+        $this->cacheOptions       = new CacheOptions();
     }
     
     public function setCacheOptions(CacheOptions $options)
@@ -115,17 +104,12 @@ abstract class AbstractDataSet extends AbstractContainerAware implements DataSet
         $this->columns->add($column);
     }
     
+    public function setColumnTransformers(ColumnTransformerCollection $transformers)
+    {
+        $this->columnTransformers = $transformers;
+    }
+    
     abstract public function configureOptions(DataSetConfiguratorInterface $configurator);
-    
-    public function setDefaultRequestOption(string $name, $value)
-    {
-        $this->defaultRequestOptions[$name] = $value;
-    }
-    
-    public function setDefaultContextOption(string $name, $value)
-    {
-        $this->defaultContextOptions[$name] = $value;
-    }
     
     public function dispatchOnDataSetInitEvent()
     {
@@ -136,11 +120,9 @@ abstract class AbstractDataSet extends AbstractContainerAware implements DataSet
     {
         $this->getDoctrineHelper()->enableFilter('locale')->setParameter('locale', $this->getRequestHelper()->getCurrentLocale());
         
-        $contextOptions = $this->getContextOptions($contextOptions);
-        $requestOptions = $this->getRequestOptions($requestOptions);
-        $context        = $this->manager->createContext($contextType, $contextOptions);
-        $request        = $this->getDataSetRequest($requestOptions);
-        $queryBuilder   = $this->getQueryBuilder($request);
+        $context      = $this->manager->createContext($contextType, $contextOptions, $this->columnTransformers);
+        $request      = $this->manager->createRequest($requestOptions);
+        $queryBuilder = $this->getQueryBuilder($request);
         
         try {
             $result = $context->getResult($queryBuilder, $request, $this->columns, $this->cacheOptions);
@@ -155,19 +137,6 @@ abstract class AbstractDataSet extends AbstractContainerAware implements DataSet
         return $result;
     }
     
-    protected function getDataSetRequest(array $requestOptions = []): DataSetRequestInterface
-    {
-        $request = $this->manager->createRequest($requestOptions);
-        $this->dispatchDataSetRequestEvent($request);
-        
-        return $request;
-    }
-    
-    protected function getDataSetTransformer(string $type, array $options = []): DataSetTransformerInterface
-    {
-        return $this->manager->createTransformer($type, $options);
-    }
-    
     abstract protected function createQueryBuilder(): QueryBuilder;
     
     protected function getQueryBuilder(DataSetRequestInterface $request): QueryBuilder
@@ -175,25 +144,6 @@ abstract class AbstractDataSet extends AbstractContainerAware implements DataSet
         $dataSetQueryBuilder = new DataSetQueryBuilder($this->createQueryBuilder());
         
         return $dataSetQueryBuilder->getQueryBuilder($this->columns, $request);
-    }
-    
-    private function getContextOptions(array $contextOptions = []): array
-    {
-        $contextOptions = array_merge($this->defaultContextOptions, $contextOptions);
-        
-        return $contextOptions;
-    }
-    
-    private function getRequestOptions(array $requestOptions = []): array
-    {
-        $requestOptions = array_merge($this->defaultRequestOptions, $requestOptions);
-        
-        return $requestOptions;
-    }
-    
-    private function dispatchDataSetRequestEvent(DataSetRequestInterface $request)
-    {
-        $this->eventDispatcher->dispatch($this->getEventName(DataSetRequestEvent::EVENT_SUFFIX), new DataSetRequestEvent($this, $request));
     }
     
     private function getEventName(string $eventSuffix): string

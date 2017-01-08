@@ -39,7 +39,7 @@ class ReviewDataSet extends AbstractDataSet
         ]);
         
         $configurator->setColumnTransformers([
-            'createdAt' => $this->getDataSetTransformer('date', ['format' => 'Y-m-d H:i:s']),
+            'createdAt' => $this->manager->createTransformer('date', ['format' => 'Y-m-d H:i:s']),
         ]);
     }
     

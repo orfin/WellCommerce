@@ -41,7 +41,7 @@ class ProducerDataSet extends BaseDataSet
         ]);
         
         $configurator->setColumnTransformers([
-            'route' => $this->getDataSetTransformer('route'),
+            'route' => $this->manager->createTransformer('route'),
         ]);
         
         $configurator->setCacheOptions(new CacheOptions(true, 3600, [
@@ -58,6 +58,7 @@ class ProducerDataSet extends BaseDataSet
         $queryBuilder->leftJoin('producer.translations', 'producer_translation');
         $queryBuilder->leftJoin('producer.products', 'producer_products');
         $queryBuilder->leftJoin('producer.shops', 'producer_shops');
+        $queryBuilder->where($queryBuilder->expr()->eq('producer_shops.id', $this->getShopStorage()->getCurrentShopIdentifier()));
         
         return $queryBuilder;
     }

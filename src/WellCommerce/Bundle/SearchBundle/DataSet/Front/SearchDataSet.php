@@ -53,7 +53,7 @@ final class SearchDataSet extends ProductDataSet
         ]);
         
         $configurator->setColumnTransformers([
-            'route' => $this->getDataSetTransformer('route'),
+            'route' => $this->manager->createTransformer('route'),
         ]);
     }
     

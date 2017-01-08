@@ -69,9 +69,9 @@ class ProductDataSet extends AbstractDataSet
         ]);
         
         $configurator->setColumnTransformers([
-            'route'         => $this->getDataSetTransformer('route'),
-            'categoryRoute' => $this->getDataSetTransformer('route'),
-            'distinctions'  => $this->getDataSetTransformer('distinctions'),
+            'route'         => $this->manager->createTransformer('route'),
+            'categoryRoute' => $this->manager->createTransformer('route'),
+            'distinctions'  => $this->manager->createTransformer('distinctions'),
         ]);
         
         $configurator->setCacheOptions(new CacheOptions(true, 3600, [

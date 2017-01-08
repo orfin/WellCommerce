@@ -32,17 +32,22 @@ abstract class AbstractDataSetContext implements DataSetContextInterface
      * @var array
      */
     protected $options;
-
+    
+    /**
+     * @var ColumnTransformerCollection
+     */
+    protected $columnTransformers;
+    
     /**
      * @var DataSetCacheManagerInterface
      */
     protected $cacheManager;
-
+    
     /**
      * @var \Symfony\Component\PropertyAccess\PropertyAccessor
      */
     protected $propertyAccessor;
-
+    
     /**
      * AbstractDataSetContext constructor.
      *
@@ -52,7 +57,7 @@ abstract class AbstractDataSetContext implements DataSetContextInterface
     {
         $this->cacheManager = $cacheManager;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -78,26 +83,23 @@ abstract class AbstractDataSetContext implements DataSetContextInterface
         } else {
             $result = $query->getArrayResult();
         }
-
+        
         return $this->transformResult($result);
     }
-
+    
     /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setRequired([
-            'column_transformers',
-            'cache'
+            'cache',
         ]);
         
         $resolver->setDefaults([
-            'column_transformers' => new ColumnTransformerCollection(),
-            'cache'               => true
+            'cache' => true,
         ]);
         
-        $resolver->setAllowedTypes('column_transformers', ColumnTransformerCollection::class);
         $resolver->setAllowedTypes('cache', 'bool');
     }
     
@@ -109,12 +111,9 @@ abstract class AbstractDataSetContext implements DataSetContextInterface
         return PropertyAccess::createPropertyAccessor();
     }
     
-    /**
-     * @return ColumnTransformerCollection
-     */
-    protected function getTransformers()
+    public function setTransformers(ColumnTransformerCollection $transformers)
     {
-        return $this->options['column_transformers'];
+        $this->columnTransformers = $transformers;
     }
     
     /**
@@ -126,11 +125,9 @@ abstract class AbstractDataSetContext implements DataSetContextInterface
      */
     protected function transformResult(array $result)
     {
-        $transformers = $this->getTransformers();
-        
-        if ($transformers->count()) {
+        if ($this->columnTransformers->count()) {
             foreach ($result as $index => $row) {
-                $result[$index] = $this->transformRow($row, $transformers);
+                $result[$index] = $this->transformRow($row);
             }
         }
         
@@ -144,11 +141,11 @@ abstract class AbstractDataSetContext implements DataSetContextInterface
      *
      * @return array
      */
-    protected function transformRow($row, ColumnTransformerCollection $transformers)
+    protected function transformRow($row)
     {
         foreach ($row as $field => $value) {
-            if ($transformers->has($field)) {
-                $row[$field] = $transformers->get($field)->transformValue($value);
+            if ($this->columnTransformers->has($field)) {
+                $row[$field] = $this->columnTransformers->get($field)->transformValue($value);
             }
         }
         

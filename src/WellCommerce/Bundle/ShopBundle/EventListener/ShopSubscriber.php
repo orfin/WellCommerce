@@ -17,7 +17,6 @@ use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
 use WellCommerce\Bundle\ShopBundle\Entity\Shop;
 use WellCommerce\Bundle\ShopBundle\Repository\ShopRepositoryInterface;
 use WellCommerce\Component\DataSet\Conditions\Condition\Eq;
-use WellCommerce\Component\DataSet\Event\DataSetRequestEvent;
 
 /**
  * Class ShopSubscriber
@@ -29,15 +28,7 @@ class ShopSubscriber extends AbstractEventSubscriber
     public static function getSubscribedEvents()
     {
         return [
-            KernelEvents::REQUEST            => ['onKernelRequest', 100],
-            'page.dataset.front.request'     => ['onShopAwareDataSetRequest', 0],
-            'page.dataset.admin.request'     => ['onShopAwareDataSetRequest', 0],
-            'category.dataset.front.request' => ['onShopAwareDataSetRequest', 0],
-            'category.dataset.admin.request' => ['onShopAwareDataSetRequest', 0],
-            'product.dataset.front.request'  => ['onShopAwareDataSetRequest', 0],
-            'product.dataset.admin.request'  => ['onShopAwareDataSetRequest', 0],
-            'producer.dataset.front.request' => ['onShopAwareDataSetRequest', 0],
-            'producer.dataset.admin.request' => ['onShopAwareDataSetRequest', 0],
+            KernelEvents::REQUEST => ['onKernelRequest', 100],
         ];
     }
     
@@ -54,18 +45,12 @@ class ShopSubscriber extends AbstractEventSubscriber
             $currentShopId = $this->getRequestHelper()->getSessionAttribute($sessionAttributeName);
             $shop          = $this->getDoctrineHelper()->getEntityManager()->getReference(Shop::class, $currentShopId);
         }
-    
+        
         $this->getShopStorage()->setCurrentShop($shop);
     }
     
-    private function getShopRepository() : ShopRepositoryInterface
+    private function getShopRepository(): ShopRepositoryInterface
     {
         return $this->get('shop.repository');
-    }
-    
-    public function onShopAwareDataSetRequest(DataSetRequestEvent $event)
-    {
-        $request = $event->getRequest();
-        $request->addCondition(new Eq('shop', $this->getShopStorage()->getCurrentShopIdentifier()));
     }
 }

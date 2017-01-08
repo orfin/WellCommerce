@@ -19,6 +19,7 @@ use WellCommerce\Component\DataSet\QueryBuilder\DataSetQueryBuilderInterface;
 use WellCommerce\Component\DataSet\Repository\DataSetAwareRepositoryInterface;
 use WellCommerce\Component\DataSet\Request\DataSetRequestFactory;
 use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
+use WellCommerce\Component\DataSet\Transformer\ColumnTransformerCollection;
 use WellCommerce\Component\DataSet\Transformer\DataSetTransformerFactory;
 use WellCommerce\Component\DataSet\Transformer\DataSetTransformerInterface;
 
@@ -33,22 +34,22 @@ final class DataSetManager implements DataSetManagerInterface
      * @var DataSetContextFactory
      */
     private $contextFactory;
-
+    
     /**
      * @var DataSetRequestFactory
      */
     private $requestFactory;
-
+    
     /**
      * @var DataSetTransformerFactory
      */
     private $transformerFactory;
-
+    
     /**
      * @var DataSetQueryBuilderFactory
      */
     private $queryBuilderFactory;
-
+    
     /**
      * DataSetManager constructor.
      *
@@ -68,23 +69,26 @@ final class DataSetManager implements DataSetManagerInterface
         $this->transformerFactory  = $transformerFactory;
         $this->queryBuilderFactory = $queryBuilderFactory;
     }
-
-    public function createContext(string $contextType, array $options = []) : DataSetContextInterface
+    
+    public function createContext(string $type, array $options = [], ColumnTransformerCollection $transformers): DataSetContextInterface
     {
-        return $this->contextFactory->create($contextType, $options);
+        $context = $this->contextFactory->create($type, $options);
+        $context->setTransformers($transformers);
+        
+        return $context;
     }
-
-    public function createTransformer(string $transformerType, array $options = []) : DataSetTransformerInterface
+    
+    public function createTransformer(string $transformerType, array $options = []): DataSetTransformerInterface
     {
         return $this->transformerFactory->create($transformerType, $options);
     }
-
-    public function createRequest(array $options = []) : DataSetRequestInterface
+    
+    public function createRequest(array $options = []): DataSetRequestInterface
     {
         return $this->requestFactory->create($options);
     }
     
-    public function createQueryBuilder(DataSetAwareRepositoryInterface $repository) : DataSetQueryBuilderInterface
+    public function createQueryBuilder(DataSetAwareRepositoryInterface $repository): DataSetQueryBuilderInterface
     {
         return $this->queryBuilderFactory->create($repository);
     }

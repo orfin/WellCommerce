@@ -44,7 +44,7 @@ class ProductDataSet extends AbstractDataSet
         ]);
         
         $configurator->setColumnTransformers([
-            'photo' => $this->getDataSetTransformer('image_path', ['filter' => 'small']),
+            'photo' => $this->manager->createTransformer('image_path', ['filter' => 'small']),
         ]);
     }
     
@@ -65,7 +65,7 @@ class ProductDataSet extends AbstractDataSet
         $queryBuilder->leftJoin('product.shops', 'product_shops');
         $queryBuilder->leftJoin('product.variants', 'variant', Expr\Join::WITH, 'variant.enabled = :variantEnabled');
         $queryBuilder->leftJoin('variant.options', 'variant_option');
-        $queryBuilder->where($queryBuilder->expr()->eq('product_shops.shop', $this->getShopStorage()->getCurrentShopIdentifier()));
+        $queryBuilder->where($queryBuilder->expr()->eq('product_shops.id', $this->getShopStorage()->getCurrentShopIdentifier()));
         $queryBuilder->setParameter('mainPhoto', 1);
         $queryBuilder->setParameter('status', 0);
         $queryBuilder->setParameter('variantEnabled', 1);

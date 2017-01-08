@@ -34,7 +34,7 @@ class PageDataSet extends BaseDataSet
         parent::configureOptions($configurator);
         
         $configurator->setColumnTransformers([
-            'route' => $this->getDataSetTransformer('route'),
+            'route' => $this->manager->createTransformer('route'),
         ]);
         
         $configurator->setCacheOptions(new CacheOptions(true, 3600, [
@@ -50,8 +50,8 @@ class PageDataSet extends BaseDataSet
         $queryBuilder->leftJoin('page.children', 'page_children');
         $queryBuilder->leftJoin('page.shops', 'page_shops');
         $queryBuilder->groupBy('page.id');
-        $queryBuilder->where('page.publish = :publish');
-        $queryBuilder->setParameter('publish', true);
+        $queryBuilder->andWhere($queryBuilder->expr()->eq('page.publish', true));
+        $queryBuilder->andWhere($queryBuilder->expr()->eq('page_shops.id', $this->getShopStorage()->getCurrentShopIdentifier()));
         
         return $queryBuilder;
     }

@@ -34,8 +34,8 @@ class NewsDataSet extends BaseDataSet
         parent::configureOptions($configurator);
         
         $configurator->setColumnTransformers([
-            'route' => $this->getDataSetTransformer('route'),
-            'photo' => $this->getDataSetTransformer('image_path', ['filter' => 'original']),
+            'route' => $this->manager->createTransformer('route'),
+            'photo' => $this->manager->createTransformer('image_path', ['filter' => 'original']),
         ]);
         
         $configurator->setCacheOptions(new CacheOptions(true, 3600, [

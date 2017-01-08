@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\ClientBundle\Repository;
 
+use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\CoreBundle\Repository\EntityRepository;
 
 /**

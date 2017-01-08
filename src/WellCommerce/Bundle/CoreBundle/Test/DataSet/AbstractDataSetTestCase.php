@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\CoreBundle\Test\DataSet;
 
 use WellCommerce\Bundle\CoreBundle\Test\AbstractTestCase;
+use WellCommerce\Component\DataSet\DataSetInterface;
 
 /**
  * Class AbstractDataSetTestCase
@@ -24,12 +25,12 @@ abstract class AbstractDataSetTestCase extends AbstractTestCase
     public function testDatasetServiceIsCreated()
     {
         $dataset = $this->get();
-
+        
         if (null !== $dataset) {
-            $this->assertInstanceOf('WellCommerce\Component\DataSet\DataSetInterface', $dataset);
+            $this->assertInstanceOf(DataSetInterface::class, $dataset);
         }
     }
-
+    
     /**
      * @return null|\WellCommerce\Component\DataSet\DataSetInterface
      */
@@ -37,15 +38,15 @@ abstract class AbstractDataSetTestCase extends AbstractTestCase
     {
         return null;
     }
-
+    
     public function testDatasetHasRequiredColumns()
     {
         $dataset = $this->get();
-
+        
         if (null !== $dataset) {
             $columns         = $dataset->getColumns();
             $requiredColumns = $this->getColumns();
-
+            
             foreach ($requiredColumns as $alias => $source) {
                 /**
                  * @var $column \WellCommerce\Component\DataSet\Column\ColumnInterface
@@ -58,7 +59,7 @@ abstract class AbstractDataSetTestCase extends AbstractTestCase
             }
         }
     }
-
+    
     /**
      * @return array
      */
@@ -66,30 +67,30 @@ abstract class AbstractDataSetTestCase extends AbstractTestCase
     {
         return [];
     }
-
+    
     protected function isAggregateColumn($source)
     {
         $aggregates = ['SUM', 'GROUP_CONCAT', 'MIN', 'MAX', 'AVG', 'COUNT'];
         $regex      = '/(' . implode('|', $aggregates) . ')/i';
-
+        
         return (bool)(preg_match($regex, $source));
     }
-
+    
     /**
      * @dataProvider getDataSetContexts
      */
     public function testDatasetReturnsResults($contexts)
     {
         $dataset = $this->get();
-
+        
         if (null !== $dataset) {
             foreach ($contexts as $context) {
                 $results = $dataset->getResult($context, ['order_by' => 'id', 'order_dir' => 'asc', 'limit' => 10]);
-                $this->assertNotNull($results);
+                $this->assertArrayNotHasKey('error', $results);
             }
         }
     }
-
+    
     /**
      * @return array
      */
@@ -101,7 +102,7 @@ abstract class AbstractDataSetTestCase extends AbstractTestCase
                     'select',
                     'array',
                     'datagrid',
-                ]
+                ],
             ],
         ];
     }

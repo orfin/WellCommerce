@@ -40,10 +40,10 @@ class PackageDataSet extends AbstractDataSet
         ]);
         
         $configurator->setColumnTransformers([
-            'createdAt'     => $this->getDataSetTransformer('date', ['format' => 'Y-m-d H:i:s']),
-            'updatedAt'     => $this->getDataSetTransformer('date', ['format' => 'Y-m-d H:i:s']),
-            'localVersion'  => $this->getDataSetTransformer('package_version_reference'),
-            'remoteVersion' => $this->getDataSetTransformer('package_version_reference'),
+            'createdAt'     => $this->manager->createTransformer('date', ['format' => 'Y-m-d H:i:s']),
+            'updatedAt'     => $this->manager->createTransformer('date', ['format' => 'Y-m-d H:i:s']),
+            'localVersion'  => $this->manager->createTransformer('package_version_reference'),
+            'remoteVersion' => $this->manager->createTransformer('package_version_reference'),
         ]);
     }
     

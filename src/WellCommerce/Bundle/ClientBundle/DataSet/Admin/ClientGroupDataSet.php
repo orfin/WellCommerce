@@ -40,6 +40,7 @@ class ClientGroupDataSet extends AbstractDataSet
         $queryBuilder = $this->repository->getQueryBuilder();
         $queryBuilder->groupBy('client_group.id');
         $queryBuilder->leftJoin('client_group.translations', 'client_group_translation');
+        $queryBuilder->leftJoin('client_group.clients', 'client');
         
         return $queryBuilder;
     }

@@ -38,7 +38,7 @@ class MediaDataSet extends AbstractDataSet
         ]);
         
         $configurator->setColumnTransformers([
-            'preview' => $this->getDataSetTransformer('image_path', ['filter' => 'medium']),
+            'preview' => $this->manager->createTransformer('image_path', ['filter' => 'medium']),
         ]);
     }
     

@@ -43,7 +43,7 @@ final class CategoryDataSet extends AbstractDataSet
         ]);
         
         $configurator->setColumnTransformers([
-            'route' => $this->getDataSetTransformer('route'),
+            'route' => $this->manager->createTransformer('route'),
         ]);
         
         $configurator->setCacheOptions(new CacheOptions(true, 3600, [

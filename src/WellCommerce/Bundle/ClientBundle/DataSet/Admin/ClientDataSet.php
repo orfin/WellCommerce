@@ -15,9 +15,7 @@ namespace WellCommerce\Bundle\ClientBundle\DataSet\Admin;
 use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
-use WellCommerce\Component\DataSet\Conditions\Condition\Eq;
 use WellCommerce\Component\DataSet\Configurator\DataSetConfiguratorInterface;
-use WellCommerce\Component\DataSet\Request\DataSetRequestInterface;
 
 /**
  * Class ClientDataSet
@@ -48,18 +46,10 @@ class ClientDataSet extends AbstractDataSet
         ]);
         
         $configurator->setColumnTransformers([
-            'createdAt'  => $this->getDataSetTransformer('date', ['format' => 'Y-m-d H:i:s']),
-            'lastActive' => $this->getDataSetTransformer('date', ['format' => 'Y-m-d H:i:s']),
-            'cart'       => $this->getDataSetTransformer('client_cart'),
+            'createdAt'  => $this->manager->createTransformer('date', ['format' => 'Y-m-d H:i:s']),
+            'lastActive' => $this->manager->createTransformer('date', ['format' => 'Y-m-d H:i:s']),
+            'cart'       => $this->manager->createTransformer('client_cart'),
         ]);
-    }
-    
-    protected function getDataSetRequest(array $requestOptions = []): DataSetRequestInterface
-    {
-        $request = parent::getDataSetRequest($requestOptions);
-        $request->addCondition(new Eq('shop', $this->getShopStorage()->getCurrentShopIdentifier()));
-        
-        return $request;
     }
     
     protected function createQueryBuilder(): QueryBuilder

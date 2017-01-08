@@ -43,6 +43,7 @@ class ProducerDataSet extends AbstractDataSet
         $queryBuilder->leftJoin('producer.translations', 'producer_translation');
         $queryBuilder->leftJoin('producer.products', 'producer_products');
         $queryBuilder->leftJoin('producer.shops', 'producer_shops');
+        $queryBuilder->where($queryBuilder->expr()->eq('producer_shops.id', $this->getShopStorage()->getCurrentShopIdentifier()));
         
         return $queryBuilder;
     }
