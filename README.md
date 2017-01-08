@@ -74,8 +74,6 @@ Every contributor is WellComme :). If you'd like to join us, please send a messa
 
 You can also discuss and share your opinions on WellCommerce in our gitter chat:
 
-[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/WellCommerce/WellCommerce?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 [1]:  http://symfony.com
 [2]:  http://doctrine-project.org
 [3]:  https://phpunit.de
