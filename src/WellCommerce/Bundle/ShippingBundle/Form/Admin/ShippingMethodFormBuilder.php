@@ -36,6 +36,11 @@ class ShippingMethodFormBuilder extends AbstractFormBuilder
         $calculators->map(function (ShippingCalculatorInterface $calculator) use (&$calculatorOptions) {
             $calculatorOptions[$calculator->getAlias()] = $calculator->getAlias();
         });
+    
+        $currencies = $this->get('currency.dataset.admin')->getResult('select', ['order_by' => 'code'], [
+            'label_column' => 'code',
+            'value_column' => 'code',
+        ]);
         
         $requiredData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'required_data',
@@ -89,7 +94,7 @@ class ShippingMethodFormBuilder extends AbstractFormBuilder
         $costsData->addChild($this->getElement('select', [
             'name'        => 'currency',
             'label'       => $this->trans('common.label.currency'),
-            'options'     => $this->get('currency.dataset.admin')->getResult('select', [], ['label_column' => 'code']),
+            'options'     => $currencies,
             'transformer' => $this->getRepositoryTransformer('entity', $this->get('currency.repository'))
         ]));
         
