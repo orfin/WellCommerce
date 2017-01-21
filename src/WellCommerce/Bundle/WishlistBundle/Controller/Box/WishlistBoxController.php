@@ -27,7 +27,7 @@ use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
  */
 class WishlistBoxController extends AbstractBoxController
 {
-    public function indexAction(LayoutBoxSettingsCollection $boxSettings) : Response
+    public function indexAction(LayoutBoxSettingsCollection $boxSettings): Response
     {
         $dataset = $this->get('product.dataset.front')->getResult('array', [
             'order_by'   => 'name',
@@ -36,13 +36,15 @@ class WishlistBoxController extends AbstractBoxController
         ]);
         
         return $this->displayTemplate('index', [
-            'dataset' => $dataset
+            'dataset' => $dataset,
         ]);
     }
     
-    private function getConditions() : ConditionsCollection
+    private function getConditions(): ConditionsCollection
     {
-        $wishlist   = $this->getWishlistRepository()->getClientWishlistCollection($this->getAuthenticatedClient());
+        /** @var WishlistRepositoryInterface $repository */
+        $repository = $this->getManager()->getRepository();
+        $wishlist   = $repository->getClientWishlistCollection($this->getAuthenticatedClient());
         $productIds = [];
         
         $wishlist->map(function (WishlistInterface $wishlist) use (&$productIds) {
@@ -53,10 +55,5 @@ class WishlistBoxController extends AbstractBoxController
         $conditions->add(new In('id', $productIds));
         
         return $conditions;
-    }
-    
-    private function getWishlistRepository() : WishlistRepositoryInterface
-    {
-        return $this->manager->getRepository();
     }
 }
